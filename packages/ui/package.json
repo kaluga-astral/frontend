@@ -1,6 +1,6 @@
 {
   "name": "@astral/ui",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.modern.js",
   "source": "./src/index.ts",
@@ -13,7 +13,7 @@
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "lint": "eslint .",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
@@ -23,6 +23,8 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
