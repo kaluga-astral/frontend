@@ -5897,7 +5897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.2.2, babel-loader@npm:^8.2.3":
+"babel-loader@npm:^8.2.2":
   version: 8.2.3
   resolution: "babel-loader@npm:8.2.3"
   dependencies:
@@ -18133,7 +18133,6 @@ __metadata:
     "@storybook/node-logger": ^6.3.12
     "@storybook/preset-create-react-app": ^3.2.0
     "@storybook/react": ^6.3.12
-    babel-loader: ^8.2.3
     emotion-theming: ^11.0.0
   languageName: unknown
   linkType: soft
