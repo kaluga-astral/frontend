@@ -20,6 +20,7 @@
     "build-storybook": "build-storybook"
   },
   "resolutions": {
-    "babel-loader": "8.1.0"
+    "babel-loader": "8.1.0",
+    "webpack": "4.44.2"
   }
 }
