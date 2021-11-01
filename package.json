@@ -18,5 +18,8 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }
