@@ -3759,7 +3759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/node-logger@npm:6.3.12":
+"@storybook/node-logger@npm:6.3.12, @storybook/node-logger@npm:^6.3.12":
   version: 6.3.12
   resolution: "@storybook/node-logger@npm:6.3.12"
   dependencies:
@@ -3778,6 +3778,26 @@ __metadata:
   dependencies:
     core-js: ^3.8.2
   checksum: 1ed16575abe2efefe75b030a97e9cf0cc7f79b8feff2cec6588504afe0b96a5b81c2fb254b2e99953524d523336686d3e355bb1dd27d708537bf9c43b7bd6182
+  languageName: node
+  linkType: hard
+
+"@storybook/preset-create-react-app@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@storybook/preset-create-react-app@npm:3.2.0"
+  dependencies:
+    "@pmmmwh/react-refresh-webpack-plugin": ^0.4.3
+    "@types/babel__core": ^7.1.7
+    "@types/webpack": ^4.41.13
+    babel-plugin-react-docgen: ^4.1.0
+    pnp-webpack-plugin: ^1.6.4
+    react-docgen-typescript-plugin: ^1.0.0
+    semver: ^7.3.5
+  peerDependencies:
+    "@babel/core": "*"
+    "@storybook/node-logger": "*"
+    "@storybook/react": ">=5.2"
+    react-scripts: ">=3.0.0"
+  checksum: 22022446dbe6e48d82b017f4d6d2ac97737e812283bbabd3c1ceb0d8e62f54c90f2dffcbd7e48376d92f2f835d44ca4f939eedce9eaca66416bd4a2c82315a68
   languageName: node
   linkType: hard
 
@@ -4704,7 +4724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:^4.41.26, @types/webpack@npm:^4.41.8":
+"@types/webpack@npm:^4.41.13, @types/webpack@npm:^4.41.26, @types/webpack@npm:^4.41.8":
   version: 4.41.31
   resolution: "@types/webpack@npm:4.41.31"
   dependencies:
@@ -6051,7 +6071,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-react-docgen@npm:^4.2.1":
+"babel-plugin-react-docgen@npm:^4.1.0, babel-plugin-react-docgen@npm:^4.2.1":
   version: 4.2.1
   resolution: "babel-plugin-react-docgen@npm:4.2.1"
   dependencies:
@@ -15268,6 +15288,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pnp-webpack-plugin@npm:^1.6.4":
+  version: 1.7.0
+  resolution: "pnp-webpack-plugin@npm:1.7.0"
+  dependencies:
+    ts-pnp: ^1.1.6
+  checksum: a41716d13607be5a3e06ba58b17e9e619cf07da3a0a7b10bd41cd89362873041054fd2b7966ad30a1b26b826cfb8fecc0469a95902d5b1b8ba8f591e2fe6b96d
+  languageName: node
+  linkType: hard
+
 "polished@npm:^4.0.5":
   version: 4.1.3
   resolution: "polished@npm:4.1.3"
@@ -17048,6 +17077,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-docgen-typescript-plugin@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-docgen-typescript-plugin@npm:1.0.0"
+  dependencies:
+    debug: ^4.1.1
+    endent: ^2.0.1
+    find-cache-dir: ^3.3.1
+    flat-cache: ^3.0.4
+    micromatch: ^4.0.2
+    react-docgen-typescript: ^1.22.0
+    tslib: ^2.0.0
+    webpack-sources: ^2.2.0
+  peerDependencies:
+    typescript: ">= 3.x"
+    webpack: ">= 4"
+  checksum: 94bfbdbad5c910312de2cbebad4e8ddd67985bff618b91a07fa6a1207a5d633ac47652400fb55636ad4384cc9e7d798efe6acbff628823f8bb218ef659f2ea84
+  languageName: node
+  linkType: hard
+
+"react-docgen-typescript@npm:^1.22.0":
+  version: 1.22.0
+  resolution: "react-docgen-typescript@npm:1.22.0"
+  peerDependencies:
+    typescript: ">= 3.x"
+  checksum: f5e5519cf3f1136b8e66bb3c459e02edf4d6c0d3bc1ee0fa848c8446f93f5332fb67c794f36e3597fd7374dea7433243537a4fd2b9311aa5d0c5a844ab8cb980
+  languageName: node
+  linkType: hard
+
 "react-docgen-typescript@npm:^2.0.0":
   version: 2.1.1
   resolution: "react-docgen-typescript@npm:2.1.1"
@@ -18068,10 +18125,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.3.12
     "@storybook/addon-docs": ^6.3.12
     "@storybook/addon-essentials": ^6.3.12
     "@storybook/addon-links": ^6.3.12
+    "@storybook/node-logger": ^6.3.12
+    "@storybook/preset-create-react-app": ^3.2.0
     "@storybook/react": ^6.3.12
     emotion-theming: ^11.0.0
   languageName: unknown
@@ -18689,7 +18749,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-list-map@npm:^2.0.0":
+"source-list-map@npm:^2.0.0, source-list-map@npm:^2.0.1":
   version: 2.0.1
   resolution: "source-list-map@npm:2.0.1"
   checksum: 806efc6f75e7cd31e4815e7a3aaf75a45c704871ea4075cb2eb49882c6fca28998f44fc5ac91adb6de03b2882ee6fb02f951fdc85e6a22b338c32bfe19557938
@@ -20673,6 +20733,16 @@ __metadata:
     source-list-map: ^2.0.0
     source-map: ~0.6.1
   checksum: 37463dad8d08114930f4bc4882a9602941f07c9f0efa9b6bc78738cd936275b990a596d801ef450d022bb005b109b9f451dd087db2f3c9baf53e8e22cf388f79
+  languageName: node
+  linkType: hard
+
+"webpack-sources@npm:^2.2.0":
+  version: 2.3.1
+  resolution: "webpack-sources@npm:2.3.1"
+  dependencies:
+    source-list-map: ^2.0.1
+    source-map: ^0.6.1
+  checksum: 6fd67f2274a84c5f51ad89767112ec8b47727134bf0f2ba0cff458c970f18966939a24128bdbddba621cd66eeb2bef0552642a9333cd8e54514f7b2a71776346
   languageName: node
   linkType: hard
 
