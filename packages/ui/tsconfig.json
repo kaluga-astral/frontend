@@ -30,7 +30,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "./src/**/*.ts"
+    "./**/*.ts",
+    "./declarations/*.ts"
   ],
   "exclude": [
     "node_modules",

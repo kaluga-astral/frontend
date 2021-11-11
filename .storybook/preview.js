@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'emotion-theming'
 import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline';
 import { getTheme, themes } from './themes'
 
 export const parameters = {
@@ -12,6 +13,7 @@ export const decorators = [
   (Story, context) => (
     <MuiThemeProvider theme={getTheme(context.globals.theme)}>
       <ThemeProvider theme={getTheme(context.globals.theme)}>
+        <CssBaseline />
         <Story {...context} />
       </ThemeProvider>
     </MuiThemeProvider>
