@@ -1,80 +1,75 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
+const HTML_FONT_SIZE = 14;
+const FONT_SIZE = 14;
+
+const pxToRem = (fontSize: number, htmlFontSize: number): string => {
+  return `${fontSize / htmlFontSize}rem`
+};
+
 export default<TypographyOptions> {
-    fontFamily: ['Ubuntu', 'sans-serif'].join(','),
-    h1: {
-      fontSize: '35px',
-      lineHeight: '40px',
-      fontWeight: 500
-    },
-    h2: {
-      fontSize: '29px',
-      lineHeight: '32px',
-      fontWeight: 500
-    },
-    h3: {
-      fontSize: '24px',
-      lineHeight: '28px',
-      fontWeight: 500
-    },
-    h4: {
-      fontSize: '20px',
-      lineHeight: '24px',
-      fontWeight: 500
-    },
-    h5: {
-      fontSize: '16px',
-      lineHeight: '24px',
-      fontWeight: 500
-    },
-    h6: {
-      fontSize: '14px',
-      lineHeight: '16px',
-      fontWeight: 500
-    },
-    h7: {
-      fontSize: '12px',
-      lineHeight: '20px',
-      fontWeight: 500
-    },
-    h8: {
-      fontSize: '12px',
-      lineHeight: '16px',
-      fontWeight: 500
-    },
-    h9: {
-      fontSize: '11px',
-      lineHeight: '16px',
-      fontWeight: 700
-    },
-    button: {
-      fontSize: '14px',
-      lineHeight: '20px',
-      fontWeight: 500
-    },
-    ui: {
-      fontSize: '14px',
-      lineHeight: '20px',
-      fontWeight: 400
-    },
-    link: {
-      fontSize: '14px',
-      lineHeight: '20px',
-      fontWeight: 400
-    },
-    pointer: {
-      fontSize: '12px',
-      lineHeight: '16px',
-      fontWeight: 500
-    },
-    small: {
-      fontSize: '12px',
-      lineHeight: '16px',
-      fontWeight: 400
-    },
-    code: {
-      fontSize: '12px',
-      lineHeight: '20px',
-      fontWeight: 300
-    }
+  pxToRem,
+  htmlFontSize: HTML_FONT_SIZE,
+  fontSize: FONT_SIZE,
+  fontFamily: ['Ubuntu', 'sans-serif'].join(','),
+  h1: {
+    fontSize: pxToRem(35, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h2: {
+    fontSize: pxToRem(29, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h3: {
+    fontSize: pxToRem(24, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h4: {
+    fontSize: pxToRem(20, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h5: {
+    fontSize: pxToRem(16, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h6: {
+    fontSize: pxToRem(14, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h7: {
+    fontSize: pxToRem(12, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h8: {
+    fontSize: pxToRem(12, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  h9: {
+    fontSize: pxToRem(11, HTML_FONT_SIZE),
+    fontWeight: 700
+  },
+  button: {
+    fontSize: pxToRem(14, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  ui: {
+    fontSize: pxToRem(14, HTML_FONT_SIZE),
+    fontWeight: 400
+  },
+  link: {
+    fontSize: pxToRem(14, HTML_FONT_SIZE),
+    fontWeight: 400
+  },
+  pointer: {
+    fontSize: pxToRem(12, HTML_FONT_SIZE),
+    fontWeight: 500
+  },
+  small: {
+    fontSize: pxToRem(12, HTML_FONT_SIZE),
+    fontWeight: 400
+  },
+  code: {
+    fontSize: pxToRem(12, HTML_FONT_SIZE),
+    fontWeight: 300
+  }
 }

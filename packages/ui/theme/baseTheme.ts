@@ -1,8 +1,10 @@
-import { createTheme } from '@mui/material'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import typography from './typography'
 import components from './components'
 
-export default createTheme({
+const theme = createTheme({
   components,
   typography
 })
+
+export default responsiveFontSizes(theme)

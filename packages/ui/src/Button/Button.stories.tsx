@@ -1,3 +1,5 @@
+import { Story } from '@storybook/react'
+
 import { Button } from './Button'
 
 export default {
@@ -5,6 +7,6 @@ export default {
   component: Button
 }
 
-const Template = (args) => <Button {...args} />
+const Template: Story = (args) => <Button {...args} />
 
 export const Default = Template.bind({})

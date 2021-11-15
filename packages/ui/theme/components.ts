@@ -1,63 +1,77 @@
 import { Components } from '@mui/material'
 
-import UbuntuLight from '../fonts/Ubuntu/UbuntuLight.ttf'
-import UbuntuRegular from '../fonts/Ubuntu/UbuntuRegular.ttf'
-import UbuntuMedium from '../fonts/Ubuntu/UbuntuMedium.ttf'
-import UbuntuBold from '../fonts/Ubuntu/UbuntuBold.ttf'
+import UbuntuBoldWoff from '../fonts/Ubuntu/UbuntuBold.woff'
+import UbuntuMediumWoff from '../fonts/Ubuntu/UbuntuMedium.woff'
+import UbuntuRegularWoff from '../fonts/Ubuntu/UbuntuRegular.woff'
+import UbuntuLightWoff from '../fonts/Ubuntu/UbuntuLight.woff'
 
-export default<Components> {
-    MuiCssBaseline: {
-        styleOverrides: `
-          @font-face {
-            font-family: 'Ubuntu';
-            font-style: 'normal';
-            font-weight: 300;
-            src: url(${UbuntuLight}) format('truetype');
-          }
-          @font-face {
-            font-family: 'Ubuntu';
-            font-style: 'normal';
-            font-weight: 400;
-            src: url(${UbuntuRegular}) format('truetype');
-          }
-          @font-face {
-            font-family: 'Ubuntu';
-            font-style: 'normal';
-            font-weight: 500;
-            src: url(${UbuntuMedium}) format('truetype');
-          }
-          @font-face {
-            font-family: 'Ubuntu';
-            font-style: 'normal';
-            font-weight: 700;
-            src: url(${UbuntuBold}) format('truetype');
-          }
-        `
-      },
-      MuiTypography: {
-        variants: [
-          {
-            props: { variant: 'button' },
-            style: {
-              textTransform: 'capitalize'
-            }
-          },
-          {
-            props: { variant: 'link' },
-            style: {
-              color: '#1874FF',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline'
-              }
-            }
-          }
-        ],
-        defaultProps: {
-          variantMapping: {
-            link: 'a',
-            code: 'code'
-          }
+import UbuntuBoldWoff2 from '../fonts/Ubuntu/UbuntuBold.woff2'
+import UbuntuMediumWoff2 from '../fonts/Ubuntu/UbuntuMedium.woff2'
+import UbuntuRegularWoff2 from '../fonts/Ubuntu/UbuntuRegular.woff2'
+import UbuntuLightWoff2 from '../fonts/Ubuntu/UbuntuLight.woff2'
+
+const MuiCssBaseline = {
+  styleOverrides: `
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: 'normal';
+      font-weight: 300;
+      font-display: swap;
+      src: url(${UbuntuLightWoff2}) format('woff2'), url(${UbuntuLightWoff}) format('woff');
+    }
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: 'normal';
+      font-weight: 400;
+      font-display: swap;
+      src: url(${UbuntuRegularWoff2}) format('woff2'), url(${UbuntuRegularWoff}) format('woff');
+    }
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: 'normal';
+      font-weight: 500;
+      font-display: swap;
+      src: url(${UbuntuMediumWoff2}) format('woff2'), url(${UbuntuMediumWoff}) format('woff');
+    }
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: 'normal';
+      font-weight: 700;
+      font-display: swap;
+      src: url(${UbuntuBoldWoff2}) format('woff2'), url(${UbuntuBoldWoff}) format('woff');
+    }
+  `
+}
+
+const MuiTypography = {
+  variants: [
+    {
+      props: { variant: 'button' },
+      style: {
+        textTransform: 'capitalize'
+      }
+    },
+    {
+      props: { variant: 'link' },
+      style: {
+        // TODO: надо будет взять цвет из палитры, когда она будет готова
+        color: '#1874FF',
+        cursor: 'pointer',
+        '&:hover': {
+          textDecoration: 'underline'
         }
       }
+    }
+  ],
+  defaultProps: {
+    variantMapping: {
+      link: 'a',
+      code: 'code'
+    }
+  }
+}
+
+export default<Components> {
+  MuiCssBaseline,
+  MuiTypography
 }

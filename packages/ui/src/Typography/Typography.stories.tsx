@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
+import { Story } from '@storybook/react'
 
-import { Typography } from './Typography'
+import { Typography, TypographyProps } from './Typography'
 
 export default {
   title: 'Components/Typography',
@@ -28,24 +29,24 @@ export default {
   }
 }
 
-const Template = (args) => (
+const Template: Story<TypographyProps> = (args) => (
   <Grid container spacing={2}>
     <Grid item xs={12} md={3}>
-      <Typography variant='h1' value='Head size H1' paragraph />
-      <Typography variant='h2' value='Head size H2' paragraph />
-      <Typography variant='h3' value='Head size H3' paragraph />
-      <Typography variant='h4' value='Head size H4' paragraph />
-      <Typography variant='h5' value='Head size H5' paragraph />
-      <Typography variant='h6' value='Head size H6' paragraph />
-      <Typography variant='h7' value='Head size H7' paragraph />
-      <Typography variant='h8' value='Head size H8' paragraph />
-      <Typography variant='h9' value='Head size H9' paragraph />
-      <Typography variant='button' value='Button text' paragraph />
-      <Typography variant='ui' value='UI text' paragraph />
-      <Typography variant='link' value='Link text' paragraph />
-      <Typography variant='pointer' value='Pointer text' paragraph />
-      <Typography variant='small' value='Small text' paragraph />
-      <Typography variant='code' value='Code text' paragraph />
+      <Typography variant='h1' paragraph>Head size H1</Typography>
+      <Typography variant='h2' paragraph>Head size H2</Typography>
+      <Typography variant='h3' paragraph>Head size H3</Typography>
+      <Typography variant='h4' paragraph>Head size H4</Typography>
+      <Typography variant='h5' paragraph>Head size H5</Typography>
+      <Typography variant='h6' paragraph>Head size H6</Typography>
+      <Typography variant='h7' paragraph>Head size H7</Typography>
+      <Typography variant='h8' paragraph>Head size H8</Typography>
+      <Typography variant='h9' paragraph>Head size H9</Typography>
+      <Typography variant='button' paragraph >Button text</Typography>
+      <Typography variant='ui' paragraph>UI text</Typography>
+      <Typography variant='link' paragraph>Link text</Typography>
+      <Typography variant='pointer' paragraph>Pointer text</Typography>
+      <Typography variant='small' paragraph>Small text</Typography>
+      <Typography variant='code' paragraph>Code text</Typography>
     </Grid>
     <Grid item xs={12} md={4}>
       <Typography {...args} />
@@ -55,6 +56,6 @@ const Template = (args) => (
 
 export const AllTypography = Template.bind({})
 AllTypography.args = {
-  value: 'Съешь же ещё этих мягких французских булок да выпей чаю',
+  children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1'
 }
