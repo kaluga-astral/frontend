@@ -1,8 +1,11 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography'
 
+const HTML_FONT_SIZE = 14
+
+// Т.к. нет досутпа к теме, написал функцию для конвертации px в rem
 const pxToRem = (
   fontSize: number,
-  htmlFontSize: number | undefined = 14
+  htmlFontSize: number = HTML_FONT_SIZE
 ): string => {
   return `${fontSize / htmlFontSize}rem`
 }

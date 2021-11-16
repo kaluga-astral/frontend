@@ -1,4 +1,4 @@
-import { createTheme } from '@astral/ui/src/theme/baseTheme'
+import { createTheme } from '@astral/ui/src/theme'
 
 export const themes = [
   {

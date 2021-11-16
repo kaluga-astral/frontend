@@ -16,9 +16,9 @@ export interface TypographyProps extends MuiTypographyProps {
     | 'code'
 }
 
-export const Typography = ({ variant, children, ...args }: TypographyProps) => {
+export const Typography = ({ variant, children, ...props }: TypographyProps) => {
   return (
-    <MuiTypography variant={variant} {...args}>
+    <MuiTypography variant={variant} {...props}>
       {children}
     </MuiTypography>
   )
