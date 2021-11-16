@@ -1,16 +1,16 @@
 import { Components } from '@mui/material'
 
-import UbuntuBoldWoff from '../fonts/Ubuntu/UbuntuBold.woff'
-import UbuntuMediumWoff from '../fonts/Ubuntu/UbuntuMedium.woff'
-import UbuntuRegularWoff from '../fonts/Ubuntu/UbuntuRegular.woff'
-import UbuntuLightWoff from '../fonts/Ubuntu/UbuntuLight.woff'
+import UbuntuBoldWoff from '../../fonts/Ubuntu/UbuntuBold.woff'
+import UbuntuMediumWoff from '../../fonts/Ubuntu/UbuntuMedium.woff'
+import UbuntuRegularWoff from '../../fonts/Ubuntu/UbuntuRegular.woff'
+import UbuntuLightWoff from '../../fonts/Ubuntu/UbuntuLight.woff'
 
-import UbuntuBoldWoff2 from '../fonts/Ubuntu/UbuntuBold.woff2'
-import UbuntuMediumWoff2 from '../fonts/Ubuntu/UbuntuMedium.woff2'
-import UbuntuRegularWoff2 from '../fonts/Ubuntu/UbuntuRegular.woff2'
-import UbuntuLightWoff2 from '../fonts/Ubuntu/UbuntuLight.woff2'
+import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2'
+import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2'
+import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2'
+import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2'
 
-const MuiCssBaseline = {
+const MuiCssBaseline: Components['MuiCssBaseline'] = {
   styleOverrides: `
     @font-face {
       font-family: 'Ubuntu';
@@ -43,7 +43,7 @@ const MuiCssBaseline = {
   `
 }
 
-const MuiTypography = {
+const MuiTypography: Components['MuiTypography'] = {
   variants: [
     {
       props: { variant: 'button' },
@@ -71,7 +71,7 @@ const MuiTypography = {
   }
 }
 
-export default<Components> {
+export const components: Components = {
   MuiCssBaseline,
   MuiTypography
 }

@@ -1,0 +1,111 @@
+import { TypographyOptions } from '@mui/material/styles/createTypography'
+
+const pxToRem = (
+  fontSize: number,
+  htmlFontSize: number | undefined = 14
+): string => {
+  return `${fontSize / htmlFontSize}rem`
+}
+
+export const typography: TypographyOptions = {
+  fontSize: 14,
+  htmlFontSize: 14,
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
+  fontWeightBold: 700,
+  fontFamily: ['Ubuntu', 'sans-serif'].join(','),
+  get h1() {
+    return {
+      fontSize: pxToRem(35, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h2() {
+    return {
+      fontSize: pxToRem(29, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h3() {
+    return {
+      fontSize: pxToRem(24, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h4() {
+    return {
+      fontSize: pxToRem(20, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h5() {
+    return {
+      fontSize: pxToRem(16, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h6() {
+    return {
+      fontSize: pxToRem(14, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h7() {
+    return {
+      fontSize: pxToRem(12, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h8() {
+    return {
+      fontSize: pxToRem(12, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get h9() {
+    return {
+      fontSize: pxToRem(11, this.htmlFontSize),
+      fontWeight: this.fontWeightBold
+    }
+  },
+  get button() {
+    return {
+      fontSize: pxToRem(14, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get ui() {
+    return {
+      fontSize: pxToRem(14, this.htmlFontSize),
+      fontWeight: this.fontWeightRegular
+    }
+  },
+  get link() {
+    return {
+      fontSize: pxToRem(14, this.htmlFontSize),
+      fontWeight: this.fontWeightRegular
+    }
+  },
+  get pointer() {
+    return {
+      fontSize: pxToRem(12, this.htmlFontSize),
+      fontWeight: this.fontWeightMedium
+    }
+  },
+  get small() {
+    return {
+      fontSize: pxToRem(12, this.htmlFontSize),
+      fontWeight: this.fontWeightRegular
+    }
+  },
+  get code() {
+    return {
+      fontSize: pxToRem(12, this.htmlFontSize),
+      fontWeight: this.fontWeightLight
+    }
+  },
+  body1: {
+    fontSize: '1rem'
+  }
+}
