@@ -1,5 +1,4 @@
 import { Grid } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Story } from '@storybook/react';
 
 import { Typography, TypographyProps } from './Typography';

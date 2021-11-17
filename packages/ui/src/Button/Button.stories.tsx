@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Story } from '@storybook/react';
 
 import { Button } from './Button';
