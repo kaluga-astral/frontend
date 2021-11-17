@@ -1,7 +1,7 @@
-import MuiButton from '@mui/material/Button'
+import MuiButton from '@mui/material/Button';
 
 export const Button = () => {
-  return <MuiButton>Button</MuiButton>
-}
+  return <MuiButton>Button</MuiButton>;
+};
 
-export default Button
+export default Button;

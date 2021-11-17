@@ -1,7 +1,7 @@
 import MuiTypography, {
-  TypographyProps as MuiTypographyProps
-} from '@mui/material/Typography'
-import { Variant } from '@mui/material/styles/createTypography'
+  TypographyProps as MuiTypographyProps,
+} from '@mui/material/Typography';
+import { Variant } from '@mui/material/styles/createTypography';
 
 export interface TypographyProps extends MuiTypographyProps {
   variant?:
@@ -13,15 +13,19 @@ export interface TypographyProps extends MuiTypographyProps {
     | 'link'
     | 'pointer'
     | 'small'
-    | 'code'
+    | 'code';
 }
 
-export const Typography = ({ variant, children, ...props }: TypographyProps) => {
+export const Typography = ({
+  variant,
+  children,
+  ...props
+}: TypographyProps) => {
   return (
     <MuiTypography variant={variant} {...props}>
       {children}
     </MuiTypography>
-  )
-}
+  );
+};
 
-export default Typography
+export default Typography;

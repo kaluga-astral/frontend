@@ -1,14 +1,13 @@
-import { Components } from '@mui/material'
+import { Components } from '@mui/material';
 
-import UbuntuBoldWoff from '../../fonts/Ubuntu/UbuntuBold.woff'
-import UbuntuMediumWoff from '../../fonts/Ubuntu/UbuntuMedium.woff'
-import UbuntuRegularWoff from '../../fonts/Ubuntu/UbuntuRegular.woff'
-import UbuntuLightWoff from '../../fonts/Ubuntu/UbuntuLight.woff'
-
-import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2'
-import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2'
-import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2'
-import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2'
+import UbuntuBoldWoff from '../../fonts/Ubuntu/UbuntuBold.woff';
+import UbuntuMediumWoff from '../../fonts/Ubuntu/UbuntuMedium.woff';
+import UbuntuRegularWoff from '../../fonts/Ubuntu/UbuntuRegular.woff';
+import UbuntuLightWoff from '../../fonts/Ubuntu/UbuntuLight.woff';
+import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2';
+import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2';
+import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2';
+import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2';
 
 const MuiCssBaseline: Components['MuiCssBaseline'] = {
   styleOverrides: `
@@ -40,16 +39,16 @@ const MuiCssBaseline: Components['MuiCssBaseline'] = {
       font-display: swap;
       src: url(${UbuntuBoldWoff2}) format('woff2'), url(${UbuntuBoldWoff}) format('woff');
     }
-  `
-}
+  `,
+};
 
 const MuiTypography: Components['MuiTypography'] = {
   variants: [
     {
       props: { variant: 'button' },
       style: {
-        textTransform: 'capitalize'
-      }
+        textTransform: 'capitalize',
+      },
     },
     {
       props: { variant: 'link' },
@@ -58,20 +57,20 @@ const MuiTypography: Components['MuiTypography'] = {
         color: '#1874FF',
         cursor: 'pointer',
         '&:hover': {
-          textDecoration: 'underline'
-        }
-      }
-    }
+          textDecoration: 'underline',
+        },
+      },
+    },
   ],
   defaultProps: {
     variantMapping: {
       link: 'a',
-      code: 'code'
-    }
-  }
-}
+      code: 'code',
+    },
+  },
+};
 
 export const components: Components = {
   MuiCssBaseline,
-  MuiTypography
-}
+  MuiTypography,
+};

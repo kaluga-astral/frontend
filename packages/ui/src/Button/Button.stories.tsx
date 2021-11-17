@@ -1,12 +1,13 @@
-import { Story } from '@storybook/react'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Story } from '@storybook/react';
 
-import { Button } from './Button'
+import { Button } from './Button';
 
 export default {
   title: 'Components/Button',
-  component: Button
-}
+  component: Button,
+};
 
-const Template: Story = (args) => <Button {...args} />
+const Template: Story = (args) => <Button {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
