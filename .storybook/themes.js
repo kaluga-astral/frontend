@@ -1,20 +1,9 @@
-import { createTheme } from '@mui/material'
-import { red, green } from '@mui/material/colors'
+import { createTheme } from '@astral/ui/src/theme'
 
 export const themes = [
   {
-    name: 'theme-1',
-    theme: createTheme({
-      palette: {
-        primary: { main: green[500] }
-      }
-    })
-  },
-  {
-    name: 'theme-2',
-    theme: createTheme({
-      palette: { primary: { main: red[500] } }
-    })
+    name: 'Base theme',
+    theme: createTheme()
   }
 ]
 

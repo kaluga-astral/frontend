@@ -1,23 +1,13 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "standard",
-    "standard-react",
-    "plugin:prettier/recommended",
-    "prettier/standard",
-    "prettier/react",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:react/jsx-runtime"
+    "@astral-frontend/eslint-config-ts-ui"
   ],
   "env": {
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "ecmaFeatures": {
-      "legacyDecorators": true,
-      "jsx": true
-    }
+    "project": ["tsconfig.json"]
   },
   "settings": {
     "react": {
@@ -25,6 +15,7 @@
     }
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "packageDir": ["./", "../../"]}],
     "space-before-function-paren": 0,
     "react/prop-types": 0,
     "react/jsx-handler-names": 0,
