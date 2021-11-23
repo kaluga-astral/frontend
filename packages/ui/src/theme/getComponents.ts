@@ -8,6 +8,9 @@ import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2';
 import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2';
 import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2';
 import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2';
+import { Brand } from '../../types/brands';
+
+import { brandColors } from './palette';
 
 const MuiCssBaseline: Components['MuiCssBaseline'] = {
   styleOverrides: `
@@ -42,7 +45,7 @@ const MuiCssBaseline: Components['MuiCssBaseline'] = {
   `,
 };
 
-const MuiTypography: Components['MuiTypography'] = {
+const MuiTypography = (brand: Brand): Components['MuiTypography'] => ({
   variants: [
     {
       props: { variant: 'button' },
@@ -53,8 +56,7 @@ const MuiTypography: Components['MuiTypography'] = {
     {
       props: { variant: 'link' },
       style: {
-        // TODO: надо будет взять цвет из палитры, когда она будет готова
-        color: '#1874FF',
+        color: brandColors[brand].hover,
         cursor: 'pointer',
         '&:hover': {
           textDecoration: 'underline',
@@ -68,9 +70,9 @@ const MuiTypography: Components['MuiTypography'] = {
       code: 'code',
     },
   },
-};
+});
 
-export const components: Components = {
+export const getComponents = (brand: Brand = Brand.DEFAULT): Components => ({
   MuiCssBaseline,
-  MuiTypography,
-};
+  MuiTypography: MuiTypography(brand),
+});
