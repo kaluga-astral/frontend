@@ -13,9 +13,17 @@ describe('createTheme', () => {
   it('Color should be taken depending on the brand', () => {
     const theme = createTheme(Brand.SIGN);
 
-    expect(theme.palette.primary.main).toBe('#376798');
-    expect(theme.palette.primary.dark).toBe('#325D89');
-    expect(theme.palette.secondary.main).toBe('#4199AC');
-    expect(theme.palette.secondary.dark).toBe('#325D89');
+    const expected = {
+      primary: {
+        main: '#376798',
+        dark: '#325D89',
+      },
+      secondary: {
+        main: '#4199AC',
+        dark: '#325D89',
+      },
+    };
+
+    expect(theme.palette).toMatchObject(expected);
   });
 });
