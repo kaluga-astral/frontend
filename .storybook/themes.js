@@ -1,5 +1,4 @@
-import { createTheme } from '@astral/ui/src/theme';
-import { Brand } from '@astral/ui/types/brands';
+import { createTheme, Brand } from '@astral/ui'
 
 export const themes = [
   {

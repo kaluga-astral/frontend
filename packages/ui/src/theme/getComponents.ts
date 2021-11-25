@@ -8,9 +8,8 @@ import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2';
 import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2';
 import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2';
 import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2';
-import { Brand } from '../../types/brands';
 
-import { brandColors } from './palette';
+import { Brand } from './constants';
 
 const MuiCssBaseline: Components['MuiCssBaseline'] = {
   styleOverrides: `
@@ -45,22 +44,12 @@ const MuiCssBaseline: Components['MuiCssBaseline'] = {
   `,
 };
 
-const MuiTypography = (brand: Brand): Components['MuiTypography'] => ({
+const getMuiTypography = (): Components['MuiTypography'] => ({
   variants: [
     {
       props: { variant: 'button' },
       style: {
         textTransform: 'capitalize',
-      },
-    },
-    {
-      props: { variant: 'link' },
-      style: {
-        color: brandColors[brand].hover,
-        cursor: 'pointer',
-        '&:hover': {
-          textDecoration: 'underline',
-        },
       },
     },
   ],
@@ -72,7 +61,9 @@ const MuiTypography = (brand: Brand): Components['MuiTypography'] => ({
   },
 });
 
+// TODO: понадобится в будущем при реализации компонентов
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getComponents = (brand: Brand = Brand.DEFAULT): Components => ({
   MuiCssBaseline,
-  MuiTypography: MuiTypography(brand),
+  MuiTypography: getMuiTypography(),
 });

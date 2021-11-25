@@ -1,6 +1,6 @@
 import { PaletteOptions } from '@mui/material/styles/createPalette';
 
-import { Brand } from '../../../types/brands';
+import { Brand } from '../constants';
 
 import { brandColors } from './brandColors';
 

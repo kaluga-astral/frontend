@@ -1,6 +1,15 @@
-import { Brand } from '../../../types/brands';
+import { Brand } from '../constants';
 
-const baseColors = {
+type BrandColors = {
+  active: string;
+  primary: string;
+  hover: string;
+  secondary: string;
+  bgActive: string;
+  bgHover: string;
+};
+
+const defaultBrandPalette: BrandColors = {
   active: '#0F52B8',
   primary: '#2165CC',
   hover: '#1874FF',
@@ -9,7 +18,7 @@ const baseColors = {
   bgHover: '#E1EDFF',
 };
 
-const edoColors = {
+const edoColors: BrandColors = {
   active: '#5D3FD4',
   primary: '#6746EB',
   hover: '#8566FF',
@@ -18,7 +27,7 @@ const edoColors = {
   bgHover: '#EFEBFF',
 };
 
-const ao5Colors = {
+const ao5Colors: BrandColors = {
   active: '#0068B2',
   primary: '#0074C6',
   hover: '#0989E3',
@@ -27,7 +36,7 @@ const ao5Colors = {
   bgHover: '#DFF0FB',
 };
 
-const ofdColors = {
+const ofdColors: BrandColors = {
   active: '#1F78D6',
   primary: '#2285EE',
   hover: '#46A0FF',
@@ -36,16 +45,16 @@ const ofdColors = {
   bgHover: '#E7F3FF',
 };
 
-const signColors = {
+const signColors: BrandColors = {
   active: '#325D89',
-  primary: '#2165CC',
+  primary: '#376798',
   hover: '#4D86BF',
   secondary: '#4199AC',
   bgActive: '#D3E1EF',
   bgHover: '#E8EFF7',
 };
 
-const lkpColors = {
+const lkpColors: BrandColors = {
   active: '#009E71',
   primary: '#00B07E',
   hover: '#2CC89B',
@@ -54,8 +63,8 @@ const lkpColors = {
   bgHover: '#E3F8F2',
 };
 
-export const brandColors = {
-  [Brand.DEFAULT]: baseColors,
+export const brandColors: Record<Brand, BrandColors> = {
+  [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Colors,
   [Brand.EDO]: edoColors,
   [Brand.OFD]: ofdColors,

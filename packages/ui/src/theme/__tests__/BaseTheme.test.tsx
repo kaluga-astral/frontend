@@ -1,6 +1,5 @@
 import { createTheme } from '../baseTheme';
-import { Brand } from '../../../types/brands';
-import { brandColors } from '../palette';
+import { Brand } from '../constants';
 
 describe('createTheme', () => {
   it('Theme merge done correctly', () => {
@@ -14,6 +13,9 @@ describe('createTheme', () => {
   it('Color should be taken depending on the brand', () => {
     const theme = createTheme(Brand.SIGN);
 
-    expect(theme.palette.primary.main === brandColors[Brand.SIGN].primary);
+    expect(theme.palette.primary.main).toBe('#376798');
+    expect(theme.palette.primary.dark).toBe('#325D89');
+    expect(theme.palette.secondary.main).toBe('#4199AC');
+    expect(theme.palette.secondary.dark).toBe('#325D89');
   });
 });
