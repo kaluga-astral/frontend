@@ -2,10 +2,10 @@ import { PaletteOptions } from '@mui/material/styles/createPalette';
 
 import { Brand } from '../constants';
 
-import { brandColors } from './brandColors';
+import { brandPalette } from './brandPalette';
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
-  const colors = brandColors[brand];
+  const colors = brandPalette[brand];
 
   return {
     primary: {

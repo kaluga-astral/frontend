@@ -18,7 +18,7 @@ const defaultBrandPalette: BrandColors = {
   bgHover: '#E1EDFF',
 };
 
-const edoColors: BrandColors = {
+const edoPalette: BrandColors = {
   active: '#5D3FD4',
   primary: '#6746EB',
   hover: '#8566FF',
@@ -27,7 +27,7 @@ const edoColors: BrandColors = {
   bgHover: '#EFEBFF',
 };
 
-const ao5Colors: BrandColors = {
+const ao5Palette: BrandColors = {
   active: '#0068B2',
   primary: '#0074C6',
   hover: '#0989E3',
@@ -36,7 +36,7 @@ const ao5Colors: BrandColors = {
   bgHover: '#DFF0FB',
 };
 
-const ofdColors: BrandColors = {
+const ofdPalette: BrandColors = {
   active: '#1F78D6',
   primary: '#2285EE',
   hover: '#46A0FF',
@@ -45,7 +45,7 @@ const ofdColors: BrandColors = {
   bgHover: '#E7F3FF',
 };
 
-const signColors: BrandColors = {
+const signPalette: BrandColors = {
   active: '#325D89',
   primary: '#376798',
   hover: '#4D86BF',
@@ -54,7 +54,7 @@ const signColors: BrandColors = {
   bgHover: '#E8EFF7',
 };
 
-const lkpColors: BrandColors = {
+const lkpPalette: BrandColors = {
   active: '#009E71',
   primary: '#00B07E',
   hover: '#2CC89B',
@@ -63,11 +63,11 @@ const lkpColors: BrandColors = {
   bgHover: '#E3F8F2',
 };
 
-export const brandColors: Record<Brand, BrandColors> = {
+export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
-  [Brand.AO5]: ao5Colors,
-  [Brand.EDO]: edoColors,
-  [Brand.OFD]: ofdColors,
-  [Brand.SIGN]: signColors,
-  [Brand.LKP]: lkpColors,
+  [Brand.AO5]: ao5Palette,
+  [Brand.EDO]: edoPalette,
+  [Brand.OFD]: ofdPalette,
+  [Brand.SIGN]: signPalette,
+  [Brand.LKP]: lkpPalette,
 };
