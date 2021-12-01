@@ -1,4 +1,5 @@
 import {
+  Theme as MuiTheme,
   ThemeOptions,
   createTheme as createMuiTheme,
   responsiveFontSizes,
@@ -6,15 +7,21 @@ import {
 import { merge } from 'lodash-es';
 
 import { typography } from './typography';
-import { components } from './components';
+import { getPalette } from './palette';
+import { getComponents } from './getComponents';
+import { Brand } from './constants';
 
 export type { Theme } from '@mui/material/styles';
 
-const themeOptions: ThemeOptions = {
-  components,
-  typography,
-};
+export const createTheme = (
+  brand: Brand,
+  options: ThemeOptions = {}
+): MuiTheme => {
+  const themeOptions: ThemeOptions = {
+    typography,
+    palette: getPalette(brand),
+    components: getComponents(brand),
+  };
 
-export const createTheme = (options?: ThemeOptions) => {
   return responsiveFontSizes(createMuiTheme(merge({}, themeOptions, options)));
 };
