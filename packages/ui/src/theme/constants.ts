@@ -6,3 +6,5 @@ export enum Brand {
   SIGN = 'SIGN',
   LKP = 'LKP',
 }
+
+export const SPACING = 4;

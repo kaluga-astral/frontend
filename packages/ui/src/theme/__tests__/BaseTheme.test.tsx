@@ -26,4 +26,10 @@ describe('createTheme', () => {
 
     expect(theme.palette).toMatchObject(expected);
   });
+
+  it('Spacing are calculated correctly', () => {
+    const theme = createTheme(Brand.SIGN);
+
+    expect(theme.spacing(2)).toBe('8px');
+  });
 });

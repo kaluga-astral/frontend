@@ -9,7 +9,7 @@ import { merge } from 'lodash-es';
 import { typography } from './typography';
 import { getPalette } from './palette';
 import { getComponents } from './getComponents';
-import { Brand } from './constants';
+import { Brand, SPACING } from './constants';
 
 export type { Theme } from '@mui/material/styles';
 
@@ -19,6 +19,7 @@ export const createTheme = (
 ): MuiTheme => {
   const themeOptions: ThemeOptions = {
     typography,
+    spacing: SPACING,
     palette: getPalette(brand),
     components: getComponents(brand),
   };
