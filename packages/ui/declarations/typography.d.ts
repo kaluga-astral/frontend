@@ -11,6 +11,26 @@ declare module '@mui/material/styles' {
     small?: React.CSSProperties;
     code?: React.CSSProperties;
   }
+
+  interface Theme {
+    elevation: {
+      100: string;
+      200: string;
+      300: string;
+      400: string;
+      500: string;
+    };
+  }
+
+  interface ThemeOptions {
+    elevation?: {
+      100: React.CSSProperties['boxShadow'];
+      200: React.CSSProperties['boxShadow'];
+      300: React.CSSProperties['boxShadow'];
+      400: React.CSSProperties['boxShadow'];
+      500: React.CSSProperties['boxShadow'];
+    };
+  }
 }
 
 declare module '@mui/material/Typography' {
