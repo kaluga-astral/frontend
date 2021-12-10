@@ -11,20 +11,24 @@ import { getPalette } from './palette';
 import { getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { elevation } from './elevation';
+import { Elevation } from './types';
 
-export type { Theme } from '@mui/material/styles';
+type CustomTheme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 
 export const createTheme = (
   brand: Brand,
   options: ThemeOptions = {}
-): Omit<MuiTheme, 'shadows'> => {
+): CustomTheme => {
   const themeOptions: ThemeOptions = {
-    elevation,
     typography,
     spacing: SPACING,
     palette: getPalette(brand),
     components: getComponents(brand),
   };
 
-  return responsiveFontSizes(createMuiTheme(merge({}, themeOptions, options)));
+  const theme = responsiveFontSizes(
+    createMuiTheme(merge({}, themeOptions, options))
+  );
+
+  return merge(theme, { elevation }) as CustomTheme;
 };
