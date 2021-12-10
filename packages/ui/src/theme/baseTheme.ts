@@ -8,15 +8,16 @@ import { merge } from 'lodash-es';
 
 import { typography } from './typography';
 import { getPalette } from './palette';
-import { getComponents } from './getComponents';
+import { getComponents } from './components';
 import { Brand, SPACING } from './constants';
+import { Elevation, elevation } from './elevation';
 
-export type { Theme } from '@mui/material/styles';
+export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 
 export const createTheme = (
   brand: Brand,
   options: ThemeOptions = {}
-): MuiTheme => {
+): Theme => {
   const themeOptions: ThemeOptions = {
     typography,
     spacing: SPACING,
@@ -24,5 +25,9 @@ export const createTheme = (
     components: getComponents(brand),
   };
 
-  return responsiveFontSizes(createMuiTheme(merge({}, themeOptions, options)));
+  const muiTheme = responsiveFontSizes(
+    createMuiTheme(merge({}, themeOptions, options))
+  );
+
+  return merge(muiTheme, { elevation }) as Theme;
 };

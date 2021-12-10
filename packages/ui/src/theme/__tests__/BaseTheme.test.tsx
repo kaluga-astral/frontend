@@ -32,4 +32,12 @@ describe('createTheme', () => {
 
     expect(theme.spacing(2)).toBe('8px');
   });
+
+  it('Theme has elevation params', () => {
+    const theme = createTheme(Brand.SIGN);
+
+    expect(theme.elevation[100]).toBe(
+      'box-shadow: 0px 0px 1px 0px #072D574F; box-shadow: 0px 1px 1px 0px #072D5740;'
+    );
+  });
 });
