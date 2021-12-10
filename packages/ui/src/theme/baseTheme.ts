@@ -10,8 +10,7 @@ import { typography } from './typography';
 import { getPalette } from './palette';
 import { getComponents } from './components';
 import { Brand, SPACING } from './constants';
-import { elevation } from './elevation';
-import { Elevation } from './types';
+import { Elevation, elevation } from './elevation';
 
 export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 
