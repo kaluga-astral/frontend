@@ -13,12 +13,12 @@ import { Brand, SPACING } from './constants';
 import { elevation } from './elevation';
 import { Elevation } from './types';
 
-type CustomTheme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
+export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 
 export const createTheme = (
   brand: Brand,
   options: ThemeOptions = {}
-): CustomTheme => {
+): Theme => {
   const themeOptions: ThemeOptions = {
     typography,
     spacing: SPACING,
@@ -26,9 +26,9 @@ export const createTheme = (
     components: getComponents(brand),
   };
 
-  const theme = responsiveFontSizes(
+  const muiTheme = responsiveFontSizes(
     createMuiTheme(merge({}, themeOptions, options))
   );
 
-  return merge(theme, { elevation }) as CustomTheme;
+  return merge(muiTheme, { elevation }) as Theme;
 };
