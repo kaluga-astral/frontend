@@ -25,3 +25,14 @@ declare module '@mui/material/Typography' {
     code: true;
   }
 }
+
+declare module '@mui/material/Badge' {
+  interface BadgePropsColorOverrides {
+    grey: true;
+    white: true;
+    errorLight: true;
+    warning: false;
+    secondary: false;
+    info: false;
+  }
+}
