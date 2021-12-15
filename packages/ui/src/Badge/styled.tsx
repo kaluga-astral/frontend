@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
-import { Badge, BadgeProps } from '@mui/material';
+import { Badge } from '@mui/material';
 
 import { Theme } from '../theme';
+
+import { BadgeProps } from './types';
 
 interface BadgeThemeProps extends BadgeProps {
   theme: Theme;
@@ -40,12 +42,12 @@ export const StyledBadge = styled(Badge, {
     color: ${({ color, theme }) => getTextColor({ color, theme })};
     padding: ${({ theme }) => theme.spacing(0, 1)};
     font-size: ${({ theme }) => theme.typography.small};
-    border: 2px solid ${({ theme }) => theme.palette.background.paper};
+    border: 2px solid ${({ theme }) => theme.palette.common.white};
   }
 
   .MuiBadge-dot {
     width: 12px;
     height: 12px;
-    border: 2px solid ${({ theme }) => theme.palette.background.paper};
+    border: 2px solid ${({ theme }) => theme.palette.common.white};
   }
 `;
