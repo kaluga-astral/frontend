@@ -1,8 +1,20 @@
-import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge';
+import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
 
 import { StyledBadge } from './styled';
 
-export const Badge = ({ children, ...props }: MuiBadgeProps) => {
+type BadgeColor =
+  | 'primary'
+  | 'grey'
+  | 'white'
+  | 'errorLight'
+  | 'error'
+  | 'success';
+
+export interface BadgeProps extends MuiBadgeProps {
+  color: BadgeColor;
+}
+
+export const Badge = ({ children, ...props }: BadgeProps) => {
   return (
     <StyledBadge {...props} max={99}>
       {children}

@@ -9,8 +9,7 @@ import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2';
 import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2';
 import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2';
 
-import { Brand, SPACING } from './constants';
-import { pxToRem } from './typography';
+import { Brand } from './constants';
 
 const MuiCssBaseline: Components['MuiCssBaseline'] = {
   styleOverrides: `
@@ -62,28 +61,9 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
   },
 });
 
-const MuiBadge: Components['MuiBadge'] = {
-  styleOverrides: {
-    badge: {
-      height: '16px',
-      lineHeight: '16px',
-      padding: `0 ${SPACING}px`,
-      borderRadius: '12px',
-      fontSize: pxToRem(12),
-      outline: '2px solid #fff',
-    },
-    dot: {
-      height: '8px',
-      width: '8px',
-      outline: `2px solid #fff`,
-    },
-  },
-};
-
 // TODO: понадобится в будущем при реализации компонентов
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getComponents = (brand: Brand = Brand.DEFAULT): Components => ({
-  MuiBadge,
   MuiCssBaseline,
   MuiTypography: getMuiTypography(),
 });

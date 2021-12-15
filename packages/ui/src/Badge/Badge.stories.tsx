@@ -1,9 +1,8 @@
-import { BadgeProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
 
-import { Badge } from './Badge';
+import { Badge, BadgeProps } from './Badge';
 
 export default {
   title: 'Components/Badge',

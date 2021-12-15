@@ -31,8 +31,21 @@ const getTextColor = ({ color, theme }: BadgeThemeProps): string => {
 
 export const StyledBadge = styled(Badge, {
   shouldForwardProp: (prop) => prop !== 'color',
-})`
+})<BadgeProps>`
   .MuiBadge-badge {
+    height: 20px;
+    border-radius: 12px;
+    line-height: 20px;
     background-color: ${({ color, theme }) => getBgColor({ color, theme })};
-    color: ${({ color, theme }) => getTextColor({ color, theme })}
+    color: ${({ color, theme }) => getTextColor({ color, theme })};
+    padding: ${({ theme }) => theme.spacing(0, 1)};
+    font-size: ${({ theme }) => theme.typography.small};
+    border: 2px solid ${({ theme }) => theme.palette.background.paper};
+  }
+
+  .MuiBadge-dot {
+    width: 12px;
+    height: 12px;
+    border: 2px solid ${({ theme }) => theme.palette.background.paper};
+  }
 `;
