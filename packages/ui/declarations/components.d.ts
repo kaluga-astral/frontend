@@ -1,6 +1,17 @@
 import React from 'react';
 
 declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    h7: string;
+    h8: string;
+    h9: string;
+    ui: string;
+    link: string;
+    pointer: string;
+    small: string;
+    code: string;
+  }
+
   interface TypographyVariantsOptions {
     h7?: React.CSSProperties;
     h8?: React.CSSProperties;
