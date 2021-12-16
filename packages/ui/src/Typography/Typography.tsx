@@ -3,7 +3,7 @@ import MuiTypography, {
 } from '@mui/material/Typography';
 import { Variant } from '@mui/material/styles/createTypography';
 
-export interface TypographyProps extends MuiTypographyProps {
+export type TypographyProps = MuiTypographyProps & {
   variant?:
     | Variant
     | 'h7'
@@ -14,7 +14,7 @@ export interface TypographyProps extends MuiTypographyProps {
     | 'pointer'
     | 'small'
     | 'code';
-}
+};
 
 export const Typography = ({
   variant,

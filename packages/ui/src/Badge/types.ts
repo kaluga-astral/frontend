@@ -8,6 +8,6 @@ type BadgeColor =
   | 'error'
   | 'success';
 
-export interface BadgeProps extends Omit<MuiBadgeProps, 'color'> {
+export type BadgeProps = Omit<MuiBadgeProps, 'color'> & {
   color?: BadgeColor;
-}
+};
