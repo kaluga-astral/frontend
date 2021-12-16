@@ -7015,6 +7015,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chromatic@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "chromatic@npm:6.2.0"
+  bin:
+    chroma: bin/main.cjs
+    chromatic: bin/main.cjs
+    chromatic-cli: bin/main.cjs
+  checksum: d0726a511531c2707d2c9964e26223cf30f890d3b322983180013d7d42de54ac6d3708ff0ef08e66c399be55639694004ecdd8a5110b58d2aea463be964c0905
+  languageName: node
+  linkType: hard
+
 "chrome-trace-event@npm:^1.0.2":
   version: 1.0.3
   resolution: "chrome-trace-event@npm:1.0.3"
@@ -18208,6 +18219,7 @@ __metadata:
     "@storybook/node-logger": ^6.3.12
     "@storybook/preset-create-react-app": ^3.2.0
     "@storybook/react": ^6.3.12
+    chromatic: ^6.2.0
     emotion-theming: ^11.0.0
   languageName: unknown
   linkType: soft
