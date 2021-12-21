@@ -1,6 +1,6 @@
-import MuiButton from '@mui/material/Button';
+import MuiButton, { ButtonProps } from '@mui/material/Button';
 
-export const Button = ({ ...props }) => {
+export const Button = ({ ...props }: ButtonProps) => {
   return <MuiButton {...props}>Button</MuiButton>;
 };
 

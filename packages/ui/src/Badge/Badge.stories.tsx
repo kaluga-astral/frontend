@@ -7,16 +7,7 @@ import { BadgeProps } from './types';
 
 export default {
   title: 'Components/Badge',
-  argTypes: {
-    color: {
-      control: { type: 'radio' },
-      options: ['grey', 'primary', 'white', 'error', 'errorLight', 'success'],
-    },
-    variant: {
-      control: { type: 'radio' },
-      options: ['standard', 'dot'],
-    },
-  },
+  component: Badge,
 };
 
 const Template: Story<BadgeProps> = (args) => (
@@ -29,8 +20,11 @@ const Template: Story<BadgeProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  color: 'error',
+  customColor: 'error',
   badgeContent: 999,
   variant: 'standard',
   invisible: false,
+};
+Default.parameters = {
+  controls: { expanded: true },
 };

@@ -9,5 +9,5 @@ type BadgeColor =
   | 'success';
 
 export type BadgeProps = Omit<MuiBadgeProps, 'color'> & {
-  color?: BadgeColor;
+  customColor: BadgeColor;
 };
