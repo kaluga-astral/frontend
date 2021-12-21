@@ -20,7 +20,7 @@ const Template: Story<BadgeProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  customColor: 'error',
+  color: 'error',
   badgeContent: 999,
   variant: 'standard',
   invisible: false,

@@ -3,13 +3,15 @@ import { Badge } from '@mui/material';
 
 import { Theme } from '../theme';
 
-import { BadgeProps } from './types';
+import { BadgeColor, BadgeProps } from './types';
 
-interface BadgeThemeProps extends BadgeProps {
-  theme: Theme;
+interface StyledBadgeProps extends Omit<BadgeProps, 'color'> {
+  customColor: BadgeColor;
 }
 
-const getBgColor = ({ customColor, theme }: BadgeThemeProps): string => {
+type StyledBadgeThemeProps = StyledBadgeProps & { theme: Theme };
+
+const getBgColor = ({ customColor, theme }: StyledBadgeThemeProps): string => {
   if (customColor === 'grey') return theme.palette.grey[300];
   if (customColor === 'errorLight') return theme.palette.error.light;
   if (customColor === 'success') return theme.palette.success.light;
@@ -20,7 +22,10 @@ const getBgColor = ({ customColor, theme }: BadgeThemeProps): string => {
   return theme.palette.primary.main;
 };
 
-const getTextColor = ({ customColor, theme }: BadgeThemeProps): string => {
+const getTextColor = ({
+  customColor,
+  theme,
+}: StyledBadgeThemeProps): string => {
   if (customColor === 'grey') return theme.palette.text.primary;
   if (customColor === 'primary') return theme.palette.primary.contrastText;
   if (customColor === 'white') return theme.palette.primary.main;
@@ -32,8 +37,8 @@ const getTextColor = ({ customColor, theme }: BadgeThemeProps): string => {
 };
 
 export const StyledBadge = styled(Badge, {
-  shouldForwardProp: (prop) => prop !== 'color' && prop !== 'customColor',
-})<BadgeProps>`
+  shouldForwardProp: (prop) => prop !== 'customColor',
+})<StyledBadgeProps>`
   .MuiBadge-badge {
     height: 20px;
     border-radius: 12px;
