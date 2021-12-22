@@ -5,28 +5,7 @@ import { Typography, TypographyProps } from './Typography';
 
 export default {
   title: 'Components/Typography',
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: [
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'h7',
-        'h8',
-        'h9',
-        'button',
-        'ui',
-        'link',
-        'pointer',
-        'small',
-        'code',
-      ],
-    },
-  },
+  component: Typography,
 };
 
 const Template: Story<TypographyProps> = (args) => (
@@ -88,4 +67,7 @@ export const AllTypography = Template.bind({});
 AllTypography.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
+};
+AllTypography.parameters = {
+  controls: { expanded: true },
 };

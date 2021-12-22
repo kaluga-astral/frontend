@@ -1,6 +1,6 @@
 import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
 
-type BadgeColor =
+export type BadgeColor =
   | 'primary'
   | 'grey'
   | 'white'
@@ -9,5 +9,5 @@ type BadgeColor =
   | 'success';
 
 export type BadgeProps = Omit<MuiBadgeProps, 'color'> & {
-  color?: BadgeColor;
+  color: BadgeColor;
 };
