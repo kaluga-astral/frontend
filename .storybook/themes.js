@@ -1,29 +1,30 @@
 import { createTheme, Brand } from '@astral/ui'
+import { ubuntuFonts } from '@astral/kit-font';
 
 export const themes = [
   {
     name: 'Base theme',
-    theme: createTheme(Brand.DEFAULT)
+    theme: createTheme({ brand: Brand.DEFAULT, fontsUrls: ubuntuFonts })
   },
   {
     name: 'Astral.edo',
-    theme: createTheme(Brand.EDO)
+    theme: createTheme({ brand: Brand.EDO, fontsUrls: ubuntuFonts })
   },
   {
     name: 'Astral.lkp',
-    theme: createTheme(Brand.LKP)
+    theme: createTheme({ brand: Brand.LKP, fontsUrls: ubuntuFonts })
   },
   {
     name: 'Astral.sign',
-    theme: createTheme(Brand.SIGN)
+    theme: createTheme({ brand: Brand.SIGN, fontsUrls: ubuntuFonts })
   },
   {
     name: 'Astral.ao5',
-    theme: createTheme(Brand.AO5)
+    theme: createTheme({ brand: Brand.AO5, fontsUrls: ubuntuFonts })
   },
   {
     name: 'Astral.ofd',
-    theme: createTheme(Brand.OFD)
+    theme: createTheme({ brand: Brand.OFD, fontsUrls: ubuntuFonts })
   },
 ];
 

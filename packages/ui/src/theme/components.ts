@@ -1,47 +1,63 @@
 import { Components } from '@mui/material';
 
-import UbuntuBoldWoff from '../../fonts/Ubuntu/UbuntuBold.woff';
-import UbuntuMediumWoff from '../../fonts/Ubuntu/UbuntuMedium.woff';
-import UbuntuRegularWoff from '../../fonts/Ubuntu/UbuntuRegular.woff';
-import UbuntuLightWoff from '../../fonts/Ubuntu/UbuntuLight.woff';
-import UbuntuBoldWoff2 from '../../fonts/Ubuntu/UbuntuBold.woff2';
-import UbuntuMediumWoff2 from '../../fonts/Ubuntu/UbuntuMedium.woff2';
-import UbuntuRegularWoff2 from '../../fonts/Ubuntu/UbuntuRegular.woff2';
-import UbuntuLightWoff2 from '../../fonts/Ubuntu/UbuntuLight.woff2';
-
 import { Brand } from './constants';
 
-const MuiCssBaseline: Components['MuiCssBaseline'] = {
-  styleOverrides: `
+export type FontsUrls = {
+  bold: {
+    woff: string;
+    woff2: string;
+  };
+  light: {
+    woff: string;
+    woff2: string;
+  };
+  medium: {
+    woff: string;
+    woff2: string;
+  };
+  regular: {
+    woff: string;
+    woff2: string;
+  };
+};
+
+const getMuiCssBaseline = (
+  fontUrls?: FontsUrls
+): Components['MuiCssBaseline'] => {
+  if (!fontUrls) return {};
+
+  return {
+    styleOverrides: `
     @font-face {
       font-family: 'Ubuntu';
       font-style: 'normal';
       font-weight: 300;
       font-display: swap;
-      src: url(${UbuntuLightWoff2}) format('woff2'), url(${UbuntuLightWoff}) format('woff');
+      src: url(${fontUrls.light.woff2}) format('woff2'), url(${fontUrls.light.woff}) format('woff');
     }
     @font-face {
       font-family: 'Ubuntu';
       font-style: 'normal';
       font-weight: 400;
       font-display: swap;
-      src: url(${UbuntuRegularWoff2}) format('woff2'), url(${UbuntuRegularWoff}) format('woff');
+      src: url(${fontUrls.regular.woff2}) format('woff2'), url(${fontUrls.regular.woff}) format('woff');
     }
     @font-face {
       font-family: 'Ubuntu';
       font-style: 'normal';
       font-weight: 500;
       font-display: swap;
-      src: url(${UbuntuMediumWoff2}) format('woff2'), url(${UbuntuMediumWoff}) format('woff');
+      src: url(${fontUrls.medium.woff2}) format('woff2'), url(${fontUrls.medium.woff}) format('woff');
     }
     @font-face {
       font-family: 'Ubuntu';
       font-style: 'normal';
       font-weight: 700;
       font-display: swap;
-      src: url(${UbuntuBoldWoff2}) format('woff2'), url(${UbuntuBoldWoff}) format('woff');
+      src: url(${fontUrls.bold.woff2}) format('woff2'), url(${fontUrls.bold.woff}) format('woff');
     }
   `,
+  };
 };
 
 const getMuiTypography = (): Components['MuiTypography'] => ({
@@ -61,9 +77,12 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
   },
 });
 
-// TODO: понадобится в будущем при реализации компонентов
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getComponents = (brand: Brand = Brand.DEFAULT): Components => ({
-  MuiCssBaseline,
+export const getComponents = (
+  // TODO: понадобится в будущем при реализации компонентов
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  brand: Brand = Brand.DEFAULT,
+  fontUrls?: FontsUrls
+): Components => ({
+  MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
 });
