@@ -1,7 +1,5 @@
 import { Components } from '@mui/material';
 
-import { Brand } from './constants';
-
 export type FontsUrls = {
   bold: {
     woff: string;
@@ -73,12 +71,7 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
   },
 });
 
-export const getComponents = (
-  // TODO: понадобится в будущем при реализации компонентов
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  brand: Brand = Brand.DEFAULT,
-  fontUrls: FontsUrls
-): Components => ({
+export const getComponents = (fontUrls: FontsUrls): Components => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
 });
