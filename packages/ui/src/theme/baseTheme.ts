@@ -29,7 +29,7 @@ export const createTheme = ({
     typography,
     spacing: SPACING,
     palette: getPalette(brand),
-    components: getComponents(brand, fontsUrls),
+    components: getComponents(fontsUrls),
   };
 
   const muiTheme = responsiveFontSizes(
