@@ -17,7 +17,7 @@ export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 type CreateThemeType = {
   brand: Brand;
   options?: ThemeOptions;
-  fontsUrls?: FontsUrls;
+  fontsUrls: FontsUrls;
 };
 
 export const createTheme = ({ brand, options, fontsUrls }: CreateThemeType) => {

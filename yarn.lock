@@ -28,9 +28,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astral/kit-font@workspace:packages/kit-font":
+"@astral/fonts@workspace:packages/fonts":
   version: 0.0.0-use.local
-  resolution: "@astral/kit-font@workspace:packages/kit-font"
+  resolution: "@astral/fonts@workspace:packages/fonts"
   languageName: unknown
   linkType: soft
 

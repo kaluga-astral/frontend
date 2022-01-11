@@ -22,12 +22,9 @@ export type FontsUrls = {
 };
 
 const getMuiCssBaseline = (
-  fontUrls?: FontsUrls
-): Components['MuiCssBaseline'] => {
-  if (!fontUrls) return {};
-
-  return {
-    styleOverrides: `
+  fontUrls: FontsUrls
+): Components['MuiCssBaseline'] => ({
+  styleOverrides: `
     @font-face {
       font-family: 'Ubuntu';
       font-style: 'normal';
@@ -57,8 +54,7 @@ const getMuiCssBaseline = (
       src: url(${fontUrls.bold.woff2}) format('woff2'), url(${fontUrls.bold.woff}) format('woff');
     }
   `,
-  };
-};
+});
 
 const getMuiTypography = (): Components['MuiTypography'] => ({
   variants: [
@@ -81,7 +77,7 @@ export const getComponents = (
   // TODO: понадобится в будущем при реализации компонентов
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   brand: Brand = Brand.DEFAULT,
-  fontUrls?: FontsUrls
+  fontUrls: FontsUrls
 ): Components => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
