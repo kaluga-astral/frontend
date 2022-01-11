@@ -14,13 +14,17 @@ import { Elevation, elevation } from './elevation';
 
 export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
 
-type CreateThemeType = {
+type CreateThemeParams = {
   brand: Brand;
   options?: ThemeOptions;
   fontsUrls: FontsUrls;
 };
 
-export const createTheme = ({ brand, options, fontsUrls }: CreateThemeType) => {
+export const createTheme = ({
+  brand,
+  options,
+  fontsUrls,
+}: CreateThemeParams) => {
   const themeOptions: ThemeOptions = {
     typography,
     spacing: SPACING,
