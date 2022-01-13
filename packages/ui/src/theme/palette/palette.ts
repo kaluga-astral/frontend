@@ -3,37 +3,38 @@ import { PaletteOptions } from '@mui/material/styles/createPalette';
 import { Brand } from '../constants';
 
 import { brandPalette } from './brandPalette';
+import { green, red, yellow } from './colorsPalette';
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
-  const colors = brandPalette[brand];
+  const brandColors = brandPalette[brand];
 
   return {
     primary: {
-      main: colors.primary,
+      main: brandColors.main,
+      dark: brandColors.dark,
       contrastText: '#FFF',
-      dark: colors.active,
     },
     secondary: {
-      main: colors.secondary,
-      dark: colors.active,
+      main: brandColors.secondary,
+      dark: brandColors.dark,
       contrastText: '#FFF',
     },
     success: {
-      light: '#E6F3EF',
-      main: '#4DAB8C',
-      dark: '#00B54E',
+      light: green[100],
+      main: green[600],
+      dark: green[800],
       contrastText: '#FFF',
     },
     warning: {
-      light: '#FEF3E6',
-      main: '#FBAB4D',
-      dark: '#F98700',
+      light: yellow[100],
+      main: yellow[600],
+      dark: yellow[800],
       contrastText: '#FFF',
     },
     error: {
-      light: '#FEEDED',
-      main: '#F67E7E',
-      dark: '#F24646',
+      light: red[100],
+      main: red[600],
+      dark: red[800],
       contrastText: '#FFF',
     },
     text: {
