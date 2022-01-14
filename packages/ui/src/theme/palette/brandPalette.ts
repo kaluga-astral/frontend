@@ -2,9 +2,9 @@ import { Brand } from '../constants';
 
 type BrandColors = {
   secondary: string;
-  dark: string;
-  main: string;
-  light: string;
+  900: string;
+  800: string;
+  700: string;
   600: string;
   500: string;
   400: string;
@@ -15,9 +15,9 @@ type BrandColors = {
 
 const defaultBrandPalette: BrandColors = {
   secondary: '#55B8F0',
-  dark: '#0F52B8',
-  main: '#2165CC',
-  light: '#1874FF',
+  900: '#0F52B8',
+  800: '#2165CC',
+  700: '#1874FF',
   600: '#2684FF',
   500: '#4C9AFF',
   400: '#70AEFF',
@@ -28,9 +28,9 @@ const defaultBrandPalette: BrandColors = {
 
 const edoPalette: BrandColors = {
   secondary: '#5653FF',
-  dark: '#5D3FD4',
-  main: '#6746EB',
-  light: '#8566FF',
+  900: '#5D3FD4',
+  800: '#6746EB',
+  700: '#8566FF',
   600: '#9D85FF',
   500: '#9D85FF',
   400: '#B29EFF',
@@ -41,9 +41,9 @@ const edoPalette: BrandColors = {
 
 const ao5Palette: BrandColors = {
   secondary: '#14A5D3',
-  dark: '#0068B2',
-  main: '#0074C6',
-  light: '#0989E3',
+  900: '#0068B2',
+  800: '#0074C6',
+  700: '#0989E3',
   600: '#2195E6',
   500: '#3AA1E9',
   400: '#52ACEB',
@@ -54,9 +54,9 @@ const ao5Palette: BrandColors = {
 
 const ofdPalette: BrandColors = {
   secondary: '#22BDEE',
-  dark: '#1F78D6',
-  main: '#2285EE',
-  light: '#46A0FF',
+  900: '#1F78D6',
+  800: '#2285EE',
+  700: '#46A0FF',
   600: '#58A9FF',
   500: '#6BB3FF',
   400: '#7DBCFF',
@@ -67,9 +67,9 @@ const ofdPalette: BrandColors = {
 
 const signPalette: BrandColors = {
   secondary: '#4099AC',
-  dark: '#325D89',
-  main: '#376798',
-  light: '#4D86BF',
+  900: '#325D89',
+  800: '#376798',
+  700: '#4D86BF',
   600: '#5E92C5',
   500: '#719ECC',
   400: '#82AAD2',
@@ -80,9 +80,9 @@ const signPalette: BrandColors = {
 
 const lkpPalette: BrandColors = {
   secondary: '#00BDB2',
-  dark: '#009E71',
-  main: '#00B07E',
-  light: '#2CC89B',
+  900: '#009E71',
+  800: '#00B07E',
+  700: '#2CC89B',
   600: '#41CDA5',
   500: '#56D3AF',
   400: '#6BD8B9',

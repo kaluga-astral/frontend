@@ -1,5 +1,7 @@
 import {
+  Palette as MuiPalette,
   Theme as MuiTheme,
+  PaletteColor,
   ThemeOptions,
   createTheme as createMuiTheme,
   responsiveFontSizes,
@@ -7,12 +9,20 @@ import {
 import { merge } from 'lodash-es';
 
 import { typography } from './typography';
-import { getPalette } from './palette';
+import { Color, Colors, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 
-export type Theme = Omit<MuiTheme, 'shadows'> & { elevation: Elevation };
+type Palette = MuiPalette & {
+  colors: Colors;
+  primary: PaletteColor & Color;
+};
+
+export type Theme = Omit<MuiTheme, 'shadows'> & {
+  elevation: Elevation;
+  palette: Palette;
+};
 
 type CreateThemeParams = {
   brand: Brand;
@@ -36,5 +46,5 @@ export const createTheme = ({
     createMuiTheme(merge({}, themeOptions, options))
   );
 
-  return merge(muiTheme, { elevation }) as Theme;
+  return merge(muiTheme as any, { elevation }) as Theme;
 };
