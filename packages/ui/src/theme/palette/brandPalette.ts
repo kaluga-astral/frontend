@@ -1,66 +1,94 @@
 import { Brand } from '../constants';
 
 type BrandColors = {
-  active: string;
-  primary: string;
-  hover: string;
   secondary: string;
-  bgActive: string;
-  bgHover: string;
+  900: string;
+  800: string;
+  700: string;
+  600: string;
+  500: string;
+  400: string;
+  300: string;
+  200: string;
+  100: string;
 };
 
 const defaultBrandPalette: BrandColors = {
-  active: '#0F52B8',
-  primary: '#2165CC',
-  hover: '#1874FF',
   secondary: '#55B8F0',
-  bgActive: '#C5DCFF',
-  bgHover: '#E1EDFF',
+  900: '#0F52B8',
+  800: '#2165CC',
+  700: '#1874FF',
+  600: '#2684FF',
+  500: '#4C9AFF',
+  400: '#70AEFF',
+  300: '#94C2FF',
+  200: '#C5DCFF',
+  100: '#E1EDFF',
 };
 
 const edoPalette: BrandColors = {
-  active: '#5D3FD4',
-  primary: '#6746EB',
-  hover: '#8566FF',
   secondary: '#5653FF',
-  bgActive: '#E0D9FF',
-  bgHover: '#EFEBFF',
+  900: '#5D3FD4',
+  800: '#6746EB',
+  700: '#8566FF',
+  600: '#9D85FF',
+  500: '#9D85FF',
+  400: '#B29EFF',
+  300: '#C2B2FF',
+  200: '#E0D9FF',
+  100: '#EFEBFF',
 };
 
 const ao5Palette: BrandColors = {
-  active: '#0068B2',
-  primary: '#0074C6',
-  hover: '#0989E3',
-  secondary: '#14A6D3',
-  bgActive: '#C1E2F8',
-  bgHover: '#DFF0FB',
+  secondary: '#14A5D3',
+  900: '#0068B2',
+  800: '#0074C6',
+  700: '#0989E3',
+  600: '#2195E6',
+  500: '#3AA1E9',
+  400: '#52ACEB',
+  300: '#84C4F1',
+  200: '#C1E2F8',
+  100: '#DFF0FB',
 };
 
 const ofdPalette: BrandColors = {
-  active: '#1F78D6',
-  primary: '#2285EE',
-  hover: '#46A0FF',
   secondary: '#22BDEE',
-  bgActive: '#D1E7FF',
-  bgHover: '#E7F3FF',
+  900: '#1F78D6',
+  800: '#2285EE',
+  700: '#46A0FF',
+  600: '#58A9FF',
+  500: '#6BB3FF',
+  400: '#7DBCFF',
+  300: '#A2CFFF',
+  200: '#D1E7FF',
+  100: '#E7F3FF',
 };
 
 const signPalette: BrandColors = {
-  active: '#325D89',
-  primary: '#376798',
-  hover: '#4D86BF',
-  secondary: '#4199AC',
-  bgActive: '#D3E1EF',
-  bgHover: '#E8EFF7',
+  secondary: '#4099AC',
+  900: '#325D89',
+  800: '#376798',
+  700: '#4D86BF',
+  600: '#5E92C5',
+  500: '#719ECC',
+  400: '#82AAD2',
+  300: '#A6C2DF',
+  200: '#D3E1EF',
+  100: '#E8EFF7',
 };
 
 const lkpPalette: BrandColors = {
-  active: '#009E71',
-  primary: '#00B07E',
-  hover: '#2CC89B',
   secondary: '#00BDB2',
-  bgActive: '#CAF1E6',
-  bgHover: '#E3F8F2',
+  900: '#009E71',
+  800: '#00B07E',
+  700: '#2CC89B',
+  600: '#41CDA5',
+  500: '#56D3AF',
+  400: '#6BD8B9',
+  300: '#95E3CD',
+  200: '#CAF1E6',
+  100: '#E3F8F2',
 };
 
 export const brandPalette: Record<Brand, BrandColors> = {

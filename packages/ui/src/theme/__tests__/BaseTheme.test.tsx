@@ -42,7 +42,7 @@ describe('createTheme', () => {
         dark: '#325D89',
       },
       secondary: {
-        main: '#4199AC',
+        main: '#4099AC',
         dark: '#325D89',
       },
     };
