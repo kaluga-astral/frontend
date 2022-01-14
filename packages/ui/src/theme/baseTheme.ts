@@ -9,13 +9,15 @@ import {
 import { merge } from 'lodash-es';
 
 import { typography } from './typography';
-import { Color, Colors, getPalette } from './palette';
+import { Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 
 type Palette = MuiPalette & {
-  colors: Colors;
+  red: Color;
+  green: Color;
+  yellow: Color;
   primary: PaletteColor & Color;
 };
 
