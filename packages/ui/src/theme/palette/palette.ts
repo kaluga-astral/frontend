@@ -1,7 +1,8 @@
 import {
   PaletteOptions as MuiPaletteOptions,
   PaletteColorOptions,
-} from '@mui/material/styles/createPalette';
+} from '@mui/material';
+import { TypeBackground } from '@mui/material/styles/createPalette';
 
 import { Brand } from '../constants';
 
@@ -21,11 +22,18 @@ export type Color = {
 
 export type PrimaryColorOptions = PaletteColorOptions & Color;
 
+type Background = TypeBackground & {
+  element: string;
+  elementHover: string;
+};
+
 type PaletteOptions = MuiPaletteOptions & {
   red: Color;
   green: Color;
   yellow: Color;
+  grey: Color;
   primary: PrimaryColorOptions;
+  background: Background;
 };
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
@@ -109,15 +117,16 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       900: '#072D57',
       800: '#1D3F66',
       700: '#557192',
-      650: '#778DA8',
-      600: '#99A9BA',
-      500: '#B7C2CE',
+      600: '#778DA8',
+      500: '#99A9BA',
+      400: '#B7C2CE',
       300: '#DDE2E8',
-      100: '#EBEEF1',
-      50: '#F0F4F7',
+      200: '#EBEEF1',
+      100: '#F0F4F7',
     },
     background: {
       default: '#FFF',
+      paper: '#FFF',
       element: '#FAFBFC',
       elementHover: '#EBECF0',
     },

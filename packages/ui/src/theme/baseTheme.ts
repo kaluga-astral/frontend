@@ -14,14 +14,15 @@ import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 
-type Palette = MuiPalette & {
+type Palette = Omit<MuiPalette, 'grey'> & {
   red: Color;
   green: Color;
   yellow: Color;
+  grey: Color;
   primary: PaletteColor & Color;
 };
 
-export type Theme = Omit<MuiTheme, 'shadows'> & {
+export type Theme = Omit<MuiTheme, 'shadows' | 'palette'> & {
   elevation: Elevation;
   palette: Palette;
 };
