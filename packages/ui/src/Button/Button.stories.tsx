@@ -7,13 +7,14 @@ export default {
   component: Button,
 };
 
-const Template: Story = (args) => <Button {...args} />;
+const Template: Story = (args) => <Button {...args}>Label</Button>;
 
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
   color: 'primary',
   variant: 'contained',
+  size: 'medium',
 };
 Default.parameters = {
   controls: { expanded: true },
