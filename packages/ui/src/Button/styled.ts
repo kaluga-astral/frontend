@@ -3,8 +3,13 @@ import styled from '@emotion/styled';
 
 import { Theme } from '../theme';
 
-import { ButtonColor, ButtonProps, ButtonVariant } from './types';
-import { ButtonColors, ButtonSizes, ButtonVariants } from './constants';
+import { ButtonColor, ButtonProps, ButtonState, ButtonVariant } from './types';
+import {
+  ButtonColors,
+  ButtonSizes,
+  ButtonStates,
+  ButtonVariants,
+} from './constants';
 
 interface StyledButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
   customColor?: ButtonColor;
@@ -14,8 +19,6 @@ interface StyledButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
 type StyledButtonThemeProps = StyledButtonProps & {
   theme: Theme;
 };
-
-type ButtonState = 'default' | 'active' | 'focus' | 'hover';
 
 const BACKGROUND_COLOR_VARIANTS = {
   default: {
@@ -146,24 +149,28 @@ export const StyledButton = styled(Button, {
   height: ${getButtonHeight};
   text-transform: unset;
   background-color: ${(props) =>
-    getBgColor({ ...props, buttonState: 'default' })};
-  color: ${(props) => getColor({ ...props, buttonState: 'default' })};
+    getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  color: ${(props) =>
+    getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
 
   &:hover {
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: 'hover' })};
-    color: ${(props) => getColor({ ...props, buttonState: 'hover' })};
+      getBgColor({ ...props, buttonState: ButtonStates.HOVER })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.HOVER })};
   }
 
   &:focus {
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: 'focus' })};
-    color: ${(props) => getColor({ ...props, buttonState: 'focus' })};
+      getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.FOCUS })};
   }
 
   &:active {
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: 'active' })};
-    color: ${(props) => getColor({ ...props, buttonState: 'active' })};
+      getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
   }
 `;

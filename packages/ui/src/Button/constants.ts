@@ -16,3 +16,10 @@ export enum ButtonSizes {
   MEDIUM = 'medium',
   LARGE = 'large',
 }
+
+export enum ButtonStates {
+  DEFAULT = 'default',
+  ACTIVE = 'active',
+  FOCUS = 'focus',
+  HOVER = 'hover',
+}
