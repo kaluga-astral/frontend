@@ -12,8 +12,8 @@ import {
 } from './constants';
 
 interface StyledButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
-  customColor: ButtonColor;
-  customVariant: ButtonVariant;
+  customColor?: ButtonColor;
+  customVariant?: ButtonVariant;
 }
 
 type StyledButtonThemeProps = StyledButtonProps & {
@@ -95,7 +95,7 @@ const getBgContained = ({
   customColor,
 }: {
   palette: Palette;
-  customColor: ButtonColor;
+  customColor?: ButtonColor;
   colorVariant: string;
 }): string => {
   const { ERROR, SUCCESS, WARNING, PRIMARY } = ButtonColors;
@@ -115,7 +115,7 @@ const getBgLight = ({
   customColor,
 }: {
   palette: Palette;
-  customColor: ButtonColor;
+  customColor?: ButtonColor;
   buttonState: ButtonState;
   colorVariant: string;
 }): string => {
