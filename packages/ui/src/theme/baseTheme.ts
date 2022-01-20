@@ -14,7 +14,7 @@ import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 
-type Palette = Omit<MuiPalette, 'grey'> & {
+export type Palette = Omit<MuiPalette, 'grey'> & {
   red: Color;
   green: Color;
   yellow: Color;

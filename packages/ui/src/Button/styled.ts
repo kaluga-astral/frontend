@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 
-import { Theme } from '../theme';
+import { Palette, Theme } from '../theme';
 
 import { ButtonColor, ButtonProps, ButtonState, ButtonVariant } from './types';
 import {
@@ -12,8 +12,8 @@ import {
 } from './constants';
 
 interface StyledButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
-  customColor?: ButtonColor;
-  customVariant?: ButtonVariant;
+  customColor: ButtonColor;
+  customVariant: ButtonVariant;
 }
 
 type StyledButtonThemeProps = StyledButtonProps & {
@@ -43,15 +43,12 @@ const getColor = ({
   customVariant,
   customColor,
   buttonState,
-  disabled,
 }: StyledButtonThemeProps & { buttonState: ButtonState }): string => {
   const { LIGHT, CONTAINED, LINK } = ButtonVariants;
   const { PRIMARY, ERROR, SUCCESS, WARNING } = ButtonColors;
   const { palette } = theme;
 
-  if (disabled) return `${palette.grey['500']} !important`;
-
-  if (buttonState === 'active') {
+  if (buttonState === ButtonStates.ACTIVE) {
     if (customVariant === LINK) return palette.grey['900'];
 
     return palette.primary.contrastText;
@@ -61,9 +58,9 @@ const getColor = ({
 
   if (customVariant === LIGHT) {
     if (customColor === PRIMARY) {
-      if (buttonState === 'default') return palette.grey['900'];
-      if (buttonState === 'hover') return palette.grey['900'];
-      if (buttonState === 'focus') return palette.primary['800'];
+      if (buttonState === ButtonStates.DEFAULT) return palette.grey['900'];
+      if (buttonState === ButtonStates.HOVER) return palette.grey['900'];
+      if (buttonState === ButtonStates.FOCUS) return palette.primary['800'];
     }
     if (customColor === ERROR) return palette.red['900'];
     if (customColor === SUCCESS) return palette.green['900'];
@@ -77,54 +74,98 @@ const getColor = ({
   return palette.grey['900'];
 };
 
+const getBgText = ({
+  palette,
+  buttonState,
+  colorVariant,
+}: {
+  palette: Palette;
+  buttonState: ButtonState;
+  colorVariant: string;
+}): string => {
+  if (buttonState === ButtonStates.HOVER) return palette.grey[colorVariant];
+  if (buttonState === ButtonStates.FOCUS) return palette.primary[colorVariant];
+
+  return 'transparent';
+};
+
+const getBgContained = ({
+  palette,
+  colorVariant,
+  customColor,
+}: {
+  palette: Palette;
+  customColor: ButtonColor;
+  colorVariant: string;
+}): string => {
+  const { ERROR, SUCCESS, WARNING, PRIMARY } = ButtonColors;
+
+  if (customColor === ERROR) return palette.red[colorVariant];
+  if (customColor === SUCCESS) return palette.green[colorVariant];
+  if (customColor === WARNING) return palette.yellow[colorVariant];
+  if (customColor === PRIMARY) return palette.primary[colorVariant];
+
+  return 'transparent';
+};
+
+const getBgLight = ({
+  palette,
+  colorVariant,
+  buttonState,
+  customColor,
+}: {
+  palette: Palette;
+  customColor: ButtonColor;
+  buttonState: ButtonState;
+  colorVariant: string;
+}): string => {
+  const { PRIMARY, ERROR, SUCCESS, WARNING } = ButtonColors;
+  if (customColor === PRIMARY) {
+    if (buttonState === ButtonStates.DEFAULT) return palette.grey[colorVariant];
+    if (buttonState === ButtonStates.HOVER) return palette.grey[colorVariant];
+    if (buttonState === ButtonStates.FOCUS)
+      return palette.primary[colorVariant];
+  }
+  if (customColor === ERROR) return palette.red[colorVariant];
+  if (customColor === SUCCESS) return palette.green[colorVariant];
+  if (customColor === WARNING) return palette.yellow[colorVariant];
+
+  return 'transparent';
+};
+
 const getBgColor = ({
   customColor,
   customVariant,
   buttonState,
-  disabled,
   theme,
 }: StyledButtonThemeProps & { buttonState: ButtonState }) => {
   const { LIGHT, CONTAINED, LINK, TEXT } = ButtonVariants;
-  const { PRIMARY, ERROR, SUCCESS, WARNING } = ButtonColors;
   const { palette } = theme;
 
-  if (disabled) {
-    if (customVariant === LINK || customVariant === TEXT) {
-      return 'transparent !important';
-    }
-    return `${palette.grey['100']} !important`;
-  }
-
   if (customVariant === LINK) return 'transparent';
-  if (buttonState === 'active') return palette.grey['900'];
+  if (buttonState === ButtonStates.ACTIVE) return palette.grey['900'];
 
   const containedColor = BACKGROUND_COLOR_VARIANTS[buttonState].contained;
   const lightColor = BACKGROUND_COLOR_VARIANTS[buttonState].light;
   const textColor = BACKGROUND_COLOR_VARIANTS[buttonState].text;
 
-  if (customVariant === TEXT) {
-    if (buttonState === 'default') return 'transparent';
-    if (buttonState === 'hover') return palette.grey[textColor];
-    if (buttonState === 'focus') return palette.primary[textColor];
-  }
+  if (customVariant === TEXT)
+    return getBgText({ buttonState, palette, colorVariant: textColor });
 
-  if (customVariant === CONTAINED) {
-    if (customColor === PRIMARY) return palette.primary[containedColor];
-    if (customColor === ERROR) return palette.red[containedColor];
-    if (customColor === SUCCESS) return palette.green[containedColor];
-    if (customColor === WARNING) return palette.yellow[containedColor];
-  }
+  if (customVariant === CONTAINED)
+    return getBgContained({
+      palette,
+      customColor,
+      colorVariant: containedColor,
+    });
 
-  if (customVariant === LIGHT) {
-    if (customColor === PRIMARY) {
-      if (buttonState === 'default') return palette.grey[lightColor];
-      if (buttonState === 'hover') return palette.grey[lightColor];
-      if (buttonState === 'focus') return palette.primary[lightColor];
-    }
-    if (customColor === ERROR) return palette.red[lightColor];
-    if (customColor === SUCCESS) return palette.green[lightColor];
-    if (customColor === WARNING) return palette.yellow[lightColor];
-  }
+  if (customVariant === LIGHT)
+    return getBgLight({
+      palette,
+      buttonState,
+      customColor,
+      colorVariant: lightColor,
+    });
 
   return 'transparent';
 };
@@ -141,6 +182,15 @@ const getButtonPadding = ({ size, theme }: StyledButtonThemeProps): string => {
   return theme.spacing(1, 3, 1, 3);
 };
 
+const getDisabledBgColor = ({
+  theme,
+  customVariant,
+}: StyledButtonThemeProps): string => {
+  if (customVariant === ButtonVariants.LINK) return 'transparent';
+
+  return theme.palette.grey['100'];
+};
+
 export const StyledButton = styled(Button, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
@@ -148,10 +198,16 @@ export const StyledButton = styled(Button, {
   padding: ${getButtonPadding};
   height: ${getButtonHeight};
   text-transform: unset;
+
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
   color: ${(props) =>
     getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+
+  &.Mui-disabled {
+    background-color: ${getDisabledBgColor};
+    color: ${({ theme }) => theme.palette.grey['500']};
+  }
 
   &:hover {
     background-color: ${(props) =>
