@@ -44,32 +44,31 @@ const getColor = ({
   customColor,
   buttonState,
 }: StyledButtonThemeProps & { buttonState: ButtonState }): string => {
-  const { LIGHT, CONTAINED, LINK } = ButtonVariants;
-  const { PRIMARY, ERROR, SUCCESS, WARNING } = ButtonColors;
   const { palette } = theme;
 
   if (buttonState === ButtonStates.ACTIVE) {
-    if (customVariant === LINK) return palette.grey['900'];
+    if (customVariant === ButtonVariants.LINK) return palette.grey['900'];
 
     return palette.primary.contrastText;
   }
 
-  if (customVariant === CONTAINED) return palette.primary.contrastText;
+  if (customVariant === ButtonVariants.CONTAINED)
+    return palette.primary.contrastText;
 
-  if (customVariant === LIGHT) {
-    if (customColor === PRIMARY) {
+  if (customVariant === ButtonVariants.LIGHT) {
+    if (customColor === ButtonColors.PRIMARY) {
       if (buttonState === ButtonStates.DEFAULT) return palette.grey['900'];
       if (buttonState === ButtonStates.HOVER) return palette.grey['900'];
       if (buttonState === ButtonStates.FOCUS) return palette.primary['800'];
     }
-    if (customColor === ERROR) return palette.red['900'];
-    if (customColor === SUCCESS) return palette.green['900'];
-    if (customColor === WARNING) return palette.yellow['900'];
+    if (customColor === ButtonColors.ERROR) return palette.red['900'];
+    if (customColor === ButtonColors.SUCCESS) return palette.green['900'];
+    if (customColor === ButtonColors.WARNING) return palette.yellow['900'];
 
     return palette.grey['900'];
   }
 
-  if (customVariant === LINK) return palette.primary.main;
+  if (customVariant === ButtonVariants.LINK) return palette.primary.main;
 
   return palette.grey['900'];
 };
@@ -98,12 +97,11 @@ const getBgContained = ({
   customColor?: ButtonColor;
   colorVariant: string;
 }): string => {
-  const { ERROR, SUCCESS, WARNING, PRIMARY } = ButtonColors;
-
-  if (customColor === ERROR) return palette.red[colorVariant];
-  if (customColor === SUCCESS) return palette.green[colorVariant];
-  if (customColor === WARNING) return palette.yellow[colorVariant];
-  if (customColor === PRIMARY) return palette.primary[colorVariant];
+  if (customColor === ButtonColors.ERROR) return palette.red[colorVariant];
+  if (customColor === ButtonColors.SUCCESS) return palette.green[colorVariant];
+  if (customColor === ButtonColors.WARNING) return palette.yellow[colorVariant];
+  if (customColor === ButtonColors.PRIMARY)
+    return palette.primary[colorVariant];
 
   return 'transparent';
 };
@@ -119,16 +117,15 @@ const getBgLight = ({
   buttonState: ButtonState;
   colorVariant: string;
 }): string => {
-  const { PRIMARY, ERROR, SUCCESS, WARNING } = ButtonColors;
-  if (customColor === PRIMARY) {
+  if (customColor === ButtonColors.PRIMARY) {
     if (buttonState === ButtonStates.DEFAULT) return palette.grey[colorVariant];
     if (buttonState === ButtonStates.HOVER) return palette.grey[colorVariant];
     if (buttonState === ButtonStates.FOCUS)
       return palette.primary[colorVariant];
   }
-  if (customColor === ERROR) return palette.red[colorVariant];
-  if (customColor === SUCCESS) return palette.green[colorVariant];
-  if (customColor === WARNING) return palette.yellow[colorVariant];
+  if (customColor === ButtonColors.ERROR) return palette.red[colorVariant];
+  if (customColor === ButtonColors.SUCCESS) return palette.green[colorVariant];
+  if (customColor === ButtonColors.WARNING) return palette.yellow[colorVariant];
 
   return 'transparent';
 };
@@ -139,27 +136,26 @@ const getBgColor = ({
   buttonState,
   theme,
 }: StyledButtonThemeProps & { buttonState: ButtonState }) => {
-  const { LIGHT, CONTAINED, LINK, TEXT } = ButtonVariants;
   const { palette } = theme;
 
-  if (customVariant === LINK) return 'transparent';
+  if (customVariant === ButtonVariants.LINK) return 'transparent';
   if (buttonState === ButtonStates.ACTIVE) return palette.grey['900'];
 
   const containedColor = BACKGROUND_COLOR_VARIANTS[buttonState].contained;
   const lightColor = BACKGROUND_COLOR_VARIANTS[buttonState].light;
   const textColor = BACKGROUND_COLOR_VARIANTS[buttonState].text;
 
-  if (customVariant === TEXT)
+  if (customVariant === ButtonVariants.TEXT)
     return getBgText({ buttonState, palette, colorVariant: textColor });
 
-  if (customVariant === CONTAINED)
+  if (customVariant === ButtonVariants.CONTAINED)
     return getBgContained({
       palette,
       customColor,
       colorVariant: containedColor,
     });
 
-  if (customVariant === LIGHT)
+  if (customVariant === ButtonVariants.LIGHT)
     return getBgLight({
       palette,
       buttonState,
