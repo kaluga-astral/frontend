@@ -1,4 +1,4 @@
-import { ButtonProps as MuiButtonProps } from '@mui/material';
+import { LoadingButtonProps } from '@mui/lab/LoadingButton';
 
 import {
   ButtonColors,
@@ -16,7 +16,10 @@ export type ButtonSize = `${ButtonSizes}`;
 
 export type ButtonState = `${ButtonStates}`;
 
-export type ButtonProps = Omit<MuiButtonProps, 'color' | 'variant' | 'size'> & {
+export type ButtonProps = Omit<
+  LoadingButtonProps,
+  'color' | 'variant' | 'size'
+> & {
   color?: ButtonColor;
   variant?: ButtonVariant;
   size?: ButtonSize;

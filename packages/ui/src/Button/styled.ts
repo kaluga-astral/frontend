@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
 import styled from '@emotion/styled';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { Palette, Theme } from '../theme';
 
@@ -191,7 +191,17 @@ const getDisabledBgColor = ({
   return theme.palette.grey['100'];
 };
 
-export const StyledButton = styled(Button, {
+const getLoadingColor = ({
+  theme,
+  customVariant,
+}: StyledButtonProps): string => {
+  if (customVariant === ButtonVariants.CONTAINED)
+    return theme.palette.primary.contrastText;
+
+  return theme.palette.grey['900'];
+};
+
+export const StyledButton = styled(LoadingButton, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<StyledButtonProps>`
@@ -208,6 +218,16 @@ export const StyledButton = styled(Button, {
   &.Mui-disabled {
     background-color: ${getDisabledBgColor};
     color: ${({ theme }) => theme.palette.grey['500']};
+  }
+
+  &.MuiLoadingButton-loading {
+    color: transparent;
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+
+    .MuiLoadingButton-loadingIndicator {
+      color: ${getLoadingColor};
+    }
   }
 
   &:hover {
