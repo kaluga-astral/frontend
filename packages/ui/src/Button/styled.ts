@@ -194,6 +194,7 @@ export const StyledButton = styled(Button, {
   padding: ${getButtonPadding};
   height: ${getButtonHeight};
   text-transform: unset;
+  border-radius: ${({ theme }) => theme.shape.small};
 
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
