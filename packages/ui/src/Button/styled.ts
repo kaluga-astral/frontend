@@ -182,7 +182,11 @@ const getDisabledBgColor = ({
   theme,
   customVariant,
 }: StyledButtonThemeProps): string => {
-  if (customVariant === ButtonVariants.LINK) return 'transparent';
+  if (
+    customVariant === ButtonVariants.LINK ||
+    customVariant === ButtonVariants.TEXT
+  )
+    return 'transparent';
 
   return theme.palette.grey['100'];
 };
