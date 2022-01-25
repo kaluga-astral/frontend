@@ -1,9 +1,10 @@
 name: 'Chromatic'
 
 on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
-    branches: [main]
+   push:
+     branches: [main]
+   pull_request:
+     branches: [main]
 
 jobs:
   chromatic-deployment:
