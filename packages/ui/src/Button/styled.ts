@@ -194,7 +194,7 @@ const getDisabledBgColor = ({
 const getLoadingColor = ({
   theme,
   customVariant,
-}: StyledButtonProps): string => {
+}: StyledButtonThemeProps): string => {
   if (customVariant === ButtonVariants.CONTAINED)
     return theme.palette.primary.contrastText;
 
