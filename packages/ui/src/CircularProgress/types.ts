@@ -6,7 +6,10 @@ export type СircularProgressColor = `${СircularProgressColors}`;
 
 export type СircularProgressSize = `${СircularProgressSizes}`;
 
-export type СircularProgressProps = Omit<MuiCircularProgressProps, 'color' | 'size'> & {
+export type СircularProgressProps = Omit<
+  MuiCircularProgressProps,
+  'color' | 'size'
+> & {
   color?: СircularProgressColor;
   size?: СircularProgressSize;
 };
