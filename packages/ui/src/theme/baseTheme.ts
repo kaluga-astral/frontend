@@ -13,6 +13,7 @@ import { Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
+import { Shape, shape } from './shape';
 
 export type Palette = Omit<MuiPalette, 'grey'> & {
   red: Color;
@@ -22,9 +23,10 @@ export type Palette = Omit<MuiPalette, 'grey'> & {
   primary: PaletteColor & Color;
 };
 
-export type Theme = Omit<MuiTheme, 'shadows' | 'palette'> & {
+export type Theme = Omit<MuiTheme, 'shadows' | 'palette' | 'shape'> & {
   elevation: Elevation;
   palette: Palette;
+  shape: Shape;
 };
 
 type CreateThemeParams = {
@@ -49,5 +51,5 @@ export const createTheme = ({
     createMuiTheme(merge({}, themeOptions, options))
   );
 
-  return merge(muiTheme as any, { elevation }) as Theme;
+  return merge(muiTheme as any, { elevation, shape }) as Theme;
 };
