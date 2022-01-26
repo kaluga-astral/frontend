@@ -1,9 +1,9 @@
-export enum LoaderColors {
+export enum СircularProgressColors {
   PRIMARY = 'primary',
   INVERTED = 'inverted',
 }
 
-export enum LoaderSizes {
+export enum СircularProgressSizes {
   SMALL = 'small',
   MEDIUM = 'medium',
   NUMBER = 'number',
