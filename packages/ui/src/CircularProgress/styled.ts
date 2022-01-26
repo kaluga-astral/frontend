@@ -26,7 +26,7 @@ const getLoaderSize = ({ customSize }: StyledLoaderThemeProps): string => {
   return '24px';
 };
 
-export const StyledLoader = styled(CircularProgress, {
+export const StyledCircularProgress = styled(CircularProgress, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customSize',
 })<StyledLoaderProps>`
