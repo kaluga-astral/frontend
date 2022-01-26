@@ -1,10 +1,10 @@
 import { StyledLoader } from './styled';
 import { LoaderProps } from './types';
 
-export const Loader = ({color, size, ...props}: LoaderProps) => {
+export const CircularProgress = ({color, size, ...props}: LoaderProps) => {
     return (
         <StyledLoader {...props} customSize={size} customColor={color} />
     );
   };
   
-  export default Loader;
+export default CircularProgress;

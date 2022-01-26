@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react';
-import { Loader } from './CircularProgress';
+import { CircularProgress } from './CircularProgress';
 
 export default {
   title: 'Components/CircularProgress',
-  component: Loader,
+  component: CircularProgress,
 };
 
-const Template: Story = (args) => <Loader {...args}/>;
+const Template: Story = (args) => <CircularProgress {...args}/>;
 
 export const Default = Template.bind({});
 

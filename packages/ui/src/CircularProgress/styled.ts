@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { Theme } from '../theme';
 
-interface StyledLoaderProps extends Omit<LoaderProps, 'color'|'size'> {
+type StyledLoaderProps = Omit<LoaderProps, 'color'|'size'> & {
   customColor?: LoaderColor;
   customSize?: LoaderSize;
 }
@@ -17,18 +17,13 @@ type StyledLoaderThemeProps = StyledLoaderProps & {
 const getColor = ({ theme, customColor }: StyledLoaderThemeProps): string => {
   if (customColor === LoaderColors.PRIMARY) return theme.palette.primary.dark;
 
-  return theme.palette.background.default;
+  return theme.palette.primary.contrastText;
 };
 
 const getLoaderSize = ({ customSize }: StyledLoaderThemeProps): string => {
-  switch (customSize) {
-    case LoaderSizes.SMALL:
-      return '16px';
-    case LoaderSizes.MEDIUM:
-      return '24px';
-    default:
-      return typeof customSize;
-  }
+  if (customSize === LoaderSizes.SMALL) return '16px';
+
+  return '24px';
 };
 
 export const StyledLoader = styled(CircularProgress, {
@@ -38,5 +33,5 @@ export const StyledLoader = styled(CircularProgress, {
   width: ${getLoaderSize};
   height: ${getLoaderSize};
   color: ${(props) =>
-    getColor({ ...props })};
+    getColor(props)};
 `;
