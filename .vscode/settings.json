@@ -1,7 +1,7 @@
 {
-  "eslint.workingDirectories": [
-    "packages/ui",
-    "packages/icons",
-    "packages/fonts"
-  ]
+    "eslint.workingDirectories": [
+      "packages/ui",
+      "packages/icons",
+      "packages/fonts"
+    ]
 }
