@@ -12,5 +12,4 @@ export type TagProps = Omit<MuiTagProps, 'color'> & {
   variant?: TagVariant;
   size?: TagSize;
   label: 'string';
-  rounded?: boolean;
 };

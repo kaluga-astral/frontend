@@ -3,125 +3,53 @@ import { Chip } from '@mui/material';
 
 import { Theme } from '../theme';
 
-import { TagColors, TagStates, TagVariants } from './constants';
+import { TagStates, TagVariants } from './constants';
 import { TagColor, TagProps, TagState, TagVariant } from './types';
 
 interface StyledTagProps extends Omit<TagProps, 'color'> {
-  customcolor: TagColor;
-  customvariant: TagVariant;
+  customColor: TagColor;
+  customVariant: TagVariant;
 }
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
 
-const getShape = ({
+const getBgColor = ({
   theme,
-  rounded,
-}: StyledTagThemeProps & { rounded: boolean }) => {
-  if (rounded) return '100px';
+  tagState,
+}: StyledTagThemeProps & { tagState: TagState }): string => {
+  if (tagState === TagStates.DEFAULT) {
+    return theme.palette.background.default;
+  }
+  if (tagState === TagStates.HOVER) return 'red';
+  if (tagState === TagStates.ACTIVE) return 'red';
+  if (tagState === TagStates.SELECTED) return 'red';
+  return 'red';
+};
+const getShape = ({ theme, customVariant }: StyledTagThemeProps): string => {
+  if (customVariant === TagVariants.REGULAR) return theme.shape.small;
+  if (customVariant === TagVariants.ROUNDED) return '100px';
+  return theme.shape.small;
+};
+const getColor = ({
+  theme,
+  tagState,
+}: StyledTagThemeProps & { tagState: TagState }): string => {
+  if (tagState === TagStates.DEFAULT || tagState === TagStates.HOVER)
+    return theme.palette.text.primary;
+  if (tagState === TagStates.ACTIVE) return theme.palette.primary.main;
+  if (tagState === TagStates.SELECTED)
+    return theme.palette.primary.contrastText;
   return theme.shape.small;
 };
 
-const getBgColor = ({
-  theme,
-  customcolor,
-  customvariant,
-}: StyledTagThemeProps & { tagState: TagState }): string => {
-  if (customvariant === TagVariants.CONTAINED) {
-    if (customcolor === TagColors.PRIMARY) {
-      return theme.palette.primary.main;
-    }
-    if (customcolor === TagColors.ERROR) {
-      return theme.palette.red[800];
-    }
-    if (customcolor === TagColors.SUCCESS) {
-      return theme.palette.green[800];
-    }
-    if (customcolor === TagColors.WARNING) {
-      return theme.palette.yellow[800];
-    }
-  }
-  if (customvariant === TagVariants.LIGHT) {
-    if (customcolor === TagColors.PRIMARY) {
-      return theme.palette.primary[100];
-    }
-    if (customcolor === TagColors.ERROR) {
-      return theme.palette.red[100];
-    }
-    if (customcolor === TagColors.SUCCESS) {
-      return theme.palette.green[100];
-    }
-    if (customcolor === TagColors.WARNING) {
-      return theme.palette.yellow[100];
-    }
-  }
-
-  return theme.palette.background.element;
-};
-
-const getColor = ({
-  theme,
-  customcolor,
-  customvariant,
-}: StyledTagThemeProps & { tagState: TagState }): string => {
-  if (customvariant === TagVariants.CONTAINED) {
-    if (customcolor === TagColors.PRIMARY) {
-      return theme.palette.primary.contrastText;
-    }
-    if (customcolor === TagColors.ERROR) {
-      return theme.palette.error.contrastText;
-    }
-
-    if (customcolor === TagColors.WARNING) {
-      return theme.palette.warning.contrastText;
-    }
-    if (customcolor === TagColors.SUCCESS) {
-      return theme.palette.success.contrastText;
-    }
-  }
-  if (customvariant === TagVariants.LIGHT) {
-    if (customcolor === TagColors.PRIMARY) {
-      return theme.palette.primary.main;
-    }
-    if (customcolor === TagColors.ERROR) {
-      return theme.palette.red[800];
-    }
-    if (customcolor === TagColors.WARNING) {
-      return theme.palette.yellow[800];
-    }
-    if (customcolor === TagColors.SUCCESS) {
-      return theme.palette.green[800];
-    }
-  }
-
-  return theme.palette.text.primary;
-};
-
 export const StyledTag = styled(Chip)<StyledTagProps>`
-  border-radius: ${(props) => {
-    return getShape({ ...props });
-  }};
-  background-color: ${(props) =>
-    getBgColor({ ...props, tagState: TagStates.DEFAULT })};
-  &:hover {
+  .MuiChip-root {
     background-color: ${(props) =>
-      getBgColor({ ...props, tagState: TagStates.HOVER })};
-    color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
-  }
-  &:active {
-    background-color: ${(props) =>
-      getBgColor({ ...props, tagState: TagStates.ACTIVE })};
-    color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
+      getBgColor({ ...props, tagState: TagStates.DEFAULT })};
+    border-radius: ${(props) => getShape({ ...props })};
   }
 
   .MuiChip-label {
     color: ${(props) => getColor({ ...props, tagState: TagStates.DEFAULT })};
-
-    &:hover {
-      color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
-    }
-    &:active {
-      color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
-    }
-    // need to add SELECTED state
   }
 `;
