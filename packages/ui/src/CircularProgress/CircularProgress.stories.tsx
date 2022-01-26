@@ -11,7 +11,7 @@ const Template: Story = (args) => <Loader {...args}/>;
 export const Default = Template.bind({});
 
 Default.args = {
-  color: 'inverted',
+  color: 'primary',
   size: 'medium',
 };
 
