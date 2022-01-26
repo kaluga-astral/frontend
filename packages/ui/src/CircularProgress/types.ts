@@ -5,7 +5,7 @@ export type LoaderColor = `${LoaderColors}`;
 
 export type LoaderSize = `${LoaderSizes}`;
 
-export type LoaderProps = Omit<MuiCircularProgressProps, 'color'|'size'> & {
+export type LoaderProps = Omit<MuiCircularProgressProps, 'color' | 'size'> & {
   color?: LoaderColor;
   size?: LoaderSize;
 };

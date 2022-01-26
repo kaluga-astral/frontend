@@ -1,11 +1,11 @@
 import { LoaderProps, LoaderColor, LoaderSize } from './types';
 import { LoaderSizes, LoaderColors } from './constants';
-import CircularProgress from '@mui/material/CircularProgress';
+import { CircularProgress } from '@mui/material';
 import styled from '@emotion/styled';
 
 import { Theme } from '../theme';
 
-type StyledLoaderProps = Omit<LoaderProps, 'color'|'size'> & {
+type StyledLoaderProps = Omit<LoaderProps, 'color' | 'size'> & {
   customColor?: LoaderColor;
   customSize?: LoaderSize;
 }
