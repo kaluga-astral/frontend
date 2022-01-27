@@ -2,14 +2,7 @@
 import { StyledTag } from './styled';
 
 const Tag = ({ children, color, variant, ...props }: any) => {
-  return (
-    <StyledTag
-      customColor={color}
-      variant="filled"
-      customVariant={variant}
-      {...props}
-    />
-  );
+  return <StyledTag customcolor={color} customvariant={variant} {...props} />;
 };
 
 export default Tag;
