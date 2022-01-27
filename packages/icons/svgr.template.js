@@ -44,16 +44,24 @@ module.exports = (variables, { tpl }) => {
     variables.jsx.children,
     false
   );
-  const name = `${variables.componentName}: React.FunctionComponent<SvgIconProps>`;
+  const type = 'React.FunctionComponent<SvgIconProps>';
+  const name = `${variables.componentName.replace('Svg', '')}`;
+  const nameWithType = `${name}: ${type}`;
+  const exports = [
+    {
+      ...variables.exports[0],
+      declaration: { ...variables.exports[0].declaration, name },
+    },
+  ];
 
   return tpl`
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-const ${name} = ({...props}) => (
+const ${nameWithType} = ({...props}) => (
       ${svgIconJsx}
 );
  
-${variables.exports};
+${exports};
 `;
 };

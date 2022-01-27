@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-const SvgEyeFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
+const EyeFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -23,4 +23,4 @@ const SvgEyeFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   </SvgIcon>
 );
 
-export default SvgEyeFillMd;
+export default EyeFillMd;
