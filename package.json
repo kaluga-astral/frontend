@@ -19,7 +19,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "chromatic --project-token=4692158faeb9"
+    "chromatic": "chromatic --project-token 4692158faeb9"
   },
   "resolutions": {
     "babel-loader": "8.1.0",
