@@ -4,6 +4,6 @@ module.exports = {
   replaceAttrValues: {
     '#1D3F66': '{props.color}',
   },
-  outDir: 'src',
+  outDir: 'generated',
   template: require('./svgr.template'),
 };

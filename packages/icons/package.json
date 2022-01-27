@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "svgr": "svgr assets",
+    "svgr": "rm -rf ./generated && svgr assets",
     "build": "rm -rf ./dist && npm run svgr  && rollup -c"
   },
   "peerDependencies": {

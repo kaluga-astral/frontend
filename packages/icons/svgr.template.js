@@ -10,7 +10,6 @@ const {
 const attributesWithCustomValues = {
   width: { name: 'width', value: '1em' },
   height: { name: 'height', value: '1em' },
-  viewBox: { name: 'viewBox', value: '0 0 24 24' },
 };
 
 const generateStringAttribute = ({ name, value }) => {
