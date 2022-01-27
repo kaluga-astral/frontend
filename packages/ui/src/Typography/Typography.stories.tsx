@@ -63,11 +63,12 @@ const Template: Story<TypographyProps> = (args) => (
   </Grid>
 );
 
-export const AllTypography = Template.bind({});
-AllTypography.args = {
+export const Showcase = Template.bind({});
+Showcase.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
 };
-AllTypography.parameters = {
+Showcase.parameters = {
+  options: { showPanel: true },
   controls: { expanded: true },
 };

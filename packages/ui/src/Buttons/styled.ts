@@ -1,24 +1,23 @@
 import styled from '@emotion/styled';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { IconButton } from '@mui/material';
 
 import { Palette, Theme } from '../theme';
 
-import { ButtonColor, ButtonProps, ButtonState, ButtonVariant } from './types';
+import {
+  ButtonColor,
+  ButtonProps,
+  ButtonSize,
+  ButtonState,
+  ButtonVariant,
+  IconButtonProps,
+} from './types';
 import {
   ButtonColors,
   ButtonSizes,
   ButtonStates,
   ButtonVariants,
 } from './constants';
-
-interface StyledButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
-  customColor?: ButtonColor;
-  customVariant?: ButtonVariant;
-}
-
-type StyledButtonThemeProps = StyledButtonProps & {
-  theme: Theme;
-};
 
 const BACKGROUND_COLOR_VARIANTS = {
   default: {
@@ -38,7 +37,26 @@ const BACKGROUND_COLOR_VARIANTS = {
   },
 };
 
-const getColor = ({
+export interface StyledButtonProps
+  extends Omit<ButtonProps, 'color' | 'variant'> {
+  customColor?: ButtonColor;
+  customVariant?: ButtonVariant;
+}
+
+interface StyledIconButtonProps
+  extends Omit<IconButtonProps, 'color' | 'variant'> {
+  customColor?: ButtonColor;
+  customVariant?: ButtonVariant;
+}
+
+export type StyledButtonThemeProps = {
+  theme: Theme;
+  customColor?: ButtonColor;
+  customVariant?: ButtonVariant;
+  size?: ButtonSize;
+};
+
+export const getColor = ({
   theme,
   customVariant,
   customColor,
@@ -73,7 +91,7 @@ const getColor = ({
   return palette.grey['900'];
 };
 
-const getBgText = ({
+export const getBgText = ({
   palette,
   buttonState,
   colorVariant,
@@ -130,7 +148,7 @@ const getBgLight = ({
   return 'transparent';
 };
 
-const getBgColor = ({
+export const getBgColor = ({
   customColor,
   customVariant,
   buttonState,
@@ -166,19 +184,22 @@ const getBgColor = ({
   return 'transparent';
 };
 
-const getButtonHeight = ({ size }: StyledButtonThemeProps): string => {
+export const getButtonHeight = ({ size }: StyledButtonThemeProps): string => {
   if (size === ButtonSizes.LARGE) return '40px';
 
   return '32px';
 };
 
-const getButtonPadding = ({ size, theme }: StyledButtonThemeProps): string => {
+export const getButtonPadding = ({
+  size,
+  theme,
+}: StyledButtonThemeProps): string => {
   if (size === ButtonSizes.LARGE) return theme.spacing(2, 4, 2, 4);
 
   return theme.spacing(1, 3, 1, 3);
 };
 
-const getDisabledBgColor = ({
+export const getDisabledBgColor = ({
   theme,
   customVariant,
 }: StyledButtonThemeProps): string => {
@@ -191,7 +212,7 @@ const getDisabledBgColor = ({
   return theme.palette.grey['100'];
 };
 
-const getLoadingColor = ({
+export const getLoadingColor = ({
   theme,
   customVariant,
 }: StyledButtonThemeProps): string => {
@@ -205,15 +226,66 @@ export const StyledButton = styled(LoadingButton, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<StyledButtonProps>`
+  text-transform: unset;
   padding: ${getButtonPadding};
   height: ${getButtonHeight};
-  text-transform: unset;
   border-radius: ${({ theme }) => theme.shape.small};
 
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
   color: ${(props) =>
     getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+
+  &.Mui-disabled {
+    background-color: ${getDisabledBgColor};
+    color: ${({ theme }) => theme.palette.grey['500']};
+  }
+
+  &.MuiLoadingButton-loading {
+    color: transparent;
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+
+    .MuiLoadingButton-loadingIndicator {
+      color: ${getLoadingColor};
+    }
+  }
+
+  &:hover {
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.HOVER })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.HOVER })};
+  }
+
+  &:focus {
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.FOCUS })};
+  }
+
+  &:active {
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+    color: ${(props) =>
+      getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+  }
+`;
+
+export const StyledIconButton = styled(IconButton, {
+  shouldForwardProp: (prop) =>
+    prop !== 'customColor' && prop !== 'customVariant',
+})<StyledIconButtonProps>`
+  padding: ${({ theme }) => theme.spacing(1)};
+  height: ${getButtonHeight};
+  width: ${getButtonHeight};
+  border-radius: ${({ theme }) => theme.shape.small};
+
+  color: ${(props) =>
+    getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  background-color: ${(props) =>
+    getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
 
   &.Mui-disabled {
     background-color: ${getDisabledBgColor};

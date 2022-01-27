@@ -1,4 +1,5 @@
 import { LoadingButtonProps } from '@mui/lab/LoadingButton';
+import { IconButtonProps as MuiIconButtonProps } from '@mui/material';
 
 import {
   ButtonColors,
@@ -18,6 +19,15 @@ export type ButtonState = `${ButtonStates}`;
 
 export type ButtonProps = Omit<
   LoadingButtonProps,
+  'color' | 'variant' | 'size'
+> & {
+  color?: ButtonColor;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+};
+
+export type IconButtonProps = Omit<
+  MuiIconButtonProps,
   'color' | 'variant' | 'size'
 > & {
   color?: ButtonColor;
