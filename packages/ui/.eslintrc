@@ -1,8 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": [
-    "@astral-frontend/eslint-config-ts-ui"
-  ],
+  "extends": ["@astral-frontend/eslint-config-ts-ui"],
   "env": {
     "node": true
   },
@@ -15,7 +13,10 @@
     }
   },
   "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "packageDir": ["./", "../../"]}],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "packageDir": ["./", "../../"] }
+    ],
     "space-before-function-paren": 0,
     "react/prop-types": 0,
     "react/jsx-handler-names": 0,
