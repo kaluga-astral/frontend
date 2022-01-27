@@ -9,8 +9,8 @@ export enum TagColors {
 }
 
 export enum TagVariants {
-  REGULAR = 'regular',
-  ROUNDED = 'rounded',
+  CONTAINED = 'contained',
+  LIGHT = 'light',
 }
 
 export enum TagSizes {
