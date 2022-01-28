@@ -1,7 +1,7 @@
 {
   "name": "@astral/icons",
   "version": "1.0.0",
-  "source": "./src/index.ts",
+  "source": "./index.ts",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
