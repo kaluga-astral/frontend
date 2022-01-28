@@ -1,11 +1,11 @@
-import { StyledCheckbox } from './styled';
 import { CheckboxProps } from './types';
+import { StyledCheckbox } from './styled';
 import { CheckedIcon, DefaultIcon, IndeterminateIcon } from './icons';
 
 const Checkbox = ({
-  icon = DefaultIcon,
-  checkedIcon = CheckedIcon,
-  indeterminateIcon = IndeterminateIcon,
+  icon = <DefaultIcon />,
+  checkedIcon = <CheckedIcon />,
+  indeterminateIcon = <IndeterminateIcon />,
   ...props
 }: CheckboxProps) => {
   return (
