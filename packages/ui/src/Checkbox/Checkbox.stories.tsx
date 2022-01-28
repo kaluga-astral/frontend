@@ -1,9 +1,9 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
-import FormControlLabel from '../FormControlLabel';
+import { FormControlLabel } from '../FormControlLabel';
 
-import Checkbox from './Checkbox';
+import { Checkbox } from './Checkbox';
 
 export default {
   title: 'Components/Checkbox',

@@ -2,7 +2,7 @@ import { CheckboxProps } from './types';
 import { StyledCheckbox } from './styled';
 import { CheckedIcon, DefaultIcon, IndeterminateIcon } from './icons';
 
-const Checkbox = ({
+export const Checkbox = ({
   icon = <DefaultIcon />,
   checkedIcon = <CheckedIcon />,
   indeterminateIcon = <IndeterminateIcon />,
@@ -17,5 +17,3 @@ const Checkbox = ({
     />
   );
 };
-
-export default Checkbox;
