@@ -9,7 +9,7 @@ import {
 import { merge } from 'lodash-es';
 
 import { typography } from './typography';
-import { Color, getPalette } from './palette';
+import { Background, Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
@@ -21,6 +21,7 @@ export type Palette = Omit<MuiPalette, 'grey'> & {
   yellow: Color;
   grey: Color;
   primary: PaletteColor & Color;
+  background: Background;
 };
 
 export type Theme = Omit<MuiTheme, 'shadows' | 'palette' | 'shape'> & {

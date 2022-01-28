@@ -22,7 +22,7 @@ export type Color = {
 
 export type PrimaryColorOptions = PaletteColorOptions & Color;
 
-type Background = TypeBackground & {
+export type Background = TypeBackground & {
   element: string;
   elementHover: string;
 };
