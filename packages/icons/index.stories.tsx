@@ -1,14 +1,19 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import * as icons from './generated';
+import * as themedIcons from './generated-themed-icons';
+import * as customIcons from './generated-custom-icons';
 
-const iconsAsComponents = Object.keys(icons).map((iconName) => {
-  return {
-    name: iconName,
-    Component: icons[iconName] as React.FunctionComponent<SvgIconProps>,
-  };
-});
+const icons = { ...themedIcons, ...customIcons };
+
+const iconsAsComponents = Object.keys(icons).map(
+  (iconName) => {
+    return {
+      name: iconName,
+      Component: icons[iconName] as React.FunctionComponent<SvgIconProps>,
+    };
+  }
+);
 
 export default {
   title: 'Components/icons',

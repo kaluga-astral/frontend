@@ -4,7 +4,7 @@ import { terser } from 'rollup-plugin-terser';
 export default {
   external: ['react', 'react/jsx-runtime', '@mui/material'],
   plugins: [typescript(), terser()],
-  input: './generated/index.tsx',
+  input: './index.ts',
   output: [
     {
       dir: 'dist',

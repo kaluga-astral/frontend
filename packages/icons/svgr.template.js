@@ -10,6 +10,7 @@ const {
 const attributesWithCustomValues = {
   width: { name: 'width', value: '1em' },
   height: { name: 'height', value: '1em' },
+  fill: { name: 'fill', value: 'currentColor' },
 };
 
 const generateStringAttribute = ({ name, value }) => {

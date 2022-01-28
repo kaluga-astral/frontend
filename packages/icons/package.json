@@ -8,8 +8,10 @@
     "dist"
   ],
   "scripts": {
-    "svgr": "rm -rf ./generated && svgr assets",
-    "build": "rm -rf ./dist && npm run svgr  && rollup -c"
+    "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
+    "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
+    "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
+    "build": "npx rimraf ./dist && npm run svgr  && rollup -c"
   },
   "peerDependencies": {
     "react": "^17.0.0"

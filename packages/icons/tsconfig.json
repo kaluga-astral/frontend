@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["generated"],
+  "include": ["generated-themed-icons", "generated-custom-icons"],
   "exclude": ["node_modules", "dist"]
 }
