@@ -4,12 +4,7 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 export const DefaultIcon: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
-  <SvgIcon
-    viewBox="0 0 14 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <SvgIcon viewBox="0 0 14 14" {...props}>
     <rect x="1" y="1" rx="2" width="12" height="12" strokeWidth="2" />
   </SvgIcon>
 );
@@ -17,12 +12,7 @@ export const DefaultIcon: React.FunctionComponent<SvgIconProps> = ({
 export const CheckedIcon: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
-  <SvgIcon
-    viewBox="0 0 14 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <SvgIcon viewBox="0 0 14 14" {...props}>
     <rect width="14" height="14" rx="3" />
     <path
       fillRule="evenodd"
@@ -35,12 +25,7 @@ export const CheckedIcon: React.FunctionComponent<SvgIconProps> = ({
 export const IndeterminateIcon: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
-  <SvgIcon
-    viewBox="0 0 14 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <SvgIcon viewBox="0 0 14 14" {...props}>
     <rect width="14" height="14" rx="3" />
     <path d="M10 6H4C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8H10C10.5523 8 11 7.55228 11 7C11 6.44772 10.5523 6 10 6Z" />
   </SvgIcon>
