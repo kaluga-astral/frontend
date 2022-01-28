@@ -17,5 +17,6 @@ Default.args = {
 };
 
 Default.parameters = {
+  options: { showPanel: true },
   controls: { expanded: true },
 };
