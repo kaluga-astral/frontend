@@ -7,8 +7,13 @@ export default {
   input: './index.ts',
   output: [
     {
-      dir: 'dist',
+      file: 'dist/index.js',
       format: 'esm',
+      sourcemap: true,
+    },
+    {
+      file: 'dist/index.cjs',
+      format: 'cjs',
       sourcemap: true,
     },
   ],
