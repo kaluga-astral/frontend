@@ -22,4 +22,5 @@ jobs:
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: 4692158faeb9
           exitZeroOnChanges: true
