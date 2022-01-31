@@ -5,9 +5,9 @@ import { ButtonProps } from '../types';
 import { ButtonSizes } from '../constants';
 import { Theme } from '../../theme';
 
-interface StyledIconButtonThemeProps extends ButtonProps {
+type StyledIconButtonThemeProps = ButtonProps & {
   theme: Theme;
-}
+};
 
 export const getButtonHeight = ({
   size,

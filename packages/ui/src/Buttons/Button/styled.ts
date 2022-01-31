@@ -5,9 +5,9 @@ import { ButtonProps } from '../types';
 import { Theme } from '../../theme';
 import { ButtonVariants } from '../constants';
 
-interface StyledButtonThemeProps extends ButtonProps {
+type StyledButtonThemeProps = ButtonProps & {
   theme: Theme;
-}
+};
 
 const getProgressColor = ({
   theme,

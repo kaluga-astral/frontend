@@ -18,11 +18,10 @@ import {
 } from '../types';
 import { Palette, Theme } from '../../theme';
 
-interface StyledButtonBaseProps
-  extends Omit<BaseButtonProps, 'color' | 'variant'> {
+type StyledButtonBaseProps = Omit<BaseButtonProps, 'color' | 'variant'> & {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
-}
+};
 
 type StyledButtonBaseThemeProps = {
   customColor?: ButtonColor;
