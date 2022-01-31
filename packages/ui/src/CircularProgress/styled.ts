@@ -3,47 +3,47 @@ import styled from '@emotion/styled';
 
 import { Theme } from '../theme';
 
-import { СircularProgressColors, СircularProgressSizes } from './constants';
+import { CircularProgressColors, CircularProgressSizes } from './constants';
 import {
-  СircularProgressColor,
-  СircularProgressProps,
-  СircularProgressSize,
+  CircularProgressColor,
+  CircularProgressProps,
+  CircularProgressSize,
 } from './types';
 
-type StyledСircularProgressProps = Omit<
-  СircularProgressProps,
+type StyledCircularProgressProps = Omit<
+  CircularProgressProps,
   'color' | 'size'
 > & {
-  customColor?: СircularProgressColor;
-  customSize?: СircularProgressSize;
+  customColor?: CircularProgressColor;
+  customSize?: CircularProgressSize;
 };
 
-type StyledСircularProgressThemeProps = StyledСircularProgressProps & {
+type StyledCircularProgressThemeProps = StyledCircularProgressProps & {
   theme: Theme;
 };
 
 const getColor = ({
   theme,
   customColor,
-}: StyledСircularProgressThemeProps): string => {
-  if (customColor === СircularProgressColors.PRIMARY)
+}: StyledCircularProgressThemeProps): string => {
+  if (customColor === CircularProgressColors.PRIMARY)
     return theme.palette.primary.dark;
 
   return theme.palette.primary.contrastText;
 };
 
-const getСircularProgressSize = ({
+const getCircularProgressSize = ({
   customSize,
-}: StyledСircularProgressThemeProps): string => {
-  if (customSize === СircularProgressSizes.SMALL) return '16px';
+}: StyledCircularProgressThemeProps): string => {
+  if (customSize === CircularProgressSizes.SMALL) return '16px';
 
   return '24px';
 };
 
 export const StyledCircularProgress = styled(CircularProgress, {
   shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'customSize',
-})<StyledСircularProgressProps>`
-  width: ${getСircularProgressSize};
-  height: ${getСircularProgressSize};
+})<StyledCircularProgressProps>`
+  width: ${getCircularProgressSize};
+  height: ${getCircularProgressSize};
   color: ${(props) => getColor(props)};
 `;
