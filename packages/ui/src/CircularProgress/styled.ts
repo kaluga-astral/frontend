@@ -3,11 +3,19 @@ import { CircularProgress } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { CircularProgressColors } from './constants';
-import { CircularProgressColor, CircularProgressProps } from './types';
+import { CircularProgressColors, CircularProgressSizes } from './constants';
+import {
+  CircularProgressColor,
+  CircularProgressProps,
+  CircularProgressSize,
+} from './types';
 
-type StyledCircularProgressProps = Omit<CircularProgressProps, 'color'> & {
+type StyledCircularProgressProps = Omit<
+  CircularProgressProps,
+  'color' | 'size'
+> & {
   customColor?: CircularProgressColor;
+  customSize?: CircularProgressSize;
 };
 
 type StyledCircularProgressThemeProps = StyledCircularProgressProps & {
@@ -24,8 +32,18 @@ const getColor = ({
   return theme.palette.primary.contrastText;
 };
 
+const getCircularProgressSize = ({
+  customSize,
+}: StyledCircularProgressThemeProps): string => {
+  if (customSize === CircularProgressSizes.SMALL) return '16px !important';
+
+  return '24px !important';
+};
+
 export const StyledCircularProgress = styled(CircularProgress, {
-  shouldForwardProp: (prop) => prop !== 'customColor',
+  shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'customSize',
 })<StyledCircularProgressProps>`
+  width: ${(props) => getCircularProgressSize(props)};
+  height: ${(props) => getCircularProgressSize(props)};
   color: ${(props) => getColor(props)};
 `;
