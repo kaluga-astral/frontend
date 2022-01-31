@@ -1,17 +1,7 @@
-import { IconButtonProps } from '../types';
-import { StyledIconButton } from '../styled';
+import { BaseButtonProps } from '../types';
 
-export const IconButton = ({
-  color,
-  variant,
-  children,
-  ...props
-}: IconButtonProps) => {
-  return (
-    <StyledIconButton {...props} customColor={color} customVariant={variant}>
-      {children}
-    </StyledIconButton>
-  );
+import { StyledIconButton } from './styled';
+
+export const IconButton = ({ children, ...props }: BaseButtonProps) => {
+  return <StyledIconButton {...props}>{children}</StyledIconButton>;
 };
-
-export default IconButton;

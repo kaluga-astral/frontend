@@ -1,5 +1,5 @@
-import { LoadingButtonProps } from '@mui/lab/LoadingButton';
-import { IconButtonProps as MuiIconButtonProps } from '@mui/material';
+import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
+import React from 'react';
 
 import {
   ButtonColors,
@@ -17,8 +17,8 @@ export type ButtonSize = `${ButtonSizes}`;
 
 export type ButtonState = `${ButtonStates}`;
 
-export type ButtonProps = Omit<
-  LoadingButtonProps,
+export type BaseButtonProps = Omit<
+  ButtonUnstyledProps,
   'color' | 'variant' | 'size'
 > & {
   color?: ButtonColor;
@@ -26,11 +26,8 @@ export type ButtonProps = Omit<
   size?: ButtonSize;
 };
 
-export type IconButtonProps = Omit<
-  MuiIconButtonProps,
-  'color' | 'variant' | 'size'
-> & {
-  color?: ButtonColor;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+export type ButtonProps = BaseButtonProps & {
+  loading?: boolean;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 };

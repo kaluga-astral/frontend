@@ -3,7 +3,7 @@ import { Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
 
-import { Button } from './Button/Button';
+import { Button } from './Button';
 import { IconButton } from './IconButton';
 
 export default {
