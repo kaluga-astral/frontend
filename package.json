@@ -19,7 +19,7 @@
   "scripts": {
     "generate-icons": "npm --prefix packages/icons run svgr",
     "storybook": "npm run generate-icons && start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "npm run generate-icons && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9"
   },
   "resolutions": {
