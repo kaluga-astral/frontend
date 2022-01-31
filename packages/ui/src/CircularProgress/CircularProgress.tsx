@@ -1,11 +1,11 @@
 import { StyledCircularProgress } from './styled';
-import { СircularProgressProps } from './types';
+import { CircularProgressProps } from './types';
 
 export const CircularProgress = ({
   color,
   size,
   ...props
-}: СircularProgressProps) => {
+}: CircularProgressProps) => {
   return (
     <StyledCircularProgress {...props} customSize={size} customColor={color} />
   );

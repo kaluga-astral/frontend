@@ -1,15 +1,15 @@
 import { CircularProgressProps as MuiCircularProgressProps } from '@mui/material';
 
-import { СircularProgressColors, СircularProgressSizes } from './constants';
+import { CircularProgressColors, CircularProgressSizes } from './constants';
 
-export type СircularProgressColor = `${СircularProgressColors}`;
+export type CircularProgressColor = `${CircularProgressColors}`;
 
-export type СircularProgressSize = `${СircularProgressSizes}`;
+export type CircularProgressSize = `${CircularProgressSizes}`;
 
-export type СircularProgressProps = Omit<
+export type CircularProgressProps = Omit<
   MuiCircularProgressProps,
   'color' | 'size'
 > & {
-  color?: СircularProgressColor;
-  size?: СircularProgressSize;
+  color?: CircularProgressColor;
+  size?: CircularProgressSize;
 };
