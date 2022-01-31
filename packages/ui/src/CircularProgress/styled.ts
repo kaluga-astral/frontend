@@ -35,15 +35,15 @@ const getColor = ({
 const getCircularProgressSize = ({
   customSize,
 }: StyledCircularProgressThemeProps): string => {
-  if (customSize === CircularProgressSizes.SMALL) return '16px';
+  if (customSize === CircularProgressSizes.SMALL) return '16px !important';
 
-  return '24px';
+  return '24px !important';
 };
 
 export const StyledCircularProgress = styled(CircularProgress, {
   shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'customSize',
 })<StyledCircularProgressProps>`
-  width: ${getCircularProgressSize};
-  height: ${getCircularProgressSize};
+  width: ${(props) => getCircularProgressSize(props)};
+  height: ${(props) => getCircularProgressSize(props)};
   color: ${(props) => getColor(props)};
 `;
