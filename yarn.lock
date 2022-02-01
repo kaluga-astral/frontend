@@ -40,7 +40,8 @@ __metadata:
   dependencies:
     "@mui/material": ^5.3.1
     "@svgr/cli": ^6.2.0
-    esbuild: ^0.14.16
+    rollup: ^2.66.1
+    rollup-plugin-esbuild: ^4.8.2
   peerDependencies:
     react: ^17.0.0
   languageName: unknown
@@ -66,6 +67,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.4.0
     "@typescript-eslint/parser": ^5.4.0
     babel-eslint: ^10.1.0
+    esbuild: ^0.14.16
     eslint: ^7.11.0
     eslint-plugin-import: ^2.25.3
     eslint-plugin-jest: ^25.2.4
@@ -3330,6 +3332,16 @@ __metadata:
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
   checksum: 8be16e27863c219edbb25a4e6ec2fe0e1e451d9e917b6a43cf2ae5bc025a6b8faaa40f82a6e53b66d0de37b58ff472c6c3d57a83037ae635041f8df959d6d9aa
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^4.1.1":
+  version: 4.1.2
+  resolution: "@rollup/pluginutils@npm:4.1.2"
+  dependencies:
+    estree-walker: ^2.0.1
+    picomatch: ^2.2.2
+  checksum: 498d67e7b48c707e3e0d9f7ddaa405833d77575b2d9607cd1914be40455ed534235e0512f9d046bf0e4ed1740e7816fd32ab1c673195e897c4fa180bcbfd7283
   languageName: node
   linkType: hard
 
@@ -8772,6 +8784,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.3.3":
+  version: 4.3.3
+  resolution: "debug@npm:4.3.3"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 14472d56fe4a94dbcfaa6dbed2dd3849f1d72ba78104a1a328047bb564643ca49df0224c3a17fa63533fd11dd3d4c8636cd861191232a2c6735af00cc2d4de16
+  languageName: node
+  linkType: hard
+
 "decamelize@npm:^1.2.0":
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0"
@@ -9580,6 +9604,13 @@ __metadata:
     is-string: ^1.0.5
     isarray: ^2.0.5
   checksum: f75e66acb6a45686fa08b3ade9c9421a70d36a0c43ed4363e67f4d7aab2226cb73dd977cb48abbaf75721b946d3cd810682fcf310c7ad0867802fbf929b17dcf
+  languageName: node
+  linkType: hard
+
+"es-module-lexer@npm:^0.9.3":
+  version: 0.9.3
+  resolution: "es-module-lexer@npm:0.9.3"
+  checksum: 84bbab23c396281db2c906c766af58b1ae2a1a2599844a504df10b9e8dc77ec800b3211fdaa133ff700f5703d791198807bba25d9667392d27a5e9feda344da8
   languageName: node
   linkType: hard
 
@@ -13775,6 +13806,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"joycon@npm:^3.0.1":
+  version: 3.1.1
+  resolution: "joycon@npm:3.1.1"
+  checksum: 8003c9c3fc79c5c7602b1c7e9f7a2df2e9916f046b0dbad862aa589be78c15734d11beb9fe846f5e06138df22cb2ad29961b6a986ba81c4920ce2b15a7f11067
+  languageName: node
+  linkType: hard
+
 "js-string-escape@npm:^1.0.1":
   version: 1.0.1
   resolution: "js-string-escape@npm:1.0.1"
@@ -13920,6 +13958,13 @@ __metadata:
   bin:
     json5: lib/cli.js
   checksum: e88fc5274bb58fc99547baa777886b069d2dd96d9cfc4490b305fd16d711dabd5979e35a4f90873cefbeb552e216b041a304fe56702bedba76e19bc7845f208d
+  languageName: node
+  linkType: hard
+
+"jsonc-parser@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "jsonc-parser@npm:3.0.0"
+  checksum: 1df2326f1f9688de30c70ff19c5b2a83ba3b89a1036160da79821d1361090775e9db502dc57a67c11b56e1186fc1ed70b887f25c5febf9a3ec4f91435836c99d
   languageName: node
   linkType: hard
 
@@ -18891,6 +18936,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-esbuild@npm:^4.8.2":
+  version: 4.8.2
+  resolution: "rollup-plugin-esbuild@npm:4.8.2"
+  dependencies:
+    "@rollup/pluginutils": ^4.1.1
+    debug: ^4.3.3
+    es-module-lexer: ^0.9.3
+    joycon: ^3.0.1
+    jsonc-parser: ^3.0.0
+  peerDependencies:
+    esbuild: ">=0.10.1"
+    rollup: ^1.20.0 || ^2.0.0
+  checksum: 3be8dc0c2da7eb182719f793595614396136298def5a09c874c4be6e7428026f3c7a5052b02cf19801e87de6b2d0b320aad813ad01e7992de6deabb55ca9fa3a
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-postcss@npm:^4.0.0":
   version: 4.0.1
   resolution: "rollup-plugin-postcss@npm:4.0.1"
@@ -18992,6 +19053,20 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: ef267b49a203f3db86d6db8c63de8737d6e3995d988dadf35c1922964c21cafbb95990543cfc716356d31bf6ca3975e58d9195df85b28721ecdc9acd3693acca
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.66.1":
+  version: 2.66.1
+  resolution: "rollup@npm:2.66.1"
+  dependencies:
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: ecd7917deeaa3005ac7cdd64186daf024594bd9ba940e32fc8966602a83349074d0ec999256009dc4475e7c3786ac52cdd824ee9df514b8c356b960fda6bfb34
   languageName: node
   linkType: hard
 
