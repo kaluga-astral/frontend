@@ -3,7 +3,7 @@ import esbuild, { minify } from 'rollup-plugin-esbuild';
 export default {
   external: ['react', 'react/jsx-runtime', '@mui/material'],
   input: './index.ts',
-  plugins: [minify(), esbuild({ target: 'es6' })],
+  plugins: [minify(), esbuild()],
   output: [
     {
       file: 'dist/index.js',
