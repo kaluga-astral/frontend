@@ -13,7 +13,8 @@ export const Button = ({
   return (
     <StyledButton loading={loading} {...props}>
       <span>{startIcon}</span>
-      {loading ? <CircularProgress /> : children}
+      {children}
+      {loading && <CircularProgress />}
       <span>{endIcon}</span>
     </StyledButton>
   );

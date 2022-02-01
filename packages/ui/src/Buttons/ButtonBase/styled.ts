@@ -232,6 +232,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};

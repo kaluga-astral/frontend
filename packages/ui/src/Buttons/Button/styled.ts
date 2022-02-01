@@ -24,6 +24,7 @@ export const StyledButton = styled(ButtonBase, {
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`
   pointer-events: ${({ loading }) => (loading ? 'none' : 'inherit')};
+  color: ${({ loading }) => loading && 'transparent'};
 
   > span:first-of-type {
     display: inherit;
@@ -38,6 +39,8 @@ export const StyledButton = styled(ButtonBase, {
   .MuiCircularProgress-root {
     width: 16px !important;
     height: 16px !important;
+    transform: translate(-50%, -50%);
+    position: absolute;
 
     color: ${getProgressColor};
   }
