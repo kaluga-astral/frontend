@@ -1,4 +1,4 @@
-import { BaseButtonProps } from '../types';
+import { BaseButtonProps } from '../ButtonBase';
 
 import { StyledIconButton } from './styled';
 

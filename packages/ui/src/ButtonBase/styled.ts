@@ -3,20 +3,21 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from '@mui/base/ButtonUnstyled';
 
+import { Palette, Theme } from '../theme';
+
 import {
   ButtonColors,
   ButtonSizes,
   ButtonStates,
   ButtonVariants,
-} from '../constants';
+} from './constants';
 import {
   BaseButtonProps,
   ButtonColor,
   ButtonSize,
   ButtonState,
   ButtonVariant,
-} from '../types';
-import { Palette, Theme } from '../../theme';
+} from './types';
 
 type StyledButtonBaseProps = Omit<BaseButtonProps, 'color' | 'variant'> & {
   customColor?: ButtonColor;

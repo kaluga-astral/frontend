@@ -1,6 +1,5 @@
-import { BaseButtonProps } from '../types';
-import { ButtonColors, ButtonVariants } from '../constants';
-
+import { BaseButtonProps } from './types';
+import { ButtonColors, ButtonVariants } from './constants';
 import { StyledButtonBase } from './styled';
 
 export const ButtonBase = ({

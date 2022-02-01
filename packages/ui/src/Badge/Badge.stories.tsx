@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 
-import { Button } from '../Buttons';
+import { Button } from '../Button';
 
 import Badge from './Badge';
 import { BadgeProps } from './types';

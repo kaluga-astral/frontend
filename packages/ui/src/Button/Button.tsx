@@ -1,5 +1,5 @@
-import { ButtonProps } from '../types';
-import { CircularProgress } from '../../CircularProgress';
+import { ButtonProps } from '../ButtonBase';
+import { CircularProgress } from '../CircularProgress';
 
 import { StyledButton } from './styled';
 
