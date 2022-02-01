@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "target": "es6"
   },
   "include": ["generated-themed-icons", "generated-custom-icons"],
   "exclude": ["node_modules", "dist"]

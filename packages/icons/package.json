@@ -15,7 +15,8 @@
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
-    "build": "npx rimraf ./dist && npm run svgr  && rollup -c"
+    "tsc": "tsc",
+    "build": "npx rimraf ./dist && npm run svgr && esbuild index.ts --bundle --minify --sourcemap --format=esm --outfile=dist/index.js && esbuild index.ts --bundle --minify --sourcemap --format=cjs --outfile=dist/index.cjs && npm run tsc"
   },
   "peerDependencies": {
     "react": "^17.0.0"
@@ -23,10 +24,6 @@
   "devDependencies": {
     "@mui/material": "^5.3.1",
     "@svgr/cli": "^6.2.0",
-    "rollup": "^2.66.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.31.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.5"
+    "esbuild": "^0.14.16"
   }
 }
