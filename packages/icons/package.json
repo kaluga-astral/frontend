@@ -2,11 +2,11 @@
   "name": "@astral/icons",
   "version": "1.0.0",
   "source": "./index.ts",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.js"
+    "require": "./dist/cjs/index.js",
+    "default": "./dist/esm/index.js"
   },
   "files": [
     "dist"
@@ -15,8 +15,7 @@
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
-    "ts-types": "tsc --emitDeclarationOnly --noEmit false --outDir dist",
-    "build": "npx rimraf ./dist && npm run svgr && rollup -c && npm run ts-types"
+    "build": "npx rimraf ./dist && npm run svgr && tsc --module es2015 --target es5 --outDir dist/esm && tsc --module commonjs --target es5 --outDir dist/cjs"
   },
   "peerDependencies": {
     "react": "^17.0.0"
@@ -24,8 +23,6 @@
   "devDependencies": {
     "@mui/material": "^5.3.1",
     "@svgr/cli": "^6.2.0",
-    "esbuild": "^0.14.16",
-    "rollup": "^2.66.1",
-    "rollup-plugin-esbuild": "^4.8.2"
+    "typescript": "^4.5.5"
   }
 }
