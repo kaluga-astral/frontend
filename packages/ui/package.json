@@ -2,13 +2,13 @@
   "name": "@astral/ui",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/cjs/index.js",
   "source": "./src/index.ts",
-  "module": "./dist/index.modern.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
+    "require": "./dist/cjs/index.js",
+    "default": "./dist/esm/index.js"
   },
   "jest": {
     "moduleNameMapper": {
@@ -19,8 +19,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "microbundle watch",
-    "build": "microbundle --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx -f es,cjs,modern",
+    "dev": "tsc --watch",
+    "build": "npx rimraf ./dist && tsc --module es2015 --outDir dist/esm && tsc --module commonjs --outDir dist/cjs",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "test": "react-scripts test --env=jsdom"
   },
@@ -52,7 +52,6 @@
     "eslint-plugin-jest": "^25.2.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
-    "microbundle": "^0.14.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",

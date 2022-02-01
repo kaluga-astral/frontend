@@ -15,7 +15,7 @@
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
-    "build": "npx rimraf ./dist && npm run svgr && tsc --module es2015 --target es5 --outDir dist/esm && tsc --module commonjs --target es5 --outDir dist/cjs"
+    "build": "npx rimraf ./dist && npm run svgr && tsc --module es2015 --outDir dist/esm && tsc --module commonjs --outDir dist/cjs"
   },
   "peerDependencies": {
     "react": "^17.0.0"
