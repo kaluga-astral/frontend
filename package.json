@@ -5,16 +5,15 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addon-docs": "^6.3.12",
-    "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/addon-links": "^6.3.12",
-    "@storybook/node-logger": "^6.3.12",
-    "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.12",
-    "chromatic": "^6.2.0",
-    "emotion-theming": "^11.0.0"
+    "@mdx-js/react": "2.0.0",
+    "@storybook/addon-actions": "6.4.17",
+    "@storybook/addon-docs": "6.4.17",
+    "@storybook/addon-essentials": "6.4.17",
+    "@storybook/addon-links": "6.4.17",
+    "@storybook/node-logger": "6.4.17",
+    "@storybook/preset-create-react-app": "4.0.0",
+    "@storybook/react": "6.4.17",
+    "chromatic": "^6.2.0"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
