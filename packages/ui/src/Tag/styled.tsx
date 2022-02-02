@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
 import { Chip } from '@mui/material';
 
+import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { TagColors, TagStates, TagVariants } from './constants';
@@ -26,6 +26,9 @@ const getBgColor = ({
   customcolor,
   customvariant,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
+  if (customcolor === TagColors.GREY) {
+    return theme.palette.grey[100];
+  }
   if (customvariant === TagVariants.CONTAINED) {
     if (customcolor === TagColors.PRIMARY) {
       return theme.palette.primary.main;
@@ -96,25 +99,35 @@ const getColor = ({
   return theme.palette.text.primary;
 };
 
-const getTagPadding = ({
+const getTagLabelPadding = ({
   theme,
   rounded,
 }: StyledTagThemeProps & { rounded: boolean }): string => {
-  console.log(rounded);
-  if (rounded) return theme.spacing(0, 2, 0, 2);
+  if (rounded) return theme.spacing(0, 2);
 
-  return theme.spacing(0, 4, 0, 4);
+  return theme.spacing(0, 1);
+};
+
+const getBgColorDeleteIcon = ({
+  theme,
+  iconState,
+}: StyledTagThemeProps & { iconState: TagState }): string => {
+  if (iconState === TagStates.DEFAULT) {
+    return 'transparent';
+  }
+  if (iconState === TagStates.HOVER) {
+    return theme.palette.red[100];
+  }
+  if (iconState === TagStates.ACTIVE) {
+    return theme.palette.red[200];
+  }
+  return 'transparent';
 };
 
 export const StyledTag = styled(Chip)<StyledTagProps>`
   font-size: 14px;
-  padding: ${({ theme, rounded }) => getTagPadding(theme, rounded)};
-
-  line-height: 20px;
-
-  border-radius: ${(props) => {
-    return getShape({ ...props });
-  }};
+  height: 20px;
+  border-radius: ${(props) => getShape({ ...props })};
   background-color: ${(props) =>
     getBgColor({ ...props, tagState: TagStates.DEFAULT })};
   &:hover {
@@ -129,6 +142,8 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
   }
 
   .MuiChip-label {
+    padding: ${(props) => getTagLabelPadding({ ...props })};
+
     color: ${(props) => getColor({ ...props, tagState: TagStates.DEFAULT })};
 
     &:hover {
@@ -138,5 +153,23 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
       color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
     }
     // need to add SELECTED state
+  }
+  .MuiChip-deleteIcon {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: ${(props) => getShape({ ...props })};
+
+    background: ${(props) =>
+      getBgColorDeleteIcon({ ...props, iconState: TagStates.ACTIVE })};
+
+    &:hover {
+      background: ${(props) =>
+        getBgColorDeleteIcon({ ...props, iconState: TagStates.HOVER })};
+    }
+    &:active {
+      background: ${(props) =>
+        getBgColorDeleteIcon({ ...props, iconState: TagStates.ACTIVE })};
+    }
   }
 `;

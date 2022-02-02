@@ -3,7 +3,7 @@ export enum TagColors {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   ERROR = 'error',
-  INFO = 'info',
+  GREY = 'grey',
   SUCCESS = 'success',
   WARNING = 'warning',
 }
