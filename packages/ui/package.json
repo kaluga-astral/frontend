@@ -2,14 +2,7 @@
   "name": "@astral/ui",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/cjs/index.js",
   "source": "./src/index.ts",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
-  "exports": {
-    "require": "./dist/cjs/index.js",
-    "default": "./dist/esm/index.js"
-  },
   "jest": {
     "moduleNameMapper": {
       "^lodash-es$": "lodash"
