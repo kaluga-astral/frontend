@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-
+import { styled } from '../styles';
 import { ButtonBase, ButtonSizes } from '../ButtonBase';
 import { Theme } from '../theme';
 import { ButtonProps } from '../Button';
