@@ -9,18 +9,19 @@ import {
 import { merge } from 'lodash-es';
 
 import { TypographyThemeOptions, typography } from './typography';
-import { Color, getPalette } from './palette';
+import { Background, Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 import { Shape, shape } from './shape';
 
-export type Palette = Omit<MuiPalette, 'grey'> & {
+export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
   green: Color;
   yellow: Color;
   grey: Color;
   primary: PaletteColor & Color;
+  background: Background;
 };
 
 export type Theme = Omit<
