@@ -20,7 +20,9 @@
   ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "npx rimraf ./dist && tsc --module es2015 --outDir dist/esm && tsc --module commonjs --outDir dist/cjs",
+    "prebuild": "npx rimraf ./lib",
+    "build": "npx commander build",
+    "publish": "yarn run build && npx commander publish",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "test": "react-scripts test --env=jsdom"
   },
