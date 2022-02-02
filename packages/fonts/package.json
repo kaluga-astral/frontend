@@ -4,6 +4,7 @@
   "main": "./src",
   "scripts": {
     "prebuild": "npx rimraf ./lib",
-    "build": "npx commander copyCommonFiles && npx commander copyFonts && npx commander modifyPackageJSON"
+    "build": "npx commander copyCommonFiles && npx commander copyFonts && npx commander modifyPackageJSON",
+    "publish": "yarn run build && npx commander publish"
   }
 }

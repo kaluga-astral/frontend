@@ -23,12 +23,10 @@ const modifyPackageJSON = () => {
           url: 'https://github.com/kaluga-astral/frontend/issues',
         },
         keywords,
-        main: './dist/esm/index.js',
-        types: './dist/esm/index.d.ts',
-        exports: {
-          require: './dist/cjs/index.js',
-          default: './dist/esm/index.js',
-        },
+        sideEffects: false,
+        main: './cjs/index.js',
+        types: './esm/index.d.ts',
+        module: './esm/index.js',
       },
       null,
       2
