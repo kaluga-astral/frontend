@@ -18,10 +18,10 @@
     "build": "npx rimraf ./dist && npm run svgr && tsc --module es2015 --outDir dist/esm && tsc --module commonjs --outDir dist/cjs"
   },
   "peerDependencies": {
+    "@mui/material": "^5.3.1",
     "react": "^17.0.0"
   },
   "devDependencies": {
-    "@mui/material": "^5.3.1",
     "@svgr/cli": "^6.2.0",
     "typescript": "^4.5.5"
   }
