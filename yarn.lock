@@ -42,6 +42,7 @@ __metadata:
     "@emotion/react": 11.7.1
     "@emotion/styled": 11.6.0
     "@mui/lab": 5.0.0-alpha.65
+    "@mui/base": ^5.0.0-alpha.66
     "@mui/material": 5.3.1
     "@testing-library/jest-dom": ^4.2.4
     "@testing-library/react": ^9.5.0
@@ -2674,7 +2675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/base@npm:5.0.0-alpha.66":
+"@mui/base@npm:5.0.0-alpha.66, @mui/base@npm:^5.0.0-alpha.66":
   version: 5.0.0-alpha.66
   resolution: "@mui/base@npm:5.0.0-alpha.66"
   dependencies:
