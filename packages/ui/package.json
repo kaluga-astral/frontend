@@ -15,9 +15,6 @@
       "^lodash-es$": "lodash"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib",
