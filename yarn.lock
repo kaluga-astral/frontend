@@ -39,10 +39,10 @@ __metadata:
   resolution: "@astral/ui@workspace:packages/ui"
   dependencies:
     "@astral-frontend/eslint-config-ts-ui": 1.0.0
-    "@emotion/react": ^11.5.0
-    "@emotion/styled": ^11.3.0
-    "@mui/lab": ^5.0.0-alpha.65
-    "@mui/material": ^5.3.1
+    "@emotion/react": 11.7.1
+    "@emotion/styled": 11.6.0
+    "@mui/lab": 5.0.0-alpha.65
+    "@mui/material": 5.3.1
     "@testing-library/jest-dom": ^4.2.4
     "@testing-library/react": ^9.5.0
     "@testing-library/user-event": ^7.2.1
@@ -59,7 +59,7 @@ __metadata:
     eslint-plugin-jest: ^25.2.4
     eslint-plugin-node: ^11.1.0
     eslint-plugin-promise: ^5.1.1
-    lodash-es: ^4.17.21
+    lodash-es: 4.17.21
     microbundle: ^0.14.1
     react: ^17.0.0
     react-dom: ^17.0.2
@@ -2039,19 +2039,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/cache@npm:^11.6.0":
-  version: 11.6.0
-  resolution: "@emotion/cache@npm:11.6.0"
-  dependencies:
-    "@emotion/memoize": ^0.7.4
-    "@emotion/sheet": ^1.1.0
-    "@emotion/utils": ^1.0.0
-    "@emotion/weak-memoize": ^0.2.5
-    stylis: ^4.0.10
-  checksum: 3c72c50bfe06fd7ec2728988181173664183d2320305a01bb757caa6a9d485de25fccde1b173d810423d2ff88a178d5a72cc21db76b9e458311a8ce3044dd2a1
-  languageName: node
-  linkType: hard
-
 "@emotion/cache@npm:^11.7.1":
   version: 11.7.1
   resolution: "@emotion/cache@npm:11.7.1"
@@ -2131,12 +2118,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.5.0":
-  version: 11.6.0
-  resolution: "@emotion/react@npm:11.6.0"
+"@emotion/react@npm:11.7.1":
+  version: 11.7.1
+  resolution: "@emotion/react@npm:11.7.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@emotion/cache": ^11.6.0
+    "@emotion/cache": ^11.7.1
     "@emotion/serialize": ^1.0.2
     "@emotion/sheet": ^1.1.0
     "@emotion/utils": ^1.0.0
@@ -2150,7 +2137,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 4fb2d108dc32716d1f162026ac5fdbd0662e3b435a34fb324629d72bb6bff61b18ac8975b51457c16ffa41543bade5d07558566ab76420b3926fbb9159441232
+  checksum: 3392aa71f9c68c16022947959f7f842174e6b075b3baf58e185462411cd9b5a87557109a9225b1abaa2d7200a08b7cb9d7f21aa035f0d36b2c89e19b2a124e02
   languageName: node
   linkType: hard
 
@@ -2209,20 +2196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^10.0.27":
-  version: 10.0.27
-  resolution: "@emotion/styled@npm:10.0.27"
-  dependencies:
-    "@emotion/styled-base": ^10.0.27
-    babel-plugin-emotion: ^10.0.27
-  peerDependencies:
-    "@emotion/core": ^10.0.27
-    react: ">=16.3.0"
-  checksum: 09e86fe47adbca1eabb34f36cee17289fbe1f2332c40051d4d5a6077eed1682612685663efb7fd68a8f290d20f9f5cb6ad1c9ca18dcdfc05ee51784d707d279c
-  languageName: node
-  linkType: hard
-
-"@emotion/styled@npm:^11.3.0":
+"@emotion/styled@npm:11.6.0":
   version: 11.6.0
   resolution: "@emotion/styled@npm:11.6.0"
   dependencies:
@@ -2241,6 +2215,19 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 612bbf114a4ca49e5b3ec4554bea1cd5aad9eeb2371babc3e6b79eab5020bd0300b9904108b621837fe715e221ba09dd131dc29918c1fd966e082d8e74fca833
+  languageName: node
+  linkType: hard
+
+"@emotion/styled@npm:^10.0.27":
+  version: 10.0.27
+  resolution: "@emotion/styled@npm:10.0.27"
+  dependencies:
+    "@emotion/styled-base": ^10.0.27
+    babel-plugin-emotion: ^10.0.27
+  peerDependencies:
+    "@emotion/core": ^10.0.27
+    react: ">=16.3.0"
+  checksum: 09e86fe47adbca1eabb34f36cee17289fbe1f2332c40051d4d5a6077eed1682612685663efb7fd68a8f290d20f9f5cb6ad1c9ca18dcdfc05ee51784d707d279c
   languageName: node
   linkType: hard
 
@@ -2709,7 +2696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/lab@npm:^5.0.0-alpha.65":
+"@mui/lab@npm:5.0.0-alpha.65":
   version: 5.0.0-alpha.65
   resolution: "@mui/lab@npm:5.0.0-alpha.65"
   dependencies:
@@ -2750,7 +2737,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:^5.3.1":
+"@mui/material@npm:5.3.1":
   version: 5.3.1
   resolution: "@mui/material@npm:5.3.1"
   dependencies:
@@ -8995,13 +8982,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emotion-theming@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "emotion-theming@npm:11.0.0"
-  checksum: d823a50c4d3df3d9a4c21574c354cdbddbe06ad1d07b7fc2807cdc2eaf5d765ea1486d9d3292ea1855d9fb18b29edd39a7e3a784da4afa54ef5f1c02970142ed
-  languageName: node
-  linkType: hard
-
 "encodeurl@npm:~1.0.2":
   version: 1.0.2
   resolution: "encodeurl@npm:1.0.2"
@@ -13603,7 +13583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21":
+"lodash-es@npm:4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
@@ -18384,7 +18364,6 @@ __metadata:
     "@storybook/preset-create-react-app": ^3.2.0
     "@storybook/react": ^6.3.12
     chromatic: ^6.2.0
-    emotion-theming: ^11.0.0
   languageName: unknown
   linkType: soft
 
@@ -19583,7 +19562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylis@npm:^4.0.10, stylis@npm:^4.0.3":
+"stylis@npm:^4.0.3":
   version: 4.0.10
   resolution: "stylis@npm:4.0.10"
   checksum: 0fecaf5c234ec3ffcb0afc21478742a815a21cb964365259789be9c1692e72e13d8c081c1150fd76ed2146633a3251cdecd6e0c120b158f44bd74c38f81cafb3

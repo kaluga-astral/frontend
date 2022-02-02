@@ -1,6 +1,6 @@
 import { CircularProgress } from '@mui/material';
-import styled from '@emotion/styled';
 
+import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { CircularProgressColors, CircularProgressSizes } from './constants';

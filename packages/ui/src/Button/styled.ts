@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+import { styled } from '../styles';
 import { Palette, Theme } from '../theme';
 
 import { ButtonColor, ButtonProps, ButtonState, ButtonVariant } from './types';
