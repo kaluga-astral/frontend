@@ -21,6 +21,9 @@ export type Palette = Omit<MuiPalette, 'grey'> & {
   yellow: Color;
   grey: Color;
   primary: PaletteColor & Color;
+  background: {
+    element: string;
+  };
 };
 
 export type Theme = Omit<MuiTheme, 'shadows' | 'palette' | 'shape'> & {
