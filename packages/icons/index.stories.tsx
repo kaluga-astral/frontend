@@ -6,14 +6,12 @@ import * as customIcons from './generated-custom-icons';
 
 const icons = { ...themedIcons, ...customIcons };
 
-const iconsAsComponents = Object.keys(icons).map(
-  (iconName) => {
-    return {
-      name: iconName,
-      Component: icons[iconName] as React.FunctionComponent<SvgIconProps>,
-    };
-  }
-);
+const iconsAsComponents = Object.keys(icons).map((iconName) => {
+  return {
+    name: iconName,
+    Component: icons[iconName] as React.FunctionComponent<SvgIconProps>,
+  };
+});
 
 export default {
   title: 'Components/icons',
