@@ -5,9 +5,9 @@ import { Theme } from '../theme';
 
 import { BadgeColor, BadgeProps } from './types';
 
-interface StyledBadgeProps extends Omit<BadgeProps, 'color'> {
+type StyledBadgeProps = Omit<BadgeProps, 'color'> & {
   customColor: BadgeColor;
-}
+};
 
 type StyledBadgeThemeProps = StyledBadgeProps & { theme: Theme };
 

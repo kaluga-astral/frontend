@@ -71,20 +71,7 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
   },
 });
 
-const MuiButton: Components['MuiButton'] = {
-  defaultProps: {
-    disableRipple: true,
-    disableFocusRipple: true,
-    disableTouchRipple: true,
-    disableElevation: true,
-    size: 'medium',
-    variant: 'contained',
-    color: 'primary',
-  },
-};
-
 export const getComponents = (fontUrls: FontsUrls): Components => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
-  MuiButton,
 });
