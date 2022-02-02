@@ -3,7 +3,7 @@ import MuiTypography, {
 } from '@mui/material/Typography';
 import { Variant } from '@mui/material/styles/createTypography';
 
-export type TypographyProps = MuiTypographyProps & {
+export type TypographyProps = Omit<MuiTypographyProps, 'variant'> & {
   variant?:
     | Variant
     | 'h7'
@@ -22,7 +22,7 @@ export const Typography = ({
   ...props
 }: TypographyProps) => {
   return (
-    <MuiTypography variant={variant} {...props}>
+    <MuiTypography variant={variant as any} {...props}>
       {children}
     </MuiTypography>
   );

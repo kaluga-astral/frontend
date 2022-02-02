@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from '@mui/base/ButtonUnstyled';
 
+import { styled } from '../styles';
 import { Palette, Theme } from '../theme';
 
 import {

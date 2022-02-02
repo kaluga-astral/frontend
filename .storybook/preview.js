@@ -1,8 +1,6 @@
 // emotion-theming нужен для: https://github.com/storybookjs/storybook/issues/10231#issuecomment-613394048
 
-import { ThemeProvider } from 'emotion-theming'
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@astral/ui'
 import { getTheme, themes } from './themes'
 
 export const parameters = {
@@ -11,12 +9,9 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => (
-    <MuiThemeProvider theme={getTheme(context.globals.theme)}>
-      <ThemeProvider theme={getTheme(context.globals.theme)}>
-        <CssBaseline />
-        <Story {...context} />
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <ThemeProvider theme={getTheme(context.globals.theme)}>
+      <Story {...context} />
+    </ThemeProvider>
   )
 ]
 
