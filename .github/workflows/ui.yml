@@ -7,6 +7,14 @@ on:
       - main
 
 jobs:
+  auto-request-review:
+    name: Auto Request Review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: necojackarc/auto-request-review@v0.7.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   prepare-yarn:
     name: Prepare yarn
     runs-on: ubuntu-latest
@@ -33,7 +41,7 @@ jobs:
         run: yarn --immutable
       - name: Run eslint
         run: yarn workspace @astral/ui lint
-  
+
   test:
     name: Running tests
     runs-on: ubuntu-latest
