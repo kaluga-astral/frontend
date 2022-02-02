@@ -1,27 +1,6 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "@astral-frontend/eslint-config-ts-ui"
-  ],
-  "env": {
-    "node": true
-  },
+  "extends": "../../.eslintrc",
   "parserOptions": {
-    "project": ["tsconfig.json"]
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "rules": {
-    "prettier/prettier": ["error",{"endOfLine": "auto", "singleQuote": true}],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "packageDir": ["./", "../../"]}],
-    "space-before-function-paren": 0,
-    "react/prop-types": 0,
-    "react/jsx-handler-names": 0,
-    "react/jsx-fragments": 0,
-    "react/no-unused-prop-types": 0,
-    "import/export": 0
+    "project": ["tsconfig.lint.json"]
   }
 }
