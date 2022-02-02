@@ -1,4 +1,5 @@
 {
+  "root": false,
   "parser": "@typescript-eslint/parser",
   "extends": [
     "@astral-frontend/eslint-config-ts-ui"
