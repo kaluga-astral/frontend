@@ -1,7 +1,6 @@
 name: CI for package @astral/ui
 
 on:
-  push:
   pull_request:
     branches:
       - main
