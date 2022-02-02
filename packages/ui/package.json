@@ -25,12 +25,12 @@
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/base": "^5.0.0-alpha.66",
-    "@mui/lab": "^5.0.0-alpha.65",
-    "@mui/material": "^5.3.1",
-    "lodash-es": "^4.17.21"
+    "@emotion/react": "11.5.0",
+    "@emotion/styled": "11.3.0",
+    "@mui/base": "5.0.0-alpha.66",
+    "@mui/lab": "5.0.0-alpha.65",
+    "@mui/material": "5.3.1",
+    "lodash-es": "4.17.21"
   },
   "peerDependencies": {
     "react": "^17.0.0"
