@@ -152,568 +152,543 @@ const Template: Story = (args) => <Tag {...args} />;
 export const ShowcaseColor: Story = () => (
   <Stack direction="column" gap={2}>
     <Stack direction="row" gap={2}>
-      <Stack direction="column" gap={2}>
-        <Stack direction="column">
-          <h2>Contained </h2>
-          <Stack direction="row" gap={2}>
-            <Stack direction="column">
-              <h3>Primary </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="primary"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="primary"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Success </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="success"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="success"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Warning </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="warning"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="warning"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Error </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="error"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="contained"
-                      color="error"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-        <Stack direction="column">
-          <h2>Light </h2>
-          <Stack direction="row" gap={2}>
-            <Stack direction="column">
-              <h3>Primary </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="primary"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="primary"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Success </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="success"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="success"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Warning </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="warning"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="warning"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Error </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="error"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      size="small"
-                      variant="light"
-                      color="error"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Stack>
-    <h1>Disabled</h1>
-    <Stack direction="row" gap={2}>
-      <Stack direction="column" gap={2}>
-        <Stack direction="column">
-          <h2>Contained </h2>
-          <Stack direction="row" gap={2}>
-            <Stack direction="column">
-              <h3>Primary </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="primary"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="primary"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Success </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="success"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="success"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Warning </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="warning"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="warning"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Error </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="error"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="contained"
-                      color="error"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-        <Stack direction="column">
-          <h2>Light </h2>
-          <Stack direction="row" gap={2}>
-            <Stack direction="column">
-              <h3>Primary </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="primary"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="primary"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Success </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="success"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="success"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Warning </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="warning"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="warning"
-                    />
-                    <text>Not rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h3>Error </h3>
-              <Stack direction="column" gap={2}>
-                <Stack direction="column" gap={2}>
-                  <b>Small</b>
-                  <Stack direction="row" gap={2}>
-                    <Tag
-                      label="Tag"
-                      disabled
-                      size="small"
-                      variant="light"
-                      color="error"
-                      rounded
-                    />
-                    <text>Rounded</text>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Stack>
-  </Stack>
-);
-export const IconsAvatarsShowCase: Story = () => (
-  <Stack direction="column" gap={2}>
-    <Stack direction="row" gap={2}>
-      <Stack direction="column" gap={2}>
+      <Stack direction="row" gap={2}>
         <Stack direction="column" gap={2}>
-          <Tag size="small" color="grey" label="Тэг" />
-          <Tag size="small" color="grey" label="Тэг" rounded />
-          <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" />
-          <Tag
-            icon={svgStartIcon}
-            size="small"
-            color="grey"
-            label="Тэг"
-            rounded
-          />
-          <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" />
-          <Tag
-            avatar={svgAvatar}
-            size="small"
-            color="grey"
-            label="Тэг"
-            rounded
-          />
+          <Stack direction="column">
+            <h2>Contained </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="success"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="success"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="warning"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="warning"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="error"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="contained"
+                        color="error"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack direction="column">
+            <h2>Light </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="primary"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="primary"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="success"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="success"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="warning"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="warning"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="error"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        size="small"
+                        variant="light"
+                        color="error"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
         </Stack>
       </Stack>
-      <Stack direction="column" gap={2}>
-        <Tag
-          size="small"
-          color="grey"
-          label="Тэг"
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          size="small"
-          color="grey"
-          label="Тэг"
-          rounded
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          icon={svgStartIcon}
-          size="small"
-          color="grey"
-          label="Тэг"
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          icon={svgStartIcon}
-          size="small"
-          color="grey"
-          label="Тэг"
-          rounded
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          avatar={svgAvatar}
-          size="small"
-          color="grey"
-          label="Тэг"
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          avatar={svgAvatar}
-          size="small"
-          color="grey"
-          label="Тэг"
-          rounded
-          deleteIcon={svgDeleteIcon}
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
+
+      <Stack direction="row" gap={2}>
+        <Stack direction="column" gap={2}>
+          <Stack direction="column">
+            <h2>Contained Disabled </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="success"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="success"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="warning"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="warning"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="error"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="contained"
+                        color="error"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack direction="column">
+            <h2>Light </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="primary"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="primary"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="success"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="success"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="warning"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="warning"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="error"
+                        rounded
+                      />
+                      <text>Rounded</text>
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        size="small"
+                        variant="light"
+                        color="error"
+                      />
+                      <text>Not rounded</text>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
       </Stack>
+    </Stack>
+    <Stack direction="row" gap={2}>
+      <Tag
+        size="small"
+        color="grey"
+        label="Тэг"
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        size="small"
+        color="grey"
+        label="Тэг"
+        rounded
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        icon={svgStartIcon}
+        size="small"
+        color="grey"
+        label="Тэг"
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        icon={svgStartIcon}
+        size="small"
+        color="grey"
+        label="Тэг"
+        rounded
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        avatar={svgAvatar}
+        size="small"
+        color="grey"
+        label="Тэг"
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        avatar={svgAvatar}
+        size="small"
+        color="grey"
+        label="Тэг"
+        rounded
+        deleteIcon={svgDeleteIcon}
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+    </Stack>
+    <Stack direction="row" gap={2}>
+      <Tag size="small" color="grey" label="Тэг" />
+      <Tag size="small" color="grey" label="Тэг" rounded />
+      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" />
+      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" rounded />
+      <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" />
+      <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" rounded />
     </Stack>
   </Stack>
 );
 
 ShowcaseColor.parameters = { options: { showPanel: false } };
-IconsAvatarsShowCase.parameters = { options: { showPanel: false } };
 
 export const Default = Template.bind({});
 Default.args = {
