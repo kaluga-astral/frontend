@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
-import { ButtonBase, ButtonProps, ButtonSizes } from '../ButtonBase';
+import { ButtonBase, ButtonSizes } from '../ButtonBase';
 import { Theme } from '../theme';
+import { ButtonProps } from '../Button';
 
 type StyledIconButtonThemeProps = ButtonProps & {
   theme: Theme;

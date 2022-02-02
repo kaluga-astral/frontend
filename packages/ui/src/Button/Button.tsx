@@ -1,7 +1,7 @@
-import { ButtonProps } from '../ButtonBase';
 import { CircularProgress } from '../CircularProgress';
 
 import { StyledButton } from './styled';
+import { ButtonProps } from './types';
 
 export const Button = ({
   children,

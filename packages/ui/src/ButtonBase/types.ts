@@ -1,5 +1,4 @@
 import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
-import React from 'react';
 
 import {
   ButtonColors,
@@ -24,10 +23,4 @@ export type BaseButtonProps = Omit<
   color?: ButtonColor;
   variant?: ButtonVariant;
   size?: ButtonSize;
-};
-
-export type ButtonProps = BaseButtonProps & {
-  loading?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
 };
