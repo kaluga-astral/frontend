@@ -18,45 +18,51 @@ const Template: Story = (args) => <Radio {...args} />;
 
 export const RadioGroups: Story = () => (
   <Stack direction="row" gap={4}>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
+    <Stack sx={{ maxWidth: 300 }} gap={2}>
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <FormLabel id="demo-radio-buttons-group-label">
+          Название группы
+        </FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue="female"
           name="radio-buttons-group"
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel value="female" control={<Radio />} label="Один" />
+          <FormControlLabel value="male" control={<Radio />} label="Два" />
+          <FormControlLabel value="other" control={<Radio />} label="Три" />
         </RadioGroup>
       </FormControl>
     </Stack>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
+    <Stack sx={{ maxWidth: 300 }} gap={2}>
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <FormLabel id="demo-radio-buttons-group-label">
+          Название группы
+        </FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
+          defaultValue="male"
           name="radio-buttons-group"
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel value="female" control={<Radio />} label="Один" />
+          <FormControlLabel value="male" control={<Radio />} label="Два" />
+          <FormControlLabel value="other" control={<Radio />} label="Три" />
         </RadioGroup>
       </FormControl>
     </Stack>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
+    <Stack sx={{ maxWidth: 300 }} gap={2}>
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <FormLabel id="demo-radio-buttons-group-label">
+          Название группы
+        </FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
+          defaultValue="other"
           name="radio-buttons-group"
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel value="female" control={<Radio />} label="Один" />
+          <FormControlLabel value="male" control={<Radio />} label="Два" />
+          <FormControlLabel value="other" control={<Radio />} label="Три" />
         </RadioGroup>
       </FormControl>
     </Stack>
