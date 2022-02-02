@@ -96,7 +96,22 @@ const getColor = ({
   return theme.palette.text.primary;
 };
 
+const getTagPadding = ({
+  theme,
+  rounded,
+}: StyledTagThemeProps & { rounded: boolean }): string => {
+  console.log(rounded);
+  if (rounded) return theme.spacing(0, 2, 0, 2);
+
+  return theme.spacing(0, 4, 0, 4);
+};
+
 export const StyledTag = styled(Chip)<StyledTagProps>`
+  font-size: 14px;
+  padding: ${({ theme, rounded }) => getTagPadding(theme, rounded)};
+
+  line-height: 20px;
+
   border-radius: ${(props) => {
     return getShape({ ...props });
   }};
