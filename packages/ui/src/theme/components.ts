@@ -64,27 +64,15 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
     },
   ],
   defaultProps: {
+    // TODO: необходимо кастомизировать типы Components['MuiTypography']
     variantMapping: {
       link: 'a',
       code: 'code',
-    },
+    } as any,
   },
 });
-
-const MuiButton: Components['MuiButton'] = {
-  defaultProps: {
-    disableRipple: true,
-    disableFocusRipple: true,
-    disableTouchRipple: true,
-    disableElevation: true,
-    size: 'medium',
-    variant: 'contained',
-    color: 'primary',
-  },
-};
 
 export const getComponents = (fontUrls: FontsUrls): Components => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
-  MuiButton,
 });

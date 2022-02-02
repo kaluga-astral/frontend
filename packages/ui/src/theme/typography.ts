@@ -1,6 +1,23 @@
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { Typography } from '@mui/material/styles/createTypography';
+import { CSSProperties } from 'react';
 
 const HTML_FONT_SIZE = 14;
+
+type CustomTypographyVariantStyle = {
+  fontSize: CSSProperties['fontSize'];
+  fontWeight: CSSProperties['fontWeight'];
+};
+
+export type TypographyThemeOptions = Typography & {
+  h7: CustomTypographyVariantStyle;
+  h8: CustomTypographyVariantStyle;
+  h9: CustomTypographyVariantStyle;
+  ui: CustomTypographyVariantStyle;
+  link: CustomTypographyVariantStyle;
+  pointer: CustomTypographyVariantStyle;
+  small: CustomTypographyVariantStyle;
+  code: CustomTypographyVariantStyle;
+};
 
 // Т.к. нет досутпа к теме, написал функцию для конвертации px в rem
 export const pxToRem = (
@@ -10,7 +27,7 @@ export const pxToRem = (
   return `${fontSize / htmlFontSize}rem`;
 };
 
-export const typography: TypographyOptions = {
+export const typography: Partial<TypographyThemeOptions> = {
   fontSize: 14,
   htmlFontSize: 14,
   fontWeightLight: 300,
