@@ -7,8 +7,9 @@ import { TagColors, TagStates, TagVariants } from './constants';
 import { TagColor, TagProps, TagState, TagVariant } from './types';
 
 interface StyledTagProps extends Omit<TagProps, 'color'> {
-  customcolor: TagColor;
-  customvariant: TagVariant;
+  customColor?: TagColor;
+  customVariant?: TagVariant;
+  rounded: boolean;
 }
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
@@ -20,40 +21,46 @@ const getShape = ({
   if (rounded) return '100px';
   return theme.shape.small;
 };
+const getBorderRadiusDeleteIcon = ({
+  rounded,
+}: StyledTagThemeProps & { rounded: boolean }) => {
+  if (rounded) return '100px';
+  return '0 3px 3px 0';
+};
 
 const getBgColor = ({
   theme,
-  customcolor,
-  customvariant,
+  customColor,
+  customVariant,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
-  if (customcolor === TagColors.GREY) {
+  if (customColor === TagColors.GREY) {
     return theme.palette.grey[100];
   }
-  if (customvariant === TagVariants.CONTAINED) {
-    if (customcolor === TagColors.PRIMARY) {
+  if (customVariant === TagVariants.CONTAINED) {
+    if (customColor === TagColors.PRIMARY) {
       return theme.palette.primary.main;
     }
-    if (customcolor === TagColors.ERROR) {
+    if (customColor === TagColors.ERROR) {
       return theme.palette.red[800];
     }
-    if (customcolor === TagColors.SUCCESS) {
+    if (customColor === TagColors.SUCCESS) {
       return theme.palette.green[800];
     }
-    if (customcolor === TagColors.WARNING) {
+    if (customColor === TagColors.WARNING) {
       return theme.palette.yellow[800];
     }
   }
-  if (customvariant === TagVariants.LIGHT) {
-    if (customcolor === TagColors.PRIMARY) {
+  if (customVariant === TagVariants.LIGHT) {
+    if (customColor === TagColors.PRIMARY) {
       return theme.palette.primary[100];
     }
-    if (customcolor === TagColors.ERROR) {
+    if (customColor === TagColors.ERROR) {
       return theme.palette.red[100];
     }
-    if (customcolor === TagColors.SUCCESS) {
+    if (customColor === TagColors.SUCCESS) {
       return theme.palette.green[100];
     }
-    if (customcolor === TagColors.WARNING) {
+    if (customColor === TagColors.WARNING) {
       return theme.palette.yellow[100];
     }
   }
@@ -63,35 +70,35 @@ const getBgColor = ({
 
 const getColor = ({
   theme,
-  customcolor,
-  customvariant,
+  customColor,
+  customVariant,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
-  if (customvariant === TagVariants.CONTAINED) {
-    if (customcolor === TagColors.PRIMARY) {
+  if (customVariant === TagVariants.CONTAINED) {
+    if (customColor === TagColors.PRIMARY) {
       return theme.palette.primary.contrastText;
     }
-    if (customcolor === TagColors.ERROR) {
+    if (customColor === TagColors.ERROR) {
       return theme.palette.error.contrastText;
     }
 
-    if (customcolor === TagColors.WARNING) {
+    if (customColor === TagColors.WARNING) {
       return theme.palette.warning.contrastText;
     }
-    if (customcolor === TagColors.SUCCESS) {
+    if (customColor === TagColors.SUCCESS) {
       return theme.palette.success.contrastText;
     }
   }
-  if (customvariant === TagVariants.LIGHT) {
-    if (customcolor === TagColors.PRIMARY) {
+  if (customVariant === TagVariants.LIGHT) {
+    if (customColor === TagColors.PRIMARY) {
       return theme.palette.primary.main;
     }
-    if (customcolor === TagColors.ERROR) {
+    if (customColor === TagColors.ERROR) {
       return theme.palette.red[800];
     }
-    if (customcolor === TagColors.WARNING) {
+    if (customColor === TagColors.WARNING) {
       return theme.palette.yellow[800];
     }
-    if (customcolor === TagColors.SUCCESS) {
+    if (customColor === TagColors.SUCCESS) {
       return theme.palette.green[800];
     }
   }
@@ -125,6 +132,7 @@ const getBgColorDeleteIcon = ({
 };
 
 export const StyledTag = styled(Chip)<StyledTagProps>`
+  user-select: none;
   font-size: 14px;
   height: 20px;
   border-radius: ${(props) => getShape({ ...props })};
@@ -158,10 +166,10 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
     margin: 0;
     width: 20px;
     height: 20px;
-    border-radius: ${(props) => getShape({ ...props })};
+    border-radius: ${(props) => getBorderRadiusDeleteIcon({ ...props })};
 
     background: ${(props) =>
-      getBgColorDeleteIcon({ ...props, iconState: TagStates.ACTIVE })};
+      getBgColorDeleteIcon({ ...props, iconState: TagStates.DEFAULT })};
 
     &:hover {
       background: ${(props) =>
@@ -171,5 +179,14 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
       background: ${(props) =>
         getBgColorDeleteIcon({ ...props, iconState: TagStates.ACTIVE })};
     }
+  }
+  .MuiChip-avatar {
+    margin: 2px;
+    width: 16px;
+    height: 16px;
+  }
+  .MuiChip-icon {
+    width: 16px;
+    height: 16px;
   }
 `;

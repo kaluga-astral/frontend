@@ -1,17 +1,8 @@
-// import { TagProps } from './types';
-import { IconButton } from '../IconButton';
-
 import { StyledTag } from './styled';
+import { TagProps } from './types';
 
-const Tag = ({ children, color, variant, deleteIcon, ...props }: any) => {
-  return (
-    <StyledTag
-      customcolor={color}
-      customvariant={variant}
-      deleteIcon={<IconButton variant="light">{deleteIcon}</IconButton>}
-      {...props}
-    />
-  );
+const Tag = ({ children, color, variant, ...props }: TagProps) => {
+  return <StyledTag customColor={color} customVariant={variant} {...props} />;
 };
 
 export default Tag;
