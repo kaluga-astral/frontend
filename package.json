@@ -16,8 +16,9 @@
     "chromatic": "^6.2.0"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "generate-icons": "npm --prefix packages/icons run svgr",
+    "storybook": "npm run generate-icons && start-storybook -p 6006",
+    "build-storybook": "npm run generate-icons && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9"
   },
   "resolutions": {
