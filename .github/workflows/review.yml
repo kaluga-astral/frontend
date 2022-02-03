@@ -1,0 +1,15 @@
+name: Request review
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  auto-request-review:
+    name: Auto Request Review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: necojackarc/auto-request-review@v0.7.0
+        with:
+          token: ${{ secrets.REVIEW_TOKEN }}

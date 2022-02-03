@@ -1,12 +1,21 @@
-import { ButtonProps } from './types';
-import { StyledButton } from './styled';
+import { CircularProgress } from '../CircularProgress';
 
-export const Button = ({ color, variant, children, ...props }: ButtonProps) => {
+import { StyledButton } from './styled';
+import { ButtonProps } from './types';
+
+export const Button = ({
+  children,
+  startIcon,
+  endIcon,
+  loading,
+  ...props
+}: ButtonProps) => {
   return (
-    <StyledButton {...props} customVariant={variant} customColor={color}>
+    <StyledButton loading={loading} {...props}>
+      <span>{startIcon}</span>
       {children}
+      {loading && <CircularProgress />}
+      <span>{endIcon}</span>
     </StyledButton>
   );
 };
-
-export default Button;

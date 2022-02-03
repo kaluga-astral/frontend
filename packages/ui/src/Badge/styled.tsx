@@ -1,13 +1,13 @@
-import styled from '@emotion/styled';
 import { Badge } from '@mui/material';
 
+import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { BadgeColor, BadgeProps } from './types';
 
-interface StyledBadgeProps extends Omit<BadgeProps, 'color'> {
+type StyledBadgeProps = Omit<BadgeProps, 'color'> & {
   customColor: BadgeColor;
-}
+};
 
 type StyledBadgeThemeProps = StyledBadgeProps & { theme: Theme };
 
@@ -47,7 +47,7 @@ export const StyledBadge = styled(Badge, {
       getBgColor({ customColor, theme })};
     color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
     padding: ${({ theme }) => theme.spacing(0, 1)};
-    font-size: ${({ theme }) => theme.typography.small};
+    font-size: ${({ theme }) => theme.typography.small.fontSize};
     border: 2px solid ${({ theme }) => theme.palette.common.white};
   }
 
