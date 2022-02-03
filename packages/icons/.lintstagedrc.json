@@ -1,0 +1,3 @@
+{
+  "packages/ui/**/*.{js,jsx,ts,tsx}": "yarn workspace @astral/icons run lint"
+}
