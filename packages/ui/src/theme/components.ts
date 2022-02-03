@@ -126,6 +126,10 @@ const MuiFormHelperText: Components<Theme>['MuiFormHelperText'] = {
     root({ theme }: { theme: any }) {
       return {
         margin: theme.spacing(1, 0, 0),
+        lineHeight: theme.typography.pxToRem(16),
+        '&.Mui-error': {
+          color: theme.palette.error.dark,
+        },
       };
     },
   },
@@ -177,11 +181,14 @@ const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
         '&:hover .MuiOutlinedInput-notchedOutline': {
           borderColor: theme.palette.grey[300],
         },
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.palette.primary[700],
-        },
         '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
           borderColor: theme.palette.background.element,
+        },
+        '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.error.dark,
+        },
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.primary[700],
         },
       };
     },
