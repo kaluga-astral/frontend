@@ -5,7 +5,7 @@ import { styled } from '../styles';
 import { CheckboxProps } from './types';
 
 export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
-  padding: ${({ theme }) => theme.spacing(1)};
+  padding: 5px;
   border-radius: unset;
   color: ${({ theme }) => theme.palette.background.element};
 

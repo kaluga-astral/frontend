@@ -7,7 +7,7 @@ import { FormControlLabelProps } from './types';
 export const StyledFormControlLabel = styled(
   FormControlLabel
 )<FormControlLabelProps>`
-  margin-left: -${({ theme }) => theme.spacing(1)};
+  margin-left: -5px;
   margin-right: 0;
   & .MuiFormControlLabel-label {
     margin-left: ${({ theme }) => theme.spacing(1)};
