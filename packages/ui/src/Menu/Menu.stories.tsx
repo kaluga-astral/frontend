@@ -3,7 +3,7 @@ import { Story } from '@storybook/react';
 
 import { Button, MenuItem } from '../index';
 
-import Menu from './Menu';
+import { Menu } from './Menu';
 
 export default {
   title: 'Components/Menu',

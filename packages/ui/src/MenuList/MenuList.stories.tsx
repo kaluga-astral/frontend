@@ -3,7 +3,7 @@ import { ListItemText } from '@mui/material';
 
 import { MenuItem } from '../index';
 
-import MenuList from './MenuList';
+import { MenuList } from './MenuList';
 
 export default {
   title: 'Components/MenList',
