@@ -2,6 +2,7 @@ import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
 import { FormControlLabel } from '../FormControlLabel';
+import { Typography } from '../Typography';
 
 import { Checkbox } from './Checkbox';
 
@@ -14,7 +15,7 @@ const Template: Story = (args) => <Checkbox {...args} />;
 
 export const Showcase: Story = () => (
   <Stack direction="row" gap={4}>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
+    <Stack gap={4}>
       <Checkbox />
       <Checkbox disabled />
       <Checkbox checked />
@@ -22,7 +23,7 @@ export const Showcase: Story = () => (
       <Checkbox indeterminate />
       <Checkbox indeterminate disabled />
     </Stack>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
+    <Stack gap={4}>
       <FormControlLabel control={<Checkbox />} label="Текст" />
       <FormControlLabel control={<Checkbox />} label="Текст" disabled />
       <FormControlLabel control={<Checkbox checked />} label="Текст" />
@@ -33,6 +34,16 @@ export const Showcase: Story = () => (
         label="Текст"
         disabled
       />
+    </Stack>
+    <Stack gap={4}>
+      <Typography variant="ui">Check=False, State=Default</Typography>
+      <Typography variant="ui">Check=False, State=Disabled</Typography>
+      <Typography variant="ui">Check=True, State=Default</Typography>
+      <Typography variant="ui">Check=True, State=Disabled</Typography>
+      <Typography variant="ui">Check=True, State=Indeterminate</Typography>
+      <Typography variant="ui">
+        Check=True, State=Indeterminate_Disabled
+      </Typography>
     </Stack>
   </Stack>
 );

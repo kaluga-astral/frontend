@@ -1,10 +1,11 @@
-import styled from '@emotion/styled';
 import { Checkbox } from '@mui/material';
+
+import { styled } from '../styles';
 
 import { CheckboxProps } from './types';
 
 export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
-  padding: 5px;
+  padding: ${({ theme }) => theme.spacing(1)};
   border-radius: unset;
   color: ${({ theme }) => theme.palette.background.element};
 
@@ -12,19 +13,19 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
     color: ${({ theme }) => theme.palette.grey[100]};
   }
 
+  & .MuiSvgIcon-border {
+    color: ${({ theme }) => theme.palette.grey[300]};
+  }
+
   & > svg {
     width: 1rem;
     height: 1rem;
   }
 
-  &:not(Mui-disabled, .Mui-checked, .MuiCheckbox-indeterminate) > svg > rect {
-    stroke: ${({ theme }) => theme.palette.grey[300]};
-  }
-
-  &.Mui-disabled:not(.Mui-checked, .MuiCheckbox-indeterminate) {
+  &.Mui-disabled {
     color: ${({ theme }) => theme.palette.grey[200]};
-    & > svg > rect {
-      stroke: currentColor;
+    & .MuiSvgIcon-border {
+      color: currentColor;
     }
   }
 
@@ -40,8 +41,8 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
       color: ${({ theme }) => theme.palette.grey[500]};
     }
 
-    & > svg > path {
-      fill: ${({ theme }) => theme.palette.common.white};
+    & .MuiSvgIcon-mark {
+      color: ${({ theme }) => theme.palette.common.white};
     }
   }
 `;
