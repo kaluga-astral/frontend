@@ -1,0 +1,28 @@
+{
+  "name": "@astral/icons",
+  "version": "1.0.0",
+  "source": "./index.ts",
+  "main": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "default": "./dist/esm/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
+    "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
+    "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
+    "build": "npx rimraf ./dist && npm run svgr && tsc --module es2015 --outDir dist/esm && tsc --module commonjs --outDir dist/cjs"
+  },
+  "peerDependencies": {
+    "@mui/material": "^5.3.1",
+    "react": "^17.0.0"
+  },
+  "devDependencies": {
+    "@svgr/cli": "^6.2.0",
+    "typescript": "^4.5.5"
+  }
+}
