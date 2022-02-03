@@ -6,8 +6,8 @@
     "commander"
   ],
   "devDependencies": {
-    "@astral/commander": "*",
     "@astral-frontend/eslint-config-ts-ui": "1.0.0",
+    "@astral/commander": "*",
     "@mdx-js/react": "2.0.0",
     "@storybook/addon-actions": "6.4.17",
     "@storybook/addon-docs": "6.4.17",
