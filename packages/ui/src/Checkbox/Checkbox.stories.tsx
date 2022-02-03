@@ -35,7 +35,7 @@ export const Showcase: Story = () => (
         disabled
       />
     </Stack>
-    <Stack gap={4}>
+    <Stack justifyContent="space-between" gap={4}>
       <Typography variant="ui">Check=False, State=Default</Typography>
       <Typography variant="ui">Check=False, State=Disabled</Typography>
       <Typography variant="ui">Check=True, State=Default</Typography>
