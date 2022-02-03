@@ -66,10 +66,11 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
     },
   ],
   defaultProps: {
+    // TODO: необходимо кастомизировать типы Components['MuiTypography']
     variantMapping: {
       link: 'a',
       code: 'code',
-    },
+    } as any,
   },
 });
 

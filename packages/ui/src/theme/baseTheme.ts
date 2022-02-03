@@ -8,7 +8,7 @@ import {
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
-import { typography } from './typography';
+import { TypographyThemeOptions, typography } from './typography';
 import { Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
@@ -26,10 +26,14 @@ export type Palette = Omit<MuiPalette, 'grey'> & {
   };
 };
 
-export type Theme = Omit<MuiTheme, 'shadows' | 'palette' | 'shape'> & {
+export type Theme = Omit<
+  MuiTheme,
+  'shadows' | 'palette' | 'shape' | 'typography'
+> & {
   elevation: Elevation;
   palette: Palette;
   shape: Shape;
+  typography: TypographyThemeOptions;
 };
 
 type CreateThemeParams = {
