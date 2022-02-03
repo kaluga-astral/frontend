@@ -7,10 +7,9 @@ export type TagVariant = `${TagVariants}`;
 export type TagSize = `${TagSizes}`;
 export type TagState = `${TagStates}`;
 
-export type TagProps = Omit<MuiTagProps, 'color'> & {
+export type TagProps = Omit<MuiTagProps, 'color' | 'variant'> & {
   color?: TagColor;
   variant?: TagVariant;
   size?: TagSize;
-  label: 'string';
   rounded?: boolean;
 };
