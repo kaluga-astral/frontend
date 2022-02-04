@@ -2,9 +2,7 @@
   "name": "@astral/commander",
   "version": "1.0.0",
   "private": true,
-  "bin": {
-    "commander": "./index.js"
-  },
+  "bin": "./index.js",
   "dependencies": {
     "recursive-copy": "^2.0.10",
     "shelljs": "^0.8.4"

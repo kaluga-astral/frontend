@@ -1,7 +1,10 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
+// Автогенерация
+// eslint-disable-next-line import/extensions
 import * as themedIcons from './generated-themed-icons';
+// eslint-disable-next-line import/extensions
 import * as customIcons from './generated-custom-icons';
 
 const icons = { ...themedIcons, ...customIcons };
