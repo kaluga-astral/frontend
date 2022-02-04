@@ -3,7 +3,7 @@ import { Chip } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { TagColors, TagStates, TagVariants } from './constants';
+import { TagColors, TagStates } from './constants';
 import { TagColor, TagProps, TagState, TagVariant } from './types';
 
 type StyledTagProps = Omit<TagProps, 'color'> & {
@@ -33,33 +33,27 @@ const getBgColor = ({
   if (customColor === TagColors.GREY) {
     return theme.palette.grey[100];
   }
-  if (customVariant === TagVariants.CONTAINED) {
-    if (customColor === TagColors.PRIMARY) {
-      return theme.palette.primary.main;
-    }
-    if (customColor === TagColors.ERROR) {
-      return theme.palette.red[800];
-    }
-    if (customColor === TagColors.SUCCESS) {
-      return theme.palette.green[800];
-    }
-    if (customColor === TagColors.WARNING) {
-      return theme.palette.yellow[800];
-    }
+  const backgroundColorVariants = {
+    contained: {
+      primary: theme.palette.primary.main,
+      error: theme.palette.red[800],
+      success: theme.palette.green[800],
+      warning: theme.palette.yellow[800],
+      default: theme.palette.background.element,
+    },
+    light: {
+      primary: theme.palette.primary[100],
+      error: theme.palette.red[100],
+      success: theme.palette.green[100],
+      warning: theme.palette.yellow[100],
+      default: theme.palette.background.element,
+    },
+  };
+  if (!customVariant) {
+    return backgroundColorVariants.contained.primary;
   }
-  if (customVariant === TagVariants.LIGHT) {
-    if (customColor === TagColors.PRIMARY) {
-      return theme.palette.primary[100];
-    }
-    if (customColor === TagColors.ERROR) {
-      return theme.palette.red[100];
-    }
-    if (customColor === TagColors.SUCCESS) {
-      return theme.palette.green[100];
-    }
-    if (customColor === TagColors.WARNING) {
-      return theme.palette.yellow[100];
-    }
+  if (customVariant && customColor) {
+    return backgroundColorVariants[customVariant][customColor];
   }
 
   return theme.palette.background.element;
@@ -70,34 +64,27 @@ const getColor = ({
   customColor,
   customVariant,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
-  if (customVariant === TagVariants.CONTAINED) {
-    if (customColor === TagColors.PRIMARY) {
-      return theme.palette.primary.contrastText;
-    }
-    if (customColor === TagColors.ERROR) {
-      return theme.palette.error.contrastText;
-    }
-
-    if (customColor === TagColors.WARNING) {
-      return theme.palette.warning.contrastText;
-    }
-    if (customColor === TagColors.SUCCESS) {
-      return theme.palette.success.contrastText;
-    }
+  const textColorVariants = {
+    contained: {
+      primary: theme.palette.primary.contrastText,
+      error: theme.palette.error.contrastText,
+      success: theme.palette.warning.contrastText,
+      warning: theme.palette.success.contrastText,
+      default: theme.palette.text.primary,
+    },
+    light: {
+      primary: theme.palette.primary.main,
+      error: theme.palette.red[800],
+      success: theme.palette.green[800],
+      warning: theme.palette.yellow[800],
+      default: theme.palette.text.primary,
+    },
+  };
+  if (!customColor) {
+    return textColorVariants.contained.primary;
   }
-  if (customVariant === TagVariants.LIGHT) {
-    if (customColor === TagColors.PRIMARY) {
-      return theme.palette.primary.main;
-    }
-    if (customColor === TagColors.ERROR) {
-      return theme.palette.red[800];
-    }
-    if (customColor === TagColors.WARNING) {
-      return theme.palette.yellow[800];
-    }
-    if (customColor === TagColors.SUCCESS) {
-      return theme.palette.green[800];
-    }
+  if (customVariant && customColor) {
+    return textColorVariants[customVariant][customColor];
   }
 
   return theme.palette.text.primary;
@@ -116,15 +103,15 @@ const getBgColorDeleteIcon = ({
   theme,
   iconState,
 }: StyledTagThemeProps & { iconState: TagState }): string => {
-  if (iconState === TagStates.DEFAULT) {
-    return 'transparent';
+  const bgColorDeleteIcon = {
+    default: 'transparent',
+    hover: theme.palette.red[100],
+    active: theme.palette.red[200],
+  };
+  if (iconState) {
+    return bgColorDeleteIcon[iconState];
   }
-  if (iconState === TagStates.HOVER) {
-    return theme.palette.red[100];
-  }
-  if (iconState === TagStates.ACTIVE) {
-    return theme.palette.red[200];
-  }
+
   return 'transparent';
 };
 
