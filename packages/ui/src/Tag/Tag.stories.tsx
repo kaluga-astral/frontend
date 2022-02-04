@@ -3,7 +3,7 @@ import { Story } from '@storybook/react';
 
 import { IconButton } from '../IconButton';
 
-import Tag from './Tag';
+import { Tag } from './Tag';
 
 export default {
   title: 'Components/Tag',
