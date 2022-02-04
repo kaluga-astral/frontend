@@ -9,25 +9,24 @@ export const StyledRadio = styled(Radio)<RadioProps>`
   color: ${({ theme }) => theme.palette.background.default};
 
   &:hover {
-    color: ${({ theme }) => theme.palette.grey[100]};
-  }
-
-  &:not(Mui-disabled, .Mui-checked, .MuiRadio-indeterminate) > svg > rect {
-    stroke: ${({ theme }) => theme.palette.grey[300]};
-  }
-
-  &.Mui-disabled:not(.Mui-checked, .MuiRadio-indeterminate) {
-    color: ${({ theme }) => theme.palette.grey[200]};
-    & > svg > rect {
-      stroke: currentColor;
+    & > svg {
+      color: ${({ theme }) => theme.palette.grey[200]};
     }
   }
 
-  &.Mui-checked,
-  &.MuiRadio-indeterminate {
+  &.Mui-disabled:not(.Mui-checked) {
+    color: ${({ theme }) => theme.palette.grey[200]};
+    & > svg {
+      color: ${({ theme }) => theme.palette.grey[300]};
+    }
+  }
+
+  &.Mui-checked {
     color: ${({ theme }) => theme.palette.primary.main};
     &:hover {
-      color: ${({ theme }) => theme.palette.primary[700]};
+      & > svg {
+        color: ${({ theme }) => theme.palette.primary[700]};
+      }
     }
     &.Mui-disabled {
       color: ${({ theme }) => theme.palette.grey[500]};
