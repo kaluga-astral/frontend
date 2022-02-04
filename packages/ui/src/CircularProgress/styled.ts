@@ -3,19 +3,11 @@ import styled from '@emotion/styled';
 
 import { Theme } from '../theme';
 
-import { CircularProgressColors, CircularProgressSizes } from './constants';
-import {
-  CircularProgressColor,
-  CircularProgressProps,
-  CircularProgressSize,
-} from './types';
+import { CircularProgressColors } from './constants';
+import { CircularProgressColor, CircularProgressProps } from './types';
 
-type StyledCircularProgressProps = Omit<
-  CircularProgressProps,
-  'color' | 'size'
-> & {
+type StyledCircularProgressProps = Omit<CircularProgressProps, 'color'> & {
   customColor?: CircularProgressColor;
-  customSize?: CircularProgressSize;
 };
 
 type StyledCircularProgressThemeProps = StyledCircularProgressProps & {
@@ -32,18 +24,8 @@ const getColor = ({
   return theme.palette.primary.contrastText;
 };
 
-const getCircularProgressSize = ({
-  customSize,
-}: StyledCircularProgressThemeProps): string => {
-  if (customSize === CircularProgressSizes.SMALL) return '16px';
-
-  return '24px';
-};
-
 export const StyledCircularProgress = styled(CircularProgress, {
-  shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'customSize',
+  shouldForwardProp: (prop) => prop !== 'customColor',
 })<StyledCircularProgressProps>`
-  width: ${(props) => getCircularProgressSize(props)} !important;
-  height: ${(props) => getCircularProgressSize(props)} !important;
   color: ${(props) => getColor(props)};
 `;

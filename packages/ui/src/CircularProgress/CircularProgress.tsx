@@ -7,7 +7,11 @@ export const CircularProgress = ({
   ...props
 }: CircularProgressProps) => {
   return (
-    <StyledCircularProgress {...props} customSize={size} customColor={color} />
+    <StyledCircularProgress
+      {...props}
+      size={size === 'small' ? 16 : 24}
+      customColor={color}
+    />
   );
 };
 
