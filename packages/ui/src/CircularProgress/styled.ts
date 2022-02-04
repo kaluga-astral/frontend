@@ -43,7 +43,7 @@ const getCircularProgressSize = ({
 export const StyledCircularProgress = styled(CircularProgress, {
   shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'customSize',
 })<StyledCircularProgressProps>`
-  width: ${(props) => getCircularProgressSize(props)} !important;
-  height: ${(props) => getCircularProgressSize(props)} !important;
+  width: ${(props) => getCircularProgressSize(props)};
+  height: ${(props) => getCircularProgressSize(props)};
   color: ${(props) => getColor(props)};
 `;
