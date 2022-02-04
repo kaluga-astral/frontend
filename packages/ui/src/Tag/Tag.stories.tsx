@@ -1,8 +1,6 @@
 import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { IconButton } from '../IconButton';
-
 import { Tag } from './Tag';
 
 export default {
@@ -637,7 +635,7 @@ export const ShowcaseColor: Story = () => (
         }}
       />
       <Tag
-        icon={<IconButton variant="light">{svgStartIcon}</IconButton>}
+        icon={svgStartIcon}
         size="small"
         color="grey"
         label="Тэг"
@@ -647,7 +645,7 @@ export const ShowcaseColor: Story = () => (
         }}
       />
       <Tag
-        icon={<IconButton variant="light">{svgStartIcon}</IconButton>}
+        icon={svgStartIcon}
         size="small"
         color="grey"
         label="Тэг"
@@ -682,19 +680,8 @@ export const ShowcaseColor: Story = () => (
     <Stack direction="row" gap={2}>
       <Tag size="small" color="grey" label="Тэг" />
       <Tag size="small" color="grey" label="Тэг" rounded />
-      <Tag
-        icon={<IconButton variant="light">{svgStartIcon}</IconButton>}
-        size="small"
-        color="grey"
-        label="Тэг"
-      />
-      <Tag
-        icon={<IconButton variant="light">{svgStartIcon}</IconButton>}
-        size="small"
-        color="grey"
-        label="Тэг"
-        rounded
-      />
+      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" />
+      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" rounded />
       <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" />
       <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" rounded />
     </Stack>
