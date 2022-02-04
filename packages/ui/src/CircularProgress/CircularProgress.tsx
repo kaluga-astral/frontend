@@ -1,4 +1,3 @@
-import { CircularProgressSizes } from './constants';
 import { StyledCircularProgress } from './styled';
 import { CircularProgressProps } from './types';
 
@@ -10,7 +9,7 @@ export const CircularProgress = ({
   return (
     <StyledCircularProgress
       {...props}
-      size={size === CircularProgressSizes.SMALL ? 16 : 24}
+      size={size === 'small' ? 16 : 24}
       customColor={color}
     />
   );
