@@ -52,3 +52,6 @@ Default.storyName = 'Icons';
 Default.args = {
   color: 'primary',
 };
+Default.parameters = {
+  options: { showPanel: false },
+};
