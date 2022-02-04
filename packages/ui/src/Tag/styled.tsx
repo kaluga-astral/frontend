@@ -6,24 +6,21 @@ import { Theme } from '../theme';
 import { TagColors, TagStates, TagVariants } from './constants';
 import { TagColor, TagProps, TagState, TagVariant } from './types';
 
-interface StyledTagProps extends Omit<TagProps, 'color'> {
+type StyledTagProps = Omit<TagProps, 'color'> & {
   customColor?: TagColor;
   customVariant?: TagVariant;
-  rounded: boolean;
-}
+  rounded?: boolean;
+};
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
 
-const getShape = ({
-  theme,
-  rounded,
-}: StyledTagThemeProps & { rounded: boolean }) => {
+const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
   if (rounded) return '100px';
   return theme.shape.small;
 };
 const getBorderRadiusDeleteIcon = ({
   rounded,
-}: StyledTagThemeProps & { rounded: boolean }) => {
+}: StyledTagThemeProps): string => {
   if (rounded) return '100px';
   return '0 3px 3px 0';
 };
@@ -109,7 +106,7 @@ const getColor = ({
 const getTagLabelPadding = ({
   theme,
   rounded,
-}: StyledTagThemeProps & { rounded: boolean }): string => {
+}: StyledTagThemeProps): string => {
   if (rounded) return theme.spacing(0, 2);
 
   return theme.spacing(0, 1);
@@ -160,7 +157,6 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
     &:active {
       color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
     }
-    // need to add SELECTED state
   }
   .MuiChip-deleteIcon {
     margin: 0;
