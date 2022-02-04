@@ -17,7 +17,7 @@ const iconsAsComponents = Object.keys(icons).map((iconName) => {
 });
 
 export default {
-  title: 'Components/icons',
+  title: 'Components/Icons',
 };
 
 const Template: Story = (args: SvgIconProps) => {
@@ -32,10 +32,14 @@ const Template: Story = (args: SvgIconProps) => {
               flexDirection: 'column',
               alignItems: 'center',
               margin: '30px',
+              width: '100px',
+              height: '100px',
             }}
           >
             <Component {...args} />
-            {name}
+            <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>
+              {name}
+            </span>
           </div>
         );
       })}
@@ -44,7 +48,7 @@ const Template: Story = (args: SvgIconProps) => {
 };
 
 export const Default = Template.bind({});
-
+Default.storyName = 'Icons';
 Default.args = {
   color: 'primary',
 };
