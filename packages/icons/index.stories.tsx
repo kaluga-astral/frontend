@@ -1,7 +1,10 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
+// Автогенерация
+// eslint-disable-next-line import/extensions
 import * as themedIcons from './generated-themed-icons';
+// eslint-disable-next-line import/extensions
 import * as customIcons from './generated-custom-icons';
 
 const icons = { ...themedIcons, ...customIcons };
@@ -14,7 +17,7 @@ const iconsAsComponents = Object.keys(icons).map((iconName) => {
 });
 
 export default {
-  title: 'Components/icons',
+  title: 'Components/Icons',
 };
 
 const Template: Story = (args: SvgIconProps) => {
@@ -29,10 +32,14 @@ const Template: Story = (args: SvgIconProps) => {
               flexDirection: 'column',
               alignItems: 'center',
               margin: '30px',
+              width: '100px',
+              height: '100px',
             }}
           >
             <Component {...args} />
-            {name}
+            <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>
+              {name}
+            </span>
           </div>
         );
       })}
@@ -41,7 +48,10 @@ const Template: Story = (args: SvgIconProps) => {
 };
 
 export const Default = Template.bind({});
-
+Default.storyName = 'Icons';
 Default.args = {
   color: 'primary',
+};
+Default.parameters = {
+  options: { showPanel: false },
 };
