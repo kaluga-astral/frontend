@@ -1,6 +1,5 @@
-import { MenuItemProps } from './types';
-import { StyledMenuItem } from './styled';
+import MuiMenuItem, { MenuItemProps } from '@mui/material/MenuItem';
 
 export const MenuItem = ({ children, ...props }: MenuItemProps) => {
-  return <StyledMenuItem {...props}>{children}</StyledMenuItem>;
+  return <MuiMenuItem {...props}>{children}</MuiMenuItem>;
 };

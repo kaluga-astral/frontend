@@ -1,5 +1,7 @@
 import { Components } from '@mui/material';
 
+import type { Theme } from './baseTheme';
+
 export type FontsUrls = {
   bold: {
     woff: string;
@@ -78,8 +80,44 @@ const MuiCheckbox: Components['MuiCheckbox'] = {
   },
 };
 
-export const getComponents = (fontUrls: FontsUrls): Components => ({
+const MuiMenu: Components<Theme>['MuiMenu'] = {
+  defaultProps: {
+    autoFocus: false,
+  },
+  styleOverrides: {
+    paper({ theme }: { theme: any }) {
+      return {
+        marginTop: theme.spacing(2),
+        '&.MuiPaper-root': {
+          borderRadius: theme.shape.small,
+          boxShadow: theme.elevation[200],
+        },
+      };
+    },
+    list({ theme }: { theme: any }) {
+      return {
+        padding: theme.spacing(1, 0),
+      };
+    },
+  },
+};
+
+const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
+  styleOverrides: {
+    root({ theme }: { theme: any }) {
+      return {
+        '&:hover': {
+          backgroundColor: theme.palette.background.elementHover,
+        },
+      };
+    },
+  },
+};
+
+export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
   MuiCheckbox,
+  MuiMenu,
+  MuiMenuItem,
 });
