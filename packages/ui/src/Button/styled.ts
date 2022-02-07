@@ -12,6 +12,7 @@ const getProgressColor = ({
   theme,
   variant,
 }: StyledButtonThemeProps): string => {
+  console.log(theme);
   if (variant === ButtonVariants.CONTAINED)
     return theme.palette.primary.contrastText;
 
