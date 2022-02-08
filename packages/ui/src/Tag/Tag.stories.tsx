@@ -691,7 +691,12 @@ export const ShowcaseColor: Story = () => (
 ShowcaseColor.parameters = { options: { showPanel: false } };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  color: 'grey',
+  label: 'Тэг',
+  deleteIcon: svgDeleteIcon,
+  onDelete: () => console.log(1),
+};
 Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

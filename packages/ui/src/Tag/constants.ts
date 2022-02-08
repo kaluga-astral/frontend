@@ -21,5 +21,4 @@ export enum TagStates {
   DEFAULT = 'default',
   HOVER = 'hover',
   ACTIVE = 'active',
-  SELECTED = 'selected',
 }
