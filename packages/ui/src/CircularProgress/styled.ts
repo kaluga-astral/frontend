@@ -6,7 +6,10 @@ import { Theme } from '../theme';
 import { CircularProgressColors } from './constants';
 import { CircularProgressColor, CircularProgressProps } from './types';
 
-type StyledCircularProgressProps = Omit<CircularProgressProps, 'color'> & {
+type StyledCircularProgressProps = Omit<
+  CircularProgressProps,
+  'color' | 'size'
+> & {
   customColor?: CircularProgressColor;
 };
 
