@@ -72,14 +72,7 @@ const getMuiTypography = (): Components['MuiTypography'] => ({
   },
 });
 
-const MuiCheckbox: Components['MuiCheckbox'] = {
-  defaultProps: {
-    disableRipple: true,
-  },
-};
-
 export const getComponents = (fontUrls: FontsUrls): Components => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography: getMuiTypography(),
-  MuiCheckbox,
 });
