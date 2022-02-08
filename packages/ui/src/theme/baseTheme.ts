@@ -45,7 +45,7 @@ export const createTheme = ({
   options,
   fontsUrls,
 }: CreateThemeParams) => {
-  const themeOptions: ThemeOptions = {
+  const themeOptions = {
     typography,
     spacing: SPACING,
     palette: getPalette(brand),
