@@ -19,10 +19,11 @@ const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
   return theme.shape.small;
 };
 const getBorderRadiusDeleteIcon = ({
+  theme,
   rounded,
 }: StyledTagThemeProps): string => {
   if (rounded) return '100px';
-  return '0 3px 3px 0';
+  return `0  ${theme.shape.small}  ${theme.shape.small} 0`;
 };
 
 const getBgColor = ({
