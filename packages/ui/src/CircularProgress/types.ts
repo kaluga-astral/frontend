@@ -4,6 +4,9 @@ import { CircularProgressColors } from './constants';
 
 export type CircularProgressColor = `${CircularProgressColors}`;
 
-export type CircularProgressProps = Omit<MuiCircularProgressProps, 'color'> & {
+export type CircularProgressProps = Omit<
+  MuiCircularProgressProps,
+  'color' | 'size'
+> & {
   color?: CircularProgressColor;
 };
