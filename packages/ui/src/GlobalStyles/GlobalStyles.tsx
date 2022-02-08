@@ -1,7 +1,18 @@
+import { CssBaseline } from '@mui/material';
 import { CssBaselineProps as GlobalStylesProps } from '@mui/material/CssBaseline';
-
-import { StyledCssBaseline } from './styled';
+import { Global } from '@emotion/react';
 
 export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
-  return <StyledCssBaseline {...props}>{children}</StyledCssBaseline>;
+  return (
+    <>
+      <CssBaseline {...props}>{children}</CssBaseline>
+      <Global
+        styles={{
+          html: {
+            fontSize: theme.typography.htmlFontSize,
+          },
+        }}
+      />
+    </>
+  );
 };
