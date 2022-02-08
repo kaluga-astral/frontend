@@ -16,14 +16,30 @@ export const Default: Story = () => {
         <TextField label="With label" />
         <TextField label="With placeholder" placeholder="Placeholder value" />
         <TextField focused label="Focused" defaultValue="Default value" />
-        <TextField error label="Invalid" defaultValue="Default value" />
+        <TextField
+          error
+          label="Invalid without helperText"
+          defaultValue="Default value"
+        />
+        <TextField
+          error
+          label="Invalid"
+          defaultValue="Default value"
+          helperText="Ошибка, проверка не пройдена"
+        />
         <TextField
           error
           focused
           label="Focused invalid"
           defaultValue="Default value"
+          helperText="Ошибка, проверка не пройдена"
         />
-        <TextField success label="Validated" defaultValue="Default value" />
+        <TextField
+          success
+          label="Validated"
+          defaultValue="Default value"
+          helperText="Проверка успешно пройдена"
+        />
         <TextField disabled label="Disabled" defaultValue="Default value" />
         <TextField
           label="Read only"
