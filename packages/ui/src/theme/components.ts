@@ -85,7 +85,7 @@ const MuiMenu: Components<Theme>['MuiMenu'] = {
     autoFocus: false,
   },
   styleOverrides: {
-    paper({ theme }: { theme: any }) {
+    paper({ theme }: { theme: Theme }) {
       return {
         marginTop: theme.spacing(2),
         '&.MuiPaper-root': {
@@ -94,7 +94,7 @@ const MuiMenu: Components<Theme>['MuiMenu'] = {
         },
       };
     },
-    list({ theme }: { theme: any }) {
+    list({ theme }: { theme: Theme }) {
       return {
         padding: theme.spacing(1, 0),
       };
@@ -104,7 +104,7 @@ const MuiMenu: Components<Theme>['MuiMenu'] = {
 
 const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   styleOverrides: {
-    root({ theme }: { theme: any }) {
+    root({ theme }: { theme: Theme }) {
       return {
         '&:hover': {
           backgroundColor: theme.palette.background.elementHover,
