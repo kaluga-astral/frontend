@@ -7,7 +7,7 @@ export default {
   component: GlobalStyles,
 };
 
-const Template: Story<any> = (args) => (
+const Template: Story = (args) => (
   <GlobalStyles {...args}>
     Съешь же ещё этих мягких французских булок да выпей чаю
   </GlobalStyles>
@@ -15,7 +15,7 @@ const Template: Story<any> = (args) => (
 
 export const Showcase = Template.bind({});
 Showcase.args = {
-  enableColorScheme: true,
+  enableColorScheme: false,
 };
 Showcase.parameters = {
   options: { showPanel: true },
