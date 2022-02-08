@@ -10,7 +10,8 @@
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
     "prebuild": "npx rimraf ./lib",
-    "build": "npm run svgr && npx commander build",
+    "build": "yarn prebuild && npm run svgr && node ../../commander build",
+    "publish": "yarn build && node ../../commander publish",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "peerDependencies": {
