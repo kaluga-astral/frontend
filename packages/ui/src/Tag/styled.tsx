@@ -100,7 +100,7 @@ const getTagLabelPadding = ({
   return theme.spacing(0, 1);
 };
 
-const getBgColorDeleteIcon = ({
+const getDeleteIconBgColor = ({
   theme,
   iconState,
 }: StyledTagThemeProps & { iconState: TagState }): string => {
@@ -153,15 +153,15 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
     border-radius: ${(props) => getBorderRadiusDeleteIcon({ ...props })};
 
     background: ${(props) =>
-      getBgColorDeleteIcon({ ...props, iconState: TagStates.DEFAULT })};
+      getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
 
     &:hover {
       background: ${(props) =>
-        getBgColorDeleteIcon({ ...props, iconState: TagStates.HOVER })};
+        getDeleteIconBgColor({ ...props, iconState: TagStates.HOVER })};
     }
     &:active {
       background: ${(props) =>
-        getBgColorDeleteIcon({ ...props, iconState: TagStates.ACTIVE })};
+        getDeleteIconBgColor({ ...props, iconState: TagStates.ACTIVE })};
     }
   }
   .MuiChip-avatar {
