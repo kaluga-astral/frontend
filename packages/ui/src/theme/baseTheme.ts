@@ -40,11 +40,8 @@ type CreateThemeParams = {
   fontsUrls: FontsUrls;
 };
 
-export const createTheme = ({
-  brand,
-  options,
-  fontsUrls,
-}: CreateThemeParams) => {
+export const createTheme = (params: CreateThemeParams) => {
+  const { brand, options, fontsUrls } = params;
   const themeOptions = {
     typography,
     spacing: SPACING,

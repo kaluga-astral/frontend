@@ -67,7 +67,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@astral/icons@workspace:packages/icons":
+"@astral/icons@^1.0.0, @astral/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@astral/icons@workspace:packages/icons"
   dependencies:
@@ -83,6 +83,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@astral/ui@workspace:packages/ui"
   dependencies:
+    "@astral/icons": ^1.0.0
     "@emotion/react": 11.5.0
     "@emotion/styled": 11.3.0
     "@mui/base": 5.0.0-alpha.66
