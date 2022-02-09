@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib",
+    "prebuild": "npx rimraf ./lib && yarn workspace @astral/icons build",
     "build": "yarn prebuild && node ../../commander build",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
