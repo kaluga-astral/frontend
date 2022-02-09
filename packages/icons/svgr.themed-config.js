@@ -13,7 +13,7 @@ module.exports = {
           },
         },
       },
-      { name: 'removeAttrs', params: { attrs: 'fill|stroke' } },
+      { name: 'removeAttrs', params: { attrs: '^fill$|^stroke$' } },
     ],
   },
   template: require('./svgr.template'),
