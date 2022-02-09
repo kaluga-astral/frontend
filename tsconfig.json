@@ -24,5 +24,6 @@
     "isolatedModules": true,
     "noEmit": false,
     "noFallthroughCasesInSwitch": true
-  }
+  },
+  "exclude": ["commander"]
 }
