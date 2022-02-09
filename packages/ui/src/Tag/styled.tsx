@@ -18,7 +18,7 @@ const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
   if (rounded) return '100px';
   return theme.shape.small;
 };
-const getBorderRadiusDeleteIcon = ({
+const getDeleteIconBorderRadius = ({
   theme,
   rounded,
 }: StyledTagThemeProps): string => {
@@ -150,7 +150,7 @@ export const StyledTag = styled(Chip)<StyledTagProps>`
     margin: 0;
     width: 20px;
     height: 20px;
-    border-radius: ${(props) => getBorderRadiusDeleteIcon({ ...props })};
+    border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
 
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
