@@ -6,5 +6,4 @@ export enum CircularProgressColors {
 export enum CircularProgressSizes {
   SMALL = 'small',
   MEDIUM = 'medium',
-  NUMBER = 'number',
 }

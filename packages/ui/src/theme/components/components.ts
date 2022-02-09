@@ -63,6 +63,46 @@ const getMuiCssBaseline = (
   `,
 });
 
+const MuiCheckbox: Components['MuiCheckbox'] = {
+  defaultProps: {
+    disableRipple: true,
+  },
+};
+
+const MuiMenu: Components<Theme>['MuiMenu'] = {
+  defaultProps: {
+    autoFocus: false,
+  },
+  styleOverrides: {
+    paper({ theme }: { theme: Theme }) {
+      return {
+        marginTop: theme.spacing(2),
+        '&.MuiPaper-root': {
+          borderRadius: theme.shape.small,
+          boxShadow: theme.elevation[200],
+        },
+      };
+    },
+    list({ theme }: { theme: Theme }) {
+      return {
+        padding: theme.spacing(1, 0),
+      };
+    },
+  },
+};
+
+const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
+  styleOverrides: {
+    root({ theme }: { theme: Theme }) {
+      return {
+        '&:hover': {
+          backgroundColor: theme.palette.background.elementHover,
+        },
+      };
+    },
+  },
+};
+
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography,
@@ -71,4 +111,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiOutlinedInput,
   MuiFormLabel,
   MuiFormHelperText,
+  MuiCheckbox,
+  MuiMenu,
+  MuiMenuItem,
 });
