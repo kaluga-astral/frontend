@@ -1,4 +1,4 @@
-import { SvgIconProps } from '@mui/material';
+import { Grid, SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
 // Автогенерация
@@ -7,42 +7,87 @@ import * as themedIcons from './generated-themed-icons';
 // eslint-disable-next-line import/extensions
 import * as customIcons from './generated-custom-icons';
 
-const icons = { ...themedIcons, ...customIcons };
+const iconsObject = { ...themedIcons, ...customIcons };
+const names = Object.keys(iconsObject);
 
-const iconsAsComponents = Object.keys(icons).map((iconName) => {
-  return {
-    name: iconName,
-    Component: icons[iconName] as React.FunctionComponent<SvgIconProps>,
-  };
-});
+const getIconsByName = (name) => {
+  return names
+    .filter((iconName) => iconName.includes(name))
+    .map((iconName) => {
+      return {
+        name: iconName,
+        Component: iconsObject[
+          iconName
+        ] as React.FunctionComponent<SvgIconProps>[],
+      };
+    });
+};
+
+const [fillMdIcons, fillSmIcons, outlineMdIcons, outlineSmIcons] = [
+  getIconsByName('FillMd'),
+  getIconsByName('FillSm'),
+  getIconsByName('OutlineMd'),
+  getIconsByName('OutlineSm'),
+];
 
 export default {
   title: 'Components/Icons',
 };
 
+const Icon = ({ component: Component, name, ...props }) => (
+  <div
+    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+  >
+    <Component {...props} />
+    <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>{name}</span>
+  </div>
+);
+
 const Template: Story = (args: SvgIconProps) => {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {iconsAsComponents.map(({ name, Component }) => {
-        return (
-          <div
-            key={name}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              margin: '30px',
-              width: '100px',
-              height: '100px',
-            }}
-          >
-            <Component {...args} />
-            <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>
-              {name}
-            </span>
-          </div>
-        );
-      })}
+    <div
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <Grid key="fillmd" container spacing={4} m={4}>
+        <Grid item xs={12}>
+          <h2 style={{ textAlign: 'center' }}>Fill Md</h2>
+        </Grid>
+        {fillMdIcons.map(({ name, Component }) => (
+          <Grid item xs={2}>
+            <Icon name={name} component={Component} {...args} />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid key="fillsm" container spacing={4} m={4}>
+        <Grid item xs={12}>
+          <h2 style={{ textAlign: 'center' }}>Fill Sm</h2>
+        </Grid>
+        {fillSmIcons.map(({ name, Component }) => (
+          <Grid item xs={2}>
+            <Icon name={name} component={Component} {...args} />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid key="outlinemd" container spacing={4} m={4}>
+        <Grid item xs={12}>
+          <h2 style={{ textAlign: 'center' }}>Outline Md</h2>
+        </Grid>
+        {outlineMdIcons.map(({ name, Component }) => (
+          <Grid item xs={2}>
+            <Icon name={name} component={Component} {...args} />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid key="outlinesm" container spacing={4} m={4}>
+        <Grid item xs={12}>
+          <h2 style={{ textAlign: 'center' }}>Outline Sm</h2>
+        </Grid>
+        {outlineSmIcons.map(({ name, Component }) => (
+          <Grid item xs={2}>
+            <Icon name={name} component={Component} {...args} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
