@@ -6,6 +6,7 @@ import { Theme } from '../theme';
 
 export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
   const theme: Theme = useTheme();
+
   return (
     <>
       <CssBaseline {...props}>{children}</CssBaseline>
