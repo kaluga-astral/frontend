@@ -25,6 +25,10 @@ export const StyledButton = styled(ButtonBase, {
   pointer-events: ${({ loading }) => (loading ? 'none' : 'inherit')};
   color: ${({ loading }) => loading && 'transparent'};
 
+  &:focus-visible {
+    color: ${({ loading }) => loading && 'transparent'};
+  }
+
   > span:first-of-type {
     display: inherit;
     margin-right: ${({ theme }) => theme.spacing(2)};

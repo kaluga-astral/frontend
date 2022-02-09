@@ -18,6 +18,7 @@ export enum ButtonSizes {
 }
 
 export enum ButtonStates {
+  FOCUS_VISIBLE = 'focusVisible',
   DEFAULT = 'default',
   ACTIVE = 'active',
   FOCUS = 'focus',
