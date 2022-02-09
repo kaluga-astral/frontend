@@ -15,7 +15,7 @@ import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 import { Shape, shape } from './shape';
 
-export type Palette = Omit<MuiPalette, 'grey'> & {
+export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
   green: Color;
   yellow: Color;
@@ -40,12 +40,9 @@ type CreateThemeParams = {
   fontsUrls: FontsUrls;
 };
 
-export const createTheme = ({
-  brand,
-  options,
-  fontsUrls,
-}: CreateThemeParams) => {
-  const themeOptions: ThemeOptions = {
+export const createTheme = (params: CreateThemeParams) => {
+  const { brand, options, fontsUrls } = params;
+  const themeOptions = {
     typography,
     spacing: SPACING,
     palette: getPalette(brand),
