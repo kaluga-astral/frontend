@@ -1,25 +1,7 @@
 import { Fragment, useMemo } from 'react';
-import { ErrorFillSm, SuccessFillSm } from '@astral/icons';
-
-import { styled } from '../styles';
 
 import { FormHelperTextProps } from './types';
-
-const styles = `
-    display: inline-flex;
-    alignitems: center;
-    justify-content: center;
-    width: 16px;
-    vertical-align: middle;
-  `;
-
-const SuccessIcon = styled(SuccessFillSm)(styles);
-
-const ErrorIcon = styled(ErrorFillSm)(styles);
-
-const Content = styled.span`
-  vertical-align: middle;
-`;
+import { Content, ErrorIcon, SuccessIcon } from './styled';
 
 export const FormHelperText: React.FC<FormHelperTextProps> = (props) => {
   const { success, error, children } = props;
@@ -35,12 +17,16 @@ export const FormHelperText: React.FC<FormHelperTextProps> = (props) => {
     return null;
   }, [success, error]);
 
-  return (
-    <Fragment>
-      {Icon}
-      <Content>{children}</Content>
-    </Fragment>
-  );
+  if (children) {
+    return (
+      <Fragment>
+        {Icon}
+        <Content>{children}</Content>
+      </Fragment>
+    );
+  }
+
+  return null;
 };
 
 export default FormHelperText;
