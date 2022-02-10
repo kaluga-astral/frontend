@@ -1,5 +1,6 @@
 import { Radio } from '@mui/material';
-import styled from '@emotion/styled';
+
+import { styled } from '../styles';
 
 import { RadioProps } from './types';
 
@@ -9,6 +10,7 @@ export const StyledRadio = styled(Radio)<RadioProps>`
   color: ${({ theme }) => theme.palette.background.default};
 
   &:hover {
+    background: none;
     & > svg {
       color: ${({ theme }) => theme.palette.grey[200]};
     }

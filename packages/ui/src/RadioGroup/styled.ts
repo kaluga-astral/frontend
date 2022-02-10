@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
 import { RadioGroup, RadioGroupProps } from '@mui/material';
+
+import { styled } from '../styles';
 
 export const StyledRadioGroup = styled(RadioGroup)<RadioGroupProps>``;
