@@ -19,7 +19,7 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
       size === 'small'
         ? theme.typography.pxToRem(16)
         : theme.typography.pxToRem(20)};
-    font-weight: 400;
+    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
   }
 
   & .MuiTooltip-arrow {
