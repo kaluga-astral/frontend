@@ -66,16 +66,12 @@ export const Showcase: Story = () => (
 
     <Typography variant="h5">Right menu tooltip</Typography>
     <Stack gap={3}>
-      <Stack gap={1} direction="row" alignItems="center">
-        <Tooltip placement="right" title="Элемент 1">
-          <IconButton>{svg}</IconButton>
-        </Tooltip>
-      </Stack>
-      <Stack gap={1} direction="row" alignItems="center">
-        <Tooltip placement="right" title="Элемент 2">
-          <IconButton>{svg}</IconButton>
-        </Tooltip>
-      </Stack>
+      <Tooltip placement="right" title="Элемент 1">
+        <IconButton>{svg}</IconButton>
+      </Tooltip>
+      <Tooltip placement="right" title="Элемент 2">
+        <IconButton>{svg}</IconButton>
+      </Tooltip>
     </Stack>
   </Stack>
 );
