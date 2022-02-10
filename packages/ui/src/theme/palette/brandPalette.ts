@@ -31,7 +31,7 @@ const edoPalette: BrandColors = {
   900: '#5D3FD4',
   800: '#6746EB',
   700: '#8566FF',
-  600: '#9D85FF',
+  600: '#9075FF',
   500: '#9D85FF',
   400: '#B29EFF',
   300: '#C2B2FF',
