@@ -38,29 +38,25 @@ export const getColor = ({
         default: theme.palette.red['900'],
         hover: theme.palette.red['900'],
         active: theme.palette.red['900'],
-        focus: theme.palette.primary.contrastText,
-        focusVisible: theme.palette.red['900'],
+        focus: theme.palette.red['900'],
       },
       success: {
         default: theme.palette.green['900'],
         hover: theme.palette.green['900'],
         active: theme.palette.green['900'],
-        focus: theme.palette.primary.contrastText,
-        focusVisible: theme.palette.green['900'],
+        focus: theme.palette.green['900'],
       },
       primary: {
         default: theme.palette.grey['900'],
         hover: theme.palette.grey['900'],
         active: theme.palette.primary['800'],
-        focus: theme.palette.primary.contrastText,
-        focusVisible: theme.palette.grey['900'],
+        focus: theme.palette.grey['900'],
       },
       warning: {
         default: theme.palette.yellow['900'],
         hover: theme.palette.yellow['900'],
         active: theme.palette.yellow['900'],
-        focus: theme.palette.primary.contrastText,
-        focusVisible: theme.palette.yellow['900'],
+        focus: theme.palette.yellow['900'],
       },
     },
     contained: theme.palette.primary.contrastText,
@@ -68,15 +64,13 @@ export const getColor = ({
       default: theme.palette.grey['900'],
       hover: theme.palette.grey['900'],
       active: theme.palette.primary['800'],
-      focus: theme.palette.primary.contrastText,
-      focusVisible: theme.palette.grey['900'],
+      focus: theme.palette.grey['900'],
     },
     link: {
       default: theme.palette.primary['800'],
       hover: theme.palette.primary['700'],
       active: theme.palette.primary['900'],
-      focus: theme.palette.grey['900'],
-      focusVisible: theme.palette.primary['800'],
+      focus: theme.palette.primary['800'],
     },
   };
 
@@ -107,29 +101,25 @@ export const getBgColor = ({
         default: theme.palette.red['100'],
         hover: theme.palette.red['200'],
         active: theme.palette.red['100'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.red['100'],
+        focus: theme.palette.red['100'],
       },
       success: {
         default: theme.palette.green['100'],
         hover: theme.palette.green['200'],
         active: theme.palette.green['100'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.green['100'],
+        focus: theme.palette.green['100'],
       },
       primary: {
         default: theme.palette.grey['100'],
         hover: theme.palette.grey['200'],
         active: theme.palette.primary['100'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.grey['100'],
+        focus: theme.palette.grey['100'],
       },
       warning: {
         default: theme.palette.yellow['100'],
         hover: theme.palette.yellow['200'],
         active: theme.palette.yellow['100'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.yellow['100'],
+        focus: theme.palette.yellow['100'],
       },
     },
     contained: {
@@ -137,37 +127,32 @@ export const getBgColor = ({
         default: theme.palette.red['800'],
         hover: theme.palette.red['700'],
         active: theme.palette.red['900'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.red['800'],
+        focus: theme.palette.red['800'],
       },
       success: {
         default: theme.palette.green['800'],
         hover: theme.palette.green['700'],
         active: theme.palette.green['900'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.green['800'],
+        focus: theme.palette.green['800'],
       },
       primary: {
         default: theme.palette.primary['800'],
         hover: theme.palette.primary['700'],
         active: theme.palette.primary['900'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.primary['800'],
+        focus: theme.palette.primary['800'],
       },
       warning: {
         default: theme.palette.yellow['800'],
         hover: theme.palette.yellow['700'],
         active: theme.palette.yellow['900'],
-        focus: theme.palette.grey['900'],
-        focusVisible: theme.palette.yellow['800'],
+        focus: theme.palette.yellow['800'],
       },
     },
     text: {
       default: 'transparent',
       hover: theme.palette.grey['200'],
       active: theme.palette.primary['100'],
-      focus: theme.palette.grey['900'],
-      focusVisible: 'transparent',
+      focus: 'transparent',
     },
     link: 'transparent',
   };
@@ -251,14 +236,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
       getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.FOCUS })};
-  }
-
-  &:focus-visible {
-    background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.FOCUS_VISIBLE })};
-    color: ${(props) =>
-      getColor({ ...props, buttonState: ButtonStates.FOCUS_VISIBLE })};
-    outline-color: ${({ theme }) => theme.palette.primary['400']};
+    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:active {
@@ -266,6 +244,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
       getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+    outline: none;
   }
 
   &.${buttonUnstyledClasses.disabled} {
