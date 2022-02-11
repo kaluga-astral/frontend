@@ -2,8 +2,7 @@ import { Global } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { CssBaselineProps as GlobalStylesProps } from '@mui/material/CssBaseline';
 
-import { Theme } from '../theme';
-import { useTheme } from '../theme/hooks/useTheme';
+import { Theme, useTheme } from '../theme';
 
 export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
   const theme: Theme = useTheme();
