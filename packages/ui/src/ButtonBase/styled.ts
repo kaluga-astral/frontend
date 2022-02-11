@@ -218,6 +218,11 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   align-items: center;
   justify-content: center;
   position: relative;
+  transition: ${({ theme }) =>
+    theme.transitions.create(['outline-width'], {
+      duration: theme.transitions.duration.shortest,
+      easing: theme.transitions.easing.easeIn,
+    })};
 
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
