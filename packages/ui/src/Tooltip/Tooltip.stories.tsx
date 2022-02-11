@@ -36,7 +36,7 @@ export const Showcase: Story = () => (
   <Stack gap={4}>
     <Typography variant="h5">Medium</Typography>
     <Stack gap={3} direction="row" alignItems="center">
-      <Tooltip open title="Всплывающая подсказка">
+      <Tooltip title="Всплывающая подсказка">
         <span>Текст</span>
       </Tooltip>
       <Tooltip title="Всплывающая подсказка">
