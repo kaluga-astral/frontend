@@ -40,7 +40,7 @@ const modifyPackageJSON = () => {
         },
         keywords,
         sideEffects: false,
-        main: './cjs/index.js',
+        main: './node/index.js',
         types: './esm/index.d.ts',
         module: './esm/index.js',
       },
