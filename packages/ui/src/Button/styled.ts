@@ -25,7 +25,7 @@ export const StyledButton = styled(ButtonBase, {
   pointer-events: ${({ loading }) => (loading ? 'none' : 'inherit')};
   color: ${({ loading }) => loading && 'transparent'};
 
-  &:focus-visible {
+  &:focus {
     color: ${({ loading }) => loading && 'transparent'};
   }
 
