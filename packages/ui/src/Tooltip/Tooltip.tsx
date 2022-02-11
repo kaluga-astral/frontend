@@ -4,7 +4,7 @@ import { StyledTooltip } from './styled';
 export const Tooltip = ({
   children,
   placement = 'top',
-  size = 'normal',
+  size = 'medium',
   ...props
 }: TooltipProps) => {
   return (

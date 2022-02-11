@@ -34,9 +34,9 @@ const Template: Story = (args) => {
 
 export const Showcase: Story = () => (
   <Stack gap={4}>
-    <Typography variant="h5">Normal</Typography>
+    <Typography variant="h5">Medium</Typography>
     <Stack gap={3} direction="row" alignItems="center">
-      <Tooltip title="Всплывающая подсказка">
+      <Tooltip open title="Всплывающая подсказка">
         <span>Текст</span>
       </Tooltip>
       <Tooltip title="Всплывающая подсказка">
@@ -81,7 +81,7 @@ Showcase.parameters = { options: { showPanel: false } };
 export const Default = Template.bind({});
 
 Default.args = {
-  size: 'normal',
+  size: 'medium',
 };
 
 Default.parameters = {
