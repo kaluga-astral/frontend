@@ -12,3 +12,7 @@ export * from './theme';
 export * from './styles';
 export * from './ThemeProvider';
 export * from './GlobalStyles';
+export * from './TextField';
+export * from './FormHelperText';
+export * from './Grid';
+export * from './Tag';
