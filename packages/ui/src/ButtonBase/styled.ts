@@ -3,14 +3,9 @@ import ButtonUnstyled, {
 } from '@mui/base/ButtonUnstyled';
 
 import { styled } from '../styles';
-import { Palette, Theme } from '../theme';
+import { Theme } from '../theme';
 
-import {
-  ButtonColors,
-  ButtonSizes,
-  ButtonStates,
-  ButtonVariants,
-} from './constants';
+import { ButtonSizes, ButtonStates, ButtonVariants } from './constants';
 import {
   BaseButtonProps,
   ButtonColor,
@@ -31,125 +26,67 @@ type StyledButtonBaseThemeProps = {
   theme: Theme;
 };
 
-const BACKGROUND_COLOR_VARIANTS = {
-  default: {
-    contained: '800',
-    light: '100',
-    text: '100',
-  },
-  hover: {
-    contained: '700',
-    light: '200',
-    text: '200',
-  },
-  focus: {
-    contained: '900',
-    light: '100',
-    text: '100',
-  },
-};
-
 export const getColor = ({
   theme,
   customVariant,
   customColor,
   buttonState,
 }: StyledButtonBaseThemeProps & { buttonState: ButtonState }): string => {
-  const { palette } = theme;
+  const textColorVariants = {
+    light: {
+      error: {
+        default: theme.palette.red['900'],
+        hover: theme.palette.red['900'],
+        active: theme.palette.red['900'],
+        focus: theme.palette.red['900'],
+      },
+      success: {
+        default: theme.palette.green['900'],
+        hover: theme.palette.green['900'],
+        active: theme.palette.green['900'],
+        focus: theme.palette.green['900'],
+      },
+      primary: {
+        default: theme.palette.grey['900'],
+        hover: theme.palette.grey['900'],
+        active: theme.palette.primary['800'],
+        focus: theme.palette.grey['900'],
+      },
+      warning: {
+        default: theme.palette.yellow['900'],
+        hover: theme.palette.yellow['900'],
+        active: theme.palette.yellow['900'],
+        focus: theme.palette.yellow['900'],
+      },
+    },
+    contained: theme.palette.primary.contrastText,
+    text: {
+      default: theme.palette.grey['900'],
+      hover: theme.palette.grey['900'],
+      active: theme.palette.primary['800'],
+      focus: theme.palette.grey['900'],
+    },
+    link: {
+      default: theme.palette.primary['800'],
+      hover: theme.palette.primary['700'],
+      active: theme.palette.primary['900'],
+      focus: theme.palette.primary['800'],
+    },
+  };
 
-  if (buttonState === ButtonStates.ACTIVE) {
-    if (customVariant === ButtonVariants.LINK) return palette.grey['900'];
+  if (customVariant === ButtonVariants.CONTAINED) {
+    return textColorVariants.contained;
+  }
 
-    return palette.primary.contrastText;
+  if (customVariant === ButtonVariants.LIGHT && customColor) {
+    return textColorVariants.light[customColor][buttonState];
   }
 
   if (customVariant === ButtonVariants.TEXT) {
-    if (buttonState === ButtonStates.FOCUS) return theme.palette.primary.main;
-
-    return palette.grey['900'];
+    return textColorVariants.text[buttonState];
   }
 
-  if (customVariant === ButtonVariants.CONTAINED)
-    return palette.primary.contrastText;
-
-  if (customVariant === ButtonVariants.LIGHT) {
-    if (customColor === ButtonColors.PRIMARY) {
-      if (buttonState === ButtonStates.DEFAULT) return palette.grey['900'];
-      if (buttonState === ButtonStates.HOVER) return palette.grey['900'];
-      if (buttonState === ButtonStates.FOCUS) return palette.primary['800'];
-    }
-    if (customColor === ButtonColors.ERROR) return palette.red['900'];
-    if (customColor === ButtonColors.SUCCESS) return palette.green['900'];
-    if (customColor === ButtonColors.WARNING) return palette.yellow['900'];
-
-    return palette.grey['900'];
-  }
-
-  if (customVariant === ButtonVariants.LINK) {
-    if (buttonState === ButtonStates.DEFAULT) return palette.primary['800'];
-    if (buttonState === ButtonStates.HOVER) return palette.primary['700'];
-    if (buttonState === ButtonStates.FOCUS) return palette.primary.dark;
-
-    return palette.primary.main;
-  }
-
-  return palette.grey['900'];
-};
-export const getBgText = ({
-  palette,
-  buttonState,
-  colorVariant,
-}: {
-  palette: Palette;
-  buttonState: ButtonState;
-  colorVariant: string;
-}): string => {
-  if (buttonState === ButtonStates.HOVER) return palette.grey[colorVariant];
-  if (buttonState === ButtonStates.FOCUS) return palette.primary[colorVariant];
-
-  return 'transparent';
-};
-
-const getBgContained = ({
-  palette,
-  colorVariant,
-  customColor,
-}: {
-  palette: Palette;
-  customColor?: ButtonColor;
-  colorVariant: string;
-}): string => {
-  if (customColor === ButtonColors.ERROR) return palette.red[colorVariant];
-  if (customColor === ButtonColors.SUCCESS) return palette.green[colorVariant];
-  if (customColor === ButtonColors.WARNING) return palette.yellow[colorVariant];
-  if (customColor === ButtonColors.PRIMARY)
-    return palette.primary[colorVariant];
-
-  return 'transparent';
-};
-
-const getBgLight = ({
-  palette,
-  colorVariant,
-  buttonState,
-  customColor,
-}: {
-  palette: Palette;
-  customColor?: ButtonColor;
-  buttonState: ButtonState;
-  colorVariant: string;
-}): string => {
-  if (customColor === ButtonColors.PRIMARY) {
-    if (buttonState === ButtonStates.DEFAULT) return palette.grey[colorVariant];
-    if (buttonState === ButtonStates.HOVER) return palette.grey[colorVariant];
-    if (buttonState === ButtonStates.FOCUS)
-      return palette.primary[colorVariant];
-  }
-  if (customColor === ButtonColors.ERROR) return palette.red[colorVariant];
-  if (customColor === ButtonColors.SUCCESS) return palette.green[colorVariant];
-  if (customColor === ButtonColors.WARNING) return palette.yellow[colorVariant];
-
-  return 'transparent';
+  return textColorVariants.link[buttonState];
 };
 
 export const getBgColor = ({
@@ -158,34 +95,81 @@ export const getBgColor = ({
   buttonState,
   theme,
 }: StyledButtonBaseThemeProps & { buttonState: ButtonState }) => {
-  const { palette } = theme;
+  const bgColorVariants = {
+    light: {
+      error: {
+        default: theme.palette.red['100'],
+        hover: theme.palette.red['200'],
+        active: theme.palette.red['100'],
+        focus: theme.palette.red['100'],
+      },
+      success: {
+        default: theme.palette.green['100'],
+        hover: theme.palette.green['200'],
+        active: theme.palette.green['100'],
+        focus: theme.palette.green['100'],
+      },
+      primary: {
+        default: theme.palette.grey['100'],
+        hover: theme.palette.grey['200'],
+        active: theme.palette.primary['100'],
+        focus: theme.palette.grey['100'],
+      },
+      warning: {
+        default: theme.palette.yellow['100'],
+        hover: theme.palette.yellow['200'],
+        active: theme.palette.yellow['100'],
+        focus: theme.palette.yellow['100'],
+      },
+    },
+    contained: {
+      error: {
+        default: theme.palette.red['800'],
+        hover: theme.palette.red['700'],
+        active: theme.palette.red['900'],
+        focus: theme.palette.red['800'],
+      },
+      success: {
+        default: theme.palette.green['800'],
+        hover: theme.palette.green['700'],
+        active: theme.palette.green['900'],
+        focus: theme.palette.green['800'],
+      },
+      primary: {
+        default: theme.palette.primary['800'],
+        hover: theme.palette.primary['700'],
+        active: theme.palette.primary['900'],
+        focus: theme.palette.primary['800'],
+      },
+      warning: {
+        default: theme.palette.yellow['800'],
+        hover: theme.palette.yellow['700'],
+        active: theme.palette.yellow['900'],
+        focus: theme.palette.yellow['800'],
+      },
+    },
+    text: {
+      default: 'transparent',
+      hover: theme.palette.grey['200'],
+      active: theme.palette.primary['100'],
+      focus: 'transparent',
+    },
+    link: 'transparent',
+  };
 
-  if (customVariant === ButtonVariants.LINK) return 'transparent';
-  if (buttonState === ButtonStates.ACTIVE) return palette.grey['900'];
+  if (customVariant === ButtonVariants.LIGHT && customColor) {
+    return bgColorVariants.light[customColor][buttonState];
+  }
 
-  const containedColor = BACKGROUND_COLOR_VARIANTS[buttonState].contained;
-  const lightColor = BACKGROUND_COLOR_VARIANTS[buttonState].light;
-  const textColor = BACKGROUND_COLOR_VARIANTS[buttonState].text;
+  if (customVariant === ButtonVariants.CONTAINED && customColor) {
+    return bgColorVariants.contained[customColor][buttonState];
+  }
 
-  if (customVariant === ButtonVariants.TEXT)
-    return getBgText({ buttonState, palette, colorVariant: textColor });
+  if (customVariant === ButtonVariants.TEXT) {
+    return bgColorVariants.text[buttonState];
+  }
 
-  if (customVariant === ButtonVariants.CONTAINED)
-    return getBgContained({
-      palette,
-      customColor,
-      colorVariant: containedColor,
-    });
-
-  if (customVariant === ButtonVariants.LIGHT)
-    return getBgLight({
-      palette,
-      buttonState,
-      customColor,
-      colorVariant: lightColor,
-    });
-
-  return 'transparent';
+  return bgColorVariants.link;
 };
 
 export const getButtonHeight = ({
@@ -252,6 +236,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
       getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.FOCUS })};
+    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:active {
@@ -259,6 +244,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
       getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+    outline: none;
   }
 
   &.${buttonUnstyledClasses.disabled} {

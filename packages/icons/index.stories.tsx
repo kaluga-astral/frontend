@@ -93,7 +93,6 @@ const Template: Story = (args: SvgIconProps) => {
 };
 
 export const Default = Template.bind({});
-Default.storyName = 'Icons';
 Default.args = {
   color: 'primary',
 };
