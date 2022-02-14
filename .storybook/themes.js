@@ -1,7 +1,7 @@
 import { createTheme, Brand } from '@astral/ui'
 import UbuntuBoldWoff from '@astral/fonts/src/UbuntuBold.woff';
 import UbuntuBoldWoff2 from '@astral/fonts/src/UbuntuBold.woff2';
-import UbuntuLightWoff from '@astral/fonts/src/UbuntuLight.woff2';
+import UbuntuLightWoff from '@astral/fonts/src/UbuntuLight.woff';
 import UbuntuLightWoff2 from '@astral/fonts/src/UbuntuLight.woff2';
 import UbuntuRegularWoff from '@astral/fonts/src/UbuntuRegular.woff';
 import UbuntuRegularWoff2 from '@astral/fonts/src/UbuntuRegular.woff2';

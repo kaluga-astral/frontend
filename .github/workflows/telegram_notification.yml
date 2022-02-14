@@ -12,8 +12,8 @@ jobs:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
         with:
-          to: -643866976
-          token: 5296240564:AAEStLQPL35cJ7cN8OPyYfA6kg2rG7_Vkns
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ${{ github.actor }} created Pull Request:
             Title: ${{ github.event.pull_request.title }}
