@@ -17,5 +17,5 @@ jobs:
           message: |
             ${{ github.actor }} created Pull Request
             Title: ${{ github.event.pull_request.title }}
-            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
+            Reviewers: *${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}*
             See changes: ${{ github.event.pull_request.html_url }}
