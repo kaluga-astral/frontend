@@ -1,7 +1,7 @@
 name: telegram message
 on:
   pull_request:
-    types: [review_requested]
+    types: [assigned]
     branches:
     - main
 jobs:
@@ -17,5 +17,5 @@ jobs:
           message: |
             ${{ github.actor }} created Pull Request
             Title: ${{ github.event.pull_request.title }}
-            Reviewers: ${{ github.event.pull_request.assignees[0].login }}, ${{ github.event.pull_request.assignees[1].login }}
+            Reviewers: ${{ gitub.event.pull_request.requested_reviewers }}
             See changes: ${{ github.event.pull_request.html_url }}
