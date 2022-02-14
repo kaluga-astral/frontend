@@ -1,7 +1,7 @@
 name: telegram message
 on:
   pull_request:
-    types: [ready_for_review]
+    types: [review_requested]
     branches:
     - main
 jobs:
@@ -15,7 +15,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created Pull Request:
+            ${{ github.actor }} created Pull Request
             Title: ${{ github.event.pull_request.title }}
             Reviewers: ${{ github.event.pull_request.assignees[0].login }}, ${{ github.event.pull_request.assignees[1].login }}
-            See changes: ${{ github.event.pull_request.url }}
+            See changes: ${{ github.event.pull_request.html_url }}
