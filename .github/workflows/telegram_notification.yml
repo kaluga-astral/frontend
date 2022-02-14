@@ -1,12 +1,11 @@
 name: telegram message
 on:
   pull_request:
-    types: [review_requested]
+    types: [opened]
     branches:
     - main
 jobs:
   build:
-    if: ${{ github.event.pull_request.requested_reviewers[0].login != null && github.event.pull_request.requested_reviewers[1].login != null }}
     name: Build
     runs-on: ubuntu-latest
     steps:
