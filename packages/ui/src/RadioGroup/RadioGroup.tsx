@@ -1,9 +1,3 @@
-import { RadioGroupProps } from '@mui/material';
-
-import { StyledRadioGroup } from './styled';
-
-export const RadioGroup = ({ ...props }: RadioGroupProps) => {
-  return <StyledRadioGroup {...props} />;
-};
+import { RadioGroup } from '@mui/material';
 
 export default RadioGroup;
