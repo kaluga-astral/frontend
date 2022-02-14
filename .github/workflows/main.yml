@@ -8,12 +8,13 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: send telegram message on push
+      - name: send telegram message on PR
         uses: appleboy/telegram-action@master
         with:
           to: -643866976
           token: 5296240564:AAEStLQPL35cJ7cN8OPyYfA6kg2rG7_Vkns
           message: |
-            ${{ github.actor }} created PR:
+            ${{ github.actor }} created Pull Request:
             Title: ${{ github.event.pull_request.title }}
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Reviewers: ${{ github.event.pull_request.assignees[0].login }}, ${{ github.event.pull_request.assignees[1].login }}
+            See changes: ${{ github.event.pull_request.url }}
