@@ -1,7 +1,7 @@
 name: telegram message
 on:
   pull_request:
-    types: [review_requested]
+    types: [assigned]
     branches:
     - main
 jobs:
