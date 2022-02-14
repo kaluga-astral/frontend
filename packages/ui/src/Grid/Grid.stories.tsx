@@ -16,7 +16,7 @@ const Item = (props: BoxProps) => (
     sx={{
       border: '1px solid',
       borderColor: (theme) => theme.palette.grey[300],
-      borderRadius: 3,
+      borderRadius: '3px',
       textAlign: 'center',
       p: 1,
     }}

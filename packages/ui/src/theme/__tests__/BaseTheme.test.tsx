@@ -60,7 +60,7 @@ describe('createTheme', () => {
     const theme = createTheme({ brand: Brand.SIGN, fontsUrls });
 
     expect(theme.elevation[100]).toBe(
-      'box-shadow: 0px 0px 1px 0px #072D574F; box-shadow: 0px 1px 1px 0px #072D5740;'
+      '0px 0px 1px 0px #072D574F, 0px 1px 1px 0px #072D5740;'
     );
   });
 });

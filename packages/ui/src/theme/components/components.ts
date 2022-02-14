@@ -1,5 +1,14 @@
 import { Components } from '@mui/material';
 
+import type { Theme } from '../baseTheme';
+
+import { MuiInputBase } from './MuiInputBase';
+import { MuiFormHelperText } from './MuiFormHelperText';
+import { MuiFormLabel } from './MuiFormLabel';
+import { MuiInputLabel } from './MuiInputLabel';
+import { MuiOutlinedInput } from './MuiOutlinedInput';
+import { MuiTypography } from './MuiTypography';
+
 export type FontsUrls = {
   bold: {
     woff: string;
@@ -54,32 +63,55 @@ const getMuiCssBaseline = (
   `,
 });
 
-const getMuiTypography = (): Components['MuiTypography'] => ({
-  variants: [
-    {
-      props: { variant: 'button' },
-      style: {
-        textTransform: 'capitalize',
-      },
-    },
-  ],
-  defaultProps: {
-    // TODO: необходимо кастомизировать типы Components['MuiTypography']
-    variantMapping: {
-      link: 'a',
-      code: 'code',
-    } as any,
-  },
-});
-
 const MuiCheckbox: Components['MuiCheckbox'] = {
   defaultProps: {
     disableRipple: true,
   },
 };
 
-export const getComponents = (fontUrls: FontsUrls): Components => ({
+const MuiMenu: Components<Theme>['MuiMenu'] = {
+  defaultProps: {
+    autoFocus: false,
+  },
+  styleOverrides: {
+    paper({ theme }: { theme: Theme }) {
+      return {
+        marginTop: theme.spacing(2),
+        '&.MuiPaper-root': {
+          borderRadius: theme.shape.small,
+          boxShadow: theme.elevation[200],
+        },
+      };
+    },
+    list({ theme }: { theme: Theme }) {
+      return {
+        padding: theme.spacing(1, 0),
+      };
+    },
+  },
+};
+
+const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
+  styleOverrides: {
+    root({ theme }: { theme: Theme }) {
+      return {
+        '&:hover': {
+          backgroundColor: theme.palette.background.elementHover,
+        },
+      };
+    },
+  },
+};
+
+export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
-  MuiTypography: getMuiTypography(),
+  MuiTypography,
+  MuiInputBase,
+  MuiInputLabel,
+  MuiOutlinedInput,
+  MuiFormLabel,
+  MuiFormHelperText,
   MuiCheckbox,
+  MuiMenu,
+  MuiMenuItem,
 });

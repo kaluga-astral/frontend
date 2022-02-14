@@ -1,0 +1,10 @@
+groups:
+  - name: devs
+    reviewers: 2
+    usernames:
+      - merkelAlbert
+      - StanislavDa
+      - AndTem
+      - perevezencev
+      - cryzer12
+      - julderen

@@ -1,10 +1,10 @@
 {
   "name": "@astral/fonts",
-  "version": "1.0.0",
+  "version": "0.2.4",
   "main": "./src",
   "scripts": {
     "prebuild": "npx rimraf ./lib",
-    "build": "npx commander copyCommonFiles && npx commander copyFonts && npx commander modifyPackageJSON",
-    "publish": "yarn run build && npx commander publish"
+    "build": "yarn prebuild && node ../../commander copyCommonFiles && node ../../commander copyFonts && node ../../commander modifyPackageJSON",
+    "publish": "yarn build && node ../../commander publish"
   }
 }
