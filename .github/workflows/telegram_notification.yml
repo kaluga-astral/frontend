@@ -1,7 +1,7 @@
 name: telegram message
 on:
   pull_request:
-    types: [review_requested]
+    types: [opened]
     branches:
     - main
 jobs:
@@ -19,4 +19,4 @@ jobs:
             Title: ${{ github.event.pull_request.title }}
             See changes: ${{ github.event.pull_request.html_url }}
             
-            Reviewers: *${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}*
+            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
