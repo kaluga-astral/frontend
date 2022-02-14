@@ -1,6 +1,6 @@
 groups:
   - name: devs
-    reviewers:
+    reviewers: 2
     usernames:
       - merkelAlbert
       - StanislavDa
