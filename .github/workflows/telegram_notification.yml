@@ -1,0 +1,22 @@
+name: telegram message
+on:
+  pull_request:
+    types: [review_requested]
+    branches:
+    - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created Pull Request
+            Title: ${{ github.event.pull_request.title }}
+            See changes: ${{ github.event.pull_request.html_url }}
+            
+            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
