@@ -1,10 +1,8 @@
-import { FormControl, FormLabel, Stack } from '@mui/material';
+import { FormControl, FormLabel, RadioGroup, Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
 import { Radio } from '../Radio';
 import { FormControlLabel } from '../FormControlLabel';
-
-import { RadioGroup } from './RadioGroup';
 
 export default {
   title: 'Components/RadioGroup',
