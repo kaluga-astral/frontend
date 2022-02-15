@@ -5,9 +5,11 @@ on:
     branches:
     - main
 jobs:
-  build:
-    name: Build
+  fetch:
+    name: Fetch
     runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ stesp.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
@@ -17,11 +19,16 @@ jobs:
             const result = await github.request(context.payload.pull_request.url)
             console.log(result.data)
             return result.data;
+  notify:
+    name: Notify
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
       - name: fetch PR info
         uses: actions/github-script@v6
         with:
           script: | 
-            console.log(${{ steps.fetch-pr.outputs.result.title }})
+            console.log(${{ needs.fetch.outputs.result }})
 #       - name: send telegram message on PR
 #         uses: appleboy/telegram-action@master
 #         with:
