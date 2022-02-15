@@ -16,9 +16,9 @@ jobs:
           script: | 
             const result = await github.request(context.payload.pull_request.url)
             console.log(result.data)
-            return result.data
+            return 'test'
       - name: Get result
-        run: echo "${{steps.fetch-pr.outputs}}"
+        run: echo "${{steps.fetch-pr.outputs.result}}"
 #       - name: send telegram message on PR
 #         uses: appleboy/telegram-action@master
 #         with:
