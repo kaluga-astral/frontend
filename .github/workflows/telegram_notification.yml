@@ -1,9 +1,9 @@
 name: telegram message
 on:
-  workflow_run:
-    workflows: [Auto Assign]
-    types:
-      - completed
+  pull_request:
+    types: [opened]
+    branches:
+    - main
 jobs:
   build:
     name: Build
@@ -12,11 +12,14 @@ jobs:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ${{ github.actor }} created Pull Request
-            Title: ${{ github.event.pull_request.title }}
-            See changes: ${{ github.event.pull_request.html_url }}
+          script: | 
+            const result = await github.request(github.event.pull_request.url)
+            console.log(result)
+#           to: ${{ secrets.TELEGRAM_CHAT_ID }}
+#           token: ${{ secrets.TELEGRAM_TOKEN }}
+#           message: |
+#             ${{ github.actor }} created Pull Request
+#             Title: ${{ github.event.pull_request.title }}
+#             See changes: ${{ github.event.pull_request.html_url }}
             
-            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
+#             Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
