@@ -4,8 +4,6 @@ on:
     workflows: [Auto Assign]
     types:
       - completed
-    branches:
-    - main
 jobs:
   build:
     name: Build
