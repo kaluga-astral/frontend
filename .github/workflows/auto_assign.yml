@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
         with:
-          pr: ${{ github.event.pull_request }}
+          pull_request: ${{ github.event.pull_request }}
