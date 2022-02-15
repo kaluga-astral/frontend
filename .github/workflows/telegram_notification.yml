@@ -14,7 +14,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const result = await github.request(github.event.pull_request.url)
+            console.log(context.payload)
+            const result = await github.request(context.payload.url)
             console.log(result)
             return result
       - name: send telegram message on PR
