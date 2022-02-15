@@ -9,7 +9,7 @@ jobs:
     name: Fetch
     runs-on: ubuntu-latest
     outputs: 
-      result: ${{fromJSON(steps.fetch-pr.outputs.result)}}
+      result: ${{ steps.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
@@ -28,7 +28,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            console.log(${{ needs.fetch.outputs.result.title }})
+            console.log(${{ fromJSON(needs.fetch.outputs.result).title }})
 #       - name: send telegram message on PR
 #         uses: appleboy/telegram-action@master
 #         with:
