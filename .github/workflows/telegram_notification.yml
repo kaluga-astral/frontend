@@ -1,7 +1,9 @@
 name: telegram message
 on:
-  pull_request:
-    types: [assigned]
+  workflow_run:
+    workflows: [Auto Assign]
+    types:
+      - completed
     branches:
     - main
 jobs:
