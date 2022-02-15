@@ -28,7 +28,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            console.log(${{ needs.fetch.outputs.result }})
+            console.log(${{ needs.fetch.outputs.result.title }})
 #       - name: send telegram message on PR
 #         uses: appleboy/telegram-action@master
 #         with:
