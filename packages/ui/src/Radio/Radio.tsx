@@ -1,13 +1,22 @@
+import React from 'react';
+
 import { RadioProps } from './types';
 import { StyledRadio } from './styled';
-import { CheckedCircleIcon, DefaultIcon } from './icon';
+import { CheckedCircleIcon, DefaultIcon } from './Icon';
 
-export const Radio = ({
-  icon = <DefaultIcon />,
-  checkedIcon = <CheckedCircleIcon />,
-  ...props
-}: RadioProps) => {
-  return <StyledRadio icon={icon} checkedIcon={checkedIcon} {...props} />;
-};
+export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
+  (
+    {
+      icon = <DefaultIcon />,
+      checkedIcon = <CheckedCircleIcon />,
+      ...props
+    }: RadioProps,
+    ref
+  ) => {
+    return (
+      <StyledRadio icon={icon} checkedIcon={checkedIcon} ref={ref} {...props} />
+    );
+  }
+);
 
 export default Radio;

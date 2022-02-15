@@ -1,14 +1,14 @@
 import React from 'react';
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon } from '@mui/material';
 
-export const DefaultIcon: React.FC<SvgIconProps> = ({ ...props }) => (
+export const DefaultIcon: React.VFC = ({ ...props }) => (
   <SvgIcon viewBox="0 0 24 24" {...props}>
     <circle cx="12" cy="12" r="7" fill="#DDE2E8" />
     <circle cx="12" cy="12" r="5" />
   </SvgIcon>
 );
 
-export const CheckedCircleIcon: React.FC<SvgIconProps> = ({ ...props }) => (
+export const CheckedCircleIcon: React.VFC = ({ ...props }) => (
   <SvgIcon viewBox="0 0 24 24" {...props}>
     <circle cx="12" cy="12" r="7" />
     <circle cx="12" cy="12" r="2" fill="#FAFBFC" />
