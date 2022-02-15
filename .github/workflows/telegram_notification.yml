@@ -15,7 +15,7 @@ jobs:
         with:
           script: | 
             console.log(context.payload)
-            const result = await github.request(context.payload.url)
+            const result = await github.request(context.payload.pull_request.url)
             console.log(result)
             return result
       - name: send telegram message on PR
