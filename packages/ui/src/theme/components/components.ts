@@ -69,6 +69,12 @@ const MuiCheckbox: Components['MuiCheckbox'] = {
   },
 };
 
+const MuiRadio: Components['MuiRadio'] = {
+  defaultProps: {
+    disableRipple: true,
+  },
+};
+
 const MuiMenu: Components<Theme>['MuiMenu'] = {
   defaultProps: {
     autoFocus: false,
@@ -114,4 +120,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCheckbox,
   MuiMenu,
   MuiMenuItem,
+  MuiRadio,
 });
