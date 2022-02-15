@@ -9,7 +9,7 @@ jobs:
     name: Fetch
     runs-on: ubuntu-latest
     outputs: 
-      result: ${{ stesp.fetch-pr.outputs.result }}
+      result: ${{ steps.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
