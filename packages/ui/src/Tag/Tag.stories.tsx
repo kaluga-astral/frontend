@@ -680,7 +680,7 @@ Default.args = {
   label: 'Тэг',
   deleteIcon: svgDeleteIcon,
   onDelete: () => console.log(1),
-  rounded: false,
+  rounded: true,
 };
 Default.parameters = {
   options: { showPanel: true },
