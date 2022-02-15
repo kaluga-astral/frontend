@@ -17,14 +17,16 @@ jobs:
             const result = await github.request(context.payload.pull_request.url)
             console.log(result.data)
             return result.data
-      - name: send telegram message on PR
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ${{ github.actor }} created Pull Request
-            Title: ${{ steps.fetch-pr.outputs.result.title }}
-            See changes: ${{ github.event.pull_request.html_url }}
+      - name: Get result
+        run: echo "${{steps.fetch-pr.outputs}}"
+#       - name: send telegram message on PR
+#         uses: appleboy/telegram-action@master
+#         with:
+#           to: ${{ secrets.TELEGRAM_CHAT_ID }}
+#           token: ${{ secrets.TELEGRAM_TOKEN }}
+#           message: |
+#             ${{ github.actor }} created Pull Request
+#             Title: ${{ steps.fetch-pr.outputs.result.title }}
+#             See changes: ${{ github.event.pull_request.html_url }}
             
-            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
+#             Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
