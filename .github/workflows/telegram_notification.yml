@@ -24,19 +24,19 @@ jobs:
     needs: fetch
     runs-on: ubuntu-latest
     steps:
-      - name: fetch PR info
-        uses: actions/github-script@v6
-        with:
-          script: | 
-            console.log(${{ fromJSON(needs.fetch.outputs.result).title }})
-#       - name: send telegram message on PR
-#         uses: appleboy/telegram-action@master
+#       - name: fetch PR info
+#         uses: actions/github-script@v6
 #         with:
-#           to: ${{ secrets.TELEGRAM_CHAT_ID }}
-#           token: ${{ secrets.TELEGRAM_TOKEN }}
-#           message: |
-#             ${{ github.actor }} created Pull Request
-#             Title: ${{ steps.fetch-pr.outputs.result.title }}
-#             See changes: ${{ github.event.pull_request.html_url }}
+#           script: | 
+#             console.log(${{ fromJSON(needs.fetch.outputs.result).title }})
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created Pull Request
+            Title: ${{ fromJSON(needs.fetch.outputs.result).title }}
+            See changes: ${{ github.event.pull_request.html_url }}
             
-#             Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
+            Reviewers: ${{ github.event.pull_request.requested_reviewers[0].login }}, ${{ github.event.pull_request.requested_reviewers[1].login }}
