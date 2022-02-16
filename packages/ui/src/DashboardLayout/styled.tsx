@@ -1,5 +1,31 @@
 import { styled } from '../styles';
 
+/**
+ * DASHBOARD
+ */
+export const DashboardStyle = styled('div')`
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 10px;
+  height: 100vh;
+  > header {
+    grid-area: header;
+  }
+  > main {
+    grid-area: main;
+  }
+  > aside {
+    grid-area: sidebar;
+  }
+`;
+
+/**
+ * HEADER
+ */
 export const StyledHeader = styled('header')`
   box-shadow: ${({ theme }) => theme.elevation[200]};
   padding: 0 ${({ theme }) => theme.spacing(5)};

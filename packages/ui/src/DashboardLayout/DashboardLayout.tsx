@@ -1,7 +1,26 @@
-import Header from './Header';
+import React, { Children } from 'react';
 
-export const DashboardLayout = {
-  Header,
+import Header from './Header';
+import { DashboardStyle } from './styled';
+
+interface DashBoardLayoutProps {
+  children: React.ReactNode;
+}
+
+export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
+  const [HeaderComponent, SideBarComponent, MainComponent, ...restChildren] =
+    Children.toArray(children);
+
+  return (
+    <DashboardStyle>
+      {HeaderComponent || <Header />}
+      {SideBarComponent || null}
+      {MainComponent || null}
+      {restChildren}
+    </DashboardStyle>
+  );
 };
+
+DashboardLayout.Header = Header;
 
 export default DashboardLayout;
