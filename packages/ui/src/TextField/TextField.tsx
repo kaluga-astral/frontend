@@ -37,7 +37,7 @@ export const TextField = forwardRef<HTMLDivElement>(
 
     return (
       <MuiTextField
-        ref={ref}
+        inputRef={ref}
         variant="outlined"
         error={error}
         color={color}
