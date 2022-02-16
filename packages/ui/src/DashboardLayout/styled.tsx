@@ -20,17 +20,23 @@ export const InnerContainer = styled('div')`
   ${styles}
 `;
 
-export const LeftPartContainer = styled('div')<{ withWidget: boolean }>`
+export const LeftPartContainer = styled('div')`
   ${styles}
-  .logo {
-    line-height: normal;
+`;
+
+export const LogoContainer = styled('div')<{ withWidget: boolean }>`
+  :not(:empty) {
     margin-left: ${({ withWidget, theme }) => withWidget && theme.spacing(2)};
     margin-right: ${({ theme }) => theme.spacing(4)};
-    max-height: 24px;
+  }
+  max-height: 24px;
+  height: 100%;
+  > * {
     height: 100%;
-    cursor: pointer;
   }
-  img.logo:not([src]) {
-    display: none;
-  }
+`;
+
+export const LogoStyle = styled('img')`
+  height: 100%;
+  cursor: pointer;
 `;

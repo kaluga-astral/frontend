@@ -1,14 +1,19 @@
 import React from 'react';
 
 export type LogoComponentProps = {
-  className: string;
-  src?: string;
+  logoSrc: string;
+};
+
+export type LogoLinkComponentProps = {
+  logoLink: string;
+  children?: React.ReactNode;
 };
 
 export type HeaderProps = {
   logoSrc?: string;
+  logoLink?: string;
   Widget?: React.ElementType;
-  LogoComponent?: React.ElementType<LogoComponentProps>;
+  LogoLinkComponent?: React.FC<LogoLinkComponentProps>;
   WidgetComponent?: React.ElementType;
   NavBarComponent?: React.ElementType;
 };

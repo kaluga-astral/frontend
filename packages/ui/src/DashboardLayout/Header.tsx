@@ -1,31 +1,60 @@
 import React, { forwardRef } from 'react';
 
-import { InnerContainer, LeftPartContainer, StyledHeader } from './styled';
-import { HeaderProps, LogoComponentProps } from './types';
+import {
+  InnerContainer,
+  LeftPartContainer,
+  LogoContainer,
+  LogoStyle,
+  StyledHeader,
+} from './styled';
+import {
+  HeaderProps,
+  LogoComponentProps,
+  LogoLinkComponentProps,
+} from './types';
 
-const LogoComponentDefault = ({ src, className }: LogoComponentProps) => (
-  <img src={src} className={className} />
-);
+const LogoLinkComponentDefault = ({
+  children,
+  logoLink,
+}: LogoLinkComponentProps) => <a href={logoLink}>{children}</a>;
 
-export const Header: React.FC<HeaderProps> = forwardRef<any, HeaderProps>(
+const LogoComponentDefault: React.FC<LogoComponentProps> = ({
+  logoSrc,
+}: LogoComponentProps) => <LogoStyle src={logoSrc} />;
+
+export const Header: React.FC<HeaderProps> = forwardRef(
   (
     {
       children,
       logoSrc,
-      LogoComponent = LogoComponentDefault,
+      logoLink = '/',
+      LogoLinkComponent,
       WidgetComponent,
       NavBarComponent,
     },
     ref
   ) => {
+    const LogoComponent = () => {
+      if (logoSrc) {
+        const Logo = <LogoComponentDefault logoSrc={logoSrc} />;
+        if ((LogoLinkComponent || logoLink) && logoLink !== null) {
+          const LinkComponent = LogoLinkComponent || LogoLinkComponentDefault;
+          return <LinkComponent logoLink={logoLink}>{Logo}</LinkComponent>;
+        } else return Logo;
+      } else if (LogoLinkComponent) {
+        return <LogoLinkComponent logoLink={logoLink} />;
+      }
+      return null;
+    };
+
     return (
       <StyledHeader ref={ref}>
         <InnerContainer>
-          <LeftPartContainer withWidget={!!WidgetComponent}>
+          <LeftPartContainer>
             {WidgetComponent && <WidgetComponent />}
-            {(logoSrc || LogoComponent) && (
-              <LogoComponent className="logo" src={logoSrc} />
-            )}
+            <LogoContainer withWidget={!!WidgetComponent}>
+              <LogoComponent />
+            </LogoContainer>
             {NavBarComponent && <NavBarComponent />}
           </LeftPartContainer>
           {children}

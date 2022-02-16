@@ -3,7 +3,7 @@ import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
 import { DashboardLayout } from './DashboardLayout';
-import { LogoComponentProps } from './types';
+import { LogoLinkComponentProps } from './types';
 
 export default {
   title: 'Components/DashboardLayout',
@@ -11,6 +11,7 @@ export default {
 };
 
 const LOGO_SRC: string = 'https://ofd.astralnalog.ru/images/FullLogo.png';
+const LOGO_LINK: string = '/';
 
 const svgLogo = (
   <svg
@@ -46,25 +47,16 @@ const svgLogo = (
   </svg>
 );
 
-const LogoComponentDefault = ({ src, className }: LogoComponentProps) => (
-  <img src={src} className={className} />
-);
-
 const NavBarComponentDefault = () => <div>Навигационная панель</div>;
 
 const WidgetComponentDefault = () => <ProductsFillMd />;
 
-const LogoLinkComponent = ({ className }: LogoComponentProps) => (
-  <a href="https://ofd.astralnalog.ru/" className={className}>
-    {svgLogo}
-  </a>
+const LogoLinkComponent = ({ logoLink }: LogoLinkComponentProps) => (
+  <a href={logoLink}>{svgLogo}</a>
 );
 
-const LogoLinkDivComponent = ({ className }: LogoComponentProps) => (
-  <div
-    onClick={() => (window.location.href = 'https://ofd.astralnalog.ru/')}
-    className={className}
-  >
+const LogoLinkDivComponent = ({ logoLink }: LogoLinkComponentProps) => (
+  <div role="button" onClick={() => (window.location.href = logoLink)}>
     {svgLogo}
   </div>
 );
@@ -73,52 +65,52 @@ export const Header: Story = () => {
   return (
     <Stack>
       <Stack gap={2} direction="column">
-        <DashboardLayout.Header />
+        <DashboardLayout.Header>
+          <div>Пустой Header</div>
+        </DashboardLayout.Header>
 
-        <DashboardLayout.Header WidgetComponent={WidgetComponentDefault} />
+        <DashboardLayout.Header WidgetComponent={WidgetComponentDefault}>
+          <div>Header с Widget (кнопка перехода на другие продукты)</div>
+        </DashboardLayout.Header>
 
-        <DashboardLayout.Header logoSrc={LOGO_SRC} />
+        <DashboardLayout.Header logoLink={null} logoSrc={LOGO_SRC}>
+          <div>Header с логотипом без ссылки</div>
+        </DashboardLayout.Header>
+
+        <DashboardLayout.Header logoSrc={LOGO_SRC}>
+          <div>Header без Widget</div>
+        </DashboardLayout.Header>
 
         <DashboardLayout.Header
           WidgetComponent={WidgetComponentDefault}
           logoSrc={LOGO_SRC}
-        />
-
-        <DashboardLayout.Header
-          LogoComponent={LogoComponentDefault}
-          logoSrc={LOGO_SRC}
-          NavBarComponent={NavBarComponentDefault}
-          WidgetComponent={WidgetComponentDefault}
-        />
-
-        <DashboardLayout.Header
-          LogoComponent={LogoComponentDefault}
-          logoSrc={LOGO_SRC}
-          NavBarComponent={NavBarComponentDefault}
-          WidgetComponent={WidgetComponentDefault}
-        />
-
-        <DashboardLayout.Header
-          WidgetComponent={WidgetComponentDefault}
-          NavBarComponent={NavBarComponentDefault}
-          LogoComponent={LogoLinkComponent}
         >
-          <div>Профиль</div>
+          <div>Header без навигационной панели</div>
+        </DashboardLayout.Header>
+
+        <DashboardLayout.Header
+          logoSrc={LOGO_SRC}
+          NavBarComponent={NavBarComponentDefault}
+          WidgetComponent={WidgetComponentDefault}
+        >
+          <div>Header с указанием логотипа при помощи ссылки</div>
         </DashboardLayout.Header>
 
         <DashboardLayout.Header
           WidgetComponent={WidgetComponentDefault}
           NavBarComponent={NavBarComponentDefault}
-          LogoComponent={LogoLinkDivComponent}
+          LogoLinkComponent={LogoLinkComponent}
         >
-          <div>Профиль</div>
+          <div>Header с кастомной ссылкой на логотипе</div>
         </DashboardLayout.Header>
 
         <DashboardLayout.Header
+          WidgetComponent={WidgetComponentDefault}
           NavBarComponent={NavBarComponentDefault}
-          LogoComponent={LogoLinkDivComponent}
+          LogoLinkComponent={LogoLinkDivComponent}
+          logoLink={LOGO_LINK}
         >
-          <div>Профиль</div>
+          <div>Header с кастомным логотипом</div>
         </DashboardLayout.Header>
       </Stack>
     </Stack>
