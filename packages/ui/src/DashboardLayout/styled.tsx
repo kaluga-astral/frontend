@@ -1,16 +1,10 @@
+import { Grid } from '../Grid';
 import { styled } from '../styles';
 
 /**
  * DASHBOARD
  */
-export const DashboardStyle = styled('div')`
-  display: grid;
-  grid-template-areas:
-    'header header'
-    'sidebar main';
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 10px;
+export const DashboardStyle = styled(Grid)`
   height: 100vh;
   > header {
     grid-area: header;

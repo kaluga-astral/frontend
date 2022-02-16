@@ -12,7 +12,13 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
     Children.toArray(children);
 
   return (
-    <DashboardStyle>
+    <DashboardStyle
+      container
+      templateColumns={'200px 1fr'}
+      templateRows={'auto 1fr'}
+      templateAreas={`"header header"
+                      "sidebar main"`}
+    >
       {HeaderComponent || <Header />}
       {SideBarComponent || null}
       {MainComponent || null}
