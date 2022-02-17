@@ -2,6 +2,7 @@ import React, { Children } from 'react';
 
 import Header from './Header';
 import SideBar from './SideBar';
+import Main from './Main';
 import { DashboardStyle } from './styled';
 
 interface DashBoardLayoutProps {
@@ -22,7 +23,7 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
     >
       {HeaderComponent || <Header />}
       {SideBarComponent || <SideBar />}
-      {MainComponent || null}
+      {MainComponent || <Main />}
       {restChildren}
     </DashboardStyle>
   );
@@ -30,5 +31,6 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
 
 DashboardLayout.Header = Header;
 DashboardLayout.SideBar = SideBar;
+DashboardLayout.Main = Main;
 
 export default DashboardLayout;
