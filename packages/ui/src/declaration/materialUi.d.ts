@@ -1,9 +1,7 @@
 import { Theme as MuiTheme } from '@mui/material/styles';
 
-import { Elevation } from '../theme';
-import { Shape } from '../theme';
+import { Elevation, Palette, Shape } from '../theme';
 import { TypographyThemeOptions } from '../theme/typography';
-import { Palette } from '../theme';
 
 declare module '@mui/material/styles' {
   export interface Theme
