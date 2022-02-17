@@ -4,12 +4,14 @@ on:
       pr_url:
         required: true
         type: string
+    outputs: 
+      result: 
+        description: PR info
+        value: ${{ steps.fetch-pr.outputs.result }}
 jobs:
   fetch:
     name: Fetch_PR
     runs-on: ubuntu-latest
-    outputs: 
-      result: ${{ steps.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
