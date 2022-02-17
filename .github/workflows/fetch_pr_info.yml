@@ -1,0 +1,27 @@
+name: fetch pr info
+on:
+  workflow_call:
+    inputs:
+      pr_url:
+        required: true
+        type: string
+    outputs: 
+      result: 
+        description: PR info
+        value: ${{ jobs.fetch.outputs.result }}
+jobs:
+  fetch:
+    name: fetch pr
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.fetch-pr.outputs.result }}
+    steps:
+      - name: fetch pr info
+        id: fetch-pr
+        uses: actions/github-script@v6
+        env:
+          pr_url: ${{ inputs.pr_url }}
+        with:
+          script: | 
+            const result = await github.request(process.env.pr_url)
+            return result.data;

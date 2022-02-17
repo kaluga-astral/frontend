@@ -116,7 +116,10 @@ const getDeleteIconBgColor = ({
   return 'transparent';
 };
 
-export const StyledTag = styled(Chip)<StyledTagProps>`
+export const StyledTag = styled(Chip, {
+  shouldForwardProp: (prop) =>
+    prop !== 'customColor' && prop !== 'customVariant' && prop !== 'rounded',
+})<StyledTagProps>`
   user-select: none;
   font-size: 14px;
   height: 20px;

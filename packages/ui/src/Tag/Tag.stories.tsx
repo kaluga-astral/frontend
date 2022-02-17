@@ -169,7 +169,7 @@ export const ShowcaseColor: Story = () => (
                         color="primary"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -178,7 +178,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="primary"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -195,7 +194,7 @@ export const ShowcaseColor: Story = () => (
                         color="success"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -204,7 +203,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="success"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -221,7 +219,7 @@ export const ShowcaseColor: Story = () => (
                         color="warning"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -230,7 +228,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="warning"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -247,7 +244,7 @@ export const ShowcaseColor: Story = () => (
                         color="error"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -256,7 +253,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="error"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -278,7 +274,7 @@ export const ShowcaseColor: Story = () => (
                         color="primary"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -287,7 +283,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="primary"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -304,7 +299,7 @@ export const ShowcaseColor: Story = () => (
                         color="success"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -313,7 +308,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="success"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -330,7 +324,7 @@ export const ShowcaseColor: Story = () => (
                         color="warning"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -339,7 +333,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="warning"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -356,7 +349,7 @@ export const ShowcaseColor: Story = () => (
                         color="error"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -365,7 +358,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="error"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -393,7 +385,7 @@ export const ShowcaseColor: Story = () => (
                         color="primary"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -403,7 +395,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="primary"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -421,7 +412,7 @@ export const ShowcaseColor: Story = () => (
                         color="success"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -431,7 +422,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="success"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -449,7 +439,7 @@ export const ShowcaseColor: Story = () => (
                         color="warning"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -459,7 +449,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="warning"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -477,7 +466,7 @@ export const ShowcaseColor: Story = () => (
                         color="error"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -487,7 +476,6 @@ export const ShowcaseColor: Story = () => (
                         variant="contained"
                         color="error"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -510,7 +498,7 @@ export const ShowcaseColor: Story = () => (
                         color="primary"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -520,7 +508,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="primary"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -538,7 +525,7 @@ export const ShowcaseColor: Story = () => (
                         color="success"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -548,7 +535,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="success"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -566,7 +552,7 @@ export const ShowcaseColor: Story = () => (
                         color="warning"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -576,7 +562,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="warning"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -594,7 +579,7 @@ export const ShowcaseColor: Story = () => (
                         color="error"
                         rounded
                       />
-                      <text>Rounded</text>
+                      Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
                       <Tag
@@ -604,7 +589,6 @@ export const ShowcaseColor: Story = () => (
                         variant="light"
                         color="error"
                       />
-                      <text>Not rounded</text>
                     </Stack>
                   </Stack>
                 </Stack>
@@ -696,6 +680,7 @@ Default.args = {
   label: 'Тэг',
   deleteIcon: svgDeleteIcon,
   onDelete: () => console.log(1),
+  rounded: true,
 };
 Default.parameters = {
   options: { showPanel: true },
