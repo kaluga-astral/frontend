@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Print the input name to STDOUT
-          run: echo The pr is ${{ github.pull_request.url }}
+          run: echo The pr is ${{ github.event.pull_request.url }}
 
   fetch:
     name: fetch
     uses: ./.github/workflows/fetch_pr_info.yml
     with:
-      pr_url: ${{ github.pull_request.url }}
+      pr_url: ${{ github.event.pull_request.url }}
 
   notify:
     name: Notify
