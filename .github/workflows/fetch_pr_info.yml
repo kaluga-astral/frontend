@@ -7,11 +7,13 @@ on:
     outputs: 
       result: 
         description: PR info
-        value: ${{ steps.fetch-pr.outputs.result }}
+        value: ${{ jobs.fetch.outputs.result }}
 jobs:
   fetch:
     name: Fetch_PR
     runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
