@@ -4,7 +4,14 @@ on:
     types: [opened, reopened]
     branches:
     - main
+
 jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Print the input name to STDOUT
+          run: echo The pr is ${{ github.pull_request.url }}
+
   fetch:
     name: fetch
     uses: ./.github/workflows/fetch_pr_info.yml
