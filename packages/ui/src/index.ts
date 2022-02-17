@@ -16,3 +16,4 @@ export * from './TextField';
 export * from './FormHelperText';
 export * from './Grid';
 export * from './Tag';
+export * from './TextArea';

@@ -4,17 +4,19 @@ on:
       pr_url:
         required: true
         type: string
+    outputs: 
+      result: 
+        description: PR info
+        value: ${{ steps.fetch-pr.outputs.result }}
 jobs:
   fetch:
     name: Fetch_PR
     runs-on: ubuntu-latest
-    outputs: 
-      result: ${{ steps.fetch-pr.outputs.result }}
     steps:
       - name: fetch PR info
         id: fetch-pr
         uses: actions/github-script@v6
         with:
           script: | 
-            const result = await github.request(inputs.pr_url)
+            const result = await github.request(${{ inputs.pr_url }})
             return result.data;
