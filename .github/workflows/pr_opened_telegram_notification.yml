@@ -1,4 +1,4 @@
-name: telegram message
+name: pull request opened notification
 on:
   pull_request:
     types: [opened, reopened]
