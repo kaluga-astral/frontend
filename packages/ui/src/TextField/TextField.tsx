@@ -5,8 +5,8 @@ import { FormHelperText } from '../FormHelperText';
 
 import { TextFieldProps } from './types';
 
-export const TextField = forwardRef<HTMLDivElement>(
-  (props: TextFieldProps, ref) => {
+export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
+  (props, ref) => {
     const {
       variant,
       success,
@@ -37,7 +37,7 @@ export const TextField = forwardRef<HTMLDivElement>(
 
     return (
       <MuiTextField
-        inputRef={ref}
+        ref={ref}
         variant="outlined"
         error={error}
         color={color}
