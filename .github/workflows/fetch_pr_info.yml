@@ -16,5 +16,5 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const result = await github.request(inputs.pr_url)
+            const result = await github.request(${{ inputs.pr_url }})
             return result.data;
