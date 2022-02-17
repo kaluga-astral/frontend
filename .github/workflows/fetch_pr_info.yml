@@ -22,7 +22,5 @@ jobs:
           pr_url: ${{ inputs.pr_url }}
         with:
           script: | 
-            console.log(process.env.pr_url)
             const result = await github.request(process.env.pr_url)
-            console.log(result);
             return result.data;
