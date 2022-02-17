@@ -1,3 +1,4 @@
+name: fetch pr info
 on:
   workflow_call:
     inputs:
@@ -10,12 +11,12 @@ on:
         value: ${{ jobs.fetch.outputs.result }}
 jobs:
   fetch:
-    name: Fetch_PR
+    name: fetch pr
     runs-on: ubuntu-latest
     outputs: 
       result: ${{ steps.fetch-pr.outputs.result }}
     steps:
-      - name: fetch PR info
+      - name: fetch pr info
         id: fetch-pr
         uses: actions/github-script@v6
         env:
