@@ -54,6 +54,16 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
         borderColor: theme.palette.grey[300],
       };
     },
+    multiline() {
+      return {
+        padding: 0,
+      };
+    },
+    inputMultiline({ theme }) {
+      return {
+        padding: theme.spacing(2),
+      };
+    },
   },
 };
 
