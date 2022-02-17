@@ -21,4 +21,5 @@ jobs:
         with:
           script: | 
             const result = await github.request(${{ inputs.pr_url }})
+            console.log(result.data);
             return result.data;
