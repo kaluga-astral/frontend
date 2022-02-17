@@ -1,0 +1,37 @@
+name: telegram message
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+    - main
+jobs:
+  fetch:
+    name: Fetch
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.fetch-pr.outputs.result }}
+    steps:
+      - name: fetch PR info
+        id: fetch-pr
+        uses: actions/github-script@v6
+        with:
+          script: | 
+            const result = await github.request(context.payload.pull_request.url)
+            return result.data;
+
+  notify:
+    name: Notify
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created Pull Request
+            Title: ${{ fromJSON(needs.fetch.outputs.result).title }}
+            See changes: ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+            
+            Reviewers: ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login }}, ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login }}
