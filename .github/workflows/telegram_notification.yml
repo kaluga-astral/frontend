@@ -6,18 +6,10 @@ on:
     - main
 jobs:
   fetch:
-    name: Fetch
-    runs-on: ubuntu-latest
-    outputs: 
-      result: ${{ steps.fetch-pr.outputs.result }}
-    steps:
-      - name: fetch PR info
-        id: fetch-pr
-        uses: actions/github-script@v6
-        with:
-          script: | 
-            const result = await github.request(context.payload.pull_request.url)
-            return result.data;
+    name: fetch
+    uses: ./.github/workflows/fetch_pr_info.yml
+    with:
+      pr_url: ${{ github.pull_request.url }}
 
   notify:
     name: Notify
