@@ -20,7 +20,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            console.log(${{ inputs.pr_url }})
+            console.log(${{ inputs }})
             const result = await github.request(${{ inputs.pr_url }})
             console.log(result);
             return result.data;
