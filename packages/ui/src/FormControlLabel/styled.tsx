@@ -1,6 +1,5 @@
 import { FormControlLabel } from '@mui/material';
-
-import { styled } from '../styles';
+import styled from '@emotion/styled';
 
 import { FormControlLabelProps } from './types';
 

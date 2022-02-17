@@ -1,6 +1,5 @@
 import { Box, BoxProps } from '@mui/material';
-
-import { styled } from '../styles';
+import styled from '@emotion/styled';
 
 type StyledGridProps = BoxProps & { container: boolean };
 

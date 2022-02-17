@@ -1,7 +1,5 @@
-import { Chip } from '@mui/material';
-
-import { styled } from '../styles';
-import { Theme } from '../theme';
+import { Chip, Theme } from '@mui/material';
+import styled from '@emotion/styled';
 
 import { TagColors, TagStates } from './constants';
 import { TagColor, TagProps, TagState, TagVariant } from './types';

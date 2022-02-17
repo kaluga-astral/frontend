@@ -1,6 +1,7 @@
-import { styled } from '../styles';
+import styled from '@emotion/styled';
+import { Theme } from '@mui/material';
+
 import { ButtonBase, ButtonSizes } from '../ButtonBase';
-import { Theme } from '../theme';
 import { ButtonProps } from '../Button';
 
 type StyledIconButtonThemeProps = ButtonProps & {

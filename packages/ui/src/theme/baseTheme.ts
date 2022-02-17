@@ -1,19 +1,19 @@
 import {
   Palette as MuiPalette,
-  Theme as MuiTheme,
   PaletteColor,
+  Theme,
   ThemeOptions,
   createTheme as createMuiTheme,
   responsiveFontSizes,
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
-import { TypographyThemeOptions, typography } from './typography';
+import { typography } from './typography';
 import { Background, Color, getPalette } from './palette';
 import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
-import { Elevation, elevation } from './elevation';
-import { Shape, shape } from './shape';
+import { elevation } from './elevation';
+import { shape } from './shape';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -22,16 +22,6 @@ export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   grey: Color;
   primary: PaletteColor & Color;
   background: Background;
-};
-
-export type Theme = Omit<
-  MuiTheme,
-  'shadows' | 'palette' | 'shape' | 'typography'
-> & {
-  elevation: Elevation;
-  palette: Palette;
-  shape: Shape;
-  typography: TypographyThemeOptions;
 };
 
 type CreateThemeParams = {

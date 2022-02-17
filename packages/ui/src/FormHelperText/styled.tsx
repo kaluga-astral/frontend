@@ -1,6 +1,5 @@
 import { ErrorFillSm, SuccessFillSm } from '@astral/icons';
-
-import { styled } from '../styles';
+import styled from '@emotion/styled';
 
 const styles = `
   display: inline-flex;

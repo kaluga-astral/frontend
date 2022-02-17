@@ -1,6 +1,4 @@
-import { Components } from '@mui/material';
-
-import type { Theme } from '../baseTheme';
+import { Components, Theme } from '@mui/material';
 
 export const MuiFormHelperText: Components<Theme>['MuiFormHelperText'] = {
   styleOverrides: {

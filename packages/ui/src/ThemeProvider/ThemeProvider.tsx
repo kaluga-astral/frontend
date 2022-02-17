@@ -1,9 +1,8 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, Theme } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import { FC } from 'react';
 
 import { GlobalStyles } from '../GlobalStyles';
-import { Theme } from '../theme';
 
 type Props = { theme: Theme };
 

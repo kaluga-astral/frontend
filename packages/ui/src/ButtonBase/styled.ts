@@ -1,9 +1,8 @@
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from '@mui/base/ButtonUnstyled';
-
-import { styled } from '../styles';
-import { Theme } from '../theme';
+import styled from '@emotion/styled';
+import { Theme } from '@mui/material';
 
 import { ButtonSizes, ButtonStates, ButtonVariants } from './constants';
 import {

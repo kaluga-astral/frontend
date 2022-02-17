@@ -1,5 +1,6 @@
-import { styled } from '../styles';
-import { Theme } from '../theme';
+import styled from '@emotion/styled';
+import { Theme } from '@mui/material';
+
 import { ButtonBase, ButtonVariants } from '../ButtonBase';
 
 import { ButtonProps } from './types';

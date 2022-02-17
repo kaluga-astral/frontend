@@ -1,6 +1,5 @@
 import { Radio } from '@mui/material';
-
-import { styled } from '../styles';
+import styled from '@emotion/styled';
 
 import { RadioProps } from './types';
 

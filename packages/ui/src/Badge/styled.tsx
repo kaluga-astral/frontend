@@ -1,7 +1,5 @@
-import { Badge } from '@mui/material';
-
-import { styled } from '../styles';
-import { Theme } from '../theme';
+import { Badge, Theme } from '@mui/material';
+import styled from '@emotion/styled';
 
 import { BadgeColor, BadgeProps } from './types';
 

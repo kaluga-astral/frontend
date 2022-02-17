@@ -1,6 +1,5 @@
 import { Checkbox } from '@mui/material';
-
-import { styled } from '../styles';
+import styled from '@emotion/styled';
 
 import { CheckboxProps } from './types';
 
