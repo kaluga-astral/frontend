@@ -16,4 +16,9 @@ export type HeaderProps = {
   LogoLinkComponent?: React.FC<LogoLinkComponentProps>;
   WidgetComponent?: React.ElementType;
   NavBarComponent?: React.ElementType;
+  height?: number;
+};
+
+export type SideBarProps = {
+  width?: number;
 };

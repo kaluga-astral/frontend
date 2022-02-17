@@ -1,7 +1,9 @@
-import { Drawer } from '@mui/material';
+import { Drawer, DrawerProps } from '@mui/material';
 
 import { Grid } from '../Grid';
 import { styled } from '../styles';
+
+import { HeaderProps } from './types';
 
 /**
  * DASHBOARD
@@ -25,11 +27,14 @@ export const DashboardStyle = styled(Grid)`
 /**
  * HEADER
  */
-export const StyledHeader = styled('header')`
+
+export const StyledHeader = styled('header', {
+  shouldForwardProp: (prop) => prop !== 'height',
+})<HeaderProps>`
   box-shadow: ${({ theme }) => theme.elevation[200]};
   padding: 0 ${({ theme }) => theme.spacing(5)};
-  min-height: var(--headerHeight, 56px);
-  height: var(--headerHeight, 56px);
+  min-height: 56px;
+  height: var(--headerHeight, ${(props) => props.height}px);
   width: 100%;
   background-color: ${({ theme }) => theme.palette.background.default};
 `;
@@ -66,11 +71,15 @@ export const LogoStyle = styled('img')`
   cursor: pointer;
 `;
 
+type DrawerStyleProps = DrawerProps & {
+  width?: number;
+};
+
 /**
  * SIDEBAR
  */
-export const DrawerStyle = styled(Drawer)`
-  width: var(--sidebarWidth, 241px);
+export const DrawerStyle = styled(Drawer)<DrawerStyleProps>`
+  width: calc(var(--sidebarWidth, ${(props) => props.width}px) + 1px);
   position: relative;
   z-index: 999;
   .MuiPaper-root {

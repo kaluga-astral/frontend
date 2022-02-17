@@ -22,7 +22,10 @@ const LogoComponentDefault: React.FC<LogoComponentProps> = ({
   logoSrc,
 }: LogoComponentProps) => <LogoStyle src={logoSrc} />;
 
-export const Header: React.FC<HeaderProps> = forwardRef(
+export const Header: React.FC<HeaderProps> = forwardRef<
+  HTMLDivElement,
+  HeaderProps
+>(
   (
     {
       children,
@@ -31,6 +34,7 @@ export const Header: React.FC<HeaderProps> = forwardRef(
       LogoLinkComponent,
       WidgetComponent,
       NavBarComponent,
+      height = 46,
     },
     ref
   ) => {
@@ -48,7 +52,7 @@ export const Header: React.FC<HeaderProps> = forwardRef(
     };
 
     return (
-      <StyledHeader ref={ref}>
+      <StyledHeader height={height} ref={ref}>
         <InnerContainer>
           <LeftPartContainer>
             {WidgetComponent && <WidgetComponent />}
