@@ -1,6 +1,7 @@
 import React, { Children } from 'react';
 
 import Header from './Header';
+import SideBar from './SideBar';
 import { DashboardStyle } from './styled';
 
 interface DashBoardLayoutProps {
@@ -14,13 +15,13 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
   return (
     <DashboardStyle
       container
-      templateColumns={'200px 1fr'}
+      templateColumns={'auto 1fr'}
       templateRows={'auto 1fr'}
       templateAreas={`"header header"
                       "sidebar main"`}
     >
       {HeaderComponent || <Header />}
-      {SideBarComponent || null}
+      {SideBarComponent || <SideBar />}
       {MainComponent || null}
       {restChildren}
     </DashboardStyle>
@@ -28,5 +29,6 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
 };
 
 DashboardLayout.Header = Header;
+DashboardLayout.SideBar = SideBar;
 
 export default DashboardLayout;
