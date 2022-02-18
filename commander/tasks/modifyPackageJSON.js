@@ -44,7 +44,6 @@ const modifyPackageJSON = () => {
         types: './esm/index.d.ts',
         type: 'module',
         types: './types/index.d.ts',
-        // source: './src/index.ts',
         main: './cjs/index.js',
         module: './esm/index.js',
         exports: {
