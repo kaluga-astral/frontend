@@ -1,8 +1,7 @@
-import {
-  ListItemIconProps,
-  ListItemIcon as MuiListItemIcon,
-} from '@mui/material';
+import { ListItemIconProps } from '@mui/material';
+
+import { StyledListItemIcon } from './styled';
 
 export const ListItemIcon = ({ children, ...props }: ListItemIconProps) => {
-  return <MuiListItemIcon {...props}>{children}</MuiListItemIcon>;
+  return <StyledListItemIcon {...props}>{children}</StyledListItemIcon>;
 };
