@@ -10,7 +10,7 @@ export default {
 
 const LOGO_SRC: string = 'https://ofd.astralnalog.ru/images/FullLogo.png';
 
-export const Dashboard: Story = () => {
+export const Default: Story = () => {
   return (
     <Box border="1px solid #dfdfdf">
       <DashboardLayout>
