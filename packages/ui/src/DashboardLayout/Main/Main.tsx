@@ -3,7 +3,13 @@ import { Box } from '@mui/material';
 
 export const Main: FC = forwardRef(({ children, ref }) => {
   return (
-    <Box ref={ref} overflow="hidden" component="main">
+    <Box
+      ref={ref}
+      gridColumn="2"
+      gridRow="2"
+      overflow="hidden"
+      component="main"
+    >
       {children}
     </Box>
   );
