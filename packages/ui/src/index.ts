@@ -1,3 +1,6 @@
+export * from './createCache';
+export * from './createEmotionServer';
+export * from './CacheProvider';
 export * from './Button';
 export * from './ButtonBase';
 export * from './IconButton';

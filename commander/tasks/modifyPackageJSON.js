@@ -42,7 +42,18 @@ const modifyPackageJSON = () => {
         sideEffects: false,
         main: './node/index.js',
         types: './esm/index.d.ts',
+        type: 'module',
+        types: './types/index.d.ts',
+        // source: './src/index.ts',
+        main: './cjs/index.js',
         module: './esm/index.js',
+        exports: {
+          '.': {
+            import: './esm/index.js',
+            require: './cjs/index.js',
+            types: './types/index.d.ts',
+          },
+        },
       },
       null,
       2
