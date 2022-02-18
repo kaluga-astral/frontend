@@ -1,19 +1,12 @@
-import { ElementType, FC } from 'react';
+import { ElementType, FC, ReactNode } from 'react';
 
 export type HeaderProps = {
-  logoSrc?: string;
-  logoLink?: string;
-  Widget?: ElementType;
-  LogoLinkComponent?: FC<LogoLinkComponentProps>;
-  WidgetComponent?: ElementType;
-  NavBarComponent?: ElementType;
-};
-
-export type LogoComponentProps = {
   logoSrc: string;
+  logoAlt: string;
+  LogoLinkComponent: FC<LogoLinkComponentProps>;
+  WidgetComponent?: ElementType;
 };
 
 export type LogoLinkComponentProps = {
-  logoLink: string;
-  children?: React.ReactNode;
+  Logo: ReactNode;
 };
