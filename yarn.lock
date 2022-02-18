@@ -68,7 +68,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@astral/icons@^0.3.0, @astral/icons@workspace:packages/icons":
+"@astral/icons@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@astral/icons@npm:0.3.0"
+  peerDependencies:
+    "@mui/material": ^5.3.1
+    react: ^17.0.0
+  checksum: 8175b3b429a180cca79e7efcb1f1bffcb16754f111fb8f3fd9ab6c4fa3050d823197ee37a1ca61ad15791748cb736605acb2ac58bee39387e56d4ba23711df50
+  languageName: node
+  linkType: hard
+
+"@astral/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@astral/icons@workspace:packages/icons"
   dependencies:
