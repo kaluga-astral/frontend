@@ -26,5 +26,7 @@ jobs:
           message: |
             &#9989; &#9989; &#9989;
             ${{ github.event.sender.login }} аппрувнул PR от ${{github.actor}}
+
             ${{ fromJSON(needs.fetch.outputs.result).title }}
+
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
