@@ -9,7 +9,7 @@ jobs:
   fetch:
     name: fetch
     if: github.event.review.state == 'approved'
-    uses: ./.github/workflows/fetch_pr_info.yml
+    uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
       pr_url: ${{ github.event.pull_request.url }}
 
