@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { Header } from './Header';
-import { SideBar } from './SideBar';
-import { Main } from './Main';
+import { Header } from './Header/';
+import { SideBar } from './SideBar/';
+import { Main } from './Main/';
 import { StyledDashboard } from './styled';
 
 interface DashBoardLayoutProps {
