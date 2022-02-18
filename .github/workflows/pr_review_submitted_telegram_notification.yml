@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             &#9989;&#9989;&#9989;
-            ${{ github.event.sender.login }} аппрувнул PR от ${{github.actor}}
+            ${{ github.event.sender.login }} аппрувнул PR от ${{ github.event.user.login }}
 
             ${{ fromJSON(needs.fetch.outputs.result).title }}
 
