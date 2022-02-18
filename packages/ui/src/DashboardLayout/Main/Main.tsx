@@ -1,7 +1,7 @@
+import { FC, forwardRef } from 'react';
 import { Box } from '@mui/material';
-import { forwardRef } from 'react';
 
-export const Main: React.FC = forwardRef(({ children, ref }) => {
+export const Main: FC = forwardRef(({ children, ref }) => {
   return (
     <Box ref={ref} overflow="hidden" component="main">
       {children}
