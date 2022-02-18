@@ -8,7 +8,8 @@ on:
 jobs:
   fetch:
     name: fetch
-    uses: ./.github/workflows/fetch_pr_info.yml
+    if: github.event.review.state == 'approved'
+    uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
       pr_url: ${{ github.event.pull_request.url }}
 
@@ -23,5 +24,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.event.sender.login }} аппрувнул PR от ${{github.actor}}: ${{ fromJSON(needs.fetch.outputs.result).title }}
+            &#9989;&#9989;&#9989;
+            ${{ github.event.sender.login }} аппрувнул PR от ${{github.actor}}
+
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
