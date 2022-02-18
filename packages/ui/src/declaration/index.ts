@@ -1,2 +1,2 @@
-export * from './materialUi.d';
+export * from './mui-material.d';
 export * from './emotion.d';
