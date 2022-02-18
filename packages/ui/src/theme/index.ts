@@ -4,3 +4,4 @@ export * from './constants';
 export * from './elevation';
 export * from './shape';
 export * from './hooks';
+export * from './zIndex';

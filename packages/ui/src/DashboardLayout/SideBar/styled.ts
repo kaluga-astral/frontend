@@ -3,10 +3,10 @@ import { Drawer } from '@mui/material';
 import { styled } from '../../styles';
 
 export const StyledDrawer = styled(Drawer)`
+  z-index: ${({ theme }) => theme.zIndex.drawer};
   grid-column: 1;
   width: 241px;
   position: relative;
-  z-index: 999;
   .MuiPaper-root {
     position: absolute;
     left: 0;

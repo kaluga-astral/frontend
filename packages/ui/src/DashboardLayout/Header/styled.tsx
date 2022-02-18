@@ -3,6 +3,7 @@ import { styled } from '../../styles';
 import { HeaderProps } from './types';
 
 export const StyledHeader = styled('header')<HeaderProps>`
+  z-index: ${({ theme }) => theme.zIndex.appBar};
   grid-column: 1 / -1;
   box-shadow: ${({ theme }) => theme.elevation[200]};
   padding: 0 ${({ theme }) => theme.spacing(5)};
