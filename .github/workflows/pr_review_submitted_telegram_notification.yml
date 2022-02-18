@@ -1,7 +1,7 @@
 name: pull request review submitted notification
 on:
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    types: [reopened]
 
 jobs:
   fetch:
