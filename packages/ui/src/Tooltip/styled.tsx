@@ -17,8 +17,8 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
         : theme.typography.ui.fontSize};
     line-height: ${({ size, theme }) =>
       size === 'small'
-        ? theme.typography.pxToRem(16)
-        : theme.typography.pxToRem(20)};
+        ? theme.typography.small.lineHeight
+        : theme.typography.ui.lineHeight};
     font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
   }
 
