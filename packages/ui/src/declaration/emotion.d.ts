@@ -1,15 +1,6 @@
 import '@emotion/react';
-import { Theme as MuiTheme } from '@mui/material/styles';
-
-import { Elevation, Palette, Shape } from '../theme';
-import { TypographyThemeOptions } from '../theme/typography';
+import { Theme as UIKitTheme } from '../theme';
 
 declare module '@emotion/react' {
-  export interface Theme
-    extends Omit<MuiTheme, 'shadows' | 'palette' | 'shape' | 'typography'> {
-    elevation: Elevation;
-    palette: Palette;
-    shape: Shape;
-    typography: TypographyThemeOptions;
-  }
+  export interface Theme extends UIKitTheme {}
 }
