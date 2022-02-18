@@ -24,7 +24,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             &#128035;&#128035;&#128035;
-            ${{ github.event.user.login }} открыл PR
+            ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
