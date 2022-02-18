@@ -1,11 +1,14 @@
 name: pull request review submitted notification
 on:
-  pull_request:
-    types: [reopened]
+  pull_request_review:
+    types: [submitted]
+    branches:
+    - main
 
 jobs:
   fetch:
     name: fetch
+    if: github.event.review.state == 'approved'
     uses: ./.github/workflows/fetch_pr_info.yml
     with:
       pr_url: ${{ github.event.pull_request.url }}
