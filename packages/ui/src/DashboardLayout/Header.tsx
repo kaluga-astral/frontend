@@ -34,7 +34,6 @@ export const Header: React.FC<HeaderProps> = forwardRef<
       LogoLinkComponent,
       WidgetComponent,
       NavBarComponent,
-      height = 46,
     },
     ref
   ) => {
@@ -52,7 +51,7 @@ export const Header: React.FC<HeaderProps> = forwardRef<
     };
 
     return (
-      <StyledHeader height={height} ref={ref}>
+      <StyledHeader ref={ref}>
         <InnerContainer>
           <LeftPartContainer>
             {WidgetComponent && <WidgetComponent />}

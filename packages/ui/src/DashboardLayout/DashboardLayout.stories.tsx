@@ -14,10 +14,10 @@ export const Dashboard: Story = () => {
   return (
     <Box border={'1px solid #dfdfdf'}>
       <DashBoardLayoutComponent>
-        <DashBoardLayoutComponent.Header height={46} logoSrc={LOGO_SRC}>
+        <DashBoardLayoutComponent.Header logoSrc={LOGO_SRC}>
           Профиль
         </DashBoardLayoutComponent.Header>
-        <DashBoardLayoutComponent.SideBar width={240} />
+        <DashBoardLayoutComponent.SideBar />
         <DashBoardLayoutComponent.Main />
       </DashBoardLayoutComponent>
     </Box>

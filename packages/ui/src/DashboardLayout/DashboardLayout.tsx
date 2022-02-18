@@ -1,31 +1,23 @@
-import React, { Children } from 'react';
+import { ReactNode } from 'react';
 
 import Header from './Header';
 import SideBar from './SideBar';
 import Main from './Main';
-import { DashboardStyle } from './styled';
+import { StyledDashboard } from './styled';
 
 interface DashBoardLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
-  const [HeaderComponent, SideBarComponent, MainComponent, ...restChildren] =
-    Children.toArray(children);
-
   return (
-    <DashboardStyle
+    <StyledDashboard
       container
-      templateColumns={'auto 1fr'}
-      templateRows={'auto 1fr'}
-      templateAreas={`"header header"
-                      "sidebar main"`}
+      templateColumns="auto 1fr"
+      templateRows="auto 1fr"
     >
-      {HeaderComponent || <Header />}
-      {SideBarComponent || <SideBar />}
-      {MainComponent || <Main />}
-      {restChildren}
-    </DashboardStyle>
+      {children}
+    </StyledDashboard>
   );
 };
 
