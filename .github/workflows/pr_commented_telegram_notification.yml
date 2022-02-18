@@ -1,10 +1,10 @@
 name: pull request commented notification
 on:  
   issue_comment:
-    types: [created]
+    types: [created, edited]
     branches:
     - main
-on:
+
   pull_request_review_comment:
     types: [created]
     branches:
