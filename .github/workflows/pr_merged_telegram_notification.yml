@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             &#127881;&#127881;&#127881;
-            ${{ github.event.pull_request.mergedBy.login }} смержил PR от ${{github.actor}}
+            ${{ github.event.pull_request.mergedBy.login }} смержил PR от ${{ github.event.user.login }}
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
