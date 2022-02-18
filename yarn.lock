@@ -68,21 +68,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-<<<<<<< HEAD
-"@astral/icons@npm:^0.2.2":
-  version: 0.2.5
-  resolution: "@astral/icons@npm:0.2.5"
-  peerDependencies:
-    "@mui/material": ^5.3.1
-    react: ^17.0.0
-  checksum: f8f427ab4259b6ab21792242d79e4d1f4cdca42fece067e2790d93e8c3cb6ad26459ee2a994feb77b389ffbdf001066309c498539a0a93d81b18e3baa8df915d
-  languageName: node
-  linkType: hard
-
-"@astral/icons@workspace:packages/icons":
-=======
 "@astral/icons@^0.3.0, @astral/icons@workspace:packages/icons":
->>>>>>> 7f3dc72f73c5a8322c4ed3e94087a1d22fb953fb
   version: 0.0.0-use.local
   resolution: "@astral/icons@workspace:packages/icons"
   dependencies:
@@ -98,14 +84,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@astral/ui@workspace:packages/ui"
   dependencies:
-<<<<<<< HEAD
-    "@astral/icons": ^0.2.2
-    "@emotion/cache": ^11.7.1
-=======
     "@astral/icons": ^0.3.0
->>>>>>> 7f3dc72f73c5a8322c4ed3e94087a1d22fb953fb
+    "@emotion/cache": 11.7.1
     "@emotion/react": 11.5.0
-    "@emotion/server": ^11.4.0
+    "@emotion/server": 11.4.0
     "@emotion/styled": 11.3.0
     "@mui/base": 5.0.0-alpha.66
     "@mui/lab": 5.0.0-alpha.65
@@ -1881,19 +1863,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/cache@npm:^10.0.27":
-  version: 10.0.29
-  resolution: "@emotion/cache@npm:10.0.29"
-  dependencies:
-    "@emotion/sheet": 0.9.4
-    "@emotion/stylis": 0.8.5
-    "@emotion/utils": 0.11.3
-    "@emotion/weak-memoize": 0.2.5
-  checksum: 78b37fb0c2e513c90143a927abef229e995b6738ef8a92ce17abe2ed409b38859ddda7c14d7f4854d6f4e450b6db50231532f53a7fec4903d7ae775b2ae3fd64
-  languageName: node
-  linkType: hard
-
-"@emotion/cache@npm:^11.5.0, @emotion/cache@npm:^11.7.1":
+"@emotion/cache@npm:11.7.1, @emotion/cache@npm:^11.5.0, @emotion/cache@npm:^11.7.1":
   version: 11.7.1
   resolution: "@emotion/cache@npm:11.7.1"
   dependencies:
@@ -1903,6 +1873,18 @@ __metadata:
     "@emotion/weak-memoize": ^0.2.5
     stylis: 4.0.13
   checksum: cf7aa8fe3bacfdedcda94b53e76a7635e122043439715fcfbf7f1a81340cfe6099a59134481a03ec3e0437466566d18528577d1e6ea92f5b98c372b8b38a8f35
+  languageName: node
+  linkType: hard
+
+"@emotion/cache@npm:^10.0.27":
+  version: 10.0.29
+  resolution: "@emotion/cache@npm:10.0.29"
+  dependencies:
+    "@emotion/sheet": 0.9.4
+    "@emotion/stylis": 0.8.5
+    "@emotion/utils": 0.11.3
+    "@emotion/weak-memoize": 0.2.5
+  checksum: 78b37fb0c2e513c90143a927abef229e995b6738ef8a92ce17abe2ed409b38859ddda7c14d7f4854d6f4e450b6db50231532f53a7fec4903d7ae775b2ae3fd64
   languageName: node
   linkType: hard
 
@@ -2021,7 +2003,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/server@npm:^11.4.0":
+"@emotion/server@npm:11.4.0":
   version: 11.4.0
   resolution: "@emotion/server@npm:11.4.0"
   dependencies:
