@@ -1,8 +1,6 @@
-import {
-  ListItemButtonProps,
-  ListItemButton as MuiListItemButton,
-} from '@mui/material';
+import { StyledListItemButton } from './styled';
+import { ListItemButtonProps } from './types';
 
 export const ListItemButton = ({ children, ...props }: ListItemButtonProps) => {
-  return <MuiListItemButton {...props}>{children}</MuiListItemButton>;
+  return <StyledListItemButton {...props}>{children}</StyledListItemButton>;
 };
