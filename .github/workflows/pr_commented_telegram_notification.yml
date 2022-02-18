@@ -15,7 +15,7 @@ jobs:
     name: fetch
     uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
-      pr_url: ${{ github.event.pull_request.url }}
+      pr_url: ${{ github.event.pull_request.url || github.event.issue.pull_request.url }}
 
   notify:
     name: notify
