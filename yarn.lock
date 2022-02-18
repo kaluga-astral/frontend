@@ -68,6 +68,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+<<<<<<< HEAD
 "@astral/icons@npm:^0.2.2":
   version: 0.2.5
   resolution: "@astral/icons@npm:0.2.5"
@@ -79,6 +80,9 @@ __metadata:
   linkType: hard
 
 "@astral/icons@workspace:packages/icons":
+=======
+"@astral/icons@^0.3.0, @astral/icons@workspace:packages/icons":
+>>>>>>> 7f3dc72f73c5a8322c4ed3e94087a1d22fb953fb
   version: 0.0.0-use.local
   resolution: "@astral/icons@workspace:packages/icons"
   dependencies:
@@ -94,8 +98,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@astral/ui@workspace:packages/ui"
   dependencies:
+<<<<<<< HEAD
     "@astral/icons": ^0.2.2
     "@emotion/cache": ^11.7.1
+=======
+    "@astral/icons": ^0.3.0
+>>>>>>> 7f3dc72f73c5a8322c4ed3e94087a1d22fb953fb
     "@emotion/react": 11.5.0
     "@emotion/server": ^11.4.0
     "@emotion/styled": 11.3.0

@@ -1,6 +1,6 @@
 {
   "name": "@astral/fonts",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "main": "./src",
   "scripts": {
     "prebuild": "npx rimraf ./lib",
