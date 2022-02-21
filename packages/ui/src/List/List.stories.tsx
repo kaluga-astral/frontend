@@ -49,7 +49,7 @@ export const Template: Story = () => {
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItem>
-          <ListItem sx={{ pl: 4 }} active>
+          <ListItem sx={{ pl: 4 }} selected>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
