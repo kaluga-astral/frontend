@@ -10,16 +10,14 @@ import {
 import { HeaderProps } from './types';
 
 export const Header: FC<HeaderProps> = forwardRef<HTMLDivElement, HeaderProps>(
-  ({ children, logoSrc, logoAlt, LogoLinkComponent, WidgetComponent }, ref) => {
+  ({ children, logoSrc, logoAlt, LogoLink, WidgetComponent }, ref) => {
     return (
       <StyledHeader ref={ref}>
         <InnerContainer>
           <LeftContainer>
             {WidgetComponent && <WidgetComponent />}
             <LogoContainer withWidget={!!WidgetComponent}>
-              <LogoLinkComponent
-                Logo={<LogoStyle src={logoSrc} alt={logoAlt} />}
-              />
+              <LogoLink Logo={<LogoStyle src={logoSrc} alt={logoAlt} />} />
             </LogoContainer>
           </LeftContainer>
           {children}

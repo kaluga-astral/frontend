@@ -17,7 +17,7 @@ export const Default: Story = () => {
         <DashboardLayout.Header
           logoAlt="Астрал.ОФД"
           logoSrc={LOGO_SRC}
-          LogoLinkComponent={({ Logo }) => <a href="/">{Logo}</a>}
+          LogoLink={({ Logo }) => <a href="/">{Logo}</a>}
         />
         <DashboardLayout.SideBar />
         <DashboardLayout.Main />
