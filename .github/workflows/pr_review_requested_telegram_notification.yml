@@ -17,8 +17,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const reviewers = context;
-            console.log(reviewers);
+            const approvedReviewsResult = await github.request(context.pull_request.url + '/reviews');
+            const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
+            const requestedReviewers =  context.pull_request.requested_reviewers;
+            
+            return { reviewersLength: reviewers.length, reviewer: context.requested_reviewer };
               
     
 
@@ -39,7 +42,7 @@ jobs:
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
-            &#128104;&#128104; требует ревью от ${{ fromJSON(needs.reviewers.outputs.result).lastReviewer.login }}
+            &#128104;&#128104; требует ревью от ${{ fromJSON(needs.reviewers.outputs.result).reviewer.login }}
             
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
             
