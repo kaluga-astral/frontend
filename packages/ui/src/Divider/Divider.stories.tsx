@@ -1,5 +1,10 @@
 import { Story } from '@storybook/react';
 
+import { ListItemButton } from '../ListItemButton';
+import { ListItemText } from '../ListItemText';
+import { List } from '../List';
+import { ListItem } from '../ListItem';
+
 import { Divider } from './Divider';
 
 export default {
@@ -9,9 +14,23 @@ export default {
 
 const Template: Story = () => {
   return (
-    <>
-      <Divider></Divider>
-    </>
+    <List>
+      <ListItem>
+        <ListItemText primary="Inbox" />
+      </ListItem>
+      <Divider />
+      <ListItem divider>
+        <ListItemText primary="Drafts" />
+      </ListItem>
+      <ListItemButton>
+        <ListItemText primary="Button" />
+      </ListItemButton>
+      <Divider light />
+      <ListItemButton>
+        <ListItemText primary="Button" />
+      </ListItemButton>
+      <Divider />
+    </List>
   );
 };
 
