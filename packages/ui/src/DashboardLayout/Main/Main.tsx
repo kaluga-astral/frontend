@@ -1,18 +1,9 @@
 import { FC, forwardRef } from 'react';
-import { Box } from '@mui/material';
+
+import { StyledMain } from './styled';
 
 export const Main: FC = forwardRef(({ children, ref }) => {
-  return (
-    <Box
-      ref={ref}
-      gridColumn="2"
-      gridRow="2"
-      overflow="hidden"
-      component="main"
-    >
-      {children}
-    </Box>
-  );
+  return <StyledMain ref={ref}>{children}</StyledMain>;
 });
 
 export default Main;
