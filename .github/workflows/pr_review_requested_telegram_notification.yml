@@ -17,6 +17,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
+            console.log(context);
             const approvedReviewsResult = await github.request(context.url + '/reviews');
             const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
             const requestedReviewers =  context.requested_reviewers;
