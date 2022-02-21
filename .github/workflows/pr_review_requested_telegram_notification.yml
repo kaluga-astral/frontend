@@ -17,12 +17,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            console.log(context.pull_request);
-            const approvedReviewsResult = await github.request(context.pull_request.url + '/reviews');
+            console.log(context.payload.pull_request);
+            const approvedReviewsResult = await github.request(context.payload.pull_request.url + '/reviews');
             const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
-            const requestedReviewers =  context.pull_request.requested_reviewers;
+            const requestedReviewers =  context.payload.pull_request.requested_reviewers;
             
-            return { reviewersLength: reviewers.length + approvedReviewers.length, reviewer: context.requested_reviewer };
+            return { reviewersLength: reviewers.length + approvedReviewers.length, reviewer: context.payload.requested_reviewer };
               
     
 
