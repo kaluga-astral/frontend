@@ -1,10 +1,16 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./**/*.ts", "./**/*.tsx", "./declarations/*.ts"],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
   "exclude": [
     "node_modules",
     "dist",
     "./**/*.test.(tsx|ts)",
     "./**/*.stories.tsx"
-  ]
+  ],
+  "compilerOptions": {
+    "declaration": false
+  }
 }
