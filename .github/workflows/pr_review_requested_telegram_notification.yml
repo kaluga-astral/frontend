@@ -38,11 +38,11 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             &#128065;&#128065;&#128065;
-            PR от ${{ fromJSON(needs.fetch.outputs.result).user.login }}
+            PR от ${{ github.event.pull_request.user.login }}
             
-            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            ${{ github.event.pull_request.title }}
             
             &#128104;&#128104; требует ревью от ${{ fromJSON(needs.reviewers.outputs.result).reviewer.login }}
             
-            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+            ${{ github.event.pull_request.html_url }}
             
