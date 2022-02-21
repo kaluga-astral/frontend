@@ -24,11 +24,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const approvedReviewsResult = await github.request(${{ github.event.pull_request.url }}/reviews);
-            const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
             const reviewers = ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers }};
             
-            return { reviewersLength: reviewers.length + approvedReviews.length, lastReviewer: reviewers[length - 1] };
+            return { reviewersLength: reviewers.length, lastReviewer: reviewers[length - 1] };
     
 
   notify:
