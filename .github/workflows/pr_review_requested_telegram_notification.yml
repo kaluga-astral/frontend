@@ -24,7 +24,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const reviewers = ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login }};
+            const reviewers = ${{ fromJSON(needs.fetch.outputs.result).requested_reviewer.login }};
             console.log(reviewers);
               
     
