@@ -13,7 +13,7 @@ export type AutocompleteProps = Omit<
   MuiAutocompleteProps<AutocompleteValueProps, boolean, false, false>,
   'size' | 'renderInput'
 > & {
-  renderInput: (params: AutocompleteRenderInputParams) => React.ReactNode;
+  renderInput?: (params: AutocompleteRenderInputParams) => React.ReactNode;
   error?: boolean;
   success?: boolean;
   helperText?: string;
