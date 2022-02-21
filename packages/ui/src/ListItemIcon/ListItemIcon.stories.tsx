@@ -1,4 +1,9 @@
+import { HomeOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
+
+import { List } from '../List';
+import { ListItem } from '../ListItem';
+import { ListItemText } from '../ListItemText';
 
 import { ListItemIcon } from './ListItemIcon';
 
@@ -9,9 +14,14 @@ export default {
 
 const Template: Story = () => {
   return (
-    <>
-      <ListItemIcon></ListItemIcon>
-    </>
+    <List>
+      <ListItem selected={0 === 0}>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="Drafts" />
+      </ListItem>
+    </List>
   );
 };
 

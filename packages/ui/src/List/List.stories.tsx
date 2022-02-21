@@ -15,7 +15,7 @@ import { ListSubheader } from '../ListSubheader';
 import { List } from './List';
 
 export default {
-  title: 'Components/List',
+  title: 'Components/Avatar',
   component: List,
 };
 
@@ -27,33 +27,43 @@ export const Template: Story = () => {
   };
 
   return (
-    <>
-      <List subheader={<ListSubheader>Subheader</ListSubheader>}>
-        <ListItem>
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-        <ListItem onClick={handleClick}>
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-          {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List disablePadding>
-            <ListItem sx={{ pl: 4 }} active>
-              <ListItemIcon>
-                <HomeOutlineMd />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List>
-    </>
+    <List subheader={<ListSubheader>Subheader</ListSubheader>}>
+      <ListItem>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="Drafts" />
+      </ListItem>
+      <ListItem onClick={handleClick}>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+        {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List disablePadding>
+          <ListItem sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItem>
+          <ListItem sx={{ pl: 4 }} active>
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItem>
+          <ListItem sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItem>
+        </List>
+      </Collapse>
+    </List>
   );
 };
 

@@ -1,4 +1,11 @@
+import { InfoFillSm } from '@astral/icons';
+import { Avatar } from '@mui/material';
 import { Story } from '@storybook/react';
+
+import { List } from '../List';
+import { ListItem } from '../ListItem';
+import { ListItemText } from '../ListItemText';
+import { ListSubheader } from '../ListSubheader';
 
 import { ListItemAvatar } from './ListItemAvatar';
 
@@ -9,9 +16,16 @@ export default {
 
 const Template: Story = () => {
   return (
-    <>
-      <ListItemAvatar></ListItemAvatar>
-    </>
+    <List subheader={<ListSubheader>Subheader</ListSubheader>}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <InfoFillSm />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+      </ListItem>
+    </List>
   );
 };
 

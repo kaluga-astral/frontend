@@ -1,17 +1,25 @@
 import { Story } from '@storybook/react';
 
+import { List } from '../List';
+import { ListItem } from '../ListItem';
+
 import { ListItemText } from './ListItemText';
 
 export default {
-  title: 'Components/ListItemTextItem',
+  title: 'Components/ListItemText',
   component: ListItemText,
 };
 
 const Template: Story = () => {
   return (
-    <>
-      <ListItemText></ListItemText>
-    </>
+    <List>
+      <ListItem>
+        <ListItemText primary="Drafts" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Inbox" />
+      </ListItem>
+    </List>
   );
 };
 

@@ -11,22 +11,22 @@ type StyledListItemThemeProps = ListItemProps & {
 };
 
 export const getBgColor = ({
-  active,
+  selected,
   theme,
 }: StyledListItemThemeProps): string => {
-  if (active) return theme.palette.grey[100];
+  if (selected) return theme.palette.grey[100];
 
   return 'transparent';
 };
 
 export const getColor = ({
   theme,
-  active,
+  selected,
   listItemState,
 }: StyledListItemThemeProps & {
   listItemState: ListItemStates;
 }): string => {
-  if (active) return theme.palette.primary[800];
+  if (selected) return theme.palette.primary[800];
   if (listItemState === ListItemStates.DEFAULT) return theme.palette.grey[900];
   if (listItemState === ListItemStates.HOVER) return theme.palette.primary[800];
 
@@ -34,10 +34,11 @@ export const getColor = ({
 };
 
 export const StyledListItem = styled(ListItem, {
-  shouldForwardProp: (prop) => prop !== 'active',
+  shouldForwardProp: (prop) => prop !== 'selected',
 })<ListItemProps>`
   cursor: pointer;
   user-select: none;
+  border-radius: 4px;
   background-color: ${(props) => getBgColor({ ...props })};
   color: ${(props) =>
     getColor({ ...props, listItemState: ListItemStates.DEFAULT })};

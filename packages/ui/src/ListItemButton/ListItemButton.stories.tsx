@@ -1,4 +1,10 @@
+import { HomeOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
+
+import { List } from '../List';
+import { ListItemIcon } from '../ListItemIcon';
+import { ListItemText } from '../ListItemText';
+import { ListSubheader } from '../ListSubheader';
 
 import { ListItemButton } from './ListItemButton';
 
@@ -9,9 +15,20 @@ export default {
 
 const Template: Story = () => {
   return (
-    <>
-      <ListItemButton></ListItemButton>
-    </>
+    <List subheader={<ListSubheader>Subheader</ListSubheader>}>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="Drafts" />
+      </ListItemButton>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+      </ListItemButton>
+    </List>
   );
 };
 
