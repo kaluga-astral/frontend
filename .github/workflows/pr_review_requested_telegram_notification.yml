@@ -5,17 +5,10 @@ on:
     branches:
     - main
 
-jobs:
-  fetch:
-    name: fetch
-    uses: ./.github/workflows/fetch_pr_info.yml
-    with:
-      pr_url: ${{ github.event.pull_request.url }}
-      
+jobs: 
   reviewers:
     name: check length of reviewers
     runs-on: ubuntu-latest
-    needs: fetch
     outputs: 
       result: ${{ steps.reviewers.outputs.result }}
     steps:
@@ -31,9 +24,9 @@ jobs:
 
   notify:
     name: notify
-    needs: [fetch, reviewers]
+    needs: reviewers
     runs-on: ubuntu-latest
-    if: ${{ fromJSON(needs.check.outputs.result).reviewersLength > 2 }}
+    if: ${{ fromJSON(needs.reviewers.outputs.result).reviewersLength > 2 }}
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
