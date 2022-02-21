@@ -62,6 +62,7 @@ export const Autocomplete = ({
     );
   };
 
+  // TODO: при стилизации компонента, тс ругается на getOptionsLabel (Object is of type 'unknown'.) и renderTags
   // @ts-ignore
   return (
     <StyledAutocomplete
