@@ -21,7 +21,7 @@ jobs:
             const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
             const requestedReviewers =  context.payload.pull_request.requested_reviewers;
             
-            return { reviewersLength: requestedReviewers.length + approvedReviewers.length, reviewer: context.payload.requested_reviewer };
+            return { reviewersLength: requestedReviewers.length + approvedReviews.length, reviewer: context.payload.requested_reviewer };
               
     
 
