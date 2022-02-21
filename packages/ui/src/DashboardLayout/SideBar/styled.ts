@@ -3,7 +3,7 @@ import { Drawer } from '@mui/material';
 import { styled } from '../../styles';
 
 export const StyledDrawer = styled(Drawer)`
-  z-index: ${({ theme }) => theme.zIndex.drawer};
+  z-index: ${({ theme }) => theme.zIndex.appBar - 1};
   grid-column: 1;
   width: 241px;
   position: relative;

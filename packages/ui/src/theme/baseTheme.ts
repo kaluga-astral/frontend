@@ -14,7 +14,6 @@ import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { Elevation, elevation } from './elevation';
 import { Shape, shape } from './shape';
-import { zIndex } from './zIndex';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -48,7 +47,6 @@ export const createTheme = (params: CreateThemeParams) => {
     spacing: SPACING,
     palette: getPalette(brand),
     components: getComponents(fontsUrls),
-    zIndex,
   };
 
   const muiTheme = responsiveFontSizes(
