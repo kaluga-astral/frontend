@@ -1,129 +1,80 @@
-import { useMemo } from 'react';
+import {
+  AutocompleteRenderGetTagProps,
+  AutocompleteRenderInputParams,
+  ListItemIcon,
+} from '@mui/material';
+import { HTMLAttributes } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
-import { useAutocomplete } from '@mui/base';
-import { InputAdornment, InputLabel, ListItemIcon } from '@mui/material';
 
-import { MenuItem } from '../MenuItem';
+import { TextField } from '../TextField';
 import { Tag } from '../Tag';
-import { MenuList } from '../MenuList';
-import { FormHelperText } from '../FormHelperText';
+import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 
-import { InputWrapper, StyledFormControl, TagsWrapper } from './styled';
-import { AutocompleteProps } from './types';
+import { AutocompleteProps, AutocompleteValueProps } from './types';
+import { StyledAutocomplete } from './styled';
 
 export const Autocomplete = ({
+  multiple,
   placeholder = 'Выберите вариант',
-  multiple = false,
-  defaultValue,
-  startAdornment,
-  endAdornment,
-  helperText,
-  options,
-  success,
   error,
+  success,
+  helperText,
   label,
-  size = 'small',
+  renderInput,
+  size = 'medium',
   ...props
 }: AutocompleteProps) => {
-  const {
-    getInputLabelProps,
-    getRootProps,
-    groupedOptions,
-    getListboxProps,
-    getOptionProps,
-    getInputProps,
-    popupOpen,
-    setAnchorEl,
-    getTagProps,
-    getClearProps,
-    focused,
-    value,
-  } = useAutocomplete({
-    ...props,
-    defaultValue,
-    openOnFocus: true,
-    disableCloseOnSelect: multiple,
-    getOptionLabel: ({ title }) => title,
-    multiple,
-    options,
-  });
-
-  const placeholderText = useMemo(() => {
-    if (Array.isArray(value) && value.length) return '';
-
-    return placeholder;
-  }, [value]);
-
-  const renderTags = () => {
-    if (Array.isArray(value)) {
-      return value.map(({ title }, index) => {
-        const tagProps = getTagProps({ index });
-
-        return (
-          <Tag
-            {...tagProps}
-            label={title}
-            deleteIcon={<CrossSmOutlineSm />}
-            color="grey"
-          />
-        );
-      });
-    }
-
-    return null;
+  const renderTags = (
+    tags: AutocompleteValueProps[],
+    getTagProps: AutocompleteRenderGetTagProps
+  ) => {
+    return tags.map(({ title }: AutocompleteValueProps, index: number) => (
+      <Tag color="grey" label={title} {...getTagProps({ index })} />
+    ));
   };
 
-  const listOptions = useMemo(() => {
-    if (!groupedOptions.length) return null;
+  const renderCustomInput = (inputParams: AutocompleteRenderInputParams) => (
+    <TextField
+      {...inputParams}
+      placeholder={placeholder}
+      label={label}
+      success={success}
+      error={error}
+      helperText={helperText}
+    />
+  );
 
-    const listItems = groupedOptions.map((option, index) => {
-      const optionsProps = getOptionProps({ option, index });
-      const checked = optionsProps['aria-selected'] as boolean;
+  const renderOption = (
+    option: HTMLAttributes<HTMLLIElement> & { key?: string }
+  ) => {
+    const selected = Boolean(option['aria-selected']);
 
-      return (
-        <MenuItem {...optionsProps}>
-          {multiple && (
-            <ListItemIcon>
-              <Checkbox checked={checked} />
-            </ListItemIcon>
-          )}
-          {option.title}
-        </MenuItem>
-      );
-    });
+    return (
+      <MenuItem {...option}>
+        {multiple && (
+          <ListItemIcon>
+            <Checkbox checked={selected} />
+          </ListItemIcon>
+        )}
+        {option.key}
+      </MenuItem>
+    );
+  };
 
-    const listboxProps = getListboxProps();
-
-    return <MenuList {...listboxProps}>{listItems}</MenuList>;
-  }, [groupedOptions, getListboxProps]);
-
+  // @ts-ignore
   return (
-    <StyledFormControl>
-      <InputLabel {...getInputLabelProps()}>{label}</InputLabel>
-      <InputWrapper
-        {...getRootProps()}
-        focused={focused}
-        popupOpen={popupOpen}
-        success={success}
-        error={error}
-        size={size}
-      >
-        <InputAdornment position="start">{startAdornment}</InputAdornment>
-        <TagsWrapper gap={1} spacing={1} direction="row" ref={setAnchorEl}>
-          {renderTags()}
-          <input placeholder={placeholderText} {...getInputProps()} />
-        </TagsWrapper>
-        <InputAdornment position="end">
-          {endAdornment}
-          <CrossSmOutlineSm {...getClearProps()} />
-          <ChevronDOutlineMd />
-        </InputAdornment>
-      </InputWrapper>
-      <FormHelperText error={error} success={success}>
-        {helperText}
-      </FormHelperText>
-      {listOptions}
-    </StyledFormControl>
+    <StyledAutocomplete
+      {...props}
+      size={size}
+      multiple={multiple}
+      getOptionLabel={(option) => option.title}
+      disableCloseOnSelect={multiple}
+      renderTags={renderTags}
+      renderInput={renderInput || renderCustomInput}
+      renderOption={renderOption}
+      popupIcon={<ChevronDOutlineMd />}
+      clearIcon={<CrossSmOutlineSm />}
+    />
   );
 };

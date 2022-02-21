@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
-import { Autocomplete } from './';
+import { Autocomplete } from './Autocomplete';
 
 export default {
   title: 'Components/Autocomplete',
@@ -20,8 +20,21 @@ const OPTIONS = [
 ];
 
 export const Showcase: Story = () => (
-  <Stack>
+  <Stack maxWidth={300}>
     <Autocomplete options={OPTIONS} label="Single" />
     <Autocomplete options={OPTIONS} label="Multiple" multiple />
+    <Autocomplete
+      label="With error"
+      options={OPTIONS}
+      helperText="Ошибка"
+      error
+    />
+    <Autocomplete
+      label="With success"
+      options={OPTIONS}
+      helperText="Успех"
+      success
+    />
+    <Autocomplete size="small" options={OPTIONS} />
   </Stack>
 );

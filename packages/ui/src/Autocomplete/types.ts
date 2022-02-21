@@ -1,23 +1,22 @@
-import { AutocompleteGroupedOption, UseAutocompleteProps } from '@mui/base';
-import { AutocompleteValue } from '@mui/base/AutocompleteUnstyled/useAutocomplete';
+import {
+  AutocompleteRenderInputParams,
+  AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material';
+import React from 'react';
 
 export type AutocompleteValueProps = {
   title: string;
   value: string;
 };
 
-export type AutocompleteProps = UseAutocompleteProps<
-  AutocompleteValueProps,
-  boolean,
-  false,
-  false
+export type AutocompleteProps = Omit<
+  MuiAutocompleteProps<AutocompleteValueProps, boolean, false, false>,
+  'size' | 'renderInput'
 > & {
-  placeholder?: string;
-  label?: string;
-  startAdornment?: Element;
-  endAdornment?: Element;
-  helperText?: string;
-  success?: boolean;
+  renderInput: (params: AutocompleteRenderInputParams) => React.ReactNode;
   error?: boolean;
-  size?: string;
+  success?: boolean;
+  helperText?: string;
+  label?: string;
+  size?: 'medium' | 'small';
 };
