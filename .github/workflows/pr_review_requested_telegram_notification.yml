@@ -25,8 +25,8 @@ jobs:
         with:
           script: | 
             const reviewers = ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers }};
-            
-            return { reviewersLength: reviewers.length, lastReviewer: reviewers[length - 1] };
+            console.log(reviewers);
+              
     
 
   notify:
