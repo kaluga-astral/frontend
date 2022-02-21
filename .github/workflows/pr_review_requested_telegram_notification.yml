@@ -24,7 +24,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: | 
-            const reviewers = ${{ needs.fetch.outputs.result }};
+            const reviewers = ${{ github.event.pull_request }};
             console.log(reviewers);
               
     
