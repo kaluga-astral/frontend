@@ -62,14 +62,12 @@ export const Autocomplete = ({
     );
   };
 
-  // TODO: при стилизации компонента, тс ругается на getOptionsLabel (Object is of type 'unknown'.) и renderTags
-  // @ts-ignore
   return (
     <StyledAutocomplete
       {...props}
       size={size}
       multiple={multiple}
-      getOptionLabel={(option) => option.title}
+      getOptionLabel={(option: AutocompleteValueProps) => option.title}
       disableCloseOnSelect={multiple}
       renderTags={renderTags}
       renderInput={renderInput || renderCustomInput}
