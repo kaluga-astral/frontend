@@ -4,7 +4,7 @@ export type HeaderProps = {
   logoSrc: string;
   logoAlt: string;
   LogoLink: FC<LogoLinkProps>;
-  WidgetComponent?: ElementType;
+  Widget?: ElementType;
 };
 
 export type LogoLinkProps = {
