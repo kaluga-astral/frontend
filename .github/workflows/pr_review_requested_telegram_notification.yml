@@ -17,16 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: fetch
     outputs: 
-      result: ${{ steps.check-length.outputs.result }}
+      result: ${{ steps.reviewers.outputs.result }}
     steps:
-      - name: 
-        id: check-length
+      - name: reviewers
+        id: reviewers
         uses: actions/github-script@v6
         with:
           script: | 
+            const approvedReviews = (await github.request(${{ github.event.pull_request.url }})).data.filter(review => review.state === 'APPROVED');
             const reviewers = ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers }};
             
-            return { reviewersLength: reviewers.length, lastReviewer: reviewers[length - 1] };
+            return { reviewersLength: reviewers.length + approvedReviews.length, lastReviewer: reviewers[length - 1] };
     
 
   notify:
