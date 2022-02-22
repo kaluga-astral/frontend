@@ -1,0 +1,34 @@
+name: pull request opened notification
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+    - main
+
+jobs:
+  fetch:
+    name: fetch
+    uses: ./.github/workflows/fetch_pr_info.yml
+    with:
+      pr_url: ${{ github.event.pull_request.url }}
+
+  notify:
+    name: notify
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            &#128035;&#128035;&#128035;
+            ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
+            
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            
+            &#128104;&#128104; Reviewers: ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login }}, ${{ fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login }}
+            
+            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+            
