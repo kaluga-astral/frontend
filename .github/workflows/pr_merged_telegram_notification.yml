@@ -24,5 +24,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.event.pull_request.mergedBy.login }} смержил PR от ${{github.actor}}: ${{ fromJSON(needs.fetch.outputs.result).title }}
+            &#127881;&#127881;&#127881;
+            ${{ github.event.pull_request.merged_by.login }} смержил PR от ${{ fromJSON(needs.fetch.outputs.result).user.login }}
+            
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}

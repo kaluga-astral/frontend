@@ -1,0 +1,48 @@
+name: pull request review requested notification
+on:
+  pull_request:
+    types: [review_requested]
+    branches:
+    - main
+
+jobs: 
+  reviewers:
+    name: check length of reviewers
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.reviewers.outputs.result }}
+    steps:
+      - name: reviewers
+        id: reviewers
+        uses: actions/github-script@v6
+        with:
+          script: | 
+            const approvedReviewsResult = await github.request(context.payload.pull_request.url + '/reviews');
+            const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
+            const requestedReviewers =  context.payload.pull_request.requested_reviewers;
+            
+            return { reviewersLength: requestedReviewers.length + approvedReviews.length, reviewer: context.payload.requested_reviewer };
+              
+    
+
+  notify:
+    name: notify
+    needs: reviewers
+    runs-on: ubuntu-latest
+    if: ${{ fromJSON(needs.reviewers.outputs.result).reviewersLength > 2 }}
+    steps:
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            &#128065;&#128065;&#128065;
+            PR от ${{ github.event.pull_request.user.login }}
+            
+            ${{ github.event.pull_request.title }}
+            
+            &#128104;&#128104; требует ревью от ${{ fromJSON(needs.reviewers.outputs.result).reviewer.login }}
+            
+            ${{ github.event.pull_request.html_url }}
+            
