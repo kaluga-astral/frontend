@@ -1,4 +1,4 @@
-name: pull request review submitted notification
+name: pull request approved notification
 on:
   pull_request_review:
     types: [submitted]
