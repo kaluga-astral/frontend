@@ -5,14 +5,15 @@ on:
     branches:
     - main
 
-  pull_request_review_comment:
-    types: [created, edited]
+  pull_request_review:
+    types: [submited]
     branches:
     - main
 
 jobs:
   fetch:
     name: fetch
+    if: ${{ github.event.review.state == 'commented' || github.event.issue != null }}
     uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
       pr_url: ${{ github.event.pull_request.url || github.event.issue.pull_request.url }}
