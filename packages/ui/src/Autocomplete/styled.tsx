@@ -3,9 +3,10 @@ import { Autocomplete } from '@mui/material';
 import { styled } from '../styles';
 
 import { AutocompleteProps } from './types';
+import { AutocompleteSizes } from './constants';
 
 const getAutocompleteHeight = ({ size }: Pick<AutocompleteProps, 'size'>) => {
-  if (size === 'small') return '32px';
+  if (size === AutocompleteSizes.small) return '32px';
 
   return '40px';
 };
