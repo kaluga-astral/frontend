@@ -1,3 +1,3 @@
-import { ListItemButtonProps as MuiListItemButton } from '@mui/material/ListItemButton/ListItemButton';
+import { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material/ListItemButton/ListItemButton';
 
-export type ListItemButtonProps = MuiListItemButton;
+export type ListItemButtonProps = MuiListItemButtonProps;

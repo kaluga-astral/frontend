@@ -1,3 +1,3 @@
-import { ListItemProps as MuiListItem } from '@mui/material/ListItem/ListItem';
+import { ListItemProps as MuiListItemProps } from '@mui/material/ListItem/ListItem';
 
-export type ListItemProps = MuiListItem;
+export type ListItemProps = MuiListItemProps;

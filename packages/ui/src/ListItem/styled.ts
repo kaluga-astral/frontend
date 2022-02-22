@@ -38,7 +38,7 @@ export const StyledListItem = styled(ListItem, {
 })<ListItemProps>`
   cursor: pointer;
   user-select: none;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.shape.small};
   background-color: ${(props) => getBgColor({ ...props })};
   color: ${(props) =>
     getColor({ ...props, listItemState: ListItemStates.DEFAULT })};

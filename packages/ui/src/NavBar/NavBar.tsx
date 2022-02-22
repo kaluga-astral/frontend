@@ -5,7 +5,6 @@ import {
 } from '@astral/icons';
 import { useState } from 'react';
 
-import Badge from '../Badge/Badge';
 import { Collapse } from '../Collapse';
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -40,14 +39,6 @@ NavBar.Router = ({ icon, title, children, active }: any) => {
       <ListItem onClick={handleClick}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText>{title}</ListItemText>
-        {children && (
-          <Badge
-            style={{ marginRight: '8px' }}
-            color="error"
-            badgeContent={12}
-            variant="standard"
-          />
-        )}
 
         {children && open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
       </ListItem>
@@ -63,7 +54,7 @@ NavBar.SubRouter = ({ children, open }: any) => {
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List>
         {children.map((child: any) => (
-          <ListItem sx={{ pl: 4 }}>
+          <ListItem>
             <ListItemIcon>
               <DotOutlineSm />
             </ListItemIcon>

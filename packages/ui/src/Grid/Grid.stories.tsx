@@ -11,18 +11,7 @@ export default {
   component: Grid,
 };
 
-const Item = (props: BoxProps) => (
-  <Box
-    sx={{
-      border: '1px solid',
-      borderColor: (theme) => theme.palette.grey[300],
-      borderRadius: '3px',
-      textAlign: 'center',
-      p: 1,
-    }}
-    {...props}
-  />
-);
+const Item = (props: BoxProps) => <Box {...props} />;
 
 const Template: Story = ({
   container,

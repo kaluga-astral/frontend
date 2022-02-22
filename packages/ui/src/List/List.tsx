@@ -1,5 +1,4 @@
-import { ListProps, List as MuiList } from '@mui/material';
+import { List, ListProps } from '@mui/material';
 
-export const List = ({ children, ...props }: ListProps) => {
-  return <MuiList {...props}>{children}</MuiList>;
-};
+export { List };
+export type { ListProps };

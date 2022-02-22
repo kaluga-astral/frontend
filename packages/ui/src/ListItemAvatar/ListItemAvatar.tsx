@@ -1,8 +1,4 @@
-import {
-  ListItemAvatarProps,
-  ListItemAvatar as MuiListItemAvatar,
-} from '@mui/material';
+import { ListItemAvatar, ListItemAvatarProps } from '@mui/material';
 
-export const ListItemAvatar = ({ children, ...props }: ListItemAvatarProps) => {
-  return <MuiListItemAvatar {...props}>{children}</MuiListItemAvatar>;
-};
+export { ListItemAvatar };
+export type { ListItemAvatarProps };

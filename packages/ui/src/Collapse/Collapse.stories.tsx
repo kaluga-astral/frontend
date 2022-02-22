@@ -35,14 +35,14 @@ const Template: Story = () => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
-          <ListItem sx={{ pl: 4 }}>
+          <ListItem>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText primary="Collapsed" />
           </ListItem>
 
-          <ListItem sx={{ pl: 4 }}>
+          <ListItem>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>

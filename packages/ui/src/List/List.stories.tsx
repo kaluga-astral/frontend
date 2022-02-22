@@ -15,7 +15,7 @@ import { ListSubheader } from '../ListSubheader';
 import { List } from './List';
 
 export default {
-  title: 'Components/Avatar',
+  title: 'Components/List',
   component: List,
 };
 
@@ -43,19 +43,19 @@ export const Template: Story = () => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
-          <ListItem sx={{ pl: 4 }}>
+          <ListItem>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItem>
-          <ListItem sx={{ pl: 4 }} selected>
+          <ListItem selected>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItem>
-          <ListItem sx={{ pl: 4 }}>
+          <ListItem>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
