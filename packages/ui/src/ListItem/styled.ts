@@ -37,6 +37,7 @@ export const StyledListItem = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== 'selected',
 })<ListItemProps>`
   cursor: pointer;
+  text-decoration: none;
   user-select: none;
   border-radius: ${({ theme }) => theme.shape.small};
   background-color: ${(props) => getBgColor({ ...props })};

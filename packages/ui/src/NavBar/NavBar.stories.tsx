@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
+import { Link, Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
 import { NavBar } from './NavBar';
@@ -9,80 +9,29 @@ export default {
   component: NavBar,
 };
 
-const links: any = [
-  {
-    title: 'Главная',
-    icon: <HomeOutlineMd />,
-    link: '/',
-    children: null,
-  },
-  {
-    title: 'Отчеты',
-    icon: <HomeOutlineMd />,
-    link: '/reports',
-    children: [
-      { title: 'Черновики', link: '/drafts' },
-      { title: 'Отправленные', link: '/sent' },
-    ],
-  },
-  {
-    title: 'Требования',
-    icon: <HomeOutlineMd />,
-    link: '/requirements',
-    children: null,
-  },
-  {
-    title: 'Отчеты',
-    icon: <HomeOutlineMd />,
-    link: '/reports',
-    children: [
-      { title: 'Черновики', link: '/drafts' },
-      { title: 'Отправленные', link: '/sent' },
-    ],
-  },
-  {
-    title: 'Отчеты',
-    icon: <HomeOutlineMd />,
-    link: '/reports',
-    children: [
-      { title: 'Черновики', link: '/drafts' },
-      { title: 'Отправленные', link: '/sent' },
-    ],
-  },
-  {
-    title: 'Отчеты',
-    icon: <HomeOutlineMd />,
-    link: '/reports',
-    children: [
-      { title: 'Черновики', link: '/drafts' },
-      { title: 'Отправленные', link: '/sent' },
-    ],
-  },
-  {
-    title: 'Отчеты',
-    icon: <HomeOutlineMd />,
-    link: '/reports',
-    children: [
-      { title: 'Черновики', link: '/drafts' },
-      { title: 'Отправленные', link: '/sent' },
-    ],
-  },
-];
-
 const Template: Story = (args) => <NavBar {...args} />;
 
 export const ShowcaseColor: Story = () => (
   <Stack direction="column" gap={2}>
-    <NavBar links={links} />
+    <NavBar>
+      <NavBar.Route icon={<HomeOutlineMd />} title={'123123'}>
+        <NavBar.SubRoute selected>
+          <Link href="/321">Отправленные</Link>
+        </NavBar.SubRoute>
+      </NavBar.Route>
+      <NavBar.Route icon={<HomeOutlineMd />} title={'123123'} selected>
+        <NavBar.SubRoute selected>
+          <Link href="/123">Отправленные</Link>
+        </NavBar.SubRoute>
+      </NavBar.Route>
+    </NavBar>
   </Stack>
 );
 
 ShowcaseColor.parameters = { options: { showPanel: false } };
 
 export const Default = Template.bind({});
-Default.args = {
-  links,
-};
+Default.args = {};
 Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

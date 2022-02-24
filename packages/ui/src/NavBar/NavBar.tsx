@@ -11,24 +11,11 @@ import { ListItem } from '../ListItem';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
 
-export const NavBar = ({ links, active }: any) => {
-  return (
-    <>
-      <List>
-        {links.map(({ icon, title, children }: any) => (
-          <NavBar.Router
-            icon={icon}
-            title={title}
-            children={children}
-            active={active}
-          />
-        ))}
-      </List>
-    </>
-  );
+export const NavBar = ({ children }: any) => {
+  return <List>{children}</List>;
 };
 
-NavBar.Router = ({ icon, title, children, active }: any) => {
+NavBar.Route = ({ icon, title, children, selected }: any) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -36,32 +23,26 @@ NavBar.Router = ({ icon, title, children, active }: any) => {
   };
   return (
     <>
-      <ListItem onClick={handleClick}>
+      <ListItem selected={selected} onClick={handleClick}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText>{title}</ListItemText>
 
         {children && open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
       </ListItem>
-      {children && (
-        <NavBar.SubRouter children={children} open={open} active={active} />
-      )}
+      <Collapse in={open}>
+        <List>{children}</List>
+      </Collapse>
     </>
   );
 };
 
-NavBar.SubRouter = ({ children, open }: any) => {
+NavBar.SubRoute = ({ children, selected }: any) => {
   return (
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List>
-        {children.map((child: any) => (
-          <ListItem>
-            <ListItemIcon>
-              <DotOutlineSm />
-            </ListItemIcon>
-            <ListItemText primary={child.title} />
-          </ListItem>
-        ))}
-      </List>
-    </Collapse>
+    <ListItem selected={selected}>
+      <ListItemIcon>
+        <DotOutlineSm />
+      </ListItemIcon>
+      <ListItemText>{children}</ListItemText>
+    </ListItem>
   );
 };
