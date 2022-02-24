@@ -1,0 +1,37 @@
+name: pull request commented notification
+on:  
+  issue_comment:
+    types: [created, edited]
+    branches:
+    - main
+
+  pull_request_review:
+    types: [submitted]
+    branches:
+    - main
+
+jobs:
+  fetch:
+    name: fetch
+    if: ${{ github.event.review.state == 'commented' || github.event.issue != null }}
+    uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
+    with:
+      pr_url: ${{ github.event.pull_request.url || github.event.issue.pull_request.url }}
+
+  notify:
+    name: notify
+    needs: fetch
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on PR
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            &#128172;&#128172;&#128172;
+            ${{ github.event.sender.login }} прокомментировал PR от ${{ fromJSON(needs.fetch.outputs.result).user.login }}
+            
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            
+            ${{ fromJSON(needs.fetch.outputs.result).html_url }}

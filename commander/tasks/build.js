@@ -7,7 +7,7 @@ const { modifyPackageJSON } = require('./modifyPackageJSON');
 
 const build = () => {
   const { code } = shell.exec(
-    `tsc --module es2015 --outDir ${DIST_DIR_NAME}/esm && tsc --module commonjs --outDir ${DIST_DIR_NAME}/node`
+    `npx tsc --module es2015 --outDir ${DIST_DIR_NAME}/esm && npx tsc --module commonjs --outDir ${DIST_DIR_NAME}/cjs && npx tsc --declaration --emitDeclarationOnly --outDir ${DIST_DIR_NAME}/types`
   );
 
   if (code !== 0) {
