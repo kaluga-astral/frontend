@@ -1,7 +1,9 @@
 import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip';
 
-export type TooltipSizes = 'medium' | 'small';
+import { TooltipSizes } from './constants';
+
+export type TooltipSize = `${TooltipSizes}`;
 
 export type TooltipProps = MuiTooltipProps & {
-  size?: TooltipSizes;
+  size?: TooltipSize;
 };
