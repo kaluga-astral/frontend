@@ -9,8 +9,5 @@
     "dist",
     "./**/*.test.(tsx|ts)",
     "./**/*.stories.tsx"
-  ],
-  "compilerOptions": {
-    "declaration": false
-  }
+  ]
 }
