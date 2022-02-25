@@ -4,7 +4,6 @@ import {
   PaletteColor,
   ThemeOptions,
   createTheme as createMuiTheme,
-  responsiveFontSizes,
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
@@ -41,9 +40,6 @@ export const createTheme = (params: CreateThemeParams) => {
     components: getComponents(fontsUrls),
   };
 
-  const muiTheme = responsiveFontSizes(
-    createMuiTheme(merge({}, themeOptions, options))
-  );
-
+  const muiTheme = createMuiTheme(merge({}, themeOptions, options));
   return merge(muiTheme as any, { elevation, shape }) as Theme;
 };

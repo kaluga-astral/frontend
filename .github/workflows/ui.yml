@@ -6,68 +6,56 @@ on:
       - main
 
 jobs:
-  prepare-yarn:
-    name: Prepare yarn
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: yarn
-      - name: Validate cache
-        run: yarn --immutable
-
   lint:
     name: Running linter
     runs-on: ubuntu-latest
-    needs: prepare-yarn
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16.x
-          cache: yarn
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
-        run: yarn --immutable
+        run: npm i
       - name: Run eslint
-        run: yarn workspace @astral/ui lint
+        run: npm run lint --workspace=@astral/ui
 
   test:
     name: Running tests
     runs-on: ubuntu-latest
-    needs: prepare-yarn
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-          cache: yarn
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
-        run: yarn --immutable
+        run: npm i
       - name: Get number of CPU cores
         id: cpu-cores
         uses: SimenB/github-actions-cpu-cores@v1
       - name: Run jest
         env:
           CI: true
-        run: yarn workspace @astral/ui test --ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}
+        run: npm run test --workspace=@astral/ui --ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}
 
   build:
     name: Running build
     runs-on: ubuntu-latest
-    needs: prepare-yarn
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-          cache: yarn
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
-        run: yarn --immutable
+        run: npm i
       - name: Run build
         env:
           CI: true
-        run: yarn workspace @astral/ui build
+        run: npm run build --workspace=@astral/ui

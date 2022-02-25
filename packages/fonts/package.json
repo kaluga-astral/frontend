@@ -4,7 +4,7 @@
   "main": "./src",
   "scripts": {
     "prebuild": "npx rimraf ./lib",
-    "build": "yarn prebuild && node ../../commander copyCommonFiles && node ../../commander copyFonts && node ../../commander modifyPackageJSON",
+    "build": "node ../../commander copyCommonFiles && node ../../commander copyFonts && node ../../commander modifyPackageJSON",
     "publish": "yarn build && node ../../commander publish"
   }
 }
