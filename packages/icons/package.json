@@ -7,9 +7,9 @@
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
     "prebuild": "npx rimraf ./lib",
-    "build": "npm run svgr && node ../../commander build",
-    "publish": "yarn build && node ../../commander publish",
-    "lint:types": "tsc --noEmit",
+    "build": "npm run svgr && commander build",
+    "publish": "npm run build && commander publish",
+    "lint:types": "npm run build",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "peerDependencies": {
