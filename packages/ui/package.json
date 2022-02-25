@@ -14,7 +14,8 @@
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
-    "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "lint:types": "tsc --noEmit",
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "dependencies": {
     "@astral/icons": "^0.5.0",

@@ -36,8 +36,5 @@
     "chromatic": "chromatic --project-token 4692158faeb9",
     "lint": "yarn workspaces foreach --exclude commander run lint",
     "publish": "npm run publish --workspaces"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
   }
 }

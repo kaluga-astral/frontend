@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "extends": ["@astral-frontend/eslint-config-node"],
+  "rules": {
+    "consistent-return": ["warn"]
+  }
+}
