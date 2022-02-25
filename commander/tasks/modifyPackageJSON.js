@@ -17,7 +17,7 @@ const updatePackagesVersions = (packageData, rootPackageVersion) => {
       {
         ...packageData,
         dependencies: updateDepsVersions(
-          packageData.dependencies,
+          packageData.dependencies || {},
           rootPackageVersion
         ),
         version: rootPackageVersion,
