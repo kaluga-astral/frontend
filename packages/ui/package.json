@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib && npm run build --workspace=@astral/icons",
+    "prebuild": "npx rimraf ./lib",
     "build": "node ../../commander build",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
