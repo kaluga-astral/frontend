@@ -15,6 +15,23 @@ export const ShowcaseColor: Story = () => (
   <Stack direction="column" gap={2}>
     <NavBar>
       <NavBar.Item icon={<HomeOutlineMd />} title={'NavBarItem '}>
+        <NavBar.ItemRoute>
+          <Link style={{ textDecoration: 'none' }} href="/ItemRoute">
+            ItemRoute
+          </Link>
+        </NavBar.ItemRoute>{' '}
+        <NavBar.ItemRoute selected>
+          <Link style={{ textDecoration: 'none' }} href="/ItemRoute">
+            ItemRoute
+          </Link>
+        </NavBar.ItemRoute>
+      </NavBar.Item>
+      <NavBar.Item title={'NavBarItem NoIcon '}>
+        <NavBar.ItemRoute>
+          <Link style={{ textDecoration: 'none' }} href="/ItemRoute">
+            ItemRoute
+          </Link>
+        </NavBar.ItemRoute>{' '}
         <NavBar.ItemRoute selected>
           <Link style={{ textDecoration: 'none' }} href="/ItemRoute">
             ItemRoute

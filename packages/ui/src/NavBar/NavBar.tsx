@@ -25,7 +25,7 @@ NavBar.Item = ({ icon, title, children, selected }: any) => {
   return (
     <>
       <ListItemButton selected={selected} onClick={handleClick}>
-        <ListItemIcon>{icon}</ListItemIcon>
+        {icon && <ListItemIcon>{icon}</ListItemIcon>}
         <ListItemText>{title}</ListItemText>
         {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
       </ListItemButton>
@@ -36,22 +36,18 @@ NavBar.Item = ({ icon, title, children, selected }: any) => {
   );
 };
 
-NavBar.ItemRoute = ({ children, selected }: any) => {
-  return (
-    <ListItem selected={selected}>
-      <ListItemIcon>
-        <DotOutlineSm />
-      </ListItemIcon>
-      <ListItemText>{children}</ListItemText>
-    </ListItem>
-  );
-};
+NavBar.ItemRoute = ({ children, selected }: any) => (
+  <ListItem selected={selected}>
+    <ListItemIcon>
+      <DotOutlineSm />
+    </ListItemIcon>
+    <ListItemText>{children}</ListItemText>
+  </ListItem>
+);
 
-NavBar.Route = ({ icon, children, selected }: any) => {
-  return (
-    <ListItem selected={selected}>
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText>{children}</ListItemText>
-    </ListItem>
-  );
-};
+NavBar.Route = ({ icon, children, selected }: any) => (
+  <ListItem selected={selected}>
+    {icon && <ListItemIcon>{icon}</ListItemIcon>}
+    <ListItemText>{children}</ListItemText>
+  </ListItem>
+);
