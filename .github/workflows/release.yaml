@@ -1,0 +1,25 @@
+name: Release packages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        run: npm i
+      - name: Run publish
+        run: RELEASE_TAG=${{ github.event.release.tag_name }} NPM_PUBLISH_TOKEN=${{ secrets.NPM_PUBLISH_TOKEN }} npm run publish
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+         commit_message: обновлены версии пакетов до ${{ github.event.release.tag_name }}
+         commit_options: '--no-verify --signoff'
