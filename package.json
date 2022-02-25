@@ -35,6 +35,7 @@
     "build-storybook": "npm run svgr --workspace=@astral/icons && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9",
     "lint": "npm run lint --workspaces",
+    "lint:types": "npm run lint:types --workspaces --if-present",
     "publish": "npm run publish --workspaces"
   }
 }
