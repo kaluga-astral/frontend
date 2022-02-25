@@ -1,6 +1,7 @@
 {
   "name": "@astral/ui",
   "version": "0.4.0",
+  "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {
       "^lodash-es$": "lodash"
@@ -8,8 +9,9 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib && yarn workspace @astral/icons build",
-    "build": "yarn prebuild && node ../../commander build && copyfiles -u 1 src/declaration/*.ts lib",
+    "prebuild": "npx rimraf ./lib && npm run build --workspace=@astral/icons",
+    "build": "node ../../commander build",
+    "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"

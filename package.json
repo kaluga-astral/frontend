@@ -1,7 +1,6 @@
 {
   "version": "0.4.0",
   "private": true,
-  "packageManager": "yarn@3.1.1",
   "workspaces": [
     "packages/*",
     "commander"
@@ -32,15 +31,11 @@
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "storybook": "yarn workspace @astral/icons run svgr && start-storybook -p 6006",
-    "build-storybook": "yarn workspace @astral/icons run svgr && build-storybook",
+    "storybook": "npm run svgr --workspace=@astral/icons && start-storybook -p 6006",
+    "build-storybook": "npm run svgr --workspace=@astral/icons && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9",
     "lint": "yarn workspaces foreach --exclude commander run lint",
-    "publish": "yarn workspaces foreach -p --exclude commander run publish"
-  },
-  "resolutions": {
-    "babel-loader": "8.1.0",
-    "webpack": "4.44.2"
+    "publish": "npm run publish --workspaces"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
