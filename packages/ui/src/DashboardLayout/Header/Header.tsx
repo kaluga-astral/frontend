@@ -1,4 +1,4 @@
-import { FC, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import {
   InnerContainer,
@@ -9,7 +9,7 @@ import {
 } from './styled';
 import { HeaderProps } from './types';
 
-export const Header: FC<HeaderProps> = forwardRef<HTMLDivElement, HeaderProps>(
+export const Header = forwardRef<HTMLDivElement, HeaderProps>(
   ({ children, logoSrc, logoAlt, LogoLink, Widget }, ref) => {
     return (
       <StyledHeader ref={ref}>
