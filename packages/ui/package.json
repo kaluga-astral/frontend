@@ -1,8 +1,7 @@
 {
   "name": "@astral/ui",
   "version": "0.4.0",
-  "type": "module",
-  "source": "./src/index.ts",
+  "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {
       "^lodash-es$": "lodash"
@@ -10,8 +9,9 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib && yarn workspace @astral/icons build",
-    "build": "yarn prebuild && node ../../commander build",
+    "prebuild": "npx rimraf ./lib",
+    "build": "node ../../commander build",
+    "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
@@ -41,6 +41,7 @@
     "@types/react-dom": "^17.0.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.0",
+    "copyfiles": "^2.4.1"
   }
 }

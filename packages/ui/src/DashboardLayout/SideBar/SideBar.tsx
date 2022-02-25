@@ -1,11 +1,15 @@
-import { FC, forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 import { StyledDrawer } from './styled';
 
-export const SideBar: FC = forwardRef<HTMLDivElement>(({ children }, ref) => (
-  <StyledDrawer ref={ref} open variant="persistent">
-    {children}
-  </StyledDrawer>
-));
+type SideBarProps = { children: ReactNode };
+
+export const SideBar = forwardRef<HTMLDivElement, SideBarProps>(
+  ({ children }, ref) => (
+    <StyledDrawer ref={ref} open variant="persistent">
+      {children}
+    </StyledDrawer>
+  )
+);
 
 export default SideBar;
