@@ -1,4 +1,4 @@
-name: CI for package @astral/ui
+name: CI for packages
 
 on:
   pull_request:
@@ -19,7 +19,22 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Run eslint
-        run: npm run lint --workspace=@astral/ui
+        run: npm run lint
+
+  lintTypes:
+    name: Running types linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        run: npm i
+      - name: Run tsc
+        run: npm run lint:types
 
   test:
     name: Running tests
@@ -41,21 +56,3 @@ jobs:
         env:
           CI: true
         run: npm run test --workspace=@astral/ui --ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}
-
-  build:
-    name: Running build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-      - name: Install dependencies
-        run: npm i
-      - name: Run build
-        env:
-          CI: true
-        run: npm run build --workspace=@astral/ui

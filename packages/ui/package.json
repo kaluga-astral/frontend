@@ -9,12 +9,12 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib",
-    "build": "node ../../commander build",
+    "prebuild": "npx rimraf ./lib && npm --prefix ../icons run build",
+    "build": "node commander build",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
-    "lint:types": "tsc -p ./tsconfig.json --noEmit",
+    "lint:types": "npm --prefix ../icons run build && tsc --noEmit",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "dependencies": {
