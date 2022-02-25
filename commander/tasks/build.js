@@ -6,6 +6,8 @@ const { copyCommonFiles } = require('./copyCommonFiles');
 const { modifyPackageJSON } = require('./modifyPackageJSON');
 
 const build = () => {
+  console.log('Starting build...');
+
   const { code } = shell.exec(
     `npx tsc --module es2015 --outDir ${DIST_DIR_NAME}/esm && npx tsc --module commonjs --outDir ${DIST_DIR_NAME}`
   );
@@ -16,6 +18,8 @@ const build = () => {
 
   copyCommonFiles();
   modifyPackageJSON();
+
+  console.log('Finish build');
 };
 
 module.exports = { build };
