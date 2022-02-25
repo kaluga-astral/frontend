@@ -9,7 +9,7 @@
     "prebuild": "npx rimraf ./lib",
     "build": "npm run svgr && commander build",
     "publish": "npm run build && commander publish",
-    "lint:types": "npm run build",
+    "lint:types": "npm run svgr && tsc --noEmit",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "peerDependencies": {
