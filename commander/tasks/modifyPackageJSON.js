@@ -5,12 +5,6 @@ const { PACKAGES_NAMES } = require('../constants');
 // обновляет до последней версии пакеты, которые есть в репозитории
 const updateDepsVersions = (packageDeps, rootPackageVersion) =>
   PACKAGES_NAMES.reduce((newPackageDeps, packageName) => {
-    console.log(
-      'packageName',
-      packageName,
-      newPackageDeps,
-      newPackageDeps[packageName]
-    );
     if (!newPackageDeps[packageName]) return newPackageDeps;
 
     return { ...newPackageDeps, [packageName]: `^${rootPackageVersion}` };
