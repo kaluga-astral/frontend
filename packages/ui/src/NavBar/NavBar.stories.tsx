@@ -14,16 +14,14 @@ const Template: Story = (args) => <NavBar {...args} />;
 export const ShowcaseColor: Story = () => (
   <Stack direction="column" gap={2}>
     <NavBar>
-      <NavBar.Route icon={<HomeOutlineMd />} title={'123123'}>
-        <NavBar.SubRoute selected>
-          <Link href="/321">Отправленные</Link>
-        </NavBar.SubRoute>
-      </NavBar.Route>
-      <NavBar.Route icon={<HomeOutlineMd />} title={'123123'} selected>
-        <NavBar.SubRoute selected>
-          <Link href="/123">Отправленные</Link>
-        </NavBar.SubRoute>
-      </NavBar.Route>
+      <NavBar.Item icon={<HomeOutlineMd />} title={'NavBarItem '}>
+        <NavBar.ItemRoute selected>
+          <Link style={{ textDecoration: 'none' }} href="/ItemRoute">
+            ItemRoute
+          </Link>
+        </NavBar.ItemRoute>
+      </NavBar.Item>
+      <NavBar.Route icon={<HomeOutlineMd />}>NavBarRoute</NavBar.Route>
     </NavBar>
   </Stack>
 );
