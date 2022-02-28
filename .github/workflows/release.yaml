@@ -28,8 +28,8 @@ jobs:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
           commit_message: [CI] Обновлена версия @astral/ui до ${{ github.event.release.tag_name }}
+          branch: main
           commit_options: '--no-verify --signoff'
 
   releaseIcons:
