@@ -21,7 +21,7 @@ export const Autocomplete = <
   FreeSolo extends boolean
 >({
   multiple,
-  placeholder = 'Выберите вариант',
+  placeholder,
   error,
   success,
   helperText,
