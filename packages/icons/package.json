@@ -1,14 +1,15 @@
 {
   "name": "@astral/icons",
-  "version": "0.4.0",
-  "source": "./index.ts",
+  "version": "0.5.0",
+  "browser": "./index.ts",
   "scripts": {
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
     "prebuild": "npx rimraf ./lib",
-    "build": "yarn prebuild && npm run svgr && node ../../commander build",
-    "publish": "yarn build && node ../../commander publish",
+    "build": "npm run svgr && commander build",
+    "publish": "npm run build && commander publish",
+    "lint:types": "npm run build",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "peerDependencies": {

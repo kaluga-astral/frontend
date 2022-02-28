@@ -1,3 +1,0 @@
-{
-  "packages/ui/**/*.{js,jsx,ts,tsx}": "yarn workspace @astral/ui run lint"
-}
