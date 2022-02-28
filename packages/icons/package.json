@@ -8,7 +8,7 @@
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
     "prebuild": "npx rimraf ./lib",
     "build": "npm run svgr && commander build",
-    "publish": "npm run build && commander publish",
+    "publish": "npm publish ./lib",
     "lint:types": "npm run svgr && tsc --noEmit",
     "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
