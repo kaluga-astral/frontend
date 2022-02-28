@@ -22,8 +22,6 @@ jobs:
         run: npm run build --workspace=@astral/ui
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Prepare npm CI
-        run: npm ci
       - name: Publish
         run: npm publish ./packages/ui/lib
         env:
@@ -50,8 +48,6 @@ jobs:
         run: npm run build --workspace=@astral/icons
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Prepare npm CI
-        run: npm ci
       - name: Publish
         run: npm publish ./packages/icons/lib
         env:
@@ -78,8 +74,6 @@ jobs:
         run: npm run build --workspace=@astral/fonts
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Prepare npm CI
-        run: npm ci
       - name: Publish
         run: npm publish ./packages/fonts/lib
         env:
