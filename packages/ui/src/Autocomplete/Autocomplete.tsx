@@ -2,6 +2,7 @@ import {
   AutocompleteRenderGetTagProps,
   AutocompleteRenderInputParams,
   ListItemIcon,
+  Autocomplete as MuiAutocomplete,
 } from '@mui/material';
 import { HTMLAttributes } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
@@ -11,30 +12,43 @@ import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 
-import { AutocompleteProps, AutocompleteValueProps } from './types';
-import { StyledAutocomplete } from './styled';
+import { AutocompleteProps } from './types';
 
-export const Autocomplete = ({
+export const Autocomplete = <
+  AutocompleteValueProps extends { title: string },
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean
+>({
   multiple,
   placeholder = 'Выберите вариант',
   error,
   success,
   helperText,
   label,
-  renderInput,
   size = 'medium',
   ...props
-}: AutocompleteProps) => {
+}: AutocompleteProps<
+  AutocompleteValueProps,
+  Multiple,
+  DisableClearable,
+  FreeSolo
+>) => {
   const renderTags = (
     tags: AutocompleteValueProps[],
     getTagProps: AutocompleteRenderGetTagProps
   ) => {
     return tags.map(({ title }: AutocompleteValueProps, index: number) => (
-      <Tag color="grey" label={title} {...getTagProps({ index })} />
+      <Tag
+        deleteIcon={<CrossSmOutlineSm />}
+        color="grey"
+        label={title}
+        {...getTagProps({ index })}
+      />
     ));
   };
 
-  const renderCustomInput = (inputParams: AutocompleteRenderInputParams) => (
+  const renderInput = (inputParams: AutocompleteRenderInputParams) => (
     <TextField
       {...inputParams}
       placeholder={placeholder}
@@ -42,6 +56,7 @@ export const Autocomplete = ({
       success={success}
       error={error}
       helperText={helperText}
+      size={size}
     />
   );
 
@@ -63,14 +78,13 @@ export const Autocomplete = ({
   };
 
   return (
-    <StyledAutocomplete
+    <MuiAutocomplete
       {...props}
       size={size}
       multiple={multiple}
-      getOptionLabel={(option: AutocompleteValueProps) => option.title}
       disableCloseOnSelect={multiple}
       renderTags={renderTags}
-      renderInput={renderInput || renderCustomInput}
+      renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
       clearIcon={<CrossSmOutlineSm />}

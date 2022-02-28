@@ -21,20 +21,35 @@ const OPTIONS = [
 
 export const Showcase: Story = () => (
   <Stack maxWidth={300}>
-    <Autocomplete options={OPTIONS} label="Single" />
-    <Autocomplete options={OPTIONS} label="Multiple" multiple />
+    <Autocomplete
+      options={OPTIONS}
+      label="Single"
+      getOptionLabel={(params) => params.title}
+    />
+    <Autocomplete
+      options={OPTIONS}
+      label="Multiple"
+      multiple
+      getOptionLabel={(params) => params.title}
+    />
     <Autocomplete
       label="With error"
       options={OPTIONS}
       helperText="Ошибка"
+      getOptionLabel={(params) => params.title}
       error
     />
     <Autocomplete
       label="With success"
       options={OPTIONS}
       helperText="Успех"
+      getOptionLabel={(params) => params.title}
       success
     />
-    <Autocomplete size="small" options={OPTIONS} />
+    <Autocomplete
+      size="small"
+      options={OPTIONS}
+      getOptionLabel={(params) => params.title}
+    />
   </Stack>
 );

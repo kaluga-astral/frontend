@@ -4,16 +4,21 @@ import { TextFieldProps } from '../TextField';
 
 import { AutocompleteSizes } from './constants';
 
-export type AutocompleteValueProps = {
-  title: string;
-  value: string;
-};
+export type AutocompleteSize = `${AutocompleteSizes}`;
 
-type AutocompleteSize = `${AutocompleteSizes}`;
-
-export type AutocompleteProps = Omit<
-  MuiAutocompleteProps<AutocompleteValueProps, boolean, false, false>,
-  'size'
+export type AutocompleteProps<
+  AutocompleteValueProps extends { title: string },
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean
+> = Omit<
+  MuiAutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >,
+  'size' | 'renderInput'
 > &
   Pick<TextFieldProps, 'error' | 'success' | 'helperText' | 'label'> & {
     size?: AutocompleteSize;
