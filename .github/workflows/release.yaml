@@ -5,8 +5,8 @@ on:
     types: [published]
 
 jobs:
-  release:
-    name: Release
+  releaseUI:
+    name: Release @astral/ui
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,11 +15,76 @@ jobs:
           node-version: 16.x
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm i
-      - name: Run publish
-        run: RELEASE_TAG=${{ github.event.release.tag_name }} NPM_PUBLISH_TOKEN=${{ secrets.NPM_PUBLISH_TOKEN }} npm run publish
+      - name: Build
+        run: npm run build --workspace=@astral/ui
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Prepare npm CI
+        run: npm ci
+      - name: Publish
+        run: npm run publish --workspace=@astral/ui
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-         commit_message: обновлены версии пакетов до ${{ github.event.release.tag_name }}
+         commit_message: обновлена версия @astral/ui до ${{ github.event.release.tag_name }}
          commit_options: '--no-verify --signoff'
+
+  releaseIcons:
+    name: Release @astral/icons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: npm i
+      - name: Build
+        run: npm run build --workspace=@astral/icons
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Prepare npm CI
+        run: npm ci
+      - name: Publish
+        run: npm run publish --workspace=@astral/icons
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
+          commit_options: '--no-verify --signoff'
+
+  releaseFonts:
+    name: Release @astral/fonts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: npm i
+      - name: Build
+        run: npm run build --workspace=@astral/fonts
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Prepare npm CI
+        run: npm ci
+      - name: Publish
+        run: npm run publish --workspace=@astral/fonts
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: обновлена версия @astral/fonts до ${{ github.event.release.tag_name }}
+          commit_options: '--no-verify --signoff'

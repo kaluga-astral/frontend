@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const { PACKAGES_NAMES } = require('../constants');
 
+const { RELEASE_TAG } = process.env;
+
 // обновляет до последней версии пакеты, которые есть в репозитории
 const updateDepsVersions = (packageDeps, rootPackageVersion) =>
   PACKAGES_NAMES.reduce((newPackageDeps, packageName) => {
@@ -40,13 +42,9 @@ const modifyPackageJSON = () => {
     ...restPackageData
   } = packageData;
 
-  const { version: rootPackageVersion } = JSON.parse(
-    fs.readFileSync('../../package.json')
-  );
-
   console.log('Update packages versions and deps');
 
-  updatePackagesVersions(packageData, rootPackageVersion);
+  updatePackagesVersions(packageData, RELEASE_TAG);
 
   console.log('Write data to lib package.json');
 
@@ -55,7 +53,7 @@ const modifyPackageJSON = () => {
     JSON.stringify(
       {
         ...restPackageData,
-        version: rootPackageVersion,
+        version: RELEASE_TAG,
         author: 'Astral.Soft',
         license: 'MIT',
         repository: {
