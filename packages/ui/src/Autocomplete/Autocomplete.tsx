@@ -15,7 +15,7 @@ import { Checkbox } from '../Checkbox';
 import { AutocompleteProps } from './types';
 
 export const Autocomplete = <
-  AutocompleteValueProps extends { title: string },
+  AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean
@@ -27,6 +27,7 @@ export const Autocomplete = <
   helperText,
   label,
   size = 'medium',
+  getOptionLabel,
   ...props
 }: AutocompleteProps<
   AutocompleteValueProps,
@@ -38,14 +39,18 @@ export const Autocomplete = <
     tags: AutocompleteValueProps[],
     getTagProps: AutocompleteRenderGetTagProps
   ) => {
-    return tags.map(({ title }: AutocompleteValueProps, index: number) => (
-      <Tag
-        deleteIcon={<CrossSmOutlineSm />}
-        color="grey"
-        label={title}
-        {...getTagProps({ index })}
-      />
-    ));
+    return tags.map((tag: AutocompleteValueProps, index: number) => {
+      const title = (getOptionLabel && getOptionLabel(tag)) || '';
+
+      return (
+        <Tag
+          deleteIcon={<CrossSmOutlineSm />}
+          color="grey"
+          label={title}
+          {...getTagProps({ index })}
+        />
+      );
+    });
   };
 
   const renderInput = (inputParams: AutocompleteRenderInputParams) => (
@@ -82,6 +87,7 @@ export const Autocomplete = <
       {...props}
       size={size}
       multiple={multiple}
+      getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
       renderTags={renderTags}
       renderInput={renderInput}

@@ -7,7 +7,7 @@ import { AutocompleteSizes } from './constants';
 export type AutocompleteSize = `${AutocompleteSizes}`;
 
 export type AutocompleteProps<
-  AutocompleteValueProps extends { title: string },
+  AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean

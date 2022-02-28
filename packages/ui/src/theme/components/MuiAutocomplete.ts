@@ -10,11 +10,11 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
         padding: theme.spacing(1),
       };
     },
-    inputRoot({ ownerState: { size } }) {
+    inputRoot({ theme, ownerState: { size } }) {
       return {
         paddingTop: '0 !important',
         paddingBottom: '0 !important',
-        paddingLeft: '4px !important',
+        paddingLeft: `${theme.spacing(1)} !important`,
         minHeight: size === AutocompleteSizes.small ? '32px' : '40px',
       };
     },
