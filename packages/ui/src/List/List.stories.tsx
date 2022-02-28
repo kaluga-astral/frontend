@@ -29,11 +29,23 @@ export const Template: Story = () => {
 
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
+      <ListItemButton>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="ListItemButton" />
+      </ListItemButton>
+      <ListItemButton selected>
+        <ListItemIcon>
+          <HomeOutlineMd />
+        </ListItemIcon>
+        <ListItemText primary="ListItemButton" />
+      </ListItemButton>
       <ListItem>
         <ListItemIcon>
           <HomeOutlineMd />
         </ListItemIcon>
-        <ListItemText primary="Drafts" />
+        <ListItemText primary="ListItem" />
       </ListItem>
       <ListItem onClick={handleClick}>
         <ListItemIcon>

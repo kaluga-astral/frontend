@@ -1,8 +1,4 @@
-import {
-  ListSubheaderProps,
-  ListSubheader as MuiListSubheader,
-} from '@mui/material';
+import { ListSubheader, ListSubheaderProps } from '@mui/material';
 
-export const ListSubheader = ({ children, ...props }: ListSubheaderProps) => {
-  return <MuiListSubheader {...props}>{children}</MuiListSubheader>;
-};
+export { ListSubheader };
+export type { ListSubheaderProps };

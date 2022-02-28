@@ -36,6 +36,9 @@ export const getColor = ({
 
 export const StyledListItemButton = styled(ListItemButton)<ListItemButtonProps>`
   background-color: ${(props) => getBgColor({ ...props })};
+  cursor: pointer;
+  user-select: none;
+  border-radius: ${({ theme }) => theme.shape.small};
   color: ${(props) =>
     getColor({ ...props, listItemButtonState: ListItemButtonStates.DEFAULT })};
   a {
