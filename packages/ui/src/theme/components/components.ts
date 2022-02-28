@@ -8,6 +8,7 @@ import { MuiFormLabel } from './MuiFormLabel';
 import { MuiInputLabel } from './MuiInputLabel';
 import { MuiOutlinedInput } from './MuiOutlinedInput';
 import { MuiTypography } from './MuiTypography';
+import { MuiAutocomplete } from './MuiAutocomplete';
 
 export type FontsUrls = {
   bold: {
@@ -117,6 +118,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiOutlinedInput,
   MuiFormLabel,
   MuiFormHelperText,
+  MuiAutocomplete,
   MuiCheckbox,
   MuiMenu,
   MuiMenuItem,
