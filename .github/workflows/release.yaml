@@ -26,11 +26,12 @@ jobs:
         run: npm publish ./packages/ui/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: EndBug/add-and-commit@v8
         with:
-          branch: main-release
-          commit_message: CI Обновлена версия @astral/ui до ${{ github.event.release.tag_name }}
-          commit_options: '--no-verify --signoff'
+          new_branch: main-release-${{ github.event.release.tag_name }}
+          add: 'packages'
+          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
+          commit: --no-verify
 
   releaseIcons:
     name: Release @astral/icons
@@ -53,11 +54,12 @@ jobs:
         run: npm publish ./packages/icons/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: EndBug/add-and-commit@v8
         with:
-          branch: main-release
-          commit_message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
-          commit_options: '--no-verify --signoff'
+          new_branch: main-release-${{ github.event.release.tag_name }}
+          add: 'packages'
+          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
+          commit: --no-verify
 
   releaseFonts:
     name: Release @astral/fonts
@@ -80,8 +82,9 @@ jobs:
         run: npm publish ./packages/fonts/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: EndBug/add-and-commit@v8
         with:
-          branch: main-release
-          commit_message: CI Обновлена версия @astral/fonts до ${{ github.event.release.tag_name }}
-          commit_options: '--no-verify --signoff'
+          new_branch: main-release-${{ github.event.release.tag_name }}
+          add: 'packages'
+          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
+          commit: --no-verify
