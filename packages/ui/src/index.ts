@@ -20,3 +20,4 @@ export * from './Tag';
 export * from './Tooltip';
 export * from './TextArea';
 export * from './DashboardLayout';
+export * from './Autocomplete';
