@@ -11,6 +11,7 @@ import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
 import { Collapse } from '../Collapse';
 import { ListSubheader } from '../ListSubheader';
+import { ListItemButton } from '../ListItemButton';
 
 import { List } from './List';
 
@@ -55,12 +56,12 @@ export const Template: Story = () => {
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItem>
-          <ListItem>
+          <ListItemButton>
             <ListItemIcon>
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText primary="Starred" />
-          </ListItem>
+          </ListItemButton>
         </List>
       </Collapse>
     </List>

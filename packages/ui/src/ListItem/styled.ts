@@ -44,6 +44,11 @@ export const StyledListItem = styled(ListItem, {
   color: ${(props) =>
     getColor({ ...props, listItemState: ListItemStates.DEFAULT })};
 
+  a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
   :hover {
     color: ${(props) =>
       getColor({
