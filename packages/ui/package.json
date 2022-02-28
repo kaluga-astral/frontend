@@ -1,6 +1,6 @@
 {
   "name": "@astral/ui",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {
@@ -9,15 +9,16 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib",
-    "build": "node ../../commander build",
+    "prebuild": "npx rimraf ./lib && npm --prefix ../icons run build",
+    "build": "node commander build",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "publish": "yarn build && node ../../commander publish",
     "test": "react-scripts test --env=jsdom",
-    "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "lint:types": "npm --prefix ../icons run build && tsc --noEmit",
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "dependencies": {
-    "@astral/icons": "^0.3.0",
+    "@astral/icons": "^0.5.0",
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.5.0",
     "@emotion/server": "11.4.0",
