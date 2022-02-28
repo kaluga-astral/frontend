@@ -28,7 +28,8 @@ jobs:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
+          branch: main-release-${{ github.event.release.tag_name }}
+          create_branch: true
           commit_message: CI Обновлена версия @astral/ui до ${{ github.event.release.tag_name }}
           commit_options: '--no-verify --signoff'
 
@@ -55,7 +56,8 @@ jobs:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
+          branch: main-release-${{ github.event.release.tag_name }}
+          create_branch: true
           commit_message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
           commit_options: '--no-verify --signoff'
 
@@ -82,6 +84,7 @@ jobs:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
+          branch: main-release-${{ github.event.release.tag_name }}
+          create_branch: true
           commit_message: CI Обновлена версия @astral/fonts до ${{ github.event.release.tag_name }}
           commit_options: '--no-verify --signoff'
