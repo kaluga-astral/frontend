@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { TextField } from '../TextField';
 import { Tag } from '../Tag';
-import { MenuItem } from '../MenuItem';
 import { CircularProgress } from '../CircularProgress';
+import { MenuItem } from '../MenuItem';
 
-import { ProgressWrapper, TagsWrapper } from './styled';
+import { Placeholder, ProgressWrapper, TagsWrapper } from './styled';
 import { SelectProps } from './types';
 
 export const Select = ({
@@ -41,6 +41,8 @@ export const Select = ({
     return selectedOptions;
   };
 
+  const isNoData = !Boolean(React.Children.count(children));
+
   return (
     <TextField
       select
@@ -57,9 +59,7 @@ export const Select = ({
         IconComponent: ChevronDOutlineMd,
       }}
     >
-      <MenuItem sx={{ display: 'none' }} value="">
-        placeholder
-      </MenuItem>
+      <Placeholder value="">placeholder</Placeholder>
 
       {loading && (
         <ProgressWrapper>
@@ -67,6 +67,7 @@ export const Select = ({
         </ProgressWrapper>
       )}
       {!loading && children}
+      {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}
     </TextField>
   );
 };

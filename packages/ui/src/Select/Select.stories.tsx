@@ -146,6 +146,7 @@ export const Showcase: Story = () => {
       >
         {renderMultipleOptions()}
       </Select>
+      <Select placeholder="Выберите вариант" label="No data" />
     </Stack>
   );
 };
