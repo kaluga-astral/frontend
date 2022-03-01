@@ -29,15 +29,23 @@ export const Template: Story = () => {
   };
 
   return (
-    <List subheader={<ListSubheader>Subheader</ListSubheader>}>
-      <ListItemButton selected>
-        <ListItemIcon>
-          <HomeOutlineMd />
-        </ListItemIcon>
-        <ListItemText>
-          <Link href="/">Главная</Link>
-        </ListItemText>
-      </ListItemButton>
+    <List subheader={<ListSubheader>Компонент Списка</ListSubheader>}>
+      <Link href="/">
+        <ListItemButton selected>
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Главная ( ссылка )</ListItemText>
+        </ListItemButton>
+      </Link>
+      <Link href="/">
+        <ListItem>
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Главная ( ссылка )</ListItemText>
+        </ListItem>
+      </Link>
       <Link href="https://www.yandex.com/">
         <ListItemButton>
           <ListItemIcon>
@@ -69,7 +77,7 @@ export const Template: Story = () => {
               <ListItemIcon>
                 <HomeOutlineMd />
               </ListItemIcon>
-              <ListItemText>Велосипеды</ListItemText>
+              <ListItemText>Велосипеды ( selected )</ListItemText>
             </ListItem>
           </Link>
           <Link href="/motorcycles">
