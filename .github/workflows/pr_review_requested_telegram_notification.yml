@@ -20,6 +20,7 @@ jobs:
             const approvedReviewsResult = await github.request(context.payload.pull_request.url + '/reviews');
             const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
             const requestedReviewers =  context.payload.pull_request.requested_reviewers;
+            console.log(context.payload.pull_request);
             
             return { reviewersLength: requestedReviewers.length + approvedReviews.length, reviewer: context.payload.requested_reviewer };
               
@@ -29,7 +30,7 @@ jobs:
     name: notify
     needs: reviewers
     runs-on: ubuntu-latest
-    if: ${{ fromJSON(needs.reviewers.outputs.result).reviewersLength > 2 }}
+    if: ${{ fromJSON(needs.reviewers.outputs.result).reviewersLength  == -1 }}
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
