@@ -15,6 +15,7 @@ ENUM:
 - refactor
 - doc
 - build
+- ci
 
 PACKAGE_NAME:
 - ui

@@ -30,10 +30,10 @@ jobs:
 #        env:
 #          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 #
-#      - name: Build @astral/icons
-#        run: npm run build --workspace=@astral/icons
-#        env:
-#          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Build @astral/icons
+        run: npm run build --workspace=@astral/icons
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
 #      - name: Publish @astral/icons
 #        run: npm publish ./packages/icons/lib
 #        env:
@@ -53,7 +53,7 @@ jobs:
         with:
           new_branch: main-release-${{ github.event.release.tag_name }}
           cwd: './packages/'
-          message: '[CI] Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           commit: --no-verify
 
       - name: Create pull request
@@ -61,4 +61,4 @@ jobs:
         with:
           branch: main-release-${{ github.event.release.tag_name }}
           base: main
-          title: '[CI] Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
