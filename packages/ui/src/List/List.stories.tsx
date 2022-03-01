@@ -1,6 +1,7 @@
 import {
   ChevronDOutlineMd,
   ChevronUpOutlineMd,
+  DotOutlineSm,
   HomeOutlineMd,
 } from '@astral/icons';
 import { Story } from '@storybook/react';
@@ -23,74 +24,107 @@ export default {
 
 export const Template: Story = () => {
   const [open, setOpen] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
   const handleClick = () => {
     setOpen(!open);
   };
-
   return (
-    <List subheader={<ListSubheader>Компонент Списка</ListSubheader>}>
-      <Link href="/">
-        <ListItemButton selected>
+    <>
+      <List subheader={<ListSubheader>Список ссылок</ListSubheader>}>
+        <Link href="/">
+          <ListItemButton
+            selected={selectedItem === 0}
+            onClick={() => {
+              setSelectedItem(0);
+            }}
+          >
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText>Главная ( ссылка )</ListItemText>
+          </ListItemButton>
+        </Link>
+        <Link href="/">
+          <ListItem
+            selected={selectedItem === 1}
+            onClick={() => {
+              setSelectedItem(1);
+            }}
+          >
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText>Главная ( ссылка )</ListItemText>
+          </ListItem>
+        </Link>
+        <Link href="https://www.yandex.com/">
+          <ListItemButton
+            selected={selectedItem === 2}
+            onClick={() => {
+              setSelectedItem(2);
+            }}
+          >
+            <ListItemIcon>
+              <HomeOutlineMd />
+            </ListItemIcon>
+            <ListItemText>Яндекс</ListItemText>
+          </ListItemButton>
+        </Link>
+      </List>
+      <List
+        subheader={
+          <ListSubheader>
+            Выпадающий список с активными элементами
+          </ListSubheader>
+        }
+      >
+        <ListItem onClick={handleClick}>
           <ListItemIcon>
             <HomeOutlineMd />
           </ListItemIcon>
-          <ListItemText>Главная ( ссылка )</ListItemText>
-        </ListItemButton>
-      </Link>
-      <Link href="/">
-        <ListItem>
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Главная ( ссылка )</ListItemText>
+          <ListItemText>Транспорт</ListItemText>
+          {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
         </ListItem>
-      </Link>
-      <Link href="https://www.yandex.com/">
-        <ListItemButton>
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Яндекс</ListItemText>
-        </ListItemButton>
-      </Link>
-
-      <ListItem onClick={handleClick}>
-        <ListItemIcon>
-          <HomeOutlineMd />
-        </ListItemIcon>
-        <ListItemText>Транспорт</ListItemText>
-        {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
-      </ListItem>
-      <Collapse in={open}>
-        <List>
-          <Link href="/cars">
-            <ListItem>
+        <Collapse in={open}>
+          <List>
+            <ListItem
+              selected={selectedItem === 3}
+              onClick={() => {
+                setSelectedItem(3);
+              }}
+            >
               <ListItemIcon>
-                <HomeOutlineMd />
+                <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Машины</ListItemText>
             </ListItem>
-          </Link>
-          <Link href="/bicycle">
-            <ListItem selected>
+            <ListItem
+              selected={selectedItem === 4}
+              onClick={() => {
+                setSelectedItem(4);
+              }}
+            >
               <ListItemIcon>
-                <HomeOutlineMd />
+                <DotOutlineSm />
               </ListItemIcon>
-              <ListItemText>Велосипеды ( selected )</ListItemText>
+              <ListItemText>Велосипеды</ListItemText>
             </ListItem>
-          </Link>
-          <Link href="/motorcycles">
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedItem === 5}
+              onClick={() => {
+                setSelectedItem(5);
+              }}
+            >
               <ListItemIcon>
-                <HomeOutlineMd />
+                <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Мотоциклы</ListItemText>
             </ListItemButton>
-          </Link>
-        </List>
-      </Collapse>
-    </List>
+          </List>
+        </Collapse>
+      </List>
+    </>
   );
 };
 
