@@ -52,7 +52,7 @@ jobs:
         uses: EndBug/add-and-commit@v8
         with:
           new_branch: main-release-${{ github.event.release.tag_name }}
-          add: '.'
+          add: '["packages/fonts/package.json --force", "packages/icons/package.json --force"]'
           message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           commit: --no-verify
 
