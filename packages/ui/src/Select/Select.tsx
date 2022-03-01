@@ -12,7 +12,6 @@ import { SelectProps } from './types';
 export const Select = ({
   multiple,
   loading,
-  value = multiple ? [] : '',
   placeholder,
   helperText,
   success,
@@ -21,9 +20,7 @@ export const Select = ({
   error,
   ...props
 }: SelectProps) => {
-  // TODO: Не выходит разрулить типы тут =\
-  // @ts-ignore
-  const renderValue = (selectedOptions): ReactNode => {
+  const renderValue = (selectedOptions: unknown): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
         <TagsWrapper>
@@ -34,11 +31,14 @@ export const Select = ({
       );
     }
 
-    if (!selectedOptions.length) {
+    if (
+      (Array.isArray(selectedOptions) || typeof selectedOptions === 'string') &&
+      !selectedOptions.length
+    ) {
       return placeholder;
     }
 
-    return selectedOptions;
+    return selectedOptions as string;
   };
 
   const isNoData = !Boolean(React.Children.count(children));
@@ -46,7 +46,6 @@ export const Select = ({
   return (
     <TextField
       select
-      value={value}
       label={label}
       helperText={helperText}
       error={error}
