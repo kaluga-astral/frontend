@@ -6,8 +6,10 @@ const { copyCommonFiles } = require('./copyCommonFiles');
 const { modifyPackageJSON } = require('./modifyPackageJSON');
 
 const build = () => {
+  console.log('Starting build...');
+
   const { code } = shell.exec(
-    `npx tsc --module es2015 --outDir ${DIST_DIR_NAME}/esm && npx tsc --module commonjs --outDir ${DIST_DIR_NAME}`
+    `tsc -p ./tsconfig.json --module es2015 --outDir ${DIST_DIR_NAME}/esm && tsc -p ./tsconfig.json --module commonjs --outDir ${DIST_DIR_NAME}`
   );
 
   if (code !== 0) {
@@ -16,6 +18,8 @@ const build = () => {
 
   copyCommonFiles();
   modifyPackageJSON();
+
+  console.log('Finish build');
 };
 
 module.exports = { build };

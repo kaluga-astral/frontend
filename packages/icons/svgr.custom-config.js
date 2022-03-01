@@ -1,6 +1,7 @@
+const commonConfig = require('./svgr.common.config');
+
 module.exports = {
-  jsxRuntime: 'automatic',
-  typescript: true,
+  ...commonConfig,
   outDir: 'generated-custom-icons',
   svgoConfig: {
     plugins: [
@@ -15,5 +16,4 @@ module.exports = {
       },
     ],
   },
-  template: require('./svgr.template'),
 };

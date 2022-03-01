@@ -6,30 +6,13 @@ on:
     - main
 
 jobs: 
-  reviewers:
-    name: check length of reviewers
-    runs-on: ubuntu-latest
-    outputs: 
-      result: ${{ steps.reviewers.outputs.result }}
-    steps:
-      - name: reviewers
-        id: reviewers
-        uses: actions/github-script@v6
-        with:
-          script: | 
-            const approvedReviewsResult = await github.request(context.payload.pull_request.url + '/reviews');
-            const approvedReviews = approvedReviewsResult.data.filter(review => review.state === 'APPROVED');
-            const requestedReviewers =  context.payload.pull_request.requested_reviewers;
-            
-            return { reviewersLength: requestedReviewers.length + approvedReviews.length, reviewer: context.payload.requested_reviewer };
-              
-    
-
   notify:
     name: notify
-    needs: reviewers
     runs-on: ubuntu-latest
-    if: ${{ fromJSON(needs.reviewers.outputs.result).reviewersLength > 2 }}
+    # т.к ревьюверы ставятся автоматически при открытии ПР, а action срабатывает на каждый реквест, 
+    # нужно понять, что мы запрашиваем ревью вручную после того как ПР открыт. 
+    # Для этого проверяем наличие assignee(ставится при открытии после установки ревьюверов)
+    if: ${{ github.event.pull_request.assignee != null }}
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
@@ -42,7 +25,7 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            &#128104;&#128104; требует ревью от ${{ fromJSON(needs.reviewers.outputs.result).reviewer.login }}
+            &#128104;&#128104; требует ревью от ${{ github.event.requested_reviewer.login }}
             
             ${{ github.event.pull_request.html_url }}
             
