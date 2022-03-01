@@ -20,6 +20,7 @@ export const Select = ({
   error,
   ...props
 }: SelectProps) => {
+  // unknown, т.к. ts ругается на несоответствие типов. По-умолчанию в selectedOptions string или string[].
   const renderValue = (selectedOptions: unknown): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
