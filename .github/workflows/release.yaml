@@ -1,8 +1,10 @@
 name: Release packages
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ main ]
+#  release:
+#    types: [published]
 
 jobs:
   releasePackages:
@@ -50,7 +52,7 @@ jobs:
         uses: EndBug/add-and-commit@v8
         with:
           new_branch: main-release-${{ github.event.release.tag_name }}
-          add: 'packages'
+#          add: 'packages'
           message: '[CI] Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           commit: --no-verify
 
