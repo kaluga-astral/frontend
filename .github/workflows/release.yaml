@@ -5,8 +5,8 @@ on:
     types: [published]
 
 jobs:
-  releaseUI:
-    name: Release @astral/ui
+  releasePackages:
+    name: Release packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,73 +18,38 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm i
-      - name: Build
+
+      - name: Build @astral/ui
         run: npm run build --workspace=@astral/ui
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish
+      - name: Publish @astral/ui
         run: npm publish ./packages/ui/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: EndBug/add-and-commit@v8
-        with:
-          new_branch: main-release-${{ github.event.release.tag_name }}
-          add: 'packages'
-          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
-          commit: --no-verify
 
-  releaseIcons:
-    name: Release @astral/icons
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: npm i
-      - name: Build
+      - name: Build @astral/icons
         run: npm run build --workspace=@astral/icons
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish
+      - name: Publish @astral/icons
         run: npm publish ./packages/icons/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: EndBug/add-and-commit@v8
-        with:
-          new_branch: main-release-${{ github.event.release.tag_name }}
-          add: 'packages'
-          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
-          commit: --no-verify
 
-  releaseFonts:
-    name: Release @astral/fonts
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: npm i
-      - name: Build
+      - name: Build @astral/fonts
         run: npm run build --workspace=@astral/fonts
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish
+      - name: Publish @astral/fonts
         run: npm publish ./packages/fonts/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - uses: EndBug/add-and-commit@v8
+
+      - name: Commit new packages versions and create pull request
+        uses: peter-evans/create-pull-request@v3
         with:
-          new_branch: main-release-${{ github.event.release.tag_name }}
-          add: 'packages'
-          message: CI Обновлена версия @astral/icons до ${{ github.event.release.tag_name }}
-          commit: --no-verify
+          branch: main-release-${{ github.event.release.tag_name }}
+          add-paths: packages
+          commit-message: '[CI] Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          title: '[CI] Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
