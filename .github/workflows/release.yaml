@@ -48,17 +48,11 @@ jobs:
 #        env:
 #          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-      - name: Commit new packages versions
-        uses: EndBug/add-and-commit@v8
-        with:
-          new_branch: main-release-${{ github.event.release.tag_name }}
-          add: '["packages/fonts/package.json --force", "packages/icons/package.json --force"]'
-          message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
-          commit: --no-verify
-
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
           branch: main-release-${{ github.event.release.tag_name }}
           base: main
+          delete-branch: true
+          commit-message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
