@@ -3,7 +3,7 @@ import { ListItemButtonProps } from './types';
 
 export const ListItemButton = ({ children, ...props }: ListItemButtonProps) => {
   return (
-    <StyledListItemButton disableRipple {...props}>
+    <StyledListItemButton {...props} disableRipple>
       {children}
     </StyledListItemButton>
   );

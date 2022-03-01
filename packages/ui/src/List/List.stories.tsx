@@ -5,6 +5,7 @@ import {
 } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
+import { Link } from '@mui/material';
 
 import { ListItem } from '../ListItem';
 import { ListItemIcon } from '../ListItemIcon';
@@ -29,51 +30,56 @@ export const Template: Story = () => {
 
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
-      <ListItemButton>
-        <ListItemIcon>
-          <HomeOutlineMd />
-        </ListItemIcon>
-        <ListItemText primary="ListItemButton" />
-      </ListItemButton>
       <ListItemButton selected>
         <ListItemIcon>
           <HomeOutlineMd />
         </ListItemIcon>
-        <ListItemText primary="ListItemButton" />
+        <ListItemText>
+          <Link href="/">Главная</Link>
+        </ListItemText>
       </ListItemButton>
-      <ListItem>
-        <ListItemIcon>
-          <HomeOutlineMd />
-        </ListItemIcon>
-        <ListItemText primary="ListItem" />
-      </ListItem>
+      <Link href="https://www.yandex.com/">
+        <ListItemButton>
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Яндекс</ListItemText>
+        </ListItemButton>
+      </Link>
+
       <ListItem onClick={handleClick}>
         <ListItemIcon>
           <HomeOutlineMd />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText>Транспорт</ListItemText>
         {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List disablePadding>
-          <ListItem>
-            <ListItemIcon>
-              <HomeOutlineMd />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-          <ListItem selected>
-            <ListItemIcon>
-              <HomeOutlineMd />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <HomeOutlineMd />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
+      <Collapse in={open}>
+        <List>
+          <Link href="/cars">
+            <ListItem>
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Машины</ListItemText>
+            </ListItem>
+          </Link>
+          <Link href="/bicycle">
+            <ListItem selected>
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Велосипеды</ListItemText>
+            </ListItem>
+          </Link>
+          <Link href="/motorcycles">
+            <ListItemButton>
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мотоциклы</ListItemText>
+            </ListItemButton>
+          </Link>
         </List>
       </Collapse>
     </List>

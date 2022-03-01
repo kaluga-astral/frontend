@@ -41,11 +41,6 @@ export const StyledListItemButton = styled(ListItemButton)<ListItemButtonProps>`
   border-radius: ${({ theme }) => theme.shape.small};
   color: ${(props) =>
     getColor({ ...props, listItemButtonState: ListItemButtonStates.DEFAULT })};
-  a {
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-  }
   :hover {
     color: ${(props) =>
       getColor({
