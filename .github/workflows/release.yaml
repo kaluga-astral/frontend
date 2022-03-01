@@ -1,10 +1,8 @@
 name: Release packages
 
 on:
-  push:
-    branches: [ main ]
-#  release:
-#    types: [published]
+  release:
+    types: [published]
 
 jobs:
   releasePackages:
@@ -21,32 +19,32 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-#      - name: Build @astral/ui
-#        run: npm run build --workspace=@astral/ui
-#        env:
-#          RELEASE_TAG: ${{ github.event.release.tag_name }}
-#      - name: Publish @astral/ui
-#        run: npm publish ./packages/ui/lib
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-#
+      - name: Build @astral/ui
+        run: npm run build --workspace=@astral/ui
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/ui
+        run: npm publish ./packages/ui/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Build @astral/icons
         run: npm run build --workspace=@astral/icons
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-#      - name: Publish @astral/icons
-#        run: npm publish ./packages/icons/lib
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Publish @astral/icons
+        run: npm publish ./packages/icons/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/fonts
         run: npm run build --workspace=@astral/fonts
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-#      - name: Publish @astral/fonts
-#        run: npm publish ./packages/fonts/lib
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Publish @astral/fonts
+        run: npm publish ./packages/fonts/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
