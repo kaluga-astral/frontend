@@ -15,7 +15,6 @@ ENUM:
 - refactor
 - doc
 - build
-- ci
 - chore
 
 PACKAGE_NAME:

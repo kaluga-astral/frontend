@@ -1,39 +1,44 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+const path = require('path');
+
 const getDirNames = require('read-dir-names');
 
-// eslint-disable-next-line import/no-extraneous-dependencies
+const packagesNames = getDirNames(path.resolve(__dirname, 'packages'));
+const componentsNames = getDirNames(
+  path.resolve(__dirname, 'packages', 'ui', 'src')
+);
+
+console.log(componentsNames);
+
 module.exports = {
-  // Область всегда только в верхнем регистре
-  'scope-case': [2, 'always', 'upper-case'],
+  rules: {
+    // Описание не может быть пустым
+    'subject-empty': [2, 'never'],
 
-  // Описание не может быть пустым
-  'subject-empty': [2, 'never'],
+    // Описание не должно заканчиваться '.'
+    'subject-full-stop': [2, 'never', '.'],
 
-  // Описание не должно заканчиваться '.'
-  'subject-full-stop': [2, 'never', '.'],
+    // Тип не может быть пустым
+    'type-empty': [2, 'never'],
 
-  // Тип всегда только в нижнем регистре
-  'type-case': [2, 'always', 'lower-case'],
-
-  // Тип не может быть пустым
-  'type-empty': [2, 'never'],
-
-  // Перечислим все возможные варианты коммитов
-  'type-enum': [
-    2,
-    'always',
-    [
-      'build',
-      'ci',
-      'docs',
-      'feat',
-      'fix',
-      'perf',
-      'refactor',
-      'revert',
-      'style',
-      'test',
-      'wip',
+    // Перечислим все возможные варианты коммитов
+    'type-enum': [
+      2,
+      'always',
+      [
+        'feat',
+        'bug',
+        'wip',
+        'refactor',
+        'doc',
+        'build',
+        'chore',
+        'revert',
+        'style',
+        'test',
+        'wip',
+        ...packagesNames,
+        ...componentsNames,
+      ],
     ],
-  ],
+  },
 };
