@@ -1,13 +1,5 @@
-import { ListProps, List as MuiList } from '@mui/material';
+import { ListProps } from '@mui/material';
 
-import { styled } from '../styles';
+export { StyledList as List } from './styled';
 
-export const List = styled(MuiList)`
-  a {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    text-decoration: none;
-  }
-`;
 export type { ListProps };
