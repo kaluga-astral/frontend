@@ -57,6 +57,7 @@ jobs:
           
   notify:
     name: notify
+    needs: releasePackages
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message on release
