@@ -20,12 +20,12 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            &#128065;&#128065;&#128065;
+            👁👁👁
             PR от ${{ github.event.pull_request.user.login }}
             
             ${{ github.event.pull_request.title }}
             
-            &#128104;&#128104; требует ревью от ${{ github.event.requested_reviewer.login }}
+            👨👨👨 требует ревью от ${{ github.event.requested_reviewer.login }}
             
             ${{ github.event.pull_request.html_url }}
             
