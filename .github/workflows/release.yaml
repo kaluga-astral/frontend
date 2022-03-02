@@ -54,3 +54,28 @@ jobs:
           base: main
           commit_message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          
+  notify:
+    name: notify
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on release
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🚀 **Были опубликованы новые версии пакетов ui-kit !**
+            
+            Опубликованные пакеты:
+
+            📦  @astral/ui: ${{ github.event.release.tag_name }}
+            📦  @astral/fonts: ${{ github.event.release.tag_name }}
+            📦  @astral/icons: ${{ github.event.release.tag_name }}
+
+            ⚡️ [Changelog](${{ github.event.release.html_url }})
+            
+            ⚡️ [Стенд storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com) для ui-kit.
+            
+            ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти ([здесь](${{ github.event.repository.html_url }})). Любой желающий может внести свой вклад в развитие проекта.
+            
