@@ -46,14 +46,37 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
+      - name: Generate token
+      - uses: tibdex/github-app-token@v1
+        id: generate-token
         with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+            
+      - name: Create pull request
+      - uses: peter-evans/create-pull-request@v3
+        id: cpr
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
           branch: main-release-${{ github.event.release.tag_name }}
           delete-branch: true
           base: main
           commit_message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v1
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          
+      - name: Auto approve
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
           
   notify:
     name: notify
