@@ -1,7 +1,7 @@
 const path = require('path');
 
 const getDirNames = require('read-dir-names');
-// test
+
 const packagesNames = getDirNames(path.resolve(__dirname, 'packages'));
 const componentsNames = getDirNames(
   path.resolve(__dirname, 'packages', 'ui', 'src')
