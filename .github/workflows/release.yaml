@@ -62,7 +62,7 @@ jobs:
       - name: send telegram message on release
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          to: ${{ secrets.TELEGRAM_RELEASE_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: html
           message: |
