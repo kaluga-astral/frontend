@@ -36,9 +36,10 @@ module.exports = {
         'style',
         'test',
         'wip',
-        ...packagesNames,
-        ...componentsNames,
       ],
     ],
+
+    // Перечисления доступных scope
+    'scope-enum': [2, 'always', [...packagesNames, ...componentsNames]],
   },
 };
