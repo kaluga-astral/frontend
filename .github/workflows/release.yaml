@@ -61,7 +61,7 @@ jobs:
           branch: main-release-${{ github.event.release.tag_name }}
           delete-branch: true
           base: main
-          commit_message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          commit-message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
 
       - name: Enable Pull Request Automerge
