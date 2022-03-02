@@ -12,6 +12,7 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": ["lib", "build", "node_modules"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
