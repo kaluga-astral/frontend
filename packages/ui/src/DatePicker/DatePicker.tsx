@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePickerProps, DatePicker as MuiDatePicker } from '@mui/lab';
@@ -24,20 +24,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           value={value}
           //@ts-ignore
           onChange={(newValue) => setValue(newValue)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <CalendarOutlineMd />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
+          renderInput={(params) => <TextField {...params} />}
+          components={{ OpenPickerIcon: CalendarOutlineMd }}
         />
       </LocalizationProvider>
     );
