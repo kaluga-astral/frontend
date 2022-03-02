@@ -1,0 +1,56 @@
+name: Release packages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  releasePackages:
+    name: Release packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build @astral/ui
+        run: npm run build --workspace=@astral/ui
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/ui
+        run: npm publish ./packages/ui/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Build @astral/icons
+        run: npm run build --workspace=@astral/icons
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/icons
+        run: npm publish ./packages/icons/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Build @astral/fonts
+        run: npm run build --workspace=@astral/fonts
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/fonts
+        run: npm publish ./packages/fonts/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: main-release-${{ github.event.release.tag_name }}
+          delete-branch: true
+          base: main
+          commit_message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
+          title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'

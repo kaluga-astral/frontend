@@ -1,6 +1,7 @@
+const commonConfig = require('./svgr.common.config');
+
 module.exports = {
-  jsxRuntime: 'automatic',
-  typescript: true,
+  ...commonConfig,
   outDir: 'generated-themed-icons',
   svgoConfig: {
     plugins: [
@@ -16,5 +17,4 @@ module.exports = {
       { name: 'removeAttrs', params: { attrs: '^fill$|^stroke$' } },
     ],
   },
-  template: require('./svgr.template'),
 };

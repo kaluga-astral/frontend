@@ -21,3 +21,4 @@ export * from './Tooltip';
 export * from './TextArea';
 export * from './DashboardLayout';
 export * from './Autocomplete';
+export * from './Select';
