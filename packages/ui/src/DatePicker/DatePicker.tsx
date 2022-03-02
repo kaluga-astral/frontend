@@ -6,6 +6,7 @@ import { DatePickerProps, DatePicker as MuiDatePicker } from '@mui/lab';
 import { CalendarOutlineMd } from '@astral/icons';
 
 import { localeMap, maskMap } from './constants';
+import { renderWeekPickerDay } from './styled';
 
 export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
   ({ ...props }, ref) => {
@@ -24,6 +25,7 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           value={value}
           //@ts-ignore
           onChange={(newValue) => setValue(newValue)}
+          renderDay={renderWeekPickerDay}
           renderInput={(params) => <TextField {...params} />}
           components={{ OpenPickerIcon: CalendarOutlineMd }}
         />
