@@ -13,7 +13,7 @@ on:
 jobs:
   fetch:
     name: fetch
-    if: ${{ github.event.review.state == 'commented' || github.event.issue != null }}
+    if: ${{ github.event.review.state == 'commented' || github.event.review.state == 'changes_requested' || github.event.issue != null }}
     uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
       pr_url: ${{ github.event.pull_request.url || github.event.issue.pull_request.url }}
