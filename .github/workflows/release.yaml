@@ -16,41 +16,41 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
           registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: npm i
+#       - name: Install dependencies
+#         run: npm i
 
-      - name: Build @astral/ui
-        run: npm run build --workspace=@astral/ui
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish @astral/ui
-        run: npm publish ./packages/ui/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+#       - name: Build @astral/ui
+#         run: npm run build --workspace=@astral/ui
+#         env:
+#           RELEASE_TAG: ${{ github.event.release.tag_name }}
+#       - name: Publish @astral/ui
+#         run: npm publish ./packages/ui/lib
+#         env:
+#           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-      - name: Build @astral/icons
-        run: npm run build --workspace=@astral/icons
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish @astral/icons
-        run: npm publish ./packages/icons/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+#       - name: Build @astral/icons
+#         run: npm run build --workspace=@astral/icons
+#         env:
+#           RELEASE_TAG: ${{ github.event.release.tag_name }}
+#       - name: Publish @astral/icons
+#         run: npm publish ./packages/icons/lib
+#         env:
+#           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-      - name: Build @astral/fonts
-        run: npm run build --workspace=@astral/fonts
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish @astral/fonts
-        run: npm publish ./packages/fonts/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+#       - name: Build @astral/fonts
+#         run: npm run build --workspace=@astral/fonts
+#         env:
+#           RELEASE_TAG: ${{ github.event.release.tag_name }}
+#       - name: Publish @astral/fonts
+#         run: npm publish ./packages/fonts/lib
+#         env:
+#           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Generate token
         uses: tibdex/github-app-token@v1
         id: generate-token
         with:
-          app_id: ${{ secrets.APP_ID }}
+          app_id: ${{ secrets.TOKEN_APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
             
       - name: Create pull request
