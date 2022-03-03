@@ -57,7 +57,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         id: cpr
         with:
-          token: ${{ steps.generate-token.outputs.token }}
           branch: main-release-${{ github.event.release.tag_name }}
           delete-branch: true
           base: main
