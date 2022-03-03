@@ -7,8 +7,6 @@ const componentsNames = getDirNames(
   path.resolve(__dirname, 'packages', 'ui', 'src')
 );
 
-console.log(componentsNames);
-
 module.exports = {
   rules: {
     // Описание не может быть пустым
