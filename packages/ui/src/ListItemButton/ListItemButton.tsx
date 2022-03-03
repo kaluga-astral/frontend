@@ -1,10 +1,6 @@
 import { StyledListItemButton } from './styled';
 import { ListItemButtonProps } from './types';
 
-export const ListItemButton = ({ children, ...props }: ListItemButtonProps) => {
-  return (
-    <StyledListItemButton {...props} disableRipple>
-      {children}
-    </StyledListItemButton>
-  );
+export const ListItemButton = ({ ...props }: ListItemButtonProps) => {
+  return <StyledListItemButton {...props} disableRipple />;
 };
