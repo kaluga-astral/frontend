@@ -85,29 +85,29 @@ jobs:
           github-token: ${{ secrets.OWNER_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
-#   notify:
-#     name: notify
-#     needs: releasePackages
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: send telegram message on release
-#         uses: appleboy/telegram-action@master
-#         with:
-#           to: ${{ secrets.TELEGRAM_RELEASE_CHAT_ID }}
-#           token: ${{ secrets.TELEGRAM_TOKEN }}
-#           format: html
-#           message: |
-#             🚀 <b>Были опубликованы новые версии пакетов ui-kit !</b>
+  notify:
+    name: notify
+    needs: releasePackages
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on release
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_RELEASE_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            🚀 <b>Были опубликованы новые версии пакетов ui-kit !</b>
             
-#             Опубликованные пакеты:
+            Опубликованные пакеты:
 
-#             📦  @astral/ui: ${{ github.event.release.tag_name }}
-#             📦  @astral/fonts: ${{ github.event.release.tag_name }}
-#             📦  @astral/icons: ${{ github.event.release.tag_name }}
+            📦  @astral/ui: ${{ github.event.release.tag_name }}
+            📦  @astral/fonts: ${{ github.event.release.tag_name }}
+            📦  @astral/icons: ${{ github.event.release.tag_name }}
 
-#             ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
+            ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
             
-#             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
+            ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
             
-#             ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти <a href="${{ github.event.repository.html_url }}">здесь</a>. Любой желающий может внести свой вклад в развитие проекта.
+            ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти <a href="${{ github.event.repository.html_url }}">здесь</a>. Любой желающий может внести свой вклад в развитие проекта.
             
