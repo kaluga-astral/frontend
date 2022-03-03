@@ -64,12 +64,12 @@ jobs:
           commit-message: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'ci: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
 
-#       - name: Enable Pull Request Automerge
-#         if: steps.cpr.outputs.pull-request-operation == 'created'
-#         uses: peter-evans/enable-pull-request-automerge@v1
-#         with:
-#           token: ${{ steps.generate-token.outputs.token }}
-#           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v1
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
       - name: Auto approve
         if: steps.cpr.outputs.pull-request-operation == 'created'
@@ -78,7 +78,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
 
-      - name: Auto approve 2
+      - name: Auto approve from Code Owner
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: hmarr/auto-approve-action@v2
         with:
