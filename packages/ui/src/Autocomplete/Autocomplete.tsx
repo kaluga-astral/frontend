@@ -94,6 +94,8 @@ export const Autocomplete = <
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
       clearIcon={<CrossSmOutlineSm />}
+      componentsProps={{ clearIndicator: { disableRipple: true } }}
+      noOptionsText="Нет данных"
     />
   );
 };

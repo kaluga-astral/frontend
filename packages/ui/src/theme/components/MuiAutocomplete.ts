@@ -5,21 +5,64 @@ import { AutocompleteSizes } from '../../Autocomplete/constants';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
   styleOverrides: {
-    root({ theme }: { theme: any }) {
+    root({ theme }) {
       return {
         padding: theme.spacing(1),
+        '.MuiTouchRipple-root': {
+          display: 'none',
+        },
       };
     },
     inputRoot({ theme, ownerState: { size } }) {
       return {
-        paddingTop: '0 !important',
-        paddingBottom: '0 !important',
+        paddingTop: `${theme.spacing(1)} !important`,
+        paddingBottom: `${theme.spacing(1)} !important`,
         paddingLeft: `${theme.spacing(1)} !important`,
         minHeight: size === AutocompleteSizes.small ? '32px' : '40px',
       };
     },
-    clearIndicator: {
-      padding: 0,
+    input({ theme }) {
+      return {
+        padding: '0 !important',
+        paddingLeft: `${theme.spacing(1)} !important`,
+      };
+    },
+    popupIndicator({ theme }) {
+      return {
+        borderRadius: theme.shape.small,
+        width: 20,
+        height: 20,
+      };
+    },
+    endAdornment() {
+      return {
+        top: 'calc(50% - 11px)',
+      };
+    },
+    paper({ theme }) {
+      return {
+        marginTop: theme.spacing(2),
+      };
+    },
+    noOptions({ theme }) {
+      return {
+        color: theme.palette.grey['500'],
+      };
+    },
+    clearIndicator({ theme }) {
+      return {
+        padding: 0,
+        borderRadius: '50%',
+        backgroundColor: theme.palette.grey['500'],
+        color: theme.palette.primary.contrastText,
+        marginRight: theme.spacing(1),
+        width: 14,
+        height: 14,
+        '>svg': {
+          width: 16,
+          height: 16,
+        },
+      };
     },
   },
 };
