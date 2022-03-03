@@ -76,14 +76,14 @@ jobs:
         uses: hmarr/auto-approve-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
 
       - name: Auto approve 2
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: hmarr/auto-approve-action@v2
         with:
           github-token: ${{ secrets.OWNER_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
 #   notify:
 #     name: notify
