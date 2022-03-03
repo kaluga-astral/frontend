@@ -31,9 +31,11 @@ export const Template: Story = () => {
   };
   return (
     <>
-      <List subheader={<ListSubheader>Список ссылок</ListSubheader>}>
+      <List
+        subheader={<ListSubheader>Список ссылок (ListItem) </ListSubheader>}
+      >
         <Link href="/">
-          <ListItemButton
+          <ListItem
             selected={selectedItem === 0}
             onClick={() => {
               setSelectedItem(0);
@@ -43,7 +45,7 @@ export const Template: Story = () => {
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText>Главная ( ссылка )</ListItemText>
-          </ListItemButton>
+          </ListItem>
         </Link>
         <Link href="/">
           <ListItem
@@ -59,7 +61,7 @@ export const Template: Story = () => {
           </ListItem>
         </Link>
         <Link href="https://www.yandex.com/">
-          <ListItemButton
+          <ListItem
             selected={selectedItem === 2}
             onClick={() => {
               setSelectedItem(2);
@@ -69,8 +71,47 @@ export const Template: Story = () => {
               <HomeOutlineMd />
             </ListItemIcon>
             <ListItemText>Яндекс</ListItemText>
-          </ListItemButton>
+          </ListItem>
         </Link>
+      </List>
+      <List
+        subheader={
+          <ListSubheader>Список Кнопок (ListItemButton) </ListSubheader>
+        }
+      >
+        <ListItemButton
+          selected={selectedItem === 11}
+          onClick={() => {
+            setSelectedItem(11);
+          }}
+        >
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Главная </ListItemText>
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedItem === 12}
+          onClick={() => {
+            setSelectedItem(12);
+          }}
+        >
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Главная </ListItemText>
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedItem === 13}
+          onClick={() => {
+            setSelectedItem(13);
+          }}
+        >
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Яндекс</ListItemText>
+        </ListItemButton>
       </List>
       <List
         subheader={

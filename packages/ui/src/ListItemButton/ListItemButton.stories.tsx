@@ -5,7 +5,6 @@ import {
 } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
-import { Link } from '@mui/material';
 
 import { List } from '../List';
 import { ListItemIcon } from '../ListItemIcon';
@@ -23,64 +22,79 @@ export default {
 
 const Template: Story = () => {
   const [open, setOpen] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
   const handleClick = () => {
     setOpen(!open);
   };
   return (
-    <List subheader={<ListSubheader>Компонент Списка</ListSubheader>}>
-      <Link href="/">
-        <ListItemButton selected>
+    <>
+      <List
+        subheader={
+          <ListSubheader>Компонент Списка Кнопки selectable</ListSubheader>
+        }
+      >
+        <ListItemButton
+          selected={selectedItem === 0}
+          onClick={() => {
+            setSelectedItem(0);
+          }}
+        >
           <ListItemIcon>
             <HomeOutlineMd />
           </ListItemIcon>
-          <ListItemText>Главная ( ссылка )</ListItemText>
+          <ListItemText>Главная </ListItemText>
         </ListItemButton>
-      </Link>
-      <Link href="https://www.yandex.com/">
-        <ListItemButton>
+        <ListItemButton
+          selected={selectedItem === 1}
+          onClick={() => {
+            setSelectedItem(1);
+          }}
+        >
           <ListItemIcon>
             <HomeOutlineMd />
           </ListItemIcon>
-          <ListItemText>Яндекс ( кнопка )</ListItemText>
+          <ListItemText>Яндекс</ListItemText>
         </ListItemButton>
-      </Link>
-      <ListItem onClick={handleClick}>
-        <ListItemIcon>
-          <HomeOutlineMd />
-        </ListItemIcon>
-        <ListItemText>Транспорт</ListItemText>
-        {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
-      </ListItem>
-      <Collapse in={open}>
-        <List>
-          <Link href="/cars">
+      </List>
+      <List
+        subheader={
+          <ListSubheader>
+            Компонент Списка ListItemButton + Collapse
+          </ListSubheader>
+        }
+      >
+        <ListItemButton onClick={handleClick}>
+          <ListItemIcon>
+            <HomeOutlineMd />
+          </ListItemIcon>
+          <ListItemText>Транспорт</ListItemText>
+          {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
+        </ListItemButton>
+        <Collapse in={open}>
+          <List>
             <ListItem>
               <ListItemIcon>
                 <HomeOutlineMd />
               </ListItemIcon>
               <ListItemText>Машины</ListItemText>
             </ListItem>
-          </Link>
-          <Link href="/bicycle">
             <ListItem selected>
               <ListItemIcon>
                 <HomeOutlineMd />
               </ListItemIcon>
               <ListItemText>Велосипеды ( selected )</ListItemText>
             </ListItem>
-          </Link>
-          <Link href="/motorcycles">
             <ListItemButton>
               <ListItemIcon>
                 <HomeOutlineMd />
               </ListItemIcon>
               <ListItemText>Мотоциклы</ListItemText>
             </ListItemButton>
-          </Link>
-        </List>
-      </Collapse>
-    </List>
+          </List>
+        </Collapse>
+      </List>
+    </>
   );
 };
 
