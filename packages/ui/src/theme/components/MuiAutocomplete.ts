@@ -8,9 +8,6 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
     root({ theme }) {
       return {
         padding: theme.spacing(1),
-        '.MuiTouchRipple-root': {
-          display: 'none',
-        },
       };
     },
     inputRoot({ theme, ownerState: { size } }) {
