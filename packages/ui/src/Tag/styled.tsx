@@ -30,7 +30,11 @@ const getBgColor = ({
   theme,
   customColor,
   customVariant,
+  onDelete,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
+  if (onDelete) {
+    return theme.palette.grey[100];
+  }
   if (customColor === TagColors.GREY) {
     return theme.palette.grey[100];
   }
@@ -64,7 +68,11 @@ const getColor = ({
   theme,
   customColor,
   customVariant,
+  onDelete,
 }: StyledTagThemeProps & { tagState: TagState }): string => {
+  if (onDelete) {
+    return theme.palette.grey[900];
+  }
   const textColorVariants = {
     contained: {
       primary: theme.palette.primary.contrastText,
@@ -82,8 +90,9 @@ const getColor = ({
     },
   };
   if (!customColor) {
-    return textColorVariants.contained.primary;
+    return textColorVariants.contained.default;
   }
+
   if (customVariant && customColor) {
     return textColorVariants[customVariant][customColor];
   }
@@ -126,6 +135,7 @@ export const StyledTag = styled(Chip, {
   border-radius: ${(props) => getShape({ ...props })};
   background-color: ${(props) =>
     getBgColor({ ...props, tagState: TagStates.DEFAULT })};
+
   &:hover {
     background-color: ${(props) =>
       getBgColor({ ...props, tagState: TagStates.HOVER })};
@@ -154,15 +164,17 @@ export const StyledTag = styled(Chip, {
     width: 20px;
     height: 20px;
     border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
-
+    color: ${({ theme }) => theme.palette.grey[800]};
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
 
     &:hover {
+      color: ${({ theme }) => theme.palette.grey[800]};
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.HOVER })};
     }
     &:active {
+      color: ${({ theme }) => theme.palette.grey[800]};
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.ACTIVE })};
     }
