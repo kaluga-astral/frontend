@@ -70,18 +70,18 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
-      - name: Auto approve
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: hmarr/auto-approve-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-
       - name: Auto approve from Code Owner
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: hmarr/auto-approve-action@v2
         with:
           github-token: ${{ secrets.OWNER_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+
+      - name: Auto approve from Code Owner 2
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.SECOND_OWNER_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
   notify:
