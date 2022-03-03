@@ -32,7 +32,6 @@ module.exports = {
         'chore',
         'revert',
         'style',
-        'test',
         'wip',
       ],
     ],
