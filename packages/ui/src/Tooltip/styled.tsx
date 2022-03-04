@@ -10,8 +10,8 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
 ))`
   & .MuiTooltip-tooltip {
     margin: 0;
-    background-color: ${({ theme }) => theme.palette.grey[900]};
-    border-radius: ${({ theme }) => theme.shape.small};
+
+    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
     font-size: ${({ size, theme }) =>
       size === TooltipSizes.SMALL
         ? theme.typography.small.fontSize
@@ -20,7 +20,9 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
       size === TooltipSizes.SMALL
         ? theme.typography.small.lineHeight
         : theme.typography.ui.lineHeight};
-    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
+
+    background-color: ${({ theme }) => theme.palette.grey[900]};
+    border-radius: ${({ theme }) => theme.shape.small};
   }
 
   & .MuiTooltip-arrow {

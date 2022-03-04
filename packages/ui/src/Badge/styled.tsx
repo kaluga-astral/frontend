@@ -41,19 +41,22 @@ export const StyledBadge = styled(Badge, {
 })<StyledBadgeProps>`
   .MuiBadge-badge {
     height: 20px;
-    border-radius: 12px;
+    padding: ${({ theme }) => theme.spacing(0, 1)};
+
+    color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
+    font-size: ${({ theme }) => theme.typography.small.fontSize};
     line-height: 20px;
+
     background-color: ${({ customColor, theme }) =>
       getBgColor({ customColor, theme })};
-    color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
-    padding: ${({ theme }) => theme.spacing(0, 1)};
-    font-size: ${({ theme }) => theme.typography.small.fontSize};
     border: 2px solid ${({ theme }) => theme.palette.common.white};
+    border-radius: 12px;
   }
 
   .MuiBadge-dot {
     width: 12px;
     height: 12px;
+
     border: 2px solid ${({ theme }) => theme.palette.common.white};
   }
 `;
