@@ -36,11 +36,13 @@ export const getColor = ({
 export const StyledListItem = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== 'selected',
 })<ListItemProps>`
-  background-color: ${(props) => getBgColor({ ...props })};
-  border-radius: ${({ theme }) => theme.shape.small};
   color: ${(props) =>
     getColor({ ...props, listItemState: ListItemStates.DEFAULT })};
+
+  background-color: ${(props) => getBgColor({ ...props })};
+  border-radius: ${({ theme }) => theme.shape.small};
   cursor: pointer;
+
   user-select: none;
 
   :hover {

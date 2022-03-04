@@ -6,8 +6,10 @@ import { RadioProps } from './types';
 
 export const StyledRadio = styled(Radio)<RadioProps>`
   padding: 5px;
-  border-radius: unset;
+
   color: ${({ theme }) => theme.palette.background.default};
+
+  border-radius: unset;
 
   &:hover {
     background: none;
