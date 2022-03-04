@@ -15,7 +15,8 @@
     "publish": "npm publish ./lib",
     "test": "react-scripts test --env=jsdom",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint ./**/*{.ts,.tsx} --fix"
   },
   "dependencies": {
     "@astral/icons": "^0.8.1",

@@ -24,6 +24,7 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
 
   &.Mui-disabled {
     color: ${({ theme }) => theme.palette.grey[200]};
+
     & .MuiSvgIcon-border {
       color: currentColor;
     }

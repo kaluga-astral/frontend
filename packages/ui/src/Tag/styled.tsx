@@ -129,18 +129,19 @@ export const StyledTag = styled(Chip, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant' && prop !== 'rounded',
 })<StyledTagProps>`
-  user-select: none;
-  font-size: 14px;
   height: 20px;
-  border-radius: ${(props) => getShape({ ...props })};
   background-color: ${(props) =>
     getBgColor({ ...props, tagState: TagStates.DEFAULT })};
+  border-radius: ${(props) => getShape({ ...props })};
+  font-size: 14px;
+  user-select: none;
 
   &:hover {
     background-color: ${(props) =>
       getBgColor({ ...props, tagState: TagStates.HOVER })};
     color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
   }
+
   &:active {
     background-color: ${(props) =>
       getBgColor({ ...props, tagState: TagStates.ACTIVE })};
@@ -149,41 +150,45 @@ export const StyledTag = styled(Chip, {
 
   .MuiChip-label {
     padding: ${(props) => getTagLabelPadding({ ...props })};
-
     color: ${(props) => getColor({ ...props, tagState: TagStates.DEFAULT })};
 
     &:hover {
       color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
     }
+
     &:active {
       color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
     }
   }
+
   .MuiChip-deleteIcon {
-    margin: 0;
     width: 20px;
     height: 20px;
-    border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
-    color: ${({ theme }) => theme.palette.grey[800]};
+    margin: 0;
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
+    border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
+    color: ${({ theme }) => theme.palette.grey[800]};
 
     &:hover {
-      color: ${({ theme }) => theme.palette.grey[800]};
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.HOVER })};
-    }
-    &:active {
       color: ${({ theme }) => theme.palette.grey[800]};
+    }
+
+    &:active {
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.ACTIVE })};
+      color: ${({ theme }) => theme.palette.grey[800]};
     }
   }
+
   .MuiChip-avatar {
-    margin: 2px;
     width: 16px;
     height: 16px;
+    margin: 2px;
   }
+
   .MuiChip-icon {
     width: 16px;
     height: 16px;

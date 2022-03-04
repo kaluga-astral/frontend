@@ -206,23 +206,22 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<StyledButtonBaseProps>`
-  border: none;
-  font-family: Ubuntu, serif;
-  padding: ${getButtonPadding};
-  height: ${getButtonHeight};
-  border-radius: ${({ theme }) => theme.shape.small};
-  cursor: pointer;
-  font-size: ${({ theme }) => theme.typography.button.fontSize};
-  font-weight: ${({ theme }) => theme.typography.button.fontWeight};
+  position: relative;
   display: inline-flex;
+  height: ${getButtonHeight};
   align-items: center;
   justify-content: center;
-  position: relative;
-
+  padding: ${getButtonPadding};
+  border: none;
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  border-radius: ${({ theme }) => theme.shape.small};
   color: ${(props) =>
     getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  cursor: pointer;
+  font-family: Ubuntu, serif;
+  font-size: ${({ theme }) => theme.typography.button.fontSize};
+  font-weight: ${({ theme }) => theme.typography.button.fontWeight};
 
   &:hover {
     background-color: ${(props) =>
@@ -248,8 +247,8 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   }
 
   &.${buttonUnstyledClasses.disabled} {
-    cursor: unset;
     background-color: ${getDisabledBgColor};
     color: ${({ theme }) => theme.palette.grey['500']};
+    cursor: unset;
   }
 `;

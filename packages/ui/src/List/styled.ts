@@ -4,9 +4,9 @@ import { styled } from '../styles';
 
 export const StyledList = styled(MuiList)`
   a {
+    display: inline-block;
     width: 100%;
     height: 100%;
-    display: inline-block;
     text-decoration: none;
   }
 `;

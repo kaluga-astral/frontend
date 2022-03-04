@@ -22,8 +22,8 @@ export const TagsWrapper = styled.div`
 
 export const ProgressWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   min-height: 64px;
+  flex-direction: column;
   align-items: center;
 
   .MuiCircularProgress-root {

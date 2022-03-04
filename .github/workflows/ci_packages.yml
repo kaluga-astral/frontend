@@ -36,6 +36,21 @@ jobs:
       - name: Run tsc
         run: npm run lint:types
 
+  lintStyles:
+    name: Running styles linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        run: npm i
+      - name: Run stylelint
+        run: npm run lint:styles
+
   test:
     name: Running tests
     runs-on: ubuntu-latest

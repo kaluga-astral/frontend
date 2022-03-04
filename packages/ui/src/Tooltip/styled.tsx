@@ -16,11 +16,11 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
       size === TooltipSizes.SMALL
         ? theme.typography.small.fontSize
         : theme.typography.ui.fontSize};
+    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
     line-height: ${({ size, theme }) =>
       size === TooltipSizes.SMALL
         ? theme.typography.small.lineHeight
         : theme.typography.ui.lineHeight};
-    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
   }
 
   & .MuiTooltip-arrow {
