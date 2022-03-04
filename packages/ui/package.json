@@ -26,6 +26,7 @@
     "@mui/base": "5.0.0-alpha.69",
     "@mui/lab": "5.0.0-alpha.70",
     "@mui/material": "5.4.3",
+    "date-fns": "^2.28.0",
     "lodash-es": "4.17.21"
   },
   "peerDependencies": {

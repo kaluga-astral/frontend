@@ -111,16 +111,6 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   },
 };
 
-const MuiPaper: Components<Theme>['MuiPaper'] = {
-  styleOverrides: {
-    root({ theme }: { theme: Theme }) {
-      return {
-        marginTop: theme.spacing(2),
-      };
-    },
-  },
-};
-
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography,
@@ -135,5 +125,4 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiMenuItem,
   MuiRadio,
   MuiPickersDay,
-  MuiPaper,
 });
