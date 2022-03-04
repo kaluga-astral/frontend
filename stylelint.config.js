@@ -25,6 +25,7 @@ module.exports = {
             'empty-line-between-groups': true,
           },
         ],
+        // отключено из-за конфликта с plugin/rational-order
         'declaration-empty-line-before': null,
       },
     },
