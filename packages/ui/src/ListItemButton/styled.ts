@@ -35,12 +35,15 @@ export const getColor = ({
 };
 
 export const StyledListItemButton = styled(ListItemButton)<ListItemButtonProps>`
-  background-color: ${(props) => getBgColor({ ...props })};
-  cursor: pointer;
-  user-select: none;
-  border-radius: ${({ theme }) => theme.shape.small};
   color: ${(props) =>
     getColor({ ...props, listItemButtonState: ListItemButtonStates.DEFAULT })};
+
+  background-color: ${(props) => getBgColor({ ...props })};
+  border-radius: ${({ theme }) => theme.shape.small};
+  cursor: pointer;
+
+  user-select: none;
+
   :hover {
     color: ${(props) =>
       getColor({
