@@ -60,7 +60,7 @@ jobs:
           branch: main-release-${{ github.event.release.tag_name }}
           delete-branch: true
           base: main
-          add-paths: packages/*.json
+          add-paths: packages/**/*.json
           commit-message: 'chore: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
           title: 'chore: Обновлены версии пакетов до ${{ github.event.release.tag_name }}'
 
