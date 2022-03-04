@@ -42,18 +42,21 @@ export const StyledBadge = styled(Badge, {
   .MuiBadge-badge {
     height: 20px;
     padding: ${({ theme }) => theme.spacing(0, 1)};
-    border: 2px solid ${({ theme }) => theme.palette.common.white};
-    background-color: ${({ customColor, theme }) =>
-      getBgColor({ customColor, theme })};
-    border-radius: 12px;
+
     color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
     font-size: ${({ theme }) => theme.typography.small.fontSize};
     line-height: 20px;
+
+    background-color: ${({ customColor, theme }) =>
+      getBgColor({ customColor, theme })};
+    border: 2px solid ${({ theme }) => theme.palette.common.white};
+    border-radius: 12px;
   }
 
   .MuiBadge-dot {
     width: 12px;
     height: 12px;
+
     border: 2px solid ${({ theme }) => theme.palette.common.white};
   }
 `;

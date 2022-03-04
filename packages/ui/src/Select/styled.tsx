@@ -8,6 +8,7 @@ export const TagsWrapper = styled.div`
 
   .MuiChip-root {
     margin-bottom: ${({ theme }) => theme.spacing(1)};
+
     background-color: ${({ theme }) => theme.palette.grey['300']};
   }
 
@@ -22,12 +23,13 @@ export const TagsWrapper = styled.div`
 
 export const ProgressWrapper = styled.div`
   display: flex;
-  min-height: 64px;
   flex-direction: column;
   align-items: center;
+  min-height: 64px;
 
   .MuiCircularProgress-root {
     margin-top: ${({ theme }) => theme.spacing(5)};
+
     color: ${({ theme }) => theme.palette.grey['900']};
   }
 `;

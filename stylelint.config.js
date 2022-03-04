@@ -5,7 +5,8 @@ module.exports = {
       customSyntax: '@stylelint/postcss-css-in-js',
       extends: [
         'stylelint-config-standard',
-        'stylelint-config-idiomatic-order',
+        // группирует правила по блокам
+        'stylelint-config-rational-order',
         'stylelint-prettier/recommended',
       ],
       plugins: ['stylelint-prettier', 'stylelint-order'],
@@ -18,6 +19,13 @@ module.exports = {
         'value-keyword-case': null,
         // разрешен kebab case (используется в mui)
         'selector-class-pattern': '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$',
+        'plugin/rational-order': [
+          true,
+          {
+            'empty-line-between-groups': true,
+          },
+        ],
+        'declaration-empty-line-before': null,
       },
     },
   ],

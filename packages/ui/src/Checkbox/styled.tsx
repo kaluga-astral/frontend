@@ -6,8 +6,10 @@ import { CheckboxProps } from './types';
 
 export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
   padding: 5px;
-  border-radius: unset;
+
   color: ${({ theme }) => theme.palette.background.element};
+
+  border-radius: unset;
 
   &:hover {
     color: ${({ theme }) => theme.palette.grey[100]};
