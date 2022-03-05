@@ -1,11 +1,17 @@
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { LocalizationProvider } from '@mui/lab';
+import { LocalizationProvider, LocalizationProviderProps } from '@mui/lab';
+import { FC } from 'react';
 import { ru } from 'date-fns/locale';
 
-export const DatePickersUtilsProvider = ({ children }: any): JSX.Element => (
-  <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
-    {children}
-  </LocalizationProvider>
-);
+export const DatePickersUtilsProvider: FC<LocalizationProviderProps> = ({
+  children,
+  locale = ru,
+}): JSX.Element => {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
+      {children}
+    </LocalizationProvider>
+  );
+};
 
 export default DatePickersUtilsProvider;

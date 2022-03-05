@@ -1,3 +1,4 @@
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { TextField } from '@mui/material';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ const Template: Story = (args) => {
   const [value, setValue] = useState(null);
 
   return (
-    <DatePickersUtilsProvider>
+    <DatePickersUtilsProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         {...args}
         renderInput={(params) => <TextField {...params} />}
