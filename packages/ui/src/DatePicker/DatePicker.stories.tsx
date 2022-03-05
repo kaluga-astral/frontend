@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
-import { DatePickersUtilsProvider } from '../DatePickersUtilsProvider';
+import { LocalizationProvider } from '../LocalizationProvider';
 
 import { DatePicker } from './DatePicker';
 
@@ -16,14 +16,14 @@ const Template: Story = (args) => {
   const [value, setValue] = useState(null);
 
   return (
-    <DatePickersUtilsProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         {...args}
         renderInput={(params) => <TextField {...params} />}
         value={value}
         onChange={setValue}
       />
-    </DatePickersUtilsProvider>
+    </LocalizationProvider>
   );
 };
 
