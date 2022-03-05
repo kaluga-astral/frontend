@@ -27,7 +27,6 @@ jobs:
             ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
-            ${{  }}
             
             👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
             
