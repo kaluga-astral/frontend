@@ -9,7 +9,7 @@ jobs:
   fetch:
     name: fetch
     uses: ./.github/workflows/fetch_pr_info.yml
-    if: ${{ github.event.pull_request.merged == true }}
+    if: github.event.pull_request.merged == true && github.event.pull_request.user.login != 'github-actions[bot]'
     with:
       pr_url: ${{ github.event.pull_request.url }}
 

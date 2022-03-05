@@ -7,22 +7,7 @@ export default {
   title: 'Components/Tag',
   component: Tag,
 };
-const svgDeleteIcon = (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M10.7703 9.66123C10.9173 9.80816 10.9999 10.0075 11 10.2153C11.0001 10.4232 10.9176 10.6225 10.7706 10.7696C10.6237 10.9166 10.4244 10.9992 10.2165 10.9993C10.0087 10.9993 9.80931 10.9168 9.66229 10.7699L8.00029 9.10723L6.33762 10.7699C6.26501 10.8429 6.17869 10.9008 6.08361 10.9404C5.98854 10.9799 5.88659 11.0003 5.78362 11.0003C5.68065 11.0003 5.5787 10.9799 5.48363 10.9404C5.38855 10.9008 5.30223 10.8429 5.22962 10.7699C5.08262 10.6229 5.00003 10.4235 5.00003 10.2156C5.00003 10.0077 5.08262 9.80826 5.22962 9.66123L6.89162 7.99923L5.22962 6.33723C5.09146 6.18856 5.01633 5.9921 5.02005 5.78917C5.02377 5.58625 5.10603 5.39267 5.24955 5.24916C5.39306 5.10564 5.58664 5.02338 5.78956 5.01966C5.99249 5.01594 6.18895 5.09107 6.33762 5.22923L8.00029 6.89123L9.66229 5.22923C9.73504 5.15648 9.82141 5.09877 9.91646 5.05939C10.0115 5.02002 10.1134 4.99976 10.2163 4.99976C10.3192 4.99976 10.4211 5.02002 10.5161 5.05939C10.6112 5.09877 10.6975 5.15648 10.7703 5.22923C10.843 5.30198 10.9007 5.38835 10.9401 5.48341C10.9795 5.57846 10.9998 5.68034 10.9998 5.78323C10.9998 5.88612 10.9795 5.988 10.9401 6.08305C10.9007 6.17811 10.843 6.26448 10.7703 6.33723L9.10829 7.99923L10.7703 9.66123Z"
-      fill="#1D3F66"
-    />
-  </svg>
-);
+
 const svgStartIcon = (
   <svg
     width="12"
@@ -147,7 +132,7 @@ const svgAvatar = (
   </svg>
 );
 
-const Template: Story = (args) => <Tag {...args} />;
+const Template: Story = (args) => <Tag {...args} onDelete={undefined} />;
 
 export const ShowcaseColor: Story = () => (
   <Stack direction="column" gap={2}>
@@ -164,7 +149,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="contained"
                         color="primary"
                         rounded
@@ -172,12 +156,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="contained"
-                        color="primary"
-                      />
+                      <Tag label="Tag" variant="contained" color="primary" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -189,7 +168,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="contained"
                         color="success"
                         rounded
@@ -197,12 +175,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="contained"
-                        color="success"
-                      />
+                      <Tag label="Tag" variant="contained" color="success" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -214,7 +187,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="contained"
                         color="warning"
                         rounded
@@ -222,12 +194,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="contained"
-                        color="warning"
-                      />
+                      <Tag label="Tag" variant="contained" color="warning" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -239,7 +206,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="contained"
                         color="error"
                         rounded
@@ -247,12 +213,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="contained"
-                        color="error"
-                      />
+                      <Tag label="Tag" variant="contained" color="error" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -269,7 +230,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="light"
                         color="primary"
                         rounded
@@ -277,12 +237,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="light"
-                        color="primary"
-                      />
+                      <Tag label="Tag" variant="light" color="primary" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -294,7 +249,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="light"
                         color="success"
                         rounded
@@ -302,12 +256,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="light"
-                        color="success"
-                      />
+                      <Tag label="Tag" variant="light" color="success" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -319,7 +268,6 @@ export const ShowcaseColor: Story = () => (
                     <Stack direction="row" gap={2}>
                       <Tag
                         label="Tag"
-                        size="small"
                         variant="light"
                         color="warning"
                         rounded
@@ -327,12 +275,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="light"
-                        color="warning"
-                      />
+                      <Tag label="Tag" variant="light" color="warning" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -342,22 +285,11 @@ export const ShowcaseColor: Story = () => (
                 <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="light"
-                        color="error"
-                        rounded
-                      />
+                      <Tag label="Tag" variant="light" color="error" rounded />
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        size="small"
-                        variant="light"
-                        color="error"
-                      />
+                      <Tag label="Tag" variant="light" color="error" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -380,7 +312,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="primary"
                         rounded
@@ -391,7 +322,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="primary"
                       />
@@ -407,7 +337,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="success"
                         rounded
@@ -418,7 +347,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="success"
                       />
@@ -434,7 +362,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="warning"
                         rounded
@@ -445,7 +372,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="warning"
                       />
@@ -461,7 +387,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="error"
                         rounded
@@ -472,7 +397,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="contained"
                         color="error"
                       />
@@ -493,7 +417,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="primary"
                         rounded
@@ -504,7 +427,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="primary"
                       />
@@ -520,7 +442,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="success"
                         rounded
@@ -531,7 +452,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="success"
                       />
@@ -547,7 +467,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="warning"
                         rounded
@@ -558,7 +477,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="warning"
                       />
@@ -574,7 +492,6 @@ export const ShowcaseColor: Story = () => (
                       <Tag
                         label="Tag"
                         disabled
-                        size="small"
                         variant="light"
                         color="error"
                         rounded
@@ -582,13 +499,7 @@ export const ShowcaseColor: Story = () => (
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        size="small"
-                        variant="light"
-                        color="error"
-                      />
+                      <Tag label="Tag" disabled variant="light" color="error" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -600,74 +511,62 @@ export const ShowcaseColor: Story = () => (
     </Stack>
     <Stack direction="row" gap={2}>
       <Tag
-        size="small"
         color="grey"
         label="Тэг"
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
       <Tag
-        size="small"
         color="grey"
         label="Тэг"
         rounded
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
       <Tag
         icon={svgStartIcon}
-        size="small"
         color="grey"
         label="Тэг"
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
       <Tag
         icon={svgStartIcon}
-        size="small"
         color="grey"
         label="Тэг"
         rounded
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
       <Tag
         avatar={svgAvatar}
-        size="small"
         color="grey"
         label="Тэг"
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
       <Tag
         avatar={svgAvatar}
-        size="small"
         color="grey"
         label="Тэг"
         rounded
-        deleteIcon={svgDeleteIcon}
         onDelete={() => {
           console.log(1);
         }}
       />
     </Stack>
     <Stack direction="row" gap={2}>
-      <Tag size="small" color="grey" label="Тэг" />
-      <Tag size="small" color="grey" label="Тэг" rounded />
-      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" />
-      <Tag icon={svgStartIcon} size="small" color="grey" label="Тэг" rounded />
-      <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" />
-      <Tag avatar={svgAvatar} size="small" color="grey" label="Тэг" rounded />
+      <Tag color="grey" label="Тэг" />
+      <Tag color="grey" label="Тэг" rounded />
+      <Tag icon={svgStartIcon} color="grey" label="Тэг" />
+      <Tag icon={svgStartIcon} color="grey" label="Тэг" rounded />
+      <Tag avatar={svgAvatar} color="grey" label="Тэг" />
+      <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
     </Stack>
   </Stack>
 );
@@ -676,10 +575,9 @@ ShowcaseColor.parameters = { options: { showPanel: false } };
 
 export const Default = Template.bind({});
 Default.args = {
-  color: 'grey',
+  variant: 'light',
+  color: 'success',
   label: 'Тэг',
-  deleteIcon: svgDeleteIcon,
-  onDelete: () => console.log(1),
   rounded: true,
 };
 Default.parameters = {
