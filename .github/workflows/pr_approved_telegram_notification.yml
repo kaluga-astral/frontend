@@ -8,7 +8,7 @@ on:
 jobs:
   fetch:
     name: fetch
-    if: github.event.review.state == 'approved'
+    if: github.event.review.state == 'approved' && github.event.pull_request.user.login != 'github-actions[bot]'
     uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
     with:
       pr_url: ${{ github.event.pull_request.url }}
@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ✅✅✅
-            ${{ github.event.sender.login }} аппрувнул PR от ${{ fromJSON(needs.fetch.outputs.result).user.login }}
+            ${{ github.event.sender.login }} аппрувнул PR от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}
 
             ${{ fromJSON(needs.fetch.outputs.result).title }}
 

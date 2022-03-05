@@ -206,50 +206,56 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<StyledButtonBaseProps>`
-  border: none;
-  font-family: Ubuntu, serif;
-  padding: ${getButtonPadding};
-  height: ${getButtonHeight};
-  border-radius: ${({ theme }) => theme.shape.small};
-  cursor: pointer;
-  font-size: ${({ theme }) => theme.typography.button.fontSize};
-  font-weight: ${({ theme }) => theme.typography.button.fontWeight};
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  height: ${getButtonHeight};
+  padding: ${getButtonPadding};
+
+  color: ${(props) =>
+    getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  font-weight: ${({ theme }) => theme.typography.button.fontWeight};
+  font-size: ${({ theme }) => theme.typography.button.fontSize};
+  font-family: Ubuntu, serif;
 
   background-color: ${(props) =>
     getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
-  color: ${(props) =>
-    getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+  border: none;
+  border-radius: ${({ theme }) => theme.shape.small};
+  cursor: pointer;
 
   &:hover {
-    background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.HOVER })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.HOVER })};
+
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.HOVER })};
   }
 
   &:focus {
-    background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.FOCUS })};
+
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
     outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:active {
-    background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
     color: ${(props) =>
       getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+
+    background-color: ${(props) =>
+      getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
     outline: none;
   }
 
   &.${buttonUnstyledClasses.disabled} {
-    cursor: unset;
-    background-color: ${getDisabledBgColor};
     color: ${({ theme }) => theme.palette.grey['500']};
+
+    background-color: ${getDisabledBgColor};
+    cursor: unset;
   }
 `;

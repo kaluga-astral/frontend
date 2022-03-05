@@ -9,7 +9,7 @@ jobs:
   fetch:
     name: fetch
     uses: ./.github/workflows/fetch_pr_info.yml
-    if: ${{ github.event.pull_request.merged == true }}
+    if: github.event.pull_request.merged == true && github.event.pull_request.user.login != 'github-actions[bot]'
     with:
       pr_url: ${{ github.event.pull_request.url }}
 
@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🎉🎉🎉
-            ${{ github.event.pull_request.merged_by.login }} смержил PR от ${{ fromJSON(needs.fetch.outputs.result).user.login }}
+            ${{ github.event.pull_request.merged_by.login }} смержил PR от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             

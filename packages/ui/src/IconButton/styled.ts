@@ -19,7 +19,7 @@ export const StyledIconButton = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`
-  height: ${getButtonHeight};
   width: ${getButtonHeight};
+  height: ${getButtonHeight};
   padding: ${({ theme }) => theme.spacing(1)};
 `;

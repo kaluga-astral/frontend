@@ -19,6 +19,24 @@ const OPTIONS = [
   { value: '8', title: 'Value 8' },
 ];
 
+const Template: Story = (args) => (
+  <Autocomplete
+    {...args}
+    options={OPTIONS}
+    label="Autocomplete"
+    getOptionLabel={(params) => params.title}
+  />
+);
+
+export const Default = Template.bind({});
+
+Default.args = {};
+
+Default.parameters = {
+  options: { showPanel: true },
+  controls: { expanded: true },
+};
+
 export const Showcase: Story = () => (
   <Stack maxWidth={300}>
     <Autocomplete
@@ -33,22 +51,30 @@ export const Showcase: Story = () => (
       getOptionLabel={(params) => params.title}
     />
     <Autocomplete
-      label="With error"
+      label="Error"
       options={OPTIONS}
       helperText="Ошибка"
       getOptionLabel={(params) => params.title}
       error
     />
     <Autocomplete
-      label="With success"
+      label="Success"
       options={OPTIONS}
       helperText="Успех"
       getOptionLabel={(params) => params.title}
       success
     />
     <Autocomplete
+      label="Small"
       size="small"
       options={OPTIONS}
+      getOptionLabel={(params) => params.title}
+    />
+    <Autocomplete
+      label="No data"
+      size="small"
+      multiple
+      options={[]}
       getOptionLabel={(params) => params.title}
     />
   </Stack>
