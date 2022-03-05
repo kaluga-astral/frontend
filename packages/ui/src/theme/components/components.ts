@@ -110,6 +110,58 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   },
 };
 
+const MuiDialog: Components<Theme>['MuiDialog'] = {
+  styleOverrides: {
+    root() {
+      return {
+        background: 'rgba(20, 42, 67, 0.54)',
+      };
+    },
+    paper({ theme }: { theme: Theme }) {
+      return {
+        borderRadius: theme.shape.small,
+      };
+    },
+  },
+};
+
+const MuiDialogTitle: Components<Theme>['MuiDialogTitle'] = {
+  styleOverrides: {
+    root({ theme }: { theme: Theme }) {
+      return {
+        padding: theme.spacing(6),
+        fontSize: theme.typography.pxToRem(24),
+        '& .ButtonUnstyled-root': {
+          position: 'absolute',
+          right: theme.spacing(5),
+          top: theme.spacing(5),
+          color: theme.palette.grey[800],
+        },
+      };
+    },
+  },
+};
+
+const MuiDialogContent: Components<Theme>['MuiDialogContent'] = {
+  styleOverrides: {
+    root({ theme }: { theme: Theme }) {
+      return {
+        padding: theme.spacing(0, 6),
+      };
+    },
+  },
+};
+
+const MuiDialogActions: Components<Theme>['MuiDialogActions'] = {
+  styleOverrides: {
+    root({ theme }: { theme: Theme }) {
+      return {
+        padding: theme.spacing(4, 6, 6, 6),
+      };
+    },
+  },
+};
+
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiTypography,
@@ -123,4 +175,8 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiMenu,
   MuiMenuItem,
   MuiRadio,
+  MuiDialog,
+  MuiDialogTitle,
+  MuiDialogContent,
+  MuiDialogActions,
 });
