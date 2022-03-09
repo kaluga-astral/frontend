@@ -1,5 +1,4 @@
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { TextField } from '@mui/material';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
@@ -13,16 +12,11 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<unknown>(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        {...args}
-        renderInput={(params) => <TextField {...params} />}
-        value={value}
-        onChange={setValue}
-      />
+      <DatePicker {...args} value={value} onChange={setValue} />
     </LocalizationProvider>
   );
 };
