@@ -12,7 +12,7 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const [value, setValue] = useState<unknown>(null);
+  const [value, setValue] = useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
