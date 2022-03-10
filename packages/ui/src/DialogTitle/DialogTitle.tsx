@@ -14,11 +14,11 @@ export const DialogTitle = ({
   return (
     <MuiDialogTitle {...props}>
       {children}
-      {showCloseButton ? (
+      {showCloseButton && (
         <IconButton variant="text" onClick={onClose}>
           <CrossOutlineMd />
         </IconButton>
-      ) : null}
+      )}
     </MuiDialogTitle>
   );
 };

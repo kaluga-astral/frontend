@@ -1,3 +1,4 @@
+import React from 'react';
 import { Dialog as MuiDialog } from '@mui/material';
 
 import { DialogTitle } from '../index';
@@ -16,7 +17,7 @@ export const Dialog = ({
     event: React.MouseEvent<HTMLButtonElement>,
     reason: 'backdropClick' | 'escapeKeyDown'
   ) => {
-    if (disableBackdropClick && reason && reason == 'backdropClick') return;
+    if (disableBackdropClick && reason == 'backdropClick') return;
     if (onClose) {
       onClose(event, reason);
     }
@@ -24,11 +25,11 @@ export const Dialog = ({
 
   return (
     <MuiDialog onClose={handleClose} {...props}>
-      {title ? (
+      {title && (
         <DialogTitle showCloseButton={showCloseButton} onClose={onClose}>
           {title}
         </DialogTitle>
-      ) : null}
+      )}
       {children}
     </MuiDialog>
   );
