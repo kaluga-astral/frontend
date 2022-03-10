@@ -3,10 +3,11 @@ import { Story } from '@storybook/react';
 
 import {
   Button,
+  Checkbox,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
+  FormControlLabel,
 } from '../index';
 
 import { Dialog } from './Dialog';
@@ -33,14 +34,11 @@ const Template: Story = () => {
         Dialog
       </Button>
       <Dialog
+        showCloseButton
         open={open}
+        title="Заголовок"
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" onClose={handleClose}>
-          Заголовок
-        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Заглушка примера текста страницы, который несет очень выжный смысл
@@ -48,7 +46,14 @@ const Template: Story = () => {
             контентом и в рамках работы приложения.
           </DialogContentText>
         </DialogContent>
-        <DialogActions disableSpacing>
+        <DialogActions
+          leftSideChildren={
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Больше не показывать"
+            />
+          }
+        >
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>

@@ -1,5 +1,35 @@
-import { DialogProps, Dialog as MuiDialog } from '@mui/material';
+import { Dialog as MuiDialog } from '@mui/material';
 
-export const Dialog = ({ children, ...props }: DialogProps) => {
-  return <MuiDialog {...props}>{children}</MuiDialog>;
+import { DialogTitle } from '../index';
+
+import { DialogProps } from './types';
+
+export const Dialog = ({
+  children,
+  title,
+  showCloseButton,
+  disableBackdropClick,
+  onClose,
+  ...props
+}: DialogProps) => {
+  const handleClose = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    reason: 'backdropClick' | 'escapeKeyDown'
+  ) => {
+    if (disableBackdropClick && reason && reason == 'backdropClick') return;
+    if (onClose) {
+      onClose(event, reason);
+    }
+  };
+
+  return (
+    <MuiDialog onClose={handleClose} {...props}>
+      {title ? (
+        <DialogTitle showCloseButton={showCloseButton} onClose={onClose}>
+          {title}
+        </DialogTitle>
+      ) : null}
+      {children}
+    </MuiDialog>
+  );
 };
