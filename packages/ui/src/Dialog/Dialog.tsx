@@ -13,15 +13,17 @@ export const Dialog = ({
   onClose,
   ...props
 }: DialogProps) => {
-  const handleClose = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    reason: 'backdropClick' | 'escapeKeyDown'
-  ) => {
-    if (disableBackdropClick && reason == 'backdropClick') return;
-    if (onClose) {
-      onClose(event, reason);
-    }
-  };
+  const handleClose =
+    onClose &&
+    ((
+      event: React.MouseEvent<HTMLButtonElement>,
+      reason: 'backdropClick' | 'escapeKeyDown'
+    ) => {
+      if (disableBackdropClick && reason == 'backdropClick') return;
+      if (onClose) {
+        onClose(event, reason);
+      }
+    });
 
   return (
     <MuiDialog onClose={handleClose} {...props}>

@@ -3,11 +3,9 @@ import { Story } from '@storybook/react';
 
 import {
   Button,
-  Checkbox,
   DialogActions,
   DialogContent,
   DialogContentText,
-  FormControlLabel,
 } from '../index';
 
 import { Dialog } from './Dialog';
@@ -46,14 +44,7 @@ const Template: Story = () => {
             контентом и в рамках работы приложения.
           </DialogContentText>
         </DialogContent>
-        <DialogActions
-          leftSideChildren={
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Больше не показывать"
-            />
-          }
-        >
+        <DialogActions>
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>
