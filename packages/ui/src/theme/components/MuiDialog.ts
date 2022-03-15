@@ -4,12 +4,12 @@ import type { Theme } from '../baseTheme';
 
 export const MuiDialog: Components<Theme>['MuiDialog'] = {
   styleOverrides: {
-    root() {
+    root({ theme }) {
       return {
-        background: 'rgba(20, 42, 67, 0.54)',
+        background: theme.palette.background.modalShadow,
       };
     },
-    paper({ theme }: { theme: Theme }) {
+    paper({ theme }) {
       return {
         borderRadius: theme.shape.small,
       };

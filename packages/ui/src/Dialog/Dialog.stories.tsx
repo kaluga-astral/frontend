@@ -31,12 +31,7 @@ const Template: Story = () => {
       <Button variant="light" onClick={handleClickOpen}>
         Dialog
       </Button>
-      <Dialog
-        showCloseButton
-        open={open}
-        title="Заголовок"
-        onClose={handleClose}
-      >
+      <Dialog title="Заголовок" open={open} onClose={handleClose}>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Заглушка примера текста страницы, который несет очень выжный смысл
@@ -48,7 +43,7 @@ const Template: Story = () => {
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button autoFocus onClick={handleClose}>
             Готово
           </Button>
         </DialogActions>

@@ -4,7 +4,7 @@ import type { Theme } from '../baseTheme';
 
 export const MuiDialogContent: Components<Theme>['MuiDialogContent'] = {
   styleOverrides: {
-    root({ theme }: { theme: Theme }) {
+    root({ theme }) {
       return {
         padding: theme.spacing(0, 6),
       };

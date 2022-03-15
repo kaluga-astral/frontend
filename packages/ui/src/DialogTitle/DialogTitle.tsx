@@ -8,13 +8,12 @@ import { DialogTitleProps } from './types';
 export const DialogTitle = ({
   children,
   onClose,
-  showCloseButton,
   ...props
 }: DialogTitleProps) => {
   return (
     <MuiDialogTitle {...props}>
       {children}
-      {showCloseButton && (
+      {onClose && (
         <IconButton variant="text" onClick={onClose}>
           <CrossOutlineMd />
         </IconButton>

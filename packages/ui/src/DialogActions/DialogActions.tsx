@@ -3,7 +3,7 @@ import {
   DialogActions as MuiDialogActions,
 } from '@mui/material';
 
-import { Grid } from '../index';
+import { Grid } from '../Grid';
 
 export const DialogActions = ({
   children,

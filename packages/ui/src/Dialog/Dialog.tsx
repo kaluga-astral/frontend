@@ -8,7 +8,6 @@ import { DialogProps } from './types';
 export const Dialog = ({
   children,
   title,
-  showCloseButton,
   disableBackdropClick,
   onClose,
   ...props
@@ -20,18 +19,12 @@ export const Dialog = ({
       reason: 'backdropClick' | 'escapeKeyDown'
     ) => {
       if (disableBackdropClick && reason == 'backdropClick') return;
-      if (onClose) {
-        onClose(event, reason);
-      }
+      onClose(event, reason);
     });
 
   return (
     <MuiDialog onClose={handleClose} {...props}>
-      {title && (
-        <DialogTitle showCloseButton={showCloseButton} onClose={onClose}>
-          {title}
-        </DialogTitle>
-      )}
+      {title && <DialogTitle onClose={onClose}>{title}</DialogTitle>}
       {children}
     </MuiDialog>
   );

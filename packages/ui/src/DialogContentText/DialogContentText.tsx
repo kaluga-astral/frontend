@@ -1,3 +1,1 @@
-import { DialogContentText } from '@mui/material';
-
-export { DialogContentText };
+export { DialogContentText } from '@mui/material';
