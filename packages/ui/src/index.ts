@@ -22,3 +22,5 @@ export * from './TextArea';
 export * from './DashboardLayout';
 export * from './Autocomplete';
 export * from './Select';
+export * from './Pagination';
+export * from './DataGrid';

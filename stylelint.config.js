@@ -18,7 +18,8 @@ module.exports = {
         // отключено из-за несовместимости со styled
         'value-keyword-case': null,
         // разрешен kebab case (используется в mui)
-        'selector-class-pattern': '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$',
+        'selector-class-pattern':
+          '^([a-zA-Z][a-zA-Z0-9]*)((-|--)[a-zA-Z0-9]+)*$',
         'plugin/rational-order': [
           true,
           {
