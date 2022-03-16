@@ -25,6 +25,7 @@ export type PrimaryColorOptions = PaletteColorOptions & Color;
 export type Background = TypeBackground & {
   element: string;
   elementHover: string;
+  modalShadow: string;
 };
 
 type PaletteOptions = MuiPaletteOptions & {
@@ -129,6 +130,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       paper: '#FFF',
       element: '#FAFBFC',
       elementHover: '#EBECF0',
+      modalShadow: '#142A438A',
     },
   };
 };

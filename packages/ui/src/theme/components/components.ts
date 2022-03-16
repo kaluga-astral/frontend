@@ -10,6 +10,10 @@ import { MuiInputLabel } from './MuiInputLabel';
 import { MuiOutlinedInput } from './MuiOutlinedInput';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
+import { MuiDialog } from './MuiDialog';
+import { MuiDialogTitle } from './MuiDialogTitle';
+import { MuiDialogContent } from './MuiDialogContent';
+import { MuiDialogActions } from './MuiDialogActions';
 
 export type FontsUrls = {
   bold: {
@@ -125,4 +129,8 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiMenu,
   MuiMenuItem,
   MuiRadio,
+  MuiDialog,
+  MuiDialogTitle,
+  MuiDialogContent,
+  MuiDialogActions,
 });
