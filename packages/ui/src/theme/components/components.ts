@@ -10,11 +10,11 @@ import { MuiInputLabel } from './MuiInputLabel';
 import { MuiOutlinedInput } from './MuiOutlinedInput';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
-import { MuiPickersDay } from './MuiPickersDay';
 import { MuiDialog } from './MuiDialog';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
+import { MuiPickersDay } from './MuiPickersDay';
 
 export type FontsUrls = {
   bold: {
