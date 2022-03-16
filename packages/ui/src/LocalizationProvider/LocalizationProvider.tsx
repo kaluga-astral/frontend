@@ -9,7 +9,7 @@ import { ru } from 'date-fns/locale';
 export const LocalizationProvider: FC<LocalizationProviderProps> = ({
   children,
   locale = ru,
-}): JSX.Element => {
+}) => {
   return (
     <MuiLocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
       {children}

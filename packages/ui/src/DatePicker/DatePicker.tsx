@@ -9,14 +9,14 @@ import type { Theme } from '../theme';
 import { DatePickerProps } from './types';
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ ...props }, ref) => {
+  ({ value = new Date(), ...props }, ref) => {
     const theme: Theme = useTheme();
 
     return (
       <MuiDatePicker
         {...props}
         ref={ref}
-        value={new Date()}
+        value={value}
         PaperProps={{
           style: {
             marginTop: theme.spacing(2),
