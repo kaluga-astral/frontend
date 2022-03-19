@@ -2,6 +2,8 @@ import { Story } from '@storybook/react';
 import { GridColDef, GridRowsProp } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 
+import { Button } from '../Button';
+
 import { DataGrid } from './DataGrid';
 
 export default {
@@ -28,8 +30,9 @@ const dataColumns: GridColDef[] = [
   { field: 'col2', headerName: 'Column 2', width: 150 },
   {
     field: 'col3',
+    width: 250,
     headerName: 'Column 3',
-    renderCell: () => <b>kek</b>,
+    renderCell: () => <Button>Custom cell</Button>,
     sortable: false,
   },
 ];
