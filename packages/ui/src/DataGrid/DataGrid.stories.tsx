@@ -44,7 +44,9 @@ export const Showcase: Story = () => (
 );
 
 const Template: Story = ({ rows, columns, ...args }) => (
-  <DataGrid rows={rows} columns={columns} {...args} />
+  <Box height={540}>
+    <DataGrid rows={rows} columns={columns} {...args} />
+  </Box>
 );
 
 export const Default = Template.bind({});
