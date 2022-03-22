@@ -16,7 +16,7 @@ export const Default: Story = () => {
     <Box border="1px solid #dfdfdf" width="800px" height="600px">
       <Placeholder
         title="Заголовок страницы"
-        text={
+        description={
           <>
             Текст для пользователя,{' '}
             <span style={{ color: 'red' }}>разъясняющий</span> принципы работы

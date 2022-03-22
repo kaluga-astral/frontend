@@ -11,7 +11,7 @@ export const Placeholder = ({
   title,
   imgSrc,
   imgAlt,
-  text,
+  description,
   Actions,
 }: PlaceholderProps) => {
   return (
@@ -19,7 +19,7 @@ export const Placeholder = ({
       <InnerContainer>
         {imgSrc && <StyledImage src={imgSrc} alt={imgAlt} />}
         {title && <StyledTitle variant="h4">{title}</StyledTitle>}
-        {text && <StyledTitle variant="ui">{text}</StyledTitle>}
+        {description && <StyledTitle variant="ui">{description}</StyledTitle>}
         {Actions && <StyledActions container>{Actions}</StyledActions>}
       </InnerContainer>
     </StyledContainer>

@@ -4,6 +4,6 @@ export type PlaceholderProps = {
   imgSrc: string;
   imgAlt: string;
   title: string;
-  text?: string | ReactNode;
+  description?: string | ReactNode;
   Actions?: ReactNode;
 };
