@@ -1,9 +1,9 @@
 import {
-  Container,
-  FooterLayout,
   InnerContainer,
+  StyledActions,
+  StyledContainer,
   StyledImage,
-  StyledTypography,
+  StyledTitle,
 } from './styled';
 import { PlaceholderProps } from './types';
 
@@ -11,23 +11,17 @@ export const Placeholder = ({
   title,
   imgSrc,
   imgAlt,
-  subtitle,
-  children,
-  Footer,
+  text,
+  Actions,
 }: PlaceholderProps) => {
   return (
-    <Container>
+    <StyledContainer>
       <InnerContainer>
         {imgSrc && <StyledImage src={imgSrc} alt={imgAlt} />}
-        {title && <StyledTypography variant="h4">{title}</StyledTypography>}
-        {subtitle && (
-          <StyledTypography align="center" variant="ui">
-            {subtitle}
-          </StyledTypography>
-        )}
-        {Footer && <FooterLayout>{Footer}</FooterLayout>}
-        {children}
+        {title && <StyledTitle variant="h4">{title}</StyledTitle>}
+        {text && <StyledTitle variant="ui">{text}</StyledTitle>}
+        {Actions && <StyledActions>{Actions}</StyledActions>}
       </InnerContainer>
-    </Container>
+    </StyledContainer>
   );
 };

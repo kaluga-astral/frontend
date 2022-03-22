@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,16 +13,18 @@ export const Container = styled.div`
 `;
 
 export const InnerContainer = styled.div`
-  max-width: 48%;
+  width: ${({ theme }) => theme.spacing(96)};
 `;
 
 export const StyledImage = styled.img`
   display: block;
+  width: auto;
+  height: ${({ theme }) => theme.spacing(40)};
   margin: auto;
   margin-bottom: ${({ theme }) => theme.spacing(8)};
 `;
 
-export const StyledTypography = styled(Typography)`
+export const StyledTitle = styled(Typography)`
   display: block;
   margin-top: ${({ theme }) => theme.spacing(4)};
   margin-bottom: ${({ theme }) => theme.spacing(4)};
@@ -30,7 +32,7 @@ export const StyledTypography = styled(Typography)`
   text-align: center;
 `;
 
-export const FooterLayout = styled.div`
+export const StyledActions = styled.footer`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing(3)};

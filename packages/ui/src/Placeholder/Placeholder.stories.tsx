@@ -17,7 +17,7 @@ export const Default: Story = () => {
     <Box border="1px solid #dfdfdf" width="800px" height="600px">
       <Placeholder
         title="Заголовок страницы"
-        subtitle={
+        text={
           <>
             Текст для пользователя,{' '}
             <span style={{ color: 'red' }}>разъясняющий</span> принципы работы
@@ -26,7 +26,7 @@ export const Default: Story = () => {
         }
         imgSrc={IMG_SRC}
         imgAlt="альтернативный текст изображения"
-        Footer={
+        Actions={
           <>
             <Button>Дополнительное</Button>
             <Button>Основное действие</Button>
