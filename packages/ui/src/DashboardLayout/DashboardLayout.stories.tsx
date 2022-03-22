@@ -8,7 +8,7 @@ export default {
   component: DashboardLayout,
 };
 
-const LOGO_SRC: string = 'https://ofd.astralnalog.ru/images/FullLogo.png';
+const LOGO_SRC: string = 'https://ofd.astralnalog.ru/images/NewLogo.svg';
 
 export const Default: Story = () => {
   return (
