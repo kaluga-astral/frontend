@@ -1,4 +1,5 @@
 import { styled } from '../styles';
+import { Grid } from '../Grid';
 import { Typography } from '../Typography';
 
 export const StyledContainer = styled.div`
@@ -32,11 +33,9 @@ export const StyledTitle = styled(Typography)`
   text-align: center;
 `;
 
-export const StyledActions = styled.footer`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing(3)};
-  justify-content: center;
+export const StyledActions = styled(Grid)`
+  grid-gap: ${({ theme }) => theme.spacing(2)};
+  grid-template-columns: 1fr 1fr;
   margin-top: ${({ theme }) => theme.spacing(6)};
   margin-bottom: ${({ theme }) => theme.spacing(6)};
 `;

@@ -20,7 +20,7 @@ export const Placeholder = ({
         {imgSrc && <StyledImage src={imgSrc} alt={imgAlt} />}
         {title && <StyledTitle variant="h4">{title}</StyledTitle>}
         {text && <StyledTitle variant="ui">{text}</StyledTitle>}
-        {Actions && <StyledActions>{Actions}</StyledActions>}
+        {Actions && <StyledActions container>{Actions}</StyledActions>}
       </InnerContainer>
     </StyledContainer>
   );

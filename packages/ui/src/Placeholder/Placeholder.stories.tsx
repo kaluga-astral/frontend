@@ -1,9 +1,8 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
+import { Certificate } from '@astral/illustrations';
 
 import { Button } from '../Button';
-
-import { IMG_SRC } from './constants';
 
 import { Placeholder } from '.';
 
@@ -24,7 +23,7 @@ export const Default: Story = () => {
             раздела или подсказки по работе в нем.
           </>
         }
-        imgSrc={IMG_SRC}
+        imgSrc={Certificate}
         imgAlt="альтернативный текст изображения"
         Actions={
           <>
