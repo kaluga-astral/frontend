@@ -1,14 +1,13 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
 
+import { LOGO_SRC } from './constants';
 import { DashboardLayout } from './DashboardLayout';
 
 export default {
   title: 'Components/DashboardLayout',
   component: DashboardLayout,
 };
-
-const LOGO_SRC: string = 'https://ofd.astralnalog.ru/images/NewLogo.svg';
 
 export const Default: Story = () => {
   return (
