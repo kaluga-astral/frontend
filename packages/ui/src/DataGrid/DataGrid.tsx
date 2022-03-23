@@ -30,9 +30,7 @@ export function DataGrid<T>({
     if (!onSelect || loading) return;
 
     if (event.target.checked) {
-      // @ts-ignore
       const newSelecteds = data.map((n) => n[keyId]);
-      // @ts-ignore
 
       onSelect(newSelecteds);
       return;
@@ -104,7 +102,6 @@ export function DataGrid<T>({
           />
           <StyledTableBody loading={loading}>
             {paginationData.map((row) => {
-              // @ts-ignore
               const isItemSelected = isSelected(row[keyId]);
 
               return (
@@ -113,7 +110,6 @@ export function DataGrid<T>({
                   role="checkbox"
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  // @ts-ignore
                   key={row[keyId]}
                   selected={isItemSelected}
                   onClick={() => handleRowClick(row)}
@@ -122,7 +118,6 @@ export function DataGrid<T>({
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isItemSelected}
-                        // @ts-ignore
                         onChange={() => handleSelectRow(row[keyId])}
                       />
                     </TableCell>
