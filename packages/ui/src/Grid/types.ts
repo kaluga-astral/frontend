@@ -32,6 +32,4 @@ export type GridElementsProps = {
 };
 
 export type GridProps = GridContainerProps &
-  GridElementsProps & {
-    children?: React.ReactNode;
-  };
+  GridElementsProps & { children?: React.ReactNode };
