@@ -1,8 +1,9 @@
 import {
-  InnerContainer,
   StyledActions,
   StyledContainer,
+  StyledDescription,
   StyledImage,
+  StyledInnerContainer,
   StyledTitle,
 } from './styled';
 import { PlaceholderProps } from './types';
@@ -16,12 +17,14 @@ export const Placeholder = ({
 }: PlaceholderProps) => {
   return (
     <StyledContainer>
-      <InnerContainer>
+      <StyledInnerContainer>
         {imgSrc && <StyledImage src={imgSrc} alt={imgAlt} />}
         {title && <StyledTitle variant="h4">{title}</StyledTitle>}
-        {description && <StyledTitle variant="ui">{description}</StyledTitle>}
-        {Actions && <StyledActions container>{Actions}</StyledActions>}
-      </InnerContainer>
+        {description && (
+          <StyledDescription variant="ui">{description}</StyledDescription>
+        )}
+      </StyledInnerContainer>
+      {Actions && <StyledActions>{Actions}</StyledActions>}
     </StyledContainer>
   );
 };

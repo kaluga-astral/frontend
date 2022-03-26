@@ -1,7 +1,8 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
-import { Certificate } from '@astral/illustrations';
 
+// пока что указал такой путь, до публикации @astral/illustrations, чтобы сборка не падала
+import NoCertificates from '../../../illustrations/src/NoCertificates.svg';
 import { Button } from '../Button';
 
 import { Placeholder } from '.';
@@ -23,7 +24,7 @@ export const Default: Story = () => {
             раздела или подсказки по работе в нем.
           </>
         }
-        imgSrc={Certificate}
+        imgSrc={NoCertificates}
         imgAlt="альтернативный текст изображения"
         Actions={
           <>
