@@ -1,0 +1,11 @@
+{
+  "name": "@astral/illustrations",
+  "main": "./src",
+  "version": "0.10.0",
+  "scripts": {
+    "prebuild": "rimraf ./lib && commander copyCommonFiles && commander copyIllustrations",
+    "build": "commander modifyPackageJSON",
+    "publish": "npm publish ./lib"
+  },
+  "dependencies": {}
+}
