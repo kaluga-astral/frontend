@@ -20,6 +20,7 @@ export type GridContainerProps = {
   autoColumns?: StyleCSSType<'gridAutoColumns'>;
   autoRows?: StyleCSSType<'gridAutoRows'>;
   autoFlow?: StyleCSSType<'gridAutoFlow'>;
+  component?: React.ElementType;
 };
 
 export type GridElementsProps = {
@@ -31,4 +32,6 @@ export type GridElementsProps = {
 };
 
 export type GridProps = GridContainerProps &
-  GridElementsProps & { children?: React.ReactNode };
+  GridElementsProps & {
+    children?: React.ReactNode;
+  };
