@@ -1,10 +1,9 @@
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import {
-  LocalizationProviderProps,
-  LocalizationProvider as MuiLocalizationProvider,
-} from '@mui/lab';
+import { LocalizationProvider as MuiLocalizationProvider } from '@mui/lab';
 import { FC } from 'react';
 import { ru } from 'date-fns/locale';
+
+import { LocalizationProviderProps } from './types';
 
 export const LocalizationProvider: FC<LocalizationProviderProps> = ({
   children,
