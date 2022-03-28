@@ -4,6 +4,7 @@ import { Story } from '@storybook/react';
 // пока что указал такой путь, до публикации @astral/illustrations, чтобы сборка не падала
 import NoCertificates from '../../../illustrations/src/NoCertificates.svg';
 import { Button } from '../Button';
+import { Typography } from '../Typography';
 
 import { Placeholder } from '.';
 
@@ -20,8 +21,10 @@ export const Default: Story = () => {
         description={
           <>
             Текст для пользователя,{' '}
-            <span style={{ color: 'red' }}>разъясняющий</span> принципы работы
-            раздела или подсказки по работе в нем.
+            <Typography variant="ui" style={{ color: 'red' }}>
+              разъясняющий
+            </Typography>{' '}
+            принципы работы раздела или подсказки по работе в нем.
           </>
         }
         imgSrc={NoCertificates}
