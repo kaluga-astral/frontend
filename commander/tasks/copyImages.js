@@ -17,7 +17,7 @@ const copyImages = () => {
     process.exit(1);
   });
 
-  console.log('Finish copyFonts');
+  console.log('Finish copyImages');
 };
 
 module.exports = { copyImages };
