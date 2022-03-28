@@ -1,7 +1,7 @@
 {
   "name": "@astral/fonts",
   "main": "./src",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "scripts": {
     "prebuild": "rimraf ./lib && commander copyCommonFiles && commander copyFonts",
     "build": "commander modifyPackageJSON",
