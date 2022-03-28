@@ -1,9 +1,9 @@
-import React from 'react';
+import { CSSProperties, ElementType, ReactNode } from 'react';
 import { Breakpoint } from '@mui/material/styles';
 
-type StyleCSSType<Type extends keyof React.CSSProperties> =
-  | React.CSSProperties[Type]
-  | Partial<Record<Breakpoint, React.CSSProperties[Type]>>;
+type StyleCSSType<Type extends keyof CSSProperties> =
+  | CSSProperties[Type]
+  | Partial<Record<Breakpoint, CSSProperties[Type]>>;
 
 export type GridContainerProps = {
   container?: boolean;
@@ -20,6 +20,7 @@ export type GridContainerProps = {
   autoColumns?: StyleCSSType<'gridAutoColumns'>;
   autoRows?: StyleCSSType<'gridAutoRows'>;
   autoFlow?: StyleCSSType<'gridAutoFlow'>;
+  component?: ElementType;
 };
 
 export type GridElementsProps = {
@@ -31,4 +32,4 @@ export type GridElementsProps = {
 };
 
 export type GridProps = GridContainerProps &
-  GridElementsProps & { children?: React.ReactNode };
+  GridElementsProps & { children?: ReactNode };
