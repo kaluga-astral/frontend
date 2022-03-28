@@ -2,11 +2,11 @@ const copy = require('recursive-copy');
 
 const { DIST_DIR_NAME } = require('../constants');
 
-const copyIllustrations = () => {
-  console.log('Starting copyIllustrations...');
+const copyImages = () => {
+  console.log('Starting copyImages...');
 
   copy('./src', `./${DIST_DIR_NAME}`, {
-    filter: ['**/*.svg'],
+    filter: ['**/*.svg', '**/*.png', '**/*.jpeg', '**/*.webp'],
     overwrite: true,
     expand: true,
     dot: true,
@@ -20,4 +20,4 @@ const copyIllustrations = () => {
   console.log('Finish copyFonts');
 };
 
-module.exports = { copyIllustrations };
+module.exports = { copyImages };

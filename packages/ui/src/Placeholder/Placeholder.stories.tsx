@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
+import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
-// пока что указал такой путь, до публикации @astral/illustrations, чтобы сборка не падала
-import NoCertificates from '../../../illustrations/src/NoCertificates.svg';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
 

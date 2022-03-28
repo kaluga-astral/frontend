@@ -3,8 +3,8 @@
   "main": "./src",
   "version": "0.10.0",
   "scripts": {
-    "prebuild": "rimraf ./lib && commander copyCommonFiles && commander copyIllustrations",
-    "build": "commander modifyPackageJSON",
+    "prebuild": "rimraf ./lib",
+    "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",
     "publish": "npm publish ./lib"
   },
   "dependencies": {}
