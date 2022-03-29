@@ -14,6 +14,9 @@ import { MuiDialog } from './MuiDialog';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
+import { MuiTableCell } from './MuiTableCell';
+import { MuiTableBody } from './MuiTableBody';
+import { MuiTableHead } from './MuiTableHead';
 
 export type FontsUrls = {
   bold: {
@@ -133,4 +136,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogTitle,
   MuiDialogContent,
   MuiDialogActions,
+  MuiTableCell,
+  MuiTableBody,
+  MuiTableHead,
 });

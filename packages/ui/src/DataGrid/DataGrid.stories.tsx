@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '../Button';
 
 import { DataGrid } from './DataGrid';
-import { CellValue, DataGridColumns } from './types';
+import { CellValue, DataGridColumns, DataGridSort } from './types';
 
 export default {
   title: 'Components/DataGrid',
@@ -12,6 +12,7 @@ export default {
 };
 
 type ColumnsType = {
+  id: string;
   documentName: string;
   direction: string;
   createDate: string;
@@ -153,8 +154,12 @@ const data = [
 
 const Template: Story = (args) => {
   const [selected, setSelected] = useState<string[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<ColumnsType>[]>([]);
 
   const handleSelect = (ids: string[]) => setSelected(ids);
+
+  const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
+    setSorting(newSorting);
 
   return (
     <DataGrid
@@ -165,6 +170,8 @@ const Template: Story = (args) => {
       rowsPerPage={10}
       selectedRows={selected}
       onSelect={handleSelect}
+      onSort={handleSort}
+      sorting={sorting}
     />
   );
 };

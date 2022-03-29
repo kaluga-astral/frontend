@@ -12,6 +12,8 @@ export function DataGrid<T>({
   // perPage = 10,
   selectedRows = [],
   onSelect,
+  sorting = [],
+  onSort,
   keyId,
 }: DataGridProps<T>) {
   const selectable = Boolean(onSelect);
@@ -51,10 +53,12 @@ export function DataGrid<T>({
     <TableContainer>
       <Table>
         <DataGridHead
+          onSort={onSort}
           totalCount={totalCount}
           selectedCount={selectedCount}
           onSelectAllRows={handleSelectAllRows}
           selectable={selectable}
+          sorting={sorting}
           columns={columns}
         />
         <DataGridBody

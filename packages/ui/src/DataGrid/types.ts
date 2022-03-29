@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 
+import { SortStates } from './constants';
+
 export type CellValue =
   | string
   | number
@@ -9,7 +11,14 @@ export type CellValue =
   | undefined
   | object;
 
+export type SortState = `${SortStates}`;
+
 export type DataGridRow = Record<string, any>;
+
+export type DataGridSort<Data extends {}> = {
+  fieldId: keyof Data;
+  sort: SortState;
+};
 
 export interface DataGridColumns<Column extends {}> {
   field: keyof Column & string;
@@ -29,6 +38,8 @@ export type DataGridProps<T = DataGridRow> = {
   selectedRows?: Array<string>;
   rowsPerPage?: number;
   onSelect?: (props: Array<string>) => void;
+  sorting?: DataGridSort<T>[];
+  onSort: (sorting: DataGridSort<T>[]) => void;
 };
 
 export type DataGridHeadProps<T = DataGridRow> = {
@@ -37,6 +48,8 @@ export type DataGridHeadProps<T = DataGridRow> = {
   onSelectAllRows: (event: React.ChangeEvent<HTMLInputElement>) => void;
   selectedCount: number;
   totalCount: number;
+  sorting: DataGridSort<T>[];
+  onSort: (sorting: DataGridSort<T>[]) => void;
 };
 
 export type DataGridBodyProps<T = DataGridRow> = {
