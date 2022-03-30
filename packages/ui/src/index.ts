@@ -35,5 +35,6 @@ export * from './ListItemButton';
 export * from './ListItemIcon';
 export * from './ListItemSecondaryAction';
 export * from './ListItemText';
+export * from './Placeholder';
 export * from './Table';
 export * from './DataGrid';
