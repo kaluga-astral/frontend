@@ -6,7 +6,7 @@ import { Typography } from '../../Typography';
 
 export function DataGridCell<T>({
   row,
-  cell: { field, renderCell, format, clickCallBack },
+  cell: { field, renderCell, format, clickCallBack, align = 'left' },
 }: CellProps<T>) {
   const handleClickCell = (): void => {
     if (clickCallBack) clickCallBack(row);
@@ -21,8 +21,9 @@ export function DataGridCell<T>({
   }, [field, format]);
 
   return (
-    <TableCell onClick={handleClickCell}>
-      <Typography>{renderCell ? renderCell(row) : formattedValue}</Typography>
+    <TableCell align={align} onClick={handleClickCell}>
+      {renderCell && renderCell(row)}
+      {!renderCell && <Typography>{formattedValue}</Typography>}
     </TableCell>
   );
 }

@@ -59,32 +59,34 @@ export function DataGrid<T>({
   }, [data, selectedRows]);
 
   return (
-    <TableContainer>
-      <Table>
-        <DataGridHead
-          onSort={onSort}
-          rowsCount={data.length}
-          uncheckedRowsCount={uncheckedRowsCount}
-          onSelectAllRows={handleSelectAllRows}
-          selectable={selectable}
-          sorting={sorting}
-          columns={columns}
-        />
-        <DataGridBody
-          keyId={keyId}
-          selectedRows={selectedRows}
-          onSelectRow={handleSelectRow}
-          selectable={selectable}
-          data={data}
-          columns={columns}
-        />
-      </Table>
+    <div>
+      <TableContainer>
+        <Table stickyHeader>
+          <DataGridHead
+            onSort={onSort}
+            rowsCount={data.length}
+            uncheckedRowsCount={uncheckedRowsCount}
+            onSelectAllRows={handleSelectAllRows}
+            selectable={selectable}
+            sorting={sorting}
+            columns={columns}
+          />
+          <DataGridBody
+            keyId={keyId}
+            selectedRows={selectedRows}
+            onSelectRow={handleSelectRow}
+            selectable={selectable}
+            data={data}
+            columns={columns}
+          />
+        </Table>
+      </TableContainer>
       <Pagination
         page={page}
         onChange={onPageChange}
         totalCount={totalCount}
         rowsPerPage={rowsPerPage}
       />
-    </TableContainer>
+    </div>
   );
 }

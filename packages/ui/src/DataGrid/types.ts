@@ -29,6 +29,7 @@ export interface DataGridColumns<Column extends {}> {
   clickCallBack?: (data: Column) => void;
   renderCell?: RenderCell<Column>;
   format?: (data: Column) => CellValue;
+  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
 }
 
 export type DataGridProps<T = DataGridRow> = {

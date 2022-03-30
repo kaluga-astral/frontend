@@ -64,13 +64,19 @@ export function DataGridHead<T>({
             />
           </TableCell>
         )}
-        {columns.map(({ field, label, sortable }) => {
+        {columns.map(({ field, label, sortable, align, renderCell }) => {
           const sortParams = sorting.find(({ fieldId }) => field === fieldId);
           const hideSortIcon = !Boolean(sortParams);
           const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
+          const fitContent = Boolean(renderCell);
 
           return (
-            <StyledTableCell key={field} onClick={handleSort(field, sortable)}>
+            <StyledTableCell
+              key={field}
+              onClick={handleSort(field, sortable)}
+              fitContent={fitContent}
+              align={align}
+            >
               <Typography variant="pointer">{label}</Typography>
               {sortable && (
                 <StyledTableSortLabel

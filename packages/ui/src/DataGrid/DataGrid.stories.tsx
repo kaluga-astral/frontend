@@ -38,8 +38,9 @@ const columns: DataGridColumns<ColumnsType>[] = [
   },
   {
     field: 'action',
-    label: '',
+    label: 'Действия',
     sortable: false,
+    align: 'center',
     renderCell: () => <Button>Отправить</Button>,
   },
 ];
