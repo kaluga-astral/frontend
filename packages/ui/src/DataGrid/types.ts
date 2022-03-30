@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ChangeEvent, ReactNode } from 'react';
 
 import { SortStates } from './constants';
 
@@ -32,24 +32,27 @@ export interface DataGridColumns<Column extends {}> {
 }
 
 export type DataGridProps<T = DataGridRow> = {
+  data: T[];
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
-  data: T[];
   selectedRows?: Array<string>;
-  rowsPerPage?: number;
   onSelect?: (props: Array<string>) => void;
   sorting?: DataGridSort<T>[];
   onSort: (sorting: DataGridSort<T>[]) => void;
+  onPageChange: (event: ChangeEvent<unknown>, page: number) => void;
+  page: number;
+  totalCount: number;
+  rowsPerPage?: number;
 };
 
 export type DataGridHeadProps<T = DataGridRow> = {
   columns: DataGridColumns<T>[];
   selectable: boolean;
   onSelectAllRows: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  selectedCount: number;
-  totalCount: number;
   sorting: DataGridSort<T>[];
   onSort: (sorting: DataGridSort<T>[]) => void;
+  uncheckedRowsCount: number;
+  rowsCount: number;
 };
 
 export type DataGridBodyProps<T = DataGridRow> = {

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { Pagination } from '../Pagination';
 import { Table, TableContainer } from '../Table';
 
 import { DataGridHead } from './DataGridHead';
@@ -9,12 +10,15 @@ import { DataGridProps } from './types';
 export function DataGrid<T>({
   columns,
   data = [],
-  // perPage = 10,
   selectedRows = [],
-  onSelect,
+  rowsPerPage = 10,
   sorting = [],
+  onSelect,
+  onPageChange,
+  totalCount,
   onSort,
   keyId,
+  page,
 }: DataGridProps<T>) {
   const selectable = Boolean(onSelect);
 
@@ -23,13 +27,17 @@ export function DataGrid<T>({
   ): void => {
     if (!onSelect) return;
 
-    if (event.target.checked) {
-      const newSelectedRows = data.map((row) => row[keyId]);
+    const pageRows = data.map((row) => row[keyId]);
 
-      return onSelect(newSelectedRows);
+    if (event.target.checked) {
+      const mergedSelectedRows = [...selectedRows, ...pageRows];
+
+      return onSelect(mergedSelectedRows);
     }
 
-    onSelect([]);
+    const filteredRows = selectedRows.filter((id) => !pageRows.includes(id));
+
+    onSelect(filteredRows);
   };
 
   const handleSelectRow = React.useCallback(
@@ -46,16 +54,17 @@ export function DataGrid<T>({
     [selectedRows]
   );
 
-  const totalCount = useMemo(() => data.length, [data]);
-  const selectedCount = useMemo(() => selectedRows.length, [selectedRows]);
+  const uncheckedRowsCount = useMemo(() => {
+    return data.filter((row) => !selectedRows.includes(row[keyId])).length;
+  }, [data, selectedRows]);
 
   return (
     <TableContainer>
       <Table>
         <DataGridHead
           onSort={onSort}
-          totalCount={totalCount}
-          selectedCount={selectedCount}
+          rowsCount={data.length}
+          uncheckedRowsCount={uncheckedRowsCount}
           onSelectAllRows={handleSelectAllRows}
           selectable={selectable}
           sorting={sorting}
@@ -70,6 +79,12 @@ export function DataGrid<T>({
           columns={columns}
         />
       </Table>
+      <Pagination
+        page={page}
+        onChange={onPageChange}
+        totalCount={totalCount}
+        rowsPerPage={rowsPerPage}
+      />
     </TableContainer>
   );
 }

@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { Button } from '../Button';
 
@@ -150,28 +150,75 @@ const data = [
     createDate: '2022-03-24T17:50:40.206Z',
     action: null,
   },
+  {
+    id: '16',
+    documentName: 'Документ 12',
+    direction: 'РПН',
+    createDate: '2022-03-24T17:50:40.206Z',
+    action: null,
+  },
+  {
+    id: '17',
+    documentName: 'Документ 13',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+    action: null,
+  },
+  {
+    id: '18',
+    documentName: 'Документ 14',
+    direction: 'ФСС',
+    createDate: '2022-03-24T17:50:40.206Z',
+    action: null,
+  },
+  {
+    id: '19',
+    documentName: 'Документ 15',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+    action: null,
+  },
+  {
+    id: '20',
+    documentName: 'Документ 15',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+    action: null,
+  },
 ];
 
 const Template: Story = (args) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [sorting, setSorting] = useState<DataGridSort<ColumnsType>[]>([]);
+  const [page, setPage] = useState<number>(1);
 
   const handleSelect = (ids: string[]) => setSelected(ids);
 
   const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
     setSorting(newSorting);
 
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number
+  ): void => {
+    setPage(newPage);
+  };
+
+  const slicedData = data.slice((page - 1) * 10, page * 10);
+
   return (
     <DataGrid
       {...args}
-      data={data}
-      columns={columns}
       keyId="id"
-      rowsPerPage={10}
+      data={slicedData}
+      columns={columns}
+      totalCount={data.length}
       selectedRows={selected}
+      onPageChange={handleChangePage}
       onSelect={handleSelect}
       onSort={handleSort}
       sorting={sorting}
+      page={page}
     />
   );
 };
@@ -179,6 +226,6 @@ const Template: Story = (args) => {
 export const Default = Template.bind({});
 
 Default.parameters = {
-  options: { showPanel: true },
+  options: { showPanel: false },
   controls: { expanded: true },
 };

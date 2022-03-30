@@ -13,19 +13,19 @@ export function DataGridHead<T>({
   columns,
   selectable,
   onSelectAllRows,
-  selectedCount,
-  totalCount,
+  rowsCount,
   onSort,
   sorting = [],
+  uncheckedRowsCount,
 }: DataGridHeadProps<T>) {
   const checked = useMemo(
-    () => Boolean(totalCount) && totalCount === selectedCount,
-    [selectedCount, totalCount]
+    () => !Boolean(uncheckedRowsCount),
+    [uncheckedRowsCount]
   );
 
   const indeterminate = useMemo(
-    () => Boolean(selectedCount) && selectedCount < totalCount,
-    [selectedCount, totalCount]
+    () => uncheckedRowsCount > 0 && uncheckedRowsCount < rowsCount,
+    [uncheckedRowsCount]
   );
 
   const handleSort = useCallback(
