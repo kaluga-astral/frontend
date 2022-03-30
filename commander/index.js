@@ -5,6 +5,7 @@ const { modifyPackageJSON } = require('./tasks/modifyPackageJSON');
 const { build } = require('./tasks/build');
 const { copyFonts } = require('./tasks/copyFonts');
 const { publish } = require('./tasks/publish');
+const { copyImages } = require('./tasks/copyImages');
 
 const [, , task] = process.argv;
 
@@ -14,6 +15,9 @@ switch (task) {
     break;
   case 'copyFonts':
     copyFonts();
+    break;
+  case 'copyImages':
+    copyImages();
     break;
   case 'publish':
     publish();
