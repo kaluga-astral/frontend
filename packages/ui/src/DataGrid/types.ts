@@ -44,6 +44,7 @@ export type DataGridProps<T = DataGridRow> = {
   page: number;
   totalCount: number;
   rowsPerPage?: number;
+  maxHeight?: number;
 };
 
 export type DataGridHeadProps<T = DataGridRow> = {

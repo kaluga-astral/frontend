@@ -6,7 +6,6 @@ export const MuiTableCell: Components<Theme>['MuiTableCell'] = {
   styleOverrides: {
     root() {
       return {
-        // padding: 0,
         border: 'none',
       };
     },

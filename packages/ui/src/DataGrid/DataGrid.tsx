@@ -1,10 +1,14 @@
 import React, { useMemo } from 'react';
 
-import { Pagination } from '../Pagination';
-import { Table, TableContainer } from '../Table';
+import { Table } from '../Table';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
+import {
+  DataGridContainer,
+  StyledPagination,
+  StyledTableContainer,
+} from './styled';
 import { DataGridProps } from './types';
 
 export function DataGrid<T>({
@@ -13,6 +17,7 @@ export function DataGrid<T>({
   selectedRows = [],
   rowsPerPage = 10,
   sorting = [],
+  maxHeight,
   onSelect,
   onPageChange,
   totalCount,
@@ -59,8 +64,8 @@ export function DataGrid<T>({
   }, [data, selectedRows]);
 
   return (
-    <div>
-      <TableContainer>
+    <DataGridContainer>
+      <StyledTableContainer maxHeight={maxHeight}>
         <Table stickyHeader>
           <DataGridHead
             onSort={onSort}
@@ -80,13 +85,13 @@ export function DataGrid<T>({
             columns={columns}
           />
         </Table>
-      </TableContainer>
-      <Pagination
+      </StyledTableContainer>
+      <StyledPagination
         page={page}
         onChange={onPageChange}
         totalCount={totalCount}
         rowsPerPage={rowsPerPage}
       />
-    </div>
+    </DataGridContainer>
   );
 }

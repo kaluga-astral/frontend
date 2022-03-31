@@ -8,6 +8,7 @@ export const Pagination = ({
   page,
   rowsPerPage = 10,
   totalCount,
+  className,
   ...props
 }: PaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);
@@ -16,7 +17,7 @@ export const Pagination = ({
   const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
   return (
-    <PaginationWrapper>
+    <PaginationWrapper className={className}>
       <Range variant="h6">{formattedRange}</Range>
       <MuiPagination shape="rounded" count={count} {...props} />
     </PaginationWrapper>

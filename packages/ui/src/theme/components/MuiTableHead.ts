@@ -6,7 +6,9 @@ export const MuiTableHead: Components<Theme>['MuiTableHead'] = {
   styleOverrides: {
     root({ theme }) {
       return {
-        borderBottom: `2px solid ${theme.palette.grey['300']}`,
+        th: {
+          borderBottom: `2px solid ${theme.palette.grey['300']}`,
+        },
       };
     },
   },
