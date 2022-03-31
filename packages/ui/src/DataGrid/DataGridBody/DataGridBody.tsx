@@ -1,7 +1,10 @@
-import { TableBody, TableCell, TableRow } from '../../Table';
+import { useEffect, useState } from 'react';
+
+import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
 
+import { StyledTableBody } from './styled';
 import { DataGridBodyProps } from './types';
 
 export function DataGridBody<T>({
@@ -12,8 +15,14 @@ export function DataGridBody<T>({
   selectedRows = [],
   keyId,
 }: DataGridBodyProps<T>) {
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (rows.length > 0 && !initialized) setInitialized(true);
+  }, [rows]);
+
   return (
-    <TableBody>
+    <StyledTableBody initialized={initialized}>
       {rows.map((row) => {
         const rowId = row[keyId];
         const checked = selectable ? selectedRows.indexOf(rowId) !== -1 : false;
@@ -36,6 +45,6 @@ export function DataGridBody<T>({
           </TableRow>
         );
       })}
-    </TableBody>
+    </StyledTableBody>
   );
 }

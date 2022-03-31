@@ -18,8 +18,8 @@ export function DataGridHead<T>({
   sorting = [],
   uncheckedRowsCount,
 }: DataGridHeadProps<T>) {
-  const selectedAllRows = useMemo(
-    () => !Boolean(uncheckedRowsCount),
+  const checked = useMemo(
+    () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
     [uncheckedRowsCount]
   );
 
@@ -58,7 +58,7 @@ export function DataGridHead<T>({
         {selectable && (
           <TableCell padding="checkbox">
             <Checkbox
-              checked={selectedAllRows}
+              checked={checked}
               indeterminate={indeterminate}
               onChange={onSelectAllRows}
             />

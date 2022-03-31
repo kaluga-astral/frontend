@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Button } from '../Button';
 
@@ -191,7 +191,16 @@ const data = [
 const Template: Story = (args) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [sorting, setSorting] = useState<DataGridSort<ColumnsType>[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<ColumnsType[]>([]);
   const [page, setPage] = useState<number>(1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
 
   const handleSelect = (ids: string[]) => setSelected(ids);
 
@@ -202,10 +211,14 @@ const Template: Story = (args) => {
     _event: ChangeEvent<unknown>,
     newPage: number
   ): void => {
+    setLoading(true);
     setPage(newPage);
-  };
 
-  const slicedData = data.slice((page - 1) * 10, page * 10);
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
 
   return (
     <DataGrid
@@ -217,6 +230,7 @@ const Template: Story = (args) => {
       selectedRows={selected}
       onPageChange={handleChangePage}
       onSelectRow={handleSelect}
+      loading={loading}
       onSort={handleSort}
       sorting={sorting}
       page={page}

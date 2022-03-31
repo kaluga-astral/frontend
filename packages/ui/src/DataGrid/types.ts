@@ -35,6 +35,7 @@ export type DataGridProps<T = DataGridRow> = {
   totalCount: number;
   rowsPerPage?: number;
   maxHeight?: number;
+  loading?: boolean;
 };
 
 export interface DataGridColumns<Column extends {}> {

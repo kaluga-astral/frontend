@@ -1,14 +1,12 @@
-import React, { useMemo } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 
+import { Pagination } from '../Pagination';
 import { Table } from '../Table';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
-import {
-  DataGridContainer,
-  StyledPagination,
-  StyledTableContainer,
-} from './styled';
+import DataGridLoader from './DataGridLoader/DataGridLoader';
+import { DataGridContainer, StyledTableContainer } from './styled';
 import { DataGridProps } from './types';
 
 export function DataGrid<T>({
@@ -20,6 +18,7 @@ export function DataGrid<T>({
   maxHeight,
   onSelectRow,
   onPageChange,
+  loading,
   totalCount,
   onSort,
   keyId,
@@ -45,9 +44,9 @@ export function DataGrid<T>({
     onSelectRow(filteredRows);
   };
 
-  const handleSelectRow = React.useCallback(
+  const handleSelectRow = useCallback(
     (rowId: string) =>
-      (event: React.ChangeEvent<HTMLInputElement>): void => {
+      (event: ChangeEvent<HTMLInputElement>): void => {
         if (!onSelectRow) return;
 
         if (event.target.checked) {
@@ -85,8 +84,9 @@ export function DataGrid<T>({
             columns={columns}
           />
         </Table>
+        <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      <StyledPagination
+      <Pagination
         page={page}
         onChange={onPageChange}
         totalCount={totalCount}
