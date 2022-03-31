@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 
 import { TableCell } from '../../Table';
-import { CellProps } from '../types';
 import { Typography } from '../../Typography';
+
+import { CellProps } from './types';
 
 export function DataGridCell<T>({
   row,
-  cell: { field, renderCell, format, clickCallBack, align = 'left' },
+  cell: { field, renderCell, format, onClick, align = 'left' },
 }: CellProps<T>) {
   const handleClickCell = (): void => {
-    if (clickCallBack) clickCallBack(row);
+    if (onClick) onClick(row);
   };
 
   const formattedValue = useMemo(() => {

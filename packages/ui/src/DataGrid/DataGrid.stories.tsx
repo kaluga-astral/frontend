@@ -211,12 +211,12 @@ const Template: Story = (args) => {
     <DataGrid
       {...args}
       keyId="id"
-      data={slicedData}
+      rows={slicedData}
       columns={columns}
       totalCount={data.length}
       selectedRows={selected}
       onPageChange={handleChangePage}
-      onSelect={handleSelect}
+      onSelectRow={handleSelect}
       onSort={handleSort}
       sorting={sorting}
       page={page}

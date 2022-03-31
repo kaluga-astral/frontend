@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 import { SortStates } from './constants';
 
@@ -13,6 +13,8 @@ export type CellValue =
 
 export type SortState = `${SortStates}`;
 
+export type RenderCell<T> = (params: T) => ReactNode;
+
 export type DataGridRow = Record<string, any>;
 
 export type DataGridSort<Data extends {}> = {
@@ -20,24 +22,12 @@ export type DataGridSort<Data extends {}> = {
   sort: SortState;
 };
 
-export interface DataGridColumns<Column extends {}> {
-  field: keyof Column & string;
-  label?: string;
-  sortable?: boolean;
-  empty?: string | number;
-  pointer?: boolean;
-  clickCallBack?: (data: Column) => void;
-  renderCell?: RenderCell<Column>;
-  format?: (data: Column) => CellValue;
-  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
-}
-
 export type DataGridProps<T = DataGridRow> = {
-  data: T[];
+  rows: T[];
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
   selectedRows?: Array<string>;
-  onSelect?: (props: Array<string>) => void;
+  onSelectRow?: (props: Array<string>) => void;
   sorting?: DataGridSort<T>[];
   onSort: (sorting: DataGridSort<T>[]) => void;
   onPageChange: (event: ChangeEvent<unknown>, page: number) => void;
@@ -47,30 +37,14 @@ export type DataGridProps<T = DataGridRow> = {
   maxHeight?: number;
 };
 
-export type DataGridHeadProps<T = DataGridRow> = {
-  columns: DataGridColumns<T>[];
-  selectable: boolean;
-  onSelectAllRows: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  sorting: DataGridSort<T>[];
-  onSort: (sorting: DataGridSort<T>[]) => void;
-  uncheckedRowsCount: number;
-  rowsCount: number;
-};
-
-export type DataGridBodyProps<T = DataGridRow> = {
-  columns: DataGridColumns<T>[];
-  keyId: keyof DataGridRow;
-  selectable: boolean;
-  selectedRows?: Array<string>;
-  data: T[];
-  onSelectRow: (
-    rowId: string
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-export type CellProps<T> = {
-  row: T;
-  cell: DataGridColumns<T>;
-};
-
-export type RenderCell<T> = (params: T) => ReactNode;
+export interface DataGridColumns<Column extends {}> {
+  field: keyof Column & string;
+  label?: string;
+  sortable?: boolean;
+  empty?: string | number;
+  pointer?: boolean;
+  onClick?: (data: Column) => void;
+  renderCell?: RenderCell<Column>;
+  format?: (data: Column) => CellValue;
+  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
+}

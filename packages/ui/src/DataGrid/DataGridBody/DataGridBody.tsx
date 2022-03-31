@@ -1,10 +1,11 @@
 import { TableBody, TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
-import { DataGridBodyProps } from '../types';
+
+import { DataGridBodyProps } from './types';
 
 export function DataGridBody<T>({
-  data,
+  rows,
   columns,
   selectable,
   onSelectRow,
@@ -13,7 +14,7 @@ export function DataGridBody<T>({
 }: DataGridBodyProps<T>) {
   return (
     <TableBody>
-      {data.map((row) => {
+      {rows.map((row) => {
         const rowId = row[keyId];
         const checked = selectable ? selectedRows.indexOf(rowId) !== -1 : false;
 

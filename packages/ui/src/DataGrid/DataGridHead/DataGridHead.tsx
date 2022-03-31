@@ -4,10 +4,10 @@ import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Typography } from '../../Typography';
 import { Checkbox } from '../../Checkbox';
-import { DataGridHeadProps } from '../types';
 import { SortStates } from '../constants';
 
 import { StyledTableCell, StyledTableSortLabel } from './styled';
+import { DataGridHeadProps } from './types';
 
 export function DataGridHead<T>({
   columns,
@@ -18,7 +18,7 @@ export function DataGridHead<T>({
   sorting = [],
   uncheckedRowsCount,
 }: DataGridHeadProps<T>) {
-  const checked = useMemo(
+  const selectedAllRows = useMemo(
     () => !Boolean(uncheckedRowsCount),
     [uncheckedRowsCount]
   );
@@ -58,7 +58,7 @@ export function DataGridHead<T>({
         {selectable && (
           <TableCell padding="checkbox">
             <Checkbox
-              checked={checked}
+              checked={selectedAllRows}
               indeterminate={indeterminate}
               onChange={onSelectAllRows}
             />

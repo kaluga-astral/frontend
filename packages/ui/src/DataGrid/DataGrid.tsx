@@ -13,55 +13,55 @@ import { DataGridProps } from './types';
 
 export function DataGrid<T>({
   columns,
-  data = [],
+  rows = [],
   selectedRows = [],
   rowsPerPage = 10,
   sorting = [],
   maxHeight,
-  onSelect,
+  onSelectRow,
   onPageChange,
   totalCount,
   onSort,
   keyId,
   page,
 }: DataGridProps<T>) {
-  const selectable = Boolean(onSelect);
+  const selectable = Boolean(onSelectRow);
 
   const handleSelectAllRows = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    if (!onSelect) return;
+    if (!onSelectRow) return;
 
-    const pageRows = data.map((row) => row[keyId]);
+    const pageRows = rows.map((row) => row[keyId]);
 
     if (event.target.checked) {
       const mergedSelectedRows = [...selectedRows, ...pageRows];
 
-      return onSelect(mergedSelectedRows);
+      return onSelectRow(mergedSelectedRows);
     }
 
     const filteredRows = selectedRows.filter((id) => !pageRows.includes(id));
 
-    onSelect(filteredRows);
+    onSelectRow(filteredRows);
   };
 
   const handleSelectRow = React.useCallback(
     (rowId: string) =>
       (event: React.ChangeEvent<HTMLInputElement>): void => {
-        if (!onSelect) return;
+        if (!onSelectRow) return;
 
         if (event.target.checked) {
-          return onSelect([...selectedRows, rowId]);
+          return onSelectRow([...selectedRows, rowId]);
         }
 
-        return onSelect(selectedRows.filter((id) => id !== rowId));
+        return onSelectRow(selectedRows.filter((id) => id !== rowId));
       },
     [selectedRows]
   );
 
   const uncheckedRowsCount = useMemo(() => {
-    return data.filter((row) => !selectedRows.includes(row[keyId])).length;
-  }, [data, selectedRows]);
+    return rows.filter((row) => !selectedRows.includes(row[keyId])).length;
+  }, [rows, selectedRows]);
 
   return (
     <DataGridContainer>
@@ -69,7 +69,7 @@ export function DataGrid<T>({
         <Table stickyHeader>
           <DataGridHead
             onSort={onSort}
-            rowsCount={data.length}
+            rowsCount={rows.length}
             uncheckedRowsCount={uncheckedRowsCount}
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
@@ -81,7 +81,7 @@ export function DataGrid<T>({
             selectedRows={selectedRows}
             onSelectRow={handleSelectRow}
             selectable={selectable}
-            data={data}
+            rows={rows}
             columns={columns}
           />
         </Table>
