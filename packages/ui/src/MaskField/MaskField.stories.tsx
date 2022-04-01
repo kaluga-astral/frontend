@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Stack, Switch } from '@mui/material';
 import { Story } from '@storybook/react';
 
 import { MaskField } from './MaskField';
@@ -10,9 +10,19 @@ export default {
 };
 
 const Template: Story = () => {
+  const [value, setValue] = React.useState('');
+  const [unmasked, setUnmasked] = React.useState(true);
+
+  const handleValueChange = (fieldValue: string) => {
+    setValue(fieldValue);
+  };
+  const handleSwitchChange = () => {
+    setValue('');
+    setUnmasked((prevState) => !prevState);
+  };
+
   return (
     <Stack>
-      <MaskField label="textfield without mask" />
       <MaskField
         label="textfield with custom mask"
         mask="aa.000"
@@ -26,6 +36,22 @@ const Template: Story = () => {
       <MaskField label="textfield with number mask" mask={Number} />
       <MaskField label="textfield with string mask" mask={String} />
       <MaskField label="textfield with date mask" mask={Date} />
+
+      <div
+        style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}
+      >
+        <MaskField
+          key={String(unmasked)}
+          label="textfield with mask/unmask"
+          mask="aa.0000-000"
+          placeholder="aa.0000-000"
+          value={value}
+          onChange={handleValueChange}
+          unmask={unmasked}
+        />
+        <Switch onChange={handleSwitchChange} checked={unmasked} />
+        Value: {value}
+      </div>
     </Stack>
   );
 };

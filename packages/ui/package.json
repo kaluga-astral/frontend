@@ -28,7 +28,8 @@
     "@mui/lab": "5.0.0-alpha.70",
     "@mui/material": "5.4.3",
     "lodash-es": "4.17.21",
-    "react-imask": "^6.4.2"
+    "react-imask": "^6.4.2",
+    "utility-types": "^3.10.0"
   },
   "peerDependencies": {
     "react": "^17.0.0"

@@ -32,3 +32,5 @@ export * from './styles';
 export * from './StylesCacheProvider';
 export * from './Tag';
 export * from './TextArea';
+export * from './theme';
+export * from './ThemeProvider';

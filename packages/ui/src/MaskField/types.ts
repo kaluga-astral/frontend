@@ -2,6 +2,15 @@ import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
 import type { TextFieldProps } from '../TextField/types';
 
-type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+type MaskProps = IMaskInputProps<
+  IMask.AnyMaskedOptions,
+  boolean,
+  string,
+  HTMLInputElement
+>;
 
-export type MaskFieldProps = Optional<IMaskInputProps, 'mask'> & TextFieldProps;
+export type MaskFieldProps = Omit<MaskProps & TextFieldProps, 'onChange'> & {
+  onChange?: (value: string) => void;
+};
+
+export type MaskFieldValue = string;
