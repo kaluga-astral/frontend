@@ -31,6 +31,7 @@ export * from './Placeholder';
 export * from './Select';
 export * from './styles';
 export * from './StylesCacheProvider';
+export * from './Table';
 export * from './Tag';
 export * from './TextArea';
 export * from './theme';
