@@ -9,5 +9,5 @@ module.exports = {
     'npm run lint --workspace=@astral/icons',
     () => 'npm run lint:types --workspace=@astral/icons',
   ],
-  'commander/**/*.{js}': ['npm run lint --workspace=@astral/commander'],
+  'commander/**/*.js': ['npm run lint --workspace=@astral/commander'],
 };

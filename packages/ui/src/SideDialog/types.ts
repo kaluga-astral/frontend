@@ -1,7 +1,7 @@
 import React from 'react';
-import { DialogProps as MuiDialogProps } from '@mui/material';
+import { DrawerProps as MuiDrawerProps } from '@mui/material';
 
-export type DialogProps = Omit<MuiDialogProps, 'onClose'> & {
+export type SideDialogProps = MuiDrawerProps & {
   title?: string;
   disableBackdropClick?: boolean;
   onClose?: (
