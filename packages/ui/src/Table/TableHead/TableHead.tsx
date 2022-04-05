@@ -1,5 +1,4 @@
-import { TableHead as MuiTableHead, TableHeadProps } from '@mui/material';
+import { TableHead, TableHeadProps } from '@mui/material';
 
-export const TableHead = (props: TableHeadProps) => {
-  return <MuiTableHead {...props} />;
-};
+export { TableHead };
+export type { TableHeadProps };

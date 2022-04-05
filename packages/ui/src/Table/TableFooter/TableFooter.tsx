@@ -1,5 +1,4 @@
-import { TableFooter as MuiTableFooter, TableFooterProps } from '@mui/material';
+import { TableFooter, TableFooterProps } from '@mui/material';
 
-export const TableFooter = (props: TableFooterProps) => {
-  return <MuiTableFooter {...props} />;
-};
+export { TableFooter };
+export type { TableFooterProps };

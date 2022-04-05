@@ -1,8 +1,4 @@
-import {
-  TableSortLabel as MuiTableSortLabel,
-  TableSortLabelProps,
-} from '@mui/material';
+import { TableSortLabel, TableSortLabelProps } from '@mui/material';
 
-export const TableSortLabel = (props: TableSortLabelProps) => {
-  return <MuiTableSortLabel {...props} />;
-};
+export { TableSortLabel };
+export type { TableSortLabelProps };

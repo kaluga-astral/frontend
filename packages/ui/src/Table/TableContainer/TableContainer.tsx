@@ -1,8 +1,4 @@
-import {
-  TableContainer as MuiTableContainer,
-  TableContainerProps,
-} from '@mui/material';
+import { TableContainer, TableContainerProps } from '@mui/material';
 
-export const TableContainer = (props: TableContainerProps) => {
-  return <MuiTableContainer {...props} />;
-};
+export { TableContainer };
+export type { TableContainerProps };

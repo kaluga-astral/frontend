@@ -1,5 +1,4 @@
-import { TableCell as MuiTableCell, TableCellProps } from '@mui/material';
+import { TableCell, TableCellProps } from '@mui/material';
 
-export const TableCell = (props: TableCellProps) => {
-  return <MuiTableCell {...props} />;
-};
+export { TableCell };
+export type { TableCellProps };
