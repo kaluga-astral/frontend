@@ -1,9 +1,10 @@
-import { DrawerProps } from '@mui/material';
-import { Drawer as MuiDrawer } from '@mui/material';
+import { Drawer } from '@mui/material';
 
 import { styled } from '../styles';
 
-export const StyledDrawer = styled(MuiDrawer)<DrawerProps>`
+import { SideDialogProps } from './types';
+
+export const StyledDrawer = styled(Drawer)<SideDialogProps>`
   .MuiPaper-root {
     width: 30%;
   }
