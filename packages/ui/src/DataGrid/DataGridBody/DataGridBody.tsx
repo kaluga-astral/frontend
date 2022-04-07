@@ -19,7 +19,7 @@ export function DataGridBody<T>({
 
   useEffect(() => {
     if (rows.length > 0 && !initialized) setInitialized(true);
-  }, [rows]);
+  }, [rows, initialized]);
 
   return (
     <StyledTableBody initialized={initialized}>

@@ -26,9 +26,7 @@ export function DataGrid<T>({
 }: DataGridProps<T>) {
   const selectable = Boolean(onSelectRow);
 
-  const handleSelectAllRows = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) return;
 
     const pageRows = rows.map((row) => row[keyId]);
@@ -60,7 +58,7 @@ export function DataGrid<T>({
 
   const uncheckedRowsCount = useMemo(() => {
     return rows.filter((row) => !selectedRows.includes(row[keyId])).length;
-  }, [rows, selectedRows]);
+  }, [rows, selectedRows, keyId]);
 
   return (
     <DataGridContainer>

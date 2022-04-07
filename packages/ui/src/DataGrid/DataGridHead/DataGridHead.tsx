@@ -20,12 +20,12 @@ export function DataGridHead<T>({
 }: DataGridHeadProps<T>) {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
-    [uncheckedRowsCount]
+    [uncheckedRowsCount, rowsCount]
   );
 
   const indeterminate = useMemo(
     () => uncheckedRowsCount > 0 && uncheckedRowsCount < rowsCount,
-    [uncheckedRowsCount]
+    [uncheckedRowsCount, rowsCount]
   );
 
   const handleSort = useCallback(

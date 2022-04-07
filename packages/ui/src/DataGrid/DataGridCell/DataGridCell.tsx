@@ -19,7 +19,7 @@ export function DataGridCell<T>({
     }
 
     return row[field];
-  }, [field, format]);
+  }, [field, format, row]);
 
   return (
     <TableCell align={align} onClick={handleClickCell}>

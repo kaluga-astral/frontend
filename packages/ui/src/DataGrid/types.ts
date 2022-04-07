@@ -38,7 +38,7 @@ export type DataGridProps<T = DataGridRow> = {
   loading?: boolean;
 };
 
-export interface DataGridColumns<Column extends {}> {
+export type DataGridColumns<Column extends {}> = {
   field: keyof Column & string;
   label?: string;
   sortable?: boolean;
@@ -48,4 +48,4 @@ export interface DataGridColumns<Column extends {}> {
   renderCell?: RenderCell<Column>;
   format?: (data: Column) => CellValue;
   align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
-}
+};
