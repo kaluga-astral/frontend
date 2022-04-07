@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "sourceMap": false,
@@ -23,7 +26,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": [
+      "./declarations"
+    ]
   },
-  "exclude": ["commander"]
+  "exclude": [
+    "commander"
+  ]
 }
