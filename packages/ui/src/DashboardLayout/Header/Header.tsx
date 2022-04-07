@@ -9,22 +9,22 @@ import {
 } from './styled';
 import { HeaderProps } from './types';
 
-export const Header = forwardRef<HTMLDivElement, HeaderProps>(
-  ({ children, logoSrc, logoAlt, LogoLink, Widget }, ref) => {
-    return (
-      <StyledHeader ref={ref}>
-        <InnerContainer>
-          <LeftContainer>
-            {Widget && <Widget />}
-            <LogoContainer withWidget={!!Widget}>
-              <LogoLink Logo={<LogoStyle src={logoSrc} alt={logoAlt} />} />
-            </LogoContainer>
-          </LeftContainer>
-          {children}
-        </InnerContainer>
-      </StyledHeader>
-    );
-  }
-);
+export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
+  const { children, logoSrc, logoAlt, LogoLink, Widget } = props;
+
+  return (
+    <StyledHeader ref={ref}>
+      <InnerContainer>
+        <LeftContainer>
+          {Widget && <Widget />}
+          <LogoContainer withWidget={Boolean(Widget)}>
+            <LogoLink Logo={<LogoStyle src={logoSrc} alt={logoAlt} />} />
+          </LogoContainer>
+        </LeftContainer>
+        {children}
+      </InnerContainer>
+    </StyledHeader>
+  );
+});
 
 export default Header;
