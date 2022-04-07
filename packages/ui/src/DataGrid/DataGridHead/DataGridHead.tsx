@@ -82,7 +82,7 @@ export function DataGridHead<T>({
                 <StyledTableSortLabel
                   hideSortIcon={hideSortIcon}
                   direction={sortDirection}
-                  active={true}
+                  active
                 />
               )}
             </StyledTableCell>
