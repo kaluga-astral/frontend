@@ -5,7 +5,7 @@ import { DataGridColumns, DataGridRow } from '../types';
 export type DataGridBodyProps<T = DataGridRow> = {
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
-  selectable: boolean;
+  selectable?: boolean;
   selectedRows?: Array<string>;
   rows: T[];
   onSelectRow: (
