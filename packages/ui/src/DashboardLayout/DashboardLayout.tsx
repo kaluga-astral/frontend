@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Header } from './Header';
-import { SideBar } from './Sidebar';
+import { Sidebar } from './Sidebar';
 import { Main } from './Main';
 import { StyledDashboard } from './styled';
 
@@ -22,7 +22,7 @@ export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
 };
 
 DashboardLayout.Header = Header;
-DashboardLayout.SideBar = SideBar;
+DashboardLayout.Sidebar = Sidebar;
 DashboardLayout.Main = Main;
 
 export default DashboardLayout;
