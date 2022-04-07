@@ -27,10 +27,10 @@
     "isolatedModules": true,
     "noEmit": false,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": [
-      "./declarations"
-    ]
   },
+  "include": [
+    "./declarations"
+  ],
   "exclude": [
     "commander"
   ]
