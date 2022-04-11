@@ -7,12 +7,8 @@ import { CellProps } from './types';
 
 export function DataGridCell<T>({
   row,
-  cell: { field, renderCell, format, onClick, align = 'left' },
+  cell: { field, renderCell, format, align = 'left' },
 }: CellProps<T>) {
-  const handleClickCell = (): void => {
-    if (onClick) onClick(row);
-  };
-
   const formattedValue = useMemo(() => {
     if (format) {
       return format(row);
@@ -22,7 +18,7 @@ export function DataGridCell<T>({
   }, [field, format, row]);
 
   return (
-    <TableCell align={align} onClick={handleClickCell}>
+    <TableCell align={align}>
       {renderCell && renderCell(row)}
       {!renderCell && <Typography>{formattedValue}</Typography>}
     </TableCell>

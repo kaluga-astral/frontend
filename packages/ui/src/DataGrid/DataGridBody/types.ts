@@ -6,9 +6,7 @@ export type DataGridBodyProps<T = DataGridRow> = {
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
   selectable?: boolean;
-  selectedRows?: Array<string>;
+  selectedRows?: Array<T>;
   rows: T[];
-  onSelectRow: (
-    rowId: string
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  onSelectRow: (row: T) => (event: ChangeEvent<HTMLInputElement>) => void;
 };

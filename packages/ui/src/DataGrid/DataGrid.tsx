@@ -1,6 +1,5 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
 
-import { Pagination } from '../Pagination';
 import { Table } from '../Table';
 
 import { DataGridHead } from './DataGridHead';
@@ -13,51 +12,55 @@ export function DataGrid<T>({
   columns,
   rows = [],
   selectedRows = [],
-  rowsPerPage = 10,
   sorting = [],
   maxHeight,
-  onSelectRow,
-  onPageChange,
+  onSelectRows,
+  pagination,
   loading,
-  totalCount,
   onSort,
   keyId,
-  page,
 }: DataGridProps<T>) {
-  const selectable = Boolean(onSelectRow);
+  const selectable = Boolean(onSelectRows);
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (!onSelectRow) return;
-
-    const pageRows = rows.map((row) => row[keyId]);
+    if (!onSelectRows) return;
 
     if (event.target.checked) {
-      const mergedSelectedRows = [...selectedRows, ...pageRows];
+      const mergedSelectedRows = [...selectedRows, ...rows];
 
-      return onSelectRow(mergedSelectedRows);
+      return onSelectRows(mergedSelectedRows);
     }
 
-    const filteredRows = selectedRows.filter((id) => !pageRows.includes(id));
+    const filteredRows = selectedRows.filter(
+      (selectedRow) => !rows.find((row) => row[keyId] === selectedRow[keyId])
+    );
 
-    onSelectRow(filteredRows);
+    onSelectRows(filteredRows);
   };
 
   const handleSelectRow = useCallback(
-    (rowId: string) =>
+    (row: T) =>
       (event: ChangeEvent<HTMLInputElement>): void => {
-        if (!onSelectRow) return;
+        if (!onSelectRows) return;
 
         if (event.target.checked) {
-          return onSelectRow([...selectedRows, rowId]);
+          return onSelectRows([...selectedRows, row]);
         }
 
-        return onSelectRow(selectedRows.filter((id) => id !== rowId));
+        return onSelectRows(
+          selectedRows.filter(
+            (selectedRow) => selectedRow[keyId] !== row[keyId]
+          )
+        );
       },
     [selectedRows]
   );
 
   const uncheckedRowsCount = useMemo(() => {
-    return rows.filter((row) => !selectedRows.includes(row[keyId])).length;
+    return rows.filter(
+      (row) =>
+        !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId])
+    ).length;
   }, [rows, selectedRows, keyId]);
 
   return (
@@ -84,12 +87,7 @@ export function DataGrid<T>({
         </Table>
         <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      <Pagination
-        page={page}
-        onChange={onPageChange}
-        totalCount={totalCount}
-        rowsPerPage={rowsPerPage}
-      />
+      {pagination}
     </DataGridContainer>
   );
 }
