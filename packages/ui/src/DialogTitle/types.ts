@@ -1,5 +1,8 @@
-import { DialogTitleProps as MuiDialogTitleProps } from '@mui/material';
+import {
+  ModalProps,
+  DialogTitleProps as MuiDialogTitleProps,
+} from '@mui/material';
 
 export type DialogTitleProps = MuiDialogTitleProps & {
-  onClose?: () => void;
+  onClose?: ModalProps['onClose'];
 };

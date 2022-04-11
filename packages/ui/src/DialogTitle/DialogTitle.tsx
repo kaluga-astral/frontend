@@ -1,5 +1,6 @@
 import { DialogTitle as MuiDialogTitle } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
+import { useCallback } from 'react';
 
 import { IconButton } from '../IconButton';
 
@@ -10,11 +11,16 @@ export const DialogTitle = ({
   onClose,
   ...props
 }: DialogTitleProps) => {
+  const onClickTitle = useCallback(
+    (e) => onClose && onClose(e, 'escapeKeyDown'),
+    [onClose]
+  );
+
   return (
     <MuiDialogTitle {...props}>
       {children}
       {onClose && (
-        <IconButton variant="text" onClick={onClose}>
+        <IconButton variant="text" onClick={onClickTitle}>
           <CrossOutlineMd />
         </IconButton>
       )}
