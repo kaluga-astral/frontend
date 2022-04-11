@@ -1,12 +1,5 @@
-import { ProviderProps, createContext } from 'react';
-
-import { ListContextType } from './types';
+import { createContext } from 'react';
 
 export const ListContext = createContext({ open: true });
 
-export const ListProvider = ({
-  value,
-  children,
-}: ProviderProps<ListContextType>) => (
-  <ListContext.Provider value={value}>{children}</ListContext.Provider>
-);
+export const ListProvider = ListContext.Provider;
