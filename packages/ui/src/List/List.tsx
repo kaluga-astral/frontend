@@ -1,5 +1,25 @@
-import { ListProps } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
 
-export { StyledList as List } from './styled';
+import { ListProvider } from '../ListProvider';
 
-export type { ListProps };
+import { ListProps } from './types';
+import { StyledList } from './styled';
+
+export const List = ({
+  collapsed = true,
+  collapsedSize,
+  children,
+  ...props
+}: ListProps) => (
+  <StyledList {...props}>
+    <ListProvider isOpen={{ open: collapsed }}>
+      <Collapse
+        orientation="horizontal"
+        in={collapsed}
+        collapsedSize={collapsedSize}
+      >
+        {children}
+      </Collapse>
+    </ListProvider>
+  </StyledList>
+);

@@ -10,4 +10,8 @@ export const StyledList = styled(MuiList)`
 
     text-decoration: none;
   }
+
+  .MuiCollapse-wrapperInner {
+    width: 100%;
+  }
 `;

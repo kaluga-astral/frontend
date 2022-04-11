@@ -1,8 +1,12 @@
-import {
-  ListItemTextProps,
-  ListItemText as MuiListItemText,
-} from '@mui/material';
+import { useContext } from 'react';
+import { ListItemTextProps } from '@mui/material';
+
+import { ListContext } from '../ListProvider';
+
+import { StyledListItemText } from './styled';
 
 export const ListItemText = ({ ...props }: ListItemTextProps) => {
-  return <MuiListItemText {...props} />;
+  const listContext = useContext(ListContext);
+
+  return <StyledListItemText {...props} open={listContext.open} />;
 };
