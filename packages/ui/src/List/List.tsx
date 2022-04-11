@@ -12,7 +12,7 @@ export const List = ({
   ...props
 }: ListProps) => (
   <StyledList {...props}>
-    <ListProvider isOpen={{ open: collapsed }}>
+    <ListProvider value={{ open: collapsed }}>
       <Collapse
         orientation="horizontal"
         in={collapsed}
