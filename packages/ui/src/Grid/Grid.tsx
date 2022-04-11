@@ -15,6 +15,7 @@ export const Grid = ({
   column,
   row,
   area,
+  component = 'div',
   children,
   ...props
 }: GridProps) => {
@@ -33,6 +34,7 @@ export const Grid = ({
       gridColumn={column}
       gridRow={row}
       gridArea={area}
+      component={component}
       {...props}
     >
       {children}

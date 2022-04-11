@@ -39,7 +39,7 @@ export const createTheme = (params: CreateThemeParams) => {
     palette: getPalette(brand),
     components: getComponents(fontsUrls),
   };
-
   const muiTheme = createMuiTheme(merge({}, themeOptions, options));
+
   return merge(muiTheme as any, { elevation, shape }) as Theme;
 };
