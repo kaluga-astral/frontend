@@ -1,6 +1,6 @@
-import { PaginationProps as MuiPaginationProps } from '@mui/material';
+import { PaginationProps } from '../../Pagination';
 
-export type PaginationProps = Omit<MuiPaginationProps, 'count'> & {
+export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   totalCount: number;
   rowsPerPage?: number;
   page: number;

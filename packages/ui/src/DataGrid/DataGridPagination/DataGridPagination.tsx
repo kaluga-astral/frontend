@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { Pagination } from '../../Pagination';
 
 import { PaginationWrapper, Range } from './styled';
-import { PaginationProps } from './types';
+import { DataGridPaginationProps } from './types';
 
 export const DataGridPagination = ({
   page,
@@ -11,7 +11,7 @@ export const DataGridPagination = ({
   totalCount,
   className,
   ...props
-}: PaginationProps) => {
+}: DataGridPaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);
   const rangeStart = useMemo(() => page * rowsPerPage, [page]);
   const rangeEnd = useMemo(() => page * rowsPerPage + rowsPerPage, [page]);
