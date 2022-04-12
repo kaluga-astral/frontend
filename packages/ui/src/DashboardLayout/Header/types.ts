@@ -1,12 +1,7 @@
-import { ElementType, FC, ReactNode } from 'react';
+import { NavProps } from './Nav/types';
+import { ProfileProps } from './Profile/types';
 
 export type HeaderProps = {
-  logoSrc: string;
-  logoAlt: string;
-  LogoLink: FC<LogoLinkProps>;
-  Widget?: ElementType;
-};
-
-export type LogoLinkProps = {
-  Logo: ReactNode;
+  nav: NavProps;
+  profile: ProfileProps;
 };

@@ -1,22 +1,36 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["@astral-frontend/eslint-config-ts-ui"],
+  "extends": [
+    "@astral-frontend/eslint-config-ts-ui"
+  ],
   "env": {
     "node": true
   },
   "parserOptions": {
-    "project": ["tsconfig.json"]
+    "project": [
+      "tsconfig.json"
+    ]
   },
   "settings": {
     "react": {
       "version": "detect"
     }
   },
-  "ignorePatterns": ["lib", "build", "node_modules"],
+  "ignorePatterns": [
+    "lib",
+    "build",
+    "node_modules"
+  ],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": true, "packageDir": ["./", "../../"] }
+      {
+        "devDependencies": true,
+        "packageDir": [
+          "./",
+          "../../"
+        ]
+      }
     ],
     "space-before-function-paren": 0,
     "react/prop-types": 0,

@@ -27,6 +27,8 @@ module.exports = {
         ],
         // отключено из-за конфликта с plugin/rational-order
         'declaration-empty-line-before': null,
+        // TODO: временно отключено из-за ошибки `Unexpected unknown unit "fr``
+        'unit-no-unknown': null,
       },
     },
   ],

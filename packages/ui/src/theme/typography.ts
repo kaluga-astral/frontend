@@ -29,6 +29,7 @@ export const pxToRem = (
 };
 
 export const typography: Partial<TypographyThemeOptions> = {
+  pxToRem,
   fontSize: 14,
   htmlFontSize: 14,
   fontWeightLight: 300,

@@ -1,6 +1,8 @@
 {
   "extends": "../../.eslintrc",
   "parserOptions": {
-    "project": ["tsconfig.lint.json"]
+    "project": [
+      "tsconfig.lint.json"
+    ]
   }
 }
