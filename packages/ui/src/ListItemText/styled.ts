@@ -14,4 +14,10 @@ export const StyledListItemText = styled(ListItemText)<StyledListItemTextProps>`
   text-overflow: ellipsis;
 
   opacity: ${({ open }) => (open ? 1 : 0)};
+
+  transition: ${({ theme }) =>
+    `${theme.transitions.create('opacity', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    })}`};
 `;
