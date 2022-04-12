@@ -16,8 +16,8 @@ export const StyledList = styled(MuiList)<ListProps>`
   .MuiCollapse-root {
     transition: ${({ theme }) =>
       `${theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.shortest,
       })} !important`};
   }
 
