@@ -133,7 +133,7 @@ export const Showcase: Story = () => (
           spacing={1}
           templateRows="auto"
           templateAreas={`"header header header header"
-  "main main . sidebar"
+  "main main . Sidebar"
   "footer footer footer footer"`}
         >
           <Grid area="header">
@@ -142,8 +142,8 @@ export const Showcase: Story = () => (
           <Grid area="main">
             <Item>Main</Item>
           </Grid>
-          <Grid area="sidebar">
-            <Item>SideBar</Item>
+          <Grid area="Sidebar">
+            <Item>Sidebar</Item>
           </Grid>
           <Grid area="footer">
             <Item>Footer</Item>

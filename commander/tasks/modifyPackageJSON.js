@@ -4,6 +4,9 @@ const { PACKAGES_NAMES } = require('../constants');
 
 const { RELEASE_TAG } = process.env;
 
+const readPackageJSON = (packageJSONPath) =>
+  JSON.parse(fs.readFileSync(packageJSONPath));
+
 // обновляет до последней версии пакеты, которые есть в репозитории
 const updateDepsVersions = (packageDeps, rootPackageVersion) =>
   PACKAGES_NAMES.reduce((newPackageDeps, packageName) => {
@@ -12,9 +15,11 @@ const updateDepsVersions = (packageDeps, rootPackageVersion) =>
     return { ...newPackageDeps, [packageName]: `^${rootPackageVersion}` };
   }, packageDeps);
 
-const updatePackagesVersions = (packageData, rootPackageVersion) => {
+const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
+  const packageData = readPackageJSON(packageJSONPath);
+
   fs.writeFileSync(
-    './package.json',
+    packageJSONPath,
     JSON.stringify(
       {
         ...packageData,
@@ -28,12 +33,16 @@ const updatePackagesVersions = (packageData, rootPackageVersion) => {
       2
     )
   );
+
+  return readPackageJSON(packageJSONPath);
 };
 
 const modifyPackageJSON = () => {
   console.log('Starting modifyPackageJSON...');
 
-  const packageData = JSON.parse(fs.readFileSync('./package.json'));
+  console.log('Update packages versions and deps');
+
+  const packageData = updatePackagesVersions('./package.json', RELEASE_TAG);
 
   const {
     scripts,
@@ -41,10 +50,6 @@ const modifyPackageJSON = () => {
     keywords = [],
     ...restPackageData
   } = packageData;
-
-  console.log('Update packages versions and deps');
-
-  updatePackagesVersions(packageData, RELEASE_TAG);
 
   console.log('Write data to lib package.json');
 
