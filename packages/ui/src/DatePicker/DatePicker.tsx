@@ -1,30 +1,67 @@
-import { forwardRef } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { DatePicker as MuiDatePicker } from '@mui/lab';
 import { CalendarOutlineMd } from '@astral/icons';
-import { TextField } from '@mui/material';
+import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
-import { useTheme } from '../theme';
-import type { Theme } from '../theme';
+import { TextField, TextFieldProps } from '../TextField';
 
 import { DatePickerProps } from './types';
 
+const componentsProps = {
+  switchViewButton: {
+    sx: {
+      padding: 1,
+      borderRadius: 1,
+    },
+  },
+  leftArrowButton: {
+    sx: {
+      padding: 1,
+      borderRadius: 1,
+    },
+  },
+  rightArrowButton: {
+    sx: {
+      padding: 1,
+      borderRadius: 1,
+    },
+  },
+};
+
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ value = new Date(), ...props }, ref) => {
-    const theme: Theme = useTheme();
+  (props, ref) => {
+    const { value = new Date(), mask = '__.__.____', ...restProps } = props;
+
+    const renderInput = useCallback((params: MuiTextFieldProps) => {
+      const textFieldParams = params as TextFieldProps;
+
+      return <TextField {...textFieldParams} />;
+    }, []);
 
     return (
       <MuiDatePicker
-        {...props}
+        {...restProps}
         ref={ref}
         value={value}
-        PaperProps={{
-          style: {
-            marginTop: theme.spacing(2),
-            boxShadow: theme.elevation[200],
+        mask={mask}
+        showDaysOutsideCurrentMonth
+        renderInput={renderInput}
+        components={{ OpenPickerIcon: CalendarOutlineMd }}
+        componentsProps={componentsProps}
+        OpenPickerButtonProps={{
+          sx: {
+            borderRadius: 1,
           },
         }}
-        renderInput={(params) => <TextField {...params} />}
-        components={{ OpenPickerIcon: CalendarOutlineMd }}
+        PaperProps={{
+          sx: {
+            marginTop: 2,
+            boxShadow: (theme) => theme.elevation[200],
+          },
+        }}
+        PopperProps={{
+          placement: 'bottom-start',
+        }}
       />
     );
   }
