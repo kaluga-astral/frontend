@@ -6,55 +6,42 @@ export const MuiPickersDay: LabComponents['MuiPickersDay'] = {
   styleOverrides: {
     root({ theme }: { theme: Theme }) {
       return {
-        width: '41px',
-        height: '32px',
+        width: 41,
+        height: 32,
+        margin: 0,
+        color: theme.palette.grey[900],
         fontSize: theme.typography.link.fontSize,
-        fontWeight: theme.typography.fontWeightMedium,
+        fontWeight: theme.typography.fontWeightRegular,
         borderRadius: theme.shape.small,
-        '&.Mui-selected': {
-          backgroundColor: theme.palette.primary[900],
-          '& > span': {
-            borderBottom: `2px solid ${theme.palette.common.white}`,
-            margin: theme.spacing(0, 1, 1, 1),
-            borderRadius: 0,
-          },
-          '&:hover': {
-            color: theme.palette.primary[900],
-            backgroundColor: theme.palette.background.elementHover,
-            '& > span': {
-              borderBottom: `2px solid ${theme.palette.primary[900]}`,
-              margin: theme.spacing(0, 1, 1, 1),
-              borderRadius: 0,
-            },
-          },
-        },
         '&.MuiPickersDay-today': {
-          border: 'none',
-          backgroundColor: theme.palette.primary[900],
-          '&:not(.Mui-selected)': {
-            color: theme.palette.primary[900],
-            borderRadius: 0,
-            backgroundColor: 'unset',
-            '& > span': {
-              borderBottom: `2px solid ${theme.palette.primary[900]}`,
-              margin: theme.spacing(0, 1, 1, 1),
-              borderRadius: 0,
+          border: 0,
+          fontWeight: theme.typography.fontWeightMedium,
+          '&:before': {
+            content: '""',
+            position: 'absolute',
+            height: 2,
+            width: 33,
+            background: theme.palette.primary[900],
+            bottom: 4,
+          },
+          '&.Mui-selected': {
+            '&:before': {
+              background: theme.palette.primary[200],
             },
           },
-          '& > span': {
-            borderBottom: `2px solid ${theme.palette.common.white}`,
-            margin: theme.spacing(0, 1, 1, 1),
-            borderRadius: 0,
-          },
         },
-        '&:not(.Mui-selected)': {
-          color: theme.palette.grey[900],
-          borderRadius: 0,
-          backgroundColor: 'unset',
+        '&.Mui-selected': {
+          fontWeight: theme.typography.fontWeightRegular,
         },
-        '&:hover': {
-          backgroundColor: theme.palette.background.elementHover,
-          borderRadius: theme.shape.small,
+        '&.Mui-focusVisible': {
+          background: theme.palette.primary[200],
+        },
+        '&.MuiPickersDay-dayOutsideMonth': {
+          color: theme.palette.grey[600],
+        },
+        '&.Mui-disabled': {
+          color: theme.palette.grey[300],
+          fontWeight: theme.typography.fontWeightRegular,
         },
       };
     },

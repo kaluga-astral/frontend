@@ -15,6 +15,8 @@ import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
 import { MuiPickersDay } from './MuiPickersDay';
+import { MuiCalendarPicker } from './MuiCalendarPicker';
+import { MuiYearPicker } from './MuiYearPicker';
 
 export type FontsUrls = {
   bold: {
@@ -135,4 +137,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogContent,
   MuiDialogActions,
   MuiPickersDay,
+  MuiCalendarPicker,
+  MuiYearPicker,
 });
