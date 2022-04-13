@@ -46,6 +46,15 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Build @astral/illustrations
+        run: npm run build --workspace=@astral/illustrations
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/illustrations
+        run: npm publish ./packages/illustrations/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Generate token
         uses: tibdex/github-app-token@v1
         id: generate-token
@@ -104,6 +113,7 @@ jobs:
             📦  @astral/ui: ${{ github.event.release.tag_name }}
             📦  @astral/fonts: ${{ github.event.release.tag_name }}
             📦  @astral/icons: ${{ github.event.release.tag_name }}
+            📦  @astral/illustrations: ${{ github.event.release.tag_name }}
 
             ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
             
