@@ -37,3 +37,5 @@ export * from './ThemeProvider';
 export * from './TextField';
 export * from './Typography';
 export * from './Tooltip';
+export * from './DatePicker';
+export * from './LocalizationProvider';
