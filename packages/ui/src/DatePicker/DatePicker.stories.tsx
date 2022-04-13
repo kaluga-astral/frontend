@@ -1,4 +1,3 @@
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
@@ -12,11 +11,14 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<Date | null>();
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker {...args} value={value} onChange={setValue} />
+    <LocalizationProvider>
+      <DatePicker {...args} value={value} onChange={handleChange} />
     </LocalizationProvider>
   );
 };
@@ -25,6 +27,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   label: 'Дата начала:',
+  disabled: false,
 };
 
 Default.parameters = {
