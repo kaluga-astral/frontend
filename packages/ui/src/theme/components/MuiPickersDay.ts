@@ -22,7 +22,7 @@ export const MuiPickersDay: LabComponents['MuiPickersDay'] = {
             height: 2,
             width: 33,
             background: theme.palette.primary[900],
-            bottom: 4,
+            bottom: theme.spacing(1),
           },
           '&.Mui-selected': {
             '&:before': {
