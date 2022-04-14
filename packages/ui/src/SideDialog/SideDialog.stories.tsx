@@ -1,12 +1,10 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from '../index';
+import { Button } from '../index';
+import { SideDialogActions } from '../SideDialogActions';
+import { SideDialogContent } from '../SideDialogContent';
+import { SideDialogContentText } from '../SideDialogContentText';
 
 import { SideDialog } from './SideDialog';
 
@@ -32,8 +30,8 @@ const Template: Story = () => {
         SideDialog
       </Button>
       <SideDialog title="Заголовок страницы" open={open} onClose={handleClose}>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+        <SideDialogContent>
+          <SideDialogContentText id="alert-dialog-description">
             Заглушка примера текста страницы, который несет очень выжный смысл
             для пользователя и предлагает ему варианты выбора действий с
             контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
@@ -75,14 +73,14 @@ const Template: Story = () => {
             sed viverra. Quisque id diam vel quam. Magna sit amet purus gravida
             quis blandit turpis cursus in. Dolor morbi non arcu risus. Sed cras
             ornare arcu dui vivamus arcu felis bibendum ut.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>
           <Button onClick={handleClose}>Готово</Button>
-        </DialogActions>
+        </SideDialogActions>
       </SideDialog>
     </div>
   );

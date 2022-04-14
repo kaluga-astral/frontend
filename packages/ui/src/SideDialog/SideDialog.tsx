@@ -1,4 +1,4 @@
-import { DialogTitle } from '../index';
+import { SideDialogTitle } from '../SideDialogTitle';
 
 import { StyledDrawer } from './styled';
 import { SideDialogProps } from './types';
@@ -12,7 +12,7 @@ export const SideDialog = ({
 }: SideDialogProps) => {
   return (
     <StyledDrawer anchor="right" open={open} onClose={onClose} {...props}>
-      <DialogTitle onClose={onClose}>{title}</DialogTitle>
+      <SideDialogTitle onClose={onClose}>{title}</SideDialogTitle>
       {children}
     </StyledDrawer>
   );
