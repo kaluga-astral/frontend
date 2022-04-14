@@ -16,6 +16,9 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
         '&:hover': {
           // FIXME: to theme
           background: '#EEF1F4',
+          '&.Mui-disabled': {
+            background: theme.palette.background.element,
+          },
         },
         '&:hover .MuiOutlinedInput-notchedOutline': {
           borderColor: theme.palette.grey[300],
