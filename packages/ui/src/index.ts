@@ -34,4 +34,7 @@ export * from './Tag';
 export * from './TextArea';
 export * from './theme';
 export * from './ThemeProvider';
+export * from './TextField';
+export * from './Typography';
+export * from './Tooltip';
 export * from './SideDialog';
