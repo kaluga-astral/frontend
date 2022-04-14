@@ -2,10 +2,11 @@ import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Button } from '../Button';
+import { Pagination as PaginationComponent } from '../Pagination';
 
-import { DataGridPagination } from './DataGridPagination';
 import { DataGrid } from './DataGrid';
 import { CellValue, DataGridColumns, DataGridSort } from './types';
+import { usePagination } from './DataGridPagination/usePagination';
 
 export default {
   title: 'Components/DataGrid',
@@ -203,11 +204,6 @@ const Template: Story = (args) => {
     }, 1500);
   }, []);
 
-  const handleSelect = (rows: ColumnsType[]) => setSelected(rows);
-
-  const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
-    setSorting(newSorting);
-
   const handleChangePage = (
     _event: ChangeEvent<unknown>,
     newPage: number
@@ -221,6 +217,18 @@ const Template: Story = (args) => {
     }, 1500);
   };
 
+  const Pagination = usePagination({
+    Pagination: PaginationComponent,
+    totalCount: data.length,
+    onChange: handleChangePage,
+    page,
+  });
+
+  const handleSelect = (rows: ColumnsType[]) => setSelected(rows);
+
+  const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
+    setSorting(newSorting);
+
   return (
     <DataGrid
       {...args}
@@ -228,17 +236,11 @@ const Template: Story = (args) => {
       rows={slicedData}
       columns={columns}
       selectedRows={selected}
-      onSelectRows={handleSelect}
+      onSelectRow={handleSelect}
       loading={loading}
       onSort={handleSort}
       sorting={sorting}
-      pagination={
-        <DataGridPagination
-          totalCount={data.length}
-          page={page}
-          onChange={handleChangePage}
-        />
-      }
+      pagination={Pagination}
     />
   );
 };
@@ -246,6 +248,6 @@ const Template: Story = (args) => {
 export const Default = Template.bind({});
 
 Default.parameters = {
-  options: { showPanel: false },
+  options: { showPanel: true },
   controls: { expanded: true },
 };

@@ -14,40 +14,40 @@ export function DataGrid<T>({
   selectedRows = [],
   sorting = [],
   maxHeight,
-  onSelectRows,
+  onSelectRow,
   pagination,
   loading,
   onSort,
   keyId,
 }: DataGridProps<T>) {
-  const selectable = Boolean(onSelectRows);
+  const selectable = Boolean(onSelectRow);
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (!onSelectRows) return;
+    if (!onSelectRow) return;
 
     if (event.target.checked) {
       const mergedSelectedRows = [...selectedRows, ...rows];
 
-      return onSelectRows(mergedSelectedRows);
+      return onSelectRow(mergedSelectedRows);
     }
 
     const filteredRows = selectedRows.filter(
       (selectedRow) => !rows.find((row) => row[keyId] === selectedRow[keyId])
     );
 
-    onSelectRows(filteredRows);
+    onSelectRow(filteredRows);
   };
 
   const handleSelectRow = useCallback(
     (row: T) =>
       (event: ChangeEvent<HTMLInputElement>): void => {
-        if (!onSelectRows) return;
+        if (!onSelectRow) return;
 
         if (event.target.checked) {
-          return onSelectRows([...selectedRows, row]);
+          return onSelectRow([...selectedRows, row]);
         }
 
-        return onSelectRows(
+        return onSelectRow(
           selectedRows.filter(
             (selectedRow) => selectedRow[keyId] !== row[keyId]
           )

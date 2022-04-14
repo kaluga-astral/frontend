@@ -27,7 +27,7 @@ export type DataGridProps<T = DataGridRow> = {
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
   selectedRows?: Array<T>;
-  onSelectRows?: (row: T[]) => void;
+  onSelectRow?: (row: T[]) => void;
   sorting?: DataGridSort<T>[];
   onSort: (sorting: DataGridSort<T>[]) => void;
   pagination?: ReactNode;

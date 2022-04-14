@@ -22,10 +22,17 @@ export function DataGridBody<T>({
     if (rows.length > 0 && !initialized) setInitialized(true);
   }, [rows, initialized]);
 
+  const renderCells = (row: T, rowId: string) => {
+    return columns.map((cell, index) => {
+      const cellId = `${rowId}-${index}`;
+
+      return <DataGridCell key={cellId} row={row} cell={cell} />;
+    });
+  };
+
   const renderedRows = useMemo(() => {
     return rows.map((row) => {
-      const rowId = row[keyId];
-      // const checked = selectable ? selectedRows.indexOf(rowId) !== -1 : false;
+      const rowId: string = row[keyId];
       const checked =
         selectable &&
         Boolean(
@@ -39,11 +46,7 @@ export function DataGridBody<T>({
               <Checkbox checked={checked} onChange={onSelectRow(row)} />
             </TableCell>
           )}
-          {columns.map((cell, index) => {
-            const cellId = `${rowId}-${index}`;
-
-            return <DataGridCell key={cellId} row={row} cell={cell} />;
-          })}
+          {renderCells(row, rowId)}
         </TableRow>
       );
     });

@@ -1,4 +1,7 @@
-import { Pagination, PaginationProps } from '@mui/material';
+import { Pagination as MuiPagination } from '@mui/material';
 
-export { Pagination };
-export type { PaginationProps };
+import { PaginationProps } from './types';
+
+export const Pagination = ({ ...props }: PaginationProps) => {
+  return <MuiPagination shape="rounded" {...props} />;
+};
