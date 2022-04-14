@@ -12,4 +12,4 @@ export type DatePickerProps = Omit<
   | 'PopperProps'
 >;
 
-export type DatePickerValue = Date | null;
+export type DatePickerValue = Date;
