@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { DatePicker as MuiDatePicker } from '@mui/lab';
 import { CalendarOutlineMd } from '@astral/icons';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
@@ -28,40 +28,43 @@ const componentsProps = {
   },
 };
 
-export const DatePicker = (props: DatePickerProps) => {
-  const { value = new Date(), mask = '__.__.____', ...restProps } = props;
+export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
+  (props, ref) => {
+    const { value = new Date(), mask = '__.__.____', ...restProps } = props;
 
-  const renderInput = useCallback((params: MuiTextFieldProps) => {
-    const textFieldParams = params as TextFieldProps;
+    const renderInput = useCallback((params: MuiTextFieldProps) => {
+      const textFieldParams = params as TextFieldProps;
 
-    return <TextField {...textFieldParams} />;
-  }, []);
+      return <TextField {...textFieldParams} />;
+    }, []);
 
-  return (
-    <MuiDatePicker
-      {...restProps}
-      value={value}
-      mask={mask}
-      showDaysOutsideCurrentMonth
-      renderInput={renderInput}
-      components={{ OpenPickerIcon: CalendarOutlineMd }}
-      componentsProps={componentsProps}
-      OpenPickerButtonProps={{
-        sx: {
-          borderRadius: 1,
-        },
-      }}
-      PaperProps={{
-        sx: {
-          marginTop: 2,
-          boxShadow: (theme) => theme.elevation[200],
-        },
-      }}
-      PopperProps={{
-        placement: 'bottom-start',
-      }}
-    />
-  );
-};
+    return (
+      <MuiDatePicker
+        {...restProps}
+        ref={ref}
+        value={value}
+        mask={mask}
+        showDaysOutsideCurrentMonth
+        renderInput={renderInput}
+        components={{ OpenPickerIcon: CalendarOutlineMd }}
+        componentsProps={componentsProps}
+        OpenPickerButtonProps={{
+          sx: {
+            borderRadius: 1,
+          },
+        }}
+        PaperProps={{
+          sx: {
+            marginTop: 2,
+            boxShadow: (theme) => theme.elevation[200],
+          },
+        }}
+        PopperProps={{
+          placement: 'bottom-start',
+        }}
+      />
+    );
+  }
+);
 
 export default DatePicker;
