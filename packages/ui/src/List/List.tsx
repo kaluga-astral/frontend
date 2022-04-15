@@ -6,20 +6,24 @@ import { ListProps } from './types';
 import { StyledList } from './styled';
 
 export const List = ({
-  collapsed = true,
+  collapsed,
   collapsedSize,
   children,
   ...props
-}: ListProps) => (
-  <StyledList {...props}>
-    <ListProvider value={{ open: collapsed }}>
-      <Collapse
-        orientation="horizontal"
-        in={collapsed}
-        collapsedSize={collapsedSize}
-      >
-        {children}
-      </Collapse>
-    </ListProvider>
-  </StyledList>
-);
+}: ListProps) => {
+  const open = collapsed === undefined || collapsed;
+
+  return (
+    <StyledList {...props}>
+      <ListProvider value={{ open }}>
+        <Collapse
+          orientation="horizontal"
+          in={open}
+          collapsedSize={collapsedSize}
+        >
+          {children}
+        </Collapse>
+      </ListProvider>
+    </StyledList>
+  );
+};

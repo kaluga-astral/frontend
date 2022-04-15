@@ -6,7 +6,7 @@ import { ListContext } from '../ListProvider';
 import { StyledListItemText } from './styled';
 
 export const ListItemText = ({ ...props }: ListItemTextProps) => {
-  const listContext = useContext(ListContext);
+  const { open } = useContext(ListContext);
 
-  return <StyledListItemText {...props} open={listContext.open} />;
+  return <StyledListItemText {...props} open={open} />;
 };
