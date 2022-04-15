@@ -5,12 +5,9 @@ import { ListProvider } from '../ListProvider';
 import { ListProps } from './types';
 import { StyledList } from './styled';
 
-export const List = ({
-  collapsed,
-  collapsedSize,
-  children,
-  ...props
-}: ListProps) => {
+const COLLAPSED_SIZE = 60;
+
+export const List = ({ collapsed, children, ...props }: ListProps) => {
   const open = collapsed === undefined || collapsed;
 
   return (
@@ -19,7 +16,7 @@ export const List = ({
         <Collapse
           orientation="horizontal"
           in={open}
-          collapsedSize={collapsedSize}
+          collapsedSize={COLLAPSED_SIZE}
         >
           {children}
         </Collapse>
