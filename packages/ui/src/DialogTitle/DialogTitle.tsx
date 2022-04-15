@@ -11,6 +11,8 @@ export const DialogTitle = ({
   onClose,
   ...props
 }: DialogTitleProps) => {
+  // 'escapeKeyDown'  в документашке написано что это опциональный тип, и можно стрингу любую туда закидывать, а по факту либо escapeKeyDown либо backdropClick
+
   const onClickTitle = useCallback(
     (e) => onClose && onClose(e, 'escapeKeyDown'),
     [onClose]

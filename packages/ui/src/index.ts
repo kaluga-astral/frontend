@@ -38,6 +38,7 @@ export * from './TextField';
 export * from './Typography';
 export * from './Tooltip';
 export * from './SideDialog';
+export * from './SideDialogTitle';
 export * from './SideDialogActions';
 export * from './SideDialogContent';
 export * from './SideDialogContentText';

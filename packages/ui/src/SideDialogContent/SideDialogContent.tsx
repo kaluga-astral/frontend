@@ -1,1 +1,1 @@
-export { DialogContent as SideDialogContent } from '@mui/material';
+export { DialogContent as SideDialogContent } from '../DialogContent';
