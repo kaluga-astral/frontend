@@ -21,6 +21,7 @@ export * from './ListItemButton';
 export * from './ListItemIcon';
 export * from './ListItemSecondaryAction';
 export * from './ListItemText';
+export * from './ListProvider';
 export * from './ListSubheader';
 export * from './MaskField';
 export * from './Menu';
