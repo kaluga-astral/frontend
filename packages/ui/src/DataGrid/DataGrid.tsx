@@ -53,7 +53,7 @@ export function DataGrid<T>({
           )
         );
       },
-    [selectedRows]
+    [selectedRows, onSelectRow]
   );
 
   const uncheckedRowsCount = useMemo(() => {

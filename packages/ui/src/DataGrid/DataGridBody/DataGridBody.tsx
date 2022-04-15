@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
@@ -22,13 +22,16 @@ export function DataGridBody<T>({
     if (rows.length > 0 && !initialized) setInitialized(true);
   }, [rows, initialized]);
 
-  const renderCells = (row: T, rowId: string) => {
-    return columns.map((cell, index) => {
-      const cellId = `${rowId}-${index}`;
+  const renderCells = useCallback(
+    (row: T, rowId: string) => {
+      return columns.map((cell, index) => {
+        const cellId = `${rowId}-${index}`;
 
-      return <DataGridCell key={cellId} row={row} cell={cell} />;
-    });
-  };
+        return <DataGridCell key={cellId} row={row} cell={cell} />;
+      });
+    },
+    [columns]
+  );
 
   const renderedRows = useMemo(() => {
     return rows.map((row) => {

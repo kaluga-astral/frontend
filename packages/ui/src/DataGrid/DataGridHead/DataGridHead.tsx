@@ -2,11 +2,10 @@ import { useCallback, useMemo } from 'react';
 
 import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
-import { Typography } from '../../Typography';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../constants';
 
-import { StyledTableCell, StyledTableSortLabel } from './styled';
+import DataGridHeadColumns from './DataGridHeadColumns';
 import { DataGridHeadProps } from './types';
 
 export function DataGridHead<T>({
@@ -55,33 +54,6 @@ export function DataGridHead<T>({
     [sorting]
   );
 
-  const renderedColumns = useMemo(() => {
-    return columns.map(({ field, label, sortable, align, renderCell }) => {
-      const sortParams = sorting.find(({ fieldId }) => field === fieldId);
-      const hideSortIcon = !Boolean(sortParams);
-      const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
-      const fitContent = Boolean(renderCell);
-
-      return (
-        <StyledTableCell
-          key={field}
-          onClick={handleSort(field, sortable)}
-          fitContent={fitContent}
-          align={align}
-        >
-          <Typography variant="pointer">{label}</Typography>
-          {sortable && (
-            <StyledTableSortLabel
-              hideSortIcon={hideSortIcon}
-              direction={sortDirection}
-              active
-            />
-          )}
-        </StyledTableCell>
-      );
-    });
-  }, [columns, sorting]);
-
   return (
     <TableHead>
       <TableRow>
@@ -94,7 +66,11 @@ export function DataGridHead<T>({
             />
           </TableCell>
         )}
-        {renderedColumns}
+        <DataGridHeadColumns
+          columns={columns}
+          onSort={handleSort}
+          sorting={sorting}
+        />
       </TableRow>
     </TableHead>
   );

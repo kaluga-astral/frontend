@@ -2,11 +2,10 @@ import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Button } from '../Button';
-import { Pagination as PaginationComponent } from '../Pagination';
 
 import { DataGrid } from './DataGrid';
+import { DataGridPagination } from './DataGridPagination';
 import { CellValue, DataGridColumns, DataGridSort } from './types';
-import { usePagination } from './DataGridPagination/usePagination';
 
 export default {
   title: 'Components/DataGrid',
@@ -217,13 +216,6 @@ const Template: Story = (args) => {
     }, 1500);
   };
 
-  const Pagination = usePagination({
-    Pagination: PaginationComponent,
-    totalCount: data.length,
-    onChange: handleChangePage,
-    page,
-  });
-
   const handleSelect = (rows: ColumnsType[]) => setSelected(rows);
 
   const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
@@ -240,7 +232,13 @@ const Template: Story = (args) => {
       loading={loading}
       onSort={handleSort}
       sorting={sorting}
-      pagination={Pagination}
+      pagination={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
     />
   );
 };
