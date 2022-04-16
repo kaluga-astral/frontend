@@ -71,7 +71,7 @@ export const Autocomplete = <
     const selected = Boolean(option['aria-selected']);
 
     return (
-      <MenuItem {...option}>
+      <MenuItem {...option} key={option.id}>
         {multiple && (
           <ListItemIcon>
             <Checkbox checked={selected} />
