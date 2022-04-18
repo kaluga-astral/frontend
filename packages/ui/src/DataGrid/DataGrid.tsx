@@ -14,6 +14,7 @@ export function DataGrid<T>({
   selectedRows = [],
   sorting = [],
   maxHeight,
+  minDisplayRows = 10,
   onSelectRow,
   Footer,
   loading,
@@ -79,6 +80,7 @@ export function DataGrid<T>({
           <DataGridBody
             keyId={keyId}
             selectedRows={selectedRows}
+            minDisplayRows={minDisplayRows}
             onSelectRow={handleSelectRow}
             selectable={selectable}
             rows={rows}

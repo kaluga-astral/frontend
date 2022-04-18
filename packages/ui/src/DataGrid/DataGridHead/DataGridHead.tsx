@@ -4,8 +4,8 @@ import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../constants';
+import { DataGridHeadColumn } from '../DataGridHeadColumn';
 
-import DataGridHeadColumns from './DataGridHeadColumns';
 import { DataGridHeadProps } from './types';
 
 export function DataGridHead<T>({
@@ -54,6 +54,28 @@ export function DataGridHead<T>({
     [sorting]
   );
 
+  const renderColumns = useMemo(() => {
+    return columns.map(({ field, label, sortable, align, renderCell }) => {
+      const sortParams = sorting.find(({ fieldId }) => field === fieldId);
+      const hideSortIcon = !Boolean(sortParams);
+      const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
+      const fitContent = Boolean(renderCell);
+
+      return (
+        <DataGridHeadColumn
+          field={field}
+          fitContent={fitContent}
+          sortDirection={sortDirection}
+          hideSortIcon={hideSortIcon}
+          onSort={handleSort}
+          label={label}
+          sortable={sortable}
+          align={align}
+        />
+      );
+    });
+  }, [columns, handleSort, sorting]);
+
   return (
     <TableHead>
       <TableRow>
@@ -66,11 +88,7 @@ export function DataGridHead<T>({
             />
           </TableCell>
         )}
-        <DataGridHeadColumns
-          columns={columns}
-          onSort={handleSort}
-          sorting={sorting}
-        />
+        {renderColumns}
       </TableRow>
     </TableHead>
   );

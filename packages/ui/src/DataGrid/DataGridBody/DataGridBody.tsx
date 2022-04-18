@@ -13,6 +13,7 @@ export function DataGridBody<T>({
   selectable,
   onSelectRow,
   selectedRows = [],
+  minDisplayRows,
   keyId,
 }: DataGridBodyProps<T>) {
   // флаг для индикации первой отрисовки компонента. когда данных еще нет - высота tableBody 0. при initialized=false
@@ -57,6 +58,8 @@ export function DataGridBody<T>({
   }, [rows, keyId, selectable, selectedRows, onSelectRow, columns]);
 
   return (
-    <StyledTableBody initialized={initialized}>{renderedRows}</StyledTableBody>
+    <StyledTableBody initialized={initialized} minDisplayRows={minDisplayRows}>
+      {renderedRows}
+    </StyledTableBody>
   );
 }

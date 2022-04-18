@@ -33,6 +33,7 @@ export type DataGridProps<T = DataGridRow> = {
   Footer?: ReactNode;
   maxHeight?: number;
   loading?: boolean;
+  minDisplayRows?: number;
 };
 
 export type DataGridColumns<Column extends {}> = {

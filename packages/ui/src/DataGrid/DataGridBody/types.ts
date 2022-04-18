@@ -9,4 +9,5 @@ export type DataGridBodyProps<T = DataGridRow> = {
   selectedRows?: Array<T>;
   rows: T[];
   onSelectRow: (row: T) => (event: ChangeEvent<HTMLInputElement>) => void;
+  minDisplayRows: number;
 };

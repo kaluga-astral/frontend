@@ -11,9 +11,3 @@ export type DataGridHeadProps<T = DataGridRow> = {
   uncheckedRowsCount: number;
   rowsCount: number;
 };
-
-export type DataGridHeadColumnsProps<T = DataGridRow> = {
-  columns: DataGridColumns<T>[];
-  onSort: (field: keyof T, sortable: boolean | undefined) => () => void;
-  sorting: DataGridSort<T>[];
-};
