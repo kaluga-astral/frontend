@@ -9,4 +9,5 @@ export type SelectProps = MuiSelectProps &
   > & {
     loading?: boolean;
     placeholder?: string;
+    getOptionLabel?: (value: string | number) => string | number;
   };
