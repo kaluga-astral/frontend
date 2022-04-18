@@ -15,7 +15,7 @@ export function DataGrid<T>({
   sorting = [],
   maxHeight,
   onSelectRow,
-  pagination,
+  Footer,
   loading,
   onSort,
   keyId,
@@ -87,7 +87,7 @@ export function DataGrid<T>({
         </Table>
         <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      {pagination}
+      {Footer}
     </DataGridContainer>
   );
 }

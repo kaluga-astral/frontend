@@ -30,7 +30,7 @@ export type DataGridProps<T = DataGridRow> = {
   onSelectRow?: (row: T[]) => void;
   sorting?: DataGridSort<T>[];
   onSort: (sorting: DataGridSort<T>[]) => void;
-  pagination?: ReactNode;
+  Footer?: ReactNode;
   maxHeight?: number;
   loading?: boolean;
 };

@@ -15,7 +15,8 @@ export function DataGridBody<T>({
   selectedRows = [],
   keyId,
 }: DataGridBodyProps<T>) {
-  // флаг для индикации первой отрисовки компонента
+  // флаг для индикации первой отрисовки компонента. когда данных еще нет - высота tableBody 0. при initialized=false
+  // устанавливается высота по-умолчанию.
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {

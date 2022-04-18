@@ -2,9 +2,9 @@ import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Button } from '../Button';
+import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
-import { DataGridPagination } from './DataGridPagination';
 import { CellValue, DataGridColumns, DataGridSort } from './types';
 
 export default {
@@ -232,7 +232,7 @@ const Template: Story = (args) => {
       loading={loading}
       onSort={handleSort}
       sorting={sorting}
-      pagination={
+      Footer={
         <DataGridPagination
           totalCount={data.length}
           onChange={handleChangePage}

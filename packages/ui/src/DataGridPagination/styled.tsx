@@ -1,5 +1,5 @@
-import { styled } from '../../styles';
-import { Typography } from '../../Typography';
+import { styled } from '../styles';
+import { Typography } from '../Typography';
 
 export const PaginationWrapper = styled.div`
   display: flex;

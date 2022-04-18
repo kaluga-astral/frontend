@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { Pagination } from '../../Pagination';
+import { Pagination } from '../Pagination';
 
 import { PaginationWrapper, Range } from './styled';
 import { DataGridPaginationProps } from './types';

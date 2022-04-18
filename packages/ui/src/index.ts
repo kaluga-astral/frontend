@@ -5,6 +5,7 @@ export * from './ButtonBase';
 export * from './Checkbox';
 export * from './DashboardLayout';
 export * from './DataGrid';
+export * from './DataGridPagination';
 export * from './Dialog';
 export * from './DialogActions';
 export * from './DialogContent';
