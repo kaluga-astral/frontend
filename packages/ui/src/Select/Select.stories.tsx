@@ -147,7 +147,7 @@ export const Showcase: Story = () => {
         value={multipleValue}
         label="Multiple"
         onChange={handleMultipleChange}
-        getOptionsLabel={getOptionLabel}
+        getOptionLabel={getOptionLabel}
         multiple
       >
         {renderMultipleOptions()}
@@ -158,7 +158,7 @@ export const Showcase: Story = () => {
         label="Loading"
         onChange={handleMultipleChange}
         onOpen={handleFetchOptions}
-        getOptionsLabel={getOptionLabel}
+        getOptionLabel={getOptionLabel}
         loading={loading}
         multiple
       >
