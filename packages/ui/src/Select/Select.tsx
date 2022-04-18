@@ -42,7 +42,7 @@ export const Select = ({
       return placeholder;
     }
 
-    return getOptionLabel(selectedOptions as string | number) as string;
+    return getOptionLabel(selectedOptions as string | number);
   };
 
   const isNoData = !Boolean(React.Children.count(children));
