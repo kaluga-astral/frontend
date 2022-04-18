@@ -23,6 +23,14 @@ const OPTIONS: string[] = [
   'Value 8',
 ];
 
+const MULTIPLE_OPTIONS: Array<{ value: number; name: string }> = [
+  { value: 1, name: 'Валерий 1' },
+  { value: 2, name: 'Валерий 2' },
+  { value: 3, name: 'Валерий 3' },
+  { value: 4, name: 'Валерий 4' },
+  { value: 5, name: 'Валерий 5' },
+];
+
 const Template: Story = (args) => {
   const [singleValue, setSingleValue] = React.useState('');
   const handleSingleChange = (event) => setSingleValue(event.target.value);
@@ -74,15 +82,15 @@ export const Showcase: Story = () => {
   };
 
   const renderMultipleOptions = () => {
-    return OPTIONS.map((option) => {
-      const checked = multipleValue.includes(option);
+    return MULTIPLE_OPTIONS.map(({ value, name }) => {
+      const checked = multipleValue.includes(value);
 
       return (
-        <MenuItem value={option} key={option}>
+        <MenuItem value={value} key={value}>
           <ListItemIcon>
             <Checkbox checked={checked} />
           </ListItemIcon>
-          {option}
+          {name}
         </MenuItem>
       );
     });
@@ -94,6 +102,14 @@ export const Showcase: Story = () => {
         {option}
       </MenuItem>
     ));
+  };
+
+  const getOptionLabel = (value: string | number) => {
+    const optionLabel = MULTIPLE_OPTIONS.find(
+      (option) => option.value === value
+    );
+
+    return optionLabel?.name || value;
   };
 
   return (
@@ -131,6 +147,7 @@ export const Showcase: Story = () => {
         value={multipleValue}
         label="Multiple"
         onChange={handleMultipleChange}
+        getOptionsLabel={getOptionLabel}
         multiple
       >
         {renderMultipleOptions()}
@@ -141,6 +158,7 @@ export const Showcase: Story = () => {
         label="Loading"
         onChange={handleMultipleChange}
         onOpen={handleFetchOptions}
+        getOptionsLabel={getOptionLabel}
         loading={loading}
         multiple
       >

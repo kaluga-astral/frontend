@@ -13,6 +13,7 @@ export const Select = ({
   multiple,
   loading,
   placeholder,
+  getOptionsLabel,
   helperText,
   success,
   children,
@@ -25,9 +26,11 @@ export const Select = ({
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
         <TagsWrapper>
-          {selectedOptions.map((option) => (
-            <Tag key={option} color="grey" label={option} />
-          ))}
+          {selectedOptions.map((option) => {
+            const optionLabel = getOptionsLabel?.(option) || option;
+
+            return <Tag key={option} color="grey" label={optionLabel} />;
+          })}
         </TagsWrapper>
       );
     }
@@ -39,7 +42,8 @@ export const Select = ({
       return placeholder;
     }
 
-    return selectedOptions as string;
+    return (getOptionsLabel?.(selectedOptions as string | number) ||
+      selectedOptions) as string;
   };
 
   const isNoData = !Boolean(React.Children.count(children));
