@@ -33,6 +33,7 @@ export type DataGridProps<T = DataGridRow> = {
   Footer?: ReactNode;
   maxHeight?: number;
   loading?: boolean;
+  // используется для отображения переданного кол-ва строк при отсутствии данных
   minDisplayRows?: number;
 };
 
