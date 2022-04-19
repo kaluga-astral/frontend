@@ -5,9 +5,7 @@ import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { ...restProps } = props;
-
-    return <LoadingButton ref={ref} {...restProps} />;
+    return <LoadingButton ref={ref} {...props} />;
   }
 );
 

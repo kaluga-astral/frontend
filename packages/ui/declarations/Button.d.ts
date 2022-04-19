@@ -1,9 +1,15 @@
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
-    variant?: 'contained' | 'light' | 'text' | 'link';
+    contained: true;
+    light: true;
+    text: true;
+    link: true;
   }
 
   interface ButtonPropsColorVariantOverrides {
-    color?: 'primary' | 'success' | 'warning' | 'error';
+    primary: true;
+    success: true;
+    warning: true;
+    error: true;
   }
 }
