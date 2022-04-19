@@ -229,7 +229,7 @@ const Template: Story = (args) => {
       columns={columns}
       selectedRows={selected}
       onSelectRow={handleSelect}
-      minDisplayRows={4}
+      minDisplayRows={10}
       loading={loading}
       onSort={handleSort}
       sorting={sorting}

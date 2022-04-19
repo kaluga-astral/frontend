@@ -4,9 +4,8 @@ import { TableBody } from '../../Table';
 const TABLE_ROW_HEIGHT = 44;
 
 export const StyledTableBody = styled(TableBody, {
-  shouldForwardProp: (prop) =>
-    prop !== 'initialized' && prop !== 'minDisplayRows',
-})<{ initialized: boolean; minDisplayRows: number }>`
-  height: ${({ initialized, minDisplayRows }) =>
-    !initialized ? `${TABLE_ROW_HEIGHT * minDisplayRows}px` : 'auto'};
+  shouldForwardProp: (prop) => prop !== 'empty' && prop !== 'minDisplayRows',
+})<{ empty: boolean; minDisplayRows: number }>`
+  height: ${({ empty, minDisplayRows }) =>
+    empty ? `${TABLE_ROW_HEIGHT * minDisplayRows}px` : 'auto'};
 `;

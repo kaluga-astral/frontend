@@ -1,12 +1,11 @@
 import { TableCellProps } from '@mui/material';
 
-import { DataGridRow, SortState } from '../types';
+import { DataGridSort, RenderCell } from '../types';
 
-export type DataGridHeadColumnProps<T = DataGridRow> = {
+export type DataGridHeadColumnProps<T> = {
   onSort: (field: keyof T, sortable: boolean | undefined) => () => void;
-  fitContent: boolean;
-  sortDirection: SortState;
-  hideSortIcon: boolean;
+  sorting: DataGridSort<T>[];
+  renderCell?: RenderCell<T>;
   label?: string;
   sortable?: boolean;
   align?: TableCellProps['align'];

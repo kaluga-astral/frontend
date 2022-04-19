@@ -1,18 +1,23 @@
 import { Typography } from '../../Typography/Typography';
+import { SortStates } from '../constants';
 
 import { StyledTableCell, StyledTableSortLabel } from './styled';
 import { DataGridHeadColumnProps } from './types';
 
-export const DataGridHeadColumn = ({
+export function DataGridHeadColumn<T>({
   onSort,
   field,
   sortable,
   align,
   label,
-  fitContent,
-  sortDirection,
-  hideSortIcon,
-}: DataGridHeadColumnProps) => {
+  sorting,
+  renderCell,
+}: DataGridHeadColumnProps<T>) {
+  const sortParams = sorting.find(({ fieldId }) => field === fieldId);
+  const hideSortIcon = !Boolean(sortParams);
+  const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
+  const fitContent = Boolean(renderCell);
+
   return (
     <StyledTableCell
       onClick={onSort(field, sortable)}
@@ -29,4 +34,4 @@ export const DataGridHeadColumn = ({
       )}
     </StyledTableCell>
   );
-};
+}

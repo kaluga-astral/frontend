@@ -56,17 +56,11 @@ export function DataGridHead<T>({
 
   const renderColumns = useMemo(() => {
     return columns.map(({ field, label, sortable, align, renderCell }) => {
-      const sortParams = sorting.find(({ fieldId }) => field === fieldId);
-      const hideSortIcon = !Boolean(sortParams);
-      const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
-      const fitContent = Boolean(renderCell);
-
       return (
         <DataGridHeadColumn
+          sorting={sorting}
+          renderCell={renderCell}
           field={field}
-          fitContent={fitContent}
-          sortDirection={sortDirection}
-          hideSortIcon={hideSortIcon}
           onSort={handleSort}
           label={label}
           sortable={sortable}
