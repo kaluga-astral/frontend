@@ -1,9 +1,6 @@
-import React from 'react';
+import { LoadingButtonProps } from '@mui/lab';
 
-import { BaseButtonProps } from '../ButtonBase';
-
-export type ButtonProps = BaseButtonProps & {
-  loading?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
+export type ButtonProps = Omit<LoadingButtonProps, 'variant' | 'color'> & {
+  variant?: 'contained' | 'light' | 'text' | 'link';
+  color?: 'primary' | 'success' | 'warning' | 'error';
 };

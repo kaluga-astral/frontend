@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 
 export type ProductProps = {
-  Logo: ReactNode;
+  Logo: FC;
   name: string;
 };

@@ -1,11 +1,23 @@
+import { Button } from '../../../Button';
 import { styled } from '../../../styles';
 
-export const Root = styled.div`
+export const Root = styled(Button)`
+  display: flex;
+  align-items: center;
+  height: auto;
+  padding: ${({ theme }) => theme.spacing(0.5, 0.5, 0.5, 2)};
+
+  text-align: right;
+`;
+
+export const User = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
+`;
 
-  text-align: right;
+export const Credentials = styled.div`
+  display: block;
 `;
 
 export const DisplayName = styled.div`

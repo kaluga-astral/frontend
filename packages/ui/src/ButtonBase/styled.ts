@@ -19,7 +19,7 @@ type StyledButtonBaseProps = Omit<BaseButtonProps, 'color' | 'variant'> & {
   customVariant?: ButtonVariant;
 };
 
-type StyledButtonBaseThemeProps = {
+export type StyledButtonBaseThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   size?: ButtonSize;

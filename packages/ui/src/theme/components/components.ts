@@ -1,7 +1,9 @@
+import type {} from '@mui/lab/themeAugmentation';
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 
+import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
 import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
@@ -14,6 +16,7 @@ import { MuiDialog } from './MuiDialog';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
+import { MuiLoadingButton } from './MuiLoadingButton';
 
 export type FontsUrls = {
   bold: {
@@ -117,6 +120,8 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiButton,
+  MuiLoadingButton,
   MuiButtonBase,
   MuiTypography,
   MuiInputBase,
