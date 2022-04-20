@@ -10,6 +10,7 @@ import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
 import { MuiInputLabel } from './MuiInputLabel';
 import { MuiOutlinedInput } from './MuiOutlinedInput';
+import { MuiPaginationItem } from './MuiPaginationItem';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
 import { MuiDialog } from './MuiDialog';
@@ -17,6 +18,8 @@ import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
 import { MuiLoadingButton } from './MuiLoadingButton';
+import { MuiTableCell } from './MuiTableCell';
+import { MuiTableHead } from './MuiTableHead';
 import { MuiPickersDay } from './MuiPickersDay';
 import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
@@ -51,7 +54,7 @@ const getMuiCssBaseline = (
       font-display: swap;
       src: url(${fontUrls.light.woff2}) format('woff2'), url(${fontUrls.light.woff}) format('woff');
     }
-    @font-face {
+    @font-face { 
       font-family: 'Ubuntu';
       font-style: 'normal';
       font-weight: 400;
@@ -141,6 +144,9 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogTitle,
   MuiDialogContent,
   MuiDialogActions,
+  MuiTableCell,
+  MuiTableHead,
+  MuiPaginationItem,
   MuiPickersDay,
   MuiCalendarPicker,
   MuiYearPicker,
