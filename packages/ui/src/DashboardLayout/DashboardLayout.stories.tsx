@@ -1,11 +1,10 @@
-import { ComponentMeta } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
   QuitOutlineMd,
   SettingsFillMd,
 } from '@astral/icons';
-import { MenuProps } from '@mui/material';
 
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
@@ -14,10 +13,7 @@ import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
 
 import { DashboardLayout } from './DashboardLayout';
-import {
-  DashboardLayoutStory,
-  DashboardLayoutStoryProps,
-} from './DashboardLayoutStory';
+import { DashboardLayoutStory } from './DashboardLayoutStory';
 import { DashboardLayoutStoryTemplate } from './DashboardLayoutStoryTemplate';
 
 export default {
@@ -28,9 +24,10 @@ export default {
   },
 } as ComponentMeta<typeof DashboardLayoutStory>;
 
-export const EDO = DashboardLayoutStoryTemplate.bind({});
+export const Story: ComponentStory<typeof DashboardLayoutStory> =
+  DashboardLayoutStoryTemplate.bind({});
 
-const args: DashboardLayoutStoryProps = {
+Story.args = {
   header: {
     nav: {
       product: {
@@ -54,7 +51,7 @@ const args: DashboardLayoutStoryProps = {
           </svg>
         ),
       },
-      // Menu,
+      // MenuList: () => <MenuList />,
     },
     profile: {
       displayName: 'Григорьев Виталий',
@@ -63,7 +60,7 @@ const args: DashboardLayoutStoryProps = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      Menu: (props: MenuProps) => (
+      Menu: (props) => (
         <Menu {...props}>
           <MenuItem>
             <ListItemIcon>
@@ -95,5 +92,3 @@ const args: DashboardLayoutStoryProps = {
     },
   },
 };
-
-EDO.args = args;
