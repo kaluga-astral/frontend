@@ -6,7 +6,7 @@ import { MenuItem } from '../index';
 import { MenuList } from './MenuList';
 
 export default {
-  title: 'Components/MenList',
+  title: 'Components/MenuList',
   component: MenuList,
 };
 
