@@ -1,26 +1,18 @@
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
-import { LocalizationProvider } from '../LocalizationProvider';
-
 import { DatePicker } from './DatePicker';
+import { DatePickerProps } from './types';
 
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
 };
 
-const Template: Story = (args) => {
-  const [value, setValue] = useState<Date | null>();
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+const Template: Story<DatePickerProps> = (args) => {
+  const [value, setValue] = useState<Date | null>(new Date());
 
-  return (
-    <LocalizationProvider>
-      <DatePicker {...args} value={value} onChange={handleChange} />
-    </LocalizationProvider>
-  );
+  return <DatePicker {...args} selected={value} onChange={setValue} />;
 };
 
 export const Default = Template.bind({});
@@ -28,6 +20,7 @@ export const Default = Template.bind({});
 Default.args = {
   label: 'Дата начала:',
   disabled: false,
+  helperText: '',
 };
 
 Default.parameters = {
