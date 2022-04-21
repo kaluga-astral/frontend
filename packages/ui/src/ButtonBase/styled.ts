@@ -240,7 +240,6 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
 
     background-color: ${(props) =>
       getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
-    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:active {
@@ -257,5 +256,9 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
 
     background-color: ${getDisabledBgColor};
     cursor: unset;
+  }
+
+  &.${buttonUnstyledClasses.focusVisible} {
+    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 `;
