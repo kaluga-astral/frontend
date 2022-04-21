@@ -175,7 +175,6 @@ export const Template: Story = () => {
       </List>
       <List
         collapsed={listOpen}
-        collapsedSize={60}
         subheader={
           <ListSubheader
             sx={{
