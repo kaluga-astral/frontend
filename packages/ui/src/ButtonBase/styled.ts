@@ -14,12 +14,15 @@ import {
   ButtonVariant,
 } from './types';
 
-type StyledButtonBaseProps = Omit<BaseButtonProps, 'color' | 'variant'> & {
+export type StyledButtonBaseProps = Omit<
+  BaseButtonProps,
+  'color' | 'variant'
+> & {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
 };
 
-type StyledButtonBaseThemeProps = {
+export type StyledButtonBaseThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   size?: ButtonSize;
