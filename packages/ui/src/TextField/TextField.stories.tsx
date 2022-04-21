@@ -11,7 +11,7 @@ export default {
 export const Default: Story = () => {
   return (
     <Stack gap={4}>
-      <Stack gap={2} direction="row">
+      <Stack gap={2} direction="column">
         <TextField label="With label" />
         <TextField label="With placeholder" placeholder="Placeholder value" />
         <TextField focused label="Focused" defaultValue="Default value" />
