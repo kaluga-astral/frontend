@@ -5,8 +5,7 @@ import { styled } from '../styles';
 const styles = `
   display: inline-flex;
   justify-content: center;
-  width: 16px;
-  max-height: 16px;
+  font-size: 16px;
   vertical-align: middle;
 `;
 
