@@ -199,8 +199,9 @@ export const getDisabledBgColor = ({
   if (
     customVariant === ButtonVariants.LINK ||
     customVariant === ButtonVariants.TEXT
-  )
+  ) {
     return 'transparent';
+  }
 
   return theme.palette.grey['100'];
 };

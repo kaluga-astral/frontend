@@ -23,7 +23,7 @@ export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.ACTIVE,
+            buttonState: ButtonStates.DEFAULT,
           }),
         },
       };
