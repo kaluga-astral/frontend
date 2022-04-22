@@ -63,21 +63,7 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
             theme,
             buttonState: ButtonStates.HOVER,
           }),
-        },
-        '&:focus': {
-          color: getColor({
-            theme,
-            customVariant,
-            customColor,
-            buttonState: ButtonStates.FOCUS,
-          }),
-          backgroundColor: getBgColor({
-            customColor,
-            customVariant,
-            theme,
-            buttonState: ButtonStates.FOCUS,
-          }),
-          outline: `2px solid ${theme.palette.primary['400']}`,
+          boxShadow: 'none',
         },
         '&:active': {
           color: getColor({
@@ -100,7 +86,22 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
             theme,
             customVariant,
           }),
-          cursor: 'unset',
+        },
+        '&.Mui-focusVisible': {
+          color: getColor({
+            theme,
+            customVariant,
+            customColor,
+            buttonState: ButtonStates.FOCUS,
+          }),
+          backgroundColor: getBgColor({
+            customColor,
+            customVariant,
+            theme,
+            buttonState: ButtonStates.FOCUS,
+          }),
+          outline: `2px solid ${theme.palette.primary['400']}`,
+          boxShadow: 'none',
         },
       };
     },

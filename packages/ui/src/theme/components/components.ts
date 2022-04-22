@@ -5,6 +5,7 @@ import type { Theme } from '../baseTheme';
 
 import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
+import { MuiLoadingButton } from './MuiLoadingButton';
 import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
@@ -127,6 +128,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiButton,
   MuiButtonBase,
+  MuiLoadingButton,
   MuiTypography,
   MuiInputBase,
   MuiInputLabel,
