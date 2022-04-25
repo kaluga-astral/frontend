@@ -241,13 +241,16 @@ ButtonShowcase.parameters = { options: { showPanel: false } };
 const Template: Story = (args) => <Button {...args}>Label</Button>;
 
 export const ButtonStory = Template.bind({});
+
 ButtonStory.storyName = 'Button';
+
 ButtonStory.args = {
   disabled: false,
   color: 'primary',
   variant: 'contained',
   size: 'medium',
 };
+
 ButtonStory.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

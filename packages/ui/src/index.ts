@@ -3,6 +3,7 @@ export * from './Badge';
 export * from './Button';
 export * from './ButtonBase';
 export * from './Checkbox';
+export * from './CircularProgress';
 export * from './DashboardLayout';
 export * from './DataGrid';
 export * from './DataGridPagination';
