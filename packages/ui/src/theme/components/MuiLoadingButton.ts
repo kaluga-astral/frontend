@@ -28,5 +28,17 @@ export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
         },
       };
     },
+    loadingIndicator({ ownerState, theme }) {
+      const customVariant =
+        ownerState.variant as StyledButtonBaseThemeProps['customVariant'];
+
+      return {
+        ...(customVariant === 'contained' && {
+          color: theme.palette.primary.contrastText,
+        }),
+      };
+    },
   },
 };
+
+export default MuiLoadingButton;

@@ -23,6 +23,7 @@ import { MuiTableHead } from './MuiTableHead';
 import { MuiPickersDay } from './MuiPickersDay';
 import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
+import { MuiCircularProgress } from './MuiCircularProgress';
 
 export type FontsUrls = {
   bold: {
@@ -150,4 +151,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiPickersDay,
   MuiCalendarPicker,
   MuiYearPicker,
+  MuiCircularProgress,
 });
