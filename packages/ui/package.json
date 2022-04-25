@@ -12,6 +12,7 @@
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
     "build": "commander build",
     "publish": "npm publish ./lib",
+    "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "test": "react-scripts test --env=jsdom",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
