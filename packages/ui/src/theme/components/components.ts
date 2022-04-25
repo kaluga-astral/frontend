@@ -4,7 +4,6 @@ import type { Theme } from '../baseTheme';
 
 import { MuiButtonBase } from './MuiButtonBase';
 import { MuiInputBase } from './MuiInputBase';
-import { MuiFormControl } from './MuiFormControl';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
 import { MuiInputLabel } from './MuiInputLabel';
@@ -130,7 +129,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiInputLabel,
   MuiOutlinedInput,
   MuiFormLabel,
-  MuiFormControl,
   MuiFormHelperText,
   MuiAutocomplete,
   MuiCheckbox,
