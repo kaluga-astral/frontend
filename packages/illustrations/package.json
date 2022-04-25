@@ -1,7 +1,7 @@
 {
   "name": "@astral/illustrations",
   "main": "./src",
-  "version": "0.22.1",
+  "version": "0.23.0-alpha.0",
   "scripts": {
     "prebuild": "rimraf ./lib",
     "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",
