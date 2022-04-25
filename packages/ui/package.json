@@ -1,6 +1,6 @@
 {
   "name": "@astral/ui",
-  "version": "0.23.0-alpha.3",
+  "version": "0.23.0-alpha.4",
   "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {
@@ -19,7 +19,7 @@
     "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix"
   },
   "dependencies": {
-    "@astral/icons": "^0.23.0-alpha.3",
+    "@astral/icons": "^0.23.0-alpha.4",
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.8.1",
     "@emotion/server": "11.4.0",
