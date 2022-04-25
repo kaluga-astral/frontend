@@ -1,6 +1,8 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
+import { MenuItem } from '../MenuItem';
+
 import { Autocomplete } from './Autocomplete';
 
 export default {
@@ -76,6 +78,17 @@ export const Showcase: Story = () => (
       multiple
       options={[]}
       getOptionLabel={(params) => params.title}
+    />
+    <Autocomplete
+      label="Custom render option"
+      size="small"
+      options={OPTIONS}
+      getOptionLabel={(params) => params.title}
+      renderOption={(props, option) => (
+        <MenuItem {...props} key={props.id}>
+          Custom render option - {option.title}
+        </MenuItem>
+      )}
     />
   </Stack>
 );
