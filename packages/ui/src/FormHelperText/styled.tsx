@@ -6,7 +6,7 @@ import { styled } from '../styles';
 const getStyles = (theme: Theme) => {
   return `display: inline-flex;
   justify-content: center;
-  font-size: ${theme.typography.pxToRem(16)};
+  font-size: ${theme.typography.h5.fontSize};
   vertical-align: middle;`;
 };
 
