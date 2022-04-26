@@ -16,6 +16,7 @@ export const Showcase = () => {
       <Typography variant="h3">ЭДО</Typography>
       <Box>
         <Product
+          href="#route"
           logo={() => (
             <svg
               width="20"

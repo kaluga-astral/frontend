@@ -31,6 +31,7 @@ export * from './Menu';
 export * from './MenuItem';
 export * from './MenuList';
 export * from './Placeholder';
+export * from './Product';
 export * from './Select';
 export * from './styles';
 export * from './StylesCacheProvider';

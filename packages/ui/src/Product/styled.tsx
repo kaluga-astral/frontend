@@ -2,7 +2,7 @@ import { Button } from '../Button';
 import { styled } from '../styles';
 
 export const Root = styled(Button)`
-  display: flex;
+  display: inline-flex;
   gap: 10px;
   align-items: center;
 `;
