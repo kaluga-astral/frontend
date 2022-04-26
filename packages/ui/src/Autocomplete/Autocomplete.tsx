@@ -1,10 +1,11 @@
 import {
   AutocompleteRenderGetTagProps,
   AutocompleteRenderInputParams,
+  AutocompleteRenderOptionState,
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
 } from '@mui/material';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useCallback } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField } from '../TextField';
@@ -19,72 +20,92 @@ export const Autocomplete = <
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean
->({
-  multiple,
-  placeholder,
-  error,
-  success,
-  helperText,
-  label,
-  size = 'medium',
-  getOptionLabel,
-  ...props
-}: AutocompleteProps<
-  AutocompleteValueProps,
-  Multiple,
-  DisableClearable,
-  FreeSolo
->) => {
-  const renderTags = (
-    tags: AutocompleteValueProps[],
-    getTagProps: AutocompleteRenderGetTagProps
-  ) => {
-    return tags.map((tag: AutocompleteValueProps, index: number) => {
-      const title = (getOptionLabel && getOptionLabel(tag)) || '';
+>(
+  props: AutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >
+) => {
+  const {
+    multiple,
+    placeholder,
+    error,
+    success,
+    helperText,
+    label,
+    size = 'medium',
+    getOptionLabel,
+    renderOption: externalRenderOption,
+    ...restProps
+  } = props;
 
-      return (
-        <Tag
-          deleteIcon={<CrossSmOutlineSm />}
-          color="grey"
-          label={title}
-          {...getTagProps({ index })}
-        />
-      );
-    });
-  };
+  const renderTags = useCallback(
+    (
+      tags: AutocompleteValueProps[],
+      getTagProps: AutocompleteRenderGetTagProps
+    ) => {
+      return tags.map((tag: AutocompleteValueProps, index: number) => {
+        const title = (getOptionLabel && getOptionLabel(tag)) || '';
 
-  const renderInput = (inputParams: AutocompleteRenderInputParams) => (
-    <TextField
-      {...inputParams}
-      placeholder={placeholder}
-      label={label}
-      success={success}
-      error={error}
-      helperText={helperText}
-      size={size}
-    />
+        return (
+          <Tag
+            deleteIcon={<CrossSmOutlineSm />}
+            color="grey"
+            label={title}
+            {...getTagProps({ index })}
+          />
+        );
+      });
+    },
+    [getOptionLabel]
   );
 
-  const renderOption = (
-    option: HTMLAttributes<HTMLLIElement> & { key?: string }
-  ) => {
-    const selected = Boolean(option['aria-selected']);
+  const renderInput = useCallback(
+    (inputParams: AutocompleteRenderInputParams) => (
+      <TextField
+        {...inputParams}
+        placeholder={placeholder}
+        label={label}
+        success={success}
+        error={error}
+        helperText={helperText}
+        size={size}
+      />
+    ),
+    [placeholder, label, success, error, helperText, size]
+  );
 
-    return (
-      <MenuItem {...option} key={option.id}>
-        {multiple && (
-          <ListItemIcon>
-            <Checkbox checked={selected} />
-          </ListItemIcon>
-        )}
-        {option.key}
-      </MenuItem>
-    );
-  };
+  const renderOption = useCallback(
+    (
+      optionProps: HTMLAttributes<HTMLLIElement> & { key?: string },
+      option: AutocompleteValueProps,
+      optionState: AutocompleteRenderOptionState
+    ) => {
+      if (externalRenderOption) {
+        return externalRenderOption(optionProps, option, optionState);
+      }
+
+      const selected = Boolean(optionProps['aria-selected']);
+
+      return (
+        <MenuItem {...optionProps} key={optionProps.id}>
+          {multiple && (
+            <ListItemIcon>
+              <Checkbox checked={selected} />
+            </ListItemIcon>
+          )}
+          {optionProps.key}
+        </MenuItem>
+      );
+    },
+    [multiple, externalRenderOption]
+  );
 
   return (
     <MuiAutocomplete
-      {...props}
+      {...restProps}
       size={size}
       multiple={multiple}
       getOptionLabel={getOptionLabel}

@@ -1,41 +1,33 @@
-import { Story } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { CircularProgress } from './CircularProgress';
+import { CircularProgress as component } from './CircularProgress';
+import { CircularProgressStory } from './CircularProgressStory';
+import { CircularProgressStoryTemplate } from './CircularProgressStoryTemplate';
 
 export default {
   title: 'Components/CircularProgress',
-  component: CircularProgress,
-};
+  component,
+  parameters: {
+    options: {
+      showPanel: true,
+    },
+    controls: {
+      expanded: true,
+    },
+    backgrounds: {
+      default: 'dark',
+      values: [
+        { name: 'dark', value: '#B7C2CE' },
+        { name: 'light', value: '#EBEEF1' },
+      ],
+    },
+  },
+} as ComponentMeta<typeof CircularProgressStory>;
 
-const Template: Story = (args) => <CircularProgress {...args} />;
+export const CircularProgress: ComponentStory<typeof CircularProgressStory> =
+  CircularProgressStoryTemplate.bind({});
 
-export const Default = Template.bind({});
-
-Default.args = {
+CircularProgress.args = {
   color: 'primary',
   size: 'medium',
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
-
-export const Showcase: Story = (args) => <CircularProgress {...args} />;
-
-Showcase.args = {
-  color: 'inverted',
-  size: 'medium',
-};
-
-Showcase.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-  backgrounds: {
-    default: 'dark',
-    values: [
-      { name: 'dark', value: '#B7C2CE' },
-      { name: 'light', value: '#EBEEF1' },
-    ],
-  },
 };

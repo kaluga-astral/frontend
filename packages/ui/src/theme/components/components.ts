@@ -5,6 +5,7 @@ import type { Theme } from '../baseTheme';
 
 import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
+import { MuiLoadingButton } from './MuiLoadingButton';
 import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
@@ -17,12 +18,12 @@ import { MuiDialog } from './MuiDialog';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
-import { MuiLoadingButton } from './MuiLoadingButton';
 import { MuiTableCell } from './MuiTableCell';
 import { MuiTableHead } from './MuiTableHead';
 import { MuiPickersDay } from './MuiPickersDay';
 import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
+import { MuiCircularProgress } from './MuiCircularProgress';
 
 export type FontsUrls = {
   bold: {
@@ -127,8 +128,8 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
   MuiButton,
-  MuiLoadingButton,
   MuiButtonBase,
+  MuiLoadingButton,
   MuiTypography,
   MuiInputBase,
   MuiInputLabel,
@@ -150,4 +151,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiPickersDay,
   MuiCalendarPicker,
   MuiYearPicker,
+  MuiCircularProgress,
 });
