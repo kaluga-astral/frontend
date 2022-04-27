@@ -10,15 +10,24 @@ export default {
   component: TextField,
 };
 
-const TextFieldWithValidationOnBlur = (
-  props: Omit<TextFieldProps, 'error'>
-) => {
-  const [helperText, setHelperText] = useState<string>('');
+const TextFieldWithValidationOnBlur = ({
+  error,
+  success,
+  helperText,
+  ...restProps
+}: TextFieldProps) => {
+  const [isVisibleHelperText, setVisibleHelperText] = useState<boolean>(false);
   const handleBlur = () => {
-    setHelperText('Ошибка, проверка не пройдена');
+    setVisibleHelperText(true);
   };
   return (
-    <TextField error helperText={helperText} onBlur={handleBlur} {...props} />
+    <TextField
+      {...restProps}
+      error={isVisibleHelperText ? error : null}
+      success={isVisibleHelperText ? success : null}
+      helperText={isVisibleHelperText ? helperText : null}
+      onBlur={handleBlur}
+    />
   );
 };
 
@@ -57,7 +66,16 @@ export const Default: Story = () => {
         />
       </Stack>
       <Stack gap={2} direction="row">
-        <TextFieldWithValidationOnBlur label="onBlur validate" />
+        <TextFieldWithValidationOnBlur
+          error
+          label="onBlur error validate"
+          helperText="Ошибка, проверка не пройдена"
+        />
+        <TextFieldWithValidationOnBlur
+          success
+          label="onBlur success validate"
+          helperText="Проверка успешно пройдена"
+        />
       </Stack>
       <Stack gap={2} direction="row">
         <TextField disabled label="Disabled" defaultValue="Default value" />
