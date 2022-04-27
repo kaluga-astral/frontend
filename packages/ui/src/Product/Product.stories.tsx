@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 
@@ -10,13 +11,18 @@ export default {
   component: Product,
 } as ComponentMeta<typeof Product>;
 
+const AdaptedLink = forwardRef<HTMLAnchorElement>((props, ref) => {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <a ref={ref} {...props} href="#123" />;
+});
+
 export const Showcase = () => {
   return (
     <Stack gap={4}>
       <Typography variant="h3">ЭДО</Typography>
       <Box>
         <Product
-          href="#route"
+          component={AdaptedLink}
           logo={() => (
             <svg
               width="20"
