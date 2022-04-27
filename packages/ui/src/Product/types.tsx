@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
-export type ProductProps = {
+import { ButtonProps } from '../Button';
+
+export type ProductProps = ButtonProps & {
   logo: FC;
   name: string;
 };

@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 
+import { Profile } from '../../Profile';
+
 import { Nav } from './Nav';
-import { Profile } from './Profile';
 import { Root } from './styled';
 import { HeaderProps } from './types';
 

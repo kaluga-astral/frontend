@@ -1,17 +1,17 @@
 import { forwardRef } from 'react';
 
-import { Name, Root } from './styled';
+import { Button } from '../Button';
+
 import { ProductProps } from './types';
 
 export const Product = forwardRef<HTMLButtonElement, ProductProps>(
   (props, ref) => {
-    const { logo: Logo, name, ...restProps } = props;
+    const { logo: Logo, name, variant = 'text', ...restProps } = props;
 
     return (
-      <Root ref={ref} variant="text" {...restProps}>
-        <Logo />
-        <Name>{name}</Name>
-      </Root>
+      <Button ref={ref} {...restProps} variant={variant} startIcon={<Logo />}>
+        {name}
+      </Button>
     );
   }
 );

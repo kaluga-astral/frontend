@@ -1,5 +1,5 @@
-import { Button } from '../../../Button';
-import { styled } from '../../../styles';
+import { Button } from '../Button';
+import { styled } from '../styles';
 
 export const Root = styled(Button)`
   display: flex;
