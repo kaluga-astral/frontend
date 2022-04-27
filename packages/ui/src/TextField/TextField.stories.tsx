@@ -16,16 +16,16 @@ const TextFieldWithValidationOnBlur = ({
   helperText,
   ...restProps
 }: TextFieldProps) => {
-  const [isVisibleHelperText, setVisibleHelperText] = useState<boolean>(false);
+  const [isValidated, setValidated] = useState<boolean>(false);
   const handleBlur = () => {
-    setVisibleHelperText(true);
+    setValidated(true);
   };
   return (
     <TextField
       {...restProps}
-      error={isVisibleHelperText ? error : null}
-      success={isVisibleHelperText ? success : null}
-      helperText={isVisibleHelperText ? helperText : null}
+      error={isValidated ? error : null}
+      success={isValidated ? success : null}
+      helperText={isValidated ? helperText : null}
       onBlur={handleBlur}
     />
   );
