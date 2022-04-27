@@ -1,3 +1,5 @@
+import { ChevronDOutlineMd } from '@astral/icons';
+
 import { Button } from '../Button';
 import { styled } from '../styles';
 
@@ -30,4 +32,17 @@ export const Annotation = styled.div`
   color: ${({ theme }) => theme.palette.grey[500]};
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
+`;
+
+export const Chevron = styled(ChevronDOutlineMd)<{ open: boolean }>`
+  transform: ${({ open }) => {
+    return open ? 'rotateZ(180deg)' : ' rotateZ(0deg)';
+  }};
+
+  transition: ${({ theme }) => {
+    return theme.transitions.create('transform', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }) ;
+  }};
 `;

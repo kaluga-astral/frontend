@@ -1,8 +1,14 @@
 import { Fragment, forwardRef, useCallback, useRef, useState } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
-import { ChevronDOutlineMd } from '@astral/icons';
 
-import { Annotation, Credentials, DisplayName, Root, User } from './styled';
+import {
+  Annotation,
+  Chevron,
+  Credentials,
+  DisplayName,
+  Root,
+  User,
+} from './styled';
 import { ProfileProps } from './types';
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
@@ -10,7 +16,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { displayName, annotation, avatar = {}, menu: Menu } = props;
 
     const [open, setOpen] = useState(false);
-    const anchorRef = useRef<HTMLButtonElement>(null);
+    const anchorRef = useRef(null);
 
     const handleClick = useCallback(() => {
       setOpen((prevValue) => {
@@ -37,7 +43,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               </Credentials>
               <Avatar {...avatar} />
             </User>
-            <ChevronDOutlineMd />
+            <Chevron open={open} />
           </Root>
         </ClickAwayListener>
         <Menu open={open} anchorEl={anchorRef.current} onClose={handleClose} />
