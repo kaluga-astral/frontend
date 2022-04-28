@@ -1,7 +1,9 @@
+import { EditOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { Button } from '../Button';
+import { ActionCell } from '../ActionCell';
+import { Action } from '../ActionCell/types';
 import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
@@ -19,6 +21,13 @@ type ColumnsType = {
   createDate: string;
   action: CellValue;
 };
+
+const ACTIONS: Action<ColumnsType>[] = [
+  { Icon: <EyeFillMd />, name: 'Отправить', onClick: () => {} },
+  { Icon: <EditOutlineMd />, name: 'Редактировать', onClick: () => {} },
+  { Icon: <SendOutlineMd />, name: 'Удалить', onClick: () => {} },
+  { Icon: <SendOutlineMd />, name: 'Удалить 2', onClick: () => {} },
+];
 
 const columns: DataGridColumns<ColumnsType>[] = [
   {
@@ -42,7 +51,7 @@ const columns: DataGridColumns<ColumnsType>[] = [
     label: 'Действия',
     sortable: false,
     align: 'center',
-    renderCell: () => <Button>Отправить</Button>,
+    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
   },
 ];
 
@@ -247,6 +256,6 @@ const Template: Story = (args) => {
 export const Default = Template.bind({});
 
 Default.parameters = {
-  options: { showPanel: true },
+  // options: { showPanel: true },
   controls: { expanded: true },
 };
