@@ -2,8 +2,7 @@ import { EditOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { ActionCell } from '../ActionCell';
-import { Action } from '../ActionCell/types';
+import { Action, ActionCell } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
@@ -256,6 +255,6 @@ const Template: Story = (args) => {
 export const Default = Template.bind({});
 
 Default.parameters = {
-  // options: { showPanel: true },
+  options: { showPanel: true },
   controls: { expanded: true },
 };
