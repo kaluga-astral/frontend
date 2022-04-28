@@ -1,3 +1,4 @@
+export * from './ActionCell';
 export * from './Autocomplete';
 export * from './Badge';
 export * from './Button';
