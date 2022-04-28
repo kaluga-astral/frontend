@@ -1,11 +1,34 @@
+import { useState } from 'react';
 import { Story } from '@storybook/react';
 import { IconButton, InputAdornment, Stack } from '@mui/material';
 
 import { TextField } from './TextField';
+import { TextFieldProps } from './types';
 
 export default {
   title: 'Components/TextField',
   component: TextField,
+};
+
+const TextFieldWithValidationOnBlur = ({
+  error,
+  success,
+  helperText,
+  ...restProps
+}: TextFieldProps) => {
+  const [isValidated, setValidated] = useState<boolean>(false);
+  const handleBlur = () => {
+    setValidated(true);
+  };
+  return (
+    <TextField
+      {...restProps}
+      error={isValidated ? error : null}
+      success={isValidated ? success : null}
+      helperText={isValidated ? helperText : null}
+      onBlur={handleBlur}
+    />
+  );
 };
 
 export const Default: Story = () => {
@@ -15,6 +38,8 @@ export const Default: Story = () => {
         <TextField label="With label" />
         <TextField label="With placeholder" placeholder="Placeholder value" />
         <TextField focused label="Focused" defaultValue="Default value" />
+      </Stack>
+      <Stack gap={2} direction="row">
         <TextField
           error
           label="Invalid without helperText"
@@ -39,6 +64,20 @@ export const Default: Story = () => {
           defaultValue="Default value"
           helperText="Проверка успешно пройдена"
         />
+      </Stack>
+      <Stack gap={2} direction="row">
+        <TextFieldWithValidationOnBlur
+          error
+          label="onBlur error validate"
+          helperText="Ошибка, проверка не пройдена"
+        />
+        <TextFieldWithValidationOnBlur
+          success
+          label="onBlur success validate"
+          helperText="Проверка успешно пройдена"
+        />
+      </Stack>
+      <Stack gap={2} direction="row">
         <TextField disabled label="Disabled" defaultValue="Default value" />
         <TextField
           label="Read only"

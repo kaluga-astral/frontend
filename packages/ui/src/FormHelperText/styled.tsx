@@ -1,17 +1,22 @@
 import { ErrorFillSm, SuccessFillSm } from '@astral/icons';
 
+import { Theme } from '../theme';
 import { styled } from '../styles';
 
-const styles = `
-  display: inline-flex;
+const getStyles = (theme: Theme) => {
+  return `display: inline-flex;
   justify-content: center;
-  width: 16px;
-  vertical-align: middle;
+  font-size: ${theme.typography.h5.fontSize};
+  vertical-align: middle;`;
+};
+
+export const SuccessIcon = styled(SuccessFillSm)`
+  ${({ theme }) => getStyles(theme)}
 `;
 
-export const SuccessIcon = styled(SuccessFillSm)(styles);
-
-export const ErrorIcon = styled(ErrorFillSm)(styles);
+export const ErrorIcon = styled(ErrorFillSm)`
+  ${({ theme }) => getStyles(theme)}
+`;
 
 export const Content = styled.span`
   vertical-align: middle;
