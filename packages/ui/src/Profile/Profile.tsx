@@ -2,12 +2,12 @@ import { Fragment, forwardRef, useCallback, useRef, useState } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
 
 import {
-  Annotation,
-  Chevron,
-  Credentials,
-  DisplayName,
-  Root,
-  User,
+  ProfileAnnotation,
+  ProfileChevron,
+  ProfileCredentials,
+  ProfileDisplayName,
+  ProfileRoot,
+  ProfileUser,
 } from './styled';
 import { ProfileProps } from './types';
 
@@ -35,16 +35,16 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     return (
       <Fragment>
         <ClickAwayListener ref={ref} onClickAway={handleClickAway}>
-          <Root ref={anchorRef} variant="text" onClick={handleClick}>
-            <User>
-              <Credentials>
-                <DisplayName>{displayName}</DisplayName>
-                <Annotation>{annotation}</Annotation>
-              </Credentials>
+          <ProfileRoot ref={anchorRef} variant="text" onClick={handleClick}>
+            <ProfileUser>
+              <ProfileCredentials>
+                <ProfileDisplayName>{displayName}</ProfileDisplayName>
+                <ProfileAnnotation>{annotation}</ProfileAnnotation>
+              </ProfileCredentials>
               <Avatar {...avatar} />
-            </User>
-            <Chevron open={open} />
-          </Root>
+            </ProfileUser>
+            <ProfileChevron open={open} />
+          </ProfileRoot>
         </ClickAwayListener>
         <Menu open={open} anchorEl={anchorRef.current} onClose={handleClose} />
       </Fragment>

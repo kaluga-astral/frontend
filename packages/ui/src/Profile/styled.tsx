@@ -3,7 +3,7 @@ import { ChevronDOutlineMd } from '@astral/icons';
 import { Button } from '../Button';
 import { styled } from '../styles';
 
-export const Root = styled(Button)`
+export const ProfileRoot = styled(Button)`
   display: flex;
   align-items: center;
   height: auto;
@@ -12,29 +12,29 @@ export const Root = styled(Button)`
   text-align: right;
 `;
 
-export const User = styled.div`
+export const ProfileUser = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
 `;
 
-export const Credentials = styled.div`
+export const ProfileCredentials = styled.div`
   display: block;
 `;
 
-export const DisplayName = styled.div`
+export const ProfileDisplayName = styled.div`
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(14)};
 `;
 
-export const Annotation = styled.div`
+export const ProfileAnnotation = styled.div`
   color: ${({ theme }) => theme.palette.grey[500]};
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
 `;
 
-export const Chevron = styled(ChevronDOutlineMd)<{ open: boolean }>`
+export const ProfileChevron = styled(ChevronDOutlineMd)<{ open: boolean }>`
   transform: ${({ open }) => {
     return open ? 'rotateZ(180deg)' : ' rotateZ(0deg)';
   }};
