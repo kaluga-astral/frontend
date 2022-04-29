@@ -22,13 +22,17 @@ export const ProfileCredentials = styled.div`
   display: block;
 `;
 
-export const ProfileDisplayName = styled.div`
+export const ProfileDisplayName = styled.span`
+  display: block;
+
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(14)};
 `;
 
-export const ProfileAnnotation = styled.div`
+export const ProfileAnnotation = styled.span`
+  display: block;
+
   color: ${({ theme }) => theme.palette.grey[500]};
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
