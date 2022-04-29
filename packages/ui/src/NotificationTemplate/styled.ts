@@ -1,9 +1,9 @@
 import { CrossOutlineSm } from '@astral/icons';
 
-import { IconButton } from '../../../IconButton';
-import { styled } from '../../../styles';
-import { Typography } from '../../../Typography';
-import { ActionsDirection, Variant } from '../../types';
+import { IconButton } from '../IconButton';
+import { ActionsDirection, Variant } from '../Notification';
+import { styled } from '../styles';
+import { Typography } from '../Typography';
 
 import { getActionsDirection, getNotificationTemplateStyles } from './utils';
 

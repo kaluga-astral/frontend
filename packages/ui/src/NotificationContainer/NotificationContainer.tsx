@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import { ToastContainer, ToastContainerProps } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
-import { NOTIFY_POSITIONS } from '../../constants';
+import { NOTIFY_POSITIONS } from '../Notification';
 
 import { ToastContainerStyled } from './styled';
 

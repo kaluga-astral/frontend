@@ -1,5 +1,5 @@
-import { Theme } from '../../../../../theme';
-import { Variant } from '../../../../types';
+import { Variant } from '../../../Notification';
+import { Theme } from '../../../theme';
 
 export const getNotificationTemplateStyles = (
   theme: Theme,

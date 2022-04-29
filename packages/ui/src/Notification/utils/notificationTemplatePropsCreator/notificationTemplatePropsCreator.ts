@@ -1,7 +1,7 @@
 import { ToastProps } from 'react-toastify/dist/types';
 
-import { NotificationProps, Variant } from '../../../../types';
-import { NotificationTemplateProps } from '../../NotificationTemplate';
+import { NotificationTemplateProps } from '../../../NotificationTemplate';
+import { NotificationProps, Variant } from '../../types';
 
 export const notificationTemplatePropsCreator = (
   options: NotificationProps,
@@ -9,8 +9,8 @@ export const notificationTemplatePropsCreator = (
   variant: Variant
 ): NotificationTemplateProps => {
   return <NotificationTemplateProps>{
-    ...options,
     ...notifyProps,
+    ...options,
     variant,
   };
 };
