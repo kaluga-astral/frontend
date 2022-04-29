@@ -36,7 +36,7 @@ export const NotificationContent = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const NotificationActions = styled.div<NotificationActionsProps>`
+export const NotificationActions = styled.footer<NotificationActionsProps>`
   display: flex;
   align-items: center;
   justify-content: ${({ actionsDirection }) =>
@@ -57,7 +57,7 @@ export const NotificationIcon = styled.section<NotificationIconProps>`
   }
 `;
 
-export const NotificationHeader = styled.div`
+export const NotificationHeader = styled.header`
   display: flex;
   align-items: center;
   width: 100%;

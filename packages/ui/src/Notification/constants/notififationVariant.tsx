@@ -6,16 +6,16 @@ import {
 } from '@astral/icons';
 import { ToastProps } from 'react-toastify/dist/types';
 
-import { NotificationTemplate } from '../../components/NotificationTemplate';
-import { notificationTemplatePropsCreator } from '../../components/NotificationTemplate/utils';
-import { NotificationProps, Variant } from '../../types';
+import { NotificationTemplate } from '../components/NotificationTemplate';
+import { notificationTemplatePropsCreator } from '../components/NotificationTemplate/utils';
+import { NotificationProps, Variant } from '../types';
 
 type NotifyAction = (
   options: NotificationProps,
   notifyProps: ToastProps
 ) => JSX.Element;
 
-export const getNotificationVariant: Record<Variant, NotifyAction> = {
+export const NOTIFICATION_VARIANT: Record<Variant, NotifyAction> = {
   info: (options, notifyContent) => (
     <NotificationTemplate
       {...notificationTemplatePropsCreator(options, notifyContent, 'info')}
