@@ -16,7 +16,6 @@ export default {
         type: null,
       },
     },
-    backgroundColor2: { required: true, default: 'qweqweqwe' },
   },
   title: 'Components/Notification',
   component: NotificationTemplate,
