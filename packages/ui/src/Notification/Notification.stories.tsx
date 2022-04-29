@@ -3,11 +3,23 @@ import { Story } from '@storybook/react';
 import { Button } from '../Button';
 
 import { NotificationContainer } from './components/NotificationContainer';
+import { NotificationTemplate } from './components/NotificationTemplate';
 import { notify } from './Notification';
 
 export default {
+  argTypes: {
+    icon: {
+      name: 'icon',
+      type: { name: 'Element', required: false },
+      description: 'Иконка для NotificationTemplate',
+      control: {
+        type: null,
+      },
+    },
+    backgroundColor2: { required: true, default: 'qweqweqwe' },
+  },
   title: 'Components/Notification',
-  component: NotificationContainer,
+  component: NotificationTemplate,
 };
 
 const Template: Story = () => {
@@ -56,8 +68,6 @@ const Template: Story = () => {
 export const Default = Template.bind({});
 
 Default.parameters = {
-  // options: { showPanel: true },
-  options: { showPanel: false },
-  // controls: { expanded: true },
-  controls: { expanded: false },
+  options: { showPanel: true },
+  controls: { expanded: true },
 };
