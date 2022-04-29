@@ -3,9 +3,8 @@ import { Stack } from '@mui/material';
 
 import { Button } from '../Button';
 
-import { NotificationContainer } from './components/NotificationContainer';
 import { NotificationTemplate } from './components/NotificationTemplate';
-import { notify } from './Notification';
+import { NotificationContainer, notify } from './Notification';
 
 export default {
   argTypes: {

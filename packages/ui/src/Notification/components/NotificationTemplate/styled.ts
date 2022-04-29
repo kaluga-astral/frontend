@@ -75,13 +75,6 @@ export const NotificationCloseButton = styled(IconButton, {
 })<NotificationCloseButtonProps>`
   padding: 0;
 
-  & > svg {
-    & > path {
-      fill: ${({ theme, filled }) =>
-        filled && theme.palette.background.default};
-    }
-  }
-
   &:hover {
     background-color: ${({ filled }) => filled && 'inherit'};
   }

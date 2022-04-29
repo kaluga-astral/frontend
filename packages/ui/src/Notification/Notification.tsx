@@ -5,6 +5,8 @@ import { NOTIFICATION_VARIANT } from './constants';
 
 interface NotificationOption extends Omit<NotificationProps, 'title'> {}
 
+export * from './components/NotificationContainer';
+
 type Notify = (title: string, options?: NotificationOption) => number | string;
 
 export const notify: Record<Variant, Notify> = {
