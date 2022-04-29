@@ -1,63 +1,38 @@
-import {
-  ErrorFillMd,
-  InfoFillMd,
-  SuccessFillMd,
-  WarningFillMd,
-} from '@astral/icons';
 import { ToastProps } from 'react-toastify/dist/types';
 
 import { NotificationTemplate } from '../components/NotificationTemplate';
 import { notificationTemplatePropsCreator } from '../components/NotificationTemplate/utils';
-// import {
-//   ErrorNotificationIcon,
-//   InfoNotificationIcon,
-//   SuccessNotificationIcon,
-//   WarningNotificationIcon,
-// } from '../styled';
 import { NotificationProps, Variant } from '../types';
+import { getNotificationIconByVariant } from '../utils';
 
 type NotifyAction = (
   options: NotificationProps,
   notifyProps: ToastProps
 ) => JSX.Element;
 
-// const getNotificationIconByVariant = (
-//   variant: Variant,
-//   filled: boolean = false
-// ): JSX.Element => {
-//   const mapOfNotificationIcons = {
-//     info: <InfoNotificationIcon filled={filled} />,
-//     success: <SuccessNotificationIcon filled={filled} />,
-//     warning: <WarningNotificationIcon filled={filled} />,
-//     error: <ErrorNotificationIcon filled={filled} />,
-//   };
-//
-//   return mapOfNotificationIcons[variant];
-// };
-
 export const NOTIFICATION_VARIANT: Record<Variant, NotifyAction> = {
   info: (options, notifyContent) => (
     <NotificationTemplate
       {...notificationTemplatePropsCreator(options, notifyContent, 'info')}
-      icon={<InfoFillMd />}
+      icon={getNotificationIconByVariant('info', options.filled)}
     />
   ),
   success: (options, notifyContent) => (
     <NotificationTemplate
       {...notificationTemplatePropsCreator(options, notifyContent, 'success')}
-      icon={<SuccessFillMd />}
+      icon={getNotificationIconByVariant('success', options.filled)}
     />
   ),
   warning: (options, notifyContent) => (
     <NotificationTemplate
       {...notificationTemplatePropsCreator(options, notifyContent, 'warning')}
-      icon={<WarningFillMd />}
+      icon={getNotificationIconByVariant('warning', options.filled)}
     />
   ),
   error: (options, notifyContent) => (
     <NotificationTemplate
       {...notificationTemplatePropsCreator(options, notifyContent, 'error')}
-      icon={<ErrorFillMd />}
+      icon={getNotificationIconByVariant('error', options.filled)}
     />
   ),
 };

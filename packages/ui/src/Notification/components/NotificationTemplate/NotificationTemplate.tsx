@@ -1,5 +1,4 @@
 import { FC, ReactNode, useMemo } from 'react';
-import { CrossOutlineSm } from '@astral/icons';
 import { ToastProps } from 'react-toastify/dist/types';
 
 import { ActionsDirection, Variant } from '../../types';
@@ -7,6 +6,7 @@ import { ActionsDirection, Variant } from '../../types';
 import {
   NotificationActions,
   NotificationCloseButton,
+  NotificationCloseIcon,
   NotificationContent,
   NotificationHeader,
   NotificationIcon,
@@ -65,7 +65,7 @@ export const NotificationTemplate: FC<NotificationTemplateProps> = ({
             color="primary"
             variant="text"
           >
-            <CrossOutlineSm />
+            <NotificationCloseIcon filled={filled} />
           </NotificationCloseButton>
         </NotificationHeader>
       </NotificationWrapper>

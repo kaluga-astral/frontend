@@ -75,6 +75,7 @@ const Template: Story = () => {
 
   const handleFilledWarning = () => {
     notify.warning({
+      filled: true,
       title: 'Внимание',
     });
   };
@@ -96,6 +97,7 @@ const Template: Story = () => {
 
   const handleFilledError = () => {
     notify.error({
+      filled: true,
       title: 'Соединение потеряно',
     });
   };
@@ -135,10 +137,18 @@ const Template: Story = () => {
           <Stack direction="column">
             <h2>Notify with content and actions </h2>
             <Stack direction="row" gap={2}>
-              <Button onClick={handledInfoWithContent}>filled info</Button>
-              <Button onClick={handleSuccessWithContent}>filled success</Button>
-              <Button onClick={handleWarningWithContent}>filled warn</Button>
-              <Button onClick={handleErrorWithContent}>filled error</Button>
+              <Button onClick={handledInfoWithContent}>
+                notify with content and action
+              </Button>
+              <Button onClick={handleSuccessWithContent}>
+                notify with content and action
+              </Button>
+              <Button onClick={handleWarningWithContent}>
+                notify with content and action
+              </Button>
+              <Button onClick={handleErrorWithContent}>
+                notify with content and action
+              </Button>
             </Stack>
           </Stack>
         </Stack>

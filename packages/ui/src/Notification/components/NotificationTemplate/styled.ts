@@ -1,3 +1,5 @@
+import { CrossOutlineSm } from '@astral/icons';
+
 import { IconButton } from '../../../IconButton';
 import { styled } from '../../../styles';
 import { Typography } from '../../../Typography';
@@ -17,8 +19,13 @@ interface NotificationTemplateProps {
   variant: Variant;
   filled: boolean;
 }
+
 interface NotificationActionsProps {
   actionsDirection: ActionsDirection;
+}
+
+interface NotificationCloseIconProps {
+  filled: boolean;
 }
 
 export const NotificationTemplate = styled.section<NotificationTemplateProps>`
@@ -48,19 +55,18 @@ export const NotificationIcon = styled.div<NotificationIconProps>`
   display: flex;
   align-items: center;
   margin-right: ${({ theme }) => theme.spacing(3)};
-
-  & > svg {
-    & > path {
-      fill: ${({ theme, filled }) =>
-        filled && theme.palette.background.default};
-    }
-  }
 `;
 
 export const NotificationHeader = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
+`;
+
+export const NotificationCloseIcon = styled(CrossOutlineSm, {
+  shouldForwardProp: (prop) => prop !== 'filled',
+})<NotificationCloseIconProps>`
+  color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
 export const NotificationCloseButton = styled(IconButton, {

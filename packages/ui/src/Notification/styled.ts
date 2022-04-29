@@ -17,18 +17,20 @@ export const InfoNotificationIcon = styled(InfoFillMd, {
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
-export const SuccessNotificationIcon = styled(
-  SuccessFillMd
-)<NotificationIconProps>`
+export const SuccessNotificationIcon = styled(SuccessFillMd, {
+  shouldForwardProp: (prop) => prop !== 'filled',
+})<NotificationIconProps>`
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
-export const WarningNotificationIcon = styled(
-  WarningFillMd
-)<NotificationIconProps>`
+export const WarningNotificationIcon = styled(WarningFillMd, {
+  shouldForwardProp: (prop) => prop !== 'filled',
+})<NotificationIconProps>`
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
-export const ErrorNotificationIcon = styled(ErrorFillMd)<NotificationIconProps>`
+export const ErrorNotificationIcon = styled(ErrorFillMd, {
+  shouldForwardProp: (prop) => prop !== 'filled',
+})<NotificationIconProps>`
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
