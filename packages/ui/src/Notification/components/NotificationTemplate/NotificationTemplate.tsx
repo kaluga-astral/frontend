@@ -32,7 +32,7 @@ export const NotificationTemplate: FC<NotificationTemplateProps> = ({
   content,
   actions,
   variant,
-  filled = true,
+  filled = false,
   actionsDirection = 'right',
 }) => {
   const handleCloseToast = () => {

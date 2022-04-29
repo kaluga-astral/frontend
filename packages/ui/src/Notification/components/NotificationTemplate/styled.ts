@@ -44,7 +44,7 @@ export const NotificationActions = styled.footer<NotificationActionsProps>`
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const NotificationIcon = styled.section<NotificationIconProps>`
+export const NotificationIcon = styled.div<NotificationIconProps>`
   display: flex;
   align-items: center;
   margin-right: ${({ theme }) => theme.spacing(3)};
