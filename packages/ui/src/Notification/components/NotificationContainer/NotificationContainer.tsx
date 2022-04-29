@@ -28,6 +28,7 @@ export const NotificationContainer: VFC<NotificationContainerProps> = (
         bodyClassName="notify__body"
         toastClassName="notify"
         progressClassName="notify__progress"
+        className="notify__container"
       />
     </ToastContainerStyled>
   );

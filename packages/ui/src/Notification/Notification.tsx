@@ -1,19 +1,33 @@
 import { toast } from 'react-toastify';
 
-import { NotificationProps } from './types';
+import { NotificationProps, Variant } from './types';
 import { NOTIFICATION_VARIANT } from './constants';
 
-export const notify = {
-  info: (options: NotificationProps) =>
-    toast(({ toastProps }) => NOTIFICATION_VARIANT.info(options, toastProps)),
-  success: (options: NotificationProps) =>
-    toast(({ toastProps }) =>
-      NOTIFICATION_VARIANT.success(options, toastProps)
+interface NotificationOption extends Omit<NotificationProps, 'title'> {}
+
+type Notify = (title: string, options?: NotificationOption) => number | string;
+
+export const notify: Record<Variant, Notify> = {
+  info: (title, options) =>
+    toast(
+      ({ toastProps }) =>
+        NOTIFICATION_VARIANT.info({ ...options, title }, toastProps),
+      options
     ),
-  warning: (options: NotificationProps) =>
-    toast(({ toastProps }) =>
-      NOTIFICATION_VARIANT.warning(options, toastProps)
+  success: (title, options) =>
+    toast(
+      ({ toastProps }) =>
+        NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
+      options
     ),
-  error: (options: NotificationProps) =>
-    toast(({ toastProps }) => NOTIFICATION_VARIANT.error(options, toastProps)),
+  warning: (title, options) =>
+    toast(({ toastProps }) =>
+      NOTIFICATION_VARIANT.warning({ ...options, title }, toastProps)
+    ),
+  error: (title, options) =>
+    toast(
+      ({ toastProps }) =>
+        NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
+      options
+    ),
 };

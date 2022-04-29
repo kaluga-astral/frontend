@@ -34,6 +34,7 @@ export const NotificationTemplate = styled.section<NotificationTemplateProps>`
   ${({ theme, variant, filled }) =>
     getNotificationTemplateStyles(theme, variant, filled)}
 `;
+
 export const NotificationWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -72,7 +73,6 @@ export const NotificationCloseIcon = styled(CrossOutlineSm, {
 export const NotificationCloseButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseButtonProps>`
-  height: inherit;
   padding: 0;
 
   & > svg {

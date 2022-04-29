@@ -24,22 +24,18 @@ export default {
 
 const Template: Story = () => {
   const handleInfo = () => {
-    notify.info({
+    notify.info('Внимание!', {
       filled: false,
-      title: 'Внимание!',
     });
   };
 
   const handleFilledInfo = () => {
-    notify.info({
-      title: 'Внимание!',
-    });
+    notify.info('Внимание!');
   };
 
   const handledInfoWithContent = () => {
-    notify.info({
+    notify.info('Внимание!', {
       filled: false,
-      title: 'Внимание!',
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="light">Подробнее</Button>,
       actionsDirection: 'right',
@@ -47,22 +43,18 @@ const Template: Story = () => {
   };
 
   const handleSuccess = () => {
-    notify.success({
+    notify.success('Операция успешно завершен', {
       filled: false,
-      title: 'Операция успешно завершен',
     });
   };
 
   const handleFilledSuccess = () => {
-    notify.success({
-      title: 'Операция успешно завершен',
-    });
+    notify.success('Операция успешно завершен');
   };
 
   const handleSuccessWithContent = () => {
-    notify.success({
+    notify.success('Операция успешно завершен', {
       filled: false,
-      title: 'Операция успешно завершен',
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="light">Подробнее</Button>,
       actionsDirection: 'right',
@@ -70,22 +62,18 @@ const Template: Story = () => {
   };
 
   const handleWarning = () => {
-    notify.warning({
+    notify.warning('Внимание', {
       filled: false,
-      title: 'Внимание',
     });
   };
 
   const handleFilledWarning = () => {
-    notify.warning({
-      title: 'Внимание',
-    });
+    notify.warning('Внимание');
   };
 
   const handleWarningWithContent = () => {
-    notify.warning({
+    notify.warning('Внимание', {
       filled: false,
-      title: 'Внимание',
       content: 'Внимание, внимание, все более менее.',
       actions: <Button variant="light">Подробнее</Button>,
       actionsDirection: 'right',
@@ -93,22 +81,18 @@ const Template: Story = () => {
   };
 
   const handleError = () => {
-    notify.error({
+    notify.error('Соединение потеряно', {
       filled: false,
-      title: 'Соединение потеряно',
     });
   };
 
   const handleFilledError = () => {
-    notify.error({
-      title: 'Соединение потеряно',
-    });
+    notify.error('Соединение потеряно');
   };
 
   const handleErrorWithContent = () => {
-    notify.error({
+    notify.error('Соединение потеряно', {
       filled: false,
-      title: 'Соединение потеряно',
       content: 'У вас куча ошибок.',
       actions: <Button variant="light">Подробнее</Button>,
       actionsDirection: 'right',
