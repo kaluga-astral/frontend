@@ -25,19 +25,20 @@ export default {
 const Template: Story = () => {
   const handleInfo = () => {
     notify.info({
+      filled: false,
       title: 'Внимание!',
     });
   };
 
   const handleFilledInfo = () => {
     notify.info({
-      filled: true,
       title: 'Внимание!',
     });
   };
 
   const handledInfoWithContent = () => {
     notify.info({
+      filled: false,
       title: 'Внимание!',
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="light">Подробнее</Button>,
@@ -47,19 +48,20 @@ const Template: Story = () => {
 
   const handleSuccess = () => {
     notify.success({
+      filled: false,
       title: 'Операция успешно завершен',
     });
   };
 
   const handleFilledSuccess = () => {
     notify.success({
-      filled: true,
       title: 'Операция успешно завершен',
     });
   };
 
   const handleSuccessWithContent = () => {
     notify.success({
+      filled: false,
       title: 'Операция успешно завершен',
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="light">Подробнее</Button>,
@@ -69,19 +71,20 @@ const Template: Story = () => {
 
   const handleWarning = () => {
     notify.warning({
+      filled: false,
       title: 'Внимание',
     });
   };
 
   const handleFilledWarning = () => {
     notify.warning({
-      filled: true,
       title: 'Внимание',
     });
   };
 
   const handleWarningWithContent = () => {
     notify.warning({
+      filled: false,
       title: 'Внимание',
       content: 'Внимание, внимание, все более менее.',
       actions: <Button variant="light">Подробнее</Button>,
@@ -91,19 +94,20 @@ const Template: Story = () => {
 
   const handleError = () => {
     notify.error({
+      filled: false,
       title: 'Соединение потеряно',
     });
   };
 
   const handleFilledError = () => {
     notify.error({
-      filled: true,
       title: 'Соединение потеряно',
     });
   };
 
   const handleErrorWithContent = () => {
     notify.error({
+      filled: false,
       title: 'Соединение потеряно',
       content: 'У вас куча ошибок.',
       actions: <Button variant="light">Подробнее</Button>,

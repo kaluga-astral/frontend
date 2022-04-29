@@ -1,3 +1,4 @@
+import { DEFAULT_NOTIFICATION_PROPS } from '../../constants';
 import {
   ErrorNotificationIcon,
   InfoNotificationIcon,
@@ -8,7 +9,7 @@ import { Variant } from '../../types';
 
 export const getNotificationIconByVariant = (
   variant: Variant,
-  filled = false
+  filled = DEFAULT_NOTIFICATION_PROPS.filled
 ): JSX.Element => {
   const mapOfNotificationIcons = {
     info: <InfoNotificationIcon filled={filled} />,

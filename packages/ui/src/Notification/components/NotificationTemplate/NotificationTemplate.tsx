@@ -1,6 +1,7 @@
 import { FC, ReactNode, useMemo } from 'react';
 import { ToastProps } from 'react-toastify/dist/types';
 
+import { DEFAULT_NOTIFICATION_PROPS } from '../../constants';
 import { ActionsDirection, Variant } from '../../types';
 
 import {
@@ -32,7 +33,7 @@ export const NotificationTemplate: FC<NotificationTemplateProps> = ({
   content,
   actions,
   variant,
-  filled = false,
+  filled = DEFAULT_NOTIFICATION_PROPS.filled,
   actionsDirection = 'right',
 }) => {
   const handleCloseToast = () => {
