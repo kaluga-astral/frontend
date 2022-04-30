@@ -1,19 +1,25 @@
-import { CircularProgressSizes } from './constants';
-import { StyledCircularProgress } from './styled';
+import { forwardRef, useMemo } from 'react';
+import MuiCircularProgress from '@mui/material/CircularProgress';
+
 import { CircularProgressProps } from './types';
 
-export const CircularProgress = ({
-  color,
-  size,
-  ...props
-}: CircularProgressProps) => {
-  return (
-    <StyledCircularProgress
-      {...props}
-      size={size === CircularProgressSizes.SMALL ? 16 : 24}
-      customColor={color}
-    />
-  );
-};
+export const CircularProgress = forwardRef<HTMLElement, CircularProgressProps>(
+  (props, ref) => {
+    const { size: sizeProp, color, ...restProps } = props;
+    const size = useMemo(() => {
+      return sizeProp === 'small' ? 16 : 24;
+    }, [sizeProp]);
+
+    return (
+      <MuiCircularProgress
+        ref={ref}
+        {...restProps}
+        size={size}
+        color="inherit"
+        data-color={color}
+      />
+    );
+  }
+);
 
 export default CircularProgress;

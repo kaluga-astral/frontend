@@ -1,8 +1,11 @@
+import type {} from '@mui/lab/themeAugmentation';
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 
+import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
+import { MuiLoadingButton } from './MuiLoadingButton';
 import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
@@ -22,6 +25,7 @@ import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
+import { MuiCircularProgress } from './MuiCircularProgress';
 
 export type FontsUrls = {
   bold: {
@@ -91,7 +95,9 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiButton,
   MuiButtonBase,
+  MuiLoadingButton,
   MuiTypography,
   MuiInputBase,
   MuiInputLabel,
@@ -113,4 +119,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiPickersDay,
   MuiCalendarPicker,
   MuiYearPicker,
+  MuiCircularProgress,
 });

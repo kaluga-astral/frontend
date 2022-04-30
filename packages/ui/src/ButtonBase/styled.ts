@@ -14,12 +14,15 @@ import {
   ButtonVariant,
 } from './types';
 
-type StyledButtonBaseProps = Omit<BaseButtonProps, 'color' | 'variant'> & {
+export type StyledButtonBaseProps = Omit<
+  BaseButtonProps,
+  'color' | 'variant'
+> & {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
 };
 
-type StyledButtonBaseThemeProps = {
+export type StyledButtonBaseThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   size?: ButtonSize;
@@ -37,13 +40,13 @@ export const getColor = ({
       error: {
         default: theme.palette.red['900'],
         hover: theme.palette.red['900'],
-        active: theme.palette.red['900'],
+        active: theme.palette.red['800'],
         focus: theme.palette.red['900'],
       },
       success: {
         default: theme.palette.green['900'],
         hover: theme.palette.green['900'],
-        active: theme.palette.green['900'],
+        active: theme.palette.green['800'],
         focus: theme.palette.green['900'],
       },
       primary: {
@@ -55,7 +58,7 @@ export const getColor = ({
       warning: {
         default: theme.palette.yellow['900'],
         hover: theme.palette.yellow['900'],
-        active: theme.palette.yellow['900'],
+        active: theme.palette.yellow['800'],
         focus: theme.palette.yellow['900'],
       },
     },
@@ -196,8 +199,9 @@ export const getDisabledBgColor = ({
   if (
     customVariant === ButtonVariants.LINK ||
     customVariant === ButtonVariants.TEXT
-  )
+  ) {
     return 'transparent';
+  }
 
   return theme.palette.grey['100'];
 };
