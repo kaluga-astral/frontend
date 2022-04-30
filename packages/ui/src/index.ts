@@ -29,6 +29,7 @@ export * from './MaskField';
 export * from './Menu';
 export * from './MenuItem';
 export * from './MenuList';
+export * from './MenuGroup';
 export * from './Placeholder';
 export * from './Select';
 export * from './styles';
