@@ -1,6 +1,6 @@
 import { ToastProps } from 'react-toastify/dist/types';
 
-import { NotificationTemplate } from '../../NotificationTemplate';
+import { NotificationTemplate } from '../NotificationTemplate';
 import { NotificationProps, Variant } from '../types';
 import {
   getNotificationIconByVariant,

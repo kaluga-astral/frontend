@@ -1,11 +1,8 @@
 import { FC, ReactNode, useMemo } from 'react';
 import { ToastProps } from 'react-toastify/dist/types';
 
-import {
-  ActionsDirection,
-  DEFAULT_NOTIFICATION_PROPS,
-  Variant,
-} from '../Notification';
+import { DEFAULT_NOTIFICATION_PROPS } from '../constants';
+import { ActionsDirection, Variant } from '../types';
 
 import {
   NotificationActions,

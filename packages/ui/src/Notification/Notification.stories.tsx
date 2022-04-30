@@ -2,10 +2,10 @@ import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
 import { Button } from '../Button';
-import { NotificationContainer } from '../NotificationContainer';
-import { NotificationTemplate } from '../NotificationTemplate';
 
 import { notify } from './Notification';
+import { NotificationContainer } from './NotificationContainer';
+import { NotificationTemplate } from './NotificationTemplate';
 
 export default {
   argTypes: {
