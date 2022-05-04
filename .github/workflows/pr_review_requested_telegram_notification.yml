@@ -20,7 +20,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            👁👁👁
+            👁👁👁 ${{ github.event.repository.name }}
             PR от ${{ github.event.pull_request.user.login }}
             
             ${{ github.event.pull_request.title }}

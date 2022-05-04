@@ -23,7 +23,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🐣🐣🐣
+            🐣🐣🐣 ${{ github.event.repository.name }}
             ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
