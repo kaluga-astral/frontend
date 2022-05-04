@@ -1,8 +1,11 @@
+import type {} from '@mui/lab/themeAugmentation';
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 
+import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
+import { MuiLoadingButton } from './MuiLoadingButton';
 import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
@@ -20,6 +23,9 @@ import { MuiTableHead } from './MuiTableHead';
 import { MuiPickersDay } from './MuiPickersDay';
 import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
+import { MuiMenu } from './MuiMenu';
+import { MuiMenuItem } from './MuiMenuItem';
+import { MuiCircularProgress } from './MuiCircularProgress';
 
 export type FontsUrls = {
   bold: {
@@ -87,43 +93,11 @@ const MuiRadio: Components['MuiRadio'] = {
   },
 };
 
-const MuiMenu: Components<Theme>['MuiMenu'] = {
-  defaultProps: {
-    autoFocus: false,
-  },
-  styleOverrides: {
-    paper({ theme }: { theme: Theme }) {
-      return {
-        marginTop: theme.spacing(2),
-        '&.MuiPaper-root': {
-          borderRadius: theme.shape.small,
-          boxShadow: theme.elevation[200],
-        },
-      };
-    },
-    list({ theme }: { theme: Theme }) {
-      return {
-        padding: theme.spacing(1, 0),
-      };
-    },
-  },
-};
-
-const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
-  styleOverrides: {
-    root({ theme }: { theme: Theme }) {
-      return {
-        '&:hover': {
-          backgroundColor: theme.palette.background.elementHover,
-        },
-      };
-    },
-  },
-};
-
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiButton,
   MuiButtonBase,
+  MuiLoadingButton,
   MuiTypography,
   MuiInputBase,
   MuiInputLabel,
@@ -145,4 +119,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiPickersDay,
   MuiCalendarPicker,
   MuiYearPicker,
+  MuiCircularProgress,
 });

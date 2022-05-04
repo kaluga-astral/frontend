@@ -1,12 +1,20 @@
 import { Story } from '@storybook/react';
-import { ListItemText } from '@mui/material';
+import {
+  CompanyOutlineMd,
+  ProfileOutlineMd,
+  QuitOutlineMd,
+  SettingsFillMd,
+} from '@astral/icons';
 
+import { Divider } from '../Divider';
+import { ListItemText } from '../ListItemText';
+import { ListItemIcon } from '../ListItemIcon';
 import { MenuItem } from '../index';
 
 import { MenuList } from './MenuList';
 
 export default {
-  title: 'Components/MenList',
+  title: 'Components/MenuList',
   component: MenuList,
 };
 
@@ -14,22 +22,29 @@ const Template: Story = () => {
   return (
     <MenuList>
       <MenuItem>
-        <ListItemText>Пункт меню 1</ListItemText>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        <ListItemText>Мой профиль</ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Пункт меню 2</ListItemText>
+        <ListItemIcon>
+          <CompanyOutlineMd />
+        </ListItemIcon>
+        <ListItemText>Мои организации</ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Пункт меню 3</ListItemText>
+        <ListItemIcon>
+          <SettingsFillMd />
+        </ListItemIcon>
+        <ListItemText>Настройки</ListItemText>
       </MenuItem>
+      <Divider />
       <MenuItem>
-        <ListItemText>Пункт меню 4</ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText>Пункт меню 5</ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText>Пункт меню 6</ListItemText>
+        <ListItemIcon>
+          <QuitOutlineMd />
+        </ListItemIcon>
+        <ListItemText>Выйти</ListItemText>
       </MenuItem>
     </MenuList>
   );

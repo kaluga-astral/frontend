@@ -1,5 +1,7 @@
-import { MenuProps, Menu as MuiMenu } from '@mui/material';
+import MuiMenu from '@mui/material/Menu';
 
-export const Menu = ({ children, ...props }: MenuProps) => {
-  return <MuiMenu {...props}>{children}</MuiMenu>;
+import { MenuProps } from './types';
+
+export const Menu = (props: MenuProps) => {
+  return <MuiMenu {...props} />;
 };
