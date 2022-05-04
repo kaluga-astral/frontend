@@ -29,7 +29,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            💬💬💬
+            💬💬💬 ${{ github.event.repository.name }}
             ${{ github.event.sender.login }} прокомментировал PR от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
