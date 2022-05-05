@@ -24,10 +24,12 @@ const Template: Story<DatePickerProps> = (args) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  label: 'Дата начала:',
-  error: false,
-  helperText: '',
-  placeholder: 'Выберите дату',
+  inputProps: {
+    label: 'Дата начала:',
+    error: false,
+    helperText: undefined,
+    placeholder: 'Выберите дату',
+  },
   disabled: false,
   minDate: subDays(new Date(), 90),
   maxDate: addDays(new Date(), 90),

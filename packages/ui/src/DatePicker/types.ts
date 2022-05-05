@@ -1,5 +1,7 @@
 import { ReactDatePickerProps } from 'react-datepicker';
 
+import { TextFieldProps } from '../TextField';
+
 export type DatePickerProps = Omit<
   ReactDatePickerProps,
   | 'renderCustomHeader'
@@ -12,10 +14,7 @@ export type DatePickerProps = Omit<
   | 'value'
   | 'placeholderText'
 > & {
-  helperText?: string;
-  label?: string;
-  error?: boolean;
-  placeholder?: string;
+  inputProps?: TextFieldProps;
   value: Date | null;
 };
 

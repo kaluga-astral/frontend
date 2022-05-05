@@ -6,6 +6,7 @@ import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
 import { MaskField } from '../MaskField';
+import { MaskFieldProps } from '../MaskField/types';
 
 import { StyledDatePickerWrapper } from './styled';
 import { DatePickerProps } from './types';
@@ -14,8 +15,8 @@ import { DatePickerDay } from './DatePickerDay';
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (props, ref) => {
-    const { helperText, label, error, value, placeholder, ...restProps } =
-      props;
+    const { value, inputProps = {}, ...restProps } = props;
+    const { placeholder = undefined, ...restInputProps } = inputProps;
 
     // уберкостыль, react-date-picker забирает значение из event.target.value
     const handleMaskFieldAccept = (
@@ -47,11 +48,9 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           )}
           customInput={
             <MaskField
+              {...(restInputProps as MaskFieldProps)}
               mask={Date}
               onAccept={handleMaskFieldAccept}
-              label={label}
-              error={error}
-              helperText={helperText}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
