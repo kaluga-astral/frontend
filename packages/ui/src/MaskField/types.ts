@@ -9,8 +9,17 @@ type MaskProps = IMaskInputProps<
   HTMLInputElement
 >;
 
-export type MaskFieldProps = Omit<MaskProps & TextFieldProps, 'onChange'> & {
+export type MaskFieldProps = Omit<
+  MaskProps & TextFieldProps,
+  'onChange' | 'onAccept'
+> & {
   onChange?: (value: string) => void;
+  onAccept?: (
+    value: string,
+    maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+    e?: InputEvent | undefined,
+    onChange?: (value: string) => void
+  ) => void;
 };
 
 export type MaskFieldValue = string;
