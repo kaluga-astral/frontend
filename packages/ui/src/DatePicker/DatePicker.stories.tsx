@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react';
-import { useState } from 'react';
+import { addDays, subDays } from 'date-fns';
+import { useEffect, useRef, useState } from 'react';
 
 import { DatePicker } from './DatePicker';
 import { DatePickerProps } from './types';
@@ -10,17 +11,26 @@ export default {
 };
 
 const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date | null>(new Date());
+  const [value, setValue] = useState<Date | null>(null);
+  const ref = useRef(null);
 
-  return <DatePicker {...args} selected={value} onChange={setValue} />;
+  useEffect(() => {
+    console.log(ref.current);
+  }, [ref]);
+
+  return <DatePicker {...args} ref={ref} value={value} onChange={setValue} />;
 };
 
 export const Default = Template.bind({});
 
 Default.args = {
   label: 'Дата начала:',
-  disabled: false,
+  error: false,
   helperText: '',
+  placeholder: 'Выберите дату',
+  disabled: false,
+  minDate: subDays(new Date(), 90),
+  maxDate: addDays(new Date(), 90),
 };
 
 Default.parameters = {
