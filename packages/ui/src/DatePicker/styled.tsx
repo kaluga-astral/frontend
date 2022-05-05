@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const StyledDatePickerWrapper = styled.div`
+export const DatePickerWrapper = styled.div`
   .react-datepicker {
     background-color: ${({ theme }) => theme.palette.background.paper};
     box-shadow: ${({ theme }) => theme.elevation[200]};

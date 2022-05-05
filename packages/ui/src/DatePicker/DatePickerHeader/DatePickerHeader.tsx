@@ -6,7 +6,7 @@ import ru from 'date-fns/locale/ru';
 
 import { IconButton } from '../../IconButton';
 
-import { StyledDate, StyledDatePickerHeaderWrapper } from './styled';
+import { DatePickerHeaderTitle, DatePickerHeaderWrapper } from './styled';
 
 export const DatePickerHeader = (props: ReactDatePickerCustomHeaderProps) => {
   const { increaseMonth, decreaseMonth, date } = props;
@@ -16,14 +16,16 @@ export const DatePickerHeader = (props: ReactDatePickerCustomHeaderProps) => {
   );
 
   return (
-    <StyledDatePickerHeaderWrapper>
+    <DatePickerHeaderWrapper>
       <IconButton variant="text" onClick={decreaseMonth}>
         <PreviousOutlineMd />
       </IconButton>
-      <StyledDate variant="h6">{localizedDate}</StyledDate>
+      <DatePickerHeaderTitle variant="h6">
+        {localizedDate}
+      </DatePickerHeaderTitle>
       <IconButton variant="text" onClick={increaseMonth}>
         <NextOutlineMd />
       </IconButton>
-    </StyledDatePickerHeaderWrapper>
+    </DatePickerHeaderWrapper>
   );
 };

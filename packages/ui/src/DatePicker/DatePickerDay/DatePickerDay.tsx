@@ -1,8 +1,12 @@
-import { StyledDatePickerDay } from './styled';
-import { DatePickerDayProps } from './types';
+import { DatePickerDayButton } from './styled';
 
-export const DatePickerDay = (props: DatePickerDayProps) => {
+type Props = {
+  dayOfMonth: number;
+  date?: Date | undefined;
+};
+
+export const DatePickerDay = (props: Props) => {
   return (
-    <StyledDatePickerDay variant="text">{props.dayOfMonth}</StyledDatePickerDay>
+    <DatePickerDayButton variant="text">{props.dayOfMonth}</DatePickerDayButton>
   );
 };
