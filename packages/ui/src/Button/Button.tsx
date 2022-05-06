@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
-import { LoadingButton } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 
+import { StyledLoadingButton } from './styled';
 import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     return (
-      <LoadingButton
+      <StyledLoadingButton
         ref={ref}
         {...props}
         loadingIndicator={<CircularProgress size="small" />}
