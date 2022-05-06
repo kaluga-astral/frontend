@@ -1,8 +1,20 @@
 import { AvatarProps, MenuProps } from '@mui/material';
 
 export type ProfileProps = {
+  /**
+   * Имя профиля
+   */
   displayName: string;
-  email: string;
+  /**
+   * Дополнительная информация (например email или username)
+   */
+  annotation?: string;
+  /**
+   * Аватарка профиля
+   */
   avatar?: AvatarProps;
-  Menu: React.FC<MenuProps>;
+  /**
+   * Выпадающее меню
+   */
+  menu: React.FC<MenuProps>;
 };

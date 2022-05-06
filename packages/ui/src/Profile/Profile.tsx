@@ -1,16 +1,22 @@
 import { Fragment, forwardRef, useCallback, useRef, useState } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
-import { ChevronDOutlineMd } from '@astral/icons';
 
-import { Credentials, DisplayName, Email, Root, User } from './styled';
+import {
+  ProfileAnnotation,
+  ProfileChevron,
+  ProfileCredentials,
+  ProfileDisplayName,
+  ProfileRoot,
+  ProfileUser,
+} from './styled';
 import { ProfileProps } from './types';
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {
-    const { displayName, email, avatar, Menu } = props;
+    const { displayName, annotation, avatar = {}, menu: Menu } = props;
 
     const [open, setOpen] = useState(false);
-    const anchorRef = useRef<HTMLButtonElement>(null);
+    const anchorRef = useRef(null);
 
     const handleClick = useCallback(() => {
       setOpen((prevValue) => {
@@ -29,16 +35,16 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     return (
       <Fragment>
         <ClickAwayListener ref={ref} onClickAway={handleClickAway}>
-          <Root ref={anchorRef} variant="text" onClick={handleClick}>
-            <User>
-              <Credentials>
-                <DisplayName>{displayName}</DisplayName>
-                <Email>{email}</Email>
-              </Credentials>
-              {avatar && <Avatar {...avatar} />}
-            </User>
-            <ChevronDOutlineMd />
-          </Root>
+          <ProfileRoot ref={anchorRef} variant="text" onClick={handleClick}>
+            <ProfileUser>
+              <ProfileCredentials>
+                <ProfileDisplayName>{displayName}</ProfileDisplayName>
+                <ProfileAnnotation>{annotation}</ProfileAnnotation>
+              </ProfileCredentials>
+              <Avatar {...avatar} />
+            </ProfileUser>
+            <ProfileChevron open={open} />
+          </ProfileRoot>
         </ClickAwayListener>
         <Menu open={open} anchorEl={anchorRef.current} onClose={handleClose} />
       </Fragment>
