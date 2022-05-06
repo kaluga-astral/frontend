@@ -65,6 +65,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
           <MaskField
             {...(restInputProps as MaskFieldProps)}
             mask={Date}
+            autofix="pad"
             onAccept={handleMaskFieldAccept}
             InputProps={{
               endAdornment: (

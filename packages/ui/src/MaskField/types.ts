@@ -20,6 +20,7 @@ export type MaskFieldProps = Omit<
     e?: InputEvent | undefined,
     onChange?: (value: string) => void
   ) => void;
+  autofix?: boolean | 'pad';
 };
 
 export type MaskFieldValue = string;
