@@ -7,10 +7,13 @@ import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
+    const { variant = 'contained', ...restProps } = props;
+
     return (
       <LoadingButton
         ref={ref}
-        {...props}
+        {...restProps}
+        variant={variant}
         loadingIndicator={<CircularProgress size="small" />}
       />
     );
