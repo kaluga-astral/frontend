@@ -1,3 +1,3 @@
 export * from './positions';
-export * from './notififationVariant';
+export * from './notificationVariant';
 export * from './defaultNotificationProps';

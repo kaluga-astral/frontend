@@ -38,11 +38,11 @@ export interface NotificationProps
    * */
   filled?: boolean;
   /**
-   * @example notify.success('title', { content: <div>Hello notify</div>> })
+   * @example notify.success('title', { content: <div>Hello notify</div> })
    * */
   content?: ReactNode;
   /**
-   * @example notify.success('title', { actions: <div>Hello notify action</div>> })
+   * @example notify.success('title', { actions: <div>Hello notify action</div> })
    * */
   actions?: JSX.Element;
   /**

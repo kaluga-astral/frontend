@@ -3,11 +3,11 @@ import { toast } from 'react-toastify';
 import { NotificationProps, Variant } from './types';
 import { NOTIFICATION_VARIANT } from './constants';
 
-interface NotificationOption extends Omit<NotificationProps, 'title'> {}
+interface NotificationOptions extends Omit<NotificationProps, 'title'> {}
 
 export type Notify = (
   title: string,
-  options?: NotificationOption
+  options?: NotificationOptions
 ) => number | string;
 
 export const notify: Record<Variant, Notify> = {
