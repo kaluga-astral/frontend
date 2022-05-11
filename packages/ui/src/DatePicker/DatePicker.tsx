@@ -1,9 +1,10 @@
-import { MutableRefObject, forwardRef } from 'react';
+import { FocusEvent, MutableRefObject, forwardRef, useState } from 'react';
 import { IMask } from 'react-imask';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
+import { isValid, parse } from 'date-fns';
 
 import { MaskField } from '../MaskField';
 import { MaskFieldProps } from '../MaskField/types';
@@ -29,9 +30,12 @@ type Props = Omit<
   value: Date | null;
 };
 
+const MIN_YEAR = 1900;
+
 export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { value, inputProps = {}, ...restProps } = props;
+  const { value: defaultValue, inputProps = {}, ...restProps } = props;
   const { placeholder = undefined, ...restInputProps } = inputProps;
+  const [value, setValue] = useState<Date | null>(defaultValue);
 
   // уберкостыль, react-date-picker забирает значение из event.target.value
   const handleMaskFieldAccept = (
@@ -47,14 +51,25 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
     } as unknown as string);
   };
 
+  const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
+    const date = parse(e?.target.value, 'dd.MM.yyyy', new Date());
+
+    if (isValid(date) && date.getFullYear() >= MIN_YEAR) {
+      setValue(date);
+    }
+  };
+
   return (
     <DatePickerWrapper>
       <ReactDatePicker
         {...restProps}
-        selected={value}
         locale={ru}
+        selected={value}
+        openToDate={value ?? undefined}
         dateFormat="dd.MM.yyyy"
         placeholderText={placeholder}
+        onChange={setValue}
+        onChangeRaw={handleChangeRaw}
         renderCustomHeader={(renderProps) => (
           <DatePickerHeader {...renderProps} />
         )}
