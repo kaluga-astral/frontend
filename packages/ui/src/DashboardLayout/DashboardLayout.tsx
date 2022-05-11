@@ -3,22 +3,16 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Main } from './Main';
-import { StyledDashboard } from './styled';
+import { Root } from './styled';
 
-interface DashBoardLayoutProps {
+export type DashBoardLayoutProps = {
   children: ReactNode;
-}
+};
 
-export const DashboardLayout = ({ children }: DashBoardLayoutProps) => {
-  return (
-    <StyledDashboard
-      container
-      templateColumns="auto 1fr"
-      templateRows="auto 1fr"
-    >
-      {children}
-    </StyledDashboard>
-  );
+export const DashboardLayout = (props: DashBoardLayoutProps) => {
+  const { children } = props;
+
+  return <Root>{children}</Root>;
 };
 
 DashboardLayout.Header = Header;

@@ -1,29 +1,25 @@
 import { forwardRef } from 'react';
 
-import {
-  InnerContainer,
-  LeftContainer,
-  LogoContainer,
-  LogoStyle,
-  StyledHeader,
-} from './styled';
-import { HeaderProps } from './types';
+import { Profile } from '../../Profile';
+import { ProfileProps } from '../../Profile/types';
+
+import { HeaderRoot } from './styled';
+import { HeaderNav } from './HeaderNav';
+import { HeaderNavProps } from './HeaderNav';
+
+export type HeaderProps = {
+  nav: HeaderNavProps;
+  profile: ProfileProps;
+};
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
-  const { children, logoSrc, logoAlt, LogoLink, Widget } = props;
+  const { nav, profile } = props;
 
   return (
-    <StyledHeader ref={ref}>
-      <InnerContainer>
-        <LeftContainer>
-          {Widget && <Widget />}
-          <LogoContainer withWidget={Boolean(Widget)}>
-            <LogoLink Logo={<LogoStyle src={logoSrc} alt={logoAlt} />} />
-          </LogoContainer>
-        </LeftContainer>
-        {children}
-      </InnerContainer>
-    </StyledHeader>
+    <HeaderRoot ref={ref}>
+      <HeaderNav {...nav} />
+      <Profile {...profile} />
+    </HeaderRoot>
   );
 });
 

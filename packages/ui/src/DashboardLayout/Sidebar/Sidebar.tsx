@@ -1,15 +1,18 @@
 import { ReactNode, forwardRef } from 'react';
 
-import { StyledDrawer } from './styled';
+import { SidebarRoot, SidebarToggler } from './styled';
 
-type SidebarProps = { children: ReactNode };
+export type SidebarProps = { children: ReactNode };
 
 export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
-  ({ children }, ref) => (
-    <StyledDrawer ref={ref} open variant="persistent">
-      {children}
-    </StyledDrawer>
-  )
+  ({ children }, ref) => {
+    return (
+      <SidebarRoot ref={ref}>
+        <nav>{children}</nav>
+        <SidebarToggler variant="text">Свернуть меню</SidebarToggler>
+      </SidebarRoot>
+    );
+  }
 );
 
 export default Sidebar;
