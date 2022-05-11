@@ -50,4 +50,5 @@ export * from './SideDialogActions';
 export * from './SideDialogContent';
 export * from './SideDialogContentText';
 export * from './DatePicker';
+export * from './Notification';
 export * from './LocalizationProvider';

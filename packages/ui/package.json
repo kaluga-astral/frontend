@@ -29,7 +29,8 @@
     "@mui/material": "5.4.3",
     "date-fns": "^2.28.0",
     "lodash-es": "4.17.21",
-    "react-imask": "^6.4.2"
+    "react-imask": "^6.4.2",
+    "react-toastify": "^9.0.0-rc-2"
   },
   "peerDependencies": {
     "react": "^17.0.0"
