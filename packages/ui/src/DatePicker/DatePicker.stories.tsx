@@ -2,16 +2,15 @@ import { Story } from '@storybook/react';
 import { addDays, subDays } from 'date-fns';
 import { useEffect, useRef, useState } from 'react';
 
-import { DatePicker } from './DatePicker';
-import { DatePickerProps } from './types';
+import { DatePicker, Props } from './DatePicker';
 
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
 };
 
-const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date | null>(null);
+const Template: Story<Props> = (args) => {
+  const [value, setValue] = useState<Date | null>(addDays(new Date(), 180));
   const ref = useRef(null);
 
   useEffect(() => {

@@ -60,23 +60,27 @@ export const DatePickerWrapper = styled.div`
           }
         }
       }
-      &--disabled > button {
-        cursor: default;
-        color: ${({ theme }) => theme.palette.grey[300]};
-        font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
-
-        &:hover,
-        :active {
-          background-color: transparent;
+      &--disabled {
+        &:not(.react-datepicker__day--selected) > button {
+          &:hover,
+          :active {
+            background-color: transparent;
+          }
         }
 
-        &:focus {
+        & > button {
+          cursor: default;
+          color: ${({ theme }) => theme.palette.grey[300]};
+          font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        &:focus-visible {
           outline: none;
         }
-      }
-
-      &:focus-visible {
-        outline: none;
       }
     }
   }

@@ -1,4 +1,4 @@
-import { FocusEvent, MutableRefObject, forwardRef, useState } from 'react';
+import { FocusEvent, MutableRefObject, forwardRef } from 'react';
 import { IMask } from 'react-imask';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
@@ -14,7 +14,7 @@ import { DatePickerWrapper } from './styled';
 import { DatePickerHeader } from './DatePickerHeader';
 import { DatePickerDay } from './DatePickerDay';
 
-type Props = Omit<
+export type Props = Omit<
   ReactDatePickerProps,
   | 'renderCustomHeader'
   | 'locale'
@@ -30,21 +30,20 @@ type Props = Omit<
   value: Date | null;
 };
 
-const MIN_YEAR = 1900;
+const MIN_YEAR = 1000;
 
 export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { value: defaultValue, inputProps = {}, ...restProps } = props;
+  const { value, onChange, inputProps = {}, ...restProps } = props;
   const { placeholder = undefined, ...restInputProps } = inputProps;
-  const [value, setValue] = useState<Date | null>(defaultValue);
 
   // уберкостыль, react-date-picker забирает значение из event.target.value
   const handleMaskFieldAccept = (
     val: string,
     _maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
     _e?: InputEvent,
-    onChange?: (value: string) => void
+    onMaskFieldChange?: (value: string) => void
   ) => {
-    onChange?.({
+    onMaskFieldChange?.({
       target: {
         value: val,
       },
@@ -54,8 +53,13 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
     const date = parse(e?.target.value, 'dd.MM.yyyy', new Date());
 
+    // если инпут пустой - кладем в value null
+    if (!e?.target.value) {
+      onChange(null, e);
+    }
+
     if (isValid(date) && date.getFullYear() >= MIN_YEAR) {
-      setValue(date);
+      onChange(date, e);
     }
   };
 
@@ -68,7 +72,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
         openToDate={value ?? undefined}
         dateFormat="dd.MM.yyyy"
         placeholderText={placeholder}
-        onChange={setValue}
+        onChange={onChange}
         onChangeRaw={handleChangeRaw}
         renderCustomHeader={(renderProps) => (
           <DatePickerHeader {...renderProps} />
