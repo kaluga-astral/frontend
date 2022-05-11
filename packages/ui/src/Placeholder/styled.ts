@@ -14,13 +14,13 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledInnerContainer = styled.div`
-  width: 384px;
+  max-width: 384px;
 `;
 
 export const StyledImage = styled.img`
   display: block;
-  width: auto;
-  height: 162px;
+  width: 100%;
+  max-height: 162px;
   margin: auto;
   margin-bottom: ${({ theme }) => theme.spacing(8)};
 `;
