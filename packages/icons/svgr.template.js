@@ -7,13 +7,7 @@ const {
   jsxSpreadAttribute,
 } = require('@babel/types');
 
-const attributesWithCustomValues = {
-  width: { name: 'width', value: '1em' },
-  height: { name: 'height', value: '1em' },
-  fill: { name: 'fill', value: 'currentColor' },
-};
-
-const generateStringAttribute = ({ name, value }) => {
+const generateStringAttribute = (name, value) => {
   return {
     type: 'JSXAttribute',
     name: {
@@ -27,6 +21,12 @@ const generateStringAttribute = ({ name, value }) => {
   };
 };
 
+const attributesWithCustomValues = {
+  width: generateStringAttribute('width', '1em'),
+  height: generateStringAttribute('height', '1em'),
+  fill: generateStringAttribute('fill', 'currentColor'),
+};
+
 module.exports = (variables, { tpl }) => {
   const svgIconJsx = jsxElement(
     jsxOpeningElement(jsxIdentifier('SvgIcon'), [
@@ -34,9 +34,7 @@ module.exports = (variables, { tpl }) => {
         (attribute) =>
           !Object.keys(attributesWithCustomValues).includes(attribute.name.name)
       ),
-      ...Object.values(attributesWithCustomValues).map(({ name, value }) =>
-        generateStringAttribute({ name, value })
-      ),
+      ...Object.values(attributesWithCustomValues),
 
       jsxSpreadAttribute(identifier('props')),
     ]),
