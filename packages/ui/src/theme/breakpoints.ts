@@ -1,6 +1,6 @@
 import { BreakpointsOptions } from '@mui/material';
 
-export const breakpoints: BreakpointsOptions = {
+export const defaultBreakpoints: BreakpointsOptions = {
   values: {
     xs: 0,
     sm: 600,
