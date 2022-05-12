@@ -33,6 +33,8 @@ export * from './MenuList';
 export * from './MenuGroup';
 export * from './Placeholder';
 export * from './Product';
+export * from './Radio';
+export * from './RadioGroup';
 export * from './Select';
 export * from './styles';
 export * from './StylesCacheProvider';
