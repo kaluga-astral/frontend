@@ -13,6 +13,7 @@ import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { elevation } from './elevation';
 import { shape } from './shape';
+import { breakpoints } from './breakpoints';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -35,6 +36,7 @@ export const createTheme = (params: CreateThemeParams) => {
   const { brand, options, fontsUrls } = params;
   const themeOptions = {
     typography,
+    breakpoints,
     spacing: SPACING,
     palette: getPalette(brand),
     components: getComponents(fontsUrls),
