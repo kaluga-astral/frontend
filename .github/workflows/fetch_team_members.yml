@@ -23,6 +23,7 @@ jobs:
           members_url: ${{ inputs.members_url }}
         with:
           script: | 
+            const { createTokenAuth } = require("@octokit/auth-token");
             const auth = createTokenAuth(secrets.OWNER_TOKEN);
             const authentication = await auth();
             const result = await github.request(process.env.members_url, { headers: authentication.headers })
