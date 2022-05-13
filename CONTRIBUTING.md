@@ -9,7 +9,7 @@
 
 Формат:
 ```
-UI-KIT-${JIRA_TASK_NUMBER}: ${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
+UIKIT-${JIRA_TASK_NUMBER}: ${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
 ```
 
 ENUM:
@@ -30,11 +30,11 @@ PACKAGE_NAME:
 
 #### Valid
 ```
-UI-KIT-200: feat(ui,Button): Добавлен props color
+UIKIT-200: feat(ui,Button): Добавлен props color
 ```
 
 ```
-UI-KIT-201: bug(ui,Button): Поправлен padding для Button
+UIKIT-201: bug(ui,Button): Поправлен padding для Button
 ```
 
 #### Invalid
@@ -45,7 +45,7 @@ feat(ui, Button): Добавлен props color
 ## Формат коммита, если нет задачи в jira
 
 ```
-UI-KIT-${JIRA_TASK_NUMBER}: ${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
+UIKIT-${JIRA_TASK_NUMBER}: ${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
 ```
 
 ENUM:
