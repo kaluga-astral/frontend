@@ -8,6 +8,9 @@ const componentsNames = getDirNames(
 );
 
 module.exports = {
+  parserOpts: {
+    issuePrefixes: ['^UI-KIT-[0-9]{1,4}']
+  },
   rules: {
     // Описание не может быть пустым
     'subject-empty': [2, 'never'],
