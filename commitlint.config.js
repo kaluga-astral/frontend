@@ -1,15 +1,23 @@
+const path = require('path');
+
+const getDirNames = require('read-dir-names');
+
+const packagesNames = getDirNames(path.resolve(__dirname, 'packages'));
+const componentsNames = getDirNames(
+  path.resolve(__dirname, 'packages', 'ui', 'src')
+);
+
 module.exports = {
   extends: [
     "@commitlint/config-conventional"
   ],
   parserPreset: {
     parserOpts: {
-      headerPattern: /^(?:UI-KIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
+      headerPattern: /^(?:UIKIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
       headerCorrespondence: ["type", "scope", "subject"],
-      issuePrefixes: ["^UI-KIT-[0-9]{4}"],
+      issuePrefixes: ["^UIKIT-[0-9]{4}"],
     },
   },
-
   rules: {
     // Тело коммита должно начинаться с пустой строки
     "body-leading-blank": [2, "always"],
@@ -36,10 +44,24 @@ module.exports = {
     "type-empty": [2, "never"],
 
     // Перечислим все возможные варианты коммитов
-    "type-enum": [
+    'type-enum': [
       2,
-      "always",
-      ["build", "ci", "docs", "feat", "fix", "bug", "refactor", "test", "wip"]
+      'always',
+      [
+        'feat',
+        'bug',
+        'wip',
+        'refactor',
+        'doc',
+        'build',
+        'chore',
+        'revert',
+        'style',
+        'wip',
+      ],
     ],
-  }
+
+    // Перечисления доступных scope
+    'scope-enum': [2, 'always', [...packagesNames, ...componentsNames]],
+  },
 };
