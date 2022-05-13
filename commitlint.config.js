@@ -13,7 +13,6 @@ module.exports = {
     headerCorrespondence: ["type", "scope", "subject"],
     issuePrefixes: ["^UI-KIT-[0-9]{4}"],
   },
-
   rules: {
     // Описание не может быть пустым
     'subject-empty': [2, 'never'],
