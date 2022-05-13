@@ -74,7 +74,7 @@ bug: Поправлен light variant для Button
 ## Формат коммита, если нет задачи в jira
 
 ```
-UIKIT-${JIRA_TASK_NUMBER}: ${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
+${ENUM}(${PACKAGE_NAME},${COMPONENT_NAME | FUNCTION_NAME}): ${Что было сделано?}
 ```
 
 ENUM:
