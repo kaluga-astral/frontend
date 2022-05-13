@@ -30,13 +30,12 @@ module.exports = {
     // Максимальная длина заголовка 72 символа
     "header-max-length": [2, "always", 72],
 
-    // Область всегда только в нижнем регистре
+    // Для scope разрешается использовать только: lower-case, camel-case, kebab-case, pascal-case
     "scope-case": [
       2,
       "never",
-      ["upper-case"]
+      ["upper-case", "sentence-case", "snake-case", "start-case"]
     ],
-
 
     // Описание не может быть пустым
     "subject-empty": [2, "never"],
