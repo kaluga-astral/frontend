@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const Root = styled.div`
+export const DashboardLayoutRoot = styled.div`
   display: grid;
   grid-template: ${() => {
     return `\n

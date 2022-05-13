@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Main } from './Main';
-import { Root } from './styled';
+import { DashboardLayoutRoot } from './styled';
 
 export type DashBoardLayoutProps = {
   children: ReactNode;
@@ -12,7 +12,7 @@ export type DashBoardLayoutProps = {
 export const DashboardLayout = (props: DashBoardLayoutProps) => {
   const { children } = props;
 
-  return <Root>{children}</Root>;
+  return <DashboardLayoutRoot>{children}</DashboardLayoutRoot>;
 };
 
 DashboardLayout.Header = Header;

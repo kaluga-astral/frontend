@@ -1,23 +1,34 @@
 import { forwardRef } from 'react';
 
+// import { MenuListProps } from '../../MenuList';
+import { Product, ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { ProfileProps } from '../../Profile/types';
 
-import { HeaderRoot } from './styled';
-import { HeaderNav } from './HeaderNav';
-import { HeaderNavProps } from './HeaderNav';
+import { HeaderNav, HeaderRoot } from './styled';
 
 export type HeaderProps = {
-  nav: HeaderNavProps;
+  product: ProductProps;
+  productSwitcher?: React.FC;
+  // menu?: React.FC<MenuListProps>;
   profile: ProfileProps;
 };
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
-  const { nav, profile } = props;
+  const {
+    productSwitcher: ProductSwitcher,
+    product,
+    // menu: Menu,
+    profile,
+  } = props;
 
   return (
     <HeaderRoot ref={ref}>
-      <HeaderNav {...nav} />
+      <HeaderNav>
+        {ProductSwitcher && <ProductSwitcher />}
+        <Product {...product} />
+        {/* {Menu && <Menu />} */}
+      </HeaderNav>
       <Profile {...profile} />
     </HeaderRoot>
   );

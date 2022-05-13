@@ -12,3 +12,8 @@ export const HeaderRoot = styled.header`
   background-color: ${({ theme }) => theme.palette.background.default};
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
+
+export const HeaderNav = styled.nav`
+  display: flex;
+  align-items: center;
+`;
