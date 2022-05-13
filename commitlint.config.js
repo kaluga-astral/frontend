@@ -20,7 +20,6 @@ module.exports = {
     },
   },
 
-
   rules: {
     // Тело коммита должно начинаться с пустой строки
     "body-leading-blank": [2, "always"],
