@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
+        if: ${{ !startsWith(github.event.pull_request.title, 'feat') }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -29,6 +30,22 @@ jobs:
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
             👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
+            
+            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+            
+      - name: send telegram message on PR with design
+        uses: appleboy/telegram-action@master
+        if: ${{ startsWith(github.event.pull_request.title, 'feat') }}
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🐣🐣🐣 ${{ github.event.repository.name }}
+            ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
+            
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            
+            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[2].login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
             
