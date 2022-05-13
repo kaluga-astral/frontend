@@ -16,7 +16,7 @@ module.exports = {
     parserOpts: {
       headerPattern: /^(?:UIKIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
       headerCorrespondence: ["type", "scope", "subject"],
-      issuePrefixes: ["^UIKIT-[0-9]{2,4}"],
+      issuePrefixes: ["^UIKIT-[0-9]{3}", "^UIKIT-[0-9]{4}"],
     },
   },
 
