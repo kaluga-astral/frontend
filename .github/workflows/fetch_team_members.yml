@@ -31,7 +31,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           members_url: ${{ inputs.members_url }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.token }}
         with:
           script: | 
             const { createTokenAuth } = require("@octokit/auth-token");
