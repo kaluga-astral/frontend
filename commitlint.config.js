@@ -9,10 +9,9 @@ const componentsNames = getDirNames(
 
 module.exports = {
   parserOpts: {
-    headerPattern: /^(?:UI-KIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
-    headerCorrespondence: ["type", "scope", "subject"],
-    issuePrefixes: ["^UI-KIT-[0-9]{4}"],
+    issuePrefixes: ["UI-KIT-"],
   },
+
   rules: {
     // Описание не может быть пустым
     'subject-empty': [2, 'never'],
