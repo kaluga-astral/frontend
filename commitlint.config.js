@@ -33,8 +33,8 @@ module.exports = {
     // Область всегда только в нижнем регистре
     "scope-case": [
       2,
-      "always",
-      ["pascal-case"]
+      "never",
+      ["upper-case"]
     ],
 
 
