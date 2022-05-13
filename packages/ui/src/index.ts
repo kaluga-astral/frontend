@@ -12,6 +12,7 @@ export * from './DialogActions';
 export * from './DialogContent';
 export * from './DialogContentText';
 export * from './DialogTitle';
+export * from './DropdownButton';
 export * from './FormControlLabel';
 export * from './FormHelperText';
 export * from './GlobalStyles';
