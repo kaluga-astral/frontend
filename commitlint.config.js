@@ -31,7 +31,7 @@ module.exports = {
     "header-max-length": [2, "always", 72],
 
     // Область всегда только в нижнем регистре
-    "scope-case": [2, "always", "lower-case"],
+    "scope-case": [2, "always", ["camel-case", "pascal-case", "kebab-case", "lower-case"]],
 
     // Описание не может быть пустым
     "subject-empty": [2, "never"],
