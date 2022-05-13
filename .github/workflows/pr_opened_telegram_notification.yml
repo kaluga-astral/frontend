@@ -17,6 +17,7 @@ jobs:
     uses: ./.github/workflows/fetch_team_members.yml
     with:
       members_url: "https://api.github.com/orgs/kaluga-astral/teams/design/members"
+      token: ${{ secrets.OWNER_TOKEN }}
 
 #   notify:
 #     name: notify
