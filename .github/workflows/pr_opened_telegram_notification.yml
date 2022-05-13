@@ -6,15 +6,21 @@ on:
     - main
 
 jobs:
-  fetch:
-    name: fetch
+  fetch-pr:
+    name: fetch-pr
     uses: ./.github/workflows/fetch_pr_info.yml
     with:
       pr_url: ${{ github.event.pull_request.url }}
+      
+  fetch-members:
+    name: fetch-members
+    uses: ./.github/workflows/fetch_team_members.yml
+    with:
+      members_url: "https://api.github.com/orgs/kaluga-astral/teams/design/members"
 
   notify:
     name: notify
-    needs: fetch
+    needs: fetch-pr
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message on PR
@@ -25,11 +31,11 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             🐣🐣🐣 ${{ github.event.repository.name }}
-            ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
+            ${{ fromJSON(needs.fetch-pr.outputs.result).user.login }} открыл PR
             
-            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            ${{ fromJSON(needs.fetch-pr.outputs.result).title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch-pr.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch-pr.outputs.result).requested_reviewers[1].login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
             
