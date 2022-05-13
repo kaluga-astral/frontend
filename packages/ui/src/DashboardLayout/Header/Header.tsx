@@ -1,29 +1,36 @@
 import { forwardRef } from 'react';
 
-import {
-  InnerContainer,
-  LeftContainer,
-  LogoContainer,
-  LogoStyle,
-  StyledHeader,
-} from './styled';
-import { HeaderProps } from './types';
+// import { MenuListProps } from '../../MenuList';
+import { Product, ProductProps } from '../../Product';
+import { Profile } from '../../Profile';
+import { ProfileProps } from '../../Profile/types';
+
+import { HeaderNav, HeaderRoot } from './styled';
+
+export type HeaderProps = {
+  product: ProductProps;
+  productSwitcher?: React.FC;
+  // menu?: React.FC<MenuListProps>;
+  profile: ProfileProps;
+};
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
-  const { children, logoSrc, logoAlt, LogoLink, Widget } = props;
+  const {
+    productSwitcher: ProductSwitcher,
+    product,
+    // menu: Menu,
+    profile,
+  } = props;
 
   return (
-    <StyledHeader ref={ref}>
-      <InnerContainer>
-        <LeftContainer>
-          {Widget && <Widget />}
-          <LogoContainer withWidget={Boolean(Widget)}>
-            <LogoLink Logo={<LogoStyle src={logoSrc} alt={logoAlt} />} />
-          </LogoContainer>
-        </LeftContainer>
-        {children}
-      </InnerContainer>
-    </StyledHeader>
+    <HeaderRoot ref={ref}>
+      <HeaderNav>
+        {ProductSwitcher && <ProductSwitcher />}
+        <Product {...product} />
+        {/* {Menu && <Menu />} */}
+      </HeaderNav>
+      <Profile {...profile} />
+    </HeaderRoot>
   );
 });
 
