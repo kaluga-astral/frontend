@@ -5,9 +5,9 @@ on:
       members_url:
         required: true
         type: string
+    secrets:
       token:
         required: true
-        type: string
     outputs: 
       result: 
         description: Team members
@@ -31,7 +31,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           members_url: ${{ inputs.members_url }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.token }}
         with:
           script: | 
             const { createTokenAuth } = require("@octokit/auth-token");
