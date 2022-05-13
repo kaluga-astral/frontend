@@ -26,20 +26,49 @@ PACKAGE_NAME:
 - icons
 - fonts
 
-### Пример
+### Примеры
 
-#### Valid
+#### Для feat необходимо указать номер задачи
+
+##### Valid
 ```
 UIKIT-200: feat(ui,Button): Добавлен props color
 ```
 
+##### Invalid
 ```
-UIKIT-201: bug(ui,Button): Поправлен padding для Button
+feat(ui,Button): Добавлен props color
 ```
 
-#### Invalid
+#### Пробел между scopes недопустим
+
+##### Valid
 ```
-feat(ui, Button): Добавлен props color
+UIKIT-200: feat(ui,Button): Добавлен props color
+```
+
+##### Invalid
+```
+UI-KIT-200: feat(ui, Button): Добавлен props color
+```
+
+#### Для feat и bug необходимо указывать scopes
+
+##### Valid
+```
+UIKIT-200: feat(ui,Button): Добавлен props color
+```
+```
+UIKIT-200: bug(ui,Button): Добавлен props color
+```
+
+##### Invalid
+```
+feat: Добавлен props color
+```
+
+```
+bug: Поправлен light variant для Button
 ```
 
 ## Формат коммита, если нет задачи в jira
