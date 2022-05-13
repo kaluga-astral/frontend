@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
-        if: ${{ !startsWith(github.event.pull_request.title, 'feat') }}
+        if: ${{ !contains(github.event.pull_request.title, 'feat') }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
             
       - name: send telegram message on PR with design
         uses: appleboy/telegram-action@master
-        if: ${{ startsWith(github.event.pull_request.title, 'feat') }}
+        if: ${{ contains(github.event.pull_request.title, 'feat') }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
