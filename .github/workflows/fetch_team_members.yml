@@ -24,4 +24,5 @@ jobs:
         with:
           script: | 
             const result = await github.request(process.env.members_url)
+            console.log(result.data)
             return result.data;
