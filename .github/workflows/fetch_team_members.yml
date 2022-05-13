@@ -1,0 +1,27 @@
+name: fetch team members
+on:
+  workflow_call:
+    inputs:
+      members_url:
+        required: true
+        type: string
+    outputs: 
+      result: 
+        description: Team members
+        value: ${{ jobs.fetch.outputs.result }}
+jobs:
+  fetch:
+    name: fetch team members
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.fetch-team-members.outputs.result }}
+    steps:
+      - name: fetch team members
+        id: fetch-team-members
+        uses: actions/github-script@v6
+        env:
+          members_url: ${{ inputs.members_url }}
+        with:
+          script: | 
+            const result = await github.request(process.env.members_url)
+            return result.data;
