@@ -27,8 +27,8 @@ module.exports = {
     // Нижний колонтитул коммита должен начинаться с пустой строки
     "footer-leading-blank": [2, "always"],
 
-    // Максимальная длина заголовка 72 символа
-    "header-max-length": [2, "always", 72],
+    // Максимальная длина заголовка 90 символов
+    "header-max-length": [2, "always", 90],
 
     // Для scope разрешается использовать только: lower-case, camel-case, kebab-case, pascal-case
     "scope-case": [
