@@ -39,6 +39,9 @@ module.exports = {
     // Описание не должно заканчиваться '.'
     "subject-full-stop": [2, "never", "."],
 
+    // Описание должно начинаться с большой буквы
+    "subject-case": [2, "always", "sentence-case"],
+
     // Тип всегда только в нижнем регистре
     "type-case": [2, "always", "lower-case"],
 
