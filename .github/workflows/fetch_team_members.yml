@@ -24,6 +24,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           script: | 
-            const result = await github.request(process.env.members_url, {})
+            const result = await github.request(process.env.members_url)
             console.log(result.data)
             return result.data;
