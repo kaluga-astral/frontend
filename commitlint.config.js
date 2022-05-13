@@ -9,6 +9,7 @@ module.exports = {
       issuePrefixes: ["^UI-KIT-[0-9]{4}"],
     },
   },
+
   rules: {
     // Тело коммита должно начинаться с пустой строки
     "body-leading-blank": [2, "always"],
