@@ -1,24 +1,27 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { MailFillSm } from '@astral/icons';
+import { ProductsFillMd } from '@astral/icons';
 
 import { MenuItem } from '../MenuItem';
 
-import { DropdownButton, DropdownButtonProps } from './DropdownButton';
+import {
+  IconDropdownButton,
+  IconDropdownButtonProps,
+} from './IconDropdownButton';
 
 export default {
-  title: 'Components/DropdownButton',
-  component: DropdownButton,
+  title: 'Components/IconDropdownButton',
+  component: IconDropdownButton,
 };
 
-const Template: Story<DropdownButtonProps> = (args) => (
+const Template: Story<IconDropdownButtonProps> = (args) => (
   <Stack gap={1}>
     <Stack gap={3} direction="row" alignItems="center">
-      <DropdownButton {...args}>
+      <IconDropdownButton {...args}>
         <MenuItem onClick={() => console.log('v1')}>Вариант выбора 1</MenuItem>
         <MenuItem onClick={() => console.log('v2')}>Вариант выбора 2</MenuItem>
         <MenuItem onClick={() => console.log('v3')}>Вариант выбора 3</MenuItem>
-      </DropdownButton>
+      </IconDropdownButton>
     </Stack>
   </Stack>
 );
@@ -26,6 +29,5 @@ const Template: Story<DropdownButtonProps> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  name: 'Действие',
-  startIcon: <MailFillSm />,
+  icon: <ProductsFillMd />,
 };

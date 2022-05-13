@@ -1,19 +1,18 @@
-import { MouseEvent, forwardRef, useState } from 'react';
-import { ChevronDOutlineMd } from '@astral/icons';
+import { MouseEvent, ReactNode, forwardRef, useState } from 'react';
 
 import { Menu } from '../Menu';
-import { ButtonProps } from '../Button';
+import { BaseButtonProps } from '../ButtonBase';
 
-import { DropdownButtonWrapper } from './styles';
+import { IconDropdownButtonWrapper } from './styles';
 
-export type DropdownButtonProps = Omit<ButtonProps, 'endIcon' | 'loading'> & {
-  name: string;
+export type IconDropdownButtonProps = Omit<BaseButtonProps, 'loading'> & {
+  icon: ReactNode;
 };
 
-export const DropdownButton = forwardRef<
+export const IconDropdownButton = forwardRef<
   HTMLButtonElement,
-  DropdownButtonProps
->(({ children, name, ...props }, ref) => {
+  IconDropdownButtonProps
+>(({ children, icon, ...props }, ref) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -25,15 +24,14 @@ export const DropdownButton = forwardRef<
 
   return (
     <>
-      <DropdownButtonWrapper
+      <IconDropdownButtonWrapper
         ref={ref}
         {...props}
         onClick={handleOpenMenu}
         selected={open}
-        endIcon={<ChevronDOutlineMd />}
       >
-        {name}
-      </DropdownButtonWrapper>
+        {icon}
+      </IconDropdownButtonWrapper>
       <Menu
         open={open}
         anchorEl={anchorEl}

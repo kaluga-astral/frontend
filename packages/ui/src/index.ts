@@ -18,6 +18,7 @@ export * from './FormHelperText';
 export * from './GlobalStyles';
 export * from './Grid';
 export * from './IconButton';
+export * from './IconDropdownButton';
 export * from './List';
 export * from './ListItem';
 export * from './ListItemAvatar';
