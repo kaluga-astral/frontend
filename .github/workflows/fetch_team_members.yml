@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - run: npm install @octokit/auth-token
 
       - name: fetch team members
@@ -27,10 +28,11 @@ jobs:
         uses: actions/github-script@v6
         env:
           members_url: ${{ inputs.members_url }}
+          owner_token: ${{ ${{ secrets.OWNER_TOKEN }} }}
         with:
           script: | 
             const { createTokenAuth } = require("@octokit/auth-token");
-            const auth = createTokenAuth(secrets.OWNER_TOKEN);
+            const auth = createTokenAuth(process.env.owner_token);
             const authentication = await auth();
             const result = await github.request(process.env.members_url, { headers: authentication.headers })
             console.log(result.data)
