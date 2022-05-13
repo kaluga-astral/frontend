@@ -27,11 +27,15 @@ module.exports = {
     // Нижний колонтитул коммита должен начинаться с пустой строки
     "footer-leading-blank": [2, "always"],
 
-    // Максимальная длина заголовка 72 символа
-    "header-max-length": [2, "always", 72],
+    // Максимальная длина заголовка 90 символов
+    "header-max-length": [2, "always", 90],
 
-    // Область всегда только в нижнем регистре
-    "scope-case": [2, "always", "lower-case"],
+    // Для scope разрешается использовать только: lower-case, camel-case, kebab-case, pascal-case
+    "scope-case": [
+      2,
+      "never",
+      ["upper-case", "sentence-case", "snake-case", "start-case"]
+    ],
 
     // Описание не может быть пустым
     "subject-empty": [2, "never"],

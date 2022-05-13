@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - run: npm install @octokit/auth-token
+      - run: npm install @octokit/rest
 
       - name: fetch team members
         id: fetch-team-members
@@ -34,9 +34,10 @@ jobs:
           token: ${{ secrets.token }}
         with:
           script: | 
-            const { createTokenAuth } = require("@octokit/auth-token");
-            const auth = createTokenAuth(process.env.token);
-            const authentication = await auth();
-            const result = await github.request(process.env.members_url, { headers: authentication.headers })
+            const { Octokit } = require("@octokit/rest");
+            const octokit = new Octokit({
+              auth: process.env.token,
+            });
+            const result = await octokit.request(process.env.members_url);
             console.log(result.data)
             return result.data;
