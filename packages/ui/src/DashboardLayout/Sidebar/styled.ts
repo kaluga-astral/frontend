@@ -1,23 +1,21 @@
-import { Drawer } from '@mui/material';
-
 import { styled } from '../../styles';
+import { Button } from '../../Button';
 
-export const StyledDrawer = styled(Drawer)`
-  position: relative;
+export const SidebarRoot = styled.aside`
   z-index: ${({ theme }) => theme.zIndex.appBar - 1};
 
-  grid-column: 1;
-  width: 241px;
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  padding: ${({ theme }) => theme.spacing(6)};
 
-  .MuiPaper-root {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
+  background-color: ${({ theme }) => theme.palette.background.element};
+  border-right: 1px solid ${({ theme }) => theme.palette.grey[300]};
+`;
 
-    padding: ${({ theme }) => theme.spacing(5, 0)};
+// export const SidebarNav = styled.nav`
+// `;
 
-    background-color: ${({ theme }) => theme.palette.background.element};
-    border-right: 1px solid ${({ theme }) => theme.palette.grey[300]};
-  }
+export const SidebarToggler = styled(Button)`
+  margin-top: auto;
 `;
