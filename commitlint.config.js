@@ -11,13 +11,15 @@ module.exports = {
   extends: [
     "@commitlint/config-conventional"
   ],
+
   parserPreset: {
     parserOpts: {
-      headerPattern: /^(?:UIKIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
+      headerPattern: /^(?:UI-KIT-[0-9]{4}:\s)?(\w*)(?:\((.*)\))?: (.*)$/,
       headerCorrespondence: ["type", "scope", "subject"],
-      issuePrefixes: ["^UIKIT-[0-9]{4}"],
+      issuePrefixes: ["^UI-KIT-[0-9]{4}"],
     },
   },
+
   rules: {
     // Тело коммита должно начинаться с пустой строки
     "body-leading-blank": [2, "always"],
