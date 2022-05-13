@@ -45,7 +45,9 @@ jobs:
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[2].login] }}
+            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
+            
+            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[2].login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
             
