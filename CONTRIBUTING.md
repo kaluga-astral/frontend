@@ -95,7 +95,7 @@ PACKAGE_NAME:
 
 #### Valid
 ```
-wip(ui,Button): Начата работа на добавлением пропса color
+wip(ui,Button): Начата работа над добавлением пропса color
 ```
 
 #### Invalid
