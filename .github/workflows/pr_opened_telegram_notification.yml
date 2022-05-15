@@ -37,8 +37,8 @@ jobs:
           script: | 
             const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
             const designers = JSON.parse(process.env.designers)
-            console.log(requested_reviewers, process.env.pr.assignees, process.env.designers)
-            const requestedDevelopers = requested_reviewers.filter(reviewer => Boolean(designers.find(designer => designer.login !== reviewer.login)))
+            console.log(requested_reviewers, designers)
+            const requestedDevelopers = requested_reviewers.filter(reviewer => !Boolean(designers.find(designer => designer.login === reviewer.login)))
             return requestedDevelopers
       
   get-designer:
@@ -95,9 +95,9 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJson(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
-            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[needs.get-designer.outputs.result.login] }}
+            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJson(needs.get-designer.outputs.result).login] }}
             
             ${{ github.event.pull_request.html_url }}
             
