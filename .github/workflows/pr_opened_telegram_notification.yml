@@ -32,7 +32,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           designers: ${{ needs.fetch-design-members.result }}
-          requested_reviewers: ${{ fromJSON(needs.fetch-pr.outputs.result).requested_reviewers[0] }}
+          requested_reviewers: ${{ fromJSON(needs.fetch-pr.outputs.result) }}
         with:
           script: | 
             const requestedDevelopers = process.env.requested_reviewers.filter(reviewer => Boolean(process.env.designers.find(designer => designer.login !== reviewer.login)))
