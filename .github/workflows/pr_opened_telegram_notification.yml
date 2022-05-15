@@ -79,7 +79,7 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
             ${{ github.event.pull_request.html_url }}
             
@@ -95,9 +95,9 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJson(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
-            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJson(needs.get-designer.outputs.result).login] }}
+            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-designer.outputs.result).login] }}
             
             ${{ github.event.pull_request.html_url }}
             
