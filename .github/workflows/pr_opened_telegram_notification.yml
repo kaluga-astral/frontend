@@ -59,6 +59,7 @@ jobs:
             const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
             const designers = JSON.parse(process.env.designers)
             const requestedDesigner = designers.find(designer => Boolean(requested_reviewers.find(reviewer => reviewer.login === designer.login)))
+            console.log(requestedDesigner)
             return requestedDesigner 
 
   notify:
@@ -96,7 +97,7 @@ jobs:
             
             👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
-            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-designer.outputs.result).login] }}
+            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[needs.get-designer.outputs.result.login] }}
             
             ${{ github.event.pull_request.html_url }}
             
