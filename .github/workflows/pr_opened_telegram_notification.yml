@@ -52,7 +52,7 @@ jobs:
         id: get-requested-designer
         uses: actions/github-script@v6
         env:
-          designers: ${{ needs.fetch-design-members.result }}
+          designers: ${{ needs.fetch-design-members.outputs.result }}
           pr: ${{ needs.fetch-pr.outputs.result }}
         with:
           script: | 
