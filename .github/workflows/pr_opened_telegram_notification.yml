@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [fetch-pr, fetch-design-members]
     outputs: 
-      result: ${{ steps.get-requested-deisgner.outputs.result }}
+      result: ${{ steps.get-requested-designer.outputs.result }}
     steps:
       - name: get requested designer
         id: get-requested-designer
