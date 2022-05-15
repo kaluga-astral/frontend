@@ -31,13 +31,14 @@ jobs:
         id: get-requested-developers
         uses: actions/github-script@v6
         env:
-          designers: ${{ needs.fetch-design-members.result }}
+          designers: ${{ needs.fetch-design-members.outputs.result }}
           pr: ${{ needs.fetch-pr.outputs.result }}
         with:
           script: | 
             const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
+            const designers = JSON.parse(process.env.designers)
             console.log(requested_reviewers, process.env.pr.assignees, process.env.designers)
-            const requestedDevelopers = requested_reviewers.filter(reviewer => Boolean(process.env.designers.find(designer => designer.login !== reviewer.login)))
+            const requestedDevelopers = requested_reviewers.filter(reviewer => Boolean(designers.find(designer => designer.login !== reviewer.login)))
             return requestedDevelopers
       
   get-designer:
@@ -56,7 +57,8 @@ jobs:
         with:
           script: | 
             const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
-            const requestedDesigner = process.env.designers.find(designer => Boolean(requested_reviewers.find(reviewer => reviewer.login === designer.login)))
+            const designers = JSON.parse(process.env.designers)
+            const requestedDesigner = designers.find(designer => Boolean(requested_reviewers.find(reviewer => reviewer.login === designer.login)))
             return requestedDesigner 
 
   notify:
