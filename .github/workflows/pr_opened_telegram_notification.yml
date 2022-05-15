@@ -94,7 +94,7 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch-pr.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch-pr.outputs.result).requested_reviewers[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
             🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-designer.outputs.result).login] }}
             
