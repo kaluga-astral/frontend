@@ -33,7 +33,8 @@ jobs:
         env:
           designers: ${{ needs.fetch-design-members.result }}
           pr: ${{ needs.fetch-pr.outputs.result }}
-          with:
+        with:
+          script: | 
             const requested_reviewers = process.env.pr.requested_reviewers
             const requestedDevelopers = requested_reviewers.filter(reviewer => Boolean(process.env.designers.find(designer => designer.login !== reviewer.login)))
             return requestedDevelopers
@@ -50,7 +51,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           designers: ${{ needs.fetch-design-members.result }}
-          requested_reviewers: ${{ needs.fetch-pr.outputs.result }}
+          pr: ${{ needs.fetch-pr.outputs.result }}
         with:
           script: | 
             const requested_reviewers = process.env.pr.requested_reviewers
