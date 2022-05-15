@@ -35,7 +35,7 @@ jobs:
           pr: ${{ needs.fetch-pr.outputs.result }}
         with:
           script: | 
-            const requested_reviewers = process.env.pr.requested_reviewers
+            const requested_reviewers = ${{ fromJson(process.env.pr).requested_reviewers }}
             console.log(requested_reviewers, process.env.pr, process.env.designers)
             const requestedDevelopers = requested_reviewers.filter(reviewer => Boolean(process.env.designers.find(designer => designer.login !== reviewer.login)))
             return requestedDevelopers
