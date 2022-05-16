@@ -41,7 +41,7 @@ const [
   fillSmIcons,
   outlineMdIcons,
   outlineSmIcons,
-  companysLogos,
+  сompaniesLogos,
 ] = [
   getIcons('FillMd', 24),
   getIcons('FillSm', 16),
@@ -138,9 +138,9 @@ const Template: Story = ({ color }: SvgIconProps) => {
         </Grid>
       </Grid>
 
-      <Grid key="сompanyslogosmd" container>
+      <Grid key="сompaniesLogos" container>
         <Grid>
-          <h2 style={{ textAlign: 'center' }}>CompanysLogos</h2>
+          <h2 style={{ textAlign: 'center' }}>Сompanies Logos</h2>
         </Grid>
         <Grid
           container
@@ -148,7 +148,7 @@ const Template: Story = ({ color }: SvgIconProps) => {
           columnSpacing={48}
           rowSpacing={6}
         >
-          {companysLogos.map(({ name, size, Component }) => (
+          {сompaniesLogos.map(({ name, size, Component }) => (
             <Icon size={size} name={name} component={Component} color={color} />
           ))}
         </Grid>
