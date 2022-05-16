@@ -1,5 +1,7 @@
-import { Grid, SvgIconProps } from '@mui/material';
+import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
+
+import { Grid } from '../ui/src/Grid';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions
@@ -39,15 +41,21 @@ const [
   fillSmIcons,
   outlineMdIcons,
   outlineSmIcons,
-  coloredFillMdIcons,
+  companysLogos,
 ] = [
   getIcons('FillMd', 24),
   getIcons('FillSm', 16),
   getIcons('OutlineMd', 24),
   getIcons('OutlineSm', 16),
-  getIcons('FillMd', 24, 'themed'),
+  getIcons('FillMd', 24).filter(
+    (icon) =>
+      icon.name === 'YoutubeFillMd' ||
+      icon.name === 'FacebookFillMd' ||
+      icon.name === 'GoogleFillMd' ||
+      icon.name === 'VkFillMd' ||
+      icon.name === 'TwitterFillMd'
+  ),
 ];
-
 export default {
   title: 'Components/Icons',
 };
@@ -64,61 +72,86 @@ const Icon = ({ component: Component, name, size, ...props }) => (
   </div>
 );
 
-const Template: Story = ({ color, style }: SvgIconProps) => {
+const Template: Story = ({ color }: SvgIconProps) => {
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <Grid key="fillmd" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="fillmd" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Fill Md 24</h2>
         </Grid>
-        {fillMdIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {fillMdIcons.map(({ name, size, Component }) => (
             <Icon size={size} name={name} component={Component} color={color} />
-          </Grid>
-        ))}
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="fillsm" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="fillsm" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Fill Sm 16</h2>
         </Grid>
-        {fillSmIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {fillSmIcons.map(({ name, size, Component }) => (
             <Icon size={size} name={name} component={Component} color={color} />
-          </Grid>
-        ))}
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="outlinemd" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="outlinemd" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Outline Md 24</h2>
         </Grid>
-        {outlineMdIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {outlineMdIcons.map(({ name, size, Component }) => (
             <Icon size={size} name={name} component={Component} color={color} />
-          </Grid>
-        ))}
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="outlinesm" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="outlinesm" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Outline Sm 16</h2>
         </Grid>
-        {outlineSmIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {outlineSmIcons.map(({ name, size, Component }) => (
             <Icon size={size} name={name} component={Component} color={color} />
-          </Grid>
-        ))}
+          ))}
+        </Grid>
       </Grid>
 
-      <Grid key="fillmdcolored" container spacing={4} m={4}>
-        <Grid item xs={12}>
-          <h2 style={{ textAlign: 'center' }}>Fill md 24 colored</h2>
+      <Grid key="сompanyslogosmd" container>
+        <Grid>
+          <h2 style={{ textAlign: 'center' }}>CompanysLogos</h2>
         </Grid>
-        {coloredFillMdIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
-            <Icon size={size} name={name} component={Component} style={style} />
-          </Grid>
-        ))}
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {companysLogos.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
       </Grid>
     </div>
   );
