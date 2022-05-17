@@ -1,12 +1,12 @@
 import { ReactNode, forwardRef } from 'react';
 
-import { StyledMain } from './styled';
+import { MainRoot } from './styled';
 
-type MainProps = { children: ReactNode };
+export type MainProps = { children: ReactNode };
 
 export const Main = forwardRef<HTMLDivElement, MainProps>(
   ({ children }, ref) => {
-    return <StyledMain ref={ref}>{children}</StyledMain>;
+    return <MainRoot ref={ref}>{children}</MainRoot>;
   }
 );
 
