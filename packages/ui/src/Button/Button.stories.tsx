@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
-import LikeOutlineMd from '@astral/icons/generated-themed-icons/LikeOutlineMd';
+import { LikeOutlineMd } from '@astral/icons';
 
 import { Typography } from '../Typography';
 

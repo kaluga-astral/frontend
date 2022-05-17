@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
+import { LoadingButton } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 
-import { StyledLoadingButton } from './styled';
 import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -10,7 +10,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { variant = 'contained', ...restProps } = props;
 
     return (
-      <StyledLoadingButton
+      <LoadingButton
         ref={ref}
         {...restProps}
         variant={variant}
