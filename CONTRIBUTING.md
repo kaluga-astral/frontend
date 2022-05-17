@@ -122,3 +122,6 @@ main-button
 main-modal-bug
 ```
 
+## Merge pull request
+Merge PR производит человек, который создал PR, после того, как получил approve от двух ревьюеров.
+Также можно воспользоваться auto-merge.
