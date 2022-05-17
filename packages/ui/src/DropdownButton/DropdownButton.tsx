@@ -7,6 +7,9 @@ import { ButtonProps } from '../Button';
 import { DropdownButtonWrapper } from './styles';
 
 export type DropdownButtonProps = Omit<ButtonProps, 'endIcon' | 'loading'> & {
+  /**
+   * Название кнопки
+   */
   name: string;
 };
 

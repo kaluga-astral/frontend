@@ -6,6 +6,9 @@ import { BaseButtonProps } from '../ButtonBase';
 import { IconDropdownButtonWrapper } from './styles';
 
 export type IconDropdownButtonProps = Omit<BaseButtonProps, 'loading'> & {
+  /**
+   * Иконка кнопки
+   */
   icon: ReactNode;
 };
 
