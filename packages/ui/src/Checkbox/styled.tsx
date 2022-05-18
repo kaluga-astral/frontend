@@ -32,7 +32,7 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
     }
   }
 
-  &.Mui-checked,
+  &.Mui-checked__day-names,
   &.MuiCheckbox-indeterminate {
     color: ${({ theme }) => theme.palette.primary.main};
 
