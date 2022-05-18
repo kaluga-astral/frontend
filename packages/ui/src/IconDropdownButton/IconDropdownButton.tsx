@@ -1,11 +1,13 @@
-import { MouseEvent, ReactNode, forwardRef, useState } from 'react';
+import { ClickAwayListener } from '@mui/material';
+import { Fragment, ReactNode, forwardRef } from 'react';
 
+import { useMenu } from '../hooks';
 import { Menu } from '../Menu';
 import { BaseButtonProps } from '../ButtonBase';
 
 import { IconDropdownButtonWrapper } from './styles';
 
-export type IconDropdownButtonProps = Omit<BaseButtonProps, 'loading'> & {
+export type IconDropdownButtonProps = BaseButtonProps & {
   /**
    * Иконка кнопки
    */
@@ -16,33 +18,23 @@ export const IconDropdownButton = forwardRef<
   HTMLButtonElement,
   IconDropdownButtonProps
 >(({ children, icon, ...props }, ref) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => setAnchorEl(null);
+  const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   return (
-    <>
-      <IconDropdownButtonWrapper
-        ref={ref}
-        {...props}
-        onClick={handleOpenMenu}
-        selected={open}
-      >
-        {icon}
-      </IconDropdownButtonWrapper>
-      <Menu
-        open={open}
-        anchorEl={anchorEl}
-        onClick={handleCloseMenu}
-        onClose={handleCloseMenu}
-      >
+    <Fragment>
+      <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+        <IconDropdownButtonWrapper
+          {...props}
+          ref={anchorRef}
+          onClick={handleOpenMenu}
+          selected={open}
+        >
+          {icon}
+        </IconDropdownButtonWrapper>
+      </ClickAwayListener>
+      <Menu open={open} anchorEl={anchorRef.current}>
         {children}
       </Menu>
-    </>
+    </Fragment>
   );
 });

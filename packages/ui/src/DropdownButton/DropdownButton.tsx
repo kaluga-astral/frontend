@@ -1,6 +1,8 @@
-import { MouseEvent, forwardRef, useState } from 'react';
+import { ClickAwayListener } from '@mui/material';
+import { Fragment, forwardRef } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
+import { useMenu } from '../hooks';
 import { Menu } from '../Menu';
 import { ButtonProps } from '../Button';
 
@@ -17,34 +19,24 @@ export const DropdownButton = forwardRef<
   HTMLButtonElement,
   DropdownButtonProps
 >(({ children, name, ...props }, ref) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => setAnchorEl(null);
+  const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   return (
-    <>
-      <DropdownButtonWrapper
-        ref={ref}
-        {...props}
-        onClick={handleOpenMenu}
-        selected={open}
-        endIcon={<ChevronDOutlineMd />}
-      >
-        {name}
-      </DropdownButtonWrapper>
-      <Menu
-        open={open}
-        anchorEl={anchorEl}
-        onClick={handleCloseMenu}
-        onClose={handleCloseMenu}
-      >
+    <Fragment>
+      <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+        <DropdownButtonWrapper
+          {...props}
+          ref={anchorRef}
+          onClick={handleOpenMenu}
+          selected={open}
+          endIcon={<ChevronDOutlineMd />}
+        >
+          {name}
+        </DropdownButtonWrapper>
+      </ClickAwayListener>
+      <Menu open={open} anchorEl={anchorRef.current}>
         {children}
       </Menu>
-    </>
+    </Fragment>
   );
 });
