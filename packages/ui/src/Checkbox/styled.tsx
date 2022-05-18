@@ -48,9 +48,4 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
       color: ${({ theme }) => theme.palette.common.white};
     }
   }
-
-  &.React-datepicker__day-names,
-  .React-datepicker__week {
-    color: ${({ theme }) => theme.palette.primary.main};
-  }
 `;
