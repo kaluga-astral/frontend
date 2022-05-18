@@ -32,7 +32,7 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
     }
   }
 
-  &.Mui-checked__day-names,
+  &.Mui-checked,
   &.MuiCheckbox-indeterminate {
     color: ${({ theme }) => theme.palette.primary.main};
 
@@ -47,5 +47,10 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
     & .MuiSvgIcon-mark {
       color: ${({ theme }) => theme.palette.common.white};
     }
+  }
+
+  &.React-datepicker__day-names,
+  .React-datepicker__week {
+    color: ${({ theme }) => theme.palette.primary.main};
   }
 `;
