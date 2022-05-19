@@ -60,7 +60,7 @@ export const ContentState = (props: ContentStateProps) => {
       imgSrc,
       errorList,
       onRetry,
-      Actions = <Button onClick={onRetry}>Попробовать снова</Button>,
+      actions = <Button onClick={onRetry}>Попробовать снова</Button>,
     } = errorState;
 
     const description = errorList.map((item, index) => (
@@ -76,7 +76,7 @@ export const ContentState = (props: ContentStateProps) => {
         description={description}
         imgAlt={imgAlt}
         imgSrc={imgSrc}
-        Actions={Actions}
+        Actions={actions}
       />
     );
   }

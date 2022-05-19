@@ -20,7 +20,7 @@ export type ContentStateErrorProps = {
   /**
    * Элементы кнопок для дальнейших действий
    */
-  Actions?: ReactNode;
+  actions?: ReactNode;
   /**
    * Функция для повторного действия
    */
