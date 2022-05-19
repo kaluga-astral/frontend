@@ -50,8 +50,7 @@ export const ContentState = (props: ContentStateProps) => {
   if (isLoading) return <Fragment>{LoadingContent}</Fragment>;
 
   if (isCustom && customState) {
-    const { title = 'Произошла ошибка', ...restCustomState } = customState;
-    return <Placeholder title={title} {...restCustomState} />;
+    return <Placeholder {...customState} />;
   }
 
   if (isError && errorState) {
