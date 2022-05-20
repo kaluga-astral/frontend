@@ -1,6 +1,6 @@
 {
   "name": "@astral/icons",
-  "version": "0.29.0",
+  "version": "0.31.0",
   "browser": "./index.ts",
   "scripts": {
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",
@@ -17,6 +17,7 @@
     "react": "^17.0.0"
   },
   "devDependencies": {
+    "@babel/types": "^7.17.10",
     "@svgr/cli": "^6.2.0",
     "typescript": "^4.5.5"
   },

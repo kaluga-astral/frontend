@@ -1,5 +1,7 @@
-import { Grid, SvgIconProps } from '@mui/material';
+import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
+
+import { Grid } from '../ui/src/Grid';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions
@@ -7,30 +9,53 @@ import * as themedIcons from './generated-themed-icons';
 // eslint-disable-next-line import/extensions
 import * as customIcons from './generated-custom-icons';
 
-const iconsObject = { ...themedIcons, ...customIcons };
-const names = Object.keys(iconsObject);
+const getIcons = (
+  name: string,
+  size: number,
+  type: 'themed' | 'custom' | 'all' = 'all'
+) => {
+  const icons = (() => {
+    if (type === 'themed') {
+      return themedIcons;
+    }
+    if (type === 'custom') {
+      return customIcons;
+    }
 
-const getIconsByName = (name: string, size: number) => {
-  return names
+    return { ...themedIcons, ...customIcons };
+  })();
+
+  return Object.keys(icons)
     .filter((iconName) => iconName.includes(name))
     .map((iconName) => {
       return {
         size,
         name: iconName,
-        Component: iconsObject[
-          iconName
-        ] as React.FunctionComponent<SvgIconProps>[],
+        Component: icons[iconName] as React.FC<SvgIconProps>,
       };
     });
 };
 
-const [fillMdIcons, fillSmIcons, outlineMdIcons, outlineSmIcons] = [
-  getIconsByName('FillMd', 24),
-  getIconsByName('FillSm', 16),
-  getIconsByName('OutlineMd', 24),
-  getIconsByName('OutlineSm', 16),
+const [
+  fillMdIcons,
+  fillSmIcons,
+  outlineMdIcons,
+  outlineSmIcons,
+  сompaniesLogos,
+] = [
+  getIcons('FillMd', 24),
+  getIcons('FillSm', 16),
+  getIcons('OutlineMd', 24),
+  getIcons('OutlineSm', 16),
+  getIcons('FillMd', 24).filter(
+    (icon) =>
+      icon.name === 'YoutubeFillMd' ||
+      icon.name === 'FacebookFillMd' ||
+      icon.name === 'GoogleFillMd' ||
+      icon.name === 'VkFillMd' ||
+      icon.name === 'TwitterFillMd'
+  ),
 ];
-
 export default {
   title: 'Components/Icons',
 };
@@ -39,63 +64,106 @@ const Icon = ({ component: Component, name, size, ...props }) => (
   <div
     style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
   >
-    <Component {...props} style={{ width: size, height: size }} />
+    <Component
+      {...props}
+      style={{ ...props.style, width: size, height: size }}
+    />
     <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>{name}</span>
   </div>
 );
 
-const Template: Story = (args: SvgIconProps) => {
+const Template: Story = ({ color }: SvgIconProps) => {
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <Grid key="fillmd" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="fillmd" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Fill Md 24</h2>
         </Grid>
-        {fillMdIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
-            <Icon size={size} name={name} component={Component} {...args} />
-          </Grid>
-        ))}
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {fillMdIcons.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="fillsm" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="fillsm" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Fill Sm 16</h2>
         </Grid>
-        {fillSmIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
-            <Icon size={size} name={name} component={Component} {...args} />
-          </Grid>
-        ))}
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {fillSmIcons.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="outlinemd" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="outlinemd" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Outline Md 24</h2>
         </Grid>
-        {outlineMdIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
-            <Icon size={size} name={name} component={Component} {...args} />
-          </Grid>
-        ))}
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {outlineMdIcons.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
       </Grid>
-      <Grid key="outlinesm" container spacing={4} m={4}>
-        <Grid item xs={12}>
+      <Grid key="outlinesm" container>
+        <Grid>
           <h2 style={{ textAlign: 'center' }}>Outline Sm 16</h2>
         </Grid>
-        {outlineSmIcons.map(({ name, size, Component }) => (
-          <Grid item key={`${name}_${size}`} xs={2}>
-            <Icon size={size} name={name} component={Component} {...args} />
-          </Grid>
-        ))}
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {outlineSmIcons.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
+      </Grid>
+
+      <Grid key="сompaniesLogos" container>
+        <Grid>
+          <h2 style={{ textAlign: 'center' }}>Сompanies Logos</h2>
+        </Grid>
+        <Grid
+          container
+          templateColumns="repeat(6, 1fr)"
+          columnSpacing={48}
+          rowSpacing={6}
+        >
+          {сompaniesLogos.map(({ name, size, Component }) => (
+            <Icon size={size} name={name} component={Component} color={color} />
+          ))}
+        </Grid>
       </Grid>
     </div>
   );
 };
 
 export const Default = Template.bind({});
+
 Default.args = {
   color: 'primary',
+  style: {
+    color: 'red',
+  },
 };
 Default.parameters = {
   options: { showPanel: false },
