@@ -1,6 +1,25 @@
-import { useRef, useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
 
-export function useMenu() {
+type UseMenu = {
+  /**
+   * Флаг состояния меню (открыто-закрыто)
+   */
+  open: boolean;
+  /**
+   * Элемент, к которому привязано меню
+   */
+  anchorRef: MutableRefObject<null>;
+  /**
+   * Обработчик открытия меню
+   */
+  handleCloseMenu: () => void;
+  /**
+   * Обработчик закрытия меню
+   */
+  handleOpenMenu: () => void;
+};
+
+export function useMenu(): UseMenu {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
