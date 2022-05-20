@@ -9,8 +9,9 @@ import {
 
 import { Button } from '../Button';
 import { ListItemIcon } from '../ListItemIcon';
-import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
+
+import { Menu } from './Menu';
 
 export default {
   title: 'Components/Menu',
