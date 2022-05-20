@@ -20,7 +20,7 @@ export const StyledInnerContainer = styled.div`
 export const StyledImage = styled.img`
   display: block;
   width: 100%;
-  max-height: 162px;
+  height: 162px;
   margin: auto;
   margin-bottom: ${({ theme }) => theme.spacing(8)};
 `;
