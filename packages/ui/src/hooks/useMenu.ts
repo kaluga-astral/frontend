@@ -1,6 +1,6 @@
 import { MutableRefObject, useRef, useState } from 'react';
 
-type UseMenu = {
+type UseMenuResult = {
   /**
    * Флаг состояния меню (открыто-закрыто)
    */
@@ -19,7 +19,7 @@ type UseMenu = {
   handleOpenMenu: () => void;
 };
 
-export function useMenu(): UseMenu {
+export function useMenu(): UseMenuResult {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

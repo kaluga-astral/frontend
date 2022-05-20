@@ -1,5 +1,5 @@
 import { ClickAwayListener } from '@mui/material';
-import { Fragment, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { useMenu } from '../hooks';
@@ -22,7 +22,7 @@ export const DropdownButton = forwardRef<
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   return (
-    <Fragment>
+    <>
       <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
         <DropdownButtonWrapper
           {...props}
@@ -37,6 +37,6 @@ export const DropdownButton = forwardRef<
       <Menu open={open} anchorEl={anchorRef.current}>
         {children}
       </Menu>
-    </Fragment>
+    </>
   );
 });

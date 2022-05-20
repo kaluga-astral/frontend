@@ -1,5 +1,5 @@
 import { ClickAwayListener } from '@mui/material';
-import { Fragment, ReactNode, forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
 import { Menu } from '../Menu';
@@ -21,7 +21,7 @@ export const IconDropdownButton = forwardRef<
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   return (
-    <Fragment>
+    <>
       <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
         <IconDropdownButtonWrapper
           {...props}
@@ -35,6 +35,6 @@ export const IconDropdownButton = forwardRef<
       <Menu open={open} anchorEl={anchorRef.current}>
         {children}
       </Menu>
-    </Fragment>
+    </>
   );
 });
