@@ -7,7 +7,7 @@ import { StyledIconButton } from './styled';
 export const IconButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
   ({ children, ...props }, ref) => {
     return (
-      <StyledIconButton ref={ref} {...props}>
+      <StyledIconButton {...props} ref={ref}>
         {children}
       </StyledIconButton>
     );

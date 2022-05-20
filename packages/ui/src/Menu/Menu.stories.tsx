@@ -1,7 +1,15 @@
-import React from 'react';
+import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { Story } from '@storybook/react';
+import {
+  CompanyOutlineMd,
+  ProfileOutlineMd,
+  QuitOutlineMd,
+  SettingsFillMd,
+} from '@astral/icons';
 
-import { Button, MenuItem } from '../index';
+import { Button } from '../Button';
+import { ListItemIcon } from '../ListItemIcon';
+import { MenuItem } from '../MenuItem';
 
 import { Menu } from './Menu';
 
@@ -11,42 +19,47 @@ export default {
 };
 
 const Template: Story = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
 
   return (
     <>
-      <Button
-        id="basic-button"
-        variant="contained"
-        color="primary"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Menu
+      <Button variant="text" onClick={handleClick}>
+        Profile
       </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Пункт меню 1</MenuItem>
-        <MenuItem onClick={handleClose}>Пункт меню 2</MenuItem>
-        <MenuItem onClick={handleClose}>Пункт меню 3</MenuItem>
-        <MenuItem onClick={handleClose}>Пункт меню 4</MenuItem>
-        <MenuItem onClick={handleClose}>Пункт меню 5</MenuItem>
-        <MenuItem onClick={handleClose}>Пункт меню 6</MenuItem>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <ProfileOutlineMd />
+          </ListItemIcon>
+          Мой профиль
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <CompanyOutlineMd />
+          </ListItemIcon>
+          Мои организации
+        </MenuItem>
+        <MenuItem divider onClick={handleClose}>
+          <ListItemIcon>
+            <SettingsFillMd />
+          </ListItemIcon>
+          Настройки
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <QuitOutlineMd />
+          </ListItemIcon>
+          Выйти
+        </MenuItem>
       </Menu>
     </>
   );

@@ -6,29 +6,98 @@ on:
     - main
 
 jobs:
-  fetch:
-    name: fetch
+  fetch-pr:
+    name: fetch-pr
     uses: ./.github/workflows/fetch_pr_info.yml
     with:
       pr_url: ${{ github.event.pull_request.url }}
+      
+  fetch-design-members:
+    name: fetch-design-members
+    uses: ./.github/workflows/fetch_team_members.yml
+    with:
+      members_url: "https://api.github.com/orgs/kaluga-astral/teams/design/members"
+    secrets:
+      token: ${{ secrets.OWNER_TOKEN }}
+      
+  get-developers:
+    name: get-developers
+    runs-on: ubuntu-latest
+    needs: [fetch-pr, fetch-design-members]
+    outputs: 
+      result: ${{ steps.get-requested-developers.outputs.result }}
+    steps:
+      - name: get requested developers
+        id: get-requested-developers
+        uses: actions/github-script@v6
+        env:
+          designers: ${{ needs.fetch-design-members.outputs.result }}
+          pr: ${{ needs.fetch-pr.outputs.result }}
+        with:
+          script: | 
+            const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
+            const designers = JSON.parse(process.env.designers)
+            console.log(requested_reviewers, designers)
+            const requestedDevelopers = requested_reviewers.filter(reviewer => !Boolean(designers.find(designer => designer.login === reviewer.login)))
+            return requestedDevelopers
+      
+  get-designer:
+    name: get-designer
+    runs-on: ubuntu-latest
+    needs: [fetch-pr, fetch-design-members]
+    outputs: 
+      result: ${{ steps.get-requested-designer.outputs.result }}
+    steps:
+      - name: get requested designer
+        id: get-requested-designer
+        uses: actions/github-script@v6
+        env:
+          designers: ${{ needs.fetch-design-members.outputs.result }}
+          pr: ${{ needs.fetch-pr.outputs.result }}
+        with:
+          script: | 
+            const requested_reviewers = JSON.parse(process.env.pr).requested_reviewers
+            const designers = JSON.parse(process.env.designers)
+            const requestedDesigner = designers.find(designer => Boolean(requested_reviewers.find(reviewer => reviewer.login === designer.login)))
+            console.log(requestedDesigner)
+            return requestedDesigner 
 
   notify:
     name: notify
-    needs: fetch
+    needs: [get-designer, get-developers]
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
+        if: ${{ !contains(github.event.pull_request.title, 'feat') }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🐣🐣🐣
-            ${{ fromJSON(needs.fetch.outputs.result).user.login }} открыл PR
+            🐣🐣🐣 ${{ github.event.repository.name }}
+            ${{ github.event.pull_request.user.login }} открыл PR
             
-            ${{ fromJSON(needs.fetch.outputs.result).title }}
+            ${{ github.event.pull_request.title }}
             
-            👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
+            👨👨👨 Reviewers: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
             
-            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+            ${{ github.event.pull_request.html_url }}
+            
+      - name: send telegram message on PR with design
+        uses: appleboy/telegram-action@master
+        if: ${{ contains(github.event.pull_request.title, 'feat') }}
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+           🐣🐣🐣 ${{ github.event.repository.name }}
+            ${{ github.event.pull_request.user.login }} открыл PR
+            
+            ${{ github.event.pull_request.title }}
+            
+            👨👨👨 Reviewers: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[0].login] }}, ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-developers.outputs.result)[1].login] }}
+            
+            🧑‍🎨🧑‍🎨🧑‍🎨 Design: ${{ fromJSON(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.get-designer.outputs.result).login] }}
+            
+            ${{ github.event.pull_request.html_url }}
             

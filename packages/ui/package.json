@@ -1,6 +1,6 @@
 {
   "name": "@astral/ui",
-  "version": "0.25.0",
+  "version": "0.31.0",
   "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {
@@ -19,7 +19,7 @@
     "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix"
   },
   "dependencies": {
-    "@astral/icons": "^0.25.0",
+    "@astral/icons": "^0.31.0",
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.8.1",
     "@emotion/server": "11.4.0",
@@ -29,7 +29,8 @@
     "@mui/material": "5.4.3",
     "date-fns": "^2.28.0",
     "lodash-es": "4.17.21",
-    "react-imask": "^6.4.2"
+    "react-imask": "^6.4.2",
+    "react-toastify": "^9.0.0-rc-2"
   },
   "peerDependencies": {
     "react": "^17.0.0"

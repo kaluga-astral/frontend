@@ -1,0 +1,45 @@
+import { Fragment, forwardRef } from 'react';
+import { Avatar, ClickAwayListener } from '@mui/material';
+
+import { useMenu } from '../hooks';
+
+import {
+  ProfileAnnotation,
+  ProfileChevron,
+  ProfileCredentials,
+  ProfileDisplayName,
+  ProfileRoot,
+  ProfileUser,
+} from './styled';
+import { ProfileProps } from './types';
+
+export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
+  (props, ref) => {
+    const { displayName, annotation, avatar = {}, menu: Menu } = props;
+    const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
+
+    return (
+      <Fragment>
+        <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+          <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
+            <ProfileUser>
+              <ProfileCredentials>
+                <ProfileDisplayName>{displayName}</ProfileDisplayName>
+                <ProfileAnnotation>{annotation}</ProfileAnnotation>
+              </ProfileCredentials>
+              <Avatar {...avatar} />
+            </ProfileUser>
+            <ProfileChevron open={open} />
+          </ProfileRoot>
+        </ClickAwayListener>
+        <Menu
+          open={open}
+          anchorEl={anchorRef.current}
+          onClose={handleCloseMenu}
+        />
+      </Fragment>
+    );
+  }
+);
+
+export default Profile;

@@ -1,0 +1,43 @@
+name: fetch team members
+on:
+  workflow_call:
+    inputs:
+      members_url:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+    outputs: 
+      result: 
+        description: Team members
+        value: ${{ jobs.fetch.outputs.result }}
+jobs:
+  fetch:
+    name: fetch team members
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.fetch-team-members.outputs.result }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm install @octokit/rest
+
+      - name: fetch team members
+        id: fetch-team-members
+        uses: actions/github-script@v6
+        env:
+          members_url: ${{ inputs.members_url }}
+          token: ${{ secrets.token }}
+        with:
+          script: | 
+            const { Octokit } = require("@octokit/rest");
+            const octokit = new Octokit({
+              auth: process.env.token,
+            });
+            const result = await octokit.request(process.env.members_url);
+            console.log(result.data)
+            return result.data;
