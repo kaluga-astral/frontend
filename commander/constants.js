@@ -5,6 +5,7 @@ const PACKAGES_NAMES = [
   '@astral/icons',
   '@astral/fonts',
   '@astral/illustrations',
+  '@astral/form',
 ];
 
 module.exports = {
