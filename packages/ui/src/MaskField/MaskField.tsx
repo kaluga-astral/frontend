@@ -57,5 +57,3 @@ export const MaskField: FC<MaskFieldProps> = ({
     <MaskedTextField {...maskFieldProps} onAccept={handleMaskFieldAccept} />
   );
 };
-
-export { IMask };

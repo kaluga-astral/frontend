@@ -4,7 +4,7 @@ import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 import { isValid, parse } from 'date-fns';
 
-import { IMask, MaskField, MaskFieldProps } from '../MaskField';
+import { MaskField, MaskFieldProps } from '../MaskField';
 import { TextFieldProps } from '../TextField';
 import { DatePickerContext } from '../DatePickerProvider';
 
@@ -43,7 +43,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
   // уберкостыль, react-date-picker забирает значение из event.target.value
   const handleMaskFieldAccept = (
     val: string,
-    _maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+    _maskRef: unknown,
     _e?: InputEvent,
     onMaskFieldChange?: (value: string) => void
   ) => {
