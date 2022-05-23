@@ -7,6 +7,7 @@ const componentsNames = getDirNames(
   path.resolve(__dirname, 'packages', 'ui', 'src')
 );
 
+console.log('packagesNames', packagesNames)
 module.exports = {
   extends: [
     "@commitlint/config-conventional"
@@ -30,11 +31,11 @@ module.exports = {
     "header-max-length": [2, "always", 90],
 
     // Для scope разрешается использовать только: lower-case, camel-case, kebab-case, pascal-case
-    "scope-case": [
-      2,
-      "never",
-      ["upper-case", "sentence-case", "snake-case", "start-case"]
-    ],
+    // "scope-case": [
+    //   2,
+    //   "never",
+    //   ["upper-case", "sentence-case", "snake-case", "start-case"]
+    // ],
 
     // Описание не может быть пустым
     "subject-empty": [2, "never"],
@@ -70,6 +71,6 @@ module.exports = {
     ],
 
     // Перечисления доступных scope
-    'scope-enum': [2, 'always', [...packagesNames, ...componentsNames]],
+    'scope-enum': [2, 'always', [...packagesNames]],
   },
 };
