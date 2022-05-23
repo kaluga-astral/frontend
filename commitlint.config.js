@@ -7,7 +7,6 @@ const componentsNames = getDirNames(
   path.resolve(__dirname, 'packages', 'ui', 'src')
 );
 
-console.log('packagesNames', packagesNames)
 module.exports = {
   extends: [
     "@commitlint/config-conventional"
@@ -71,6 +70,6 @@ module.exports = {
     ],
 
     // Перечисления доступных scope
-    'scope-enum': [2, 'always', [...packagesNames]],
+    'scope-enum': [2, 'always', [...packagesNames, ...componentsNames]],
   },
 };
