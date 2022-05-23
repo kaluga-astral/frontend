@@ -4,7 +4,29 @@ import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
 import { TextField, TextFieldProps } from '../TextField';
 
-import type { MaskFieldProps } from './types';
+type MaskProps = IMaskInputProps<
+  IMask.AnyMaskedOptions,
+  boolean,
+  string,
+  HTMLInputElement
+>;
+
+export type MaskFieldProps = Omit<
+  MaskProps & TextFieldProps,
+  'onChange' | 'onAccept'
+> & {
+  onChange?: (value: string) => void;
+  onAccept?: (
+    value: string,
+    maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+    e?: InputEvent | undefined,
+    onChange?: (value: string) => void
+  ) => void;
+  /**
+   * Автоматически исправляет введенное значение под маску. Если передан 'pad' - подставляет 0 перед цифрами в дате
+   */
+  autofix?: boolean | 'pad';
+};
 
 const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
   const textFieldProps = props as TextFieldProps;
@@ -35,3 +57,5 @@ export const MaskField: FC<MaskFieldProps> = ({
     <MaskedTextField {...maskFieldProps} onAccept={handleMaskFieldAccept} />
   );
 };
+
+export { IMask };
