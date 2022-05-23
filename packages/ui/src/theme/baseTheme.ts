@@ -1,4 +1,5 @@
 import {
+  BreakpointsOptions,
   Palette as MuiPalette,
   Theme as MuiTheme,
   PaletteColor,
@@ -13,6 +14,7 @@ import { FontsUrls, getComponents } from './components';
 import { Brand, SPACING } from './constants';
 import { elevation } from './elevation';
 import { shape } from './shape';
+import { defaultBreakpoints } from './breakpoints';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -29,12 +31,19 @@ type CreateThemeParams = {
   brand: Brand;
   options?: ThemeOptions;
   fontsUrls: FontsUrls;
+  breakpoints?: BreakpointsOptions;
 };
 
 export const createTheme = (params: CreateThemeParams) => {
-  const { brand, options, fontsUrls } = params;
+  const {
+    brand,
+    options,
+    fontsUrls,
+    breakpoints = defaultBreakpoints,
+  } = params;
   const themeOptions = {
     typography,
+    breakpoints,
     spacing: SPACING,
     palette: getPalette(brand),
     components: getComponents(fontsUrls),

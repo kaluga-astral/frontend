@@ -55,6 +55,15 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Build @astral/form
+        run: npm run build --workspace=@astral/form
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Publish @astral/form
+        run: npm publish ./packages/form/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Generate token
         uses: tibdex/github-app-token@v1
         id: generate-token
@@ -107,17 +116,17 @@ jobs:
           format: html
           message: |
             🚀 <b>Были опубликованы новые версии пакетов ui-kit !</b>
-            
+
             Опубликованные пакеты:
 
             📦  @astral/ui: ${{ github.event.release.tag_name }}
             📦  @astral/fonts: ${{ github.event.release.tag_name }}
             📦  @astral/icons: ${{ github.event.release.tag_name }}
             📦  @astral/illustrations: ${{ github.event.release.tag_name }}
+            📦  @astral/form: ${{ github.event.release.tag_name }}
 
             ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
-            
+
             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
-            
+
             ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти <a href="${{ github.event.repository.html_url }}">здесь</a>. Любой желающий может внести свой вклад в развитие проекта.
-            
