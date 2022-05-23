@@ -9,7 +9,9 @@ export default {
 
 const Template: Story = (args) => (
   <GlobalStyles {...args}>
-    Съешь же ещё этих мягких французских булок да выпей чаю
+    <div style={{ width: '150vw', height: '150vh' }}>
+      Съешь же ещё этих мягких французских булок да выпей чаю
+    </div>
   </GlobalStyles>
 );
 

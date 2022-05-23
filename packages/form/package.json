@@ -1,7 +1,7 @@
 {
-  "name": "@astral/illustrations",
+  "name": "@astral/form",
   "main": "./src",
-  "version": "0.31.0",
+  "version": "0.30.0",
   "scripts": {
     "prebuild": "rimraf ./lib",
     "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",

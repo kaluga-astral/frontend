@@ -1,5 +1,7 @@
-import { Fragment, forwardRef, useCallback, useRef, useState } from 'react';
+import { Fragment, forwardRef } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
+
+import { useMenu } from '../hooks';
 
 import {
   ProfileAnnotation,
@@ -14,28 +16,12 @@ import { ProfileProps } from './types';
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {
     const { displayName, annotation, avatar = {}, menu: Menu } = props;
-
-    const [open, setOpen] = useState(false);
-    const anchorRef = useRef(null);
-
-    const handleClick = useCallback(() => {
-      setOpen((prevValue) => {
-        return !prevValue;
-      });
-    }, []);
-
-    const handleClickAway = useCallback(() => {
-      setOpen(false);
-    }, []);
-
-    const handleClose = useCallback(() => {
-      setOpen(false);
-    }, []);
+    const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     return (
       <Fragment>
-        <ClickAwayListener ref={ref} onClickAway={handleClickAway}>
-          <ProfileRoot ref={anchorRef} variant="text" onClick={handleClick}>
+        <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+          <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             <ProfileUser>
               <ProfileCredentials>
                 <ProfileDisplayName>{displayName}</ProfileDisplayName>
@@ -46,7 +32,11 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             <ProfileChevron open={open} />
           </ProfileRoot>
         </ClickAwayListener>
-        <Menu open={open} anchorEl={anchorRef.current} onClose={handleClose} />
+        <Menu
+          open={open}
+          anchorEl={anchorRef.current}
+          onClose={handleCloseMenu}
+        />
       </Fragment>
     );
   }

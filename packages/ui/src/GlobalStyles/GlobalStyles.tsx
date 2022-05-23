@@ -15,6 +15,17 @@ export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
           html: {
             fontSize: theme.typography.htmlFontSize,
           },
+          '*': {
+            scrollbarWidth: 'thin',
+          },
+          '*::-webkit-scrollbar': {
+            width: 4,
+            height: 4,
+          },
+          '*::-webkit-scrollbar-thumb': {
+            borderRadius: theme.shape.small,
+            backgroundColor: theme.palette.grey[300],
+          },
         }}
       />
     </>

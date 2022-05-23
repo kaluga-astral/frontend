@@ -103,6 +103,15 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
           outline: `2px solid ${theme.palette.primary['400']}`,
           boxShadow: 'none',
         },
+        '&.MuiButton-root .MuiButton-startIcon': {
+          marginRight: theme.spacing(1),
+        },
+        '&.MuiButton-root .MuiButton-endIcon': {
+          marginLeft: theme.spacing(1),
+        },
+        '&.MuiButton-root .MuiSvgIcon-root': {
+          fontSize: '24px',
+        },
       };
     },
   },
