@@ -2,7 +2,7 @@ import { DatePickerDayButton } from './styled';
 
 type Props = {
   dayOfMonth: number;
-  date?: Date | undefined;
+  date?: Date;
 };
 
 export const DatePickerDay = (props: Props) => {

@@ -1,6 +1,8 @@
 import { Story } from '@storybook/react';
 import { addDays, subDays } from 'date-fns';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+
+import { DatePickerProvider } from '../DatePickerProvider';
 
 import { DatePicker, Props } from './DatePicker';
 
@@ -11,13 +13,12 @@ export default {
 
 const Template: Story<Props> = (args) => {
   const [value, setValue] = useState<Date | null>(addDays(new Date(), 180));
-  const ref = useRef(null);
 
-  useEffect(() => {
-    console.log(ref.current);
-  }, [ref]);
-
-  return <DatePicker {...args} ref={ref} value={value} onChange={setValue} />;
+  return (
+    <DatePickerProvider>
+      <DatePicker {...args} value={value} onChange={setValue} />
+    </DatePickerProvider>
+  );
 };
 
 export const Default = Template.bind({});

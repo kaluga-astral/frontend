@@ -1,14 +1,12 @@
-import { FocusEvent, MutableRefObject, forwardRef } from 'react';
-import { IMask } from 'react-imask';
+import { FocusEvent, MutableRefObject, forwardRef, useContext } from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
-import ru from 'date-fns/locale/ru';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 import { isValid, parse } from 'date-fns';
 
-import { MaskField } from '../MaskField';
-import { MaskFieldProps } from '../MaskField/types';
+import { IMask, MaskField, MaskFieldProps } from '../MaskField';
 import { TextFieldProps } from '../TextField';
+import { DatePickerContext } from '../DatePickerProvider';
 
 import { DatePickerWrapper } from './styled';
 import { DatePickerHeader } from './DatePickerHeader';
@@ -18,7 +16,6 @@ export type Props = Omit<
   ReactDatePickerProps,
   | 'renderCustomHeader'
   | 'locale'
-  | 'dateFormat'
   | 'renderCustomHeader'
   | 'renderDayContents'
   | 'customInput'
@@ -27,14 +24,21 @@ export type Props = Omit<
   | 'placeholderText'
 > & {
   inputProps?: TextFieldProps;
-  value: Date | null;
+  value?: Date;
 };
 
 const MIN_YEAR = 1000;
 
 export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { value, onChange, inputProps = {}, ...restProps } = props;
-  const { placeholder = undefined, ...restInputProps } = inputProps;
+  const {
+    value,
+    onChange,
+    inputProps = {},
+    dateFormat = 'dd.MM.yyyy',
+    ...restProps
+  } = props;
+  const { placeholder, ...restInputProps } = inputProps;
+  const { locale } = useContext(DatePickerContext);
 
   // уберкостыль, react-date-picker забирает значение из event.target.value
   const handleMaskFieldAccept = (
@@ -51,7 +55,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
   };
 
   const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
-    const date = parse(e?.target.value, 'dd.MM.yyyy', new Date());
+    const date = parse(e?.target.value, dateFormat as string, new Date());
 
     // если инпут пустой - кладем в value null
     if (!e?.target.value) {
@@ -67,10 +71,10 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <DatePickerWrapper>
       <ReactDatePicker
         {...restProps}
-        locale={ru}
+        locale={locale}
         selected={value}
         openToDate={value ?? undefined}
-        dateFormat="dd.MM.yyyy"
+        dateFormat={dateFormat}
         placeholderText={placeholder}
         onChange={onChange}
         onChangeRaw={handleChangeRaw}
@@ -94,6 +98,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>((props, ref) => {
               ),
             }}
             inputRef={(el: HTMLInputElement | null) => {
+              // если передан ref - пишем в ref.current элемент из MaskField (inputRef принимает только функцию)
               if (ref) {
                 (ref as MutableRefObject<HTMLInputElement | null>).current = el;
               }
