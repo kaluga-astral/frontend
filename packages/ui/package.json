@@ -52,11 +52,11 @@
   "exports": {
     ".": {
       "import": "./esm/index.js",
-      "require": "./cjs/index.js"
+      "require": "./index.js"
     },
     "./server": {
       "import": "./esm/server/index.js",
-      "require": "./cjs/server/index.js"
+      "require": "./server/index.js"
     }
   }
 }
