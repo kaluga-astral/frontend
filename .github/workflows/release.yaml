@@ -55,14 +55,14 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-      - name: Build @astral/form
-        run: npm run build --workspace=@astral/form
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: Publish @astral/form
-        run: npm publish ./packages/form/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+#      - name: Build @astral/form
+#        run: npm run build --workspace=@astral/form
+#        env:
+#          RELEASE_TAG: ${{ github.event.release.tag_name }}
+#      - name: Publish @astral/form
+#        run: npm publish ./packages/form/lib
+#        env:
+#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Generate token
         uses: tibdex/github-app-token@v1
