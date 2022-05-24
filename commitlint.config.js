@@ -19,7 +19,6 @@ module.exports = {
       issuePrefixes: ["^UIKIT-[0-9]{2,4}"],
     },
   },
-
   rules: {
     // Тело коммита должно начинаться с пустой строки
     "body-leading-blank": [2, "always"],
@@ -29,13 +28,6 @@ module.exports = {
 
     // Максимальная длина заголовка 90 символов
     "header-max-length": [2, "always", 90],
-
-    // Для scope разрешается использовать только: lower-case, camel-case, kebab-case, pascal-case
-    "scope-case": [
-      2,
-      "never",
-      ["upper-case", "sentence-case", "snake-case", "start-case"]
-    ],
 
     // Описание не может быть пустым
     "subject-empty": [2, "never"],
