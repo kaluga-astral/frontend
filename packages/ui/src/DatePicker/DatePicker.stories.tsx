@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 import { DatePickerProvider } from '../DatePickerProvider';
 
-import { DatePicker, Props } from './DatePicker';
+import { DatePicker, DatePickerProps } from './DatePicker';
 
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
 };
 
-const Template: Story<Props> = (args) => {
+const Template: Story<DatePickerProps> = (args) => {
   const [value, setValue] = useState<Date | null>(addDays(new Date(), 180));
 
   return (
