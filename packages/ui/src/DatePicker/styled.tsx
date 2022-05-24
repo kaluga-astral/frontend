@@ -11,6 +11,10 @@ export const DatePickerWrapper = styled.div`
     border-radius: ${({ theme }) => theme.spacing(1)};
     box-shadow: ${({ theme }) => theme.elevation[200]};
 
+    &-popper {
+      z-index: ${({ theme }) => theme.zIndex.drawer};
+    }
+
     & .react-datepicker__day-names,
     .react-datepicker__week {
       display: flex;
