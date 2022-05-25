@@ -1,4 +1,4 @@
-import { EditOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 
 import { CellValue, DataGrid, DataGridColumns } from '../DataGrid';
@@ -17,20 +17,24 @@ type ColumnsType = {
 
 const ACTIONS: Actions<ColumnsType> = {
   main: [
-    { icon: <EyeFillMd />, name: 'Просмотреть', onClick: () => {} },
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
     {
       icon: <SendOutlineMd />,
       nested: true,
       name: 'Отправить',
       actions: [
-        { name: 'Туда', onClick: () => {} },
-        { name: 'Сюда', onClick: () => {} },
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
       ],
     },
   ],
   secondary: [
-    { icon: <EditOutlineMd />, name: 'Редактировать', onClick: () => {} },
-    { icon: <SendOutlineMd />, name: 'Удалить', onClick: () => {} },
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
   ],
 };
 

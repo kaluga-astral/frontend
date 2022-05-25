@@ -1,5 +1,5 @@
 import { DotsVOutlineMd } from '@astral/icons';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 
 import { IconButton } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
@@ -23,7 +23,7 @@ export type SingleAction<T> = {
   /**
    * Иконка действия
    */
-  icon: ReactNode;
+  icon?: ReactNode;
   /**
    * Обработчик действия
    */
@@ -91,23 +91,28 @@ export function ActionCell<T>({
       onClick(row);
     };
 
-  const renderMainActions = useMemo(() => {
-    return main.map(({ nested, icon, name, ...rest }) => {
-      if (nested) {
-        const { actions: nestedActions } = rest as MultipleAction<T>;
+  const renderMainAction = useCallback(
+    (action: MainAction<T>) => {
+      if (action.nested) {
+        const { name, actions, icon } = action;
 
         return (
           <Tooltip key={name} title={name}>
             <IconDropdownButton icon={icon} variant="text">
-              {nestedActions.map(({ name: nestedActionName }) => (
-                <MenuItem key={nestedActionName}>{nestedActionName}</MenuItem>
+              {actions.map(({ name: nestedActionName, onClick }) => (
+                <MenuItem
+                  key={nestedActionName}
+                  onClick={handleActionClick(onClick)}
+                >
+                  {nestedActionName}
+                </MenuItem>
               ))}
             </IconDropdownButton>
           </Tooltip>
         );
       }
 
-      const { onClick } = rest as SingleAction<T>;
+      const { onClick, name, icon } = action;
 
       return (
         <Tooltip key={name} title={name}>
@@ -116,31 +121,28 @@ export function ActionCell<T>({
           </IconButton>
         </Tooltip>
       );
-    });
-  }, [main, handleActionClick]);
+    },
+    [handleActionClick]
+  );
 
-  const renderMenuActions = useMemo(() => {
-    return secondary.map(({ name, onClick }) => (
-      <MenuItem key={name} onClick={handleActionClick(onClick)}>
-        {name}
-      </MenuItem>
-    ));
-  }, [secondary, handleActionClick]);
-
-  const renderAdditionalActions = useMemo(() => {
+  const renderSecondaryActions = useMemo(() => {
     if (!Boolean(secondary.length)) return null;
 
     return (
       <IconDropdownButton icon={<DotsVOutlineMd />} variant="text">
-        {renderMenuActions}
+        {secondary.map(({ name, onClick }) => (
+          <MenuItem key={name} onClick={handleActionClick(onClick)}>
+            {name}
+          </MenuItem>
+        ))}
       </IconDropdownButton>
     );
-  }, [renderMenuActions, handleActionClick]);
+  }, [secondary, handleActionClick]);
 
   return (
     <ActionCellWrapper>
-      {renderMainActions}
-      {renderAdditionalActions}
+      {main.map((action) => renderMainAction(action))}
+      {renderSecondaryActions}
     </ActionCellWrapper>
   );
 }
