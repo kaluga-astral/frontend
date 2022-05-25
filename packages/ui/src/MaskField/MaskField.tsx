@@ -26,6 +26,10 @@ export type MaskFieldProps = Omit<
    * Автоматически исправляет введенное значение под маску. Если передан 'pad' - подставляет 0 перед цифрами в дате
    */
   autofix?: boolean | 'pad';
+  /**
+   * Кастомные определения (definitions) для более точной настройки маски
+   */
+  definitions?: IMask.MaskedPattern.Definitions;
 };
 
 const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
