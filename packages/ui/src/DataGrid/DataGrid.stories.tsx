@@ -1,8 +1,8 @@
-import { EditOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { Action, ActionCell } from '../ActionCell';
+import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
@@ -21,12 +21,28 @@ type ColumnsType = {
   action: CellValue;
 };
 
-const ACTIONS: Action<ColumnsType>[] = [
-  { Icon: <EyeFillMd />, name: 'Отправить', onClick: () => {} },
-  { Icon: <EditOutlineMd />, name: 'Редактировать', onClick: () => {} },
-  { Icon: <SendOutlineMd />, name: 'Удалить', onClick: () => {} },
-  { Icon: <SendOutlineMd />, name: 'Удалить 2', onClick: () => {} },
-];
+const ACTIONS: Actions<ColumnsType> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
+      ],
+    },
+  ],
+  secondary: [
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
+  ],
+};
 
 const columns: DataGridColumns<ColumnsType>[] = [
   {
