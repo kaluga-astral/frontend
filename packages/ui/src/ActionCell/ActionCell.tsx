@@ -1,84 +1,146 @@
 import { DotsVOutlineMd } from '@astral/icons';
-import React, { useMemo, useState } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { IconButton } from '../IconButton';
-import { Menu } from '../Menu';
+import { IconDropdownButton } from '../IconDropdownButton';
 import { MenuItem } from '../MenuItem';
 import { Tooltip } from '../Tooltip';
 
-import { ActionCellWrapper } from './styled';
-import { Action, ActionCellProps } from './types';
+import { ActionCellWrapper } from './styles';
 
-const MAX_MAIN_ACTIONS = 2;
-const MAX_ACTIONS_IN_CELL = 3;
+export type NestedAction<T> = {
+  /**
+   * Обработчик действия
+   */
+  onClick: (row: T) => void;
+  /**
+   * Название действия
+   */
+  name: string;
+};
 
-export function ActionCell<T>({ actions = [], row }: ActionCellProps<T>) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+export type SingleAction<T> = {
+  /**
+   * Иконка действия
+   */
+  icon: ReactNode;
+  /**
+   * Обработчик действия
+   */
+  onClick: (row: T) => void;
+  /**
+   * Название действия
+   */
+  name: string;
+  /**
+   * Флаг показа выпадающего списка при клике
+   */
+  nested?: false;
+};
 
-  const open = Boolean(anchorEl);
-  const actionsCount = actions.length;
+export type MultipleAction<T> = {
+  /**
+   * Иконка действия
+   */
+  icon: ReactNode;
+  /**
+   * Список действий для выпадающего списка
+   */
+  actions: Array<NestedAction<T>>;
+  /**
+   * Флаг показа выпадающего списка при клике
+   */
+  nested: true;
+  /**
+   * Название действия
+   */
+  name: string;
+};
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+export type MainAction<T> = SingleAction<T> | MultipleAction<T>;
 
-  const handleCloseMenu = () => setAnchorEl(null);
+export type Actions<T> = {
+  /**
+   * Основные действия
+   */
+  main: MainAction<T>[];
+  /**
+   * Второстепенные действия
+   */
+  secondary?: SingleAction<T>[];
+};
 
-  const handleActionClick = (onClick: Action<T>['onClick']) => () => {
-    if (anchorEl) handleCloseMenu();
+export type ActionsCellProps<T> = {
+  /**
+   * Действия
+   */
+  actions: Actions<T>;
+  /**
+   * Данные строки из DataGrid
+   */
+  row: T;
+};
 
-    onClick(row);
-  };
+export function ActionCell<T>({
+  actions: { main = [], secondary = [] },
+  row,
+}: ActionsCellProps<T>) {
+  const handleActionClick =
+    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
+    () => {
+      onClick(row);
+    };
 
   const renderMainActions = useMemo(() => {
-    return actions.slice(0, MAX_MAIN_ACTIONS).map(({ name, onClick, Icon }) => (
-      <Tooltip key={name} title={name}>
-        <IconButton variant="text" onClick={handleActionClick(onClick)}>
-          {Icon}
-        </IconButton>
-      </Tooltip>
-    ));
-  }, [actions, handleActionClick]);
+    return main.map(({ nested, icon, name, ...rest }) => {
+      if (nested) {
+        const { actions: nestedActions } = rest as MultipleAction<T>;
 
-  const renderAdditionalActions = useMemo(() => {
-    if (actionsCount < MAX_ACTIONS_IN_CELL) return null;
+        return (
+          <Tooltip key={name} title={name}>
+            <IconDropdownButton icon={icon} variant="text">
+              {nestedActions.map(({ name: nestedActionName }) => (
+                <MenuItem key={nestedActionName}>{nestedActionName}</MenuItem>
+              ))}
+            </IconDropdownButton>
+          </Tooltip>
+        );
+      }
 
-    if (actionsCount === MAX_ACTIONS_IN_CELL) {
-      const { onClick, Icon } = actions[MAX_ACTIONS_IN_CELL - 1];
+      const { onClick } = rest as SingleAction<T>;
 
       return (
-        <IconButton variant="text" onClick={handleActionClick(onClick)}>
-          {Icon}
-        </IconButton>
+        <Tooltip key={name} title={name}>
+          <IconButton variant="text" onClick={handleActionClick(onClick)}>
+            {icon}
+          </IconButton>
+        </Tooltip>
       );
-    }
-
-    return (
-      <IconButton variant="text" onClick={handleOpenMenu}>
-        <DotsVOutlineMd />
-      </IconButton>
-    );
-  }, [actions, handleActionClick]);
+    });
+  }, [main, handleActionClick]);
 
   const renderMenuActions = useMemo(() => {
-    return actions
-      .slice(MAX_MAIN_ACTIONS, actionsCount)
-      .map(({ name, onClick }) => (
-        <MenuItem key={name} onClick={handleActionClick(onClick)}>
-          {name}
-        </MenuItem>
-      ));
-  }, [actions, handleActionClick]);
+    return secondary.map(({ name, onClick }) => (
+      <MenuItem key={name} onClick={handleActionClick(onClick)}>
+        {name}
+      </MenuItem>
+    ));
+  }, [secondary, handleActionClick]);
+
+  const renderAdditionalActions = useMemo(() => {
+    if (!Boolean(secondary.length)) return null;
+
+    return (
+      <IconDropdownButton icon={<DotsVOutlineMd />} variant="text">
+        {renderMenuActions}
+      </IconDropdownButton>
+    );
+  }, [renderMenuActions, handleActionClick]);
 
   return (
-    <>
-      <ActionCellWrapper>
-        {renderMainActions}
-        {renderAdditionalActions}
-      </ActionCellWrapper>
-      <Menu open={open} anchorEl={anchorEl} onClose={handleCloseMenu}>
-        {renderMenuActions}
-      </Menu>
-    </>
+    <ActionCellWrapper>
+      {renderMainActions}
+      {renderAdditionalActions}
+    </ActionCellWrapper>
   );
 }

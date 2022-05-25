@@ -3,8 +3,7 @@ import { Story } from '@storybook/react';
 
 import { CellValue, DataGrid, DataGridColumns } from '../DataGrid';
 
-import { ActionCell } from './ActionCell';
-import { Action } from './types';
+import { ActionCell, Actions } from './ActionCell';
 
 export default {
   title: 'Components/ActionCell',
@@ -16,12 +15,24 @@ type ColumnsType = {
   action: CellValue;
 };
 
-const ACTIONS: Action<ColumnsType>[] = [
-  { Icon: <EyeFillMd />, name: 'Отправить', onClick: () => {} },
-  { Icon: <EditOutlineMd />, name: 'Редактировать', onClick: () => {} },
-  { Icon: <SendOutlineMd />, name: 'Удалить', onClick: () => {} },
-  { Icon: <SendOutlineMd />, name: 'Удалить 2', onClick: () => {} },
-];
+const ACTIONS: Actions<ColumnsType> = {
+  main: [
+    { icon: <EyeFillMd />, name: 'Просмотреть', onClick: () => {} },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => {} },
+        { name: 'Сюда', onClick: () => {} },
+      ],
+    },
+  ],
+  secondary: [
+    { icon: <EditOutlineMd />, name: 'Редактировать', onClick: () => {} },
+    { icon: <SendOutlineMd />, name: 'Удалить', onClick: () => {} },
+  ],
+};
 
 const columns: DataGridColumns<ColumnsType>[] = [
   {

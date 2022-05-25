@@ -1,4 +1,10 @@
-import { MutableRefObject, useRef, useState } from 'react';
+import {
+  ForwardedRef,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 type UseMenuResult = {
   /**
@@ -19,9 +25,21 @@ type UseMenuResult = {
   handleOpenMenu: () => void;
 };
 
-export function useMenu(): UseMenuResult {
+export function useMenu(
+  ref: ForwardedRef<HTMLButtonElement> | null = null
+): UseMenuResult {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+
+  useEffect(() => {
+    if (!ref) return;
+
+    if (typeof ref === 'function') {
+      ref(anchorRef.current);
+    } else {
+      ref.current = anchorRef.current;
+    }
+  }, [ref]);
 
   const handleCloseMenu = () => setOpen(false);
 
