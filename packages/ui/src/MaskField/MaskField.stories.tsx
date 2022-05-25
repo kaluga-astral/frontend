@@ -36,6 +36,17 @@ const Template: Story = () => {
       <MaskField label="textfield with number mask" mask={Number} />
       <MaskField label="textfield with string mask" mask={String} />
       <MaskField label="textfield with date mask" mask={Date} />
+      <MaskField
+        label="textfield with regexp mask"
+        placeholder="Postal code"
+        mask={/^[1-6]\d{0,5}$/}
+      />
+      <MaskField
+        label="textfield with definitions"
+        mask={'XXX - XXXXXX'}
+        placeholder={'XXX - XXXXXX'}
+        definitions={{ X: /[a-zA-Z0-9]/ }}
+      />
 
       <div
         style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}
