@@ -1,0 +1,11 @@
+{
+  "name": "@astral/form",
+  "main": "./src",
+  "version": "0.30.0",
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",
+    "publish": "npm publish ./lib"
+  },
+  "dependencies": {}
+}

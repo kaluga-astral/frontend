@@ -1,68 +1,114 @@
-import { forwardRef, useCallback } from 'react';
-import { DatePicker as MuiDatePicker } from '@mui/lab';
+import { FocusEvent, MutableRefObject, forwardRef, useContext } from 'react';
+import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
-import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
+import { isValid, parse } from 'date-fns';
 
-import { TextField, TextFieldProps } from '../TextField';
+import { MaskField, MaskFieldProps } from '../MaskField';
+import { TextFieldProps } from '../TextField';
+import { DatePickerContext } from '../DatePickerProvider';
 
-import { DatePickerProps } from './types';
+import { DatePickerWrapper } from './styled';
+import { DatePickerHeader } from './DatePickerHeader';
+import { DatePickerDay } from './DatePickerDay';
 
-const componentsProps = {
-  switchViewButton: {
-    sx: {
-      padding: 1,
-      borderRadius: 1,
-    },
-  },
-  leftArrowButton: {
-    sx: {
-      padding: 1,
-      borderRadius: 1,
-    },
-  },
-  rightArrowButton: {
-    sx: {
-      padding: 1,
-      borderRadius: 1,
-    },
-  },
+export type DatePickerProps = Omit<
+  ReactDatePickerProps,
+  | 'renderCustomHeader'
+  | 'locale'
+  | 'renderCustomHeader'
+  | 'renderDayContents'
+  | 'customInput'
+  | 'selected'
+  | 'value'
+  | 'placeholderText'
+> & {
+  inputProps?: TextFieldProps;
+  value?: Date;
 };
 
-export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
+const MIN_YEAR = 1000;
+
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (props, ref) => {
-    const { value = new Date(), mask = '__.__.____', ...restProps } = props;
+    const {
+      value,
+      onChange,
+      inputProps = {},
+      dateFormat = 'dd.MM.yyyy',
+      ...restProps
+    } = props;
+    const { placeholder, ...restInputProps } = inputProps;
+    const { locale } = useContext(DatePickerContext);
 
-    const renderInput = useCallback((params: MuiTextFieldProps) => {
-      const textFieldParams = params as TextFieldProps;
+    // уберкостыль, react-date-picker забирает значение из event.target.value
+    const handleMaskFieldAccept = (
+      val: string,
+      _maskRef: unknown,
+      _e?: InputEvent,
+      onMaskFieldChange?: (value: string) => void
+    ) => {
+      onMaskFieldChange?.({
+        target: {
+          value: val,
+        },
+      } as unknown as string);
+    };
 
-      return <TextField {...textFieldParams} />;
-    }, []);
+    const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
+      const date = parse(e?.target.value, dateFormat as string, new Date());
+
+      // если инпут пустой - кладем в value null
+      if (!e?.target.value) {
+        onChange(null, e);
+      }
+
+      if (isValid(date) && date.getFullYear() >= MIN_YEAR) {
+        onChange(date, e);
+      }
+    };
 
     return (
-      <MuiDatePicker
-        {...restProps}
-        ref={ref}
-        value={value}
-        mask={mask}
-        showDaysOutsideCurrentMonth
-        renderInput={renderInput}
-        components={{ OpenPickerIcon: CalendarOutlineMd }}
-        componentsProps={componentsProps}
-        OpenPickerButtonProps={{
-          sx: {
-            borderRadius: 1,
-          },
-        }}
-        PaperProps={{
-          sx: {
-            marginTop: 2,
-            boxShadow: (theme) => theme.elevation[200],
-          },
-        }}
-        PopperProps={{
-          placement: 'bottom-start',
-        }}
-      />
+      <DatePickerWrapper>
+        <ReactDatePicker
+          {...restProps}
+          locale={locale}
+          selected={value}
+          openToDate={value ?? undefined}
+          dateFormat={dateFormat}
+          placeholderText={placeholder}
+          onChange={onChange}
+          onChangeRaw={handleChangeRaw}
+          renderCustomHeader={(renderProps) => (
+            <DatePickerHeader {...renderProps} />
+          )}
+          renderDayContents={(dayOfMonth: number) => (
+            <DatePickerDay dayOfMonth={dayOfMonth} />
+          )}
+          customInput={
+            <MaskField
+              {...(restInputProps as MaskFieldProps)}
+              mask={Date}
+              autofix="pad"
+              onAccept={handleMaskFieldAccept}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <CalendarOutlineMd />
+                  </InputAdornment>
+                ),
+              }}
+              inputRef={(el: HTMLInputElement | null) => {
+                // если передан ref - пишем в ref.current элемент из MaskField (inputRef принимает только функцию)
+                if (ref) {
+                  (ref as MutableRefObject<HTMLInputElement | null>).current =
+                    el;
+                }
+              }}
+            />
+          }
+        />
+      </DatePickerWrapper>
     );
   }
 );
