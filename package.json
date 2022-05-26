@@ -1,6 +1,5 @@
 {
   "private": true,
-  "version": "0.30.0",
   "workspaces": [
     "packages/*",
     "commander"
@@ -40,15 +39,7 @@
     "stylelint-config-standard": "25.0.0",
     "stylelint-order": "^5.0.0",
     "stylelint-prettier": "^2.0.0",
-    "typescript": "^4.4.4",
-    "semantic-release": "^19.0.2",
-    "@semantic-release/commit-analyzer": "^9.0.2",
-    "@semantic-release/release-notes-generator": "^10.0.3",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/npm": "^9.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.4",
-    "@semantic-release/exec": "^6.0.3"
+    "typescript": "^4.4.4"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && start-storybook -p 6006",
