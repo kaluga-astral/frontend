@@ -58,6 +58,7 @@ export function DataGridHead<T>({
     return columns.map(({ field, label, sortable, align, renderCell }) => {
       return (
         <DataGridHeadColumn
+          key={field}
           sorting={sorting}
           renderCell={renderCell}
           field={field}
