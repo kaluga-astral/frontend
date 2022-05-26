@@ -18,11 +18,11 @@ export const IconDropdownButton = forwardRef<
   HTMLButtonElement,
   IconDropdownButtonProps
 >(({ children, icon, ...props }, ref) => {
-  const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
+  const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu(ref);
 
   return (
     <>
-      <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+      <ClickAwayListener onClickAway={handleCloseMenu}>
         <IconDropdownButtonWrapper
           {...props}
           ref={anchorRef}

@@ -47,6 +47,6 @@ export const ProfileChevron = styled(ChevronDOutlineMd)<{ open: boolean }>`
     return theme.transitions.create('transform', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    });
+    }) ;
   }};
 `;
