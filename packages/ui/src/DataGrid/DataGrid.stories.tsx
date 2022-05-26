@@ -1,7 +1,8 @@
+import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { Button } from '../Button';
+import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
@@ -18,6 +19,29 @@ type ColumnsType = {
   direction: string;
   createDate: string;
   action: CellValue;
+};
+
+const ACTIONS: Actions<ColumnsType> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
+      ],
+    },
+  ],
+  secondary: [
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
+  ],
 };
 
 const columns: DataGridColumns<ColumnsType>[] = [
@@ -42,7 +66,7 @@ const columns: DataGridColumns<ColumnsType>[] = [
     label: 'Действия',
     sortable: false,
     align: 'center',
-    renderCell: () => <Button>Отправить</Button>,
+    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
   },
 ];
 
