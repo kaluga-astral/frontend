@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
-import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
+import NoCertificates from '@astral/illustrations/src/no_certificates.svg';
 
 import { Button } from '../Button';
 import { Typography } from '../Typography';
