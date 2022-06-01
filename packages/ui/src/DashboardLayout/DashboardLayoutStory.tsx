@@ -1,14 +1,10 @@
 import { FC } from 'react';
-import {
-  CompanyOutlineMd,
-  ProfileOutlineMd,
-  SettingsFillMd,
-} from '@astral/icons';
-import { ListItemButton } from '@mui/material';
+// import {
+//   CompanyOutlineMd,
+//   ProfileOutlineMd,
+//   SettingsFillMd,
+// } from '@astral/icons';
 
-import { List } from '../List';
-import { ListItemIcon } from '../ListItemIcon';
-import { ListItemText } from '../ListItemText';
 import { DashboardLayout } from '../DashboardLayout';
 
 import { HeaderProps } from './Header';
@@ -23,28 +19,24 @@ export const DashboardLayoutStory: FC<DashboardLayoutStoryProps> = (props) => {
   return (
     <DashboardLayout>
       <DashboardLayout.Header {...header} />
-      <DashboardLayout.Sidebar>
-        <List>
-          <ListItemButton>
-            <ListItemIcon>
-              <ProfileOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Главная</ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <CompanyOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Документы</ListItemText>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <SettingsFillMd />
-            </ListItemIcon>
-            <ListItemText>Контрагенты</ListItemText>
-          </ListItemButton>
-        </List>
-      </DashboardLayout.Sidebar>
+      <DashboardLayout.Sidebar
+      // nav={[
+      //   {
+      //     icon: <ProfileOutlineMd />,
+      //     title: 'Главная',
+      //   },
+      //   {
+      //     active: true,
+      //     icon: <CompanyOutlineMd />,
+      //     title: 'Документы',
+      //     children: [{}],
+      //   },
+      //   {
+      //     icon: <SettingsFillMd />,
+      //     title: 'Контрагенты',
+      //   },
+      // ]}
+      />
       <DashboardLayout.Main>main-content</DashboardLayout.Main>
     </DashboardLayout>
   );

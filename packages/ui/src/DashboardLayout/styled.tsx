@@ -5,7 +5,7 @@ export const DashboardLayoutRoot = styled.div`
   grid-template: ${() => {
     return `\n
       [header-start]  "header header"     [header-end]
-      [main-start]    "sidebar main" 1fr  [main-end] / 240px 1fr
+      [main-start]    "sidebar main" 1fr  [main-end] / auto 1fr
     `;
   }};
   height: 100vh;
