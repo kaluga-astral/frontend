@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 import { useState } from 'react';
-import NoCertificates from '@astral/illustrations/src/no_certificates.svg';
+import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
 import { PlaceholderProps } from '../Placeholder/types';
