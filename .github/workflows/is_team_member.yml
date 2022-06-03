@@ -44,4 +44,4 @@ jobs:
             });
             const result = await octokit.request(process.env.members_url);
             const members = result.data;
-            return members.map(team_member=>team_member.login).includes(member)
+            return members.map(team_member=>team_member.login).includes(process.env.member)
