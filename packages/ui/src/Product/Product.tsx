@@ -13,7 +13,7 @@ export const Product = forwardRef<HTMLButtonElement, ProductProps>(
         {name}
       </Button>
     );
-  }
+  },
 );
 
 export default Product;

@@ -14,7 +14,9 @@ export const getBgColor = ({
   selected,
   theme,
 }: StyledListItemButtonThemeProps): string => {
-  if (selected) return theme.palette.grey[100];
+  if (selected) {
+    return theme.palette.grey[100];
+  }
 
   return 'transparent';
 };
@@ -26,10 +28,13 @@ export const getColor = ({
 }: StyledListItemButtonThemeProps & {
   listItemButtonState: ListItemButtonStates;
 }): string => {
-  if (listItemButtonState === ListItemButtonStates.DEFAULT)
+  if (listItemButtonState === ListItemButtonStates.DEFAULT) {
     return theme.palette.grey[900];
-  if (listItemButtonState === ListItemButtonStates.HOVER || selected)
+  }
+
+  if (listItemButtonState === ListItemButtonStates.HOVER || selected) {
     return theme.palette.primary[800];
+  }
 
   return theme.palette.grey[900];
 };

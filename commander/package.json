@@ -12,8 +12,6 @@
   },
   "devDependencies": {
     "typescript": "^4.5.5",
-    "@astral-frontend/eslint-config-node": "^2.0.1",
-    "babel-eslint": "^10.1.0",
-    "@babel/eslint-parser": "^7.17.0"
+    "@astral/eslint-config-node": "^1.0.2"
   }
 }

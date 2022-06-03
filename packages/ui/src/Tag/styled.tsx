@@ -15,14 +15,20 @@ type StyledTagProps = Omit<TagProps, 'color'> & {
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
 
 const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
-  if (rounded) return '100px';
+  if (rounded) {
+    return '100px';
+  }
+
   return theme.shape.small;
 };
 const getDeleteIconBorderRadius = ({
   theme,
   rounded,
 }: StyledTagThemeProps): string => {
-  if (rounded) return '100px';
+  if (rounded) {
+    return '100px';
+  }
+
   return `0  ${theme.shape.small}  ${theme.shape.small} 0`;
 };
 
@@ -35,9 +41,11 @@ const getBgColor = ({
   if (onDelete) {
     return theme.palette.grey[100];
   }
+
   if (customColor === TagColors.GREY) {
     return theme.palette.grey[100];
   }
+
   const backgroundColorVariants = {
     contained: {
       primary: theme.palette.primary.main,
@@ -54,9 +62,11 @@ const getBgColor = ({
       default: theme.palette.background.element,
     },
   };
+
   if (!customVariant) {
     return backgroundColorVariants.contained.primary;
   }
+
   if (customVariant && customColor) {
     return backgroundColorVariants[customVariant][customColor];
   }
@@ -73,6 +83,7 @@ const getColor = ({
   if (onDelete) {
     return theme.palette.grey[900];
   }
+
   const textColorVariants = {
     contained: {
       primary: theme.palette.primary.contrastText,
@@ -89,6 +100,7 @@ const getColor = ({
       default: theme.palette.text.primary,
     },
   };
+
   if (!customColor) {
     return textColorVariants.contained.default;
   }
@@ -104,7 +116,9 @@ const getTagLabelPadding = ({
   theme,
   rounded,
 }: StyledTagThemeProps): string => {
-  if (rounded) return theme.spacing(0, 2);
+  if (rounded) {
+    return theme.spacing(0, 2);
+  }
 
   return theme.spacing(0, 1);
 };
@@ -118,6 +132,7 @@ const getDeleteIconBgColor = ({
     hover: theme.palette.red[100],
     active: theme.palette.red[200],
   };
+
   if (iconState) {
     return bgColorDeleteIcon[iconState];
   }

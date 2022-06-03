@@ -229,7 +229,7 @@ const Template: Story = (args) => {
 
   const handleChangePage = (
     _event: ChangeEvent<unknown>,
-    newPage: number
+    newPage: number,
   ): void => {
     setLoading(true);
     setPage(newPage);

@@ -27,6 +27,7 @@ const Template: Story = () => {
   const handleClick = () => {
     setOpen(!open);
   };
+
   return (
     <>
       <List

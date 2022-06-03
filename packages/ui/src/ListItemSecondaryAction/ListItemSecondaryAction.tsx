@@ -4,4 +4,5 @@ import {
 } from '@mui/material';
 
 export { ListItemSecondaryAction };
+
 export type { ListItemSecondaryActionProps };

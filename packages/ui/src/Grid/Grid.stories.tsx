@@ -68,6 +68,7 @@ const Template: Story = ({
     justifySelf,
     alignSelf,
   };
+
   return (
     <Grid {...containerProps}>
       <Grid {...elementProps}>

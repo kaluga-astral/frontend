@@ -8,7 +8,7 @@ const publish = () => {
   const { NPM_PUBLISH_TOKEN } = process.env;
 
   const { code } = shell.exec(
-    `npm publish ./${DIST_DIR_NAME} --_authToken=${NPM_PUBLISH_TOKEN}`
+    `npm publish ./${DIST_DIR_NAME} --_authToken=${NPM_PUBLISH_TOKEN}`,
   );
 
   if (code !== 0) {

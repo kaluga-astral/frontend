@@ -24,7 +24,7 @@ export function DataGridBody<T>({
         return <DataGridCell key={cellId} row={row} cell={cell} />;
       });
     },
-    [columns]
+    [columns],
   );
 
   const renderedRows = useMemo(() => {
@@ -33,7 +33,7 @@ export function DataGridBody<T>({
       const checked =
         selectable &&
         Boolean(
-          selectedRows.find((selectedRow) => selectedRow[keyId] === rowId)
+          selectedRows.find((selectedRow) => selectedRow[keyId] === rowId),
         );
 
       return (

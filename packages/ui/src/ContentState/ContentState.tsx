@@ -47,7 +47,9 @@ export const ContentState = (props: ContentStateProps) => {
     children,
   } = props;
 
-  if (isLoading) return <Fragment>{LoadingContent}</Fragment>;
+  if (isLoading) {
+    return <>{LoadingContent}</>;
+  }
 
   if (isCustom && customState) {
     return <Placeholder {...customState} />;
@@ -81,7 +83,7 @@ export const ContentState = (props: ContentStateProps) => {
     );
   }
 
-  return <Fragment>{children}</Fragment>;
+  return <>{children}</>;
 };
 
 export default ContentState;

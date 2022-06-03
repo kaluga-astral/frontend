@@ -17,7 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         loadingIndicator={<CircularProgress size="small" />}
       />
     );
-  }
+  },
 );
 
 export default Button;

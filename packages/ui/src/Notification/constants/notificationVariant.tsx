@@ -9,7 +9,7 @@ import {
 
 type NotifyAction = (
   options: NotificationProps,
-  notifyProps: ToastProps
+  notifyProps: ToastProps,
 ) => JSX.Element;
 
 export const NOTIFICATION_VARIANT: Record<Variant, NotifyAction> = {

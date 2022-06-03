@@ -15,7 +15,7 @@ export const DialogTitle = ({
 
   const onClickTitle = useCallback(
     (e) => onClose && onClose(e, 'escapeKeyDown'),
-    [onClose]
+    [onClose],
   );
 
   return (
