@@ -11,11 +11,6 @@ jobs:
     uses: ./.github/workflows/fetch_pr_info.yml
     with:
       pr_url: ${{ github.event.pull_request.url }}
-      
-  add-designer:
-    name: add-designer
-    if: ${{ contains(github.event.pull_request.title, 'feat') || contains(github.event.pull_request.title, 'Feat') || contains(github.event.pull_request.title, 'FEAT') }}
-    uses: ./.github/workflows/add_designer_to_review.yml
 
   notify:
     name: notify
@@ -36,3 +31,9 @@ jobs:
             👨👨👨 Reviewers: ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[0].login] }}, ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).requested_reviewers[1].login] }}
             
             ${{ fromJSON(needs.fetch.outputs.result).html_url }}
+
+  add-designer:
+    needs: notify
+    name: add-designer
+    if: ${{ contains(github.event.pull_request.title, 'feat') || contains(github.event.pull_request.title, 'Feat') || contains(github.event.pull_request.title, 'FEAT') }}
+    uses: ./.github/workflows/add_designer_to_review.yml
