@@ -22,7 +22,7 @@ jobs:
     # т.к ревьюверы ставятся автоматически при открытии ПР, а action срабатывает на каждый реквест, 
     # нужно понять, что мы запрашиваем ревью вручную после того как ПР открыт. 
     # Для этого проверяем наличие assignee(ставится при открытии после установки ревьюверов)
-    if: ${{ github.event.pull_request.assignee != null }}
+    if: ${{ github.event.pull_request.assignee != null &&  github.event.requested_reviewer != null }}
     needs: is-designer
     steps:
       - name: echo
@@ -36,7 +36,7 @@ jobs:
 
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
-        if: needs.is-designer.outputs.result == false
+        if: needs.is-designer.outputs.result == 'false'
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -52,7 +52,7 @@ jobs:
 
       - name: send telegram message on PR for designer
         uses: appleboy/telegram-action@master
-        if: needs.is-designer.outputs.result == true
+        if: needs.is-designer.outputs.result == 'true'
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
