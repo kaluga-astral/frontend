@@ -25,6 +25,15 @@ jobs:
     if: ${{ github.event.pull_request.assignee != null }}
     needs: is-designer
     steps:
+      - name: echo
+        id: exho
+        uses: actions/github-script@v6
+        env:
+          res: ${{ needs.is-designer.outputs.result }}
+        with:
+          script: | 
+            console.log(process.env.res)
+
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
         if: needs.is-designer.outputs.result == false
