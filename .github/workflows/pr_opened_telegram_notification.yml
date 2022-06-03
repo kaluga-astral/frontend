@@ -37,3 +37,5 @@ jobs:
     name: add-designer
     if: ${{ contains(github.event.pull_request.title, 'feat') || contains(github.event.pull_request.title, 'Feat') || contains(github.event.pull_request.title, 'FEAT') }}
     uses: ./.github/workflows/add_designer_to_review.yml
+    secrets:
+      token: ${{ secrets.OWNER_TOKEN }}
