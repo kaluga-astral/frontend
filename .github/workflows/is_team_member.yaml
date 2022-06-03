@@ -20,7 +20,7 @@ jobs:
     name: is team member
     runs-on: ubuntu-latest
     outputs: 
-      result: ${{ steps.fetch-team-members.outputs.result }}
+      result: ${{ steps.is-team-member.outputs.result }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
