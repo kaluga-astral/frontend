@@ -23,4 +23,5 @@ export type BaseButtonProps = Omit<
   color?: ButtonColor;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  selected?: boolean;
 };
