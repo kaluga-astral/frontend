@@ -26,6 +26,7 @@ export type DataGridProps<T = DataGridRow> = {
   rows: T[];
   columns: DataGridColumns<T>[];
   keyId: keyof DataGridRow;
+  onRowClick?: (row: T) => void;
   selectedRows?: Array<T>;
   onSelectRow?: (row: T[]) => void;
   sorting?: DataGridSort<T>[];
