@@ -1,0 +1,4 @@
+*.tsx text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.svg text eol=lf
