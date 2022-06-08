@@ -3,7 +3,7 @@ import { loadingButtonClasses } from '@mui/lab';
 
 import type { Theme } from '../baseTheme';
 import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styled';
-import { ButtonStates } from '../../ButtonBase/constants';
+import { ButtonStates } from '../../ButtonBase';
 import { getBgColor } from '../../ButtonBase/styled';
 
 export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
@@ -26,16 +26,6 @@ export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
             buttonState: ButtonStates.DEFAULT,
           }),
         },
-      };
-    },
-    loadingIndicator({ ownerState, theme }) {
-      const customVariant =
-        ownerState.variant as StyledButtonBaseThemeProps['customVariant'];
-
-      return {
-        ...(customVariant === 'contained' && {
-          color: theme.palette.primary.contrastText,
-        }),
       };
     },
   },
