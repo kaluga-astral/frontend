@@ -28,10 +28,9 @@ export function DataGridBody<T>({
     [columns]
   );
 
-
-  const handleRowClick = (row: T) => {
+  const handleRowClick = (row: T) => () => {
     if (onRowClick) {
-      return onRowClick(row);
+      onRowClick(row);
     }
   };
 
@@ -45,7 +44,11 @@ export function DataGridBody<T>({
         );
 
       return (
-        <TableRow key={rowId} hover={Boolean(onRowClick)} onClick={() => handleRowClick(row)}>
+        <TableRow
+          key={rowId}
+          hover={Boolean(onRowClick)}
+          onClick={handleRowClick(row)}
+        >
           {selectable && (
             <TableCell padding="checkbox">
               <Checkbox checked={checked} onChange={onSelectRow(row)} />
