@@ -13,6 +13,7 @@ jobs:
       - uses: actions-ecosystem/action-add-labels@v1
         if: ${{ contains(github.event.pull_request.title, 'feat') || contains(github.event.pull_request.title, 'Feat') || contains(github.event.pull_request.title, 'FEAT') }}
         with:
+          github_token: ${{ secrets.OWNER_TOKEN }}
           labels: |
             feat
 
