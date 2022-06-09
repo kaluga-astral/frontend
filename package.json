@@ -17,8 +17,6 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.8",
     "@stylelint/postcss-css-in-js": "^0.37.2",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
     "babel-eslint": "^10.1.0",
     "chromatic": "^6.2.0",
     "commitlint": "16.2.1",
