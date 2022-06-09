@@ -28,7 +28,7 @@ export function DataGridHead<T>({
   );
 
   const handleSort = useCallback(
-    (field, sortable) => () => {
+    (field: keyof T, sortable?: boolean) => () => {
       if (sortable) {
         const currentSort = sorting.find(({ fieldId }) => fieldId === field);
 
