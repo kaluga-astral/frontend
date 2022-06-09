@@ -50,7 +50,10 @@ export function DataGridBody<T>({
           onClick={handleRowClick(row)}
         >
           {selectable && (
-            <TableCell padding="checkbox">
+            <TableCell
+              padding="checkbox"
+              onClick={(event) => event.stopPropagation()}
+            >
               <Checkbox checked={checked} onChange={onSelectRow(row)} />
             </TableCell>
           )}
@@ -58,7 +61,7 @@ export function DataGridBody<T>({
         </TableRow>
       );
     });
-  }, [rows, keyId, selectable, selectedRows, onSelectRow, columns]);
+  }, [rows, keyId, selectable, selectedRows, onSelectRow, onRowClick, columns]);
 
   return (
     <StyledTableBody empty={!rows.length} minDisplayRows={minDisplayRows}>

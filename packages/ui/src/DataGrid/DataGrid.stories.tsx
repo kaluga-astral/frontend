@@ -242,6 +242,8 @@ const Template: Story = (args) => {
 
   const handleSelect = (rows: ColumnsType[]) => setSelected(rows);
 
+  const handleRowClick = (row: ColumnsType) => console.log('row clicked', row);
+
   const handleSort = (newSorting: DataGridSort<ColumnsType>[]) =>
     setSorting(newSorting);
 
@@ -253,6 +255,7 @@ const Template: Story = (args) => {
       columns={columns}
       selectedRows={selected}
       onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
       minDisplayRows={10}
       loading={loading}
       onSort={handleSort}

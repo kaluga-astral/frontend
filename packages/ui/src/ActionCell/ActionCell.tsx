@@ -140,7 +140,7 @@ export function ActionCell<T>({
   }, [secondary, handleActionClick]);
 
   return (
-    <ActionCellWrapper>
+    <ActionCellWrapper onClick={(event) => event.stopPropagation()}>
       {main.map((action) => renderMainAction(action))}
       {renderSecondaryActions}
     </ActionCellWrapper>

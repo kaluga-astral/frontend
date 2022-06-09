@@ -21,7 +21,7 @@ export const IconDropdownButton = forwardRef<
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleCloseMenu}>
+      <ClickAwayListener onClickAway={handleCloseMenu} mouseEvent="onMouseDown">
         <IconButton
           {...props}
           ref={anchorRef}
