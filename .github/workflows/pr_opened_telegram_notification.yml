@@ -6,6 +6,16 @@ on:
     - main
 
 jobs:
+  add_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ contains(github.event.pull_request.title, 'feat') || contains(github.event.pull_request.title, 'Feat') || contains(github.event.pull_request.title, 'FEAT') }}
+        with:
+          labels: |
+            feat
+
   fetch:
     name: fetch
     uses: ./.github/workflows/fetch_pr_info.yml
