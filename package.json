@@ -20,7 +20,6 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.4.22",
     "@stylelint/postcss-css-in-js": "^0.37.2",
-    "babel-eslint": "^10.1.0",
     "chromatic": "^6.2.0",
     "commitlint": "16.2.1",
     "@commitlint/config-conventional": "16.2.1",
