@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 import { SortStates } from './constants';
 
@@ -45,4 +45,5 @@ export type DataGridColumns<Column extends {}> = {
   renderCell?: RenderCell<Column>;
   format?: (data: Column) => CellValue;
   align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
+  width?: CSSProperties['width'];
 };

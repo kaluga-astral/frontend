@@ -55,17 +55,17 @@ export function DataGridHead<T>({
   );
 
   const renderColumns = useMemo(() => {
-    return columns.map(({ field, label, sortable, align, renderCell }) => {
+    return columns.map(({ field, label, sortable, align, width }) => {
       return (
         <DataGridHeadColumn
           key={field}
           sorting={sorting}
-          renderCell={renderCell}
           field={field}
           onSort={handleSort}
           label={label}
           sortable={sortable}
           align={align}
+          width={width}
         />
       );
     });
