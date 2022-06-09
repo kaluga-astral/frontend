@@ -1,4 +1,4 @@
-import { createTheme, Brand } from '@astral/ui'
+import { createTheme, Brand } from '../packages/ui/src'
 import UbuntuBoldWoff from '@astral/fonts/src/UbuntuBold.woff';
 import UbuntuBoldWoff2 from '@astral/fonts/src/UbuntuBold.woff2';
 import UbuntuLightWoff from '@astral/fonts/src/UbuntuLight.woff';
