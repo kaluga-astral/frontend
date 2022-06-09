@@ -11,6 +11,7 @@ export function DataGridBody<T>({
   rows,
   columns,
   selectable,
+  onRowClick,
   onSelectRow,
   selectedRows = [],
   minDisplayRows,
@@ -27,6 +28,12 @@ export function DataGridBody<T>({
     [columns]
   );
 
+  const handleRowClick = (row: T) => () => {
+    if (onRowClick) {
+      onRowClick(row);
+    }
+  };
+
   const renderedRows = useMemo(() => {
     return rows.map((row) => {
       const rowId: string = row[keyId];
@@ -37,9 +44,16 @@ export function DataGridBody<T>({
         );
 
       return (
-        <TableRow key={rowId}>
+        <TableRow
+          key={rowId}
+          hover={Boolean(onRowClick)}
+          onClick={handleRowClick(row)}
+        >
           {selectable && (
-            <TableCell padding="checkbox">
+            <TableCell
+              padding="checkbox"
+              onClick={(event) => event.stopPropagation()}
+            >
               <Checkbox checked={checked} onChange={onSelectRow(row)} />
             </TableCell>
           )}
@@ -47,7 +61,7 @@ export function DataGridBody<T>({
         </TableRow>
       );
     });
-  }, [rows, keyId, selectable, selectedRows, onSelectRow, columns]);
+  }, [rows, keyId, selectable, selectedRows, onSelectRow, onRowClick, columns]);
 
   return (
     <StyledTableBody empty={!rows.length} minDisplayRows={minDisplayRows}>

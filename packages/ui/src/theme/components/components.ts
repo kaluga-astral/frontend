@@ -20,6 +20,7 @@ import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
 import { MuiTableCell } from './MuiTableCell';
 import { MuiTableHead } from './MuiTableHead';
+import { MuiTableRow } from './MuiTableRow';
 import { MuiPickersDay } from './MuiPickersDay';
 import { MuiCalendarPicker } from './MuiCalendarPicker';
 import { MuiYearPicker } from './MuiYearPicker';
@@ -115,6 +116,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogActions,
   MuiTableCell,
   MuiTableHead,
+  MuiTableRow,
   MuiPaginationItem,
   MuiPickersDay,
   MuiCalendarPicker,
