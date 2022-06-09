@@ -11,18 +11,17 @@ export function DataGridHeadColumn<T>({
   align,
   label,
   sorting,
-  renderCell,
+  width,
 }: DataGridHeadColumnProps<T>) {
   const sortParams = sorting.find(({ fieldId }) => field === fieldId);
   const hideSortIcon = !Boolean(sortParams);
   const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
-  const fitContent = Boolean(renderCell);
 
   return (
     <StyledTableCell
       onClick={onSort(field, sortable)}
-      fitContent={fitContent}
       align={align}
+      width={width}
     >
       <Typography variant="pointer">{label}</Typography>
       {sortable && (
