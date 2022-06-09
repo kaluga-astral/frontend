@@ -1,0 +1,48 @@
+name: is team member
+on:
+  workflow_call:
+    inputs:
+      members_url:
+        required: true
+        type: string
+      member:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+    outputs: 
+      result: 
+        description: "Is team member"
+        value: ${{ jobs.fetch.outputs.result }}
+jobs:
+  fetch:
+    name: is team member
+    runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.is-team-member.outputs.result }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm install @octokit/rest
+
+      - name: is team member
+        id: is-team-member
+        uses: actions/github-script@v6
+        env:
+          members_url: ${{ inputs.members_url }}
+          member: ${{ inputs.member }}
+          token: ${{ secrets.token }}
+        with:
+          script: | 
+            const { Octokit } = require("@octokit/rest");
+            const octokit = new Octokit({
+              auth: process.env.token,
+            });
+            const result = await octokit.request(process.env.members_url);
+            const members = result.data;
+            console.log(members, process.env.member)
+            return members.map(team_member=>team_member.login).includes(process.env.member)

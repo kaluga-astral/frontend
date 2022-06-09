@@ -1,7 +1,8 @@
 import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { LikeOutlineMd } from '@astral/icons';
+import { CheckOutlineMd, LikeOutlineMd } from '@astral/icons';
 
+import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
 import { Button } from './Button';
@@ -34,6 +35,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="primary" variant="contained" disabled>
           Disabled
         </Button>
+        <Button color="primary" variant="contained" selected>
+          Selected
+        </Button>
+        <IconButton color="primary" variant="contained" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -55,6 +62,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="success" variant="contained" disabled>
           Disabled
         </Button>
+        <Button color="success" variant="contained" selected>
+          Selected
+        </Button>
+        <IconButton color="success" variant="contained" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -76,6 +89,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="warning" variant="contained" disabled>
           Disabled
         </Button>
+        <Button color="warning" variant="contained" selected>
+          Selected
+        </Button>
+        <IconButton color="warning" variant="contained" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -97,6 +116,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="error" variant="contained" disabled>
           Disabled
         </Button>
+        <Button color="error" variant="contained" selected>
+          Selected
+        </Button>
+        <IconButton color="error" variant="contained" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -119,6 +144,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="primary" variant="light" disabled>
           Disabled
         </Button>
+        <Button color="primary" variant="light" selected>
+          Selected
+        </Button>
+        <IconButton color="primary" variant="light" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -140,6 +171,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="success" variant="light" disabled>
           Disabled
         </Button>
+        <Button color="success" variant="light" selected>
+          Selected
+        </Button>
+        <IconButton color="success" variant="light" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -161,6 +198,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="warning" variant="light" disabled>
           Disabled
         </Button>
+        <Button color="warning" variant="light" selected>
+          Selected
+        </Button>
+        <IconButton color="warning" variant="light" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -182,6 +225,12 @@ export const ButtonShowcase: Story = () => (
         <Button color="error" variant="light" disabled>
           Disabled
         </Button>
+        <Button color="error" variant="light" selected>
+          Selected
+        </Button>
+        <IconButton color="error" variant="light" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -202,6 +251,12 @@ export const ButtonShowcase: Story = () => (
         <Button variant="text" disabled>
           Disabled
         </Button>
+        <Button variant="text" selected>
+          Selected
+        </Button>
+        <IconButton variant="text" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
 
@@ -222,6 +277,12 @@ export const ButtonShowcase: Story = () => (
         <Button variant="link" disabled>
           Disabled
         </Button>
+        <Button variant="link" selected>
+          Selected
+        </Button>
+        <IconButton variant="link" selected>
+          <CheckOutlineMd />
+        </IconButton>
       </Stack>
     </Stack>
   </Stack>

@@ -2,7 +2,7 @@ import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styled';
-import { ButtonStates } from '../../ButtonBase/constants';
+import { ButtonStates } from '../../ButtonBase';
 import {
   getBgColor,
   getButtonHeight,
@@ -21,16 +21,19 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         ownerState.variant as StyledButtonBaseThemeProps['customVariant'];
       const customColor =
         ownerState.color as StyledButtonBaseThemeProps['customColor'];
+      const selected = ownerState.selected as boolean;
 
       return {
         display: 'inline-flex',
         color: getColor({
+          selected,
           theme,
           customVariant,
           customColor,
           buttonState: ButtonStates.DEFAULT,
         }),
         backgroundColor: getBgColor({
+          selected,
           customColor,
           customVariant,
           buttonState: ButtonStates.DEFAULT,
@@ -52,12 +55,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         boxShadow: 'none',
         '&:hover': {
           color: getColor({
+            selected,
             theme,
             customVariant,
             customColor,
             buttonState: ButtonStates.HOVER,
           }),
           backgroundColor: getBgColor({
+            selected,
             customColor,
             customVariant,
             theme,
@@ -67,12 +72,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         },
         '&:active': {
           color: getColor({
+            selected,
             customColor,
             customVariant,
             theme,
             buttonState: ButtonStates.ACTIVE,
           }),
           backgroundColor: getBgColor({
+            selected,
             customColor,
             customVariant,
             theme,
@@ -89,12 +96,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         },
         '&.Mui-focusVisible': {
           color: getColor({
+            selected,
             theme,
             customVariant,
             customColor,
             buttonState: ButtonStates.FOCUS,
           }),
           backgroundColor: getBgColor({
+            selected,
             customColor,
             customVariant,
             theme,

@@ -25,6 +25,7 @@ export type StyledButtonBaseProps = Omit<
 export type StyledButtonBaseThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
+  selected?: boolean;
   size?: ButtonSize;
   theme: Theme;
 };
@@ -34,8 +35,15 @@ export const getColor = ({
   customVariant,
   customColor,
   buttonState,
+  selected,
 }: StyledButtonBaseThemeProps & { buttonState: ButtonState }): string => {
   const textColorVariants = {
+    selected: {
+      default: theme.palette.grey['900'],
+      hover: theme.palette.grey['700'],
+      active: theme.palette.grey['800'],
+      focus: theme.palette.grey['900'],
+    },
     light: {
       error: {
         default: theme.palette.red['900'],
@@ -77,6 +85,12 @@ export const getColor = ({
     },
   };
 
+  if (selected) {
+    return customVariant !== ButtonVariants.LINK
+      ? theme.palette.primary.contrastText
+      : textColorVariants.selected[buttonState];
+  }
+
   if (customVariant === ButtonVariants.CONTAINED) {
     return textColorVariants.contained;
   }
@@ -93,12 +107,19 @@ export const getColor = ({
 };
 
 export const getBgColor = ({
+  selected,
   customColor,
   customVariant,
   buttonState,
   theme,
 }: StyledButtonBaseThemeProps & { buttonState: ButtonState }) => {
   const bgColorVariants = {
+    selected: {
+      default: theme.palette.grey['900'],
+      hover: theme.palette.grey['700'],
+      active: theme.palette.grey['800'],
+      focus: theme.palette.grey['900'],
+    },
     light: {
       error: {
         default: theme.palette.red['100'],
@@ -159,6 +180,10 @@ export const getBgColor = ({
     },
     link: 'transparent',
   };
+
+  if (selected && customVariant !== ButtonVariants.LINK) {
+    return bgColorVariants.selected[buttonState];
+  }
 
   if (customVariant === ButtonVariants.LIGHT && customColor) {
     return bgColorVariants.light[customColor][buttonState];

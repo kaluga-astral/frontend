@@ -3,6 +3,7 @@ import { Fragment, ReactNode } from 'react';
 import { Button, CircularProgress, Placeholder, Typography } from '..';
 import { PlaceholderProps } from '../Placeholder/types';
 
+import { LoadingContainer } from './styles';
 import { ContentStateErrorProps } from './types';
 
 type ContentStateProps = {
@@ -48,7 +49,7 @@ export const ContentState = (props: ContentStateProps) => {
   } = props;
 
   if (isLoading) {
-    return <>{LoadingContent}</>;
+    return <LoadingContainer>{LoadingContent}</LoadingContainer>;
   }
 
   if (isCustom && customState) {

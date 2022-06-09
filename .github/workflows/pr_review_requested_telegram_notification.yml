@@ -6,16 +6,28 @@ on:
     - main
 
 jobs: 
+  is-designer:
+    name: is-designer
+    uses: ./.github/workflows/is_team_member.yml
+    with:
+      members_url: "https://api.github.com/orgs/kaluga-astral/teams/design/members"
+      member: ${{ github.event.requested_reviewer.login }}
+    secrets:
+      token: ${{ secrets.OWNER_TOKEN }}
+    
+
   notify:
     name: notify
     runs-on: ubuntu-latest
     # т.к ревьюверы ставятся автоматически при открытии ПР, а action срабатывает на каждый реквест, 
     # нужно понять, что мы запрашиваем ревью вручную после того как ПР открыт. 
     # Для этого проверяем наличие assignee(ставится при открытии после установки ревьюверов)
-    if: ${{ github.event.pull_request.assignee != null }}
+    if: ${{ github.event.pull_request.assignee != null &&  github.event.requested_reviewer != null }}
+    needs: is-designer
     steps:
       - name: send telegram message on PR
         uses: appleboy/telegram-action@master
+        if: needs.is-designer.outputs.result == 'false'
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -26,6 +38,22 @@ jobs:
             ${{ github.event.pull_request.title }}
             
             👨👨👨 требует ревью от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[github.event.requested_reviewer.login] }}
+            
+            ${{ github.event.pull_request.html_url }}
+
+      - name: send telegram message on PR for designer
+        uses: appleboy/telegram-action@master
+        if: needs.is-designer.outputs.result == 'true'
+        with:
+          to: ${{ secrets.TELEGRAM_DESIGNERS_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            👁👁👁 ${{ github.event.repository.name }}
+            PR от ${{ github.event.pull_request.user.login }}
+            
+            ${{ github.event.pull_request.title }}
+            
+            🧑‍🎨🧑‍🎨🧑‍🎨 требует ревью дизайна от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[github.event.requested_reviewer.login] }}
             
             ${{ github.event.pull_request.html_url }}
             
