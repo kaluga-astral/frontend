@@ -8,6 +8,7 @@ export const MuiTableRow: Components<Theme>['MuiTableRow'] = {
       return {
         '&.MuiTableRow-hover:hover': {
           backgroundColor: theme.palette.background.elementHover,
+          cursor: 'pointer',
         },
       };
     },
