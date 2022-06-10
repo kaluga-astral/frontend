@@ -19,12 +19,14 @@ const Template: Story<BadgeProps> = (args) => (
 );
 
 export const Default = Template.bind({});
+
 Default.args = {
   color: 'error',
   badgeContent: 999,
   variant: 'standard',
   invisible: false,
 };
+
 Default.parameters = {
   controls: { expanded: true },
 };

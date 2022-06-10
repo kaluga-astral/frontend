@@ -40,8 +40,8 @@ const ofdLogoSrc = URL.createObjectURL(
         />
       </svg>`,
     ],
-    { type: 'image/svg+xml' }
-  )
+    { type: 'image/svg+xml' },
+  ),
 );
 
 export const Showcase = () => {

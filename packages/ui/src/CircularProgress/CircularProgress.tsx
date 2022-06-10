@@ -19,7 +19,7 @@ export const CircularProgress = forwardRef<HTMLElement, CircularProgressProps>(
         data-color={color}
       />
     );
-  }
+  },
 );
 
 export default CircularProgress;

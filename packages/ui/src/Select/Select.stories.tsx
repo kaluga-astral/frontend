@@ -106,7 +106,7 @@ export const Showcase: Story = () => {
 
   const getOptionLabel = (value: string | number) => {
     const optionLabel = MULTIPLE_OPTIONS.find(
-      (option) => option.value === value
+      (option) => option.value === value,
     );
 
     return optionLabel?.name || value;

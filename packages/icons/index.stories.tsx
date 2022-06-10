@@ -12,12 +12,13 @@ import * as customIcons from './generated-custom-icons';
 const getIcons = (
   name: string,
   size: number,
-  type: 'themed' | 'custom' | 'all' = 'all'
+  type: 'themed' | 'custom' | 'all' = 'all',
 ) => {
   const icons = (() => {
     if (type === 'themed') {
       return themedIcons;
     }
+
     if (type === 'custom') {
       return customIcons;
     }
@@ -53,9 +54,10 @@ const [
       icon.name === 'FacebookFillMd' ||
       icon.name === 'GoogleFillMd' ||
       icon.name === 'VkFillMd' ||
-      icon.name === 'TwitterFillMd'
+      icon.name === 'TwitterFillMd',
   ),
 ];
+
 export default {
   title: 'Components/Icons',
 };
@@ -165,6 +167,7 @@ Default.args = {
     color: 'red',
   },
 };
+
 Default.parameters = {
   options: { showPanel: false },
 };

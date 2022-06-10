@@ -7,12 +7,12 @@ import { TooltipSizes } from './constants';
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     { children, placement = 'top', size = TooltipSizes.MEDIUM, ...props },
-    ref
+    ref,
   ) => {
     return (
       <StyledTooltip ref={ref} size={size} placement={placement} {...props}>
         {children}
       </StyledTooltip>
     );
-  }
+  },
 );

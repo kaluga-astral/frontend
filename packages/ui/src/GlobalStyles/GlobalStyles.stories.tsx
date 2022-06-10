@@ -16,9 +16,11 @@ const Template: Story = (args) => (
 );
 
 export const Showcase = Template.bind({});
+
 Showcase.args = {
   enableColorScheme: false,
 };
+
 Showcase.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

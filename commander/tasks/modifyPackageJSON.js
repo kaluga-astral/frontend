@@ -10,7 +10,9 @@ const readPackageJSON = (packageJSONPath) =>
 // обновляет до последней версии пакеты, которые есть в репозитории
 const updateDepsVersions = (packageDeps, rootPackageVersion) =>
   PACKAGES_NAMES.reduce((newPackageDeps, packageName) => {
-    if (!newPackageDeps[packageName]) return newPackageDeps;
+    if (!newPackageDeps[packageName]) {
+      return newPackageDeps;
+    }
 
     return { ...newPackageDeps, [packageName]: `^${rootPackageVersion}` };
   }, packageDeps);
@@ -25,13 +27,13 @@ const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
         ...packageData,
         dependencies: updateDepsVersions(
           packageData.dependencies || {},
-          rootPackageVersion
+          rootPackageVersion,
         ),
         version: rootPackageVersion,
       },
       null,
-      2
-    )
+      2,
+    ),
   );
 
   return readPackageJSON(packageJSONPath);
@@ -39,7 +41,6 @@ const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
 
 const modifyPackageJSON = () => {
   console.log('Starting modifyPackageJSON...');
-
   console.log('Update packages versions and deps');
 
   const packageData = updatePackagesVersions('./package.json', RELEASE_TAG);
@@ -75,8 +76,8 @@ const modifyPackageJSON = () => {
         module: './esm/index.js',
       },
       null,
-      2
-    )
+      2,
+    ),
   );
 
   console.log('Finish modifyPackageJSON');

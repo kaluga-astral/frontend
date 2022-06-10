@@ -20,7 +20,7 @@ export type MaskFieldProps = Omit<
     value: string,
     maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
     e?: InputEvent | undefined,
-    onChange?: (value: string) => void
+    onChange?: (value: string) => void,
   ) => void;
   /**
    * Автоматически исправляет введенное значение под маску. Если передан 'pad' - подставляет 0 перед цифрами в дате
@@ -48,7 +48,7 @@ export const MaskField: FC<MaskFieldProps> = ({
   const handleMaskFieldAccept = (
     value: string,
     maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
-    e?: InputEvent
+    e?: InputEvent,
   ) => {
     if (onAccept) {
       return onAccept(value, maskRef, e, onChange);

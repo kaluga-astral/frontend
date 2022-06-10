@@ -20,7 +20,11 @@ export function DataGridCell<T>({
   return (
     <TableCell align={align}>
       {renderCell && renderCell(row)}
-      {!renderCell && <Typography>{formattedValue}</Typography>}
+      {!renderCell && (
+        <Typography>
+          <>{formattedValue}</>
+        </Typography>
+      )}
     </TableCell>
   );
 }

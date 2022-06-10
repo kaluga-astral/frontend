@@ -26,13 +26,15 @@ type UseMenuResult = {
 };
 
 export function useMenu(
-  ref: ForwardedRef<HTMLButtonElement> | null = null
+  ref: ForwardedRef<HTMLButtonElement> | null = null,
 ): UseMenuResult {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
   useEffect(() => {
-    if (!ref) return;
+    if (!ref) {
+      return;
+    }
 
     if (typeof ref === 'function') {
       ref(anchorRef.current);

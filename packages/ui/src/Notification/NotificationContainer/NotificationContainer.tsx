@@ -11,7 +11,7 @@ injectStyle();
 export interface NotificationContainerProps extends ToastContainerProps {}
 
 export const NotificationContainer: VFC<NotificationContainerProps> = (
-  props
+  props,
 ) => {
   return (
     <ToastContainerStyled>

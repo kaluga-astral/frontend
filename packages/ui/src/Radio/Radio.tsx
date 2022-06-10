@@ -11,12 +11,12 @@ export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
       checkedIcon = <CheckedCircleIcon />,
       ...props
     }: RadioProps,
-    ref
+    ref,
   ) => {
     return (
       <StyledRadio icon={icon} checkedIcon={checkedIcon} ref={ref} {...props} />
     );
-  }
+  },
 );
 
 export default Radio;
