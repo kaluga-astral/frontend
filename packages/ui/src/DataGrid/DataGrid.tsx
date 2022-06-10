@@ -12,18 +12,54 @@ export type DataGridProps<
   Data = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
+  /**
+   * Массив данных для таблицы
+   */
   rows: Data[];
+  /**
+   * Конфигурация колонок для таблицы
+   */
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
+  /**
+   * Обработчик клика строки таблицы
+   */
   onRowClick?: (row: Data) => void;
+  /**
+   * Массив выбранных строк
+   */
   selectedRows?: Array<Data>;
+  /**
+   * Обработчик выбора строки
+   */
   onSelectRow?: (row: Data[]) => void;
+  /**
+   * Массив сортируемых колонок
+   */
   sorting?: DataGridSort<SortField>[];
+  /**
+   * Обработчик сортировки
+   */
   onSort: (sorting: DataGridSort<SortField>[]) => void;
+  /**
+   * Компонент кастомного футера (н-р Pagination)
+   */
   Footer?: ReactNode;
+  /**
+   * Максимальная высота для таблицы
+   */
   maxHeight?: number;
+  /**
+   * Флажок загрузки данных
+   */
   loading?: boolean;
-  // используется для отображения переданного кол-ва строк при отсутствии данных
+  /**
+   * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
+   */
+  emptyCellValue?: ReactNode;
+  /**
+   *  используется для отображения переданного кол-ва строк при отсутствии данных
+   */
   minDisplayRows?: number;
 };
 
@@ -40,6 +76,7 @@ export function DataGrid<Data extends object, SortField extends keyof Data>({
   loading,
   onSort,
   keyId,
+  emptyCellValue,
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
 
@@ -110,6 +147,7 @@ export function DataGrid<Data extends object, SortField extends keyof Data>({
             selectable={selectable}
             rows={rows}
             columns={columns}
+            emptyCellValue={emptyCellValue}
           />
         </Table>
         <DataGridLoader loading={loading} />

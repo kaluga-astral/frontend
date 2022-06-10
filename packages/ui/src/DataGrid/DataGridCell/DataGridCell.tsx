@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { TableCell } from '../../Table';
 import { Typography } from '../../Typography';
@@ -7,11 +7,13 @@ import { DataGridColumns } from '../types';
 export type CellProps<Data> = {
   row: Data;
   cell: DataGridColumns<Data>;
+  emptyCellValue?: ReactNode;
 };
 
 export function DataGridCell<Data>({
   row,
-  cell: { field, renderCell, format, align = 'left', emptyCellValue = '-' },
+  cell: { field, renderCell, format, align = 'left' },
+  emptyCellValue = '-',
 }: CellProps<Data>) {
   const formattedValue = useMemo(() => {
     if (format) {

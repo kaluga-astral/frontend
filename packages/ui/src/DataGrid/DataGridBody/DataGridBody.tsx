@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
 
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
@@ -16,6 +16,7 @@ export type DataGridBodyProps<Data> = {
   rows: Data[];
   onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
+  emptyCellValue?: ReactNode;
 };
 
 export function DataGridBody<Data>({
@@ -27,13 +28,21 @@ export function DataGridBody<Data>({
   selectedRows = [],
   minDisplayRows,
   keyId,
+  emptyCellValue,
 }: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
     (row: Data, rowId: string) => {
       return columns.map((cell, index) => {
         const cellId = `${rowId}-${index}`;
 
-        return <DataGridCell<Data> key={cellId} row={row} cell={cell} />;
+        return (
+          <DataGridCell<Data>
+            key={cellId}
+            row={row}
+            cell={cell}
+            emptyCellValue={emptyCellValue}
+          />
+        );
       });
     },
     [columns],
