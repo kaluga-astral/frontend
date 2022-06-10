@@ -48,7 +48,7 @@ export type FontsUrls = {
 };
 
 const getMuiCssBaseline = (
-  fontUrls: FontsUrls
+  fontUrls: FontsUrls,
 ): Components['MuiCssBaseline'] => ({
   styleOverrides: `
     @font-face {

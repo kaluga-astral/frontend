@@ -2,14 +2,7 @@ import { CSSProperties, ReactNode } from 'react';
 
 import { SortStates } from './constants';
 
-export type CellValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | null
-  | undefined
-  | object;
+export type CellValue = string | number | boolean | Date | undefined | object;
 
 export type SortState = `${SortStates}`;
 

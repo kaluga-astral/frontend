@@ -65,10 +65,12 @@ const Template: Story<TypographyProps> = (args) => (
 );
 
 export const Showcase = Template.bind({});
+
 Showcase.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
 };
+
 Showcase.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

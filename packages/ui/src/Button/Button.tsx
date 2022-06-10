@@ -12,8 +12,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { variant = ButtonVariants.CONTAINED, ...restProps } = props;
 
     const loadingIndicatorColor = useMemo(() => {
-      if (variant !== ButtonVariants.CONTAINED)
+      if (variant !== ButtonVariants.CONTAINED) {
         return CircularProgressColors.PRIMARY;
+      }
 
       return CircularProgressColors.INVERTED;
     }, [variant]);
@@ -28,7 +29,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         }
       />
     );
-  }
+  },
 );
 
 export default Button;

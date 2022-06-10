@@ -12,7 +12,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         <SidebarToggler variant="text">Свернуть меню</SidebarToggler>
       </SidebarRoot>
     );
-  }
+  },
 );
 
 export default Sidebar;

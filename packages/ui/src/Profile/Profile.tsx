@@ -1,4 +1,4 @@
-import { Fragment, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
 
 import { useMenu } from '../hooks';
@@ -19,7 +19,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     return (
-      <Fragment>
+      <>
         <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             <ProfileUser>
@@ -37,9 +37,9 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
         />
-      </Fragment>
+      </>
     );
-  }
+  },
 );
 
 export default Profile;

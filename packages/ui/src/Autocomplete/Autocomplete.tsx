@@ -19,14 +19,14 @@ export const Autocomplete = <
   AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
-  FreeSolo extends boolean
+  FreeSolo extends boolean,
 >(
   props: AutocompleteProps<
     AutocompleteValueProps,
     Multiple,
     DisableClearable,
     FreeSolo
-  >
+  >,
 ) => {
   const {
     multiple,
@@ -44,7 +44,7 @@ export const Autocomplete = <
   const renderTags = useCallback(
     (
       tags: AutocompleteValueProps[],
-      getTagProps: AutocompleteRenderGetTagProps
+      getTagProps: AutocompleteRenderGetTagProps,
     ) => {
       return tags.map((tag: AutocompleteValueProps, index: number) => {
         const title = (getOptionLabel && getOptionLabel(tag)) || '';
@@ -59,7 +59,7 @@ export const Autocomplete = <
         );
       });
     },
-    [getOptionLabel]
+    [getOptionLabel],
   );
 
   const renderInput = useCallback(
@@ -74,14 +74,14 @@ export const Autocomplete = <
         size={size}
       />
     ),
-    [placeholder, label, success, error, helperText, size]
+    [placeholder, label, success, error, helperText, size],
   );
 
   const renderOption = useCallback(
     (
       optionProps: HTMLAttributes<HTMLLIElement> & { key?: string },
       option: AutocompleteValueProps,
-      optionState: AutocompleteRenderOptionState
+      optionState: AutocompleteRenderOptionState,
     ) => {
       if (externalRenderOption) {
         return externalRenderOption(optionProps, option, optionState);
@@ -100,7 +100,7 @@ export const Autocomplete = <
         </MenuItem>
       );
     },
-    [multiple, externalRenderOption]
+    [multiple, externalRenderOption],
   );
 
   return (

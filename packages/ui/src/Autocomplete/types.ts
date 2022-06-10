@@ -10,7 +10,7 @@ export type AutocompleteProps<
   AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
-  FreeSolo extends boolean
+  FreeSolo extends boolean,
 > = Omit<
   MuiAutocompleteProps<
     AutocompleteValueProps,

@@ -574,12 +574,14 @@ export const ShowcaseColor: Story = () => (
 ShowcaseColor.parameters = { options: { showPanel: false } };
 
 export const Default = Template.bind({});
+
 Default.args = {
   variant: 'light',
   color: 'success',
   label: 'Тэг',
   rounded: true,
 };
+
 Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

@@ -12,24 +12,31 @@ const [, , task] = process.argv;
 switch (task) {
   case 'build':
     build();
+
     break;
   case 'copyFonts':
     copyFonts();
+
     break;
   case 'copyImages':
     copyImages();
+
     break;
   case 'publish':
     publish();
+
     break;
   case 'copyCommonFiles':
     copyCommonFiles();
+
     break;
   case 'modifyPackageJSON':
     modifyPackageJSON();
+
     break;
   default:
     console.error('Task not found');
     process.exit(1);
+
     break;
 }

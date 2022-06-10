@@ -203,7 +203,9 @@ export const getBgColor = ({
 export const getButtonHeight = ({
   size,
 }: StyledButtonBaseThemeProps): string => {
-  if (size === ButtonSizes.LARGE) return '40px';
+  if (size === ButtonSizes.LARGE) {
+    return '40px';
+  }
 
   return '32px';
 };
@@ -212,7 +214,9 @@ export const getButtonPadding = ({
   size,
   theme,
 }: StyledButtonBaseThemeProps): string => {
-  if (size === ButtonSizes.LARGE) return theme.spacing(2, 4, 2, 4);
+  if (size === ButtonSizes.LARGE) {
+    return theme.spacing(2, 4, 2, 4);
+  }
 
   return theme.spacing(1, 3, 1, 3);
 };

@@ -46,7 +46,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       val: string,
       _maskRef: unknown,
       _e?: InputEvent,
-      onMaskFieldChange?: (value: string) => void
+      onMaskFieldChange?: (value: string) => void,
     ) => {
       onMaskFieldChange?.({
         target: {
@@ -110,7 +110,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         />
       </DatePickerWrapper>
     );
-  }
+  },
 );
 
 export default DatePicker;

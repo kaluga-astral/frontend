@@ -25,7 +25,9 @@ export function DataGrid<T>({
   const selectable = Boolean(onSelectRow);
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (!onSelectRow) return;
+    if (!onSelectRow) {
+      return;
+    }
 
     if (event.target.checked) {
       const mergedSelectedRows = [...selectedRows, ...rows];
@@ -34,7 +36,7 @@ export function DataGrid<T>({
     }
 
     const filteredRows = selectedRows.filter(
-      (selectedRow) => !rows.find((row) => row[keyId] === selectedRow[keyId])
+      (selectedRow) => !rows.find((row) => row[keyId] === selectedRow[keyId]),
     );
 
     onSelectRow(filteredRows);
@@ -43,7 +45,9 @@ export function DataGrid<T>({
   const handleSelectRow = useCallback(
     (row: T) =>
       (event: ChangeEvent<HTMLInputElement>): void => {
-        if (!onSelectRow) return;
+        if (!onSelectRow) {
+          return;
+        }
 
         if (event.target.checked) {
           return onSelectRow([...selectedRows, row]);
@@ -51,17 +55,17 @@ export function DataGrid<T>({
 
         return onSelectRow(
           selectedRows.filter(
-            (selectedRow) => selectedRow[keyId] !== row[keyId]
-          )
+            (selectedRow) => selectedRow[keyId] !== row[keyId],
+          ),
         );
       },
-    [selectedRows, onSelectRow]
+    [selectedRows, onSelectRow],
   );
 
   const uncheckedRowsCount = useMemo(() => {
     return rows.filter(
       (row) =>
-        !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId])
+        !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId]),
     ).length;
   }, [rows, selectedRows, keyId]);
 

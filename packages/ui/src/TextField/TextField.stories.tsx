@@ -20,6 +20,7 @@ const TextFieldWithValidationOnBlur = ({
   const handleBlur = () => {
     setValidated(true);
   };
+
   return (
     <TextField
       {...restProps}

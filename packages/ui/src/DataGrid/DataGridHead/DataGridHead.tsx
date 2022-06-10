@@ -19,16 +19,16 @@ export function DataGridHead<T>({
 }: DataGridHeadProps<T>) {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
-    [uncheckedRowsCount, rowsCount]
+    [uncheckedRowsCount, rowsCount],
   );
 
   const indeterminate = useMemo(
     () => uncheckedRowsCount > 0 && uncheckedRowsCount < rowsCount,
-    [uncheckedRowsCount, rowsCount]
+    [uncheckedRowsCount, rowsCount],
   );
 
   const handleSort = useCallback(
-    (field, sortable) => () => {
+    (field: keyof T, sortable?: boolean) => () => {
       if (sortable) {
         const currentSort = sorting.find(({ fieldId }) => fieldId === field);
 
@@ -51,7 +51,7 @@ export function DataGridHead<T>({
         onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
       }
     },
-    [sorting]
+    [sorting],
   );
 
   const renderColumns = useMemo(() => {

@@ -57,6 +57,7 @@ Default.args = {
   indeterminate: false,
   checked: false,
 };
+
 Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
