@@ -1,12 +1,24 @@
-import { useCallback, useMemo } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 
 import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../constants';
 import { DataGridHeadColumn } from '../DataGridHeadColumn';
+import { DataGridColumns, DataGridRow, DataGridSort } from '../types';
 
-import { DataGridHeadProps } from './types';
+export type DataGridHeadProps<
+  Data = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+> = {
+  columns: DataGridColumns<Data>[];
+  selectable: boolean;
+  onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
+  sorting: DataGridSort<SortField>[];
+  onSort: (sorting: DataGridSort<SortField>[]) => void;
+  uncheckedRowsCount: number;
+  rowsCount: number;
+};
 
 export function DataGridHead<Data, SortField extends keyof Data>({
   columns,

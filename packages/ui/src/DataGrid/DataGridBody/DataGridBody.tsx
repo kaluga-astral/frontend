@@ -1,11 +1,22 @@
-import { useCallback, useMemo } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
+import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styled';
-import { DataGridBodyProps } from './types';
+
+export type DataGridBodyProps<Data> = {
+  columns: DataGridColumns<Data>[];
+  keyId: keyof DataGridRow;
+  onRowClick?: (row: Data) => void;
+  selectable?: boolean;
+  selectedRows?: Array<Data>;
+  rows: Data[];
+  onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
+  minDisplayRows: number;
+};
 
 export function DataGridBody<Data>({
   rows,

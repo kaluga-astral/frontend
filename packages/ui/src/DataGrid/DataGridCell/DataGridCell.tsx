@@ -2,12 +2,16 @@ import { useMemo } from 'react';
 
 import { TableCell } from '../../Table';
 import { Typography } from '../../Typography';
+import { DataGridColumns } from '../types';
 
-import { CellProps } from './types';
+export type CellProps<Data> = {
+  row: Data;
+  cell: DataGridColumns<Data>;
+};
 
 export function DataGridCell<Data>({
   row,
-  cell: { field, renderCell, format, align = 'left' },
+  cell: { field, renderCell, format, align = 'left', emptyCellValue = '-' },
 }: CellProps<Data>) {
   const formattedValue = useMemo(() => {
     if (format) {
@@ -18,8 +22,8 @@ export function DataGridCell<Data>({
       return row[field];
     }
 
-    return 'Нет данных';
-  }, [field, format, row]);
+    return emptyCellValue;
+  }, [field, format, row, emptyCellValue]);
 
   return (
     <TableCell align={align}>

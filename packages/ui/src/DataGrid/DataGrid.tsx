@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
 
 import { Table } from '../Table';
 
@@ -6,7 +6,26 @@ import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridContainer, StyledTableContainer } from './styled';
-import { DataGridProps } from './types';
+import { DataGridColumns, DataGridRow, DataGridSort } from './types';
+
+export type DataGridProps<
+  Data = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+> = {
+  rows: Data[];
+  columns: DataGridColumns<Data>[];
+  keyId: keyof DataGridRow;
+  onRowClick?: (row: Data) => void;
+  selectedRows?: Array<Data>;
+  onSelectRow?: (row: Data[]) => void;
+  sorting?: DataGridSort<SortField>[];
+  onSort: (sorting: DataGridSort<SortField>[]) => void;
+  Footer?: ReactNode;
+  maxHeight?: number;
+  loading?: boolean;
+  // используется для отображения переданного кол-ва строк при отсутствии данных
+  minDisplayRows?: number;
+};
 
 export function DataGrid<Data extends object, SortField extends keyof Data>({
   columns,

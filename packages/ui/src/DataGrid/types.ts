@@ -16,25 +16,6 @@ export type DataGridSort<SortField> = {
   sort: SortState;
 };
 
-export type DataGridProps<
-  Data = DataGridRow,
-  SortField extends keyof Data = keyof Data,
-> = {
-  rows: Data[];
-  columns: DataGridColumns<Data>[];
-  keyId: keyof DataGridRow;
-  onRowClick?: (row: Data) => void;
-  selectedRows?: Array<Data>;
-  onSelectRow?: (row: Data[]) => void;
-  sorting?: DataGridSort<SortField>[];
-  onSort: (sorting: DataGridSort<SortField>[]) => void;
-  Footer?: ReactNode;
-  maxHeight?: number;
-  loading?: boolean;
-  // используется для отображения переданного кол-ва строк при отсутствии данных
-  minDisplayRows?: number;
-};
-
 export type DataGridColumns<Data extends {}> = {
   field?: keyof Data;
   label?: string;
@@ -44,4 +25,5 @@ export type DataGridColumns<Data extends {}> = {
   format?: (data: Data) => CellValue;
   align?: TableCellProps['align'];
   width?: CSSProperties['width'];
+  emptyCellValue?: ReactNode;
 };
