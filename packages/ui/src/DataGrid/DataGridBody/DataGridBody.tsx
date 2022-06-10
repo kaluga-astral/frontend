@@ -7,7 +7,7 @@ import { Checkbox } from '../../Checkbox';
 import { StyledTableBody } from './styled';
 import { DataGridBodyProps } from './types';
 
-export function DataGridBody<T>({
+export function DataGridBody<Data>({
   rows,
   columns,
   selectable,
@@ -16,19 +16,19 @@ export function DataGridBody<T>({
   selectedRows = [],
   minDisplayRows,
   keyId,
-}: DataGridBodyProps<T>) {
+}: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
-    (row: T, rowId: string) => {
+    (row: Data, rowId: string) => {
       return columns.map((cell, index) => {
         const cellId = `${rowId}-${index}`;
 
-        return <DataGridCell key={cellId} row={row} cell={cell} />;
+        return <DataGridCell<Data> key={cellId} row={row} cell={cell} />;
       });
     },
     [columns],
   );
 
-  const handleRowClick = (row: T) => () => {
+  const handleRowClick = (row: Data) => () => {
     if (onRowClick) {
       onRowClick(row);
     }

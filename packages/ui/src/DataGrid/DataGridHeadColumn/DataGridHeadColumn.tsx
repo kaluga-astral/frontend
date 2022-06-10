@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
 import { Typography } from '../../Typography/Typography';
 import { SortStates } from '../constants';
 
 import { StyledTableCell, StyledTableSortLabel } from './styled';
 import { DataGridHeadColumnProps } from './types';
 
-export function DataGridHeadColumn<T>({
+export function DataGridHeadColumn<Data, SortField extends keyof Data>({
   onSort,
   field,
   sortable,
@@ -12,17 +13,19 @@ export function DataGridHeadColumn<T>({
   label,
   sorting,
   width,
-}: DataGridHeadColumnProps<T>) {
-  const sortParams = sorting.find(({ fieldId }) => field === fieldId);
-  const hideSortIcon = !Boolean(sortParams);
-  const sortDirection = sortParams ? sortParams.sort : SortStates.ASC;
+}: DataGridHeadColumnProps<Data, SortField>) {
+  const sortParams = useMemo(() => sorting.find(({ fieldId }) => field === fieldId), [sorting, field]);
+  const hideSortIcon = useMemo(() => !Boolean(sortParams),[sortParams]);
+  const sortDirection =  useMemo(() => sortParams ? sortParams.sort : SortStates.ASC, [sortParams]);
+
+  const handleSortClick = () => {
+    if (field) {
+      onSort(field as SortField, sortable);
+    }
+  };
 
   return (
-    <StyledTableCell
-      onClick={onSort(field, sortable)}
-      align={align}
-      width={width}
-    >
+    <StyledTableCell onClick={handleSortClick} align={align} width={width}>
       <Typography variant="pointer">{label}</Typography>
       {sortable && (
         <StyledTableSortLabel

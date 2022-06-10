@@ -8,7 +8,7 @@ import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridContainer, StyledTableContainer } from './styled';
 import { DataGridProps } from './types';
 
-export function DataGrid<T>({
+export function DataGrid<Data extends object, SortField extends keyof Data>({
   columns,
   rows = [],
   selectedRows = [],
@@ -21,7 +21,7 @@ export function DataGrid<T>({
   loading,
   onSort,
   keyId,
-}: DataGridProps<T>) {
+}: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -43,7 +43,7 @@ export function DataGrid<T>({
   };
 
   const handleSelectRow = useCallback(
-    (row: T) =>
+    (row: Data) =>
       (event: ChangeEvent<HTMLInputElement>): void => {
         if (!onSelectRow) {
           return;
@@ -59,7 +59,7 @@ export function DataGrid<T>({
           ),
         );
       },
-    [selectedRows, onSelectRow],
+    [selectedRows, onSelectRow, keyId],
   );
 
   const uncheckedRowsCount = useMemo(() => {
@@ -73,7 +73,7 @@ export function DataGrid<T>({
     <DataGridContainer>
       <StyledTableContainer maxHeight={maxHeight}>
         <Table stickyHeader>
-          <DataGridHead
+          <DataGridHead<Data, SortField>
             onSort={onSort}
             rowsCount={rows.length}
             uncheckedRowsCount={uncheckedRowsCount}
@@ -82,7 +82,7 @@ export function DataGrid<T>({
             sorting={sorting}
             columns={columns}
           />
-          <DataGridBody
+          <DataGridBody<Data>
             keyId={keyId}
             selectedRows={selectedRows}
             minDisplayRows={minDisplayRows}

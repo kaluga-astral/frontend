@@ -2,13 +2,13 @@ import { ChangeEvent } from 'react';
 
 import { DataGridColumns, DataGridRow } from '../types';
 
-export type DataGridBodyProps<T = DataGridRow> = {
-  columns: DataGridColumns<T>[];
+export type DataGridBodyProps<Data> = {
+  columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
-  onRowClick?: (row: T) => void;
+  onRowClick?: (row: Data) => void;
   selectable?: boolean;
-  selectedRows?: Array<T>;
-  rows: T[];
-  onSelectRow: (row: T) => (event: ChangeEvent<HTMLInputElement>) => void;
+  selectedRows?: Array<Data>;
+  rows: Data[];
+  onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
 };

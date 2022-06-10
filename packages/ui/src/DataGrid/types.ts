@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
+import { TableCellProps } from '@mui/material';
 
 import { SortStates } from './constants';
 
@@ -6,24 +7,27 @@ export type CellValue = string | number | boolean | Date | undefined | object;
 
 export type SortState = `${SortStates}`;
 
-export type RenderCell<T> = (params: T) => ReactNode;
+export type RenderCell<Data> = (params: Data) => ReactNode;
 
 export type DataGridRow = Record<string, any>;
 
-export type DataGridSort<Data extends {}> = {
-  fieldId: keyof Data;
+export type DataGridSort<SortField> = {
+  fieldId: SortField;
   sort: SortState;
 };
 
-export type DataGridProps<T = DataGridRow> = {
-  rows: T[];
-  columns: DataGridColumns<T>[];
+export type DataGridProps<
+  Data = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+> = {
+  rows: Data[];
+  columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
-  onRowClick?: (row: T) => void;
-  selectedRows?: Array<T>;
-  onSelectRow?: (row: T[]) => void;
-  sorting?: DataGridSort<T>[];
-  onSort: (sorting: DataGridSort<T>[]) => void;
+  onRowClick?: (row: Data) => void;
+  selectedRows?: Array<Data>;
+  onSelectRow?: (row: Data[]) => void;
+  sorting?: DataGridSort<SortField>[];
+  onSort: (sorting: DataGridSort<SortField>[]) => void;
   Footer?: ReactNode;
   maxHeight?: number;
   loading?: boolean;
@@ -31,13 +35,13 @@ export type DataGridProps<T = DataGridRow> = {
   minDisplayRows?: number;
 };
 
-export type DataGridColumns<Column extends {}> = {
-  field: keyof Column & string;
+export type DataGridColumns<Data extends {}> = {
+  field?: keyof Data;
   label?: string;
   sortable?: boolean;
   pointer?: boolean;
-  renderCell?: RenderCell<Column>;
-  format?: (data: Column) => CellValue;
-  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
+  renderCell?: RenderCell<Data>;
+  format?: (data: Data) => CellValue;
+  align?: TableCellProps['align'];
   width?: CSSProperties['width'];
 };

@@ -5,16 +5,20 @@ import { Typography } from '../../Typography';
 
 import { CellProps } from './types';
 
-export function DataGridCell<T>({
+export function DataGridCell<Data>({
   row,
   cell: { field, renderCell, format, align = 'left' },
-}: CellProps<T>) {
+}: CellProps<Data>) {
   const formattedValue = useMemo(() => {
     if (format) {
       return format(row);
     }
 
-    return row[field];
+    if (field) {
+      return row[field];
+    }
+
+    return 'Нет данных';
   }, [field, format, row]);
 
   return (

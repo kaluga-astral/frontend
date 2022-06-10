@@ -1,14 +1,17 @@
 import { TableCellProps } from '@mui/material';
 import { CSSProperties } from 'react';
 
-import { DataGridSort } from '../types';
+import { DataGridRow, DataGridSort } from '../types';
 
-export type DataGridHeadColumnProps<T> = {
-  onSort: (field: keyof T, sortable: boolean | undefined) => () => void;
-  sorting: DataGridSort<T>[];
+export type DataGridHeadColumnProps<
+  Data = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+> = {
+  onSort: (field: SortField, sortable?: boolean) => void;
+  sorting: DataGridSort<SortField>[];
   label?: string;
   sortable?: boolean;
   align?: TableCellProps['align'];
-  field: keyof T;
+  field?: keyof Data;
   width?: CSSProperties['width'];
 };
