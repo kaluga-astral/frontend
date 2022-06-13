@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AlertTitle, Alert as MuiAlert } from '@mui/material';
+import { AlertTitle } from '@mui/material';
 import {
   ErrorFillMd,
   InfoFillMd,
@@ -10,6 +10,7 @@ import {
 import { Button } from '../Button';
 
 import { AlertProps } from './types';
+import { StyledAlert } from './styled';
 
 export const Alert = ({
   severity,
@@ -41,13 +42,7 @@ export const Alert = ({
   }, [severity]);
 
   return (
-    <MuiAlert
-      severity={severity}
-      icon={icon}
-      onClose={onClose}
-      color={severity}
-      {...props}
-    >
+    <StyledAlert severity={severity} icon={icon} onClose={onClose} {...props}>
       {title && <AlertTitle>{title}</AlertTitle>}
       {message}
       {buttonLinkText && (
@@ -55,7 +50,7 @@ export const Alert = ({
           {buttonLinkText}
         </Button>
       )}
-    </MuiAlert>
+    </StyledAlert>
   );
 };
 
