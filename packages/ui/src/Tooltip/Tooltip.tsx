@@ -5,14 +5,29 @@ import { StyledTooltip } from './styled';
 import { TooltipSizes } from './constants';
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  (
-    { children, placement = 'top', size = TooltipSizes.MEDIUM, ...props },
-    ref
-  ) => {
-    return (
-      <StyledTooltip ref={ref} size={size} placement={placement} {...props}>
-        {children}
-      </StyledTooltip>
-    );
+  (props, ref) => {
+    const {
+      children,
+      placement = 'top',
+      size = TooltipSizes.MEDIUM,
+      title,
+      ...restProps
+    } = props;
+
+    if (title) {
+      return (
+        <StyledTooltip
+          ref={ref}
+          size={size}
+          placement={placement}
+          title={title}
+          {...restProps}
+        >
+          {children}
+        </StyledTooltip>
+      );
+    }
+
+    return children;
   }
 );

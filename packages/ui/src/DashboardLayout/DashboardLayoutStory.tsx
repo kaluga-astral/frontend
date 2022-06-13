@@ -1,42 +1,22 @@
 import { FC } from 'react';
-// import {
-//   CompanyOutlineMd,
-//   ProfileOutlineMd,
-//   SettingsFillMd,
-// } from '@astral/icons';
 
 import { DashboardLayout } from '../DashboardLayout';
 
 import { HeaderProps } from './Header';
+import { SidebarProps } from './Sidebar';
 
 export type DashboardLayoutStoryProps = {
   header: HeaderProps;
+  sidebar: SidebarProps;
 };
 
 export const DashboardLayoutStory: FC<DashboardLayoutStoryProps> = (props) => {
-  const { header } = props;
+  const { header, sidebar } = props;
 
   return (
     <DashboardLayout>
       <DashboardLayout.Header {...header} />
-      <DashboardLayout.Sidebar
-      // nav={[
-      //   {
-      //     icon: <ProfileOutlineMd />,
-      //     title: 'Главная',
-      //   },
-      //   {
-      //     active: true,
-      //     icon: <CompanyOutlineMd />,
-      //     title: 'Документы',
-      //     children: [{}],
-      //   },
-      //   {
-      //     icon: <SettingsFillMd />,
-      //     title: 'Контрагенты',
-      //   },
-      // ]}
-      />
+      <DashboardLayout.Sidebar {...sidebar} />
       <DashboardLayout.Main>main-content</DashboardLayout.Main>
     </DashboardLayout>
   );

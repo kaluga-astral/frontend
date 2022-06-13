@@ -1,6 +1,10 @@
+import { forwardRef } from 'react';
+
 import { StyledListItemButton } from './styled';
 import { ListItemButtonProps } from './types';
 
-export const ListItemButton = ({ ...props }: ListItemButtonProps) => {
-  return <StyledListItemButton {...props} disableRipple />;
-};
+export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
+  (props, ref) => {
+    return <StyledListItemButton ref={ref} {...props} disableRipple />;
+  }
+);

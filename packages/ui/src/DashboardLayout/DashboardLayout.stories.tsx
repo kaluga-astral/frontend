@@ -99,6 +99,48 @@ EDO.args = {
       ),
     },
   },
+  sidebar: {
+    // organization: {},
+    menu: {
+      // renderer() {},
+      items: [
+        [
+          'documents',
+          {
+            selected: true,
+            icon: <ProfileOutlineMd />,
+            text: 'Документы',
+            items: [
+              [
+                'incoming-documents',
+                { selected: true, text: 'Входящие документы' },
+              ],
+              [
+                'outgoing-documents',
+                { selected: false, text: 'Исходящие документы' },
+              ],
+            ],
+          },
+        ],
+        [
+          'counterparties',
+          {
+            selected: false,
+            icon: <ProfileOutlineMd />,
+            text: 'Контрагенты',
+          },
+        ],
+        [
+          'organizations',
+          {
+            selected: true,
+            icon: <ProfileOutlineMd />,
+            text: 'Мои организации',
+          },
+        ],
+      ],
+    },
+  },
 };
 
 export const OFD: ComponentStory<typeof DashboardLayoutStory> =

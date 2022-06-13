@@ -2,6 +2,7 @@ export * from './ActionCell';
 export * from './Autocomplete';
 export * from './Badge';
 export * from './Button';
+export * from './Divider';
 export * from './ButtonBase';
 export * from './Checkbox';
 export * from './CircularProgress';

@@ -1,77 +1,37 @@
 import { forwardRef, useCallback, useState } from 'react';
-import {
-  CompanyOutlineMd,
-  MenuOffOutlineMd,
-  MenuOnOutlineMd,
-  ProfileOutlineMd,
-  SettingsFillMd,
-} from '@astral/icons';
-import Collapse from '@mui/material/Collapse';
 
-import { List } from '../../List';
-import { ListItem } from '../../ListItem';
-import { ListItemIcon } from '../../ListItemIcon';
-import { ListItemText } from '../../ListItemText';
+import { NavMenu, NavMenuProps } from '../../NavMenu';
 
-import {
-  NavListItem,
-  SidebarNav,
-  SidebarRoot,
-  SidebarToggler,
-  SidebarTogglerContent,
-  SidebarTogglerWrapper,
-} from './styled';
+import { SidebarRoot } from './styled';
+import { SidebarNav } from './SidebarNav';
+import { SidebarToggler } from './SidebarToggler';
 
-export type SidebarProps = {};
+export type SidebarProps = {
+  menu: {
+    items: NavMenuProps['items'];
+  };
+};
 
-export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
-  (_props, ref) => {
-    const [collapsed, setCollapsed] = useState(true);
+export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
+  (props, ref) => {
+    const { menu } = props;
 
-    const handleSidebarTogglerClick = useCallback(() => {
-      setCollapsed((prevValue) => !prevValue);
+    const [collapsedIn, setCollapsedIn] = useState(true);
+
+    const handleTogglerChange = useCallback(() => {
+      setCollapsedIn((prevValue) => !prevValue);
     }, []);
 
     return (
-      <SidebarRoot ref={ref} collapsed={collapsed}>
-        <SidebarNav>
-          <List collapsed={!collapsed}>
-            <NavListItem>
-              <ListItemIcon>
-                <ProfileOutlineMd />
-              </ListItemIcon>
-              <ListItemText>Главная</ListItemText>
-            </NavListItem>
-            <ListItem>
-              <ListItemIcon>
-                <CompanyOutlineMd />
-              </ListItemIcon>
-              <ListItemText>Документы</ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <SettingsFillMd />
-              </ListItemIcon>
-              <ListItemText>Контрагенты</ListItemText>
-            </ListItem>
-          </List>
-        </SidebarNav>
-        <SidebarTogglerWrapper>
-          <SidebarToggler
-            startIcon={collapsed ? <MenuOnOutlineMd /> : <MenuOffOutlineMd />}
-            variant="text"
-            onClick={handleSidebarTogglerClick}
-          >
-            <Collapse orientation="horizontal" in={!collapsed}>
-              <SidebarTogglerContent collapsed={collapsed}>
-                Свернуть меню
-              </SidebarTogglerContent>
-            </Collapse>
-          </SidebarToggler>
-        </SidebarTogglerWrapper>
+      <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
+        <SidebarNav
+          menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
+        />
+        <SidebarToggler
+          collapsedIn={collapsedIn}
+          onChange={handleTogglerChange}
+        />
       </SidebarRoot>
     );
   }
 );
-
-export default Sidebar;
