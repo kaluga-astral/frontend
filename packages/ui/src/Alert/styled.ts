@@ -6,8 +6,8 @@ import { Theme } from '../theme';
 import { AlertStates } from './constants';
 import { AlertProps, AlertState } from './types';
 
-export type StyledAlertProps = Omit<AlertProps, 'severity'> & {
-  severity?: AlertState;
+export type StyledAlertProps = Omit<AlertProps, 'severity' | 'message'> & {
+  severity: AlertState;
 };
 
 export type StyledAlertThemeProps = {
@@ -62,11 +62,20 @@ export const setIconColor = ({
 };
 
 export const StyledAlert = styled(Alert, {
-  shouldForwardProp: (prop) => prop !== 'alertState',
+  shouldForwardProp: (prop) => prop !== 'severity',
 })<StyledAlertProps>`
   &.${alertClasses.root} {
     background-color: ${setBackgroundColor};
-    padding: 16px;
+    padding: ${({ theme }) => theme.spacing(4)};
+  }
+
+  &.${alertClasses.icon} {
+    color: ${({ theme }) => theme.palette.grey['500']};
+  }
+
+  &.${alertClasses.message} {
+    padding-top: ${({ theme }) => theme.spacing(2)};
+    padding-bottom: 0;
   }
 
   button {

@@ -1,4 +1,3 @@
-import type {} from '@mui/lab/themeAugmentation';
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
@@ -27,6 +26,7 @@ import { MuiYearPicker } from './MuiYearPicker';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
+import { MuiAlertTitle } from './MuiAlertTitle';
 
 export type FontsUrls = {
   bold: {
@@ -96,6 +96,7 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiAlertTitle,
   MuiButton,
   MuiButtonBase,
   MuiLoadingButton,

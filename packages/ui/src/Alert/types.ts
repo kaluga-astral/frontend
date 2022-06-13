@@ -6,12 +6,12 @@ export type AlertState = `${AlertStates}`;
 
 export type AlertProps = Omit<
   MuiAlertProps,
-  'severity' | 'variant' | 'icon'
+  'severity' | 'variant' | 'icon' | 'message'
 > & {
   severity: AlertState;
   message: string;
   title?: string;
   buttonLinkText?: React.ReactNode;
   onClose: () => void;
-  onLinkHandleClick: () => void;
+  onLinkHandleClick?: () => void;
 };

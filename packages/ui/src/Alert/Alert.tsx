@@ -23,19 +23,19 @@ export const Alert = ({
 }: AlertProps) => {
   const icon = useMemo(() => {
     if (severity === 'info') {
-      return <InfoFillMd />;
+      return <InfoFillMd color="inherit" />;
     }
 
     if (severity === 'success') {
-      return <SuccessFillMd />;
+      return <SuccessFillMd color="inherit" />;
     }
 
     if (severity === 'warning') {
-      return <WarningFillMd />;
+      return <WarningFillMd color="inherit" />;
     }
 
     if (severity === 'error') {
-      return <ErrorFillMd />;
+      return <ErrorFillMd color="inherit" />;
     }
 
     return <InfoFillMd />;
