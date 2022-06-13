@@ -10,7 +10,15 @@ export default {
 
 const Template: Story = (args) => (
   <Stack sx={{ width: '624px', height: '108px' }} spacing={2}>
-    <Alert {...args} onClose={() => {}}></Alert>
+    <Alert
+      severity="info"
+      message="Заголовок и действия опциональны, их можно отключить, если требуется."
+      title="Заголовок"
+      buttonLinkText="Кнопка ссылка"
+      onClose={() => {}}
+      onLinkHandleClick={() => {}}
+      {...args}
+    ></Alert>
   </Stack>
 );
 

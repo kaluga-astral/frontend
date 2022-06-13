@@ -11,16 +11,15 @@ import { Button } from '../Button';
 
 import { AlertProps } from './types';
 
-export const Alert = (props: AlertProps) => {
-  const {
-    severity,
-    message,
-    title,
-    onClose,
-    buttonLinkText,
-    onLinkHandleClick,
-  } = props;
-
+export const Alert = ({
+  severity,
+  message,
+  title,
+  onClose,
+  buttonLinkText,
+  onLinkHandleClick,
+  ...props
+}: AlertProps) => {
   const icon = useMemo(() => {
     if (severity === 'info') {
       return <InfoFillMd />;
@@ -47,6 +46,7 @@ export const Alert = (props: AlertProps) => {
       icon={icon}
       onClose={onClose}
       color={severity}
+      {...props}
     >
       {title && <AlertTitle>{title}</AlertTitle>}
       {message}
