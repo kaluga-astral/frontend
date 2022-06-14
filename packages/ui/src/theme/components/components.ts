@@ -1,3 +1,4 @@
+import type {} from '@mui/lab/themeAugmentation';
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
