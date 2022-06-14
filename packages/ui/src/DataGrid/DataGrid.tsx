@@ -13,51 +13,70 @@ export type DataGridProps<
   SortField extends keyof Data = keyof Data,
 > = {
   /**
+   * @example <DataGrid rows={[{name: 'test'}]} />
    * Массив данных для таблицы
    */
   rows: Data[];
   /**
+   * @example <DataGrid columns={[
+   *   {
+   *     field: 'test',
+   *     label: 'Тестовая колонка',
+   *     sortable: true,
+   *   }]} />
    * Конфигурация колонок для таблицы
    */
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
   /**
+   * @example <DataGrid onRowClick={(row) => console.log('clicked')} />
    * Обработчик клика строки таблицы
    */
   onRowClick?: (row: Data) => void;
   /**
+   * @example <DataGrid selectedRows={[{name: 'test'}]} />
    * Массив выбранных строк
    */
   selectedRows?: Array<Data>;
   /**
+   * @example <DataGrid onSelectRow={(row) => console.log(select)} />
    * Обработчик выбора строки
    */
   onSelectRow?: (row: Data[]) => void;
   /**
+   * @example <DataGrid sorting={[{fieldId: 'test', sort: 'asc'}]} />
    * Массив сортируемых колонок
    */
   sorting?: DataGridSort<SortField>[];
   /**
+   * @example <DataGrid onSort={({fieldId: 'test', sort: 'asc'}) => console.log('sorted')} />
    * Обработчик сортировки
    */
   onSort: (sorting: DataGridSort<SortField>[]) => void;
   /**
+   * @example <DataGrid  Footer={<DataGridPagination />} />
    * Компонент кастомного футера (н-р Pagination)
    */
   Footer?: ReactNode;
   /**
+   * @example <DataGrid  maxHeight={900} />
    * Максимальная высота для таблицы
    */
   maxHeight?: number;
   /**
+   * @example <DataGrid  loading={true} />
    * Флажок загрузки данных
    */
   loading?: boolean;
   /**
+   * @default '-'
+   * @example <DataGrid  emptyCellValue{'Нет данных'} />
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
    */
   emptyCellValue?: ReactNode;
   /**
+   * @default 10
+   * @example <DataGrid  minDisplayRows{10} />
    *  используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
