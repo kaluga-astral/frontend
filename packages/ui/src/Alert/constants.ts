@@ -4,10 +4,3 @@ export enum AlertStates {
   WARNING = 'warning',
   INFO = 'info',
 }
-
-export enum AlertColors {
-  ERROR = 'error',
-  SUCCESS = 'success',
-  WARNING = 'warning',
-  PRIMARY = 'primary',
-}
