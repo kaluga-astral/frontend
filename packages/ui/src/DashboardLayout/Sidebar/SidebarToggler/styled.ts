@@ -9,5 +9,6 @@ export const SidebarTogglerRoot = styled(SidebarTogglerButton)`
 
 export const SidebarTogglerContent = styled.span`
   margin-left: ${({ theme }) => theme.spacing(4)};
+
   white-space: nowrap;
 `;

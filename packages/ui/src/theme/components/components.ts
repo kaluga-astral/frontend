@@ -26,6 +26,7 @@ import { MuiYearPicker } from './MuiYearPicker';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
+import { MuiListItemButton } from './MuiListItemButton';
 
 export type FontsUrls = {
   bold: {
@@ -120,4 +121,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCalendarPicker,
   MuiYearPicker,
   MuiCircularProgress,
+  MuiListItemButton,
 });

@@ -19,9 +19,10 @@ export const NavMenuItemButton = forwardRef<
   NavMenuItemButtonProps
 >((props, ref) => {
   const { collapsedIn, selected, text, icon } = props;
+  const component = 'a';
 
   return (
-    <NavMenuItemButtonRoot ref={ref} selected={selected}>
+    <NavMenuItemButtonRoot ref={ref} selected={selected} component={component}>
       <Tooltip arrow title={!collapsedIn && text} placement="right">
         <ListItemIcon sx={{ minWidth: 'unset' }}>{icon}</ListItemIcon>
       </Tooltip>
