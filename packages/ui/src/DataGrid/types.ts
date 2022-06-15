@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
+import { TableCellProps } from '@mui/material';
 
 import { SortStates } from './constants';
 
@@ -6,38 +7,58 @@ export type CellValue = string | number | boolean | Date | undefined | object;
 
 export type SortState = `${SortStates}`;
 
-export type RenderCell<T> = (params: T) => ReactNode;
+export type RenderCell<Data> = (params: Data) => ReactNode;
 
 export type DataGridRow = Record<string, any>;
 
-export type DataGridSort<Data extends {}> = {
-  fieldId: keyof Data;
+export type DataGridSort<SortField> = {
+  /**
+   * @example {fieldId: 'test'}
+   * Значение поля сортируемой колонки
+   */
+  fieldId: SortField;
+  /**
+   * @example {sort: 'asc'}
+   * Значение возрастающий или убывающий сортировки (asc | desc)
+   */
   sort: SortState;
 };
 
-export type DataGridProps<T = DataGridRow> = {
-  rows: T[];
-  columns: DataGridColumns<T>[];
-  keyId: keyof DataGridRow;
-  onRowClick?: (row: T) => void;
-  selectedRows?: Array<T>;
-  onSelectRow?: (row: T[]) => void;
-  sorting?: DataGridSort<T>[];
-  onSort: (sorting: DataGridSort<T>[]) => void;
-  Footer?: ReactNode;
-  maxHeight?: number;
-  loading?: boolean;
-  // используется для отображения переданного кол-ва строк при отсутствии данных
-  minDisplayRows?: number;
-};
-
-export type DataGridColumns<Column extends {}> = {
-  field: keyof Column & string;
+export type DataGridColumns<Data extends {}> = {
+  /**
+   * @example {field: 'test'}
+   * Значение ключа поля данных для колонки
+   */
+  field?: keyof Data;
+  /**
+   * @example {label: 'Тестовая колонка'}
+   * Название колонки таблицы
+   */
   label?: string;
+  /**
+   * @example {sortable: 'true'}
+   * Флажок включающий сортировку колонки
+   */
   sortable?: boolean;
   pointer?: boolean;
-  renderCell?: RenderCell<Column>;
-  format?: (data: Column) => CellValue;
-  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
+  /**
+   * @example {renderCell: (row) => <div>Hello Cell</div>'}
+   * Кастомное отображение ячеек для колонки
+   */
+  renderCell?: RenderCell<Data>;
+  /**
+   * @example {format: (row) => new Date(row.createDate).toLocaleDateString()}
+   * Функция для кастомного форматирования данных ячеек для колонки
+   */
+  format?: (data: Data) => CellValue;
+  /**
+   * @example {align: 'left'}
+   * CSS свойство размещения контента в ячейке
+   */
+  align?: TableCellProps['align'];
+  /**
+   * @example {width: '100%'}
+   * CSS свойство ширины ячейки
+   */
   width?: CSSProperties['width'];
 };

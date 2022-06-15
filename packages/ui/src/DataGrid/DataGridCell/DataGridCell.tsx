@@ -1,21 +1,31 @@
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { TableCell } from '../../Table';
 import { Typography } from '../../Typography';
+import { DataGridColumns } from '../types';
 
-import { CellProps } from './types';
+export type CellProps<Data> = {
+  row: Data;
+  cell: DataGridColumns<Data>;
+  emptyCellValue?: ReactNode;
+};
 
-export function DataGridCell<T>({
+export function DataGridCell<Data>({
   row,
   cell: { field, renderCell, format, align = 'left' },
-}: CellProps<T>) {
+  emptyCellValue = '-',
+}: CellProps<Data>) {
   const formattedValue = useMemo(() => {
     if (format) {
       return format(row);
     }
 
-    return row[field];
-  }, [field, format, row]);
+    if (field) {
+      return row[field];
+    }
+
+    return emptyCellValue;
+  }, [field, format, row, emptyCellValue]);
 
   return (
     <TableCell align={align}>

@@ -4,7 +4,10 @@ import {
   StyledDivider,
   StyledLinearProgress,
 } from './styled';
-import { DataGridLoaderProps } from './types';
+
+export type DataGridLoaderProps = {
+  loading?: boolean;
+};
 
 const DataGridLoader = ({ loading = false }: DataGridLoaderProps) => {
   return (

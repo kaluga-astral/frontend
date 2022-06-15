@@ -1,13 +1,25 @@
-import { useCallback, useMemo } from 'react';
+import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
 
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
+import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styled';
-import { DataGridBodyProps } from './types';
 
-export function DataGridBody<T>({
+export type DataGridBodyProps<Data> = {
+  columns: DataGridColumns<Data>[];
+  keyId: keyof DataGridRow;
+  onRowClick?: (row: Data) => void;
+  selectable?: boolean;
+  selectedRows?: Array<Data>;
+  rows: Data[];
+  onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
+  minDisplayRows: number;
+  emptyCellValue?: ReactNode;
+};
+
+export function DataGridBody<Data>({
   rows,
   columns,
   selectable,
@@ -16,19 +28,27 @@ export function DataGridBody<T>({
   selectedRows = [],
   minDisplayRows,
   keyId,
-}: DataGridBodyProps<T>) {
+  emptyCellValue,
+}: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
-    (row: T, rowId: string) => {
+    (row: Data, rowId: string) => {
       return columns.map((cell, index) => {
         const cellId = `${rowId}-${index}`;
 
-        return <DataGridCell key={cellId} row={row} cell={cell} />;
+        return (
+          <DataGridCell<Data>
+            key={cellId}
+            row={row}
+            cell={cell}
+            emptyCellValue={emptyCellValue}
+          />
+        );
       });
     },
     [columns],
   );
 
-  const handleRowClick = (row: T) => () => {
+  const handleRowClick = (row: Data) => () => {
     if (onRowClick) {
       onRowClick(row);
     }
