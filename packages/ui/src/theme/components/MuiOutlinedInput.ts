@@ -35,6 +35,7 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     },
     input({ theme }) {
       return {
+        height: 20,
         padding: theme.spacing(2.5, 2),
         borderRadius: theme.shape.small,
         '&:disabled': {
@@ -48,13 +49,12 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     },
     inputSizeSmall({ theme }) {
       return {
-        paddingBlock: theme.spacing(2),
-        paddingInline: theme.spacing(1.5),
+        padding: theme.spacing(1.5, 2),
       };
     },
     notchedOutline({ theme }: { theme: any }) {
       return {
-        borderWidth: '2px',
+        borderWidth: 2,
         borderColor: theme.palette.grey[300],
       };
     },
