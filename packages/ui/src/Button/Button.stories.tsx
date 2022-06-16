@@ -20,12 +20,8 @@ export const ButtonShowcase: Story = () => (
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
       <Stack gap={3} direction="row" alignItems="center">
-        <Button color="primary" variant="contained">
-          Label
-        </Button>
-        <Button color="primary" variant="contained" loading>
-          Loading
-        </Button>
+        <Button>Label</Button>
+        <Button loading>Loading</Button>
         <Button color="primary" variant="contained" size="large">
           Large
         </Button>

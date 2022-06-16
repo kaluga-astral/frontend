@@ -53,7 +53,7 @@ jobs:
             
             ${{ github.event.pull_request.title }}
             
-            🧑‍🎨🧑‍🎨🧑‍🎨 требует ревью дизайна от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[github.event.requested_reviewer.login] }}
+            🧑‍🎨🧑‍🎨🧑‍🎨 требует ревью дизайна
             
             ${{ github.event.pull_request.html_url }}
             

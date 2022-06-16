@@ -21,9 +21,6 @@ import { MuiDialogActions } from './MuiDialogActions';
 import { MuiTableCell } from './MuiTableCell';
 import { MuiTableHead } from './MuiTableHead';
 import { MuiTableRow } from './MuiTableRow';
-import { MuiPickersDay } from './MuiPickersDay';
-import { MuiCalendarPicker } from './MuiCalendarPicker';
-import { MuiYearPicker } from './MuiYearPicker';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
@@ -122,8 +119,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiTableHead,
   MuiTableRow,
   MuiPaginationItem,
-  MuiPickersDay,
-  MuiCalendarPicker,
-  MuiYearPicker,
   MuiCircularProgress,
 });
