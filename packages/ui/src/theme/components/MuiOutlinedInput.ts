@@ -52,7 +52,7 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
         paddingInline: theme.spacing(1.5),
       };
     },
-    notchedOutline({ theme }: { theme: any }) {
+    notchedOutline({ theme }) {
       return {
         borderWidth: '2px',
         borderColor: theme.palette.grey[300],
