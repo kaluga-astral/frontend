@@ -49,10 +49,11 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     },
     inputSizeSmall({ theme }) {
       return {
-        padding: theme.spacing(1.5, 2),
+        paddingBlock: theme.spacing(1.5),
+        paddingInline: theme.spacing(2),
       };
     },
-    notchedOutline({ theme }: { theme: any }) {
+    notchedOutline({ theme }) {
       return {
         borderWidth: 2,
         borderColor: theme.palette.grey[300],
