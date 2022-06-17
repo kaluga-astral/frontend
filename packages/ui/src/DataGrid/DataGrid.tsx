@@ -9,7 +9,7 @@ import { DataGridContainer, StyledTableContainer } from './styled';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
-  Data = DataGridRow,
+  Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
   /**
@@ -52,7 +52,7 @@ export type DataGridProps<
    * @example <DataGrid onSort={({fieldId: 'test', sort: 'asc'}) => console.log('sorted')} />
    * Обработчик сортировки
    */
-  onSort: (sorting: DataGridSort<SortField>[]) => void;
+  onSort?: (sorting: DataGridSort<SortField>[]) => void;
   /**
    * @example <DataGrid  Footer={<DataGridPagination />} />
    * Компонент кастомного футера (н-р Pagination)
@@ -82,7 +82,10 @@ export type DataGridProps<
   minDisplayRows?: number;
 };
 
-export function DataGrid<Data extends object, SortField extends keyof Data>({
+export function DataGrid<
+  Data extends object = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+>({
   columns,
   rows = [],
   selectedRows = [],

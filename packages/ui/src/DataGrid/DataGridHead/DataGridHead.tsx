@@ -15,7 +15,7 @@ export type DataGridHeadProps<
   selectable: boolean;
   onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
   sorting: DataGridSort<SortField>[];
-  onSort: (sorting: DataGridSort<SortField>[]) => void;
+  onSort?: (sorting: DataGridSort<SortField>[]) => void;
   uncheckedRowsCount: number;
   rowsCount: number;
 };
@@ -40,28 +40,30 @@ export function DataGridHead<Data, SortField extends keyof Data>({
   );
 
   const handleSort = useCallback(
-    (field: SortField, sortable?: boolean) => {
-      if (sortable) {
-        const currentSort = sorting.find(({ fieldId }) => fieldId === field);
-
-        // если для выбранного столбца текущая сортировка ASC - меняем на DESC
-        if (currentSort && currentSort.sort === SortStates.ASC) {
-          const newSorting = [
-            ...sorting.filter(({ fieldId }) => fieldId !== field),
-            { fieldId: field, sort: SortStates.DESC },
-          ];
-
-          return onSort(newSorting);
-          // если для выбранного столбца текущая сортировка DESC - убираем сортировку
-        } else if (currentSort && currentSort.sort === SortStates.DESC) {
-          const newSorting = sorting.filter(({ fieldId }) => fieldId !== field);
-
-          return onSort(newSorting);
-        }
-
-        // если для выбранного столбца нет сортировки - добавляем сортировку ASC
-        onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
+    (field: SortField) => {
+      if (!onSort) {
+        return;
       }
+
+      const currentSort = sorting.find(({ fieldId }) => fieldId === field);
+
+      // если для выбранного столбца текущая сортировка ASC - меняем на DESC
+      if (currentSort && currentSort.sort === SortStates.ASC) {
+        const newSorting = [
+          ...sorting.filter(({ fieldId }) => fieldId !== field),
+          { fieldId: field, sort: SortStates.DESC },
+        ];
+
+        return onSort(newSorting);
+        // если для выбранного столбца текущая сортировка DESC - убираем сортировку
+      } else if (currentSort && currentSort.sort === SortStates.DESC) {
+        const newSorting = sorting.filter(({ fieldId }) => fieldId !== field);
+
+        return onSort(newSorting);
+      }
+
+      // если для выбранного столбца нет сортировки - добавляем сортировку ASC
+      onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
     },
     [sorting, onSort],
   );
