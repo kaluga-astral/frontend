@@ -11,7 +11,7 @@ export type DataGridHeadColumnProps<
   Data = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
-  onSort: (field: SortField, sortable?: boolean) => void;
+  onSort: (field: SortField) => void;
   sorting: DataGridSort<SortField>[];
   label?: string;
   sortable?: boolean;
@@ -40,13 +40,18 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
   );
 
   const handleSortClick = () => {
-    if (field) {
-      onSort(field as SortField, sortable);
+    if (field && sortable) {
+      onSort(field as SortField);
     }
   };
 
   return (
-    <StyledTableCell onClick={handleSortClick} align={align} width={width}>
+    <StyledTableCell
+      onClick={handleSortClick}
+      align={align}
+      width={width}
+      sortable={sortable}
+    >
       <Typography variant="pointer">{label}</Typography>
       {sortable && (
         <StyledTableSortLabel

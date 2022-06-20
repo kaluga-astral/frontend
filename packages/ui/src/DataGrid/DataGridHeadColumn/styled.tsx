@@ -6,6 +6,7 @@ import { TableCell, TableSortLabel } from '../../Table';
 
 type StyledTableCellProps = TableCellProps & {
   width?: CSSProperties['width'];
+  sortable?: boolean;
 };
 
 export const StyledTableSortLabel = styled(TableSortLabel)<TableSortLabelProps>`
@@ -17,7 +18,8 @@ export const StyledTableCell = styled(TableCell, {
 })<StyledTableCellProps>`
   width: ${({ width = 'auto' }) => width};
 
-  cursor: pointer;
-
+  cursor: ${({ sortable }) => (sortable ? 'pointer' : 'initial')};
+  padding: ${({ theme }) => theme.spacing(3, 4)};
+  color: ${({ theme }) => theme.palette.grey[700]};
   user-select: none;
 `;
