@@ -1,3 +1,4 @@
+import { ReactElement, forwardRef } from 'react';
 import { ProductsFillMd } from '@astral/icons';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
@@ -30,35 +31,61 @@ export default {
 export const EDO: ComponentStory<typeof DashboardLayoutStory> =
   DashboardLayoutStoryTemplate.bind({});
 
+type RouterLinkProps = {
+  className?: string;
+  to: string;
+  children: ReactElement;
+};
+
+const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
+  (props, ref) => {
+    const { className, to, children } = props;
+
+    const handleClick = (e) => {
+      e.preventDefault();
+    };
+
+    return (
+      <a ref={ref} className={className} href={to} onClick={handleClick}>
+        {children}
+      </a>
+    );
+  }
+);
+
 EDO.args = {
   header: {
-    productSwitcher: () => (
-      <Box>
-        <IconButton variant="text">
-          <ProductsFillMd />
-        </IconButton>
-      </Box>
-    ),
+    productSwitcher() {
+      return (
+        <Box>
+          <IconButton variant="text">
+            <ProductsFillMd />
+          </IconButton>
+        </Box>
+      );
+    },
     product: {
       name: 'Астрал.ЭДО',
-      logo: () => (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6.5 6.10352e-05C5.1195 6.10352e-05 4 1.11956 4 2.50006V3.00006H13.75C15.545 3.00006 17 4.45506 17 6.25006V11.2501C17 12.2166 16.2165 13.0001 15.25 13.0001H8.75C7.7835 13.0001 7 12.2166 7 11.2501V8.00006H5C4.4475 8.00006 4 8.44756 4 9.00006V13.5001C4 14.8806 5.1195 16.0001 6.5 16.0001H17.5C18.8805 16.0001 20 14.8806 20 13.5001V2.50006C20 1.11956 18.8805 6.10352e-05 17.5 6.10352e-05H6.5Z"
-            fill="#8566FF"
-          />
-          <path
-            d="M2.5 4.00006C1.1195 4.00006 0 5.11956 0 6.50006V17.5001C0 18.8806 1.1195 20.0001 2.5 20.0001H13.5C14.8805 20.0001 16 18.8806 16 17.5001V17.0001H6.25C4.455 17.0001 3 15.5451 3 13.7501V8.75006C3 7.78356 3.7835 7.00006 4.75 7.00006H11.25C12.2165 7.00006 13 7.78356 13 8.75006V12.0001H15C15.5525 12.0001 16 11.5526 16 11.0001V6.50006C16 5.11956 14.8805 4.00006 13.5 4.00006H2.5Z"
-            fill="#5D3FD4"
-          />
-        </svg>
-      ),
+      logo() {
+        return (
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.5 6.10352e-05C5.1195 6.10352e-05 4 1.11956 4 2.50006V3.00006H13.75C15.545 3.00006 17 4.45506 17 6.25006V11.2501C17 12.2166 16.2165 13.0001 15.25 13.0001H8.75C7.7835 13.0001 7 12.2166 7 11.2501V8.00006H5C4.4475 8.00006 4 8.44756 4 9.00006V13.5001C4 14.8806 5.1195 16.0001 6.5 16.0001H17.5C18.8805 16.0001 20 14.8806 20 13.5001V2.50006C20 1.11956 18.8805 6.10352e-05 17.5 6.10352e-05H6.5Z"
+              fill="#8566FF"
+            />
+            <path
+              d="M2.5 4.00006C1.1195 4.00006 0 5.11956 0 6.50006V17.5001C0 18.8806 1.1195 20.0001 2.5 20.0001H13.5C14.8805 20.0001 16 18.8806 16 17.5001V17.0001H6.25C4.455 17.0001 3 15.5451 3 13.7501V8.75006C3 7.78356 3.7835 7.00006 4.75 7.00006H11.25C12.2165 7.00006 13 7.78356 13 8.75006V12.0001H15C15.5525 12.0001 16 11.5526 16 11.0001V6.50006C16 5.11956 14.8805 4.00006 13.5 4.00006H2.5Z"
+              fill="#5D3FD4"
+            />
+          </svg>
+        );
+      },
     },
     // menu: () => <MenuList />,
     profile: {
@@ -68,57 +95,88 @@ EDO.args = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      menu: (props) => (
-        <Menu {...props}>
-          <MenuItem>
-            <ListItemIcon>
-              <ProfileOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Мой профиль</ListItemText>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <CompanyOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Мои организации</ListItemText>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <SettingsFillMd />
-            </ListItemIcon>
-            <ListItemText>Настройки</ListItemText>
-          </MenuItem>
-          <Divider />
-          <MenuItem>
-            <ListItemIcon>
-              <QuitOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Выйти</ListItemText>
-          </MenuItem>
-        </Menu>
-      ),
+      menu(props) {
+        return (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мой профиль</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мои организации</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>Настройки</ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Выйти</ListItemText>
+            </MenuItem>
+          </Menu>
+        );
+      },
     },
   },
   sidebar: {
     // organization: {},
     // CTAButton,
     menu: {
-      // renderer() {},
       items: [
         [
           'documents',
           {
-            selected: true,
             icon: <ProfileOutlineMd />,
             text: 'Документы',
+            getState() {
+              return 'active';
+            },
             items: [
               [
                 'incoming-documents',
-                { selected: true, text: 'Входящие документы' },
+                {
+                  text: 'Входящие документы',
+                  getState() {
+                    return 'active';
+                  },
+                  component: forwardRef((props, ref) => {
+                    return (
+                      <RouterLink
+                        ref={ref}
+                        to="/incoming-documents"
+                        {...props}
+                      />
+                    );
+                  }),
+                },
               ],
               [
                 'outgoing-documents',
-                { selected: false, text: 'Исходящие документы' },
+                {
+                  text: 'Исходящие документы',
+                  getState() {
+                    return 'inactive';
+                  },
+                  component: forwardRef((props, ref) => {
+                    return (
+                      <RouterLink
+                        ref={ref}
+                        to="/outgoing-documents"
+                        {...props}
+                      />
+                    );
+                  }),
+                },
               ],
             ],
           },
@@ -126,17 +184,40 @@ EDO.args = {
         [
           'counterparties',
           {
-            selected: false,
             icon: <ProfileOutlineMd />,
             text: 'Контрагенты',
+            getState() {
+              return 'inactive';
+            },
+            items: [
+              [
+                'invitations',
+                {
+                  text: 'Приглашения',
+                  getState() {
+                    return 'inactive';
+                  },
+                  component: forwardRef((props, ref) => {
+                    return (
+                      <RouterLink ref={ref} to="/invitations" {...props} />
+                    );
+                  }),
+                },
+              ],
+            ],
           },
         ],
         [
           'organizations',
           {
-            selected: true,
             icon: <ProfileOutlineMd />,
             text: 'Мои организации',
+            getState() {
+              return 'active';
+            },
+            component: forwardRef((props, ref) => {
+              return <RouterLink ref={ref} to="/organizations" {...props} />;
+            }),
           },
         ],
       ],

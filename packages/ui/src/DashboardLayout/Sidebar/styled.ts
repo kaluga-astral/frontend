@@ -6,7 +6,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   display: flex;
   flex-direction: column;
   grid-area: sidebar;
-  width: ${({ collapsedIn }) => {
+  min-width: ${({ collapsedIn }) => {
     if (collapsedIn) {
       return '240px';
     }
@@ -19,9 +19,9 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   border-right: 1px solid ${({ theme }) => theme.palette.grey[300]};
 
   transition: ${({ theme }) => {
-    return theme.transitions.create('width', {
+    return theme.transitions.create('min-width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }) ;
+    });
   }};
 `;
