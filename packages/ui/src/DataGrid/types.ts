@@ -9,6 +9,7 @@ export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DataGridRow = Record<string, any>;
 
 export type DataGridSort<SortField> = {

@@ -34,7 +34,7 @@
     "@types/react-dom": "^18.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "@astral/stylelint-config-styled": "^1.1.4"
+    "@astral/stylelint-config-styled": "^1.2.0"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && start-storybook -p 6006",

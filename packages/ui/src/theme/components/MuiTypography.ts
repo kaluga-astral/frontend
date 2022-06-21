@@ -33,6 +33,7 @@ export const MuiTypography: Components['MuiTypography'] = {
     variantMapping: {
       link: 'a',
       code: 'code',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any,
   },
 };

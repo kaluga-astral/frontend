@@ -50,5 +50,6 @@ export const createTheme = (params: CreateThemeParams) => {
   };
   const muiTheme = createMuiTheme(merge({}, themeOptions, options));
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return merge(muiTheme as any, { elevation, shape }) as Theme;
 };
