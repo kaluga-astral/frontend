@@ -5,8 +5,8 @@
     "commander"
   ],
   "devDependencies": {
-    "@astral/eslint-config-react-ts": "^1.3.1",
-    "@astral/commitlint-config": "^1.3.1",
+    "@astral/eslint-config-react-ts": "^1.3.2",
+    "@astral/commitlint-config": "^1.3.2",
     "@astral/commander": "*",
     "@astral/illustrations": "*",
     "@mdx-js/react": "2.0.0",
@@ -34,7 +34,7 @@
     "@types/react-dom": "^18.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "@astral/stylelint-config-styled": "^1.3.1"
+    "@astral/stylelint-config-styled": "^1.3.2"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && start-storybook -p 6006",
