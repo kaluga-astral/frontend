@@ -6,9 +6,8 @@ import {
 
 import { WithoutEmotionSpecific } from '../types';
 
-export type CircularProgressProps = Omit<
-  MuiCircularProgressProps,
-  'color' | 'size'
+export type CircularProgressProps = WithoutEmotionSpecific<
+  Omit<MuiCircularProgressProps, 'color' | 'size'>
 > & {
   /**
    * Цвет лоадера
@@ -20,24 +19,23 @@ export type CircularProgressProps = Omit<
   size?: 'small' | 'medium';
 };
 
-export const CircularProgress = forwardRef<
-  HTMLElement,
-  WithoutEmotionSpecific<CircularProgressProps>
->((props, ref) => {
-  const { size: sizeProp, color, ...restProps } = props;
-  const size = useMemo(() => {
-    return sizeProp === 'small' ? 16 : 24;
-  }, [sizeProp]);
+export const CircularProgress = forwardRef<HTMLElement, CircularProgressProps>(
+  (props, ref) => {
+    const { size: sizeProp, color, ...restProps } = props;
+    const size = useMemo(() => {
+      return sizeProp === 'small' ? 16 : 24;
+    }, [sizeProp]);
 
-  return (
-    <MuiCircularProgress
-      ref={ref}
-      {...restProps}
-      size={size}
-      color="inherit"
-      data-color={color}
-    />
-  );
-});
+    return (
+      <MuiCircularProgress
+        ref={ref}
+        {...restProps}
+        size={size}
+        color="inherit"
+        data-color={color}
+      />
+    );
+  },
+);
 
 export default CircularProgress;
