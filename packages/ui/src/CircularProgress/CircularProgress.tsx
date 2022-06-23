@@ -1,9 +1,24 @@
 import { forwardRef, useMemo } from 'react';
-import MuiCircularProgress from '@mui/material/CircularProgress';
+import {
+  CircularProgress as MuiCircularProgress,
+  CircularProgressProps as MuiCircularProgressProps,
+} from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
 
-import { CircularProgressProps } from './types';
+export type CircularProgressProps = Omit<
+  MuiCircularProgressProps,
+  'color' | 'size'
+> & {
+  /**
+   * Цвет лоадера
+   */
+  color?: 'primary' | 'inverted';
+  /**
+   * Размер лоадера
+   */
+  size?: 'small' | 'medium';
+};
 
 export const CircularProgress = forwardRef<
   HTMLElement,
