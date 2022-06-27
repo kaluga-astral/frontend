@@ -28,10 +28,13 @@ export const DataGridPagination = ({
   ...props
 }: DataGridPaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);
-  const rangeStart = useMemo(() => (page - 1) * rowsPerPage + 1, [page]);
+  const rangeStart = useMemo(
+    () => (page - 1) * rowsPerPage + 1,
+    [page, rowsPerPage],
+  );
   const rangeEnd = useMemo(
     () => (page - 1) * rowsPerPage + rowsPerPage,
-    [page],
+    [page, rowsPerPage],
   );
   const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
