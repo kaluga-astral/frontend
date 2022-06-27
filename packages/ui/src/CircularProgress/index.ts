@@ -1,3 +1,3 @@
 export * from './CircularProgress';
 
-export * from './declaration';
+export * from './types';
