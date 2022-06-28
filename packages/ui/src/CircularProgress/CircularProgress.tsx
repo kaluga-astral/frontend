@@ -6,6 +6,13 @@ import {
 
 import { WithoutEmotionSpecific } from '../types';
 
+declare module '@mui/material/CircularProgress' {
+  interface CircularProgressPropsColorOverrides {
+    primary: true;
+    inverted: true;
+  }
+}
+
 export type CircularProgressProps = WithoutEmotionSpecific<
   Omit<MuiCircularProgressProps, 'color' | 'size'>
 > & {
