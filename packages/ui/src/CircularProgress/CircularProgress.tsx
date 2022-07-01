@@ -1,7 +1,30 @@
 import { forwardRef, useMemo } from 'react';
-import MuiCircularProgress from '@mui/material/CircularProgress';
+import {
+  CircularProgress as MuiCircularProgress,
+  CircularProgressProps as MuiCircularProgressProps,
+} from '@mui/material';
 
-import { CircularProgressProps } from './types';
+import { WithoutEmotionSpecific } from '../types';
+
+declare module '@mui/material/CircularProgress' {
+  interface CircularProgressPropsColorOverrides {
+    primary: true;
+    inverted: true;
+  }
+}
+
+export type CircularProgressProps = WithoutEmotionSpecific<
+  Omit<MuiCircularProgressProps, 'color' | 'size'>
+> & {
+  /**
+   * Цвет лоадера
+   */
+  color?: 'primary' | 'inverted';
+  /**
+   * Размер лоадера
+   */
+  size?: 'small' | 'medium';
+};
 
 export const CircularProgress = forwardRef<HTMLElement, CircularProgressProps>(
   (props, ref) => {
