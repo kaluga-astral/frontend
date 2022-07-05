@@ -2,13 +2,12 @@ import { ChevronDOutlineMd } from '@astral/icons';
 
 import { styled } from '../styles';
 
-import { IChevron } from './Chevron';
-import { getChevronTransformValue } from './getChevronTransformValue';
+import { ChevronProps } from './Chevron';
 
 export const ChevronWrapper = styled(ChevronDOutlineMd)<
-  Pick<IChevron, 'isActive'>
+  Pick<ChevronProps, 'isActive'>
 >`
-  transform: ${getChevronTransformValue};
+  transform: rotateZ(${({ isActive }) => (isActive ? 180 : 0)}deg);
 
   transition: ${({ theme }) =>
     theme.transitions.create('transform', {

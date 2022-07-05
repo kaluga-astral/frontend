@@ -3,14 +3,14 @@ import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
 
-import { Chevron, IChevron } from './Chevron';
+import { Chevron, ChevronProps } from './Chevron';
 
 export default {
   title: 'Components/Chevron',
   component: Chevron,
 };
 
-const Template: Story<IChevron> = (args) => {
+const Template: Story<ChevronProps> = (args) => {
   const [isActive, setActive] = useState(args.isActive);
 
   return (
