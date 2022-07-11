@@ -2,9 +2,7 @@ import { Collapse } from '@mui/material';
 
 import { styled } from '../styles';
 
-import { CollapseProps } from './types';
-
-export const StyledCollapse = styled(Collapse)<CollapseProps>`
+export const StyledCollapse = styled(Collapse)`
   &.MuiCollapse-vertical {
     transition: ${({ theme }) =>
       `${theme.transitions.create('height', {
