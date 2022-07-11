@@ -24,7 +24,7 @@ export default {
   component: List,
 };
 
-export const Template: Story = () => {
+const Template: Story = () => {
   const [open, setOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
   const [listOpen, setListOpen] = useState(true);
@@ -135,9 +135,9 @@ export const Template: Story = () => {
           <ListItemText>Транспорт</ListItemText>
           {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
         </ListItem>
-        <Collapse in={open}>
-          <List>
-            <ListItem
+        <Collapse in={open} timeout={150} orientation="vertical">
+          <List disablePadding>
+            <ListItemButton
               selected={selectedItem === 3}
               onClick={() => {
                 setSelectedItem(3);
@@ -147,8 +147,8 @@ export const Template: Story = () => {
                 <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Машины</ListItemText>
-            </ListItem>
-            <ListItem
+            </ListItemButton>
+            <ListItemButton
               selected={selectedItem === 4}
               onClick={() => {
                 setSelectedItem(4);
@@ -158,7 +158,7 @@ export const Template: Story = () => {
                 <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Велосипеды</ListItemText>
-            </ListItem>
+            </ListItemButton>
             <ListItemButton
               selected={selectedItem === 5}
               onClick={() => {
@@ -174,7 +174,6 @@ export const Template: Story = () => {
         </Collapse>
       </List>
       <List
-        collapsed={listOpen}
         subheader={
           <ListSubheader
             sx={{
@@ -189,41 +188,50 @@ export const Template: Story = () => {
           </ListSubheader>
         }
       >
-        <ListItemButton
-          selected={selectedItem === 11}
-          onClick={() => {
-            setSelectedItem(11);
-          }}
+        <Collapse
+          in={listOpen}
+          timeout={150}
+          orientation="horizontal"
+          collapsedSize={56}
         >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Главная</ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          selected={selectedItem === 12}
-          onClick={() => {
-            setSelectedItem(12);
-          }}
-        >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            Главная новая страница для определенно ненужного сайта
-          </ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          selected={selectedItem === 13}
-          onClick={() => {
-            setSelectedItem(13);
-          }}
-        >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Яндекс</ListItemText>
-        </ListItemButton>
+          <List disablePadding>
+            <ListItemButton
+              selected={selectedItem === 11}
+              onClick={() => {
+                setSelectedItem(11);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Главная</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={selectedItem === 12}
+              onClick={() => {
+                setSelectedItem(12);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                Главная новая страница для определенно ненужного сайта
+              </ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={selectedItem === 13}
+              onClick={() => {
+                setSelectedItem(13);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Яндекс</ListItemText>
+            </ListItemButton>
+          </List>
+        </Collapse>
       </List>
     </>
   );

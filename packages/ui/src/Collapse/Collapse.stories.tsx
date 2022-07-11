@@ -34,7 +34,7 @@ const Template: Story = () => {
         <ListItemText primary="Inbox" />
         {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout={150} orientation="vertical">
         <List disablePadding>
           <ListItem>
             <ListItemIcon>
@@ -42,7 +42,6 @@ const Template: Story = () => {
             </ListItemIcon>
             <ListItemText primary="Collapsed" />
           </ListItem>
-
           <ListItem>
             <ListItemIcon>
               <HomeOutlineMd />
