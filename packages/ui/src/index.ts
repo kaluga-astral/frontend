@@ -123,3 +123,5 @@ export * from './Notification';
 export * from './LocalizationProvider';
 
 export * from './ContentState';
+
+export * from './Chevron';
