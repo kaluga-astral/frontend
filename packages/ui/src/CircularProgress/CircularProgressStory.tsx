@@ -5,7 +5,7 @@ import { CircularProgress, CircularProgressProps } from '../CircularProgress';
 export type CircularProgressStoryProps = CircularProgressProps;
 
 export const CircularProgressStory: FC<CircularProgressStoryProps> = (
-  props
+  props,
 ) => {
   const { size, color } = props;
 

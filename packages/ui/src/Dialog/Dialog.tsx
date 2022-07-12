@@ -16,9 +16,12 @@ export const Dialog = ({
     onClose &&
     ((
       event: React.MouseEvent<HTMLButtonElement>,
-      reason: 'backdropClick' | 'escapeKeyDown'
+      reason: 'backdropClick' | 'escapeKeyDown',
     ) => {
-      if (disableBackdropClick && reason == 'backdropClick') return;
+      if (disableBackdropClick && reason == 'backdropClick') {
+        return;
+      }
+
       onClose(event, reason);
     });
 

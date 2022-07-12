@@ -13,7 +13,7 @@ export const DatePickerHeader = (props: ReactDatePickerCustomHeaderProps) => {
   const { locale } = useContext(DatePickerContext);
   const localizedDate = useMemo(
     () => format(date, 'LLLL yyy', { locale }),
-    [date]
+    [date],
   );
 
   return (

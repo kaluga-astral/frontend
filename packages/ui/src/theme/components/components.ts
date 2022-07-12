@@ -20,9 +20,7 @@ import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
 import { MuiTableCell } from './MuiTableCell';
 import { MuiTableHead } from './MuiTableHead';
-import { MuiPickersDay } from './MuiPickersDay';
-import { MuiCalendarPicker } from './MuiCalendarPicker';
-import { MuiYearPicker } from './MuiYearPicker';
+import { MuiTableRow } from './MuiTableRow';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
@@ -48,7 +46,7 @@ export type FontsUrls = {
 };
 
 const getMuiCssBaseline = (
-  fontUrls: FontsUrls
+  fontUrls: FontsUrls,
 ): Components['MuiCssBaseline'] => ({
   styleOverrides: `
     @font-face {
@@ -116,10 +114,8 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogActions,
   MuiTableCell,
   MuiTableHead,
+  MuiTableRow,
   MuiPaginationItem,
-  MuiPickersDay,
-  MuiCalendarPicker,
-  MuiYearPicker,
   MuiCircularProgress,
   MuiListItemButton,
 });

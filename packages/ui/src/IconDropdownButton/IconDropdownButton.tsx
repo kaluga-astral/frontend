@@ -2,10 +2,9 @@ import { ClickAwayListener } from '@mui/material';
 import { ReactNode, forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
+import { IconButton } from '../IconButton';
 import { Menu } from '../Menu';
 import { BaseButtonProps } from '../ButtonBase';
-
-import { IconDropdownButtonWrapper } from './styles';
 
 export type IconDropdownButtonProps = BaseButtonProps & {
   /**
@@ -22,15 +21,15 @@ export const IconDropdownButton = forwardRef<
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleCloseMenu}>
-        <IconDropdownButtonWrapper
+      <ClickAwayListener onClickAway={handleCloseMenu} mouseEvent="onMouseDown">
+        <IconButton
           {...props}
           ref={anchorRef}
           onClick={handleOpenMenu}
           selected={open}
         >
           {icon}
-        </IconDropdownButtonWrapper>
+        </IconButton>
       </ClickAwayListener>
       <Menu open={open} anchorEl={anchorRef.current}>
         {children}

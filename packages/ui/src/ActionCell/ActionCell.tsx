@@ -122,11 +122,13 @@ export function ActionCell<T>({
         </Tooltip>
       );
     },
-    [handleActionClick]
+    [handleActionClick],
   );
 
   const renderSecondaryActions = useMemo(() => {
-    if (!Boolean(secondary.length)) return null;
+    if (!Boolean(secondary.length)) {
+      return null;
+    }
 
     return (
       <IconDropdownButton icon={<DotsVOutlineMd />} variant="text">
@@ -140,7 +142,7 @@ export function ActionCell<T>({
   }, [secondary, handleActionClick]);
 
   return (
-    <ActionCellWrapper>
+    <ActionCellWrapper onClick={(event) => event.stopPropagation()}>
       {main.map((action) => renderMainAction(action))}
       {renderSecondaryActions}
     </ActionCellWrapper>

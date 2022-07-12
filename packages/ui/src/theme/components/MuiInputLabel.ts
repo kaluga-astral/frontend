@@ -7,7 +7,7 @@ export const MuiInputLabel: Components<Theme>['MuiInputLabel'] = {
     shrink: true,
   },
   styleOverrides: {
-    root({ theme }: { theme: any }) {
+    root({ theme }) {
       return {
         position: 'relative',
         transform: 'none',

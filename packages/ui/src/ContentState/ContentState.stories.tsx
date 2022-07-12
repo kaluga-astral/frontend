@@ -55,7 +55,9 @@ const Case = ({
 
   const handleClick = () => {
     const TIMEOUT_MS = 3000;
+
     setLoading(true);
+
     setTimeout(() => {
       setLoading(false);
       setErrorList(['Ошибка с текстом 1', 'Ошибка с текстом 2']);

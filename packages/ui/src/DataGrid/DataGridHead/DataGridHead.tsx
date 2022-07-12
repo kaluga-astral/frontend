@@ -1,14 +1,26 @@
-import { useCallback, useMemo } from 'react';
+import { ChangeEvent, useCallback, useMemo } from 'react';
 
 import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../constants';
 import { DataGridHeadColumn } from '../DataGridHeadColumn';
+import { DataGridColumns, DataGridRow, DataGridSort } from '../types';
 
-import { DataGridHeadProps } from './types';
+export type DataGridHeadProps<
+  Data = DataGridRow,
+  SortField extends keyof Data = keyof Data,
+> = {
+  columns: DataGridColumns<Data>[];
+  selectable: boolean;
+  onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
+  sorting: DataGridSort<SortField>[];
+  onSort?: (sorting: DataGridSort<SortField>[]) => void;
+  uncheckedRowsCount: number;
+  rowsCount: number;
+};
 
-export function DataGridHead<T>({
+export function DataGridHead<Data, SortField extends keyof Data>({
   columns,
   selectable,
   onSelectAllRows,
@@ -16,56 +28,58 @@ export function DataGridHead<T>({
   onSort,
   sorting = [],
   uncheckedRowsCount,
-}: DataGridHeadProps<T>) {
+}: DataGridHeadProps<Data, SortField>) {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
-    [uncheckedRowsCount, rowsCount]
+    [uncheckedRowsCount, rowsCount],
   );
 
   const indeterminate = useMemo(
     () => uncheckedRowsCount > 0 && uncheckedRowsCount < rowsCount,
-    [uncheckedRowsCount, rowsCount]
+    [uncheckedRowsCount, rowsCount],
   );
 
   const handleSort = useCallback(
-    (field, sortable) => () => {
-      if (sortable) {
-        const currentSort = sorting.find(({ fieldId }) => fieldId === field);
-
-        // если для выбранного столбца текущая сортировка ASC - меняем на DESC
-        if (currentSort && currentSort.sort === SortStates.ASC) {
-          const newSorting = [
-            ...sorting.filter(({ fieldId }) => fieldId !== field),
-            { fieldId: field, sort: SortStates.DESC },
-          ];
-
-          return onSort(newSorting);
-          // если для выбранного столбца текущая сортировка DESC - убираем сортировку
-        } else if (currentSort && currentSort.sort === SortStates.DESC) {
-          const newSorting = sorting.filter(({ fieldId }) => fieldId !== field);
-
-          return onSort(newSorting);
-        }
-
-        // если для выбранного столбца нет сортировки - добавляем сортировку ASC
-        onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
+    (field: SortField) => {
+      if (!onSort) {
+        return;
       }
+
+      const currentSort = sorting.find(({ fieldId }) => fieldId === field);
+
+      // если для выбранного столбца текущая сортировка ASC - меняем на DESC
+      if (currentSort && currentSort.sort === SortStates.ASC) {
+        const newSorting = [
+          ...sorting.filter(({ fieldId }) => fieldId !== field),
+          { fieldId: field, sort: SortStates.DESC },
+        ];
+
+        return onSort(newSorting);
+        // если для выбранного столбца текущая сортировка DESC - убираем сортировку
+      } else if (currentSort && currentSort.sort === SortStates.DESC) {
+        const newSorting = sorting.filter(({ fieldId }) => fieldId !== field);
+
+        return onSort(newSorting);
+      }
+
+      // если для выбранного столбца нет сортировки - добавляем сортировку ASC
+      onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
     },
-    [sorting]
+    [sorting, onSort],
   );
 
   const renderColumns = useMemo(() => {
-    return columns.map(({ field, label, sortable, align, renderCell }) => {
+    return columns.map(({ field, label, sortable, align, width }) => {
       return (
-        <DataGridHeadColumn
-          key={field}
+        <DataGridHeadColumn<Data, SortField>
+          key={label}
           sorting={sorting}
-          renderCell={renderCell}
           field={field}
           onSort={handleSort}
           label={label}
           sortable={sortable}
           align={align}
+          width={width}
         />
       );
     });

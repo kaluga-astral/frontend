@@ -129,7 +129,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       default: '#FFF',
       paper: '#FFF',
       element: '#FAFBFC',
-      elementHover: '#EBECF0',
+      elementHover: '#EEF1F4',
       modalShadow: '#142A438A',
     },
   };

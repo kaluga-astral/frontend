@@ -185,13 +185,16 @@ IconButtonShowcase.parameters = { options: { showPanel: false } };
 const Template: Story = (args) => <IconButton {...args}>{svg}</IconButton>;
 
 export const IconButtonStory = Template.bind({});
+
 IconButtonStory.storyName = 'Icon Button';
+
 IconButtonStory.args = {
   disabled: false,
   color: 'primary',
   variant: 'contained',
   size: 'medium',
 };
+
 IconButtonStory.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },

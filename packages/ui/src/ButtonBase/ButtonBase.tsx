@@ -12,7 +12,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, BaseButtonProps>(
       color = ButtonColors.PRIMARY,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <StyledButtonBase
@@ -24,5 +24,5 @@ export const ButtonBase = forwardRef<HTMLButtonElement, BaseButtonProps>(
         {children}
       </StyledButtonBase>
     );
-  }
+  },
 );

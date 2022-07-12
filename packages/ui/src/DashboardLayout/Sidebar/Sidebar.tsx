@@ -40,5 +40,5 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
         />
       </SidebarRoot>
     );
-  }
+  },
 );

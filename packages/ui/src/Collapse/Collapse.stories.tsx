@@ -1,8 +1,4 @@
-import {
-  ChevronDOutlineMd,
-  ChevronUpOutlineMd,
-  HomeOutlineMd,
-} from '@astral/icons';
+import { HomeOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
@@ -10,6 +6,7 @@ import { List } from '../List';
 import { ListItem } from '../ListItem';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
+import { Chevron } from '../Chevron';
 
 import { Collapse } from './Collapse';
 
@@ -24,6 +21,7 @@ const Template: Story = () => {
   const handleClick = () => {
     setOpen(!open);
   };
+
   return (
     <List>
       <ListItem onClick={handleClick}>
@@ -31,7 +29,7 @@ const Template: Story = () => {
           <HomeOutlineMd />
         </ListItemIcon>
         <ListItemText primary="Inbox" />
-        {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
+        <Chevron isActive={open} />
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>

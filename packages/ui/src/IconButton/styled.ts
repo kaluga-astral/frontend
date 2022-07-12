@@ -10,7 +10,9 @@ type StyledIconButtonThemeProps = ButtonProps & {
 export const getButtonHeight = ({
   size,
 }: StyledIconButtonThemeProps): string => {
-  if (size === ButtonSizes.LARGE) return '40px';
+  if (size === ButtonSizes.LARGE) {
+    return '40px';
+  }
 
   return '32px';
 };

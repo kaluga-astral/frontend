@@ -1,10 +1,12 @@
 import { TableCellProps, TableSortLabelProps } from '@mui/material';
+import { CSSProperties } from 'react';
 
 import { styled } from '../../styles';
 import { TableCell, TableSortLabel } from '../../Table';
 
 type StyledTableCellProps = TableCellProps & {
-  fitContent?: boolean;
+  width?: CSSProperties['width'];
+  sortable?: boolean;
 };
 
 export const StyledTableSortLabel = styled(TableSortLabel)<TableSortLabelProps>`
@@ -12,11 +14,14 @@ export const StyledTableSortLabel = styled(TableSortLabel)<TableSortLabelProps>`
 `;
 
 export const StyledTableCell = styled(TableCell, {
-  shouldForwardProp: (prop) => prop !== 'fitContent',
+  shouldForwardProp: (prop) => prop !== 'width',
 })<StyledTableCellProps>`
-  width: ${({ fitContent }) => (fitContent ? '1%' : 'auto')};
+  width: ${({ width = 'auto' }) => width};
+  padding: ${({ theme }) => theme.spacing(3, 4)};
 
-  cursor: pointer;
+  color: ${({ theme }) => theme.palette.grey[700]};
+
+  cursor: ${({ sortable }) => (sortable ? 'pointer' : 'initial')};
 
   user-select: none;
 `;

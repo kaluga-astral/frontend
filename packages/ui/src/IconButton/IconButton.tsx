@@ -11,5 +11,5 @@ export const IconButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
         {children}
       </StyledIconButton>
     );
-  }
+  },
 );

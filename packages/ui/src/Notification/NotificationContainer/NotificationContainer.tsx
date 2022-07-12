@@ -6,12 +6,14 @@ import { NOTIFY_POSITIONS } from '../constants';
 
 import { ToastContainerStyled } from './styled';
 
-injectStyle();
+if (typeof window !== 'undefined') {
+  injectStyle();
+}
 
 export interface NotificationContainerProps extends ToastContainerProps {}
 
 export const NotificationContainer: VFC<NotificationContainerProps> = (
-  props
+  props,
 ) => {
   return (
     <ToastContainerStyled>

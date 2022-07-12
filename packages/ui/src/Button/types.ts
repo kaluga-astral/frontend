@@ -22,4 +22,5 @@ export type ButtonProps = Omit<LoadingButtonProps, 'variant' | 'color'> & {
   color?: 'primary' | 'success' | 'warning' | 'error';
   // https://github.com/mui/material-ui/issues/30038
   component?: ElementType;
+  selected?: boolean;
 };

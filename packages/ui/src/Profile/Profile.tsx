@@ -1,11 +1,11 @@
-import { Fragment, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Avatar, ClickAwayListener } from '@mui/material';
 
 import { useMenu } from '../hooks';
+import { Chevron } from '../Chevron';
 
 import {
   ProfileAnnotation,
-  ProfileChevron,
   ProfileCredentials,
   ProfileDisplayName,
   ProfileRoot,
@@ -19,7 +19,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     return (
-      <Fragment>
+      <>
         <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             <ProfileUser>
@@ -29,7 +29,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               </ProfileCredentials>
               <Avatar {...avatar} />
             </ProfileUser>
-            <ProfileChevron open={open} />
+            <Chevron isActive={open} />
           </ProfileRoot>
         </ClickAwayListener>
         <Menu
@@ -37,9 +37,9 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
         />
-      </Fragment>
+      </>
     );
-  }
+  },
 );
 
 export default Profile;

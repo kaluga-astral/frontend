@@ -9,4 +9,7 @@ module.exports = {
     // у storybook в 6 версии есть проблемы с 11 emotion - не работает темиация
     emotionAlias: false,
   },
+  core: {
+    builder: 'webpack5',
+  },
 }

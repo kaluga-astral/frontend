@@ -7,7 +7,7 @@ interface NotificationOptions extends Omit<NotificationProps, 'title'> {}
 
 export type Notify = (
   title: string,
-  options?: NotificationOptions
+  options?: NotificationOptions,
 ) => number | string;
 
 export const notify: Record<Variant, Notify> = {
@@ -15,22 +15,22 @@ export const notify: Record<Variant, Notify> = {
     toast(
       ({ toastProps }) =>
         NOTIFICATION_VARIANT.info({ ...options, title }, toastProps),
-      options
+      options,
     ),
   success: (title, options) =>
     toast(
       ({ toastProps }) =>
         NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
-      options
+      options,
     ),
   warning: (title, options) =>
     toast(({ toastProps }) =>
-      NOTIFICATION_VARIANT.warning({ ...options, title }, toastProps)
+      NOTIFICATION_VARIANT.warning({ ...options, title }, toastProps),
     ),
   error: (title, options) =>
     toast(
       ({ toastProps }) =>
         NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
-      options
+      options,
     ),
 };

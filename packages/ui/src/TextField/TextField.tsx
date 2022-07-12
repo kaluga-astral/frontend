@@ -1,4 +1,4 @@
-import { Fragment, forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import MuiTextField from '@mui/material/TextField';
 
 import { FormHelperText } from '../FormHelperText';
@@ -28,13 +28,16 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       if (success) {
         return <FormHelperText success>{helperTextProp}</FormHelperText>;
       }
+
       if (error) {
         return <FormHelperText error>{helperTextProp}</FormHelperText>;
       }
 
-      if (helperTextProp) return helperTextProp;
+      if (helperTextProp) {
+        return helperTextProp;
+      }
 
-      return <Fragment />;
+      return <></>;
     }, [helperTextProp, success, error]);
 
     return (
@@ -47,7 +50,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         {...restProps}
       />
     );
-  }
+  },
 );
 
 export default TextField;

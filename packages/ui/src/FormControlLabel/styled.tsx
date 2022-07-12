@@ -5,7 +5,7 @@ import { styled } from '../styles';
 import { FormControlLabelProps } from './types';
 
 export const StyledFormControlLabel = styled(
-  FormControlLabel
+  FormControlLabel,
 )<FormControlLabelProps>`
   margin-right: 0;
   margin-left: -5px;

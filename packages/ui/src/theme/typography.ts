@@ -23,7 +23,7 @@ export type TypographyThemeOptions = Typography & {
 // Т.к. нет досутпа к теме, написал функцию для конвертации px в rem
 export const pxToRem = (
   fontSize: number,
-  htmlFontSize: number = HTML_FONT_SIZE
+  htmlFontSize: number = HTML_FONT_SIZE,
 ): string => {
   return `${fontSize / htmlFontSize}rem`;
 };

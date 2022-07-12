@@ -4,14 +4,16 @@ import { Theme } from '../../../../theme';
 export const getNotificationTemplateStyles = (
   theme: Theme,
   variant: Variant,
-  filled: boolean
+  filled: boolean,
 ) => {
   const defaultColors = {
     color: theme.palette.grey[900],
     background: theme.palette.background.default,
   };
 
-  if (!filled) return defaultColors;
+  if (!filled) {
+    return defaultColors;
+  }
 
   const mapOfStyles = {
     info: {
@@ -31,5 +33,6 @@ export const getNotificationTemplateStyles = (
       background: theme.palette.red[600],
     },
   };
+
   return mapOfStyles[variant];
 };

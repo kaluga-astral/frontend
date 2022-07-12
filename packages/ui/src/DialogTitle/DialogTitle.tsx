@@ -1,6 +1,6 @@
 import { DialogTitle as MuiDialogTitle } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
-import { useCallback } from 'react';
+import { MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
 
@@ -13,10 +13,11 @@ export const DialogTitle = ({
 }: DialogTitleProps) => {
   // 'escapeKeyDown'  в документашке написано что это опциональный тип, и можно стрингу любую туда закидывать, а по факту либо escapeKeyDown либо backdropClick
 
-  const onClickTitle = useCallback(
-    (e) => onClose && onClose(e, 'escapeKeyDown'),
-    [onClose]
-  );
+  const onClickTitle = (e: MouseEvent<HTMLButtonElement>) => {
+    if (onClose) {
+      onClose(e, 'escapeKeyDown');
+    }
+  };
 
   return (
     <MuiDialogTitle {...props}>

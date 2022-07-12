@@ -14,8 +14,7 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
         color: theme.palette.grey[900],
         background: theme.palette.background.element,
         '&:hover': {
-          // FIXME: to theme
-          background: '#EEF1F4',
+          background: theme.palette.background.elementHover,
           '&.Mui-disabled': {
             background: theme.palette.background.element,
           },
@@ -36,6 +35,7 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     },
     input({ theme }) {
       return {
+        height: 20,
         padding: theme.spacing(2.5, 2),
         borderRadius: theme.shape.small,
         '&:disabled': {
@@ -49,13 +49,13 @@ export const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
     },
     inputSizeSmall({ theme }) {
       return {
-        paddingBlock: theme.spacing(2),
-        paddingInline: theme.spacing(1.5),
+        paddingBlock: theme.spacing(1.5),
+        paddingInline: theme.spacing(2),
       };
     },
-    notchedOutline({ theme }: { theme: any }) {
+    notchedOutline({ theme }) {
       return {
-        borderWidth: '2px',
+        borderWidth: 2,
         borderColor: theme.palette.grey[300],
       };
     },
