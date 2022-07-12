@@ -25,7 +25,7 @@ export type NavMenuProps = {
       value: {
         icon: ReactElement;
         text: string;
-        getState: () => 'active' | 'inactive'; // | disabled | etc
+        active?: boolean;
         component?: ElementType;
         items?: NavMenuItemListProps['items'];
       }
@@ -42,18 +42,22 @@ export const NavMenu = forwardRef<HTMLUListElement, NavMenuProps>(
         {items.map((item) => {
           const [key, value] = item;
           const [opened, setOpened] = useState(
-            value.items?.some(([, { getState }]) => {
-              const state = getState();
-
-              return state === 'active';
-            }) ?? false
+            value.items?.some(([, { active }]) => {
+              return active;
+            })
           );
           const selected = useMemo(() => {
-            return opened ? false : value.getState() === 'active';
-          }, [opened, value.getState]);
+            return opened ? false : value.active;
+          }, [opened, value.active]);
 
           const handleNavMenuItemButtonClick = useCallback(() => {
-            setOpened((prevValue) => !prevValue);
+            setOpened((prevValue) => {
+              if (typeof prevValue === 'boolean') {
+                return !prevValue;
+              }
+
+              return;
+            });
           }, []);
 
           return (

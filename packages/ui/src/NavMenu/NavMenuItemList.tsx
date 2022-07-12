@@ -1,4 +1,4 @@
-import { ElementType, useMemo } from 'react';
+import { ElementType } from 'react';
 import { List } from '@mui/material';
 import { PageDotOutlineMd } from '@astral/icons';
 
@@ -11,7 +11,7 @@ export type NavMenuItemListProps = {
       key: string,
       value: {
         text: string;
-        getState: () => 'active' | 'inactive';
+        active: boolean;
         component: ElementType;
       }
     ]
@@ -25,15 +25,12 @@ export const NavMenuItemList = (props: NavMenuItemListProps) => {
     <List disablePadding>
       {items.map((item) => {
         const [key, value] = item;
-        const selected = useMemo(() => {
-          return value.getState() === 'active';
-        }, [value.getState]);
 
         return (
           <li key={key}>
             <NavMenuItemButton
               collapsedIn={collapsedIn}
-              selected={selected}
+              selected={value.active}
               text={value.text}
               icon={<PageDotOutlineMd />}
               component={value.component}

@@ -1,9 +1,9 @@
 import { ReactElement, forwardRef } from 'react';
-import { ProductsFillMd } from '@astral/icons';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
   CompanyOutlineMd,
+  ProductsFillMd,
   ProfileOutlineMd,
   QuitOutlineMd,
   SettingsFillMd,
@@ -138,17 +138,12 @@ EDO.args = {
           {
             icon: <ProfileOutlineMd />,
             text: 'Документы',
-            getState() {
-              return 'active';
-            },
             items: [
               [
                 'incoming-documents',
                 {
                   text: 'Входящие документы',
-                  getState() {
-                    return 'active';
-                  },
+                  active: true,
                   component: forwardRef((props, ref) => {
                     return (
                       <RouterLink
@@ -164,9 +159,7 @@ EDO.args = {
                 'outgoing-documents',
                 {
                   text: 'Исходящие документы',
-                  getState() {
-                    return 'inactive';
-                  },
+                  active: false,
                   component: forwardRef((props, ref) => {
                     return (
                       <RouterLink
@@ -186,17 +179,12 @@ EDO.args = {
           {
             icon: <ProfileOutlineMd />,
             text: 'Контрагенты',
-            getState() {
-              return 'inactive';
-            },
             items: [
               [
                 'invitations',
                 {
                   text: 'Приглашения',
-                  getState() {
-                    return 'inactive';
-                  },
+                  active: false,
                   component: forwardRef((props, ref) => {
                     return (
                       <RouterLink ref={ref} to="/invitations" {...props} />
@@ -210,11 +198,9 @@ EDO.args = {
         [
           'organizations',
           {
-            icon: <ProfileOutlineMd />,
+            icon: <CompanyOutlineMd />,
             text: 'Мои организации',
-            getState() {
-              return 'active';
-            },
+            active: true,
             component: forwardRef((props, ref) => {
               return <RouterLink ref={ref} to="/organizations" {...props} />;
             }),
