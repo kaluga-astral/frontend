@@ -1,5 +1,9 @@
-import { Collapse, CollapseProps } from '@mui/material';
+import { CollapseProps } from '@mui/material';
 
-export { Collapse };
+import { StyledCollapse } from './styled';
+
+export const Collapse = (props: CollapseProps) => {
+  return <StyledCollapse {...props} />;
+};
 
 export type { CollapseProps };
