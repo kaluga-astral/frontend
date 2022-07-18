@@ -19,6 +19,16 @@ const OPTIONS = [
   { value: '6', title: 'Value 6' },
   { value: '7', title: 'Value 7' },
   { value: '8', title: 'Value 8' },
+  {
+    value: '9',
+    title:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci, aliquam aliquid delectus ipsam laboriosam magni molestias possimus ullam voluptatibus!',
+  },
+  {
+    value: '10',
+    title:
+      '12 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, vero?',
+  },
 ];
 
 const Template: Story = (args) => (

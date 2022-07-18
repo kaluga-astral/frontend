@@ -1,6 +1,7 @@
 import { AutocompleteProps as MuiAutocompleteProps } from '@mui/material';
 
 import { TextFieldProps } from '../TextField';
+import { OverflowedElementProps } from '../OverflowTypography';
 
 import { AutocompleteSizes } from './constants';
 
@@ -22,4 +23,5 @@ export type AutocompleteProps<
 > &
   Pick<TextFieldProps, 'error' | 'success' | 'helperText' | 'label'> & {
     size?: AutocompleteSize;
+    overflowOption?: OverflowedElementProps;
   };

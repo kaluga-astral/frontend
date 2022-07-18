@@ -12,8 +12,13 @@ import { TextField } from '../TextField';
 import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
+import { OverflowTypography } from '../OverflowTypography';
 
 import { AutocompleteProps } from './types';
+import {
+  DEFAULT_AUTOCOMPLETE_ELEMENT_OVERFLOW_LIMIT,
+  DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
+} from './constants';
 
 export const Autocomplete = <
   AutocompleteValueProps,
@@ -38,6 +43,7 @@ export const Autocomplete = <
     size = 'medium',
     getOptionLabel,
     renderOption: externalRenderOption,
+    overflowOption,
     ...restProps
   } = props;
 
@@ -96,7 +102,13 @@ export const Autocomplete = <
               <Checkbox checked={selected} />
             </ListItemIcon>
           )}
-          {optionProps.key}
+          <OverflowTypography
+            rowsCount={DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT}
+            overflowLimit={DEFAULT_AUTOCOMPLETE_ELEMENT_OVERFLOW_LIMIT}
+            {...overflowOption}
+          >
+            {optionProps.key}
+          </OverflowTypography>
         </MenuItem>
       );
     },
