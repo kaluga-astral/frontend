@@ -8,17 +8,25 @@ import { OverflowTypographyWrapper } from './styles';
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
 export type OverflowedProps = {
-  // опорная единица, по которой определяется max-width в ch по формуле ${overflowLimit / rowsCount},
-  // и определяется необходимость монтирования Tooltip
-  // по умолчанию равно 64
+  /**
+   * @example <OverflowTypography overflowLimit={74} />
+   * @default 64
+   * @description опорная единица, по которой определяется max-width в ch по формуле ${overflowLimit / rowsCount}, и определяется необходимость монтирования Tooltip
+   */
   overflowLimit?: number;
-  // опорная единица по которой определяется максимиально отображаемое колличество строк
-  // по умолчанию равно 1
+  /**
+   * @example <OverflowTypography rowsCount={2} />
+   * @default 1
+   * @description опорная единица по которой определяется максимиально отображаемое колличество строк
+   */
   rowsCount?: number;
 };
 
 type TooltipCustomizable = {
-  //при необходмисоти можно кастомизировать настройки для Тултипа
+  /**
+   * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
+   * @description способ кастомизировать тултип при необходимости
+   */
   tooltipProps?: Omit<TooltipProps, 'children'>;
 };
 

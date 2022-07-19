@@ -4,21 +4,46 @@ import {
   AutocompleteRenderOptionState,
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
+  AutocompleteProps as MuiAutocompleteProps,
 } from '@mui/material';
 import { HTMLAttributes, useCallback } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
-import { TextField } from '../TextField';
+import { TextField, TextFieldProps } from '../TextField';
 import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
-import { OverflowTypography } from '../OverflowTypography';
-
-import { AutocompleteProps } from './types';
 import {
+  OverflowTypography,
+  OverflowedElementProps,
+} from '../OverflowTypography';
+
+import {
+  AutocompleteSizes,
   DEFAULT_AUTOCOMPLETE_ELEMENT_OVERFLOW_LIMIT,
   DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
 } from './constants';
+
+export type AutocompleteSize = `${AutocompleteSizes}`;
+
+export type AutocompleteProps<
+  AutocompleteValueProps,
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean,
+> = Omit<
+  MuiAutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >,
+  'size' | 'renderInput'
+> &
+  Pick<TextFieldProps, 'error' | 'success' | 'helperText' | 'label'> & {
+    size?: AutocompleteSize;
+    overflowOption?: OverflowedElementProps;
+  };
 
 export const Autocomplete = <
   AutocompleteValueProps,
