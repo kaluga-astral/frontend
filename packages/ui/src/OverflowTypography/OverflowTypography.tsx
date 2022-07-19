@@ -55,15 +55,23 @@ export const OverflowTypography = ({
     return (
       <Tooltip title={children} disableInteractive {...tooltipProps}>
         <OverflowTypographyWrapper
-          {...{ ...props, overflowLimit, rowsCount, children }}
-        />
+          {...props}
+          rowsCount={rowsCount}
+          overflowLimit={overflowLimit}
+        >
+          {children}
+        </OverflowTypographyWrapper>
       </Tooltip>
     );
   }
 
   return (
     <OverflowTypographyWrapper
-      {...{ ...props, overflowLimit, rowsCount, children }}
-    />
+      {...props}
+      rowsCount={rowsCount}
+      overflowLimit={overflowLimit}
+    >
+      {children}
+    </OverflowTypographyWrapper>
   );
 };
