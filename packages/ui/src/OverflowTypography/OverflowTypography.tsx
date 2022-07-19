@@ -1,21 +1,26 @@
-import { lazy } from 'react';
 import { PropsWithChildren } from 'react';
 
 import { TypographyProps } from '../Typography';
-import { TooltipProps as BasicTooltipProps } from '../Tooltip';
+import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 
 import { OverflowTypographyWrapper } from './styles';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
-export interface OverflowedProps {
+export type OverflowedProps = {
+  // опорная единица, по которой определяется max-width в ch по формуле ${overflowLimit / rowsCount},
+  // и определяется необходимость монтирования Tooltip
+  // по умолчанию равно 64
   overflowLimit?: number;
+  // опорная единица по которой определяется максимиально отображаемое колличество строк
+  // по умолчанию равно 1
   rowsCount?: number;
-}
+};
 
-interface TooltipCustomizable {
+type TooltipCustomizable = {
+  //при необходмисоти можно кастомизировать настройки для Тултипа
   tooltipProps?: Omit<TooltipProps, 'children'>;
-}
+};
 
 export type OverflowedElementProps = OverflowedProps &
   TooltipCustomizable &
@@ -24,16 +29,12 @@ export type OverflowedElementProps = OverflowedProps &
 export type OverflowedTypographyProps =
   PropsWithChildren<OverflowedElementProps>;
 
-const LazyTooltip = lazy(() =>
-  import('../Tooltip').then((data) => ({ default: data.Tooltip })),
-);
-
 export const DEFAULT_OVERFLOW_OPTION_LENGTH = 64;
 
 export const DEFAULT_ROWS_COUNT = 1;
 
 export const OverflowTypography = ({
-  tooltipProps = {} as TooltipProps,
+  tooltipProps,
   children,
   overflowLimit = DEFAULT_OVERFLOW_OPTION_LENGTH,
   rowsCount = DEFAULT_ROWS_COUNT,
@@ -42,18 +43,17 @@ export const OverflowTypography = ({
   const isLongerThanLimit =
     typeof children === 'string' && children.length > overflowLimit;
 
-  return isLongerThanLimit ? (
-    <LazyTooltip
-      // @ts-ignore ругается на то что тайтл может быть перезаписан, но на то и расчет, что при необходимости его можно заменить.
-      title={children}
-      disableInteractive
-      {...tooltipProps}
-    >
-      <OverflowTypographyWrapper
-        {...{ ...props, overflowLimit, rowsCount, children }}
-      />
-    </LazyTooltip>
-  ) : (
+  if (isLongerThanLimit) {
+    return (
+      <Tooltip title={children} disableInteractive {...tooltipProps}>
+        <OverflowTypographyWrapper
+          {...{ ...props, overflowLimit, rowsCount, children }}
+        />
+      </Tooltip>
+    );
+  }
+
+  return (
     <OverflowTypographyWrapper
       {...{ ...props, overflowLimit, rowsCount, children }}
     />
