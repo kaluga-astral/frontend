@@ -130,7 +130,7 @@ const Template: Story = () => {
           <ListItemText>Транспорт</ListItemText>
           <Chevron isActive={open} />
         </ListItem>
-        <Collapse in={open} timeout={150} orientation="vertical">
+        <Collapse in={open} orientation="vertical">
           <List disablePadding>
             <ListItemButton
               selected={selectedItem === 3}
@@ -187,12 +187,7 @@ const Template: Story = () => {
           </ListSubheader>
         }
       >
-        <Collapse
-          in={listOpen}
-          timeout={150}
-          orientation="horizontal"
-          collapsedSize={56}
-        >
+        <Collapse in={listOpen} orientation="horizontal" collapsedSize={56}>
           <List disablePadding>
             <ListItemButton
               selected={selectedItem === 11}

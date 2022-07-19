@@ -31,7 +31,7 @@ const Template: Story = () => {
         <ListItemText primary="Inbox" />
         <Chevron isActive={open} />
       </ListItem>
-      <Collapse in={open} timeout={150} orientation="vertical">
+      <Collapse in={open}>
         <List disablePadding>
           <ListItem>
             <ListItemIcon>
