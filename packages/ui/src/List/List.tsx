@@ -1,7 +1,7 @@
 import { ListProvider } from '../ListProvider';
 
 import { ListProps } from './types';
-import { StyledList } from './styled';
+import { StyledList } from './styles';
 
 export const List = ({ children, collapsed, ...props }: ListProps) => {
   const open = collapsed === undefined || collapsed;
