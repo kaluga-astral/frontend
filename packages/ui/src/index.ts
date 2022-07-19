@@ -62,8 +62,6 @@ export * from './ListItemSecondaryAction';
 
 export * from './ListItemText';
 
-export * from './ListProvider';
-
 export * from './ListSubheader';
 
 export * from './MaskField';
