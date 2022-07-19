@@ -11,7 +11,7 @@ export type OverflowedProps = {
   /**
    * @example <OverflowTypography overflowLimit={74} />
    * @default 64
-   * @description опорная единица, по которой определяется max-width в ch по формуле ${overflowLimit / rowsCount}, и определяется необходимость монтирования Tooltip
+   * @description опорная единица, по которой определяется max-width и необходимость монтирования Tooltip
    */
   overflowLimit?: number;
   /**
