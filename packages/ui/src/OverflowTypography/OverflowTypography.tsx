@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, forwardRef } from 'react';
 
 import { TypographyProps } from '../Typography';
 import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
@@ -41,37 +41,47 @@ export const DEFAULT_OVERFLOW_OPTION_LENGTH = 64;
 
 export const DEFAULT_ROWS_COUNT = 1;
 
-export const OverflowTypography = ({
-  tooltipProps,
-  children,
-  overflowLimit = DEFAULT_OVERFLOW_OPTION_LENGTH,
-  rowsCount = DEFAULT_ROWS_COUNT,
-  ...props
-}: OverflowedTypographyProps) => {
-  const isLongerThanLimit =
-    typeof children === 'string' && children.length > overflowLimit;
+export const OverflowTypography = forwardRef<
+  HTMLParagraphElement,
+  OverflowedTypographyProps
+>(
+  (
+    {
+      tooltipProps,
+      children,
+      overflowLimit = DEFAULT_OVERFLOW_OPTION_LENGTH,
+      rowsCount = DEFAULT_ROWS_COUNT,
+      ...props
+    },
+    ref,
+  ) => {
+    const isLongerThanLimit =
+      typeof children === 'string' && children.length > overflowLimit;
 
-  if (isLongerThanLimit) {
+    if (isLongerThanLimit) {
+      return (
+        <Tooltip title={children} disableInteractive {...tooltipProps}>
+          <OverflowTypographyWrapper
+            {...props}
+            rowsCount={rowsCount}
+            overflowLimit={overflowLimit}
+            ref={ref}
+          >
+            {children}
+          </OverflowTypographyWrapper>
+        </Tooltip>
+      );
+    }
+
     return (
-      <Tooltip title={children} disableInteractive {...tooltipProps}>
-        <OverflowTypographyWrapper
-          {...props}
-          rowsCount={rowsCount}
-          overflowLimit={overflowLimit}
-        >
-          {children}
-        </OverflowTypographyWrapper>
-      </Tooltip>
+      <OverflowTypographyWrapper
+        {...props}
+        rowsCount={rowsCount}
+        overflowLimit={overflowLimit}
+        ref={ref}
+      >
+        {children}
+      </OverflowTypographyWrapper>
     );
-  }
-
-  return (
-    <OverflowTypographyWrapper
-      {...props}
-      rowsCount={rowsCount}
-      overflowLimit={overflowLimit}
-    >
-      {children}
-    </OverflowTypographyWrapper>
-  );
-};
+  },
+);

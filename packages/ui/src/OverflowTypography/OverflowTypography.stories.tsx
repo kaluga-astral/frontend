@@ -65,7 +65,7 @@ ShowCase.parameters = { options: { showPanel: false } };
 
 const Template: Story<OverflowedTypographyProps> = (args) => {
   return (
-    <OverflowTypography {...args}>
+    <OverflowTypography {...args} ref={undefined}>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
       deserunt dolore doloremque eligendi error esse facilis harum inventore
       labore maxime non pariatur perspiciatis quae quibusdam, recusandae
