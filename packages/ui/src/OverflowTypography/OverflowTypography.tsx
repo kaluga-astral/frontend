@@ -58,30 +58,22 @@ export const OverflowTypography = forwardRef<
     const isLongerThanLimit =
       typeof children === 'string' && children.length > overflowLimit;
 
+    const typographyProps = {
+      ...props,
+      ref,
+      overflowLimit,
+      children,
+      rowsCount,
+    };
+
     if (isLongerThanLimit) {
       return (
         <Tooltip title={children} disableInteractive {...tooltipProps}>
-          <OverflowTypographyWrapper
-            {...props}
-            rowsCount={rowsCount}
-            overflowLimit={overflowLimit}
-            ref={ref}
-          >
-            {children}
-          </OverflowTypographyWrapper>
+          <OverflowTypographyWrapper {...typographyProps} />
         </Tooltip>
       );
     }
 
-    return (
-      <OverflowTypographyWrapper
-        {...props}
-        rowsCount={rowsCount}
-        overflowLimit={overflowLimit}
-        ref={ref}
-      >
-        {children}
-      </OverflowTypographyWrapper>
-    );
+    return <OverflowTypographyWrapper {...typographyProps} />;
   },
 );
