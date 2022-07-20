@@ -1,14 +1,9 @@
-import {
-  ChevronDOutlineMd,
-  ChevronUpOutlineMd,
-  DotOutlineSm,
-  HomeOutlineMd,
-} from '@astral/icons';
+import { DotOutlineSm, HomeOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 import { Link } from '@mui/material';
-import { ChevronLOutlineMd, ChevronROutlineMd } from '@astral/icons';
 
+import { Chevron } from '../Chevron';
 import { ListItem } from '../ListItem';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
@@ -24,7 +19,7 @@ export default {
   component: List,
 };
 
-export const Template: Story = () => {
+const Template: Story = () => {
   const [open, setOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
   const [listOpen, setListOpen] = useState(true);
@@ -133,11 +128,11 @@ export const Template: Story = () => {
             <HomeOutlineMd />
           </ListItemIcon>
           <ListItemText>Транспорт</ListItemText>
-          {open ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />}
+          <Chevron isActive={open} />
         </ListItem>
-        <Collapse in={open}>
-          <List>
-            <ListItem
+        <Collapse in={open} orientation="vertical">
+          <List disablePadding>
+            <ListItemButton
               selected={selectedItem === 3}
               onClick={() => {
                 setSelectedItem(3);
@@ -147,8 +142,8 @@ export const Template: Story = () => {
                 <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Машины</ListItemText>
-            </ListItem>
-            <ListItem
+            </ListItemButton>
+            <ListItemButton
               selected={selectedItem === 4}
               onClick={() => {
                 setSelectedItem(4);
@@ -158,7 +153,7 @@ export const Template: Story = () => {
                 <DotOutlineSm />
               </ListItemIcon>
               <ListItemText>Велосипеды</ListItemText>
-            </ListItem>
+            </ListItemButton>
             <ListItemButton
               selected={selectedItem === 5}
               onClick={() => {
@@ -174,7 +169,6 @@ export const Template: Story = () => {
         </Collapse>
       </List>
       <List
-        collapsed={listOpen}
         subheader={
           <ListSubheader
             sx={{
@@ -183,47 +177,55 @@ export const Template: Story = () => {
             }}
           >
             Сворачиваемый список
-            <IconButton variant="text" onClick={handleListCollapse}>
-              {listOpen ? <ChevronLOutlineMd /> : <ChevronROutlineMd />}
+            <IconButton
+              variant="text"
+              onClick={handleListCollapse}
+              style={{ transform: 'rotate(270deg)' }}
+            >
+              <Chevron isActive={listOpen} />
             </IconButton>
           </ListSubheader>
         }
       >
-        <ListItemButton
-          selected={selectedItem === 11}
-          onClick={() => {
-            setSelectedItem(11);
-          }}
-        >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Главная</ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          selected={selectedItem === 12}
-          onClick={() => {
-            setSelectedItem(12);
-          }}
-        >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            Главная новая страница для определенно ненужного сайта
-          </ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          selected={selectedItem === 13}
-          onClick={() => {
-            setSelectedItem(13);
-          }}
-        >
-          <ListItemIcon>
-            <HomeOutlineMd />
-          </ListItemIcon>
-          <ListItemText>Яндекс</ListItemText>
-        </ListItemButton>
+        <Collapse in={listOpen} orientation="horizontal" collapsedSize={56}>
+          <List disablePadding>
+            <ListItemButton
+              selected={selectedItem === 11}
+              onClick={() => {
+                setSelectedItem(11);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Главная</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={selectedItem === 12}
+              onClick={() => {
+                setSelectedItem(12);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                Главная новая страница для определенно ненужного сайта
+              </ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={selectedItem === 13}
+              onClick={() => {
+                setSelectedItem(13);
+              }}
+            >
+              <ListItemIcon>
+                <HomeOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Яндекс</ListItemText>
+            </ListItemButton>
+          </List>
+        </Collapse>
       </List>
     </>
   );
