@@ -99,11 +99,10 @@ export const Showcase: Story = () => (
       label="Custom render option"
       size="small"
       options={OPTIONS}
-      open
       getOptionLabel={(params) => params.title}
       renderOption={(props, option) => (
         <MenuItem {...props} key={props.id}>
-          <OverflowTypography overflowLimit={74} rowsCount={2}>
+          <OverflowTypography rowsCount={2}>
             {`Custom render option - ${option.title}`}
           </OverflowTypography>
         </MenuItem>

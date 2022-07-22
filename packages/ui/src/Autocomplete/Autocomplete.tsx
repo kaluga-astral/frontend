@@ -20,7 +20,6 @@ import {
 
 import {
   AutocompleteSizes,
-  DEFAULT_AUTOCOMPLETE_ELEMENT_OVERFLOW_LIMIT,
   DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
 } from './constants';
 
@@ -129,7 +128,6 @@ export const Autocomplete = <
           )}
           <OverflowTypography
             rowsCount={DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT}
-            overflowLimit={DEFAULT_AUTOCOMPLETE_ELEMENT_OVERFLOW_LIMIT}
             {...overflowOption}
           >
             {optionProps.key}

@@ -1,4 +1,11 @@
-import { PropsWithChildren, forwardRef } from 'react';
+import {
+  PropsWithChildren,
+  forwardRef,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import debounce from 'lodash-es/debounce';
 
 import { TypographyProps } from '../Typography';
 import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
@@ -8,12 +15,6 @@ import { OverflowTypographyWrapper } from './styles';
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
 export type OverflowedProps = {
-  /**
-   * @example <OverflowTypography overflowLimit={74} />
-   * @default 64
-   * @description опорная единица, по которой определяется max-width и необходимость монтирования Tooltip
-   */
-  overflowLimit?: number;
   /**
    * @example <OverflowTypography rowsCount={2} />
    * @default 1
@@ -37,38 +38,77 @@ export type OverflowedElementProps = OverflowedProps &
 export type OverflowedTypographyProps =
   PropsWithChildren<OverflowedElementProps>;
 
-export const DEFAULT_OVERFLOW_OPTION_LENGTH = 64;
-
 export const DEFAULT_ROWS_COUNT = 1;
 
+type SetOverflowable = {
+  setOverflow?: (cond: boolean) => void;
+};
+
+type MutatedHTMLElement = HTMLElement & SetOverflowable;
+
+const isTargetMutated = (
+  x: Element,
+): x is HTMLElement & Required<SetOverflowable> =>
+  Boolean(x && (x as MutatedHTMLElement).setOverflow);
+
+const checkOnOverflow = ({ target, contentRect }: ResizeObserverEntry) => {
+  if (!isTargetMutated(target)) {
+    return;
+  }
+
+  target.setOverflow(contentRect.height < target.scrollHeight);
+};
+
+const debouncedResizeCb = debounce(
+  (entrys: ResizeObserverEntry[]) => entrys.forEach(checkOnOverflow),
+  500,
+);
+
+const resizeObserver = new ResizeObserver(debouncedResizeCb);
+
 export const OverflowTypography = forwardRef<
-  HTMLParagraphElement,
+  MutatedHTMLElement,
   OverflowedTypographyProps
 >(
   (
-    {
-      tooltipProps,
-      children,
-      overflowLimit = DEFAULT_OVERFLOW_OPTION_LENGTH,
-      rowsCount = DEFAULT_ROWS_COUNT,
-      ...props
-    },
-    ref,
+    { tooltipProps, children, rowsCount = DEFAULT_ROWS_COUNT, ...props },
+    forwardedRef,
   ) => {
-    const isLongerThanLimit =
-      typeof children === 'string' && children.length > overflowLimit;
+    const localRef = useRef<MutatedHTMLElement>(null);
+    const ref =
+      forwardedRef && typeof forwardedRef !== 'function'
+        ? forwardedRef
+        : localRef;
+
+    const [isLongerThanLimit, setOverflow] = useState(false);
+
+    useLayoutEffect(() => {
+      if (ref?.current) {
+        const node = ref.current;
+
+        node.setOverflow = setOverflow;
+        resizeObserver.observe(node);
+
+        return () => resizeObserver.unobserve(node);
+      }
+
+      return;
+    }, [ref.current]);
 
     const typographyProps = {
       ...props,
       ref,
-      overflowLimit,
       children,
       rowsCount,
     };
 
     if (isLongerThanLimit) {
       return (
-        <Tooltip title={children} disableInteractive {...tooltipProps}>
+        <Tooltip
+          title={(typeof children === 'string' && children) || ''}
+          disableInteractive
+          {...tooltipProps}
+        >
           <OverflowTypographyWrapper {...typographyProps} />
         </Tooltip>
       );

@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
+import { Stack } from '@mui/material';
 
-import { Grid } from '../Grid';
 import { Typography } from '../Typography';
 
 import {
@@ -15,38 +15,28 @@ export default {
 
 export const ShowCase: Story = () => {
   return (
-    <Grid container spacing={4}>
+    <Stack maxWidth={600} spacing={4}>
       <Typography variant="h2">Мотивация</Typography>
       <Typography variant="code">
-        Вариация 'Typography' элемента, с автоматической проверкой на длину
-        строки, и если длина больше настраиваемого значения 'overflowLimit', то
-        тогда добавляется кастомизируемая обертка 'Tooltip'.
+        Вариация 'Typography' элемента, с автоматической проверкой на
+        переполнение текстового контента, и если есть переполнение, то тогда
+        добавляется кастомизируемая обертка 'Tooltip'.
         <br />
-        Так же важный параметр 'rowsCount', по умолчанию равен '1'. Означает
-        число строк, после которого текст будет обрезаться, и добавляться
-        многоточие.
-        <br />
-        Расчет максимальной ширины элемента производится по формуле
-        {'`${ overflowLimit / rowsCount }ch`.'}
-        <br />
-        Единица измерения 'ch' выбрана из того соображения, что нужно
-        рассчитывать ширину по усредненной ширине символа, коей 'ch'
-        приблизительно и является.
+        Важный параметр 'rowsCount', по умолчанию равен '1'. Означает число
+        строк, после которого текст будет обрезаться, и добавляться многоточие.
       </Typography>
       <Typography variant="h2">Примеры</Typography>
       <OverflowTypography>
         Not enough long text for special behavior.
       </OverflowTypography>
       <OverflowTypography>
-        Enough long. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        At eos nam ratione!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut
+        delectus dolorem ea, explicabo illo minus nostrum quae quod veniam.
       </OverflowTypography>
-      <OverflowTypography overflowLimit={74} rowsCount={2}>
-        Short with overflow = 74 rowsCount = 2, like in Autocomplite
-      </OverflowTypography>
-      <OverflowTypography overflowLimit={74} rowsCount={2}>
-        Long with overflow = 74 rowsCount = 2, like in default Autocomplite
-        component. Lorem ipsum dolor sit amet.
+      <OverflowTypography rowsCount={2} maxWidth={300}>
+        rowsCount = 2, like in default Autocomplite component. Lorem ipsum dolor
+        sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui,
+        tempore.
       </OverflowTypography>
       <OverflowTypography
         tooltipProps={{
@@ -54,10 +44,11 @@ export const ShowCase: Story = () => {
           placement: 'top-start',
         }}
       >
-        With custom tooltip settings. Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Esse, ipsum.
+        With custom tooltip settings. Lorem ipsum dolor sit amet, consecrate
+        adipisicing elit. Assumenda autem debitis eligendi inventore magni nobis
+        perspiciatis quisquam ratione, unde vel?
       </OverflowTypography>
-    </Grid>
+    </Stack>
   );
 };
 
