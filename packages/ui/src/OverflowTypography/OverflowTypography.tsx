@@ -47,9 +47,9 @@ type SetOverflowable = {
 type MutatedHTMLElement = HTMLElement & SetOverflowable;
 
 const isTargetMutated = (
-  x: Element,
-): x is HTMLElement & Required<SetOverflowable> =>
-  Boolean(x && (x as MutatedHTMLElement).setOverflow);
+  target: Element,
+): target is HTMLElement & Required<SetOverflowable> =>
+  Boolean((target as MutatedHTMLElement)?.setOverflow);
 
 const checkOnOverflow = ({ target, contentRect }: ResizeObserverEntry) => {
   if (!isTargetMutated(target)) {
@@ -80,7 +80,7 @@ export const OverflowTypography = forwardRef<
         ? forwardedRef
         : localRef;
 
-    const [isLongerThanLimit, setOverflow] = useState(false);
+    const [isOverflowed, setOverflow] = useState(false);
 
     useLayoutEffect(() => {
       if (ref?.current) {
@@ -102,13 +102,9 @@ export const OverflowTypography = forwardRef<
       rowsCount,
     };
 
-    if (isLongerThanLimit) {
+    if (isOverflowed) {
       return (
-        <Tooltip
-          title={(typeof children === 'string' && children) || ''}
-          disableInteractive
-          {...tooltipProps}
-        >
+        <Tooltip title={children || ''} disableInteractive {...tooltipProps}>
           <OverflowTypographyWrapper {...typographyProps} />
         </Tooltip>
       );
