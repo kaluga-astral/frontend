@@ -1,16 +1,10 @@
-import {
-  PropsWithChildren,
-  forwardRef,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import debounce from 'lodash-es/debounce';
+import { PropsWithChildren, forwardRef } from 'react';
 
 import { TypographyProps } from '../Typography';
 import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 
 import { OverflowTypographyWrapper } from './styles';
+import { useOverflowed } from './hooks/useOverflowed';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
@@ -40,60 +34,15 @@ export type OverflowedTypographyProps =
 
 export const DEFAULT_ROWS_COUNT = 1;
 
-type SetOverflowable = {
-  setOverflow?: (cond: boolean) => void;
-};
-
-type MutatedHTMLElement = HTMLElement & SetOverflowable;
-
-const isTargetMutated = (
-  target: Element,
-): target is HTMLElement & Required<SetOverflowable> =>
-  Boolean((target as MutatedHTMLElement)?.setOverflow);
-
-const checkOnOverflow = ({ target, contentRect }: ResizeObserverEntry) => {
-  if (!isTargetMutated(target)) {
-    return;
-  }
-
-  target.setOverflow(contentRect.height < target.scrollHeight);
-};
-
-const debouncedResizeCb = debounce(
-  (entrys: ResizeObserverEntry[]) => entrys.forEach(checkOnOverflow),
-  500,
-);
-
-const resizeObserver = new ResizeObserver(debouncedResizeCb);
-
 export const OverflowTypography = forwardRef<
-  MutatedHTMLElement,
+  HTMLElement,
   OverflowedTypographyProps
 >(
   (
     { tooltipProps, children, rowsCount = DEFAULT_ROWS_COUNT, ...props },
     forwardedRef,
   ) => {
-    const localRef = useRef<MutatedHTMLElement>(null);
-    const ref =
-      forwardedRef && typeof forwardedRef !== 'function'
-        ? forwardedRef
-        : localRef;
-
-    const [isOverflowed, setOverflow] = useState(false);
-
-    useLayoutEffect(() => {
-      if (ref?.current) {
-        const node = ref.current;
-
-        node.setOverflow = setOverflow;
-        resizeObserver.observe(node);
-
-        return () => resizeObserver.unobserve(node);
-      }
-
-      return;
-    }, [ref.current]);
+    const { ref, isOverflowed } = useOverflowed(forwardedRef);
 
     const typographyProps = {
       ...props,
