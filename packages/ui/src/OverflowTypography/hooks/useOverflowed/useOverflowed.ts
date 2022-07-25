@@ -54,5 +54,5 @@ export const useOverflowed = (forwardedRef?: Ref<MutatedHTMLElement>) => {
     return;
   }, [ref.current]);
 
-  return { isOverflowed, ref };
+  return { isOverflowed, ref: ref as Ref<HTMLElement> };
 };
