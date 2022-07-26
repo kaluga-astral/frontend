@@ -20,7 +20,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       props;
     const [savedCollapsedIn, setSavedCollapsedIn] = useLocalStorage(
       localStorageKey,
-      true
+      true,
     );
     const [collapsedIn, setCollapsedIn] = useState(savedCollapsedIn ?? true);
 

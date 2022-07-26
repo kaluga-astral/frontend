@@ -6,5 +6,5 @@ import { StyledListItemIcon } from './styled';
 export const ListItemIcon = forwardRef<HTMLLIElement, ListItemIconProps>(
   (props, ref) => {
     return <StyledListItemIcon ref={ref} {...props} />;
-  }
+  },
 );

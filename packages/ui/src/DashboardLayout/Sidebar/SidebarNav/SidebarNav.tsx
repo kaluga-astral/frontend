@@ -9,5 +9,5 @@ export const SidebarNav = forwardRef<HTMLDivElement, SidebarNavProps>(
     const { menu } = props;
 
     return <nav ref={ref}>{menu}</nav>;
-  }
+  },
 );

@@ -50,7 +50,7 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
         {children}
       </a>
     );
-  }
+  },
 );
 
 EDO.args = {

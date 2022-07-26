@@ -22,6 +22,6 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
     return theme.transitions.create('min-width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }) ;
+    });
   }};
 `;

@@ -14,28 +14,30 @@ export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
   size?: TooltipSize;
 };
 
-export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
-  const {
-    title,
-    placement = 'top',
-    size = TooltipSizes.MEDIUM,
-    children,
-    ...restProps
-  } = props;
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+  (props, ref) => {
+    const {
+      title,
+      placement = 'top',
+      size = TooltipSizes.MEDIUM,
+      children,
+      ...restProps
+    } = props;
 
-  if (title) {
-    return (
-      <StyledTooltip
-        ref={ref}
-        title={title}
-        size={size}
-        placement={placement}
-        {...restProps}
-      >
-        {children}
-      </StyledTooltip>
-    );
-  }
+    if (title) {
+      return (
+        <StyledTooltip
+          ref={ref}
+          title={title}
+          size={size}
+          placement={placement}
+          {...restProps}
+        >
+          {children}
+        </StyledTooltip>
+      );
+    }
 
-  return children
-});
+    return children;
+  },
+);

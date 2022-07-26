@@ -13,7 +13,7 @@ export type NavMenuItemListProps = {
         text: string;
         active: boolean;
         component: ElementType;
-      }
+      },
     ]
   >;
 };
