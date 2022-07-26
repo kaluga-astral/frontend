@@ -17,7 +17,7 @@ export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
 
   const [isOverflowed, setOverflow] = useState(false);
 
-  const debouncedSetOverflow = useCallback(
+  const handleResize = useCallback(
     debounce(
       ([{ target, contentRect }]: ResizeObserverEntry[]) =>
         setOverflow(contentRect.height < target.scrollHeight),
@@ -26,10 +26,7 @@ export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
     [],
   );
 
-  const resizeObserver = useMemo(
-    () => new ResizeObserver(debouncedSetOverflow),
-    [],
-  );
+  const resizeObserver = useMemo(() => new ResizeObserver(handleResize), []);
 
   useLayoutEffect(() => {
     if (ref?.current) {
