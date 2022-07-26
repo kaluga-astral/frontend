@@ -1,30 +1,15 @@
-import { Ref, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import {
+  Ref,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import debounce from 'lodash-es/debounce';
 
-type SetOverflowable = {
-  setOverflow?: (entry: ResizeObserverEntry) => void;
-};
-
-type MutatedHTMLElement = HTMLElement & SetOverflowable;
-
-const isTargetMutated = (
-  target: Element,
-): target is HTMLElement & Required<SetOverflowable> =>
-  Boolean((target as MutatedHTMLElement)?.setOverflow);
-
-const checkOnOverflow = (entry: ResizeObserverEntry) => {
-  if (isTargetMutated(entry.target)) {
-    entry.target.setOverflow(entry);
-  }
-};
-
-const resizeCb = (entries: ResizeObserverEntry[]) =>
-  entries.forEach(checkOnOverflow);
-
-const resizeObserver = new ResizeObserver(resizeCb);
-
-export const useOverflowed = (forwardedRef?: Ref<MutatedHTMLElement>) => {
-  const localRef = useRef<MutatedHTMLElement>(null);
+export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
+  const localRef = useRef<HTMLElement>(null);
   const ref =
     forwardedRef && typeof forwardedRef !== 'function'
       ? forwardedRef
@@ -34,10 +19,15 @@ export const useOverflowed = (forwardedRef?: Ref<MutatedHTMLElement>) => {
 
   const debouncedSetOverflow = useCallback(
     debounce(
-      ({ target, contentRect }: ResizeObserverEntry) =>
+      ([{ target, contentRect }]: ResizeObserverEntry[]) =>
         setOverflow(contentRect.height < target.scrollHeight),
       500,
     ),
+    [],
+  );
+
+  const resizeObserver = useMemo(
+    () => new ResizeObserver(debouncedSetOverflow),
     [],
   );
 
@@ -45,7 +35,6 @@ export const useOverflowed = (forwardedRef?: Ref<MutatedHTMLElement>) => {
     if (ref?.current) {
       const node = ref.current;
 
-      node.setOverflow = debouncedSetOverflow;
       resizeObserver.observe(node);
 
       return () => resizeObserver.unobserve(node);
@@ -54,5 +43,5 @@ export const useOverflowed = (forwardedRef?: Ref<MutatedHTMLElement>) => {
     return;
   }, [ref.current]);
 
-  return { isOverflowed, ref: ref as Ref<HTMLElement> };
+  return { isOverflowed, ref };
 };
