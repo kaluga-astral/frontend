@@ -8,7 +8,7 @@ import {
   NavMenuItemButtonIcon,
   NavMenuItemButtonRoot,
   NavMenuItemButtonText,
-} from './styled';
+} from './styles';
 
 export type NavMenuItemButtonProps = {
   opened?: boolean;

@@ -8,6 +8,7 @@ import { ListItemText } from '../../ListItemText';
 export const NavMenuItemButtonRoot = styled(ListItemButton)`
   height: 40px;
   padding: ${({ theme }) => theme.spacing(2)};
+
   border-radius: ${({ theme }) => theme.shape.medium};
 `;
 
@@ -25,14 +26,15 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
   opened?: boolean;
   collapsedIn: boolean;
 }>`
-  margin-left: auto;
   width: ${({ collapsedIn }) => {
     if (collapsedIn) {
       return '1em';
     }
 
-    return 0;
+    return '0px';
   }};
+  margin-left: auto;
+
   transform: ${({ opened }) => {
     if (opened) {
       return 'rotateZ(180deg)';
@@ -40,10 +42,11 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
 
     return 'rotateZ(0deg)';
   }};
+
   transition: ${({ theme }) => {
     return theme.transitions.create('transform', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    });
+    }) ;
   }};
 `;
