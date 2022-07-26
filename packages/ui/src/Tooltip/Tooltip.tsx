@@ -29,7 +29,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
         ref={ref}
         title={title}
         size={size}
-        placement={placement} {...restProps}>{children}</StyledTooltip>
+        placement={placement}
+        {...restProps}
+      >
+        {children}
+      </StyledTooltip>
     );
   }
 
