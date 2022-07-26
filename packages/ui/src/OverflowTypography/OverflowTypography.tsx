@@ -51,9 +51,9 @@ export const OverflowTypography = forwardRef<
       rowsCount,
     };
 
-    if (isOverflowed) {
+    if (children && isOverflowed) {
       return (
-        <Tooltip title={children || ''} disableInteractive {...tooltipProps}>
+        <Tooltip title={children} disableInteractive {...tooltipProps}>
           <OverflowTypographyWrapper {...typographyProps} />
         </Tooltip>
       );
