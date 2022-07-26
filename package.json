@@ -6,7 +6,7 @@
   ],
   "devDependencies": {
     "@astral/eslint-config-react-ts": "^1.3.2",
-    "@astral/commitlint-config": "^1.4.0",
+    "@astral/commitlint-config": "^1.4.1",
     "@astral/commander": "*",
     "@astral/illustrations": "*",
     "@mdx-js/react": "2.0.0",
