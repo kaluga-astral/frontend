@@ -1,0 +1,16 @@
+name: 'Chromatic'
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - packages/ui/**
+      - packages/icons/**
+      - packages/fonts/**
+      - .storybook/**
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+      steps:
+          - run: 'echo "No chromatic-deployment required"'
