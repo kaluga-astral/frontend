@@ -3,8 +3,8 @@ name: Label Reviews
 
 on:
   pull_request_review:
-    types: [submitted, edited, dismissed]
-  
+    types: [submitted, edited, dismissed, synchronize]
+
 jobs:
   require-reviewers:
     runs-on: ubuntu-18.04
