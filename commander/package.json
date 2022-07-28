@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "recursive-copy": "^2.0.10",
-    "shelljs": "^0.8.4"
+    "yargs": "^17.5.1",
+    "shelljs": "^0.8.4",
+    "@commitlint/lint": "^17.0.3",
+    "@commitlint/load": "^17.0.3"
   },
   "devDependencies": {
     "typescript": "^4.5.5",
