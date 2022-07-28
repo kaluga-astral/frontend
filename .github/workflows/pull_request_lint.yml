@@ -2,7 +2,7 @@ name: Pull request title lint
 on:
   pull_request:
     branches: [main]
-    types: ['opened', 'edited', 'reopened']
+    types: [opened, edited, reopened, synchronize]
 
 jobs:
   lint:
