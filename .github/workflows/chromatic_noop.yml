@@ -8,6 +8,8 @@ on:
       - packages/icons/**
       - packages/fonts/**
       - .storybook/**
+      - package.json
+      - package-lock.json
 
 jobs:
   chromatic-deployment:
