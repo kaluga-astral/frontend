@@ -47,6 +47,6 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
     return theme.transitions.create('transform', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    });
+    }) ;
   }};
 `;

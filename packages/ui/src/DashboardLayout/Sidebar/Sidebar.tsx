@@ -3,7 +3,7 @@ import { forwardRef, useCallback, useState } from 'react';
 import { NavMenu, NavMenuProps } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
 
-import { SidebarRoot } from './styled';
+import { SidebarRoot } from './styles';
 import { SidebarNav } from './SidebarNav';
 import { SidebarToggler } from './SidebarToggler';
 
