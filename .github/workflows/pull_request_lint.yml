@@ -2,7 +2,7 @@ name: Pull request title lint
 on:
   pull_request:
     branches: [main]
-    types: ['opened', 'edited', 'reopened']
+    types: [opened, edited, reopened, synchronize]
 
 jobs:
   lint:
@@ -17,4 +17,4 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Lint title
-        uses: JulienKode/pull-request-name-linter-action@v0.5.0
+        run: node commander/index.js lintPRTitle --title='${{ github.event.pull_request.title }}'
