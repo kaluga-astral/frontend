@@ -24,6 +24,8 @@ import { MuiTableRow } from './MuiTableRow';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
+import { MuiAlertTitle } from './MuiAlertTitle';
+import { MuiAlert } from './MuiAlert';
 
 export type FontsUrls = {
   bold: {
@@ -93,6 +95,8 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiAlert,
+  MuiAlertTitle,
   MuiButton,
   MuiButtonBase,
   MuiLoadingButton,
