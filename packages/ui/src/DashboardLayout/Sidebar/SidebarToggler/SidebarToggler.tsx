@@ -6,17 +6,17 @@ import { SidebarTogglerContent, SidebarTogglerRoot } from './styled';
 
 export type SidebarTogglerProps = {
   collapsedIn: boolean;
-  onChange: () => void;
+  onToggle: () => void;
 };
 
 export const SidebarToggler = forwardRef<
   HTMLButtonElement,
   SidebarTogglerProps
 >((props, ref) => {
-  const { collapsedIn, onChange } = props;
+  const { collapsedIn, onToggle } = props;
 
   const handleButtonClick = () => {
-    onChange();
+    onToggle();
   };
 
   return (

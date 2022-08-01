@@ -3,7 +3,7 @@ import { MenuOffOutlineMd, MenuOnOutlineMd } from '@astral/icons';
 
 import { ButtonProps } from '../../../../Button';
 
-import { SidebarTogglerButtonRoot } from './styled';
+import { SidebarTogglerButtonRoot } from './styles';
 
 export type SidebarTogglerButtonProps = ButtonProps & {
   collapsedIn: boolean;

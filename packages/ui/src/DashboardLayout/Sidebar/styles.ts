@@ -6,13 +6,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   display: flex;
   flex-direction: column;
   grid-area: sidebar;
-  min-width: ${({ collapsedIn }) => {
-    if (collapsedIn) {
-      return '240px';
-    }
-
-    return '100%';
-  }};
+  min-width: ${({ collapsedIn }) => (collapsedIn ? '240px' : '100%')};
   padding: ${({ theme }) => theme.spacing(2)};
 
   background-color: ${({ theme }) => theme.palette.background.element};
