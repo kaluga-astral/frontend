@@ -43,7 +43,6 @@ export const getColor = ({
   return theme.palette.grey[900];
 };
 
-// FIXME: color #f4f4fb; does not exist in theme.palette
 export const StyledListItem = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== 'selected',
 })<ListItemProps>`
@@ -62,7 +61,5 @@ export const StyledListItem = styled(ListItem, {
         ...props,
         listItemState: ListItemStates.HOVER,
       })};
-
-    background: #f4f4fb;
   }
 `;
