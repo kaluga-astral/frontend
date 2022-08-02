@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Box, Switch } from '@mui/material';
+import { Box, Paper, Switch } from '@mui/material';
+import { Theme } from '@mui/material/styles';
 import { Story } from '@storybook/react';
-import { HomeOutlineMd } from '@astral/icons';
 
 import { FormControlLabel } from '../FormControlLabel';
 
@@ -12,29 +12,42 @@ export default {
   component: Zoom,
 };
 
-const Template: Story = () => {
-  const [open, setOpen] = useState(true);
+const icon = (
+  <Paper sx={{ m: 1 }} elevation={4}>
+    <Box component="svg" sx={{ width: 100, height: 100 }}>
+      <Box
+        component="polygon"
+        sx={{
+          fill: (theme: Theme) => theme.palette.common.white,
+          stroke: (theme) => theme.palette.divider,
+          strokeWidth: 1,
+        }}
+        points="0,100 50,00, 100,100"
+      />
+    </Box>
+  </Paper>
+);
 
-  const handleClick = () => {
-    setOpen(!open);
+const Template: Story = () => {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
   };
 
   return (
-    <Box>
+    <Box sx={{ height: 180 }}>
       <FormControlLabel
-        control={<Switch checked={open} onChange={handleClick} />}
+        control={<Switch checked={checked} onChange={handleChange} />}
         label="Show"
       />
       <Box sx={{ display: 'flex' }}>
-        <Zoom in={open}>
-          <div>
-            <HomeOutlineMd />
-          </div>
-        </Zoom>
-        <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}>
-          <div>
-            <HomeOutlineMd />
-          </div>
+        <Zoom in={checked}>{icon}</Zoom>
+        <Zoom
+          in={checked}
+          style={{ transitionDelay: checked ? '500ms' : '0ms' }}
+        >
+          {icon}
         </Zoom>
       </Box>
     </Box>
