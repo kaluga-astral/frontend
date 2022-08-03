@@ -3,7 +3,7 @@ import { useState } from 'react';
 import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
-import { PlaceholderProps } from '../Placeholder/types';
+import { PlaceholderProps } from '../Placeholder';
 
 export default {
   title: 'Components/ContentState',

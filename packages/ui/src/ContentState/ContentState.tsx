@@ -1,7 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 
 import { Button, CircularProgress, Placeholder, Typography } from '..';
-import { PlaceholderProps } from '../Placeholder/types';
+import { PlaceholderProps } from '../Placeholder';
 
 import { LoadingContainer } from './styles';
 import { ContentStateErrorProps } from './types';
