@@ -2,7 +2,7 @@ import { ElementType } from 'react';
 import { List } from '@mui/material';
 import { PageDotOutlineMd } from '@astral/icons';
 
-import { NavMenuItemButton } from './NavMenuItemButton/NavMenuItemButton';
+import { NavMenuItemButton } from '../NavMenuItemButton';
 
 export type NavMenuItemListProps = {
   collapsedIn: boolean;

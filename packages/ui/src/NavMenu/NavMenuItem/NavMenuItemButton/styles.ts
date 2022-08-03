@@ -1,9 +1,9 @@
 import { ChevronDOutlineMd } from '@astral/icons';
 
-import { styled } from '../../styles';
-import { ListItemButton } from '../../ListItemButton';
-import { ListItemIcon } from '../../ListItemIcon';
-import { ListItemText } from '../../ListItemText';
+import { styled } from '../../../styles';
+import { ListItemButton } from '../../../ListItemButton';
+import { ListItemIcon } from '../../../ListItemIcon';
+import { ListItemText } from '../../../ListItemText';
 
 export const NavMenuItemButtonRoot = styled(ListItemButton)`
   height: 40px;

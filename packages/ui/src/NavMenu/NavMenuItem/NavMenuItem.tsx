@@ -6,11 +6,11 @@ import {
   useState,
 } from 'react';
 
-import { Collapse } from '../Collapse';
+import { Collapse } from '../../Collapse';
 
-import { NavMenuItemListProps } from './NavMenuItemList';
+import { NavMenuItemListProps } from './NavMenuItemList/NavMenuItemList';
 import { NavMenuItemButton } from './NavMenuItemButton';
-import { NavMenuItemList } from './NavMenuItemList';
+import { NavMenuItemList } from './NavMenuItemList/NavMenuItemList';
 
 export type NavMenuItemProps = {
   collapsedIn: boolean;

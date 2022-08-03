@@ -1,7 +1,7 @@
 import { ElementType, ReactElement, forwardRef } from 'react';
 
-import { Collapse } from '../../Collapse';
-import { Tooltip } from '../../Tooltip';
+import { Collapse } from '../../../Collapse';
+import { Tooltip } from '../../../Tooltip';
 
 import {
   NavMenuItemButtonChevron,

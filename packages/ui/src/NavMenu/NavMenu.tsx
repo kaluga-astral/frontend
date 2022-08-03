@@ -7,13 +7,13 @@ export type NavMenuProps = {
   /**
    * Состояние свернуто/развернуто меню по горизонтали
    */
-  collapsedIn: boolean;
+  collapsedIn?: boolean;
   items: Array<NavMenuItemProps['item']>;
 };
 
 export const NavMenu = forwardRef<HTMLUListElement, NavMenuProps>(
   (props, ref) => {
-    const { collapsedIn, items } = props;
+    const { collapsedIn = true, items } = props;
 
     return (
       <List ref={ref} disablePadding>
