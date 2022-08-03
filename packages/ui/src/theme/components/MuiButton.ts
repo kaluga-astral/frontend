@@ -25,6 +25,7 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
 
       return {
         display: 'inline-flex',
+        gap: theme.spacing(1),
         color: getColor({
           selected,
           theme,

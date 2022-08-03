@@ -24,6 +24,8 @@ import { MuiTableRow } from './MuiTableRow';
 import { MuiMenu } from './MuiMenu';
 import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
+import { MuiListItemButton } from './MuiListItemButton';
+import { MuiListItemText } from './MuiListItemText';
 
 export type FontsUrls = {
   bold: {
@@ -116,4 +118,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiTableRow,
   MuiPaginationItem,
   MuiCircularProgress,
+  MuiListItemButton,
+  MuiListItemText,
 });

@@ -5,7 +5,7 @@ import { Product, ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { ProfileProps } from '../../Profile/types';
 
-import { HeaderNav, HeaderRoot } from './styled';
+import { HeaderNav, HeaderRoot } from './styles';
 
 export type HeaderProps = {
   product: ProductProps;

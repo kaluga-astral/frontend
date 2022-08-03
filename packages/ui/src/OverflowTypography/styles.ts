@@ -6,11 +6,12 @@ import { OverflowedProps } from './OverflowTypography';
 export const OverflowTypographyWrapper = styled(Typography, {
   shouldForwardProp: (name) => name !== 'rowsCount',
 })<Required<OverflowedProps>>`
-  -webkit-line-clamp: ${({ rowsCount }) => rowsCount};
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
+  display: box;
   max-width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
+
   white-space: initial;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: ${({ rowsCount }) => rowsCount};
+  -webkit-box-orient: vertical;
 `;

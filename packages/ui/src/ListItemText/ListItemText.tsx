@@ -1,7 +1,9 @@
-import { ListItemTextProps } from '@mui/material';
+import MuiListItemText, {
+  ListItemTextProps as MuiListItemTextProps,
+} from '@mui/material/ListItemText';
 
-import { StyledListItemText } from './styles';
+export type ListItemTextProps = MuiListItemTextProps & {};
 
-export const ListItemText = ({ ...props }: ListItemTextProps) => {
-  return <StyledListItemText {...props} />;
+export const ListItemText = (props: ListItemTextProps) => {
+  return <MuiListItemText {...props} />;
 };
