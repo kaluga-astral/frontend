@@ -19,7 +19,7 @@ export const DialogTitle = ({
 }: DialogTitleProps) => {
   // 'escapeKeyDown'  в документашке написано что это опциональный тип, и можно стрингу любую туда закидывать, а по факту либо escapeKeyDown либо backdropClick
 
-  const handleClickTitle = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleTitleClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       onClose(e, 'escapeKeyDown');
     }
@@ -31,7 +31,7 @@ export const DialogTitle = ({
       {onClose && (
         <IconButton
           variant="text"
-          onClick={handleClickTitle}
+          onClick={handleTitleClick}
           aria-label="Закрыть модальное окно"
         >
           <CrossOutlineMd />
