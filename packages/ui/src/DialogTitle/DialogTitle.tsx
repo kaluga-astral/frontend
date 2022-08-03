@@ -1,10 +1,16 @@
-import { DialogTitle as MuiDialogTitle } from '@mui/material';
+import {
+  ModalProps,
+  DialogTitle as MuiDialogTitle,
+  DialogTitleProps as MuiDialogTitleProps,
+} from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 import { MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
 
-import { DialogTitleProps } from './types';
+export type DialogTitleProps = MuiDialogTitleProps & {
+  onClose?: ModalProps['onClose'];
+};
 
 export const DialogTitle = ({
   children,
@@ -23,7 +29,11 @@ export const DialogTitle = ({
     <MuiDialogTitle {...props}>
       {children}
       {onClose && (
-        <IconButton variant="text" onClick={onClickTitle}>
+        <IconButton
+          variant="text"
+          onClick={onClickTitle}
+          aria-label="Закрыть модальное окно"
+        >
           <CrossOutlineMd />
         </IconButton>
       )}
