@@ -3,8 +3,22 @@ name: 'Chromatic'
 on:
    push:
      branches: [main]
+     paths:
+       - packages/ui/**
+       - packages/icons/**
+       - packages/fonts/**
+       - .storybook/**
+       - package.json
+       - package-lock.json
    pull_request:
      branches: [main]
+     paths:
+       - packages/ui/**
+       - packages/icons/**
+       - packages/fonts/**
+       - .storybook/**
+       - package.json
+       - package-lock.json
 
 jobs:
   chromatic-deployment:

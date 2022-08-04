@@ -4,6 +4,8 @@ module.exports = {
   ...commonConfig,
   outDir: 'generated-custom-icons',
   svgoConfig: {
+    multipass: true,
+    floatPrecision: 1,
     plugins: [
       'prefixIds',
       {
@@ -14,6 +16,7 @@ module.exports = {
           },
         },
       },
+      { name: 'removeAttrs', params: { attrs: '^fill-rule$|^clip-rule$' } },
     ],
   },
 };
