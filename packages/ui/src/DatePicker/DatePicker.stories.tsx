@@ -11,8 +11,12 @@ export default {
   component: DatePicker,
 };
 
+const TIMESTAMP_VALUE = 1659012063771;
+
 const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date | null>(addDays(new Date(), 180));
+  const [value, setValue] = useState<Date | null>(
+    addDays(new Date(TIMESTAMP_VALUE), 180),
+  );
 
   return (
     <DatePickerProvider>
@@ -31,8 +35,8 @@ Default.args = {
     placeholder: 'Выберите дату',
   },
   disabled: false,
-  minDate: subDays(new Date(), 90),
-  maxDate: addDays(new Date(), 90),
+  minDate: subDays(new Date(TIMESTAMP_VALUE), 90),
+  maxDate: addDays(new Date(TIMESTAMP_VALUE), 90),
 };
 
 Default.parameters = {
