@@ -1,10 +1,16 @@
-import { DialogTitle as MuiDialogTitle } from '@mui/material';
+import {
+  ModalProps,
+  DialogTitle as MuiDialogTitle,
+  DialogTitleProps as MuiDialogTitleProps,
+} from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 import { MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
 
-import { DialogTitleProps } from './types';
+export type DialogTitleProps = MuiDialogTitleProps & {
+  onClose?: ModalProps['onClose'];
+};
 
 export const DialogTitle = ({
   children,
@@ -13,7 +19,7 @@ export const DialogTitle = ({
 }: DialogTitleProps) => {
   // 'escapeKeyDown'  в документашке написано что это опциональный тип, и можно стрингу любую туда закидывать, а по факту либо escapeKeyDown либо backdropClick
 
-  const onClickTitle = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleTitleClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       onClose(e, 'escapeKeyDown');
     }
@@ -23,7 +29,11 @@ export const DialogTitle = ({
     <MuiDialogTitle {...props}>
       {children}
       {onClose && (
-        <IconButton variant="text" onClick={onClickTitle}>
+        <IconButton
+          variant="text"
+          onClick={handleTitleClick}
+          aria-label="Закрыть модальное окно"
+        >
           <CrossOutlineMd />
         </IconButton>
       )}
