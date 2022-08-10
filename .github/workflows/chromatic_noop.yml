@@ -14,5 +14,5 @@ on:
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
-      steps:
-          - run: 'echo "No chromatic-deployment required"'
+    steps:
+      - run: 'echo "No chromatic-deployment required"'
