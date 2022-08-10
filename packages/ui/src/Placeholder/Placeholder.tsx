@@ -7,7 +7,7 @@ import {
   PlaceholderInnerContainer,
   PlaceholderRoot,
   PlaceholderTitle,
-} from './styled';
+} from './styles';
 
 export type PlaceholderProps = {
   /**

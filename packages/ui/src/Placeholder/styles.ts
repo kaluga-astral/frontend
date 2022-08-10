@@ -40,13 +40,9 @@ export const PlaceholderDescription = styled(Typography)`
 export const PlaceholderActions = styled.footer`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: ${({ theme }) => theme.spacing(5)};
 
-  /**
-  nth-child(n) для добавления веса, чтобы переопределить стили
-  */
-  > :nth-child(n) {
-    margin: ${({ theme }) => theme.spacing(1)};
-  }
+  gap: ${({ theme }) => theme.spacing(1)};
+  justify-content: center;
+
+  margin-top: ${({ theme }) => theme.spacing(5)};
 `;
