@@ -3,7 +3,7 @@ name: Label Reviews
 
 on:
   pull_request:
-    types: [opened, unlabeled, labeled]
+    types: [unlabeled, labeled]
   pull_request_review:
     types: [submitted, edited, dismissed]
 
