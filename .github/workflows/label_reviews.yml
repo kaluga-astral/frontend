@@ -2,8 +2,10 @@
 name: Label Reviews
 
 on:
+  pull_request:
+    types: [opened, synchronize, unlabeled, labeled, edited]
   pull_request_review:
-    types: [submitted, edited, dismissed, synchronize]
+    types: [submitted, edited, dismissed]
 
 jobs:
   require-reviewers:
