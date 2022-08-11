@@ -1,12 +1,36 @@
+import { ReactNode } from 'react';
+
 import {
-  StyledActions,
-  StyledContainer,
-  StyledDescription,
-  StyledImage,
-  StyledInnerContainer,
-  StyledTitle,
-} from './styled';
-import { PlaceholderProps } from './types';
+  PlaceholderActions,
+  PlaceholderDescription,
+  PlaceholderImage,
+  PlaceholderInnerContainer,
+  PlaceholderRoot,
+  PlaceholderTitle,
+} from './styles';
+
+export type PlaceholderProps = {
+  /**
+   * Ссылка на изображение
+   */
+  imgSrc: string;
+  /**
+   * Описание изображения
+   */
+  imgAlt: string;
+  /**
+   * Заголовок
+   */
+  title: string;
+  /**
+   * Описание
+   */
+  description?: string | ReactNode;
+  /**
+   * Действия
+   */
+  Actions?: ReactNode;
+};
 
 export const Placeholder = ({
   title,
@@ -16,15 +40,17 @@ export const Placeholder = ({
   Actions,
 }: PlaceholderProps) => {
   return (
-    <StyledContainer>
-      <StyledInnerContainer>
-        {imgSrc && <StyledImage src={imgSrc} alt={imgAlt} />}
-        {title && <StyledTitle variant="h4">{title}</StyledTitle>}
+    <PlaceholderRoot>
+      <PlaceholderInnerContainer>
+        <PlaceholderImage src={imgSrc} alt={imgAlt} />
+        <PlaceholderTitle variant="h4">{title}</PlaceholderTitle>
         {description && (
-          <StyledDescription variant="ui">{description}</StyledDescription>
+          <PlaceholderDescription variant="ui">
+            {description}
+          </PlaceholderDescription>
         )}
-      </StyledInnerContainer>
-      {Actions && <StyledActions>{Actions}</StyledActions>}
-    </StyledContainer>
+      </PlaceholderInnerContainer>
+      {Actions && <PlaceholderActions>{Actions}</PlaceholderActions>}
+    </PlaceholderRoot>
   );
 };

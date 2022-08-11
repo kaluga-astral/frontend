@@ -10,6 +10,6 @@ module.exports = {
     emotionAlias: false,
   },
   core: {
-    builder: 'webpack5',
+    builder: "@storybook/builder-vite"
   },
 }
