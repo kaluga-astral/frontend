@@ -4,12 +4,14 @@ type StackOptions = {
   push: (id: string) => void;
   pop: (id: string) => boolean;
   clean: () => void;
+  remove: (id: string) => void;
 };
 
 export const BackdropStackContext = createContext<StackOptions>({
   push: () => {},
   pop: () => true,
   clean: () => {},
+  remove: () => {},
 });
 
 export const BackdropStackProvider = ({ children }: PropsWithChildren<{}>) => {
@@ -48,8 +50,12 @@ export const BackdropStackProvider = ({ children }: PropsWithChildren<{}>) => {
     stack.current = [];
   };
 
+  const remove = (id: string) => {
+    stack.current = stack.current.filter((item) => item !== id);
+  };
+
   return (
-    <BackdropStackContext.Provider value={{ push, pop, clean }}>
+    <BackdropStackContext.Provider value={{ push, pop, clean, remove }}>
       {children}
     </BackdropStackContext.Provider>
   );

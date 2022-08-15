@@ -1,7 +1,8 @@
 import { Story } from '@storybook/react';
-import { useRef } from 'react';
-import { Box, Popover } from '@mui/material';
+import { useRef, useState } from 'react';
+import { Box, MenuItem, Popover } from '@mui/material';
 
+import { Select } from '../Select';
 import { Autocomplete } from '../Autocomplete';
 import { Dialog } from '../Dialog';
 import { Button } from '../Button';
@@ -53,6 +54,31 @@ const AutoCompleteExample = ({ index }: IndexedProps) => {
   );
 };
 
+const SelectExample = ({ index }: IndexedProps) => {
+  const { handleClose, handleOpen } = useBackdropStackToggle(`select_${index}`);
+  const [value, setValue] = useState('');
+
+  return (
+    <Select
+      placeholder="Выберите вариант"
+      label="Select"
+      value={value}
+      onOpen={handleOpen}
+      onClose={handleClose}
+    >
+      {OPTIONS.map((item, i) => (
+        <MenuItem
+          key={i}
+          value={item.value}
+          onClick={() => setValue(item.value)}
+        >
+          {item.title}
+        </MenuItem>
+      ))}
+    </Select>
+  );
+};
+
 const PopupExample = ({ index }: IndexedProps) => {
   const { isOpened, handleOpen, handleClose } = useBackdropStackToggle(
     `popup_${index}`,
@@ -70,11 +96,11 @@ const PopupExample = ({ index }: IndexedProps) => {
         anchorEl={ref.current}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'right',
+          horizontal: 'left',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'left',
         }}
       >
         <Box padding={4}>
@@ -83,6 +109,7 @@ const PopupExample = ({ index }: IndexedProps) => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae,
             porro?
           </div>
+          <SelectExample index={index + 1} />
           <AutoCompleteExample index={index + 1} />
           {isOpened && <PopupExample index={index + 1} />}
         </Box>
@@ -97,18 +124,35 @@ const DialogExample = () => {
 
   return (
     <>
+      <Typography variant="h2">Мотивация</Typography>
+      <Typography variant="code">
+        Абстрактный компонент, предназначенный для предотвращения случаного
+        нажатия пользователем по бэкдропу/оверлею/серой зоне модального окна.
+        <br />
+        Кейс состоит в том, что если внутри модального окна, пользователь
+        взаимодействует с другими активными попап подобными элементами,
+        автокомплитом, селектом, то для их закрытия пользователь может
+        воспользоваться кликом мышкой "снаружи" окна взаимодействия, и тогда это
+        приводит к клику по фоновой части модалки, и это приводит к закрытию не
+        только селекта/автокомплита, но и самой модалки, чего пользователь
+        совсем не ожидал
+      </Typography>
+      <Typography variant="h2" marginTop={3} marginBottom={2}>
+        Пример
+      </Typography>
       <Button onClick={handleOpen}>Открыть модалку</Button>
       <Dialog
         open={isOpened}
         onClose={handleClose}
         title="Example modal content"
       >
-        <Box padding={4}>
+        <Box padding={6}>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
             eveniet, ipsum. Deserunt dicta eum facilis nihil perferendis
             quisquam rerum vero.
           </div>
+          <SelectExample index={0} />
           <AutoCompleteExample index={0} />
           <PopupExample index={0} />
         </Box>
