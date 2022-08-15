@@ -34,6 +34,8 @@ export * from './DialogTitle';
 
 export * from './DropdownButton';
 
+export * from './Fade';
+
 export * from './FormControlLabel';
 
 export * from './FormHelperText';
@@ -41,6 +43,8 @@ export * from './FormHelperText';
 export * from './GlobalStyles';
 
 export * from './Grid';
+
+export * from './Grow';
 
 export * from './IconButton';
 
@@ -73,6 +77,8 @@ export * from './MenuItem';
 export * from './MenuList';
 
 export * from './MenuGroup';
+
+export * from './OverflowTypography';
 
 export * from './Placeholder';
 
@@ -116,6 +122,10 @@ export * from './SideDialogContent';
 
 export * from './SideDialogContentText';
 
+export * from './Slide';
+
+export * from './Zoom';
+
 export * from './Notification';
 
 export * from './LocalizationProvider';
@@ -123,5 +133,3 @@ export * from './LocalizationProvider';
 export * from './ContentState';
 
 export * from './Chevron';
-
-export * from './OverflowTypography';
