@@ -14,8 +14,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
 
   transition: ${({ theme }) => {
     return theme.transitions.create('min-width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.standard,
     }) ;
   }};
 `;
