@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Main } from './Main';
-import { DashboardLayoutRoot } from './styled';
+import { DashboardLayoutRoot } from './styles';
 
 export type DashBoardLayoutProps = {
   children: ReactNode;
