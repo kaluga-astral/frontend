@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 
 import { BackdropStackContext } from '../../BackdropStack';
 
+type Reasons = 'escapeKeyDown' | 'backdropClick' | string;
+
 export const useBackdropStackModalToggle = (id: string) => {
   const { push, pop, clean } = useContext(BackdropStackContext);
   const [isOpened, setOpened] = useState(false);
@@ -11,7 +13,7 @@ export const useBackdropStackModalToggle = (id: string) => {
     setOpened(true);
   };
 
-  const handleClose = (_: Event, reason: string) => {
+  const handleClose = (_: Event, reason: Reasons) => {
     const canBeClosed =
       reason === 'escapeKeyDown' || (reason === 'backdropClick' && pop(id));
 

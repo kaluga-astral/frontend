@@ -17,7 +17,7 @@ export default {
   title: 'Components/BackdropStack',
 };
 
-type IOption = {
+type Option = {
   value: string;
   title: string;
 };
@@ -26,7 +26,7 @@ type IndexedProps = {
   index: number;
 };
 
-const OPTIONS: IOption[] = [
+const OPTIONS: Option[] = [
   { value: '1', title: 'Value 1' },
   { value: '2', title: 'Value 2' },
   { value: '3', title: 'Value 3' },
@@ -37,13 +37,13 @@ const OPTIONS: IOption[] = [
   { value: '8', title: 'Value 8' },
 ];
 
-const AutoCompleteExample = ({ index }: IndexedProps) => {
+const AutocompleteExample = ({ index }: IndexedProps) => {
   const { handleClose, handleOpen } = useBackdropStackToggle(
     `autocomplete_${index}`,
   );
 
   return (
-    <Autocomplete<IOption, true, false, false>
+    <Autocomplete<Option, true, false, false>
       options={OPTIONS}
       onOpen={handleOpen}
       onClose={handleClose}
@@ -110,7 +110,7 @@ const PopupExample = ({ index }: IndexedProps) => {
             porro?
           </div>
           <SelectExample index={index + 1} />
-          <AutoCompleteExample index={index + 1} />
+          <AutocompleteExample index={index + 1} />
           {isOpened && <PopupExample index={index + 1} />}
         </Box>
       </Popover>
@@ -153,7 +153,7 @@ const DialogExample = () => {
             quisquam rerum vero.
           </div>
           <SelectExample index={0} />
-          <AutoCompleteExample index={0} />
+          <AutocompleteExample index={0} />
           <PopupExample index={0} />
         </Box>
       </Dialog>
