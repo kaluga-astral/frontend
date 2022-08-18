@@ -7,10 +7,7 @@ import { Autocomplete } from '../Autocomplete';
 import { Dialog } from '../Dialog';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
-import {
-  BackdropStackProvider,
-  useBackdropStackToggle,
-} from '../BackdropStack';
+import { useBackdropStackToggle } from '../BackdropStack';
 
 export default {
   title: 'Components/BackdropStack',
@@ -36,10 +33,8 @@ const OPTIONS: Option[] = [
   { value: '8', title: 'Value 8' },
 ];
 
-const AutocompleteExample = ({ index }: IndexedProps) => {
-  const { handleClose, handleOpen } = useBackdropStackToggle(
-    `autocomplete_${index}`,
-  );
+const AutocompleteExample = () => {
+  const { handleClose, handleOpen } = useBackdropStackToggle();
 
   return (
     <Autocomplete<Option, true, false, false>
@@ -53,8 +48,8 @@ const AutocompleteExample = ({ index }: IndexedProps) => {
   );
 };
 
-const SelectExample = ({ index }: IndexedProps) => {
-  const { handleClose, handleOpen } = useBackdropStackToggle(`select_${index}`);
+const SelectExample = () => {
+  const { handleClose, handleOpen } = useBackdropStackToggle();
   const [value, setValue] = useState('');
 
   return (
@@ -79,9 +74,7 @@ const SelectExample = ({ index }: IndexedProps) => {
 };
 
 const PopupExample = ({ index }: IndexedProps) => {
-  const { isOpened, handleOpen, handleClose } = useBackdropStackToggle(
-    `popup_${index}`,
-  );
+  const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
   const ref = useRef<HTMLButtonElement>(null);
 
   return (
@@ -108,8 +101,8 @@ const PopupExample = ({ index }: IndexedProps) => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae,
             porro?
           </div>
-          <SelectExample index={index + 1} />
-          <AutocompleteExample index={index + 1} />
+          <SelectExample />
+          <AutocompleteExample />
           {isOpened && <PopupExample index={index + 1} />}
         </Box>
       </Popover>
@@ -117,10 +110,7 @@ const PopupExample = ({ index }: IndexedProps) => {
   );
 };
 
-const DialogExample = () => {
-  const { isOpened, handleOpen, handleClose } =
-    useBackdropStackToggle('dialog');
-
+const MotivationPart = () => {
   return (
     <>
       <Typography variant="h2">Мотивация</Typography>
@@ -139,6 +129,16 @@ const DialogExample = () => {
       <Typography variant="h2" marginTop={3} marginBottom={2}>
         Пример
       </Typography>
+    </>
+  );
+};
+
+const Template: Story<{}> = () => {
+  const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
+
+  return (
+    <>
+      <MotivationPart />
       <Button onClick={handleOpen}>Открыть модалку</Button>
       <Dialog
         open={isOpened}
@@ -151,20 +151,12 @@ const DialogExample = () => {
             eveniet, ipsum. Deserunt dicta eum facilis nihil perferendis
             quisquam rerum vero.
           </div>
-          <SelectExample index={0} />
-          <AutocompleteExample index={0} />
+          <SelectExample />
+          <AutocompleteExample />
           <PopupExample index={0} />
         </Box>
       </Dialog>
     </>
-  );
-};
-
-const Template: Story<{}> = () => {
-  return (
-    <BackdropStackProvider>
-      <DialogExample />
-    </BackdropStackProvider>
   );
 };
 

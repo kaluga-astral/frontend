@@ -1,4 +1,3 @@
-import { PropsWithChildren, createContext, useRef } from 'react';
 import { nanoid } from 'nanoid';
 
 type PopId = string;
@@ -6,19 +5,7 @@ type PointerId = string;
 
 type PopTuple = [Reasons | undefined, PointerId];
 
-type PopOptions = {
-  reason?: Reasons;
-  cleanOnPop: boolean;
-};
-
-type PopFunc = (id: PopId, options: PopOptions) => boolean;
-
-type StackOptions = {
-  push: (id: PopId) => void;
-  pop: PopFunc;
-  clean: () => void;
-  remove: (id: PopId) => void;
-};
+type PopFunc = (id: PopId, reason?: Reasons) => boolean;
 
 export type Reasons =
   | 'escapeKeyDown'
@@ -27,67 +14,54 @@ export type Reasons =
   | 'blur'
   | string;
 
-export const BackdropStackContext = createContext<StackOptions>({
-  push: () => {},
-  pop: () => true,
-  clean: () => {},
-  remove: () => {},
-});
+class BackdropStackManager {
+  private stack: PopId[] = [];
 
-let currentPointerId: PointerId = '';
+  private previousPopInfo: PopTuple = ['', ''];
 
-document.addEventListener('pointerdown', () => (currentPointerId = nanoid()));
+  private currentPointerId: PointerId = '';
 
-export const BackdropStackProvider = ({ children }: PropsWithChildren<{}>) => {
-  const stack = useRef<PopId[]>([]);
-  const previousPopInfo = useRef<PopTuple>(['', '']);
+  constructor() {
+    document.addEventListener(
+      'pointerdown',
+      () => (this.currentPointerId = nanoid()),
+    );
+  }
 
-  const checkOnBackdropAndBlurCombination = (reason?: Reasons): boolean => {
-    const [previousReason, previousPointerId] = previousPopInfo.current;
+  private checkOnBackdropAndBlurCombination = (reason?: Reasons): boolean => {
+    const [previousReason, previousPointerId] = this.previousPopInfo;
 
     return (
       reason === 'backdropClick' &&
       previousReason === 'blur' &&
-      previousPointerId === currentPointerId
+      previousPointerId === this.currentPointerId
     );
   };
 
-  const clean = () => {
-    stack.current = [];
+  public remove = (id: PopId) => {
+    this.stack = this.stack.filter((item) => item !== id);
   };
 
-  const remove = (id: PopId) => {
-    stack.current = stack.current.filter((item) => item !== id);
+  public push = (id: PopId) => {
+    this.stack.push(id);
   };
 
-  const push = (id: PopId) => {
-    stack.current.push(id);
-  };
-
-  const pop: PopFunc = (id, { reason, cleanOnPop }) => {
-    if (checkOnBackdropAndBlurCombination(reason)) {
+  public pop: PopFunc = (id, reason) => {
+    if (this.checkOnBackdropAndBlurCombination(reason)) {
       return false;
     }
 
-    const lastOpenedElement = stack.current[stack.current.length - 1];
+    const lastOpenedElement = this.stack[this.stack.length - 1];
 
     if (lastOpenedElement === id) {
-      previousPopInfo.current = [reason, currentPointerId];
-      stack.current.pop();
-
-      if (cleanOnPop) {
-        clean();
-      }
+      this.previousPopInfo = [reason, this.currentPointerId];
+      this.stack.pop();
 
       return true;
     }
 
     return false;
   };
+}
 
-  return (
-    <BackdropStackContext.Provider value={{ push, pop, clean, remove }}>
-      {children}
-    </BackdropStackContext.Provider>
-  );
-};
+export const backdropStackManager = new BackdropStackManager();
