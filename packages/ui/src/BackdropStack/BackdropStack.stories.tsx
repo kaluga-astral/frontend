@@ -9,7 +9,6 @@ import { Button } from '../Button';
 import { Typography } from '../Typography';
 import {
   BackdropStackProvider,
-  useBackdropStackModalToggle,
   useBackdropStackToggle,
 } from '../BackdropStack';
 
@@ -120,7 +119,7 @@ const PopupExample = ({ index }: IndexedProps) => {
 
 const DialogExample = () => {
   const { isOpened, handleOpen, handleClose } =
-    useBackdropStackModalToggle('dialog');
+    useBackdropStackToggle('dialog');
 
   return (
     <>

@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { SyntheticEvent, useContext, useEffect, useState } from 'react';
 
-import { BackdropStackContext } from '../../BackdropStack';
+import { BackdropStackContext, Reasons } from '../../BackdropStack';
 
-export const useBackdropStackToggle = (id: string) => {
+export const useBackdropStackToggle = (id: string, cleanOnClose = false) => {
   const { pop, push, remove } = useContext(BackdropStackContext);
 
   const [isOpened, setOpened] = useState(false);
@@ -11,8 +11,8 @@ export const useBackdropStackToggle = (id: string) => {
     setOpened(true);
   };
 
-  const handleClose = () => {
-    setOpened(isOpened ? !pop(id) : false);
+  const handleClose = (_: SyntheticEvent<Element, Event>, reason?: Reasons) => {
+    setOpened(!pop(id, { reason, cleanOnPop: cleanOnClose }));
   };
 
   useEffect(() => () => remove(id), []);
