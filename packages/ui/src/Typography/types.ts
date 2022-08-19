@@ -8,7 +8,7 @@ import * as React from 'react';
 
 import { Theme } from '../theme';
 
-import { TypographyColors } from './constants';
+import { TypographyColors } from './enums';
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {

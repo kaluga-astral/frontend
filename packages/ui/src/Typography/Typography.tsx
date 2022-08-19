@@ -1,7 +1,7 @@
 import { Typography as MuiTypography } from '@mui/material';
 import { useMemo } from 'react';
 
-import { TypographyColors } from './constants';
+import { TypographyColors } from './enums';
 import { TypographyProps } from './types';
 
 export const Typography = ({ children, color, ...props }: TypographyProps) => {

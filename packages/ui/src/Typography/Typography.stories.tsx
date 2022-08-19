@@ -15,7 +15,7 @@ const Template: Story<TypographyProps> = (args) => (
       <Typography color="success" variant="h1" paragraph>
         Head size H1
       </Typography>
-      <Typography color="error" component="div" variant="h2" paragraph>
+      <Typography color="error" variant="h2" paragraph>
         Head size H2
       </Typography>
       <Typography color="warning" variant="h3" paragraph>
@@ -27,17 +27,17 @@ const Template: Story<TypographyProps> = (args) => (
       <Typography color="secondary" variant="h5" paragraph>
         Head size H5
       </Typography>
-      <Typography color="grey" variant="h6" paragraph>
+      <Typography color="info" variant="h6" paragraph>
         Head size H6
-      </Typography>
-      <Typography color="info" variant="h7" paragraph>
-        Head size H7
       </Typography>
       <Typography
         color={(theme) => theme.palette.error.dark}
-        variant="h8"
+        variant="h7"
         paragraph
       >
+        Head size H7
+      </Typography>
+      <Typography variant="h8" paragraph>
         Head size H8
       </Typography>
       <Typography variant="h9" paragraph>
