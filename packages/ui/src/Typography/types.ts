@@ -32,5 +32,5 @@ export type TypographyProps = Omit<
 > & {
   variant?: Variant | keyof TypographyPropsVariantOverrides;
   component?: React.ElementType;
-  color?: TypographyColor | ((theme: Theme) => string) | string;
+  color?: TypographyColor | ((theme: Theme) => string);
 };

@@ -37,7 +37,7 @@ const Template: Story<TypographyProps> = (args) => (
       >
         Head size H7
       </Typography>
-      <Typography variant="h8" paragraph>
+      <Typography color="textSecondary" variant="h8" paragraph>
         Head size H8
       </Typography>
       <Typography variant="h9" paragraph>
