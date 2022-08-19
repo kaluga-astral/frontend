@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Typography } from './Typography';
 import { TypographyProps } from './types';
+import { Typography } from './Typography';
 
 export default {
   title: 'Components/Typography',
@@ -12,28 +12,32 @@ export default {
 const Template: Story<TypographyProps> = (args) => (
   <Grid container spacing={2}>
     <Grid item xs={12} md={3}>
-      <Typography variant="h1" paragraph>
+      <Typography color="success" variant="h1" paragraph>
         Head size H1
       </Typography>
-      <Typography variant="h2" paragraph>
+      <Typography color="error" variant="h2" paragraph>
         Head size H2
       </Typography>
-      <Typography variant="h3" paragraph>
+      <Typography color="warning" variant="h3" paragraph>
         Head size H3
       </Typography>
-      <Typography variant="h4" paragraph>
+      <Typography color="primary" variant="h4" paragraph>
         Head size H4
       </Typography>
-      <Typography variant="h5" paragraph>
+      <Typography color="secondary" variant="h5" paragraph>
         Head size H5
       </Typography>
-      <Typography variant="h6" paragraph>
+      <Typography color="info" variant="h6" paragraph>
         Head size H6
       </Typography>
-      <Typography variant="h7" paragraph>
+      <Typography
+        color={(theme) => theme.palette.error.dark}
+        variant="h7"
+        paragraph
+      >
         Head size H7
       </Typography>
-      <Typography variant="h8" paragraph>
+      <Typography color="textSecondary" variant="h8" paragraph>
         Head size H8
       </Typography>
       <Typography variant="h9" paragraph>
