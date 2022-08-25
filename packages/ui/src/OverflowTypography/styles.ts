@@ -6,7 +6,8 @@ import { OverflowedProps } from './OverflowTypography';
 export const OverflowTypographyWrapper = styled(Typography, {
   shouldForwardProp: (name) => name !== 'rowsCount',
 })<Required<OverflowedProps>>`
-  display: box;
+  /* stylelint-disable-next-line */
+  display: -webkit-box;
   max-width: 100%;
   overflow: hidden;
 
