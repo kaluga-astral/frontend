@@ -18,7 +18,9 @@ export const NavMenu = forwardRef<HTMLUListElement, NavMenuProps>(
     return (
       <List ref={ref} disablePadding>
         {items.map((item) => {
-          return <NavMenuItem collapsedIn={collapsedIn} item={item} />;
+          return (
+            <NavMenuItem key={item[0]} collapsedIn={collapsedIn} item={item} />
+          );
         })}
       </List>
     );
