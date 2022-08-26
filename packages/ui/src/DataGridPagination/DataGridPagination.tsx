@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { Pagination } from '../Pagination';
 import { PaginationProps } from '../Pagination';
 
-import { PaginationWrapper, Range } from './styled';
+import { PaginationWrapper, Range } from './styles';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
@@ -41,7 +41,7 @@ export const DataGridPagination = ({
   return (
     <PaginationWrapper className={className}>
       <Range variant="h6">{formattedRange}</Range>
-      <Pagination count={count} {...props} />
+      <Pagination count={count} page={page} {...props} />
     </PaginationWrapper>
   );
 };
