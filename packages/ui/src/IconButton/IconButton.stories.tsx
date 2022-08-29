@@ -8,7 +8,7 @@ import {
 
 import { Grid } from '../Grid';
 import { Typography } from '../Typography/Typography';
-import { StorybookExampleTemplate } from '../docs/StorybookExampleTemplate';
+import { StorybookExampleTemplate } from '../docs';
 
 import { IconButton } from './IconButton';
 
@@ -33,131 +33,143 @@ export const IconButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Contained"
-      subtitle={[
+      description={[
         'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
         'На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов.',
       ]}
-      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
     >
-      <IconButton variant="contained">
-        <PrintOutlineMd />
-      </IconButton>
-      <IconButton selected variant="contained">
-        <PrintOutlineMd />
-      </IconButton>
-      <IconButton disabled variant="contained">
-        <PrintOutlineMd />
-      </IconButton>
+      <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <IconButton variant="contained">
+          <PrintOutlineMd />
+        </IconButton>
+        <IconButton selected variant="contained">
+          <PrintOutlineMd />
+        </IconButton>
+        <IconButton disabled variant="contained">
+          <PrintOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
 
     <br />
 
     <StorybookExampleTemplate
       title="Light"
-      subtitle={[
+      description={[
         'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
       ]}
-      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
     >
-      <IconButton variant="light">
-        <EyeOutlineMd />
-      </IconButton>
-      <IconButton selected variant="light">
-        <EyeOutlineMd />
-      </IconButton>
-      <IconButton disabled variant="light">
-        <EyeOutlineMd />
-      </IconButton>
+      <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <IconButton variant="light">
+          <EyeOutlineMd />
+        </IconButton>
+        <IconButton selected variant="light">
+          <EyeOutlineMd />
+        </IconButton>
+        <IconButton disabled variant="light">
+          <EyeOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
 
     <br />
 
     <StorybookExampleTemplate
       title="Link"
-      subtitle={[
+      description={[
         'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
       ]}
-      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
     >
-      <IconButton variant="link">
-        <FilterOutlineMd />
-      </IconButton>
-      <IconButton selected variant="link">
-        <FilterOutlineMd />
-      </IconButton>
-      <IconButton disabled variant="link">
-        <FilterOutlineMd />
-      </IconButton>
+      <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <IconButton variant="link">
+          <FilterOutlineMd />
+        </IconButton>
+        <IconButton selected variant="link">
+          <FilterOutlineMd />
+        </IconButton>
+        <IconButton disabled variant="link">
+          <FilterOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
 
     <br />
 
     <StorybookExampleTemplate
       title="Text"
-      subtitle={['Кнопка требующая наименьшего внимания.']}
-      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
+      description={['Кнопка требующая наименьшего внимания.']}
     >
-      <IconButton variant="text">
-        <FilterOutlineMd />
-      </IconButton>
-      <IconButton selected variant="text">
-        <FilterOutlineMd />
-      </IconButton>
-      <IconButton disabled variant="text">
-        <FilterOutlineMd />
-      </IconButton>
+      <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <IconButton variant="text">
+          <FilterOutlineMd />
+        </IconButton>
+        <IconButton selected variant="text">
+          <FilterOutlineMd />
+        </IconButton>
+        <IconButton disabled variant="text">
+          <FilterOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
 
     <br />
 
     <StorybookExampleTemplate
       title="Размер кнопки"
-      subtitle={[
+      description={[
         'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
       ]}
-      gridProps={{
-        justifyContent: 'center',
-        autoFlow: 'column',
-        alignItems: 'center',
-      }}
     >
-      <IconButton size="medium" variant="light">
-        <DownloadOutlineMd />
-      </IconButton>
-      <IconButton size="large" variant="light">
-        <DownloadOutlineMd />
-      </IconButton>
+      <Grid
+        container
+        justifyContent="center"
+        autoFlow="column"
+        alignItems="center"
+        spacing={4}
+      >
+        <IconButton size="medium" variant="light">
+          <DownloadOutlineMd />
+        </IconButton>
+        <IconButton size="large" variant="light">
+          <DownloadOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
 
     <br />
 
     <StorybookExampleTemplate
       title="Эмоциональный оттенок"
-      subtitle={['К любой кнопке может быть добавлен эмоциональный оттенок.']}
-      gridProps={{
-        justifyContent: 'center',
-        templateColumns: 'repeat(3, 40px)',
-      }}
+      description={[
+        'К любой кнопке может быть добавлен эмоциональный оттенок.',
+      ]}
     >
-      <IconButton variant="contained" color="error">
-        <DownloadOutlineMd />
-      </IconButton>
-      <IconButton variant="contained" color="success">
-        <DownloadOutlineMd />
-      </IconButton>
-      <IconButton variant="contained" color="warning">
-        <DownloadOutlineMd />
-      </IconButton>
+      <Grid
+        container
+        justifyContent="center"
+        templateColumns="repeat(3, 40px)"
+        spacing={4}
+      >
+        <IconButton variant="contained" color="error">
+          <DownloadOutlineMd />
+        </IconButton>
+        <IconButton variant="contained" color="success">
+          <DownloadOutlineMd />
+        </IconButton>
+        <IconButton variant="contained" color="warning">
+          <DownloadOutlineMd />
+        </IconButton>
 
-      <IconButton variant="light" color="error">
-        <DownloadOutlineMd />
-      </IconButton>
-      <IconButton variant="light" color="success">
-        <DownloadOutlineMd />
-      </IconButton>
-      <IconButton variant="light" color="warning">
-        <DownloadOutlineMd />
-      </IconButton>
+        <IconButton variant="light" color="error">
+          <DownloadOutlineMd />
+        </IconButton>
+        <IconButton variant="light" color="success">
+          <DownloadOutlineMd />
+        </IconButton>
+        <IconButton variant="light" color="warning">
+          <DownloadOutlineMd />
+        </IconButton>
+      </Grid>
     </StorybookExampleTemplate>
   </Grid>
 );
