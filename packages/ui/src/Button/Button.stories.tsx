@@ -46,7 +46,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Contained"
-      description={[
+      descriptionList={[
         'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
         'На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов. Например, кнопки «Подключить» на карточках тарифов.',
         'Также кнопки используются в диалоговых окнах и в попапах, когда пользователю необходимо выбрать одно действие из нескольких альтернативных. Например, кнопка «Сохранить» или «Продолжить».',
@@ -70,7 +70,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Light"
-      description={[
+      descriptionList={[
         'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
       ]}
     >
@@ -94,7 +94,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Link"
-      description={[
+      descriptionList={[
         'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
       ]}
     >
@@ -118,7 +118,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Text"
-      description={['Кнопка требующая наименьшего внимания.']}
+      descriptionList={['Кнопка требующая наименьшего внимания.']}
     >
       <Grid container justifyContent="center" autoFlow="column" spacing={4}>
         <Button variant="text" fullWidth>
@@ -140,7 +140,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Кнопки с иконками"
-      description={[
+      descriptionList={[
         'Иногда для отображения действия на кнопку нужно добавить иконку. Также можно добавить бейдж.',
       ]}
     >
@@ -185,7 +185,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Размер кнопки"
-      description={[
+      descriptionList={[
         'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
       ]}
     >
@@ -209,7 +209,7 @@ export const ButtonShowcase: Story = () => (
 
     <StorybookExampleTemplate
       title="Эмоциональный оттенок"
-      description={[
+      descriptionList={[
         'К любой кнопке может быть добавлен эмоциональный оттенок.',
       ]}
     >

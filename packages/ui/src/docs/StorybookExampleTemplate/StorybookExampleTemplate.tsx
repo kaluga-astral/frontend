@@ -4,20 +4,20 @@ import { Typography } from '../../Typography';
 
 type StorybookExampleTemplateProps = {
   title: string;
-  description?: string[];
+  descriptionList?: string[];
   children: ReactNode;
 };
 
 export const StorybookExampleTemplate = ({
   title,
-  description = [],
+  descriptionList = [],
   children,
 }: StorybookExampleTemplateProps) => {
   const subtitles = useMemo(() => {
-    return description?.map((text) => (
+    return descriptionList?.map((text) => (
       <Typography paragraph>{text}</Typography>
     ));
-  }, [description]);
+  }, [descriptionList]);
 
   return (
     <>
