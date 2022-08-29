@@ -1,9 +1,13 @@
 import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
-import { CheckOutlineMd, LikeOutlineMd } from '@astral/icons';
+import { Badge } from '@mui/material';
+import {
+  ChevronDOutlineMd,
+  DialogOutlineMd,
+  LikeOutlineMd,
+} from '@astral/icons';
 
-import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
+import { Grid } from '../Grid';
 
 import { Button } from './Button';
 
@@ -12,276 +16,282 @@ export default {
   component: Button,
 };
 
-const svg = <LikeOutlineMd />;
-
 export const ButtonShowcase: Story = () => (
-  <Stack gap={4}>
-    <Typography variant="h3">Contained</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button>Label</Button>
-        <Button loading>Loading</Button>
-        <Button color="primary" variant="contained" size="large">
-          Large
-        </Button>
-        <Button color="primary" variant="contained" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="primary" variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button color="primary" variant="contained" selected>
-          Selected
-        </Button>
-        <IconButton color="primary" variant="contained" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="success" variant="contained">
-          Label
-        </Button>
-        <Button color="success" variant="contained" loading>
-          Loading
-        </Button>
-        <Button color="success" variant="contained" size="large">
-          Large
-        </Button>
-        <Button color="success" variant="contained" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="success" variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button color="success" variant="contained" selected>
-          Selected
-        </Button>
-        <IconButton color="success" variant="contained" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="warning" variant="contained">
-          Label
-        </Button>
-        <Button color="warning" variant="contained" loading>
-          Loading
-        </Button>
-        <Button color="warning" variant="contained" size="large">
-          Large
-        </Button>
-        <Button color="warning" variant="contained" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="warning" variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button color="warning" variant="contained" selected>
-          Selected
-        </Button>
-        <IconButton color="warning" variant="contained" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="error" variant="contained">
-          Label
-        </Button>
-        <Button color="error" variant="contained" loading>
-          Loading
-        </Button>
-        <Button color="error" variant="contained" size="large">
-          Large
-        </Button>
-        <Button color="error" variant="contained" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="error" variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button color="error" variant="contained" selected>
-          Selected
-        </Button>
-        <IconButton color="error" variant="contained" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Typography variant="h3">Light</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="primary" variant="light">
-          Label
-        </Button>
-        <Button color="primary" variant="light" loading>
-          Loading
-        </Button>
-        <Button color="primary" variant="light" size="large">
-          Large
-        </Button>
-        <Button color="primary" variant="light" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="primary" variant="light" disabled>
-          Disabled
-        </Button>
-        <Button color="primary" variant="light" selected>
-          Selected
-        </Button>
-        <IconButton color="primary" variant="light" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="success" variant="light">
-          Label
-        </Button>
-        <Button color="success" variant="light" loading>
-          Loading
-        </Button>
-        <Button color="success" variant="light" size="large">
-          Large
-        </Button>
-        <Button color="success" variant="light" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="success" variant="light" disabled>
-          Disabled
-        </Button>
-        <Button color="success" variant="light" selected>
-          Selected
-        </Button>
-        <IconButton color="success" variant="light" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="warning" variant="light">
-          Label
-        </Button>
-        <Button color="warning" variant="light" loading>
-          Loading
-        </Button>
-        <Button color="warning" variant="light" size="large">
-          Large
-        </Button>
-        <Button color="warning" variant="light" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="warning" variant="light" disabled>
-          Disabled
-        </Button>
-        <Button color="warning" variant="light" selected>
-          Selected
-        </Button>
-        <IconButton color="warning" variant="light" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Stack gap={1}>
-      <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="error" variant="light">
-          Label
-        </Button>
-        <Button color="error" variant="light" loading>
-          Loading
-        </Button>
-        <Button color="error" variant="light" size="large">
-          Large
-        </Button>
-        <Button color="error" variant="light" startIcon={svg}>
-          With icon
-        </Button>
-        <Button color="error" variant="light" disabled>
-          Disabled
-        </Button>
-        <Button color="error" variant="light" selected>
-          Selected
-        </Button>
-        <IconButton color="error" variant="light" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Typography variant="h3">Text</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button variant="text">Label</Button>
-        <Button variant="text" loading>
-          Loading
-        </Button>
-        <Button variant="text" size="large">
-          Large
-        </Button>
-        <Button variant="text" startIcon={svg}>
-          With icon
-        </Button>
-        <Button variant="text" disabled>
-          Disabled
-        </Button>
-        <Button variant="text" selected>
-          Selected
-        </Button>
-        <IconButton variant="text" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-
-    <Typography variant="h3">Link</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button variant="link">Label</Button>
-        <Button variant="link" loading>
-          Loading
-        </Button>
-        <Button variant="link" size="large">
-          Large
-        </Button>
-        <Button variant="link" startIcon={svg}>
-          With icon
-        </Button>
-        <Button variant="link" disabled>
-          Disabled
-        </Button>
-        <Button variant="link" selected>
-          Selected
-        </Button>
-        <IconButton variant="link" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-  </Stack>
+  <Grid>
+    <Typography paragraph variant="h3">
+      Buttons
+    </Typography>
+    <Typography paragraph>
+      Кнопки позволяют пользователям выполнять действия и делать выбор одним
+      нажатием.
+    </Typography>
+    <Typography>
+      Кнопки обозначают действия, которые могут выполнять пользователи. Они
+      используются в таких местах пользовательского интерфейса, как:
+    </Typography>
+    <ul>
+      <li>Диалоги</li>
+      <li>Всплывающие окно</li>
+      <li>Формы</li>
+      <li>Карточки</li>
+      <li>Панели инструментов</li>
+    </ul>
+    <br />
+    <Typography variant="h4" paragraph>
+      Типы кнопок
+    </Typography>
+    <Typography variant="h5" paragraph>
+      Contained
+    </Typography>
+    <Typography paragraph>
+      Используется, когда необходимо обозначить ключевое или стартовое действие
+      на странице. Например, начать заполнение формы или завершить работу с ней.
+    </Typography>
+    <Typography paragraph>
+      На одной странице не может находиться свыше одной акцентной кнопки.
+      Исключение — акцентные кнопки с одинаковым действием в ряду однородных,
+      равнозначных элементов. Например, кнопки «Подключить» на карточках
+      тарифов.
+    </Typography>
+    <Typography paragraph>
+      Также кнопки используются в диалоговых окнах и в попапах, когда
+      пользователю необходимо выбрать одно действие из нескольких
+      альтернативных. Например, кнопка «Сохранить» или «Продолжить».
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
+        <Grid column="3">
+          <Button fullWidth>Default</Button>
+        </Grid>
+        <Grid column="4">
+          <Button loading fullWidth>
+            Loading
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button selected fullWidth>
+            Selected
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button disabled fullWidth>
+            Disabled
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Light
+    </Typography>
+    <Typography paragraph>
+      Кнопка может помещаться на одной строке с другими компонентами и не
+      предполагает привлечения обязательного внимания всех пользователей. При
+      взаимодействии со страницей часть пользователей не воспользуется кнопкой,
+      но она может быть нужна определенной группе пользователей.
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
+        <Grid column="3">
+          <Button variant="light" fullWidth>
+            Default
+          </Button>
+        </Grid>
+        <Grid column="4">
+          <Button variant="light" loading fullWidth>
+            Loading
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button variant="light" selected fullWidth>
+            Selected
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button variant="light" disabled fullWidth>
+            Disabled
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Link
+    </Typography>
+    <Typography paragraph>
+      Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях
+      открывает окно браузера.
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
+        <Grid column="3">
+          <Button variant="link" fullWidth>
+            Default
+          </Button>
+        </Grid>
+        <Grid column="4">
+          <Button variant="link" loading fullWidth>
+            Loading
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button variant="link" selected fullWidth>
+            Selected
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button variant="link" disabled fullWidth>
+            Disabled
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Text
+    </Typography>
+    <Typography paragraph>Кнопка требующая наименьшего внимания.</Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
+        <Grid column="3">
+          <Button variant="text" fullWidth>
+            Default
+          </Button>
+        </Grid>
+        <Grid column="4">
+          <Button variant="text" loading fullWidth>
+            Loading
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button variant="text" selected fullWidth>
+            Selected
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button variant="text" disabled fullWidth>
+            Disabled
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Кнопки с иконками
+    </Typography>
+    <Typography paragraph>
+      Иногда для отображения действия на кнопку нужно добавить иконку. Также
+      можно добавить бейдж.
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
+        <Grid column="3">
+          <Button startIcon={<LikeOutlineMd />} variant="light" fullWidth>
+            Before
+          </Button>
+        </Grid>
+        <Grid column="4">
+          <Button endIcon={<DialogOutlineMd />} variant="light" fullWidth>
+            After
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button
+            startIcon={<DialogOutlineMd />}
+            endIcon={<ChevronDOutlineMd />}
+            variant="light"
+            fullWidth
+          >
+            Before & After
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button
+            variant="light"
+            fullWidth
+            endIcon={
+              <Badge
+                badgeContent={12}
+                color="error"
+                children={'\u00A0'}
+                style={{ marginTop: 23, marginLeft: 8 }}
+              />
+            }
+          >
+            Badge
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Размер кнопки
+    </Typography>
+    <Typography paragraph>
+      Существует 2 стандартных размера кноки: большой и стандартный. Большая
+      используется для промостраниц и сайтов, стандартная в интерфейсах.
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid
+        container
+        templateColumns="repeat(10, 1fr)"
+        spacing={4}
+        alignItems="center"
+      >
+        <Grid column="5">
+          <Button size="medium" variant="light" fullWidth>
+            Medium
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button size="large" variant="light" fullWidth>
+            Large
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+    <br />
+    <Typography variant="h5" paragraph>
+      Эмоциональный оттенок
+    </Typography>
+    <Typography paragraph>
+      К любой кнопке может быть добавлен эмоциональный оттенок.
+    </Typography>
+    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
+      <Grid container templateColumns="repeat(11, 1fr)" spacing={4}>
+        <Grid column="5">
+          <Button color="error" variant="contained" fullWidth>
+            Error
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button color="success" variant="contained" fullWidth>
+            Success
+          </Button>
+        </Grid>
+        <Grid column="7">
+          <Button color="warning" variant="contained" fullWidth>
+            Warning
+          </Button>
+        </Grid>
+        <Grid column="5">
+          <Button color="error" variant="light" fullWidth>
+            Error
+          </Button>
+        </Grid>
+        <Grid column="6">
+          <Button color="success" variant="light" fullWidth>
+            Success
+          </Button>
+        </Grid>
+        <Grid column="7">
+          <Button color="warning" variant="light" fullWidth>
+            Warning
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+  </Grid>
 );
 
 ButtonShowcase.parameters = { options: { showPanel: false } };
