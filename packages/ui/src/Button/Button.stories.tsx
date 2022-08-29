@@ -8,6 +8,7 @@ import {
 
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
+import { StorybookExampleTemplate } from '../docs/StorybookExampleTemplate';
 
 import { Button } from './Button';
 
@@ -36,261 +37,193 @@ export const ButtonShowcase: Story = () => (
       <li>Карточки</li>
       <li>Панели инструментов</li>
     </ul>
+
     <br />
+
     <Typography variant="h4" paragraph>
       Типы кнопок
     </Typography>
-    <Typography variant="h5" paragraph>
-      Contained
-    </Typography>
-    <Typography paragraph>
-      Используется, когда необходимо обозначить ключевое или стартовое действие
-      на странице. Например, начать заполнение формы или завершить работу с ней.
-    </Typography>
-    <Typography paragraph>
-      На одной странице не может находиться свыше одной акцентной кнопки.
-      Исключение — акцентные кнопки с одинаковым действием в ряду однородных,
-      равнозначных элементов. Например, кнопки «Подключить» на карточках
-      тарифов.
-    </Typography>
-    <Typography paragraph>
-      Также кнопки используются в диалоговых окнах и в попапах, когда
-      пользователю необходимо выбрать одно действие из нескольких
-      альтернативных. Например, кнопка «Сохранить» или «Продолжить».
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
-        <Grid column="3">
-          <Button fullWidth>Default</Button>
-        </Grid>
-        <Grid column="4">
-          <Button loading fullWidth>
-            Loading
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button selected fullWidth>
-            Selected
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button disabled fullWidth>
-            Disabled
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+
+    <StorybookExampleTemplate
+      title="Contained"
+      subtitle={[
+        'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
+        'На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов. Например, кнопки «Подключить» на карточках тарифов.',
+        'Также кнопки используются в диалоговых окнах и в попапах, когда пользователю необходимо выбрать одно действие из нескольких альтернативных. Например, кнопка «Сохранить» или «Продолжить».',
+      ]}
+      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
+    >
+      <Button fullWidth>Default</Button>
+      <Button loading fullWidth>
+        Loading
+      </Button>
+      <Button selected fullWidth>
+        Selected
+      </Button>
+      <Button disabled fullWidth>
+        Disabled
+      </Button>
+    </StorybookExampleTemplate>
+
     <br />
-    <Typography variant="h5" paragraph>
-      Light
-    </Typography>
-    <Typography paragraph>
-      Кнопка может помещаться на одной строке с другими компонентами и не
-      предполагает привлечения обязательного внимания всех пользователей. При
-      взаимодействии со страницей часть пользователей не воспользуется кнопкой,
-      но она может быть нужна определенной группе пользователей.
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
-        <Grid column="3">
-          <Button variant="light" fullWidth>
-            Default
-          </Button>
-        </Grid>
-        <Grid column="4">
-          <Button variant="light" loading fullWidth>
-            Loading
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button variant="light" selected fullWidth>
-            Selected
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button variant="light" disabled fullWidth>
-            Disabled
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+
+    <StorybookExampleTemplate
+      title="Light"
+      subtitle={[
+        'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
+      ]}
+      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
+    >
+      <Button variant="light" fullWidth>
+        Default
+      </Button>
+      <Button variant="light" loading fullWidth>
+        Loading
+      </Button>
+      <Button variant="light" selected fullWidth>
+        Selected
+      </Button>
+      <Button variant="light" disabled fullWidth>
+        Disabled
+      </Button>
+    </StorybookExampleTemplate>
+
     <br />
-    <Typography variant="h5" paragraph>
-      Link
-    </Typography>
-    <Typography paragraph>
-      Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях
-      открывает окно браузера.
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
-        <Grid column="3">
-          <Button variant="link" fullWidth>
-            Default
-          </Button>
-        </Grid>
-        <Grid column="4">
-          <Button variant="link" loading fullWidth>
-            Loading
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button variant="link" selected fullWidth>
-            Selected
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button variant="link" disabled fullWidth>
-            Disabled
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+
+    <StorybookExampleTemplate
+      title="Link"
+      subtitle={[
+        'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
+      ]}
+      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
+    >
+      <Button variant="link" fullWidth>
+        Default
+      </Button>
+      <Button variant="link" loading fullWidth>
+        Loading
+      </Button>
+      <Button variant="link" selected fullWidth>
+        Selected
+      </Button>
+      <Button variant="link" disabled fullWidth>
+        Disabled
+      </Button>
+    </StorybookExampleTemplate>
+
     <br />
-    <Typography variant="h5" paragraph>
-      Text
-    </Typography>
-    <Typography paragraph>Кнопка требующая наименьшего внимания.</Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
-        <Grid column="3">
-          <Button variant="text" fullWidth>
-            Default
-          </Button>
-        </Grid>
-        <Grid column="4">
-          <Button variant="text" loading fullWidth>
-            Loading
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button variant="text" selected fullWidth>
-            Selected
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button variant="text" disabled fullWidth>
-            Disabled
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+
+    <StorybookExampleTemplate
+      title="Text"
+      subtitle={['Кнопка требующая наименьшего внимания.']}
+      gridProps={{ justifyContent: 'center', autoFlow: 'column' }}
+    >
+      <Button variant="text" fullWidth>
+        Default
+      </Button>
+      <Button variant="text" loading fullWidth>
+        Loading
+      </Button>
+      <Button variant="text" selected fullWidth>
+        Selected
+      </Button>
+      <Button variant="text" disabled fullWidth>
+        Disabled
+      </Button>
+    </StorybookExampleTemplate>
+
     <br />
-    <Typography variant="h5" paragraph>
-      Кнопки с иконками
-    </Typography>
-    <Typography paragraph>
-      Иногда для отображения действия на кнопку нужно добавить иконку. Также
-      можно добавить бейдж.
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(8, 1fr)" spacing={4}>
-        <Grid column="3">
-          <Button startIcon={<LikeOutlineMd />} variant="light" fullWidth>
-            Before
-          </Button>
-        </Grid>
-        <Grid column="4">
-          <Button endIcon={<DialogOutlineMd />} variant="light" fullWidth>
-            After
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button
-            startIcon={<DialogOutlineMd />}
-            endIcon={<ChevronDOutlineMd />}
-            variant="light"
-            fullWidth
-          >
-            Before & After
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button
-            variant="light"
-            fullWidth
-            endIcon={
-              <Badge
-                badgeContent={12}
-                color="error"
-                children={'\u00A0'}
-                style={{ marginTop: 23, marginLeft: 8 }}
-              />
-            }
-          >
-            Badge
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
-    <br />
-    <Typography variant="h5" paragraph>
-      Размер кнопки
-    </Typography>
-    <Typography paragraph>
-      Существует 2 стандартных размера кноки: большой и стандартный. Большая
-      используется для промостраниц и сайтов, стандартная в интерфейсах.
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid
-        container
-        templateColumns="repeat(10, 1fr)"
-        spacing={4}
-        alignItems="center"
+
+    <StorybookExampleTemplate
+      title="Кнопки с иконками"
+      subtitle={[
+        'Иногда для отображения действия на кнопку нужно добавить иконку. Также можно добавить бейдж.',
+      ]}
+      gridProps={{
+        justifyContent: 'center',
+        templateColumns: 'repeat(auto-fit, 200px)',
+      }}
+    >
+      <Button startIcon={<LikeOutlineMd />} variant="light" fullWidth>
+        Before
+      </Button>
+      <Button endIcon={<DialogOutlineMd />} variant="light" fullWidth>
+        After
+      </Button>
+      <Button
+        startIcon={<DialogOutlineMd />}
+        endIcon={<ChevronDOutlineMd />}
+        variant="light"
+        fullWidth
       >
-        <Grid column="5">
-          <Button size="medium" variant="light" fullWidth>
-            Medium
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button size="large" variant="light" fullWidth>
-            Large
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+        Before & After
+      </Button>
+      <Button
+        variant="light"
+        fullWidth
+        endIcon={
+          <Badge
+            badgeContent={12}
+            color="error"
+            children={<span style={{ width: 10 }} />}
+            style={{ marginLeft: 2, marginRight: 15 }}
+          />
+        }
+      >
+        Badge
+      </Button>
+    </StorybookExampleTemplate>
+
     <br />
-    <Typography variant="h5" paragraph>
-      Эмоциональный оттенок
-    </Typography>
-    <Typography paragraph>
-      К любой кнопке может быть добавлен эмоциональный оттенок.
-    </Typography>
-    <div style={{ padding: '32px 0', background: '#FAFBFC' }}>
-      <Grid container templateColumns="repeat(11, 1fr)" spacing={4}>
-        <Grid column="5">
-          <Button color="error" variant="contained" fullWidth>
-            Error
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button color="success" variant="contained" fullWidth>
-            Success
-          </Button>
-        </Grid>
-        <Grid column="7">
-          <Button color="warning" variant="contained" fullWidth>
-            Warning
-          </Button>
-        </Grid>
-        <Grid column="5">
-          <Button color="error" variant="light" fullWidth>
-            Error
-          </Button>
-        </Grid>
-        <Grid column="6">
-          <Button color="success" variant="light" fullWidth>
-            Success
-          </Button>
-        </Grid>
-        <Grid column="7">
-          <Button color="warning" variant="light" fullWidth>
-            Warning
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+
+    <StorybookExampleTemplate
+      title="Размер кнопки"
+      subtitle={[
+        'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
+      ]}
+      gridProps={{
+        justifyContent: 'center',
+        autoFlow: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Button size="medium" variant="light" fullWidth>
+        Medium
+      </Button>
+      <Button size="large" variant="light" fullWidth>
+        Large
+      </Button>
+    </StorybookExampleTemplate>
+
+    <br />
+
+    <StorybookExampleTemplate
+      title="Эмоциональный оттенок"
+      subtitle={['К любой кнопке может быть добавлен эмоциональный оттенок.']}
+      gridProps={{
+        justifyContent: 'center',
+        templateColumns: 'repeat(3, 100px)',
+      }}
+    >
+      <Button color="error" variant="contained" fullWidth>
+        Error
+      </Button>
+      <Button color="success" variant="contained" fullWidth>
+        Success
+      </Button>
+      <Button color="warning" variant="contained" fullWidth>
+        Warning
+      </Button>
+      <Button color="error" variant="light" fullWidth>
+        Error
+      </Button>
+      <Button color="success" variant="light" fullWidth>
+        Success
+      </Button>
+      <Button color="warning" variant="light" fullWidth>
+        Warning
+      </Button>
+    </StorybookExampleTemplate>
   </Grid>
 );
 
