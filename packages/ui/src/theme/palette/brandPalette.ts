@@ -39,6 +39,19 @@ const edoPalette: BrandColors = {
   100: '#EFEBFF',
 };
 
+const kedoPalette: BrandColors = {
+  secondary: '#5653FF',
+  900: '#5D3FD4',
+  800: '#6746EB',
+  700: '#8566FF',
+  600: '#9075FF',
+  500: '#9D85FF',
+  400: '#B29EFF',
+  300: '#C2B2FF',
+  200: '#E0D9FF',
+  100: '#EFEBFF',
+};
+
 const ao5Palette: BrandColors = {
   secondary: '#14A5D3',
   900: '#0068B2',
@@ -95,7 +108,7 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
   [Brand.EDO]: edoPalette,
-  [Brand.KEDO]: edoPalette,
+  [Brand.KEDO]: kedoPalette,
   [Brand.OFD]: ofdPalette,
   [Brand.SIGN]: signPalette,
   [Brand.LKP]: lkpPalette,
