@@ -62,11 +62,6 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
-  notify:
-    name: notify
-    needs: releasePackages
-    runs-on: ubuntu-latest
-    steps:
       - name: send telegram message on release
         uses: appleboy/telegram-action@master
         with:
