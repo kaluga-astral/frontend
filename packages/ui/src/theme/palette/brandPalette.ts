@@ -95,6 +95,7 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
   [Brand.EDO]: edoPalette,
+  [Brand.KEDO]: edoPalette,
   [Brand.OFD]: ofdPalette,
   [Brand.SIGN]: signPalette,
   [Brand.LKP]: lkpPalette,
