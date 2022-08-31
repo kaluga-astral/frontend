@@ -5,7 +5,7 @@ const getDirNames = require('read-dir-names');
 
 const packagesNames = getDirNames(path.resolve(__dirname, 'packages'));
 const componentsNames = getDirNames(
-  path.resolve(__dirname, 'packages', 'ui', 'src')
+  path.resolve(__dirname, 'packages', 'ui', 'src'),
 );
 
 module.exports = createConfig({
