@@ -24,12 +24,12 @@ jobs:
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: semantic-release
 
       - name: Build @astral/ui
         run: npm run build --workspace=@astral/ui
         env:
-          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+          # NEXT_VERSION устанавливается в semantic-release.config.js
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/ui
         run: npm publish ./packages/ui/lib
         env:
@@ -38,7 +38,7 @@ jobs:
       - name: Build @astral/icons
         run: npm run build --workspace=@astral/icons
         env:
-          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/icons
         run: npm publish ./packages/icons/lib
         env:
@@ -47,7 +47,7 @@ jobs:
       - name: Build @astral/fonts
         run: npm run build --workspace=@astral/fonts
         env:
-          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/fonts
         run: npm publish ./packages/fonts/lib
         env:
@@ -56,8 +56,36 @@ jobs:
       - name: Build @astral/illustrations
         run: npm run build --workspace=@astral/illustrations
         env:
-          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/illustrations
         run: npm publish ./packages/illustrations/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+  notify:
+    name: notify
+    needs: releasePackages
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on release
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_RELEASE_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            🚀 <b>Были опубликованы новые версии пакетов ui-kit !</b>
+
+            Опубликованные пакеты:
+
+            📦  @astral/ui: ${{ env.NEXT_VERSION }}
+            📦  @astral/fonts: ${{ env.NEXT_VERSION }}
+            📦  @astral/icons: ${{ env.NEXT_VERSION }}
+            📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
+            📦  @astral/form: ${{ env.NEXT_VERSION }}
+
+            ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
+
+            ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
+
+            ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти <a href="${{ github.event.repository.html_url }}">здесь</a>. Любой желающий может внести свой вклад в развитие проекта.
