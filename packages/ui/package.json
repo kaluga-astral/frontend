@@ -32,7 +32,8 @@
     "nanoid": "^4.0.0",
     "react-datepicker": "4.7.0",
     "react-imask": "^6.4.2",
-    "react-toastify": "9.0.3"
+    "react-toastify": "9.0.3",
+    "react-use": "^17.4.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"

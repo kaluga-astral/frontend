@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import debounce from 'lodash-es/debounce';
+import { debounce } from 'lodash-es';
 
 export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
   const localRef = useRef<HTMLElement>(null);

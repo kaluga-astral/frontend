@@ -4,9 +4,4 @@ node_modules
 storybook-static
 
 /.idea/*
-/.yarn/*
-!/.yarn/patches
-!/.yarn/plugins
-!/.yarn/releases
-!/.yarn/sdks
-!/.yarn/cache
+yarn-error.log

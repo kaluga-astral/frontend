@@ -8,6 +8,8 @@ export * from './Badge';
 
 export * from './Button';
 
+export * from './Divider';
+
 export * from './ButtonBase';
 
 export * from './Checkbox';
