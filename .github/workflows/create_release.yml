@@ -23,4 +23,41 @@ jobs:
       - name: Generate release
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.AUTOMERGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: semantic-release
+
+      - name: Build @astral/ui
+        run: npm run build --workspace=@astral/ui
+        env:
+          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+      - name: Publish @astral/ui
+        run: npm publish ./packages/ui/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Build @astral/icons
+        run: npm run build --workspace=@astral/icons
+        env:
+          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+      - name: Publish @astral/icons
+        run: npm publish ./packages/icons/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Build @astral/fonts
+        run: npm run build --workspace=@astral/fonts
+        env:
+          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+      - name: Publish @astral/fonts
+        run: npm publish ./packages/fonts/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Build @astral/illustrations
+        run: npm run build --workspace=@astral/illustrations
+        env:
+          RELEASE_TAG: ${{ steps.semantic-release.outputs.NEXT_VERSION }}
+      - name: Publish @astral/illustrations
+        run: npm publish ./packages/illustrations/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

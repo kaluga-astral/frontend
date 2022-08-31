@@ -42,5 +42,13 @@ module.exports = {
       },
     ],
     ['@semantic-release/github'],
+    [
+      '@semantic-release/exec',
+      {
+        // добавляем в outputs gh actions следущую версию пакетов
+        prepareCmd:
+          'echo "::set-output name=NEXT_VERSION::${nextRelease.version}"',
+      },
+    ],
   ],
 };
