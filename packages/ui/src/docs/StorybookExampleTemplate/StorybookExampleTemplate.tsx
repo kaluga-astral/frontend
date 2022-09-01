@@ -14,8 +14,10 @@ export const StorybookExampleTemplate = ({
   children,
 }: StorybookExampleTemplateProps) => {
   const subtitles = useMemo(() => {
-    return descriptionList?.map((text) => (
-      <Typography paragraph>{text}</Typography>
+    return descriptionList?.map((text, index) => (
+      <Typography key={index} paragraph>
+        {text}
+      </Typography>
     ));
   }, [descriptionList]);
 
@@ -25,7 +27,16 @@ export const StorybookExampleTemplate = ({
         {title}
       </Typography>
       {subtitles}
-      <div style={{ padding: '32px 0', background: '#FAFBFC' }}>{children}</div>
+      <div
+        style={{
+          padding: '32px 0',
+          background: '#FAFBFC',
+          border: '1px solid #DDE2E8',
+          borderRadius: 3,
+        }}
+      >
+        {children}
+      </div>
     </>
   );
 };
