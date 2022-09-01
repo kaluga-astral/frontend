@@ -37,6 +37,10 @@ export const themes = [
     theme: createTheme({ brand: Brand.EDO, fontsUrls })
   },
   {
+    name: 'Astral.kedo',
+    theme: createTheme({ brand: Brand.KEDO, fontsUrls })
+  },
+  {
     name: 'Astral.lkp',
     theme: createTheme({ brand: Brand.LKP, fontsUrls })
   },
