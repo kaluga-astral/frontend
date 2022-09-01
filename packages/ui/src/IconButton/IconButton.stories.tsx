@@ -113,6 +113,7 @@ export const IconButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <StorybookExampleTemplate
         title="Light"
@@ -133,6 +134,7 @@ export const IconButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -155,6 +157,7 @@ export const IconButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <StorybookExampleTemplate
         title="Text"
@@ -173,6 +176,7 @@ export const IconButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -197,6 +201,7 @@ export const IconButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -233,6 +238,7 @@ export const IconButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <Typography variant="h5" paragraph>

@@ -5,6 +5,7 @@ import {
   DialogOutlineMd,
   LikeOutlineMd,
 } from '@astral/icons';
+import { useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
@@ -24,6 +25,17 @@ export default {
 export const ButtonShowcase: Story = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('lg'));
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [loading]);
+
+  const handleClick = () => setLoading(true);
 
   return (
     <div style={{ width: matches ? '100%' : '70%' }}>
@@ -46,6 +58,7 @@ export const ButtonShowcase: Story = () => {
         <li>Панели инструментов</li>
       </ul>
 
+      <br />
       <br />
 
       <Typography variant="h4" paragraph>
@@ -75,6 +88,7 @@ export const ButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <StorybookExampleTemplate
         title="Light"
@@ -98,6 +112,7 @@ export const ButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -123,6 +138,7 @@ export const ButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <StorybookExampleTemplate
         title="Text"
@@ -144,6 +160,7 @@ export const ButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -190,6 +207,7 @@ export const ButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <StorybookExampleTemplate
         title="Размер кнопки"
@@ -213,6 +231,7 @@ export const ButtonShowcase: Story = () => {
         </Grid>
       </StorybookExampleTemplate>
 
+      <br />
       <br />
 
       <StorybookExampleTemplate
@@ -249,6 +268,7 @@ export const ButtonShowcase: Story = () => {
       </StorybookExampleTemplate>
 
       <br />
+      <br />
 
       <Typography variant="h5" paragraph>
         Пример использования
@@ -261,7 +281,9 @@ export const ButtonShowcase: Story = () => {
         </DialogContent>
         <DialogActions>
           <Button variant="text">Отмена</Button>
-          <Button>Продолджить</Button>
+          <Button loading={loading} onClick={handleClick}>
+            Продолджить
+          </Button>
         </DialogActions>
       </Paper>
     </div>
