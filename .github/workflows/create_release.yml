@@ -66,6 +66,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/illustrations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/illustrations/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
