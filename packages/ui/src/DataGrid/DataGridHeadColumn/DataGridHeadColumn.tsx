@@ -1,11 +1,11 @@
 import { CSSProperties, useMemo } from 'react';
 import { TableCellProps } from '@mui/material';
+import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
-import { Typography } from '../../Typography/Typography';
 import { SortStates } from '../constants';
 import { DataGridRow, DataGridSort } from '../types';
 
-import { StyledTableCell, StyledTableSortLabel } from './styled';
+import { StyledTableCell, TableCellTitle } from './styles';
 
 export type DataGridHeadColumnProps<
   Data = DataGridRow,
@@ -33,11 +33,21 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
     () => sorting.find(({ fieldId }) => field === fieldId),
     [sorting, field],
   );
-  const hideSortIcon = useMemo(() => !Boolean(sortParams), [sortParams]);
-  const sortDirection = useMemo(
-    () => (sortParams ? sortParams.sort : SortStates.ASC),
-    [sortParams],
-  );
+
+  const sortIcon = useMemo(() => {
+    if (!sortable) {
+      return null;
+    }
+
+    switch (sortParams?.sort) {
+      case SortStates.ASC:
+        return <SortUpFillSm color="primary" />;
+      case SortStates.DESC:
+        return <SortDownFillSm color="primary" />;
+      default:
+        return <SortFillSm />;
+    }
+  }, [sortParams, sortable]);
 
   const handleSortClick = () => {
     if (field && sortable) {
@@ -52,14 +62,10 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
       width={width}
       sortable={sortable}
     >
-      <Typography variant="pointer">{label}</Typography>
-      {sortable && (
-        <StyledTableSortLabel
-          hideSortIcon={hideSortIcon}
-          direction={sortDirection}
-          active
-        />
-      )}
+      <TableCellTitle variant="pointer">
+        {label}
+        {sortIcon}
+      </TableCellTitle>
     </StyledTableCell>
   );
 }

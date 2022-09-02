@@ -5,7 +5,7 @@ import { Table } from '../Table';
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
-import { DataGridContainer, StyledTableContainer } from './styled';
+import { DataGridContainer, StyledTableContainer } from './styles';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<

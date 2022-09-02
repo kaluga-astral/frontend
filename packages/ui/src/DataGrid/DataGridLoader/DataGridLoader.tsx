@@ -3,7 +3,7 @@ import {
   LoaderWrapper,
   StyledDivider,
   StyledLinearProgress,
-} from './styled';
+} from './styles';
 
 export type DataGridLoaderProps = {
   loading?: boolean;
