@@ -11,7 +11,7 @@ type StyledTableCellProps = TableCellProps & {
 };
 
 export const StyledTableCell = styled(TableCell, {
-  shouldForwardProp: (prop) => prop !== 'width',
+  shouldForwardProp: (prop) => prop !== 'width' && prop !== 'sortable',
 })<StyledTableCellProps>`
   width: ${({ width = 'auto' }) => width};
   padding: ${({ theme }) => theme.spacing(3, 4)};

@@ -12,7 +12,7 @@ export type DataGridHeadColumnProps<
   SortField extends keyof Data = keyof Data,
 > = {
   onSort: (field: SortField) => void;
-  sorting: DataGridSort<SortField>[];
+  sorting?: DataGridSort<SortField>;
   label?: string;
   sortable?: boolean;
   align?: TableCellProps['align'];
@@ -29,17 +29,16 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
   sorting,
   width,
 }: DataGridHeadColumnProps<Data, SortField>) {
-  const sortParams = useMemo(
-    () => sorting.find(({ fieldId }) => field === fieldId),
-    [sorting, field],
-  );
-
   const sortIcon = useMemo(() => {
     if (!sortable) {
       return null;
     }
 
-    switch (sortParams?.sort) {
+    if (sorting?.fieldId !== field) {
+      return <SortFillSm />;
+    }
+
+    switch (sorting?.sort) {
       case SortStates.ASC:
         return <SortUpFillSm color="primary" />;
       case SortStates.DESC:
@@ -47,7 +46,7 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
       default:
         return <SortFillSm />;
     }
-  }, [sortParams, sortable]);
+  }, [sorting, sortable, field]);
 
   const handleSortClick = () => {
     if (field && sortable) {

@@ -44,15 +44,15 @@ export type DataGridProps<
    */
   onSelectRow?: (row: Data[]) => void;
   /**
-   * @example <DataGrid sorting={[{fieldId: 'test', sort: 'asc'}]} />
+   * @example <DataGrid sorting={{fieldId: 'test', sort: 'asc'}} />
    * Массив сортируемых колонок
    */
-  sorting?: DataGridSort<SortField>[];
+  sorting?: DataGridSort<SortField>;
   /**
    * @example <DataGrid onSort={({fieldId: 'test', sort: 'asc'}) => console.log('sorted')} />
    * Обработчик сортировки
    */
-  onSort?: (sorting: DataGridSort<SortField>[]) => void;
+  onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
   /**
    * @example <DataGrid  Footer={<DataGridPagination />} />
    * Компонент кастомного футера (н-р Pagination)
@@ -89,7 +89,7 @@ export function DataGrid<
   columns,
   rows = [],
   selectedRows = [],
-  sorting = [],
+  sorting,
   maxHeight,
   minDisplayRows = 10,
   onRowClick,
