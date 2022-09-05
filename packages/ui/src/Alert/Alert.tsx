@@ -29,7 +29,7 @@ export type AlertProps = Omit<
    *   <>
    *     <button>действие 1</button>
    *     <button>действие 2</button>
-   *   </button>
+   *   </>
    * }>Сообщение</Alert>
    * Используется для отображения набора действий
    */
