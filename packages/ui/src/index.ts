@@ -1,5 +1,7 @@
 export * from './ActionCell';
 
+export * from './Alert';
+
 export * from './Autocomplete';
 
 export * from './Badge';

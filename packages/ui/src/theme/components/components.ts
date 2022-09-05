@@ -3,6 +3,7 @@ import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 
+import { MuiAlert } from './MuiAlert';
 import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
 import { MuiLoadingButton } from './MuiLoadingButton';
@@ -95,6 +96,7 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiAlert,
   MuiButton,
   MuiButtonBase,
   MuiLoadingButton,
