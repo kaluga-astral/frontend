@@ -27,7 +27,7 @@ export const TableCellTitle = styled(Typography)`
   display: flex;
   align-items: center;
 
-  .MuiSvgIcon-root {
+  > svg {
     width: 16px;
     height: 16px;
   }
