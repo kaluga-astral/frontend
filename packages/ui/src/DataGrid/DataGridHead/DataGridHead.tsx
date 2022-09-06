@@ -14,8 +14,8 @@ export type DataGridHeadProps<
   columns: DataGridColumns<Data>[];
   selectable: boolean;
   onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
-  sorting: DataGridSort<SortField>[];
-  onSort?: (sorting: DataGridSort<SortField>[]) => void;
+  sorting?: DataGridSort<SortField>;
+  onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
   uncheckedRowsCount: number;
   rowsCount: number;
 };
@@ -26,7 +26,7 @@ export function DataGridHead<Data, SortField extends keyof Data>({
   onSelectAllRows,
   rowsCount,
   onSort,
-  sorting = [],
+  sorting,
   uncheckedRowsCount,
 }: DataGridHeadProps<Data, SortField>) {
   const checked = useMemo(
@@ -45,25 +45,20 @@ export function DataGridHead<Data, SortField extends keyof Data>({
         return;
       }
 
-      const currentSort = sorting.find(({ fieldId }) => fieldId === field);
+      const isCurrentField = sorting?.fieldId === field;
 
       // если для выбранного столбца текущая сортировка ASC - меняем на DESC
-      if (currentSort && currentSort.sort === SortStates.ASC) {
-        const newSorting = [
-          ...sorting.filter(({ fieldId }) => fieldId !== field),
-          { fieldId: field, sort: SortStates.DESC },
-        ];
+      if (isCurrentField && sorting.sort === SortStates.ASC) {
+        return onSort({ fieldId: field, sort: SortStates.DESC });
+      }
 
-        return onSort(newSorting);
-        // если для выбранного столбца текущая сортировка DESC - убираем сортировку
-      } else if (currentSort && currentSort.sort === SortStates.DESC) {
-        const newSorting = sorting.filter(({ fieldId }) => fieldId !== field);
-
-        return onSort(newSorting);
+      // если для выбранного столбца текущая сортировка DESC - убираем сортировку
+      if (isCurrentField && sorting.sort === SortStates.DESC) {
+        return onSort(undefined);
       }
 
       // если для выбранного столбца нет сортировки - добавляем сортировку ASC
-      onSort([...sorting, { fieldId: field, sort: SortStates.ASC }]);
+      onSort({ fieldId: field, sort: SortStates.ASC });
     },
     [sorting, onSort],
   );

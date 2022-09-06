@@ -1,18 +1,18 @@
 import { CSSProperties, useMemo } from 'react';
 import { TableCellProps } from '@mui/material';
+import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
-import { Typography } from '../../Typography/Typography';
 import { SortStates } from '../constants';
 import { DataGridRow, DataGridSort } from '../types';
 
-import { StyledTableCell, StyledTableSortLabel } from './styled';
+import { StyledTableCell, TableCellTitle } from './styles';
 
 export type DataGridHeadColumnProps<
   Data = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
   onSort: (field: SortField) => void;
-  sorting: DataGridSort<SortField>[];
+  sorting?: DataGridSort<SortField>;
   label?: string;
   sortable?: boolean;
   align?: TableCellProps['align'];
@@ -29,15 +29,24 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
   sorting,
   width,
 }: DataGridHeadColumnProps<Data, SortField>) {
-  const sortParams = useMemo(
-    () => sorting.find(({ fieldId }) => field === fieldId),
-    [sorting, field],
-  );
-  const hideSortIcon = useMemo(() => !Boolean(sortParams), [sortParams]);
-  const sortDirection = useMemo(
-    () => (sortParams ? sortParams.sort : SortStates.ASC),
-    [sortParams],
-  );
+  const sortIcon = useMemo(() => {
+    if (!sortable) {
+      return null;
+    }
+
+    if (sorting?.fieldId !== field) {
+      return <SortFillSm />;
+    }
+
+    switch (sorting?.sort) {
+      case SortStates.ASC:
+        return <SortUpFillSm color="primary" />;
+      case SortStates.DESC:
+        return <SortDownFillSm color="primary" />;
+      default:
+        return <SortFillSm />;
+    }
+  }, [sorting, sortable, field]);
 
   const handleSortClick = () => {
     if (field && sortable) {
@@ -52,14 +61,10 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
       width={width}
       sortable={sortable}
     >
-      <Typography variant="pointer">{label}</Typography>
-      {sortable && (
-        <StyledTableSortLabel
-          hideSortIcon={hideSortIcon}
-          direction={sortDirection}
-          active
-        />
-      )}
+      <TableCellTitle variant="pointer">
+        {label}
+        {sortIcon}
+      </TableCellTitle>
     </StyledTableCell>
   );
 }

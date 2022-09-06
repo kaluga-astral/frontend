@@ -196,7 +196,7 @@ const data: DataType[] = [
 
 const Template: Story = (args) => {
   const [selected, setSelected] = useState<DataType[]>([]);
-  const [sorting, setSorting] = useState<DataGridSort<SortField>[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -225,7 +225,7 @@ const Template: Story = (args) => {
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
-  const handleSort = (newSorting: DataGridSort<SortField>[]) =>
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
     setSorting(newSorting);
 
   return (

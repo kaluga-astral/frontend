@@ -5,7 +5,7 @@ import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
 import { DataGridColumns, DataGridRow } from '../types';
 
-import { StyledTableBody } from './styled';
+import { StyledTableBody } from './styles';
 
 export type DataGridBodyProps<Data> = {
   columns: DataGridColumns<Data>[];
