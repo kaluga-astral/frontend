@@ -6,6 +6,8 @@ export * from './Badge';
 
 export * from './Button';
 
+export * from './Descriptions';
+
 export * from './Divider';
 
 export * from './ButtonBase';
