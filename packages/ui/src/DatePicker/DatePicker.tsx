@@ -2,7 +2,7 @@ import { FocusEvent, MutableRefObject, forwardRef, useContext } from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
-import { isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 
 import { MaskField, MaskFieldProps } from '../MaskField';
 import { TextFieldProps } from '../TextField';
@@ -14,7 +14,6 @@ import { DatePickerDay } from './DatePickerDay';
 
 export type DatePickerProps = Omit<
   ReactDatePickerProps,
-  | 'renderCustomHeader'
   | 'locale'
   | 'renderCustomHeader'
   | 'renderDayContents'
@@ -41,7 +40,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const { placeholder, ...restInputProps } = inputProps;
     const { locale } = useContext(DatePickerContext);
 
-    // уберкостыль, react-date-picker забирает значение из event.target.value
     const handleMaskFieldAccept = (
       val: string,
       _maskRef: unknown,
@@ -55,11 +53,11 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       } as unknown as string);
     };
 
-    const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
-      const date = parse(e?.target.value, dateFormat as string, new Date());
-
-      // если инпут пустой - кладем в value null
-      if (!e?.target.value) {
+    const handleChange = (
+      date: Date,
+      e: FocusEvent<HTMLInputElement, Element>,
+    ) => {
+      if (!date) {
         onChange(null, e);
       }
 
@@ -77,8 +75,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           openToDate={value ?? undefined}
           dateFormat={dateFormat}
           placeholderText={placeholder}
-          onChange={onChange}
-          onChangeRaw={handleChangeRaw}
+          onChange={handleChange}
           renderCustomHeader={(renderProps) => (
             <DatePickerHeader {...renderProps} />
           )}
