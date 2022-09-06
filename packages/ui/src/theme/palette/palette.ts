@@ -111,7 +111,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
     },
     text: {
       primary: '#072D57',
-      secondary: '#072D57',
+      secondary: '#557192',
       disabled: '#99A9BA',
     },
     grey: {
