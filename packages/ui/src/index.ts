@@ -6,7 +6,7 @@ export * from './Badge';
 
 export * from './Button';
 
-export * from './Descriptions';
+export * from './Description';
 
 export * from './Divider';
 
