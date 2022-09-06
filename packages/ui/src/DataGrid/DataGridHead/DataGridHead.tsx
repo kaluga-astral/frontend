@@ -50,8 +50,10 @@ export function DataGridHead<Data, SortField extends keyof Data>({
       // если для выбранного столбца текущая сортировка ASC - меняем на DESC
       if (isCurrentField && sorting.sort === SortStates.ASC) {
         return onSort({ fieldId: field, sort: SortStates.DESC });
-        // если для выбранного столбца текущая сортировка DESC - убираем сортировку
-      } else if (isCurrentField && sorting.sort === SortStates.DESC) {
+      }
+
+      // если для выбранного столбца текущая сортировка DESC - убираем сортировку
+      if (isCurrentField && sorting.sort === SortStates.DESC) {
         return onSort(undefined);
       }
 

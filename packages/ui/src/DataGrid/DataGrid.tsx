@@ -45,7 +45,7 @@ export type DataGridProps<
   onSelectRow?: (row: Data[]) => void;
   /**
    * @example <DataGrid sorting={{fieldId: 'test', sort: 'asc'}} />
-   * Массив сортируемых колонок
+   * Параметры сортируемой колонки
    */
   sorting?: DataGridSort<SortField>;
   /**
@@ -77,7 +77,7 @@ export type DataGridProps<
   /**
    * @default 10
    * @example <DataGrid  minDisplayRows{10} />
-   *  используется для отображения переданного кол-ва строк при отсутствии данных
+   *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
 };
