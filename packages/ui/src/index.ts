@@ -126,6 +126,8 @@ export * from './SideDialogContentText';
 
 export * from './Slide';
 
+export * from './SwipeableDrawer';
+
 export * from './Zoom';
 
 export * from './Notification';
