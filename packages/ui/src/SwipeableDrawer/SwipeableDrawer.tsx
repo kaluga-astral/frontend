@@ -27,7 +27,7 @@ const SwipeableDrawer = ({
         }}
       />
 
-      <MuiSwipeableDrawer {...rest}>
+      <MuiSwipeableDrawer {...rest} swipeAreaWidth={drawerBleeding}>
         <StyledDrawerHeader drawerBleeding={drawerBleeding}>
           <StyledPuller>{drawerBleedingIcon}</StyledPuller>
 

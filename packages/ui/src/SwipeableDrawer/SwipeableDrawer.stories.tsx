@@ -38,7 +38,6 @@ const Template: Story = () => {
         open={open}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
-        swipeAreaWidth={56}
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
