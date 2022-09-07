@@ -1,7 +1,10 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Reasons, backdropStackManager } from '../../BackdropStack';
+import {
+  Reason,
+  backdropStackManager,
+} from '../../services/BackdropStackManager';
 /**
  * @description необязательные настройки для использоввания хука
  */
@@ -26,14 +29,14 @@ type ReturnElements = {
   /**
    * @description метод вызываемый при закрытии элемента, внутри него определяется состояние isOpened
    */
-  handleClose: (
-    event: SyntheticEvent<Element, Event>,
-    reason?: Reasons,
-  ) => void;
+  handleClose: (event: SyntheticEvent<Element, Event>, reason?: Reason) => void;
 };
 
 type UseBackdropStackToggleFunc = (options?: Options) => ReturnElements;
 
+/**
+ * @description хук предназначен для быстрого использования backdropStackManager в реакт компонентах, хранит неуправляемый стейт, если вам нужно управлять этим стейтом, воспользуйтесь backdropStackManager в своем компоненте напрямую.
+ */
 export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
   id: parentId,
 } = {}) => {
@@ -46,7 +49,7 @@ export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
     setOpened(true);
   };
 
-  const handleClose = (_: SyntheticEvent<Element, Event>, reason?: Reasons) => {
+  const handleClose = (_: SyntheticEvent<Element, Event>, reason?: Reason) => {
     setOpened(!pop(id.current, reason));
   };
 
