@@ -1,34 +1,34 @@
 import { nanoid } from 'nanoid';
 
 type PopId = string;
-type PointerId = string;
+type PointerId = string | null;
 
-type PopTuple = [Reasons | undefined, PointerId];
+type PopTuple = [Reason | undefined, PointerId];
 
-type PopFunc = (id: PopId, reason?: Reasons) => boolean;
-
-export type Reasons =
+export type Reason =
   | 'escapeKeyDown'
   | 'backdropClick'
   | 'toggleInput'
   | 'blur'
-  | string;
+  | null;
 
 class BackdropStackManager {
   private stack: PopId[] = [];
 
-  private previousPopInfo: PopTuple = ['', ''];
+  // сохраняем информацию о том какой был предыдущий вызов pop,
+  // нужен для предотвращения синхронного закрытия при последовательности 'blur' и 'backdropClick' в рамках одного клика
+  private previousPopInfo: PopTuple = [null, null];
 
-  private currentPointerId: PointerId = '';
+  private currentPointerId: PointerId = null;
 
   constructor() {
-    document.addEventListener(
+    document?.addEventListener(
       'pointerdown',
       () => (this.currentPointerId = nanoid()),
     );
   }
 
-  private checkOnBackdropAndBlurCombination = (reason?: Reasons): boolean => {
+  private checkOn = (reason?: Reason): boolean => {
     const [previousReason, previousPointerId] = this.previousPopInfo;
 
     return (
@@ -46,8 +46,8 @@ class BackdropStackManager {
     this.stack.push(id);
   };
 
-  public pop: PopFunc = (id, reason) => {
-    if (this.checkOnBackdropAndBlurCombination(reason)) {
+  public pop = (id: PopId, reason?: Reason): boolean => {
+    if (this.checkOn(reason)) {
       return false;
     }
 
