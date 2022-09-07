@@ -36,6 +36,8 @@ export * from './DialogTitle';
 
 export * from './DropdownButton';
 
+export * from './Fab';
+
 export * from './Fade';
 
 export * from './FormControlLabel';

@@ -3,10 +3,10 @@ import { Fab } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { FabProps } from './types';
-import { FabSizes, FabStates, FabVariants } from './constants';
+import { FabProps } from './Fab';
+import { FabSizes, FabStates } from './enums';
 
-type StyledFabThemeProps = FabProps & { theme: Theme };
+type StyledFabThemeProps = FabProps & { theme: Theme } & { isSquare: boolean };
 
 const getBgColor = ({
   theme,
@@ -67,7 +67,7 @@ const getSize = (props: FabProps) => {
   return '62px';
 };
 const getBorderRadius = (props: StyledFabThemeProps) => {
-  if (props.variant === FabVariants.SQUARE) {
+  if (props.isSquare) {
     return props.theme.shape.small;
   }
 
@@ -75,8 +75,8 @@ const getBorderRadius = (props: StyledFabThemeProps) => {
 };
 
 export const StyledFab = styled(Fab, {
-  shouldForwardProp: (props) => props !== 'size' && props !== 'variant',
-})<FabProps>`
+  shouldForwardProp: (props) => props !== 'size' && props !== 'isSquare',
+})<FabProps & { isSquare: boolean }>`
   width: ${(props) => getSize(props)};
   height: ${(props) => getSize(props)};
 
