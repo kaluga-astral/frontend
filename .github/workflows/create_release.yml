@@ -89,7 +89,7 @@ jobs:
             📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
 
-            ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/${{ env.NEXT_VERSION }}">Changelog</a>
+            ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/v${{ env.NEXT_VERSION }}">Changelog</a>
 
             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
 
