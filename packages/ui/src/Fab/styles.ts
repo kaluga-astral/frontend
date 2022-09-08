@@ -4,7 +4,7 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { FabProps } from './Fab';
-import { FabSizes, FabStates } from './enums';
+import { FabColors, FabSizes, FabStates } from './enums';
 
 type StyledFabThemeProps = FabProps & { theme: Theme } & { isSquare: boolean };
 
@@ -13,7 +13,8 @@ const getBgColor = ({
   color,
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
-  const backGroundColors = {
+  const backgroundColors = {
+    colored: theme.palette[color ? color : 'primary'][800],
     default: theme.palette.grey[100],
     defaultHover: theme.palette.primary[100],
     error: theme.palette.red[800],
@@ -21,24 +22,22 @@ const getBgColor = ({
   };
 
   if (!color) {
-    if (fabState === FabStates.DEFAULT) {
-      return backGroundColors.default;
+    if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
+      return backgroundColors.defaultHover;
     }
 
-    if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
-      return backGroundColors.defaultHover;
-    }
+    return backgroundColors[FabStates.DEFAULT];
   }
 
-  if (color === 'error') {
+  if (color === FabColors.ERROR) {
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
-      return backGroundColors.errorHover;
+      return backgroundColors.errorHover;
     }
 
-    return backGroundColors.error;
+    return backgroundColors.error;
   }
 
-  return '';
+  return backgroundColors.colored;
 };
 const getColor = ({
   theme,
@@ -46,21 +45,20 @@ const getColor = ({
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
   const colors = {
+    colored: theme.palette.grey[100],
     default: theme.palette.grey[900],
     defaultHover: theme.palette.primary[800],
   };
 
   if (!color) {
-    if (fabState === FabStates.DEFAULT) {
-      return colors.default;
-    }
-
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
       return colors.defaultHover;
     }
+
+    return colors[FabStates.DEFAULT];
   }
 
-  return '';
+  return colors.colored;
 };
 
 const getSize = (props: FabProps) => {
@@ -72,10 +70,6 @@ const getSize = (props: FabProps) => {
     return '52px';
   }
 
-  if (props.size === FabSizes.LARGE) {
-    return '62px';
-  }
-
   return '62px';
 };
 const getBorderRadius = (props: StyledFabThemeProps) => {
@@ -83,7 +77,7 @@ const getBorderRadius = (props: StyledFabThemeProps) => {
     return props.theme.shape.small;
   }
 
-  return '';
+  return '50%';
 };
 
 export const StyledFab = styled(Fab, {

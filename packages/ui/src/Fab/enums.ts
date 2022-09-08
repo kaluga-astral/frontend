@@ -18,6 +18,6 @@ export enum FabColors {
   WARNING = 'warning',
 }
 
-export enum FabVariants {
+export enum CustomFabVariants {
   SQUARE = 'square',
 }

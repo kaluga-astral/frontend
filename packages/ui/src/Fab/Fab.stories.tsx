@@ -16,7 +16,7 @@ const svg = <LikeOutlineMd />;
 export const FabShowcase: Story = () => (
   <Stack gap={4}>
     <Stack gap={4}>
-      <Typography variant="h3">Default Type</Typography>
+      <Typography variant="h3">Default Type (Square)</Typography>
       <Stack gap={1}>
         <Typography variant="h4">Small </Typography>
         <Stack gap={3} direction="row" alignItems="center">
@@ -82,7 +82,7 @@ export const FabShowcase: Story = () => (
       </Stack>
     </Stack>
     <Stack gap={4}>
-      <Typography variant="h3">Square Type</Typography>
+      <Typography variant="h3">Сircular Type</Typography>
       <Stack gap={1}>
         <Typography variant="h4">Small </Typography>
         <Stack gap={3} direction="row" alignItems="center">

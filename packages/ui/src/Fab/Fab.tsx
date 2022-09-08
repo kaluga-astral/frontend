@@ -2,21 +2,27 @@ import { forwardRef } from 'react';
 import { FabProps as MuiFabProps } from '@mui/material/Fab';
 
 import { StyledFab } from './styles';
-import { FabColor } from './types';
-import { FabVariants } from './enums';
+import { CustomFabVariant, FabColor } from './types';
+import { CustomFabVariants, FabSizes } from './enums';
 
 export type FabProps = Omit<MuiFabProps, 'color' | 'variant'> & {
   color?: FabColor;
-  variant?: MuiFabProps['variant'] | 'square';
+  variant?: MuiFabProps['variant'] | CustomFabVariant;
 };
 
 export const Fab = forwardRef<HTMLButtonElement, FabProps>(
-  ({ ref, variant = 'square', ...props }) => {
+  ({
+    ref,
+    variant = CustomFabVariants.SQUARE,
+    size = FabSizes.LARGE,
+    ...props
+  }) => {
     return (
       <StyledFab
         {...props}
-        variant={variant === FabVariants.SQUARE ? 'circular' : variant}
-        isSquare={variant === FabVariants.SQUARE}
+        variant={variant === CustomFabVariants.SQUARE ? 'circular' : variant}
+        isSquare={variant === CustomFabVariants.SQUARE}
+        size={size}
         ref={ref}
       />
     );
