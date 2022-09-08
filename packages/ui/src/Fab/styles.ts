@@ -13,22 +13,29 @@ const getBgColor = ({
   color,
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
+  const backGroundColors = {
+    default: theme.palette.grey[100],
+    defaultHover: theme.palette.primary[100],
+    error: theme.palette.red[800],
+    errorHover: theme.palette.red[900],
+  };
+
   if (!color) {
     if (fabState === FabStates.DEFAULT) {
-      return theme.palette.grey[100];
+      return backGroundColors.default;
     }
 
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
-      return theme.palette.primary[100];
+      return backGroundColors.defaultHover;
     }
   }
 
   if (color === 'error') {
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
-      return theme.palette.red[900];
+      return backGroundColors.errorHover;
     }
 
-    return theme.palette.red[800];
+    return backGroundColors.error;
   }
 
   return '';
@@ -38,13 +45,18 @@ const getColor = ({
   color,
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
+  const colors = {
+    default: theme.palette.grey[900],
+    defaultHover: theme.palette.primary[800],
+  };
+
   if (!color) {
     if (fabState === FabStates.DEFAULT) {
-      return theme.palette.grey[900];
+      return colors.default;
     }
 
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
-      return theme.palette.primary[800];
+      return colors.defaultHover;
     }
   }
 
