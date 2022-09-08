@@ -4,7 +4,7 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { FabProps } from './Fab';
-import { FabColors, FabStates } from './enums';
+import { FabColors, FabSizes, FabStates } from './enums';
 
 type StyledFabThemeProps = FabProps & { theme: Theme } & { isSquare: boolean };
 
@@ -14,14 +14,17 @@ const getBgColor = ({
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
   const backgroundColors = {
-    colored: theme.palette[color ? color : 'primary'][800],
+    colored:
+      theme.palette[
+        color && color !== FabColors.DEFAULT ? color : FabColors.PRIMARY
+      ][800],
     default: theme.palette.grey[100],
     defaultHover: theme.palette.primary[100],
     error: theme.palette.red[800],
     errorHover: theme.palette.red[900],
   };
 
-  if (!color) {
+  if (color === FabColors.DEFAULT) {
     if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
       return backgroundColors.defaultHover;
     }
@@ -50,7 +53,7 @@ const getColor = ({
     hover: theme.palette.primary[800],
   };
 
-  if (!color) {
+  if (color === FabColors.DEFAULT) {
     return colors[fabState];
   }
 
@@ -64,7 +67,7 @@ const getSize = (props: FabProps) => {
     large: '62px',
   };
 
-  return props.size && sizes[props.size];
+  return sizes[props.size || FabSizes.LARGE];
 };
 const getBorderRadius = (props: StyledFabThemeProps) => {
   const variants = {
@@ -76,7 +79,7 @@ const getBorderRadius = (props: StyledFabThemeProps) => {
     return variants.square;
   }
 
-  return props.variant && variants[props.variant];
+  return variants[props.variant || 'square'];
 };
 
 export const StyledFab = styled(Fab, {

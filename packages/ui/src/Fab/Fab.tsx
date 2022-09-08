@@ -11,13 +11,20 @@ export type FabProps = Omit<MuiFabProps, 'color' | 'variant'> & {
 };
 
 export const Fab = forwardRef<HTMLButtonElement, FabProps>(
-  ({ ref, variant = 'square', size = FabSizes.LARGE, ...props }) => {
+  ({
+    ref,
+    variant = 'square',
+    size = FabSizes.LARGE,
+    color = 'default',
+    ...props
+  }) => {
     return (
       <StyledFab
         {...props}
         variant={variant === 'square' ? 'circular' : variant}
         isSquare={variant === 'square'}
         size={size}
+        color={color}
         ref={ref}
       />
     );
