@@ -14,8 +14,8 @@ export const Fab = forwardRef<HTMLButtonElement, FabProps>(
   ({
     ref,
     variant = 'square',
-    size = FabSizes.LARGE,
-    color = 'default',
+    size = FabSizes.Large,
+    color = 'primary',
     ...props
   }) => {
     return (

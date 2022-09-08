@@ -1,19 +1,19 @@
 export enum FabSizes {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-  LARGE = 'large',
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
 }
 
 export enum FabStates {
-  DEFAULT = 'default',
-  HOVER = 'hover',
-  ACTIVE = 'active',
+  Default = 'default',
+  Hover = 'hover',
+  Active = 'active',
 }
 
 export enum FabColors {
-  DEFAULT = 'default',
-  PRIMARY = 'primary',
-  ERROR = 'error',
-  SUCCESS = 'success',
-  WARNING = 'warning',
+  Default = 'default',
+  Primary = 'primary',
+  Error = 'error',
+  Success = 'success',
+  Warning = 'warning',
 }

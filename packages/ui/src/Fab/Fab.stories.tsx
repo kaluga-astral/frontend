@@ -20,7 +20,9 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Small </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="small">{svg}</Fab>
+          <Fab size="small" color="default">
+            {svg}
+          </Fab>
           <Fab size="small" color="primary">
             {svg}
           </Fab>
@@ -41,7 +43,9 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Medium </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="medium">{svg}</Fab>
+          <Fab size="medium" color="default">
+            {svg}
+          </Fab>
           <Fab size="medium" color="primary">
             {svg}
           </Fab>
@@ -62,7 +66,9 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Large </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="large">{svg}</Fab>
+          <Fab size="large" color="default">
+            {svg}
+          </Fab>
           <Fab size="large" color="primary">
             {svg}
           </Fab>
@@ -86,7 +92,7 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Small </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="small">
+          <Fab variant="circular" size="small" color="default">
             {svg}
           </Fab>
           <Fab variant="circular" size="small" color="primary">
@@ -109,7 +115,7 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Medium </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="medium">
+          <Fab variant="circular" size="medium" color="default">
             {svg}
           </Fab>
           <Fab variant="circular" size="medium" color="primary">
@@ -133,7 +139,7 @@ export const FabShowcase: Story = () => (
       <Stack gap={1}>
         <Typography variant="h4">Large </Typography>
         <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="large">
+          <Fab variant="circular" size="large" color="default">
             {svg}
           </Fab>
           <Fab variant="circular" size="large" color="primary">

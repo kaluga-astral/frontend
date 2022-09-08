@@ -16,7 +16,7 @@ const getBgColor = ({
   const backgroundColors = {
     colored:
       theme.palette[
-        color && color !== FabColors.DEFAULT ? color : FabColors.PRIMARY
+        color && color !== FabColors.Default ? color : FabColors.Primary
       ][800],
     default: theme.palette.grey[100],
     defaultHover: theme.palette.primary[100],
@@ -24,16 +24,16 @@ const getBgColor = ({
     errorHover: theme.palette.red[900],
   };
 
-  if (color === FabColors.DEFAULT) {
-    if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
+  if (color === FabColors.Default) {
+    if (fabState === FabStates.Active || fabState === FabStates.Hover) {
       return backgroundColors.defaultHover;
     }
 
-    return backgroundColors[FabStates.DEFAULT];
+    return backgroundColors[FabStates.Default];
   }
 
-  if (color === FabColors.ERROR) {
-    if (fabState === FabStates.ACTIVE || fabState === FabStates.HOVER) {
+  if (color === FabColors.Error) {
+    if (fabState === FabStates.Active || fabState === FabStates.Hover) {
       return backgroundColors.errorHover;
     }
 
@@ -53,7 +53,7 @@ const getColor = ({
     hover: theme.palette.primary[800],
   };
 
-  if (color === FabColors.DEFAULT) {
+  if (color === FabColors.Default) {
     return colors[fabState];
   }
 
@@ -67,7 +67,7 @@ const getSize = (props: FabProps) => {
     large: '62px',
   };
 
-  return sizes[props.size || FabSizes.LARGE];
+  return sizes[props.size || FabSizes.Large];
 };
 const getBorderRadius = (props: StyledFabThemeProps) => {
   const variants = {
@@ -88,23 +88,23 @@ export const StyledFab = styled(Fab, {
   width: ${(props) => getSize(props)};
   height: ${(props) => getSize(props)};
 
-  color: ${(props) => getColor({ ...props, fabState: FabStates.DEFAULT })};
+  color: ${(props) => getColor({ ...props, fabState: FabStates.Default })};
 
   background: ${(props) =>
-    getBgColor({ ...props, fabState: FabStates.DEFAULT })};
+    getBgColor({ ...props, fabState: FabStates.Default })};
   border-radius: ${(props) => getBorderRadius(props)};
 
   :active {
-    color: ${(props) => getColor({ ...props, fabState: FabStates.ACTIVE })};
+    color: ${(props) => getColor({ ...props, fabState: FabStates.Active })};
 
     background: ${(props) =>
-      getBgColor({ ...props, fabState: FabStates.ACTIVE })};
+      getBgColor({ ...props, fabState: FabStates.Active })};
   }
 
   :hover {
-    color: ${(props) => getColor({ ...props, fabState: FabStates.ACTIVE })};
+    color: ${(props) => getColor({ ...props, fabState: FabStates.Hover })};
 
     background: ${(props) =>
-      getBgColor({ ...props, fabState: FabStates.ACTIVE })};
+      getBgColor({ ...props, fabState: FabStates.Hover })};
   }
 `;
