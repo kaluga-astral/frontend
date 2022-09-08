@@ -10,13 +10,14 @@ import { Typography } from '../Typography';
 
 import { SwipeableDrawer } from './SwipeableDrawer';
 
-const Root = styled('div')(({ theme }) => ({
-  height: '100%',
-  backgroundColor:
+const Root = styled('div')`
+  height: 100%;
+
+  background-color: ${({ theme }) =>
     theme.palette.mode === 'light'
       ? theme.palette.grey['100']
-      : theme.palette.background.default,
-}));
+      : theme.palette.background.default};
+`;
 
 const Row = styled('div')`
   display: flex;

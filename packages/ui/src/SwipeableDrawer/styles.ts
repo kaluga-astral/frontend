@@ -34,7 +34,7 @@ const calcMaxBodyHeight = ({
 /**
  * @description Определение плавной анимации полного скрытия компонента.
  */
-const determineHowSwipeableDrawerTransform = ({
+const getUnmountTransform = ({
   open,
   ModalProps,
 }: SwipeableDrawerProps): string => {
@@ -49,7 +49,7 @@ export const StyledSwipeableDrawer = styled(
   .MuiPaper-root {
     overflow: visible;
 
-    transform: ${(props) => determineHowSwipeableDrawerTransform({ ...props })};
+    transform: ${(props) => getUnmountTransform({ ...props })};
   }
 
   .MuiBackdrop-root {
