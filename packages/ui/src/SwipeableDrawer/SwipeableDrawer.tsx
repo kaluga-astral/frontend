@@ -18,6 +18,12 @@ export type SwipeableDrawerProps = {
   drawerBleedingTitle: string;
   /**
    * @example <StyledSwipeableDrawer>
+   * @default false
+   * @description Остаётся ли компонент смонтированным после его скрытия.
+   */
+  isMountedOnHide?: boolean;
+  /**
+   * @example <StyledSwipeableDrawer>
    * @default undefined
    * @description Иконка в шапке компонента (над заголовком).
    */
@@ -32,13 +38,18 @@ export type SwipeableDrawerProps = {
 
 export const SwipeableDrawer = ({
   drawerBleedingTitle,
+  isMountedOnHide = false,
   drawerBleedingIcon,
   drawerBleedingHeight = 56,
   children,
   ...props
 }: SwipeableDrawerProps) => {
   return (
-    <StyledSwipeableDrawer {...props} swipeAreaWidth={drawerBleedingHeight}>
+    <StyledSwipeableDrawer
+      {...props}
+      swipeAreaWidth={drawerBleedingHeight}
+      ModalProps={{ keepMounted: isMountedOnHide }}
+    >
       <SwipeableDrawerHeader drawerBleedingHeight={drawerBleedingHeight}>
         <SwipeableDrawerPuller>
           {drawerBleedingIcon || <SwipeableDrawerPullerIcon />}

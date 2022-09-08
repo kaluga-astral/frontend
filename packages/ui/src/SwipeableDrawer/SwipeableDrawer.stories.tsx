@@ -20,7 +20,11 @@ export default {
   component: SwipeableDrawer,
 };
 
-const Template: Story = () => {
+const Template: Story = ({
+  drawerBleedingTitle,
+  isMountedOnHide,
+  drawerBleedingHeight,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = (newOpen: boolean) => () => {
@@ -39,10 +43,9 @@ const Template: Story = () => {
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
         disableSwipeToOpen={false}
-        ModalProps={{
-          keepMounted: false,
-        }}
-        drawerBleedingTitle="Все новые документы"
+        drawerBleedingTitle={drawerBleedingTitle}
+        isMountedOnHide={isMountedOnHide}
+        drawerBleedingHeight={drawerBleedingHeight}
       >
         <Skeleton variant="rectangular" height="1500px" />
       </SwipeableDrawer>
@@ -51,6 +54,12 @@ const Template: Story = () => {
 };
 
 export const Default = Template.bind({});
+
+Default.args = {
+  drawerBleedingTitle: 'Все новые документы',
+  isMountedOnHide: false,
+  drawerBleedingHeight: 56,
+};
 
 Default.parameters = {
   options: { showPanel: true },
