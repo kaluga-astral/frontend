@@ -10,34 +10,6 @@ import {
   SwipeableDrawerTitle,
 } from './styles';
 
-export const SwipeableDrawer = ({
-  drawerBleedingTitle,
-  drawerBleedingIcon,
-  drawerBleedingHeight = 56,
-  children,
-  ...rest
-}: SwipeableDrawerProps): JSX.Element => {
-  return (
-    <StyledSwipeableDrawer {...rest} swipeAreaWidth={drawerBleedingHeight}>
-      <SwipeableDrawerHeader drawerBleedingHeight={drawerBleedingHeight}>
-        <SwipeableDrawerPuller>
-          {drawerBleedingIcon ? (
-            drawerBleedingIcon
-          ) : (
-            <SwipeableDrawerPullerIcon />
-          )}
-        </SwipeableDrawerPuller>
-
-        <SwipeableDrawerTitle>{drawerBleedingTitle}</SwipeableDrawerTitle>
-      </SwipeableDrawerHeader>
-
-      <SwipeableDrawerBody drawerBleedingHeight={drawerBleedingHeight}>
-        {children}
-      </SwipeableDrawerBody>
-    </StyledSwipeableDrawer>
-  );
-};
-
 export type SwipeableDrawerProps = {
   /**
    * @example <StyledSwipeableDrawer drawerBleedingTitle="Заголовок">
@@ -57,3 +29,27 @@ export type SwipeableDrawerProps = {
    */
   drawerBleedingHeight?: number;
 } & MuiSwipeableDrawerProps;
+
+export const SwipeableDrawer = ({
+  drawerBleedingTitle,
+  drawerBleedingIcon,
+  drawerBleedingHeight = 56,
+  children,
+  ...props
+}: SwipeableDrawerProps) => {
+  return (
+    <StyledSwipeableDrawer {...props} swipeAreaWidth={drawerBleedingHeight}>
+      <SwipeableDrawerHeader drawerBleedingHeight={drawerBleedingHeight}>
+        <SwipeableDrawerPuller>
+          {drawerBleedingIcon || <SwipeableDrawerPullerIcon />}
+        </SwipeableDrawerPuller>
+
+        <SwipeableDrawerTitle>{drawerBleedingTitle}</SwipeableDrawerTitle>
+      </SwipeableDrawerHeader>
+
+      <SwipeableDrawerBody drawerBleedingHeight={drawerBleedingHeight}>
+        {children}
+      </SwipeableDrawerBody>
+    </StyledSwipeableDrawer>
+  );
+};

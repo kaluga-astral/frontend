@@ -1,6 +1,4 @@
 import {
-  Box,
-  BoxProps,
   SwipeableDrawer,
   SwipeableDrawerProps,
   Typography,
@@ -9,19 +7,26 @@ import {
 
 import { styled } from '../styles';
 
-type SwipeableDrawerHeaderProps = BoxProps & {
+type SwipeableDrawerHeaderProps = {
   drawerBleedingHeight: number;
 };
 
-type SwipeableDrawerBodyProps = BoxProps & {
+type SwipeableDrawerBodyProps = {
   drawerBleedingHeight: number;
 };
 
+/**
+ * @description Вывод высоты шапки компонента.
+ */
 const getHeight = ({
   drawerBleedingHeight,
-}: SwipeableDrawerHeaderProps): string => `${drawerBleedingHeight}`;
+}: SwipeableDrawerHeaderProps): string => `${drawerBleedingHeight}px`;
 
-const getMaxHeight = ({
+/**
+ * @description Расчет максимальной высоты тела компонента с учетом абсолютно
+ * позиционированной шапки, плюс отступ от верха экрана в размер шапки.
+ */
+const calcMaxBodyHeight = ({
   drawerBleedingHeight,
 }: SwipeableDrawerHeaderProps): string =>
   `calc(100vh - ${drawerBleedingHeight}px * 2)`;
@@ -34,26 +39,27 @@ export const StyledSwipeableDrawer = styled(
   }
 `;
 
-export const SwipeableDrawerHeader = styled(Box)<SwipeableDrawerHeaderProps>`
+export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
   position: absolute;
-  top: -${(props) => getHeight({ ...props })}px;
+  top: -${(props) => getHeight({ ...props })};
 
   display: flex;
   justify-content: center;
   width: 100%;
-  height: ${(props) => getHeight({ ...props })}px;
+  height: ${(props) => getHeight({ ...props })};
   padding: ${({ theme }) => theme.spacing(6, 6, 3, 6)};
 
   background-color: ${({ theme }) =>
     theme.palette.mode === 'light'
       ? theme.palette.background.default
       : theme.palette.grey[800]};
-  border-radius: ${({ theme }) => theme.spacing(1, 1, 0, 0)};
+  border-top-left-radius: ${({ theme }) => theme.shape.medium};
+  border-top-right-radius: ${({ theme }) => theme.shape.medium};
   box-shadow: ${({ theme }) => theme.shadows[8]};
   visibility: visible;
 `;
 
-export const SwipeableDrawerPuller = styled(Box)<BoxProps>`
+export const SwipeableDrawerPuller = styled.div`
   position: absolute;
   top: 0;
 
@@ -71,7 +77,7 @@ export const SwipeableDrawerPuller = styled(Box)<BoxProps>`
   }
 `;
 
-export const SwipeableDrawerPullerIcon = styled(Box)<BoxProps>`
+export const SwipeableDrawerPullerIcon = styled.div`
   width: 14px;
   height: 2px;
 
@@ -79,7 +85,7 @@ export const SwipeableDrawerPullerIcon = styled(Box)<BoxProps>`
     theme.palette.mode === 'light'
       ? theme.palette.grey[900]
       : theme.palette.grey[300]};
-  border-radius: 2px;
+  border-radius: ${({ theme }) => theme.shape.small};
 `;
 
 export const SwipeableDrawerTitle = styled(Typography)<TypographyProps>`
@@ -90,11 +96,11 @@ export const SwipeableDrawerTitle = styled(Typography)<TypographyProps>`
   text-overflow: ellipsis;
 `;
 
-export const SwipeableDrawerBody = styled(Box)<SwipeableDrawerBodyProps>`
+export const SwipeableDrawerBody = styled.div<SwipeableDrawerBodyProps>`
   z-index: ${({ theme }) => theme.zIndex.mobileStepper};
 
   height: 100%;
-  max-height: ${(props) => getMaxHeight({ ...props })};
+  max-height: ${(props) => calcMaxBodyHeight({ ...props })};
   overflow: auto;
 
   background-color: ${({ theme }) =>
