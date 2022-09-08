@@ -31,11 +31,25 @@ const calcMaxBodyHeight = ({
 }: SwipeableDrawerHeaderProps): string =>
   `calc(100vh - ${drawerBleedingHeight}px * 2)`;
 
+/**
+ * @description Определение плавной анимации полного скрытия компонента.
+ */
+const determineHowSwipeableDrawerTransform = ({
+  open,
+  ModalProps,
+}: SwipeableDrawerProps): string => {
+  return !ModalProps?.keepMounted && !open
+    ? 'translateY(100vh) !important'
+    : 'none';
+};
+
 export const StyledSwipeableDrawer = styled(
   SwipeableDrawer,
 )<SwipeableDrawerProps>`
   .MuiPaper-root {
     overflow: visible;
+
+    transform: ${(props) => determineHowSwipeableDrawerTransform({ ...props })};
   }
 
   .MuiBackdrop-root {
@@ -93,11 +107,7 @@ export const SwipeableDrawerPullerIcon = styled.div`
 `;
 
 export const SwipeableDrawerTitle = styled(Typography)<TypographyProps>`
-  overflow: hidden;
-
   color: ${({ theme }) => theme.palette.grey[700]};
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const SwipeableDrawerBody = styled.div<SwipeableDrawerBodyProps>`

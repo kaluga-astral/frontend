@@ -1,9 +1,12 @@
+import { Stack } from '@mui/material';
 import { useState } from 'react';
 import { Story } from '@storybook/react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
+
+import { Typography } from '../Typography';
 
 import { SwipeableDrawer } from './SwipeableDrawer';
 
@@ -14,6 +17,35 @@ const Root = styled('div')(({ theme }) => ({
       ? theme.palette.grey['100']
       : theme.palette.background.default,
 }));
+
+const Row = styled('div')`
+  display: flex;
+  margin: ${({ theme }) => theme.spacing(4, 4, 4)};
+
+  & > * {
+    display: flex;
+    flex: 1 100%;
+  }
+
+  & > *:not(:first-child):not(:only-child) {
+    margin-left: ${({ theme }) => theme.spacing(4)};
+  }
+`;
+
+const renderRows = (count: number) => {
+  const rows = [];
+
+  for (let i = 0; i < count; i++) {
+    rows.push(
+      <Row>
+        <Skeleton variant="rectangular" height="150px" />
+        <Skeleton variant="rectangular" height="150px" />
+      </Row>,
+    );
+  }
+
+  return rows;
+};
 
 export default {
   title: 'Components/SwipeableDrawer',
@@ -47,21 +79,88 @@ const Template: Story = ({
         isMountedOnHide={isMountedOnHide}
         drawerBleedingHeight={drawerBleedingHeight}
       >
-        <Skeleton variant="rectangular" height="1500px" />
+        {renderRows(1)}
       </SwipeableDrawer>
     </Root>
   );
 };
 
-export const Default = Template.bind({});
+export const SwipeableDrawerStory = Template.bind({});
 
-Default.args = {
+SwipeableDrawerStory.storyName = 'SwipeableDrawer';
+
+SwipeableDrawerStory.args = {
   drawerBleedingTitle: 'Все новые документы',
   isMountedOnHide: false,
   drawerBleedingHeight: 56,
 };
 
-Default.parameters = {
+SwipeableDrawerStory.parameters = {
+  options: { showPanel: true },
+  controls: { expanded: true },
+};
+
+export const SwipeableDrawerShowcase: Story = () => {
+  const [isOpenSmall, setIsOpenSmall] = useState(false);
+  const [isOpenBig, setIsOpenBig] = useState(false);
+
+  const handleToggleSmall = (newOpen: boolean) => () => {
+    setIsOpenSmall(newOpen);
+  };
+
+  const handleToggleBig = (newOpen: boolean) => () => {
+    setIsOpenBig(newOpen);
+  };
+
+  return (
+    <Stack gap={4}>
+      <Typography variant="h3">Варианты наполнения</Typography>
+      <Root>
+        <Box sx={{ textAlign: 'center', pt: 1 }}>
+          <Button onClick={handleToggleSmall(true)}>
+            Небольшое наполнение
+          </Button>
+        </Box>
+
+        <SwipeableDrawer
+          anchor="bottom"
+          open={isOpenSmall}
+          onClose={handleToggleSmall(false)}
+          onOpen={handleToggleSmall(true)}
+          disableSwipeToOpen={false}
+          drawerBleedingTitle="Не большое наполнение"
+          drawerBleedingHeight={56}
+        >
+          {renderRows(1)}
+        </SwipeableDrawer>
+      </Root>
+
+      <Root>
+        <Box sx={{ textAlign: 'center', pt: 1 }}>
+          <Button onClick={handleToggleBig(true)}>
+            Наполнение с переполнением
+          </Button>
+        </Box>
+
+        <SwipeableDrawer
+          anchor="bottom"
+          open={isOpenBig}
+          onClose={handleToggleBig(false)}
+          onOpen={handleToggleBig(true)}
+          disableSwipeToOpen={false}
+          drawerBleedingTitle="Наполнение с переполнением"
+          drawerBleedingHeight={56}
+        >
+          {renderRows(10)}
+        </SwipeableDrawer>
+      </Root>
+    </Stack>
+  );
+};
+
+SwipeableDrawerShowcase.storyName = 'SwipeableDrawer Showcase';
+
+SwipeableDrawerShowcase.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
 };

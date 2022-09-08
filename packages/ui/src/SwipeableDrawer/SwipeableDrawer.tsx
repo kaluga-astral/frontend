@@ -55,7 +55,9 @@ export const SwipeableDrawer = ({
           {drawerBleedingIcon || <SwipeableDrawerPullerIcon />}
         </SwipeableDrawerPuller>
 
-        <SwipeableDrawerTitle>{drawerBleedingTitle}</SwipeableDrawerTitle>
+        <SwipeableDrawerTitle noWrap>
+          {drawerBleedingTitle}
+        </SwipeableDrawerTitle>
       </SwipeableDrawerHeader>
 
       <SwipeableDrawerBody drawerBleedingHeight={drawerBleedingHeight}>
