@@ -33,6 +33,8 @@ const calcMaxBodyHeight = ({
 
 /**
  * @description Определение плавной анимации полного скрытия компонента.
+ * Предусматривает для <SwipeableDrawer keepMounted={false} /> переопределение
+ * базового "transition" плавно выводя компонент за рамки видимой области экрана.
  */
 const getUnmountTransform = ({
   open,
