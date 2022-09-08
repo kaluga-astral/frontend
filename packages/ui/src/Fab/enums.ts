@@ -17,7 +17,3 @@ export enum FabColors {
   SUCCESS = 'success',
   WARNING = 'warning',
 }
-
-export enum CustomFabVariants {
-  SQUARE = 'square',
-}
