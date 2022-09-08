@@ -62,22 +62,33 @@ const getColor = ({
 };
 
 const getSize = (props: FabProps) => {
+  const sizes = {
+    small: '42px',
+    medium: '42px',
+    large: '42px',
+  };
+
   if (props.size === FabSizes.SMALL) {
-    return '42px';
+    return sizes.small;
   }
 
   if (props.size === FabSizes.MEDIUM) {
-    return '52px';
+    return sizes.medium;
   }
 
-  return '62px';
+  return sizes.large;
 };
 const getBorderRadius = (props: StyledFabThemeProps) => {
+  const variants = {
+    square: props.theme.shape.small,
+    circular: '50%',
+  };
+
   if (props.isSquare) {
-    return props.theme.shape.small;
+    return variants.square;
   }
 
-  return '50%';
+  return variants.circular;
 };
 
 export const StyledFab = styled(Fab, {
