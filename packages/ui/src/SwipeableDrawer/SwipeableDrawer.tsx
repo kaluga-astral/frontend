@@ -1,43 +1,59 @@
-import { Global } from '@emotion/react';
-import { SwipeableDrawer as MuiSwipeableDrawer } from '@mui/material';
+import { ReactNode } from 'react';
+import { SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
 
-import { SwipeableDrawerProps } from './types';
 import {
-  StyleTypography,
-  StyledDrawerBody,
-  StyledDrawerHeader,
-  StyledPuller,
-} from './styled';
+  StyledSwipeableDrawer,
+  SwipeableDrawerBody,
+  SwipeableDrawerHeader,
+  SwipeableDrawerPuller,
+  SwipeableDrawerPullerIcon,
+  SwipeableDrawerTitle,
+} from './styles';
 
-const SwipeableDrawer = ({
-  drawerBleeding = 56,
-  drawerBleedingIcon,
+export const SwipeableDrawer = ({
   drawerBleedingTitle,
+  drawerBleedingIcon,
+  drawerBleedingHeight = 56,
   children,
   ...rest
-}: SwipeableDrawerProps) => {
+}: SwipeableDrawerProps): JSX.Element => {
   return (
-    <>
-      <Global
-        styles={{
-          '.MuiDrawer-root > .MuiPaper-root': {
-            maxHeight: `calc(100vh - ${drawerBleeding}px * 2)`,
-            overflow: 'visible',
-          },
-        }}
-      />
+    <StyledSwipeableDrawer {...rest} swipeAreaWidth={drawerBleedingHeight}>
+      <SwipeableDrawerHeader drawerBleedingHeight={drawerBleedingHeight}>
+        <SwipeableDrawerPuller>
+          {drawerBleedingIcon ? (
+            drawerBleedingIcon
+          ) : (
+            <SwipeableDrawerPullerIcon />
+          )}
+        </SwipeableDrawerPuller>
 
-      <MuiSwipeableDrawer {...rest} swipeAreaWidth={drawerBleeding}>
-        <StyledDrawerHeader drawerBleeding={drawerBleeding}>
-          <StyledPuller>{drawerBleedingIcon}</StyledPuller>
+        <SwipeableDrawerTitle>{drawerBleedingTitle}</SwipeableDrawerTitle>
+      </SwipeableDrawerHeader>
 
-          <StyleTypography>{drawerBleedingTitle}</StyleTypography>
-        </StyledDrawerHeader>
-
-        <StyledDrawerBody>{children}</StyledDrawerBody>
-      </MuiSwipeableDrawer>
-    </>
+      <SwipeableDrawerBody drawerBleedingHeight={drawerBleedingHeight}>
+        {children}
+      </SwipeableDrawerBody>
+    </StyledSwipeableDrawer>
   );
 };
 
-export default SwipeableDrawer;
+export type SwipeableDrawerProps = {
+  /**
+   * @example <StyledSwipeableDrawer drawerBleedingTitle="Заголовок">
+   * @description Текстовый заголовок в шапке компонента.
+   */
+  drawerBleedingTitle: string;
+  /**
+   * @example <StyledSwipeableDrawer>
+   * @default undefined
+   * @description Иконка в шапке компонента (над заголовком).
+   */
+  drawerBleedingIcon?: ReactNode;
+  /**
+   * @example <StyledSwipeableDrawer drawerBleedingIcon={56}>
+   * @default 56
+   * @description Высота шапки компонента и невидимого перетаскиваемого элемента.
+   */
+  drawerBleedingHeight?: number;
+} & MuiSwipeableDrawerProps;

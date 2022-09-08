@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
-import SwipeableDrawer from './SwipeableDrawer';
+import { SwipeableDrawer } from './SwipeableDrawer';
 
 const Root = styled('div')(({ theme }) => ({
   height: '100%',
@@ -21,23 +21,23 @@ export default {
 };
 
 const Template: Story = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+  const handleToggle = (newOpen: boolean) => () => {
+    setIsOpen(newOpen);
   };
 
   return (
     <Root>
       <Box sx={{ textAlign: 'center', pt: 1 }}>
-        <Button onClick={toggleDrawer(true)}>Open</Button>
+        <Button onClick={handleToggle(true)}>Open</Button>
       </Box>
 
       <SwipeableDrawer
         anchor="bottom"
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        open={isOpen}
+        onClose={handleToggle(false)}
+        onOpen={handleToggle(true)}
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
