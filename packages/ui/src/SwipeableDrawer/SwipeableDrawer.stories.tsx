@@ -40,7 +40,7 @@ const Template: Story = () => {
         onOpen={handleToggle(true)}
         disableSwipeToOpen={false}
         ModalProps={{
-          keepMounted: true,
+          keepMounted: false,
         }}
         drawerBleedingTitle="Все новые документы"
       >

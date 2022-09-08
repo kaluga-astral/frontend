@@ -37,6 +37,10 @@ export const StyledSwipeableDrawer = styled(
   .MuiPaper-root {
     overflow: visible;
   }
+
+  .MuiBackdrop-root {
+    background-color: ${({ theme }) => theme.palette.background.modalShadow};
+  }
 `;
 
 export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
