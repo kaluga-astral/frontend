@@ -7,7 +7,7 @@ export const MuiTab: Components<Theme>['MuiTab'] = {
     root({ theme }) {
       return {
         minWidth: 0,
-        padding: `0 ${theme.spacing(2)} 0 ${theme.spacing(2)}`,
+        padding: theme.spacing(0, 2),
         textTransform: 'none',
       };
     },

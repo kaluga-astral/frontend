@@ -106,6 +106,10 @@ export * from './StylesCacheProvider';
 
 export * from './Table';
 
+export * from './Tab';
+
+export * from './Tabs';
+
 export * from './Tag';
 
 export * from './TextArea';
