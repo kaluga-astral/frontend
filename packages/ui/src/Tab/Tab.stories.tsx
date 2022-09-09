@@ -1,11 +1,8 @@
 import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
+import { Stack, Tab, Tabs } from '@mui/material';
 
 import { Typography } from '../Typography';
-import { StyledTabs } from '../Tabs/styles';
-
-import { Tab } from './Tab';
 
 export default {
   title: 'Components/Tab',
@@ -24,11 +21,11 @@ export const TabShowcase: Story = () => {
       <Stack gap={4}>
         <Typography variant="h3">Tab</Typography>
         <Stack gap={1}>
-          <StyledTabs value={value} onChange={handleChange}>
+          <Tabs value={value} onChange={handleChange}>
             <Tab label="Tab" />
             <Tab label="Tab" />
             <Tab label="Tab" disabled />
-          </StyledTabs>
+          </Tabs>
         </Stack>
       </Stack>
     </Stack>
