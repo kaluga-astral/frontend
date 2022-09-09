@@ -1,8 +1,11 @@
+import Stack from '@mui/material/Stack';
 import { Story } from '@storybook/react';
-import { Stack, Tab, Tabs } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
 
 import { Typography } from '../Typography';
+import { Tab } from '../Tab';
+
+import { Tabs } from './Tabs';
 
 export default {
   title: 'Components/Tabs',
