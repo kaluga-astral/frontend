@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { IMask, IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
@@ -12,7 +11,8 @@ type MaskProps = IMaskInputProps<
 >;
 
 export type MaskFieldProps = Omit<
-  MaskProps & TextFieldProps,
+  Omit<MaskProps, 'size' | 'defaultValue' | 'rows' | 'value' | 'label'> &
+    TextFieldProps,
   'onChange' | 'onAccept'
 > & {
   onChange?: (value: string) => void;
@@ -38,11 +38,7 @@ const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
   return <TextField inputRef={inputRef} {...textFieldProps} />;
 });
 
-export const MaskField: FC<MaskFieldProps> = ({
-  onChange,
-  onAccept,
-  ...props
-}) => {
+export const MaskField = ({ onChange, onAccept, ...props }: MaskFieldProps) => {
   const maskFieldProps = props as IMaskInputProps;
 
   const handleMaskFieldAccept = (

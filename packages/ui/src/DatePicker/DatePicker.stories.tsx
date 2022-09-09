@@ -3,6 +3,7 @@ import { addDays, subDays } from 'date-fns';
 import { useState } from 'react';
 
 import { DatePickerProvider } from '../DatePickerProvider';
+import { NewDatePicker } from '../NewDatePicker';
 
 import { DatePicker, DatePickerProps } from './DatePicker';
 
@@ -19,9 +20,12 @@ const Template: Story<DatePickerProps> = (args) => {
   );
 
   return (
-    <DatePickerProvider>
-      <DatePicker {...args} value={value} onChange={setValue} />
-    </DatePickerProvider>
+    <>
+      <DatePickerProvider>
+        <DatePicker {...args} value={value} onChange={setValue} />
+      </DatePickerProvider>
+      <NewDatePicker label="Какая то дата" placeholder="Выберите дату" />
+    </>
   );
 };
 

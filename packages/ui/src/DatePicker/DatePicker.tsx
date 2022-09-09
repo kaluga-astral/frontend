@@ -14,7 +14,6 @@ import { DatePickerDay } from './DatePickerDay';
 
 export type DatePickerProps = Omit<
   ReactDatePickerProps,
-  | 'renderCustomHeader'
   | 'locale'
   | 'renderCustomHeader'
   | 'renderDayContents'
@@ -57,11 +56,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const handleChangeRaw = (e: FocusEvent<HTMLInputElement, Element>) => {
       const date = parse(e?.target.value, dateFormat as string, new Date());
-
-      // если инпут пустой - кладем в value null
-      if (!e?.target.value) {
-        onChange(null, e);
-      }
 
       if (isValid(date) && date.getFullYear() >= MIN_YEAR) {
         onChange(date, e);
