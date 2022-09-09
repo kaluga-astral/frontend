@@ -4,9 +4,9 @@ import { styled } from '../styles';
 
 export const StyledTab = styled(Tab)<TabProps>`
   min-width: 0;
-  padding-right: 8px;
+  padding-right: ${({ theme }) => theme.spacing(2)};
   padding-bottom: 0;
-  padding-left: 8px;
+  padding-left: ${({ theme }) => theme.spacing(2)};
 
   text-transform: none;
 `;
