@@ -1,7 +1,7 @@
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
-import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styled';
+import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styles';
 import { ButtonStates } from '../../ButtonBase';
 import {
   getBgColor,
@@ -9,7 +9,7 @@ import {
   getButtonPadding,
   getColor,
   getDisabledBgColor,
-} from '../../ButtonBase/styled';
+} from '../../ButtonBase/styles';
 
 export const MuiButton: Components<Theme>['MuiButton'] = {
   defaultProps: {
@@ -31,13 +31,13 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
           theme,
           customVariant,
           customColor,
-          buttonState: ButtonStates.DEFAULT,
+          buttonState: ButtonStates.Default,
         }),
         backgroundColor: getBgColor({
           selected,
           customColor,
           customVariant,
-          buttonState: ButtonStates.DEFAULT,
+          buttonState: ButtonStates.Default,
           theme,
         }),
         height: getButtonHeight({
@@ -60,14 +60,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
             theme,
             customVariant,
             customColor,
-            buttonState: ButtonStates.HOVER,
+            buttonState: ButtonStates.Hover,
           }),
           backgroundColor: getBgColor({
             selected,
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.HOVER,
+            buttonState: ButtonStates.Hover,
           }),
           boxShadow: 'none',
         },
@@ -77,14 +77,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.ACTIVE,
+            buttonState: ButtonStates.Active,
           }),
           backgroundColor: getBgColor({
             selected,
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.ACTIVE,
+            buttonState: ButtonStates.Active,
           }),
           outline: 'none',
         },
@@ -101,14 +101,14 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
             theme,
             customVariant,
             customColor,
-            buttonState: ButtonStates.FOCUS,
+            buttonState: ButtonStates.Focus,
           }),
           backgroundColor: getBgColor({
             selected,
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.FOCUS,
+            buttonState: ButtonStates.Focus,
           }),
           outline: `2px solid ${theme.palette.primary['400']}`,
           boxShadow: 'none',

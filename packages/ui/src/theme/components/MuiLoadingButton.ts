@@ -2,9 +2,9 @@ import { Components } from '@mui/material';
 import { loadingButtonClasses } from '@mui/lab';
 
 import type { Theme } from '../baseTheme';
-import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styled';
+import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styles';
 import { ButtonStates } from '../../ButtonBase';
-import { getBgColor } from '../../ButtonBase/styled';
+import { getBgColor } from '../../ButtonBase/styles';
 
 export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
   defaultProps: {
@@ -23,7 +23,7 @@ export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
             customColor,
             customVariant,
             theme,
-            buttonState: ButtonStates.DEFAULT,
+            buttonState: ButtonStates.Default,
           }),
         },
       };

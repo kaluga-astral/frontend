@@ -17,6 +17,7 @@ const svg = <LikeOutlineMd />;
 export const ButtonShowcase: Story = () => (
   <Stack gap={4}>
     <Typography variant="h3">Contained</Typography>
+
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -39,7 +40,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">success</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -66,7 +66,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">warning</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -93,7 +92,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">error</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -120,7 +118,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Typography variant="h3">Light</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
@@ -148,7 +145,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">success</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -175,7 +171,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">warning</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -202,7 +197,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Stack gap={1}>
       <Typography variant="code">error</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -229,7 +223,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Typography variant="h3">Text</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
@@ -255,7 +248,6 @@ export const ButtonShowcase: Story = () => (
         </IconButton>
       </Stack>
     </Stack>
-
     <Typography variant="h3">Link</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
@@ -284,6 +276,114 @@ export const ButtonShowcase: Story = () => (
   </Stack>
 );
 
+export const MobileButtonShowcase: Story = () => (
+  <Stack gap={4}>
+    <Typography variant="h3">Contained</Typography>
+    <Stack gap={1}>
+      <Typography variant="code">primary mobile </Typography>
+
+      <Stack gap={3} direction="row" alignItems="center">
+        <Button>Default</Button>
+        <Button size="small">Small</Button>
+        <Button size="small" loading>
+          Loading
+        </Button>
+        <Stack gap={3} direction="row" alignItems="center">
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            startIcon={svg}
+          >
+            With icon
+          </Button>
+        </Stack>
+      </Stack>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Button size="small" color="primary" variant="contained" disabled>
+          Disabled
+        </Button>
+        <Button size="small" color="primary" variant="contained" selected>
+          Selected
+        </Button>
+        <IconButton color="primary" variant="contained" selected>
+          <CheckOutlineMd />
+        </IconButton>
+      </Stack>
+    </Stack>
+    <Stack gap={1}>
+      <Typography variant="code">success mobile </Typography>
+
+      <Stack gap={3} direction="row" alignItems="center">
+        <Button color="success">Default</Button>
+        <Button color="success" size="small">
+          Small
+        </Button>
+        <Button color="success" size="small" loading>
+          Loading
+        </Button>
+        <Stack gap={3} direction="row" alignItems="center">
+          <Button
+            size="small"
+            color="success"
+            variant="contained"
+            startIcon={svg}
+          >
+            With icon
+          </Button>
+        </Stack>
+      </Stack>
+    </Stack>
+    <Stack gap={1}>
+      <Typography variant="code">warning mobile </Typography>
+
+      <Stack gap={3} direction="row" alignItems="center">
+        <Button color="warning">Default</Button>
+        <Button color="warning" size="small">
+          Small
+        </Button>
+        <Button color="warning" size="small" loading>
+          Loading
+        </Button>
+        <Stack gap={3} direction="row" alignItems="center">
+          <Button
+            size="small"
+            color="warning"
+            variant="contained"
+            startIcon={svg}
+          >
+            With icon
+          </Button>
+        </Stack>
+      </Stack>
+    </Stack>
+    <Stack gap={1}>
+      <Typography variant="code">error mobile </Typography>
+
+      <Stack gap={3} direction="row" alignItems="center">
+        <Button color="error">Default</Button>
+        <Button color="error" size="small">
+          Small
+        </Button>
+        <Button color="error" size="small" loading>
+          Loading
+        </Button>
+        <Stack gap={3} direction="row" alignItems="center">
+          <Button
+            size="small"
+            color="error"
+            variant="contained"
+            startIcon={svg}
+          >
+            With icon
+          </Button>
+        </Stack>
+      </Stack>
+    </Stack>
+  </Stack>
+);
+
+MobileButtonShowcase.parameters = { options: { showPanel: false } };
 ButtonShowcase.parameters = { options: { showPanel: false } };
 
 const Template: Story = (args) => <Button {...args}>Label</Button>;
