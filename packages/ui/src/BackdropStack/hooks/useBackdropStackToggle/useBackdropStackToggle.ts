@@ -1,7 +1,10 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Reason, backdropStackManager } from '../../BackdropStack';
+import {
+  Reason,
+  backdropStackManager,
+} from '../../services/BackdropStackManager';
 /**
  * @description необязательные настройки для использоввания хука
  */

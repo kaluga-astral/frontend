@@ -1,3 +1,3 @@
-export * from './BackdropStack';
+export * from './services/BackdropStackManager';
 
 export * from './hooks/useBackdropStackToggle';
