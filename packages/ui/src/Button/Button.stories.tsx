@@ -17,7 +17,6 @@ const svg = <LikeOutlineMd />;
 export const ButtonShowcase: Story = () => (
   <Stack gap={4}>
     <Typography variant="h3">Contained</Typography>
-
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
       <Stack gap={3} direction="row" alignItems="center">
@@ -281,7 +280,6 @@ export const MobileButtonShowcase: Story = () => (
     <Typography variant="h3">Contained</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary mobile </Typography>
-
       <Stack gap={3} direction="row" alignItems="center">
         <Button>Default</Button>
         <Button size="small">Small</Button>
@@ -313,7 +311,6 @@ export const MobileButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">success mobile </Typography>
-
       <Stack gap={3} direction="row" alignItems="center">
         <Button color="success">Default</Button>
         <Button color="success" size="small">
@@ -336,7 +333,6 @@ export const MobileButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">warning mobile </Typography>
-
       <Stack gap={3} direction="row" alignItems="center">
         <Button color="warning">Default</Button>
         <Button color="warning" size="small">
@@ -359,7 +355,6 @@ export const MobileButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">error mobile </Typography>
-
       <Stack gap={3} direction="row" alignItems="center">
         <Button color="error">Default</Button>
         <Button color="error" size="small">
