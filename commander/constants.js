@@ -1,4 +1,5 @@
 const DIST_DIR_NAME = 'lib';
+const DEFAULT_CONFIG_PATH = './tsconfig.json';
 
 const PACKAGES_NAMES = [
   '@astral/ui',
@@ -10,5 +11,6 @@ const PACKAGES_NAMES = [
 
 module.exports = {
   DIST_DIR_NAME,
+  DEFAULT_CONFIG_PATH,
   PACKAGES_NAMES,
 };

@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
-    "build": "commander build",
+    "build": "commander build --config ./tsconfig.build.json",
     "publish": "npm publish ./lib",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "test": "react-scripts test --env=jsdom",
