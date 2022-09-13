@@ -16,8 +16,6 @@ export const StyledLoadingButton = styled(LoadingButton, {
     height: ${getButtonHeightMobile};
     padding: ${getButtonPaddingMobile};
 
-    font-size: ${({ theme }) => theme.typography.h5.fontSize};
-
     white-space: nowrap;
   }
 `;
