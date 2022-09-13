@@ -256,7 +256,9 @@ export const getButtonHeightMobile = ({
   return '48px';
 };
 
-const getBreakPoint = ({ theme }: StyledButtonBaseThemeProps): string => {
+export const getBreakPoint = ({
+  theme,
+}: StyledButtonBaseThemeProps): string => {
   return `${theme.breakpoints.values.sm}px`;
 };
 
@@ -273,7 +275,7 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   height: ${getButtonHeightMobile};
   padding: ${getButtonPaddingMobile};
 
-  @media screen and (max-width: ${getBreakPoint}) {
+  @media screen and (min-width: ${getBreakPoint}) {
     height: ${getButtonHeight};
     padding: ${getButtonPadding};
   }
