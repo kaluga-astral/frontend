@@ -2,7 +2,6 @@ import { LoadingButton } from '@mui/lab';
 
 import { styled } from '../styles';
 import {
-  getBreakPoint,
   getButtonHeightMobile,
   getButtonPaddingMobile,
 } from '../ButtonBase/styles';
@@ -13,11 +12,12 @@ export const StyledLoadingButton = styled(LoadingButton, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<ButtonProps>`
-  @media screen and (max-width: ${getBreakPoint}) {
+  ${({ theme }) => theme.breakpoints.down('sm')} {
     height: ${getButtonHeightMobile};
     padding: ${getButtonPaddingMobile};
 
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.typography.h5.fontSize};
+
     white-space: nowrap;
   }
 `;

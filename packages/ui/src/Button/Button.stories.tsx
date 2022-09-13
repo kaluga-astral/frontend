@@ -19,7 +19,8 @@ export const ButtonShowcase: Story = () => (
     <Typography variant="h3">Contained</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button size="small">Small</Button>
         <Button>Label</Button>
         <Button loading>Loading</Button>
         <Button color="primary" variant="contained" size="large">
@@ -34,6 +35,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="primary" variant="contained" selected>
           Selected
         </Button>
+        <IconButton color="primary" variant="contained" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="primary" variant="contained" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -41,7 +45,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="success" variant="contained" size="small">
+          Small
+        </Button>
         <Button color="success" variant="contained">
           Label
         </Button>
@@ -60,6 +67,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="success" variant="contained" selected>
           Selected
         </Button>
+        <IconButton color="success" variant="contained" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="success" variant="contained" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -67,7 +77,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="warning" variant="contained" size="small">
+          Small
+        </Button>
         <Button color="warning" variant="contained">
           Label
         </Button>
@@ -86,6 +99,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="warning" variant="contained" selected>
           Selected
         </Button>
+        <IconButton color="warning" variant="contained" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="warning" variant="contained" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -93,7 +109,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="error" variant="contained" size="small">
+          Small
+        </Button>
         <Button color="error" variant="contained">
           Label
         </Button>
@@ -112,6 +131,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="error" variant="contained" selected>
           Selected
         </Button>
+        <IconButton color="error" variant="contained" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="error" variant="contained" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -120,7 +142,10 @@ export const ButtonShowcase: Story = () => (
     <Typography variant="h3">Light</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="primary" variant="light" size="small">
+          Small
+        </Button>
         <Button color="primary" variant="light">
           Label
         </Button>
@@ -139,6 +164,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="primary" variant="light" selected>
           Selected
         </Button>
+        <IconButton color="primary" variant="light" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="primary" variant="light" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -146,7 +174,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="success" variant="light" size="small">
+          Small
+        </Button>
         <Button color="success" variant="light">
           Label
         </Button>
@@ -165,6 +196,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="success" variant="light" selected>
           Selected
         </Button>
+        <IconButton color="success" variant="light" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="success" variant="light" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -172,7 +206,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="warning" variant="light" size="small">
+          Small
+        </Button>
         <Button color="warning" variant="light">
           Label
         </Button>
@@ -191,6 +228,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="warning" variant="light" selected>
           Selected
         </Button>
+        <IconButton color="warning" variant="light" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="warning" variant="light" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -198,7 +238,10 @@ export const ButtonShowcase: Story = () => (
     </Stack>
     <Stack gap={1}>
       <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button color="error" variant="light" size="small">
+          Small
+        </Button>
         <Button color="error" variant="light">
           Label
         </Button>
@@ -217,6 +260,9 @@ export const ButtonShowcase: Story = () => (
         <Button color="error" variant="light" selected>
           Selected
         </Button>
+        <IconButton color="error" variant="light" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton color="error" variant="light" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -225,7 +271,10 @@ export const ButtonShowcase: Story = () => (
     <Typography variant="h3">Text</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button variant="text" size="small">
+          Small
+        </Button>
         <Button variant="text">Label</Button>
         <Button variant="text" loading>
           Loading
@@ -242,6 +291,9 @@ export const ButtonShowcase: Story = () => (
         <Button variant="text" selected>
           Selected
         </Button>
+        <IconButton variant="text" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton variant="text" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -250,7 +302,10 @@ export const ButtonShowcase: Story = () => (
     <Typography variant="h3">Link</Typography>
     <Stack gap={1}>
       <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
+      <Stack gap={3} direction="row" alignItems="center" flexWrap="wrap">
+        <Button variant="link" size="small">
+          Small
+        </Button>
         <Button variant="link">Label</Button>
         <Button variant="link" loading>
           Loading
@@ -267,6 +322,9 @@ export const ButtonShowcase: Story = () => (
         <Button variant="link" selected>
           Selected
         </Button>
+        <IconButton variant="link" size="small" selected>
+          <CheckOutlineMd />
+        </IconButton>
         <IconButton variant="link" selected>
           <CheckOutlineMd />
         </IconButton>
@@ -275,110 +333,6 @@ export const ButtonShowcase: Story = () => (
   </Stack>
 );
 
-export const MobileButtonShowcase: Story = () => (
-  <Stack gap={4}>
-    <Typography variant="h3">Contained</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary mobile </Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button>Default</Button>
-        <Button size="small">Small</Button>
-        <Button size="small" loading>
-          Loading
-        </Button>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Button
-            size="small"
-            color="primary"
-            variant="contained"
-            startIcon={svg}
-          >
-            With icon
-          </Button>
-        </Stack>
-      </Stack>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button size="small" color="primary" variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button size="small" color="primary" variant="contained" selected>
-          Selected
-        </Button>
-        <IconButton color="primary" variant="contained" selected>
-          <CheckOutlineMd />
-        </IconButton>
-      </Stack>
-    </Stack>
-    <Stack gap={1}>
-      <Typography variant="code">success mobile </Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="success">Default</Button>
-        <Button color="success" size="small">
-          Small
-        </Button>
-        <Button color="success" size="small" loading>
-          Loading
-        </Button>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Button
-            size="small"
-            color="success"
-            variant="contained"
-            startIcon={svg}
-          >
-            With icon
-          </Button>
-        </Stack>
-      </Stack>
-    </Stack>
-    <Stack gap={1}>
-      <Typography variant="code">warning mobile </Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="warning">Default</Button>
-        <Button color="warning" size="small">
-          Small
-        </Button>
-        <Button color="warning" size="small" loading>
-          Loading
-        </Button>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Button
-            size="small"
-            color="warning"
-            variant="contained"
-            startIcon={svg}
-          >
-            With icon
-          </Button>
-        </Stack>
-      </Stack>
-    </Stack>
-    <Stack gap={1}>
-      <Typography variant="code">error mobile </Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Button color="error">Default</Button>
-        <Button color="error" size="small">
-          Small
-        </Button>
-        <Button color="error" size="small" loading>
-          Loading
-        </Button>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Button
-            size="small"
-            color="error"
-            variant="contained"
-            startIcon={svg}
-          >
-            With icon
-          </Button>
-        </Stack>
-      </Stack>
-    </Stack>
-  </Stack>
-);
-
-MobileButtonShowcase.parameters = { options: { showPanel: false } };
 ButtonShowcase.parameters = { options: { showPanel: false } };
 
 const Template: Story = (args) => <Button {...args}>Label</Button>;

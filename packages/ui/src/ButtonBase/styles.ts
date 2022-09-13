@@ -256,12 +256,6 @@ export const getButtonHeightMobile = ({
   return '48px';
 };
 
-export const getBreakPoint = ({
-  theme,
-}: StyledButtonBaseThemeProps): string => {
-  return `${theme.breakpoints.values.sm}px`;
-};
-
 export const StyledButtonBase = styled(ButtonUnstyled, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
@@ -274,11 +268,11 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
 
   height: ${getButtonHeightMobile};
   padding: ${getButtonPaddingMobile};
-
-  @media screen and (min-width: ${getBreakPoint}) {
+  ${({ theme }) => theme.breakpoints.up('sm')} {
     height: ${getButtonHeight};
     padding: ${getButtonPadding};
   }
+
   color: ${(props) =>
     getColor({ ...props, buttonState: ButtonStates.Default })};
   font-weight: ${({ theme }) => theme.typography.button.fontWeight};
