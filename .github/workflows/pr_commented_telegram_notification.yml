@@ -31,6 +31,7 @@ jobs:
           message: |
             💬💬💬 ${{ github.event.repository.name }}
             ${{ github.event.sender.login }} прокомментировал PR от ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}
+            Текст комментария :  ${{ github.event.comment.body }}
             
             ${{ fromJSON(needs.fetch.outputs.result).title }}
             
