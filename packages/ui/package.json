@@ -6,15 +6,15 @@
     "moduleNameMapper": {
       "^lodash-es$": "lodash"
     }
-  },
-  "scripts": {
+},
+"scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
     "build": "commander build --config ./tsconfig.build.json",
     "publish": "npm publish ./lib",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "test": "react-scripts test --env=jsdom",
-    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit -p ./tsconfig.build.json",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
