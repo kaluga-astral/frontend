@@ -92,6 +92,8 @@ export * from './Placeholder';
 
 export * from './Product';
 
+export * from './ProductWidget';
+
 export * from './Profile';
 
 export * from './Radio';

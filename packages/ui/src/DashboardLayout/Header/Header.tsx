@@ -1,9 +1,9 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 // import { MenuListProps } from '../../MenuList';
 import { Product, ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
-import { ProfileProps } from '../../Profile/types';
+import { ProfileProps } from '../../Profile';
 
 import { HeaderNav, HeaderRoot } from './styles';
 
