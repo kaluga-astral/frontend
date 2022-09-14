@@ -14,7 +14,7 @@ import {
   ButtonVariant,
 } from './types';
 
-export type StyledButtonBaseProps = Omit<
+export type ButtonBaseWrapperProps = Omit<
   BaseButtonProps,
   'color' | 'variant'
 > & {
@@ -22,7 +22,7 @@ export type StyledButtonBaseProps = Omit<
   customVariant?: ButtonVariant;
 };
 
-export type StyledButtonBaseThemeProps = {
+export type ButtonBaseWrapperThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   selected?: boolean;
@@ -36,7 +36,7 @@ export const getColor = ({
   customColor,
   buttonState,
   selected,
-}: StyledButtonBaseThemeProps & { buttonState: ButtonState }): string => {
+}: ButtonBaseWrapperThemeProps & { buttonState: ButtonState }): string => {
   const textColorVariants = {
     selected: {
       default: theme.palette.grey['900'],
@@ -112,7 +112,7 @@ export const getBgColor = ({
   customVariant,
   buttonState,
   theme,
-}: StyledButtonBaseThemeProps & { buttonState: ButtonState }) => {
+}: ButtonBaseWrapperThemeProps & { buttonState: ButtonState }) => {
   const bgColorVariants = {
     selected: {
       default: theme.palette.grey['900'],
@@ -202,7 +202,7 @@ export const getBgColor = ({
 
 export const getButtonHeight = ({
   size,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (size === ButtonSizes.Large) {
     return '40px';
   }
@@ -213,7 +213,7 @@ export const getButtonHeight = ({
 export const getButtonPadding = ({
   size,
   theme,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (size === ButtonSizes.Large) {
     return theme.spacing(2, 4, 2, 4);
   }
@@ -224,7 +224,7 @@ export const getButtonPadding = ({
 export const getDisabledBgColor = ({
   theme,
   customVariant,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (
     customVariant === ButtonVariants.Link ||
     customVariant === ButtonVariants.Text
@@ -238,7 +238,7 @@ export const getDisabledBgColor = ({
 export const getButtonPaddingMobile = ({
   size,
   theme,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (size === ButtonSizes.Small) {
     return theme.spacing(2, 3);
   }
@@ -248,7 +248,7 @@ export const getButtonPaddingMobile = ({
 
 export const getButtonHeightMobile = ({
   size,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (size === ButtonSizes.Small) {
     return '32px';
   }
@@ -256,10 +256,10 @@ export const getButtonHeightMobile = ({
   return '48px';
 };
 
-export const StyledButtonBase = styled(ButtonUnstyled, {
+export const ButtonBaseWrapper = styled(ButtonUnstyled, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
-})<StyledButtonBaseProps>`
+})<ButtonBaseWrapperProps>`
   position: relative;
 
   display: inline-flex;

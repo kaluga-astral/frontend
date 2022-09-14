@@ -1,7 +1,7 @@
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
-import type { StyledButtonBaseThemeProps } from '../../ButtonBase/styles';
+import type { ButtonBaseWrapperThemeProps } from '../../ButtonBase/styles';
 import { ButtonStates } from '../../ButtonBase';
 import {
   getBgColor,
@@ -18,9 +18,9 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
   styleOverrides: {
     root({ ownerState, theme }) {
       const customVariant =
-        ownerState.variant as StyledButtonBaseThemeProps['customVariant'];
+        ownerState.variant as ButtonBaseWrapperThemeProps['customVariant'];
       const customColor =
-        ownerState.color as StyledButtonBaseThemeProps['customColor'];
+        ownerState.color as ButtonBaseWrapperThemeProps['customColor'];
       const selected = ownerState.selected as boolean;
 
       return {
@@ -42,11 +42,11 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         }),
         height: getButtonHeight({
           theme,
-          size: ownerState.size as StyledButtonBaseThemeProps['size'],
+          size: ownerState.size as ButtonBaseWrapperThemeProps['size'],
         }),
         padding: getButtonPadding({
           theme,
-          size: ownerState.size as StyledButtonBaseThemeProps['size'],
+          size: ownerState.size as ButtonBaseWrapperThemeProps['size'],
         }),
         fontWeight: theme.typography.button.fontWeight,
         fontSize: theme.typography.button.fontSize,

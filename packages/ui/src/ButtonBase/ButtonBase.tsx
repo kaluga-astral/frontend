@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 import { BaseButtonProps } from './types';
 import { ButtonColors, ButtonVariants } from './enums';
-import { StyledButtonBase } from './styles';
+import { ButtonBaseWrapper } from './styles';
 
 export const ButtonBase = forwardRef<HTMLButtonElement, BaseButtonProps>(
   (
@@ -15,14 +15,14 @@ export const ButtonBase = forwardRef<HTMLButtonElement, BaseButtonProps>(
     ref,
   ) => {
     return (
-      <StyledButtonBase
+      <ButtonBaseWrapper
         ref={ref}
         {...props}
         customColor={color}
         customVariant={variant}
       >
         {children}
-      </StyledButtonBase>
+      </ButtonBaseWrapper>
     );
   },
 );

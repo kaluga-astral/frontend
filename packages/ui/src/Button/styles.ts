@@ -8,7 +8,7 @@ import {
 
 import { ButtonProps } from './types';
 
-export const StyledLoadingButton = styled(LoadingButton, {
+export const LoadingButtonWrapper = styled(LoadingButton, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<ButtonProps>`

@@ -4,7 +4,7 @@ import { ButtonColors, ButtonVariants } from '../ButtonBase';
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 
-import { StyledLoadingButton } from './styles';
+import { LoadingButtonWrapper } from './styles';
 import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,7 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }, [variant]);
 
     return (
-      <StyledLoadingButton
+      <LoadingButtonWrapper
         ref={ref}
         {...restProps}
         variant={variant}

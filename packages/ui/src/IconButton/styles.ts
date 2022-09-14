@@ -3,11 +3,13 @@ import { ButtonBase, ButtonSizes } from '../ButtonBase';
 import { Theme } from '../theme';
 import { ButtonProps } from '../Button';
 
-type StyledIconButtonThemeProps = ButtonProps & {
+type IconButtonWrapperThemeProps = ButtonProps & {
   theme: Theme;
 };
 
-export const getButtonSize = ({ size }: StyledIconButtonThemeProps): string => {
+export const getButtonSize = ({
+  size,
+}: IconButtonWrapperThemeProps): string => {
   if (size === ButtonSizes.Large) {
     return '40px';
   }
@@ -17,7 +19,7 @@ export const getButtonSize = ({ size }: StyledIconButtonThemeProps): string => {
 
 export const getButtonSizeMobile = ({
   size,
-}: StyledIconButtonThemeProps): string => {
+}: IconButtonWrapperThemeProps): string => {
   if (size === ButtonSizes.Small) {
     return '36px';
   }
@@ -25,7 +27,7 @@ export const getButtonSizeMobile = ({
   return '48px';
 };
 
-export const StyledIconButton = styled(ButtonBase, {
+export const IconButtonWrapper = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`
