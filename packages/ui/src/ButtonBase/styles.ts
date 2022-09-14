@@ -265,12 +265,12 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: ${getButtonHeight};
+  padding: ${getButtonPadding};
 
-  height: ${getButtonHeightMobile};
-  padding: ${getButtonPaddingMobile};
-  ${({ theme }) => theme.breakpoints.up('sm')} {
-    height: ${getButtonHeight};
-    padding: ${getButtonPadding};
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    height: ${getButtonHeightMobile};
+    padding: ${getButtonPaddingMobile};
   }
 
   color: ${(props) =>
