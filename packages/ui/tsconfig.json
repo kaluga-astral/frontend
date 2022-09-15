@@ -2,12 +2,9 @@
   "extends": "../../tsconfig.json",
   "include": [
     "./**/*.ts",
-    "./**/*.tsx"
+    "./**/*.tsx",
   ],
   "exclude": [
-    "node_modules",
-    "lib",
-    "./**/*.test.(tsx|ts)",
-    "./**/*.stories.tsx"
+    "lib"
   ]
 }

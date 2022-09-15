@@ -1,6 +1,6 @@
 const shell = require('shelljs');
 
-const { DIST_DIR_NAME } = require('../constants');
+const { TSCONFIG_PATH, DIST_DIR_NAME } = require('../constants');
 
 const { copyCommonFiles } = require('./copyCommonFiles');
 const { modifyPackageJSON } = require('./modifyPackageJSON');
@@ -9,7 +9,7 @@ const build = () => {
   console.log('Starting build...');
 
   const { code } = shell.exec(
-    `tsc -p ./tsconfig.json --module es2015 --outDir ${DIST_DIR_NAME}/esm && tsc -p ./tsconfig.json --module commonjs --outDir ${DIST_DIR_NAME}`,
+    `tsc -p ${TSCONFIG_PATH} --module es2015 --outDir ${DIST_DIR_NAME}/esm && tsc -p ${TSCONFIG_PATH} --module commonjs --outDir ${DIST_DIR_NAME}`,
   );
 
   if (code !== 0) {

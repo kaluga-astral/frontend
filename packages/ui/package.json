@@ -1,6 +1,5 @@
 {
   "name": "@astral/ui",
-  "version": "0.31.0",
   "browser": "./src/index.ts",
   "jest": {
     "moduleNameMapper": {

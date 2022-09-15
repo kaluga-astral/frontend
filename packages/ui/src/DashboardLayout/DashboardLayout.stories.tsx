@@ -1,4 +1,4 @@
-import { ReactElement, forwardRef } from 'react';
+import { MouseEvent, ReactElement, forwardRef } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
@@ -41,7 +41,7 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
   (props, ref) => {
     const { className, to, children } = props;
 
-    const handleClick = (e) => {
+    const handleClick = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();
     };
 
