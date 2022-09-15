@@ -9,7 +9,7 @@ export const DescriptionWrapper = styled.div`
     flex-direction: column;
 
     .MuiTypography-root {
-      font-size: 14px;
+      font-size: ${({ theme }) => theme.typography.fontSize};
     }
   }
 `;
