@@ -1,8 +1,5 @@
 import { Story } from '@storybook/react';
 import { FC, MouseEventHandler, PropsWithChildren, useState } from 'react';
-// ???
-// Cannot find module '@astral/illustrations/src/no-certificates.svg' or its corresponding type declarations
-// @ts-ignore
 import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
