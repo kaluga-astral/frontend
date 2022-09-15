@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { AutocompleteCloseReason } from '@mui/base/AutocompleteUnstyled/useAutocomplete';
 
 type PopId = string;
 type PointerId = string | null;
@@ -10,6 +11,7 @@ export type Reason =
   | 'backdropClick'
   | 'toggleInput'
   | 'blur'
+  | AutocompleteCloseReason
   | null;
 
 class BackdropStackManager {
