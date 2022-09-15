@@ -1,5 +1,8 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
+// ???
+// Cannot find module '@astral/illustrations/src/no-certificates.svg' or its corresponding type declarations.
+// @ts-ignore
 import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button } from '../Button';

@@ -1,5 +1,8 @@
 import { Story } from '@storybook/react';
-import { useState } from 'react';
+import { FC, MouseEventHandler, PropsWithChildren, useState } from 'react';
+// ???
+// Cannot find module '@astral/illustrations/src/no-certificates.svg' or its corresponding type declarations
+// @ts-ignore
 import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
@@ -19,7 +22,7 @@ const BaseContentContainer = styled(Grid)`
   border: 1px solid gray;
 `;
 
-const BaseContent = ({ children }) => {
+const BaseContent: FC<PropsWithChildren> = ({ children }) => {
   return (
     <BaseContentContainer
       alignContent="center"
@@ -31,7 +34,9 @@ const BaseContent = ({ children }) => {
   );
 };
 
-const Form = ({ onClick }) => {
+const Form: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> = ({
+  onClick,
+}) => {
   return (
     <>
       <TextField label="Название" />
@@ -50,8 +55,8 @@ const Case = ({
   loadingContent?: JSX.Element | string;
 }) => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [errorList, setErrorList] = useState<null | string[]>();
-  const isError = !!errorList;
+  const [errorList, setErrorList] = useState<string[]>([]);
+  const isError = !!errorList.length;
 
   const handleClick = () => {
     const TIMEOUT_MS = 3000;

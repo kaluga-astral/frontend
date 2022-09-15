@@ -24,8 +24,8 @@ const TextFieldWithValidationOnBlur = ({
   return (
     <TextField
       {...restProps}
-      error={isValidated ? error : null}
-      success={isValidated ? success : null}
+      error={isValidated ? error : undefined}
+      success={isValidated ? success : undefined}
       helperText={isValidated ? helperText : null}
       onBlur={handleBlur}
     />
