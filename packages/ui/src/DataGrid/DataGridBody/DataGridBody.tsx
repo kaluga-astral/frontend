@@ -3,7 +3,6 @@ import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
-import { DataGridNoData } from '../DataGridNoData';
 import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styles';
@@ -18,7 +17,7 @@ export type DataGridBodyProps<Data> = {
   onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
   emptyCellValue?: ReactNode;
-  loading?: boolean;
+  NoDataPlaceholder?: ReactNode;
 };
 
 export function DataGridBody<Data>({
@@ -31,7 +30,7 @@ export function DataGridBody<Data>({
   minDisplayRows,
   keyId,
   emptyCellValue,
-  loading,
+  NoDataPlaceholder,
 }: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
     (row: Data, rowId: string) => {
@@ -88,11 +87,7 @@ export function DataGridBody<Data>({
 
   return (
     <StyledTableBody empty={!rows.length} minDisplayRows={minDisplayRows}>
-      {rows.length ? (
-        renderedRows
-      ) : (
-        <DataGridNoData title="Нет данных" loading={loading} />
-      )}
+      {rows.length ? renderedRows : NoDataPlaceholder}
     </StyledTableBody>
   );
 }
