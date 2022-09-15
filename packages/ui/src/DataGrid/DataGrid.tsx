@@ -170,11 +170,12 @@ export function DataGrid<
             rows={rows}
             columns={columns}
             emptyCellValue={emptyCellValue}
+            loading={loading}
           />
         </Table>
         <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      {Footer}
+      {rows.length ? Footer : null}
     </DataGridContainer>
   );
 }
