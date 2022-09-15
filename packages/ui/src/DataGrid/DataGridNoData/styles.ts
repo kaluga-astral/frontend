@@ -1,7 +1,7 @@
 import { Typography, TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
-export const StyledDataGridNoData = styled.div`
+export const DataGridNoDataWrapper = styled.div`
   position: absolute;
 
   display: flex;
@@ -11,7 +11,7 @@ export const StyledDataGridNoData = styled.div`
   height: 100%;
 `;
 
-export const DataGridNoDataWrapper = styled.div`
+export const StyledDataGridNoData = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

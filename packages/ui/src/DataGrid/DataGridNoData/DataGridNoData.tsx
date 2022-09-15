@@ -14,12 +14,12 @@ export type DataGridNoDataProps = {
 
 export const DataGridNoData = ({ title, loading }: DataGridNoDataProps) => {
   return !loading ? (
-    <StyledDataGridNoData>
-      <DataGridNoDataWrapper>
+    <DataGridNoDataWrapper>
+      <StyledDataGridNoData>
         <DataGridNoDataIcon src={NoData} alt={title} />
 
         <DataGridNoDataTitle variant="h4">{title}</DataGridNoDataTitle>
-      </DataGridNoDataWrapper>
-    </StyledDataGridNoData>
+      </StyledDataGridNoData>
+    </DataGridNoDataWrapper>
   ) : null;
 };
