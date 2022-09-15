@@ -5,7 +5,7 @@ import { Table } from '../Table';
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
-import { DataGridContainer, StyledTableContainer } from './styled';
+import { DataGridContainer, StyledTableContainer } from './styles';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
@@ -44,15 +44,15 @@ export type DataGridProps<
    */
   onSelectRow?: (row: Data[]) => void;
   /**
-   * @example <DataGrid sorting={[{fieldId: 'test', sort: 'asc'}]} />
-   * Массив сортируемых колонок
+   * @example <DataGrid sorting={{fieldId: 'test', sort: 'asc'}} />
+   * Параметры сортируемой колонки
    */
-  sorting?: DataGridSort<SortField>[];
+  sorting?: DataGridSort<SortField>;
   /**
    * @example <DataGrid onSort={({fieldId: 'test', sort: 'asc'}) => console.log('sorted')} />
    * Обработчик сортировки
    */
-  onSort?: (sorting: DataGridSort<SortField>[]) => void;
+  onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
   /**
    * @example <DataGrid  Footer={<DataGridPagination />} />
    * Компонент кастомного футера (н-р Pagination)
@@ -77,7 +77,7 @@ export type DataGridProps<
   /**
    * @default 10
    * @example <DataGrid  minDisplayRows{10} />
-   *  используется для отображения переданного кол-ва строк при отсутствии данных
+   *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
 };
@@ -89,7 +89,7 @@ export function DataGrid<
   columns,
   rows = [],
   selectedRows = [],
-  sorting = [],
+  sorting,
   maxHeight,
   minDisplayRows = 10,
   onRowClick,

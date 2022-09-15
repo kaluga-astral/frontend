@@ -1,5 +1,7 @@
 export * from './ActionCell';
 
+export * from './Alert';
+
 export * from './Autocomplete';
 
 export * from './BackdropStack';
@@ -7,6 +9,8 @@ export * from './BackdropStack';
 export * from './Badge';
 
 export * from './Button';
+
+export * from './Description';
 
 export * from './Divider';
 
@@ -37,6 +41,8 @@ export * from './DialogContentText';
 export * from './DialogTitle';
 
 export * from './DropdownButton';
+
+export * from './Fab';
 
 export * from './Fade';
 
@@ -102,6 +108,10 @@ export * from './StylesCacheProvider';
 
 export * from './Table';
 
+export * from './Tab';
+
+export * from './Tabs';
+
 export * from './Tag';
 
 export * from './TextArea';
@@ -127,6 +137,8 @@ export * from './SideDialogContent';
 export * from './SideDialogContentText';
 
 export * from './Slide';
+
+export * from './SwipeableDrawer';
 
 export * from './Zoom';
 

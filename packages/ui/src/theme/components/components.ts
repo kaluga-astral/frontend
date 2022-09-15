@@ -3,6 +3,7 @@ import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
 
+import { MuiAlert } from './MuiAlert';
 import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
 import { MuiLoadingButton } from './MuiLoadingButton';
@@ -26,6 +27,8 @@ import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
 import { MuiListItemButton } from './MuiListItemButton';
 import { MuiListItemText } from './MuiListItemText';
+import { MuiTab } from './MuiTab';
+import { MuiTabs } from './MuiTabs';
 
 export type FontsUrls = {
   bold: {
@@ -95,6 +98,7 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiAlert,
   MuiButton,
   MuiButtonBase,
   MuiLoadingButton,
@@ -120,4 +124,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCircularProgress,
   MuiListItemButton,
   MuiListItemText,
+  MuiTab,
+  MuiTabs,
 });

@@ -2,7 +2,7 @@ name: 'Create release'
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
 
 jobs:
   releasePackages:
@@ -21,48 +21,58 @@ jobs:
         run: npm i
 
       - name: Generate release
+        # Устанавливает в env NEXT_VERSION и CURRENT_VERSION
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build @astral/ui
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/ui
         env:
           # NEXT_VERSION устанавливается в semantic-release.config.js
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/ui
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/ui/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/icons
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/icons
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/icons
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/icons/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/fonts
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/fonts
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/fonts
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/fonts/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/illustrations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/illustrations
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
       - name: Publish @astral/illustrations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/illustrations/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: send telegram message on release
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_RELEASE_CHAT_ID }}
@@ -79,7 +89,7 @@ jobs:
             📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
 
-            ⚡️ <a href="${{ github.event.release.html_url }}">Changelog</a>
+            ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/v${{ env.NEXT_VERSION }}">Changelog</a>
 
             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
 
