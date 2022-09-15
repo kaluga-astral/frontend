@@ -1,0 +1,1 @@
+// создана папка src, т.к. при сборке copyCommonFiles ищет папку form/src
