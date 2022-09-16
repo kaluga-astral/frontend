@@ -6,7 +6,7 @@ import { Grid } from '../Grid';
 
 type Props = {
   children: ReactNode;
-  captureException: (errorInfo: ErrorInfo, error: Error) => void;
+  captureException?: (errorInfo: ErrorInfo, error: Error) => void;
 };
 
 type State = {
@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    this.props.captureException(errorInfo, error);
+    this.props.captureException?.(errorInfo, error);
   }
 
   handleReloadPage() {
