@@ -8,13 +8,13 @@ import {
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
-import { typography } from './typography';
-import { Background, Color, getPalette } from './palette';
-import { FontsUrls, getComponents } from './components';
-import { Brand, SPACING } from './constants';
-import { elevation } from './elevation';
-import { shape } from './shape';
-import { defaultBreakpoints } from './breakpoints';
+import { typography } from '../typography';
+import { Background, Color, getPalette } from '../palette';
+import { FontsUrls, getComponents } from '../components';
+import { Brand, SPACING } from '../constants';
+import { elevation } from '../elevation';
+import { shape } from '../shape';
+import { defaultBreakpoints } from '../breakpoints';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
