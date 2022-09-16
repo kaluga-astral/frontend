@@ -1,32 +1,39 @@
 import { Story } from '@storybook/react';
+import { useForm } from 'react-hook-form';
+import { Button, Grid } from '@astral/ui';
 
-import { useStorybookFormPreview } from '../hooks/useStorybookFormPreview';
-
-import { FormTextField } from './FormTextField';
+import { FormTextField, FormTextFieldValue } from './FormTextField';
 
 export default {
   title: 'Form/FormTextField',
   component: null,
 };
 
+type FormValues = { name: FormTextFieldValue };
+
 const Template: Story = () => {
-  const DEFAULT_VALUES = {
-    textField: '',
+  const form = useForm<FormValues>();
+
+  const handleSubmit = (values: FormValues) => {
+    window.alert(JSON.stringify(values));
   };
 
-  const ERROR_TEXT_REQUIRED = 'Обязательное поле';
-
-  const { control, Form } = useStorybookFormPreview(DEFAULT_VALUES);
-
   return (
-    <Form >
-      <FormTextField
-        label="Form text field"
-        control={control}
-        name="textField"
-        rules={{ required: ERROR_TEXT_REQUIRED }}
-      />
-    </Form>
+    <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <Grid container templateColumns="1fr" rowSpacing={2}>
+        <Grid>
+          <FormTextField
+            label="Form text field"
+            control={form.control}
+            name="name"
+            rules={{ required: 'Обязательное поле' }}
+          />
+        </Grid>
+        <Grid>
+          <Button type="submit">Submit</Button>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 

@@ -1,17 +1,18 @@
 import { TextField, TextFieldProps } from '@astral/ui';
-import { UseControllerProps, useController } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';
+import { WithFormFieldProps } from '../types';
 
 export type FormTextFieldValue = string;
 
-export type FormTextFieldProps<FieldName extends {}> = {
-  name: FieldName;
-} & Omit<TextFieldProps, 'name'> &
-  UseControllerProps<FieldName>;
+export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
+  Omit<TextFieldProps, 'name'>,
+  FieldValues
+>;
 
-export function FormTextField<FieldName extends {}>(
-  props: FormTextFieldProps<FieldName>,
+export function FormTextField<FieldValues extends object>(
+  props: FormTextFieldProps<FieldValues>,
 ) {
   const { field, fieldState } = useController(props);
   const errorProps = useFieldErrorProps(fieldState);
