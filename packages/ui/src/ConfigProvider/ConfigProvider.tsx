@@ -2,7 +2,13 @@ import { ErrorInfo, ReactNode, createContext, useEffect } from 'react';
 import ru from 'date-fns/locale/ru';
 
 export type ConfigContextProps = {
+  /*
+   * Локализация
+   */
   locale?: Locale;
+  /*
+   * Callback для отправки ошибки в sentry
+   */
   captureException?: (errorInfo: ErrorInfo, error: Error) => void;
 };
 
@@ -11,13 +17,7 @@ export type ConfigProviderProps = ConfigContextProps & {
 };
 
 export const ConfigContext = createContext<ConfigContextProps>({
-  /*
-   * Локализация
-   */
   locale: ru,
-  /*
-   * Callback для отправки ошибки в sentry
-   */
   captureException: (errorInfo, error) => console.error(errorInfo, error),
 });
 
