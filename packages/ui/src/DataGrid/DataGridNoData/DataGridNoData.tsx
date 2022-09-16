@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
 import {
+  DataGridNoDataContent,
   DataGridNoDataIcon,
   DataGridNoDataTitle,
   DataGridNoDataWrapper,
-  StyledDataGridNoData,
 } from './styles';
 
 export type DataGridNoDataProps = {
@@ -15,17 +15,20 @@ export type DataGridNoDataProps = {
    */
   title?: string;
   /**
-   * @default renderBaseNoDataIcon()
-   * @example <DataGridNoData  imgSrc={NoData} />
+   * @default BaseNoDataIcon()
+   * @example <DataGridNoData  noDataIcon={BaseNoDataIcon()} />
    * @description Иконка
    */
   noDataIcon?: ReactNode;
+  /**
+   * @default false
+   * @example <DataGridNoData  loading={false} />
+   * @description Флажок загрузки данных
+   */
+  loading?: boolean;
 };
 
-/**
- * @description Рендер иконки отсутствия данных по умолчанию
- */
-const renderBaseNoDataIcon = () => (
+const BaseNoDataIcon = () => (
   <svg viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fill="#EBEEF1"
@@ -103,15 +106,16 @@ const renderBaseNoDataIcon = () => (
 
 export const DataGridNoData = ({
   title = 'Нет данных',
-  noDataIcon = renderBaseNoDataIcon(),
+  noDataIcon = BaseNoDataIcon(),
+  loading = false,
 }: DataGridNoDataProps) => {
-  return (
+  return !loading ? (
     <DataGridNoDataWrapper>
-      <StyledDataGridNoData>
+      <DataGridNoDataContent>
         <DataGridNoDataIcon>{noDataIcon}</DataGridNoDataIcon>
 
         <DataGridNoDataTitle variant="h4">{title}</DataGridNoDataTitle>
-      </StyledDataGridNoData>
+      </DataGridNoDataContent>
     </DataGridNoDataWrapper>
-  );
+  ) : null;
 };

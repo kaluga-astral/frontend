@@ -13,7 +13,7 @@ export const DataGridNoDataWrapper = styled.tr`
   transform: translate(-50%, -50%);
 `;
 
-export const StyledDataGridNoData = styled.div`
+export const DataGridNoDataContent = styled.figure`
   position: absolute;
 
   display: flex;

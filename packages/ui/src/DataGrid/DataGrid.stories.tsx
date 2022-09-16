@@ -6,7 +6,6 @@ import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 
 import { DataGrid } from './DataGrid';
-import { DataGridNoData } from './DataGridNoData';
 import { DataGridColumns, DataGridSort } from './types';
 
 export default {
@@ -294,20 +293,6 @@ export const Showcase: Story = (args) => {
   const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
     setSorting(newSorting);
 
-  const renderDataGridPlaceholder = (isLoading: boolean) => {
-    return !isLoading ? <DataGridNoData /> : null;
-  };
-
-  const renderDataGridFooter = (isDataPresent: boolean) => {
-    return isDataPresent ? (
-      <DataGridPagination
-        totalCount={data.length}
-        onChange={handleChangePage}
-        page={page}
-      />
-    ) : null;
-  };
-
   return (
     <DataGrid<DataType, SortField>
       {...args}
@@ -321,8 +306,13 @@ export const Showcase: Story = (args) => {
       loading={loading}
       onSort={handleSort}
       sorting={sorting}
-      NoDataPlaceholder={renderDataGridPlaceholder(loading)}
-      Footer={renderDataGridFooter(!!slicedData.length)}
+      Footer={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
     />
   );
 };

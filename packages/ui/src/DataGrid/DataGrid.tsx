@@ -5,6 +5,7 @@ import { Table } from '../Table';
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
+import { DataGridNoData } from './DataGridNoData';
 import { DataGridContainer, StyledTableContainer } from './styles';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
@@ -176,12 +177,14 @@ export function DataGrid<
             rows={rows}
             columns={columns}
             emptyCellValue={emptyCellValue}
-            NoDataPlaceholder={NoDataPlaceholder}
+            NoDataPlaceholder={
+              NoDataPlaceholder || <DataGridNoData loading={loading} />
+            }
           />
         </Table>
         <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      {Footer}
+      {rows.length ? Footer : null}
     </DataGridContainer>
   );
 }
