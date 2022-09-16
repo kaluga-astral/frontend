@@ -1,0 +1,19 @@
+{
+  "name": "@astral/validations",
+  "browser": "./src/index.ts",
+  "main": "./src/index.ts",
+  "scripts": {
+    "prebuild": "npx rimraf ./lib",
+    "build": "commander build",
+    "publish": "npm publish ./lib",
+    "tests": "jest --passWithNoTests",
+    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.6"
+  }
+}

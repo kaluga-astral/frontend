@@ -71,6 +71,17 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Build @astral/validations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm run build --workspace=@astral/validations
+        env:
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
+      - name: Publish @astral/validations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/validations/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: send telegram message on release
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         uses: appleboy/telegram-action@master
