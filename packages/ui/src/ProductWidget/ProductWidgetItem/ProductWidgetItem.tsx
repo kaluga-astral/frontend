@@ -18,7 +18,7 @@ export const ProductWidgetItem = ({
   return (
     <li>
       <ProductLink href={url}>
-        <Logo src={logoUrl} alt="" color={color} />
+        <Logo src={logoUrl} alt={name} color={color} />
         <Typography>{name}</Typography>
       </ProductLink>
     </li>

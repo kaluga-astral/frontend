@@ -1,60 +1,43 @@
-import { ErrorFillMd } from '@astral/icons';
-import { useMemo } from 'react';
+import { ContentState } from '../../ContentState';
 
-import { CircularProgress } from '../../CircularProgress';
-import { Typography } from '../../Typography';
-import { ProductWidgetItem } from '../ProductWidgetItem';
-
-import { ContentWrapper, Error, ProgressWrapper } from './styles';
+import { Logo, ProductItem } from './styles';
 
 type ProductWidgetContentProps = {
-  loading: boolean;
+  isLoading: boolean;
   products: Array<{
     name: string;
     url: string;
     logoUrl: string;
     color: string;
   }>;
-  error: string;
+  isError: boolean;
 };
 
 export const ProductWidgetContent = ({
-  loading,
-  error,
+  isLoading,
+  isError,
   products = [],
 }: ProductWidgetContentProps) => {
-  const productsList = useMemo(() => {
-    return products.map((product) => (
-      <ProductWidgetItem key={product.name} {...product} />
-    ));
-  }, [products]);
+  const productsList = products.map((product) => (
+    <ProductItem key={product.name} {...product}>
+      <Logo src={product.logoUrl} color={product.color} />
+      {product.name}
+    </ProductItem>
+  ));
 
   return (
-    <ContentWrapper container spacing={1} component="ul">
-      {loading && (
-        <ProgressWrapper>
-          <CircularProgress color="primary" />
-        </ProgressWrapper>
-      )}
-      {error && (
-        <Error>
-          <Typography alignItems="center" display="flex" paragraph variant="h6">
-            <ErrorFillMd />
-            Что-то полшо не так
-          </Typography>
-          <Typography>Произошла ошибка. Повторите попытку позже.</Typography>
-        </Error>
-      )}
-      {!loading && (
-        <Typography
-          variant="h7"
-          color="textSecondary"
-          textTransform="uppercase"
-        >
-          Продукты экосистемы
-        </Typography>
-      )}
-      {!loading && productsList}
-    </ContentWrapper>
+    <ContentState
+      isLoading={isLoading}
+      isCustom={isError}
+      customState={{
+        imgAlt: 'Что-то полшо не так',
+        title: 'Что-то пошло не так',
+        description: 'Произошла ошибка. Повторите попытку позже.',
+        // TODO: imgSrc обязательный параметр, а в title не засунуть текст с иконкой(
+        imgSrc: '',
+      }}
+    >
+      {productsList}
+    </ContentState>
   );
 };

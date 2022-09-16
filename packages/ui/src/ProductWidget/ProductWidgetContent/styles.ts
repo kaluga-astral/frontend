@@ -1,32 +1,17 @@
-import { Grid } from '../../Grid';
 import { styled } from '../../styles';
+import { MenuItem } from '../../MenuItem';
 
-export const ContentWrapper = styled(Grid)`
-  width: 285px;
-  min-height: 124px;
-  margin: 0;
-  padding: ${({ theme }) => theme.spacing(4)};
+export const ProductItem = styled(MenuItem)`
+  width: 100%;
 
-  list-style-type: none;
+  border-radius: ${({ theme }) => theme.shape.small};
 `;
 
-export const Error = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+export const Logo = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: ${({ theme }) => theme.spacing(2)};
 
-  text-align: center;
-
-  svg {
-    margin-right: ${({ theme }) => theme.spacing(2)};
-
-    color: ${({ theme }) => theme.palette.error.dark};
-  }
-`;
-
-export const ProgressWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: ${({ color }) => color};
+  border-radius: ${({ theme }) => theme.shape.small};
 `;

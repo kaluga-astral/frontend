@@ -1,10 +1,11 @@
 import { ProductsFillMd } from '@astral/icons';
-import { Popover } from '@mui/material';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { useMenu } from '../hooks';
 
 import { ProductWidgetContent } from './ProductWidgetContent';
+import { ContentWrapper, WidgetMenu } from './styles';
 
 export type WidgetProduct = {
   url: string;
@@ -19,50 +20,51 @@ export type ProductWidgetProps = {
 
 export const ProductWidget = ({ getProducts }: ProductWidgetProps) => {
   const [products, setProducts] = useState<WidgetProduct[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
-  const open = Boolean(anchorEl);
-
-  const handleShowProducts = async (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleShowProducts = async () => {
+    handleOpenMenu();
 
     if (!products.length) {
-      setLoading(true);
+      setIsLoading(true);
 
       try {
         const productsList = await getProducts();
 
         setProducts(productsList);
       } catch (e) {
-        setError('error');
+        setIsError(true);
       }
 
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const handleClose = () => setAnchorEl(null);
-
   return (
     <>
-      <IconButton selected={open} variant="text" onClick={handleShowProducts}>
+      <IconButton
+        ref={anchorRef}
+        selected={open}
+        variant="text"
+        onClick={handleShowProducts}
+      >
         <ProductsFillMd />
       </IconButton>
-      <Popover
+      <WidgetMenu
         open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: -8, horizontal: 0 }}
+        anchorEl={anchorRef.current}
+        onClose={handleCloseMenu}
       >
-        <ProductWidgetContent
-          loading={loading}
-          error={error}
-          products={products}
-        />
-      </Popover>
+        <ContentWrapper>
+          <ProductWidgetContent
+            isLoading={isLoading}
+            isError={isError}
+            products={products}
+          />
+        </ContentWrapper>
+      </WidgetMenu>
     </>
   );
 };
