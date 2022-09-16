@@ -14,6 +14,9 @@ export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
         styles={{
           html: {
             fontSize: theme.typography.htmlFontSize,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 16,
+            },
           },
           '*': {
             scrollbarWidth: 'thin',

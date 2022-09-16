@@ -9,7 +9,7 @@ const { lintPRTitle } = require('./tasks/lintPRTitle');
 const runTask = async ({ task, args }) => {
   switch (task) {
     case 'build':
-      build();
+      build({ config: args.config });
 
       break;
     case 'copyFonts':

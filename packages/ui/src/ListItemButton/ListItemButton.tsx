@@ -6,11 +6,13 @@ export type ListItemButtonProps = Omit<
   MuiListItemButtonProps,
   'disableRipple'
 > & {
-  component: ElementType;
+  component?: ElementType;
 };
 
 export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
   (props, ref) => {
-    return <MuiListItemButton ref={ref} {...props} disableRipple />;
+    return (
+      <MuiListItemButton ref={ref} component="div" {...props} disableRipple />
+    );
   },
 );
