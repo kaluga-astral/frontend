@@ -6,9 +6,7 @@
     "prebuild": "rimraf ./lib",
     "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",
     "publish": "npm publish ./lib",
-    "tests": "jest --passWithNoTests",
-    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "tests": "jest --passWithNoTests"
   },
   "dependencies": {}
 }
