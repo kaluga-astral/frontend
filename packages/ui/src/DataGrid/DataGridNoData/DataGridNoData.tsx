@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import {
-  DataGridNoDataContent,
+  DataGridNoDataFigure,
   DataGridNoDataIcon,
   DataGridNoDataTitle,
   DataGridNoDataWrapper,
@@ -10,22 +10,22 @@ import {
 export type DataGridNoDataProps = {
   /**
    * @default 'Нет данных'
-   * @example <DataGridNoData  title='Нет данных' />
+   * @example <DataGridNoData title='Нет данных' />
    * @description Заголовок
    */
   title?: string;
   /**
    * @default BaseNoDataIcon()
-   * @example <DataGridNoData  noDataIcon={BaseNoDataIcon()} />
+   * @example <DataGridNoData noDataIcon={BaseNoDataIcon()} />
    * @description Иконка
    */
   noDataIcon?: ReactNode;
   /**
-   * @default false
-   * @example <DataGridNoData  loading={false} />
-   * @description Флажок загрузки данных
+   * @default 250
+   * @example <DataGridNoData noDataIconWidth={250} />
+   * @description Ширина иконки (высота рассчитывается пропорционально ширине)
    */
-  loading?: boolean;
+  noDataIconWidth?: number;
 };
 
 const BaseNoDataIcon = () => (
@@ -107,15 +107,19 @@ const BaseNoDataIcon = () => (
 export const DataGridNoData = ({
   title = 'Нет данных',
   noDataIcon = BaseNoDataIcon(),
-  loading = false,
+  noDataIconWidth = 250,
 }: DataGridNoDataProps) => {
-  return !loading ? (
+  return (
     <DataGridNoDataWrapper>
-      <DataGridNoDataContent>
-        <DataGridNoDataIcon>{noDataIcon}</DataGridNoDataIcon>
+      <DataGridNoDataFigure>
+        <DataGridNoDataIcon noDataIconWidth={noDataIconWidth}>
+          {noDataIcon}
+        </DataGridNoDataIcon>
 
-        <DataGridNoDataTitle variant="h4">{title}</DataGridNoDataTitle>
-      </DataGridNoDataContent>
+        <figcaption>
+          <DataGridNoDataTitle variant="h4">{title}</DataGridNoDataTitle>
+        </figcaption>
+      </DataGridNoDataFigure>
     </DataGridNoDataWrapper>
-  ) : null;
+  );
 };

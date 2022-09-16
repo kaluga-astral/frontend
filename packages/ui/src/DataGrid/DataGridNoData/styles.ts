@@ -13,7 +13,7 @@ export const DataGridNoDataWrapper = styled.tr`
   transform: translate(-50%, -50%);
 `;
 
-export const DataGridNoDataContent = styled.figure`
+export const DataGridNoDataFigure = styled.figure`
   position: absolute;
 
   display: flex;
@@ -21,9 +21,9 @@ export const DataGridNoDataContent = styled.figure`
   align-items: center;
 `;
 
-export const DataGridNoDataIcon = styled.div`
+export const DataGridNoDataIcon = styled.div<{ noDataIconWidth: number }>`
   svg {
-    width: 250px;
+    width: ${({ noDataIconWidth }) => `${noDataIconWidth}px`};
     height: auto;
   }
 `;
