@@ -60,10 +60,10 @@ export type DataGridProps<
    */
   Footer?: ReactNode;
   /**
-   * @example <DataGrid  NoDataPlaceholder={<DataGridNoData />} />
+   * @example <DataGrid  noDataPlaceholder={<DataGridNoData />} />
    *  Используется для отображения placeholder при отсутствии данных в таблице
    */
-  NoDataPlaceholder?: ReactNode;
+  noDataPlaceholder?: ReactNode;
   /**
    * @example <DataGrid  maxHeight={900} />
    * Максимальная высота для таблицы
@@ -101,7 +101,7 @@ export function DataGrid<
   onRowClick,
   onSelectRow,
   Footer,
-  NoDataPlaceholder,
+  noDataPlaceholder,
   loading,
   onSort,
   keyId,
@@ -156,11 +156,11 @@ export function DataGrid<
 
   const renderedPlaceholder = useCallback(() => {
     if (!loading) {
-      return NoDataPlaceholder || <DataGridNoData />;
+      return noDataPlaceholder || <DataGridNoData />;
     }
 
     return null;
-  }, [NoDataPlaceholder, loading]);
+  }, [noDataPlaceholder, loading]);
 
   return (
     <DataGridContainer>
@@ -185,7 +185,7 @@ export function DataGrid<
             rows={rows}
             columns={columns}
             emptyCellValue={emptyCellValue}
-            NoDataPlaceholder={renderedPlaceholder()}
+            noDataPlaceholder={renderedPlaceholder()}
           />
         </Table>
         <DataGridLoader loading={loading} />

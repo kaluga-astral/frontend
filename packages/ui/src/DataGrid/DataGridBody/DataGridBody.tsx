@@ -17,7 +17,7 @@ export type DataGridBodyProps<Data> = {
   onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
   emptyCellValue?: ReactNode;
-  NoDataPlaceholder?: ReactNode;
+  noDataPlaceholder?: ReactNode;
 };
 
 export function DataGridBody<Data>({
@@ -30,7 +30,7 @@ export function DataGridBody<Data>({
   minDisplayRows,
   keyId,
   emptyCellValue,
-  NoDataPlaceholder,
+  noDataPlaceholder,
 }: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
     (row: Data, rowId: string) => {
@@ -87,7 +87,7 @@ export function DataGridBody<Data>({
 
   return (
     <StyledTableBody empty={!rows.length} minDisplayRows={minDisplayRows}>
-      {rows.length ? renderedRows : NoDataPlaceholder}
+      {rows.length ? renderedRows : noDataPlaceholder}
     </StyledTableBody>
   );
 }

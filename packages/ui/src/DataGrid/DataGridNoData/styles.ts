@@ -1,4 +1,3 @@
-import { Typography, TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
 export const DataGridNoDataWrapper = styled.tr`
@@ -28,6 +27,8 @@ export const DataGridNoDataIcon = styled.div<{ noDataIconWidth: number }>`
   }
 `;
 
-export const DataGridNoDataTitle = styled(Typography)<TypographyProps>`
+export const DataGridNoDataFigcaption = styled.figcaption`
   color: ${({ theme }) => theme.palette.grey[600]};
+  font-weight: ${({ theme }) => theme.typography.h4.fontWeight};
+  font-size: ${({ theme }) => theme.typography.h4.fontSize};
 `;

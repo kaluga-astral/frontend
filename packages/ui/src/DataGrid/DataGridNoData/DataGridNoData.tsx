@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import {
+  DataGridNoDataFigcaption,
   DataGridNoDataFigure,
   DataGridNoDataIcon,
-  DataGridNoDataTitle,
   DataGridNoDataWrapper,
 } from './styles';
 
@@ -116,9 +116,7 @@ export const DataGridNoData = ({
           {noDataIcon}
         </DataGridNoDataIcon>
 
-        <figcaption>
-          <DataGridNoDataTitle variant="h4">{title}</DataGridNoDataTitle>
-        </figcaption>
+        <DataGridNoDataFigcaption>{title}</DataGridNoDataFigcaption>
       </DataGridNoDataFigure>
     </DataGridNoDataWrapper>
   );
