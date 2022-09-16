@@ -4,7 +4,6 @@ import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
 import { PlaceholderProps } from '../Placeholder';
-import { ConfigProvider } from '../ConfigProvider';
 
 export default {
   title: 'Components/ContentState',
@@ -71,6 +70,7 @@ const Case = ({
     <BaseContent>
       <ContentState
         loadingContent={loadingContent}
+        isCustom={customState ? isError : false}
         isLoading={isLoading}
         isError={isError}
         errorState={{
@@ -92,27 +92,25 @@ const Case = ({
 
 const Template: Story = () => {
   return (
-    <ConfigProvider captureException={() => {}}>
-      <Grid
-        templateColumns="repeat(2, 400px)"
-        templateRows="repeat(2, 400px)"
-        container
-      >
-        <Case
-          title="Вариант isCustom"
-          customState={{
-            imgAlt: 'Нет сертификатов',
-            imgSrc: NoCertificates,
-            title: 'Произошла Custom-ошибка',
-          }}
-        />
-        <Case title="Вариант isError" />
-        <Case
-          title="Вариант с Custom Loading"
-          loadingContent="Пожалуйста подождите..."
-        />
-      </Grid>
-    </ConfigProvider>
+    <Grid
+      templateColumns="repeat(2, 400px)"
+      templateRows="repeat(2, 400px)"
+      container
+    >
+      <Case
+        title="Вариант isCustom"
+        customState={{
+          imgAlt: 'Нет сертификатов',
+          imgSrc: NoCertificates,
+          title: 'Произошла Custom-ошибка',
+        }}
+      />
+      <Case title="Вариант isError" />
+      <Case
+        title="Вариант с Custom Loading"
+        loadingContent="Пожалуйста подождите..."
+      />
+    </Grid>
   );
 };
 

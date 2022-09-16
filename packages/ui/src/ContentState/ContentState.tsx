@@ -26,6 +26,10 @@ type ContentStateProps = {
    */
   errorState?: ContentStateErrorProps;
   /**
+   * Флаг для отображения custom состояния ошибки
+   */
+  isCustom?: boolean;
+  /**
    * Параметры для отображения custom состояния ошибки
    */
   customState?: PlaceholderProps;
@@ -38,6 +42,7 @@ type ContentStateProps = {
 export const ContentState = ({
   isLoading,
   isError,
+  isCustom,
   errorState,
   customState,
   children,
@@ -49,7 +54,7 @@ export const ContentState = ({
     return <LoadingContainer>{LoadingContent}</LoadingContainer>;
   }
 
-  if (isError && customState) {
+  if (isCustom && customState) {
     return <Placeholder {...customState} />;
   }
 

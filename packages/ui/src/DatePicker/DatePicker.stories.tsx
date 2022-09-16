@@ -2,8 +2,6 @@ import { Story } from '@storybook/react';
 import { addDays, subDays } from 'date-fns';
 import { useState } from 'react';
 
-import { ConfigProvider } from '../ConfigProvider';
-
 import { DatePicker, DatePickerProps } from './DatePicker';
 
 export default {
@@ -22,11 +20,7 @@ const Template: Story<DatePickerProps> = (args) => {
     setValue(date);
   };
 
-  return (
-    <ConfigProvider captureException={() => {}}>
-      <DatePicker {...args} value={value} onChange={handleChange} />
-    </ConfigProvider>
-  );
+  return <DatePicker {...args} value={value} onChange={handleChange} />;
 };
 
 export const Default = Template.bind({});
