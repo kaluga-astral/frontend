@@ -1,10 +1,7 @@
 import { Grid } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Theme } from '../theme';
-
-import { TypographyProps } from './types';
-import { Typography } from './Typography';
+import { Typography, TypographyProps } from './Typography';
 
 export default {
   title: 'Components/Typography',
@@ -33,7 +30,7 @@ const Template: Story<TypographyProps> = (args) => (
         Head size H6
       </Typography>
       <Typography
-        color={(theme: Theme) => theme.palette.error.dark}
+        color={(theme) => theme.palette.error.dark}
         variant="h7"
         paragraph
       >
