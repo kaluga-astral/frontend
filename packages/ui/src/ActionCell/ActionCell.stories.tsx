@@ -57,17 +57,17 @@ const data = [
   {
     id: '1',
     documentName: 'Документ 1',
-    action: null,
+    action: () => {},
   },
   {
     id: '2',
     documentName: 'Документ 2',
-    action: null,
+    action: () => {},
   },
   {
     id: '3',
     documentName: 'Документ 3',
-    action: null,
+    action: () => {},
   },
 ];
 

@@ -4,6 +4,8 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './BackdropStack';
+
 export * from './Badge';
 
 export * from './Button';
