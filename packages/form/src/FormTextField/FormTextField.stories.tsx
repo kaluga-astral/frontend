@@ -2,10 +2,10 @@ import { Story } from '@storybook/react';
 
 import { useStorybookFormPreview } from '../hooks/useStorybookFormPreview';
 
-import { FormTextFiled } from './FormTextFiled';
+import { FormTextField } from './FormTextField';
 
 export default {
-  title: 'Form/FormTextFiled',
+  title: 'Form/FormTextField',
   component: null,
 };
 
@@ -19,8 +19,8 @@ const Template: Story = () => {
   const { control, Form } = useStorybookFormPreview(DEFAULT_VALUES);
 
   return (
-    <Form>
-      <FormTextFiled
+    <Form >
+      <FormTextField
         label="Form text field"
         control={control}
         name="textField"

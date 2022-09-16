@@ -1,1 +1,5 @@
-// создана папка src, т.к. при сборке copyCommonFiles ищет папку form/src
+export * from 'react-hook-form';
+
+export * from './FormTextarea';
+
+export * from './FormTextField';

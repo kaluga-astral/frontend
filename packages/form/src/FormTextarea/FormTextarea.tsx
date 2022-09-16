@@ -1,7 +1,7 @@
-import { TextArea, TextAreaProps } from '@astral/ui/src';
+import { TextArea, TextAreaProps } from '@astral/ui';
 import { UseControllerProps, useController } from 'react-hook-form';
 
-import { getErrorMessage } from '../utils';
+import { useFieldErrorProps } from '../hooks';
 
 export type FormTextareaValue = string;
 
@@ -14,13 +14,7 @@ export function FormTextarea<FieldName extends {}>(
   props: FormTextareaProps<FieldName>,
 ) {
   const { field, fieldState } = useController(props);
-  const errorMessages = getErrorMessage(fieldState);
-  const hasError = Boolean(errorMessages);
+  const errorProps = useFieldErrorProps(fieldState);
 
-  const statusState = {
-    error: hasError,
-    helperText: hasError && errorMessages,
-  };
-
-  return <TextArea {...field} {...props} {...statusState} />;
+  return <TextArea {...field} {...props} {...errorProps} />;
 }

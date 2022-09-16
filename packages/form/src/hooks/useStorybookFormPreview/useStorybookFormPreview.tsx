@@ -7,6 +7,7 @@ export const useStorybookFormPreview = (defaultValues: any) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { control, handleSubmit, reset } = useForm<any>({
     defaultValues,
+    mode: 'onBlur',
   });
 
   const onSubmit = (submitData: unknown) => {
