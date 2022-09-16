@@ -116,7 +116,9 @@ export const DataGridNoData = ({
           {noDataIcon}
         </DataGridNoDataIcon>
 
-        <DataGridNoDataFigcaption>{title}</DataGridNoDataFigcaption>
+        <DataGridNoDataFigcaption component="figcaption" variant="h4">
+          {title}
+        </DataGridNoDataFigcaption>
       </DataGridNoDataFigure>
     </DataGridNoDataWrapper>
   );
