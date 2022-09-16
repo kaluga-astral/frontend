@@ -4,16 +4,16 @@ import { NextOutlineMd, PreviousOutlineMd } from '@astral/icons';
 import format from 'date-fns/format';
 
 import { IconButton } from '../../IconButton';
-import { DatePickerContext } from '../../DatePickerProvider';
+import { ConfigContext } from '../../ConfigProvider';
 
 import { DatePickerHeaderTitle, DatePickerHeaderWrapper } from './styled';
 
 export const DatePickerHeader = (props: ReactDatePickerCustomHeaderProps) => {
   const { increaseMonth, decreaseMonth, date } = props;
-  const { locale } = useContext(DatePickerContext);
+  const { locale } = useContext(ConfigContext);
   const localizedDate = useMemo(
     () => format(date, 'LLLL yyy', { locale }),
-    [date],
+    [date, locale],
   );
 
   return (
