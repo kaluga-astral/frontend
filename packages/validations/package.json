@@ -11,9 +11,9 @@
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash.isempty": "^4.4.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.6"
+    "@types/lodash.isempty": "^4.4.7"
   }
 }
