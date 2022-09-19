@@ -2,7 +2,7 @@ import { InitializedRule } from '../types';
 import { createRule } from '../createRule';
 
 /**
- * @description Объеденяет переданные правила в цепочку правил, выполняя все переданные правила, независимо от результата выполнения правил. Выполняет правила слева направо.
+ * @description Объеденяет переданные правила в цепочку правил, выполняя все переданные правила, независимо от результата выполнения правил. Выполняет правила слева направо
  * @example flowAll(isIncludeDot(), isIncludeComma());
  * @example flow(isRequired(), flowAll(isIncludeDot(), isIncludeComma()));
  */
