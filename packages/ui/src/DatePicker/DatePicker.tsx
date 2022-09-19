@@ -6,7 +6,7 @@ import { isValid, parse } from 'date-fns';
 
 import { MaskField, MaskFieldProps } from '../MaskField';
 import { TextFieldProps } from '../TextField';
-import { DatePickerContext } from '../DatePickerProvider';
+import { ConfigContext } from '../ConfigProvider';
 
 import { DatePickerWrapper } from './styled';
 import { DatePickerHeader } from './DatePickerHeader';
@@ -16,7 +16,6 @@ export type DatePickerProps = Omit<
   ReactDatePickerProps,
   | 'renderCustomHeader'
   | 'locale'
-  | 'renderCustomHeader'
   | 'renderDayContents'
   | 'customInput'
   | 'selected'
@@ -39,7 +38,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       ...restProps
     } = props;
     const { placeholder, ...restInputProps } = inputProps;
-    const { locale } = useContext(DatePickerContext);
+    const { locale } = useContext(ConfigContext);
 
     // уберкостыль, react-date-picker забирает значение из event.target.value
     const handleMaskFieldAccept = (
