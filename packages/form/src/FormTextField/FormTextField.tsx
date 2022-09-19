@@ -4,10 +4,13 @@ import { useController } from 'react-hook-form';
 import { useFieldErrorProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
+/**
+ * @description Тип значения, которое сетится в state формы
+ */
 export type FormTextFieldValue = string;
 
 export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
-  Omit<TextFieldProps, 'name'>,
+  TextFieldProps,
   FieldValues
 >;
 
