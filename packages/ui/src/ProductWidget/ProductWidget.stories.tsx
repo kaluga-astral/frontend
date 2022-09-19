@@ -11,6 +11,7 @@ import { ProductWidget, WidgetProduct } from './ProductWidget';
 export default {
   title: 'Components/ProductWidget',
   component: ProductWidget,
+  excludeStories: ['handleGetProducts'],
 } as ComponentMeta<typeof ProductWidget>;
 
 export const handleGetProducts = (): Promise<WidgetProduct[]> => {
@@ -115,7 +116,7 @@ const header = {
   },
 };
 
-export const Showcase = () => {
+export const Default = () => {
   return (
     <ExampleTemplate>
       <Typography paragraph variant="h3">
