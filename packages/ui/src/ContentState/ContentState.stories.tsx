@@ -70,6 +70,7 @@ const Case = ({
     <BaseContent>
       <ContentState
         loadingContent={loadingContent}
+        isCustom={customState ? isError : false}
         isLoading={isLoading}
         isError={isError}
         errorState={{
@@ -78,7 +79,6 @@ const Case = ({
           onRetry: handleClick,
           errorList,
         }}
-        isCustom={customState ? isError : false}
         customState={customState}
       >
         <Typography variant="h4" paragraph>
