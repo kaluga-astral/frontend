@@ -1,8 +1,7 @@
 import { Grid } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { TypographyProps } from './types';
-import { Typography } from './Typography';
+import { Typography, TypographyProps } from './Typography';
 
 export default {
   title: 'Components/Typography',

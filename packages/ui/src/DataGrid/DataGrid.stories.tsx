@@ -196,7 +196,7 @@ const data: DataType[] = [
 
 const Template: Story = (args) => {
   const [selected, setSelected] = useState<DataType[]>([]);
-  const [sorting, setSorting] = useState<DataGridSort<SortField>[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -225,7 +225,7 @@ const Template: Story = (args) => {
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
-  const handleSort = (newSorting: DataGridSort<SortField>[]) =>
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
     setSorting(newSorting);
 
   return (
@@ -258,3 +258,63 @@ Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
 };
+
+export const Showcase: Story = (args) => {
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData([]);
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
+    setSorting(newSorting);
+
+  return (
+    <DataGrid<DataType, SortField>
+      {...args}
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      minDisplayRows={10}
+      loading={loading}
+      onSort={handleSort}
+      sorting={sorting}
+      Footer={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
+    />
+  );
+};
+
+Showcase.storyName = 'DataGrid NoData';

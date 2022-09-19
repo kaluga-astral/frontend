@@ -1,5 +1,6 @@
-import { createTheme } from '../baseTheme';
 import { Brand } from '../constants';
+
+import { createTheme } from './baseTheme';
 
 describe('createTheme', () => {
   const fontsUrls = {

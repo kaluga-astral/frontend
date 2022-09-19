@@ -5,7 +5,8 @@
   "scripts": {
     "prebuild": "rimraf ./lib",
     "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON",
-    "publish": "npm publish ./lib"
+    "publish": "npm publish ./lib",
+    "tests": "jest --passWithNoTests"
   },
   "dependencies": {}
 }

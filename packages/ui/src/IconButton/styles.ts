@@ -3,25 +3,40 @@ import { ButtonBase, ButtonSizes } from '../ButtonBase';
 import { Theme } from '../theme';
 import { ButtonProps } from '../Button';
 
-type StyledIconButtonThemeProps = ButtonProps & {
+type IconButtonWrapperThemeProps = ButtonProps & {
   theme: Theme;
 };
 
-export const getButtonHeight = ({
+export const getButtonSize = ({
   size,
-}: StyledIconButtonThemeProps): string => {
-  if (size === ButtonSizes.LARGE) {
+}: IconButtonWrapperThemeProps): string => {
+  if (size === ButtonSizes.Large) {
     return '40px';
   }
 
   return '32px';
 };
 
-export const StyledIconButton = styled(ButtonBase, {
+export const getButtonSizeMobile = ({
+  size,
+}: IconButtonWrapperThemeProps): string => {
+  if (size === ButtonSizes.Small) {
+    return '36px';
+  }
+
+  return '48px';
+};
+
+export const IconButtonWrapper = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`
-  width: ${getButtonHeight};
-  height: ${getButtonHeight};
+  width: ${getButtonSize};
+  height: ${getButtonSize};
   padding: ${({ theme }) => theme.spacing(1)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: ${getButtonSizeMobile};
+    height: ${getButtonSizeMobile};
+  }
 `;

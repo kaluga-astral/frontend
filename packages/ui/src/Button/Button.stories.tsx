@@ -261,7 +261,7 @@ export const ButtonShowcase: Story = () => {
         <DialogActions>
           <Button variant="text">Отмена</Button>
           <Button loading={loading} onClick={handleClick}>
-            Продолджить
+            Продолжить
           </Button>
         </DialogActions>
       </Paper>
