@@ -1,7 +1,19 @@
 import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
+import { Paper, useMediaQuery, useTheme } from '@mui/material';
+import {
+  DownloadOutlineMd,
+  EyeFillMd,
+  EyeOutlineMd,
+  FilterOutlineMd,
+  PrintOutlineMd,
+  SendOutlineMd,
+} from '@astral/icons';
 
-import { Typography } from '../Typography';
+import { Grid } from '../Grid';
+import { Typography } from '../Typography/Typography';
+import { Case } from '../docs';
+import { DataGrid, DataGridColumns } from '../DataGrid';
+import { ActionCell, Actions } from '../ActionCell';
 
 import { IconButton } from './IconButton';
 
@@ -10,179 +22,242 @@ export default {
   component: IconButton,
 };
 
-const svg = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 230 230"
-    fill="currentColor"
-    width="16px"
-    height="16px"
-  >
-    <path d="M213.588,120.982L115,213.445l-98.588-92.463C-6.537,96.466-5.26,57.99,19.248,35.047l2.227-2.083  c24.51-22.942,62.984-21.674,85.934,2.842L115,43.709l7.592-7.903c22.949-24.516,61.424-25.784,85.936-2.842l2.227,2.083  C235.26,57.99,236.537,96.466,213.588,120.982z" />
-  </svg>
-);
+type Example = { id: string; name: string; code: string; ref: string };
 
-export const IconButtonShowcase: Story = () => (
-  <Stack gap={4}>
-    <Typography variant="h3">Contained</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="primary" variant="contained">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="contained" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="contained" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+const ACTIONS: Actions<Example> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
+      ],
+    },
+  ],
+};
 
-    <Stack gap={1}>
-      <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="success" variant="contained">
-          {svg}
-        </IconButton>
-        <IconButton color="success" variant="contained" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="success" variant="contained" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+const COLUMNS: DataGridColumns<Example>[] = [
+  { field: 'name', label: 'Наименование' },
+  { field: 'code', label: 'Код партнера' },
+  { field: 'ref', label: 'Реф. ссылка' },
+  {
+    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+    width: '1%',
+  },
+];
 
-    <Stack gap={1}>
-      <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="warning" variant="contained">
-          {svg}
-        </IconButton>
-        <IconButton color="warning" variant="contained" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="warning" variant="contained" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+const DATA: Example[] = [
+  {
+    id: '1',
+    name: 'Офис на ул. Куйбышева 128, к. №1',
+    code: '456-875',
+    ref: 'http://referal.lk',
+  },
+  {
+    id: '2',
+    name: 'Офис на Огарева',
+    code: '456-875',
+    ref: 'http://referal.lk.',
+  },
+  {
+    id: '3',
+    name: 'Офис на Маяковской, оф 245',
+    code: '456-875',
+    ref: 'http://referal.lk',
+  },
+];
 
-    <Stack gap={1}>
-      <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="error" variant="contained">
-          {svg}
-        </IconButton>
-        <IconButton color="error" variant="contained" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="error" variant="contained" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+export const IconButtonShowcase: Story = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('lg'));
 
-    <Typography variant="h3">Light</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="primary" variant="light">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="light" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="light" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+  return (
+    <div style={{ width: matches ? '100%' : '70%' }}>
+      <Typography paragraph variant="h3">
+        IconButton
+      </Typography>
+      <Typography paragraph>
+        Кнопки позволяют пользователям выполнять действия и делать выбор одним
+        нажатием.
+      </Typography>
+      <br />
+      <Typography variant="h4" paragraph>
+        Типы кнопок
+      </Typography>
 
-    <Stack gap={1}>
-      <Typography variant="code">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="success" variant="light">
-          {svg}
-        </IconButton>
-        <IconButton color="success" variant="light" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="success" variant="light" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+      <Case
+        title="Contained"
+        descriptionList={[
+          'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
+          'На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов.',
+        ]}
+      >
+        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+          <IconButton variant="contained">
+            <PrintOutlineMd />
+          </IconButton>
+          <IconButton selected variant="contained">
+            <PrintOutlineMd />
+          </IconButton>
+          <IconButton disabled variant="contained">
+            <PrintOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
 
-    <Stack gap={1}>
-      <Typography variant="code">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="warning" variant="light">
-          {svg}
-        </IconButton>
-        <IconButton color="warning" variant="light" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="warning" variant="light" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+      <br />
+      <br />
 
-    <Stack gap={1}>
-      <Typography variant="code">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="error" variant="light">
-          {svg}
-        </IconButton>
-        <IconButton color="error" variant="light" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="error" variant="light" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+      <Case
+        title="Light"
+        descriptionList={[
+          'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
+        ]}
+      >
+        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+          <IconButton variant="light">
+            <EyeOutlineMd />
+          </IconButton>
+          <IconButton selected variant="light">
+            <EyeOutlineMd />
+          </IconButton>
+          <IconButton disabled variant="light">
+            <EyeOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
 
-    <Typography variant="h3">Text</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="primary" variant="text">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="text" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="text" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
+      <br />
+      <br />
 
-    <Typography variant="h3">Link</Typography>
-    <Stack gap={1}>
-      <Typography variant="code">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <IconButton color="primary" variant="link">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="link" size="large">
-          {svg}
-        </IconButton>
-        <IconButton color="primary" variant="link" disabled>
-          {svg}
-        </IconButton>
-      </Stack>
-    </Stack>
-  </Stack>
-);
+      <Case
+        title="Link"
+        descriptionList={[
+          'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
+        ]}
+      >
+        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+          <IconButton variant="link">
+            <FilterOutlineMd />
+          </IconButton>
+          <IconButton selected variant="link">
+            <FilterOutlineMd />
+          </IconButton>
+          <IconButton disabled variant="link">
+            <FilterOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
+
+      <br />
+      <br />
+
+      <Case
+        title="Text"
+        descriptionList={['Кнопка требующая наименьшего внимания.']}
+      >
+        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+          <IconButton variant="text">
+            <FilterOutlineMd />
+          </IconButton>
+          <IconButton selected variant="text">
+            <FilterOutlineMd />
+          </IconButton>
+          <IconButton disabled variant="text">
+            <FilterOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
+
+      <br />
+      <br />
+
+      <Case
+        title="Размер кнопки"
+        descriptionList={[
+          'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
+        ]}
+      >
+        <Grid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          alignItems="center"
+          spacing={4}
+        >
+          <IconButton size="medium" variant="light">
+            <DownloadOutlineMd />
+          </IconButton>
+          <IconButton size="large" variant="light">
+            <DownloadOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
+
+      <br />
+      <br />
+
+      <Case
+        title="Эмоциональный оттенок"
+        descriptionList={[
+          'К любой кнопке может быть добавлен эмоциональный оттенок.',
+        ]}
+      >
+        <Grid
+          container
+          justifyContent="center"
+          templateColumns="repeat(3, 40px)"
+          spacing={4}
+        >
+          <IconButton variant="contained" color="error">
+            <DownloadOutlineMd />
+          </IconButton>
+          <IconButton variant="contained" color="success">
+            <DownloadOutlineMd />
+          </IconButton>
+          <IconButton variant="contained" color="warning">
+            <DownloadOutlineMd />
+          </IconButton>
+
+          <IconButton variant="light" color="error">
+            <DownloadOutlineMd />
+          </IconButton>
+          <IconButton variant="light" color="success">
+            <DownloadOutlineMd />
+          </IconButton>
+          <IconButton variant="light" color="warning">
+            <DownloadOutlineMd />
+          </IconButton>
+        </Grid>
+      </Case>
+
+      <br />
+      <br />
+
+      <Typography variant="h5" paragraph>
+        Пример использования
+      </Typography>
+      <Paper style={{ padding: 15 }}>
+        <DataGrid rows={DATA} columns={COLUMNS} keyId={'id'} />
+      </Paper>
+    </div>
+  );
+};
 
 IconButtonShowcase.parameters = { options: { showPanel: false } };
 
-const Template: Story = (args) => <IconButton {...args}>{svg}</IconButton>;
+const Template: Story = (args) => (
+  <IconButton {...args}>
+    <PrintOutlineMd />
+  </IconButton>
+);
 
 export const IconButtonStory = Template.bind({});
 
