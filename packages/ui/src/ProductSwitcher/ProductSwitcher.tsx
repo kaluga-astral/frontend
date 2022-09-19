@@ -4,21 +4,15 @@ import { useState } from 'react';
 import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
-import { ProductWidgetContent } from './ProductWidgetContent';
+import { ProductSwitcherContent } from './ProductSwitcherContent';
 import { ContentWrapper, WidgetMenu } from './styles';
+import { WidgetProduct } from './types';
 
-export type WidgetProduct = {
-  url: string;
-  name: string;
-  logoUrl: string;
-  color: string;
-};
-
-export type ProductWidgetProps = {
+export type ProductSwitcherProps = {
   getProducts: () => Promise<Array<WidgetProduct>>;
 };
 
-export const ProductWidget = ({ getProducts }: ProductWidgetProps) => {
+export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
   const [products, setProducts] = useState<WidgetProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -58,7 +52,7 @@ export const ProductWidget = ({ getProducts }: ProductWidgetProps) => {
         onClose={handleCloseMenu}
       >
         <ContentWrapper>
-          <ProductWidgetContent
+          <ProductSwitcherContent
             isLoading={isLoading}
             isError={isError}
             products={products}

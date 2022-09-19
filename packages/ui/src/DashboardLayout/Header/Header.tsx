@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 // import { MenuListProps } from '../../MenuList';
 import { Product, ProductProps } from '../../Product';

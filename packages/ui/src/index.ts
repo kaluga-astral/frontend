@@ -96,7 +96,7 @@ export * from './Placeholder';
 
 export * from './Product';
 
-export * from './ProductWidget';
+export * from './ProductSwitcher';
 
 export * from './Profile';
 

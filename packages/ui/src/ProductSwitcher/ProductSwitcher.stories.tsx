@@ -6,13 +6,14 @@ import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 import { DashboardLayout } from '../DashboardLayout';
 
-import { ProductWidget, WidgetProduct } from './ProductWidget';
+import { ProductSwitcher } from './ProductSwitcher';
+import { WidgetProduct } from './types';
 
 export default {
-  title: 'Components/ProductWidget',
-  component: ProductWidget,
+  title: 'Components/ProductSwitcher',
+  component: ProductSwitcher,
   excludeStories: ['handleGetProducts'],
-} as ComponentMeta<typeof ProductWidget>;
+} as ComponentMeta<typeof ProductSwitcher>;
 
 export const handleGetProducts = (): Promise<WidgetProduct[]> => {
   return new Promise((resolve) =>
@@ -78,7 +79,7 @@ const header = {
   productSwitcher() {
     return (
       <Box>
-        <ProductWidget getProducts={handleGetProducts} />
+        <ProductSwitcher getProducts={handleGetProducts} />
       </Box>
     );
   },
@@ -134,7 +135,7 @@ export const Default = () => {
         descriptionList={['']}
       >
         <Grid container justifyContent="center">
-          <ProductWidget getProducts={handleGetProducts} />
+          <ProductSwitcher getProducts={handleGetProducts} />
         </Grid>
       </ExampleTemplate.Case>
       <Typography variant="h5" paragraph>

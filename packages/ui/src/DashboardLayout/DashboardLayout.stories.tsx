@@ -13,8 +13,8 @@ import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
-import { ProductWidget } from '../ProductWidget';
-import { handleGetProducts } from '../ProductWidget/ProductWidget.stories';
+import { ProductSwitcher } from '../ProductSwitcher';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 
 import { DashboardLayout } from './DashboardLayout';
 import { DashboardLayoutStory } from './DashboardLayoutStory';
@@ -58,7 +58,7 @@ EDO.args = {
     productSwitcher() {
       return (
         <Box>
-          <ProductWidget getProducts={handleGetProducts} />
+          <ProductSwitcher getProducts={handleGetProducts} />
         </Box>
       );
     },
