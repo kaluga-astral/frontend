@@ -11,7 +11,7 @@ import {
 
 import { Grid } from '../Grid';
 import { Typography } from '../Typography/Typography';
-import { StorybookExampleTemplate } from '../docs';
+import { Case } from '../docs';
 import { DataGrid, DataGridColumns } from '../DataGrid';
 import { ActionCell, Actions } from '../ActionCell';
 
@@ -92,7 +92,7 @@ export const IconButtonShowcase: Story = () => {
         Типы кнопок
       </Typography>
 
-      <StorybookExampleTemplate
+      <Case
         title="Contained"
         descriptionList={[
           'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
@@ -110,12 +110,12 @@ export const IconButtonShowcase: Story = () => {
             <PrintOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />
 
-      <StorybookExampleTemplate
+      <Case
         title="Light"
         descriptionList={[
           'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
@@ -132,12 +132,12 @@ export const IconButtonShowcase: Story = () => {
             <EyeOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />
 
-      <StorybookExampleTemplate
+      <Case
         title="Link"
         descriptionList={[
           'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
@@ -154,12 +154,12 @@ export const IconButtonShowcase: Story = () => {
             <FilterOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />
 
-      <StorybookExampleTemplate
+      <Case
         title="Text"
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
@@ -174,12 +174,12 @@ export const IconButtonShowcase: Story = () => {
             <FilterOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />
 
-      <StorybookExampleTemplate
+      <Case
         title="Размер кнопки"
         descriptionList={[
           'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
@@ -199,12 +199,12 @@ export const IconButtonShowcase: Story = () => {
             <DownloadOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />
 
-      <StorybookExampleTemplate
+      <Case
         title="Эмоциональный оттенок"
         descriptionList={[
           'К любой кнопке может быть добавлен эмоциональный оттенок.',
@@ -236,7 +236,7 @@ export const IconButtonShowcase: Story = () => {
             <DownloadOutlineMd />
           </IconButton>
         </Grid>
-      </StorybookExampleTemplate>
+      </Case>
 
       <br />
       <br />

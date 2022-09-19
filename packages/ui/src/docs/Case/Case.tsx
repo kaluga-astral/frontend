@@ -2,17 +2,15 @@ import { ReactNode, useMemo } from 'react';
 
 import { Typography } from '../../Typography';
 
-type StorybookExampleTemplateProps = {
+import { CaseWrapper } from './styles';
+
+type CaseProps = {
   title: string;
   descriptionList?: string[];
   children: ReactNode;
 };
 
-export const StorybookExampleTemplate = ({
-  title,
-  descriptionList = [],
-  children,
-}: StorybookExampleTemplateProps) => {
+export const Case = ({ title, descriptionList = [], children }: CaseProps) => {
   const subtitles = useMemo(() => {
     return descriptionList?.map((text, index) => (
       <Typography key={index} paragraph>
@@ -22,7 +20,7 @@ export const StorybookExampleTemplate = ({
   }, [descriptionList]);
 
   return (
-    <>
+    <CaseWrapper>
       <Typography variant="h5" paragraph>
         {title}
       </Typography>
@@ -37,6 +35,6 @@ export const StorybookExampleTemplate = ({
       >
         {children}
       </div>
-    </>
+    </CaseWrapper>
   );
 };

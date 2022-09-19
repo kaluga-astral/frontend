@@ -9,11 +9,11 @@ import { useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
-import { StorybookExampleTemplate } from '../docs';
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
 import { Badge } from '../Badge';
+import { ExampleTemplate } from '../docs/ExampleTemplate';
 
 import { Button } from './Button';
 
@@ -23,9 +23,11 @@ export default {
 };
 
 export const ButtonShowcase: Story = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('lg'));
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -38,7 +40,7 @@ export const ButtonShowcase: Story = () => {
   const handleClick = () => setLoading(true);
 
   return (
-    <div style={{ width: matches ? '100%' : '70%' }}>
+    <ExampleTemplate>
       <Typography paragraph variant="h3">
         Buttons
       </Typography>
@@ -58,14 +60,11 @@ export const ButtonShowcase: Story = () => {
         <li>Панели инструментов</li>
       </ul>
 
-      <br />
-      <br />
-
       <Typography variant="h4" paragraph>
         Типы кнопок
       </Typography>
 
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Contained"
         descriptionList={[
           'Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.',
@@ -73,7 +72,7 @@ export const ButtonShowcase: Story = () => {
           'Также кнопки используются в диалоговых окнах и в попапах, когда пользователю необходимо выбрать одно действие из нескольких альтернативных. Например, кнопка «Сохранить» или «Продолжить».',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           <Button fullWidth>Default</Button>
           <Button loading fullWidth>
             Loading
@@ -85,18 +84,15 @@ export const ButtonShowcase: Story = () => {
             Disabled
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Light"
         descriptionList={[
           'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           <Button variant="light" fullWidth>
             Default
           </Button>
@@ -110,18 +106,15 @@ export const ButtonShowcase: Story = () => {
             Disabled
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Link"
         descriptionList={[
           'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           <Button variant="link" fullWidth>
             Default
           </Button>
@@ -135,16 +128,13 @@ export const ButtonShowcase: Story = () => {
             Disabled
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Text"
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           <Button variant="text" fullWidth>
             Default
           </Button>
@@ -158,12 +148,9 @@ export const ButtonShowcase: Story = () => {
             Disabled
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Кнопки с иконками"
         descriptionList={[
           'Иногда для отображения действия на кнопку нужно добавить иконку. Также можно добавить бейдж.',
@@ -204,12 +191,9 @@ export const ButtonShowcase: Story = () => {
             Badge
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Размер кнопки"
         descriptionList={[
           'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
@@ -218,7 +202,7 @@ export const ButtonShowcase: Story = () => {
         <Grid
           container
           justifyContent="center"
-          autoFlow="column"
+          autoFlow={autoFlow}
           spacing={4}
           alignItems="center"
         >
@@ -229,12 +213,9 @@ export const ButtonShowcase: Story = () => {
             Large
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
+      </ExampleTemplate.Case>
 
-      <br />
-      <br />
-
-      <StorybookExampleTemplate
+      <ExampleTemplate.Case
         title="Эмоциональный оттенок"
         descriptionList={[
           'К любой кнопке может быть добавлен эмоциональный оттенок.',
@@ -243,7 +224,8 @@ export const ButtonShowcase: Story = () => {
         <Grid
           container
           justifyContent="center"
-          templateColumns="repeat(3, 100px)"
+          autoFlow={autoFlow}
+          templateColumns={matches ? '' : 'repeat(3, 100px)'}
           spacing={4}
         >
           <Button color="error" variant="contained" fullWidth>
@@ -265,10 +247,7 @@ export const ButtonShowcase: Story = () => {
             Warning
           </Button>
         </Grid>
-      </StorybookExampleTemplate>
-
-      <br />
-      <br />
+      </ExampleTemplate.Case>
 
       <Typography variant="h5" paragraph>
         Пример использования
@@ -286,7 +265,7 @@ export const ButtonShowcase: Story = () => {
           </Button>
         </DialogActions>
       </Paper>
-    </div>
+    </ExampleTemplate>
   );
 };
 
