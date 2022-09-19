@@ -21,8 +21,7 @@ export const PlaceholderImage = styled.img`
   display: block;
   width: 100%;
   height: 162px;
-  margin: auto;
-  margin-bottom: ${({ theme }) => theme.spacing(6)};
+  margin: auto auto ${({ theme }) => theme.spacing(6)};
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
     margin-bottom: ${({ theme }) => theme.spacing(8)};
