@@ -1,22 +1,22 @@
-import { LoadingButton } from '@mui/lab';
 import { forwardRef, useMemo } from 'react';
 
 import { ButtonColors, ButtonVariants } from '../ButtonBase';
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 
+import { LoadingButtonWrapper } from './styles';
 import { ButtonProps } from './types';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
-      variant = ButtonVariants.CONTAINED,
-      color = ButtonColors.PRIMARY,
+      variant = ButtonVariants.Contained,
+      color = ButtonColors.Primary,
       ...restProps
     } = props;
 
     const loadingIndicatorColor = useMemo(() => {
-      if (variant !== ButtonVariants.CONTAINED) {
+      if (variant !== ButtonVariants.Contained) {
         return CircularProgressColors.PRIMARY;
       }
 
@@ -24,7 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }, [variant]);
 
     return (
-      <LoadingButton
+      <LoadingButtonWrapper
         ref={ref}
         {...restProps}
         variant={variant}

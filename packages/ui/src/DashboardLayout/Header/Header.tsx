@@ -11,7 +11,7 @@ export type HeaderProps = {
   product: ProductProps;
   productSwitcher?: React.FC;
   // menu?: React.FC<MenuListProps>;
-  profile: ProfileProps;
+  profile?: ProfileProps;
 };
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
@@ -29,7 +29,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
         <Product {...product} />
         {/* {Menu && <Menu />} */}
       </HeaderNav>
-      <Profile {...profile} />
+      {profile && <Profile {...profile} />}
     </HeaderRoot>
   );
 });

@@ -1,8 +1,4 @@
-import {
-  AlertTitle,
-  Alert as MuiAlert,
-  AlertProps as MuiAlertProps,
-} from '@mui/material';
+import { AlertTitle, AlertProps as MuiAlertProps } from '@mui/material';
 import {
   ErrorFillMd,
   InfoFillMd,
@@ -14,6 +10,8 @@ import { ReactNode } from 'react';
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 import { Collapse } from '../Collapse';
+
+import { StyledAlert } from './styles';
 
 export type AlertProps = Omit<
   MuiAlertProps,
@@ -52,7 +50,7 @@ export const Alert = ({
 }: AlertProps) => {
   return (
     <Collapse in={display}>
-      <MuiAlert
+      <StyledAlert
         {...props}
         closeText={closeText}
         variant="filled"
@@ -78,7 +76,7 @@ export const Alert = ({
         >
           {actions}
         </Grid>
-      </MuiAlert>
+      </StyledAlert>
     </Collapse>
   );
 };

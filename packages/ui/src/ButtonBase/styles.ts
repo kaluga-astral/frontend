@@ -5,7 +5,7 @@ import ButtonUnstyled, {
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { ButtonSizes, ButtonStates, ButtonVariants } from './constants';
+import { ButtonSizes, ButtonStates, ButtonVariants } from './enums';
 import {
   BaseButtonProps,
   ButtonColor,
@@ -14,7 +14,7 @@ import {
   ButtonVariant,
 } from './types';
 
-export type StyledButtonBaseProps = Omit<
+export type ButtonBaseWrapperProps = Omit<
   BaseButtonProps,
   'color' | 'variant'
 > & {
@@ -22,7 +22,7 @@ export type StyledButtonBaseProps = Omit<
   customVariant?: ButtonVariant;
 };
 
-export type StyledButtonBaseThemeProps = {
+export type ButtonBaseWrapperThemeProps = {
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   selected?: boolean;
@@ -36,7 +36,7 @@ export const getColor = ({
   customColor,
   buttonState,
   selected,
-}: StyledButtonBaseThemeProps & { buttonState: ButtonState }): string => {
+}: ButtonBaseWrapperThemeProps & { buttonState: ButtonState }): string => {
   const textColorVariants = {
     selected: {
       default: theme.palette.grey['900'],
@@ -86,20 +86,20 @@ export const getColor = ({
   };
 
   if (selected) {
-    return customVariant !== ButtonVariants.LINK
+    return customVariant !== ButtonVariants.Link
       ? theme.palette.primary.contrastText
       : textColorVariants.selected[buttonState];
   }
 
-  if (customVariant === ButtonVariants.CONTAINED) {
+  if (customVariant === ButtonVariants.Contained) {
     return textColorVariants.contained;
   }
 
-  if (customVariant === ButtonVariants.LIGHT && customColor) {
+  if (customVariant === ButtonVariants.Light && customColor) {
     return textColorVariants.light[customColor][buttonState];
   }
 
-  if (customVariant === ButtonVariants.TEXT) {
+  if (customVariant === ButtonVariants.Text) {
     return textColorVariants.text[buttonState];
   }
 
@@ -112,7 +112,7 @@ export const getBgColor = ({
   customVariant,
   buttonState,
   theme,
-}: StyledButtonBaseThemeProps & { buttonState: ButtonState }) => {
+}: ButtonBaseWrapperThemeProps & { buttonState: ButtonState }) => {
   const bgColorVariants = {
     selected: {
       default: theme.palette.grey['900'],
@@ -181,19 +181,19 @@ export const getBgColor = ({
     link: 'transparent',
   };
 
-  if (selected && customVariant !== ButtonVariants.LINK) {
+  if (selected && customVariant !== ButtonVariants.Link) {
     return bgColorVariants.selected[buttonState];
   }
 
-  if (customVariant === ButtonVariants.LIGHT && customColor) {
+  if (customVariant === ButtonVariants.Light && customColor) {
     return bgColorVariants.light[customColor][buttonState];
   }
 
-  if (customVariant === ButtonVariants.CONTAINED && customColor) {
+  if (customVariant === ButtonVariants.Contained && customColor) {
     return bgColorVariants.contained[customColor][buttonState];
   }
 
-  if (customVariant === ButtonVariants.TEXT) {
+  if (customVariant === ButtonVariants.Text) {
     return bgColorVariants.text[buttonState];
   }
 
@@ -202,8 +202,8 @@ export const getBgColor = ({
 
 export const getButtonHeight = ({
   size,
-}: StyledButtonBaseThemeProps): string => {
-  if (size === ButtonSizes.LARGE) {
+}: ButtonBaseWrapperThemeProps): string => {
+  if (size === ButtonSizes.Large) {
     return '40px';
   }
 
@@ -213,8 +213,8 @@ export const getButtonHeight = ({
 export const getButtonPadding = ({
   size,
   theme,
-}: StyledButtonBaseThemeProps): string => {
-  if (size === ButtonSizes.LARGE) {
+}: ButtonBaseWrapperThemeProps): string => {
+  if (size === ButtonSizes.Large) {
     return theme.spacing(2, 4, 2, 4);
   }
 
@@ -224,10 +224,10 @@ export const getButtonPadding = ({
 export const getDisabledBgColor = ({
   theme,
   customVariant,
-}: StyledButtonBaseThemeProps): string => {
+}: ButtonBaseWrapperThemeProps): string => {
   if (
-    customVariant === ButtonVariants.LINK ||
-    customVariant === ButtonVariants.TEXT
+    customVariant === ButtonVariants.Link ||
+    customVariant === ButtonVariants.Text
   ) {
     return 'transparent';
   }
@@ -235,10 +235,31 @@ export const getDisabledBgColor = ({
   return theme.palette.grey['100'];
 };
 
-export const StyledButtonBase = styled(ButtonUnstyled, {
+export const getButtonPaddingMobile = ({
+  size,
+  theme,
+}: ButtonBaseWrapperThemeProps): string => {
+  if (size === ButtonSizes.Small) {
+    return theme.spacing(2, 3);
+  }
+
+  return theme.spacing(4, 3);
+};
+
+export const getButtonHeightMobile = ({
+  size,
+}: ButtonBaseWrapperThemeProps): string => {
+  if (size === ButtonSizes.Small) {
+    return '32px';
+  }
+
+  return '48px';
+};
+
+export const ButtonBaseWrapper = styled(ButtonUnstyled, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
-})<StyledButtonBaseProps>`
+})<ButtonBaseWrapperProps>`
   position: relative;
 
   display: inline-flex;
@@ -247,40 +268,46 @@ export const StyledButtonBase = styled(ButtonUnstyled, {
   height: ${getButtonHeight};
   padding: ${getButtonPadding};
 
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    height: ${getButtonHeightMobile};
+    padding: ${getButtonPaddingMobile};
+  }
+
   color: ${(props) =>
-    getColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+    getColor({ ...props, buttonState: ButtonStates.Default })};
   font-weight: ${({ theme }) => theme.typography.button.fontWeight};
   font-size: ${({ theme }) => theme.typography.button.fontSize};
   font-family: Ubuntu, serif;
 
   background-color: ${(props) =>
-    getBgColor({ ...props, buttonState: ButtonStates.DEFAULT })};
+    getBgColor({ ...props, buttonState: ButtonStates.Default })};
+
   border: none;
   border-radius: ${({ theme }) => theme.shape.small};
   cursor: pointer;
 
   &:hover {
     color: ${(props) =>
-      getColor({ ...props, buttonState: ButtonStates.HOVER })};
+      getColor({ ...props, buttonState: ButtonStates.Hover })};
 
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.HOVER })};
+      getBgColor({ ...props, buttonState: ButtonStates.Hover })};
   }
 
   &:focus {
     color: ${(props) =>
-      getColor({ ...props, buttonState: ButtonStates.FOCUS })};
+      getColor({ ...props, buttonState: ButtonStates.Focus })};
 
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.FOCUS })};
+      getBgColor({ ...props, buttonState: ButtonStates.Focus })};
   }
 
   &:active {
     color: ${(props) =>
-      getColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+      getColor({ ...props, buttonState: ButtonStates.Active })};
 
     background-color: ${(props) =>
-      getBgColor({ ...props, buttonState: ButtonStates.ACTIVE })};
+      getBgColor({ ...props, buttonState: ButtonStates.Active })};
     outline: none;
   }
 

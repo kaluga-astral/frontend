@@ -14,13 +14,17 @@ export default {
 const TIMESTAMP_VALUE = 1659012063771;
 
 const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date | null>(
+  const [value, setValue] = useState<Date>(
     addDays(new Date(TIMESTAMP_VALUE), 180),
   );
 
+  const handleChange = (date: Date) => {
+    setValue(date);
+  };
+
   return (
     <DatePickerProvider>
-      <DatePicker {...args} value={value} onChange={setValue} />
+      <DatePicker {...args} value={value} onChange={handleChange} />
     </DatePickerProvider>
   );
 };

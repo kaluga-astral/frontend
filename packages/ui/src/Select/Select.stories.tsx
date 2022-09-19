@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
-import { ListItemIcon, Stack } from '@mui/material';
-import React from 'react';
+import { ListItemIcon, SelectChangeEvent, Stack } from '@mui/material';
+import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
@@ -32,8 +32,10 @@ const MULTIPLE_OPTIONS: Array<{ value: number; name: string }> = [
 ];
 
 const Template: Story = (args) => {
-  const [singleValue, setSingleValue] = React.useState('');
-  const handleSingleChange = (event) => setSingleValue(event.target.value);
+  const [singleValue, setSingleValue] = useState('');
+  const handleSingleChange = (event: SelectChangeEvent<HTMLInputElement>) => {
+    setSingleValue((event.target as HTMLInputElement).value);
+  };
 
   const renderSingleOptions = () => {
     return OPTIONS.map((option) => (
@@ -47,6 +49,9 @@ const Template: Story = (args) => {
     <Stack maxWidth={300}>
       <Select
         {...args}
+        // ?
+        // Type '(event: SelectChangeEvent<HTMLInputElement>) => void' is not assignable to type '(event: SelectChangeEvent<unknown>, child: ReactNode) => void'.
+        // @ts-ignore
         onChange={handleSingleChange}
         value={singleValue}
         placeholder="Выберите вариант"
@@ -69,11 +74,13 @@ Default.parameters = {
 
 export const Showcase: Story = () => {
   const [singleValue, setSingleValue] = React.useState('');
-  const [multipleValue, setMultipleValue] = React.useState([]);
+  const [multipleValue, setMultipleValue] = React.useState<number[]>([]);
   const [loading, setLoading] = React.useState(false);
 
+  // @ts-ignore
   const handleMultipleChange = (event) => setMultipleValue(event.target.value);
 
+  // @ts-ignore
   const handleSingleChange = (event) => setSingleValue(event.target.value);
 
   const handleFetchOptions = () => {
