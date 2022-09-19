@@ -36,9 +36,9 @@ export const ProductWidget = ({ getProducts }: ProductWidgetProps) => {
         setProducts(productsList);
       } catch (e) {
         setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     }
   };
 
