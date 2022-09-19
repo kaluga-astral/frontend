@@ -21,8 +21,4 @@ describe('isRequired', () => {
       expect(isRequired()(value)).toBe(REQUIRED_RULE_DEFAULT_MESSAGE);
     },
   );
-
-  it('Обрабатывает кейс, когда валидация вызывается без проброса value', () => {
-    expect(isRequired()()).toBe(REQUIRED_RULE_DEFAULT_MESSAGE);
-  });
 });
