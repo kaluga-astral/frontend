@@ -9,7 +9,8 @@
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix"
+    "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix",
+    "tests": "jest --passWithNoTests"
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
