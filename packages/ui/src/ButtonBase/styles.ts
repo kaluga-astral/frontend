@@ -23,6 +23,7 @@ export type ButtonBaseWrapperProps = Omit<
 };
 
 export type ButtonBaseWrapperThemeProps = {
+  variant?: ButtonVariant;
   customColor?: ButtonColor;
   customVariant?: ButtonVariant;
   selected?: boolean;
@@ -238,7 +239,12 @@ export const getDisabledBgColor = ({
 export const getButtonPaddingMobile = ({
   size,
   theme,
+  variant,
 }: ButtonBaseWrapperThemeProps): string => {
+  if (variant === ButtonVariants.Link) {
+    return '0';
+  }
+
   if (size === ButtonSizes.Small) {
     return theme.spacing(2, 3);
   }
