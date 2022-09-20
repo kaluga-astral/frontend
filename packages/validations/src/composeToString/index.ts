@@ -1,1 +1,1 @@
-export * from './flowToString';
+export * from './composeToString';
