@@ -1,18 +1,19 @@
 {
   "name": "@astral/form",
   "browser": "./src/index.ts",
+  "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
     "prebuild": "npx rimraf ./lib",
     "build": "commander build",
     "publish": "npm publish ./lib",
-    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint:types": "tsc --noEmit",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix"
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
-    "@astral/ui": "*"
+    "@astral/ui": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"

@@ -1,38 +1,32 @@
 import { Story } from '@storybook/react';
-import { Grid } from '@astral/ui';
 
+import { FormStoryContainer } from '../docs';
 import { SubmitButton } from '../SubmitButton';
 import { useForm } from '../hooks';
 
-import { FormTextArea, FormTextareaValue } from './FormTextarea';
+import { FormTextArea, FormTextAreaValue } from './FormTextArea';
 
 export default {
   title: 'Form/FormTextarea',
   component: null,
 };
 
-type FormValues = { textareaField: FormTextareaValue };
+type FormValues = { textareaField: FormTextAreaValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();
 
-  const handleSubmit = (values: FormValues) => {
-    window.alert(JSON.stringify(values));
-  };
-
   return (
-    <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
-      <Grid container templateColumns="300px" spacing={2}>
-        <FormTextArea
-          required
-          label="Form textarea field"
-          control={form.control}
-          name="textareaField"
-          rules={{ required: 'Обязательное поле' }}
-        />
-        <SubmitButton>Submit</SubmitButton>
-      </Grid>
-    </form>
+    <FormStoryContainer form={form}>
+      <FormTextArea
+        required
+        label="Form textarea field"
+        control={form.control}
+        name="textareaField"
+        rules={{ required: 'Обязательное поле' }}
+      />
+      <SubmitButton>Submit</SubmitButton>
+    </FormStoryContainer>
   );
 };
 

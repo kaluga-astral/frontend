@@ -56,7 +56,9 @@ export const Form = <FormValues extends object>({
   return (
     <FormProvider {...form}>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <form {...props}>{children}</form>
+      <form noValidate {...props}>
+        {children}
+      </form>
     </FormProvider>
   );
 };

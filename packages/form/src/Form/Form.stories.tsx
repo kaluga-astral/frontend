@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
-import { useForm } from 'react-hook-form';
 import { Grid } from '@astral/ui';
 
+import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
 import { SubmitButton } from '../SubmitButton';
 

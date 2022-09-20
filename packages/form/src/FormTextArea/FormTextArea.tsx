@@ -7,7 +7,7 @@ import { WithFormFieldProps } from '../types';
 /**
  * @description Тип значения, которое сетится в state формы
  */
-export type FormTextareaValue = string;
+export type FormTextAreaValue = string;
 
 export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
   TextAreaProps,
