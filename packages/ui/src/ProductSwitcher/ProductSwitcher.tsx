@@ -1,6 +1,7 @@
 import { ProductsFillMd } from '@astral/icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { ConfigContext } from '../ConfigProvider';
 import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
@@ -16,6 +17,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
   const [products, setProducts] = useState<WidgetProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { captureException } = useContext(ConfigContext);
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   const handleShowProducts = async () => {
@@ -28,8 +30,9 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
         const productsList = await getProducts();
 
         setProducts(productsList);
-      } catch (e) {
+      } catch (error) {
         setIsError(true);
+        captureException?.(error);
       } finally {
         setIsLoading(false);
       }
