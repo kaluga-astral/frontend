@@ -4,10 +4,10 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "prebuild": "npx rimraf ./lib",
+    "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
     "build": "commander build",
     "publish": "npm publish ./lib",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix",
     "tests": "jest --passWithNoTests"
