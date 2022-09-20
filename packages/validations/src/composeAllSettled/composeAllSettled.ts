@@ -3,10 +3,10 @@ import { createRule } from '../createRule';
 
 /**
  * @description Объеденяет переданные правила в цепочку правил, выполняя все переданные правила, независимо от результата выполнения правил. Выполняет правила слева направо
- * @example flowAll(isIncludeDot(), isIncludeComma());
- * @example flow(isRequired(), flowAll(isIncludeDot(), isIncludeComma()));
+ * @example composeAllSettled(isIncludeDot(), isIncludeComma());
+ * @example compose(isRequired(), composeAllSettled(isIncludeDot(), isIncludeComma()));
  */
-export const flowAll = createRule((...rules: InitializedRule[]) => (value) => {
+export const composeAllSettled = createRule((...rules: InitializedRule[]) => (value) => {
   const errors: string[] = [];
 
   rules.forEach((rule) => {

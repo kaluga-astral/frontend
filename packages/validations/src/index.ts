@@ -2,11 +2,11 @@ export * from './createRule';
 
 export * from './yupAdapter';
 
-export * from './flow';
+export * from './compose';
 
-export * from './flowAll';
+export * from './composeAllSettled';
 
-export * from './flowToString';
+export * from './composeToString';
 
 export * from './isRequired';
 

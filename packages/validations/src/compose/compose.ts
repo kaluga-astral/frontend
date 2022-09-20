@@ -3,10 +3,10 @@ import { createRule } from '../createRule';
 
 /**
  * @description Объеденяет переданные правила в цепочку правил, останавливает выполнение цепочки, если появилась ошибка. Выполняет правила слева направо
- * @example flow(isRequired(), isEmail());
- * @example flow(isRequired(), flow(isIncludeDot(), isIncludeComma()));
+ * @example compose(isRequired(), isEmail());
+ * @example compose(isRequired(), compose(isIncludeDot(), isIncludeComma()));
  */
-export const flow = createRule(
+export const compose = createRule(
   (...rules: InitializedRule[]) =>
     (value) =>
       rules.reduce<ValidationResult>(

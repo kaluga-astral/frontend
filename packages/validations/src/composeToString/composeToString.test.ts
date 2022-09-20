@@ -1,8 +1,8 @@
-import { flowToString } from './flowToString';
+import { composeToString } from './composeToString';
 
-describe('flowToString', () => {
+describe('composeToString', () => {
   it('Если появляется массив ошибок, то возвращается первая из массива', () => {
-    const validate = flowToString(
+    const validate = composeToString(
       () => undefined,
       () => ['error1', 'error2'],
     );
@@ -11,8 +11,8 @@ describe('flowToString', () => {
   });
 
   it('Поддерживает вложенность', () => {
-    const validate = flowToString(
-      flowToString(() => ['error3', 'error4']),
+    const validate = composeToString(
+      composeToString(() => ['error3', 'error4']),
       () => ['error1', 'error2'],
     );
 
