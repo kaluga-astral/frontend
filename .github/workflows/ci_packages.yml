@@ -70,4 +70,4 @@ jobs:
       - name: Run jest
         env:
           CI: true
-        run: npm run test --workspace=@astral/ui --ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}
+        run: npm run tests --ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}

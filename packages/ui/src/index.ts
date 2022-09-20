@@ -10,6 +10,8 @@ export * from './Badge';
 
 export * from './Button';
 
+export * from './DatePickerProvider';
+
 export * from './Description';
 
 export * from './Divider';
@@ -20,6 +22,8 @@ export * from './Checkbox';
 
 export * from './CircularProgress';
 
+export * from './ConfigProvider';
+
 export * from './DashboardLayout';
 
 export * from './DataGrid';
@@ -27,8 +31,6 @@ export * from './DataGrid';
 export * from './DataGridPagination';
 
 export * from './DatePicker';
-
-export * from './DatePickerProvider';
 
 export * from './Dialog';
 

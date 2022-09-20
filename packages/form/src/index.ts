@@ -16,3 +16,5 @@ export {
   useFieldErrorProps,
   useFormContext,
 } from './hooks';
+
+export { FormProvider } from './FormProvider';
