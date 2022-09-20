@@ -2,12 +2,11 @@ import { Story } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import { Grid } from '@astral/ui';
 
+import { FormTextField, FormTextFieldValue } from '../FormTextField';
 import { SubmitButton } from '../SubmitButton';
 
-import { FormTextField, FormTextFieldValue } from './FormTextField';
-
 export default {
-  title: 'Form/FormTextField',
+  title: 'Form/SubmitButton',
   component: null,
 };
 

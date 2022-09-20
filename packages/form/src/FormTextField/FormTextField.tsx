@@ -14,6 +14,9 @@ export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
   FieldValues
 >;
 
+/**
+ * @description Тестовый инпут для формы
+ */
 export function FormTextField<FieldValues extends object>(
   props: FormTextFieldProps<FieldValues>,
 ) {

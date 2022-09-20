@@ -1,17 +1,17 @@
 import { Story } from '@storybook/react';
-import { useForm } from 'react-hook-form';
 import { Grid } from '@astral/ui';
 
 import { SubmitButton } from '../SubmitButton';
+import { useForm } from '../hooks';
 
-import { FormTextField, FormTextFieldValue } from './FormTextField';
+import { FormTextArea, FormTextareaValue } from './FormTextarea';
 
 export default {
-  title: 'Form/FormTextField',
+  title: 'Form/FormTextarea',
   component: null,
 };
 
-type FormValues = { name: FormTextFieldValue };
+type FormValues = { textareaField: FormTextareaValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();
@@ -22,12 +22,12 @@ const Template: Story = () => {
 
   return (
     <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
-      <Grid container templateColumns="300px" rowSpacing={2}>
-        <FormTextField
+      <Grid container templateColumns="300px" spacing={2}>
+        <FormTextArea
           required
-          label="Form text field"
+          label="Form textarea field"
           control={form.control}
-          name="name"
+          name="textareaField"
           rules={{ required: 'Обязательное поле' }}
         />
         <SubmitButton>Submit</SubmitButton>

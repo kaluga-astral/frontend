@@ -9,13 +9,16 @@ import { WithFormFieldProps } from '../types';
  */
 export type FormTextareaValue = string;
 
-export type FormTextareaProps<FieldValues extends object> = WithFormFieldProps<
+export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
   TextAreaProps,
   FieldValues
 >;
 
-export function FormTextarea<FieldValues extends object>(
-  props: FormTextareaProps<FieldValues>,
+/**
+ * @description TextArea для формы
+ */
+export function FormTextArea<FieldValues extends object>(
+  props: FormTextAreaProps<FieldValues>,
 ) {
   const { field, fieldState } = useController(props);
   const errorProps = useFieldErrorProps(fieldState);
