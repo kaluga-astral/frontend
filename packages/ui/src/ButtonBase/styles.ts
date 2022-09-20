@@ -241,7 +241,7 @@ export const getButtonPaddingMobile = ({
   theme,
   variant,
 }: ButtonBaseWrapperThemeProps): string => {
-  if (variant === 'link') {
+  if (variant === ButtonVariants.Link) {
     return '0';
   }
 

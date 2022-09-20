@@ -5,6 +5,7 @@ import {
   getButtonHeightMobile,
   getButtonPaddingMobile,
 } from '../ButtonBase/styles';
+import { ButtonVariants } from '../ButtonBase';
 
 import { ButtonProps } from './types';
 
@@ -12,8 +13,9 @@ export const LoadingButtonWrapper = styled(LoadingButton, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<ButtonProps>`
-  min-width: ${({ variant }) => (variant === 'link' ? 'auto' : '')};
-  padding: ${({ variant }) => (variant === 'link' ? 0 : '')};
+  min-width: ${({ variant }) =>
+    variant === ButtonVariants.Link ? 'auto' : ''};
+  padding: ${({ variant }) => (variant === ButtonVariants.Link ? 0 : '')};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     height: ${getButtonHeightMobile};
