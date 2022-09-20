@@ -74,6 +74,16 @@ const modifyPackageJSON = () => {
         types: './esm/index.d.ts',
         main: './index.js',
         module: './esm/index.js',
+        exports: {
+          '.': {
+            import: './esm/index.js',
+            require: './index.js',
+          },
+          './server': {
+            import: './esm/server/index.js',
+            require: './server/index.js',
+          },
+        },
       },
       null,
       2,
