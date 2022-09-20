@@ -15,6 +15,10 @@ export default {
   excludeStories: ['handleGetProducts'],
 } as ComponentMeta<typeof ProductSwitcher>;
 
+export const handleReject = (): Promise<WidgetProduct[]> => {
+  return new Promise((_resolve, reject) => reject(''));
+};
+
 export const handleGetProducts = (): Promise<WidgetProduct[]> => {
   return new Promise((resolve) =>
     setTimeout(
@@ -121,10 +125,10 @@ export const Default = () => {
   return (
     <ExampleTemplate>
       <Typography paragraph variant="h3">
-        Product Widget
+        Product Switcher
       </Typography>
       <Typography paragraph>
-        Product Widget дает возможность быстрого перехода к другому продукту.
+        Product Switcher дает возможность быстрого перехода к другому продукту.
         Используется в хэдере системы
       </Typography>
       <Typography variant="h4" paragraph>
@@ -134,8 +138,9 @@ export const Default = () => {
         title="Переход к другому продукту"
         descriptionList={['']}
       >
-        <Grid container justifyContent="center">
+        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
           <ProductSwitcher getProducts={handleGetProducts} />
+          <ProductSwitcher getProducts={handleReject} />
         </Grid>
       </ExampleTemplate.Case>
       <Typography variant="h5" paragraph>

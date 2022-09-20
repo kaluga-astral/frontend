@@ -19,7 +19,7 @@ export const ProductSwitcherContent = ({
       isLoading={isLoading}
       isCustom={isError}
       customState={{
-        imgAlt: 'Что-то полшо не так',
+        imgAlt: 'Что-то пошло не так',
         title: 'Что-то пошло не так',
         description: 'Произошла ошибка. Повторите попытку позже.',
         // TODO: imgSrc обязательный параметр, а в title не засунуть текст с иконкой. Соответствующая доработка в задаче:

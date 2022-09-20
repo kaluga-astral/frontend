@@ -7,6 +7,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 240px;
+  max-width: 280px;
   min-height: 150px;
   padding: ${({ theme }) => theme.spacing(2)};
 `;
