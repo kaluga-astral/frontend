@@ -1,4 +1,4 @@
-import { ErrorInfo, ReactNode, createContext, useEffect } from 'react';
+import { ReactNode, createContext, useEffect } from 'react';
 import ru from 'date-fns/locale/ru';
 
 export type ConfigContextProps = {
@@ -9,7 +9,8 @@ export type ConfigContextProps = {
   /*
    * Callback для отправки ошибки в sentry
    */
-  captureException?: (errorInfo: ErrorInfo, error: Error) => void;
+  // eslint-disable-next-line
+  captureException?: (error: any) => void;
 };
 
 export type ConfigProviderProps = ConfigContextProps & {
@@ -18,7 +19,7 @@ export type ConfigProviderProps = ConfigContextProps & {
 
 export const ConfigContext = createContext<ConfigContextProps>({
   locale: ru,
-  captureException: (errorInfo, error) => console.error(errorInfo, error),
+  captureException: (error) => console.error(error),
 });
 
 export const ConfigProvider = ({
