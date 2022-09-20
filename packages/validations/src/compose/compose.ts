@@ -2,7 +2,7 @@ import { InitializedRule, ValidationResult } from '../types';
 import { createRule } from '../createRule';
 
 /**
- * @description Объеденяет переданные правила в цепочку правил, останавливает выполнение цепочки, если появилась ошибка. Выполняет правила слева направо
+ * @description Объединяет переданные правила в цепочку правил, останавливает выполнение цепочки, если появилась ошибка. Выполняет правила слева направо
  * @example compose(isRequired(), isEmail());
  * @example compose(isRequired(), compose(isIncludeDot(), isIncludeComma()));
  */

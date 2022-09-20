@@ -2,7 +2,7 @@ import { InitializedRule } from '../types';
 import { compose } from '../compose';
 
 /**
- * @description Объеденяет правила в цепочку и форматирует результат в одну строку. Останаваливается при возникновении ошибки. Работает слева направо
+ * @description Объединяет правила в цепочку и форматирует результат в одну строку. Останаваливается при возникновении ошибки. Работает слева направо
  * Подходит в качестве адаптера к react-final-form
  * @example composeToString(isIncludeDot(), isIncludeComma());
  * @example composeToString(isRequired(), composeToString(isIncludeDot(), isIncludeComma()));
