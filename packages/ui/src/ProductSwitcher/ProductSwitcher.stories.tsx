@@ -12,7 +12,7 @@ import { WidgetProduct } from './types';
 export default {
   title: 'Components/ProductSwitcher',
   component: ProductSwitcher,
-  excludeStories: ['handleGetProducts'],
+  excludeStories: ['handleGetProducts', 'handleReject'],
 } as ComponentMeta<typeof ProductSwitcher>;
 
 export const handleReject = (): Promise<WidgetProduct[]> => {
