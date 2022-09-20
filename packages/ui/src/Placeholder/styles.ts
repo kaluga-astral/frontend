@@ -19,9 +19,10 @@ export const PlaceholderInnerContainer = styled.div`
 
 export const PlaceholderImage = styled.img`
   display: block;
-  width: 100%;
-  height: 162px;
+  width: ${({ width }) => width || '100%'};
+  height: ${({ height }) => height || 'auto'};
   margin: auto auto ${({ theme }) => theme.spacing(6)};
+  object-fit: contain;
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
     margin-bottom: ${({ theme }) => theme.spacing(8)};
