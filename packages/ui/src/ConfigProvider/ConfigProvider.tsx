@@ -5,15 +5,15 @@ export type ConfigContextProps = {
   /*
    * Локализация
    */
-  locale?: Locale;
+  locale: Locale;
   /*
    * Callback для отправки ошибки в sentry
    */
   // eslint-disable-next-line
-  captureException?: (error: any) => void;
+  captureException: (error: any) => void;
 };
 
-export type ConfigProviderProps = ConfigContextProps & {
+export type ConfigProviderProps = Partial<ConfigContextProps> & {
   children: ReactNode;
 };
 
@@ -37,7 +37,12 @@ export const ConfigProvider = ({
   }, []);
 
   return (
-    <ConfigContext.Provider value={{ locale, captureException }}>
+    <ConfigContext.Provider
+      value={{
+        locale,
+        captureException: captureException || ((error) => console.error(error)),
+      }}
+    >
       {children}
     </ConfigContext.Provider>
   );

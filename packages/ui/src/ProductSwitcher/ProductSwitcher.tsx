@@ -32,7 +32,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
         setProducts(productsList);
       } catch (error) {
         setIsError(true);
-        captureException?.(error);
+        captureException(error);
       } finally {
         setIsLoading(false);
       }
