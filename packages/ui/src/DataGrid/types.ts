@@ -25,7 +25,7 @@ export type DataGridSort<SortField> = {
   sort: SortState;
 };
 
-export type DataGridColumns<Data extends {}> = {
+export type DataGridColumns<Data extends object> = {
   /**
    * @example {field: 'test'}
    * Значение ключа поля данных для колонки

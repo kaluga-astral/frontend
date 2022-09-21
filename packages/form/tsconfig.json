@@ -3,7 +3,8 @@
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
-    "./*.js"
+    "./*.js",
+    "../ui/src/declaration/**/*.ts"
   ],
   "exclude": [
     "lib"

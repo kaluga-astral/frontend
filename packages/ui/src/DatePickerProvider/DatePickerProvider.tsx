@@ -1,22 +1,13 @@
-import { ReactNode, createContext } from 'react';
-import ru from 'date-fns/locale/ru';
+import { ConfigContext } from '../ConfigProvider';
+import { ConfigProvider } from '../ConfigProvider';
 
-export const DatePickerContext = createContext({ locale: ru });
+/*
+ * @deprecated Компонент будет удален с выходом версии 2.0. Используйте ConfigProvider
+ */
+const DatePickerContext = ConfigContext;
+/*
+ * @deprecated Компонент будет удален с выходом версии 2.0. Используйте ConfigProvider
+ */
+const DatePickerProvider = ConfigProvider;
 
-type Props = {
-  children: ReactNode;
-  /**
-   * Локализация
-   */
-  locale?: Locale;
-};
-
-export const DatePickerProvider = (props: Props) => {
-  const { children, locale = ru } = props;
-
-  return (
-    <DatePickerContext.Provider value={{ locale }}>
-      {children}
-    </DatePickerContext.Provider>
-  );
-};
+export { DatePickerContext, DatePickerProvider };

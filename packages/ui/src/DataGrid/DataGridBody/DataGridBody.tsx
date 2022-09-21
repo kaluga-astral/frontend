@@ -7,7 +7,7 @@ import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styles';
 
-export type DataGridBodyProps<Data> = {
+export type DataGridBodyProps<Data extends object> = {
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
   onRowClick?: (row: Data) => void;
@@ -20,7 +20,7 @@ export type DataGridBodyProps<Data> = {
   noDataPlaceholder?: ReactNode;
 };
 
-export function DataGridBody<Data>({
+export function DataGridBody<Data extends object>({
   rows,
   columns,
   selectable,

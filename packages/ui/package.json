@@ -1,6 +1,8 @@
 {
   "name": "@astral/ui",
+  "version": "1.0.0",
   "browser": "./src/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
@@ -35,15 +37,5 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.5",
     "@types/react-datepicker": "4.4.0"
-  },
-  "exports": {
-    ".": {
-      "import": "./esm/index.js",
-      "require": "./index.js"
-    },
-    "./server": {
-      "import": "./esm/server/index.js",
-      "require": "./server/index.js"
-    }
   }
 }
