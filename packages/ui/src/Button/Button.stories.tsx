@@ -224,7 +224,7 @@ export const ButtonShowcase: Story = () => {
         <Grid
           container
           justifyContent="center"
-          autoFlow={autoFlow}
+          autoFlow={matches ? autoFlow : 'false'}
           templateColumns={matches ? '' : 'repeat(3, 100px)'}
           spacing={4}
         >
