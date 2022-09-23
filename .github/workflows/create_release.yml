@@ -99,9 +99,10 @@ jobs:
             📦  @astral/icons: ${{ env.NEXT_VERSION }}
             📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
+            📦  @astral/validations: ${{ env.NEXT_VERSION }}
 
             ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/v${{ env.NEXT_VERSION }}">Changelog</a>
 
             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
 
-            ⚡️ Новый ui-kit - это наш open source, репозиторий можете найти <a href="${{ github.event.repository.html_url }}">здесь</a>. Любой желающий может внести свой вклад в развитие проекта.
+            ⚡️ Проявив инициативу и взяв доступную задачу с доски <a href="https://astraltrack.atlassian.net/jira/software/c/projects/UIKIT/boards/276">Frontend.Shared</a> вы развиваете frontend в компании.
