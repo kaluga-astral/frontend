@@ -8,6 +8,7 @@ import {
 import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addMonths } from '../../utils/addMonths';
+import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
 
 import { DateDayPickerGridHead } from './components/DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './components/DateDayPickerGrid';
@@ -18,19 +19,6 @@ type DateDayPickerProps = {
 } & CommonDateCalendarHeadProps &
   PickerProps;
 
-const monthYearFormat = Intl.DateTimeFormat('ru', {
-  month: 'long',
-  year: 'numeric',
-}).format;
-
-const dayFormat = Intl.DateTimeFormat('ru', {
-  weekday: 'short',
-  year: '2-digit',
-  month: 'short',
-  day: '2-digit',
-  timeZone: 'UTC',
-}).format;
-
 export const DayPicker = ({
   date: initialDate,
   selectedDate,
@@ -38,6 +26,19 @@ export const DayPicker = ({
   isMondayFirst,
   ...headProps
 }: DateDayPickerProps) => {
+  const monthYearFormat = useLocaleDateTimeFormat({
+    month: 'long',
+    year: 'numeric',
+  });
+
+  const dayFormat = useLocaleDateTimeFormat({
+    weekday: 'short',
+    year: '2-digit',
+    month: 'short',
+    day: '2-digit',
+    timeZone: 'UTC',
+  });
+
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
     addCb: addMonths,

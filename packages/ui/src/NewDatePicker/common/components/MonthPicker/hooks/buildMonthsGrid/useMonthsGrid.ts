@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 
 import { MONTHS_IN_YEAR } from '../../../../constants/monthsInYear';
-import { buildIsoDateString } from '../../../../utils/buildIsoDateString';
 import { addMonths } from '../../../../utils/addMonths';
 import { isDateOutOfRange } from '../../../../utils/isDateOutOfRange';
 import { GridBuilder, GridItem } from '../../../../types/gridBuilder';
 import { buildGridResult } from '../../../../utils/buildGridItem';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
 import { isDate } from '../../../../utils/isDate';
+import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type MonthItem = {
   month: number;
@@ -18,7 +18,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
   selectedDate,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
-  const startDate = new Date(buildIsoDateString(baseDate.getUTCFullYear()));
+  const startDate = buildIsoDate({ year: baseDate.getUTCFullYear() });
   const year = startDate.getUTCFullYear();
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
@@ -27,7 +27,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
   const grid: GridItem<MonthItem>[] = [];
 
   for (let i = 0; i < MONTHS_IN_YEAR; i++) {
-    const date = new Date(buildIsoDateString(year, i + 1));
+    const date = buildIsoDate({ year, month: i + 1 });
 
     grid.push({
       date: addMonths(startDate, i),

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { IMask, IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
@@ -11,7 +12,10 @@ type MaskProps = IMaskInputProps<
 >;
 
 export type MaskFieldProps = Omit<
-  Omit<MaskProps, 'size' | 'defaultValue' | 'rows' | 'value' | 'label'> &
+  Omit<
+    MaskProps,
+    'size' | 'defaultValue' | 'rows' | 'value' | 'label' | 'inputRef'
+  > &
     TextFieldProps,
   'onChange' | 'onAccept'
 > & {
@@ -38,22 +42,28 @@ const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
   return <TextField inputRef={inputRef} {...textFieldProps} />;
 });
 
-export const MaskField = ({ onChange, onAccept, ...props }: MaskFieldProps) => {
-  const maskFieldProps = props as IMaskInputProps;
+export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
+  ({ onChange, onAccept, ...props }, ref) => {
+    const maskFieldProps = props as IMaskInputProps;
 
-  const handleMaskFieldAccept = (
-    value: string,
-    maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
-    e?: InputEvent,
-  ) => {
-    if (onAccept) {
-      return onAccept(value, maskRef, e, onChange);
-    }
+    const handleMaskFieldAccept = (
+      value: string,
+      maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+      e?: InputEvent,
+    ) => {
+      if (onAccept) {
+        return onAccept(value, maskRef, e, onChange);
+      }
 
-    onChange?.(value);
-  };
+      onChange?.(value);
+    };
 
-  return (
-    <MaskedTextField {...maskFieldProps} onAccept={handleMaskFieldAccept} />
-  );
-};
+    return (
+      <MaskedTextField
+        {...maskFieldProps}
+        inputRef={() => ref}
+        onAccept={handleMaskFieldAccept}
+      />
+    );
+  },
+);

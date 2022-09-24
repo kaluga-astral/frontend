@@ -8,19 +8,11 @@ import {
 import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addYears } from '../../utils/addYears';
+import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
 
 import { useMonthsGrid } from './hooks/buildMonthsGrid';
 
 type DateMonthPickerProps = PickerProps & CommonDateCalendarHeadProps;
-
-const monthFormat = Intl.DateTimeFormat('ru', {
-  month: 'long',
-}).format;
-
-const titleFormat = Intl.DateTimeFormat('ru', {
-  month: 'long',
-  year: 'numeric',
-}).format;
 
 export const MonthPicker = ({
   date: initialDate,
@@ -28,6 +20,15 @@ export const MonthPicker = ({
   onChange,
   ...headProps
 }: DateMonthPickerProps) => {
+  const monthFormat = useLocaleDateTimeFormat({
+    month: 'long',
+  });
+
+  const titleFormat = useLocaleDateTimeFormat({
+    month: 'long',
+    year: 'numeric',
+  });
+
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
     addCb: addYears,

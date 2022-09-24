@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { YearPicker } from '../YearPicker';
 import { MonthPicker } from '../MonthPicker';
@@ -34,6 +34,10 @@ export const YearMonthDayPicker = ({
   const handleMonthHeadBtnClick = () => setState(States.years);
 
   const handleDaysHeadBtnClick = () => setState(States.months);
+
+  useEffect(() => {
+    setDate(initialDate);
+  }, [initialDate]);
 
   return (
     <>

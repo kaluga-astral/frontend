@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type UseCalendarNavigateProps = {
   date: Date;
@@ -18,6 +18,10 @@ export const useCalendarNavigate = ({
   const handlePrevClick = () => {
     setBaseDate(addCb(baseDate, -1));
   };
+
+  useEffect(() => {
+    setBaseDate(date);
+  }, [date]);
 
   return {
     baseDate,

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { MinMaxDate } from '../../types/minMaxDate';
 import { isDate } from '../isDate';
-import { buildIsoDateString } from '../buildIsoDateString';
+import { buildIsoDate } from '../buildIsoDate';
 
 type UseBaseDateInRangeOptions = MinMaxDate;
 
@@ -15,14 +15,12 @@ export const useBaseDateInRange = ({
 }: UseBaseDateInRangeOptions): Date =>
   useMemo(() => {
     const currentDate = new Date();
-    const baseDate = new Date(
-      buildIsoDateString(
-        currentDate.getUTCFullYear(),
-        currentDate.getUTCMonth() + 1,
-        currentDate.getUTCDate(),
-        currentDate.getUTCHours(),
-      ),
-    );
+    const baseDate = buildIsoDate({
+      year: currentDate.getUTCFullYear(),
+      month: currentDate.getUTCMonth() + 1,
+      day: currentDate.getUTCDate(),
+      hour: currentDate.getUTCHours(),
+    });
 
     if (isDate(minDate) && +baseDate < +minDate) {
       return minDate;

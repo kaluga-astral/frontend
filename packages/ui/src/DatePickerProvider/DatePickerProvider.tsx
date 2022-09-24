@@ -1,22 +1,19 @@
-import { ReactNode, createContext } from 'react';
-import ru from 'date-fns/locale/ru';
+import { PropsWithChildren, createContext } from 'react';
 
-export const DatePickerContext = createContext({ locale: ru });
+export const DatePickerContext = createContext({ locale: 'ru' });
 
-type Props = {
-  children: ReactNode;
+type DatePickerProviderProps = {
   /**
    * Локализация
    */
-  locale?: Locale;
+  locale?: 'string';
 };
 
-export const DatePickerProvider = (props: Props) => {
-  const { children, locale = ru } = props;
-
-  return (
-    <DatePickerContext.Provider value={{ locale }}>
-      {children}
-    </DatePickerContext.Provider>
-  );
-};
+export const DatePickerProvider = ({
+  locale,
+  children,
+}: PropsWithChildren<DatePickerProviderProps>) => (
+  <DatePickerContext.Provider value={{ locale: locale || 'ru' }}>
+    {children}
+  </DatePickerContext.Provider>
+);

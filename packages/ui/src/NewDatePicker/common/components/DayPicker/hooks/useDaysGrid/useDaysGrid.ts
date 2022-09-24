@@ -7,7 +7,7 @@ import { GridBuilder, GridItem } from '../../../../types/gridBuilder';
 import { isDateOutOfRange } from '../../../../utils/isDateOutOfRange';
 import { buildGridResult } from '../../../../utils/buildGridItem';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
-import { buildIsoDateString } from '../../../../utils/buildIsoDateString';
+import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type DayItem = {
   /**
@@ -44,10 +44,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
   const month = baseDate.getUTCMonth() + 1;
-  const startDate = new Date(
-    buildIsoDateString(baseDate.getUTCFullYear(), month),
-  );
-
+  const startDate = buildIsoDate({ year: baseDate.getUTCFullYear(), month });
   const firstWeekDayGap = +isMondayFirst;
 
   let startWeekDay = startDate.getUTCDay();
@@ -82,6 +79,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
         +date >= +selectedDate &&
         +date < +addDays(selectedDate, 1),
       isCurrent:
+        date.getUTCFullYear() === currentDate.getFullYear() &&
         date.getUTCDate() === currentDate.getDate() &&
         date.getUTCMonth() === currentDate.getMonth(),
       date,

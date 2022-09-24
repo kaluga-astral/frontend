@@ -1,31 +1,24 @@
-import { MouseEvent, forwardRef, useContext } from 'react';
+import { forwardRef } from 'react';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
-import { TextFieldProps } from '../../../../TextField';
-import { dateToSimpleIso } from '../../utils/simplifyIsoDate';
-import { MinMaxDateContext } from '../MinMaxDateContext';
+import { MaskFieldProps } from '../../../../MaskField';
 
 import { DatePickerInputWrapper } from './styles';
 
-type DatePickerInputProps = TextFieldProps;
+type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'>;
 
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, ...props }, ref) => {
-  const { maxDate, minDate } = useContext(MinMaxDateContext);
-  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
-    // preventDefault для предотвращения открытия нативного календаря
-    e.preventDefault();
-    onClick?.(e);
-  };
-
+>(({ onClick, onChange, ...props }, ref) => {
   return (
     <DatePickerInputWrapper
       {...props}
-      type="date"
-      onClick={handleClick}
+      ref={ref}
+      onClick={onClick}
+      mask={Date}
+      autofix="pad"
       fullWidth
       InputProps={{
         endAdornment: (
@@ -35,11 +28,7 @@ export const DatePickerInput = forwardRef<
         ),
       }}
       inputProps={{
-        min: dateToSimpleIso(minDate),
-        max: dateToSimpleIso(maxDate),
         ref,
-        // required здесь нужен, чтобы скрыть нативный крестик очистки в мозиле
-        required: true,
       }}
     />
   );

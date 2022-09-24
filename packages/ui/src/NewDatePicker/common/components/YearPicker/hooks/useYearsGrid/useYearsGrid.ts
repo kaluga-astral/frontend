@@ -1,16 +1,18 @@
 import { useContext } from 'react';
 
-import { buildIsoDateString } from '../../../../utils/buildIsoDateString';
 import { YEARS_IN_GRID } from '../../constants';
 import { isDateOutOfRange } from '../../../../utils/isDateOutOfRange';
 import { GridBuilder, GridItem } from '../../../../types/gridBuilder';
 import { addYears } from '../../../../utils/addYears';
 import { buildGridResult } from '../../../../utils/buildGridItem';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
+import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type YearItem = {
   year: number;
 };
+
+const YEAR_OFFSET = 4;
 
 export const useYearsGrid: GridBuilder<YearItem> = ({
   baseDate,
@@ -23,8 +25,8 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
 
   const grid: GridItem<YearItem>[] = [];
 
-  for (let i = YEARS_IN_GRID / -2; i < YEARS_IN_GRID / 2; i++) {
-    const date = new Date(buildIsoDateString(baseYear + i));
+  for (let i = 0 - YEAR_OFFSET; i < YEARS_IN_GRID - YEAR_OFFSET; i++) {
+    const date = buildIsoDate({ year: baseYear + i });
     const year = date.getUTCFullYear();
 
     grid.push({
