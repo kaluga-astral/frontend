@@ -1,71 +1,67 @@
 import { Grid } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Typography, TypographyProps } from './Typography';
+import { Typography, TypographyColor, TypographyProps } from './Typography';
 
 export default {
   title: 'Components/Typography',
   component: Typography,
 };
 
-const Template: Story<TypographyProps> = (args) => (
-  <Grid container spacing={2}>
-    <Grid item xs={12} md={3}>
-      <Typography color="success" variant="h1" paragraph>
-        Head size H1
-      </Typography>
-      <Typography color="error" variant="h2" paragraph>
-        Head size H2
-      </Typography>
-      <Typography color="warning" variant="h3" paragraph>
-        Head size H3
-      </Typography>
-      <Typography color="primary" variant="h4" paragraph>
-        Head size H4
-      </Typography>
-      <Typography color="secondary" variant="h5" paragraph>
-        Head size H5
-      </Typography>
-      <Typography color="info" variant="h6" paragraph>
-        Head size H6
-      </Typography>
-      <Typography
-        color={(theme) => theme.palette.error.dark}
-        variant="h7"
-        paragraph
+const variants: TypographyProps['variant'][] = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'h7',
+  'h8',
+  'h9',
+  'button',
+  'ui',
+  'link',
+  'pointer',
+  'small',
+  'code',
+];
+
+const colors: TypographyColor[] = [
+  'text',
+  'textSecondary',
+  'primary',
+  'secondary',
+  'info',
+  'success',
+  'error',
+  'warning',
+];
+
+const Template: Story<TypographyProps> = (args) => {
+  return (
+    <>
+      <Typography mb={5} {...args} />
+      <Grid
+        container
+        display="grid"
+        gridTemplateColumns={`repeat(${colors.length}, 1fr)`}
+        gap={4}
+        justifyContent="center"
+        alignItems="center"
       >
-        Head size H7
-      </Typography>
-      <Typography color="textSecondary" variant="h8" paragraph>
-        Head size H8
-      </Typography>
-      <Typography variant="h9" paragraph>
-        Head size H9
-      </Typography>
-      <Typography variant="button" paragraph>
-        Button text
-      </Typography>
-      <Typography variant="ui" paragraph>
-        UI text
-      </Typography>
-      <Typography variant="link" paragraph>
-        Link text
-      </Typography>
-      <Typography variant="pointer" paragraph>
-        Pointer text
-      </Typography>
-      <Typography variant="small" paragraph>
-        Small text
-      </Typography>
-      <Typography variant="code" paragraph>
-        Code text
-      </Typography>
-    </Grid>
-    <Grid item xs={12} md={4}>
-      <Typography {...args} />
-    </Grid>
-  </Grid>
-);
+        {variants.map((variant) => (
+          <>
+            {colors.map((color) => (
+              <Typography color={color} variant={variant}>
+                {variant} x {color}
+              </Typography>
+            ))}
+          </>
+        ))}
+      </Grid>
+    </>
+  );
+};
 
 export const Showcase = Template.bind({});
 
