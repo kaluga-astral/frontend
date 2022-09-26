@@ -52,9 +52,9 @@
     "storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && start-storybook -p 6006",
     "build-storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && set NODE_OPTIONS=--max_old_space_size=3072 && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9",
-    "lint": "npm run lint --workspaces --if-present",
+    "lint": "npm run lint:all --workspaces --if-present",
     "lint:types": "npm run lint:types --workspaces --if-present",
-    "lint:styles": "npm run lint:styles --workspaces --if-present",
+    "lint:styles": "npm run lint:styles:all --workspaces --if-present",
     "publish": "npm run build --workspaces --if-present && npm run publish --workspaces --if-present",
     "tests": "npm run tests --workspaces --if-present"
   }

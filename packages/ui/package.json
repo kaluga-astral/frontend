@@ -11,8 +11,10 @@
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "tests": "jest --passWithNoTests",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "lint:styles": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint": "eslint . --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint . --fix",
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@astral/icons": "^0.31.0",

@@ -10,7 +10,8 @@
     "build": "npm run svgr && commander build",
     "publish": "npm publish ./lib",
     "lint:types": "npm run svgr && tsc --noEmit",
-    "lint": "npx eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "lint": "eslint . --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "peerDependencies": {
     "@mui/material": "^5.3.1",

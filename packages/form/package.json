@@ -8,8 +8,8 @@
     "build": "commander build",
     "publish": "npm publish ./lib",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "lint:styles": "stylelint 'src/**/*{.ts,.tsx}' --fix",
+    "lint": "eslint . --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "tests": "jest --passWithNoTests"
   },
   "dependencies": {
