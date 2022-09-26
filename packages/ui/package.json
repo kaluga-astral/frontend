@@ -14,7 +14,7 @@
     "lint:styles": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
-    "@astral/icons": "^undefined",
+    "@astral/icons": "^0.31.0",
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.9.0",
     "@emotion/server": "11.4.0",
