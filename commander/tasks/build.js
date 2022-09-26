@@ -5,7 +5,12 @@ const { TSCONFIG_PATH, DIST_DIR_NAME } = require('../constants');
 const { copyCommonFiles } = require('./copyCommonFiles');
 const { modifyPackageJSON } = require('./modifyPackageJSON');
 
-const build = () => {
+const build = ({
+  /**
+   * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
+   * */
+  isOnlyStaticPackage,
+}) => {
   console.log('Starting build...');
 
   const { code } = shell.exec(
@@ -17,7 +22,7 @@ const build = () => {
   }
 
   copyCommonFiles();
-  modifyPackageJSON();
+  modifyPackageJSON({ isOnlyStaticPackage });
   console.log('Finish build');
 };
 

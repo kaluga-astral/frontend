@@ -39,7 +39,12 @@ const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
   return readPackageJSON(packageJSONPath);
 };
 
-const modifyPackageJSON = () => {
+const modifyPackageJSON = ({
+  /**
+   * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
+   * */
+  isOnlyStaticPackage,
+}) => {
   console.log('Starting modifyPackageJSON...');
   console.log('Update packages versions and deps');
 
@@ -54,40 +59,45 @@ const modifyPackageJSON = () => {
 
   console.log('Write data to lib package.json');
 
+  const newPackageData = {
+    ...restPackageData,
+    version: RELEASE_TAG,
+    author: 'Astral.Soft',
+    license: 'MIT',
+    repository: {
+      type: 'git',
+      url: 'git+https://github.com/kaluga-astral/frontend',
+    },
+    bugs: {
+      url: 'https://github.com/kaluga-astral/frontend/issues',
+    },
+    keywords,
+    sideEffects: false,
+    // обнуляем main, если оно есть
+    main: undefined,
+  };
+
+  if (!isOnlyStaticPackage) {
+    newPackageData.types = './esm/index.d.ts';
+    newPackageData.main = './index.js';
+    newPackageData.module = './esm/index.js';
+    newPackageData.browser = './esm/index.js';
+
+    newPackageData.exports = {
+      '.': {
+        import: './esm/index.js',
+        require: './index.js',
+      },
+      './server': {
+        import: './esm/server/index.js',
+        require: './server/index.js',
+      },
+    };
+  }
+
   fs.writeFileSync(
     './lib/package.json',
-    JSON.stringify(
-      {
-        ...restPackageData,
-        version: RELEASE_TAG,
-        author: 'Astral.Soft',
-        license: 'MIT',
-        repository: {
-          type: 'git',
-          url: 'git+https://github.com/kaluga-astral/frontend',
-        },
-        bugs: {
-          url: 'https://github.com/kaluga-astral/frontend/issues',
-        },
-        keywords,
-        sideEffects: false,
-        types: './esm/index.d.ts',
-        main: './index.js',
-        module: './esm/index.js',
-        exports: {
-          '.': {
-            import: './esm/index.js',
-            require: './index.js',
-          },
-          './server': {
-            import: './esm/server/index.js',
-            require: './server/index.js',
-          },
-        },
-      },
-      null,
-      2,
-    ),
+    JSON.stringify(newPackageData, null, 2),
   );
 
   console.log('Finish modifyPackageJSON');
