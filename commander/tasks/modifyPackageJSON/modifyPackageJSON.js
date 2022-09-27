@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-const { PACKAGES_NAMES } = require('../constants');
-
-const { RELEASE_TAG } = process.env;
+const { PACKAGES_NAMES } = require('../../constants');
 
 const readPackageJSON = (packageJSONPath) =>
   JSON.parse(fs.readFileSync(packageJSONPath));
@@ -43,12 +41,21 @@ const modifyPackageJSON = ({
   /**
    * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
    * */
-  isStaticPackage,
+  isStaticPackage = false,
+  /**
+   * @description Новая версия пакета
+   * @example modifyPackageJSON({ releaseTag: '1.1.0' })
+   * */
+  releaseTag,
 }) => {
+  if (!releaseTag) {
+    throw Error('modifyPackageJSON: releaseTag is not defined');
+  }
+
   console.log('Starting modifyPackageJSON...');
   console.log('Update packages versions and deps');
 
-  const packageData = updatePackagesVersions('./package.json', RELEASE_TAG);
+  const packageData = updatePackagesVersions('./package.json', releaseTag);
 
   const {
     scripts,
@@ -59,9 +66,9 @@ const modifyPackageJSON = ({
 
   console.log('Write data to lib package.json');
 
-  const newPackageData = {
+  const modifiedPackageData = {
     ...restPackageData,
-    version: RELEASE_TAG,
+    version: releaseTag,
     author: 'Astral.Soft',
     license: 'MIT',
     repository: {
@@ -78,26 +85,27 @@ const modifyPackageJSON = ({
   };
 
   if (!isStaticPackage) {
-    newPackageData.types = './esm/index.d.ts';
-    newPackageData.main = './index.js';
-    newPackageData.module = './esm/index.js';
-    newPackageData.browser = './esm/index.js';
-
-    newPackageData.exports = {
-      '.': {
-        import: './esm/index.js',
-        require: './index.js',
+    Object.assign(modifiedPackageData, {
+      types: './esm/index.d.ts',
+      main: './index.js',
+      module: './esm/index.js',
+      browser: './esm/index.js',
+      exports: {
+        '.': {
+          import: './esm/index.js',
+          require: './index.js',
+        },
+        './server': {
+          import: './esm/server/index.js',
+          require: './server/index.js',
+        },
       },
-      './server': {
-        import: './esm/server/index.js',
-        require: './server/index.js',
-      },
-    };
+    });
   }
 
   fs.writeFileSync(
     './lib/package.json',
-    JSON.stringify(newPackageData, null, 2),
+    JSON.stringify(modifiedPackageData, null, 2),
   );
 
   console.log('Finish modifyPackageJSON');

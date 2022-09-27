@@ -10,6 +10,11 @@ const build = ({
    * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
    * */
   isStaticPackage,
+  /**
+   * @description Новая версия пакета
+   * @example modifyPackageJSON({ releaseTag: '1.1.0' })
+   * */
+  releaseTag,
 }) => {
   console.log('Starting build...');
 
@@ -22,7 +27,7 @@ const build = ({
   }
 
   copyCommonFiles();
-  modifyPackageJSON({ isStaticPackage });
+  modifyPackageJSON({ isStaticPackage, releaseTag });
   console.log('Finish build');
 };
 
