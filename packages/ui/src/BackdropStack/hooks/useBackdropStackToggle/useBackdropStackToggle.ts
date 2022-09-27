@@ -1,5 +1,4 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
-import { nanoid } from 'nanoid';
 
 import {
   Reason,
@@ -40,8 +39,9 @@ type UseBackdropStackToggleFunc = (options?: Options) => ReturnElements;
 export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
   id: parentId,
 } = {}) => {
-  const id = useRef<string>(parentId || nanoid());
-  const { pop, push, remove } = backdropStackManager;
+  const { pop, push, remove, getUniqueId } = backdropStackManager;
+
+  const id = useRef<string>(parentId || getUniqueId());
 
   const [isOpened, setOpened] = useState(false);
   const handleOpen = () => {
