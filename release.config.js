@@ -31,6 +31,11 @@ module.exports = {
               section: '✨ Features',
               hidden: false,
             },
+            {
+              type: 'build',
+              section: '📦 Build',
+              hidden: false,
+            },
           ],
         },
       },
