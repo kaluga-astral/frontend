@@ -9,7 +9,7 @@ const copyCommonFiles = () => {
   console.log('Copy LICENSE');
 
   copy(
-    path.resolve(__dirname, '..', '..', 'LICENSE'),
+    path.resolve(__dirname, '..', '..', '..', 'LICENSE'),
     `./${DIST_DIR_NAME}/LICENSE`,
   ).catch((error) => {
     console.error(error);
