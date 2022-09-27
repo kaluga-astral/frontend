@@ -4,7 +4,13 @@ import { isDateOutOfRange } from '../isDateOutOfRange';
 import { MinMaxDate } from '../../types/minMaxDate';
 
 type BuildGridResultOptions<T> = {
+  /**
+   * @description массив элементов для рендера в календаре
+   */
   grid: GridItem<T>[];
+  /**
+   * @description хелпер, который будет вызываться при клике по стрелкам вперед/назад
+   */
   addCb: AddHelper;
 } & MinMaxDate;
 

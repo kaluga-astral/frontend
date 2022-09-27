@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   CommonDateCalendarHeadProps,
   DateCalendarGridBtnLarge,
@@ -9,6 +11,7 @@ import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addYears } from '../../utils/addYears';
 import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
+import { DatePickerContext } from '../../../../DatePickerProvider';
 
 import { useMonthsGrid } from './hooks/buildMonthsGrid';
 
@@ -39,11 +42,15 @@ export const MonthPicker = ({
     selectedDate,
   });
 
+  const {
+    languageMap: { year: yearCaption },
+  } = useContext(DatePickerContext);
+
   return (
     <DateCalendarWrapper>
       <DateCalendarHead
         {...headProps}
-        arrowPostfixTitle="год"
+        arrowPostfixTitle={yearCaption.single}
         onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
         onNextClick={!isNextDisabled ? handleNextClick : undefined}
         headBtnText={baseDate.getUTCFullYear()}

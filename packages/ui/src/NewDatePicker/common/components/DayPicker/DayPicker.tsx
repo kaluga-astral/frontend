@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   CommonDateCalendarHeadProps,
   DateCalendarBody,
@@ -9,14 +11,22 @@ import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addMonths } from '../../utils/addMonths';
 import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
+import { DatePickerContext } from '../../../../DatePickerProvider';
 
 import { DateDayPickerGridHead } from './components/DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './components/DateDayPickerGrid';
 import { useDaysGrid } from './hooks/useDaysGrid';
 
-type DateDayPickerProps = {
+export type MondayFirst = {
+  /**
+   * @description флаг рендера календаря дней начиная с понедельника
+   * @default true
+   */
   isMondayFirst?: boolean;
-} & CommonDateCalendarHeadProps &
+};
+
+type DateDayPickerProps = MondayFirst &
+  CommonDateCalendarHeadProps &
   PickerProps;
 
 export const DayPicker = ({
@@ -39,6 +49,10 @@ export const DayPicker = ({
     timeZone: 'UTC',
   });
 
+  const {
+    languageMap: { month: monthCaption },
+  } = useContext(DatePickerContext);
+
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
     addCb: addMonths,
@@ -54,7 +68,7 @@ export const DayPicker = ({
     <DateCalendarWrapper>
       <DateCalendarHead
         {...headProps}
-        arrowPostfixTitle="месяц"
+        arrowPostfixTitle={monthCaption.single}
         onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
         onNextClick={!isNextDisabled ? handleNextClick : undefined}
         headBtnText={monthYearFormat(baseDate)}

@@ -1,19 +1,35 @@
 import { PropsWithChildren, createContext } from 'react';
 
-export const DatePickerContext = createContext({ locale: 'ru' });
+import { russianMap } from './constants/russianMap';
+import { LanguageMap } from './types';
+
+export const DatePickerContext = createContext<
+  Required<DatePickerProviderProps>
+>({
+  locale: 'ru',
+  languageMap: russianMap,
+});
 
 type DatePickerProviderProps = {
   /**
-   * Локализация
+   * @description имя локали используемое для Intl
+   * @example 'ru', 'en-GB'
+   * @default 'ru'
    */
-  locale?: 'string';
+  locale?: string;
+  /**
+   * @description карта перевода, содержащая тексты используемые в календаре
+   * @default 'russianMap'
+   */
+  languageMap?: LanguageMap;
 };
 
 export const DatePickerProvider = ({
-  locale,
+  locale = 'ru',
+  languageMap = russianMap,
   children,
 }: PropsWithChildren<DatePickerProviderProps>) => (
-  <DatePickerContext.Provider value={{ locale: locale || 'ru' }}>
+  <DatePickerContext.Provider value={{ locale, languageMap }}>
     {children}
   </DatePickerContext.Provider>
 );

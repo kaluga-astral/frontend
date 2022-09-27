@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   CommonDateCalendarHeadProps,
   DateCalendarGridBtnLarge,
@@ -8,6 +10,7 @@ import {
 import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/addYears';
 import { PickerProps } from '../../types/pickerProps';
+import { DatePickerContext } from '../../../../DatePickerProvider';
 
 import { useYearsGrid } from './hooks/useYearsGrid';
 import { YEARS_IN_GRID } from './constants';
@@ -29,11 +32,15 @@ export const YearPicker = ({
     selectedDate,
   });
 
+  const {
+    languageMap: { year: yearCaption },
+  } = useContext(DatePickerContext);
+
   return (
     <DateCalendarWrapper>
       <DateCalendarHead
         {...headProps}
-        arrowPostfixTitle="года"
+        arrowPostfixTitle={yearCaption.plural as string}
         isPlural
         onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
         onNextClick={!isNextDisabled ? handleNextClick : undefined}

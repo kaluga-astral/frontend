@@ -10,6 +10,9 @@ import { isDate } from '../../../../utils/isDate';
 import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type MonthItem = {
+  /**
+   * @description нормализованный день месяца для использования в календаре
+   */
   month: number;
 };
 

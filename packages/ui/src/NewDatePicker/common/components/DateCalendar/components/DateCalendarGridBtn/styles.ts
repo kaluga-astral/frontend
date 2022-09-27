@@ -3,10 +3,16 @@ import { DateCalendarBtn } from '../DateCalendarBtn';
 
 type DateCalendarDayBtnWrapperProps = {
   /**
-   * @description флаг означающий что дата находится вне доступного диапазана, например при выборе дня, месяц до и месяц после, должны находиться вне
+   * @description флаг означающий, что дата находится вне доступного диапазона, например при выборе дня, месяц до и месяц после, должны находиться вне
    */
   isOutOfAvailableRange?: boolean;
+  /**
+   * @description флаг означающий, что дата совпадает с локальным временем пользователя
+   */
   isCurrent: boolean;
+  /**
+   * @description флаг означающий, что дата находится в выбранном диапазоне
+   */
   isInSelectedRange?: boolean;
 };
 

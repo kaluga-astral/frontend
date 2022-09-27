@@ -13,6 +13,9 @@ const orderMap: ElementsMap = {
   [DateMaskElements.second]: 'second',
 };
 
+/**
+ * @description хелпер конвертации строковой даты созданной по маске обратно в Date
+ */
 export const maskToDate = (date: string, mask: DateMask): Date => {
   const dateArr = date.split('.');
   const options: BuildIsoDateStringOptions = { year: 1900 };

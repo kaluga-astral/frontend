@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { YearPicker } from '../YearPicker';
 import { MonthPicker } from '../MonthPicker';
-import { DayPicker } from '../DayPicker';
+import { DayPicker, MondayFirst } from '../DayPicker';
 import { PickerProps } from '../../types/pickerProps';
+import { DatePickerContext } from '../../../../DatePickerProvider';
 
 enum States {
   days,
@@ -11,12 +12,13 @@ enum States {
   years,
 }
 
-type YearMonthDayPickerProps = PickerProps;
+type YearMonthDayPickerProps = PickerProps & MondayFirst;
 
 export const YearMonthDayPicker = ({
   onChange,
   date: initialDate,
   selectedDate,
+  isMondayFirst,
 }: YearMonthDayPickerProps) => {
   const [currentState, setState] = useState(States.days);
   const [date, setDate] = useState(initialDate);
@@ -34,6 +36,10 @@ export const YearMonthDayPicker = ({
   const handleMonthHeadBtnClick = () => setState(States.years);
 
   const handleDaysHeadBtnClick = () => setState(States.months);
+
+  const {
+    languageMap: { toYearPick, toMonthPick },
+  } = useContext(DatePickerContext);
 
   useEffect(() => {
     setDate(initialDate);
@@ -54,15 +60,16 @@ export const YearMonthDayPicker = ({
           selectedDate={selectedDate}
           onChange={handleMonthChange}
           onHeadBtnClick={handleMonthHeadBtnClick}
-          headBtnTitle="К выбору года"
+          headBtnTitle={toYearPick.single}
         />
       )}
       {currentState === States.days && (
         <DayPicker
           date={date}
+          isMondayFirst={isMondayFirst}
           selectedDate={selectedDate}
           onHeadBtnClick={handleDaysHeadBtnClick}
-          headBtnTitle="К выбору месяца"
+          headBtnTitle={toMonthPick.single}
           onChange={onChange}
         />
       )}

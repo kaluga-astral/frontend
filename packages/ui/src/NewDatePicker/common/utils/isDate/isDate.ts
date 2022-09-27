@@ -1,3 +1,6 @@
+/**
+ * @description функция проверки значения на дату
+ */
 export const isDate = (value: unknown): value is Date =>
   value !== null &&
   (value instanceof Date ||

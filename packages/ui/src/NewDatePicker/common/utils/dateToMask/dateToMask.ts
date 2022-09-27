@@ -12,6 +12,9 @@ const elementsMap: ElementsMap = {
   [DateMaskElements.second]: (date) => date.getUTCSeconds(),
 };
 
+/**
+ * @description хелпер для генерации строковой даты по заданной маске
+ */
 export const dateToMask = (date: Date, mask: DateMask): string =>
   mask
     .split('.')

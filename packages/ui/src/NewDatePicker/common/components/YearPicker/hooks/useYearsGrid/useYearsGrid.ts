@@ -9,6 +9,9 @@ import { MinMaxDateContext } from '../../../MinMaxDateContext';
 import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type YearItem = {
+  /**
+   * @description номер года для рендера в календаре
+   */
   year: number;
 };
 

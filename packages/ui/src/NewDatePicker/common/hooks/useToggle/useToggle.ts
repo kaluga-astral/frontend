@@ -5,12 +5,28 @@ type CloseHandler = () => void;
 
 type UseToggleResultTuple = [boolean, OpenHandler, CloseHandler];
 
-export const useToggle = (initialState = false): UseToggleResultTuple => {
+type UseToggleOptions = {
+  initialState?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+};
+
+export const useToggle = ({
+  initialState = false,
+  onClose,
+  onOpen,
+}: UseToggleOptions): UseToggleResultTuple => {
   const [isActive, setActive] = useState(initialState);
 
-  const handleOpen = () => setActive(true);
+  const handleOpen = () => {
+    setActive(true);
+    onOpen?.();
+  };
 
-  const handleClose = () => setActive(false);
+  const handleClose = () => {
+    setActive(false);
+    onClose?.();
+  };
 
   return [isActive, handleOpen, handleClose];
 };

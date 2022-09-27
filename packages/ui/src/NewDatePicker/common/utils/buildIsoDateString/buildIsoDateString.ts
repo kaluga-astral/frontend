@@ -1,7 +1,7 @@
 import { zeroPad } from '../zeroPad';
 
 /**
- * @description хелпер генерирующий строковую дату в формате ISO
+ * @description опции для генерации даты в строковом формате
  * @param {number} year  - год, обязательный
  * @param {number} month - месяц, опциональный
  * @param {number} day - день месяца, опциональный
@@ -9,7 +9,6 @@ import { zeroPad } from '../zeroPad';
  * @param {number} minute - минута, опциональный
  * @param {number} second - секунда, опциональный
  */
-
 export type BuildIsoDateStringOptions = {
   year: number;
   month?: number;
@@ -19,6 +18,9 @@ export type BuildIsoDateStringOptions = {
   second?: number;
 };
 
+/**
+ * @description хелпер генерирующий строковую дату в формате ISO
+ */
 export const buildIsoDateString = ({
   year,
   month = 1,

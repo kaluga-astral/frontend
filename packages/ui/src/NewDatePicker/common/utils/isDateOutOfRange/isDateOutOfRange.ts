@@ -5,6 +5,9 @@ type IsDateOutOfRangeOptions = {
   date: Date;
 } & MinMaxDate;
 
+/**
+ * @description хелпер проверки даты на вхождение в указанный диапазон между minDate и maxDate
+ */
 export const isDateOutOfRange = ({
   date,
   minDate,
