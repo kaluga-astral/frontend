@@ -9,7 +9,7 @@ const build = ({
   /**
    * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
    * */
-  isOnlyStaticPackage,
+  isStaticPackage,
 }) => {
   console.log('Starting build...');
 
@@ -22,7 +22,7 @@ const build = ({
   }
 
   copyCommonFiles();
-  modifyPackageJSON({ isOnlyStaticPackage });
+  modifyPackageJSON({ isStaticPackage });
   console.log('Finish build');
 };
 

@@ -43,7 +43,7 @@ const modifyPackageJSON = ({
   /**
    * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
    * */
-  isOnlyStaticPackage,
+  isStaticPackage,
 }) => {
   console.log('Starting modifyPackageJSON...');
   console.log('Update packages versions and deps');
@@ -77,7 +77,7 @@ const modifyPackageJSON = ({
     main: undefined,
   };
 
-  if (!isOnlyStaticPackage) {
+  if (!isStaticPackage) {
     newPackageData.types = './esm/index.d.ts';
     newPackageData.main = './index.js';
     newPackageData.module = './esm/index.js';

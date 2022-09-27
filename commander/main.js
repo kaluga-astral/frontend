@@ -9,7 +9,7 @@ const { lintPRTitle } = require('./tasks/lintPRTitle');
 const runTask = async ({ task, args }) => {
   switch (task) {
     case 'build':
-      build({ isOnlyStaticPackage: args.isOnlyStaticPackage });
+      build({ isStaticPackage: args.isStaticPackage });
 
       break;
     case 'copyFonts':
@@ -29,7 +29,7 @@ const runTask = async ({ task, args }) => {
 
       break;
     case 'modifyPackageJSON':
-      modifyPackageJSON({ isOnlyStaticPackage: args.isOnlyStaticPackage });
+      modifyPackageJSON({ isStaticPackage: args.isStaticPackage });
 
       break;
     case 'lintPRTitle':

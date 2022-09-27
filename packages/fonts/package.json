@@ -4,7 +4,7 @@
   "version": "0.31.0",
   "scripts": {
     "prebuild": "rimraf ./lib",
-    "build": "commander copyCommonFiles && commander copyFonts && commander modifyPackageJSON --isOnlyStaticPackage=true",
+    "build": "commander copyCommonFiles && commander copyFonts && commander modifyPackageJSON --isStaticPackage=true",
     "publish": "npm publish ./lib"
   },
   "dependencies": {}
