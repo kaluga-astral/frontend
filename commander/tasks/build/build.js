@@ -1,9 +1,8 @@
 const shell = require('shelljs');
 
-const { TSCONFIG_PATH, DIST_DIR_NAME } = require('../constants');
-
-const { copyCommonFiles } = require('./copyCommonFiles');
-const { modifyPackageJSON } = require('./modifyPackageJSON');
+const { TSCONFIG_PATH, DIST_DIR_NAME } = require('../../constants');
+const { copyCommonFiles } = require('../copyCommonFiles');
+const { modifyPackageJSON } = require('../modifyPackageJSON');
 
 const build = ({
   /**
