@@ -4,14 +4,17 @@ import { DAYS_IN_WEEK } from '../../../../constants/daysInWeek';
 import { MONTHS_IN_YEAR } from '../../../../constants/monthsInYear';
 import { addDays } from '../../../../utils/addDays';
 import { GridBuilder, GridItem } from '../../../../types/gridBuilder';
-import { isDateOutOfRange } from '../../../../utils/isDateOutOfRange';
+import {
+  DateCompareDeep,
+  isDateOutOfRange,
+} from '../../../../utils/isDateOutOfRange';
 import { buildGridResult } from '../../../../utils/buildGridItem';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
 import { buildIsoDate } from '../../../../utils/buildIsoDate';
 
 export type DayItem = {
   /**
-   * @description Флаг обозначающий что дата совпадает с запрошенным месяцем
+   * @description Флаг обозначающий, что дата совпадает с запрошенным месяцем
    */
   isOutOfAvailableRange: boolean;
   /**
@@ -22,12 +25,12 @@ export type DayItem = {
 
 type BuildMonthGridOptions = {
   /**
-   * @description для сборки каледарая в полный размер, для соответсвия с дизайном в rangePicker
+   * @description для сборки календаря в полный размер, для соответствия с дизайном в rangePicker
    * @default false
    */
   fullSize?: boolean;
   /**
-   * @description Флаг обозначающий что надо отрендерить массив, где понедельник в календаре идет вначале
+   * @description Флаг обозначающий, что надо отрендерить массив, где понедельник в календаре идет вначале
    * @default true
    */
   isMondayFirst?: boolean;
@@ -42,9 +45,11 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
   fullSize = false,
   isMondayFirst = true,
 }) => {
+  const grid: GridItem<DayItem>[] = [];
   const { maxDate, minDate } = useContext(MinMaxDateContext);
   const month = baseDate.getUTCMonth() + 1;
   const startDate = buildIsoDate({ year: baseDate.getUTCFullYear(), month });
+
   const firstWeekDayGap = +isMondayFirst;
 
   let startWeekDay = startDate.getUTCDay();
@@ -53,15 +58,19 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
     startWeekDay = DAYS_IN_WEEK;
   }
 
-  const grid: GridItem<DayItem>[] = [];
+  let startMonthIndex = 0;
+  let lastCurrentMonthIndex = -1;
+
+  const currentDate = new Date();
 
   for (let i = firstWeekDayGap; i < MAX_DAYS_IN_GRID + firstWeekDayGap; i++) {
     const date = addDays(startDate, i - startWeekDay);
-
     const dateMonth = date.getUTCMonth() + 1;
     const isNextMonth =
       (dateMonth !== MONTHS_IN_YEAR && dateMonth > month) ||
       (month === MONTHS_IN_YEAR && dateMonth === 1);
+    const isPrevMonth =
+      dateMonth < month || (dateMonth === MONTHS_IN_YEAR && month === 1);
     const isFirstDayOfWeek = date.getUTCDay() === firstWeekDayGap;
 
     // проверка на необходимость продолжать заполнять массив
@@ -70,7 +79,13 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       break;
     }
 
-    const currentDate = new Date();
+    if (!isNextMonth) {
+      lastCurrentMonthIndex++;
+    }
+
+    if (isPrevMonth) {
+      startMonthIndex++;
+    }
 
     grid.push({
       isOutOfAvailableRange: dateMonth !== month,
@@ -84,9 +99,22 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
         date.getUTCMonth() === currentDate.getMonth(),
       date,
       monthDay: date.getUTCDate(),
-      disabled: isDateOutOfRange({ date, minDate, maxDate }),
+      disabled: isDateOutOfRange({
+        date,
+        minDate,
+        maxDate,
+        deep: DateCompareDeep.day,
+      }),
     });
   }
 
-  return buildGridResult<DayItem>({ grid, minDate, maxDate, addCb: addDays });
+  return buildGridResult<DayItem>({
+    grid,
+    minDate,
+    maxDate,
+    addCb: addDays,
+    indexPrevDisabledCheck: startMonthIndex,
+    indexNextDisabledCheck: lastCurrentMonthIndex,
+    deep: DateCompareDeep.day,
+  });
 };

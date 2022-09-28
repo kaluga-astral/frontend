@@ -1,7 +1,6 @@
 import { GridBuilderResult, GridItem } from '../../types/gridBuilder';
 import { AddHelper } from '../../types/addHelper';
-import { isDateOutOfRange } from '../isDateOutOfRange';
-import { MinMaxDate } from '../../types/minMaxDate';
+import { IsDateOutOfRangeOptions, isDateOutOfRange } from '../isDateOutOfRange';
 
 type BuildGridResultOptions<T> = {
   /**
@@ -9,26 +8,39 @@ type BuildGridResultOptions<T> = {
    */
   grid: GridItem<T>[];
   /**
-   * @description хелпер, который будет вызываться при клике по стрелкам вперед/назад
+   * @description хелпер, который будет вызываться для добавления к минимальной и максимальной дате из грида, и сравнения с minDate и maxDate, в следствии мы выясним, являются ли сосдние элементы задизейбленными
    */
   addCb: AddHelper;
-} & MinMaxDate;
+  /**
+   * @description индекс элемента от которого надо чекнуть предыдущий на disabled
+   */
+  indexPrevDisabledCheck?: number;
+  /**
+   * @description индекс элемента от которого надо чекнуть следующий на disabled
+   */
+  indexNextDisabledCheck?: number;
+} & Omit<IsDateOutOfRangeOptions, 'date'>;
 
 export const buildGridResult = <T>({
   grid,
   addCb,
   maxDate,
   minDate,
+  indexPrevDisabledCheck = 0,
+  indexNextDisabledCheck = grid.length - 1,
+  deep,
 }: BuildGridResultOptions<T>): GridBuilderResult<T> => ({
   grid,
   isPrevDisabled: isDateOutOfRange({
-    date: addCb(grid[0].date, -1),
+    date: addCb(grid[indexPrevDisabledCheck].date, -1),
     maxDate,
     minDate,
+    deep,
   }),
   isNextDisabled: isDateOutOfRange({
-    date: addCb((grid.at(-1) as GridItem<{}>).date, 1),
+    date: addCb(grid[indexNextDisabledCheck].date, 1),
     minDate,
     maxDate,
+    deep,
   }),
 });

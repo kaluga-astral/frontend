@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
-import { Popper, PopperProps } from '@mui/material';
+import { PopperProps } from '@mui/material';
 
 import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
 
-import { DatePickerPopoverInner } from './styles';
+import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
 export type DatePickerProps = PropsWithChildren<
   Omit<PopperProps, 'children'>
@@ -19,7 +19,7 @@ export const DatePickerPopper = ({
   useEscapeClickEffect({ cb: onClose, isActive: props.open });
 
   return (
-    <Popper
+    <PopperWrapper
       {...props}
       placement="bottom-start"
       disablePortal
@@ -33,6 +33,6 @@ export const DatePickerPopper = ({
       ]}
     >
       <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
-    </Popper>
+    </PopperWrapper>
   );
 };

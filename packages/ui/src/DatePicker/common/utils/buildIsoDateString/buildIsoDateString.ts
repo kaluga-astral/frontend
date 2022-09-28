@@ -1,9 +1,9 @@
 import { zeroPad } from '../zeroPad';
 
 /**
- * @description опции для генерации даты в строковом формате
+ * @description опции для генерации даты без смещения по часовому поясу пользователя
  * @param {number} year  - год, обязательный
- * @param {number} month - месяц, опциональный
+ * @param {number} month - месяц, опциональный, должен быть нормализован, т.е. начинаться от 1
  * @param {number} day - день месяца, опциональный
  * @param {number} hour - час, опциональный
  * @param {number} minute - минута, опциональный
