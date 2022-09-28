@@ -26,7 +26,7 @@ export type IsDateOutOfRangeOptions = Partial<MinMaxDate> & {
   log?: boolean;
 };
 
-const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
+export const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
   buildIsoDate({
     year: date.getUTCFullYear(),
     month: deep > DateCompareDeep.year ? date.getUTCMonth() + 1 : undefined,

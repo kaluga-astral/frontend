@@ -1,5 +1,11 @@
-import { forwardRef, useContext, useEffect, useMemo, useState } from 'react';
-import { ReactMaskProps } from 'react-imask/dist/mixin';
+import {
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import { DatePickerClickAwayListener } from '../../common/components/DatePickerClickAwayListener';
 import { DatePickerInput } from '../../common/components/DatePickerInput';
@@ -19,6 +25,7 @@ import { DateMask } from '../../common/types/maskDate';
 import { maskToDate } from '../../common/utils/maskToDate';
 import {
   DateCompareDeep,
+  buildDateByDeep,
   isDateOutOfRange,
 } from '../../common/utils/isDateOutOfRange';
 import { MondayFirst } from '../../common/components/DayPicker';
@@ -60,39 +67,40 @@ const DatePickerInner = forwardRef<
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
 
-    const handleInputChange: ReactMaskProps['onComplete'] = (value, _, e) => {
-      if (Boolean(e)) {
-        const date = maskToDate(value, mask);
+    const checkValue = useCallback(
+      (value: string) => {
+        if (value.length === mask?.length) {
+          const date = maskToDate(value, mask);
 
-        if (
-          isDateOutOfRange({
-            date,
-            minDate,
-            deep: DateCompareDeep.day,
-          })
-        ) {
-          setSelectedDate(minDate);
-        } else if (
-          isDateOutOfRange({
-            date,
-            maxDate,
-            deep: DateCompareDeep.day,
-          })
-        ) {
-          setSelectedDate(maxDate);
-        } else {
-          setSelectedDate(date);
+          if (
+            isDateOutOfRange({
+              date,
+              minDate,
+              deep: DateCompareDeep.day,
+            })
+          ) {
+            setSelectedDate(buildDateByDeep(minDate, DateCompareDeep.day));
+          } else if (
+            isDateOutOfRange({
+              date,
+              maxDate,
+              deep: DateCompareDeep.day,
+            })
+          ) {
+            setSelectedDate(buildDateByDeep(maxDate, DateCompareDeep.day));
+          } else {
+            setSelectedDate(date);
+          }
+        } else if (value === '') {
+          setSelectedDate(null);
         }
-      }
-    };
+      },
+      [mask],
+    );
 
     const handleDayPick = (date: Date) => {
       setSelectedDate(date);
       closePopper();
-    };
-
-    const handleClean = () => {
-      setSelectedDate(null);
     };
 
     useEffect(() => {
@@ -105,9 +113,9 @@ const DatePickerInner = forwardRef<
       <DatePickerClickAwayListener onClickAway={closePopper}>
         <DatePickerInput
           {...inputProps}
-          onClean={handleClean}
+          onNativeChange={(e) => checkValue(e.target.value)}
+          onBlur={(e) => checkValue(e.target.value)}
           disabled={disabled}
-          onComplete={handleInputChange}
           value={maskedDate}
           ref={ref}
           onFocus={openPopper}

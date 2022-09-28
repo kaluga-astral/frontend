@@ -7,21 +7,13 @@ import { MaskFieldProps } from '../../../../MaskField';
 import { DatePickerInputWrapper } from './styles';
 
 type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
-  onClean?: () => void;
+  onNativeChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, onChange, onClean, ...props }, ref) => {
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    if (e?.target?.value === '') {
-      onClean?.();
-    }
-  };
-
+>(({ onClick, onChange, onNativeChange, ...props }, ref) => {
   return (
     <DatePickerInputWrapper
       {...props}
@@ -31,7 +23,7 @@ export const DatePickerInput = forwardRef<
       autofix="pad"
       fullWidth
       InputProps={{
-        onChange: handleChange,
+        onChange: onNativeChange,
         endAdornment: (
           <InputAdornment position="end" disablePointerEvents>
             <CalendarOutlineMd />
