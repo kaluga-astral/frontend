@@ -6,10 +6,15 @@ const { publish } = require('./tasks/publish');
 const { copyImages } = require('./tasks/copyImages');
 const { lintPRTitle } = require('./tasks/lintPRTitle');
 
+const { RELEASE_TAG } = process.env;
+
 const runTask = async ({ task, args }) => {
   switch (task) {
     case 'build':
-      build();
+      build({
+        isStaticPackage: args.isStaticPackage,
+        releaseTag: RELEASE_TAG,
+      });
 
       break;
     case 'copyFonts':
@@ -29,7 +34,10 @@ const runTask = async ({ task, args }) => {
 
       break;
     case 'modifyPackageJSON':
-      modifyPackageJSON();
+      modifyPackageJSON({
+        isStaticPackage: args.isStaticPackage,
+        releaseTag: RELEASE_TAG,
+      });
 
       break;
     case 'lintPRTitle':

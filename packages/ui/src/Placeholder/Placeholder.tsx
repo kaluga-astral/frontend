@@ -19,6 +19,14 @@ export type PlaceholderProps = {
    */
   imgAlt: string;
   /**
+   * ширина изображения
+   */
+  imgWidth?: string;
+  /**
+   * высота изображения
+   */
+  imgHeight?: string;
+  /**
    * Заголовок
    */
   title: string;
@@ -36,13 +44,20 @@ export const Placeholder = ({
   title,
   imgSrc,
   imgAlt,
+  imgWidth,
+  imgHeight,
   description,
   Actions,
 }: PlaceholderProps) => {
   return (
     <PlaceholderRoot>
       <PlaceholderInnerContainer>
-        <PlaceholderImage src={imgSrc} alt={imgAlt} />
+        <PlaceholderImage
+          src={imgSrc}
+          alt={imgAlt}
+          width={imgWidth}
+          height={imgHeight}
+        />
         <PlaceholderTitle variant="h4">{title}</PlaceholderTitle>
         {description && (
           <PlaceholderDescription variant="ui">

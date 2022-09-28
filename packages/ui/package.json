@@ -1,22 +1,20 @@
 {
   "name": "@astral/ui",
-  "version": "0.31.0",
+  "version": "1.0.0",
   "browser": "./src/index.ts",
-  "jest": {
-    "moduleNameMapper": {
-      "^lodash-es$": "lodash"
-    }
-  },
+  "main": "./src/index.ts",
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
     "build": "commander build",
     "publish": "npm publish ./lib",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
-    "test": "react-scripts test --env=jsdom",
+    "tests": "jest --passWithNoTests",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "lint:styles": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint": "eslint . --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint . --fix",
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@astral/icons": "^0.31.0",
@@ -36,23 +34,6 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^25.1.4",
-    "@types/lodash-es": "^4.17.5",
-    "@types/node": "^12.12.38",
-    "@types/react-datepicker": "4.4.0",
-    "copyfiles": "^2.4.1"
-  },
-  "exports": {
-    ".": {
-      "import": "./esm/index.js",
-      "require": "./index.js"
-    },
-    "./server": {
-      "import": "./esm/server/index.js",
-      "require": "./server/index.js"
-    }
+    "@types/lodash-es": "^4.17.5"
   }
 }

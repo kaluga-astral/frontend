@@ -1,5 +1,9 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["generated-themed-icons", "generated-custom-icons", "./index.ts"],
-  "exclude": ["node_modules", "lib"]
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.stories.tsx"
+  ],
+  "exclude": ["node_modules", "lib", "generated-custom-icons", "generated-themed-icons"]
 }

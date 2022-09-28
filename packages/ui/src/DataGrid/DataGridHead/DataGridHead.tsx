@@ -8,7 +8,7 @@ import { DataGridHeadColumn } from '../DataGridHeadColumn';
 import { DataGridColumns, DataGridRow, DataGridSort } from '../types';
 
 export type DataGridHeadProps<
-  Data = DataGridRow,
+  Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
   columns: DataGridColumns<Data>[];
@@ -20,7 +20,10 @@ export type DataGridHeadProps<
   rowsCount: number;
 };
 
-export function DataGridHead<Data, SortField extends keyof Data>({
+export function DataGridHead<
+  Data extends object,
+  SortField extends keyof Data,
+>({
   columns,
   selectable,
   onSelectAllRows,

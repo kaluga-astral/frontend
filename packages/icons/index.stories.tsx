@@ -62,6 +62,7 @@ export default {
   title: 'Components/Icons',
 };
 
+// @ts-ignore
 const Icon = ({ component: Component, name, size, ...props }) => (
   <div
     style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}

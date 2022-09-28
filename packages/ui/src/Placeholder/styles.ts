@@ -19,22 +19,44 @@ export const PlaceholderInnerContainer = styled.div`
 
 export const PlaceholderImage = styled.img`
   display: block;
-  width: 100%;
-  height: 162px;
-  margin: auto;
-  margin-bottom: ${({ theme }) => theme.spacing(8)};
+  width: ${({ width }) => width || '100%'};
+  height: ${({ height }) => height || 'auto'};
+  margin: auto auto ${({ theme }) => theme.spacing(6)};
+  object-fit: contain;
+
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
+
+    color: ${({ theme }) => theme.palette.grey[900]};
+  }
 `;
 
 export const PlaceholderTitle = styled(Typography)`
-  margin-bottom: ${({ theme }) => theme.spacing(4)};
+  margin-bottom: ${({ theme }) => theme.spacing(6)};
+
+  color: ${({ theme }) => theme.palette.grey[700]};
+  font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
 
   text-align: center;
+
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    margin-bottom: ${({ theme }) => theme.spacing(4)};
+
+    color: ${({ theme }) => theme.palette.grey[900]};
+    font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
+  }
 `;
 
 export const PlaceholderDescription = styled(Typography)`
   display: block;
 
+  color: ${({ theme }) => theme.palette.grey[700]};
+
   text-align: center;
+
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    color: ${({ theme }) => theme.palette.grey[900]};
+  }
 `;
 
 export const PlaceholderActions = styled.footer`
@@ -44,5 +66,11 @@ export const PlaceholderActions = styled.footer`
   gap: ${({ theme }) => theme.spacing(1)};
   justify-content: center;
 
-  margin-top: ${({ theme }) => theme.spacing(5)};
+  margin-top: ${({ theme }) => theme.spacing(6)};
+
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    margin-bottom: ${({ theme }) => theme.spacing(5)};
+
+    color: ${({ theme }) => theme.palette.grey[900]};
+  }
 `;

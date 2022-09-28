@@ -4,13 +4,13 @@ import { TableCell } from '../../Table';
 import { Typography } from '../../Typography';
 import { DataGridColumns } from '../types';
 
-export type CellProps<Data> = {
+export type CellProps<Data extends object> = {
   row: Data;
   cell: DataGridColumns<Data>;
   emptyCellValue?: ReactNode;
 };
 
-export function DataGridCell<Data>({
+export function DataGridCell<Data extends object>({
   row,
   cell: { field, renderCell, format, align = 'left' },
   emptyCellValue = '-',

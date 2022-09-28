@@ -7,7 +7,7 @@ import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styles';
 
-export type DataGridBodyProps<Data> = {
+export type DataGridBodyProps<Data extends object> = {
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
   onRowClick?: (row: Data) => void;
@@ -17,9 +17,10 @@ export type DataGridBodyProps<Data> = {
   onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
   emptyCellValue?: ReactNode;
+  noDataPlaceholder?: ReactNode;
 };
 
-export function DataGridBody<Data>({
+export function DataGridBody<Data extends object>({
   rows,
   columns,
   selectable,
@@ -29,6 +30,7 @@ export function DataGridBody<Data>({
   minDisplayRows,
   keyId,
   emptyCellValue,
+  noDataPlaceholder,
 }: DataGridBodyProps<Data>) {
   const renderCells = useCallback(
     (row: Data, rowId: string) => {
@@ -85,7 +87,7 @@ export function DataGridBody<Data>({
 
   return (
     <StyledTableBody empty={!rows.length} minDisplayRows={minDisplayRows}>
-      {renderedRows}
+      {rows.length ? renderedRows : noDataPlaceholder}
     </StyledTableBody>
   );
 }

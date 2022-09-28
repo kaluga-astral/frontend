@@ -14,7 +14,7 @@ export default {
 
 export const Default: Story = () => {
   return (
-    <Box border="1px solid #dfdfdf" width="800px" height="600px">
+    <Box border="1px solid #dfdfdf" width="100%" height="600px">
       <Placeholder
         title="Заголовок страницы"
         description={

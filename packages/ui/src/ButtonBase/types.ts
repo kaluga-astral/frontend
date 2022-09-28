@@ -5,7 +5,7 @@ import {
   ButtonSizes,
   ButtonStates,
   ButtonVariants,
-} from './constants';
+} from './enums';
 
 // Тут и ниже преобразует enum в union
 export type ButtonColor = `${ButtonColors}`;

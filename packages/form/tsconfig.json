@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./*.js",
+    "../ui/src/declaration/**/*.ts"
+  ],
+  "exclude": [
+    "lib"
+  ]
+}

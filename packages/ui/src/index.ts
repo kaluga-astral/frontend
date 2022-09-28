@@ -4,9 +4,13 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './BackdropStack';
+
 export * from './Badge';
 
 export * from './Button';
+
+export * from './DatePickerProvider';
 
 export * from './Description';
 
@@ -18,6 +22,8 @@ export * from './Checkbox';
 
 export * from './CircularProgress';
 
+export * from './ConfigProvider';
+
 export * from './DashboardLayout';
 
 export * from './DataGrid';
@@ -25,8 +31,6 @@ export * from './DataGrid';
 export * from './DataGridPagination';
 
 export * from './DatePicker';
-
-export * from './DatePickerProvider';
 
 export * from './Dialog';
 
@@ -39,6 +43,8 @@ export * from './DialogContentText';
 export * from './DialogTitle';
 
 export * from './DropdownButton';
+
+export * from './Fab';
 
 export * from './Fade';
 
@@ -90,6 +96,8 @@ export * from './Placeholder';
 
 export * from './Product';
 
+export * from './ProductSwitcher';
+
 export * from './Profile';
 
 export * from './Radio';
@@ -103,6 +111,10 @@ export * from './styles';
 export * from './StylesCacheProvider';
 
 export * from './Table';
+
+export * from './Tab';
+
+export * from './Tabs';
 
 export * from './Tag';
 

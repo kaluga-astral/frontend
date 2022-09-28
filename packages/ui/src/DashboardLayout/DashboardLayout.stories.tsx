@@ -1,20 +1,20 @@
-import { ReactElement, forwardRef } from 'react';
+import { MouseEvent, ReactElement, forwardRef } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
   CompanyOutlineMd,
-  ProductsFillMd,
   ProfileOutlineMd,
   QuitOutlineMd,
   SettingsFillMd,
 } from '@astral/icons';
 
-import { IconButton } from '../IconButton';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
+import { ProductSwitcher } from '../ProductSwitcher';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 
 import { DashboardLayout } from './DashboardLayout';
 import { DashboardLayoutStory } from './DashboardLayoutStory';
@@ -41,7 +41,7 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
   (props, ref) => {
     const { className, to, children } = props;
 
-    const handleClick = (e) => {
+    const handleClick = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();
     };
 
@@ -58,9 +58,7 @@ EDO.args = {
     productSwitcher() {
       return (
         <Box>
-          <IconButton variant="text">
-            <ProductsFillMd />
-          </IconButton>
+          <ProductSwitcher getProducts={handleGetProducts} />
         </Box>
       );
     },

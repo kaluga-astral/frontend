@@ -1,7 +1,9 @@
-import { Fragment, ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 
 import { Button, CircularProgress, Placeholder, Typography } from '..';
 import { PlaceholderProps } from '../Placeholder';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { ConfigContext } from '../ConfigProvider';
 
 import { LoadingContainer } from './styles';
 import { ContentStateErrorProps } from './types';
@@ -37,16 +39,16 @@ type ContentStateProps = {
   children: ReactNode;
 };
 
-export const ContentState = (props: ContentStateProps) => {
-  const {
-    isLoading,
-    loadingContent: LoadingContent = <CircularProgress color="primary" />,
-    isError,
-    errorState,
-    isCustom,
-    customState,
-    children,
-  } = props;
+export const ContentState = ({
+  isLoading,
+  isError,
+  isCustom,
+  errorState,
+  customState,
+  children,
+  loadingContent: LoadingContent = <CircularProgress color="primary" />,
+}: ContentStateProps) => {
+  const { captureException } = useContext(ConfigContext);
 
   if (isLoading) {
     return <LoadingContainer>{LoadingContent}</LoadingContainer>;
@@ -66,11 +68,10 @@ export const ContentState = (props: ContentStateProps) => {
       actions = <Button onClick={onRetry}>Попробовать снова</Button>,
     } = errorState;
 
-    const description = errorList.map((item, index) => (
-      <Fragment key={index}>
-        <Typography component="span">{item}</Typography>
-        <br />
-      </Fragment>
+    const description = errorList.map((errorMessage) => (
+      <Typography key={errorMessage} component="p">
+        {errorMessage}
+      </Typography>
     ));
 
     return (
@@ -84,7 +85,9 @@ export const ContentState = (props: ContentStateProps) => {
     );
   }
 
-  return <>{children}</>;
+  return (
+    <ErrorBoundary captureException={captureException}>
+      {children}
+    </ErrorBoundary>
+  );
 };
-
-export default ContentState;
