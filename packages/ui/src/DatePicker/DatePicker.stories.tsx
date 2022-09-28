@@ -1,31 +1,19 @@
 import { Story } from '@storybook/react';
-import { addDays, subDays } from 'date-fns';
-import { useState } from 'react';
 
 import { DatePickerProvider } from '../DatePickerProvider';
-import { NewDatePicker } from '../NewDatePicker';
 
-import { DatePicker, DatePickerProps } from './DatePicker';
+import { DatePicker, DatePickerProps, addDays } from './index';
 
 export default {
-  title: 'Components/DatePicker',
+  title: 'Components/DatePickers/DefaultDatePicker',
   component: DatePicker,
 };
 
-const TIMESTAMP_VALUE = 1659012063771;
-
 const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date | null>(
-    addDays(new Date(TIMESTAMP_VALUE), 180),
-  );
-
   return (
-    <>
-      <DatePickerProvider>
-        <DatePicker {...args} value={value} onChange={setValue} />
-      </DatePickerProvider>
-      <NewDatePicker label="Какая то дата" placeholder="Выберите дату" />
-    </>
+    <DatePickerProvider>
+      <DatePicker {...args} />
+    </DatePickerProvider>
   );
 };
 
@@ -39,8 +27,8 @@ Default.args = {
     placeholder: 'Выберите дату',
   },
   disabled: false,
-  minDate: subDays(new Date(TIMESTAMP_VALUE), 90),
-  maxDate: addDays(new Date(TIMESTAMP_VALUE), 90),
+  minDate: addDays(new Date(), -90),
+  maxDate: addDays(new Date(), 90),
 };
 
 Default.parameters = {
