@@ -68,7 +68,7 @@ const DatePickerInner = forwardRef<
           isDateOutOfRange({
             date,
             minDate,
-            deep: DateCompareDeep.minute,
+            deep: DateCompareDeep.day,
           })
         ) {
           setSelectedDate(minDate);
@@ -76,7 +76,7 @@ const DatePickerInner = forwardRef<
           isDateOutOfRange({
             date,
             maxDate,
-            deep: DateCompareDeep.minute,
+            deep: DateCompareDeep.day,
           })
         ) {
           setSelectedDate(maxDate);
@@ -91,6 +91,10 @@ const DatePickerInner = forwardRef<
       closePopper();
     };
 
+    const handleClean = () => {
+      setSelectedDate(null);
+    };
+
     useEffect(() => {
       if (selectedDate) {
         onChange?.(selectedDate);
@@ -101,6 +105,7 @@ const DatePickerInner = forwardRef<
       <DatePickerClickAwayListener onClickAway={closePopper}>
         <DatePickerInput
           {...inputProps}
+          onClean={handleClean}
           disabled={disabled}
           onComplete={handleInputChange}
           value={maskedDate}
