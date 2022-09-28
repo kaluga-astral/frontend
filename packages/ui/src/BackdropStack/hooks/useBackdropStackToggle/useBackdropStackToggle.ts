@@ -39,9 +39,9 @@ type UseBackdropStackToggleFunc = (options?: Options) => ReturnElements;
 export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
   id: parentId,
 } = {}) => {
-  const { pop, push, remove, getUniqueId } = backdropStackManager;
+  const { pop, push, remove, generateID } = backdropStackManager;
 
-  const id = useRef<string>(parentId || getUniqueId());
+  const id = useRef<string>(parentId || generateID());
 
   const [isOpened, setOpened] = useState(false);
   const handleOpen = () => {

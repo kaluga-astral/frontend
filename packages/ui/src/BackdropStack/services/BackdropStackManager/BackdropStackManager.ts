@@ -25,7 +25,7 @@ class BackdropStackManager {
   constructor() {
     document?.addEventListener(
       'pointerdown',
-      () => (this.currentPointerId = this.getUniqueId()),
+      () => (this.currentPointerId = this.generateID()),
     );
   }
 
@@ -39,7 +39,7 @@ class BackdropStackManager {
     );
   };
 
-  public getUniqueId = () => {
+  public generateID = () => {
     return String(Math.random())
   }
 
