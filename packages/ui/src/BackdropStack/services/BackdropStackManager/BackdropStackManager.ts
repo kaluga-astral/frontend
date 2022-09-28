@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { AutocompleteCloseReason } from '@mui/base/AutocompleteUnstyled/useAutocomplete';
 
 type PopId = string;
@@ -26,7 +25,7 @@ class BackdropStackManager {
   constructor() {
     document?.addEventListener(
       'pointerdown',
-      () => (this.currentPointerId = nanoid()),
+      () => (this.currentPointerId = this.generateID()),
     );
   }
 
@@ -39,6 +38,10 @@ class BackdropStackManager {
       previousPointerId === this.currentPointerId
     );
   };
+
+  public generateID = () => {
+    return String(Math.random())
+  }
 
   public remove = (id: PopId) => {
     this.stack = this.stack.filter((item) => item !== id);
