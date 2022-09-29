@@ -1,18 +1,18 @@
 import { INCORRECT_MESSAGE } from '../constants';
 import { createRule } from '../createRule';
 
-export const getDefaultMessage = (min: number) => {
-  return `Должно быть больше чем ${min}`;
+export const getDefaultMessage = (max: number) => {
+  return `Должно быть меньше чем ${max}`;
 };
 
 /**
- * @description Проверяет минимальное значение value
- * @example isMinValue(10)(1239123);
- * @param {number} [min] Минимальное значение value
+ * @description Проверяет максимальное значение value
+ * @example isMaxValue(10)(1239123);
+ * @param {number} [max] Максимальное значение value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMinValue = createRule(
-  (min: number, message: string = `Должно быть больше чем ${min}`) =>
+export const isMaxValue = createRule(
+  (max: number, message: string = `Должно быть меньше чем ${max}`) =>
     (value) => {
       if (value === '') {
         return undefined;
@@ -24,7 +24,7 @@ export const isMinValue = createRule(
         !/\s/g.test(value) &&
         value !== ''
       ) {
-        if (parseFloat(value) >= min) {
+        if (parseFloat(value) <= max) {
           return undefined;
         }
 
@@ -35,12 +35,12 @@ export const isMinValue = createRule(
         return INCORRECT_MESSAGE;
       }
 
-      if (value >= min) {
+      if (value <= max) {
         return undefined;
       }
 
-      if (min < 0) {
-        throw new Error('Значение параметра `min` должно быть >= 0');
+      if (max < 0) {
+        throw new Error('Значение параметра `max` должно быть >= 0');
       }
 
       return message;

@@ -1,18 +1,35 @@
-import { isMaxLength } from './isMaxLength';
+import { INCORRECT_MESSAGE } from '../constants';
 
-describe('`maxLength` validation rule', () => {
-  test('should return an error object if value is invalid', () => {
-    expect(isMaxLength(3)('012300000')).toBe('Макс. символов: 3');
+import { getDefaultMessage, isMaxLength } from './isMaxLength';
+
+describe('isMaxLength', () => {
+  it.each<unknown>([
+    'asdsaxzcadsdaasd',
+    '           d        ',
+    '12341Nanasd2 2131',
+    [0, 1, 23, 5, '', NaN, '  ', 0, 123, 's', null, 44, 12],
+  ])('Invalid for: %s', (value) => {
+    expect(isMaxLength(10)(value)).toBe(getDefaultMessage(10));
   });
 
-  test('should return empty object if value is valid', () => {
-    expect(isMaxLength(10)('0123456789')).toBe(undefined);
-    expect(isMaxLength(20)('0123456')).toBe(undefined);
-    expect(isMaxLength(20)(1232184)).toBe(undefined);
+  it.each<unknown>([
+    0,
+    1,
+    true,
+    { a: 1 },
+    NaN,
+    new Date(),
+    Infinity,
+    false,
+    {},
+  ])('Invalid for: %s', (value) => {
+    expect(isMaxLength(10)(value)).toBe(INCORRECT_MESSAGE);
   });
 
-  test('should throw an error if params invalid', () => {
-    expect(() => isMaxLength(0)('0123456789')).toThrow();
-    expect(() => isMaxLength(-2)('0123456789')).toThrow();
-  });
+  it.each<unknown>(['', '     ', [], null, undefined, 'undefined', 'null'])(
+    'Valid for: %s',
+    (value) => {
+      expect(isMaxLength(10)(value)).toBe(undefined);
+    },
+  );
 });

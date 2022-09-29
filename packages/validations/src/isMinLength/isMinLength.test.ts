@@ -1,18 +1,37 @@
-import { isMinLength } from './isMinLength';
+import { INCORRECT_MESSAGE } from '../constants';
 
-describe('`minLength` validation rule', () => {
-  test('should return an error object if value is invalid', () => {
-    expect(isMinLength(10)('0123')).toBe('Мин. символов: 10');
+import { getDefaultMessage, isMinLength } from './isMinLength';
+
+describe('isMinLength', () => {
+  it.each<unknown>([
+    'asdsaxzcadsdaasd',
+    '           d        ',
+    '12341Nanasd2 2131',
+    'undefined',
+    'null',
+    [0, 1, 23, 5, '', NaN, '  ', 0, 123, 's', null, 44, 12],
+  ])('Valid for: %s', (value) => {
+    expect(isMinLength(50)(value)).toBe(getDefaultMessage(50));
   });
 
-  test('should return empty object if value is valid', () => {
-    expect(isMinLength(10)('0123456789')).toBe(undefined);
-    expect(isMinLength(2)('0123456789122')).toBe(undefined);
-    expect(isMinLength(20)('0123456789122')).toBe('Мин. символов: 20');
+  it.each<unknown>([
+    0,
+    1,
+    true,
+    { a: 1 },
+    NaN,
+    new Date(),
+    Infinity,
+    false,
+    {},
+  ])('Invalid for: %s', (value) => {
+    expect(isMinLength(5)(value)).toBe(INCORRECT_MESSAGE);
   });
 
-  test('should throw an error if params invalid', () => {
-    expect(() => isMinLength(0)('0123456789')).toThrow();
-    expect(() => isMinLength(-2)('0123456789')).toThrow();
-  });
+  it.each<unknown>(['123', '     ', [1], '', null, undefined])(
+    'Valid for: %s',
+    (value) => {
+      expect(isMinLength(0)(value)).toBe(undefined);
+    },
+  );
 });

@@ -1,13 +1,35 @@
-import { isMinValue } from './isMinValue';
+import { INCORRECT_MESSAGE } from '../constants';
 
-describe('`minValue` validation rule', () => {
-  test('should return error object if data is valid', () => {
-    expect(isMinValue(7736)(1000)).toEqual('Должно быть больше чем 7736');
-    expect(isMinValue(9999999)(10)).toEqual('Должно быть больше чем 9999999');
-    expect(isMinValue(55)('213')).toEqual('Должно иметь тип number');
+import { getDefaultMessage, isMinValue } from './isMinValue';
+
+describe('isMinValue', () => {
+  it.each<unknown>([-1, '-44', '-0.12'])('Invalid for: %s', (value) => {
+    expect(isMinValue(0)(value)).toBe(getDefaultMessage(0));
   });
 
-  test('should return empty object if data is valid', () => {
-    expect(isMinValue(10)(100)).toEqual(undefined);
+  it.each<unknown>([
+    'a',
+    true,
+    ['v'],
+    { a: 1 },
+    [undefined],
+    NaN,
+    new Date(),
+    '     ',
+    '         12',
+    false,
+    [],
+    {},
+    null,
+    undefined,
+  ])('Invalid for: %s', (value) => {
+    expect(isMinValue(0)(value)).toBe(INCORRECT_MESSAGE);
   });
+
+  it.each<unknown>([0, 1, Infinity, 0.34, '0.34', '0', ''])(
+    'Valid for: %s',
+    (value) => {
+      expect(isMinValue(0)(value)).toBe(undefined);
+    },
+  );
 });
