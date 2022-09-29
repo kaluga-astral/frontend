@@ -8,5 +8,5 @@ export const DateCalendarWrapper = styled.div`
   grid-template:
     '${CalendarGridPositions.prev} ${CalendarGridPositions.head} ${CalendarGridPositions.next}' auto
     '${CalendarGridPositions.body} ${CalendarGridPositions.body} ${CalendarGridPositions.body}' 1fr
-    / ${({ theme }) => theme.spacing(8)} 1fr ${({ theme }) => theme.spacing(8)};
+    / 32px 1fr 32px;
 `;

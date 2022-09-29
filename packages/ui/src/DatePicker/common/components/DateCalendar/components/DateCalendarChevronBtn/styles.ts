@@ -3,9 +3,9 @@ import { DateCalendarBtn } from '../DateCalendarBtn';
 import { CalendarGridPositions } from '../../enums/calendarGridPositions';
 
 const DateCalendarChevronBtn = styled(DateCalendarBtn)`
-  width: ${({ theme }) => theme.spacing(8)};
-  min-width: ${({ theme }) => theme.spacing(8)};
-  max-width: ${({ theme }) => theme.spacing(8)};
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
 `;
 
 export const DateCalendarNextBtnWrapper = styled(DateCalendarChevronBtn)`

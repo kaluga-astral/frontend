@@ -30,9 +30,9 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
   position: relative;
 
   color: ${({ theme, isCurrent, isOutOfAvailableRange, selected }) =>
+    (selected && theme.palette.common.white) ||
     (isOutOfAvailableRange && theme.palette.grey[600]) ||
     (!selected && isCurrent && theme.palette.primary.dark) ||
-    (selected && theme.palette.common.white) ||
     ''};
 
   background-color: ${({ theme, selected, isInSelectedRange }) =>
@@ -44,12 +44,12 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 
   &::after {
     position: absolute;
-    bottom: ${({ theme }) => theme.spacing(1)};
-    left: ${({ theme }) => theme.spacing(2)};
+    bottom: 4px;
+    left: 8px;
 
     display: ${({ isCurrent }) => (isCurrent ? 'block' : 'none')};
-    width: calc(100% - ${({ theme }) => theme.spacing(4)});
-    height: ${({ theme }) => theme.spacing(0.5)};
+    width: calc(100% - 16px);
+    height: 2px;
 
     color: currentColor;
 
@@ -60,16 +60,16 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 `;
 
 export const DateCalendarGridBtnLarge = styled(DateCalendarGridBtn)`
-  min-width: ${({ theme }) => theme.spacing(20)};
-  min-height: ${({ theme }) => theme.spacing(13)};
+  min-width: 80px;
+  min-height: 52px;
   padding: ${({ theme }) => theme.spacing(4, 2)};
 
   text-transform: capitalize;
 
   &::after {
-    bottom: ${({ theme }) => theme.spacing(2)};
-    left: ${({ theme }) => theme.spacing(4)};
+    bottom: 8px;
+    left: 16px;
 
-    width: calc(100% - ${({ theme }) => theme.spacing(8)});
+    width: calc(100% - 32px);
   }
 `;
