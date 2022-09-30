@@ -43,8 +43,8 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 
   &::after {
     position: absolute;
-    bottom: 4px;
-    left: 8px;
+    bottom: ${({ theme }) => theme.spacing(1)};
+    left: ${({ theme }) => theme.spacing(2)};
 
     display: ${({ isCurrent }) => (isCurrent ? 'block' : 'none')};
     width: calc(100% - 16px);
@@ -66,8 +66,8 @@ export const DateCalendarGridBtnLarge = styled(DateCalendarGridBtn)`
   text-transform: capitalize;
 
   &::after {
-    bottom: 8px;
-    left: 16px;
+    bottom: ${({ theme }) => theme.spacing(2)};
+    left: ${({ theme }) => theme.spacing(4)};
 
     width: calc(100% - 32px);
   }
