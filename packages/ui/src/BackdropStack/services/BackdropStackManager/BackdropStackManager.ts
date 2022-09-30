@@ -23,7 +23,7 @@ class BackdropStackManager {
   private currentPointerId: PointerId = null;
 
   constructor() {
-    document?.addEventListener(
+    globalThis?.document?.addEventListener(
       'pointerdown',
       () => (this.currentPointerId = this.generateID()),
     );
@@ -40,8 +40,8 @@ class BackdropStackManager {
   };
 
   public generateID = () => {
-    return String(Math.random())
-  }
+    return String(Math.random());
+  };
 
   public remove = (id: PopId) => {
     this.stack = this.stack.filter((item) => item !== id);
