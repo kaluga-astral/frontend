@@ -1,31 +1,26 @@
-import { isOGRNUL } from './isOGRNUL';
+import { IS_OGRNUL_DEFAULT_MESSAGE, isOGRNUL } from './isOGRNUL';
 
-describe('mustBeOGRNUL', () => {
-  it('должна возвращать сообщение об ошибке если value < 13 символов', () => {
-    const value = new Array(12).fill('1').join('');
+describe('isOGRNUL', () => {
+  it.each<unknown>(['1175958036814', '1214000000092'])(
+    'Valid for: %s',
+    (value) => {
+      expect(isOGRNUL()(value)).toBe(undefined);
+    },
+  );
 
-    expect(isOGRNUL()(value)).toEqual('');
-  });
-
-  it('должна возвращать сообщение об ошибке если value > 13 символов', () => {
-    const value = new Array(14).fill('1').join('');
-
-    expect(isOGRNUL()(value)).toEqual('');
-  });
-
-  it('должна возвращать null если value = 13 символов (контрольная сумма верна)', () => {
-    expect(isOGRNUL()('1175958036814')).toEqual(undefined);
-  });
-
-  it('должна возвращать сообщение об ошибке если value = 13 символов (контрольная сумма неверна).', () => {
-    expect(isOGRNUL()('1175958000004')).toEqual('');
-  });
-
-  it('должна возвращать null если value является валидным ОГРН ЮЛ', () => {
-    expect(isOGRNUL()('1175958036814')).toEqual(undefined);
-  });
-
-  it('должна возвращать сообщение об ошибке если value является невалидным ОГРН ЮЛ', () => {
-    expect(isOGRNUL()('1175958000004')).toEqual('');
+  it.each<unknown>([
+    'a',
+    0,
+    1,
+    true,
+    ['v'],
+    { a: 1 },
+    [undefined],
+    NaN,
+    new Date(),
+    '1175958000004',
+    1175958000004,
+  ])('Invalid for: %s', (value) => {
+    expect(isOGRNUL()(value)).toBe(IS_OGRNUL_DEFAULT_MESSAGE);
   });
 });

@@ -1,18 +1,18 @@
 import { createRule } from '../createRule';
 
-export const IS_OGRNUL_DEFAULT_MESSAGE = 'Некорректный ОГРН';
+export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРНИП';
 
 const OGRNUL_LENGTH = 13;
 
-export const isOGRNUL = createRule(
-  (message: string = IS_OGRNUL_DEFAULT_MESSAGE) =>
+export const isOGRNIP = createRule(
+  (message: string = IS_OGRNIP_DEFAULT_MESSAGE) =>
     (value) => {
       if (typeof value === 'string') {
         const isOGRNLengthValid = value.length === OGRNUL_LENGTH;
         const isOGRNCheckNumValid =
-          value.slice(-1) !== `${parseInt(value.slice(0, -1)) % 11}`.slice(-1);
+          value.slice(-1) !== `${parseInt(value.slice(0, -1)) % 13}`.slice(-1);
 
-        if (!/^(\d{13})$/.test(value)) {
+        if (!/^(\d{15})$/.test(value)) {
           return message;
         }
 
