@@ -4,6 +4,11 @@ export const IS_INNIP_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
 const INNIP_LENGTH = 12;
 
+/**
+ * @description Проверяет валиден ли ИНН ИП
+ * @example isINNIP()('384212952720');
+ * @param {string} [value] проверяемое значение
+ */
 export const isINNIP = createRule(
   (message: string = IS_INNIP_DEFAULT_MESSAGE) =>
     (value) => {

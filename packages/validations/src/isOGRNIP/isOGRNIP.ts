@@ -1,9 +1,14 @@
 import { createRule } from '../createRule';
 
-export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРНИП';
+export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРН ИП';
 
-const OGRNUL_LENGTH = 15;
+const OGRNIP_LENGTH = 15;
 
+/**
+ * @description Проверяет валиден ли ОРГН ИП
+ * @example isOGRNIP()('7728168971');
+ * @param {string} [value] проверяемое значение
+ */
 export const isOGRNIP = createRule(
   (message: string = IS_OGRNIP_DEFAULT_MESSAGE) =>
     (value) => {
@@ -12,15 +17,15 @@ export const isOGRNIP = createRule(
       }
 
       if (typeof value === 'string') {
-        const isOGRNLengthValid = value.length === OGRNUL_LENGTH;
-        const isOGRNCheckNumValid =
-          value.slice(-1) !== `${parseInt(value.slice(0, -1)) % 13}`.slice(-1);
-
-        if (!/^(\d{15})$/.test(value)) {
+        if (value.length !== OGRNIP_LENGTH) {
           return message;
         }
 
-        if (value && isOGRNLengthValid && isOGRNCheckNumValid) {
+        const checkSum = (parseInt(value.slice(0, -1)) % 13)
+          .toString()
+          .slice(-1);
+
+        if (value.slice(14, 15) !== checkSum) {
           return message;
         }
 

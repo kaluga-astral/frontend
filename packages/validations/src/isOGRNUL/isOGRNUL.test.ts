@@ -1,7 +1,7 @@
 import { IS_OGRNUL_DEFAULT_MESSAGE, isOGRNUL } from './isOGRNUL';
 
 describe('isOGRNUL', () => {
-  it.each<unknown>(['1175958036814', '1214000000092', ''])(
+  it.each<unknown>(['8104338364837', '1214000000092', ''])(
     'Valid for: %s',
     (value) => {
       expect(isOGRNUL()(value)).toBe(undefined);

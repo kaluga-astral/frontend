@@ -4,6 +4,11 @@ export const IS_INNUL_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
 const INNUL_LENGTH = 10;
 
+/**
+ * @description Проверяет валиден ли ИНН ЮЛ
+ * @example isINNUL()('7728168971');
+ * @param {string} [value] проверяемое значение
+ */
 export const isINNUL = createRule(
   (message: string = IS_INNUL_DEFAULT_MESSAGE) =>
     (value) => {

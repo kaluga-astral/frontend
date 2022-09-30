@@ -1,9 +1,14 @@
 import { createRule } from '../createRule';
 
-export const IS_OGRNUL_DEFAULT_MESSAGE = 'Некорректный ОГРН';
+export const IS_OGRNUL_DEFAULT_MESSAGE = 'Некорректный ОГРН ЮЛ';
 
 const OGRNUL_LENGTH = 13;
 
+/**
+ * @description Проверяет валиден ли ОРГН ЮЛ
+ * @example isOGRNUL()('7728168971');
+ * @param {string} [value] проверяемое значение
+ */
 export const isOGRNUL = createRule(
   (message: string = IS_OGRNUL_DEFAULT_MESSAGE) =>
     (value) => {
@@ -12,15 +17,15 @@ export const isOGRNUL = createRule(
       }
 
       if (typeof value === 'string') {
-        const isOGRNLengthValid = value.length === OGRNUL_LENGTH;
-        const isOGRNCheckNumValid =
-          value.slice(-1) !== `${parseInt(value.slice(0, -1)) % 11}`.slice(-1);
-
-        if (!/^(\d{13})$/.test(value)) {
+        if (value.length !== OGRNUL_LENGTH) {
           return message;
         }
 
-        if (value && isOGRNLengthValid && isOGRNCheckNumValid) {
+        const checkSum = (parseInt(value.slice(0, -1)) % 11)
+          .toString()
+          .slice(-1);
+
+        if (value.slice(12, 13) !== checkSum) {
           return message;
         }
 
