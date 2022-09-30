@@ -15,7 +15,7 @@ export const getDefaultMessage = (min: number) => `Мин. символов: ${m
 export const isMinLength = createRule(
   (min: number, message: string = `Мин. символов: ${min}`) =>
     (value?: unknown): string | undefined => {
-      if (value === '' || value === undefined || value === null) {
+      if (value === '') {
         return undefined;
       }
 

@@ -7,6 +7,10 @@ const OGRNUL_LENGTH = 13;
 export const isOGRNUL = createRule(
   (message: string = IS_OGRNUL_DEFAULT_MESSAGE) =>
     (value) => {
+      if (value === '') {
+        return undefined;
+      }
+
       if (typeof value === 'string') {
         const isOGRNLengthValid = value.length === OGRNUL_LENGTH;
         const isOGRNCheckNumValid =

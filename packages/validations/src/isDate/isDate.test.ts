@@ -13,19 +13,16 @@ describe('isDate', () => {
     '2011-22-12',
     '1991.22.22',
     'Invalid Date',
+    null,
+    undefined,
   ])('Invalid for: %s', (value) => {
     expect(isDate()(value)).toBe(IS_DATE_RULE_DEFAULT_MESSAGE);
   });
 
-  it.each<unknown>([
-    '2011-11-12',
-    '1991.01.22',
-    '01.12.2022',
-    new Date(),
-    '',
-    null,
-    undefined,
-  ])('Valid for: %s', (value) => {
-    expect(isDate()(value)).toBe(undefined);
-  });
+  it.each<unknown>(['2011-11-12', '1991.01.22', '01.12.2022', new Date(), ''])(
+    'Valid for: %s',
+    (value) => {
+      expect(isDate()(value)).toBe(undefined);
+    },
+  );
 });

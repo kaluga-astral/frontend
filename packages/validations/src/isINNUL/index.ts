@@ -1,1 +1,1 @@
-// export * from './isINNUL';
+export * from './isINNUL';

@@ -10,7 +10,7 @@ export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат да�
 export const isDate = createRule(
   (message: string = IS_DATE_RULE_DEFAULT_MESSAGE) =>
     (value) => {
-      if (value === '' || value === null || value === undefined) {
+      if (value === '') {
         return undefined;
       }
 

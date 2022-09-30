@@ -24,14 +24,13 @@ describe('isMinLength', () => {
     Infinity,
     false,
     {},
+    null,
+    undefined,
   ])('Invalid for: %s', (value) => {
     expect(isMinLength(5)(value)).toBe(INCORRECT_MESSAGE);
   });
 
-  it.each<unknown>(['123', '     ', [1], '', null, undefined])(
-    'Valid for: %s',
-    (value) => {
-      expect(isMinLength(0)(value)).toBe(undefined);
-    },
-  );
+  it.each<unknown>(['123', '     ', [1], ''])('Valid for: %s', (value) => {
+    expect(isMinLength(0)(value)).toBe(undefined);
+  });
 });

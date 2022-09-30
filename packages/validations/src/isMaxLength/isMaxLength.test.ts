@@ -22,11 +22,13 @@ describe('isMaxLength', () => {
     Infinity,
     false,
     {},
+    null,
+    undefined,
   ])('Invalid for: %s', (value) => {
     expect(isMaxLength(10)(value)).toBe(INCORRECT_MESSAGE);
   });
 
-  it.each<unknown>(['', '     ', [], null, undefined, 'undefined', 'null'])(
+  it.each<unknown>(['', '     ', [], 'undefined', 'null'])(
     'Valid for: %s',
     (value) => {
       expect(isMaxLength(10)(value)).toBe(undefined);

@@ -2,11 +2,15 @@ import { createRule } from '../createRule';
 
 export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРНИП';
 
-const OGRNUL_LENGTH = 13;
+const OGRNUL_LENGTH = 15;
 
 export const isOGRNIP = createRule(
   (message: string = IS_OGRNIP_DEFAULT_MESSAGE) =>
     (value) => {
+      if (value === '') {
+        return undefined;
+      }
+
       if (typeof value === 'string') {
         const isOGRNLengthValid = value.length === OGRNUL_LENGTH;
         const isOGRNCheckNumValid =

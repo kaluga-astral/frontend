@@ -1,1 +1,1 @@
-export * from './isMaxValue';
+export { isMaxValue } from './isMaxValue';

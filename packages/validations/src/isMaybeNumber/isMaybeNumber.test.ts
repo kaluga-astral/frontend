@@ -21,6 +21,8 @@ describe('isMaybeNumber', () => {
     'undefined',
     'NaN',
     'number',
+    null,
+    undefined,
   ])('Invalid for: %s', (value) => {
     expect(isMaybeNumber()(value)).toBe(IS_MAYBE_NUMBER_RULE_DEFAULT_MESSAGE);
   });

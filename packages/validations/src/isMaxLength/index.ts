@@ -1,1 +1,1 @@
-export * from './isMaxLength';
+export { isMaxLength } from './isMaxLength';

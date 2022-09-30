@@ -1,1 +1,1 @@
-export * from './isMinValue';
+export { isMinValue } from './isMinValue';

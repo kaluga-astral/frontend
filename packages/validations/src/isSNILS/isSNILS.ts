@@ -19,6 +19,10 @@ export const calcCheckSumForSNILS = (digitsOfValue: string) =>
 export const isSNILS = createRule(
   (message: string = IS_SNILS_DEFAULT_MESSAGE) =>
     (value) => {
+      if (value === '') {
+        return undefined;
+      }
+
       if (typeof value !== 'string') {
         return IS_SNILS_DEFAULT_MESSAGE;
       }

@@ -1,9 +1,12 @@
 import { IS_SNILS_DEFAULT_MESSAGE, isSNILS } from './isSNILS';
 
 describe('isSNILS', () => {
-  it.each<unknown>(['15657325992', '95145370513'])('Valid for: %s', (value) => {
-    expect(isSNILS()(value)).toBe(undefined);
-  });
+  it.each<unknown>(['15657325992', '95145370513', ''])(
+    'Valid for: %s',
+    (value) => {
+      expect(isSNILS()(value)).toBe(undefined);
+    },
+  );
 
   it.each<unknown>([
     'a',

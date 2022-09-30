@@ -1,7 +1,7 @@
 import { IS_OGRNIP_DEFAULT_MESSAGE, isOGRNIP } from './isOGRNIP';
 
 describe('isOGRNIP', () => {
-  it.each<unknown>(['316682000089619'])('Valid for: %s', (value) => {
+  it.each<unknown>(['316682000089619', ''])('Valid for: %s', (value) => {
     expect(isOGRNIP()(value)).toBe(undefined);
   });
 
@@ -18,6 +18,8 @@ describe('isOGRNIP', () => {
     '1175958000004',
     '1175958036814',
     1175958000004,
+    null,
+    undefined,
   ])('Invalid for: %s', (value) => {
     expect(isOGRNIP()(value)).toBe(IS_OGRNIP_DEFAULT_MESSAGE);
   });
