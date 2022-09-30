@@ -13,7 +13,7 @@ export type DateCalendarArrowBtnProps = Omit<ButtonProps, 'variant'> & {
 export const DateCalendarBtn = forwardRef<
   HTMLButtonElement,
   DateCalendarArrowBtnProps
->(({ title, disabled, selected, ...props }, ref) =>
+>(({ title = '', disabled, selected, ...props }, ref) =>
   disabled ? (
     <DateCalendarBtnWrapper
       ref={ref}
@@ -22,7 +22,7 @@ export const DateCalendarBtn = forwardRef<
       {...props}
     />
   ) : (
-    <Tooltip title={title || ''} disableInteractive>
+    <Tooltip title={title} disableInteractive>
       <DateCalendarBtnWrapper
         ref={ref}
         variant={selected ? 'contained' : 'text'}

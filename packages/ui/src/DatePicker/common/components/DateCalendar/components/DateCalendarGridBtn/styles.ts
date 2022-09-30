@@ -1,5 +1,6 @@
 import { styled } from '../../../../../../styles';
 import { DateCalendarBtn } from '../DateCalendarBtn';
+import { Theme } from '../../../../../../theme';
 
 type DateCalendarDayBtnWrapperProps = {
   /**
@@ -16,6 +17,48 @@ type DateCalendarDayBtnWrapperProps = {
   isInSelectedRange?: boolean;
 };
 
+type GetColorOptions = {
+  theme: Theme;
+  selected?: boolean;
+} & DateCalendarDayBtnWrapperProps;
+
+const getTextColor = ({
+  theme,
+  isCurrent,
+  isOutOfAvailableRange,
+  selected,
+}: GetColorOptions) => {
+  if (selected) {
+    return theme.palette.common.white;
+  }
+
+  if (isOutOfAvailableRange) {
+    return theme.palette.grey[600];
+  }
+
+  if (!selected && isCurrent) {
+    return theme.palette.primary.dark;
+  }
+
+  return '';
+};
+
+const getBgColor = ({
+  theme,
+  selected,
+  isInSelectedRange,
+}: GetColorOptions) => {
+  if (selected) {
+    return theme.palette.primary[800];
+  }
+
+  if (isInSelectedRange) {
+    return theme.palette.primary[100];
+  }
+
+  return '';
+};
+
 const nonForwardableProps = new Set<PropertyKey>([
   'isCurrent',
   'isOutOfAvailableRange',
@@ -28,16 +71,9 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 })<DateCalendarDayBtnWrapperProps>`
   position: relative;
 
-  color: ${({ theme, isCurrent, isOutOfAvailableRange, selected }) =>
-    (selected && theme.palette.common.white) ||
-    (isOutOfAvailableRange && theme.palette.grey[600]) ||
-    (!selected && isCurrent && theme.palette.primary.dark) ||
-    ''};
+  color: ${(props) => getTextColor(props)};
 
-  background-color: ${({ theme, selected, isInSelectedRange }) =>
-    (selected && theme.palette.primary[800]) ||
-    (isInSelectedRange && theme.palette.primary[100]) ||
-    ''};
+  background-color: ${(props) => getBgColor(props)};
 
   border-radius: ${({ isInSelectedRange }) => (isInSelectedRange ? '0' : '')};
 
