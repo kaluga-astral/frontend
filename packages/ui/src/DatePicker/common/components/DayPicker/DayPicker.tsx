@@ -62,6 +62,7 @@ export const DayPicker = ({
     baseDate,
     selectedDate,
     isMondayFirst,
+    fullSize: true,
   });
 
   return (

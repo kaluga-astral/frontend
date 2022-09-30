@@ -19,7 +19,6 @@ type DateCalendarDayBtnWrapperProps = {
 const nonForwardableProps = new Set<PropertyKey>([
   'isCurrent',
   'isOutOfAvailableRange',
-  'selected',
   'isInSelectedRange',
 ]);
 

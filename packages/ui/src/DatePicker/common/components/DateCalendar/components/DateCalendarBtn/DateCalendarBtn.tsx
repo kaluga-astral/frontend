@@ -7,19 +7,27 @@ import { DateCalendarBtnWrapper } from './styles';
 
 export type DateCalendarArrowBtnProps = Omit<ButtonProps, 'variant'> & {
   title?: string;
-
   children: ReactNode;
 };
 
 export const DateCalendarBtn = forwardRef<
   HTMLButtonElement,
   DateCalendarArrowBtnProps
->(({ title, disabled, ...props }, ref) =>
+>(({ title, disabled, selected, ...props }, ref) =>
   disabled ? (
-    <DateCalendarBtnWrapper ref={ref} variant="text" disabled {...props} />
+    <DateCalendarBtnWrapper
+      ref={ref}
+      variant={selected ? 'contained' : 'text'}
+      disabled
+      {...props}
+    />
   ) : (
     <Tooltip title={title || ''} disableInteractive>
-      <DateCalendarBtnWrapper ref={ref} variant="text" {...props} />
+      <DateCalendarBtnWrapper
+        ref={ref}
+        variant={selected ? 'contained' : 'text'}
+        {...props}
+      />
     </Tooltip>
   ),
 );

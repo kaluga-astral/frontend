@@ -12,6 +12,9 @@ type UseCalendarNavigateProps = {
   addCb: (date: Date, count: number) => Date;
 };
 
+/**
+ * @description хук для навигации в календаре по опорной дате
+ */
 export const useCalendarNavigate = ({
   date,
   addCb,
@@ -26,9 +29,7 @@ export const useCalendarNavigate = ({
     setBaseDate(addCb(baseDate, -1));
   };
 
-  useEffect(() => {
-    setBaseDate(date);
-  }, [date]);
+  useEffect(() => setBaseDate(date), [date]);
 
   return {
     baseDate,

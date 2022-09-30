@@ -11,6 +11,10 @@ type UseToggleOptions = {
   onClose?: () => void;
 };
 
+/**
+ * @description хук хранящий стейт активности, и предоставляющий методы переключения, позволяет уменьшить бойлерплейт код
+ */
+
 export const useToggle = ({
   initialState = false,
   onClose,

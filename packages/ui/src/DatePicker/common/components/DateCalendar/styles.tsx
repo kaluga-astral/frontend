@@ -9,4 +9,6 @@ export const DateCalendarWrapper = styled.div`
     '${CalendarGridPositions.prev} ${CalendarGridPositions.head} ${CalendarGridPositions.next}' auto
     '${CalendarGridPositions.body} ${CalendarGridPositions.body} ${CalendarGridPositions.body}' 1fr
     / 32px 1fr 32px;
+  width: 288px;
+  height: 256px;
 `;

@@ -26,6 +26,7 @@ import { maskToDate } from '../../common/utils/maskToDate';
 import { MondayFirst } from '../../common/components/DayPicker';
 import { useSelectedBaseDate } from '../../common/hooks/useSelectedBaseDate';
 import { areDatesSame } from '../../common/utils/areDatesSame';
+import { isDate } from '../../common/utils/isDate';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -70,16 +71,14 @@ const DatePickerInner = forwardRef<
         if (value.length === mask?.length) {
           const date = maskToDate(value, mask);
 
-          if (areDatesSame(date, selectedDate)) {
-            return;
-          }
-
-          if (value !== '') {
+          if (isDate(date) && !areDatesSame(date, selectedDate)) {
             setSelectedDate(date);
-
-            return;
           }
 
+          return;
+        }
+
+        if (value === '') {
           setSelectedDate(null);
         }
       },
