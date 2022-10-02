@@ -3,12 +3,9 @@ import { INCORRECT_MESSAGE } from '../constants';
 import { getDefaultMessage, isMaxValue } from './isMaxValue';
 
 describe('isMaxValue', () => {
-  it.each<unknown>([0, '0', -1, -44, '-44', '-0.12', ''])(
-    'Valid for: %s',
-    (value) => {
-      expect(isMaxValue(0)(value)).toBe(undefined);
-    },
-  );
+  it.each<unknown>([-1, -44, '-44', '-1.12', ''])('Valid for: %s', (value) => {
+    expect(isMaxValue(-1)(value)).toBe(undefined);
+  });
 
   it.each<unknown>([
     'a',
@@ -31,5 +28,11 @@ describe('isMaxValue', () => {
 
   it.each<unknown>([1, Infinity, 0.34, '0.34'])('Valid for: %s', (value) => {
     expect(isMaxValue(0)(value)).toBe(getDefaultMessage(0));
+  });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isMaxValue(-22, customMessage)(-11)).toBe(customMessage);
   });
 });

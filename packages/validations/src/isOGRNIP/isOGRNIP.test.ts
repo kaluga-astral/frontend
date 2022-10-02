@@ -17,10 +17,17 @@ describe('isOGRNIP', () => {
     new Date(),
     '1175958000004',
     '1175958036814',
+    '1-22-33-44-5555555-6',
     1175958000004,
     null,
     undefined,
   ])('Invalid for: %s', (value) => {
     expect(isOGRNIP()(value)).toBe(IS_OGRNIP_DEFAULT_MESSAGE);
+  });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isOGRNIP(customMessage)('q')).toBe(customMessage);
   });
 });

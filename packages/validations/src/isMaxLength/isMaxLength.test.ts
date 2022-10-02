@@ -34,4 +34,10 @@ describe('isMaxLength', () => {
       expect(isMaxLength(10)(value)).toBe(undefined);
     },
   );
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isMaxLength(1, customMessage)('12123')).toBe(customMessage);
+  });
 });

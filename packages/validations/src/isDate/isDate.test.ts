@@ -13,8 +13,7 @@ describe('isDate', () => {
     '2011-22-12',
     '1991.22.22',
     'Invalid Date',
-    null,
-    undefined,
+    new Date('a'),
   ])('Invalid for: %s', (value) => {
     expect(isDate()(value)).toBe(IS_DATE_RULE_DEFAULT_MESSAGE);
   });
@@ -25,4 +24,10 @@ describe('isDate', () => {
       expect(isDate()(value)).toBe(undefined);
     },
   );
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isDate(customMessage)('q')).toBe(customMessage);
+  });
 });

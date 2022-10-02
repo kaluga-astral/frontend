@@ -17,14 +17,14 @@ export const isDate = createRule(
       if (typeof value === 'string') {
         const date = new Date(value);
 
-        if (Boolean(date.getTime())) {
+        if (!isNaN(date.getTime())) {
           return undefined;
         }
 
         return message;
       }
 
-      if (value instanceof Date) {
+      if (value instanceof Date && !isNaN(value.getTime())) {
         return undefined;
       }
 

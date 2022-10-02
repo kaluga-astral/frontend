@@ -25,4 +25,10 @@ describe('isSNILS', () => {
   ])('Invalid for: %s', (value) => {
     expect(isSNILS()(value)).toBe(IS_SNILS_DEFAULT_MESSAGE);
   });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isSNILS(customMessage)('q')).toBe(customMessage);
+  });
 });

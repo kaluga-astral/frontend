@@ -33,4 +33,10 @@ describe('isMinLength', () => {
   it.each<unknown>(['123', '     ', [1], ''])('Valid for: %s', (value) => {
     expect(isMinLength(0)(value)).toBe(undefined);
   });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isMinLength(111, customMessage)('12123')).toBe(customMessage);
+  });
 });

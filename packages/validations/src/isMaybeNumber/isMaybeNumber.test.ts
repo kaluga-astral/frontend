@@ -4,9 +4,12 @@ import {
 } from './isMaybeNumber';
 
 describe('isMaybeNumber', () => {
-  it.each<unknown>([-1, '-44', '-0.12'])('Valid for: %s', (value) => {
-    expect(isMaybeNumber()(value)).toBe(undefined);
-  });
+  it.each<unknown>([-1, '-44', '-0.12', 2e3, '2e3'])(
+    'Valid for: %s',
+    (value) => {
+      expect(isMaybeNumber()(value)).toBe(undefined);
+    },
+  );
 
   it.each<unknown>([
     'a',
@@ -25,5 +28,11 @@ describe('isMaybeNumber', () => {
     undefined,
   ])('Invalid for: %s', (value) => {
     expect(isMaybeNumber()(value)).toBe(IS_MAYBE_NUMBER_RULE_DEFAULT_MESSAGE);
+  });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isMaybeNumber(customMessage)(NaN)).toBe(customMessage);
   });
 });

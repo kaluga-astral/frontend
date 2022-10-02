@@ -26,10 +26,16 @@ describe('isMinValue', () => {
     expect(isMinValue(0)(value)).toBe(INCORRECT_MESSAGE);
   });
 
-  it.each<unknown>([0, 1, Infinity, 0.34, '0.34', '0', ''])(
+  it.each<unknown>([0, 1, Infinity, 0.34, '0.34', '0', '', -9])(
     'Valid for: %s',
     (value) => {
-      expect(isMinValue(0)(value)).toBe(undefined);
+      expect(isMinValue(-55)(value)).toBe(undefined);
     },
   );
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isMinValue(-2, customMessage)(-11)).toBe(customMessage);
+  });
 });

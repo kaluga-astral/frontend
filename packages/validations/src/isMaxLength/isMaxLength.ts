@@ -15,6 +15,10 @@ export const getDefaultMessage = (max: number) => `Макс. символов: $
 export const isMaxLength = createRule(
   (max: number, message: string = getDefaultMessage(max)) =>
     (value) => {
+      if (max < 0) {
+        throw new Error('Значение параметра `max` должно быть >= 0');
+      }
+
       if (value === '') {
         return undefined;
       }
@@ -29,10 +33,6 @@ export const isMaxLength = createRule(
 
       if (isEmpty(value)) {
         return undefined;
-      }
-
-      if (max <= 0) {
-        throw new Error('Значение параметра `max` должно быть >= 0');
       }
 
       return undefined;

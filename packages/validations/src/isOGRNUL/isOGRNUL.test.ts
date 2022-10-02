@@ -19,10 +19,17 @@ describe('isOGRNUL', () => {
     NaN,
     new Date(),
     '1175958000004',
+    '1-22-33-5555555-6',
     1175958000004,
     null,
     undefined,
   ])('Invalid for: %s', (value) => {
     expect(isOGRNUL()(value)).toBe(IS_OGRNUL_DEFAULT_MESSAGE);
+  });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isOGRNUL(customMessage)('q')).toBe(customMessage);
   });
 });

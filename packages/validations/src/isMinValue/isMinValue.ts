@@ -1,4 +1,4 @@
-import { INCORRECT_MESSAGE } from '../constants';
+import { CONTAINS_SPACES_REGEX, INCORRECT_MESSAGE } from '../constants';
 import { createRule } from '../createRule';
 
 export const getDefaultMessage = (min: number) => {
@@ -21,7 +21,7 @@ export const isMinValue = createRule(
       if (
         typeof value === 'string' &&
         !isNaN(Number(value)) &&
-        !/\s/g.test(value) &&
+        !CONTAINS_SPACES_REGEX.test(value) &&
         value !== ''
       ) {
         if (parseFloat(value) >= min) {
@@ -37,10 +37,6 @@ export const isMinValue = createRule(
 
       if (value >= min) {
         return undefined;
-      }
-
-      if (min < 0) {
-        throw new Error('Значение параметра `min` должно быть >= 0');
       }
 
       return message;

@@ -5,11 +5,11 @@ export const IS_SNILS_DEFAULT_MESSAGE = 'Некорректный СНИЛС';
 const RESTRICTED_VALUES = ['00000000000'];
 const DEFAULT_CHECKED_SUM = [0, 100, 101];
 
-export const removeSpecialCharacters = (value: string) => {
+const removeSpecialCharacters = (value: string) => {
   return value.replace(/\D/g, '');
 };
 
-export const calcCheckSumForSNILS = (digitsOfValue: string) =>
+const calcCheckSumForSNILS = (digitsOfValue: string) =>
   digitsOfValue
     .slice(0, 9)
     .split('')
@@ -29,13 +29,13 @@ export const isSNILS = createRule(
       }
 
       if (typeof value !== 'string') {
-        return IS_SNILS_DEFAULT_MESSAGE;
+        return message;
       }
 
       const formattedValue = removeSpecialCharacters(value);
 
       if (formattedValue.length !== value.length) {
-        return IS_SNILS_DEFAULT_MESSAGE;
+        return message;
       }
 
       if (!/^(\d{11})$/.test(formattedValue)) {

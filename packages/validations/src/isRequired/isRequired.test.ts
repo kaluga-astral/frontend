@@ -21,4 +21,10 @@ describe('isRequired', () => {
       expect(isRequired()(value)).toBe(REQUIRED_RULE_DEFAULT_MESSAGE);
     },
   );
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isRequired(customMessage)('')).toBe(customMessage);
+  });
 });
