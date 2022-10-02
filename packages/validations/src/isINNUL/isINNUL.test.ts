@@ -25,4 +25,10 @@ describe('isINNUL', () => {
   ])('Invalid for: %s', (value) => {
     expect(isINNUL()(value)).toBe(IS_INNUL_DEFAULT_MESSAGE);
   });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isINNUL(customMessage)('213')).toBe(customMessage);
+  });
 });

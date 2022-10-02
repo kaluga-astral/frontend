@@ -28,4 +28,10 @@ describe('isINNIP', () => {
   ])('Invalid for: %s', (value) => {
     expect(isINNIP()(value)).toBe(IS_INNIP_DEFAULT_MESSAGE);
   });
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isINNIP(customMessage)('213')).toBe(customMessage);
+  });
 });
