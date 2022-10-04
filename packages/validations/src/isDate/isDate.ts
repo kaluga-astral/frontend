@@ -1,4 +1,5 @@
 import { createRule } from '../createRule';
+import { isEmptyString } from '../utils';
 
 export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат даты';
 
@@ -10,6 +11,10 @@ export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат да�
 export const isDate = createRule<{ message?: string }, false>(
   ({ message = IS_DATE_RULE_DEFAULT_MESSAGE } = {}) =>
     (value) => {
+      if (isEmptyString(value)) {
+        return undefined;
+      }
+
       if (typeof value === 'string') {
         const date = new Date(value);
 

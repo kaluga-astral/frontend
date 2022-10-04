@@ -30,4 +30,14 @@ describe('isDate', () => {
 
     expect(isDate({ message: customMessage })('q')).toBe(customMessage);
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isDate({ exclude: isExclude })('exclude')).toBe(undefined);
+  });
 });

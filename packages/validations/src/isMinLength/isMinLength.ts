@@ -2,19 +2,24 @@ import isEmpty from 'lodash.isempty';
 
 import { createRule } from '../createRule';
 import { INCORRECT_MESSAGE } from '../constants';
+import { isEmptyString } from '../utils';
 
 export const getDefaultMessage = (min: number) => `Мин. символов: ${min}`;
 
 /**
  * @description Проверяет минимальную длину value
- * @example isMinLength(10)(1239123);
- * @example isMinLength(10)('1239123');
+ * @example isMinLength({ min: 10 })(1239123);
+ * @example isMinLength({ min: 10 })('1239123');
  * @param {number} [min] Минимальная длина value
  * @param {unknown} [value] проверяемое значение
  */
 export const isMinLength = createRule<{ message?: string; min: number }, false>(
   ({ min, message = `Мин. символов: ${min}` } = { min: 0 }) =>
     (value?: unknown): string | undefined => {
+      if (isEmptyString(value)) {
+        return undefined;
+      }
+
       if (min < 0) {
         throw new Error('Значение параметра `min` должно быть >= 0');
       }

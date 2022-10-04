@@ -42,4 +42,16 @@ describe('isMaxLength', () => {
       customMessage,
     );
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isMaxLength({ max: 1, exclude: isExclude })('exclude')).toBe(
+      undefined,
+    );
+  });
 });

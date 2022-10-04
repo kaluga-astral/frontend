@@ -34,4 +34,14 @@ describe('isINNIP', () => {
 
     expect(isINNIP({ message: customMessage })('213')).toBe(customMessage);
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isINNIP({ exclude: isExclude })('exclude')).toBe(undefined);
+  });
 });

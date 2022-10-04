@@ -1,4 +1,5 @@
 import { createRule } from '../createRule';
+import { isEmptyString } from '../utils';
 
 export const IS_OGRNUL_DEFAULT_MESSAGE = 'Некорректный ОГРН ЮЛ';
 
@@ -12,7 +13,7 @@ const OGRNUL_LENGTH = 13;
 export const isOGRNUL = createRule<{ message?: string }, false>(
   ({ message = IS_OGRNUL_DEFAULT_MESSAGE } = {}) =>
     (value) => {
-      if (value === '') {
+      if (isEmptyString(value)) {
         return undefined;
       }
 

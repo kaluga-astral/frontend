@@ -1,4 +1,5 @@
 import { createRule } from '../createRule';
+import { isEmptyString } from '../utils';
 
 export const IS_INNUL_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
@@ -24,6 +25,10 @@ const calcCheckSumForInnUl = (arrSymbols: string[]) =>
 export const isINNUL = createRule<{ message?: string }, false>(
   ({ message = IS_INNUL_DEFAULT_MESSAGE } = {}) =>
     (value) => {
+      if (isEmptyString(value)) {
+        return undefined;
+      }
+
       if (typeof value === 'string') {
         if (value.length !== INNUL_LENGTH) {
           return message;

@@ -31,4 +31,14 @@ describe('isSNILS', () => {
 
     expect(isSNILS({ message: customMessage })('q')).toBe(customMessage);
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isSNILS({ exclude: isExclude })('exclude')).toBe(undefined);
+  });
 });

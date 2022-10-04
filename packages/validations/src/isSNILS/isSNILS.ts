@@ -1,4 +1,5 @@
 import { createRule } from '../createRule';
+import { isEmptyString } from '../utils';
 
 export const IS_SNILS_DEFAULT_MESSAGE = 'Некорректный СНИЛС';
 
@@ -24,6 +25,10 @@ const calcCheckSumForSNILS = (digitsOfValue: string) =>
 export const isSNILS = createRule<{ message?: string }, false>(
   ({ message = IS_SNILS_DEFAULT_MESSAGE } = {}) =>
     (value) => {
+      if (isEmptyString(value)) {
+        return undefined;
+      }
+
       if (typeof value !== 'string') {
         return message;
       }

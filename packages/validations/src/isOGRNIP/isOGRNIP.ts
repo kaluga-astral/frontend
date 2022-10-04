@@ -1,4 +1,5 @@
 import { createRule } from '../createRule';
+import { isEmptyString } from '../utils';
 
 export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРН ИП';
 
@@ -12,6 +13,10 @@ const OGRNIP_LENGTH = 15;
 export const isOGRNIP = createRule<{ message?: string }, false>(
   ({ message = IS_OGRNIP_DEFAULT_MESSAGE } = {}) =>
     (value) => {
+      if (isEmptyString(value)) {
+        return undefined;
+      }
+
       if (typeof value === 'string') {
         if (value.length !== OGRNIP_LENGTH) {
           return message;

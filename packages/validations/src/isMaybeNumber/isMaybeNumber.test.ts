@@ -35,4 +35,14 @@ describe('isMaybeNumber', () => {
 
     expect(isMaybeNumber({ message: customMessage })(NaN)).toBe(customMessage);
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isMaybeNumber({ exclude: isExclude })('exclude')).toBe(undefined);
+  });
 });

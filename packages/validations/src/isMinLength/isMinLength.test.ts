@@ -41,4 +41,16 @@ describe('isMinLength', () => {
       customMessage,
     );
   });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude'];
+
+      return excluded.includes(value);
+    };
+
+    expect(isMinLength({ min: 123, exclude: isExclude })('exclude')).toBe(
+      undefined,
+    );
+  });
 });
