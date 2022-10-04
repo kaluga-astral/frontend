@@ -33,9 +33,9 @@ describe('isMaxValue', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMaxValue({ max: -22, message: customMessage })(-11)).toBe(
-      customMessage,
-    );
+    expect(
+      isMaxValue({ max: -22, message: { defaultMessage: customMessage } })(-11),
+    ).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

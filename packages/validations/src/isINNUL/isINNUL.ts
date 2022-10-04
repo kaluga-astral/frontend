@@ -1,5 +1,6 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
+import { Message } from '../types';
 
 export const IS_INNUL_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
@@ -22,8 +23,12 @@ const calcCheckSumForInnUl = (arrSymbols: string[]) =>
  * @example isINNUL()('7728168971');
  * @param {string} [value] проверяемое значение
  */
-export const isINNUL = createRule<{ message?: string }, false>(
-  ({ message = IS_INNUL_DEFAULT_MESSAGE } = {}) =>
+export const isINNUL = createRule<{ message?: Message }, false>(
+  ({
+      message = {
+        defaultMessage: IS_INNUL_DEFAULT_MESSAGE,
+      },
+    } = {}) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
@@ -31,24 +36,24 @@ export const isINNUL = createRule<{ message?: string }, false>(
 
       if (typeof value === 'string') {
         if (value.length !== INNUL_LENGTH) {
-          return message;
+          return message.defaultMessage;
         }
 
         const arrSymbols = value.split('');
 
         if (arrSymbols.some((symbol) => isNaN(Number(symbol)))) {
-          return message;
+          return message.defaultMessage;
         }
 
         const checksum = calcCheckSumForInnUl(arrSymbols);
 
         if (Number(value[9]) !== checksum) {
-          return message;
+          return message.defaultMessage;
         }
 
         return undefined;
       }
 
-      return message;
+      return message.defaultMessage;
     },
 );

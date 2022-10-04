@@ -1,5 +1,6 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
+import { Message } from '../types';
 
 export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат даты';
 
@@ -8,8 +9,12 @@ export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат да�
  * @example isDate()('2011-11-12');
  * @param {string} [value] проверяемое значение
  */
-export const isDate = createRule<{ message?: string }, false>(
-  ({ message = IS_DATE_RULE_DEFAULT_MESSAGE } = {}) =>
+export const isDate = createRule<{ message?: Message }, false>(
+  ({
+      message = {
+        defaultMessage: IS_DATE_RULE_DEFAULT_MESSAGE,
+      },
+    } = {}) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
@@ -22,13 +27,13 @@ export const isDate = createRule<{ message?: string }, false>(
           return undefined;
         }
 
-        return message;
+        return message.defaultMessage;
       }
 
       if (value instanceof Date && !isNaN(value.getTime())) {
         return undefined;
       }
 
-      return message;
+      return message.defaultMessage;
     },
 );

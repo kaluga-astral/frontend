@@ -36,9 +36,9 @@ describe('isMinValue', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMinValue({ min: -2, message: customMessage })(-11)).toBe(
-      customMessage,
-    );
+    expect(
+      isMinValue({ min: -2, message: { defaultMessage: customMessage } })(-11),
+    ).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

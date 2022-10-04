@@ -37,9 +37,11 @@ describe('isMinLength', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMinLength({ min: 111, message: customMessage })('12123')).toBe(
-      customMessage,
-    );
+    expect(
+      isMinLength({ min: 111, message: { defaultMessage: customMessage } })(
+        '12123',
+      ),
+    ).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

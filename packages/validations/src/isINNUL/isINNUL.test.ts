@@ -29,7 +29,9 @@ describe('isINNUL', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isINNUL({ message: customMessage })('213')).toBe(customMessage);
+    expect(isINNUL({ message: { defaultMessage: customMessage } })('213')).toBe(
+      customMessage,
+    );
   });
 
   it('Valid exclude value', () => {

@@ -28,7 +28,9 @@ describe('isDate', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isDate({ message: customMessage })('q')).toBe(customMessage);
+    expect(isDate({ message: { defaultMessage: customMessage } })('q')).toBe(
+      customMessage,
+    );
   });
 
   it('Valid exclude value', () => {

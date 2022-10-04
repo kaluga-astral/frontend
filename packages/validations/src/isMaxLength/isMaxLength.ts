@@ -3,6 +3,7 @@ import isEmpty from 'lodash.isempty';
 import { createRule } from '../createRule';
 import { INCORRECT_MESSAGE } from '../constants';
 import { isEmptyString } from '../utils';
+import { Message } from '../types';
 
 export const getDefaultMessage = (max: number) => `Макс. символов: ${max}`;
 
@@ -13,8 +14,19 @@ export const getDefaultMessage = (max: number) => `Макс. символов: $
  * @param {number} [max] Максимальная длина value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMaxLength = createRule<{ max: number; message?: string }, false>(
-  ({ max, message = getDefaultMessage(max) } = { max: 0 }) =>
+export const isMaxLength = createRule<
+  { max: number; message?: Message },
+  false
+>(
+  (
+      {
+        max,
+        message = {
+          defaultMessage: getDefaultMessage(max),
+          incorrectValue: INCORRECT_MESSAGE,
+        },
+      } = { max: 0 },
+    ) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
@@ -25,11 +37,11 @@ export const isMaxLength = createRule<{ max: number; message?: string }, false>(
       }
 
       if (typeof value === 'string' || Array.isArray(value)) {
-        return value.length > max ? message : undefined;
+        return value.length > max ? message.defaultMessage : undefined;
       }
 
       if (typeof value !== 'string' || !Array.isArray(value)) {
-        return INCORRECT_MESSAGE;
+        return message.incorrectValue;
       }
 
       if (isEmpty(value)) {

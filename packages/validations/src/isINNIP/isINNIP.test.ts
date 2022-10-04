@@ -32,7 +32,9 @@ describe('isINNIP', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isINNIP({ message: customMessage })('213')).toBe(customMessage);
+    expect(isINNIP({ message: { defaultMessage: customMessage } })('213')).toBe(
+      customMessage,
+    );
   });
 
   it('Valid exclude value', () => {

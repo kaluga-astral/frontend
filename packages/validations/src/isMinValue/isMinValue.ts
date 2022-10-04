@@ -1,6 +1,7 @@
 import { CONTAINS_SPACES_REGEX, INCORRECT_MESSAGE } from '../constants';
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
+import { Message } from '../types';
 
 export const getDefaultMessage = (min: number) => {
   return `Должно быть больше чем ${min}`;
@@ -12,8 +13,16 @@ export const getDefaultMessage = (min: number) => {
  * @param {number} [min] Минимальное значение value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMinValue = createRule<{ min: number; message?: string }, false>(
-  ({ min, message = `Должно быть больше чем ${min}` } = { min: 0 }) =>
+export const isMinValue = createRule<{ min: number; message?: Message }, false>(
+  (
+      {
+        min,
+        message = {
+          defaultMessage: `Должно быть больше чем ${min}`,
+          incorrectValue: INCORRECT_MESSAGE,
+        },
+      } = { min: 0 },
+    ) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
@@ -29,17 +38,17 @@ export const isMinValue = createRule<{ min: number; message?: string }, false>(
           return undefined;
         }
 
-        return message;
+        return message.defaultMessage;
       }
 
       if (typeof value !== 'number' || isNaN(value)) {
-        return INCORRECT_MESSAGE;
+        return message.incorrectValue;
       }
 
       if (value >= min) {
         return undefined;
       }
 
-      return message;
+      return message.defaultMessage;
     },
 );

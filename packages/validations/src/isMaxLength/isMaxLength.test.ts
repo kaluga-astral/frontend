@@ -38,9 +38,11 @@ describe('isMaxLength', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMaxLength({ max: 1, message: customMessage })('12123')).toBe(
-      customMessage,
-    );
+    expect(
+      isMaxLength({ max: 1, message: { defaultMessage: customMessage } })(
+        '12123',
+      ),
+    ).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

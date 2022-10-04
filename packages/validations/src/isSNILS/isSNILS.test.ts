@@ -29,7 +29,9 @@ describe('isSNILS', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isSNILS({ message: customMessage })('q')).toBe(customMessage);
+    expect(isSNILS({ message: { defaultMessage: customMessage } })('q')).toBe(
+      customMessage,
+    );
   });
 
   it('Valid exclude value', () => {
