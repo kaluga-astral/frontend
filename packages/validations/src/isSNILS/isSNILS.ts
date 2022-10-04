@@ -21,13 +21,9 @@ const calcCheckSumForSNILS = (digitsOfValue: string) =>
  * @example isSNILS()('95145370513');
  * @param {string} [value] проверяемое значение
  */
-export const isSNILS = createRule(
-  (message: string = IS_SNILS_DEFAULT_MESSAGE) =>
+export const isSNILS = createRule<{ message?: string }, false>(
+  ({ message = IS_SNILS_DEFAULT_MESSAGE } = {}) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (typeof value !== 'string') {
         return message;
       }

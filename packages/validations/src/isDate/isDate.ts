@@ -7,13 +7,9 @@ export const IS_DATE_RULE_DEFAULT_MESSAGE = 'Неверный формат да�
  * @example isDate()('2011-11-12');
  * @param {string} [value] проверяемое значение
  */
-export const isDate = createRule(
-  (message: string = IS_DATE_RULE_DEFAULT_MESSAGE) =>
+export const isDate = createRule<{ message?: string }, false>(
+  ({ message = IS_DATE_RULE_DEFAULT_MESSAGE } = {}) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (typeof value === 'string') {
         const date = new Date(value);
 

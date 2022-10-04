@@ -11,13 +11,9 @@ export const getDefaultMessage = (min: number) => {
  * @param {number} [min] Минимальное значение value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMinValue = createRule(
-  (min: number, message: string = `Должно быть больше чем ${min}`) =>
+export const isMinValue = createRule<{ min: number; message?: string }, false>(
+  ({ min, message = `Должно быть больше чем ${min}` } = { min: 0 }) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (
         typeof value === 'string' &&
         !isNaN(Number(value)) &&

@@ -11,7 +11,7 @@ describe('isMinLength', () => {
     'null',
     [0, 1, 23, 5, '', NaN, '  ', 0, 123, 's', null, 44, 12],
   ])('Valid for: %s', (value) => {
-    expect(isMinLength(50)(value)).toBe(getDefaultMessage(50));
+    expect(isMinLength({ min: 50 })(value)).toBe(getDefaultMessage(50));
   });
 
   it.each<unknown>([
@@ -27,16 +27,18 @@ describe('isMinLength', () => {
     null,
     undefined,
   ])('Invalid for: %s', (value) => {
-    expect(isMinLength(5)(value)).toBe(INCORRECT_MESSAGE);
+    expect(isMinLength({ min: 5 })(value)).toBe(INCORRECT_MESSAGE);
   });
 
   it.each<unknown>(['123', '     ', [1], ''])('Valid for: %s', (value) => {
-    expect(isMinLength(0)(value)).toBe(undefined);
+    expect(isMinLength({ min: 0 })(value)).toBe(undefined);
   });
 
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMinLength(111, customMessage)('12123')).toBe(customMessage);
+    expect(isMinLength({ min: 111, message: customMessage })('12123')).toBe(
+      customMessage,
+    );
   });
 });

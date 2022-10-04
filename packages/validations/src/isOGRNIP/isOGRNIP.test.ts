@@ -28,6 +28,6 @@ describe('isOGRNIP', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isOGRNIP(customMessage)('q')).toBe(customMessage);
+    expect(isOGRNIP({ message: customMessage })('q')).toBe(customMessage);
   });
 });

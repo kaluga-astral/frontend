@@ -4,18 +4,39 @@ export const IS_INNIP_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
 const INNIP_LENGTH = 12;
 
+const FIRST_INN_UL_DECODING = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
+const SECOND_INN_UL_DECODING = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
+
+const calcFirstCheckSumForInnUl = (arrSymbols: string[]) =>
+  (arrSymbols
+    .slice(0, -2)
+    .reduce(
+      (sum, symbol, index) =>
+        FIRST_INN_UL_DECODING[index] * Number(symbol) + sum,
+      0,
+    ) %
+    11) %
+  10;
+
+const calcSecondCheckSumForInnUl = (arrSymbols: string[]) =>
+  (arrSymbols
+    .slice(0, -1)
+    .reduce(
+      (sum, symbol, index) =>
+        SECOND_INN_UL_DECODING[index] * Number(symbol) + sum,
+      0,
+    ) %
+    11) %
+  10;
+
 /**
  * @description Проверяет валиден ли ИНН ИП
  * @example isINNIP()('384212952720');
  * @param {string} [value] проверяемое значение
  */
-export const isINNIP = createRule(
-  (message: string = IS_INNIP_DEFAULT_MESSAGE) =>
+export const isINNIP = createRule<{ message?: string }, false>(
+  ({ message = IS_INNIP_DEFAULT_MESSAGE } = {}) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (typeof value === 'string') {
         if (value.length !== INNIP_LENGTH) {
           return message;
@@ -23,32 +44,9 @@ export const isINNIP = createRule(
 
         const arrSymbols = value.split('');
 
-        if (arrSymbols.some((symbol) => isNaN(Number(symbol)))) {
-          return message;
-        }
+        const firstChecksum = calcFirstCheckSumForInnUl(arrSymbols);
 
-        const firstChecksum =
-          (arrSymbols
-            .slice(0, -2)
-            .reduce(
-              (sum, symbol, index) =>
-                [7, 2, 4, 10, 3, 5, 9, 4, 6, 8][index] * Number(symbol) + sum,
-              0,
-            ) %
-            11) %
-          10;
-
-        const secondChecksum =
-          (arrSymbols
-            .slice(0, -1)
-            .reduce(
-              (sum, symbol, index) =>
-                [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8][index] * Number(symbol) +
-                sum,
-              0,
-            ) %
-            11) %
-          10;
+        const secondChecksum = calcSecondCheckSumForInnUl(arrSymbols);
 
         if (
           Number(value[10]) !== firstChecksum &&

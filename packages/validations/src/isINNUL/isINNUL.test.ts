@@ -29,6 +29,6 @@ describe('isINNUL', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isINNUL(customMessage)('213')).toBe(customMessage);
+    expect(isINNUL({ message: customMessage })('213')).toBe(customMessage);
   });
 });

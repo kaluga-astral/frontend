@@ -11,13 +11,9 @@ export const getDefaultMessage = (max: number) => {
  * @param {number} [max] Максимальное значение value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMaxValue = createRule(
-  (max: number, message: string = `Должно быть меньше чем ${max}`) =>
+export const isMaxValue = createRule<{ message?: string; max: number }, false>(
+  ({ max, message = `Должно быть меньше чем ${max}` } = { max: 0 }) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (
         typeof value === 'string' &&
         !isNaN(Number(value)) &&

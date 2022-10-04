@@ -4,7 +4,7 @@ import { getDefaultMessage, isMinValue } from './isMinValue';
 
 describe('isMinValue', () => {
   it.each<unknown>([-1, '-44', '-0.12'])('Invalid for: %s', (value) => {
-    expect(isMinValue(0)(value)).toBe(getDefaultMessage(0));
+    expect(isMinValue({ min: 0 })(value)).toBe(getDefaultMessage(0));
   });
 
   it.each<unknown>([
@@ -23,19 +23,21 @@ describe('isMinValue', () => {
     null,
     undefined,
   ])('Invalid for: %s', (value) => {
-    expect(isMinValue(0)(value)).toBe(INCORRECT_MESSAGE);
+    expect(isMinValue({ min: 0 })(value)).toBe(INCORRECT_MESSAGE);
   });
 
   it.each<unknown>([0, 1, Infinity, 0.34, '0.34', '0', '', -9])(
     'Valid for: %s',
     (value) => {
-      expect(isMinValue(-55)(value)).toBe(undefined);
+      expect(isMinValue({ min: -55 })(value)).toBe(undefined);
     },
   );
 
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMinValue(-2, customMessage)(-11)).toBe(customMessage);
+    expect(isMinValue({ min: -2, message: customMessage })(-11)).toBe(
+      customMessage,
+    );
   });
 });

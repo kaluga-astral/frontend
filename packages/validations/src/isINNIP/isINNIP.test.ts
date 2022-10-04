@@ -32,6 +32,6 @@ describe('isINNIP', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isINNIP(customMessage)('213')).toBe(customMessage);
+    expect(isINNIP({ message: customMessage })('213')).toBe(customMessage);
   });
 });

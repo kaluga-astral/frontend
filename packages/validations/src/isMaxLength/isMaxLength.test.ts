@@ -9,7 +9,7 @@ describe('isMaxLength', () => {
     '12341Nanasd2 2131',
     [0, 1, 23, 5, '', NaN, '  ', 0, 123, 's', null, 44, 12],
   ])('Invalid for: %s', (value) => {
-    expect(isMaxLength(10)(value)).toBe(getDefaultMessage(10));
+    expect(isMaxLength({ max: 10 })(value)).toBe(getDefaultMessage(10));
   });
 
   it.each<unknown>([
@@ -25,19 +25,21 @@ describe('isMaxLength', () => {
     null,
     undefined,
   ])('Invalid for: %s', (value) => {
-    expect(isMaxLength(10)(value)).toBe(INCORRECT_MESSAGE);
+    expect(isMaxLength({ max: 10 })(value)).toBe(INCORRECT_MESSAGE);
   });
 
   it.each<unknown>(['', '     ', [], 'undefined', 'null'])(
     'Valid for: %s',
     (value) => {
-      expect(isMaxLength(10)(value)).toBe(undefined);
+      expect(isMaxLength({ max: 10 })(value)).toBe(undefined);
     },
   );
 
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMaxLength(1, customMessage)('12123')).toBe(customMessage);
+    expect(isMaxLength({ max: 1, message: customMessage })('12123')).toBe(
+      customMessage,
+    );
   });
 });

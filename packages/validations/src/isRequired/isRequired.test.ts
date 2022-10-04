@@ -25,6 +25,6 @@ describe('isRequired', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isRequired(customMessage)('')).toBe(customMessage);
+    expect(isRequired({ message: customMessage })('')).toBe(customMessage);
   });
 });

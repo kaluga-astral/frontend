@@ -30,6 +30,6 @@ describe('isOGRNUL', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isOGRNUL(customMessage)('q')).toBe(customMessage);
+    expect(isOGRNUL({ message: customMessage })('q')).toBe(customMessage);
   });
 });

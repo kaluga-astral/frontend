@@ -28,6 +28,6 @@ describe('isDate', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isDate(customMessage)('q')).toBe(customMessage);
+    expect(isDate({ message: customMessage })('q')).toBe(customMessage);
   });
 });

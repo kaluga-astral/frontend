@@ -33,6 +33,6 @@ describe('isMaybeNumber', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isMaybeNumber(customMessage)(NaN)).toBe(customMessage);
+    expect(isMaybeNumber({ message: customMessage })(NaN)).toBe(customMessage);
   });
 });

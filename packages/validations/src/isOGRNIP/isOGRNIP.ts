@@ -9,13 +9,9 @@ const OGRNIP_LENGTH = 15;
  * @example isOGRNIP()('7728168971');
  * @param {string} [value] проверяемое значение
  */
-export const isOGRNIP = createRule(
-  (message: string = IS_OGRNIP_DEFAULT_MESSAGE) =>
+export const isOGRNIP = createRule<{ message?: string }, false>(
+  ({ message = IS_OGRNIP_DEFAULT_MESSAGE } = {}) =>
     (value) => {
-      if (value === '') {
-        return undefined;
-      }
-
       if (typeof value === 'string') {
         if (value.length !== OGRNIP_LENGTH) {
           return message;

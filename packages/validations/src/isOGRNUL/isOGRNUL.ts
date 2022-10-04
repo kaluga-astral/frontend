@@ -9,8 +9,8 @@ const OGRNUL_LENGTH = 13;
  * @example isOGRNUL()('7728168971');
  * @param {string} [value] проверяемое значение
  */
-export const isOGRNUL = createRule(
-  (message: string = IS_OGRNUL_DEFAULT_MESSAGE) =>
+export const isOGRNUL = createRule<{ message?: string }, false>(
+  ({ message = IS_OGRNUL_DEFAULT_MESSAGE } = {}) =>
     (value) => {
       if (value === '') {
         return undefined;
