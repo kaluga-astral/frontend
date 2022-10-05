@@ -24,15 +24,13 @@ export const isMaxValue = createRule<
   },
   true
 >(
-  (
-      {
-        max,
-        message = {
-          defaultMessage: `Должно быть меньше чем ${max}`,
-          incorrectValue: INCORRECT_MESSAGE,
-        },
-      } = { max: 0 },
-    ) =>
+  ({
+      max,
+      message = {
+        defaultMessage: `Должно быть меньше чем ${max}`,
+        incorrectValue: INCORRECT_MESSAGE,
+      },
+    }) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;

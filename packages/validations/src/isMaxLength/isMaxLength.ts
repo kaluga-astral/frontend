@@ -24,15 +24,13 @@ export const isMaxLength = createRule<
   },
   true
 >(
-  (
-      {
-        max,
-        message = {
-          defaultMessage: getDefaultMessage(max),
-          incorrectValue: INCORRECT_MESSAGE,
-        },
-      } = { max: 0 },
-    ) =>
+  ({
+      max,
+      message = {
+        defaultMessage: getDefaultMessage(max),
+        incorrectValue: INCORRECT_MESSAGE,
+      },
+    }) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
