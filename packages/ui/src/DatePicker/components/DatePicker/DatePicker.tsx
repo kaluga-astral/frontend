@@ -19,7 +19,7 @@ import {
 } from '../../common/components/MinMaxDateContext';
 import { MinMaxDate } from '../../common/types/minMaxDate';
 import { YearMonthDayPicker } from '../../common/components/YearMonthDayPicker';
-import { useBaseDateInRange } from '../../common/utils/getBaseDateInRange';
+import { useBaseDateInRange } from '../../common/hooks/useBaseDateInRange';
 import { dateToMask } from '../../common/utils/dateToMask';
 import { DateMask } from '../../common/types/maskDate';
 import { maskToDate } from '../../common/utils/maskToDate';

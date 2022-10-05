@@ -13,7 +13,7 @@ import { addYears } from '../../utils/addYears';
 import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
 import { DatePickerContext } from '../../../../DatePickerProvider';
 
-import { useMonthsGrid } from './hooks/buildMonthsGrid';
+import { useMonthsGrid } from './hooks/useMonthsGrid';
 
 type DateMonthPickerProps = PickerProps & CommonDateCalendarHeadProps;
 

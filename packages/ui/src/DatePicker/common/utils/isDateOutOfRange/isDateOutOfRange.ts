@@ -37,7 +37,7 @@ export const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
   });
 
 /**
- * @description хелпер проверки даты на вхождение в указанный диапазон между minDate и maxDate
+ * @description утилита проверки даты на вхождение в указанный диапазон между minDate и maxDate
  */
 export const isDateOutOfRange = ({
   date,

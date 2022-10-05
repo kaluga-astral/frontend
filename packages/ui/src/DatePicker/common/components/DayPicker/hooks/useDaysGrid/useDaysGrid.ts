@@ -1,7 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
-import { DAYS_IN_WEEK } from '../../../../constants/daysInWeek';
-import { MONTHS_IN_YEAR } from '../../../../constants/monthsInYear';
+import { DAYS_IN_WEEK, MONTHS_IN_YEAR } from '../../../../constants';
 import { addDays } from '../../../../utils/addDays';
 import { GridBuilder, GridItem } from '../../../../types/gridBuilder';
 import {
@@ -45,76 +44,79 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
   fullSize = false,
   isMondayFirst = true,
 }) => {
-  const grid: GridItem<DayItem>[] = [];
   const { maxDate, minDate } = useContext(MinMaxDateContext);
-  const month = baseDate.getUTCMonth() + 1;
-  const startDate = buildIsoDate({ year: baseDate.getUTCFullYear(), month });
 
-  const firstWeekDayGap = +isMondayFirst;
+  return useMemo(() => {
+    const grid: GridItem<DayItem>[] = [];
+    const month = baseDate.getUTCMonth() + 1;
+    const startDate = buildIsoDate({ year: baseDate.getUTCFullYear(), month });
 
-  let startWeekDay = startDate.getUTCDay();
+    const firstWeekDayGap = +isMondayFirst;
 
-  if (startWeekDay === 0 && isMondayFirst) {
-    startWeekDay = DAYS_IN_WEEK;
-  }
+    let startWeekDay = startDate.getUTCDay();
 
-  let startMonthIndex = 0;
-  let lastCurrentMonthIndex = -1;
-
-  const currentDate = new Date();
-
-  for (let i = firstWeekDayGap; i < MAX_DAYS_IN_GRID + firstWeekDayGap; i++) {
-    const date = addDays(startDate, i - startWeekDay);
-    const dateMonth = date.getUTCMonth() + 1;
-    const isNextMonth =
-      (dateMonth !== MONTHS_IN_YEAR && dateMonth > month) ||
-      (month === MONTHS_IN_YEAR && dateMonth === 1);
-    const isPrevMonth =
-      dateMonth < month || (dateMonth === MONTHS_IN_YEAR && month === 1);
-    const isFirstDayOfWeek = date.getUTCDay() === firstWeekDayGap;
-
-    // проверка на необходимость продолжать заполнять массив
-    // если fullSize === false, и начался следующий месяц, и день недели понедельник, то тогда закончить заполнение
-    if (!fullSize && isNextMonth && isFirstDayOfWeek) {
-      break;
+    if (startWeekDay === 0 && isMondayFirst) {
+      startWeekDay = DAYS_IN_WEEK;
     }
 
-    if (!isNextMonth) {
-      lastCurrentMonthIndex++;
-    }
+    let startMonthIndex = 0;
+    let lastCurrentMonthIndex = -1;
 
-    if (isPrevMonth) {
-      startMonthIndex++;
-    }
+    const currentDate = new Date();
 
-    grid.push({
-      isOutOfAvailableRange: dateMonth !== month,
-      selected:
-        !!selectedDate &&
-        +date >= +selectedDate &&
-        +date < +addDays(selectedDate, 1),
-      isCurrent:
-        date.getUTCFullYear() === currentDate.getFullYear() &&
-        date.getUTCDate() === currentDate.getDate() &&
-        date.getUTCMonth() === currentDate.getMonth(),
-      date,
-      monthDay: date.getUTCDate(),
-      disabled: isDateOutOfRange({
+    for (let i = firstWeekDayGap; i < MAX_DAYS_IN_GRID + firstWeekDayGap; i++) {
+      const date = addDays(startDate, i - startWeekDay);
+      const dateMonth = date.getUTCMonth() + 1;
+      const isNextMonth =
+        (dateMonth !== MONTHS_IN_YEAR && dateMonth > month) ||
+        (month === MONTHS_IN_YEAR && dateMonth === 1);
+      const isPrevMonth =
+        dateMonth < month || (dateMonth === MONTHS_IN_YEAR && month === 1);
+      const isFirstDayOfWeek = date.getUTCDay() === firstWeekDayGap;
+
+      // проверка на необходимость продолжать заполнять массив
+      // если fullSize === false, и начался следующий месяц, и день недели понедельник, то тогда закончить заполнение
+      if (!fullSize && isNextMonth && isFirstDayOfWeek) {
+        break;
+      }
+
+      if (!isNextMonth) {
+        lastCurrentMonthIndex++;
+      }
+
+      if (isPrevMonth) {
+        startMonthIndex++;
+      }
+
+      grid.push({
+        isOutOfAvailableRange: dateMonth !== month,
+        selected:
+          !!selectedDate &&
+          +date >= +selectedDate &&
+          +date < +addDays(selectedDate, 1),
+        isCurrent:
+          date.getUTCFullYear() === currentDate.getFullYear() &&
+          date.getUTCDate() === currentDate.getDate() &&
+          date.getUTCMonth() === currentDate.getMonth(),
         date,
-        minDate,
-        maxDate,
-        deep: DateCompareDeep.day,
-      }),
-    });
-  }
+        monthDay: date.getUTCDate(),
+        disabled: isDateOutOfRange({
+          date,
+          minDate,
+          maxDate,
+          deep: DateCompareDeep.day,
+        }),
+      });
+    }
 
-  return buildGridResult<DayItem>({
-    grid,
-    minDate,
-    maxDate,
-    addCb: addDays,
-    indexPrevDisabledCheck: startMonthIndex,
-    indexNextDisabledCheck: lastCurrentMonthIndex,
-    deep: DateCompareDeep.day,
-  });
+    return buildGridResult<DayItem>({
+      grid,
+      minDate,
+      maxDate,
+      addCb: addDays,
+      indexPrevDisabledCheck: startMonthIndex,
+      indexNextDisabledCheck: lastCurrentMonthIndex,
+      deep: DateCompareDeep.day,
+    });
+  }, [baseDate, selectedDate]);
 };

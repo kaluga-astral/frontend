@@ -27,6 +27,7 @@ export const DatePickerPopper = ({
         {
           name: 'offset',
           options: {
+            // использование отступов для соответствия с дизайном, 0 по горизонтали, 8px по вертикали
             offset: [0, 8],
           },
         },

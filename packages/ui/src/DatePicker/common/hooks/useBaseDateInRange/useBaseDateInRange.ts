@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { MinMaxDate } from '../../types/minMaxDate';
-import { buildIsoDate } from '../buildIsoDate';
+import { buildIsoDate } from '../../utils/buildIsoDate';
 
 type UseBaseDateInRangeOptions = MinMaxDate;
 

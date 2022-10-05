@@ -13,7 +13,7 @@ const elementsMap: ElementsMap = {
 };
 
 /**
- * @description хелпер для генерации строковой даты по заданной маске
+ * @description утилита для генерации строковой даты по заданной маске
  */
 export const dateToMask = (date: Date, mask: DateMask): string =>
   mask

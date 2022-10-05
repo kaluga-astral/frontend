@@ -11,6 +11,8 @@ type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
 };
 
+const ALL_LETTERS = /\w/g;
+
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
@@ -19,7 +21,8 @@ export const DatePickerInput = forwardRef<
     {...props}
     ref={ref}
     onClick={onClick}
-    mask={mask?.replace(/\w/g, '0')}
+    // заменяем все буквы из маски на нули, потому что MaskField умеет работать только с цифрами
+    mask={mask?.replace(ALL_LETTERS, '0')}
     autofix={false}
     fullWidth
     InputProps={{

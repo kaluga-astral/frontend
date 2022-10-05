@@ -19,7 +19,7 @@ export type BuildIsoDateStringOptions = {
 };
 
 /**
- * @description хелпер генерирующий строковую дату в формате ISO
+ * @description утилита генерирующая строковую дату в формате ISO
  */
 export const buildIsoDateString = ({
   year,
