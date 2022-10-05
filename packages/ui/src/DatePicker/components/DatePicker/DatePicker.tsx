@@ -19,6 +19,7 @@ import {
 import { MinMaxDate } from '../../common/types/minMaxDate';
 import { YearMonthDayPicker } from '../../common/components/YearMonthDayPicker';
 import { useBaseDateInRange } from '../../common/utils/getBaseDateInRange';
+import { dateToMask } from '../../common/utils/dateToMask';
 import { DateMask } from '../../common/types/maskDate';
 import { maskToDate } from '../../common/utils/maskToDate';
 import { MondayFirst } from '../../common/components/DayPicker';
@@ -85,6 +86,7 @@ const DatePickerInner = forwardRef<
     );
 
     const handleDayPick = (date: Date) => {
+      setMaskedDate(dateToMask(date, mask));
       setSelectedDate(date);
       closePopper();
     };
