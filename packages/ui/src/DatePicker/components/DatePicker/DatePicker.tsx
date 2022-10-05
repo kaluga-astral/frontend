@@ -3,7 +3,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 
@@ -20,7 +19,6 @@ import {
 import { MinMaxDate } from '../../common/types/minMaxDate';
 import { YearMonthDayPicker } from '../../common/components/YearMonthDayPicker';
 import { useBaseDateInRange } from '../../common/utils/getBaseDateInRange';
-import { dateToMask } from '../../common/utils/dateToMask';
 import { DateMask } from '../../common/types/maskDate';
 import { maskToDate } from '../../common/utils/maskToDate';
 import { MondayFirst } from '../../common/components/DayPicker';
@@ -58,21 +56,22 @@ const DatePickerInner = forwardRef<
     const ref = useForwardedRef(forwardedRef);
     const [isActive, openPopper, closePopper] = useToggle({ onOpen, onClose });
     const [selectedDate, setSelectedDate] = useState<Date | undefined | null>();
-    const maskedDate = useMemo(
-      () => (selectedDate ? dateToMask(selectedDate, mask) : ''),
-      [selectedDate],
-    );
+    const [maskedDate, setMaskedDate] = useState('');
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const selectedBaseDate = useSelectedBaseDate(selectedDate);
 
     const checkValue = useCallback(
       (value: string) => {
+        setMaskedDate(value);
+
         if (value.length === mask?.length) {
           const date = maskToDate(value, mask);
 
           if (isDate(date) && !areDatesSame(date, selectedDate)) {
             setSelectedDate(date);
+          } else {
+            setSelectedDate(null);
           }
 
           return;
