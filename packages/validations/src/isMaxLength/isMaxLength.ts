@@ -11,7 +11,8 @@ export const getDefaultMessage = (max: number) => `Макс. символов: $
  * @example isMaxLength({ max: 10 })(1239123);
  * @example isMaxLength({ max: 10 })('1239123');
  * @param {number} [max] Максимальная длина value
- * @param {unknown} [value] проверяемое значение
+ * @param {string} [message.defaultMessage] Сообщение при неудачной валидации
+ * @param {string} [message.incorrectValue] Сообщение при переданном некорректном value
  */
 export const isMaxLength = createRule<
   {

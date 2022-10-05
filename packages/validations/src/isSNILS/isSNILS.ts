@@ -17,10 +17,17 @@ const calcCheckSumForSNILS = (digitsOfValue: string) =>
     .map(Number)
     .reduce((sum, currentValue, index) => sum + currentValue * (9 - index), 0);
 
+const compareCheckSum = (calculatedCheckSum: number, checkSum: number) => {
+  return (
+    calculatedCheckSum % DEFAULT_CHECKED_SUM[2] === checkSum ||
+    (calculatedCheckSum % DEFAULT_CHECKED_SUM[2] === DEFAULT_CHECKED_SUM[1] &&
+      checkSum === DEFAULT_CHECKED_SUM[0])
+  );
+};
+
 /**
  * @description Проверяет валиден ли СНИЛС
  * @example isSNILS()('95145370513');
- * @param {string} [value] проверяемое значение
  */
 export const isSNILS = createRule<{ message?: string }, false>(
   ({ message = IS_SNILS_DEFAULT_MESSAGE } = {}) =>
@@ -70,12 +77,7 @@ export const isSNILS = createRule<{ message?: string }, false>(
       }
 
       if (calculatedCheckSum > DEFAULT_CHECKED_SUM[2]) {
-        if (
-          calculatedCheckSum % DEFAULT_CHECKED_SUM[2] === checkSum ||
-          (calculatedCheckSum % DEFAULT_CHECKED_SUM[2] ===
-            DEFAULT_CHECKED_SUM[1] &&
-            checkSum === DEFAULT_CHECKED_SUM[0])
-        ) {
+        if (compareCheckSum(calculatedCheckSum, checkSum)) {
           return undefined;
         }
 

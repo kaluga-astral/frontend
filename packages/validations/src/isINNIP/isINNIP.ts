@@ -33,7 +33,6 @@ const calcSecondCheckSumForInnUl = (arrSymbols: string[]) =>
 /**
  * @description Проверяет валиден ли ИНН ИП
  * @example isINNIP()('384212952720');
- * @param {string} [value] ИНН без маски
  */
 export const isINNIP = createRule<{ message?: string }, false>(
   ({ message = IS_INNIP_DEFAULT_MESSAGE } = {}) =>

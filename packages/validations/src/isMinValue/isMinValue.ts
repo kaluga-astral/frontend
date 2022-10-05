@@ -11,7 +11,8 @@ export const getDefaultMessage = (min: number) => {
  * @description Проверяет минимальное значение value
  * @example isMinValue({ min: 10 })(1239123);
  * @param {number} [min] Минимальное значение value
- * @param {unknown} [value] проверяемое значение
+ * @param {string} [message.defaultMessage] Сообщение при неудачной валидации
+ * @param {string} [message.incorrectValue] Сообщение при переданном некорректном value
  */
 export const isMinValue = createRule<
   {

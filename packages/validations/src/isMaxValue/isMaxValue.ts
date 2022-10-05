@@ -11,7 +11,8 @@ export const getDefaultMessage = (max: number) => {
  * @description Проверяет максимальное значение value
  * @example isMaxValue({ max: 10 })(1239123);
  * @param {number} [max] Максимальное значение value
- * @param {unknown} [value] проверяемое значение
+ * @param {string} [message.defaultMessage] Сообщение при неудачной валидации
+ * @param {string} [message.incorrectValue] Сообщение при переданном некорректном value
  */
 export const isMaxValue = createRule<
   {

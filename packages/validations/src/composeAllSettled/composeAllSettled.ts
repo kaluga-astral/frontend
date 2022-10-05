@@ -7,7 +7,7 @@ import { InitializedRule, ValidationResult } from '../types';
  */
 export const composeAllSettled =
   (...rules: InitializedRule[]) =>
-  (value: unknown): undefined | ValidationResult => {
+  (value: unknown): ValidationResult => {
     const errors: string[] = [];
 
     rules.forEach((rule) => {

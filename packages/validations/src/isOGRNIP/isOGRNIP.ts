@@ -8,7 +8,6 @@ const OGRNIP_LENGTH = 15;
 /**
  * @description Проверяет валиден ли ОРГН ИП
  * @example isOGRNIP()('7728168971');
- * @param {string} [value] проверяемое значение
  */
 export const isOGRNIP = createRule<{ message?: string }, false>(
   ({ message = IS_OGRNIP_DEFAULT_MESSAGE } = {}) =>

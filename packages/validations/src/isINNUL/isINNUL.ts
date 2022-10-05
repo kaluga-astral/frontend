@@ -20,7 +20,6 @@ const calcCheckSumForInnUl = (arrSymbols: string[]) =>
 /**
  * @description Проверяет валиден ли ИНН ЮЛ
  * @example isINNUL()('7728168971');
- * @param {string} [value] проверяемое значение
  */
 export const isINNUL = createRule<{ message?: string }, false>(
   ({ message = IS_INNUL_DEFAULT_MESSAGE } = {}) =>

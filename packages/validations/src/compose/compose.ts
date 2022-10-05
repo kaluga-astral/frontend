@@ -7,7 +7,7 @@ import { InitializedRule, ValidationResult } from '../types';
  */
 export const compose =
   (...rules: InitializedRule[]) =>
-  (value: unknown): undefined | ValidationResult =>
+  (value: unknown): ValidationResult =>
     rules.reduce<ValidationResult>(
       (result, rule) => result || rule(value),
       undefined,

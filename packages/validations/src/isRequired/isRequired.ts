@@ -8,7 +8,6 @@ export const REQUIRED_RULE_DEFAULT_MESSAGE = 'Не заполнено';
  * @description Проверяет присутсвует ли value
  * @example isRequired();
  * @example isRequired('ИНН обязателен');
- * @param {string} [message] - 'Не заполнено'
  */
 export const isRequired = createRule<{ message?: string }, false>(
   ({ message = REQUIRED_RULE_DEFAULT_MESSAGE } = {}) =>

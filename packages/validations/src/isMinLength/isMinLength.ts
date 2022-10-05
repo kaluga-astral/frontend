@@ -11,7 +11,8 @@ export const getDefaultMessage = (min: number) => `Мин. символов: ${m
  * @example isMinLength({ min: 10 })(1239123);
  * @example isMinLength({ min: 10 })('1239123');
  * @param {number} [min] Минимальная длина value
- * @param {unknown} [value] проверяемое значение
+ * @param {string} [message.defaultMessage] Сообщение при неудачной валидации
+ * @param {string} [message.incorrectValue] Сообщение при переданном некорректном value
  */
 export const isMinLength = createRule<
   {

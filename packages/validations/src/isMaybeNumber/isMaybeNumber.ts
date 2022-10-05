@@ -8,7 +8,6 @@ export const IS_MAYBE_NUMBER_RULE_DEFAULT_MESSAGE =
 /**
  * @description Проверяет может ли значение быть преобразованным в число
  * @example isMaybeNumber()('7728168971');
- * @param {string} [value] проверяемое значение
  */
 export const isMaybeNumber = createRule<{ message?: string }, false>(
   ({ message = IS_MAYBE_NUMBER_RULE_DEFAULT_MESSAGE } = {}) =>
