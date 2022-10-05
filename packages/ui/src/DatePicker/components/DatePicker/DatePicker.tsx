@@ -1,4 +1,5 @@
 import {
+  FocusEvent,
   forwardRef,
   useCallback,
   useContext,
@@ -30,7 +31,8 @@ import { isDate } from '../../common/utils/isDate';
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
     mask?: DateMask;
-    onChange?: (date: Date | null | undefined) => void;
+    onChange?: (date: Date | string | null | undefined) => void;
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
     onOpen?: () => void;
     onClose?: () => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
@@ -45,6 +47,7 @@ const DatePickerInner = forwardRef<
     {
       onChange,
       onOpen,
+      onBlur,
       onClose,
       mask = 'DD.MM.YYYY',
       isMondayFirst,
@@ -66,20 +69,12 @@ const DatePickerInner = forwardRef<
       (value: string) => {
         setMaskedDate(value);
 
-        if (value.length === mask?.length) {
-          const date = maskToDate(value, mask);
+        const date = maskToDate(value, mask);
 
-          if (isDate(date) && !areDatesSame(date, selectedDate)) {
-            setSelectedDate(date);
-          } else {
-            setSelectedDate(null);
-          }
-
-          return;
-        }
-
-        if (value === '') {
+        if (value === '' || !isDate(date)) {
           setSelectedDate(null);
+        } else if (!areDatesSame(date, selectedDate)) {
+          setSelectedDate(date);
         }
       },
       [mask, selectedDate],
@@ -91,7 +86,15 @@ const DatePickerInner = forwardRef<
       closePopper();
     };
 
-    useEffect(() => onChange?.(selectedDate), [selectedDate]);
+    useEffect(
+      () => onChange?.(selectedDate || maskedDate),
+      [selectedDate, maskedDate],
+    );
+
+    const blurHandler = (e: FocusEvent<HTMLInputElement>) => {
+      checkValue(e.target.value);
+      onBlur?.(e);
+    };
 
     return (
       <DatePickerClickAwayListener onClickAway={closePopper}>
@@ -99,7 +102,7 @@ const DatePickerInner = forwardRef<
           {...inputProps}
           mask={mask}
           onNativeChange={(e) => checkValue(e.target.value)}
-          onBlur={(e) => checkValue(e.target.value)}
+          onBlur={blurHandler}
           disabled={disabled}
           value={maskedDate}
           ref={ref}
