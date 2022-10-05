@@ -33,9 +33,7 @@ describe('isMaybeNumber', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(
-      isMaybeNumber({ message: { defaultMessage: customMessage } })(NaN),
-    ).toBe(customMessage);
+    expect(isMaybeNumber({ message: customMessage })(NaN)).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

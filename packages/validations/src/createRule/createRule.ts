@@ -17,6 +17,7 @@ export function createRule<Params extends object, RequiredParams extends false>(
   >,
 ): Rule<Params & { exclude?: (value: unknown) => boolean }, RequiredParams>;
 
+// Реализована перегрузка, поэтому используется any
 // eslint-disable-next-line
 export function createRule(creator: any) {
   // eslint-disable-next-line

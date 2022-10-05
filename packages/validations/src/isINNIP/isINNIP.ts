@@ -1,6 +1,5 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
-import { Message } from '../types';
 
 export const IS_INNIP_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
 
@@ -34,14 +33,10 @@ const calcSecondCheckSumForInnUl = (arrSymbols: string[]) =>
 /**
  * @description Проверяет валиден ли ИНН ИП
  * @example isINNIP()('384212952720');
- * @param {string} [value] проверяемое значение
+ * @param {string} [value] ИНН без маски
  */
-export const isINNIP = createRule<{ message?: Message }, false>(
-  ({
-      message = {
-        defaultMessage: IS_INNIP_DEFAULT_MESSAGE,
-      },
-    } = {}) =>
+export const isINNIP = createRule<{ message?: string }, false>(
+  ({ message = IS_INNIP_DEFAULT_MESSAGE } = {}) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
@@ -49,7 +44,7 @@ export const isINNIP = createRule<{ message?: Message }, false>(
 
       if (typeof value === 'string') {
         if (value.length !== INNIP_LENGTH) {
-          return message.defaultMessage;
+          return message;
         }
 
         const arrSymbols = value.split('');
@@ -62,12 +57,12 @@ export const isINNIP = createRule<{ message?: Message }, false>(
           Number(value[10]) !== firstChecksum &&
           Number(value[11]) !== secondChecksum
         ) {
-          return message.defaultMessage;
+          return message;
         }
 
         return undefined;
       }
 
-      return message.defaultMessage;
+      return message;
     },
 );

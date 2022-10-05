@@ -25,9 +25,7 @@ describe('isRequired', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isRequired({ message: { defaultMessage: customMessage } })('')).toBe(
-      customMessage,
-    );
+    expect(isRequired({ message: customMessage })('')).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

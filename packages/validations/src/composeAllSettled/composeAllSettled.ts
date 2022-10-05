@@ -1,4 +1,4 @@
-import { InitializedRule } from '../types';
+import { InitializedRule, ValidationResult } from '../types';
 
 /**
  * @description Объединяет переданные правила в цепочку правил, выполняя все переданные правила, независимо от результата выполнения правил. Выполняет правила слева направо
@@ -7,7 +7,7 @@ import { InitializedRule } from '../types';
  */
 export const composeAllSettled =
   (...rules: InitializedRule[]) =>
-  (value: unknown) => {
+  (value: unknown): undefined | ValidationResult => {
     const errors: string[] = [];
 
     rules.forEach((rule) => {

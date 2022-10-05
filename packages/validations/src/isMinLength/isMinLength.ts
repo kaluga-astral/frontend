@@ -3,7 +3,6 @@ import isEmpty from 'lodash.isempty';
 import { createRule } from '../createRule';
 import { INCORRECT_MESSAGE } from '../constants';
 import { isEmptyString } from '../utils';
-import { Message } from '../types';
 
 export const getDefaultMessage = (min: number) => `Мин. символов: ${min}`;
 
@@ -15,8 +14,14 @@ export const getDefaultMessage = (min: number) => `Мин. символов: ${m
  * @param {unknown} [value] проверяемое значение
  */
 export const isMinLength = createRule<
-  { message?: Message; min: number },
-  false
+  {
+    message?: {
+      defaultMessage?: string;
+      incorrectValue?: string;
+    };
+    min: number;
+  },
+  true
 >(
   (
       {

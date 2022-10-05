@@ -10,8 +10,3 @@ export type Rule<
 > = RequiredParams extends true
   ? (params: Params) => InitializedRule
   : (params?: Params) => InitializedRule;
-
-export type Message = {
-  defaultMessage?: string;
-  incorrectValue?: string;
-};

@@ -3,7 +3,6 @@ import isEmpty from 'lodash.isempty';
 import { createRule } from '../createRule';
 import { INCORRECT_MESSAGE } from '../constants';
 import { isEmptyString } from '../utils';
-import { Message } from '../types';
 
 export const getDefaultMessage = (max: number) => `Макс. символов: ${max}`;
 
@@ -15,8 +14,14 @@ export const getDefaultMessage = (max: number) => `Макс. символов: $
  * @param {unknown} [value] проверяемое значение
  */
 export const isMaxLength = createRule<
-  { max: number; message?: Message },
-  false
+  {
+    max: number;
+    message?: {
+      defaultMessage?: string;
+      incorrectValue?: string;
+    };
+  },
+  true
 >(
   (
       {

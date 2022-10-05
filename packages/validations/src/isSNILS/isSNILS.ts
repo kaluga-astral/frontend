@@ -1,6 +1,5 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
-import { Message } from '../types';
 
 export const IS_SNILS_DEFAULT_MESSAGE = 'Некорректный СНИЛС';
 
@@ -23,33 +22,29 @@ const calcCheckSumForSNILS = (digitsOfValue: string) =>
  * @example isSNILS()('95145370513');
  * @param {string} [value] проверяемое значение
  */
-export const isSNILS = createRule<{ message?: Message }, false>(
-  ({
-      message = {
-        defaultMessage: IS_SNILS_DEFAULT_MESSAGE,
-      },
-    } = {}) =>
+export const isSNILS = createRule<{ message?: string }, false>(
+  ({ message = IS_SNILS_DEFAULT_MESSAGE } = {}) =>
     (value) => {
       if (isEmptyString(value)) {
         return undefined;
       }
 
       if (typeof value !== 'string') {
-        return message.defaultMessage;
+        return message;
       }
 
       const formattedValue = removeSpecialCharacters(value);
 
       if (formattedValue.length !== value.length) {
-        return message.defaultMessage;
+        return message;
       }
 
       if (!/^(\d{11})$/.test(formattedValue)) {
-        return message.defaultMessage;
+        return message;
       }
 
       if (RESTRICTED_VALUES.includes(formattedValue)) {
-        return message.defaultMessage;
+        return message;
       }
 
       const checkSum = Number(formattedValue.slice(9, 11));
@@ -60,7 +55,7 @@ export const isSNILS = createRule<{ message?: Message }, false>(
           return undefined;
         }
 
-        return message.defaultMessage;
+        return message;
       }
 
       if (
@@ -71,7 +66,7 @@ export const isSNILS = createRule<{ message?: Message }, false>(
           return undefined;
         }
 
-        return message.defaultMessage;
+        return message;
       }
 
       if (calculatedCheckSum > DEFAULT_CHECKED_SUM[2]) {
@@ -84,7 +79,7 @@ export const isSNILS = createRule<{ message?: Message }, false>(
           return undefined;
         }
 
-        return message.defaultMessage;
+        return message;
       }
 
       return undefined;

@@ -28,9 +28,7 @@ describe('isOGRNIP', () => {
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isOGRNIP({ message: { defaultMessage: customMessage } })('q')).toBe(
-      customMessage,
-    );
+    expect(isOGRNIP({ message: customMessage })('q')).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {

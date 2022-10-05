@@ -1,7 +1,7 @@
-import { CONTAINS_SPACES_REGEX, INCORRECT_MESSAGE } from '../constants';
+import { INCORRECT_MESSAGE } from '../constants';
 import { createRule } from '../createRule';
+import { isMaybeNumber } from '../isMaybeNumber';
 import { isEmptyString } from '../utils';
-import { Message } from '../types';
 
 export const getDefaultMessage = (max: number) => {
   return `Должно быть меньше чем ${max}`;
@@ -13,7 +13,16 @@ export const getDefaultMessage = (max: number) => {
  * @param {number} [max] Максимальное значение value
  * @param {unknown} [value] проверяемое значение
  */
-export const isMaxValue = createRule<{ message?: Message; max: number }, false>(
+export const isMaxValue = createRule<
+  {
+    message?: {
+      defaultMessage?: string;
+      incorrectValue?: string;
+    };
+    max: number;
+  },
+  true
+>(
   (
       {
         max,
@@ -28,12 +37,7 @@ export const isMaxValue = createRule<{ message?: Message; max: number }, false>(
         return undefined;
       }
 
-      if (
-        typeof value === 'string' &&
-        !isNaN(Number(value)) &&
-        !CONTAINS_SPACES_REGEX.test(value) &&
-        value !== ''
-      ) {
+      if (typeof value === 'string' && !isMaybeNumber()(value)) {
         if (parseFloat(value) <= max) {
           return undefined;
         }
