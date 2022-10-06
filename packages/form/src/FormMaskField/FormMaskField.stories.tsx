@@ -11,7 +11,7 @@ export default {
   component: null,
 };
 
-type FormValues = { textareaField: FormMaskFieldValue };
+type FormValues = { maskField: FormMaskFieldValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();
@@ -22,7 +22,7 @@ const Template: Story = () => {
         required
         label="Form mask field"
         control={form.control}
-        name="textareaField"
+        name="maskField"
         rules={{ required: 'Обязательное поле' }}
         mask="aa.000"
       />
