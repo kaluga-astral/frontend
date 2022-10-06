@@ -21,4 +21,20 @@ describe('isRequired', () => {
       expect(isRequired()(value)).toBe(REQUIRED_RULE_DEFAULT_MESSAGE);
     },
   );
+
+  it('Valid custom message', () => {
+    const customMessage = 'CustomMessage';
+
+    expect(isRequired({ message: customMessage })('')).toBe(customMessage);
+  });
+
+  it('Valid exclude value', () => {
+    const isExclude = (value: unknown) => {
+      const excluded: unknown[] = ['exclude', ''];
+
+      return excluded.includes(value);
+    };
+
+    expect(isRequired({ exclude: isExclude })('')).toBe(undefined);
+  });
 });
