@@ -2,6 +2,8 @@ export * from 'react-hook-form';
 
 export * from './FormTextArea';
 
+export * from './FormCheckbox';
+
 export * from './FormTextField';
 
 export * from './SubmitButton';
