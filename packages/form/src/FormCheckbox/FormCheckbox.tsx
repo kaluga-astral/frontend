@@ -13,7 +13,7 @@ import { WithFormFieldProps } from '../types';
 /**
  * @description Тип значения, которое сетится в state формы
  */
-export type FormCheckboxValue = string;
+export type FormCheckboxValue = boolean;
 
 export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   CheckboxProps,
