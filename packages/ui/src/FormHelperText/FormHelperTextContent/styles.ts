@@ -29,14 +29,14 @@ export const FormHelperTextWrapper = styled.span<WrapperProps>`
   }};
 `;
 
-export const SuccessIcon = styled(SuccessFillSm)`
+export const FormHelperTextSuccessIcon = styled(SuccessFillSm)`
   ${({ theme }) => getStyles(theme)}
 `;
 
-export const ErrorIcon = styled(ErrorFillSm)`
+export const FormHelperTextErrorIcon = styled(ErrorFillSm)`
   ${({ theme }) => getStyles(theme)}
 `;
 
-export const Content = styled.span`
+export const FormHelperTextMessage = styled.span`
   vertical-align: middle;
 `;

@@ -1,10 +1,10 @@
 import { ReactNode, useMemo } from 'react';
 
 import {
-  Content,
-  ErrorIcon,
+  FormHelperTextErrorIcon,
+  FormHelperTextMessage,
+  FormHelperTextSuccessIcon,
   FormHelperTextWrapper,
-  SuccessIcon,
 } from './styles';
 
 export type FormHelperTextContentProps = {
@@ -20,11 +20,11 @@ export const FormHelperTextContent: React.FC<FormHelperTextContentProps> = ({
 }) => {
   const Icon = useMemo(() => {
     if (success) {
-      return <SuccessIcon />;
+      return <FormHelperTextSuccessIcon />;
     }
 
     if (error) {
-      return <ErrorIcon />;
+      return <FormHelperTextErrorIcon />;
     }
 
     return null;
@@ -34,7 +34,7 @@ export const FormHelperTextContent: React.FC<FormHelperTextContentProps> = ({
     return (
       <FormHelperTextWrapper error={error} success={success}>
         {Icon}
-        <Content>{children}</Content>
+        <FormHelperTextMessage>{children}</FormHelperTextMessage>
       </FormHelperTextWrapper>
     );
   }
