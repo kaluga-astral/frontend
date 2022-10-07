@@ -7,7 +7,6 @@ import { MuiAlert } from './MuiAlert';
 import { MuiButton } from './MuiButton';
 import { MuiButtonBase } from './MuiButtonBase';
 import { MuiLoadingButton } from './MuiLoadingButton';
-import { MuiInputBase } from './MuiInputBase';
 import { MuiFormHelperText } from './MuiFormHelperText';
 import { MuiFormLabel } from './MuiFormLabel';
 import { MuiInputLabel } from './MuiInputLabel';
@@ -103,7 +102,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiButtonBase,
   MuiLoadingButton,
   MuiTypography,
-  MuiInputBase,
   MuiInputLabel,
   MuiOutlinedInput,
   MuiFormLabel,
