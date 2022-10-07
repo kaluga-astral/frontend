@@ -48,6 +48,8 @@ export * from './Fab';
 
 export * from './Fade';
 
+export * from './FormControl';
+
 export * from './FormControlLabel';
 
 export * from './FormHelperText';
