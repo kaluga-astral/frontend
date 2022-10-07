@@ -1,6 +1,11 @@
 import { ReactNode, useMemo } from 'react';
 
-import { Content, ErrorIcon, SuccessIcon, Wrapper } from './styles';
+import {
+  Content,
+  ErrorIcon,
+  FormHelperTextWrapper,
+  SuccessIcon,
+} from './styles';
 
 export type FormHelperTextContentProps = {
   success?: boolean;
@@ -27,10 +32,10 @@ export const FormHelperTextContent: React.FC<FormHelperTextContentProps> = ({
 
   if (children) {
     return (
-      <Wrapper error={error} success={success}>
+      <FormHelperTextWrapper error={error} success={success}>
         {Icon}
         <Content>{children}</Content>
-      </Wrapper>
+      </FormHelperTextWrapper>
     );
   }
 

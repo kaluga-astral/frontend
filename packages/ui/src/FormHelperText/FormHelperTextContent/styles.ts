@@ -15,7 +15,7 @@ type WrapperProps = {
   error?: boolean;
 };
 
-export const Wrapper = styled.span<WrapperProps>`
+export const FormHelperTextWrapper = styled.span<WrapperProps>`
   color: ${({ success, error, theme }) => {
     if (success) {
       return theme.palette.success.dark;
