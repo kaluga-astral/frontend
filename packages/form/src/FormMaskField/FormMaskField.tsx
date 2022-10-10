@@ -17,11 +17,12 @@ export type FormMaskFieldProps<FieldValues extends object> = WithFormFieldProps<
 /**
  * @description Тестовый инпут с маской для формы
  */
-export function FormMaskField<FieldValues extends object>(
-  props: FormMaskFieldProps<FieldValues>,
-) {
+export function FormMaskField<FieldValues extends object>({
+  unmask = true,
+  ...props
+}: FormMaskFieldProps<FieldValues>) {
   const { field, fieldState } = useController(props);
   const errorProps = useFieldErrorProps(fieldState);
 
-  return <MaskField {...field} {...props} {...errorProps} />;
+  return <MaskField {...field} unmask={unmask} {...props} {...errorProps} />;
 }
