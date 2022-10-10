@@ -1,7 +1,7 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
 
-export const IS_MOBILE_PHONE_DEFAULT_MESSAGE = 'Начинается с +7 (9**)...';
+export const IS_MOBILE_PHONE_DEFAULT_MESSAGE = 'Некорректный номер телефона';
 
 const MOBILE_PHONE_REGEX = /^(7)\d{10}$/;
 
