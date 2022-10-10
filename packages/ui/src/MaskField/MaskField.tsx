@@ -44,7 +44,7 @@ const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
 
 export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
   ({ onChange, onAccept, ...props }, ref) => {
-    const maskFieldProps = props as IMaskInputProps;
+    const maskFieldProps = { unmask: true, ...props } as IMaskInputProps;
 
     const handleMaskFieldAccept = (
       value: string,

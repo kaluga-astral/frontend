@@ -15,7 +15,7 @@ export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description TextArea для формы
+ * @description Адаптер для TextArea
  */
 export function FormTextArea<FieldValues extends object>(
   props: FormTextAreaProps<FieldValues>,

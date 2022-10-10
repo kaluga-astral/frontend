@@ -1,33 +1,27 @@
-import { useMemo } from 'react';
+import {
+  FormHelperText as MuiFormHelperText,
+  FormHelperTextProps as MuiFormHelperTextProps,
+} from '@mui/material';
+import { FC } from 'react';
 
-import { FormHelperTextProps } from './types';
-import { Content, ErrorIcon, SuccessIcon } from './styled';
+import { FormHelperTextContent } from './FormHelperTextContent';
 
-export const FormHelperText: React.FC<FormHelperTextProps> = (props) => {
-  const { success, error, children } = props;
-
-  const Icon = useMemo(() => {
-    if (success) {
-      return <SuccessIcon />;
-    }
-
-    if (error) {
-      return <ErrorIcon />;
-    }
-
-    return null;
-  }, [success, error]);
-
-  if (children) {
-    return (
-      <>
-        {Icon}
-        <Content>{children}</Content>
-      </>
-    );
-  }
-
-  return null;
+export type FormHelperTextProps = MuiFormHelperTextProps & {
+  success?: boolean;
+  error?: boolean;
 };
 
-export default FormHelperText;
+export const FormHelperText: FC<FormHelperTextProps> = ({
+  children,
+  success,
+  error,
+  ...props
+}: FormHelperTextProps) => {
+  return (
+    <MuiFormHelperText {...props}>
+      <FormHelperTextContent error={error} success={success}>
+        {children}
+      </FormHelperTextContent>
+    </MuiFormHelperText>
+  );
+};
