@@ -10,7 +10,7 @@ import {
 import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/addYears';
 import { PickerProps } from '../../types/pickerProps';
-import { DatePickerContext } from '../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
 
 import { useYearsGrid } from './hooks/useYearsGrid';
 import { YEARS_IN_GRID } from './constants';
@@ -32,9 +32,7 @@ export const YearPicker = ({
     selectedDate,
   });
 
-  const {
-    languageMap: { year: yearCaption },
-  } = useContext(DatePickerContext);
+  const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
     <DateCalendarWrapper>

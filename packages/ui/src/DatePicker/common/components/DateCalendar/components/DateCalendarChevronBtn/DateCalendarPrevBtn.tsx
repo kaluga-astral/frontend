@@ -1,7 +1,7 @@
 import { PreviousOutlineMd } from '@astral/icons';
 import { forwardRef, useContext } from 'react';
 
-import { DatePickerContext } from '../../../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../../../ConfigProvider';
 
 import { DateCalendarPrevBtnWrapper } from './styles';
 import { DateCalendarChevronBtnProps } from './types';
@@ -10,9 +10,7 @@ export const DateCalendarPrevBtn = forwardRef<
   HTMLButtonElement,
   DateCalendarChevronBtnProps
 >(({ postfixTitle, isPlural, ...props }, ref) => {
-  const {
-    languageMap: { previous },
-  } = useContext(DatePickerContext);
+  const { previous } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
     <DateCalendarPrevBtnWrapper

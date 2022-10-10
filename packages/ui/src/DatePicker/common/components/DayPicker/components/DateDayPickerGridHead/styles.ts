@@ -1,5 +1,5 @@
 import { styled } from '../../../../../../styles';
-import { DAYS_IN_WEEK } from '../../../../constants/daysInWeek';
+import { DAYS_IN_WEEK } from '../../../../constants';
 
 export const DateDayPickerGridHeadWrapper = styled.div`
   display: grid;

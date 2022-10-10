@@ -4,7 +4,7 @@ import { YearPicker } from '../YearPicker';
 import { MonthPicker } from '../MonthPicker';
 import { DayPicker, MondayFirst } from '../DayPicker';
 import { PickerProps } from '../../types/pickerProps';
-import { DatePickerContext } from '../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
 
 enum States {
   days,
@@ -37,9 +37,8 @@ export const YearMonthDayPicker = ({
 
   const handleDaysHeadBtnClick = () => setState(States.months);
 
-  const {
-    languageMap: { toYearPick, toMonthPick },
-  } = useContext(DatePickerContext);
+  const { toYearPick, toMonthPick } =
+    useContext(ConfigContext).datePickerLanguageMap;
 
   useEffect(() => {
     setDate(initialDate);

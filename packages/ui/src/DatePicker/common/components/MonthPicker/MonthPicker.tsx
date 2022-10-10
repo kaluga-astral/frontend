@@ -11,7 +11,7 @@ import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addYears } from '../../utils/addYears';
 import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
-import { DatePickerContext } from '../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
 
 import { useMonthsGrid } from './hooks/useMonthsGrid';
 
@@ -42,9 +42,7 @@ export const MonthPicker = ({
     selectedDate,
   });
 
-  const {
-    languageMap: { year: yearCaption },
-  } = useContext(DatePickerContext);
+  const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
     <DateCalendarWrapper>

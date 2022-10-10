@@ -1,14 +1,14 @@
 import { useContext, useRef } from 'react';
 
-import { DatePickerContext } from '../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
 
 type UseLocaleDateTimeFormatOptions = Intl.DateTimeFormatOptions;
 
 export const useLocaleDateTimeFormat = (
   options: UseLocaleDateTimeFormatOptions,
 ) => {
-  const { locale } = useContext(DatePickerContext);
-  const { current } = useRef(Intl.DateTimeFormat(locale, options).format);
+  const { language } = useContext(ConfigContext);
+  const { current } = useRef(Intl.DateTimeFormat(language, options).format);
 
   return current;
 };

@@ -1,10 +1,26 @@
 import { ReactNode, createContext, useEffect } from 'react';
 
+import { LanguageMap } from '../DatePicker/types';
+import { russianMap } from '../DatePicker/constants/russianMap';
+
+type Language = 'ru';
+
 export type ConfigContextProps = {
-  /*
-   * Локализация
+  /**
+   * @deprecated используйте language взамен
    */
-  locale: string;
+  //eslint-disable-next-line
+  locale?: any;
+  /**
+   * @description язык локализации
+   * @default 'ru'
+   */
+  language: Language;
+  /**
+   * @description языковая карта для DatePicker
+   * @default russianMap
+   */
+  datePickerLanguageMap: LanguageMap;
   /*
    * Callback для отправки ошибки в sentry
    */
@@ -17,15 +33,17 @@ export type ConfigProviderProps = Partial<ConfigContextProps> & {
 };
 
 export const ConfigContext = createContext<ConfigContextProps>({
-  locale: 'ru',
+  language: 'ru',
+  datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
 });
 
 export const ConfigProvider = ({
   children,
-  locale = 'ru',
+  language = 'ru',
+  datePickerLanguageMap = russianMap,
   captureException,
-}: ConfigProviderProps) => {
+}: Partial<ConfigProviderProps>) => {
   useEffect(() => {
     if (!captureException) {
       console.warn(
@@ -38,7 +56,8 @@ export const ConfigProvider = ({
   return (
     <ConfigContext.Provider
       value={{
-        locale,
+        language,
+        datePickerLanguageMap,
         captureException: captureException || ((error) => console.error(error)),
       }}
     >

@@ -11,7 +11,7 @@ import { useCalendarNavigate } from '../../hooks/useCalendarNavigate';
 import { PickerProps } from '../../types/pickerProps';
 import { addMonths } from '../../utils/addMonths';
 import { useLocaleDateTimeFormat } from '../../hooks/useLocaleDateTimeFormat';
-import { DatePickerContext } from '../../../../DatePickerProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
 
 import { DateDayPickerGridHead } from './components/DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './components/DateDayPickerGrid';
@@ -49,9 +49,8 @@ export const DayPicker = ({
     timeZone: 'UTC',
   });
 
-  const {
-    languageMap: { month: monthCaption },
-  } = useContext(DatePickerContext);
+  const { month: monthCaption } =
+    useContext(ConfigContext).datePickerLanguageMap;
 
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
