@@ -22,6 +22,9 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   success?: boolean;
 };
 
+/**
+ * @description Адаптер для Checkbox
+ */
 export function FormCheckbox<FieldValues extends object>({
   success,
   ...props
