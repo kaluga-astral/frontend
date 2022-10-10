@@ -1,9 +1,10 @@
 import { Story } from '@storybook/react';
 
-import { DatePickerProvider } from '../DatePickerProvider';
 import { Grid } from '../Grid';
+import { addDays } from '../utils/addDays';
+import { buildIsoDate } from '../utils/buildIsoDate';
 
-import { DatePicker, DatePickerProps, addDays, buildIsoDate } from './index';
+import { DatePicker, DatePickerProps } from './index';
 
 export default {
   title: 'Components/DatePickers/DefaultDatePicker',
@@ -17,13 +18,7 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: Story<DatePickerProps> = (args) => {
-  return (
-    <DatePickerProvider>
-      <DatePicker {...args} />
-    </DatePickerProvider>
-  );
-};
+const Template: Story<DatePickerProps> = (args) => <DatePicker {...args} />;
 
 export const Showcase: Story = () => (
   <Grid container spacing={6} autoFlow="row">
