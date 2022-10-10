@@ -43,7 +43,7 @@ export const MaskField: FC<MaskFieldProps> = ({
   onAccept,
   ...props
 }) => {
-  const maskFieldProps = props as IMaskInputProps;
+  const maskFieldProps = { unmask: true, ...props } as IMaskInputProps;
 
   const handleMaskFieldAccept = (
     value: string,
