@@ -21,11 +21,11 @@ export const useBaseDateInRange = ({
       hour: currentDate.getUTCHours(),
     });
 
-    if (+baseDate < +minDate) {
+    if (Number(baseDate) < Number(minDate)) {
       return minDate;
     }
 
-    if (+baseDate > +maxDate) {
+    if (Number(baseDate) > Number(maxDate)) {
       return maxDate;
     }
 
