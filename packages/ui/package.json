@@ -25,6 +25,7 @@
     "@mui/base": "^5.0.0-alpha.85",
     "@mui/lab": "^5.0.0-alpha.86",
     "@mui/material": "^5.8.4",
+    "date-fns": "^2.29.3",
     "lodash-es": "^4.17.21",
     "react-imask": "^6.4.2",
     "react-toastify": "9.0.3",
