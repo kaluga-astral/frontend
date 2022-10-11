@@ -6,7 +6,7 @@ import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 import { useFieldErrorProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
-const MOBILE_PHONE_MASK = '+0 (000) 00-00-000';
+const MOBILE_PHONE_MASK = '+7 (000) 00-00-000';
 
 const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 
