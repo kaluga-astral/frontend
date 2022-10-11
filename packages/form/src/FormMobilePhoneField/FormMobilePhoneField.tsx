@@ -52,6 +52,7 @@ export function FormMobilePhoneField<FieldValues extends object>({
       {...props}
       {...errorProps}
       mask={MOBILE_PHONE_MASK}
+      autoComplete="tel"
     />
   );
 }
