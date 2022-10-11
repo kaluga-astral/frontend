@@ -4,7 +4,6 @@
     "./**/*.ts",
     "./**/*.tsx",
     "./*.js",
-    "../ui/declarations/declarations.d.ts"
   ],
   "exclude": [
     "lib"

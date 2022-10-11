@@ -6,7 +6,7 @@ import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 import { useFieldErrorProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
-export const MOBILE_PHONE_MASK = '+0 (000) 00-00-000';
+const MOBILE_PHONE_MASK = '+0 (000) 00-00-000';
 
 export const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 
@@ -16,16 +16,12 @@ export const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 export type FormMobilePhoneFieldValue = string;
 
 export type FormMobilePhoneFieldProps<FieldValues extends object> =
-  WithFormFieldProps<
-    Omit<MaskFieldProps, 'mask'> & { mask?: string },
-    FieldValues
-  >;
+  WithFormFieldProps<Omit<MaskFieldProps, 'mask'>, FieldValues>;
 
 /**
- * @description Адаптер для MaskField с маской ввода номера мобильного телефона
+ * @description Поле для ввода личного мобильного номера телефона, начинающего на 79
  */
 export function FormMobilePhoneField<FieldValues extends object>({
-  mask = MOBILE_PHONE_MASK,
   rules,
   ...props
 }: FormMobilePhoneFieldProps<FieldValues>) {
@@ -51,11 +47,11 @@ export function FormMobilePhoneField<FieldValues extends object>({
 
   return (
     <MaskField
-      placeholder="+7 (900) 000-00-00"
-      mask={mask}
+      placeholder="+7 (9**) ***-**-**"
       {...field}
       {...props}
       {...errorProps}
+      mask={MOBILE_PHONE_MASK}
     />
   );
 }
