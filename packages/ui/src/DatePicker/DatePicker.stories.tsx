@@ -1,8 +1,7 @@
 import { Story } from '@storybook/react';
 
 import { Grid } from '../Grid';
-import { addDays } from '../utils/addDays';
-import { buildIsoDate } from '../utils/buildIsoDate';
+import { addDays, buildIsoDate } from '../utils/date';
 
 import { DatePicker, DatePickerProps } from './index';
 

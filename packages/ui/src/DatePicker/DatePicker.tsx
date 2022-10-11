@@ -1,4 +1,5 @@
 import {
+  ChangeEvent,
   FocusEvent,
   forwardRef,
   useCallback,
@@ -10,23 +11,25 @@ import {
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef } from '../hooks/useForwardedRef';
 import { useToggle } from '../hooks/useToggle';
-import { areDatesSame } from '../utils/areDatesSame';
-import { isDate } from '../utils/isDate';
-import { dateToMask } from '../utils/maskDate/dateToMask';
-import { maskToDate } from '../utils/maskDate/maskToDate';
-import { DateMask } from '../utils/maskDate/maskDate';
+import {
+  DateMask,
+  areDatesSame,
+  dateToMask,
+  isDate,
+  maskToDate,
+} from '../utils/date';
 
-import { DatePickerClickAwayListener } from './components/DatePickerClickAwayListener';
-import { DatePickerInput } from './components/DatePickerInput';
-import { DatePickerPopper } from './components/DatePickerPopper';
+import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
+import { DatePickerInput } from './DatePickerInput';
+import { DatePickerPopper } from './DatePickerPopper';
 import {
   MinMaxDateContext,
   MinMaxDateContextProvider,
-} from './components/MinMaxDateContext';
+} from './MinMaxDateContext';
 import { MinMaxDate } from './types';
-import { YearMonthDayPicker } from './components/YearMonthDayPicker';
+import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { useBaseDateInRange } from './hooks/useBaseDateInRange';
-import { MondayFirst } from './components/DayPicker';
+import { MondayFirst } from './DayPicker';
 import { useSelectedBaseDate } from './hooks/useSelectedBaseDate';
 
 export type DatePickerProps = MondayFirst &
@@ -100,12 +103,15 @@ const DatePickerInner = forwardRef<
       onBlur?.(e);
     };
 
+    const handleNativeChange = (e: ChangeEvent<HTMLInputElement>) =>
+      checkValue(e.target.value);
+
     return (
       <DatePickerClickAwayListener onClickAway={closePopper}>
         <DatePickerInput
           {...inputProps}
           mask={mask}
-          onNativeChange={(e) => checkValue(e.target.value)}
+          onNativeChange={handleNativeChange}
           onBlur={blurHandler}
           disabled={disabled}
           value={maskedDate}

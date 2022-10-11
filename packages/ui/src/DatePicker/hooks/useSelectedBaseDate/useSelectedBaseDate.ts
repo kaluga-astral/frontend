@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { MinMaxDateContext } from '../../components/MinMaxDateContext';
+import { MinMaxDateContext } from '../../MinMaxDateContext';
 import {
   DateCompareDeep,
+  areDatesSame,
   isDateOutOfRange,
-} from '../../../utils/isDateOutOfRange';
-import { areDatesSame } from '../../../utils/areDatesSame';
+} from '../../../utils/date';
 
 export const useSelectedBaseDate = (selectedDate?: Date | null) => {
   const { minDate, maxDate } = useContext(MinMaxDateContext);

@@ -1,8 +1,5 @@
 import { GridBuilderResult, GridItem } from '../../types';
-import {
-  IsDateOutOfRangeOptions,
-  isDateOutOfRange,
-} from '../../../utils/isDateOutOfRange';
+import { IsDateOutOfRangeOptions, isDateOutOfRange } from '../../../utils/date';
 
 type BuildGridResultOptions<T> = {
   /**
