@@ -8,7 +8,7 @@ import { WithFormFieldProps } from '../types';
 
 const MOBILE_PHONE_MASK = '+0 (000) 00-00-000';
 
-export const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
+const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 
 /**
  * @description Тип значения, которое сетится в state формы

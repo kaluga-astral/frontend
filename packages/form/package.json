@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
+    "postbuild": "copyfiles -u 1 declarations/*.ts lib",
     "build": "commander build",
     "publish": "npm publish ./lib",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
