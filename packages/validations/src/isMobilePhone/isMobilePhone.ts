@@ -3,7 +3,7 @@ import { isEmptyString } from '../utils';
 
 export const IS_MOBILE_PHONE_DEFAULT_MESSAGE = 'Некорректный номер телефона';
 
-const MOBILE_PHONE_REGEX = /^(7)\d{10}$/;
+const MOBILE_PHONE_REGEX = /^(79)\d{9}$/;
 
 /**
  * @description Проверяет валиден ли мобильный телефон
