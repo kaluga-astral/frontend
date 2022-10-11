@@ -1,11 +1,14 @@
 import { MaskField, MaskFieldProps } from '@astral/ui';
 import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
+import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 
 import { useFieldErrorProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 export const MOBILE_PHONE_MASK = '+0 (000) 00-00-000';
+
+export const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 
 /**
  * @description Тип значения, которое сетится в state формы
@@ -28,18 +31,31 @@ export function FormMobilePhoneField<FieldValues extends object>({
 }: FormMobilePhoneFieldProps<FieldValues>) {
   const customRules = useMemo(() => {
     if (rules?.validate) {
-      return rules;
+      return {
+        ...rules,
+        validate: compose(
+          rules.validate as InitializedRule,
+          isMobilePhone({ message: IS_MOBILE_PHONE_MESSAGE }),
+        ),
+      };
     }
 
     return {
       ...rules,
-      // TODO: Подставить правило валидации мобильного телефона
-      validate: () => false,
+      validate: isMobilePhone({ message: IS_MOBILE_PHONE_MESSAGE }),
     };
   }, [rules]);
 
   const { field, fieldState } = useController({ ...props, rules: customRules });
   const errorProps = useFieldErrorProps(fieldState);
 
-  return <MaskField mask={mask} {...field} {...props} {...errorProps} />;
+  return (
+    <MaskField
+      placeholder="+7 (900) 000-00-00"
+      mask={mask}
+      {...field}
+      {...props}
+      {...errorProps}
+    />
+  );
 }
