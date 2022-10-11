@@ -76,7 +76,7 @@ const DatePickerInner = forwardRef<
       (value: string) => {
         setMaskedDate(value);
 
-        const date = maskToDate(value, mask);
+        const date = maskToDate(value);
 
         if (value === '' || !isDate(date)) {
           setSelectedDate(null);
