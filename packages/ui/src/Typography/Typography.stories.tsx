@@ -8,6 +8,10 @@ export default {
   component: Typography,
 };
 
+const intensities: TypographyProps['intensity'][] = [
+  900, 800, 700, 600, 500, 400, 300, 200, 100,
+];
+
 const variants: TypographyProps['variant'][] = [
   'h1',
   'h2',
@@ -35,42 +39,59 @@ const colors: TypographyColor[] = [
   'success',
   'error',
   'warning',
+  'grey',
+  'red',
+  'green',
+  'yellow',
 ];
 
 const Template: Story<TypographyProps> = (args) => {
-  return (
-    <>
-      <Typography mb={5} {...args} />
-      <Grid
-        container
-        display="grid"
-        gridTemplateColumns={`repeat(${colors.length}, 1fr)`}
-        gap={4}
-        justifyContent="center"
-        alignItems="center"
-      >
-        {variants.map((variant) => (
-          <>
-            {colors.map((color) => (
-              <Typography color={color} variant={variant}>
-                {variant} x {color}
+  return <Typography mb={5} {...args} />;
+};
+
+export const Showcase = () => (
+  <Grid
+    container
+    display="grid"
+    gridTemplateColumns={`repeat(${colors.length}, 1fr)`}
+    gap={4}
+    justifyContent="center"
+    alignItems="center"
+  >
+    {variants.map((variant) => (
+      <>
+        {colors.map((color) => (
+          <Grid
+            height="100%"
+            justifyContent="space-between"
+            container
+            display="grid"
+          >
+            <Typography color={color} variant={variant}>
+              {variant} x {color}
+            </Typography>
+            {intensities?.map((intensity) => (
+              <Typography color={color} variant={variant} intensity={intensity}>
+                {variant} x {color} x {intensity}
               </Typography>
             ))}
-          </>
+          </Grid>
         ))}
-      </Grid>
-    </>
-  );
-};
+      </>
+    ))}
+  </Grid>
+);
 
-export const Showcase = Template.bind({});
+export const Default = Template.bind({});
 
-Showcase.args = {
+Default.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
+  color: 'primary',
+  intensity: 900,
 };
 
-Showcase.parameters = {
+Default.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
 };
