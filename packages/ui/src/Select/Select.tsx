@@ -1,28 +1,41 @@
+import {
+  FormControl,
+  InputLabel,
+  Select as MuiSelect,
+  SelectProps as MuiSelectProps,
+} from '@mui/material';
 import React, { ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
-import { TextField } from '../TextField';
 import { Tag } from '../Tag';
+import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
 
-import { Placeholder, ProgressWrapper, TagsWrapper } from './styled';
-import { SelectProps } from './types';
+import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
 
-export const Select = ({
-  multiple,
-  loading,
-  placeholder,
+export type SelectProps<Value> = MuiSelectProps<Value> & {
+  loading?: boolean;
+  placeholder?: string;
+  getOptionLabel?: (value: string | number) => string | number;
+  helperText?: string;
+  success?: boolean;
+  error?: boolean;
+  label: string;
+};
+
+export const Select = <Value,>({
   getOptionLabel = (value) => value,
+  placeholder,
   helperText,
+  loading,
   success,
   children,
-  label,
   error,
+  label,
   ...props
-}: SelectProps) => {
-  // unknown, т.к. ts ругается на несоответствие типов. По-умолчанию в selectedOptions string или string[].
-  const renderValue = (selectedOptions: unknown): ReactNode => {
+}: SelectProps<Value>) => {
+  const renderValue = (selectedOptions: Value): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
         <TagsWrapper>
@@ -48,29 +61,27 @@ export const Select = ({
   const isNoData = !Boolean(React.Children.count(children));
 
   return (
-    <TextField
-      select
-      label={label}
-      helperText={helperText}
-      error={error}
-      success={success}
-      SelectProps={{
-        ...props,
-        multiple,
-        renderValue,
-        displayEmpty: true,
-        IconComponent: ChevronDOutlineMd,
-      }}
-    >
-      <Placeholder value="">placeholder</Placeholder>
-
-      {loading && (
-        <ProgressWrapper>
-          <CircularProgress color="primary" />
-        </ProgressWrapper>
-      )}
-      {!loading && children}
-      {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}
-    </TextField>
+    <FormControl error={error}>
+      <InputLabel htmlFor="grouped-select">{label}</InputLabel>
+      <MuiSelect
+        {...props}
+        label={label}
+        renderValue={renderValue}
+        IconComponent={ChevronDOutlineMd}
+        displayEmpty
+      >
+        <Placeholder value="">{placeholder}</Placeholder>
+        {loading && (
+          <ProgressWrapper>
+            <CircularProgress color="primary" />
+          </ProgressWrapper>
+        )}
+        {!loading && children}
+        {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}
+      </MuiSelect>
+      <FormHelperText error={error} success={success}>
+        {helperText}
+      </FormHelperText>
+    </FormControl>
   );
 };
