@@ -76,7 +76,7 @@ const DatePickerInner = forwardRef<
       (value: string) => {
         setMaskedDate(value);
 
-        const date = parseDate(value);
+        const date = parseDate(value, mask);
 
         if (value === '' || !isDate(date)) {
           setSelectedDate(null);
@@ -88,6 +88,7 @@ const DatePickerInner = forwardRef<
     );
 
     const handleDayPick = (date: Date) => {
+      console.log(date, formatDate(date, mask));
       setMaskedDate(formatDate(date, mask));
       setSelectedDate(date);
       closePopper();
