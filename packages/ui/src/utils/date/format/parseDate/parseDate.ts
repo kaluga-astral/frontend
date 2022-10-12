@@ -15,8 +15,12 @@ const orderMap: ElementsMap = {
 /**
  * @description утилита конвертации строковой даты созданной по маске обратно в Date
  */
-export const parseDate = (date: string, mask: DateMask): Date => {
-  const dateArr = date.split('.');
+export const parseDate = (
+  date: string,
+  mask: DateMask,
+  separator = '.',
+): Date => {
+  const dateArr = date.split(separator);
   const options: BuildIsoDateStringOptions = { year: 1900 };
 
   mask.split('.').forEach((element, index) => {
