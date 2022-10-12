@@ -1,6 +1,6 @@
 const shell = require('shelljs');
 
-const { DIST_DIR_NAME } = require('../constants');
+const { DIST_DIR_NAME } = require('../../constants');
 
 const publish = () => {
   console.log('Starting publish...');

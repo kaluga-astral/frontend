@@ -1,7 +1,7 @@
 import { forwardRef, useMemo } from 'react';
 import MuiTextField from '@mui/material/TextField';
 
-import { FormHelperText } from '../FormHelperText';
+import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
 
 import { TextFieldProps } from './types';
 
@@ -26,11 +26,17 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
     const helperText = useMemo(() => {
       if (success) {
-        return <FormHelperText success>{helperTextProp}</FormHelperText>;
+        return (
+          <FormHelperTextContent success>
+            {helperTextProp}
+          </FormHelperTextContent>
+        );
       }
 
       if (error) {
-        return <FormHelperText error>{helperTextProp}</FormHelperText>;
+        return (
+          <FormHelperTextContent error>{helperTextProp}</FormHelperTextContent>
+        );
       }
 
       if (helperTextProp) {

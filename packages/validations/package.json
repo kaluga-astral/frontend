@@ -8,7 +8,8 @@
     "publish": "npm publish ./lib",
     "tests": "jest --passWithNoTests",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
   "dependencies": {
     "lodash.isempty": "^4.4.0"

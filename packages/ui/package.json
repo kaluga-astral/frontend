@@ -11,8 +11,10 @@
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "tests": "jest --passWithNoTests",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "lint:styles": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint --fix",
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@astral/icons": "^0.31.0",
@@ -25,7 +27,6 @@
     "@mui/material": "^5.8.4",
     "date-fns": "^2.28.0",
     "lodash-es": "^4.17.21",
-    "nanoid": "^4.0.0",
     "react-datepicker": "4.7.0",
     "react-imask": "^6.4.2",
     "react-toastify": "9.0.3",
