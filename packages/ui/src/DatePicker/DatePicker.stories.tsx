@@ -1,27 +1,52 @@
 import { Story } from '@storybook/react';
-import { addDays, subDays } from 'date-fns';
-import { useState } from 'react';
 
-import { DatePicker, DatePickerProps } from './DatePicker';
+import { Grid } from '../Grid';
+import { addDays, buildIsoDate } from '../utils/date';
+
+import { DatePicker, DatePickerProps } from './index';
 
 export default {
-  title: 'Components/DatePicker',
+  title: 'Components/DatePickers/DefaultDatePicker',
   component: DatePicker,
 };
 
-const TIMESTAMP_VALUE = 1659012063771;
+const normalizedCurrentDate = buildIsoDate({
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
+  day: new Date().getDate(),
+  hour: 1,
+});
 
-const Template: Story<DatePickerProps> = (args) => {
-  const [value, setValue] = useState<Date>(
-    addDays(new Date(TIMESTAMP_VALUE), 180),
-  );
+const Template: Story<DatePickerProps> = (args) => <DatePicker {...args} />;
 
-  const handleChange = (date: Date) => {
-    setValue(date);
-  };
-
-  return <DatePicker {...args} value={value} onChange={handleChange} />;
-};
+export const Showcase: Story = () => (
+  <Grid container spacing={6} autoFlow="row">
+    <DatePicker inputProps={{ label: 'Все по умолчанию' }} />
+    <DatePicker
+      inputProps={{ label: 'maxDate меньше текущей' }}
+      maxDate={addDays(normalizedCurrentDate, -90)}
+    />
+    <DatePicker
+      inputProps={{ label: 'minDate больше текущей' }}
+      minDate={addDays(normalizedCurrentDate, 90)}
+    />
+    <DatePicker
+      inputProps={{ label: 'Узкий диапазон выбора' }}
+      minDate={buildIsoDate({ year: 2022, month: 6, day: 30 })}
+      maxDate={buildIsoDate({ year: 2022, month: 7, day: 10 })}
+    />
+    <DatePicker
+      inputProps={{ label: 'minDate больше текущей + Узкий диапазон выбора' }}
+      minDate={addDays(normalizedCurrentDate, 90)}
+      maxDate={addDays(normalizedCurrentDate, 100)}
+    />
+    <DatePicker
+      inputProps={{ label: 'maxDate меньше текущей + Узкий диапазон выбора' }}
+      minDate={addDays(normalizedCurrentDate, -90)}
+      maxDate={addDays(normalizedCurrentDate, -80)}
+    />
+  </Grid>
+);
 
 export const Default = Template.bind({});
 
@@ -33,8 +58,6 @@ Default.args = {
     placeholder: 'Выберите дату',
   },
   disabled: false,
-  minDate: subDays(new Date(TIMESTAMP_VALUE), 90),
-  maxDate: addDays(new Date(TIMESTAMP_VALUE), 90),
 };
 
 Default.parameters = {

@@ -25,7 +25,7 @@
     "@types/react-dom": "^18.0.5",
     "chromatic": "^6.2.0",
     "commitlint": "^17.0.3",
-    "eslint": "^8.17.0",
+    "eslint": "8.17.0",
     "husky": "^4.3.8",
     "lint-staged": "^11.1.2",
     "prettier": "^2.6.2",
@@ -50,7 +50,7 @@
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && start-storybook -p 6006",
-    "build-storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && set NODE_OPTIONS=--max_old_space_size=3072 && build-storybook",
+    "build-storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && set NODE_OPTIONS=--max_old_space_size=4072 && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9",
     "lint": "npm run lint:all --workspaces --if-present",
     "lint:types": "npm run lint:types --workspaces --if-present",
