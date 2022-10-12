@@ -17,6 +17,10 @@ export const LoadingButtonWrapper = styled(LoadingButton, {
     variant === ButtonVariants.Link ? 'auto' : ''};
   padding: ${({ variant }) => (variant === ButtonVariants.Link ? 0 : '')};
 
+  :active {
+    box-shadow: none;
+  }
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
     height: ${getButtonHeightMobile};
     padding: ${getButtonPaddingMobile};
