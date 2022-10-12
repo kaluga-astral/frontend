@@ -56,7 +56,7 @@ export const Typography: React.FC<TypographyProps> = forwardRef<
     }
 
     return colorName;
-  }, [color]);
+  }, [color, intensity]);
 
   return (
     <MuiTypography ref={ref} {...props} color={typographyColor}>
