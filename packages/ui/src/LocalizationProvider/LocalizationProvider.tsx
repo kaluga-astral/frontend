@@ -1,14 +1,17 @@
+import { PropsWithChildren } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider as MuiLocalizationProvider } from '@mui/lab';
-import { FC } from 'react';
-import { ru } from 'date-fns/locale';
+import { LocalizationProviderProps as MuiLocalizationProviderProps } from '@mui/lab';
 
-import { LocalizationProviderProps } from './types';
+export type LocalizationProviderProps = Omit<
+  MuiLocalizationProviderProps,
+  'dateAdapter'
+>;
 
-export const LocalizationProvider: FC<LocalizationProviderProps> = ({
+export const LocalizationProvider = ({
   children,
-  locale = ru,
-}) => {
+  locale = 'ru',
+}: PropsWithChildren<LocalizationProviderProps>) => {
   return (
     <MuiLocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
       {children}

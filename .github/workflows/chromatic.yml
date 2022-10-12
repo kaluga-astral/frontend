@@ -34,7 +34,7 @@ jobs:
 
       - name: Publish to Chromatic
         env:
-          NODE_OPTIONS: --max-old-space-size=3072
+          NODE_OPTIONS: --max-old-space-size=4072
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
