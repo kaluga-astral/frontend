@@ -1,7 +1,8 @@
-import { isDate as fnsIsDate } from 'date-fns';
+import dayjs from 'dayjs';
+
+type Unknown = null | undefined | string | number | Date;
 
 /**
  * @description функция проверки значения на дату
  */
-export const isDate = (value: unknown): value is Date =>
-  fnsIsDate(value) && !isNaN(Number(value));
+export const isDate = (value: Unknown): value is Date => dayjs(value).isValid();

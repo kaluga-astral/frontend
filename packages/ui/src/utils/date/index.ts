@@ -12,4 +12,4 @@ export * from './isDateOutOfRange';
 
 export * from './areDatesSame';
 
-export * from './maskDate';
+export * from './format';

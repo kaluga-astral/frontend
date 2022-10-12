@@ -14,9 +14,9 @@ import { useToggle } from '../hooks/useToggle';
 import {
   DateMask,
   areDatesSame,
-  dateToMask,
+  formatDate,
   isDate,
-  maskToDate,
+  parseDate,
 } from '../utils/date';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
@@ -76,7 +76,7 @@ const DatePickerInner = forwardRef<
       (value: string) => {
         setMaskedDate(value);
 
-        const date = maskToDate(value);
+        const date = parseDate(value);
 
         if (value === '' || !isDate(date)) {
           setSelectedDate(null);
@@ -88,7 +88,7 @@ const DatePickerInner = forwardRef<
     );
 
     const handleDayPick = (date: Date) => {
-      setMaskedDate(dateToMask(date, mask));
+      setMaskedDate(formatDate(date, mask));
       setSelectedDate(date);
       closePopper();
     };

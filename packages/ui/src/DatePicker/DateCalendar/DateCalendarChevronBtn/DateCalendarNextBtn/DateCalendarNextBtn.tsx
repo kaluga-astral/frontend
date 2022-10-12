@@ -1,10 +1,10 @@
 import { NextOutlineMd } from '@astral/icons';
 import { forwardRef, useContext } from 'react';
 
-import { ConfigContext } from '../../../ConfigProvider';
+import { ConfigContext } from '../../../../ConfigProvider';
+import { DateCalendarChevronBtnProps } from '../types';
 
 import { DateCalendarNextBtnWrapper } from './styles';
-import { DateCalendarChevronBtnProps } from './types';
 
 export const DateCalendarNextBtn = forwardRef<
   HTMLButtonElement,

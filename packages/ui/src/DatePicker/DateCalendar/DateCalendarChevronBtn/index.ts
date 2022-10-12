@@ -1,3 +1,3 @@
-export * from './DateCalendarNextBtn';
+export * from './DateCalendarNextBtn/DateCalendarNextBtn';
 
-export * from './DateCalendarPrevBtn';
+export * from './DateCalendarPrevBtn/DateCalendarPrevBtn';
