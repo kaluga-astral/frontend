@@ -8,8 +8,16 @@ export default {
   component: Typography,
 };
 
-const intensities: TypographyProps['intensity'][] = [
-  900, 800, 700, 600, 500, 400, 300, 200, 100,
+const intensities: TypographyProps['colorIntensity'][] = [
+  '900',
+  '800',
+  '700',
+  '600',
+  '500',
+  '400',
+  '300',
+  '200',
+  '100',
 ];
 
 const variants: TypographyProps['variant'][] = [
@@ -71,7 +79,11 @@ export const Showcase = () => (
               {variant} x {color}
             </Typography>
             {intensities?.map((intensity) => (
-              <Typography color={color} variant={variant} intensity={intensity}>
+              <Typography
+                color={color}
+                variant={variant}
+                colorIntensity={intensity}
+              >
                 {variant} x {color} x {intensity}
               </Typography>
             ))}

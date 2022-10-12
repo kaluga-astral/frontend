@@ -11,7 +11,16 @@ import { Theme } from '../theme';
 
 import { TypographyColors } from './enums';
 
-type Intensity = 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100;
+type Intensity =
+  | '900'
+  | '800'
+  | '700'
+  | '600'
+  | '500'
+  | '400'
+  | '300'
+  | '200'
+  | '100';
 
 export type TypographyColor = keyof typeof TypographyColors;
 
@@ -22,7 +31,13 @@ export type TypographyProps = Omit<
   variant?: Variant | keyof TypographyPropsVariantOverrides;
   component?: React.ElementType;
   color?: TypographyColor | ((theme: Theme) => string);
-  intensity?: Intensity;
+  /**
+   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
+   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
+   * @default undefined
+   * @example <Typography color="grey" colorIntensity="500" />
+   */
+  colorIntensity?: Intensity;
 };
 
 declare module '@mui/material/Typography' {
@@ -42,7 +57,7 @@ declare module '@mui/material/Typography' {
 export const Typography: React.FC<TypographyProps> = forwardRef<
   HTMLElement,
   TypographyProps
->(({ children, color, intensity, ...props }, ref) => {
+>(({ children, color, colorIntensity, ...props }, ref) => {
   const typographyColor = useMemo(() => {
     if (typeof color === 'function') {
       return color;
@@ -50,13 +65,13 @@ export const Typography: React.FC<TypographyProps> = forwardRef<
 
     const colorName = (color && TypographyColors[color]) || color;
 
-    if (colorName && typeof intensity === 'number') {
+    if (colorName && Boolean(colorIntensity)) {
       return (theme: Theme) =>
-        theme.palette[colorName]?.[intensity] || colorName;
+        theme.palette[colorName]?.[colorIntensity as string] || colorName;
     }
 
     return colorName;
-  }, [color, intensity]);
+  }, [color, colorIntensity]);
 
   return (
     <MuiTypography ref={ref} {...props} color={typographyColor}>
