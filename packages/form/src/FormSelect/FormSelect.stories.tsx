@@ -5,10 +5,10 @@ import { FormStoryContainer } from '../docs';
 import { SubmitButton } from '../SubmitButton';
 import { useForm } from '../hooks';
 
-import { FormSelectField } from './FormSelectField';
+import { FormSelect } from './FormSelect';
 
 export default {
-  title: 'Form/FormSelectField',
+  title: 'Form/FormSelect',
   component: null,
 };
 
@@ -74,7 +74,7 @@ const Template: Story = () => {
 
   return (
     <FormStoryContainer form={form}>
-      <FormSelectField
+      <FormSelect
         control={form.control}
         name="multiline"
         title="Form select field"
@@ -83,15 +83,15 @@ const Template: Story = () => {
         multiple
       >
         {renderMultipleOptions()}
-      </FormSelectField>
-      <FormSelectField
+      </FormSelect>
+      <FormSelect
         control={form.control}
         name="single"
         title="Form select field"
         rules={{ required: 'Обязательное поле' }}
       >
         {renderSingleOptions()}
-      </FormSelectField>
+      </FormSelect>
       <SubmitButton>Submit</SubmitButton>
     </FormStoryContainer>
   );
