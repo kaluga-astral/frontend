@@ -12,7 +12,11 @@ import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
 
-import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
+import {
+  SelectPlaceholder,
+  SelectProgressWrapper,
+  SelectTagsWrapper,
+} from './styles';
 
 export type SelectProps<Value> = MuiSelectProps<Value> & {
   loading?: boolean;
@@ -38,13 +42,13 @@ export const Select = <Value,>({
   const renderValue = (selectedOptions: Value): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
-        <TagsWrapper>
+        <SelectTagsWrapper>
           {selectedOptions.map((option) => {
             const optionLabel = getOptionLabel(option);
 
             return <Tag key={option} color="grey" label={optionLabel} />;
           })}
-        </TagsWrapper>
+        </SelectTagsWrapper>
       );
     }
 
@@ -70,11 +74,11 @@ export const Select = <Value,>({
         IconComponent={ChevronDOutlineMd}
         displayEmpty
       >
-        <Placeholder value="">{placeholder}</Placeholder>
+        <SelectPlaceholder value="">{placeholder}</SelectPlaceholder>
         {loading && (
-          <ProgressWrapper>
+          <SelectProgressWrapper>
             <CircularProgress color="primary" />
-          </ProgressWrapper>
+          </SelectProgressWrapper>
         )}
         {!loading && children}
         {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}
