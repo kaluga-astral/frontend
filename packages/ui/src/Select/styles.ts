@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
 
-export const TagsWrapper = styled.div`
+export const SelectTagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: -${({ theme }) => theme.spacing(1)};
@@ -21,7 +21,7 @@ export const TagsWrapper = styled.div`
   }
 `;
 
-export const ProgressWrapper = styled.div`
+export const SelectProgressWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +34,6 @@ export const ProgressWrapper = styled.div`
   }
 `;
 
-export const Placeholder = styled(MenuItem)`
+export const SelectPlaceholder = styled(MenuItem)`
   display: none;
 `;

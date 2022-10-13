@@ -8,6 +8,8 @@ export * from './FormTextArea';
 
 export * from './FormCheckbox';
 
+export * from './FormSelect';
+
 export * from './FormTextField';
 
 export * from './SubmitButton';
