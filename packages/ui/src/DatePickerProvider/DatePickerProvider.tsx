@@ -1,13 +1,13 @@
-import { ConfigContext } from '../ConfigProvider';
-import { ConfigProvider } from '../ConfigProvider';
+import { PropsWithChildren } from 'react';
 
-/*
- * @deprecated Компонент будет удален с выходом версии 2.0. Используйте ConfigProvider
- */
-const DatePickerContext = ConfigContext;
-/*
- * @deprecated Компонент будет удален с выходом версии 2.0. Используйте ConfigProvider
- */
-const DatePickerProvider = ConfigProvider;
+type DatePickerProviderProps = {
+  //eslint-disable-next-line
+  locale?: any;
+};
 
-export { DatePickerContext, DatePickerProvider };
+/**
+ * @deprecated отказываемся от использования в пользу ConfigProvider
+ */
+export const DatePickerProvider = ({
+  children,
+}: PropsWithChildren<DatePickerProviderProps>) => <>{children}</>;
