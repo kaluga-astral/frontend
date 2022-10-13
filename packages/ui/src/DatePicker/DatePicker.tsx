@@ -41,6 +41,7 @@ export type DatePickerProps = MondayFirst &
     onClose?: () => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
+    defaultValue?: Date;
   };
 
 const DatePickerInner = forwardRef<
@@ -57,6 +58,7 @@ const DatePickerInner = forwardRef<
       isMondayFirst,
       inputProps,
       disabled,
+      defaultValue,
     },
     forwardedRef,
   ) => {
@@ -66,7 +68,9 @@ const DatePickerInner = forwardRef<
       onActive: onOpen,
       onInactive: onClose,
     });
-    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>();
+    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>(
+      defaultValue,
+    );
     const [maskedDate, setMaskedDate] = useState('');
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
