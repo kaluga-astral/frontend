@@ -23,18 +23,18 @@ const OPTIONS: string[] = [
   'Value 8',
 ];
 
-const MULTIPLE_OPTIONS: Array<{ value: number; name: string }> = [
-  { value: 1, name: 'Валерий 1' },
-  { value: 2, name: 'Валерий 2' },
-  { value: 3, name: 'Валерий 3' },
-  { value: 4, name: 'Валерий 4' },
-  { value: 5, name: 'Валерий 5' },
+const MULTIPLE_OPTIONS: Array<{ value: string; name: string }> = [
+  { value: '1', name: 'Валерий 1' },
+  { value: '2', name: 'Валерий 2' },
+  { value: '3', name: 'Валерий 3' },
+  { value: '4', name: 'Валерий 4' },
+  { value: '5', name: 'Валерий 5' },
 ];
 
 const Template: Story = (args) => {
   const [singleValue, setSingleValue] = useState('');
-  const handleSingleChange = (event: SelectChangeEvent<HTMLInputElement>) => {
-    setSingleValue((event.target as HTMLInputElement).value);
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
+    setSingleValue(event.target.value);
   };
 
   const renderSingleOptions = () => {
@@ -49,9 +49,7 @@ const Template: Story = (args) => {
     <Stack maxWidth={300}>
       <Select
         {...args}
-        // ?
-        // Type '(event: SelectChangeEvent<HTMLInputElement>) => void' is not assignable to type '(event: SelectChangeEvent<unknown>, child: ReactNode) => void'.
-        // @ts-ignore
+        label="Select"
         onChange={handleSingleChange}
         value={singleValue}
         placeholder="Выберите вариант"
@@ -74,14 +72,17 @@ Default.parameters = {
 
 export const Showcase: Story = () => {
   const [singleValue, setSingleValue] = React.useState('');
-  const [multipleValue, setMultipleValue] = React.useState<number[]>([]);
+  const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
 
-  // @ts-ignore
-  const handleMultipleChange = (event) => setMultipleValue(event.target.value);
+  const handleMultipleChange = (
+    event: SelectChangeEvent<typeof multipleValue>,
+  ) => {
+    setMultipleValue(event.target.value as string[]);
+  };
 
-  // @ts-ignore
-  const handleSingleChange = (event) => setSingleValue(event.target.value);
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) =>
+    setSingleValue(event.target.value);
 
   const handleFetchOptions = () => {
     setLoading(true);

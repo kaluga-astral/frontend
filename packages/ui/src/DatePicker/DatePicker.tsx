@@ -41,6 +41,7 @@ export type DatePickerProps = MondayFirst &
     onClose?: () => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
+    value?: Date;
   };
 
 const DatePickerInner = forwardRef<
@@ -57,6 +58,7 @@ const DatePickerInner = forwardRef<
       isMondayFirst,
       inputProps,
       disabled,
+      value: parentValue,
     },
     forwardedRef,
   ) => {
@@ -66,17 +68,21 @@ const DatePickerInner = forwardRef<
       onActive: onOpen,
       onInactive: onClose,
     });
-    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>();
+    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>(
+      parentValue,
+    );
     const [maskedDate, setMaskedDate] = useState('');
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const selectedBaseDate = useSelectedBaseDate(selectedDate);
 
     const checkValue = useCallback(
-      (value: string) => {
-        setMaskedDate(value);
+      (value: string | Date) => {
+        const isString = typeof value === 'string';
 
-        const date = parseDate(value);
+        setMaskedDate(isString ? value : formatDate(value, mask));
+
+        const date = isString ? parseDate(value, mask) : value;
 
         if (value === '' || !isDate(date)) {
           setSelectedDate(null);
@@ -97,6 +103,8 @@ const DatePickerInner = forwardRef<
       () => onChange?.(selectedDate || maskedDate),
       [selectedDate, maskedDate],
     );
+
+    useEffect(() => checkValue(parentValue || ''), [parentValue]);
 
     const blurHandler = (e: FocusEvent<HTMLInputElement>) => {
       checkValue(e.target.value);
