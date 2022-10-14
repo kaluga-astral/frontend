@@ -256,7 +256,7 @@ export const getButtonHeightMobile = ({
   size,
 }: ButtonBaseWrapperThemeProps): string => {
   if (size === ButtonSizes.Small) {
-    return '32px';
+    return '36px';
   }
 
   return '48px';
