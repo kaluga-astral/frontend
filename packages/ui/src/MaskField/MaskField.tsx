@@ -11,6 +11,16 @@ type MaskProps = IMaskInputProps<
   HTMLInputElement
 >;
 
+export type MaskBlocks = Record<
+  string,
+  {
+    mask: typeof IMask.MaskedRange;
+    from: number;
+    to: number;
+    maxLength: number;
+  }
+>;
+
 export type MaskFieldProps = Omit<
   Omit<
     MaskProps,
@@ -34,6 +44,10 @@ export type MaskFieldProps = Omit<
    * Кастомные определения (definitions) для более точной настройки маски
    */
   definitions?: IMask.MaskedPattern.Definitions;
+  /**
+   * Сущность работающая в комбинации с пропсом `mask`, позволяет делать динамическую маску, в которой при удалении элементов, они заменяются подчеркиванием вместо смещения всего значения
+   */
+  blocks?: MaskBlocks;
 };
 
 const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
