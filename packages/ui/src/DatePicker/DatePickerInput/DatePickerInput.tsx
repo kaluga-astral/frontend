@@ -1,8 +1,9 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { IMask } from 'react-imask';
+import { ChangeEvent, forwardRef, useMemo } from 'react';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
-import { MaskFieldProps } from '../../MaskField';
+import { MaskBlocks, MaskFieldProps } from '../../MaskField';
 
 import { DatePickerInputWrapper } from './styles';
 
@@ -11,30 +12,50 @@ type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
 };
 
-const ALL_LETTERS = /\w/g;
-
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, onChange, onNativeChange, mask, ...props }, ref) => (
-  <DatePickerInputWrapper
-    {...props}
-    ref={ref}
-    onClick={onClick}
-    // заменяем все буквы из маски на нули, потому что MaskField умеет работать только с цифрами
-    mask={mask?.replace(ALL_LETTERS, '0')}
-    autofix={false}
-    fullWidth
-    InputProps={{
-      onChange: onNativeChange,
-      endAdornment: (
-        <InputAdornment position="end" disablePointerEvents>
-          <CalendarOutlineMd />
-        </InputAdornment>
-      ),
-    }}
-    inputProps={{
-      ref,
-    }}
-  />
-));
+>(({ onClick, onChange, onNativeChange, mask, ...props }, ref) => {
+  const [normalizedMask, maskBlocks] = useMemo(() => {
+    // маска maskField соглашается работать только с разделителями имеющими символ "`" (косая кавычка) перед заменяемым элементом
+    const nMask = mask?.replace('.', '.`');
+
+    const blocks: MaskBlocks = {};
+
+    mask.split('.').forEach((key) => {
+      const to = Number(String.prototype.padStart(key.length, '9'));
+
+      blocks[key] = {
+        mask: IMask.MaskedRange,
+        from: 0,
+        to,
+        maxLength: key.length,
+      };
+    });
+
+    return [nMask, blocks];
+  }, [mask]);
+
+  return (
+    <DatePickerInputWrapper
+      {...props}
+      ref={ref}
+      onClick={onClick}
+      mask={normalizedMask}
+      blocks={maskBlocks}
+      autofix={false}
+      fullWidth
+      InputProps={{
+        onChange: onNativeChange,
+        endAdornment: (
+          <InputAdornment position="end" disablePointerEvents>
+            <CalendarOutlineMd />
+          </InputAdornment>
+        ),
+      }}
+      inputProps={{
+        ref,
+      }}
+    />
+  );
+});
