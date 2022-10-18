@@ -38,7 +38,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
       const date = buildIsoDate({ year, month: i + 1 });
 
       grid.push({
-        date: addMonths(startDate, i),
+        date,
         selected: selectedMonth === i && selectedYear === year,
         month: i + 1,
         isCurrent: i === currentMonth && year === currentYear,
