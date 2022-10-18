@@ -22,6 +22,7 @@ const Template: Story<DatePickerProps> = (args) => <DatePicker {...args} />;
 export const Showcase: Story = () => (
   <Grid container spacing={6} autoFlow="row">
     <DatePicker inputProps={{ label: 'Все по умолчанию' }} />
+    <DatePicker inputProps={{ label: 'Контролируемый' }} value={new Date()} />
     <DatePicker
       inputProps={{ label: 'maxDate меньше текущей' }}
       maxDate={addDays(normalizedCurrentDate, -90)}
