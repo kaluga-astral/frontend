@@ -3,7 +3,7 @@
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
-    "../ui/src/declaration/**/*.ts"
+    "declarations/*.d.ts"
   ],
   "exclude": [
     "node_modules",
