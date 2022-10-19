@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FocusEvent,
+  SyntheticEvent,
   forwardRef,
   useCallback,
   useContext,
@@ -9,8 +10,7 @@ import {
 } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { useForwardedRef } from '../hooks/useForwardedRef';
-import { useToggle } from '../hooks/useToggle';
+import { useForwardedRef, useToggle } from '../hooks';
 import {
   DateMask,
   areDatesSame,
@@ -18,6 +18,7 @@ import {
   isDate,
   parseDate,
 } from '../utils/date';
+import { Reason } from '../BackdropStack';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';
@@ -38,7 +39,10 @@ export type DatePickerProps = MondayFirst &
     onChange?: (date: Date | string | null | undefined) => void;
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
     onOpen?: () => void;
-    onClose?: () => void;
+    onClose?: (
+      _?: SyntheticEvent<Element, Event> | Event,
+      reason?: Reason,
+    ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
     value?: Date;
@@ -96,7 +100,7 @@ const DatePickerInner = forwardRef<
     const handleDayPick = (date: Date) => {
       setMaskedDate(formatDate(date, mask));
       setSelectedDate(date);
-      closePopper();
+      closePopper(undefined, 'selectOption');
     };
 
     useEffect(

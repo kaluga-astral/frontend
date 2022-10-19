@@ -1,14 +1,18 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, SyntheticEvent } from 'react';
 import { PopperProps } from '@mui/material';
 
 import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
+import { Reason } from '../../BackdropStack';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
 export type DatePickerProps = PropsWithChildren<
   Omit<PopperProps, 'children'>
 > & {
-  onClose?: () => void;
+  onClose?: (
+    _?: SyntheticEvent<Element, Event> | Event,
+    reason?: Reason,
+  ) => void;
 };
 
 export const DatePickerPopper = ({
@@ -16,7 +20,11 @@ export const DatePickerPopper = ({
   onClose,
   ...props
 }: DatePickerProps) => {
-  useEscapeClickEffect({ onEscape: onClose, isActive: props.open });
+  useEscapeClickEffect({
+    onEscape: onClose,
+    isActive: props.open,
+    preventBubbling: true,
+  });
 
   return (
     <PopperWrapper

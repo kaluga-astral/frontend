@@ -28,7 +28,10 @@ type ReturnElements = {
   /**
    * @description метод вызываемый при закрытии элемента, внутри него определяется состояние isOpened
    */
-  handleClose: (event: SyntheticEvent<Element, Event>, reason?: Reason) => void;
+  handleClose: (
+    event?: SyntheticEvent<Element, Event> | Event | {},
+    reason?: Reason,
+  ) => void;
 };
 
 type UseBackdropStackToggleFunc = (options?: Options) => ReturnElements;
@@ -49,7 +52,10 @@ export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
     setOpened(true);
   };
 
-  const handleClose = (_: SyntheticEvent<Element, Event>, reason?: Reason) => {
+  const handleClose = (
+    _?: SyntheticEvent<Element, Event> | Event | {},
+    reason?: Reason,
+  ) => {
     setOpened(!pop(id.current, reason));
   };
 

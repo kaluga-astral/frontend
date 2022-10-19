@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+
+import { Reason } from '../../BackdropStack';
 
 type OpenHandler = () => void;
-type CloseHandler = () => void;
+type CloseHandler = (
+  _?: SyntheticEvent<Element, Event> | Event,
+  reason?: Reason,
+) => void;
 
 type UseToggleResultTuple = [boolean, OpenHandler, CloseHandler];
 
@@ -9,7 +14,7 @@ type UseToggleOptions =
   | {
       initialState?: boolean;
       onActive?: () => void;
-      onInactive?: () => void;
+      onInactive?: CloseHandler;
     }
   | undefined;
 
@@ -26,9 +31,9 @@ export const useToggle = (params: UseToggleOptions): UseToggleResultTuple => {
     onActive?.();
   };
 
-  const handleInactive = () => {
+  const handleInactive: CloseHandler = (_, reason) => {
     setActive(false);
-    onInactive?.();
+    onInactive?.(_, reason);
   };
 
   return [isActive, handleActive, handleInactive];
