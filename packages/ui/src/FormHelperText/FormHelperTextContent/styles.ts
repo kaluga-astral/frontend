@@ -15,7 +15,10 @@ type WrapperProps = {
   error?: boolean;
 };
 
+// flex необходим, для того, чтобы span не менял высоту полей и имел фиксированную высоту в 16px
 export const FormHelperTextWrapper = styled.span<WrapperProps>`
+  display: flex;
+
   color: ${({ success, error, theme }) => {
     if (success) {
       return theme.palette.success.dark;
