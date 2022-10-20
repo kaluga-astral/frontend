@@ -40,7 +40,7 @@ export type DatePickerProps = MondayFirst &
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
     onOpen?: () => void;
     onClose?: (
-      _?: SyntheticEvent<Element, Event> | Event,
+      event?: SyntheticEvent<Element, Event> | Event,
       reason?: Reason,
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
