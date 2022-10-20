@@ -6,7 +6,7 @@ export type UseEscapeClickEffectProps = {
   /**
    * @description колбэк который будет вызываться при нажатии на кнопку `esc`
    */
-  onEscape?: (_: Event, reason: Reason) => void;
+  onEscape?: (event: Event, reason: Reason) => void;
   /**
    * @description флаг активности
    */
