@@ -4,7 +4,7 @@ import { Reason } from '../../BackdropStack';
 
 type OpenHandler = () => void;
 type CloseHandler = (
-  _?: SyntheticEvent<Element, Event> | Event,
+  event?: SyntheticEvent<Element, Event> | Event,
   reason?: Reason,
 ) => void;
 
