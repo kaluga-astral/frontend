@@ -1,9 +1,7 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
-import {
-  Reason,
-  backdropStackManager,
-} from '../../services/BackdropStackManager';
+import { backdropStackManager } from '../../services/BackdropStackManager';
+import { Reason } from '../../../types';
 /**
  * @description необязательные настройки для использоввания хука
  */

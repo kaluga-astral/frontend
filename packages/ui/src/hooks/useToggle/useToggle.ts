@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
 
-import { Reason } from '../../BackdropStack';
+import { Reason } from '../../types';
 
 type OpenHandler = () => void;
 type CloseHandler = (

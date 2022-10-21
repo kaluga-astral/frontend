@@ -18,7 +18,7 @@ import {
   isDate,
   parseDate,
 } from '../utils/date';
-import { Reason } from '../BackdropStack';
+import { Reason } from '../types';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';

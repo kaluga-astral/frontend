@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Reason } from '../../BackdropStack';
+import { Reason } from '../../types';
 
 export type UseEscapeClickEffectProps = {
   /**

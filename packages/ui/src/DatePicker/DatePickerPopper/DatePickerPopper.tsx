@@ -2,7 +2,7 @@ import { PropsWithChildren, SyntheticEvent } from 'react';
 import { PopperProps } from '@mui/material';
 
 import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
-import { Reason } from '../../BackdropStack';
+import { Reason } from '../../types';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
