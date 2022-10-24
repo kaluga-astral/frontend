@@ -74,7 +74,7 @@ const SelectExample = () => {
   );
 };
 
-const DatepickerExample = () => {
+const DatePickerExample = () => {
   const { handleOpen, handleClose } = useBackdropStackToggle();
 
   return <DatePicker onOpen={handleOpen} onClose={handleClose} />;
@@ -110,7 +110,7 @@ const PopupExample = ({ index }: IndexedProps) => {
           </div>
           <SelectExample />
           <AutocompleteExample />
-          <DatepickerExample />
+          <DatePickerExample />
           {isOpened && <PopupExample index={index + 1} />}
         </Box>
       </Popover>
@@ -161,7 +161,7 @@ const Template: Story<{}> = () => {
           </div>
           <SelectExample />
           <AutocompleteExample />
-          <DatepickerExample />
+          <DatePickerExample />
           <PopupExample index={0} />
         </Box>
       </Dialog>
