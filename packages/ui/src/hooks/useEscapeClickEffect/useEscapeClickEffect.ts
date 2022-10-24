@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-type UseEscapeClickEffectProps = {
+import { Reason } from '../../types';
+
+export type UseEscapeClickEffectProps = {
   /**
    * @description колбэк который будет вызываться при нажатии на кнопку `esc`
    */
-  onEscape?: () => void;
+  onEscape?: (event: Event, reason: Reason) => void;
   /**
    * @description флаг активности
    */
@@ -35,14 +37,14 @@ export const useEscapeClickEffect = ({
           e.stopImmediatePropagation();
         }
 
-        onEscape?.();
+        onEscape?.(e, 'escape');
       }
     };
 
-    window.addEventListener('keydown', onKeydown);
+    window.addEventListener('keydown', onKeydown, true);
 
     return () => {
-      window.removeEventListener('keydown', onKeydown);
+      window.removeEventListener('keydown', onKeydown, true);
     };
   }, [isActive]);
 };
