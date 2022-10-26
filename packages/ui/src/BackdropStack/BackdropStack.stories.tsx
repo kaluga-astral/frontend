@@ -8,6 +8,7 @@ import { Dialog } from '../Dialog';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
 import { useBackdropStackToggle } from '../BackdropStack';
+import { DatePicker } from '../DatePicker';
 
 export default {
   title: 'Components/BackdropStack',
@@ -73,6 +74,12 @@ const SelectExample = () => {
   );
 };
 
+const DatePickerExample = () => {
+  const { handleOpen, handleClose } = useBackdropStackToggle();
+
+  return <DatePicker onOpen={handleOpen} onClose={handleClose} />;
+};
+
 const PopupExample = ({ index }: IndexedProps) => {
   const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
   const ref = useRef<HTMLButtonElement>(null);
@@ -103,6 +110,7 @@ const PopupExample = ({ index }: IndexedProps) => {
           </div>
           <SelectExample />
           <AutocompleteExample />
+          <DatePickerExample />
           {isOpened && <PopupExample index={index + 1} />}
         </Box>
       </Popover>
@@ -153,6 +161,7 @@ const Template: Story<{}> = () => {
           </div>
           <SelectExample />
           <AutocompleteExample />
+          <DatePickerExample />
           <PopupExample index={0} />
         </Box>
       </Dialog>

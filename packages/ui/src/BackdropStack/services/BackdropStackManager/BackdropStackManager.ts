@@ -1,17 +1,9 @@
-import { AutocompleteCloseReason } from '@mui/base/AutocompleteUnstyled/useAutocomplete';
+import { Reason } from '../../../types';
 
 type PopId = string;
 type PointerId = string | null;
 
 type PopTuple = [Reason | undefined, PointerId];
-
-export type Reason =
-  | 'escapeKeyDown'
-  | 'backdropClick'
-  | 'toggleInput'
-  | 'blur'
-  | AutocompleteCloseReason
-  | null;
 
 class BackdropStackManager {
   private stack: PopId[] = [];
