@@ -92,6 +92,13 @@ export const Autocomplete = <
     [getOptionLabel],
   );
 
+  const isOptionEqualToValue = useCallback(
+    (option: AutocompleteValueProps, value: AutocompleteValueProps) => {
+      return JSON.stringify(option) === JSON.stringify(value);
+    },
+    [],
+  );
+
   const renderInput = useCallback(
     (inputParams: AutocompleteRenderInputParams) => (
       <TextField
@@ -150,6 +157,7 @@ export const Autocomplete = <
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
       clearIcon={<CrossSmOutlineSm />}
+      isOptionEqualToValue={isOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText="Нет данных"
     />
