@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { FC, MouseEventHandler, PropsWithChildren, useState } from 'react';
+import { MouseEventHandler, PropsWithChildren, useState } from 'react';
 import NoCertificates from '@astral/illustrations/src/no-certificates.svg';
 
 import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
@@ -19,7 +19,7 @@ const BaseContentContainer = styled(Grid)`
   border: 1px solid gray;
 `;
 
-const BaseContent: FC<PropsWithChildren> = ({ children }) => {
+const BaseContent = ({ children }: PropsWithChildren<{}>) => {
   return (
     <BaseContentContainer
       alignContent="center"
@@ -31,9 +31,9 @@ const BaseContent: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-const Form: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> = ({
+const Form = ({
   onClick,
-}) => {
+}: PropsWithChildren<{ onClick: MouseEventHandler<HTMLButtonElement> }>) => {
   return (
     <>
       <TextField label="Название" />

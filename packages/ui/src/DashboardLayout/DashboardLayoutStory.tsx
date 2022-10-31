@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import { DashboardLayout } from '../DashboardLayout';
 
 import { HeaderProps } from './Header';
@@ -10,7 +8,7 @@ export type DashboardLayoutStoryProps = {
   sidebar: SidebarProps;
 };
 
-export const DashboardLayoutStory: FC<DashboardLayoutStoryProps> = (props) => {
+export const DashboardLayoutStory = (props: DashboardLayoutStoryProps) => {
   const { header, sidebar } = props;
 
   return (
