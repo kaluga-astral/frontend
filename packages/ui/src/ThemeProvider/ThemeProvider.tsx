@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
@@ -10,7 +10,7 @@ export type ThemeProviderProps = {
   children: ReactNode;
 };
 
-export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
+export const ThemeProvider = (props: PropsWithChildren<ThemeProviderProps>) => {
   const { theme, children } = props;
 
   return (

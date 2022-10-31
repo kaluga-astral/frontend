@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { ButtonProps } from '../Button';
 
 export type ProductProps = ButtonProps & {
-  logo: FC;
+  logo: (props: PropsWithChildren<{}>) => JSX.Element;
   name: string;
 };

@@ -1,4 +1,7 @@
+import { PropsWithChildren } from 'react';
 import { AvatarProps, MenuProps } from '@mui/material';
+
+import { WithoutEmotionSpecific } from '../types';
 
 export type ProfileProps = {
   /**
@@ -16,5 +19,7 @@ export type ProfileProps = {
   /**
    * Выпадающее меню
    */
-  menu: React.FC<MenuProps>;
+  menu: (
+    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
+  ) => JSX.Element;
 };

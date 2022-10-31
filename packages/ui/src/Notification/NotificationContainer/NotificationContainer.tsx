@@ -1,4 +1,3 @@
-import { VFC } from 'react';
 import { ToastContainer, ToastContainerProps } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
@@ -12,9 +11,7 @@ if (typeof window !== 'undefined') {
 
 export interface NotificationContainerProps extends ToastContainerProps {}
 
-export const NotificationContainer: VFC<NotificationContainerProps> = (
-  props,
-) => {
+export const NotificationContainer = (props: NotificationContainerProps) => {
   return (
     <ToastContainerStyled>
       <ToastContainer

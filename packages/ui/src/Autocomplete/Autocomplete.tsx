@@ -17,6 +17,7 @@ import {
   OverflowTypography,
   OverflowedElementProps,
 } from '../OverflowTypography';
+import { WithoutEmotionSpecific } from '../types';
 
 import {
   AutocompleteSizes,
@@ -31,11 +32,13 @@ export type AutocompleteProps<
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 > = Omit<
-  MuiAutocompleteProps<
-    AutocompleteValueProps,
-    Multiple,
-    DisableClearable,
-    FreeSolo
+  WithoutEmotionSpecific<
+    MuiAutocompleteProps<
+      AutocompleteValueProps,
+      Multiple,
+      DisableClearable,
+      FreeSolo
+    >
   >,
   'size' | 'renderInput'
 > &

@@ -1,5 +1,7 @@
 import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
 
+import { WithoutEmotionSpecific } from '../types';
+
 import {
   ButtonColors,
   ButtonSizes,
@@ -17,7 +19,7 @@ export type ButtonSize = `${ButtonSizes}`;
 export type ButtonState = `${ButtonStates}`;
 
 export type BaseButtonProps = Omit<
-  ButtonUnstyledProps,
+  WithoutEmotionSpecific<ButtonUnstyledProps>,
   'color' | 'variant' | 'size'
 > & {
   color?: ButtonColor;

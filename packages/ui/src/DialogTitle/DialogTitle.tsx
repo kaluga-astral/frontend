@@ -7,8 +7,9 @@ import { CrossOutlineMd } from '@astral/icons';
 import { MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
+import { WithoutEmotionSpecific } from '../types';
 
-export type DialogTitleProps = MuiDialogTitleProps & {
+export type DialogTitleProps = WithoutEmotionSpecific<MuiDialogTitleProps> & {
   onClose?: ModalProps['onClose'];
 };
 

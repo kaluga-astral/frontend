@@ -10,11 +10,12 @@ import { ReactNode } from 'react';
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 import { Collapse } from '../Collapse';
+import { WithoutEmotionSpecific } from '../types';
 
 import { StyledAlert } from './styles';
 
 export type AlertProps = Omit<
-  MuiAlertProps,
+  WithoutEmotionSpecific<MuiAlertProps>,
   'variant' | 'action' | 'color' | 'iconMapping'
 > & {
   /**

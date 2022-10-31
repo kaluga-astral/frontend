@@ -1,9 +1,12 @@
 import {
-  DialogActionsProps,
   DialogActions as MuiDialogActions,
+  DialogActionsProps as MuiDialogActionsProps,
 } from '@mui/material';
 
 import { Grid } from '../Grid';
+import { WithoutEmotionSpecific } from '../types';
+
+export type DialogActionsProps = WithoutEmotionSpecific<MuiDialogActionsProps>;
 
 export const DialogActions = ({
   children,

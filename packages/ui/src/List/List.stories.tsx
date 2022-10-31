@@ -171,7 +171,7 @@ const Template: Story = () => {
       <List
         subheader={
           <ListSubheader
-            sx={{
+            style={{
               display: 'flex',
               alignItems: 'center',
             }}

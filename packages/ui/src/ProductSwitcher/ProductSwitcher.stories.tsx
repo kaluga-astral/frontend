@@ -117,7 +117,7 @@ const header = {
       alt: 'Григорьев Виталий',
       children: 'ГВ',
     },
-    menu: () => null,
+    menu: () => null as unknown as JSX.Element,
   },
 };
 

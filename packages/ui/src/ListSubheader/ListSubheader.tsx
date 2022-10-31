@@ -1,5 +1,12 @@
-import { ListSubheader, ListSubheaderProps } from '@mui/material';
+import {
+  ListSubheader as MuiListSubheader,
+  ListSubheaderProps as MuiListSubheaderProps,
+} from '@mui/material';
 
-export { ListSubheader };
+import { WithoutEmotionSpecific } from '../types';
 
-export type { ListSubheaderProps };
+export type ListSubheaderProps = WithoutEmotionSpecific<MuiListSubheaderProps>;
+
+export const ListSubheader = (props: ListSubheaderProps) => (
+  <MuiListSubheader {...props} />
+);

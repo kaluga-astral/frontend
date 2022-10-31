@@ -2,12 +2,12 @@ import { PropsWithChildren, SyntheticEvent } from 'react';
 import { PopperProps } from '@mui/material';
 
 import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
-import { Reason } from '../../types';
+import { Reason, WithoutEmotionSpecific } from '../../types';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
 export type DatePickerProps = PropsWithChildren<
-  Omit<PopperProps, 'children'>
+  Omit<WithoutEmotionSpecific<PopperProps>, 'children'>
 > & {
   onClose?: (
     _?: SyntheticEvent<Element, Event> | Event,

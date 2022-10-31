@@ -11,6 +11,7 @@ import { Tag } from '../Tag';
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
+import { WithoutEmotionSpecific } from '../types';
 
 import {
   SelectPlaceholder,
@@ -18,7 +19,9 @@ import {
   SelectTagsWrapper,
 } from './styles';
 
-export type SelectProps<Value> = MuiSelectProps<Value> & {
+export type SelectProps<Value> = WithoutEmotionSpecific<
+  MuiSelectProps<Value>
+> & {
   loading?: boolean;
   placeholder?: string;
   getOptionLabel?: (value: string | number) => string | number;

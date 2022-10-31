@@ -1,5 +1,7 @@
 import { DrawerProps as MuiDrawerProps } from '@mui/material';
 
-export type SideDialogProps = MuiDrawerProps & {
+import { WithoutEmotionSpecific } from '../types';
+
+export type SideDialogProps = WithoutEmotionSpecific<MuiDrawerProps> & {
   title: string;
 };

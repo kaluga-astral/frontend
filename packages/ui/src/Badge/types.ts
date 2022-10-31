@@ -1,5 +1,7 @@
 import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
 
+import { WithoutEmotionSpecific } from '../types';
+
 export type BadgeColor =
   | 'primary'
   | 'grey'
@@ -8,6 +10,9 @@ export type BadgeColor =
   | 'error'
   | 'success';
 
-export type BadgeProps = Omit<MuiBadgeProps, 'color'> & {
+export type BadgeProps = Omit<
+  WithoutEmotionSpecific<MuiBadgeProps>,
+  'color'
+> & {
   color: BadgeColor;
 };

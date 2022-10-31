@@ -1,5 +1,10 @@
-import { TableRow, TableRowProps } from '@mui/material';
+import {
+  TableRow as MuiTableRow,
+  TableRowProps as MuiTableRowProps,
+} from '@mui/material';
 
-export { TableRow };
+import { WithoutEmotionSpecific } from '../../types';
 
-export type { TableRowProps };
+export type TableRowProps = WithoutEmotionSpecific<MuiTableRowProps>;
+
+export const TableRow = (props: TableRowProps) => <MuiTableRow {...props} />;

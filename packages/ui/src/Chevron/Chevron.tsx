@@ -1,5 +1,7 @@
 import { SvgIconProps } from '@mui/material';
 
+import { WithoutEmotionSpecific } from '../types';
+
 import { ChevronWrapper } from './styles';
 
 export const Chevron = (props: ChevronProps): JSX.Element => (
@@ -7,6 +9,6 @@ export const Chevron = (props: ChevronProps): JSX.Element => (
 );
 
 export type ChevronProps = { isActive?: boolean; className?: string } & Omit<
-  SvgIconProps,
-  'children' | 'classes' | 'ref' | 'sx'
+  WithoutEmotionSpecific<SvgIconProps>,
+  'children' | 'classes' | 'ref'
 >;

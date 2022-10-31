@@ -2,8 +2,10 @@ import { ElementType, forwardRef } from 'react';
 import { ListItemButton as MuiListItemButton } from '@mui/material';
 import { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material/ListItemButton/ListItemButton';
 
+import { WithoutEmotionSpecific } from '../types';
+
 export type ListItemButtonProps = Omit<
-  MuiListItemButtonProps,
+  WithoutEmotionSpecific<MuiListItemButtonProps>,
   'disableRipple'
 > & {
   component?: ElementType;
