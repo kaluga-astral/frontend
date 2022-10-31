@@ -8,6 +8,7 @@ import { Variant } from '@mui/material/styles/createTypography';
 import React, { forwardRef, useMemo } from 'react';
 
 import { Theme } from '../theme';
+import { WithoutEmotionSpecific } from '../types';
 
 import { TypographyColors } from './enums';
 
@@ -25,7 +26,7 @@ type Intensity =
 export type TypographyColor = keyof typeof TypographyColors;
 
 export type TypographyProps = Omit<
-  OverrideProps<TypographyTypeMap, React.ElementType>,
+  OverrideProps<WithoutEmotionSpecific<TypographyTypeMap>, React.ElementType>,
   'variant' | 'color'
 > & {
   variant?: Variant | keyof TypographyPropsVariantOverrides;

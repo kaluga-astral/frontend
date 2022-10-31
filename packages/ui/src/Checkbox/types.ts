@@ -1,3 +1,8 @@
 import { CheckboxProps as MuiCheckboxProps } from '@mui/material';
 
-export type CheckboxProps = Omit<MuiCheckboxProps, 'size' | 'color'>;
+import { WithoutEmotionSpecific } from '../types';
+
+export type CheckboxProps = Omit<
+  WithoutEmotionSpecific<MuiCheckboxProps>,
+  'size' | 'color'
+>;

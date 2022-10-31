@@ -1,8 +1,13 @@
 import {
-  ListItemSecondaryAction,
-  ListItemSecondaryActionProps,
+  ListItemSecondaryAction as MuiListItemSecondaryAction,
+  ListItemSecondaryActionProps as MuiListItemSecondaryActionProps,
 } from '@mui/material';
 
-export { ListItemSecondaryAction };
+import { WithoutEmotionSpecific } from '../types';
 
-export type { ListItemSecondaryActionProps };
+export type ListItemSecondaryActionProps =
+  WithoutEmotionSpecific<MuiListItemSecondaryActionProps>;
+
+export const ListItemSecondaryAction = (
+  props: ListItemSecondaryActionProps,
+) => <MuiListItemSecondaryAction {...props} />;

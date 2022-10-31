@@ -4,12 +4,15 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 
+import { WithoutEmotionSpecific } from '../types';
+
 import { FormHelperTextContent } from './FormHelperTextContent';
 
-export type FormHelperTextProps = MuiFormHelperTextProps & {
-  success?: boolean;
-  error?: boolean;
-};
+export type FormHelperTextProps =
+  WithoutEmotionSpecific<MuiFormHelperTextProps> & {
+    success?: boolean;
+    error?: boolean;
+  };
 
 export const FormHelperText: FC<FormHelperTextProps> = ({
   children,

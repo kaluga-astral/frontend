@@ -1,5 +1,7 @@
-import { Menu, MenuProps } from '@mui/material';
+import { Menu as MuiMenu, MenuProps as MuiMenuProps } from '@mui/material';
 
-export { Menu };
+import { WithoutEmotionSpecific } from '../types';
 
-export type { MenuProps };
+export type MenuProps = WithoutEmotionSpecific<MuiMenuProps>;
+
+export const Menu = (props: MenuProps) => <MuiMenu {...props} />;

@@ -1,3 +1,12 @@
-export { RadioGroup } from '@mui/material';
+import {
+  RadioGroup as MuiRadioGroup,
+  RadioGroupProps as MuiRadioGroupProps,
+} from '@mui/material';
 
-export type { RadioGroupProps } from '@mui/material';
+import { WithoutEmotionSpecific } from '../types';
+
+export type RadioGroupProps = WithoutEmotionSpecific<MuiRadioGroupProps>;
+
+export const RadioGroup = (props: RadioGroupProps) => (
+  <MuiRadioGroup {...props} />
+);

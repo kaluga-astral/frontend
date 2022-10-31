@@ -1,5 +1,10 @@
-import { Divider, DividerProps } from '@mui/material';
+import {
+  Divider as MuiDivider,
+  DividerProps as MuiDividerProps,
+} from '@mui/material';
 
-export { Divider };
+import { WithoutEmotionSpecific } from '../types';
 
-export type { DividerProps };
+export type DividerProps = WithoutEmotionSpecific<MuiDividerProps>;
+
+export const Divider = (props: DividerProps) => <MuiDivider {...props} />;

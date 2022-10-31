@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
 
+import { WithoutEmotionSpecific } from '../types';
+
 import {
   StyledSwipeableDrawer,
   SwipeableDrawerBody,
@@ -34,7 +36,7 @@ export type SwipeableDrawerProps = {
    * @description Высота шапки компонента и невидимого перетаскиваемого элемента.
    */
   drawerBleedingHeight?: number;
-} & MuiSwipeableDrawerProps;
+} & WithoutEmotionSpecific<MuiSwipeableDrawerProps>;
 
 export const SwipeableDrawer = ({
   drawerBleedingTitle,

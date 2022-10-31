@@ -14,7 +14,7 @@ declare module '@mui/material/CircularProgress' {
 }
 
 export type CircularProgressProps = WithoutEmotionSpecific<
-  Omit<MuiCircularProgressProps, 'color' | 'size'>
+  Omit<WithoutEmotionSpecific<MuiCircularProgressProps>, 'color' | 'size'>
 > & {
   /**
    * Цвет лоадера

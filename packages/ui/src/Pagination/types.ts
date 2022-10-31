@@ -1,3 +1,8 @@
 import { PaginationProps as MuiPaginationProps } from '@mui/material';
 
-export type PaginationProps = Omit<MuiPaginationProps, 'shape'>;
+import { WithoutEmotionSpecific } from '../types';
+
+export type PaginationProps = Omit<
+  WithoutEmotionSpecific<MuiPaginationProps>,
+  'shape'
+>;

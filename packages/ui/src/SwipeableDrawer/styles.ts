@@ -2,10 +2,10 @@ import {
   SwipeableDrawer,
   SwipeableDrawerProps,
   Typography,
-  TypographyProps,
 } from '@mui/material';
 
 import { styled } from '../styles';
+import { TypographyProps } from '../Typography';
 
 type SwipeableDrawerHeaderProps = {
   drawerBleedingHeight: number;

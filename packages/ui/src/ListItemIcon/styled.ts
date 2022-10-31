@@ -1,7 +1,7 @@
-import { ListItemIcon, ListItemIconProps } from '@mui/material';
+import { ListItemIcon } from '@mui/material';
 
 import { styled } from '../styles';
 
-export const StyledListItemIcon = styled(ListItemIcon)<ListItemIconProps>`
+export const StyledListItemIcon = styled(ListItemIcon)`
   color: ${({ theme }) => theme.palette.grey[900]};
 `;

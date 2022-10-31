@@ -1,5 +1,10 @@
-import { Collapse, CollapseProps } from '@mui/material';
+import {
+  Collapse as MuiCollapse,
+  CollapseProps as MuiCollapseProps,
+} from '@mui/material';
 
-export { Collapse };
+import { WithoutEmotionSpecific } from '../types';
 
-export type { CollapseProps };
+export type CollapseProps = WithoutEmotionSpecific<MuiCollapseProps>;
+
+export const Collapse = (props: CollapseProps) => <MuiCollapse {...props} />;

@@ -1,6 +1,11 @@
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
-export type TextFieldProps = Omit<MuiTextFieldProps, 'variant' | 'color'> & {
+import { WithoutEmotionSpecific } from '../types';
+
+export type TextFieldProps = Omit<
+  WithoutEmotionSpecific<MuiTextFieldProps>,
+  'variant' | 'color'
+> & {
   variant?: never;
   color?: never;
   success?: boolean;

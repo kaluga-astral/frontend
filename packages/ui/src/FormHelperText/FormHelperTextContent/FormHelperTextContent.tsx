@@ -13,11 +13,11 @@ export type FormHelperTextContentProps = {
   children?: ReactNode;
 };
 
-export const FormHelperTextContent: React.FC<FormHelperTextContentProps> = ({
+export const FormHelperTextContent = ({
   success,
   error,
   children,
-}) => {
+}: FormHelperTextContentProps) => {
   const Icon = useMemo(() => {
     if (success) {
       return <FormHelperTextSuccessIcon />;

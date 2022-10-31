@@ -1,6 +1,8 @@
 import { ElementType } from 'react';
 import { LoadingButtonProps } from '@mui/lab';
 
+import { WithoutEmotionSpecific } from '../types';
+
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     contained: true;
@@ -17,7 +19,10 @@ declare module '@mui/material/Button' {
   }
 }
 
-export type ButtonProps = Omit<LoadingButtonProps, 'variant' | 'color'> & {
+export type ButtonProps = Omit<
+  WithoutEmotionSpecific<LoadingButtonProps>,
+  'variant' | 'color'
+> & {
   variant?: 'contained' | 'light' | 'text' | 'link';
   color?: 'primary' | 'success' | 'warning' | 'error';
   // https://github.com/mui/material-ui/issues/30038

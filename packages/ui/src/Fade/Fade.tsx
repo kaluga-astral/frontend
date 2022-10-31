@@ -1,5 +1,5 @@
-import { Fade, FadeProps } from '@mui/material';
+import { Fade as MuiFade, FadeProps as MuiFadeProps } from '@mui/material';
 
-export { Fade };
+export type FadeProps = MuiFadeProps;
 
-export type { FadeProps };
+export const Fade = MuiFade;
