@@ -5,11 +5,6 @@ import { AutocompleteSizes } from '../../Autocomplete/constants';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
   styleOverrides: {
-    root({ theme }) {
-      return {
-        padding: theme.spacing(1),
-      };
-    },
     inputRoot({ theme, ownerState: { size } }) {
       return {
         paddingTop: `${theme.spacing(1)} !important`,
