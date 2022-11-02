@@ -80,7 +80,7 @@ export const Showcase = () => (
             </Typography>
             {intensities?.map((intensity) => (
               <Typography
-                ket={intensity}
+                key={intensity}
                 color={color}
                 variant={variant}
                 colorIntensity={intensity}
