@@ -28,7 +28,7 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   helperText?: string;
   success?: boolean;
   error?: boolean;
-  label: string;
+  label?: string;
 };
 
 export const Select = <Value,>({
@@ -69,10 +69,9 @@ export const Select = <Value,>({
 
   return (
     <FormControl error={error}>
-      <InputLabel htmlFor="grouped-select">{label}</InputLabel>
+      {label && <InputLabel htmlFor="grouped-select">{label}</InputLabel>}
       <MuiSelect
         {...props}
-        label={label}
         renderValue={renderValue}
         IconComponent={ChevronDOutlineMd}
         displayEmpty
