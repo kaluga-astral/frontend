@@ -29,11 +29,11 @@ export type PlaceholderProps = {
   /**
    * Заголовок
    */
-  title: ReactNode;
+  title: JSX.Element | JSX.Element[] | string;
   /**
    * Описание
    */
-  description?: ReactNode;
+  description?: JSX.Element | JSX.Element[] | string;
   /**
    * Действия
    */
