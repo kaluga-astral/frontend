@@ -82,13 +82,13 @@ export type ActionsCellProps<T> = {
   /**
    * Позиция тултипа
    */
-  placement?: TooltipProps['placement'];
+  tooltipPlacement?: TooltipProps['placement'];
 };
 
 export function ActionCell<T>({
   actions: { main = [], secondary = [] },
   row,
-  placement,
+  tooltipPlacement,
 }: ActionsCellProps<T>) {
   const handleActionClick =
     (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
@@ -102,7 +102,7 @@ export function ActionCell<T>({
         const { name, actions, icon } = action;
 
         return (
-          <Tooltip key={name} title={name} placement={placement}>
+          <Tooltip key={name} title={name} placement={tooltipPlacement}>
             <IconDropdownButton icon={icon} variant="text">
               {actions.map(({ name: nestedActionName, onClick }) => (
                 <MenuItem
@@ -120,7 +120,7 @@ export function ActionCell<T>({
       const { onClick, name, icon } = action;
 
       return (
-        <Tooltip key={name} title={name} placement={placement}>
+        <Tooltip key={name} title={name} placement={tooltipPlacement}>
           <IconButton variant="text" onClick={handleActionClick(onClick)}>
             {icon}
           </IconButton>
