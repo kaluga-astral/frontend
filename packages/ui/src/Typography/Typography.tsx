@@ -58,7 +58,7 @@ declare module '@mui/material/Typography' {
 export const Typography = forwardRef<
   HTMLElement,
   PropsWithChildren<TypographyProps>
->(({ children, color, colorIntensity = '900', ...props }, ref) => {
+>(({ children, color, colorIntensity = '800', ...props }, ref) => {
   const typographyColor = useMemo(() => {
     if (typeof color === 'function') {
       return color;
