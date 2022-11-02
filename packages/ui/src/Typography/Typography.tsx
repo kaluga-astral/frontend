@@ -64,11 +64,22 @@ export const Typography = forwardRef<
       return color;
     }
 
-    if (color && TypographyColors[color]) {
-      const getMainColor = (theme: Theme) => theme.palette[color]?.main;
+    // получаем название цвета по TypographyColors
+    const colorName = color && TypographyColors[color];
 
-      return (theme: Theme) =>
-        theme.palette[color]?.[colorIntensity as string] || getMainColor(theme);
+    if (colorName) {
+      return (theme: Theme) => {
+        // если такой цвет есть в палитре, то ищем его intensity
+        // или возвращаем main цвет (если для данного цвета не определены intensity)
+        // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
+        // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
+
+        return (
+          theme.palette[colorName]?.[colorIntensity as string] ||
+          theme.palette[colorName]?.main ||
+          colorName
+        );
+      };
     }
 
     return;

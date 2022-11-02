@@ -70,6 +70,7 @@ export const Showcase = () => (
       <>
         {colors.map((color) => (
           <Grid
+            key={color}
             height="100%"
             justifyContent="space-between"
             container
