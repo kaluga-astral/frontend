@@ -58,20 +58,20 @@ declare module '@mui/material/Typography' {
 export const Typography = forwardRef<
   HTMLElement,
   PropsWithChildren<TypographyProps>
->(({ children, color, colorIntensity, ...props }, ref) => {
+>(({ children, color, colorIntensity = '900', ...props }, ref) => {
   const typographyColor = useMemo(() => {
     if (typeof color === 'function') {
       return color;
     }
 
-    const colorName = (color && TypographyColors[color]) || color;
+    if (color && TypographyColors[color]) {
+      const getMainColor = (theme: Theme) => theme.palette[color]?.main;
 
-    if (colorName && Boolean(colorIntensity)) {
       return (theme: Theme) =>
-        theme.palette[colorName]?.[colorIntensity as string] || colorName;
+        theme.palette[color]?.[colorIntensity as string] || getMainColor(theme);
     }
 
-    return colorName;
+    return;
   }, [color, colorIntensity]);
 
   return (
