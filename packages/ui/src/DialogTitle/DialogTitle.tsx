@@ -1,5 +1,6 @@
 import {
   ModalProps,
+  DialogTitle as MuiDialogTitle,
   DialogTitleProps as MuiDialogTitleProps,
 } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
@@ -7,8 +8,6 @@ import { MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
 import { WithoutEmotionSpecific } from '../types';
-
-import { DialogTitleStyled } from './styles';
 
 export type DialogTitleProps = WithoutEmotionSpecific<MuiDialogTitleProps> & {
   onClose?: ModalProps['onClose'];
@@ -28,7 +27,7 @@ export const DialogTitle = ({
   };
 
   return (
-    <DialogTitleStyled {...props}>
+    <MuiDialogTitle {...props}>
       {children}
       {onClose && (
         <IconButton
@@ -39,6 +38,6 @@ export const DialogTitle = ({
           <CrossOutlineMd />
         </IconButton>
       )}
-    </DialogTitleStyled>
+    </MuiDialogTitle>
   );
 };
