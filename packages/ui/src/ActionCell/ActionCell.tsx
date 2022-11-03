@@ -4,7 +4,7 @@ import { ReactNode, useCallback, useMemo } from 'react';
 import { IconButton } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
 import { MenuItem } from '../MenuItem';
-import { Tooltip } from '../Tooltip';
+import { Tooltip, TooltipProps } from '../Tooltip';
 
 import { ActionCellWrapper } from './styles';
 
@@ -79,11 +79,16 @@ export type ActionsCellProps<T> = {
    * Данные строки из DataGrid
    */
   row: T;
+  /**
+   * Позиция тултипа
+   */
+  tooltipPlacement?: TooltipProps['placement'];
 };
 
 export function ActionCell<T>({
   actions: { main = [], secondary = [] },
   row,
+  tooltipPlacement,
 }: ActionsCellProps<T>) {
   const handleActionClick =
     (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
@@ -97,7 +102,7 @@ export function ActionCell<T>({
         const { name, actions, icon } = action;
 
         return (
-          <Tooltip key={name} title={name}>
+          <Tooltip key={name} title={name} placement={tooltipPlacement}>
             <IconDropdownButton icon={icon} variant="text">
               {actions.map(({ name: nestedActionName, onClick }) => (
                 <MenuItem
@@ -115,7 +120,7 @@ export function ActionCell<T>({
       const { onClick, name, icon } = action;
 
       return (
-        <Tooltip key={name} title={name}>
+        <Tooltip key={name} title={name} placement={tooltipPlacement}>
           <IconButton variant="text" onClick={handleActionClick(onClick)}>
             {icon}
           </IconButton>
