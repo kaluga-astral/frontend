@@ -1,6 +1,5 @@
-import ButtonUnstyled, {
-  buttonUnstyledClasses,
-} from '@mui/base/ButtonUnstyled';
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
+import { buttonClasses } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
@@ -317,14 +316,14 @@ export const ButtonBaseWrapper = styled(ButtonUnstyled, {
     outline: none;
   }
 
-  &.${buttonUnstyledClasses.disabled} {
+  &.${buttonClasses.disabled} {
     color: ${({ theme }) => theme.palette.grey['500']};
 
     background-color: ${getDisabledBgColor};
     cursor: unset;
   }
 
-  &.${buttonUnstyledClasses.focusVisible} {
+  &.${buttonClasses.focusVisible} {
     outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 `;

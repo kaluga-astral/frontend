@@ -20,7 +20,7 @@ export const Default: Story = () => {
         description={
           <>
             Текст для пользователя,{' '}
-            <Typography variant="ui" style={{ color: 'red' }}>
+            <Typography color="error" variant="ui">
               разъясняющий
             </Typography>{' '}
             принципы работы раздела или подсказки по работе в нем.

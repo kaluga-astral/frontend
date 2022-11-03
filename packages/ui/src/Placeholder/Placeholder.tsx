@@ -13,11 +13,11 @@ export type PlaceholderProps = {
   /**
    * Ссылка на изображение
    */
-  imgSrc: string;
+  imgSrc?: string;
   /**
-   * Описание изображения
+   * Описание изображения (атрибут alt)
    */
-  imgAlt: string;
+  imgAlt?: string;
   /**
    * ширина изображения
    */
@@ -29,11 +29,11 @@ export type PlaceholderProps = {
   /**
    * Заголовок
    */
-  title: string;
+  title: JSX.Element | JSX.Element[] | string;
   /**
    * Описание
    */
-  description?: string | ReactNode;
+  description?: JSX.Element | JSX.Element[] | string;
   /**
    * Действия
    */
@@ -52,12 +52,14 @@ export const Placeholder = ({
   return (
     <PlaceholderRoot>
       <PlaceholderInnerContainer>
-        <PlaceholderImage
-          src={imgSrc}
-          alt={imgAlt}
-          width={imgWidth}
-          height={imgHeight}
-        />
+        {imgSrc && (
+          <PlaceholderImage
+            src={imgSrc}
+            alt={imgAlt}
+            width={imgWidth}
+            height={imgHeight}
+          />
+        )}
         <PlaceholderTitle variant="h4">{title}</PlaceholderTitle>
         {description && (
           <PlaceholderDescription variant="ui">
