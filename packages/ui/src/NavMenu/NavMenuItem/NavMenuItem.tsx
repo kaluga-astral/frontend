@@ -8,9 +8,8 @@ import {
 
 import { Collapse } from '../../Collapse';
 
-import { NavMenuItemListProps } from './NavMenuItemList/NavMenuItemList';
+import { NavMenuItemList, NavMenuItemListProps } from './NavMenuItemList';
 import { NavMenuItemButton } from './NavMenuItemButton';
-import { NavMenuItemList } from './NavMenuItemList/NavMenuItemList';
 
 export type NavMenuItemProps = {
   collapsedIn: boolean;
