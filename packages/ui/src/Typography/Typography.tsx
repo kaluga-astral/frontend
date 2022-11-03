@@ -58,20 +58,31 @@ declare module '@mui/material/Typography' {
 export const Typography = forwardRef<
   HTMLElement,
   PropsWithChildren<TypographyProps>
->(({ children, color, colorIntensity, ...props }, ref) => {
+>(({ children, color, colorIntensity = '800', ...props }, ref) => {
   const typographyColor = useMemo(() => {
     if (typeof color === 'function') {
       return color;
     }
 
-    const colorName = (color && TypographyColors[color]) || color;
+    // получаем название цвета по TypographyColors
+    const colorName = color && TypographyColors[color];
 
-    if (colorName && Boolean(colorIntensity)) {
-      return (theme: Theme) =>
-        theme.palette[colorName]?.[colorIntensity as string] || colorName;
+    if (colorName) {
+      return (theme: Theme) => {
+        // если такой цвет есть в палитре, то ищем его intensity
+        // или возвращаем main цвет (если для данного цвета не определены intensity)
+        // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
+        // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
+
+        return (
+          theme.palette[colorName]?.[colorIntensity as string] ||
+          theme.palette[colorName]?.main ||
+          colorName
+        );
+      };
     }
 
-    return colorName;
+    return;
   }, [color, colorIntensity]);
 
   return (

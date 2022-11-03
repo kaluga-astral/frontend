@@ -70,6 +70,7 @@ export const Showcase = () => (
       <>
         {colors.map((color) => (
           <Grid
+            key={color}
             height="100%"
             justifyContent="space-between"
             container
@@ -80,6 +81,7 @@ export const Showcase = () => (
             </Typography>
             {intensities?.map((intensity) => (
               <Typography
+                key={intensity}
                 color={color}
                 variant={variant}
                 colorIntensity={intensity}
