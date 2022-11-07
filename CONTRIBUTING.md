@@ -1,5 +1,7 @@
 # GIT
 
+Модель ветвления GIT описана [здесь](https://github.com/kaluga-astral/docs/blob/main/GIT.md).
+
 # Авторелизы
 
 Для проекта подключены авторелизы npm пакетов с помощью semantic-release.
