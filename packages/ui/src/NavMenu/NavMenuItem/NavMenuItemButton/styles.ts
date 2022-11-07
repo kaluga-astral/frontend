@@ -14,7 +14,7 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   transition: ${({ theme }) => {
     return theme.transitions.create('color', {
       easing: theme.transitions.easing.easeIn,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.shorter,
     }) ;
   }};
 
