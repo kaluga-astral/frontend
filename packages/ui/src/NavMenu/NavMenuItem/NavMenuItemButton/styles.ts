@@ -11,16 +11,17 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
 
   border-radius: ${({ theme }) => theme.shape.medium};
 
-  transition: ${({ theme }) => {
-    return theme.transitions.create('color', {
-      easing: theme.transitions.easing.easeIn,
-      duration: theme.transitions.duration.shorter,
-    }) ;
-  }};
-
   .MuiListItemIcon-root {
+
     color: ${({ theme, selected }) => {
       return selected ? theme.palette.primary['800'] : 'inherit';
+    }};
+
+    transition: ${({ theme }) => {
+      return theme.transitions.create('color', {
+        easing: theme.transitions.easing.easeIn,
+        duration: theme.transitions.duration.shortest,
+      }) ;
     }};
   }
 
