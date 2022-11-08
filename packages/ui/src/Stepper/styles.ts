@@ -1,8 +1,8 @@
 import { NextOutlineMd } from '@astral/icons';
 
-import { styled } from '..';
+import { styled } from '../styles';
 
-import { StepConnector } from '.';
+import { StepConnector } from './StepConnector';
 
 export const NextStepperConnector = styled(NextOutlineMd)`
   color: ${({ theme }) => theme.palette.grey[400]};
