@@ -7,15 +7,19 @@ type StyledTableContainerProps = TableContainerProps & {
   maxHeight?: number;
 };
 
-export const DataGridContainer = styled.div`
+export const DataGridContainer = styled.div<StyledTableContainerProps>`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
+  max-height: ${({ maxHeight }) => (maxHeight ? `${maxHeight}px` : 'initial')};
   overflow: hidden;
 `;
 
 export const StyledTableContainer = styled(TableContainer, {
   shouldForwardProp: (prop) => prop !== 'maxHeight',
 })<StyledTableContainerProps>`
-  position: relative;
-
-  max-height: ${({ maxHeight }) => `${maxHeight}px` || 'auto'};
+  height: 100%;
 `;

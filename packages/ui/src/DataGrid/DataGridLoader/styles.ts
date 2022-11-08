@@ -3,12 +3,18 @@ import { LinearProgress } from '@mui/material';
 import { Divider } from '../../Divider';
 import { styled } from '../../styles';
 
-export const Backdrop = styled.div`
+type BackdropProps = {
+  withFooter: boolean;
+  footerHeight: number;
+};
+
+export const Backdrop = styled.div<BackdropProps>`
   position: absolute;
   top: 0;
 
   width: 100%;
-  height: 100%;
+  height: ${({ withFooter, footerHeight }) =>
+    withFooter ? `calc(100% - ${footerHeight}px) ` : '100%'};
 
   background-color: ${({ theme }) => theme.palette.grey['100']};
   opacity: 0.6;
