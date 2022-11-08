@@ -5,7 +5,21 @@ on:
     branches: [main]
 
 jobs:
+  # Устанавливает should_skip в true, если одновременно запускается два релиза
+  checkConcurrentRelease:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          concurrent_skipping: 'always'
+          skip_after_successful_duplicate: 'true'
+
   releasePackages:
+    needs: checkConcurrentRelease
+    if: needs.pre_job.outputs.should_skip != 'true'
     name: Release packages
     runs-on: ubuntu-latest
     steps:
@@ -26,73 +40,82 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Build всех пакетов
       - name: Build @astral/ui
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/ui
         env:
           # NEXT_VERSION устанавливается в semantic-release.config.js
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
-      - name: Publish @astral/ui
-        if: env.CURRENT_VERSION != env.NEXT_VERSION
-        run: npm publish ./packages/ui/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/icons
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/icons
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
-      - name: Publish @astral/icons
-        if: env.CURRENT_VERSION != env.NEXT_VERSION
-        run: npm publish ./packages/icons/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/fonts
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/fonts
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
-      - name: Publish @astral/fonts
-        if: env.CURRENT_VERSION != env.NEXT_VERSION
-        run: npm publish ./packages/fonts/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/illustrations
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/illustrations
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
-      - name: Publish @astral/illustrations
-        if: env.CURRENT_VERSION != env.NEXT_VERSION
-        run: npm publish ./packages/illustrations/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/validations
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/validations
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
-      - name: Publish @astral/validations
-        if: env.CURRENT_VERSION != env.NEXT_VERSION
-        run: npm publish ./packages/validations/lib
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Build @astral/form
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/form
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
+
+      # Паблишинг всех пакетов
+      - name: Publish @astral/ui
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/ui/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/icons
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/icons/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/fonts
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/fonts/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/illustrations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/illustrations/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/validations
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/validations/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Publish @astral/form
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/form/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      # Нотификация в telegram
       - name: send telegram message on release
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         uses: appleboy/telegram-action@master
