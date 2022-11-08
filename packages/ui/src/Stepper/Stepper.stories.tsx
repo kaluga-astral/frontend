@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Step, Stepper } from '.';
+import { Step, StepLabel, Stepper } from '.';
 
 export default {
   title: 'Components/Stepper',
@@ -12,10 +12,18 @@ const Template: Story = () => {
   return (
     <Box>
       <Stepper activeStep={2}>
-        <Step>Completed</Step>
-        <Step error>Error</Step>
-        <Step>Select</Step>
-        <Step>Default</Step>
+        <Step>
+          <StepLabel>Completed</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel error>Error</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Select</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Default</StepLabel>
+        </Step>
       </Stepper>
     </Box>
   );

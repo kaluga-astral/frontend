@@ -1,1 +1,1 @@
-export * from './Step';
+export { Step } from '@mui/material';
