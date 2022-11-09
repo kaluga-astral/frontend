@@ -1,9 +1,12 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { Stack } from '@mui/material';
 
 import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
+import { ExampleTemplate } from '../docs';
+import { Button } from '../Button';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
@@ -168,30 +171,6 @@ const data: DataType[] = [
     direction: 'РПН',
     createDate: '2022-03-24T17:50:40.206Z',
   },
-  {
-    id: '17',
-    documentName: 'Документ 13',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '18',
-    documentName: 'Документ 14',
-    direction: 'ФСС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '19',
-    documentName: 'Документ 15',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '20',
-    documentName: 'Документ 15',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
 ];
 
 const Template: Story = (args) => {
@@ -221,6 +200,16 @@ const Template: Story = (args) => {
     }, 1500);
   };
 
+  const handleReset = () => {
+    setSlicedData([]);
+    setLoading(true);
+
+    return setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setLoading(false);
+    }, 1500);
+  };
+
   const handleSelect = (rows: DataType[]) => setSelected(rows);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
@@ -229,33 +218,106 @@ const Template: Story = (args) => {
     setSorting(newSorting);
 
   return (
-    <DataGrid<DataType, SortField>
-      {...args}
-      keyId="id"
-      rows={slicedData}
-      columns={columns}
-      selectedRows={selected}
-      onSelectRow={handleSelect}
-      onRowClick={handleRowClick}
-      minDisplayRows={10}
-      loading={loading}
-      onSort={handleSort}
-      sorting={sorting}
-      Footer={
-        <DataGridPagination
-          totalCount={data.length}
-          onChange={handleChangePage}
-          page={page}
-        />
-      }
-    />
+    <ExampleTemplate>
+      <ExampleTemplate.Case
+        title="DataGrid без пагинации"
+        descriptionList={[
+          'Растягивается по всей доступной высоте котейнера (600px)',
+        ]}
+      >
+        <Stack
+          spacing={4}
+          sx={{ height: '600px', padding: '0 36px', alignItems: 'flex-end' }}
+        >
+          <Button onClick={handleReset}>Сбросить</Button>
+          <DataGrid<DataType, SortField>
+            {...args}
+            keyId="id"
+            rows={slicedData}
+            columns={columns}
+            selectedRows={selected}
+            onSelectRow={handleSelect}
+            onRowClick={handleRowClick}
+            loading={loading}
+            onSort={handleSort}
+            sorting={sorting}
+          />
+        </Stack>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title="DataGrid с пагинацией"
+        descriptionList={[
+          'Растягивается по всей доступной высоте котейнера (700px)',
+        ]}
+      >
+        <Stack
+          spacing={4}
+          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
+        >
+          <Button onClick={handleReset}>Сбросить</Button>
+          <DataGrid<DataType, SortField>
+            {...args}
+            keyId="id"
+            rows={slicedData}
+            columns={columns}
+            selectedRows={selected}
+            onSelectRow={handleSelect}
+            onRowClick={handleRowClick}
+            loading={loading}
+            onSort={handleSort}
+            sorting={sorting}
+            Footer={
+              <DataGridPagination
+                totalCount={data.length}
+                onChange={handleChangePage}
+                page={page}
+              />
+            }
+          />
+        </Stack>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title="DataGrid с пагинацией без данных"
+        descriptionList={[
+          'Растягивается по всей доступной высоте котейнера (700px)',
+        ]}
+      >
+        <Stack
+          spacing={4}
+          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
+        >
+          <Button onClick={handleReset}>Сбросить</Button>
+          <DataGrid<DataType, SortField>
+            {...args}
+            keyId="id"
+            rows={[]}
+            columns={columns}
+            selectedRows={selected}
+            onSelectRow={handleSelect}
+            onRowClick={handleRowClick}
+            loading={loading}
+            onSort={handleSort}
+            sorting={sorting}
+            Footer={
+              <DataGridPagination
+                totalCount={data.length}
+                onChange={handleChangePage}
+                page={page}
+              />
+            }
+          />
+        </Stack>
+      </ExampleTemplate.Case>
+    </ExampleTemplate>
   );
 };
 
 export const Default = Template.bind({});
 
 Default.parameters = {
-  options: { showPanel: true },
+  options: { showPanel: false },
   controls: { expanded: true },
 };
 

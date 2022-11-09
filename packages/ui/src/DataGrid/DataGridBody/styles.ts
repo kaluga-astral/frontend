@@ -9,5 +9,5 @@ export const StyledTableBody = styled(TableBody, {
   position: relative;
 
   height: ${({ empty, minDisplayRows }) =>
-    empty ? `${TABLE_ROW_HEIGHT * minDisplayRows}px` : 'auto'};
+    empty ? `${TABLE_ROW_HEIGHT * minDisplayRows}px` : '100%'};
 `;

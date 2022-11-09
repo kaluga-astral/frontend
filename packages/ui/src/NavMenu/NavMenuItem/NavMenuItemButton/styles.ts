@@ -12,7 +12,6 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   border-radius: ${({ theme }) => theme.shape.medium};
 
   .MuiListItemIcon-root {
-
     color: ${({ theme, selected }) => {
       return selected ? theme.palette.primary['800'] : 'inherit';
     }};
