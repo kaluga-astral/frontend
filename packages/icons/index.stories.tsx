@@ -77,9 +77,7 @@ const Icon = ({ component: Component, name, size, ...props }) => (
 
 const Template: Story = ({ color }: SvgIconProps) => {
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
+    <>
       <Grid key="fillmd" container>
         <Grid>
           <h2 style={{ textAlign: 'center' }}>Fill Md 24</h2>
@@ -156,7 +154,7 @@ const Template: Story = ({ color }: SvgIconProps) => {
           ))}
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 
