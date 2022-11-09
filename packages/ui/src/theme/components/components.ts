@@ -30,6 +30,7 @@ import { MuiTab } from './MuiTab';
 import { MuiTabs } from './MuiTabs';
 import { MuiStepLabel } from './MuiStepLabel';
 import { MuiStep } from './MuiStep';
+import { MuiStepConnector } from './MuiStepConnector';
 
 export type FontsUrls = {
   bold: {
@@ -128,4 +129,5 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiTabs,
   MuiStepLabel,
   MuiStep,
+  MuiStepConnector,
 });

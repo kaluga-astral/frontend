@@ -1,5 +1,6 @@
-import { Box } from '@mui/material';
 import { Story } from '@storybook/react';
+
+import { Grid, Typography } from '..';
 
 import { Step, StepLabel, Stepper } from '.';
 
@@ -10,22 +11,46 @@ export default {
 
 const Template: Story = () => {
   return (
-    <Box>
-      <Stepper activeStep={2}>
-        <Step>
-          <StepLabel>Completed</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel error>Error</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Select</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Default</StepLabel>
-        </Step>
-      </Stepper>
-    </Box>
+    <Grid container rowSpacing={10}>
+      <Grid>
+        <Typography paragraph variant="h4">
+          Stepper without line
+        </Typography>
+        <Stepper activeStep={2}>
+          <Step>
+            <StepLabel>Completed</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel error>Error</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Select</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Default</StepLabel>
+          </Step>
+        </Stepper>
+      </Grid>
+      <Grid>
+        <Typography paragraph variant="h4">
+          Stepper with line
+        </Typography>
+        <Stepper alternativeLabel activeStep={2}>
+          <Step>
+            <StepLabel>Completed</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel error>Error</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Select</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Default</StepLabel>
+          </Step>
+        </Stepper>
+      </Grid>
+    </Grid>
   );
 };
 

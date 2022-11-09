@@ -1,14 +1,15 @@
-import { SuccessFillMd } from '@astral/icons';
+import {
+  CircleErrorFillMd,
+  StepDefaultFillMd,
+  SuccessFillMd,
+} from '@astral/icons';
 import { StepIconProps } from '@mui/material';
-
-import { ErrorIcon } from './ErrorIcon';
-import { ActiveIcon, DefaultIcon } from './styles';
 
 export const StepIcon = (props: StepIconProps) => {
   const { active, completed, error } = props;
 
   if (error) {
-    return <ErrorIcon />;
+    return <CircleErrorFillMd color="error" />;
   }
 
   if (completed) {
@@ -16,8 +17,8 @@ export const StepIcon = (props: StepIconProps) => {
   }
 
   if (active) {
-    return <ActiveIcon />;
+    return <StepDefaultFillMd color="primary" />;
   }
 
-  return <DefaultIcon />;
+  return <StepDefaultFillMd color="disabled" />;
 };
