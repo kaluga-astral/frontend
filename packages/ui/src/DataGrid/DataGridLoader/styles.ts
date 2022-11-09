@@ -13,6 +13,8 @@ export const Backdrop = styled.div<BackdropProps>`
   top: 0;
 
   width: 100%;
+
+  /* Если в DataGrid передан Footer, нужно чтобы Backdrop не перекрывал его в состоянии loading, поэтому тут его высота вычитается из всей высоты бэкдропа */
   height: ${({ withFooter, footerHeight }) =>
     withFooter ? `calc(100% - ${footerHeight}px) ` : '100%'};
 

@@ -13,7 +13,7 @@ export type DataGridProps<
   Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
-  className?: string | undefined;
+  className?: string;
   /**
    * @example <DataGrid rows={[{name: 'test'}]} />
    * Массив данных для таблицы
