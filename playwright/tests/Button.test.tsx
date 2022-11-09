@@ -14,6 +14,41 @@ test('Button: по дефолту отображается contained вариа�
     return getComputedStyle(el).getPropertyValue('background-color');
   });
 
-  console.log('color', color);
-  await expect(color).toBe(true);
+  await expect(color).toBe('red');
+});
+
+test('Button: при доступе через tab появляется outline', async ({
+  mount,
+  page,
+}) => {
+  const component = await mount(
+    <Mount>
+      <Button>Btn</Button>
+    </Mount>,
+  );
+
+  await page.keyboard.down('Tab');
+
+  const outlineWidth = await component.evaluate((el) =>
+    getComputedStyle(el).getPropertyValue('outline-width'),
+  );
+
+  await expect(outlineWidth).toBe('2px');
+});
+
+test('Button: при наведении изменяется цвет', async ({ mount, page }) => {
+  const component = await mount(
+    <Mount>
+      <Button>Btn</Button>
+    </Mount>,
+  );
+
+  await component.hover();
+  await page.waitForTimeout(1000);
+
+  const backgroundColor = await component.evaluate((el) =>
+    getComputedStyle(el).getPropertyValue('background-color'),
+  );
+
+  await expect(backgroundColor).toBe('');
 });

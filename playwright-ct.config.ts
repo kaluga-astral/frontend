@@ -1,3 +1,5 @@
+import path from 'path';
+
 import type { PlaywrightTestConfig } from '@playwright/experimental-ct-react';
 import { devices } from '@playwright/experimental-ct-react';
 
@@ -5,7 +7,7 @@ import { devices } from '@playwright/experimental-ct-react';
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './playwright',
+  testDir: path.resolve(__dirname, 'playwright'),
   /* The base directory, relative to the config file, for snapshot files created with toMatchSnapshot and toHaveScreenshot. */
   snapshotDir: './__snapshots__',
   /* Maximum time one test can run for. */
@@ -29,6 +31,15 @@ const config: PlaywrightTestConfig = {
     ctPort: 3100,
 
     viewport: { width: 1280, height: 720 },
+
+    ctViteConfig: {
+      optimizeDeps: { include: ['@astral/ui'] },
+      build: {
+        commonjsOptions: {
+          include: [/packages/]
+        }
+      }
+    },
   },
 
   /* Configure projects for major browsers */

@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "commander"
+    "commander",
+    "playwright"
   ],
   "devDependencies": {
     "@astral/commander": "*",
@@ -12,7 +13,6 @@
     "@astral/prettier-config": "^1.0.0",
     "@astral/stylelint-config-styled": "^1.3.8",
     "@mdx-js/react": "2.0.0",
-    "@playwright/experimental-ct-react": "^1.27.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
@@ -47,8 +47,7 @@
     "stylelint": "^14.5.3",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.3",
-    "vite": "^3.0.4",
-    "playwright": "^1.27.1"
+    "vite": "^3.0.4"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && start-storybook -p 6006",
@@ -59,6 +58,6 @@
     "lint:styles": "npm run lint:styles:all --workspaces --if-present",
     "publish": "npm run build --workspaces --if-present && npm run publish --workspaces --if-present",
     "tests": "npm run tests --workspaces --if-present",
-    "test-ct": "playwright test -c playwright-ct.config.ts"
+    "playwright:dev": "playwright test -c playwright-ct.config.ts"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "name": "@astral/compo-tests",
+  "module": "./index.ts",
+  "private": true,
+  "scripts": {
+    "tests": "npm run tests --workspaces --if-present",
+    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+  },
+  "dependencies": {
+    "playwright": "^1.27.1",
+    "@playwright/experimental-ct-react": "^1.27.1"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.20.1"
+  }
+}
