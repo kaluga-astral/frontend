@@ -2,7 +2,7 @@ import { Typography, TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
 export const DataGridNoDataWrapper = styled.tr`
-  position: sticky;
+  position: absolute;
   top: 50%;
   left: 50%;
 
