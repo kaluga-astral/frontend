@@ -27,13 +27,4 @@ describe('Button', () => {
       .should('have.css', 'background-color')
       .and('be.colored', theme.palette.grey[900]);
   });
-
-  it('Selected:hover: background', () => {
-    cy.mount(<Button selected>Btn</Button>);
-
-    cy.get('button')
-      .realHover()
-      .should('have.css', 'background-color')
-      .and('be.colored', theme.palette.grey[700]);
-  });
 });

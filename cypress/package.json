@@ -1,0 +1,15 @@
+{
+  "name": "@astral/component-tests",
+  "private": true,
+  "scripts": {
+    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^2.2.0",
+    "cypress": "^10.11.0",
+    "@testing-library/cypress": "^8.0.3",
+    "chai-colors": "^1.0.1"
+  }
+}
