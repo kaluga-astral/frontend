@@ -13,6 +13,7 @@ export type DataGridProps<
   Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
+  className?: string;
   /**
    * @example <DataGrid rows={[{name: 'test'}]} />
    * Массив данных для таблицы
@@ -86,6 +87,12 @@ export type DataGridProps<
    *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
+  /**
+   * @default 50
+   * @example <DateGrid Footer={Footer} footerHeight={50} />
+   * Высота Footer, по-умолчанию указана высота Footer из кита
+   */
+  footerHeight?: number;
 };
 
 export function DataGrid<
@@ -106,8 +113,11 @@ export function DataGrid<
   onSort,
   keyId,
   emptyCellValue,
+  className,
+  footerHeight = 50,
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
+  const withFooter = Boolean(Footer);
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) {
@@ -163,8 +173,8 @@ export function DataGrid<
   }, [noDataPlaceholder, loading]);
 
   return (
-    <DataGridContainer>
-      <StyledTableContainer maxHeight={maxHeight}>
+    <DataGridContainer maxHeight={maxHeight} className={className}>
+      <StyledTableContainer>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
             onSort={onSort}
@@ -188,9 +198,13 @@ export function DataGrid<
             noDataPlaceholder={renderedPlaceholder()}
           />
         </Table>
-        <DataGridLoader loading={loading} />
       </StyledTableContainer>
-      {rows.length ? Footer : null}
+      <DataGridLoader
+        footerHeight={footerHeight}
+        withFooter={withFooter}
+        loading={loading}
+      />
+      {Footer}
     </DataGridContainer>
   );
 }

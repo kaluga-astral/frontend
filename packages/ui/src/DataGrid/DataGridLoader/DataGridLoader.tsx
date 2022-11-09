@@ -7,13 +7,22 @@ import {
 
 export type DataGridLoaderProps = {
   loading?: boolean;
+  withFooter: boolean;
+  footerHeight: number;
 };
 
-const DataGridLoader = ({ loading = false }: DataGridLoaderProps) => {
+const DataGridLoader = ({
+  loading = false,
+  withFooter,
+  footerHeight,
+}: DataGridLoaderProps) => {
   return (
     <LoaderWrapper>
-      {loading && <Backdrop />}
-      {loading ? <StyledLinearProgress /> : <StyledDivider />}
+      {loading && (
+        <Backdrop withFooter={withFooter} footerHeight={footerHeight} />
+      )}
+      {loading && <StyledLinearProgress />}
+      {!loading && <StyledDivider />}
     </LoaderWrapper>
   );
 };

@@ -10,6 +10,8 @@ export * from './Badge';
 
 export * from './Button';
 
+export * from './Collapse';
+
 export * from './DatePickerProvider';
 
 export * from './Description';
