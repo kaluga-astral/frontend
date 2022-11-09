@@ -10,6 +10,42 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   padding: ${({ theme }) => theme.spacing(2)};
 
   border-radius: ${({ theme }) => theme.shape.medium};
+
+  .MuiListItemIcon-root {
+
+    color: ${({ theme, selected }) => {
+      return selected ? theme.palette.primary['800'] : 'inherit';
+    }};
+
+    transition: ${({ theme }) => {
+      return theme.transitions.create('color', {
+        easing: theme.transitions.easing.easeIn,
+        duration: theme.transitions.duration.shortest,
+      }) ;
+    }};
+  }
+
+  &.Mui-selected:hover {
+    background-color: inherit;
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.primary['800']};
+
+    background-color: inherit;
+
+    .MuiListItemIcon-root {
+      color: ${({ theme }) => theme.palette.primary['800']};
+    }
+  }
+
+  &:active {
+    color: ${({ theme }) => theme.palette.primary['900']};
+
+    .MuiListItemIcon-root {
+      color: ${({ theme }) => theme.palette.primary['900']};
+    }
+  }
 `;
 
 export const NavMenuItemButtonIcon = styled(ListItemIcon)`
