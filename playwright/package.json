@@ -2,7 +2,6 @@
   "name": "@astral/component-tests",
   "private": true,
   "scripts": {
-    "tests": "npm run tests --workspaces --if-present",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
