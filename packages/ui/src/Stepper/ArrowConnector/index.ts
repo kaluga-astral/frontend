@@ -1,1 +1,1 @@
-export * from './ArrowStepperConnector';
+export * from './ArrowConnector';
