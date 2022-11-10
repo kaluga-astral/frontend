@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 
-import { ThemeProvider } from '../../src';
+import { ThemeProvider } from '../../packages/ui/src';
 
 import { theme } from './theme';
 

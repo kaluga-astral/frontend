@@ -57,6 +57,7 @@
     "lint:types": "npm run lint:types --workspaces --if-present",
     "lint:styles": "npm run lint:styles:all --workspaces --if-present",
     "publish": "npm run build --workspaces --if-present && npm run publish --workspaces --if-present",
-    "tests": "npm run tests --workspaces --if-present"
+    "tests": "npm run tests --workspaces --if-present",
+    "playwright:dev": "playwright test -c playwright-ct.config.ts"
   }
 }
