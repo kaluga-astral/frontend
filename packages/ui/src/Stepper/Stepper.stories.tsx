@@ -31,9 +31,9 @@ const Template: Story = () => {
       </Grid>
       <Grid>
         <Typography paragraph variant="h4">
-          Stepper without line
+          Stepper with connector arrow
         </Typography>
-        <Stepper connector={<Stepper.ArrowConnector />} activeStep={2}>
+        <Stepper connector="arrow" activeStep={2}>
           <Step>
             <StepLabel>Completed</StepLabel>
           </Step>
