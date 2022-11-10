@@ -5,20 +5,6 @@ import {
 
 import { WithoutEmotionSpecific } from '../types';
 
-import { NextStepConnector } from './styles';
+export type StepperProps = WithoutEmotionSpecific<MuiStepperProps>;
 
-export type StepperProps = Omit<
-  WithoutEmotionSpecific<MuiStepperProps>,
-  'orientation'
->;
-
-export const Stepper = (props: StepperProps) => {
-  const { alternativeLabel } = props;
-
-  return (
-    <MuiStepper
-      connector={alternativeLabel ? undefined : <NextStepConnector />}
-      {...props}
-    />
-  );
-};
+export const Stepper = (props: StepperProps) => <MuiStepper {...props} />;

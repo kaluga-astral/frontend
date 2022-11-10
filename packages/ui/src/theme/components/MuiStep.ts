@@ -4,7 +4,7 @@ import type { Theme } from '../baseTheme';
 
 export const MuiStep: Components<Theme>['MuiStep'] = {
   styleOverrides: {
-    root({ theme }) {
+    horizontal({ theme }) {
       return {
         '&:first-child': {
           paddingLeft: 0,
