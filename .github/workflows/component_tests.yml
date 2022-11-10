@@ -21,5 +21,7 @@ jobs:
         run: npm i
       - name: Install playwright browsers
         run: npx playwright install --with-deps
+      - name: Build icons
+        run: npm run svgr --workspace=@astral/icons
       - name: Run tests
         run: npx playwright test -c playwright-ct.config.ts
