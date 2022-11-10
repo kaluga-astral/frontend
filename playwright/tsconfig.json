@@ -1,13 +1,11 @@
 {
   "extends": "../tsconfig.json",
-  "types": "../packages/ui/src/declaration/**/*.ts",
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
     "./*.js"
   ],
   "exclude": [
-    "lib",
-    "../packages"
+    "lib"
   ]
 }
