@@ -5,6 +5,7 @@ on:
      branches: [main]
      paths:
        - packages/ui/**
+       - packages/form/**
        - packages/icons/**
        - packages/fonts/**
        - .storybook/**
@@ -15,6 +16,7 @@ on:
      paths:
        - packages/ui/**
        - packages/icons/**
+       - packages/form/**
        - packages/fonts/**
        - .storybook/**
        - package.json
