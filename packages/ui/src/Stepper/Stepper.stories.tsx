@@ -1,17 +1,13 @@
 import { Story } from '@storybook/react';
-import { NextOutlineMd } from '@astral/icons';
 
-import { Grid, Step, StepLabel, Stepper, Typography, styled } from '..';
+import { Grid, Step, StepLabel, Stepper, Typography } from '..';
+
+import { ArrowStepperConnector } from './ArrowStepperConnector';
 
 export default {
   title: 'Components/Stepper',
   component: Step,
 };
-
-const NextStepConnector = styled(NextOutlineMd)`
-  color: ${({ theme }) => theme.palette.grey[400]};
-  font-size: ${({ theme }) => theme.typography.h4.fontSize};
-`;
 
 const Template: Story = () => {
   return (
@@ -39,7 +35,7 @@ const Template: Story = () => {
         <Typography paragraph variant="h4">
           Stepper without line
         </Typography>
-        <Stepper connector={<NextStepConnector />} activeStep={2}>
+        <Stepper connector={<ArrowStepperConnector />} activeStep={2}>
           <Step>
             <StepLabel>Completed</StepLabel>
           </Step>
