@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/experimental-ct-react';
 
-import { Autocomplete } from '../../packages/ui/src';
-import { Mount } from '../common';
+import { Autocomplete } from '../../src';
+import { Mount } from '../common/Mount';
 
 test('Autocomplete: по дефолту отображается contained вариант', async ({
   mount,

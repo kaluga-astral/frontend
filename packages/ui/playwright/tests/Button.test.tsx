@@ -1,20 +1,26 @@
 import { expect, test } from '@playwright/experimental-ct-react';
 
-import { Button } from '../../packages/ui/src';
-import { Mount } from '../common';
+import { Button } from '../../src/Button';
+import { Mount } from '../common/Mount';
+import { getTheme, hexToRgb } from '../common/utils';
 
-test('Button: по дефолту отображается contained вариант', async ({ mount }) => {
+test('Button: по дефолту отображается contained вариант', async ({
+  mount,
+  page,
+}) => {
   const component = await mount(
     <Mount>
       <Button>Btn</Button>
     </Mount>,
   );
 
+  const theme = await getTheme(page);
+
   const color = await component.evaluate((el) => {
     return getComputedStyle(el).getPropertyValue('background-color');
   });
 
-  await expect(color).toBe('red');
+  await expect(color).toBe(hexToRgb(theme.palette.primary.main));
 });
 
 test('Button: при доступе через tab появляется outline', async ({
@@ -43,6 +49,8 @@ test('Button: при наведении изменяется цвет', async ({
     </Mount>,
   );
 
+  const theme = await getTheme(page);
+
   await component.hover();
   await page.waitForTimeout(1000);
 
@@ -50,5 +58,5 @@ test('Button: при наведении изменяется цвет', async ({
     getComputedStyle(el).getPropertyValue('background-color'),
   );
 
-  await expect(backgroundColor).toBe('');
+  await expect(backgroundColor).toBe(hexToRgb(theme.palette.primary[700]));
 });

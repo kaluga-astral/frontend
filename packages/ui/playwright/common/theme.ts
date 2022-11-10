@@ -1,4 +1,4 @@
-import { Brand, createTheme } from '../../packages/ui/src';
+import { Brand, createTheme } from '../../src/theme';
 
 const fontsUrls = {
   bold: {

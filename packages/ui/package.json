@@ -1,6 +1,5 @@
 {
   "name": "@astral/ui",
-  "type": "module",
   "version": "1.0.0",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
@@ -15,7 +14,8 @@
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint --fix",
-    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix",
+    "playwright:dev": "playwright test -c playwright-ct.config.ts"
   },
   "dependencies": {
     "@astral/icons": "^0.31.0",
@@ -36,6 +36,9 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5"
+    "@types/lodash-es": "^4.17.5",
+    "playwright": "^1.27.1",
+    "colord": "^2.9.3",
+    "@playwright/experimental-ct-react": "^1.27.1"
   }
 }
