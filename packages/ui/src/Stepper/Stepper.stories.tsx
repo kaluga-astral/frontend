@@ -2,8 +2,6 @@ import { Story } from '@storybook/react';
 
 import { Grid, Step, StepLabel, Stepper, Typography } from '..';
 
-import { ArrowStepperConnector } from './ArrowStepperConnector';
-
 export default {
   title: 'Components/Stepper',
   component: Step,
@@ -35,7 +33,7 @@ const Template: Story = () => {
         <Typography paragraph variant="h4">
           Stepper without line
         </Typography>
-        <Stepper connector={<ArrowStepperConnector />} activeStep={2}>
+        <Stepper connector={<Stepper.ArrowConnector />} activeStep={2}>
           <Step>
             <StepLabel>Completed</StepLabel>
           </Step>

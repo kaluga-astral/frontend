@@ -5,6 +5,10 @@ import {
 
 import { WithoutEmotionSpecific } from '../types';
 
+import { ArrowConnector } from './ArrowConnector';
+
 export type StepperProps = WithoutEmotionSpecific<MuiStepperProps>;
 
 export const Stepper = (props: StepperProps) => <MuiStepper {...props} />;
+
+Stepper.ArrowConnector = ArrowConnector;
