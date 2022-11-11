@@ -15,6 +15,17 @@ jobs:
     secrets:
       token: ${{ secrets.OWNER_TOKEN }}
     
+  add_labels:
+    runs-on: ubuntu-latest
+    needs: is-designer
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: needs.is-designer.outputs.result == 'true'
+        with:
+          github_token: ${{ secrets.OWNER_TOKEN }}
+          labels: |
+            ui
 
   notify:
     name: notify
