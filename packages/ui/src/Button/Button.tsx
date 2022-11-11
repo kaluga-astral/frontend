@@ -27,10 +27,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <LoadingButtonWrapper
         ref={ref}
+        data-testid={BUTTON_TEST_ID}
         {...restProps}
         variant={variant}
         color={color}
-        data-testid={BUTTON_TEST_ID}
         loadingIndicator={
           <CircularProgress
             color={loadingIndicatorColor}

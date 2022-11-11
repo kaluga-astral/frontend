@@ -20,9 +20,11 @@ import {
 import { WithoutEmotionSpecific } from '../types';
 
 import {
-  AutocompleteSizes,
+  AUTOCOMPLETE_INPUT_TEST_ID,
+  AUTOCOMPLETE_TEST_ID,
   DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
 } from './constants';
+import { AutocompleteSizes } from './enums';
 
 export type AutocompleteSize = `${AutocompleteSizes}`;
 
@@ -112,6 +114,10 @@ export const Autocomplete = <
         error={error}
         helperText={helperText}
         size={size}
+        inputProps={{
+          'data-testid': AUTOCOMPLETE_INPUT_TEST_ID,
+          ...inputParams?.inputProps,
+        }}
       />
     ),
     [placeholder, label, success, error, helperText, size],
@@ -150,6 +156,7 @@ export const Autocomplete = <
 
   return (
     <MuiAutocomplete
+      data-testid={AUTOCOMPLETE_TEST_ID}
       {...restProps}
       size={size}
       multiple={multiple}
