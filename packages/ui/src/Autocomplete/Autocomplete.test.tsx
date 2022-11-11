@@ -1,7 +1,11 @@
 import { act, renderWithTheme, userEvents } from '@astral/tests';
 
 import { Autocomplete } from './Autocomplete';
-import { AUTOCOMPLETE_INPUT_TEST_ID } from './constants';
+import {
+  AUTOCOMPLETE_INPUT_TEST_ID,
+  AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID,
+  AUTOCOMPLETE_TAG_TEST_ID,
+} from './constants';
 
 describe('Autocomplete', () => {
   it('При пустых options отображается плейсхолдер', async () => {
@@ -126,16 +130,90 @@ describe('Autocomplete', () => {
   });
 
   describe('Prop:Multiple', () => {
-    it('В options отображаются чекбоксы', () => {
-      expect(true).toBeTruthy();
+    it('В options отображаются чекбоксы', async () => {
+      const user = userEvents.setup();
+
+      type Option = { name: string; surname: string };
+
+      const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+      const { getByTestId } = renderWithTheme(
+        <Autocomplete<Option, true, false, false>
+          multiple
+          options={options}
+          getOptionLabel={(option) => option.surname}
+        />,
+      );
+
+      await user.click(getByTestId(AUTOCOMPLETE_INPUT_TEST_ID));
+
+      const checkbox = getByTestId(AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID);
+
+      expect(checkbox).toBeVisible();
     });
 
-    it('После выбора option в инпуте появляется tag', () => {
-      expect(true).toBeTruthy();
+    it('После выбора option в инпуте появляется tag', async () => {
+      const user = userEvents.setup();
+
+      type Option = { name: string; surname: string };
+
+      const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+      const { getByTestId } = renderWithTheme(
+        <Autocomplete<Option, true, false, false>
+          multiple
+          options={options}
+          getOptionLabel={(option) => option.surname}
+        />,
+      );
+
+      await user.click(getByTestId(AUTOCOMPLETE_INPUT_TEST_ID));
+      await user.click(getByTestId(AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID));
+
+      const checkbox = getByTestId(
+        AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID,
+      ).getElementsByTagName('input')[0];
+
+      expect(checkbox).toBeChecked();
+
+      const tag = getByTestId(AUTOCOMPLETE_TAG_TEST_ID);
+
+      expect(tag).toBeVisible();
     });
 
-    it('Tag из инпута можно удалить', () => {
-      expect(true).toBeTruthy();
+    it('Tag из инпута можно удалить', async () => {
+      const user = userEvents.setup();
+
+      type Option = { name: string; surname: string };
+
+      const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+      const { getByTestId, queryByTestId } = renderWithTheme(
+        <Autocomplete<Option, true, false, false>
+          multiple
+          options={options}
+          getOptionLabel={(option) => option.surname}
+        />,
+      );
+
+      await user.click(getByTestId(AUTOCOMPLETE_INPUT_TEST_ID));
+      await user.click(getByTestId(AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID));
+
+      const tagDeleteIcon = getByTestId(
+        AUTOCOMPLETE_TAG_TEST_ID,
+      ).getElementsByTagName('svg')[0];
+
+      await user.click(tagDeleteIcon);
+
+      const checkbox = getByTestId(
+        AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID,
+      ).getElementsByTagName('input')[0];
+
+      expect(checkbox).not.toBeChecked();
+
+      const tag = queryByTestId(AUTOCOMPLETE_TAG_TEST_ID);
+
+      expect(tag).toBeNull();
     });
   });
 });

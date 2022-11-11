@@ -21,6 +21,8 @@ import { WithoutEmotionSpecific } from '../types';
 
 import {
   AUTOCOMPLETE_INPUT_TEST_ID,
+  AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID,
+  AUTOCOMPLETE_TAG_TEST_ID,
   AUTOCOMPLETE_TEST_ID,
   DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
 } from './constants';
@@ -89,6 +91,7 @@ export const Autocomplete = <
             deleteIcon={<CrossSmOutlineSm />}
             color="grey"
             label={title}
+            data-testid={AUTOCOMPLETE_TAG_TEST_ID}
             {...getTagProps({ index })}
           />
         );
@@ -139,7 +142,10 @@ export const Autocomplete = <
         <MenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
-              <Checkbox checked={selected} />
+              <Checkbox
+                data-testid={AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID}
+                checked={selected}
+              />
             </ListItemIcon>
           )}
           <OverflowTypography
