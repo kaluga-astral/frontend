@@ -25,7 +25,7 @@ jobs:
         with:
           github_token: ${{ secrets.OWNER_TOKEN }}
           labels: |
-            ui
+            design-review
 
   notify:
     name: notify
