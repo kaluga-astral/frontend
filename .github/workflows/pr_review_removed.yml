@@ -1,0 +1,29 @@
+name: pull request review removed notification
+on:
+  pull_request:
+    types: [review_request_removed]
+    branches:
+    - main
+
+jobs: 
+  is-designer:
+    name: is-designer
+    uses: ./.github/workflows/is_team_member.yml
+    with:
+      members_url: "https://api.github.com/orgs/kaluga-astral/teams/design/members"
+      member: ${{ github.event.requested_reviewer.login }}
+    secrets:
+      token: ${{ secrets.OWNER_TOKEN }}
+
+  remove_label:
+    runs-on: ubuntu-latest
+    needs: is-designer
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: needs.is-designer.outputs.result == 'true'
+        with:
+          labels: ui
+    
+
+   
