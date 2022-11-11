@@ -23,7 +23,7 @@ jobs:
       - uses: actions-ecosystem/action-remove-labels@v1
         if: needs.is-designer.outputs.result == 'true'
         with:
-          labels: ui
+          labels: design-review
     
 
    
