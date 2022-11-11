@@ -1,60 +1,27 @@
-import userEvent from '@testing-library/user-event';
-import { act, screen } from '@testing-library/react';
-import { hexToRgb, renderWithTheme, theme } from '@astral/tests';
+import { screen } from '@testing-library/react';
+import { renderWithTheme } from '@astral/tests';
+import { useEffect, useRef } from 'react';
 
 import { Button } from './Button';
-import { ButtonProps } from './types';
+import { BUTTON_LOADER_TEST_ID } from './constants';
 
 describe('Button', () => {
-  it('По дефолту отображается contained вариант', () => {
-    renderWithTheme(<Button>Btn</Button>);
+  it('Возможно получить ref', () => {
+    const resultRef = { current: null };
 
-    const button = screen.getByRole('button');
+    const ButtonWithRef = () => {
+      const ref = useRef(null);
 
-    const backgroundColor = window
-      .getComputedStyle(button)
-      .getPropertyValue('background-color');
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
 
-    expect(backgroundColor).toBe(hexToRgb(theme.palette.primary.main));
+      return <Button ref={ref}>Btn</Button>;
+    };
+
+    renderWithTheme(<ButtonWithRef />);
+    expect(resultRef?.current).not.toBeNull();
   });
-
-  it.each<ButtonProps['variant']>(['contained', 'light', 'text', 'link'])(
-    'При доступе через tab появляется outline для variant: %s',
-    async (variant) => {
-      renderWithTheme(<Button variant={variant}>Btn</Button>);
-
-      const user = userEvent.setup();
-
-      await user.tab({ shift: true });
-
-      const button = screen.getByRole('button');
-
-      const outline = window
-        .getComputedStyle(button)
-        .getPropertyValue('outline');
-
-      expect(outline.includes('2px')).toBeTruthy();
-    },
-  );
-
-  it.each<ButtonProps['variant']>(['contained', 'light', 'text', 'link'])(
-    'При фокусе отсутствует тень для variant: %s',
-    (variant) => {
-      renderWithTheme(<Button variant={variant}>Btn</Button>);
-
-      const button = screen.getByRole('button');
-
-      act(() => {
-        button.focus();
-      });
-
-      const shadow = window
-        .getComputedStyle(button)
-        .getPropertyValue('box-shadow');
-
-      expect(shadow).toBe('none');
-    },
-  );
 
   it('Prop disabled блокирует кнопку', () => {
     renderWithTheme(<Button disabled>Btn</Button>);
@@ -62,5 +29,31 @@ describe('Button', () => {
     const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
+  });
+
+  it('Prop loading блокирует кнопку', () => {
+    renderWithTheme(<Button loading>Btn</Button>);
+
+    const button = screen.getByRole('button');
+
+    expect(button).toBeDisabled();
+  });
+
+  describe('Prop: Loading', () => {
+    it('Блокирует кнопку', () => {
+      renderWithTheme(<Button loading>Btn</Button>);
+
+      const button = screen.getByRole('button');
+
+      expect(button).toBeDisabled();
+    });
+
+    it('Отображает лоадер', () => {
+      const { getByTestId } = renderWithTheme(<Button loading>Btn</Button>);
+
+      const loader = getByTestId(BUTTON_LOADER_TEST_ID);
+
+      expect(loader).toBeVisible();
+    });
   });
 });
