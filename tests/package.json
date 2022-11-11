@@ -1,0 +1,14 @@
+{
+  "name": "@astral/tests",
+  "private": true,
+  "browser": "./src/index.ts",
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint:types": "tsc --noEmit",
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+  },
+  "dependencies": {
+    "colord": "^2.9.3"
+  }
+}
