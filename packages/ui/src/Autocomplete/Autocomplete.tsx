@@ -136,7 +136,11 @@ export const Autocomplete = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <MenuItem {...optionProps} key={optionProps.id}>
+        <MenuItem
+          data-testid={AUTOCOMPLETE_TEST_ID_MAP.option}
+          {...optionProps}
+          key={optionProps.id}
+        >
           {multiple && (
             <ListItemIcon>
               <Checkbox
