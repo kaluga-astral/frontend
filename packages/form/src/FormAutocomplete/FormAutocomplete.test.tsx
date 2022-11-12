@@ -7,6 +7,36 @@ import { useForm } from '../hooks';
 import { FormAutocomplete } from './FormAutocomplete';
 
 describe('FormAutocomplete', () => {
+  it('Отображается ошибка валидации', async () => {
+    const TestComponent = () => {
+      const form = useForm();
+
+      return (
+        <Form
+          data-testid="form"
+          form={form}
+          onSubmit={form.handleSubmit(() => undefined)}
+        >
+          <FormAutocomplete
+            name="user"
+            options={[]}
+            rules={{ required: 'required' }}
+          />
+        </Form>
+      );
+    };
+
+    const { getByText, getByTestId } = renderWithTheme(<TestComponent />);
+
+    fireEvent.submit(getByTestId('form'));
+
+    await waitFor(() => {
+      const errorText = getByText('required');
+
+      expect(errorText).toBeVisible();
+    });
+  });
+
   it('После выбора значения в форму сетится весь выбранный option', async () => {
     type Option = {
       name: string;
