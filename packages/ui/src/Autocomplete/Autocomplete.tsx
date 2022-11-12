@@ -20,10 +20,7 @@ import {
 import { WithoutEmotionSpecific } from '../types';
 
 import {
-  AUTOCOMPLETE_INPUT_TEST_ID,
-  AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID,
-  AUTOCOMPLETE_TAG_TEST_ID,
-  AUTOCOMPLETE_TEST_ID,
+  AUTOCOMPLETE_TEST_ID_MAP,
   DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
 } from './constants';
 import { AutocompleteSizes } from './enums';
@@ -91,7 +88,7 @@ export const Autocomplete = <
             deleteIcon={<CrossSmOutlineSm />}
             color="grey"
             label={title}
-            data-testid={AUTOCOMPLETE_TAG_TEST_ID}
+            data-testid={AUTOCOMPLETE_TEST_ID_MAP.tag}
             {...getTagProps({ index })}
           />
         );
@@ -118,7 +115,7 @@ export const Autocomplete = <
         helperText={helperText}
         size={size}
         inputProps={{
-          'data-testid': AUTOCOMPLETE_INPUT_TEST_ID,
+          'data-testid': AUTOCOMPLETE_TEST_ID_MAP.input,
           ...inputParams?.inputProps,
         }}
       />
@@ -143,7 +140,7 @@ export const Autocomplete = <
           {multiple && (
             <ListItemIcon>
               <Checkbox
-                data-testid={AUTOCOMPLETE_OPTION_CHECKBOX_TEST_ID}
+                data-testid={AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox}
                 checked={selected}
               />
             </ListItemIcon>
@@ -162,7 +159,7 @@ export const Autocomplete = <
 
   return (
     <MuiAutocomplete
-      data-testid={AUTOCOMPLETE_TEST_ID}
+      data-testid={AUTOCOMPLETE_TEST_ID_MAP.root}
       {...restProps}
       size={size}
       multiple={multiple}

@@ -4,7 +4,7 @@ import { ButtonColors, ButtonVariants } from '../ButtonBase';
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 
-import { BUTTON_LOADER_TEST_ID, BUTTON_TEST_ID } from './constants';
+import { BUTTON_TEST_ID_MAP } from './constants';
 import { LoadingButtonWrapper } from './styles';
 import { ButtonProps } from './types';
 
@@ -27,7 +27,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <LoadingButtonWrapper
         ref={ref}
-        data-testid={BUTTON_TEST_ID}
+        data-testid={BUTTON_TEST_ID_MAP.root}
         {...restProps}
         variant={variant}
         color={color}
@@ -35,7 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <CircularProgress
             color={loadingIndicatorColor}
             size="small"
-            data-testid={BUTTON_LOADER_TEST_ID}
+            data-testid={BUTTON_TEST_ID_MAP.loader}
           />
         }
       />
