@@ -25,7 +25,7 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   loading?: boolean;
   placeholder?: string;
   getOptionLabel?: (value: string | number) => string | number;
-  helperText?: string;
+  helperText?: ReactNode;
   success?: boolean;
   error?: boolean;
   label?: string;
