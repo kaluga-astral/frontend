@@ -1,4 +1,4 @@
-import { act, renderWithTheme, userEvents } from '@astral/tests';
+import { fireEvent, renderWithTheme, userEvents } from '@astral/tests';
 
 import { Autocomplete } from './Autocomplete';
 import { AUTOCOMPLETE_TEST_ID_MAP } from './constants';
@@ -23,9 +23,7 @@ describe('Autocomplete', () => {
       <Autocomplete options={[]} />,
     );
 
-    act(() => {
-      getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input).focus();
-    });
+    fireEvent.focus(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const noDataPlaceholder = queryByText('Нет данных');
 
