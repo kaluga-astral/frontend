@@ -5,13 +5,11 @@ import { AUTOCOMPLETE_TEST_ID_MAP } from './constants';
 
 describe('Autocomplete', () => {
   it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
-    const user = userEvents.setup();
-
     const { getByText, getByTestId } = renderWithTheme(
       <Autocomplete options={[]} />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const noDataPlaceholder = getByText('Нет данных');
 
@@ -31,8 +29,6 @@ describe('Autocomplete', () => {
   });
 
   it('Prop:getOptionLabel: позволяет отображать в popover label', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -47,7 +43,7 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const vasya = getByText('Pupkin');
     const kolya = getByText('Kolin');
@@ -57,8 +53,6 @@ describe('Autocomplete', () => {
   });
 
   it('Behavior: закрывается popover после выбора значения', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -73,17 +67,15 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const selectedOption = getByRole('option', { name: 'Pupkin' });
 
-    await user.click(selectedOption);
+    await userEvents.click(selectedOption);
     expect(queryByRole('option')).toBeNull();
   });
 
   it('Behavior: в инпут сетится label после выбора option', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -98,11 +90,11 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const option = getByRole('option', { name: 'Pupkin' });
 
-    await user.click(option);
+    await userEvents.click(option);
 
     const input = getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input);
 
@@ -110,8 +102,6 @@ describe('Autocomplete', () => {
   });
 
   it('Prop:multiple: в options отображаются чекбоксы', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -124,7 +114,7 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     const checkbox = getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox);
 
@@ -132,8 +122,6 @@ describe('Autocomplete', () => {
   });
 
   it('Prop:multiple: после выбора option в инпуте появляется tag', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -146,8 +134,11 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+
+    await userEvents.click(
+      getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
+    );
 
     const checkbox = getByTestId(
       AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
@@ -161,8 +152,6 @@ describe('Autocomplete', () => {
   });
 
   it('Prop:multiple: tag из инпута можно удалить', async () => {
-    const user = userEvents.setup();
-
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -175,14 +164,17 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox));
+    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+
+    await userEvents.click(
+      getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
+    );
 
     const tagDeleteIcon = getByTestId(
       AUTOCOMPLETE_TEST_ID_MAP.tag,
     ).getElementsByTagName('svg')[0];
 
-    await user.click(tagDeleteIcon);
+    await userEvents.click(tagDeleteIcon);
 
     const checkbox = getByTestId(
       AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
