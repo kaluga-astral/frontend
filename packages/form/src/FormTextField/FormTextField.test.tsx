@@ -1,4 +1,4 @@
-import { fireEvent, renderWithTheme, waitFor } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen, waitFor } from '@astral/tests';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -21,12 +21,11 @@ describe('FormTextField', () => {
       );
     };
 
-    const { getByText, getByTestId } = renderWithTheme(<TestComponent />);
-
-    fireEvent.submit(getByTestId('form'));
+    renderWithTheme(<TestComponent />);
+    fireEvent.submit(screen.getByTestId('form'));
 
     await waitFor(() => {
-      const errorText = getByText('required');
+      const errorText = screen.getByText('required');
 
       expect(errorText).toBeVisible();
     });

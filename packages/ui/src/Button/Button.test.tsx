@@ -1,4 +1,4 @@
-import { renderWithTheme } from '@astral/tests';
+import { renderWithTheme, screen } from '@astral/tests';
 import { useEffect, useRef } from 'react';
 
 import { Button } from './Button';
@@ -23,25 +23,25 @@ describe('Button', () => {
   });
 
   it('Prop:disabled: блокирует кнопку', () => {
-    const { getByRole } = renderWithTheme(<Button disabled>Btn</Button>);
+    renderWithTheme(<Button disabled>Btn</Button>);
 
-    const button = getByRole('button');
+    const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
   });
 
   it('Prop:loading: блокирует кнопку', () => {
-    const { getByRole } = renderWithTheme(<Button loading>Btn</Button>);
+    renderWithTheme(<Button loading>Btn</Button>);
 
-    const button = getByRole('button');
+    const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
   });
 
   it('Prop:loading: отображается лоадер', () => {
-    const { getByTestId } = renderWithTheme(<Button loading>Btn</Button>);
+    renderWithTheme(<Button loading>Btn</Button>);
 
-    const loader = getByTestId(BUTTON_TEST_ID_MAP.loader);
+    const loader = screen.getByTestId(BUTTON_TEST_ID_MAP.loader);
 
     expect(loader).toBeVisible();
   });

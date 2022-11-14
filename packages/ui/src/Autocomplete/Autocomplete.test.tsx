@@ -1,29 +1,23 @@
-import { fireEvent, renderWithTheme, userEvents } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { Autocomplete } from './Autocomplete';
 import { AUTOCOMPLETE_TEST_ID_MAP } from './constants';
 
 describe('Autocomplete', () => {
   it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
-    const { getByText, getByTestId } = renderWithTheme(
-      <Autocomplete options={[]} />,
-    );
+    renderWithTheme(<Autocomplete options={[]} />);
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-
-    const noDataPlaceholder = getByText('Нет данных');
+    const noDataPlaceholder = screen.getByText('Нет данных');
 
     expect(noDataPlaceholder).toBeVisible();
   });
 
   it('Behavior:focus: не отображается popover', async () => {
-    const { queryByText, getByTestId } = renderWithTheme(
-      <Autocomplete options={[]} />,
-    );
+    renderWithTheme(<Autocomplete options={[]} />);
+    fireEvent.focus(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    fireEvent.focus(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-
-    const noDataPlaceholder = queryByText('Нет данных');
+    const noDataPlaceholder = screen.queryByText('Нет данных');
 
     expect(noDataPlaceholder).toBeNull();
   });
@@ -36,17 +30,17 @@ describe('Autocomplete', () => {
       { name: 'Kolya', surname: 'Kolin' },
     ];
 
-    const { getByText, getByTestId } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, false, false, false>
         options={options}
         getOptionLabel={(option) => option.surname}
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    const vasya = getByText('Pupkin');
-    const kolya = getByText('Kolin');
+    const vasya = screen.getByText('Pupkin');
+    const kolya = screen.getByText('Kolin');
 
     expect(vasya).toBeVisible();
     expect(kolya).toBeVisible();
@@ -60,19 +54,19 @@ describe('Autocomplete', () => {
       { name: 'Kolya', surname: 'Kolin' },
     ];
 
-    const { getByRole, getByTestId, queryByRole } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, false, false, false>
         options={options}
         getOptionLabel={(option) => option.surname}
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    const selectedOption = getByRole('option', { name: 'Pupkin' });
+    const selectedOption = screen.getByRole('option', { name: 'Pupkin' });
 
     await userEvents.click(selectedOption);
-    expect(queryByRole('option')).toBeNull();
+    expect(screen.queryByRole('option')).toBeNull();
   });
 
   it('Behavior: в инпут сетится label после выбора option', async () => {
@@ -83,20 +77,20 @@ describe('Autocomplete', () => {
       { name: 'Kolya', surname: 'Kolin' },
     ];
 
-    const { getByRole, getByTestId } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, false, false, false>
         options={options}
         getOptionLabel={(option) => option.surname}
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    const option = getByRole('option', { name: 'Pupkin' });
+    const option = screen.getByRole('option', { name: 'Pupkin' });
 
     await userEvents.click(option);
 
-    const input = getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input);
+    const input = screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input);
 
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
@@ -106,7 +100,7 @@ describe('Autocomplete', () => {
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
-    const { getByTestId } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, true, false, false>
         multiple
         options={options}
@@ -114,9 +108,11 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
-    const checkbox = getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox);
+    const checkbox = screen.getByTestId(
+      AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
+    );
 
     expect(checkbox).toBeVisible();
   });
@@ -126,7 +122,7 @@ describe('Autocomplete', () => {
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
-    const { getByTestId } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, true, false, false>
         multiple
         options={options}
@@ -134,19 +130,19 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     await userEvents.click(
-      getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
+      screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
     );
 
-    const checkbox = getByTestId(
-      AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
-    ).getElementsByTagName('input')[0];
+    const checkbox = screen
+      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox)
+      .getElementsByTagName('input')[0];
 
     expect(checkbox).toBeChecked();
 
-    const tag = getByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
+    const tag = screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
 
     expect(tag).toBeVisible();
   });
@@ -156,7 +152,7 @@ describe('Autocomplete', () => {
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
-    const { getByTestId, queryByTestId } = renderWithTheme(
+    renderWithTheme(
       <Autocomplete<Option, true, false, false>
         multiple
         options={options}
@@ -164,25 +160,25 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
 
     await userEvents.click(
-      getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
+      screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
     );
 
-    const tagDeleteIcon = getByTestId(
-      AUTOCOMPLETE_TEST_ID_MAP.tag,
-    ).getElementsByTagName('svg')[0];
+    const tagDeleteIcon = screen
+      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag)
+      .getElementsByTagName('svg')[0];
 
     await userEvents.click(tagDeleteIcon);
 
-    const checkbox = getByTestId(
-      AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
-    ).getElementsByTagName('input')[0];
+    const checkbox = screen
+      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox)
+      .getElementsByTagName('input')[0];
 
     expect(checkbox).not.toBeChecked();
 
-    const tag = queryByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
+    const tag = screen.queryByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
 
     expect(tag).toBeNull();
   });

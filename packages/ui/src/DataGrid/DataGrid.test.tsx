@@ -1,4 +1,4 @@
-import { renderWithTheme, userEvents } from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useState } from 'react';
 
 import { DataGrid } from './DataGrid';
@@ -14,11 +14,9 @@ describe('DataGrid', () => {
       },
     ];
 
-    const { getByText } = renderWithTheme(
-      <DataGrid keyId="id" rows={[]} columns={columns} />,
-    );
+    renderWithTheme(<DataGrid keyId="id" rows={[]} columns={columns} />);
 
-    const title = getByText('Наименование');
+    const title = screen.getByText('Наименование');
 
     expect(title).toBeVisible();
   });
@@ -32,11 +30,9 @@ describe('DataGrid', () => {
       },
     ];
 
-    const { getByTestId } = renderWithTheme(
-      <DataGrid keyId="id" rows={[]} columns={columns} />,
-    );
+    renderWithTheme(<DataGrid keyId="id" rows={[]} columns={columns} />);
 
-    const icon = getByTestId(DATA_GRID_TEST_ID_MAP.sortIcon);
+    const icon = screen.getByTestId(DATA_GRID_TEST_ID_MAP.sortIcon);
 
     expect(icon).toBeVisible();
   });
@@ -74,19 +70,18 @@ describe('DataGrid', () => {
       );
     };
 
-    const { getByText } = renderWithTheme(<TestComponent />);
-
+    renderWithTheme(<TestComponent />);
     expect(currentSort).toBe(undefined);
-    await userEvents.click(getByText('Наименование'));
+    await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'asc' });
-    await userEvents.click(getByText('Наименование'));
+    await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'desc' });
-    await userEvents.click(getByText('Наименование'));
+    await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toBe(undefined);
   });
 
   it('Props:columns:field: отображает в строке данные по field', async () => {
-    const { getByText } = renderWithTheme(
+    renderWithTheme(
       <DataGrid
         keyId="name"
         rows={[{ name: 'Vasya' }]}
@@ -99,7 +94,7 @@ describe('DataGrid', () => {
       />,
     );
 
-    const title = getByText('Vasya');
+    const title = screen.getByText('Vasya');
 
     expect(title).toBeVisible();
   });
@@ -112,11 +107,9 @@ describe('DataGrid', () => {
       },
     ];
 
-    const { getByText } = renderWithTheme(
-      <DataGrid keyId="id" rows={[]} columns={columns} />,
-    );
+    renderWithTheme(<DataGrid keyId="id" rows={[]} columns={columns} />);
 
-    const title = getByText('Нет данных');
+    const title = screen.getByText('Нет данных');
 
     expect(title).toBeVisible();
   });
@@ -124,7 +117,7 @@ describe('DataGrid', () => {
   it('Props:onRowClick: по клику на строку получаем данные row', async () => {
     const onRowClick = jest.fn();
 
-    const { getByText } = renderWithTheme(
+    renderWithTheme(
       <DataGrid
         keyId="name"
         rows={[{ name: 'Vasya' }]}
@@ -138,13 +131,13 @@ describe('DataGrid', () => {
       />,
     );
 
-    await userEvents.click(getByText('Vasya'));
+    await userEvents.click(screen.getByText('Vasya'));
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
   });
 
   // TODO: https://astraltrack.atlassian.net/browse/UIKIT-309
   // it('Props:emptyCellValue: по дефолту для пустого значения отображается -', async () => {
-  //   const { getByText } = renderWithTheme(
+  //   renderWithTheme(
   //     <DataGrid<{ name?: string }>
   //       keyId="name"
   //       rows={[{}]}
@@ -157,7 +150,7 @@ describe('DataGrid', () => {
   //     />,
   //   );
   //
-  //   const emptySymbol = getByText('-');
+  //   const emptySymbol = screen.getByText('-');
   //
   //   expect(emptySymbol).toBeVisible();
   // });

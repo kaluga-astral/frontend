@@ -1,4 +1,10 @@
-import { fireEvent, renderWithTheme, userEvents, waitFor } from '@astral/tests';
+import {
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+  waitFor,
+} from '@astral/tests';
 import { AUTOCOMPLETE_TEST_ID_MAP } from '@astral/ui';
 
 import { Form } from '../Form';
@@ -26,12 +32,11 @@ describe('FormAutocomplete', () => {
       );
     };
 
-    const { getByText, getByTestId } = renderWithTheme(<TestComponent />);
-
-    fireEvent.submit(getByTestId('form'));
+    renderWithTheme(<TestComponent />);
+    fireEvent.submit(screen.getByTestId('form'));
 
     await waitFor(() => {
-      const errorText = getByText('required');
+      const errorText = screen.getByText('required');
 
       expect(errorText).toBeVisible();
     });
@@ -65,11 +70,10 @@ describe('FormAutocomplete', () => {
       );
     };
 
-    const { getByTestId } = renderWithTheme(<TestComponent />);
-
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-    await user.click(getByTestId(AUTOCOMPLETE_TEST_ID_MAP.option));
-    fireEvent.submit(getByTestId('form'));
+    renderWithTheme(<TestComponent />);
+    await user.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await user.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.option));
+    fireEvent.submit(screen.getByTestId('form'));
 
     await waitFor(() => {
       const [submitValues] = onSubmit.mock.calls[0];

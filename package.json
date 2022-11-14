@@ -50,7 +50,8 @@
     "jest-environment-jsdom": "^29.3.1",
     "copyfiles": "^2.4.1",
     "resize-observer-polyfill": "^1.5.1",
-    "jest-junit": "^14.0.1"
+    "jest-junit": "^14.0.1",
+    "eslint-plugin-testing-library": "^5.9.1"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && start-storybook -p 6006",

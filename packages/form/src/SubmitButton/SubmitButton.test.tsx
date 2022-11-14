@@ -1,4 +1,4 @@
-import { fireEvent, renderWithTheme, waitFor } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen, waitFor } from '@astral/tests';
 import { BUTTON_TEST_ID_MAP } from '@astral/ui';
 
 import { Form } from '../Form';
@@ -20,12 +20,11 @@ describe('SubmitButton', () => {
       );
     };
 
-    const { getByTestId, getByText } = renderWithTheme(<TestComponent />);
-
-    fireEvent.submit(getByText('submit'));
+    renderWithTheme(<TestComponent />);
+    fireEvent.submit(screen.getByText('submit'));
 
     await waitFor(() => {
-      const buttonLoader = getByTestId(BUTTON_TEST_ID_MAP.loader);
+      const buttonLoader = screen.getByTestId(BUTTON_TEST_ID_MAP.loader);
 
       expect(buttonLoader).toBeVisible();
     });
