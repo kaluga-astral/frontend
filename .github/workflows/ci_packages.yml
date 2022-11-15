@@ -81,5 +81,5 @@ jobs:
         if: success() || failure()
         with:
           name: JEST Tests
-          path: /packages/**/junit.xml
+          path: /packages/ui/junit.xml | /packages/form/junit.xml | /packages/validations/junit.xml
           reporter: jest-junit
