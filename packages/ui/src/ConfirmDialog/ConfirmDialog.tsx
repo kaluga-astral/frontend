@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Button, ButtonProps } from '../Button';
 import { Dialog } from '../Dialog';
 import { DialogContent } from '../DialogContent';
@@ -16,16 +18,25 @@ type ConfirmDialogProps = {
   /**
    * @description Вспомогательный текст
    */
-  description: string;
+  description?: ReactNode;
+  /**
+   * @description Функция для закрытия диалога
+   */
+  onClose: () => void;
   /**
    * @description Параметры кнопок действий
    */
   actions: {
+    /**
+     * @description Параметры кнопки подтверждения
+     * @example <ConfirmDialog actions={{ confirm: { text: 'Название кнопки' }}}
+     */
     confirm: ButtonProps & { text: string };
-    cancel: ButtonProps & {
-      text: string;
-      onClick: ButtonProps['onClick'];
-    };
+    /**
+     * @description Параметры кнопки отмены. В качестве действия onClick по-умолчанию используется пропс onClose
+     * @example <ConfirmDialog actions={{ cancel: { text: 'Название кнопки' }}}
+     */
+    cancel: ButtonProps & { text: string };
   };
 };
 
@@ -34,17 +45,23 @@ export const ConfirmDialog = ({
   title,
   description,
   actions,
+  onClose,
 }: ConfirmDialogProps) => {
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
   const { text: cancelText, ...cancelButtonProps } = actions.cancel;
+  const handleCancelClick = cancelButtonProps.onClick || onClose;
 
   return (
     <Dialog title={title} open={open} onClose={actions.cancel.onClick}>
-      <DialogContent>
-        <DialogContentText>{description}</DialogContentText>
-      </DialogContent>
+      {description && (
+        <DialogContent>
+          <DialogContentText>{description}</DialogContentText>
+        </DialogContent>
+      )}
       <DialogActions>
-        <Button {...cancelButtonProps}>{cancelText}</Button>
+        <Button {...cancelButtonProps} onClick={handleCancelClick}>
+          {cancelText}
+        </Button>
         <Button {...confirmButtonProps}>{confirmText}</Button>
       </DialogActions>
     </Dialog>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
+import { useToggle } from '../hooks';
 
 import { ConfirmDialog } from './ConfirmDialog';
 
@@ -11,36 +12,31 @@ export default {
 };
 
 const Template: Story = () => {
-  const [open, setOpen] = React.useState(false);
+  const [isActive, handleActive, handleInactive] = useToggle();
   const [loading, setLoading] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleConfirm = () => {
     setLoading(true);
 
     return setTimeout(() => {
       setLoading(false);
-      setOpen(false);
+      handleInactive();
     }, 1000);
   };
 
-  const handleClose = () => setOpen(false);
-
   return (
     <div>
-      <Button variant="light" onClick={handleClickOpen}>
+      <Button variant="light" onClick={handleActive}>
         ConfirmDialog
       </Button>
       <ConfirmDialog
-        open={open}
+        open={isActive}
         title="Подверждение"
         description="Вы подтверждаете дейтвие?"
+        onClose={handleInactive}
         actions={{
           confirm: { text: 'Да', onClick: handleConfirm, loading },
-          cancel: { text: 'Нет', onClick: handleClose, variant: 'text' },
+          cancel: { text: 'Нет', onClick: handleInactive, variant: 'text' },
         }}
       />
     </div>
