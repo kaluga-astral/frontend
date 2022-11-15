@@ -3,7 +3,7 @@ import { renderHook, userEvents } from '@astral/tests';
 import { useEscapeClickEffect } from './useEscapeClickEffect';
 
 describe('useEscapeClickEffect', () => {
-  it('Prop:isActive=true: при нажатии esc вызывается onEscape', async () => {
+  it('Props:isActive=true: при нажатии esc вызывается onEscape', async () => {
     const onEscape = jest.fn();
 
     renderHook(() => useEscapeClickEffect({ isActive: true, onEscape }));
@@ -11,7 +11,7 @@ describe('useEscapeClickEffect', () => {
     expect(onEscape).toBeCalled();
   });
 
-  it('Prop:isActive=false: при нажатии esc onEscape не вызывается', async () => {
+  it('Props:isActive=false: при нажатии esc onEscape не вызывается', async () => {
     const onEscape = jest.fn();
 
     renderHook(() => useEscapeClickEffect({ isActive: false, onEscape }));

@@ -5,7 +5,7 @@ import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
 
 describe('DataGrid', () => {
-  it('Prop:columns: отображаются названия колонок', () => {
+  it('Props:columns: отображаются названия колонок', () => {
     const columns = [
       {
         field: 'name',
@@ -20,7 +20,7 @@ describe('DataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('Prop:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: отображается иконка сортировки', () => {
     const columns = [
       {
         field: 'name',
@@ -36,7 +36,7 @@ describe('DataGrid', () => {
     expect(icon).not.toBeNull();
   });
 
-  it('Prop:columns:sortable: по клику на head cell вызывается onSort', async () => {
+  it('Props:columns:sortable: по клику на head cell вызывается onSort', async () => {
     type DataItem = {
       name: string;
     };
@@ -98,7 +98,7 @@ describe('DataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('NoDataPlaceholder: отображается, если нет данных', async () => {
+  it('Props:options=[]: отображается placeholder', async () => {
     const columns = [
       {
         field: 'name',

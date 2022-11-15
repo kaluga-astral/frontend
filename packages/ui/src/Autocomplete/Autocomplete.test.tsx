@@ -12,7 +12,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeVisible();
   });
 
-  it('Behavior:focus: не отображается popover', async () => {
+  it('Focus: не отображается popover', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
 
@@ -45,7 +45,7 @@ describe('Autocomplete', () => {
     expect(kolya).toBeVisible();
   });
 
-  it('Behavior: закрывается popover после выбора значения', async () => {
+  it('Закрывается popover после выбора значения', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -68,7 +68,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Behavior: в инпут сетится label после выбора option', async () => {
+  it('Props:multiple=false: в инпут сетится label после выбора option', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [

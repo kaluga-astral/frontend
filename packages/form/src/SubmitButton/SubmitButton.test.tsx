@@ -6,7 +6,7 @@ import { useForm } from '../hooks';
 import { SubmitButton } from './SubmitButton';
 
 describe('SubmitButton', () => {
-  it('Form:submitting: отображается лоадер', async () => {
+  it('Form-submitting: отображается лоадер', async () => {
     const TestComponent = () => {
       const form = useForm();
 
