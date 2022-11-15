@@ -2,7 +2,6 @@ import { renderWithTheme, screen } from '@astral/tests';
 import { useEffect, useRef } from 'react';
 
 import { Button } from './Button';
-import { BUTTON_TEST_ID_MAP } from './constants';
 
 describe('Button', () => {
   it('Prop:ref: is present', () => {
@@ -41,7 +40,7 @@ describe('Button', () => {
   it('Prop:loading: отображается лоадер', () => {
     renderWithTheme(<Button loading>Btn</Button>);
 
-    const loader = screen.getByTestId(BUTTON_TEST_ID_MAP.loader);
+    const loader = screen.getByRole('progressbar');
 
     expect(loader).toBeVisible();
   });

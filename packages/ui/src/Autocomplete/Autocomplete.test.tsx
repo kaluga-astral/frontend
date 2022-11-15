@@ -1,12 +1,11 @@
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { Autocomplete } from './Autocomplete';
-import { AUTOCOMPLETE_TEST_ID_MAP } from './constants';
 
 describe('Autocomplete', () => {
   it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByRole('combobox'));
 
     const noDataPlaceholder = screen.getByText('Нет данных');
 
@@ -15,7 +14,7 @@ describe('Autocomplete', () => {
 
   it('Behavior:focus: не отображается popover', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
-    fireEvent.focus(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    fireEvent.focus(screen.getByRole('combobox'));
 
     const noDataPlaceholder = screen.queryByText('Нет данных');
 
@@ -37,7 +36,7 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByRole('combobox'));
 
     const vasya = screen.getByText('Pupkin');
     const kolya = screen.getByText('Kolin');
@@ -61,7 +60,7 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByRole('combobox'));
 
     const selectedOption = screen.getByRole('option', { name: 'Pupkin' });
 
@@ -84,13 +83,13 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByRole('combobox'));
 
     const option = screen.getByRole('option', { name: 'Pupkin' });
 
     await userEvents.click(option);
 
-    const input = screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input);
+    const input = screen.getByRole('combobox');
 
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
@@ -108,11 +107,9 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
+    await userEvents.click(screen.getByRole('combobox'));
 
-    const checkbox = screen.getByTestId(
-      AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox,
-    );
+    const checkbox = screen.getByRole('menuitemcheckbox');
 
     expect(checkbox).toBeVisible();
   });
@@ -130,19 +127,16 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-
-    await userEvents.click(
-      screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
-    );
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('menuitemcheckbox'));
 
     const checkbox = screen
-      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox)
+      .getByRole('menuitemcheckbox')
       .getElementsByTagName('input')[0];
 
     expect(checkbox).toBeChecked();
 
-    const tag = screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
+    const tag = screen.getByRole('button', { name: 'Pupkin' });
 
     expect(tag).toBeVisible();
   });
@@ -160,25 +154,22 @@ describe('Autocomplete', () => {
       />,
     );
 
-    await userEvents.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-
-    await userEvents.click(
-      screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox),
-    );
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('menuitemcheckbox'));
 
     const tagDeleteIcon = screen
-      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag)
+      .getByRole('button', { name: 'Pupkin' })
       .getElementsByTagName('svg')[0];
 
     await userEvents.click(tagDeleteIcon);
 
     const checkbox = screen
-      .getByTestId(AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox)
+      .getByRole('menuitemcheckbox')
       .getElementsByTagName('input')[0];
 
     expect(checkbox).not.toBeChecked();
 
-    const tag = screen.queryByTestId(AUTOCOMPLETE_TEST_ID_MAP.tag);
+    const tag = screen.queryByRole('button', { name: 'Pupkin' });
 
     expect(tag).toBeNull();
   });

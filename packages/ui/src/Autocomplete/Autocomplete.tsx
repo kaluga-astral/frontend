@@ -19,10 +19,7 @@ import {
 } from '../OverflowTypography';
 import { WithoutEmotionSpecific } from '../types';
 
-import {
-  AUTOCOMPLETE_TEST_ID_MAP,
-  DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
-} from './constants';
+import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { AutocompleteSizes } from './enums';
 
 export type AutocompleteSize = `${AutocompleteSizes}`;
@@ -88,7 +85,6 @@ export const Autocomplete = <
             deleteIcon={<CrossSmOutlineSm />}
             color="grey"
             label={title}
-            data-testid={AUTOCOMPLETE_TEST_ID_MAP.tag}
             {...getTagProps({ index })}
           />
         );
@@ -115,7 +111,6 @@ export const Autocomplete = <
         helperText={helperText}
         size={size}
         inputProps={{
-          'data-testid': AUTOCOMPLETE_TEST_ID_MAP.input,
           ...inputParams?.inputProps,
         }}
       />
@@ -136,17 +131,10 @@ export const Autocomplete = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <MenuItem
-          data-testid={AUTOCOMPLETE_TEST_ID_MAP.option}
-          {...optionProps}
-          key={optionProps.id}
-        >
+        <MenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
-              <Checkbox
-                data-testid={AUTOCOMPLETE_TEST_ID_MAP.optionCheckbox}
-                checked={selected}
-              />
+              <Checkbox role="menuitemcheckbox" checked={selected} />
             </ListItemIcon>
           )}
           <OverflowTypography
@@ -163,7 +151,6 @@ export const Autocomplete = <
 
   return (
     <MuiAutocomplete
-      data-testid={AUTOCOMPLETE_TEST_ID_MAP.root}
       {...restProps}
       size={size}
       multiple={multiple}

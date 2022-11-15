@@ -5,7 +5,6 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
-import { AUTOCOMPLETE_TEST_ID_MAP } from '@astral/ui';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -19,7 +18,7 @@ describe('FormAutocomplete', () => {
 
       return (
         <Form
-          data-testid="form"
+          name="form"
           form={form}
           onSubmit={form.handleSubmit(() => undefined)}
         >
@@ -33,7 +32,7 @@ describe('FormAutocomplete', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.submit(screen.getByTestId('form'));
+    fireEvent.submit(screen.getByRole('form'));
 
     await waitFor(() => {
       const errorText = screen.getByText('required');
@@ -56,11 +55,7 @@ describe('FormAutocomplete', () => {
       const form = useForm<{ user: Option }>();
 
       return (
-        <Form
-          data-testid="form"
-          form={form}
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
+        <Form name="form" form={form} onSubmit={form.handleSubmit(onSubmit)}>
           <FormAutocomplete
             name="user"
             getOptionLabel={(option) => (option as Option).name}
@@ -71,9 +66,9 @@ describe('FormAutocomplete', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    await user.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.input));
-    await user.click(screen.getByTestId(AUTOCOMPLETE_TEST_ID_MAP.option));
-    fireEvent.submit(screen.getByTestId('form'));
+    await user.click(screen.getByRole('combobox'));
+    await user.click(screen.getByRole('option'));
+    fireEvent.submit(screen.getByRole('form'));
 
     await waitFor(() => {
       const [submitValues] = onSubmit.mock.calls[0];

@@ -2,7 +2,6 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useState } from 'react';
 
 import { DataGrid } from './DataGrid';
-import { DATA_GRID_TEST_ID_MAP } from './constants';
 import { DataGridColumns, DataGridSort } from './types';
 
 describe('DataGrid', () => {
@@ -32,9 +31,9 @@ describe('DataGrid', () => {
 
     renderWithTheme(<DataGrid keyId="id" rows={[]} columns={columns} />);
 
-    const icon = screen.getByTestId(DATA_GRID_TEST_ID_MAP.sortIcon);
+    const icon = screen.getByText('Наименование').querySelector('svg');
 
-    expect(icon).toBeVisible();
+    expect(icon).not.toBeNull();
   });
 
   it('Prop:columns:sortable: по клику на head cell вызывается onSort', async () => {

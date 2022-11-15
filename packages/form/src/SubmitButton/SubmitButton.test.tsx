@@ -1,5 +1,4 @@
 import { fireEvent, renderWithTheme, screen, waitFor } from '@astral/tests';
-import { BUTTON_TEST_ID_MAP } from '@astral/ui';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -24,7 +23,7 @@ describe('SubmitButton', () => {
     fireEvent.submit(screen.getByText('submit'));
 
     await waitFor(() => {
-      const buttonLoader = screen.getByTestId(BUTTON_TEST_ID_MAP.loader);
+      const buttonLoader = screen.getByRole('progressbar');
 
       expect(buttonLoader).toBeVisible();
     });

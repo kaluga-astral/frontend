@@ -2,7 +2,6 @@ import { CSSProperties, useMemo } from 'react';
 import { TableCellProps } from '@mui/material';
 import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
-import { DATA_GRID_TEST_ID_MAP } from '../constants';
 import { SortStates } from '../enums';
 import { DataGridRow, DataGridSort } from '../types';
 
@@ -36,26 +35,16 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
     }
 
     if (sorting?.fieldId !== field) {
-      return <SortFillSm data-testid={DATA_GRID_TEST_ID_MAP.sortIcon} />;
+      return <SortFillSm />;
     }
 
     switch (sorting?.sort) {
       case SortStates.ASC:
-        return (
-          <SortUpFillSm
-            color="primary"
-            data-testid={DATA_GRID_TEST_ID_MAP.sortIcon}
-          />
-        );
+        return <SortUpFillSm color="primary" />;
       case SortStates.DESC:
-        return (
-          <SortDownFillSm
-            color="primary"
-            data-testid={DATA_GRID_TEST_ID_MAP.sortIcon}
-          />
-        );
+        return <SortDownFillSm color="primary" />;
       default:
-        return <SortFillSm data-testid={DATA_GRID_TEST_ID_MAP.sortIcon} />;
+        return <SortFillSm />;
     }
   }, [sorting, sortable, field]);
 
