@@ -110,9 +110,6 @@ export const Autocomplete = <
         error={error}
         helperText={helperText}
         size={size}
-        inputProps={{
-          ...inputParams?.inputProps,
-        }}
       />
     ),
     [placeholder, label, success, error, helperText, size],
