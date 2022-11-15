@@ -57,7 +57,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 16.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v2
         with:
           node-version: 18.x
@@ -81,5 +81,5 @@ jobs:
         if: success() || failure()
         with:
           name: JEST Tests
-          path: /packages/ui/junit.xml | /packages/form/junit.xml | /packages/validations/junit.xml
+          path: /**/junit.xml
           reporter: jest-junit
