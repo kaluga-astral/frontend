@@ -75,11 +75,3 @@ jobs:
         env:
           CI: true
         run: npm run tests:ci --maxWorkers=${{ steps.cpu-cores.outputs.count }}
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: JEST Tests
-          path: /**/packages/ui/junit.xml|/**/packages/form/junit.xml|/**/packages/validations/junit.xml
-          reporter: jest-junit
