@@ -5,6 +5,5 @@ module.exports = {
   moduleNameMapper: {
     '^lodash-es$': 'lodash'
   },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   reporters: ['default', 'jest-junit'],
 };
