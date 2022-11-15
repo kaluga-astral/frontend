@@ -52,7 +52,7 @@ export const ConfirmDialog = ({
   const handleCancelClick = cancelButtonProps.onClick || onClose;
 
   return (
-    <Dialog title={title} open={open} onClose={actions.cancel.onClick}>
+    <Dialog title={title} open={open} onClose={onClose}>
       {description && (
         <DialogContent>
           <DialogContentText>{description}</DialogContentText>

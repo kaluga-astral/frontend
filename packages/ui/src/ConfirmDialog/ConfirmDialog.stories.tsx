@@ -12,7 +12,7 @@ export default {
 };
 
 const Template: Story = () => {
-  const [isActive, handleActive, handleInactive] = useToggle();
+  const [isActive, handleOpen, handleClose] = useToggle();
   const [loading, setLoading] = React.useState(false);
 
   const handleConfirm = () => {
@@ -20,23 +20,23 @@ const Template: Story = () => {
 
     return setTimeout(() => {
       setLoading(false);
-      handleInactive();
+      handleClose();
     }, 1000);
   };
 
   return (
     <div>
-      <Button variant="light" onClick={handleActive}>
+      <Button variant="light" onClick={handleOpen}>
         ConfirmDialog
       </Button>
       <ConfirmDialog
         open={isActive}
         title="Подверждение"
         description="Вы подтверждаете дейтвие?"
-        onClose={handleInactive}
+        onClose={handleClose}
         actions={{
           confirm: { text: 'Да', onClick: handleConfirm, loading },
-          cancel: { text: 'Нет', onClick: handleInactive, variant: 'text' },
+          cancel: { text: 'Нет', variant: 'text' },
         }}
       />
     </div>
