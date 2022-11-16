@@ -1,5 +1,5 @@
-/// <reference types="@astral/ui/declaration/emotion" />
-/// <reference types="@astral/ui/declaration/mui-material" />
+/// <reference types="../../ui/src/declaration/emotion" />
+/// <reference types="../../ui/src/declaration/mui-material" />
 /// <reference types="@emotion/react/types/css-prop" />
 
 declare module '*.svg' {

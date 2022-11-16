@@ -19,10 +19,8 @@ import {
 } from '../OverflowTypography';
 import { WithoutEmotionSpecific } from '../types';
 
-import {
-  AutocompleteSizes,
-  DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT,
-} from './constants';
+import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
+import { AutocompleteSizes } from './enums';
 
 export type AutocompleteSize = `${AutocompleteSizes}`;
 
@@ -133,7 +131,7 @@ export const Autocomplete = <
         <MenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
-              <Checkbox checked={selected} />
+              <Checkbox role="menuitemcheckbox" checked={selected} />
             </ListItemIcon>
           )}
           <OverflowTypography

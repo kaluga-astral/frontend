@@ -11,18 +11,18 @@
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
-    "tests": "jest --passWithNoTests"
+    "tests": "jest --passWithNoTests",
+    "tests:ci": "jest --ci --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
-    "@astral/ui": "^1.25.0",
-    "@astral/validations": "^1.0.0"
+    "@astral/ui": "*",
+    "@astral/validations": "*"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "react": "^18.2.0",
-    "@types/react": "^18.0.20"
+    "@astral/tests": "*"
   }
 }

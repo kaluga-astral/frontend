@@ -27,7 +27,8 @@
     "noFallthroughCasesInSwitch": true,
   },
   "include": [
-    "./declarations"
+    "./declarations",
+    "./jest-setup.ts"
   ],
   "exclude": [
     "commander"
