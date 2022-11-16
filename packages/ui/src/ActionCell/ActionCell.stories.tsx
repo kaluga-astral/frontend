@@ -48,7 +48,8 @@ const columns: DataGridColumns<ColumnsType>[] = [
     field: 'action',
     label: 'Действия',
     sortable: false,
-    align: 'center',
+    width: '10%',
+    align: 'right',
     renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
   },
 ];
