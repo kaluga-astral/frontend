@@ -2,7 +2,7 @@ import { CSSProperties, useMemo } from 'react';
 import { TableCellProps } from '@mui/material';
 import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
-import { SortStates } from '../constants';
+import { SortStates } from '../enums';
 import { DataGridRow, DataGridSort } from '../types';
 
 import { StyledTableCell, TableCellTitle } from './styles';

@@ -5,7 +5,7 @@ import { WithFormFieldProps } from '../types';
 import { useFieldErrorProps } from '../hooks';
 
 export type FormSelectProps<FieldValues extends object> = WithFormFieldProps<
-  SelectProps,
+  SelectProps<unknown>,
   FieldValues
 >;
 

@@ -10,6 +10,7 @@
     "publish": "npm publish ./lib",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "tests": "jest --passWithNoTests",
+    "tests:ci": "jest --ci --reporters=default --reporters=jest-junit",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
@@ -35,6 +36,7 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5"
+    "@types/lodash-es": "^4.17.5",
+    "@astral/tests": "*"
   }
 }

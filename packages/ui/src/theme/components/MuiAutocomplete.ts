@@ -1,7 +1,7 @@
 import { Components } from '@mui/material';
 
 import type { Theme } from '../baseTheme';
-import { AutocompleteSizes } from '../../Autocomplete/constants';
+import { AutocompleteSizes } from '../../Autocomplete/enums';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
   styleOverrides: {
