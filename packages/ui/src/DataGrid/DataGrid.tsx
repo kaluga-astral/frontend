@@ -125,7 +125,13 @@ export function DataGrid<
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = [...selectedRows, ...rows];
+      const restSelectedRows = rows.filter(
+        (row) =>
+          !selectedRows.find(
+            (selectedRow) => selectedRow[keyId] === row[keyId],
+          ),
+      );
+      const mergedSelectedRows = [...selectedRows, ...restSelectedRows];
 
       return onSelectRow(mergedSelectedRows);
     }
