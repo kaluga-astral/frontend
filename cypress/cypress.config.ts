@@ -10,4 +10,5 @@ export default defineConfig({
       viteConfig,
     },
   },
+  video: false,
 });
