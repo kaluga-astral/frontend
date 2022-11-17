@@ -1,26 +1,12 @@
-import {
-  Backdrop,
-  LoaderWrapper,
-  StyledDivider,
-  StyledLinearProgress,
-} from './styles';
+import { LoaderWrapper, StyledDivider, StyledLinearProgress } from './styles';
 
 export type DataGridLoaderProps = {
   loading?: boolean;
-  withFooter: boolean;
-  footerHeight: number;
 };
 
-const DataGridLoader = ({
-  loading = false,
-  withFooter,
-  footerHeight,
-}: DataGridLoaderProps) => {
+const DataGridLoader = ({ loading = false }: DataGridLoaderProps) => {
   return (
     <LoaderWrapper>
-      {loading && (
-        <Backdrop withFooter={withFooter} footerHeight={footerHeight} />
-      )}
       {loading && <StyledLinearProgress />}
       {!loading && <StyledDivider />}
     </LoaderWrapper>

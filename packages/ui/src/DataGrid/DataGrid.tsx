@@ -6,7 +6,11 @@ import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
-import { DataGridContainer, StyledTableContainer } from './styles';
+import {
+  DataGridContainer,
+  DisabledTableContainer,
+  StyledTableContainer,
+} from './styles';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
@@ -76,6 +80,11 @@ export type DataGridProps<
    */
   loading?: boolean;
   /**
+   * @example <DataGrid  disabled={true} />
+   * Флажок блокировки таблицы
+   */
+  disabled?: boolean;
+  /**
    * @default '-'
    * @example <DataGrid  emptyCellValue{'Нет данных'} />
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -87,12 +96,6 @@ export type DataGridProps<
    *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
-  /**
-   * @default 50
-   * @example <DateGrid Footer={Footer} footerHeight={50} />
-   * Высота Footer, по-умолчанию указана высота Footer из кита
-   */
-  footerHeight?: number;
 };
 
 export function DataGrid<
@@ -110,14 +113,16 @@ export function DataGrid<
   Footer,
   noDataPlaceholder,
   loading,
+  disabled,
   onSort,
   keyId,
   emptyCellValue,
   className,
-  footerHeight = 50,
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
-  const withFooter = Boolean(Footer);
+
+  const TableContainer =
+    loading || disabled ? DisabledTableContainer : StyledTableContainer;
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) {
@@ -174,7 +179,7 @@ export function DataGrid<
 
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
-      <StyledTableContainer>
+      <TableContainer>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
             onSort={onSort}
@@ -198,12 +203,8 @@ export function DataGrid<
             noDataPlaceholder={renderedPlaceholder()}
           />
         </Table>
-      </StyledTableContainer>
-      <DataGridLoader
-        footerHeight={footerHeight}
-        withFooter={withFooter}
-        loading={loading}
-      />
+      </TableContainer>
+      <DataGridLoader loading={loading} />
       {Footer}
     </DataGridContainer>
   );

@@ -23,3 +23,10 @@ export const StyledTableContainer = styled(TableContainer, {
 })<StyledTableContainerProps>`
   height: 100%;
 `;
+
+export const DisabledTableContainer = styled(StyledTableContainer)`
+  background: ${({ theme }) => theme.palette.background.element};
+  filter: grayscale(100%);
+
+  pointer-events: none;
+`;
