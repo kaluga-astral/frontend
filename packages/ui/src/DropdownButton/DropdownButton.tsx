@@ -24,7 +24,8 @@ export const DropdownButton = forwardRef<
       <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
         <Button
           {...props}
-          ref={anchorRef}
+          ref={ref}
+          // ref={anchorRef}
           onClick={handleOpenMenu}
           endIcon={<Chevron isActive={open} />}
         >
