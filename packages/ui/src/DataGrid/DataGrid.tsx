@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
+import { uniqBy } from 'lodash-es';
 
 import { Table } from '../Table';
 
@@ -125,7 +126,7 @@ export function DataGrid<
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = [...selectedRows, ...rows];
+      const mergedSelectedRows = uniqBy([...selectedRows, ...rows], keyId);
 
       return onSelectRow(mergedSelectedRows);
     }
