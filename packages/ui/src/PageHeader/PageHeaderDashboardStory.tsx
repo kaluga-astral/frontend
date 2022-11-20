@@ -8,7 +8,7 @@ import {
   SendOutlineMd,
   SettingsFillMd,
 } from '@astral/icons';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { ChangeEvent, Fragment, useState } from 'react';
 
 import { ActionCell, Actions } from '../ActionCell';
@@ -17,7 +17,6 @@ import { SidebarProps } from '../DashboardLayout/Sidebar';
 import { DataGrid, DataGridColumns } from '../DataGrid';
 import { DataGridPagination } from '../DataGridPagination';
 import { Divider } from '../Divider';
-import { Grid } from '../Grid';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
 import { Menu, MenuProps } from '../Menu';
@@ -358,23 +357,17 @@ export const PageHeaderDashboardStory = () => {
               ],
             },
             subHeader: (
-              <Grid
-                container
-                templateColumns="240px repeat(3, 196px)"
-                spacing={2}
-              >
+              <Stack flexDirection="row" flexWrap="wrap" gap={2}>
                 <TextField
                   placeholder="Поиск на странице..."
                   size="small"
-                  fullWidth
                   InputProps={{
                     startAdornment: <SearchOutlineMd />,
                   }}
                 />
                 <Select value="" placeholder="Выберите вариант" size="small" />
                 <Select value="" placeholder="Выберите вариант" size="small" />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-              </Grid>
+              </Stack>
             ),
           }}
           content={{

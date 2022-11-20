@@ -1,9 +1,9 @@
 import { AddOutlineMd, SearchOutlineMd } from '@astral/icons';
+import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 import { Fragment } from 'react';
 
 import { ExampleTemplate } from '../docs';
-import { Grid } from '../Grid';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
 import { Typography } from '../Typography';
@@ -202,15 +202,10 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           subHeader={
-            <Grid
-              container
-              templateColumns="240px repeat(4, 196px)"
-              spacing={2}
-            >
+            <Stack flexDirection="row" flexWrap="wrap" gap={2}>
               <TextField
                 placeholder="Поиск на странице..."
                 size="small"
-                fullWidth
                 InputProps={{
                   startAdornment: <SearchOutlineMd />,
                 }}
@@ -219,7 +214,7 @@ export const Showcase: Story = () => {
               <Select value="" placeholder="Выберите вариант" size="small" />
               <Select value="" placeholder="Выберите вариант" size="small" />
               <Select value="" placeholder="Выберите вариант" size="small" />
-            </Grid>
+            </Stack>
           }
         />
       </ExampleTemplate.Case>
