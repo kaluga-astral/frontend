@@ -11,23 +11,23 @@ export type PageContentProps = {
    */
   isSeparatorShown?: boolean;
   /**
-   * @example <PageContent hasDefaultPadding>Контент</PageContent>
-   * @default false
+   * @example <PageContent isPaddingDisabled>Контент</PageContent>
+   * @default true
    * Флаг, добавляющий стандартные отсупы (требуются не всегда)
    */
-  hasDefaultPadding?: boolean;
+  isPaddingDisabled?: boolean;
 };
 
 export const PageContent = (props: PageContentProps) => {
   const {
     children,
-    hasDefaultPadding = false,
+    isPaddingDisabled = true,
     isSeparatorShown = false,
   } = props;
 
   return (
     <PageContentWrapper
-      hasDefaultPadding={hasDefaultPadding}
+      isPaddingDisabled={isPaddingDisabled}
       isSeparatorShown={isSeparatorShown}
     >
       {children}

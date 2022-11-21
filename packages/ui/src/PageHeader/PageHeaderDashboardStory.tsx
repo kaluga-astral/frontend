@@ -344,13 +344,13 @@ export const PageHeaderDashboardStory = () => {
               <Fragment key="3">Текст с разделителем</Fragment>,
             ],
             actions: {
-              mainButtons: [
+              main: [
                 {
                   text: 'Основное действие',
                   startIcon: <AddOutlineMd />,
                 },
               ],
-              secondaryButtons: [
+              secondary: [
                 {
                   text: 'Кнопка',
                 },
@@ -390,7 +390,7 @@ export const PageHeaderDashboardStory = () => {
                 }
               />
             ),
-            hasDefaultPadding: true,
+            isPaddingDisabled: false,
           }}
         />
       </DashboardLayout.Main>

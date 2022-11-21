@@ -1,14 +1,14 @@
 import { styled } from '../styles';
 
 type PageContentWrapperProps = {
-  hasDefaultPadding?: boolean;
+  isPaddingDisabled?: boolean;
   isSeparatorShown?: boolean;
 };
 
 export const PageContentWrapper = styled.article<PageContentWrapperProps>`
   grid-area: content;
-  padding: ${({ hasDefaultPadding, theme }) =>
-    hasDefaultPadding ? theme.spacing(0, 6) : 0};
+  padding: ${({ isPaddingDisabled, theme }) =>
+    isPaddingDisabled ? 0 : theme.spacing(0, 6)};
   overflow: auto;
 
   border-top: ${({ isSeparatorShown, theme }) =>

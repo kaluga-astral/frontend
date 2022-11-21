@@ -3,7 +3,7 @@ import { ArrowLOutlineMd } from '@astral/icons';
 
 import { BaseButtonProps } from '../ButtonBase';
 
-import { ButtonGroups, ButtonGroupsProps } from './ButtonGroups';
+import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 import {
   PageHeaderBackButton,
   PageHeaderBreadcrumbs,
@@ -42,20 +42,20 @@ export type PageHeaderProps = {
   breadCrumbs?: ReactNode[];
   /**
    * @example <PageHeader actions={{
-   *  mainButtons: [
+   *  main: [
    *    {
    *      text: 'Основное действие',
    *    },
    *  ],
-   *  secondaryButtons: [
+   *  secondary: [
    *    {
    *      text: 'Вспомогательное действие',
    *    },
    *  ]
    * }} />
-   * Набор кнопок, видимые кофигурируются через объект mainButtons, скрытые в меню - через secondaryButtons
+   * Набор кнопок, видимые кофигурируются через объект main, скрытые в меню - через secondary
    */
-  actions?: ButtonGroupsProps;
+  actions?: ButtonGroupProps;
   /**
    * @example <PageHeader backButton={{
    *  onClick: () => {},
@@ -83,7 +83,7 @@ export const PageHeader = (props: PageHeaderProps) => {
       {description && (
         <PageHeaderDescription>{description}</PageHeaderDescription>
       )}
-      {actions && <ButtonGroups {...actions} />}
+      {actions && <ButtonGroup {...actions} />}
       {subHeader && <PageSubHeader>{subHeader}</PageSubHeader>}
     </PageHeaderWrapper>
   );

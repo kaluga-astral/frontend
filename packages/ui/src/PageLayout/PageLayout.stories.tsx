@@ -230,13 +230,13 @@ export const Showcase: Story = () => {
               <Fragment key="3">Текст с разделителем</Fragment>,
             ],
             actions: {
-              mainButtons: [
+              main: [
                 {
                   text: 'Основное действие',
                   startIcon: <AddOutlineMd />,
                 },
               ],
-              secondaryButtons: [
+              secondary: [
                 {
                   text: 'Кнопка',
                 },
@@ -281,7 +281,7 @@ export const Showcase: Story = () => {
                 }
               />
             ),
-            hasDefaultPadding: true,
+            isPaddingDisabled: false,
           }}
         />
       </ExampleTemplate.Case>
@@ -295,7 +295,7 @@ export const Showcase: Story = () => {
           header={{
             title: 'Черновики',
             actions: {
-              mainButtons: [
+              main: [
                 {
                   text: 'Второстепенное действие',
                   variant: 'light',
@@ -321,7 +321,7 @@ export const Showcase: Story = () => {
                   startIcon: <AddOutlineMd />,
                 },
               ],
-              secondaryButtons: [
+              secondary: [
                 {
                   text: 'Кнопка',
                 },

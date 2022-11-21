@@ -7,8 +7,8 @@ import { IconDropdownButton } from '../../IconDropdownButton';
 
 import { ButtonGroupsWrapper } from './styles';
 
-export type ButtonGroupsProps = {
-  mainButtons?: (Pick<
+export type ButtonGroupProps = {
+  main?: (Pick<
     ButtonProps,
     | 'color'
     | 'disabled'
@@ -22,7 +22,7 @@ export type ButtonGroupsProps = {
   > & {
     text: string;
   })[];
-  secondaryButtons?: (Pick<
+  secondary?: (Pick<
     ListItemButtonProps,
     'disabled' | 'onClick' | 'component'
   > & {
@@ -30,23 +30,23 @@ export type ButtonGroupsProps = {
   })[];
 };
 
-export const ButtonGroups = (props: ButtonGroupsProps) => {
-  const { mainButtons, secondaryButtons } = props;
+export const ButtonGroup = (props: ButtonGroupProps) => {
+  const { main, secondary } = props;
 
   return (
     <ButtonGroupsWrapper>
-      {secondaryButtons && (
+      {secondary && (
         <IconDropdownButton icon={<DotsOutlineMd />} variant="light">
-          {secondaryButtons.map(({ text, ...secondaryButtonProps }) => (
-            <ListItemButton key={text} {...secondaryButtonProps}>
+          {secondary.map(({ text, ...secondaryProps }) => (
+            <ListItemButton key={text} {...secondaryProps}>
               <ListItemText primary={text} />
             </ListItemButton>
           ))}
         </IconDropdownButton>
       )}
-      {mainButtons &&
-        mainButtons.map(({ text, ...mainButtonProps }) => (
-          <Button key={text} {...mainButtonProps}>
+      {main &&
+        main.map(({ text, ...mainProps }) => (
+          <Button key={text} {...mainProps}>
             {text}
           </Button>
         ))}

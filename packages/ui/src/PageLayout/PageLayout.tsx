@@ -15,7 +15,7 @@ export type PageLayoutProps = {
   /**
    * @example <PageLayout content={{
    *  children: 'Контент страницы',
-   *  hasDefaultPadding: true,
+   *  isPaddingDisabled: false,
    * }} />
    * Конфигурация PageContent
    */

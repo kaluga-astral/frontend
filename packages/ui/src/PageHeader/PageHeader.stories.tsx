@@ -58,13 +58,13 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           actions={{
-            mainButtons: [
+            main: [
               {
                 text: 'Основное действие',
                 startIcon: <AddOutlineMd />,
               },
             ],
-            secondaryButtons: [
+            secondary: [
               {
                 text: 'Кнопка',
               },
@@ -84,13 +84,13 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           actions={{
-            mainButtons: [
+            main: [
               {
                 text: 'Основное действие',
                 startIcon: <AddOutlineMd />,
               },
             ],
-            secondaryButtons: [
+            secondary: [
               {
                 text: 'Кнопка',
               },
@@ -115,13 +115,13 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           actions={{
-            mainButtons: [
+            main: [
               {
                 text: 'Основное действие',
                 startIcon: <AddOutlineMd />,
               },
             ],
-            secondaryButtons: [
+            secondary: [
               {
                 text: 'Кнопка',
               },
@@ -141,13 +141,13 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           actions={{
-            mainButtons: [
+            main: [
               {
                 text: 'Основное действие',
                 startIcon: <AddOutlineMd />,
               },
             ],
-            secondaryButtons: [
+            secondary: [
               {
                 text: 'Кнопка',
               },
@@ -173,13 +173,13 @@ export const Showcase: Story = () => {
         <PageHeader
           title="Черновики"
           actions={{
-            mainButtons: [
+            main: [
               {
                 text: 'Основное действие',
                 startIcon: <AddOutlineMd />,
               },
             ],
-            secondaryButtons: [
+            secondary: [
               {
                 text: 'Кнопка',
               },
@@ -242,12 +242,12 @@ PageHeaderStory.args = {
     <Fragment key="3">Текст с разделителем</Fragment>,
   ],
   actions: {
-    mainButtons: [
+    main: [
       {
         text: 'Основное действие',
       },
     ],
-    secondaryButtons: [
+    secondary: [
       {
         text: 'Кнопка',
       },
