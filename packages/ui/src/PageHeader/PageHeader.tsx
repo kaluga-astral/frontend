@@ -10,7 +10,7 @@ import {
   PageHeaderDescription,
   PageHeaderTitle,
   PageHeaderWrapper,
-  PageSubHeader,
+  PageSubheader,
 } from './styles';
 
 export type PageHeaderProps = {
@@ -25,12 +25,12 @@ export type PageHeaderProps = {
    */
   description?: ReactNode;
   /**
-   * @example <PageHeader subHeader={<TextField placeholder="Поиск на странице..." size="small" />} />
+   * @example <PageHeader subheader={<TextField placeholder="Поиск на странице..." size="small" />} />
    * Набор компонент, отображаемый в нижней части блока
    */
-  subHeader?: ReactNode;
+  subheader?: ReactNode;
   /**
-   * @example <PageHeader breadCrumbs={
+   * @example <PageHeader breadcrumbs={
    *  [
    *    <Link>Первая ссылка</Link>,
    *    <Link>Вторая ссылка</Link>,
@@ -39,7 +39,7 @@ export type PageHeaderProps = {
    * } />
    * Хлебные крошки
    */
-  breadCrumbs?: ReactNode[];
+  breadcrumbs?: ReactNode[];
   /**
    * @example <PageHeader actions={{
    *  main: [
@@ -62,20 +62,20 @@ export type PageHeaderProps = {
    * }} />
    * Кнопка назад
    */
-  backButton?: Pick<BaseButtonProps, 'component' | 'onClick'>;
+  backButton?: Omit<BaseButtonProps, 'children' | 'variant'>;
 };
 
 export const PageHeader = (props: PageHeaderProps) => {
-  const { title, description, subHeader, breadCrumbs, actions, backButton } =
+  const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
 
   return (
     <PageHeaderWrapper>
-      {breadCrumbs && (
-        <PageHeaderBreadcrumbs>{breadCrumbs}</PageHeaderBreadcrumbs>
+      {breadcrumbs && (
+        <PageHeaderBreadcrumbs>{breadcrumbs}</PageHeaderBreadcrumbs>
       )}
       {backButton && (
-        <PageHeaderBackButton variant="light" {...backButton}>
+        <PageHeaderBackButton {...backButton} variant="light">
           <ArrowLOutlineMd />
         </PageHeaderBackButton>
       )}
@@ -84,7 +84,7 @@ export const PageHeader = (props: PageHeaderProps) => {
         <PageHeaderDescription>{description}</PageHeaderDescription>
       )}
       {actions && <ButtonGroup {...actions} />}
-      {subHeader && <PageSubHeader>{subHeader}</PageSubHeader>}
+      {subheader && <PageSubheader>{subheader}</PageSubheader>}
     </PageHeaderWrapper>
   );
 };

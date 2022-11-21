@@ -24,7 +24,7 @@ export const PageHeaderBackButton = styled(IconButton)`
   margin-right: ${({ theme }) => theme.spacing(2.5)};
 `;
 
-export const PageSubHeader = styled.div`
+export const PageSubheader = styled.div`
   grid-area: sub-header;
   padding-top: ${({ theme }) => theme.spacing(6)};
 `;

@@ -5,27 +5,13 @@ import { ListItemButton, ListItemButtonProps } from '../../ListItemButton';
 import { ListItemText } from '../../ListItemText';
 import { IconDropdownButton } from '../../IconDropdownButton';
 
-import { ButtonGroupsWrapper } from './styles';
+import { ButtonGroupWrapper } from './styles';
 
 export type ButtonGroupProps = {
-  main?: (Pick<
-    ButtonProps,
-    | 'color'
-    | 'disabled'
-    | 'onClick'
-    | 'startIcon'
-    | 'endIcon'
-    | 'loading'
-    | 'selected'
-    | 'variant'
-    | 'component'
-  > & {
+  main?: (Omit<ButtonProps, 'children'> & {
     text: string;
   })[];
-  secondary?: (Pick<
-    ListItemButtonProps,
-    'disabled' | 'onClick' | 'component'
-  > & {
+  secondary?: (Omit<ListItemButtonProps, 'children'> & {
     text: string;
   })[];
 };
@@ -34,7 +20,7 @@ export const ButtonGroup = (props: ButtonGroupProps) => {
   const { main, secondary } = props;
 
   return (
-    <ButtonGroupsWrapper>
+    <ButtonGroupWrapper>
       {secondary && (
         <IconDropdownButton icon={<DotsOutlineMd />} variant="light">
           {secondary.map(({ text, ...secondaryProps }) => (
@@ -50,6 +36,6 @@ export const ButtonGroup = (props: ButtonGroupProps) => {
             {text}
           </Button>
         ))}
-    </ButtonGroupsWrapper>
+    </ButtonGroupWrapper>
   );
 };

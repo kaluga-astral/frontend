@@ -96,7 +96,7 @@ export const Showcase: Story = () => {
               },
             ],
           }}
-          breadCrumbs={[
+          breadcrumbs={[
             <Fragment key="1">Первый текст</Fragment>,
             <Fragment key="2">Текст с разделителем</Fragment>,
             <Fragment key="3">Текст с разделителем</Fragment>,
@@ -154,7 +154,7 @@ export const Showcase: Story = () => {
             ],
           }}
           description="В таблице представлены данные, которые..."
-          breadCrumbs={[
+          breadcrumbs={[
             <Fragment key="1">Первый текст</Fragment>,
             <Fragment key="2">Текст с разделителем</Fragment>,
             <Fragment key="3">Текст с разделителем</Fragment>,
@@ -201,7 +201,7 @@ export const Showcase: Story = () => {
       >
         <PageHeader
           title="Черновики"
-          subHeader={
+          subheader={
             <Stack flexDirection="row" flexWrap="wrap" gap={2}>
               <TextField
                 placeholder="Поиск на странице..."
@@ -236,7 +236,7 @@ PageHeaderStory.storyName = 'Default';
 PageHeaderStory.args = {
   title: 'Заголовок',
   description: 'Описание',
-  breadCrumbs: [
+  breadcrumbs: [
     <Fragment key="1">Первый текст</Fragment>,
     <Fragment key="2">Текст с разделителем</Fragment>,
     <Fragment key="3">Текст с разделителем</Fragment>,
@@ -253,7 +253,7 @@ PageHeaderStory.args = {
       },
     ],
   },
-  subHeader: (
+  subheader: (
     <TextField
       placeholder="Поиск на странице..."
       size="small"

@@ -338,7 +338,7 @@ export const PageHeaderDashboardStory = () => {
         <PageLayout
           header={{
             title: 'Черновики',
-            breadCrumbs: [
+            breadcrumbs: [
               <Fragment key="1">Первый текст</Fragment>,
               <Fragment key="2">Текст с разделителем</Fragment>,
               <Fragment key="3">Текст с разделителем</Fragment>,
@@ -356,7 +356,7 @@ export const PageHeaderDashboardStory = () => {
                 },
               ],
             },
-            subHeader: (
+            subheader: (
               <Stack flexDirection="row" flexWrap="wrap" gap={2}>
                 <TextField
                   placeholder="Поиск на странице..."

@@ -224,7 +224,7 @@ export const Showcase: Story = () => {
         <PageLayout
           header={{
             title: 'Черновики',
-            breadCrumbs: [
+            breadcrumbs: [
               <Fragment key="1">Первый текст</Fragment>,
               <Fragment key="2">Текст с разделителем</Fragment>,
               <Fragment key="3">Текст с разделителем</Fragment>,
@@ -242,7 +242,7 @@ export const Showcase: Story = () => {
                 },
               ],
             },
-            subHeader: (
+            subheader: (
               <Grid
                 container
                 templateColumns="240px repeat(2, 192px)"
