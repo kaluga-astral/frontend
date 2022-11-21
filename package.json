@@ -64,6 +64,6 @@
     "lint:styles": "npm run lint:styles:all --workspaces --if-present",
     "publish": "npm run build --workspaces --if-present && npm run publish --workspaces --if-present",
     "tests": "npm run tests --workspaces --if-present",
-    "tests:ci": "npm run tests:ci --workspaces --if-present"
+    "tests:ci": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && tests:ci --workspaces --if-present"
   }
 }
