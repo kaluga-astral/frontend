@@ -9,9 +9,11 @@
   "dependencies": {
     "playwright": "^1.27.1",
     "colord": "^2.9.3",
-    "@playwright/experimental-ct-react": "^1.27.1"
+    "@playwright/experimental-ct-react": "^1.27.1",
+    "sinon": "^14.0.2"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.20.1"
+    "@babel/runtime": "^7.20.1",
+    "@types/sinon": "^10.0.13"
   }
 }
