@@ -218,7 +218,7 @@ export const Showcase: Story = () => {
           }
         />
       </ExampleTemplate.Case>
-      <ExampleTemplate.Case title="Пример использования">
+      <ExampleTemplate.Case title="Пример использования" fullWidth>
         <PageHeaderDashboardStory />
       </ExampleTemplate.Case>
     </ExampleTemplate>

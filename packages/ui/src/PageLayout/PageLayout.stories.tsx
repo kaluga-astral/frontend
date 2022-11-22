@@ -217,6 +217,7 @@ export const Showcase: Story = () => {
       </Typography>
       <ExampleTemplate.Case
         title="Table"
+        fullWidth
         descriptionList={[
           'Используется, когда необходимо отобразить массив данных на странице в виде таблицы.',
         ]}
@@ -287,6 +288,7 @@ export const Showcase: Story = () => {
       </ExampleTemplate.Case>
       <ExampleTemplate.Case
         title="Editor"
+        fullWidth
         descriptionList={[
           'Используется, когда необходимо создать заявлений, отчет заполнить какую то форму для отправки.',
         ]}
