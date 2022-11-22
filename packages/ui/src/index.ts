@@ -100,8 +100,6 @@ export * from './OverflowTypography';
 
 export * from './PageAside';
 
-export * from './PageAside';
-
 export * from './PageHeader';
 
 export * from './PageLayout';
