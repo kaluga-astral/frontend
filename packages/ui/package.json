@@ -10,7 +10,7 @@
     "publish": "npm publish ./lib",
     "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
     "tests": "jest --passWithNoTests",
-    "tests:ci": "jest --ci --reporters=default --reporters=jest-junit",
+    "tests:ci": "npm --prefix ../icons run svgr && jest --ci --reporters=default --reporters=jest-junit",
     "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
@@ -18,7 +18,7 @@
     "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
-    "@astral/icons": "^1.38.0",
+    "@astral/icons": "*",
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.9.0",
     "@emotion/server": "11.4.0",
