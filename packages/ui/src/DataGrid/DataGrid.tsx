@@ -128,9 +128,9 @@ export function DataGrid<
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
   const withFooter = Boolean(Footer);
-  const needUseDisabledState = loading || disabled;
+  const isTableDisabled = loading || disabled;
 
-  const TableContainer = needUseDisabledState
+  const TableContainer = isTableDisabled
     ? DisabledTableContainer
     : StyledTableContainer;
 
@@ -189,7 +189,7 @@ export function DataGrid<
 
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
-      <TableContainer inert={needUseDisabledState ? '' : false}>
+      <TableContainer inert={isTableDisabled ? '' : false}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
             onSort={onSort}
