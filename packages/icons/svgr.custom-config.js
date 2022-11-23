@@ -5,6 +5,7 @@ module.exports = {
   outDir: 'generated-custom-icons',
   svgoConfig: {
     multipass: true,
+    floatPrecision: 1,
     plugins: [
       'prefixIds',
       {
