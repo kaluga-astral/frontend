@@ -1,16 +1,21 @@
 import { ReactNode, useMemo } from 'react';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 import { Typography } from '../../Typography';
 
-import { CaseWrapper } from './styles';
+import { CaseContentWrapper, CaseWrapper } from './styles';
 
 type CaseProps = {
   title: string;
   descriptionList?: string[];
   children: ReactNode;
+  fullWidth?: boolean;
 };
 
-export const Case = ({ title, descriptionList = [], children }: CaseProps) => {
+export const Case = (props: CaseProps) => {
+  const { children, descriptionList = [], fullWidth = false, title } = props;
+  const theme = useTheme();
+  const isFullWidth = useMediaQuery(theme.breakpoints.down('sm')) || fullWidth;
   const subtitles = useMemo(() => {
     return descriptionList?.map((text, index) => (
       <Typography key={index} paragraph>
@@ -20,21 +25,12 @@ export const Case = ({ title, descriptionList = [], children }: CaseProps) => {
   }, [descriptionList]);
 
   return (
-    <CaseWrapper>
+    <CaseWrapper fullWidth={isFullWidth}>
       <Typography variant="h5" paragraph>
         {title}
       </Typography>
       {subtitles}
-      <div
-        style={{
-          padding: '32px 0',
-          background: '#FAFBFC',
-          border: '1px solid #DDE2E8',
-          borderRadius: 3,
-        }}
-      >
-        {children}
-      </div>
+      <CaseContentWrapper>{children}</CaseContentWrapper>
     </CaseWrapper>
   );
 };

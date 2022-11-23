@@ -10,6 +10,8 @@ export * from './Badge';
 
 export * from './Button';
 
+export * from './Breadcrumbs';
+
 export * from './Collapse';
 
 export * from './DatePickerProvider';
@@ -95,6 +97,14 @@ export * from './MenuList';
 export * from './MenuGroup';
 
 export * from './OverflowTypography';
+
+export * from './PageAside';
+
+export * from './PageHeader';
+
+export * from './PageLayout';
+
+export * from './PageLayoutContainer';
 
 export * from './Placeholder';
 
