@@ -7,6 +7,7 @@ import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 import { ExampleTemplate } from '../docs';
 import { Button } from '../Button';
+import { Grid } from '../Grid';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
@@ -179,6 +180,7 @@ const Template: Story = (args) => {
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -216,6 +218,8 @@ const Template: Story = (args) => {
 
   const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
     setSorting(newSorting);
+
+  const handleToggleDisabled = () => setDisabled((prev) => !prev);
 
   return (
     <ExampleTemplate>
@@ -300,6 +304,46 @@ const Template: Story = (args) => {
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
+            Footer={
+              <DataGridPagination
+                totalCount={data.length}
+                onChange={handleChangePage}
+                page={page}
+              />
+            }
+          />
+        </Stack>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title="DataGrid с блокировкой содержимого"
+        descriptionList={[
+          'Растягивается по всей доступной высоте котейнера (700px)',
+        ]}
+      >
+        <Stack
+          spacing={4}
+          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
+        >
+          <Grid container templateColumns="auto auto" spacing={4}>
+            <Button onClick={handleReset}>Сбросить</Button>
+            <Button onClick={handleToggleDisabled}>
+              {disabled ? 'Разблокировать' : 'Заблокировать'}
+            </Button>
+          </Grid>
+
+          <DataGrid<DataType, SortField>
+            {...args}
+            keyId="id"
+            rows={slicedData}
+            columns={columns}
+            selectedRows={selected}
+            onSelectRow={handleSelect}
+            onRowClick={handleRowClick}
+            loading={loading}
+            onSort={handleSort}
+            sorting={sorting}
+            disabled={disabled}
             Footer={
               <DataGridPagination
                 totalCount={data.length}
