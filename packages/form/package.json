@@ -12,7 +12,7 @@
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "tests": "jest --passWithNoTests",
-    "tests:ci": "jest --ci --reporters=default --reporters=jest-junit"
+    "tests:ci": "npm --prefix ../icons run svgr && jest --ci --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
