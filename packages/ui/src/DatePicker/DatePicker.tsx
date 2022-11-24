@@ -103,12 +103,13 @@ const DatePickerInner = forwardRef<
       closePopper(undefined, 'selectOption');
     };
 
-    useEffect(
-      () => onChange?.(selectedDate || maskedDate),
-      [selectedDate, maskedDate],
-    );
+    useEffect(() => {
+      onChange?.(selectedDate || maskedDate);
+    }, [selectedDate, maskedDate]);
 
-    useEffect(() => checkValue(parentValue || ''), [parentValue]);
+    useEffect(() => {
+      checkValue(parentValue || '');
+    }, [parentValue]);
 
     const blurHandler = (e: FocusEvent<HTMLInputElement>) => {
       checkValue(e.target.value);

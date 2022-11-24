@@ -29,7 +29,9 @@ export const useCalendarNavigate = ({
     setBaseDate(addCb(baseDate, -1));
   };
 
-  useEffect(() => setBaseDate(date), [date]);
+  useEffect(() => {
+    setBaseDate(date);
+  }, [date]);
 
   return {
     baseDate,
