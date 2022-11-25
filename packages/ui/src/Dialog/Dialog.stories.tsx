@@ -1,15 +1,31 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import { Button, DialogActions, DialogContent, DialogContentText } from '..';
+import {
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Typography,
+  styled,
+} from '..';
 
 import { Dialog } from './Dialog';
-import { Subtitle } from './styles';
 
 export default {
   title: 'Components/Dialog',
   component: Dialog,
 };
+
+const Subtitle = styled(Typography)`
+  &::before {
+    padding: ${({ theme }) => theme.spacing(0, 4)};
+
+    color: ${({ theme }) => theme.palette.grey[500]};
+
+    content: '|';
+  }
+`;
 
 const Template: Story = () => {
   const [open, setOpen] = React.useState(false);
