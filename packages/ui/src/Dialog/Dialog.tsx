@@ -1,9 +1,23 @@
-import React from 'react';
-import { Dialog as MuiDialog } from '@mui/material';
+import {
+  Dialog as MuiDialog,
+  DialogProps as MuiDialogProps,
+} from '@mui/material';
 
-import { DialogTitle } from '../index';
+import { DialogTitle } from '../DialogTitle';
+import { WithoutEmotionSpecific } from '../types';
 
-import { DialogProps } from './types';
+export type DialogProps = WithoutEmotionSpecific<
+  Omit<MuiDialogProps, 'title'>
+> & {
+  /**
+   * Заголовок
+   */
+  title?: JSX.Element | JSX.Element[] | string;
+  /**
+   * Отключить кликабельность фонового компонента
+   */
+  disableBackdropClick?: boolean;
+};
 
 export const Dialog = ({
   children,
