@@ -1,14 +1,10 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from '../index';
+import { Button, DialogActions, DialogContent, DialogContentText } from '..';
 
 import { Dialog } from './Dialog';
+import { Subtitle } from './styles';
 
 export default {
   title: 'Components/Dialog',
@@ -27,11 +23,20 @@ const Template: Story = () => {
   };
 
   return (
-    <div>
+    <>
       <Button variant="light" onClick={handleClickOpen}>
         Dialog
       </Button>
-      <Dialog title="Заголовок" open={open} onClose={handleClose}>
+      <Dialog
+        title={
+          <>
+            Заголовок
+            <Subtitle variant="ui">Подзаголовок</Subtitle>
+          </>
+        }
+        open={open}
+        onClose={handleClose}
+      >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Заглушка примера текста страницы, который несет очень выжный смысл
@@ -48,7 +53,7 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
