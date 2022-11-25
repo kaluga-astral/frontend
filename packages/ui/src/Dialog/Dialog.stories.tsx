@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Story } from '@storybook/react';
 
 import {
@@ -28,7 +28,7 @@ const Subtitle = styled(Typography)`
 `;
 
 const Template: Story = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
