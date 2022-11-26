@@ -3,6 +3,7 @@ import { Popper } from '@mui/material';
 import { styled } from '../../styles';
 
 export const DatePickerPopoverInner = styled.div`
+  display: flex;
   padding: ${({ theme }) => theme.spacing(4)};
 
   background: ${({ theme }) => theme.palette.common.white};

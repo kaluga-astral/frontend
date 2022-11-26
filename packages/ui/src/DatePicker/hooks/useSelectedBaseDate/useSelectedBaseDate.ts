@@ -1,14 +1,28 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { MinMaxDateContext } from '../../MinMaxDateContext';
 import {
   DateCompareDeep,
   areDatesSame,
   isDateOutOfRange,
 } from '../../../utils/date';
+import { MinMaxDate } from '../../types';
 
-export const useSelectedBaseDate = (selectedDate?: Date | null) => {
-  const { minDate, maxDate } = useContext(MinMaxDateContext);
+type UseSelectedBaseDateOptions = MinMaxDate & {
+  parentValue?: Date | null;
+};
+
+export const useSelectedBaseDate = ({
+  parentValue,
+  minDate,
+  maxDate,
+}: UseSelectedBaseDateOptions): [
+  Date | null | undefined,
+  Date | null | undefined,
+  (date: Date | undefined | null) => void,
+] => {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined | null>(
+    parentValue,
+  );
   const [baseDate, setBaseDate] = useState(selectedDate);
 
   useEffect(() => {
@@ -31,5 +45,5 @@ export const useSelectedBaseDate = (selectedDate?: Date | null) => {
     }
   }, [selectedDate]);
 
-  return baseDate;
+  return [baseDate, selectedDate, setSelectedDate];
 };

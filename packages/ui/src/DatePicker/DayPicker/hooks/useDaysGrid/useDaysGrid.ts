@@ -158,5 +158,5 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       indexNextDisabledCheck: lastCurrentMonthIndex,
       deep: DateCompareDeep.day,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate]);
 };

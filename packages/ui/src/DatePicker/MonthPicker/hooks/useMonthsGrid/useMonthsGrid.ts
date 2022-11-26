@@ -59,5 +59,5 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
       addCb: addMonths,
       deep: DateCompareDeep.month,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate]);
 };

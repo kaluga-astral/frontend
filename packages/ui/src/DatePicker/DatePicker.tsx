@@ -4,7 +4,6 @@ import {
   SyntheticEvent,
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -24,7 +23,8 @@ import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopper } from './DatePickerPopper';
 import {
-  MinMaxDateContext,
+  DEFAULT_MAX_DATE,
+  DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from './MinMaxDateContext';
 import { MinMaxDate } from './types';
@@ -45,40 +45,36 @@ export type DatePickerProps = MondayFirst &
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
-    value?: Date;
+    value?: Date | null;
   };
 
-const DatePickerInner = forwardRef<
-  HTMLInputElement,
-  Omit<DatePickerProps, 'minDate' | 'maxDate'>
->(
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       onChange,
       onOpen,
       onBlur,
       onClose,
-      mask = 'DD.MM.YYYY',
+      mask = '`DD.`MM.`YYYY',
       isMondayFirst,
       inputProps,
       disabled,
       value: parentValue,
+      minDate = DEFAULT_MIN_DATE,
+      maxDate = DEFAULT_MAX_DATE,
     },
     forwardedRef,
   ) => {
-    const { maxDate, minDate } = useContext(MinMaxDateContext);
     const ref = useForwardedRef(forwardedRef);
     const [isActive, openPopper, closePopper] = useToggle({
       onActive: onOpen,
       onInactive: onClose,
     });
-    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>(
-      parentValue,
-    );
     const [maskedDate, setMaskedDate] = useState('');
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
-    const selectedBaseDate = useSelectedBaseDate(selectedDate);
+    const [selectedBaseDate, selectedDate, setSelectedDate] =
+      useSelectedBaseDate({ parentValue, minDate, maxDate });
 
     const checkValue = useCallback(
       (value: string | Date) => {
@@ -136,22 +132,16 @@ const DatePickerInner = forwardRef<
           onClose={closePopper}
           anchorEl={ref?.current}
         >
-          <YearMonthDayPicker
-            isMondayFirst={isMondayFirst}
-            selectedDate={selectedBaseDate}
-            onChange={handleDayPick}
-            date={selectedBaseDate || baseDate}
-          />
+          <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
+            <YearMonthDayPicker
+              isMondayFirst={isMondayFirst}
+              selectedDate={selectedBaseDate}
+              onChange={handleDayPick}
+              date={selectedBaseDate || baseDate}
+            />
+          </MinMaxDateContextProvider>
         </DatePickerPopper>
       </DatePickerClickAwayListener>
     );
   },
-);
-
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  ({ minDate, maxDate, ...props }, forwardedRef) => (
-    <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
-      <DatePickerInner {...props} ref={forwardedRef} />
-    </MinMaxDateContextProvider>
-  ),
 );

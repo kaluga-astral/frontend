@@ -60,5 +60,5 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
       addCb: addYears,
       deep: DateCompareDeep.year,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate]);
 };

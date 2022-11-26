@@ -12,20 +12,19 @@ type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
 };
 
+const KEYS_IN_MASK = /\w{1,4}/g;
+
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
 >(({ onClick, onChange, onNativeChange, mask, ...props }, ref) => {
-  const [normalizedMask, maskBlocks] = useMemo(() => {
-    // маска maskField соглашается работать только с разделителями имеющими символ "`" (косая кавычка) перед заменяемым элементом
-    const nMask = mask?.replace('.', '.`');
-
+  const maskBlocks = useMemo(() => {
     const blocks: MaskBlocks = {};
 
-    mask.split('.').forEach((key) => {
+    mask.match(KEYS_IN_MASK)?.forEach((key) => {
       const to = Number(String.prototype.padStart(key.length, '9'));
 
-      blocks[key] = {
+      blocks[key.replace(/`/, '')] = {
         mask: IMask.MaskedRange,
         from: 0,
         to,
@@ -33,15 +32,17 @@ export const DatePickerInput = forwardRef<
       };
     });
 
-    return [nMask, blocks];
+    return blocks;
   }, [mask]);
+
+  console.log(maskBlocks);
 
   return (
     <DatePickerInputWrapper
       {...props}
       ref={ref}
       onClick={onClick}
-      mask={normalizedMask}
+      mask={mask}
       blocks={maskBlocks}
       autofix={false}
       fullWidth
