@@ -1,5 +1,4 @@
 import { renderWithTheme, screen } from '@astral/tests';
-import { describe, expect, it } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { Button } from './Button';
