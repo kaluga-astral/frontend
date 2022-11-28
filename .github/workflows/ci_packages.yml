@@ -67,11 +67,7 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: Get number of CPU cores
-        id: cpu-cores
-        uses: SimenB/github-actions-cpu-cores@v1
-
-      - name: Run jest
+      - name: Run vitest
         env:
           CI: true
-        run: npm run tests:ci --maxWorkers=${{ steps.cpu-cores.outputs.count }} --workspaces --if-present
+        run: npm run tests:ci --workspaces --if-present

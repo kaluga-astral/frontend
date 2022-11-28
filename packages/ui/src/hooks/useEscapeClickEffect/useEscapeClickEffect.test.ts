@@ -1,10 +1,11 @@
 import { renderHook, userEvents } from '@astral/tests';
+import { vi } from 'vitest';
 
 import { useEscapeClickEffect } from './useEscapeClickEffect';
 
 describe('useEscapeClickEffect', () => {
   it('Props:isActive=true: при нажатии esc вызывается onEscape', async () => {
-    const onEscape = jest.fn();
+    const onEscape = vi.fn();
 
     renderHook(() => useEscapeClickEffect({ isActive: true, onEscape }));
     await userEvents.keyboard('{Escape}');
@@ -12,7 +13,7 @@ describe('useEscapeClickEffect', () => {
   });
 
   it('Props:isActive=false: при нажатии esc onEscape не вызывается', async () => {
-    const onEscape = jest.fn();
+    const onEscape = vi.fn();
 
     renderHook(() => useEscapeClickEffect({ isActive: false, onEscape }));
     await userEvents.keyboard('{Escape}');

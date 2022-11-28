@@ -1,5 +1,6 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useState } from 'react';
+import { vi } from 'vitest';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
@@ -114,7 +115,7 @@ describe('DataGrid', () => {
   });
 
   it('Props:onRowClick: по клику на строку получаем данные row', async () => {
-    const onRowClick = jest.fn();
+    const onRowClick = vi.fn();
 
     renderWithTheme(
       <DataGrid
