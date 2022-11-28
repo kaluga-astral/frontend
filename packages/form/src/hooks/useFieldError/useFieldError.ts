@@ -9,10 +9,8 @@ type UseFieldErrorPropsResult = Pick<TextFieldProps, 'error' | 'helperText'>;
 export const useFieldErrorProps = (
   fieldState: Pick<ControllerFieldState, 'error'>,
 ): UseFieldErrorPropsResult => {
-  const errorMessage = fieldState.error?.message;
-
   return {
-    error: Boolean(errorMessage),
-    helperText: errorMessage,
+    error: Boolean(fieldState.error),
+    helperText: fieldState.error?.message,
   };
 };
