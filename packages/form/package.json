@@ -4,15 +4,15 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "prebuild": "npx rimraf ./lib && npm --prefix ../icons run svgr",
+    "prebuild": "npx rimraf ./lib",
     "postbuild": "copyfiles -u 1 declarations/*.ts lib",
     "build": "commander build",
     "publish": "npm publish ./lib",
-    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "tests": "vitest run",
-    "tests:ci": "npm --prefix ../icons run svgr && vitest run --reporter=junit --outputFile.junit=junit.xml"
+    "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
