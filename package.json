@@ -46,6 +46,7 @@
     "@semantic-release/github": "^8.0.5",
     "@semantic-release/exec": "^6.0.3",
     "vitest": "^0.25.3",
+    "@vitejs/plugin-react": "^2.2.0",
     "copyfiles": "^2.4.1",
     "jsdom": "^20.0.3",
     "resize-observer-polyfill": "^1.5.1",
