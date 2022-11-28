@@ -28,7 +28,9 @@
   },
   "types": ["vitest/globals"],
   "include": [
-    "./declarations"
+    "./declarations",
+    "./*.js",
+    "./*.ts"
   ],
   "exclude": [
     "commander"
