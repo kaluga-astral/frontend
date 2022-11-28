@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 module.exports = {
   'packages/ui/**/*.{js,jsx,ts,tsx}': [
     'npm run lint --workspace=@astral/ui',
