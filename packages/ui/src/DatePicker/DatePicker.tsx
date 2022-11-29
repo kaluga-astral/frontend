@@ -6,7 +6,7 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
+  useState,
 } from 'react';
 
 import { TextFieldProps } from '../TextField';
@@ -36,7 +36,7 @@ import { useSelectedBaseDate } from './hooks/useSelectedBaseDate';
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
     mask?: DateMask;
-    onChange?: (date?: string) => void;
+    onChange?: (date: Date | string | null | undefined) => void;
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
     onOpen?: () => void;
     onClose?: (
@@ -45,7 +45,7 @@ export type DatePickerProps = MondayFirst &
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
-    value?: string;
+    value?: Date;
   };
 
 const DatePickerInner = forwardRef<
@@ -62,7 +62,7 @@ const DatePickerInner = forwardRef<
       isMondayFirst,
       inputProps,
       disabled,
-      value,
+      value: parentValue,
     },
     forwardedRef,
   ) => {
@@ -72,11 +72,12 @@ const DatePickerInner = forwardRef<
       onActive: onOpen,
       onInactive: onClose,
     });
+    const [selectedDate, setSelectedDate] = useState<Date | undefined | null>(
+      parentValue,
+    );
+    const [maskedDate, setMaskedDate] = useState('');
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
-
-    const selectedDate = useMemo(() => {}, [mask, value]);
-
     const selectedBaseDate = useSelectedBaseDate(selectedDate);
 
     const checkValue = useCallback(
@@ -103,7 +104,7 @@ const DatePickerInner = forwardRef<
     };
 
     useEffect(() => {
-      onChange?.(selectedDate ? formatDate(selectedDate, mask) : maskedDate);
+      onChange?.(selectedDate || maskedDate);
     }, [selectedDate, maskedDate]);
 
     useEffect(() => {
@@ -126,7 +127,7 @@ const DatePickerInner = forwardRef<
           onNativeChange={handleNativeChange}
           onBlur={blurHandler}
           disabled={disabled}
-          value={value}
+          value={maskedDate}
           ref={ref}
           onFocus={openPopper}
         />

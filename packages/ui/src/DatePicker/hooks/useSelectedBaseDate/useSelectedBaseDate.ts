@@ -7,11 +7,9 @@ import {
   isDateOutOfRange,
 } from '../../../utils/date';
 
-type BaseDate = Date | undefined;
-
-export const useSelectedBaseDate = (selectedDate?: Date): BaseDate => {
+export const useSelectedBaseDate = (selectedDate?: Date | null) => {
   const { minDate, maxDate } = useContext(MinMaxDateContext);
-  const [baseDate, setBaseDate] = useState<BaseDate>(selectedDate);
+  const [baseDate, setBaseDate] = useState(selectedDate);
 
   useEffect(() => {
     if (areDatesSame(baseDate, selectedDate)) {
@@ -27,7 +25,7 @@ export const useSelectedBaseDate = (selectedDate?: Date): BaseDate => {
         deep: DateCompareDeep.day,
       })
     ) {
-      setBaseDate(undefined);
+      setBaseDate(null);
     } else {
       setBaseDate(selectedDate);
     }
