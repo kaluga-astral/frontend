@@ -7,9 +7,9 @@
     "generate-custom-icons": "npx rimraf ./generated-custom-icons && svgr --config-file svgr.custom-config.js custom-assets",
     "svgr": "npm run generate-themed-icons && npm run generate-custom-icons",
     "prebuild": "npx rimraf ./lib",
-    "build": "npm run svgr && commander build",
+    "build": "commander build",
     "publish": "npm publish ./lib",
-    "lint:types": "npm run svgr && tsc --noEmit",
+    "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },
