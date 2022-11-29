@@ -1,11 +1,6 @@
 name: Label Reviews
 
-on:
-  pull_request_review:
-    types:
-      - submitted
-      - edited
-      - dismissed
+on: [pull_request]
 
 jobs:
   require-reviewers:
