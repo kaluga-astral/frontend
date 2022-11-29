@@ -3,4 +3,3 @@
     "include": ["generated-themed-icons", "generated-custom-icons", "./index.ts"],
     "exclude": ["node_modules", "lib"]
   }
-  
