@@ -5,6 +5,7 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
+import { vi } from 'vitest';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -48,7 +49,7 @@ describe('FormAutocomplete', () => {
     };
 
     const user = userEvents.setup();
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
     const TestComponent = () => {

@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
+import { uniqBy } from 'lodash-es';
 
 import { Table } from '../Table';
 
@@ -6,7 +7,11 @@ import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
-import { DataGridContainer, StyledTableContainer } from './styles';
+import {
+  DataGridContainer,
+  DisabledTableContainer,
+  StyledTableContainer,
+} from './styles';
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
@@ -76,6 +81,11 @@ export type DataGridProps<
    */
   loading?: boolean;
   /**
+   * @example <DataGrid  disabled={true} />
+   * Флажок блокировки таблицы
+   */
+  disabled?: boolean;
+  /**
    * @default '-'
    * @example <DataGrid  emptyCellValue{'Нет данных'} />
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -110,6 +120,7 @@ export function DataGrid<
   Footer,
   noDataPlaceholder,
   loading,
+  disabled,
   onSort,
   keyId,
   emptyCellValue,
@@ -118,6 +129,11 @@ export function DataGrid<
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
   const withFooter = Boolean(Footer);
+  const isTableDisabled = loading || disabled;
+
+  const TableContainer = isTableDisabled
+    ? DisabledTableContainer
+    : StyledTableContainer;
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) {
@@ -125,7 +141,7 @@ export function DataGrid<
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = [...selectedRows, ...rows];
+      const mergedSelectedRows = uniqBy([...selectedRows, ...rows], keyId);
 
       return onSelectRow(mergedSelectedRows);
     }
@@ -174,7 +190,7 @@ export function DataGrid<
 
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
-      <StyledTableContainer>
+      <TableContainer inert={isTableDisabled ? '' : false}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
             onSort={onSort}
@@ -198,10 +214,11 @@ export function DataGrid<
             noDataPlaceholder={renderedPlaceholder()}
           />
         </Table>
-      </StyledTableContainer>
+      </TableContainer>
       <DataGridLoader
         footerHeight={footerHeight}
         withFooter={withFooter}
+        disabled={disabled}
         loading={loading}
       />
       {Footer}

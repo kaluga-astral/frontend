@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Story } from '@storybook/react';
 
 import {
@@ -6,7 +6,9 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-} from '../index';
+  Typography,
+  styled,
+} from '..';
 
 import { Dialog } from './Dialog';
 
@@ -15,8 +17,18 @@ export default {
   component: Dialog,
 };
 
+const Subtitle = styled(Typography)`
+  &::before {
+    padding: ${({ theme }) => theme.spacing(0, 4)};
+
+    color: ${({ theme }) => theme.palette.grey[500]};
+
+    content: '|';
+  }
+`;
+
 const Template: Story = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,11 +39,20 @@ const Template: Story = () => {
   };
 
   return (
-    <div>
+    <>
       <Button variant="light" onClick={handleClickOpen}>
         Dialog
       </Button>
-      <Dialog title="Заголовок" open={open} onClose={handleClose}>
+      <Dialog
+        title={
+          <>
+            Заголовок
+            <Subtitle variant="ui">Подзаголовок</Subtitle>
+          </>
+        }
+        open={open}
+        onClose={handleClose}
+      >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Заглушка примера текста страницы, который несет очень выжный смысл
@@ -48,7 +69,7 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 

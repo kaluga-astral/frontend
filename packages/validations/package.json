@@ -6,9 +6,9 @@
     "prebuild": "npx rimraf ./lib",
     "build": "commander build",
     "publish": "npm publish ./lib",
-    "tests": "jest --passWithNoTests",
-    "tests:ci": "jest --ci --reporters=default --reporters=jest-junit",
-    "lint:types": "npm --prefix ../icons run svgr && tsc --noEmit",
+    "tests": "vitest run",
+    "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",
+    "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
   },

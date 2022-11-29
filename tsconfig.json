@@ -26,9 +26,11 @@
     "noEmit": false,
     "noFallthroughCasesInSwitch": true,
   },
+  "types": ["vitest/globals"],
   "include": [
     "./declarations",
-    "./jest-setup.ts"
+    "./*.js",
+    "./*.ts"
   ],
   "exclude": [
     "commander"

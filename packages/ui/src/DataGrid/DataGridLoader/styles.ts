@@ -18,8 +18,8 @@ export const Backdrop = styled.div<BackdropProps>`
   height: ${({ withFooter, footerHeight }) =>
     withFooter ? `calc(100% - ${footerHeight}px) ` : '100%'};
 
-  background-color: ${({ theme }) => theme.palette.grey['100']};
-  opacity: 0.6;
+  background-color: ${({ theme }) => theme.palette.background.element};
+  opacity: 0.3;
 `;
 
 export const StyledDivider = styled(Divider)`
