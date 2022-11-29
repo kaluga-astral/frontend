@@ -3,12 +3,8 @@
   "main": "./src",
   "version": "0.31.0",
   "scripts": {
-    "svgo": "npx rimraf ./dist && svgo -q --config svgo.config.js -f src -o dist",
     "prebuild": "rimraf ./lib",
     "build": "commander copyCommonFiles && commander copyImages && commander modifyPackageJSON --isStaticPackage=true",
     "publish": "npm publish ./lib"
-  },
-  "dependencies": {
-    "svgo": "^2.8.0"
   }
 }
