@@ -55,7 +55,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && set NODE_OPTIONS=--max_old_space_size=4072 && build-storybook",
+    "build-storybook": "set NODE_OPTIONS=--max_old_space_size=4072 && build-storybook",
     "chromatic": "chromatic --project-token 4692158faeb9",
     "lint": "npm run lint:all --workspaces --if-present",
     "lint:types": "npm run lint:types --workspaces --if-present",
