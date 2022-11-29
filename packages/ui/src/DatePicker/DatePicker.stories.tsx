@@ -18,35 +18,41 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: Story<DatePickerProps> = (args) => {
+const Template: Story<DatePickerProps> = (props) => {
   const [date, setDate] = useState<Date | undefined>();
 
-  return <DatePicker {...args} value={date} onChange={setDate} />;
+  console.log('date', date);
+
+  return <DatePicker value={date} onChange={setDate} {...props} />;
 };
 
 export const Showcase: Story = () => (
   <Grid container spacing={6} autoFlow="row">
-    <DatePicker inputProps={{ label: 'Все по умолчанию' }} />
-    <DatePicker inputProps={{ label: 'Контролируемый' }} value={new Date()} />
-    <DatePicker
+    <Template inputProps={{ label: 'Все по умолчанию' }} />
+    <Template
+      inputProps={{ label: 'Disabled default value' }}
+      value={new Date('2022-11-01')}
+      disabled
+    />
+    <Template
       inputProps={{ label: 'maxDate меньше текущей' }}
       maxDate={addDays(normalizedCurrentDate, -90)}
     />
-    <DatePicker
+    <Template
       inputProps={{ label: 'minDate больше текущей' }}
       minDate={addDays(normalizedCurrentDate, 90)}
     />
-    <DatePicker
+    <Template
       inputProps={{ label: 'Узкий диапазон выбора' }}
       minDate={buildIsoDate({ year: 2022, month: 6, day: 30 })}
       maxDate={buildIsoDate({ year: 2022, month: 7, day: 10 })}
     />
-    <DatePicker
+    <Template
       inputProps={{ label: 'minDate больше текущей + Узкий диапазон выбора' }}
       minDate={addDays(normalizedCurrentDate, 90)}
       maxDate={addDays(normalizedCurrentDate, 100)}
     />
-    <DatePicker
+    <Template
       inputProps={{ label: 'maxDate меньше текущей + Узкий диапазон выбора' }}
       minDate={addDays(normalizedCurrentDate, -90)}
       maxDate={addDays(normalizedCurrentDate, -80)}

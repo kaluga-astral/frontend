@@ -9,13 +9,7 @@ import {
 
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
-import {
-  DateMask,
-  areDatesSame,
-  formatDate,
-  isDate,
-  parseDate,
-} from '../utils/date';
+import { DateMask, formatDate, parseDate } from '../utils/date';
 import { Reason } from '../types';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
@@ -70,6 +64,7 @@ const DatePickerInner = forwardRef<
       onActive: onOpen,
       onInactive: onClose,
     });
+
     const [maskedDate, setMaskedDate] = useState(() =>
       value ? formatDate(value, mask) : '',
     );
@@ -92,13 +87,7 @@ const DatePickerInner = forwardRef<
 
       const date = parseDate(maskedValue, mask);
 
-      if (onChange && !isDate(date)) {
-        onChange(undefined);
-
-        return;
-      }
-
-      if (onChange && !areDatesSame(date, value)) {
+      if (onChange) {
         onChange(date);
       }
     };
