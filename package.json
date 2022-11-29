@@ -27,7 +27,6 @@
     "chromatic": "^6.2.0",
     "commitlint": "^17.0.3",
     "eslint": "8.17.0",
-    "html-webpack-plugin": "4.5.1",
     "husky": "^4.3.8",
     "lint-staged": "^11.1.2",
     "prettier": "^2.6.2",
@@ -50,8 +49,7 @@
     "copyfiles": "^2.4.1",
     "jsdom": "^20.0.3",
     "resize-observer-polyfill": "^1.5.1",
-    "eslint-plugin-testing-library": "^5.9.1",
-    "webpack": "4.46.0"
+    "eslint-plugin-testing-library": "^5.9.1"
   },
   "scripts": {
     "storybook": "npm run svgr --workspace=@astral/icons && npm run svgo --workspace=@astral/illustrations && start-storybook -p 6006",

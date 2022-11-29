@@ -1,4 +1,5 @@
 import { Story } from '@storybook/react';
+import { useState } from 'react';
 
 import { Grid } from '../Grid';
 import { addDays, buildIsoDate } from '../utils/date';
@@ -17,7 +18,11 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: Story<DatePickerProps> = (args) => <DatePicker {...args} />;
+const Template: Story<DatePickerProps> = (args) => {
+  const [date, setDate] = useState<Date | undefined>();
+
+  return <DatePicker {...args} value={date} onChange={setDate} />;
+};
 
 export const Showcase: Story = () => (
   <Grid container spacing={6} autoFlow="row">
