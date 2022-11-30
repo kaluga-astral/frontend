@@ -38,6 +38,4 @@ export const PageHeaderTitle = styled(Typography)`
   display: flex;
   grid-area: title;
   align-items: center;
-
-  line-height: ${({ theme }) => theme.typography.pxToRem(32)};
 `;
