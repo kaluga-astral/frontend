@@ -39,5 +39,5 @@ export const PageHeaderTitle = styled(Typography)`
   grid-area: title;
   align-items: center;
 
-  line-height: 32px;
+  line-height: ${({ theme }) => theme.typography.pxToRem(32)};
 `;
