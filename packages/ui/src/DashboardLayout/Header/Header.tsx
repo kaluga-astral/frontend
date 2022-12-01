@@ -1,10 +1,11 @@
 import { PropsWithChildren, forwardRef } from 'react';
 
+import { Grid } from '../../Grid';
 import { Product, ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { ProfileProps } from '../../Profile';
 
-import { HeaderNav, HeaderRoot } from './styles';
+import { HeaderRoot } from './styles';
 
 export type HeaderProps = {
   product: ProductProps;
@@ -17,11 +18,16 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
 
   return (
     <HeaderRoot ref={ref}>
-      <HeaderNav>
+      <Grid
+        container
+        columnSpacing={(theme) => theme.spacing(0.5)}
+        autoFlow="column"
+        component="nav"
+      >
         {ProductSwitcher && <ProductSwitcher />}
         <Product {...product} />
         {/* {Menu && <Menu />} */}
-      </HeaderNav>
+      </Grid>
       {profile && <Profile {...profile} />}
     </HeaderRoot>
   );
