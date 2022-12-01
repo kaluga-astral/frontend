@@ -21,8 +21,6 @@ const normalizedCurrentDate = buildIsoDate({
 const Template: Story<DatePickerProps> = (props) => {
   const [date, setDate] = useState<Date | undefined>();
 
-  console.log('date', date);
-
   return <DatePicker value={date} onChange={setDate} {...props} />;
 };
 
@@ -60,7 +58,11 @@ export const Showcase: Story = () => (
   </Grid>
 );
 
-export const Default = Template.bind({});
+export const Default: Story<DatePickerProps> = (props) => {
+  const [date, setDate] = useState<Date | undefined>();
+
+  return <DatePicker {...props} value={date} onChange={setDate} />;
+};
 
 Default.args = {
   inputProps: {

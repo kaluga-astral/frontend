@@ -1,5 +1,6 @@
-import { act, renderWithTheme, screen } from '@astral/tests';
+import { act, fireEvent, renderWithTheme, screen } from '@astral/tests';
 import { vi } from 'vitest';
+import { useState } from 'react';
 
 import { DatePicker } from './DatePicker';
 
@@ -14,11 +15,11 @@ describe('DatePicker', () => {
     vi.useRealTimers();
   });
 
-  it('Prop:onChange: при выборе даты в пикере в onChange передается объект Date', async () => {
+  it('Props:onChange: при выборе даты в пикере в onChange передается объект Date', async () => {
     const onChange = vi.fn();
 
     renderWithTheme(<DatePicker onChange={onChange} />);
-    await act(() => screen.getByRole('textbox').focus());
+    fireEvent.focus(screen.getByRole('textbox'));
     await act(() => screen.getAllByText('10')[0].click());
     expect(onChange.mock.calls[0][0] instanceof Date).toBeTruthy();
 
@@ -27,44 +28,70 @@ describe('DatePicker', () => {
     );
   });
 
-  it('Prop:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
+  it('Props:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
     const onChange = vi.fn();
 
     renderWithTheme(
       <DatePicker onChange={onChange} minDate={new Date('2022-02-09')} />,
     );
 
-    await act(() => screen.getByRole('textbox').focus());
+    fireEvent.focus(screen.getByRole('textbox'));
 
     const btn = screen.getAllByText('8')[0];
 
     expect(btn).toBeDisabled();
   });
 
-  it('Prop:minDate: в пикере можно выбрать дату равной minDate', async () => {
+  it('Props:minDate: в пикере можно выбрать дату равной minDate', async () => {
     renderWithTheme(<DatePicker minDate={new Date('2022-02-09')} />);
-    await act(() => screen.getByRole('textbox').focus());
+    fireEvent.focus(screen.getByRole('textbox'));
 
     const btn = screen.getAllByText('9')[0];
 
     expect(btn).not.toBeDisabled();
   });
 
-  it('Prop:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
+  it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
     renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
-    await act(() => screen.getByRole('textbox').focus());
+    fireEvent.focus(screen.getByRole('textbox'));
 
     const btn = screen.getAllByText('10')[0];
 
     expect(btn).toBeDisabled();
   });
 
-  it('Prop:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
+  it('Props:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
     renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
-    await act(() => screen.getByRole('textbox').focus());
+    fireEvent.focus(screen.getByRole('textbox'));
 
     const btn = screen.getAllByText('9')[0];
 
     expect(btn).not.toBeDisabled();
+  });
+
+  it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
+    const callbacks: { setValue: (date?: Date) => void } = {
+      setValue: () => undefined,
+    };
+
+    const TestComponent = () => {
+      const [value, setValue] = useState<Date | undefined>();
+
+      callbacks.setValue = setValue;
+
+      return <DatePicker value={value} onChange={setValue} />;
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    await act(() => {
+      callbacks.setValue(new Date('2022-03-09'));
+    });
+
+    fireEvent.focus(screen.getByRole('textbox'));
+
+    const selected = screen.getAllByText('9')[0].getAttribute('aria-selected');
+
+    expect(selected).toBeTruthy();
   });
 });
