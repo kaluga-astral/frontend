@@ -20,7 +20,7 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
       return theme.transitions.create('color', {
         easing: theme.transitions.easing.easeIn,
         duration: theme.transitions.duration.shortest,
-      }) ;
+      });
     }};
   }
 
@@ -82,6 +82,6 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
     return theme.transitions.create('transform', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }) ;
+    });
   }};
 `;
