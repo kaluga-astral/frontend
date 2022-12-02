@@ -1,4 +1,4 @@
-import { fireEvent, renderWithTheme, screen, waitFor } from '@astral/tests';
+import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -11,18 +11,15 @@ describe('FormTextField', () => {
       const form = useForm();
 
       return (
-        <Form
-          data-testid="form"
-          form={form}
-          onSubmit={form.handleSubmit(() => undefined)}
-        >
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
           <FormTextField name="user" rules={{ required: 'required' }} />
+          <button type="submit">submit</button>
         </Form>
       );
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.submit(screen.getByTestId('form'));
+    await userEvents.click(screen.getByText('submit'));
 
     await waitFor(() => {
       const errorText = screen.getByText('required');
