@@ -28,6 +28,7 @@ import {
 import { MondayFirst } from './DayPicker';
 
 export type DatePickerProps = MondayFirst &
+  Pick<TextFieldProps, 'label' | 'required' | 'helperText'> &
   Partial<MinMaxDate> & {
     /**
      * @description Маска для инпута даты

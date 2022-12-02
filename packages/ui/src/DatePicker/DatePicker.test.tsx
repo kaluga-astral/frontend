@@ -1,4 +1,10 @@
-import { act, fireEvent, renderWithTheme, screen } from '@astral/tests';
+import {
+  act,
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+} from '@astral/tests';
 import { vi } from 'vitest';
 import { useState } from 'react';
 
@@ -6,12 +12,12 @@ import { DatePicker } from './DatePicker';
 
 // Протестировать любые кейсы, связанные с MaskFiled невозможно из-за того, что MaskField использует методы, не эмулируемые в rtl
 describe('DatePicker', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
+  beforeAll(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date('2022-02-10'));
   });
 
-  afterEach(() => {
+  afterAll(() => {
     vi.useRealTimers();
   });
 
@@ -20,7 +26,10 @@ describe('DatePicker', () => {
 
     renderWithTheme(<DatePicker onChange={onChange} />);
     fireEvent.focus(screen.getByRole('textbox'));
-    await act(() => screen.getAllByText('10')[0].click());
+
+    const dateBtn = screen.getAllByText('10')[0];
+
+    await userEvents.click(dateBtn);
     expect(onChange.mock.calls[0][0] instanceof Date).toBeTruthy();
 
     expect(onChange.mock.calls[0][0].toISOString()).toBe(
