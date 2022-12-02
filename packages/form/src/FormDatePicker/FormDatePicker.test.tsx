@@ -55,11 +55,7 @@ describe('FormDatePicker', () => {
     };
 
     renderWithTheme(<TestComponent />);
-
-    const input = screen.getByRole('textbox');
-
-    vi.useRealTimers();
-    await userEvents.click(input);
+    await userEvents.click(screen.getByRole('textbox'));
     await userEvents.click(screen.getAllByText('9')[0]);
     await userEvents.click(screen.getByText('submit'));
 
