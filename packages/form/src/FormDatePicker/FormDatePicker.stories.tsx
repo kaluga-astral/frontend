@@ -19,7 +19,7 @@ const Template: Story = () => {
   return (
     <FormStoryContainer form={form}>
       <FormDatePicker
-        inputProps={{ label: 'Form mask field', required: true }}
+        inputProps={{ label: 'FormDatePicker', required: true }}
         control={form.control}
         name="dateField"
         rules={{ required: 'Обязательное поле' }}
