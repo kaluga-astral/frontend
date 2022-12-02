@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const DialogOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -15,4 +16,5 @@ const DialogOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <path d="M16 9H8a1 1 0 0 0 0 2h8a1 1 0 1 0 0-2Zm-5 3H8a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2Z" />
   </SvgIcon>
 );
+
 export default DialogOutlineMd;

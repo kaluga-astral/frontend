@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const MailFillSm: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 16 16"
@@ -15,4 +16,5 @@ const MailFillSm: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     />
   </SvgIcon>
 );
+
 export default MailFillSm;

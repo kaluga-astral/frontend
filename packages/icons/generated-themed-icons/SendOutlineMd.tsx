@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const SendOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -13,4 +14,5 @@ const SendOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="m8.4 12.9 4-2a1 1 0 0 0 0-1.8 1 1 0 0 0-.8 0l-4 2a1 1 0 0 0 0 1.8 1 1 0 0 0 .8 0Z" />
   </SvgIcon>
 );
+
 export default SendOutlineMd;
