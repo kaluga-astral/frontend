@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const EyeOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -13,4 +14,5 @@ const EyeOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm0-6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" />
   </SvgIcon>
 );
+
 export default EyeOutlineMd;

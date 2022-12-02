@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const YoutubeFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -15,4 +16,5 @@ const YoutubeFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     />
   </SvgIcon>
 );
+
 export default YoutubeFillMd;

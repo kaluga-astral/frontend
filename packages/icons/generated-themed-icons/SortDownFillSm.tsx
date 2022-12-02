@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const SortDownFillSm: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -15,4 +16,5 @@ const SortDownFillSm: React.FunctionComponent<SvgIconProps> = ({
     <path d="M8 13 4.5 9h7L8 13Z" />
   </SvgIcon>
 );
+
 export default SortDownFillSm;

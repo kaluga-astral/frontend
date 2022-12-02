@@ -18,6 +18,7 @@ export const DateCalendarBtn = forwardRef<
     <DateCalendarBtnWrapper
       ref={ref}
       variant={selected ? 'contained' : 'text'}
+      aria-selected={selected}
       disabled
       {...props}
     />
@@ -26,6 +27,7 @@ export const DateCalendarBtn = forwardRef<
       <DateCalendarBtnWrapper
         ref={ref}
         variant={selected ? 'contained' : 'text'}
+        aria-selected={selected}
         {...props}
       />
     </Tooltip>

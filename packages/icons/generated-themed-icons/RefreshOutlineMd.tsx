@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const RefreshOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -16,4 +17,5 @@ const RefreshOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <path d="M14.1 4.6a1 1 0 0 0 .5 1.4c2 1 3.4 3.2 3.4 5.6 0 2.3-1.2 4.3-3 5.5a1 1 0 0 0-.4 1.4c.3.5.9.6 1.4.4a8.6 8.6 0 0 0-.6-14.8 1 1 0 0 0-1 0 1 1 0 0 0-.3.5Z" />
   </SvgIcon>
 );
+
 export default RefreshOutlineMd;

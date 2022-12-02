@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const QuitOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -13,4 +14,5 @@ const QuitOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="M16 13a1 1 0 0 0 1-1 1 1 0 0 0-1-1H6.5l1.2-1.2A1 1 0 0 0 7.4 8a1 1 0 0 0-1.2.2l-2.9 3a1 1 0 0 0 0 1.4l3 3A1 1 0 0 0 8 15a1 1 0 0 0-.3-.8L6.5 13H16Z" />
   </SvgIcon>
 );
+
 export default QuitOutlineMd;
