@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const MinusOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -14,4 +15,5 @@ const MinusOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <path d="M5 11.5c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v1c0 .3-.2.5-.5.5h-13a.5.5 0 0 1-.5-.5v-1Z" />
   </SvgIcon>
 );
+
 export default MinusOutlineMd;

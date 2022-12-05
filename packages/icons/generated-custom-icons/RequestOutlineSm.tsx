@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const RequestOutlineSm: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -17,4 +18,5 @@ const RequestOutlineSm: React.FunctionComponent<SvgIconProps> = ({
     />
   </SvgIcon>
 );
+
 export default RequestOutlineSm;

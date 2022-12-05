@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const DotsVOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -14,4 +15,5 @@ const DotsVOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <path d="M12 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0-7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0-7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
   </SvgIcon>
 );
+
 export default DotsVOutlineMd;
