@@ -113,4 +113,13 @@ describe('DatePicker', () => {
     await userEvents.click(document.body);
     expect(onBlur).toBeCalled();
   });
+
+  it('Props:onBlur: не вызывается при потере фокуса на инпуте', async () => {
+    const onBlur = vi.fn();
+
+    renderWithTheme(<DatePicker onBlur={onBlur} />);
+    fireEvent.focus(screen.getByRole('textbox'));
+    await userEvents.tab();
+    expect(onBlur).not.toBeCalled();
+  });
 });
