@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 module.exports = {
   branches: ['main', { name: 'dev', prerelease: 'dev' }],
   repositoryUrl: 'https://github.com/kaluga-astral/frontend',
@@ -51,7 +50,9 @@ module.exports = {
       '@semantic-release/exec',
       {
         // добавляем в env gh actions версии пакетов
-        prepareCmd: "echo 'NEXT_VERSION=${nextRelease.version}' >> $GITHUB_ENV; echo 'CURRENT_VERSION=${lastRelease.version}' >> $GITHUB_ENV",
+        prepareCmd:
+          // eslint-disable-next-line
+          "echo 'NEXT_VERSION=${nextRelease.version}' >> $GITHUB_ENV; echo 'CURRENT_VERSION=${lastRelease.version}' >> $GITHUB_ENV",
       },
     ],
   ],

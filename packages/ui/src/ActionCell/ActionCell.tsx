@@ -1,18 +1,19 @@
 import { DotsVOutlineMd } from '@astral/icons';
 import { ReactNode, useCallback, useMemo } from 'react';
 
+import { BaseButtonProps } from '../ButtonBase';
 import { IconButton } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
-import { MenuItem } from '../MenuItem';
+import { MenuItem, MenuItemProps } from '../MenuItem';
 import { Tooltip, TooltipProps } from '../Tooltip';
 
 import { ActionCellWrapper } from './styles';
 
-export type NestedAction<T> = {
+export type NestedAction<T> = MenuItemProps & {
   /**
    * Обработчик действия
    */
-  onClick: (row: T) => void;
+  onClick?: (row: T) => void;
   /**
    * Название действия
    */
@@ -27,7 +28,7 @@ export type SingleAction<T> = {
   /**
    * Обработчик действия
    */
-  onClick: (row: T) => void;
+  onClick?: (row: T) => void;
   /**
    * Название действия
    */
@@ -38,7 +39,7 @@ export type SingleAction<T> = {
   nested?: false;
 };
 
-export type MultipleAction<T> = {
+export type MultipleAction<T> = MenuItemProps & {
   /**
    * Иконка действия
    */
@@ -57,7 +58,11 @@ export type MultipleAction<T> = {
   name: string;
 };
 
-export type MainAction<T> = SingleAction<T> | MultipleAction<T>;
+export type MainAction<T> =
+  | (BaseButtonProps & SingleAction<T>)
+  | MultipleAction<T>;
+
+export type SecondaryAction<T> = MenuItemProps & SingleAction<T>;
 
 export type Actions<T> = {
   /**
@@ -67,7 +72,7 @@ export type Actions<T> = {
   /**
    * Второстепенные действия
    */
-  secondary?: SingleAction<T>[];
+  secondary?: SecondaryAction<T>[];
 };
 
 export type ActionsCellProps<T> = {
@@ -90,11 +95,12 @@ export function ActionCell<T>({
   row,
   tooltipPlacement,
 }: ActionsCellProps<T>) {
-  const handleActionClick =
-    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
-    () => {
-      onClick(row);
-    };
+  const handleActionClick = useCallback(
+    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) => () => {
+      onClick?.(row);
+    },
+    [row],
+  );
 
   const renderMainAction = useCallback(
     (action: MainAction<T>) => {
@@ -104,10 +110,11 @@ export function ActionCell<T>({
         return (
           <Tooltip key={name} title={name} placement={tooltipPlacement}>
             <IconDropdownButton icon={icon} variant="text">
-              {actions.map(({ name: nestedActionName, onClick }) => (
+              {actions.map(({ name: nestedActionName, onClick, ...props }) => (
                 <MenuItem
                   key={nestedActionName}
                   onClick={handleActionClick(onClick)}
+                  {...props}
                 >
                   {nestedActionName}
                 </MenuItem>
@@ -117,17 +124,21 @@ export function ActionCell<T>({
         );
       }
 
-      const { onClick, name, icon } = action;
+      const { onClick, name, icon, nested, ...props } = action;
 
       return (
         <Tooltip key={name} title={name} placement={tooltipPlacement}>
-          <IconButton variant="text" onClick={handleActionClick(onClick)}>
+          <IconButton
+            variant="text"
+            onClick={handleActionClick(onClick)}
+            {...props}
+          >
             {icon}
           </IconButton>
         </Tooltip>
       );
     },
-    [handleActionClick],
+    [handleActionClick, tooltipPlacement],
   );
 
   const renderSecondaryActions = useMemo(() => {
@@ -137,8 +148,8 @@ export function ActionCell<T>({
 
     return (
       <IconDropdownButton icon={<DotsVOutlineMd />} variant="text">
-        {secondary.map(({ name, onClick }) => (
-          <MenuItem key={name} onClick={handleActionClick(onClick)}>
+        {secondary.map(({ name, onClick, nested, ...props }) => (
+          <MenuItem key={name} onClick={handleActionClick(onClick)} {...props}>
             {name}
           </MenuItem>
         ))}
@@ -148,7 +159,7 @@ export function ActionCell<T>({
 
   return (
     <ActionCellWrapper onClick={(event) => event.stopPropagation()}>
-      {main.map((action) => renderMainAction(action))}
+      {main.map(renderMainAction)}
       {renderSecondaryActions}
     </ActionCellWrapper>
   );

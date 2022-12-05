@@ -46,15 +46,19 @@ export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
 
   const [isOpened, setOpened] = useState(false);
   const handleOpen = () => {
-    push(id.current);
-    setOpened(true);
+    if (!isOpened) {
+      push(id.current);
+      setOpened(true);
+    }
   };
 
   const handleClose = (
     _?: SyntheticEvent<Element, Event> | Event | {},
     reason?: Reason,
   ) => {
-    setOpened(!pop(id.current, reason));
+    if (isOpened) {
+      setOpened(!pop(id.current, reason));
+    }
   };
 
   useEffect(() => () => remove(id.current), []);

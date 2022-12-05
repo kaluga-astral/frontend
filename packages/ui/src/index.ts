@@ -142,6 +142,10 @@ export * from './TextField';
 
 export * from './Typography';
 
+export * from './ToggleButton';
+
+export * from './ToggleButtonGroup';
+
 export * from './Tooltip';
 
 export * from './SideDialog';

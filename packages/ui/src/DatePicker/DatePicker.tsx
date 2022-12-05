@@ -1,22 +1,8 @@
-import {
-  ChangeEvent,
-  FocusEvent,
-  SyntheticEvent,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, FocusEvent, SyntheticEvent, forwardRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
-import {
-  DateMask,
-  areDatesSame,
-  formatDate,
-  isDate,
-  parseDate,
-} from '../utils/date';
+import { DateMask } from '../utils/date';
 import { Reason } from '../types';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
@@ -29,14 +15,24 @@ import {
 } from './MinMaxDateContext';
 import { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
-import { useBaseDateInRange } from './hooks/useBaseDateInRange';
+import {
+  useBaseDateInRange,
+  useMaskedValue,
+  useSelectedBaseDate,
+} from './hooks';
 import { MondayFirst } from './DayPicker';
-import { useSelectedBaseDate } from './hooks/useSelectedBaseDate';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
+    /**
+     * @description Маска для инпута даты
+     * @default 'DD.MM.YYYY'
+     * */
     mask?: DateMask;
-    onChange?: (date: Date | string | null | undefined) => void;
+    /**
+     * @description Обработчик изменения состояния. Передает только Date object, если дата невалидна, то будет Invalid date
+     * */
+    onChange?: (date?: Date) => void;
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
     onOpen?: () => void;
     onClose?: (
@@ -45,7 +41,10 @@ export type DatePickerProps = MondayFirst &
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
-    value?: Date | null;
+    /**
+     * @description Принимает только Date object, включая невалидную дату Invalid date
+     * */
+    value?: Date;
   };
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
@@ -59,7 +58,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       isMondayFirst,
       inputProps,
       disabled,
-      value: parentValue,
+      value,
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
     },
@@ -70,60 +69,44 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       onActive: onOpen,
       onInactive: onClose,
     });
-    const [maskedDate, setMaskedDate] = useState('');
+
+    const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
+      useMaskedValue({
+        currentValue: value,
+        mask,
+        onChangeValue: onChange,
+      });
 
     const baseDate = useBaseDateInRange({ minDate, maxDate });
-    const [selectedBaseDate, selectedDate, setSelectedDate] =
-      useSelectedBaseDate({ parentValue, minDate, maxDate });
-
-    const checkValue = useCallback(
-      (value: string | Date) => {
-        const isString = typeof value === 'string';
-
-        setMaskedDate(isString ? value : formatDate(value, mask));
-
-        const date = isString ? parseDate(value, mask) : value;
-
-        if (value === '' || !isDate(date)) {
-          setSelectedDate(null);
-        } else if (!areDatesSame(date, selectedDate)) {
-          setSelectedDate(date);
-        }
-      },
-      [mask, selectedDate],
-    );
+    const selectedBaseDate = useSelectedBaseDate({
+      currentValue: value,
+      minDate,
+      maxDate,
+    });
 
     const handleDayPick = (date: Date) => {
-      setMaskedDate(formatDate(date, mask));
-      setSelectedDate(date);
+      onChangeMaskedDate(date);
       closePopper(undefined, 'selectOption');
     };
 
-    useEffect(() => {
-      onChange?.(selectedDate || maskedDate);
-    }, [selectedDate, maskedDate]);
-
-    useEffect(() => {
-      checkValue(parentValue || '');
-    }, [parentValue]);
-
-    const blurHandler = (e: FocusEvent<HTMLInputElement>) => {
-      checkValue(e.target.value);
+    const handleBlurMaskInput = (e: FocusEvent<HTMLInputElement>) => {
+      onChangeMaskedValue(e.target.value);
       onBlur?.(e);
     };
 
-    const handleNativeChange = (e: ChangeEvent<HTMLInputElement>) =>
-      checkValue(e.target.value);
+    const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
+      onChangeMaskedValue(e.target.value);
+    };
 
     return (
       <DatePickerClickAwayListener onClickAway={closePopper}>
         <DatePickerInput
           {...inputProps}
           mask={mask}
-          onNativeChange={handleNativeChange}
-          onBlur={blurHandler}
+          onNativeChange={handleChangeMaskInput}
+          onBlur={handleBlurMaskInput}
           disabled={disabled}
-          value={maskedDate}
+          value={maskedValue}
           ref={ref}
           onFocus={openPopper}
         />

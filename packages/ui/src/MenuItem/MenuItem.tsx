@@ -1,6 +1,7 @@
-import { StyledMenuItem } from './styled';
-import { MenuItemProps } from './types';
+import { MenuItemProps as MuiMenuItemProps } from '@mui/material';
 
-export const MenuItem = ({ children, ...props }: MenuItemProps) => {
-  return <StyledMenuItem {...props}>{children}</StyledMenuItem>;
-};
+import { WithoutEmotionSpecific } from '../types';
+
+export type MenuItemProps = WithoutEmotionSpecific<MuiMenuItemProps>;
+
+export { MenuItem } from '@mui/material';
