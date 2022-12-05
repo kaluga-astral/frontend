@@ -66,7 +66,7 @@ const DatePickerInner = forwardRef<
   ) => {
     const { maxDate, minDate } = useContext(MinMaxDateContext);
     const ref = useForwardedRef(forwardedRef);
-    const [isOpenPopover, openPopper, closePopper] = useToggle({
+    const [isOpenPopper, openPopper, closePopper] = useToggle({
       onActive: onOpen,
       onInactive: onClose,
     });
@@ -108,7 +108,7 @@ const DatePickerInner = forwardRef<
           onFocus={openPopper}
         />
         <DatePickerPopper
-          open={isOpenPopover}
+          open={isOpenPopper}
           onClose={handleClosePopover}
           anchorEl={ref?.current}
         >
