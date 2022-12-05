@@ -15,5 +15,5 @@ export const HeaderRoot = styled.header`
 `;
 
 export const HeaderNav = styled(Grid)`
-  column-gap: ${({ theme }) => theme.spacing(0.5)};
+  column-gap: ${({ theme }) => theme.spacing(1)};
 `;
