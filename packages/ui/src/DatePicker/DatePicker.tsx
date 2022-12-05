@@ -71,7 +71,7 @@ const DatePickerInner = forwardRef<
       onInactive: onClose,
     });
 
-    const handleClosePopover = () => {
+    const handleClosePopper = () => {
       // для данного компонента onBlur должен срабатывать после закрытия popover, а не во время выбора даты
       onBlur?.();
       closePopper(undefined, 'selectOption');
@@ -89,7 +89,7 @@ const DatePickerInner = forwardRef<
 
     const handleDayPick = (date: Date) => {
       onChangeMaskedDate(date);
-      handleClosePopover();
+      handleClosePopper();
     };
 
     const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +97,7 @@ const DatePickerInner = forwardRef<
     };
 
     return (
-      <DatePickerClickAwayListener onClickAway={handleClosePopover}>
+      <DatePickerClickAwayListener onClickAway={handleClosePopper}>
         <DatePickerInput
           {...inputProps}
           mask={mask}
@@ -109,7 +109,7 @@ const DatePickerInner = forwardRef<
         />
         <DatePickerPopper
           open={isOpenPopper}
-          onClose={handleClosePopover}
+          onClose={handleClosePopper}
           anchorEl={ref?.current}
         >
           <YearMonthDayPicker
