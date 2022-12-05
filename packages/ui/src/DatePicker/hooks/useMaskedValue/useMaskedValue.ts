@@ -40,7 +40,13 @@ export const useMaskedValue = ({
 
   const handleChangeMaskedValue = (value: string) => {
     setMaskedValue(value);
-    onChangeValue?.(parseDate(value, mask));
+
+    // parseDate вернет Invalid Date при undefined. А нам надо undefined
+    if (!value) {
+      onChangeValue?.(undefined);
+    } else {
+      onChangeValue?.(parseDate(value, mask));
+    }
   };
 
   const handleChangeMaskedDate = (date: Date) => {
