@@ -46,7 +46,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(117 90 253)',
           },
           {
-            url: '',
+            url: 'https://ofd.astralnalog.ru/lk',
             name: 'Астрал.ОФД',
             logoUrl:
               'https://identity.astral.ru/api/Files/f0519e97-7a50-4796-a8d2-877cd15c7668',

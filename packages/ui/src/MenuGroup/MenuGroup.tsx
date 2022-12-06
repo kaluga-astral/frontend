@@ -1,7 +1,14 @@
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
-import { MenuGroupProps } from './types';
-import { StyledContentWrapper, StyledLabel } from './styled';
+import { StyledContentWrapper, StyledLabel } from './styles';
+
+export type MenuGroupProps = {
+  children: ReactNode;
+  /**
+   * Заголовок группы
+   */
+  label: string;
+};
 
 export const MenuGroup = (props: MenuGroupProps) => {
   const { children, label } = props;
@@ -9,8 +16,12 @@ export const MenuGroup = (props: MenuGroupProps) => {
 
   return (
     <>
-      <StyledLabel variant="h7">{upperCasedLabel}</StyledLabel>
-      <StyledContentWrapper>{children}</StyledContentWrapper>
+      <StyledLabel component="li" variant="h7">
+        {upperCasedLabel}
+      </StyledLabel>
+      <StyledContentWrapper>
+        <ul>{children}</ul>
+      </StyledContentWrapper>
     </>
   );
 };

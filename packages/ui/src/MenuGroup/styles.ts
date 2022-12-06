@@ -13,7 +13,9 @@ export const StyledLabel = styled(Typography)`
 export const StyledContentWrapper = styled.li`
   width: 100%;
 
-  & > li {
-    padding-left: ${({ theme }) => theme.spacing(7)};
+  & ul {
+    padding: 0;
+
+    list-style: none;
   }
 `;
