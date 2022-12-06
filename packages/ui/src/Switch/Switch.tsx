@@ -1,10 +1,10 @@
 import { forwardRef } from 'react';
+import { Switch as MuiSwitch } from '@mui/material';
 
-import { StyledSwitch } from './styled';
 import { SwitchProps } from './types';
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ size = 'medium', ...props }, ref) => {
-    return <StyledSwitch size={size} ref={ref} {...props} />;
+  (props, ref) => {
+    return <MuiSwitch ref={ref} {...props} />;
   },
 );
