@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, ReactNode } from 'react';
+import { CSSProperties, ElementType } from 'react';
 import { Breakpoint } from '@mui/material/styles';
 
 type StyleCSSType<Type extends keyof CSSProperties> =
@@ -30,6 +30,3 @@ export type GridElementsProps = {
   justifySelf?: StyleCSSType<'justifySelf'>;
   alignSelf?: StyleCSSType<'alignSelf'>;
 };
-
-export type GridProps = GridContainerProps &
-  GridElementsProps & { children?: ReactNode };
