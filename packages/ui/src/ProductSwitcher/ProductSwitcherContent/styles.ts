@@ -4,7 +4,7 @@ import { Grid } from '../../Grid';
 
 export const ProductItem = styled(MenuItem)`
   padding-left: ${({ theme }) => theme.spacing(6)};
-`;
+` as typeof MenuItem;
 
 export const Logo = styled('img', {
   shouldForwardProp: (prop) => prop !== 'color',

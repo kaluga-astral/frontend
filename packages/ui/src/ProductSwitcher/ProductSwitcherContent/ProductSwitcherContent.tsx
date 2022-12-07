@@ -45,7 +45,6 @@ export const ProductSwitcherContent = ({
         {products.map((product) => {
           return (
             <li key={product.id}>
-              {/* @ts-ignore типы не позволяют прокинуть component */}
               <ProductItem component="a" href={product.url}>
                 <Logo src={product.logoUrl} color={product.color} />
                 <Typography variant="ui" color="grey" colorIntensity={900}>
