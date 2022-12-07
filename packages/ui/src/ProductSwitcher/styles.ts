@@ -3,7 +3,6 @@ import { Menu } from '../Menu';
 
 export const WidgetMenu = styled(Menu)`
   .MuiPaper-root > .MuiList-root {
-
     display: flex;
     flex-direction: column;
     align-items: center;
