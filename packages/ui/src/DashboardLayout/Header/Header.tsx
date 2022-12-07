@@ -17,7 +17,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
 
   return (
     <HeaderRoot ref={ref}>
-      <HeaderNav>
+      <HeaderNav container autoFlow="column" component="nav">
         {ProductSwitcher && <ProductSwitcher />}
         <Product {...product} />
         {/* {Menu && <Menu />} */}
