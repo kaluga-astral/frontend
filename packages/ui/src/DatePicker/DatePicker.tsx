@@ -77,6 +77,12 @@ const DatePickerInner = forwardRef<
       closePopper(undefined, 'selectOption');
     };
 
+    const handleClickAwayPicker = () => {
+      if (isOpenPopper) {
+        handleClosePopper();
+      }
+    };
+
     const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
       useMaskedValue({
         currentValue: value,
@@ -97,7 +103,7 @@ const DatePickerInner = forwardRef<
     };
 
     return (
-      <DatePickerClickAwayListener onClickAway={handleClosePopper}>
+      <DatePickerClickAwayListener onClickAway={handleClickAwayPicker}>
         <DatePickerInput
           {...inputProps}
           mask={mask}
