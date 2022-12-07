@@ -1,7 +1,12 @@
 import { forwardRef } from 'react';
-import { Switch as MuiSwitch } from '@mui/material';
+import {
+  Switch as MuiSwitch,
+  SwitchProps as MuiSwitchProps,
+} from '@mui/material';
 
-import { SwitchProps } from './types';
+import { WithoutEmotionSpecific } from '../types';
+
+export type SwitchProps = WithoutEmotionSpecific<MuiSwitchProps>;
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
   (props, ref) => {
