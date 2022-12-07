@@ -93,15 +93,15 @@ jobs:
         run: echo "PACKAGE_VERSION=1.0.0-test.$(date +%s)" >> $GITHUB_OUTPUT
 
       # Build всех пакетов
-#      - name: Build @astral/ui
-#        run: npm run build --workspace=@astral/ui
-#        env:
-#          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-#
-#      - name: Build @astral/icons
-#        run: npm run build --workspace=@astral/icons
-#        env:
-#          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+      - name: Build @astral/ui
+        run: npm run build --workspace=@astral/ui
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+
+      - name: Build @astral/icons
+        run: npm run build --workspace=@astral/icons
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       - name: Build @astral/fonts
         run: npm run build --workspace=@astral/fonts
