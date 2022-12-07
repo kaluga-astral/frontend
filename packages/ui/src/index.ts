@@ -173,3 +173,5 @@ export * from './ContentState';
 export * from './Chevron';
 
 export * from './Stepper';
+
+export * from './Switch';
