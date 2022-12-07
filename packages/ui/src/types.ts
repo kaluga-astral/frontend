@@ -5,6 +5,7 @@ export type WithoutEmotionSpecific<Props> = Omit<Props, 'sx' | 'css'>;
 export type Reason =
   | 'escapeKeyDown'
   | 'backdropClick'
+  | 'awayClick'
   | 'toggleInput'
   | 'blur'
   | AutocompleteCloseReason

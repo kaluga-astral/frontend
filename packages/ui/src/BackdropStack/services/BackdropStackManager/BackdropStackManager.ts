@@ -26,7 +26,7 @@ class BackdropStackManager {
 
     return (
       reason === 'backdropClick' &&
-      previousReason === 'blur' &&
+      (previousReason === 'blur' || previousReason === 'awayClick') &&
       previousPointerId === this.currentPointerId
     );
   };

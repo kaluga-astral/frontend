@@ -4,8 +4,8 @@ import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
 import { DateMask } from '../utils/date';
 import { Reason } from '../types';
+import { AwayClickListener } from '../AwayClickListener';
 
-import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopper } from './DatePickerPopper';
 import {
@@ -71,10 +71,13 @@ const DatePickerInner = forwardRef<
       onInactive: onClose,
     });
 
-    const handleClosePopper = () => {
+    const handleClosePopper = (
+      e?: SyntheticEvent<Element, Event> | Event,
+      reason?: Reason,
+    ) => {
       // для данного компонента onBlur должен срабатывать после закрытия popover, а не во время выбора даты
       onBlur?.();
-      closePopper(undefined, 'selectOption');
+      closePopper(e, reason || 'selectOption');
     };
 
     const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
@@ -97,7 +100,11 @@ const DatePickerInner = forwardRef<
     };
 
     return (
-      <DatePickerClickAwayListener onClickAway={handleClosePopper}>
+      <AwayClickListener
+        onAwayClick={handleClosePopper}
+        isActive={isOpenPopper}
+        preventBubbling
+      >
         <DatePickerInput
           {...inputProps}
           mask={mask}
@@ -119,7 +126,7 @@ const DatePickerInner = forwardRef<
             date={selectedBaseDate || baseDate}
           />
         </DatePickerPopper>
-      </DatePickerClickAwayListener>
+      </AwayClickListener>
     );
   },
 );
