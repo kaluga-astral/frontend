@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 
-import { StyledContentWrapper, StyledLabel } from './styles';
+import { MenuGroupContent, MenuGroupLabel } from './styles';
 
 export type MenuGroupProps = {
   children: ReactNode;
@@ -16,12 +16,12 @@ export const MenuGroup = (props: MenuGroupProps) => {
 
   return (
     <>
-      <StyledLabel component="li" variant="h7">
+      <MenuGroupLabel component="li" variant="h7">
         {upperCasedLabel}
-      </StyledLabel>
-      <StyledContentWrapper>
+      </MenuGroupLabel>
+      <MenuGroupContent>
         <ul>{children}</ul>
-      </StyledContentWrapper>
+      </MenuGroupContent>
     </>
   );
 };
