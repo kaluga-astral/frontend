@@ -25,6 +25,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
       () =>
         resolve([
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff53b1',
             url: '',
             name: 'Астрал.Отчет',
             logoUrl:
@@ -32,6 +33,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: '#2d77ff',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff532',
             url: '',
             name: 'Астрал.ЭДО',
             logoUrl:
@@ -39,6 +41,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(117 90 253)',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff533',
             url: '',
             name: 'Астрал.КЭДО',
             logoUrl:
@@ -46,6 +49,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(117 90 253)',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff534',
             url: 'https://ofd.astralnalog.ru/lk',
             name: 'Астрал.ОФД',
             logoUrl:
@@ -53,6 +57,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(117 90 253)',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff535',
             url: '',
             name: 'Астрал.ЭТ',
             logoUrl:
@@ -60,6 +65,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(55 103 152)',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff536',
             url: '',
             name: 'Личный кабинет',
             logoUrl:
@@ -67,6 +73,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
             color: 'rgb(10, 124, 255)',
           },
           {
+            id: '49d3ce2a-d57c-4794-b659-f80e31ff537',
             url: '',
             name: 'Кабинет партнера',
             logoUrl:

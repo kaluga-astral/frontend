@@ -44,7 +44,7 @@ export const ProductSwitcherContent = ({
       <MenuGroup label="Продукты экосистемы">
         {products.map((product) => {
           return (
-            <li>
+            <li key={product.id}>
               {/* @ts-ignore типы не позволяют прокинуть component */}
               <ProductItem component="a" href={product.url}>
                 <Logo src={product.logoUrl} color={product.color} />
