@@ -184,3 +184,14 @@ jobs:
       - name: Build project
         working-directory: ./example
         run: npm run build:dev
+
+      - name: Unpublish tests packages
+        run: |
+          npm unpublish @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
