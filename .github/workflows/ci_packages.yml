@@ -108,63 +108,63 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
-#      - name: Build @astral/illustrations
-#        run: npm run build --workspace=@astral/illustrations
-#        env:
-#          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-#
-#      - name: Build @astral/validations
-#        run: npm run build --workspace=@astral/validations
-#        env:
-#          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-#
-#      - name: Build @astral/form
-#        run: npm run build --workspace=@astral/form
-#        env:
-#          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+      - name: Build @astral/illustrations
+        run: npm run build --workspace=@astral/illustrations
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+
+      - name: Build @astral/validations
+        run: npm run build --workspace=@astral/validations
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+
+      - name: Build @astral/form
+        run: npm run build --workspace=@astral/form
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       # Паблишинг всех пакетов
-#      - name: Publish @astral/ui
-#        run: npm publish ./packages/ui/lib --tag test
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-#
-#      - name: Publish @astral/icons
-#        run: npm publish ./packages/icons/lib --tag test
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Publish @astral/ui
+        run: npm publish ./packages/ui/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/icons
+        run: npm publish ./packages/icons/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Publish @astral/fonts
         run: npm publish ./packages/fonts/lib --tag test
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-#
-#      - name: Publish @astral/illustrations
-#        run: npm publish ./packages/illustrations/lib --tag test
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-#
-#      - name: Publish @astral/validations
-#        run: npm publish ./packages/validations/lib --tag test
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-#
-#      - name: Publish @astral/form
-#        run: npm publish ./packages/form/lib --tag test
-#        env:
-#          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/illustrations
+        run: npm publish ./packages/illustrations/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/validations
+        run: npm publish ./packages/validations/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/form
+        run: npm publish ./packages/form/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       # В example устанавливаются пакеты с тестовыми версиями
       - name: Install deps for example project
         working-directory: ./example
         run: |
           npm i &
-          npm --save @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm --save @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm --save @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+          npm i --save @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm i --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm i --save @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm i --save @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       - name: Check types
         working-directory: ./example
