@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const SearchOutlineSm: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -17,4 +18,5 @@ const SearchOutlineSm: React.FunctionComponent<SvgIconProps> = ({
     />
   </SvgIcon>
 );
+
 export default SearchOutlineSm;

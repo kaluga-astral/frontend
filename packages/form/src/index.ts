@@ -1,5 +1,7 @@
 export * from 'react-hook-form';
 
+export * from './FormAutocomplete';
+
 export * from './FormMaskField';
 
 export * from './FormMobilePhoneField';
@@ -13,6 +15,8 @@ export * from './FormSelect';
 export * from './FormTextField';
 
 export * from './SubmitButton';
+
+export * from './FormDatePicker';
 
 export * from './types';
 

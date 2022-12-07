@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const MailOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -13,4 +14,5 @@ const MailOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="M5.5 6.5H3.1c.2.4.4.9.8 1.2l5.9 5.9a3.1 3.1 0 0 0 4.4 0L20 7.7c.4-.3.6-.8.8-1.2h-2.4l-5.6 5.7a1.1 1.1 0 0 1-1.6 0L5.5 6.5Z" />
   </SvgIcon>
 );
+
 export default MailOutlineMd;

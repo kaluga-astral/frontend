@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const PageDotOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -14,4 +15,5 @@ const PageDotOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <circle cx={12} cy={12} r={2} />
   </SvgIcon>
 );
+
 export default PageDotOutlineMd;

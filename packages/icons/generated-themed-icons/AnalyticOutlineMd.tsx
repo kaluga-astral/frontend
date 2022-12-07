@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const AnalyticOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -15,4 +16,5 @@ const AnalyticOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     <path d="M13.3 13.7a1 1 0 0 0 1.4 0l4-4a1 1 0 1 0-1.4-1.4L14 11.6l-2.3-2.3a1 1 0 0 0-1.4 0l-4 4a1 1 0 0 0 1.4 1.4l3.3-3.3 2.3 2.3Z" />
   </SvgIcon>
 );
+
 export default AnalyticOutlineMd;

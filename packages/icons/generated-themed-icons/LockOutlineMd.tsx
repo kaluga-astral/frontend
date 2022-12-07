@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const LockOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -13,4 +14,5 @@ const LockOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
   </SvgIcon>
 );
+
 export default LockOutlineMd;

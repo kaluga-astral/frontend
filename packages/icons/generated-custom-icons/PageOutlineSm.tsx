@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const PageOutlineSm: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 16 16"
@@ -15,4 +16,5 @@ const PageOutlineSm: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     />
   </SvgIcon>
 );
+
 export default PageOutlineSm;
