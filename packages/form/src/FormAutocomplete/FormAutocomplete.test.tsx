@@ -48,7 +48,6 @@ describe('FormAutocomplete', () => {
       surname: string;
     };
 
-    const user = userEvents.setup();
     const onSubmit = vi.fn();
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
@@ -67,8 +66,8 @@ describe('FormAutocomplete', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    await user.click(screen.getByRole('combobox'));
-    await user.click(screen.getByRole('option'));
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('option'));
     fireEvent.submit(screen.getByRole('form'));
 
     await waitFor(() => {
@@ -77,6 +76,42 @@ describe('FormAutocomplete', () => {
       expect(submitValues).toEqual({
         user: { name: 'Vasya', surname: 'Pupkin' },
       });
+    });
+  });
+
+  it('Prop:multiple: после выбора значения в форму сетится массив option', async () => {
+    type Option = {
+      name: string;
+      surname: string;
+    };
+
+    const onSubmit = vi.fn();
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+    const TestComponent = () => {
+      const form = useForm<{ user: Option }>();
+
+      return (
+        <Form name="form" form={form} onSubmit={form.handleSubmit(onSubmit)}>
+          <FormAutocomplete
+            multiple
+            name="user"
+            getOptionLabel={(option) => (option as Option).name}
+            options={options}
+          />
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('option'));
+    fireEvent.submit(screen.getByRole('form'));
+
+    await waitFor(() => {
+      const [submitValues] = onSubmit.mock.calls[0];
+
+      expect(submitValues.user).toEqual([{ name: 'Vasya', surname: 'Pupkin' }]);
     });
   });
 });
