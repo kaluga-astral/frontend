@@ -15,7 +15,7 @@ import {
   KedoIcon,
   OfdIcon,
 } from './Icons';
-import { StyledLabel, StyledMenuItem, StyledMenuWrapper } from './styled';
+import { StyledLabel, StyledMenuItem } from './styled';
 
 export default {
   title: 'Components/MenuGroup',
@@ -40,54 +40,52 @@ const Template: Story = () => {
         Products
       </Button>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <StyledMenuWrapper>
-          <MenuGroup label="Мои продукты">
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <AoIcon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.Отчет</StyledLabel>
-            </StyledMenuItem>
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <ApIcon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.Подпись</StyledLabel>
-            </StyledMenuItem>
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <EdoIcon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.ЭДО</StyledLabel>
-            </StyledMenuItem>
-          </MenuGroup>
-          <MenuGroup label="Больше продуктов от a-soft">
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <KedoIcon />
-              </ListItemIcon>
-              <StyledLabel>Кадровый ЭДО</StyledLabel>
-            </StyledMenuItem>
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <AsIcon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.Скрин</StyledLabel>
-            </StyledMenuItem>
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <OfdIcon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.ОФД</StyledLabel>
-            </StyledMenuItem>
-            <StyledMenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <Ap2Icon />
-              </ListItemIcon>
-              <StyledLabel>Астрал.Подпись</StyledLabel>
-            </StyledMenuItem>
-          </MenuGroup>
-        </StyledMenuWrapper>
+        <MenuGroup label="Мои продукты">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Отчет</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ApIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <EdoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ЭДО</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
+        <MenuGroup label="Больше продуктов от a-soft">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <KedoIcon />
+            </ListItemIcon>
+            <StyledLabel>Кадровый ЭДО</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AsIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Скрин</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <OfdIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ОФД</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Ap2Icon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
       </Menu>
     </>
   );
