@@ -90,13 +90,14 @@ jobs:
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
 
       - name: Set test package version
@@ -195,31 +196,3 @@ jobs:
           npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-  fetchPRInfo:
-    name: fetchPRInfo
-    needs: testPublishPackages
-    if: failure()
-    uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
-    with:
-      pr_url: ${{ github.event.pull_request.url }}
-
-  notifyErrorPackages:
-    name: Notify on error packages
-    if: failure()
-    needs: [testPublishPackages, fetchPRInfo]
-    runs-on: ubuntu-latest
-    steps:
-      - name: send telegram message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ‼️${{ github.event.repository.name }}
-            ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetchPRInfo.outputs.result).user.login] }}, при публикации тестовый пакетов на основе вашего PR были обнаружены ошибки или braking changes.
-            Необходимо либо исправить ошибки, либо внести соответствующие правки в <a href="https://github.com/kaluga-astral/frontend/tree/main/example">example</a> директории.
-
-            ${{ fromJSON(needs.fetch.outputs.result).title }}
-
-            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
