@@ -29,7 +29,7 @@ export type TypographyProps = Omit<
   OverrideProps<WithoutEmotionSpecific<TypographyTypeMap>, React.ElementType>,
   'variant' | 'color'
 > & {
-  variant?: Variant | keyof TypographyPropsVariantOverrides;
+  variant: Variant | keyof TypographyPropsVariantOverrides;
   component?: React.ElementType;
   color?: TypographyColor | ((theme: Theme) => string);
   /**

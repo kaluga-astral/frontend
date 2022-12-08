@@ -195,3 +195,23 @@ jobs:
           npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+  notifyErrorPackages:
+    name: Notify on error packages
+    if: failure()
+    needs: testPublishPackages
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ‼️${{ github.event.repository.name }}
+            ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}, при публикации тестовый пакетов на основе вашего PR были обнаружены ошибки или braking changes.
+            Необходимо либо исправить ошибки, либо внести соответствующие правки в <a href="https://github.com/kaluga-astral/frontend/tree/main/example">example</a> директории.
+
+            ${{ fromJSON(needs.fetch.outputs.result).title }}
+
+            ${{ fromJSON(needs.fetch.outputs.result).html_url }}
