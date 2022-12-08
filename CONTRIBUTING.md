@@ -80,7 +80,7 @@ feat(UI-KIT-200, ui, Button): Добавлен props color
 
 # Тестирование
 
-Тесты в проекте пишутся с использованием jest и react-testing-library.
+Тесты в проекте пишутся с использованием vitest и react-testing-library.
 
 ## Что покрывать тестами?
 
