@@ -87,17 +87,17 @@ const modifyPackageJSON = ({
   if (!isStaticPackage) {
     Object.assign(modifiedPackageData, {
       types: './esm/index.d.ts',
-      main: './src/index.js',
-      module: './src/esm/index.js',
-      browser: './src/esm/index.js',
+      main: './index.js',
+      module: './esm/index.js',
+      browser: './esm/index.js',
       exports: {
         '.': {
-          import: './src/esm/index.js',
-          require: './src/index.js',
+          import: './esm/index.js',
+          require: './index.js',
         },
         './server': {
-          import: './src/esm/server/index.js',
-          require: './src/server/index.js',
+          import: './esm/server/index.js',
+          require: './server/index.js',
         },
       },
     });
