@@ -169,15 +169,12 @@ jobs:
           npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
           npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
-      - name: Check types
+      - name: Check packages errors (lint:types + build:dev)
         working-directory: ./example
-        run: npm run lint:types
-
-      - name: Build project
-        working-directory: ./example
-        run: npm run build:dev
+        run: npm run lint:types & npm run build:dev
 
       - name: Unpublish tests packages
+        if: always()
         run: |
           npm unpublish @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
