@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 
 import { useAwayClickEffect } from './useAwayClickEffect';
 
-describe('useEscapeClickEffect', () => {
+describe('useAwayClickEffect', () => {
   it('Props:isActive=true: при нажатии вне целевого дива вызывается onAwayClick', async () => {
     const onAwayClick = vi.fn();
     const div = document.createElement('div');
