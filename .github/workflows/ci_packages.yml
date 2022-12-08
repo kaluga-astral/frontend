@@ -96,8 +96,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Install dependencies
         run: npm i
 
       - name: Set test package version
