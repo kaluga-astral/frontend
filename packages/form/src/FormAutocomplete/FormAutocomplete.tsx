@@ -3,7 +3,7 @@ import { useController } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
 
 import { WithFormFieldProps } from '../types';
-import { useFieldErrorProps } from '../hooks';
+import { useFieldErrorProps, useInputProps } from '../hooks';
 
 export type FormAutocompleteProps<
   FieldValues extends object,
@@ -34,8 +34,8 @@ export const FormAutocomplete = <
     FreeSolo
   >,
 ) => {
+  const inputProps = useInputProps(props);
   const { field, fieldState } = useController(props);
-
   const errorProps = useFieldErrorProps(fieldState);
 
   const handleOnChange = <Value,>(
@@ -46,7 +46,7 @@ export const FormAutocomplete = <
   return (
     <Autocomplete
       {...field}
-      {...props}
+      {...inputProps}
       {...errorProps}
       onChange={handleOnChange}
     />

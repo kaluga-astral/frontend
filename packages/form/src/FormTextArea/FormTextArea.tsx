@@ -2,6 +2,7 @@ import { TextArea, TextAreaProps } from '@astral/ui';
 import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';
+import { useInputProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 /**
@@ -20,8 +21,9 @@ export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
 export function FormTextArea<FieldValues extends object>(
   props: FormTextAreaProps<FieldValues>,
 ) {
+  const inputProps = useInputProps(props);
   const { field, fieldState } = useController(props);
   const errorProps = useFieldErrorProps(fieldState);
 
-  return <TextArea {...field} {...props} {...errorProps} />;
+  return <TextArea {...field} {...inputProps} {...errorProps} />;
 }
