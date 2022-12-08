@@ -2,7 +2,7 @@ import { AutocompleteCloseReason } from '@mui/base/AutocompleteUnstyled/useAutoc
 
 export type WithoutEmotionSpecific<Props> = Omit<Props, 'sx' | 'css'>;
 
-export type Reason =
+export type CloseEventReason =
   | 'escapeKeyDown'
   | 'backdropClick'
   | 'awayClick'

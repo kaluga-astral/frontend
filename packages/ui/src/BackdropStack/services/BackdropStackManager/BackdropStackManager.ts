@@ -1,9 +1,14 @@
-import { Reason } from '../../../types';
+import { CloseEventReason } from '../../../types';
 
 type PopId = string;
 type PointerId = string | null;
 
-type PopTuple = [Reason | undefined, PointerId];
+type PopTuple = [CloseEventReason | undefined, PointerId];
+
+const backdropConflictsReasons = new Set<CloseEventReason | undefined>([
+  'blur',
+  'awayClick',
+]);
 
 class BackdropStackManager {
   private stack: PopId[] = [];
@@ -21,12 +26,12 @@ class BackdropStackManager {
     );
   }
 
-  private checkOn = (reason?: Reason): boolean => {
+  private checkOn = (reason?: CloseEventReason): boolean => {
     const [previousReason, previousPointerId] = this.previousPopInfo;
 
     return (
       reason === 'backdropClick' &&
-      (previousReason === 'blur' || previousReason === 'awayClick') &&
+      backdropConflictsReasons.has(previousReason) &&
       previousPointerId === this.currentPointerId
     );
   };
@@ -43,7 +48,7 @@ class BackdropStackManager {
     this.stack.push(id);
   };
 
-  public pop = (id: PopId, reason?: Reason): boolean => {
+  public pop = (id: PopId, reason?: CloseEventReason): boolean => {
     if (this.checkOn(reason)) {
       return false;
     }

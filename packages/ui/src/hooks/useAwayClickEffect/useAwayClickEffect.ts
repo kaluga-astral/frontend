@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-import { Reason } from '../../types';
+import { CloseEventReason } from '../../types';
 
 export type UseAwayClickListenerOptions = {
   /**
@@ -10,7 +10,7 @@ export type UseAwayClickListenerOptions = {
   /**
    * @description колбэк который будет вызываться при нажатии вне рефа
    */
-  onAwayClick: (e: PointerEvent, reason: Reason) => void;
+  onAwayClick: (e: PointerEvent, reason: CloseEventReason) => void;
   /**
    * @description флаг активности
    */
@@ -21,6 +21,10 @@ export type UseAwayClickListenerOptions = {
   preventBubbling?: boolean;
 };
 
+/**
+ * @description хук позволяющий подписаться на клик вне указанного рефа,
+ * подойдет для использования в кастомных попперах
+ */
 export const useAwayClickEffect = ({
   ref,
   onAwayClick,
@@ -41,7 +45,7 @@ export const useAwayClickEffect = ({
           e.stopImmediatePropagation();
         }
 
-        onAwayClick?.(e, 'awayClick');
+        onAwayClick(e, 'awayClick');
       }
     };
 
