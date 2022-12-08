@@ -196,10 +196,18 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+  fetchPRInfo:
+    name: fetchPRInfo
+    needs: testPublishPackages
+    if: failure()
+    uses: kaluga-astral/frontend/.github/workflows/fetch_pr_info.yml@main
+    with:
+      pr_url: ${{ github.event.pull_request.url }}
+
   notifyErrorPackages:
     name: Notify on error packages
     if: failure()
-    needs: testPublishPackages
+    needs: [testPublishPackages, fetchPRInfo]
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message
@@ -209,7 +217,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ‼️${{ github.event.repository.name }}
-            ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetch.outputs.result).user.login] }}, при публикации тестовый пакетов на основе вашего PR были обнаружены ошибки или braking changes.
+            ${{ fromJson(SECRETS.TELEGRAM_ACCOUNTS)[fromJSON(needs.fetchPRInfo.outputs.result).user.login] }}, при публикации тестовый пакетов на основе вашего PR были обнаружены ошибки или braking changes.
             Необходимо либо исправить ошибки, либо внести соответствующие правки в <a href="https://github.com/kaluga-astral/frontend/tree/main/example">example</a> директории.
 
             ${{ fromJSON(needs.fetch.outputs.result).title }}
