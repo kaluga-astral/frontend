@@ -122,4 +122,12 @@ describe('DatePicker', () => {
     await userEvents.tab();
     expect(onBlur).not.toBeCalled();
   });
+
+  it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {
+    const onBlur = vi.fn();
+
+    renderWithTheme(<DatePicker onBlur={onBlur} />);
+    await userEvents.click(document.body);
+    expect(onBlur).not.toBeCalled();
+  });
 });
