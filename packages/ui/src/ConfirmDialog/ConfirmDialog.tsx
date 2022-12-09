@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { Button, ButtonProps } from '../Button';
 import { Dialog } from '../Dialog';
@@ -36,7 +36,7 @@ type ConfirmDialogProps = {
      * @description Параметры кнопки отмены. В качестве действия onClick по-умолчанию используется пропс onClose
      * @example <ConfirmDialog actions={{ cancel: { text: 'Название кнопки' }}}
      */
-    cancel: ButtonProps & { text: string };
+    cancel?: ButtonProps & { text: string };
   };
 };
 
@@ -48,8 +48,21 @@ export const ConfirmDialog = ({
   onClose,
 }: ConfirmDialogProps) => {
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
-  const { text: cancelText, ...cancelButtonProps } = actions.cancel;
-  const handleCancelClick = cancelButtonProps.onClick || onClose;
+
+  const renderCancelButton = useMemo(() => {
+    if (actions.cancel) {
+      const { text: cancelText, ...cancelButtonProps } = actions.cancel;
+      const handleCancelClick = actions.cancel?.onClick || onClose;
+
+      return (
+        <Button {...cancelButtonProps} onClick={handleCancelClick}>
+          {cancelText}
+        </Button>
+      );
+    }
+
+    return null;
+  }, [actions.cancel, onClose]);
 
   return (
     <Dialog title={title} open={open} onClose={onClose}>
@@ -59,9 +72,7 @@ export const ConfirmDialog = ({
         </DialogContent>
       )}
       <DialogActions>
-        <Button {...cancelButtonProps} onClick={handleCancelClick}>
-          {cancelText}
-        </Button>
+        {renderCancelButton}
         <Button {...confirmButtonProps}>{confirmText}</Button>
       </DialogActions>
     </Dialog>
