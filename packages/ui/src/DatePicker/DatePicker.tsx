@@ -3,7 +3,7 @@ import { ChangeEvent, SyntheticEvent, forwardRef, useContext } from 'react';
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
 import { DateMask } from '../utils/date';
-import { Reason } from '../types';
+import { CloseEventReason } from '../types';
 
 import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';
@@ -36,7 +36,7 @@ export type DatePickerProps = MondayFirst &
     onOpen?: () => void;
     onClose?: (
       event?: SyntheticEvent<Element, Event> | Event,
-      reason?: Reason,
+      reason?: CloseEventReason,
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
     disabled?: boolean;
