@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const PlusFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
     viewBox="0 0 24 24"
@@ -12,4 +13,5 @@ const PlusFillMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM11 7a1 1 0 1 1 2 0v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H7a1 1 0 1 1 0-2h4V7Z" />
   </SvgIcon>
 );
+
 export default PlusFillMd;

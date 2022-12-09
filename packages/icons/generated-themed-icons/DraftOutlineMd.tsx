@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
+
 const DraftOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
@@ -21,4 +22,5 @@ const DraftOutlineMd: React.FunctionComponent<SvgIconProps> = ({
     />
   </SvgIcon>
 );
+
 export default DraftOutlineMd;

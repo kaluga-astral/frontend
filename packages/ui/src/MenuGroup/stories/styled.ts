@@ -10,6 +10,6 @@ export const StyledLabel = styled(Typography)`
   font-size: ${({ theme }) => theme.typography.h5.fontSize};
 `;
 
-export const StyledMenuWrapper = styled.div`
-  padding-top: ${({ theme }) => theme.spacing(2)};
+export const StyledMenuWrapper = styled.ul`
+  padding: ${({ theme }) => theme.spacing(2, 0, 0, 0)};
 `;
