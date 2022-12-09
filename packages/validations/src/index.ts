@@ -1,7 +1,5 @@
 export * from './createRule';
 
-export * from './yupAdapter';
-
 export * from './compose';
 
 export * from './composeAllSettled';

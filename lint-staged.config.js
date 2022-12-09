@@ -16,5 +16,9 @@ module.exports = {
     'npm run lint --workspace=@astral/validations',
     () => 'npm run lint:types --workspace=@astral/validations',
   ],
+  'packages/yup-rules/**/*.{js,ts}': [
+    'npm run lint --workspace=@astral/validations',
+    () => 'npm run lint:types --workspace=@astral/validations',
+  ],
   'commander/**/*.{js}': ['npm run lint --workspace=@astral/commander'],
 };

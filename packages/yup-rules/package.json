@@ -1,0 +1,24 @@
+{
+  "name": "@astral/yup-rules",
+  "browser": "./src/index.ts",
+  "main": "./src/index.ts",
+  "scripts": {
+    "prebuild": "npx rimraf ./lib",
+    "build": "commander build",
+    "publish": "npm publish ./lib",
+    "tests": "vitest run",
+    "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",
+    "lint:types": "tsc --noEmit",
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
+  },
+  "dependencies": {
+    "@astral/validations": "*"
+  },
+  "devDependencies": {
+    "yup": "^0.32.11"
+  },
+  "peerDependencies": {
+    "yup": "0.x.x"
+  }
+}

@@ -8,5 +8,9 @@ export type Rule<
   Params extends object,
   RequiredParams extends boolean,
 > = RequiredParams extends true
-  ? (params: Params) => InitializedRule
-  : (params?: Params) => InitializedRule;
+  ? (
+      params: Params & { exclude?: (value: unknown) => boolean },
+    ) => InitializedRule
+  : (
+      params?: Params & { exclude?: (value: unknown) => boolean },
+    ) => InitializedRule;

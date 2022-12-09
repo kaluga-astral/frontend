@@ -4,18 +4,12 @@ import { Rule } from '../types';
  * @description Фабрика по созданию правил валидации.
  */
 export function createRule<Params extends object, RequiredParams extends true>(
-  creator: Rule<
-    Params & { exclude?: (value: unknown) => boolean },
-    RequiredParams
-  >,
-): Rule<Params & { exclude?: (value: unknown) => boolean }, RequiredParams>;
+  creator: Rule<Params, RequiredParams>,
+): Rule<Params, RequiredParams>;
 
 export function createRule<Params extends object, RequiredParams extends false>(
-  creator: Rule<
-    Params & { exclude?: (value: unknown) => boolean },
-    RequiredParams
-  >,
-): Rule<Params & { exclude?: (value: unknown) => boolean }, RequiredParams>;
+  creator: Rule<Params, RequiredParams>,
+): Rule<Params, RequiredParams>;
 
 // Реализована перегрузка, поэтому используется any
 // eslint-disable-next-line
