@@ -28,7 +28,7 @@ type PopTuple = [CloseEventReason | undefined, PointerId];
  */
 const backdropConflictsReasons = new Set<CloseEventReason | undefined>([
   'blur',
-  'awayClick',
+  'clickAway',
 ]);
 
 class BackdropStackManager {

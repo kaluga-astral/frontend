@@ -2,7 +2,7 @@ import { RefObject, useEffect } from 'react';
 
 import { CloseEventReason } from '../../types';
 
-export type UseAwayClickListenerOptions = {
+export type UseClickAwayListenerOptions = {
   /**
    * @description реф на дом ноду, клик вне которой надо отслеживать
    */
@@ -10,7 +10,7 @@ export type UseAwayClickListenerOptions = {
   /**
    * @description колбэк который будет вызываться при нажатии вне рефа
    */
-  onAwayClick: (e: PointerEvent, reason: CloseEventReason) => void;
+  onClickAway: (e: PointerEvent, reason: CloseEventReason) => void;
   /**
    * @description флаг активности
    */
@@ -25,12 +25,12 @@ export type UseAwayClickListenerOptions = {
  * @description хук позволяющий подписаться на клик вне указанного рефа,
  * подойдет для использования в кастомных попперах
  */
-export const useAwayClickEffect = ({
+export const useClickAwayEffect = ({
   ref,
-  onAwayClick,
+  onClickAway,
   preventBubbling,
   isActive,
-}: UseAwayClickListenerOptions) => {
+}: UseClickAwayListenerOptions) => {
   useEffect(() => {
     const node = ref?.current;
 
@@ -45,7 +45,7 @@ export const useAwayClickEffect = ({
           e.stopImmediatePropagation();
         }
 
-        onAwayClick(e, 'awayClick');
+        onClickAway(e, 'clickAway');
       }
     };
 

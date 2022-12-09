@@ -4,7 +4,7 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
-export * from './AwayClickListener';
+export * from './ClickAwayListener';
 
 export * from './BackdropStack';
 

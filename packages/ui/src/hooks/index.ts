@@ -10,4 +10,4 @@ export * from './useRadioGroup';
 
 export * from './useEscapeClickEffect';
 
-export * from './useAwayClickEffect';
+export * from './useClickAwayEffect';
