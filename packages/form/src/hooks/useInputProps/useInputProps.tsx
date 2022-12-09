@@ -6,14 +6,8 @@ import { FieldValues } from 'react-hook-form';
 export const useInputProps = <InputProps extends FieldValues>(
   props: InputProps,
 ) => {
-  const {
-    control,
-    defaultValue,
-    name,
-    rules,
-    shouldUnregister,
-    ...inputProps
-  } = props;
+  const { control, defaultValue, rules, shouldUnregister, ...inputProps } =
+    props;
 
   return inputProps;
 };
