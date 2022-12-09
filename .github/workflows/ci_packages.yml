@@ -120,6 +120,11 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
+      - name: Build @astral/yup-rules
+        run: npm run build --workspace=@astral/yup-rules
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+
       - name: Build @astral/form
         run: npm run build --workspace=@astral/form
         env:
@@ -151,6 +156,11 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Publish @astral/yup-rules
+        run: npm publish ./packages/yup-rules/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Publish @astral/form
         run: npm publish ./packages/form/lib --tag test
         env:
@@ -166,7 +176,8 @@ jobs:
           npm i --save @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
           npm i --save @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
           npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+          npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
+          npm i --save @astral/yup-rules@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       - name: Check packages errors (lint:types + build:dev)
         working-directory: ./example
@@ -180,6 +191,7 @@ jobs:
           npm unpublish @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/yup-rules@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

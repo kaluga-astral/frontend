@@ -71,6 +71,12 @@ jobs:
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
 
+      - name: Build @astral/yup-rules
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm run build --workspace=@astral/yup-rules
+        env:
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
+
       - name: Build @astral/form
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/form
@@ -108,6 +114,12 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Publish @astral/yup-rules
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/yup-rules/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Publish @astral/form
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/form/lib
@@ -133,6 +145,7 @@ jobs:
             📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
             📦  @astral/validations: ${{ env.NEXT_VERSION }}
+            📦  @astral/yup-rules: ${{ env.NEXT_VERSION }}
 
             ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/v${{ env.NEXT_VERSION }}">Changelog</a>
 
