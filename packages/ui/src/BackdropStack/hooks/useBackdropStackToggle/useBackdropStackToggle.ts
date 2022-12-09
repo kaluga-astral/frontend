@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import { backdropStackManager } from '../../services/BackdropStackManager';
-import { Reason } from '../../../types';
+import { CloseEventReason } from '../../../types';
 /**
  * @description необязательные настройки для использоввания хука
  */
@@ -28,7 +28,7 @@ type ReturnElements = {
    */
   handleClose: (
     event?: SyntheticEvent<Element, Event> | Event | {},
-    reason?: Reason,
+    reason?: CloseEventReason,
   ) => void;
 };
 
@@ -54,7 +54,7 @@ export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
 
   const handleClose = (
     _?: SyntheticEvent<Element, Event> | Event | {},
-    reason?: Reason,
+    reason?: CloseEventReason,
   ) => {
     if (isOpened) {
       setOpened(!pop(id.current, reason));

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { Reason } from '../../types';
+import { CloseEventReason } from '../../types';
 
 export type UseEscapeClickEffectProps = {
   /**
    * @description колбэк который будет вызываться при нажатии на кнопку `esc`
    */
-  onEscape?: (event: Event, reason: Reason) => void;
+  onEscape?: (event: Event, reason: CloseEventReason) => void;
   /**
    * @description флаг активности
    */
