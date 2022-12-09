@@ -8,6 +8,7 @@ const PACKAGES_NAMES = [
   '@astral/illustrations',
   '@astral/form',
   '@astral/validations',
+  '@astral/yup-rules',
 ];
 
 module.exports = {
