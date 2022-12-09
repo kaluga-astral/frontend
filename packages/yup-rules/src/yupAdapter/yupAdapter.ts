@@ -1,30 +1,5 @@
-import { InitializedRule, Rule } from '@astral/validations';
-import { BaseSchema, TestFunction, ValidationError } from 'yup';
-
-/**
- * @description Адаптирует проинициализированное правило из @astral/validation к интерфейсу yup.test
- * @example yup.string().test(yupAdapter(isMinLength(22)))
- */
-const yupTestAdapter =
-  <Value = unknown>(rule: InitializedRule): TestFunction<Value> =>
-  (value) => {
-    const validationResult = rule(value);
-
-    if (!validationResult) {
-      return true;
-    }
-
-    if (Array.isArray(validationResult)) {
-      return new ValidationError(
-        validationResult.map(
-          (errorMessage) => new ValidationError(errorMessage),
-        ),
-        value,
-      );
-    }
-
-    return new ValidationError(validationResult, value);
-  };
+import { Rule } from '@astral/validations';
+import { BaseSchema, ValidationError } from 'yup';
 
 type YupAdapterPredicate = () => BaseSchema;
 
@@ -61,5 +36,23 @@ export function yupAdapter(
   rule: Rule<object, boolean>,
 ) {
   return (params: object = {}) =>
-    yupPredicate().test(yupTestAdapter(rule(params)));
+    yupPredicate().test((value, context) => {
+      const validationResult = rule(params)(value);
+
+      if (!validationResult) {
+        return true;
+      }
+
+      if (Array.isArray(validationResult)) {
+        return new ValidationError(
+          validationResult.map(
+            (errorMessage) => new ValidationError(errorMessage),
+          ),
+          value,
+          context.path,
+        );
+      }
+
+      return context.createError({ ...context, message: validationResult });
+    });
 }

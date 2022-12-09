@@ -10,24 +10,37 @@ describe('yupAdapter', () => {
   const yupRule = yupAdapter<typeof rule, false>(yup.string, rule);
 
   it('Адаптирует правило, которое не возвращает ошибки', () => {
-    const validationResult = yupRule().validateSync('value');
+    const validationResult = yup
+      .object({ inn: yupRule() })
+      .validateSync({ inn: 'value' });
 
-    expect(validationResult).toBe('value');
+    expect(validationResult).toEqual({ inn: 'value' });
   });
 
   it('Адаптирует правило, которое возвращает ошибку', () => {
     try {
-      yupRule({ error: 'My error' }).validateSync('value');
+      yup
+        .object({ inn: yupRule({ error: 'My error' }) })
+        .validateSync({ inn: 'value' });
     } catch (e) {
-      expect((e as ValidationError).message).toBe('My error');
+      const error = e as ValidationError;
+
+      expect(error.path).toBe('inn');
+      expect(error.errors).toEqual(['My error']);
+      expect(error.message).toBe('My error');
     }
   });
 
   it('Адаптирует правило, которое возвращает массив ошибок', () => {
     try {
-      yupRule({ error: ['1', '2'] }).validateSync('value');
+      yup
+        .object({ inn: yupRule({ error: ['1', '2'] }) })
+        .validateSync({ inn: 'value' });
     } catch (e) {
-      expect((e as ValidationError).message).toBe('2 errors occurred');
+      const error = e as ValidationError;
+
+      expect(error.path).toBe('inn');
+      expect(error.errors).toEqual(['1', '2']);
     }
   });
 });
