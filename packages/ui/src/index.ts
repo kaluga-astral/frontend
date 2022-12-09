@@ -4,6 +4,8 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './ClickAwayListener';
+
 export * from './BackdropStack';
 
 export * from './Badge';
@@ -69,6 +71,8 @@ export * from './IconButton';
 export * from './IconDropdownButton';
 
 export * from './hooks';
+
+export * from './types';
 
 export * from './List';
 
