@@ -4,8 +4,8 @@ import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
+import { ClickAwayListener } from '../ClickAwayListener';
 
-import { DatePickerClickAwayListener } from './DatePickerClickAwayListener';
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopper } from './DatePickerPopper';
 import {
@@ -44,6 +44,7 @@ export type DatePickerProps = MondayFirst &
      * @description Принимает только Date object, включая невалидную дату Invalid date
      * */
     value?: Date;
+    className?: string;
   };
 
 const DatePickerInner = forwardRef<
@@ -61,6 +62,7 @@ const DatePickerInner = forwardRef<
       inputProps,
       disabled,
       value,
+      className,
     },
     forwardedRef,
   ) => {
@@ -75,12 +77,6 @@ const DatePickerInner = forwardRef<
       // для данного компонента onBlur должен срабатывать после закрытия popover, а не во время выбора даты
       onBlur?.();
       closePopper(undefined, 'selectOption');
-    };
-
-    const handleClickAwayPicker = () => {
-      if (isOpenPopper) {
-        handleClosePopper();
-      }
     };
 
     const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
@@ -103,29 +99,34 @@ const DatePickerInner = forwardRef<
     };
 
     return (
-      <DatePickerClickAwayListener onClickAway={handleClickAwayPicker}>
-        <DatePickerInput
-          {...inputProps}
-          mask={mask}
-          onNativeChange={handleChangeMaskInput}
-          disabled={disabled}
-          value={maskedValue}
-          ref={ref}
-          onFocus={openPopper}
-        />
-        <DatePickerPopper
-          open={isOpenPopper}
-          onClose={handleClosePopper}
-          anchorEl={ref?.current}
-        >
-          <YearMonthDayPicker
-            isMondayFirst={isMondayFirst}
-            selectedDate={selectedBaseDate}
-            onChange={handleDayPick}
-            date={selectedBaseDate || baseDate}
+      <ClickAwayListener
+        isActive={isOpenPopper}
+        onClickAway={handleClosePopper}
+      >
+        <div className={className}>
+          <DatePickerInput
+            {...inputProps}
+            mask={mask}
+            onNativeChange={handleChangeMaskInput}
+            disabled={disabled}
+            value={maskedValue}
+            ref={ref}
+            onFocus={openPopper}
           />
-        </DatePickerPopper>
-      </DatePickerClickAwayListener>
+          <DatePickerPopper
+            open={isOpenPopper}
+            onClose={handleClosePopper}
+            anchorEl={ref?.current}
+          >
+            <YearMonthDayPicker
+              isMondayFirst={isMondayFirst}
+              selectedDate={selectedBaseDate}
+              onChange={handleDayPick}
+              date={selectedBaseDate || baseDate}
+            />
+          </DatePickerPopper>
+        </div>
+      </ClickAwayListener>
     );
   },
 );
