@@ -20,7 +20,10 @@ export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
   const handleResize = useCallback(
     debounce(
       ([{ target, contentRect }]: ResizeObserverEntry[]) =>
-        setOverflow(contentRect.height < target.scrollHeight),
+        setOverflow(
+          contentRect.height < target.scrollHeight ||
+            target.scrollWidth > contentRect.width,
+        ),
       500,
     ),
     [],
