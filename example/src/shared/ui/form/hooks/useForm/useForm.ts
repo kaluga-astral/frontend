@@ -24,7 +24,7 @@ export const useForm = <
 >({
   validationSchema,
   ...params
-}: UseFormProps<TFieldValues, TContext>): UseFormReturn<
+}: UseFormProps<TFieldValues, TContext> = {}): UseFormReturn<
   TFieldValues,
   TContext
 > =>

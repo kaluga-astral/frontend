@@ -12,9 +12,6 @@ export enum DocumentOperationType {
   DecryptXml = 'DecryptXml',
 }
 
-/**
- * @description Сервис-инициатор криптооперации.
- * */
 export enum DocumentPackageOwner {
   Unknown = 'Unknown',
   WebReport = 'WebReport',

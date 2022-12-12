@@ -4,6 +4,7 @@ export {
   useController as useFormController,
   UseControllerProps as UseFormControllerProps,
   FormTextField,
+  FormTextFieldValue,
   FormTextArea,
   WithFormFieldProps,
   SubmitButton,

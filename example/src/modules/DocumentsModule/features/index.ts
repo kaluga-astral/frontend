@@ -7,3 +7,5 @@ export * from './StatusCell';
 export * from './ArchivedStatusFilter';
 
 export * from './SignedList';
+
+export * from './CreateDocForm';
