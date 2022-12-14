@@ -4,9 +4,10 @@ import { UseClickAwayListenerOptions, useClickAwayEffect } from '../hooks';
 
 export type ClickAwayListenerProps = Omit<
   UseClickAwayListenerOptions,
-  'ref'
+  'ref' | 'isActive'
 > & {
   children: JSX.Element;
+  isActive?: boolean;
 };
 
 /**
@@ -15,7 +16,7 @@ export type ClickAwayListenerProps = Omit<
 export const ClickAwayListener = ({
   onClickAway,
   preventBubbling,
-  isActive,
+  isActive = true,
   children,
 }: ClickAwayListenerProps) => {
   const ref = useRef<HTMLDivElement>(null);
