@@ -49,6 +49,7 @@ export const OverflowTypography = forwardRef<
       ref,
       children,
       rowsCount,
+      hasMultipleRows: rowsCount > DEFAULT_ROWS_COUNT,
     };
 
     if (children && isOverflowed) {
