@@ -1,4 +1,9 @@
 module.exports = {
+  'packages/ui/**/*.{js,jsx,ts,tsx}': [
+    'npm run lint --workspace=@astral/ui',
+    'npm run lint:styles --workspace=@astral/ui',
+    () => 'npm run lint:types --workspace=@astral/ui',
+  ],
   'packages/components/**/*.{js,jsx,ts,tsx}': [
     'npm run lint --workspace=@astral/components',
     'npm run lint:styles --workspace=@astral/components',
