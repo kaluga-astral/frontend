@@ -18,6 +18,8 @@ export * from './SubmitButton';
 
 export * from './FormDatePicker';
 
+export * from './Form';
+
 export * from './types';
 
 // нельзя экспортить через * потому, что есть пересечение с export * from 'react-hook-form';
