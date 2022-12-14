@@ -25,7 +25,6 @@ export {
   useForm,
   type UseFormProps,
   type UseFormReturn,
-  useFieldErrorProps,
   useFormContext,
 } from './hooks';
 
