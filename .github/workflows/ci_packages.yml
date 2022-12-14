@@ -110,16 +110,6 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
-      - name: Build @astral/fonts
-        run: npm run build --workspace=@astral/fonts
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/illustrations
-        run: npm run build --workspace=@astral/illustrations
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
       - name: Build @astral/validations
         run: npm run build --workspace=@astral/validations
         env:
@@ -143,16 +133,6 @@ jobs:
 
       - name: Publish @astral/icons
         run: npm publish ./packages/icons/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/fonts
-        run: npm publish ./packages/fonts/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/illustrations
-        run: npm publish ./packages/illustrations/lib --tag test
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
@@ -181,12 +161,10 @@ jobs:
       - name: Unpublish tests packages
         if: always()
         run: |
-          npm unpublish @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/components@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+          npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
