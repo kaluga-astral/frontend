@@ -1,8 +1,18 @@
 {
   "name": "@astral/components",
   "version": "1.0.0",
-  "browser": "./src/index.ts",
-  "main": "./src/index.ts",
+  "browser": "./src/server/index.ts",
+  "main": "./src/server/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "server": ["src/server/index.ts"],
+      "declaration/*": ["src/declaration/*"]
+    }
+  },
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npx rimraf ./lib",
