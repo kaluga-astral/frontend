@@ -1,4 +1,4 @@
-import { TextArea, TextAreaProps } from '@astral/ui';
+import { TextArea, TextAreaProps } from '../../../components';
 import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';

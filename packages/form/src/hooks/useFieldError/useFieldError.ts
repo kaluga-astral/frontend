@@ -1,4 +1,4 @@
-import { TextFieldProps } from '@astral/ui';
+import { TextFieldProps } from '../../../../components';
 import { ControllerFieldState } from 'react-hook-form';
 
 type UseFieldErrorPropsResult = Pick<TextFieldProps, 'error' | 'helperText'>;

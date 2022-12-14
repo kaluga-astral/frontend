@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { Grid } from '@astral/ui';
+import { Grid } from '../../../components';
 
 import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';

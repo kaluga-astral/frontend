@@ -100,6 +100,11 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
+      - name: Build @astral/components
+        run: npm run build --workspace=@astral/components
+        env:
+          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+
       - name: Build @astral/icons
         run: npm run build --workspace=@astral/icons
         env:
@@ -128,6 +133,11 @@ jobs:
       # Паблишинг всех пакетов
       - name: Publish @astral/ui
         run: npm publish ./packages/ui/lib --tag test
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/components
+        run: npm publish ./packages/components/lib --tag test
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
@@ -161,12 +171,8 @@ jobs:
         working-directory: ./example
         run: |
           npm i &&
-          npm i --save @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
           npm i --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
           npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       - name: Check packages errors (lint:types + build:dev)
         working-directory: ./example
@@ -177,6 +183,7 @@ jobs:
         run: |
           npm unpublish @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
+          npm unpublish @astral/components@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
           npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &

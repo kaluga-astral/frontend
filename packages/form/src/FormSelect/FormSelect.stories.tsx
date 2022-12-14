@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { Checkbox, ListItemIcon, MenuItem } from '@astral/ui';
+import { Checkbox, ListItemIcon, MenuItem } from '../../../components';
 
 import { FormStoryContainer } from '../docs';
 import { SubmitButton } from '../SubmitButton';

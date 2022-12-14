@@ -1,4 +1,4 @@
-import { DatePicker, DatePickerProps } from '@astral/ui';
+import { DatePicker, DatePickerProps } from '../../../components';
 import { InitializedRule, compose, isDate } from '@astral/validations';
 import { useController } from 'react-hook-form';
 import { useMemo } from 'react';

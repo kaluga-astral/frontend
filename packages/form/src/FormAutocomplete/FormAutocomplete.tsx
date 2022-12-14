@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteProps } from '@astral/ui';
+import { Autocomplete, AutocompleteProps } from '../../../components';
 import { useController } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
 

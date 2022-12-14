@@ -47,6 +47,12 @@ jobs:
           # NEXT_VERSION устанавливается в semantic-release.config.js
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
 
+      - name: Build @astral/components
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm run build --workspace=@astral/components
+        env:
+          RELEASE_TAG: ${{ env.NEXT_VERSION }}
+
       - name: Build @astral/icons
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm run build --workspace=@astral/icons
@@ -81,6 +87,12 @@ jobs:
       - name: Publish @astral/ui
         if: env.CURRENT_VERSION != env.NEXT_VERSION
         run: npm publish ./packages/ui/lib
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Publish @astral/components
+        if: env.CURRENT_VERSION != env.NEXT_VERSION
+        run: npm publish ./packages/components/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
@@ -128,9 +140,8 @@ jobs:
             Опубликованные пакеты:
 
             📦  @astral/ui: ${{ env.NEXT_VERSION }}
-            📦  @astral/fonts: ${{ env.NEXT_VERSION }}
+            📦  @astral/components: ${{ env.NEXT_VERSION }}
             📦  @astral/icons: ${{ env.NEXT_VERSION }}
-            📦  @astral/illustrations: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
             📦  @astral/validations: ${{ env.NEXT_VERSION }}
 
