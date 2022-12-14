@@ -1,12 +1,12 @@
 import { createTheme, Brand } from '../packages/components/src'
-import UbuntuBoldWoff from '@astral/fonts/src/UbuntuBold.woff';
-import UbuntuBoldWoff2 from '@astral/fonts/src/UbuntuBold.woff2';
-import UbuntuLightWoff from '@astral/fonts/src/UbuntuLight.woff';
-import UbuntuLightWoff2 from '@astral/fonts/src/UbuntuLight.woff2';
-import UbuntuRegularWoff from '@astral/fonts/src/UbuntuRegular.woff';
-import UbuntuRegularWoff2 from '@astral/fonts/src/UbuntuRegular.woff2';
-import UbuntuMediumWoff from '@astral/fonts/src/UbuntuMedium.woff';
-import UbuntuMediumWoff2 from '@astral/fonts/src/UbuntuMedium.woff2';
+import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
+import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
+import UbuntuLightWoff from '@astral/ui/fonts/UbuntuLight.woff';
+import UbuntuLightWoff2 from '@astral/ui/fonts/UbuntuLight.woff2';
+import UbuntuRegularWoff from '@astral/ui/fonts/UbuntuRegular.woff';
+import UbuntuRegularWoff2 from '@astral/ui/fonts/UbuntuRegular.woff2';
+import UbuntuMediumWoff from '@astral/ui/fonts/UbuntuMedium.woff';
+import UbuntuMediumWoff2 from '@astral/ui/fonts/UbuntuMedium.woff2';
 
 const fontsUrls = {
   bold: {
