@@ -1,4 +1,4 @@
-import { Grid } from '../../../../components';
+import { Grid } from '@astral/components';
 
 import { Form, FormProps } from '../../Form';
 

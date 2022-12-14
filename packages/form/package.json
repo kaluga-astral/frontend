@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
-    "@astral/ui": "*",
+    "@astral/components": "*",
     "@astral/validations": "*"
   },
   "peerDependencies": {

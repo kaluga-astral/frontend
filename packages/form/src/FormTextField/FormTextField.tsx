@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps } from '../../../components';
+import { TextField, TextFieldProps } from '@astral/components';
 import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';
