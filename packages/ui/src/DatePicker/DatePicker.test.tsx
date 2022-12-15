@@ -78,6 +78,15 @@ describe('DatePicker', () => {
     expect(btn).not.toBeDisabled();
   });
 
+  it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
+    renderWithTheme(<DatePicker value={new Date('2022-12-16T18:59:00Z')} />);
+    fireEvent.focus(screen.getByRole('textbox'));
+
+    const selected = screen.getAllByText('16')[0].getAttribute('aria-selected');
+
+    expect(selected).toBeTruthy();
+  });
+
   it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
