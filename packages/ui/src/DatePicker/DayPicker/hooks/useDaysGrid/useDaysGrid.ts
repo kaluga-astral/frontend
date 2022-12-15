@@ -135,9 +135,9 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
           Number(date) >= Number(selectedDate) &&
           Number(date) < Number(addDays(selectedDate, 1)),
         isCurrent:
-          date.getUTCFullYear() === currentDate.getFullYear() &&
-          date.getUTCDate() === currentDate.getDate() &&
-          date.getUTCMonth() === currentDate.getMonth(),
+          date.getFullYear() === currentDate.getFullYear() &&
+          date.getDate() === currentDate.getDate() &&
+          date.getMonth() === currentDate.getMonth(),
         date,
         monthDay: date.getUTCDate(),
         disabled: isDateOutOfRange({
