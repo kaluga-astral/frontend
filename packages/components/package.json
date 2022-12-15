@@ -1,6 +1,6 @@
 {
   "name": "@astral/components",
-  "version": "22",
+  "version": "1.0.0",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
   "exports": {
@@ -12,14 +12,17 @@
       "server": [
         "src/server/index.ts"
       ],
-      "declaration/*": [
-        "src/declaration/*"
+      "declaration/emotion": [
+        "src/declaration/emotion.d.ts"
+      ],
+      "declaration/mui-material": [
+        "src/declaration/mui-material.d.ts"
       ]
     }
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "RELEASE_TAG=22 node pack",
+    "build": "node pack",
     "publish": "npm publish ./lib",
     "tests": "vitest run",
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",

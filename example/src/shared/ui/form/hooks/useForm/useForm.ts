@@ -3,7 +3,7 @@ import {
   UseFormProps as UseAstralFormProps,
   UseFormReturn,
   useForm as useAstralForm,
-} from '@astral/form';
+} from '@astral/ui';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { validationService } from '../../../../services';
