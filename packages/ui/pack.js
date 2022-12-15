@@ -1,3 +1,19 @@
-const { build } = require('@astral/commander/tasks/build');
+const { buildTs, copy, rmDist } = require('@astral/commander');
 
-build({ releaseTag: process.env.RELEASE_TAG, packageExports: {} });
+rmDist();
+copy({ sourcesDirPath: './fonts' });
+copy({ sourcesDirPath: './illustrations' });
+
+copy({
+  sourcesDirPath: './src',
+  targetPath: '.',
+  files: ['declarations.d.ts'],
+});
+
+buildTs({
+  releaseTag: process.env.RELEASE_TAG,
+  packageExports: {
+    './fonts': { import: './fonts/*' },
+    './illustrations': { import: './illustrations/*' },
+  },
+});

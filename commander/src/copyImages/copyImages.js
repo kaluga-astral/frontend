@@ -1,6 +1,6 @@
 const copy = require('recursive-copy');
 
-const { DIST_DIR_NAME } = require('../../constants');
+const { DIST_DIR_NAME } = require('../constants');
 
 const copyImages = () => {
   console.log('Starting copyImages...');

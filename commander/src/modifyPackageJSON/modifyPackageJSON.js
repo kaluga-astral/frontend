@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { PACKAGES_NAMES } = require('../../constants');
+const { PACKAGES_NAMES } = require('../constants');
 
 const readPackageJSON = (packageJSONPath) =>
   JSON.parse(fs.readFileSync(packageJSONPath));
@@ -37,33 +37,7 @@ const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
   return readPackageJSON(packageJSONPath);
 };
 
-const generateExports = (packageExports) =>
-  Object.entries(packageExports).reduce(
-    (result, [key, { path, isStatic }]) => ({
-      ...result,
-      [`./${key}`]: isStatic
-        ? {
-            import: `./${path}/*`,
-            require: `./${path}/*`,
-          }
-        : {
-            import: `./esm/${path}`,
-            require: `./${path}`,
-          },
-    }),
-    {
-      '.': {
-        import: './esm/index.js',
-        require: './index.js',
-      },
-    },
-  );
-
 const modifyPackageJSON = ({
-  /**
-   * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
-   * */
-  isStaticPackage = false,
   /**
    * @description Новая версия пакета
    * @example modifyPackageJSON({ releaseTag: '1.1.0' })
@@ -71,7 +45,7 @@ const modifyPackageJSON = ({
   releaseTag,
   /**
    * @description Какие exports в package.json присутсвуют для данного пакета
-   * @example modifyPackageJSON({ packageExports: { fonts: { path: './fonts', isStatic: true }  } })
+   * @example modifyPackageJSON({ packageExports: { fonts: { import: './fonts/*' }  } })
    * */
   packageExports,
 }) => {
@@ -87,6 +61,7 @@ const modifyPackageJSON = ({
   const {
     scripts,
     devDependencies,
+    typesVersions,
     keywords = [],
     ...restPackageData
   } = packageData;
@@ -107,19 +82,18 @@ const modifyPackageJSON = ({
     },
     keywords,
     sideEffects: false,
-    // обнуляем main, если оно есть
-    main: undefined,
+    types: './esm/index.d.ts',
+    main: './index.js',
+    module: './esm/index.js',
+    browser: './esm/index.js',
+    exports: {
+      '.': {
+        import: './esm/index.js',
+        require: './index.js',
+      },
+      ...packageExports,
+    },
   };
-
-  if (!isStaticPackage) {
-    Object.assign(modifiedPackageData, {
-      types: './esm/index.d.ts',
-      main: './index.js',
-      module: './esm/index.js',
-      browser: './esm/index.js',
-      exports: generateExports(packageExports),
-    });
-  }
 
   fs.writeFileSync(
     './lib/package.json',

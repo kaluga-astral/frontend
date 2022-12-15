@@ -3,8 +3,7 @@
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
   "scripts": {
-    "prebuild": "npx rimraf ./lib",
-    "build": "commander build",
+    "build": "RELEASE_TAG=22 node pack",
     "publish": "npm publish ./lib",
     "tests": "vitest run",
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",
@@ -17,5 +16,6 @@
   },
   "devDependencies": {
     "@types/lodash.isempty": "^4.4.7"
-  }
+  },
+  "version": "22"
 }

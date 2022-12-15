@@ -4,9 +4,8 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "prebuild": "npx rimraf ./lib",
     "postbuild": "copyfiles -u 1 declarations/*.ts lib",
-    "build": "commander build",
+    "build": "node pack",
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",

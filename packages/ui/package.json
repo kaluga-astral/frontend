@@ -1,6 +1,6 @@
 {
   "name": "@astral/ui",
-  "version": "1.0.0",
+  "version": "22",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
   "exports": {
@@ -9,18 +9,10 @@
     "./fonts/*": "./fonts/*",
     "./illustrations/*": "./illustrations/*"
   },
-  "typesVersions": {
-    "*": {
-      "server": ["src/server/index.ts"],
-      "declarations/*": ["src/declarations/*"]
-    }
-  },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib",
-    "build": "commander build",
+    "build": "node pack",
     "publish": "npm publish ./lib",
-    "postbuild": "copyfiles -u 1 src/declarations.d.ts lib",
     "tests": "vitest run --passWithNoTests",
     "tests:ci": "vitest run --passWithNoTests --reporter=junit --outputFile.junit=junit.xml",
     "lint:types": "tsc --noEmit",

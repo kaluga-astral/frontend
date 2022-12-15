@@ -2,7 +2,7 @@ const path = require('path');
 
 const copy = require('recursive-copy');
 
-const { DIST_DIR_NAME } = require('../../constants');
+const { DIST_DIR_NAME } = require('../constants');
 
 const copyCommonFiles = () => {
   console.log('Starting copyCommonFiles...');
