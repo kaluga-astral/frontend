@@ -2,9 +2,7 @@ const { copyCommonFiles } = require('./tasks/copyCommonFiles');
 const { modifyPackageJSON } = require('./tasks/modifyPackageJSON');
 const { build } = require('./tasks/build');
 const { copyFonts } = require('./tasks/copyFonts');
-const { publish } = require('./tasks/publish');
 const { copyImages } = require('./tasks/copyImages');
-const { lintPRTitle } = require('./tasks/lintPRTitle');
 
 const { RELEASE_TAG } = process.env;
 
@@ -13,6 +11,7 @@ const runTask = async ({ task, args }) => {
     case 'build':
       build({
         isStaticPackage: args.isStaticPackage,
+        packageExports: args.packageExports,
         releaseTag: RELEASE_TAG,
       });
 
@@ -25,10 +24,6 @@ const runTask = async ({ task, args }) => {
       copyImages();
 
       break;
-    case 'publish':
-      publish();
-
-      break;
     case 'copyCommonFiles':
       copyCommonFiles();
 
@@ -36,14 +31,12 @@ const runTask = async ({ task, args }) => {
     case 'modifyPackageJSON':
       modifyPackageJSON({
         isStaticPackage: args.isStaticPackage,
+        packageExports: args.packageExports,
         releaseTag: RELEASE_TAG,
       });
 
       break;
-    case 'lintPRTitle':
-      await lintPRTitle({ title: args.title });
 
-      break;
     default:
       throw Error('Task not found');
   }

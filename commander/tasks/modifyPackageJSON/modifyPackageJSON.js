@@ -37,6 +37,28 @@ const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
   return readPackageJSON(packageJSONPath);
 };
 
+const generateExports = (packageExports) =>
+  Object.entries(packageExports).reduce(
+    (result, [key, { path, isStatic }]) => ({
+      ...result,
+      [`./${key}`]: isStatic
+        ? {
+            import: `./${path}/*`,
+            require: `./${path}/*`,
+          }
+        : {
+            import: `./esm/${path}`,
+            require: `./${path}`,
+          },
+    }),
+    {
+      '.': {
+        import: './esm/index.js',
+        require: './index.js',
+      },
+    },
+  );
+
 const modifyPackageJSON = ({
   /**
    * @description Флаг, указывающий, на то содержит ли пакет только статичные файлы (изображения, шрифты...)
@@ -47,6 +69,11 @@ const modifyPackageJSON = ({
    * @example modifyPackageJSON({ releaseTag: '1.1.0' })
    * */
   releaseTag,
+  /**
+   * @description Какие exports в package.json присутсвуют для данного пакета
+   * @example modifyPackageJSON({ packageExports: { fonts: { path: './fonts', isStatic: true }  } })
+   * */
+  packageExports,
 }) => {
   if (!releaseTag) {
     throw Error('modifyPackageJSON: releaseTag is not defined');
@@ -90,16 +117,7 @@ const modifyPackageJSON = ({
       main: './index.js',
       module: './esm/index.js',
       browser: './esm/index.js',
-      exports: {
-        '.': {
-          import: './esm/index.js',
-          require: './index.js',
-        },
-        './server': {
-          import: './esm/server/index.js',
-          require: './server/index.js',
-        },
-      },
+      exports: generateExports(packageExports),
     });
   }
 
