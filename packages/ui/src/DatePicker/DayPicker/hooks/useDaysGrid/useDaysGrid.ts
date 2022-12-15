@@ -5,6 +5,7 @@ import {
   DateCompareDeep,
   addDays,
   buildIsoDate,
+  isDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { GridBuilder, GridItem } from '../../../types';
@@ -131,7 +132,8 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
 
       grid.push({
         isOutOfAvailableRange: dateMonth !== month,
-        selected: !!selectedDate && compareDateDayByUTC(selectedDate, date),
+        selected:
+          isDate(selectedDate) && compareDateDayByUTC(selectedDate, date),
         isCurrent:
           date.getUTCFullYear() === currentDate.getFullYear() &&
           date.getUTCDate() === currentDate.getDate() &&
