@@ -11,6 +11,7 @@
   "dependencies": {
     "mobx": "6.6.2",
     "react-use": "17.4.0",
+    "bootstrap": "^5.2.3",
     "yup": "0.32.11",
     "@hookform/resolvers": "2.9.10",
     "axios": "1.1.3",

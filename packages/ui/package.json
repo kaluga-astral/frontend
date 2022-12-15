@@ -9,6 +9,16 @@
     "./fonts/*": "./fonts/*",
     "./illustrations/*": "./illustrations/*"
   },
+  "typesVersions": {
+    "*": {
+      "server": [
+        "src/server/index.ts"
+      ],
+      "declarations": [
+        "src/declarations.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "dev": "tsc --watch",
     "build": "node pack",
