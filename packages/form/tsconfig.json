@@ -4,8 +4,7 @@
     "./**/*.ts",
     "./**/*.tsx",
     "./*.js",
-    "./*.ts",
-    "declarations/*.d.ts"
+    "./*.ts"
   ],
   "exclude": [
     "lib"

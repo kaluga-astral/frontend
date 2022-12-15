@@ -4,8 +4,7 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "postbuild": "copyfiles -u 1 declarations/*.ts lib",
-    "build": "node pack",
+    "build": "RELEASE_TAG=1.0.0 node pack",
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
@@ -15,8 +14,8 @@
   },
   "dependencies": {
     "react-hook-form": "^7.35.0",
-    "@astral/components": "*",
-    "@astral/validations": "*"
+    "@astral/components": "^1.0.0",
+    "@astral/validations": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
