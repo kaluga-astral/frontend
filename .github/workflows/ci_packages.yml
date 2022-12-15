@@ -95,54 +95,24 @@ jobs:
         run: echo "PACKAGE_VERSION=1.0.0-test.$(date +%s)" >> $GITHUB_OUTPUT
 
       # Build всех пакетов
-      - name: Build @astral/ui
-        run: npm run build --workspace=@astral/ui
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/components
-        run: npm run build --workspace=@astral/components
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/icons
-        run: npm run build --workspace=@astral/icons
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/validations
-        run: npm run build --workspace=@astral/validations
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/form
-        run: npm run build --workspace=@astral/form
+      - name: Build packages
+        run: |
+          npm run build --workspace=@astral/ui &
+          npm run build --workspace=@astral/components &
+          npm run build --workspace=@astral/icons &
+          npm run build --workspace=@astral/validations &
+          npm run build --workspace=@astral/form
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       # Паблишинг всех пакетов
-      - name: Publish @astral/ui
-        run: npm publish ./packages/ui/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/components
-        run: npm publish ./packages/components/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/icons
-        run: npm publish ./packages/icons/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/validations
-        run: npm publish ./packages/validations/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/form
-        run: npm publish ./packages/form/lib --tag test
+      - name: Publish packages
+        run: |
+          npm publish ./packages/ui/lib --tag test &
+          npm publish ./packages/components/lib --tag test &
+          npm publish ./packages/icons/lib --tag test &
+          npm publish ./packages/validations/lib --tag test &
+          npm publish ./packages/form/lib --tag test
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
