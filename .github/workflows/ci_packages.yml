@@ -123,7 +123,7 @@ jobs:
         run: |
           npm i &&
           npm i --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
+          npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
       - name: Check packages errors (lint:types + build:dev)
         working-directory: ./example
