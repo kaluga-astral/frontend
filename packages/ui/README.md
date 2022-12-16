@@ -6,7 +6,7 @@
 
 ## 1.0.0 -> 2.0.0
 
-## Deps
+### Deps
 Теперь пакет ```@astral/ui``` аккумулирует и реэкспортит пакеты:
 - ```@astral/fonts```
 - ```@astral/illustrations```
