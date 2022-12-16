@@ -106,24 +106,10 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
 
-      # Паблишинг всех пакетов
-      - name: Publish packages
-        run: |
-          npm publish ./packages/ui/lib --tag test &
-          npm publish ./packages/components/lib --tag test &
-          npm publish ./packages/icons/lib --tag test &
-          npm publish ./packages/validations/lib --tag test &
-          npm publish ./packages/form/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
       # В example устанавливаются пакеты с тестовыми версиями
       - name: Install deps for example project
         working-directory: ./example
-        run: |
-          npm i &&
-          npm i --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+        run: npm i
 
       - name: Check packages errors (lint:types + build:dev)
         working-directory: ./example

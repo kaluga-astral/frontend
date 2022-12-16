@@ -5,6 +5,7 @@
   "scripts": {
     "build:prod": "time webpack --mode=production --config webpack.config.js",
     "build:dev": "webpack --mode=development --config webpack.config.js",
+    "prepare-packages": "node",
     "dev": "webpack serve --mode=development",
     "lint:types": "tsc --noEmit",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
@@ -54,5 +55,9 @@
     "dotenv-webpack": "8.0.1",
     "react-router-dom": "6.4.3",
     "@svgr/webpack": "6.5.1"
+  },
+  "devDependencies": {
+    "shelljs": "0.8.5",
+    "recursive-copy": "2.0.14"
   }
 }
