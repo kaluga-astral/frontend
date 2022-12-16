@@ -13,7 +13,7 @@ copy({
 buildTs({
   releaseTag: process.env.RELEASE_TAG,
   packageExports: {
-    './fonts': { import: './fonts/*' },
-    './illustrations': { import: './illustrations/*' },
+    './fonts/*': './fonts/*',
+    './illustrations/*': './illustrations/*',
   },
 });
