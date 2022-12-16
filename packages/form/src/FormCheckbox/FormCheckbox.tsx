@@ -4,7 +4,7 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-} from '@astral/ui';
+} from '@astral/components';
 import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';

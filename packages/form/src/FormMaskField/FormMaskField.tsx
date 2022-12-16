@@ -1,4 +1,4 @@
-import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/ui';
+import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/components';
 import { useController } from 'react-hook-form';
 
 import { useFieldErrorProps } from '../hooks';

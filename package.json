@@ -51,7 +51,8 @@
     "copyfiles": "^2.4.1",
     "jsdom": "^20.0.3",
     "resize-observer-polyfill": "^1.5.1",
-    "eslint-plugin-testing-library": "^5.9.1"
+    "eslint-plugin-testing-library": "^5.9.1",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
@@ -60,7 +61,6 @@
     "lint": "npm run lint:all --workspaces --if-present",
     "lint:types": "npm run lint:types --workspaces --if-present",
     "lint:styles": "npm run lint:styles:all --workspaces --if-present",
-    "publish": "npm run build --workspaces --if-present && npm run publish --workspaces --if-present",
     "tests": "npm run tests --workspaces --if-present",
     "tests:ci": "npm run tests:ci --workspaces --if-present"
   }

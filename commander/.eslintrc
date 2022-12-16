@@ -1,4 +1,10 @@
 {
   "root": true,
-  "extends": ["@astral/eslint-config-node"]
+  "extends": ["@astral/eslint-config-node"],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "packageDir": ["./", "../"] }
+    ]
+  }
 }

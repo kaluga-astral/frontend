@@ -1,4 +1,4 @@
-import { Select, SelectProps } from '@astral/ui';
+import { Select, SelectProps } from '@astral/components';
 import { useController } from 'react-hook-form';
 
 import { WithFormFieldProps } from '../types';

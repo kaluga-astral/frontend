@@ -9,4 +9,4 @@ export {
   SubmitButton,
   useWatch as useFormWatch,
   useFieldErrorProps,
-} from '@astral/form';
+} from '@astral/ui';
