@@ -4,7 +4,7 @@ import { useFieldErrorProps } from '../useFieldErrorProps';
 import { useInputProps } from '../useInputProps';
 
 /**
- * @description хук предназначен для предоставления пропсов input без пропсов rhf и error пропсов.
+ * @description хук предназначен для предоставления пропсов field без пропсов rhf
  */
 export const useFieldProps = <FieldProps extends FieldValues>(
   props: FieldProps,
