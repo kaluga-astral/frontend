@@ -18,23 +18,14 @@ const updateDepsVersions = (packageDeps, rootPackageVersion) =>
 const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
   const packageData = readPackageJSON(packageJSONPath);
 
-  fs.writeFileSync(
-    packageJSONPath,
-    JSON.stringify(
-      {
-        ...packageData,
-        dependencies: updateDepsVersions(
-          packageData.dependencies || {},
-          rootPackageVersion,
-        ),
-        version: rootPackageVersion,
-      },
-      null,
-      2,
+  return {
+    ...packageData,
+    dependencies: updateDepsVersions(
+      packageData.dependencies || {},
+      rootPackageVersion,
     ),
-  );
-
-  return readPackageJSON(packageJSONPath);
+    version: rootPackageVersion,
+  };
 };
 
 const modifyPackageJSON = ({
