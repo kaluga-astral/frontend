@@ -5,7 +5,7 @@
   "scripts": {
     "build:prod": "time webpack --mode=production --config webpack.config.js",
     "build:dev": "webpack --mode=development --config webpack.config.js",
-    "prepare-packages": "node",
+    "prepare-packages": "node build-packages.js && npm i",
     "dev": "webpack serve --mode=development",
     "lint:types": "tsc --noEmit",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet"
