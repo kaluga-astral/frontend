@@ -1,17 +1,17 @@
 import { ControllerFieldState, FieldValues } from 'react-hook-form';
 
-import { useFieldErrorProps } from '../useFieldErrorProps';
-import { useInputProps } from '../useInputProps';
+import { useFormFieldErrorProps } from '../useFormFieldErrorProps';
+import { useFormInputProps } from '../useFormInputProps';
 
 /**
  * @description хук предназначен для предоставления пропсов field без пропсов rhf
  */
-export const useFieldProps = <FieldProps extends FieldValues>(
+export const useFormFieldProps = <FieldProps extends FieldValues>(
   props: FieldProps,
   fieldState: ControllerFieldState,
 ) => {
-  const inputProps = useInputProps(props);
-  const errorProps = useFieldErrorProps(fieldState);
+  const inputProps = useFormInputProps(props);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
   return { ...inputProps, ...errorProps };
 };

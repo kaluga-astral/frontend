@@ -3,7 +3,7 @@ import { InitializedRule, compose, isDate } from '@astral/validations';
 import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
 
-import { useFieldErrorProps, useInputProps } from '../hooks';
+import { useFormFieldErrorProps, useFormInputProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 const DEFAULT_VALIDATE = () => undefined;
@@ -32,12 +32,12 @@ export function FormDatePicker<FieldValues extends object>({
     };
   }, [rules]);
 
-  const inputProps = useInputProps(props);
+  const inputProps = useFormInputProps(props);
   const { field, fieldState } = useController({
     ...props,
     rules: validationRules,
   });
-  const errorProps = useFieldErrorProps(fieldState);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
   return (
     <DatePicker

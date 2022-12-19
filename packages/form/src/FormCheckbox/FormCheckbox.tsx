@@ -7,7 +7,7 @@ import {
 } from '@astral/ui';
 import { useController } from 'react-hook-form';
 
-import { useFieldErrorProps, useInputProps } from '../hooks';
+import { useFormFieldErrorProps, useFormInputProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 /**
@@ -29,9 +29,9 @@ export function FormCheckbox<FieldValues extends object>({
   success,
   ...props
 }: FormCheckboxProps<FieldValues>) {
-  const inputProps = useInputProps(props);
+  const inputProps = useFormInputProps(props);
   const { field, fieldState } = useController(props);
-  const errorProps = useFieldErrorProps(fieldState);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
   return (
     <FormControl>

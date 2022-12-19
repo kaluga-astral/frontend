@@ -3,7 +3,7 @@ import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
 import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 
-import { useFieldProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 const MOBILE_PHONE_MASK = '+{7} (000) 00-00-000';
@@ -43,7 +43,7 @@ export function FormMobilePhoneField<FieldValues extends object>({
   }, [rules]);
 
   const { field, fieldState } = useController({ ...props, rules: customRules });
-  const fieldProps = useFieldProps(props, fieldState);
+  const fieldProps = useFormFieldProps(props, fieldState);
 
   const ref = useForwardedRef(field.ref);
 

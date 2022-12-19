@@ -1,7 +1,7 @@
 import { TextArea, TextAreaProps } from '@astral/ui';
 import { useController } from 'react-hook-form';
 
-import { useFieldProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 /**
@@ -21,7 +21,7 @@ export function FormTextArea<FieldValues extends object>(
   props: FormTextAreaProps<FieldValues>,
 ) {
   const { field, fieldState } = useController(props);
-  const fieldProps = useFieldProps(props, fieldState);
+  const fieldProps = useFormFieldProps(props, fieldState);
 
   return <TextArea {...field} {...fieldProps} />;
 }
