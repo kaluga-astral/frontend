@@ -36,17 +36,17 @@ describe('isEmail', () => {
     expect(isEmail()(value)).toBe(undefined);
   });
 
-  it('Valid default invalid length message', () => {
+  it('Validate default invalid length message', () => {
     expect(isEmail()(getLongEmail())).toBe(INVALID_LENGTH_ERROR_MESSAGE);
   });
 
-  it('Valid custom message', () => {
+  it('Validate custom message', () => {
     const customMessage = 'CustomMessage';
 
     expect(isEmail({ message: customMessage })('test@')).toBe(customMessage);
   });
 
-  it('Valid custom invalid length message', () => {
+  it('Validate custom invalid length message', () => {
     const customMessage = 'CustomMessage';
 
     expect(
