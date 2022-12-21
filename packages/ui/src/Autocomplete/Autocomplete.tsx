@@ -68,6 +68,7 @@ export const Autocomplete = <
     size = 'medium',
     getOptionLabel,
     renderOption: externalRenderOption,
+    isOptionEqualToValue,
     overflowOption,
     ...restProps
   } = props;
@@ -93,7 +94,7 @@ export const Autocomplete = <
     [getOptionLabel],
   );
 
-  const isOptionEqualToValue = useCallback(
+  const handleIsOptionEqualToValue = useCallback(
     (option: AutocompleteValueProps, value: AutocompleteValueProps) => {
       return JSON.stringify(option) === JSON.stringify(value);
     },
@@ -158,7 +159,7 @@ export const Autocomplete = <
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
       clearIcon={<CrossSmOutlineSm />}
-      isOptionEqualToValue={isOptionEqualToValue}
+      isOptionEqualToValue={isOptionEqualToValue || handleIsOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText="Нет данных"
     />
