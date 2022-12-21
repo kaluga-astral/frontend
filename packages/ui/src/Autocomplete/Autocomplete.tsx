@@ -68,6 +68,7 @@ export const Autocomplete = <
     size = 'medium',
     getOptionLabel,
     renderOption: externalRenderOption,
+    isOptionEqualToValue: externalOptionEqualToValue,
     overflowOption,
     ...restProps
   } = props;
@@ -95,9 +96,13 @@ export const Autocomplete = <
 
   const isOptionEqualToValue = useCallback(
     (option: AutocompleteValueProps, value: AutocompleteValueProps) => {
+      if (externalOptionEqualToValue) {
+        return externalOptionEqualToValue(option, value);
+      }
+
       return JSON.stringify(option) === JSON.stringify(value);
     },
-    [],
+    [externalOptionEqualToValue],
   );
 
   const renderInput = useCallback(
