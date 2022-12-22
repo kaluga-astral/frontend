@@ -10,11 +10,12 @@ export const MuiDialogTitle: Components<Theme>['MuiDialogTitle'] = {
         fontSize: theme.typography.h4.fontSize,
         fontWeight: theme.typography.h4.fontWeight,
         lineHeight: theme.typography.h4.lineHeight,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
 
         [`& .${buttonClasses.root}`]: {
-          position: 'absolute',
-          right: theme.spacing(5),
-          top: theme.spacing(5),
+          marginLeft: theme.spacing(4),
           color: theme.palette.grey[800],
         },
       };

@@ -5,11 +5,13 @@ import {
   DateCompareDeep,
   addDays,
   buildIsoDate,
+  isDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { GridBuilder, GridItem } from '../../../types';
 import { buildGridResult } from '../../../utils/buildGridItem';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
+import { compareDateDayByUTC } from '../../../utils/compareDateDayByUTC';
 
 export type DayItem = {
   /**
@@ -131,9 +133,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       grid.push({
         isOutOfAvailableRange: dateMonth !== month,
         selected:
-          !!selectedDate &&
-          Number(date) >= Number(selectedDate) &&
-          Number(date) < Number(addDays(selectedDate, 1)),
+          isDate(selectedDate) && compareDateDayByUTC(selectedDate, date),
         isCurrent:
           date.getUTCFullYear() === currentDate.getFullYear() &&
           date.getUTCDate() === currentDate.getDate() &&

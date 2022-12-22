@@ -78,6 +78,15 @@ describe('DatePicker', () => {
     expect(btn).not.toBeDisabled();
   });
 
+  it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
+    renderWithTheme(<DatePicker value={new Date('2022-12-16T18:59:00Z')} />);
+    fireEvent.focus(screen.getByRole('textbox'));
+
+    const selected = screen.getAllByText('16')[0].getAttribute('aria-selected');
+
+    expect(selected).toBeTruthy();
+  });
+
   it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
@@ -102,5 +111,32 @@ describe('DatePicker', () => {
     const selected = screen.getAllByText('9')[0].getAttribute('aria-selected');
 
     expect(selected).toBeTruthy();
+  });
+
+  it('Props:onBlur: вызывается при закрытии popover', async () => {
+    const onBlur = vi.fn();
+
+    renderWithTheme(<DatePicker onBlur={onBlur} />);
+    fireEvent.focus(screen.getByRole('textbox'));
+    // клик вне инпута с поповером
+    await userEvents.click(document.body);
+    expect(onBlur).toBeCalled();
+  });
+
+  it('Props:onBlur: не вызывается при потере фокуса на инпуте', async () => {
+    const onBlur = vi.fn();
+
+    renderWithTheme(<DatePicker onBlur={onBlur} />);
+    fireEvent.focus(screen.getByRole('textbox'));
+    await userEvents.tab();
+    expect(onBlur).not.toBeCalled();
+  });
+
+  it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {
+    const onBlur = vi.fn();
+
+    renderWithTheme(<DatePicker onBlur={onBlur} />);
+    await userEvents.click(document.body);
+    expect(onBlur).not.toBeCalled();
   });
 });

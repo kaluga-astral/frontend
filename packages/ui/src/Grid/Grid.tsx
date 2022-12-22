@@ -1,9 +1,12 @@
-import { forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
-import { GridProps } from './types';
+import { GridContainerProps, GridElementsProps } from './types';
 import { StyledGrid } from './styled';
 
-export const Grid = forwardRef<HTMLDivElement, GridProps>(
+export type GridProps = GridContainerProps &
+  GridElementsProps & { children?: ReactNode };
+
+export const Grid = forwardRef<HTMLElement, GridProps>(
   (
     {
       container = false,
@@ -24,26 +27,28 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
       ...props
     },
     ref,
-  ) => (
-    <StyledGrid
-      ref={ref}
-      container={container}
-      gridTemplateColumns={templateColumns}
-      gridTemplateRows={templateRows}
-      gridTemplateAreas={templateAreas}
-      columnGap={columnSpacing}
-      rowGap={rowSpacing}
-      gap={spacing}
-      gridAutoColumns={autoColumns}
-      gridAutoRows={autoRows}
-      gridAutoFlow={autoFlow}
-      gridColumn={column}
-      gridRow={row}
-      gridArea={area}
-      component={component}
-      {...props}
-    >
-      {children}
-    </StyledGrid>
-  ),
+  ) => {
+    return (
+      <StyledGrid
+        ref={ref}
+        container={container}
+        gridTemplateColumns={templateColumns}
+        gridTemplateRows={templateRows}
+        gridTemplateAreas={templateAreas}
+        columnGap={columnSpacing}
+        rowGap={rowSpacing}
+        gap={spacing}
+        gridAutoColumns={autoColumns}
+        gridAutoRows={autoRows}
+        gridAutoFlow={autoFlow}
+        gridColumn={column}
+        gridRow={row}
+        gridArea={area}
+        component={component}
+        {...props}
+      >
+        {children}
+      </StyledGrid>
+    );
+  },
 );

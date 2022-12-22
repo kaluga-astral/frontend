@@ -4,6 +4,8 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './ClickAwayListener';
+
 export * from './BackdropStack';
 
 export * from './Badge';
@@ -13,6 +15,8 @@ export * from './Button';
 export * from './Breadcrumbs';
 
 export * from './Collapse';
+
+export * from './ConfirmDialog';
 
 export * from './DatePickerProvider';
 
@@ -69,6 +73,8 @@ export * from './IconButton';
 export * from './IconDropdownButton';
 
 export * from './hooks';
+
+export * from './types';
 
 export * from './List';
 
@@ -173,3 +179,5 @@ export * from './ContentState';
 export * from './Chevron';
 
 export * from './Stepper';
+
+export * from './Switch';

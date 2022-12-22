@@ -35,8 +35,6 @@ export const DatePickerInput = forwardRef<
     return blocks;
   }, [mask]);
 
-  console.log(maskBlocks);
-
   return (
     <DatePickerInputWrapper
       {...props}

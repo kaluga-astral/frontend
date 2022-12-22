@@ -6,8 +6,8 @@ import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
 import { ProductSwitcherContent } from './ProductSwitcherContent';
-import { ContentWrapper, WidgetMenu } from './styles';
 import { WidgetProduct } from './types';
+import { WidgetMenu } from './styles';
 
 export type ProductSwitcherProps = {
   getProducts: () => Promise<Array<WidgetProduct>>;
@@ -54,13 +54,11 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
         anchorEl={anchorRef.current}
         onClose={handleCloseMenu}
       >
-        <ContentWrapper>
-          <ProductSwitcherContent
-            isLoading={isLoading}
-            isError={isError}
-            products={products}
-          />
-        </ContentWrapper>
+        <ProductSwitcherContent
+          isLoading={isLoading}
+          isError={isError}
+          products={products}
+        />
       </WidgetMenu>
     </>
   );

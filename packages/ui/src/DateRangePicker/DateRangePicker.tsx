@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 
 import { Grid } from '../Grid';
 import {
@@ -6,17 +6,17 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useForwardedRef, useToggle } from '../hooks';
+import { useClickAwayEffect, useForwardedRef, useToggle } from '../hooks';
 import {
   useBaseDateInRange,
   useMaskedValue,
   useSelectedBaseDate,
 } from '../DatePicker/hooks';
-import { DatePickerClickAwayListener } from '../DatePicker/DatePickerClickAwayListener';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
+import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 
 import { DateRangePickerSplitter } from './styles';
 
@@ -52,7 +52,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onOpen,
       onBlur,
       onClose,
-      mask = '`DD.`MM.`YYYY',
+      mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       inputProps,
       disabled,
@@ -69,6 +69,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onActive: onOpen,
       onInactive: onClose,
     });
+
+    useClickAwayEffect({ ref, onClickAway: closePopper, isActive });
 
     const {
       maskedValue: maskedValueA,
@@ -112,16 +114,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       closePopper(undefined, 'selectOption');
     };
 
-    const blurHandlerA = (e: FocusEvent<HTMLInputElement>) => {
-      onChangeMaskedValueA(e.target.value);
-      onBlur?.(e);
-    };
-
-    const blurHandlerB = (e: FocusEvent<HTMLInputElement>) => {
-      onChangeMaskedValueB(e.target.value);
-      onBlur?.(e);
-    };
-
     const handleChangeMaskInputA = (e: ChangeEvent<HTMLInputElement>) =>
       onChangeMaskedValueA(e.target.value);
 
@@ -129,13 +121,12 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onChangeMaskedValueB(e.target.value);
 
     return (
-      <DatePickerClickAwayListener onClickAway={closePopper}>
+      <>
         <Grid container spacing={2} ref={ref}>
           <DatePickerInput
             {...inputProps}
             mask={mask}
             onNativeChange={handleChangeMaskInputA}
-            onBlur={blurHandlerA}
             disabled={disabled}
             value={maskedValueA}
             onFocus={openPopper}
@@ -144,7 +135,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             {...inputProps}
             mask={mask}
             onNativeChange={handleChangeMaskInputB}
-            onBlur={blurHandlerB}
             disabled={disabled}
             value={maskedValueB}
             onFocus={openPopper}
@@ -179,7 +169,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             />
           </MinMaxDateContextProvider>
         </DatePickerPopper>
-      </DatePickerClickAwayListener>
+      </>
     );
   },
 );
