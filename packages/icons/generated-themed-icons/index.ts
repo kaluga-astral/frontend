@@ -32,6 +32,8 @@ export { default as CaseOutlineMd } from './CaseOutlineMd';
 
 export { default as CassOutlineMd } from './CassOutlineMd';
 
+export { default as CertOutlineMd } from './CertOutlineMd';
+
 export { default as CheckOutlineMd } from './CheckOutlineMd';
 
 export { default as CheckOutlineSm } from './CheckOutlineSm';
@@ -169,6 +171,8 @@ export { default as RefreshOutlineMd } from './RefreshOutlineMd';
 export { default as RefreshOutlineSm } from './RefreshOutlineSm';
 
 export { default as RequirementOutlineMd } from './RequirementOutlineMd';
+
+export { default as SaveOutlineMd } from './SaveOutlineMd';
 
 export { default as SearchOutlineMd } from './SearchOutlineMd';
 
