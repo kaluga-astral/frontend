@@ -5,6 +5,19 @@ export {
   ControllerProps as FormControllerProps,
   UseControllerProps as UseFormControllerProps,
   FieldValues as FormFieldValues,
+  Controller as FormController,
+  useFieldArray as useFormFieldArray,
+  FieldArrayWithId as FormFieldArrayWithId,
+  FieldArray as FormFieldArray,
+  Field as FormField,
+  FieldError as FormFieldError,
+  FieldErrors as FormFieldErrors,
+  FieldPath as FormFieldPath,
+  Path as FormPath,
+  UseFormGetValues,
+  FieldArrayPath as FormFieldArrayPath,
+  Resolver as FormResolver,
+  RegisterOptions as FormRegisterOptions,
 } from 'react-hook-form';
 
 export * from './FormAutocomplete';
