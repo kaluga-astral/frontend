@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, forwardRef } from 'react';
+import { SyntheticEvent, forwardRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useToggle } from '../hooks';
@@ -15,13 +15,10 @@ import {
 } from './MinMaxDateContext';
 import { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
-import {
-  useBaseDateInRange,
-  useMaskedValue,
-  useSelectedBaseDate,
-} from './hooks';
+import { useBaseDateInRange } from './hooks';
 import { MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
+import { useMaskedValueAndSelectedBaseDate } from './hooks/useMaskedValueAndSelectedBaseDate';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -67,40 +64,32 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     forwardedRef,
   ) => {
+    const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useForwardedRef(forwardedRef);
+
     const [isOpenPopper, openPopper, closePopper] = useToggle({
       onActive: onOpen,
       onInactive: onClose,
     });
-
-    const handleClosePopper = () => {
+    const handleClosePopper = (
+      event?: SyntheticEvent<Element, Event> | Event,
+      reason?: CloseEventReason,
+    ) => {
       // для данного компонента onBlur должен срабатывать после закрытия popover, а не во время выбора даты
       onBlur?.();
-      closePopper(undefined, 'selectOption');
+      closePopper(event, reason);
     };
 
-    const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
-      useMaskedValue({
-        currentValue: value,
+    const { inputProps: calculatedPickerProps, pickerProps } =
+      useMaskedValueAndSelectedBaseDate({
+        maxDate,
+        minDate,
         mask,
-        onChangeValue: onChange,
+        closePopper: handleClosePopper,
+        currentValue: value,
+        onChange,
+        baseDate,
       });
-
-    const baseDate = useBaseDateInRange({ minDate, maxDate });
-    const selectedBaseDate = useSelectedBaseDate({
-      currentValue: value,
-      minDate,
-      maxDate,
-    });
-
-    const handleDayPick = (date: Date) => {
-      onChangeMaskedDate(date);
-      handleClosePopper();
-    };
-
-    const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
-      onChangeMaskedValue(e.target.value);
-    };
 
     return (
       <ClickAwayListener
@@ -110,10 +99,9 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         <div className={className}>
           <DatePickerInput
             {...inputProps}
+            {...calculatedPickerProps}
             mask={mask}
-            onNativeChange={handleChangeMaskInput}
             disabled={disabled}
-            value={maskedValue}
             ref={ref}
             onFocus={openPopper}
           />
@@ -125,9 +113,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
               <YearMonthDayPicker
                 isMondayFirst={isMondayFirst}
-                selectedDate={selectedBaseDate}
-                onChange={handleDayPick}
-                date={selectedBaseDate || baseDate}
+                {...pickerProps}
               />
             </MinMaxDateContextProvider>
           </DatePickerPopper>

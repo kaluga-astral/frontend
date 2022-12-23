@@ -21,6 +21,7 @@ export const MonthPicker = ({
   date: initialDate,
   selectedDate,
   onChange,
+  rangeDate,
   ...headProps
 }: DateMonthPickerProps) => {
   const monthFormat = useLocaleDateTimeFormat({
@@ -40,6 +41,7 @@ export const MonthPicker = ({
   const { grid, isPrevDisabled, isNextDisabled } = useMonthsGrid({
     baseDate,
     selectedDate,
+    rangeDate,
   });
 
   const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;

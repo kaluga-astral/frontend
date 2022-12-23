@@ -6,6 +6,13 @@ import { CloseEventReason, WithoutEmotionSpecific } from '../../types';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
+/**
+ * @description тупл для соответсвтия попперовскому способу задания отступов, 1е число по X, второе по Y
+ */
+export type OffsetTuple = [number, number];
+
+const DEFAULT_OFFSET: OffsetTuple = [0, 8];
+
 export type DatePickerProps = PropsWithChildren<
   Omit<WithoutEmotionSpecific<PopperProps>, 'children'>
 > & {
@@ -13,11 +20,13 @@ export type DatePickerProps = PropsWithChildren<
     _?: SyntheticEvent<Element, Event> | Event,
     reason?: CloseEventReason,
   ) => void;
+  offset?: OffsetTuple;
 };
 
 export const DatePickerPopper = ({
   children,
   onClose,
+  offset = DEFAULT_OFFSET,
   ...props
 }: DatePickerProps) => {
   useEscapeClickEffect({
@@ -36,7 +45,7 @@ export const DatePickerPopper = ({
           name: 'offset',
           options: {
             // использование отступов для соответствия с дизайном, 0 по горизонтали, 8px по вертикали
-            offset: [0, 8],
+            offset,
           },
         },
       ]}

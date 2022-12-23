@@ -14,6 +14,13 @@ export type GridItem<T> = {
    * @description флаг, обозначающий, что дата совпадает с текущей датой пользователя
    */
   isCurrent: boolean;
+  /**
+   * @description флаг, обозначающий, что дата попадает в выбранный пользователем интервал
+   */
+  isInSelectedRange: boolean;
+  /**
+   * @description флаг, обозначающий что элемент будет не доступен к выбору
+   */
   disabled: boolean;
 } & T;
 
@@ -40,7 +47,11 @@ type GridBuilderOptions<T = {}> = {
   /**
    * @description выбранная дата, будет использоваться для сверки элемента массива с этой датой на предмет совпадения
    */
-  selectedDate?: Date | null;
+  selectedDate?: Date;
+  /**
+   * @description дата, относительно которой будет происходить сравнение на попадание в выбранный интервал
+   */
+  rangeDate?: Date;
 } & T;
 
 export type GridBuilder<Item = {}, Options = {}> = (

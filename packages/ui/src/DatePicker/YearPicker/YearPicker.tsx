@@ -21,6 +21,7 @@ export const YearPicker = ({
   date: initialDate,
   selectedDate,
   onChange,
+  rangeDate,
   ...headProps
 }: DateYearPickerProps) => {
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
@@ -30,6 +31,7 @@ export const YearPicker = ({
   const { grid, isPrevDisabled, isNextDisabled } = useYearsGrid({
     baseDate,
     selectedDate,
+    rangeDate,
   });
 
   const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;

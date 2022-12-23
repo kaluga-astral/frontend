@@ -1,175 +1,145 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-import { Grid } from '../Grid';
+import { Grid, GridProps } from '../Grid';
 import {
   DEFAULT_MAX_DATE,
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
 import { useClickAwayEffect, useForwardedRef, useToggle } from '../hooks';
-import {
-  useBaseDateInRange,
-  useMaskedValue,
-  useSelectedBaseDate,
-} from '../DatePicker/hooks';
+import { useBaseDateInRange } from '../DatePicker/hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
-import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
+import { DatePickerPopper, OffsetTuple } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
+import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
 
 import { DateRangePickerSplitter } from './styles';
 
+const DEFAULT_SPACING = 2;
+
+const POPPER_OFFSET: OffsetTuple = [
+  0, /**
+   * @description минус 12, потому что мы используем в качестве рефа грид,
+   * в котором создают лишние отступы плейсхолдеры для ошибок валидации
+   */ -12,
+];
+
+type DateItemProps = Pick<DatePickerProps, 'onChange' | 'value' | 'inputProps'>;
+
 export type DateRangePickerProps = Omit<
   DatePickerProps,
-  'onChange' | 'value'
+  'onChange' | 'value' | 'onBlur' | 'inputProps'
 > & {
   /**
-   * @description управляемая дата для пикера слева
+   * @description специфичные пропсы для управления датой слева
    */
-  valueA?: Date;
+  itemA?: DateItemProps;
   /**
-   * @description управляемая дата для пикера справа
+   * @description специфичные пропсы для управления датой справа
    */
-  valueB?: Date;
+  itemB?: DateItemProps;
   /**
-   * @description Обработчик изменения состояния первой даты.
-   * Передает только Date object, если дата невалидна, то будет Invalid date
+   * @description отступ между инпутами дат
    */
-  onChangeA?: (value?: Date) => void;
-  /**
-   * @description Обработчик изменения состояния второй даты.
-   * Передает только Date object, если дата невалидна, то будет Invalid date
-   */
-  onChangeB?: (value?: Date) => void;
+  spacing?: GridProps['spacing'];
 };
 
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   (
     {
-      onChangeA,
-      onChangeB,
+      itemA = {},
+      itemB = {},
       onOpen,
-      onBlur,
       onClose,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
-      inputProps,
       disabled,
-      valueA,
-      valueB,
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
+      spacing = DEFAULT_SPACING,
     },
     forwardedRef,
   ) => {
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useForwardedRef(forwardedRef);
-    const [isActive, openPopper, closePopper] = useToggle({
+    const [isOpenPopper, openPopper, closePopper] = useToggle({
       onActive: onOpen,
       onInactive: onClose,
     });
 
-    useClickAwayEffect({ ref, onClickAway: closePopper, isActive });
-
-    const {
-      maskedValue: maskedValueA,
-      onChangeMaskedValue: onChangeMaskedValueA,
-      onChangeMaskedDate: onChangeMaskedDateA,
-    } = useMaskedValue({
-      currentValue: valueA,
-      mask,
-      onChangeValue: onChangeA,
+    useClickAwayEffect({
+      ref,
+      onClickAway: closePopper,
+      isActive: isOpenPopper,
     });
 
-    const {
-      maskedValue: maskedValueB,
-      onChangeMaskedValue: onChangeMaskedValueB,
-      onChangeMaskedDate: onChangeMaskedDateB,
-    } = useMaskedValue({
-      currentValue: valueB,
-      mask,
-      onChangeValue: onChangeB,
-    });
-
-    const selectedBaseDateA = useSelectedBaseDate({
-      currentValue: valueA,
-      minDate,
+    const optionsA = useMaskedValueAndSelectedBaseDate({
       maxDate,
-    });
-
-    const selectedBaseDateB = useSelectedBaseDate({
-      currentValue: valueB,
       minDate,
-      maxDate,
+      mask,
+      closePopper,
+      currentValue: itemA?.value,
+      onChange: itemA?.onChange,
+      baseDate,
     });
 
-    const handleDayPickA = (date: Date) => {
-      onChangeMaskedDateA(date);
-      closePopper(undefined, 'selectOption');
-    };
-
-    const handleDayPickB = (date: Date) => {
-      onChangeMaskedDateB(date);
-      closePopper(undefined, 'selectOption');
-    };
-
-    const handleChangeMaskInputA = (e: ChangeEvent<HTMLInputElement>) =>
-      onChangeMaskedValueA(e.target.value);
-
-    const handleChangeMaskInputB = (e: ChangeEvent<HTMLInputElement>) =>
-      onChangeMaskedValueB(e.target.value);
+    const optionsB = useMaskedValueAndSelectedBaseDate({
+      maxDate,
+      minDate,
+      mask,
+      closePopper,
+      currentValue: itemB?.value,
+      onChange: itemB?.onChange,
+      baseDate,
+    });
 
     return (
-      <>
-        <Grid container spacing={2} ref={ref}>
-          <DatePickerInput
-            {...inputProps}
-            mask={mask}
-            onNativeChange={handleChangeMaskInputA}
-            disabled={disabled}
-            value={maskedValueA}
-            onFocus={openPopper}
-          />
-          <DatePickerInput
-            {...inputProps}
-            mask={mask}
-            onNativeChange={handleChangeMaskInputB}
-            disabled={disabled}
-            value={maskedValueB}
-            onFocus={openPopper}
-          />
-        </Grid>
+      <Grid container spacing={spacing} ref={ref} autoFlow="column">
+        <DatePickerInput
+          {...itemA.inputProps}
+          mask={mask}
+          {...optionsA.inputProps}
+          disabled={disabled}
+          onFocus={openPopper}
+        />
+        <DatePickerInput
+          {...itemB.inputProps}
+          mask={mask}
+          {...optionsB.inputProps}
+          disabled={disabled}
+          onFocus={openPopper}
+        />
         <DatePickerPopper
-          open={isActive}
+          open={isOpenPopper}
           onClose={closePopper}
           anchorEl={ref?.current}
+          offset={POPPER_OFFSET}
         >
           <MinMaxDateContextProvider
             minDate={minDate}
-            maxDate={valueB || maxDate}
+            maxDate={itemB.value || maxDate}
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              selectedDate={selectedBaseDateA}
-              onChange={handleDayPickA}
-              date={selectedBaseDateA || baseDate}
+              {...optionsA.pickerProps}
+              rangeDate={itemB.value}
             />
           </MinMaxDateContextProvider>
           <DateRangePickerSplitter />
           <MinMaxDateContextProvider
-            minDate={valueA || minDate}
+            minDate={itemA.value || minDate}
             maxDate={maxDate}
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              selectedDate={selectedBaseDateB}
-              onChange={handleDayPickB}
-              date={selectedBaseDateB || baseDate}
+              {...optionsB.pickerProps}
+              rangeDate={itemA.value}
             />
           </MinMaxDateContextProvider>
         </DatePickerPopper>
-      </>
+      </Grid>
     );
   },
 );

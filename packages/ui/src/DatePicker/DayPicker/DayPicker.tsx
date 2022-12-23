@@ -34,6 +34,7 @@ export const DayPicker = ({
   selectedDate,
   onChange,
   isMondayFirst,
+  rangeDate,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -62,6 +63,7 @@ export const DayPicker = ({
     selectedDate,
     isMondayFirst,
     fullSize: true,
+    rangeDate,
   });
 
   return (

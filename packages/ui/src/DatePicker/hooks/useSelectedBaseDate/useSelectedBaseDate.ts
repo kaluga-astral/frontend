@@ -39,8 +39,8 @@ export const useSelectedBaseDate = ({
       !currentValue ||
       isDateOutOfRange({
         date: currentValue,
-        minDate,
-        maxDate,
+        dateA: minDate,
+        dateB: maxDate,
         deep: DateCompareDeep.day,
       })
     ) {
