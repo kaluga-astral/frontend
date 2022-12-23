@@ -7,11 +7,6 @@ type Language = 'ru';
 
 export type ConfigContextProps = {
   /**
-   * @deprecated используйте language взамен
-   */
-  //eslint-disable-next-line
-  locale?: any;
-  /**
    * @description язык локализации
    * @default 'ru'
    */

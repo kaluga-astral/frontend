@@ -18,8 +18,6 @@ export * from './Collapse';
 
 export * from './ConfirmDialog';
 
-export * from './DatePickerProvider';
-
 export * from './Description';
 
 export * from './Divider';
