@@ -17,4 +17,4 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Lint title
-        run: node PRTitleLinter/index.js --title='${{ github.event.pull_request.title }}'
+        run: node PRLinter/index.js --title='${{ github.event.pull_request.title }}'
