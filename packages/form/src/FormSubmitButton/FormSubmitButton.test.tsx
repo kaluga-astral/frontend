@@ -3,9 +3,9 @@ import { fireEvent, renderWithTheme, screen, waitFor } from '@astral/tests';
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
-import { SubmitButton } from './SubmitButton';
+import { FormSubmitButton } from './FormSubmitButton';
 
-describe('SubmitButton', () => {
+describe('FormSubmitButton', () => {
   it('Form-submitting: отображается лоадер', async () => {
     const TestComponent = () => {
       const form = useForm();
@@ -14,7 +14,7 @@ describe('SubmitButton', () => {
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(handleSubmit)}>
-          <SubmitButton>submit</SubmitButton>
+          <FormSubmitButton>submit</FormSubmitButton>
         </Form>
       );
     };

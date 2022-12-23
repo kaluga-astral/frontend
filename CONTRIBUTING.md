@@ -168,7 +168,7 @@ describe('Autocomplete', () => {
   it('Закрывается popover после выбора значения', () => {});
 });
 
-describe('SubmitButton', () => {
+describe('FormSubmitButton', () => {
   it('Form-submitting: отображается лоадер', () => {});
 });
 ```
