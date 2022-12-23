@@ -98,6 +98,10 @@ jobs:
         working-directory: ./example
         run: npm run prepare-packages
 
-      - name: Check packages errors (lint:types + build:dev)
+      - name: Check example types
         working-directory: ./example
-        run: npm run lint:types & npm run build:dev
+        run: npm run lint:types
+
+      - name: Check example build
+        working-directory: ./example
+        run: npm run build:dev

@@ -3,6 +3,8 @@ export {
   UseWatchProps as UseFormWatchProps,
   useController as useFormController,
   ControllerProps as FormControllerProps,
+  UseControllerProps as UseFormControllerProps,
+  FieldValues as FormFieldValues,
 } from 'react-hook-form';
 
 export * from './FormAutocomplete';
