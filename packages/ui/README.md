@@ -97,3 +97,6 @@ import { useForm, useFormWatch, useFormController } from '@astral/ui';
 ```ts
 import { QuitOutlineMd } from '@astral/ui';
 ```
+
+### DatePickerProvider
+Компонент был удален, используйте ConfigProvider.
