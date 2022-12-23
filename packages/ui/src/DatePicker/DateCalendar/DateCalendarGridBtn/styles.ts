@@ -2,24 +2,11 @@ import { styled } from '../../../styles';
 import { DateCalendarBtn } from '../DateCalendarBtn';
 import { Theme } from '../../../theme';
 
-type DateCalendarDayBtnWrapperProps = {
-  /**
-   * @description флаг означающий, что дата находится вне доступного диапазона, например при выборе дня, месяц до и месяц после, должны находиться вне
-   */
-  isOutOfAvailableRange?: boolean;
-  /**
-   * @description флаг означающий, что дата совпадает с локальным временем пользователя
-   */
-  isCurrent: boolean;
-  /**
-   * @description флаг означающий, что дата находится в выбранном диапазоне
-   */
-  isInSelectedRange?: boolean;
-};
+import { DateCalendarDayBtnWrapperProps } from './DateCalendarGridBtn';
+import { IS_IN_RANGE_CLASS, IS_SELECTED_CLASS } from './constants';
 
 type GetColorOptions = {
   theme: Theme;
-  selected?: boolean;
 } & DateCalendarDayBtnWrapperProps;
 
 const getTextColor = ({
@@ -65,7 +52,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isInSelectedRange',
 ]);
 
-export const DateCalendarGridBtn = styled(DateCalendarBtn, {
+export const DateCalendarGridBtnWrapper = styled(DateCalendarBtn, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`
@@ -75,7 +62,30 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 
   background-color: ${(props) => getBgColor(props)};
 
-  border-radius: ${({ isInSelectedRange }) => (isInSelectedRange ? '0' : '')};
+  &.${IS_IN_RANGE_CLASS} {
+    border-radius: 0;
+
+    &:first-of-type,
+    &:nth-of-type(7n + 1) {
+      border-top-left-radius: ${({ theme }) => theme.shape.small};
+      border-bottom-left-radius: ${({ theme }) => theme.shape.small};
+    }
+
+    &:nth-of-type(7n) {
+      border-top-right-radius: ${({ theme }) => theme.shape.small};
+      border-bottom-right-radius: ${({ theme }) => theme.shape.small};
+    }
+  }
+
+  &:not(.${IS_IN_RANGE_CLASS}) + .${IS_SELECTED_CLASS}.${IS_IN_RANGE_CLASS} {
+    border-top-left-radius: ${({ theme }) => theme.shape.small};
+    border-bottom-left-radius: ${({ theme }) => theme.shape.small};
+  }
+
+  &.${IS_IN_RANGE_CLASS} + .${IS_SELECTED_CLASS} {
+    border-top-right-radius: ${({ theme }) => theme.shape.small};
+    border-bottom-right-radius: ${({ theme }) => theme.shape.small};
+  }
 
   &::after {
     position: absolute;
@@ -91,20 +101,5 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
     background-color: currentColor;
 
     content: '';
-  }
-`;
-
-export const DateCalendarGridBtnLarge = styled(DateCalendarGridBtn)`
-  min-width: 80px;
-  min-height: 52px;
-  padding: ${({ theme }) => theme.spacing(4, 2)};
-
-  text-transform: capitalize;
-
-  &::after {
-    bottom: ${({ theme }) => theme.spacing(2)};
-    left: ${({ theme }) => theme.spacing(4)};
-
-    width: calc(100% - 32px);
   }
 `;

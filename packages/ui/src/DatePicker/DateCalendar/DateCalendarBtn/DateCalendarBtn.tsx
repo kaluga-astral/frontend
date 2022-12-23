@@ -1,7 +1,7 @@
 import { ReactNode, forwardRef } from 'react';
 
 import { ButtonProps } from '../../../Button';
-import { Tooltip } from '../../../Tooltip';
+import { DateCalendarBtnTooltip } from '../DateCalendarBtnTooltip';
 
 import { DateCalendarBtnWrapper } from './styles';
 
@@ -13,23 +13,14 @@ export type DateCalendarArrowBtnProps = Omit<ButtonProps, 'variant'> & {
 export const DateCalendarBtn = forwardRef<
   HTMLButtonElement,
   DateCalendarArrowBtnProps
->(({ title = '', disabled, selected, ...props }, ref) =>
-  disabled ? (
+>(({ title = '', disabled, selected, ...props }, ref) => (
+  <DateCalendarBtnTooltip title={title} isActive={!disabled}>
     <DateCalendarBtnWrapper
       ref={ref}
       variant={selected ? 'contained' : 'text'}
       aria-selected={selected}
-      disabled
+      disabled={disabled}
       {...props}
     />
-  ) : (
-    <Tooltip title={title} disableInteractive>
-      <DateCalendarBtnWrapper
-        ref={ref}
-        variant={selected ? 'contained' : 'text'}
-        aria-selected={selected}
-        {...props}
-      />
-    </Tooltip>
-  ),
-);
+  </DateCalendarBtnTooltip>
+));
