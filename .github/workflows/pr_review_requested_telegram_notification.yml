@@ -2,10 +2,9 @@ name: pull request review requested notification
 on:
   pull_request:
     types: [review_requested]
-    branches:
-    - main
+    branches: [main, next]
 
-jobs: 
+jobs:
   is-designer:
     name: is-designer
     uses: ./.github/workflows/is_team_member.yml
@@ -14,7 +13,7 @@ jobs:
       member: ${{ github.event.requested_reviewer.login }}
     secrets:
       token: ${{ secrets.OWNER_TOKEN }}
-    
+
   add_labels:
     runs-on: ubuntu-latest
     needs: is-designer
@@ -30,8 +29,8 @@ jobs:
   notify:
     name: notify
     runs-on: ubuntu-latest
-    # т.к ревьюверы ставятся автоматически при открытии ПР, а action срабатывает на каждый реквест, 
-    # нужно понять, что мы запрашиваем ревью вручную после того как ПР открыт. 
+    # т.к ревьюверы ставятся автоматически при открытии ПР, а action срабатывает на каждый реквест,
+    # нужно понять, что мы запрашиваем ревью вручную после того как ПР открыт.
     # Для этого проверяем наличие assignee(ставится при открытии после установки ревьюверов)
     if: ${{ github.event.pull_request.assignee != null &&  github.event.requested_reviewer != null }}
     needs: is-designer
