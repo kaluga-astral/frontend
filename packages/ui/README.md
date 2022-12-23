@@ -88,11 +88,10 @@ import certImgSrc from '@astral/ui/illustrations/cert.svg';
 Весь ```@astral/form``` теперь экспортируется из ```@astral/ui```.
 
 ```ts
-import { useForm } from '@astral/ui';
+import { useForm, useFormWatch, useFormController } from '@astral/ui';
 ```
 
 ### @astral/icons
-Все элементы пакета ```@astral/icons``` получили префиксы form.
 Весь ```@astral/icons``` теперь экспортируется из ```@astral/ui```.
 
 ```ts
