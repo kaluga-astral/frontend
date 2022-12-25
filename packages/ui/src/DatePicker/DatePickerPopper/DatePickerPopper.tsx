@@ -1,8 +1,7 @@
-import { PropsWithChildren, SyntheticEvent } from 'react';
+import { PropsWithChildren } from 'react';
 import { Fade, PopperProps } from '@mui/material';
 
-import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
-import { CloseEventReason, WithoutEmotionSpecific } from '../../types';
+import { WithoutEmotionSpecific } from '../../types';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
@@ -11,51 +10,46 @@ import { DatePickerPopoverInner, PopperWrapper } from './styles';
  */
 export type OffsetTuple = [number, number];
 
-const DEFAULT_OFFSET: OffsetTuple = [0, 8];
+const DEFAULT_OFFSET: OffsetTuple = [
+  0, /**
+   * @description минус 12, потому что мы используем в качестве рефа грид/див,
+   * в котором создают лишние отступы плейсхолдеры для ошибок валидации
+   */ -12,
+];
 
 export type DatePickerProps = PropsWithChildren<
   Omit<WithoutEmotionSpecific<PopperProps>, 'children'>
 > & {
-  onClose?: (
-    _?: SyntheticEvent<Element, Event> | Event,
-    reason?: CloseEventReason,
-  ) => void;
+  /**
+   * @description оффсет появления поппера от якоря
+   * @default [0, -12]
+   */
   offset?: OffsetTuple;
 };
 
 export const DatePickerPopper = ({
   children,
-  onClose,
   offset = DEFAULT_OFFSET,
   ...props
-}: DatePickerProps) => {
-  useEscapeClickEffect({
-    onEscape: onClose,
-    isActive: props.open,
-    preventBubbling: true,
-  });
-
-  return (
-    <PopperWrapper
-      placement="bottom-start"
-      {...props}
-      disablePortal
-      modifiers={[
-        {
-          name: 'offset',
-          options: {
-            // использование отступов для соответствия с дизайном, 0 по горизонтали, 8px по вертикали
-            offset,
-          },
+}: DatePickerProps) => (
+  <PopperWrapper
+    placement="bottom-start"
+    {...props}
+    disablePortal
+    modifiers={[
+      {
+        name: 'offset',
+        options: {
+          offset,
         },
-      ]}
-      transition
-    >
-      {({ TransitionProps }) => (
-        <Fade {...TransitionProps}>
-          <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
-        </Fade>
-      )}
-    </PopperWrapper>
-  );
-};
+      },
+    ]}
+    transition
+  >
+    {({ TransitionProps }) => (
+      <Fade {...TransitionProps}>
+        <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
+      </Fade>
+    )}
+  </PopperWrapper>
+);

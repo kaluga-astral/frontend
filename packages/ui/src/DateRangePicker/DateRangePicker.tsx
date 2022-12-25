@@ -6,27 +6,19 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useClickAwayEffect, useForwardedRef, useToggle } from '../hooks';
+import { useForwardedRef, usePopperHooks } from '../hooks';
 import { useBaseDateInRange } from '../DatePicker/hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
-import { DatePickerPopper, OffsetTuple } from '../DatePicker/DatePickerPopper';
+import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
 import { addDays, addMonths, isDate } from '../utils/date';
-import { useFocusAwayEffect } from '../hooks/useFocusAwayEffect';
 
 import { DateRangePickerSplitter } from './styles';
 
 const DEFAULT_SPACING = 2;
-
-const POPPER_OFFSET: OffsetTuple = [
-  0, /**
-   * @description минус 12, потому что мы используем в качестве рефа грид,
-   * в котором создают лишние отступы плейсхолдеры для ошибок валидации
-   */ -12,
-];
 
 type DateItemProps = Pick<DatePickerProps, 'onChange' | 'value' | 'inputProps'>;
 
@@ -67,21 +59,10 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   ) => {
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useForwardedRef(forwardedRef);
-    const [isOpenPopper, openPopper, closePopper] = useToggle({
-      onActive: onOpen,
-      onInactive: onClose,
-    });
-
-    useClickAwayEffect({
+    const { isOpenPopper, openPopper, closePopper } = usePopperHooks({
       ref,
-      onClickAway: closePopper,
-      isActive: isOpenPopper,
-    });
-
-    useFocusAwayEffect({
-      ref,
-      onFocusAway: closePopper,
-      isActive: isOpenPopper,
+      onOpen,
+      onClose,
     });
 
     const handleDayPick = () => {
@@ -128,9 +109,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         />
         <DatePickerPopper
           open={isOpenPopper}
-          onClose={closePopper}
           anchorEl={ref?.current}
-          offset={POPPER_OFFSET}
           placement="bottom"
         >
           <MinMaxDateContextProvider
