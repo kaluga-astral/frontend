@@ -71,7 +71,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       onInactive: onClose,
     });
     const handleDayPick = () => closePopper(undefined, 'selectOption');
-    const { inputProps: calculatedPickerProps, pickerProps } =
+    const { inputProps: calculatedInputProps, pickerProps } =
       useMaskedValueAndSelectedBaseDate({
         maxDate,
         minDate,
@@ -87,7 +87,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         <div className={className}>
           <DatePickerInput
             {...inputProps}
-            {...calculatedPickerProps}
+            {...calculatedInputProps}
             mask={mask}
             disabled={disabled}
             ref={ref}
