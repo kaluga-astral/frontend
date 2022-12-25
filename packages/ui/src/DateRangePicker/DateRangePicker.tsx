@@ -15,6 +15,7 @@ import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
 import { addDays, addMonths, isDate } from '../utils/date';
+import { useFocusAwayEffect } from '../hooks/useFocusAwayEffect';
 
 import { DateRangePickerSplitter } from './styles';
 
@@ -74,6 +75,12 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     useClickAwayEffect({
       ref,
       onClickAway: closePopper,
+      isActive: isOpenPopper,
+    });
+
+    useFocusAwayEffect({
+      ref,
+      onFocusAway: closePopper,
       isActive: isOpenPopper,
     });
 

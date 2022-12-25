@@ -10,6 +10,7 @@ export type CloseEventReason =
   | 'escapeKeyDown'
   | 'backdropClick'
   | 'clickAway'
+  | 'focusAway'
   | 'toggleInput'
   | 'blur'
   | AutocompleteCloseReason
