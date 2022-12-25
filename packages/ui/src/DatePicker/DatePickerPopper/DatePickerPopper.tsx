@@ -1,5 +1,5 @@
 import { PropsWithChildren, SyntheticEvent } from 'react';
-import { PopperProps } from '@mui/material';
+import { Fade, PopperProps } from '@mui/material';
 
 import { useEscapeClickEffect } from '../../hooks/useEscapeClickEffect';
 import { CloseEventReason, WithoutEmotionSpecific } from '../../types';
@@ -37,8 +37,8 @@ export const DatePickerPopper = ({
 
   return (
     <PopperWrapper
-      {...props}
       placement="bottom-start"
+      {...props}
       disablePortal
       modifiers={[
         {
@@ -49,8 +49,13 @@ export const DatePickerPopper = ({
           },
         },
       ]}
+      transition
     >
-      <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
+      {({ TransitionProps }) => (
+        <Fade {...TransitionProps}>
+          <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
+        </Fade>
+      )}
     </PopperWrapper>
   );
 };

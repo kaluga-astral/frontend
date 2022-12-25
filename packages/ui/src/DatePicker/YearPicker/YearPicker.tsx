@@ -11,6 +11,7 @@ import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/date';
 import { PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
 
 import { useYearsGrid } from './hooks/useYearsGrid';
 import { YEARS_IN_GRID } from './constants';
@@ -51,6 +52,7 @@ export const YearPicker = ({
           <DateCalendarGridBtnLarge
             key={year}
             onClick={() => onChange?.(date)}
+            lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
             {...props}
           >
             {year}

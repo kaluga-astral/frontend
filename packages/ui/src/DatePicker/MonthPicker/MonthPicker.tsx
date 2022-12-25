@@ -12,6 +12,7 @@ import { PickerProps } from '../types';
 import { addYears } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
 
 import { useMonthsGrid } from './hooks/useMonthsGrid';
 
@@ -61,6 +62,7 @@ export const MonthPicker = ({
             key={`${month}_${index}`}
             onClick={() => onChange?.(date)}
             title={titleFormat(date)}
+            lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
             {...props}
           >
             {monthFormat(date)}

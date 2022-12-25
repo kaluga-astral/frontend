@@ -50,6 +50,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isCurrent',
   'isOutOfAvailableRange',
   'isInSelectedRange',
+  'lengthInRow',
 ]);
 
 export const DateCalendarGridBtnWrapper = styled(DateCalendarBtn, {
@@ -66,12 +67,12 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarBtn, {
     border-radius: 0;
 
     &:first-of-type,
-    &:nth-of-type(7n + 1) {
+    &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
       border-top-left-radius: ${({ theme }) => theme.shape.small};
       border-bottom-left-radius: ${({ theme }) => theme.shape.small};
     }
 
-    &:nth-of-type(7n) {
+    &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
       border-top-right-radius: ${({ theme }) => theme.shape.small};
       border-bottom-right-radius: ${({ theme }) => theme.shape.small};
     }

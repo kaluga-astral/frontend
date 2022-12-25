@@ -1,6 +1,5 @@
 import { Story } from '@storybook/react';
 import { useState } from 'react';
-import { merge } from 'lodash-es';
 
 import { Grid } from '../Grid';
 import { addDays, buildIsoDate } from '../utils/date';
@@ -23,12 +22,13 @@ const Template: Story<DateRangePickerProps> = (args) => {
   const [dateA, setDateA] = useState<Date | undefined>(args.itemA?.value);
   const [dateB, setDateB] = useState<Date | undefined>(args.itemB?.value);
 
-  const props = merge(args || {}, {
-    itemA: { value: dateA, onChange: setDateA },
-    itemB: { value: dateB, onChange: setDateB },
-  });
-
-  return <DateRangePicker {...props} />;
+  return (
+    <DateRangePicker
+      {...args}
+      itemA={{ value: dateA, onChange: setDateA }}
+      itemB={{ value: dateB, onChange: setDateB }}
+    />
+  );
 };
 
 export const Showcase: Story = () => (

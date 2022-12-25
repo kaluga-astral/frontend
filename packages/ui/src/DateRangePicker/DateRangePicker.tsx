@@ -14,6 +14,7 @@ import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
+import { addDays, addMonths, isDate } from '../utils/date';
 
 import { DateRangePickerSplitter } from './styles';
 
@@ -42,6 +43,7 @@ export type DateRangePickerProps = Omit<
   itemB?: DateItemProps;
   /**
    * @description отступ между инпутами дат
+   * @default 2
    */
   spacing?: GridProps['spacing'];
 };
@@ -75,11 +77,17 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       isActive: isOpenPopper,
     });
 
+    const handleDayPick = () => {
+      if (itemA?.value || itemB?.value) {
+        closePopper(undefined, 'selectOption');
+      }
+    };
+
     const optionsA = useMaskedValueAndSelectedBaseDate({
       maxDate,
       minDate,
       mask,
-      closePopper,
+      onDatePick: handleDayPick,
       currentValue: itemA?.value,
       onChange: itemA?.onChange,
       baseDate,
@@ -89,10 +97,10 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       maxDate,
       minDate,
       mask,
-      closePopper,
+      onDatePick: handleDayPick,
       currentValue: itemB?.value,
       onChange: itemB?.onChange,
-      baseDate,
+      baseDate: addMonths(baseDate, 1),
     });
 
     return (
@@ -116,10 +124,11 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           onClose={closePopper}
           anchorEl={ref?.current}
           offset={POPPER_OFFSET}
+          placement="bottom"
         >
           <MinMaxDateContextProvider
             minDate={minDate}
-            maxDate={itemB.value || maxDate}
+            maxDate={isDate(itemB.value) ? addDays(itemB.value, -1) : maxDate}
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
@@ -129,7 +138,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           </MinMaxDateContextProvider>
           <DateRangePickerSplitter />
           <MinMaxDateContextProvider
-            minDate={itemA.value || minDate}
+            minDate={isDate(itemA.value) ? addDays(itemA.value, 1) : minDate}
             maxDate={maxDate}
           >
             <YearMonthDayPicker

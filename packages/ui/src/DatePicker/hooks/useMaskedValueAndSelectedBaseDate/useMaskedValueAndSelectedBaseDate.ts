@@ -1,19 +1,18 @@
-import { ChangeEvent, SyntheticEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 import { useMaskedValue } from '../useMaskedValue';
 import { useSelectedBaseDate } from '../useSelectedBaseDate';
-import { CloseEventReason } from '../../../types';
 import { MinMaxDate, PickerProps } from '../../types';
 
 type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   mask: string;
   onChange?: (date?: Date) => void;
   currentValue?: Date;
-  closePopper: (
-    event?: SyntheticEvent<Element, Event> | Event,
-    reason?: CloseEventReason,
-  ) => void;
   baseDate: Date;
+  /**
+   * @description колбэк на выбор даты в пикере
+   */
+  onDatePick: () => void;
 };
 
 type UseMaskedValueAndSelectedBaseDateReturn = {
@@ -43,10 +42,10 @@ export const useMaskedValueAndSelectedBaseDate = ({
   onChange,
   mask,
   currentValue,
-  closePopper,
   minDate,
   maxDate,
   baseDate,
+  onDatePick,
 }: UseMaskedValueAndSelectedBaseDateOptions): UseMaskedValueAndSelectedBaseDateReturn => {
   const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
     useMaskedValue({
@@ -60,9 +59,9 @@ export const useMaskedValueAndSelectedBaseDate = ({
     maxDate,
   });
 
-  const handleDayPick = (date: Date) => {
+  const handleDatePick = (date: Date) => {
     onChangeMaskedDate(date);
-    closePopper(undefined, 'selectOption');
+    onDatePick();
   };
 
   const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +75,7 @@ export const useMaskedValueAndSelectedBaseDate = ({
     },
     pickerProps: {
       selectedDate: selectedBaseDate,
-      onChange: handleDayPick,
+      onChange: handleDatePick,
       date: selectedBaseDate || baseDate,
     },
   };

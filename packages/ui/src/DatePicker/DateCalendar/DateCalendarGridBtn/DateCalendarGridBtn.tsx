@@ -18,6 +18,10 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    * @description флаг означающий, что дата находится в выбранном диапазоне
    */
   isInSelectedRange?: boolean;
+  /**
+   * @description количество элементов в строке, требуется для стилизации
+   */
+  lengthInRow: number;
   children: ReactNode;
 };
 
