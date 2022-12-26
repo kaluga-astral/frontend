@@ -1,7 +1,7 @@
 import { SyntheticEvent, forwardRef, useRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { usePopperHooks } from '../hooks';
+import { useInputPopperHooks } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
@@ -51,6 +51,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       onChange,
       onOpen,
       onClose,
+      onBlur,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       inputProps,
@@ -65,10 +66,11 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useRef<HTMLDivElement>(null);
 
-    const { isOpenPopper, openPopper, closePopper } = usePopperHooks({
+    const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
       ref,
       onOpen,
       onClose,
+      onBlur,
     });
     const handleDayPick = () => closePopper(undefined, 'selectOption');
     const { inputProps: calculatedInputProps, pickerProps } =
@@ -90,7 +92,8 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           mask={mask}
           disabled={disabled}
           ref={forwardedRef}
-          onFocus={openPopper}
+          onFocus={handleActivate}
+          onClick={handleActivate}
         />
         <DatePickerPopper open={isOpenPopper} anchorEl={ref?.current}>
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>

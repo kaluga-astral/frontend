@@ -41,7 +41,6 @@ export const DatePickerInput = forwardRef<
     <DatePickerInputWrapper
       {...props}
       ref={ref}
-      onClick={onClick}
       mask={normalizedMask}
       blocks={maskBlocks}
       autofix={false}
@@ -56,6 +55,7 @@ export const DatePickerInput = forwardRef<
       }}
       inputProps={{
         ref,
+        onClick,
       }}
     />
   );

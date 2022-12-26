@@ -6,7 +6,7 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useForwardedRef, usePopperHooks } from '../hooks';
+import { useForwardedRef, useInputPopperHooks } from '../hooks';
 import { useBaseDateInRange } from '../DatePicker/hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
@@ -39,6 +39,10 @@ export type DateRangePickerProps = Omit<
    * @default 2
    */
   spacing?: GridProps['spacing'];
+  /**
+   * @description общий обработчик для обоих инпутов, вызовется только если фокус сработает вне общего дива
+   */
+  onBlur?: () => void;
 };
 
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
@@ -48,6 +52,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       itemB = {},
       onOpen,
       onClose,
+      onBlur,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       disabled,
@@ -59,10 +64,11 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   ) => {
     const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useForwardedRef(forwardedRef);
-    const { isOpenPopper, openPopper, closePopper } = usePopperHooks({
+    const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
       ref,
       onOpen,
       onClose,
+      onBlur,
     });
 
     const handleDayPick = () => {
@@ -98,14 +104,16 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           mask={mask}
           {...optionsA.inputProps}
           disabled={disabled}
-          onFocus={openPopper}
+          onFocus={handleActivate}
+          onClick={handleActivate}
         />
         <DatePickerInput
           {...itemB.inputProps}
           mask={mask}
           {...optionsB.inputProps}
           disabled={disabled}
-          onFocus={openPopper}
+          onFocus={handleActivate}
+          onClick={handleActivate}
         />
         <DatePickerPopper
           open={isOpenPopper}

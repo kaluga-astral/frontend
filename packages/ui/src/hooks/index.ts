@@ -14,4 +14,4 @@ export * from './useClickAwayEffect';
 
 export * from './useFocusAwayEffect';
 
-export * from './usePopperHooks';
+export * from './useInputPopperHooks';
