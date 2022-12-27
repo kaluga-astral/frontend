@@ -10,7 +10,7 @@ module.exports = {
           { type: 'build', release: 'patch' },
           { type: 'feat', release: 'minor' },
           { type: 'refactor', release: 'patch' },
-          { type: 'next', release: 'major' },
+          { type: 'major', release: 'major' },
         ],
       },
     ],

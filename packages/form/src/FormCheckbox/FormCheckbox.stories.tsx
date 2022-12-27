@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 
 import { FormStoryContainer } from '../docs';
-import { SubmitButton } from '../SubmitButton';
+import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
 import { FormCheckbox, FormCheckboxValue } from './FormCheckbox';
@@ -24,7 +24,7 @@ const Template: Story = () => {
         title="Form checkbox field"
         rules={{ required: 'Must be checked' }}
       />
-      <SubmitButton>Submit</SubmitButton>
+      <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
 };

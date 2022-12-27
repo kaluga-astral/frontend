@@ -2,11 +2,11 @@ import { Story } from '@storybook/react';
 
 import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
-import { SubmitButton } from '../SubmitButton';
+import { FormSubmitButton } from '../FormSubmitButton';
 import { FormStoryContainer } from '../docs';
 
 export default {
-  title: 'Form/SubmitButton',
+  title: 'Form/FormSubmitButton',
   component: null,
 };
 
@@ -24,7 +24,7 @@ const Template: Story = () => {
         name="name"
         rules={{ required: 'Обязательное поле' }}
       />
-      <SubmitButton>Submit</SubmitButton>
+      <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
 };
