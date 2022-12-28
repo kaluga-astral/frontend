@@ -1,7 +1,7 @@
 name: Pull request title lint
 on:
   pull_request:
-    branches: [main]
+    branches: [main, next]
     types: [opened, edited, reopened, synchronize]
 
 jobs:
@@ -17,4 +17,4 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Lint title
-        run: node commander/index.js lintPRTitle --title='${{ github.event.pull_request.title }}'
+        run: node PRLinter/index.js --title='${{ github.event.pull_request.title }}'

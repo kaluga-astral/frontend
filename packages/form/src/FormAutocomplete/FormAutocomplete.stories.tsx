@@ -2,7 +2,7 @@ import { Story } from '@storybook/react';
 
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
-import { SubmitButton } from '../SubmitButton';
+import { FormSubmitButton } from '../FormSubmitButton';
 
 import { FormAutocomplete } from './FormAutocomplete';
 
@@ -57,7 +57,7 @@ const Template: Story = () => {
         getOptionLabel={(params) => params.title}
         rules={{ required: 'Обязательное поле' }}
       />
-      <SubmitButton>Submit</SubmitButton>
+      <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
 };

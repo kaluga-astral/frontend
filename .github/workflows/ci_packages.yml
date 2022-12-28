@@ -2,8 +2,7 @@ name: CI for packages
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main, next]
 
 jobs:
   lint:
@@ -90,96 +89,19 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: Set test package version
-        id: test-package-version
-        run: echo "PACKAGE_VERSION=1.0.0-test.$(date +%s)" >> $GITHUB_OUTPUT
-
-      # Build всех пакетов
-      - name: Build @astral/ui
-        run: npm run build --workspace=@astral/ui
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/icons
-        run: npm run build --workspace=@astral/icons
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/fonts
-        run: npm run build --workspace=@astral/fonts
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/illustrations
-        run: npm run build --workspace=@astral/illustrations
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/validations
-        run: npm run build --workspace=@astral/validations
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      - name: Build @astral/form
-        run: npm run build --workspace=@astral/form
-        env:
-          RELEASE_TAG: ${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-
-      # Паблишинг всех пакетов
-      - name: Publish @astral/ui
-        run: npm publish ./packages/ui/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/icons
-        run: npm publish ./packages/icons/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/fonts
-        run: npm publish ./packages/fonts/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/illustrations
-        run: npm publish ./packages/illustrations/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/validations
-        run: npm publish ./packages/validations/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
-      - name: Publish @astral/form
-        run: npm publish ./packages/form/lib --tag test
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-
       # В example устанавливаются пакеты с тестовыми версиями
       - name: Install deps for example project
         working-directory: ./example
-        run: |
-          npm i &&
-          npm i --save @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &&
-          npm i --save @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
+        run: npm i
 
-      - name: Check packages errors (lint:types + build:dev)
+      - name: Prepare packages
         working-directory: ./example
-        run: npm run lint:types & npm run build:dev
+        run: npm run prepare-packages
 
-      - name: Unpublish tests packages
-        if: always()
-        run: |
-          npm unpublish @astral/illustrations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/ui@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/form@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/icons@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/validations@${{ steps.test-package-version.outputs.PACKAGE_VERSION }} &
-          npm unpublish @astral/fonts@${{ steps.test-package-version.outputs.PACKAGE_VERSION }}
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Check example types
+        working-directory: ./example
+        run: npm run lint:types
+
+      - name: Check example build
+        working-directory: ./example
+        run: npm run build:dev

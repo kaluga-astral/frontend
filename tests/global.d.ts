@@ -1,5 +1,5 @@
-/// <reference types="../packages/ui/src/declaration/emotion" />
-/// <reference types="../packages/ui/src/declaration/mui-material" />
+/// <reference types="../packages/components/src/declaration/emotion" />
+/// <reference types="../packages/components/src/declaration/mui-material" />
 /// <reference types="@emotion/react/types/css-prop" />
 
 declare module '*.svg' {

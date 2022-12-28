@@ -6,7 +6,7 @@ export {
   SearchOutlineMd,
   BlockOutlineMd,
   CheckOutlineMd,
-} from '@astral/icons';
+} from '@astral/ui';
 
 export { default as ArrowIcon } from 'icons/arrow-icon.svg?component';
 

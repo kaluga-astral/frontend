@@ -1,6 +1,6 @@
 // emotion-theming нужен для: https://github.com/storybookjs/storybook/issues/10231#issuecomment-613394048
 
-import { ThemeProvider } from '../packages/ui/src'
+import { ThemeProvider } from '../packages/components/src'
 import { getTheme, themes } from './themes'
 
 export const parameters = {

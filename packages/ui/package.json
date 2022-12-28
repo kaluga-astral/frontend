@@ -3,14 +3,28 @@
   "version": "1.0.0",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server/index.ts",
+    "./fonts/*": "./fonts/*",
+    "./illustrations/*": "./illustrations/*"
+  },
+  "typesVersions": {
+    "*": {
+      "server": [
+        "src/server/index.ts"
+      ],
+      "declarations": [
+        "src/declarations.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "dev": "tsc --watch",
-    "prebuild": "npx rimraf ./lib",
-    "build": "commander build",
+    "build": "node pack",
     "publish": "npm publish ./lib",
-    "postbuild": "copyfiles -u 1 src/declaration/*.ts lib",
-    "tests": "vitest run",
-    "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",
+    "tests": "vitest run --passWithNoTests",
+    "tests:ci": "vitest run --passWithNoTests --reporter=junit --outputFile.junit=junit.xml",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
@@ -19,24 +33,13 @@
   },
   "dependencies": {
     "@astral/icons": "*",
-    "@emotion/cache": "11.7.1",
-    "@emotion/react": "11.9.0",
-    "@emotion/server": "11.4.0",
-    "@emotion/styled": "11.8.1",
-    "@mui/base": "^5.0.0-alpha.104",
-    "@mui/lab": "^5.0.0-alpha.106",
-    "@mui/material": "^5.10.12",
-    "dayjs": "^1.11.5",
-    "lodash-es": "^4.17.21",
-    "react-imask": "^6.4.2",
-    "react-toastify": "9.0.3",
-    "react-use": "^17.4.0"
+    "@astral/components": "*",
+    "@astral/form": "*"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5",
     "@astral/tests": "*"
   }
 }

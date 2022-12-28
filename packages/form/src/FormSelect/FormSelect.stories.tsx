@@ -1,8 +1,8 @@
 import { Story } from '@storybook/react';
-import { Checkbox, ListItemIcon, MenuItem } from '@astral/ui';
+import { Checkbox, ListItemIcon, MenuItem } from '@astral/components';
 
 import { FormStoryContainer } from '../docs';
-import { SubmitButton } from '../SubmitButton';
+import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
 import { FormSelect } from './FormSelect';
@@ -92,7 +92,7 @@ const Template: Story = () => {
       >
         {renderSingleOptions()}
       </FormSelect>
-      <SubmitButton>Submit</SubmitButton>
+      <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
 };

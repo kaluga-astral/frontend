@@ -13,6 +13,7 @@ Semantic-release определяет новую версию пакета по 
 - doc - релиз произведен не будет
 - build - релиз patch версии пакетов
 - chore - релиз произведен не будет
+- major - будет произведен релиз major версии
 
 ## Релизы основных версий пакетов
 
@@ -168,7 +169,7 @@ describe('Autocomplete', () => {
   it('Закрывается popover после выбора значения', () => {});
 });
 
-describe('SubmitButton', () => {
+describe('FormSubmitButton', () => {
   it('Form-submitting: отображается лоадер', () => {});
 });
 ```

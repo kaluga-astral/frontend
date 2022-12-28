@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": ["@astral/eslint-config-node"]
+}
