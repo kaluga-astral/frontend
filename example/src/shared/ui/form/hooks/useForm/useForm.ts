@@ -1,15 +1,15 @@
 import {
-  FieldValues,
+  FormFieldValues,
   UseFormProps as UseAstralFormProps,
   UseFormReturn,
   useForm as useAstralForm,
-} from '@astral/form';
+} from '@astral/ui';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { validationService } from '../../../../services';
 
 export type UseFormProps<
-  TFieldValues extends FieldValues = FieldValues,
+  TFieldValues extends FormFieldValues = FormFieldValues,
   // eslint-disable-next-line
   TContext = any,
 > = Omit<UseAstralFormProps<TFieldValues, TContext>, 'resolver'> & {
@@ -18,7 +18,7 @@ export type UseFormProps<
 };
 
 export const useForm = <
-  TFieldValues extends FieldValues = FieldValues,
+  TFieldValues extends FormFieldValues = FormFieldValues,
   // eslint-disable-next-line
   TContext = any,
 >({

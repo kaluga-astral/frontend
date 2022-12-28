@@ -1,9 +1,9 @@
 import { Story } from '@storybook/react';
-import { Grid } from '@astral/ui';
+import { Grid } from '@astral/components';
 
 import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
-import { SubmitButton } from '../SubmitButton';
+import { FormSubmitButton } from '../FormSubmitButton';
 
 import { Form } from './Form';
 
@@ -34,7 +34,7 @@ const Template: Story = () => {
           name="name"
           rules={{ required: 'Обязательное поле' }}
         />
-        <SubmitButton>Submit</SubmitButton>
+        <FormSubmitButton>Submit</FormSubmitButton>
       </Grid>
     </Form>
   );

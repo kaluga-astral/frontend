@@ -1,9 +1,9 @@
-import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/ui';
+import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/components';
 import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
 import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 
-import { useFieldErrorProps } from '../hooks';
+import { useFormFieldErrorProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 const MOBILE_PHONE_MASK = '+{7} (000) 00-00-000';
@@ -43,7 +43,7 @@ export function FormMobilePhoneField<FieldValues extends object>({
   }, [rules]);
 
   const { field, fieldState } = useController({ ...props, rules: customRules });
-  const errorProps = useFieldErrorProps(fieldState);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
   const ref = useForwardedRef(field.ref);
 

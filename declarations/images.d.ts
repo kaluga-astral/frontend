@@ -1,22 +1,22 @@
-declare module "*.svg" {
+declare module '*.svg' {
   const image: string;
 
   export default image;
 }
 
-declare module "*.png" {
+declare module '*.png' {
   const image: string;
 
   export default image;
 }
 
-declare module "*.jpg" {
+declare module '*.jpg' {
   const image: string;
 
   export default image;
 }
 
-declare module "*.webp" {
+declare module '*.webp' {
   const image: string;
 
   export default image;

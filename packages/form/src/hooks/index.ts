@@ -1,4 +1,4 @@
-export * from './useFieldError';
+export * from './useFormFieldErrorProps';
 
 export * from './useForm';
 
