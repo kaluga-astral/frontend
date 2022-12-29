@@ -4,7 +4,7 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "build": "RELEASE_TAG=1.0.0 node pack",
+    "build": "node pack",
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
