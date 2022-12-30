@@ -57,8 +57,8 @@ export const themes = [
     theme: createTheme({ brand: Brand.OFD, fontsUrls })
   },
   {
-    name: 'Astral.M4D',
-    theme: createTheme({ brand: Brand.M4D, fontsUrls })
+    name: 'Astral.POA',
+    theme: createTheme({ brand: Brand.POA, fontsUrls })
   },
   {
     name: 'Astral.RSS',

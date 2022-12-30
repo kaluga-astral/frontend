@@ -6,7 +6,7 @@ export enum Brand {
   OFD = 'OFD',
   SIGN = 'SIGN',
   LKP = 'LKP',
-  M4D = 'M4D',
+  POA = 'POA',
   RSS = 'RSS',
 }
 

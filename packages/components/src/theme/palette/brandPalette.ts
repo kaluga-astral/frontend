@@ -104,7 +104,7 @@ const lkpPalette: BrandColors = {
   100: '#E3F8F2',
 };
 
-const m4dPalette: BrandColors = {
+const poaPalette: BrandColors = {
   secondary: '#5ED7CF',
   900: '#0BA399',
   800: '#33B3AA',
@@ -138,6 +138,6 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.OFD]: ofdPalette,
   [Brand.SIGN]: signPalette,
   [Brand.LKP]: lkpPalette,
-  [Brand.M4D]: m4dPalette,
+  [Brand.POA]: poaPalette,
   [Brand.RSS]: rssPalette,
 };
