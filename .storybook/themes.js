@@ -56,6 +56,14 @@ export const themes = [
     name: 'Astral.ofd',
     theme: createTheme({ brand: Brand.OFD, fontsUrls })
   },
+  {
+    name: 'Astral.M4D',
+    theme: createTheme({ brand: Brand.M4D, fontsUrls })
+  },
+  {
+    name: 'Astral.RSS',
+    theme: createTheme({ brand: Brand.RSS, fontsUrls })
+  },
 ];
 
 export const getTheme = (name) => {
