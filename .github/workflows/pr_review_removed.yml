@@ -2,10 +2,9 @@ name: pull request review removed notification
 on:
   pull_request:
     types: [review_request_removed]
-    branches:
-    - main
+    branches: [main, next]
 
-jobs: 
+jobs:
   is-designer:
     name: is-designer
     uses: ./.github/workflows/is_team_member.yml
@@ -24,6 +23,6 @@ jobs:
         if: needs.is-designer.outputs.result == 'true'
         with:
           labels: design-review
-    
 
-   
+
+

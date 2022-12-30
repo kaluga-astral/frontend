@@ -1,9 +1,9 @@
-import { Autocomplete, AutocompleteProps } from '@astral/ui';
+import { Autocomplete, AutocompleteProps } from '@astral/components';
 import { useController } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
 
 import { WithFormFieldProps } from '../types';
-import { useFieldErrorProps } from '../hooks';
+import { useFormFieldErrorProps } from '../hooks';
 
 export type FormAutocompleteProps<
   FieldValues extends object,
@@ -36,7 +36,7 @@ export const FormAutocomplete = <
 ) => {
   const { field, fieldState } = useController(props);
 
-  const errorProps = useFieldErrorProps(fieldState);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,

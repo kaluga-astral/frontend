@@ -1,7 +1,7 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Grid } from '../ui/src/Grid';
+import { Grid } from '../components/src/Grid';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions

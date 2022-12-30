@@ -35,3 +35,7 @@ export * from './isMaybeNumber';
 export * from './isDate';
 
 export * from './isSNILS';
+
+export * from './composeSome';
+
+export * from './isEmail';

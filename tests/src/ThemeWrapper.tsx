@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { ThemeProvider } from '../../packages/ui/src';
+import { ThemeProvider } from '../../packages/components/src';
 
 import { theme } from './theme';
 

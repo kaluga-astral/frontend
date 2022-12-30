@@ -1,21 +1,17 @@
 {
   "name": "@astral/commander",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "bin": "./index.js",
+  "main": "./src/index.js",
   "scripts": {
     "lint": "eslint ./ --fix --quiet",
-    "tests": "jest --silent"
+    "tests": "vitest run"
   },
   "dependencies": {
     "recursive-copy": "^2.0.10",
-    "yargs": "^17.5.1",
-    "shelljs": "^0.8.4",
-    "@commitlint/lint": "^17.0.3",
-    "@commitlint/load": "^17.0.3"
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
-    "typescript": "^4.5.5",
     "@astral/eslint-config-node": "^1.0.2"
   }
 }

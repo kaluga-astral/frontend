@@ -2,8 +2,7 @@ name: pull request opened notification
 on:
   pull_request:
     types: [opened, reopened]
-    branches:
-    - main
+    branches: [main, next]
 
 jobs:
 #   add_labels:
