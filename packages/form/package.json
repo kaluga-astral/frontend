@@ -13,7 +13,7 @@
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "react-hook-form": "^7.35.0",
+    "react-hook-form": "^7.41.5",
     "@astral/components": "^1.0.0",
     "@astral/validations": "^1.0.0"
   },

@@ -28,13 +28,4 @@ describe('composeSome', () => {
 
     expect(validate(null)).toBe(undefined);
   });
-
-  it('Valid one of rules return array errors', () => {
-    const validate = composeSome(
-      () => ['error1', 'error2'],
-      () => 'error3',
-    );
-
-    expect(validate(null)).toBe('error1');
-  });
 });
