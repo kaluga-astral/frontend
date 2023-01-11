@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { ReactElement, forwardRef, useMemo } from 'react';
 
 import { NavMenu, NavMenuProps } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
@@ -8,6 +8,10 @@ import { SidebarNav } from './SidebarNav';
 import { SidebarToggler } from './SidebarToggler';
 
 export type SidebarProps = {
+  /**
+   * Кнопка главного действия в сайдбаре
+   */
+  sidebarButton?: ReactElement;
   /**
    * Ключ по которому осуществляется персист состояния collapsedIn в localStorage
    */
@@ -25,8 +29,11 @@ export type SidebarProps = {
 
 export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
-    const { menu, localStorageKey = '@astral/ui::Sidebar::collapsedIn' } =
-      props;
+    const {
+      menu,
+      localStorageKey = '@astral/ui::Sidebar::collapsedIn',
+      sidebarButton,
+    } = props;
     const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
       localStorageKey,
       true,
@@ -38,8 +45,17 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       });
     };
 
+    const renderSidebarButton = useMemo(() => {
+      if (sidebarButton) {
+        return React.cloneElement(sidebarButton, { collapsedIn });
+      }
+
+      return null;
+    }, [sidebarButton, collapsedIn]);
+
     return (
       <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
+        {renderSidebarButton}
         <SidebarNav
           menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
         />
