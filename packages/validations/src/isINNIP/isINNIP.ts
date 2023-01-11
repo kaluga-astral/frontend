@@ -1,7 +1,7 @@
 import { createRule } from '../createRule';
 import { isEmptyString } from '../utils';
 
-export const IS_INNIP_DEFAULT_MESSAGE = 'Некорректный ИНН ЮЛ';
+export const IS_INNIP_DEFAULT_MESSAGE = 'Некорректный ИНН ИП';
 
 const INNIP_LENGTH = 12;
 

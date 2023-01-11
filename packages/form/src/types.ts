@@ -8,3 +8,5 @@ export type WithFormFieldProps<
   Props extends object,
   FieldValues extends object,
 > = Omit<Props, 'name' | 'error'> & UseControllerProps<FieldValues>;
+
+export { FieldValues } from 'react-hook-form';
