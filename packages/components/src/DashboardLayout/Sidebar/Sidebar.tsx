@@ -10,7 +10,8 @@ import { SidebarToggler } from './SidebarToggler';
 
 export type SidebarProps = {
   /**
-   * Кнопка главного действия в сайдбаре
+   * Пропс длея передачи контента в заголовок сайдбара
+   * @example <Sidebar header={<SidebarButton />>} >
    */
   header?: ReactNode;
   /**
