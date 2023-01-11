@@ -1,8 +1,9 @@
-import React, { ReactElement, forwardRef, useMemo } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 import { NavMenu, NavMenuProps } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
 
+import { SidebarProvider } from './SidebarProvider';
 import { SidebarRoot } from './styles';
 import { SidebarNav } from './SidebarNav';
 import { SidebarToggler } from './SidebarToggler';
@@ -11,7 +12,7 @@ export type SidebarProps = {
   /**
    * Кнопка главного действия в сайдбаре
    */
-  sidebarButton?: ReactElement;
+  header?: ReactNode;
   /**
    * Ключ по которому осуществляется персист состояния collapsedIn в localStorage
    */
@@ -32,7 +33,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
     const {
       menu,
       localStorageKey = '@astral/ui::Sidebar::collapsedIn',
-      sidebarButton,
+      header,
     } = props;
     const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
       localStorageKey,
@@ -45,25 +46,19 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       });
     };
 
-    const renderSidebarButton = useMemo(() => {
-      if (sidebarButton) {
-        return React.cloneElement(sidebarButton, { collapsedIn });
-      }
-
-      return null;
-    }, [sidebarButton, collapsedIn]);
-
     return (
-      <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
-        {renderSidebarButton}
-        <SidebarNav
-          menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
-        />
-        <SidebarToggler
-          collapsedIn={collapsedIn}
-          onToggle={handleTogglerChange}
-        />
-      </SidebarRoot>
+      <SidebarProvider collapsedIn={collapsedIn}>
+        <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
+          {header}
+          <SidebarNav
+            menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
+          />
+          <SidebarToggler
+            collapsedIn={collapsedIn}
+            onToggle={handleTogglerChange}
+          />
+        </SidebarRoot>
+      </SidebarProvider>
     );
   },
 );

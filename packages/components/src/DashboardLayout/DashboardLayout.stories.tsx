@@ -128,7 +128,7 @@ EDO.args = {
     },
   },
   sidebar: {
-    sidebarButton: (
+    header: (
       <SidebarButton startIcon={<AddOutlineMd />}>
         Добавить документ
       </SidebarButton>
