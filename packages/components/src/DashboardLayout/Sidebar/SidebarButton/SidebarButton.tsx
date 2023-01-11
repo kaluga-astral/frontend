@@ -10,19 +10,19 @@ import { Button } from './styles';
 export const SidebarButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const { children } = props;
-    const { collapsedIn } = useContext(SidebarContext);
+    const { isOpen } = useContext(SidebarContext);
 
     return (
       <Tooltip
         arrow
         title={children}
         placement="right"
-        disableFocusListener={collapsedIn}
-        disableHoverListener={collapsedIn}
-        disableTouchListener={collapsedIn}
+        disableFocusListener={isOpen}
+        disableHoverListener={isOpen}
+        disableTouchListener={isOpen}
       >
-        <Button ref={ref} collapsedIn={collapsedIn} {...props}>
-          <Collapse orientation="horizontal" in={collapsedIn}>
+        <Button ref={ref} isOpen={isOpen} {...props}>
+          <Collapse orientation="horizontal" in={isOpen}>
             {children}
           </Collapse>
         </Button>

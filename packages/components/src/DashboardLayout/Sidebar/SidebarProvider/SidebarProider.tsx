@@ -1,7 +1,7 @@
 import { ReactNode, createContext } from 'react';
 
 export type SidebarContextProps = {
-  collapsedIn: boolean;
+  isOpen?: boolean;
 };
 
 export type SidebarProviderProps = Partial<SidebarContextProps> & {
@@ -9,15 +9,12 @@ export type SidebarProviderProps = Partial<SidebarContextProps> & {
 };
 
 export const SidebarContext = createContext<SidebarContextProps>({
-  collapsedIn: false,
+  isOpen: false,
 });
 
-export const SidebarProvider = ({
-  children,
-  collapsedIn = true,
-}: SidebarProviderProps) => {
+export const SidebarProvider = ({ children, isOpen }: SidebarProviderProps) => {
   return (
-    <SidebarContext.Provider value={{ collapsedIn }}>
+    <SidebarContext.Provider value={{ isOpen }}>
       {children}
     </SidebarContext.Provider>
   );

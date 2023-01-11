@@ -5,12 +5,12 @@ import {
 import { styled } from '../../../styles';
 
 type ButtonProps = UIKitButtonProps & {
-  collapsedIn?: boolean;
+  isOpen?: boolean;
 };
 
 export const Button = styled(UIKitButton)<ButtonProps>`
-  min-width: ${({ collapsedIn }) => (!collapsedIn ? '40px' : '100%')};
-  max-width: ${({ collapsedIn }) => (!collapsedIn ? '40px' : '100%')};
+  min-width: ${({ isOpen }) => (!isOpen ? '40px' : '100%')};
+  max-width: ${({ isOpen }) => (!isOpen ? '40px' : '100%')};
   height: 40px;
   max-height: 40px;
   margin-bottom: ${({ theme }) => theme.spacing(1)};
@@ -24,9 +24,9 @@ export const Button = styled(UIKitButton)<ButtonProps>`
     }) ;
   }};
 
-  .MuiButton-startIcon {
-    margin-right: ${({ theme, collapsedIn }) =>
-      !collapsedIn ? theme.spacing(-2) : theme.spacing(0)} !important;
+  && > .MuiButton-startIcon {
+    margin-right: ${({ theme, isOpen }) =>
+      !isOpen ? theme.spacing(-2) : theme.spacing(0)};
 
     transition: ${({ theme }) => {
       return theme.transitions.create('margin-right', {
@@ -35,9 +35,9 @@ export const Button = styled(UIKitButton)<ButtonProps>`
     }};
   }
 
-  .MuiButton-endIcon {
-    margin-right: ${({ theme, collapsedIn }) =>
-      !collapsedIn ? theme.spacing(2) : theme.spacing(0)} !important;
+  && > .MuiButton-endIcon {
+    margin-right: ${({ theme, isOpen }) =>
+      !isOpen ? theme.spacing(2) : theme.spacing(0)};
 
     transition: ${({ theme }) => {
       return theme.transitions.create('margin-right', {

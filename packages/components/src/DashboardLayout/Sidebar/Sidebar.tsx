@@ -47,7 +47,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
     };
 
     return (
-      <SidebarProvider collapsedIn={collapsedIn}>
+      <SidebarProvider isOpen={collapsedIn}>
         <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
           {header}
           <SidebarNav
