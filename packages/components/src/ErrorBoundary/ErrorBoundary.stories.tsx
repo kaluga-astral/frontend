@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
+import { Button } from '../Button';
 import { ConfigProvider } from '../ConfigProvider';
 
 import { ErrorBoundary } from './ErrorBoundary';
@@ -18,16 +19,16 @@ function BuggyButton() {
 
   useEffect(() => {
     if (count === 2) {
-      throw new Error('I crashed!');
+      throw new Error('Кнопка сломалась на 2 клике');
     }
   });
 
-  return <button onClick={onClick}>Click Me</button>;
+  return <Button onClick={onClick}>Сломаюсь на 2 клике</Button>;
 }
 
 const Template: Story = () => {
   return (
-    <ConfigProvider captureException={() => alert('my custom exception')}>
+    <ConfigProvider captureException={(error) => alert(error)}>
       <ErrorBoundary>
         <BuggyButton />
       </ErrorBoundary>
