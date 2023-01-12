@@ -1,36 +1,93 @@
-import { toast } from 'react-toastify';
+import {
+  Id,
+  ToastContent,
+  ToastOptions,
+  UpdateOptions,
+  toast,
+} from 'react-toastify';
 
 import { NotificationProps, Variant } from './types';
-import { NOTIFICATION_VARIANT } from './constants';
+import { NOTIFICATION_VARIANT, NotificationVariantTypes } from './constants';
+import { getClassNameModifierByVariant } from './utils';
 
-interface NotificationOptions extends Omit<NotificationProps, 'title'> {}
+type NotificationOptions = Omit<NotificationProps, 'title'>;
 
 export type Notify = (
-  title: string,
+  title: NotificationProps['title'],
   options?: NotificationOptions,
 ) => number | string;
 
-export const notify: Record<Variant, Notify> = {
-  info: (title, options) =>
+type Controllable = {
+  /**
+   * @description метод создания полностью кастомной нотификации
+   */
+  custom: (content: ToastContent, options?: ToastOptions) => Id;
+  /**
+   * @description force метод для закрытия всех нотификаций, либо конкретной по айдишке
+   */
+  close: (id?: Id) => void;
+  /**
+   * @description метод обновления конкретной нотификации,
+   * пригодится когда имеется контролируемый прогресс бар
+   */
+  update: (id: Id, options?: UpdateOptions) => void;
+  /**
+   * @description метод закрывающий нотификацию с контролируемым прогресс баром
+   */
+  done: (id: Id) => void;
+};
+
+export const notify: Record<Variant, Notify> & Controllable = {
+  success: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
-        NOTIFICATION_VARIANT.info({ ...options, title }, toastProps),
-      options,
+        NOTIFICATION_VARIANT.success({ ...options, icon, title }, toastProps),
+      {
+        className: getClassNameModifierByVariant(
+          NotificationVariantTypes.success,
+          options.hideProgressBar,
+        ),
+        ...options,
+      },
     ),
-  success: (title, options) =>
+  info: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
-        NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
-      options,
+        NOTIFICATION_VARIANT.info({ ...options, icon, title }, toastProps),
+      {
+        className: getClassNameModifierByVariant(
+          NotificationVariantTypes.info,
+          options.hideProgressBar,
+        ),
+        ...options,
+      },
     ),
-  warning: (title, options) =>
-    toast(({ toastProps }) =>
-      NOTIFICATION_VARIANT.warning({ ...options, title }, toastProps),
-    ),
-  error: (title, options) =>
+  warning: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
-        NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
-      options,
+        NOTIFICATION_VARIANT.warning({ ...options, icon, title }, toastProps),
+      {
+        className: getClassNameModifierByVariant(
+          NotificationVariantTypes.warning,
+          options.hideProgressBar,
+        ),
+        ...options,
+      },
     ),
+  error: (title, { icon, ...options } = {}) =>
+    toast(
+      ({ toastProps }) =>
+        NOTIFICATION_VARIANT.error({ ...options, icon, title }, toastProps),
+      {
+        className: getClassNameModifierByVariant(
+          NotificationVariantTypes.error,
+          options.hideProgressBar,
+        ),
+        ...options,
+      },
+    ),
+  custom: toast,
+  close: toast.dismiss,
+  update: toast.update,
+  done: toast.done,
 };

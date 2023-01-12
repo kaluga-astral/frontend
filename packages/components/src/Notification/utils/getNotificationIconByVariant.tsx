@@ -1,11 +1,11 @@
-import { DEFAULT_NOTIFICATION_PROPS } from '../../constants';
+import { DEFAULT_NOTIFICATION_PROPS } from '../constants';
 import {
   ErrorNotificationIcon,
   InfoNotificationIcon,
   SuccessNotificationIcon,
   WarningNotificationIcon,
-} from '../../styled';
-import { Variant } from '../../types';
+} from '../styles';
+import { Variant } from '../types';
 
 export const getNotificationIconByVariant = (
   variant: Variant,
