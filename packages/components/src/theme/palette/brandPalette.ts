@@ -105,29 +105,29 @@ const lkpPalette: BrandColors = {
 };
 
 const poaPalette: BrandColors = {
-  secondary: '#5ED7CF',
-  900: '#0BA399',
-  800: '#33B3AA',
-  700: '#4DBCB5',
-  600: '#66C6BF',
-  500: '#80CFCA',
-  400: '#99D9D4',
-  300: '#B3E2DF',
-  200: '#CCECEA',
-  100: '#E6F5F4',
+  secondary: '#2BCCFF',
+  900: '#0A9DEF',
+  800: '#33ADF2',
+  700: '#4DB8F4',
+  600: '#66C2F5',
+  500: '#80CCF8',
+  400: '#99D6F9',
+  300: '#B3E1FB',
+  200: '#CCEBFC',
+  100: '#E6F5FE',
 };
 
 const rssPalette: BrandColors = {
-  secondary: '#FF5EA2',
-  900: '#F54772',
-  800: '#FF5B83',
-  700: '#FF6F92',
-  600: '#FF84A2',
-  500: '#FF98B1',
-  400: '#FFADC1',
-  300: '#FFC1D0',
-  200: '#FFD6E0',
-  100: '#FFEAEF',
+  secondary: '#8B45D1',
+  900: '#541B8D',
+  800: '#663499',
+  700: '#7A4EA6',
+  600: '#8D67B2',
+  500: '#A080C0',
+  400: '#B399CC',
+  300: '#C6B3D9',
+  200: '#D9CCE5',
+  100: '#ECE6F3',
 };
 
 export const brandPalette: Record<Brand, BrandColors> = {
