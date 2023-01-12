@@ -13,7 +13,6 @@ import {
 import {
   NotificationCloseButton,
   NotificationCloseIcon,
-  NotificationContent,
   NotificationFooter,
   NotificationHeader,
   NotificationIcon,
@@ -85,7 +84,7 @@ export const NotificationTemplate = ({
             </NotificationCloseButton>
           )}
         </NotificationHeader>
-        {content && <NotificationContent>{content}</NotificationContent>}
+        {content && <div>{content}</div>}
         {actions && (
           <NotificationFooter actionsDirection={actionsDirection}>
             {actions}

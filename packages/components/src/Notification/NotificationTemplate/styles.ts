@@ -41,8 +41,6 @@ export const NotificationInner = styled.div`
   }
 `;
 
-export const NotificationContent = styled.div``;
-
 export const NotificationFooter = styled.footer<NotificationActionsProps>`
   display: flex;
   justify-content: ${({ actionsDirection }) =>
@@ -83,5 +81,6 @@ export const NotificationCloseButton = styled(IconButton, {
 
 export const NotificationTitle = styled(Typography)`
   flex: 1;
+
   font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
 `;
