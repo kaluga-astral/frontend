@@ -1,16 +1,12 @@
 import React, { ReactNode } from 'react';
 
 import { Button } from '../Button';
+import { ConfigContext } from '../ConfigProvider';
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 
 type Props = {
   children: ReactNode;
-  /*
-   * Callback для отправки ошибки в Sentry
-   */
-  // eslint-disable-next-line
-  captureException: (error: any) => void;
 };
 
 type State = {
@@ -18,6 +14,10 @@ type State = {
 };
 
 class ErrorBoundary extends React.Component<Props, State> {
+  static contextType = ConfigContext;
+
+  context!: React.ContextType<typeof ConfigContext>;
+
   public state: State = {
     error: false,
   };
@@ -27,7 +27,9 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error) {
-    this.props.captureException(error);
+    const context = this.context;
+
+    context.captureException(error);
   }
 
   handleReloadPage() {
@@ -52,4 +54,4 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 }
 
-export default ErrorBoundary;
+export { ErrorBoundary };
