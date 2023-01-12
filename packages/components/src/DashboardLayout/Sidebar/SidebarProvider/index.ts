@@ -1,1 +1,1 @@
-export * from './SidebarProider';
+export * from './SidebarProvider';

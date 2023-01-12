@@ -5,7 +5,7 @@ import { Collapse } from '../../../Collapse';
 import { Tooltip } from '../../../Tooltip';
 import { SidebarContext } from '../SidebarProvider';
 
-import { Button } from './styles';
+import { SidebarButton as Button } from './styles';
 
 export const SidebarButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {

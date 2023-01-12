@@ -8,7 +8,7 @@ type ButtonProps = UIKitButtonProps & {
   isOpen?: boolean;
 };
 
-export const Button = styled(UIKitButton)<ButtonProps>`
+export const SidebarButton = styled(UIKitButton)<ButtonProps>`
   min-width: ${({ isOpen }) => (!isOpen ? '40px' : '100%')};
   max-width: ${({ isOpen }) => (!isOpen ? '40px' : '100%')};
   height: 40px;
