@@ -2,6 +2,7 @@ import { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 
 import { Button } from '../Button';
+import { CircularProgress } from '../CircularProgress';
 
 import { notify } from './Notification';
 import { NotificationContainer } from './NotificationContainer';
@@ -49,9 +50,11 @@ const Template: Story = () => {
   };
 
   const handleWithoutCloseButton = () => {
-    notify.success('Операция успешно завершен', {
+    notify.success('Как будто что то загружаем', {
       filled: false,
       hasCloseButton: false,
+      autoClose: 10000,
+      icon: <CircularProgress color="primary" size="medium" />,
     });
   };
 
@@ -162,7 +165,7 @@ const Template: Story = () => {
                 error with content and action without progressBar
               </Button>
               <Button onClick={handleWithoutCloseButton}>
-                without close button
+                without close button, with custom icon
               </Button>
             </Stack>
           </Stack>
