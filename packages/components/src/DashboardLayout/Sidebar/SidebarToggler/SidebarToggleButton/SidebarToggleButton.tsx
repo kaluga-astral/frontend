@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { MenuOffOutlineMd, MenuOnOutlineMd } from '@astral/icons';
 
+import { Tooltip } from '../../../../Tooltip';
 import { ButtonProps } from '../../../../Button';
 
 import { SidebarTogglerButtonRoot } from './styles';
@@ -18,7 +19,17 @@ export const SidebarTogglerButton = forwardRef<
   return (
     <SidebarTogglerButtonRoot
       ref={ref}
-      startIcon={collapsedIn ? <MenuOffOutlineMd /> : <MenuOnOutlineMd />}
+      startIcon={
+        collapsedIn ? (
+          <MenuOffOutlineMd />
+        ) : (
+          <Tooltip title="Раскрыть меню" arrow placement="right">
+            <div>
+              <MenuOnOutlineMd />
+            </div>
+          </Tooltip>
+        )
+      }
       variant="text"
       {...restProps}
     />
