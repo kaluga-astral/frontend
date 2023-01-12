@@ -9,22 +9,19 @@ import { InitializedRule, ValidationResult } from '../types';
 export const composeSome =
   (...rules: InitializedRule[]) =>
   (value: unknown): ValidationResult => {
-    const errors: ValidationResult = rules.reduce<string[]>(
-      (errorsAcc, rule) => {
-        const error = rule(value);
+    const errors = rules.reduce<string[]>((errorsAcc, rule) => {
+      const error = rule(value);
 
-        if (Array.isArray(error) && error.length > 0) {
-          errorsAcc.push(...error);
-        }
+      if (Array.isArray(error) && error.length > 0) {
+        errorsAcc.push(...error);
+      }
 
-        if (typeof error === 'string') {
-          errorsAcc.push(error);
-        }
+      if (typeof error === 'string') {
+        errorsAcc.push(error);
+      }
 
-        return errorsAcc;
-      },
-      [],
-    );
+      return errorsAcc;
+    }, []);
 
     if (!errors.length) {
       return undefined;

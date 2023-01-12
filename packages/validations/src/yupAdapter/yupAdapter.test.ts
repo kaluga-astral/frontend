@@ -16,12 +16,4 @@ describe('yupAdapter', () => {
 
     expect(yupRule(null)).toBe('dot invalid');
   });
-
-  it('Возвращает массив строк, если был массив MultipleErrorObj', () => {
-    const yupRule = yupAdapter(rule(['dot invalid', 'comma invalid']));
-
-    const expectedResult = ['dot invalid', 'comma invalid'];
-
-    expect(yupRule(null)).toEqual(expectedResult);
-  });
 });

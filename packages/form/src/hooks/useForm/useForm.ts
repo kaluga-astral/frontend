@@ -3,7 +3,8 @@ import {
   UseFormReturn,
   useForm as useRHForm,
 } from 'react-hook-form';
-import { FieldValues } from 'react-hook-form/dist/types';
+
+import { FieldValues } from '../../types';
 
 /**
  * Custom hook to manage the entire form.

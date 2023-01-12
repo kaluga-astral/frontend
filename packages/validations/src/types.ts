@@ -1,4 +1,4 @@
-export type RuleError = string | string[];
+export type RuleError = string;
 
 export type ValidationResult = RuleError | undefined;
 
