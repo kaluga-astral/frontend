@@ -12,3 +12,7 @@ export const SidebarTogglerButtonRoot = styled(Button)`
     margin: 0;
   }
 `;
+
+export const SidebarTogglerIconWrapper = styled.div`
+  height: 24px;
+`;
