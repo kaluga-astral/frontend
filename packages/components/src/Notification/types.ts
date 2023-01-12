@@ -59,4 +59,9 @@ export type NotificationProps = Omit<
    * @default зависит от Variant нотификации, например Variant="success" иконка "Зеленая галочка"
    */
   icon?: ReactNode;
+  /**
+   * @description опциональный пропс позволяющий отключить кнопку рендера крестика закрытия нотификации
+   * @default true
+   */
+  hasCloseButton?: boolean;
 };

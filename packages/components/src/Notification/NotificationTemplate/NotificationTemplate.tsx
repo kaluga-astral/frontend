@@ -30,6 +30,7 @@ export type NotificationTemplateProps = ToastProps & {
   content?: ReactNode;
   actions?: JSX.Element;
   actionsDirection?: ActionsDirection;
+  hasCloseButton?: boolean;
 };
 
 const mapOfNotificationIcons = {
@@ -59,6 +60,7 @@ export const NotificationTemplate = ({
   variant,
   filled = DEFAULT_NOTIFICATION_PROPS.filled,
   actionsDirection = 'right',
+  hasCloseButton = true,
 }: NotificationTemplateProps) => {
   const handleCloseToast = () => closeToast?.();
 
@@ -72,14 +74,16 @@ export const NotificationTemplate = ({
       <NotificationInner>
         <NotificationHeader>
           <NotificationTitle>{title}</NotificationTitle>
-          <NotificationCloseButton
-            filled={filled}
-            onClick={handleCloseToast}
-            color="primary"
-            variant="text"
-          >
-            <NotificationCloseIcon filled={filled} />
-          </NotificationCloseButton>
+          {hasCloseButton && (
+            <NotificationCloseButton
+              filled={filled}
+              onClick={handleCloseToast}
+              color="primary"
+              variant="text"
+            >
+              <NotificationCloseIcon filled={filled} />
+            </NotificationCloseButton>
+          )}
         </NotificationHeader>
         {content && <NotificationContent>{content}</NotificationContent>}
         {actions && (

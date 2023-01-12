@@ -48,6 +48,13 @@ const Template: Story = () => {
     });
   };
 
+  const handleWithoutCloseButton = () => {
+    notify.success('Операция успешно завершен', {
+      filled: false,
+      hasCloseButton: false,
+    });
+  };
+
   const handleFilledSuccess = () => {
     notify.success('Операция успешно завершен');
   };
@@ -153,6 +160,9 @@ const Template: Story = () => {
               </Stack>
               <Button onClick={handleErrorWithContentWithoutProgressBar}>
                 error with content and action without progressBar
+              </Button>
+              <Button onClick={handleWithoutCloseButton}>
+                without close button
               </Button>
             </Stack>
           </Stack>
