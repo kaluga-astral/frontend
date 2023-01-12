@@ -6,13 +6,23 @@ import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 
 type Props = {
+  /**
+   * Компонент, ошибки которого будут перехвачены
+   */
   children: ReactNode;
 };
 
 type State = {
+  /**
+   * Флаг наличия перехваченной ошибки
+   */
   error: boolean;
 };
 
+/**
+ * Компонент, который перехватывает ошибки в оберутых в него компонентах.
+ * @example <ErrorBoundary><InsecureComponent/></ErrorBoundary>
+ */
 class ErrorBoundary extends React.Component<Props, State> {
   static contextType = ConfigContext;
 
@@ -27,9 +37,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error) {
-    const context = this.context;
-
-    context.captureException(error);
+    this.context.captureException(error);
   }
 
   handleReloadPage() {
