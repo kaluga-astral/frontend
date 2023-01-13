@@ -7,8 +7,9 @@ import {
 } from 'react-toastify';
 
 import { NotificationProps, Variant } from './types';
-import { NOTIFICATION_VARIANT, NotificationVariantTypes } from './constants';
+import { NotificationVariantTypes } from './constants';
 import { getClassNameModifierByVariant } from './utils';
+import { NOTIFICATION_VARIANT } from './NotificationTemplate/constants';
 
 type NotificationOptions = Omit<NotificationProps, 'title'>;
 
@@ -25,7 +26,7 @@ type Controllable = {
   /**
    * @description force метод для закрытия всех нотификаций, либо конкретной по айдишке
    */
-  close: (id?: Id) => void;
+  dismiss: (id?: Id) => void;
   /**
    * @description метод обновления конкретной нотификации,
    * пригодится когда имеется контролируемый прогресс бар
@@ -87,7 +88,7 @@ export const notify: Record<Variant, Notify> & Controllable = {
       },
     ),
   custom: toast,
-  close: toast.dismiss,
+  dismiss: toast.dismiss,
   update: toast.update,
   done: toast.done,
 };

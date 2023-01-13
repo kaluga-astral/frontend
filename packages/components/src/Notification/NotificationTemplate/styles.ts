@@ -35,16 +35,13 @@ export const NotificationTemplateWrapper = styled.article<NotificationTemplatePr
 
 export const NotificationInner = styled.div`
   flex-grow: 1;
-
-  & > * + * {
-    margin-top: ${({ theme }) => theme.spacing(2)};
-  }
 `;
 
 export const NotificationFooter = styled.footer<NotificationActionsProps>`
   display: flex;
   justify-content: ${({ actionsDirection }) =>
     getActionsDirection(actionsDirection)};
+  margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
 export const NotificationIcon = styled.div`
@@ -52,20 +49,22 @@ export const NotificationIcon = styled.div`
   padding-top: ${({ theme }) => theme.spacing(1)};
 `;
 
+export const NotificationContent = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(2)};
+`;
+
 export const NotificationHeader = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
   min-height: 32px;
-
-  & > * + * {
-    margin-left: ${({ theme }) => theme.spacing(1)};
-  }
 `;
 
 export const NotificationCloseIcon = styled(CrossOutlineSm, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseIconProps>`
+  margin-left: ${({ theme }) => theme.spacing(1)};
+
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 

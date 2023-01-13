@@ -1,4 +1,4 @@
-import { ToastContainer as ExternalToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import { styled } from '../../styles';
 import { NOTIFY_CLASSNAME, NotificationVariantTypes } from '../constants';
@@ -23,25 +23,26 @@ export const NotificationsWrapper = styled.div`
     }
     &--${NotificationVariantTypes.success} {
       --toastify-color-progress-light: ${({ theme }) =>
-        theme.palette.green[800]};
+        theme.palette.success[800]};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.green[100]};
+        background-color: ${({ theme }) => theme.palette.success[100]};
       }
     }
     &--${NotificationVariantTypes.warning} {
       --toastify-color-progress-light: ${({ theme }) =>
-        theme.palette.yellow[800]};
+        theme.palette.warning[800]};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.yellow[100]};
+        background-color: ${({ theme }) => theme.palette.warning[100]};
       }
     }
     &--${NotificationVariantTypes.error} {
-      --toastify-color-progress-light: ${({ theme }) => theme.palette.red[800]};
+      --toastify-color-progress-light: ${({ theme }) =>
+        theme.palette.error[800]};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.red[100]};
+        background-color: ${({ theme }) => theme.palette.error[100]};
       }
     }
 
@@ -53,22 +54,25 @@ export const NotificationsWrapper = styled.div`
     &__progress {
       top: 0;
       bottom: auto;
+
       height: 3px;
     }
 
     &::after {
-      content: '';
-      display: block;
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
+
+      display: block;
       width: 100%;
       height: 3px;
+
+      content: '';
     }
   }
 `;
 
-export const ToastContainer = styled(ExternalToastContainer)`
+export const NotificationContainerInner = styled(ToastContainer)`
   min-width: 400px;
   max-width: 400px;
 `;

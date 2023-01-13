@@ -13,6 +13,7 @@ import {
 import {
   NotificationCloseButton,
   NotificationCloseIcon,
+  NotificationContent,
   NotificationFooter,
   NotificationHeader,
   NotificationIcon,
@@ -29,7 +30,7 @@ export type NotificationTemplateProps = ToastProps & {
   content?: ReactNode;
   actions?: JSX.Element;
   actionsDirection?: ActionsDirection;
-  hasCloseButton?: boolean;
+  showCloseButton?: boolean;
 };
 
 const mapOfNotificationIcons = {
@@ -59,21 +60,19 @@ export const NotificationTemplate = ({
   variant,
   filled = DEFAULT_NOTIFICATION_PROPS.filled,
   actionsDirection = 'right',
-  hasCloseButton = true,
+  showCloseButton = true,
 }: NotificationTemplateProps) => {
   const handleCloseToast = () => closeToast?.();
 
   return (
     <NotificationTemplateWrapper variant={variant} filled={filled}>
-      {icon !== null && (
-        <NotificationIcon>
-          {icon || <DefaultIcon filled={filled} variant={variant} />}
-        </NotificationIcon>
-      )}
+      <NotificationIcon>
+        {icon || <DefaultIcon filled={filled} variant={variant} />}
+      </NotificationIcon>
       <NotificationInner>
         <NotificationHeader>
           <NotificationTitle>{title}</NotificationTitle>
-          {hasCloseButton && (
+          {showCloseButton && (
             <NotificationCloseButton
               filled={filled}
               onClick={handleCloseToast}
@@ -84,7 +83,7 @@ export const NotificationTemplate = ({
             </NotificationCloseButton>
           )}
         </NotificationHeader>
-        {content && <div>{content}</div>}
+        {content && <NotificationContent>{content}</NotificationContent>}
         {actions && (
           <NotificationFooter actionsDirection={actionsDirection}>
             {actions}

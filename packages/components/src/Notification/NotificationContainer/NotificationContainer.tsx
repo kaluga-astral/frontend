@@ -3,7 +3,7 @@ import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import { NOTIFY_CLASSNAME, NOTIFY_POSITIONS } from '../constants';
 
-import { NotificationsWrapper, ToastContainer } from './styles';
+import { NotificationContainerInner, NotificationsWrapper } from './styles';
 
 if (typeof window !== 'undefined') {
   injectStyle();
@@ -15,7 +15,7 @@ export type NotificationContainerProps = Omit<ToastContainerProps, 'theme'> & {
 
 export const NotificationContainer = (props: NotificationContainerProps) => (
   <NotificationsWrapper>
-    <ToastContainer
+    <NotificationContainerInner
       {...props}
       pauseOnFocusLoss
       position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
