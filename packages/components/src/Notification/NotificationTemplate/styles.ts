@@ -7,66 +7,64 @@ import { ActionsDirection, Variant } from '../types';
 
 import { getActionsDirection, getNotificationTemplateStyles } from './utils';
 
-interface NotificationCloseButtonProps {
+type NotificationCloseButtonProps = {
   filled: boolean;
-}
+};
 
-interface NotificationIconProps {
-  filled: boolean;
-}
-
-interface NotificationTemplateProps {
+type NotificationTemplateProps = {
   variant: Variant;
   filled: boolean;
-}
+};
 
-interface NotificationActionsProps {
+type NotificationActionsProps = {
   actionsDirection: ActionsDirection;
-}
+};
 
-interface NotificationCloseIconProps {
+type NotificationCloseIconProps = {
   filled: boolean;
-}
+};
 
-export const NotificationTemplate = styled.section<NotificationTemplateProps>`
+export const NotificationTemplateWrapper = styled.article<NotificationTemplateProps>`
+  display: flex;
+  align-items: flex-start;
+  min-height: 56px;
   padding: ${({ theme }) => theme.spacing(4)};
-
   ${({ theme, variant, filled }) =>
     getNotificationTemplateStyles(theme, variant, filled)}
 `;
 
-export const NotificationWrapper = styled.div`
+export const NotificationInner = styled.div`
+  flex-grow: 1;
+`;
+
+export const NotificationFooter = styled.footer<NotificationActionsProps>`
   display: flex;
-  align-items: center;
+  justify-content: ${({ actionsDirection }) =>
+    getActionsDirection(actionsDirection)};
+  margin-top: ${({ theme }) => theme.spacing(2)};
+`;
+
+export const NotificationIcon = styled.div`
+  margin-right: ${({ theme }) => theme.spacing(3)};
+  padding-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 export const NotificationContent = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const NotificationActions = styled.footer<NotificationActionsProps>`
-  display: flex;
-  align-items: center;
-  justify-content: ${({ actionsDirection }) =>
-    getActionsDirection(actionsDirection)};
-  margin-top: ${({ theme }) => theme.spacing(2)};
-`;
-
-export const NotificationIcon = styled.div<NotificationIconProps>`
-  display: flex;
-  align-items: center;
-  margin-right: ${({ theme }) => theme.spacing(3)};
-`;
-
 export const NotificationHeader = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
+  min-height: 32px;
 `;
 
 export const NotificationCloseIcon = styled(CrossOutlineSm, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseIconProps>`
+  margin-left: ${({ theme }) => theme.spacing(1)};
+
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
@@ -82,7 +80,6 @@ export const NotificationCloseButton = styled(IconButton, {
 
 export const NotificationTitle = styled(Typography)`
   flex: 1;
-  margin-right: ${({ theme }) => theme.spacing(1)};
 
   font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
 `;
