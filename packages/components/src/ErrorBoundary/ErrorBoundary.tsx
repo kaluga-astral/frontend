@@ -21,6 +21,7 @@ type State = {
 
 /**
  * Компонент, который перехватывает ошибки в оберутых в него компонентах.
+ * При перехвате ошибки осуществляется ее отправка в captureException
  * @example <ErrorBoundary><InsecureComponent/></ErrorBoundary>
  */
 class ErrorBoundary extends React.Component<Props, State> {
