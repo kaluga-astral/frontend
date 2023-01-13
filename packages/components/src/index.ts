@@ -50,6 +50,8 @@ export * from './DialogTitle';
 
 export * from './DropdownButton';
 
+export * from './ErrorBoundary';
+
 export * from './Fab';
 
 export * from './Fade';

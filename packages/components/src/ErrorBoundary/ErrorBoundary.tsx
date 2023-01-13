@@ -1,23 +1,34 @@
 import React, { ReactNode } from 'react';
 
 import { Button } from '../Button';
+import { ConfigContext } from '../ConfigProvider';
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 
 type Props = {
-  children: ReactNode;
-  /*
-   * Callback для отправки ошибки в Sentry
+  /**
+   * Компонент, ошибки которого будут перехвачены
    */
-  // eslint-disable-next-line
-  captureException: (error: any) => void;
+  children: ReactNode;
 };
 
 type State = {
+  /**
+   * Флаг наличия перехваченной ошибки
+   */
   error: boolean;
 };
 
+/**
+ * Компонент, который перехватывает ошибки в оберутых в него компонентах.
+ * При перехвате ошибки осуществляется ее отправка в captureException
+ * @example <ErrorBoundary><InsecureComponent/></ErrorBoundary>
+ */
 class ErrorBoundary extends React.Component<Props, State> {
+  static contextType = ConfigContext;
+
+  context!: React.ContextType<typeof ConfigContext>;
+
   public state: State = {
     error: false,
   };
@@ -27,7 +38,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error) {
-    this.props.captureException(error);
+    this.context.captureException(error);
   }
 
   handleReloadPage() {
@@ -52,4 +63,4 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 }
 
-export default ErrorBoundary;
+export { ErrorBoundary };
