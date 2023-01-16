@@ -23,26 +23,26 @@ export const NotificationsWrapper = styled.div`
     }
     &--${NotificationVariantTypes.success} {
       --toastify-color-progress-light: ${({ theme }) =>
-        theme.palette.success[800]};
+        theme.palette.success.dark};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.success[100]};
+        background-color: ${({ theme }) => theme.palette.success.light};
       }
     }
     &--${NotificationVariantTypes.warning} {
       --toastify-color-progress-light: ${({ theme }) =>
-        theme.palette.warning[800]};
+        theme.palette.warning.dark};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.warning[100]};
+        background-color: ${({ theme }) => theme.palette.warning.light};
       }
     }
     &--${NotificationVariantTypes.error} {
       --toastify-color-progress-light: ${({ theme }) =>
-        theme.palette.error[800]};
+        theme.palette.error.dark};
 
       &::after {
-        background-color: ${({ theme }) => theme.palette.error[100]};
+        background-color: ${({ theme }) => theme.palette.error.light};
       }
     }
 
