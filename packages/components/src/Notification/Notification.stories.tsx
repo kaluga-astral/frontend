@@ -52,7 +52,7 @@ const Template: Story = () => {
   const handleWithoutCloseButton = () => {
     notify.success('Как будто что то загружаем', {
       filled: false,
-      hasCloseButton: false,
+      showCloseButton: false,
       autoClose: 10000,
       icon: <CircularProgress color="primary" size="medium" />,
     });

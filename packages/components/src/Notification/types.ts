@@ -63,5 +63,5 @@ export type NotificationProps = Omit<
    * @description опциональный пропс позволяющий отключить кнопку рендера крестика закрытия нотификации
    * @default true
    */
-  hasCloseButton?: boolean;
+  showCloseButton?: boolean;
 };
