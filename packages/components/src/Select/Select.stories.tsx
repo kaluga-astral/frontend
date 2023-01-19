@@ -172,7 +172,7 @@ export const Showcase: Story = () => {
       >
         {renderMultipleOptions()}
       </Select>
-      <Select placeholder="Выберите вариант" label="No data" />
+      <Select placeholder="Выберите вариант" label="No data" required />
     </Stack>
   );
 };
