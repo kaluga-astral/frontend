@@ -40,7 +40,10 @@ export type AutocompleteProps<
   >,
   'size' | 'renderInput'
 > &
-  Pick<TextFieldProps, 'error' | 'success' | 'helperText' | 'label'> & {
+  Pick<
+    TextFieldProps,
+    'error' | 'success' | 'helperText' | 'label' | 'required'
+  > & {
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
   };
@@ -67,6 +70,7 @@ export const Autocomplete = <
     label,
     size = 'medium',
     getOptionLabel,
+    required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
     overflowOption,
@@ -109,6 +113,7 @@ export const Autocomplete = <
     (inputParams: AutocompleteRenderInputParams) => (
       <TextField
         {...inputParams}
+        required={required}
         placeholder={placeholder}
         label={label}
         success={success}
@@ -117,7 +122,7 @@ export const Autocomplete = <
         size={size}
       />
     ),
-    [placeholder, label, success, error, helperText, size],
+    [placeholder, label, success, error, helperText, size, required],
   );
 
   const renderOption = useCallback(
