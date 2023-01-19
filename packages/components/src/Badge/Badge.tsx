@@ -1,8 +1,8 @@
 import { BadgeProps } from './types';
-import { StyledBadge } from './styled';
+import { StyledBadge } from './styles';
 
-export const Badge = ({ children, color, ...props }: BadgeProps) => (
-  <StyledBadge customColor={color} {...props} max={99}>
+export const Badge = ({ children, color, max = 99, ...props }: BadgeProps) => (
+  <StyledBadge customColor={color} max={max} {...props}>
     {children}
   </StyledBadge>
 );
