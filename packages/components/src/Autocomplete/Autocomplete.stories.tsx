@@ -94,6 +94,7 @@ export const Showcase: Story = () => (
       multiple
       options={[]}
       getOptionLabel={(params) => params.title}
+      required
     />
     <Autocomplete<IOption, false, false, false>
       label="Custom render option"
