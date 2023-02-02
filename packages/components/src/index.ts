@@ -62,6 +62,8 @@ export * from './FormControlLabel';
 
 export * from './FormHelperText';
 
+export * from './FlowButton';
+
 export * from './GlobalStyles';
 
 export * from './Grid';
