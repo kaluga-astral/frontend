@@ -36,16 +36,4 @@ describe('FlowButton', () => {
 
     expect(button).toBeDisabled();
   });
-
-  it('Prop:loading: блокирует кнопку', () => {
-    renderWithTheme(
-      <FlowButton targetText="Далее" loading>
-        Выпустить УНЭП
-      </FlowButton>,
-    );
-
-    const button = screen.getByRole('button');
-
-    expect(button).toBeDisabled();
-  });
 });

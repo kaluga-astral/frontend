@@ -3,9 +3,19 @@ import { ArrowROutlineLg } from '@astral/icons';
 
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
+import { ButtonProps } from '../Button';
 
 import { FlowButtonWrapper, TargetTextWrapper } from './styles';
-import { FlowButtonProps } from './types';
+
+export type FlowButtonProps = Omit<
+  ButtonProps,
+  'loading' | 'loadingIndicator' | 'loadingPosition' | 'size' | 'variant'
+> & {
+  /**
+   * @targetText Текст на кнопке, указаывающий направление по флоу
+   * */
+  targetText: string;
+};
 
 export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
   (props, ref) => {
@@ -15,10 +25,9 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
       <FlowButtonWrapper
         ref={ref}
         {...restProps}
-        size="medium"
         endIcon={<ArrowROutlineLg width={32} height={32} />}
       >
-        <Grid container justifyContent="flex-start" justifyItems="flex-start">
+        <Grid>
           <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
           <Typography variant="h6">{children}</Typography>
         </Grid>
