@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react';
 
 import { ExampleTemplate } from '../docs';
+import { Grid } from '../Grid';
 
 import { FlowButton } from './FlowButton';
 
@@ -12,9 +13,9 @@ export default {
 export const FlowButtonShowcase: Story = () => {
   return (
     <ExampleTemplate>
-      <FlowButton smallText="Далее" fullWidth>
-        Выпустить УНЭП
-      </FlowButton>
+      <Grid container justifyContent="flex-start" spacing={4}>
+        <FlowButton targetText="Далее">Выпустить УНЭП</FlowButton>
+      </Grid>
     </ExampleTemplate>
   );
 };
@@ -22,7 +23,7 @@ export const FlowButtonShowcase: Story = () => {
 FlowButtonShowcase.parameters = { options: { showPanel: false } };
 
 const Template: Story = (args) => (
-  <FlowButton {...args} smallText="Далее" fullWidth>
+  <FlowButton {...args} targetText="Далее">
     Выпустить УНЭП
   </FlowButton>
 );

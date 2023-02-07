@@ -2,13 +2,14 @@ import { forwardRef } from 'react';
 import { ArrowROutlineLg } from '@astral/icons';
 
 import { Typography } from '../Typography';
+import { Grid } from '../Grid';
 
-import { FlowButtonContentWrapper, FlowButtonWrapper } from './styles';
+import { FlowButtonWrapper, TargetTextWrapper } from './styles';
 import { FlowButtonProps } from './types';
 
 export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
   (props, ref) => {
-    const { children, smallText, ...restProps } = props;
+    const { children, targetText, ...restProps } = props;
 
     return (
       <FlowButtonWrapper
@@ -17,14 +18,10 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
         size="medium"
         endIcon={<ArrowROutlineLg width={32} height={32} />}
       >
-        <FlowButtonContentWrapper>
-          <Typography variant="h7" color="white">
-            {smallText}
-          </Typography>
-          <Typography marginTop={1} variant="h6" color="white">
-            {children}
-          </Typography>
-        </FlowButtonContentWrapper>
+        <Grid container justifyContent="flex-start" justifyItems="flex-start">
+          <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
+          <Typography variant="h6">{children}</Typography>
+        </Grid>
       </FlowButtonWrapper>
     );
   },

@@ -1,5 +1,8 @@
 import { ButtonProps } from '../Button';
 
 export type FlowButtonProps = ButtonProps & {
-  smallText: string;
+  /**
+   * @targetText Текст на кнопке, указаывающий направление по флоу
+   * */
+  targetText: string;
 };

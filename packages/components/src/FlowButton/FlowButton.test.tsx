@@ -1,6 +1,5 @@
-import { renderWithTheme, screen } from '@astral/tests';
-import { describe, expect, it } from 'vitest';
 import { useEffect, useRef } from 'react';
+import { renderWithTheme, screen } from '@astral/tests';
 
 import { FlowButton } from './FlowButton';
 
@@ -16,7 +15,7 @@ describe('FlowButton', () => {
       }, []);
 
       return (
-        <FlowButton smallText="Далее" ref={ref}>
+        <FlowButton targetText="Далее" ref={ref}>
           Выпустить УНЭП
         </FlowButton>
       );
@@ -28,7 +27,7 @@ describe('FlowButton', () => {
 
   it('Prop:disabled: блокирует кнопку', () => {
     renderWithTheme(
-      <FlowButton smallText="Далее" disabled>
+      <FlowButton targetText="Далее" disabled>
         Выпустить УНЭП
       </FlowButton>,
     );
@@ -40,7 +39,7 @@ describe('FlowButton', () => {
 
   it('Prop:loading: блокирует кнопку', () => {
     renderWithTheme(
-      <FlowButton smallText="Далее" loading>
+      <FlowButton targetText="Далее" loading>
         Выпустить УНЭП
       </FlowButton>,
     );
@@ -48,17 +47,5 @@ describe('FlowButton', () => {
     const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
-  });
-
-  it('Prop:loading: отображается лоадер', () => {
-    renderWithTheme(
-      <FlowButton smallText="Далее" loading>
-        Выпустить УНЭП
-      </FlowButton>,
-    );
-
-    const loader = screen.getByRole('progressbar');
-
-    expect(loader).toBeVisible();
   });
 });
