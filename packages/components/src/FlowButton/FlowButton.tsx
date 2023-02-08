@@ -27,7 +27,7 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
         {...restProps}
         endIcon={<ArrowROutlineLg width={32} height={32} />}
       >
-        <Grid container justifyItems="flex-start">
+        <Grid container justifyItems="start">
           <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
           <Typography variant="h6">{children}</Typography>
         </Grid>

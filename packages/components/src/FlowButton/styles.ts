@@ -15,4 +15,6 @@ export const FlowButtonWrapper = styled(Button)`
 
 export const TargetTextWrapper = styled(Typography)`
   margin-bottom: ${({ theme: { spacing } }) => spacing(1)};
+
+  text-align: start;
 `;
