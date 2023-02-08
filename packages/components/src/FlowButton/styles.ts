@@ -11,6 +11,10 @@ export const FlowButtonWrapper = styled(Button)`
   padding: ${({ theme: { spacing } }) => spacing(4, 5)};
 
   border-radius: ${({ theme: { shape } }) => shape.medium};
+
+  ${({ theme: { breakpoints } }) => breakpoints.down('sm')} {
+    padding: ${({ theme: { spacing } }) => spacing(4, 5)};
+  }
 `;
 
 export const TargetTextWrapper = styled(Typography)`
