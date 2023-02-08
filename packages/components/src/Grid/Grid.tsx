@@ -1,7 +1,7 @@
 import { ReactNode, forwardRef } from 'react';
 
 import { GridContainerProps, GridElementsProps } from './types';
-import { StyledGrid } from './styled';
+import { StyledGrid } from './styles';
 
 export type GridProps = GridContainerProps &
   GridElementsProps & { children?: ReactNode };
