@@ -10,6 +10,9 @@ export const FlowButtonWrapper = styled(Button)`
   min-height: 71px;
   padding: ${({ theme: { spacing } }) => spacing(4, 5)};
 
+  ${({ theme: { breakpoints } }) => breakpoints.down('sm')} {
+    padding: ${({ theme: { spacing } }) => spacing(4, 5)};
+  }
   border-radius: ${({ theme: { shape } }) => shape.medium};
 `;
 
