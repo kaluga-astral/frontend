@@ -13,10 +13,7 @@ copy({
 buildTs({
   releaseTag: process.env.RELEASE_TAG,
   packageExports: {
-    './server': {
-      import: './esm/server/index.js',
-      require: './server/index.js',
-    },
+    './server': './server/index.js',
     './fonts/*': './fonts/*',
     './illustrations/*': './illustrations/*',
   },
