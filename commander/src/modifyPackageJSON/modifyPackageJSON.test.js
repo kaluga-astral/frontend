@@ -45,10 +45,7 @@ describe('modifyPackageJSON', () => {
     });
 
     expect(packageFileData.exports).toEqual({
-      '.': {
-        import: './esm/index.js',
-        require: './index.js',
-      },
+      '.': './index.js',
       './fonts': { import: './fonts/*' },
     });
   });
