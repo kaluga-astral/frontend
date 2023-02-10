@@ -183,34 +183,34 @@ export const StyledTag = styled(Chip, {
 
   font-size: 14px;
 
-  background-color: ${(props) => getBgColor({ ...props })};
-  border-radius: ${(props) => getShape({ ...props })};
+  background-color: ${getBgColor};
+  border-radius: ${getShape};
 
   user-select: none;
 
   &:hover {
-    color: ${(props) => getColor({ ...props })};
+    color: ${getColor};
 
-    background-color: ${(props) => getBgColor({ ...props })};
+    background-color: ${getBgColor};
   }
 
   &:active {
-    color: ${(props) => getColor({ ...props })};
+    color: ${getColor};
 
-    background-color: ${(props) => getBgColor({ ...props })};
+    background-color: ${getBgColor};
   }
 
   .MuiChip-label {
-    padding: ${(props) => getTagLabelPadding({ ...props })};
+    padding: ${getTagLabelPadding};
 
-    color: ${(props) => getColor({ ...props })};
+    color: ${getColor};
 
     &:hover {
-      color: ${(props) => getColor({ ...props })};
+      color: ${getColor};
     }
 
     &:active {
-      color: ${(props) => getColor({ ...props })};
+      color: ${getColor};
     }
   }
 
@@ -223,7 +223,7 @@ export const StyledTag = styled(Chip, {
 
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
-    border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
+    border-radius: ${getDeleteIconBorderRadius};
 
     &:hover {
       color: ${({ theme }) => theme.palette.grey[800]};
@@ -253,7 +253,6 @@ export const StyledTag = styled(Chip, {
 `;
 
 export const CheckableStyledTag = styled(StyledTag)`
-
   background-color: ${({
     checked,
     theme,
