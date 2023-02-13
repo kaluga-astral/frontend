@@ -4,14 +4,16 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { TagColors, TagStates } from './enums';
-import { TagColor, TagState, TagVariant } from './types';
+import { TagColor, TagSize, TagState, TagVariant } from './types';
+import { HEIGHTS } from './constants';
 
 import { TagProps } from '.';
 
-type StyledTagProps = Omit<TagProps, 'color'> & {
+type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
   customColor?: TagColor;
   customVariant?: TagVariant;
   rounded?: boolean;
+  customSize: TagSize;
 };
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
@@ -119,12 +121,20 @@ const getColor = ({
 const getTagLabelPadding = ({
   theme,
   rounded,
+  customSize,
 }: StyledTagThemeProps): string => {
   if (rounded) {
     return theme.spacing(0, 2);
   }
 
-  return theme.spacing(0, 1);
+  switch (customSize) {
+    case 'small':
+      return theme.spacing(0, 1);
+    case 'medium':
+      return theme.spacing(1, 2);
+    case 'large':
+      return theme.spacing(1.5, 2);
+  }
 };
 
 const getDeleteIconBgColor = ({
@@ -146,9 +156,12 @@ const getDeleteIconBgColor = ({
 
 export const StyledTag = styled(Chip, {
   shouldForwardProp: (prop) =>
-    prop !== 'customColor' && prop !== 'customVariant' && prop !== 'rounded',
+    prop !== 'customColor' &&
+    prop !== 'customVariant' &&
+    prop !== 'rounded' &&
+    prop !== 'customSize',
 })<StyledTagProps>`
-  height: 20px;
+  height: ${({ customSize }) => HEIGHTS[customSize]};
 
   font-size: 14px;
 

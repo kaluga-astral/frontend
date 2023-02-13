@@ -12,6 +12,12 @@ export enum TagVariants {
   LIGHT = 'light',
 }
 
+export enum TagSizes {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+
 export enum TagStates {
   DEFAULT = 'default',
   HOVER = 'hover',
