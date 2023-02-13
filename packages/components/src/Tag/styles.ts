@@ -4,7 +4,9 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { TagColors, TagStates } from './enums';
-import { TagColor, TagProps, TagState, TagVariant } from './types';
+import { TagColor, TagState, TagVariant } from './types';
+
+import { TagProps } from '.';
 
 type StyledTagProps = Omit<TagProps, 'color'> & {
   customColor?: TagColor;
@@ -30,39 +32,6 @@ const getDeleteIconBorderRadius = ({
   }
 
   return `0  ${theme.shape.small}  ${theme.shape.small} 0`;
-};
-
-const getHoverBgColor = (props: StyledTagThemeProps) => {
-  const { theme, customColor, customVariant } = props;
-
-  const backgroundHoverColorVariants = {
-    light: {
-      primary: theme.palette.primary[200],
-      error: theme.palette.red[200],
-      success: theme.palette.green[200],
-      warning: theme.palette.yellow[200],
-      grey: theme.palette.grey[200],
-      default: theme.palette.grey[200],
-    },
-    contained: {
-      primary: theme.palette.primary[700],
-      error: theme.palette.red[700],
-      success: theme.palette.green[700],
-      warning: theme.palette.yellow[700],
-      grey: theme.palette.grey[200],
-      default: theme.palette.grey[200],
-    },
-  };
-
-  if (!customVariant) {
-    return backgroundHoverColorVariants.contained.primary;
-  }
-
-  if (customVariant && customColor) {
-    return backgroundHoverColorVariants[customVariant][customColor];
-  }
-
-  return theme.palette.background.element;
 };
 
 const getBgColor = ({
@@ -249,43 +218,5 @@ export const StyledTag = styled(Chip, {
   .MuiChip-icon {
     width: 16px;
     height: 16px;
-  }
-`;
-
-export const CheckableStyledTag = styled(StyledTag)`
-  background-color: ${({
-    checked,
-    theme,
-    customColor,
-    customVariant,
-    onDelete,
-  }) =>
-    checked
-      ? theme.palette.grey[900]
-      : getBgColor({ theme, customColor, customVariant, onDelete })};
-  cursor: pointer;
-
-  .MuiChip-label {
-    color: ${({ theme, customColor, customVariant, onDelete, checked }) =>
-      checked
-        ? theme.palette.primary.contrastText
-        : getColor({ theme, customColor, customVariant, onDelete })};
-
-    &:hover {
-      color: ${(props) =>
-        props.checked
-          ? props.theme.palette.primary.contrastText
-          : getColor({ ...props })};
-    }
-  }
-
-  &:hover {
-    background-color: ${(props) =>
-      props.checked ? props.theme.palette.grey[700] : getHoverBgColor(props)};
-  }
-
-  &:active {
-    background-color: ${(props) =>
-      props.checked ? props.theme.palette.grey[800] : getBgColor(props)};
   }
 `;

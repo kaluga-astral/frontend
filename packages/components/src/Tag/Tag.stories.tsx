@@ -1,6 +1,5 @@
 import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
-import { useState } from 'react';
 
 import { Tag } from './Tag';
 
@@ -135,381 +134,162 @@ const svgAvatar = (
 
 const Template: Story = (args) => <Tag {...args} onDelete={undefined} />;
 
-export const ShowcaseColor: Story = () => {
-  const [checked, setChecked] = useState(false);
-
-  return (
-    <Stack direction="column" gap={2}>
+export const ShowcaseColor: Story = () => (
+  <Stack direction="column" gap={2}>
+    <Stack direction="row" gap={2}>
       <Stack direction="row" gap={2}>
-        <Stack direction="row" gap={2}>
-          <Stack direction="column" gap={2}>
-            <Stack direction="column">
-              <h2>Contained </h2>
-              <Stack direction="row" gap={2}>
-                <Stack direction="column">
-                  <h3>Primary </h3>
+        <Stack direction="column" gap={2}>
+          <Stack direction="column">
+            <h2>Contained </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="contained"
-                          color="primary"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="contained" color="primary" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="contained"
+                        color="primary"
+                        rounded
+                      />
+                      Rounded
                     </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Success </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="contained"
-                          color="success"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="contained" color="success" />
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Warning </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="contained"
-                          color="warning"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="contained" color="warning" />
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Error </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="contained"
-                          color="error"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="contained" color="error" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="contained" color="primary" />
                     </Stack>
                   </Stack>
                 </Stack>
               </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h2>Light </h2>
-              <Stack direction="row" gap={2}>
-                <Stack direction="column">
-                  <h3>Primary </h3>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="light"
-                          color="primary"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="light" color="primary" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="contained"
+                        color="success"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="contained" color="success" />
                     </Stack>
                   </Stack>
                 </Stack>
-                <Stack direction="column">
-                  <h3>Success </h3>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="light"
-                          color="success"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="light" color="success" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="contained"
+                        color="warning"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="contained" color="warning" />
                     </Stack>
                   </Stack>
                 </Stack>
-                <Stack direction="column">
-                  <h3>Warning </h3>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          variant="light"
-                          color="warning"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="light" color="warning" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="contained"
+                        color="error"
+                        rounded
+                      />
+                      Rounded
                     </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Error </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="light" color="error" />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag label="Tag" variant="light" color="error" />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="contained" color="error" />
                     </Stack>
                   </Stack>
                 </Stack>
               </Stack>
             </Stack>
           </Stack>
-        </Stack>
-
-        <Stack direction="row" gap={2}>
-          <Stack direction="column" gap={2}>
-            <Stack direction="column">
-              <h2>Contained Disabled </h2>
-              <Stack direction="row" gap={2}>
-                <Stack direction="column">
-                  <h3>Primary </h3>
+          <Stack direction="column">
+            <h2>Light </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="primary"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="primary"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="light"
+                        color="primary"
+                        rounded
+                      />
+                      Rounded
                     </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Success </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="success"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="success"
-                        />
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Warning </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="warning"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="warning"
-                        />
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Error </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="error"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="contained"
-                          color="error"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="light" color="primary" />
                     </Stack>
                   </Stack>
                 </Stack>
               </Stack>
-            </Stack>
-            <Stack direction="column">
-              <h2>Light </h2>
-              <Stack direction="row" gap={2}>
-                <Stack direction="column">
-                  <h3>Primary </h3>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="primary"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="primary"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="light"
+                        color="success"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="light" color="success" />
                     </Stack>
                   </Stack>
                 </Stack>
-                <Stack direction="column">
-                  <h3>Success </h3>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="success"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="success"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        variant="light"
+                        color="warning"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="light" color="warning" />
                     </Stack>
                   </Stack>
                 </Stack>
-                <Stack direction="column">
-                  <h3>Warning </h3>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="warning"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="warning"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="light" color="error" />
+                      Rounded
                     </Stack>
-                  </Stack>
-                </Stack>
-                <Stack direction="column">
-                  <h3>Error </h3>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="column" gap={2}>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="error"
-                          rounded
-                        />
-                        Rounded
-                      </Stack>
-                      <Stack direction="row" gap={2}>
-                        <Tag
-                          label="Tag"
-                          disabled
-                          variant="light"
-                          color="error"
-                        />
-                      </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" variant="light" color="error" />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -518,171 +298,278 @@ export const ShowcaseColor: Story = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Stack direction="row" gap={2}>
-        <Tag
-          color="grey"
-          label="Тэг"
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          color="grey"
-          label="Тэг"
-          rounded
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          icon={svgStartIcon}
-          color="grey"
-          label="Тэг"
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          icon={svgStartIcon}
-          color="grey"
-          label="Тэг"
-          rounded
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          avatar={svgAvatar}
-          color="grey"
-          label="Тэг"
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-        <Tag
-          avatar={svgAvatar}
-          color="grey"
-          label="Тэг"
-          rounded
-          onDelete={() => {
-            console.log(1);
-          }}
-        />
-      </Stack>
-      <Stack direction="row" gap={2}>
-        <Tag color="grey" label="Тэг" />
-        <Tag color="grey" label="Тэг" rounded />
-        <Tag icon={svgStartIcon} color="grey" label="Тэг" />
-        <Tag icon={svgStartIcon} color="grey" label="Тэг" rounded />
-        <Tag avatar={svgAvatar} color="grey" label="Тэг" />
-        <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
-      </Stack>
 
       <Stack direction="row" gap={2}>
-        <Tag
-          label="Checkable primary contained tag"
-          variant="contained"
-          color="primary"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable error contained tag"
-          variant="contained"
-          color="error"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable success contained tag"
-          variant="contained"
-          color="success"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable warning contained tag"
-          variant="contained"
-          color="warning"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable grey contained tag"
-          variant="contained"
-          color="grey"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-      </Stack>
-      <Stack direction="row" gap={2}>
-        <Tag
-          label="Checkable primary light tag"
-          variant="light"
-          color="primary"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable error light tag"
-          variant="light"
-          color="error"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable success light tag"
-          variant="light"
-          color="success"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable warning light tag"
-          variant="light"
-          color="warning"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
-
-        <Tag
-          label="Checkable grey light tag"
-          variant="light"
-          color="grey"
-          rounded
-          checkable
-          onChange={setChecked}
-          checked={checked}
-        />
+        <Stack direction="column" gap={2}>
+          <Stack direction="column">
+            <h2>Contained Disabled </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="primary"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="primary"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="success"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="success"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="warning"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="warning"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="error"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="contained"
+                        color="error"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack direction="column">
+            <h2>Light </h2>
+            <Stack direction="row" gap={2}>
+              <Stack direction="column">
+                <h3>Primary </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="primary"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="primary"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Success </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="success"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="success"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Warning </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="warning"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="warning"
+                      />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack direction="column">
+                <h3>Error </h3>
+                <Stack direction="column" gap={2}>
+                  <Stack direction="column" gap={2}>
+                    <Stack direction="row" gap={2}>
+                      <Tag
+                        label="Tag"
+                        disabled
+                        variant="light"
+                        color="error"
+                        rounded
+                      />
+                      Rounded
+                    </Stack>
+                    <Stack direction="row" gap={2}>
+                      <Tag label="Tag" disabled variant="light" color="error" />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
       </Stack>
     </Stack>
-  );
-};
+    <Stack direction="row" gap={2}>
+      <Tag
+        color="grey"
+        label="Тэг"
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        color="grey"
+        label="Тэг"
+        rounded
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        icon={svgStartIcon}
+        color="grey"
+        label="Тэг"
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        icon={svgStartIcon}
+        color="grey"
+        label="Тэг"
+        rounded
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        avatar={svgAvatar}
+        color="grey"
+        label="Тэг"
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+      <Tag
+        avatar={svgAvatar}
+        color="grey"
+        label="Тэг"
+        rounded
+        onDelete={() => {
+          console.log(1);
+        }}
+      />
+    </Stack>
+    <Stack direction="row" gap={2}>
+      <Tag color="grey" label="Тэг" />
+      <Tag color="grey" label="Тэг" rounded />
+      <Tag icon={svgStartIcon} color="grey" label="Тэг" />
+      <Tag icon={svgStartIcon} color="grey" label="Тэг" rounded />
+      <Tag avatar={svgAvatar} color="grey" label="Тэг" />
+      <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
+    </Stack>
+  </Stack>
+);
 
 ShowcaseColor.parameters = { options: { showPanel: false } };
 

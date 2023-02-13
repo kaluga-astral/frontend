@@ -1,23 +1,27 @@
 import { forwardRef } from 'react';
 import { CrossSmOutlineSm } from '@astral/icons';
+import { ChipProps as MuiTagProps } from '@mui/material/Chip/Chip';
 
-import { CheckableStyledTag, StyledTag } from './styled';
-import { TagProps } from './types';
+import { WithoutEmotionSpecific } from '../types';
+
+import { StyledTag } from './styles';
+import { TagColor, TagVariant } from './types';
+
+export type TagProps = Omit<
+  WithoutEmotionSpecific<MuiTagProps>,
+  'color' | 'variant' | 'size'
+> & {
+  color?: TagColor;
+  variant?: TagVariant;
+  rounded?: boolean;
+};
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
-  ({ color, variant, deleteIcon, checkable, onChange, ...props }, ref) => {
-    const Component = checkable ? CheckableStyledTag : StyledTag;
-
-    const handleClickTag = () => {
-      onChange?.(!props.checked);
-    };
-
+  ({ color, variant, deleteIcon, onChange, ...props }, ref) => {
     return (
-      <Component
+      <StyledTag
         customColor={color}
         customVariant={variant}
-        clickable={false}
-        onClick={handleClickTag}
         ref={ref}
         {...props}
         deleteIcon={deleteIcon ? deleteIcon : <CrossSmOutlineSm />}
