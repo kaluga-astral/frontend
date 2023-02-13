@@ -17,12 +17,12 @@ export type TagProps = Omit<
 };
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
-  ({ color, variant, deleteIcon, onChange, ...props }, ref) => {
+  ({ color, variant, deleteIcon, ...props }, ref) => {
     return (
       <StyledTag
+        ref={ref}
         customColor={color}
         customVariant={variant}
-        ref={ref}
         {...props}
         deleteIcon={deleteIcon ? deleteIcon : <CrossSmOutlineSm />}
       />

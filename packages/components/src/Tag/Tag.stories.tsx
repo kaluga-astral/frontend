@@ -285,7 +285,7 @@ export const ShowcaseColor: Story = () => (
                 <Stack direction="column" gap={2}>
                   <Stack direction="column" gap={2}>
                     <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="error" />
+                      <Tag label="Tag" variant="light" color="error" rounded />
                       Rounded
                     </Stack>
                     <Stack direction="row" gap={2}>
