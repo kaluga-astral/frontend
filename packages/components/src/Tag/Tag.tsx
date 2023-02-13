@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { CrossSmOutlineSm } from '@astral/icons';
-import { ChipProps as MuiTagProps } from '@mui/material/Chip/Chip';
+import { ChipProps as MuiTagProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
 

@@ -14,7 +14,7 @@ export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
    */
   checked?: boolean;
   /**
-   * Обработчик события клика
+   * Обработчик изменения состояния тега
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   /**

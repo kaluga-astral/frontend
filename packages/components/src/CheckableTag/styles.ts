@@ -17,7 +17,7 @@ const getHoverBgColor = ({
   checked,
 }: StyledTagThemeProps) => {
   if (disabled) {
-    return 'none';
+    return 'initial';
   }
 
   if (checked) {
@@ -58,7 +58,7 @@ const getActiveBgColor = ({
   disabled,
 }: StyledTagThemeProps) => {
   if (disabled) {
-    return 'none';
+    return 'initial';
   }
 
   if (checked) {
