@@ -19,14 +19,12 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         color="error"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
 
       <CheckableTag
         label="Checkable tag"
-        rounded
         color="warning"
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
@@ -35,14 +33,12 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         color="primary"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
 
       <CheckableTag
         label="Checkable tag"
-        rounded
         color="success"
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
@@ -50,7 +46,6 @@ export const ShowcaseColor: Story = () => {
 
       <CheckableTag
         label="Checkable tag"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
@@ -59,7 +54,6 @@ export const ShowcaseColor: Story = () => {
         label="Checkable tag"
         variant="contained"
         color="error"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
@@ -67,7 +61,6 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         variant="contained"
-        rounded
         color="warning"
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
@@ -77,7 +70,6 @@ export const ShowcaseColor: Story = () => {
         label="Checkable tag"
         variant="contained"
         color="primary"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
@@ -85,7 +77,6 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         variant="contained"
-        rounded
         color="success"
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
@@ -94,7 +85,6 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         variant="contained"
-        rounded
         checked={checked}
         onChange={(event) => setChecked(event.target.checked)}
       />
@@ -102,7 +92,6 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable disabled tag"
         variant="contained"
-        rounded
         disabled
         color="success"
         checked={checked}
@@ -120,7 +109,6 @@ Default.args = {
   variant: 'light',
   color: 'success',
   label: 'Тэг Checkable',
-  rounded: true,
 };
 
 Default.parameters = {
