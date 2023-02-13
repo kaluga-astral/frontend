@@ -91,14 +91,6 @@ const getActiveBgColor = ({
   return activeBgColor.light.default;
 };
 
-export const Root = styled.label`
-  width: fit-content;
-`;
-
-export const HiddenInput = styled.input`
-  display: none;
-`;
-
 const getBgColor = ({ theme, checked, disabled }: StyledTagThemeProps) => {
   if (disabled) {
     return theme.palette.grey[100];
@@ -123,8 +115,15 @@ const getColor = ({ theme, checked, disabled }: StyledTagThemeProps) => {
   return null;
 };
 
-export const StyledTag = styled(Tag)`
+export const CheckableTagWrapper = styled.label`
+  width: fit-content;
+`;
 
+export const CheckableTagHiddenInput = styled.input`
+  display: none;
+`;
+
+export const CheckableTagStyled = styled(Tag)`
   background-color: ${getBgColor};
   cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
 

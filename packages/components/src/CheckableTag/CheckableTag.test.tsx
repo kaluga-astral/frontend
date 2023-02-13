@@ -1,6 +1,6 @@
-import { renderWithTheme, screen } from '@astral/tests';
-import { describe, expect, it, vi } from 'vitest';
+import { vi } from 'vitest';
 import { useEffect, useRef } from 'react';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { CheckableTag } from './CheckableTag';
 
@@ -30,14 +30,12 @@ describe('CheckableTag', () => {
     expect(tag).toBeDisabled();
   });
 
-  it('Prop:onChange: вызывается', () => {
+  it('Prop:onChange: вызывается', async () => {
     const label = 'Тег';
-    const obj = { onChange: () => {} };
+    const onChange = vi.fn();
 
-    const spy = vi.spyOn(obj, 'onChange');
-
-    renderWithTheme(<CheckableTag label={label} onChange={obj.onChange} />);
-    screen.getByText(label)?.click();
-    expect(spy).toHaveBeenCalled();
+    renderWithTheme(<CheckableTag label={label} onChange={onChange} />);
+    await userEvents.click(screen.getByText(label));
+    expect(onChange).toHaveBeenCalled();
   });
 });
