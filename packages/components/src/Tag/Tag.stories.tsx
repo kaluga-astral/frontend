@@ -579,6 +579,10 @@ export const ShowcaseColor: Story = () => (
       />
       <Tag color="success" variant="contained" label="Тэг large" size="large" />
     </Stack>
+
+    <Stack direction="row" gap={2}>
+      <Tag color="error" variant="text" label="Тэг text" />
+    </Stack>
   </Stack>
 );
 

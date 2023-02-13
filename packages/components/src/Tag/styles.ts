@@ -42,6 +42,10 @@ const getBgColor = ({
   customVariant,
   onDelete,
 }: StyledTagThemeProps): string => {
+  if (customVariant === 'text') {
+    return 'transparent';
+  }
+
   if (onDelete) {
     return theme.palette.grey[100];
   }
@@ -86,7 +90,7 @@ const getColor = ({
   customVariant,
   onDelete,
 }: StyledTagThemeProps): string => {
-  if (onDelete) {
+  if (onDelete || customVariant === 'text') {
     return theme.palette.grey[900];
   }
 

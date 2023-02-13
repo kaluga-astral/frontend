@@ -47,6 +47,7 @@ export const ShowcaseColor: Story = () => {
       <CheckableTag
         label="Checkable tag"
         checked={checked}
+        variant="text"
         onChange={(event) => setChecked(event.target.checked)}
       />
 
