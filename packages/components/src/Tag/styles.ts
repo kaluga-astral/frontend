@@ -3,8 +3,10 @@ import { Chip } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { TagColors, TagStates } from './constants';
-import { TagColor, TagProps, TagState, TagVariant } from './types';
+import { TagColors, TagStates } from './enums';
+import { TagColor, TagState, TagVariant } from './types';
+
+import { TagProps } from '.';
 
 type StyledTagProps = Omit<TagProps, 'color'> & {
   customColor?: TagColor;
@@ -37,7 +39,7 @@ const getBgColor = ({
   customColor,
   customVariant,
   onDelete,
-}: StyledTagThemeProps & { tagState: TagState }): string => {
+}: StyledTagThemeProps): string => {
   if (onDelete) {
     return theme.palette.grey[100];
   }
@@ -52,6 +54,7 @@ const getBgColor = ({
       error: theme.palette.red[800],
       success: theme.palette.green[800],
       warning: theme.palette.yellow[800],
+      grey: theme.palette.grey[100],
       default: theme.palette.background.element,
     },
     light: {
@@ -59,6 +62,7 @@ const getBgColor = ({
       error: theme.palette.red[100],
       success: theme.palette.green[100],
       warning: theme.palette.yellow[100],
+      grey: theme.palette.grey[100],
       default: theme.palette.background.element,
     },
   };
@@ -79,7 +83,7 @@ const getColor = ({
   customColor,
   customVariant,
   onDelete,
-}: StyledTagThemeProps & { tagState: TagState }): string => {
+}: StyledTagThemeProps): string => {
   if (onDelete) {
     return theme.palette.grey[900];
   }
@@ -148,37 +152,34 @@ export const StyledTag = styled(Chip, {
 
   font-size: 14px;
 
-  background-color: ${(props) =>
-    getBgColor({ ...props, tagState: TagStates.DEFAULT })};
-  border-radius: ${(props) => getShape({ ...props })};
+  background-color: ${getBgColor};
+  border-radius: ${getShape};
 
   user-select: none;
 
   &:hover {
-    color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
+    color: ${getColor};
 
-    background-color: ${(props) =>
-      getBgColor({ ...props, tagState: TagStates.HOVER })};
+    background-color: ${getBgColor};
   }
 
   &:active {
-    color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
+    color: ${getColor};
 
-    background-color: ${(props) =>
-      getBgColor({ ...props, tagState: TagStates.ACTIVE })};
+    background-color: ${getBgColor};
   }
 
   .MuiChip-label {
-    padding: ${(props) => getTagLabelPadding({ ...props })};
+    padding: ${getTagLabelPadding};
 
-    color: ${(props) => getColor({ ...props, tagState: TagStates.DEFAULT })};
+    color: ${getColor};
 
     &:hover {
-      color: ${(props) => getColor({ ...props, tagState: TagStates.HOVER })};
+      color: ${getColor};
     }
 
     &:active {
-      color: ${(props) => getColor({ ...props, tagState: TagStates.ACTIVE })};
+      color: ${getColor};
     }
   }
 
@@ -191,7 +192,7 @@ export const StyledTag = styled(Chip, {
 
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
-    border-radius: ${(props) => getDeleteIconBorderRadius({ ...props })};
+    border-radius: ${getDeleteIconBorderRadius};
 
     &:hover {
       color: ${({ theme }) => theme.palette.grey[800]};
