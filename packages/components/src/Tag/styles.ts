@@ -17,7 +17,7 @@ type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
 
-const HEIGHTS: { [size in TagSize]: string } = {
+const HEIGHTS: Record<TagSize, string> = {
   small: '20px',
   medium: '24px',
   large: '32px',
