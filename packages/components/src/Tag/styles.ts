@@ -140,9 +140,8 @@ const getTagLabelPadding = ({
     case 'small':
       return theme.spacing(0, 1);
     case 'medium':
-      return theme.spacing(1, 2);
     case 'large':
-      return theme.spacing(1.5, 2);
+      return theme.spacing(0, 2);
   }
 };
 
