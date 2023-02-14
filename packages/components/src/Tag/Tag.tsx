@@ -53,8 +53,6 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     },
     ref,
   ) => {
-    const preparedBadge = (badge || '').trim();
-
     const preparedBadgeColor =
       badgeColor ||
       getBadgeColor({
@@ -65,11 +63,11 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     const labelContent = (
       <>
         {label}{' '}
-        {preparedBadge ? (
+        {badge ? (
           <TagBadge
             withBorder={false}
             color={preparedBadgeColor}
-            badgeContent={preparedBadge}
+            badgeContent={badge}
           />
         ) : (
           <></>
