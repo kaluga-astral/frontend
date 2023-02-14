@@ -3,9 +3,8 @@ import { Chip } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { TagColors, TagStates } from './enums';
+import { TagColors, TagSizes, TagStates } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
-import { HEIGHTS } from './constants';
 
 import { TagProps } from '.';
 
@@ -17,6 +16,12 @@ type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
 };
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
+
+const HEIGHTS = {
+  [TagSizes.SMALL]: '20px',
+  [TagSizes.MEDIUM]: '24px',
+  [TagSizes.LARGE]: '32px',
+};
 
 const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
   if (rounded) {
