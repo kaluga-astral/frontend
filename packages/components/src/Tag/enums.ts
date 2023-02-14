@@ -10,6 +10,7 @@ export enum TagColors {
 export enum TagVariants {
   CONTAINED = 'contained',
   LIGHT = 'light',
+  TEXT = 'text',
 }
 
 export enum TagStates {

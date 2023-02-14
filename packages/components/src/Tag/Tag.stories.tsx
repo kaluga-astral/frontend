@@ -568,6 +568,21 @@ export const ShowcaseColor: Story = () => (
       <Tag avatar={svgAvatar} color="grey" label="Тэг" />
       <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
     </Stack>
+
+    <Stack direction="row" gap={2}>
+      <Tag color="error" variant="contained" label="Тэг small" />
+      <Tag
+        color="warning"
+        variant="contained"
+        label="Тэг medium"
+        size="medium"
+      />
+      <Tag color="success" variant="contained" label="Тэг large" size="large" />
+    </Stack>
+
+    <Stack direction="row" gap={2}>
+      <Tag color="error" variant="text" label="Тэг text" />
+    </Stack>
   </Stack>
 );
 

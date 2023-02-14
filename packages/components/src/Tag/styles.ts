@@ -4,17 +4,24 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { TagColors, TagStates } from './enums';
-import { TagColor, TagState, TagVariant } from './types';
+import { TagColor, TagSize, TagState, TagVariant } from './types';
 
 import { TagProps } from '.';
 
-type StyledTagProps = Omit<TagProps, 'color'> & {
+type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
   customColor?: TagColor;
   customVariant?: TagVariant;
   rounded?: boolean;
+  customSize: TagSize;
 };
 
 type StyledTagThemeProps = StyledTagProps & { theme: Theme };
+
+const HEIGHTS: Record<TagSize, string> = {
+  small: '20px',
+  medium: '24px',
+  large: '32px',
+};
 
 const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
   if (rounded) {
@@ -40,6 +47,10 @@ const getBgColor = ({
   customVariant,
   onDelete,
 }: StyledTagThemeProps): string => {
+  if (customVariant === 'text') {
+    return 'transparent';
+  }
+
   if (onDelete) {
     return theme.palette.grey[100];
   }
@@ -84,7 +95,7 @@ const getColor = ({
   customVariant,
   onDelete,
 }: StyledTagThemeProps): string => {
-  if (onDelete) {
+  if (onDelete || customVariant === 'text') {
     return theme.palette.grey[900];
   }
 
@@ -119,12 +130,19 @@ const getColor = ({
 const getTagLabelPadding = ({
   theme,
   rounded,
+  customSize,
 }: StyledTagThemeProps): string => {
   if (rounded) {
     return theme.spacing(0, 2);
   }
 
-  return theme.spacing(0, 1);
+  switch (customSize) {
+    case 'small':
+      return theme.spacing(0, 1);
+    case 'medium':
+    case 'large':
+      return theme.spacing(0, 2);
+  }
 };
 
 const getDeleteIconBgColor = ({
@@ -146,9 +164,12 @@ const getDeleteIconBgColor = ({
 
 export const StyledTag = styled(Chip, {
   shouldForwardProp: (prop) =>
-    prop !== 'customColor' && prop !== 'customVariant' && prop !== 'rounded',
+    prop !== 'customColor' &&
+    prop !== 'customVariant' &&
+    prop !== 'rounded' &&
+    prop !== 'customSize',
 })<StyledTagProps>`
-  height: 20px;
+  height: ${({ customSize }) => HEIGHTS[customSize]};
 
   font-size: 14px;
 

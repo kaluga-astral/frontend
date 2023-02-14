@@ -1,13 +1,17 @@
 import { styled } from '../styles';
 import { Tag, TagColor, TagVariant } from '../Tag';
 import { Theme } from '../theme';
+import { TagVariants } from '../Tag/enums';
 
 import { CheckableTagProps } from './CheckableTag';
 
 type StyledTagThemeProps = CheckableTagProps & { theme: Theme };
-type TagColorsKit = {
-  [variant in TagVariant]: { [color in TagColor]: string };
-};
+type TagColorsKit = Omit<
+  {
+    [variant in TagVariant]: { [color in TagColor]: string };
+  },
+  'text'
+>;
 
 const getHoverBgColor = ({
   theme,
@@ -22,6 +26,10 @@ const getHoverBgColor = ({
 
   if (checked) {
     return theme.palette.grey[700];
+  }
+
+  if (variant === TagVariants.TEXT) {
+    return theme.palette.grey[200];
   }
 
   const hoverBgColors: TagColorsKit = {
@@ -63,6 +71,10 @@ const getActiveBgColor = ({
 
   if (checked) {
     return theme.palette.grey[800];
+  }
+
+  if (variant === TagVariants.TEXT) {
+    return theme.palette.primary[100];
   }
 
   const activeBgColor: TagColorsKit = {
