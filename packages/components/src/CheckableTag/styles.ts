@@ -2,6 +2,7 @@ import { styled } from '../styles';
 import { Tag, TagColor, TagVariant } from '../Tag';
 import { Theme } from '../theme';
 import { TagVariants } from '../Tag/enums';
+import { BadgeColor } from '../Badge';
 
 import { CheckableTagProps } from './CheckableTag';
 
@@ -12,6 +13,24 @@ type TagColorsKit = Omit<
   },
   'text'
 >;
+
+export const getBadgeColor = (args: {
+  checked?: boolean;
+  disabled?: boolean;
+  defaultColor?: BadgeColor | null;
+}): BadgeColor | null => {
+  const { checked, disabled, defaultColor } = args;
+
+  if (disabled) {
+    return 'grey';
+  }
+
+  if (checked) {
+    return 'white';
+  }
+
+  return defaultColor || null;
+};
 
 const getHoverBgColor = ({
   theme,

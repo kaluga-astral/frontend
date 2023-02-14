@@ -6,6 +6,7 @@ import {
   CheckableTagHiddenInput,
   CheckableTagStyled,
   CheckableTagWrapper,
+  getBadgeColor,
 } from './styles';
 
 export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
@@ -31,10 +32,20 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
       color = 'grey',
       onChange,
       disabled,
+      badge,
+      badgeColor = null,
       ...tagProps
     },
     ref,
   ) => {
+    const preparedBadgeColor = badge
+      ? getBadgeColor({
+          checked,
+          disabled,
+          defaultColor: badgeColor,
+        })
+      : null;
+
     return (
       <CheckableTagWrapper>
         <CheckableTagHiddenInput
@@ -49,6 +60,8 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           variant={variant}
           color={color}
           disabled={disabled}
+          badge={badge}
+          badgeColor={preparedBadgeColor}
           {...tagProps}
         />
       </CheckableTagWrapper>

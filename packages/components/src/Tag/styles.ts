@@ -2,8 +2,9 @@ import { Chip } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
+import { Badge, BadgeColor } from '../Badge';
 
-import { TagColors, TagStates } from './enums';
+import { TagColors, TagStates, TagVariants } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
 
 import { TagProps } from '.';
@@ -21,6 +22,28 @@ const HEIGHTS: Record<TagSize, string> = {
   small: '20px',
   medium: '24px',
   large: '32px',
+};
+
+export const getBadgeColor = (args: {
+  tagColor?: TagColor;
+  variant?: TagVariant;
+}) => {
+  const { tagColor, variant } = args;
+
+  if (variant === TagVariants.CONTAINED) {
+    return 'white';
+  }
+
+  const colors: { [tagColor in TagColor]: BadgeColor } = {
+    [TagColors.PRIMARY]: 'primary',
+    [TagColors.ERROR]: 'error',
+    [TagColors.GREY]: 'grey',
+    [TagColors.SUCCESS]: 'success',
+    [TagColors.WARNING]: 'warning',
+    [TagColors.DEFAULT]: 'grey',
+  };
+
+  return colors[tagColor || 'default'];
 };
 
 const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
@@ -239,5 +262,15 @@ export const StyledTag = styled(Chip, {
   .MuiChip-icon {
     width: 16px;
     height: 16px;
+  }
+`;
+
+export const TagBadge = styled(Badge)`
+  vertical-align: text-top;
+
+  & span.MuiBadge-badge {
+    position: static;
+
+    transform: none;
   }
 `;
