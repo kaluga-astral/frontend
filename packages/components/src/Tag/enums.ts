@@ -13,12 +13,6 @@ export enum TagVariants {
   TEXT = 'text',
 }
 
-export enum TagSizes {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-  LARGE = 'large',
-}
-
 export enum TagStates {
   DEFAULT = 'default',
   HOVER = 'hover',
