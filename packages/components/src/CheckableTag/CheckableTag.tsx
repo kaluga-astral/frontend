@@ -64,12 +64,12 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
     },
     ref,
   ) => {
-    const startAddonWithCheckable = (props: TagAddonProps) =>
+    const checkableStartAddon = (props: TagAddonProps) =>
       StartAddon ? (
         <StartAddon checked={checked} disabled={disabled} {...props} />
       ) : null;
 
-    const endAddonWithCheckable = (props: TagAddonProps) =>
+    const checkableEndAddon = (props: TagAddonProps) =>
       EndAddon ? (
         <EndAddon checked={checked} disabled={disabled} {...props} />
       ) : null;
@@ -88,8 +88,8 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           variant={variant}
           color={color}
           disabled={disabled}
-          startAddon={startAddonWithCheckable}
-          endAddon={endAddonWithCheckable}
+          startAddon={checkableStartAddon}
+          endAddon={checkableEndAddon}
           {...tagProps}
         />
       </CheckableTagWrapper>
