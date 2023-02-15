@@ -11,7 +11,7 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    */
   totalCount: number;
   /**
-   * Количество записей на страницу
+   * Мксимальное количество записей на страницу
    */
   rowsPerPage?: number;
   /**
@@ -32,10 +32,19 @@ export const DataGridPagination = ({
     () => (page - 1) * rowsPerPage + 1,
     [page, rowsPerPage],
   );
-  const rangeEnd = useMemo(
-    () => (page - 1) * rowsPerPage + rowsPerPage,
-    [page, rowsPerPage],
-  );
+  const rangeEnd = useMemo(() => {
+    const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
+
+    if (isLastPage) {
+      const lastPagesCount = totalCount % rowsPerPage;
+
+      if (lastPagesCount) {
+        return rowsPerPage * page - (rowsPerPage - lastPagesCount);
+      }
+    }
+
+    return rowsPerPage * page;
+  }, [page, rowsPerPage]);
   const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
   return (
