@@ -36,9 +36,12 @@ export const DataGridPagination = ({
     const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
 
     if (isLastPage) {
+      // получаем оставшееся кол-во строк на последней странице
       const lastPageRowsCount = totalCount % rowsPerPage;
 
       if (lastPageRowsCount) {
+        // Вычисляем итоговое количество строк. Пример: totalCount=26
+        // (10 * 3) - (10 - 6) = 30 - 4 = 26
         return rowsPerPage * page - (rowsPerPage - lastPageRowsCount);
       }
     }
