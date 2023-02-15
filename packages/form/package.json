@@ -4,9 +4,7 @@
   "main": "./src/index.ts",
   "version": "1.0.0",
   "scripts": {
-    "prebuild": "npx rimraf ./lib",
-    "postbuild": "copyfiles -u 1 declarations/*.ts lib",
-    "build": "commander build",
+    "build": "node pack",
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
@@ -15,9 +13,9 @@
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "react-hook-form": "^7.35.0",
-    "@astral/ui": "*",
-    "@astral/validations": "*"
+    "react-hook-form": "^7.41.5",
+    "@astral/components": "^1.0.0",
+    "@astral/validations": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"

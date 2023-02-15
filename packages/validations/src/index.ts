@@ -4,10 +4,6 @@ export * from './yupAdapter';
 
 export * from './compose';
 
-export * from './composeAllSettled';
-
-export * from './composeToString';
-
 export * from './isRequired';
 
 export * from './types';
@@ -35,3 +31,7 @@ export * from './isMaybeNumber';
 export * from './isDate';
 
 export * from './isSNILS';
+
+export * from './composeSome';
+
+export * from './isEmail';

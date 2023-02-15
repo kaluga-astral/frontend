@@ -7,15 +7,21 @@ on:
        - packages/ui/**
        - packages/icons/**
        - packages/fonts/**
+       - packages/components/**
+       - packages/form/**
+       - packages/validations/**
        - .storybook/**
        - package.json
        - package-lock.json
    pull_request:
-     branches: [main]
+     branches: [main, next]
      paths:
        - packages/ui/**
        - packages/icons/**
        - packages/fonts/**
+       - packages/components/**
+       - packages/form/**
+       - packages/validations/**
        - .storybook/**
        - package.json
        - package-lock.json

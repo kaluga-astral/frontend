@@ -2,8 +2,7 @@ name: pull request approved notification
 on:
   pull_request_review:
     types: [submitted]
-    branches:
-    - main
+    branches: [main, next]
 
 jobs:
   fetch:

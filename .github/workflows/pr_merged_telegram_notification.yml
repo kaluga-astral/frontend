@@ -2,8 +2,7 @@ name: pull request merged notification
 on:
   pull_request:
     types: [closed]
-    branches:
-    - main
+    branches: [main, next]
 
 jobs:
   fetch:

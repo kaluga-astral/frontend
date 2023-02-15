@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "target": "esnext",
+    "strict": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "paths": {
+      "@example/*": [
+        "./src/*"
+      ],
+      "images/*": [
+        "./public/images/*"
+      ],
+      "icons/*": [
+        "./public/images/icons/*"
+      ]
+    }
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "./global.d.ts", "*.js"],
+  "exclude": ["../packages"]
+}

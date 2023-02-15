@@ -2,8 +2,7 @@ name: CI for packages
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main, next]
 
 jobs:
   lint:
@@ -16,6 +15,7 @@ jobs:
           node-version: 18.x
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
       - name: Install dependencies
         run: npm i
       - name: Run eslint
@@ -31,6 +31,7 @@ jobs:
           node-version: 18.x
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
       - name: Install dependencies
         run: npm i
       - name: Run tsc
@@ -46,6 +47,7 @@ jobs:
           node-version: 18.x
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
       - name: Install dependencies
         run: npm i
       - name: Run stylelint
@@ -71,3 +73,41 @@ jobs:
         env:
           CI: true
         run: npm run tests:ci --workspaces --if-present
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: '**/junit.xml'
+
+  # Проверяет, что новые версии пакетов не сломают публикуемые пакеты
+  testPublishPackages:
+    name: Published tests packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install dependencies
+        run: npm i
+
+      # В example устанавливаются пакеты с тестовыми версиями
+      - name: Install deps for example project
+        working-directory: ./example
+        run: npm i
+
+      - name: Prepare packages
+        working-directory: ./example
+        run: npm run prepare-packages
+
+      - name: Check example types
+        working-directory: ./example
+        run: npm run lint:types
+
+      - name: Check example build
+        working-directory: ./example
+        run: npm run build:dev
