@@ -1,6 +1,8 @@
 import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
+import { TagBadge } from '../TagBadge';
+
 import { Tag } from './Tag';
 
 export default {
@@ -581,7 +583,46 @@ export const ShowcaseColor: Story = () => (
     </Stack>
 
     <Stack direction="row" gap={2}>
-      <Tag color="error" variant="text" label="Тэг text" />
+      <Tag
+        color="success"
+        variant="light"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="warning"
+        variant="light"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="error"
+        size="medium"
+        variant="contained"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="error"
+        size="medium"
+        variant="contained"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="primary"
+        size="large"
+        variant="contained"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="warning"
+        size="large"
+        variant="contained"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
     </Stack>
   </Stack>
 );

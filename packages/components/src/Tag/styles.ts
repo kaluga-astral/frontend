@@ -2,8 +2,9 @@ import { Chip } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
+import { BadgeColor } from '../Badge';
 
-import { TagColors, TagStates } from './enums';
+import { TagColors, TagStates, TagVariants } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
 
 import { TagProps } from '.';
@@ -21,6 +22,28 @@ const HEIGHTS: Record<TagSize, string> = {
   small: '20px',
   medium: '24px',
   large: '32px',
+};
+
+export const getBadgeColor = (args: {
+  tagColor?: TagColor;
+  variant?: TagVariant;
+}) => {
+  const { tagColor, variant } = args;
+
+  if (variant === TagVariants.CONTAINED) {
+    return 'white';
+  }
+
+  const colors: Record<TagColor, BadgeColor> = {
+    [TagColors.PRIMARY]: 'primary',
+    [TagColors.ERROR]: 'error',
+    [TagColors.GREY]: 'grey',
+    [TagColors.SUCCESS]: 'success',
+    [TagColors.WARNING]: 'warning',
+    [TagColors.DEFAULT]: 'grey',
+  };
+
+  return colors[tagColor || 'default'];
 };
 
 const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {

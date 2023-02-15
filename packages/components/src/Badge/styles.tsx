@@ -3,7 +3,9 @@ import { Badge } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { BadgeColor, BadgeProps } from './types';
+import { BadgeColor } from './types';
+
+import { BadgeProps } from '.';
 
 type StyledBadgeProps = Omit<BadgeProps, 'color'> & {
   customColor: BadgeColor;
@@ -21,7 +23,7 @@ const getBgColor = ({ customColor, theme }: StyledBadgeThemeProps): string => {
   }
 
   if (customColor === 'success') {
-    return theme.palette.success.light;
+    return theme.palette.success.main;
   }
 
   if (customColor === 'primary') {
@@ -30,6 +32,10 @@ const getBgColor = ({ customColor, theme }: StyledBadgeThemeProps): string => {
 
   if (customColor === 'white') {
     return theme.palette.background.default;
+  }
+
+  if (customColor === 'warning') {
+    return theme.palette.warning.main;
   }
 
   if (customColor === 'error') {
@@ -52,7 +58,7 @@ const getTextColor = ({
   }
 
   if (customColor === 'white') {
-    return theme.palette.primary.main;
+    return theme.palette.grey[900];
   }
 
   if (customColor === 'error') {
@@ -64,14 +70,18 @@ const getTextColor = ({
   }
 
   if (customColor === 'success') {
-    return theme.palette.success.dark;
+    return theme.palette.primary.contrastText;
+  }
+
+  if (customColor === 'warning') {
+    return theme.palette.error.contrastText;
   }
 
   return theme.palette.primary.contrastText;
 };
 
 export const StyledBadge = styled(Badge, {
-  shouldForwardProp: (prop) => prop !== 'customColor',
+  shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'withBorder',
 })<StyledBadgeProps>`
   .MuiBadge-badge {
     height: 20px;
@@ -83,8 +93,9 @@ export const StyledBadge = styled(Badge, {
 
     background-color: ${({ customColor, theme }) =>
       getBgColor({ customColor, theme })};
-    border: 2px solid ${({ theme }) => theme.palette.common.white};
-    border-radius: 12px;
+    border: ${({ withBorder, theme }) =>
+      withBorder ? `2px solid ${theme.palette.common.white}` : 'none'};
+    border-radius: ${({ withBorder }) => (withBorder ? '12px' : null)};
   }
 
   .MuiBadge-dot {
