@@ -84,8 +84,7 @@ export const StyledBadge = styled(Badge, {
   shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'withBorder',
 })<StyledBadgeProps>`
   .MuiBadge-badge {
-    box-sizing: content-box;
-    height: 16px;
+    height: 20px;
     padding: ${({ theme }) => theme.spacing(0, 1)};
 
     color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};

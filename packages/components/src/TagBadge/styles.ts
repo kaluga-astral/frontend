@@ -29,6 +29,9 @@ export const StyledBadge = styled(Badge)`
   & span.MuiBadge-badge {
     position: static;
 
+    box-sizing: content-box;
+    height: 16px;
+
     transform: none;
   }
 `;
