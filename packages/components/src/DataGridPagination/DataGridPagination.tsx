@@ -36,15 +36,15 @@ export const DataGridPagination = ({
     const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
 
     if (isLastPage) {
-      const lastPagesCount = totalCount % rowsPerPage;
+      const lastPageRowsCount = totalCount % rowsPerPage;
 
-      if (lastPagesCount) {
-        return rowsPerPage * page - (rowsPerPage - lastPagesCount);
+      if (lastPageRowsCount) {
+        return rowsPerPage * page - (rowsPerPage - lastPageRowsCount);
       }
     }
 
     return rowsPerPage * page;
-  }, [page, rowsPerPage]);
+  }, [page, rowsPerPage, totalCount]);
   const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
   return (
