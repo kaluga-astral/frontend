@@ -2,7 +2,7 @@ import { Chip } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
-import { Badge, BadgeColor } from '../Badge';
+import { BadgeColor } from '../Badge';
 
 import { TagColors, TagStates, TagVariants } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
@@ -34,7 +34,7 @@ export const getBadgeColor = (args: {
     return 'white';
   }
 
-  const colors: { [tagColor in TagColor]: BadgeColor } = {
+  const colors: Record<TagColor, BadgeColor> = {
     [TagColors.PRIMARY]: 'primary',
     [TagColors.ERROR]: 'error',
     [TagColors.GREY]: 'grey',
@@ -262,15 +262,5 @@ export const StyledTag = styled(Chip, {
   .MuiChip-icon {
     width: 16px;
     height: 16px;
-  }
-`;
-
-export const TagBadge = styled(Badge)`
-  vertical-align: text-top;
-
-  & span.MuiBadge-badge {
-    position: static;
-
-    transform: none;
   }
 `;

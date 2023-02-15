@@ -1,15 +1,18 @@
 import { ChangeEvent, forwardRef } from 'react';
 
-import { TagProps } from '../Tag';
+import { TagAddonProps, TagProps } from '../Tag';
 
 import {
   CheckableTagHiddenInput,
   CheckableTagStyled,
   CheckableTagWrapper,
-  getBadgeColor,
 } from './styles';
+import { CheckableTagAddon } from './types';
 
-export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
+export type CheckableTagProps = Omit<
+  TagProps,
+  'onChange' | 'startAddon' | 'endAddon'
+> & {
   /**
    * Состояние тега
    */
@@ -22,6 +25,15 @@ export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
    * Блокировка клика по тегу
    */
   disabled?: boolean;
+  /**
+   * Контент слева от label
+   */
+  startAddon?: CheckableTagAddon;
+
+  /**
+   * Контент справа от label
+   */
+  endAddon?: CheckableTagAddon;
 };
 
 export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
@@ -32,19 +44,25 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
       color = 'grey',
       onChange,
       disabled,
-      badge,
-      badgeColor = null,
+      startAddon: StartAddon,
+      endAddon: EndAddon,
       ...tagProps
     },
     ref,
   ) => {
-    const preparedBadgeColor = badge
-      ? getBadgeColor({
-          checked,
-          disabled,
-          defaultColor: badgeColor,
-        })
-      : null;
+    const startAddonWithCheckable = (props: TagAddonProps) =>
+      StartAddon ? (
+        <StartAddon checked={checked} disabled={disabled} {...props} />
+      ) : (
+        <></>
+      );
+
+    const endAddonWithCheckable = (props: TagAddonProps) =>
+      EndAddon ? (
+        <EndAddon checked={checked} disabled={disabled} {...props} />
+      ) : (
+        <></>
+      );
 
     return (
       <CheckableTagWrapper>
@@ -60,8 +78,8 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           variant={variant}
           color={color}
           disabled={disabled}
-          badge={badge}
-          badgeColor={preparedBadgeColor}
+          startAddon={startAddonWithCheckable}
+          endAddon={endAddonWithCheckable}
           {...tagProps}
         />
       </CheckableTagWrapper>

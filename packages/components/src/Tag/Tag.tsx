@@ -3,10 +3,10 @@ import { CrossSmOutlineSm } from '@astral/icons';
 import { ChipProps as MuiTagProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
-import { BadgeColor } from '../Badge';
+import { Grid } from '../Grid';
 
-import { StyledTag, TagBadge, getBadgeColor } from './styles';
-import { TagColor, TagSize, TagVariant } from './types';
+import { StyledTag, getBadgeColor } from './styles';
+import { TagAddon, TagColor, TagSize, TagVariant } from './types';
 
 export type TagProps = Omit<
   WithoutEmotionSpecific<MuiTagProps>,
@@ -30,13 +30,14 @@ export type TagProps = Omit<
   size?: TagSize;
 
   /**
-   * Содержимое badge
+   * Контент слева от label
    */
-  badge?: string;
+  startAddon?: TagAddon;
+
   /**
-   * Кастомный цвет badge
+   * Контент справа от label
    */
-  badgeColor?: BadgeColor | null;
+  endAddon?: TagAddon;
 };
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
@@ -47,32 +48,29 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       deleteIcon,
       size = 'small',
       label,
-      badge,
-      badgeColor,
+      startAddon: StartAddon,
+      endAddon: EndAddon,
       ...props
     },
     ref,
   ) => {
-    const preparedBadgeColor =
-      badgeColor ||
-      getBadgeColor({
-        variant: variant,
-        tagColor: color,
-      });
-
     const labelContent = (
-      <>
-        {label}{' '}
-        {badge ? (
-          <TagBadge
-            withBorder={false}
-            color={preparedBadgeColor}
-            badgeContent={badge}
-          />
-        ) : (
-          <></>
+      <Grid
+        container
+        component="span"
+        justifyContent="flex-start"
+        alignItems="center"
+        autoFlow="column"
+        spacing={1}
+      >
+        {StartAddon && (
+          <StartAddon color={getBadgeColor({ variant, tagColor: color })} />
         )}
-      </>
+        {label}
+        {EndAddon && (
+          <EndAddon color={getBadgeColor({ variant, tagColor: color })} />
+        )}
+      </Grid>
     );
 
     return (

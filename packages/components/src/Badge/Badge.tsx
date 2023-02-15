@@ -9,7 +9,13 @@ export type BadgeProps = Omit<
   WithoutEmotionSpecific<MuiBadgeProps>,
   'color'
 > & {
+  /**
+   * Цвет фона
+   */
   color: BadgeColor;
+  /**
+   * Наличие белой рамки
+   */
   withBorder?: boolean;
 };
 

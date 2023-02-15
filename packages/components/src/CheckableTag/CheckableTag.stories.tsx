@@ -2,6 +2,8 @@ import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 import { ChangeEvent, useState } from 'react';
 
+import { TagBadge, TagBadgeProps } from '../TagBadge';
+
 import { CheckableTag } from './CheckableTag';
 
 export default {
@@ -21,6 +23,9 @@ export const ShowcaseColor: Story = () => {
     checked,
     badge: '12',
     onChange: handleChecked,
+    endAddon: (props: TagBadgeProps) => (
+      <TagBadge {...props} badgeContent={'12'} />
+    ),
   };
 
   return (
@@ -54,12 +59,11 @@ export const ShowcaseColor: Story = () => {
         color="success"
         {...baseProps}
       />
-      <CheckableTag label="Checkable tag" variant="contained" {...baseProps} />
       <CheckableTag
         label="Checkable disabled tag"
         variant="contained"
-        disabled
         color="success"
+        disabled
         {...baseProps}
       />
     </Stack>
