@@ -1,6 +1,7 @@
 import { BadgeColor, BadgeProps } from '../Badge';
 
-import { StyledBadge, getCheckableTagBadgeBgColor } from './styles';
+import { StyledBadge } from './styles';
+import { getCheckableTagBadgeBgColor } from './utils';
 
 export type TagBadgeProps = Omit<BadgeProps, 'color' | 'withBorder'> & {
   /**
@@ -21,6 +22,9 @@ export type TagBadgeProps = Omit<BadgeProps, 'color' | 'withBorder'> & {
   color?: BadgeColor;
 };
 
+/**
+ * @description Badge для использования внутри компонента Tag
+ */
 export const TagBadge = ({
   color = 'primary',
   checked,

@@ -27,6 +27,7 @@ export type CheckableTagProps = Omit<
   disabled?: boolean;
   /**
    * Контент слева от label
+
    */
   startAddon?: CheckableTagAddon;
 
@@ -36,6 +37,19 @@ export type CheckableTagProps = Omit<
   endAddon?: CheckableTagAddon;
 };
 
+/**
+ * @description Тег с возможностью быть checked (по логике Checkbox)
+ * @example
+ * <CheckableTag
+   * label="tag"
+   * variant="contained"
+   * color="success"
+   * checked
+   * onChange={handleChecked}
+   * endAddon={(props: TagBadgeProps) => ( <TagBadge {...props} badgeContent={'12'} />)}
+ * />
+
+ */
 export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
   (
     {
@@ -53,16 +67,12 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
     const startAddonWithCheckable = (props: TagAddonProps) =>
       StartAddon ? (
         <StartAddon checked={checked} disabled={disabled} {...props} />
-      ) : (
-        <></>
-      );
+      ) : null;
 
     const endAddonWithCheckable = (props: TagAddonProps) =>
       EndAddon ? (
         <EndAddon checked={checked} disabled={disabled} {...props} />
-      ) : (
-        <></>
-      );
+      ) : null;
 
     return (
       <CheckableTagWrapper>

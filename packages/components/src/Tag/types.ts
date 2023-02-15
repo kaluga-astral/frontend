@@ -16,4 +16,4 @@ export type TagAddonProps = {
   color?: BadgeColor;
 };
 
-export type TagAddon = (props: TagAddonProps) => ReactElement;
+export type TagAddon = (props: TagAddonProps) => ReactElement | null;

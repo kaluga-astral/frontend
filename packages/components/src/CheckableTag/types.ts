@@ -7,4 +7,6 @@ export type CheckableTagAddonProps = {
   disabled?: boolean;
 } & TagAddonProps;
 
-export type CheckableTagAddon = (props: CheckableTagAddonProps) => ReactElement;
+export type CheckableTagAddon = (
+  props: CheckableTagAddonProps,
+) => ReactElement | null;

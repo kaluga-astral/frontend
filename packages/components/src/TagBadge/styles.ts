@@ -1,27 +1,5 @@
 import { styled } from '../styles/index';
-import { Badge, BadgeColor } from '../Badge';
-
-export const getCheckableTagBadgeBgColor = ({
-  disabled,
-  checked,
-  checkedColor,
-  color,
-}: {
-  checked?: boolean;
-  disabled?: boolean;
-  checkedColor?: BadgeColor;
-  color: BadgeColor;
-}) => {
-  if (disabled) {
-    return 'grey';
-  }
-
-  if (checked) {
-    return checkedColor || 'white';
-  }
-
-  return color;
-};
+import { Badge } from '../Badge';
 
 export const StyledBadge = styled(Badge)`
   vertical-align: text-top;

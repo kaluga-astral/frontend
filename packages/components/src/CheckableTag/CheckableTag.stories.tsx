@@ -21,7 +21,6 @@ export const ShowcaseColor: Story = () => {
 
   const baseProps = {
     checked,
-    badge: '12',
     onChange: handleChecked,
     endAddon: (props: TagBadgeProps) => (
       <TagBadge {...props} badgeContent={'12'} />
