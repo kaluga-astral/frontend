@@ -600,7 +600,21 @@ export const ShowcaseColor: Story = () => (
         size="medium"
         variant="contained"
         label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="error"
+        size="medium"
+        variant="contained"
+        label="Тэг"
         endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="primary"
+        size="large"
+        variant="contained"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
       />
       <Tag
         color="warning"
