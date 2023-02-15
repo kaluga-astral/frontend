@@ -1,14 +1,18 @@
 import { ChangeEvent, forwardRef } from 'react';
 
-import { TagProps } from '../Tag';
+import { TagAddonProps, TagProps } from '../Tag';
 
 import {
   CheckableTagHiddenInput,
   CheckableTagStyled,
   CheckableTagWrapper,
 } from './styles';
+import { CheckableTagAddon } from './types';
 
-export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
+export type CheckableTagProps = Omit<
+  TagProps,
+  'onChange' | 'startAddon' | 'endAddon'
+> & {
   /**
    * Состояние тега
    */
@@ -21,8 +25,31 @@ export type CheckableTagProps = Omit<TagProps, 'onChange'> & {
    * Блокировка клика по тегу
    */
   disabled?: boolean;
+  /**
+   * Контент слева от label
+
+   */
+  startAddon?: CheckableTagAddon;
+
+  /**
+   * Контент справа от label
+   */
+  endAddon?: CheckableTagAddon;
 };
 
+/**
+ * @description Тег с возможностью быть checked (по логике Checkbox)
+ * @example
+ * <CheckableTag
+   * label="tag"
+   * variant="contained"
+   * color="success"
+   * checked
+   * onChange={handleChecked}
+   * endAddon={(props: TagBadgeProps) => ( <TagBadge {...props} badgeContent={'12'} />)}
+ * />
+
+ */
 export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
   (
     {
@@ -31,10 +58,22 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
       color = 'grey',
       onChange,
       disabled,
+      startAddon: StartAddon,
+      endAddon: EndAddon,
       ...tagProps
     },
     ref,
   ) => {
+    const checkableStartAddon = (props: TagAddonProps) =>
+      StartAddon ? (
+        <StartAddon checked={checked} disabled={disabled} {...props} />
+      ) : null;
+
+    const checkableEndAddon = (props: TagAddonProps) =>
+      EndAddon ? (
+        <EndAddon checked={checked} disabled={disabled} {...props} />
+      ) : null;
+
     return (
       <CheckableTagWrapper>
         <CheckableTagHiddenInput
@@ -49,6 +88,8 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           variant={variant}
           color={color}
           disabled={disabled}
+          startAddon={checkableStartAddon}
+          endAddon={checkableEndAddon}
           {...tagProps}
         />
       </CheckableTagWrapper>
