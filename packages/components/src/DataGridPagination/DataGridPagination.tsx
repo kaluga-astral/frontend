@@ -11,7 +11,7 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    */
   totalCount: number;
   /**
-   * Мксимальное количество записей на страницу
+   * Максимальное количество записей на страницу
    */
   rowsPerPage?: number;
   /**
