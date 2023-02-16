@@ -7,13 +7,11 @@ const TEST_DATA = [
   { page: 3, totalCount: 24, expected: '21 — 24 из 24 записей' },
   { page: 2, totalCount: 20, expected: '11 — 20 из 20 записей' },
   { page: 2, totalCount: 19, expected: '11 — 19 из 19 записей' },
-  { page: 1, totalCount: 10, expected: '1 — 10 из 10 записей' },
-  { page: 1, totalCount: 5, expected: '1 — 5 из 5 записей' },
 ];
 
 describe('DataGridPagination', () => {
   test.each(TEST_DATA)(
-    'Props:page=$page:totalCount=$totalCount: Текст пагинации "$expected"',
+    'Props:page=$page:totalCount=$totalCount: текст пагинации "$expected"',
     ({ totalCount, page, expected }) => {
       renderWithTheme(
         <DataGridPagination totalCount={totalCount} page={page} />,
@@ -24,4 +22,12 @@ describe('DataGridPagination', () => {
       expect(text).toBeInTheDocument();
     },
   );
+
+  it('Props:totalCount=11:rowsPerPage=10: пагинация не отображается', () => {
+    const { container } = renderWithTheme(
+      <DataGridPagination page={1} totalCount={1} rowsPerPage={10} />,
+    );
+
+    expect(container).toBeEmptyDOMElement();
+  });
 });
