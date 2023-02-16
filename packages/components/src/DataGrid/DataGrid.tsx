@@ -97,12 +97,6 @@ export type DataGridProps<
    *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
-  /**
-   * @default 50
-   * @example <DateGrid Footer={Footer} footerHeight={50} />
-   * Высота Footer, по-умолчанию указана высота Footer из кита
-   */
-  footerHeight?: number;
 };
 
 export function DataGrid<
@@ -125,10 +119,8 @@ export function DataGrid<
   keyId,
   emptyCellValue,
   className,
-  footerHeight = 50,
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
-  const withFooter = Boolean(Footer);
   const isTableDisabled = loading || disabled;
 
   const TableContainer = isTableDisabled
@@ -215,12 +207,7 @@ export function DataGrid<
           />
         </Table>
       </TableContainer>
-      <DataGridLoader
-        footerHeight={footerHeight}
-        withFooter={withFooter}
-        disabled={disabled}
-        loading={loading}
-      />
+      <DataGridLoader disabled={disabled} loading={loading} />
       {Footer}
     </DataGridContainer>
   );
