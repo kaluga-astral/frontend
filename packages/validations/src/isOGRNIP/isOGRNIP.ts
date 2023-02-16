@@ -1,6 +1,5 @@
 import { createRule } from '../createRule';
-import { isEmptyString } from '../utils';
-import { isStringOfZeros } from '../utils/isStringOfZeros';
+import { isEmptyString, isStringOfZeros } from '../utils';
 
 export const IS_OGRNIP_DEFAULT_MESSAGE = 'Некорректный ОГРН ИП';
 
