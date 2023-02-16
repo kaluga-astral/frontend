@@ -5,8 +5,8 @@ describe('isINNIP', () => {
     expect(isINNIP()(value)).toBe(undefined);
   });
 
-  it.each<unknown>(['000000000000'])('Invalid for: %s', (value) => {
-    expect(isINNIP()(value)).toBe(IS_INNIP_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если ИНН ИП состоит целиком из нулей', () => {
+    expect(isINNIP()('000000000000')).toBe(IS_INNIP_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([

@@ -8,8 +8,8 @@ describe('isSNILS', () => {
     },
   );
 
-  it.each<unknown>(['00000000000'])('Invalid for: %s', (value) => {
-    expect(isSNILS()(value)).toBe(IS_SNILS_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если СНИЛС состоит целиком из нулей', () => {
+    expect(isSNILS()('00000000000')).toBe(IS_SNILS_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([

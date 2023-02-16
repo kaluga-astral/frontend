@@ -8,8 +8,8 @@ describe('isKPP', () => {
     },
   );
 
-  it.each<unknown>(['000000000'])('Invalid for: %s', (value) => {
-    expect(isKPP()(value)).toBe(IS_KPP_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если КПП состоит целиком из нулей', () => {
+    expect(isKPP()('000000000')).toBe(IS_KPP_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([

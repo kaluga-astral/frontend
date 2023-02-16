@@ -8,8 +8,8 @@ describe('isOGRNUL', () => {
     },
   );
 
-  it.each<unknown>(['0000000000000'])('Invalid for: %s', (value) => {
-    expect(isOGRNUL()(value)).toBe(IS_OGRNUL_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если ОГРНЮЛ состоит целиком из нулей', () => {
+    expect(isOGRNUL()('00000000000')).toBe(IS_OGRNUL_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([

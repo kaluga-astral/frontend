@@ -5,8 +5,8 @@ describe('isOGRNIP', () => {
     expect(isOGRNIP()(value)).toBe(undefined);
   });
 
-  it.each<unknown>(['000000000000000'])('Invalid for: %s', (value) => {
-    expect(isOGRNIP()(value)).toBe(IS_OGRNIP_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если ОГРНИП состоит целиком из нулей', () => {
+    expect(isOGRNIP()('000000000000000')).toBe(IS_OGRNIP_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([

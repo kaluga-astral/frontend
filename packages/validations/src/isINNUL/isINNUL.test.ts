@@ -5,8 +5,8 @@ describe('isINNUL', () => {
     expect(isINNUL()(value)).toBe(undefined);
   });
 
-  it.each<unknown>(['0000000000'])('Invalid for: %s', (value) => {
-    expect(isINNUL()(value)).toBe(IS_INNUL_DEFAULT_MESSAGE);
+  it('Возвращает ошибку, если ИНН ЮЛ состоит целиком из нулей', () => {
+    expect(isINNUL()('0000000000')).toBe(IS_INNUL_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([
