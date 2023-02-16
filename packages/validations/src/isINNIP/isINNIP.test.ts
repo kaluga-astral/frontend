@@ -5,6 +5,10 @@ describe('isINNIP', () => {
     expect(isINNIP()(value)).toBe(undefined);
   });
 
+  it.each<unknown>(['000000000000'])('Invalid for: %s', (value) => {
+    expect(isINNIP()(value)).toBe(IS_INNIP_DEFAULT_MESSAGE);
+  });
+
   it.each<unknown>([
     'a',
     '123a',

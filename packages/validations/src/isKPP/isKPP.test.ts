@@ -1,15 +1,15 @@
-import { IS_SNILS_DEFAULT_MESSAGE, isSNILS } from './isSNILS';
+import { IS_KPP_DEFAULT_MESSAGE, isKPP } from './isKPP';
 
-describe('isSNILS', () => {
-  it.each<unknown>(['15657325992', '95145370513', ''])(
+describe('isKPP', () => {
+  it.each<unknown>(['249443332', '082645444', '0826AD444', '0826ZE444', ''])(
     'Valid for: %s',
     (value) => {
-      expect(isSNILS()(value)).toBe(undefined);
+      expect(isKPP()(value)).toBe(undefined);
     },
   );
 
-  it.each<unknown>(['00000000000'])('Invalid for: %s', (value) => {
-    expect(isSNILS()(value)).toBe(IS_SNILS_DEFAULT_MESSAGE);
+  it.each<unknown>(['000000000'])('Invalid for: %s', (value) => {
+    expect(isKPP()(value)).toBe(IS_KPP_DEFAULT_MESSAGE);
   });
 
   it.each<unknown>([
@@ -27,13 +27,13 @@ describe('isSNILS', () => {
     1175958000004,
     95145370513,
   ])('Invalid for: %s', (value) => {
-    expect(isSNILS()(value)).toBe(IS_SNILS_DEFAULT_MESSAGE);
+    expect(isKPP()(value)).toBe(IS_KPP_DEFAULT_MESSAGE);
   });
 
   it('Valid custom message', () => {
     const customMessage = 'CustomMessage';
 
-    expect(isSNILS({ message: customMessage })('q')).toBe(customMessage);
+    expect(isKPP({ message: customMessage })('q')).toBe(customMessage);
   });
 
   it('Valid exclude value', () => {
@@ -43,6 +43,6 @@ describe('isSNILS', () => {
       return excluded.includes(value);
     };
 
-    expect(isSNILS({ exclude: isExclude })('exclude')).toBe(undefined);
+    expect(isKPP({ exclude: isExclude })('exclude')).toBe(undefined);
   });
 });
