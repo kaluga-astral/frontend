@@ -314,7 +314,7 @@ const Template: Story = (args) => {
             sorting={sorting}
             Footer={
               <DataGridPagination
-                totalCount={data.length}
+                totalCount={0}
                 onChange={handleChangePage}
                 page={page}
               />
