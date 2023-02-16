@@ -226,6 +226,7 @@ const Template: Story = (args) => {
       <ExampleTemplate.Case
         title="DataGrid без пагинации"
         descriptionList={[
+          'Пагинация скрыта, так как totalCount(10) меньше или равен minDisplayRows(10)',
           'Растягивается по всей доступной высоте котейнера (600px)',
         ]}
       >
@@ -245,6 +246,14 @@ const Template: Story = (args) => {
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
+            totalCount={10}
+            Footer={
+              <DataGridPagination
+                totalCount={data.length}
+                onChange={handleChangePage}
+                page={page}
+              />
+            }
           />
         </Stack>
       </ExampleTemplate.Case>
@@ -268,6 +277,7 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
+            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -301,6 +311,7 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
+            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -340,6 +351,7 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
+            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -408,6 +420,7 @@ export const Showcase: Story = (args) => {
       selectedRows={selected}
       onSelectRow={handleSelect}
       onRowClick={handleRowClick}
+      totalCount={data.length}
       minDisplayRows={10}
       loading={loading}
       onSort={handleSort}
