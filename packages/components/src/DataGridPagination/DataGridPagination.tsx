@@ -50,6 +50,10 @@ export const DataGridPagination = ({
   }, [page, rowsPerPage, totalCount]);
   const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
+  if (totalCount <= rowsPerPage) {
+    return null;
+  }
+
   return (
     <PaginationWrapper className={className}>
       <Range variant="h6">{formattedRange}</Range>

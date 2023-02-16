@@ -6,64 +6,6 @@ import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
 
 describe('DataGrid', () => {
-  it('Props:totalCount=1:minDisplayRows=10: Footer не отображается, totalCount <= minDisplayRows', () => {
-    type DataItem = {
-      name: string;
-    };
-
-    const columns: DataGridColumns<DataItem>[] = [
-      {
-        field: 'name',
-        label: 'Наименование',
-        sortable: true,
-      },
-    ];
-
-    renderWithTheme(
-      <DataGrid
-        keyId="id"
-        rows={[{ name: 'name' }]}
-        columns={columns}
-        Footer={<span>Footer is visible</span>}
-        totalCount={1}
-        minDisplayRows={10}
-      />,
-    );
-
-    const title = screen.queryByText(/Footer is visible/i);
-
-    expect(title).not.toBeInTheDocument();
-  });
-
-  it('Props:totalCount=10:minDisplayRows=1: Footer отображается, totalCount > minDisplayRows', () => {
-    type DataItem = {
-      name: string;
-    };
-
-    const columns: DataGridColumns<DataItem>[] = [
-      {
-        field: 'name',
-        label: 'Наименование',
-        sortable: true,
-      },
-    ];
-
-    renderWithTheme(
-      <DataGrid
-        keyId="id"
-        rows={[{ name: 'name' }]}
-        columns={columns}
-        minDisplayRows={1}
-        totalCount={10}
-        Footer={<span>Footer is visible</span>}
-      />,
-    );
-
-    const title = screen.getByText('Footer is visible');
-
-    expect(title).toBeInTheDocument();
-  });
-
   it('Props:columns: отображаются названия колонок', () => {
     const columns = [
       {

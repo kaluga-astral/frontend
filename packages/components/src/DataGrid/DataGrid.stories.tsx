@@ -246,10 +246,9 @@ const Template: Story = (args) => {
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
-            totalCount={10}
             Footer={
               <DataGridPagination
-                totalCount={data.length}
+                totalCount={10}
                 onChange={handleChangePage}
                 page={page}
               />
@@ -277,7 +276,6 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
-            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -311,7 +309,6 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
-            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -351,7 +348,6 @@ const Template: Story = (args) => {
             selectedRows={selected}
             onSelectRow={handleSelect}
             onRowClick={handleRowClick}
-            totalCount={data.length}
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
@@ -420,7 +416,6 @@ export const Showcase: Story = (args) => {
       selectedRows={selected}
       onSelectRow={handleSelect}
       onRowClick={handleRowClick}
-      totalCount={data.length}
       minDisplayRows={10}
       loading={loading}
       onSort={handleSort}

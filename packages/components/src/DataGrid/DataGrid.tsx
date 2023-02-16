@@ -97,18 +97,6 @@ export type DataGridProps<
    *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
-  /**
-   * @default 50
-   * @example <DateGrid Footer={Footer} footerHeight={50} />
-   * Высота Footer, по-умолчанию указана высота Footer из кита
-   */
-  footerHeight?: number;
-  /**
-   * @example <DateGrid totalCount={16} />
-   * Всего количество записей в таблице.
-   * Footer скрывается, если totalCount передан и totalCount <= minDisplayRows
-   */
-  totalCount?: number;
 };
 
 export function DataGrid<
@@ -131,13 +119,9 @@ export function DataGrid<
   keyId,
   emptyCellValue,
   className,
-  footerHeight = 50,
-  totalCount,
 }: DataGridProps<Data, SortField>) {
   const selectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
-  const isSinglePage = Boolean(totalCount && totalCount <= minDisplayRows);
-  const withFooter = Boolean(Footer && !isSinglePage);
 
   const TableContainer = isTableDisabled
     ? DisabledTableContainer
@@ -223,13 +207,8 @@ export function DataGrid<
           />
         </Table>
       </TableContainer>
-      <DataGridLoader
-        footerHeight={footerHeight}
-        withFooter={withFooter}
-        disabled={disabled}
-        loading={loading}
-      />
-      {withFooter && Footer}
+      <DataGridLoader disabled={disabled} loading={loading} />
+      {Footer}
     </DataGridContainer>
   );
 }
