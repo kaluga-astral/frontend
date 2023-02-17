@@ -24,6 +24,8 @@ export * from './Divider';
 
 export * from './ButtonBase';
 
+export * from './CheckableTag';
+
 export * from './Checkbox';
 
 export * from './CircularProgress';
@@ -139,6 +141,8 @@ export * from './Tab';
 export * from './Tabs';
 
 export * from './Tag';
+
+export * from './TagBadge';
 
 export * from './TextArea';
 
