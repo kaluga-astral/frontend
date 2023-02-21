@@ -1,10 +1,23 @@
 import { FieldValues } from 'react-hook-form';
 
+import { WithFormFieldProps } from '../../types';
+
+export type UseFormInputProps<
+  TFormInputProps extends object,
+  TFieldValues extends FieldValues,
+> = Omit<
+  WithFormFieldProps<TFormInputProps, TFieldValues>,
+  'name' | 'shouldUnregister' | 'defaultValue' | 'rules' | 'control'
+>;
+
 /**
- * @description хук предназначен для предоставления пропсов input без пропсов rhf.
+ * @description хук предназначен для предоставления пропсов компонента с input без пропсов RHF
  */
-export const useFormInputProps = <FormFieldProps extends FieldValues>(
-  props: FormFieldProps,
+export const useFormInputProps = <
+  TFormInputProps extends object,
+  TFieldValues extends FieldValues,
+>(
+  props: WithFormFieldProps<TFormInputProps, TFieldValues>,
 ) => {
   const {
     control,

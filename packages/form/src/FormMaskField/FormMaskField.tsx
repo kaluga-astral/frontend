@@ -1,5 +1,4 @@
-import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/components';
-import { useController } from 'react-hook-form';
+import { MaskField, MaskFieldProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
@@ -9,21 +8,13 @@ import { WithFormFieldProps } from '../types';
  */
 export type FormMaskFieldValue = string;
 
-export type FormMaskFieldProps<FieldValues extends object> = WithFormFieldProps<
-  MaskFieldProps,
-  FieldValues
->;
+export type FormMaskFieldProps = WithFormFieldProps<MaskFieldProps>;
 
 /**
  * @description Адаптер для MaskField
  */
-export function FormMaskField<FieldValues extends object>(
-  props: FormMaskFieldProps<FieldValues>,
-) {
-  const { field, fieldState } = useController(props);
-  const fieldProps = useFormFieldProps(props, fieldState);
+export function FormMaskField(props: FormMaskFieldProps) {
+  const fieldProps = useFormFieldProps(props);
 
-  const ref = useForwardedRef(field.ref);
-
-  return <MaskField {...field} ref={ref} {...fieldProps} />;
+  return <MaskField {...fieldProps} />;
 }

@@ -1,22 +1,15 @@
 import { Select, SelectProps } from '@astral/components';
-import { useController } from 'react-hook-form';
 
 import { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
-export type FormSelectProps<FieldValues extends object> = WithFormFieldProps<
-  SelectProps<unknown>,
-  FieldValues
->;
+export type FormSelectProps = WithFormFieldProps<SelectProps<unknown>>;
 
 /**
  * @description Адаптер для Select
  */
-export function FormSelect<FieldValues extends object>(
-  props: FormSelectProps<FieldValues>,
-) {
-  const { field, fieldState } = useController(props);
-  const fieldProps = useFormFieldProps(props, fieldState);
+export function FormSelect(props: FormSelectProps) {
+  const fieldProps = useFormFieldProps(props);
 
-  return <Select {...field} {...fieldProps} />;
+  return <Select {...fieldProps} />;
 }

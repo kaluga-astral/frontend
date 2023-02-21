@@ -1,5 +1,4 @@
 import { TextArea, TextAreaProps } from '@astral/components';
-import { useController } from 'react-hook-form';
 
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
@@ -9,19 +8,13 @@ import { WithFormFieldProps } from '../types';
  */
 export type FormTextAreaValue = string;
 
-export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
-  TextAreaProps,
-  FieldValues
->;
+export type FormTextAreaProps = WithFormFieldProps<TextAreaProps>;
 
 /**
  * @description Адаптер для TextArea
  */
-export function FormTextArea<FieldValues extends object>(
-  props: FormTextAreaProps<FieldValues>,
-) {
-  const { field, fieldState } = useController(props);
-  const fieldProps = useFormFieldProps(props, fieldState);
+export function FormTextArea(props: FormTextAreaProps) {
+  const fieldProps = useFormFieldProps(props);
 
-  return <TextArea {...field} {...fieldProps} />;
+  return <TextArea {...fieldProps} />;
 }

@@ -1,27 +1,20 @@
 import { TextField, TextFieldProps } from '@astral/components';
-import { useController } from 'react-hook-form';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { FieldValues, WithFormFieldProps } from '../types';
 
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormTextFieldValue = string;
-
-export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
-  TextFieldProps,
-  FieldValues
->;
+export type FormTextFieldProps<
+  TFieldValues extends FieldValues,
+  TFieldProps extends object = TextFieldProps,
+> = WithFormFieldProps<TFieldProps, TFieldValues>;
 
 /**
  * @description Адаптер для TextField
  */
-export function FormTextField<FieldValues extends object>(
-  props: FormTextFieldProps<FieldValues>,
+export function FormTextField<TFieldValues extends FieldValues>(
+  props: FormTextFieldProps<TFieldValues>,
 ) {
-  const { field, fieldState } = useController(props);
-  const fieldProps = useFormFieldProps(props, fieldState);
+  const fieldProps = useFormFieldProps(props);
 
-  return <TextField {...field} {...fieldProps} />;
+  return <TextField {...fieldProps} />;
 }

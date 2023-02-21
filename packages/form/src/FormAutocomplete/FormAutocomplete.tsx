@@ -1,46 +1,35 @@
 import { Autocomplete, AutocompleteProps } from '@astral/components';
-import { useController } from 'react-hook-form';
 import { SyntheticEvent } from 'react';
 
 import { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormAutocompleteProps<
-  FieldValues extends object,
   Option,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 > = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-  FieldValues
+  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>
 >;
 
 /**
  * @description Адаптер для Select
  */
 export const FormAutocomplete = <
-  FieldValues extends object,
   Option,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 >(
-  props: FormAutocompleteProps<
-    FieldValues,
-    Option,
-    Multiple,
-    DisableClearable,
-    FreeSolo
-  >,
+  props: FormAutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
 ) => {
-  const { field, fieldState } = useController(props);
-  const inputProps = useFormFieldProps(props, fieldState);
+  const fieldProps = useFormFieldProps(props);
 
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,
     value: Value,
-  ) => field.onChange(value);
+  ) => fieldProps.onChange(value);
 
-  return <Autocomplete {...field} {...inputProps} onChange={handleOnChange} />;
+  return <Autocomplete {...fieldProps} onChange={handleOnChange} />;
 };

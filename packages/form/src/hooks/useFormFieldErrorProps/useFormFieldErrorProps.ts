@@ -1,7 +1,7 @@
 import { TextFieldProps } from '@astral/components';
 import { ControllerFieldState } from 'react-hook-form';
 
-type UseFormFieldErrorPropsResult = Pick<
+export type UseFormFieldErrorPropsReturn = Pick<
   TextFieldProps,
   'error' | 'helperText'
 >;
@@ -11,7 +11,7 @@ type UseFormFieldErrorPropsResult = Pick<
  */
 export const useFormFieldErrorProps = (
   fieldState: Pick<ControllerFieldState, 'error'>,
-): UseFormFieldErrorPropsResult => {
+): UseFormFieldErrorPropsReturn => {
   return {
     error: Boolean(fieldState.error),
     helperText: fieldState.error?.message,

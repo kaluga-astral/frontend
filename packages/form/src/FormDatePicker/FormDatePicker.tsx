@@ -13,16 +13,12 @@ const DEFAULT_VALIDATE = () => undefined;
  */
 export type FormDatePickerValue = Date;
 
-export type FormDatePickerProps<FieldValues extends object> =
-  WithFormFieldProps<DatePickerProps, FieldValues>;
+export type FormDatePickerProps = WithFormFieldProps<DatePickerProps>;
 
 /**
  * @description DatePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
  */
-export function FormDatePicker<FieldValues extends object>({
-  rules,
-  ...props
-}: FormDatePickerProps<FieldValues>) {
+export function FormDatePicker({ rules, ...props }: FormDatePickerProps) {
   const validationRules = useMemo(() => {
     const validate = rules?.validate || DEFAULT_VALIDATE;
 
@@ -33,6 +29,7 @@ export function FormDatePicker<FieldValues extends object>({
   }, [rules]);
 
   const inputProps = useFormInputProps(props);
+
   const { field, fieldState } = useController({
     ...props,
     rules: validationRules,
