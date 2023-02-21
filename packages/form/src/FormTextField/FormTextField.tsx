@@ -33,6 +33,7 @@ export function FormTextField<FieldValues extends object>({
     }
 
     field.onBlur();
+    props.onBlur?.(event);
   };
 
   return (
