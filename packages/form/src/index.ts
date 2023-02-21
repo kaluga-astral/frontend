@@ -48,6 +48,8 @@ export {
   type UseFormProps,
   type UseFormReturn,
   useFormContext,
+  useFormFieldErrorProps,
+  useFormFieldProps,
 } from './hooks';
 
 export { FormProvider } from './FormProvider';
