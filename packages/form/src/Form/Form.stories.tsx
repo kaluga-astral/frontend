@@ -12,7 +12,7 @@ export default {
   component: null,
 };
 
-type FormValues = { name: FormTextFieldValue, a: string };
+type FormValues = { name: FormTextFieldValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();
@@ -31,7 +31,7 @@ const Template: Story = () => {
           required
           label="Form text field"
           control={form.control}
-          name="a"
+          name="name"
           rules={{ required: 'Обязательное поле' }}
         />
         <FormSubmitButton>Submit</FormSubmitButton>
