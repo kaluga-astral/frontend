@@ -3,10 +3,8 @@ import { TextField, TextFieldProps } from '@astral/components';
 import { useFormFieldProps } from '../hooks';
 import { FieldValues, WithFormFieldProps } from '../types';
 
-export type FormTextFieldProps<
-  TFieldValues extends FieldValues,
-  TFieldProps extends object = TextFieldProps,
-> = WithFormFieldProps<TFieldProps, TFieldValues>;
+export type FormTextFieldProps<TFieldValues extends FieldValues> =
+  WithFormFieldProps<TextFieldProps, TFieldValues>;
 
 /**
  * @description Адаптер для TextField
@@ -14,7 +12,10 @@ export type FormTextFieldProps<
 export function FormTextField<TFieldValues extends FieldValues>(
   props: FormTextFieldProps<TFieldValues>,
 ) {
-  const fieldProps = useFormFieldProps(props);
+  const fieldProps = useFormFieldProps<
+    FormTextFieldProps<TFieldValues>,
+    TFieldValues
+  >(props);
 
-  return <TextField {...fieldProps} />;
+  return <TextField {...fieldProps} ref={fieldProps.ref} />;
 }

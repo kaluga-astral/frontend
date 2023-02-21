@@ -1,43 +1,40 @@
-// @ts-nocheck
-
-import { ControllerRenderProps, useController } from 'react-hook-form';
+import { useForwardedRef } from '@astral/components';
+import { useController } from 'react-hook-form';
 
 import { WithFormFieldProps, FieldValues } from '../../types';
-// import { useFormFieldErrorProps } from '../useFormFieldErrorProps';
-import { UseFormInputProps, useFormInputProps } from '../useFormInputProps';
+import { useFormFieldErrorProps } from '../useFormFieldErrorProps';
+import { useFormInputProps } from '../useFormInputProps';
 
-type UseFormFieldReturn<
+export type UseFormFieldProps<
+  TFormFieldProps extends object,
   TFieldValues extends FieldValues,
-  TFormInputProps extends object,
-> = ControllerRenderProps<TFieldValues> &
-  UseFormInputProps<TFormInputProps, TFieldValues>;
+> = WithFormFieldProps<TFormFieldProps, TFieldValues>;
 
 /**
- * @description хук предназначен для предоставления пропсов field без пропсов rhf
+ * @description хук предназначен для получения пропсов при инициализации нового поля в RHF
  */
 export const useFormFieldProps = <
+  TFormFieldProps extends object,
   TFieldValues extends FieldValues,
-  TFormInputProps extends object,
-  TFormTextFieldProps extends WithFormFieldProps<
-    TFormInputProps,
-    TFieldValues
-  > = WithFormFieldProps<TFormInputProps, TFieldValues>,
 >(
-  props: TFormTextFieldProps,
-): UseFormFieldReturn<TFieldValues, TFormInputProps> => {
+  props: UseFormFieldProps<TFormFieldProps, TFieldValues>,
+) => {
   const { field, fieldState } = useController(props);
 
-  // const ref = useForwardedRef(field.ref);
+  const ref = useForwardedRef(field.ref);
 
   /**
    * Вырезаем системные RHF пропсы предназначенные только для useController, например rules, defaultValue и т.д.
    */
-  const inputProps = useFormInputProps(props);
+  const inputProps = useFormInputProps<
+    UseFormFieldProps<TFormFieldProps, TFieldValues>,
+    TFieldValues
+  >(props);
 
   /**
    * Получаем пропсы для отображения ошибки
    */
-  // const errorProps = useFormFieldErrorProps(fieldState);
+  const errorProps = useFormFieldErrorProps(fieldState);
 
-  return { ...field, ...inputProps };
+  return { ...inputProps, ...field, ...errorProps, ref };
 };
