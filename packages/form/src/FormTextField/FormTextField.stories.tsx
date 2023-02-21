@@ -4,14 +4,15 @@ import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 
-import { FormTextField, FormTextFieldValue } from './FormTextField';
+import { FormTextField } from './FormTextField';
+import { FormTextFieldValue } from './types';
 
 export default {
   title: 'Form/FormTextField',
   component: null,
 };
 
-type FormValues = { name: FormTextFieldValue };
+type FormValues = { name: FormTextFieldValue; a: string };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();

@@ -4,7 +4,8 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
-import { FormCheckbox, FormCheckboxValue } from './FormCheckbox';
+import { FormCheckbox } from './FormCheckbox';
+import { FormCheckboxValue } from './types';
 
 export default {
   title: 'Form/FormCheckbox',
@@ -22,7 +23,7 @@ const Template: Story = () => {
         control={form.control}
         name="fieldName"
         title="Form checkbox field"
-        rules={{ required: 'Must be checked' }}
+        rules={{ required: 'Обязательное поле' }}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

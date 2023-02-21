@@ -4,7 +4,8 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
-import { FormMaskField, FormMaskFieldValue } from './FormMaskField';
+import { FormMaskField } from './FormMaskField';
+import { FormMaskFieldValue } from './types';
 
 export default {
   title: 'Form/FormMaskField',
