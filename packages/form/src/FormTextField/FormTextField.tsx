@@ -20,10 +20,10 @@ export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
 /**
  * @description Адаптер для TextField
  */
-export function FormTextField<FieldValues extends object>(
-  props: FormTextFieldProps<FieldValues>,
-) {
-  const { trimmed = true } = props;
+export function FormTextField<FieldValues extends object>({
+  trimmed = true,
+  ...props
+}: FormTextFieldProps<FieldValues>) {
   const { field, fieldState } = useController(props);
   const errorProps = useFormFieldErrorProps(fieldState);
 
