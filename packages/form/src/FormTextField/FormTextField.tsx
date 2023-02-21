@@ -14,6 +14,10 @@ export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
   TextFieldProps,
   FieldValues
 > & {
+  /**
+   * @description Параметр для обрезания пробелов в текстфилде. По-умолчанию true
+   * @example <FormTextField trimmed={false} />
+   */
   trimmed?: boolean;
 };
 
