@@ -1,3 +1,4 @@
+import { FocusEvent } from 'react';
 import { TextField, TextFieldProps } from '@astral/components';
 import { useController } from 'react-hook-form';
 
@@ -12,7 +13,9 @@ export type FormTextFieldValue = string;
 export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
   TextFieldProps,
   FieldValues
->;
+> & {
+  trimmed?: boolean;
+};
 
 /**
  * @description Адаптер для TextField
@@ -20,8 +23,19 @@ export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
 export function FormTextField<FieldValues extends object>(
   props: FormTextFieldProps<FieldValues>,
 ) {
+  const { trimmed = true } = props;
   const { field, fieldState } = useController(props);
   const errorProps = useFormFieldErrorProps(fieldState);
 
-  return <TextField {...field} {...props} {...errorProps} />;
+  const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+    if (trimmed) {
+      field.onChange(event.target.value?.trim());
+    }
+
+    field.onBlur();
+  };
+
+  return (
+    <TextField {...field} {...props} onBlur={handleOnBlur} {...errorProps} />
+  );
 }
