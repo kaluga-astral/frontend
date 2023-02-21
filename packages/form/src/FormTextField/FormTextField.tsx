@@ -17,5 +17,5 @@ export function FormTextField<TFieldValues extends FieldValues>(
     TFieldValues
   >(props);
 
-  return <TextField {...fieldProps} ref={fieldProps.ref} />;
+  return <TextField {...fieldProps} />;
 }

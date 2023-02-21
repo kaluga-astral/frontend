@@ -9,22 +9,16 @@ const MOBILE_PHONE_MASK = '+{7} (000) 00-00-000';
 
 const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
 
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormMobilePhoneFieldValue = string;
-
-export type FormMobilePhoneFieldProps = WithFormFieldProps<
-  Omit<MaskFieldProps, 'mask'>
->;
+export type FormMobilePhoneFieldProps<FieldValues extends object> =
+  WithFormFieldProps<Omit<MaskFieldProps, 'mask'>, FieldValues>;
 
 /**
  * @description Поле для ввода личного мобильного номера телефона, начинающего на 79
  */
-export function FormMobilePhoneField({
+export const FormMobilePhoneField = <FieldValues extends object>({
   rules,
   ...props
-}: FormMobilePhoneFieldProps) {
+}: FormMobilePhoneFieldProps<FieldValues>) => {
   const customRules = useMemo(() => {
     if (rules?.validate) {
       return {
@@ -42,7 +36,10 @@ export function FormMobilePhoneField({
     };
   }, [rules]);
 
-  const fieldProps = useFormFieldProps({
+  const fieldProps = useFormFieldProps<
+    FormMobilePhoneFieldProps<FieldValues>,
+    FieldValues
+  >({
     ...props,
     rules: customRules,
   });
@@ -55,4 +52,4 @@ export function FormMobilePhoneField({
       autoComplete="tel"
     />
   );
-}
+};

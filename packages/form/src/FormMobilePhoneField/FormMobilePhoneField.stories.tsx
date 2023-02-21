@@ -4,10 +4,8 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
-import {
-  FormMobilePhoneField,
-  FormMobilePhoneFieldValue,
-} from './FormMobilePhoneField';
+import { FormMobilePhoneField } from './FormMobilePhoneField';
+import { FormMobilePhoneFieldValue } from './types';
 
 export default {
   title: 'Form/FormMobilePhoneField',

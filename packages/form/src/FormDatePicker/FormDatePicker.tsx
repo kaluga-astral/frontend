@@ -1,9 +1,8 @@
 import { DatePicker, DatePickerProps } from '@astral/components';
 import { InitializedRule, compose, isDate } from '@astral/validations';
-import { useController } from 'react-hook-form';
 import { useMemo } from 'react';
 
-import { useFormFieldErrorProps, useFormInputProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 const DEFAULT_VALIDATE = () => undefined;
@@ -13,12 +12,16 @@ const DEFAULT_VALIDATE = () => undefined;
  */
 export type FormDatePickerValue = Date;
 
-export type FormDatePickerProps = WithFormFieldProps<DatePickerProps>;
+export type FormDatePickerProps<FieldValues extends object> =
+  WithFormFieldProps<DatePickerProps, FieldValues>;
 
 /**
  * @description DatePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
  */
-export function FormDatePicker({ rules, ...props }: FormDatePickerProps) {
+export const FormDatePicker = <FieldValues extends object>({
+  rules,
+  ...props
+}: FormDatePickerProps<FieldValues>) => {
   const validationRules = useMemo(() => {
     const validate = rules?.validate || DEFAULT_VALIDATE;
 
@@ -28,19 +31,23 @@ export function FormDatePicker({ rules, ...props }: FormDatePickerProps) {
     };
   }, [rules]);
 
-  const inputProps = useFormInputProps(props);
-
-  const { field, fieldState } = useController({
+  const fieldProps = useFormFieldProps<
+    FormDatePickerProps<FieldValues>,
+    FieldValues
+  >({
     ...props,
     rules: validationRules,
   });
-  const errorProps = useFormFieldErrorProps(fieldState);
+
+  const { error, helperText, ...fieldPropsWithoutErrorProps } = fieldProps;
+
+  const { name, onBlur, onChange, ref, value, ...datePickerProps } =
+    fieldPropsWithoutErrorProps;
 
   return (
     <DatePicker
-      {...field}
-      {...inputProps}
-      inputProps={{ ...props.inputProps, ...errorProps }}
+      {...fieldPropsWithoutErrorProps}
+      inputProps={{ ...datePickerProps.inputProps, error, helperText }}
     />
   );
-}
+};

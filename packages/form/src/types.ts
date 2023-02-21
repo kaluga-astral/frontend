@@ -1,4 +1,4 @@
-import { FieldPath, UseControllerProps } from 'react-hook-form';
+import { UseControllerProps } from 'react-hook-form';
 
 /**
  * @description Добавляет к переданным пропсам типы для react-hook-form. Позволяет переиспользовать логику типизации для филдов формы.

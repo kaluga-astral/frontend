@@ -3,18 +3,21 @@ import { TextArea, TextAreaProps } from '@astral/components';
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormTextAreaValue = string;
-
-export type FormTextAreaProps = WithFormFieldProps<TextAreaProps>;
+export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
+  TextAreaProps,
+  FieldValues
+>;
 
 /**
  * @description Адаптер для TextArea
  */
-export function FormTextArea(props: FormTextAreaProps) {
-  const fieldProps = useFormFieldProps(props);
+export const FormTextArea = <FieldValues extends object>(
+  props: FormTextAreaProps<FieldValues>,
+) => {
+  const fieldProps = useFormFieldProps<
+    FormTextAreaProps<FieldValues>,
+    FieldValues
+  >(props);
 
   return <TextArea {...fieldProps} />;
-}
+};

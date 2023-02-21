@@ -3,18 +3,21 @@ import { MaskField, MaskFieldProps } from '@astral/components';
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormMaskFieldValue = string;
-
-export type FormMaskFieldProps = WithFormFieldProps<MaskFieldProps>;
+export type FormMaskFieldProps<FieldValues extends object> = WithFormFieldProps<
+  MaskFieldProps,
+  FieldValues
+>;
 
 /**
  * @description Адаптер для MaskField
  */
-export function FormMaskField(props: FormMaskFieldProps) {
-  const fieldProps = useFormFieldProps(props);
+export const FormMaskField = <FieldValues extends object>(
+  props: FormMaskFieldProps<FieldValues>,
+) => {
+  const fieldProps = useFormFieldProps<
+    FormMaskFieldProps<FieldValues>,
+    FieldValues
+  >(props);
 
   return <MaskField {...fieldProps} />;
-}
+};

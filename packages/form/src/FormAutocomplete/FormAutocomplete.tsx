@@ -5,26 +5,44 @@ import { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormAutocompleteProps<
+  FieldValues extends object,
   Option,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 > = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>
+  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+  FieldValues
 >;
 
 /**
  * @description Адаптер для Select
  */
 export const FormAutocomplete = <
+  FieldValues extends object,
   Option,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 >(
-  props: FormAutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+  props: FormAutocompleteProps<
+    FieldValues,
+    Option,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >,
 ) => {
-  const fieldProps = useFormFieldProps(props);
+  const fieldProps = useFormFieldProps<
+    FormAutocompleteProps<
+      FieldValues,
+      Option,
+      Multiple,
+      DisableClearable,
+      FreeSolo
+    >,
+    FieldValues
+  >(props);
 
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,
