@@ -68,11 +68,15 @@ export const Autocomplete = <
     success,
     helperText,
     label,
-    size = 'medium',
     getOptionLabel,
     required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    noOptionsText = 'Нет данных',
+    closeText = 'Закрыть',
+    openText = 'Открыть',
+    clearText = 'Очистить',
+    size = 'medium',
     overflowOption,
     ...restProps
   } = props;
@@ -170,7 +174,10 @@ export const Autocomplete = <
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
-      noOptionsText="Нет данных"
+      noOptionsText={noOptionsText}
+      closeText={closeText}
+      openText={openText}
+      clearText={clearText}
     />
   );
 };

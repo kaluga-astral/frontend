@@ -8,6 +8,10 @@ describe('isSNILS', () => {
     },
   );
 
+  it('Возвращает ошибку, если СНИЛС состоит целиком из нулей', () => {
+    expect(isSNILS()('00000000000')).toBe(IS_SNILS_DEFAULT_MESSAGE);
+  });
+
   it.each<unknown>([
     'a',
     0,

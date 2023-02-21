@@ -5,6 +5,10 @@ describe('isINNIP', () => {
     expect(isINNIP()(value)).toBe(undefined);
   });
 
+  it('Возвращает ошибку, если ИНН ИП состоит целиком из нулей', () => {
+    expect(isINNIP()('000000000000')).toBe(IS_INNIP_DEFAULT_MESSAGE);
+  });
+
   it.each<unknown>([
     'a',
     '123a',

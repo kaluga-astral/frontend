@@ -8,6 +8,10 @@ describe('isOGRNUL', () => {
     },
   );
 
+  it('Возвращает ошибку, если ОГРНЮЛ состоит целиком из нулей', () => {
+    expect(isOGRNUL()('00000000000')).toBe(IS_OGRNUL_DEFAULT_MESSAGE);
+  });
+
   it.each<unknown>([
     'a',
     0,
