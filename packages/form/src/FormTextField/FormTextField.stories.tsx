@@ -23,7 +23,7 @@ const Template: Story = () => {
         control={form.control}
         name="name"
         rules={{ required: 'Обязательное поле' }}
-        // helperText="Это поле отражает всю суть текстовых полей"
+        helperText="Это поле отражает всю суть текстовых полей"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
