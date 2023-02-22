@@ -42,6 +42,14 @@ export * from './Form';
 
 export * from './types';
 
-export * from './hooks';
+// нельзя экспортить через * потому, что есть пересечение с export * from 'react-hook-form';
+export {
+  useForm,
+  type UseFormProps,
+  type UseFormReturn,
+  useFormContext,
+  useFormFieldErrorProps,
+  useFormFieldProps,
+} from './hooks';
 
 export { FormProvider } from './FormProvider';
