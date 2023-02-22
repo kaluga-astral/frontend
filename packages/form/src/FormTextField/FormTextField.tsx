@@ -4,11 +4,6 @@ import { TextField, TextFieldProps } from '@astral/components';
 import { useFormFieldProps } from '../hooks';
 import { FieldValues, WithFormFieldProps } from '../types';
 
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormTextFieldValue = string;
-
 export type FormTextFieldProps<TFieldValues extends FieldValues> =
   WithFormFieldProps<TextFieldProps, TFieldValues> & {
     /**
