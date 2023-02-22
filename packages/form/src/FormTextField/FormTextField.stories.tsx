@@ -4,8 +4,7 @@ import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 
-import { FormTextField } from './FormTextField';
-import { FormTextFieldValue } from './types';
+import { FormTextField, FormTextFieldValue } from './FormTextField';
 
 export default {
   title: 'Form/FormTextField',
