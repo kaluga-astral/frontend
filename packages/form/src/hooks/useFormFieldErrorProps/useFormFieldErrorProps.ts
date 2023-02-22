@@ -12,8 +12,16 @@ type UseFormFieldErrorPropsReturn = Pick<
 export const useFormFieldErrorProps = (
   fieldState: Pick<ControllerFieldState, 'error'>,
 ): UseFormFieldErrorPropsReturn => {
+  const { error } = fieldState;
+
+  if (error) {
+    return {
+      error: true,
+      helperText: error?.message,
+    };
+  }
+
   return {
-    error: Boolean(fieldState.error),
-    helperText: fieldState.error?.message,
+    error: false,
   };
 };
