@@ -43,7 +43,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         return helperTextProp;
       }
 
-      return <></>;
+      return null;
     }, [helperTextProp, success, error]);
 
     return (
