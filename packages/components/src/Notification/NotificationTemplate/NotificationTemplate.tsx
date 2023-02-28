@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { ToastProps } from 'react-toastify/dist/types';
 
-import { DEFAULT_NOTIFICATION_PROPS } from '../constants';
 import { ActionsDirection, Variant } from '../types';
 import {
   ErrorNotificationIcon,
@@ -58,7 +57,7 @@ export const NotificationTemplate = ({
   content,
   actions,
   variant,
-  filled = DEFAULT_NOTIFICATION_PROPS.filled,
+  filled = false,
   actionsDirection = 'right',
   showCloseButton = true,
 }: NotificationTemplateProps) => {
