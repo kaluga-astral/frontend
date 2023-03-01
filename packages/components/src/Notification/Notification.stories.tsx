@@ -30,10 +30,6 @@ const Template: Story = () => {
     });
   };
 
-  const handleFilledInfo = () => {
-    notify.info('Внимание!');
-  };
-
   const handledInfoWithContent = () => {
     notify.info('Внимание!', {
       filled: false,
@@ -58,10 +54,6 @@ const Template: Story = () => {
     });
   };
 
-  const handleFilledSuccess = () => {
-    notify.success('Операция успешно завершен');
-  };
-
   const handleSuccessWithContent = () => {
     notify.success('Операция успешно завершен', {
       filled: false,
@@ -77,10 +69,6 @@ const Template: Story = () => {
     });
   };
 
-  const handleFilledWarning = () => {
-    notify.warning('Внимание');
-  };
-
   const handleWarningWithContent = () => {
     notify.warning('Внимание', {
       filled: false,
@@ -94,10 +82,6 @@ const Template: Story = () => {
     notify.error('Соединение потеряно', {
       filled: false,
     });
-  };
-
-  const handleFilledError = () => {
-    notify.error('Соединение потеряно');
   };
 
   const handleErrorWithContent = () => {
@@ -131,15 +115,6 @@ const Template: Story = () => {
               <Button onClick={handleSuccess}>success</Button>
               <Button onClick={handleWarning}>warn</Button>
               <Button onClick={handleError}>error</Button>
-            </Stack>
-          </Stack>
-          <Stack direction="column">
-            <h2>Filled notify </h2>
-            <Stack direction="row" gap={2}>
-              <Button onClick={handleFilledInfo}>filled info</Button>
-              <Button onClick={handleFilledSuccess}>filled success</Button>
-              <Button onClick={handleFilledWarning}>filled warn</Button>
-              <Button onClick={handleFilledError}>filled error</Button>
             </Stack>
           </Stack>
           <Stack direction="column">
