@@ -4,12 +4,7 @@ on:
   pull_request:
     branches: [main, next]
     paths-ignore:
-      - packages/ui/**
-      - packages/icons/**
-      - packages/fonts/**
-      - packages/components/**
-      - packages/form/**
-      - packages/validations/**
+      - packages/**
       - .storybook/**
       - package.json
       - package-lock.json
