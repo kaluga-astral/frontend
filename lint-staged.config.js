@@ -6,7 +6,6 @@ module.exports = {
 
   'packages/components/**/*.{js,jsx,ts,tsx}': [
     'npm run lint --workspace=@astral/components',
-    'npm run lint:styles --workspace=@astral/components',
     () => 'npm run lint:types --workspace=@astral/components',
   ],
   'packages/components/**/styles.{ts,tsx}': [
