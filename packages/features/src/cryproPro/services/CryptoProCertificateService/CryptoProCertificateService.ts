@@ -1,1 +1,3 @@
-export class CryptoProCertificateService {}
+export class CryptoProCertificateService {
+  public getCerts = () => [];
+}
