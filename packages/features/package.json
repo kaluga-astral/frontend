@@ -1,5 +1,5 @@
 {
-  "name": "@astral/components",
+  "name": "@astral/features",
   "version": "2.0.0",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
