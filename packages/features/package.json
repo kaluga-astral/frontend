@@ -1,5 +1,5 @@
 {
-  "name": "@astral/form",
+  "name": "@astral/features",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
   "version": "2.0.0",
@@ -13,9 +13,9 @@
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "react-hook-form": "^7.41.5",
-    "@astral/components": "*",
-    "@astral/validations": "*"
+    "@astral/ui": "*",
+    "mobx": "^6.8.0",
+    "mobx-react-lite": "^3.4.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
