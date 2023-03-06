@@ -106,11 +106,16 @@ export function ActionCell<T>({
   const renderMainAction = useCallback(
     (action: MainAction<T>) => {
       if (action.nested) {
-        const { name, actions, icon } = action;
+        const { name, actions, icon, disabled } = action;
 
         return (
-          <Tooltip key={name} title={name} placement={tooltipPlacement}>
-            <IconDropdownButton icon={icon} variant="text">
+          <Tooltip
+            key={name}
+            title={name}
+            placement={tooltipPlacement}
+            withoutContainer={!disabled}
+          >
+            <IconDropdownButton icon={icon} variant="text" disabled={disabled}>
               {actions.map(({ name: nestedActionName, onClick, ...props }) => (
                 <MenuItem
                   key={nestedActionName}
@@ -128,7 +133,12 @@ export function ActionCell<T>({
       const { onClick, name, icon, nested, ...props } = action;
 
       return (
-        <Tooltip key={name} title={name} placement={tooltipPlacement}>
+        <Tooltip
+          key={name}
+          title={name}
+          placement={tooltipPlacement}
+          withoutContainer={!props.disabled}
+        >
           <IconButton
             variant="text"
             onClick={handleActionClick(onClick)}
