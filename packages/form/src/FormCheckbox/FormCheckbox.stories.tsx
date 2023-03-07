@@ -20,7 +20,7 @@ type FormValues = {
 const Template: Story = () => {
   const form = useForm<FormValues>({
     defaultValues: {
-      fieldName1: false,
+      fieldName1: undefined,
       fieldName2: true,
     },
   });

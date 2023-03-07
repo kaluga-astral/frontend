@@ -29,7 +29,7 @@ export const FormCheckbox = <FieldValues extends object>({
   return (
     <FormControl>
       <FormControlLabel
-        control={<Checkbox checked={value} {...restFieldProps} />}
+        control={<Checkbox checked={!!value} {...restFieldProps} />}
         label={title}
       />
       <FormHelperText error={error} success={success}>
