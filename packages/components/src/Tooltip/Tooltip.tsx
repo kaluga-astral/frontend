@@ -13,7 +13,7 @@ export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
    */
   size?: TooltipSize;
   /**
-   * При значении false оборачивает коипонент в div. По-умолчанию true
+   * При значении false оборачивает компонент в div. По-умолчанию true
    * Это позволяет показывать тултипы на задизейбленных компонентах
    * @example <Tooltip withoutContainer={false} ...><Button disabled></Tooltip>
    */
