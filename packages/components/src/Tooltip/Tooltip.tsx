@@ -4,7 +4,7 @@ import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip';
 import { WithoutEmotionSpecific } from '../types';
 
 import { TooltipSize } from './types';
-import { StyledTooltip } from './styled';
+import { StyledTooltip, TooltipContentWrapper } from './styles';
 import { TooltipSizes } from './constants';
 
 export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
@@ -40,7 +40,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           placement={placement}
           {...restProps}
         >
-          {withoutContainer ? children : <div>{children}</div>}
+          {withoutContainer ? (
+            children
+          ) : (
+            <TooltipContentWrapper>{children}</TooltipContentWrapper>
+          )}
         </StyledTooltip>
       );
     }
