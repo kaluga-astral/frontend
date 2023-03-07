@@ -1,8 +1,7 @@
 import { DotsVOutlineMd } from '@astral/icons';
 import { ReactNode, useCallback, useMemo } from 'react';
 
-import { BaseButtonProps } from '../ButtonBase';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
 import { MenuItem, MenuItemProps } from '../MenuItem';
 import { Tooltip, TooltipProps } from '../Tooltip';
@@ -59,7 +58,7 @@ export type MultipleAction<T> = MenuItemProps & {
 };
 
 export type MainAction<T> =
-  | (BaseButtonProps & SingleAction<T>)
+  | (IconButtonProps & SingleAction<T>)
   | MultipleAction<T>;
 
 export type SecondaryAction<T> = MenuItemProps & SingleAction<T>;
