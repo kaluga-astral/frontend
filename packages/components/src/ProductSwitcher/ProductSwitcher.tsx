@@ -29,7 +29,13 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
       try {
         const productsList = await getProducts();
 
-        setProducts(productsList);
+        const { hostname } = new URL(window.origin);
+
+        setProducts(
+          productsList.filter(
+            (product) => new URL(product.url).hostname !== hostname,
+          ),
+        );
       } catch (error) {
         setIsError(true);
         captureException(error);
