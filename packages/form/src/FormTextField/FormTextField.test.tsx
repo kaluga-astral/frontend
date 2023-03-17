@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
 
 import { Form } from '../Form';
@@ -26,5 +27,27 @@ describe('FormTextField', () => {
 
       expect(errorText).toBeVisible();
     });
+  });
+
+  it('Prop:ref: is present', () => {
+    const resultRef = { current: null };
+
+    const FormTextFieldWithRef = () => {
+      const ref = useRef(null);
+      const form = useForm();
+
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
+
+      return (
+        <Form form={form}>
+          <FormTextField name="user" ref={ref} />
+        </Form>
+      );
+    };
+
+    renderWithTheme(<FormTextFieldWithRef />);
+    expect(resultRef?.current).not.toBeNull();
   });
 });
