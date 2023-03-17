@@ -50,4 +50,30 @@ describe('FormTextField', () => {
     renderWithTheme(<FormTextFieldWithRef />);
     expect(resultRef?.current).not.toBeNull();
   });
+
+  it('Prop:ref: Фокус на поле после клика на Submit', async () => {
+    const TestComponent = () => {
+      const form = useForm();
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormTextField
+            name="user"
+            label="user"
+            rules={{ required: 'required' }}
+          />
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    await userEvents.click(screen.getByText('submit'));
+
+    await waitFor(() => {
+      const input = screen.getByRole('textbox', { name: /user/i });
+
+      expect(input).toHaveFocus();
+    });
+  });
 });
