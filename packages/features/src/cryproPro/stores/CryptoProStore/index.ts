@@ -1,1 +1,1 @@
-export * from './CryptoProStore'
+export * from './CryptoProStore';

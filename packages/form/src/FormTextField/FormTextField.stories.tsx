@@ -1,4 +1,5 @@
 import { Story } from '@storybook/react';
+import { useLayoutEffect, useRef } from 'react';
 
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
@@ -10,10 +11,15 @@ export default {
   component: null,
 };
 
-type FormValues = { name: FormTextFieldValue; a: string };
+type FormValues = { name: FormTextFieldValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();
+  const inputRef = useRef(null);
+
+  useLayoutEffect(() => {
+    console.log('ref.current', inputRef.current);
+  }, []);
 
   return (
     <FormStoryContainer form={form}>
@@ -24,6 +30,7 @@ const Template: Story = () => {
         name="name"
         rules={{ required: 'Обязательное поле' }}
         helperText="Это поле отражает всю суть текстовых полей"
+        ref={inputRef}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

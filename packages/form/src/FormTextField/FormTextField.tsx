@@ -1,29 +1,29 @@
-import { FocusEvent } from 'react';
+import { forwardRef } from 'react';
+import type { FocusEvent, ForwardedRef } from 'react';
 import { TextField, TextFieldProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { FieldValues, WithFormFieldProps } from '../types';
+import { WithFormFieldProps } from '../types';
 
-export type FormTextFieldProps<TFieldValues extends FieldValues> =
-  WithFormFieldProps<TextFieldProps, TFieldValues> & {
-    /**
-     * @description Параметр для обрезания пробелов в текстфилде при вызове onBlur. По-умолчанию true
-     * @example <FormTextField trimmed={false} />
-     */
-    trimmed?: boolean;
-  };
+export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
+  TextFieldProps,
+  FieldValues
+> & {
+  /**
+   * @description Параметр для обрезания пробелов в текстфилде при вызове onBlur. По-умолчанию true
+   * @example <FormTextField trimmed={false} />
+   */
+  trimmed?: boolean;
+};
 
 /**
  * @description Адаптер для TextField
  */
-export function FormTextField<TFieldValues extends FieldValues>({
-  trimmed = true,
-  ...props
-}: FormTextFieldProps<TFieldValues>) {
-  const fieldProps = useFormFieldProps<
-    FormTextFieldProps<TFieldValues>,
-    TFieldValues
-  >(props);
+function FormTextFieldInner<T extends object>(
+  { trimmed = true, ...props }: FormTextFieldProps<T>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
+  const fieldProps = useFormFieldProps<FormTextFieldProps<T>, T>(props);
 
   const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
     if (trimmed) {
@@ -34,5 +34,9 @@ export function FormTextField<TFieldValues extends FieldValues>({
     props.onBlur?.(event);
   };
 
-  return <TextField {...fieldProps} onBlur={handleOnBlur} />;
+  return <TextField {...fieldProps} ref={ref} onBlur={handleOnBlur} />;
 }
+
+export const FormTextField = forwardRef(FormTextFieldInner) as <T>(
+  props: T & { ref?: ForwardedRef<HTMLDivElement> },
+) => ReturnType<typeof FormTextFieldInner>;
