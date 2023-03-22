@@ -79,4 +79,31 @@ describe('FormAutocomplete', () => {
       });
     });
   });
+
+  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
+    const TestComponent = () => {
+      const form = useForm();
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormAutocomplete
+            name="user"
+            label="user"
+            rules={{ required: 'required' }}
+            options={[]}
+          />
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    await userEvents.click(screen.getByText('submit'));
+
+    await waitFor(() => {
+      const input = screen.getByRole('combobox', { name: /user/i });
+
+      expect(input).toHaveFocus();
+    });
+  });
 });

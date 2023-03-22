@@ -1,4 +1,4 @@
-import { renderWithTheme, screen, userEvents } from '@astral/tests';
+import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
 import { vi } from 'vitest';
 
 import { Form } from '../Form';
@@ -62,5 +62,31 @@ describe('FormDatePicker', () => {
     const [submitValues] = onSubmit.mock.calls[0];
 
     expect(submitValues.date.toISOString().includes('2022-02-09')).toBeTruthy();
+  });
+
+  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
+    const TestComponent = () => {
+      const form = useForm();
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormDatePicker
+            name="date"
+            inputProps={{ label: 'date', required: true }}
+            rules={{ required: 'required' }}
+          />
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    await userEvents.click(screen.getByText('submit'));
+
+    await waitFor(() => {
+      const input = screen.getByRole('textbox', { name: /date/i });
+
+      expect(input).toHaveFocus();
+    });
   });
 });

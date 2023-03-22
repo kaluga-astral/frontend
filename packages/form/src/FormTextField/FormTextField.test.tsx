@@ -51,7 +51,7 @@ describe('FormTextField', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:ref: Фокус на поле после клика на Submit', async () => {
+  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
       const form = useForm();
 
