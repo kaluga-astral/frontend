@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
@@ -20,7 +20,7 @@ const PopoverContainer = styled(Grid)`
 const Template: Story = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -34,8 +34,8 @@ const Template: Story = () => {
         Открыть Popover
       </Button>
       <Popover
-        open={open}
-        anchorEl={Boolean(anchorEl)}
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
