@@ -1,4 +1,4 @@
-import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { vi } from 'vitest';
 
 import { Form } from '../Form';
@@ -83,10 +83,8 @@ describe('FormDatePicker', () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByText('submit'));
 
-    await waitFor(() => {
-      const input = screen.getByRole('textbox', { name: /date/i });
+    const input = await screen.findByRole('textbox', { name: /date/i });
 
-      expect(input).toHaveFocus();
-    });
+    expect(input).toHaveFocus();
   });
 });

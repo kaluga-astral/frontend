@@ -100,10 +100,8 @@ describe('FormAutocomplete', () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByText('submit'));
 
-    await waitFor(() => {
-      const input = screen.getByRole('combobox', { name: /user/i });
+    const input = await screen.findByRole('combobox', { name: /user/i });
 
-      expect(input).toHaveFocus();
-    });
+    expect(input).toHaveFocus();
   });
 });

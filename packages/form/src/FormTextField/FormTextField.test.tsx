@@ -70,10 +70,8 @@ describe('FormTextField', () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByText('submit'));
 
-    await waitFor(() => {
-      const input = screen.getByRole('textbox', { name: /user/i });
+    const input = await screen.findByRole('textbox', { name: /user/i });
 
-      expect(input).toHaveFocus();
-    });
+    expect(input).toHaveFocus();
   });
 });
