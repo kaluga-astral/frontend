@@ -6,7 +6,8 @@ import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
 } from '@mui/material';
-import { HTMLAttributes, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
+import type { ForwardedRef, HTMLAttributes } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, TextFieldProps } from '../TextField';
@@ -42,13 +43,13 @@ export type AutocompleteProps<
 > &
   Pick<
     TextFieldProps,
-    'error' | 'success' | 'helperText' | 'label' | 'required'
+    'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
   > & {
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
   };
 
-export const Autocomplete = <
+const AutocompleteInner = <
   AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
@@ -60,6 +61,7 @@ export const Autocomplete = <
     DisableClearable,
     FreeSolo
   >,
+  ref?: ForwardedRef<unknown>,
 ) => {
   const {
     multiple,
@@ -78,6 +80,7 @@ export const Autocomplete = <
     clearText = 'Очистить',
     size = 'medium',
     overflowOption,
+    inputRef,
     ...restProps
   } = props;
 
@@ -117,6 +120,7 @@ export const Autocomplete = <
     (inputParams: AutocompleteRenderInputParams) => (
       <TextField
         {...inputParams}
+        inputRef={inputRef}
         required={required}
         placeholder={placeholder}
         label={label}
@@ -126,7 +130,7 @@ export const Autocomplete = <
         size={size}
       />
     ),
-    [placeholder, label, success, error, helperText, size, required],
+    [placeholder, label, success, error, helperText, size, required, inputRef],
   );
 
   const renderOption = useCallback(
@@ -178,6 +182,21 @@ export const Autocomplete = <
       closeText={closeText}
       openText={openText}
       clearText={clearText}
+      ref={ref}
     />
   );
 };
+
+export const Autocomplete = forwardRef(AutocompleteInner) as <
+  AutocompleteValueProps,
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean,
+>(
+  props: AutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  > & { ref?: ForwardedRef<unknown> },
+) => ReturnType<typeof AutocompleteInner>;
