@@ -9,13 +9,16 @@
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint --fix",
     "tests": "vitest run",
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
     "@astral/ui": "*",
     "mobx": "^6.8.0",
-    "mobx-react-lite": "^3.4.0"
+    "mobx-react-lite": "^3.4.0",
+    "@astral/cryptopro-cades": "1.5.1",
+    "@mui/material": "^5.10.12"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
