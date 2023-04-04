@@ -21,7 +21,7 @@ export const SidebarButton = styled(UIKitButton)<ButtonProps>`
   transition: ${({ theme }) => {
     return theme.transitions.create(['max-width', 'min-width'], {
       duration: theme.transitions.duration.standard,
-    }) ;
+    });
   }};
 
   && > .MuiButton-startIcon {
@@ -31,7 +31,7 @@ export const SidebarButton = styled(UIKitButton)<ButtonProps>`
     transition: ${({ theme }) => {
       return theme.transitions.create('margin-right', {
         duration: theme.transitions.duration.standard,
-      }) ;
+      });
     }};
   }
 
@@ -42,7 +42,7 @@ export const SidebarButton = styled(UIKitButton)<ButtonProps>`
     transition: ${({ theme }) => {
       return theme.transitions.create('margin-right', {
         duration: theme.transitions.duration.standard,
-      }) ;
+      });
     }};
   }
 `;

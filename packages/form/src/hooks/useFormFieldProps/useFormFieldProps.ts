@@ -30,5 +30,5 @@ export const useFormFieldProps = <
 
   const errorProps = useFormFieldErrorProps(fieldState);
 
-  return { ...inputProps, ...field, ...errorProps, ref };
+  return { ...inputProps, ...field, ...errorProps, inputRef: ref };
 };
