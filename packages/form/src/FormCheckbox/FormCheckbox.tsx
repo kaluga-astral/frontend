@@ -14,6 +14,9 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   FieldValues
 > & {
   success?: boolean;
+  /**
+   * Флаг принудительного скрытия блока helperText
+   */
   hideHelperText?: boolean;
 };
 
