@@ -43,7 +43,10 @@ const Template: Story = () => {
         control={<Switch checked={isDialogOpen} onChange={handleChange} />}
         label="Показать список сертификатов"
       />
-      <CryptoProProvider cryptoProStore={cryptoProStore}>
+      <CryptoProProvider
+        cryptoProStore={cryptoProStore}
+        onCloseButtonClick={cryptoProStore.resetIsPluginChecked}
+      >
         <Dialog
           title="Выбор сертификата"
           open={isDialogOpen}

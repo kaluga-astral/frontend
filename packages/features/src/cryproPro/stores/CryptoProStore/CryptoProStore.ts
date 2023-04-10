@@ -79,6 +79,13 @@ export class CryptoProStore {
   };
 
   /**
+   * @description Метод сброса флага проверки плагина
+   * */
+  public resetIsPluginChecked = async () => {
+    this.isPluginChecked = false;
+  };
+
+  /**
    * @description Метод получения списка сертификатов
    * */
   public getCertificateList = async () => {

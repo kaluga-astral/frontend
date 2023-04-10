@@ -8,7 +8,11 @@ export const CryptoProProvider = observer(
   ({
     children,
     cryptoProStore,
-  }: PropsWithChildren<{ cryptoProStore: CryptoProStore }>) => {
+    onCloseButtonClick,
+  }: PropsWithChildren<{
+    cryptoProStore: CryptoProStore;
+    onCloseButtonClick: () => void;
+  }>) => {
     return (
       <>
         {cryptoProStore.isPluginChecked && cryptoProStore.isPluginInstalled ? (
@@ -19,7 +23,7 @@ export const CryptoProProvider = observer(
               cryptoProStore.isPluginChecked &&
               !cryptoProStore.isPluginInstalled
             }
-            onCloseButtonClick={() => {}}
+            onCloseButtonClick={onCloseButtonClick}
           />
         )}
       </>
