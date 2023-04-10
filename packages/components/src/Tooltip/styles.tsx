@@ -45,3 +45,7 @@ export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
     margin-left: ${({ theme }) => theme.spacing(2)};
   }
 `;
+
+export const TooltipContentWrapper = styled.div`
+  display: inherit;
+`;

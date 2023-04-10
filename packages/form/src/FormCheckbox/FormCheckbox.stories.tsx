@@ -12,18 +12,30 @@ export default {
   component: null,
 };
 
-type FormValues = { fieldName: FormCheckboxValue };
+type FormValues = {
+  fieldName1: FormCheckboxValue;
+  fieldName2: FormCheckboxValue;
+};
 
 const Template: Story = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    defaultValues: {
+      fieldName1: undefined,
+      fieldName2: true,
+    },
+  });
 
   return (
     <FormStoryContainer form={form}>
       <FormCheckbox
         control={form.control}
-        name="fieldName"
+        name="fieldName1"
         title="Form checkbox field"
-        rules={{ required: 'Обязательное поле' }}
+      />
+      <FormCheckbox
+        control={form.control}
+        name="fieldName2"
+        title="Form checkbox field"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

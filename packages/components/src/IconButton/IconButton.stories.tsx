@@ -109,6 +109,9 @@ export const IconButtonShowcase: Story = () => {
           <IconButton disabled variant="contained">
             <PrintOutlineMd />
           </IconButton>
+          <IconButton loading variant="contained">
+            <PrintOutlineMd />
+          </IconButton>
         </Grid>
       </Case>
 
@@ -129,6 +132,9 @@ export const IconButtonShowcase: Story = () => {
             <EyeOutlineMd />
           </IconButton>
           <IconButton disabled variant="light">
+            <EyeOutlineMd />
+          </IconButton>
+          <IconButton loading variant="light">
             <EyeOutlineMd />
           </IconButton>
         </Grid>
@@ -153,6 +159,9 @@ export const IconButtonShowcase: Story = () => {
           <IconButton disabled variant="link">
             <FilterOutlineMd />
           </IconButton>
+          <IconButton loading variant="link">
+            <FilterOutlineMd />
+          </IconButton>
         </Grid>
       </Case>
 
@@ -171,6 +180,9 @@ export const IconButtonShowcase: Story = () => {
             <FilterOutlineMd />
           </IconButton>
           <IconButton disabled variant="text">
+            <FilterOutlineMd />
+          </IconButton>
+          <IconButton loading variant="text">
             <FilterOutlineMd />
           </IconButton>
         </Grid>

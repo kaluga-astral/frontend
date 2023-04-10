@@ -321,6 +321,8 @@ export const ButtonBaseWrapper = styled(ButtonUnstyled, {
 
     background-color: ${getDisabledBgColor};
     cursor: unset;
+
+    pointer-events: none;
   }
 
   &.${buttonClasses.focusVisible} {

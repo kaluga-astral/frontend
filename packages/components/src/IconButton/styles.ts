@@ -35,6 +35,8 @@ export const IconButtonWrapper = styled(ButtonBase, {
   height: ${getButtonSize};
   padding: ${({ theme }) => theme.spacing(1)};
 
+  pointer-events: ${({ loading }) => loading && 'none'};
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
     width: ${getButtonSizeMobile};
     height: ${getButtonSizeMobile};
