@@ -1,8 +1,8 @@
-import { Button, Description, Tooltip } from '@astral/components';
-import { InfoFillSm, OpenLinkOutlineMd } from '@astral/icons';
+import { Button, Description, Tooltip } from '@astral/ui';
+import { InfoFillSm, OpenLinkOutlineMd } from '@astral/ui';
 
 import { WorkspaceInfoItem } from '../styles';
-import { CheckWorkspace } from '../WorkspaceSetup';
+import { CheckWorkspace } from '../../../services/WorkspaceSetupService/WorkspaceSetupService';
 
 import { CryptoproviderInfoIconWrapper } from './styles';
 
@@ -11,27 +11,30 @@ type Props = {
 };
 
 export const CryptoproviderInfo = ({ workspaceSetupInfo }: Props) => {
+  const descriptionValueOfInstalation = workspaceSetupInfo.hasCryptoProvider
+    ? 'Установлен'
+    : 'Не установлен';
+
+  const descriptionValueForInstalation =
+    !workspaceSetupInfo.isPluginInstalled ? (
+      <>
+        Нет данных
+        <Tooltip title="Данные о криптопровайдере будут получены после установки приложения “КриптоПро ЭЦП Browser plug-in” и обновления страницы браузера.">
+          <CryptoproviderInfoIconWrapper>
+            <InfoFillSm />
+          </CryptoproviderInfoIconWrapper>
+        </Tooltip>
+      </>
+    ) : null;
+
   return (
     <WorkspaceInfoItem>
       <Description>
         <Description.Name>Криптопровайдер</Description.Name>
         <Description.Value>
-          {!workspaceSetupInfo.isPluginInstalled ? (
-            <>
-              Нет данных
-              <Tooltip title="Данные о криптопровайдере будут получены после установки приложения “КриптоПро ЭЦП Browser plug-in” и обновления страницы браузера.">
-                <CryptoproviderInfoIconWrapper>
-                  <InfoFillSm />
-                </CryptoproviderInfoIconWrapper>
-              </Tooltip>
-            </>
-          ) : workspaceSetupInfo.cspVersion ? (
-            `Крипто Про CSP v${workspaceSetupInfo.cspVersion}`
-          ) : workspaceSetupInfo.hasCryptoProvider ? (
-            'Установлен'
-          ) : (
-            'Не установлен'
-          )}
+          {workspaceSetupInfo.cspVersion
+            ? `Крипто Про CSP v${workspaceSetupInfo.cspVersion}`
+            : descriptionValueForInstalation || descriptionValueOfInstalation}
         </Description.Value>
       </Description>
       {!workspaceSetupInfo.isPluginInstalled && (

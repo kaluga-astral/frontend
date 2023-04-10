@@ -1,1 +1,1 @@
-export * from './CertificatesRenderOptions';
+export * from './CertificatesOptions';

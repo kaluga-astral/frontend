@@ -4,25 +4,29 @@ import {
   DialogActions,
   DialogContent,
   Typography,
-} from '@astral/components';
-import { RefreshOutlineMd } from '@astral/icons';
+} from '@astral/ui';
+import { RefreshOutlineMd } from '@astral/ui';
 import { useEffect, useState } from 'react';
+
+import {
+  CheckWorkspace,
+  createWorkspaceSetupService,
+} from '../../services/WorkspaceSetupService';
 
 import { CryptoproviderInfo } from './CryptoproviderInfo';
 import { PluginInfo } from './PluginInfo';
 import { WorkspaceInfoWrapper } from './styles';
-import { CheckWorkspace, createWorkspaceSetupStore } from './WorkspaceSetup';
 
 type SetupCryptoProWorkspaceModalProps = {
   isDialogOpen: boolean;
-  handleCloseButtonClick: () => void;
+  onCloseButtonClick: () => void;
 };
 
 export const SetupCryptoProWorkspaceModal = ({
   isDialogOpen,
-  handleCloseButtonClick,
+  onCloseButtonClick,
 }: SetupCryptoProWorkspaceModalProps) => {
-  const workspaceSetupStore = createWorkspaceSetupStore();
+  const workspaceSetupStore = createWorkspaceSetupService();
   const [workspaceSetupInfo, setWorkspaceSetupInfo] = useState(
     {} as CheckWorkspace,
   );
@@ -40,7 +44,7 @@ export const SetupCryptoProWorkspaceModal = ({
   return (
     <Dialog
       open={isDialogOpen}
-      onClose={handleCloseButtonClick}
+      onClose={onCloseButtonClick}
       title="Настройка рабочего места"
       maxWidth="sm"
       fullWidth
@@ -57,7 +61,7 @@ export const SetupCryptoProWorkspaceModal = ({
         </WorkspaceInfoWrapper>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={handleCloseButtonClick}>
+        <Button variant="text" onClick={onCloseButtonClick}>
           Закрыть
         </Button>
         <Button

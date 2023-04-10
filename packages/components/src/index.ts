@@ -4,6 +4,8 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './Avatar';
+
 export * from './ClickAwayListener';
 
 export * from './BackdropStack';

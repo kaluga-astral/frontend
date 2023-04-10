@@ -20,15 +20,27 @@ export type FormatedCertificate = {
   expires: string;
 };
 
+/**
+ * @description Сервис для сертификатов КриптоПро
+ * */
 export class CryptoProCertificateService {
+  /**
+   * @description Метод получения списка сертификатов
+   * */
   public getCertificateList = () => {
     return getCertificates(STORE_TYPE.ALL);
   };
 
+  /**
+   * @description Метод получения сертификата по skid
+   * */
   public getCertificateBySkid = (skid: string) => {
     return findCertificateBySkid(skid) as unknown as Promise<Certificate>;
   };
 
+  /**
+   * @description Метод фильтрации списка сертификатов
+   * */
   public filterCertificateList = (
     certificates: Certificate[],
     certificateSelectors?: string[],
@@ -55,6 +67,9 @@ export class CryptoProCertificateService {
     });
   };
 
+  /**
+   * @description Метод форматирования списка сертификатов
+   * */
   public formatCertificateList = (
     certificates: Certificate[],
   ): FormatedCertificate[] => {

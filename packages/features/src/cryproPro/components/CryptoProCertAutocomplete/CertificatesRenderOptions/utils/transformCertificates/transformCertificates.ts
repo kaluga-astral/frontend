@@ -1,7 +1,7 @@
 import { Certificate } from '@astral/cryptopro-cades';
 
-import { getCertificateExpiresDate } from '../../../../services/CryptoProCertificateService/utils';
-import { CertificateType } from '../../types';
+import { getCertificateExpiresDate } from '../../../../../services';
+import { CertificateType } from '../../../enums';
 
 type CertificateShortInfo = {
   notAfter: string;
@@ -14,15 +14,19 @@ type CertificateShortInfo = {
 export const transformCertificate = (
   certificate: Certificate,
 ): CertificateShortInfo => {
+  const сertificateTypeIfNotLegal = certificate.subject.ogrnip
+    ? CertificateType.SoleTrader
+    : CertificateType.Individual;
+
+  const isCertificateTypeLegal = certificate.subject.innLe;
+
   return {
     notAfter: getCertificateExpiresDate(certificate.notAfter),
     subjectKeyId: certificate.subjectKeyId,
     name: certificate.subject.commonName,
     inn: certificate.subject.innLe || certificate.subject.inn,
-    type: certificate.subject.innLe
+    type: isCertificateTypeLegal
       ? CertificateType.LegalEntity
-      : certificate.subject.ogrnip
-      ? CertificateType.SoleTrader
-      : CertificateType.Individual,
+      : сertificateTypeIfNotLegal,
   };
 };

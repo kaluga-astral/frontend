@@ -1,4 +1,4 @@
-import { styled } from '@astral/components';
+import { styled } from '@astral/ui';
 
 export const WorkspaceInfoItem = styled.div`
   display: flex;

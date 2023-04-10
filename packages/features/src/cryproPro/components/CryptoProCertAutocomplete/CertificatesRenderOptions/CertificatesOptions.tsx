@@ -3,14 +3,14 @@ import { HTMLAttributes } from 'react';
 
 import { AutocompleteListItem } from '../AutocompleteListItem';
 
-import { transformCertificate } from './transformCertificates';
+import { transformCertificate } from './utils/transformCertificates';
 
 interface AutocompleteRenderOptionState {
   inputValue: string;
   selected: boolean;
 }
 
-export const CertificatesRenderOptions =
+export const CertificatesOptions =
   (disabled: boolean = false) =>
   (
     { className, ...restAttrs }: HTMLAttributes<HTMLLIElement>,

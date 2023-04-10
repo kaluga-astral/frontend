@@ -1,5 +1,9 @@
-import { notify } from '@astral/components';
-import { ICryptoError, getSystemInfo } from '@astral/cryptopro-cades';
+import { notify } from '@astral/ui';
+import {
+  ICryptoError,
+  ISystemInfo,
+  getSystemInfo,
+} from '@astral/cryptopro-cades';
 
 import {
   CRYPTO_PROVIDER_NOT_FOUND_CODE,
@@ -14,7 +18,7 @@ export type CheckWorkspace = {
   hasErrors: boolean;
 };
 
-export class WorkspaceSetupStore {
+export class WorkspaceSetupService {
   public isPluginInstalled = false;
 
   public cspVersion: string | null = null;
@@ -23,26 +27,26 @@ export class WorkspaceSetupStore {
 
   private hasCryptoProvider = false;
 
-  private static instance: WorkspaceSetupStore | null = null;
+  private static instance: WorkspaceSetupService | null = null;
 
   public isLoading = false;
 
   constructor() {
     // делаем из класса singleton
-    if (WorkspaceSetupStore.instance) {
-      return WorkspaceSetupStore.instance;
+    if (WorkspaceSetupService.instance) {
+      return WorkspaceSetupService.instance;
     }
 
-    WorkspaceSetupStore.instance = this;
+    WorkspaceSetupService.instance = this;
   }
 
   public checkWorkspace = async (): Promise<CheckWorkspace> => {
     this.isLoading = true;
 
-    const resultInfo = await getSystemInfo();
+    let resultInfo: ISystemInfo = {} as ISystemInfo;
 
     try {
-      await getSystemInfo();
+      resultInfo = await getSystemInfo();
     } catch (error) {
       const pluginError = error as ICryptoError;
 
@@ -83,4 +87,4 @@ export class WorkspaceSetupStore {
   };
 }
 
-export const createWorkspaceSetupStore = () => new WorkspaceSetupStore();
+export const createWorkspaceSetupService = () => new WorkspaceSetupService();

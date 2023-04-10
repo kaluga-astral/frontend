@@ -1,12 +1,13 @@
 import {
+  Avatar,
   ListItemIcon,
   MenuItem,
-  FormControlLabel as UIFormControlLabel,
+  Typography,
+  TypographyProps,
   styled,
 } from '@astral/ui';
-import { Avatar } from '@mui/material';
 
-export const AvatarIcon = styled(Avatar)`
+export const AutocompleteListAvatarIcon = styled(Avatar)`
   background-color: ${({ theme }) => theme.palette.primary[800]};
 `;
 
@@ -16,31 +17,39 @@ export const AutocompleteListItemLabel = styled.div`
   width: 100%;
 `;
 
-export const ItemIcon = styled(ListItemIcon)`
+export const AutocompleteListItemLabelTitle = styled(
+  Typography,
+)<TypographyProps>`
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+  font-size: ${({ theme }) => theme.typography.fontSize[14]};
+`;
+
+export const AutocompleteListItemIcon = styled(ListItemIcon)`
   display: flex;
   align-self: center;
   justify-self: center;
   padding-left: ${({ theme }) => theme.spacing(4)};
 `;
 
-export const GroupMenuItem = styled(MenuItem)`
+export const GroupMenuItem = styled(MenuItem, {
+  shouldForwardProp: (prop) => prop !== 'checked',
+})<{ checked?: boolean }>`
+  ${({ theme, checked }) =>
+    checked && 'background-color: ' + theme.palette.primary[100] + ';'}
   align-items: flex-start;
   padding: 0;
 `;
 
-export const GroupControlLabel = styled(UIFormControlLabel)`
+export const AutocompleteListItemContent = styled(MenuItem)`
   justify-content: space-between;
+  justify-items: start;
   width: 100%;
   margin-left: 0;
   padding: ${({ theme }) => theme.spacing(1.5, 4, 1.5, 0)};
 
-  & > span {
-    margin-left: 0 !important;
+  && > span {
+    margin-left: 0;
 
     font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   }
-`;
-
-export const AutocompleteListItemContent = styled(GroupControlLabel)`
-  justify-items: start;
 `;

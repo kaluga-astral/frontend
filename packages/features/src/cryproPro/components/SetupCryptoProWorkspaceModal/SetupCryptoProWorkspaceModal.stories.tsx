@@ -1,4 +1,4 @@
-import { FormControlLabel, Switch } from '@astral/components';
+import { FormControlLabel, Switch } from '@astral/ui';
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
@@ -24,7 +24,7 @@ const Template: Story = () => {
       />
       <SetupCryptoProWorkspaceModal
         isDialogOpen={isDialogOpen}
-        handleCloseButtonClick={handleChange}
+        onCloseButtonClick={handleChange}
       />
     </>
   );

@@ -15,11 +15,9 @@
   },
   "dependencies": {
     "@astral/ui": "*",
-    "@astral/components": "*",
-    "@astral/icons": "*",
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.0",
-    "@astral/cryptopro-cades": "1.5.1",
+    "@astral/cryptopro-cades": "^1.5.1",
     "@mui/material": "^5.10.12"
   },
   "peerDependencies": {
