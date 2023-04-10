@@ -10,7 +10,7 @@ export default {
   component: null,
 };
 
-type FormValues = { name: FormTextFieldValue; a: string };
+type FormValues = { name: FormTextFieldValue };
 
 const Template: Story = () => {
   const form = useForm<FormValues>();

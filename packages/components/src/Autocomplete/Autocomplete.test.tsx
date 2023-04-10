@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { Autocomplete } from './Autocomplete';
@@ -172,5 +173,22 @@ describe('Autocomplete', () => {
     const tag = screen.queryByRole('button', { name: 'Pupkin' });
 
     expect(tag).toBeNull();
+  });
+
+  it('Prop:ref: is present', () => {
+    const resultRef = { current: null };
+
+    const AutocompleteWithRef = () => {
+      const ref = useRef(null);
+
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
+
+      return <Autocomplete options={[]} ref={ref} />;
+    };
+
+    renderWithTheme(<AutocompleteWithRef />);
+    expect(resultRef?.current).not.toBeNull();
   });
 });

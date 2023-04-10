@@ -94,7 +94,7 @@ jobs:
             ⚡️ Проявив инициативу и взяв доступную задачу с доски <a href="https://astraltrack.atlassian.net/jira/software/c/projects/UIKIT/boards/276">Frontend.Shared</a>, вы развиваете frontend в компании.
 
       # Отказ релиза, если workflow упал. При откате: удаляется git tag + удаляется github release. Сделано для того, чтобы можно было перезапускать упавшие релизы
-      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.1
         if: failure()
         with:
           tag_name: v${{ env.NEXT_VERSION }}
