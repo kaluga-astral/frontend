@@ -7,6 +7,7 @@ type CertificateShortInfo = {
   notAfter: string;
   subjectKeyId: string | null;
   name: string | null;
+  ownerName: string | null;
   inn: string | null;
   type: CertificateType;
 };
@@ -24,6 +25,7 @@ export const transformCertificate = (
     notAfter: getCertificateExpiresDate(certificate.notAfter),
     subjectKeyId: certificate.subjectKeyId,
     name: certificate.subject.commonName,
+    ownerName: `${certificate.subject.surname} ${certificate.subject.name}`,
     inn: certificate.subject.innLe || certificate.subject.inn,
     type: isCertificateTypeLegal
       ? CertificateType.LegalEntity

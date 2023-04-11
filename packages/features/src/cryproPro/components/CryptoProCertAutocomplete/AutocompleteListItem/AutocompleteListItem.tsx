@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import { ListItemAvatar, OverflowTypography, Typography } from '@astral/ui';
+import { ListItemAvatar, OverflowTypography } from '@astral/ui';
 
 import { CertificateType } from '../../../constants';
 
@@ -9,14 +9,17 @@ import {
   AutocompleteListItemIcon,
   AutocompleteListItemLabel,
   AutocompleteListItemLabelTitle,
+  AutocompleteListItemSideLabel,
   GroupMenuItem,
 } from './styles';
+import { getShortFullName } from './utils';
 
 type AutocompleteListItemProps = Omit<
   HTMLAttributes<HTMLLIElement>,
   'title'
 > & {
   title: ReactNode;
+  sidetitle: string | null;
   inn: ReactNode;
   notAfter: ReactNode;
   type: CertificateType;
@@ -27,22 +30,34 @@ type AutocompleteListItemProps = Omit<
 type AutocompleteListItemLabelGroupProps = {
   title: ReactNode;
   subtitle: ReactNode;
+  sidetitle: string;
 };
 
 const AutocompleteListItemLabelGroup = ({
   title,
   subtitle,
+  sidetitle,
 }: AutocompleteListItemLabelGroupProps) => (
-  <AutocompleteListItemLabel>
-    <OverflowTypography>{title}</OverflowTypography>
-    <Typography color="grey" colorIntensity="600">
-      {subtitle}
-    </Typography>
-  </AutocompleteListItemLabel>
+  <>
+    <AutocompleteListItemLabel>
+      <OverflowTypography>
+        <AutocompleteListItemLabelTitle>{title}</AutocompleteListItemLabelTitle>
+      </OverflowTypography>
+      <OverflowTypography color="grey" colorIntensity="600">
+        {subtitle}
+      </OverflowTypography>
+    </AutocompleteListItemLabel>
+    <AutocompleteListItemSideLabel>
+      <OverflowTypography color="grey" colorIntensity="600">
+        {sidetitle}
+      </OverflowTypography>
+    </AutocompleteListItemSideLabel>
+  </>
 );
 
 export const AutocompleteListItem = ({
   title,
+  sidetitle,
   inn,
   notAfter,
   checked,
@@ -59,19 +74,14 @@ export const AutocompleteListItem = ({
       </AutocompleteListItemIcon>
       <AutocompleteListItemContent>
         <AutocompleteListItemLabelGroup
-          title={
-            <AutocompleteListItemLabelTitle>
-              {title}
-            </AutocompleteListItemLabelTitle>
-          }
+          title={title}
           subtitle={
             <>
-              <OverflowTypography>
-                {inn}&bull;
-                {notAfter}
-              </OverflowTypography>
+              {inn}&bull;
+              {notAfter}
             </>
           }
+          sidetitle={getShortFullName(sidetitle)}
         />
       </AutocompleteListItemContent>
     </GroupMenuItem>

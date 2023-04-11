@@ -2,7 +2,7 @@ import {
   Avatar,
   ListItemIcon,
   MenuItem,
-  Typography,
+  OverflowTypography,
   TypographyProps,
   styled,
 } from '@astral/ui';
@@ -14,11 +14,18 @@ export const AutocompleteListAvatarIcon = styled(Avatar)`
 export const AutocompleteListItemLabel = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
+`;
+
+export const AutocompleteListItemSideLabel = styled.div`
+  display: flex;
+  align-self: start;
+  justify-content: end;
+  width: 20%;
 `;
 
 export const AutocompleteListItemLabelTitle = styled(
-  Typography,
+  OverflowTypography,
 )<TypographyProps>`
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   font-size: ${({ theme }) => theme.typography.fontSize};
@@ -41,7 +48,7 @@ export const GroupMenuItem = styled(MenuItem, {
 `;
 
 export const AutocompleteListItemContent = styled(MenuItem)`
-  justify-content: space-between;
+  justify-content: space-around;
   justify-items: start;
   width: 100%;
   margin-left: 0;

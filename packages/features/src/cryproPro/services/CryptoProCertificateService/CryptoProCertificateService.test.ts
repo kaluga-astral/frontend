@@ -129,6 +129,6 @@ describe('CryptoProCertificateService.getCerts', () => {
     const result =
       cryptoProCertificateService.formatCertificateList(certificatesList);
 
-    expect(result).toEqual(formatedCertificatesList);
+    expect(result).toStrictEqual(formatedCertificatesList);
   });
 });

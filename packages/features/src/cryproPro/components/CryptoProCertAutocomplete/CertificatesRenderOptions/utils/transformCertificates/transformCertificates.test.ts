@@ -44,6 +44,7 @@ describe('transformCertificate', () => {
     inn: '966785728532',
     name: 'Кузнецова Таисия Болеславовна',
     notAfter: '30.08.2022',
+    ownerName: 'Кузнецова Таисия Болеславовна',
     subjectKeyId: '91835696AEFD6AFD9AE5D504339BC510674C6E39',
     type: 'ИП',
   };
@@ -51,6 +52,6 @@ describe('transformCertificate', () => {
   it('Props:certificate: приведение сертификата к типу CertificateShortInfo', async () => {
     const resultCertificate = transformCertificate(originalCertificate);
 
-    expect(resultCertificate).toEqual(transformedCertificate);
+    expect(resultCertificate).toStrictEqual(transformedCertificate);
   });
 });

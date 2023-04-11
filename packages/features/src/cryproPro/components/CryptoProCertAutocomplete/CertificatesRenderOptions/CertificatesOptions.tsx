@@ -24,6 +24,7 @@ export const CertificatesOptions =
         {...restAttrs}
         key={certificate.subjectKeyId}
         title={certificate.name}
+        sidetitle={certificate.ownerName}
         type={certificate.type}
         checked={meta.selected}
         inn={`ИНН: ${certificate.inn} `}
