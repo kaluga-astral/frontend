@@ -27,7 +27,6 @@ export const CryptoProCertAutocomplete = <
   return (
     <Autocomplete
       {...props}
-      open={true}
       renderOption={CertificatesOptions()}
       getOptionLabel={getOptionLabel}
     />
