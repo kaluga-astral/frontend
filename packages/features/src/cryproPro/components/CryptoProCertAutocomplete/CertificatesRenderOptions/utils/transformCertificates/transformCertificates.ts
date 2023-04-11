@@ -1,7 +1,7 @@
 import { Certificate } from '@astral/cryptopro-cades';
 
 import { getCertificateExpiresDate } from '../../../../../services';
-import { CertificateType } from '../../../enums';
+import { CertificateType } from '../../../../../constants';
 
 type CertificateShortInfo = {
   notAfter: string;

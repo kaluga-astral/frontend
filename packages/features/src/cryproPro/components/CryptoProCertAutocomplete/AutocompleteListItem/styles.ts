@@ -21,7 +21,7 @@ export const AutocompleteListItemLabelTitle = styled(
   Typography,
 )<TypographyProps>`
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
-  font-size: ${({ theme }) => theme.typography.fontSize[14]};
+  font-size: ${({ theme }) => theme.typography.fontSize};
 `;
 
 export const AutocompleteListItemIcon = styled(ListItemIcon)`
@@ -35,7 +35,7 @@ export const GroupMenuItem = styled(MenuItem, {
   shouldForwardProp: (prop) => prop !== 'checked',
 })<{ checked?: boolean }>`
   ${({ theme, checked }) =>
-    checked && 'background-color: ' + theme.palette.primary[100] + ';'}
+    checked && `background-color: ${theme.palette.primary[100]};`}
   align-items: flex-start;
   padding: 0;
 `;
@@ -45,7 +45,7 @@ export const AutocompleteListItemContent = styled(MenuItem)`
   justify-items: start;
   width: 100%;
   margin-left: 0;
-  padding: ${({ theme }) => theme.spacing(1.5, 4, 1.5, 0)};
+  padding: ${({ theme }) => theme.spacing(2, 4, 2, 0)};
 
   && > span {
     margin-left: 0;

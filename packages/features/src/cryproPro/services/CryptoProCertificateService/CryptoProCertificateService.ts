@@ -34,12 +34,17 @@ export class CryptoProCertificateService {
   /**
    * @description Метод получения сертификата по skid
    * */
-  public getCertificateBySkid = (skid: string) => {
-    return findCertificateBySkid(skid) as unknown as Promise<Certificate>;
+  public getCertificateBySkid = (
+    skid: string,
+    certificates?: Certificate[],
+  ) => {
+    return certificates?.length
+      ? certificates.find((certificate) => certificate.subjectKeyId === skid)
+      : (findCertificateBySkid(skid) as unknown as Promise<Certificate>);
   };
 
   /**
-   * @description Метод фильтрации списка сертификатов
+   * @description Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
    * */
   public filterCertificateList = (
     certificates: Certificate[],
@@ -68,7 +73,7 @@ export class CryptoProCertificateService {
   };
 
   /**
-   * @description Метод форматирования списка сертификатов
+   * @description Метод приведения списка сертификатов к интерфейсу FormatedCertificate
    * */
   public formatCertificateList = (
     certificates: Certificate[],

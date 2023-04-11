@@ -30,17 +30,12 @@ export const CryptoProCertFormAutocomplete = <
   const { field, fieldState } = useFormController(props);
   const errorProps = useFormFieldErrorProps(fieldState);
 
-  // eslint-disable-next-line
-  const handleChange: any = (_: any, value: Certificate | Certificate[]) => {
-    field.onChange(value);
-  };
-
   return (
     <CryptoProCertAutocomplete
       {...field}
       {...props}
       {...errorProps}
-      onChange={handleChange}
+      onChange={(_, value) => field.onChange(value)}
     />
   );
 };

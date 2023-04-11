@@ -2,6 +2,7 @@ export {
   SetupCryptoProWorkspaceModal,
   CryptoProCertFormAutocomplete,
   CryptoProCertAutocomplete,
+  CryptoProProvider,
 } from './components';
 
-export { CryptoProStore, CryptoProProvider } from './stores';
+export { CryptoProStore } from './stores';

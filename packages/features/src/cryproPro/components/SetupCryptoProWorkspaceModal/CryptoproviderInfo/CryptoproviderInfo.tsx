@@ -2,7 +2,7 @@ import { Button, Description, Tooltip } from '@astral/ui';
 import { InfoFillSm, OpenLinkOutlineMd } from '@astral/ui';
 
 import { WorkspaceInfoItem } from '../styles';
-import { CheckWorkspace } from '../../../services/WorkspaceSetupService/WorkspaceSetupService';
+import { CheckWorkspace } from '../../../services';
 
 import { CryptoproviderInfoIconWrapper } from './styles';
 
@@ -27,6 +27,9 @@ export const CryptoproviderInfo = ({ workspaceSetupInfo }: Props) => {
       </>
     ) : null;
 
+  const getDescription = () =>
+    descriptionValueForInstalation ?? descriptionValueOfInstalation;
+
   return (
     <WorkspaceInfoItem>
       <Description>
@@ -34,7 +37,7 @@ export const CryptoproviderInfo = ({ workspaceSetupInfo }: Props) => {
         <Description.Value>
           {workspaceSetupInfo.cspVersion
             ? `Крипто Про CSP v${workspaceSetupInfo.cspVersion}`
-            : descriptionValueForInstalation || descriptionValueOfInstalation}
+            : getDescription()}
         </Description.Value>
       </Description>
       {!workspaceSetupInfo.isPluginInstalled && (

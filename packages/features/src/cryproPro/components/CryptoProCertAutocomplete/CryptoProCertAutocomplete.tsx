@@ -3,6 +3,10 @@ import { Autocomplete, AutocompleteProps } from '@astral/ui';
 
 import { CertificatesOptions } from './CertificatesRenderOptions';
 
+type AutocompleteFreeSoloValueMapping<FreeSolo> = FreeSolo extends true
+  ? string
+  : never;
+
 /**
  * @description Autocomplete с сертификатами
  */
@@ -13,5 +17,18 @@ export const CryptoProCertAutocomplete = <
 >(
   props: AutocompleteProps<Certificate, Multiple, DisableClearable, FreeSolo>,
 ) => {
-  return <Autocomplete {...props} renderOption={CertificatesOptions()} />;
+  const getOptionLabel = (
+    option: Certificate | AutocompleteFreeSoloValueMapping<FreeSolo>,
+  ) =>
+    props.getOptionLabel
+      ? props.getOptionLabel(option)
+      : ((option as Certificate).subject.commonName as string);
+
+  return (
+    <Autocomplete
+      {...props}
+      renderOption={CertificatesOptions()}
+      getOptionLabel={getOptionLabel}
+    />
+  );
 };

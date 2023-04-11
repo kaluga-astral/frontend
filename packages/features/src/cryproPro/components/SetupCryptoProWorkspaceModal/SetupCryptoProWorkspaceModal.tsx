@@ -26,13 +26,13 @@ export const SetupCryptoProWorkspaceModal = ({
   isDialogOpen,
   onCloseButtonClick,
 }: SetupCryptoProWorkspaceModalProps) => {
-  const workspaceSetupStore = createWorkspaceSetupService();
+  const workspaceSetupService = createWorkspaceSetupService();
   const [workspaceSetupInfo, setWorkspaceSetupInfo] = useState(
     {} as CheckWorkspace,
   );
 
   useEffect(() => {
-    workspaceSetupStore
+    workspaceSetupService
       .checkWorkspace()
       .then((res) => setWorkspaceSetupInfo(res));
   }, []);

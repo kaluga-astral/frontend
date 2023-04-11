@@ -15,13 +15,13 @@ import {
 } from '../../services/WorkspaceSetupService';
 
 /**
- * @description Стор для сертификатов и методов КриптоПро
+ * @description Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро
  * */
 export class CryptoProStore {
   /**
-   * @description Флаг проверки плагина
+   * @description Флаг для открытия окна настройки рабочего места
    * */
-  public isPluginChecked: boolean = false;
+  public isRequestSetupWorkspace: boolean = false;
 
   /**
    * @description Флаг установки плагина
@@ -41,7 +41,7 @@ export class CryptoProStore {
   /**
    * @description Сертификат, найденный по Skid
    * */
-  public certificateBySkid: Certificate = {} as Certificate;
+  public certificateBySkid?: Certificate = {} as Certificate;
 
   private static instance: CryptoProStore | null = null;
 
@@ -68,21 +68,21 @@ export class CryptoProStore {
   }
 
   /**
-   * @description Метод проверки плагина
+   * @description Метод проверки настройки рабочего места
    * */
   public checkWorkspace = async () => {
-    this.isPluginChecked = true;
+    this.isRequestSetupWorkspace = true;
 
-    return (this.isPluginInstalled = await (
+    this.isPluginInstalled = await (
       await this.workspaceSetupStore.checkWorkspace()
-    ).isPluginInstalled);
+    ).isPluginInstalled;
   };
 
   /**
-   * @description Метод сброса флага проверки плагина
+   * @description Метод сброса флага для открытия окна настройки рабочего места
    * */
-  public resetIsPluginChecked = async () => {
-    this.isPluginChecked = false;
+  public resetIsRequestSetupWorkspace = async () => {
+    this.isRequestSetupWorkspace = false;
   };
 
   /**
@@ -102,7 +102,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод фильтрации списка сертификатов
+   * @description Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
    * */
   public filterCertificateList = (
     certificates: Certificate[],
@@ -116,7 +116,8 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод форматирования списка сертификатов
+   * @description Метод приведения списка сертификатов к интерфейсу FormatedCertificate
+   * * @param certificates список сертификатов
    * */
   public formatCertificateList = (certificates: Certificate[]) => {
     this.formatedCertificateList =

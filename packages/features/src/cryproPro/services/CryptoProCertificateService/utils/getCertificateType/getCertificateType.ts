@@ -1,9 +1,11 @@
-import { CertificateType } from '../../../../components/CryptoProCertAutocomplete/enums';
+import { CertificateType } from '../../../../constants';
 
 const IP_INN_LENGTH = 12;
 
+const isIPINN = (inn: string | null) => inn?.length === IP_INN_LENGTH;
+
 export const getCertificateType = (inn: string | null, ogrn: string | null) => {
-  if (inn?.length === IP_INN_LENGTH) {
+  if (isIPINN(inn)) {
     if (ogrn) {
       return CertificateType.SoleTrader;
     }
