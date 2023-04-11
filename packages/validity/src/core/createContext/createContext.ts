@@ -1,0 +1,27 @@
+import { ValidationContext, ValidationTypes } from '../types';
+
+/**
+ * @description Создет context валидации
+ * Если не было предыдущего контекста, то создает новый. При этом в values записывает текщее валидируемое значение.
+ * Это означает, что в ctx.values попадает value самого верхнего guard или rule
+ */
+export function createContext<Value extends ValidationTypes>(
+  prevCtx: ValidationContext<Value> | undefined,
+  value: Value,
+): ValidationContext<Value>;
+
+export function createContext<Value extends ValidationTypes, Values>(
+  prevCtx: ValidationContext<Values> | undefined,
+  value: Value,
+): ValidationContext<Values>;
+
+export function createContext<Value extends ValidationTypes, Values>(
+  prevCtx: ValidationContext<Values> | undefined,
+  value: Value,
+): ValidationContext<Values | Value> {
+  if (prevCtx) {
+    return prevCtx;
+  }
+
+  return { values: value };
+}

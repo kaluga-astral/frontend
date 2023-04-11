@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="293" failures="0" errors="0" time="1.221">
+    <testsuite name="src/isMinLength/isMinLength.test.ts" timestamp="2022-12-08T08:59:56.284Z" hostname="MacBook-Pro-2.local" tests="23" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: asdsaxzcadsdaasd" time="0.002">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for:            d        " time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: 12341Nanasd2 2131" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: true" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: 2022-12-08T08:59:55.616Z" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: Infinity" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: false" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: {}" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: null" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: 123" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for:      " time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid custom message" time="0.002">
+        </testcase>
+        <testcase classname="src/isMinLength/isMinLength.test.ts" name="isMinLength &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isMaybeNumber/isMaybeNumber.test.ts" timestamp="2022-12-08T08:59:56.290Z" hostname="MacBook-Pro-2.local" tests="21" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid for: -1" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid for: -44" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid for: -0.12" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid for: 2000" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid for: 2e3" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: a" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: 123a" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for:         1      " time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: { a: 1 }" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: 2022-12-08T08:59:55.616Z" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: number" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isMaybeNumber/isMaybeNumber.test.ts" name="isMaybeNumber &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isINNIP/isINNIP.test.ts" timestamp="2022-12-08T08:59:56.298Z" hostname="MacBook-Pro-2.local" tests="23" failures="0" errors="0" skipped="0" time="0.005">
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Valid for: 384212952720" time="0.002">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 123a" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for:         1      " time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: true" time="0.001">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 2022-12-08T08:59:55.616Z" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: NaN" time="0.001">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: number" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 3842129527" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 384212952a20" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 384212952720" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: +384212952720" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: 7728168911" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isINNIP/isINNIP.test.ts" name="isINNIP &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isMobilePhone/isMobilePhone.test.ts" timestamp="2022-12-08T08:59:56.301Z" hostname="MacBook-Pro-2.local" tests="25" failures="0" errors="0" skipped="0" time="0.007">
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Valid for: 79999999999" time="0.002">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: undefined" time="0.001">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 2022-12-08T08:59:55.616Z" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 89999999999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 78999999999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 7999999999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 79999999999" time="0.001">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: +79999999999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 7(999)9999999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 7 (999) 99-99-999" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 7 (999) 999-99-99" time="0.001">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 7(999)999-99-99" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: null" time="0.001">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isMobilePhone/isMobilePhone.test.ts" name="isMobilePhone &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isMinValue/isMinValue.test.ts" timestamp="2022-12-08T08:59:56.306Z" hostname="MacBook-Pro-2.local" tests="27" failures="0" errors="0" skipped="0" time="0.009">
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: -1" time="0.002">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: -44" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: -0.12" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: a" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: v" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: 2022-12-08T08:59:55.617Z" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for:      " time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for:          12" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: false" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: %s" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: {}" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: 0" time="0.001">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: Infinity" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: 0.34" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: 0.34" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid for: -9" time="0">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid custom message" time="0.002">
+        </testcase>
+        <testcase classname="src/isMinValue/isMinValue.test.ts" name="isMinValue &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isMaxValue/isMaxValue.test.ts" timestamp="2022-12-08T08:59:56.312Z" hostname="MacBook-Pro-2.local" tests="25" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: -1" time="0.002">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: -44" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: -44" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: -1.12" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: 2022-12-08T08:59:55.617Z" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for:      " time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for:        41" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: false" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: %s" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: {}" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: Infinity" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: 0.34" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid for: 0.34" time="0">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid custom message" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxValue/isMaxValue.test.ts" name="isMaxValue &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isDate/isDate.test.ts" timestamp="2022-12-08T08:59:56.318Z" hostname="MacBook-Pro-2.local" tests="19" failures="0" errors="0" skipped="0" time="0.007">
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: a" time="0.002">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: 1" time="0.001">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: undefined" time="0.001">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: 2011-22-12" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: 1991.22.22" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: Invalid Date" time="0.001">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Invalid for: Invalid Date" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid for: 2011-11-12" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid for: 1991.01.22" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid for: 01.12.2022" time="0.001">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid for: 2022-12-08T08:59:55.619Z" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isDate/isDate.test.ts" name="isDate &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/composeAllSettled/composeAllSettled.test.ts" timestamp="2022-12-08T08:59:56.321Z" hostname="MacBook-Pro-2.local" tests="6" failures="0" errors="0" skipped="0" time="0.004">
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Возвращает все ошибки, которые появляется при выполнении правил" time="0.002">
+        </testcase>
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Делает многомерные массивы ошибок плоскими" time="0.001">
+        </testcase>
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Не добавляет в результирующий массив ошибок undefined" time="0">
+        </testcase>
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Возвращает undefined, если нет ошибок" time="0">
+        </testcase>
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Если итоговая ошибка одна, то она возвращается без массива" time="0">
+        </testcase>
+        <testcase classname="src/composeAllSettled/composeAllSettled.test.ts" name="composeAllSettled &gt; Поддерживает вложенность" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isOGRNIP/isOGRNIP.test.ts" timestamp="2022-12-08T08:59:56.324Z" hostname="MacBook-Pro-2.local" tests="19" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Valid for: 316682000089619" time="0.003">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 0" time="0.001">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: NaN" time="0.001">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 2022-12-08T08:59:55.920Z" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 1175958036814" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 1-22-33-44-5555555-6" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNIP/isOGRNIP.test.ts" name="isOGRNIP &gt; Valid exclude value" time="0.001">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isINNUL/isINNUL.test.ts" timestamp="2022-12-08T08:59:56.328Z" hostname="MacBook-Pro-2.local" tests="20" failures="0" errors="0" skipped="0" time="0.007">
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Valid for: 7728168971" time="0.003">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: a" time="0.001">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: 123a" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for:         1      " time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: true" time="0.001">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: 2022-12-08T08:59:55.921Z" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: NaN" time="0.001">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: number" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: 384212952720" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: 7728168911" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isINNUL/isINNUL.test.ts" name="isINNUL &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/composeToString/composeToString.test.ts" timestamp="2022-12-08T08:59:56.331Z" hostname="MacBook-Pro-2.local" tests="2" failures="0" errors="0" skipped="0" time="0.004">
+        <testcase classname="src/composeToString/composeToString.test.ts" name="composeToString &gt; Если появляется массив ошибок, то возвращается первая из массива" time="0.003">
+        </testcase>
+        <testcase classname="src/composeToString/composeToString.test.ts" name="composeToString &gt; Поддерживает вложенность" time="0.001">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isOGRNUL/isOGRNUL.test.ts" timestamp="2022-12-08T08:59:56.332Z" hostname="MacBook-Pro-2.local" tests="19" failures="0" errors="0" skipped="0" time="0.005">
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Valid for: 8104338364837" time="0.002">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Valid for: 1214000000092" time="0.001">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: { a: 1 }" time="0.001">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 2022-12-08T08:59:55.972Z" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 1-22-33-5555555-6" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Valid custom message" time="0.001">
+        </testcase>
+        <testcase classname="src/isOGRNUL/isOGRNUL.test.ts" name="isOGRNUL &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isRequired/isRequired.test.ts" timestamp="2022-12-08T08:59:56.335Z" hostname="MacBook-Pro-2.local" tests="18" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: a" time="0.002">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: true" time="0.001">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid for: 2022-12-08T08:59:55.976Z" time="0.001">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: " time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for:      " time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: false" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: %s" time="0.002">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: {}" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isRequired/isRequired.test.ts" name="isRequired &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isSNILS/isSNILS.test.ts" timestamp="2022-12-08T08:59:56.338Z" hostname="MacBook-Pro-2.local" tests="18" failures="0" errors="0" skipped="0" time="0.006">
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Valid for: 15657325992" time="0.002">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Valid for: 95145370513" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Valid for: " time="0.001">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: a" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: v" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: { a: 1 }" time="0.001">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 2022-12-08T08:59:55.994Z" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 95145370511" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 156-573-259 92" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 1175958000004" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Invalid for: 95145370513" time="0.001">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Valid custom message" time="0">
+        </testcase>
+        <testcase classname="src/isSNILS/isSNILS.test.ts" name="isSNILS &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/yupAdapter/yupAdapter.test.ts" timestamp="2022-12-08T08:59:56.343Z" hostname="MacBook-Pro-2.local" tests="3" failures="0" errors="0" skipped="0" time="0.002">
+        <testcase classname="src/yupAdapter/yupAdapter.test.ts" name="yupAdapter &gt; Возвращает false, если нет ошибки валидации" time="0.001">
+        </testcase>
+        <testcase classname="src/yupAdapter/yupAdapter.test.ts" name="yupAdapter &gt; Возвращает исходную ошибку, если был не массив ошибок" time="0">
+        </testcase>
+        <testcase classname="src/yupAdapter/yupAdapter.test.ts" name="yupAdapter &gt; Возвращает массив строк, если был массив MultipleErrorObj" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/isMaxLength/isMaxLength.test.ts" timestamp="2022-12-08T08:59:56.344Z" hostname="MacBook-Pro-2.local" tests="22" failures="0" errors="0" skipped="0" time="0.005">
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: asdsaxzcadsdaasd" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for:            d        " time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: 12341Nanasd2 2131" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: 0" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: 0" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: 1" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: true" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: { a: 1 }" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: NaN" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: 2022-12-08T08:59:56.262Z" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: Infinity" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: false" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: {}" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Invalid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid for: " time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid for:      " time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid for: %s" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid for: undefined" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid for: null" time="0">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid custom message" time="0.001">
+        </testcase>
+        <testcase classname="src/isMaxLength/isMaxLength.test.ts" name="isMaxLength &gt; Valid exclude value" time="0">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/compose/compose.test.ts" timestamp="2022-12-08T08:59:56.351Z" hostname="MacBook-Pro-2.local" tests="2" failures="0" errors="0" skipped="0" time="0.002">
+        <testcase classname="src/compose/compose.test.ts" name="compose &gt; Выполняет правила слева направо" time="0">
+        </testcase>
+        <testcase classname="src/compose/compose.test.ts" name="compose &gt; Поддерживается вложенность" time="0.001">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/createRule/createRule.test.ts" timestamp="2022-12-08T08:59:56.351Z" hostname="MacBook-Pro-2.local" tests="1" failures="0" errors="0" skipped="0" time="0.002">
+        <testcase classname="src/createRule/createRule.test.ts" name="createRule &gt; Не модифицирует переданный rule" time="0.001">
+        </testcase>
+    </testsuite>
+</testsuites>
