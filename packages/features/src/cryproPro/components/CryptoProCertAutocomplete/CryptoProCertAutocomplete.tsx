@@ -1,11 +1,48 @@
 import { Certificate } from '@astral/cryptopro-cades';
 import { Autocomplete, AutocompleteProps } from '@astral/ui';
+import { HTMLAttributes } from 'react';
 
-import { CertificatesOptions } from './CertificatesRenderOptions';
+import { AutocompleteListItem } from './AutocompleteListItem';
+import { transformCertificate } from './utils';
+
+interface AutocompleteRenderOptionState {
+  inputValue: string;
+  selected: boolean;
+}
+
+const CertificatesOptions =
+  (disabled: boolean = false) =>
+  (
+    { className, ...restAttrs }: HTMLAttributes<HTMLLIElement>,
+    params: Certificate,
+    meta: AutocompleteRenderOptionState,
+  ) => {
+    const certificate = transformCertificate(params);
+
+    return (
+      <AutocompleteListItem
+        {...restAttrs}
+        key={certificate.subjectKeyId}
+        title={certificate.name}
+        sidetitle={certificate.ownerName}
+        type={certificate.type}
+        checked={meta.selected}
+        inn={`ИНН: ${certificate.inn} `}
+        notAfter={
+          certificate.notAfter ? ` Действует до: ${certificate.notAfter}` : ''
+        }
+        disabled={disabled}
+      />
+    );
+  };
 
 type AutocompleteFreeSoloValueMapping<FreeSolo> = FreeSolo extends true
   ? string
   : never;
+
+const defaultGetOptionLabel = (
+  option: Certificate | AutocompleteFreeSoloValueMapping<boolean>,
+) => (option as Certificate).subject.commonName as string;
 
 /**
  * @description Autocomplete с сертификатами
@@ -14,16 +51,10 @@ export const CryptoProCertAutocomplete = <
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
->(
-  props: AutocompleteProps<Certificate, Multiple, DisableClearable, FreeSolo>,
-) => {
-  const getOptionLabel = (
-    option: Certificate | AutocompleteFreeSoloValueMapping<FreeSolo>,
-  ) =>
-    props.getOptionLabel
-      ? props.getOptionLabel(option)
-      : ((option as Certificate).subject.commonName as string);
-
+>({
+  getOptionLabel = defaultGetOptionLabel,
+  ...props
+}: AutocompleteProps<Certificate, Multiple, DisableClearable, FreeSolo>) => {
   return (
     <Autocomplete
       {...props}

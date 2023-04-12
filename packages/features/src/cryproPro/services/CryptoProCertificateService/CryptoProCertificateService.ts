@@ -15,9 +15,9 @@ export type FormatedCertificate = {
   type: string;
   title: string;
   inn: string;
-  owner: string;
+  owner: string | null;
   skid: string;
-  expires: string;
+  expires: string | null;
 };
 
 /**

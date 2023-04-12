@@ -11,24 +11,27 @@ type Props = {
 };
 
 export const CryptoproviderInfo = ({ workspaceSetupInfo }: Props) => {
-  const descriptionValueOfInstalation = workspaceSetupInfo.hasCryptoProvider
-    ? 'Установлен'
-    : 'Не установлен';
-
-  const descriptionValueForInstalation =
-    !workspaceSetupInfo.isPluginInstalled ? (
-      <>
-        Нет данных
-        <Tooltip title="Данные о криптопровайдере будут получены после установки приложения “КриптоПро ЭЦП Browser plug-in” и обновления страницы браузера.">
-          <CryptoproviderInfoIconWrapper>
-            <InfoFillSm />
-          </CryptoproviderInfoIconWrapper>
-        </Tooltip>
-      </>
-    ) : null;
-
-  const getDescription = () =>
-    descriptionValueForInstalation ?? descriptionValueOfInstalation;
+  const getDescription = () => {
+    if (!workspaceSetupInfo.isPluginInstalled) {
+      return (
+        <>
+          Нет данных
+          <Tooltip
+            title="Данные о криптопровайдере будут получены после 
+          установки приложения “КриптоПро ЭЦП Browser plug-in” и обновления страницы браузера."
+          >
+            <CryptoproviderInfoIconWrapper>
+              <InfoFillSm />
+            </CryptoproviderInfoIconWrapper>
+          </Tooltip>
+        </>
+      );
+    } else if (workspaceSetupInfo.hasCryptoProvider) {
+      return 'Установлен';
+    } else {
+      return 'Не установлен';
+    }
+  };
 
   return (
     <WorkspaceInfoItem>

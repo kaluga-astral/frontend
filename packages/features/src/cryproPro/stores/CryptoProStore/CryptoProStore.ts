@@ -34,7 +34,7 @@ export class CryptoProStore {
   public certificateList: Certificate[] = [];
 
   /**
-   * @description Форматированный список сертификатов
+   * @description Список сертификатов приведенный к интерфейсу FormatedCertificate
    * */
   public formatedCertificateList: FormatedCertificate[] = [];
 
@@ -45,7 +45,7 @@ export class CryptoProStore {
 
   private static instance: CryptoProStore | null = null;
 
-  private workspaceSetupStore: WorkspaceSetupService =
+  private workspaceSetupService: WorkspaceSetupService =
     {} as WorkspaceSetupService;
 
   private cryptoProCertificateService: CryptoProCertificateService =
@@ -61,7 +61,7 @@ export class CryptoProStore {
     }
 
     CryptoProStore.instance = this;
-    this.workspaceSetupStore = createWorkspaceSetupService();
+    this.workspaceSetupService = createWorkspaceSetupService();
     this.cryptoProCertificateService = new CryptoProCertificateService();
     this.cryptoProSignService = new CryptoProSignService();
     makeAutoObservable(this, {}, { autoBind: true });
@@ -73,9 +73,11 @@ export class CryptoProStore {
   public checkWorkspace = async () => {
     this.isRequestSetupWorkspace = true;
 
-    this.isPluginInstalled = await (
-      await this.workspaceSetupStore.checkWorkspace()
-    ).isPluginInstalled;
+    const result = await this.workspaceSetupService.checkWorkspace();
+
+    this.isPluginInstalled = result.isPluginInstalled;
+
+    return result;
   };
 
   /**

@@ -1,10 +1,10 @@
 import { Certificate } from '@astral/cryptopro-cades';
 
-import { getCertificateExpiresDate } from '../../../../../services';
-import { CertificateType } from '../../../../../constants';
+import { getCertificateExpiresDate } from '../../../../services';
+import { CertificateType } from '../../../../constants';
 
 type CertificateShortInfo = {
-  notAfter: string;
+  notAfter: string | null;
   subjectKeyId: string | null;
   name: string | null;
   ownerName: string | null;

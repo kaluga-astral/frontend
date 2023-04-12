@@ -6,12 +6,8 @@ import {
   Typography,
 } from '@astral/ui';
 import { RefreshOutlineMd } from '@astral/ui';
-import { useEffect, useState } from 'react';
 
-import {
-  CheckWorkspace,
-  createWorkspaceSetupService,
-} from '../../services/WorkspaceSetupService';
+import { CheckWorkspace } from '../../services/WorkspaceSetupService';
 
 import { CryptoproviderInfo } from './CryptoproviderInfo';
 import { PluginInfo } from './PluginInfo';
@@ -20,23 +16,14 @@ import { WorkspaceInfoWrapper } from './styles';
 type SetupCryptoProWorkspaceModalProps = {
   isDialogOpen: boolean;
   onCloseButtonClick: () => void;
+  workspaceSetupInfo: CheckWorkspace;
 };
 
 export const SetupCryptoProWorkspaceModal = ({
   isDialogOpen,
   onCloseButtonClick,
+  workspaceSetupInfo,
 }: SetupCryptoProWorkspaceModalProps) => {
-  const workspaceSetupService = createWorkspaceSetupService();
-  const [workspaceSetupInfo, setWorkspaceSetupInfo] = useState(
-    {} as CheckWorkspace,
-  );
-
-  useEffect(() => {
-    workspaceSetupService
-      .checkWorkspace()
-      .then((res) => setWorkspaceSetupInfo(res));
-  }, []);
-
   const handleRefreshButtonClick = () => {
     location.reload();
   };

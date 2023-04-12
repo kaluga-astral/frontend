@@ -3,7 +3,7 @@ export const getCertificateOwnerShortName = (
   name: string | null,
 ) => {
   if (!surname || !name) {
-    return 'Неизвестно';
+    return null;
   }
 
   const [firstname, patronymic] = name.split(' ');
