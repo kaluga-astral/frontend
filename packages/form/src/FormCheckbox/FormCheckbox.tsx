@@ -14,6 +14,10 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   FieldValues
 > & {
   success?: boolean;
+  /**
+   * Флаг принудительного скрытия блока helperText
+   */
+  hideHelperText?: boolean;
 };
 
 /**
@@ -21,6 +25,7 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
  */
 export const FormCheckbox = <FieldValues extends object>({
   success,
+  hideHelperText = false,
   ...restProps
 }: FormCheckboxProps<FieldValues>) => {
   const { title, error, helperText, value, ...restFieldProps } =
@@ -32,9 +37,11 @@ export const FormCheckbox = <FieldValues extends object>({
         control={<Checkbox checked={!!value} {...restFieldProps} />}
         label={title}
       />
-      <FormHelperText error={error} success={success}>
-        {helperText}
-      </FormHelperText>
+      {!hideHelperText && (
+        <FormHelperText error={error} success={success}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };
