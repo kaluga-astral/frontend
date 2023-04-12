@@ -10,7 +10,6 @@ import { Story } from '@storybook/react';
 import { useState } from 'react';
 
 import { CryptoProCertAutocomplete } from '..';
-import { CheckWorkspace } from '../../services';
 import { CryptoProStore } from '../../stores/CryptoProStore';
 
 import { CryptoProProvider } from './CryptoProProvider';
@@ -24,13 +23,9 @@ const Template: Story = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [cryptoProStore] = useState(new CryptoProStore());
-  const [workspaceSetupInfo, setWorkspaceSetupInfo] = useState(
-    {} as CheckWorkspace,
-  );
 
   const handleChange = () => {
-    cryptoProStore.checkWorkspace().then(async (result) => {
-      setWorkspaceSetupInfo(result);
+    cryptoProStore.checkWorkspace().then(async () => {
       await cryptoProStore.getCertificateList();
       setIsDialogOpen(true);
     });
@@ -48,10 +43,7 @@ const Template: Story = () => {
         control={<Switch checked={isDialogOpen} onChange={handleChange} />}
         label="Показать список сертификатов"
       />
-      <CryptoProProvider
-        cryptoProStore={cryptoProStore}
-        workspaceSetupInfo={workspaceSetupInfo}
-      >
+      <CryptoProProvider cryptoProStore={cryptoProStore}>
         <Dialog
           title="Выбор сертификата"
           open={isDialogOpen}

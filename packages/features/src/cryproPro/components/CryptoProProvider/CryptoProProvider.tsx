@@ -2,7 +2,6 @@ import { observer } from 'mobx-react-lite';
 import { PropsWithChildren } from 'react';
 
 import { SetupCryptoProWorkspaceModal } from '..';
-import { CheckWorkspace } from '../../services';
 import { CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
@@ -16,16 +15,14 @@ export const CryptoProProvider = observer(
   ({
     children,
     cryptoProStore,
-    workspaceSetupInfo,
   }: PropsWithChildren<{
     cryptoProStore: CryptoProStore;
-    workspaceSetupInfo: CheckWorkspace;
   }>) => {
     return (
       <>
-        {cryptoProStore.isPluginInstalled && children}
+        {children}
         <SetupCryptoProWorkspaceModal
-          workspaceSetupInfo={workspaceSetupInfo}
+          workspaceSetupInfo={cryptoProStore.workspaceSetupInfo}
           isDialogOpen={
             cryptoProStore.isRequestSetupWorkspace &&
             !cryptoProStore.isPluginInstalled

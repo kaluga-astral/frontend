@@ -10,6 +10,7 @@ import {
   FormatedCertificate,
 } from '../../services';
 import {
+  CheckWorkspace,
   WorkspaceSetupService,
   createWorkspaceSetupService,
 } from '../../services/WorkspaceSetupService';
@@ -43,6 +44,11 @@ export class CryptoProStore {
    * */
   public certificateBySkid?: Certificate = {} as Certificate;
 
+  /**
+   * @description Информация о настройках рабочего места
+   * */
+  public workspaceSetupInfo: CheckWorkspace = {} as CheckWorkspace;
+
   private static instance: CryptoProStore | null = null;
 
   private workspaceSetupService: WorkspaceSetupService =
@@ -72,12 +78,8 @@ export class CryptoProStore {
    * */
   public checkWorkspace = async () => {
     this.isRequestSetupWorkspace = true;
-
-    const result = await this.workspaceSetupService.checkWorkspace();
-
-    this.isPluginInstalled = result.isPluginInstalled;
-
-    return result;
+    this.workspaceSetupInfo = await this.workspaceSetupService.checkWorkspace();
+    this.isPluginInstalled = this.workspaceSetupInfo.isPluginInstalled;
   };
 
   /**
