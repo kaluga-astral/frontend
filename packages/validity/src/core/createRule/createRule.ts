@@ -26,14 +26,9 @@ type RuleParams<
 type RuleCreator<
   ValidationType extends ValidationTypes,
   Params extends object,
-  RequiredParams extends boolean,
-> = RequiredParams extends true
-  ? (
-      params: RuleParams<Params, ValidationType, unknown>,
-    ) => ValidationRule<ValidationType, unknown>
-  : (
-      params?: RuleParams<Params, ValidationType, unknown>,
-    ) => ValidationRule<ValidationType, unknown>;
+> = (
+  params: RuleParams<Params, ValidationType, unknown>,
+) => ValidationRule<ValidationType, unknown>;
 
 /**
  * @description Перегрузка для функций, в которых params optional
@@ -41,9 +36,10 @@ type RuleCreator<
 export function createRule<
   ValidationType extends ValidationTypes,
   Params extends object,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RequiredParams extends true,
 >(
-  creator: RuleCreator<ValidationType, Params, RequiredParams>,
+  creator: RuleCreator<ValidationType, Params>,
 ): <TValues>(
   params: RuleParams<Params, ValidationType, TValues>,
 ) => (
@@ -57,9 +53,10 @@ export function createRule<
 export function createRule<
   ValidationType extends ValidationTypes,
   Params extends object,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RequiredParams extends false,
 >(
-  creator: RuleCreator<ValidationType, Params, RequiredParams>,
+  creator: RuleCreator<ValidationType, Params>,
 ): <TValues>(
   params?: RuleParams<Params, ValidationType, TValues>,
 ) => (
@@ -74,8 +71,7 @@ export function createRule<
 export function createRule<
   ValidationType extends ValidationTypes,
   Params extends object,
-  RequiredParams extends boolean,
->(creator: RuleCreator<ValidationType, Params, RequiredParams>) {
+>(creator: RuleCreator<ValidationType, Params>) {
   return <TValues>(params?: RuleParams<Params, ValidationType, TValues>) =>
     (value: ValidationType, ctx?: ValidationContext<TValues>) => {
       const currentCtx = createContext<ValidationType, TValues>(ctx, value);
