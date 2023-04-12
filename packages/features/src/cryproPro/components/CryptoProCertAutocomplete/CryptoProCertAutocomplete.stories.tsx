@@ -1,0 +1,38 @@
+import { Certificate } from '@astral/cryptopro-cades';
+import { Story } from '@storybook/react';
+import { useState } from 'react';
+
+import { CryptoProCertificateService } from '../../services';
+
+import { CryptoProCertAutocomplete } from './CryptoProCertAutocomplete';
+
+export default {
+  title: 'Features/CryptoProCertAutocomplete',
+  component: null,
+};
+
+const Template: Story = () => {
+  const [certificateList, setCertificateList] = useState([] as Certificate[]);
+
+  const cryptoProCertificateService = new CryptoProCertificateService();
+
+  cryptoProCertificateService
+    .getCertificateList()
+    .then((result) => setCertificateList(result));
+
+  return (
+    <CryptoProCertAutocomplete
+      options={certificateList}
+      getOptionLabel={(option) =>
+        (option as Certificate).subject.commonName as string
+      }
+    />
+  );
+};
+
+export const Default = Template.bind({});
+
+Default.parameters = {
+  options: { showPanel: true },
+  controls: { expanded: true },
+};
