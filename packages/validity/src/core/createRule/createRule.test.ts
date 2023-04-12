@@ -48,4 +48,22 @@ describe('createRule', () => {
     expect(rule({ exclude: () => true })('value')?.message).toBeUndefined();
     expect(rule({ exclude: () => false })('value')?.message).toBe('error');
   });
+
+  it('preprocessCtx: изменяет переданный контекст', () => {
+    const rule = createRule<ValidationStringType, {}, false>(
+      (_, { preprocessCtx }) => {
+        preprocessCtx((prevCtx) => ({ ...prevCtx, isOptional: false }));
+
+        return () => undefined;
+      },
+    );
+
+    const preprocessCtx = rule().meta?.preprocessCtx;
+
+    expect(preprocessCtx).not.toBeUndefined();
+
+    const resultCtx = preprocessCtx?.({ values: '', isOptional: true });
+
+    expect(resultCtx?.isOptional).toBeFalsy();
+  });
 });

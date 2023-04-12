@@ -36,6 +36,10 @@ export type ValidationContext<TValues> = {
    * @description Значения, которые валидируется guard самого высоко порядка
    */
   values: TValues;
+  /**
+   * @description Флаг, указывающий на то, что guard должен выключить проверку на required
+   */
+  isOptional: boolean;
 };
 
 /**
@@ -49,12 +53,25 @@ export type ValidationGuard<TValues> = (
 export type ValidationResult = ValidationError | undefined;
 
 /**
- * @description Правило для валидации
+ * @description Meta данные для advanced валидации (например, можно сделать так, чтобы верхнеуровневое првавило стало работать по другому)
  */
-export type ValidationRule<TValue, TValues> = (
-  value: TValue,
-  ctx: ValidationContext<TValues>,
-) => ValidationResult;
+export type ValidationRuleMeta = {
+  /**
+   * @description Функция, позволяющая модифицировать context перед вызовом правил валидаций с value
+   * Позволяет реализовать optional, partial
+   */
+  preprocessCtx?: (
+    prevCtx: ValidationContext<unknown>,
+  ) => ValidationContext<unknown>;
+};
+
+/**
+ * @description Правило для валидации. Может содержать в прототипе meta информацию для advanced валидации
+ */
+export interface ValidationRule<TValue, TValues> {
+  (value: TValue, ctx?: ValidationContext<TValues>): ValidationResult;
+  meta?: ValidationRuleMeta;
+}
 
 /**
  * @description Позволяет писать правила валидации, работающие с любыми value
