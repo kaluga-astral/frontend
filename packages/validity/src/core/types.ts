@@ -68,10 +68,10 @@ export type ValidationRuleMeta = {
 /**
  * @description Правило для валидации. Может содержать в прототипе meta информацию для advanced валидации
  */
-export interface ValidationRule<TValue, TValues> {
-  (value: TValue, ctx?: ValidationContext<TValues>): ValidationResult;
-  meta?: ValidationRuleMeta;
-}
+export type ValidationRule<TValue, TValues> = (
+  value: TValue,
+  ctx?: ValidationContext<TValues>,
+) => ValidationResult;
 
 /**
  * @description Позволяет писать правила валидации, работающие с любыми value
