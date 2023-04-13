@@ -7,4 +7,4 @@ export {
 
 export { CryptoProStore } from './stores';
 
-export * from './constants';
+export * from './types';
