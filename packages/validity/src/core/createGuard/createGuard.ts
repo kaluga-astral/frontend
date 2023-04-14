@@ -1,6 +1,5 @@
 import {
   ValidationContext,
-  ValidationObjectType,
   ValidationResult,
   ValidationRule,
   ValidationTypes,
@@ -17,8 +16,11 @@ type DefOptions = {
   requiredErrorMessage?: string;
 };
 
-interface Guard<ValidationType extends ValidationTypes, Params> {
-  <TValues = ValidationType>(...params: Params[]): ValidationRule<
+interface Guard<
+  ValidationType extends ValidationTypes,
+  Params extends Array<unknown>,
+> {
+  <TValues = ValidationType>(...params: Params): ValidationRule<
     ValidationType,
     TValues
   >;
@@ -33,11 +35,14 @@ interface Guard<ValidationType extends ValidationTypes, Params> {
 /**
  * @description Функция, которая позволяет определять частную логику для guard
  */
-type GuardCreator<Params> = (
-  ...params: Params[]
+export type GuardCreator<Params extends Array<unknown>> = (
+  ...params: Params
 ) => (value: unknown, ctx: ValidationContext<unknown>) => ValidationResult;
 
-const createGuard = <ValidationType extends ValidationTypes, Params>(
+export const createGuard = <
+  ValidationType extends ValidationTypes,
+  Params extends Array<unknown> = [],
+>(
   guardCreator: GuardCreator<Params>,
 ): Guard<ValidationType, Params> => {
   const guard: Guard<ValidationType, Params> =
@@ -66,34 +71,3 @@ const createGuard = <ValidationType extends ValidationTypes, Params>(
 
   return guard;
 };
-
-const createCompositeGuard =
-  <ValidationType extends ValidationTypes>(
-    guardCreator: GuardCreator<ValidationRule<ValidationType, any>>,
-  ) =>
-  <TValues>(...params: ValidationRule<ValidationType, TValues>[]) =>
-    createGuard<ValidationType, ValidationRule<ValidationType, TValues>>(
-      guardCreator,
-    )(...params);
-
-const string = createCompositeGuard<string>(
-  (...rules) =>
-    () =>
-      undefined,
-);
-
-const object = createGuard<ValidationObjectType, object>(
-  (object) => (value, ctx) => undefined,
-);
-
-const obj1 = object.define({ requiredErrorMessage: '' });
-
-obj1<{ a: string }>({})({});
-
-string<{ l: string }>((value, ctx) => {
-  if (ctx?.values.l) {
-    return undefined;
-  }
-
-  return undefined;
-});
