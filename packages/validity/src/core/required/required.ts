@@ -1,4 +1,4 @@
-import { ValidationAnyType, ValidationRule } from '../types';
+import { ValidationRule } from '../types';
 import { createError } from '../createError';
 import { REQUIRED_ERROR_INFO } from '../errors';
 
