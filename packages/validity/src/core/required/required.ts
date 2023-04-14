@@ -1,20 +1,17 @@
-import { createError } from '../createError';
 import { createRule } from '../createRule';
 import { REQUIRED_ERROR_INFO } from '../errors';
 
 /**
  * @description Правило для проверки значение на required
  */
-export const required = createRule<unknown, { message?: string }, false>(
-  ({ message } = {}) =>
-    (value) => {
-      if (!value) {
-        return createError({
-          ...REQUIRED_ERROR_INFO,
-          message: message || REQUIRED_ERROR_INFO.message,
-        });
-      }
+export const required = ({ message }: { message?: string } = {}) =>
+  createRule<unknown>((value, ctx) => {
+    if (!value) {
+      return ctx.createError({
+        ...REQUIRED_ERROR_INFO,
+        message: message || REQUIRED_ERROR_INFO.message,
+      });
+    }
 
-      return undefined;
-    },
-);
+    return undefined;
+  });

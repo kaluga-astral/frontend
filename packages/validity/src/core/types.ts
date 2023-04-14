@@ -29,6 +29,11 @@ export class ValidationError extends Error {
 }
 
 /**
+ * @description Фабрика ошибок
+ */
+export type CreateError = (errorInfo: ErrorInfo) => ValidationError;
+
+/**
  * @description Контекст, который доступен в каждом правиле
  */
 export type ValidationContext<TValues> = {
@@ -40,6 +45,10 @@ export type ValidationContext<TValues> = {
    * @description Флаг, указывающий на то, что guard должен выключить проверку на required
    */
   isOptional: boolean;
+  /**
+   * @description Фабрика ошибок. Возвращает новую ошибку валидации
+   */
+  createError: CreateError;
 };
 
 /**

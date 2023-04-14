@@ -1,10 +1,11 @@
-import { expect } from 'vitest';
+import { ValidationError } from '../types';
+import { createError } from '../createError';
 
 import { createContext } from './createContext';
 
 describe('createContext', () => {
   it('Не создает новый контекст, если был старый', () => {
-    const ctx = { values: undefined, isOptional: true };
+    const ctx = { values: undefined, isOptional: true, createError };
 
     const resultCtx = createContext(ctx, '');
 
@@ -22,5 +23,13 @@ describe('createContext', () => {
     const resultCtx = createContext(undefined, 'value');
 
     expect(resultCtx.values).toBe('value');
+  });
+
+  it('В контексте доступна фабрика для создания ошибок валидации', () => {
+    const ctx = createContext(undefined, 'value');
+
+    const error = ctx.createError({ code: Symbol(), message: 'error' });
+
+    expect(error instanceof ValidationError).toBeTruthy();
   });
 });

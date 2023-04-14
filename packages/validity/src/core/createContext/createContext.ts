@@ -1,4 +1,5 @@
 import { ValidationContext, ValidationTypes } from '../types';
+import { createError } from '../createError';
 
 /**
  * @description Создет context валидации
@@ -23,5 +24,5 @@ export function createContext<Value extends ValidationTypes, Values>(
     return prevCtx;
   }
 
-  return { values: value, isOptional: true };
+  return { values: value, isOptional: true, createError };
 }

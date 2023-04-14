@@ -35,26 +35,37 @@ interface Guard<ValidationType extends ValidationTypes, TValues> {
 /**
  * @description Функция, которая позволяет определять частную логику для guard
  */
-type GuardExecutor = (
+type GuardExecutor<TValues> = (
   value: unknown,
-  ctx: ValidationContext<unknown>,
+  ctx: ValidationContext<TValues>,
 ) => ValidationResult;
 
 /**
  * @description Фабрика по создания guard'ов. Guard - функция, проверяющая тип значения
  * По-дефолту проверяет value на required. Для выключения required необходимо использовать optional().
  * После первого вызова guard в прототипу функции становится доступен метод define, который позволяет переопределить дефолтное поведение guard (например, изменить текст для required правила)
+ * @example
+ * ```ts
+ * const string = <TValues>(...rules: ValidationRule<string, TValues>[]) =>
+ *   createGuard<string, TValues>((value, ctx) => {
+ *     if (typeof value !== 'string') {
+ *       return ctx.createError({ code: Symbol(), message: 'Не строка' });
+ *     }
+ *
+ *     return compose<string, TValues>(...rules)(value, ctx);
+ *   });
+ * ```
  */
 export const createGuard = <ValidationType extends ValidationTypes, TValues>(
-  executeGuard: GuardExecutor,
+  executeGuard: GuardExecutor<TValues>,
 ): Guard<ValidationType, TValues> => {
-  // выделено в отдельную именованную функцию для того, чтобы ее можно было рекрусивно вызвать в define
+  // выделено в отдельную именованную функцию для того, чтобы ее можно было рекурсивно вызывать в define
   const createInnerGuard = (
     defOptions: DefOptions = {},
   ): Guard<ValidationType, TValues> => {
     const guard: Guard<ValidationType, TValues> = (value, ctx) => {
       // контекст создается, если он не был создан раннее
-      const currentCtx = createContext<ValidationType, unknown>(
+      const currentCtx = createContext<ValidationType, TValues>(
         ctx,
         // при создании контекста сейчас не имеет значение какого типа будет ctx.values
         value as ValidationType,
@@ -62,14 +73,11 @@ export const createGuard = <ValidationType extends ValidationTypes, TValues>(
 
       // делает guard required, если в контексте isOptional false. Контекст модифицируется вышестоящими правилами
       if (!currentCtx.isOptional) {
-        return compose<unknown, unknown>(
+        return compose<unknown, TValues>(
           // возможность переопределить дефолтный message для required
           required({ message: defOptions.requiredErrorMessage }),
           (interValue, interCtx) =>
-            executeGuard(
-              interValue,
-              interCtx as ValidationContext<ValidationType>,
-            ),
+            executeGuard(interValue, interCtx as ValidationContext<TValues>),
         )(value, currentCtx);
       }
 
@@ -84,21 +92,3 @@ export const createGuard = <ValidationType extends ValidationTypes, TValues>(
 
   return createInnerGuard();
 };
-
-// const object = <Schema extends Record<string, unknown>, TValues = Schema>(
-//   schema: Schema,
-// ) => createGuard<Schema, TValues>((value, ctx) => undefined);
-//
-// object<{ k: string }>({ k: '' })(88);
-//
-// const awesomeObject = object<{ k: string }>({ k: '' }).define({
-//   requiredErrorMessage: '',
-// });
-//
-// awesomeObject({});
-//
-// const string = <TValues = unknown>(
-//   ...rules: ValidationRule<string, TValues>[]
-// ) => createGuard<string, TValues>((value, ctx) => undefined);
-//
-// string()(22);
