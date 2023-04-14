@@ -17,7 +17,7 @@ describe('createRule', () => {
   it('Если нет контекста, то создается новый', () => {
     const rule = () =>
       createRule<string>((_, ctx) => {
-        expect(ctx).toContain({ values: 'value' });
+        expect(ctx).toContain({ values: 'value', isOptional: true });
 
         return undefined;
       });
