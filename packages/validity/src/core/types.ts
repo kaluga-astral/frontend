@@ -76,8 +76,7 @@ export type ValidationRule<TValue, TValues> = (
 /**
  * @description Позволяет писать правила валидации, работающие с любыми value
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ValidationAnyType = any;
+export type ValidationAnyType = unknown;
 
 export type ValidationObjectType = Record<string, ValidationAnyType>;
 
@@ -88,6 +87,7 @@ export type ValidationNumberType = number;
 export type ValidationDateType = number;
 
 export type ValidationTypes =
+  | ValidationAnyType
   | ValidationObjectType
   | ValidationStringType
   | ValidationNumberType
