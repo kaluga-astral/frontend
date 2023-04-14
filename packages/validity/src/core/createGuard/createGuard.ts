@@ -41,7 +41,7 @@ type GuardExecutor<TValues> = (
 ) => ValidationResult;
 
 /**
- * @description Фабрика по создания guard'ов. Guard - функция, проверяющая тип значения
+ * @description Создает guard. Guard - функция, проверяющая тип значения
  * По-дефолту проверяет value на required. Для выключения required необходимо использовать optional().
  * После первого вызова guard в прототипу функции становится доступен метод define, который позволяет переопределить дефолтное поведение guard (например, изменить текст для required правила)
  * @example

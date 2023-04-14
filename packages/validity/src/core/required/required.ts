@@ -2,7 +2,8 @@ import { createRule } from '../createRule';
 import { REQUIRED_ERROR_INFO } from '../errors';
 
 /**
- * @description Правило для проверки значение на required
+ * @description Проверяет value на пустоту. Если значение пустое, то возвращает ошибку.
+ * Правило универсально для всех типов данных
  */
 export const required = ({ message }: { message?: string } = {}) =>
   createRule<unknown>((value, ctx) => {

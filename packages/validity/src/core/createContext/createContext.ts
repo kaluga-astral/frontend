@@ -2,7 +2,7 @@ import { ValidationContext, ValidationTypes } from '../types';
 import { createError } from '../createError';
 
 /**
- * @description Создет context валидации
+ * @description Создает context валидации
  * Если не было предыдущего контекста, то создает новый. При этом в values записывает текщее валидируемое значение. Это означает, что в ctx.values попадает value самого верхнего guard или rule
  * При создании контекста устанавливает isOptional в true для того, чтобы по-дефолту все правило были required
  */

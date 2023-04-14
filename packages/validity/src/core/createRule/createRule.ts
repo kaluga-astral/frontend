@@ -25,7 +25,7 @@ type RuleExecutor = (
 ) => ValidationResult;
 
 /**
- * @description Фабрика для создания правил валидации
+ * @description Создает правила валидации, которые можно использовать внутри guard или по отдельности
  * @param executor - функция, которая позволяет определять частную логику для guard
  * @param commonParams - единые параметры для всех rule
  * @example
