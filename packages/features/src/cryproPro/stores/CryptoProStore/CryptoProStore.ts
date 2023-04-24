@@ -77,8 +77,10 @@ export class CryptoProStore {
    * @description Метод проверки настройки рабочего места
    * */
   public checkWorkspace = async () => {
-    this.isRequestSetupWorkspace = true;
-    this.workspaceSetupInfo = await this.workspaceSetupService.checkWorkspace();
+    this.workspaceSetupInfo = await this.workspaceSetupService
+      .checkWorkspace()
+      .finally(() => (this.isRequestSetupWorkspace = true));
+
     this.isPluginInstalled = this.workspaceSetupInfo.isPluginInstalled;
   };
 
