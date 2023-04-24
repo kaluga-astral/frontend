@@ -81,10 +81,11 @@ const AutocompleteInner = <
     size = 'medium',
     overflowOption,
     inputRef,
+    renderTags,
     ...restProps
   } = props;
 
-  const renderTags = useCallback(
+  const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
       getTagProps: AutocompleteRenderGetTagProps,
@@ -171,7 +172,7 @@ const AutocompleteInner = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
-      renderTags={renderTags}
+      renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
