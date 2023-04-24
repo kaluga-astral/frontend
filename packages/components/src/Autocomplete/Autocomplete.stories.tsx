@@ -3,6 +3,8 @@ import { Stack } from '@mui/material';
 
 import { MenuItem } from '../MenuItem';
 import { OverflowTypography } from '../OverflowTypography';
+import { Tag } from '../Tag';
+import { Tooltip } from '../Tooltip';
 
 import { Autocomplete } from './Autocomplete';
 
@@ -67,6 +69,32 @@ export const Showcase: Story = () => (
       label="Multiple"
       multiple
       getOptionLabel={(params) => params.title}
+    />
+    <Autocomplete<IOption, true, false, false>
+      multiple
+      options={OPTIONS}
+      label="Multiple custom tags"
+      getOptionLabel={(params) => params.title}
+      renderTags={(tags, getTagProps) => {
+        return tags.map((tag, index) => {
+          const { title } = tag;
+          const { onDelete, ...tagProps } = getTagProps({ index });
+          const isCustom = index === 0;
+
+          return (
+            <Tooltip title={isCustom && 'Custom tag'}>
+              <Tag
+                {...tagProps}
+                onDelete={isCustom ? undefined : onDelete}
+                color="warning"
+                size="small"
+                label={title}
+                variant="light"
+              />
+            </Tooltip>
+          );
+        });
+      }}
     />
     <Autocomplete<IOption, false, false, false>
       label="Error"
