@@ -6,3 +6,5 @@ export {
 } from './components';
 
 export { CryptoProStore } from './stores';
+
+export { Certificate } from './types';
