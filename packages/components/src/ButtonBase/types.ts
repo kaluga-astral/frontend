@@ -1,4 +1,4 @@
-import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
+import { ButtonProps as ButtonUnstyledProps } from '@mui/base/Button';
 
 import { WithoutEmotionSpecific } from '../types';
 
