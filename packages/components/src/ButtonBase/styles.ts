@@ -1,4 +1,4 @@
-import ButtonUnstyled from '@mui/base/Button';
+import { Button as ButtonUnstyled } from '@mui/base';
 import { buttonClasses } from '@mui/material';
 
 import { styled } from '../styles';
