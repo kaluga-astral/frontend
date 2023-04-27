@@ -1,4 +1,4 @@
-import { Button as ButtonUnstyled } from '@mui/base';
+import { Button } from '@mui/base';
 import { buttonClasses } from '@mui/material';
 
 import { styled } from '../styles';
@@ -261,7 +261,7 @@ export const getButtonHeightMobile = ({
   return '48px';
 };
 
-export const ButtonBaseWrapper = styled(ButtonUnstyled, {
+export const ButtonBaseWrapper = styled(Button, {
   shouldForwardProp: (prop) =>
     prop !== 'customColor' && prop !== 'customVariant',
 })<ButtonBaseWrapperProps>`
