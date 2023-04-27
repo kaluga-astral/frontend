@@ -48,6 +48,8 @@ export { default as ChevronUpOutlineMd } from './ChevronUpOutlineMd';
 
 export { default as CircleErrorFillMd } from './CircleErrorFillMd';
 
+export { default as ClassmatesFillMd } from './ClassmatesFillMd';
+
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
 
 export { default as CompanyOutlineMd } from './CompanyOutlineMd';
@@ -146,6 +148,8 @@ export { default as PeopleOutlineMd } from './PeopleOutlineMd';
 
 export { default as PhoneFillSm } from './PhoneFillSm';
 
+export { default as PhoneOutlineMd } from './PhoneOutlineMd';
+
 export { default as PhotoFillMd } from './PhotoFillMd';
 
 export { default as PluginFillMd } from './PluginFillMd';
@@ -205,6 +209,8 @@ export { default as SupportFillMd } from './SupportFillMd';
 export { default as TreeOutlineMd } from './TreeOutlineMd';
 
 export { default as UploadOutlineMd } from './UploadOutlineMd';
+
+export { default as VkFillMd } from './VkFillMd';
 
 export { default as WarningFillMd } from './WarningFillMd';
 
