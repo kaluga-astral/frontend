@@ -12,6 +12,7 @@ import { MuiFormLabel } from './MuiFormLabel';
 import { MuiInputLabel } from './MuiInputLabel';
 import { MuiOutlinedInput } from './MuiOutlinedInput';
 import { MuiPaginationItem } from './MuiPaginationItem';
+import { MuiPaper } from './MuiPaper';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
 import { MuiDialog } from './MuiDialog';
@@ -125,6 +126,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiTableHead,
   MuiTableRow,
   MuiPaginationItem,
+  MuiPaper,
   MuiCircularProgress,
   MuiListItemButton,
   MuiListItemText,
