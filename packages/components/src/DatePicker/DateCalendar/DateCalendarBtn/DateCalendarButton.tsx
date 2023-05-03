@@ -1,20 +1,20 @@
 import { ReactNode, forwardRef } from 'react';
 
 import { ButtonProps } from '../../../Button';
-import { DateCalendarBtnTooltip } from '../DateCalendarBtnTooltip';
+import { DateCalendarButtonTooltip } from '../DateCalendarButtonTooltip';
 
 import { DateCalendarBtnWrapper } from './styles';
 
-export type DateCalendarArrowBtnProps = Omit<ButtonProps, 'variant'> & {
+export type DateCalendarButtonProps = Omit<ButtonProps, 'variant'> & {
   title?: string;
   children: ReactNode;
 };
 
-export const DateCalendarBtn = forwardRef<
+export const DateCalendarButton = forwardRef<
   HTMLButtonElement,
-  DateCalendarArrowBtnProps
+  DateCalendarButtonProps
 >(({ title = '', disabled, selected, ...props }, ref) => (
-  <DateCalendarBtnTooltip title={title} isActive={!disabled}>
+  <DateCalendarButtonTooltip title={title} isActive={!disabled}>
     <DateCalendarBtnWrapper
       ref={ref}
       variant={selected ? 'contained' : 'text'}
@@ -22,5 +22,5 @@ export const DateCalendarBtn = forwardRef<
       disabled={disabled}
       {...props}
     />
-  </DateCalendarBtnTooltip>
+  </DateCalendarButtonTooltip>
 ));

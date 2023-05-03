@@ -47,7 +47,7 @@ export const useMaskedValueAndSelectedBaseDate = ({
   baseDate,
   onDatePick,
 }: UseMaskedValueAndSelectedBaseDateOptions): UseMaskedValueAndSelectedBaseDateReturn => {
-  const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
+  const { maskedValue, onMaskedValueChange, onMaskedDateChange } =
     useMaskedValue({
       currentValue,
       mask,
@@ -60,18 +60,18 @@ export const useMaskedValueAndSelectedBaseDate = ({
   });
 
   const handleDatePick = (date: Date) => {
-    onChangeMaskedDate(date);
+    onMaskedDateChange(date);
     onDatePick();
   };
 
-  const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeMaskedValue(e.target.value);
+  const handleMaskedInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onMaskedValueChange(e.target.value);
   };
 
   return {
     inputProps: {
       value: maskedValue,
-      onNativeChange: handleChangeMaskInput,
+      onNativeChange: handleMaskedInputChange,
     },
     pickerProps: {
       selectedDate: selectedBaseDate,

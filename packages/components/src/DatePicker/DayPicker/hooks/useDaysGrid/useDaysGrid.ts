@@ -141,7 +141,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
         selected:
           (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
           (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),
-        isCurrent:
+        isCurrentInUserLocalTime:
           date.getUTCFullYear() === currentDate.getFullYear() &&
           date.getUTCDate() === currentDate.getDate() &&
           date.getUTCMonth() === currentDate.getMonth(),

@@ -47,7 +47,7 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
         date,
         year,
         selected: selectedYear === year,
-        isCurrent: year === currentYear,
+        isCurrentInUserLocalTime: year === currentYear,
         isInSelectedRange: isDateBetweenSelectedAndRangeDates({
           date,
           selectedDate,

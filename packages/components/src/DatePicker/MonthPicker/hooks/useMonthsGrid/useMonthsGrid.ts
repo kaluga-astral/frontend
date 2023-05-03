@@ -45,7 +45,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
         date,
         selected: selectedMonth === i && selectedYear === year,
         month: i + 1,
-        isCurrent: i === currentMonth && year === currentYear,
+        isCurrentInUserLocalTime: i === currentMonth && year === currentYear,
         isInSelectedRange: isDateBetweenSelectedAndRangeDates({
           date,
           selectedDate,

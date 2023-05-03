@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react';
-import { Fade, PopperProps } from '@mui/material';
+import { PopperProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../../types';
+import { Fade } from '../../Fade';
 
 import { DatePickerPopoverInner, PopperWrapper } from './styles';
 
@@ -18,7 +19,10 @@ const DEFAULT_OFFSET: OffsetTuple = [
 ];
 
 export type DatePickerProps = PropsWithChildren<
-  Omit<WithoutEmotionSpecific<PopperProps>, 'children'>
+  Omit<
+    WithoutEmotionSpecific<PopperProps>,
+    'children' | 'disablePortal' | 'transition' | 'modifiers'
+  >
 > & {
   /**
    * @description оффсет появления поппера от якоря

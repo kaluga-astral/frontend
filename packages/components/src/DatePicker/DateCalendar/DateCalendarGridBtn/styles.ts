@@ -1,5 +1,5 @@
 import { styled } from '../../../styles';
-import { DateCalendarBtn } from '../DateCalendarBtn';
+import { DateCalendarButton } from '../DateCalendarBtn';
 import { Theme } from '../../../theme';
 
 import { DateCalendarDayBtnWrapperProps } from './DateCalendarGridBtn';
@@ -11,7 +11,7 @@ type GetColorOptions = {
 
 const getTextColor = ({
   theme,
-  isCurrent,
+  isCurrentInUserLocalTime,
   isOutOfAvailableRange,
   selected,
 }: GetColorOptions) => {
@@ -23,7 +23,7 @@ const getTextColor = ({
     return theme.palette.grey[600];
   }
 
-  if (!selected && isCurrent) {
+  if (!selected && isCurrentInUserLocalTime) {
     return theme.palette.primary.dark;
   }
 
@@ -47,13 +47,13 @@ const getBgColor = ({
 };
 
 const nonForwardableProps = new Set<PropertyKey>([
-  'isCurrent',
+  'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
   'lengthInRow',
 ]);
 
-export const DateCalendarGridBtnWrapper = styled(DateCalendarBtn, {
+export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`
@@ -93,7 +93,8 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarBtn, {
     bottom: ${({ theme }) => theme.spacing(1)};
     left: ${({ theme }) => theme.spacing(2)};
 
-    display: ${({ isCurrent }) => (isCurrent ? 'block' : 'none')};
+    display: ${({ isCurrentInUserLocalTime }) =>
+      isCurrentInUserLocalTime ? 'block' : 'none'};
     width: calc(100% - 16px);
     height: 2px;
 

@@ -13,7 +13,7 @@ export type GridItem<T> = {
   /**
    * @description флаг, обозначающий, что дата совпадает с текущей датой пользователя
    */
-  isCurrent: boolean;
+  isCurrentInUserLocalTime: boolean;
   /**
    * @description флаг, обозначающий, что дата попадает в выбранный пользователем интервал
    */
