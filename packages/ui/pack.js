@@ -13,6 +13,7 @@ copy({
 buildTs({
   releaseTag: process.env.RELEASE_TAG,
   packageExports: {
+    './server': './server/index.js',
     './fonts/*': './fonts/*',
     './illustrations/*': './illustrations/*',
   },

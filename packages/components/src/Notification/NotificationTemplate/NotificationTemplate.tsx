@@ -1,30 +1,54 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode } from 'react';
 import { ToastProps } from 'react-toastify/dist/types';
 
-import { DEFAULT_NOTIFICATION_PROPS } from '../constants';
 import { ActionsDirection, Variant } from '../types';
+import {
+  ErrorNotificationIcon,
+  InfoNotificationIcon,
+  SuccessNotificationIcon,
+  WarningNotificationIcon,
+} from '../styles';
 
 import {
-  NotificationActions,
   NotificationCloseButton,
   NotificationCloseIcon,
   NotificationContent,
+  NotificationFooter,
   NotificationHeader,
   NotificationIcon,
+  NotificationInner,
+  NotificationTemplateWrapper,
   NotificationTitle,
-  NotificationWrapper,
-  NotificationTemplate as StyledNotificationTemplate,
-} from './styled';
+} from './styles';
 
-export interface NotificationTemplateProps extends ToastProps {
-  icon: JSX.Element;
+export type NotificationTemplateProps = ToastProps & {
+  icon?: JSX.Element;
   title: string;
   filled?: boolean;
   variant: Variant;
   content?: ReactNode;
   actions?: JSX.Element;
   actionsDirection?: ActionsDirection;
-}
+  showCloseButton?: boolean;
+};
+
+const mapOfNotificationIcons = {
+  info: InfoNotificationIcon,
+  success: SuccessNotificationIcon,
+  warning: WarningNotificationIcon,
+  error: ErrorNotificationIcon,
+};
+
+type DefaultIconProps = {
+  variant: Variant;
+  filled: boolean;
+};
+
+const DefaultIcon = ({ variant, filled }: DefaultIconProps) => {
+  const Icon = mapOfNotificationIcons[variant];
+
+  return <Icon filled={filled} />;
+};
 
 export const NotificationTemplate = ({
   icon,
@@ -33,45 +57,38 @@ export const NotificationTemplate = ({
   content,
   actions,
   variant,
-  filled = DEFAULT_NOTIFICATION_PROPS.filled,
+  filled = false,
   actionsDirection = 'right',
+  showCloseButton = true,
 }: NotificationTemplateProps) => {
-  const handleCloseToast = () => {
-    if (closeToast) {
-      closeToast();
-    }
-  };
-
-  const Content = useMemo(() => {
-    return <NotificationContent>{content}</NotificationContent>;
-  }, [content]);
-
-  const Actions = useMemo(() => {
-    return (
-      <NotificationActions actionsDirection={actionsDirection}>
-        {actions}
-      </NotificationActions>
-    );
-  }, [actions, actionsDirection]);
+  const handleCloseToast = () => closeToast?.();
 
   return (
-    <StyledNotificationTemplate variant={variant} filled={filled}>
-      <NotificationWrapper>
-        <NotificationIcon filled={filled}>{icon}</NotificationIcon>
+    <NotificationTemplateWrapper variant={variant} filled={filled}>
+      <NotificationIcon>
+        {icon || <DefaultIcon filled={filled} variant={variant} />}
+      </NotificationIcon>
+      <NotificationInner>
         <NotificationHeader>
           <NotificationTitle>{title}</NotificationTitle>
-          <NotificationCloseButton
-            filled={filled}
-            onClick={handleCloseToast}
-            color="primary"
-            variant="text"
-          >
-            <NotificationCloseIcon filled={filled} />
-          </NotificationCloseButton>
+          {showCloseButton && (
+            <NotificationCloseButton
+              filled={filled}
+              onClick={handleCloseToast}
+              color="primary"
+              variant="text"
+            >
+              <NotificationCloseIcon filled={filled} />
+            </NotificationCloseButton>
+          )}
         </NotificationHeader>
-      </NotificationWrapper>
-      {content && Content}
-      {actions && Actions}
-    </StyledNotificationTemplate>
+        {content && <NotificationContent>{content}</NotificationContent>}
+        {actions && (
+          <NotificationFooter actionsDirection={actionsDirection}>
+            {actions}
+          </NotificationFooter>
+        )}
+      </NotificationInner>
+    </NotificationTemplateWrapper>
   );
 };

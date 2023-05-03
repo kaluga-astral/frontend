@@ -1,9 +1,8 @@
-import { ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 
 import { Button, CircularProgress, Placeholder, Typography } from '..';
 import { PlaceholderProps } from '../Placeholder';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import { ConfigContext } from '../ConfigProvider';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 import { LoadingContainer } from './styles';
 import { ContentStateErrorProps } from './types';
@@ -48,8 +47,6 @@ export const ContentState = ({
   children,
   loadingContent: LoadingContent = <CircularProgress color="primary" />,
 }: ContentStateProps) => {
-  const { captureException } = useContext(ConfigContext);
-
   if (isLoading) {
     return <LoadingContainer>{LoadingContent}</LoadingContainer>;
   }
@@ -85,9 +82,5 @@ export const ContentState = ({
     );
   }
 
-  return (
-    <ErrorBoundary captureException={captureException}>
-      {children}
-    </ErrorBoundary>
-  );
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 };

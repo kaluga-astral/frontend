@@ -1,8 +1,7 @@
 import { DotsVOutlineMd } from '@astral/icons';
 import { ReactNode, useCallback, useMemo } from 'react';
 
-import { BaseButtonProps } from '../ButtonBase';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
 import { MenuItem, MenuItemProps } from '../MenuItem';
 import { Tooltip, TooltipProps } from '../Tooltip';
@@ -59,7 +58,7 @@ export type MultipleAction<T> = MenuItemProps & {
 };
 
 export type MainAction<T> =
-  | (BaseButtonProps & SingleAction<T>)
+  | (IconButtonProps & SingleAction<T>)
   | MultipleAction<T>;
 
 export type SecondaryAction<T> = MenuItemProps & SingleAction<T>;
@@ -106,11 +105,16 @@ export function ActionCell<T>({
   const renderMainAction = useCallback(
     (action: MainAction<T>) => {
       if (action.nested) {
-        const { name, actions, icon } = action;
+        const { name, actions, icon, disabled } = action;
 
         return (
-          <Tooltip key={name} title={name} placement={tooltipPlacement}>
-            <IconDropdownButton icon={icon} variant="text">
+          <Tooltip
+            key={name}
+            title={name}
+            placement={tooltipPlacement}
+            withoutContainer={!disabled}
+          >
+            <IconDropdownButton icon={icon} variant="text" disabled={disabled}>
               {actions.map(({ name: nestedActionName, onClick, ...props }) => (
                 <MenuItem
                   key={nestedActionName}
@@ -128,7 +132,12 @@ export function ActionCell<T>({
       const { onClick, name, icon, nested, ...props } = action;
 
       return (
-        <Tooltip key={name} title={name} placement={tooltipPlacement}>
+        <Tooltip
+          key={name}
+          title={name}
+          placement={tooltipPlacement}
+          withoutContainer={!props.disabled}
+        >
           <IconButton
             variant="text"
             onClick={handleActionClick(onClick)}

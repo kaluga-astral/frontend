@@ -104,6 +104,32 @@ const lkpPalette: BrandColors = {
   100: '#E3F8F2',
 };
 
+const poaPalette: BrandColors = {
+  secondary: '#2BCCFF',
+  900: '#0A9DEF',
+  800: '#33ADF2',
+  700: '#4DB8F4',
+  600: '#66C2F5',
+  500: '#80CCF8',
+  400: '#99D6F9',
+  300: '#B3E1FB',
+  200: '#CCEBFC',
+  100: '#E6F5FE',
+};
+
+const rssPalette: BrandColors = {
+  secondary: '#8B45D1',
+  900: '#541B8D',
+  800: '#663499',
+  700: '#7A4EA6',
+  600: '#8D67B2',
+  500: '#A080C0',
+  400: '#B399CC',
+  300: '#C6B3D9',
+  200: '#D9CCE5',
+  100: '#ECE6F3',
+};
+
 export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
@@ -112,4 +138,6 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.OFD]: ofdPalette,
   [Brand.SIGN]: signPalette,
   [Brand.LKP]: lkpPalette,
+  [Brand.POA]: poaPalette,
+  [Brand.RSS]: rssPalette,
 };

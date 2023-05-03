@@ -5,42 +5,43 @@ import {
   FormControlLabel,
   FormHelperText,
 } from '@astral/components';
-import { useController } from 'react-hook-form';
 
-import { useFormFieldErrorProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
-
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormCheckboxValue = boolean;
 
 export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   CheckboxProps,
   FieldValues
 > & {
   success?: boolean;
+  /**
+   * Флаг принудительного скрытия блока helperText
+   */
+  hideHelperText?: boolean;
 };
 
 /**
  * @description Адаптер для Checkbox
  */
-export function FormCheckbox<FieldValues extends object>({
+export const FormCheckbox = <FieldValues extends object>({
   success,
-  ...props
-}: FormCheckboxProps<FieldValues>) {
-  const { field, fieldState } = useController(props);
-  const errorProps = useFormFieldErrorProps(fieldState);
+  hideHelperText = false,
+  ...restProps
+}: FormCheckboxProps<FieldValues>) => {
+  const { title, error, helperText, value, ...restFieldProps } =
+    useFormFieldProps<FormCheckboxProps<FieldValues>, FieldValues>(restProps);
 
   return (
     <FormControl>
       <FormControlLabel
-        control={<Checkbox {...field} {...props} />}
-        label={props.title}
+        control={<Checkbox checked={!!value} {...restFieldProps} />}
+        label={title}
       />
-      <FormHelperText error={errorProps.error} success={success}>
-        {errorProps.helperText}
-      </FormHelperText>
+      {!hideHelperText && (
+        <FormHelperText error={error} success={success}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
-}
+};

@@ -4,7 +4,8 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
-import { FormTextArea, FormTextAreaValue } from './FormTextArea';
+import { FormTextArea } from './FormTextArea';
+import { FormTextAreaValue } from './types';
 
 export default {
   title: 'Form/FormTextarea',

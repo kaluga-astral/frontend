@@ -26,7 +26,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
         resolve([
           {
             id: '49d3ce2a-d57c-4794-b659-f80e31ff53b1',
-            url: '',
+            url: 'https://online.astral.ru/',
             name: 'Астрал.Отчет',
             logoUrl:
               'https://identity.astral.ru/api/Files/06a5fb56-210c-4f08-bb7b-253a9103560f',
@@ -34,7 +34,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
           },
           {
             id: '49d3ce2a-d57c-4794-b659-f80e31ff532',
-            url: '',
+            url: 'https://doc.astral.ru/',
             name: 'Астрал.ЭДО',
             logoUrl:
               'https://identity.astral.ru/api/Files/b5b06b5a-2d0e-491b-9815-043d82f104aa',
@@ -42,7 +42,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
           },
           {
             id: '49d3ce2a-d57c-4794-b659-f80e31ff533',
-            url: '',
+            url: 'https://ikedo.astral.ru/',
             name: 'Астрал.КЭДО',
             logoUrl:
               'https://identity.astral.ru/api/Files/f0519e97-7a50-4796-a8d2-877cd15c7668',
@@ -58,7 +58,7 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
           },
           {
             id: '49d3ce2a-d57c-4794-b659-f80e31ff535',
-            url: '',
+            url: 'https://lk.et.astral.ru',
             name: 'Астрал.ЭТ',
             logoUrl:
               'https://identity.astral.ru/api/Files/ac497150-1926-47be-9e5f-42e739e7279c',
@@ -66,19 +66,11 @@ export const handleGetProducts = (): Promise<WidgetProduct[]> => {
           },
           {
             id: '49d3ce2a-d57c-4794-b659-f80e31ff536',
-            url: '',
+            url: 'https://personarea.astral.ru/',
             name: 'Личный кабинет',
             logoUrl:
               'https://identity.astral.ru/api/Files/9d214f12-c518-44e2-a711-fa1bf2b89fdd',
             color: 'rgb(10, 124, 255)',
-          },
-          {
-            id: '49d3ce2a-d57c-4794-b659-f80e31ff537',
-            url: '',
-            name: 'Кабинет партнера',
-            logoUrl:
-              'https://identity.astral.ru/api/Files/f0519e97-7a50-4796-a8d2-877cd15c7668',
-            color: 'rgb(117 90 253)',
           },
         ]),
       1500,

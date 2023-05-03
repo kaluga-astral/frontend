@@ -35,3 +35,5 @@ export * from './isSNILS';
 export * from './composeSome';
 
 export * from './isEmail';
+
+export * from './isKPP';

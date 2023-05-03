@@ -2,8 +2,9 @@ import { Story } from '@storybook/react';
 
 import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
-import { FormSubmitButton } from '../FormSubmitButton';
 import { FormStoryContainer } from '../docs';
+
+import { FormSubmitButton } from './';
 
 export default {
   title: 'Form/FormSubmitButton',

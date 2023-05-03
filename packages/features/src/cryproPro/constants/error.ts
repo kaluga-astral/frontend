@@ -1,0 +1,5 @@
+export const PLUGIN_NOT_INSTALLED_CODE = 'CBP-1';
+
+export const PLUGIN_NOT_INITIALIZED_CODE = 'CBP-2';
+
+export const CRYPTO_PROVIDER_NOT_FOUND_CODE = 'CBP-8';

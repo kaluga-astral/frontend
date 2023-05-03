@@ -6,7 +6,8 @@ import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
 } from '@mui/material';
-import { HTMLAttributes, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
+import type { ForwardedRef, HTMLAttributes } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, TextFieldProps } from '../TextField';
@@ -40,12 +41,15 @@ export type AutocompleteProps<
   >,
   'size' | 'renderInput'
 > &
-  Pick<TextFieldProps, 'error' | 'success' | 'helperText' | 'label'> & {
+  Pick<
+    TextFieldProps,
+    'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
+  > & {
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
   };
 
-export const Autocomplete = <
+const AutocompleteInner = <
   AutocompleteValueProps,
   Multiple extends boolean,
   DisableClearable extends boolean,
@@ -57,6 +61,7 @@ export const Autocomplete = <
     DisableClearable,
     FreeSolo
   >,
+  ref?: ForwardedRef<unknown>,
 ) => {
   const {
     multiple,
@@ -65,15 +70,22 @@ export const Autocomplete = <
     success,
     helperText,
     label,
-    size = 'medium',
     getOptionLabel,
+    required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    noOptionsText = 'Нет данных',
+    closeText = 'Закрыть',
+    openText = 'Открыть',
+    clearText = 'Очистить',
+    size = 'medium',
     overflowOption,
+    inputRef,
+    renderTags,
     ...restProps
   } = props;
 
-  const renderTags = useCallback(
+  const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
       getTagProps: AutocompleteRenderGetTagProps,
@@ -109,6 +121,8 @@ export const Autocomplete = <
     (inputParams: AutocompleteRenderInputParams) => (
       <TextField
         {...inputParams}
+        inputRef={inputRef}
+        required={required}
         placeholder={placeholder}
         label={label}
         success={success}
@@ -117,7 +131,7 @@ export const Autocomplete = <
         size={size}
       />
     ),
-    [placeholder, label, success, error, helperText, size],
+    [placeholder, label, success, error, helperText, size, required, inputRef],
   );
 
   const renderOption = useCallback(
@@ -158,14 +172,32 @@ export const Autocomplete = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
-      renderTags={renderTags}
+      renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
-      noOptionsText="Нет данных"
+      noOptionsText={noOptionsText}
+      closeText={closeText}
+      openText={openText}
+      clearText={clearText}
+      ref={ref}
     />
   );
 };
+
+export const Autocomplete = forwardRef(AutocompleteInner) as <
+  AutocompleteValueProps,
+  Multiple extends boolean,
+  DisableClearable extends boolean,
+  FreeSolo extends boolean,
+>(
+  props: AutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  > & { ref?: ForwardedRef<unknown> },
+) => ReturnType<typeof AutocompleteInner>;
