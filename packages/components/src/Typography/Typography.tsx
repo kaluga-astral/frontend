@@ -30,7 +30,7 @@ export type TypographyProps<Element extends ElementType = 'span'> =
     Omit<OverrideProps<TypographyTypeMap, Element>, 'variant' | 'color'> & {
       color?: TypographyColor | ((theme: Theme) => string);
       variant?: Variant | keyof TypographyPropsVariantOverrides;
-      component?: React.ElementType;
+      component?: ElementType;
       /**
        * @description интенсивность цвета, будет применена для цвета, у которого есть градации
        * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
