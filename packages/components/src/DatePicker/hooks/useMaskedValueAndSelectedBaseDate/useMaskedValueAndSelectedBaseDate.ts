@@ -2,13 +2,19 @@ import { ChangeEvent } from 'react';
 
 import { useMaskedValue } from '../useMaskedValue';
 import { useSelectedBaseDate } from '../useSelectedBaseDate';
+import { useBaseDateInRange } from '../useBaseDateInRange';
 import { MinMaxDate, PickerProps } from '../../types';
 
 type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   mask: string;
   onChange?: (date?: Date) => void;
   currentValue?: Date;
-  baseDate: Date;
+  /**
+   * @description смещение базовой даты в месяцах.
+   * ожидается использование в DateRangePicker, для создания опорной даты второго календаря,
+   * @default 0
+   */
+  monthOffset?: number;
   /**
    * @description колбэк на выбор даты в пикере
    */
@@ -44,9 +50,10 @@ export const useMaskedValueAndSelectedBaseDate = ({
   currentValue,
   minDate,
   maxDate,
-  baseDate,
+  monthOffset,
   onDatePick,
 }: UseMaskedValueAndSelectedBaseDateOptions): UseMaskedValueAndSelectedBaseDateReturn => {
+  const baseDate = useBaseDateInRange({ minDate, maxDate, monthOffset });
   const { maskedValue, onMaskedValueChange, onMaskedDateChange } =
     useMaskedValue({
       currentValue,

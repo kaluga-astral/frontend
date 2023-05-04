@@ -14,7 +14,6 @@ import {
 } from './MinMaxDateContext';
 import { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
-import { useBaseDateInRange } from './hooks';
 import { MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
 import { useMaskedValueAndSelectedBaseDate } from './hooks/useMaskedValueAndSelectedBaseDate';
@@ -63,7 +62,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     forwardedRef,
   ) => {
-    const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useRef<HTMLDivElement>(null);
 
     const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
@@ -81,7 +79,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         onDatePick: handleDayPick,
         currentValue: value,
         onChange,
-        baseDate,
       });
 
     return (

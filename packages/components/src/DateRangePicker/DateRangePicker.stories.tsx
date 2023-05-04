@@ -36,7 +36,10 @@ export const Showcase: Story = () => (
     <Template />
     <Template
       itemA={{ inputProps: { label: 'Контролируемый A' }, value: new Date() }}
-      itemB={{ inputProps: { label: 'Контролируемый B' }, value: new Date() }}
+      itemB={{
+        inputProps: { label: 'Контролируемый B' },
+        value: addDays(new Date(), 1),
+      }}
     />
     <Template
       itemA={{ inputProps: { label: 'maxDate меньше текущей A' } }}

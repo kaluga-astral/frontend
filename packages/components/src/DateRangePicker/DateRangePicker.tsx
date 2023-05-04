@@ -7,14 +7,13 @@ import {
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
 import { useForwardedRef, useInputPopperHooks } from '../hooks';
-import { useBaseDateInRange } from '../DatePicker/hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
-import { addDays, addMonths, isDate } from '../utils/date';
+import { addDays, isDate } from '../utils/date';
 
 import { DateRangePickerSplitter } from './styles';
 
@@ -62,7 +61,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     },
     forwardedRef,
   ) => {
-    const baseDate = useBaseDateInRange({ minDate, maxDate });
     const ref = useForwardedRef(forwardedRef);
     const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
       ref,
@@ -84,7 +82,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onDatePick: handleDayPick,
       currentValue: itemA?.value,
       onChange: itemA?.onChange,
-      baseDate,
     });
 
     const optionsB = useMaskedValueAndSelectedBaseDate({
@@ -94,7 +91,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onDatePick: handleDayPick,
       currentValue: itemB?.value,
       onChange: itemB?.onChange,
-      baseDate: addMonths(baseDate, 1),
+      monthOffset: 1,
     });
 
     return (
