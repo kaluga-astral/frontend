@@ -25,8 +25,8 @@ const Template: Story<DateRangePickerProps> = (args) => {
   return (
     <DateRangePicker
       {...args}
-      itemA={{ value: dateA, onChange: setDateA }}
-      itemB={{ value: dateB, onChange: setDateB }}
+      itemA={{ ...args.itemA, value: dateA, onChange: setDateA }}
+      itemB={{ ...args.itemB, value: dateB, onChange: setDateB }}
     />
   );
 };
