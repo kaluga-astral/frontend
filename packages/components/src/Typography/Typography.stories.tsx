@@ -76,10 +76,7 @@ export const Showcase = () => (
             container
             display="grid"
           >
-            <Typography
-              color={(theme) => theme.palette.red[200]}
-              variant={variant}
-            >
+            <Typography color={color} variant={variant}>
               {variant} x {color}
             </Typography>
             {intensities?.map((intensity) => (
