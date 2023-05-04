@@ -11,7 +11,8 @@ export const DateCalendarGridBtnLargeWrapper = styled(DateCalendarGridBtn)`
   &::after {
     bottom: ${({ theme }) => theme.spacing(2)};
     left: ${({ theme }) => theme.spacing(4)};
-    // по дизайну с каждой стороны отступ по 16px, итого два раза по 16px = 32px
+
+    /* по дизайну с каждой стороны отступ по 16px, итого два раза по 16px = 32px */
     width: calc(100% - 32px);
   }
 `;
