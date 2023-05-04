@@ -3,11 +3,12 @@ import { DateCalendarButton } from '../DateCalendarBtn';
 import { Theme } from '../../../theme';
 
 import { DateCalendarDayBtnWrapperProps } from './DateCalendarGridBtn';
-import { IS_IN_RANGE_CLASS, IS_SELECTED_CLASS } from './constants';
 
-type GetColorOptions = {
+type WithTheme = {
   theme: Theme;
-} & DateCalendarDayBtnWrapperProps;
+};
+
+type GetColorOptions = WithTheme & DateCalendarDayBtnWrapperProps;
 
 const getTextColor = ({
   theme,
@@ -46,7 +47,45 @@ const getBgColor = ({
   return '';
 };
 
+const getLeftBorderRadius = ({
+  isInSelectedRange,
+  isPreviousItemInSelectedRange,
+  selected,
+  theme,
+}: DateCalendarDayBtnWrapperProps & WithTheme) => {
+  if (
+    !isInSelectedRange ||
+    (!isPreviousItemInSelectedRange && isInSelectedRange && selected)
+  ) {
+    return theme.shape.small;
+  }
+
+  if (isInSelectedRange) {
+    return '0';
+  }
+
+  return '';
+};
+
+const getRightBorderRadius = ({
+  isInSelectedRange,
+  isPreviousItemInSelectedRange,
+  selected,
+  theme,
+}: DateCalendarDayBtnWrapperProps & WithTheme) => {
+  if (!isInSelectedRange || (isPreviousItemInSelectedRange && selected)) {
+    return theme.shape.small;
+  }
+
+  if (isInSelectedRange) {
+    return '0';
+  }
+
+  return '';
+};
+
 const nonForwardableProps = new Set<PropertyKey>([
+  'isPreviousItemInSelectedRange',
   'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
@@ -63,29 +102,19 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
 
   background-color: ${(props) => getBgColor(props)};
 
-  &.${IS_IN_RANGE_CLASS} {
-    border-radius: 0;
+  --radius-left: ${(props) => getLeftBorderRadius(props)};
+  --radius-right: ${(props) => getRightBorderRadius(props)};
+  border-radius: var(--radius-left) var(--radius-right) var(--radius-right)
+    var(--radius-left);
 
-    &:first-of-type,
-    &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
-      border-top-left-radius: ${({ theme }) => theme.shape.small};
-      border-bottom-left-radius: ${({ theme }) => theme.shape.small};
-    }
-
-    &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
-      border-top-right-radius: ${({ theme }) => theme.shape.small};
-      border-bottom-right-radius: ${({ theme }) => theme.shape.small};
-    }
+  &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
+    --radius-left: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
   }
 
-  &:not(.${IS_IN_RANGE_CLASS}) + .${IS_SELECTED_CLASS}.${IS_IN_RANGE_CLASS} {
-    border-top-left-radius: ${({ theme }) => theme.shape.small};
-    border-bottom-left-radius: ${({ theme }) => theme.shape.small};
-  }
-
-  &.${IS_IN_RANGE_CLASS} + .${IS_SELECTED_CLASS} {
-    border-top-right-radius: ${({ theme }) => theme.shape.small};
-    border-bottom-right-radius: ${({ theme }) => theme.shape.small};
+  &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
+    --radius-right: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
   }
 
   &::after {

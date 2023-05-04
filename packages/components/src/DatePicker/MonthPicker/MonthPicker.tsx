@@ -63,6 +63,7 @@ export const MonthPicker = ({
             onClick={() => onChange?.(date)}
             title={titleFormat(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
+            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
             {...props}
           >
             {monthFormat(date)}

@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { ButtonProps } from '../../../Button';
 
 import { DateCalendarGridBtnWrapper } from './styles';
-import { IS_IN_RANGE_CLASS, IS_SELECTED_CLASS } from './constants';
 
 export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
   /**
@@ -25,20 +24,12 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    */
   lengthInRow: number;
   children: ReactNode;
+  /**
+   * @description флаг, означающий, что предыдущий элемент находится в выбранном диапазоне
+   */
+  isPreviousItemInSelectedRange?: boolean;
 };
 
-export const DateCalendarGridBtn = ({
-  className = '',
-  selected,
-  isInSelectedRange,
-  ...props
-}: DateCalendarDayBtnWrapperProps) => (
-  <DateCalendarGridBtnWrapper
-    className={`${className} ${isInSelectedRange ? IS_IN_RANGE_CLASS : ''} ${
-      selected ? IS_SELECTED_CLASS : ''
-    }`}
-    selected={selected}
-    isInSelectedRange={isInSelectedRange}
-    {...props}
-  />
+export const DateCalendarGridBtn = (props: DateCalendarDayBtnWrapperProps) => (
+  <DateCalendarGridBtnWrapper {...props} />
 );

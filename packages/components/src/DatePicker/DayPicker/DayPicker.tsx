@@ -85,6 +85,7 @@ export const DayPicker = ({
               onClick={() => onChange?.(date)}
               title={dayFormat(date)}
               lengthInRow={DAYS_IN_WEEK}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
               {...props}
             >
               {monthDay}

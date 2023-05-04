@@ -48,11 +48,12 @@ export const YearPicker = ({
         headBtnText={`${grid[0]?.year}-${grid.at(-1)?.year}`}
       />
       <DateCalendarGridLarge>
-        {grid.map(({ year, date, ...props }) => (
+        {grid.map(({ year, date, ...props }, index) => (
           <DateCalendarGridBtnLarge
             key={year}
             onClick={() => onChange?.(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
+            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
             {...props}
           >
             {year}
