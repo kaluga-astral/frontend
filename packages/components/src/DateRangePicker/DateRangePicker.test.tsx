@@ -190,9 +190,16 @@ describe('DateRangePicker', () => {
     renderWithTheme(<TestComponent />);
     fireEvent.focus(screen.getByPlaceholderText('inputA'));
     // eslint-disable-next-line testing-library/prefer-presence-queries
-    expect(screen.queryByRole('tooltip')).toBeTruthy();
-    await userEvents.click(screen.getAllByText('15')[0]);
-    await userEvents.click(screen.getAllByText('15')[1]);
+    expect(screen.queryAllByRole('tooltip').length).toBeTruthy();
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[0]);
+    });
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[1]);
+    });
+
     expect(screen.queryByRole('tooltip')).toBe(null);
   });
 
