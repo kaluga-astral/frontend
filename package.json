@@ -46,10 +46,10 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.5",
     "@semantic-release/exec": "^6.0.3",
-    "vitest": "^0.25.3",
+    "vitest": "^0.31.0",
     "@vitejs/plugin-react": "^2.2.0",
     "copyfiles": "^2.4.1",
-    "jsdom": "^20.0.3",
+    "jsdom": "^22.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "eslint-plugin-testing-library": "^5.9.1",
     "cross-env": "^7.0.3"
