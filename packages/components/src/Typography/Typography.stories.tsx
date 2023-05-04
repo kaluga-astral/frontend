@@ -76,7 +76,10 @@ export const Showcase = () => (
             container
             display="grid"
           >
-            <Typography color={color} variant={variant}>
+            <Typography
+              color={(theme) => theme.palette.red[200]}
+              variant={variant}
+            >
               {variant} x {color}
             </Typography>
             {intensities?.map((intensity) => (
@@ -102,7 +105,7 @@ Default.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
   color: 'primary',
-  intensity: 900,
+  colorIntensity: '900',
 };
 
 Default.parameters = {
