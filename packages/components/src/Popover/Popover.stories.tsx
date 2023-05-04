@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Story } from '@storybook/react';
 
 import { Button } from '../Button';

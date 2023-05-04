@@ -8,7 +8,7 @@ type Props = {
 export const SignerCell = ({ person, organization }: Props) => (
   <>
     <Typography>{person}</Typography>
-    <Typography variant="small" color="grey" colorIntensity="600">
+    <Typography variant="small" color={(theme) => theme.palette.red[200]}>
       {organization}
     </Typography>
   </>
