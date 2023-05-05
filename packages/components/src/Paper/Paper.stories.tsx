@@ -101,12 +101,15 @@ export const PaperShowcase: Story = () => {
 
   return (
     <ExampleTemplate>
-      <Typography variant="h3">Paper</Typography>
+      <Typography variant="h3" paragraph>
+        Paper
+      </Typography>
+      <br />
+      <br />
       <Typography paragraph>
         Стиль напоминает бумагу, если на нее смотреть сверху вниз, она имеет
         разную высоту.
       </Typography>
-
       {/* Пример */}
 
       <ExampleTemplate.Case
@@ -118,21 +121,17 @@ export const PaperShowcase: Story = () => {
         <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           {/* elevation={1} = нет тени */}
           <PaperExampleStory>
-            <Typography variant="h6" color={'#557192'} paragraph>
+            <Typography variant="h6" color={'#557192'}>
               Высота-1
             </Typography>
           </PaperExampleStory>
           {/* elevation={2} Тень 200 */}
           <PaperExampleStory elevation={2}>
-            <Typography variant="h6" paragraph>
-              Высота-2
-            </Typography>
+            <Typography variant="h6">Высота-2</Typography>
           </PaperExampleStory>
           {/* elevation={3} Тень 300 */}
           <PaperExampleStory elevation={3}>
-            <Typography variant="h6" paragraph>
-              Высота-3
-            </Typography>
+            <Typography variant="h6">Высота-3</Typography>
           </PaperExampleStory>
         </Grid>
       </ExampleTemplate.Case>
@@ -140,17 +139,13 @@ export const PaperShowcase: Story = () => {
 
       {/* Высота 1 */}
 
-      <Typography variant="h5" color={900}>
+      <Typography variant="h5" color={900} paragraph>
         Высота-1
       </Typography>
-      <br />
       <Typography variant="ui" color={800} paragraph>
         Не имеет тени и соответственно высоты. Например рабочая область любого
         реестра (таблицы).
       </Typography>
-
-      <br />
-      <br />
 
       {/* Высота 2 */}
 
@@ -161,7 +156,7 @@ export const PaperShowcase: Story = () => {
         ]}
       >
         <IndentWrapper>
-          <Typography variant="h6" color={900} paragraph>
+          <Typography variant="h6" color={900}>
             Пример использования 1: Хедер (Header)
           </Typography>
 
@@ -173,7 +168,7 @@ export const PaperShowcase: Story = () => {
             <Profile {...header.profile} />
           </PaperHeaderStyled>
 
-          <Typography variant="h6" color={900} paragraph>
+          <Typography variant="h6" color={900}>
             Пример использования 2: Выпадающий список (Dropdown)
           </Typography>
 
