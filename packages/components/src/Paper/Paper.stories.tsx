@@ -101,12 +101,12 @@ export const PaperShowcase: Story = () => {
 
   return (
     <ExampleTemplate>
-      <Typography variant="h3" paragraph>
+      <Typography variant="h3" color={'gray'} colorIntensity={'900'} paragraph>
         Paper
       </Typography>
       <br />
       <br />
-      <Typography paragraph>
+      <Typography color={'gray'} colorIntensity={'800'} paragraph>
         Стиль напоминает бумагу, если на нее смотреть сверху вниз, она имеет
         разную высоту.
       </Typography>
@@ -121,17 +121,21 @@ export const PaperShowcase: Story = () => {
         <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           {/* elevation={1} = нет тени */}
           <PaperExampleStory>
-            <Typography variant="h6" color={'#557192'}>
+            <Typography variant="h6" color={'gray'} colorIntensity={'700'}>
               Высота-1
             </Typography>
           </PaperExampleStory>
           {/* elevation={2} Тень 200 */}
           <PaperExampleStory elevation={2}>
-            <Typography variant="h6">Высота-2</Typography>
+            <Typography variant="h6" color={'gray'} colorIntensity={'700'}>
+              Высота-2
+            </Typography>
           </PaperExampleStory>
           {/* elevation={3} Тень 300 */}
           <PaperExampleStory elevation={3}>
-            <Typography variant="h6">Высота-3</Typography>
+            <Typography variant="h6" color={'gray'} colorIntensity={'700'}>
+              Высота-3
+            </Typography>
           </PaperExampleStory>
         </Grid>
       </ExampleTemplate.Case>
@@ -139,10 +143,10 @@ export const PaperShowcase: Story = () => {
 
       {/* Высота 1 */}
 
-      <Typography variant="h5" color={900} paragraph>
+      <Typography variant="h5" color={'gray'} colorIntensity={'900'} paragraph>
         Высота-1
       </Typography>
-      <Typography variant="ui" color={800} paragraph>
+      <Typography variant="ui" color={'gray'} colorIntensity={'800'} paragraph>
         Не имеет тени и соответственно высоты. Например рабочая область любого
         реестра (таблицы).
       </Typography>
@@ -156,7 +160,7 @@ export const PaperShowcase: Story = () => {
         ]}
       >
         <IndentWrapper>
-          <Typography variant="h6" color={900}>
+          <Typography variant="h6" color={'gray'} colorIntensity={'900'}>
             Пример использования 1: Хедер (Header)
           </Typography>
 
@@ -168,7 +172,7 @@ export const PaperShowcase: Story = () => {
             <Profile {...header.profile} />
           </PaperHeaderStyled>
 
-          <Typography variant="h6" color={900}>
+          <Typography variant="h6" color={'gray'} colorIntensity={'900'}>
             Пример использования 2: Выпадающий список (Dropdown)
           </Typography>
 
@@ -177,25 +181,33 @@ export const PaperShowcase: Story = () => {
               <ListItemIcon>
                 <CaseOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui">Список дел</Typography>
+              <Typography variant="ui" color={'gray'} colorIntensity={'900'}>
+                Список дел
+              </Typography>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
                 <EditFillMd />
               </ListItemIcon>
-              <Typography variant="ui">Редактировать</Typography>
+              <Typography variant="ui" color={'gray'} colorIntensity={'900'}>
+                Редактировать
+              </Typography>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
                 <DocumentOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui">Новый документ</Typography>
+              <Typography variant="ui" color={'gray'} colorIntensity={'900'}>
+                Новый документ
+              </Typography>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
                 <BinOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui">Удалить</Typography>
+              <Typography variant="ui" color={'gray'} colorIntensity={'900'}>
+                Удалить
+              </Typography>
             </MenuItem>
           </PaperMenu>
         </IndentWrapper>
