@@ -101,12 +101,12 @@ export const PaperShowcase: Story = () => {
 
   return (
     <ExampleTemplate>
-      <Typography variant="h3" color="gray" colorIntensity="900" paragraph>
+      <Typography variant="h3" color="grey" colorIntensity="900" paragraph>
         Paper
       </Typography>
       <br />
       <br />
-      <Typography color="gray" colorIntensity="800" paragraph>
+      <Typography color="grey" colorIntensity="800" paragraph>
         Стиль напоминает бумагу, если на нее смотреть сверху вниз, она имеет
         разную высоту.
       </Typography>
@@ -121,19 +121,19 @@ export const PaperShowcase: Story = () => {
         <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
           {/* elevation={1} = нет тени */}
           <PaperExampleStory>
-            <Typography variant="h6" color="gray" colorIntensity="700">
+            <Typography variant="h6" color="grey" colorIntensity="700">
               Высота-1
             </Typography>
           </PaperExampleStory>
           {/* elevation={2} Тень 200 */}
           <PaperExampleStory elevation={2}>
-            <Typography variant="h6" color="gray" colorIntensity="700">
+            <Typography variant="h6" color="grey" colorIntensity="700">
               Высота-2
             </Typography>
           </PaperExampleStory>
           {/* elevation={3} Тень 300 */}
           <PaperExampleStory elevation={3}>
-            <Typography variant="h6" color="gray" colorIntensity="700">
+            <Typography variant="h6" color="grey" colorIntensity="700">
               Высота-3
             </Typography>
           </PaperExampleStory>
@@ -143,10 +143,10 @@ export const PaperShowcase: Story = () => {
 
       {/* Высота 1 */}
 
-      <Typography variant="h5" color="gray" colorIntensity="900" paragraph>
+      <Typography variant="h5" color="grey" colorIntensity="900" paragraph>
         Высота-1
       </Typography>
-      <Typography variant="ui" color="gray" colorIntensity="800" paragraph>
+      <Typography variant="ui" color="grey" colorIntensity="800" paragraph>
         Не имеет тени и соответственно высоты. Например рабочая область любого
         реестра (таблицы).
       </Typography>
@@ -160,7 +160,7 @@ export const PaperShowcase: Story = () => {
         ]}
       >
         <IndentWrapper>
-          <Typography variant="h6" color="gray" colorIntensity="900">
+          <Typography variant="h6" color="grey" colorIntensity="900">
             Пример использования 1: Хедер (Header)
           </Typography>
 
@@ -172,7 +172,7 @@ export const PaperShowcase: Story = () => {
             <Profile {...header.profile} />
           </PaperHeaderStyled>
 
-          <Typography variant="h6" color="gray" colorIntensity="900">
+          <Typography variant="h6" color="grey" colorIntensity="900">
             Пример использования 2: Выпадающий список (Dropdown)
           </Typography>
 
@@ -181,7 +181,7 @@ export const PaperShowcase: Story = () => {
               <ListItemIcon>
                 <CaseOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui" color="gray" colorIntensity="900">
+              <Typography variant="ui" color="grey" colorIntensity="900">
                 Список дел
               </Typography>
             </MenuItem>
@@ -189,7 +189,7 @@ export const PaperShowcase: Story = () => {
               <ListItemIcon>
                 <EditFillMd />
               </ListItemIcon>
-              <Typography variant="ui" color="gray" colorIntensity="900">
+              <Typography variant="ui" color="grey" colorIntensity="900">
                 Редактировать
               </Typography>
             </MenuItem>
@@ -197,7 +197,7 @@ export const PaperShowcase: Story = () => {
               <ListItemIcon>
                 <DocumentOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui" color="gray" colorIntensity="900">
+              <Typography variant="ui" color="grey" colorIntensity="900">
                 Новый документ
               </Typography>
             </MenuItem>
@@ -205,7 +205,7 @@ export const PaperShowcase: Story = () => {
               <ListItemIcon>
                 <BinOutlineMd />
               </ListItemIcon>
-              <Typography variant="ui" color="gray" colorIntensity="900">
+              <Typography variant="ui" color="grey" colorIntensity="900">
                 Удалить
               </Typography>
             </MenuItem>
@@ -233,10 +233,10 @@ PaperStory.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
   backgrounds: {
-    default: 'gray',
+    default: 'grey',
     values: [
       {
-        name: 'gray',
+        name: 'grey',
         value: '#eee',
       },
     ],
