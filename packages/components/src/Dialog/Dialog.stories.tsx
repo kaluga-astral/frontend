@@ -6,9 +6,12 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
+  Grid,
+  Tag,
   Typography,
   styled,
 } from '..';
+import { DialogHeader } from '../DialogHeader';
 
 import { Dialog } from './Dialog';
 
@@ -28,21 +31,37 @@ const Subtitle = styled(Typography)`
 `;
 
 const Template: Story = () => {
-  const [open, setOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogWithHeaderOpen, setDialogWithHeaderOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setDialogOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setDialogOpen(false);
+  };
+
+  const handleOpenDialogWithHeader = () => {
+    setDialogWithHeaderOpen(true);
+  };
+
+  const handleCloseDialogWithHeader = () => {
+    setDialogWithHeaderOpen(false);
   };
 
   return (
-    <>
-      <Button variant="light" onClick={handleClickOpen}>
-        Dialog
-      </Button>
+    <Grid container spacing={2}>
+      <Grid>
+        <Button variant="light" onClick={handleClickOpen}>
+          Dialog
+        </Button>
+      </Grid>
+      <Grid>
+        <Button variant="light" onClick={handleOpenDialogWithHeader}>
+          Dialog with DialogHeader
+        </Button>
+      </Grid>
       <Dialog
         title={
           <>
@@ -50,12 +69,12 @@ const Template: Story = () => {
             <Subtitle variant="ui">Подзаголовок</Subtitle>
           </>
         }
-        open={open}
+        open={dialogOpen}
         onClose={handleClose}
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Заглушка примера текста страницы, который несет очень выжный смысл
+            Заглушка примера текста страницы, который несет очень важный смысл
             для пользователя и предлагает ему варианты выбора действий с
             контентом и в рамках работы приложения.
           </DialogContentText>
@@ -69,7 +88,29 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+      <Dialog open={dialogWithHeaderOpen} onClose={handleCloseDialogWithHeader}>
+        <DialogHeader title="Заголовок" onClose={handleCloseDialogWithHeader}>
+          <Tag variant="light" label="Light Tag" color="primary" />
+          <Button variant="contained" color="primary">
+            Button
+          </Button>
+        </DialogHeader>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Демонстрация диалога с компонентом DialogHeader, который позволяет
+            добавлять другие компоненты в заголовок диалога.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="text" onClick={handleCloseDialogWithHeader}>
+            Отмена
+          </Button>
+          <Button autoFocus onClick={handleCloseDialogWithHeader}>
+            Готово
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Grid>
   );
 };
 
