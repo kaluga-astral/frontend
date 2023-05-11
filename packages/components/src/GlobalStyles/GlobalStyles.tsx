@@ -1,15 +1,26 @@
 import { Global } from '@emotion/react';
-import { CssBaseline } from '@mui/material';
-import { CssBaselineProps as GlobalStylesProps } from '@mui/material/CssBaseline';
+import { CssBaseline, ScopedCssBaseline } from '@mui/material';
+import { CssBaselineProps } from '@mui/material/CssBaseline';
 
 import { Theme, useTheme } from '../theme';
 
-export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
+type GlobalStylesProps = CssBaselineProps & {
+  withoutGlobalStyles?: boolean;
+};
+
+export const GlobalStyles = ({
+  children,
+  withoutGlobalStyles = false,
+  ...props
+}: GlobalStylesProps) => {
   const theme: Theme = useTheme();
 
   return (
     <>
-      <CssBaseline {...props}>{children}</CssBaseline>
+      {!withoutGlobalStyles && <CssBaseline {...props}>{children}</CssBaseline>}
+      {withoutGlobalStyles && (
+        <ScopedCssBaseline {...props}>{children}</ScopedCssBaseline>
+      )}
       <Global
         styles={{
           html: {
