@@ -5,21 +5,28 @@ import { CssBaselineProps } from '@mui/material/CssBaseline';
 import { Theme, useTheme } from '../theme';
 
 type GlobalStylesProps = CssBaselineProps & {
-  withoutGlobalStyles?: boolean;
+  /**
+   * @description Если `true` отключает глобальные стили.
+   * Задаёт стили только для для блока, который обёрнут в `ThemeProvider`.
+   * Нужен для постепенного перевода сайта на библиотеку компонентов.
+   * @default false
+   */
+  withScopedStyles?: boolean;
 };
 
 export const GlobalStyles = ({
   children,
-  withoutGlobalStyles = false,
+  withScopedStyles = false,
   ...props
 }: GlobalStylesProps) => {
   const theme: Theme = useTheme();
 
   return (
     <>
-      {!withoutGlobalStyles && <CssBaseline {...props}>{children}</CssBaseline>}
-      {withoutGlobalStyles && (
+      {withScopedStyles ? (
         <ScopedCssBaseline {...props}>{children}</ScopedCssBaseline>
+      ) : (
+        <CssBaseline {...props}>{children}</CssBaseline>
       )}
       <Global
         styles={{

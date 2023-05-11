@@ -8,17 +8,29 @@ import { Theme } from '../theme';
 
 export type ThemeProviderProps = {
   children: ReactNode;
+
+  /**
+   * @description Объект темы, обычно являющийся результатом `createTheme()`.
+   * Предоставленная тема будет объединена с темой по умолчанию.
+   */
   theme: Theme;
-  withoutGlobalStyles?: boolean;
+
+  /**
+   * @description Если `true` отключает глобальные стили.
+   * Задаёт стили только для для блока, который обёрнут в `ThemeProvider`.
+   * Нужен для постепенного перевода сайта на библиотеку компонентов.
+   * @default false
+   */
+  withScopedStyles?: boolean;
 };
 
 export const ThemeProvider = (props: PropsWithChildren<ThemeProviderProps>) => {
-  const { children, theme, withoutGlobalStyles = false } = props;
+  const { children, theme, withScopedStyles = false } = props;
 
   return (
     <MuiThemeProvider theme={theme}>
       <EmotionThemeProvider theme={theme}>
-        <GlobalStyles withoutGlobalStyles={withoutGlobalStyles}>
+        <GlobalStyles withScopedStyles={withScopedStyles}>
           {children}
         </GlobalStyles>
       </EmotionThemeProvider>
