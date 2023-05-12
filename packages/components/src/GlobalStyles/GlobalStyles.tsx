@@ -7,7 +7,7 @@ import { Theme, useTheme } from '../theme';
 type GlobalStylesProps = CssBaselineProps & {
   /**
    * @description Если `true` отключает глобальные стили.
-   * Задаёт стили только для для блока, который обёрнут в `ThemeProvider`.
+   * Задаёт стили только для блока, который обёрнут в `ThemeProvider`.
    * Нужен для постепенного перевода сайта на библиотеку компонентов.
    * @default false
    */
