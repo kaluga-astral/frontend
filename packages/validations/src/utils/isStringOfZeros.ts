@@ -3,7 +3,7 @@
  */
 export const isStringOfZeros = (value: unknown) => {
   if (value && typeof value === 'string') {
-    return !Boolean(value.replaceAll('0', ''));
+    return !Boolean(value.split('0').join(''));
   }
 
   return false;
