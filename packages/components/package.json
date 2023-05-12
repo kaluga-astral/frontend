@@ -40,7 +40,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/base": "5.0.0-alpha.128",
     "@mui/lab": "5.0.0-alpha.128",
-    "@mui/material": "5.12.2",
+    "@mui/material": "5.13.0",
     "dayjs": "^1.11.5",
     "lodash-es": "^4.17.21",
     "react-imask": "6.4.2",
