@@ -22,11 +22,11 @@ export const IndentWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(0, 8)};
 
   & > :nth-child(odd) {
-    margin-bottom: 20px;
+    margin-bottom: ${({ theme }) => theme.spacing(5)};
   }
 
   & > :nth-child(even):not(:last-child) {
-    margin-bottom: 32px;
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
   }
 `;
 
