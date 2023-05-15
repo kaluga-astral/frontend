@@ -6,7 +6,7 @@ import { Grid, GridContainerProps } from '../Grid';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
-import { StyledContainer } from './styles';
+import { DialogHeaderRoot } from './styles';
 
 export type DialogHeaderProps = {
   children: React.ReactNode;
@@ -29,27 +29,8 @@ export const DialogHeader = ({
     }
   };
 
-  const templateColumns = React.useMemo(() => {
-    let type = '1fr';
-
-    if (title) {
-      type = 'max-content ' + type;
-    }
-
-    if (onClose) {
-      type += ' 32px';
-    }
-
-    return type;
-  }, [title, onClose]);
-
   return (
-    <StyledContainer
-      container
-      templateColumns={templateColumns}
-      alignItems="center"
-      spacing={2}
-    >
+    <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && (
         <Typography intensity={500} variant="h4">
           {title}
@@ -73,6 +54,6 @@ export const DialogHeader = ({
           <CrossOutlineMd />
         </IconButton>
       )}
-    </StyledContainer>
+    </DialogHeaderRoot>
   );
 };
