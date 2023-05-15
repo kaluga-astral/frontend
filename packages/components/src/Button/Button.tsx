@@ -1,5 +1,5 @@
-import { LoadingButtonProps } from '@mui/lab';
 import { ElementType, forwardRef, useMemo } from 'react';
+import { LoadingButtonProps } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
