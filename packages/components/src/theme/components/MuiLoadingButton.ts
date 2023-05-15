@@ -2,9 +2,9 @@ import { Components } from '@mui/material';
 import { loadingButtonClasses } from '@mui/lab';
 
 import type { Theme } from '../baseTheme';
-import type { ButtonBaseWrapperThemeProps } from '../../ButtonBase/styles';
-import { ButtonStates } from '../../ButtonBase';
-import { getBgColor } from '../../ButtonBase/styles';
+import { ButtonProps, ButtonStates } from '../../Button';
+
+import { getButtonBackgroundColor } from './MuiButton';
 
 export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
   defaultProps: {
@@ -12,16 +12,14 @@ export const MuiLoadingButton: Components<Theme>['MuiLoadingButton'] = {
   },
   styleOverrides: {
     root({ ownerState, theme }) {
-      const customVariant =
-        ownerState.variant as ButtonBaseWrapperThemeProps['customVariant'];
-      const customColor =
-        ownerState.color as ButtonBaseWrapperThemeProps['customColor'];
+      const variant = ownerState.variant as ButtonProps['variant'];
+      const color = ownerState.color as ButtonProps['color'];
 
       return {
         [`&.${loadingButtonClasses.loading}`]: {
-          backgroundColor: getBgColor({
-            customColor,
-            customVariant,
+          backgroundColor: getButtonBackgroundColor({
+            color,
+            variant,
             theme,
             buttonState: ButtonStates.Default,
           }),

@@ -2,11 +2,10 @@ import { ClickAwayListener } from '@mui/material';
 import { ReactNode, forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { Menu } from '../Menu';
-import { BaseButtonProps } from '../ButtonBase';
 
-export type IconDropdownButtonProps = BaseButtonProps & {
+export type IconDropdownButtonProps = IconButtonProps & {
   /**
    * Иконка кнопки
    */

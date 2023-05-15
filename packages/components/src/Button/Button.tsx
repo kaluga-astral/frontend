@@ -1,11 +1,23 @@
-import { forwardRef, useMemo } from 'react';
+import { LoadingButtonProps } from '@mui/lab';
+import { ElementType, forwardRef, useMemo } from 'react';
 
-import { ButtonColors, ButtonVariants } from '../ButtonBase';
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
+import { WithoutEmotionSpecific } from '../types';
 
+import { ButtonColors, ButtonVariants } from './enums';
 import { LoadingButtonWrapper } from './styles';
-import { ButtonProps } from './types';
+
+export type ButtonProps = Omit<
+  WithoutEmotionSpecific<LoadingButtonProps>,
+  'variant' | 'color'
+> & {
+  variant?: `${ButtonVariants}`;
+  color?: `${ButtonColors}`;
+  // https://github.com/mui/material-ui/issues/30038
+  component?: ElementType;
+  selected?: boolean;
+};
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
