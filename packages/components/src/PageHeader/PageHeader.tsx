@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
-import { ButtonProps } from '../Button';
+import { type ButtonProps } from '../Button';
 
-import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
+import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
   PageHeaderBackButton,
   PageHeaderBreadcrumbs,

@@ -2,7 +2,7 @@ import { ClickAwayListener } from '@mui/material';
 import { ReactNode, forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
-import { IconButton, IconButtonProps } from '../IconButton';
+import { IconButton, type IconButtonProps } from '../IconButton';
 import { Menu } from '../Menu';
 
 export type IconDropdownButtonProps = IconButtonProps & {

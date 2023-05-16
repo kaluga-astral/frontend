@@ -1,9 +1,9 @@
 import { ElementType, forwardRef, useMemo } from 'react';
-import { LoadingButtonProps } from '@mui/lab';
+import type { LoadingButtonProps } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 import { ButtonColors, ButtonVariants } from './enums';
 import { LoadingButtonWrapper } from './styles';
