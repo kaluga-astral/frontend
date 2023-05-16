@@ -5,4 +5,4 @@ import { WithoutEmotionSpecific } from '../types';
 export type CheckboxProps = Omit<
   WithoutEmotionSpecific<MuiCheckboxProps>,
   'size' | 'color'
->;
+> & { error?: boolean };

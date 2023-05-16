@@ -1,10 +1,12 @@
-import { Checkbox } from '@mui/material';
+import { Checkbox, css } from '@mui/material';
 
 import { styled } from '../styles';
 
 import { CheckboxProps } from './types';
 
-export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
+export const StyledCheckbox = styled(Checkbox, {
+  shouldForwardProp: (prop) => prop !== 'error',
+})<CheckboxProps>`
   padding: 5px;
 
   color: ${({ theme }) => theme.palette.background.element};
@@ -48,4 +50,20 @@ export const StyledCheckbox = styled(Checkbox)<CheckboxProps>`
       color: ${({ theme }) => theme.palette.common.white};
     }
   }
+
+  ${({ error, theme }) =>
+    error &&
+    css`
+      &.Mui-checked {
+        color: ${theme.palette.red[800]};
+
+        &:hover {
+          color: ${theme.palette.red[700]};
+        }
+      }
+
+      & .MuiSvgIcon-border {
+        color: ${theme.palette.red[800]};
+      }
+    `}
 `;

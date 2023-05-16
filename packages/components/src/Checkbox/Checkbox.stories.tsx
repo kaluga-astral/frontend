@@ -17,33 +17,39 @@ export const Showcase: Story = () => (
   <Stack direction="row" gap={4}>
     <Stack gap={4}>
       <Checkbox />
-      <Checkbox disabled />
       <Checkbox checked />
-      <Checkbox disabled checked />
       <Checkbox indeterminate />
       <Checkbox indeterminate disabled />
+      <Checkbox disabled />
+      <Checkbox disabled checked />
+      <Checkbox error />
+      <Checkbox error checked />
     </Stack>
     <Stack gap={4}>
       <FormControlLabel control={<Checkbox />} label="Текст" />
-      <FormControlLabel control={<Checkbox />} label="Текст" disabled />
       <FormControlLabel control={<Checkbox checked />} label="Текст" />
-      <FormControlLabel control={<Checkbox checked />} label="Текст" disabled />
       <FormControlLabel control={<Checkbox indeterminate />} label="Текст" />
       <FormControlLabel
         control={<Checkbox indeterminate />}
         label="Текст"
         disabled
       />
+      <FormControlLabel control={<Checkbox />} label="Текст" disabled />
+      <FormControlLabel control={<Checkbox checked />} label="Текст" disabled />
+      <FormControlLabel control={<Checkbox error />} label="Текст" />
+      <FormControlLabel control={<Checkbox error checked />} label="Текст" />
     </Stack>
     <Stack justifyContent="space-between" gap={4}>
       <Typography variant="ui">Check=False, State=Default</Typography>
-      <Typography variant="ui">Check=False, State=Disabled</Typography>
       <Typography variant="ui">Check=True, State=Default</Typography>
-      <Typography variant="ui">Check=True, State=Disabled</Typography>
       <Typography variant="ui">Check=True, State=Indeterminate</Typography>
       <Typography variant="ui">
         Check=True, State=Indeterminate_Disabled
       </Typography>
+      <Typography variant="ui">Check=False, State=Disabled</Typography>
+      <Typography variant="ui">Check=True, State=Disabled</Typography>
+      <Typography variant="ui">Check=False, State=Error_Default</Typography>
+      <Typography variant="ui">Check=True, State=Error_Default</Typography>
     </Stack>
   </Stack>
 );
