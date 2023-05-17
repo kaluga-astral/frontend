@@ -1,7 +1,5 @@
 import { styled } from '../../styles';
 
-import { Value } from './Value';
-
-export const ValueWrapper = styled(Value)`
+export const ValueWrapper = styled.div`
   margin-left: ${({ theme }) => theme.spacing(2)};
 `;
