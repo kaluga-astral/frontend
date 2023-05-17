@@ -17,10 +17,11 @@ export const DescriptionWrapper = styled.div<{
   }
 `;
 
-export const DashedSeparator = styled.div`
+export const DescriptionDashedSeparator = styled.div`
   flex: 1;
   height: 4px;
-  margin-right: ${({ theme }) => theme.spacing(1)};
+  margin-right: ${({ theme }) => theme.spacing(2)};
+  margin-left: ${({ theme }) => theme.spacing(2)};
 
   border-bottom: 1px dashed ${({ theme }) => theme.palette.grey[400]};
 `;
