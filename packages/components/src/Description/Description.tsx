@@ -12,7 +12,7 @@ export type DescriptionProps = {
   children: ReactNode;
 
   /**
-   * пропс justifyContent, который позиционирует элементы либо по разным краям, либо по левому краю
+   * Позиционирует элементы либо по разным краям, либо по левому краю
    */
   justifyContent?: 'space-between' | 'start';
 
