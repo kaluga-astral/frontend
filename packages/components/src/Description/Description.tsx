@@ -17,7 +17,7 @@ export type DescriptionProps = {
   justifyContent?: 'space-between' | 'start';
 
   /**
-   * флаг отвечающий за добавление dashed разделителя, заполняющего свободное пространство между Name Value
+   * Добавляет dashed разделителя, заполняющего свободное пространство между Name Value
    */
   leader?: boolean;
 };
