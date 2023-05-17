@@ -16,7 +16,7 @@ export const Name = ({
   return (
     <>
       <Typography {...props} color={color}>
-        {children}:&nbsp;
+        {children}:
       </Typography>
       {leader && <DescriptionDashedSeparator />}
     </>
