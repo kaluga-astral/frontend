@@ -6,8 +6,7 @@ export const DescriptionWrapper = styled.div<{
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: ${({ justifyContent }) =>
-    justifyContent ? justifyContent : 'start'};
+  justify-content: ${({ justifyContent }) => justifyContent};
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
 

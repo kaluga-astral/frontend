@@ -24,7 +24,7 @@ export type DescriptionProps = {
 
 export const Description = ({
   children,
-  justifyContent,
+  justifyContent = 'start',
   leader = false,
 }: DescriptionProps) => {
   return (
