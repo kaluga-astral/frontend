@@ -7,8 +7,10 @@ export const MuiButtonBase: Components<Theme>['MuiButtonBase'] = {
     disableRipple: true,
   },
   styleOverrides: {
-    root: {
-      fontFamily: 'Ubuntu, serif',
+    root({ theme }) {
+      return {
+        fontFamily: theme.typography.fontFamily,
+      };
     },
   },
 };

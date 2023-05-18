@@ -12,10 +12,22 @@ export type ButtonProps = Omit<
   WithoutEmotionSpecific<LoadingButtonProps>,
   'variant' | 'color'
 > & {
+  /**
+   * Тип кнопки
+   */
   variant?: `${ButtonVariants}`;
+  /**
+   * Цвет текста кнопки
+   */
   color?: `${ButtonColors}`;
   // https://github.com/mui/material-ui/issues/30038
+  /**
+   * Тип html-элемента
+   */
   component?: ElementType;
+  /**
+   * Состояние кнопки - selected
+   */
   selected?: boolean;
 };
 
