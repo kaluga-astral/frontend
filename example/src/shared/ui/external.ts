@@ -31,7 +31,7 @@ export {
   TypographyColor,
   MenuItem,
   Select,
-  BaseButtonProps,
+  ButtonProps
 } from '@astral/ui';
 
 export {
