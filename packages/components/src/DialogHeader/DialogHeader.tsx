@@ -31,11 +31,7 @@ export const DialogHeader = ({
 
   return (
     <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
-      {title && (
-        <Typography intensity={500} variant="h4">
-          {title}
-        </Typography>
-      )}
+      {title && <Typography variant="h4">{title}</Typography>}
       <Grid
         container
         justifyContent={justifyContent}
