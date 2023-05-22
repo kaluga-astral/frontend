@@ -71,7 +71,13 @@ const columns: DataGridColumns<DataType>[] = [
     sortable: false,
     align: 'center',
     width: '1%',
-    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+    renderCell: (row) => {
+      if (['1', '2', '3', '4'].includes(row.id)) {
+        return null;
+      }
+
+      return <ActionCell actions={ACTIONS} row={row} />;
+    },
   },
 ];
 

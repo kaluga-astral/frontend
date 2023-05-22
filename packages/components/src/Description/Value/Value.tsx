@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 import { Typography, TypographyProps } from '../../Typography';
 
+import { ValueWrapper } from './styles';
+
 export type ValueProps = Pick<
   TypographyProps,
   'color' | 'variant' | 'children'
@@ -16,5 +18,7 @@ export type ValueProps = Pick<
 const STUB = <>&ndash;</>;
 
 export const Value = ({ children, stub = STUB, ...props }: ValueProps) => (
-  <Typography {...props}>{children || stub}</Typography>
+  <ValueWrapper>
+    <Typography {...props}>{children || stub}</Typography>
+  </ValueWrapper>
 );
