@@ -1,3 +1,0 @@
-# @astral/validations
-
-Утилиты валидаций
