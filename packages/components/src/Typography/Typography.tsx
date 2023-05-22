@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { OverrideProps } from '@mui/material/OverridableComponent';
 import { Variant } from '@mui/material/styles/createTypography';
-import { PropsWithChildren, forwardRef, useMemo } from 'react';
+import { ElementType, PropsWithChildren, forwardRef, useMemo } from 'react';
 
 import { Theme } from '../theme';
 import { WithoutEmotionSpecific } from '../types';
@@ -25,21 +25,21 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
-export type TypographyProps = Omit<
-  OverrideProps<WithoutEmotionSpecific<TypographyTypeMap>, React.ElementType>,
-  'variant' | 'color'
-> & {
-  variant?: Variant | keyof TypographyPropsVariantOverrides;
-  component?: React.ElementType;
-  color?: TypographyColor | ((theme: Theme) => string);
-  /**
-   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-   * @default undefined
-   * @example <Typography color="grey" colorIntensity="500" />
-   */
-  colorIntensity?: Intensity;
-};
+export type TypographyProps<Element extends ElementType = 'span'> =
+  WithoutEmotionSpecific<
+    Omit<OverrideProps<TypographyTypeMap, Element>, 'variant' | 'color'> & {
+      color?: TypographyColor | ((theme: Theme) => string);
+      variant?: Variant | keyof TypographyPropsVariantOverrides;
+      component?: ElementType;
+      /**
+       * @description интенсивность цвета, будет применена для цвета, у которого есть градации
+       * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
+       * @default undefined
+       * @example <Typography color="grey" colorIntensity="500" />
+       */
+      colorIntensity?: Intensity;
+    }
+  >;
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {

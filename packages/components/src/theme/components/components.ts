@@ -54,39 +54,49 @@ export type FontsUrls = {
   };
 };
 
+const getFontFaces = (fontUrls: FontsUrls): string => `
+  @font-face {
+    font-family: 'Ubuntu';
+    font-style: 'normal';
+    font-weight: 300;
+    font-display: swap;
+    src: url(${fontUrls.light.woff2}) format('woff2'), url(${fontUrls.light.woff}) format('woff');
+  }
+  @font-face { 
+    font-family: 'Ubuntu';
+    font-style: 'normal';
+    font-weight: 400;
+    font-display: swap;
+    src: url(${fontUrls.regular.woff2}) format('woff2'), url(${fontUrls.regular.woff}) format('woff');
+  }
+  @font-face {
+    font-family: 'Ubuntu';
+    font-style: 'normal';
+    font-weight: 500;
+    font-display: swap;
+    src: url(${fontUrls.medium.woff2}) format('woff2'), url(${fontUrls.medium.woff}) format('woff');
+  }
+  @font-face {
+    font-family: 'Ubuntu';
+    font-style: 'normal';
+    font-weight: 700;
+    font-display: swap;
+    src: url(${fontUrls.bold.woff2}) format('woff2'), url(${fontUrls.bold.woff}) format('woff');
+  }
+`;
+
 const getMuiCssBaseline = (
   fontUrls: FontsUrls,
 ): Components['MuiCssBaseline'] => ({
-  styleOverrides: `
-    @font-face {
-      font-family: 'Ubuntu';
-      font-style: 'normal';
-      font-weight: 300;
-      font-display: swap;
-      src: url(${fontUrls.light.woff2}) format('woff2'), url(${fontUrls.light.woff}) format('woff');
-    }
-    @font-face { 
-      font-family: 'Ubuntu';
-      font-style: 'normal';
-      font-weight: 400;
-      font-display: swap;
-      src: url(${fontUrls.regular.woff2}) format('woff2'), url(${fontUrls.regular.woff}) format('woff');
-    }
-    @font-face {
-      font-family: 'Ubuntu';
-      font-style: 'normal';
-      font-weight: 500;
-      font-display: swap;
-      src: url(${fontUrls.medium.woff2}) format('woff2'), url(${fontUrls.medium.woff}) format('woff');
-    }
-    @font-face {
-      font-family: 'Ubuntu';
-      font-style: 'normal';
-      font-weight: 700;
-      font-display: swap;
-      src: url(${fontUrls.bold.woff2}) format('woff2'), url(${fontUrls.bold.woff}) format('woff');
-    }
-  `,
+  styleOverrides: getFontFaces(fontUrls),
+});
+
+const getMuiScopedCssBaseline = (
+  fontUrls: FontsUrls,
+): Components['MuiScopedCssBaseline'] => ({
+  styleOverrides: {
+    root: getFontFaces(fontUrls),
+  },
 });
 
 const MuiCheckbox: Components['MuiCheckbox'] = {
@@ -103,6 +113,7 @@ const MuiRadio: Components['MuiRadio'] = {
 
 export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCssBaseline: getMuiCssBaseline(fontUrls),
+  MuiScopedCssBaseline: getMuiScopedCssBaseline(fontUrls),
   MuiAlert,
   MuiButton,
   MuiButtonBase,

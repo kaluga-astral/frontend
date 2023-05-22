@@ -43,7 +43,7 @@ export type MaskFieldProps = Omit<
   /**
    * Кастомные определения (definitions) для более точной настройки маски
    */
-  definitions?: IMask.MaskedPattern.Definitions;
+  definitions?: IMask.MaskedPattern['definitions'];
   /**
    * Сущность работающая в комбинации с пропсом `mask`, позволяет делать динамическую маску, в которой при удалении элементов, они заменяются подчеркиванием вместо смещения всего значения
    */

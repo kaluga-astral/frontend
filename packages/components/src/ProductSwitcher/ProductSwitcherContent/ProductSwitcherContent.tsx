@@ -33,7 +33,7 @@ export const ProductSwitcherContent = ({
             component="span"
           >
             <ErrorFillSm color="inherit" />
-            <Typography variant="h6" color="grey" colorIntensity={900}>
+            <Typography variant="h6" color="grey" colorIntensity="900">
               Что-то пошло не так
             </Typography>
           </TitleErrorContainer>
@@ -47,7 +47,7 @@ export const ProductSwitcherContent = ({
             <li key={product.id}>
               <ProductItem component="a" href={product.url}>
                 <Logo src={product.logoUrl} color={product.color} />
-                <Typography variant="ui" color="grey" colorIntensity={900}>
+                <Typography variant="ui" color="grey" colorIntensity="900">
                   {product.name}
                 </Typography>
               </ProductItem>
