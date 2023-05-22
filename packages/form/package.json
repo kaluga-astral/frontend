@@ -15,7 +15,7 @@
   "dependencies": {
     "react-hook-form": "^7.41.5",
     "@astral/components": "*",
-    "@astral/validations": "*"
+    "@astral/validations": "^2.27.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
