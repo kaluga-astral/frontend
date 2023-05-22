@@ -5,7 +5,7 @@ const shell = require('shelljs');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const copy = require('recursive-copy');
 
-const packagesNames = ['ui', 'components', 'form', 'validations', 'icons'];
+const packagesNames = ['ui', 'components', 'form', 'icons'];
 
 const packagesSourcePath = path.resolve(__dirname, '..', 'packages');
 
