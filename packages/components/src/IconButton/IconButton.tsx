@@ -1,11 +1,11 @@
 import { forwardRef, useMemo } from 'react';
 
-import { BaseButtonProps, ButtonVariants } from '../ButtonBase';
+import { type ButtonProps, ButtonVariants } from '../Button';
 import { CircularProgress, CircularProgressProps } from '../CircularProgress';
 
 import { IconButtonWrapper } from './styles';
 
-export type IconButtonProps = BaseButtonProps & {
+export type IconButtonProps = ButtonProps & {
   /**
    * @description Флаг отображения индикатора загрузки
    * @example <IconButton loading />

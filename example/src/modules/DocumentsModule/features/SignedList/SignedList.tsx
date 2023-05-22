@@ -101,8 +101,6 @@ export const SignedList = observer((props: SignedListProps) => {
                 disabled: isArchiveButtonLoading,
               }}
               DownloadArchiveButtonProps={{
-                // todo: что-то не так с типизацией BaseButtonProps, component принимает только button
-                // @ts-ignore
                 component: 'a',
                 href: getPackageDownloadUrl(row.documentPackageId),
               }}
