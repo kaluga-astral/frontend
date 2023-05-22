@@ -22,8 +22,8 @@ export const Showcase: Story = () => (
       <Checkbox indeterminate disabled />
       <Checkbox disabled />
       <Checkbox disabled checked />
-      <Checkbox error />
-      <Checkbox error checked />
+      <Checkbox isError={true} />
+      <Checkbox isError={true} checked />
     </Stack>
     <Stack gap={4}>
       <FormControlLabel control={<Checkbox />} label="Текст" />
@@ -36,8 +36,11 @@ export const Showcase: Story = () => (
       />
       <FormControlLabel control={<Checkbox />} label="Текст" disabled />
       <FormControlLabel control={<Checkbox checked />} label="Текст" disabled />
-      <FormControlLabel control={<Checkbox error />} label="Текст" />
-      <FormControlLabel control={<Checkbox error checked />} label="Текст" />
+      <FormControlLabel control={<Checkbox isError={true} />} label="Текст" />
+      <FormControlLabel
+        control={<Checkbox isError={true} checked />}
+        label="Текст"
+      />
     </Stack>
     <Stack justifyContent="space-between" gap={4}>
       <Typography variant="ui">Check=False, State=Default</Typography>

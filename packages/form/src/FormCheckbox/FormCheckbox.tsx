@@ -47,7 +47,7 @@ export const FormCheckbox = <FieldValues extends object>({
       >
         <FormControlLabel
           control={
-            <Checkbox checked={!!value} error={error} {...restFieldProps} />
+            <Checkbox checked={!!value} isError={error} {...restFieldProps} />
           }
           label={title}
         />
