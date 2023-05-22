@@ -15,6 +15,8 @@ export default {
 type FormValues = {
   fieldName1: FormCheckboxValue;
   fieldName2: FormCheckboxValue;
+  fieldName3: FormCheckboxValue;
+  fieldName4: FormCheckboxValue;
 };
 
 const Template: Story = () => {
@@ -22,6 +24,8 @@ const Template: Story = () => {
     defaultValues: {
       fieldName1: undefined,
       fieldName2: true,
+      fieldName3: undefined,
+      fieldName4: undefined,
     },
   });
 
@@ -36,6 +40,19 @@ const Template: Story = () => {
         control={form.control}
         name="fieldName2"
         title="Form checkbox field"
+      />
+      <FormCheckbox
+        control={form.control}
+        rules={{ required: 'Required field' }}
+        name="fieldName3"
+        title="Required field with helper text"
+      />
+      <FormCheckbox
+        control={form.control}
+        rules={{ required: 'Required field' }}
+        hideHelperText
+        name="fieldName4"
+        title="Required field with tooltip"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
