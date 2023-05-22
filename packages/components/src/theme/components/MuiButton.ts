@@ -359,6 +359,24 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
           }),
           outline: 'none',
         },
+        '&:focus-visible': {
+          color: getButtonColor({
+            selected,
+            theme,
+            variant,
+            color,
+            buttonState: ButtonStates.Focus,
+          }),
+          backgroundColor: getButtonBackgroundColor({
+            selected,
+            color,
+            variant,
+            theme,
+            buttonState: ButtonStates.Focus,
+          }),
+          outline: `2px solid ${theme.palette.primary['400']}`,
+          boxShadow: 'none',
+        },
         [`&.${buttonClasses.disabled}`]: {
           color: theme.palette.grey['500'],
           backgroundColor: getButtonDisabledBackgroundColor({
@@ -383,30 +401,6 @@ export const MuiButton: Components<Theme>['MuiButton'] = {
         '&.MuiButton-root .MuiSvgIcon-root': {
           fontSize: '24px',
         },
-      };
-    },
-    focusVisible({ ownerState, theme }) {
-      const variant = ownerState.variant as ButtonProps['variant'];
-      const color = ownerState.color as ButtonProps['color'];
-      const selected = ownerState.selected as ButtonProps['selected'];
-
-      return {
-        color: getButtonColor({
-          selected,
-          theme,
-          variant,
-          color,
-          buttonState: ButtonStates.Focus,
-        }),
-        backgroundColor: getButtonBackgroundColor({
-          selected,
-          color,
-          variant,
-          theme,
-          buttonState: ButtonStates.Focus,
-        }),
-        outline: `2px solid ${theme.palette.primary['400']}`,
-        boxShadow: 'none',
       };
     },
   },
