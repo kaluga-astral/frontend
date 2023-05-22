@@ -39,7 +39,7 @@ const getValue = ({ type, values, defaultValue }: GetValueOptions) => {
     return defaultValue;
   }
 
-  return values[type];
+  return values[type] || defaultValue;
 };
 
 /**
