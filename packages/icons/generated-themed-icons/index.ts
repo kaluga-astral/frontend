@@ -82,6 +82,8 @@ export { default as DownOutlineMd } from './DownOutlineMd';
 
 export { default as DownloadOutlineMd } from './DownloadOutlineMd';
 
+export { default as DownloadVOutlineMd } from './DownloadVOutlineMd';
+
 export { default as DraftOutlineMd } from './DraftOutlineMd';
 
 export { default as EditFillMd } from './EditFillMd';
