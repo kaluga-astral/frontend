@@ -139,9 +139,9 @@ export const CheckboxShowcase: Story = () => {
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
-        title="Validation"
+        title="Error"
         descriptionList={[
-          'Валидация компонента может быть, когда в результате обработки значения в форме произошла ошибка.',
+          'Вид компонента для визуального отображения состояния ошибки',
         ]}
       >
         <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>

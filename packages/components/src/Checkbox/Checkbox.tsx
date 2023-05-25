@@ -9,10 +9,12 @@ import { CheckedIcon, DefaultIcon, IndeterminateIcon } from './icons';
 export type CheckboxProps = Omit<
   WithoutEmotionSpecific<MuiCheckboxProps>,
   'size' | 'color'
+> & {
   /**
-   * Флаг для активации error стилей для checkbox.
+   * Флаг для активации error стилей.
    */
-> & { isError?: boolean };
+  isError?: boolean;
+};
 
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
   (
