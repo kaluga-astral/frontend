@@ -8,7 +8,7 @@ export type ContentStateErrorProps = {
   /**
    * Изображение ошибки
    */
-  imgSrc: string;
+  imgSrc?: string;
   /**
    * Alt атрибут для изображения
    */

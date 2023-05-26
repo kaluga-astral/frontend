@@ -48,7 +48,7 @@ export const ContentState = ({
   children,
   loadingContent: LoadingContent = <CircularProgress color="primary" />,
 }: ContentStateProps) => {
-  const { captureException } = useContext(ConfigContext);
+  const { captureException, imagesMap } = useContext(ConfigContext);
 
   if (isLoading) {
     return <LoadingContainer>{LoadingContent}</LoadingContainer>;
@@ -79,7 +79,7 @@ export const ContentState = ({
         title={title}
         description={description}
         imgAlt={imgAlt}
-        imgSrc={imgSrc}
+        imgSrc={imgSrc || imagesMap.defaultErrorImgSrc}
         Actions={actions}
       />
     );
