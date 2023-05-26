@@ -20,6 +20,8 @@ import {
 } from '../OverflowTypography';
 import { WithoutEmotionSpecific } from '../types';
 
+export type { AutocompleteRenderGetTagProps } from '@mui/material';
+
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { AutocompleteSizes } from './enums';
 

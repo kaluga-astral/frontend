@@ -63,8 +63,6 @@ export const NotificationHeader = styled.header`
 export const NotificationCloseIcon = styled(CrossOutlineSm, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseIconProps>`
-  margin-left: ${({ theme }) => theme.spacing(1)};
-
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
