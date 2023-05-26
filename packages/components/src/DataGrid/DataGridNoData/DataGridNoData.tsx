@@ -30,7 +30,7 @@ export type DataGridNoDataProps = {
 };
 
 export const DataGridNoData = ({
-  title = 'Нет данных',
+  title = 'Нет\u00a0данных',
   noDataIcon,
   noDataIconWidth = 250,
 }: DataGridNoDataProps) => {
