@@ -7,11 +7,8 @@ const packagesNames = getDirNames(path.resolve(__dirname, 'packages'));
 const componentsNames = getDirNames(
   path.resolve(__dirname, 'packages', 'ui', 'src'),
 );
-const validationRulesNames = getDirNames(
-  path.resolve(__dirname, 'packages', 'validations', 'src'),
-);
 
 module.exports = createConfig({
-  scopes: [...packagesNames, ...componentsNames, ...validationRulesNames],
+  scopes: [...packagesNames, ...componentsNames],
   ticketPrefix: 'UIKIT',
 });
