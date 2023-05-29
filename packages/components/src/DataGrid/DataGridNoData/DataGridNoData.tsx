@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ConfigContext } from '../../ConfigProvider';
+import { ConfigContext, type ConfigContextProps } from '../../ConfigProvider';
 
 import {
   DataGridNoDataFigcaption,
@@ -11,7 +11,9 @@ import {
 
 export type DataGridNoDataProps = {
   /**
-   * @default 'Нет данных'
+   * Добавлен неразрывный пробел `\u00a0`
+   * тк без изображения текст форматируется в 2 строки
+   * @default 'Нет\u00a0данных'
    * @example <DataGridNoData title='Нет данных' />
    * @description Заголовок
    */
@@ -34,7 +36,9 @@ export const DataGridNoData = ({
   noDataIcon,
   noDataIconWidth = 250,
 }: DataGridNoDataProps) => {
-  const { noDataImgSrc } = useContext(ConfigContext).imagesMap;
+  const {
+    imagesMap: { noDataImgSrc },
+  } = useContext<ConfigContextProps>(ConfigContext);
 
   return (
     <DataGridNoDataWrapper>
