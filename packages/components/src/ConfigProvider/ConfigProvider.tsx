@@ -3,7 +3,22 @@ import { ReactNode, createContext, useEffect } from 'react';
 import { LanguageMap } from '../DatePicker/types';
 import { russianMap } from '../DatePicker/constants/russianMap';
 
+const imagesMapDefault = {
+  noDataImgSrc: '',
+  defaultErrorImgSrc: '',
+};
+
 type Language = 'ru';
+type ImagesMap = {
+  /**
+   * @description изображение при отсутствии данных (используется в DataGrid)
+   */
+  noDataImgSrc: string;
+  /**
+   * @description изображение при ошибке (используется в ContentState)
+   */
+  defaultErrorImgSrc: string;
+};
 
 export type ConfigContextProps = {
   /**
@@ -21,6 +36,12 @@ export type ConfigContextProps = {
    */
   // eslint-disable-next-line
   captureException: (error: any) => void;
+
+  /**
+   * @description карта для типовых изображений.
+   * Используется в компонентах ui-kit, где требуется отображение декоративных img
+   */
+  imagesMap: ImagesMap;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -31,6 +52,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   language: 'ru',
   datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
+  imagesMap: imagesMapDefault,
 });
 
 export const ConfigProvider = ({
@@ -38,6 +60,7 @@ export const ConfigProvider = ({
   language = 'ru',
   datePickerLanguageMap = russianMap,
   captureException,
+  imagesMap = imagesMapDefault,
 }: Partial<ConfigProviderProps>) => {
   useEffect(() => {
     if (!captureException) {
@@ -54,6 +77,7 @@ export const ConfigProvider = ({
         language,
         datePickerLanguageMap,
         captureException: captureException || ((error) => console.error(error)),
+        imagesMap,
       }}
     >
       {children}

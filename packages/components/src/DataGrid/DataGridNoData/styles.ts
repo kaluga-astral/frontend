@@ -21,11 +21,11 @@ export const DataGridNoDataFigure = styled.figure`
   align-items: center;
 `;
 
-export const DataGridNoDataIcon = styled.div<{ noDataIconWidth: number }>`
-  svg {
-    width: ${({ noDataIconWidth }) => `${noDataIconWidth}px`};
-    height: auto;
-  }
+export const DataGridNoDataIcon = styled.img`
+  display: block;
+  width: ${({ width }) => `${width}px` || '100%'};
+  margin: auto auto ${({ theme }) => theme.spacing(3)};
+  object-fit: contain;
 `;
 
 export const DataGridNoDataFigcaption = styled(Typography)<TypographyProps>`
