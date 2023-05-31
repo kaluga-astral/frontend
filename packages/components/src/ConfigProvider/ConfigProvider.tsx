@@ -38,7 +38,8 @@ export type ConfigContextProps = {
   captureException: (error: any) => void;
 
   /**
-   * @description карта для типовых изображений
+   * @description карта для типовых изображений.
+   * Используется в компонентах ui-kit, где требуется отображение декоративных img
    */
   imagesMap: ImagesMap;
 };
