@@ -62,7 +62,7 @@ export const ContentState = ({
     const {
       title = 'Произошла ошибка',
       imgAlt,
-      imgSrc,
+      imgSrc = imagesMap.defaultErrorImgSrc,
       errorList,
       onRetry,
       actions = <Button onClick={onRetry}>Попробовать снова</Button>,
@@ -79,7 +79,7 @@ export const ContentState = ({
         title={title}
         description={description}
         imgAlt={imgAlt}
-        imgSrc={imgSrc || imagesMap.defaultErrorImgSrc}
+        imgSrc={imgSrc}
         Actions={actions}
       />
     );

@@ -7,6 +7,8 @@ export type ContentStateErrorProps = {
   title?: string;
   /**
    * Изображение ошибки
+   * @default '' присваивается в ConfigProvider imagesMap.defaultErrorImgSrc
+   * @example <ConfigProvider imagesMap={{ defaultErrorImgSrc: '<img-path>' }} />
    */
   imgSrc?: string;
   /**

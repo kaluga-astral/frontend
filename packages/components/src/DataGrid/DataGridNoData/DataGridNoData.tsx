@@ -19,11 +19,6 @@ export type DataGridNoDataProps = {
    */
   title?: string;
   /**
-   * @example <DataGridNoData noDataIcon="data:image/svg+xml;base64,PHN2..." />
-   * @description Иконка
-   */
-  noDataIcon?: string;
-  /**
    * @default 250
    * @example <DataGridNoData noDataIconWidth={250} />
    * @description Ширина иконки (высота рассчитывается пропорционально ширине)
@@ -33,7 +28,6 @@ export type DataGridNoDataProps = {
 
 export const DataGridNoData = ({
   title = 'Нет\u00a0данных',
-  noDataIcon,
   noDataIconWidth = 250,
 }: DataGridNoDataProps) => {
   const {
@@ -44,10 +38,7 @@ export const DataGridNoData = ({
     <DataGridNoDataWrapper>
       <DataGridNoDataFigure>
         {noDataImgSrc && (
-          <DataGridNoDataIcon
-            src={noDataIcon || noDataImgSrc}
-            width={noDataIconWidth}
-          />
+          <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
         )}
         <DataGridNoDataFigcaption component="figcaption" variant="h4">
           {title}
