@@ -4,7 +4,9 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
+  Tooltip,
 } from '@astral/components';
+import { useMemo } from 'react';
 
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
@@ -14,6 +16,10 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
   FieldValues
 > & {
   success?: boolean;
+  /**
+   * Флаг принудительного скрытия блока helperText
+   */
+  hideHelperText?: boolean;
 };
 
 /**
@@ -21,22 +27,36 @@ export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
  */
 export const FormCheckbox = <FieldValues extends object>({
   success,
+  hideHelperText = false,
   ...restProps
 }: FormCheckboxProps<FieldValues>) => {
-  const { title, error, helperText, ...restFieldProps } = useFormFieldProps<
-    FormCheckboxProps<FieldValues>,
-    FieldValues
-  >(restProps);
+  const { title, error, helperText, value, ...restFieldProps } =
+    useFormFieldProps<FormCheckboxProps<FieldValues>, FieldValues>(restProps);
+
+  const showTooltip = useMemo(
+    () => Boolean(error && hideHelperText),
+    [error, hideHelperText],
+  );
 
   return (
     <FormControl>
-      <FormControlLabel
-        control={<Checkbox {...restFieldProps} />}
-        label={title}
-      />
-      <FormHelperText error={error} success={success}>
-        {helperText}
-      </FormHelperText>
+      <Tooltip
+        title={showTooltip && helperText}
+        placement={'bottom-start'}
+        withoutContainer={false}
+      >
+        <FormControlLabel
+          control={
+            <Checkbox checked={!!value} isError={error} {...restFieldProps} />
+          }
+          label={title}
+        />
+      </Tooltip>
+      {!hideHelperText && (
+        <FormHelperText error={error} success={success}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

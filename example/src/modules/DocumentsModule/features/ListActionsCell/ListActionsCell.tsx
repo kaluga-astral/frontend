@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import {
   ActionCell,
   ArchiveOutlineMd,
-  BaseButtonProps,
+  ButtonProps,
   BlockOutlineMd,
   CheckOutlineMd,
   DownloadIcon,
@@ -17,10 +17,10 @@ import {
 
 type Props<T> = {
   row: T;
-  ArchiveButtonProps?: BaseButtonProps;
-  DownloadArchiveButtonProps?: BaseButtonProps;
-  ProcessButtonProps?: BaseButtonProps;
-  RejectButtonProps?: BaseButtonProps;
+  ArchiveButtonProps?: ButtonProps;
+  DownloadArchiveButtonProps?: ButtonProps;
+  ProcessButtonProps?: ButtonProps;
+  RejectButtonProps?: ButtonProps;
 };
 
 export const ListActionsCell = (props: Props<DocumentPackagesDTO>) => {

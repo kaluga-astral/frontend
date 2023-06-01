@@ -10,7 +10,3 @@ export enum NotificationVariantTypes {
 export const NOTIFY_POSITIONS = toast.POSITION;
 
 export const NOTIFY_CLASSNAME = 'astral-notify';
-
-export const DEFAULT_NOTIFICATION_PROPS = {
-  filled: true,
-};

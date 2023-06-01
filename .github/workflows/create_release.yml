@@ -34,6 +34,7 @@ jobs:
         run: npm i
 
       - name: Generate release
+        id: semantic_release
         # Устанавливает в env NEXT_VERSION и CURRENT_VERSION
         run: npx semantic-release
         env:
@@ -47,8 +48,8 @@ jobs:
           npm run build --workspace=@astral/ui &
           npm run build --workspace=@astral/components &
           npm run build --workspace=@astral/icons &
-          npm run build --workspace=@astral/validations &
-          npm run build --workspace=@astral/form
+          npm run build --workspace=@astral/form &
+          npm run build --workspace=@astral/features
         env:
           RELEASE_TAG: ${{ env.NEXT_VERSION }}
 
@@ -59,8 +60,8 @@ jobs:
           npm publish ./packages/ui/lib &
           npm publish ./packages/components/lib &
           npm publish ./packages/icons/lib &
-          npm publish ./packages/validations/lib &
-          npm publish ./packages/form/lib
+          npm publish ./packages/form/lib &
+          npm publish ./packages/features/lib
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
@@ -81,10 +82,32 @@ jobs:
             📦  @astral/components: ${{ env.NEXT_VERSION }}
             📦  @astral/icons: ${{ env.NEXT_VERSION }}
             📦  @astral/form: ${{ env.NEXT_VERSION }}
-            📦  @astral/validations: ${{ env.NEXT_VERSION }}
+            📦  @astral/features: ${{ env.NEXT_VERSION }}
 
             ⚡️ <a href="https://github.com/kaluga-astral/frontend/releases/tag/v${{ env.NEXT_VERSION }}">Changelog</a>
 
             ⚡️ <a href="https://main--61baeff6f06230003a88ef8a.chromatic.com">Стенд storybook для ui-kit.</a>
 
             ⚡️ Проявив инициативу и взяв доступную задачу с доски <a href="https://astraltrack.atlassian.net/jira/software/c/projects/UIKIT/boards/276">Frontend.Shared</a>, вы развиваете frontend в компании.
+
+      # Отказ релиза, если workflow упал. При откате: удаляется git tag + удаляется github release. Сделано для того, чтобы можно было перезапускать упавшие релизы
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.1
+        if: failure()
+        with:
+          tag_name: v${{ env.NEXT_VERSION }}
+          delete_release: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Нотификация в telegram, если release упал
+      - name: send telegram message on fail release
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ‼️Ошибка релиза пакетов версии ${{ env.NEXT_VERSION }}
+            
+            <a href="https://github.com/kaluga-astral/${{ github.event.repository.name }}/actions">Перезапустите</a> release
+

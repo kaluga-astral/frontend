@@ -4,7 +4,7 @@ import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip';
 import { WithoutEmotionSpecific } from '../types';
 
 import { TooltipSize } from './types';
-import { StyledTooltip } from './styled';
+import { StyledTooltip, TooltipContentWrapper } from './styles';
 import { TooltipSizes } from './constants';
 
 export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
@@ -12,6 +12,12 @@ export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
    * Размер тултипа
    */
   size?: TooltipSize;
+  /**
+   * При значении false оборачивает компонент в div. По-умолчанию true
+   * Это позволяет показывать тултипы на задизейбленных компонентах
+   * @example <Tooltip withoutContainer={false} ...><Button disabled></Tooltip>
+   */
+  withoutContainer?: boolean;
 };
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -20,6 +26,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       title,
       placement = 'top',
       size = TooltipSizes.MEDIUM,
+      withoutContainer = true,
       children,
       ...restProps
     } = props;
@@ -33,7 +40,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           placement={placement}
           {...restProps}
         >
-          {children}
+          {withoutContainer ? (
+            children
+          ) : (
+            <TooltipContentWrapper>{children}</TooltipContentWrapper>
+          )}
         </StyledTooltip>
       );
     }
