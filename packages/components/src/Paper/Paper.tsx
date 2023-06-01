@@ -13,7 +13,6 @@ export type PaperProps = Omit<
    * <Paper> | <Paper elevation={1}> = Тень [200]
    * <Paper elevation={2}> = Тень [300]
    */
-  // elevation?: number;
   elevation?: 0 | 1 | 2;
 };
 
