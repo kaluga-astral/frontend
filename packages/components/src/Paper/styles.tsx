@@ -2,7 +2,7 @@ import { styled } from '../styles';
 
 import { Paper } from './Paper';
 
-export const PaperHeaderStyled = styled(Paper)`
+export const PaperHeader = styled(Paper)`
   display: flex;
   align-items: center;
   justify-content: space-between;

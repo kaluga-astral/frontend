@@ -29,7 +29,7 @@ import { Divider } from '../Divider';
 import {
   IndentWrapper,
   PaperExampleStory,
-  PaperHeaderStyled,
+  PaperHeader,
   PaperMenu,
 } from './styles';
 import { Paper } from './Paper';
@@ -164,13 +164,13 @@ export const PaperShowcase: Story = () => {
             Пример использования 1: Хедер (Header)
           </Typography>
 
-          <PaperHeaderStyled>
+          <PaperHeader>
             <HeaderNav container autoFlow="column" component="nav">
               <ProductSwitcher getProducts={handleGetProducts} />
               <Product {...header.product} />
             </HeaderNav>
             <Profile {...header.profile} />
-          </PaperHeaderStyled>
+          </PaperHeader>
 
           <Typography variant="h6" color="grey" colorIntensity="900">
             Пример использования 2: Выпадающий список (Dropdown)
