@@ -114,6 +114,8 @@ export * from './MenuItem';
 
 export * from './MenuList';
 
+export * from './NavMenu';
+
 export * from './Notification';
 
 export * from './OverflowTypography';
