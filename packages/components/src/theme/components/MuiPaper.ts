@@ -15,11 +15,11 @@ const getShadow = (elevation: number | undefined, theme: Theme): string => {
     return 'none';
   }
 
-  if (elevation === 2) {
-    return theme.elevation['300'];
+  if (elevation === 1) {
+    return theme.elevation['200'];
   }
 
-  return theme.elevation['200'];
+  return theme.elevation['300'];
 };
 
 export const MuiPaper: Components<Theme>['MuiPaper'] = {
