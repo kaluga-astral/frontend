@@ -119,42 +119,42 @@ export const PaperShowcase: Story = () => {
         ]}
       >
         <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
-          {/* elevation={1} = нет тени */}
+          {/* elevation={0} = нет тени */}
+          <PaperExampleStory elevation={0}>
+            <Typography variant="h6" color="grey" colorIntensity="700">
+              Elevation-0
+            </Typography>
+          </PaperExampleStory>
+          {/* elevation={1} Тень 200 */}
           <PaperExampleStory>
             <Typography variant="h6" color="grey" colorIntensity="700">
-              Высота-1
+              Elevation-1
             </Typography>
           </PaperExampleStory>
-          {/* elevation={2} Тень 200 */}
+          {/* elevation={2} Тень 300 */}
           <PaperExampleStory elevation={2}>
             <Typography variant="h6" color="grey" colorIntensity="700">
-              Высота-2
-            </Typography>
-          </PaperExampleStory>
-          {/* elevation={3} Тень 300 */}
-          <PaperExampleStory elevation={3}>
-            <Typography variant="h6" color="grey" colorIntensity="700">
-              Высота-3
+              Elevation-2
             </Typography>
           </PaperExampleStory>
         </Grid>
       </ExampleTemplate.Case>
       <br />
 
-      {/* Высота 1 */}
+      {/* Elevation 0 */}
 
       <Typography variant="h5" color="grey" colorIntensity="900" paragraph>
-        Высота-1
+        Elevation-0
       </Typography>
       <Typography variant="ui" color="grey" colorIntensity="800" paragraph>
         Не имеет тени и соответственно высоты. Например рабочая область любого
         реестра (таблицы).
       </Typography>
 
-      {/* Высота 2 */}
+      {/* Elevation 1 */}
 
       <ExampleTemplate.Case
-        title="Высота-2"
+        title="Elevation-1"
         descriptionList={[
           'Используется для отображения различной информации объединенной под карточку, а так же различные варианты выпадающих списков.',
         ]}
@@ -164,7 +164,7 @@ export const PaperShowcase: Story = () => {
             Пример использования 1: Хедер (Header)
           </Typography>
 
-          <PaperHeaderStyled elevation={2}>
+          <PaperHeaderStyled>
             <HeaderNav container autoFlow="column" component="nav">
               <ProductSwitcher getProducts={handleGetProducts} />
               <Product {...header.product} />
@@ -176,7 +176,7 @@ export const PaperShowcase: Story = () => {
             Пример использования 2: Выпадающий список (Dropdown)
           </Typography>
 
-          <PaperMenu elevation={2}>
+          <PaperMenu>
             <MenuItem>
               <ListItemIcon>
                 <CaseOutlineMd />
@@ -225,8 +225,8 @@ export const PaperStory = Template.bind({});
 PaperStory.storyName = 'Default';
 
 PaperStory.args = {
-  elevation: 2,
-  children: 'Высота',
+  elevation: 1,
+  children: 'Elevation',
 };
 
 PaperStory.parameters = {

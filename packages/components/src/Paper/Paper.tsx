@@ -7,13 +7,14 @@ export type PaperProps = Omit<
 > & {
   /**
    * @description Определяет, на какой высоте над поверхностью находится элемент. Чем больше значение, тем дальше элемент визуально.
-   * @default elevation={1} 'Нет тени'
+   * @default elevation={1} 'Тень [200]'
    * @example
-   * <Paper> | <Paper elevation={1}> = Нет тени
-   * <Paper elevation={2}> = Тень [200]
-   * <Paper elevation={3}> = Тень [300]
+   * <Paper elevation={0}> = Нет тени
+   * <Paper> | <Paper elevation={1}> = Тень [200]
+   * <Paper elevation={2}> = Тень [300]
    */
-  elevation?: 1 | 2 | 3;
+  // elevation?: number;
+  elevation?: 0 | 1 | 2;
 };
 
 export const Paper = (props: PaperProps) => {

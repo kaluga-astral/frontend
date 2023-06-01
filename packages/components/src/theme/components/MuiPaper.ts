@@ -11,15 +11,15 @@ import type { Theme } from '../baseTheme';
  * getShadow( 2, theme)
  */
 const getShadow = (elevation: number | undefined, theme: Theme): string => {
-  if (elevation === 2) {
-    return theme.elevation['200'];
+  if (elevation === 0) {
+    return 'none';
   }
 
-  if (elevation === 3) {
+  if (elevation === 2) {
     return theme.elevation['300'];
   }
 
-  return 'none';
+  return theme.elevation['200'];
 };
 
 export const MuiPaper: Components<Theme>['MuiPaper'] = {
