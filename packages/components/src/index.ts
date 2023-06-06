@@ -128,6 +128,8 @@ export * from './PageLayout';
 
 export * from './PageLayoutContainer';
 
+export * from './Paper';
+
 export * from './Placeholder';
 
 export * from './Popover';
