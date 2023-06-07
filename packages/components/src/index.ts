@@ -114,6 +114,8 @@ export * from './MenuItem';
 
 export * from './MenuList';
 
+export * from './NavMenu';
+
 export * from './Notification';
 
 export * from './OverflowTypography';
@@ -125,6 +127,8 @@ export * from './PageHeader';
 export * from './PageLayout';
 
 export * from './PageLayoutContainer';
+
+export * from './Paper';
 
 export * from './Placeholder';
 
