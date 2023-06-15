@@ -27,7 +27,10 @@ export type TypographyColor = keyof typeof TypographyColors;
 
 export type TypographyProps<Element extends ElementType = 'span'> =
   WithoutEmotionSpecific<
-    Omit<OverrideProps<TypographyTypeMap, Element>, 'variant' | 'color'> & {
+    Omit<
+      OverrideProps<TypographyTypeMap, Element>,
+      'variant' | 'color' | 'classes' | 'sx' | 'variantMapping'
+    > & {
       color?: TypographyColor | ((theme: Theme) => string);
       variant?: Variant | keyof TypographyPropsVariantOverrides;
       component?: ElementType;
