@@ -1,27 +1,42 @@
+import { forwardRef } from 'react';
+import type { FocusEvent, ForwardedRef } from 'react';
 import { TextField, TextFieldProps } from '@astral/components';
-import { useController } from 'react-hook-form';
 
-import { useFormFieldErrorProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
-
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormTextFieldValue = string;
 
 export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
   TextFieldProps,
   FieldValues
->;
+> & {
+  /**
+   * @description Параметр для обрезания пробелов в текстфилде при вызове onBlur. По-умолчанию true
+   * @example <FormTextField trimmed={false} />
+   */
+  trimmed?: boolean;
+};
 
 /**
  * @description Адаптер для TextField
  */
-export function FormTextField<FieldValues extends object>(
-  props: FormTextFieldProps<FieldValues>,
+function FormTextFieldInner<T extends object>(
+  { trimmed = true, ...props }: FormTextFieldProps<T>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const { field, fieldState } = useController(props);
-  const errorProps = useFormFieldErrorProps(fieldState);
+  const fieldProps = useFormFieldProps<FormTextFieldProps<T>, T>(props);
 
-  return <TextField {...field} {...props} {...errorProps} />;
+  const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+    if (trimmed) {
+      fieldProps.onChange(event.target.value?.trim());
+    }
+
+    fieldProps.onBlur();
+    props.onBlur?.(event);
+  };
+
+  return <TextField {...fieldProps} ref={ref} onBlur={handleOnBlur} />;
 }
+
+export const FormTextField = forwardRef(FormTextFieldInner) as <T>(
+  props: T & { ref?: ForwardedRef<HTMLDivElement> },
+) => ReturnType<typeof FormTextFieldInner>;

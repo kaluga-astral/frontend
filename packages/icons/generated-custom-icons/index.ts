@@ -16,6 +16,4 @@ export { default as RoundFillSm } from './RoundFillSm';
 
 export { default as TwitterFillMd } from './TwitterFillMd';
 
-export { default as VkFillMd } from './VkFillMd';
-
 export { default as YoutubeFillMd } from './YoutubeFillMd';

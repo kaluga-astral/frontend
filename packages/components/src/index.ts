@@ -4,31 +4,37 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export * from './Avatar';
+
 export * from './ClickAwayListener';
 
 export * from './BackdropStack';
 
 export * from './Badge';
 
-export * from './Button';
-
 export * from './Breadcrumbs';
 
-export * from './Collapse';
-
-export * from './ConfirmDialog';
-
-export * from './Description';
-
-export * from './Divider';
+export * from './Button';
 
 export * from './ButtonBase';
 
+export * from './CheckableTag';
+
 export * from './Checkbox';
+
+export * from './Chevron';
 
 export * from './CircularProgress';
 
+export * from './ClickAwayListener';
+
+export * from './Collapse';
+
 export * from './ConfigProvider';
+
+export * from './ConfirmDialog';
+
+export * from './ContentState';
 
 export * from './DashboardLayout';
 
@@ -37,6 +43,8 @@ export * from './DataGrid';
 export * from './DataGridPagination';
 
 export * from './DatePicker';
+
+export * from './Description';
 
 export * from './Dialog';
 
@@ -48,11 +56,17 @@ export * from './DialogContentText';
 
 export * from './DialogTitle';
 
+export * from './Divider';
+
 export * from './DropdownButton';
+
+export * from './ErrorBoundary';
 
 export * from './Fab';
 
 export * from './Fade';
+
+export * from './FlowButton';
 
 export * from './FormControl';
 
@@ -66,13 +80,11 @@ export * from './Grid';
 
 export * from './Grow';
 
+export * from './hooks';
+
 export * from './IconButton';
 
 export * from './IconDropdownButton';
-
-export * from './hooks';
-
-export * from './types';
 
 export * from './List';
 
@@ -90,15 +102,21 @@ export * from './ListItemText';
 
 export * from './ListSubheader';
 
+export * from './LocalizationProvider';
+
 export * from './MaskField';
 
 export * from './Menu';
+
+export * from './MenuGroup';
 
 export * from './MenuItem';
 
 export * from './MenuList';
 
-export * from './MenuGroup';
+export * from './NavMenu';
+
+export * from './Notification';
 
 export * from './OverflowTypography';
 
@@ -110,7 +128,11 @@ export * from './PageLayout';
 
 export * from './PageLayoutContainer';
 
+export * from './Paper';
+
 export * from './Placeholder';
+
+export * from './Popover';
 
 export * from './Product';
 
@@ -124,37 +146,7 @@ export * from './RadioGroup';
 
 export * from './Select';
 
-export * from './styles';
-
-export * from './StylesCacheProvider';
-
-export * from './Table';
-
-export * from './Tab';
-
-export * from './Tabs';
-
-export * from './Tag';
-
-export * from './TextArea';
-
-export * from './theme';
-
-export * from './ThemeProvider';
-
-export * from './TextField';
-
-export * from './Typography';
-
-export * from './ToggleButton';
-
-export * from './ToggleButtonGroup';
-
-export * from './Tooltip';
-
 export * from './SideDialog';
-
-export * from './SideDialogTitle';
 
 export * from './SideDialogActions';
 
@@ -162,20 +154,46 @@ export * from './SideDialogContent';
 
 export * from './SideDialogContentText';
 
+export * from './SideDialogTitle';
+
 export * from './Slide';
-
-export * from './SwipeableDrawer';
-
-export * from './Zoom';
-
-export * from './Notification';
-
-export * from './LocalizationProvider';
-
-export * from './ContentState';
-
-export * from './Chevron';
 
 export * from './Stepper';
 
+export * from './styles';
+
+export * from './StylesCacheProvider';
+
+export * from './SwipeableDrawer';
+
 export * from './Switch';
+
+export * from './Tab';
+
+export * from './Table';
+
+export * from './Tabs';
+
+export * from './Tag';
+
+export * from './TagBadge';
+
+export * from './TextArea';
+
+export * from './TextField';
+
+export * from './theme';
+
+export * from './ThemeProvider';
+
+export * from './ToggleButton';
+
+export * from './ToggleButtonGroup';
+
+export * from './Tooltip';
+
+export * from './types';
+
+export * from './Typography';
+
+export * from './Zoom';

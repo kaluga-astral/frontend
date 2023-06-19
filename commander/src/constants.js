@@ -8,7 +8,6 @@ const PACKAGES_NAMES = [
   '@astral/fonts',
   '@astral/illustrations',
   '@astral/form',
-  '@astral/validations',
 ];
 
 module.exports = {

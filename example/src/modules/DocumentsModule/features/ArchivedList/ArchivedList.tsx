@@ -77,8 +77,6 @@ export const ArchivedList = observer(
               <ListActionsCell
                 row={row}
                 DownloadArchiveButtonProps={{
-                  // todo: что-то не так с типизацией BaseButtonProps, component принимает только button
-                  // @ts-ignore
                   component: 'a',
                   href: getPackageDownloadUrl(row.documentPackageId),
                 }}

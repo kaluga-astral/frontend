@@ -1,15 +1,33 @@
 import { Global } from '@emotion/react';
-import { CssBaseline } from '@mui/material';
-import { CssBaselineProps as GlobalStylesProps } from '@mui/material/CssBaseline';
+import { CssBaseline, ScopedCssBaseline } from '@mui/material';
+import { CssBaselineProps } from '@mui/material/CssBaseline';
 
 import { Theme, useTheme } from '../theme';
 
-export const GlobalStyles = ({ children, ...props }: GlobalStylesProps) => {
+type GlobalStylesProps = CssBaselineProps & {
+  /**
+   * @description Если `true` отключает глобальные стили.
+   * Задаёт стили только для блока, который обёрнут в `ThemeProvider`.
+   * Нужен для постепенного перевода сайта на библиотеку компонентов.
+   * @default false
+   */
+  withScopedStyles?: boolean;
+};
+
+export const GlobalStyles = ({
+  children,
+  withScopedStyles = false,
+  ...props
+}: GlobalStylesProps) => {
   const theme: Theme = useTheme();
 
   return (
     <>
-      <CssBaseline {...props}>{children}</CssBaseline>
+      {withScopedStyles ? (
+        <ScopedCssBaseline {...props}>{children}</ScopedCssBaseline>
+      ) : (
+        <CssBaseline {...props}>{children}</CssBaseline>
+      )}
       <Global
         styles={{
           html: {

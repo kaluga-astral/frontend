@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
-import { BaseButtonProps } from '../ButtonBase';
+import { type ButtonProps } from '../Button';
 
-import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
+import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
   PageHeaderBackButton,
   PageHeaderBreadcrumbs,
@@ -62,7 +62,7 @@ export type PageHeaderProps = {
    * }} />
    * Кнопка назад
    */
-  backButton?: Omit<BaseButtonProps, 'children' | 'variant'>;
+  backButton?: Omit<ButtonProps, 'children' | 'variant'>;
 };
 
 export const PageHeader = (props: PageHeaderProps) => {

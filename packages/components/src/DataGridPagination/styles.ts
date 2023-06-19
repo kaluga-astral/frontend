@@ -5,7 +5,7 @@ export const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${({ theme }) => theme.spacing(2, 0)};
+  padding-top: ${({ theme }) => theme.spacing(2)};
 `;
 
 export const Range = styled(Typography)`

@@ -1,6 +1,8 @@
 import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
+import { TagBadge } from '../TagBadge';
+
 import { Tag } from './Tag';
 
 export default {
@@ -567,6 +569,60 @@ export const ShowcaseColor: Story = () => (
       <Tag icon={svgStartIcon} color="grey" label="Тэг" rounded />
       <Tag avatar={svgAvatar} color="grey" label="Тэг" />
       <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
+    </Stack>
+
+    <Stack direction="row" gap={2}>
+      <Tag color="error" variant="contained" label="Тэг small" />
+      <Tag
+        color="warning"
+        variant="contained"
+        label="Тэг medium"
+        size="medium"
+      />
+      <Tag color="success" variant="contained" label="Тэг large" size="large" />
+    </Stack>
+
+    <Stack direction="row" gap={2}>
+      <Tag
+        color="success"
+        variant="light"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="warning"
+        variant="light"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="error"
+        size="medium"
+        variant="contained"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="error"
+        size="medium"
+        variant="contained"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="primary"
+        size="large"
+        variant="contained"
+        label="Тэг"
+        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
+      <Tag
+        color="warning"
+        size="large"
+        variant="contained"
+        label="Тэг"
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+      />
     </Stack>
   </Stack>
 );

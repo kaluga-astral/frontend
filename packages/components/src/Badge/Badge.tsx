@@ -1,8 +1,32 @@
-import { BadgeProps } from './types';
-import { StyledBadge } from './styled';
+import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
 
-export const Badge = ({ children, color, ...props }: BadgeProps) => (
-  <StyledBadge customColor={color} {...props} max={99}>
+import { WithoutEmotionSpecific } from '../types';
+
+import { BadgeColor } from './types';
+import { StyledBadge } from './styles';
+
+export type BadgeProps = Omit<
+  WithoutEmotionSpecific<MuiBadgeProps>,
+  'color'
+> & {
+  /**
+   * Цвет фона
+   */
+  color: BadgeColor;
+  /**
+   * Наличие белой рамки
+   */
+  withBorder?: boolean;
+};
+
+export const Badge = ({
+  children,
+  color,
+  max = 99,
+  withBorder = true,
+  ...props
+}: BadgeProps) => (
+  <StyledBadge customColor={color} max={max} withBorder={withBorder} {...props}>
     {children}
   </StyledBadge>
 );

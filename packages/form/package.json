@@ -2,9 +2,9 @@
   "name": "@astral/form",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
-    "build": "RELEASE_TAG=1.0.0 node pack",
+    "build": "node pack",
     "publish": "npm publish ./lib",
     "lint:types": "tsc --noEmit",
     "lint": "eslint --fix --quiet",
@@ -13,9 +13,9 @@
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "react-hook-form": "^7.35.0",
-    "@astral/components": "^1.0.0",
-    "@astral/validations": "^1.0.0"
+    "react-hook-form": "^7.41.5",
+    "@astral/components": "*",
+    "@astral/validations": "^2.27.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"

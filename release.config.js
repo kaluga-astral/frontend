@@ -11,6 +11,7 @@ module.exports = {
           { type: 'feat', release: 'minor' },
           { type: 'refactor', release: 'patch' },
           { type: 'major', release: 'major' },
+          { type: 'doc', release: 'patch' },
         ],
       },
     ],
@@ -34,6 +35,11 @@ module.exports = {
             {
               type: 'build',
               section: '📦 Build',
+              hidden: false,
+            },
+            {
+              type: 'doc',
+              section: '📄 Docs',
               hidden: false,
             },
           ],

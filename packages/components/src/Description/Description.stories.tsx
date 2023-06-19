@@ -47,6 +47,14 @@ const Template: Story = () => (
       <Description.Name>Info</Description.Name>
       <Description.Value color="info">info</Description.Value>
     </Description>
+    <Description leader>
+      <Description.Name>Info With leader</Description.Name>
+      <Description.Value color="info">info</Description.Value>
+    </Description>
+    <Description justifyContent="space-between">
+      <Description.Name>Info WithOut leader</Description.Name>
+      <Description.Value color="info">info</Description.Value>
+    </Description>
   </Grid>
 );
 

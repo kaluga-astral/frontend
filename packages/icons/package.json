@@ -1,6 +1,6 @@
 {
   "name": "@astral/icons",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "browser": "./index.ts",
   "scripts": {
     "generate-themed-icons": "npx rimraf ./generated-themed-icons && svgr --config-file svgr.themed-config.js themed-assets",

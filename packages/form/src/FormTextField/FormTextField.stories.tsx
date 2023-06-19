@@ -3,8 +3,7 @@ import { Story } from '@storybook/react';
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
-
-import { FormTextField, FormTextFieldValue } from './FormTextField';
+import { FormTextField, FormTextFieldValue } from '../FormTextField';
 
 export default {
   title: 'Form/FormTextField',
@@ -24,6 +23,7 @@ const Template: Story = () => {
         control={form.control}
         name="name"
         rules={{ required: 'Обязательное поле' }}
+        helperText="Это поле отражает всю суть текстовых полей"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

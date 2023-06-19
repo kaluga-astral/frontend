@@ -1,20 +1,19 @@
-import { ChipProps as MuiTagProps } from '@mui/material/Chip/Chip';
+import { ReactElement } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
+import { BadgeColor } from '../Badge';
 
-import { TagColors, TagStates, TagVariants } from './constants';
+import { TagColors, TagStates, TagVariants } from './enums';
 
 export type TagColor = `${TagColors}`;
 
 export type TagVariant = `${TagVariants}`;
 
+export type TagSize = 'small' | 'medium' | 'large';
+
 export type TagState = `${TagStates}`;
 
-export type TagProps = Omit<
-  WithoutEmotionSpecific<MuiTagProps>,
-  'color' | 'variant' | 'size'
-> & {
-  color?: TagColor;
-  variant?: TagVariant;
-  rounded?: boolean;
+export type TagAddonProps = {
+  color?: BadgeColor;
 };
+
+export type TagAddon = (props: TagAddonProps) => ReactElement | null;
