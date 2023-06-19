@@ -71,7 +71,13 @@ const columns: DataGridColumns<DataType>[] = [
     sortable: false,
     align: 'center',
     width: '1%',
-    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+    renderCell: (row) => {
+      if (['1', '2', '3', '4'].includes(row.id)) {
+        return null;
+      }
+
+      return <ActionCell actions={ACTIONS} row={row} />;
+    },
   },
 ];
 
@@ -226,6 +232,7 @@ const Template: Story = (args) => {
       <ExampleTemplate.Case
         title="DataGrid без пагинации"
         descriptionList={[
+          'Пагинация скрыта, так как totalCount(10) меньше или равен minDisplayRows(10)',
           'Растягивается по всей доступной высоте котейнера (600px)',
         ]}
       >
@@ -245,6 +252,13 @@ const Template: Story = (args) => {
             loading={loading}
             onSort={handleSort}
             sorting={sorting}
+            Footer={
+              <DataGridPagination
+                totalCount={10}
+                onChange={handleChangePage}
+                page={page}
+              />
+            }
           />
         </Stack>
       </ExampleTemplate.Case>
@@ -306,7 +320,7 @@ const Template: Story = (args) => {
             sorting={sorting}
             Footer={
               <DataGridPagination
-                totalCount={data.length}
+                totalCount={0}
                 onChange={handleChangePage}
                 page={page}
               />

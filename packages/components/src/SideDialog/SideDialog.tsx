@@ -1,7 +1,13 @@
-import { SideDialogTitle } from '../SideDialogTitle';
+import { DrawerProps as MuiDrawerProps } from '@mui/material';
 
-import { StyledDrawer } from './styled';
-import { SideDialogProps } from './types';
+import { SideDialogTitle } from '../SideDialogTitle';
+import { WithoutEmotionSpecific } from '../types';
+
+import { StyledDrawer } from './styles';
+
+export type SideDialogProps = WithoutEmotionSpecific<MuiDrawerProps> & {
+  title: string;
+};
 
 export const SideDialog = ({
   children,

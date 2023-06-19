@@ -2,6 +2,7 @@ import { MouseEvent, ReactElement, forwardRef } from 'react';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
+  AddOutlineMd,
   CompanyOutlineMd,
   ProfileOutlineMd,
   QuitOutlineMd,
@@ -19,6 +20,7 @@ import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 import { DashboardLayout } from './DashboardLayout';
 import { DashboardLayoutStory } from './DashboardLayoutStory';
 import { DashboardLayoutStoryTemplate } from './DashboardLayoutStoryTemplate';
+import { SidebarButton } from './Sidebar/SidebarButton';
 
 export default {
   title: 'Components/DashboardLayout',
@@ -85,7 +87,6 @@ EDO.args = {
         );
       },
     },
-    // menu: () => <MenuList />,
     profile: {
       displayName: 'Григорьев Виталий',
       annotation: 'vitatiy_grig@mail.ru',
@@ -127,8 +128,11 @@ EDO.args = {
     },
   },
   sidebar: {
-    // organization: {},
-    // CTAButton,
+    header: (
+      <SidebarButton startIcon={<AddOutlineMd />}>
+        Добавить документ
+      </SidebarButton>
+    ),
     menu: {
       items: [
         [

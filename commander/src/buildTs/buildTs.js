@@ -19,7 +19,7 @@ const buildTs = ({
   console.log('Starting build...');
 
   const { code: buildCode } = shell.exec(
-    `tsc -p ${TSCONFIG_PATH} --module es2015 --outDir ${DIST_DIR_NAME}/esm & tsc -p ${TSCONFIG_PATH} --module commonjs --outDir ${DIST_DIR_NAME}`,
+    `tsc -p ${TSCONFIG_PATH} --module es2015 --outDir ${DIST_DIR_NAME}`,
   );
 
   if (buildCode !== 0) {

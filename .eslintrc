@@ -1,15 +1,22 @@
 {
   "root": true,
-  "extends": ["@astral/eslint-config-react-ts", "plugin:testing-library/react"],
+  "extends": ["@astral/eslint-config-react-ts"],
   "env": {
     "node": true
   },
   "ignorePatterns": ["lib", "build", "node_modules"],
-  "plugins": ["testing-library"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "packageDir": ["./", "./"] }
     ]
-  }
+  },
+  "overrides": [
+    // Для увеличения производительности plugin:testing-library запускается только для test.tsx файлов
+    {
+      "files": "**/*.test.tsx",
+      "extends": ["plugin:testing-library/react"],
+      "plugins": ["testing-library"]
+    }
+  ]
 }

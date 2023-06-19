@@ -102,7 +102,7 @@ Default.args = {
   children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
   variant: 'h1',
   color: 'primary',
-  intensity: 900,
+  colorIntensity: '900',
 };
 
 Default.parameters = {

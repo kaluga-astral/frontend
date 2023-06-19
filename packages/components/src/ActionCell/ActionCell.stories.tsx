@@ -19,7 +19,8 @@ const ACTIONS: Actions<ColumnsType> = {
   main: [
     {
       icon: <EyeFillMd />,
-      name: 'Просмотреть',
+      name: 'Просмотреть нельзя',
+      disabled: true,
       onClick: () => console.log('main'),
     },
     {
@@ -27,7 +28,11 @@ const ACTIONS: Actions<ColumnsType> = {
       nested: true,
       name: 'Отправить',
       actions: [
-        { name: 'Туда', onClick: () => console.log('nested 1') },
+        {
+          name: 'Туда',
+          onClick: () => console.log('nested 1'),
+          disabled: true,
+        },
         { name: 'Сюда', onClick: () => console.log('nested 2') },
       ],
     },
@@ -50,7 +55,9 @@ const columns: DataGridColumns<ColumnsType>[] = [
     sortable: false,
     width: '10%',
     align: 'right',
-    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+    renderCell: (row) => (
+      <ActionCell tooltipPlacement="left" actions={ACTIONS} row={row} />
+    ),
   },
 ];
 

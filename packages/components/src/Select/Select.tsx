@@ -32,6 +32,7 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
 };
 
 export const Select = <Value,>({
+  required,
   getOptionLabel = (value) => value,
   placeholder,
   helperText,
@@ -69,7 +70,11 @@ export const Select = <Value,>({
 
   return (
     <FormControl error={error}>
-      {label && <InputLabel htmlFor="grouped-select">{label}</InputLabel>}
+      {label && (
+        <InputLabel htmlFor="grouped-select" required={required}>
+          {label}
+        </InputLabel>
+      )}
       <MuiSelect
         {...props}
         renderValue={renderValue}

@@ -1,19 +1,13 @@
-import { MaskField, MaskFieldProps, useForwardedRef } from '@astral/components';
-import { useController } from 'react-hook-form';
+import { MaskField, MaskFieldProps } from '@astral/components';
 import { useMemo } from 'react';
 import { InitializedRule, compose, isMobilePhone } from '@astral/validations';
 
-import { useFormFieldErrorProps } from '../hooks';
+import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
 const MOBILE_PHONE_MASK = '+{7} (000) 00-00-000';
 
 const IS_MOBILE_PHONE_MESSAGE = 'Начинается с +7 (9**)...';
-
-/**
- * @description Тип значения, которое сетится в state формы
- */
-export type FormMobilePhoneFieldValue = string;
 
 export type FormMobilePhoneFieldProps<FieldValues extends object> =
   WithFormFieldProps<Omit<MaskFieldProps, 'mask'>, FieldValues>;
@@ -21,10 +15,10 @@ export type FormMobilePhoneFieldProps<FieldValues extends object> =
 /**
  * @description Поле для ввода личного мобильного номера телефона, начинающего на 79
  */
-export function FormMobilePhoneField<FieldValues extends object>({
+export const FormMobilePhoneField = <FieldValues extends object>({
   rules,
   ...props
-}: FormMobilePhoneFieldProps<FieldValues>) {
+}: FormMobilePhoneFieldProps<FieldValues>) => {
   const customRules = useMemo(() => {
     if (rules?.validate) {
       return {
@@ -42,20 +36,20 @@ export function FormMobilePhoneField<FieldValues extends object>({
     };
   }, [rules]);
 
-  const { field, fieldState } = useController({ ...props, rules: customRules });
-  const errorProps = useFormFieldErrorProps(fieldState);
-
-  const ref = useForwardedRef(field.ref);
+  const fieldProps = useFormFieldProps<
+    FormMobilePhoneFieldProps<FieldValues>,
+    FieldValues
+  >({
+    ...props,
+    rules: customRules,
+  });
 
   return (
     <MaskField
       placeholder="+7 (9**) ***-**-**"
-      {...field}
-      ref={ref}
-      {...props}
-      {...errorProps}
+      {...fieldProps}
       mask={MOBILE_PHONE_MASK}
       autoComplete="tel"
     />
   );
-}
+};

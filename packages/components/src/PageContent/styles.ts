@@ -13,4 +13,6 @@ export const PageContentWrapper = styled.article<PageContentWrapperProps>`
 
   border-top: ${({ isSeparatorShown, theme }) =>
     isSeparatorShown ? `1px solid ${theme.palette.grey[300]}` : 'none'};
+
+  scroll-behavior: smooth;
 `;

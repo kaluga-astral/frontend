@@ -4,18 +4,14 @@ on:
    push:
      branches: [main]
      paths:
-       - packages/ui/**
-       - packages/icons/**
-       - packages/fonts/**
+       - packages/**
        - .storybook/**
        - package.json
        - package-lock.json
    pull_request:
      branches: [main, next]
      paths:
-       - packages/ui/**
-       - packages/icons/**
-       - packages/fonts/**
+       - packages/**
        - .storybook/**
        - package.json
        - package-lock.json
