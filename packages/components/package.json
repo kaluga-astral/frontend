@@ -44,7 +44,7 @@
     "@mui/system": "^5.13.5",
     "dayjs": "^1.11.5",
     "lodash-es": "^4.17.21",
-    "react-imask": "6.4.2",
+    "react-imask": "^6.4.2",
     "react-toastify": "9.0.3",
     "react-use": "^17.4.0"
   },
@@ -52,7 +52,7 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@astral/tests": "*",
-    "@types/lodash-es": "^4.17.5"
+    "@types/lodash-es": "^4.17.5",
+    "@astral/tests": "*"
   }
 }
