@@ -10,6 +10,8 @@ import { Typography } from '../Typography';
 import { useBackdropStackToggle } from '../BackdropStack';
 import { DatePicker } from '../DatePicker';
 
+import { ExampleWrapper } from './styles';
+
 export default {
   title: 'Components/BackdropStack',
 };
@@ -134,9 +136,9 @@ const MotivationPart = () => {
         только селекта/автокомплита, но и самой модалки, чего пользователь
         совсем не ожидал
       </Typography>
-      <Typography variant="h2" marginTop={3} marginBottom={2}>
-        Пример
-      </Typography>
+      <ExampleWrapper>
+        <Typography variant="h2">Пример</Typography>
+      </ExampleWrapper>
     </>
   );
 };

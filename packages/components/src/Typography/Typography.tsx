@@ -1,14 +1,13 @@
 import {
   Typography as MuiTypography,
+  TypographyProps as MuiTypographyProps,
   TypographyPropsVariantOverrides,
-  TypographyTypeMap,
 } from '@mui/material';
-import { OverrideProps } from '@mui/material/OverridableComponent';
 import { Variant } from '@mui/material/styles/createTypography';
 import { ElementType, PropsWithChildren, forwardRef, useMemo } from 'react';
+import { SystemProps } from '@mui/system';
 
 import { Theme } from '../theme';
-import { WithoutEmotionSpecific } from '../types';
 
 import { TypographyColors } from './enums';
 
@@ -25,24 +24,23 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
-export type TypographyProps<Element extends ElementType = 'span'> =
-  WithoutEmotionSpecific<
-    Omit<
-      OverrideProps<TypographyTypeMap, Element>,
-      'variant' | 'color' | 'classes' | 'sx' | 'variantMapping'
-    > & {
-      color?: TypographyColor | ((theme: Theme) => string);
-      variant?: Variant | keyof TypographyPropsVariantOverrides;
-      component?: ElementType;
-      /**
-       * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-       * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-       * @default undefined
-       * @example <Typography color="grey" colorIntensity="500" />
-       */
-      colorIntensity?: Intensity;
-    }
-  >;
+type OmittedTypographyProps = Omit<
+  MuiTypographyProps,
+  keyof SystemProps<Theme> | 'sx' | 'classes' | 'variantMapping' | 'css'
+>;
+
+export interface TypographyProps extends OmittedTypographyProps {
+  color?: TypographyColor | ((theme: Theme) => string);
+  variant?: Variant | keyof TypographyPropsVariantOverrides;
+  component?: ElementType;
+  /**
+   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
+   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
+   * @default undefined
+   * @example <Typography color="grey" colorIntensity="500" />
+   */
+  colorIntensity?: Intensity;
+}
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
