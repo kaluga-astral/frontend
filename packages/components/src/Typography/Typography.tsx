@@ -24,6 +24,7 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
+// Убираем стилевые пропсы mui, например: justifyContent, alignItems, содержащиеся в SystemProps
 type OmittedTypographyProps = Omit<
   MuiTypographyProps,
   keyof SystemProps<Theme> | 'sx' | 'classes' | 'variantMapping' | 'css'

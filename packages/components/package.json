@@ -41,10 +41,10 @@
     "@mui/base": "5.0.0-beta.0",
     "@mui/lab": "5.0.0-alpha.129",
     "@mui/material": "5.13.0",
-    "@mui/system": "^5.13.5",
+    "@mui/system": "5.13.5",
     "dayjs": "^1.11.5",
     "lodash-es": "^4.17.21",
-    "react-imask": "^6.4.2",
+    "react-imask": "6.4.2",
     "react-toastify": "9.0.3",
     "react-use": "^17.4.0"
   },

@@ -9,8 +9,7 @@ import { Button } from '../Button';
 import { Typography } from '../Typography';
 import { useBackdropStackToggle } from '../BackdropStack';
 import { DatePicker } from '../DatePicker';
-
-import { ExampleWrapper } from './styles';
+import { styled } from '../styles';
 
 export default {
   title: 'Components/BackdropStack',
@@ -35,6 +34,11 @@ const OPTIONS: Option[] = [
   { value: '7', title: 'Value 7' },
   { value: '8', title: 'Value 8' },
 ];
+
+const ExampleWrapper = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(3)};
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
+`;
 
 const AutocompleteExample = () => {
   const { handleClose, handleOpen } = useBackdropStackToggle();
