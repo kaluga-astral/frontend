@@ -1,15 +1,26 @@
 import {
   Typography as MuiTypography,
-  TypographyProps as MuiTypographyProps,
   TypographyPropsVariantOverrides,
+  TypographyTypeMap,
 } from '@mui/material';
+import { OverrideProps } from '@mui/material/OverridableComponent';
 import { Variant } from '@mui/material/styles/createTypography';
-import { ElementType, PropsWithChildren, forwardRef, useMemo } from 'react';
-import { SystemProps } from '@mui/system';
+import {
+  DetailedHTMLProps,
+  ElementType,
+  ForwardedRef,
+  HTMLAttributes,
+  PropsWithChildren,
+  forwardRef,
+  useMemo,
+} from 'react';
 
 import { Theme } from '../theme';
+// import { WithoutEmotionSpecific } from '../types';
 
 import { TypographyColors } from './enums';
+
+// import IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
 type Intensity =
   | '900'
@@ -24,13 +35,14 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
-// Убираем стилевые пропсы mui, например: justifyContent, alignItems, содержащиеся в SystemProps
-type OmittedTypographyProps = Omit<
-  MuiTypographyProps,
-  keyof SystemProps<Theme> | 'sx' | 'classes' | 'variantMapping' | 'css'
->;
+//Добавляем нужные нам пропсы из mui и базовые HTML props
+type TypographyPropsBase = Pick<
+  OverrideProps<TypographyTypeMap, ElementType>,
+  'paragraph' | 'noWrap' | 'align' | 'gutterBottom'
+> &
+  DetailedHTMLProps<HTMLAttributes<ElementType>, ElementType>;
 
-export interface TypographyProps extends OmittedTypographyProps {
+export type TypographyProps = TypographyPropsBase & {
   color?: TypographyColor | ((theme: Theme) => string);
   variant?: Variant | keyof TypographyPropsVariantOverrides;
   component?: ElementType;
@@ -41,7 +53,8 @@ export interface TypographyProps extends OmittedTypographyProps {
    * @example <Typography color="grey" colorIntensity="500" />
    */
   colorIntensity?: Intensity;
-}
+  ref?: ForwardedRef<HTMLElement>;
+};
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
@@ -60,38 +73,50 @@ declare module '@mui/material/Typography' {
 export const Typography = forwardRef<
   HTMLElement,
   PropsWithChildren<TypographyProps>
->(({ children, color, colorIntensity = '800', ...props }, ref) => {
-  const typographyColor = useMemo(() => {
-    if (typeof color === 'function') {
-      return color;
-    }
+>(
+  (
+    { children, color, paragraph, colorIntensity = '800', component, ...props },
+    ref,
+  ) => {
+    const Component = paragraph ? 'p' : component || 'span';
 
-    // получаем название цвета по TypographyColors
-    const colorName = color && TypographyColors[color];
+    const typographyColor = useMemo(() => {
+      if (typeof color === 'function') {
+        return color;
+      }
 
-    if (colorName) {
-      return (theme: Theme) => {
-        // если такой цвет есть в палитре, то ищем его intensity
-        // или возвращаем main цвет (если для данного цвета не определены intensity)
-        // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
-        // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
+      // получаем название цвета по TypographyColors
+      const colorName = color && TypographyColors[color];
 
-        return (
-          theme.palette[colorName]?.[colorIntensity as string] ||
-          theme.palette[colorName]?.main ||
-          colorName
-        );
-      };
-    }
+      if (colorName) {
+        return (theme: Theme) => {
+          // если такой цвет есть в палитре, то ищем его intensity
+          // или возвращаем main цвет (если для данного цвета не определены intensity)
+          // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
+          // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
 
-    return;
-  }, [color, colorIntensity]);
+          return (
+            theme.palette[colorName]?.[colorIntensity as string] ||
+            theme.palette[colorName]?.main ||
+            colorName
+          );
+        };
+      }
 
-  return (
-    <MuiTypography ref={ref} {...props} color={typographyColor}>
-      {children}
-    </MuiTypography>
-  );
-});
+      return;
+    }, [color, colorIntensity]);
+
+    return (
+      <MuiTypography
+        component={Component}
+        ref={ref}
+        {...props}
+        color={typographyColor}
+      >
+        {children}
+      </MuiTypography>
+    );
+  },
+);
 
 export default Typography;
