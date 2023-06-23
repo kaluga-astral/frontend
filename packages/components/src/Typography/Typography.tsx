@@ -4,13 +4,7 @@ import {
   TypographyPropsVariantOverrides,
 } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import {
-  DetailedHTMLProps,
-  ElementType,
-  HTMLAttributes,
-  forwardRef,
-  useMemo,
-} from 'react';
+import { ElementType, HTMLAttributes, forwardRef, useMemo } from 'react';
 
 import { Theme } from '../theme';
 
@@ -29,27 +23,27 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
-//Добавляем нужные нам пропсы из mui и базовые HTML props
-type TypographyPropsBase<TElement extends ElementType = 'p'> = Pick<
-  MuiTypographyProps<TElement>,
-  'paragraph' | 'noWrap' | 'align' | 'gutterBottom'
-> &
-  DetailedHTMLProps<HTMLAttributes<TElement>, TElement>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ComponentProp = ElementType<any>;
 
-export type TypographyProps<TElement extends ElementType = 'p'> =
-  TypographyPropsBase<TElement> & {
-    color?: TypographyColor;
-    variant?: Variant | keyof TypographyPropsVariantOverrides;
-    // component: TElement;
-    /**
-     * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-     * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-     * @default undefined
-     * @example <Typography color="grey" colorIntensity="500" />
-     */
-    colorIntensity?: Intensity;
-    component?: TElement | keyof JSX.IntrinsicElements;
-  };
+//Добавляем нужные нам пропсы из mui и базовые HTML props
+type TypographyPropsBase = Pick<
+  MuiTypographyProps,
+  'paragraph' | 'noWrap' | 'align' | 'gutterBottom' | 'children'
+>;
+
+export type TypographyProps = TypographyPropsBase & {
+  color?: TypographyColor;
+  variant?: Variant | keyof TypographyPropsVariantOverrides;
+  /**
+   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
+   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
+   * @default undefined
+   * @example <Typography color="grey" colorIntensity="500" />
+   */
+  colorIntensity?: Intensity;
+  component?: ComponentProp;
+} & HTMLAttributes<HTMLParagraphElement>;
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
@@ -65,7 +59,7 @@ declare module '@mui/material/Typography' {
   }
 }
 
-export const Typography = forwardRef<HTMLElement, TypographyProps>(
+export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
   (
     { children, color, paragraph, colorIntensity = '800', component, ...props },
     ref,
@@ -96,8 +90,7 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
       <MuiTypography
         ref={ref}
         {...props}
-        // eslint-disable-next-line
-        component={component as any}
+        component={component as ComponentProp}
         color={typographyColor}
       >
         {children}
@@ -105,5 +98,3 @@ export const Typography = forwardRef<HTMLElement, TypographyProps>(
     );
   },
 );
-
-export default Typography;
