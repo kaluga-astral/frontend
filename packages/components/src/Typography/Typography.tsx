@@ -60,10 +60,7 @@ declare module '@mui/material/Typography' {
 }
 
 export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
-  (
-    { children, color, paragraph, colorIntensity = '800', component, ...props },
-    ref,
-  ) => {
+  ({ children, color, colorIntensity = '800', component, ...props }, ref) => {
     const typographyColor = useMemo(() => {
       // получаем название цвета по TypographyColors
       const colorName = color && TypographyColors[color];
