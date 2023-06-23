@@ -1,26 +1,20 @@
 import {
   Typography as MuiTypography,
+  TypographyProps as MuiTypographyProps,
   TypographyPropsVariantOverrides,
-  TypographyTypeMap,
 } from '@mui/material';
-import { OverrideProps } from '@mui/material/OverridableComponent';
 import { Variant } from '@mui/material/styles/createTypography';
 import {
   DetailedHTMLProps,
   ElementType,
-  ForwardedRef,
   HTMLAttributes,
-  PropsWithChildren,
   forwardRef,
   useMemo,
 } from 'react';
 
 import { Theme } from '../theme';
-// import { WithoutEmotionSpecific } from '../types';
 
 import { TypographyColors } from './enums';
-
-// import IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
 type Intensity =
   | '900'
@@ -36,25 +30,26 @@ type Intensity =
 export type TypographyColor = keyof typeof TypographyColors;
 
 //Добавляем нужные нам пропсы из mui и базовые HTML props
-type TypographyPropsBase = Pick<
-  OverrideProps<TypographyTypeMap, ElementType>,
+type TypographyPropsBase<TElement extends ElementType = 'p'> = Pick<
+  MuiTypographyProps<TElement>,
   'paragraph' | 'noWrap' | 'align' | 'gutterBottom'
 > &
-  DetailedHTMLProps<HTMLAttributes<ElementType>, ElementType>;
+  DetailedHTMLProps<HTMLAttributes<TElement>, TElement>;
 
-export type TypographyProps = TypographyPropsBase & {
-  color?: TypographyColor | ((theme: Theme) => string);
-  variant?: Variant | keyof TypographyPropsVariantOverrides;
-  component?: ElementType;
-  /**
-   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-   * @default undefined
-   * @example <Typography color="grey" colorIntensity="500" />
-   */
-  colorIntensity?: Intensity;
-  ref?: ForwardedRef<HTMLElement>;
-};
+export type TypographyProps<TElement extends ElementType = 'p'> =
+  TypographyPropsBase<TElement> & {
+    color?: TypographyColor;
+    variant?: Variant | keyof TypographyPropsVariantOverrides;
+    // component: TElement;
+    /**
+     * @description интенсивность цвета, будет применена для цвета, у которого есть градации
+     * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
+     * @default undefined
+     * @example <Typography color="grey" colorIntensity="500" />
+     */
+    colorIntensity?: Intensity;
+    component?: TElement | keyof JSX.IntrinsicElements;
+  };
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
@@ -70,21 +65,12 @@ declare module '@mui/material/Typography' {
   }
 }
 
-export const Typography = forwardRef<
-  HTMLElement,
-  PropsWithChildren<TypographyProps>
->(
+export const Typography = forwardRef<HTMLElement, TypographyProps>(
   (
     { children, color, paragraph, colorIntensity = '800', component, ...props },
     ref,
   ) => {
-    const Component = paragraph ? 'p' : component || 'span';
-
     const typographyColor = useMemo(() => {
-      if (typeof color === 'function') {
-        return color;
-      }
-
       // получаем название цвета по TypographyColors
       const colorName = color && TypographyColors[color];
 
@@ -108,9 +94,10 @@ export const Typography = forwardRef<
 
     return (
       <MuiTypography
-        component={Component}
         ref={ref}
         {...props}
+        // eslint-disable-next-line
+        component={component as any}
         color={typographyColor}
       >
         {children}
