@@ -26,22 +26,32 @@ export type TypographyColor = keyof typeof TypographyColors;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentProp = ElementType<any>;
 
-//Добавляем нужные нам пропсы из mui и базовые HTML props
+//Добавляем нужные нам пропсы из mui
 type TypographyPropsBase = Pick<
   MuiTypographyProps,
   'paragraph' | 'noWrap' | 'align' | 'gutterBottom' | 'children'
 >;
 
 export type TypographyProps = TypographyPropsBase & {
+  /**
+   * @description Цвет текста
+   * @default undefined
+   */
   color?: TypographyColor;
+  /**
+   * @description Применяет стили оформления темы
+   * @default 'body1'
+   */
   variant?: Variant | keyof TypographyPropsVariantOverrides;
   /**
-   * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-   * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-   * @default undefined
-   * @example <Typography color="grey" colorIntensity="500" />
+   * @description Интенсивность цвета, будет применена для цвета, у которого есть градации
+   * @default '800'
    */
   colorIntensity?: Intensity;
+  /**
+   * @description Тип HTML - элемента
+   * @default 'p'
+   */
   component?: ComponentProp;
 } & HTMLAttributes<HTMLParagraphElement>;
 
