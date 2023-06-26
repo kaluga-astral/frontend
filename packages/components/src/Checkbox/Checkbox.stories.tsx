@@ -54,7 +54,7 @@ export const CheckboxShowcase: Story = () => {
       <Typography paragraph variant="h3">
         Checkbox
       </Typography>
-      <Typography paragraph maxWidth={'60%'}>
+      <Typography paragraph>
         Checkbox — это элемент графического пользовательского интерфейса,
         позволяющий пользователю управлять параметром с двумя состояниями — ☑
         включено и ☐ отключено.

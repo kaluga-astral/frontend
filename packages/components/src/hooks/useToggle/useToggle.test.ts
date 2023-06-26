@@ -15,6 +15,7 @@ describe('useToggle', () => {
 
       act(() => method());
       isActive = result.current[0];
+
       expect(isActive).toBe(expected);
     },
   );
