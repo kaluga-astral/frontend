@@ -6,16 +6,26 @@ import {
   waitFor,
 } from '@astral/tests';
 import { vi } from 'vitest';
+import { object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
 import { FormAutocomplete } from './FormAutocomplete';
 
+type FormValues = { user: string };
+
+const validationSchema = object<FormValues>({
+  user: string(),
+});
+
 describe('FormAutocomplete', () => {
   it('Отображается ошибка валидации', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm<FormValues>({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form
@@ -23,11 +33,7 @@ describe('FormAutocomplete', () => {
           form={form}
           onSubmit={form.handleSubmit(() => undefined)}
         >
-          <FormAutocomplete
-            name="user"
-            options={[]}
-            rules={{ required: 'required' }}
-          />
+          <FormAutocomplete name="user" options={[]} />
         </Form>
       );
     };
@@ -36,7 +42,7 @@ describe('FormAutocomplete', () => {
     fireEvent.submit(screen.getByRole('form'));
 
     await waitFor(() => {
-      const errorText = screen.getByText('required');
+      const errorText = screen.getByText('Обязательно');
 
       expect(errorText).toBeVisible();
     });
@@ -82,16 +88,13 @@ describe('FormAutocomplete', () => {
 
   it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm<FormValues>({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormAutocomplete
-            name="user"
-            label="user"
-            rules={{ required: 'required' }}
-            options={[]}
-          />
+          <FormAutocomplete name="user" label="user" options={[]} />
           <button type="submit">submit</button>
         </Form>
       );

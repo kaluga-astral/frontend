@@ -1,4 +1,6 @@
 import { Story } from '@storybook/react';
+import { object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
@@ -12,8 +14,14 @@ export default {
 
 type FormValues = { name: FormTextFieldValue };
 
+const validationSchema = object<FormValues>({
+  name: string(),
+});
+
 const Template: Story = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    resolver: resolver<FormValues>(validationSchema),
+  });
 
   return (
     <FormStoryContainer form={form}>
@@ -22,7 +30,6 @@ const Template: Story = () => {
         label="Form text field"
         control={form.control}
         name="name"
-        rules={{ required: 'Обязательное поле' }}
         helperText="Это поле отражает всю суть текстовых полей"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
