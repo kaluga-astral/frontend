@@ -20,15 +20,21 @@ export type DescriptionProps = {
    * Добавляет dashed разделитель, заполняющего свободное пространство между Name Value
    */
   leader?: boolean;
+
+  /**
+   * Определяет разделитель между Name Value
+   */
+  separator?: string;
 };
 
 export const Description = ({
   children,
   justifyContent = 'start',
   leader = false,
+  separator = ':',
 }: DescriptionProps) => {
   return (
-    <DescriptionProvider leader={leader}>
+    <DescriptionProvider leader={leader} separator={separator}>
       <DescriptionWrapper justifyContent={justifyContent}>
         {children}
       </DescriptionWrapper>
