@@ -13,15 +13,15 @@
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "react-hook-form": "^7.41.5",
     "@astral/components": "*",
-    "@astral/validations": "^3.2.2",
-    "@astral/validations-react-hook-form-resolver": "^3.2.2"
+    "react-hook-form": "^7.41.5"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@astral/tests": "*"
+    "@astral/tests": "*",
+    "@astral/validations": "^3.2.2",
+    "@astral/validations-react-hook-form-resolver": "^3.2.2"
   }
 }
