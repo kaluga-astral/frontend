@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import { useConfig } from '../../ConfigProvider/ConfigProvider';
 import { Typography, TypographyProps } from '../../Typography';
 
 import { ValueWrapper } from './styles';
@@ -17,8 +18,12 @@ export type ValueProps = Pick<
 
 const STUB = <>&ndash;</>;
 
-export const Value = ({ children, stub = STUB, ...props }: ValueProps) => (
-  <ValueWrapper>
-    <Typography {...props}>{children || stub}</Typography>
-  </ValueWrapper>
-);
+export const Value = ({ children, stub = STUB, ...props }: ValueProps) => {
+  const { emptySymbol } = useConfig();
+
+  return (
+    <ValueWrapper>
+      <Typography {...props}>{children || emptySymbol || stub}</Typography>
+    </ValueWrapper>
+  );
+};
