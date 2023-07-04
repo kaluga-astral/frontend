@@ -1,5 +1,7 @@
 import { Story } from '@storybook/react';
 import { useEffect } from 'react';
+import { boolean, object, optional } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
@@ -28,13 +30,26 @@ type Form2Values = {
   fieldName4: FormCheckboxValue;
 };
 
+const validationSchema1 = object<Form1Values>({
+  check1: boolean(),
+  check2: optional(boolean()),
+});
+
+const validationSchema2 = object<Form2Values>({
+  fieldName1: optional(boolean()),
+  fieldName2: optional(boolean()),
+  fieldName3: boolean(),
+  fieldName4: boolean(),
+});
+
 const Template: Story = () => {
   const form1 = useForm<Form1Values>({
     mode: 'onChange',
     defaultValues: {
-      check1: undefined,
+      check1: false,
       check2: true,
     },
+    resolver: resolver<Form1Values>(validationSchema1),
   });
 
   const form2 = useForm<Form2Values>({
@@ -44,6 +59,7 @@ const Template: Story = () => {
       fieldName3: undefined,
       fieldName4: undefined,
     },
+    resolver: resolver<Form2Values>(validationSchema2),
   });
 
   useEffect(() => {
@@ -66,18 +82,13 @@ const Template: Story = () => {
           <Grid container justifyContent="center" autoFlow="column" spacing={4}>
             <FormCheckbox
               control={form1.control}
-              rules={{ required: 'Required field' }}
               name="check1"
               title="Текст"
               hideHelperText
             />
             <FormCheckbox
               control={form1.control}
-              rules={{
-                validate: {
-                  activeCheckError: (value) => !value,
-                },
-              }}
+              isError
               name="check2"
               title="Текст"
             />
@@ -103,13 +114,11 @@ const Template: Story = () => {
           />
           <FormCheckbox
             control={form2.control}
-            rules={{ required: 'Required field' }}
             name="fieldName3"
             title="Required field with helper text"
           />
           <FormCheckbox
             control={form2.control}
-            rules={{ required: 'Required field' }}
             hideHelperText
             name="fieldName4"
             title="Required field with tooltip"

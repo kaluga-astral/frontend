@@ -1,5 +1,14 @@
 import { Story } from '@storybook/react';
 import { Checkbox, ListItemIcon, MenuItem } from '@astral/components';
+import {
+  array,
+  arrayItem,
+  min,
+  number,
+  object,
+  string,
+} from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
@@ -10,6 +19,16 @@ import { FormSelect } from './FormSelect';
 export default {
   title: 'Form/FormSelect',
   component: null,
+};
+
+type IOption = {
+  value: number;
+  name: string;
+};
+
+type FormValues = {
+  single: string;
+  multiline: number[];
 };
 
 const OPTIONS: string[] = [
@@ -23,7 +42,7 @@ const OPTIONS: string[] = [
   'Value 8',
 ];
 
-const MULTIPLE_OPTIONS: Array<{ value: number; name: string }> = [
+const MULTIPLE_OPTIONS: IOption[] = [
   { value: 1, name: 'Валерий 1' },
   { value: 2, name: 'Валерий 2' },
   { value: 3, name: 'Валерий 3' },
@@ -31,14 +50,15 @@ const MULTIPLE_OPTIONS: Array<{ value: number; name: string }> = [
   { value: 5, name: 'Валерий 5' },
 ];
 
-type FormValues = {
-  single: string;
-  multiline: number[];
-};
+const validationSchema = object<FormValues>({
+  multiline: array(min(1), arrayItem(number())),
+  single: string(),
+});
 
 const Template: Story = () => {
   const form = useForm<FormValues>({
     defaultValues: { multiline: [], single: '' },
+    resolver: resolver<FormValues>(validationSchema),
   });
 
   const renderSingleOptions = () => {
@@ -78,7 +98,7 @@ const Template: Story = () => {
         control={form.control}
         name="multiline"
         title="Form select field"
-        rules={{ required: 'Обязательное поле' }}
+        // rules={{ required: 'Обязательное поле' }}
         getOptionLabel={getOptionLabel}
         multiple
       >
@@ -88,7 +108,7 @@ const Template: Story = () => {
         control={form.control}
         name="single"
         title="Form select field"
-        rules={{ required: 'Обязательное поле' }}
+        // rules={{ required: 'Обязательное поле' }}
       >
         {renderSingleOptions()}
       </FormSelect>
