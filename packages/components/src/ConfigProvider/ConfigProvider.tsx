@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect } from 'react';
+import { ReactNode, createContext, useEffect } from 'react';
 
 import { LanguageMap } from '../DatePicker/types';
 import { russianMap } from '../DatePicker/constants/russianMap';
@@ -21,8 +21,8 @@ export type ConfigContextProps = {
    */
   // eslint-disable-next-line
   captureException: (error: any) => void;
-  // новый проп для индикации отсутствующего значения
-  emptySymbol?: string;
+
+  emptySymbol: string;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -33,7 +33,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   language: 'ru',
   datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
-  emptySymbol: '-', // установка значения по умолчанию
+  emptySymbol: '-',
 });
 
 export const ConfigProvider = ({
@@ -58,15 +58,10 @@ export const ConfigProvider = ({
         language,
         datePickerLanguageMap,
         captureException: captureException || ((error) => console.error(error)),
-        emptySymbol, // передача значения emptySymbol в контекст
+        emptySymbol,
       }}
     >
       {children}
     </ConfigContext.Provider>
   );
 };
-
-// функция для использования значения из контекста ConfigContext
-export const useConfig = () => useContext(ConfigContext);
-
-export default ConfigProvider;

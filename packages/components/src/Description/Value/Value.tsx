@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 
-import { useConfig } from '../../ConfigProvider/ConfigProvider';
 import { Typography, TypographyProps } from '../../Typography';
+import { ConfigContext } from '../../ConfigProvider';
 
 import { ValueWrapper } from './styles';
 
@@ -16,14 +16,12 @@ export type ValueProps = Pick<
   stub?: ReactNode;
 };
 
-const STUB = <>&ndash;</>;
-
-export const Value = ({ children, stub = STUB, ...props }: ValueProps) => {
-  const { emptySymbol } = useConfig();
+export const Value = ({ children, stub, ...props }: ValueProps) => {
+  const { emptySymbol } = useContext(ConfigContext);
 
   return (
     <ValueWrapper>
-      <Typography {...props}>{children || emptySymbol || stub}</Typography>
+      <Typography {...props}>{children || stub || emptySymbol}</Typography>
     </ValueWrapper>
   );
 };
