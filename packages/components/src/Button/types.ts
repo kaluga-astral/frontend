@@ -1,7 +1,9 @@
-import { ElementType } from 'react';
-import { LoadingButtonProps } from '@mui/lab';
-
-import { WithoutEmotionSpecific } from '../types';
+import {
+  ButtonColors,
+  ButtonSizes,
+  ButtonStates,
+  ButtonVariants,
+} from './enums';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
@@ -19,13 +21,10 @@ declare module '@mui/material/Button' {
   }
 }
 
-export type ButtonProps = Omit<
-  WithoutEmotionSpecific<LoadingButtonProps>,
-  'variant' | 'color'
-> & {
-  variant?: 'contained' | 'light' | 'text' | 'link';
-  color?: 'primary' | 'success' | 'warning' | 'error';
-  // https://github.com/mui/material-ui/issues/30038
-  component?: ElementType;
-  selected?: boolean;
-};
+export type ButtonColor = `${ButtonColors}`;
+
+export type ButtonVariant = `${ButtonVariants}`;
+
+export type ButtonSize = `${ButtonSizes}`;
+
+export type ButtonState = `${ButtonStates}`;

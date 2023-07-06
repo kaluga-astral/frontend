@@ -82,6 +82,8 @@ export { default as DownOutlineMd } from './DownOutlineMd';
 
 export { default as DownloadOutlineMd } from './DownloadOutlineMd';
 
+export { default as DownloadVOutlineMd } from './DownloadVOutlineMd';
+
 export { default as DraftOutlineMd } from './DraftOutlineMd';
 
 export { default as EditFillMd } from './EditFillMd';
@@ -205,6 +207,8 @@ export { default as SuccessFillMd } from './SuccessFillMd';
 export { default as SuccessFillSm } from './SuccessFillSm';
 
 export { default as SupportFillMd } from './SupportFillMd';
+
+export { default as TelegramFillMd } from './TelegramFillMd';
 
 export { default as TreeOutlineMd } from './TreeOutlineMd';
 

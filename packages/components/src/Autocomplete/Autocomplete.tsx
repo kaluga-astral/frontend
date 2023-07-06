@@ -23,6 +23,8 @@ import { WithoutEmotionSpecific } from '../types';
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { AutocompleteSizes } from './enums';
 
+export type { AutocompleteRenderGetTagProps } from '@mui/material';
+
 export type AutocompleteSize = `${AutocompleteSizes}`;
 
 export type AutocompleteProps<
