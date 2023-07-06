@@ -53,18 +53,17 @@ const getLeftBorderRadius = ({
   selected,
   theme,
 }: DateCalendarDayBtnWrapperProps & WithTheme) => {
-  if (
-    !isInSelectedRange ||
-    (!isPreviousItemInSelectedRange && isInSelectedRange && selected)
-  ) {
+  // если элемент вне выбранной зоны, это значит что нам нужно скругление слева,
+  // или если он выбранный, и перед ним нету элемента внутри,
+  // то тогда устанавливаем скругление слева
+  if (!isInSelectedRange || (!isPreviousItemInSelectedRange && selected)) {
     return theme.shape.small;
   }
 
-  if (isInSelectedRange) {
-    return '0';
-  }
-
-  return '';
+  // если предыдушее условие не выполнилось,
+  // значит элемент просто внутри выбранного диапазона,
+  // тогда обнуляем стандартное скругление
+  return '0';
 };
 
 const getRightBorderRadius = ({
@@ -73,15 +72,17 @@ const getRightBorderRadius = ({
   selected,
   theme,
 }: DateCalendarDayBtnWrapperProps & WithTheme) => {
+  // если элемент вне выбранной зоны, это значит что нам нужно скругление справа,
+  // или если элемент выбранный, и перед ним есть сосед внутри выбранной зоны,
+  // тогда устанавливаем скругление справа
   if (!isInSelectedRange || (isPreviousItemInSelectedRange && selected)) {
     return theme.shape.small;
   }
 
-  if (isInSelectedRange) {
-    return '0';
-  }
-
-  return '';
+  // если предыдушее условие не выполнилось,
+  // значит элемент просто внутри выбранного диапазона,
+  // тогда обнуляем стандартное скругление
+  return '0';
 };
 
 const nonForwardableProps = new Set<PropertyKey>([
@@ -102,18 +103,24 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
 
   background-color: ${(props) => getBgColor(props)};
 
-  --radius-left: ${(props) => getLeftBorderRadius(props)};
-  --radius-right: ${(props) => getRightBorderRadius(props)};
-  border-radius: var(--radius-left) var(--radius-right) var(--radius-right)
-    var(--radius-left);
+  border-radius: ${(props) => getLeftBorderRadius(props)}
+    ${(props) => getRightBorderRadius(props)}
+    ${(props) => getRightBorderRadius(props)}
+    ${(props) => getLeftBorderRadius(props)};
 
+  /* первый элемент строки для выбранного диапазона должен иметь скругление слева */
   &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
-    --radius-left: ${({ theme, isInSelectedRange }) =>
+    border-top-left-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+    border-bottom-left-radius: ${({ theme, isInSelectedRange }) =>
       isInSelectedRange ? theme.shape.small : ''};
   }
 
+  /* последний элемент строки для выбранного диапазона должен иметь скругление справа */
   &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
-    --radius-right: ${({ theme, isInSelectedRange }) =>
+    border-top-right-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+    border-bottom-right-radius: ${({ theme, isInSelectedRange }) =>
       isInSelectedRange ? theme.shape.small : ''};
   }
 
@@ -124,7 +131,7 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
 
     display: ${({ isCurrentInUserLocalTime }) =>
       isCurrentInUserLocalTime ? 'block' : 'none'};
-    width: calc(100% - 16px);
+    width: calc(100% - ${({ theme }) => theme.spacing(4)});
     height: 2px;
 
     color: currentColor;

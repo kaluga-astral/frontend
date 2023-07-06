@@ -1,7 +1,7 @@
 import { SyntheticEvent, forwardRef, useRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { useInputPopperHooks } from '../hooks';
+import { useInputPopper } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
@@ -16,7 +16,7 @@ import { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
-import { useMaskedValueAndSelectedBaseDate } from './hooks/useMaskedValueAndSelectedBaseDate';
+import { useDatePickerOptions } from './hooks';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -64,7 +64,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
+    const { isOpenPopper, openPopper, closePopper } = useInputPopper({
       ref,
       onOpen,
       onClose,
@@ -72,7 +72,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     });
     const handleDayPick = () => closePopper(undefined, 'selectOption');
     const { inputProps: calculatedInputProps, pickerProps } =
-      useMaskedValueAndSelectedBaseDate({
+      useDatePickerOptions({
         maxDate,
         minDate,
         mask,
@@ -89,8 +89,8 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           mask={mask}
           disabled={disabled}
           ref={forwardedRef}
-          onFocus={handleActivate}
-          onClick={handleActivate}
+          onFocus={openPopper}
+          onClick={openPopper}
         />
         <DatePickerPopper open={isOpenPopper} anchorEl={ref?.current}>
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>

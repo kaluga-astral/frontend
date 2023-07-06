@@ -13,6 +13,6 @@ export const DateCalendarGridBtnLargeWrapper = styled(DateCalendarGridBtn)`
     left: ${({ theme }) => theme.spacing(4)};
 
     /* по дизайну с каждой стороны отступ по 16px, итого два раза по 16px = 32px */
-    width: calc(100% - 32px);
+    width: calc(100% - ${({ theme }) => theme.spacing(8)});
   }
 `;

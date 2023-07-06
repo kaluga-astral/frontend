@@ -12,6 +12,9 @@ type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
 };
 
+/**
+ * @description регулярка, указывающая на любые буквы и цифры длинной от 1 до 4 символов включительно
+ */
 const KEYS_IN_MASK = /\w{1,4}/g;
 
 export const DatePickerInput = forwardRef<
@@ -23,14 +26,18 @@ export const DatePickerInput = forwardRef<
     const nMask = mask?.replace('.', '.`');
     const blocks: MaskBlocks = {};
 
-    mask.match(KEYS_IN_MASK)?.forEach((key) => {
-      const to = Number(String.prototype.padStart(key.length, '9'));
+    // создаем массив элементов, попадающих под регулярку
+    mask.match(KEYS_IN_MASK)?.forEach((maskPart) => {
+      // Число, с колличество цифр "9" равному колличеству букв части маски.
+      // Например, для части ключа 'ГГГГ' результат будет 9999
+      const to = Number(String.prototype.padStart(maskPart.length, '9'));
 
-      blocks[key] = {
+      // для каждой части маски, создаем свой MaskBlock
+      blocks[maskPart] = {
         mask: IMask.MaskedRange,
         from: 0,
         to,
-        maxLength: key.length,
+        maxLength: maskPart.length,
       };
     });
 

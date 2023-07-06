@@ -42,9 +42,15 @@ type UseMaskedValueAndSelectedBaseDateReturn = {
 };
 
 /**
- * @description хук объединяющий повторяющуюся логику в работе DatePicker и RangeDatePicker
+ * @description хук объединяющий повторяющуюся логику в работе DatePicker и RangeDatePicker:
+ * опорная дата;
+ * значение для маски;
+ * обработчик изменения значения маски;
+ * выбранную даты;
+ * обработчик выбора даты;
+ * выбранное значение даты;
  */
-export const useMaskedValueAndSelectedBaseDate = ({
+export const useDatePickerOptions = ({
   onChange,
   mask,
   currentValue,

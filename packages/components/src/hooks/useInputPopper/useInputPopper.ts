@@ -36,7 +36,7 @@ export type UseInputPopperHooksOptions = {
 /**
  * @description хук объединяюший в себе сопутствующие хуки для использования поппера с каким нибудь инпутом
  */
-export const useInputPopperHooks = ({
+export const useInputPopper = ({
   ref,
   onOpen,
   onClose,
@@ -97,5 +97,5 @@ export const useInputPopperHooks = ({
     preventBubbling: true,
   });
 
-  return { isOpenPopper, handleActivate, closePopper };
+  return { isOpenPopper, openPopper: handleActivate, closePopper };
 };

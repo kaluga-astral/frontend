@@ -6,16 +6,16 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useForwardedRef, useInputPopperHooks } from '../hooks';
+import { useForwardedRef, useInputPopper } from '../hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
-import { useMaskedValueAndSelectedBaseDate } from '../DatePicker/hooks/useMaskedValueAndSelectedBaseDate';
-import { addDays, isDate } from '../utils/date';
+import { useDatePickerOptions } from '../DatePicker/hooks';
 
 import { DateRangePickerSplitter } from './styles';
+import { getBoundaryDate } from './utils';
 
 const DEFAULT_SPACING = 2;
 
@@ -28,11 +28,11 @@ export type DateRangePickerProps = Omit<
   /**
    * @description специфичные пропсы для управления датой слева
    */
-  itemA?: DateItemProps;
+  startDateProps?: DateItemProps;
   /**
    * @description специфичные пропсы для управления датой справа
    */
-  itemB?: DateItemProps;
+  endDateProps?: DateItemProps;
   /**
    * @description отступ между инпутами дат
    * @default 2
@@ -47,8 +47,8 @@ export type DateRangePickerProps = Omit<
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   (
     {
-      itemA = {},
-      itemB = {},
+      startDateProps = {},
+      endDateProps = {},
       onOpen,
       onClose,
       onBlur,
@@ -62,7 +62,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     forwardedRef,
   ) => {
     const ref = useForwardedRef(forwardedRef);
-    const { isOpenPopper, handleActivate, closePopper } = useInputPopperHooks({
+    const { isOpenPopper, openPopper, closePopper } = useInputPopper({
       ref,
       onOpen,
       onClose,
@@ -70,47 +70,48 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     });
 
     const handleDayPick = () => {
-      if (itemA?.value || itemB?.value) {
+      if (startDateProps?.value || endDateProps?.value) {
         closePopper(undefined, 'selectOption');
       }
     };
 
-    const optionsA = useMaskedValueAndSelectedBaseDate({
+    const startDateOptions = useDatePickerOptions({
       maxDate,
       minDate,
       mask,
       onDatePick: handleDayPick,
-      currentValue: itemA?.value,
-      onChange: itemA?.onChange,
+      currentValue: startDateProps?.value,
+      onChange: startDateProps?.onChange,
     });
 
-    const optionsB = useMaskedValueAndSelectedBaseDate({
+    const endDateOptions = useDatePickerOptions({
       maxDate,
       minDate,
       mask,
       onDatePick: handleDayPick,
-      currentValue: itemB?.value,
-      onChange: itemB?.onChange,
+      currentValue: endDateProps?.value,
+      onChange: endDateProps?.onChange,
+      // единица здесь означает, что второй пикер будет по умолчанию отличаться от первого на 1 месяц
       monthOffset: 1,
     });
 
     return (
       <Grid container spacing={spacing} ref={ref} autoFlow="column">
         <DatePickerInput
-          {...itemA.inputProps}
+          {...startDateProps.inputProps}
           mask={mask}
-          {...optionsA.inputProps}
+          {...startDateOptions.inputProps}
           disabled={disabled}
-          onFocus={handleActivate}
-          onClick={handleActivate}
+          onFocus={openPopper}
+          onClick={openPopper}
         />
         <DatePickerInput
-          {...itemB.inputProps}
+          {...endDateProps.inputProps}
           mask={mask}
-          {...optionsB.inputProps}
+          {...endDateOptions.inputProps}
           disabled={disabled}
-          onFocus={handleActivate}
-          onClick={handleActivate}
+          onFocus={openPopper}
+          onClick={openPopper}
         />
         <DatePickerPopper
           open={isOpenPopper}
@@ -119,23 +120,39 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         >
           <MinMaxDateContextProvider
             minDate={minDate}
-            maxDate={isDate(itemB.value) ? addDays(itemB.value, -1) : maxDate}
+            // если выбрана дата во втором пикере,
+            // то она становится значением максимальной даты для первого пикера,
+            // иначе используем изначальную максимальную дату
+            // смещение в -1 не позволит выбрать пользователю одну и туже дату в обоих пикерах
+            maxDate={getBoundaryDate({
+              reserve: maxDate,
+              target: endDateProps.value,
+              offset: -1,
+            })}
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              {...optionsA.pickerProps}
-              rangeDate={itemB.value}
+              {...startDateOptions.pickerProps}
+              rangeDate={endDateProps.value}
             />
           </MinMaxDateContextProvider>
           <DateRangePickerSplitter />
           <MinMaxDateContextProvider
-            minDate={isDate(itemA.value) ? addDays(itemA.value, 1) : minDate}
+            // если выбрана дата в первом пикере,
+            // то она становится значением минимальной даты для второго пикера,
+            // иначе используем изначальную минимальную дату
+            // смещение в 1 не позволит выбрать пользователю одну и туже дату в обоих пикерах
+            minDate={getBoundaryDate({
+              reserve: minDate,
+              target: startDateProps.value,
+              offset: 1,
+            })}
             maxDate={maxDate}
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              {...optionsB.pickerProps}
-              rangeDate={itemA.value}
+              {...endDateOptions.pickerProps}
+              rangeDate={startDateProps.value}
             />
           </MinMaxDateContextProvider>
         </DatePickerPopper>

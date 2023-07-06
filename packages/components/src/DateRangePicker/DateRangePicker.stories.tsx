@@ -19,14 +19,22 @@ const normalizedCurrentDate = buildIsoDate({
 });
 
 const Template: Story<DateRangePickerProps> = (args) => {
-  const [dateA, setDateA] = useState<Date | undefined>(args.itemA?.value);
-  const [dateB, setDateB] = useState<Date | undefined>(args.itemB?.value);
+  const [dateA, setDateA] = useState<Date | undefined>(
+    args.startDateProps?.value,
+  );
+  const [dateB, setDateB] = useState<Date | undefined>(
+    args.endDateProps?.value,
+  );
 
   return (
     <DateRangePicker
       {...args}
-      itemA={{ ...args.itemA, value: dateA, onChange: setDateA }}
-      itemB={{ ...args.itemB, value: dateB, onChange: setDateB }}
+      startDateProps={{
+        ...args.startDateProps,
+        value: dateA,
+        onChange: setDateA,
+      }}
+      endDateProps={{ ...args.endDateProps, value: dateB, onChange: setDateB }}
     />
   );
 };
@@ -35,35 +43,38 @@ export const Showcase: Story = () => (
   <Grid container spacing={6} autoFlow="row">
     <Template />
     <Template
-      itemA={{ inputProps: { label: 'Контролируемый A' }, value: new Date() }}
-      itemB={{
+      startDateProps={{
+        inputProps: { label: 'Контролируемый A' },
+        value: new Date(),
+      }}
+      endDateProps={{
         inputProps: { label: 'Контролируемый B' },
         value: addDays(new Date(), 1),
       }}
     />
     <Template
-      itemA={{ inputProps: { label: 'maxDate меньше текущей A' } }}
-      itemB={{ inputProps: { label: 'maxDate меньше текущей B' } }}
+      startDateProps={{ inputProps: { label: 'maxDate меньше текущей A' } }}
+      endDateProps={{ inputProps: { label: 'maxDate меньше текущей B' } }}
       maxDate={addDays(normalizedCurrentDate, -90)}
     />
     <Template
-      itemA={{ inputProps: { label: 'minDate больше текущей A' } }}
-      itemB={{ inputProps: { label: 'minDate больше текущей B' } }}
+      startDateProps={{ inputProps: { label: 'minDate больше текущей A' } }}
+      endDateProps={{ inputProps: { label: 'minDate больше текущей B' } }}
       minDate={addDays(normalizedCurrentDate, 90)}
     />
     <Template
-      itemA={{ inputProps: { label: 'Узкий диапазон выбора A' } }}
-      itemB={{ inputProps: { label: 'Узкий диапазон выбора B' } }}
+      startDateProps={{ inputProps: { label: 'Узкий диапазон выбора A' } }}
+      endDateProps={{ inputProps: { label: 'Узкий диапазон выбора B' } }}
       minDate={buildIsoDate({ year: 2022, month: 6, day: 30 })}
       maxDate={buildIsoDate({ year: 2022, month: 7, day: 10 })}
     />
     <Template
-      itemA={{
+      startDateProps={{
         inputProps: {
           label: 'minDate больше текущей + Узкий диапазон выбора A',
         },
       }}
-      itemB={{
+      endDateProps={{
         inputProps: {
           label: 'minDate больше текущей + Узкий диапазон выбора B',
         },
@@ -72,12 +83,12 @@ export const Showcase: Story = () => (
       maxDate={addDays(normalizedCurrentDate, 100)}
     />
     <Template
-      itemA={{
+      startDateProps={{
         inputProps: {
           label: 'maxDate меньше текущей + Узкий диапазон выбора A',
         },
       }}
-      itemB={{
+      endDateProps={{
         inputProps: {
           label: 'maxDate меньше текущей + Узкий диапазон выбора B',
         },
@@ -91,7 +102,7 @@ export const Showcase: Story = () => (
 export const Default = Template.bind({});
 
 Default.args = {
-  itemA: {
+  startDateProps: {
     inputProps: {
       label: 'Дата начала:',
       placeholder: 'Выберите дату',
@@ -99,7 +110,7 @@ Default.args = {
       helperText: undefined,
     },
   },
-  itemB: {
+  endDateProps: {
     inputProps: {
       label: 'Дата окончания:',
       placeholder: 'Выберите дату',

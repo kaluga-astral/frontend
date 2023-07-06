@@ -26,8 +26,14 @@ describe('DateRangePicker', () => {
 
     renderWithTheme(
       <DateRangePicker
-        itemA={{ onChange: onChangeA, inputProps: { placeholder: 'inputA' } }}
-        itemB={{ onChange: onChangeB, inputProps: { placeholder: 'inputB' } }}
+        startDateProps={{
+          onChange: onChangeA,
+          inputProps: { placeholder: 'inputA' },
+        }}
+        endDateProps={{
+          onChange: onChangeB,
+          inputProps: { placeholder: 'inputB' },
+        }}
       />,
     );
 
@@ -57,7 +63,7 @@ describe('DateRangePicker', () => {
   it('Props:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
     renderWithTheme(
       <DateRangePicker
-        itemA={{ inputProps: { placeholder: 'inputA' } }}
+        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
         minDate={new Date('2022-02-09')}
       />,
     );
@@ -72,7 +78,7 @@ describe('DateRangePicker', () => {
   it('Props:minDate: в пикере можно выбрать дату равной minDate', async () => {
     renderWithTheme(
       <DateRangePicker
-        itemA={{ inputProps: { placeholder: 'inputA' } }}
+        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
         minDate={new Date('2022-02-09')}
       />,
     );
@@ -87,7 +93,7 @@ describe('DateRangePicker', () => {
   it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
     renderWithTheme(
       <DateRangePicker
-        itemA={{ inputProps: { placeholder: 'inputA' } }}
+        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
         maxDate={new Date('2022-02-09')}
       />,
     );
@@ -102,7 +108,7 @@ describe('DateRangePicker', () => {
   it('Props:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
     renderWithTheme(
       <DateRangePicker
-        itemA={{ inputProps: { placeholder: 'inputA' } }}
+        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
         maxDate={new Date('2022-02-09')}
       />,
     );
@@ -117,7 +123,7 @@ describe('DateRangePicker', () => {
   it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
     renderWithTheme(
       <DateRangePicker
-        itemA={{
+        startDateProps={{
           inputProps: { placeholder: 'inputA' },
           value: new Date('2022-12-16T18:59:00Z'),
         }}
@@ -144,7 +150,7 @@ describe('DateRangePicker', () => {
 
       return (
         <DateRangePicker
-          itemA={{
+          startDateProps={{
             inputProps: { placeholder: 'inputA' },
             value,
             onChange: setValue,
@@ -173,12 +179,12 @@ describe('DateRangePicker', () => {
 
       return (
         <DateRangePicker
-          itemA={{
+          startDateProps={{
             inputProps: { placeholder: 'inputA' },
             value: valueA,
             onChange: setValueA,
           }}
-          itemB={{
+          endDateProps={{
             inputProps: { placeholder: 'inputB' },
             value: valueB,
             onChange: setValueB,
@@ -209,7 +215,7 @@ describe('DateRangePicker', () => {
     renderWithTheme(
       <DateRangePicker
         onBlur={onBlur}
-        itemA={{ inputProps: { placeholder: 'inputA' } }}
+        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
       />,
     );
 

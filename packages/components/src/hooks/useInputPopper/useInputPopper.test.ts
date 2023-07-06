@@ -2,9 +2,9 @@ import { RefObject } from 'react';
 import { act, fireEvent, renderHook, userEvents } from '@astral/tests';
 import { expect, vi } from 'vitest';
 
-import { useInputPopperHooks } from './useInputPopperHooks';
+import { useInputPopper } from './useInputPopper';
 
-describe('useInputPopperHooks', () => {
+describe('useInputPopper', () => {
   const prepare = () => {
     const onOpen = vi.fn();
     const onClose = vi.fn();
@@ -22,7 +22,7 @@ describe('useInputPopperHooks', () => {
     const ref = { current: div } as RefObject<HTMLElement>;
 
     const { result, rerender } = renderHook(() =>
-      useInputPopperHooks({ onOpen, onClose, onBlur, ref }),
+      useInputPopper({ onOpen, onClose, onBlur, ref }),
     );
 
     return {
@@ -39,7 +39,7 @@ describe('useInputPopperHooks', () => {
     const { onOpen, result } = prepare();
 
     act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     expect(onOpen).toBeCalled();
@@ -49,7 +49,7 @@ describe('useInputPopperHooks', () => {
     const { onClose, result } = prepare();
 
     act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     expect(onClose).not.toBeCalled();
@@ -59,7 +59,7 @@ describe('useInputPopperHooks', () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     rerender();
@@ -77,7 +77,7 @@ describe('useInputPopperHooks', () => {
     const { rerender, result, inputOut } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     rerender();
@@ -90,7 +90,7 @@ describe('useInputPopperHooks', () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await userEvents.keyboard('{Escape}');
@@ -102,7 +102,7 @@ describe('useInputPopperHooks', () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await userEvents.click(document.body);
@@ -114,7 +114,7 @@ describe('useInputPopperHooks', () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await act(() => {
@@ -128,7 +128,7 @@ describe('useInputPopperHooks', () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await userEvents.keyboard('{Escape}');
@@ -139,7 +139,7 @@ describe('useInputPopperHooks', () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await userEvents.click(document.body);
@@ -150,7 +150,7 @@ describe('useInputPopperHooks', () => {
     const { result, onBlur, inputOut } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     fireEvent.focus(inputOut);
@@ -161,7 +161,7 @@ describe('useInputPopperHooks', () => {
     const { result, onBlur, inputOut } = prepare();
 
     await act(() => {
-      result.current.handleActivate();
+      result.current.openPopper();
     });
 
     await userEvents.keyboard('{Escape}');
