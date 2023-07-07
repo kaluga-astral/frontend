@@ -206,7 +206,7 @@ describe('DateRangePicker', () => {
       await userEvents.click(screen.getAllByText('15')[1]);
     });
 
-    expect(screen.queryByRole('tooltip')).toBe(null);
+    expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
   });
 
   it('Props:onBlur: вызывается при фокусе на стороннем элементе', async () => {
