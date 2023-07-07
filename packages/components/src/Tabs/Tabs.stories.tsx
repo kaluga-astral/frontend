@@ -13,7 +13,7 @@ export default {
   component: Tabs,
 };
 
-interface TabPanelProps {
+type TabPanelProps = {
   children: JSX.Element | JSX.Element[];
   value: number;
   index: number;
@@ -38,16 +38,13 @@ export const TabsShowcase: Story = () => {
   return (
     <ExampleTemplate>
       <Typography variant="h3">Tabs</Typography>
-      <br />
-      <br />
-      <Typography style={{ width: 772 }} color="grey" colorIntensity="800" paragraph>
+      <Typography style={{ width: 772, margin: '60px 0px 16px' }} color="grey" colorIntensity="800" paragraph>
         Вкладки упрощают просмотр и переключение между разделами в рамках одной страницы. 
       </Typography>
-      <Typography style={{ width: 772 }} color="grey" colorIntensity="800" paragraph>
+      <Typography style={{ width: 772, margin: '0px 0px 60px' }} color="grey" colorIntensity="800" paragraph>
         Данный компонент может быть использован, когда необходимо организовать и обеспечить навигацию между 
         связанными между собой группами контента, которые находятся на одном уровне иерархии страницы. 
       </Typography>
-      <br />
       <ExampleTemplate.Case title="Отображение компонента" 
       descriptionList={[
         'Tabs',
@@ -63,16 +60,13 @@ export const TabsShowcase: Story = () => {
           <Tab label="Вкладка 6" disabled />
         </Tabs>
       </ExampleTemplate.Case>
-      <br />
-      <br />
-      <Paper style={{ width: 468 }}>
+      <Paper style={{ width: 468, margin: '60px 0px 0px' }}>
         <Box padding='24px 24px'>
           <Typography variant="h4">Заголовок окна</Typography>
-          <Tabs value={value2} onChange={handleChange2}>
+          <Tabs value={value2} onChange={handleChange2} style={{margin: '0px 0px 16px'}}>
             <Tab label="Вкладка 1" />
             <Tab label="Вкладка 2" />
           </Tabs>
-          <br />
           <CustomTabPanel value={value2} index={0}>
             <span>Заглушка примера текста страницы, который несёт очень важный смысл для пользователя 
               и предлагает ему варианты выбора действий с контентом и в рамках работы приложения.</span>
