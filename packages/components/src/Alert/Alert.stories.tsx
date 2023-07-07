@@ -77,7 +77,7 @@ export const AlertShowcase: Story = () => {
         действия / кнопка “Закрыть”.
       </Typography>
 
-      <ExampleTemplate.Case>
+      <ExampleTemplate.Case title="">
         <Grid
           container
           justifyContent="center"
@@ -228,7 +228,7 @@ export const AlertShowcase: Story = () => {
         <li>Есть проблемы с подключением;</li>
       </ul>
 
-      <ExampleTemplate.Case>
+      <ExampleTemplate.Case title="">
         <Grid container templateColumns="70%" justifyContent="center">
           <Alert
             severity="error"
