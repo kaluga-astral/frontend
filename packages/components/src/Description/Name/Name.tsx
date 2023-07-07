@@ -11,12 +11,13 @@ export const Name = ({
   color = 'textSecondary',
   ...props
 }: NameProps) => {
-  const { leader } = useContext(DescriptionContext);
+  const { leader, separator } = useContext(DescriptionContext);
 
   return (
     <>
       <Typography {...props} color={color}>
-        {children}:
+        {children}
+        {separator}
       </Typography>
       {leader && <DescriptionDashedSeparator />}
     </>
