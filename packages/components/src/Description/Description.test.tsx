@@ -2,6 +2,7 @@ import { renderWithTheme, screen } from '@astral/tests';
 
 import { Description } from './Description';
 import { DEFAULT_SEPARATOR } from './constants';
+import { DEFAULT_SYMBOL } from './constants';
 
 describe('Description', () => {
   it('Props:separator: Без указания разделителя, должен выводиться разделитель по умолчанию', () => {
@@ -31,5 +32,45 @@ describe('Description', () => {
     const customSeparatorElement = screen.getByText(name + customSeparator);
 
     expect(customSeparatorElement).toBeInTheDocument();
+  });
+
+  it('Props:emptySymbol: Если value пустое, отображается символ тире', () => {
+    renderWithTheme(
+      <Description>
+        <Description.Value></Description.Value>
+      </Description>,
+    );
+
+    const defaultEmptySymbol = screen.getByText(DEFAULT_SYMBOL);
+
+    expect(defaultEmptySymbol).toBeInTheDocument();
+  });
+
+  it('Props: emptySymbol: Если children пустое и stub присутствует, отображается значение stub', () => {
+    const stubText = 'текст';
+
+    renderWithTheme(
+      <Description>
+        <Description.Value stub={stubText}></Description.Value>
+      </Description>,
+    );
+
+    const stubElement = screen.getByText(stubText);
+
+    expect(stubElement).toBeInTheDocument();
+  });
+
+  it('Props: emptySymbol: Если children не пустое и stub пустое, отображается значение children', () => {
+    const childrenText = 'текст';
+
+    renderWithTheme(
+      <Description>
+        <Description.Value>{childrenText}</Description.Value>
+      </Description>,
+    );
+
+    const childrenElement = screen.getByText(childrenText);
+
+    expect(childrenElement).toBeInTheDocument();
   });
 });
