@@ -1,9 +1,9 @@
 import { styled } from '../../../styles';
-import { DateCalendarBtn } from '../DateCalendarBtn';
+import { DateCalendarButton } from '../DateCalendarBtn';
 import { CalendarGridPositions } from '../enums/calendarGridPositions';
 import { Typography } from '../../../Typography';
 
-export const DateCalendarHeadBtn = styled(DateCalendarBtn)`
+export const DateCalendarHeadBtn = styled(DateCalendarButton)`
   display: block;
   grid-area: ${CalendarGridPositions.head};
 
