@@ -11,6 +11,6 @@ export const DatePickerPopoverInner = styled.div`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const PopperWrapper = styled(Popper)`
+export const PopoverWrapper = styled(Popper)`
   z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;

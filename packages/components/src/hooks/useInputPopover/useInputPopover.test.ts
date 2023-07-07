@@ -39,7 +39,7 @@ describe('useInputPopover', () => {
     const { onOpen, result } = prepare();
 
     act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     expect(onOpen).toBeCalled();
@@ -49,7 +49,7 @@ describe('useInputPopover', () => {
     const { onClose, result } = prepare();
 
     act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     expect(onClose).not.toBeCalled();
@@ -59,66 +59,66 @@ describe('useInputPopover', () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     rerender();
-    expect(result.current.isOpenPopper).toBe(true);
+    expect(result.current.isOpenPopover).toBe(true);
 
     await act(() => {
-      result.current.closePopper();
+      result.current.closePopover();
     });
 
     rerender();
-    expect(result.current.isOpenPopper).toBe(false);
+    expect(result.current.isOpenPopover).toBe(false);
   });
 
   it('стейт активности = false при использовании расширенных способов: фокус по внешнему инпуту', async () => {
     const { rerender, result, inputOut } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     rerender();
     fireEvent.focus(inputOut);
     rerender();
-    expect(result.current.isOpenPopper).toBe(false);
+    expect(result.current.isOpenPopover).toBe(false);
   });
 
   it('стейт активности = false при использовании расширенных способов: клик по Escape', async () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await userEvents.keyboard('{Escape}');
     rerender();
-    expect(result.current.isOpenPopper).toBe(false);
+    expect(result.current.isOpenPopover).toBe(false);
   });
 
   it('стейт активности = false при использовании расширенных способов: клик вне отслеживаемого рефа', async () => {
     const { rerender, result } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await userEvents.click(document.body);
     rerender();
-    expect(result.current.isOpenPopper).toBe(false);
+    expect(result.current.isOpenPopover).toBe(false);
   });
 
   it('если закрыть поппер через closePopper, onBlur не вызывается', async () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await act(() => {
-      result.current.closePopper();
+      result.current.closePopover();
     });
 
     expect(onBlur).not.toBeCalled();
@@ -128,7 +128,7 @@ describe('useInputPopover', () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await userEvents.keyboard('{Escape}');
@@ -139,7 +139,7 @@ describe('useInputPopover', () => {
     const { result, onBlur } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await userEvents.click(document.body);
@@ -150,7 +150,7 @@ describe('useInputPopover', () => {
     const { result, onBlur, inputOut } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     fireEvent.focus(inputOut);
@@ -161,7 +161,7 @@ describe('useInputPopover', () => {
     const { result, onBlur, inputOut } = prepare();
 
     await act(() => {
-      result.current.openPopper();
+      result.current.openPopover();
     });
 
     await userEvents.keyboard('{Escape}');

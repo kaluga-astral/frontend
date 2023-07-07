@@ -8,7 +8,7 @@ import {
 } from '../DatePicker/MinMaxDateContext';
 import { useForwardedRef, useInputPopover } from '../hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
-import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
+import { DatePickerPopover } from '../DatePicker/DatePickerPopover';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
@@ -62,7 +62,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     forwardedRef,
   ) => {
     const ref = useForwardedRef(forwardedRef);
-    const { isOpenPopper, openPopper, closePopper } = useInputPopover({
+    const { isOpenPopover, openPopover, closePopover } = useInputPopover({
       ref,
       onOpen,
       onClose,
@@ -71,7 +71,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
 
     const handleDayPick = () => {
       if (startDateProps?.value || endDateProps?.value) {
-        closePopper(undefined, 'selectOption');
+        closePopover(undefined, 'selectOption');
       }
     };
 
@@ -102,19 +102,19 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           mask={mask}
           {...startDateOptions.inputProps}
           disabled={disabled}
-          onFocus={openPopper}
-          onClick={openPopper}
+          onFocus={openPopover}
+          onClick={openPopover}
         />
         <DatePickerInput
           {...endDateProps.inputProps}
           mask={mask}
           {...endDateOptions.inputProps}
           disabled={disabled}
-          onFocus={openPopper}
-          onClick={openPopper}
+          onFocus={openPopover}
+          onClick={openPopover}
         />
-        <DatePickerPopper
-          open={isOpenPopper}
+        <DatePickerPopover
+          open={isOpenPopover}
           anchorEl={ref?.current}
           placement="bottom"
         >
@@ -155,7 +155,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               rangeDate={startDateProps.value}
             />
           </MinMaxDateContextProvider>
-        </DatePickerPopper>
+        </DatePickerPopover>
       </Grid>
     );
   },

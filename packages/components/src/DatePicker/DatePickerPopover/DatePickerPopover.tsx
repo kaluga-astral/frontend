@@ -4,7 +4,7 @@ import { PopperProps } from '@mui/material';
 import { WithoutEmotionSpecific } from '../../types';
 import { Fade } from '../../Fade';
 
-import { DatePickerPopoverInner, PopperWrapper } from './styles';
+import { DatePickerPopoverInner, PopoverWrapper } from './styles';
 
 /**
  * @description тупл для соответсвтия попперовскому способу задания отступов, 1е число по X, второе по Y
@@ -18,7 +18,7 @@ const DEFAULT_OFFSET: OffsetTuple = [
    */ -12,
 ];
 
-export type DatePickerProps = PropsWithChildren<
+export type DatePickerPopoverProps = PropsWithChildren<
   Omit<
     WithoutEmotionSpecific<PopperProps>,
     'children' | 'disablePortal' | 'transition' | 'modifiers'
@@ -31,12 +31,12 @@ export type DatePickerProps = PropsWithChildren<
   offset?: OffsetTuple;
 };
 
-export const DatePickerPopper = ({
+export const DatePickerPopover = ({
   children,
   offset = DEFAULT_OFFSET,
   ...props
-}: DatePickerProps) => (
-  <PopperWrapper
+}: DatePickerPopoverProps) => (
+  <PopoverWrapper
     placement="bottom-start"
     {...props}
     disablePortal
@@ -55,5 +55,5 @@ export const DatePickerPopper = ({
         <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
       </Fade>
     )}
-  </PopperWrapper>
+  </PopoverWrapper>
 );

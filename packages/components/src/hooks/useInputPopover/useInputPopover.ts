@@ -43,7 +43,7 @@ export const useInputPopover = ({
   onBlur,
 }: UseInputPopoverOptions) => {
   // флаг активности поппера и методы управления
-  const [isOpenPopper, openPopper, closePopper] = useToggle({
+  const [isOpenPopover, openPopover, closePopover] = useToggle({
     onActive: onOpen,
     onInactive: onClose,
   });
@@ -53,9 +53,9 @@ export const useInputPopover = ({
 
   // метод активации, если пользователь сфокусировался или кликнул на инпут,
   // открываем поппер и включаем оба флага активности
-  const handleActivate = !isOpenPopper
+  const handleActivate = !isOpenPopover
     ? () => {
-        openPopper();
+        openPopover();
         openProgress();
       }
     : openProgress;
@@ -65,8 +65,8 @@ export const useInputPopover = ({
   const handleCloseByAway = (e: Event, reason: CloseEventReason) => {
     onBlur?.();
 
-    if (isOpenPopper) {
-      closePopper(e, reason);
+    if (isOpenPopover) {
+      closePopover(e, reason);
     }
 
     closeProgress();
@@ -77,7 +77,7 @@ export const useInputPopover = ({
   useClickAwayEffect({
     ref,
     onClickAway: handleCloseByAway,
-    isActive: isOpenPopper,
+    isActive: isOpenPopover,
   });
 
   // отслеживаем эвенты фокуса, срабатывания останавливают пользовательский сценарий
@@ -92,10 +92,14 @@ export const useInputPopover = ({
   // отслеживаем клик Esc, не останавливает пользовательский сценарий
   // активность по флагу поппера
   useEscapeClickEffect({
-    onEscape: closePopper,
-    isActive: isOpenPopper,
+    onEscape: closePopover,
+    isActive: isOpenPopover,
     preventBubbling: true,
   });
 
-  return { isOpenPopper, openPopper: handleActivate, closePopper };
+  return {
+    isOpenPopover: isOpenPopover,
+    openPopover: handleActivate,
+    closePopover: closePopover,
+  };
 };

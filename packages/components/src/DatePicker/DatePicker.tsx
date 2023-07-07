@@ -6,7 +6,7 @@ import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
 import { DatePickerInput } from './DatePickerInput';
-import { DatePickerPopper } from './DatePickerPopper';
+import { DatePickerPopover } from './DatePickerPopover';
 import {
   DEFAULT_MAX_DATE,
   DEFAULT_MIN_DATE,
@@ -64,13 +64,13 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const { isOpenPopper, openPopper, closePopper } = useInputPopover({
+    const { isOpenPopover, openPopover, closePopover } = useInputPopover({
       ref,
       onOpen,
       onClose,
       onBlur,
     });
-    const handleDayPick = () => closePopper(undefined, 'selectOption');
+    const handleDayPick = () => closePopover(undefined, 'selectOption');
     const { inputProps: calculatedInputProps, pickerProps } =
       useDatePickerOptions({
         maxDate,
@@ -89,17 +89,17 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           mask={mask}
           disabled={disabled}
           ref={forwardedRef}
-          onFocus={openPopper}
-          onClick={openPopper}
+          onFocus={openPopover}
+          onClick={openPopover}
         />
-        <DatePickerPopper open={isOpenPopper} anchorEl={ref?.current}>
+        <DatePickerPopover open={isOpenPopover} anchorEl={ref?.current}>
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
               {...pickerProps}
             />
           </MinMaxDateContextProvider>
-        </DatePickerPopper>
+        </DatePickerPopover>
       </div>
     );
   },
