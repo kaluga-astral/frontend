@@ -1,8 +1,7 @@
 import { renderWithTheme, screen } from '@astral/tests';
 
 import { Description } from './Description';
-import { DEFAULT_SEPARATOR } from './constants';
-import { DEFAULT_SYMBOL } from './constants';
+import { DEFAULT_SEPARATOR, DEFAULT_SYMBOL } from './constants';
 
 describe('Description', () => {
   it('Props:separator: Без указания разделителя, должен выводиться разделитель по умолчанию', () => {
@@ -70,6 +69,18 @@ describe('Description', () => {
     );
 
     const childrenElement = screen.getByText(childrenText);
+
+    expect(childrenElement).toBeInTheDocument();
+  });
+
+  it('Props: emptySymbol: Если children равно 0, отображается значение 0', () => {
+    renderWithTheme(
+      <Description>
+        <Description.Value>0</Description.Value>
+      </Description>,
+    );
+
+    const childrenElement = screen.getByText('0');
 
     expect(childrenElement).toBeInTheDocument();
   });
