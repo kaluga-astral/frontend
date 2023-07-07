@@ -82,7 +82,7 @@ export const AlertShowcase: Story = () => {
           container
           justifyContent="center"
           autoFlow={matches ? autoFlow : 'false'}
-          templateColumns={matches ? '' : 'repeat(3, 325px)'}
+          templateColumns={matches ? '' : 'repeat(3, 30%)'}
           spacing={4}
         >
           <Alert
