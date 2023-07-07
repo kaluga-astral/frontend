@@ -1,10 +1,7 @@
 import { Story } from '@storybook/react';
-import { Link, Paper, useMediaQuery, useTheme } from '@mui/material';
+import { Link, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { DialogActions } from '../DialogActions';
-import { DialogContent } from '../DialogContent';
-import { DialogTitle } from '../DialogTitle';
 import { ExampleTemplate } from '../docs';
 import { Grid } from '../Grid';
 import { Button } from '../Button';
@@ -265,24 +262,6 @@ export const AlertShowcase: Story = () => {
           </Alert>
         </Grid>
       </ExampleTemplate.Case>
-
-      <br />
-      <Typography variant="h4" paragraph>
-        Пример использования
-      </Typography>
-
-      <Paper style={{ width: 500 }}>
-        <DialogTitle>Загрузка списка владельцев ЭП</DialogTitle>
-        <DialogContent>
-          Заглушка примера текста страницы, который несет очень важный смысл для
-          пользователя и предлагает ему варианты выбора действий с контентом и в
-          рамках работы приложения.
-        </DialogContent>
-        <DialogActions>
-          <Button variant="text">Загрузить другой список</Button>
-          <Button disabled={true}>Добавить в заявление</Button>
-        </DialogActions>
-      </Paper>
     </ExampleTemplate>
   );
 };

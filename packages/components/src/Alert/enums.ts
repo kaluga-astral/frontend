@@ -1,4 +1,4 @@
-export enum AlertSeverity {
+export enum AlertSeverityLevels {
   Information = 'info',
   Success = 'success',
   Warning = 'warning',
