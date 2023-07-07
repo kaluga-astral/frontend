@@ -1,7 +1,7 @@
 import { SyntheticEvent, forwardRef, useRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { useInputPopper } from '../hooks';
+import { useInputPopover } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
@@ -64,7 +64,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const { isOpenPopper, openPopper, closePopper } = useInputPopper({
+    const { isOpenPopper, openPopper, closePopper } = useInputPopover({
       ref,
       onOpen,
       onClose,

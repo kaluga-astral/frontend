@@ -6,7 +6,7 @@ import { useFocusAwayEffect } from '../useFocusAwayEffect';
 import { CloseEventReason } from '../../types';
 import { useEscapeClickEffect } from '../useEscapeClickEffect';
 
-export type UseInputPopperHooksOptions = {
+export type UseInputPopoverOptions = {
   /**
    * @description реф на отслеживаемую ноду, эвенты вне которого будут приводить к закрытию поппера
    */
@@ -19,7 +19,7 @@ export type UseInputPopperHooksOptions = {
    * @description коллбэк на закрытие поппера
    */
   onClose?: (
-    _?: SyntheticEvent<Element, Event> | Event,
+    event?: SyntheticEvent<Element, Event> | Event,
     reason?: CloseEventReason,
   ) => void;
   /**
@@ -36,12 +36,12 @@ export type UseInputPopperHooksOptions = {
 /**
  * @description хук объединяюший в себе сопутствующие хуки для использования поппера с каким нибудь инпутом
  */
-export const useInputPopper = ({
+export const useInputPopover = ({
   ref,
   onOpen,
   onClose,
   onBlur,
-}: UseInputPopperHooksOptions) => {
+}: UseInputPopoverOptions) => {
   // флаг активности поппера и методы управления
   const [isOpenPopper, openPopper, closePopper] = useToggle({
     onActive: onOpen,

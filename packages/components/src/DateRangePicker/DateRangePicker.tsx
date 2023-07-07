@@ -6,7 +6,7 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useForwardedRef, useInputPopper } from '../hooks';
+import { useForwardedRef, useInputPopover } from '../hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopper } from '../DatePicker/DatePickerPopper';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
@@ -62,7 +62,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     forwardedRef,
   ) => {
     const ref = useForwardedRef(forwardedRef);
-    const { isOpenPopper, openPopper, closePopper } = useInputPopper({
+    const { isOpenPopper, openPopper, closePopper } = useInputPopover({
       ref,
       onOpen,
       onClose,

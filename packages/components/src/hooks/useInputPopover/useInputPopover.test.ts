@@ -2,9 +2,9 @@ import { RefObject } from 'react';
 import { act, fireEvent, renderHook, userEvents } from '@astral/tests';
 import { expect, vi } from 'vitest';
 
-import { useInputPopper } from './useInputPopper';
+import { useInputPopover } from './useInputPopover';
 
-describe('useInputPopper', () => {
+describe('useInputPopover', () => {
   const prepare = () => {
     const onOpen = vi.fn();
     const onClose = vi.fn();
@@ -22,7 +22,7 @@ describe('useInputPopper', () => {
     const ref = { current: div } as RefObject<HTMLElement>;
 
     const { result, rerender } = renderHook(() =>
-      useInputPopper({ onOpen, onClose, onBlur, ref }),
+      useInputPopover({ onOpen, onClose, onBlur, ref }),
     );
 
     return {
