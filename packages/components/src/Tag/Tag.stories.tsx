@@ -338,6 +338,13 @@ export const TagShowcase: Story = () => {
               console.log('deleted');
             }}
           />
+          <Tag
+            label="Disabled"
+            disabled
+            onDelete={() => {
+              console.log('не нажмётся в дизейбле');
+            }}
+          />
         </Grid>
       </ExampleTemplate.Case>
 
