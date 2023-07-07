@@ -21,7 +21,7 @@ export const Value = ({ children, stub, ...props }: ValueProps) => {
 
   return (
     <ValueWrapper>
-      <Typography {...props}>{children || stub || emptySymbol}</Typography>
+      <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
     </ValueWrapper>
   );
 };

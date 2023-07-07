@@ -21,7 +21,10 @@ export type ConfigContextProps = {
    */
   // eslint-disable-next-line
   captureException: (error: any) => void;
-
+  /**
+   * @default '-'
+   * Определяет символ, который будет выводиться вместо пустого Value
+   */
   emptySymbol: string;
 };
 
