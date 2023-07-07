@@ -1,3 +1,1 @@
-import { AlertSeverityLevels } from './enums';
-
-export type AlertSeverity = `${AlertSeverityLevels}`;
+export type AlertSeverity = 'info' | 'success' | 'warning' | 'error';

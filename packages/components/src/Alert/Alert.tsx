@@ -12,7 +12,7 @@ import { Grid } from '../Grid';
 import { Collapse } from '../Collapse';
 import { WithoutEmotionSpecific } from '../types';
 
-import { AlertSeverityLevels } from './enums';
+import { AlertSeverity } from './types';
 import { StyledAlert } from './styles';
 
 export type AlertProps = Omit<
@@ -22,7 +22,7 @@ export type AlertProps = Omit<
   /**
    * Тип тоста
    */
-  severity?: `${AlertSeverityLevels}`;
+  severity?: `${AlertSeverity}`;
   /**
    * @example <Alert title="Заголовок">Сообщение</Alert>
    * Заголовок
@@ -54,7 +54,7 @@ export const Alert = ({
   onClose,
   ...props
 }: AlertProps) => {
-  const { severity = AlertSeverityLevels.Information, ...restProps } = props;
+  const { severity = 'info', ...restProps } = props;
 
   return (
     <Collapse in={display}>
