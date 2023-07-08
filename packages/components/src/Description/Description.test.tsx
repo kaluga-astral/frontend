@@ -33,7 +33,7 @@ describe('Description', () => {
     expect(customSeparatorElement).toBeInTheDocument();
   });
 
-  it('Props:emptySymbol: Если value пустое, отображается символ тире', () => {
+  it('Props:children: Если value пустое, отображается символ тире', () => {
     renderWithTheme(
       <Description>
         <Description.Value></Description.Value>
@@ -45,7 +45,7 @@ describe('Description', () => {
     expect(defaultEmptySymbol).toBeInTheDocument();
   });
 
-  it('Props: emptySymbol: Если children пустое и stub присутствует, отображается значение stub', () => {
+  it('Props: children: Если children пустое и stub присутствует, отображается значение stub', () => {
     const stubText = 'текст';
 
     renderWithTheme(
@@ -59,7 +59,7 @@ describe('Description', () => {
     expect(stubElement).toBeInTheDocument();
   });
 
-  it('Props: emptySymbol: Если children не пустое и stub пустое, отображается значение children', () => {
+  it('Props: children: Если children не пустое и stub пустое, отображается значение children', () => {
     const childrenText = 'текст';
 
     renderWithTheme(
@@ -73,7 +73,7 @@ describe('Description', () => {
     expect(childrenElement).toBeInTheDocument();
   });
 
-  it('Props: emptySymbol: Если children равно 0, отображается значение 0', () => {
+  it('Props: children: Если children равно 0, отображается значение 0', () => {
     renderWithTheme(
       <Description>
         <Description.Value>0</Description.Value>
