@@ -17,6 +17,7 @@ type YearMonthDayPickerProps = PickerProps & MondayFirst;
 export const YearMonthDayPicker = ({
   onChange,
   date: initialDate,
+  rangeDate,
   selectedDate,
   isMondayFirst,
 }: YearMonthDayPickerProps) => {
@@ -51,6 +52,7 @@ export const YearMonthDayPicker = ({
           date={date}
           selectedDate={selectedDate}
           onChange={handleYearChange}
+          rangeDate={rangeDate}
         />
       )}
       {currentState === States.months && (
@@ -60,6 +62,7 @@ export const YearMonthDayPicker = ({
           onChange={handleMonthChange}
           onHeadBtnClick={handleMonthHeadBtnClick}
           headBtnTitle={toYearPick.single}
+          rangeDate={rangeDate}
         />
       )}
       {currentState === States.days && (
@@ -70,6 +73,7 @@ export const YearMonthDayPicker = ({
           onHeadBtnClick={handleDaysHeadBtnClick}
           headBtnTitle={toMonthPick.single}
           onChange={onChange}
+          rangeDate={rangeDate}
         />
       )}
     </>

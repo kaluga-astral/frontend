@@ -68,8 +68,13 @@ const getBgColor = ({
   theme,
   customColor,
   customVariant,
+  disabled,
   onDelete,
 }: StyledTagThemeProps): string => {
+  if (disabled) {
+    return theme.palette.grey[100];
+  }
+
   if (customVariant === 'text') {
     return 'transparent';
   }
@@ -116,8 +121,13 @@ const getColor = ({
   theme,
   customColor,
   customVariant,
+  disabled,
   onDelete,
 }: StyledTagThemeProps): string => {
+  if (disabled) {
+    return theme.palette.text.disabled;
+  }
+
   if (onDelete || customVariant === 'text') {
     return theme.palette.grey[900];
   }
@@ -251,6 +261,10 @@ export const StyledTag = styled(Chip, {
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.ACTIVE })};
     }
+  }
+
+  &.Mui-disabled {
+    opacity: 1;
   }
 
   .MuiChip-avatar {

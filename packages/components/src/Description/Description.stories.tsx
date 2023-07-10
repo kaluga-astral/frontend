@@ -36,6 +36,10 @@ const Template: Story = () => (
       <Description.Value>separator</Description.Value>
     </Description>
     <Description>
+      <Description.Name>EmptySymbol</Description.Name>
+      <Description.Value></Description.Value>
+    </Description>
+    <Description>
       <Description.Name>Error</Description.Name>
       <Description.Value color="error">error</Description.Value>
     </Description>
