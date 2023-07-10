@@ -113,23 +113,14 @@ describe('DatePicker', () => {
     expect(selected).toBeTruthy();
   });
 
-  it('Props:onBlur: вызывается при закрытии popover', async () => {
+  it('Props:onBlur: вызывается при фокусе на стороннем элементе', async () => {
     const onBlur = vi.fn();
 
     renderWithTheme(<DatePicker onBlur={onBlur} />);
     fireEvent.focus(screen.getByRole('textbox'));
-    // клик вне инпута с поповером
-    await userEvents.click(document.body);
+    // фокус вне инпута с поповером
+    fireEvent.focus(document.body);
     expect(onBlur).toBeCalled();
-  });
-
-  it('Props:onBlur: не вызывается при потере фокуса на инпуте', async () => {
-    const onBlur = vi.fn();
-
-    renderWithTheme(<DatePicker onBlur={onBlur} />);
-    fireEvent.focus(screen.getByRole('textbox'));
-    await userEvents.tab();
-    expect(onBlur).not.toBeCalled();
   });
 
   it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {

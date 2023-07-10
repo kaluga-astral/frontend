@@ -11,6 +11,7 @@ import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/date';
 import { PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
 
 import { useYearsGrid } from './hooks/useYearsGrid';
 import { YEARS_IN_GRID } from './constants';
@@ -21,6 +22,7 @@ export const YearPicker = ({
   date: initialDate,
   selectedDate,
   onChange,
+  rangeDate,
   ...headProps
 }: DateYearPickerProps) => {
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
@@ -30,6 +32,7 @@ export const YearPicker = ({
   const { grid, isPrevDisabled, isNextDisabled } = useYearsGrid({
     baseDate,
     selectedDate,
+    rangeDate,
   });
 
   const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;
@@ -45,10 +48,12 @@ export const YearPicker = ({
         headBtnText={`${grid[0]?.year}-${grid.at(-1)?.year}`}
       />
       <DateCalendarGridLarge>
-        {grid.map(({ year, date, ...props }) => (
+        {grid.map(({ year, date, ...props }, index) => (
           <DateCalendarGridBtnLarge
             key={year}
             onClick={() => onChange?.(date)}
+            lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
+            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
             {...props}
           >
             {year}
