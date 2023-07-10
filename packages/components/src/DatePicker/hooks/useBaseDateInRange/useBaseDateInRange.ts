@@ -1,9 +1,16 @@
 import { useMemo } from 'react';
 
 import { MinMaxDate } from '../../types';
-import { buildIsoDate } from '../../../utils/date';
+import { addMonths, buildIsoDate } from '../../../utils/date';
 
-type UseBaseDateInRangeOptions = MinMaxDate;
+type UseBaseDateInRangeOptions = MinMaxDate & {
+  /**
+   * @description смещение базовой даты в месяцах.
+   * ожидается использование в DateRangePicker, для создания опорной даты второго календаря,
+   * @default 0
+   */
+  monthOffset?: number;
+};
 
 /**
  * @description хук который выдаст нам опорную дату, которая будет в пределах от минимальной, до максимальной, пригодится, когда текущая дата меньше минимальной, или больше миаксимальной.
@@ -11,9 +18,10 @@ type UseBaseDateInRangeOptions = MinMaxDate;
 export const useBaseDateInRange = ({
   minDate,
   maxDate,
+  monthOffset = 0,
 }: UseBaseDateInRangeOptions): Date =>
   useMemo(() => {
-    const currentDate = new Date();
+    const currentDate = addMonths(new Date(), monthOffset);
     const baseDate = buildIsoDate({
       year: currentDate.getUTCFullYear(),
       month: currentDate.getUTCMonth() + 1,
@@ -30,4 +38,4 @@ export const useBaseDateInRange = ({
     }
 
     return baseDate;
-  }, [minDate, maxDate]);
+  }, [minDate, maxDate, monthOffset]);

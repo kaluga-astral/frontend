@@ -19,11 +19,11 @@ type Returned = {
   /**
    * @description Изменение maskedValue по Date
    * */
-  onChangeMaskedDate: (date: Date) => void;
+  onMaskedDateChange: (date: Date) => void;
   /**
    * @description Изменение maskedValue
    * */
-  onChangeMaskedValue: (value: string) => void;
+  onMaskedValueChange: (value: string) => void;
 };
 
 /**
@@ -38,7 +38,7 @@ export const useMaskedValue = ({
     currentValue ? formatDate(currentValue, mask) : '',
   );
 
-  const handleChangeMaskedValue = (value: string) => {
+  const handleMaskedValueChange = (value: string) => {
     setMaskedValue(value);
 
     // parseDate вернет Invalid Date при undefined. А нам надо undefined
@@ -81,7 +81,7 @@ export const useMaskedValue = ({
 
   return {
     maskedValue,
-    onChangeMaskedValue: handleChangeMaskedValue,
-    onChangeMaskedDate: handleChangeMaskedDate,
+    onMaskedValueChange: handleMaskedValueChange,
+    onMaskedDateChange: handleChangeMaskedDate,
   };
 };
