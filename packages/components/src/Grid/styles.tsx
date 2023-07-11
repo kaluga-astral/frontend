@@ -6,7 +6,18 @@ import { GridProps } from './Grid';
 const ensureArray = <T = unknown,>(arg: T | T[]): T[] =>
   Array.isArray(arg) ? arg : [arg];
 
-export const StyledGrid = styled(GridComponent)<GridProps>`
+export const StyledGrid = styled(GridComponent, {
+  shouldForwardProp: (prop: string) =>
+    ![
+      'container',
+      'columns',
+      'rows',
+      'direction',
+      'columnSpacing',
+      'rowSpacing',
+      'spacing',
+    ].includes(prop),
+})<GridProps>`
   ${({ theme, columnSpacing }) =>
     columnSpacing && `column-gap: ${theme.spacing(columnSpacing)};`};
   ${({ theme, rowSpacing }) =>
