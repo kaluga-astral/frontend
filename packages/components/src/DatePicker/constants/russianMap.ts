@@ -9,4 +9,6 @@ export const russianMap: LanguageMap = {
   year: { single: 'год', plural: 'года' },
   month: { single: 'месяц', plural: 'месяца' },
   day: { single: 'день', plural: 'дни' },
+  from: { single: 'от' },
+  to: { single: 'до' },
 };

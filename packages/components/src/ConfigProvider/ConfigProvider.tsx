@@ -21,6 +21,11 @@ export type ConfigContextProps = {
    */
   // eslint-disable-next-line
   captureException: (error: any) => void;
+  /**
+   * @description символ для пустого значения
+   * @default '-'
+   */
+  emptySymbol: string;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -31,6 +36,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   language: 'ru',
   datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
+  emptySymbol: '-',
 });
 
 export const ConfigProvider = ({
@@ -38,6 +44,7 @@ export const ConfigProvider = ({
   language = 'ru',
   datePickerLanguageMap = russianMap,
   captureException,
+  emptySymbol = '-',
 }: Partial<ConfigProviderProps>) => {
   useEffect(() => {
     if (!captureException) {
@@ -54,6 +61,7 @@ export const ConfigProvider = ({
         language,
         datePickerLanguageMap,
         captureException: captureException || ((error) => console.error(error)),
+        emptySymbol,
       }}
     >
       {children}
