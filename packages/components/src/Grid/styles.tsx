@@ -1,10 +1,22 @@
 import { styled } from '../styles';
+import { Theme } from '../theme';
 
 import { GridComponent } from './GridComponent';
 import { GridProps } from './Grid';
 
+/**
+ * @description Если аргумент - массив, то возвращаем его, иначе кладем аргумент в массив
+ */
 const ensureArray = <T = unknown,>(arg: T | T[]): T[] =>
   Array.isArray(arg) ? arg : [arg];
+
+/**
+ * @description Проходит по массиву со значениями отступов и превращает в строку
+ */
+const setCss = (prop: number | [number, number], theme: Theme) =>
+  ensureArray(prop)
+    .map((value) => theme.spacing(value))
+    .join(' ');
 
 export const StyledGrid = styled(GridComponent, {
   shouldForwardProp: (prop: string) =>
@@ -22,11 +34,7 @@ export const StyledGrid = styled(GridComponent, {
     columnSpacing && `column-gap: ${theme.spacing(columnSpacing)};`};
   ${({ theme, rowSpacing }) =>
     rowSpacing && `row-gap: ${theme.spacing(rowSpacing)};`};
-  ${({ theme, spacing }) =>
-    spacing &&
-    `gap: ${ensureArray(spacing)
-      .map((value) => theme.spacing(value))
-      .join(' ')};`};
+  ${({ theme, spacing }) => spacing && `gap: ${setCss(spacing, theme)};`};
   ${({ container, spacing, rowSpacing, columnSpacing }) =>
     (spacing || rowSpacing || container || columnSpacing) && 'display: grid'};
   ${({ columns }) =>
