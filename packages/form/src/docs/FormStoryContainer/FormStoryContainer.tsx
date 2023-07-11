@@ -1,4 +1,4 @@
-import { Grid } from '@astral/components';
+import { LegacyGrid } from '@astral/components';
 
 import { Form, FormProps } from '../../Form';
 
@@ -21,9 +21,9 @@ export const FormStoryContainer = ({
 
   return (
     <Form {...props} onSubmit={form.handleSubmit(onSubmit || handleSubmit)}>
-      <Grid container templateColumns="300px" spacing={2}>
+      <LegacyGrid container templateColumns="300px" spacing={2}>
         {children}
-      </Grid>
+      </LegacyGrid>
     </Form>
   );
 };

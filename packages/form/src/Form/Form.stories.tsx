@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import { Grid } from '@astral/components';
+import { LegacyGrid } from '@astral/components';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -34,7 +34,7 @@ const Template: Story = () => {
 
   return (
     <Form noValidate form={form} onSubmit={form.handleSubmit(handleSubmit)}>
-      <Grid container templateColumns="300px" rowSpacing={2}>
+      <LegacyGrid container templateColumns="300px" rowSpacing={2}>
         <FormTextField
           required
           label="Form text field"
@@ -42,7 +42,7 @@ const Template: Story = () => {
           name="name"
         />
         <FormSubmitButton>Submit</FormSubmitButton>
-      </Grid>
+      </LegacyGrid>
     </Form>
   );
 };

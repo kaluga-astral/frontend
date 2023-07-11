@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 import { useState } from 'react';
 
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
 import { DatePicker, DatePickerProps } from './index';
@@ -25,7 +25,7 @@ const Template: Story<DatePickerProps> = (props) => {
 };
 
 export const Showcase: Story = () => (
-  <Grid container spacing={6} autoFlow="row">
+  <LegacyGrid container spacing={6} autoFlow="row">
     <Template inputProps={{ label: 'Все по умолчанию' }} />
     <Template
       inputProps={{ label: 'Disabled default value' }}
@@ -55,7 +55,7 @@ export const Showcase: Story = () => (
       minDate={addDays(normalizedCurrentDate, -90)}
       maxDate={addDays(normalizedCurrentDate, -80)}
     />
-  </Grid>
+  </LegacyGrid>
 );
 
 export const Default: Story<DatePickerProps> = (props) => {

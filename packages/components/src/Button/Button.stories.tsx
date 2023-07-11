@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
@@ -72,7 +72,12 @@ export const ButtonShowcase: Story = () => {
           'Также кнопки используются в диалоговых окнах и в попапах, когда пользователю необходимо выбрать одно действие из нескольких альтернативных. Например, кнопка «Сохранить» или «Продолжить».',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <Button fullWidth>Default</Button>
           <Button loading fullWidth>
             Loading
@@ -83,7 +88,7 @@ export const ButtonShowcase: Story = () => {
           <Button disabled fullWidth>
             Disabled
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -92,7 +97,12 @@ export const ButtonShowcase: Story = () => {
           'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <Button variant="light" fullWidth>
             Default
           </Button>
@@ -105,7 +115,7 @@ export const ButtonShowcase: Story = () => {
           <Button variant="light" disabled fullWidth>
             Disabled
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -114,7 +124,12 @@ export const ButtonShowcase: Story = () => {
           'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <Button variant="link" fullWidth>
             Default
           </Button>
@@ -127,14 +142,19 @@ export const ButtonShowcase: Story = () => {
           <Button variant="link" disabled fullWidth>
             Disabled
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
         title="Text"
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <Button variant="text" fullWidth>
             Default
           </Button>
@@ -147,7 +167,7 @@ export const ButtonShowcase: Story = () => {
           <Button variant="text" disabled fullWidth>
             Disabled
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -156,7 +176,7 @@ export const ButtonShowcase: Story = () => {
           'Иногда для отображения действия на кнопку нужно добавить иконку. Также можно добавить бейдж.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           templateColumns="repeat(auto-fit, 200px)"
@@ -190,7 +210,7 @@ export const ButtonShowcase: Story = () => {
           >
             Badge
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -199,7 +219,7 @@ export const ButtonShowcase: Story = () => {
           'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={autoFlow}
@@ -212,7 +232,7 @@ export const ButtonShowcase: Story = () => {
           <Button size="large" variant="light" fullWidth>
             Large
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -221,7 +241,7 @@ export const ButtonShowcase: Story = () => {
           'К любой кнопке может быть добавлен эмоциональный оттенок.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={matches ? autoFlow : 'false'}
@@ -246,7 +266,7 @@ export const ButtonShowcase: Story = () => {
           <Button color="warning" variant="light" fullWidth>
             Warning
           </Button>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <Typography variant="h5" paragraph>

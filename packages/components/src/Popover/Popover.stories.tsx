@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react';
 import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { Typography } from '../Typography';
 import { styled } from '../styles';
 
@@ -13,7 +13,7 @@ export default {
   component: Popover,
 };
 
-const PopoverContainer = styled(Grid)`
+const PopoverContainer = styled(LegacyGrid)`
   padding: ${({ theme }) => theme.spacing(2)};
 `;
 

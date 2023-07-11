@@ -2,7 +2,7 @@ import { Story } from '@storybook/react';
 import { Link } from '@mui/material';
 import { useState } from 'react';
 
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { Button } from '../Button';
 
 import { Alert } from './Alert';
@@ -20,7 +20,7 @@ const Template: Story = () => {
   const handleReset = () => setClosedList([]);
 
   return (
-    <Grid spacing={4}>
+    <LegacyGrid spacing={4}>
       <Alert
         severity="error"
         title="Заголовок"
@@ -68,7 +68,7 @@ const Template: Story = () => {
       </Alert>
       <br />
       <Button onClick={handleReset}>Сбросить</Button>
-    </Grid>
+    </LegacyGrid>
   );
 };
 

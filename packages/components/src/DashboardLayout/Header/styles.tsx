@@ -1,4 +1,4 @@
-import { Grid } from '../../Grid';
+import { LegacyGrid } from '../../LegacyGrid';
 import { styled } from '../../styles';
 
 export const HeaderRoot = styled.header`
@@ -14,6 +14,6 @@ export const HeaderRoot = styled.header`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const HeaderNav = styled(Grid)`
+export const HeaderNav = styled(LegacyGrid)`
   column-gap: ${({ theme }) => theme.spacing(1)};
 `;

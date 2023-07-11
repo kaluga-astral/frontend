@@ -1,7 +1,7 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { Grid } from '../components/src/Grid';
+import { LegacyGrid } from '../components/src/LegacyGrid';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions
@@ -78,11 +78,11 @@ const Icon = ({ component: Component, name, size, ...props }) => (
 const Template: Story = ({ color }: SvgIconProps) => {
   return (
     <>
-      <Grid key="fillmd" container>
-        <Grid>
+      <LegacyGrid key="fillmd" container>
+        <LegacyGrid>
           <h2 style={{ textAlign: 'center' }}>Fill Md 24</h2>
-        </Grid>
-        <Grid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
+        </LegacyGrid>
+        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
           {fillMdIcons.map(({ name, size, Component }) => (
             <Icon
               key={name}
@@ -92,13 +92,13 @@ const Template: Story = ({ color }: SvgIconProps) => {
               color={color}
             />
           ))}
-        </Grid>
-      </Grid>
-      <Grid key="fillsm" container>
-        <Grid>
+        </LegacyGrid>
+      </LegacyGrid>
+      <LegacyGrid key="fillsm" container>
+        <LegacyGrid>
           <h2 style={{ textAlign: 'center' }}>Fill Sm 16</h2>
-        </Grid>
-        <Grid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
+        </LegacyGrid>
+        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
           {fillSmIcons.map(({ name, size, Component }) => (
             <Icon
               key={name}
@@ -108,13 +108,13 @@ const Template: Story = ({ color }: SvgIconProps) => {
               color={color}
             />
           ))}
-        </Grid>
-      </Grid>
-      <Grid key="outlinemd" container>
-        <Grid>
+        </LegacyGrid>
+      </LegacyGrid>
+      <LegacyGrid key="outlinemd" container>
+        <LegacyGrid>
           <h2 style={{ textAlign: 'center' }}>Outline Md 24</h2>
-        </Grid>
-        <Grid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
+        </LegacyGrid>
+        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
           {outlineMdIcons.map(({ name, size, Component }) => (
             <Icon
               key={name}
@@ -124,13 +124,13 @@ const Template: Story = ({ color }: SvgIconProps) => {
               color={color}
             />
           ))}
-        </Grid>
-      </Grid>
-      <Grid key="outlinesm" container>
-        <Grid>
+        </LegacyGrid>
+      </LegacyGrid>
+      <LegacyGrid key="outlinesm" container>
+        <LegacyGrid>
           <h2 style={{ textAlign: 'center' }}>Outline Sm 16</h2>
-        </Grid>
-        <Grid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
+        </LegacyGrid>
+        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
           {outlineSmIcons.map(({ name, size, Component }) => (
             <Icon
               key={name}
@@ -140,14 +140,14 @@ const Template: Story = ({ color }: SvgIconProps) => {
               color={color}
             />
           ))}
-        </Grid>
-      </Grid>
+        </LegacyGrid>
+      </LegacyGrid>
 
-      <Grid key="сompaniesLogos" container>
-        <Grid>
+      <LegacyGrid key="сompaniesLogos" container>
+        <LegacyGrid>
           <h2 style={{ textAlign: 'center' }}>Сompanies Logos</h2>
-        </Grid>
-        <Grid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
+        </LegacyGrid>
+        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
           {сompaniesLogos.map(({ name, size, Component }) => (
             <Icon
               key={name}
@@ -157,8 +157,8 @@ const Template: Story = ({ color }: SvgIconProps) => {
               color={color}
             />
           ))}
-        </Grid>
-      </Grid>
+        </LegacyGrid>
+      </LegacyGrid>
     </>
   );
 };

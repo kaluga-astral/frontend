@@ -1,14 +1,25 @@
-import { Box, BoxProps } from '@mui/material';
-
 import { styled } from '../styles';
-import { WithoutEmotionSpecific } from '../types';
 
-type StyledGridProps = WithoutEmotionSpecific<BoxProps> & {
-  container: boolean;
-};
+import { GridComponent } from './GridComponent';
+import { GridProps } from './Grid';
 
-export const StyledGrid = styled(Box, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'container',
-})<StyledGridProps>`
-  display: ${({ container }) => container && 'grid'};
+const ensureArray = <T = unknown,>(arg: T | T[]): T[] =>
+  Array.isArray(arg) ? arg : [arg];
+
+export const StyledGrid = styled(GridComponent)<GridProps>`
+  ${({ theme, columnSpacing }) =>
+    columnSpacing && `column-gap: ${theme.spacing(columnSpacing)};`};
+  ${({ theme, rowSpacing }) =>
+    rowSpacing && `row-gap: ${theme.spacing(rowSpacing)};`};
+  ${({ theme, spacing }) =>
+    spacing &&
+    `gap: ${ensureArray(spacing)
+      .map((value) => theme.spacing(value))
+      .join(' ')};`};
+  ${({ container, spacing, rowSpacing, columnSpacing }) =>
+    (spacing || rowSpacing || container || columnSpacing) && 'display: grid'};
+  ${({ columns }) =>
+    columns && `grid-template-columns: repeat(${columns}, 1fr)`};
+  ${({ rows }) => rows && `grid-template-rows: repeat(${rows}, 1fr)`};
+  ${({ direction }) => direction && `grid-auto-flow: ${direction}`};
 `;
