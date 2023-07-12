@@ -1,31 +1,35 @@
-import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 
-import { TagBadge } from '../TagBadge';
+import { Typography } from '../Typography';
+import { Grid } from '../Grid';
+import { ExampleTemplate } from '../docs/ExampleTemplate';
 
 import { Tag } from './Tag';
+import { TagBadge } from '../TagBadge';
+import { useMediaQuery, useTheme } from '@mui/material';
+import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
+import { Stack } from '@mui/material';
+import { DataGrid, DataGridColumns, DataGridSort } from '../DataGrid';
+import { useState } from 'react';
+import { ActionCell, Actions } from '../ActionCell';
+import { TagColors } from './enums';
 
-export default {
-  title: 'Components/Tag',
-  component: Tag,
+type DataType = {
+  id: string;
+  documentName: string;
+  companyName: string;
+  status: string;
+  direction: string;
+  createDate: string;
 };
 
-const svgStartIcon = (
-  <svg
-    width="12"
-    height="14"
-    viewBox="0 0 12 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M7.5 3C7.5 3.82843 6.82843 4.5 6 4.5C5.17157 4.5 4.5 3.82843 4.5 3C4.5 2.17157 5.17157 1.5 6 1.5C6.82843 1.5 7.5 2.17157 7.5 3ZM9 3C9 4.65685 7.65685 6 6 6C4.34315 6 3 4.65685 3 3C3 1.34315 4.34315 0 6 0C7.65685 0 9 1.34315 9 3ZM1.5 9C1.5 8.72386 1.72386 8.5 2 8.5H10C10.2761 8.5 10.5 8.72386 10.5 9V10.4384C10.5 10.6679 10.3439 10.8679 10.1213 10.9235L7.81902 11.4991C6.62472 11.7977 5.37528 11.7977 4.18098 11.4991L1.87873 10.9235C1.65615 10.8679 1.5 10.6679 1.5 10.4384V9ZM0 9C0 7.89543 0.895431 7 2 7H10C11.1046 7 12 7.89543 12 9V10.4384C12 11.3562 11.3754 12.1561 10.4851 12.3787L8.18282 12.9543C6.74966 13.3126 5.25034 13.3126 3.81718 12.9543L1.51493 12.3787C0.624594 12.1561 0 11.3562 0 10.4384V9Z"
-      fill="#1D3F66"
-    />
-  </svg>
-);
+type TagStatusType = {
+  label: string;
+  color: TagColors;
+};
+
+type SortField = 'documentName' | 'direction' | 'createDate';
+
 const svgAvatar = (
   <svg
     width="16"
@@ -134,511 +138,335 @@ const svgAvatar = (
   </svg>
 );
 
+const tagStatus: { [key: string]: TagStatusType } = {
+  created: {
+    label: 'Создан',
+    color: TagColors.SUCCESS,
+  },
+  progress: {
+    label: 'В процессе',
+    color: TagColors.GREY,
+  },
+  error: {
+    label: 'Ошибки',
+    color: TagColors.ERROR,
+  },
+};
+
+const slicedData: DataType[] = [
+  {
+    id: '1',
+    documentName: 'Заголовок',
+    companyName: 'Машиностроительный за...',
+    direction: '2536 ИФНС Владивостокского...',
+    status: 'created',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '2',
+    documentName: '2-НДФЛ',
+    companyName: 'Первое управление госуд...',
+    direction: '2536 ИФНС Владивостокского...',
+    status: 'progress',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '3',
+    documentName: 'УСН',
+    companyName: 'ООО “Рога и копы”',
+    direction: '2536 ИФНС Владивостокского...',
+    status: 'progress',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '4',
+    documentName: 'Заявление на получение госу...',
+    companyName: 'Транснефтьгаз',
+    direction: '2536 ИФНС Владивостокского...',
+    status: 'error',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+];
+
+const ACTIONS: Actions<DataType> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
+    {
+      icon: <SendOutlineMd />,
+      name: 'Отправить',
+      onClick: () => console.log('sended'),
+    },
+  ],
+  secondary: [
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
+  ],
+};
+
+const columns: DataGridColumns<DataType>[] = [
+  {
+    field: 'documentName',
+    label: 'Название отчета',
+    sortable: true,
+  },
+  {
+    field: 'companyName',
+    label: 'Организация',
+    sortable: true,
+  },
+  {
+    field: 'direction',
+    label: 'Гос. Орган',
+    sortable: true,
+  },
+  {
+    field: 'status',
+    label: 'Статус',
+    sortable: true,
+    renderCell: (row) => (
+      <Tag
+        label={tagStatus[row.status].label}
+        variant="light"
+        color={tagStatus[row.status].color}
+      />
+    ),
+  },
+  {
+    field: 'createDate',
+    label: 'Дата создания',
+    sortable: true,
+    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+  },
+  {
+    label: 'Действия',
+    sortable: false,
+    align: 'center',
+    width: '1%',
+    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+  },
+];
+
+export default {
+  title: 'Components/Tag',
+  component: Tag,
+};
+
+export const TagShowcase: Story = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleRowClick = () => console.log('row clicked');
+
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
+    setSorting(newSorting);
+
+  return (
+    <ExampleTemplate>
+      <Typography variant="h3" paragraph>
+        Tags
+      </Typography>
+      <br />
+      <br />
+
+      <Typography variant="ui" paragraph>
+        Тэги позволяют пользователям маркировать или фильтровать информацию.
+      </Typography>
+      <Typography variant="ui" paragraph>
+        Могут показывать количество объектов, содержащихся в категории.
+        Несколько тэгов может быть выбранно одновременно. При этом будет показан
+        контент, относящийся к каждому выбранному тэгу.
+      </Typography>
+      <br />
+      <br />
+
+      <Typography variant="h5" paragraph>
+        Типы тэгов
+      </Typography>
+
+      <ExampleTemplate.Case
+        title="Tag"
+        descriptionList={[
+          'Статичный компонент без возможности взаимодействия.',
+        ]}
+      >
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+          <Tag label="Text" variant="text" />
+          <Tag label="Light gray" variant="light" color="grey" />
+          <Tag label="Light primary" variant="light" color="primary" />
+          <Tag label="Contained primary" variant="contained" color="primary" />
+        </Grid>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title=""
+        descriptionList={['Дополнительные элементы.']}
+      >
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+          <Tag avatar={svgAvatar} label="Default" color="grey" />
+          <Tag avatar={<ManOutlineSm />} label="Default" color="grey" />
+          <Tag
+            label="Default"
+            variant="text"
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+        </Grid>
+      </ExampleTemplate.Case>
+      <br />
+
+      <ExampleTemplate.Case
+        title="Removable Tag"
+        descriptionList={[
+          'Тэг позволяющий фильтровать контент страницы при нажатии. Тэг можно удалить при необходимости.',
+        ]}
+      >
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+          <Tag
+            label="Default"
+            variant="light"
+            color="grey"
+            onDelete={() => {
+              console.log('deleted');
+            }}
+          />
+          <Tag
+            label="Disabled"
+            disabled
+            onDelete={() => {
+              console.log('не нажмётся в дизейбле');
+            }}
+          />
+        </Grid>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title=""
+        descriptionList={['Дополнительные элементы']}
+      >
+        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+          <Tag
+            avatar={svgAvatar}
+            color="grey"
+            label="Default"
+            onDelete={() => {
+              console.log('deleted');
+            }}
+          />
+          <Tag
+            avatar={<ManOutlineSm />}
+            label="Default"
+            color="grey"
+            onDelete={() => {
+              console.log('deleted');
+            }}
+          />
+          <Tag
+            label="Default"
+            variant="text"
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={() => {
+              console.log('deleted');
+            }}
+          />
+        </Grid>
+      </ExampleTemplate.Case>
+      <br />
+
+      <ExampleTemplate.Case
+        title="Размер тэга"
+        descriptionList={['3 стандартных размера тэга: small, medium, large.']}
+      >
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          autoFlow={autoFlow}
+          spacing={8}
+        >
+          <Tag label="Small" variant="light" color="grey" size="small" />
+          <Tag label="Medium" variant="light" color="grey" size="medium" />
+          <Tag label="Large" variant="light" color="grey" size="large" />
+        </Grid>
+      </ExampleTemplate.Case>
+      <br />
+
+      <ExampleTemplate.Case
+        title="Эмоциональный оттенок"
+        descriptionList={[
+          'К любому тэгу может быть добавлен эмоциональный оттенок.',
+        ]}
+      >
+        <Grid container justifyContent="center" spacing={5}>
+          <Grid
+            container
+            autoFlow={autoFlow}
+            spacing={8}
+            templateColumns="repeat(3, auto)"
+          >
+            <Tag label="Error" variant="contained" color="error" />
+            <Tag label="Success" variant="contained" color="success" />
+            <Tag label="Warning" variant="contained" color="warning" />
+          </Grid>
+          <Grid
+            container
+            autoFlow={autoFlow}
+            spacing={8}
+            templateColumns="repeat(3, auto)"
+          >
+            <Tag label="Error" variant="light" color="error" />
+            <Tag label="Success" variant="light" color="success" />
+            <Tag label="Warning" variant="light" color="warning" />
+          </Grid>
+        </Grid>
+      </ExampleTemplate.Case>
+      <br />
+      <br />
+
+      <Typography variant="h5" paragraph>
+        Пример использования
+      </Typography>
+
+      <Stack spacing={4}>
+        <DataGrid<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          columns={columns}
+          selectedRows={selected}
+          onSelectRow={handleSelect}
+          onRowClick={handleRowClick}
+          onSort={handleSort}
+          sorting={sorting}
+        />
+      </Stack>
+    </ExampleTemplate>
+  );
+};
+
 const Template: Story = (args) => <Tag {...args} onDelete={undefined} />;
 
-export const ShowcaseColor: Story = () => (
-  <Stack direction="column" gap={2}>
-    <Stack direction="row" gap={2}>
-      <Stack direction="row" gap={2}>
-        <Stack direction="column" gap={2}>
-          <Stack direction="column">
-            <h2>Contained </h2>
-            <Stack direction="row" gap={2}>
-              <Stack direction="column">
-                <h3>Primary </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="contained"
-                        color="primary"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="contained" color="primary" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Success </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="contained"
-                        color="success"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="contained" color="success" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Warning </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="contained"
-                        color="warning"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="contained" color="warning" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Error </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="contained"
-                        color="error"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="contained" color="error" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-          <Stack direction="column">
-            <h2>Light </h2>
-            <Stack direction="row" gap={2}>
-              <Stack direction="column">
-                <h3>Primary </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="light"
-                        color="primary"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="primary" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Success </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="light"
-                        color="success"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="success" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Warning </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        variant="light"
-                        color="warning"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="warning" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Error </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="error" rounded />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" variant="light" color="error" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>
+TagShowcase.parameters = { options: { showPanel: false } };
 
-      <Stack direction="row" gap={2}>
-        <Stack direction="column" gap={2}>
-          <Stack direction="column">
-            <h2>Contained Disabled </h2>
-            <Stack direction="row" gap={2}>
-              <Stack direction="column">
-                <h3>Primary </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="primary"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="primary"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Success </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="success"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="success"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Warning </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="warning"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="warning"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Error </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="error"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="contained"
-                        color="error"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-          <Stack direction="column">
-            <h2>Light </h2>
-            <Stack direction="row" gap={2}>
-              <Stack direction="column">
-                <h3>Primary </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="primary"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="primary"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Success </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="success"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="success"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Warning </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="warning"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="warning"
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Stack direction="column">
-                <h3>Error </h3>
-                <Stack direction="column" gap={2}>
-                  <Stack direction="column" gap={2}>
-                    <Stack direction="row" gap={2}>
-                      <Tag
-                        label="Tag"
-                        disabled
-                        variant="light"
-                        color="error"
-                        rounded
-                      />
-                      Rounded
-                    </Stack>
-                    <Stack direction="row" gap={2}>
-                      <Tag label="Tag" disabled variant="light" color="error" />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Stack>
-    <Stack direction="row" gap={2}>
-      <Tag
-        color="grey"
-        label="Тэг"
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-      <Tag
-        color="grey"
-        label="Тэг"
-        rounded
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-      <Tag
-        icon={svgStartIcon}
-        color="grey"
-        label="Тэг"
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-      <Tag
-        icon={svgStartIcon}
-        color="grey"
-        label="Тэг"
-        rounded
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-      <Tag
-        avatar={svgAvatar}
-        color="grey"
-        label="Тэг"
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-      <Tag
-        avatar={svgAvatar}
-        color="grey"
-        label="Тэг"
-        rounded
-        onDelete={() => {
-          console.log(1);
-        }}
-      />
-    </Stack>
-    <Stack direction="row" gap={2}>
-      <Tag color="grey" label="Тэг" />
-      <Tag color="grey" label="Тэг" rounded />
-      <Tag icon={svgStartIcon} color="grey" label="Тэг" />
-      <Tag icon={svgStartIcon} color="grey" label="Тэг" rounded />
-      <Tag avatar={svgAvatar} color="grey" label="Тэг" />
-      <Tag avatar={svgAvatar} color="grey" label="Тэг" rounded />
-    </Stack>
+export const TagStory = Template.bind({});
 
-    <Stack direction="row" gap={2}>
-      <Tag color="error" variant="contained" label="Тэг small" />
-      <Tag
-        color="warning"
-        variant="contained"
-        label="Тэг medium"
-        size="medium"
-      />
-      <Tag color="success" variant="contained" label="Тэг large" size="large" />
-    </Stack>
+TagStory.storyName = 'Tag';
 
-    <Stack direction="row" gap={2}>
-      <Tag
-        color="success"
-        variant="light"
-        label="Тэг"
-        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-      <Tag
-        color="warning"
-        variant="light"
-        label="Тэг"
-        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-      <Tag
-        color="error"
-        size="medium"
-        variant="contained"
-        label="Тэг"
-        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-      <Tag
-        color="error"
-        size="medium"
-        variant="contained"
-        label="Тэг"
-        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-      <Tag
-        color="primary"
-        size="large"
-        variant="contained"
-        label="Тэг"
-        startAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-      <Tag
-        color="warning"
-        size="large"
-        variant="contained"
-        label="Тэг"
-        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-      />
-    </Stack>
-  </Stack>
-);
-
-ShowcaseColor.parameters = { options: { showPanel: false } };
-
-export const Default = Template.bind({});
-
-Default.args = {
+TagStory.args = {
   variant: 'light',
   color: 'success',
   label: 'Тэг',
   rounded: true,
 };
 
-Default.parameters = {
+TagStory.parameters = {
   options: { showPanel: true },
   controls: { expanded: true },
 };
