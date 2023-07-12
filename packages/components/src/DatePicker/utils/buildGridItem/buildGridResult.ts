@@ -23,8 +23,8 @@ type BuildGridResultOptions<T> = {
 export const buildGridResult = <T>({
   grid,
   addCb,
-  maxDate,
-  minDate,
+  dateB,
+  dateA,
   indexPrevDisabledCheck = 0,
   indexNextDisabledCheck = grid.length - 1,
   deep,
@@ -32,14 +32,14 @@ export const buildGridResult = <T>({
   grid,
   isPrevDisabled: isDateOutOfRange({
     date: addCb(grid[indexPrevDisabledCheck].date, -1),
-    maxDate,
-    minDate,
+    dateB: dateB,
+    dateA: dateA,
     deep,
   }),
   isNextDisabled: isDateOutOfRange({
     date: addCb(grid[indexNextDisabledCheck].date, 1),
-    minDate,
-    maxDate,
+    dateA: dateA,
+    dateB: dateB,
     deep,
   }),
 });

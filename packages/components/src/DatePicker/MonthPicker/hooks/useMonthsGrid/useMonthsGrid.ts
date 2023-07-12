@@ -8,7 +8,10 @@ import {
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { GridBuilder, GridItem } from '../../../types';
-import { buildGridResult } from '../../../utils/buildGridItem';
+import {
+  buildGridResult,
+  isDateBetweenSelectedAndRangeDates,
+} from '../../../utils';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
 
 export type MonthItem = {
@@ -21,6 +24,7 @@ export type MonthItem = {
 export const useMonthsGrid: GridBuilder<MonthItem> = ({
   baseDate,
   selectedDate,
+  rangeDate,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
@@ -41,23 +45,28 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
         date,
         selected: selectedMonth === i && selectedYear === year,
         month: i + 1,
-        isCurrent: i === currentMonth && year === currentYear,
+        isCurrentInUserLocalTime: i === currentMonth && year === currentYear,
+        isInSelectedRange: isDateBetweenSelectedAndRangeDates({
+          date,
+          selectedDate,
+          rangeDate,
+          deep: DateCompareDeep.month,
+        }),
         disabled: isDateOutOfRange({
           date,
-          minDate,
-          maxDate,
+          dateA: minDate,
+          dateB: maxDate,
           deep: DateCompareDeep.month,
-          log: true,
         }),
       });
     }
 
     return buildGridResult<MonthItem>({
       grid,
-      minDate,
-      maxDate,
+      dateA: minDate,
+      dateB: maxDate,
       addCb: addMonths,
       deep: DateCompareDeep.month,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };
