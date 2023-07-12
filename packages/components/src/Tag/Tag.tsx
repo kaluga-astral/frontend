@@ -3,7 +3,7 @@ import { CrossSmOutlineSm } from '@astral/icons';
 import { ChipProps as MuiTagProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 
 import { StyledTag, getBadgeColor } from './styles';
 import { TagAddon, TagColor, TagSize, TagVariant } from './types';
@@ -55,7 +55,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     ref,
   ) => {
     const labelContent = (
-      <Grid
+      <LegacyGrid
         container
         component="span"
         justifyContent="flex-start"
@@ -70,7 +70,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         {EndAddon && (
           <EndAddon color={getBadgeColor({ variant, tagColor: color })} />
         )}
-      </Grid>
+      </LegacyGrid>
     );
 
     return (

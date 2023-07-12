@@ -8,7 +8,7 @@ import {
 import { ReactNode } from 'react';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { Collapse } from '../Collapse';
 import { WithoutEmotionSpecific } from '../types';
 
@@ -69,14 +69,14 @@ export const Alert = ({
           </AlertTitle>
         )}
         <Typography gutterBottom={Boolean(actions)}>{children}</Typography>
-        <Grid
+        <LegacyGrid
           container
           spacing={4}
           autoFlow="column"
           justifyContent="flex-start"
         >
           {actions}
-        </Grid>
+        </LegacyGrid>
       </StyledAlert>
     </Collapse>
   );

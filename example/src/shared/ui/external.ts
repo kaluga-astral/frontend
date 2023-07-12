@@ -19,6 +19,7 @@ export {
   WidgetProduct,
   Button,
   Grid,
+  LegacyGrid,
   styled,
   TextField,
   DataGridSort,
@@ -31,7 +32,7 @@ export {
   TypographyColor,
   MenuItem,
   Select,
-  ButtonProps
+  ButtonProps,
 } from '@astral/ui';
 
 export {

@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 
 import { ClickAwayListener } from './ClickAwayListener';
 
@@ -32,7 +32,7 @@ const Template: Story<{}> = () => {
       </Typography>
 
       <ExampleTemplate.Case title="Пример">
-        <Grid container justifyContent="center">
+        <LegacyGrid container justifyContent="center">
           <ClickAwayListener onClickAway={handleClickAway} isActive={isActive}>
             <div>
               <Button ref={ref} onClick={() => setActive(true)}>
@@ -64,7 +64,7 @@ const Template: Story<{}> = () => {
               </Popper>
             </div>
           </ClickAwayListener>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
     </ExampleTemplate>
   );

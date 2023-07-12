@@ -2,7 +2,7 @@ import React from 'react';
 import { ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
-import { Grid, GridContainerProps } from '../Grid';
+import { GridContainerProps, LegacyGrid } from '../LegacyGrid';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
@@ -32,7 +32,7 @@ export const DialogHeader = ({
   return (
     <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && <Typography variant="h4">{title}</Typography>}
-      <Grid
+      <LegacyGrid
         container
         justifyContent={justifyContent}
         alignItems="center"
@@ -40,7 +40,7 @@ export const DialogHeader = ({
         spacing={disableSpacing ? 0 : 2}
       >
         {children}
-      </Grid>
+      </LegacyGrid>
       {onClose && (
         <IconButton
           variant="text"
