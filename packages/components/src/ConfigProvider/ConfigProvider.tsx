@@ -42,6 +42,11 @@ export type ConfigContextProps = {
    * Используется в компонентах ui-kit, где требуется отображение декоративных img
    */
   imagesMap: ImagesMap;
+  /**
+   * @description символ для пустого значения
+   * @default '-'
+   */
+  emptySymbol: string;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -53,6 +58,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
   imagesMap: imagesMapDefault,
+  emptySymbol: '-',
 });
 
 export const ConfigProvider = ({
@@ -60,6 +66,7 @@ export const ConfigProvider = ({
   language = 'ru',
   datePickerLanguageMap = russianMap,
   captureException,
+  emptySymbol = '-',
   imagesMap = imagesMapDefault,
 }: Partial<ConfigProviderProps>) => {
   useEffect(() => {
@@ -77,6 +84,7 @@ export const ConfigProvider = ({
         language,
         datePickerLanguageMap,
         captureException: captureException || ((error) => console.error(error)),
+        emptySymbol,
         imagesMap,
       }}
     >

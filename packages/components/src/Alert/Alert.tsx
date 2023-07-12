@@ -12,12 +12,17 @@ import { LegacyGrid } from '../LegacyGrid';
 import { Collapse } from '../Collapse';
 import { WithoutEmotionSpecific } from '../types';
 
+import { AlertSeverity } from './types';
 import { StyledAlert } from './styles';
 
 export type AlertProps = Omit<
   WithoutEmotionSpecific<MuiAlertProps>,
-  'variant' | 'action' | 'color' | 'iconMapping'
+  'severity' | 'variant' | 'action' | 'color' | 'iconMapping'
 > & {
+  /**
+   * Тип тоста
+   */
+  severity?: `${AlertSeverity}`;
   /**
    * @example <Alert title="Заголовок">Сообщение</Alert>
    * Заголовок
@@ -49,10 +54,13 @@ export const Alert = ({
   onClose,
   ...props
 }: AlertProps) => {
+  const { severity = 'info', ...restProps } = props;
+
   return (
     <Collapse in={display}>
       <StyledAlert
-        {...props}
+        {...restProps}
+        severity={severity}
         closeText={closeText}
         variant="filled"
         onClose={onClose}

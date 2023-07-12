@@ -9,13 +9,18 @@ import {
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { GridBuilder, GridItem } from '../../../types';
-import { buildGridResult } from '../../../utils/buildGridItem';
+import {
+  buildGridResult,
+  compareDateDayByUTC,
+  isDateBetweenSelectedAndRangeDates,
+} from '../../../utils';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
-import { compareDateDayByUTC } from '../../../utils/compareDateDayByUTC';
 
 export type DayItem = {
   /**
-   * @description Флаг обозначающий, что дата совпадает с запрошенным месяцем
+   * @description Флаг обозначающий, что дата не попадает в предполагаемый диапазон к выбору,
+   * но эту дату все равно можно выбрать, например календарь на декабрь 22го года, начинается с понедельника 28го ноября,
+   * и вот этот кусочек ноября будет вне целевого диапазона
    */
   isOutOfAvailableRange: boolean;
   /**
@@ -43,6 +48,7 @@ const MAX_DAYS_IN_GRID = MAX_ROWS * DAYS_IN_WEEK;
 export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
   baseDate,
   selectedDate,
+  rangeDate,
   fullSize = false,
   isMondayFirst = true,
 }) => {
@@ -133,17 +139,24 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       grid.push({
         isOutOfAvailableRange: dateMonth !== month,
         selected:
-          isDate(selectedDate) && compareDateDayByUTC(selectedDate, date),
-        isCurrent:
+          (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
+          (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),
+        isCurrentInUserLocalTime:
           date.getUTCFullYear() === currentDate.getFullYear() &&
           date.getUTCDate() === currentDate.getDate() &&
           date.getUTCMonth() === currentDate.getMonth(),
         date,
+        isInSelectedRange: isDateBetweenSelectedAndRangeDates({
+          date,
+          selectedDate,
+          rangeDate,
+          deep: DateCompareDeep.day,
+        }),
         monthDay: date.getUTCDate(),
         disabled: isDateOutOfRange({
           date,
-          minDate,
-          maxDate,
+          dateA: minDate,
+          dateB: maxDate,
           deep: DateCompareDeep.day,
         }),
       });
@@ -151,12 +164,12 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
 
     return buildGridResult<DayItem>({
       grid,
-      minDate,
-      maxDate,
+      dateA: minDate,
+      dateB: maxDate,
       addCb: addDays,
       indexPrevDisabledCheck: startMonthIndex,
       indexNextDisabledCheck: lastCurrentMonthIndex,
       deep: DateCompareDeep.day,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };
