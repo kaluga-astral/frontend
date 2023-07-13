@@ -1,4 +1,5 @@
 import { Paper as MuiPaper, PaperProps as MuiPaperProps } from '@mui/material';
+
 import { WithoutEmotionSpecific } from '../types';
 
 export type PaperProps = Omit<

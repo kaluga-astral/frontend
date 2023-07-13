@@ -1,5 +1,7 @@
 import { Story } from '@storybook/react';
-import { Grid } from '@astral/components';
+import { LegacyGrid } from '@astral/components';
+import { object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
@@ -14,8 +16,14 @@ export default {
 
 type FormValues = { name: FormTextFieldValue };
 
+const validationSchema = object<FormValues>({
+  name: string(),
+});
+
 const Template: Story = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    resolver: resolver<FormValues>(validationSchema),
+  });
 
   const handleSubmit = (values: FormValues) =>
     new Promise<void>((resolve) => {
@@ -26,16 +34,15 @@ const Template: Story = () => {
 
   return (
     <Form noValidate form={form} onSubmit={form.handleSubmit(handleSubmit)}>
-      <Grid container templateColumns="300px" rowSpacing={2}>
+      <LegacyGrid container templateColumns="300px" rowSpacing={2}>
         <FormTextField
           required
           label="Form text field"
           control={form.control}
           name="name"
-          rules={{ required: 'Обязательное поле' }}
         />
         <FormSubmitButton>Submit</FormSubmitButton>
-      </Grid>
+      </LegacyGrid>
     </Form>
   );
 };

@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import { ExampleTemplate } from '../docs';
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { DashboardLayout } from '../DashboardLayout';
 
 import { ProductSwitcher } from './ProductSwitcher';
@@ -137,10 +137,15 @@ export const Default = () => {
         title="Переход к другому продукту"
         descriptionList={['']}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          spacing={4}
+        >
           <ProductSwitcher getProducts={handleGetProducts} />
           <ProductSwitcher getProducts={handleReject} />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <Typography variant="h5" paragraph>
         Пример использования

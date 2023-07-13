@@ -3,7 +3,7 @@ import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { DialogOutlineMd, MailFillSm } from '@astral/icons';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
 import { MenuItem } from '../MenuItem';
 
@@ -52,7 +52,12 @@ export const DropdownButtonShowcase: Story = () => {
           'На одной странице не может находиться свыше одной акцентной кнопки. Исключение - акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов. ',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <DropdownButton fullWidth name="Default">
             {dropdownContent}
           </DropdownButton>
@@ -62,7 +67,7 @@ export const DropdownButtonShowcase: Story = () => {
           <DropdownButton loading fullWidth name="Loading">
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -71,7 +76,12 @@ export const DropdownButtonShowcase: Story = () => {
           'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <DropdownButton variant="light" fullWidth name="Default">
             {dropdownContent}
           </DropdownButton>
@@ -81,14 +91,19 @@ export const DropdownButtonShowcase: Story = () => {
           <DropdownButton variant="light" loading fullWidth name="Loading">
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
         title="Text"
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <DropdownButton variant="text" fullWidth name="Defalut">
             {dropdownContent}
           </DropdownButton>
@@ -98,7 +113,7 @@ export const DropdownButtonShowcase: Story = () => {
           <DropdownButton variant="text" loading fullWidth name="Loading">
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -107,7 +122,7 @@ export const DropdownButtonShowcase: Story = () => {
           'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={autoFlow}
@@ -125,11 +140,11 @@ export const DropdownButtonShowcase: Story = () => {
           <DropdownButton size="large" variant="light" fullWidth name="Default">
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case title="Кнопки с иконками">
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           templateColumns="repeat(auto-fit, 200px)"
@@ -143,7 +158,7 @@ export const DropdownButtonShowcase: Story = () => {
           >
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -152,7 +167,7 @@ export const DropdownButtonShowcase: Story = () => {
           'К любой кнопке может быть добавлен эмоциональный оттенок.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={matches ? autoFlow : 'false'}
@@ -202,7 +217,7 @@ export const DropdownButtonShowcase: Story = () => {
           >
             {dropdownContent}
           </DropdownButton>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
     </ExampleTemplate>
   );

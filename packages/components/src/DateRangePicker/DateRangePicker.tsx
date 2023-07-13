@@ -96,7 +96,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     });
 
     return (
-      <Grid container spacing={spacing} ref={ref} autoFlow="column">
+      <Grid container spacing={spacing} ref={ref} direction="column">
         <DatePickerInput
           {...startDateProps.inputProps}
           mask={mask}

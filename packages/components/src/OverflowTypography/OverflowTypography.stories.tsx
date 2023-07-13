@@ -36,7 +36,7 @@ export const ShowCase: Story = () => {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut
         delectus dolorem ea, explicabo illo minus nostrum quae quod veniam.
       </OverflowTypography>
-      <OverflowTypography rowsCount={2} maxWidth={300}>
+      <OverflowTypography rowsCount={2}>
         rowsCount = 2, like in default Autocomplite component. Lorem ipsum dolor
         sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui,
         tempore.

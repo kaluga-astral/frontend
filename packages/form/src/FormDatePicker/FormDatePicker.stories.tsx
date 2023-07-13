@@ -1,4 +1,6 @@
 import { Story } from '@storybook/react';
+import { date, object } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
@@ -13,8 +15,14 @@ export default {
 
 type FormValues = { dateField: FormDatePickerValue };
 
+const validationSchema = object<FormValues>({
+  dateField: date(),
+});
+
 const Template: Story = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    resolver: resolver<FormValues>(validationSchema),
+  });
 
   return (
     <FormStoryContainer form={form}>
@@ -22,7 +30,6 @@ const Template: Story = () => {
         inputProps={{ label: 'FormDatePicker', required: true }}
         control={form.control}
         name="dateField"
-        rules={{ required: 'Обязательное поле' }}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

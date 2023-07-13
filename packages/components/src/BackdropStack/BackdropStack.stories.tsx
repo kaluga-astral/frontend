@@ -9,6 +9,7 @@ import { Button } from '../Button';
 import { Typography } from '../Typography';
 import { useBackdropStackToggle } from '../BackdropStack';
 import { DatePicker } from '../DatePicker';
+import { styled } from '../styles';
 
 export default {
   title: 'Components/BackdropStack',
@@ -33,6 +34,11 @@ const OPTIONS: Option[] = [
   { value: '7', title: 'Value 7' },
   { value: '8', title: 'Value 8' },
 ];
+
+const ExampleWrapper = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(3)};
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
+`;
 
 const AutocompleteExample = () => {
   const { handleClose, handleOpen } = useBackdropStackToggle();
@@ -134,9 +140,9 @@ const MotivationPart = () => {
         только селекта/автокомплита, но и самой модалки, чего пользователь
         совсем не ожидал
       </Typography>
-      <Typography variant="h2" marginTop={3} marginBottom={2}>
-        Пример
-      </Typography>
+      <ExampleWrapper>
+        <Typography variant="h2">Пример</Typography>
+      </ExampleWrapper>
     </>
   );
 };

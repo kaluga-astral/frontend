@@ -3,7 +3,7 @@ import { Link, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { ExampleTemplate } from '../docs';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
 
@@ -75,7 +75,7 @@ export const AlertShowcase: Story = () => {
       </Typography>
 
       <ExampleTemplate.Case title="">
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={matches ? autoFlow : 'false'}
@@ -143,7 +143,7 @@ export const AlertShowcase: Story = () => {
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <br />
@@ -158,7 +158,7 @@ export const AlertShowcase: Story = () => {
           'Используется, когда необходимо подсветить изменения или обозначить важную информацию на странице.',
         ]}
       >
-        <Grid container templateColumns="70%" justifyContent="center">
+        <LegacyGrid container templateColumns="70%" justifyContent="center">
           <Alert
             severity="info"
             title="Редактирование ограничено"
@@ -174,7 +174,7 @@ export const AlertShowcase: Story = () => {
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -183,12 +183,12 @@ export const AlertShowcase: Story = () => {
           'Данный тип компонента используется, когда необходимо оповестить пользователя, что действие или событие произошло успешно.',
         ]}
       >
-        <Grid container templateColumns="70%" justifyContent="center">
+        <LegacyGrid container templateColumns="70%" justifyContent="center">
           <Alert severity="success" onClose={handleClose}>
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -197,7 +197,7 @@ export const AlertShowcase: Story = () => {
           'Сообщение раздела, которое используется для помощи во избежание ошибок.',
         ]}
       >
-        <Grid container templateColumns="70%" justifyContent="center">
+        <LegacyGrid container templateColumns="70%" justifyContent="center">
           <Alert
             severity="warning"
             title="Был изменён сертификат"
@@ -206,7 +206,7 @@ export const AlertShowcase: Story = () => {
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <Typography variant="h5" paragraph>
@@ -226,7 +226,7 @@ export const AlertShowcase: Story = () => {
       </ul>
 
       <ExampleTemplate.Case title="">
-        <Grid container templateColumns="70%" justifyContent="center">
+        <LegacyGrid container templateColumns="70%" justifyContent="center">
           <Alert
             severity="error"
             title="Что-то пошло не так с подбором тарифа"
@@ -235,7 +235,7 @@ export const AlertShowcase: Story = () => {
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -245,7 +245,7 @@ export const AlertShowcase: Story = () => {
           'Действие в сообщении отображается в виде текста ссылки. Действий может быть несколько в одном сообщении. Чаще всего не более двух.',
         ]}
       >
-        <Grid container templateColumns="70%" justifyContent="center">
+        <LegacyGrid container templateColumns="70%" justifyContent="center">
           <Alert
             severity="warning"
             onClose={handleClose}
@@ -260,7 +260,7 @@ export const AlertShowcase: Story = () => {
             Заголовок и действия опциональны, их можно отключить, если
             требуется.
           </Alert>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
     </ExampleTemplate>
   );
@@ -276,7 +276,7 @@ const Template: Story = (args) => {
   const handleReset = () => setClosedList([]);
 
   return (
-    <Grid spacing={4}>
+    <LegacyGrid spacing={4}>
       <Alert
         {...args}
         onClose={handleClose('1')}
@@ -297,7 +297,7 @@ const Template: Story = (args) => {
 
       <br />
       <Button onClick={handleReset}>Сбросить</Button>
-    </Grid>
+    </LegacyGrid>
   );
 };
 
