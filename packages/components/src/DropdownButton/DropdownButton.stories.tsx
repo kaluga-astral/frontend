@@ -1,15 +1,11 @@
 import { Story } from '@storybook/react';
 import { Stack, useMediaQuery, useTheme } from '@mui/material';
-import { DialogOutlineMd, MailFillSm, SearchOutlineMd } from '@astral/icons';
-import { Fragment, useEffect, useState } from 'react';
+import { DialogOutlineMd, MailFillSm } from '@astral/icons';
 
-import { Select } from '../Select';
-import { TextField } from '../TextField';
 import { Typography } from '../Typography';
 import { Grid } from '../Grid';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
 import { MenuItem } from '../MenuItem';
-import { PageLayout } from '.././PageLayout';
 
 import { DropdownButton, DropdownButtonProps } from './DropdownButton';
 
@@ -27,19 +23,10 @@ const dropdownContent = (
 );
 
 export const DropdownButtonShowcase: Story = () => {
-  const [loading, setLoading] = useState(false);
   const theme = useTheme();
 
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timeout);
-  }, [loading]);
 
   return (
     <ExampleTemplate>
@@ -150,7 +137,6 @@ export const DropdownButtonShowcase: Story = () => {
         >
           <DropdownButton
             startIcon={<DialogOutlineMd />}
-            //endIcon={<ChevronDOutlineMd />}
             variant="light"
             fullWidth
             name="Before&After"
@@ -217,56 +203,6 @@ export const DropdownButtonShowcase: Story = () => {
             {dropdownContent}
           </DropdownButton>
         </Grid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case title="Пример использования">
-        <PageLayout
-          header={{
-            title: 'Черновики',
-            breadcrumbs: [
-              <Fragment key="1">Раздел 1</Fragment>,
-              <Fragment key="2">Текст</Fragment>,
-              <Fragment key="3">Текст</Fragment>,
-              <Fragment key="4">Текст</Fragment>,
-              <Fragment key="5">Текст</Fragment>,
-              <Fragment key="6">Текст</Fragment>,
-            ],
-            actions: {
-              main: [
-                {
-                  text: 'Основное действие',
-                },
-              ],
-              secondary: [
-                {
-                  text: 'Кнопка',
-                },
-              ],
-            },
-            subheader: (
-              <Grid
-                container
-                templateColumns="240px repeat(2, 192px)"
-                spacing={2}
-              >
-                <TextField
-                  placeholder="Поиск на странице..."
-                  size="small"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: <SearchOutlineMd />,
-                  }}
-                />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-              </Grid>
-            ),
-          }}
-          content={{
-            children: null,
-            isPaddingDisabled: false,
-          }}
-        />
       </ExampleTemplate.Case>
     </ExampleTemplate>
   );
