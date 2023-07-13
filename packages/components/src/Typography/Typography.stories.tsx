@@ -54,7 +54,7 @@ const colors: TypographyColor[] = [
 ];
 
 const Template: Story<TypographyProps> = (args) => {
-  return <Typography mb={5} {...args} />;
+  return <Typography {...args} />;
 };
 
 export const Showcase = () => (

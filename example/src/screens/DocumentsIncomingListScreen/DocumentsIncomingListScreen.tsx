@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import {
   BlockOutlineMd,
   CheckOutlineMd,
-  Grid,
+  LegacyGrid,
   PageLayout,
   SearchField,
 } from '@example/shared';
@@ -70,7 +70,7 @@ export const DocumentsIncomingListScreen = observer(
             ],
           },
           subheader: (
-            <Grid
+            <LegacyGrid
               container
               templateColumns="240px repeat(2, 192px)"
               spacing={2}
@@ -79,7 +79,7 @@ export const DocumentsIncomingListScreen = observer(
                 onChangeSearch={handleChangeSearch}
                 searchValue={searchValue}
               />
-            </Grid>
+            </LegacyGrid>
           ),
         }}
         content={{

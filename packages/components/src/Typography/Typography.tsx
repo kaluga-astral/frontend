@@ -1,14 +1,12 @@
 import {
   Typography as MuiTypography,
+  TypographyProps as MuiTypographyProps,
   TypographyPropsVariantOverrides,
-  TypographyTypeMap,
 } from '@mui/material';
-import { OverrideProps } from '@mui/material/OverridableComponent';
 import { Variant } from '@mui/material/styles/createTypography';
-import { ElementType, PropsWithChildren, forwardRef, useMemo } from 'react';
+import { ElementType, HTMLAttributes, forwardRef, useMemo } from 'react';
 
 import { Theme } from '../theme';
-import { WithoutEmotionSpecific } from '../types';
 
 import { TypographyColors } from './enums';
 
@@ -25,21 +23,37 @@ type Intensity =
 
 export type TypographyColor = keyof typeof TypographyColors;
 
-export type TypographyProps<Element extends ElementType = 'span'> =
-  WithoutEmotionSpecific<
-    Omit<OverrideProps<TypographyTypeMap, Element>, 'variant' | 'color'> & {
-      color?: TypographyColor | ((theme: Theme) => string);
-      variant?: Variant | keyof TypographyPropsVariantOverrides;
-      component?: ElementType;
-      /**
-       * @description интенсивность цвета, будет применена для цвета, у которого есть градации
-       * @variation 900 | 800 | 700 | 600 | 500 | 400 | 300 | 200 | 100
-       * @default undefined
-       * @example <Typography color="grey" colorIntensity="500" />
-       */
-      colorIntensity?: Intensity;
-    }
-  >;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ComponentProp = ElementType<any>;
+
+//Добавляем нужные нам пропсы из mui
+type TypographyPropsBase = Pick<
+  MuiTypographyProps,
+  'paragraph' | 'noWrap' | 'align' | 'gutterBottom' | 'children'
+>;
+
+export type TypographyProps = TypographyPropsBase & {
+  /**
+   * @description Цвет текста
+   * @default undefined
+   */
+  color?: TypographyColor;
+  /**
+   * @description Применяет стили оформления темы
+   * @default 'body1'
+   */
+  variant?: Variant | keyof TypographyPropsVariantOverrides;
+  /**
+   * @description Интенсивность цвета, будет применена для цвета, у которого есть градации
+   * @default '800'
+   */
+  colorIntensity?: Intensity;
+  /**
+   * @description Тип HTML - элемента
+   * @default 'p'
+   */
+  component?: ComponentProp;
+} & HTMLAttributes<HTMLParagraphElement>;
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
@@ -55,41 +69,39 @@ declare module '@mui/material/Typography' {
   }
 }
 
-export const Typography = forwardRef<
-  HTMLElement,
-  PropsWithChildren<TypographyProps>
->(({ children, color, colorIntensity = '800', ...props }, ref) => {
-  const typographyColor = useMemo(() => {
-    if (typeof color === 'function') {
-      return color;
-    }
+export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
+  ({ children, color, colorIntensity = '800', component, ...props }, ref) => {
+    const typographyColor = useMemo(() => {
+      // получаем название цвета по TypographyColors
+      const colorName = color && TypographyColors[color];
 
-    // получаем название цвета по TypographyColors
-    const colorName = color && TypographyColors[color];
+      if (colorName) {
+        return (theme: Theme) => {
+          // если такой цвет есть в палитре, то ищем его intensity
+          // или возвращаем main цвет (если для данного цвета не определены intensity)
+          // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
+          // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
 
-    if (colorName) {
-      return (theme: Theme) => {
-        // если такой цвет есть в палитре, то ищем его intensity
-        // или возвращаем main цвет (если для данного цвета не определены intensity)
-        // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
-        // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
+          return (
+            theme.palette[colorName]?.[colorIntensity as string] ||
+            theme.palette[colorName]?.main ||
+            colorName
+          );
+        };
+      }
 
-        return (
-          theme.palette[colorName]?.[colorIntensity as string] ||
-          theme.palette[colorName]?.main ||
-          colorName
-        );
-      };
-    }
+      return;
+    }, [color, colorIntensity]);
 
-    return;
-  }, [color, colorIntensity]);
-
-  return (
-    <MuiTypography ref={ref} {...props} color={typographyColor}>
-      {children}
-    </MuiTypography>
-  );
-});
-
-export default Typography;
+    return (
+      <MuiTypography
+        ref={ref}
+        {...props}
+        component={component as ComponentProp}
+        color={typographyColor}
+      >
+        {children}
+      </MuiTypography>
+    );
+  },
+);

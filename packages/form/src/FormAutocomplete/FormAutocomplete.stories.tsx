@@ -1,4 +1,6 @@
 import { Story } from '@storybook/react';
+import { array, arrayItem, min, object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
@@ -41,9 +43,21 @@ type FormValues = {
   autocomplete: IOption[];
 };
 
+const validationSchema = object<FormValues>({
+  autocomplete: array(
+    min(1),
+    arrayItem(
+      object<IOption>({
+        value: string(),
+        title: string(),
+      }),
+    ),
+  ),
+});
 const Template: Story = () => {
   const form = useForm<FormValues>({
     defaultValues: { autocomplete: [OPTIONS[0]] },
+    resolver: resolver<FormValues>(validationSchema),
   });
 
   return (
@@ -55,7 +69,6 @@ const Template: Story = () => {
         options={OPTIONS}
         label="Form autocomplete"
         getOptionLabel={(params) => params.title}
-        rules={{ required: 'Обязательное поле' }}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

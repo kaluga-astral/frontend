@@ -6,7 +6,7 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  Grid,
+  LegacyGrid,
   Tag,
   Typography,
   styled,
@@ -51,17 +51,17 @@ const Template: Story = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid>
+    <LegacyGrid container spacing={2}>
+      <LegacyGrid>
         <Button variant="light" onClick={handleClickOpen}>
           Dialog
         </Button>
-      </Grid>
-      <Grid>
+      </LegacyGrid>
+      <LegacyGrid>
         <Button variant="light" onClick={handleOpenDialogWithHeader}>
           Dialog with DialogHeader
         </Button>
-      </Grid>
+      </LegacyGrid>
       <Dialog
         title={
           <>
@@ -110,7 +110,7 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Grid>
+    </LegacyGrid>
   );
 };
 

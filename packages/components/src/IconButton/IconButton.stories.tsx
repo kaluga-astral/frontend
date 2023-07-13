@@ -9,7 +9,7 @@ import {
   SendOutlineMd,
 } from '@astral/icons';
 
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { Typography } from '../Typography/Typography';
 import { Case } from '../docs';
 import { DataGrid, DataGridColumns } from '../DataGrid';
@@ -99,7 +99,12 @@ export const IconButtonShowcase: Story = () => {
           'На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          spacing={4}
+        >
           <IconButton variant="contained">
             <PrintOutlineMd />
           </IconButton>
@@ -112,7 +117,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton loading variant="contained">
             <PrintOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />
@@ -124,7 +129,12 @@ export const IconButtonShowcase: Story = () => {
           'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          spacing={4}
+        >
           <IconButton variant="light">
             <EyeOutlineMd />
           </IconButton>
@@ -137,7 +147,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton loading variant="light">
             <EyeOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />
@@ -149,7 +159,12 @@ export const IconButtonShowcase: Story = () => {
           'Кнопка для перехода по ссылке на новую страницу. В некоторых слкчаях открывает окно браузера.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          spacing={4}
+        >
           <IconButton variant="link">
             <FilterOutlineMd />
           </IconButton>
@@ -162,7 +177,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton loading variant="link">
             <FilterOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />
@@ -172,7 +187,12 @@ export const IconButtonShowcase: Story = () => {
         title="Text"
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
-        <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow="column"
+          spacing={4}
+        >
           <IconButton variant="text">
             <FilterOutlineMd />
           </IconButton>
@@ -185,7 +205,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton loading variant="text">
             <FilterOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />
@@ -197,7 +217,7 @@ export const IconButtonShowcase: Story = () => {
           'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow="column"
@@ -210,7 +230,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton size="large" variant="light">
             <DownloadOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />
@@ -222,7 +242,7 @@ export const IconButtonShowcase: Story = () => {
           'К любой кнопке может быть добавлен эмоциональный оттенок.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           templateColumns="repeat(3, 40px)"
@@ -247,7 +267,7 @@ export const IconButtonShowcase: Story = () => {
           <IconButton variant="light" color="warning">
             <DownloadOutlineMd />
           </IconButton>
-        </Grid>
+        </LegacyGrid>
       </Case>
 
       <br />

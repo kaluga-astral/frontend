@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 import { MenuItem } from '../../MenuItem';
-import { Grid } from '../../Grid';
+import { LegacyGrid } from '../../LegacyGrid';
 
 // as typeof MenuItem необходим для возможности прокинуть component
 // https://github.com/mui/material-ui/issues/15695
@@ -19,7 +19,7 @@ export const Logo = styled('img', {
   border-radius: ${({ theme }) => theme.shape.small};
 `;
 
-export const TitleErrorContainer = styled(Grid)`
+export const TitleErrorContainer = styled(LegacyGrid)`
   color: ${({ theme }) => theme.palette.error.dark};
   column-gap: ${({ theme }) => theme.spacing(2)};
 `;

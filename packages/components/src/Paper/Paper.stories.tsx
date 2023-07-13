@@ -13,7 +13,7 @@ import {
 
 import { HeaderNav } from '../DashboardLayout/Header/styles';
 import { ExampleTemplate } from '../docs';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { MenuItem } from '../MenuItem';
 import { AoIcon } from '../MenuGroup/stories/Icons';
 import { Product } from '../Product';
@@ -118,7 +118,12 @@ export const PaperShowcase: Story = () => {
           'Высота бумаги визуально разделяется тенью, чем больше тень, тем выше находится объект.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           {/* elevation={0} = нет тени */}
           <PaperExampleStory elevation={0}>
             <Typography variant="h6" color="grey" colorIntensity="700">
@@ -137,7 +142,7 @@ export const PaperShowcase: Story = () => {
               Elevation-2
             </Typography>
           </PaperExampleStory>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <br />
 

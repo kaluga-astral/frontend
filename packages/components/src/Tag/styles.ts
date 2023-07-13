@@ -271,6 +271,8 @@ export const StyledTag = styled(Chip, {
     width: 16px;
     height: 16px;
     margin: 2px;
+
+    color: ${getColor};
   }
 
   .MuiChip-icon {

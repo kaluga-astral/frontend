@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Grid, PageLayout, SearchField } from '@example/shared';
+import { LegacyGrid, PageLayout, SearchField } from '@example/shared';
 import {
   SignedList,
   createDocumentsSignedListStore,
@@ -44,12 +44,12 @@ export const DocumentsSentListScreen = observer(
         header={{
           title: 'Мои документы: Отправленные',
           subheader: (
-            <Grid container templateColumns="240px" spacing={2}>
+            <LegacyGrid container templateColumns="240px" spacing={2}>
               <SearchField
                 onChangeSearch={handleChangeSearch}
                 searchValue={searchValue}
               />
-            </Grid>
+            </LegacyGrid>
           ),
         }}
         content={{
