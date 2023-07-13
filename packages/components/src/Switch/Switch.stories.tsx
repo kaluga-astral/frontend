@@ -2,7 +2,7 @@ import { Story } from '@storybook/react';
 import { Paper, useMediaQuery, useTheme } from '@mui/material';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
@@ -47,7 +47,7 @@ export const SwitchShowcase: Story = () => {
           'Переключатель имеет два состояния: выключен и включен.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={autoFlow}
@@ -59,7 +59,7 @@ export const SwitchShowcase: Story = () => {
           <Switch checked />
           <Switch disabled />
           <Switch checked disabled />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -70,7 +70,7 @@ export const SwitchShowcase: Story = () => {
           'Пример использования: включить отображение сервисных  уведомлений.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={autoFlow}
@@ -110,7 +110,7 @@ export const SwitchShowcase: Story = () => {
             labelPlacement="start"
             disabled
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -119,7 +119,7 @@ export const SwitchShowcase: Story = () => {
           'Переключатель имеет несколько размеров: small, medium.',
         ]}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           autoFlow={autoFlow}
@@ -131,7 +131,7 @@ export const SwitchShowcase: Story = () => {
 
           <Switch />
           <FormControlLabel control={<Switch />} label="Text" />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <Typography variant="h5" paragraph>
@@ -140,14 +140,14 @@ export const SwitchShowcase: Story = () => {
       <Paper style={{ width: 500 }}>
         <DialogTitle variant="h5">Настройки</DialogTitle>
         <DialogContent>
-          <Grid
+          <LegacyGrid
             container
             templateColumns="auto auto"
             justifyContent="space-between"
           >
             <Typography>Отображать отклоненные заявления</Typography>
             <Switch size="small" />
-          </Grid>
+          </LegacyGrid>
         </DialogContent>
         <DialogActions></DialogActions>
       </Paper>

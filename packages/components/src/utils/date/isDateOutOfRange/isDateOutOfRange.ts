@@ -1,4 +1,3 @@
-import { isDate } from '../isDate';
 import { buildIsoDate } from '../buildIsoDate';
 
 /**
@@ -22,9 +21,8 @@ export type IsDateOutOfRangeOptions = {
    * @description глубина сравнивания, даты могут быть равны по году, но разные по месяцу, и т.д.
    */
   deep?: DateCompareDeep;
-  log?: boolean;
-  minDate?: Date;
-  maxDate?: Date;
+  dateA: Date;
+  dateB: Date;
 };
 
 export const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
@@ -32,36 +30,37 @@ export const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
     year: date.getUTCFullYear(),
     month: deep > DateCompareDeep.year ? date.getUTCMonth() + 1 : undefined,
     day: deep > DateCompareDeep.month ? date.getUTCDate() : undefined,
-    hour: deep > DateCompareDeep.day ? date.getUTCDate() : undefined,
-    minute: deep > DateCompareDeep.hour ? date.getUTCDate() : undefined,
-    second: deep > DateCompareDeep.minute ? date.getUTCDate() : undefined,
+    hour: deep > DateCompareDeep.day ? date.getUTCHours() : undefined,
+    minute: deep > DateCompareDeep.hour ? date.getUTCMinutes() : undefined,
+    second: deep > DateCompareDeep.minute ? date.getUTCSeconds() : undefined,
   });
 
 /**
- * @description утилита проверки даты на вхождение в указанный диапазон между minDate и maxDate
+ * @description утилита занимающаяся числовым сравнением дат на НЕ вхождение даты в промежуток между А и B
+ */
+const checkDateOnOutOfRange = ({
+  date,
+  dateA,
+  dateB,
+}: Omit<IsDateOutOfRangeOptions, 'deep'>): boolean =>
+  !((dateA >= date && date >= dateB) || (dateB >= date && date >= dateA));
+
+/**
+ * @description утилита проверки даты на НЕ вхождение в указанный диапазон между A и B, с учетом глубины сравнения
  */
 export const isDateOutOfRange = ({
   date,
-  minDate,
-  maxDate,
+  dateA,
+  dateB,
   deep = DateCompareDeep.second,
 }: IsDateOutOfRangeOptions): boolean => {
-  const hasMinDate = isDate(minDate);
-  const hasMaxDate = isDate(maxDate);
-
   if (deep === DateCompareDeep.second) {
-    return (
-      (hasMinDate && Number(date) < Number(minDate)) ||
-      (hasMaxDate && Number(date) > Number(maxDate))
-    );
-  } else {
-    const dateToCompare = buildDateByDeep(date, deep);
-
-    return (
-      (hasMinDate &&
-        Number(dateToCompare) < Number(buildDateByDeep(minDate, deep))) ||
-      (hasMaxDate &&
-        Number(dateToCompare) > Number(buildDateByDeep(maxDate, deep)))
-    );
+    return checkDateOnOutOfRange({ date, dateA, dateB });
   }
+
+  return checkDateOnOutOfRange({
+    date: buildDateByDeep(date, deep),
+    dateA: buildDateByDeep(dateA, deep),
+    dateB: buildDateByDeep(dateB, deep),
+  });
 };

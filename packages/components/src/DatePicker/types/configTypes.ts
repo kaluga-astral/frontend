@@ -19,6 +19,8 @@ export type LangItemNames =
   | 'next'
   | 'year'
   | 'month'
-  | 'day';
+  | 'day'
+  | 'from'
+  | 'to';
 
 export type LanguageMap = Record<LangItemNames, LangItemValues>;

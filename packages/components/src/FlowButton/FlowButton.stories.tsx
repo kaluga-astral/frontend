@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 
 import { ExampleTemplate } from '../docs';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 
 import { FlowButton } from './FlowButton';
 
@@ -13,9 +13,9 @@ export default {
 export const FlowButtonShowcase: Story = () => {
   return (
     <ExampleTemplate>
-      <Grid container justifyContent="flex-start" spacing={4}>
+      <LegacyGrid container justifyContent="flex-start" spacing={4}>
         <FlowButton targetText="Далее">Выпустить УНЭП</FlowButton>
-      </Grid>
+      </LegacyGrid>
     </ExampleTemplate>
   );
 };

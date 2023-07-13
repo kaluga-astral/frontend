@@ -8,7 +8,7 @@ import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 //TODO необходимо вынести в отдельный пакет
 import { ExampleTemplate } from '../../../components/src/docs';
-import { Grid, Typography } from '../../../components';
+import { LegacyGrid, Typography } from '../../../components';
 
 import { FormCheckbox } from './FormCheckbox';
 import { FormCheckboxValue } from './types';
@@ -79,7 +79,12 @@ const Template: Story = () => {
         ]}
       >
         <FormStoryContainer form={form1}>
-          <Grid container justifyContent="center" autoFlow="column" spacing={4}>
+          <LegacyGrid
+            container
+            justifyContent="center"
+            autoFlow="column"
+            spacing={4}
+          >
             <FormCheckbox
               control={form1.control}
               name="check1"
@@ -92,11 +97,11 @@ const Template: Story = () => {
               name="check2"
               title="Текст"
             />
-          </Grid>
+          </LegacyGrid>
         </FormStoryContainer>
       </ExampleTemplate.Case>
 
-      <Grid>
+      <LegacyGrid>
         <Typography variant="h5" paragraph>
           Пример использования
         </Typography>
@@ -125,7 +130,7 @@ const Template: Story = () => {
           />
           <FormSubmitButton>Submit</FormSubmitButton>
         </FormStoryContainer>
-      </Grid>
+      </LegacyGrid>
     </ExampleTemplate>
   );
 };

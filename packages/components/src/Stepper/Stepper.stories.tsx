@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 
-import { Grid, Step, StepLabel, Stepper, Typography } from '..';
+import { LegacyGrid, Step, StepLabel, Stepper, Typography } from '..';
 
 export default {
   title: 'Components/Stepper',
@@ -9,8 +9,8 @@ export default {
 
 const Template: Story = () => {
   return (
-    <Grid container rowSpacing={10}>
-      <Grid>
+    <LegacyGrid container rowSpacing={10}>
+      <LegacyGrid>
         <Typography paragraph variant="h4">
           Stepper default
         </Typography>
@@ -28,8 +28,8 @@ const Template: Story = () => {
             <StepLabel>Default</StepLabel>
           </Step>
         </Stepper>
-      </Grid>
-      <Grid>
+      </LegacyGrid>
+      <LegacyGrid>
         <Typography paragraph variant="h4">
           Stepper with connector arrow
         </Typography>
@@ -47,8 +47,8 @@ const Template: Story = () => {
             <StepLabel>Default</StepLabel>
           </Step>
         </Stepper>
-      </Grid>
-      <Grid>
+      </LegacyGrid>
+      <LegacyGrid>
         <Typography paragraph variant="h4">
           Stepper with alternativeLabel
         </Typography>
@@ -66,8 +66,8 @@ const Template: Story = () => {
             <StepLabel>Default</StepLabel>
           </Step>
         </Stepper>
-      </Grid>
-    </Grid>
+      </LegacyGrid>
+    </LegacyGrid>
   );
 };
 

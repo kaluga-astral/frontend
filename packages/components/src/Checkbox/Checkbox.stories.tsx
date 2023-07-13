@@ -3,7 +3,7 @@ import { Box, Paper, useMediaQuery, useTheme } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
@@ -77,11 +77,16 @@ export const CheckboxShowcase: Story = () => {
         title="Checkbox_Basic"
         descriptionList={['Базовый вид компонента.']}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <Checkbox />
           <Checkbox disabled />
           <Checkbox disabled checked />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -90,14 +95,19 @@ export const CheckboxShowcase: Story = () => {
           'Обычно чекбокс используется с текстом, к которому он относится.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <FormControlLabel control={<Checkbox />} label="Текст" />
           <FormControlLabel control={<Checkbox disabled />} label="Текст" />
           <FormControlLabel
             control={<Checkbox disabled checked />}
             label="Текст"
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -108,7 +118,7 @@ export const CheckboxShowcase: Story = () => {
           'Он представляет собой выбранный чекбокс со знаком “-”.',
         ]}
       >
-        <Grid container justifyContent="center">
+        <LegacyGrid container justifyContent="center">
           <div>
             <FormControlLabel
               label="Заголовок"
@@ -135,7 +145,7 @@ export const CheckboxShowcase: Story = () => {
               />
             </Box>
           </div>
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -144,7 +154,12 @@ export const CheckboxShowcase: Story = () => {
           'Вид компонента для визуального отображения состояния ошибки',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={4}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={4}
+        >
           <FormControlLabel
             control={<Checkbox isError={true} />}
             label="Текст"
@@ -153,7 +168,7 @@ export const CheckboxShowcase: Story = () => {
             control={<Checkbox checked isError={true} />}
             label="Текст"
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <Typography variant="h5" paragraph>
@@ -163,10 +178,10 @@ export const CheckboxShowcase: Story = () => {
         <DialogTitle>Форма обратной связи</DialogTitle>
         <DialogContent>
           <Box>
-            <Grid container templateColumns="repeat(2, 1fr)" spacing={2}>
+            <LegacyGrid container templateColumns="repeat(2, 1fr)" spacing={2}>
               <TextField placeholder={'Поле 1'} />
               <TextField placeholder={'Поле 2'} />
-            </Grid>
+            </LegacyGrid>
             <FormControlLabel
               control={<Checkbox />}
               label="Дополнительный параметр "

@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react';
 
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 
 import { Description } from './Description';
 
@@ -10,7 +10,7 @@ export default {
 };
 
 const Template: Story = () => (
-  <Grid container spacing={4}>
+  <LegacyGrid container spacing={4}>
     <Description>
       <Description.Name>Фамилия</Description.Name>
       <Description.Value>Иванов</Description.Value>
@@ -30,6 +30,14 @@ const Template: Story = () => (
     <Description>
       <Description.Name>Отчество</Description.Name>
       <Description.Value>Степанович</Description.Value>
+    </Description>
+    <Description separator=";">
+      <Description.Name>Custom</Description.Name>
+      <Description.Value>separator</Description.Value>
+    </Description>
+    <Description>
+      <Description.Name>EmptySymbol</Description.Name>
+      <Description.Value></Description.Value>
     </Description>
     <Description>
       <Description.Name>Error</Description.Name>
@@ -55,7 +63,7 @@ const Template: Story = () => (
       <Description.Name>Info WithOut leader</Description.Name>
       <Description.Value color="info">info</Description.Value>
     </Description>
-  </Grid>
+  </LegacyGrid>
 );
 
 export const Default = Template.bind({});
