@@ -1,13 +1,13 @@
 import { Story } from '@storybook/react';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
 
 import { Link } from '@mui/material';
 import { Breadcrumbs } from './';
 import { PageHeader } from '../PageHeader';
 import { AddOutlineMd } from '@astral/icons';
+import { BreadcrumbsWrapper } from './styles';
 
 const handleClick = (
   event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -78,11 +78,11 @@ export const BreadcrumbsShowcase: Story = () => {
           'Стандартный вид компонента представляет собой перечисление элементов навигационной цепочки через “/”.   ',
         ]}
       >
-        <Grid container justifyContent="center">
+        <BreadcrumbsWrapper>
           <Breadcrumbs aria-label="breadcrumb">
             {createBreadcrumbsCase(['Раздел 1', 'Раздел 2', 'Раздел 3'])}
           </Breadcrumbs>
-        </Grid>
+        </BreadcrumbsWrapper>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -91,7 +91,7 @@ export const BreadcrumbsShowcase: Story = () => {
           'Сокращенный вид компонента представляет собой скрытие 2х и более элементов навигации под “...”, которые занимают в цепочке не первое и не последнее место. При клике на данный элемент должен появляться компонент “Menu” со списком скрытых страниц на которые пользователь может переместиться по клику.Такой компонет может быть использован при нехватке пространства для отображения всех элементов навигации, при масштабировании страницы и в других случаях предусмотренных дизайнером.',
         ]}
       >
-        <Grid container justifyContent="center">
+        <BreadcrumbsWrapper>
           <Breadcrumbs maxItems={2} aria-label="breadcrumb">
             {createBreadcrumbsCase([
               'Раздел 1',
@@ -100,7 +100,7 @@ export const BreadcrumbsShowcase: Story = () => {
               'Раздел 4',
             ])}
           </Breadcrumbs>
-        </Grid>
+        </BreadcrumbsWrapper>
       </ExampleTemplate.Case>
       <br />
 
