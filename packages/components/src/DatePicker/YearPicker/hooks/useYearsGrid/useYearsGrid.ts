@@ -8,7 +8,10 @@ import {
   buildIsoDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
-import { buildGridResult } from '../../../utils/buildGridItem';
+import {
+  buildGridResult,
+  isDateBetweenSelectedAndRangeDates,
+} from '../../../utils';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
 
 export type YearItem = {
@@ -25,6 +28,7 @@ const YEAR_OFFSET = 4;
 export const useYearsGrid: GridBuilder<YearItem> = ({
   baseDate,
   selectedDate,
+  rangeDate,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
@@ -43,11 +47,17 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
         date,
         year,
         selected: selectedYear === year,
-        isCurrent: year === currentYear,
+        isCurrentInUserLocalTime: year === currentYear,
+        isInSelectedRange: isDateBetweenSelectedAndRangeDates({
+          date,
+          selectedDate,
+          rangeDate,
+          deep: DateCompareDeep.year,
+        }),
         disabled: isDateOutOfRange({
           date,
-          minDate,
-          maxDate,
+          dateA: minDate,
+          dateB: maxDate,
           deep: DateCompareDeep.year,
         }),
       });
@@ -55,10 +65,10 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
 
     return buildGridResult({
       grid,
-      minDate,
-      maxDate,
+      dateA: minDate,
+      dateB: maxDate,
       addCb: addYears,
       deep: DateCompareDeep.year,
     });
-  }, [baseDate, selectedDate]);
+  }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };

@@ -208,6 +208,8 @@ export { default as SuccessFillSm } from './SuccessFillSm';
 
 export { default as SupportFillMd } from './SupportFillMd';
 
+export { default as TelegramFillMd } from './TelegramFillMd';
+
 export { default as TreeOutlineMd } from './TreeOutlineMd';
 
 export { default as UploadOutlineMd } from './UploadOutlineMd';
