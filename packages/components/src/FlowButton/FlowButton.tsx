@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { ArrowROutlineLg } from '@astral/icons';
 
 import { Typography } from '../Typography';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { ButtonProps } from '../Button';
 
 import { FlowButtonWrapper, TargetTextWrapper } from './styles';
@@ -27,10 +27,10 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
         endIcon={<ArrowROutlineLg width={32} height={32} />}
         {...restProps}
       >
-        <Grid container justifyItems="start">
+        <LegacyGrid container justifyItems="start">
           <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
           <Typography variant="h6">{children}</Typography>
-        </Grid>
+        </LegacyGrid>
       </FlowButtonWrapper>
     );
   },

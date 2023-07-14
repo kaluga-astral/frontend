@@ -1,17 +1,17 @@
 import { Story } from '@storybook/react';
-
-import { Typography } from '../Typography';
-import { Grid } from '../Grid';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-
-import { Tag } from './Tag';
-import { TagBadge } from '../TagBadge';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { DataGrid, DataGridColumns, DataGridSort } from '../DataGrid';
 import { useState } from 'react';
+
+import { DataGrid, DataGridColumns, DataGridSort } from '../DataGrid';
+import { TagBadge } from '../TagBadge';
+import { ExampleTemplate } from '../docs/ExampleTemplate';
+import { LegacyGrid } from '../LegacyGrid';
+import { Typography } from '../Typography';
 import { ActionCell, Actions } from '../ActionCell';
+
+import { Tag } from './Tag';
 import { TagColors } from './enums';
 
 type DataType = {
@@ -299,19 +299,29 @@ export const TagShowcase: Story = () => {
           'Статичный компонент без возможности взаимодействия.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={8}
+        >
           <Tag label="Text" variant="text" />
           <Tag label="Light gray" variant="light" color="grey" />
           <Tag label="Light primary" variant="light" color="primary" />
           <Tag label="Contained primary" variant="contained" color="primary" />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
         title=""
         descriptionList={['Дополнительные элементы.']}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={8}
+        >
           <Tag avatar={svgAvatar} label="Default" color="grey" />
           <Tag avatar={<ManOutlineSm />} label="Default" color="grey" />
           <Tag
@@ -319,7 +329,7 @@ export const TagShowcase: Story = () => {
             variant="text"
             endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <br />
 
@@ -329,7 +339,12 @@ export const TagShowcase: Story = () => {
           'Тэг позволяющий фильтровать контент страницы при нажатии. Тэг можно удалить при необходимости.',
         ]}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={8}
+        >
           <Tag
             label="Default"
             variant="light"
@@ -345,14 +360,19 @@ export const TagShowcase: Story = () => {
               console.log('не нажмётся в дизейбле');
             }}
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
         title=""
         descriptionList={['Дополнительные элементы']}
       >
-        <Grid container justifyContent="center" autoFlow={autoFlow} spacing={8}>
+        <LegacyGrid
+          container
+          justifyContent="center"
+          autoFlow={autoFlow}
+          spacing={8}
+        >
           <Tag
             avatar={svgAvatar}
             color="grey"
@@ -377,7 +397,7 @@ export const TagShowcase: Story = () => {
               console.log('deleted');
             }}
           />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <br />
 
@@ -385,7 +405,7 @@ export const TagShowcase: Story = () => {
         title="Размер тэга"
         descriptionList={['3 стандартных размера тэга: small, medium, large.']}
       >
-        <Grid
+        <LegacyGrid
           container
           justifyContent="center"
           alignItems="center"
@@ -395,7 +415,7 @@ export const TagShowcase: Story = () => {
           <Tag label="Small" variant="light" color="grey" size="small" />
           <Tag label="Medium" variant="light" color="grey" size="medium" />
           <Tag label="Large" variant="light" color="grey" size="large" />
-        </Grid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <br />
 
@@ -405,8 +425,8 @@ export const TagShowcase: Story = () => {
           'К любому тэгу может быть добавлен эмоциональный оттенок.',
         ]}
       >
-        <Grid container justifyContent="center" spacing={5}>
-          <Grid
+        <LegacyGrid container justifyContent="center" spacing={5}>
+          <LegacyGrid
             container
             autoFlow={autoFlow}
             spacing={8}
@@ -415,8 +435,8 @@ export const TagShowcase: Story = () => {
             <Tag label="Error" variant="contained" color="error" />
             <Tag label="Success" variant="contained" color="success" />
             <Tag label="Warning" variant="contained" color="warning" />
-          </Grid>
-          <Grid
+          </LegacyGrid>
+          <LegacyGrid
             container
             autoFlow={autoFlow}
             spacing={8}
@@ -425,8 +445,8 @@ export const TagShowcase: Story = () => {
             <Tag label="Error" variant="light" color="error" />
             <Tag label="Success" variant="light" color="success" />
             <Tag label="Warning" variant="light" color="warning" />
-          </Grid>
-        </Grid>
+          </LegacyGrid>
+        </LegacyGrid>
       </ExampleTemplate.Case>
       <br />
       <br />

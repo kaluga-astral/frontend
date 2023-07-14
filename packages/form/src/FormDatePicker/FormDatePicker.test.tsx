@@ -1,10 +1,18 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { vi } from 'vitest';
+import { date, object } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
 import { FormDatePicker, FormDatePickerValue } from './FormDatePicker';
+
+type FormValues = { date: Date };
+
+const validationSchema = object<FormValues>({
+  date: date(),
+});
 
 describe('FormDatePicker', () => {
   beforeEach(() => {
@@ -18,7 +26,9 @@ describe('FormDatePicker', () => {
 
   it('Отображается ошибка валидации', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm<FormValues>({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form
@@ -26,7 +36,7 @@ describe('FormDatePicker', () => {
           form={form}
           onSubmit={form.handleSubmit(() => undefined)}
         >
-          <FormDatePicker name="date" rules={{ required: 'required' }} />
+          <FormDatePicker name="date" />
           <button type="submit">submit</button>
         </Form>
       );
@@ -35,7 +45,7 @@ describe('FormDatePicker', () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByText('submit'));
 
-    const errorText = await screen.findByText('required');
+    const errorText = await screen.findByText('Обязательно');
 
     expect(errorText).toBeVisible();
   });
@@ -66,14 +76,15 @@ describe('FormDatePicker', () => {
 
   it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm<FormValues>({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
           <FormDatePicker
             name="date"
             inputProps={{ label: 'date', required: true }}
-            rules={{ required: 'required' }}
           />
           <button type="submit">submit</button>
         </Form>

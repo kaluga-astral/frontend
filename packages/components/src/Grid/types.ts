@@ -1,32 +1,45 @@
-import { CSSProperties, ElementType } from 'react';
-import { Breakpoint } from '@mui/material/styles';
+import { ElementType, ReactNode } from 'react';
 
-type StyleCSSType<Type extends keyof CSSProperties> =
-  | CSSProperties[Type]
-  | Partial<Record<Breakpoint, CSSProperties[Type]>>;
-
-export type GridContainerProps = {
+export type GridPropsBase = {
+  /**
+   * @description Задаёт display: grid; Если задан columns, spacing и тп, то включается автоматически
+   * @default false
+   */
   container?: boolean;
-  templateColumns?: StyleCSSType<'gridTemplateColumns'>;
-  templateRows?: StyleCSSType<'gridTemplateRows'>;
-  templateAreas?: StyleCSSType<'gridTemplateAreas'>;
-  columnSpacing?: StyleCSSType<'gridColumnGap'>;
-  rowSpacing?: StyleCSSType<'gridRowGap'>;
-  spacing?: StyleCSSType<'gridGap'>;
-  justifyItems?: StyleCSSType<'justifyItems'>;
-  alignItems?: StyleCSSType<'alignItems'>;
-  justifyContent?: StyleCSSType<'justifyContent'>;
-  alignContent?: StyleCSSType<'alignContent'>;
-  autoColumns?: StyleCSSType<'gridAutoColumns'>;
-  autoRows?: StyleCSSType<'gridAutoRows'>;
-  autoFlow?: StyleCSSType<'gridAutoFlow'>;
+  /**
+   * @description Количество равных колонок
+   * @default undefined
+   */
+  columns?: number;
+  /**
+   * @description Количество равных рядов
+   * @default undefined
+   */
+  rows?: number;
+  /**
+   * @description Отступы между колонками
+   * @default undefined
+   */
+  columnSpacing?: number;
+  /**
+   * @description Отступы между рядами
+   * @default undefined
+   */
+  rowSpacing?: number;
+  /**
+   * @description Отступы между колонками и рядами. Если передан массив: Первый элемент - отступ между рядами, второй - между колонками
+   * @default undefined
+   */
+  spacing?: number | [number, number];
+  /**
+   * @description Соответствует grid-autoflow
+   * @default 	'row'
+   */
+  direction?: 'row' | 'column' | 'dense';
+  /**
+   * @description Тип элемента
+   * @default 	'div'
+   */
   component?: ElementType;
-};
-
-export type GridElementsProps = {
-  column?: StyleCSSType<'gridColumn'>;
-  row?: StyleCSSType<'gridRow'>;
-  area?: StyleCSSType<'gridArea'>;
-  justifySelf?: StyleCSSType<'justifySelf'>;
-  alignSelf?: StyleCSSType<'alignSelf'>;
+  children?: ReactNode;
 };

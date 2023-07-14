@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 
 import { Button, CircularProgress, Placeholder, Typography } from '..';
 import { PlaceholderProps } from '../Placeholder';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { ConfigContext } from '../ConfigProvider';
 
 import { LoadingContainer } from './styles';
 import { ContentStateErrorProps } from './types';
@@ -47,6 +48,8 @@ export const ContentState = ({
   children,
   loadingContent: LoadingContent = <CircularProgress color="primary" />,
 }: ContentStateProps) => {
+  const { imagesMap } = useContext(ConfigContext);
+
   if (isLoading) {
     return <LoadingContainer>{LoadingContent}</LoadingContainer>;
   }
@@ -59,7 +62,7 @@ export const ContentState = ({
     const {
       title = 'Произошла ошибка',
       imgAlt,
-      imgSrc,
+      imgSrc = imagesMap.defaultErrorImgSrc,
       errorList,
       onRetry,
       actions = <Button onClick={onRetry}>Попробовать снова</Button>,

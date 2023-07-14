@@ -1,7 +1,14 @@
 import { Story } from '@storybook/react';
 import { MouseEventHandler, PropsWithChildren, useState } from 'react';
 
-import { Button, ContentState, Grid, TextField, Typography, styled } from '..';
+import {
+  Button,
+  ContentState,
+  LegacyGrid,
+  TextField,
+  Typography,
+  styled,
+} from '..';
 import { PlaceholderProps } from '../Placeholder';
 
 const noCertImgBase64 =
@@ -12,7 +19,7 @@ export default {
   component: ContentState,
 };
 
-const BaseContentContainer = styled(Grid)`
+const BaseContentContainer = styled(LegacyGrid)`
   width: 384px;
   height: 384px;
   padding: 8px;
@@ -94,7 +101,7 @@ const Case = ({
 
 const Template: Story = () => {
   return (
-    <Grid
+    <LegacyGrid
       templateColumns="repeat(2, 400px)"
       templateRows="repeat(2, 400px)"
       container
@@ -112,7 +119,7 @@ const Template: Story = () => {
         title="Вариант с Custom Loading"
         loadingContent="Пожалуйста подождите..."
       />
-    </Grid>
+    </LegacyGrid>
   );
 };
 

@@ -86,6 +86,8 @@ export * from './IconButton';
 
 export * from './IconDropdownButton';
 
+export * from './LegacyGrid';
+
 export * from './List';
 
 export * from './ListItem';

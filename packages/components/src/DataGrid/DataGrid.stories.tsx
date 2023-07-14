@@ -7,7 +7,7 @@ import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 import { ExampleTemplate } from '../docs';
 import { Button } from '../Button';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
@@ -339,12 +339,12 @@ const Template: Story = (args) => {
           spacing={4}
           sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
         >
-          <Grid container templateColumns="auto auto" spacing={4}>
+          <LegacyGrid container templateColumns="auto auto" spacing={4}>
             <Button onClick={handleReset}>Сбросить</Button>
             <Button onClick={handleToggleDisabled}>
               {disabled ? 'Разблокировать' : 'Заблокировать'}
             </Button>
-          </Grid>
+          </LegacyGrid>
 
           <DataGrid<DataType, SortField>
             {...args}

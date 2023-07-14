@@ -1,6 +1,6 @@
 {
   "name": "@astral/components",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "browser": "./src/index.ts",
   "main": "./src/index.ts",
   "exports": {
@@ -51,7 +51,7 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5",
-    "@astral/tests": "*"
+    "@astral/tests": "*",
+    "@types/lodash-es": "^4.17.5"
   }
 }
