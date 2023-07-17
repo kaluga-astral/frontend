@@ -1,13 +1,13 @@
 import { Story } from '@storybook/react';
+import { Link } from '@mui/material';
+import { AddOutlineMd } from '@astral/icons';
+import { Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
-
-import { Link } from '@mui/material';
-import { Breadcrumbs } from './';
 import { PageHeader } from '../PageHeader';
-import { AddOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
+
+import { Breadcrumbs } from './';
 
 const handleClick = (
   event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -19,6 +19,7 @@ const handleClick = (
 const createBreadcrumbsCase = (args: string[]) => {
   const lastChild: string = args.pop() || '';
   const result = [];
+
   args.forEach((element) => {
     result.push(
       <Link
@@ -32,11 +33,13 @@ const createBreadcrumbsCase = (args: string[]) => {
       </Link>,
     );
   });
+
   result.push(
     <Typography key="4" color="primary">
       {lastChild}
     </Typography>,
   );
+
   return result;
 };
 
