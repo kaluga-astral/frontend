@@ -8,8 +8,14 @@ import { ExampleTemplate } from '../docs/ExampleTemplate';
 
 import { IconDropdownButton } from './IconDropdownButton';
 import { DataGrid, DataGridColumns } from '../DataGrid';
-import { PaperWrapper } from './styles';
 import { IconButton } from '../IconButton';
+import { styled } from '../styles';
+import { Paper } from '../Paper';
+
+const PaperWrapper = styled(Paper)`
+  width: 70%;
+  padding: ${({ theme }) => theme.spacing(6)};
+`;
 
 export default {
   title: 'Components/IconDropdownButton',
