@@ -86,7 +86,11 @@ const columns: DataGridColumns<DataType>[] = [
         <IconButton variant="light" onClick={handleClick}>
           <EditOutlineMd />
         </IconButton>
-        <IconDropdownButton variant="light" icon={<DotsVOutlineMd />}>
+        <IconDropdownButton
+          variant="light"
+          icon={<DotsVOutlineMd />}
+          aria-label="Меню"
+        >
           {children}
         </IconDropdownButton>
       </Stack>
@@ -120,17 +124,27 @@ export const IconDropdownButtonShowcase: Story = () => {
         ]}
       >
         <Stack gap={8} direction="row" justifyContent="center">
-          <IconDropdownButton variant="light" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            variant="light"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
           <IconDropdownButton
             disabled
             variant="light"
             icon={<DotsVOutlineMd />}
+            aria-label="Меню"
           >
             {children}
           </IconDropdownButton>
-          <IconDropdownButton loading variant="light" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            loading
+            variant="light"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
         </Stack>
@@ -141,13 +155,27 @@ export const IconDropdownButtonShowcase: Story = () => {
         descriptionList={['Кнопка требующая наименьшего внимания.']}
       >
         <Stack gap={8} direction="row" justifyContent="center">
-          <IconDropdownButton variant="text" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            variant="text"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
-          <IconDropdownButton disabled variant="text" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            disabled
+            variant="text"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
-          <IconDropdownButton loading variant="text" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            loading
+            variant="text"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
         </Stack>
@@ -165,13 +193,18 @@ export const IconDropdownButtonShowcase: Story = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <IconDropdownButton variant="light" icon={<DotsVOutlineMd />}>
+          <IconDropdownButton
+            variant="light"
+            icon={<DotsVOutlineMd />}
+            aria-label="Меню"
+          >
             {children}
           </IconDropdownButton>
           <IconDropdownButton
             size="large"
             variant="light"
             icon={<DotsVOutlineMd />}
+            aria-label="Меню"
           >
             {children}
           </IconDropdownButton>
@@ -191,7 +224,7 @@ export const IconDropdownButtonShowcase: Story = () => {
 };
 
 const Template: Story = (args) => (
-  <IconDropdownButton icon={<DotsVOutlineMd />} {...args} />
+  <IconDropdownButton icon={<DotsVOutlineMd />} {...args} aria-label="Меню" />
 );
 
 IconDropdownButtonShowcase.parameters = { options: { showPanel: false } };
