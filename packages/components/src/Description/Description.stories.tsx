@@ -56,17 +56,15 @@ export const DescriptionShowcase: Story = () => {
           'Структура данного компонента: “Наименование поля: Текст поля”.',
         ]}
       >
-        <GridWrapper container>
-          <Grid rowSpacing={3}>
-            <Description>
-              <Description.Name>Название поля</Description.Name>
-              <Description.Value>Значение поля</Description.Value>
-            </Description>
-            <Description>
-              <Description.Name>Длинное название поля</Description.Name>
-              <Description.Value>Длинное значение поля</Description.Value>
-            </Description>
-          </Grid>
+        <GridWrapper rowSpacing={3} container>
+          <Description>
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
         </GridWrapper>
       </ExampleTemplate.Case>
 
@@ -77,17 +75,15 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, а “Текст поля” - к правому краю с соответствующим выравниванием текста.',
         ]}
       >
-        <GridWrapper container>
-          <Grid rowSpacing={3}>
-            <Description justifyContent="space-between">
-              <Description.Name>Название поля</Description.Name>
-              <Description.Value>Значение поля</Description.Value>
-            </Description>
-            <Description justifyContent="space-between">
-              <Description.Name>Длинное название поля</Description.Name>
-              <Description.Value>Длинное значение поля</Description.Value>
-            </Description>
-          </Grid>
+        <GridWrapper rowSpacing={3} container>
+          <Description justifyContent="space-between">
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description justifyContent="space-between">
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
         </GridWrapper>
       </ExampleTemplate.Case>
 
@@ -98,17 +94,15 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, “Текст поля” - к правому краю с соответствующим выравниванием текста, а между ними отображается пунктирная линия, длина которой задается автоматически в соответствии с длиной Наименования и Текста поля. Она имеет привязку к верхнему краю поля.',
         ]}
       >
-        <GridWrapper container>
-          <Grid rowSpacing={3}>
-            <Description leader>
-              <Description.Name>Название поля</Description.Name>
-              <Description.Value>Значение поля</Description.Value>
-            </Description>
-            <Description leader>
-              <Description.Name>Длинное название поля</Description.Name>
-              <Description.Value>Длинное значение поля</Description.Value>
-            </Description>
-          </Grid>
+        <GridWrapper rowSpacing={3} container>
+          <Description leader>
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description leader>
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
         </GridWrapper>
       </ExampleTemplate.Case>
       <br />
@@ -120,39 +114,37 @@ export const DescriptionShowcase: Story = () => {
           'Вариант цвета текста может быть выбран в зависимости от контекста использования.',
         ]}
       >
-        <GridWrapper container>
-          <Grid rowSpacing={3}>
-            <Description>
-              <Description.Name>Название показателя</Description.Name>
-              <Description.Value color="grey">
-                Значение показателя
-              </Description.Value>
-            </Description>
-            <Description>
-              <Description.Name>Название показателя</Description.Name>
-              <Description.Value color="warning">
-                Значение показателя
-              </Description.Value>
-            </Description>
-            <Description>
-              <Description.Name>Название показателя</Description.Name>
-              <Description.Value color="error">
-                Значение показателя
-              </Description.Value>
-            </Description>
-            <Description>
-              <Description.Name>Название показателя</Description.Name>
-              <Description.Value color="success">
-                Значение показателя
-              </Description.Value>
-            </Description>
-            <Description>
-              <Description.Name>Название показателя</Description.Name>
-              <Description.Value color="primary">
-                Значение показателя
-              </Description.Value>
-            </Description>
-          </Grid>
+        <GridWrapper rowSpacing={3} container>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="grey">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="warning">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="error">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="success">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="primary">
+              Значение показателя
+            </Description.Value>
+          </Description>
         </GridWrapper>
       </ExampleTemplate.Case>
       <br />
