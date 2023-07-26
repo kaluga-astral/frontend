@@ -1,75 +1,234 @@
 import { Story } from '@storybook/react';
+import { ExampleTemplate } from '../docs';
 
-import { LegacyGrid } from '../LegacyGrid';
+import { Typography } from '../Typography';
 
 import { Description } from './Description';
+import { styled } from '../styles';
+import { Paper } from '../Paper';
+import { Grid } from '../Grid';
+
+const GridWrapper = styled(Grid)`
+  justify-content: center;
+`;
+
+const PaperWrapper = styled(Paper)`
+  width: 468px;
+  padding: ${({ theme }) => theme.spacing(6)};
+`;
 
 export default {
   title: 'Components/Description',
   component: Description,
 };
 
-const Template: Story = () => (
-  <LegacyGrid container spacing={4}>
-    <Description>
-      <Description.Name>Фамилия</Description.Name>
-      <Description.Value>Иванов</Description.Value>
+export const DescriptionShowcase: Story = () => {
+  return (
+    <ExampleTemplate>
+      <Typography variant="h3" paragraph>
+        Description
+      </Typography>
+      <br />
+      <br />
+
+      <Typography variant="ui" paragraph>
+        Description — это компонент для отображения какой-то информации на
+        странице с определенной структурой - ”Наименование поля: Tекст поля”.
+      </Typography>
+      <Typography variant="ui">
+        Виджет полезен в использовании для следующих сценариев:
+      </Typography>
+      <Typography variant="ui" paragraph>
+        Отображение сводных данных организации Pаявления на ЭП Сертификата ЭП и
+        тд.
+      </Typography>
+      <br />
+      <br />
+
+      <Typography variant="h5" paragraph>
+        Типы компонента
+      </Typography>
+
+      <ExampleTemplate.Case
+        title="Description_start"
+        descriptionList={[
+          'Отображение информации слева направо.',
+          'Структура данного компонента: “Наименование поля: Текст поля”.',
+        ]}
+      >
+        <GridWrapper rowSpacing={3} container>
+          <Description>
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
+        </GridWrapper>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title="Description_space between"
+        descriptionList={[
+          'Отображение информации слева направо с прязкой к границам области отображения данных.',
+          'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, а “Текст поля” - к правому краю с соответствующим выравниванием текста.',
+        ]}
+      >
+        <GridWrapper rowSpacing={3} container>
+          <Description justifyContent="space-between">
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description justifyContent="space-between">
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
+        </GridWrapper>
+      </ExampleTemplate.Case>
+
+      <ExampleTemplate.Case
+        title="Description_space between with leader"
+        descriptionList={[
+          'Отображение информации слева направо с прязкой к границам области отображения данных.',
+          'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, “Текст поля” - к правому краю с соответствующим выравниванием текста, а между ними отображается пунктирная линия, длина которой задается автоматически в соответствии с длиной Наименования и Текста поля. Она имеет привязку к верхнему краю поля.',
+        ]}
+      >
+        <GridWrapper rowSpacing={3} container>
+          <Description leader>
+            <Description.Name>Название поля</Description.Name>
+            <Description.Value>Значение поля</Description.Value>
+          </Description>
+          <Description leader>
+            <Description.Name>Длинное название поля</Description.Name>
+            <Description.Value>Длинное значение поля</Description.Value>
+          </Description>
+        </GridWrapper>
+      </ExampleTemplate.Case>
+      <br />
+
+      <ExampleTemplate.Case
+        title="Цвета"
+        descriptionList={[
+          'Каждый вариант компонента имеет несколько вариантов цвета “Текста поля”: Default, Warning, Error, Success, Info.',
+          'Вариант цвета текста может быть выбран в зависимости от контекста использования.',
+        ]}
+      >
+        <GridWrapper rowSpacing={3} container>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="grey">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="warning">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="error">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="success">
+              Значение показателя
+            </Description.Value>
+          </Description>
+          <Description>
+            <Description.Name>Название показателя</Description.Name>
+            <Description.Value color="primary">
+              Значение показателя
+            </Description.Value>
+          </Description>
+        </GridWrapper>
+      </ExampleTemplate.Case>
+      <br />
+
+      <Typography variant="h5" paragraph>
+        Пример использования
+      </Typography>
+      <PaperWrapper>
+        <Typography variant="h4" paragraph>
+          Данные Организации
+        </Typography>
+
+        <Grid rowSpacing={3}>
+          <Description leader>
+            <Description.Name>Название организации</Description.Name>
+            <Description.Value>ООО “Рога и Копыта”</Description.Value>
+          </Description>
+          <Description leader>
+            <Description.Name>ИНН</Description.Name>
+            <Description.Value>123456789012</Description.Value>
+          </Description>
+          <Description leader>
+            <Description.Name>КПП</Description.Name>
+            <Description.Value>КПП 1234567890123</Description.Value>
+          </Description>
+          <Description leader>
+            <Description.Name>ОГРН</Description.Name>
+            <Description.Value>1234567890123456</Description.Value>
+          </Description>
+        </Grid>
+      </PaperWrapper>
+    </ExampleTemplate>
+  );
+};
+
+const Template: Story = (args) => (
+  <PaperWrapper>
+    <Description {...args}>
+      <Description.Name color={args.colorName}>Фамилия</Description.Name>
+      <Description.Value color={args.colorValue}>Иванов</Description.Value>
     </Description>
-    <Description>
-      <Description.Name>Дата рождения</Description.Name>
-      <Description.Value>12.06.2022</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Имя</Description.Name>
-      <Description.Value>Петр</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Паспорт</Description.Name>
-      <Description.Value>4141 343411</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Отчество</Description.Name>
-      <Description.Value>Степанович</Description.Value>
-    </Description>
-    <Description separator=";">
-      <Description.Name>Custom</Description.Name>
-      <Description.Value>separator</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>EmptySymbol</Description.Name>
-      <Description.Value></Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Error</Description.Name>
-      <Description.Value color="error">error</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Warning</Description.Name>
-      <Description.Value color="warning">warning</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Success</Description.Name>
-      <Description.Value color="success">success</Description.Value>
-    </Description>
-    <Description>
-      <Description.Name>Info</Description.Name>
-      <Description.Value color="info">info</Description.Value>
-    </Description>
-    <Description leader>
-      <Description.Name>Info With leader</Description.Name>
-      <Description.Value color="info">info</Description.Value>
-    </Description>
-    <Description justifyContent="space-between">
-      <Description.Name>Info WithOut leader</Description.Name>
-      <Description.Value color="info">info</Description.Value>
-    </Description>
-  </LegacyGrid>
+  </PaperWrapper>
 );
 
-export const Default = Template.bind({});
+DescriptionShowcase.parameters = { options: { showPanel: false } };
 
-Default.args = {};
+export const DescriptionStory = Template.bind({});
 
-Default.parameters = {
+DescriptionStory.storyName = 'Description';
+
+DescriptionStory.args = {
+  leader: true,
+};
+
+const optionsForColor = [
+  'text',
+  'red',
+  'secondary',
+  'primary',
+  'error',
+  'success',
+  'warning',
+  'info',
+  'textSecondary',
+  'grey',
+  'green',
+  'yellow',
+  undefined,
+];
+
+DescriptionStory.argTypes = {
+  colorName: {
+    control: 'select',
+    options: optionsForColor,
+    description: 'пропс из дочернего компонента Name',
+  },
+  colorValue: {
+    control: 'select',
+    options: optionsForColor,
+    description: 'пропс из дочернего компонента Value',
+  },
+};
+
+DescriptionStory.parameters = {
+  options: { showPanel: true },
   controls: { expanded: true },
 };
