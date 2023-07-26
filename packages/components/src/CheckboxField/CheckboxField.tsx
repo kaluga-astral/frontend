@@ -45,7 +45,7 @@ export const CheckboxField = ({
     <FormControl>
       <Tooltip
         title={showTooltip && helperText}
-        placement={'bottom-start'}
+        placement="bottom-start"
         withoutContainer={false}
       >
         <FormControlLabel
