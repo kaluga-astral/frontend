@@ -13,20 +13,18 @@ export const SidebarTogglerButtonRoot = styled(Button)`
   }
 `;
 
-export const SidebarTogglerIconsWrapper = styled('div', {
-  shouldForwardProp: (props) => props !== 'isSOpen',
-})<{ isOpen: boolean }>`
-  /* Селектор иконки "раскрытия" */
-  & > .MuiSvgIcon-root {
-    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  }
-
-  /* Селектор иконки "скрытия" (обернут тултипом) */
-  & > div[aria-label] {
-    display: ${({ isOpen }) => (isOpen ? 'none' : 'block')};
-  }
-`;
-
 export const SidebarTogglerIconWrapper = styled.div`
   height: 24px;
+`;
+
+export const SidebarTogglerOffIconWrapper = styled('div', {
+  shouldForwardProp: (props) => props !== 'isOpen',
+})<{ isOpen: boolean }>`
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+`;
+
+export const SidebarTogglerOnIconWrapper = styled('div', {
+  shouldForwardProp: (props) => props !== 'isOpen',
+})<{ isOpen: boolean }>`
+  display: ${({ isOpen }) => (!isOpen ? 'block' : 'none')};
 `;

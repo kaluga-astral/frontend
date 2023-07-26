@@ -7,7 +7,8 @@ import { ButtonProps } from '../../../../Button';
 import {
   SidebarTogglerButtonRoot,
   SidebarTogglerIconWrapper,
-  SidebarTogglerIconsWrapper,
+  SidebarTogglerOffIconWrapper,
+  SidebarTogglerOnIconWrapper,
 } from './styles';
 
 export type SidebarTogglerButtonProps = ButtonProps & {
@@ -24,14 +25,20 @@ export const SidebarTogglerButton = forwardRef<
     <SidebarTogglerButtonRoot
       ref={ref}
       startIcon={
-        <SidebarTogglerIconsWrapper isOpen={collapsedIn}>
-          <MenuOffOutlineMd />
-          <Tooltip title="Раскрыть меню" arrow placement="right">
+        <>
+          <SidebarTogglerOffIconWrapper isOpen={collapsedIn}>
             <SidebarTogglerIconWrapper>
-              <MenuOnOutlineMd />
+              <MenuOffOutlineMd />
             </SidebarTogglerIconWrapper>
-          </Tooltip>
-        </SidebarTogglerIconsWrapper>
+          </SidebarTogglerOffIconWrapper>
+          <SidebarTogglerOnIconWrapper isOpen={collapsedIn}>
+            <Tooltip title="Раскрыть меню" arrow placement="right">
+              <SidebarTogglerIconWrapper>
+                <MenuOnOutlineMd />
+              </SidebarTogglerIconWrapper>
+            </Tooltip>
+          </SidebarTogglerOnIconWrapper>
+        </>
       }
       variant="text"
       {...restProps}
