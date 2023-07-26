@@ -9,7 +9,6 @@ import { Paper } from '../Paper';
 import { Grid } from '../Grid';
 
 const GridWrapper = styled(Grid)`
-  display: flex;
   justify-content: center;
 `;
 
@@ -57,7 +56,7 @@ export const DescriptionShowcase: Story = () => {
           'Структура данного компонента: “Наименование поля: Текст поля”.',
         ]}
       >
-        <GridWrapper>
+        <GridWrapper container>
           <Grid rowSpacing={3}>
             <Description>
               <Description.Name>Название поля</Description.Name>
@@ -78,7 +77,7 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, а “Текст поля” - к правому краю с соответствующим выравниванием текста.',
         ]}
       >
-        <GridWrapper>
+        <GridWrapper container>
           <Grid rowSpacing={3}>
             <Description justifyContent="space-between">
               <Description.Name>Название поля</Description.Name>
@@ -99,7 +98,7 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, “Текст поля” - к правому краю с соответствующим выравниванием текста, а между ними отображается пунктирная линия, длина которой задается автоматически в соответствии с длиной Наименования и Текста поля. Она имеет привязку к верхнему краю поля.',
         ]}
       >
-        <GridWrapper>
+        <GridWrapper container>
           <Grid rowSpacing={3}>
             <Description leader>
               <Description.Name>Название поля</Description.Name>
@@ -121,7 +120,7 @@ export const DescriptionShowcase: Story = () => {
           'Вариант цвета текста может быть выбран в зависимости от контекста использования.',
         ]}
       >
-        <GridWrapper>
+        <GridWrapper container>
           <Grid rowSpacing={3}>
             <Description>
               <Description.Name>Название показателя</Description.Name>
