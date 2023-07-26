@@ -1,4 +1,3 @@
-import { Stack } from '@mui/material';
 import { Story } from '@storybook/react';
 import { ExampleTemplate } from '../docs';
 
@@ -7,9 +6,11 @@ import { Typography } from '../Typography';
 import { Description } from './Description';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
+import { Grid } from '../Grid';
 
-const StackCaseWrapper = styled(Stack)`
-  width: 360px;
+const GridWrapper = styled(Grid)`
+  display: flex;
+  justify-content: center;
 `;
 
 const PaperWrapper = styled(Paper)`
@@ -56,8 +57,8 @@ export const DescriptionShowcase: Story = () => {
           'Структура данного компонента: “Наименование поля: Текст поля”.',
         ]}
       >
-        <Stack justifyContent="center" alignItems="center">
-          <StackCaseWrapper gap={3}>
+        <GridWrapper>
+          <Grid rowSpacing={3}>
             <Description>
               <Description.Name>Название поля</Description.Name>
               <Description.Value>Значение поля</Description.Value>
@@ -66,8 +67,8 @@ export const DescriptionShowcase: Story = () => {
               <Description.Name>Длинное название поля</Description.Name>
               <Description.Value>Длинное значение поля</Description.Value>
             </Description>
-          </StackCaseWrapper>
-        </Stack>
+          </Grid>
+        </GridWrapper>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -77,8 +78,8 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, а “Текст поля” - к правому краю с соответствующим выравниванием текста.',
         ]}
       >
-        <Stack justifyContent="center" alignItems="center">
-          <StackCaseWrapper gap={3}>
+        <GridWrapper>
+          <Grid rowSpacing={3}>
             <Description justifyContent="space-between">
               <Description.Name>Название поля</Description.Name>
               <Description.Value>Значение поля</Description.Value>
@@ -87,8 +88,8 @@ export const DescriptionShowcase: Story = () => {
               <Description.Name>Длинное название поля</Description.Name>
               <Description.Value>Длинное значение поля</Description.Value>
             </Description>
-          </StackCaseWrapper>
-        </Stack>
+          </Grid>
+        </GridWrapper>
       </ExampleTemplate.Case>
 
       <ExampleTemplate.Case
@@ -98,8 +99,8 @@ export const DescriptionShowcase: Story = () => {
           'В данном компоненте “Наименование поля” имеет привязку к левому краю области отображения данных, “Текст поля” - к правому краю с соответствующим выравниванием текста, а между ними отображается пунктирная линия, длина которой задается автоматически в соответствии с длиной Наименования и Текста поля. Она имеет привязку к верхнему краю поля.',
         ]}
       >
-        <Stack justifyContent="center" alignItems="center">
-          <StackCaseWrapper gap={3}>
+        <GridWrapper>
+          <Grid rowSpacing={3}>
             <Description leader>
               <Description.Name>Название поля</Description.Name>
               <Description.Value>Значение поля</Description.Value>
@@ -108,8 +109,8 @@ export const DescriptionShowcase: Story = () => {
               <Description.Name>Длинное название поля</Description.Name>
               <Description.Value>Длинное значение поля</Description.Value>
             </Description>
-          </StackCaseWrapper>
-        </Stack>
+          </Grid>
+        </GridWrapper>
       </ExampleTemplate.Case>
       <br />
 
@@ -120,8 +121,8 @@ export const DescriptionShowcase: Story = () => {
           'Вариант цвета текста может быть выбран в зависимости от контекста использования.',
         ]}
       >
-        <Stack justifyContent="center" alignItems="center">
-          <StackCaseWrapper gap={3} alignItems="center">
+        <GridWrapper>
+          <Grid rowSpacing={3}>
             <Description>
               <Description.Name>Название показателя</Description.Name>
               <Description.Value color="grey">
@@ -152,8 +153,8 @@ export const DescriptionShowcase: Story = () => {
                 Значение показателя
               </Description.Value>
             </Description>
-          </StackCaseWrapper>
-        </Stack>
+          </Grid>
+        </GridWrapper>
       </ExampleTemplate.Case>
       <br />
 
@@ -165,7 +166,7 @@ export const DescriptionShowcase: Story = () => {
           Данные Организации
         </Typography>
 
-        <Stack gap={3}>
+        <Grid rowSpacing={3}>
           <Description leader>
             <Description.Name>Название организации</Description.Name>
             <Description.Value>ООО “Рога и Копыта”</Description.Value>
@@ -182,7 +183,7 @@ export const DescriptionShowcase: Story = () => {
             <Description.Name>ОГРН</Description.Name>
             <Description.Value>1234567890123456</Description.Value>
           </Description>
-        </Stack>
+        </Grid>
       </PaperWrapper>
     </ExampleTemplate>
   );
