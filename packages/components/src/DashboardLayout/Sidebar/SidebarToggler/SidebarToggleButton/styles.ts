@@ -16,15 +16,3 @@ export const SidebarTogglerButtonRoot = styled(Button)`
 export const SidebarTogglerIconWrapper = styled.div`
   height: 24px;
 `;
-
-export const SidebarTogglerOffIconWrapper = styled('div', {
-  shouldForwardProp: (props) => props !== 'isOpen',
-})<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-`;
-
-export const SidebarTogglerOnIconWrapper = styled('div', {
-  shouldForwardProp: (props) => props !== 'isOpen',
-})<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (!isOpen ? 'block' : 'none')};
-`;

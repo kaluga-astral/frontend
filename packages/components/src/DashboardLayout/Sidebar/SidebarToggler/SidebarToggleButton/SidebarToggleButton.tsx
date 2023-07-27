@@ -4,12 +4,7 @@ import { MenuOffOutlineMd, MenuOnOutlineMd } from '@astral/icons';
 import { Tooltip } from '../../../../Tooltip';
 import { ButtonProps } from '../../../../Button';
 
-import {
-  SidebarTogglerButtonRoot,
-  SidebarTogglerIconWrapper,
-  SidebarTogglerOffIconWrapper,
-  SidebarTogglerOnIconWrapper,
-} from './styles';
+import { SidebarTogglerButtonRoot, SidebarTogglerIconWrapper } from './styles';
 
 export type SidebarTogglerButtonProps = ButtonProps & {
   collapsedIn: boolean;
@@ -25,20 +20,15 @@ export const SidebarTogglerButton = forwardRef<
     <SidebarTogglerButtonRoot
       ref={ref}
       startIcon={
-        <>
-          <SidebarTogglerOffIconWrapper isOpen={collapsedIn}>
+        collapsedIn ? (
+          <MenuOffOutlineMd />
+        ) : (
+          <Tooltip title="Раскрыть меню" arrow placement="right">
             <SidebarTogglerIconWrapper>
-              <MenuOffOutlineMd />
+              <MenuOnOutlineMd />
             </SidebarTogglerIconWrapper>
-          </SidebarTogglerOffIconWrapper>
-          <SidebarTogglerOnIconWrapper isOpen={collapsedIn}>
-            <Tooltip title="Раскрыть меню" arrow placement="right">
-              <SidebarTogglerIconWrapper>
-                <MenuOnOutlineMd />
-              </SidebarTogglerIconWrapper>
-            </Tooltip>
-          </SidebarTogglerOnIconWrapper>
-        </>
+          </Tooltip>
+        )
       }
       variant="text"
       {...restProps}
