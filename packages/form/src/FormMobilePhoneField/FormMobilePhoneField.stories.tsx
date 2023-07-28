@@ -1,4 +1,6 @@
 import { Story } from '@storybook/react';
+import { mobilePhone, object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
@@ -12,10 +14,16 @@ export default {
   component: null,
 };
 
+const validationSchema = object<FormValues>({
+  phoneField: string(mobilePhone()),
+});
+
 type FormValues = { phoneField: FormMobilePhoneFieldValue };
 
 const Template: Story = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    resolver: resolver<FormValues>(validationSchema),
+  });
 
   return (
     <FormStoryContainer form={form}>
@@ -24,7 +32,6 @@ const Template: Story = () => {
         label="Phone mask field"
         control={form.control}
         name="phoneField"
-        rules={{ required: 'Обязательное поле' }}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>

@@ -1,30 +1,18 @@
 import { styled } from '../../../styles';
-import { DateCalendarBtn } from '../DateCalendarBtn';
+import { DateCalendarButton } from '../DateCalendarBtn';
 import { Theme } from '../../../theme';
 
-type DateCalendarDayBtnWrapperProps = {
-  /**
-   * @description флаг означающий, что дата находится вне доступного диапазона, например при выборе дня, месяц до и месяц после, должны находиться вне
-   */
-  isOutOfAvailableRange?: boolean;
-  /**
-   * @description флаг означающий, что дата совпадает с локальным временем пользователя
-   */
-  isCurrent: boolean;
-  /**
-   * @description флаг означающий, что дата находится в выбранном диапазоне
-   */
-  isInSelectedRange?: boolean;
+import { DateCalendarDayBtnWrapperProps } from './DateCalendarGridBtn';
+
+type WithTheme = {
+  theme: Theme;
 };
 
-type GetColorOptions = {
-  theme: Theme;
-  selected?: boolean;
-} & DateCalendarDayBtnWrapperProps;
+type GetColorOptions = WithTheme & DateCalendarDayBtnWrapperProps;
 
 const getTextColor = ({
   theme,
-  isCurrent,
+  isCurrentInUserLocalTime,
   isOutOfAvailableRange,
   selected,
 }: GetColorOptions) => {
@@ -36,7 +24,7 @@ const getTextColor = ({
     return theme.palette.grey[600];
   }
 
-  if (!selected && isCurrent) {
+  if (!selected && isCurrentInUserLocalTime) {
     return theme.palette.primary.dark;
   }
 
@@ -59,13 +47,53 @@ const getBgColor = ({
   return '';
 };
 
+const getLeftBorderRadius = ({
+  isInSelectedRange,
+  isPreviousItemInSelectedRange,
+  selected,
+  theme,
+}: DateCalendarDayBtnWrapperProps & WithTheme) => {
+  // если элемент вне выбранной зоны, это значит что нам нужно скругление слева,
+  // или если он выбранный, и перед ним нету элемента внутри,
+  // то тогда устанавливаем скругление слева
+  if (!isInSelectedRange || (!isPreviousItemInSelectedRange && selected)) {
+    return theme.shape.small;
+  }
+
+  // если предыдушее условие не выполнилось,
+  // значит элемент просто внутри выбранного диапазона,
+  // тогда обнуляем стандартное скругление
+  return '0';
+};
+
+const getRightBorderRadius = ({
+  isInSelectedRange,
+  isPreviousItemInSelectedRange,
+  selected,
+  theme,
+}: DateCalendarDayBtnWrapperProps & WithTheme) => {
+  // если элемент вне выбранной зоны, это значит что нам нужно скругление справа,
+  // или если элемент выбранный, и перед ним есть сосед внутри выбранной зоны,
+  // тогда устанавливаем скругление справа
+  if (!isInSelectedRange || (isPreviousItemInSelectedRange && selected)) {
+    return theme.shape.small;
+  }
+
+  // если предыдушее условие не выполнилось,
+  // значит элемент просто внутри выбранного диапазона,
+  // тогда обнуляем стандартное скругление
+  return '0';
+};
+
 const nonForwardableProps = new Set<PropertyKey>([
-  'isCurrent',
+  'isPreviousItemInSelectedRange',
+  'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
+  'lengthInRow',
 ]);
 
-export const DateCalendarGridBtn = styled(DateCalendarBtn, {
+export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`
@@ -75,15 +103,35 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
 
   background-color: ${(props) => getBgColor(props)};
 
-  border-radius: ${({ isInSelectedRange }) => (isInSelectedRange ? '0' : '')};
+  border-radius: ${(props) => getLeftBorderRadius(props)}
+    ${(props) => getRightBorderRadius(props)}
+    ${(props) => getRightBorderRadius(props)}
+    ${(props) => getLeftBorderRadius(props)};
+
+  /* первый элемент строки для выбранного диапазона должен иметь скругление слева */
+  &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
+    border-top-left-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+    border-bottom-left-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+  }
+
+  /* последний элемент строки для выбранного диапазона должен иметь скругление справа */
+  &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
+    border-top-right-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+    border-bottom-right-radius: ${({ theme, isInSelectedRange }) =>
+      isInSelectedRange ? theme.shape.small : ''};
+  }
 
   &::after {
     position: absolute;
     bottom: ${({ theme }) => theme.spacing(1)};
     left: ${({ theme }) => theme.spacing(2)};
 
-    display: ${({ isCurrent }) => (isCurrent ? 'block' : 'none')};
-    width: calc(100% - 16px);
+    display: ${({ isCurrentInUserLocalTime }) =>
+      isCurrentInUserLocalTime ? 'block' : 'none'};
+    width: calc(100% - ${({ theme }) => theme.spacing(4)});
     height: 2px;
 
     color: currentColor;
@@ -91,20 +139,5 @@ export const DateCalendarGridBtn = styled(DateCalendarBtn, {
     background-color: currentColor;
 
     content: '';
-  }
-`;
-
-export const DateCalendarGridBtnLarge = styled(DateCalendarGridBtn)`
-  min-width: 80px;
-  min-height: 52px;
-  padding: ${({ theme }) => theme.spacing(4, 2)};
-
-  text-transform: capitalize;
-
-  &::after {
-    bottom: ${({ theme }) => theme.spacing(2)};
-    left: ${({ theme }) => theme.spacing(4)};
-
-    width: calc(100% - 32px);
   }
 `;

@@ -1,42 +1,54 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { MinMaxDateContext } from '../../MinMaxDateContext';
 import {
   DateCompareDeep,
   areDatesSame,
   isDate,
   isDateOutOfRange,
 } from '../../../utils/date';
+import { MinMaxDate } from '../../types';
 
-export const useSelectedBaseDate = (selectedDate?: Date): Date | undefined => {
-  const { minDate, maxDate } = useContext(MinMaxDateContext);
-  const [baseDate, setBaseDate] = useState<Date | undefined>(selectedDate);
+type UseSelectedBaseDateOptions = {
+  currentValue?: Date;
+} & MinMaxDate;
+
+/**
+ * @description хук предоставляющий дату для отображения в пикере,
+ * на основе полученной даты от родительского компонента,
+ * защищает пикер от выбора даты вне диапазона minDate и maxDate
+ */
+export const useSelectedBaseDate = ({
+  currentValue,
+  minDate,
+  maxDate,
+}: UseSelectedBaseDateOptions): Date | undefined => {
+  const [baseDate, setBaseDate] = useState<Date | undefined>(currentValue);
 
   useEffect(() => {
-    if (!isDate(selectedDate)) {
+    if (!isDate(currentValue)) {
       setBaseDate(undefined);
 
       return;
     }
 
-    if (areDatesSame(baseDate, selectedDate)) {
+    if (areDatesSame(baseDate, currentValue)) {
       return;
     }
 
     if (
-      !selectedDate ||
+      !currentValue ||
       isDateOutOfRange({
-        date: selectedDate,
-        minDate,
-        maxDate,
+        date: currentValue,
+        dateA: minDate,
+        dateB: maxDate,
         deep: DateCompareDeep.day,
       })
     ) {
       setBaseDate(undefined);
     } else {
-      setBaseDate(selectedDate);
+      setBaseDate(currentValue);
     }
-  }, [selectedDate]);
+  }, [currentValue]);
 
   return baseDate;
 };

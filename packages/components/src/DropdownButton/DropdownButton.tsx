@@ -6,7 +6,7 @@ import { Menu } from '../Menu';
 import { Button, ButtonProps } from '../Button';
 import { Chevron } from '../Chevron';
 
-export type DropdownButtonProps = Omit<ButtonProps, 'endIcon' | 'loading'> & {
+export type DropdownButtonProps = Omit<ButtonProps, 'endIcon'> & {
   /**
    * Название кнопки
    */

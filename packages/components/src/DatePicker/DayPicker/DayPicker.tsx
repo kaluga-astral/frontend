@@ -12,6 +12,7 @@ import { PickerProps } from '../types';
 import { addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
+import { DAYS_IN_WEEK } from '../constants/counts';
 
 import { DateDayPickerGridHead } from './DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './DateDayPickerGrid';
@@ -34,6 +35,7 @@ export const DayPicker = ({
   selectedDate,
   onChange,
   isMondayFirst,
+  rangeDate,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -62,6 +64,7 @@ export const DayPicker = ({
     selectedDate,
     isMondayFirst,
     fullSize: true,
+    rangeDate,
   });
 
   return (
@@ -81,6 +84,8 @@ export const DayPicker = ({
               key={index}
               onClick={() => onChange?.(date)}
               title={dayFormat(date)}
+              lengthInRow={DAYS_IN_WEEK}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
               {...props}
             >
               {monthDay}

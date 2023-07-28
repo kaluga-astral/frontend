@@ -1,19 +1,29 @@
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
+import { object, string } from '@astral/validations';
+import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
 import { FormTextField } from './FormTextField';
 
+type FormValues = { user: string };
+
+const validationSchema = object<FormValues>({
+  user: string(),
+});
+
 describe('FormTextField', () => {
   it('Отображается ошибка валидации', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormTextField name="user" rules={{ required: 'required' }} />
+          <FormTextField name="user" />
           <button type="submit">submit</button>
         </Form>
       );
@@ -23,7 +33,7 @@ describe('FormTextField', () => {
     await userEvents.click(screen.getByText('submit'));
 
     await waitFor(() => {
-      const errorText = screen.getByText('required');
+      const errorText = screen.getByText('Обязательно');
 
       expect(errorText).toBeVisible();
     });
@@ -53,15 +63,13 @@ describe('FormTextField', () => {
 
   it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
-      const form = useForm();
+      const form = useForm({
+        resolver: resolver<FormValues>(validationSchema),
+      });
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormTextField
-            name="user"
-            label="user"
-            rules={{ required: 'required' }}
-          />
+          <FormTextField name="user" label="user" />
           <button type="submit">submit</button>
         </Form>
       );

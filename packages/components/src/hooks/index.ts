@@ -11,3 +11,7 @@ export * from './useRadioGroup';
 export * from './useEscapeClickEffect';
 
 export * from './useClickAwayEffect';
+
+export * from './useFocusAwayEffect';
+
+export * from './useInputPopover';

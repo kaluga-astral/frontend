@@ -1,7 +1,7 @@
 import { styled } from '../../../styles';
-import { DateCalendarBtn } from '../DateCalendarBtn';
+import { DateCalendarButton } from '../DateCalendarBtn';
 
-export const DateCalendarChevronBtn = styled(DateCalendarBtn)`
+export const DateCalendarChevronBtn = styled(DateCalendarButton)`
   width: 32px;
   min-width: 32px;
   max-width: 32px;

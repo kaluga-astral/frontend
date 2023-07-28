@@ -12,7 +12,7 @@ import { ActionCell, Actions } from '../ActionCell';
 import { DataGrid, DataGridColumns } from '../DataGrid';
 import { DataGridPagination } from '../DataGridPagination';
 import { ExampleTemplate } from '../docs';
-import { Grid } from '../Grid';
+import { LegacyGrid } from '../LegacyGrid';
 import { List } from '../List';
 import { ListItem } from '../ListItem';
 import { Select } from '../Select';
@@ -244,7 +244,7 @@ export const Showcase: Story = () => {
               ],
             },
             subheader: (
-              <Grid
+              <LegacyGrid
                 container
                 templateColumns="240px repeat(2, 192px)"
                 spacing={2}
@@ -259,7 +259,7 @@ export const Showcase: Story = () => {
                 />
                 <Select value="" placeholder="Выберите вариант" size="small" />
                 <Select value="" placeholder="Выберите вариант" size="small" />
-              </Grid>
+              </LegacyGrid>
             ),
           }}
           content={{
@@ -333,7 +333,7 @@ export const Showcase: Story = () => {
           content={{
             children: (
               <Stack padding={8}>
-                <Grid container justifyContent="center">
+                <LegacyGrid container justifyContent="center">
                   <Typography variant="h4" align="center">
                     Налоговый расчет по авансовому платежу по налогу на
                     имущество&nbsp;организаций
@@ -357,7 +357,7 @@ export const Showcase: Story = () => {
                     <TextField label="Наименование организации" fullWidth />
                     <TextField label="Контактный телефон" fullWidth />
                   </Stack>
-                </Grid>
+                </LegacyGrid>
               </Stack>
             ),
           }}

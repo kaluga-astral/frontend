@@ -1,25 +1,22 @@
-import { ChangeEvent, SyntheticEvent, forwardRef, useContext } from 'react';
+import { SyntheticEvent, forwardRef, useRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { useForwardedRef, useToggle } from '../hooks';
+import { useInputPopover } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
-import { ClickAwayListener } from '../ClickAwayListener';
 
 import { DatePickerInput } from './DatePickerInput';
-import { DatePickerPopper } from './DatePickerPopper';
+import { DatePickerPopover } from './DatePickerPopover';
 import {
-  MinMaxDateContext,
+  DEFAULT_MAX_DATE,
+  DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from './MinMaxDateContext';
 import { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
-import {
-  useBaseDateInRange,
-  useMaskedValue,
-  useSelectedBaseDate,
-} from './hooks';
 import { MondayFirst } from './DayPicker';
+import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
+import { useDatePickerOptions } from './hooks';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -47,94 +44,63 @@ export type DatePickerProps = MondayFirst &
     className?: string;
   };
 
-const DatePickerInner = forwardRef<
-  HTMLInputElement,
-  Omit<DatePickerProps, 'minDate' | 'maxDate'>
->(
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       onChange,
       onOpen,
-      onBlur,
       onClose,
-      mask = 'DD.MM.YYYY',
+      onBlur,
+      mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       inputProps,
       disabled,
       value,
       className,
+      minDate = DEFAULT_MIN_DATE,
+      maxDate = DEFAULT_MAX_DATE,
     },
     forwardedRef,
   ) => {
-    const { maxDate, minDate } = useContext(MinMaxDateContext);
-    const ref = useForwardedRef(forwardedRef);
-    const [isOpenPopper, openPopper, closePopper] = useToggle({
-      onActive: onOpen,
-      onInactive: onClose,
+    const ref = useRef<HTMLDivElement>(null);
+
+    const { isOpenPopover, openPopover, closePopover } = useInputPopover({
+      ref,
+      onOpen,
+      onClose,
+      onBlur,
     });
-
-    const handleClosePopper = () => {
-      // для данного компонента onBlur должен срабатывать после закрытия popover, а не во время выбора даты
-      onBlur?.();
-      closePopper(undefined, 'selectOption');
-    };
-
-    const { maskedValue, onChangeMaskedValue, onChangeMaskedDate } =
-      useMaskedValue({
-        currentValue: value,
+    const handleDayPick = () => closePopover(undefined, 'selectOption');
+    const { inputProps: calculatedInputProps, pickerProps } =
+      useDatePickerOptions({
+        maxDate,
+        minDate,
         mask,
-        onChangeValue: onChange,
+        onDatePick: handleDayPick,
+        currentValue: value,
+        onChange,
       });
 
-    const baseDate = useBaseDateInRange({ minDate, maxDate });
-    const selectedBaseDate = useSelectedBaseDate(value);
-
-    const handleDayPick = (date: Date) => {
-      onChangeMaskedDate(date);
-      handleClosePopper();
-    };
-
-    const handleChangeMaskInput = (e: ChangeEvent<HTMLInputElement>) => {
-      onChangeMaskedValue(e.target.value);
-    };
-
     return (
-      <ClickAwayListener
-        isActive={isOpenPopper}
-        onClickAway={handleClosePopper}
-      >
-        <div className={className}>
-          <DatePickerInput
-            {...inputProps}
-            mask={mask}
-            onNativeChange={handleChangeMaskInput}
-            disabled={disabled}
-            value={maskedValue}
-            ref={ref}
-            onFocus={openPopper}
-          />
-          <DatePickerPopper
-            open={isOpenPopper}
-            onClose={handleClosePopper}
-            anchorEl={ref?.current}
-          >
+      <div ref={ref} className={className}>
+        <DatePickerInput
+          {...inputProps}
+          {...calculatedInputProps}
+          mask={mask}
+          disabled={disabled}
+          ref={forwardedRef}
+          onFocus={openPopover}
+          onClick={openPopover}
+        />
+        <DatePickerPopover open={isOpenPopover} anchorEl={ref?.current}>
+          <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              selectedDate={selectedBaseDate}
-              onChange={handleDayPick}
-              date={selectedBaseDate || baseDate}
+              {...pickerProps}
             />
-          </DatePickerPopper>
-        </div>
-      </ClickAwayListener>
+          </MinMaxDateContextProvider>
+        </DatePickerPopover>
+      </div>
     );
   },
-);
-
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  ({ minDate, maxDate, ...props }, forwardedRef) => (
-    <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
-      <DatePickerInner {...props} ref={forwardedRef} />
-    </MinMaxDateContextProvider>
-  ),
 );
