@@ -34,7 +34,7 @@ const Template: Story = () => {
           <CheckboxField
             label="Текст (success)"
             helperText={'helper text'}
-            success
+            isSuccess
           />
         </Stack>
       </ExampleTemplate.Case>

@@ -10,7 +10,7 @@ export type CheckboxFieldProps = CheckboxProps & {
   /**
    * Флаг отображения успешного состояния текстовой ошибки (helperText)
    */
-  success?: boolean;
+  isSuccess?: boolean;
   /**
    * Текст-подсказка
    */
@@ -29,7 +29,7 @@ export type CheckboxFieldProps = CheckboxProps & {
  * @description Составной компонент чекбокса. Содержит label, tooltip, helperText и т.д.
  */
 export const CheckboxField = ({
-  success,
+  isSuccess,
   helperText,
   hideHelperText = false,
   label,
@@ -54,7 +54,7 @@ export const CheckboxField = ({
         />
       </Tooltip>
       {!hideHelperText && (
-        <FormHelperText error={isError} success={success}>
+        <FormHelperText error={isError} success={isSuccess}>
           {helperText}
         </FormHelperText>
       )}
