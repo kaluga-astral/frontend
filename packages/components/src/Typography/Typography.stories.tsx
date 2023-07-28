@@ -16,7 +16,9 @@ export default meta;
 type Story = StoryObj<typeof Typography>;
 
 export const Interaction: Story = {
-  args: {},
+  args: {
+    children: 'Электронная отчетность и документооборот',
+  },
 };
 
 export const Variants: Story = {
