@@ -1,13 +1,25 @@
-import { ThemeProvider, Grid } from '../packages/components/src'
+import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
+
+const StoryWrapper = styled.article`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing(3)};
+  
+  ${({theme}) => theme.breakpoints.down('sm')} {
+    flex-direction: column;
+  }
+`;
 
 export default {
   decorators: [
     (Story, context) => (
       <ThemeProvider theme={getTheme(context.globals.theme)}>
-        <Grid container justifyContent="center" alignItems="center" autoFlow="column" spacing={4}>
+        <StoryWrapper>
           <Story {...context} />
-        </Grid>
+        </StoryWrapper>
       </ThemeProvider>
     )
   ],
