@@ -11,6 +11,7 @@ module.exports = {
     options: {}
   },
   docs: {
-    autodocs: true
+    autodocs: true,
+    source: { type: 'dynamic' }
   }
 };
