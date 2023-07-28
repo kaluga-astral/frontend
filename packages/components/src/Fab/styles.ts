@@ -13,11 +13,21 @@ const getBgColor = ({
   color,
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
+  const getColoredBackgroundColors = () => {
+    switch (color) {
+      case 'error':
+        return theme.palette.error.dark;
+      case 'warning':
+        return theme.palette.warning.dark;
+      case 'success':
+        return theme.palette.success.dark;
+      default:
+        return theme.palette.primary.main;
+    }
+  };
+
   const backgroundColors = {
-    colored:
-      theme.palette[
-        color && color !== FabColors.Default ? color : FabColors.Primary
-      ][800],
+    colored: getColoredBackgroundColors(),
     default: theme.palette.grey[100],
     defaultHover: theme.palette.primary[100],
     error: theme.palette.red[800],
@@ -48,7 +58,7 @@ const getColor = ({
   fabState,
 }: StyledFabThemeProps & { fabState: FabStates }): string => {
   const colors = {
-    colored: theme.palette.grey[100],
+    active: theme.palette.grey[100],
     default: theme.palette.grey[900],
     hover: theme.palette.primary[800],
   };
@@ -57,7 +67,7 @@ const getColor = ({
     return colors[fabState];
   }
 
-  return colors.colored;
+  return colors.active;
 };
 
 const getSize = (props: FabProps) => {
@@ -68,18 +78,6 @@ const getSize = (props: FabProps) => {
   };
 
   return sizes[props.size || FabSizes.Large];
-};
-const getBorderRadius = (props: StyledFabThemeProps) => {
-  const variants = {
-    square: props.theme.shape.small,
-    circular: '50%',
-  };
-
-  if (props.isSquare) {
-    return variants.square;
-  }
-
-  return variants[props.variant || 'square'];
 };
 
 export const StyledFab = styled(Fab, {
@@ -92,7 +90,8 @@ export const StyledFab = styled(Fab, {
 
   background: ${(props) =>
     getBgColor({ ...props, fabState: FabStates.Default })};
-  border-radius: ${(props) => getBorderRadius(props)};
+  border-radius: ${({ theme, isSquare }) =>
+    isSquare ? theme.shape.small : '50%'};
 
   :active {
     color: ${(props) => getColor({ ...props, fabState: FabStates.Active })};
