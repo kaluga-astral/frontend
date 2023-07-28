@@ -1,111 +1,152 @@
-import { Grid } from '@mui/material';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Typography, TypographyColor, TypographyProps } from './Typography';
+import { Grid } from '../Grid';
+import { Paper } from '../Paper';
+import { styled } from '../styles';
 
-export default {
+import { Typography } from './Typography';
+
+const meta: Meta<typeof Typography> = {
   title: 'Components/Typography',
   component: Typography,
 };
 
-const intensities: TypographyProps['colorIntensity'][] = [
-  '900',
-  '800',
-  '700',
-  '600',
-  '500',
-  '400',
-  '300',
-  '200',
-  '100',
-];
+export default meta;
 
-const variants: TypographyProps['variant'][] = [
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'h7',
-  'h8',
-  'h9',
-  'button',
-  'ui',
-  'link',
-  'pointer',
-  'small',
-  'code',
-];
+type Story = StoryObj<typeof Typography>;
 
-const colors: TypographyColor[] = [
-  'text',
-  'textSecondary',
-  'primary',
-  'secondary',
-  'info',
-  'success',
-  'error',
-  'warning',
-  'grey',
-  'red',
-  'green',
-  'yellow',
-];
-
-const Template: Story<TypographyProps> = (args) => {
-  return <Typography {...args} />;
+export const Interaction: Story = {
+  args: {},
 };
 
-export const Showcase = () => (
-  <Grid
-    container
-    display="grid"
-    gridTemplateColumns={`repeat(${colors.length}, 1fr)`}
-    gap={4}
-    justifyContent="center"
-    alignItems="center"
-  >
-    {variants.map((variant) => (
-      <>
-        {colors.map((color) => (
-          <Grid
-            key={color}
-            height="100%"
-            justifyContent="space-between"
-            container
-            display="grid"
-          >
-            <Typography color={color} variant={variant}>
-              {variant} x {color}
-            </Typography>
-            {intensities?.map((intensity) => (
-              <Typography
-                key={intensity}
-                color={color}
-                variant={variant}
-                colorIntensity={intensity}
-              >
-                {variant} x {color} x {intensity}
-              </Typography>
-            ))}
-          </Grid>
-        ))}
-      </>
-    ))}
-  </Grid>
+export const Variants: Story = {
+  render: () => (
+    <Grid container spacing={6}>
+      <Typography variant="h1">
+        h1. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="h2">
+        h2. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="h3">
+        h3. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="h4">
+        h4. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="h5">
+        h5. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="h6">
+        h6. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="subtitle1">
+        subtitle1. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="subtitle2">
+        subtitle2. Электронная отчетность и документооборот
+      </Typography>
+      <Typography>Default. Электронная отчетность и документооборот</Typography>
+      <Typography variant="ui">
+        ui. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="body1">
+        body1. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="body2">
+        body2. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="caption">
+        caption. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="button">
+        button. Электронная отчетность и документооборот
+      </Typography>
+      <Typography variant="overline">
+        overline. Электронная отчетность и документооборот
+      </Typography>
+    </Grid>
+  ),
+};
+
+export const Colors: Story = {
+  render: () => (
+    <Grid container spacing={6}>
+      <Typography>default. Электронная отчетность и документооборот</Typography>
+      <Typography color="text">
+        text. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="secondary">
+        secondary. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="error">
+        error. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="warning">
+        warning. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="info">
+        info. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="textSecondary">
+        textSecondary. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="grey">
+        grey. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="red">
+        red. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="green">
+        green. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="yellow">
+        yellow. Электронная отчетность и документооборот
+      </Typography>
+    </Grid>
+  ),
+};
+
+export const ColorIntensity: Story = {
+  render: () => (
+    <Grid container spacing={6}>
+      <Typography color="info" colorIntensity="300">
+        text[300]. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="red" colorIntensity="200">
+        red[200]. Электронная отчетность и документооборот
+      </Typography>
+      <Typography color="grey" colorIntensity="400">
+        grey[400]. Электронная отчетность и документооборот
+      </Typography>
+    </Grid>
+  ),
+};
+
+export const NoWrap = () => (
+  <div style={{ width: '200px' }}>
+    <Typography noWrap>
+      Электронная отчетность и документооборот. Электронная отчетность и
+      документооборот
+    </Typography>
+  </div>
 );
 
-export const Default = Template.bind({});
+const ExamplePaper = styled(Paper)`
+  padding: ${({ theme }) => theme.spacing(4)};
+`;
 
-Default.args = {
-  children: 'Съешь же ещё этих мягких французских булок да выпей чаю',
-  variant: 'h1',
-  color: 'primary',
-  colorIntensity: '900',
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+export const Example = () => (
+  <ExamplePaper>
+    <Typography variant="h3" component="h2" gutterBottom>
+      Заявка успешно отправлена
+    </Typography>
+    <Typography paragraph>
+      Заявка{' '}
+      <Typography color="info" component="span">
+        22
+      </Typography>{' '}
+      была отправлена на ваш email
+    </Typography>
+  </ExamplePaper>
+);
