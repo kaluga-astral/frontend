@@ -12,7 +12,7 @@ export type FabProps = Omit<
   'color' | 'variant'
 > & {
   color?: FabColor;
-  variant?: MuiFabProps['variant'] | 'square';
+  variant?: 'circular' | 'square';
 };
 
 export const Fab = forwardRef<HTMLButtonElement, FabProps>(

@@ -1,6 +1,7 @@
 import {
   PaletteOptions as MuiPaletteOptions,
   PaletteColorOptions,
+  SimplePaletteColorOptions,
 } from '@mui/material';
 import { TypeBackground } from '@mui/material/styles/createPalette';
 
@@ -134,3 +135,5 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
     },
   };
 };
+
+export type { SimplePaletteColorOptions };
