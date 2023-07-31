@@ -139,6 +139,7 @@ const getColor = ({
       success: theme.palette.warning.contrastText,
       warning: theme.palette.success.contrastText,
       default: theme.palette.text.primary,
+      grey: theme.palette.grey[900],
     },
     light: {
       primary: theme.palette.primary.main,
@@ -146,6 +147,7 @@ const getColor = ({
       success: theme.palette.green[800],
       warning: theme.palette.yellow[800],
       default: theme.palette.text.primary,
+      grey: theme.palette.grey[900],
     },
   };
 
