@@ -1,6 +1,5 @@
 import { SvgIconProps } from '@mui/material';
 import { Story } from '@storybook/react';
-import { FunctionComponent } from 'react';
 
 import { LegacyGrid } from '../components/src/LegacyGrid';
 
@@ -10,14 +9,12 @@ import * as themedIcons from './generated-themed-icons';
 // eslint-disable-next-line import/extensions
 import * as customIcons from './generated-custom-icons';
 
-type GeneratedIcons = Record<string, FunctionComponent>;
-
 const getIcons = (
   name: string,
   size: number,
   type: 'themed' | 'custom' | 'all' = 'all',
 ) => {
-  const icons: GeneratedIcons = (() => {
+  const icons = (() => {
     if (type === 'themed') {
       return themedIcons;
     }
