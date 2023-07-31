@@ -22,7 +22,7 @@ export const formatDate = (
 ): string =>
   mask
     .split(separator)
-    .map((element) => elementsMap[element as DateMaskElements]?.(date))
+    .map((element) => elementsMap[element]?.(date))
     .filter(Boolean)
     .map((value) => zeroPad(value, 2))
     .join(separator);
