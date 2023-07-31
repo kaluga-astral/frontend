@@ -7,7 +7,7 @@ import { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styles';
 
-export type DataGridBodyProps<Data extends object> = {
+export type DataGridBodyProps<Data extends Record<string, unknown>> = {
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
   onRowClick?: (row: Data) => void;
@@ -20,7 +20,7 @@ export type DataGridBodyProps<Data extends object> = {
   noDataPlaceholder?: ReactNode;
 };
 
-export function DataGridBody<Data extends object>({
+export function DataGridBody<Data extends Record<string, unknown>>({
   rows,
   columns,
   selectable,
@@ -58,7 +58,7 @@ export function DataGridBody<Data extends object>({
 
   const renderedRows = useMemo(() => {
     return rows.map((row) => {
-      const rowId: string = row[keyId];
+      const rowId = row[keyId] as string;
       const checked =
         selectable &&
         Boolean(

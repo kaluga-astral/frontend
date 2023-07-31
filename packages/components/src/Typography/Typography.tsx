@@ -82,9 +82,12 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
           // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
           // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
 
+          // TODO: необходим рефакторинг. https://track.astral.ru/soft/browse/UIKIT-844
           return (
-            theme.palette[colorName]?.[colorIntensity as string] ||
-            theme.palette[colorName]?.main ||
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (theme.palette as any)[colorName]?.[colorIntensity as string] ||
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (theme.palette as any)[colorName]?.main ||
             colorName
           );
         };
