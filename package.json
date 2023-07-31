@@ -28,7 +28,6 @@
     "@storybook/client-api": "7.0.24",
     "@storybook/core-server": "7.0.24",
     "@storybook/node-logger": "7.0.24",
-    "@storybook/preset-create-react-app": "7.0.24",
     "@storybook/react": "7.0.24",
     "@storybook/react-webpack5": "^7.0.24",
     "@types/react": "^18.2.14",
