@@ -6,9 +6,21 @@ import {
 import { Variant } from '@mui/material/styles/createTypography';
 import { ElementType, HTMLAttributes, forwardRef, useMemo } from 'react';
 
-import { Theme } from '../theme';
+import { SimplePaletteColorOptions, Theme } from '../theme';
 
-import { TypographyColors } from './enums';
+export type TypographyColor =
+  | 'text'
+  | 'secondary'
+  | 'primary'
+  | 'error'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'textSecondary'
+  | 'grey'
+  | 'red'
+  | 'green'
+  | 'yellow';
 
 type Intensity =
   | '900'
@@ -20,8 +32,6 @@ type Intensity =
   | '300'
   | '200'
   | '100';
-
-export type TypographyColor = keyof typeof TypographyColors;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentProp = ElementType<any>;
@@ -69,27 +79,38 @@ declare module '@mui/material/Typography' {
   }
 }
 
+const MAIN_PALETTE_COLOR = [
+  'primary',
+  'error',
+  'success',
+  'warning',
+  'secondary',
+  'info',
+] as const;
+
 export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
   ({ children, color, colorIntensity = '800', component, ...props }, ref) => {
     const typographyColor = useMemo(() => {
-      // получаем название цвета по TypographyColors
-      const colorName = color && TypographyColors[color];
-
-      if (colorName) {
+      if (color) {
         return (theme: Theme) => {
           // если такой цвет есть в палитре, то ищем его intensity
           // или возвращаем main цвет (если для данного цвета не определены intensity)
           // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
           // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
 
-          // TODO: необходим рефакторинг. https://track.astral.ru/soft/browse/UIKIT-844
-          return (
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.[colorIntensity as string] ||
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.main ||
-            colorName
-          );
+          if (color === 'text') {
+            return theme.palette.text.primary;
+          }
+
+          if (color === 'textSecondary') {
+            return theme.palette.text.secondary;
+          }
+
+          if (MAIN_PALETTE_COLOR.includes(color)) {
+            return (theme.palette[color] as SimplePaletteColorOptions).main;
+          }
+
+          return theme.palette[color][colorIntensity];
         };
       }
 
