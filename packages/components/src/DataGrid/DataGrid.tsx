@@ -15,7 +15,7 @@ import {
 import { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
-  Data extends Record<string, unknown> = DataGridRow,
+  Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 > = {
   className?: string;
@@ -100,7 +100,7 @@ export type DataGridProps<
 };
 
 export function DataGrid<
-  Data extends Record<string, unknown> = DataGridRow,
+  Data extends object = DataGridRow,
   SortField extends keyof Data = keyof Data,
 >({
   columns,
