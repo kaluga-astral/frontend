@@ -1,5 +1,5 @@
 import { MouseEvent, ReactElement, forwardRef } from 'react';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
   AddOutlineMd,
@@ -28,7 +28,7 @@ export default {
   parameters: {
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof DashboardLayoutStory>;
+};
 
 export const EDO: ComponentStory<typeof DashboardLayoutStory> =
   DashboardLayoutStoryTemplate.bind({});
