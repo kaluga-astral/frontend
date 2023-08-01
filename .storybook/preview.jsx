@@ -1,45 +1,25 @@
-import { ThemeProvider, styled } from '../packages/components/src'
+// emotion-theming нужен для: https://github.com/storybookjs/storybook/issues/10231#issuecomment-613394048
+
+import { ThemeProvider } from '../packages/components/src'
 import { getTheme, themes } from './themes'
 
-const StoryWrapper = styled.article`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing(3)};
-  
-  ${({theme}) => theme.breakpoints.down('sm')} {
-    flex-direction: column;
-  }
-`;
+export const decorators = [
+  (Story, context) => (
+    <ThemeProvider theme={getTheme(context.globals.theme)}>
+      <Story {...context} />
+    </ThemeProvider>
+  )
+]
 
-export default {
-  decorators: [
-    (Story, context) => (
-      <ThemeProvider theme={getTheme(context.globals.theme)}>
-        <StoryWrapper>
-          <Story {...context} />
-        </StoryWrapper>
-      </ThemeProvider>
-    )
-  ],
-  globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: themes[0].name,
-      toolbar: {
-        icon: 'circlehollow',
-        items: themes.map((theme) => theme.name),
-        showName: true
-      }
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: themes[0].name,
+    toolbar: {
+      icon: 'circlehollow',
+      items: themes.map((theme) => theme.name),
+      showName: true
     }
-  },
-  parameters: {
-    docs: {
-      source: {
-        type: 'dynamic'
-      },
-    },
   }
-};
+}

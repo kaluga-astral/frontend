@@ -216,6 +216,8 @@ export { default as UploadOutlineMd } from './UploadOutlineMd';
 
 export { default as VkFillMd } from './VkFillMd';
 
+export { default as VisibilityOffOutlineMd } from './VisibilityOffOutlineMd';
+
 export { default as WarningFillMd } from './WarningFillMd';
 
 export { default as WarningFillSm } from './WarningFillSm';
