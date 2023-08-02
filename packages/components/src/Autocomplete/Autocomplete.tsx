@@ -57,15 +57,7 @@ const AutocompleteInner = <
   DisableClearable extends boolean,
   FreeSolo extends boolean,
 >(
-  props: AutocompleteProps<
-    AutocompleteValueProps,
-    Multiple,
-    DisableClearable,
-    FreeSolo
-  >,
-  ref?: ForwardedRef<unknown>,
-) => {
-  const {
+  {
     multiple,
     placeholder,
     error,
@@ -85,8 +77,14 @@ const AutocompleteInner = <
     inputRef,
     renderTags,
     ...restProps
-  } = props;
-
+  }: AutocompleteProps<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >,
+  ref?: ForwardedRef<unknown>,
+) => {
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
