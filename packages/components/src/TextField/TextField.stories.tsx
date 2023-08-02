@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { EyeFillMd } from '@astral/icons';
+import { EditFillMd, EyeFillMd } from '@astral/icons';
 
 import { TextField } from './TextField';
 
@@ -63,13 +63,16 @@ export const Disabled = () => (
 );
 
 // Storybook фризится, если вызывать компонент в рендере
-const Icon = <EyeFillMd />;
+const EyeIcon = <EyeFillMd />;
+const EditIcon = <EditFillMd />;
 
 export const Adornment = () => (
   <>
     <TextField InputProps={{ startAdornment: '₽' }} label="Цена" />
     <TextField InputProps={{ endAdornment: '₽' }} label="Цена" />
-    <TextField InputProps={{ endAdornment: Icon }} label="Пароль" />
-    <TextField InputProps={{ startAdornment: Icon }} label="Пароль" />
+    <TextField InputProps={{ endAdornment: EyeIcon }} label="Пароль" />
+    <TextField InputProps={{ startAdornment: EditIcon }} label="Имя" />
+    <TextField error InputProps={{ startAdornment: '₽' }} label="Цена" />
+    <TextField error InputProps={{ startAdornment: EditIcon }} label="Имя" />
   </>
 );
