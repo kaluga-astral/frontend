@@ -22,6 +22,8 @@ export * from './CheckableTag';
 
 export * from './Checkbox';
 
+export * from './CheckboxField';
+
 export * from './Chevron';
 
 export * from './CircularProgress';
