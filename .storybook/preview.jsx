@@ -37,7 +37,7 @@ export default {
   },
   parameters: {
     docs: {
-      source: { type: 'dynamic' },
+      source: { type: 'dynamic', dark: true },
     },
   },
 };

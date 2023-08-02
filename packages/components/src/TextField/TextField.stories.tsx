@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { EditFillMd, EyeFillMd } from '@astral/icons';
+import { EyeFillMd, SearchOutlineMd } from '@astral/icons';
+import { ChangeEvent, useState } from 'react';
 
 import { TextField } from './TextField';
 
@@ -64,15 +65,25 @@ export const Disabled = () => (
 
 // Storybook фризится, если вызывать компонент в рендере
 const EyeIcon = <EyeFillMd />;
-const EditIcon = <EditFillMd />;
+const SearchIcon = <SearchOutlineMd />;
 
 export const Adornment = () => (
   <>
     <TextField InputProps={{ startAdornment: '₽' }} label="Цена" />
     <TextField InputProps={{ endAdornment: '₽' }} label="Цена" />
     <TextField InputProps={{ endAdornment: EyeIcon }} label="Пароль" />
-    <TextField InputProps={{ startAdornment: EditIcon }} label="Имя" />
+    <TextField InputProps={{ startAdornment: SearchIcon }} label="Имя" />
     <TextField error InputProps={{ startAdornment: '₽' }} label="Цена" />
-    <TextField error InputProps={{ startAdornment: EditIcon }} label="Имя" />
+    <TextField error InputProps={{ startAdornment: SearchIcon }} label="Имя" />
   </>
 );
+
+export const Controlled = () => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  return <TextField label="Имя" value={value} onChange={handleChange} />;
+};

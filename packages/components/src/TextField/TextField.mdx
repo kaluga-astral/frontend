@@ -1,4 +1,4 @@
-import { Canvas, Meta, ArgsTable, Title } from '@storybook/blocks';
+import { Canvas, Meta, ArgsTable, Title, Source } from '@storybook/blocks';
 import * as TextFieldStories from './TextField.stories';
 
 <Meta of={TextFieldStories} />
@@ -8,6 +8,12 @@ import * as TextFieldStories from './TextField.stories';
 # Example
 
 <Canvas of={TextFieldStories.Example} />
+
+# Controlled
+
+<Canvas of={TextFieldStories.Controlled} sourceState="none" />
+
+<Source of={TextFieldStories.Controlled} type="code" />
 
 # Required
 

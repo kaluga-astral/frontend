@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -7,10 +7,12 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { FormTextField, FormTextFieldValue } from '../FormTextField';
 
-export default {
+const meta: Meta<typeof FormTextField> = {
   title: 'Form/FormTextField',
-  component: null,
+  component: FormTextField,
 };
+
+export default meta;
 
 type FormValues = { name: FormTextFieldValue };
 
