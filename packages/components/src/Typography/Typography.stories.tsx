@@ -21,109 +21,103 @@ export const Interaction: Story = {
   },
 };
 
-export const Variants: Story = {
-  render: () => (
-    <Grid container spacing={6}>
-      <Typography variant="h1">
-        h1. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="h2">
-        h2. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="h3">
-        h3. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="h4">
-        h4. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="h5">
-        h5. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="h6">
-        h6. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="subtitle1">
-        subtitle1. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="subtitle2">
-        subtitle2. Электронная отчетность и документооборот
-      </Typography>
-      <Typography>Default. Электронная отчетность и документооборот</Typography>
-      <Typography variant="ui">
-        ui. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="body1">
-        body1. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="body2">
-        body2. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="caption">
-        caption. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="button">
-        button. Электронная отчетность и документооборот
-      </Typography>
-      <Typography variant="overline">
-        overline. Электронная отчетность и документооборот
-      </Typography>
-    </Grid>
-  ),
-};
+export const Variants = () => (
+  <Grid container spacing={6}>
+    <Typography variant="h1">
+      h1. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="h2">
+      h2. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="h3">
+      h3. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="h4">
+      h4. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="h5">
+      h5. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="h6">
+      h6. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="subtitle1">
+      subtitle1. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="subtitle2">
+      subtitle2. Электронная отчетность и документооборот
+    </Typography>
+    <Typography>Default. Электронная отчетность и документооборот</Typography>
+    <Typography variant="ui">
+      ui. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="body1">
+      body1. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="body2">
+      body2. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="caption">
+      caption. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="button">
+      button. Электронная отчетность и документооборот
+    </Typography>
+    <Typography variant="overline">
+      overline. Электронная отчетность и документооборот
+    </Typography>
+  </Grid>
+);
 
-export const Colors: Story = {
-  render: () => (
-    <Grid container spacing={6}>
-      <Typography>default. Электронная отчетность и документооборот</Typography>
-      <Typography color="text">
-        text. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="secondary">
-        secondary. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="error">
-        error. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="warning">
-        warning. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="info">
-        info. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="textSecondary">
-        textSecondary. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="grey">
-        grey. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="red">
-        red. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="green">
-        green. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="yellow">
-        yellow. Электронная отчетность и документооборот
-      </Typography>
-    </Grid>
-  ),
-};
+export const Colors = () => (
+  <Grid container spacing={6}>
+    <Typography>default. Электронная отчетность и документооборот</Typography>
+    <Typography color="text">
+      text. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="secondary">
+      secondary. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="error">
+      error. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="warning">
+      warning. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="info">
+      info. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="textSecondary">
+      textSecondary. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="grey">
+      grey. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="red">
+      red. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="green">
+      green. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="yellow">
+      yellow. Электронная отчетность и документооборот
+    </Typography>
+  </Grid>
+);
 
-export const ColorIntensity: Story = {
-  render: () => (
-    <Grid container spacing={6}>
-      <Typography color="info" colorIntensity="300">
-        text[300]. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="red" colorIntensity="200">
-        red[200]. Электронная отчетность и документооборот
-      </Typography>
-      <Typography color="grey" colorIntensity="400">
-        grey[400]. Электронная отчетность и документооборот
-      </Typography>
-    </Grid>
-  ),
-};
+export const ColorIntensity = () => (
+  <Grid container spacing={6}>
+    <Typography color="info" colorIntensity="300">
+      text[300]. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="red" colorIntensity="200">
+      red[200]. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="grey" colorIntensity="400">
+      grey[400]. Электронная отчетность и документооборот
+    </Typography>
+  </Grid>
+);
 
 export const NoWrap = () => (
   <div style={{ width: '200px' }}>

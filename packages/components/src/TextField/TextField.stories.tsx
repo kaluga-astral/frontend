@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { EyeFillMd } from '@astral/icons';
 
 import { TextField } from './TextField';
 
@@ -18,6 +19,57 @@ export const Interaction: Story = {
   },
 };
 
-export const Example: Story = {
-  render: (args) => <TextField {...args} />,
-};
+export const Example = () => (
+  <>
+    <TextField label="Basic" />
+    <TextField label="Disabled" disabled />
+  </>
+);
+
+export const Statuses = () => (
+  <>
+    <TextField required error helperText="Обязательно" label="Имя" />
+    <TextField
+      success
+      helperText="Удачно завершился процесс проверки"
+      label="Email"
+    />
+  </>
+);
+
+export const Required = () => <TextField required label="Имя" />;
+
+export const Sizes = () => (
+  <>
+    <TextField label="Medium" />
+    <TextField label="Small" size="small" />
+  </>
+);
+
+export const FullWidth = () => <TextField fullWidth label="Длинное поле" />;
+
+export const HelperText = () => (
+  <>
+    <TextField helperText="Поясняю поле" label="Имя" />
+    <TextField error helperText="Поясняю ошибку поля" label="Имя" />
+    <TextField success helperText="Поясняю success статус" label="Имя" />
+  </>
+);
+
+export const Disabled = () => (
+  <>
+    <TextField disabled helperText="Поясняю поле" label="Имя" />
+  </>
+);
+
+// Storybook фризится, если вызывать компонент в рендере
+const Icon = <EyeFillMd />;
+
+export const Adornment = () => (
+  <>
+    <TextField InputProps={{ startAdornment: '₽' }} label="Цена" />
+    <TextField InputProps={{ endAdornment: '₽' }} label="Цена" />
+    <TextField InputProps={{ endAdornment: Icon }} label="Пароль" />
+    <TextField InputProps={{ startAdornment: Icon }} label="Пароль" />
+  </>
+);

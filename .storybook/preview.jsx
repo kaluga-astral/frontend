@@ -35,4 +35,9 @@ export default {
       }
     }
   },
+  parameters: {
+    docs: {
+      source: { type: 'dynamic' },
+    },
+  },
 };
