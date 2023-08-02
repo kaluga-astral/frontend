@@ -24,11 +24,6 @@ const getShadow = (elevation: number | undefined, theme: Theme): string => {
 
 export const MuiPaper: Components<Theme>['MuiPaper'] = {
   styleOverrides: {
-    root({ theme }) {
-      return {
-        borderRadius: theme.spacing(2),
-      };
-    },
     elevation({ theme, ownerState: { elevation } }) {
       return {
         boxShadow: getShadow(elevation, theme),
