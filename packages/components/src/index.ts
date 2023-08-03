@@ -202,4 +202,4 @@ export * from './Typography';
 
 export * from './Zoom';
 
-export * from './forwardRefWIthGeneric';
+export * from './forwardRefWithGeneric';

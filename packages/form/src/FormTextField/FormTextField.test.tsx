@@ -69,7 +69,7 @@ describe('FormTextField', () => {
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormTextField name="user" label="user" control={form.control} />
+          <FormTextField name="user" control={form.control} label="user" />
           <button type="submit">submit</button>
         </Form>
       );
