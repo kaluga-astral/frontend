@@ -1,6 +1,9 @@
-import { forwardRef } from 'react';
 import type { FocusEvent, ForwardedRef } from 'react';
-import { TextField, TextFieldProps } from '@astral/components';
+import {
+  TextField,
+  TextFieldProps,
+  forwardRefWithGeneric,
+} from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
@@ -37,6 +40,4 @@ function FormTextFieldInner<T extends object>(
   return <TextField {...fieldProps} ref={ref} onBlur={handleOnBlur} />;
 }
 
-export const FormTextField = forwardRef(FormTextFieldInner) as <T>(
-  props: T & { ref?: ForwardedRef<HTMLDivElement> },
-) => ReturnType<typeof FormTextFieldInner>;
+export const FormTextField = forwardRefWithGeneric(FormTextFieldInner);
