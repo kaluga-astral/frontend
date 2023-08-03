@@ -1,11 +1,14 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
+import { Grid } from '@astral/components';
 
 import { useForm } from '../hooks';
-import { FormStoryContainer } from '../docs';
+import { Form } from '../Form';
 import { FormSubmitButton } from '../FormSubmitButton';
-import { FormTextField, FormTextFieldValue } from '../FormTextField';
+
+import { FormTextField } from './FormTextField';
+import { FormTextFieldValue } from './types';
 
 const meta: Meta<typeof FormTextField> = {
   title: 'Form/FormTextField',
@@ -20,28 +23,32 @@ const validationSchema = object<FormValues>({
   name: string(),
 });
 
-const Template: Story = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
 
-  return (
-    <FormStoryContainer form={form}>
-      <FormTextField
-        required
-        label="Form text field"
-        control={form.control}
-        name="name"
-        helperText="Это поле отражает всю суть текстовых полей"
-      />
-      <FormSubmitButton>Submit</FormSubmitButton>
-    </FormStoryContainer>
+  const handleSubmit = form.handleSubmit(
+    (values) =>
+      new Promise<void>((resolve) => {
+        setTimeout(() => {
+          window.alert(JSON.stringify(values));
+          resolve();
+        }, 1000);
+      }),
   );
-};
 
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  return (
+    <Form form={form} onSubmit={handleSubmit}>
+      <Grid container spacing={2}>
+        <FormTextField
+          required
+          label="Имя"
+          name="name"
+          control={form.control}
+        />
+        <FormSubmitButton>Отправить</FormSubmitButton>
+      </Grid>
+    </Form>
+  );
 };
