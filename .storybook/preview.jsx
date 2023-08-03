@@ -1,4 +1,6 @@
 import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
+import prettier from 'prettier/standalone';
+import prettierTs from 'prettier/parser-typescript';
 
 import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
@@ -48,6 +50,12 @@ export default {
           <ArgsTable />
         </>
       ),
+      transformSource: input =>
+        prettier.format(input, {
+          parser: 'typescript',
+          plugins: [prettierTs],
+        }),
     },
   }
 };
+
