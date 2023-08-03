@@ -201,3 +201,5 @@ export * from './types';
 export * from './Typography';
 
 export * from './Zoom';
+
+export * from './forwardRefWithGeneric';
