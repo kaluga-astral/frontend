@@ -1,3 +1,5 @@
+import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
+
 import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
 
@@ -35,4 +37,17 @@ export default {
       }
     }
   },
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Stories />
+          <Title>API</Title>
+          <ArgsTable />
+        </>
+      ),
+    },
+  }
 };
