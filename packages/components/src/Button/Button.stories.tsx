@@ -5,12 +5,14 @@ import {
   DialogOutlineMd,
   LikeOutlineMd,
 } from '@astral/icons';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
 import { Badge } from '../Badge';
+import { Grid } from '../Grid';
+import { styled } from '../styles';
 
 import { Button } from './Button';
 
@@ -64,74 +66,79 @@ export const Example = () => {
   );
 };
 
-export const Contained = () => (
-  <>
-    <Button>Default</Button>
-    <Button loading>Loading</Button>
-    <Button selected>Selected</Button>
-    <Button disabled>Disabled</Button>
-  </>
+const ButtonsContainer = styled(Grid)`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing(3)};
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    flex-direction: row;
+    grid-template-columns: 1fr;
+    width: 150px;
+  }
+`;
+
+export const Variants = () => (
+  <ButtonsContainer columns={4}>
+    <Button>Contained</Button>
+    <Button variant="light">Light</Button>
+    <Button variant="link">Link</Button>
+    <Button variant="text">Text</Button>
+  </ButtonsContainer>
 );
 
-export const Light = () => (
-  <>
-    <Button variant="light">Default</Button>
-    <Button variant="light" loading>
-      Loading
+export const Disabled = () => (
+  <ButtonsContainer columns={4}>
+    <Button disabled>Contained</Button>
+    <Button disabled variant="light">
+      Light
     </Button>
-    <Button variant="light" selected>
-      Selected
+    <Button disabled variant="link">
+      Link
     </Button>
-    <Button variant="light" disabled>
-      Disabled
+    <Button disabled variant="text">
+      Text
     </Button>
-  </>
+  </ButtonsContainer>
 );
 
-export const Link = () => (
-  <>
-    <Button variant="link">Default</Button>
-    <Button variant="link" loading>
-      Loading
+export const Loading = () => (
+  <ButtonsContainer columns={4}>
+    <Button loading>Contained</Button>
+    <Button loading variant="light">
+      Light
     </Button>
-    <Button variant="link" selected>
-      Selected
+    <Button loading variant="link">
+      Link
     </Button>
-    <Button variant="link" disabled>
-      Disabled
+    <Button loading variant="text">
+      Text
     </Button>
-  </>
+  </ButtonsContainer>
 );
 
-export const Text = () => (
-  <>
-    <Button variant="text">Default</Button>
-    <Button variant="text" loading>
-      Loading
+export const Selected = () => (
+  <ButtonsContainer columns={4}>
+    <Button selected>Contained</Button>
+    <Button selected variant="light">
+      Light
     </Button>
-    <Button variant="text" selected>
-      Selected
+    <Button selected variant="link">
+      Link
     </Button>
-    <Button variant="text" disabled>
-      Disabled
+    <Button selected variant="text">
+      Text
     </Button>
-  </>
+  </ButtonsContainer>
 );
 
 export const Icons = () => (
-  <>
-    <Button startIcon={<LikeOutlineMd />} variant="light">
-      Before
-    </Button>
-    <Button endIcon={<DialogOutlineMd />} variant="light">
-      After
-    </Button>
-    <Button
-      startIcon={<DialogOutlineMd />}
-      endIcon={<ChevronDOutlineMd />}
-      variant="light"
-    >
-      Before & After
+  <ButtonsContainer columns={4}>
+    <Button startIcon={<LikeOutlineMd />}>Start Icon</Button>
+    <Button endIcon={<DialogOutlineMd />}>End Icon</Button>
+    <Button startIcon={<DialogOutlineMd />} endIcon={<ChevronDOutlineMd />}>
+      Start & End
     </Button>
     <Button
       variant="light"
@@ -146,39 +153,65 @@ export const Icons = () => (
     >
       Badge
     </Button>
-  </>
+  </ButtonsContainer>
 );
 
 export const Sizes = () => (
-  <>
-    <Button size="medium" variant="light">
-      Medium
-    </Button>
-    <Button size="large" variant="light">
-      Large
-    </Button>
-  </>
+  <ButtonsContainer columns={2}>
+    <Button size="medium">Medium</Button>
+    <Button size="large">Large</Button>
+  </ButtonsContainer>
 );
 
 export const Colors = () => (
+  <Grid container spacing={3}>
+    <ButtonsContainer columns={5}>
+      <Button>Primary</Button>
+      <Button color="error">Error</Button>
+      <Button color="success">Success</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="error">Error</Button>
+    </ButtonsContainer>
+    <ButtonsContainer columns={5}>
+      <Button variant="light">Primary</Button>
+      <Button variant="light" color="error">
+        Error
+      </Button>
+      <Button variant="light" color="success">
+        Success
+      </Button>
+      <Button variant="light" color="warning">
+        Warning
+      </Button>
+      <Button variant="light" color="error">
+        Error
+      </Button>
+    </ButtonsContainer>
+  </Grid>
+);
+
+const Link = ({
+  children,
+  className,
+  href,
+}: {
+  children: ReactNode;
+  className?: string;
+  href: string;
+}) => (
+  <a href={href} className={className}>
+    {children}
+  </a>
+);
+
+/**
+ * Когда необходима ссылка, которая выглядит как кнопка
+ */
+export const AsLink = () => (
   <>
-    <Button color="error" variant="contained">
-      Error
-    </Button>
-    <Button color="success" variant="contained">
-      Success
-    </Button>
-    <Button color="warning" variant="contained">
-      Warning
-    </Button>
-    <Button color="error" variant="light">
-      Error
-    </Button>
-    <Button color="success" variant="light">
-      Success
-    </Button>
-    <Button color="warning" variant="light">
-      Warning
+    <Button href="#">Обычная ссылка</Button>
+    <Button href="/" component={Link}>
+      Ссылка роутера
     </Button>
   </>
 );
