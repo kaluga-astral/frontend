@@ -1,0 +1,38 @@
+import { Canvas, Meta, ArgsTable, Title } from '@storybook/blocks';
+import * as TypographyStories from './Typography.stories';
+
+<Meta of={TypographyStories} />
+
+<Title />
+
+Весь текст должен задаться через Typography.
+
+# Variants
+
+<Canvas of={TypographyStories.Variants} />
+
+# Colors
+
+<Canvas of={TypographyStories.Colors} />
+
+# ColorIntensity
+
+Prop ```colorIntensity``` позволяет задать интенсивность указанного ```color```.
+
+<Canvas of={TypographyStories.ColorIntensity} />
+
+# Ellipsis
+
+Prop ```noWrap``` позволяет добавить ```...```, если текст не помещается в контейнер.
+
+Если необходимо умное ограничение длинны поля с tooltip, смотрите на [OverflowTypography](/docs/components-overflowtypography--docs).
+
+<Canvas of={TypographyStories.NoWrap} />
+
+# Example
+
+<Canvas of={TypographyStories.Example} />
+
+# API
+
+<ArgsTable />
