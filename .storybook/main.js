@@ -1,6 +1,6 @@
 module.exports = {
   stories: [
-    '../packages/**/*.stories.mdx',
+    '../packages/**/*.mdx',
     '../packages/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: ['storybook-addon-swc', '@storybook/addon-links', '@storybook/addon-essentials'],
@@ -13,4 +13,8 @@ module.exports = {
     name: '@storybook/react-webpack5',
     options: {}
   },
+  docs: {
+    autodocs: true,
+    source: { type: 'dynamic' }
+  }
 }

@@ -1,0 +1,43 @@
+import { Canvas, Meta, ArgsTable, Title } from '@storybook/blocks';
+import * as useMenuStories from './useMenu.stories';
+
+<Meta of={useMenuStories} />
+
+<Title />
+
+Хук упрощает работу с компонентов [Menu](/docs/menu--docs).
+
+# Example
+
+<Canvas of={useMenuStories.Example} />
+
+# API
+
+## Params
+
+### useMenu(ref)
+
+```ref``` - optional. Ref, в который будет установлен anchorRef. Если ref не указан, то хук сам создат anchorRef
+
+## Returned
+
+```ts
+type UseMenuResult = {
+  /**
+   * Флаг состояния меню (открыто-закрыто)
+   */
+  open: boolean;
+  /**
+   * Элемент, к которому привязано меню
+   */
+  anchorRef: MutableRefObject<null>;
+  /**
+   * Обработчик открытия меню
+   */
+  handleCloseMenu: () => void;
+  /**
+   * Обработчик закрытия меню
+   */
+  handleOpenMenu: () => void;
+};
+```
