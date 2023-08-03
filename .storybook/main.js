@@ -25,9 +25,13 @@ module.exports = {
         esModuleInterop: false,
       },
       skipChildrenPropWithoutDoc: false,
+      shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
         // не добавляет в сгенерированное API для пропсов стандартные типы из react (Html атрибуты и тп)
-        if (prop?.declarations?.find(({ fileName }) => fileName.includes('node_modules/@types/react'))) {
+        // если в declarations один элемент и он из @types/react, то это стандартный атрибут
+        if (
+          prop?.declarations?.length === 1 && prop?.declarations[0]?.fileName.includes('node_modules/@types/react')
+        ) {
           return false;
         }
 
