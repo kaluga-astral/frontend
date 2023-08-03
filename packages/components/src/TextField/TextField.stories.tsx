@@ -18,6 +18,11 @@ export const Interaction: Story = {
     label: 'Имя',
     helperText: 'Смотрите имя в паспорте',
   },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 export const Example = () => (
@@ -26,6 +31,16 @@ export const Example = () => (
     <TextField label="Disabled" disabled />
   </>
 );
+
+export const Controlled = () => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  return <TextField label="Имя" value={value} onChange={handleChange} />;
+};
 
 export const Statuses = () => (
   <>
@@ -77,13 +92,3 @@ export const Adornment = () => (
     <TextField error InputProps={{ startAdornment: SearchIcon }} label="Имя" />
   </>
 );
-
-export const Controlled = () => {
-  const [value, setValue] = useState('');
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
-
-  return <TextField label="Имя" value={value} onChange={handleChange} />;
-};
