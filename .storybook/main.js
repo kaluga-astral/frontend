@@ -13,4 +13,21 @@ module.exports = {
     name: '@storybook/react-webpack5',
     options: {}
   },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+      skipChildrenPropWithoutDoc: false,
+      propFilter: (prop) => {
+        if (prop?.declarations?.find(({ fileName }) => fileName.includes('node_modules/@types/react'))) {
+          return false;
+        }
+
+        return true;
+      },
+    },
+  },
 }
