@@ -13,14 +13,6 @@ export const DataGridNoDataWrapper = styled.tr`
   transform: translate(-50%, -50%);
 `;
 
-export const DataGridNoDataFigure = styled.figure`
-  position: absolute;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 export const DataGridNoDataIcon = styled.img`
   display: block;
   width: ${({ width }) => `${width}px` || '100%'};

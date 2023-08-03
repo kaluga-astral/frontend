@@ -4,7 +4,6 @@ import { ConfigContext, type ConfigContextProps } from '../../ConfigProvider';
 
 import {
   DataGridNoDataFigcaption,
-  DataGridNoDataFigure,
   DataGridNoDataIcon,
   DataGridNoDataWrapper,
 } from './styles';
@@ -36,14 +35,16 @@ export const DataGridNoData = ({
 
   return (
     <DataGridNoDataWrapper>
-      <DataGridNoDataFigure>
-        {noDataImgSrc && (
-          <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
-        )}
-        <DataGridNoDataFigcaption component="figcaption" variant="h4">
-          {title}
-        </DataGridNoDataFigcaption>
-      </DataGridNoDataFigure>
+      <td>
+        <figure>
+          {noDataImgSrc && (
+            <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
+          )}
+          <DataGridNoDataFigcaption component="figcaption" variant="h4">
+            {title}
+          </DataGridNoDataFigcaption>
+        </figure>
+      </td>
     </DataGridNoDataWrapper>
   );
 };
