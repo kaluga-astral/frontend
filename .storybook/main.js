@@ -16,6 +16,7 @@ module.exports = {
   docs: {
     autodocs: true,
   },
+  // storybook по-дефолту не отображает вычисляемые типы (Union, Pick, Omit, любые generic) и типы, импортируемые из node_modules
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
@@ -25,6 +26,7 @@ module.exports = {
       },
       skipChildrenPropWithoutDoc: false,
       propFilter: (prop) => {
+        // не добавляет в сгенерированное API для пропсов стандартные типы из react (Html атрибуты и тп)
         if (prop?.declarations?.find(({ fileName }) => fileName.includes('node_modules/@types/react'))) {
           return false;
         }
