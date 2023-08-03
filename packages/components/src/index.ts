@@ -46,6 +46,8 @@ export * from './DataGridPagination';
 
 export * from './DatePicker';
 
+export * from './DateRangePicker';
+
 export * from './Description';
 
 export * from './Dialog';
