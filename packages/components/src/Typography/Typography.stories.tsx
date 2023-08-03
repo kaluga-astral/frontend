@@ -6,6 +6,9 @@ import { styled } from '../styles';
 
 import { Typography } from './Typography';
 
+/**
+ * Весь текст должен задаться через Typography.
+ */
 const meta: Meta<typeof Typography> = {
   title: 'Components/Typography',
   component: Typography,
@@ -18,6 +21,11 @@ type Story = StoryObj<typeof Typography>;
 export const Interaction: Story = {
   args: {
     children: 'Электронная отчетность и документооборот',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
   },
 };
 
@@ -105,6 +113,9 @@ export const Colors = () => (
   </Grid>
 );
 
+/**
+ * Prop ```colorIntensity``` позволяет задать интенсивность указанного ```color```.
+ */
 export const ColorIntensity = () => (
   <Grid container spacing={6}>
     <Typography color="info" colorIntensity="300">
@@ -119,7 +130,12 @@ export const ColorIntensity = () => (
   </Grid>
 );
 
-export const NoWrap = () => (
+/**
+ * Prop ```noWrap``` позволяет добавить ```...```, если текст не помещается в контейнер.
+ *
+ * Если необходимо умное ограничение длинны поля с tooltip, смотрите на [OverflowTypography](/docs/components-overflowtypography--docs).
+ */
+export const Ellipsis = () => (
   <div style={{ width: '200px' }}>
     <Typography noWrap>
       Электронная отчетность и документооборот. Электронная отчетность и
