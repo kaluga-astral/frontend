@@ -182,7 +182,7 @@ export function DataGrid<
 
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
-      <TableContainer inert={isTableDisabled ? '' : false}>
+      <TableContainer inert={isTableDisabled ? '' : undefined}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
             onSort={onSort}
