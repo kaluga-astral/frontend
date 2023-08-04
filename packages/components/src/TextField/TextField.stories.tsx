@@ -82,17 +82,20 @@ export const Disabled = () => (
   </>
 );
 
-// Storybook фризится, если вызывать компонент в рендере
-const EyeIcon = <EyeFillMd />;
-const SearchIcon = <SearchOutlineMd />;
-
 export const Adornment = () => (
   <>
     <TextField InputProps={{ startAdornment: '₽' }} label="Цена" />
     <TextField InputProps={{ endAdornment: '₽' }} label="Цена" />
-    <TextField InputProps={{ endAdornment: EyeIcon }} label="Пароль" />
-    <TextField InputProps={{ startAdornment: SearchIcon }} label="Имя" />
+    <TextField InputProps={{ endAdornment: <EyeFillMd /> }} label="Пароль" />
+    <TextField
+      InputProps={{ startAdornment: <SearchOutlineMd /> }}
+      label="Имя"
+    />
     <TextField error InputProps={{ startAdornment: '₽' }} label="Цена" />
-    <TextField error InputProps={{ startAdornment: SearchIcon }} label="Имя" />
+    <TextField
+      error
+      InputProps={{ startAdornment: <SearchOutlineMd /> }}
+      label="Имя"
+    />
   </>
 );
