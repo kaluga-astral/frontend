@@ -3,20 +3,37 @@ import { act, renderHook } from '@astral/tests';
 import { useToggle } from './useToggle';
 
 describe('useToggle', () => {
-  it.each([
-    ['handleActive', true, false],
-    ['handleInactive', false, true],
-  ])(
-    'isActive: Меняем стейт с помощью %s на %s',
-    (_, expected, initialState) => {
-      const { result } = renderHook(() => useToggle({ initialState }));
-      let [isActive, handleActive, handleInactive] = result.current;
-      const method = isActive ? handleInactive : handleActive;
+  const prepare = () => {
+    const { result, rerender } = renderHook(() =>
+      useToggle({ initialState: false }),
+    );
+    const [isActive, handleActive, handleInactive] = result.current;
 
-      act(() => method());
-      isActive = result.current[0];
+    return {
+      isActive,
+      handleActive,
+      handleInactive,
+      result,
+      rerender,
+    };
+  };
 
-      expect(isActive).toBe(expected);
-    },
-  );
+  it('isActive: Меняем стейт с помощью handleActive на true', () => {
+    let { result, isActive, handleActive } = prepare();
+
+    act(() => handleActive());
+    isActive = result.current[0];
+
+    expect(isActive).toBe(true);
+  });
+
+  it('isActive: Меняем стейт с помощью handleInactive на false', () => {
+    let { result, isActive, handleInactive, rerender } = prepare();
+    rerender({ initialState: false });
+
+    act(() => handleInactive());
+    isActive = result.current[0];
+
+    expect(isActive).toBe(false);
+  });
 });
