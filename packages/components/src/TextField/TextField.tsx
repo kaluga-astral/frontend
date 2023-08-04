@@ -1,21 +1,22 @@
 import { forwardRef, useMemo } from 'react';
-import MuiTextField from '@mui/material/TextField';
+import { TextField as MuiTextField } from '@mui/material';
+import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
 import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
+import { WithoutEmotionSpecific } from '../types';
 
-import { TextFieldProps } from './types';
+export type TextFieldProps = Omit<
+  WithoutEmotionSpecific<MuiTextFieldProps>,
+  'variant' | 'color'
+> & {
+  success?: boolean;
+};
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
-  (props, ref) => {
-    const {
-      variant,
-      success,
-      error,
-      color: colorProp,
-      helperText: helperTextProp,
-      ...restProps
-    } = props;
-
+  (
+    { success, error, helperText: helperTextProp, fullWidth = false, ...props },
+    ref,
+  ) => {
     const color = useMemo(() => {
       if (success) {
         return 'success';
@@ -43,7 +44,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         return helperTextProp;
       }
 
-      // helperText из mui/TextField имеет тип React.ReactNode | undefined;
+      // helperText из mui/TextField имеет тип ReactNode | undefined;
       // однако если helperText={null} вспомогательный текст просто перестает
       // рендериться, поэтому необходимо передавать что-то отличное от null
       // но при этом не отображаеющеся на странице
@@ -54,13 +55,12 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       <MuiTextField
         ref={ref}
         variant="outlined"
+        fullWidth={fullWidth}
         error={error}
         color={color}
         helperText={helperText}
-        {...restProps}
+        {...props}
       />
     );
   },
 );
-
-export default TextField;

@@ -15,6 +15,28 @@ module.exports = {
   },
   docs: {
     autodocs: true,
-    source: { type: 'dynamic' }
-  }
+  },
+  // storybook по-дефолту не отображает вычисляемые типы (Union, Pick, Omit, любые generic) и типы, импортируемые из node_modules
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+      skipChildrenPropWithoutDoc: false,
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => {
+        // не добавляет в сгенерированное API для пропсов стандартные типы из react (Html атрибуты и тп)
+        // если в declarations один элемент и он из @types/react, то это стандартный атрибут
+        if (
+          prop?.declarations?.length === 1 && prop?.declarations[0]?.fileName.includes('node_modules/@types/react')
+        ) {
+          return false;
+        }
+
+        return true;
+      },
+    },
+  },
 }

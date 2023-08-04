@@ -87,26 +87,4 @@ export const Showcase: Story = () => {
   );
 };
 
-Showcase.parameters = { options: { showPanel: false } };
-
 export const Default = Template.bind({});
-
-Default.args = {
-  fullWidth: false,
-  label: 'label',
-  placeholder: 'placeholder',
-  helperText: 'helperText',
-  focused: false,
-  error: false,
-  success: false,
-  disabled: false,
-  readOnly: false,
-  minRows: undefined,
-  maxRows: undefined,
-  rows: undefined,
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
