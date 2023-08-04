@@ -29,8 +29,6 @@ export type SidebarProps = {
   };
 };
 
-const TEMP_LOCAL_STORAGE_KEY = '@astral/ui::Sidebar::tempKey';
-
 export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
     const {
@@ -39,14 +37,21 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       header,
     } = props;
 
-    const [key, setKey] = useState(TEMP_LOCAL_STORAGE_KEY);
-    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(key, true);
+    const [key, setKey] = useState(true);
+    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
+      localStorageKey,
+      true,
+    );
 
+    /**
+     * Присваивается значение из localStorage внутреннему флагу после монтирования компонента
+     * Это необходимо, чтобы предотвратить возникновение ошибки гидратации в nextjs
+     * Если пользователь свернул сайдбар, то после перезагрузки сраницы, он увидит плавное схлопывание сайдбара.
+     * При этом next не будет выдавать ошибку о несоответствии стилей
+     */
     useEffect(() => {
-      setKey(localStorageKey);
-
-      return localStorage.removeItem(TEMP_LOCAL_STORAGE_KEY);
-    }, [localStorageKey]);
+      setKey(collapsedIn);
+    }, [collapsedIn]);
 
     const handleTogglerChange = () => {
       setCollapsedIn(() => {
@@ -56,7 +61,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
 
     return (
       <SidebarProvider isOpen={collapsedIn}>
-        <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
+        <SidebarRoot ref={ref} collapsedIn={key}>
           {header}
           <SidebarNav
             menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
