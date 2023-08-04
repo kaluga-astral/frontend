@@ -120,7 +120,7 @@ Semantic-release определяет новую версию пакета по 
 ### Генерация Props
 Storybook автоматически генерирует API Props на основе типов typescript.
 
-Если какой-либо prop не попал в сгенерированное API, то необходимо править функцию [filterProp в файле main.js](https://github.com/kaluga-astral/frontend/blob/main/.storybook/main.js#L29). 
+ℹ️ Если какой-либо prop не попал в сгенерированное API, то необходимо править функцию [filterProp в файле main.js](https://github.com/kaluga-astral/frontend/blob/main/.storybook/main.js#L29). 
 
 ---
 
@@ -224,7 +224,7 @@ export const Ellipsis = () => (
 
 ##### [Шаблон](https://github.com/kaluga-astral/frontend/blob/main/packages/components/src/TextField/TextField.stories.tsx)
 
-При написании stories необходимо учитывать мобильные разрешения. Дефолтный контейнер [учитывает](#дефолтная-верстка-контейнера) мобильные разрешения.
+ℹ️ При написании stories необходимо учитывать мобильные разрешения. Дефолтный контейнер [учитывает](#дефолтная-верстка-контейнера) мобильные разрешения.
 
 ### Meta
 ```ts
