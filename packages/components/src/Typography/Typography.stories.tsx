@@ -7,7 +7,10 @@ import { styled } from '../styles';
 import { Typography } from './Typography';
 
 /**
- * Весь текст должен задаться через Typography.
+ * Весь текст должен задаваться через Typography.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=1-347&mode=design&t=lMvg1tmjfSIA2lhp-0)
+ * ### [Guide]()
  */
 const meta: Meta<typeof Typography> = {
   title: 'Components/Typography',
