@@ -224,6 +224,8 @@ export const Ellipsis = () => (
 
 ##### [Шаблон](https://github.com/kaluga-astral/frontend/blob/main/packages/components/src/TextField/TextField.stories.tsx)
 
+При написании stories необходимо учитывать мобильные разрешения. Дефолтный контейнер [учитывает](#дефолтная-верстка-контейнера) мобильные разрешения.
+
 ### Meta
 ```ts
 /**
