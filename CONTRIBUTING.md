@@ -199,6 +199,39 @@ export const Interaction: Story = {
 #### parameters.docs.disable
 ```parameters.docs.disable``` позволяет отключить отображение story в Docs.
 
+### Дефолтная верстка контейнера
+Каждая story по-дефолту оборачивается в контейнер с версткой, описанным в [preview файле](https://github.com/kaluga-astral/frontend/blob/main/.storybook/preview.jsx#L9):
+- Контент центрируется
+- Между элементами добавляется стандартный отступ
+- Элементы переносятся на следующую строку, если не влезают
+- Для мобильного разрешения элементы выстраиваются в одну колонку
+
+Если дефолтной верстки контейнера хватает, то можно использовать ```fragment``` для оборачивая story:
+```tsx
+export const Statuses = () => (
+  <>
+    <TextField required error helperText="Обязательно" label="Имя" />
+    <TextField
+      success
+      helperText="Удачно завершился процесс проверки"
+      label="Email"
+    />
+  </>
+);
+```
+
+Если дефолтного контейнера не хватает, то можно написать для story свой:
+```tsx
+export const Variants = () => (
+  <ButtonsContainer columns={4}>
+    <Button>Contained</Button>
+    <Button variant="light">Light</Button>
+    <Button variant="link">Link</Button>
+    <Button variant="text">Text</Button>
+  </ButtonsContainer>
+);
+```
+
 ## Формат
 
 ### Meta
