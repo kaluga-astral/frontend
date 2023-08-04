@@ -2,6 +2,9 @@
 
 Пакет содержит все необходимые фичи для построения интерфейсов приложений Астрал.Софт.
 
+# [Documentation](https://main--61baeff6f06230003a88ef8a.chromatic.com/)
+[Storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com/) содержит документацию компонентов ```@astral/ui```.
+
 # Migration guide
 
 ## 2.0.0 -> 3.0.0
