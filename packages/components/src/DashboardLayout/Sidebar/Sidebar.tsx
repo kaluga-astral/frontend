@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode, forwardRef, useEffect, useState } from 'react';
 
 import { NavMenu, NavMenuProps } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
@@ -29,6 +29,8 @@ export type SidebarProps = {
   };
 };
 
+const TEMP_LOCAL_STORAGE_KEY = '@astral/ui::Sidebar::tempKey';
+
 export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
     const {
@@ -36,10 +38,15 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       localStorageKey = '@astral/ui::Sidebar::collapsedIn',
       header,
     } = props;
-    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
-      localStorageKey,
-      true,
-    );
+
+    const [key, setKey] = useState(TEMP_LOCAL_STORAGE_KEY);
+    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(key, true);
+
+    useEffect(() => {
+      setKey(localStorageKey);
+
+      return localStorage.removeItem(TEMP_LOCAL_STORAGE_KEY);
+    }, [localStorageKey]);
 
     const handleTogglerChange = () => {
       setCollapsedIn(() => {
