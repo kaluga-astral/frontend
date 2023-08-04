@@ -36,14 +36,16 @@ export const DataGridNoData = ({
 
   return (
     <DataGridNoDataWrapper>
-      <DataGridNoDataFigure>
-        {noDataImgSrc && (
-          <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
-        )}
-        <DataGridNoDataFigcaption component="figcaption" variant="h4">
-          {title}
-        </DataGridNoDataFigcaption>
-      </DataGridNoDataFigure>
+      <td>
+        <DataGridNoDataFigure>
+          {noDataImgSrc && (
+            <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
+          )}
+          <DataGridNoDataFigcaption component="figcaption" variant="h4">
+            {title}
+          </DataGridNoDataFigcaption>
+        </DataGridNoDataFigure>
+      </td>
     </DataGridNoDataWrapper>
   );
 };
