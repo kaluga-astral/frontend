@@ -7,7 +7,7 @@ import {
   AutocompleteProps as MuiAutocompleteProps,
 } from '@mui/material';
 import { forwardRef, useCallback } from 'react';
-import type { ForwardedRef, HTMLAttributes } from 'react';
+import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, TextFieldProps } from '../TextField';
@@ -47,6 +47,9 @@ export type AutocompleteProps<
     TextFieldProps,
     'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
   > & {
+    renderInput?: (
+      props: TextFieldProps & Omit<AutocompleteRenderInputParams, 'size'>,
+    ) => ReactNode;
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
   };
@@ -84,6 +87,7 @@ const AutocompleteInner = <
     overflowOption,
     inputRef,
     renderTags,
+    renderInput: ExternalRenderInput,
     ...restProps
   } = props;
 
@@ -120,20 +124,36 @@ const AutocompleteInner = <
   );
 
   const renderInput = useCallback(
-    (inputParams: AutocompleteRenderInputParams) => (
-      <TextField
-        {...inputParams}
-        inputRef={inputRef}
-        required={required}
-        placeholder={placeholder}
-        label={label}
-        success={success}
-        error={error}
-        helperText={helperText}
-        size={size}
-      />
-    ),
-    [placeholder, label, success, error, helperText, size, required, inputRef],
+    (inputParams: AutocompleteRenderInputParams) => {
+      const generalInputParams = {
+        ...inputParams,
+        inputRef,
+        required,
+        placeholder,
+        label,
+        success,
+        error,
+        helperText,
+        size,
+      };
+
+      return ExternalRenderInput ? (
+        <ExternalRenderInput {...generalInputParams} />
+      ) : (
+        <TextField {...generalInputParams} />
+      );
+    },
+    [
+      ExternalRenderInput,
+      inputRef,
+      required,
+      placeholder,
+      label,
+      success,
+      error,
+      helperText,
+      size,
+    ],
   );
 
   const renderOption = useCallback(
