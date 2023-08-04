@@ -37,7 +37,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       header,
     } = props;
 
-    const [collapsedIn, seCollapsedIn] = useState(true);
+    const [key, setKey] = useState(true);
     const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
       localStorageKey,
       true,
