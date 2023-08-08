@@ -5,6 +5,7 @@ module.exports = {
     '../packages/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: ['storybook-addon-swc', '@storybook/addon-links', '@storybook/addon-essentials'],
+  staticDirs: ['./public'],
   features: {
     // https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#emotion11-quasi-compatibility
     // у storybook в 6 версии есть проблемы с 11 emotion - не работает темиация
