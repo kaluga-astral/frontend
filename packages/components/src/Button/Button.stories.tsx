@@ -5,12 +5,14 @@ import {
   DialogOutlineMd,
   LikeOutlineMd,
 } from '@astral/icons';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
 import { DialogTitle } from '../DialogTitle';
 import { Badge } from '../Badge';
+import { Grid } from '../Grid';
+import { styled } from '../styles';
 
 import { Button } from './Button';
 
@@ -27,153 +29,11 @@ export const Interaction: Story = {
   args: {
     children: 'Click me',
   },
-};
-
-export const Contained: Story = {
-  render: (args) => (
-    <>
-      <Button {...args}>Default</Button>
-      <Button {...args} loading>
-        Loading
-      </Button>
-      <Button {...args} selected>
-        Selected
-      </Button>
-      <Button {...args} disabled>
-        Disabled
-      </Button>
-    </>
-  ),
-};
-
-export const Light: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} variant="light">
-        Default
-      </Button>
-      <Button {...args} variant="light" loading>
-        Loading
-      </Button>
-      <Button {...args} variant="light" selected>
-        Selected
-      </Button>
-      <Button {...args} variant="light" disabled>
-        Disabled
-      </Button>
-    </>
-  ),
-};
-
-export const Link: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} variant="link">
-        Default
-      </Button>
-      <Button {...args} variant="link" loading>
-        Loading
-      </Button>
-      <Button {...args} variant="link" selected>
-        Selected
-      </Button>
-      <Button {...args} variant="link" disabled>
-        Disabled
-      </Button>
-    </>
-  ),
-};
-
-export const Text: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} variant="text">
-        Default
-      </Button>
-      <Button {...args} variant="text" loading>
-        Loading
-      </Button>
-      <Button {...args} variant="text" selected>
-        Selected
-      </Button>
-      <Button {...args} variant="text" disabled>
-        Disabled
-      </Button>
-    </>
-  ),
-};
-
-export const Icons: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} startIcon={<LikeOutlineMd />} variant="light">
-        Before
-      </Button>
-      <Button {...args} endIcon={<DialogOutlineMd />} variant="light">
-        After
-      </Button>
-      <Button
-        {...args}
-        startIcon={<DialogOutlineMd />}
-        endIcon={<ChevronDOutlineMd />}
-        variant="light"
-      >
-        Before & After
-      </Button>
-      <Button
-        {...args}
-        variant="light"
-        endIcon={
-          <Badge
-            badgeContent={12}
-            color="error"
-            children={<span style={{ width: 10 }} />}
-            style={{ marginLeft: 2, marginRight: 15 }}
-          />
-        }
-      >
-        Badge
-      </Button>
-    </>
-  ),
-};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} size="medium" variant="light">
-        Medium
-      </Button>
-      <Button {...args} size="large" variant="light">
-        Large
-      </Button>
-    </>
-  ),
-};
-
-export const Colors: Story = {
-  render: (args) => (
-    <>
-      <Button {...args} color="error" variant="contained">
-        Error
-      </Button>
-      <Button {...args} color="success" variant="contained">
-        Success
-      </Button>
-      <Button {...args} color="warning" variant="contained">
-        Warning
-      </Button>
-      <Button {...args} color="error" variant="light">
-        Error
-      </Button>
-      <Button {...args} color="success" variant="light">
-        Success
-      </Button>
-      <Button {...args} color="warning" variant="light">
-        Warning
-      </Button>
-    </>
-  ),
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 export const Example = () => {
@@ -205,3 +65,153 @@ export const Example = () => {
     </Paper>
   );
 };
+
+const ButtonsContainer = styled(Grid)`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing(3)};
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    flex-direction: row;
+    grid-template-columns: 1fr;
+    width: 150px;
+  }
+`;
+
+export const Variants = () => (
+  <ButtonsContainer columns={4}>
+    <Button>Contained</Button>
+    <Button variant="light">Light</Button>
+    <Button variant="link">Link</Button>
+    <Button variant="text">Text</Button>
+  </ButtonsContainer>
+);
+
+export const Disabled = () => (
+  <ButtonsContainer columns={4}>
+    <Button disabled>Contained</Button>
+    <Button disabled variant="light">
+      Light
+    </Button>
+    <Button disabled variant="link">
+      Link
+    </Button>
+    <Button disabled variant="text">
+      Text
+    </Button>
+  </ButtonsContainer>
+);
+
+export const Loading = () => (
+  <ButtonsContainer columns={4}>
+    <Button loading>Contained</Button>
+    <Button loading variant="light">
+      Light
+    </Button>
+    <Button loading variant="link">
+      Link
+    </Button>
+    <Button loading variant="text">
+      Text
+    </Button>
+  </ButtonsContainer>
+);
+
+export const Selected = () => (
+  <ButtonsContainer columns={4}>
+    <Button selected>Contained</Button>
+    <Button selected variant="light">
+      Light
+    </Button>
+    <Button selected variant="link">
+      Link
+    </Button>
+    <Button selected variant="text">
+      Text
+    </Button>
+  </ButtonsContainer>
+);
+
+export const Icons = () => (
+  <ButtonsContainer columns={4}>
+    <Button startIcon={<LikeOutlineMd />}>Start Icon</Button>
+    <Button endIcon={<DialogOutlineMd />}>End Icon</Button>
+    <Button startIcon={<DialogOutlineMd />} endIcon={<ChevronDOutlineMd />}>
+      Start & End
+    </Button>
+    <Button
+      variant="light"
+      endIcon={
+        <Badge
+          badgeContent={12}
+          color="error"
+          children={<span style={{ width: 10 }} />}
+          style={{ marginLeft: 2, marginRight: 15 }}
+        />
+      }
+    >
+      Badge
+    </Button>
+  </ButtonsContainer>
+);
+
+export const Sizes = () => (
+  <ButtonsContainer columns={2}>
+    <Button size="medium">Medium</Button>
+    <Button size="large">Large</Button>
+  </ButtonsContainer>
+);
+
+export const Colors = () => (
+  <Grid container spacing={3}>
+    <ButtonsContainer columns={5}>
+      <Button>Primary</Button>
+      <Button color="error">Error</Button>
+      <Button color="success">Success</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="error">Error</Button>
+    </ButtonsContainer>
+    <ButtonsContainer columns={5}>
+      <Button variant="light">Primary</Button>
+      <Button variant="light" color="error">
+        Error
+      </Button>
+      <Button variant="light" color="success">
+        Success
+      </Button>
+      <Button variant="light" color="warning">
+        Warning
+      </Button>
+      <Button variant="light" color="error">
+        Error
+      </Button>
+    </ButtonsContainer>
+  </Grid>
+);
+
+const Link = ({
+  children,
+  className,
+  href,
+}: {
+  children: ReactNode;
+  className?: string;
+  href: string;
+}) => (
+  <a href={href} className={className}>
+    {children}
+  </a>
+);
+
+/**
+ * Когда необходима ссылка, которая выглядит как кнопка
+ */
+export const AsLink = () => (
+  <>
+    <Button href="#">Обычная ссылка</Button>
+    <Button href="/" component={Link}>
+      Ссылка роутера
+    </Button>
+  </>
+);
