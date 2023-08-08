@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode, forwardRef, useEffect, useState } from 'react';
 
 import { NavMenu, NavMenuProps } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
@@ -36,14 +36,26 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       localStorageKey = '@astral/ui::Sidebar::collapsedIn',
       header,
     } = props;
-    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
+
+    const [collapsedIn, setCollapsedIn] = useState(true);
+    const [storageCollapsedIn = true, setStorageCollapsedIn] = useLocalStorage(
       localStorageKey,
       true,
     );
 
+    /**
+     * Присваивается значение из localStorage внутреннему флагу после монтирования компонента
+     * Это необходимо, чтобы предотвратить возникновение ошибки гидратации в nextjs
+     * Если пользователь свернул сайдбар, то после перезагрузки сраницы, он увидит плавное схлопывание сайдбара.
+     * При этом next не будет выдавать ошибку о несоответствии стилей
+     */
+    useEffect(() => {
+      setCollapsedIn(storageCollapsedIn);
+    }, [storageCollapsedIn]);
+
     const handleTogglerChange = () => {
-      setCollapsedIn(() => {
-        return !collapsedIn;
+      setStorageCollapsedIn(() => {
+        return !storageCollapsedIn;
       });
     };
 
