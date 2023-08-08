@@ -1,8 +1,8 @@
-import { SvgIconProps } from '@mui/material';
-import { Story } from '@storybook/react';
-import { FunctionComponent } from 'react';
+import { SvgIcon, SvgIconProps } from '@mui/material';
+import { Meta } from '@storybook/react';
+import { FunctionComponent, ReactNode } from 'react';
 
-import { LegacyGrid } from '../components/src/LegacyGrid';
+import { LegacyGrid, OverflowTypography } from '../components';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions
@@ -61,120 +61,126 @@ const [
   ),
 ];
 
-export default {
+/**
+ * Иконки дизайн-системы Астрал-Софт
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=1-343&mode=design&t=K2c3EsjCTx9bHCuK-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof SvgIcon> = {
   title: 'Components/Icons',
+  component: SvgIcon,
 };
+
+export default meta;
 
 // @ts-ignore
 const Icon = ({ component: Component, name, size, ...props }) => (
   <div
-    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '100px',
+      justifySelf: 'center',
+    }}
   >
     <Component
       {...props}
       style={{ ...props.style, width: size, height: size }}
     />
-    <span style={{ fontSize: '0.85rem', marginTop: '20px' }}>{name}</span>
+    <OverflowTypography
+      style={{
+        marginTop: '20px',
+      }}
+    >
+      {name}
+    </OverflowTypography>
   </div>
 );
 
-const Template: Story = ({ color }: SvgIconProps) => {
-  return (
-    <>
-      <LegacyGrid key="fillmd" container>
-        <LegacyGrid>
-          <h2 style={{ textAlign: 'center' }}>Fill Md 24</h2>
-        </LegacyGrid>
-        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
-          {fillMdIcons.map(({ name, size, Component }) => (
-            <Icon
-              key={name}
-              size={size}
-              name={name}
-              component={Component}
-              color={color}
-            />
-          ))}
-        </LegacyGrid>
-      </LegacyGrid>
-      <LegacyGrid key="fillsm" container>
-        <LegacyGrid>
-          <h2 style={{ textAlign: 'center' }}>Fill Sm 16</h2>
-        </LegacyGrid>
-        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
-          {fillSmIcons.map(({ name, size, Component }) => (
-            <Icon
-              key={name}
-              size={size}
-              name={name}
-              component={Component}
-              color={color}
-            />
-          ))}
-        </LegacyGrid>
-      </LegacyGrid>
-      <LegacyGrid key="outlinemd" container>
-        <LegacyGrid>
-          <h2 style={{ textAlign: 'center' }}>Outline Md 24</h2>
-        </LegacyGrid>
-        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
-          {outlineMdIcons.map(({ name, size, Component }) => (
-            <Icon
-              key={name}
-              size={size}
-              name={name}
-              component={Component}
-              color={color}
-            />
-          ))}
-        </LegacyGrid>
-      </LegacyGrid>
-      <LegacyGrid key="outlinesm" container>
-        <LegacyGrid>
-          <h2 style={{ textAlign: 'center' }}>Outline Sm 16</h2>
-        </LegacyGrid>
-        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
-          {outlineSmIcons.map(({ name, size, Component }) => (
-            <Icon
-              key={name}
-              size={size}
-              name={name}
-              component={Component}
-              color={color}
-            />
-          ))}
-        </LegacyGrid>
-      </LegacyGrid>
+const IconGallery = ({ children }: { children: ReactNode }) => (
+  <div style={{ width: '100%' }}>
+    <LegacyGrid
+      container
+      templateColumns="repeat(auto-fill, minmax(100px, 1fr))"
+      spacing={5}
+    >
+      {children}
+    </LegacyGrid>
+  </div>
+);
 
-      <LegacyGrid key="сompaniesLogos" container>
-        <LegacyGrid>
-          <h2 style={{ textAlign: 'center' }}>Сompanies Logos</h2>
-        </LegacyGrid>
-        <LegacyGrid container templateColumns="repeat(6, 1fr)" rowSpacing={6}>
-          {сompaniesLogos.map(({ name, size, Component }) => (
-            <Icon
-              key={name}
-              size={size}
-              name={name}
-              component={Component}
-              color={color}
-            />
-          ))}
-        </LegacyGrid>
-      </LegacyGrid>
-    </>
-  );
-};
+export const FillMdIcons = (props: SvgIconProps) => (
+  <IconGallery>
+    {fillMdIcons.map(({ name, size, Component }) => (
+      <Icon
+        {...props}
+        color="primary"
+        key={name}
+        size={size}
+        name={name}
+        component={Component}
+      />
+    ))}
+  </IconGallery>
+);
 
-export const Default = Template.bind({});
+export const FillSmIcons = (props: SvgIconProps) => (
+  <IconGallery>
+    {fillSmIcons.map(({ name, size, Component }) => (
+      <Icon
+        {...props}
+        color="primary"
+        key={name}
+        size={size}
+        name={name}
+        component={Component}
+      />
+    ))}
+  </IconGallery>
+);
 
-Default.args = {
-  color: 'primary',
-  style: {
-    color: 'red',
-  },
-};
+export const OutlineMdIcons = (props: SvgIconProps) => (
+  <IconGallery>
+    {outlineMdIcons.map(({ name, size, Component }) => (
+      <Icon
+        {...props}
+        color="primary"
+        key={name}
+        size={size}
+        name={name}
+        component={Component}
+      />
+    ))}
+  </IconGallery>
+);
 
-Default.parameters = {
-  options: { showPanel: false },
-};
+export const OutlineSmIcons = (props: SvgIconProps) => (
+  <IconGallery>
+    {outlineSmIcons.map(({ name, size, Component }) => (
+      <Icon
+        {...props}
+        color="primary"
+        key={name}
+        size={size}
+        name={name}
+        component={Component}
+      />
+    ))}
+  </IconGallery>
+);
+
+export const Logos = (props: SvgIconProps) => (
+  <IconGallery>
+    {сompaniesLogos.map(({ name, size, Component }) => (
+      <Icon
+        {...props}
+        color="primary"
+        key={name}
+        size={size}
+        name={name}
+        component={Component}
+      />
+    ))}
+  </IconGallery>
+);
