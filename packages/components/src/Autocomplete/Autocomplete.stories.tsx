@@ -137,5 +137,30 @@ export const Showcase: Story = () => (
         </MenuItem>
       )}
     />
+    <Autocomplete<IOption, true, false, false>
+      label="Custom render input"
+      size="small"
+      options={OPTIONS}
+      getOptionLabel={(params) => params.title}
+      renderOption={(props, option) => (
+        <MenuItem {...props} key={props.id}>
+          <OverflowTypography rowsCount={2}>
+            {`Custom render option - ${option.title}`}
+          </OverflowTypography>
+        </MenuItem>
+      )}
+      renderInput={(params) => (
+        <div ref={params.InputProps.ref}>
+          <label>{params.label}</label>
+          <input
+            type="text"
+            ref={params.inputProps.ref}
+            value={params.inputProps.value}
+            onMouseDown={params.inputProps.onMouseDown}
+            placeholder={params.placeholder}
+          />
+        </div>
+      )}
+    />
   </Stack>
 );
