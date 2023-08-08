@@ -37,8 +37,8 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       header,
     } = props;
 
-    const [key, setKey] = useState(true);
-    const [collapsedIn = true, setCollapsedIn] = useLocalStorage(
+    const [collapsedIn, setCollapsedIn] = useState(true);
+    const [storageCollapsedIn = true, setStorageCollapsedIn] = useLocalStorage(
       localStorageKey,
       true,
     );
@@ -50,18 +50,18 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
      * При этом next не будет выдавать ошибку о несоответствии стилей
      */
     useEffect(() => {
-      setKey(collapsedIn);
-    }, [collapsedIn]);
+      setCollapsedIn(storageCollapsedIn);
+    }, [storageCollapsedIn]);
 
     const handleTogglerChange = () => {
-      setCollapsedIn(() => {
-        return !collapsedIn;
+      setStorageCollapsedIn(() => {
+        return !storageCollapsedIn;
       });
     };
 
     return (
       <SidebarProvider isOpen={collapsedIn}>
-        <SidebarRoot ref={ref} collapsedIn={key}>
+        <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
           {header}
           <SidebarNav
             menu={<NavMenu collapsedIn={collapsedIn} items={menu.items} />}
