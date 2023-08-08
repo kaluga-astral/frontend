@@ -1,6 +1,11 @@
+import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
+import prettier from 'prettier/standalone';
+import prettierTs from 'prettier/parser-typescript';
+
 import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
 
+// Все story оборачиваются в grid
 const StoryWrapper = styled.article`
   display: flex;
   justify-content: center;
@@ -35,4 +40,25 @@ export default {
       }
     }
   },
+  parameters: {
+    docs: {
+      // единый шаблон для генерации mdx
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <Stories />
+          <Title>API</Title>
+          <ArgsTable />
+        </>
+      ),
+      // storybook по-дефолту криво отображает код в source блоках. Здесь вручную подключается prettier для форматирования кода
+      transformSource: input =>
+        prettier.format(input, {
+          parser: 'typescript',
+          plugins: [prettierTs],
+        }),
+    },
+  }
 };
+
