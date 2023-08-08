@@ -19,18 +19,13 @@ describe('Sidebar', () => {
     );
   });
 
-  it('Sidebar закрытый при false у флага в localStorage', async () => {
-    localStorage.setItem('test', 'false');
-    renderWithTheme(<Sidebar localStorageKey="test" menu={{ items: [] }} />);
-
-    await waitFor(() =>
-      expect(screen.getByText('Свернуть меню')).not.toBeVisible(),
-    );
-  });
-
-  it('Sidebar открытый при true у флага в localStorage', async () => {
+  it('Sidebar открытый при первом рендере и остается открытым при true у флага в localStorage', async () => {
     localStorage.setItem('test', 'true');
     renderWithTheme(<Sidebar localStorageKey="test" menu={{ items: [] }} />);
     expect(screen.getByText('Свернуть меню')).toBeVisible();
+
+    await waitFor(() =>
+      expect(screen.getByText('Свернуть меню')).toBeVisible(),
+    );
   });
 });
