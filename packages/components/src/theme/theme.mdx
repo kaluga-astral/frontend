@@ -1,14 +1,50 @@
-import { Meta, ArgsTable } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
+import ReactJson from 'react-json-view';
 
-<Meta title="Components/Theme/ThemeProvider" />
+import { Brand } from './constants';
+import { createTheme } from './baseTheme';
 
-# ThemeProvider
+<Meta title="Components/Theme/Theme" />
 
-Предназначен для синхронизации [темы](/story/components-theme-theme--docs) между всеми компонентами ui-kit.
+# Theme
 
-Приложение должно быть обернуто в ```ThemeProvider``` для корректной работы.
+Используется совместно с [ThemeProvider](/story/components-theme-themeprovider--docs)() и styled.
 
-## Example
+## ThemeViewer
+
+<ReactJson
+  collapsed
+  name="theme"
+  style={{ width: '100%', marginBottom: '24px', marginTop: '24px' }}
+  src={
+    createTheme({
+      brand: Brand.DEFAULT,
+      fontsUrls: {
+        bold: {
+          woff: '',
+          woff2: '',
+        },
+        light: {
+          woff: '',
+          woff2: '',
+        },
+        regular: {
+          woff: '',
+          woff2: '',
+        },
+        medium: {
+          woff: '',
+          woff2: '',
+        },
+      },
+    })
+  }
+  theme="monokai"
+  displayObjectSize={false}
+  displayDataTypes={false}
+/>
+
+## Создание темы
 
 ```tsx
 import {
@@ -58,6 +94,24 @@ const App = () => (
 );
 ```
 
+## Brand
+Тема поддерживает брендирование.
+
+Поддерживаемые бренды:
+```ts
+export enum Brand {
+  DEFAULT = 'DEFAULT',
+  EDO = 'EDO',
+  KEDO = 'KEDO',
+  AO5 = 'AO5',
+  OFD = 'OFD',
+  SIGN = 'SIGN',
+  LKP = 'LKP',
+  POA = 'POA',
+  RSS = 'RSS',
+}
+```
+
 ## useTheme
 Для доступа к ```theme``` внутри компонента можно использовать ```useTheme```.
 
@@ -74,7 +128,3 @@ const Card = () => {
   );
 };
 ```
-
-# API
-
-<ArgsTable />
