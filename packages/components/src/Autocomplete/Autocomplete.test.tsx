@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
+import { TextField } from '../TextField';
+
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
@@ -190,5 +192,20 @@ describe('Autocomplete', () => {
 
     renderWithTheme(<AutocompleteWithRef />);
     expect(resultRef?.current).not.toBeNull();
+  });
+
+  it('Prop:renderInput: is present', async () => {
+    renderWithTheme(
+      <Autocomplete
+        options={[]}
+        renderInput={(props) => (
+          <TextField {...props} data-testid="customField" />
+        )}
+      />,
+    );
+
+    const paper = screen.getByTestId('customField');
+
+    expect(paper).toBeVisible();
   });
 });

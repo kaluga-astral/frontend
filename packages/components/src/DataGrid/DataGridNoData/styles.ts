@@ -14,8 +14,6 @@ export const DataGridNoDataWrapper = styled.tr`
 `;
 
 export const DataGridNoDataFigure = styled.figure`
-  position: absolute;
-
   display: flex;
   flex-direction: column;
   align-items: center;
