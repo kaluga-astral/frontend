@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Components/Styles/styled" />
+
+# styled
+
+Функция для стилизации компонентов из пакета [@emotion/styled](https://emotion.sh/docs/styled).
+
+[Style guide]() по написанию styled-компонентов.
+
+## Example
+
+```ts
+import { styled } from '@astral/ui';
+
+const CardWrapper = styled.article`
+  width: 200px;
+  height: 200px;
+  padding: ${({ theme }) => theme.spacing(4)};
+
+  background-color: ${({ theme }) => theme.palette.background.default};
+`;
+```
+
+## Использование темы
+Через тему обязательно должны задаваться:
+- отступы (```theme.spacing```)
+- размеры шрифтов (```theme.typography```)
+- цвета (```theme.palette```)
