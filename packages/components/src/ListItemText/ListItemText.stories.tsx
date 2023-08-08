@@ -6,7 +6,7 @@ import { ListItem } from '../ListItem';
 import { ListItemText } from './ListItemText';
 
 export default {
-  title: 'Components/ListItemText',
+  title: 'Components/List/ListItemText',
   component: ListItemText,
 };
 

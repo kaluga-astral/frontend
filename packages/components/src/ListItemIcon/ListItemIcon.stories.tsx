@@ -8,7 +8,7 @@ import { ListItemText } from '../ListItemText';
 import { ListItemIcon } from './ListItemIcon';
 
 export default {
-  title: 'Components/ListItemIcon',
+  title: 'Components/List/ListItemIcon',
   component: ListItemIcon,
 };
 

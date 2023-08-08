@@ -12,7 +12,7 @@ import { PageHeader, PageHeaderProps } from './PageHeader';
 import { PageHeaderDashboardStory } from './PageHeaderDashboardStory';
 
 export default {
-  title: 'Components/PageHeader',
+  title: 'Components/PageLayout/PageHeader',
   component: PageHeader,
 };
 

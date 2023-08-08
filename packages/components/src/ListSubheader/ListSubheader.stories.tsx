@@ -9,7 +9,7 @@ import { ListItemText } from '../ListItemText';
 import { ListSubheader } from './ListSubheader';
 
 export default {
-  title: 'Components/ListSubheader',
+  title: 'Components/List/ListSubheader',
   component: ListSubheader,
 };
 

@@ -14,7 +14,7 @@ import { MenuItem } from '../index';
 import { MenuList } from './MenuList';
 
 export default {
-  title: 'Components/MenuList',
+  title: 'Components/Menu/MenuList',
   component: MenuList,
 };
 

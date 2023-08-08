@@ -8,7 +8,7 @@ import { FormControlLabel } from '../FormControlLabel';
 import { Grow } from './Grow';
 
 export default {
-  title: 'Components/Grow',
+  title: 'Components/Transitions/Grow',
   component: Grow,
 };
 

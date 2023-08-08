@@ -8,7 +8,7 @@ import { FormControlLabel } from '../FormControlLabel';
 import { Zoom } from './Zoom';
 
 export default {
-  title: 'Components/Zoom',
+  title: 'Components/Transitions/Zoom',
   component: Zoom,
 };
 

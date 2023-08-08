@@ -11,7 +11,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItem } from './ListItem';
 
 export default {
-  title: 'Components/ListItem',
+  title: 'Components/List/ListItem',
   component: ListItem,
 };
 
