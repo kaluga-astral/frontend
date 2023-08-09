@@ -67,7 +67,7 @@ const [
  * ### [Guide]()
  */
 const meta: Meta<typeof SvgIcon> = {
-  title: 'Components/Icons',
+  title: 'Icons/Icons',
   component: SvgIcon,
 };
 
