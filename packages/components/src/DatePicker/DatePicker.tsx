@@ -42,6 +42,11 @@ export type DatePickerProps = MondayFirst &
      * */
     value?: Date;
     className?: string;
+    /**
+     * @description Определяет размер компонента
+     * @default 	'medium'
+     */
+    size?: 'small' | 'medium';
   };
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
@@ -59,6 +64,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       className,
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
+      size,
     },
     forwardedRef,
   ) => {
@@ -87,6 +93,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           {...inputProps}
           {...calculatedInputProps}
           mask={mask}
+          size={size}
           disabled={disabled}
           ref={forwardedRef}
           onFocus={openPopover}

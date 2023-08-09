@@ -58,6 +58,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
       spacing = DEFAULT_SPACING,
+      size,
     },
     forwardedRef,
   ) => {
@@ -100,6 +101,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         <DatePickerInput
           {...startDateProps.inputProps}
           mask={mask}
+          size={size}
           {...startDateOptions.inputProps}
           disabled={disabled}
           onFocus={openPopover}
@@ -107,6 +109,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         />
         <DatePickerInput
           {...endDateProps.inputProps}
+          size={size}
           mask={mask}
           {...endDateOptions.inputProps}
           disabled={disabled}
