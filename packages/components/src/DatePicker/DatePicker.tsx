@@ -64,7 +64,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       className,
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
-      size = 'medium',
+      size,
     },
     forwardedRef,
   ) => {
