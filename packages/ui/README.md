@@ -1,9 +1,161 @@
 # @astral/ui
 
-Пакет содержит все необходимые фичи для построения интерфейсов приложений Астрал.Софт.
+```@astral/ui``` - это UI-KIT, на основе которого строятся интерфейсы в Астрал-Софт.
 
-# [Documentation](https://main--61baeff6f06230003a88ef8a.chromatic.com/)
+```@astral/ui``` включает в себя пакеты:
+-  ```@astral/components```
+-  ```@astral/form```
+-  ```@astral/icons```
+
+# Table of contents
+- [Storybook](#storybook)
+- [Introduction](#introduction)
+- [Getting started with Next.js](#getting-started-with-nextjs)
+- [Migration guide](#migration-guide)
+
+# [Storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com/)
 [Storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com/) содержит документацию компонентов ```@astral/ui```.
+
+# Introduction
+```@astral/ui``` - это единая точка входа для всех основных составных частей UI-KIT.
+
+```@astral/ui``` экспортирует:
+- все содержимое пакета ```@astral/components```
+- все содержимое пакета ```@astral/form```
+- все содержимое пакета ```@astral/icons```
+- illustrations - иллюстрации, которые необходимо использовать в проекте
+- fonts - шрифты, которые необходимо использовать в проекте
+
+## @astral/components
+```@astral/components``` - пакет, содержащий основу для построения интерфейсов: react-компоненты, хуки, utils.
+
+## @astral/form
+```@astral/form``` - пакет, содержащий обертки ```@astral/components``` для интеграции с react-hook-form.
+
+## @astral/icons
+```@astral/icons``` - пакет, содержащий иконки, доступные в дизайн-системе.
+
+# Getting started with Next.js
+
+## Example
+Пример использования и интеграции ```@astral/ui``` находится [здесь](https://github.com/kaluga-astral/nextjs-boilerplate).
+
+## Installation
+
+```shell
+npm --save @astral/ui
+```
+
+## global.d.ts
+
+```ts
+/// <reference types="@astral/ui/declarations" />
+
+```
+
+## next.config
+
+```js
+const nextConfig = {
+  ...
+  transpilePackages: [
+    '@astral/ui',
+    '@astral/icons',
+    '@astral/components',
+    '@astral/form',
+  ],
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.(woff|woff2)$/i,
+      issuer: { and: [/\.(js|ts)x?$/] },
+      type: 'asset/resource',
+    });
+
+    return config;
+  },
+  ...
+};
+
+module.exports = nextConfig;
+```
+
+## _app.tsx
+
+```tsx
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import * as monitoringErrorService from '@sentry/nextjs';
+import {
+  Brand,
+  ConfigProvider,
+  NotificationContainer,
+  StylesCacheProvider,
+  ThemeProvider,
+  createTheme,
+} from '@astral/ui';
+import { createStylesCache as createStylesServerCache } from '@astral/ui/server';
+import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
+import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
+import UbuntuLightWoff from '@astral/ui/fonts/UbuntuLight.woff';
+import UbuntuLightWoff2 from '@astral/ui/fonts/UbuntuLight.woff2';
+import UbuntuRegularWoff from '@astral/ui/fonts/UbuntuRegular.woff';
+import UbuntuRegularWoff2 from '@astral/ui/fonts/UbuntuRegular.woff2';
+import UbuntuMediumWoff from '@astral/ui/fonts/UbuntuMedium.woff';
+import UbuntuMediumWoff2 from '@astral/ui/fonts/UbuntuMedium.woff2';
+
+import { MainLayout } from '@example/modules/LayoutModule';
+
+const fontsUrls = {
+  bold: {
+    woff: UbuntuBoldWoff,
+    woff2: UbuntuBoldWoff2,
+  },
+  light: {
+    woff: UbuntuLightWoff,
+    woff2: UbuntuLightWoff2,
+  },
+  regular: {
+    woff: UbuntuRegularWoff,
+    woff2: UbuntuRegularWoff2,
+  },
+  medium: {
+    woff: UbuntuMediumWoff,
+    woff2: UbuntuMediumWoff2,
+  },
+};
+
+export const theme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
+
+const stylesCache = createStylesServerCache({ key: 'next' });
+
+export const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>Astral.Example</title>
+      </Head>
+      <StylesCacheProvider value={stylesCache}>
+        <ConfigProvider
+          captureException={monitoringErrorService.captureException}
+        >
+          <ThemeProvider theme={theme}>
+            <NotificationContainer />
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ThemeProvider>
+        </ConfigProvider>
+      </StylesCacheProvider>
+    </>
+  );
+};
+
+export default App;
+```
 
 # Migration guide
 
