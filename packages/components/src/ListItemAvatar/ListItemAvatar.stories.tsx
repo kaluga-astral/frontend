@@ -10,7 +10,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItemAvatar } from './ListItemAvatar';
 
 export default {
-  title: 'Components/ListItemAvatar',
+  title: 'Components/List/ListItemAvatar',
   component: ListItemAvatar,
 };
 

@@ -32,6 +32,25 @@ export const Interaction: Story = {
   },
 };
 
+const ExamplePaper = styled(Paper)`
+  padding: ${({ theme }) => theme.spacing(4)};
+`;
+
+export const Example = () => (
+  <ExamplePaper>
+    <Typography variant="h3" component="h2" gutterBottom>
+      Заявка успешно отправлена
+    </Typography>
+    <Typography paragraph>
+      Заявка{' '}
+      <Typography color="info" component="span">
+        22
+      </Typography>{' '}
+      была отправлена на ваш email
+    </Typography>
+  </ExamplePaper>
+);
+
 export const Variants = () => (
   <Grid container spacing={6}>
     <Typography variant="h1">
@@ -145,23 +164,4 @@ export const Ellipsis = () => (
       документооборот
     </Typography>
   </div>
-);
-
-const ExamplePaper = styled(Paper)`
-  padding: ${({ theme }) => theme.spacing(4)};
-`;
-
-export const Example = () => (
-  <ExamplePaper>
-    <Typography variant="h3" component="h2" gutterBottom>
-      Заявка успешно отправлена
-    </Typography>
-    <Typography paragraph>
-      Заявка{' '}
-      <Typography color="info" component="span">
-        22
-      </Typography>{' '}
-      была отправлена на ваш email
-    </Typography>
-  </ExamplePaper>
 );

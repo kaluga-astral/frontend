@@ -18,7 +18,7 @@ import {
 import { StyledLabel, StyledMenuItem } from './styled';
 
 export default {
-  title: 'Components/MenuGroup',
+  title: 'Components/Menu/MenuGroup',
   component: MenuGroup,
 };
 

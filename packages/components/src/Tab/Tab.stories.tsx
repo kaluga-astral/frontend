@@ -8,7 +8,7 @@ import { Typography } from '../Typography';
 import { Tab } from './Tab';
 
 export default {
-  title: 'Components/Tab',
+  title: 'Components/Tabs/Tab',
   component: Tab,
 };
 

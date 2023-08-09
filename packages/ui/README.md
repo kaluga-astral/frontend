@@ -10,6 +10,7 @@
 # Table of contents
 - [Storybook](#storybook)
 - [Introduction](#introduction)
+- [Playground](#playground)
 - [Getting started with Next.js](#getting-started-with-nextjs)
 - [Migration guide](#migration-guide)
 
@@ -34,6 +35,9 @@
 
 ## @astral/icons
 ```@astral/icons``` - пакет, содержащий иконки, доступные в дизайн-системе.
+
+# Playground
+Доступен [Codesandbox](https://codesandbox.io/p/sandbox/sleepy-chatterjee-8mv9ml?file=%2Fsrc%2FPlayground%2FPlayground.tsx%3A12%2C1) для проверки фукнционала.
 
 # Getting started with Next.js
 

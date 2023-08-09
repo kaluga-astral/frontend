@@ -13,7 +13,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItemButton } from './ListItemButton';
 
 export default {
-  title: 'Components/ListItemButton',
+  title: 'Components/List/ListItemButton',
   component: ListItemButton,
 };
 

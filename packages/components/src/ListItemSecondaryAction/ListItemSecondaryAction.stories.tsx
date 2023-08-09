@@ -9,7 +9,7 @@ import { ListItemText } from '../ListItemText';
 import { ListItemSecondaryAction } from './ListItemSecondaryAction';
 
 export default {
-  title: 'Components/ListItemSecondaryActionItem',
+  title: 'Components/List/ListItemSecondaryActionItem',
   component: ListItemSecondaryAction,
 };
 

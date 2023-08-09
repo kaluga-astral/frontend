@@ -1,0 +1,80 @@
+import { Meta, ArgsTable } from '@storybook/blocks';
+
+<Meta title="Components/Theme/ThemeProvider" />
+
+# ThemeProvider
+
+Предназначен для синхронизации [темы](/story/components-theme-theme--docs) между всеми компонентами ui-kit.
+
+Приложение должно быть обернуто в ```ThemeProvider``` для корректной работы.
+
+## Example
+
+```tsx
+import {
+  Brand,
+  createTheme,
+  styled
+} from '@astral/ui';
+
+import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
+import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
+import UbuntuLightWoff from '@astral/ui/fonts/UbuntuLight.woff';
+import UbuntuLightWoff2 from '@astral/ui/fonts/UbuntuLight.woff2';
+import UbuntuRegularWoff from '@astral/ui/fonts/UbuntuRegular.woff';
+import UbuntuRegularWoff2 from '@astral/ui/fonts/UbuntuRegular.woff2';
+import UbuntuMediumWoff from '@astral/ui/fonts/UbuntuMedium.woff';
+import UbuntuMediumWoff2 from '@astral/ui/fonts/UbuntuMedium.woff2';
+
+const fontsUrls = {
+  bold: {
+    woff: UbuntuBoldWoff,
+    woff2: UbuntuBoldWoff2,
+  },
+  light: {
+    woff: UbuntuLightWoff,
+    woff2: UbuntuLightWoff2,
+  },
+  regular: {
+    woff: UbuntuRegularWoff,
+    woff2: UbuntuRegularWoff2,
+  },
+  medium: {
+    woff: UbuntuMediumWoff,
+    woff2: UbuntuMediumWoff2,
+  },
+};
+
+const theme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
+
+const Main = styled.main`
+  padding: ${({ theme }) => theme.spacing(4)};
+`;
+
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Main />
+  </ThemeProvider>
+);
+```
+
+## useTheme
+Для доступа к ```theme``` внутри компонента можно использовать ```useTheme```.
+
+```tsx
+import { useTheme } from '@astral/ui';
+
+const Card = () => {
+  const theme = useTheme();
+
+  return (
+    <article>
+      <p>Primary: {theme.palette.primary.main}</p>
+    </article>
+  );
+};
+```
+
+# API
+
+<ArgsTable />
