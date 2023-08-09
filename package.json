@@ -57,8 +57,13 @@
     "vite": "^4.4.7",
     "vitest": "^0.33.0",
     "webpack": "^5.88.1",
-    "react-object-view": "0.3.4",
     "react-json-view": "1.21.3"
+  },
+  "overrides": {
+    "react-json-view": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   },
   "scripts": {
     "storybook": "storybook dev",
