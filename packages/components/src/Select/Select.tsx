@@ -4,7 +4,7 @@ import {
   Select as MuiSelect,
   SelectProps as MuiSelectProps,
 } from '@mui/material';
-import React, { ReactNode } from 'react';
+import React, { ForwardedRef, ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { Tag } from '../Tag';
@@ -12,6 +12,7 @@ import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
 import { WithoutEmotionSpecific } from '../types';
+import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import {
   SelectPlaceholder,
@@ -31,18 +32,21 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   label?: string;
 };
 
-export const Select = <Value,>({
-  required,
-  getOptionLabel = (value) => value,
-  placeholder,
-  helperText,
-  loading,
-  success,
-  children,
-  error,
-  label,
-  ...props
-}: SelectProps<Value>) => {
+const SelectInner = <Value,>(
+  {
+    required,
+    getOptionLabel = (value) => value,
+    placeholder,
+    helperText,
+    loading,
+    success,
+    children,
+    error,
+    label,
+    ...props
+  }: SelectProps<Value>,
+  ref: ForwardedRef<HTMLDivElement>,
+) => {
   const renderValue = (selectedOptions: Value): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
@@ -80,6 +84,7 @@ export const Select = <Value,>({
         renderValue={renderValue}
         IconComponent={ChevronDOutlineMd}
         displayEmpty
+        ref={ref}
       >
         <SelectPlaceholder value="">{placeholder}</SelectPlaceholder>
         {loading && (
@@ -96,3 +101,5 @@ export const Select = <Value,>({
     </FormControl>
   );
 };
+
+export const Select = forwardRefWithGeneric(SelectInner);
