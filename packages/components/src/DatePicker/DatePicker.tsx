@@ -1,7 +1,7 @@
-import { SyntheticEvent, forwardRef, useRef } from 'react';
+import { RefObject, SyntheticEvent, forwardRef } from 'react';
 
 import { TextFieldProps } from '../TextField';
-import { useInputPopover } from '../hooks';
+import { useForwardedRef, useInputPopover } from '../hooks';
 import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
@@ -36,6 +36,7 @@ export type DatePickerProps = MondayFirst &
       reason?: CloseEventReason,
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
+    inputRef?: RefObject<HTMLInputElement>;
     disabled?: boolean;
     /**
      * @description Принимает только Date object, включая невалидную дату Invalid date
@@ -59,6 +60,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       inputProps,
+      inputRef,
       disabled,
       value,
       className,
@@ -68,7 +70,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     forwardedRef,
   ) => {
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useForwardedRef(forwardedRef);
 
     const { isOpenPopover, openPopover, closePopover } = useInputPopover({
       ref,
@@ -95,7 +97,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           mask={mask}
           size={size}
           disabled={disabled}
-          ref={forwardedRef}
+          ref={inputRef}
           onFocus={openPopover}
           onClick={openPopover}
         />
