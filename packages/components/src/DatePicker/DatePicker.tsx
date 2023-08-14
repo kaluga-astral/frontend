@@ -50,7 +50,7 @@ export type DatePickerProps = MondayFirst &
     size?: 'small' | 'medium';
   };
 
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
+export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
     {
       onChange,
@@ -70,7 +70,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     },
     forwardedRef,
   ) => {
-    const ref = useForwardedRef(forwardedRef);
+    const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
     const { isOpenPopover, openPopover, closePopover } = useInputPopover({
       ref,
