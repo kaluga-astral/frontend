@@ -152,6 +152,11 @@ export const IsError = () => {
   );
 };
 
+/**
+ * Prop ```CustomState``` позволяет отобразить кастомное состояние при ```isCustom === true```
+ *
+ * Prop ```CustomState``` принимает объект с props для [Placeholder](/docs/components-placeholder--docs)
+ */
 export const CustomState = () => {
   const { fetch, isLoading, isSuccess } = useSimulateLoading();
 
