@@ -12,6 +12,9 @@ import {
   FormDateRangePickerValue,
 } from './FormDateRangePicker';
 
+/**
+ * Обертка [DateRangePicker](/story/components-datepickers-daterangepicker--docs) для react-hook-form
+ */
 const meta: Meta<typeof FormDateRangePicker> = {
   title: 'Form/FormDateRangePicker',
   component: FormDateRangePicker,
@@ -48,51 +51,6 @@ export const Example = () => {
     <Form form={form} onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <FormDateRangePicker
-          startDateProps={{
-            name: 'startDateField',
-            control: form.control,
-            inputProps: {
-              label: 'startDate',
-            },
-          }}
-          endDateProps={{
-            name: 'endDateField',
-            control: form.control,
-            inputProps: {
-              label: 'endDate',
-            },
-          }}
-        />
-        <FormSubmitButton>Submit</FormSubmitButton>
-      </Grid>
-    </Form>
-  );
-};
-
-/**
- * Prop `size` управляет размером компонента.
- * По-дефолту 'medium'.
- */
-export const Size = () => {
-  const form = useForm<FormValues>({
-    resolver: resolver<FormValues>(validationSchema),
-  });
-
-  const handleSubmit = form.handleSubmit(
-    (values) =>
-      new Promise<void>((resolve) => {
-        setTimeout(() => {
-          window.alert(JSON.stringify(values));
-          resolve();
-        }, 1000);
-      }),
-  );
-
-  return (
-    <Form form={form} onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <FormDateRangePicker
-          size={'small'}
           startDateProps={{
             name: 'startDateField',
             control: form.control,
