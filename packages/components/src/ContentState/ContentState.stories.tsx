@@ -174,7 +174,9 @@ export const ErrorState = () => {
 };
 
 /**
- * Переопределение картинки для ошибки из ```ConfigProvider```
+ * Переопределение картинки для ошибки
+ *
+ * По умолчанию (без указанного ```errorState.imgSrc```) отображается ```defaultErrorImgSrc``` из ```ConfigProvider```
  */
 export const ErrorStateWithCustomImg = () => {
   const { fetchWithError, isLoading, error } = useSimulateLoading();
