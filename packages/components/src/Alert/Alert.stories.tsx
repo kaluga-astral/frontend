@@ -1,319 +1,116 @@
-import { Story } from '@storybook/react';
-import { Link, useMediaQuery, useTheme } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
-import { ExampleTemplate } from '../docs';
-import { LegacyGrid } from '../LegacyGrid';
 import { Button } from '../Button';
-import { Typography } from '../Typography';
+import { Grid } from '../Grid';
 
 import { Alert } from './Alert';
 
-export default {
+/**
+ * Alert - Предупреждение. Короткое важное сообщение, которое используется для привлечения внимание пользователя, не прерывая его задачи.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=825%3A13886)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
   component: Alert,
 };
 
-export const AlertShowcase: Story = () => {
-  const [closed, setClosed] = useState(false);
-  const theme = useTheme();
+export default meta;
 
-  const matches = useMediaQuery(theme.breakpoints.down('xl'));
-  const autoFlow = matches ? 'row' : 'column';
+type Story = StoryObj<typeof Alert>;
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setClosed(false);
-    }, 1500);
+export const Interaction: Story = {
+  args: {
+    children: 'Формирование счета может занять до 15 минут',
+    display: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
-    return () => clearTimeout(timeout);
-  }, [closed]);
+const useToggleDisplay = () => {
+  const [isDisplay, setIsDisplay] = useState(true);
+  const toggleIsDisplay = () => setIsDisplay((prev) => !prev);
 
-  const handleClose = () => setClosed(true);
+  return { isDisplay, toggleIsDisplay };
+};
 
-  return (
-    <ExampleTemplate>
-      <Typography paragraph variant="h3">
-        Alert
-      </Typography>
-      <Typography paragraph>
-        Предупреждение — это короткое важное сообщение, которое используется для
-        привлечения внимание пользователя, не прерывая его задачи.
-      </Typography>
-      <Typography>
-        Предупреждение предлагает четыре уровня серьезности:
-      </Typography>
-      <ul>
-        <li>Information - информационное оповещение</li>
-        <li>Success - сообщение об успехе</li>
-        <li>Warning - предупреждение</li>
-        <li>Error - сообщение об ошибке</li>
-      </ul>
+export const Example = () => (
+  <Alert title="Внимание">Формирование счета может занять до 15 минут</Alert>
+);
 
-      <br />
-      <Typography variant="h4" paragraph>
-        Анатомия компонента Alert
-      </Typography>
+export const Severity = () => (
+  <>
+    <Alert severity="info" title="info">
+      Формирование счета может занять до 15 минут
+    </Alert>
+    <Alert severity="success" title="success">
+      Формирование счета может занять до 15 минут
+    </Alert>
+    <Alert severity="warning" title="warning">
+      Формирование счета может занять до 15 минут
+    </Alert>
+    <Alert severity="error" title="error">
+      Формирование счета может занять до 15 минут
+    </Alert>
+  </>
+);
 
-      <Typography>Компонент состоит из:</Typography>
-      <ol>
-        <li>Иконки, соответствующей уровню серьезности;</li>
-        <li>Заголовка;</li>
-        <li>Поясняющего текста;</li>
-        <li>Кнопки действия;</li>
-        <li>Кнопка “Закрыть”.</li>
-      </ol>
+export const Actions = () => (
+  <Alert actions={<Button variant="link">Перейти к счету</Button>}>
+    Формирование счета может занять до 15 минут
+  </Alert>
+);
 
-      <Typography paragraph>
-        Ширина блока компонента зависит от ширины контента, к которому относится
-        предупреждение.
-      </Typography>
+export const Title = () => (
+  <Alert title="Внимание">Формирование счета может занять до 15 минут</Alert>
+);
 
-      <Typography paragraph>
-        В компоненте могут отсутствовать заголовок / поясняющий текст / кнопки
-        действия / кнопка “Закрыть”.
-      </Typography>
+export const WithoutTitle = () => (
+  <Alert>Формирование счета может занять до 15 минут</Alert>
+);
 
-      <ExampleTemplate.Case title="">
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={matches ? autoFlow : 'false'}
-          templateColumns={matches ? '' : 'repeat(3, 30%)'}
-          spacing={4}
-        >
-          <Alert
-            severity="info"
-            title="Заголовок"
-            onClose={handleClose}
-            actions={
-              <>
-                <Link underline="hover" href="https://www.google.com/">
-                  Кнопка-ссылка
-                </Link>
-              </>
-            }
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
+/**
+ * Prop ```onClose``` позволяет отобразить кнопку для закрытия Alert, и обработать клик по ней
+ */
+export const OnClose = () => {
+  const { isDisplay, toggleIsDisplay } = useToggleDisplay();
 
-          <Alert
-            severity="info"
-            title="Заголовок"
-            onClose={handleClose}
-            actions={
-              <>
-                <Link underline="hover" href="https://www.google.com/">
-                  Кнопка-ссылка
-                </Link>
-              </>
-            }
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-
-          <Alert
-            severity="info"
-            onClose={handleClose}
-            actions={
-              <>
-                <Link underline="hover" href="https://www.google.com/">
-                  Кнопка-ссылка
-                </Link>
-              </>
-            }
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-
-          <Alert severity="info" title="Заголовок" onClose={handleClose}>
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-
-          <Alert severity="info" title="Заголовок" onClose={handleClose}>
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-
-          <Alert severity="info" onClose={handleClose}>
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <br />
-      <Typography variant="h4" paragraph>
-        Типы компонента
-      </Typography>
-
-      <ExampleTemplate.Case
-        title="Information"
-        descriptionList={[
-          'Информационное оповещение это стандартное состояние оповещения. ',
-          'Используется, когда необходимо подсветить изменения или обозначить важную информацию на странице.',
-        ]}
-      >
-        <LegacyGrid container templateColumns="70%" justifyContent="center">
-          <Alert
-            severity="info"
-            title="Редактирование ограничено"
-            onClose={handleClose}
-            actions={
-              <>
-                <Link underline="hover" href="https://www.google.com/">
-                  Кнопка-ссылка
-                </Link>
-              </>
-            }
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Success"
-        descriptionList={[
-          'Данный тип компонента используется, когда необходимо оповестить пользователя, что действие или событие произошло успешно.',
-        ]}
-      >
-        <LegacyGrid container templateColumns="70%" justifyContent="center">
-          <Alert severity="success" onClose={handleClose}>
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Warning"
-        descriptionList={[
-          'Сообщение раздела, которое используется для помощи во избежание ошибок.',
-        ]}
-      >
-        <LegacyGrid container templateColumns="70%" justifyContent="center">
-          <Alert
-            severity="warning"
-            title="Был изменён сертификат"
-            onClose={handleClose}
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <Typography variant="h5" paragraph>
-        Error
-      </Typography>
-
-      <Typography>
-        Используется, когда необходимо сообщить пользователю:
-      </Typography>
-
-      <ul>
-        <li>
-          Произошло что-то критическое, что мешает дальнейшей работе в разделе;
-        </li>
-        <li>Доступ к разделу запрещен;</li>
-        <li>Есть проблемы с подключением;</li>
-      </ul>
-
-      <ExampleTemplate.Case title="">
-        <LegacyGrid container templateColumns="70%" justifyContent="center">
-          <Alert
-            severity="error"
-            title="Что-то пошло не так с подбором тарифа"
-            onClose={handleClose}
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Кнопка действия"
-        descriptionList={[
-          'Используется, когда необходимо дать возможность принять решение в соответствии с содержимым сообщения раздела.',
-          'Действие в сообщении отображается в виде текста ссылки. Действий может быть несколько в одном сообщении. Чаще всего не более двух.',
-        ]}
-      >
-        <LegacyGrid container templateColumns="70%" justifyContent="center">
-          <Alert
-            severity="warning"
-            onClose={handleClose}
-            actions={
-              <>
-                <Link underline="hover" href="https://www.google.com/">
-                  Подробнее
-                </Link>
-              </>
-            }
-          >
-            Заголовок и действия опциональны, их можно отключить, если
-            требуется.
-          </Alert>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
+  return isDisplay ? (
+    <Alert onClose={toggleIsDisplay}>
+      Формирование счета может занять до 15 минут
+    </Alert>
+  ) : (
+    <Button onClick={toggleIsDisplay}>Показать Alert</Button>
   );
 };
 
-AlertShowcase.parameters = { options: { showPanel: false } };
-
-const Template: Story = (args) => {
-  const [closedList, setClosedList] = useState<string[]>([]);
-
-  const handleClose = (id: string) => () => setClosedList([...closedList, id]);
-
-  const handleReset = () => setClosedList([]);
+/**
+ * Prop ```display``` позволяет задать видимость элемента
+ */
+export const Display = () => {
+  const { isDisplay, toggleIsDisplay } = useToggleDisplay();
 
   return (
-    <LegacyGrid spacing={4}>
-      <Alert
-        {...args}
-        onClose={handleClose('1')}
-        display={!closedList.includes('1')}
-        actions={
-          <>
-            <Link underline="hover" href="https://www.google.com/">
-              Кнопка-ссылка
-            </Link>
-            <Link underline="hover" href="https://www.google.com/">
-              Другая кнопка-ссылка
-            </Link>
-          </>
-        }
-      >
-        Заголовок и действия опциональны, их можно отключить, если требуется.
+    <Grid container spacing={2}>
+      <Button onClick={toggleIsDisplay}>Показать/спрятать Alert</Button>
+      <Alert display={isDisplay}>
+        Формирование счета может занять до 15 минут
       </Alert>
-
-      <br />
-      <Button onClick={handleReset}>Сбросить</Button>
-    </LegacyGrid>
+    </Grid>
   );
 };
 
-export const AlertStory = Template.bind({});
-
-AlertStory.storyName = 'Alert';
-
-AlertStory.args = {
-  severity: 'info',
-  title: 'Заголовок',
-  closeText: 'Скрыть',
-  square: false,
-  elevation: 1,
-};
-
-AlertStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+/**
+ * Prop ```closeText``` позволяет задать текст подсказки про ховере на иконку закрытия Alert
+ */
+export const CloseText = () => (
+  <Alert closeText="Кастомный текст" onClose={() => {}}>
+    Формирование счета может занять до 15 минут
+  </Alert>
+);
