@@ -19,7 +19,10 @@ import { getBoundaryDate } from './utils';
 
 const DEFAULT_SPACING = 2;
 
-type DateItemProps = Pick<DatePickerProps, 'onChange' | 'value' | 'inputProps'>;
+export type DateItemProps = Pick<
+  DatePickerProps,
+  'onChange' | 'value' | 'inputProps'
+>;
 
 export type DateRangePickerProps = Omit<
   DatePickerProps,

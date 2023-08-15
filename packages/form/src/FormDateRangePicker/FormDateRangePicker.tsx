@@ -1,0 +1,73 @@
+import {
+  DateItemProps,
+  DateRangePicker,
+  DateRangePickerProps,
+} from '@astral/components';
+
+import { useFormFieldProps } from '../hooks';
+import { WithFormFieldProps } from '../types';
+
+/**
+ * @description Тип значения, которое сетится в state формы
+ */
+export type FormDateRangePickerValue = Date;
+
+export type FormDateRangePickerProps<FieldValues extends object> = Omit<
+  DateRangePickerProps,
+  'startDateProps' | 'endDateProps'
+> & {
+  /**
+   * @description пропсы для управления датой слева
+   */
+  startDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
+
+  /**
+   * @description пропсы для управления датой справа
+   */
+  endDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
+};
+
+/**
+ * @description DateRangePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
+ */
+export const FormDateRangePicker = <FieldValues extends object>({
+  startDateProps,
+  endDateProps,
+  ...props
+}: FormDateRangePickerProps<FieldValues>) => {
+  const startDateFieldProps = useFormFieldProps<DateItemProps, FieldValues>(
+    startDateProps,
+  );
+
+  const endDateFieldProps = useFormFieldProps<DateItemProps, FieldValues>(
+    endDateProps,
+  );
+
+  const { error: startDateError, helperText: startDateHelperText } =
+    startDateFieldProps;
+
+  const { error: endDateError, helperText: endDateErrorText } =
+    endDateFieldProps;
+
+  return (
+    <DateRangePicker
+      {...props}
+      startDateProps={{
+        ...startDateFieldProps,
+        inputProps: {
+          ...startDateProps.inputProps,
+          error: startDateError,
+          helperText: startDateHelperText,
+        },
+      }}
+      endDateProps={{
+        ...endDateFieldProps,
+        inputProps: {
+          ...endDateProps.inputProps,
+          error: endDateError,
+          helperText: endDateErrorText,
+        },
+      }}
+    />
+  );
+};
