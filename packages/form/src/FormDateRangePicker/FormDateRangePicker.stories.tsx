@@ -61,14 +61,14 @@ export const Example = () => {
               name: 'startDateField',
               control: form.control,
               inputProps: {
-                label: 'startDate',
+                label: 'Дата начала:',
               },
             }}
             endDateProps={{
               name: 'endDateField',
               control: form.control,
               inputProps: {
-                label: 'endDate',
+                label: 'Дата окончания:',
               },
             }}
           />

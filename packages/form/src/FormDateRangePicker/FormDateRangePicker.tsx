@@ -12,18 +12,20 @@ import { WithFormFieldProps } from '../types';
  */
 export type FormDateRangePickerValue = Date;
 
-export type FormDateRangePickerProps<FieldValues extends object> =
-  DateRangePickerProps & {
-    /**
-     * @description пропсы для управления датой слева
-     */
-    startDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
+export type FormDateRangePickerProps<FieldValues extends object> = Omit<
+  DateRangePickerProps,
+  'startDateProps' | 'endDateProps'
+> & {
+  /**
+   * @description пропсы для управления датой слева
+   */
+  startDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
 
-    /**
-     * @description пропсы для управления датой справа
-     */
-    endDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
-  };
+  /**
+   * @description пропсы для управления датой справа
+   */
+  endDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
+};
 
 /**
  * @description DateRangePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
