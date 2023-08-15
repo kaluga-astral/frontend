@@ -15,7 +15,7 @@ const getErrorStyles = (theme: Theme) => css`
   }
 
   & .MuiSvgIcon-border {
-    color: ${theme.palette.red[800]};
+    fill: ${theme.palette.red[800]};
   }
 `;
 
@@ -33,7 +33,7 @@ export const CheckboxStyled = styled(Checkbox, {
   }
 
   & .MuiSvgIcon-border {
-    color: ${({ theme }) => theme.palette.grey[300]};
+    fill: ${({ theme }) => theme.palette.grey[300]};
   }
 
   & > svg {
@@ -45,7 +45,7 @@ export const CheckboxStyled = styled(Checkbox, {
     color: ${({ theme }) => theme.palette.grey[200]};
 
     & .MuiSvgIcon-border {
-      color: currentColor;
+      fill: currentColor;
     }
   }
 
@@ -62,7 +62,7 @@ export const CheckboxStyled = styled(Checkbox, {
     }
 
     & .MuiSvgIcon-mark {
-      color: ${({ theme }) => theme.palette.common.white};
+      fill: ${({ theme }) => theme.palette.common.white};
     }
   }
 
