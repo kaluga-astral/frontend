@@ -38,6 +38,8 @@ export * from './FormSubmitButton';
 
 export * from './FormDatePicker';
 
+export * from './FormDateRangePicker';
+
 export * from './Form';
 
 export * from './types';
