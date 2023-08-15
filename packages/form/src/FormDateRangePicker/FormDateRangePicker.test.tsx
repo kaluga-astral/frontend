@@ -114,13 +114,11 @@ describe('FormDateRangePicker', () => {
     renderWithTheme(<TestComponent />);
     fireEvent.focus(screen.getByLabelText('startDate'));
 
-    const dateBtnA = screen.getAllByText('14')[0];
+    const startDateBtn = screen.getAllByText('14')[0];
+    const endDateBtn = screen.getAllByText('15')[1];
 
-    await userEvents.click(dateBtnA);
-
-    const dateBtnB = screen.getAllByText('15')[1];
-
-    await userEvents.click(dateBtnB);
+    await userEvents.click(startDateBtn);
+    await userEvents.click(endDateBtn);
 
     await waitFor(async () => {
       await userEvents.click(screen.getByText('submit'));

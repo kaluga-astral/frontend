@@ -15,12 +15,12 @@ export type FormDateRangePickerValue = Date;
 export type FormDateRangePickerProps<FieldValues extends object> =
   DateRangePickerProps & {
     /**
-     * @description специфичные пропсы для управления датой слева
+     * @description пропсы для управления датой слева
      */
     startDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
 
     /**
-     * @description специфичные пропсы для управления датой справа
+     * @description пропсы для управления датой справа
      */
     endDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
   };
