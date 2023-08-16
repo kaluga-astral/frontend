@@ -1,3 +1,5 @@
+export * from './Accordion';
+
 export * from './ActionCell';
 
 export * from './Alert';
