@@ -32,7 +32,7 @@ export const Interaction: Story = {
         <Typography>Дата оформления: 15.08.2023</Typography>
       </>
     ),
-    title: 'Информация о заказе',
+    summary: 'Информация о заказе',
     startAdorment: <InfoFillMd color="info" />,
   },
   parameters: {
@@ -51,7 +51,7 @@ const BaseContainer = styled(Grid)`
 export const Example = () => (
   <BaseContainer>
     <Accordion
-      title="Информация о заказе"
+      summary="Информация о заказе"
       startAdorment={<InfoFillMd color="info" />}
     >
       <Typography>Сумма заказа: 1 000 руб</Typography>
@@ -60,9 +60,11 @@ export const Example = () => (
   </BaseContainer>
 );
 
-export const Title = () => (
+export const Summary = () => (
   <BaseContainer>
-    <Accordion title="Любой title">
+    <Accordion
+      summary={<Typography variant="subtitle2">Любой summary</Typography>}
+    >
       <Typography>Сумма заказа: 1 000 руб</Typography>
       <Typography>Дата оформления: 15.08.2023</Typography>
     </Accordion>
@@ -72,7 +74,7 @@ export const Title = () => (
 export const StartAdorment = () => (
   <BaseContainer>
     <Accordion
-      title="Информация о заказе"
+      summary="Информация о заказе"
       startAdorment={<SuccessFillMd color="success" />}
     >
       <Typography>Сумма заказа: 1 000 руб</Typography>
@@ -99,7 +101,7 @@ export const Controlled = () => {
       <Button onClick={handleToggleAccordion}>Toggle</Button>
       <BaseContainer container spacing={2}>
         <Accordion
-          title="Информация о заказе"
+          summary="123"
           isExpanded={isExpanded}
           onChange={handleChangeAccordion}
         >
@@ -110,18 +112,3 @@ export const Controlled = () => {
     </Grid>
   );
 };
-
-/**
- * Prop ```titleProps``` позволяет сконфигурировать title как [Typography](/docs/components-typography--docs).
- */
-export const TitleProps = () => (
-  <BaseContainer>
-    <Accordion
-      title="Информация о заказе"
-      titleProps={{ variant: 'subtitle2' }}
-    >
-      <Typography>Сумма заказа: 1 000 руб</Typography>
-      <Typography>Дата оформления: 15.08.2023</Typography>
-    </Accordion>
-  </BaseContainer>
-);

@@ -1,20 +1,19 @@
 import React, { PropsWithChildren, forwardRef, useState } from 'react';
 
-import { TypographyProps } from '../Typography';
 import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';
 
 import {
   AccordionContentWrapper,
   AccordionHeader,
-  AccordionTitle,
+  AccordionSummary,
 } from './styles';
 
 export type AccordionProps = PropsWithChildren<{
   /**
    *  Заголовок
    */
-  title: string;
+  summary: React.ReactElement | string;
   /**
    *  Элемент, отображаемый перед заголовком
    */
@@ -23,10 +22,7 @@ export type AccordionProps = PropsWithChildren<{
    *  Управляет состоянием аккордеона
    */
   isExpanded?: boolean;
-  /**
-   *  Конфигурация Typography в title
-   */
-  titleProps?: TypographyProps;
+
   /**
    *  Обработчик, вызываемый при клике по хедеру
    */
@@ -38,14 +34,7 @@ export type AccordionProps = PropsWithChildren<{
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    {
-      title,
-      startAdorment,
-      isExpanded,
-      titleProps,
-      onChange,
-      children,
-    }: AccordionProps,
+    { summary, startAdorment, isExpanded, onChange, children }: AccordionProps,
     forwardedRef,
   ) => {
     const [isUncontrolledExpanded, setIsUncontrolledExpanded] = useState(false);
@@ -69,19 +58,22 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       }
     };
 
+    const SummaryWrapper =
+      typeof summary === 'string' ? AccordionSummary : React.Fragment;
+
     return (
       <div ref={forwardedRef}>
         <AccordionHeader
           role="button"
           onClick={handleClickHeader}
-          $withStartAdorment={hasStartAdorment}
+          withStartAdorment={hasStartAdorment}
         >
           {startAdorment}
-          <AccordionTitle {...titleProps}>{title}</AccordionTitle>
+          <SummaryWrapper>{summary}</SummaryWrapper>
           <Chevron isActive={actualIsExpanded} />
         </AccordionHeader>
         <Collapse in={actualIsExpanded}>
-          <AccordionContentWrapper $withStartAdorment={hasStartAdorment}>
+          <AccordionContentWrapper withStartAdorment={hasStartAdorment}>
             {children}
           </AccordionContentWrapper>
         </Collapse>

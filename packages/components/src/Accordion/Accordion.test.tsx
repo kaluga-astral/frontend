@@ -20,7 +20,7 @@ describe('Accordion', () => {
 
       return (
         <Accordion
-          title="Тест"
+          summary="Тест"
           startAdorment={<InfoFillMd color="info" />}
           ref={ref}
         />
@@ -34,7 +34,7 @@ describe('Accordion', () => {
   it('Prop:title: задает title', () => {
     renderWithTheme(
       <Accordion
-        title="Тест"
+        summary="Тест"
         startAdorment={<InfoFillMd color="info" />}
       ></Accordion>,
     );
@@ -46,7 +46,7 @@ describe('Accordion', () => {
 
   it('Скрывает и отображает контент', async () => {
     renderWithTheme(
-      <Accordion title="Тест" startAdorment={<InfoFillMd color="info" />}>
+      <Accordion summary="Тест" startAdorment={<InfoFillMd color="info" />}>
         <Typography>Контент</Typography>
       </Accordion>,
     );
@@ -63,7 +63,7 @@ describe('Accordion', () => {
   it('Prop:isExpanded:true Отображает контент', async () => {
     renderWithTheme(
       <Accordion
-        title="Тест"
+        summary="Тест"
         startAdorment={<InfoFillMd color="info" />}
         isExpanded
       >
@@ -79,7 +79,7 @@ describe('Accordion', () => {
   it('Prop:isExpanded:false Скрывает контент', async () => {
     renderWithTheme(
       <Accordion
-        title="Тест"
+        summary="Тест"
         startAdorment={<InfoFillMd color="info" />}
         isExpanded={false}
       >
@@ -97,7 +97,7 @@ describe('Accordion', () => {
 
     renderWithTheme(
       <Accordion
-        title="Тест"
+        summary="Тест"
         startAdorment={<InfoFillMd color="info" />}
         onChange={onChange}
       >
@@ -116,7 +116,7 @@ describe('Accordion', () => {
 
     renderWithTheme(
       <Accordion
-        title="Тест"
+        summary="Тест"
         startAdorment={<InfoFillMd color="info" />}
         isExpanded
         onChange={onChange}
