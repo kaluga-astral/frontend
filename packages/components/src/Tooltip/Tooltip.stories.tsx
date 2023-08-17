@@ -103,6 +103,11 @@ export const Sizes = () => (
 const GridContainer = styled(Grid)`
   margin-top: 30px;
   gap: 10px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    flex-direction: row;
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Location = () => (
