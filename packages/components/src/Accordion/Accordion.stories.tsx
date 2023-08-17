@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { InfoFillMd, SuccessFillMd } from '@astral/icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Grid } from '../Grid';
 import { Button } from '../Button';
@@ -62,7 +62,7 @@ export const Example = () => (
 
 export const Title = () => (
   <BaseContainer>
-    <Accordion title="Любой title" startAdorment={<InfoFillMd color="info" />}>
+    <Accordion title="Любой title">
       <Typography>Сумма заказа: 1 000 руб</Typography>
       <Typography>Дата оформления: 15.08.2023</Typography>
     </Accordion>
@@ -81,10 +81,18 @@ export const StartAdorment = () => (
   </BaseContainer>
 );
 
-export const IsOpen = () => {
-  const [isOpen, setIsOpen] = useState(true);
+export const Controlled = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
 
-  const handleToggleAccordion = () => setIsOpen((prev) => !prev);
+  const handleToggleAccordion = () => setIsExpanded((prev) => !prev);
+
+  const handleChangeAccordion = (
+    newIsExpanded: boolean,
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => {
+    setIsExpanded(newIsExpanded);
+    console.log('Click accordion header event', event);
+  };
 
   return (
     <Grid container>
@@ -92,8 +100,8 @@ export const IsOpen = () => {
       <BaseContainer container spacing={2}>
         <Accordion
           title="Информация о заказе"
-          startAdorment={<InfoFillMd color="info" />}
-          isOpen={isOpen}
+          isExpanded={isExpanded}
+          onChange={handleChangeAccordion}
         >
           <Typography>Сумма заказа: 1 000 руб</Typography>
           <Typography>Дата оформления: 15.08.2023</Typography>
@@ -110,7 +118,6 @@ export const TitleProps = () => (
   <BaseContainer>
     <Accordion
       title="Информация о заказе"
-      startAdorment={<SuccessFillMd color="success" />}
       titleProps={{ variant: 'subtitle2' }}
     >
       <Typography>Сумма заказа: 1 000 руб</Typography>

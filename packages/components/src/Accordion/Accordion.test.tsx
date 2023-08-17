@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { InfoFillMd } from '@astral/icons';
+import { vi } from 'vitest';
 
 import { Typography } from '../Typography';
 
@@ -50,7 +51,7 @@ describe('Accordion', () => {
       </Accordion>,
     );
 
-    const title = screen.getByText('Тест');
+    const title = screen.getByRole('button', { name: 'Тест' });
 
     const content = screen.getByText('Контент');
 
@@ -59,12 +60,12 @@ describe('Accordion', () => {
     expect(content).toBeVisible();
   });
 
-  it('Prop:isOpen:true Отображает контент', async () => {
+  it('Prop:isExpanded:true Отображает контент', async () => {
     renderWithTheme(
       <Accordion
         title="Тест"
         startAdorment={<InfoFillMd color="info" />}
-        isOpen
+        isExpanded
       >
         <Typography>Контент</Typography>
       </Accordion>,
@@ -75,12 +76,12 @@ describe('Accordion', () => {
     expect(content).toBeVisible();
   });
 
-  it('Prop:isOpen:false Скрывает контент', async () => {
+  it('Prop:isExpanded:false Скрывает контент', async () => {
     renderWithTheme(
       <Accordion
         title="Тест"
         startAdorment={<InfoFillMd color="info" />}
-        isOpen={false}
+        isExpanded={false}
       >
         <Typography>Контент</Typography>
       </Accordion>,
@@ -89,5 +90,44 @@ describe('Accordion', () => {
     const content = screen.getByText('Контент');
 
     expect(content).not.toBeVisible();
+  });
+
+  it('Prop:onChange Вызывается без переданного isExpanded', async () => {
+    const onChange = vi.fn();
+
+    renderWithTheme(
+      <Accordion
+        title="Тест"
+        startAdorment={<InfoFillMd color="info" />}
+        onChange={onChange}
+      >
+        <Typography>Контент</Typography>
+      </Accordion>,
+    );
+
+    const title = screen.getByRole('button', { name: 'Тест' });
+
+    await userEvents.click(title);
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it('Prop:onChange Вызывается с переданным isExpanded', async () => {
+    const onChange = vi.fn();
+
+    renderWithTheme(
+      <Accordion
+        title="Тест"
+        startAdorment={<InfoFillMd color="info" />}
+        isExpanded
+        onChange={onChange}
+      >
+        <Typography>Контент</Typography>
+      </Accordion>,
+    );
+
+    const title = screen.getByRole('button', { name: 'Тест' });
+
+    await userEvents.click(title);
+    expect(onChange).toHaveBeenCalled();
   });
 });

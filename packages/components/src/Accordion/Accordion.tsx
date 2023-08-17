@@ -1,14 +1,8 @@
-import React, {
-  PropsWithChildren,
-  forwardRef,
-  useEffect,
-  useState,
-} from 'react';
+import React, { PropsWithChildren, forwardRef, useState } from 'react';
 
 import { TypographyProps } from '../Typography';
 import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';
-import { useForwardedRef } from '../hooks';
 
 import {
   AccordionContentWrapper,
@@ -16,51 +10,80 @@ import {
   AccordionTitle,
 } from './styles';
 
-export type AccordionProps = PropsWithChildren & {
+export type AccordionProps = PropsWithChildren<{
   /**
-   * @description Заголовок
+   *  Заголовок
    */
   title: string;
   /**
-   * @description Элемент, отображаемый перед заголовком
+   *  Элемент, отображаемый перед заголовком
    */
-  startAdorment: React.ReactNode;
+  startAdorment?: React.ReactNode;
   /**
-   * @description Управляет состоянием аккордеона
+   *  Управляет состоянием аккордеона
    */
-  isOpen?: boolean;
+  isExpanded?: boolean;
   /**
-   * @description Конфигурация Typography в title
+   *  Конфигурация Typography в title
    */
   titleProps?: TypographyProps;
-};
+  /**
+   *  Обработчик, вызываемый при клике по хедеру
+   */
+  onChange?: (
+    isExpanded: boolean,
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => void;
+}>;
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    { title, startAdorment, isOpen, titleProps, children }: AccordionProps,
+    {
+      title,
+      startAdorment,
+      isExpanded,
+      titleProps,
+      onChange,
+      children,
+    }: AccordionProps,
     forwardedRef,
   ) => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isUncontrolledExpanded, setIsUncontrolledExpanded] = useState(false);
 
-    const ref = useForwardedRef(forwardedRef);
+    const isControlled = typeof isExpanded === 'boolean';
 
-    const handleClick = () => {
-      setIsCollapsed((prev) => !prev);
+    const actualIsExpanded = isControlled ? isExpanded : isUncontrolledExpanded;
+
+    const hasStartAdorment = Boolean(startAdorment);
+
+    const handleClickHeader = (
+      event: React.MouseEvent<HTMLElement, MouseEvent>,
+    ) => {
+      if (isControlled) {
+        onChange?.(!isExpanded, event);
+      } else {
+        const newValue = !isUncontrolledExpanded;
+
+        setIsUncontrolledExpanded(newValue);
+        onChange?.(newValue, event);
+      }
     };
 
-    useEffect(() => {
-      setIsCollapsed(isOpen || false);
-    }, [isOpen]);
-
     return (
-      <div ref={ref}>
-        <AccordionHeader container onClick={handleClick}>
+      <div ref={forwardedRef}>
+        <AccordionHeader
+          role="button"
+          onClick={handleClickHeader}
+          $withStartAdorment={hasStartAdorment}
+        >
           {startAdorment}
           <AccordionTitle {...titleProps}>{title}</AccordionTitle>
-          <Chevron isActive={isCollapsed} />
+          <Chevron isActive={actualIsExpanded} />
         </AccordionHeader>
-        <Collapse in={isCollapsed}>
-          <AccordionContentWrapper>{children}</AccordionContentWrapper>
+        <Collapse in={actualIsExpanded}>
+          <AccordionContentWrapper $withStartAdorment={hasStartAdorment}>
+            {children}
+          </AccordionContentWrapper>
         </Collapse>
       </div>
     );
