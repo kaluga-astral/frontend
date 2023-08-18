@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Checkbox, ListItemIcon, MenuItem } from '@astral/components';
 import {
   array,
@@ -16,10 +16,12 @@ import { useForm } from '../hooks';
 
 import { FormSelect } from './FormSelect';
 
-export default {
+const meta: Meta<typeof FormSelect> = {
   title: 'Form/FormSelect',
-  component: null,
+  component: FormSelect,
 };
+
+export default meta;
 
 type IOption = {
   value: number;
@@ -55,7 +57,7 @@ const validationSchema = object<FormValues>({
   single: string(),
 });
 
-const Template: Story = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     defaultValues: { multiline: [], single: '' },
     resolver: resolver<FormValues>(validationSchema),
@@ -115,11 +117,4 @@ const Template: Story = () => {
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

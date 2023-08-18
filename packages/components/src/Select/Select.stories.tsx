@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ListItemIcon, SelectChangeEvent } from '@mui/material';
+import { ListItemIcon, SelectChangeEvent, Stack } from '@mui/material';
 import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
@@ -20,6 +20,8 @@ export default meta;
 
 type Story = StoryObj<typeof Select>;
 
+const FIX_WIDTH_SELECT = 150;
+
 const OPTIONS: string[] = [
   'Value 1',
   'Value 2',
@@ -39,29 +41,24 @@ const MULTIPLE_OPTIONS: Array<{ value: string; name: string }> = [
   { value: '5', name: 'Валерий 5' },
 ];
 
-const renderSingleOptions = () => {
-  return OPTIONS.map((option) => (
-    <MenuItem value={option} key={option}>
-      {option}
-    </MenuItem>
-  ));
-};
-
 export const Interaction: Story = {
   render: (args) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [singleValue, setSingleValue] = useState('');
-    const handleSingleChange = (
-      event: SelectChangeEvent<typeof singleValue>,
-    ) => {
-      setSingleValue(event.target.value);
+    const handleSingleChange = (event: SelectChangeEvent<unknown>) => {
+      setSingleValue(event.target.value as string);
     };
 
     return (
-      // @ts-ignore
-      <Select onChange={handleSingleChange} value={singleValue} {...args}>
-        {renderSingleOptions()}
-      </Select>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select onChange={handleSingleChange} value={singleValue} {...args}>
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
     );
   },
   args: {
@@ -83,70 +80,38 @@ export const Example = () => {
 
   return (
     <>
-      <Select
-        label="Basic"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-      >
-        {renderSingleOptions()}
-      </Select>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          label="Basic"
+          onChange={handleSingleChange}
+          value={singleValue}
+          placeholder="Выберите вариант"
+          fullWidth
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
 
-      <Select
-        label="Disabled"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        disabled
-      >
-        {renderSingleOptions()}
-      </Select>
-    </>
-  );
-};
-
-export const Variants = () => {
-  const [singleValue, setSingleValue] = useState('');
-  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
-    setSingleValue(event.target.value);
-  };
-
-  return (
-    <>
-      <Select
-        label="Standart"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        variant="standard"
-      >
-        {renderSingleOptions()}
-      </Select>
-
-      <Select
-        label="Outlined"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        variant="outlined"
-      >
-        {renderSingleOptions()}
-      </Select>
-
-      <Select
-        label="Filled"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        variant="filled"
-      >
-        {renderSingleOptions()}
-      </Select>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          label="Disabled"
+          onChange={handleSingleChange}
+          value={singleValue}
+          placeholder="Выберите вариант"
+          fullWidth
+          disabled
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
     </>
   );
 };
@@ -165,34 +130,13 @@ export const Disabled = () => {
         value={singleValue}
         placeholder="Выберите вариант"
         fullWidth
-        variant="standard"
         disabled
       >
-        {renderSingleOptions()}
-      </Select>
-
-      <Select
-        label="Outlined"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        variant="outlined"
-        disabled
-      >
-        {renderSingleOptions()}
-      </Select>
-
-      <Select
-        label="Filled"
-        onChange={handleSingleChange}
-        value={singleValue}
-        placeholder="Выберите вариант"
-        fullWidth
-        variant="filled"
-        disabled
-      >
-        {renderSingleOptions()}
+        {OPTIONS.map((option) => (
+          <MenuItem value={option} key={option}>
+            {option}
+          </MenuItem>
+        ))}
       </Select>
     </>
   );
@@ -226,7 +170,11 @@ export const Loading = () => {
         loading={loading}
         multiple
       >
-        {renderSingleOptions()}
+        {OPTIONS.map((option) => (
+          <MenuItem value={option} key={option}>
+            {option}
+          </MenuItem>
+        ))}
       </Select>
     </>
   );
@@ -240,26 +188,39 @@ export const Validation = () => {
 
   return (
     <>
-      <Select
-        error
-        helperText="Ошибка валидации"
-        placeholder="Выберите вариант"
-        value={singleValue}
-        label="Error"
-        onChange={handleSingleChange}
-      >
-        {renderSingleOptions()}
-      </Select>
-      <Select
-        success
-        helperText="Проверка пройдена"
-        placeholder="Выберите вариант"
-        value={singleValue}
-        label="Success"
-        onChange={handleSingleChange}
-      >
-        {renderSingleOptions()}
-      </Select>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          error
+          helperText="Ошибка валидации"
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Error"
+          onChange={handleSingleChange}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          success
+          helperText="Проверка пройдена"
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Success"
+          onChange={handleSingleChange}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
     </>
   );
 };
@@ -297,7 +258,7 @@ export const Multiple = () => {
   };
 
   return (
-    <>
+    <Stack width={FIX_WIDTH_SELECT}>
       <Select
         placeholder="Выберите вариант"
         value={multipleValue}
@@ -308,7 +269,7 @@ export const Multiple = () => {
       >
         {renderMultipleOptions()}
       </Select>
-    </>
+    </Stack>
   );
 };
 
