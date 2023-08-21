@@ -13,7 +13,10 @@ import { Collapse } from '../Collapse';
 
 import { CollapsableAlertActions } from './styles';
 
-type CollapsableAlertProps = Omit<AlertProps, 'title'> &
+type CollapsableAlertProps = Pick<
+  AlertProps,
+  'severity' | 'actions' | 'display'
+> &
   Omit<AccordionProps, 'startAdorment' | 'onChange' | 'summary'> & {
     title: AccordionProps['summary'];
     headerStartAdorment?: AccordionProps['startAdorment'];
