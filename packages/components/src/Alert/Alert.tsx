@@ -1,4 +1,8 @@
-import { AlertTitle, AlertProps as MuiAlertProps } from '@mui/material';
+import {
+  Alert as AlertMui,
+  AlertTitle,
+  AlertProps as MuiAlertProps,
+} from '@mui/material';
 import {
   ErrorFillMd,
   InfoFillMd,
@@ -13,7 +17,6 @@ import { Collapse } from '../Collapse';
 import { WithoutEmotionSpecific } from '../types';
 
 import { AlertSeverity } from './types';
-import { StyledAlert } from './styles';
 
 export type AlertProps = Omit<
   WithoutEmotionSpecific<MuiAlertProps>,
@@ -58,7 +61,7 @@ export const Alert = ({
 
   return (
     <Collapse in={display}>
-      <StyledAlert
+      <AlertMui
         {...restProps}
         severity={severity}
         closeText={closeText}
@@ -85,7 +88,7 @@ export const Alert = ({
         >
           {actions}
         </LegacyGrid>
-      </StyledAlert>
+      </AlertMui>
     </Collapse>
   );
 };
