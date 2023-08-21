@@ -1,5 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ListItemIcon, SelectChangeEvent, Stack } from '@mui/material';
+import {
+  ListItemIcon,
+  ListSubheader,
+  SelectChangeEvent,
+  Stack,
+} from '@mui/material';
 import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
@@ -143,7 +148,7 @@ export const Disabled = () => {
 };
 
 export const Loading = () => {
-  const [multipleValue] = React.useState<string[]>([]);
+  const [singleValue, setSingleValue] = useState('');
   const [loading, setLoading] = React.useState(false);
 
   const handleFetchOptions = () => {
@@ -151,31 +156,28 @@ export const Loading = () => {
     setTimeout(() => setLoading(false), 2000);
   };
 
-  const getOptionLabel = (value: string | number) => {
-    const optionLabel = MULTIPLE_OPTIONS.find(
-      (option) => option.value === value,
-    );
-
-    return optionLabel?.name || value;
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
+    setSingleValue(event.target.value);
   };
 
   return (
     <>
-      <Select
-        placeholder="Выберите вариант"
-        value={multipleValue}
-        label="Loading"
-        onOpen={handleFetchOptions}
-        getOptionLabel={getOptionLabel}
-        loading={loading}
-        multiple
-      >
-        {OPTIONS.map((option) => (
-          <MenuItem value={option} key={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </Select>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          placeholder="Выберите вариант"
+          value={singleValue}
+          onChange={handleSingleChange}
+          label="Loading"
+          onOpen={handleFetchOptions}
+          loading={loading}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
     </>
   );
 };
@@ -270,6 +272,33 @@ export const Multiple = () => {
         {renderMultipleOptions()}
       </Select>
     </Stack>
+  );
+};
+
+export const Grouping = () => {
+  const [singleValue, setSingleValue] = React.useState('');
+
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) =>
+    setSingleValue(event.target.value);
+
+  return (
+    <>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Grouping"
+          onChange={handleSingleChange}
+        >
+          <ListSubheader>Group 1</ListSubheader>
+          <MenuItem value={1}>Option 1</MenuItem>
+          <MenuItem value={2}>Option 2</MenuItem>
+          <ListSubheader>Group 2</ListSubheader>
+          <MenuItem value={3}>Option 3</MenuItem>
+          <MenuItem value={4}>Option 4</MenuItem>
+        </Select>
+      </Stack>
+    </>
   );
 };
 
