@@ -4,6 +4,7 @@ import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';
 
 import {
+  AccordionChevronWrapper,
   AccordionContentWrapper,
   AccordionHeader,
   AccordionSummary,
@@ -70,7 +71,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         >
           {startAdorment}
           <SummaryWrapper>{summary}</SummaryWrapper>
-          <Chevron isActive={actualIsExpanded} />
+          <AccordionChevronWrapper>
+            <Chevron isActive={actualIsExpanded} />
+          </AccordionChevronWrapper>
         </AccordionHeader>
         <Collapse in={actualIsExpanded}>
           <AccordionContentWrapper withStartAdorment={hasStartAdorment}>

@@ -21,3 +21,9 @@ export const AccordionContentWrapper = styled.div<{
 export const AccordionSummary = styled(Typography)`
   align-self: center;
 `;
+
+export const AccordionChevronWrapper = styled.div`
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+`;
