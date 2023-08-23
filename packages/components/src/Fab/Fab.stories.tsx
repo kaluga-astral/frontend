@@ -37,7 +37,7 @@ export const Example = () => (
 export const Sizes = () => (
   <>
     <Stack gap={4}>
-      <Typography variant="h5">Small</Typography>
+      <Typography variant="h6">small</Typography>
       <Stack gap={3} direction="row" alignItems="center">
         <Fab size="small" color="default">
           {svg}
@@ -46,7 +46,7 @@ export const Sizes = () => (
     </Stack>
 
     <Stack gap={4}>
-      <Typography variant="h5">Medium</Typography>
+      <Typography variant="h6">medium</Typography>
       <Stack gap={3} direction="row" alignItems="center">
         <Fab size="medium" color="default">
           {svg}
@@ -55,7 +55,7 @@ export const Sizes = () => (
     </Stack>
 
     <Stack gap={4}>
-      <Typography variant="h5">Large</Typography>
+      <Typography variant="h6">large</Typography>
       <Stack gap={3} direction="row" alignItems="center">
         <Fab size="large" color="default">
           {svg}
@@ -66,37 +66,94 @@ export const Sizes = () => (
 );
 
 export const Colors = () => (
-  <Stack gap={4} direction="row" alignItems="center">
-    <Fab size="small" color="default">
-      {svg}
-    </Fab>
+  <>
+    <Stack gap={4}>
+      <Typography variant="h6">default</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="default">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
 
-    <Fab size="small" color="primary">
-      {svg}
-    </Fab>
+    <Stack gap={4}>
+      <Typography variant="h6">primary</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="primary">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
 
-    <Fab size="small" color="success">
-      {svg}
-    </Fab>
+    <Stack gap={4}>
+      <Typography variant="h6">success</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="success">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
 
-    <Fab size="small" color="warning">
-      {svg}
-    </Fab>
+    <Stack gap={4}>
+      <Typography variant="h6">warning</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="warning">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
 
-    <Fab size="small" color="error">
-      {svg}
-    </Fab>
-  </Stack>
+    <Stack gap={4}>
+      <Typography variant="h6">error</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="error">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
+  </>
 );
 
-export const Сircular = () => (
-  <Fab variant="circular" size="small" color="default">
-    {svg}
-  </Fab>
+export const Variants = () => (
+  <>
+    <Stack gap={4}>
+      <Typography variant="h6">square</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="default">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
+
+    <Stack gap={4}>
+      <Typography variant="h6">circular</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab variant="circular" size="small" color="default">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
+  </>
 );
 
-export const Disabled = () => (
-  <Fab size="small" color="default" disabled>
-    {svg}
-  </Fab>
+export const States = () => (
+  <>
+    <Stack gap={4}>
+      <Typography variant="h6">active</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="default">
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
+
+    <Stack gap={4}>
+      <Typography variant="h6">disabled</Typography>
+      <Stack gap={3} direction="row" alignItems="center">
+        <Fab size="small" color="default" disabled>
+          {svg}
+        </Fab>
+      </Stack>
+    </Stack>
+  </>
 );
