@@ -1,17 +1,21 @@
 import { LikeOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Typography } from '../Typography';
+import { Grid } from '../Grid';
+import { styled } from '../styles';
 
 import { Fab } from './Fab';
+
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
 
 const meta: Meta<typeof Fab> = {
   title: 'Components/Fab',
   component: Fab,
 };
-
-const svg = <LikeOutlineMd />;
 
 export default meta;
 
@@ -19,7 +23,7 @@ type Story = StoryObj<typeof Fab>;
 
 export const Interaction: Story = {
   args: {
-    children: svg,
+    children: <LikeOutlineMd />,
   },
   parameters: {
     docs: {
@@ -28,132 +32,106 @@ export const Interaction: Story = {
   },
 };
 
+const ColorsContainer = styled(Grid)`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: ${({ theme }) => theme.spacing(4)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    grid-template-columns: 1fr;
+  }
+`;
+
 export const Example = () => (
   <Fab size="small" color="default">
-    {svg}
+    <LikeOutlineMd />
   </Fab>
 );
 
 export const Sizes = () => (
   <>
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">small</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">medium</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="medium" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="medium" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">large</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="large" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="large" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
   </>
 );
 
 export const Colors = () => (
-  <>
-    <Stack gap={4}>
+  <ColorsContainer>
+    <Grid spacing={2}>
       <Typography variant="h6">default</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">primary</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="primary">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="primary">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">success</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="success">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="success">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">warning</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="warning">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="warning">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">error</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="error">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
-  </>
+      <Fab size="small" color="error">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
+  </ColorsContainer>
 );
 
 export const Variants = () => (
   <>
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">square</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab size="small" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
 
-    <Stack gap={4}>
+    <Grid spacing={2}>
       <Typography variant="h6">circular</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab variant="circular" size="small" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
+      <Fab variant="circular" size="small" color="default">
+        <LikeOutlineMd />
+      </Fab>
+    </Grid>
   </>
 );
 
-export const States = () => (
-  <>
-    <Stack gap={4}>
-      <Typography variant="h6">active</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="default">
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
-
-    <Stack gap={4}>
-      <Typography variant="h6">disabled</Typography>
-      <Stack gap={3} direction="row" alignItems="center">
-        <Fab size="small" color="default" disabled>
-          {svg}
-        </Fab>
-      </Stack>
-    </Stack>
-  </>
+export const Disabled = () => (
+  <Fab size="small" color="default" disabled>
+    <LikeOutlineMd />
+  </Fab>
 );
