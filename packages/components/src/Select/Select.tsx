@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
-  MuiSelectProps<Value>
+  Omit<MuiSelectProps<Value>, 'variant'>
 > & {
   loading?: boolean;
   placeholder?: string;
