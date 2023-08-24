@@ -1,5 +1,10 @@
-import { Story } from '@storybook/react';
-import { ListItemIcon, SelectChangeEvent, Stack } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
+import {
+  ListItemIcon,
+  ListSubheader,
+  SelectChangeEvent,
+  Stack,
+} from '@mui/material';
 import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
@@ -7,10 +12,20 @@ import { Checkbox } from '../Checkbox';
 
 import { Select } from './Select';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=8756%3A125130)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Select>;
+
+const FIX_WIDTH_SELECT = 150;
 
 const OPTIONS: string[] = [
   'Value 1',
@@ -31,62 +46,194 @@ const MULTIPLE_OPTIONS: Array<{ value: string; name: string }> = [
   { value: '5', name: 'Валерий 5' },
 ];
 
-const Template: Story = (args) => {
+export const Interaction: Story = {
+  render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [singleValue, setSingleValue] = useState('');
+    const handleSingleChange = (event: SelectChangeEvent<unknown>) => {
+      setSingleValue(event.target.value as string);
+    };
+
+    return (
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select onChange={handleSingleChange} value={singleValue} {...args}>
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+    );
+  },
+  args: {
+    label: 'Select',
+    placeholder: 'Выберите вариант',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [singleValue, setSingleValue] = useState('');
   const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
     setSingleValue(event.target.value);
   };
 
-  const renderSingleOptions = () => {
-    return OPTIONS.map((option) => (
-      <MenuItem value={option} key={option}>
-        {option}
-      </MenuItem>
-    ));
+  return (
+    <>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          label="Basic"
+          onChange={handleSingleChange}
+          value={singleValue}
+          placeholder="Выберите вариант"
+          fullWidth
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          label="Disabled"
+          onChange={handleSingleChange}
+          value={singleValue}
+          placeholder="Выберите вариант"
+          fullWidth
+          disabled
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+    </>
+  );
+};
+
+export const Disabled = () => {
+  const [singleValue, setSingleValue] = useState('');
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
+    setSingleValue(event.target.value);
   };
 
   return (
-    <Stack maxWidth={300}>
+    <>
       <Select
-        {...args}
-        label="Select"
+        label="Standart"
         onChange={handleSingleChange}
         value={singleValue}
         placeholder="Выберите вариант"
         fullWidth
+        disabled
       >
-        {renderSingleOptions()}
+        {OPTIONS.map((option) => (
+          <MenuItem value={option} key={option}>
+            {option}
+          </MenuItem>
+        ))}
       </Select>
-    </Stack>
+    </>
   );
 };
 
-export const Default = Template.bind({});
+export const Loading = () => {
+  const [singleValue, setSingleValue] = useState('');
+  const [loading, setLoading] = React.useState(false);
 
-Default.args = {};
+  const handleFetchOptions = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
 
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
+    setSingleValue(event.target.value);
+  };
+
+  return (
+    <>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          placeholder="Выберите вариант"
+          value={singleValue}
+          onChange={handleSingleChange}
+          label="Loading"
+          onOpen={handleFetchOptions}
+          loading={loading}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+    </>
+  );
 };
 
-export const Showcase: Story = () => {
+export const Validation = () => {
   const [singleValue, setSingleValue] = React.useState('');
+
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) =>
+    setSingleValue(event.target.value);
+
+  return (
+    <>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          error
+          helperText="Ошибка валидации"
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Error"
+          onChange={handleSingleChange}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          success
+          helperText="Проверка пройдена"
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Success"
+          onChange={handleSingleChange}
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </Stack>
+    </>
+  );
+};
+
+export const Multiple = () => {
   const [multipleValue, setMultipleValue] = React.useState<string[]>([]);
-  const [loading, setLoading] = React.useState(false);
 
   const handleMultipleChange = (
     event: SelectChangeEvent<typeof multipleValue>,
   ) => {
     setMultipleValue(event.target.value as string[]);
-  };
-
-  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) =>
-    setSingleValue(event.target.value);
-
-  const handleFetchOptions = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
   };
 
   const renderMultipleOptions = () => {
@@ -104,14 +251,6 @@ export const Showcase: Story = () => {
     });
   };
 
-  const renderSingleOptions = () => {
-    return OPTIONS.map((option) => (
-      <MenuItem value={option} key={option}>
-        {option}
-      </MenuItem>
-    ));
-  };
-
   const getOptionLabel = (value: string | number) => {
     const optionLabel = MULTIPLE_OPTIONS.find(
       (option) => option.value === value,
@@ -121,35 +260,7 @@ export const Showcase: Story = () => {
   };
 
   return (
-    <Stack maxWidth={300} gap={2}>
-      <Select
-        placeholder="Выберите вариант"
-        value={singleValue}
-        label="Single"
-        onChange={handleSingleChange}
-      >
-        {renderSingleOptions()}
-      </Select>
-      <Select
-        error
-        helperText="Ошибка валидации"
-        placeholder="Выберите вариант"
-        value={singleValue}
-        label="Error"
-        onChange={handleSingleChange}
-      >
-        {renderSingleOptions()}
-      </Select>
-      <Select
-        success
-        helperText="Проверка пройдена"
-        placeholder="Выберите вариант"
-        value={singleValue}
-        label="Success"
-        onChange={handleSingleChange}
-      >
-        {renderSingleOptions()}
-      </Select>
+    <Stack width={FIX_WIDTH_SELECT}>
       <Select
         placeholder="Выберите вариант"
         value={multipleValue}
@@ -160,24 +271,54 @@ export const Showcase: Story = () => {
       >
         {renderMultipleOptions()}
       </Select>
-      <Select
-        placeholder="Выберите вариант"
-        value={multipleValue}
-        label="Loading"
-        onChange={handleMultipleChange}
-        onOpen={handleFetchOptions}
-        getOptionLabel={getOptionLabel}
-        loading={loading}
-        multiple
-      >
-        {renderMultipleOptions()}
-      </Select>
-      <Select placeholder="Выберите вариант" label="No data" required />
     </Stack>
   );
 };
 
-Showcase.parameters = {
-  options: { showPanel: false },
-  controls: { expanded: true },
+export const Grouping = () => {
+  const [singleValue, setSingleValue] = React.useState('');
+
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) =>
+    setSingleValue(event.target.value);
+
+  return (
+    <>
+      <Stack width={FIX_WIDTH_SELECT}>
+        <Select
+          placeholder="Выберите вариант"
+          value={singleValue}
+          label="Grouping"
+          onChange={handleSingleChange}
+        >
+          <ListSubheader>Group 1</ListSubheader>
+          <MenuItem value={1}>Option 1</MenuItem>
+          <MenuItem value={2}>Option 2</MenuItem>
+          <ListSubheader>Group 2</ListSubheader>
+          <MenuItem value={3}>Option 3</MenuItem>
+          <MenuItem value={4}>Option 4</MenuItem>
+        </Select>
+      </Stack>
+    </>
+  );
+};
+
+export const NoData = () => {
+  const [singleValue, setSingleValue] = useState('');
+  const handleSingleChange = (event: SelectChangeEvent<typeof singleValue>) => {
+    setSingleValue(event.target.value);
+  };
+
+  return (
+    <>
+      <Select
+        label="No data"
+        onChange={handleSingleChange}
+        value={singleValue}
+        placeholder="Выберите вариант"
+        fullWidth
+      >
+        {[]}
+      </Select>
+    </>
+  );
 };
