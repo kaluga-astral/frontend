@@ -1,3 +1,5 @@
+export * from './Accordion';
+
 export * from './ActionCell';
 
 export * from './Alert';
@@ -31,6 +33,8 @@ export * from './CircularProgress';
 export * from './ClickAwayListener';
 
 export * from './Collapse';
+
+export * from './CollapsableAlert';
 
 export * from './ConfigProvider';
 
