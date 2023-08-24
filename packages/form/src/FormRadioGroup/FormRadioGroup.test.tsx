@@ -4,7 +4,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { useForm } from '../hooks';
 import { Form } from '../Form';
-import { RadioGroupField } from '../../../components/src/RadioGroupField';
+import { RadioGroupField } from '../../../components';
 
 import { FormRadioGroup } from './FormRadioGroup';
 
@@ -12,8 +12,14 @@ type FormValues = {
   radioGroupValue: string;
 };
 
+const VALIDATION_ERROR_MESSAGE = 'Ошибка валидации';
+
+const validateCustomString = string().define({
+  requiredErrorMessage: VALIDATION_ERROR_MESSAGE,
+});
+
 const validationSchema = object<FormValues>({
-  radioGroupValue: string(),
+  radioGroupValue: validateCustomString,
 });
 
 describe('RormRadioGroup', () => {
@@ -51,7 +57,6 @@ describe('RormRadioGroup', () => {
 
     const tooltip = await screen.findByRole('tooltip');
 
-    //TODO пока нет возможности прокинуть свой текст в валидацию string
-    expect(tooltip).toHaveTextContent(/^Обязательно$/);
+    expect(tooltip).toHaveTextContent(VALIDATION_ERROR_MESSAGE);
   });
 });
