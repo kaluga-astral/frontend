@@ -78,6 +78,8 @@ export * from './FormControl';
 
 export * from './FormControlLabel';
 
+export * from './FormLabel';
+
 export * from './FormHelperText';
 
 export * from './GlobalStyles';
@@ -150,7 +152,11 @@ export * from './Profile';
 
 export * from './Radio';
 
+export * from './RadioField';
+
 export * from './RadioGroup';
+
+export * from './RadioGroupField';
 
 export * from './Select';
 
