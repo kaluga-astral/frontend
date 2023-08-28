@@ -31,16 +31,6 @@ export const Interaction: Story = {
   },
 };
 
-const ColorsContainer = styled(Grid)`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: ${({ theme }) => theme.spacing(4)};
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    grid-template-columns: 1fr;
-  }
-`;
-
 const Item = styled.div`
   display: grid;
   justify-items: center;
@@ -85,7 +75,7 @@ export const Sizes = () => (
 );
 
 export const Colors = () => (
-  <ColorsContainer>
+  <>
     <Grid spacing={2}>
       <Item>
         <Typography variant="h6">default</Typography>
@@ -130,7 +120,7 @@ export const Colors = () => (
         </Fab>
       </Item>
     </Grid>
-  </ColorsContainer>
+  </>
 );
 
 export const Variants = () => (
