@@ -8,7 +8,7 @@ import {
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
-import { typography } from '../typography';
+import { getTypography } from '../typography';
 import { Background, Color, getPalette } from '../palette';
 import { FontsUrls, getComponents } from '../components';
 import { Brand, SPACING } from '../constants';
@@ -32,6 +32,7 @@ type CreateThemeParams = {
   options?: ThemeOptions;
   fontsUrls: FontsUrls;
   breakpoints?: BreakpointsOptions;
+  htmlFontSizeForScope?: number;
 };
 
 export const createTheme = (params: CreateThemeParams) => {
@@ -40,9 +41,10 @@ export const createTheme = (params: CreateThemeParams) => {
     options,
     fontsUrls,
     breakpoints = defaultBreakpoints,
+    htmlFontSizeForScope,
   } = params;
   const themeOptions = {
-    typography,
+    typography: getTypography(htmlFontSizeForScope),
     breakpoints,
     spacing: SPACING,
     palette: getPalette(brand),

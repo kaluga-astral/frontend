@@ -28,120 +28,125 @@ export const pxToRem = (
   return `${fontSize / htmlFontSize}rem`;
 };
 
-export const typography: Partial<TypographyThemeOptions> = {
-  fontSize: 14,
-  htmlFontSize: 14,
-  fontWeightLight: 300,
-  fontWeightRegular: 400,
-  fontWeightMedium: 500,
-  fontWeightBold: 700,
-  fontFamily: ['Ubuntu', 'sans-serif'].join(','),
-  get h1() {
-    return {
-      fontSize: pxToRem(35, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(40, this.htmlFontSize),
-    };
-  },
-  get h2() {
-    return {
-      fontSize: pxToRem(29, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(32, this.htmlFontSize),
-    };
-  },
-  get h3() {
-    return {
-      fontSize: pxToRem(24, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(28, this.htmlFontSize),
-    };
-  },
-  get h4() {
-    return {
-      fontSize: pxToRem(20, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(24, this.htmlFontSize),
-    };
-  },
-  get h5() {
-    return {
-      fontSize: pxToRem(16, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(24, this.htmlFontSize),
-    };
-  },
-  get h6() {
-    return {
-      fontSize: pxToRem(14, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(16, this.htmlFontSize),
-    };
-  },
-  get h7() {
-    return {
-      fontSize: pxToRem(12, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(20, this.htmlFontSize),
-    };
-  },
-  get h8() {
-    return {
-      fontSize: pxToRem(12, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(16, this.htmlFontSize),
-    };
-  },
-  get h9() {
-    return {
-      fontSize: pxToRem(11, this.htmlFontSize),
-      fontWeight: this.fontWeightBold,
-      lineHeight: pxToRem(16, this.htmlFontSize),
-    };
-  },
-  get button() {
-    return {
-      fontSize: pxToRem(14, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(24, this.htmlFontSize),
-    };
-  },
-  get ui() {
-    return {
-      fontSize: pxToRem(14, this.htmlFontSize),
-      fontWeight: this.fontWeightRegular,
-      lineHeight: pxToRem(20, this.htmlFontSize),
-    };
-  },
-  get link() {
-    return {
-      fontSize: pxToRem(14, this.htmlFontSize),
-      fontWeight: this.fontWeightRegular,
-      lineHeight: pxToRem(20, this.htmlFontSize),
-    };
-  },
-  get pointer() {
-    return {
-      fontSize: pxToRem(12, this.htmlFontSize),
-      fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(16, this.htmlFontSize),
-    };
-  },
-  get small() {
-    return {
-      fontSize: pxToRem(12, this.htmlFontSize),
-      fontWeight: this.fontWeightRegular,
-      lineHeight: pxToRem(16, this.htmlFontSize),
-    };
-  },
-  get code() {
-    return {
-      fontSize: pxToRem(12, this.htmlFontSize),
-      fontWeight: this.fontWeightLight,
-      lineHeight: pxToRem(20, this.htmlFontSize),
-    };
-  },
-  body1: {
-    fontSize: '1rem',
-  },
+export const getTypography = (htmlFontSizeForScope?: number) => {
+  return {
+    fontSize: 14,
+    htmlFontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
+    htmlFontSizeForScope: htmlFontSizeForScope,
+    fontFamily: ['Ubuntu', 'sans-serif'].join(','),
+    get h1() {
+      return {
+        fontSize: pxToRem(35, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.htmlFontSizeForScope ?? this.fontWeightMedium,
+        lineHeight: pxToRem(40, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h2() {
+      return {
+        fontSize: pxToRem(29, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(32, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h3() {
+      return {
+        fontSize: pxToRem(24, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(28, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h4() {
+      return {
+        fontSize: pxToRem(20, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(24, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h5() {
+      return {
+        fontSize: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(24, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h6() {
+      return {
+        fontSize: pxToRem(14, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h7() {
+      return {
+        fontSize: pxToRem(12, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(20, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h8() {
+      return {
+        fontSize: pxToRem(12, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get h9() {
+      return {
+        fontSize: pxToRem(11, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightBold,
+        lineHeight: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get button() {
+      return {
+        fontSize: pxToRem(14, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(24, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get ui() {
+      return {
+        fontSize: pxToRem(14, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightRegular,
+        lineHeight: pxToRem(20, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get link() {
+      return {
+        fontSize: pxToRem(14, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightRegular,
+        lineHeight: pxToRem(20, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get pointer() {
+      return {
+        fontSize: pxToRem(12, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightMedium,
+        lineHeight: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get small() {
+      return {
+        fontSize: pxToRem(12, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightRegular,
+        lineHeight: pxToRem(16, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get code() {
+      return {
+        fontSize: pxToRem(12, this.htmlFontSizeForScope ?? this.htmlFontSize),
+        fontWeight: this.fontWeightLight,
+        lineHeight: pxToRem(20, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+    get body1() {
+      return {
+        fontSize: pxToRem(14, this.htmlFontSizeForScope ?? this.htmlFontSize),
+      };
+    },
+  };
 };
