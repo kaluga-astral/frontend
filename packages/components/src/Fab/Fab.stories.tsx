@@ -1,184 +1,152 @@
-import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
 import { LikeOutlineMd } from '@astral/icons';
+import { Meta, StoryObj } from '@storybook/react';
 
+import { Grid } from '../Grid';
 import { Typography } from '../Typography';
+import { styled } from '../styles';
 
 import { Fab } from './Fab';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Fab> = {
   title: 'Components/Fab',
   component: Fab,
 };
 
-const svg = <LikeOutlineMd />;
+export default meta;
 
-export const FabShowcase: Story = () => (
-  <Stack gap={4}>
-    <Stack gap={4}>
-      <Typography variant="h3">Default Type (Square)</Typography>
-      <Stack gap={1}>
-        <Typography variant="h4">Small </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="small" color="default">
-            {svg}
-          </Fab>
-          <Fab size="small" color="primary">
-            {svg}
-          </Fab>
-          <Fab size="small" color="success">
-            {svg}
-          </Fab>
-          <Fab size="small" color="warning">
-            {svg}
-          </Fab>
-          <Fab size="small" color="error">
-            {svg}
-          </Fab>
-          <Fab size="small" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-      <Stack gap={1}>
-        <Typography variant="h4">Medium </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="medium" color="default">
-            {svg}
-          </Fab>
-          <Fab size="medium" color="primary">
-            {svg}
-          </Fab>
-          <Fab size="medium" color="success">
-            {svg}
-          </Fab>
-          <Fab size="medium" color="warning">
-            {svg}
-          </Fab>
-          <Fab size="medium" color="error">
-            {svg}
-          </Fab>
-          <Fab size="medium" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-      <Stack gap={1}>
-        <Typography variant="h4">Large </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab size="large" color="default">
-            {svg}
-          </Fab>
-          <Fab size="large" color="primary">
-            {svg}
-          </Fab>
-          <Fab size="large" color="success">
-            {svg}
-          </Fab>
-          <Fab size="large" color="warning">
-            {svg}
-          </Fab>
-          <Fab size="large" color="error">
-            {svg}
-          </Fab>
-          <Fab size="large" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-    </Stack>
-    <Stack gap={4}>
-      <Typography variant="h3">Сircular Type</Typography>
-      <Stack gap={1}>
-        <Typography variant="h4">Small </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="small" color="default">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="small" color="primary">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="small" color="success">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="small" color="warning">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="small" color="error">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="small" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-      <Stack gap={1}>
-        <Typography variant="h4">Medium </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="medium" color="default">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="medium" color="primary">
-            {svg}
-          </Fab>
+type Story = StoryObj<typeof Fab>;
 
-          <Fab variant="circular" size="medium" color="success">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="medium" color="warning">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="medium" color="error">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="medium" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-      <Stack gap={1}>
-        <Typography variant="h4">Large </Typography>
-        <Stack gap={3} direction="row" alignItems="center">
-          <Fab variant="circular" size="large" color="default">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="large" color="primary">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="large" color="success">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="large" color="warning">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="large" color="error">
-            {svg}
-          </Fab>
-          <Fab variant="circular" size="large" color="error" disabled>
-            {svg}
-          </Fab>
-        </Stack>
-      </Stack>
-    </Stack>
-  </Stack>
+export const Interaction: Story = {
+  args: {
+    children: <LikeOutlineMd />,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+const Item = styled.div`
+  display: grid;
+  justify-items: center;
+  gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+export const Example = () => (
+  <Fab size="small" color="default">
+    <LikeOutlineMd />
+  </Fab>
 );
 
-FabShowcase.parameters = { options: { showPanel: false } };
+export const Sizes = () => (
+  <>
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">small</Typography>
+        <Fab size="small" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
 
-const Template: Story = (args) => <Fab {...args}>{svg}</Fab>;
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">medium</Typography>
+        <Fab size="medium" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
 
-export const FabStory = Template.bind({});
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">large</Typography>
+        <Fab size="large" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+  </>
+);
 
-FabStory.storyName = 'Fab';
+export const Colors = () => (
+  <>
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">default</Typography>
+        <Fab size="small" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
 
-FabStory.args = {
-  disabled: false,
-  color: 'primary',
-  variant: 'square',
-  size: 'medium',
-};
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">primary</Typography>
+        <Fab size="small" color="primary">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
 
-FabStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">success</Typography>
+        <Fab size="small" color="success">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">warning</Typography>
+        <Fab size="small" color="warning">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">error</Typography>
+        <Fab size="small" color="error">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+  </>
+);
+
+export const Variants = () => (
+  <>
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">square</Typography>
+        <Fab size="small" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+
+    <Grid spacing={2}>
+      <Item>
+        <Typography variant="h6">circular</Typography>
+        <Fab variant="circular" size="small" color="default">
+          <LikeOutlineMd />
+        </Fab>
+      </Item>
+    </Grid>
+  </>
+);
+
+export const Disabled = () => (
+  <Fab size="small" color="default" disabled>
+    <LikeOutlineMd />
+  </Fab>
+);
