@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { IMask } from 'react-imask';
 
 import { useMaskedValue } from '../useMaskedValue';
 import { useSelectedBaseDate } from '../useSelectedBaseDate';
@@ -22,6 +23,12 @@ type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
 };
 
 type UseMaskedValueAndSelectedBaseDateReturn = {
+  onAccept?: (
+    value: string,
+    maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+    e?: InputEvent | undefined,
+    onChange?: (value: string) => void,
+  ) => void;
   /**
    * @description пропсы необходимые для работы пикеров
    */
@@ -82,6 +89,10 @@ export const useDatePickerOptions = ({
   };
 
   return {
+    onAccept: (_, maskRef) => {
+      console.log(maskRef);
+      onMaskedValueChange(maskRef.value);
+    },
     inputProps: {
       value: maskedValue,
       onNativeChange: handleMaskedInputChange,

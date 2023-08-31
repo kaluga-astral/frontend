@@ -58,7 +58,7 @@ export const DatePickerInput = forwardRef<
         autofix={false}
         fullWidth
         InputProps={{
-          onChange: onNativeChange,
+          // onChange: onNativeChange,
           endAdornment: (
             <InputAdornment position="end" disablePointerEvents>
               <CalendarOutlineMd />

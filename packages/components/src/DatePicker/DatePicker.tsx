@@ -1,4 +1,5 @@
 import { RefObject, SyntheticEvent, forwardRef } from 'react';
+import { IMask } from 'react-imask';
 
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useInputPopover } from '../hooks';
@@ -36,6 +37,12 @@ export type DatePickerProps = MondayFirst &
       reason?: CloseEventReason,
     ) => void;
     inputProps?: Omit<TextFieldProps, 'ref' | 'value' | 'onChange'>;
+    onAccept?: (
+      value: string,
+      maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+      e?: InputEvent | undefined,
+      onChange?: (value: string) => void,
+    ) => void;
     inputRef?: RefObject<HTMLInputElement>;
     disabled?: boolean;
     /**
@@ -79,21 +86,27 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onBlur,
     });
     const handleDayPick = () => closePopover(undefined, 'selectOption');
-    const { inputProps: calculatedInputProps, pickerProps } =
-      useDatePickerOptions({
-        maxDate,
-        minDate,
-        mask,
-        onDatePick: handleDayPick,
-        currentValue: value,
-        onChange,
-      });
+    const {
+      onAccept,
+      inputProps: calculatedInputProps,
+      pickerProps,
+    } = useDatePickerOptions({
+      maxDate,
+      minDate,
+      mask,
+      onDatePick: handleDayPick,
+      currentValue: value,
+      onChange,
+    });
+
+    console.log('rende');
 
     return (
       <div ref={ref} className={className}>
         <DatePickerInput
           {...inputProps}
           {...calculatedInputProps}
+          onAccept={onAccept}
           mask={mask}
           size={size}
           disabled={disabled}
