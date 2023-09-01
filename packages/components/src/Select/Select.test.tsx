@@ -1,4 +1,4 @@
-import { renderWithTheme } from '@astral/tests';
+import { renderWithTheme, screen } from '@astral/tests';
 import { describe, expect, it } from 'vitest';
 import { useEffect, useRef } from 'react';
 
@@ -26,5 +26,10 @@ describe('Select', () => {
 
     renderWithTheme(<SelectWithRef />);
     expect(resultRef?.current).not.toBeNull();
+  });
+
+  it('Props:helperText: hideHelperText: helperText не отображается', () => {
+    renderWithTheme(<Select helperText={'helper text'} hideHelperText />);
+    expect(screen.queryByText('helper text')).toBeNull();
   });
 });
