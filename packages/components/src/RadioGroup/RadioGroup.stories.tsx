@@ -1,102 +1,64 @@
-import { FormControl, FormLabel, RadioGroup, Stack } from '@mui/material';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Radio } from '../Radio';
-import { FormControlLabel } from '../FormControlLabel';
+import { RadioGroupField } from '../RadioGroupField';
 
-export default {
+import { RadioGroup } from './RadioGroup';
+
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=3925-52201&mode=design&t=HZv64PqoHPvGj5MB-0)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
 };
 
-const Template: Story = (args) => <Radio {...args} />;
+export default meta;
 
-export const RadioGroups: Story = () => (
-  <Stack direction="row" gap={10}>
-    <Stack sx={{ maxWidth: 300 }} gap={2}>
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label" required>
-          Название группы
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="one"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel value="one" control={<Radio />} label="Один" />
-          <FormControlLabel value="two" control={<Radio />} label="Два" />
-          <FormControlLabel value="three" control={<Radio />} label="Три" />
-          <FormControlLabel
-            value="four"
-            control={<Radio disabled />}
-            label="Четыре"
-          />
-          <FormControlLabel
-            value="five"
-            control={<Radio checked disabled />}
-            label="Пять"
-          />
-        </RadioGroup>
-      </FormControl>
-    </Stack>
-    <Stack sx={{ maxWidth: 300 }} gap={2}>
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label" required>
-          Название группы
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="two"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel
-            value="one"
-            control={<Radio disabled />}
-            label="Один"
-          />
-          <FormControlLabel value="two" control={<Radio />} label="Два" />
-          <FormControlLabel value="three" control={<Radio />} label="Три" />
-          <FormControlLabel value="four" control={<Radio />} label="Четыре" />
-          <FormControlLabel
-            value="five"
-            control={<Radio checked disabled />}
-            label="Пять"
-          />
-        </RadioGroup>
-      </FormControl>
-    </Stack>
-    <Stack sx={{ maxWidth: 300 }} gap={2}>
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label" required>
-          Название группы
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="three"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel
-            value="one"
-            control={<Radio disabled />}
-            label="Один"
-          />
-          <FormControlLabel
-            value="two"
-            control={<Radio checked disabled />}
-            label="Два"
-          />
-          <FormControlLabel value="three" control={<Radio />} label="Три" />
-          <FormControlLabel value="four" control={<Radio />} label="Четыре" />
-          <FormControlLabel value="five" control={<Radio />} label="Пять" />
-        </RadioGroup>
-      </FormControl>
-    </Stack>
-  </Stack>
+type Story = StoryObj<typeof RadioGroup>;
+
+export const Interaction: Story = {
+  args: {
+    groupLabel: 'Группа радио',
+    required: false,
+    isError: false,
+    errorText: 'Ошибка',
+    children: (
+      <>
+        <RadioGroupField label="Radio field 1" value="one" />
+        <RadioGroupField label="Radio field 2" value="two" />
+        <RadioGroupField label="Radio field 3" value="three" />
+      </>
+    ),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => (
+  <RadioGroup groupLabel="Группа радио">
+    <RadioGroupField label="Radio field 1" value="one" />
+    <RadioGroupField label="Radio field 2" value="two" />
+    <RadioGroupField label="Radio field 3" value="three" />
+  </RadioGroup>
 );
 
-export const Default = Template.bind({});
+export const ErrorState = () => (
+  <RadioGroup groupLabel="Группа радио" required isError errorText="Ошибка">
+    <RadioGroupField label="Radio field 1" value="one" />
+    <RadioGroupField label="Radio field 2" value="two" />
+    <RadioGroupField label="Radio field 3" value="three" />
+  </RadioGroup>
+);
 
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+export const Row = () => (
+  <RadioGroup groupLabel="Группа радио" row required>
+    <RadioGroupField label="Radio field 1" value="one" />
+    <RadioGroupField label="Radio field 2" value="two" />
+    <RadioGroupField label="Radio field 3" value="three" />
+  </RadioGroup>
+);

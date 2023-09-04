@@ -1,61 +1,35 @@
-import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
-
-import { FormControlLabel } from '../FormControlLabel';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Radio } from './Radio';
 
-export default {
-  title: 'Components/RadioButton',
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=3925-52201&mode=design&t=HZv64PqoHPvGj5MB-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Radio> = {
+  title: 'Components/Radio',
   component: Radio,
 };
 
-const Template: Story = (args) => <Radio {...args} />;
+export default meta;
 
-export const RadioButton: Story = () => (
-  <Stack direction="row" gap={4}>
-    <Stack sx={{ maxWidth: 300 }} gap={2}>
-      <FormControlLabel
-        control={<Radio checked={false} />}
-        label="Check=False, State=Default"
-      />
-      <FormControlLabel
-        control={<Radio checked={false} />}
-        label="Check=False, State=Hover"
-      />
-      <FormControlLabel
-        control={<Radio checked />}
-        label="Check=True, State=Default"
-      />
-      <FormControlLabel
-        control={<Radio checked />}
-        label="Check=True, State=Hover"
-      />
-      <FormControlLabel
-        control={<Radio />}
-        label="Check=False, State=Disabled"
-        disabled
-      />
-      <FormControlLabel
-        control={<Radio checked />}
-        label="Check=True, State=Disabled"
-        disabled
-      />
-    </Stack>
-    <Stack sx={{ maxWidth: 200 }} gap={2}>
-      <FormControlLabel control={<Radio checked={false} />} label="Текст" />
-      <FormControlLabel control={<Radio checked={false} />} label="Текст" />
-      <FormControlLabel control={<Radio checked />} label="Текст" />
-      <FormControlLabel control={<Radio checked />} label="Текст" />
-      <FormControlLabel control={<Radio />} label="Текст" disabled />
-      <FormControlLabel control={<Radio checked />} label="Текст" disabled />
-    </Stack>
-  </Stack>
-);
+type Story = StoryObj<typeof Radio>;
 
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+export const Interaction: Story = {
+  args: {
+    checked: false,
+    disabled: false,
+    isError: false,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
+
+export const Example = () => <Radio />;
+
+export const Disabled = () => <Radio disabled />;
+
+export const Error = () => <Radio isError />;
