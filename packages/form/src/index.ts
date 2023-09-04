@@ -30,6 +30,8 @@ export * from './FormTextArea';
 
 export * from './FormCheckbox';
 
+export * from './FormRadioGroup';
+
 export * from './FormSelect';
 
 export * from './FormTextField';
