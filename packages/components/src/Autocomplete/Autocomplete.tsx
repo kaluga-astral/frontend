@@ -41,7 +41,7 @@ export type AutocompleteProps<
       FreeSolo
     >
   >,
-  'size' | 'renderInput'
+  'size' | 'renderInput' | 'getOptionLabel'
 > &
   Pick<
     TextFieldProps,
@@ -52,6 +52,7 @@ export type AutocompleteProps<
     ) => ReactNode;
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
+    getOptionLabel?: (option: AutocompleteValueProps) => string;
   };
 
 const AutocompleteInner = <
@@ -119,6 +120,18 @@ const AutocompleteInner = <
       return JSON.stringify(option) === JSON.stringify(value);
     },
     [externalOptionEqualToValue],
+  );
+
+  const handleGetOptionLabel = useCallback(
+    (option: string | AutocompleteValueProps): string => {
+      if (restProps.freeSolo && typeof option === 'string') {
+        return option;
+      }
+
+      // @ts-ignore
+      return getOptionLabel ? getOptionLabel(option) : option.label ?? option;
+    },
+    [restProps.freeSolo, getOptionLabel],
   );
 
   const renderInput = useCallback(
@@ -190,7 +203,7 @@ const AutocompleteInner = <
       {...restProps}
       size={size}
       multiple={multiple}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={handleGetOptionLabel}
       disableCloseOnSelect={multiple}
       renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}

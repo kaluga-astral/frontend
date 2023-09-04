@@ -114,13 +114,7 @@ export const FreeSolo = () => {
         options={OPTIONS}
         freeSolo
         label="Form autocomplete with freeSolo"
-        getOptionLabel={(params) => {
-          if (typeof params === 'string') {
-            return params ?? '';
-          }
-
-          return params.title;
-        }}
+        getOptionLabel={(params) => params.title}
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
