@@ -9,6 +9,8 @@ import { Alert } from './Alert';
 /**
  * Alert - Предупреждение. Короткое важное сообщение, которое используется для привлечения внимания пользователя, не прерывая его задачи.
  *
+ * Для сворачивания контента использовать [CollapsableAlert](/docs/components-collapsablealert--docs)
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=825%3A13886)
  * ### [Guide]()
  */

@@ -34,6 +34,8 @@ export * from './ClickAwayListener';
 
 export * from './Collapse';
 
+export * from './CollapsableAlert';
+
 export * from './ConfigProvider';
 
 export * from './ConfirmDialog';

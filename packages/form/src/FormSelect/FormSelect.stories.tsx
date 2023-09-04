@@ -1,5 +1,5 @@
-import { Story } from '@storybook/react';
-import { Checkbox, ListItemIcon, MenuItem } from '@astral/components';
+import { Meta } from '@storybook/react';
+import { Checkbox, Grid, ListItemIcon, MenuItem } from '@astral/components';
 import {
   array,
   arrayItem,
@@ -10,16 +10,23 @@ import {
 } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
-import { FormStoryContainer } from '../docs';
+import { styled } from '../../../components/src/styles';
+import { Form } from '../Form';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
 import { FormSelect } from './FormSelect';
 
-export default {
+/**
+ * Обертка [Select](/story/components-select--docs) для react-hook-form
+ */
+
+const meta: Meta<typeof FormSelect> = {
   title: 'Form/FormSelect',
-  component: null,
+  component: FormSelect,
 };
+
+export default meta;
 
 type IOption = {
   value: number;
@@ -55,19 +62,11 @@ const validationSchema = object<FormValues>({
   single: string(),
 });
 
-const Template: Story = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     defaultValues: { multiline: [], single: '' },
     resolver: resolver<FormValues>(validationSchema),
   });
-
-  const renderSingleOptions = () => {
-    return OPTIONS.map((option) => (
-      <MenuItem value={option} key={option}>
-        {option}
-      </MenuItem>
-    ));
-  };
 
   const getOptionLabel = (value: string | number) => {
     const optionLabel = MULTIPLE_OPTIONS.find(
@@ -92,34 +91,45 @@ const Template: Story = () => {
     });
   };
 
-  return (
-    <FormStoryContainer form={form}>
-      <FormSelect
-        control={form.control}
-        name="multiline"
-        title="Form select field"
-        // rules={{ required: 'Обязательное поле' }}
-        getOptionLabel={getOptionLabel}
-        multiple
-      >
-        {renderMultipleOptions()}
-      </FormSelect>
-      <FormSelect
-        control={form.control}
-        name="single"
-        title="Form select field"
-        // rules={{ required: 'Обязательное поле' }}
-      >
-        {renderSingleOptions()}
-      </FormSelect>
-      <FormSubmitButton>Submit</FormSubmitButton>
-    </FormStoryContainer>
+  const handleSubmit = form.handleSubmit(
+    (values) =>
+      new Promise<void>((resolve) => {
+        setTimeout(() => {
+          window.alert(JSON.stringify(values));
+          resolve();
+        }, 1000);
+      }),
   );
-};
 
-export const Default = Template.bind({});
+  const GridContainer = styled(Grid)`
+    width: 150px;
+  `;
 
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  return (
+    <Form form={form} onSubmit={handleSubmit}>
+      <GridContainer container>
+        <FormSelect
+          control={form.control}
+          name="multiline"
+          title="Form select field"
+          getOptionLabel={getOptionLabel}
+          multiple
+        >
+          {renderMultipleOptions()}
+        </FormSelect>
+        <FormSelect
+          control={form.control}
+          name="single"
+          title="Form select field"
+        >
+          {OPTIONS.map((option) => (
+            <MenuItem value={option} key={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </FormSelect>
+        <FormSubmitButton>Submit</FormSubmitButton>
+      </GridContainer>
+    </Form>
+  );
 };
