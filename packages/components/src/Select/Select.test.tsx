@@ -28,7 +28,7 @@ describe('Select', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Props:helperText: hideHelperText: helperText не отображается', () => {
+  it('Props:hideHelperText=true: helperText не отображается', () => {
     renderWithTheme(<Select helperText={'helper text'} hideHelperText />);
     expect(screen.queryByText('helper text')).toBeNull();
   });
