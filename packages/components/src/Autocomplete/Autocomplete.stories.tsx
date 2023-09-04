@@ -76,7 +76,9 @@ export const FreeSolo = () => (
       options={OPTIONS}
       label="FreeSolo"
       freeSolo
-      getOptionLabel={(params) => params.title}
+      getOptionLabel={(params) =>
+        typeof params === 'string' ? params : params.title
+      }
     />
   </Wrapper>
 );

@@ -124,7 +124,9 @@ describe('FormAutocomplete', () => {
             label="user"
             freeSolo
             options={[{ name: 'Vasya', surname: 'Pupkin' }]}
-            getOptionLabel={(value) => value.name}
+            getOptionLabel={(value) =>
+              typeof value === 'string' ? value : value.name
+            }
           />
           <button type="submit">submit</button>
         </Form>
@@ -163,7 +165,9 @@ describe('FormAutocomplete', () => {
               { name: 'Vasya', surname: 'Pupkin' },
               { name: 'Ivan', surname: 'Ivanov' },
             ]}
-            getOptionLabel={(value) => value.name}
+            getOptionLabel={(value) =>
+              typeof value === 'string' ? value : value.name
+            }
           />
           <button type="submit">submit</button>
         </Form>
