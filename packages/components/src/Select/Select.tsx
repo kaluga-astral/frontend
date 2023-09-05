@@ -23,37 +23,19 @@ import {
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
 > & {
-  /**
-   * Идет загрузка
-   */
   loading?: boolean;
-  /**
-   * Подсказка
-   */
   placeholder?: string;
-  /**
-   * Получить опции
-   */
   getOptionLabel?: (value: string | number) => string | number;
   /**
-   * Вспомогательный текст
+   * Добавляет вспомогательный текст под селектом
    */
   helperText?: ReactNode;
   /**
-   * Скрыть вспомогательный текст
+   * Скрывает вспомогательный текст
    */
   hideHelperText?: boolean;
-  /**
-   * Успешно
-   */
   success?: boolean;
-  /**
-   * С ошибкой
-   */
   error?: boolean;
-  /**
-   * Надпись
-   */
   label?: string;
 };
 
