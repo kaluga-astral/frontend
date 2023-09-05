@@ -31,7 +31,7 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
    */
   helperText?: ReactNode;
   /**
-   * Скрывает вспомогательный текст
+   * Скрывает вспомогательный текст под селектом
    */
   hideHelperText?: boolean;
   success?: boolean;
