@@ -3,7 +3,6 @@ import { MouseEvent, useState } from 'react';
 
 import { ToggleButtonGroup } from '../ToggleButtonGroup';
 import { Grid } from '../Grid';
-import { Typography } from '../Typography';
 
 import { ToggleButton } from './';
 
@@ -62,6 +61,9 @@ export const Size = () => (
   </Grid>
 );
 
+/**
+ *  Меняет цвет, если ToggleButton находится в состоянии 'active'
+ */
 export const Colors = () => {
   const [value, setValue] = useState('val1');
 
@@ -75,38 +77,33 @@ export const Colors = () => {
   };
 
   return (
-    <>
-      <Grid container spacing={6}>
-        <Typography>
-          Меняет цвет, если ToggleButton находится в состоянии 'active'
-        </Typography>
-        <ToggleButtonGroup exclusive onChange={handleChange} value={value}>
-          <ToggleButton value="val1" color="primary">
-            Primary
-          </ToggleButton>
-          <ToggleButton value="val2" color="secondary">
-            Secondary
-          </ToggleButton>
-          <ToggleButton value="val3" color="error">
-            Error
-          </ToggleButton>
-          <ToggleButton value="val4" color="success">
-            Success
-          </ToggleButton>
-          <ToggleButton value="val5" color="warning">
-            Warning
-          </ToggleButton>
-          <ToggleButton value="val6" color="info">
-            Info
-          </ToggleButton>
-          <ToggleButton value="val7" color="standard">
-            Standard
-          </ToggleButton>
-          <ToggleButton value="val8" disabled={true}>
-            Disabled
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Grid>
-    </>
+    <Grid container spacing={6}>
+      <ToggleButtonGroup exclusive onChange={handleChange} value={value}>
+        <ToggleButton value="val1" color="primary">
+          Primary
+        </ToggleButton>
+        <ToggleButton value="val2" color="secondary">
+          Secondary
+        </ToggleButton>
+        <ToggleButton value="val3" color="error">
+          Error
+        </ToggleButton>
+        <ToggleButton value="val4" color="success">
+          Success
+        </ToggleButton>
+        <ToggleButton value="val5" color="warning">
+          Warning
+        </ToggleButton>
+        <ToggleButton value="val6" color="info">
+          Info
+        </ToggleButton>
+        <ToggleButton value="val7" color="standard">
+          Standard
+        </ToggleButton>
+        <ToggleButton value="val8" disabled={true}>
+          Disabled
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </Grid>
   );
 };
