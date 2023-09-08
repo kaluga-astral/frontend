@@ -1,8 +1,10 @@
 import { Autocomplete, AutocompleteProps } from '@astral/components';
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useCallback } from 'react';
 
 import { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
+
+type AutocompleteInputChangeReason = 'input' | 'reset' | 'clear';
 
 export type FormAutocompleteProps<
   FieldValues extends object,
@@ -49,5 +51,27 @@ export const FormAutocomplete = <
     value: Value,
   ) => fieldProps.onChange(value);
 
-  return <Autocomplete {...fieldProps} onChange={handleOnChange} />;
+  const handleOnInputChange = useCallback(
+    (
+      _event: SyntheticEvent<Element, Event>,
+      value: string,
+      reason: AutocompleteInputChangeReason,
+    ) => {
+      //Устанавливаем значение в форму если триггером изменения инпута был пользовательский ввод
+      if (fieldProps.freeSolo && reason === 'input') {
+        fieldProps.onChange(value);
+      }
+
+      fieldProps.onInputChange?.(_event, value, reason);
+    },
+    [fieldProps.freeSolo, fieldProps.onInputChange],
+  );
+
+  return (
+    <Autocomplete
+      {...fieldProps}
+      onInputChange={handleOnInputChange}
+      onChange={handleOnChange}
+    />
+  );
 };

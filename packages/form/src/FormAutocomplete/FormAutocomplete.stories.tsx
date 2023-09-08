@@ -1,5 +1,5 @@
-import { Story } from '@storybook/react';
-import { array, arrayItem, min, object, string } from '@astral/validations';
+import { Meta } from '@storybook/react';
+import { array, arrayItem, min, object, or, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
@@ -8,10 +8,15 @@ import { FormSubmitButton } from '../FormSubmitButton';
 
 import { FormAutocomplete } from './FormAutocomplete';
 
-export default {
+/**
+ * Обертка [FormAutocomplete](/docs/components-autocomplete--docs) для react-hook-form
+ */
+const meta: Meta<typeof FormAutocomplete> = {
   title: 'Form/FormAutocomplete',
-  component: null,
+  component: FormAutocomplete,
 };
+
+export default meta;
 
 type IOption = {
   value: string;
@@ -43,6 +48,10 @@ type FormValues = {
   autocomplete: IOption[];
 };
 
+type FormFreeValues = {
+  autocomplete: IOption | string;
+};
+
 const validationSchema = object<FormValues>({
   autocomplete: array(
     min(1),
@@ -54,7 +63,18 @@ const validationSchema = object<FormValues>({
     ),
   ),
 });
-const Template: Story = () => {
+
+const validationFreeSchema = object<FormFreeValues>({
+  autocomplete: or(
+    object<IOption>({
+      value: string(),
+      title: string(),
+    }),
+    string(min(4)),
+  ),
+});
+
+export const Example = () => {
   const form = useForm<FormValues>({
     defaultValues: { autocomplete: [OPTIONS[0]] },
     resolver: resolver<FormValues>(validationSchema),
@@ -75,11 +95,30 @@ const Template: Story = () => {
   );
 };
 
-export const Default = Template.bind({});
+/**
+ * Prop `freeSolo`: если true, значение в input не будет связано со списком options.
+ *
+ * В данные формы могут быть установлены как строка из input, так и обьект из списка.
+ */
+export const FreeSolo = () => {
+  const form = useForm<FormFreeValues>({
+    defaultValues: { autocomplete: '' },
+    resolver: resolver<FormFreeValues>(validationFreeSchema),
+  });
 
-Default.args = {};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  return (
+    <FormStoryContainer form={form}>
+      <FormAutocomplete<FormFreeValues, IOption, true, false, true>
+        control={form.control}
+        name="autocomplete"
+        options={OPTIONS}
+        freeSolo
+        label="Form autocomplete with freeSolo"
+        getOptionLabel={(params) =>
+          typeof params === 'string' ? params : params.title
+        }
+      />
+      <FormSubmitButton>Submit</FormSubmitButton>
+    </FormStoryContainer>
+  );
 };

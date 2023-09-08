@@ -1,17 +1,23 @@
-import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
+import { Meta } from '@storybook/react';
 
+import { Tooltip } from '../Tooltip';
+import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { OverflowTypography } from '../OverflowTypography';
-import { Tag } from '../Tag';
-import { Tooltip } from '../Tooltip';
+import { styled } from '../styles/styled';
 
 import { Autocomplete } from './Autocomplete';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=8620-116375&mode=design&t=LIHrMjQSPzLTny2z-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Autocomplete> = {
   title: 'Components/Autocomplete',
   component: Autocomplete,
 };
+
+export default meta;
 
 type IOption = {
   value: string;
@@ -39,37 +45,46 @@ const OPTIONS: IOption[] = [
   },
 ];
 
-const Template: Story = (args) => (
-  <Autocomplete<IOption, false, false, false>
-    {...args}
-    options={OPTIONS}
-    label="Autocomplete"
-    getOptionLabel={(params) => params.title}
-  />
-);
+const Wrapper = styled.div`
+  min-width: 300px;
+`;
 
-export const Default = Template.bind({});
-
-Default.args = {};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
-
-export const Showcase: Story = () => (
-  <Stack maxWidth={300}>
+export const Example = () => (
+  <Wrapper>
     <Autocomplete<IOption, false, false, false>
       options={OPTIONS}
-      label="Single"
+      label="Выберите вариант"
       getOptionLabel={(params) => params.title}
     />
+  </Wrapper>
+);
+
+export const Multiple = () => (
+  <Wrapper>
     <Autocomplete<IOption, true, false, false>
       options={OPTIONS}
       label="Multiple"
       multiple
       getOptionLabel={(params) => params.title}
     />
+  </Wrapper>
+);
+
+export const FreeSolo = () => (
+  <Wrapper>
+    <Autocomplete<IOption, false, false, true>
+      options={OPTIONS}
+      label="FreeSolo"
+      freeSolo
+      getOptionLabel={(params) =>
+        typeof params === 'string' ? params : params.title
+      }
+    />
+  </Wrapper>
+);
+
+export const MultipleCustomTags = () => (
+  <Wrapper>
     <Autocomplete<IOption, true, false, false>
       multiple
       options={OPTIONS}
@@ -96,6 +111,11 @@ export const Showcase: Story = () => (
         });
       }}
     />
+  </Wrapper>
+);
+
+export const Error = () => (
+  <Wrapper>
     <Autocomplete<IOption, false, false, false>
       label="Error"
       options={OPTIONS}
@@ -103,6 +123,11 @@ export const Showcase: Story = () => (
       getOptionLabel={(params) => params.title}
       error
     />
+  </Wrapper>
+);
+
+export const Success = () => (
+  <Wrapper>
     <Autocomplete<IOption, false, false, false>
       label="Success"
       options={OPTIONS}
@@ -110,12 +135,22 @@ export const Showcase: Story = () => (
       getOptionLabel={(params) => params.title}
       success
     />
+  </Wrapper>
+);
+
+export const Small = () => (
+  <Wrapper>
     <Autocomplete<IOption, false, false, false>
       label="Small"
       size="small"
       options={OPTIONS}
       getOptionLabel={(params) => params.title}
     />
+  </Wrapper>
+);
+
+export const NoData = () => (
+  <Wrapper>
     <Autocomplete<IOption, true, false, false>
       label="No data"
       size="small"
@@ -124,6 +159,11 @@ export const Showcase: Story = () => (
       getOptionLabel={(params) => params.title}
       required
     />
+  </Wrapper>
+);
+
+export const CustomRenderOption = () => (
+  <Wrapper>
     <Autocomplete<IOption, false, false, false>
       label="Custom render option"
       size="small"
@@ -137,6 +177,11 @@ export const Showcase: Story = () => (
         </MenuItem>
       )}
     />
+  </Wrapper>
+);
+
+export const CustomRenderInput = () => (
+  <Wrapper>
     <Autocomplete<IOption, true, false, false>
       label="Custom render input"
       size="small"
@@ -162,5 +207,5 @@ export const Showcase: Story = () => (
         </div>
       )}
     />
-  </Stack>
+  </Wrapper>
 );
