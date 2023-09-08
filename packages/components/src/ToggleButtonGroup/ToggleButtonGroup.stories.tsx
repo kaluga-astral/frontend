@@ -2,16 +2,13 @@ import { Meta } from '@storybook/react';
 import { MouseEvent, useState } from 'react';
 
 import { ToggleButton } from '../ToggleButton';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 import { Paper } from '../Paper';
 import { Typography } from '../Typography';
 
-import { ToggleButtonGroup } from './';
+import { ToggleButtonGroup } from './ToggleButtonGroup';
 
 /**
- * ToggleButtonGroup группирует [ToggleButton](?path=/story/components-togglebutton--docs), представляет две или более опций в одном элементе управления.
- * Опции элемента управления переключаются между собой по клику. Выбранная опция перекрашивается в продуктовую палитру.
- *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=14005%3A156527&mode=design&t=8ycJptcUyE1sU6EI-1)
  * ### [Guide]()
  */

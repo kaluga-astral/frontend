@@ -4,7 +4,7 @@ import { MouseEvent, useState } from 'react';
 import { ToggleButtonGroup } from '../ToggleButtonGroup';
 import { Grid } from '../Grid';
 
-import { ToggleButton } from './';
+import { ToggleButton } from './ToggleButton';
 
 /**
  * Используется в форме заполнения данных для переключения блока данных.
