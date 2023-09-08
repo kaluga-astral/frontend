@@ -11,7 +11,7 @@ import { ToggleButton } from './';
  * Используется в форме заполнения данных для переключения блока данных.
  * Группируется с помощью компонента [ToggleButtonGroup](?path=/story/components-togglebuttongroup--docs)
  *
- * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=1-347&mode=design&t=lMvg1tmjfSIA2lhp-0)
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=14005%3A156527&mode=design&t=8ycJptcUyE1sU6EI-1)
  * ### [Guide]()
  */
 const meta: Meta<typeof ToggleButton> = {
