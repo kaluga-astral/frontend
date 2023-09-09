@@ -40,12 +40,22 @@ export const Showcase: Story = () => (
       <Item>Item 3</Item>
     </Grid>
 
+    <Grid columns="auto 1fr" spacing={2}>
+      <Item>Item 1</Item>
+      <Item>Item 2</Item>
+    </Grid>
+
     <Typography variant="ui">Grid rows</Typography>
 
     <Grid container rows={3} rowSpacing={1}>
       <Item>Item 1</Item>
       <Item>Item 2</Item>
       <Item>Item 3</Item>
+    </Grid>
+
+    <Grid rows="1fr 2fr" rowSpacing={1}>
+      <Item>Item 1</Item>
+      <Item>Item 2</Item>
     </Grid>
 
     <Typography variant="ui">Grid Spacing</Typography>

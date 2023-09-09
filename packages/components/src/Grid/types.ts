@@ -7,15 +7,17 @@ export type GridPropsBase = {
    */
   container?: boolean;
   /**
-   * @description Количество равных колонок
+   * @description Количество равных колонок,
+   * либо текстовое значение соответствующее grid-template-columns
    * @default undefined
    */
-  columns?: number;
+  columns?: number | string;
   /**
-   * @description Количество равных рядов
+   * @description Количество равных рядов,
+   * либо текстовое значение соответствующее grid-template-rows
    * @default undefined
    */
-  rows?: number;
+  rows?: number | string;
   /**
    * @description Отступы между колонками
    * @default undefined
