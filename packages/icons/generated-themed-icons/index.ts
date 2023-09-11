@@ -56,6 +56,8 @@ export { default as CompanyOutlineMd } from './CompanyOutlineMd';
 
 export { default as CopyOutlineSm } from './CopyOutlineSm';
 
+export { default as CopyOutlineMd } from './CopyOutlineMd';
+
 export { default as CopyMailFillMd } from './CopyMailFillMd';
 
 export { default as CrossOutlineMd } from './CrossOutlineMd';

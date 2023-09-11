@@ -8,7 +8,8 @@
     "node_modules",
     "lib",
     "./*.ts",
-    "./**/*.test.(tsx|ts)",
+    "./**/*.test.tsx",
+    "./**/*.test.ts",
     "./**/*.stories.tsx",
     "./src/docs"
   ]

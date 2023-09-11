@@ -26,7 +26,14 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   loading?: boolean;
   placeholder?: string;
   getOptionLabel?: (value: string | number) => string | number;
+  /**
+   * Добавляет вспомогательный текст под селектом
+   */
   helperText?: ReactNode;
+  /**
+   * Скрывает вспомогательный текст под селектом
+   */
+  hideHelperText?: boolean;
   success?: boolean;
   error?: boolean;
   label?: string;
@@ -38,6 +45,7 @@ const SelectInner = <Value,>(
     getOptionLabel = (value) => value,
     placeholder,
     helperText,
+    hideHelperText = false,
     loading,
     success,
     children,
@@ -95,9 +103,11 @@ const SelectInner = <Value,>(
         {!loading && children}
         {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}
       </MuiSelect>
-      <FormHelperText error={error} success={success}>
-        {helperText}
-      </FormHelperText>
+      {!hideHelperText && (
+        <FormHelperText error={error} success={success}>
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };
