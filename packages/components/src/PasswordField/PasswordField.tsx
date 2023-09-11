@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { MouseEvent, forwardRef, useState } from 'react';
 import { EyeOutlineMd, VisibilityOffOutlineMd } from '@astral/icons';
 import { InputAdornment } from '@mui/material';
 
@@ -6,6 +6,9 @@ import { IconButton } from '../IconButton';
 import { TextField, TextFieldProps } from '../TextField';
 
 type PasswordFieldInputProps = TextFieldProps & {
+  /**
+   * @description если true, показываются символы пароля
+   */
   showSymbols?: boolean;
 };
 
@@ -13,13 +16,11 @@ export const PasswordField = forwardRef<
   HTMLInputElement,
   PasswordFieldInputProps
 >(({ label, disabled = false, showSymbols = false, ...props }) => {
-  const [showPassword, setShowPassword] = React.useState(showSymbols);
+  const [showPassword, setShowPassword] = useState(showSymbols);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
