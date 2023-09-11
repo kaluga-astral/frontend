@@ -38,7 +38,11 @@ export const PasswordField = forwardRef<
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
             >
-              {showPassword ? <VisibilityOffOutlineMd /> : <EyeOutlineMd />}
+              {showPassword ? (
+                <VisibilityOffOutlineMd id="visibility-off" />
+              ) : (
+                <EyeOutlineMd id="visibility-on" />
+              )}
             </IconButton>
           </InputAdornment>
         ),
