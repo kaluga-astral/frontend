@@ -192,7 +192,7 @@ export const HideProgressBar = () => (
     <NotificationContainer enableMultiContainer={true} containerId={'hide-progress-bar'} />
     <Stack direction="row" gap={2}>
       <Button onClick={handleErrorWithContentWithoutProgressBar}>
-        With icon
+        Hide progress bar
       </Button>
     </Stack>
     </ExampleStack>
