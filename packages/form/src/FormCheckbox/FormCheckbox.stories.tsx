@@ -110,7 +110,12 @@ const Template: Story = () => {
           <FormCheckbox
             control={form2.control}
             name="fieldName1"
-            title="Form checkbox field"
+            title={
+              <>
+                Lorem ipsum dolor sit amet <a href="/">some link in label</a>{' '}
+                lorem ipsum
+              </>
+            }
           />
           <FormCheckbox
             control={form2.control}
