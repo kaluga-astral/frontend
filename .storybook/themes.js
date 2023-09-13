@@ -64,6 +64,10 @@ export const themes = [
     name: 'Astral.RSS',
     theme: createTheme({ brand: Brand.RSS, fontsUrls })
   },
+  {
+    name: 'Astral.SBER',
+    theme: createTheme({ brand: Brand.SBER, fontsUrls })
+  },
 ];
 
 export const getTheme = (name) => {
