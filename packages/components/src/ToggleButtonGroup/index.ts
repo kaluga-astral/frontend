@@ -1,1 +1,1 @@
-export { ToggleButtonGroup, type ToggleButtonGroupProps } from '@mui/material';
+export * from './ToggleButtonGroup';
