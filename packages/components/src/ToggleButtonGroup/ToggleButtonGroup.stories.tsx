@@ -1,20 +1,34 @@
-import { Story } from '@storybook/react';
-import { useState } from 'react';
+import { Meta } from '@storybook/react';
+import { MouseEvent, useState } from 'react';
 
 import { ToggleButton } from '../ToggleButton';
+import { styled } from '../styles';
+import { Paper } from '../Paper';
+import { Typography } from '../Typography';
 
-import { ToggleButtonGroup } from './';
+import { ToggleButtonGroup } from './ToggleButtonGroup';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=14005%3A156527&mode=design&t=8ycJptcUyE1sU6EI-1)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof ToggleButtonGroup> = {
   title: 'Components/ToggleButtonGroup',
   component: ToggleButtonGroup,
 };
 
-export const TabsShowcase: Story = () => {
+export default meta;
+
+const ExamplePaper = styled(Paper)`
+  padding: ${({ theme }) => theme.spacing(4)};
+`;
+
+export const Example = () => {
   const [value, setValue] = useState('val1');
 
   const handleChange = (
-    _event: React.MouseEvent<HTMLElement>,
+    _event: MouseEvent<HTMLElement>,
     selectedValue: string,
   ) => {
     if (selectedValue) {
@@ -23,13 +37,15 @@ export const TabsShowcase: Story = () => {
   };
 
   return (
-    <ToggleButtonGroup exclusive onChange={handleChange} value={value}>
-      <ToggleButton value="val1">Вариант 1</ToggleButton>
-      <ToggleButton value="val2">Вариант 2</ToggleButton>
-      <ToggleButton value="val3">Вариант 3</ToggleButton>
-      <ToggleButton value="val4">Вариант 4</ToggleButton>
-    </ToggleButtonGroup>
+    <ExamplePaper>
+      <Typography variant="overline" component="h2" gutterBottom>
+        Сведения о представителе
+      </Typography>
+      <ToggleButtonGroup exclusive onChange={handleChange} value={value}>
+        <ToggleButton value="val1">Юридическое лицо</ToggleButton>
+        <ToggleButton value="val2">Индивидуальный предприниматель</ToggleButton>
+        <ToggleButton value="val3">Физическое лицо</ToggleButton>
+      </ToggleButtonGroup>
+    </ExamplePaper>
   );
 };
-
-TabsShowcase.parameters = { options: { showPanel: false } };
