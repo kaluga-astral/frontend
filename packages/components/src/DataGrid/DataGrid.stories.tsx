@@ -245,7 +245,7 @@ const Template: Story = (args) => {
           <DataGrid<DataType, SortField>
             {...args}
             keyId="id"
-            activeKeyId={'3'}
+            activeRowId={'3'}
             rows={slicedData}
             columns={columns}
             selectedRows={selected}

@@ -10,7 +10,7 @@ import { StyledTableBody } from './styles';
 export type DataGridBodyProps<Data extends Record<string, unknown>> = {
   columns: DataGridColumns<Data>[];
   keyId: keyof DataGridRow;
-  activeKeyId?: string;
+  activeRowId?: string;
   onRowClick?: (row: Data) => void;
   selectable?: boolean;
   selectedRows?: Array<Data>;
@@ -30,7 +30,7 @@ export function DataGridBody<Data extends Record<string, unknown>>({
   selectedRows = [],
   minDisplayRows,
   keyId,
-  activeKeyId,
+  activeRowId,
   emptyCellValue,
   noDataPlaceholder,
 }: DataGridBodyProps<Data>) {
@@ -71,7 +71,7 @@ export function DataGridBody<Data extends Record<string, unknown>>({
         <TableRow
           key={rowId}
           hover={Boolean(onRowClick)}
-          selected={activeKeyId === rowId}
+          selected={activeRowId === rowId}
           onClick={handleRowClick(row)}
         >
           {selectable && (
