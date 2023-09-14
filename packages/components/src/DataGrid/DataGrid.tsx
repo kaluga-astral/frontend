@@ -36,7 +36,7 @@ export type DataGridProps<
   columns: DataGridColumns<Data>[];
   /**
    * @example <DataGrid activeKeyId={activeId} />
-   * Идентификатор активного элемента
+   * Идентификатор активного элемента массива rows
    */
   activeKeyId?: string;
   keyId: keyof DataGridRow;
