@@ -34,6 +34,11 @@ export type DataGridProps<
    * Конфигурация колонок для таблицы
    */
   columns: DataGridColumns<Data>[];
+  /**
+   * @example <DataGrid activeKeyId={activeId} />
+   * Идентификатор активного элемента
+   */
+  activeKeyId?: string;
   keyId: keyof DataGridRow;
   /**
    * @example <DataGrid onRowClick={(row) => console.log('clicked')} />
@@ -117,6 +122,7 @@ export function DataGrid<
   disabled,
   onSort,
   keyId,
+  activeKeyId,
   emptyCellValue,
   className,
 }: DataGridProps<Data, SortField>) {
@@ -194,6 +200,7 @@ export function DataGrid<
             columns={columns}
           />
           <DataGridBody<Data>
+            activeKeyId={activeKeyId}
             keyId={keyId}
             selectedRows={selectedRows}
             minDisplayRows={minDisplayRows}

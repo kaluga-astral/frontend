@@ -234,6 +234,7 @@ const Template: Story = (args) => {
         descriptionList={[
           'Пагинация скрыта, так как totalCount(10) меньше или равен minDisplayRows(10)',
           'Растягивается по всей доступной высоте котейнера (600px)',
+          'Активный элемент с id 3',
         ]}
       >
         <Stack
@@ -244,6 +245,7 @@ const Template: Story = (args) => {
           <DataGrid<DataType, SortField>
             {...args}
             keyId="id"
+            activeKeyId={'3'}
             rows={slicedData}
             columns={columns}
             selectedRows={selected}
