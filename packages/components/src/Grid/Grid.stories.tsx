@@ -91,6 +91,10 @@ export const Showcase: Story = () => (
   </Grid>
 );
 
+/**
+ * Prop ```rows``` позволяет задать текстовое значение соответствующее grid-template-rows
+ */
+
 export const StringRows = () => {
   return (
     <Wrapper>
@@ -102,6 +106,9 @@ export const StringRows = () => {
   );
 };
 
+/**
+ * Prop ```columns``` позволяет задать текстовое значение соответствующее grid-template-columns
+ */
 export const StringColumns = () => {
   return (
     <Wrapper>
