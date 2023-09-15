@@ -1,17 +1,19 @@
+import { ReactNode } from 'react';
 import { CheckboxField, CheckboxProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
 import { WithFormFieldProps } from '../types';
 
-export type FormCheckboxProps<FieldValues extends object> = WithFormFieldProps<
-  CheckboxProps,
-  FieldValues
+export type FormCheckboxProps<FieldValues extends object> = Omit<
+  WithFormFieldProps<CheckboxProps, FieldValues>,
+  'title'
 > & {
   success?: boolean;
   /**
    * Флаг принудительного скрытия блока helperText
    */
   hideHelperText?: boolean;
+  title: ReactNode;
 };
 
 /**

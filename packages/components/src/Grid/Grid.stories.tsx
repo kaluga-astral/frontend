@@ -16,6 +16,10 @@ const Item = styled.div`
   text-align: center;
 `;
 
+const Wrapper = styled.div`
+  min-width: 500px;
+`;
+
 const Template: Story = (props) => {
   return (
     <Grid {...props}>
@@ -86,6 +90,35 @@ export const Showcase: Story = () => (
     </Grid>
   </Grid>
 );
+
+/**
+ * Prop ```rows``` позволяет задать текстовое значение соответствующее grid-template-rows
+ */
+
+export const StringRows = () => {
+  return (
+    <Wrapper>
+      <Grid rows="1fr 2fr" rowSpacing={1}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+      </Grid>
+    </Wrapper>
+  );
+};
+
+/**
+ * Prop ```columns``` позволяет задать текстовое значение соответствующее grid-template-columns
+ */
+export const StringColumns = () => {
+  return (
+    <Wrapper>
+      <Grid columns="auto 1fr" spacing={2}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+      </Grid>
+    </Wrapper>
+  );
+};
 
 Showcase.parameters = { options: { showPanel: false } };
 

@@ -1,10 +1,10 @@
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
+import { RadioGroupField } from '@astral/components';
 
 import { useForm } from '../hooks';
 import { Form } from '../Form';
-import { RadioGroupField } from '../../../components';
 
 import { FormRadioGroup } from './FormRadioGroup';
 

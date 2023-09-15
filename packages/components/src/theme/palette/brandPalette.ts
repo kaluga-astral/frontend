@@ -1,7 +1,6 @@
 import { Brand } from '../constants';
 
-type BrandColors = {
-  secondary: string;
+type ColorShades = {
   900: string;
   800: string;
   700: string;
@@ -12,6 +11,14 @@ type BrandColors = {
   200: string;
   100: string;
 };
+
+type BrandColors = {
+  secondary: string;
+  red?: ColorShades;
+  green?: ColorShades;
+  yellow?: ColorShades;
+  grey?: ColorShades;
+} & ColorShades;
 
 const defaultBrandPalette: BrandColors = {
   secondary: '#55B8F0',
@@ -130,6 +137,63 @@ const rssPalette: BrandColors = {
   100: '#ECE6F3',
 };
 
+const sberPalette: BrandColors = {
+  secondary: '#107F8C',
+  900: '#005E7F',
+  800: '#107F8C',
+  700: '#21A19A',
+  600: '#7AC7C2',
+  500: '#90D0CC',
+  400: '#ABDBD8',
+  300: '#D3ECEB',
+  200: '#E5FCF7',
+  100: '#EEF8F7',
+  green: {
+    900: '#278B86',
+    800: '#21A19A',
+    700: '#3CADA6',
+    600: '#7AC7C2',
+    500: '#A6D9D7',
+    400: '#C1E5E3',
+    300: '#DBF0EF',
+    200: '#E9F6F5',
+    100: '#F2FAF9',
+  },
+  red: {
+    900: '#920C24',
+    800: '#C11030',
+    700: '#C92D49',
+    600: '#DA7083',
+    500: '#E69FAC',
+    400: '#EEBCC5',
+    300: '#F5D9DE',
+    200: '#F9E8EB',
+    100: '#FCF1F3',
+  },
+  yellow: {
+    900: '#CC7A00',
+    800: '#FF9900',
+    700: '#FFA61F',
+    600: '#FFC266',
+    500: '#FFD699',
+    400: '#FFE3B8',
+    300: '#FFEED6',
+    200: '#FFF5E6',
+    100: '#FFF9F0',
+  },
+  grey: {
+    900: '#1F1F22',
+    800: '#565B62',
+    700: '#7D838A',
+    600: '#979CA1',
+    500: '#A4A8AD',
+    400: '#B2B8BF',
+    300: '#D9DEE3',
+    200: '#E4E8EB',
+    100: '#F2F5F5',
+  },
+};
+
 export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
@@ -140,4 +204,5 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.LKP]: lkpPalette,
   [Brand.POA]: poaPalette,
   [Brand.RSS]: rssPalette,
+  [Brand.SBER]: sberPalette,
 };
