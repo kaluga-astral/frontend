@@ -18,6 +18,14 @@ const setCss = (prop: number | [number, number], theme: Theme) =>
     .map((value) => theme.spacing(value))
     .join(' ');
 
+const getTemplateStyle = (value?: number | string): string | undefined => {
+  if (typeof value === 'number') {
+    return `repeat(${value}, 1fr)`;
+  }
+
+  return value;
+};
+
 export const StyledGrid = styled(GridComponent, {
   shouldForwardProp: (prop: string) =>
     ![
@@ -37,8 +45,7 @@ export const StyledGrid = styled(GridComponent, {
   ${({ theme, spacing }) => spacing && `gap: ${setCss(spacing, theme)};`};
   ${({ container, spacing, rowSpacing, columnSpacing }) =>
     (spacing || rowSpacing || container || columnSpacing) && 'display: grid'};
-  ${({ columns }) =>
-    columns && `grid-template-columns: repeat(${columns}, 1fr)`};
-  ${({ rows }) => rows && `grid-template-rows: repeat(${rows}, 1fr)`};
+  grid-template-columns: ${({ columns }) => getTemplateStyle(columns)};
+  grid-template-rows: ${({ rows }) => getTemplateStyle(rows)};
   ${({ direction }) => direction && `grid-auto-flow: ${direction}`};
 `;

@@ -10,6 +10,9 @@ export const MuiTableRow: Components<Theme>['MuiTableRow'] = {
           backgroundColor: theme.palette.background.elementHover,
           cursor: 'pointer',
         },
+        '&.Mui-selected': {
+          backgroundColor: theme.palette.primary['100'],
+        },
       };
     },
   },

@@ -22,7 +22,6 @@ export type NotificationProps = Omit<
   | 'transition'
   | 'draggableDirection'
   | 'role'
-  | 'containerId'
   | 'rtl'
   | 'icon'
   | 'theme'
