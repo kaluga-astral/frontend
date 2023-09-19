@@ -26,14 +26,6 @@ export default meta;
 
 type Story = StoryObj<typeof NotificationTemplate>;
 
-const handleSuccessExample = () => {
-  notify.success('Успешно', {
-    filled: false,
-    content: 'Поле сохранено',
-    containerId: 'example',
-  });
-};
-
 export const Interaction: Story = {
   args: {
     filled: false,
@@ -49,76 +41,6 @@ export const Interaction: Story = {
   },
 };
 
-const handleInfo = () => {
-  notify.info('Загрузка завершена', {
-    filled: false,
-    containerId: 'types',
-  });
-};
-
-const handleSuccess = () => {
-  notify.success('Операция успешно завершена', {
-    filled: false,
-    containerId: 'types',
-  });
-};
-
-const handleWithoutCloseButton = () => {
-  notify.success('Идёт загрузка...', {
-    filled: false,
-    showCloseButton: false,
-    autoClose: 10000,
-    icon: <CircularProgress color="primary" size="medium" />,
-    containerId: 'autoclose',
-  });
-};
-
-const handleSuccessWithContent = () => {
-  notify.success('Операция успешно завершена', {
-    filled: false,
-    content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-    actions: <Button variant="link">Подробнее</Button>,
-    actionsDirection: 'right',
-    containerId: 'content',
-  });
-};
-
-const handleSuccessWithIcon = () => {
-  notify.success('Операция успешно завершена', {
-    filled: false,
-    content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-    actions: <Button variant="link">Подробнее</Button>,
-    actionsDirection: 'right',
-    icon: <CircularProgress color="primary" size="medium" />,
-    containerId: 'icon',
-  });
-};
-
-const handleWarning = () => {
-  notify.warning('Внимание', {
-    filled: false,
-    containerId: 'types',
-  });
-};
-
-const handleError = () => {
-  notify.error('Соединение потеряно', {
-    filled: false,
-    containerId: 'types',
-  });
-};
-
-const handleErrorWithContentWithoutProgressBar = () => {
-  notify.error('Ошибка', {
-    filled: false,
-    content: 'Соединение потеряно',
-    actions: <Button variant="link">Подробнее</Button>,
-    actionsDirection: 'right',
-    hideProgressBar: true,
-    containerId: 'hide-progress-bar',
-  });
-};
-
 const ExamplePaper = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(4)};
 `;
@@ -128,6 +50,14 @@ const ExampleStack = styled(Stack)`
 `;
 
 export const Example = () => {
+  const handleSuccessExample = () => {
+    notify.success('Успешно', {
+      filled: false,
+      content: 'Поле сохранено',
+      containerId: 'example',
+    });
+  };
+
   return (
     <ExamplePaper>
       <NotificationContainer
@@ -145,67 +75,149 @@ export const Example = () => {
   );
 };
 
-export const Types = () => (
-  <ExampleStack>
-    <NotificationContainer enableMultiContainer={true} containerId={'types'} />
-    <Stack direction="row" gap={2}>
-      <Button onClick={handleInfo}>info</Button>
-      <Button onClick={handleSuccess} color="success">
-        success
-      </Button>
-      <Button onClick={handleWarning} color="warning">
-        warning
-      </Button>
-      <Button onClick={handleError} color="error">
-        error
-      </Button>
-    </Stack>
-  </ExampleStack>
-);
+export const Types = () => {
+  const handleInfo = () => {
+    notify.info('Загрузка завершена', {
+      filled: false,
+      containerId: 'types',
+    });
+  };
 
-export const AutoClose = () => (
-  <ExampleStack>
-    <NotificationContainer
-      enableMultiContainer={true}
-      containerId={'autoclose'}
-    />
-    <Stack direction="row" gap={2}>
-      <Button onClick={handleWithoutCloseButton}>Autoclose in 10 sec</Button>
-    </Stack>
-  </ExampleStack>
-);
+  const handleSuccess = () => {
+    notify.success('Операция успешно завершена', {
+      filled: false,
+      containerId: 'types',
+    });
+  };
 
-export const Content = () => (
-  <ExampleStack>
-    <NotificationContainer
-      enableMultiContainer={true}
-      containerId={'content'}
-    />
-    <Stack direction="row" gap={2}>
-      <Button onClick={handleSuccessWithContent}>With content</Button>
-    </Stack>
-  </ExampleStack>
-);
+  const handleWarning = () => {
+    notify.warning('Внимание', {
+      filled: false,
+      containerId: 'types',
+    });
+  };
+  const handleError = () => {
+    notify.error('Соединение потеряно', {
+      filled: false,
+      containerId: 'types',
+    });
+  };
 
-export const Icon = () => (
-  <ExampleStack>
-    <NotificationContainer enableMultiContainer={true} containerId={'icon'} />
-    <Stack direction="row" gap={2}>
-      <Button onClick={handleSuccessWithIcon}>With icon</Button>
-    </Stack>
-  </ExampleStack>
-);
+  return (
+    <ExampleStack>
+      <NotificationContainer
+        enableMultiContainer={true}
+        containerId={'types'}
+      />
+      <Stack direction="column" gap={2}>
+        <Button onClick={handleInfo}>info</Button>
+        <Button onClick={handleSuccess} color="success">
+          success
+        </Button>
+        <Button onClick={handleWarning} color="warning">
+          warning
+        </Button>
+        <Button onClick={handleError} color="error">
+          error
+        </Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
 
-export const HideProgressBar = () => (
-  <ExampleStack>
-    <NotificationContainer
-      enableMultiContainer={true}
-      containerId={'hide-progress-bar'}
-    />
-    <Stack direction="row" gap={2}>
-      <Button onClick={handleErrorWithContentWithoutProgressBar}>
-        Hide progress bar
-      </Button>
-    </Stack>
-  </ExampleStack>
-);
+export const AutoClose = () => {
+  const handleWithoutCloseButton = () => {
+    notify.success('Идёт загрузка...', {
+      filled: false,
+      showCloseButton: false,
+      autoClose: 10000,
+      icon: <CircularProgress color="primary" size="medium" />,
+      containerId: 'autoclose',
+    });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainer
+        enableMultiContainer={true}
+        containerId={'autoclose'}
+      />
+      <Stack direction="row" gap={2}>
+        <Button onClick={handleWithoutCloseButton}>Autoclose in 10 sec</Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+export const Content = () => {
+  const handleSuccessWithContent = () => {
+    notify.success('Операция успешно завершена', {
+      filled: false,
+      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
+      actions: <Button variant="link">Подробнее</Button>,
+      actionsDirection: 'right',
+      containerId: 'content',
+    });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainer
+        enableMultiContainer={true}
+        containerId={'content'}
+      />
+      <Stack direction="row" gap={2}>
+        <Button onClick={handleSuccessWithContent}>With content</Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+export const Icon = () => {
+  const handleSuccessWithIcon = () => {
+    notify.success('Операция успешно завершена', {
+      filled: false,
+      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
+      actions: <Button variant="link">Подробнее</Button>,
+      actionsDirection: 'right',
+      icon: <CircularProgress color="primary" size="medium" />,
+      containerId: 'icon',
+    });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainer enableMultiContainer={true} containerId={'icon'} />
+      <Stack direction="row" gap={2}>
+        <Button onClick={handleSuccessWithIcon}>With icon</Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+export const HideProgressBar = () => {
+  const handleErrorWithContentWithoutProgressBar = () => {
+    notify.error('Ошибка', {
+      filled: false,
+      content: 'Соединение потеряно',
+      actions: <Button variant="link">Подробнее</Button>,
+      actionsDirection: 'right',
+      hideProgressBar: true,
+      containerId: 'hide-progress-bar',
+    });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainer
+        enableMultiContainer={true}
+        containerId={'hide-progress-bar'}
+      />
+      <Stack direction="row" gap={2}>
+        <Button onClick={handleErrorWithContentWithoutProgressBar}>
+          Hide progress bar
+        </Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
