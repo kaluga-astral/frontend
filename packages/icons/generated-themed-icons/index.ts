@@ -214,8 +214,6 @@ export { default as SuccessFillMd } from './SuccessFillMd';
 
 export { default as SuccessFillSm } from './SuccessFillSm';
 
-export { default as SuccessOutlineSm } from './SuccessOutlineSm';
-
 export { default as SupportFillMd } from './SupportFillMd';
 
 export { default as TelegramFillMd } from './TelegramFillMd';
