@@ -30,7 +30,7 @@ const handleSuccessExample = () => {
   notify.success('Успешно', {
     filled: false,
     content: 'Поле сохранено',
-    containerId: 'example'
+    containerId: 'example',
   });
 };
 
@@ -50,16 +50,16 @@ export const Interaction: Story = {
 };
 
 const handleInfo = () => {
-  notify.info('Загрузка завершена!', {
+  notify.info('Загрузка завершена', {
     filled: false,
-    containerId: 'types'
+    containerId: 'types',
   });
 };
 
 const handleSuccess = () => {
   notify.success('Операция успешно завершена', {
     filled: false,
-    containerId: 'types'
+    containerId: 'types',
   });
 };
 
@@ -69,7 +69,7 @@ const handleWithoutCloseButton = () => {
     showCloseButton: false,
     autoClose: 10000,
     icon: <CircularProgress color="primary" size="medium" />,
-    containerId: 'autoclose'
+    containerId: 'autoclose',
   });
 };
 
@@ -79,7 +79,7 @@ const handleSuccessWithContent = () => {
     content: 'Все необходимые действия увенчались успехом в ходе обработки.',
     actions: <Button variant="link">Подробнее</Button>,
     actionsDirection: 'right',
-    containerId: 'content'
+    containerId: 'content',
   });
 };
 
@@ -90,21 +90,21 @@ const handleSuccessWithIcon = () => {
     actions: <Button variant="link">Подробнее</Button>,
     actionsDirection: 'right',
     icon: <CircularProgress color="primary" size="medium" />,
-    containerId: 'icon'
+    containerId: 'icon',
   });
 };
 
 const handleWarning = () => {
   notify.warning('Внимание', {
     filled: false,
-    containerId: 'types'
+    containerId: 'types',
   });
 };
 
 const handleError = () => {
   notify.error('Соединение потеряно', {
     filled: false,
-    containerId: 'types'
+    containerId: 'types',
   });
 };
 
@@ -115,7 +115,7 @@ const handleErrorWithContentWithoutProgressBar = () => {
     actions: <Button variant="link">Подробнее</Button>,
     actionsDirection: 'right',
     hideProgressBar: true,
-    containerId: 'hide-progress-bar'
+    containerId: 'hide-progress-bar',
   });
 };
 
@@ -130,7 +130,10 @@ const ExampleStack = styled(Stack)`
 export const Example = () => {
   return (
     <ExamplePaper>
-      <NotificationContainer enableMultiContainer={true} containerId={'example'} />
+      <NotificationContainer
+        enableMultiContainer={true}
+        containerId={'example'}
+      />
       <Stack gap={15}>
         <Stack flexDirection="column" gap={2}>
           <Typography>Введите название поля</Typography>
@@ -162,20 +165,26 @@ export const Types = () => (
 
 export const AutoClose = () => (
   <ExampleStack>
-    <NotificationContainer enableMultiContainer={true} containerId={'autoclose'} />
+    <NotificationContainer
+      enableMultiContainer={true}
+      containerId={'autoclose'}
+    />
     <Stack direction="row" gap={2}>
       <Button onClick={handleWithoutCloseButton}>Autoclose in 10 sec</Button>
     </Stack>
-    </ExampleStack>
+  </ExampleStack>
 );
 
 export const Content = () => (
   <ExampleStack>
-    <NotificationContainer enableMultiContainer={true} containerId={'content'} />
+    <NotificationContainer
+      enableMultiContainer={true}
+      containerId={'content'}
+    />
     <Stack direction="row" gap={2}>
       <Button onClick={handleSuccessWithContent}>With content</Button>
     </Stack>
-    </ExampleStack>
+  </ExampleStack>
 );
 
 export const Icon = () => (
@@ -184,16 +193,19 @@ export const Icon = () => (
     <Stack direction="row" gap={2}>
       <Button onClick={handleSuccessWithIcon}>With icon</Button>
     </Stack>
-    </ExampleStack>
+  </ExampleStack>
 );
 
 export const HideProgressBar = () => (
   <ExampleStack>
-    <NotificationContainer enableMultiContainer={true} containerId={'hide-progress-bar'} />
+    <NotificationContainer
+      enableMultiContainer={true}
+      containerId={'hide-progress-bar'}
+    />
     <Stack direction="row" gap={2}>
       <Button onClick={handleErrorWithContentWithoutProgressBar}>
         Hide progress bar
       </Button>
     </Stack>
-    </ExampleStack>
+  </ExampleStack>
 );
