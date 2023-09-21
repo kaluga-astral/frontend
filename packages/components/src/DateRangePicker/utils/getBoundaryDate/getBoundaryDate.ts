@@ -12,7 +12,7 @@ type GetBoundaryDateParams = {
   /**
    * @description смещение в днях
    */
-  offset: number;
+  offset?: number;
 };
 
 /**
@@ -23,7 +23,7 @@ type GetBoundaryDateParams = {
 export const getBoundaryDate = ({
   reserve,
   target,
-  offset,
+  offset = 0,
 }: GetBoundaryDateParams): Date => {
   if (isDate(target)) {
     return addDays(target, offset);

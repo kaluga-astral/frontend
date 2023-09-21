@@ -132,7 +132,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             maxDate={getBoundaryDate({
               reserve: maxDate,
               target: endDateProps.value,
-              offset: 0,
             })}
           >
             <YearMonthDayPicker
@@ -149,7 +148,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             minDate={getBoundaryDate({
               reserve: minDate,
               target: startDateProps.value,
-              offset: 0,
             })}
             maxDate={maxDate}
           >
