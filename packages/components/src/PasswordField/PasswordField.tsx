@@ -5,7 +5,7 @@ import { InputAdornment } from '@mui/material';
 import { IconButton } from '../IconButton';
 import { TextField, TextFieldProps } from '../TextField';
 
-type PasswordFieldInputProps = TextFieldProps & {
+export type PasswordFieldInputProps = TextFieldProps & {
   /**
    * @description если true, показываются символы пароля
    */
