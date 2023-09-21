@@ -182,9 +182,9 @@ export { default as RefreshOutlineSm } from './RefreshOutlineSm';
 
 export { default as RequirementOutlineMd } from './RequirementOutlineMd';
 
-export { default as RouteOutlineMdTest } from './RouteOutlineMd';
+export { default as RouteOutlineMd } from './RouteOutlineMd';
 
-export { default as RouteOutlineSmTest } from './RouteOutlineSm';
+export { default as RouteOutlineSm } from './RouteOutlineSm';
 
 export { default as SaveOutlineMd } from './SaveOutlineMd';
 
