@@ -3,6 +3,5 @@
     "packages/ui",
     "packages/icons",
     "packages/fonts"
-  ],
-  "editor.formatOnSave": true
+  ]
 }
