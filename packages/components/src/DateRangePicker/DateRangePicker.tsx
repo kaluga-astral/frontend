@@ -107,6 +107,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           size={size}
           {...startDateOptions.inputProps}
           disabled={disabled}
+          onAccept={startDateOptions.onAccept}
           onFocus={openPopover}
           onClick={openPopover}
         />
@@ -116,6 +117,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           mask={mask}
           {...endDateOptions.inputProps}
           disabled={disabled}
+          onAccept={endDateOptions.onAccept}
           onFocus={openPopover}
           onClick={openPopover}
         />

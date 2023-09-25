@@ -2,7 +2,6 @@ import { PropsWithChildren } from 'react';
 import { PopperProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../../types';
-import { Fade } from '../../Fade';
 
 import { DatePickerPopoverInner, PopoverWrapper } from './styles';
 
@@ -48,12 +47,7 @@ export const DatePickerPopover = ({
         },
       },
     ]}
-    transition
   >
-    {({ TransitionProps }) => (
-      <Fade {...TransitionProps}>
-        <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
-      </Fade>
-    )}
+    <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
   </PopoverWrapper>
 );
