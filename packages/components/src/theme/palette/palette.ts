@@ -113,10 +113,12 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
         contrastText: '#FFF',
       };
     },
-    text: {
-      primary: '#072D57',
-      secondary: '#557192',
-      disabled: '#99A9BA',
+    get text() {
+      return {
+        primary: this.grey[900],
+        secondary: this.grey[700],
+        disabled: this.grey[500],
+      };
     },
     grey: {
       900: '#072D57',
