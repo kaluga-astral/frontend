@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import { IMask } from 'react-imask';
 
 import { useMaskedValue } from '../useMaskedValue';
@@ -41,10 +40,6 @@ type UseMaskedValueAndSelectedBaseDateReturn = {
      * @description строковое значение даты для инпута с маской
      */
     value: string;
-    /**
-     * @description колбэк вызов на изменение значения в инпуте
-     */
-    onNativeChange: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 };
 
@@ -84,18 +79,12 @@ export const useDatePickerOptions = ({
     onDatePick();
   };
 
-  const handleMaskedInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onMaskedValueChange(e.target.value);
-  };
-
   return {
     onAccept: (_, maskRef) => {
-      console.log(maskRef);
       onMaskedValueChange(maskRef.value);
     },
     inputProps: {
       value: maskedValue,
-      onNativeChange: handleMaskedInputChange,
     },
     pickerProps: {
       selectedDate: selectedBaseDate,
