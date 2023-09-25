@@ -79,10 +79,15 @@ export const useDatePickerOptions = ({
     onDatePick();
   };
 
+  const handleMaskedInputChange = (
+    _: string,
+    maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
+  ) => {
+    onMaskedValueChange(maskRef.value);
+  };
+
   return {
-    onAccept: (_, maskRef) => {
-      onMaskedValueChange(maskRef.value);
-    },
+    onAccept: handleMaskedInputChange,
     inputProps: {
       value: maskedValue,
     },
