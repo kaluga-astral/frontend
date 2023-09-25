@@ -52,6 +52,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       300: '#FAB5B5',
       200: '#FCDADA',
       100: '#FEEDED',
+      ...brandColors.red,
     },
     green: {
       900: '#008055',
@@ -63,6 +64,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       300: '#99CFBD',
       200: '#CCE7DE',
       100: '#E6F3EF',
+      ...brandColors.green,
     },
     yellow: {
       900: '#ED8000',
@@ -74,6 +76,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       300: '#FDDBB2',
       200: '#FBE6CC',
       100: '#FEF3E6',
+      ...brandColors.yellow,
     },
     primary: {
       main: brandColors[800],
@@ -110,10 +113,12 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
         contrastText: '#FFF',
       };
     },
-    text: {
-      primary: '#072D57',
-      secondary: '#557192',
-      disabled: '#99A9BA',
+    get text() {
+      return {
+        primary: this.grey[900],
+        secondary: this.grey[700],
+        disabled: this.grey[500],
+      };
     },
     grey: {
       900: '#072D57',
@@ -125,6 +130,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       300: '#DDE2E8',
       200: '#EBEEF1',
       100: '#F0F4F7',
+      ...brandColors.grey,
     },
     background: {
       default: '#FFF',

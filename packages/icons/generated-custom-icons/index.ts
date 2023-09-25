@@ -14,6 +14,8 @@ export { default as RequestOutlineSm } from './RequestOutlineSm';
 
 export { default as RoundFillSm } from './RoundFillSm';
 
+export { default as SuccessOutlineSm } from './SuccessOutlineSm';
+
 export { default as TwitterFillMd } from './TwitterFillMd';
 
 export { default as YoutubeFillMd } from './YoutubeFillMd';

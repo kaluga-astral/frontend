@@ -17,7 +17,7 @@ import { useDatePickerOptions } from '../DatePicker/hooks';
 import { DateRangePickerSplitter } from './styles';
 import { getBoundaryDate } from './utils';
 
-const DEFAULT_SPACING = 2;
+const DEFAULT_SPACING = 1;
 
 export type DateItemProps = Pick<
   DatePickerProps,
@@ -131,11 +131,9 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             // если выбрана дата во втором пикере,
             // то она становится значением максимальной даты для первого пикера,
             // иначе используем изначальную максимальную дату
-            // смещение в -1 не позволит выбрать пользователю одну и туже дату в обоих пикерах
             maxDate={getBoundaryDate({
               reserve: maxDate,
               target: endDateProps.value,
-              offset: -1,
             })}
           >
             <YearMonthDayPicker
@@ -149,11 +147,9 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             // если выбрана дата в первом пикере,
             // то она становится значением минимальной даты для второго пикера,
             // иначе используем изначальную минимальную дату
-            // смещение в 1 не позволит выбрать пользователю одну и туже дату в обоих пикерах
             minDate={getBoundaryDate({
               reserve: minDate,
               target: startDateProps.value,
-              offset: 1,
             })}
             maxDate={maxDate}
           >
