@@ -215,3 +215,5 @@ export * from './Typography';
 export * from './Zoom';
 
 export * from './forwardRefWithGeneric';
+
+export * from './PasswordField';
