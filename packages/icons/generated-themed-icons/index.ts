@@ -70,6 +70,8 @@ export { default as DialogOutlineMd } from './DialogOutlineMd';
 
 export { default as DocumentOutlineMd } from './DocumentOutlineMd';
 
+export { default as DocumentOutlineSm } from './DocumentOutlineSm';
+
 export { default as DocumentsOutlineMd } from './DocumentsOutlineMd';
 
 export { default as DotOutlineSm } from './DotOutlineSm';
@@ -179,6 +181,10 @@ export { default as RefreshOutlineMd } from './RefreshOutlineMd';
 export { default as RefreshOutlineSm } from './RefreshOutlineSm';
 
 export { default as RequirementOutlineMd } from './RequirementOutlineMd';
+
+export { default as RouteOutlineMd } from './RouteOutlineMd';
+
+export { default as RouteOutlineSm } from './RouteOutlineSm';
 
 export { default as SaveOutlineMd } from './SaveOutlineMd';
 

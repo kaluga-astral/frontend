@@ -79,21 +79,25 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onBlur,
     });
     const handleDayPick = () => closePopover(undefined, 'selectOption');
-    const { inputProps: calculatedInputProps, pickerProps } =
-      useDatePickerOptions({
-        maxDate,
-        minDate,
-        mask,
-        onDatePick: handleDayPick,
-        currentValue: value,
-        onChange,
-      });
+    const {
+      onAccept,
+      inputProps: calculatedInputProps,
+      pickerProps,
+    } = useDatePickerOptions({
+      maxDate,
+      minDate,
+      mask,
+      onDatePick: handleDayPick,
+      currentValue: value,
+      onChange,
+    });
 
     return (
       <div ref={ref} className={className}>
         <DatePickerInput
           {...inputProps}
           {...calculatedInputProps}
+          onAccept={onAccept}
           mask={mask}
           size={size}
           disabled={disabled}
