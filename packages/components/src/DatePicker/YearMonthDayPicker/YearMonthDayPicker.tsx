@@ -34,6 +34,7 @@ export const YearMonthDayPicker = ({
   const focusRef = () => ref.current?.focus();
 
   const handleYearChange = (receivedDate: Date) => {
+    focusRef();
     setDate(receivedDate);
     setState(States.months);
   };
