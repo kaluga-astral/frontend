@@ -68,6 +68,10 @@ export const themes = [
     name: 'Astral.SBER',
     theme: createTheme({ brand: Brand.SBER, fontsUrls })
   },
+  {
+    name:'Astral.LK1C',
+    theme:createTheme({brand:Brand.LK1C, fontsUrls })
+  }
 ];
 
 export const getTheme = (name) => {
