@@ -4,10 +4,10 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
+import { ConfigProvider } from '../ConfigProvider';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
-import { DataGridNoDataWrapper } from './DataGridNoData/styles';
 
 /**
  * DataGrid — отображает информацию в удобном для просмотра виде. Может включать:
@@ -32,17 +32,9 @@ type DataType = {
   createDate: string;
 };
 
-type SortField = 'documentName' | 'direction' | 'createDate';
+const noDataStubSrc = '/no-data-stub.svg';
 
-const NoDataStub = () => {
-  return (
-    <DataGridNoDataWrapper>
-      <td>
-        <img src="/no-data-stub.svg" alt="my image" />
-      </td>
-    </DataGridNoDataWrapper>
-  );
-};
+type SortField = 'documentName' | 'direction' | 'createDate';
 
 const ACTIONS: Actions<DataType> = {
   main: [
@@ -90,10 +82,6 @@ const columns: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '1%',
     renderCell: (row) => {
-      if (['1', '2', '3', '4'].includes(row.id)) {
-        return null;
-      }
-
       return <ActionCell actions={ACTIONS} row={row} />;
     },
   },
@@ -110,13 +98,13 @@ const data: DataType[] = [
     id: '2',
     documentName: 'Документ 2',
     direction: 'ФСС',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-25T17:50:40.206Z',
   },
   {
     id: '3',
     documentName: 'Документ 3',
     direction: 'ПФР',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-27T17:50:40.206Z',
   },
   {
     id: '4',
@@ -128,7 +116,7 @@ const data: DataType[] = [
     id: '5',
     documentName: 'Документ 5',
     direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-29T17:50:40.206Z',
   },
   {
     id: '6',
@@ -200,25 +188,27 @@ const data: DataType[] = [
 
 /**
  * DataGrid без пагинации
- - Prop ```activeRowId``` позволяет отобразить активный ряд в таблице в зависимости от значения prop ```keyId```
  */
-export const WithoutPagination = () => {
-  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+export const Example = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
 
   return (
     <DataGrid<DataType, SortField>
       keyId="id"
-      activeRowId={'3'}
-      rows={data}
+      rows={slicedData}
       columns={columns}
       onRowClick={handleRowClick}
-      onSort={handleSort}
-      sorting={sorting}
+      loading={loading}
     />
   );
 };
@@ -227,7 +217,6 @@ export const WithoutPagination = () => {
  * Постраничное отображение данных в таблице. Внизу таблицы есть область, в которой слева отображается счетчик данных на странице из общего количества данных, справа - кнопки с нумерацией страниц таблицы для переключения между ними.
  */
 export const WithPagination = () => {
-  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -254,9 +243,6 @@ export const WithPagination = () => {
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
-
   return (
     <DataGrid<DataType, SortField>
       keyId="id"
@@ -264,8 +250,6 @@ export const WithPagination = () => {
       columns={columns}
       onRowClick={handleRowClick}
       loading={loading}
-      onSort={handleSort}
-      sorting={sorting}
       Footer={
         <DataGridPagination
           totalCount={data.length}
@@ -278,7 +262,126 @@ export const WithPagination = () => {
 };
 
 /**
- * В случае, когда нет данных для отображения их в таблице, необходимо показать иллюстрацию и текст “Нет данных” и убрать сортировку для столбцов, если она присутствует
+ * DataGrid с сортировкой
+ */
+export const WithSorting = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) => {
+    if (newSorting) {
+      const sortData = (
+        array: DataType[],
+        field: SortField,
+        sortOrder: 'asc' | 'desc',
+      ) => {
+        const sortedArray = [...array];
+
+        sortedArray.sort((a, b) => {
+          const valueA = a[field];
+          const valueB = b[field];
+
+          if (valueA === valueB) {
+            return 0;
+          }
+
+          if (field === 'documentName') {
+            // Разделение текстовой и числовой частей
+            const regex = /([^\d]+)(\d+)/;
+            const matchA = valueA.match(regex);
+            const matchB = valueB.match(regex);
+
+            // Проверка на null
+            if (matchA === null || matchB === null) {
+              return 0;
+            }
+
+            const [, textA, numberA] = matchA;
+            const [, textB, numberB] = matchB;
+
+            const comparison =
+              textA.localeCompare(textB) || Number(numberA) - Number(numberB);
+
+            // Определение порядка сортировки
+            return sortOrder === 'desc' ? -1 * comparison : comparison;
+          } else {
+            // Если не сортируем по полю documentName, используем прежний код сортировки
+            if (valueA < valueB) {
+              return sortOrder === 'desc' ? 1 : -1;
+            }
+
+            if (valueA > valueB) {
+              return sortOrder === 'desc' ? -1 : 1;
+            }
+
+            return 0;
+          }
+        });
+
+        return sortedArray;
+      };
+
+      setSlicedData(sortData(slicedData, newSorting.fieldId, newSorting.sort));
+    } else {
+      setSlicedData(data.slice(0, 10));
+    }
+
+    setSorting(newSorting);
+  };
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      onSort={handleSort}
+      sorting={sorting}
+      onRowClick={handleRowClick}
+    />
+  );
+};
+
+/**
+ * Prop ```activeRowId``` позволяет отобразить активный ряд в таблице в зависимости от значения prop ```keyId```
+ */
+export const WithActiveRow = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      activeRowId={'3'}
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      onRowClick={handleRowClick}
+    />
+  );
+};
+
+/**
+ * В случае, когда нет данных для отображения их в таблице, необходимо показать изображение и текст “Нет данных” и убрать сортировку для столбцов, если она присутствует. Изображение можно передать через ConfigProvider.
  */
 export const NoData = () => {
   const [loading, setLoading] = useState(true);
@@ -294,15 +397,18 @@ export const NoData = () => {
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   return (
-    <DataGrid<DataType, SortField>
-      keyId="id"
-      activeRowId={'3'}
-      rows={slicedData}
-      columns={columns}
-      onRowClick={handleRowClick}
-      loading={loading}
-      noDataPlaceholder={<NoDataStub />}
-    />
+    <ConfigProvider
+      imagesMap={{ defaultErrorImgSrc: '', noDataImgSrc: noDataStubSrc }}
+    >
+      <DataGrid<DataType, SortField>
+        keyId="id"
+        activeRowId={'3'}
+        rows={slicedData}
+        columns={columns}
+        onRowClick={handleRowClick}
+        loading={loading}
+      />
+    </ConfigProvider>
   );
 };
 
@@ -311,7 +417,6 @@ export const NoData = () => {
  */
 export const WithCheckbox = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
-  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -340,9 +445,6 @@ export const WithCheckbox = () => {
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
-
   return (
     <DataGrid<DataType, SortField>
       keyId="id"
@@ -350,8 +452,6 @@ export const WithCheckbox = () => {
       columns={columns}
       onRowClick={handleRowClick}
       loading={loading}
-      onSort={handleSort}
-      sorting={sorting}
       selectedRows={selected}
       onSelectRow={handleSelect}
       Footer={
