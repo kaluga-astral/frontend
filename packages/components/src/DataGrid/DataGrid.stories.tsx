@@ -1,21 +1,29 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
-import { Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Stack } from '@mui/material';
 
 import { ActionCell, Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
-import { ExampleTemplate } from '../docs';
-import { Button } from '../Button';
-import { LegacyGrid } from '../LegacyGrid';
+import { ConfigProvider } from '../ConfigProvider';
 
 import { DataGrid } from './DataGrid';
 import { DataGridColumns, DataGridSort } from './types';
 
-export default {
+/**
+ * DataGrid — отображает информацию в удобном для просмотра виде. Может включать:
+ - Соответствующую визуализацию
+ - Навигацию
+ - Инструменты для запроса и обработки данных
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof DataGrid> = {
   title: 'Components/DataGrid',
   component: DataGrid,
 };
+
+export default meta;
 
 type DataType = {
   id: string;
@@ -23,6 +31,8 @@ type DataType = {
   direction: string;
   createDate: string;
 };
+
+const noDataStubSrc = '/no-data-stub.svg';
 
 type SortField = 'documentName' | 'direction' | 'createDate';
 
@@ -72,10 +82,6 @@ const columns: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '1%',
     renderCell: (row) => {
-      if (['1', '2', '3', '4'].includes(row.id)) {
-        return null;
-      }
-
       return <ActionCell actions={ACTIONS} row={row} />;
     },
   },
@@ -92,13 +98,13 @@ const data: DataType[] = [
     id: '2',
     documentName: 'Документ 2',
     direction: 'ФСС',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-25T17:50:40.206Z',
   },
   {
     id: '3',
     documentName: 'Документ 3',
     direction: 'ПФР',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-27T17:50:40.206Z',
   },
   {
     id: '4',
@@ -110,7 +116,7 @@ const data: DataType[] = [
     id: '5',
     documentName: 'Документ 5',
     direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
+    createDate: '2022-03-29T17:50:40.206Z',
   },
   {
     id: '6',
@@ -161,273 +167,89 @@ const data: DataType[] = [
     createDate: '2022-03-24T17:50:40.206Z',
   },
   {
-    id: '15',
+    id: '14',
     documentName: 'Документ 14',
     direction: 'ФСС',
     createDate: '2022-03-24T17:50:40.206Z',
   },
   {
-    id: '14',
+    id: '15',
     documentName: 'Документ 15',
     direction: 'ФНС',
     createDate: '2022-03-24T17:50:40.206Z',
   },
   {
     id: '16',
-    documentName: 'Документ 12',
+    documentName: 'Документ 16',
     direction: 'РПН',
     createDate: '2022-03-24T17:50:40.206Z',
   },
 ];
 
-const Template: Story = (args) => {
-  const [selected, setSelected] = useState<DataType[]>([]);
-  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+/**
+ * DataGrid без пагинации
+ */
+export const Example = () => {
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setSlicedData(data.slice(0, 10));
       setLoading(false);
     }, 1500);
   }, []);
 
-  const handleChangePage = (
-    _event: ChangeEvent<unknown>,
-    newPage: number,
-  ): void => {
-    setLoading(true);
-    setPage(newPage);
-
-    setTimeout(() => {
-      setLoading(false);
-      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
-    }, 1500);
-  };
-
-  const handleReset = () => {
-    setSlicedData([]);
-    setLoading(true);
-
-    return setTimeout(() => {
-      setSlicedData(data.slice((page - 1) * 10, page * 10));
-      setLoading(false);
-    }, 1500);
-  };
-
-  const handleSelect = (rows: DataType[]) => setSelected(rows);
-
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
-
-  const handleToggleDisabled = () => setDisabled((prev) => !prev);
-
-  return (
-    <ExampleTemplate>
-      <ExampleTemplate.Case
-        title="DataGrid без пагинации"
-        descriptionList={[
-          'Пагинация скрыта, так как totalCount(10) меньше или равен minDisplayRows(10)',
-          'Растягивается по всей доступной высоте котейнера (600px)',
-          'Активный элемент с id 3',
-        ]}
-      >
-        <Stack
-          spacing={4}
-          sx={{ height: '600px', padding: '0 36px', alignItems: 'flex-end' }}
-        >
-          <Button onClick={handleReset}>Сбросить</Button>
-          <DataGrid<DataType, SortField>
-            {...args}
-            keyId="id"
-            activeRowId={'3'}
-            rows={slicedData}
-            columns={columns}
-            selectedRows={selected}
-            onSelectRow={handleSelect}
-            onRowClick={handleRowClick}
-            loading={loading}
-            onSort={handleSort}
-            sorting={sorting}
-            Footer={
-              <DataGridPagination
-                totalCount={10}
-                onChange={handleChangePage}
-                page={page}
-              />
-            }
-          />
-        </Stack>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="DataGrid с пагинацией"
-        descriptionList={[
-          'Растягивается по всей доступной высоте котейнера (700px)',
-        ]}
-      >
-        <Stack
-          spacing={4}
-          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
-        >
-          <Button onClick={handleReset}>Сбросить</Button>
-          <DataGrid<DataType, SortField>
-            {...args}
-            keyId="id"
-            rows={slicedData}
-            columns={columns}
-            selectedRows={selected}
-            onSelectRow={handleSelect}
-            onRowClick={handleRowClick}
-            loading={loading}
-            onSort={handleSort}
-            sorting={sorting}
-            Footer={
-              <DataGridPagination
-                totalCount={data.length}
-                onChange={handleChangePage}
-                page={page}
-              />
-            }
-          />
-        </Stack>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="DataGrid с пагинацией без данных"
-        descriptionList={[
-          'Растягивается по всей доступной высоте котейнера (700px)',
-        ]}
-      >
-        <Stack
-          spacing={4}
-          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
-        >
-          <Button onClick={handleReset}>Сбросить</Button>
-          <DataGrid<DataType, SortField>
-            {...args}
-            keyId="id"
-            rows={[]}
-            columns={columns}
-            selectedRows={selected}
-            onSelectRow={handleSelect}
-            onRowClick={handleRowClick}
-            loading={loading}
-            onSort={handleSort}
-            sorting={sorting}
-            Footer={
-              <DataGridPagination
-                totalCount={0}
-                onChange={handleChangePage}
-                page={page}
-              />
-            }
-          />
-        </Stack>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="DataGrid с блокировкой содержимого"
-        descriptionList={[
-          'Растягивается по всей доступной высоте котейнера (700px)',
-        ]}
-      >
-        <Stack
-          spacing={4}
-          sx={{ height: '700px', padding: '0 36px', alignItems: 'flex-end' }}
-        >
-          <LegacyGrid container templateColumns="auto auto" spacing={4}>
-            <Button onClick={handleReset}>Сбросить</Button>
-            <Button onClick={handleToggleDisabled}>
-              {disabled ? 'Разблокировать' : 'Заблокировать'}
-            </Button>
-          </LegacyGrid>
-
-          <DataGrid<DataType, SortField>
-            {...args}
-            keyId="id"
-            rows={slicedData}
-            columns={columns}
-            selectedRows={selected}
-            onSelectRow={handleSelect}
-            onRowClick={handleRowClick}
-            loading={loading}
-            onSort={handleSort}
-            sorting={sorting}
-            disabled={disabled}
-            Footer={
-              <DataGridPagination
-                totalCount={data.length}
-                onChange={handleChangePage}
-                page={page}
-              />
-            }
-          />
-        </Stack>
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
-  );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: false },
-  controls: { expanded: true },
-};
-
-export const Showcase: Story = (args) => {
-  const [selected, setSelected] = useState<DataType[]>([]);
-  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
-  const [loading, setLoading] = useState(true);
-  const [slicedData, setSlicedData] = useState<DataType[]>([]);
-  const [page, setPage] = useState<number>(1);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData([]);
-      setLoading(false);
-    }, 1500);
-  }, []);
-
-  const handleChangePage = (
-    _event: ChangeEvent<unknown>,
-    newPage: number,
-  ): void => {
-    setLoading(true);
-    setPage(newPage);
-
-    setTimeout(() => {
-      setLoading(false);
-      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
-    }, 1500);
-  };
-
-  const handleSelect = (rows: DataType[]) => setSelected(rows);
-
-  const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
 
   return (
     <DataGrid<DataType, SortField>
-      {...args}
       keyId="id"
       rows={slicedData}
       columns={columns}
-      selectedRows={selected}
-      onSelectRow={handleSelect}
       onRowClick={handleRowClick}
-      minDisplayRows={10}
       loading={loading}
-      onSort={handleSort}
-      sorting={sorting}
+    />
+  );
+};
+
+/**
+ * Постраничное отображение данных в таблице. Внизу таблицы есть область, в которой слева отображается счетчик данных на странице из общего количества данных, справа - кнопки с нумерацией страниц таблицы для переключения между ними.
+ */
+export const WithPagination = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      loading={loading}
       Footer={
         <DataGridPagination
           totalCount={data.length}
@@ -439,4 +261,307 @@ export const Showcase: Story = (args) => {
   );
 };
 
-Showcase.storyName = 'DataGrid NoData';
+/**
+ * DataGrid с сортировкой
+ */
+export const WithSorting = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [sorting, setSorting] = useState<DataGridSort<SortField>>();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) => {
+    if (newSorting) {
+      const sortData = (
+        array: DataType[],
+        field: SortField,
+        sortOrder: 'asc' | 'desc',
+      ) => {
+        const sortedArray = [...array];
+
+        sortedArray.sort((a, b) => {
+          const valueA = a[field];
+          const valueB = b[field];
+
+          if (valueA === valueB) {
+            return 0;
+          }
+
+          if (field === 'documentName') {
+            // Разделение текстовой и числовой частей
+            const regex = /([^\d]+)(\d+)/;
+            const matchA = valueA.match(regex);
+            const matchB = valueB.match(regex);
+
+            // Проверка на null
+            if (matchA === null || matchB === null) {
+              return 0;
+            }
+
+            const [, textA, numberA] = matchA;
+            const [, textB, numberB] = matchB;
+
+            const comparison =
+              textA.localeCompare(textB) || Number(numberA) - Number(numberB);
+
+            // Определение порядка сортировки
+            return sortOrder === 'desc' ? -1 * comparison : comparison;
+          } else {
+            // Если не сортируем по полю documentName, используем прежний код сортировки
+            if (valueA < valueB) {
+              return sortOrder === 'desc' ? 1 : -1;
+            }
+
+            if (valueA > valueB) {
+              return sortOrder === 'desc' ? -1 : 1;
+            }
+
+            return 0;
+          }
+        });
+
+        return sortedArray;
+      };
+
+      setSlicedData(sortData(slicedData, newSorting.fieldId, newSorting.sort));
+    } else {
+      setSlicedData(data.slice(0, 10));
+    }
+
+    setSorting(newSorting);
+  };
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      onSort={handleSort}
+      sorting={sorting}
+      onRowClick={handleRowClick}
+    />
+  );
+};
+
+/**
+ * Prop ```activeRowId``` позволяет отобразить активный ряд в таблице в зависимости от значения prop ```keyId```
+ */
+export const WithActiveRow = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      activeRowId={'3'}
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      onRowClick={handleRowClick}
+    />
+  );
+};
+
+/**
+ * В случае, когда нет данных для отображения их в таблице, необходимо показать изображение и текст “Нет данных” и убрать сортировку для столбцов, если она присутствует. Изображение можно передать через ConfigProvider.
+ */
+export const NoData = () => {
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData([]);
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <ConfigProvider
+      imagesMap={{ defaultErrorImgSrc: '', noDataImgSrc: noDataStubSrc }}
+    >
+      <DataGrid<DataType, SortField>
+        keyId="id"
+        activeRowId={'3'}
+        rows={slicedData}
+        columns={columns}
+        onRowClick={handleRowClick}
+        loading={loading}
+      />
+    </ConfigProvider>
+  );
+};
+
+/**
+ * В таблице может добавляться возможность выбора отдельных строк или всего списка значений посредством использования компонента checkbox. В страничном варинте таблицы при выборе checkbox в datagrid_header выбираются все значения на странице
+ */
+export const WithCheckbox = () => {
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      loading={loading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      Footer={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
+    />
+  );
+};
+
+/**
+ * Prop ```disabled``` позволяет заблокировать контент
+ */
+export const WithDisabledContent = () => {
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      disabled={true}
+      onRowClick={handleRowClick}
+    />
+  );
+};
+
+/**
+ * Состояние загрузки регулируется полем ```loading``` экшенов переданных в ```<ActionCell/>```
+ */
+export const WithLoaderInButton = () => {
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 5));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+  const ACTIONS_WITH_LOADER: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        loading: true,
+        name: 'Отправить',
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columnsWithLoader: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
+      },
+    },
+  ];
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columnsWithLoader}
+      loading={loading}
+      onRowClick={handleRowClick}
+    />
+  );
+};
