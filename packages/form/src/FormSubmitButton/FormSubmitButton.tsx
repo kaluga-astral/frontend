@@ -10,11 +10,16 @@ export type FormSubmitButtonProps = Omit<ButtonProps, 'type'>;
 export const FormSubmitButton = ({
   children,
   loading,
+  ...props
 }: FormSubmitButtonProps) => {
   const { formState } = useFormContext();
 
   return (
-    <Button type="submit" loading={loading || formState.isSubmitting}>
+    <Button
+      type="submit"
+      loading={loading || formState.isSubmitting}
+      {...props}
+    >
       {children}
     </Button>
   );
