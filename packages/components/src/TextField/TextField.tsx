@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react';
+import { type ReactNode, forwardRef, useMemo } from 'react';
 import { TextField as MuiTextField } from '@mui/material';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
@@ -10,11 +10,22 @@ export type TextFieldProps = Omit<
   'variant' | 'color'
 > & {
   success?: boolean;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
 };
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   (
-    { success, error, helperText: helperTextProp, fullWidth = false, ...props },
+    {
+      success,
+      error,
+      helperText: helperTextProp,
+      fullWidth = false,
+      startAdornment,
+      endAdornment,
+      InputProps,
+      ...props
+    },
     ref,
   ) => {
     const color = useMemo(() => {
@@ -59,6 +70,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         error={error}
         color={color}
         helperText={helperText}
+        InputProps={{ startAdornment, endAdornment, ...InputProps }}
         {...props}
       />
     );
