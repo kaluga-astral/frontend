@@ -9,8 +9,17 @@ export type TextFieldProps = Omit<
   WithoutEmotionSpecific<MuiTextFieldProps>,
   'variant' | 'color'
 > & {
+  /**
+   * @description Флаг отображения успешного состояния
+   */
   success?: boolean;
+  /**
+   * @description Элемент который добавляется в начало
+   */
   startAdornment?: ReactNode;
+  /**
+   * @description Элемент который добавляется в конец
+   */
   endAdornment?: ReactNode;
 };
 
