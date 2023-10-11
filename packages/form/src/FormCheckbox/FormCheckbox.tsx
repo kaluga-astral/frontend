@@ -13,7 +13,7 @@ export type FormCheckboxProps<FieldValues extends object> = Omit<
    * Флаг принудительного скрытия блока helperText
    */
   hideHelperText?: boolean;
-  title: ReactNode;
+  title?: ReactNode;
 };
 
 /**
@@ -24,10 +24,12 @@ export const FormCheckbox = <FieldValues extends object>({
   hideHelperText = false,
   ...restProps
 }: FormCheckboxProps<FieldValues>) => {
-  const { title, value, error, ...restFieldProps } = useFormFieldProps<
-    FormCheckboxProps<FieldValues>,
-    FieldValues
-  >(restProps);
+  const {
+    title = '',
+    value,
+    error,
+    ...restFieldProps
+  } = useFormFieldProps<FormCheckboxProps<FieldValues>, FieldValues>(restProps);
 
   return (
     <CheckboxField
