@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-import { OverflowedProps } from './OverflowTypography';
+import { OverflowedProps } from './types';
 
 type OverflowTypographyWrapperProps = {
   hasMultipleRows: boolean;

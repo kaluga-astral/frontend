@@ -3,7 +3,7 @@ import { Checkbox, css } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { CheckboxProps } from './Checkbox';
+import { CheckboxProps } from './types';
 
 const getErrorStyles = (theme: Theme) => css`
   &.Mui-checked {

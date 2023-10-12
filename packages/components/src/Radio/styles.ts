@@ -3,7 +3,7 @@ import { Radio, css } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { RadioProps } from './Radio';
+import { RadioProps } from './types';
 import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from './constants';
 
 const getErrorStyles = (theme: Theme) => css`

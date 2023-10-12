@@ -3,7 +3,7 @@ import { Tag, TagColor, TagVariant } from '../Tag';
 import { Theme } from '../theme';
 import { TagVariants } from '../Tag/enums';
 
-import { CheckableTagProps } from './CheckableTag';
+import { CheckableTagProps } from './types';
 
 type StyledTagThemeProps = CheckableTagProps & { theme: Theme };
 type TagColorsKit = Omit<

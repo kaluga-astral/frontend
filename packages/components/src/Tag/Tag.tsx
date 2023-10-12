@@ -1,44 +1,10 @@
 import { forwardRef } from 'react';
 import { CrossSmOutlineSm } from '@astral/icons';
-import { ChipProps as MuiTagProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
 import { LegacyGrid } from '../LegacyGrid';
 
 import { StyledTag, getBadgeColor } from './styles';
-import { TagAddon, TagColor, TagSize, TagVariant } from './types';
-
-export type TagProps = Omit<
-  WithoutEmotionSpecific<MuiTagProps>,
-  'color' | 'variant' | 'size'
-> & {
-  /**
-   * Цвет тега
-   */
-  color?: TagColor;
-  /**
-   * Тип тега
-   */
-  variant?: TagVariant;
-  /**
-   * Скругленная форма тега
-   */
-  rounded?: boolean;
-  /**
-   * Размер тега
-   */
-  size?: TagSize;
-
-  /**
-   * Контент слева от label
-   */
-  startAddon?: TagAddon;
-
-  /**
-   * Контент справа от label
-   */
-  endAddon?: TagAddon;
-};
+import { TagProps } from './types';
 
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (

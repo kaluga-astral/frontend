@@ -1,36 +1,10 @@
-import { PropsWithChildren, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-import { TypographyProps } from '../Typography';
-import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
+import { Tooltip } from '../Tooltip';
 
 import { OverflowTypographyWrapper } from './styles';
 import { useOverflowed } from './hooks/useOverflowed';
-
-type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
-
-export type OverflowedProps = {
-  /**
-   * @example <OverflowTypography rowsCount={2} />
-   * @default 1
-   * @description опорная единица по которой определяется максимиально отображаемое колличество строк
-   */
-  rowsCount?: number;
-};
-
-type TooltipCustomizable = {
-  /**
-   * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
-   * @description способ кастомизировать тултип при необходимости
-   */
-  tooltipProps?: Omit<TooltipProps, 'children'>;
-};
-
-export type OverflowedElementProps = OverflowedProps &
-  TooltipCustomizable &
-  TypographyProps;
-
-export type OverflowedTypographyProps =
-  PropsWithChildren<OverflowedElementProps>;
+import { OverflowedTypographyProps } from './types';
 
 export const DEFAULT_ROWS_COUNT = 1;
 

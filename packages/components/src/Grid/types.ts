@@ -1,4 +1,9 @@
-import { ElementType, ReactNode } from 'react';
+import {
+  DetailedHTMLProps,
+  ElementType,
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
 
 export type GridPropsBase = {
   /**
@@ -45,3 +50,6 @@ export type GridPropsBase = {
   component?: ElementType;
   children?: ReactNode;
 };
+
+export type GridProps = GridPropsBase &
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;

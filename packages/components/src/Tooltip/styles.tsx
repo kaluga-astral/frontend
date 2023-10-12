@@ -3,7 +3,7 @@ import { Tooltip } from '@mui/material';
 import { styled } from '../styles';
 
 import { TooltipSizes } from './constants';
-import { TooltipProps } from './Tooltip';
+import { TooltipProps } from './types';
 
 export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />

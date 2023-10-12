@@ -1,41 +1,13 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-import { TagAddonProps, TagProps } from '../Tag';
+import { TagAddonProps } from '../Tag';
 
 import {
   CheckableTagHiddenInput,
   CheckableTagStyled,
   CheckableTagWrapper,
 } from './styles';
-import { CheckableTagAddon } from './types';
-
-export type CheckableTagProps = Omit<
-  TagProps,
-  'onChange' | 'startAddon' | 'endAddon'
-> & {
-  /**
-   * Состояние тега
-   */
-  checked?: boolean;
-  /**
-   * Обработчик изменения состояния тега
-   */
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  /**
-   * Блокировка клика по тегу
-   */
-  disabled?: boolean;
-  /**
-   * Контент слева от label
-
-   */
-  startAddon?: CheckableTagAddon;
-
-  /**
-   * Контент справа от label
-   */
-  endAddon?: CheckableTagAddon;
-};
+import { CheckableTagProps } from './types';
 
 /**
  * @description Тег с возможностью быть checked (по логике Checkbox)

@@ -1,19 +1,8 @@
 import { forwardRef } from 'react';
-import { FabProps as MuiFabProps } from '@mui/material/Fab';
-
-import { WithoutEmotionSpecific } from '../types';
 
 import { StyledFab } from './styles';
-import { FabColor } from './types';
+import { FabProps } from './types';
 import { FabSizes } from './enums';
-
-export type FabProps = Omit<
-  WithoutEmotionSpecific<MuiFabProps>,
-  'color' | 'variant'
-> & {
-  color?: FabColor;
-  variant?: 'circular' | 'square';
-};
 
 export const Fab = forwardRef<HTMLButtonElement, FabProps>(
   (

@@ -2,7 +2,7 @@ import { styled } from '../../../styles';
 import { DateCalendarButton } from '../DateCalendarBtn';
 import { Theme } from '../../../theme';
 
-import { DateCalendarDayBtnWrapperProps } from './DateCalendarGridBtn';
+import { DateCalendarDayBtnWrapperProps } from './types';
 
 type WithTheme = {
   theme: Theme;

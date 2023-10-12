@@ -1,22 +1,10 @@
-import React from 'react';
-import { RadioProps as MuiRadioProps } from '@mui/material';
-
-import { WithoutEmotionSpecific } from '../types';
+import { forwardRef } from 'react';
 
 import { StyledRadio } from './styles';
 import { CheckedCircleIcon, DefaultIcon } from './Icon';
+import { RadioProps } from './types';
 
-export type RadioProps = Omit<
-  WithoutEmotionSpecific<MuiRadioProps>,
-  'size' | 'color'
-> & {
-  /**
-   * Флаг для применения error стилей.
-   */
-  isError?: boolean;
-};
-
-export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
+export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
   (
     {
       icon = <DefaultIcon />,

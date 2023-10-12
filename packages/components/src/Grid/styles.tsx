@@ -2,7 +2,7 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { GridComponent } from './GridComponent';
-import { GridProps } from './Grid';
+import { GridProps } from './types';
 
 /**
  * @description Если аргумент - массив, то возвращаем его, иначе кладем аргумент в массив

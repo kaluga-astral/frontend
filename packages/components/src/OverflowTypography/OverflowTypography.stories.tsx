@@ -3,10 +3,8 @@ import { Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
 
-import {
-  OverflowTypography,
-  OverflowedTypographyProps,
-} from './OverflowTypography';
+import { OverflowTypography } from './OverflowTypography';
+import { OverflowedTypographyProps } from './types';
 
 export default {
   title: 'Components/OverflowTypography',

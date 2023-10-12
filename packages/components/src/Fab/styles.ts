@@ -3,7 +3,7 @@ import { Fab } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { FabProps } from './Fab';
+import { FabProps } from './types';
 import { FabColors, FabSizes, FabStates } from './enums';
 
 type StyledFabThemeProps = FabProps & { theme: Theme } & { isSquare: boolean };

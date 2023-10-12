@@ -2,7 +2,7 @@ import { ChevronDOutlineMd } from '@astral/icons';
 
 import { styled } from '../styles';
 
-import { ChevronProps } from './Chevron';
+import { ChevronProps } from './types';
 
 export const ChevronWrapper = styled(ChevronDOutlineMd, {
   shouldForwardProp: (prop) => prop !== 'isActive',

@@ -3,9 +3,7 @@ import { Badge } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { BadgeColor } from './types';
-
-import { BadgeProps } from '.';
+import { BadgeColor, BadgeProps } from './types';
 
 type StyledBadgeProps = Omit<BadgeProps, 'color'> & {
   customColor: BadgeColor;

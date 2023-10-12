@@ -5,9 +5,7 @@ import { Theme } from '../theme';
 import { BadgeColor } from '../Badge';
 
 import { TagColors, TagStates, TagVariants } from './enums';
-import { TagColor, TagSize, TagState, TagVariant } from './types';
-
-import { TagProps } from '.';
+import { TagColor, TagProps, TagSize, TagState, TagVariant } from './types';
 
 type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
   customColor?: TagColor;
