@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip/Tooltip';
+import { TooltipProps as MuiTooltipProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
 

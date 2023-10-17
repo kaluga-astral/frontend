@@ -6,7 +6,7 @@ type ChevronWrapperProps = { isActive?: boolean };
 
 export const ChevronWrapper = styled(ChevronDOutlineMd, {
   shouldForwardProp: (prop) => prop !== 'isActive',
-})<Pick<ChevronWrapperProps, 'isActive'>>`
+})<ChevronWrapperProps>`
   transform: rotateZ(${({ isActive }) => (isActive ? 180 : 0)}deg);
 
   transition: ${({ theme }) =>

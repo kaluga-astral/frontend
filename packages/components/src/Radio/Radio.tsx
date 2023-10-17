@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { RadioProps as MuiRadioProps } from '@mui/material/Radio/Radio';
+import { RadioProps as MuiRadioProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
 

@@ -1,17 +1,12 @@
 import { Fab } from '@mui/material';
-import { FabProps as MuiFabProps } from '@mui/material/Fab/Fab';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
-import { WithoutEmotionSpecific } from '../types';
 
 import { FabColor } from './types';
 import { FabColors, FabSizes, FabStates } from './enums';
 
-type StyledFabThemeProps = Omit<
-  WithoutEmotionSpecific<MuiFabProps>,
-  'color' | 'variant'
-> & {
+type StyledFabThemeProps = {
   isSquare: boolean;
   color?: FabColor;
   variant?: 'circular' | 'square';
@@ -79,7 +74,9 @@ const getColor = ({
   return colors.active;
 };
 
-const getSize = (props: StyledFabThemeProps) => {
+const getSize = (
+  props: StyledFabThemeProps & { size?: 'small' | 'large' | 'medium' },
+) => {
   const sizes = {
     small: '42px',
     medium: '52px',

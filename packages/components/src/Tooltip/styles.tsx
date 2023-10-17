@@ -1,5 +1,4 @@
-import { Tooltip } from '@mui/material';
-import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip/Tooltip';
+import { TooltipProps as MuiTooltipProps, Tooltip } from '@mui/material';
 
 import { styled } from '../styles';
 import { WithoutEmotionSpecific } from '../types';

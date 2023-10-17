@@ -1,16 +1,11 @@
 import { Radio, css } from '@mui/material';
-import { RadioProps as MuiRadioProps } from '@mui/material/Radio/Radio';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
-import { WithoutEmotionSpecific } from '../types';
 
 import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from './constants';
 
-type StyledRadioProps = Omit<
-  WithoutEmotionSpecific<MuiRadioProps>,
-  'size' | 'color'
-> & {
+type StyledRadioProps = {
   isError?: boolean;
 };
 

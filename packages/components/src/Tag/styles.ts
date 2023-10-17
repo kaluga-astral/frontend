@@ -1,25 +1,23 @@
-import { Chip } from '@mui/material';
-import { ChipProps as MuiTagProps } from '@mui/material/Chip/Chip';
+import { Chip, ChipProps } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
 import { BadgeColor } from '../Badge';
-import { WithoutEmotionSpecific } from '../types';
 
 import { TagColors, TagStates, TagVariants } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
 
-type StyledTagProps = Omit<
-  WithoutEmotionSpecific<MuiTagProps>,
-  'color' | 'variant' | 'size'
-> & {
+type StyledTagProps = {
   customColor?: TagColor;
   customVariant?: TagVariant;
   rounded?: boolean;
   customSize: TagSize;
 };
 
-type StyledTagThemeProps = StyledTagProps & { theme: Theme };
+type StyledTagThemeProps = StyledTagProps & { theme: Theme } & Pick<
+    ChipProps,
+    'onDelete' | 'disabled'
+  >;
 
 const HEIGHTS: Record<TagSize, string> = {
   small: '20px',
