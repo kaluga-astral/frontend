@@ -3,8 +3,7 @@ import { Story } from '@storybook/react';
 
 import { Button } from '../Button';
 
-import { Chevron } from './Chevron';
-import { ChevronProps } from './types';
+import { Chevron, ChevronProps } from './Chevron';
 
 export default {
   title: 'Components/Chevron',

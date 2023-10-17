@@ -1,18 +1,27 @@
 import { Fab } from '@mui/material';
+import { FabProps as MuiFabProps } from '@mui/material/Fab/Fab';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
+import { WithoutEmotionSpecific } from '../types';
 
-import { FabProps } from './types';
+import { FabColor } from './types';
 import { FabColors, FabSizes, FabStates } from './enums';
 
-type StyledFabThemeProps = FabProps & { theme: Theme } & { isSquare: boolean };
+type StyledFabThemeProps = Omit<
+  WithoutEmotionSpecific<MuiFabProps>,
+  'color' | 'variant'
+> & {
+  isSquare: boolean;
+  color?: FabColor;
+  variant?: 'circular' | 'square';
+};
 
 const getBgColor = ({
   theme,
   color,
   fabState,
-}: StyledFabThemeProps & { fabState: FabStates }): string => {
+}: StyledFabThemeProps & { fabState: FabStates; theme: Theme }): string => {
   const getColoredBackgroundColors = () => {
     switch (color) {
       case 'error':
@@ -56,7 +65,7 @@ const getColor = ({
   theme,
   color,
   fabState,
-}: StyledFabThemeProps & { fabState: FabStates }): string => {
+}: StyledFabThemeProps & { fabState: FabStates; theme: Theme }): string => {
   const colors = {
     active: theme.palette.grey[100],
     default: theme.palette.grey[900],
@@ -70,7 +79,7 @@ const getColor = ({
   return colors.active;
 };
 
-const getSize = (props: FabProps) => {
+const getSize = (props: StyledFabThemeProps) => {
   const sizes = {
     small: '42px',
     medium: '52px',
@@ -82,7 +91,7 @@ const getSize = (props: FabProps) => {
 
 export const StyledFab = styled(Fab, {
   shouldForwardProp: (props) => props !== 'size' && props !== 'isSquare',
-})<FabProps & { isSquare: boolean }>`
+})<StyledFabThemeProps & { isSquare: boolean }>`
   width: ${(props) => getSize(props)};
   height: ${(props) => getSize(props)};
 

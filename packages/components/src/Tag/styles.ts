@@ -1,13 +1,18 @@
 import { Chip } from '@mui/material';
+import { ChipProps as MuiTagProps } from '@mui/material/Chip/Chip';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
 import { BadgeColor } from '../Badge';
+import { WithoutEmotionSpecific } from '../types';
 
 import { TagColors, TagStates, TagVariants } from './enums';
-import { TagColor, TagProps, TagSize, TagState, TagVariant } from './types';
+import { TagColor, TagSize, TagState, TagVariant } from './types';
 
-type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
+type StyledTagProps = Omit<
+  WithoutEmotionSpecific<MuiTagProps>,
+  'color' | 'variant' | 'size'
+> & {
   customColor?: TagColor;
   customVariant?: TagVariant;
   rounded?: boolean;

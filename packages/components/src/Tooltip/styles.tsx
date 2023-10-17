@@ -1,13 +1,21 @@
 import { Tooltip } from '@mui/material';
+import { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip/Tooltip';
 
 import { styled } from '../styles';
+import { WithoutEmotionSpecific } from '../types';
 
 import { TooltipSizes } from './constants';
-import { TooltipProps } from './types';
+import { TooltipSize } from './types';
 
-export const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))`
+type StyledTooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
+  size?: TooltipSize;
+};
+
+export const StyledTooltip = styled(
+  ({ className, ...props }: StyledTooltipProps) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ),
+)`
   & .MuiTooltip-tooltip {
     margin: 0;
 
