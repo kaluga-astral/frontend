@@ -1,11 +1,12 @@
 import { styled } from '../styles';
-import { Tag, TagColor, TagVariant } from '../Tag';
+import { Tag, TagColor, TagProps, TagVariant } from '../Tag';
 import { Theme } from '../theme';
 import { TagVariants } from '../Tag/enums';
 
-import { CheckableTagProps } from './CheckableTag';
+type CheckableTagStyledProps = {
+  checked?: boolean;
+};
 
-type StyledTagThemeProps = CheckableTagProps & { theme: Theme };
 type TagColorsKit = Omit<
   {
     [variant in TagVariant]: { [color in TagColor]: string };
@@ -19,7 +20,7 @@ const getHoverBgColor = ({
   variant,
   disabled,
   checked,
-}: StyledTagThemeProps) => {
+}: TagProps & CheckableTagStyledProps & { theme: Theme }) => {
   if (disabled) {
     return 'initial';
   }
@@ -64,7 +65,7 @@ const getActiveBgColor = ({
   checked,
   variant,
   disabled,
-}: StyledTagThemeProps) => {
+}: TagProps & CheckableTagStyledProps & { theme: Theme }) => {
   if (disabled) {
     return 'initial';
   }
@@ -103,7 +104,11 @@ const getActiveBgColor = ({
   return activeBgColor.light.default;
 };
 
-const getBgColor = ({ theme, checked, disabled }: StyledTagThemeProps) => {
+const getBgColor = ({
+  theme,
+  checked,
+  disabled,
+}: TagProps & CheckableTagStyledProps & { theme: Theme }) => {
   if (disabled) {
     return theme.palette.grey[100];
   }
@@ -115,7 +120,11 @@ const getBgColor = ({ theme, checked, disabled }: StyledTagThemeProps) => {
   return null;
 };
 
-const getColor = ({ theme, checked, disabled }: StyledTagThemeProps) => {
+const getColor = ({
+  theme,
+  checked,
+  disabled,
+}: TagProps & CheckableTagStyledProps & { theme: Theme }) => {
   if (disabled) {
     return theme.palette.grey[500];
   }
@@ -135,7 +144,7 @@ export const CheckableTagHiddenInput = styled.input`
   display: none;
 `;
 
-export const CheckableTagStyled = styled(Tag)`
+export const CheckableTagStyled = styled(Tag)<CheckableTagStyledProps>`
   background-color: ${getBgColor};
   cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
 

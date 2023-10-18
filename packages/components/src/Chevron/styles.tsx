@@ -2,11 +2,11 @@ import { ChevronDOutlineMd } from '@astral/icons';
 
 import { styled } from '../styles';
 
-import { ChevronProps } from './Chevron';
+type ChevronWrapperProps = { isActive?: boolean };
 
 export const ChevronWrapper = styled(ChevronDOutlineMd, {
   shouldForwardProp: (prop) => prop !== 'isActive',
-})<Pick<ChevronProps, 'isActive'>>`
+})<ChevronWrapperProps>`
   transform: rotateZ(${({ isActive }) => (isActive ? 180 : 0)}deg);
 
   transition: ${({ theme }) =>

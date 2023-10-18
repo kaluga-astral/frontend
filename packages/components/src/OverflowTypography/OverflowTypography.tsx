@@ -1,7 +1,9 @@
-import { PropsWithChildren, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import { PropsWithChildren } from 'react';
 
+import { Tooltip } from '../Tooltip';
+import { TooltipProps as BasicTooltipProps } from '../Tooltip';
 import { TypographyProps } from '../Typography';
-import { TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 
 import { OverflowTypographyWrapper } from './styles';
 import { useOverflowed } from './hooks/useOverflowed';
