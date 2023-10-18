@@ -30,6 +30,25 @@ export const Interaction: Story = {
 export const Example = () => {
   return (
     <MenuList>
+      <MenuItem>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Мой профиль
+      </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Выход
+      </MenuItem>
+    </MenuList>
+  );
+};
+
+export const Selected = () => {
+  return (
+    <MenuList>
       <MenuItem selected>
         <ListItemIcon>
           <ProfileOutlineMd />
