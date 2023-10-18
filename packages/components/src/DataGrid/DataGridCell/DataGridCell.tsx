@@ -2,6 +2,7 @@ import { ReactNode, useMemo } from 'react';
 
 import { TableCell } from '../../Table';
 import { DataGridColumns } from '../types';
+import { Grid } from '../../Grid';
 import { OverflowTypography } from '../../OverflowTypography';
 
 export type CellProps<Data extends object> = {
@@ -31,9 +32,11 @@ export function DataGridCell<Data extends object>({
     <TableCell align={align}>
       {renderCell && renderCell(row)}
       {!renderCell && (
-        <OverflowTypography rowsCount={2}>
-          <>{formattedValue}</>
-        </OverflowTypography>
+        <Grid container>
+          <OverflowTypography rowsCount={2}>
+            <>{formattedValue}</>
+          </OverflowTypography>
+        </Grid>
       )}
     </TableCell>
   );
