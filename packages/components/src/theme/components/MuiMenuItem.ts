@@ -14,9 +14,6 @@ export const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
         '&.Mui-selected': {
           background: `linear-gradient(90deg, ${theme.palette.primary.main} 0, ${theme.palette.primary.main} 4px, ${theme.palette.primary['100']} 4px)`,
         },
-        '&.Mui-selected:hover': {
-          background: `linear-gradient(90deg, ${theme.palette.primary.main} 0, ${theme.palette.primary.main} 4px, ${theme.palette.primary['200']} 4px)`,
-        },
       };
     },
   },

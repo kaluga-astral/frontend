@@ -36,6 +36,12 @@ export const Example = () => {
         </ListItemIcon>
         Мой профиль
       </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Выход
+      </MenuItem>
     </MenuList>
   );
 };
