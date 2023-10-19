@@ -35,6 +35,8 @@ export const CollapsibleTypographyWrapper = styled(Typography, {
 
   transition: all 0.5s ease-in-out;
 
+  -webkit-box-orient: ${({ isOpenCollapse }) =>
+    isOpenCollapse ? '' : 'vertical'};
   -webkit-line-clamp: ${({ rowsCount, isOpenCollapse }) =>
     isOpenCollapse ? 'none' : rowsCount || '1'};
 `;

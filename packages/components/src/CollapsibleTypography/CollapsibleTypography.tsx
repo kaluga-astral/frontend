@@ -1,5 +1,4 @@
 import { PropsWithChildren, forwardRef } from 'react';
-import { ChevronDOutlineMd, ChevronUpOutlineMd } from '@astral/icons';
 
 import { TypographyProps } from '../Typography';
 import { Button } from '../Button';
@@ -50,12 +49,9 @@ export const CollapsibleTypography = forwardRef<
       {isCollapsControll && (
         <Button
           variant="link"
-          endIcon={
-            isOpenCollapse ? <ChevronUpOutlineMd /> : <ChevronDOutlineMd />
-          }
           onClick={() => setIsOpenCollaps(!isOpenCollapse)}
         >
-          {isOpenCollapse ? 'Свернуть' : 'Показать весть текст'}
+          {isOpenCollapse ? 'Скрыть' : 'Показать полностью'}
         </Button>
       )}
     </CollapsibleWrapper>
