@@ -19,11 +19,11 @@ export const InternalErrorPlaceholder = () => {
       title="Произошла непредвиденная ошибка"
       description={
         <div>
-          <Typography component="p">
+          <Typography>
             Пожалуйста, попробуйте обновить страницу или обратитесь в
             техническую поддержку:
           </Typography>
-          <Typography component="p">
+          <Typography>
             email&nbsp;
             <Link href={`mailto:${techSup.email}`}>{techSup.email}</Link>,
             телефон&nbsp;
