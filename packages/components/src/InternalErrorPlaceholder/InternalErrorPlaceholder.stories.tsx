@@ -6,7 +6,7 @@ import { ConfigProvider } from '../ConfigProvider';
 import { InternalErrorPlaceholder } from './InternalErrorPlaceholder';
 
 /**
- * InternalErrorPlaceholder - это внутренний компонент, позволяющий отображать ошибки во время исполнения кода
+ * ```InternalErrorPlaceholder``` - это внутренний компонент, позволяющий отображать ошибки во время исполнения кода
  *
  */
 const meta: Meta<typeof InternalErrorPlaceholder> = {
@@ -22,6 +22,7 @@ export const Example = () => {
       imagesMap={{
         defaultErrorImgSrc: errorIllustration,
         noDataImgSrc: errorIllustration,
+        updateErrorImgSrc: errorIllustration,
       }}
       techSup={{ email: 'test@example.com', phone: '79999999999' }}
     >
