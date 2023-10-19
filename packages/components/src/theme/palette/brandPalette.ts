@@ -12,16 +12,29 @@ type ColorShades = {
   100: string;
 };
 
+export type ColorBrand = {
+  background: string;
+} & Pick<ColorShades, 800>;
+
+type Secondary = Pick<ColorShades, 800>;
+
 type BrandColors = {
-  secondary: string;
+  secondary: Secondary;
   red?: ColorShades;
   green?: ColorShades;
   yellow?: ColorShades;
   grey?: ColorShades;
+  brand: ColorBrand;
 } & ColorShades;
 
 const defaultBrandPalette: BrandColors = {
-  secondary: '#55B8F0',
+  secondary: {
+    800: '#55B8F0',
+  },
+  brand: {
+    800: '#2165CC',
+    background: '#FAFBFC',
+  },
   900: '#0F52B8',
   800: '#2165CC',
   700: '#1874FF',
@@ -34,7 +47,13 @@ const defaultBrandPalette: BrandColors = {
 };
 
 const edoPalette: BrandColors = {
-  secondary: '#5653FF',
+  secondary: {
+    800: '#5653FF',
+  },
+  brand: {
+    800: '#6746EB',
+    background: '#FAFBFC',
+  },
   900: '#5D3FD4',
   800: '#6746EB',
   700: '#8566FF',
@@ -47,7 +66,13 @@ const edoPalette: BrandColors = {
 };
 
 const kedoPalette: BrandColors = {
-  secondary: '#5653FF',
+  secondary: {
+    800: '#5653FF',
+  },
+  brand: {
+    800: '#6746EB',
+    background: '#FAFBFC',
+  },
   900: '#5D3FD4',
   800: '#6746EB',
   700: '#8566FF',
@@ -60,7 +85,13 @@ const kedoPalette: BrandColors = {
 };
 
 const ao5Palette: BrandColors = {
-  secondary: '#14A5D3',
+  secondary: {
+    800: '#14A5D3',
+  },
+  brand: {
+    800: '#0074C6',
+    background: '#FAFBFC',
+  },
   900: '#0068B2',
   800: '#0074C6',
   700: '#0989E3',
@@ -73,7 +104,13 @@ const ao5Palette: BrandColors = {
 };
 
 const ofdPalette: BrandColors = {
-  secondary: '#22BDEE',
+  secondary: {
+    800: '#22BDEE',
+  },
+  brand: {
+    800: '#2285EE',
+    background: '#FAFBFC',
+  },
   900: '#1F78D6',
   800: '#2285EE',
   700: '#46A0FF',
@@ -86,7 +123,13 @@ const ofdPalette: BrandColors = {
 };
 
 const signPalette: BrandColors = {
-  secondary: '#4099AC',
+  secondary: {
+    800: '#4099AC',
+  },
+  brand: {
+    800: '#376798',
+    background: '#FAFBFC',
+  },
   900: '#325D89',
   800: '#376798',
   700: '#4D86BF',
@@ -99,7 +142,13 @@ const signPalette: BrandColors = {
 };
 
 const lkpPalette: BrandColors = {
-  secondary: '#00BDB2',
+  secondary: {
+    800: '#00BDB2',
+  },
+  brand: {
+    800: '#00B07E',
+    background: '#FAFBFC',
+  },
   900: '#009E71',
   800: '#00B07E',
   700: '#2CC89B',
@@ -112,7 +161,13 @@ const lkpPalette: BrandColors = {
 };
 
 const poaPalette: BrandColors = {
-  secondary: '#2BCCFF',
+  secondary: {
+    800: '#2BCCFF',
+  },
+  brand: {
+    800: '#33ADF2',
+    background: '#FAFBFC',
+  },
   900: '#0A9DEF',
   800: '#33ADF2',
   700: '#4DB8F4',
@@ -125,7 +180,13 @@ const poaPalette: BrandColors = {
 };
 
 const rssPalette: BrandColors = {
-  secondary: '#8B45D1',
+  secondary: {
+    800: '#8B45D1',
+  },
+  brand: {
+    800: '#663499',
+    background: '#FAFBFC',
+  },
   900: '#541B8D',
   800: '#663499',
   700: '#7A4EA6',
@@ -138,7 +199,9 @@ const rssPalette: BrandColors = {
 };
 
 const sberPalette: BrandColors = {
-  secondary: '#107F8C',
+  secondary: {
+    800: '#107F8C',
+  },
   900: '#005E7F',
   800: '#107F8C',
   700: '#21A19A',
@@ -148,6 +211,10 @@ const sberPalette: BrandColors = {
   300: '#D3ECEB',
   200: '#E5FCF7',
   100: '#EEF8F7',
+  brand: {
+    800: '#107F8C',
+    background: '#E4E8EB',
+  },
   green: {
     900: '#278B86',
     800: '#21A19A',
