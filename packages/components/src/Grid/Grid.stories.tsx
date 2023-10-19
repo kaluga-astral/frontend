@@ -11,9 +11,10 @@ export default {
 };
 
 const Item = styled.div`
+  text-align: center;
+
   border: 1px solid ${({ theme }) => theme.palette.grey[300]};
   border-radius: 3px;
-  text-align: center;
 `;
 
 const Wrapper = styled.div`

@@ -2,6 +2,8 @@
   "eslint.workingDirectories": [
     "packages/ui",
     "packages/icons",
-    "packages/fonts"
+    "packages/fonts",
+    "packages/form",
+    "packages/components"
   ]
 }
