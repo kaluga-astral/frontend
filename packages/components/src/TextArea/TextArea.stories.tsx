@@ -80,7 +80,5 @@ export const HelperText = () => (
 );
 
 export const Disabled = () => (
-  <>
-    <TextArea disabled helperText="Поле не доступно" label="Доп. информация" />
-  </>
+  <TextArea disabled helperText="Поле не доступно" label="Доп. информация" />
 );
