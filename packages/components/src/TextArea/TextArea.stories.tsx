@@ -1,90 +1,84 @@
-import { Story } from '@storybook/react';
-import { Stack } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
+import { ChangeEvent, useState } from 'react';
 
 import { TextArea } from './TextArea';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=3211-52609&mode=design&t=lMvg1tmjfSIA2lhp-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof TextArea> = {
   title: 'Components/TextArea',
   component: TextArea,
 };
 
-const Template: Story = ({ readOnly, ...args }) => {
+export default meta;
+
+type Story = StoryObj<typeof TextArea>;
+
+export const Interaction: Story = {
+  args: {
+    label: 'Комментарии',
+    helperText: 'Укажите любую доп. информацию',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => (
+  <>
+    <TextArea label="Basic" />
+    <TextArea label="Disabled" disabled />
+  </>
+);
+
+export const Controlled = () => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
   return (
+    <TextArea label="Доп. информация" value={value} onChange={handleChange} />
+  );
+};
+
+export const Statuses = () => (
+  <>
     <TextArea
-      InputProps={{
-        readOnly,
-      }}
-      {...args}
+      required
+      error
+      helperText="Обязательно"
+      label="Информация об абоненте"
     />
-  );
-};
+    <TextArea
+      success
+      helperText="Удачно завершился процесс проверки ключа"
+      label="Электронный ключ"
+    />
+  </>
+);
 
-export const Showcase: Story = () => {
-  return (
-    <Stack gap={4}>
-      <Stack gap={4} direction="row">
-        <TextArea label="With label" fullWidth />
-        <TextArea
-          label="With placeholder"
-          placeholder="Placeholder value"
-          fullWidth
-        />
-        <TextArea
-          focused
-          label="Focused"
-          defaultValue="Default value"
-          fullWidth
-        />
-      </Stack>
-      <Stack gap={4} direction="row">
-        <TextArea
-          error
-          label="Invalid without helperText"
-          defaultValue="Default value"
-          fullWidth
-        />
-        <TextArea
-          error
-          label="Invalid"
-          defaultValue="Default value"
-          helperText="Ошибка, проверка не пройдена"
-          fullWidth
-        />
-        <TextArea
-          error
-          focused
-          label="Focused invalid"
-          defaultValue="Default value"
-          helperText="Ошибка, проверка не пройдена"
-          fullWidth
-        />
-      </Stack>
-      <Stack gap={4} direction="row">
-        <TextArea
-          success
-          label="Validated"
-          defaultValue="Default value"
-          helperText="Проверка успешно пройдена"
-          fullWidth
-        />
-        <TextArea
-          disabled
-          label="Disabled"
-          defaultValue="Default value"
-          fullWidth
-        />
-        <TextArea
-          label="Read only"
-          defaultValue="Default value"
-          InputProps={{
-            readOnly: true,
-          }}
-          helperText="Iam readOnly"
-          fullWidth
-        />
-      </Stack>
-    </Stack>
-  );
-};
+export const Required = () => <TextArea required label="Доп. информация" />;
 
-export const Default = Template.bind({});
+export const FullWidth = () => <TextArea fullWidth label="Длинное поле" />;
+
+export const HelperText = () => (
+  <>
+    <TextArea helperText="Описание поле" label="Доп. информация" />
+    <TextArea error helperText="Описание ошибки поля" label="Доп. информация" />
+    <TextArea
+      success
+      helperText="Отображение success статуса"
+      label="Доп. информация"
+    />
+  </>
+);
+
+export const Disabled = () => (
+  <TextArea disabled helperText="Поле не доступно" label="Доп. информация" />
+);
