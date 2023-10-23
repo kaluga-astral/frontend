@@ -6,7 +6,7 @@ import { ConfigProvider } from '../ConfigProvider';
 import { OutdatedReleasePlaceholder } from './OutdatedReleasePlaceholder';
 
 /**
- * ```OutdatedReleasePlaceholder``` - это внутренний компонент, позволяющий отображать информации при устаревании статики сборки
+ * ```OutdatedReleasePlaceholder``` - это внутренний компонент, позволяющий отображать ошибки, связанные с устаревшей версией билда
  */
 const meta: Meta<typeof OutdatedReleasePlaceholder> = {
   title: 'Components/OutdatedReleasePlaceholder',
