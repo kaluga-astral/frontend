@@ -57,5 +57,13 @@ export const Example = () => (
       quidem et sed dolor veritatis animi tempora neque eveniet at natus,
       praesentium nisi, culpa hic iure.
     </CollapsibleTypography>
+    <CollapsibleTypography rowsCount={5}>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
+      fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
+      eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
+      amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
+      quidem et sed dolor veritatis animi tempora neque eveniet at natus,
+      praesentium nisi, culpa hic iure.
+    </CollapsibleTypography>
   </>
 );

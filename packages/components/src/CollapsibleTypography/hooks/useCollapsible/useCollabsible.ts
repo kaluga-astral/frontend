@@ -6,11 +6,11 @@ export const useCollabsible = (forwardedRef?: Ref<HTMLElement>) => {
     forwardedRef && typeof forwardedRef !== 'function'
       ? forwardedRef
       : localRef;
-  const [isCollapsControll, setIsCollapsControll] = useState(true);
-  const [initialHight, setInitialHeight] = useState('');
+  const [isCollapsable, setIsCollapsable] = useState(true);
+  const [initialHeight, setInitialHeight] = useState('');
   const [currentHeight, setCurrentHeight] = useState('auto');
 
-  const [isOpenCollapse, setIsOpenCollaps] = useState(false);
+  const [isOpenCollapse, setIsOpenCollapse] = useState(false);
 
   useEffect(() => {
     if (ref.current) {
@@ -21,10 +21,10 @@ export const useCollabsible = (forwardedRef?: Ref<HTMLElement>) => {
       setInitialHeight(clientH + 'px');
 
       if (scrollH > clientH) {
-        return setIsCollapsControll(true);
+        return setIsCollapsable(true);
       }
 
-      setIsCollapsControll(false);
+      setIsCollapsable(false);
     }
   }, [ref]);
 
@@ -38,15 +38,19 @@ export const useCollabsible = (forwardedRef?: Ref<HTMLElement>) => {
         return setCurrentHeight(scrollH + 'px');
       }
 
-      setCurrentHeight(initialHight);
+      setCurrentHeight(initialHeight);
     }
-  }, [initialHight, isOpenCollapse, ref]);
+  }, [initialHeight, isOpenCollapse, ref]);
+
+  const toggleCollapse = () => {
+    setIsOpenCollapse(!isOpenCollapse);
+  };
 
   return {
     ref,
-    isCollapsControll,
+    isCollapsable,
     isOpenCollapse,
-    setIsOpenCollaps,
     currentHeight,
+    toggleCollapse,
   };
 };

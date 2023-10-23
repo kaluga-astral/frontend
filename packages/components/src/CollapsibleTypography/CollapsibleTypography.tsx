@@ -8,13 +8,32 @@ import { useCollabsible } from './hooks';
 
 export const DEFAULT_ROWS_COUNT = 1;
 
+export const DEFAULT_SHOW_TEXT = 'Показать полностью';
+
+export const DEFAULT_HIDE_TEXT = 'Скрыть';
+
 export type CollapsibleProps = {
   /**
+   * Maximum displayed number of lines
    * @example <CollapsibleTypography rowsCount={2} />
    * @default 1
    * @description опорная единица по которой определяется максимиально отображаемое колличество строк
    */
   rowsCount?: number;
+  /**
+   * Show button text
+   * @default 'Показать полностью'
+   * @description Текст кнопки для показа сокрытого текста
+   *
+   */
+  showButtonText?: string;
+  /**
+   * Hide button text
+   * @default 'Скрыть'
+   * @description текст кнопки скрытия контента
+   *
+   */
+  hideButtonText?: string;
 };
 
 export type CollapsibleElementProps = CollapsibleProps & TypographyProps;
@@ -25,35 +44,43 @@ export type CollapsibleTypographyProps =
 export const CollapsibleTypography = forwardRef<
   HTMLElement,
   CollapsibleTypographyProps
->(({ children, rowsCount = DEFAULT_ROWS_COUNT, ...props }, forwardedRef) => {
-  const {
-    ref,
-    isOpenCollapse,
-    setIsOpenCollaps,
-    isCollapsControll,
-    currentHeight,
-  } = useCollabsible(forwardedRef);
+>(
+  (
+    {
+      children,
+      rowsCount = DEFAULT_ROWS_COUNT,
+      showButtonText = DEFAULT_SHOW_TEXT,
+      hideButtonText = DEFAULT_HIDE_TEXT,
+      ...props
+    },
+    forwardedRef,
+  ) => {
+    const {
+      ref,
+      isOpenCollapse,
+      toggleCollapse,
+      isCollapsable,
+      currentHeight,
+    } = useCollabsible(forwardedRef);
 
-  const collapsibleProps = {
-    children,
-    rowsCount,
-    ref,
-    isOpenCollapse,
-    currentHeight,
-    ...props,
-  };
+    const collapsibleProps = {
+      children,
+      rowsCount,
+      ref,
+      isOpenCollapse,
+      currentHeight,
+      ...props,
+    };
 
-  return (
-    <CollapsibleWrapper>
-      <CollapsibleTypographyWrapper {...collapsibleProps} />
-      {isCollapsControll && (
-        <Button
-          variant="link"
-          onClick={() => setIsOpenCollaps(!isOpenCollapse)}
-        >
-          {isOpenCollapse ? 'Скрыть' : 'Показать полностью'}
-        </Button>
-      )}
-    </CollapsibleWrapper>
-  );
-});
+    return (
+      <CollapsibleWrapper>
+        <CollapsibleTypographyWrapper {...collapsibleProps} />
+        {isCollapsable && (
+          <Button variant="link" onClick={toggleCollapse}>
+            {isOpenCollapse ? hideButtonText : showButtonText}
+          </Button>
+        )}
+      </CollapsibleWrapper>
+    );
+  },
+);

@@ -33,7 +33,10 @@ export const CollapsibleTypographyWrapper = styled(Typography, {
   text-overflow: ellipsis;
   white-space: ${({ isOpenCollapse }) => (isOpenCollapse ? 'none' : 'initial')};
 
-  transition: all 0.5s ease-in-out;
+  transition: ${({ theme }) =>
+    theme.transitions.create(['height'], {
+      duration: theme.transitions.duration.standard,
+    })};
 
   -webkit-box-orient: ${({ isOpenCollapse }) =>
     isOpenCollapse ? '' : 'vertical'};
