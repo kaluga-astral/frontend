@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Stack, Switch } from '@mui/material';
+import { Switch } from '@mui/material';
 
 import { Grid } from '../Grid';
 
@@ -35,13 +35,11 @@ export const Interaction: Story = {
 
 export const Example = () => {
   return (
-    <Stack>
-      <MaskField
-        label="Введите номер телефона"
-        mask="+7 (000) 000-00-00"
-        placeholder="+7 (000) 000-00-00"
-      />
-    </Stack>
+    <MaskField
+      label="Введите номер телефона"
+      mask="+7 (000) 000-00-00"
+      placeholder="+7 (000) 000-00-00"
+    />
   );
 };
 
@@ -52,8 +50,19 @@ export const Label = () => (
   </Grid>
 );
 
+export const MaskIncludesLetters = () => (
+  <MaskField
+    label="Маска может содержать буквы"
+    mask="aa.000.aaaaa"
+    placeholder="aa.aaa.aaaaa"
+  />
+);
+
 export const Placeholder = () => (
-  <MaskField label="With custom mask" mask="aa.000" placeholder="aa.000" />
+  <Grid container rows={2}>
+    <MaskField label="With placeholder" mask="aa.000" placeholder="aa.000" />
+    <MaskField label="Without placeholder" mask="aa.000" />
+  </Grid>
 );
 
 /**
@@ -68,7 +77,11 @@ export const Definitions = () => (
   />
 );
 
-export const Controlled = () => {
+/**
+ * Prop ```unmask``` - работает в комбинации с пропсом `mask`, позволяет включить/отключить маску. По дефолту в value попадают данные без маски.
+ */
+
+export const Unmask = () => {
   const [value, setValue] = React.useState('');
   const [unmasked, setUnmasked] = React.useState(true);
 
@@ -80,21 +93,19 @@ export const Controlled = () => {
     setUnmasked((prevState) => !prevState);
   };
 
-  const checkIsMasked = () => (unmasked ? 'aa.0000-000' : '');
-
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}
-    >
+    <>
       <MaskField
         key={String(unmasked)}
         label="With mask/unmask"
-        mask={checkIsMasked()}
-        placeholder={checkIsMasked()}
+        mask="aa.0000-000"
+        placeholder="aa.0000-000"
         value={value}
         onChange={handleValueChange}
+        unmask={unmasked}
       />
       Mask/unmask: <Switch onChange={handleSwitchChange} checked={unmasked} />
-    </div>
+      Value: {value}
+    </>
   );
 };
