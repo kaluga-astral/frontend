@@ -33,7 +33,7 @@ export const Interaction: Story = {
 
 export const Example = () => {
   return (
-    <div style={{ width: '600px' }}>
+    <div style={{ maxWidth: '600px' }}>
       <OverflowTypography>
         Not enough long text for special behavior.
       </OverflowTypography>
@@ -53,7 +53,7 @@ export const Example = () => {
  */
 export const RowsCount = () => {
   return (
-    <div style={{ width: '600px' }}>
+    <div style={{ maxWidth: '600px' }}>
       <OverflowTypography>
         default props, Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Atque aut delectus dolorem ea, explicabo illo minus nostrum quae quod
@@ -74,7 +74,7 @@ export const RowsCount = () => {
  */
 export const TooltipProps = () => {
   return (
-    <div style={{ width: '600px' }}>
+    <div style={{ maxWidth: '600px' }}>
       <OverflowTypography
         tooltipProps={{
           title: 'custom tooltip, with separate settings',
