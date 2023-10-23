@@ -1,6 +1,25 @@
-import { Ref, useEffect, useRef, useState } from 'react';
+import { Ref, RefObject, useEffect, useRef, useState } from 'react';
+type UseCollabsibleResult = {
+  ref: RefObject<HTMLElement>;
+  isCollapsable: boolean;
+  isOpenCollapse: boolean;
+  currentHeight: string;
+  toggleCollapse: () => void;
+};
 
-export const useCollabsible = (forwardedRef?: Ref<HTMLElement>) => {
+/**
+ * @description Хук используется для подсчета scrollHeight и сlientHeigh.
+ * Компоненту  в пропсах задается rowsCount, который попадает  в стили и устанавливает значение -webkit-line-clamp = rowsCount;
+ * Затем мы сравниевам scrollHeight и сlientHeigh,
+ * если scrollHeight > , то значение isCollapsable = true.
+ * Это значит что компонент переполнен и нужно отобразить кнопку управления состоянием (показать/скрыть) isOpenCollapse.
+ * Когда isOpenCollapse = true значение -webkit-line-clamp = "none";
+ * Компоненту устанавливается высота равная его scrollHeight
+ * сlientHeigh сохраняется как initialHeight и при закрытии устанавливается компоненту для плавной анимации раскрытия/скрытия
+ */
+export const useCollabsible = (
+  forwardedRef?: Ref<HTMLElement>,
+): UseCollabsibleResult => {
   const localRef = useRef<HTMLElement>(null);
   const ref =
     forwardedRef && typeof forwardedRef !== 'function'
