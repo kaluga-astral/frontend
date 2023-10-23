@@ -155,7 +155,11 @@ export const ErrorState = () => {
   return (
     <BaseContentContainer container>
       <ConfigProvider
-        imagesMap={{ defaultErrorImgSrc: exampleImg, noDataImgSrc: exampleImg }}
+        imagesMap={{
+          defaultErrorImgSrc: exampleImg,
+          noDataImgSrc: exampleImg,
+          outdatedReleaseErrorImgSrc: exampleImg,
+        }}
       >
         <ContentState
           isLoading={isLoading}
@@ -184,7 +188,11 @@ export const ErrorStateWithCustomImg = () => {
   return (
     <BaseContentContainer container>
       <ConfigProvider
-        imagesMap={{ defaultErrorImgSrc: exampleImg, noDataImgSrc: exampleImg }}
+        imagesMap={{
+          defaultErrorImgSrc: exampleImg,
+          noDataImgSrc: exampleImg,
+          outdatedReleaseErrorImgSrc: exampleImg,
+        }}
       >
         <ContentState
           isLoading={isLoading}

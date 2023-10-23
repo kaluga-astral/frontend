@@ -6,6 +6,7 @@ import { russianMap } from '../DatePicker/constants/russianMap';
 const imagesMapDefault = {
   noDataImgSrc: '',
   defaultErrorImgSrc: '',
+  outdatedReleaseErrorImgSrc: '',
 };
 
 const techSupDefault = {
@@ -23,6 +24,10 @@ type ImagesMap = {
    * @description изображение при ошибке (используется в ContentState)
    */
   defaultErrorImgSrc: string;
+  /**
+   * @description изображение при ошибке при обновлении продукта (используется в ContentState/ErrorBoundary)
+   */
+  outdatedReleaseErrorImgSrc: string;
 };
 
 type TechnicalSupport = {

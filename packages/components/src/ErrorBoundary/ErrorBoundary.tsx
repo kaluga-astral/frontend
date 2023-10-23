@@ -2,6 +2,11 @@ import React, { ReactNode } from 'react';
 
 import { ConfigContext } from '../ConfigProvider';
 import { InternalErrorPlaceholder } from '../InternalErrorPlaceholder';
+import { OutdatedReleasePlaceholder } from '../OutdatedReleasePlaceholder';
+
+import { TypeError } from './enums';
+import { CONDITION_TYPE_ERROR } from './constants';
+import { State } from './types';
 
 type Props = {
   /**
@@ -10,11 +15,12 @@ type Props = {
   children: ReactNode;
 };
 
-type State = {
-  /**
-   * Флаг наличия перехваченной ошибки
-   */
-  error: boolean;
+/**
+ * Отображение при определенной ошибке
+ */
+const PLACEHOLDER_TYPE_ERROR: Record<TypeError, ReactNode> = {
+  [TypeError.OutdatedRelease]: <OutdatedReleasePlaceholder />,
+  [TypeError.Default]: <InternalErrorPlaceholder />,
 };
 
 /**
@@ -28,24 +34,26 @@ class ErrorBoundary extends React.Component<Props, State> {
   context!: React.ContextType<typeof ConfigContext>;
 
   public state: State = {
-    error: false,
+    hasError: false,
+    typeError: TypeError.Default,
   };
 
-  public static getDerivedStateFromError() {
-    return { error: true };
+  public static getDerivedStateFromError(error: Error) {
+    return {
+      hasError: true,
+      typeError:
+        CONDITION_TYPE_ERROR.find(({ condition }) => condition(error))?.type ??
+        TypeError.Default,
+    };
   }
 
   public componentDidCatch(error: Error) {
     this.context.captureException(error);
   }
 
-  handleReloadPage() {
-    location.reload();
-  }
-
   public render() {
-    if (this.state.error) {
-      return <InternalErrorPlaceholder />;
+    if (this.state.hasError) {
+      return PLACEHOLDER_TYPE_ERROR[this.state.typeError];
     }
 
     return this.props.children;

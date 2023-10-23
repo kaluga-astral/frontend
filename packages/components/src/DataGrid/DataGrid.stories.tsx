@@ -398,7 +398,11 @@ export const NoData = () => {
 
   return (
     <ConfigProvider
-      imagesMap={{ defaultErrorImgSrc: '', noDataImgSrc: noDataStubSrc }}
+      imagesMap={{
+        defaultErrorImgSrc: '',
+        noDataImgSrc: noDataStubSrc,
+        outdatedReleaseErrorImgSrc: '',
+      }}
     >
       <DataGrid<DataType, SortField>
         keyId="id"

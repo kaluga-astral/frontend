@@ -1,18 +1,34 @@
-import { Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
+import { ConfigProvider } from '../ConfigProvider';
+import outdatedReleaseIllustration from '../../../ui/illustrations/outdated_release.svg';
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { Button } from '../Button';
-import { ConfigProvider } from '../ConfigProvider';
 
 import { ErrorBoundary } from './ErrorBoundary';
 
-export default {
+const meta: Meta<typeof ErrorBoundary> = {
   title: 'Components/ErrorBoundary',
   component: ErrorBoundary,
 };
 
-function BuggyButton() {
+export default meta;
+
+/**
+ * Кастомная ошибка подгрузки чанков при релизах
+ */
+class OutdatedReleaseError extends Error {
+  constructor(message: string = '', ...args: ErrorOptions[]) {
+    super(message, ...args);
+    this.name = 'ChunkLoadError';
+  }
+}
+
+/**
+ * Кнопка для вызова ошибки type = Default
+ */
+const BuggyButton = () => {
   const [count, setCount] = useState(0);
   const onClick = () => {
     setCount(count + 1);
@@ -25,15 +41,37 @@ function BuggyButton() {
   });
 
   return <Button onClick={onClick}>Сломаюсь на 2 клике</Button>;
-}
+};
 
-const Template: Story = () => {
+/**
+ * Кнопка для вызова ошибки при релизах type = OutdatedRelease
+ */
+const OutdatedReleaseButton = () => {
+  const [isClicked, setIsClicked] = useState(false);
+  const onClick = () => {
+    setIsClicked(true);
+  };
+
+  useEffect(() => {
+    if (isClicked) {
+      throw new OutdatedReleaseError('Ошибка загрузки приложения');
+    }
+  });
+
+  return <Button onClick={onClick}>Вызову ошибку релиза</Button>;
+};
+
+/**
+ *  Стандартная обработка всех непредвиденных ошибок исполения кода в приложении
+ */
+export const Default = () => {
   return (
     <ConfigProvider
       captureException={(error) => alert(error)}
       imagesMap={{
         defaultErrorImgSrc: errorIllustration,
         noDataImgSrc: errorIllustration,
+        outdatedReleaseErrorImgSrc: outdatedReleaseIllustration,
       }}
       techSup={{ email: 'test@example.com', phone: '79999999999' }}
     >
@@ -44,9 +82,21 @@ const Template: Story = () => {
   );
 };
 
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+/**
+ *  ```OutdatedRelease``` появляется только при устаревание статики после релиза,
+ *  позволяет производить сборку в любое время и предостерегает клиента от непредвиденных ошибок во время релиза
+ */
+export const OutdatedRelease = () => (
+  <ConfigProvider
+    captureException={(error) => alert(error)}
+    imagesMap={{
+      defaultErrorImgSrc: errorIllustration,
+      noDataImgSrc: errorIllustration,
+      outdatedReleaseErrorImgSrc: outdatedReleaseIllustration,
+    }}
+  >
+    <ErrorBoundary>
+      <OutdatedReleaseButton />
+    </ErrorBoundary>
+  </ConfigProvider>
+);
