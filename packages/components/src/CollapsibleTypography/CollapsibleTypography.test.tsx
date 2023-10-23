@@ -31,7 +31,7 @@ describe('CollapsibleTypography ', () => {
     expect(controlButton).toBeInTheDocument();
   });
 
-  it('Prop: rowsCount={-5}: При отрицательном значении устанавливается значение по умолчанию', async () => {
+  it('Prop: rowsCount={-5}: При отрицательном значении устанавливается значение по умолчанию', () => {
     renderWithTheme(
       <CollapsibleTypography rowsCount={-5}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
@@ -46,7 +46,7 @@ describe('CollapsibleTypography ', () => {
     expect(controlButton).toBeInTheDocument();
   });
 
-  it('Prop: showButtonText={"Какой-то текст"}: Изменяется текст кнопки открытия', async () => {
+  it('Prop: showButtonText={"Какой-то текст"}: Изменяется текст кнопки открытия', () => {
     renderWithTheme(
       <CollapsibleTypography showButtonText={EXAMPLE_SHOW_TEXT}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
@@ -59,6 +59,22 @@ describe('CollapsibleTypography ', () => {
     const controlButton = screen.getByText(EXAMPLE_SHOW_TEXT);
 
     expect(controlButton).toBeInTheDocument();
+  });
+
+  it('Prop: hideButtonText={"Какой-то текст"}: Изменяется текст кнопки сокрытия', async () => {
+    renderWithTheme(
+      <CollapsibleTypography hideButtonText={EXAMPLE_SHOW_TEXT}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
+        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
+        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
+        suscipit ipsa officia.
+      </CollapsibleTypography>,
+    );
+
+    const showButton = screen.getByText(SHOW_BUTTON_TEXT);
+
+    await userEvents.click(showButton);
+    expect(screen.getByText(EXAMPLE_SHOW_TEXT)).toBeInTheDocument();
   });
 
   it('Click control button: При нажатии на кнопку "Показать" меняется состояние', async () => {
