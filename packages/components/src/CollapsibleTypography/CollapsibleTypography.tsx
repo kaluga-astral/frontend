@@ -41,6 +41,10 @@ export type CollapsibleElementProps = CollapsibleProps & TypographyProps;
 export type CollapsibleTypographyProps =
   PropsWithChildren<CollapsibleElementProps>;
 
+/**
+ * За основу взята логика компонента OverflowTypography.
+ * Пропс rowsCount определяет максимиально отображаемое колличество строк
+ */
 export const CollapsibleTypography = forwardRef<
   HTMLElement,
   CollapsibleTypographyProps
