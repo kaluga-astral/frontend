@@ -2,8 +2,8 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import {
   CollapsibleTypography,
-  DEFAULT_HIDE_TEXT,
-  DEFAULT_SHOW_TEXT,
+  HIDE_BUTTON_TEXT,
+  SHOW_BUTTON_TEXT,
 } from './CollapsibleTypography';
 
 const EXAMPLE_SHOW_TEXT = 'Какой-то текст';
@@ -41,7 +41,7 @@ describe('CollapsibleTypography ', () => {
       </CollapsibleTypography>,
     );
 
-    const controlButton = screen.getByText(DEFAULT_SHOW_TEXT);
+    const controlButton = screen.getByText(SHOW_BUTTON_TEXT);
 
     expect(controlButton).toBeInTheDocument();
   });
@@ -71,9 +71,9 @@ describe('CollapsibleTypography ', () => {
       </CollapsibleTypography>,
     );
 
-    const controlButton = screen.getByText(DEFAULT_SHOW_TEXT);
+    const controlButton = screen.getByText(SHOW_BUTTON_TEXT);
 
     await userEvents.click(controlButton);
-    expect(screen.getByText(DEFAULT_HIDE_TEXT)).toBeInTheDocument();
+    expect(screen.getByText(HIDE_BUTTON_TEXT)).toBeInTheDocument();
   });
 });

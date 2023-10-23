@@ -8,9 +8,9 @@ import { useCollabsible } from './hooks';
 
 export const DEFAULT_ROWS_COUNT = 1;
 
-export const DEFAULT_SHOW_TEXT = 'Показать полностью';
+export const SHOW_BUTTON_TEXT = 'Показать полностью';
 
-export const DEFAULT_HIDE_TEXT = 'Скрыть';
+export const HIDE_BUTTON_TEXT = 'Скрыть';
 
 export type CollapsibleProps = {
   /**
@@ -49,8 +49,8 @@ export const CollapsibleTypography = forwardRef<
     {
       children,
       rowsCount = DEFAULT_ROWS_COUNT,
-      showButtonText = DEFAULT_SHOW_TEXT,
-      hideButtonText = DEFAULT_HIDE_TEXT,
+      showButtonText = SHOW_BUTTON_TEXT,
+      hideButtonText = HIDE_BUTTON_TEXT,
       ...props
     },
     forwardedRef,
