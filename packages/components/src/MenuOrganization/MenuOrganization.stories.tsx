@@ -122,6 +122,7 @@ export const Example = () => {
       organizations={ORGANIZATIONS}
       currentOrganization={selected}
       onSelect={handleSelectOrganization}
+      onAddOrganization={() => {}}
     />
   );
 };
@@ -132,6 +133,7 @@ export const NoOrganizations = () => {
       organizations={[]}
       currentOrganization={null}
       onSelect={() => {}}
+      onAddOrganization={() => {}}
     />
   );
 };

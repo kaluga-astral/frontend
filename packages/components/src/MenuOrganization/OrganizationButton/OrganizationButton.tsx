@@ -15,14 +15,19 @@ export type OrganizationButtonProps = {
   onClick: () => void;
   isOpen: boolean;
   currentOrganization?: Organization | null;
+  onAddOrganization: () => void;
 };
 
 export const OrganizationButton = forwardRef<
   HTMLButtonElement,
   OrganizationButtonProps
->(({ onClick, isOpen, currentOrganization }, ref) => {
+>(({ onClick, isOpen, currentOrganization, onAddOrganization }, ref) => {
   if (!currentOrganization) {
-    return <Button startIcon={<AddOutlineMd />}>Добавить организацию</Button>;
+    return (
+      <Button startIcon={<AddOutlineMd />} onClick={onAddOrganization}>
+        Добавить организацию
+      </Button>
+    );
   }
 
   const { name, inn, kpp } = currentOrganization;

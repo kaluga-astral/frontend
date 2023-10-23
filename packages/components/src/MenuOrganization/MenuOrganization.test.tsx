@@ -90,6 +90,7 @@ describe('MenuOrganization', () => {
         organizations={ORGANIZATIONS}
         currentOrganization={null}
         onSelect={() => {}}
+        onAddOrganization={() => {}}
       />,
     );
 
@@ -102,6 +103,7 @@ describe('MenuOrganization', () => {
         organizations={ORGANIZATIONS}
         currentOrganization={CURRENT_ORGANIZATION}
         onSelect={() => {}}
+        onAddOrganization={() => {}}
       />,
     );
 

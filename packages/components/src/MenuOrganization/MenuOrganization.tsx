@@ -16,14 +16,28 @@ import {
 } from './styles';
 
 export type MenuOrganizationProps = {
+  /**
+   * Выбранная организация
+   */
   currentOrganization?: Organization | null;
+  /**
+   * Список организаций
+   */
   organizations: Array<{ group: string; data: Array<Organization> }>;
+  /**
+   * Обработчик выбора организации
+   */
   onSelect: (organization: Organization) => void;
+  /**
+   * Обработчик клика по кнопке "Добавить организацию"
+   */
+  onAddOrganization: () => void;
 };
 
 export const MenuOrganization = ({
   organizations = [],
   currentOrganization,
+  onAddOrganization,
   onSelect,
 }: MenuOrganizationProps) => {
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
@@ -38,6 +52,7 @@ export const MenuOrganization = ({
       <OrganizationButton
         isOpen={open}
         onClick={handleOpenMenu}
+        onAddOrganization={onAddOrganization}
         currentOrganization={currentOrganization}
         ref={anchorRef}
       />
@@ -73,7 +88,7 @@ export const MenuOrganization = ({
         </OrganizationsWrapper>
         <Divider />
         <OrganizationsButtonWrapper>
-          <Button startIcon={<AddOutlineMd />} fullWidth>
+          <Button startIcon={<AddOutlineMd />} onClick={onAddOrganization}>
             Добавить организацию
           </Button>
         </OrganizationsButtonWrapper>
