@@ -22,7 +22,6 @@ export const Example = () => {
       imagesMap={{
         defaultErrorImgSrc: errorIllustration,
         noDataImgSrc: errorIllustration,
-        updateErrorImgSrc: errorIllustration,
       }}
       techSup={{ email: 'test@example.com', phone: '79999999999' }}
     >
