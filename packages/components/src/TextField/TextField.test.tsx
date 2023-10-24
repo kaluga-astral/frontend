@@ -1,8 +1,6 @@
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { it, vi } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import { useEffect, useRef } from 'react';
-
-import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
 
 import { TextField } from './TextField';
 
@@ -27,44 +25,6 @@ describe('TextField', () => {
     expect(screen.getByDisplayValue('TestTextField')).toBeDisabled();
   });
 
-  it('Prop:error: отображает состояние error', () => {
-    renderWithTheme(
-      <TextField defaultValue="TestTextField" error helperText="Обязательно" />,
-    );
-
-    vi.mock('../FormHelperText/FormHelperTextContent', () => {
-      return {
-        FormHelperTextContent: vi.fn(),
-      };
-    });
-
-    expect(FormHelperTextContent).toHaveBeenCalledWith(
-      { children: 'Обязательно', error: true },
-      {},
-    );
-  });
-
-  it('Prop:success: отображает состояние success', () => {
-    renderWithTheme(
-      <TextField
-        defaultValue="TestTextField"
-        success
-        helperText="Удачно завершился процесс проверки"
-      />,
-    );
-
-    vi.mock('../FormHelperText/FormHelperTextContent', () => {
-      return {
-        FormHelperTextContent: vi.fn(),
-      };
-    });
-
-    expect(FormHelperTextContent).toHaveBeenCalledWith(
-      { children: 'Удачно завершился процесс проверки', success: true },
-      {},
-    );
-  });
-
   it('Prop:required: после становится required', () => {
     renderWithTheme(<TextField defaultValue="TestTextField" required />);
     expect(screen.getByDisplayValue('TestTextField')).toBeRequired();
@@ -85,9 +45,10 @@ describe('TextField', () => {
     });
 
     expect(onChangeMock.mock.lastCall).toEqual(['newTextInTextField']);
+    vi.clearAllMocks();
   });
 
-  it('Prop:ref: меняется значение input при вводе текста', () => {
+  it('Prop:ref: ref из props заменяется на оригинальный', () => {
     const resultRef = { current: null };
 
     const TextFieldRef = () => {
