@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
+import errorIllustration from '../../../ui/illustrations/error.svg';
 import { Button } from '../Button';
 import { ConfigProvider } from '../ConfigProvider';
 
@@ -28,7 +29,14 @@ function BuggyButton() {
 
 const Template: Story = () => {
   return (
-    <ConfigProvider captureException={(error) => alert(error)}>
+    <ConfigProvider
+      captureException={(error) => alert(error)}
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: errorIllustration,
+      }}
+      techSup={{ email: 'test@example.com', phone: '79999999999' }}
+    >
       <ErrorBoundary>
         <BuggyButton />
       </ErrorBoundary>
