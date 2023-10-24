@@ -8,6 +8,11 @@ const imagesMapDefault = {
   defaultErrorImgSrc: '',
 };
 
+const techSupDefault = {
+  phone: '',
+  email: '',
+};
+
 type Language = 'ru';
 type ImagesMap = {
   /**
@@ -18,6 +23,11 @@ type ImagesMap = {
    * @description изображение при ошибке (используется в ContentState)
    */
   defaultErrorImgSrc: string;
+};
+
+type TechnicalSupport = {
+  phone: string;
+  email: string;
 };
 
 export type ConfigContextProps = {
@@ -47,6 +57,11 @@ export type ConfigContextProps = {
    * @default '-'
    */
   emptySymbol: string;
+  /**
+   * @description Данные технической поддержки
+   * @default '-'
+   */
+  techSup: TechnicalSupport;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -58,6 +73,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   datePickerLanguageMap: russianMap,
   captureException: (error) => console.error(error),
   imagesMap: imagesMapDefault,
+  techSup: techSupDefault,
   emptySymbol: '-',
 });
 
@@ -68,6 +84,7 @@ export const ConfigProvider = ({
   captureException,
   emptySymbol = '-',
   imagesMap = imagesMapDefault,
+  techSup = techSupDefault,
 }: Partial<ConfigProviderProps>) => {
   useEffect(() => {
     if (!captureException) {
@@ -86,6 +103,7 @@ export const ConfigProvider = ({
         captureException: captureException || ((error) => console.error(error)),
         emptySymbol,
         imagesMap,
+        techSup,
       }}
     >
       {children}
