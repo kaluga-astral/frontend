@@ -2,8 +2,6 @@ import { fireEvent, renderWithTheme, screen } from '@astral/tests';
 import { expect, it } from 'vitest';
 import { theme } from '@astral/tests/src/theme';
 
-import { ThemeProvider } from '../ThemeProvider';
-
 import { TextField } from './TextField';
 
 describe('TextField', () => {
@@ -29,13 +27,7 @@ describe('TextField', () => {
 
   it('Prop:error, helperText: отображает helperText и состояние error', () => {
     renderWithTheme(
-      <ThemeProvider theme={theme}>
-        <TextField
-          defaultValue="TestTextField"
-          error
-          helperText="Обязательно"
-        />
-      </ThemeProvider>,
+      <TextField defaultValue="TestTextField" error helperText="Обязательно" />,
     );
 
     expect(screen.getByText('Обязательно'));
@@ -47,13 +39,11 @@ describe('TextField', () => {
 
   it('Prop:success, helperText: отображает helperText и состояние success', () => {
     renderWithTheme(
-      <ThemeProvider theme={theme}>
-        <TextField
-          defaultValue="TestTextField"
-          success
-          helperText="Удачно завершился процесс проверки"
-        />
-      </ThemeProvider>,
+      <TextField
+        defaultValue="TestTextField"
+        success
+        helperText="Удачно завершился процесс проверки"
+      />,
     );
 
     expect(
