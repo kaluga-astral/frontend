@@ -1,5 +1,5 @@
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { expect, it, vi } from 'vitest';
+import { it, vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
