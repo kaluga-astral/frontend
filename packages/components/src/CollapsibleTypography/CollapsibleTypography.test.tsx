@@ -1,4 +1,5 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
+import { vi } from 'vitest';
 
 import {
   CollapsibleTypography,
@@ -7,10 +8,25 @@ import {
 } from './CollapsibleTypography';
 
 const EXAMPLE_SHOW_TEXT = 'Какой-то текст';
+const EXAMPLE_CONTENT = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
+asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
+architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
+suscipit ipsa officia.`;
 const setScrollHeight = (value: number) => {
   Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
     configurable: true,
     value: value,
+  });
+};
+
+const setClientHeight = (value: number) => {
+  Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
+    configurable: true,
+    value: vi.fn(() => {
+      return {
+        height: value,
+      };
+    }),
   });
 };
 
@@ -20,10 +36,7 @@ describe('CollapsibleTypography ', () => {
 
     renderWithTheme(
       <CollapsibleTypography rowsCount={1}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
+        {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
@@ -37,10 +50,7 @@ describe('CollapsibleTypography ', () => {
 
     renderWithTheme(
       <CollapsibleTypography rowsCount={-5}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
+        {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
@@ -54,10 +64,7 @@ describe('CollapsibleTypography ', () => {
 
     renderWithTheme(
       <CollapsibleTypography showButtonText={EXAMPLE_SHOW_TEXT}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
+        {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
@@ -71,10 +78,7 @@ describe('CollapsibleTypography ', () => {
 
     renderWithTheme(
       <CollapsibleTypography hideButtonText={EXAMPLE_SHOW_TEXT}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
+        {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
@@ -89,10 +93,7 @@ describe('CollapsibleTypography ', () => {
 
     renderWithTheme(
       <CollapsibleTypography rowsCount={1}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
+        {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
@@ -102,15 +103,13 @@ describe('CollapsibleTypography ', () => {
     expect(screen.getByText(HIDE_BUTTON_TEXT)).toBeInTheDocument();
   });
 
-  it('если контент не переполнен', () => {
-    setScrollHeight(0);
+  it('Кнопка "показать" скрыта, если контент не переполнен', () => {
+    setScrollHeight(200);
+    setClientHeight(200);
 
     renderWithTheme(
       <CollapsibleTypography>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-        asperiores a, aliquam nam nihil maxime eaque aliquid illo hic
-        architecto, aperiam repellendus quaerat nulla esse debitis repudiandae,
-        suscipit ipsa officia.
       </CollapsibleTypography>,
     );
 
