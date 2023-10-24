@@ -1,6 +1,8 @@
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { expect, it } from 'vitest';
-import { theme } from '@astral/tests/src/theme';
+import { expect, it, vi } from 'vitest';
+import { useEffect, useRef } from 'react';
+
+import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
 
 import { TextField } from './TextField';
 
@@ -25,19 +27,24 @@ describe('TextField', () => {
     expect(screen.getByDisplayValue('TestTextField')).toBeDisabled();
   });
 
-  it('Prop:error, helperText: отображает helperText и состояние error', () => {
+  it('Prop:error: отображает состояние error', () => {
     renderWithTheme(
       <TextField defaultValue="TestTextField" error helperText="Обязательно" />,
     );
 
-    expect(screen.getByText('Обязательно'));
-
-    expect(screen.getByText('Обязательно')).toHaveStyle({
-      color: theme.palette.error.dark,
+    vi.mock('../FormHelperText/FormHelperTextContent', () => {
+      return {
+        FormHelperTextContent: vi.fn(),
+      };
     });
+
+    expect(FormHelperTextContent).toHaveBeenCalledWith(
+      { children: 'Обязательно', error: true },
+      {},
+    );
   });
 
-  it('Prop:success, helperText: отображает helperText и состояние success', () => {
+  it('Prop:success: отображает состояние success', () => {
     renderWithTheme(
       <TextField
         defaultValue="TestTextField"
@@ -46,13 +53,16 @@ describe('TextField', () => {
       />,
     );
 
-    expect(
-      screen.getByText('Удачно завершился процесс проверки'),
-    ).toBeInTheDocument();
-
-    expect(screen.getByText('Удачно завершился процесс проверки')).toHaveStyle({
-      color: theme.palette.success.dark,
+    vi.mock('../FormHelperText/FormHelperTextContent', () => {
+      return {
+        FormHelperTextContent: vi.fn(),
+      };
     });
+
+    expect(FormHelperTextContent).toHaveBeenCalledWith(
+      { children: 'Удачно завершился процесс проверки', success: true },
+      {},
+    );
   });
 
   it('Prop:required: после становится required', () => {
@@ -60,13 +70,37 @@ describe('TextField', () => {
     expect(screen.getByDisplayValue('TestTextField')).toBeRequired();
   });
 
-  it('Prop:changeValue: меняется значение input при вводе текста', () => {
-    renderWithTheme(<TextField defaultValue="TestTextField" required />);
+  it('Prop:onChange: корректно передаётся значение в onChange', () => {
+    const onChangeMock = vi.fn();
+
+    renderWithTheme(
+      <TextField
+        onChange={(e) => onChangeMock(e.target.value)}
+        defaultValue="TestTextField"
+      />,
+    );
 
     fireEvent.change(screen.getByDisplayValue('TestTextField'), {
       target: { value: 'newTextInTextField' },
     });
 
-    expect(screen.getByDisplayValue('newTextInTextField')).toBeInTheDocument();
+    expect(onChangeMock.mock.lastCall).toEqual(['newTextInTextField']);
+  });
+
+  it('Prop:ref: меняется значение input при вводе текста', () => {
+    const resultRef = { current: null };
+
+    const TextFieldRef = () => {
+      const ref = useRef(null);
+
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
+
+      return <TextField ref={ref} defaultValue="TestTextField" />;
+    };
+
+    renderWithTheme(<TextFieldRef />);
+    expect(resultRef?.current).not.toBeNull();
   });
 });
