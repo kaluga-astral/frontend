@@ -190,7 +190,7 @@ type ImagesMap = {
 Breaking changes:
 - Компонент DataGrid теперь не инкапсулирует инлайновую svg для отображения NoData статуса. Для того, чтобы изображение появилось необходимо в ConfigProvider указать prop ```imagesMap.noDataImgSrc```
 - Компонент ContentState больше не требует required prop ```errorState.imgSrc```. Ссылка на изображение берется из ConfigProvider
-- Компонент ErrorBoundary перехватывает ошибку устаревших билдов и корректно её обрабатывает, для того, что отобразилось изображение, необходимо в ConfigProvider указать prop ```images.outdatedReleaseErrorImgSrc``` 
+- Компонент ErrorBoundary перехватывает ошибку устаревших билдов и корректно её обрабатывает, для того, чтобы отобразилось изображение, необходимо в ConfigProvider указать prop ```images.outdatedReleaseErrorImgSrc``` 
 ```tsx
 import noDataImgSrc from '@astral/ui/illustrations/no-data.svg';
 import outdatedReleaseErrorImgSrc from '@astral/ui/illustrations/outdated_release.svg';
