@@ -45,13 +45,17 @@ export type CodeFieldInputProps = TextFieldProps & {
   // disabled?: boolean;
 };
 
-export const CONFIRMATION_CODE_LENGTH_DEFAULT = 6;
+const CONFIRMATION_CODE_LENGTH_DEFAULT = 6;
 
-// const KEYBOARD_KEYS = {
-//   removeDigit: 'Backspace',
-//   moveCaretLeft: 'ArrowLeft',
-//   moveCaretRight: 'ArrowRight',
-// };
+const DIGITS_REGEX = /[^0-9]/g;
+
+const KEYBOARD_KEYS = {
+  backspace: 'Backspace',
+  moveCaretLeft: 'ArrowLeft',
+  moveCaretRight: 'ArrowRight',
+};
+
+type NumbersInputType = ('' | number)[];
 
 export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
   ({
@@ -61,6 +65,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     codeLength = CONFIRMATION_CODE_LENGTH_DEFAULT,
     ...props
   }) => {
+    const lastIndexOfCode = codeLength - 1;
     // const [digitsState, setDigitsState] = useState({
     //   currentIndex: 0,
     //   prevIndex: 0,
@@ -107,47 +112,6 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     //   }
     // };
 
-    // const getKeyDownHandler = (index) => (event) => {
-    //   switch (event.key) {
-    //     case KEYBOARD_KEYS.removeDigit: {
-    //       let newValue = '';
-    //
-    //       if (event.target.value.trim()) {
-    //         newValue = value.slice(0, index) + ' ' + value.slice(index + 1);
-    //       } else {
-    //         newValue = index
-    //           ? value.slice(0, index - 1) + ' ' + value.slice(index + 1)
-    //           : value.slice(index + 1);
-    //
-    //         setDigitsState({
-    //           prevIndex: index,
-    //           currentIndex: index - 1,
-    //         });
-    //       }
-    //
-    //       onChange(newValue.padEnd(CONFIRMATION_CODE_LENGTH, ' '));
-    //
-    //       break;
-    //     }
-    //     case KEYBOARD_KEYS.moveCaretLeft: {
-    //       setDigitsState({
-    //         prevIndex: index,
-    //         currentIndex: index - 1,
-    //       });
-    //
-    //       break;
-    //     }
-    //     case KEYBOARD_KEYS.moveCaretRight: {
-    //       setDigitsState({
-    //         prevIndex: index,
-    //         currentIndex: index + 1,
-    //       });
-    //
-    //       break;
-    //     }
-    //   }
-    // };
-
     //timer
     // const [counter, setCounter] = useState(-1);
     //
@@ -182,7 +146,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     //   };
     // }, [shouldStopTimer]);
 
-    const [arrayValue, setArrayValue] = useState<(string | number)[]>(
+    const [arrayValue, setArrayValue] = useState<NumbersInputType>(
       Array.from({ length: codeLength }),
     );
     const [currentFocusedIndex, setCurrentFocusedIndex] = useState(0);
@@ -190,153 +154,148 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
     const onChange = (e: BaseSyntheticEvent, index: number) => {
-      console.log(e.target.value);
+      const newValue = e.target.value.replace(DIGITS_REGEX, '');
 
-      setArrayValue((preValue: (string | number)[]) => {
-        const newArray = [...preValue];
+      e.target.value = newValue;
 
-        if (parseInt(e.target.value)) {
-          newArray[index] = parseInt(e.target.value);
-        } else {
-          newArray[index] = e.target.value;
+      setArrayValue((preValue: NumbersInputType) => {
+        const newArrayValue = [...preValue];
+
+        if (parseInt(newValue) || newValue === '0') {
+          newArrayValue[index] = newValue;
         }
 
-        return newArray;
+        return newArrayValue;
       });
+    };
+
+    const setFocusIndex = (index: number) => {
+      setCurrentFocusedIndex(index);
+      inputRefs.current[index].focus();
+    };
+
+    const setFocusIndexNext = (index: number) => {
+      if (index === lastIndexOfCode) {
+        return;
+      } else {
+        setFocusIndex(index + 1);
+      }
+    };
+
+    const setFocusIndexPrevious = (index: number) => {
+      if (index === 0) {
+        return;
+      } else {
+        setFocusIndex(index - 1);
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+      if (e.key === KEYBOARD_KEYS.moveCaretLeft) {
+        setFocusIndexPrevious(index);
+      } else if (e.key === KEYBOARD_KEYS.moveCaretRight) {
+        setFocusIndexNext(index);
+      } else if (e.key === KEYBOARD_KEYS.backspace) {
+        e.preventDefault();
+
+        let newArrayValue = [...arrayValue];
+
+        if (arrayValue[index]) {
+          newArrayValue[index] = '';
+          setArrayValue(newArrayValue);
+        } else if (arrayValue[index - 1]) {
+          newArrayValue[index - 1] = '';
+          setArrayValue(newArrayValue);
+          setFocusIndexPrevious(index);
+        }
+      }
     };
 
     const onKeyUp = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
-      if (e.key === 'Backspace') {
-        if (index === 0) {
-          setCurrentFocusedIndex(0);
-        } else {
-          setCurrentFocusedIndex(index - 1);
-
-          if (inputRefs && inputRefs.current && index === currentFocusedIndex) {
-            inputRefs.current[index - 1].focus();
-          }
-        }
-      } else {
-        if (
-          (parseInt(e.key) || parseInt(e.key) === 0) &&
-          index <= arrayValue.length - 2
-        ) {
-          setCurrentFocusedIndex(index + 1);
-
-          if (inputRefs && inputRefs.current && index === currentFocusedIndex) {
-            inputRefs.current[index + 1].focus();
-          }
-        }
-      }
-    };
-
-    //todo мне не нравится что идет привязка к keyCode
-    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       const keyCode = parseInt(e.key);
 
-      console.log(e.key, e.metaKey, e);
-
-      if (
-        !(keyCode >= 0 && keyCode <= 9) &&
-        e.key !== 'Backspace' &&
-        !(e.metaKey && e.key === 'v')
-      ) {
-        console.log(88787878);
-        e.preventDefault();
+      if (e.key === KEYBOARD_KEYS.backspace) {
+        setFocusIndexPrevious(index);
+      } else if (keyCode >= 0 && keyCode <= 9) {
+        setFocusIndexNext(index);
       }
     };
 
-    const onFocus = (e: BaseSyntheticEvent, index: number) => {
+    const onFocus = (e: FocusEvent, index: number) => {
+      e.target?.select(e);
       setCurrentFocusedIndex(index);
     };
 
-    useEffect(() => {
-      document.addEventListener('paste', async () => {
-        // const pastePermission = await navigator.permissions.query({
-        //   name: 'clipboard-read' as PermissionName,
-        // });
-        //
-        // if (pastePermission.state === 'denied') {
-        //   console.log(111);
-        //   throw new Error('Not allowed to read clipboard');
-        // }
+    // todo поделить на отдельные функции
+    const onPaste = (event: ClipboardEvent) => {
+      event.preventDefault();
 
-        const clipboardContent = await navigator.clipboard.readText();
+      let pasteText: string = event.clipboardData?.getData('text') || '';
 
-        try {
-          let newArray: Array<number | string> = clipboardContent.split('');
+      // оставляем только цифры + отсекаем лишние символы (кол-во)
+      const cleanedValue = pasteText
+        .replace(DIGITS_REGEX, '')
+        .slice(0, codeLength)
+        .split('');
 
-          newArray = newArray.map((num) => Number(num));
+      try {
+        const newArrayValue = cleanedValue.map((num) => Number(num));
 
-          const lastIndex = arrayValue.length - 1;
+        if (currentFocusedIndex > 0) {
+          const remainingPlaces = lastIndexOfCode - currentFocusedIndex; //осталось мест 6-3=3
+          const partialArray = newArrayValue.slice(0, remainingPlaces + 1);
 
-          if (currentFocusedIndex > 0) {
-            const remainingPlaces = lastIndex - currentFocusedIndex;
-            const partialArray = newArray.slice(0, remainingPlaces + 1);
-
-            setArrayValue([
-              ...arrayValue.slice(0, currentFocusedIndex),
-              ...partialArray,
-            ]);
-          } else {
-            setArrayValue([
-              ...newArray,
-              ...arrayValue.slice(newArray.length - 1, lastIndex),
-            ]);
-          }
-
-          if (
-            newArray.length < arrayValue.length &&
-            currentFocusedIndex === 0
-          ) {
-            setCurrentFocusedIndex(newArray.length - 1);
-            inputRefs.current[newArray.length - 1].focus();
-          } else {
-            setCurrentFocusedIndex(arrayValue.length - 1);
-            inputRefs.current[arrayValue.length - 1].focus();
-          }
-        } catch (err) {
-          console.error(err);
+          setArrayValue([
+            ...arrayValue.slice(0, currentFocusedIndex),
+            ...partialArray,
+          ]);
+        } else {
+          setArrayValue([
+            ...newArrayValue,
+            ...arrayValue.slice(newArrayValue.length - 1, lastIndexOfCode),
+          ]);
         }
-      });
+
+        if (
+          newArrayValue.length < arrayValue.length &&
+          currentFocusedIndex === 0
+        ) {
+          setFocusIndex(newArrayValue.length - 1);
+        } else {
+          setFocusIndex(arrayValue.length - 1);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    useEffect(() => {
+      document.addEventListener('paste', onPaste);
 
       return () => {
-        document.removeEventListener('paste', () =>
-          console.log('Removed paste listner'),
-        );
+        document.removeEventListener('paste', onPaste);
       };
-    }, [arrayValue, currentFocusedIndex]);
+    }, []);
 
     return (
       <CodeFieldWrapper>
         {label && <Typography>{label}</Typography>}
-        <div>
-          {console.log('value', arrayValue)}
-          currentFocusedIndex: {currentFocusedIndex}, value: {arrayValue}
-        </div>
         <CodeFieldDigitsWrapper>
           {arrayValue.map((value: string | number, index: number) => (
             <Digit
-              // autofocus
               key={index}
               disabled={disabled}
               // hasError={!!error}
-              // onChange={onChange(index)}
-              // onClick={getClickHandler(index)}
-              // onKeyDown={getKeyDownHandler(index)}
-              // ref={(ref) => {
-              //   inputsRef.current[index] = ref;
-              // }}
-              type="text"
-              // value={value?.[index] || ''}
+              type="tel"
               maxLength={1}
               inputMode="numeric"
-              // pattern="\d{1}"
-              value={value}
+              pattern="[0-9]"
+              // autofocus
+              value={value || ''}
               ref={(el) => el && (inputRefs.current[index] = el)}
               onChange={(e) => onChange(e, index)}
               onKeyUp={(e) => onKeyUp(e, index)}
-              onKeyDown={(e) => onKeyDown(e)}
+              onKeyDown={(e) => onKeyDown(e, index)}
               onFocus={(e) => onFocus(e, index)}
             />
           ))}
