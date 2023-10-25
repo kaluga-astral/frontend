@@ -1,3 +1,5 @@
+import { typographyClasses } from '@mui/material';
+
 import { Grid } from '../Grid';
 import { styled } from '../styles/styled';
 
@@ -6,7 +8,7 @@ export const OrganizationsButtonWrapper = styled.div`
 `;
 
 export const OrganizationGroupTitle = styled.div`
-  > li.MuiTypography-root {
+  > li.${typographyClasses.root} {
     position: sticky;
     top: 0;
     z-index: 1;
