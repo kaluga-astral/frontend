@@ -64,4 +64,34 @@ describe('TextField', () => {
     renderWithTheme(<TextFieldRef />);
     expect(resultRef?.current).not.toBeNull();
   });
+
+  it('Prop:error: отображает состояние error', () => {
+    renderWithTheme(
+      <TextField defaultValue="TestTextField" error helperText="Обязательно" />,
+    );
+
+    expect(
+      screen.getByLabelText('FormHelperTextContentErrorIcon'),
+    ).toBeInTheDocument();
+
+    expect(screen.getByText('Обязательно')).toBeInTheDocument();
+  });
+
+  it('Prop:success: отображает состояние success', () => {
+    renderWithTheme(
+      <TextField
+        defaultValue="TestTextField"
+        success
+        helperText="Удачно завершился процесс проверки"
+      />,
+    );
+
+    expect(
+      screen.getByLabelText('FormHelperTextContentSuccessIcon'),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText('Удачно завершился процесс проверки'),
+    ).toBeInTheDocument();
+  });
 });
