@@ -11,6 +11,8 @@ export const OrganizationGroupTitle = styled.div`
     top: 0;
     z-index: 1;
 
+    padding: ${({ theme }) => theme.spacing(2)};
+
     background: ${({ theme }) => theme.palette.background.paper};
   }
 `;

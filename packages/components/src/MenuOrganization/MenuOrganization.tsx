@@ -88,7 +88,11 @@ export const MenuOrganization = ({
         </OrganizationsWrapper>
         <Divider />
         <OrganizationsButtonWrapper>
-          <Button startIcon={<AddOutlineMd />} onClick={onAddOrganization}>
+          <Button
+            startIcon={<AddOutlineMd />}
+            onClick={onAddOrganization}
+            fullWidth
+          >
             Добавить организацию
           </Button>
         </OrganizationsButtonWrapper>
