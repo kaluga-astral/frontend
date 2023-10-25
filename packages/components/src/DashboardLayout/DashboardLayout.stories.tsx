@@ -14,6 +14,10 @@ import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
+import {
+  CURRENT_ORGANIZATION,
+  ORGANIZATIONS,
+} from '../MenuOrganization/MenuOrganization.stories';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 
@@ -63,6 +67,12 @@ EDO.args = {
           <ProductSwitcher getProducts={handleGetProducts} />
         </Box>
       );
+    },
+    menuOrganization: {
+      currentOrganization: CURRENT_ORGANIZATION,
+      organizations: ORGANIZATIONS,
+      onAddOrganization: () => {},
+      onSelect: () => {},
     },
     product: {
       name: 'Астрал.ЭДО',

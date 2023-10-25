@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { MenuOrganization, MenuOrganizationProps } from './MenuOrganization';
 import { Organization } from './types';
 
-const CURRENT_ORGANIZATION = {
+export const CURRENT_ORGANIZATION = {
   name: 'АО Калуга-Астрал',
   inn: '1231312312',
   kpp: '1231231231',
   id: '2',
 };
 
-const ORGANIZATIONS = [
+export const ORGANIZATIONS = [
   {
     group: 'Подключенные',
     data: [
