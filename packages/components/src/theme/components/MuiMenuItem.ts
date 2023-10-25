@@ -6,7 +6,7 @@ export const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   styleOverrides: {
     root({ theme }: { theme: Theme }) {
       return {
-        padding: theme.spacing(2),
+        padding: theme.spacing(2, 2, 2, 3),
         '&:hover': {
           backgroundColor: theme.palette.background.elementHover,
         },
