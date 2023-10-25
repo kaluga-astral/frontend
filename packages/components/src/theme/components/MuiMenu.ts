@@ -19,7 +19,7 @@ export const MuiMenu: Components<Theme>['MuiMenu'] = {
     list({ theme }: { theme: Theme }) {
       return {
         [`&&.${listClasses.root}`]: {
-          padding: listClasses,
+          padding: 0,
         },
         [`&&.${listClasses.padding}`]: {
           padding: theme.spacing(1, 0),
