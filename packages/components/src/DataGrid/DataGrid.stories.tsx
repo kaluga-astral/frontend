@@ -25,18 +25,51 @@ const meta: Meta<typeof DataGrid> = {
 
 export default meta;
 
+type DataType = {
+  id: string;
+  documentName: string;
+  direction: string;
+  createDate: string;
+};
+type SortField = 'documentName' | 'direction' | 'createDate';
+
+const generateRandomDate = () => {
+  const start = new Date(2022, 0, 1);
+  const end = new Date();
+  const randomTimestamp =
+    start.getTime() + Math.random() * (end.getTime() - start.getTime());
+  const randomDate = new Date(randomTimestamp);
+
+  return randomDate.toISOString();
+};
+
+const generateData = (dataObjTemplate: DataType): DataType[] => {
+  const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
+  const DATA_ARRAY_LENGTH = 16;
+
+  return Array(DATA_ARRAY_LENGTH)
+    .fill(dataObjTemplate)
+    .map((_, i) => ({
+      id: String(i + 1),
+      documentName: `Документ ${i + 1}`,
+      direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
+      createDate: generateRandomDate(),
+    }));
+};
+
 /**
  * DataGrid без пагинации
  */
+
 export const Example = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -86,105 +119,6 @@ export const Example = () => {
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS} row={row} />;
       },
-    },
-  ];
-
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
     },
   ];
 
@@ -215,14 +149,14 @@ export const Example = () => {
  * Постраничное отображение данных в таблице. Внизу таблицы есть область, в которой слева отображается счетчик данных на странице из общего количества данных, справа - кнопки с нумерацией страниц таблицы для переключения между ними.
  */
 export const WithPagination = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -272,105 +206,6 @@ export const WithPagination = () => {
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS} row={row} />;
       },
-    },
-  ];
-
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
     },
   ];
 
@@ -422,14 +257,14 @@ export const WithPagination = () => {
  * DataGrid с сортировкой
  */
 export const WithSorting = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -479,105 +314,6 @@ export const WithSorting = () => {
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS} row={row} />;
       },
-    },
-  ];
-
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
     },
   ];
 
@@ -672,14 +408,14 @@ export const WithSorting = () => {
  * Prop ```activeRowId``` позволяет отобразить активный ряд в таблице в зависимости от значения prop ```keyId```
  */
 export const WithActiveRow = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -732,105 +468,6 @@ export const WithActiveRow = () => {
     },
   ];
 
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-  ];
-
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
 
@@ -859,16 +496,7 @@ export const WithActiveRow = () => {
  * В случае, когда нет данных для отображения их в таблице, необходимо показать изображение и текст “Нет данных” и убрать сортировку для столбцов, если она присутствует. Изображение можно передать через ConfigProvider.
  */
 export const NoData = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
-  };
-
   const noDataStubSrc = '/no-data-stub.svg';
-
-  type SortField = 'documentName' | 'direction' | 'createDate';
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -953,14 +581,14 @@ export const NoData = () => {
  * В таблице может добавляться возможность выбора отдельных строк или всего списка значений посредством использования компонента checkbox. В страничном варинте таблицы при выборе checkbox в datagrid_header выбираются все значения на странице
  */
 export const WithCheckbox = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -1010,105 +638,6 @@ export const WithCheckbox = () => {
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS} row={row} />;
       },
-    },
-  ];
-
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
     },
   ];
 
@@ -1165,14 +694,14 @@ export const WithCheckbox = () => {
  * Prop ```disabled``` позволяет заблокировать контент
  */
 export const WithDisabledContent = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -1225,105 +754,6 @@ export const WithDisabledContent = () => {
     },
   ];
 
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-  ];
-
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -1352,113 +782,14 @@ export const WithDisabledContent = () => {
  * Состояние загрузки регулируется полем ```loading``` экшенов переданных в ```<ActionCell/>```
  */
 export const WithLoaderInButton = () => {
-  type DataType = {
-    id: string;
-    documentName: string;
-    direction: string;
-    createDate: string;
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
   };
 
-  type SortField = 'documentName' | 'direction' | 'createDate';
-
-  const data: DataType[] = [
-    {
-      id: '1',
-      documentName: 'Документ 1',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '2',
-      documentName: 'Документ 2',
-      direction: 'ФСС',
-      createDate: '2022-03-25T17:50:40.206Z',
-    },
-    {
-      id: '3',
-      documentName: 'Документ 3',
-      direction: 'ПФР',
-      createDate: '2022-03-27T17:50:40.206Z',
-    },
-    {
-      id: '4',
-      documentName: 'Документ 4',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '5',
-      documentName: 'Документ 5',
-      direction: 'ФНС',
-      createDate: '2022-03-29T17:50:40.206Z',
-    },
-    {
-      id: '6',
-      documentName: 'Документ 6',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '7',
-      documentName: 'Документ 7',
-      direction: 'ПФР',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '8',
-      documentName: 'Документ 8',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '9',
-      documentName: 'Документ 9',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '10',
-      documentName: 'Документ 10',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '11',
-      documentName: 'Документ 11',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '12',
-      documentName: 'Документ 12',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '13',
-      documentName: 'Документ 13',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '14',
-      documentName: 'Документ 14',
-      direction: 'ФСС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '15',
-      documentName: 'Документ 15',
-      direction: 'ФНС',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-    {
-      id: '16',
-      documentName: 'Документ 16',
-      direction: 'РПН',
-      createDate: '2022-03-24T17:50:40.206Z',
-    },
-  ];
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
   const ACTIONS_WITH_LOADER: Actions<DataType> = {
     main: [
