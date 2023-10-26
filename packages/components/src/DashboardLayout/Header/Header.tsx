@@ -14,7 +14,7 @@ export type HeaderProps = {
   product: ProductProps;
   productSwitcher?: (props: PropsWithChildren<{}>) => JSX.Element;
   profile?: ProfileProps;
-  organizationMenu?: MenuOrganizationProps | null;
+  organizationMenu?: MenuOrganizationProps;
 };
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {

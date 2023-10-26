@@ -2,10 +2,7 @@ import { renderWithTheme, screen } from '@astral/tests';
 import { expect } from 'vitest';
 
 import { MenuOrganization } from './MenuOrganization';
-import {
-  CURRENT_ORGANIZATION,
-  ORGANIZATIONS,
-} from './MenuOrganization.stories';
+import { CURRENT_ORGANIZATION, ORGANIZATIONS } from './MenuOrganizations.stubs';
 
 describe('MenuOrganization', () => {
   it('Prop:currentOrganization=null: отображается кнопка "Добавить организацию"', () => {

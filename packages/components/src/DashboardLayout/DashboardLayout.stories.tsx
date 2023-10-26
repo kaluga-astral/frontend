@@ -17,7 +17,7 @@ import { Divider } from '../Divider';
 import {
   CURRENT_ORGANIZATION,
   ORGANIZATIONS,
-} from '../MenuOrganization/MenuOrganization.stories';
+} from '../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 
