@@ -47,7 +47,7 @@ const generateData = (dataObjTemplate: DataType): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
   const DATA_ARRAY_LENGTH = 16;
 
-  return Array(DATA_ARRAY_LENGTH)
+  return Array.from({ length: DATA_ARRAY_LENGTH })
     .fill(dataObjTemplate)
     .map((_, i) => ({
       id: String(i + 1),
