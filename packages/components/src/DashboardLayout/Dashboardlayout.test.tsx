@@ -19,7 +19,7 @@ describe('DashboardLayout', () => {
     renderWithTheme(
       <DashboardLayout>
         <DashboardLayout.Header
-          menuOrganization={undefined}
+          organizationMenu={undefined}
           productSwitcher={undefined}
           product={PRODUCT}
           profile={PROFILE}
@@ -35,7 +35,7 @@ describe('DashboardLayout', () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={undefined}
-          menuOrganization={{} as MenuOrganizationProps}
+          organizationMenu={{} as MenuOrganizationProps}
           product={PRODUCT}
           profile={PROFILE}
         />

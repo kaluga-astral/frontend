@@ -8,13 +8,13 @@ import { Product, ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { ProfileProps } from '../../Profile';
 
-import { HeaderNav, HeaderRoot, HeaderSection } from './styles';
+import { HeaderRoot, HeaderSection } from './styles';
 
 export type HeaderProps = {
   product: ProductProps;
   productSwitcher?: (props: PropsWithChildren<{}>) => JSX.Element;
   profile?: ProfileProps;
-  menuOrganization?: MenuOrganizationProps | null;
+  organizationMenu?: MenuOrganizationProps | null;
 };
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
@@ -22,21 +22,19 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     productSwitcher: ProductSwitcher,
     product,
     profile,
-    menuOrganization,
+    organizationMenu,
   } = props;
 
   return (
     <HeaderRoot ref={ref}>
-      <HeaderNav>
-        <HeaderSection spacing={2} container>
-          {ProductSwitcher && <ProductSwitcher />}
-          <Product {...product} />
-        </HeaderSection>
-        <HeaderSection spacing={2} container>
-          {menuOrganization && <MenuOrganization {...menuOrganization} />}
-          {profile && <Profile {...profile} />}
-        </HeaderSection>
-      </HeaderNav>
+      <HeaderSection>
+        {ProductSwitcher && <ProductSwitcher />}
+        <Product {...product} />
+      </HeaderSection>
+      <HeaderSection>
+        {organizationMenu && <MenuOrganization {...organizationMenu} />}
+        {profile && <Profile {...profile} />}
+      </HeaderSection>
     </HeaderRoot>
   );
 });

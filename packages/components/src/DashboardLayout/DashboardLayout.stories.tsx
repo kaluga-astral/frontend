@@ -68,7 +68,7 @@ EDO.args = {
         </Box>
       );
     },
-    menuOrganization: {
+    organizationMenu: {
       currentOrganization: CURRENT_ORGANIZATION,
       organizations: ORGANIZATIONS,
       onAddOrganization: () => {},

@@ -1,5 +1,4 @@
 import { styled } from '../../styles';
-import { Grid } from '../../Grid';
 
 export const HeaderRoot = styled.header`
   z-index: ${({ theme }) => theme.zIndex.appBar};
@@ -14,13 +13,7 @@ export const HeaderRoot = styled.header`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const HeaderNav = styled.div`
+export const HeaderSection = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const HeaderSection = styled(Grid)`
-  grid-auto-flow: column;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
