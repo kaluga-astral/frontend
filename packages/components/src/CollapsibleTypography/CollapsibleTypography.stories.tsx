@@ -5,6 +5,7 @@ import { CollapsibleTypography } from './CollapsibleTypography';
 /**
  * ### [Figma]()
  * ### [Guide]()
+ * Компонент даёт возможность скрывать часть текста по строкам, и показывать их при нажатии на кнопку
  */
 
 const meta: Meta<typeof CollapsibleTypography> = {
@@ -16,21 +17,23 @@ export default meta;
 
 type Story = StoryObj<typeof CollapsibleTypography>;
 
+const EXAMPLE_TEXT = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
+fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
+eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
+amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
+quidem et sed dolor veritatis animi tempora neque eveniet at natus,
+praesentium nisi, culpa hic iure.
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
+fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
+eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
+amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
+quidem et sed dolor veritatis animi tempora neque eveniet at natus,
+praesentium nisi, culpa hic iure.`;
+
 export const Interaction: Story = {
   args: {
     rowsCount: 1,
-    children: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
-    fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
-    eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
-    amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
-    quidem et sed dolor veritatis animi tempora neque eveniet at natus,
-    praesentium nisi, culpa hic iure.
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
-    fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
-    eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
-    amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
-    quidem et sed dolor veritatis animi tempora neque eveniet at natus,
-    praesentium nisi, culpa hic iure.`,
+    children: EXAMPLE_TEXT,
   },
   parameters: {
     docs: {
@@ -41,29 +44,33 @@ export const Interaction: Story = {
 
 export const Example = () => (
   <>
-    <CollapsibleTypography rowsCount={1}>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
-      fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
-      eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
-      amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
-      quidem et sed dolor veritatis animi tempora neque eveniet at natus,
-      praesentium nisi, culpa hic iure.
+    <CollapsibleTypography>{EXAMPLE_TEXT}</CollapsibleTypography>
+    <CollapsibleTypography rowsCount={2}>{EXAMPLE_TEXT}</CollapsibleTypography>
+    <CollapsibleTypography rowsCount={7}>{EXAMPLE_TEXT}</CollapsibleTypography>
+  </>
+);
+
+export const Colors = () => (
+  <>
+    <CollapsibleTypography color="success">
+      {EXAMPLE_TEXT}
     </CollapsibleTypography>
-    <CollapsibleTypography rowsCount={2}>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
-      fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
-      eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
-      amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
-      quidem et sed dolor veritatis animi tempora neque eveniet at natus,
-      praesentium nisi, culpa hic iure.
+    <CollapsibleTypography color="warning">
+      {EXAMPLE_TEXT}
     </CollapsibleTypography>
-    <CollapsibleTypography rowsCount={5}>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto doloremque
-      fuga tenetur ex vel quidem et sed dolor veritatis animi tempora neque
-      eveniet at natus, praesentium nisi, culpa hic iure. Lorem ipsum dolor sit,
-      amet consectetur adipisicing elit. Iusto doloremque fuga tenetur ex vel
-      quidem et sed dolor veritatis animi tempora neque eveniet at natus,
-      praesentium nisi, culpa hic iure.
+  </>
+);
+
+export const ButtonsText = () => (
+  <>
+    <CollapsibleTypography textShowButton="Открыть" textHideButton="Закрыть">
+      {EXAMPLE_TEXT}
+    </CollapsibleTypography>
+    <CollapsibleTypography
+      textShowButton="Показать скрытый текст"
+      textHideButton="Свернуть"
+    >
+      {EXAMPLE_TEXT}
     </CollapsibleTypography>
   </>
 );

@@ -1,21 +1,22 @@
-import { Ref, RefObject, useEffect, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  Ref,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 type UseCollabsibleResult = {
   ref: RefObject<HTMLElement>;
   isCollapsable: boolean;
   isOpenCollapse: boolean;
-  currentHeight: string;
+  currentHeight: CSSProperties['height'];
   toggleCollapse: () => void;
 };
 
 /**
- * @description Хук используется для подсчета scrollHeight и сlientHeigh.
- * Компоненту  в пропсах задается rowsCount, который попадает  в стили и устанавливает значение -webkit-line-clamp = rowsCount;
- * Затем мы сравниевам scrollHeight и сlientHeigh,
- * если scrollHeight > , то значение isCollapsable = true.
- * Это значит что компонент переполнен и нужно отобразить кнопку управления состоянием (показать/скрыть) isOpenCollapse.
- * Когда isOpenCollapse = true значение -webkit-line-clamp = "none";
- * Компоненту устанавливается высота равная его scrollHeight
- * сlientHeigh сохраняется как initialHeight и при закрытии устанавливается компоненту для плавной анимации раскрытия/скрытия
+ * @description Хук используется для управления логикой открытия/скрытия
+ *
  */
 export const useCollabsible = (
   forwardedRef?: Ref<HTMLElement>,
@@ -26,8 +27,10 @@ export const useCollabsible = (
       ? forwardedRef
       : localRef;
   const [isCollapsable, setIsCollapsable] = useState(true);
-  const [initialHeight, setInitialHeight] = useState('');
-  const [currentHeight, setCurrentHeight] = useState('auto');
+  const [initialHeight, setInitialHeight] =
+    useState<CSSProperties['height']>('0');
+  const [currentHeight, setCurrentHeight] =
+    useState<CSSProperties['height']>('auto');
 
   const [isOpenCollapse, setIsOpenCollapse] = useState(false);
 
@@ -37,7 +40,7 @@ export const useCollabsible = (
       const clientH = node.getBoundingClientRect().height;
       const scrollH = node.scrollHeight;
 
-      setInitialHeight(clientH + 'px');
+      setInitialHeight(`${clientH}px`);
 
       if (scrollH > clientH) {
         return setIsCollapsable(true);
@@ -54,7 +57,7 @@ export const useCollabsible = (
       const scrollH = node.scrollHeight;
 
       if (isOpenCollapse) {
-        return setCurrentHeight(scrollH + 'px');
+        return setCurrentHeight(`${scrollH}px`);
       }
 
       setCurrentHeight(initialHeight);

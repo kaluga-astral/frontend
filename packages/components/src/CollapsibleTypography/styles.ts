@@ -1,10 +1,12 @@
+import { CSSProperties } from 'react';
+
 import { Typography } from '../Typography';
 import { styled } from '../styles';
 
 type CollapsibleTypographyWrapperProps = {
   rowsCount: number;
   isOpenCollapse: boolean;
-  currentHeight: string;
+  currentHeight: CSSProperties['height'];
 };
 
 const collapsibleTypographyWrapperProps = [
@@ -13,7 +15,7 @@ const collapsibleTypographyWrapperProps = [
   'currentHeight',
 ];
 
-export const CollapsibleWrapper = styled.div`
+export const CollapsibleWrapper = styled.article`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

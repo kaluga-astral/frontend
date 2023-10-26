@@ -3,8 +3,8 @@ import { vi } from 'vitest';
 
 import {
   CollapsibleTypography,
-  HIDE_BUTTON_TEXT,
-  SHOW_BUTTON_TEXT,
+  TEXT_HIDE_BUTTON,
+  TEXT_SHOW_BUTTON,
 } from './CollapsibleTypography';
 
 const EXAMPLE_SHOW_TEXT = 'Какой-то текст';
@@ -45,7 +45,7 @@ describe('CollapsibleTypography ', () => {
     expect(controlButton).toBeInTheDocument();
   });
 
-  it('Prop: rowsCount={-5}: При отрицательном значении устанавливается значение по умолчанию', () => {
+  it('Prop: rowsCount: При отрицательном значении устанавливается значение по умолчанию', () => {
     setScrollHeight(200);
 
     renderWithTheme(
@@ -54,16 +54,16 @@ describe('CollapsibleTypography ', () => {
       </CollapsibleTypography>,
     );
 
-    const controlButton = screen.getByText(SHOW_BUTTON_TEXT);
+    const controlButton = screen.getByText(TEXT_SHOW_BUTTON);
 
     expect(controlButton).toBeInTheDocument();
   });
 
-  it('Prop: showButtonText={"Какой-то текст"}: Изменяется текст кнопки открытия', () => {
+  it('Prop: showButtonText: Изменяется текст кнопки открытия', () => {
     setScrollHeight(200);
 
     renderWithTheme(
-      <CollapsibleTypography showButtonText={EXAMPLE_SHOW_TEXT}>
+      <CollapsibleTypography textShowButton={EXAMPLE_SHOW_TEXT}>
         {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
@@ -73,22 +73,22 @@ describe('CollapsibleTypography ', () => {
     expect(controlButton).toBeInTheDocument();
   });
 
-  it('Prop: hideButtonText={"Какой-то текст"}: Изменяется текст кнопки сокрытия', async () => {
+  it('Prop: hideButtonText: Изменяется текст кнопки сокрытия', async () => {
     setScrollHeight(200);
 
     renderWithTheme(
-      <CollapsibleTypography hideButtonText={EXAMPLE_SHOW_TEXT}>
+      <CollapsibleTypography textHideButton={EXAMPLE_SHOW_TEXT}>
         {EXAMPLE_CONTENT}
       </CollapsibleTypography>,
     );
 
-    const showButton = screen.getByText(SHOW_BUTTON_TEXT);
+    const showButton = screen.getByText(TEXT_SHOW_BUTTON);
 
     await userEvents.click(showButton);
     expect(screen.getByText(EXAMPLE_SHOW_TEXT)).toBeInTheDocument();
   });
 
-  it('Click control button: При нажатии на кнопку "Показать" меняется состояние', async () => {
+  it('При нажатии на кнопку "Показать" отображается весь текст', async () => {
     setScrollHeight(200);
 
     renderWithTheme(
@@ -97,10 +97,10 @@ describe('CollapsibleTypography ', () => {
       </CollapsibleTypography>,
     );
 
-    const controlButton = screen.getByText(SHOW_BUTTON_TEXT);
+    const controlButton = screen.getByText(TEXT_SHOW_BUTTON);
 
     await userEvents.click(controlButton);
-    expect(screen.getByText(HIDE_BUTTON_TEXT)).toBeInTheDocument();
+    expect(screen.getByText(TEXT_HIDE_BUTTON)).toBeInTheDocument();
   });
 
   it('Кнопка "показать" скрыта, если контент не переполнен', () => {
