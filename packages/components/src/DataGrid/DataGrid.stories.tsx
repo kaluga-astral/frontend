@@ -31,165 +31,97 @@ type DataType = {
   direction: string;
   createDate: string;
 };
-
-const noDataStubSrc = '/no-data-stub.svg';
-
 type SortField = 'documentName' | 'direction' | 'createDate';
 
-const ACTIONS: Actions<DataType> = {
-  main: [
-    {
-      icon: <EyeFillMd />,
-      name: 'Просмотреть',
-      onClick: () => console.log('main'),
-    },
-    {
-      icon: <SendOutlineMd />,
-      nested: true,
-      name: 'Отправить',
-      actions: [
-        { name: 'Туда', onClick: () => console.log('nested 1') },
-        { name: 'Сюда', onClick: () => console.log('nested 2') },
-      ],
-    },
-  ],
-  secondary: [
-    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
-    { name: 'Удалить', onClick: () => console.log('secondary 2') },
-  ],
+const generateRandomDate = () => {
+  const start = new Date(2022, 0, 1);
+  const end = new Date();
+  const randomTimestamp =
+    start.getTime() + Math.random() * (end.getTime() - start.getTime());
+  const randomDate = new Date(randomTimestamp);
+
+  return randomDate.toISOString();
 };
 
-const columns: DataGridColumns<DataType>[] = [
-  {
-    field: 'documentName',
-    label: 'Наименование документа',
-    sortable: true,
-  },
-  {
-    field: 'direction',
-    label: 'Направление',
-    sortable: true,
-  },
-  {
-    field: 'createDate',
-    label: 'Дата создания',
-    sortable: true,
-    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-  },
-  {
-    label: 'Действия',
-    sortable: false,
-    align: 'center',
-    width: '1%',
-    renderCell: (row) => {
-      return <ActionCell actions={ACTIONS} row={row} />;
-    },
-  },
-];
+const generateData = (dataObjTemplate: DataType): DataType[] => {
+  const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
+  const DATA_ARRAY_LENGTH = 16;
 
-const data: DataType[] = [
-  {
-    id: '1',
-    documentName: 'Документ 1',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '2',
-    documentName: 'Документ 2',
-    direction: 'ФСС',
-    createDate: '2022-03-25T17:50:40.206Z',
-  },
-  {
-    id: '3',
-    documentName: 'Документ 3',
-    direction: 'ПФР',
-    createDate: '2022-03-27T17:50:40.206Z',
-  },
-  {
-    id: '4',
-    documentName: 'Документ 4',
-    direction: 'РПН',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '5',
-    documentName: 'Документ 5',
-    direction: 'ФНС',
-    createDate: '2022-03-29T17:50:40.206Z',
-  },
-  {
-    id: '6',
-    documentName: 'Документ 6',
-    direction: 'РПН',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '7',
-    documentName: 'Документ 7',
-    direction: 'ПФР',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '8',
-    documentName: 'Документ 8',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '9',
-    documentName: 'Документ 9',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '10',
-    documentName: 'Документ 10',
-    direction: 'ФСС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '11',
-    documentName: 'Документ 11',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '12',
-    documentName: 'Документ 12',
-    direction: 'РПН',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '13',
-    documentName: 'Документ 13',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '14',
-    documentName: 'Документ 14',
-    direction: 'ФСС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '15',
-    documentName: 'Документ 15',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-  {
-    id: '16',
-    documentName: 'Документ 16',
-    direction: 'РПН',
-    createDate: '2022-03-24T17:50:40.206Z',
-  },
-];
+  return Array.from({ length: DATA_ARRAY_LENGTH })
+    .fill(dataObjTemplate)
+    .map((_, i) => ({
+      id: String(i + 1),
+      documentName: `Документ ${i + 1}`,
+      direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
+      createDate: generateRandomDate(),
+    }));
+};
 
 /**
  * DataGrid без пагинации
  */
+
 export const Example = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
 
@@ -217,6 +149,66 @@ export const Example = () => {
  * Постраничное отображение данных в таблице. Внизу таблицы есть область, в которой слева отображается счетчик данных на странице из общего количества данных, справа - кнопки с нумерацией страниц таблицы для переключения между ними.
  */
 export const WithPagination = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -265,6 +257,66 @@ export const WithPagination = () => {
  * DataGrid с сортировкой
  */
 export const WithSorting = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [sorting, setSorting] = useState<DataGridSort<SortField>>();
@@ -356,6 +408,66 @@ export const WithSorting = () => {
  * Prop ```activeRowId``` позволяет отобразить активный ряд в таблице в зависимости от значения prop ```keyId```
  */
 export const WithActiveRow = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
 
@@ -384,6 +496,59 @@ export const WithActiveRow = () => {
  * В случае, когда нет данных для отображения их в таблице, необходимо показать изображение и текст “Нет данных” и убрать сортировку для столбцов, если она присутствует. Изображение можно передать через ConfigProvider.
  */
 export const NoData = () => {
+  const noDataStubSrc = '/no-data-stub.svg';
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
 
@@ -416,6 +581,66 @@ export const NoData = () => {
  * В таблице может добавляться возможность выбора отдельных строк или всего списка значений посредством использования компонента checkbox. В страничном варинте таблицы при выборе checkbox в datagrid_header выбираются все значения на странице
  */
 export const WithCheckbox = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [selected, setSelected] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -469,6 +694,66 @@ export const WithCheckbox = () => {
  * Prop ```disabled``` позволяет заблокировать контент
  */
 export const WithDisabledContent = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -497,17 +782,15 @@ export const WithDisabledContent = () => {
  * Состояние загрузки регулируется полем ```loading``` экшенов переданных в ```<ActionCell/>```
  */
 export const WithLoaderInButton = () => {
-  const [slicedData, setSlicedData] = useState<DataType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData(data.slice(0, 5));
-      setLoading(false);
-    }, 1500);
-  }, []);
+  const data = generateData(DATA_OBJECT_TEMPLATE);
 
-  const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const ACTIONS_WITH_LOADER: Actions<DataType> = {
     main: [
       {
@@ -554,6 +837,18 @@ export const WithLoaderInButton = () => {
       },
     },
   ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 5));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   return (
     <DataGrid<DataType, SortField>
