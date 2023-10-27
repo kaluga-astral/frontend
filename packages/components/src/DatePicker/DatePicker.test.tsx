@@ -25,7 +25,7 @@ describe('DatePicker', () => {
     const onChange = vi.fn();
 
     renderWithTheme(<DatePicker onChange={onChange} />);
-    fireEvent.click(screen.getByRole('textbox'));
+    fireEvent.focus(screen.getByRole('textbox'));
 
     const dateBtn = screen.getAllByText('10')[0];
 

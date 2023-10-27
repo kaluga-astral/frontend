@@ -44,7 +44,7 @@ export const DatePickerInput = forwardRef<
   }, [mask]);
 
   return (
-    <div onFocus={onFocus}>
+    <div onFocus={onFocus} tabIndex={-1}>
       <DatePickerInputWrapper
         {...props}
         ref={ref}
