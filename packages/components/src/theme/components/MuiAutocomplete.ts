@@ -1,6 +1,6 @@
 import { Components } from '@mui/material';
 
-import type { Theme } from '../baseTheme';
+import { Theme } from '../types';
 import { AutocompleteSizes } from '../../Autocomplete/enums';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
