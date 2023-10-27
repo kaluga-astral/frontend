@@ -11,7 +11,6 @@ import {
   SettingsFillMd,
 } from '@astral/icons';
 
-import { HeaderNav } from '../DashboardLayout/Header/styles';
 import { ExampleTemplate } from '../docs';
 import { LegacyGrid } from '../LegacyGrid';
 import { MenuItem } from '../MenuItem';
@@ -170,10 +169,11 @@ export const PaperShowcase: Story = () => {
           </Typography>
 
           <PaperHeader>
-            <HeaderNav container autoFlow="column" component="nav">
+            <div>
               <ProductSwitcher getProducts={handleGetProducts} />
               <Product {...header.product} />
-            </HeaderNav>
+            </div>
+
             <Profile {...header.profile} />
           </PaperHeader>
 

@@ -1,9 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import { Button } from '../Button';
 import { ConfigContext } from '../ConfigProvider';
-import { Typography } from '../Typography';
-import { LegacyGrid } from '../LegacyGrid';
+import { InternalErrorPlaceholder } from '../InternalErrorPlaceholder';
 
 type Props = {
   /**
@@ -47,16 +45,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   public render() {
     if (this.state.error) {
-      return (
-        <LegacyGrid alignItems="center" justifyContent="center">
-          <Typography variant="h4" paragraph>
-            Произошла ошибка
-          </Typography>
-          <Button onClick={this.handleReloadPage}>
-            Перезагрузить страницу
-          </Button>
-        </LegacyGrid>
-      );
+      return <InternalErrorPlaceholder />;
     }
 
     return this.props.children;
