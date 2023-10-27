@@ -6,25 +6,19 @@ import { Button } from '../Button';
 import { CollapsibleTypographyWrapper, CollapsibleWrapper } from './styles';
 import { useCollabsible } from './hooks';
 
-export const TEXT_SHOW_BUTTON = 'Показать полностью';
-
-export const TEXT_HIDE_BUTTON = 'Скрыть';
-
-export type CollapsibleProps = {
+type CollapsibleProps = {
   /**
    * @example <CollapsibleTypography rowsCount={2} />
-   * @description опорная единица по которой определяется максимиально отображаемое колличество строк
+   * Максимиально отображаемое колличество строк
    */
   rowsCount?: number;
   /**
-   * @default 'Показать полностью'
-   * @description Текст кнопки для показа сокрытого текста
+   * Текст кнопки для показа сокрытого текста
    *
    */
   textShowButton?: string;
   /**
-   * @default 'Скрыть'
-   * @description текст кнопки скрытия контента
+   * Текст кнопки скрытия контента
    *
    */
   textHideButton?: string;
@@ -45,8 +39,8 @@ export const CollapsibleTypography = forwardRef<
     {
       children,
       rowsCount = 1,
-      textShowButton = TEXT_SHOW_BUTTON,
-      textHideButton = TEXT_HIDE_BUTTON,
+      textShowButton = 'Показать полностью',
+      textHideButton = 'Скрыть',
       ...props
     },
     forwardedRef,

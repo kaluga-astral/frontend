@@ -1,11 +1,11 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { vi } from 'vitest';
 
-import {
-  CollapsibleTypography,
-  TEXT_HIDE_BUTTON,
-  TEXT_SHOW_BUTTON,
-} from './CollapsibleTypography';
+import { CollapsibleTypography } from './CollapsibleTypography';
+
+const TEXT_SHOW_BUTTON = 'Показать полностью';
+
+const TEXT_HIDE_BUTTON = 'Скрыть';
 
 const EXAMPLE_SHOW_TEXT = 'Какой-то текст';
 const EXAMPLE_CONTENT = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum

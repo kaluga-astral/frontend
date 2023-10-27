@@ -15,7 +15,7 @@ type UseCollabsibleResult = {
 };
 
 /**
- * @description Хук используется для управления логикой открытия/скрытия
+ * @description Хук используется для управления логикой открытия/скрытия текста
  *
  */
 export const useCollabsible = (
@@ -37,15 +37,22 @@ export const useCollabsible = (
   useEffect(() => {
     if (ref.current) {
       const node = ref.current;
+      /**
+       * Eсли isOpenCollapse=false то в стилях webkit-line-clamp = rowsCount
+       * Получаем клиентскую высоту, она будет равна колличеству строк умноженой на высоту строки
+       */
       const clientH = node.getBoundingClientRect().height;
       const scrollH = node.scrollHeight;
 
+      // нужно сохранить изначальную клиентскую высоту компонента, что бы можно было к ней вернуться
       setInitialHeight(`${clientH}px`);
 
       if (scrollH > clientH) {
+        // если scrollHeight > clientHeight то  компонент переполнен, значит нужна кнопка для управлением открытия/скрытия текста
         return setIsCollapsable(true);
       }
 
+      // если нет, то кнопка не нужна
       setIsCollapsable(false);
     }
   }, [ref]);
@@ -57,9 +64,11 @@ export const useCollabsible = (
       const scrollH = node.scrollHeight;
 
       if (isOpenCollapse) {
+        // Показываем скрытую часть текста
         return setCurrentHeight(`${scrollH}px`);
       }
 
+      // Возвращаем изначальное состояние
       setCurrentHeight(initialHeight);
     }
   }, [initialHeight, isOpenCollapse, ref]);
