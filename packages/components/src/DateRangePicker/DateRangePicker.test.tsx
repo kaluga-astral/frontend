@@ -37,7 +37,7 @@ describe('DateRangePicker', () => {
       />,
     );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+    fireEvent.click(screen.getByPlaceholderText('inputA'));
 
     const dateBtnA = screen.getAllByText('15')[0];
 
@@ -194,7 +194,7 @@ describe('DateRangePicker', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+    fireEvent.click(screen.getByPlaceholderText('inputA'));
     // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryAllByRole('tooltip').length).toBeTruthy();
 
@@ -203,7 +203,7 @@ describe('DateRangePicker', () => {
     });
 
     await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[1]);
+      await userEvents.click(screen.getAllByText('15')[15]);
     });
 
     expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
