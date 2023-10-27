@@ -27,7 +27,7 @@ const TestComponent = ({ children }: { children: ReactNode }) => (
 );
 
 describe('ErrorBoundary', () => {
-  it('Props:children with error type=default: Отображается placeholder с непредвиденной ошибкой', async () => {
+  it('Props:children с непредвиденной ошибкой: Обрабатывается непредвиденная ошибка', async () => {
     renderWithTheme(
       <TestComponent>
         <BuggyButton />
@@ -38,18 +38,25 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('Произошла непредвиденная ошибка')).toBeVisible();
   });
 
-  it.each<[string, ReactNode]>([
-    ['ChunkLoadError', <ChunkLoadErrorButton />],
-    [
-      'Failed to fetch dynamically imported module',
-      <FailedFetchModuleButton />,
-    ],
-  ])(
-    'Props:children with error %s & type=outdatedRelease: Отображается placeholder с ошибкой при загрузке чанков',
-    async (_, children) => {
-      renderWithTheme(<TestComponent>{children}</TestComponent>);
-      await userEvents.click(screen.getByRole('button'));
-      expect(screen.getByText('Обновление в сервисе')).toBeVisible();
-    },
-  );
+  it('Props:children с ошибокй загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
+    renderWithTheme(
+      <TestComponent>
+        <ChunkLoadErrorButton />
+      </TestComponent>,
+    );
+
+    await userEvents.click(screen.getByRole('button'));
+    expect(screen.getByText('Обновление в сервисе')).toBeVisible();
+  });
+
+  it('Props:children с ошибкой загрузки es-modules: Обрабатывается ошибка загрузки es modules', async () => {
+    renderWithTheme(
+      <TestComponent>
+        <FailedFetchModuleButton />
+      </TestComponent>,
+    );
+
+    await userEvents.click(screen.getByRole('button'));
+    expect(screen.getByText('Обновление в сервисе')).toBeVisible();
+  });
 });
