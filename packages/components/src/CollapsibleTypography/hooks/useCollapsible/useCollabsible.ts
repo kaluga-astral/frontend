@@ -44,7 +44,6 @@ export const useCollabsible = (
       const clientH = node.getBoundingClientRect().height;
       const scrollH = node.scrollHeight;
 
-      // нужно сохранить изначальную клиентскую высоту компонента, что бы можно было к ней вернуться
       setInitialHeight(`${clientH}px`);
 
       if (scrollH > clientH) {
@@ -52,7 +51,6 @@ export const useCollabsible = (
         return setIsCollapsable(true);
       }
 
-      // если нет, то кнопка не нужна
       setIsCollapsable(false);
     }
   }, [ref]);
@@ -68,7 +66,6 @@ export const useCollabsible = (
         return setCurrentHeight(`${scrollH}px`);
       }
 
-      // Возвращаем изначальное состояние
       setCurrentHeight(initialHeight);
     }
   }, [initialHeight, isOpenCollapse, ref]);
