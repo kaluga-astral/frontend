@@ -6,7 +6,17 @@ import { OutdatedReleasePlaceholder } from '../OutdatedReleasePlaceholder';
 
 import { TypeError } from './enums';
 import { CONDITION_TYPE_ERROR } from './constants';
-import { State } from './types';
+
+export type State = {
+  /**
+   * Флаг наличия перехваченной ошибки
+   */
+  hasError: boolean;
+  /**
+   * Тип перехваченной ошибки
+   */
+  typeError: TypeError;
+};
 
 type Props = {
   /**

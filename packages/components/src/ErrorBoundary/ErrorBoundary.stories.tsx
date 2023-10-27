@@ -1,11 +1,10 @@
 import { Meta } from '@storybook/react';
-import { useEffect, useState } from 'react';
 
 import { ConfigProvider } from '../ConfigProvider';
 import outdatedReleaseIllustration from '../../../ui/illustrations/outdated_release.svg';
 import errorIllustration from '../../../ui/illustrations/error.svg';
-import { Button } from '../Button';
 
+import { BuggyButton, ChunkLoadErrorButton } from './ErrorBoundary.stubs';
 import { ErrorBoundary } from './ErrorBoundary';
 
 const meta: Meta<typeof ErrorBoundary> = {
@@ -14,52 +13,6 @@ const meta: Meta<typeof ErrorBoundary> = {
 };
 
 export default meta;
-
-/**
- * Кастомная ошибка подгрузки чанков при релизах
- */
-class OutdatedReleaseError extends Error {
-  constructor(message: string = '', ...args: ErrorOptions[]) {
-    super(message, ...args);
-    this.name = 'ChunkLoadError';
-  }
-}
-
-/**
- * Кнопка для вызова ошибки type = Default
- */
-const BuggyButton = () => {
-  const [count, setCount] = useState(0);
-  const onClick = () => {
-    setCount(count + 1);
-  };
-
-  useEffect(() => {
-    if (count === 2) {
-      throw new Error('Кнопка сломалась на 2 клике');
-    }
-  });
-
-  return <Button onClick={onClick}>Сломаюсь на 2 клике</Button>;
-};
-
-/**
- * Кнопка для вызова ошибки при релизах type = OutdatedRelease
- */
-const OutdatedReleaseButton = () => {
-  const [isClicked, setIsClicked] = useState(false);
-  const onClick = () => {
-    setIsClicked(true);
-  };
-
-  useEffect(() => {
-    if (isClicked) {
-      throw new OutdatedReleaseError('Ошибка загрузки приложения');
-    }
-  });
-
-  return <Button onClick={onClick}>Вызову ошибку релиза</Button>;
-};
 
 /**
  *  Стандартная обработка всех непредвиденных ошибок исполения кода в приложении
@@ -96,7 +49,7 @@ export const OutdatedRelease = () => (
     }}
   >
     <ErrorBoundary>
-      <OutdatedReleaseButton />
+      <ChunkLoadErrorButton />
     </ErrorBoundary>
   </ConfigProvider>
 );

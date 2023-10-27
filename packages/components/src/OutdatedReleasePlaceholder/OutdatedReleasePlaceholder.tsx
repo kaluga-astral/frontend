@@ -8,7 +8,7 @@ import { Typography } from '../Typography';
 export const OutdatedReleasePlaceholder = () => {
   const { imagesMap } = useContext(ConfigContext);
 
-  const handleRefreshButtonClick = () => {
+  const handleClickRefresh = () => {
     location.reload();
   };
 
@@ -25,9 +25,7 @@ export const OutdatedReleasePlaceholder = () => {
       imgSrc={imagesMap.outdatedReleaseErrorImgSrc}
       imgWidth="324px"
       imgHeight="162px"
-      Actions={
-        <Button onClick={handleRefreshButtonClick}>Обновить страницу</Button>
-      }
+      Actions={<Button onClick={handleClickRefresh}>Обновить страницу</Button>}
     />
   );
 };

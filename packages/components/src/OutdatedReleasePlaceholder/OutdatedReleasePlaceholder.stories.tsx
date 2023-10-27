@@ -9,7 +9,7 @@ import { OutdatedReleasePlaceholder } from './OutdatedReleasePlaceholder';
  * ```OutdatedReleasePlaceholder``` - это внутренний компонент, позволяющий отображать ошибки, связанные с устаревшей версией билда
  */
 const meta: Meta<typeof OutdatedReleasePlaceholder> = {
-  title: 'Components/OutdatedReleasePlaceholder',
+  title: 'Components/Placeholders/OutdatedReleasePlaceholder',
   component: OutdatedReleasePlaceholder,
 };
 

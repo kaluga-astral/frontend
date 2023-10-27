@@ -25,7 +25,7 @@ type ImagesMap = {
    */
   defaultErrorImgSrc: string;
   /**
-   * @description изображение при ошибке при обновлении продукта (используется в ContentState/ErrorBoundary)
+   * @description изображение при ошибке загрузки актуальных чанков (используется в ContentState/ErrorBoundary)
    */
   outdatedReleaseErrorImgSrc: string;
 };
