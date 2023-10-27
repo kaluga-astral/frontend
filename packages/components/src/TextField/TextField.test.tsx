@@ -1,5 +1,5 @@
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { it, vi } from 'vitest';
+import { vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { TextField } from './TextField';
