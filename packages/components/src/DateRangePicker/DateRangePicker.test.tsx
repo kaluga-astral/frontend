@@ -203,7 +203,7 @@ describe('DateRangePicker', () => {
     });
 
     await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[15]);
+      await userEvents.click(screen.getAllByText('15')[1]);
     });
 
     expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
