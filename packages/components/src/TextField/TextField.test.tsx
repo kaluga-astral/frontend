@@ -70,10 +70,6 @@ describe('TextField', () => {
       <TextField defaultValue="TestTextField" error helperText="Обязательно" />,
     );
 
-    expect(
-      screen.getByLabelText('FormHelperTextContentErrorIcon'),
-    ).toBeInTheDocument();
-
     expect(screen.getByText('Обязательно')).toBeInTheDocument();
   });
 
@@ -85,10 +81,6 @@ describe('TextField', () => {
         helperText="Удачно завершился процесс проверки"
       />,
     );
-
-    expect(
-      screen.getByLabelText('FormHelperTextContentSuccessIcon'),
-    ).toBeInTheDocument();
 
     expect(
       screen.getByText('Удачно завершился процесс проверки'),

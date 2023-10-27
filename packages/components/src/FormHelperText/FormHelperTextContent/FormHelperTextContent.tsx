@@ -20,15 +20,11 @@ export const FormHelperTextContent = ({
 }: FormHelperTextContentProps) => {
   const Icon = useMemo(() => {
     if (success) {
-      return (
-        <FormHelperTextSuccessIcon aria-label="FormHelperTextContentSuccessIcon" />
-      );
+      return <FormHelperTextSuccessIcon />;
     }
 
     if (error) {
-      return (
-        <FormHelperTextErrorIcon aria-label="FormHelperTextContentErrorIcon" />
-      );
+      return <FormHelperTextErrorIcon />;
     }
 
     return null;
