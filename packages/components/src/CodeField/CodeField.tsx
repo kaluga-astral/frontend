@@ -6,13 +6,17 @@ import {
   useRef,
   useState,
 } from 'react';
-// import { forwardRef, useEffect, useState } from 'react';
-// import { Link } from '@mui/material';
 
 import { TextFieldProps } from '../TextField';
-import { Typography } from '../Typography';
+import { FormHelperText } from '../FormHelperText';
 
-import { CodeFieldDigitsWrapper, CodeFieldWrapper, Digit } from './styles';
+import {
+  CodeFieldDigitsWrapper,
+  CodeFieldLabel,
+  CodeFieldWrapper,
+  Digit,
+} from './styles';
+import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 
 export type CodeFieldInputProps = TextFieldProps & {
   /**
@@ -24,7 +28,7 @@ export type CodeFieldInputProps = TextFieldProps & {
    */
   count?: number;
   /**
-   * @description время, после которого разрешен перезапрос кода (в мс)
+   * @description время, после которого разрешен перезапрос кода (в сек)
    */
   time?: number;
   /**
@@ -34,15 +38,27 @@ export type CodeFieldInputProps = TextFieldProps & {
   /**
    * @description если true, отображается ошибка
    */
-  error?: boolean;
-  // /**
-  //  * @description если true, показывается анимация загрузки
-  //  */
-  // loading?: boolean;
-  // /**
-  //  * @description если true, показываются символы, редактирование запрещено
-  //  */
-  // disabled?: boolean;
+  isError?: boolean;
+  /**
+   * @description текст ошибки
+   */
+  errorText?: string;
+  /**
+   * @description если true, показывается анимация загрузки
+   */
+  loading?: boolean;
+  /**
+   * @description если true, показываются символы, редактирование запрещено
+   */
+  disabled?: boolean;
+  /**
+   * @description фукция, которая вызовется при перезапросе
+   */
+  onRestart?: () => void;
+  /**
+   * @description начальное значение поля
+   */
+  initialValue?: NumbersInputType;
 };
 
 const CONFIRMATION_CODE_LENGTH_DEFAULT = 6;
@@ -61,93 +77,17 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
   ({
     label,
     disabled = false,
-    time = 1000 * 60,
+    time = 3, // todo поменять на 60
     codeLength = CONFIRMATION_CODE_LENGTH_DEFAULT,
-    ...props
+    isError = false,
+    errorText = 'Код подтверждения недействителен',
+    initialValue,
+    loading = false,
   }) => {
     const lastIndexOfCode = codeLength - 1;
-    // const [digitsState, setDigitsState] = useState({
-    //   currentIndex: 0,
-    //   prevIndex: 0,
-    // });
-
-    // const onChange = (index: number) => (event) => {
-    //   const diff = event.target.value.replace(value[index], '');
-    //
-    //   const isOnlyNonDigitDiff = !diff.match(/[0-9]/g);
-    //
-    //   if (isOnlyNonDigitDiff) {
-    //     return;
-    //   }
-    //
-    //   const restSubstring = value.slice(index + 1);
-    //
-    //   let firstNonEmptyIndex = [...restSubstring].findIndex(
-    //     (char) => char !== ' ',
-    //   );
-    //
-    //   firstNonEmptyIndex =
-    //     firstNonEmptyIndex === -1 ? restSubstring.length : firstNonEmptyIndex;
-    //
-    //   // отбрасываем не цифры + обработка для кейса вставки текста из буфера обмена
-    //   const cleanedValue = event.target.value
-    //     .replace(/\D/g, '')
-    //     .slice(0, firstNonEmptyIndex + 1);
-    //
-    //   if (
-    //     cleanedValue &&
-    //     value.replace(/ /g, '').length < CONFIRMATION_CODE_LENGTH
-    //   ) {
-    //     const newValue =
-    //       value.slice(0, index) +
-    //       cleanedValue +
-    //       value.slice(index + cleanedValue.length);
-    //
-    //     onChange(newValue);
-    //
-    //     setDigitsState({
-    //       prevIndex: index,
-    //       currentIndex: index + cleanedValue.length,
-    //     });
-    //   }
-    // };
-
-    //timer
-    // const [counter, setCounter] = useState(-1);
-    //
-    // useEffect(() => {
-    //   if (counter < 0) {
-    //     return () => {};
-    //   }
-    //
-    //   const timeoutId = setTimeout(() => {
-    //     setCounter((counter) => counter - 1);
-    //   }, time);
-    //
-    //   return () => {
-    //     clearTimeout(timeoutId);
-    //   };
-    // }, [counter]);
-    //
-    // useEffect(() => {
-    //   if (shouldStartTimer) {
-    //     setCounter(timerSecondsLeft);
-    //     setFormState((state) => ({ ...state, shouldStartTimer: false }));
-    //   }
-    //
-    //   return () => {};
-    // });
-    //
-    // useEffect(() => {
-    //   shouldStopTimer && setCounter(-1);
-    //
-    //   return () => {
-    //     setFormState((state) => ({ ...state, shouldStopTimer: false }));
-    //   };
-    // }, [shouldStopTimer]);
 
     const [arrayValue, setArrayValue] = useState<NumbersInputType>(
-      Array.from({ length: codeLength }),
+      () => initialValue || Array.from({ length: codeLength }),
     );
     const [currentFocusedIndex, setCurrentFocusedIndex] = useState(0);
 
@@ -279,33 +219,34 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
 
     return (
       <CodeFieldWrapper>
-        {label && <Typography>{label}</Typography>}
+        {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
         <CodeFieldDigitsWrapper>
           {arrayValue.map((value: string | number, index: number) => (
             <Digit
               key={index}
-              disabled={disabled}
-              // hasError={!!error}
+              disabled={disabled || loading}
               type="tel"
               maxLength={1}
               inputMode="numeric"
               pattern="[0-9]"
-              // autofocus
               value={value || ''}
               ref={(el) => el && (inputRefs.current[index] = el)}
               onChange={(e) => onChange(e, index)}
               onKeyUp={(e) => onKeyUp(e, index)}
               onKeyDown={(e) => onKeyDown(e, index)}
               onFocus={(e) => onFocus(e, index)}
+              isError={isError}
             />
           ))}
         </CodeFieldDigitsWrapper>
-        {/*<Typography color="textSecondary">*/}
-        {/*  Отправить код повторно <>{counter} сек.</>*/}
-        {/*</Typography>*/}
-        {/*<Link>*/}
-        {/*  <Typography color="info">Отправить код повторно</Typography>*/}
-        {/*</Link>*/}
+        {isError && <FormHelperText error>{errorText}</FormHelperText>}
+        <ResendCodeButton
+          disabled={disabled}
+          loading={loading}
+          isError={isError}
+          time={time}
+          onRestart={() => {}}
+        />
       </CodeFieldWrapper>
     );
   },

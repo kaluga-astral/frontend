@@ -1,4 +1,5 @@
 import { styled } from '../styles';
+import { Typography } from '../Typography';
 
 export const CodeFieldWrapper = styled.div`
   display: flex;
@@ -7,11 +8,10 @@ export const CodeFieldWrapper = styled.div`
 
 export const CodeFieldDigitsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 432px;
+  gap: 12px;
 `;
 
-export const Digit = styled.input`
+export const Digit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;
 
@@ -21,8 +21,17 @@ export const Digit = styled.input`
   outline: none;
 
   font-size: 20px;
-  color: ${({ theme }) => theme.palette.grey[900]};
+
   font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
+  font-family: ${({ theme }) => theme.typography.fontFamily};
 
   background: ${({ theme }) => theme.palette.background.elementHover};
+
+  color: ${({ theme, isError }) => {
+    return isError ? theme.palette.error.dark : theme.palette.grey[900];
+  }}};
+`;
+
+export const CodeFieldLabel = styled(Typography)`
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;
