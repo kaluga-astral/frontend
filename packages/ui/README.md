@@ -193,7 +193,7 @@ Breaking changes:
 - Компонент ErrorBoundary перехватывает ошибку устаревших билдов и корректно её обрабатывает, для того, чтобы отобразилось изображение, необходимо в ConfigProvider указать prop ```images.outdatedReleaseErrorImgSrc``` 
 ```tsx
 import noDataImgSrc from '@astral/ui/illustrations/no-data.svg';
-import outdatedReleaseErrorImgSrc from '@astral/ui/illustrations/outdated_release.svg';
+import outdatedReleaseErrorImgSrc from '@astral/ui/illustrations/outdated-release.svg';
 import errorImgSrc from 'static/erorr-inmg.png';
 
 const App = () => {
