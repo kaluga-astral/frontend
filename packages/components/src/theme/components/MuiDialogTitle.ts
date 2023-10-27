@@ -1,6 +1,6 @@
 import { Components, buttonClasses } from '@mui/material';
 
-import type { Theme } from '../baseTheme';
+import { Theme } from '../types';
 
 export const MuiDialogTitle: Components<Theme>['MuiDialogTitle'] = {
   styleOverrides: {
