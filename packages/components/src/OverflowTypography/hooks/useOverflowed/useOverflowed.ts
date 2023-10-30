@@ -36,7 +36,7 @@ export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
     }
 
     return;
-  }, [ref]);
+  }, [ref.current]);
 
   return { isOverflowed, ref };
 };
