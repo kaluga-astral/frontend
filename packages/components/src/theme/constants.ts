@@ -9,6 +9,7 @@ export enum Brand {
   POA = 'POA',
   RSS = 'RSS',
   SBER = 'SBER',
+  PLATFORM = 'PLATFORM',
 }
 
 export const SPACING = 4;
