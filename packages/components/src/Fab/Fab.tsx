@@ -1,5 +1,5 @@
+import { FabProps as MuiFabProps } from '@mui/material';
 import { forwardRef } from 'react';
-import { FabProps as MuiFabProps } from '@mui/material/Fab';
 
 import { WithoutEmotionSpecific } from '../types';
 

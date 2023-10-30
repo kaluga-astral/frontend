@@ -84,18 +84,11 @@ export const Disabled = () => (
 
 export const Adornment = () => (
   <>
-    <TextField InputProps={{ startAdornment: '₽' }} label="Цена" />
-    <TextField InputProps={{ endAdornment: '₽' }} label="Цена" />
-    <TextField InputProps={{ endAdornment: <EyeFillMd /> }} label="Пароль" />
-    <TextField
-      InputProps={{ startAdornment: <SearchOutlineMd /> }}
-      label="Имя"
-    />
-    <TextField error InputProps={{ startAdornment: '₽' }} label="Цена" />
-    <TextField
-      error
-      InputProps={{ startAdornment: <SearchOutlineMd /> }}
-      label="Имя"
-    />
+    <TextField startAdornment="₽" label="Цена" />
+    <TextField endAdornment="₽" label="Цена" />
+    <TextField endAdornment={<EyeFillMd />} label="Пароль" />
+    <TextField startAdornment={<SearchOutlineMd />} label="Имя" />
+    <TextField error startAdornment="₽" label="Цена" />
+    <TextField error startAdornment={<SearchOutlineMd />} label="Имя" />
   </>
 );

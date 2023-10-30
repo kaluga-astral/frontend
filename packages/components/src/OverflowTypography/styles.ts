@@ -1,11 +1,10 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-import { OverflowedProps } from './OverflowTypography';
-
 type OverflowTypographyWrapperProps = {
   hasMultipleRows: boolean;
-} & Required<OverflowedProps>;
+  rowsCount: number;
+};
 
 // проверки на rowsCount в стилях нужны для того, чтобы элементы в одну строку обрезались бы по буквенно
 // но если нужно обрезание по нескольким строчкам, тогда элементы будут обрезаться по словам

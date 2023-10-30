@@ -5,12 +5,12 @@ import { DotsVOutlineMd, EditOutlineMd } from '@astral/icons';
 import { MenuItem } from '../MenuItem';
 import { Typography } from '../Typography';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
-
-import { IconDropdownButton } from './IconDropdownButton';
 import { DataGrid, DataGridColumns } from '../DataGrid';
 import { IconButton } from '../IconButton';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
+
+import { IconDropdownButton } from './IconDropdownButton';
 
 const PaperWrapper = styled(Paper)`
   width: 70%;
