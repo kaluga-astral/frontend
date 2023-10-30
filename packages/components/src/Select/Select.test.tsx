@@ -73,29 +73,12 @@ describe('Select', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
-  it.each([
-    {
-      value: ['1', '3'],
-      children: [
-        { value: '1', name: 'Name 1' },
-        { value: '2', name: 'Name 2' },
-        { value: '3', name: 'Name 3' },
-      ],
-      result: ['Name 1', 'Name 3'],
-      testName: 'value не пустое и select отображает выбранные значения',
-    },
-
-    {
-      value: [],
-      children: [
-        { value: '1', name: 'Name 1' },
-        { value: '2', name: 'Name 2' },
-        { value: '3', name: 'Name 3' },
-      ],
-      result: ['Name 1', 'Name 2', 'Name 3'],
-      testName: 'value пустое и select не отображает значения',
-    },
-  ])('Props:renderValue: $testName ', ({ value, children, result }) => {
+  it('Props:renderValue: value не пустое и select отображает выбранные значения', () => {
+    const children = [
+      { value: '1', name: 'Name 1' },
+      { value: '2', name: 'Name 2' },
+      { value: '3', name: 'Name 3' },
+    ];
     const getOptionLabel = (selectedOption: string | number) => {
       return (
         children.find((child) => child.value === selectedOption)?.name || ''
@@ -104,23 +87,57 @@ describe('Select', () => {
 
     renderWithTheme(
       <Select
-        value={value}
+        value={['1', '3']}
         placeholder="placeholder"
         multiple
         getOptionLabel={getOptionLabel}
       >
-        {children.map((child) => (
+        {[
+          { value: '1', name: 'Name 1' },
+          { value: '2', name: 'Name 2' },
+          { value: '3', name: 'Name 3' },
+        ].map((child) => (
           <MenuItem key={child.value}>{child.value}</MenuItem>
         ))}
       </Select>,
     );
 
-    result.map((resultValue) => {
-      if (value.length) {
-        expect(screen.getByText(resultValue)).toBeInTheDocument();
-      } else {
-        expect(screen.queryByText(resultValue)).not.toBeInTheDocument();
-      }
-    });
+    ['Name 1', 'Name 3'].map((resultValue) =>
+      expect(screen.getByText(resultValue)).toBeInTheDocument(),
+    );
+  });
+
+  it('Props:renderValue: value пустое и select не отображает значения', () => {
+    const children = [
+      { value: '1', name: 'Name 1' },
+      { value: '2', name: 'Name 2' },
+      { value: '3', name: 'Name 3' },
+    ];
+    const getOptionLabel = (selectedOption: string | number) => {
+      return (
+        children.find((child) => child.value === selectedOption)?.name || ''
+      );
+    };
+
+    renderWithTheme(
+      <Select
+        value={[]}
+        placeholder="placeholder"
+        multiple
+        getOptionLabel={getOptionLabel}
+      >
+        {[
+          { value: '1', name: 'Name 1' },
+          { value: '2', name: 'Name 2' },
+          { value: '3', name: 'Name 3' },
+        ].map((child) => (
+          <MenuItem key={child.value}>{child.value}</MenuItem>
+        ))}
+      </Select>,
+    );
+
+    ['Name 1', 'Name 2', 'Name 3'].map((resultValue) =>
+      expect(screen.queryByText(resultValue)).not.toBeInTheDocument(),
+    );
   });
 });
