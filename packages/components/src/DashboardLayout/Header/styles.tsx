@@ -1,4 +1,3 @@
-import { LegacyGrid } from '../../LegacyGrid';
 import { styled } from '../../styles';
 
 export const HeaderRoot = styled.header`
@@ -14,6 +13,7 @@ export const HeaderRoot = styled.header`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const HeaderNav = styled(LegacyGrid)`
-  column-gap: ${({ theme }) => theme.spacing(1)};
+export const HeaderSection = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;

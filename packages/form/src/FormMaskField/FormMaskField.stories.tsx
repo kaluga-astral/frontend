@@ -1,47 +1,59 @@
-import { Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
+import { Grid } from '@astral/components';
 
-import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
+import { Form } from '../Form';
 
 import { FormMaskField } from './FormMaskField';
 import { FormMaskFieldValue } from './types';
 
-export default {
+/**
+ * Обертка [MaskField](/story/components-maskfield--docs) для react-hook-form
+ */
+const meta: Meta<typeof FormMaskField> = {
   title: 'Form/FormMaskField',
-  component: null,
+  component: FormMaskField,
 };
 
-type FormValues = { maskField: FormMaskFieldValue };
+export default meta;
+
+type FormValues = { maskFieldId: FormMaskFieldValue };
 
 const validationSchema = object<FormValues>({
-  maskField: string(),
+  maskFieldId: string(),
 });
 
-const Template: Story = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
 
-  return (
-    <FormStoryContainer form={form}>
-      <FormMaskField
-        required
-        label="Form mask field"
-        control={form.control}
-        name="maskField"
-        mask="aa.000"
-      />
-      <FormSubmitButton>Submit</FormSubmitButton>
-    </FormStoryContainer>
+  const handleSubmit = form.handleSubmit(
+    (values) =>
+      new Promise<void>((resolve) => {
+        setTimeout(() => {
+          window.alert(JSON.stringify(values));
+          resolve();
+        }, 1000);
+      }),
   );
-};
 
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  return (
+    <Form form={form} onSubmit={handleSubmit}>
+      <Grid container spacing={2}>
+        <FormMaskField
+          required
+          label="Ввод ID"
+          name="maskFieldId"
+          mask="aa.0000-000"
+          placeholder="aa.0000-000"
+          control={form.control}
+        />
+        <FormSubmitButton>Отправить</FormSubmitButton>
+      </Grid>
+    </Form>
+  );
 };
