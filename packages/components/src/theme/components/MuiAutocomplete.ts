@@ -57,24 +57,22 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
 
         '::before': {
           content: '""',
-
           position: 'absolute',
           top: '50%',
           left: '50%',
 
           display: 'block',
-          width: '50%',
-          height: '50%',
+          width: '0.5em',
+          height: '0.5em',
 
           backgroundColor: theme.palette.grey['500'],
 
           transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
         },
-
         '>svg': {
-          width: 16,
-          height: 16,
+          width: '0.5em',
+          height: '0.5em',
 
           zIndex: 1,
         },
