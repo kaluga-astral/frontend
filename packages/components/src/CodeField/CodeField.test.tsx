@@ -1,38 +1,145 @@
-import { renderWithTheme, screen } from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { describe, expect, it } from 'vitest';
 
 import { CodeField } from './CodeField';
 
-describe('PasswordField', () => {
+describe('CodeField', () => {
+  it('Prop:codeLength: задает кол-во символов', () => {
+    const TEST_LENGTH = 10;
+
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    expect(fields.length).toBe(TEST_LENGTH);
+  });
+
   it('Prop:disabled: блокирует поле', () => {
-    renderWithTheme(<CodeField label="password" disabled />);
+    renderWithTheme(<CodeField disabled />);
 
-    const field = screen.getByLabelText('password');
+    const fields = screen.getAllByRole('textbox');
 
-    expect(field).toBeDisabled();
+    const resendButton = screen.getByRole('button');
+
+    fields.forEach((field) => expect(field).toBeDisabled());
+    expect(resendButton).toBeDisabled();
   });
 
-  it('Prop:showSymbols: по-умолчанию символы скрыты, иконка поля соответствует состоянию', () => {
-    renderWithTheme(<CodeField label="password" />);
+  it('Prop:loading: блокирует поле', () => {
+    renderWithTheme(<CodeField loading />);
 
-    const field = screen.getByLabelText('password');
+    const fields = screen.getAllByRole('textbox');
 
-    expect(field).toHaveAttribute('type', 'password');
+    const resendButton = screen.getByRole('button');
 
-    const icon = screen.getByRole('button').getElementsByTagName('svg')[0];
-
-    expect(icon.id).toEqual('visibility-on');
+    fields.forEach((field) => expect(field).toBeDisabled());
+    expect(resendButton).toBeDisabled();
   });
 
-  it('Prop:showSymbols: символы видны, иконка поля соответствует состоянию', () => {
-    renderWithTheme(<CodeField label="password" showSymbols />);
+  it('Prop:time: пока timer > 0, кнопка повторной отправки кода неактивна', () => {
+    renderWithTheme(<CodeField />);
 
-    const field = screen.getByLabelText('password');
+    const resendButton = screen.getByRole('button');
 
-    expect(field).toHaveAttribute('type', 'text');
+    expect(resendButton).toBeDisabled();
+  });
 
-    const icon = screen.getByRole('button').getElementsByTagName('svg')[0];
+  it('Prop:time: когда timer = 0, кнопка повторной отправки кода активна', () => {
+    renderWithTheme(<CodeField time={0} />);
 
-    expect(icon.id).toEqual('visibility-off');
+    const resendButton = screen.getByRole('button');
+
+    expect(resendButton).not.toBeDisabled();
+  });
+
+  it('backspace: удаляет символ в текущием поле (при наличии)', async () => {
+    renderWithTheme(<CodeField initialValue={[1, 2, 3, 4, 5, 6]} />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[4]);
+    await userEvents.keyboard('{Backspace}');
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '1',
+      '2',
+      '3',
+      '4',
+      '',
+      '6',
+    ]);
+  });
+
+  it('backspace: удаляет символ в предыдущем поле (при отсутвии в текущем поле)', async () => {
+    renderWithTheme(<CodeField initialValue={[1, 2, 3, 4, '', '']} />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[4]);
+    await userEvents.keyboard('{Backspace}');
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '1',
+      '2',
+      '3',
+      '',
+      '',
+      '',
+    ]);
+  });
+
+  it('Нажатие стрелки вправо -> переводит фокус в соседнее поле справа', async () => {
+    const TEST_FOCUS_FIELD = 4;
+
+    renderWithTheme(<CodeField />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.keyboard('{ArrowRight}');
+    expect(fields[TEST_FOCUS_FIELD + 1]).toHaveFocus();
+  });
+
+  it('Нажатие стрелки влево <- переводит фокус в соседнее поле слева', async () => {
+    const TEST_FOCUS_FIELD = 4;
+
+    renderWithTheme(<CodeField />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.keyboard('{ArrowLeft}');
+    expect(fields[TEST_FOCUS_FIELD - 1]).toHaveFocus();
+  });
+
+  it('Для ввода доступны только арабские цифры', async () => {
+    const TEST_FOCUS_FIELD = 4;
+
+    renderWithTheme(<CodeField />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.keyboard('fF&^Ⅷאַחַת');
+    expect(fields[TEST_FOCUS_FIELD].value).toBe('');
+  });
+
+  it('cntl+v: вставка в поле обрезает все, кроме цифр', async () => {
+    const TEST_VALUE = 'test123t4t56';
+
+    renderWithTheme(<CodeField />);
+
+    const fields = screen.getAllByRole('textbox');
+
+    await userEvents.paste(TEST_VALUE);
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+    ]);
   });
 });
