@@ -81,7 +81,7 @@ export const StepSlider = <TKeys extends DefaultKey>({
   isFullWidth,
   slideProps: {
     mountOnEnter = true,
-    unmountOnExit = false,
+    unmountOnExit = true,
     easing = DEFAULT_EASING,
     ...restSlideProps
   } = {},
