@@ -74,53 +74,53 @@ describe('Select', () => {
   });
 
   it.each([
-    [
-      ['1', '3'],
-      [
+    {
+      value: ['1', '3'],
+      children: [
         { value: '1', name: 'Name 1' },
         { value: '2', name: 'Name 2' },
         { value: '3', name: 'Name 3' },
       ],
-      ['Name 1', 'Name 3'],
-    ],
-    [
-      [],
-      [
-        { value: '1', name: 'Name 1' },
-        { value: '2', name: 'Name 2' },
-        { value: '3', name: 'Name 3' },
-      ],
-      ['Name 1', 'Name 2', 'Name 3'],
-    ],
-  ])(
-    'Props:renderValue: правильно отрабатывает renderValue',
-    (value, children, result) => {
-      const getOptionLabel = (selectedOption: string | number) => {
-        return (
-          children.find((child) => child.value === selectedOption)?.name || ''
-        );
-      };
-
-      renderWithTheme(
-        <Select
-          value={value}
-          placeholder="placeholder"
-          multiple
-          getOptionLabel={getOptionLabel}
-        >
-          {children.map((child) => (
-            <MenuItem key={child.value}>{child.value}</MenuItem>
-          ))}
-        </Select>,
-      );
-
-      result.map((resultValue) => {
-        if (value.length) {
-          expect(screen.getByText(resultValue)).toBeInTheDocument();
-        } else {
-          expect(screen.queryByText(resultValue)).not.toBeInTheDocument();
-        }
-      });
+      result: ['Name 1', 'Name 3'],
+      testName: 'value не пустое и select отображает выбранные значения',
     },
-  );
+
+    {
+      value: [],
+      children: [
+        { value: '1', name: 'Name 1' },
+        { value: '2', name: 'Name 2' },
+        { value: '3', name: 'Name 3' },
+      ],
+      result: ['Name 1', 'Name 2', 'Name 3'],
+      testName: 'value пустое и select не отображает значения',
+    },
+  ])('Props:renderValue: $testName ', ({ value, children, result }) => {
+    const getOptionLabel = (selectedOption: string | number) => {
+      return (
+        children.find((child) => child.value === selectedOption)?.name || ''
+      );
+    };
+
+    renderWithTheme(
+      <Select
+        value={value}
+        placeholder="placeholder"
+        multiple
+        getOptionLabel={getOptionLabel}
+      >
+        {children.map((child) => (
+          <MenuItem key={child.value}>{child.value}</MenuItem>
+        ))}
+      </Select>,
+    );
+
+    result.map((resultValue) => {
+      if (value.length) {
+        expect(screen.getByText(resultValue)).toBeInTheDocument();
+      } else {
+        expect(screen.queryByText(resultValue)).not.toBeInTheDocument();
+      }
+    });
+  });
 });
