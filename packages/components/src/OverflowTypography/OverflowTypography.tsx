@@ -6,7 +6,7 @@ import { TooltipProps as BasicTooltipProps } from '../Tooltip';
 import { TypographyProps } from '../Typography';
 
 import { OverflowTypographyWrapper } from './styles';
-import { useOverflowed } from './hooks/useOverflowed';
+import { useOverflowed } from './hooks';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 

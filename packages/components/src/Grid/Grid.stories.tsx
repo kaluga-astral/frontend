@@ -20,10 +20,11 @@ const meta: Meta<typeof Grid> = {
 export default meta;
 
 const Item = styled.div`
+  text-align: center;
+
   border: 1px solid ${({ theme }) => theme.palette.grey[300]};
   padding: 10px;
   border-radius: 3px;
-  text-align: center;
 `;
 
 const Wrapper = styled.div`
