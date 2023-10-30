@@ -62,7 +62,7 @@ export type StepSliderProps<TKeys extends DefaultKey> = {
    */
   steps: Step<TKeys>[];
   /**
-   * @description флаг, определяющий необходимость элемента растягиваться на всю доступную ширину
+   * @description растягивает на всю доступную ширину
    */
   isFullWidth?: boolean;
   /**
@@ -88,7 +88,7 @@ export const StepSlider = <TKeys extends DefaultKey>({
 }: StepSliderProps<TKeys>): ReactNode => {
   const keyId = useId();
   const containerRef = useRef<HTMLDivElement>(
-    globalThis.document.body as HTMLDivElement,
+    globalThis.document?.body as HTMLDivElement,
   );
   const [currentStep, setCurrentStep] = useState(activeStep);
   const [directionMap, setDirectionMap] = useState<DirectionMap<TKeys>>(() =>

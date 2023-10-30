@@ -3,11 +3,13 @@ import { useState } from 'react';
 
 import { Button } from '../Button';
 import { Grid } from '../Grid';
+import { TextField } from '../TextField';
+import { Typography } from '../Typography';
 
 import { StepSlider } from './StepSlider';
 
 /**
- * Компонент предназначенный для анимированного переключения активного компонента
+ * Компонент предназначенный для анимированного переключения активного компонента. Может быть полезно в пошаговых формах, где пользователь может переключаться между шагами формы.
  *
  * ### [Figma]()
  * ### [Guide]()
@@ -52,8 +54,9 @@ export const Example = () => {
           id: 1,
           component: (
             <Grid spacing={2}>
-              first
-              <Button onClick={handleNext}>go next</Button>
+              <TextField label="Логин" />
+              <TextField label="Пароль" />
+              <Button onClick={handleNext}>Дальше</Button>
             </Grid>
           ),
         },
@@ -61,10 +64,11 @@ export const Example = () => {
           id: 2,
           component: (
             <Grid spacing={2}>
-              second
+              <TextField label="Фамилия" />
+              <TextField label="Имя" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -73,10 +77,11 @@ export const Example = () => {
           id: 3,
           component: (
             <Grid spacing={2}>
-              third
+              <TextField label="Снилс" />
+              <TextField label="Инн" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -85,8 +90,8 @@ export const Example = () => {
           id: 4,
           component: (
             <Grid spacing={2}>
-              fourth
-              <Button onClick={handleBack}>go back</Button>
+              <Typography variant="h4">Спасибо за регистрацию</Typography>
+              <Button onClick={handleBack}>Назад</Button>
             </Grid>
           ),
         },
@@ -116,8 +121,9 @@ export const SlideProps = () => {
           id: 1,
           component: (
             <Grid spacing={2}>
-              first
-              <Button onClick={handleNext}>go next</Button>
+              <TextField label="Логин" />
+              <TextField label="Пароль" />
+              <Button onClick={handleNext}>Дальше</Button>
             </Grid>
           ),
         },
@@ -125,10 +131,11 @@ export const SlideProps = () => {
           id: 2,
           component: (
             <Grid spacing={2}>
-              second
+              <TextField label="Фамилия" />
+              <TextField label="Имя" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -137,10 +144,11 @@ export const SlideProps = () => {
           id: 3,
           component: (
             <Grid spacing={2}>
-              third
+              <TextField label="Снилс" />
+              <TextField label="Инн" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -149,8 +157,8 @@ export const SlideProps = () => {
           id: 4,
           component: (
             <Grid spacing={2}>
-              fourth
-              <Button onClick={handleBack}>go back</Button>
+              <Typography variant="h4">Спасибо за регистрацию</Typography>
+              <Button onClick={handleBack}>Назад</Button>
             </Grid>
           ),
         },
@@ -177,8 +185,9 @@ export const IsFullWidth = () => {
           id: 1,
           component: (
             <Grid spacing={2}>
-              first
-              <Button onClick={handleNext}>go next</Button>
+              <TextField label="Логин" />
+              <TextField label="Пароль" />
+              <Button onClick={handleNext}>Дальше</Button>
             </Grid>
           ),
         },
@@ -186,10 +195,11 @@ export const IsFullWidth = () => {
           id: 2,
           component: (
             <Grid spacing={2}>
-              second
+              <TextField label="Фамилия" />
+              <TextField label="Имя" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -198,10 +208,11 @@ export const IsFullWidth = () => {
           id: 3,
           component: (
             <Grid spacing={2}>
-              third
+              <TextField label="Снилс" />
+              <TextField label="Инн" />
               <Grid columns={2} spacing={2}>
-                <Button onClick={handleBack}>go back</Button>
-                <Button onClick={handleNext}>go next</Button>
+                <Button onClick={handleBack}>Назад</Button>
+                <Button onClick={handleNext}>Дальше</Button>
               </Grid>
             </Grid>
           ),
@@ -210,8 +221,8 @@ export const IsFullWidth = () => {
           id: 4,
           component: (
             <Grid spacing={2}>
-              fourth
-              <Button onClick={handleBack}>go back</Button>
+              <Typography variant="h4">Спасибо за регистрацию</Typography>
+              <Button onClick={handleBack}>Назад</Button>
             </Grid>
           ),
         },
