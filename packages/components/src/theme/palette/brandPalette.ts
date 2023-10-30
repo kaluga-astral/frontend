@@ -261,6 +261,25 @@ const sberPalette: BrandColors = {
   },
 };
 
+const platformPalette: BrandColors = {
+  secondary: {
+    800: '#3ED1F5',
+  },
+  brand: {
+    800: '#0088CB',
+    background: '#FAFBFC',
+  },
+  900: '#1A83C7',
+  800: '#3391CD',
+  700: '#4D9ED4',
+  600: '#66ACDA',
+  500: '#80BAE0',
+  400: '#99C8E6',
+  300: '#B2D6EC',
+  200: '#CCE3F3',
+  100: '#E5F1F9',
+};
+
 export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
@@ -272,4 +291,5 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.POA]: poaPalette,
   [Brand.RSS]: rssPalette,
   [Brand.SBER]: sberPalette,
+  [Brand.PLATFORM]: platformPalette,
 };
