@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { ConfigProvider } from '../ConfigProvider';
-import outdatedReleaseIllustration from '../../../ui/illustrations/outdated_release.svg';
+import outdatedReleaseIllustration from '../../../ui/illustrations/outdated-release.svg';
 import errorIllustration from '../../../ui/illustrations/error.svg';
 
 import { BuggyButton, ChunkLoadErrorButton } from './ErrorBoundary.stubs';
