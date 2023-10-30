@@ -6,6 +6,7 @@ import { russianMap } from '../DatePicker/constants/russianMap';
 const imagesMapDefault = {
   noDataImgSrc: '',
   defaultErrorImgSrc: '',
+  outdatedReleaseErrorImgSrc: '',
 };
 
 const techSupDefault = {
@@ -16,13 +17,17 @@ const techSupDefault = {
 type Language = 'ru';
 type ImagesMap = {
   /**
-   * @description изображение при отсутствии данных (используется в DataGrid)
+   * Изображение при отсутствии данных (используется в DataGrid)
    */
   noDataImgSrc: string;
   /**
-   * @description изображение при ошибке (используется в ContentState)
+   * Изображение при ошибке (используется в ContentState)
    */
   defaultErrorImgSrc: string;
+  /**
+   * Изображение при ошибке загрузки актуальных чанков (используется в ContentState/ErrorBoundary)
+   */
+  outdatedReleaseErrorImgSrc: string;
 };
 
 type TechnicalSupport = {
@@ -32,12 +37,12 @@ type TechnicalSupport = {
 
 export type ConfigContextProps = {
   /**
-   * @description язык локализации
+   * Язык локализации
    * @default 'ru'
    */
   language: Language;
   /**
-   * @description языковая карта для DatePicker
+   * Языковая карта для DatePicker
    * @default russianMap
    */
   datePickerLanguageMap: LanguageMap;
@@ -48,17 +53,17 @@ export type ConfigContextProps = {
   captureException: (error: any) => void;
 
   /**
-   * @description карта для типовых изображений.
+   * Карта для типовых изображений.
    * Используется в компонентах ui-kit, где требуется отображение декоративных img
    */
   imagesMap: ImagesMap;
   /**
-   * @description символ для пустого значения
+   * Символ для пустого значения
    * @default '-'
    */
   emptySymbol: string;
   /**
-   * @description Данные технической поддержки
+   * Данные технической поддержки
    * @default '-'
    */
   techSup: TechnicalSupport;

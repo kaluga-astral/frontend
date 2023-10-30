@@ -1,39 +1,30 @@
-import { Story } from '@storybook/react';
-import { useEffect, useState } from 'react';
+import { Meta } from '@storybook/react';
 
-import errorIllustration from '../../../ui/illustrations/error.svg';
-import { Button } from '../Button';
 import { ConfigProvider } from '../ConfigProvider';
+import outdatedReleaseIllustration from '../../../ui/illustrations/outdated_release.svg';
+import errorIllustration from '../../../ui/illustrations/error.svg';
 
+import { BuggyButton, ChunkLoadErrorButton } from './ErrorBoundary.stubs';
 import { ErrorBoundary } from './ErrorBoundary';
 
-export default {
+const meta: Meta<typeof ErrorBoundary> = {
   title: 'Components/ErrorBoundary',
   component: ErrorBoundary,
 };
 
-function BuggyButton() {
-  const [count, setCount] = useState(0);
-  const onClick = () => {
-    setCount(count + 1);
-  };
+export default meta;
 
-  useEffect(() => {
-    if (count === 2) {
-      throw new Error('Кнопка сломалась на 2 клике');
-    }
-  });
-
-  return <Button onClick={onClick}>Сломаюсь на 2 клике</Button>;
-}
-
-const Template: Story = () => {
+/**
+ *  Стандартная обработка всех непредвиденных ошибок исполения кода в приложении
+ */
+export const Default = () => {
   return (
     <ConfigProvider
       captureException={(error) => alert(error)}
       imagesMap={{
         defaultErrorImgSrc: errorIllustration,
         noDataImgSrc: errorIllustration,
+        outdatedReleaseErrorImgSrc: outdatedReleaseIllustration,
       }}
       techSup={{ email: 'test@example.com', phone: '79999999999' }}
     >
@@ -44,9 +35,21 @@ const Template: Story = () => {
   );
 };
 
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+/**
+ *  ```OutdatedRelease``` появляется только при устаревание статики после релиза,
+ *  позволяет производить сборку в любое время и предостерегает клиента от непредвиденных ошибок во время релиза
+ */
+export const OutdatedRelease = () => (
+  <ConfigProvider
+    captureException={(error) => alert(error)}
+    imagesMap={{
+      defaultErrorImgSrc: errorIllustration,
+      noDataImgSrc: errorIllustration,
+      outdatedReleaseErrorImgSrc: outdatedReleaseIllustration,
+    }}
+  >
+    <ErrorBoundary>
+      <ChunkLoadErrorButton />
+    </ErrorBoundary>
+  </ConfigProvider>
+);

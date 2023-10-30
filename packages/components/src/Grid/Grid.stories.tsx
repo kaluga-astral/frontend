@@ -1,17 +1,27 @@
-import { Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import { Typography } from '../Typography';
 import { styled } from '../styles';
+import { Button } from '../Button';
 
 import { Grid } from './Grid';
 
-export default {
+/**
+ * Grid предназначен для группировки элементов в обоих направлениях.
+ *
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Grid> = {
   title: 'Components/Grid',
   component: Grid,
 };
 
+export default meta;
+
 const Item = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.grey[300]};
+  padding: 10px;
   border-radius: 3px;
   text-align: center;
 `;
@@ -20,87 +30,37 @@ const Wrapper = styled.div`
   min-width: 500px;
 `;
 
-const Template: Story = (props) => {
-  return (
-    <Grid {...props}>
-      <Grid>Grid Item 1</Grid>
-    </Grid>
-  );
-};
-
-export const Showcase: Story = () => (
-  <Grid container spacing={2}>
-    <Typography variant="h3">Grid Props</Typography>
-    <Typography variant="ui">Grid Container</Typography>
-
-    <Grid container>
-      <Item>Item 1</Item>
-    </Grid>
-    <Typography variant="ui">Grid columns</Typography>
-
-    <Grid container columns={3} spacing={2}>
-      <Item>Item 1</Item>
-      <Item>Item 2</Item>
-      <Item>Item 3</Item>
-    </Grid>
-
-    <Typography variant="ui">Grid rows</Typography>
-
-    <Grid container rows={3} rowSpacing={1}>
-      <Item>Item 1</Item>
-      <Item>Item 2</Item>
-      <Item>Item 3</Item>
-    </Grid>
-
-    <Typography variant="ui">Grid Spacing</Typography>
-
-    <Grid spacing={1}>
-      <Grid container columns={3} spacing={1}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-      </Grid>
-      <Grid container columns={2} rows={2} spacing={[2, 6]}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
+export const Example = () => (
+  <Wrapper>
+    <Grid container spacing={7}>
+      <Typography variant={'h4'}>Выберите категорию:</Typography>
+      <Grid rowSpacing={3}>
+        <Grid container columns={'auto'} direction={'column'} columnSpacing={3}>
+          <Item>
+            <Typography variant={'h6'}>Абоненты</Typography>
+          </Item>
+        </Grid>
+        <Grid container direction={'column'} columnSpacing={3}>
+          <Button fullWidth> Юр. лица</Button>
+          <Button fullWidth> Физ. лица</Button>
+          <Button fullWidth> Самозанятые</Button>
+        </Grid>
       </Grid>
     </Grid>
-    <Typography variant="ui">Grid Row Spacing & Column Spacing</Typography>
-
-    <Grid container columns={2} rows={2} columnSpacing={1} rowSpacing={2}>
-      <Item>Item 1</Item>
-      <Item>Item 2</Item>
-      <Item>Item 3</Item>
-    </Grid>
-
-    <Typography variant="ui">Grid direction</Typography>
-
-    <Grid rowSpacing={1}>
-      <Grid container direction={'row'} spacing={1}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-      </Grid>
-      <Grid container direction={'column'} spacing={1}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-      </Grid>
-    </Grid>
-  </Grid>
+  </Wrapper>
 );
 
 /**
  * Prop ```rows``` позволяет задать текстовое значение соответствующее grid-template-rows
  */
 
-export const StringRows = () => {
+export const Rows = () => {
   return (
     <Wrapper>
-      <Grid rows="1fr 2fr" rowSpacing={1}>
+      <Grid container rows={3} rowSpacing={1}>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
+        <Item>Item 3</Item>
       </Grid>
     </Wrapper>
   );
@@ -109,26 +69,84 @@ export const StringRows = () => {
 /**
  * Prop ```columns``` позволяет задать текстовое значение соответствующее grid-template-columns
  */
-export const StringColumns = () => {
+export const Columns = () => {
   return (
     <Wrapper>
-      <Grid columns="auto 1fr" spacing={2}>
+      <Grid container columns={3} spacing={2}>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
+        <Item>Item 3</Item>
       </Grid>
     </Wrapper>
   );
 };
 
-Showcase.parameters = { options: { showPanel: false } };
-
-export const Default = Template.bind({});
-
-Default.args = {
-  container: true,
+/**
+ * Prop ```spacing``` позволяет задать отступы между колонками и рядами. Если передан массив: Первый элемент - отступ между рядами, второй - между колонками
+ */
+export const Spacing = () => {
+  return (
+    <Wrapper>
+      <Grid container columns={2} rows={2} spacing={[2, 6]}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+        <Item>Item 3</Item>
+        <Item>Item 4</Item>
+      </Grid>
+    </Wrapper>
+  );
 };
 
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+/**
+ * Prop ```rowSpacing``` позволяет задать отступы между рядами.
+ */
+export const RowSpacing = () => {
+  return (
+    <Wrapper>
+      <Grid container columns={2} rows={2} rowSpacing={6}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+        <Item>Item 3</Item>
+        <Item>Item 4</Item>
+      </Grid>
+    </Wrapper>
+  );
+};
+
+/**
+ * Prop ```columnSpacing``` позволяет задать отступы между колонками.
+ */
+export const ColumnSpacing = () => {
+  return (
+    <Wrapper>
+      <Grid container columns={2} rows={2} columnSpacing={6}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+        <Item>Item 3</Item>
+        <Item>Item 4</Item>
+      </Grid>
+    </Wrapper>
+  );
+};
+
+/**
+ * Prop ```direction``` Соответствует grid-autoflow
+ */
+export const Direction = () => {
+  return (
+    <Wrapper>
+      <Grid rowSpacing={1}>
+        <Grid container direction={'row'} spacing={1}>
+          <Item>Item 1</Item>
+          <Item>Item 2</Item>
+          <Item>Item 3</Item>
+        </Grid>
+        <Grid container direction={'column'} spacing={1}>
+          <Item>Item 1</Item>
+          <Item>Item 2</Item>
+          <Item>Item 3</Item>
+        </Grid>
+      </Grid>
+    </Wrapper>
+  );
 };
