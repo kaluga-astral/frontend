@@ -61,6 +61,14 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
   opened?: boolean;
   collapsedIn: boolean;
 }>`
+  transform: ${({ opened }) => {
+    if (opened) {
+      return 'rotateZ(180deg)';
+    }
+
+    return 'rotateZ(0deg)';
+  }};
+
   width: ${({ collapsedIn }) => {
     if (collapsedIn) {
       return '1em';
@@ -69,14 +77,6 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
     return '0px';
   }};
   margin-left: auto;
-
-  transform: ${({ opened }) => {
-    if (opened) {
-      return 'rotateZ(180deg)';
-    }
-
-    return 'rotateZ(0deg)';
-  }};
 
   transition: ${({ theme }) => {
     return theme.transitions.create('transform', {
