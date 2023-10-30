@@ -19,8 +19,7 @@ type Story = StoryObj<typeof CodeField>;
 
 export const Interaction: Story = {
   args: {
-    label: 'Пароль',
-    helperText: 'Придумайте новый пароль',
+    label: 'Код подтверждения отправлен на test@test.ru',
   },
   parameters: {
     docs: {
@@ -93,7 +92,7 @@ export const Loading = () => (
   </>
 );
 
-export const СodeLength = () => (
+export const CodeLength = () => (
   <div>
     <div>
       <CodeField onRestart={() => {}} codeLength={4} />

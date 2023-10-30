@@ -8,10 +8,25 @@ import { Typography } from '../../Typography';
 import { ResendCodeButtonWrapper } from './styles';
 
 type ResendCodeButtonProps = {
+  /**
+   * @description Если true, показываются символы, редактирование запрещено
+   */
   disabled: boolean;
+  /**
+   * @description Если true, показывается анимация загрузки
+   */
   loading: boolean;
+  /**
+   * @description Флаг состояния ошибки
+   */
   isError: boolean;
+  /**
+   * @description Время, после которого разрешен перезапрос кода (в сек)
+   */
   time: number;
+  /**
+   * @description Фукция, которая вызовется при перезапросе
+   */
   onRestart: () => void;
 };
 
@@ -36,7 +51,11 @@ const ResendCodeButton = ({
 
   return (
     <ResendCodeButtonWrapper isError={isError}>
-      <Button variant="link" disabled={disabled || loading} onClick={onClick}>
+      <Button
+        variant="link"
+        disabled={disabled || loading || timer > 0}
+        onClick={onClick}
+      >
         Отправить код повторно
       </Button>
       {showTimer && (
