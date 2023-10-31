@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { IMask, IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
@@ -60,6 +60,15 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
   ({ onChange, onAccept, ...props }, ref) => {
     const maskFieldProps = { unmask: true, ...props } as IMaskInputProps;
 
+    const inputRef = useRef(null);
+
+    const [isValue, setIsValue] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocusChange = () => {
+      setIsFocused((prevIsFocused) => !prevIsFocused);
+    };
+
     const handleMaskFieldAccept = (
       value: string,
       maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
@@ -70,6 +79,11 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
       }
 
       onChange?.(value);
+      setIsValue(value);
+    };
+
+    const checkIsLazy = () => {
+      return isFocused || isValue;
     };
 
     return (
@@ -77,6 +91,10 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
         {...maskFieldProps}
         inputRef={() => ref}
         onAccept={handleMaskFieldAccept}
+        ref={inputRef}
+        onFocus={handleFocusChange}
+        onBlur={handleFocusChange}
+        lazy={!checkIsLazy()}
       />
     );
   },
