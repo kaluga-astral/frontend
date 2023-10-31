@@ -72,6 +72,10 @@ export const themes = [
     name: 'Astral.LK1C',
     theme: createTheme({ brand: Brand.LK1C, fontsUrls }),
   },
+  {
+    name: 'Astral.PLATFORM',
+    theme: createTheme({ brand: Brand.PLATFORM, fontsUrls })
+  },
 ];
 
 export const getTheme = (name) => {
