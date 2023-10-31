@@ -10,7 +10,7 @@ import { InternalErrorPlaceholder } from './InternalErrorPlaceholder';
  *
  */
 const meta: Meta<typeof InternalErrorPlaceholder> = {
-  title: 'Components/InternalErrorPlaceholder',
+  title: 'Components/Placeholders/InternalErrorPlaceholder',
   component: InternalErrorPlaceholder,
 };
 
@@ -22,6 +22,7 @@ export const Example = () => {
       imagesMap={{
         defaultErrorImgSrc: errorIllustration,
         noDataImgSrc: errorIllustration,
+        outdatedReleaseErrorImgSrc: errorIllustration,
       }}
       techSup={{ email: 'test@example.com', phone: '79999999999' }}
     >

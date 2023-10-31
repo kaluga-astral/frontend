@@ -15,8 +15,8 @@ export const SidebarButton = styled(UIKitButton)<ButtonProps>`
   max-height: 40px;
   margin-bottom: ${({ theme }) => theme.spacing(1)};
 
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 
   transition: ${({ theme }) => {
     return theme.transitions.create(['max-width', 'min-width'], {

@@ -36,6 +36,8 @@ export * from './Collapse';
 
 export * from './CollapsableAlert';
 
+export * from './CollapsibleTypography';
+
 export * from './ConfigProvider';
 
 export * from './ConfirmDialog';

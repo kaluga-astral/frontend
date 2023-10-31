@@ -33,8 +33,8 @@ export const Interaction: Story = {
 
 const Item = styled.div`
   display: grid;
-  justify-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
+  justify-items: center;
 `;
 
 export const Example = () => (

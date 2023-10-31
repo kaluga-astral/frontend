@@ -10,7 +10,7 @@ import { formatPhoneToView } from '../utils/phone';
 export const InternalErrorPlaceholder = () => {
   const { imagesMap, techSup } = useContext(ConfigContext);
 
-  const handleRefreshButtonClick = () => {
+  const handleClickRefresh = () => {
     location.reload();
   };
 
@@ -37,9 +37,7 @@ export const InternalErrorPlaceholder = () => {
       imgSrc={imagesMap.defaultErrorImgSrc}
       imgWidth="324px"
       imgHeight="162px"
-      Actions={
-        <Button onClick={handleRefreshButtonClick}>Обновить страницу</Button>
-      }
+      Actions={<Button onClick={handleClickRefresh}>Обновить страницу</Button>}
     />
   );
 };

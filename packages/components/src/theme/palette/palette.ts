@@ -80,14 +80,14 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       ...brandColors.yellow,
     },
     primary: {
-      main: brandColors[800],
-      dark: brandColors[900],
+      main: brandColors.primary[800],
+      dark: brandColors.primary[900],
       contrastText: '#FFF',
-      ...brandColors,
+      ...brandColors.primary,
     },
     secondary: {
       main: brandColors.secondary[800],
-      dark: brandColors[900],
+      dark: brandColors.primary[900],
       contrastText: '#FFF',
       ...brandColors.secondary,
     },
