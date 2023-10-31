@@ -8,3 +8,4 @@
 
 # Contributing
 Перед внесением правок в репозиторий необходимо ознакомиться с [CONTRIBUTING.md](https://github.com/kaluga-astral/frontend/blob/main/CONTRIBUTING.md).
+
