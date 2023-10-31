@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { useState } from 'react';
 
 import { Grid, Step, StepContent, StepLabel, Stepper, Typography } from '..';
-import Button from '../Button/Button';
+import Button from '../Button';
 import { styled } from '../styles';
 
 /**
