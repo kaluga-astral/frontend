@@ -6,9 +6,14 @@ import {
 import { StepIcon } from '../StepIcon';
 import { WithoutEmotionSpecific } from '../../types';
 
-export type StepProps = WithoutEmotionSpecific<MuiStepLabelProps>;
+export type StepProps = {
+  /**
+   * Номер текущего шага
+   */
+  step?: number;
+} & WithoutEmotionSpecific<MuiStepLabelProps>;
 
-export const StepLabel = (props: StepProps & { step?: number }) => {
+export const StepLabel = (props: StepProps) => {
   return (
     <MuiStepLabel
       StepIconComponent={({ active, error, completed, icon }) =>

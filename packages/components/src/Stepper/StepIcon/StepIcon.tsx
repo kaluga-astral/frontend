@@ -1,5 +1,7 @@
 import { StepDefaultFillMd } from '@astral/icons';
-import { StepIconProps } from '@mui/material';
+import { StepIconProps as MuiStepIconProps } from '@mui/material';
+
+import { WithoutEmotionSpecific } from '../../types';
 
 import {
   StepDefaultIcon,
@@ -8,7 +10,14 @@ import {
   StepSuccessIcon,
 } from './styles';
 
-export const StepIcon = (props: { step?: number } & StepIconProps) => {
+export type StepIconProps = {
+  /**
+   * Номер текущего шага
+   */
+  step?: number;
+} & WithoutEmotionSpecific<MuiStepIconProps>;
+
+export const StepIcon = (props: StepIconProps) => {
   const { active, completed, error, step, icon } = props;
 
   if (step !== undefined) {
