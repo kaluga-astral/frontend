@@ -148,7 +148,7 @@ export const TransitionStepByStep = () => {
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((item, index) => (
           <Step key={index} completed={true}>
-            <StepLabel step={activeStep} error={item.isError}>
+            <StepLabel isSelected={activeStep === index} error={item.isError}>
               {item.label}
             </StepLabel>
           </Step>

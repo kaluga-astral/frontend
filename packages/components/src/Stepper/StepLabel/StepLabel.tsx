@@ -8,9 +8,9 @@ import { WithoutEmotionSpecific } from '../../types';
 
 export type StepProps = {
   /**
-   * Номер текущего шага
+   * Является ли шаг в состоянии select
    */
-  step?: number;
+  isSelected?: boolean;
 } & WithoutEmotionSpecific<MuiStepLabelProps>;
 
 export const StepLabel = (props: StepProps) => {
@@ -18,7 +18,7 @@ export const StepLabel = (props: StepProps) => {
     <MuiStepLabel
       StepIconComponent={({ active, error, completed, icon }) =>
         StepIcon({
-          step: props.step,
+          isSelected: props.isSelected,
           active,
           error,
           completed,

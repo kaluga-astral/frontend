@@ -12,22 +12,20 @@ import {
 
 export type StepIconProps = {
   /**
-   * Номер текущего шага
+   * Является ли шаг в состоянии select
    */
-  step?: number;
+  isSelected?: boolean;
 } & WithoutEmotionSpecific<MuiStepIconProps>;
 
 export const StepIcon = (props: StepIconProps) => {
-  const { active, completed, error, step, icon } = props;
+  const { active, completed, error, isSelected } = props;
 
-  if (step !== undefined) {
-    if (completed && error && step + 1 === icon) {
-      return <StepSelectIcon $isError />;
-    }
+  if (completed && error && isSelected) {
+    return <StepSelectIcon $isError />;
+  }
 
-    if (completed && step + 1 === icon) {
-      return <StepSelectIcon />;
-    }
+  if (completed && isSelected) {
+    return <StepSelectIcon />;
   }
 
   if (error) {
