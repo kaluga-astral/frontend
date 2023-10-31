@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/react';
+import { useState } from 'react';
 
 import { Grid, Step, StepContent, StepLabel, Stepper, Typography } from '..';
+import Button from '../Button/Button';
+import { styled } from '../styles';
 
 /**
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=427-5578&mode=design&t=cAVE2DuNhtiUtoF6-0)
@@ -35,7 +38,7 @@ export const Example = () => (
   </Grid>
 );
 
-export const Сonnector = () => (
+export const Connector = () => (
   <Grid>
     <Typography paragraph variant="h4">
       Stepper со стрелочным коннектором
@@ -108,3 +111,57 @@ export const Orientation = () => (
     </Stepper>
   </Grid>
 );
+
+const ButtonsWrapper = styled.div`
+  padding: ${({ theme }) => theme.spacing(3, 10, 0, 10)};
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TransitionStepByStep = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleBack = () => {
+    if (activeStep !== 0) {
+      setActiveStep((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeStep < 3) {
+      setActiveStep((prev) => prev + 1);
+    }
+  };
+
+  const steps = [
+    { label: 'Step 1', isError: false },
+    { label: 'Step 2', isError: false },
+    { label: 'Step 3', isError: true },
+    { label: 'Step 4', isError: false },
+  ];
+
+  return (
+    <Grid>
+      <Typography paragraph variant="h4">
+        Stepper c переключением шагов(все шаги завершены)
+      </Typography>
+      <Stepper alternativeLabel activeStep={activeStep}>
+        {steps.map((item, index) => (
+          <Step key={index} completed={true}>
+            <StepLabel step={activeStep} error={item.isError}>
+              {item.label}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <ButtonsWrapper>
+        <Button variant="link" onClick={handleBack}>
+          BACK
+        </Button>
+        <Button variant="link" onClick={handleNext}>
+          NEXT
+        </Button>
+      </ButtonsWrapper>
+    </Grid>
+  );
+};
