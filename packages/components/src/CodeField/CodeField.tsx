@@ -85,7 +85,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     label,
     time = RESTART_TIME_DEFAULT,
     codeLength = CODE_LENGTH_DEFAULT,
-    onRestart = () => {},
+    onRestart,
     initialValue,
     loading = false,
     disabled = false,

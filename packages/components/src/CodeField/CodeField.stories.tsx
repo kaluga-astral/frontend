@@ -92,6 +92,12 @@ export const Loading = () => (
   </>
 );
 
+export const WithoutRestartButton = () => (
+  <>
+    <CodeField loading={true} initialValue={TEST_VALUE} />
+  </>
+);
+
 export const CodeLength = () => (
   <div>
     <div>
