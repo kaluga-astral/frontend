@@ -217,3 +217,5 @@ export * from './Zoom';
 export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
+
+export * from './CodeField';

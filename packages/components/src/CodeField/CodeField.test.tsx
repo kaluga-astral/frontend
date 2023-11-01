@@ -53,9 +53,9 @@ describe('CodeField', () => {
   });
 
   it('backspace: удаляет символ в текущием поле (при наличии)', async () => {
-    renderWithTheme(<CodeField initialValue={[1, 2, 3, 4, 5, 6]} />);
+    renderWithTheme(<CodeField initialValue="123456" />);
 
-    const fields = screen.getAllByRole('textbox');
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.click(fields[4]);
     await userEvents.keyboard('{Backspace}');
@@ -71,9 +71,9 @@ describe('CodeField', () => {
   });
 
   it('backspace: удаляет символ в предыдущем поле (при отсутвии в текущем поле)', async () => {
-    renderWithTheme(<CodeField initialValue={[1, 2, 3, 4, '', '']} />);
+    renderWithTheme(<CodeField initialValue="1234" />);
 
-    const fields = screen.getAllByRole('textbox');
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.click(fields[4]);
     await userEvents.keyboard('{Backspace}');
@@ -117,7 +117,7 @@ describe('CodeField', () => {
 
     renderWithTheme(<CodeField />);
 
-    const fields = screen.getAllByRole('textbox');
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.click(fields[TEST_FOCUS_FIELD]);
     await userEvents.keyboard('fF&^Ⅷאַחַת');
@@ -129,7 +129,7 @@ describe('CodeField', () => {
 
     renderWithTheme(<CodeField />);
 
-    const fields = screen.getAllByRole('textbox');
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.paste(TEST_VALUE);
 

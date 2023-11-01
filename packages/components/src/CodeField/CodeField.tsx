@@ -1,6 +1,8 @@
 import {
   BaseSyntheticEvent,
+  FocusEvent,
   KeyboardEvent,
+  ReactNode,
   forwardRef,
   useEffect,
   useRef,
@@ -37,7 +39,7 @@ export type CodeFieldInputProps = {
   /**
    * @description Начальное значение поля
    */
-  initialValue?: CodeFieldInputType[];
+  initialValue?: string;
   /**
    * @description Если true, показывается анимация загрузки
    */
@@ -53,7 +55,15 @@ export type CodeFieldInputProps = {
   /**
    * @description Текстовая информация об ошибке, будет отображен при isError: true
    */
-  errorText?: string;
+  errorText?: ReactNode;
+  /**
+   * @description Вызывается при изменении поля
+   */
+  onChange?: (value: string) => void;
+  /**
+   * @description Вызывается при заполнении поля
+   */
+  onComplete?: (value: string) => void;
 };
 
 const CODE_LENGTH_DEFAULT = 6;
@@ -81,12 +91,34 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     disabled = false,
     isError = false,
     errorText = ERROR_TEXT_DEFAULT,
+    onChange: onFieldChange,
+    onComplete,
   }) => {
     const lastIndexOfCode = codeLength - 1;
 
-    const [arrayValue, setArrayValue] = useState<CodeFieldInputType[]>(
-      () => initialValue || Array.from({ length: codeLength }),
-    );
+    const [arrayValue, setArrayValue] = useState<CodeFieldInputType[]>(() => {
+      const initialArray = Array.from({ length: codeLength });
+
+      if (initialValue) {
+        initialValue.split('').forEach((symbol, index) => {
+          initialArray[index] = symbol;
+        });
+      }
+
+      return initialArray as CodeFieldInputType[];
+    });
+
+    useEffect(() => {
+      const formattedValue = arrayValue.join('');
+
+      if (onFieldChange) {
+        onFieldChange(formattedValue);
+      }
+
+      if (onComplete) {
+        onComplete(formattedValue);
+      }
+    }, [arrayValue]);
 
     const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
@@ -110,6 +142,19 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
       }
     };
 
+    const deletePreviousSymbol = (index: number) => {
+      let newArrayValue = [...arrayValue];
+
+      if (arrayValue[index]) {
+        newArrayValue[index] = '';
+        setArrayValue(newArrayValue);
+      } else if (arrayValue[index - 1]) {
+        newArrayValue[index - 1] = '';
+        setArrayValue(newArrayValue);
+        setFocusIndexPrevious(index);
+      }
+    };
+
     const onChange = (e: BaseSyntheticEvent, index: number) => {
       const newValue = e.target.value.replace(DIGITS_REGEX, '');
 
@@ -124,19 +169,6 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
 
         return newArrayValue;
       });
-    };
-
-    const deletePreviousSymbol = (index: number) => {
-      let newArrayValue = [...arrayValue];
-
-      if (arrayValue[index]) {
-        newArrayValue[index] = '';
-        setArrayValue(newArrayValue);
-      } else if (arrayValue[index - 1]) {
-        newArrayValue[index - 1] = '';
-        setArrayValue(newArrayValue);
-        setFocusIndexPrevious(index);
-      }
     };
 
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
@@ -169,8 +201,8 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
       }
     };
 
-    const onFocus = (e: FocusEvent) => {
-      e.target?.select(e);
+    const onFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
+      e.target?.select();
     };
 
     const onPaste = (event: ClipboardEvent) => {
@@ -234,13 +266,15 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
           ))}
         </CodeFieldDigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
-        <ResendCodeButton
-          time={time}
-          disabled={disabled}
-          loading={loading}
-          isError={isError}
-          onRestart={onRestart}
-        />
+        {onRestart && (
+          <ResendCodeButton
+            time={time}
+            disabled={disabled}
+            loading={loading}
+            isError={isError}
+            onRestart={onRestart}
+          />
+        )}
       </CodeFieldWrapper>
     );
   },

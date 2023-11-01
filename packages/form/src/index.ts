@@ -44,6 +44,8 @@ export * from './FormDateRangePicker';
 
 export * from './FormPasswordField';
 
+export * from './FormCodeField';
+
 export * from './Form';
 
 export * from './types';

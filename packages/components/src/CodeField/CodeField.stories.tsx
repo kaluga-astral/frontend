@@ -28,7 +28,7 @@ export const Interaction: Story = {
   },
 };
 
-const TEST_VALUE = [1, 7, 5, 6, 2, 9];
+const TEST_VALUE = '175629';
 
 export const Example = () => (
   <>
