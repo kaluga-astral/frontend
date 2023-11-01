@@ -16,29 +16,27 @@ import { createTheme } from './baseTheme';
   collapsed
   name="theme"
   style={{ width: '100%', marginBottom: '24px', marginTop: '24px' }}
-  src={
-    createTheme({
-      brand: Brand.DEFAULT,
-      fontsUrls: {
-        bold: {
-          woff: '',
-          woff2: '',
-        },
-        light: {
-          woff: '',
-          woff2: '',
-        },
-        regular: {
-          woff: '',
-          woff2: '',
-        },
-        medium: {
-          woff: '',
-          woff2: '',
-        },
+  src={createTheme({
+    brand: Brand.DEFAULT,
+    fontsUrls: {
+      bold: {
+        woff: '',
+        woff2: '',
       },
-    })
-  }
+      light: {
+        woff: '',
+        woff2: '',
+      },
+      regular: {
+        woff: '',
+        woff2: '',
+      },
+      medium: {
+        woff: '',
+        woff2: '',
+      },
+    },
+  })}
   theme="monokai"
   displayObjectSize={false}
   displayDataTypes={false}
@@ -47,11 +45,7 @@ import { createTheme } from './baseTheme';
 ## Создание темы
 
 ```tsx
-import {
-  Brand,
-  createTheme,
-  styled
-} from '@astral/ui';
+import { Brand, createTheme, styled } from '@astral/ui';
 
 import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
 import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
@@ -95,9 +89,11 @@ const App = () => (
 ```
 
 ## Brand
+
 Тема поддерживает брендирование.
 
 Поддерживаемые бренды:
+
 ```ts
 export enum Brand {
   DEFAULT = 'DEFAULT',
@@ -109,11 +105,15 @@ export enum Brand {
   LKP = 'LKP',
   POA = 'POA',
   RSS = 'RSS',
+  SBER = 'SBER',
+  LK1C = 'LK1C',
+  PLATFORM = 'PLATFORM',
 }
 ```
 
 ## useTheme
-Для доступа к ```theme``` внутри компонента можно использовать ```useTheme```.
+
+Для доступа к `theme` внутри компонента можно использовать `useTheme`.
 
 ```tsx
 import { useTheme } from '@astral/ui';
