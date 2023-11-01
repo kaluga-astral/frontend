@@ -19,7 +19,7 @@ const KEYS_IN_MASK = /\w{1,4}/g;
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, onChange, mask, size = 'medium', ...props }, ref) => {
+>(({ onClick, mask, size = 'medium', onFocus, ...props }, ref) => {
   const [normalizedMask, maskBlocks] = useMemo(() => {
     // маска maskField соглашается работать только с разделителями имеющими символ "`" (косая кавычка) перед заменяемым элементом
     const nMask = mask?.replace('.', '.`');
@@ -44,26 +44,28 @@ export const DatePickerInput = forwardRef<
   }, [mask]);
 
   return (
-    <DatePickerInputWrapper
-      {...props}
-      ref={ref}
-      size={size}
-      mask={normalizedMask}
-      unmask={false}
-      blocks={maskBlocks}
-      autofix={false}
-      fullWidth
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end" disablePointerEvents>
-            <CalendarOutlineMd />
-          </InputAdornment>
-        ),
-      }}
-      inputProps={{
-        ref,
-        onClick,
-      }}
-    />
+    <div onFocus={onFocus} tabIndex={-1}>
+      <DatePickerInputWrapper
+        {...props}
+        ref={ref}
+        size={size}
+        mask={normalizedMask}
+        unmask={false}
+        blocks={maskBlocks}
+        autofix={false}
+        fullWidth
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" disablePointerEvents>
+              <CalendarOutlineMd />
+            </InputAdornment>
+          ),
+        }}
+        inputProps={{
+          ref,
+          onClick,
+        }}
+      />
+    </div>
   );
 });
