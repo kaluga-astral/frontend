@@ -101,8 +101,8 @@ export const Sizes = () => (
 );
 
 const GridContainer = styled(Grid)`
-  margin-top: 30px;
   gap: 10px;
+  margin-top: 30px;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: row;

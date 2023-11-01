@@ -1,6 +1,6 @@
 import { Components } from '@mui/material';
 
-import type { Theme } from '../baseTheme';
+import { Theme } from '../types';
 import { AutocompleteSizes } from '../../Autocomplete/enums';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
@@ -22,13 +22,18 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
     popupIndicator({ theme }) {
       return {
         borderRadius: theme.shape.small,
-        width: 20,
-        height: 20,
+        display: 'flex',
+        alignItems: 'center',
+        width: 32,
+        height: 32,
       };
     },
     endAdornment() {
       return {
-        top: 'calc(50% - 11px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        top: 'calc(50% - 16px)',
       };
     },
     paper({ theme }) {
@@ -43,16 +48,35 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
     },
     clearIndicator({ theme }) {
       return {
+        width: 32,
+        height: 32,
+
         padding: 0,
-        borderRadius: '50%',
-        backgroundColor: theme.palette.grey['500'],
+
         color: theme.palette.primary.contrastText,
-        marginRight: theme.spacing(1),
-        width: 14,
-        height: 14,
+
+        '::before': {
+          content: '""',
+
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+
+          display: 'block',
+          width: '50%',
+          height: '50%',
+
+          backgroundColor: theme.palette.grey['500'],
+
+          transform: 'translate(-50%, -50%)',
+          borderRadius: '50%',
+        },
+
         '>svg': {
           width: 16,
           height: 16,
+
+          zIndex: 1,
         },
       };
     },

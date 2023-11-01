@@ -1,4 +1,4 @@
-import { Chip } from '@mui/material';
+import { Chip, ChipProps } from '@mui/material';
 
 import { styled } from '../styles';
 import { Theme } from '../theme';
@@ -7,16 +7,17 @@ import { BadgeColor } from '../Badge';
 import { TagColors, TagStates, TagVariants } from './enums';
 import { TagColor, TagSize, TagState, TagVariant } from './types';
 
-import { TagProps } from '.';
-
-type StyledTagProps = Omit<TagProps, 'color' | 'size'> & {
+type StyledTagProps = {
   customColor?: TagColor;
   customVariant?: TagVariant;
   rounded?: boolean;
   customSize: TagSize;
 };
 
-type StyledTagThemeProps = StyledTagProps & { theme: Theme };
+type StyledTagThemeProps = StyledTagProps & { theme: Theme } & Pick<
+    ChipProps,
+    'onDelete' | 'disabled'
+  >;
 
 const HEIGHTS: Record<TagSize, string> = {
   small: '20px',

@@ -50,6 +50,7 @@ export type CheckableTagProps = Omit<
  * />
 
  */
+
 export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
   (
     {

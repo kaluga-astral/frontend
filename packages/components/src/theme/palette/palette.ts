@@ -7,7 +7,7 @@ import { TypeBackground } from '@mui/material/styles/createPalette';
 
 import { Brand } from '../constants';
 
-import { brandPalette } from './brandPalette';
+import { ColorBrand, brandPalette } from './brandPalette';
 
 export type Color = {
   900: string;
@@ -36,6 +36,7 @@ type PaletteOptions = MuiPaletteOptions & {
   grey: Color;
   primary: PrimaryColorOptions;
   background: Background;
+  brand: ColorBrand;
 };
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
@@ -79,15 +80,16 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       ...brandColors.yellow,
     },
     primary: {
-      main: brandColors[800],
-      dark: brandColors[900],
+      main: brandColors.primary[800],
+      dark: brandColors.primary[900],
       contrastText: '#FFF',
-      ...brandColors,
+      ...brandColors.primary,
     },
     secondary: {
-      main: brandColors.secondary,
-      dark: brandColors[900],
+      main: brandColors.secondary[800],
+      dark: brandColors.primary[900],
       contrastText: '#FFF',
+      ...brandColors.secondary,
     },
     get success() {
       return {
@@ -138,6 +140,10 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       element: '#FAFBFC',
       elementHover: '#EEF1F4',
       modalShadow: '#142A438A',
+    },
+    brand: {
+      800: brandColors.brand[800],
+      background: brandColors.brand.background,
     },
   };
 };

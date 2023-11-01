@@ -3,8 +3,11 @@ import { Radio, css } from '@mui/material';
 import { styled } from '../styles';
 import { Theme } from '../theme';
 
-import { RadioProps } from './Radio';
 import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from './constants';
+
+type StyledRadioProps = {
+  isError?: boolean;
+};
 
 const getErrorStyles = (theme: Theme) => css`
   &.MuiRadio-root:not(.Mui-disabled) {
@@ -20,7 +23,7 @@ const getErrorStyles = (theme: Theme) => css`
 
 export const StyledRadio = styled(Radio, {
   shouldForwardProp: (prop) => prop !== 'isError',
-})<RadioProps>`
+})<StyledRadioProps>`
   padding: 5px;
 
   color: ${({ theme }) => theme.palette.grey[300]};

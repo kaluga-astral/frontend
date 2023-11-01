@@ -1,6 +1,6 @@
-import { Components } from '@mui/material';
+import { Components, listClasses, paperClasses } from '@mui/material';
 
-import type { Theme } from '../baseTheme';
+import { Theme } from '../types';
 
 export const MuiMenu: Components<Theme>['MuiMenu'] = {
   defaultProps: {
@@ -10,7 +10,7 @@ export const MuiMenu: Components<Theme>['MuiMenu'] = {
     paper({ theme }: { theme: Theme }) {
       return {
         marginTop: theme.spacing(2),
-        '&.MuiPaper-root': {
+        [`&&.${paperClasses.root}`]: {
           borderRadius: theme.shape.small,
           boxShadow: theme.elevation[200],
         },
@@ -18,7 +18,12 @@ export const MuiMenu: Components<Theme>['MuiMenu'] = {
     },
     list({ theme }: { theme: Theme }) {
       return {
-        padding: theme.spacing(1, 0),
+        [`&&.${listClasses.root}`]: {
+          padding: 0,
+        },
+        [`&&.${listClasses.padding}`]: {
+          padding: theme.spacing(1, 0),
+        },
       };
     },
   },
