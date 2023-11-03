@@ -1,18 +1,24 @@
-import { Story } from '@storybook/react';
-import { Stack, useMediaQuery, useTheme } from '@mui/material';
-import { DialogOutlineMd, MailFillSm } from '@astral/icons';
+import { Meta, StoryObj } from '@storybook/react';
+import { DialogOutlineMd } from '@astral/icons';
 
-import { Typography } from '../Typography';
-import { LegacyGrid } from '../LegacyGrid';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { MenuItem } from '../MenuItem';
+import { Grid, MenuItem, Typography } from '..';
 
-import { DropdownButton, DropdownButtonProps } from './DropdownButton';
+import { DropdownButton } from './DropdownButton';
 
-export default {
+/**
+ * DropdownButton - позволяет компактно разместить несколько вариантов действия в одном элементе.
+ *
+ * В большинстве случаев в качестве такого элемента выступает кнопка или пункт меню. Вызывается по клику или наведению на элемент.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=6960-90908&mode=design&t=vqxm9iY5hHwyqGi6-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof DropdownButton> = {
   title: 'Components/DropdownButton',
   component: DropdownButton,
 };
+
+export default meta;
 
 const dropdownContent = (
   <>
@@ -22,231 +28,119 @@ const dropdownContent = (
   </>
 );
 
-export const DropdownButtonShowcase: Story = () => {
-  const theme = useTheme();
+type Story = StoryObj<typeof DropdownButton>;
 
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
+export const Interaction: Story = {
+  args: {
+    children: dropdownContent,
+    name: 'Действие',
+    variant: 'contained',
+    color: 'primary',
+    size: 'large',
+    fullWidth: false,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
+export const Example = () => (
+  <Grid container columns={3} spacing={4}>
+    <DropdownButton name="Default">{dropdownContent}</DropdownButton>
+    <DropdownButton disabled name="Disabled">
+      {dropdownContent}
+    </DropdownButton>
+    <DropdownButton loading name="Loading">
+      {dropdownContent}
+    </DropdownButton>
+  </Grid>
+);
+
+export const StartIcon = () => {
   return (
-    <ExampleTemplate>
-      <Typography paragraph variant="h3">
-        DropdownButton
-      </Typography>
-      <Typography paragraph>
-        DropdownButton - позволяет компактно разместить несколько вариантов
-        действия в одном элементе.
-      </Typography>
-      <Typography paragraph>
-        В большинстве случаев в качестве такого элемента выступает кнопка или
-        пункт меню. Вызывается по клику или наведению на элемент.
-      </Typography>
-      <Typography variant="h4" paragraph>
-        Типы кнопок
-      </Typography>
-
-      <ExampleTemplate.Case
-        title="Contained"
-        descriptionList={[
-          'Используется, когда необходимо обозначить ключевое или стартовое действие на странице.',
-          'На одной странице не может находиться свыше одной акцентной кнопки. Исключение - акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов. ',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={4}
-        >
-          <DropdownButton fullWidth name="Default">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton disabled fullWidth name="Disabled">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton loading fullWidth name="Loading">
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Light"
-        descriptionList={[
-          'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={4}
-        >
-          <DropdownButton variant="light" fullWidth name="Default">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton variant="light" disabled fullWidth name="Disabled">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton variant="light" loading fullWidth name="Loading">
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Text"
-        descriptionList={['Кнопка требующая наименьшего внимания.']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={4}
-        >
-          <DropdownButton variant="text" fullWidth name="Defalut">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton variant="text" disabled fullWidth name="Disabled">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton variant="text" loading fullWidth name="Loading">
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Размер кнопки"
-        descriptionList={[
-          'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={4}
-          alignItems="center"
-        >
-          <DropdownButton
-            size="medium"
-            variant="light"
-            fullWidth
-            name="Default"
-          >
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton size="large" variant="light" fullWidth name="Default">
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case title="Кнопки с иконками">
-        <LegacyGrid
-          container
-          justifyContent="center"
-          templateColumns="repeat(auto-fit, 200px)"
-          spacing={4}
-        >
-          <DropdownButton
-            startIcon={<DialogOutlineMd />}
-            variant="light"
-            fullWidth
-            name="Before&After"
-          >
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Эмоциональный оттенок"
-        descriptionList={[
-          'К любой кнопке может быть добавлен эмоциональный оттенок.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={matches ? autoFlow : 'false'}
-          templateColumns={matches ? '' : 'repeat(3, 100px)'}
-          spacing={4}
-        >
-          <DropdownButton
-            color="error"
-            variant="contained"
-            fullWidth
-            name="Error"
-          >
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton
-            color="success"
-            variant="contained"
-            fullWidth
-            name="Success"
-          >
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton
-            color="warning"
-            variant="contained"
-            fullWidth
-            name="Warning"
-          >
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton color="error" variant="light" fullWidth name="Error">
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton
-            color="success"
-            variant="light"
-            fullWidth
-            name="Success"
-          >
-            {dropdownContent}
-          </DropdownButton>
-          <DropdownButton
-            color="warning"
-            variant="light"
-            fullWidth
-            name="Warning"
-          >
-            {dropdownContent}
-          </DropdownButton>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
+    <DropdownButton
+      startIcon={<DialogOutlineMd />}
+      variant="light"
+      name="With icon"
+    >
+      {dropdownContent}
+    </DropdownButton>
   );
 };
 
-DropdownButtonShowcase.parameters = { options: { showPanel: false } };
+/** Для стилизации основной кнопки доступны ButtonProps */
+export const ButtonProps = () => (
+  <Grid container rowSpacing={5}>
+    <Typography variant="h6">Variant</Typography>
 
-const Template: Story<DropdownButtonProps> = (args) => (
-  <Stack gap={1}>
-    <Stack gap={3} direction="row" alignItems="center">
-      <DropdownButton {...args}>{dropdownContent}</DropdownButton>
-    </Stack>
-  </Stack>
+    <Grid container columns={3} spacing={4}>
+      <DropdownButton name="Default">{dropdownContent}</DropdownButton>
+      <DropdownButton variant="light" name="Light">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton variant="text" name="Text">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton variant="link" name="Link">
+        {dropdownContent}
+      </DropdownButton>
+    </Grid>
+
+    <Typography variant="h6">Color</Typography>
+
+    <Grid container columns={3} spacing={4}>
+      <DropdownButton color="primary" name="Primary">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton color="error" name="Error">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton color="success" name="Success">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton color="warning" name="Warning">
+        {dropdownContent}
+      </DropdownButton>
+    </Grid>
+
+    <Typography variant="h6">Size</Typography>
+
+    <Grid container columns={3} spacing={6}>
+      <DropdownButton size="medium" name="Medium">
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton size="large" name="Large">
+        {dropdownContent}
+      </DropdownButton>
+    </Grid>
+  </Grid>
 );
 
-export const DropdownButtonStory = Template.bind({});
-
-DropdownButtonStory.storyName = 'DropdownButton';
-
-DropdownButtonStory.args = {
-  name: 'Действие',
-  startIcon: <MailFillSm />,
-  disabled: false,
-  color: 'primary',
-  variant: 'contained',
-  size: 'medium',
-};
-
-DropdownButtonStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+/** Для управления параметрами popover доступны PopoverProps */
+export const PopoverProps = () => {
+  return (
+    <>
+      <DropdownButton
+        name="Default"
+        variant="light"
+        popoverProps={{
+          anchorOrigin: { vertical: 'center', horizontal: 'right' },
+        }}
+      >
+        {dropdownContent}
+      </DropdownButton>
+      <DropdownButton
+        name="Default"
+        variant="light"
+        popoverProps={{
+          anchorOrigin: { vertical: 'center', horizontal: 'right' },
+          transformOrigin: { vertical: 100, horizontal: 'right' },
+        }}
+      >
+        {dropdownContent}
+      </DropdownButton>
+    </>
+  );
 };
