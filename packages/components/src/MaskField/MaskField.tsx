@@ -82,9 +82,7 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
       setIsValue(value);
     };
 
-    const checkIsLazy = () => {
-      return isFocused || isValue;
-    };
+    const checkIsLazy = isFocused || isValue;
 
     return (
       <MaskedTextField
@@ -94,7 +92,7 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
         ref={inputRef}
         onFocus={handleFocusChange}
         onBlur={handleFocusChange}
-        lazy={!checkIsLazy()}
+        lazy={!checkIsLazy}
       />
     );
   },
