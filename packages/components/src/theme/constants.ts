@@ -9,6 +9,7 @@ export enum Brand {
   POA = 'POA',
   RSS = 'RSS',
   SBER = 'SBER',
+  LK1C = 'LK1C',
   PLATFORM = 'PLATFORM',
 }
 

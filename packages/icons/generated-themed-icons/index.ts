@@ -120,6 +120,8 @@ export { default as InfoFillSm } from './InfoFillSm';
 
 export { default as InfoOutlineMd } from './InfoOutlineMd';
 
+export { default as InfoOutlineSm } from './InfoOutlineSm';
+
 export { default as LikeOutlineMd } from './LikeOutlineMd';
 
 export { default as LinkOutlineMd } from './LinkOutlineMd';

@@ -282,6 +282,27 @@ const sberPalette: BrandColors = {
   },
 };
 
+const lk1cPalette: BrandColors = {
+  primary: {
+    900: '#0559AD',
+    800: '#087FF7',
+    700: '#268FF9',
+    600: '#6BB2FA',
+    500: '#9CCCFC',
+    400: '#BADCFD',
+    300: '#D7EAFE',
+    200: '#E7F3FF',
+    100: '#F0F8FF',
+  },
+  secondary: {
+    800: '#2EA32E',
+  },
+  brand: {
+    800: '#FF5E5D',
+    background: '#F9F4F2',
+  },
+};
+
 const platformPalette: BrandColors = {
   primary: {
     900: '#1A83C7',
@@ -314,5 +335,6 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.POA]: poaPalette,
   [Brand.RSS]: rssPalette,
   [Brand.SBER]: sberPalette,
+  [Brand.LK1C]: lk1cPalette,
   [Brand.PLATFORM]: platformPalette,
 };
