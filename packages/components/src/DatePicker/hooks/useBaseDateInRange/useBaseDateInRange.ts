@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
+import { addMonths, buildIsoDate } from '@astral/utils';
 
 import { MinMaxDate } from '../../types';
-import { addMonths, buildIsoDate } from '../../../utils/date';
 
 type UseBaseDateInRangeOptions = MinMaxDate & {
   /**

@@ -1,13 +1,13 @@
 import { useContext, useMemo } from 'react';
-
-import { YEARS_IN_GRID } from '../../constants';
-import { GridBuilder, GridItem } from '../../../types';
 import {
   DateCompareDeep,
   addYears,
   buildIsoDate,
   isDateOutOfRange,
-} from '../../../../utils/date';
+} from '@astral/utils';
+
+import { YEARS_IN_GRID } from '../../constants';
+import { GridBuilder, GridItem } from '../../../types';
 import {
   buildGridResult,
   isDateBetweenSelectedAndRangeDates,

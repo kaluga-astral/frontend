@@ -1,8 +1,8 @@
 import { Story } from '@storybook/react';
 import { useState } from 'react';
+import { addDays, buildIsoDate } from '@astral/utils';
 
 import { LegacyGrid } from '../LegacyGrid';
-import { addDays, buildIsoDate } from '../utils/date';
 
 import { DateRangePicker, DateRangePickerProps } from './index';
 

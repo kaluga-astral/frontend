@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { Link } from '@mui/material';
+import { formatPhoneToView } from '@astral/utils';
 
 import { Button } from '../Button';
 import { Placeholder } from '../Placeholder';
 import { ConfigContext } from '../ConfigProvider';
 import { Typography } from '../Typography';
-import { formatPhoneToView } from '../utils/phone';
 
 export const InternalErrorPlaceholder = () => {
   const { imagesMap, techSup } = useContext(ConfigContext);
