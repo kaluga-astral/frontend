@@ -1,6 +1,4 @@
 import {
-  BaseSyntheticEvent,
-  FocusEvent,
   KeyboardEvent,
   ReactNode,
   forwardRef,
@@ -18,6 +16,13 @@ import {
   Digit,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
+import {
+  CODE_LENGTH_DEFAULT,
+  DIGITS_REGEX,
+  ERROR_TEXT_DEFAULT,
+  KEYBOARD_KEYS,
+  RESTART_TIME_DEFAULT,
+} from './constants';
 
 export type CodeFieldInputProps = {
   /**
@@ -64,18 +69,6 @@ export type CodeFieldInputProps = {
    * @description Вызывается при заполнении поля
    */
   onComplete?: (value: string) => void;
-};
-
-const CODE_LENGTH_DEFAULT = 6;
-const RESTART_TIME_DEFAULT = 60;
-const ERROR_TEXT_DEFAULT = 'Код подтверждения недействителен';
-
-const DIGITS_REGEX = /[^0-9]/g;
-
-const KEYBOARD_KEYS = {
-  backspace: 'Backspace',
-  moveCaretLeft: 'ArrowLeft',
-  moveCaretRight: 'ArrowRight',
 };
 
 type CodeFieldInputType = '' | number;
@@ -145,27 +138,27 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     const deletePreviousSymbol = (index: number) => {
       let newArrayValue = [...arrayValue];
 
-      if (arrayValue[index]) {
+      if (arrayValue[index].toString()) {
         newArrayValue[index] = '';
         setArrayValue(newArrayValue);
-      } else if (arrayValue[index - 1]) {
+      } else if (arrayValue[index - 1].toString()) {
         newArrayValue[index - 1] = '';
         setArrayValue(newArrayValue);
         setFocusIndexPrevious(index);
       }
     };
 
-    const onChange = (e: BaseSyntheticEvent, index: number) => {
-      const newValue = e.target.value.replace(DIGITS_REGEX, '');
+    const onChange = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+      const newValue = parseInt(e.key);
 
+      // @ts-ignore
       e.target.value = newValue;
 
       setArrayValue((preValue: CodeFieldInputType[]) => {
         const newArrayValue = [...preValue];
 
-        if (parseInt(newValue) || newValue === '0') {
-          newArrayValue[index] = newValue;
-        }
+        newArrayValue[index] = newValue;
+        setFocusIndexNext(index);
 
         return newArrayValue;
       });
@@ -188,6 +181,9 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
           e.preventDefault();
 
           break;
+        case KEYBOARD_KEYS.arrowUp:
+        case KEYBOARD_KEYS.arrowDown:
+          e.preventDefault();
       }
     };
 
@@ -197,12 +193,8 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
       if (e.key === KEYBOARD_KEYS.backspace) {
         setFocusIndexPrevious(index);
       } else if (keyCode >= 0 && keyCode <= 9) {
-        setFocusIndexNext(index);
+        onChange(e, index);
       }
-    };
-
-    const onFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
-      e.target?.select();
     };
 
     const onPaste = (event: ClipboardEvent) => {
@@ -252,15 +244,12 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
               key={index}
               disabled={disabled || loading}
               type="tel"
-              maxLength={1}
               inputMode="numeric"
               pattern="[0-9]"
-              value={value || ''}
+              value={value ?? ''}
               ref={(el) => el && (inputRefs.current[index] = el)}
-              onChange={(e) => onChange(e, index)}
               onKeyUp={(e) => onKeyUp(e, index)}
               onKeyDown={(e) => onKeyDown(e, index)}
-              onFocus={(e) => onFocus(e)}
               isError={isError}
             />
           ))}
@@ -279,3 +268,4 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
     );
   },
 );
+///678901
