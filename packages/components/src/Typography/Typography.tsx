@@ -1,5 +1,4 @@
 import {
-  Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
   TypographyPropsVariantOverrides,
 } from '@mui/material';
@@ -9,6 +8,7 @@ import { ElementType, HTMLAttributes, forwardRef, useMemo } from 'react';
 import { Theme } from '../theme';
 
 import { TypographyColors } from './enums';
+import { StyledTypography } from './styles';
 
 type Intensity =
   | '900'
@@ -53,6 +53,11 @@ export type TypographyProps = TypographyPropsBase & {
    * @default 'p'
    */
   component?: ComponentProp;
+  /**
+   * @description Верхний регистр дочерних элементов
+   * @default false
+   */
+  isUpperCase?: boolean;
 } & HTMLAttributes<HTMLParagraphElement>;
 
 declare module '@mui/material/Typography' {
@@ -97,14 +102,14 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
     }, [color, colorIntensity]);
 
     return (
-      <MuiTypography
+      <StyledTypography
         ref={ref}
         {...props}
         component={component as ComponentProp}
         color={typographyColor}
       >
         {children}
-      </MuiTypography>
+      </StyledTypography>
     );
   },
 );

@@ -165,3 +165,18 @@ export const Ellipsis = () => (
     </Typography>
   </div>
 );
+
+/**
+ * Prop ```isUpperCase``` позволяет добавить верхний регистр на дочерние элементы
+ */
+export const UpperCase = () => (
+  <Grid container spacing={6}>
+    <Typography isUpperCase>
+      Электронная отчетность и документооборот{' '}
+      <Typography color="info" component="span">
+        и{' '}
+      </Typography>
+      документооборот
+    </Typography>
+  </Grid>
+);
