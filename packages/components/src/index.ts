@@ -144,6 +144,8 @@ export * from './PageLayoutContainer';
 
 export * from './Paper';
 
+export * from './PersonalData';
+
 export * from './Placeholder';
 
 export * from './Popover';
