@@ -167,7 +167,7 @@ export const Ellipsis = () => (
 );
 
 /**
- * Prop ```isUpperCase``` позволяет добавить верхний регистр на дочерние элементы
+ * Prop ```isUpperCase``` переводит текст в верхний регистр
  */
 export const UpperCase = () => (
   <Grid container spacing={6}>

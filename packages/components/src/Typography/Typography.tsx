@@ -8,7 +8,7 @@ import { ElementType, HTMLAttributes, forwardRef, useMemo } from 'react';
 import { Theme } from '../theme';
 
 import { TypographyColors } from './enums';
-import { StyledTypography } from './styles';
+import { TypographyWrapper } from './styles';
 
 type Intensity =
   | '900'
@@ -102,14 +102,14 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
     }, [color, colorIntensity]);
 
     return (
-      <StyledTypography
+      <TypographyWrapper
         ref={ref}
         {...props}
         component={component as ComponentProp}
         color={typographyColor}
       >
         {children}
-      </StyledTypography>
+      </TypographyWrapper>
     );
   },
 );
