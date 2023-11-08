@@ -4,8 +4,9 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   z-index: ${({ theme }) => theme.zIndex.appBar - 1};
 
   display: flex;
-  flex-direction: column;
   grid-area: sidebar;
+  flex-direction: column;
+
   min-width: ${({ collapsedIn }) => (collapsedIn ? '240px' : '100%')};
   padding: ${({ theme }) => theme.spacing(2)};
 

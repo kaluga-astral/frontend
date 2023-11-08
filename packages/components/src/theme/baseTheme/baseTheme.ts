@@ -1,7 +1,6 @@
 import {
   BreakpointsOptions,
   Palette as MuiPalette,
-  Theme as MuiTheme,
   PaletteColor,
   ThemeOptions,
   createTheme as createMuiTheme,
@@ -15,6 +14,7 @@ import { Brand, SPACING } from '../constants';
 import { elevation } from '../elevation';
 import { shape } from '../shape';
 import { defaultBreakpoints } from '../breakpoints';
+import { Theme } from '../types';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -24,8 +24,6 @@ export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   primary: PaletteColor & Color;
   background: Background;
 };
-
-export type Theme = MuiTheme;
 
 type CreateThemeParams = {
   brand: Brand;

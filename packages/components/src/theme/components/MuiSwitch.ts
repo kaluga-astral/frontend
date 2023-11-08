@@ -1,6 +1,6 @@
 import { Components } from '@mui/material';
 
-import type { Theme } from '../baseTheme';
+import { Theme } from '../types';
 
 const prepareColorToUrl = (color: string) => color.replace('#', '%23');
 

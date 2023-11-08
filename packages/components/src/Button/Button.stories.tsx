@@ -69,8 +69,8 @@ export const Example = () => {
 const ButtonsContainer = styled(Grid)`
   display: grid;
   gap: ${({ theme }) => theme.spacing(3)};
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: row;
