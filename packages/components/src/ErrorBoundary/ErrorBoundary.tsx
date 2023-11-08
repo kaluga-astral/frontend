@@ -1,9 +1,22 @@
 import React, { ReactNode } from 'react';
 
-import { Button } from '../Button';
 import { ConfigContext } from '../ConfigProvider';
-import { Typography } from '../Typography';
-import { LegacyGrid } from '../LegacyGrid';
+import { InternalErrorPlaceholder } from '../InternalErrorPlaceholder';
+import { OutdatedReleasePlaceholder } from '../OutdatedReleasePlaceholder';
+
+import { TypeError } from './enums';
+import { CONDITION_TYPE_ERROR } from './constants';
+
+export type State = {
+  /**
+   * Флаг наличия перехваченной ошибки
+   */
+  hasError: boolean;
+  /**
+   * Тип перехваченной ошибки
+   */
+  typeError: TypeError;
+};
 
 type Props = {
   /**
@@ -12,11 +25,12 @@ type Props = {
   children: ReactNode;
 };
 
-type State = {
-  /**
-   * Флаг наличия перехваченной ошибки
-   */
-  error: boolean;
+/**
+ * Отображение при определенной ошибке
+ */
+const PLACEHOLDER_TYPE_ERROR: Record<TypeError, ReactNode> = {
+  [TypeError.OutdatedRelease]: <OutdatedReleasePlaceholder />,
+  [TypeError.Default]: <InternalErrorPlaceholder />,
 };
 
 /**
@@ -30,33 +44,26 @@ class ErrorBoundary extends React.Component<Props, State> {
   context!: React.ContextType<typeof ConfigContext>;
 
   public state: State = {
-    error: false,
+    hasError: false,
+    typeError: TypeError.Default,
   };
 
-  public static getDerivedStateFromError() {
-    return { error: true };
+  public static getDerivedStateFromError(error: Error) {
+    return {
+      hasError: true,
+      typeError:
+        CONDITION_TYPE_ERROR.find(({ condition }) => condition(error))?.type ??
+        TypeError.Default,
+    };
   }
 
   public componentDidCatch(error: Error) {
     this.context.captureException(error);
   }
 
-  handleReloadPage() {
-    location.reload();
-  }
-
   public render() {
-    if (this.state.error) {
-      return (
-        <LegacyGrid alignItems="center" justifyContent="center">
-          <Typography variant="h4" paragraph>
-            Произошла ошибка
-          </Typography>
-          <Button onClick={this.handleReloadPage}>
-            Перезагрузить страницу
-          </Button>
-        </LegacyGrid>
-      );
+    if (this.state.hasError) {
+      return PLACEHOLDER_TYPE_ERROR[this.state.typeError];
     }
 
     return this.props.children;

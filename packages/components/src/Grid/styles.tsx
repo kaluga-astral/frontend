@@ -2,7 +2,46 @@ import { styled } from '../styles';
 import { Theme } from '../theme';
 
 import { GridComponent } from './GridComponent';
-import { GridProps } from './Grid';
+
+export type StyledGridProps = {
+  /**
+   * Задаёт display: grid; Если задан columns, spacing и тп, то включается автоматически
+   * @default false
+   */
+  container?: boolean;
+  /**
+   * Количество равных колонок,
+   * либо текстовое значение соответствующее grid-template-columns
+   * @default undefined
+   */
+  columns?: number | string;
+  /**
+   * Количество равных рядов,
+   * либо текстовое значение соответствующее grid-template-rows
+   * @default undefined
+   */
+  rows?: number | string;
+  /**
+   * Отступы между колонками
+   * @default undefined
+   */
+  columnSpacing?: number;
+  /**
+   * Отступы между рядами
+   * @default undefined
+   */
+  rowSpacing?: number;
+  /**
+   * Отступы между колонками и рядами. Если передан массив: Первый элемент - отступ между рядами, второй - между колонками
+   * @default undefined
+   */
+  spacing?: number | [number, number];
+  /**
+   * Соответствует grid-autoflow
+   * @default 	'row'
+   */
+  direction?: 'row' | 'column' | 'dense';
+};
 
 /**
  * @description Если аргумент - массив, то возвращаем его, иначе кладем аргумент в массив
@@ -37,7 +76,7 @@ export const StyledGrid = styled(GridComponent, {
       'rowSpacing',
       'spacing',
     ].includes(prop),
-})<GridProps>`
+})<StyledGridProps>`
   ${({ theme, columnSpacing }) =>
     columnSpacing && `column-gap: ${theme.spacing(columnSpacing)};`};
   ${({ theme, rowSpacing }) =>

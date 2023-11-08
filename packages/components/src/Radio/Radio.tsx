@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { RadioProps as MuiRadioProps } from '@mui/material';
 
 import { WithoutEmotionSpecific } from '../types';
@@ -16,7 +16,7 @@ export type RadioProps = Omit<
   isError?: boolean;
 };
 
-export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
+export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
   (
     {
       icon = <DefaultIcon />,
@@ -30,5 +30,3 @@ export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(
     );
   },
 );
-
-export default Radio;
