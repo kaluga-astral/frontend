@@ -1,13 +1,13 @@
 import { useContext, useMemo } from 'react';
-
-import { DAYS_IN_WEEK, MONTHS_IN_YEAR } from '../../../constants/counts';
 import {
   DateCompareDeep,
   addDays,
   buildIsoDate,
   isDate,
   isDateOutOfRange,
-} from '../../../../utils/date';
+} from '@astral/utils';
+
+import { DAYS_IN_WEEK, MONTHS_IN_YEAR } from '../../../constants/counts';
 import { GridBuilder, GridItem } from '../../../types';
 import {
   buildGridResult,

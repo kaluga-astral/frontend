@@ -1,12 +1,12 @@
 import { useContext, useMemo } from 'react';
-
-import { MONTHS_IN_YEAR } from '../../../constants/counts';
 import {
   DateCompareDeep,
   addMonths,
   buildIsoDate,
   isDateOutOfRange,
-} from '../../../../utils/date';
+} from '@astral/utils';
+
+import { MONTHS_IN_YEAR } from '../../../constants/counts';
 import { GridBuilder, GridItem } from '../../../types';
 import {
   buildGridResult,

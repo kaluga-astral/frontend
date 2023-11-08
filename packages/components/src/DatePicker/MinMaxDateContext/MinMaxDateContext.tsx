@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext } from 'react';
+import { buildIsoDate } from '@astral/utils';
 
 import { MinMaxDate } from '../types';
-import { buildIsoDate } from '../../utils/date';
 
 export const DEFAULT_MIN_DATE = buildIsoDate({ year: 1900 });
 

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { addMonths } from '@astral/utils';
 
 import {
   CommonDateCalendarHeadProps,
@@ -9,7 +10,6 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { PickerProps } from '../types';
-import { addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
 import { DAYS_IN_WEEK } from '../constants/counts';

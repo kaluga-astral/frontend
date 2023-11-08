@@ -1,8 +1,8 @@
 import { RefObject, SyntheticEvent, forwardRef } from 'react';
+import { DateMask } from '@astral/utils';
 
 import { TextFieldProps } from '../TextField';
 import { useForwardedRef, useInputPopover } from '../hooks';
-import { DateMask } from '../utils/date';
 import { CloseEventReason } from '../types';
 
 import { DatePickerInput } from './DatePickerInput';
