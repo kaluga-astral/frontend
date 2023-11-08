@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { AstralProductSwitcher } from './AstralProductSwitcher';
 import { MOCK_FETCH_IDENTITY_PRODUCT } from './AstralProductSwitcher.stub';
 
-const IDENTITY_URL = 'https://identity.demo.astral-dev.ru';
+const IDENTITY_URL = 'https://identity';
 
 /**
  * Реализация виджета продуктов Astral. Поддерживает мультиэкосистемность с помощью передачи параметра ```tenantId```.
@@ -16,6 +16,7 @@ const meta: Meta<typeof AstralProductSwitcher> = {
   component: AstralProductSwitcher,
   parameters: {
     mockData: MOCK_FETCH_IDENTITY_PRODUCT,
+    refreshStoryOnUpdate: true,
   },
 };
 
@@ -43,5 +44,5 @@ export const Example = () => (
  * Prop ```tenantId``` позволяет задать экосистему identity.
  */
 export const Tenant = () => (
-  <AstralProductSwitcher identityUrl={IDENTITY_URL} tenantId="1c" />
+  <AstralProductSwitcher identityUrl={IDENTITY_URL} tenantId="eco" />
 );

@@ -27,9 +27,17 @@ export type IdentityProductsWidgetDTO = {
    * */
   iconFileId: string;
   /**
+   * Ссылка на логотип продукта
+   * */
+  logoUrl?: string;
+  /**
    * Цвет продукта
    * */
   backgroundHexColor?: string;
+  /**
+   * Идентификатор экосистемы
+   * */
+  tenantId?: string;
 };
 
 /**

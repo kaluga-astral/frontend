@@ -1,8 +1,11 @@
-const IDENTITY_URL = 'https://identity.demo.astral-dev.ru';
+const IDENTITY_URL = 'https://identity';
 
 type MockRequest = {
   searchParams: Record<string, string>;
 };
+
+const mockImage =
+  'data:image/svg+xml;base64, PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04LjI1NzE5IDE3LjI2ODlDOC4yNTcxOSAxNy4yNjg5IDQuNTY5MzMgMjAuMjAyMyA0LjExODcyIDIyLjA3OTZDMi43NjA3OCAyNy43MzY5IDEzLjQwNTkgMjAuOTM3NyAxNy45Njg3IDE3LjUxMDZDMTkuMjMwNCAxNi41NjI5IDIxLjAyNTggMTUuMTIwOSAyMi43MDE4IDEzLjYwNTlMMjIuOTExOSAxMy40NzQxQzIyLjkwNjQgMTMuNDU5NCAyMi45MDA5IDEzLjQ0NDcgMjIuODk1NCAxMy40MzAxQzI2LjI4NDQgMTAuMzM3OCAyOS4wNzUgNy4wMTExOSAyNS43NjgyIDcuMDAwMDFDMjMuOTcwOCA2Ljk5Mzk0IDE5Ljg3NjEgOC45MzMyNiAxOS44NzYxIDguOTMzMjZDMTkuODc2MSA4LjkzMzI2IDIyLjc4MjggNy43MzU2NCAyMy40NjUxIDguMDgyOUMyNC40NDM2IDguNTgwODggMjMuMzk5NSA5LjgzMDI2IDIxLjY2OSAxMS4zMDE5QzIwLjMxODEgOS42NDU2MSAxOC4yOTU2IDguNTkzMzkgMTYuMDM1MyA4LjU5MzM5QzExLjk2ODEgOC41OTMzOSA4LjY3MDk2IDEyLjAwMDIgOC42NzA5NiAxNi4yMDI4QzguNjcwOTYgMTcuNjE2MSA5LjA0Mzc5IDE4LjkzOTMgOS42OTMzNiAyMC4wNzMzQzcuNTgzODkgMjEuMzE2NyA1Ljk1ODY3IDIxLjg0OCA2LjAwODkyIDIwLjQzMDVDNi4wNDY0IDE5LjM3MzMgOC4yNTcxOSAxNy4yNjg5IDguMjU3MTkgMTcuMjY4OVpNMjMuMzk5NiAxNi4yMDI4QzIzLjM5OTYgMjAuNDA1NCAyMC4xMDI1IDIzLjgxMjMgMTYuMDM1MyAyMy44MTIzQzE1LjYwMzkgMjMuODEyMyAxNS4xODEyIDIzLjc3NCAxNC43NzAyIDIzLjcwMDVDMTQuMzM4NyAyMy42MjMzIDE0LjExNDEgMjMuMTYwNCAxNC4zMTYxIDIyLjc3MTRDMTYuMTk1MiAxOS4xNTI1IDIxLjAxNzMgMTYuMzkxNiAyMy4zMzkzIDE1LjIyNTNDMjMuMzc5IDE1LjU0NTMgMjMuMzk5NiAxNS44NzE2IDIzLjM5OTYgMTYuMjAyOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04LjUgOC41QzguNSA5LjMyODQzIDcuODI4NDMgMTAgNyAxMEM2LjE3MTU3IDEwIDUuNSA5LjMyODQzIDUuNSA4LjVDNS41IDcuNjcxNTcgNi4xNzE1NyA3IDcgN0M3LjgyODQzIDcgOC41IDcuNjcxNTcgOC41IDguNVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=';
 
 export const MOCK_FETCH_IDENTITY_PRODUCT = [
   {
@@ -15,83 +18,105 @@ export const MOCK_FETCH_IDENTITY_PRODUCT = [
           return {
             data: [
               {
-                id: '6fe18f7a-7dfb-48c6-ab07-0d8da638244f',
-                name: 'Астрал.Отчет',
-                productUrl: 'https://demo-report.astralnalog.ru/',
-                description: 'Астрал Отчет',
-                shortDescription: 'Астрал Отчет',
-                iconFileId: '5731cbfc-267d-45e0-af08-d4e6c68881f4',
+                id: '1',
+                name: 'Астрал.Продукт 1',
+                productUrl: 'https://product1',
+                description: 'Астрал.Продукт 1',
+                shortDescription: 'Астрал.Продукт 1',
+                iconFileId: '1',
+                logoUrl: mockImage,
                 backgroundHexColor: '#2e77ff',
-                logoUrl: `${IDENTITY_URL}/api/Files/5731cbfc-267d-45e0-af08-d4e6c68881f4`,
                 tenantId: 'astral',
               },
               {
-                id: '9f98d09d-5e09-4900-a3fb-ae582aae3343',
-                name: 'Астрал.Доверенность',
-                productUrl: 'https://poa.demo.cloud.astral-dev.ru',
-                description: 'Астрал.Доверенность',
-                shortDescription: 'Астрал.Доверенность',
-                iconFileId: 'afe2ff5f-f03b-4ba2-a3dd-0adf6c9ca71a',
+                id: '2',
+                name: 'Астрал.Продукт 2',
+                productUrl: 'https://product2',
+                description: 'Астрал.Продукт2',
+                shortDescription: 'Астрал.Продукт2',
+                iconFileId: '2',
+                logoUrl: mockImage,
                 backgroundHexColor: '#33adf2',
-                logoUrl: `${IDENTITY_URL}/api/Files/afe2ff5f-f03b-4ba2-a3dd-0adf6c9ca71a`,
                 tenantId: 'astral',
               },
               {
-                id: '9fce36d1-e4cb-4352-ab41-1a2d37b206bc',
-                name: 'Астрал.ЭДО',
-                productUrl: 'https://edo.astral-dev.ru',
-                description: 'Астрал ЭДО',
-                shortDescription: 'Астрал ЭДО',
-                iconFileId: '1639299f-3f67-48f4-a9e7-5bdfc339f91f',
+                id: '3',
+                name: 'Астрал.Продукт 3',
+                productUrl: 'https://product3',
+                description: 'Астрал.Продукт3',
+                shortDescription: 'Астрал.Продукт3',
+                iconFileId: '3',
+                logoUrl: mockImage,
                 backgroundHexColor: '#755afd',
-                logoUrl: `${IDENTITY_URL}/api/Files/1639299f-3f67-48f4-a9e7-5bdfc339f91f`,
                 tenantId: 'astral',
               },
               {
-                id: 'b556f1f8-a0f2-49d8-9d02-3273625ea6cd',
-                name: 'Астрал.ОФД',
-                productUrl: 'https://test.ofd.astralnalog.ru/lk',
-                description: 'Астрал ОФД',
-                shortDescription: 'Астрал ОФД',
-                iconFileId: '6ad838ab-7773-4daa-9b9b-22ca07ae1540',
+                id: '4',
+                name: 'Астрал.Продукт 4',
+                productUrl: 'https://product4',
+                description: 'Астрал.Продукт4',
+                shortDescription: 'Астрал.Продукт4',
+                iconFileId: '4',
+                logoUrl: mockImage,
                 backgroundHexColor: '#00b2ff',
-                logoUrl: `${IDENTITY_URL}/api/Files/6ad838ab-7773-4daa-9b9b-22ca07ae1540`,
                 tenantId: 'astral',
               },
               {
-                id: 'c50fa9b0-eabe-4cd2-aa36-5fb6d187e147',
-                name: 'Астрал.КЭДО',
-                productUrl: 'https://kedo.cloud.astral-dev.ru',
-                description: 'Кадровый электронный документооборот',
-                shortDescription: 'Астрал КЭДО',
-                iconFileId: 'f049b85e-32d2-4332-a56d-00477b9cfe24',
+                id: '5',
+                name: 'Астрал.Продукт 5',
+                productUrl: 'https://product5',
+                description: 'Астрал.Продукт5',
+                shortDescription: 'Астрал.Продукт5',
+                iconFileId: '5',
+                logoUrl: mockImage,
                 backgroundHexColor: '#7856ff',
-                logoUrl: `${IDENTITY_URL}/api/Files/f049b85e-32d2-4332-a56d-00477b9cfe24`,
                 tenantId: 'astral',
               },
             ],
             meta: {
-              totalCount: 6,
+              totalCount: 5,
             },
           };
         }
-        case '1c': {
+        case 'eco': {
           return {
             data: [
               {
-                id: '47a0545a-c511-4f2f-abc6-8b2a036f592a',
-                name: '1C-Докс',
-                productUrl: 'https://personarea.demo.astral-dev.ru',
-                description: '1C-Докс',
-                shortDescription: '1C-Докс',
-                iconFileId: '47a0545a-c511-4f2f-abc6-8b2a036f592a',
+                id: '6',
+                name: 'Экосистема-Продукт 1',
+                productUrl: 'https://eco1',
+                description: 'Экосистема-Продукт1',
+                shortDescription: 'Экосистема-Продукт1',
+                iconFileId: 'test',
+                logoUrl: mockImage,
+                backgroundHexColor: '#2e77ff',
+                tenantId: 'eco',
+              },
+              {
+                id: '7',
+                name: 'Экосистема-Продукт 2',
+                productUrl: 'https://eco2',
+                description: 'Экосистема-Продукт2',
+                shortDescription: 'Экосистема-Продукт2',
+                iconFileId: 'test',
+                logoUrl: mockImage,
                 backgroundHexColor: '#7756FF',
-                logoUrl: `${IDENTITY_URL}/api/Files/47a0545a-c511-4f2f-abc6-8b2a036f592a`,
-                tenantId: '1c',
+                tenantId: 'eco',
+              },
+              {
+                id: '8',
+                name: 'Экосистема-Продукт 3',
+                productUrl: 'https://eco3',
+                description: 'Экосистема-Продукт3',
+                shortDescription: 'Экосистема-Продукт3',
+                iconFileId: 'test',
+                logoUrl: mockImage,
+                backgroundHexColor: '#0397b3',
+                tenantId: 'eco',
               },
             ],
             meta: {
-              totalCount: 1,
+              totalCount: 3,
             },
           };
         }

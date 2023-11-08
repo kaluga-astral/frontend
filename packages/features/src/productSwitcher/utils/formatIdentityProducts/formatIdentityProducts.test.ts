@@ -41,6 +41,7 @@ describe('formatIdentityProducts', () => {
       {
         id: 'testId',
         iconFileId: 'testIconFile',
+        logoUrl: 'testIdentity/api/Files/testIconFile',
       },
     ];
 

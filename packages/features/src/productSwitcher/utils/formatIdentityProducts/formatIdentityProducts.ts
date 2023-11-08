@@ -16,7 +16,9 @@ export const formatIdentityProducts = (
       id: identityProduct.id,
       url: identityProduct.productUrl || '',
       name: identityProduct.name || '',
-      logoUrl: `${identityUrl}/api/Files/${identityProduct.iconFileId}`,
+      logoUrl:
+        identityProduct.logoUrl ||
+        `${identityUrl}/api/files/${identityProduct.iconFileId}`,
       color: identityProduct.backgroundHexColor || '',
     };
   }) || [];

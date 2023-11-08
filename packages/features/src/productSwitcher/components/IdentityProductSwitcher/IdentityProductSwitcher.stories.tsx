@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { MOCK_FETCH_IDENTITY_PRODUCT } from './IdentityProductSwitcher.stub';
 import { IdentityProductSwitcher } from './IdentityProductSwitcher';
 
-const IDENTITY_URL = 'https://identity.demo.astral-dev.ru';
+const IDENTITY_URL = 'https://identity';
 
 /**
  * Реализация виджета продуктов Identity. Позволяет отображать все продукты из всех экосистем Астрала.

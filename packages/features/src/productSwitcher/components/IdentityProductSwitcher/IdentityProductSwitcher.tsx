@@ -22,7 +22,7 @@ import {
   WidgetMenu,
 } from './styles';
 
-export const AstralIdentityTenants = 'astral';
+export const ASTRAL_IDENTITY_DEFAULT_TENANT = 'astral';
 
 export type IdentityProductSwitcherType = {
   /**
@@ -38,7 +38,9 @@ export const IdentityProductSwitcher = ({
     useState<Record<string, WidgetProduct[]>>();
 
   const [tenants, setTenants] = useState<IdentityTenantsDTO[]>();
-  const [tenantId, setTenantId] = useState<string>(AstralIdentityTenants);
+  const [tenantId, setTenantId] = useState<string>(
+    ASTRAL_IDENTITY_DEFAULT_TENANT,
+  );
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -79,7 +81,6 @@ export const IdentityProductSwitcher = ({
       }
     }
   };
-
   const handleChangeTenant = async (
     _event: MouseEvent<HTMLElement>,
     selectedValue: string,
