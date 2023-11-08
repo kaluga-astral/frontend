@@ -10,14 +10,14 @@ vi.mock('../../../../utils', async () => {
       id: 'testId',
       url: 'https://product',
       name: 'testName',
-      logoUrl: 'https://identity/api/Files/testIconFile',
+      logoUrl: 'https://identity/api/files/testIconFile',
       color: 'testColor',
     },
     {
       id: 'testId2',
       url: 'https://localhost',
       name: 'testName2',
-      logoUrl: 'https://identity/api/Files/testIconFile',
+      logoUrl: 'https://identity/api/files/testIconFile',
       color: 'testColor2',
     },
   ];
@@ -35,7 +35,7 @@ describe('getTenantsProducts', () => {
           id: 'testId',
           url: 'https://product',
           name: 'testName',
-          logoUrl: 'https://identity/api/Files/testIconFile',
+          logoUrl: 'https://identity/api/files/testIconFile',
           color: 'testColor',
         },
       ],
@@ -47,11 +47,11 @@ describe('getTenantsProducts', () => {
 
   it('getTenantsProducts форматирует продукты по нескольким экосистемам', async () => {
     const expectedResult = {
-      '1c': [
+      eco: [
         {
           color: 'testColor',
           id: 'testId',
-          logoUrl: 'https://identity/api/Files/testIconFile',
+          logoUrl: 'https://identity/api/files/testIconFile',
           name: 'testName',
           url: 'https://product',
         },
@@ -61,12 +61,12 @@ describe('getTenantsProducts', () => {
           id: 'testId',
           url: 'https://product',
           name: 'testName',
-          logoUrl: 'https://identity/api/Files/testIconFile',
+          logoUrl: 'https://identity/api/files/testIconFile',
           color: 'testColor',
         },
       ],
     };
-    const result = await getTenantsProducts(IDENTITY_URL, ['astral', '1c']);
+    const result = await getTenantsProducts(IDENTITY_URL, ['astral', 'eco']);
 
     expect(result).toStrictEqual(expectedResult);
   });

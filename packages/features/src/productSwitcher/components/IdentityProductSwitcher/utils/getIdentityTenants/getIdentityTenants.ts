@@ -2,7 +2,7 @@ import { IdentityTenantsDTO } from '../../../../types';
 
 /**
  * Получение данных из identity
- * @param identityUrl - адрес идентити
+ * @param identityUrl - адрес identity
  */
 export const getIdentityTenants = async (identityUrl: string) => {
   return fetch(`${identityUrl}/api/tenants/widget`).then((response) => {

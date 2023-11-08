@@ -3,7 +3,7 @@ import { formatIdentityProducts } from '../formatIdentityProducts';
 
 /**
  * Получение данных из identity
- * @param identityUrl - адрес идентити
+ * @param identityUrl - адрес identity
  * @param tenantId - идентификатор экосистемы
  */
 export const getIdentityProducts = async (

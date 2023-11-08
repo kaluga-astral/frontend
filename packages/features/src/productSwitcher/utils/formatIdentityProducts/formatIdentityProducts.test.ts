@@ -23,7 +23,7 @@ describe('formatIdentityProducts', () => {
         id: 'testId',
         url: 'testUrl',
         name: 'testName',
-        logoUrl: 'testIdentity/api/Files/testIconFile',
+        logoUrl: 'testIdentity/api/files/testIconFile',
         color: 'testColor',
       },
     ];
@@ -41,7 +41,7 @@ describe('formatIdentityProducts', () => {
       {
         id: 'testId',
         iconFileId: 'testIconFile',
-        logoUrl: 'testIdentity/api/Files/testIconFile',
+        logoUrl: 'testIdentity/api/files/testIconFile',
       },
     ];
 
@@ -50,7 +50,7 @@ describe('formatIdentityProducts', () => {
         id: 'testId',
         url: '',
         name: '',
-        logoUrl: 'testIdentity/api/Files/testIconFile',
+        logoUrl: 'testIdentity/api/files/testIconFile',
         color: '',
       },
     ];

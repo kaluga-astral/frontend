@@ -13,8 +13,9 @@ export const WidgetMenu = styled(Menu)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     width: 285px;
-    min-height: 124px;
+    min-height: 100px;
     padding: ${({ theme }) => theme.spacing(3, 0)};
   }
 `;
@@ -37,8 +38,9 @@ export const Logo = styled('img', {
 `;
 
 export const TitleErrorContainer = styled(LegacyGrid)`
-  color: ${({ theme }) => theme.palette.error.dark};
   column-gap: ${({ theme }) => theme.spacing(2)};
+
+  color: ${({ theme }) => theme.palette.error.dark};
 `;
 
 export const TenantToggleButtonGroup = styled(ToggleButtonGroup)`
@@ -48,5 +50,6 @@ export const TenantToggleButtonGroup = styled(ToggleButtonGroup)`
 
 export const TenantToggleButton = styled(ToggleButton)`
   flex: 1;
+
   text-transform: uppercase;
 `;
