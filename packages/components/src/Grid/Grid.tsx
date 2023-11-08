@@ -1,9 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { StyledGrid, StyledGridProps } from './styles';
+import { GridComponentProps } from './GridComponent';
 
-import { GridPropsBase } from './types';
-import { StyledGrid } from './styles';
-
-export type GridProps = GridPropsBase &
-  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+export type GridProps = GridComponentProps & StyledGridProps;
 
 export const Grid = StyledGrid;

@@ -23,17 +23,15 @@ describe('useToggle', () => {
 
     act(() => handleActive());
     isActive = result.current[0];
-
     expect(isActive).toBe(true);
   });
 
   it('isActive: Меняем стейт с помощью handleInactive на false', () => {
     let { result, isActive, handleInactive, rerender } = prepare();
-    rerender({ initialState: false });
 
+    rerender({ initialState: false });
     act(() => handleInactive());
     isActive = result.current[0];
-
     expect(isActive).toBe(false);
   });
 });

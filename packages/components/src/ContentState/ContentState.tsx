@@ -1,7 +1,9 @@
 import { ReactNode, useContext } from 'react';
 
-import { Button, CircularProgress, Placeholder, Typography } from '..';
-import { PlaceholderProps } from '../Placeholder';
+import { Placeholder, PlaceholderProps } from '../Placeholder';
+import { CircularProgress } from '../CircularProgress';
+import { Typography } from '../Typography';
+import { Button } from '../Button';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ConfigContext } from '../ConfigProvider';
 

@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react';
+
 import { ExampleTemplate } from '../docs';
-
 import { Typography } from '../Typography';
-
-import { Description } from './Description';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
 import { Grid } from '../Grid';
+
+import { Description } from './Description';
 
 const GridWrapper = styled(Grid)`
   justify-content: center;
