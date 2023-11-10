@@ -1,3 +1,6 @@
 export * from './cryproPro';
 
-export * from './productSwitcher';
+export {
+  IdentityProductSwitcher,
+  AstralProductSwitcher,
+} from './productSwitcher';

@@ -9,16 +9,23 @@ import { IdentityProductsWidgetDTO } from '../../types';
  */
 export const formatIdentityProducts = (
   identityUrl: string,
-  identityProducts?: IdentityProductsWidgetDTO[],
+  identityProducts: IdentityProductsWidgetDTO[] = [],
 ) =>
-  identityProducts?.map((identityProduct): WidgetProduct => {
-    return {
-      id: identityProduct.id,
-      url: identityProduct.productUrl || '',
-      name: identityProduct.name || '',
-      logoUrl:
-        identityProduct.logoUrl ||
-        `${identityUrl}/api/files/${identityProduct.iconFileId}`,
-      color: identityProduct.backgroundHexColor || '',
-    };
-  }) || [];
+  identityProducts?.map(
+    ({
+      id,
+      productUrl = '',
+      name = '',
+      logoUrl,
+      iconFileId,
+      backgroundHexColor = '',
+    }): WidgetProduct => {
+      return {
+        id: id,
+        url: productUrl,
+        name: name,
+        logoUrl: logoUrl || `${identityUrl}/api/files/${iconFileId}`,
+        color: backgroundHexColor,
+      };
+    },
+  ) || [];

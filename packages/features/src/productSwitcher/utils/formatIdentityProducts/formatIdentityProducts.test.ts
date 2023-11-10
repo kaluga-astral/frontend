@@ -7,7 +7,7 @@ import { formatIdentityProducts } from './formatIdentityProducts';
 const IDENTITY_URL = 'testIdentity';
 
 describe('formatIdentityProducts', () => {
-  it('formatIdentityProducts форматирует список продуктов identity в формат для виджета продуктов', () => {
+  it('Форматирует список продуктов identity в формат для виджета продуктов', () => {
     const identityInitialProducts: IdentityProductsWidgetDTO[] = [
       {
         id: 'testId',
@@ -36,7 +36,7 @@ describe('formatIdentityProducts', () => {
     expect(result).toStrictEqual(formattedProducts);
   });
 
-  it('formatIdentityProducts корретно форматирует продукты с незаполненными необязательными полями', () => {
+  it('Форматирует продукты с незаполненными необязательными полями', () => {
     const identityInitialProducts: IdentityProductsWidgetDTO[] = [
       {
         id: 'testId',
@@ -63,7 +63,7 @@ describe('formatIdentityProducts', () => {
     expect(result).toStrictEqual(formattedProducts);
   });
 
-  it('formatIdentityProducts возвращает пустой массив, если нет продуктов', () => {
+  it('Возвращает пустой массив, если нет продуктов', () => {
     const result = formatIdentityProducts(IDENTITY_URL);
 
     expect(result).toStrictEqual([]);

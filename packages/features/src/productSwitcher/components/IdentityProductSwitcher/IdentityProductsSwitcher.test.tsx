@@ -1,5 +1,11 @@
-import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
+import {
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+  waitFor,
+} from '@astral/tests';
+import { expect, it, vi } from 'vitest';
 
 import { IdentityProductSwitcher } from './IdentityProductSwitcher';
 
@@ -62,14 +68,14 @@ vi.mock('./utils', async () => {
 });
 
 describe('IdentityProductSwitcher', () => {
-  it('При открытие виджета, список экосистем отображается корректно', async () => {
+  it('При открытие виджета, отображается список экосистем', async () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByRole('button'));
     expect(screen.getByText('Экосистема1')).toBeVisible();
     expect(screen.getByText('Экосистема2')).toBeVisible();
   });
 
-  it('При открытие виджета, отображаются продукты из первой экосистемы', async () => {
+  it('При открытие виджета, отображаются продукты из первой выбранной экосистемы', async () => {
     renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByRole('button'));
     expect(screen.getByText('testProductName1')).toBeVisible();
@@ -91,5 +97,23 @@ describe('IdentityProductSwitcher', () => {
     expect(
       screen.getByRole('menuitem', { name: 'testProductName1' }),
     ).toHaveAttribute('href', 'https://product');
+  });
+
+  it('При ошибке получения продуктов, отображается ошибка', async () => {
+    vi.restoreAllMocks();
+    renderWithTheme(<IdentityProductSwitcher identityUrl="" />);
+    await userEvents.click(screen.getByRole('button'));
+    expect(screen.getByText('Что-то пошло не так')).toBeVisible();
+  });
+
+  it('При загрузке продуктов в виджете появляется лоудер', async () => {
+    renderWithTheme(<TestComponent />);
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => {
+      const loader = screen.getByRole('progressbar');
+
+      expect(loader).toBeVisible();
+    });
   });
 });
