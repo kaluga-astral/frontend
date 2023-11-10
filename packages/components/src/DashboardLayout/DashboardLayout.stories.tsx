@@ -19,7 +19,7 @@ import {
   ORGANIZATIONS,
 } from '../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../ProductSwitcher';
-import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 
 import { DashboardLayout } from './DashboardLayout';
 import { DashboardLayoutStory } from './DashboardLayoutStory';
