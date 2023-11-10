@@ -1,4 +1,4 @@
-import { LanguageMap } from '../types';
+import type { LanguageMap } from '../types';
 
 export const russianMap: LanguageMap = {
   toYearPick: { single: 'К выбору года' },

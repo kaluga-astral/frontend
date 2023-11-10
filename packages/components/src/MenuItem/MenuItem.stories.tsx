@@ -1,10 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ProfileOutlineMd } from '@astral/icons';
 
 import { ListItemIcon } from '../ListItemIcon';
 import { MenuList } from '../MenuList';
 
-import { MenuItem, MenuItemProps } from './MenuItem';
+import type { MenuItemProps } from './MenuItem';
+import { MenuItem } from './MenuItem';
 
 const meta: Meta<typeof MenuItem> = {
   title: 'Components/Menu/MenuItem',

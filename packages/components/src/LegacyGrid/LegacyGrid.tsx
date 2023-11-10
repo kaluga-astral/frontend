@@ -1,6 +1,7 @@
-import { ReactNode, forwardRef } from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 
-import { GridContainerProps, GridElementsProps } from './types';
+import type { GridContainerProps, GridElementsProps } from './types';
 import { StyledGrid } from './styles';
 
 export type LegacyGridProps = GridContainerProps &

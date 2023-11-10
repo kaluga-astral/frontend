@@ -1,9 +1,9 @@
-import { IMask } from 'react-imask';
+import type { IMask } from 'react-imask';
 
 import { useMaskedValue } from '../useMaskedValue';
 import { useSelectedBaseDate } from '../useSelectedBaseDate';
 import { useBaseDateInRange } from '../useBaseDateInRange';
-import { MinMaxDate, PickerProps } from '../../types';
+import type { MinMaxDate, PickerProps } from '../../types';
 
 type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   mask: string;

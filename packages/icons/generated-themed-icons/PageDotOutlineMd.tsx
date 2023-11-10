@@ -1,5 +1,6 @@
 import React from 'react';
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import type { SvgIconProps } from '@mui/material';
+import { SvgIcon } from '@mui/material';
 
 const PageDotOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props

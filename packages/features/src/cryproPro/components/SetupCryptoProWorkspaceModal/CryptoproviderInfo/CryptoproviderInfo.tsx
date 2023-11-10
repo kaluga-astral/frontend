@@ -2,7 +2,7 @@ import { Button, Description, Tooltip } from '@astral/ui';
 import { InfoFillSm, OpenLinkOutlineMd } from '@astral/ui';
 
 import { WorkspaceInfoItem } from '../styles';
-import { CheckWorkspace } from '../../../services';
+import type { CheckWorkspace } from '../../../services';
 
 import { CryptoproviderInfoIconWrapper } from './styles';
 

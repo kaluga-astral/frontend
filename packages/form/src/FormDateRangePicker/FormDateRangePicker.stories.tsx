@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid } from '@astral/components';
@@ -8,10 +8,8 @@ import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 import { Form } from '../Form';
 
-import {
-  FormDateRangePicker,
-  FormDateRangePickerValue,
-} from './FormDateRangePicker';
+import type { FormDateRangePickerValue } from './FormDateRangePicker';
+import { FormDateRangePicker } from './FormDateRangePicker';
 
 /**
  * Обертка [DateRangePicker](/story/components-datepickers-daterangepicker--docs) для react-hook-form

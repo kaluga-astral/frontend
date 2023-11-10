@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import { ToastProps } from 'react-toastify/dist/types';
+import type { ReactNode } from 'react';
+import type { ToastProps } from 'react-toastify/dist/types';
 
-import { ActionsDirection, Variant } from '../types';
+import type { ActionsDirection, Variant } from '../types';
 import {
   ErrorNotificationIcon,
   InfoNotificationIcon,

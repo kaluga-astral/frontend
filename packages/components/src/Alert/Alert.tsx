@@ -1,22 +1,19 @@
-import {
-  Alert as AlertMui,
-  AlertTitle,
-  AlertProps as MuiAlertProps,
-} from '@mui/material';
+import type { AlertProps as MuiAlertProps } from '@mui/material';
+import { Alert as AlertMui, AlertTitle } from '@mui/material';
 import {
   ErrorFillMd,
   InfoFillMd,
   SuccessFillMd,
   WarningFillMd,
 } from '@astral/icons';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Typography } from '../Typography';
 import { LegacyGrid } from '../LegacyGrid';
 import { Collapse } from '../Collapse';
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
-import { AlertSeverity } from './types';
+import type { AlertSeverity } from './types';
 
 export type AlertProps = Omit<
   WithoutEmotionSpecific<MuiAlertProps>,

@@ -1,8 +1,9 @@
 import { Global } from '@emotion/react';
 import { CssBaseline, ScopedCssBaseline } from '@mui/material';
-import { CssBaselineProps } from '@mui/material/CssBaseline';
+import type { CssBaselineProps } from '@mui/material/CssBaseline';
 
-import { Theme, useTheme } from '../theme';
+import type { Theme } from '../theme';
+import { useTheme } from '../theme';
 
 type GlobalStylesProps = CssBaselineProps & {
   /**

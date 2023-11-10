@@ -1,4 +1,5 @@
-import { DateCompareDeep, isDate, isDateOutOfRange } from '../../../utils/date';
+import type { DateCompareDeep } from '../../../utils/date';
+import { isDate, isDateOutOfRange } from '../../../utils/date';
 
 type IsDateBetweenSelectedAndRangeDatesOptions = {
   date: Date;

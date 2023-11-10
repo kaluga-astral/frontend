@@ -1,9 +1,11 @@
-import { MouseEvent, forwardRef, useState } from 'react';
+import type { MouseEvent } from 'react';
+import { forwardRef, useState } from 'react';
 import { EyeOutlineMd, VisibilityOffOutlineMd } from '@astral/icons';
 import { InputAdornment } from '@mui/material';
 
 import { IconButton } from '../IconButton';
-import { TextField, TextFieldProps } from '../TextField';
+import type { TextFieldProps } from '../TextField';
+import { TextField } from '../TextField';
 
 export type PasswordFieldInputProps = TextFieldProps & {
   /**

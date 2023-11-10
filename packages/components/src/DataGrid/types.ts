@@ -1,7 +1,7 @@
-import { CSSProperties, ReactNode } from 'react';
-import { TableCellProps } from '@mui/material';
+import type { CSSProperties, ReactNode } from 'react';
+import type { TableCellProps } from '@mui/material';
 
-import { SortStates } from './enums';
+import type { SortStates } from './enums';
 
 export type CellValue = string | number | boolean | Date | undefined | object;
 

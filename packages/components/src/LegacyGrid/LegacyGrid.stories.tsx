@@ -1,10 +1,11 @@
-import { Story } from '@storybook/react';
-import { Box, BoxProps, Stack } from '@mui/material';
+import type { Story } from '@storybook/react';
+import type { BoxProps } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
 
 import { LegacyGrid } from './LegacyGrid';
-import { GridContainerProps, GridElementsProps } from './types';
+import type { GridContainerProps, GridElementsProps } from './types';
 
 export default {
   title: 'Components/LegacyGrid',

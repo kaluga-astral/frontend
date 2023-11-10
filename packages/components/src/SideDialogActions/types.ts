@@ -1,6 +1,6 @@
-import { DialogActionsProps as MuiDialogActionsProps } from '@mui/material';
+import type { DialogActionsProps as MuiDialogActionsProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type SideDialogActionsProps =
   WithoutEmotionSpecific<MuiDialogActionsProps>;

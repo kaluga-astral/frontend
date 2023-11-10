@@ -1,13 +1,14 @@
-import {
+import type {
   PaletteOptions as MuiPaletteOptions,
   PaletteColorOptions,
   SimplePaletteColorOptions,
 } from '@mui/material';
-import { TypeBackground } from '@mui/material/styles/createPalette';
+import type { TypeBackground } from '@mui/material/styles/createPalette';
 
 import { Brand } from '../constants';
 
-import { ColorBrand, brandPalette } from './brandPalette';
+import type { ColorBrand } from './brandPalette';
+import { brandPalette } from './brandPalette';
 
 export type Color = {
   900: string;

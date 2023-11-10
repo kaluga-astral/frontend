@@ -1,5 +1,5 @@
+import type { Certificate } from '@astral/cryptopro-cades';
 import {
-  Certificate,
   STORE_TYPE,
   findCertificateBySkid,
   getCertificates,

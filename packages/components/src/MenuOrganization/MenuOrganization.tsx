@@ -8,7 +8,7 @@ import { MenuGroup } from '../MenuGroup';
 
 import { OrganizationButton } from './OrganizationButton';
 import { OrganizationItem } from './OrganizationItem';
-import { Organization } from './types';
+import type { Organization } from './types';
 import {
   OrganizationGroupTitle,
   OrganizationsButtonWrapper,

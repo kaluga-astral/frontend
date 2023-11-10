@@ -1,11 +1,8 @@
-import {
+import type {
   CADESCOM_XML_SIGNATURE_TYPE,
   Certificate,
-  decrypt,
-  sign,
-  signHash,
-  signXml,
 } from '@astral/cryptopro-cades';
+import { decrypt, sign, signHash, signXml } from '@astral/cryptopro-cades';
 
 /**
  * @description Сервис для методов подписания КриптоПро

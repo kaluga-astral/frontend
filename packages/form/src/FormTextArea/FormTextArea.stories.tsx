@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -7,7 +7,7 @@ import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
 import { FormTextArea } from './FormTextArea';
-import { FormTextAreaValue } from './types';
+import type { FormTextAreaValue } from './types';
 
 export default {
   title: 'Form/FormTextarea',

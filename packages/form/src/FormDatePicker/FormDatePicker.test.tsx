@@ -6,7 +6,8 @@ import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
-import { FormDatePicker, FormDatePickerValue } from './FormDatePicker';
+import type { FormDatePickerValue } from './FormDatePicker';
+import { FormDatePicker } from './FormDatePicker';
 
 type FormValues = { date: Date };
 

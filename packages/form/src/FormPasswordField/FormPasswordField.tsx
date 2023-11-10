@@ -1,6 +1,7 @@
-import { PasswordField, PasswordFieldInputProps } from '@astral/components';
+import type { PasswordFieldInputProps } from '@astral/components';
+import { PasswordField } from '@astral/components';
 
-import { WithFormFieldProps } from '../types';
+import type { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormPasswordFieldProps<FieldValues extends object> =

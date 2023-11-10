@@ -1,8 +1,10 @@
 import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
-import { ChangeEvent, useState } from 'react';
+import type { Story } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import { useState } from 'react';
 
-import { TagBadge, TagBadgeProps } from '../TagBadge';
+import type { TagBadgeProps } from '../TagBadge';
+import { TagBadge } from '../TagBadge';
 
 import { CheckableTag } from './CheckableTag';
 

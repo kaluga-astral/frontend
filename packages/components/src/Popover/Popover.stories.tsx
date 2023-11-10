@@ -1,5 +1,6 @@
-import { MouseEvent, useState } from 'react';
-import { Story } from '@storybook/react';
+import type { MouseEvent } from 'react';
+import { useState } from 'react';
+import type { Story } from '@storybook/react';
 
 import { Button } from '../Button';
 import { LegacyGrid } from '../LegacyGrid';

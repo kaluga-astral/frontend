@@ -1,6 +1,9 @@
-import { PageAside, PageAsideProps } from '../PageAside';
-import { PageContent, PageContentProps } from '../PageContent';
-import { PageHeader, PageHeaderProps } from '../PageHeader';
+import type { PageAsideProps } from '../PageAside';
+import { PageAside } from '../PageAside';
+import type { PageContentProps } from '../PageContent';
+import { PageContent } from '../PageContent';
+import type { PageHeaderProps } from '../PageHeader';
+import { PageHeader } from '../PageHeader';
 import { PageLayoutContainer } from '../PageLayoutContainer';
 
 export type PageLayoutProps = {

@@ -1,9 +1,10 @@
-import { RefObject, SyntheticEvent, forwardRef } from 'react';
+import type { RefObject, SyntheticEvent } from 'react';
+import { forwardRef } from 'react';
 
-import { TextFieldProps } from '../TextField';
+import type { TextFieldProps } from '../TextField';
 import { useForwardedRef, useInputPopover } from '../hooks';
-import { DateMask } from '../utils/date';
-import { CloseEventReason } from '../types';
+import type { DateMask } from '../utils/date';
+import type { CloseEventReason } from '../types';
 
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopover } from './DatePickerPopover';
@@ -12,9 +13,9 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from './MinMaxDateContext';
-import { MinMaxDate } from './types';
+import type { MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
-import { MondayFirst } from './DayPicker';
+import type { MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
 import { useDatePickerOptions } from './hooks';
 

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { MenuOffOutlineMd, MenuOnOutlineMd } from '@astral/icons';
 
 import { Tooltip } from '../../../../Tooltip';
-import { ButtonProps } from '../../../../Button';
+import type { ButtonProps } from '../../../../Button';
 
 import { SidebarTogglerButtonRoot, SidebarTogglerIconWrapper } from './styles';
 

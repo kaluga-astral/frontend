@@ -1,11 +1,12 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import type { ChangeEvent } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../enums';
 import { DataGridHeadColumn } from '../DataGridHeadColumn';
-import { DataGridColumns, DataGridRow, DataGridSort } from '../types';
+import type { DataGridColumns, DataGridRow, DataGridSort } from '../types';
 
 export type DataGridHeadProps<
   Data extends object = DataGridRow,

@@ -1,4 +1,5 @@
-import { Zoom as MuiZoom, ZoomProps as MuiZoomProps } from '@mui/material';
+import type { ZoomProps as MuiZoomProps } from '@mui/material';
+import { Zoom as MuiZoom } from '@mui/material';
 
 export type ZoomProps = MuiZoomProps;
 

@@ -1,6 +1,7 @@
-import { Components, menuItemClasses } from '@mui/material';
+import type { Components } from '@mui/material';
+import { menuItemClasses } from '@mui/material';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 export const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   styleOverrides: {

@@ -1,5 +1,5 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import {
   BinOutlineMd,
   CaseOutlineMd,
@@ -21,7 +21,8 @@ import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 import { Profile } from '../Profile';
 import { Typography } from '../Typography';
 import { ListItemIcon } from '../ListItemIcon';
-import { Menu, MenuProps } from '../Menu';
+import type { MenuProps } from '../Menu';
+import { Menu } from '../Menu';
 import { ListItemText } from '../ListItemText';
 import { Divider } from '../Divider';
 

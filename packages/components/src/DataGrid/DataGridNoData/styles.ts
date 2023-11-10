@@ -1,16 +1,16 @@
-import { Typography, TypographyProps } from '../../Typography';
+import type { TypographyProps } from '../../Typography';
+import { Typography } from '../../Typography';
 import { styled } from '../../styles';
 
 export const DataGridNoDataWrapper = styled.tr`
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transform: translate(-50%, -50%);
 `;
 
 export const DataGridNoDataFigure = styled.figure`
@@ -21,8 +21,10 @@ export const DataGridNoDataFigure = styled.figure`
 
 export const DataGridNoDataIcon = styled.img`
   display: block;
+
   width: ${({ width }) => `${width}px` || '100%'};
   margin: auto auto ${({ theme }) => theme.spacing(3)};
+
   object-fit: contain;
 `;
 

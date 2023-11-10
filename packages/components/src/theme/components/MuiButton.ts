@@ -1,13 +1,9 @@
-import { Components, buttonClasses } from '@mui/material';
+import type { Components } from '@mui/material';
+import { buttonClasses } from '@mui/material';
 
-import { Theme } from '../types';
-import {
-  ButtonProps,
-  ButtonSizes,
-  ButtonState,
-  ButtonStates,
-  ButtonVariants,
-} from '../../Button';
+import type { Theme } from '../types';
+import type { ButtonProps, ButtonState } from '../../Button';
+import { ButtonSizes, ButtonStates, ButtonVariants } from '../../Button';
 
 type WithTheme<T extends object> = T & { theme: Theme };
 

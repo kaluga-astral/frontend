@@ -1,7 +1,7 @@
-import { FormHTMLAttributes, ReactNode } from 'react';
+import type { FormHTMLAttributes, ReactNode } from 'react';
 
 import { FormProvider } from '../FormProvider';
-import { UseFormReturn } from '../hooks';
+import type { UseFormReturn } from '../hooks';
 
 export type FormProps<FormValues extends object> =
   FormHTMLAttributes<HTMLFormElement> & {

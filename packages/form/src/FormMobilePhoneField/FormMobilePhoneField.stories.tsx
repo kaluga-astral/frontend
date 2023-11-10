@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { mobilePhone, object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -7,7 +7,7 @@ import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
 import { FormMobilePhoneField } from './FormMobilePhoneField';
-import { FormMobilePhoneFieldValue } from './types';
+import type { FormMobilePhoneFieldValue } from './types';
 
 export default {
   title: 'Form/FormMobilePhoneField',

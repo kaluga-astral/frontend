@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import { AvatarProps, MenuProps } from '@mui/material';
+import type { PropsWithChildren } from 'react';
+import type { AvatarProps, MenuProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type ProfileProps = {
   /**

@@ -1,6 +1,7 @@
-import { PropsWithChildren, forwardRef } from 'react';
+import type { PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 
-import { TypographyProps } from '../Typography';
+import type { TypographyProps } from '../Typography';
 import { Button } from '../Button';
 
 import { CollapsibleTypographyWrapper, CollapsibleWrapper } from './styles';

@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { Radio, RadioProps } from '../Radio';
-import { FormControlLabelProps } from '../FormControlLabel';
+import type { RadioProps } from '../Radio';
+import { Radio } from '../Radio';
+import type { FormControlLabelProps } from '../FormControlLabel';
 import { Tooltip } from '../Tooltip';
 
 import { StyledFormControlLabel } from './styles';

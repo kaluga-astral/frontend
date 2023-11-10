@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, forwardRef, useState } from 'react';
+import type { PropsWithChildren } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';

@@ -1,11 +1,5 @@
-import {
-  CSSProperties,
-  Ref,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import type { CSSProperties, Ref, RefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
 type UseCollabsibleResult = {
   ref: RefObject<HTMLElement>;
   isCollapsable: boolean;

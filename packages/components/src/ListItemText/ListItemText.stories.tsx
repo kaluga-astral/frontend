@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';

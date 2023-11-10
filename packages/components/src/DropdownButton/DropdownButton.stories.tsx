@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { DialogOutlineMd } from '@astral/icons';
 
 import { Grid, MenuItem, Typography } from '..';

@@ -7,7 +7,7 @@ import {
   buildIsoDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
-import { GridBuilder, GridItem } from '../../../types';
+import type { GridBuilder, GridItem } from '../../../types';
 import {
   buildGridResult,
   isDateBetweenSelectedAndRangeDates,

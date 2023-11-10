@@ -2,7 +2,7 @@ import { MenuList } from '@mui/material';
 
 import { styled } from '../styles';
 
-import { MenuListProps } from './types';
+import type { MenuListProps } from './types';
 
 export const StyledMenuList = styled(MenuList)<MenuListProps>`
   &.MuiList-root {

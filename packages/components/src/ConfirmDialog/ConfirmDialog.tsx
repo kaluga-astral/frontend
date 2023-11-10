@@ -1,6 +1,8 @@
-import { ReactNode, useMemo } from 'react';
+import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 
-import { Button, ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button';
+import { Button } from '../Button';
 import { Dialog } from '../Dialog';
 import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';

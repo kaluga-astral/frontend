@@ -1,7 +1,7 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { CircularProgress as component } from './CircularProgress';
-import { CircularProgressStory } from './CircularProgressStory';
+import type { CircularProgressStory } from './CircularProgressStory';
 import { CircularProgressStoryTemplate } from './CircularProgressStoryTemplate';
 
 export default {

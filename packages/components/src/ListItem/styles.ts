@@ -1,10 +1,10 @@
 import { ListItem } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import type { Theme } from '../theme';
 
 import { ListItemStates } from './constants';
-import { ListItemProps } from './types';
+import type { ListItemProps } from './types';
 
 type StyledListItemThemeProps = ListItemProps & {
   theme: Theme;
@@ -46,14 +46,14 @@ export const getColor = ({
 export const StyledListItem = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== 'selected',
 })<ListItemProps>`
+  cursor: pointer;
+  user-select: none;
+
   color: ${(props) =>
     getColor({ ...props, listItemState: ListItemStates.DEFAULT })};
 
   background-color: ${(props) => getBgColor({ ...props })};
   border-radius: ${({ theme }) => theme.shape.small};
-  cursor: pointer;
-
-  user-select: none;
 
   :hover {
     color: ${(props) =>

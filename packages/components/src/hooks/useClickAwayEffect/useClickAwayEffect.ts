@@ -1,6 +1,7 @@
-import { RefObject, useEffect } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 
-import { CloseEventReason } from '../../types';
+import type { CloseEventReason } from '../../types';
 
 export type UseClickAwayListenerOptions = {
   /**

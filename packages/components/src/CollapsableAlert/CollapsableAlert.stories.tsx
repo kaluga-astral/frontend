@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { BookmarkFillMd } from '@astral/icons';
 import React, { useState } from 'react';
 

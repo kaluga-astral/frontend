@@ -1,6 +1,7 @@
-import { Certificate } from '@astral/cryptopro-cades';
-import { Autocomplete, AutocompleteProps } from '@astral/ui';
-import { HTMLAttributes } from 'react';
+import type { Certificate } from '@astral/cryptopro-cades';
+import type { AutocompleteProps } from '@astral/ui';
+import { Autocomplete } from '@astral/ui';
+import type { HTMLAttributes } from 'react';
 
 import { AutocompleteListItem } from './AutocompleteListItem';
 import { transformCertificate } from './utils';

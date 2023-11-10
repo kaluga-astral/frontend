@@ -1,5 +1,6 @@
-import { Story } from '@storybook/react';
-import { SyntheticEvent, useState } from 'react';
+import type { Story } from '@storybook/react';
+import type { SyntheticEvent } from 'react';
+import { useState } from 'react';
 import { Stack } from '@mui/material';
 
 import { Tabs } from '../Tabs';

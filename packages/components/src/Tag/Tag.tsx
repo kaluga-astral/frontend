@@ -1,13 +1,14 @@
-import { ReactElement, forwardRef } from 'react';
+import type { ReactElement } from 'react';
+import { forwardRef } from 'react';
 import { CrossSmOutlineSm } from '@astral/icons';
-import { ChipProps as MuiTagProps } from '@mui/material';
+import type { ChipProps as MuiTagProps } from '@mui/material';
 
 import { LegacyGrid } from '../LegacyGrid';
-import { WithoutEmotionSpecific } from '../types';
-import { BadgeColor } from '../Badge';
+import type { WithoutEmotionSpecific } from '../types';
+import type { BadgeColor } from '../Badge';
 
 import { StyledTag, getBadgeColor } from './styles';
-import { TagColor, TagSize, TagVariant } from './types';
+import type { TagColor, TagSize, TagVariant } from './types';
 
 export type TagAddonProps = {
   color?: BadgeColor;

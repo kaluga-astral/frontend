@@ -11,7 +11,7 @@ import {
   ProfileRoot,
   ProfileUser,
 } from './styled';
-import { ProfileProps } from './types';
+import type { ProfileProps } from './types';
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {

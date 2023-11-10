@@ -1,5 +1,5 @@
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import type { Theme } from '../theme';
 
 import { GridComponent } from './GridComponent';
 

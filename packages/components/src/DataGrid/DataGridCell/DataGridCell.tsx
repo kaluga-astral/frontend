@@ -1,7 +1,8 @@
-import { ReactNode, useMemo } from 'react';
+import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 
 import { TableCell } from '../../Table';
-import { DataGridColumns } from '../types';
+import type { DataGridColumns } from '../types';
 import { OverflowTypography } from '../../OverflowTypography';
 
 export type CellProps<Data extends object> = {

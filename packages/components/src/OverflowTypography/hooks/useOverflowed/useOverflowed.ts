@@ -1,4 +1,5 @@
-import { Ref, useLayoutEffect, useRef, useState } from 'react';
+import type { Ref } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { debounce } from 'lodash-es';
 
 export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {

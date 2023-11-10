@@ -1,6 +1,7 @@
-import { Components, listClasses, paperClasses } from '@mui/material';
+import type { Components } from '@mui/material';
+import { listClasses, paperClasses } from '@mui/material';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 export const MuiMenu: Components<Theme>['MuiMenu'] = {
   defaultProps: {

@@ -1,4 +1,4 @@
-import { BadgeColor, BadgeProps } from '../Badge';
+import type { BadgeColor, BadgeProps } from '../Badge';
 
 import { StyledBadge } from './styles';
 import { getCheckableTagBadgeBgColor } from './utils';

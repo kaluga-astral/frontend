@@ -1,9 +1,10 @@
-import { CSSProperties, useMemo } from 'react';
-import { TableCellProps } from '@mui/material';
+import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
+import type { TableCellProps } from '@mui/material';
 import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
 import { SortStates } from '../enums';
-import { DataGridRow, DataGridSort } from '../types';
+import type { DataGridRow, DataGridSort } from '../types';
 
 import { StyledTableCell, TableCellTitle } from './styles';
 

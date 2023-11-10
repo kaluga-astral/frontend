@@ -1,19 +1,19 @@
-import {
+import type {
   CADESCOM_XML_SIGNATURE_TYPE,
   Certificate,
 } from '@astral/cryptopro-cades';
 import { makeAutoObservable } from 'mobx';
 
+import type { FormatedCertificate } from '../../services';
 import {
   CryptoProCertificateService,
   CryptoProSignService,
-  FormatedCertificate,
 } from '../../services';
-import {
+import type {
   CheckWorkspace,
   WorkspaceSetupService,
-  createWorkspaceSetupService,
 } from '../../services/WorkspaceSetupService';
+import { createWorkspaceSetupService } from '../../services/WorkspaceSetupService';
 
 /**
  * @description Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро

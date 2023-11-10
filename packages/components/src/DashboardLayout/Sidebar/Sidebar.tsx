@@ -1,7 +1,9 @@
-import { ReactNode, forwardRef, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import { NavMenu, NavMenuProps } from '../../NavMenu';
+import type { NavMenuProps } from '../../NavMenu';
+import { NavMenu } from '../../NavMenu';
 import { useLocalStorage } from '../../hooks';
 
 import { SidebarProvider } from './SidebarProvider';

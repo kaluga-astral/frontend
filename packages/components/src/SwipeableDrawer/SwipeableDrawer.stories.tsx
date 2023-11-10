@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';

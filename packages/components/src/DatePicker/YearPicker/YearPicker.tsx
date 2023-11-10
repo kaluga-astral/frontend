@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
+import type { CommonDateCalendarHeadProps } from '../DateCalendar';
 import {
-  CommonDateCalendarHeadProps,
   DateCalendarGridBtnLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
@@ -9,7 +9,7 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/date';
-import { PickerProps } from '../types';
+import type { PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
 import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
 

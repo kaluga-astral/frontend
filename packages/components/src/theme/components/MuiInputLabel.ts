@@ -1,6 +1,6 @@
-import { Components } from '@mui/material';
+import type { Components } from '@mui/material';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 export const MuiInputLabel: Components<Theme>['MuiInputLabel'] = {
   defaultProps: {

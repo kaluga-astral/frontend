@@ -1,8 +1,9 @@
 import React from 'react';
-import { ModalProps } from '@mui/material';
+import type { ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
-import { GridContainerProps, LegacyGrid } from '../LegacyGrid';
+import type { GridContainerProps } from '../LegacyGrid';
+import { LegacyGrid } from '../LegacyGrid';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 

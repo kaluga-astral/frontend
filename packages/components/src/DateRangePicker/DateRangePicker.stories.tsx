@@ -1,10 +1,11 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
-import { DateRangePicker, DateRangePickerProps } from './index';
+import type { DateRangePickerProps } from './index';
+import { DateRangePicker } from './index';
 
 export default {
   title: 'Components/DatePickers/DateRangePicker',

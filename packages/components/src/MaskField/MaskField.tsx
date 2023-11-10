@@ -1,8 +1,10 @@
 import { forwardRef } from 'react';
-import { IMask, IMaskMixin } from 'react-imask';
+import type { IMask } from 'react-imask';
+import { IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
-import { TextField, TextFieldProps } from '../TextField';
+import type { TextFieldProps } from '../TextField';
+import { TextField } from '../TextField';
 
 type MaskProps = IMaskInputProps<
   IMask.AnyMaskedOptions,

@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
-import { ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button';
 
 export type ProductProps = ButtonProps & {
   logo: (props: PropsWithChildren<{}>) => JSX.Element;

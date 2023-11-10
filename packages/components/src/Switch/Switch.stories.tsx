@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Paper, useMediaQuery, useTheme } from '@mui/material';
 
 import { Typography } from '../Typography';

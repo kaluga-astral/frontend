@@ -1,10 +1,9 @@
-import { ElementType, forwardRef } from 'react';
-import {
-  ListItemButton as MuiListItemButton,
-  ListItemButtonProps as MuiListItemButtonProps,
-} from '@mui/material';
+import type { ElementType } from 'react';
+import { forwardRef } from 'react';
+import type { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material';
+import { ListItemButton as MuiListItemButton } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type ListItemButtonProps = Omit<
   WithoutEmotionSpecific<MuiListItemButtonProps>,

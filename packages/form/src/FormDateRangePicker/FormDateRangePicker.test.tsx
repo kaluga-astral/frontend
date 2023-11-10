@@ -12,10 +12,8 @@ import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Form } from '../Form';
 import { useForm } from '../hooks';
 
-import {
-  FormDateRangePicker,
-  FormDateRangePickerValue,
-} from './FormDateRangePicker';
+import type { FormDateRangePickerValue } from './FormDateRangePicker';
+import { FormDateRangePicker } from './FormDateRangePicker';
 
 type FormValues = {
   startDateField: FormDateRangePickerValue;

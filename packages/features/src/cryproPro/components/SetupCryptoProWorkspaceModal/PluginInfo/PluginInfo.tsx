@@ -2,7 +2,7 @@ import { Button, Description, Typography } from '@astral/ui';
 import { DownloadOutlineMd } from '@astral/ui';
 
 import { WorkspaceInfoItem } from '../styles';
-import { CheckWorkspace } from '../../../services';
+import type { CheckWorkspace } from '../../../services';
 
 type Props = {
   workspaceSetupInfo: CheckWorkspace;

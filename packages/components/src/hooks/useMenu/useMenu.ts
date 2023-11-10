@@ -1,10 +1,5 @@
-import {
-  ForwardedRef,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import type { ForwardedRef, MutableRefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type UseMenuResult = {
   /**

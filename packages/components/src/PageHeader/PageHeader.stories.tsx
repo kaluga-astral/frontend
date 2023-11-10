@@ -1,6 +1,6 @@
 import { AddOutlineMd, SearchOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Fragment } from 'react';
 
 import { ExampleTemplate } from '../docs';
@@ -8,7 +8,8 @@ import { Select } from '../Select';
 import { TextField } from '../TextField';
 import { Typography } from '../Typography';
 
-import { PageHeader, PageHeaderProps } from './PageHeader';
+import type { PageHeaderProps } from './PageHeader';
+import { PageHeader } from './PageHeader';
 import { PageHeaderDashboardStory } from './PageHeaderDashboardStory';
 
 export default {

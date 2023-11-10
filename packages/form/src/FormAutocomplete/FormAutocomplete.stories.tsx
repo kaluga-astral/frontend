@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import { array, arrayItem, min, object, or, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 

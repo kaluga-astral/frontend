@@ -1,10 +1,8 @@
-import {
-  DialogActions as MuiDialogActions,
-  DialogActionsProps as MuiDialogActionsProps,
-} from '@mui/material';
+import type { DialogActionsProps as MuiDialogActionsProps } from '@mui/material';
+import { DialogActions as MuiDialogActions } from '@mui/material';
 
 import { LegacyGrid } from '../LegacyGrid';
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type DialogActionsProps = WithoutEmotionSpecific<MuiDialogActionsProps>;
 

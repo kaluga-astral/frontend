@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { useEffect } from 'react';
 import { boolean, object, optional } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
@@ -11,7 +11,7 @@ import { ExampleTemplate } from '../../../components/src/docs';
 import { LegacyGrid, Typography } from '../../../components';
 
 import { FormCheckbox } from './FormCheckbox';
-import { FormCheckboxValue } from './types';
+import type { FormCheckboxValue } from './types';
 
 export default {
   title: 'Form/FormCheckbox',

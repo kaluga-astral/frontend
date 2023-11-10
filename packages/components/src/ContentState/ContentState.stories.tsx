@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { MouseEventHandler, PropsWithChildren, useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import type { MouseEventHandler, PropsWithChildren } from 'react';
+import { useState } from 'react';
 
 import { Grid } from '../Grid';
 import { styled } from '../styles';

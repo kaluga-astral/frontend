@@ -1,9 +1,9 @@
-import { RefObject, SyntheticEvent } from 'react';
+import type { RefObject, SyntheticEvent } from 'react';
 
 import { useToggle } from '../useToggle';
 import { useClickAwayEffect } from '../useClickAwayEffect';
 import { useFocusAwayEffect } from '../useFocusAwayEffect';
-import { CloseEventReason } from '../../types';
+import type { CloseEventReason } from '../../types';
 import { useEscapeClickEffect } from '../useEscapeClickEffect';
 
 export type UseInputPopoverOptions = {

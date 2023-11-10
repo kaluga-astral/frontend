@@ -1,4 +1,5 @@
-import { MouseEvent, ReactElement, forwardRef } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
+import { forwardRef } from 'react';
 import type { ComponentStory } from '@storybook/react';
 import { Box } from '@mui/material';
 import {
@@ -22,7 +23,7 @@ import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
 
 import { DashboardLayout } from './DashboardLayout';
-import { DashboardLayoutStory } from './DashboardLayoutStory';
+import type { DashboardLayoutStory } from './DashboardLayoutStory';
 import { DashboardLayoutStoryTemplate } from './DashboardLayoutStoryTemplate';
 import { SidebarButton } from './Sidebar/SidebarButton';
 

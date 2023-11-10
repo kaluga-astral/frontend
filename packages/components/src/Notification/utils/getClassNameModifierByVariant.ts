@@ -1,4 +1,4 @@
-import { Variant } from '../types';
+import type { Variant } from '../types';
 import { NOTIFY_CLASSNAME } from '../constants';
 
 /**

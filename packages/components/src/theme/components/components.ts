@@ -1,7 +1,7 @@
 import type {} from '@mui/lab/themeAugmentation';
-import { Components } from '@mui/material';
+import type { Components } from '@mui/material';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 import { MuiAlert } from './MuiAlert';
 import { MuiButton } from './MuiButton';

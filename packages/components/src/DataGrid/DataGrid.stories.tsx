@@ -1,13 +1,15 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
-import { Meta } from '@storybook/react';
-import { ChangeEvent, useEffect, useState } from 'react';
+import type { Meta } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 
-import { ActionCell, Actions } from '../ActionCell';
+import type { Actions } from '../ActionCell';
+import { ActionCell } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
 
 import { DataGrid } from './DataGrid';
-import { DataGridColumns, DataGridSort } from './types';
+import type { DataGridColumns, DataGridSort } from './types';
 
 /**
  * DataGrid — отображает информацию в удобном для просмотра виде. Может включать:

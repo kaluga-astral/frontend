@@ -1,9 +1,7 @@
-import {
-  TableSortLabel as MuiTableSortLabel,
-  TableSortLabelProps as MuiTableSortLabelProps,
-} from '@mui/material';
+import type { TableSortLabelProps as MuiTableSortLabelProps } from '@mui/material';
+import { TableSortLabel as MuiTableSortLabel } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../../types';
+import type { WithoutEmotionSpecific } from '../../types';
 
 export type TableSortLabelProps =
   WithoutEmotionSpecific<MuiTableSortLabelProps>;

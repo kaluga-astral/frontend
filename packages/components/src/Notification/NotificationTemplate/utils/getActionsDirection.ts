@@ -1,4 +1,4 @@
-import { ActionsDirection } from '../../types';
+import type { ActionsDirection } from '../../types';
 
 export const getActionsDirection = (direction: ActionsDirection) => {
   const MAP_OF_DIRECTIONS = {

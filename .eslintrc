@@ -10,7 +10,6 @@
       "error",
       { "devDependencies": true, "packageDir": ["./", "./"] }
     ],
-    "@typescript-eslint/consistent-type-imports": "error"
   },
   "overrides": [
     // Для увеличения производительности plugin:testing-library запускается только для test.tsx файлов

@@ -1,9 +1,9 @@
 import { Fab } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import type { Theme } from '../theme';
 
-import { FabColor } from './types';
+import type { FabColor } from './types';
 import { FabColors, FabSizes, FabStates } from './enums';
 
 type StyledFabThemeProps = {

@@ -1,9 +1,7 @@
-import {
-  FormLabel as MuiFormLabel,
-  FormLabelProps as MuiFormLabelProps,
-} from '@mui/material';
+import type { FormLabelProps as MuiFormLabelProps } from '@mui/material';
+import { FormLabel as MuiFormLabel } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type FormLabelProps = WithoutEmotionSpecific<MuiFormLabelProps>;
 

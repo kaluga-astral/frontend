@@ -1,11 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Paper } from '@mui/material';
 import {
   ChevronDOutlineMd,
   DialogOutlineMd,
   LikeOutlineMd,
 } from '@astral/icons';
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';

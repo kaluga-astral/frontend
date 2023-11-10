@@ -5,11 +5,14 @@ import {
   SendOutlineMd,
 } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
-import { ChangeEvent, Fragment, useState } from 'react';
+import type { Story } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import { Fragment, useState } from 'react';
 
-import { ActionCell, Actions } from '../ActionCell';
-import { DataGrid, DataGridColumns } from '../DataGrid';
+import type { Actions } from '../ActionCell';
+import { ActionCell } from '../ActionCell';
+import type { DataGridColumns } from '../DataGrid';
+import { DataGrid } from '../DataGrid';
 import { DataGridPagination } from '../DataGridPagination';
 import { ExampleTemplate } from '../docs';
 import { LegacyGrid } from '../LegacyGrid';

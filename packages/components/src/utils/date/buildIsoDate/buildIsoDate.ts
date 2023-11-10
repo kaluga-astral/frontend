@@ -1,7 +1,5 @@
-import {
-  BuildIsoDateStringOptions,
-  buildIsoDateString,
-} from './buildIsoDateString';
+import type { BuildIsoDateStringOptions } from './buildIsoDateString';
+import { buildIsoDateString } from './buildIsoDateString';
 
 /**
  * @description утилита для создания даты не зависящей от часового пояса пользователя

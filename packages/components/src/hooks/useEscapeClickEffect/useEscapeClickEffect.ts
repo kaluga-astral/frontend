@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { CloseEventReason } from '../../types';
+import type { CloseEventReason } from '../../types';
 
 export type UseEscapeClickEffectProps = {
   /**

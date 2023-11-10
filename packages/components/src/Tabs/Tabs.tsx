@@ -1,6 +1,7 @@
-import { Tabs as MuiTabs, TabsProps as MuiTabsProps } from '@mui/material';
+import type { TabsProps as MuiTabsProps } from '@mui/material';
+import { Tabs as MuiTabs } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type TabsProps = WithoutEmotionSpecific<MuiTabsProps>;
 

@@ -1,7 +1,7 @@
 import { Checkbox, css } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import type { Theme } from '../theme';
 
 type CheckboxStyledProps = {
   isError?: boolean;

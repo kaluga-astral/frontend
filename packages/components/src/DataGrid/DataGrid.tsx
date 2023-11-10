@@ -1,4 +1,5 @@
-import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
+import { useCallback, useMemo } from 'react';
 import { uniqBy } from 'lodash-es';
 
 import { Table } from '../Table';
@@ -12,7 +13,7 @@ import {
   DisabledTableContainer,
   StyledTableContainer,
 } from './styles';
-import { DataGridColumns, DataGridRow, DataGridSort } from './types';
+import type { DataGridColumns, DataGridRow, DataGridSort } from './types';
 
 export type DataGridProps<
   Data extends Record<string, unknown> = DataGridRow,

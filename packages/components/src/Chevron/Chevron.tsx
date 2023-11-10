@@ -1,6 +1,6 @@
-import { SvgIconProps } from '@mui/material';
+import type { SvgIconProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 import { ChevronWrapper } from './styles';
 

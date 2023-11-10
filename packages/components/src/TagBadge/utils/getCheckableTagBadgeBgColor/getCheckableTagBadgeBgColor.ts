@@ -1,4 +1,4 @@
-import { BadgeColor } from '../../../Badge';
+import type { BadgeColor } from '../../../Badge';
 
 /**
  * @description Утилита для получения цвета TagBadge,

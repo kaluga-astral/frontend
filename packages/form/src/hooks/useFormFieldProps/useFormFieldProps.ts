@@ -1,7 +1,7 @@
 import { useController } from 'react-hook-form';
 import { useForwardedRef } from '@astral/components';
 
-import { FieldValues, WithFormFieldProps } from '../../types';
+import type { FieldValues, WithFormFieldProps } from '../../types';
 import { useFormFieldErrorProps } from '../useFormFieldErrorProps';
 import { useFormInputProps } from '../useFormInputProps';
 

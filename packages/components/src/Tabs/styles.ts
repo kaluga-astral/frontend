@@ -1,8 +1,11 @@
-import { Typography, TypographyProps } from '../Typography';
-import { Paper, PaperProps } from '../Paper';
+import type { TypographyProps } from '../Typography';
+import { Typography } from '../Typography';
+import type { PaperProps } from '../Paper';
+import { Paper } from '../Paper';
 import { styled } from '../styles';
 
-import { Tabs, TabsProps } from './Tabs';
+import type { TabsProps } from './Tabs';
+import { Tabs } from './Tabs';
 
 export const TabsShowcaseTypography1 = styled(Typography)<TypographyProps>`
   width: 772px;

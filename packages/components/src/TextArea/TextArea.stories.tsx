@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { ChangeEvent, useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import type { ChangeEvent } from 'react';
+import { useState } from 'react';
 
 import { TextArea } from './TextArea';
 

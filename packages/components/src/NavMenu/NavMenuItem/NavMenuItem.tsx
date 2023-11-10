@@ -1,14 +1,10 @@
-import {
-  ElementType,
-  ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import type { ElementType, ReactElement } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Collapse } from '../../Collapse';
 
-import { NavMenuItemList, NavMenuItemListProps } from './NavMenuItemList';
+import type { NavMenuItemListProps } from './NavMenuItemList';
+import { NavMenuItemList } from './NavMenuItemList';
 import { NavMenuItemButton } from './NavMenuItemButton';
 
 export type NavMenuItemProps = {

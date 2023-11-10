@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { PropsWithChildren } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
 import { GlobalStyles } from '../GlobalStyles';
-import { Theme } from '../theme';
+import type { Theme } from '../theme';
 
 export type ThemeProviderProps = {
   children: ReactNode;

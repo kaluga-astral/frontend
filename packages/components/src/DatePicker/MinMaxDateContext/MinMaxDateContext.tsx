@@ -1,6 +1,7 @@
-import { PropsWithChildren, createContext } from 'react';
+import type { PropsWithChildren } from 'react';
+import { createContext } from 'react';
 
-import { MinMaxDate } from '../types';
+import type { MinMaxDate } from '../types';
 import { buildIsoDate } from '../../utils/date';
 
 export const DEFAULT_MIN_DATE = buildIsoDate({ year: 1900 });

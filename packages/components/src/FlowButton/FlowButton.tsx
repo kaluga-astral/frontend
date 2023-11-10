@@ -3,7 +3,7 @@ import { ArrowROutlineLg } from '@astral/icons';
 
 import { Typography } from '../Typography';
 import { LegacyGrid } from '../LegacyGrid';
-import { ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button';
 
 import { FlowButtonWrapper, TargetTextWrapper } from './styles';
 

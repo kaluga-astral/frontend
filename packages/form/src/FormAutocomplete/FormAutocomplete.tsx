@@ -1,7 +1,9 @@
-import { Autocomplete, AutocompleteProps } from '@astral/components';
-import { SyntheticEvent, useCallback } from 'react';
+import type { AutocompleteProps } from '@astral/components';
+import { Autocomplete } from '@astral/components';
+import type { SyntheticEvent } from 'react';
+import { useCallback } from 'react';
 
-import { WithFormFieldProps } from '../types';
+import type { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 type AutocompleteInputChangeReason = 'input' | 'reset' | 'clear';

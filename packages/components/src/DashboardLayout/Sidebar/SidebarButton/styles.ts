@@ -1,7 +1,5 @@
-import {
-  Button as UIKitButton,
-  ButtonProps as UIKitButtonProps,
-} from '../../../Button';
+import type { ButtonProps as UIKitButtonProps } from '../../../Button';
+import { Button as UIKitButton } from '../../../Button';
 import { styled } from '../../../styles';
 
 type ButtonProps = UIKitButtonProps & {

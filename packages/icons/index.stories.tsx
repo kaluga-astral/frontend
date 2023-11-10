@@ -1,6 +1,7 @@
-import { SvgIcon, SvgIconProps } from '@mui/material';
-import { Meta } from '@storybook/react';
-import { FunctionComponent, ReactNode } from 'react';
+import type { SvgIconProps } from '@mui/material';
+import { SvgIcon } from '@mui/material';
+import type { Meta } from '@storybook/react';
+import type { FunctionComponent, ReactNode } from 'react';
 
 import { LegacyGrid, OverflowTypography } from '../components';
 

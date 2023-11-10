@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
-import { TagAddonProps } from '../Tag';
+import type { TagAddonProps } from '../Tag';
 
 export type CheckableTagAddonProps = {
   checked?: boolean;

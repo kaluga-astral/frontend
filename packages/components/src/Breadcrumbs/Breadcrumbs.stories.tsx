@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Link } from '@mui/material';
 import { AddOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';

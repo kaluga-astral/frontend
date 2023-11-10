@@ -1,8 +1,9 @@
 import { FormControlLabel, Switch } from '@astral/ui';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { useState } from 'react';
 
-import { CheckWorkspace, createWorkspaceSetupService } from '../../services';
+import type { CheckWorkspace } from '../../services';
+import { createWorkspaceSetupService } from '../../services';
 
 import { SetupCryptoProWorkspaceModal } from './SetupCryptoProWorkspaceModal';
 

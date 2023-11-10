@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import { ClickAwayListener } from '@mui/material';
 
 import { Menu } from '../../Menu';

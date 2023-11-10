@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 import { TextField } from '../TextField';
 
-import { TextAreaProps } from './types';
+import type { TextAreaProps } from './types';
 
 export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
   ({ rows = 7, ...props }, ref) => {

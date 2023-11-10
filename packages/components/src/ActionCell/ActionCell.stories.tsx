@@ -1,9 +1,11 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 
-import { CellValue, DataGrid, DataGridColumns } from '../DataGrid';
+import type { CellValue, DataGridColumns } from '../DataGrid';
+import { DataGrid } from '../DataGrid';
 
-import { ActionCell, Actions } from './ActionCell';
+import type { Actions } from './ActionCell';
+import { ActionCell } from './ActionCell';
 
 export default {
   title: 'Components/ActionCell',

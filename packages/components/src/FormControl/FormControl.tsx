@@ -1,10 +1,8 @@
-import {
-  FormControl as MuiFormControl,
-  FormControlProps as MuiFormControlProps,
-} from '@mui/material';
+import type { FormControlProps as MuiFormControlProps } from '@mui/material';
+import { FormControl as MuiFormControl } from '@mui/material';
 import { forwardRef } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type FormControlProps = WithoutEmotionSpecific<MuiFormControlProps>;
 

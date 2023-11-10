@@ -1,9 +1,6 @@
 import { notify } from '@astral/ui';
-import {
-  ICryptoError,
-  ISystemInfo,
-  getSystemInfo,
-} from '@astral/cryptopro-cades';
+import type { ICryptoError, ISystemInfo } from '@astral/cryptopro-cades';
+import { getSystemInfo } from '@astral/cryptopro-cades';
 
 import {
   CRYPTO_PROVIDER_NOT_FOUND_CODE,

@@ -1,10 +1,9 @@
-import { ReactElement, useMemo } from 'react';
-import {
-  Stepper as MuiStepper,
-  StepperProps as MuiStepperProps,
-} from '@mui/material';
+import type { ReactElement } from 'react';
+import { useMemo } from 'react';
+import type { StepperProps as MuiStepperProps } from '@mui/material';
+import { Stepper as MuiStepper } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 import type { StepConnectorProps } from './StepConnector';
 import { ArrowConnector } from './ArrowConnector';

@@ -7,7 +7,7 @@ import { OverflowTypography } from '../../OverflowTypography';
 import { Typography } from '../../Typography';
 import { OrganizationWrapper } from '../OrganizationItem/styles';
 import { OrganizationData } from '../styles';
-import { Organization } from '../types';
+import type { Organization } from '../types';
 
 import { OrganizationBtn } from './styles';
 

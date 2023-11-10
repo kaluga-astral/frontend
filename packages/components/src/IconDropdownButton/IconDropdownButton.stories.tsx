@@ -1,11 +1,12 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { DotsVOutlineMd, EditOutlineMd } from '@astral/icons';
 
 import { MenuItem } from '../MenuItem';
 import { Typography } from '../Typography';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { DataGrid, DataGridColumns } from '../DataGrid';
+import type { DataGridColumns } from '../DataGrid';
+import { DataGrid } from '../DataGrid';
 import { IconButton } from '../IconButton';
 import { styled } from '../styles';
 import { Paper } from '../Paper';

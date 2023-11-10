@@ -1,10 +1,7 @@
-import {
-  UseFormProps,
-  UseFormReturn,
-  useForm as useRHForm,
-} from 'react-hook-form';
+import type { UseFormProps, UseFormReturn } from 'react-hook-form';
+import { useForm as useRHForm } from 'react-hook-form';
 
-import { FieldValues } from '../../types';
+import type { FieldValues } from '../../types';
 
 /**
  * Custom hook to manage the entire form.

@@ -1,11 +1,12 @@
-import { Chip, ChipProps } from '@mui/material';
+import type { ChipProps } from '@mui/material';
+import { Chip } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
-import { BadgeColor } from '../Badge';
+import type { Theme } from '../theme';
+import type { BadgeColor } from '../Badge';
 
 import { TagColors, TagStates, TagVariants } from './enums';
-import { TagColor, TagSize, TagState, TagVariant } from './types';
+import type { TagColor, TagSize, TagState, TagVariant } from './types';
 
 type StyledTagProps = {
   customColor?: TagColor;
@@ -205,14 +206,14 @@ export const StyledTag = styled(Chip, {
     prop !== 'rounded' &&
     prop !== 'customSize',
 })<StyledTagProps>`
+  user-select: none;
+
   height: ${({ customSize }) => HEIGHTS[customSize]};
 
   font-size: 14px;
 
   background-color: ${getBgColor};
   border-radius: ${getShape};
-
-  user-select: none;
 
   &:hover {
     color: ${getColor};

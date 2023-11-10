@@ -9,17 +9,21 @@ import {
   SettingsFillMd,
 } from '@astral/icons';
 import { Box, Stack } from '@mui/material';
-import { ChangeEvent, Fragment, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { Fragment, useState } from 'react';
 
-import { ActionCell, Actions } from '../ActionCell';
+import type { Actions } from '../ActionCell';
+import { ActionCell } from '../ActionCell';
 import { DashboardLayout } from '../DashboardLayout';
-import { SidebarProps } from '../DashboardLayout/Sidebar';
-import { DataGrid, DataGridColumns } from '../DataGrid';
+import type { SidebarProps } from '../DashboardLayout/Sidebar';
+import type { DataGridColumns } from '../DataGrid';
+import { DataGrid } from '../DataGrid';
 import { DataGridPagination } from '../DataGridPagination';
 import { Divider } from '../Divider';
 import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
-import { Menu, MenuProps } from '../Menu';
+import type { MenuProps } from '../Menu';
+import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';

@@ -1,9 +1,10 @@
-import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
 import { Checkbox } from '../../Checkbox';
-import { DataGridColumns, DataGridRow } from '../types';
+import type { DataGridColumns, DataGridRow } from '../types';
 
 import { StyledTableBody } from './styles';
 

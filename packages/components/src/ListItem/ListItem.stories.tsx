@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Link } from '@mui/material';
 import { useState } from 'react';
 

@@ -1,10 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import {
-  ListItemIcon,
-  ListSubheader,
-  SelectChangeEvent,
-  Stack,
-} from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
+import type { SelectChangeEvent } from '@mui/material';
+import { ListItemIcon, ListSubheader, Stack } from '@mui/material';
 import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';

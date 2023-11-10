@@ -1,5 +1,6 @@
 import { styled } from '../styles';
-import { Button, ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button';
+import { Button } from '../Button';
 import {
   getButtonHeight,
   getButtonHeightMobile,
@@ -9,11 +10,11 @@ export const IconButtonWrapper = styled(Button, {
   shouldForwardProp: (prop) =>
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`
+  pointer-events: ${({ loading }) => loading && 'none'};
+
   width: ${getButtonHeight};
   height: ${getButtonHeight};
   padding: ${({ theme }) => theme.spacing(1)};
-
-  pointer-events: ${({ loading }) => loading && 'none'};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     width: ${getButtonHeightMobile};

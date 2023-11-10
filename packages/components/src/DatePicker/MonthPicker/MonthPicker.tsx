@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 
+import type { CommonDateCalendarHeadProps } from '../DateCalendar';
 import {
-  CommonDateCalendarHeadProps,
   DateCalendarGridBtnLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
-import { PickerProps } from '../types';
+import type { PickerProps } from '../types';
 import { addYears } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';

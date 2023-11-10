@@ -1,4 +1,5 @@
-import { ReactNode, createContext } from 'react';
+import type { ReactNode } from 'react';
+import { createContext } from 'react';
 
 export type SidebarContextProps = {
   isOpen?: boolean;

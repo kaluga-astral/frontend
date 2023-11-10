@@ -1,6 +1,7 @@
-import { Components, stepLabelClasses } from '@mui/material';
+import type { Components } from '@mui/material';
+import { stepLabelClasses } from '@mui/material';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 export const MuiStepLabel: Components<Theme>['MuiStepLabel'] = {
   styleOverrides: {

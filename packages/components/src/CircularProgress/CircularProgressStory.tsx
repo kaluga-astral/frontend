@@ -1,4 +1,5 @@
-import { CircularProgress, CircularProgressProps } from '../CircularProgress';
+import type { CircularProgressProps } from '../CircularProgress';
+import { CircularProgress } from '../CircularProgress';
 
 export type CircularProgressStoryProps = CircularProgressProps;
 

@@ -1,9 +1,10 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
-import { FormTextField, FormTextFieldValue } from '../FormTextField';
+import type { FormTextFieldValue } from '../FormTextField';
+import { FormTextField } from '../FormTextField';
 import { FormStoryContainer } from '../docs';
 
 import { FormSubmitButton } from './';

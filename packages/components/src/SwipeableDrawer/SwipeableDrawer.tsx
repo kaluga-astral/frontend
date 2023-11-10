@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import { SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
+import type { ReactNode } from 'react';
+import type { SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 import {
   StyledSwipeableDrawer,

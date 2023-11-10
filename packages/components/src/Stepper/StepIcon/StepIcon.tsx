@@ -1,7 +1,7 @@
 import { StepDefaultFillMd } from '@astral/icons';
-import { StepIconProps as MuiStepIconProps } from '@mui/material';
+import type { StepIconProps as MuiStepIconProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../../types';
+import type { WithoutEmotionSpecific } from '../../types';
 
 import {
   StepDefaultIcon,

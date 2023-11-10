@@ -1,7 +1,7 @@
-import { Components } from '@mui/material';
+import type { Components } from '@mui/material';
 import { loadingButtonClasses } from '@mui/lab';
 
-import { Theme } from '../types';
+import type { Theme } from '../types';
 import { type ButtonProps, ButtonStates } from '../../Button';
 
 import { getButtonBackgroundColor } from './MuiButton';

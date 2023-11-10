@@ -1,4 +1,4 @@
-import { CloseEventReason } from '../../../types';
+import type { CloseEventReason } from '../../../types';
 /**
  * @description айдишка модалки/поппера/тултипа
  */

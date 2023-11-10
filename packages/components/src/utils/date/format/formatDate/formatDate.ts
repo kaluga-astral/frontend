@@ -1,5 +1,6 @@
 import { zeroPad } from '../../../zeroPad';
-import { DateMask, DateMaskElements } from '../maskDate';
+import type { DateMask } from '../maskDate';
+import { DateMaskElements } from '../maskDate';
 
 type ElementsMap = Record<DateMaskElements, (date: Date) => number>;
 

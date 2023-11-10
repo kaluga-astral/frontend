@@ -1,10 +1,5 @@
-import {
-  FunctionComponentElement,
-  cloneElement,
-  isValidElement,
-  useContext,
-  useMemo,
-} from 'react';
+import type { FunctionComponentElement } from 'react';
+import { cloneElement, isValidElement, useContext, useMemo } from 'react';
 
 import { ConfigContext } from '../ConfigProvider';
 

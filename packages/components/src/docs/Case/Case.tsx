@@ -1,4 +1,5 @@
-import { ReactNode, useMemo } from 'react';
+import type { ReactNode } from 'react';
+import { useMemo } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 import { Typography } from '../../Typography';

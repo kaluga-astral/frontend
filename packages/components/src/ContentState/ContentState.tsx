@@ -1,6 +1,8 @@
-import { ReactNode, useContext } from 'react';
+import type { ReactNode } from 'react';
+import { useContext } from 'react';
 
-import { Placeholder, PlaceholderProps } from '../Placeholder';
+import type { PlaceholderProps } from '../Placeholder';
+import { Placeholder } from '../Placeholder';
 import { CircularProgress } from '../CircularProgress';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
@@ -8,7 +10,7 @@ import { ErrorBoundary } from '../ErrorBoundary';
 import { ConfigContext } from '../ConfigProvider';
 
 import { LoadingContainer } from './styles';
-import { ContentStateErrorProps } from './types';
+import type { ContentStateErrorProps } from './types';
 
 type ContentStateProps = {
   /**

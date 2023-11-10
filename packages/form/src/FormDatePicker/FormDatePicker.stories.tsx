@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -6,7 +6,8 @@ import { FormStoryContainer } from '../docs';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
 
-import { FormDatePicker, FormDatePickerValue } from './FormDatePicker';
+import type { FormDatePickerValue } from './FormDatePicker';
+import { FormDatePicker } from './FormDatePicker';
 
 export default {
   title: 'Form/FormDatePicker',

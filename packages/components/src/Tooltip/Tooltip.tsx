@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
-import { TooltipProps as MuiTooltipProps } from '@mui/material';
+import type { TooltipProps as MuiTooltipProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
-import { TooltipSize } from './types';
+import type { TooltipSize } from './types';
 import { StyledTooltip, TooltipContentWrapper } from './styles';
 import { TooltipSizes } from './constants';
 

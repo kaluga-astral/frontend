@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import type { ComponentMeta } from '@storybook/react';
 import { Box } from '@mui/material';
 
 import { ExampleTemplate } from '../docs';
@@ -7,7 +7,7 @@ import { LegacyGrid } from '../LegacyGrid';
 import { DashboardLayout } from '../DashboardLayout';
 
 import { ProductSwitcher } from './ProductSwitcher';
-import { WidgetProduct } from './types';
+import type { WidgetProduct } from './types';
 
 export default {
   title: 'Components/ProductSwitcher',

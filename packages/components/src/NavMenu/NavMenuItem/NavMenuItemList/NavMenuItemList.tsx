@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 import { List } from '@mui/material';
 import { PageDotOutlineMd } from '@astral/icons';
 

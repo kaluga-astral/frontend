@@ -1,4 +1,4 @@
-import { Certificate } from '@astral/cryptopro-cades';
+import type { Certificate } from '@astral/cryptopro-cades';
 
 import { getCertificateExpiresDate } from '../../../../services';
 import { CertificateType } from '../../../../constants';

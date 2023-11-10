@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 import { Box, Popper } from '@mui/material';
 import { useRef, useState } from 'react';
 

@@ -6,7 +6,7 @@ import {
   isDate,
   isDateOutOfRange,
 } from '../../../utils/date';
-import { MinMaxDate } from '../../types';
+import type { MinMaxDate } from '../../types';
 
 type UseSelectedBaseDateOptions = {
   currentValue?: Date;

@@ -1,10 +1,10 @@
-import {
+import type {
   DetailedHTMLProps,
   ElementType,
   HTMLAttributes,
   ReactNode,
-  forwardRef,
 } from 'react';
+import { forwardRef } from 'react';
 
 export type GridComponentProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,

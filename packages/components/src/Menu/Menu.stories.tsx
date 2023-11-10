@@ -1,5 +1,6 @@
-import { MouseEvent, useCallback, useMemo, useState } from 'react';
-import { Story } from '@storybook/react';
+import type { MouseEvent } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import type { Story } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,

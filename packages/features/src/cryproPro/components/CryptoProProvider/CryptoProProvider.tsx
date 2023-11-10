@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { SetupCryptoProWorkspaceModal } from '..';
-import { CryptoProStore } from '../../stores/CryptoProStore';
+import type { CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
  * @description Провайдер, который в случае отсутствия или неактивности

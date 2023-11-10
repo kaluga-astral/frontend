@@ -1,6 +1,7 @@
-import { Slide as MuiSlide, SlideProps as MuiSlideProps } from '@mui/material';
+import type { SlideProps as MuiSlideProps } from '@mui/material';
+import { Slide as MuiSlide } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 export type SlideProps = WithoutEmotionSpecific<MuiSlideProps>;
 

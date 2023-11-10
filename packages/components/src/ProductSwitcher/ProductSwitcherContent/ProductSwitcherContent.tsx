@@ -3,7 +3,7 @@ import { ErrorFillSm } from '@astral/icons';
 import { ContentState } from '../../ContentState';
 import { MenuGroup } from '../../MenuGroup';
 import { Typography } from '../../Typography';
-import { WidgetProduct } from '../types';
+import type { WidgetProduct } from '../types';
 
 import { Logo, ProductItem, TitleErrorContainer } from './styles';
 

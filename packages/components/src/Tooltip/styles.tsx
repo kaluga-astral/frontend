@@ -1,10 +1,11 @@
-import { TooltipProps as MuiTooltipProps, Tooltip } from '@mui/material';
+import type { TooltipProps as MuiTooltipProps } from '@mui/material';
+import { Tooltip } from '@mui/material';
 
 import { styled } from '../styles';
-import { WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 
 import { TooltipSizes } from './constants';
-import { TooltipSize } from './types';
+import type { TooltipSize } from './types';
 
 type StyledTooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
   size?: TooltipSize;
@@ -18,11 +19,11 @@ export const StyledTooltip = styled(
   & .MuiTooltip-tooltip {
     margin: 0;
 
-    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
     font-size: ${({ size, theme }) =>
       size === TooltipSizes.SMALL
         ? theme.typography.small.fontSize
         : theme.typography.ui.fontSize};
+    font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
     line-height: ${({ size, theme }) =>
       size === TooltipSizes.SMALL
         ? theme.typography.small.lineHeight
