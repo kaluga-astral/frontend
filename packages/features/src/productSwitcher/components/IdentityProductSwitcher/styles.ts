@@ -7,7 +7,7 @@ import {
   styled,
 } from '@astral/ui';
 
-export const WidgetMenu = styled(Menu)`
+export const IdentityProductSwitcherMenu = styled(Menu)`
   .MuiPaper-root > .MuiList-root {
     display: flex;
     flex-direction: column;
@@ -22,11 +22,11 @@ export const WidgetMenu = styled(Menu)`
 
 // as typeof MenuItem необходим для возможности прокинуть component
 // https://github.com/mui/material-ui/issues/15695
-export const ProductItem = styled(MenuItem)`
+export const IdentityProductSwitcherItem = styled(MenuItem)`
   padding-left: ${({ theme }) => theme.spacing(6)};
 ` as typeof MenuItem;
 
-export const Logo = styled('img', {
+export const IdentityProductSwitcherLogo = styled('img', {
   shouldForwardProp: (prop) => prop !== 'color',
 })`
   width: 40px;
@@ -37,13 +37,13 @@ export const Logo = styled('img', {
   border-radius: ${({ theme }) => theme.shape.small};
 `;
 
-export const TitleErrorContainer = styled(LegacyGrid)`
+export const IdentityProductSwitcherErrorContainer = styled(LegacyGrid)`
   column-gap: ${({ theme }) => theme.spacing(2)};
 
   color: ${({ theme }) => theme.palette.error.dark};
 `;
 
-export const TenantToggleButtonGroup = styled(ToggleButtonGroup)`
+export const TenantsToggleButtonGroup = styled(ToggleButtonGroup)`
   width: 100%;
   padding: ${({ theme }) => theme.spacing(1, 4, 4)};
 `;

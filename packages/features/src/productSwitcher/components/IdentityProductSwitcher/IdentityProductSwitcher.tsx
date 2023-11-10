@@ -1,19 +1,20 @@
 import {
   ContentState,
+  ErrorFillSm,
   IconButton,
   MenuGroup,
+  ProductsFillMd,
   Typography,
   useMenu,
 } from '@astral/ui';
-import { ErrorFillSm, ProductsFillMd } from '@astral/icons';
 
 import {
-  Logo,
-  ProductItem,
+  IdentityProductSwitcherErrorContainer,
+  IdentityProductSwitcherItem,
+  IdentityProductSwitcherLogo,
+  IdentityProductSwitcherMenu,
   TenantToggleButton,
-  TenantToggleButtonGroup,
-  TitleErrorContainer,
-  WidgetMenu,
+  TenantsToggleButtonGroup,
 } from './styles';
 import { useLogic } from './hooks';
 
@@ -51,7 +52,7 @@ export const IdentityProductSwitcher = ({
       >
         <ProductsFillMd />
       </IconButton>
-      <WidgetMenu
+      <IdentityProductSwitcherMenu
         open={open}
         anchorEl={anchorRef.current}
         onClose={handleCloseMenu}
@@ -63,7 +64,7 @@ export const IdentityProductSwitcher = ({
             customState={{
               imgAlt: 'Что-то пошло не так',
               title: (
-                <TitleErrorContainer
+                <IdentityProductSwitcherErrorContainer
                   container
                   autoFlow="column"
                   alignItems="center"
@@ -74,13 +75,13 @@ export const IdentityProductSwitcher = ({
                   <Typography variant="h6" color="grey" colorIntensity="900">
                     Что-то пошло не так
                   </Typography>
-                </TitleErrorContainer>
+                </IdentityProductSwitcherErrorContainer>
               ),
               description: 'Произошла ошибка. Повторите попытку позже.',
             }}
           >
             {tenants?.length && (
-              <TenantToggleButtonGroup
+              <TenantsToggleButtonGroup
                 exclusive
                 onChange={handleChangeTenant}
                 value={tenantId}
@@ -90,23 +91,26 @@ export const IdentityProductSwitcher = ({
                     {name}
                   </TenantToggleButton>
                 ))}
-              </TenantToggleButtonGroup>
+              </TenantsToggleButtonGroup>
             )}
             {productList?.map((product) => {
               return (
                 <li key={product.id}>
-                  <ProductItem component="a" href={product.url}>
-                    <Logo src={product.logoUrl} color={product.color} />
+                  <IdentityProductSwitcherItem component="a" href={product.url}>
+                    <IdentityProductSwitcherLogo
+                      src={product.logoUrl}
+                      color={product.color}
+                    />
                     <Typography variant="ui" color="grey" colorIntensity="900">
                       {product.name}
                     </Typography>
-                  </ProductItem>
+                  </IdentityProductSwitcherItem>
                 </li>
               );
             })}
           </ContentState>
         </MenuGroup>
-      </WidgetMenu>
+      </IdentityProductSwitcherMenu>
     </>
   );
 };
