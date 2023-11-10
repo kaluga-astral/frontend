@@ -80,13 +80,13 @@ export const IdentityProductSwitcher = ({
               description: 'Произошла ошибка. Повторите попытку позже.',
             }}
           >
-            {tenants?.length && (
+            {Boolean(tenants?.length) && (
               <TenantsToggleButtonGroup
                 exclusive
                 onChange={handleChangeTenant}
                 value={tenantId}
               >
-                {tenants.map(({ id, name }) => (
+                {tenants?.map(({ id, name }) => (
                   <TenantToggleButton value={id} key={id}>
                     {name}
                   </TenantToggleButton>
