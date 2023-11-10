@@ -6,5 +6,4 @@
     "packages/form",
     "packages/components"
   ],
-  "editor.formatOnSave": true
 }
