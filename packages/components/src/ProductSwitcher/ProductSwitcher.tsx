@@ -21,6 +21,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   const handleShowProducts = async () => {
+    setIsError(false);
     handleOpenMenu();
 
     if (!products.length) {
