@@ -14,6 +14,8 @@ const techSupDefault = {
   email: '',
 };
 
+const defaultHidePersonalDataClassname = 'ym-hide-content';
+
 type Language = 'ru';
 type ImagesMap = {
   /**
@@ -67,6 +69,16 @@ export type ConfigContextProps = {
    * @default '-'
    */
   techSup: TechnicalSupport;
+  /**
+   *  флаг скрытия персональной информации от трекеров
+   *  @default true
+   */
+  hidePersonalData?: boolean;
+  /**
+   * цсс класс для сокрытия персональной информации от трекеров
+   * @default 'ym-hide-content'
+   */
+  hidePersonalDataClassname?: string;
 };
 
 export type ConfigProviderProps = Partial<ConfigContextProps> & {
@@ -80,6 +92,8 @@ export const ConfigContext = createContext<ConfigContextProps>({
   imagesMap: imagesMapDefault,
   techSup: techSupDefault,
   emptySymbol: '-',
+  hidePersonalDataClassname: defaultHidePersonalDataClassname,
+  hidePersonalData: true,
 });
 
 export const ConfigProvider = ({
@@ -90,6 +104,8 @@ export const ConfigProvider = ({
   emptySymbol = '-',
   imagesMap = imagesMapDefault,
   techSup = techSupDefault,
+  hidePersonalData = true,
+  hidePersonalDataClassname = defaultHidePersonalDataClassname,
 }: Partial<ConfigProviderProps>) => {
   useEffect(() => {
     if (!captureException) {
@@ -109,6 +125,8 @@ export const ConfigProvider = ({
         emptySymbol,
         imagesMap,
         techSup,
+        hidePersonalData,
+        hidePersonalDataClassname,
       }}
     >
       {children}
