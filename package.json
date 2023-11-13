@@ -10,7 +10,7 @@
     "@astral/commitlint-config": "^2.0.0",
     "@astral/eslint-config-react-ts": "^2.0.0",
     "@astral/illustrations": "*",
-    "@astral/prettier-config": "^1.6.2",
+    "@astral/prettier-config": "^2.0.0",
     "@astral/stylelint-config-styled": "^2.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
