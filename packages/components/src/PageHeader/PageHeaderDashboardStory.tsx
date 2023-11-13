@@ -23,7 +23,7 @@ import { Menu, MenuProps } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
-import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
 

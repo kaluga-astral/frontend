@@ -17,7 +17,7 @@ import { MenuItem } from '../MenuItem';
 import { AoIcon } from '../MenuGroup/stories/Icons';
 import { Product } from '../Product';
 import { ProductSwitcher } from '../ProductSwitcher';
-import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stories';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { Profile } from '../Profile';
 import { Typography } from '../Typography';
 import { ListItemIcon } from '../ListItemIcon';
