@@ -9,7 +9,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "packageDir": ["./", "./"] }
-    ],
+    ]
   },
   "overrides": [
     // Для увеличения производительности plugin:testing-library запускается только для test.tsx файлов
