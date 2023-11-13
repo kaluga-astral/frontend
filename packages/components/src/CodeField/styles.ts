@@ -14,22 +14,19 @@ export const CodeFieldDigitsWrapper = styled.div`
 export const Digit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;
-
-  border: unset;
-  border-radius: ${({ theme }) => theme.shape.small};
   padding: 18px 25px;
-  outline: none;
 
-  font-size: 20px;
-
-  font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
   font-family: ${({ theme }) => theme.typography.fontFamily};
-
-  background: ${({ theme }) => theme.palette.background.elementHover};
-
+  font-size: 20px;
+  font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
   color: ${({ theme, isError }) => {
     return isError ? theme.palette.error.dark : theme.palette.grey[900];
-  }}};
+  }};
+
+  background: ${({ theme }) => theme.palette.background.elementHover};
+  border: unset;
+  border-radius: ${({ theme }) => theme.shape.small};
+  outline: none;
 `;
 
 export const CodeFieldLabel = styled(Typography)`
