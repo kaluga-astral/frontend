@@ -33,10 +33,10 @@ export const useCodeState = (
   const deletePreviousSymbol = (index: number) => {
     let newArrayValue = [...arrayValue];
 
-    if (arrayValue[index].toString()) {
+    if (arrayValue[index]?.toString()) {
       newArrayValue[index] = '';
       setArrayValue(newArrayValue);
-    } else if (arrayValue[index - 1].toString()) {
+    } else if (arrayValue[index - 1]?.toString()) {
       newArrayValue[index - 1] = '';
       setArrayValue(newArrayValue);
       setFocusIndexPrevious(index);
