@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
 
 type UseTimerParams = {
+  /**
+   * @description Значение, при котором таймер останавливается
+   */
   endTime?: number;
+  /**
+   * @description Интервал таймера в мс
+   */
   stepMS?: number;
+  /**
+   * @description Callback, будет выполнена по истечению таймера
+   */
   onExpires?: () => void;
+  /**
+   * @description Callback, вызывается при обновлении времени
+   */
   onStep?: (time: number) => void;
-  isFormatHHMMSS?: boolean;
 };
 
 type RestartTimer = (newTime?: number) => void;
