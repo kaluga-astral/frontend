@@ -171,12 +171,10 @@ export const Example = () => {
 
 export const WithButtons = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState(
-    data.map((n) => ({
-      ...n,
-      actions: <Button variant="link">Перейти к уведомлению</Button>,
-    })),
-  );
+  const notifications = data.map((n) => ({
+    ...n,
+    actions: <Button variant="link">Перейти к уведомлению</Button>,
+  }));
   const unreadNotifications = notifications.filter(
     (notification) => notification.isUnread,
   );
