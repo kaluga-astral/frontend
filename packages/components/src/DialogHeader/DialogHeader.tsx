@@ -2,25 +2,20 @@ import React from 'react';
 import { ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
-import { GridContainerProps, LegacyGrid } from '../LegacyGrid';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
-import { DialogHeaderRoot } from './styles';
+import { DialogHeaderContent, DialogHeaderRoot } from './styles';
 
 export type DialogHeaderProps = {
   children: React.ReactNode;
-  justifyContent?: GridContainerProps['justifyContent'];
   title?: string;
-  disableSpacing?: boolean;
   onClose?: ModalProps['onClose'];
 };
 
 export const DialogHeader = ({
   children,
-  justifyContent = 'left',
   title,
-  disableSpacing,
   onClose,
 }: DialogHeaderProps) => {
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,15 +27,7 @@ export const DialogHeader = ({
   return (
     <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && <Typography variant="h4">{title}</Typography>}
-      <LegacyGrid
-        container
-        justifyContent={justifyContent}
-        alignItems="center"
-        autoFlow="column"
-        spacing={disableSpacing ? 0 : 2}
-      >
-        {children}
-      </LegacyGrid>
+      <DialogHeaderContent>{children}</DialogHeaderContent>
       {onClose && (
         <IconButton
           variant="text"

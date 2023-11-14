@@ -90,10 +90,18 @@ const Template: Story = () => {
       </Dialog>
       <Dialog open={dialogWithHeaderOpen} onClose={handleCloseDialogWithHeader}>
         <DialogHeader title="Заголовок" onClose={handleCloseDialogWithHeader}>
-          <Tag variant="light" label="Light Tag" color="primary" />
-          <Button variant="contained" color="primary">
-            Button
-          </Button>
+          <LegacyGrid
+            spacing={2}
+            container
+            justifyContent="flex-start"
+            templateColumns="auto auto"
+            alignItems="center"
+          >
+            <Tag variant="light" label="Light Tag" color="primary" />
+            <Button variant="contained" color="primary">
+              Button
+            </Button>
+          </LegacyGrid>
         </DialogHeader>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

@@ -6,7 +6,7 @@ import { WithoutEmotionSpecific } from '../types';
 import { StyledDrawer } from './styles';
 
 export type SideDialogProps = WithoutEmotionSpecific<MuiDrawerProps> & {
-  title: string;
+  title?: string;
 };
 
 export const SideDialog = ({
@@ -18,7 +18,7 @@ export const SideDialog = ({
 }: SideDialogProps) => {
   return (
     <StyledDrawer anchor="right" open={open} onClose={onClose} {...props}>
-      <SideDialogTitle onClose={onClose}>{title}</SideDialogTitle>
+      {title && <SideDialogTitle onClose={onClose}>{title}</SideDialogTitle>}
       {children}
     </StyledDrawer>
   );

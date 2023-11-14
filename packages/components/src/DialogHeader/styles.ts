@@ -24,9 +24,16 @@ export const DialogHeaderRoot = styled('div', {
 
     return '1fr';
   }};
+  column-gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
+
+  height: auto;
   padding: ${({ theme }) => theme.spacing(4, 6)};
+`;
+
+export const DialogHeaderContent = styled('div')`
   overflow: hidden;
 
-  column-gap: ${({ theme }) => theme.spacing(2)};
+  width: 100%;
+  height: 100%;
 `;
