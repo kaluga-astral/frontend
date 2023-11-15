@@ -35,7 +35,7 @@ export const Example = () => (
     <br />
     <CodeField
       label="Код подтверждения отправлен на test@test.ru"
-      onRestart={() => {}}
+      onResendCode={() => Promise.resolve()}
     />
   </>
 );
@@ -48,7 +48,7 @@ export const Error = () => (
     <div>
       <CodeField
         isError={true}
-        onRestart={() => {}}
+        onResendCode={() => Promise.resolve()}
         initialValue={TEST_VALUE}
       />
     </div>
@@ -63,7 +63,7 @@ export const Error = () => (
       <CodeField
         isError={true}
         errorText="Код подтверждения неверный"
-        onRestart={() => {}}
+        onResendCode={() => Promise.resolve()}
         initialValue={TEST_VALUE}
       />
     </div>
@@ -75,7 +75,7 @@ export const Disabled = () => (
     <CodeField
       label="Код подтверждения отправлен на test@test.ru"
       disabled={true}
-      onRestart={() => {}}
+      onResendCode={() => Promise.resolve()}
       initialValue={TEST_VALUE}
     />
   </>
@@ -86,7 +86,7 @@ export const Loading = () => (
     <CodeField
       label="Код подтверждения отправлен на test@test.ru"
       loading={true}
-      onRestart={() => {}}
+      onResendCode={() => Promise.resolve()}
       initialValue={TEST_VALUE}
     />
   </>
@@ -101,37 +101,37 @@ export const WithoutRestartButton = () => (
 export const CodeLength = () => (
   <div>
     <div>
-      <CodeField onRestart={() => {}} codeLength={4} />
+      <CodeField codeLength={4} />
     </div>
 
     <br />
 
     <div>
-      <CodeField onRestart={() => {}} codeLength={5} />
+      <CodeField codeLength={5} />
     </div>
 
     <br />
 
     <div>
-      <CodeField onRestart={() => {}} codeLength={6} />
+      <CodeField codeLength={6} />
     </div>
 
     <br />
 
     <div>
-      <CodeField onRestart={() => {}} codeLength={7} />
+      <CodeField codeLength={7} />
     </div>
 
     <br />
 
     <div>
-      <CodeField onRestart={() => {}} codeLength={8} />
+      <CodeField codeLength={8} />
     </div>
 
     <br />
 
     <div>
-      <CodeField onRestart={() => {}} codeLength={9} />
+      <CodeField codeLength={9} />
     </div>
   </div>
 );

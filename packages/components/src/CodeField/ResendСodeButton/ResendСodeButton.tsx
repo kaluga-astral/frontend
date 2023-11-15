@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useTimer } from '../../hooks';
 import { Button } from '../../Button';
@@ -25,24 +25,32 @@ type ResendCodeButtonProps = {
    */
   time: number;
   /**
-   * @description Фукция, которая вызовется при перезапросе
+   * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
-  onRestart: () => void;
+  onResendCode: () => Promise<void>;
 };
 
 const ResendCodeButton = ({
   loading,
   disabled,
   time,
-  onRestart,
+  onResendCode,
   isError,
 }: ResendCodeButtonProps) => {
   const [timer, restartTimer] = useTimer(0);
-  const showTimer = !disabled && !loading && timer > 0;
+  const [resendCodeLoading, setResendCodeLoading] = useState(false);
+
+  const showTimer = !disabled && !loading && !resendCodeLoading && timer > 0;
+  const disableButton = disabled || loading || resendCodeLoading || timer > 0;
 
   const onClick = () => {
-    onRestart();
-    restartTimer(time);
+    setResendCodeLoading(true);
+
+    onResendCode()
+      .then(() => {
+        restartTimer();
+      })
+      .finally(() => setResendCodeLoading(false));
   };
 
   useEffect(() => {
@@ -51,11 +59,7 @@ const ResendCodeButton = ({
 
   return (
     <ResendCodeButtonWrapper isError={isError}>
-      <Button
-        variant="link"
-        disabled={disabled || loading || timer > 0}
-        onClick={onClick}
-      >
+      <Button variant="link" disabled={disableButton} onClick={onClick}>
         Отправить код повторно
       </Button>
       {showTimer && (

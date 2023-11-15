@@ -30,9 +30,9 @@ export type CodeFieldInputProps = {
    */
   codeLength?: number;
   /**
-   * @description Фукция, которая вызовется при перезапросе
+   * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
-  onRestart?: () => void;
+  onResendCode?: () => Promise<void>;
   /**
    * @description Начальное значение поля
    */
@@ -69,7 +69,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
       label,
       time = RESTART_TIME_DEFAULT,
       codeLength = CODE_LENGTH_DEFAULT,
-      onRestart,
+      onResendCode,
       initialValue,
       loading = false,
       disabled = false,
@@ -119,13 +119,13 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
           ))}
         </CodeFieldDigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
-        {onRestart && (
+        {onResendCode && (
           <ResendCodeButton
             time={time}
             disabled={disabled}
             loading={loading}
             isError={isError}
-            onRestart={onRestart}
+            onResendCode={onResendCode}
           />
         )}
       </CodeFieldWrapper>

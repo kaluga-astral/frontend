@@ -15,7 +15,9 @@ describe('CodeField', () => {
   });
 
   it('Prop:disabled: блокирует поле', () => {
-    renderWithTheme(<CodeField disabled onRestart={() => {}} />);
+    renderWithTheme(
+      <CodeField disabled onResendCode={() => Promise.resolve()} />,
+    );
 
     const fields = screen.getAllByRole('textbox');
 
@@ -26,7 +28,9 @@ describe('CodeField', () => {
   });
 
   it('Prop:loading: блокирует поле', () => {
-    renderWithTheme(<CodeField loading onRestart={() => {}} />);
+    renderWithTheme(
+      <CodeField loading onResendCode={() => Promise.resolve()} />,
+    );
 
     const fields = screen.getAllByRole('textbox');
 
@@ -37,7 +41,7 @@ describe('CodeField', () => {
   });
 
   it('Prop:time: пока timer > 0, кнопка повторной отправки кода неактивна', () => {
-    renderWithTheme(<CodeField onRestart={() => {}} />);
+    renderWithTheme(<CodeField onResendCode={() => Promise.resolve()} />);
 
     const resendButton = screen.getByRole('button');
 
@@ -45,7 +49,9 @@ describe('CodeField', () => {
   });
 
   it('Prop:time: когда timer = 0, кнопка повторной отправки кода активна', () => {
-    renderWithTheme(<CodeField time={0} onRestart={() => {}} />);
+    renderWithTheme(
+      <CodeField time={0} onResendCode={() => Promise.resolve()} />,
+    );
 
     const resendButton = screen.getByRole('button');
 
@@ -71,7 +77,9 @@ describe('CodeField', () => {
   });
 
   it('backspace: удаляет символ в предыдущем поле (при отсутвии в текущем поле)', async () => {
-    renderWithTheme(<CodeField initialValue="1234" onRestart={() => {}} />);
+    renderWithTheme(
+      <CodeField initialValue="1234" onResendCode={() => Promise.resolve()} />,
+    );
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
