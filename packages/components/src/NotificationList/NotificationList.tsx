@@ -8,6 +8,7 @@ import { Divider } from '../Divider';
 
 import { NotificationListItem } from './NotificationListItem';
 import { NotificationListTabs } from './NotificationListTabs/NotificationListTabs';
+import { Notification } from './types';
 import {
   NotificationListDialog,
   NotificationListFooter,
@@ -15,27 +16,92 @@ import {
   NotificationListMain,
 } from './styles';
 import { NotificationListEmpty } from './NotificationListEmpty';
-import { NotificationListProps } from './types';
+
+export type NotificationListProps = {
+  /**
+   * @description флаг управления отображением уведомлений
+   * @type boolean
+   * @default false
+   * */
+  isOpen: boolean;
+  /**
+   * @description список уведомлений
+   * @type Notification[]
+   * @default []
+   * */
+  notifications: Notification[];
+  /**
+   * @description список непрочитанных уведомлений
+   * @type Notification[]
+   * @default undefined
+   * */
+  unreadNotifications?: Notification[];
+  /**
+   * @description источник изображения при отсутствии уведомлений
+   * @type string
+   * @default undefined
+   * */
+  noDataImgSrc?: string;
+  /**
+   * @description флаг управления отображением непрочитанных уведомлений
+   * @type boolean
+   * @default false
+   * */
+  isInitialUnreadOnly?: boolean;
+  /**
+   * @description функция обработки закрытия уведомления
+   * @type () => void
+   * */
+  onClose: () => void;
+  /**
+   * @description функция вызывается когда уведомление выводится на экран
+   * @type (id: string | number) => void
+   * */
+  onViewNotification?: (id: string | number) => void;
+  /**
+   * @description функция обработки прочтения всех уведомления
+   * @type (notifications: Notification[]) => void
+   * */
+  onReadAll?: (notifications: Notification[]) => void;
+  /**
+   * @description функция обработки удаления уведомления
+   * @type (id: string | number) => void
+   * */
+  onDelete?: (id: string | number) => void;
+  /**
+   * @description функция обработки нажатия на кнопку настроек
+   * @type () => void
+   * */
+  onSettingsButtonClick?: () => void;
+  /**
+   * @description функция обработки смены вкладки
+   * @type () => void
+   * */
+  onTabChange?: () => void;
+};
 
 export const NotificationList = ({
-  open,
+  isOpen,
   notifications,
   unreadNotifications,
   noDataImgSrc,
-  initialUnreadOnly = false,
+  isInitialUnreadOnly = false,
   onClose,
   onDelete,
   onReadAll,
-  onNotificationVisible,
+  onViewNotification,
   onSettingsButtonClick,
   onTabChange,
 }: NotificationListProps) => {
   const listRef = useRef<HTMLUListElement | null>(null);
-  const [isUnreadOnly, setIsUnreadOnly] = useState(
-    Boolean(unreadNotifications) && initialUnreadOnly,
-  );
-  const visibleNotifications =
-    unreadNotifications && isUnreadOnly ? unreadNotifications : notifications;
+  const [isUnreadOnly, setIsUnreadOnly] = useState(isInitialUnreadOnly);
+  const visibleNotifications = (() => {
+    if (unreadNotifications && isUnreadOnly) {
+      return unreadNotifications;
+    }
+
+    return notifications;
+  })();
 
   const handleToggleUnreadOnly = () => {
     setIsUnreadOnly((prev) => !prev);
@@ -90,7 +156,7 @@ export const NotificationList = ({
                 key={notification.id}
                 {...notification}
                 onDelete={onDelete}
-                onNotificationVisible={onNotificationVisible}
+                onViewNotification={onViewNotification}
               />
             ))}
           </NotificationListMain>
@@ -114,7 +180,7 @@ export const NotificationList = ({
   }, [isUnreadOnly]);
 
   return (
-    <NotificationListDialog open={open} onClose={onClose}>
+    <NotificationListDialog open={isOpen} onClose={onClose}>
       <SideDialogHeader title="Уведомления" onClose={onClose}>
         <NotificationListHeader>
           <IconButton variant="text" onClick={onSettingsButtonClick}>

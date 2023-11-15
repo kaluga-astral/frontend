@@ -54,7 +54,7 @@ describe('NotificationList', () => {
   it('Props:unreadNotifications: отображает непрочитанные уведомления', () => {
     renderWithTheme(
       <NotificationList
-        open
+        isOpen
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={() => {}}
@@ -69,11 +69,11 @@ describe('NotificationList', () => {
   it('Props:notifications: отображает все уведомления', () => {
     renderWithTheme(
       <NotificationList
-        open
+        isOpen
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={() => {}}
-        initialUnreadOnly={false}
+        isInitialUnreadOnly={false}
       />,
     );
 
@@ -87,11 +87,11 @@ describe('NotificationList', () => {
   it('Переключает режим отображения непрочитанных уведомлений', () => {
     renderWithTheme(
       <NotificationList
-        open
+        isOpen
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={() => {}}
-        initialUnreadOnly={false}
+        isInitialUnreadOnly={false}
       />,
     );
 
@@ -111,7 +111,7 @@ describe('NotificationList', () => {
 
     renderWithTheme(
       <NotificationList
-        open
+        isOpen
         notifications={notifications}
         onReadAll={onReadAllMock}
         onClose={() => {}}
@@ -126,7 +126,7 @@ describe('NotificationList', () => {
   it('NotificationListFooter не виден при отсутствии onReadAll', () => {
     renderWithTheme(
       <NotificationList
-        open
+        isOpen
         notifications={notifications}
         onClose={() => {}}
       />,

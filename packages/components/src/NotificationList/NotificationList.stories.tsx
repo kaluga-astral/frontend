@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { BellFillMd } from '@astral/icons';
 
@@ -7,7 +7,7 @@ import { Badge } from '../Badge';
 import { Button } from '../Button';
 
 import { NotificationList } from './NotificationList';
-import { Notification, NotificationListProps } from './types';
+import { Notification } from './types';
 
 const meta: Meta<typeof NotificationList> = {
   title: 'Components/NotificationList',
@@ -16,7 +16,7 @@ const meta: Meta<typeof NotificationList> = {
 
 export default meta;
 
-type Story = StoryObj<NotificationListProps>;
+type Story = StoryObj<typeof NotificationList>;
 
 const noDataStubSrc = '/no-notifications-stub.svg';
 
@@ -38,6 +38,14 @@ const data: Notification[] = [
     isUnread: true,
   },
   {
+    id: 3,
+    title: 'Обновление в личном кабинете',
+    date: '2023-10-30T12:00:00',
+    text: 'Добавлен раздел Обмен с 1С',
+    priority: 'ordinary',
+    isUnread: true,
+  },
+  {
     id: 4,
     title: 'Приглашение',
     date: '2023-10-30T13:00:00',
@@ -51,7 +59,7 @@ const data: Notification[] = [
     date: '2023-10-30T16:00:00',
     text: 'Срочное предупреждение: необходимо изменить пароль к учетной записи.',
     priority: 'critical',
-    isUnread: false,
+    isUnread: true,
   },
   {
     id: 6,
@@ -59,7 +67,7 @@ const data: Notification[] = [
     date: '2023-10-30T20:00:00',
     text: 'Организация ООО “Тестовая” подключена к личному кабинету',
     priority: 'ordinary',
-    isUnread: false,
+    isUnread: true,
   },
   {
     id: 7,
@@ -67,7 +75,7 @@ const data: Notification[] = [
     date: '2023-10-30T21:00:00',
     text: 'Для организации ООО “Тестовая” изменено краткое наименование.',
     priority: 'ordinary',
-    isUnread: false,
+    isUnread: true,
   },
   {
     id: 8,
@@ -75,14 +83,16 @@ const data: Notification[] = [
     date: '2023-10-30T22:00:00',
     text: 'Срок действия сертификата ЭП для организации ООО “Тестовая” истекает через 30 дней. Обновите сертификат для продолжении работы с регистрацией ККТ.',
     priority: 'ordinary',
-    isUnread: false,
+    isUnread: true,
   },
 ];
 
 export const Interaction: Story = {
   args: {
-    open: false,
-    onClose: () => {},
+    isOpen: true,
+    notifications: data,
+    unreadNotifications: data.filter((notification) => notification.isUnread),
+    noDataImgSrc: noDataStubSrc,
   },
   parameters: {
     docs: {
@@ -94,37 +104,37 @@ export const Interaction: Story = {
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState(data);
+  const viewedIds = useRef<(number | string)[]>([]);
   const unreadNotifications = notifications.filter(
     (notification) => notification.isUnread,
   );
-
-  let timeout: NodeJS.Timeout | null = null;
 
   const handleClick = () => {
     setIsOpen(true);
   };
 
   const handleClose = () => {
+    setNotifications((prev) =>
+      prev.map((notification) => {
+        if (viewedIds.current.includes(notification.id)) {
+          return {
+            ...notification,
+            isUnread: false,
+          };
+        }
+
+        return notification;
+      }),
+    );
+
+    viewedIds.current = [];
     setIsOpen(false);
   };
 
   const handleRead = (id: string | number) => {
-    if (timeout) {
-      clearTimeout(timeout);
+    if (!viewedIds.current.includes(id)) {
+      viewedIds.current = [...viewedIds.current, id];
     }
-
-    timeout = setTimeout(() => {
-      setNotifications((prev) =>
-        prev.map((notification) =>
-          notification.id === id
-            ? {
-                ...notification,
-                isUnread: false,
-              }
-            : notification,
-        ),
-      );
-    }, 2000);
   };
 
   const handleReadAll = () => {
@@ -155,26 +165,35 @@ export const Example = () => {
       </Badge>
 
       <NotificationList
-        open={isOpen}
+        isOpen={isOpen}
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={handleClose}
-        onNotificationVisible={handleRead}
+        onViewNotification={handleRead}
         onReadAll={handleReadAll}
         onDelete={handleDelete}
         noDataImgSrc={noDataStubSrc}
-        initialUnreadOnly={unreadNotifications.length > 0}
+        isInitialUnreadOnly={unreadNotifications.length > 0}
       />
     </>
   );
 };
 
-export const WithButtons = () => {
+export const WithLinks = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const notifications = data.map((n) => ({
-    ...n,
-    actions: <Button variant="link">Перейти к уведомлению</Button>,
-  }));
+  const viewedIds = useRef<(number | string)[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>(
+    data.map((n) => {
+      if (n.id === 3 || n.id === 4) {
+        return {
+          ...n,
+          actions: <Button variant="link">Перейти в раздел</Button>,
+        };
+      }
+
+      return n;
+    }),
+  );
   const unreadNotifications = notifications.filter(
     (notification) => notification.isUnread,
   );
@@ -184,81 +203,28 @@ export const WithButtons = () => {
   };
 
   const handleClose = () => {
+    setNotifications((prev) =>
+      prev.map((notification) => {
+        if (viewedIds.current.includes(notification.id)) {
+          return {
+            ...notification,
+            isUnread: false,
+          };
+        }
+
+        return notification;
+      }),
+    );
+
+    viewedIds.current = [];
     setIsOpen(false);
   };
-
-  return (
-    <>
-      <Badge
-        badgeContent={unreadNotifications.length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        open={isOpen}
-        notifications={notifications}
-        unreadNotifications={unreadNotifications}
-        onClose={handleClose}
-        noDataImgSrc={noDataStubSrc}
-        initialUnreadOnly={unreadNotifications.length > 0}
-      />
-    </>
-  );
-};
-
-export const WithIcons = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const unreadNotifications = notifications.filter(
-    (notification) => notification.isUnread,
-  );
 
   const handleRead = (id: string | number) => {
-    setNotifications((prev) =>
-      prev.map((notification) =>
-        notification.id === id
-          ? {
-              ...notification,
-              isUnread: false,
-              actions: undefined,
-            }
-          : notification,
-      ),
-    );
+    if (!viewedIds.current.includes(id)) {
+      viewedIds.current = [...viewedIds.current, id];
+    }
   };
-
-  const handleClick = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const handleDelete = (id: string | number) => {
-    setNotifications((prev) =>
-      prev.filter((notification) => notification.id !== id),
-    );
-  };
-
-  useEffect(() => {
-    setNotifications(
-      data.map((n) => ({
-        ...n,
-        actions: n.isUnread && (
-          <Button onClick={() => handleRead(n.id)} variant="light">
-            Отметить как прочитанное
-          </Button>
-        ),
-        icon: <BellFillMd />,
-      })),
-    );
-  }, []);
 
   return (
     <>
@@ -273,13 +239,13 @@ export const WithIcons = () => {
       </Badge>
 
       <NotificationList
-        open={isOpen}
+        isOpen={isOpen}
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={handleClose}
         noDataImgSrc={noDataStubSrc}
-        initialUnreadOnly={unreadNotifications.length > 0}
-        onDelete={handleDelete}
+        isInitialUnreadOnly={unreadNotifications.length > 0}
+        onViewNotification={handleRead}
       />
     </>
   );
@@ -328,7 +294,7 @@ export const WithoutTabs = () => {
       </Badge>
 
       <NotificationList
-        open={isOpen}
+        isOpen={isOpen}
         notifications={notifications}
         onClose={handleClose}
         noDataImgSrc={noDataStubSrc}

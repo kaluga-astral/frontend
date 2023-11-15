@@ -2,7 +2,7 @@ import { styled } from '../../styles';
 import { Typography } from '../../Typography';
 import { NotificationListPriority } from '../types';
 import { Theme } from '../../theme';
-import { PRIORITIES } from '../constants';
+import { NOTIFICATION_PRIORITIES } from '../constants';
 import { IconButton } from '../../IconButton';
 
 const getPriorityColor = ({
@@ -12,11 +12,11 @@ const getPriorityColor = ({
   theme: Theme;
   priority?: NotificationListPriority;
 }) => {
-  if (priority === PRIORITIES.important) {
+  if (priority === NOTIFICATION_PRIORITIES.important) {
     return theme.palette.yellow[800];
   }
 
-  if (priority === PRIORITIES.critical) {
+  if (priority === NOTIFICATION_PRIORITIES.critical) {
     return theme.palette.red[800];
   }
 

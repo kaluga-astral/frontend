@@ -1,10 +1,10 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { BellFillMd } from '@astral/icons';
 import { expect, vi } from 'vitest';
 
-import { NotificationListItemProps } from '../types';
-
-import { NotificationListItem } from './NotificationListItem';
+import {
+  NotificationListItem,
+  NotificationListItemProps,
+} from './NotificationListItem';
 
 const notification: NotificationListItemProps = {
   id: 1,
@@ -41,18 +41,5 @@ describe('NotificationListItem', () => {
     const notificationDeleteButton = screen.getByText('action');
 
     expect(notificationDeleteButton).toBeVisible();
-  });
-
-  it('Props:icon: отображает иконку', () => {
-    renderWithTheme(
-      <NotificationListItem
-        {...notification}
-        icon={<BellFillMd data-testid="test" />}
-      />,
-    );
-
-    const notificationIcon = screen.getByTestId('test');
-
-    expect(notificationIcon).toBeVisible();
   });
 });

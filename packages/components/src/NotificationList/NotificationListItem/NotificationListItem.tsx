@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { CrossOutlineSm } from '@astral/icons';
 
 import { Typography } from '../../Typography';
-import { NotificationListItemProps } from '../types';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { NotificationListPriority } from '../types';
 
+import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 import {
   ListItem,
   ListItemActions,
@@ -29,17 +29,73 @@ const getDateFormat = (date: string | Date | null) => {
   });
 };
 
+export type NotificationListItemProps = {
+  /**
+   * @description уникальный идентификатор уведомления
+   * @type string | number
+   * @default ''
+   * */
+  id: string | number;
+  /**
+   * @description заголовок уведомления
+   * @type string
+   * @default ''
+   * */
+  title: string;
+  /**
+   * @description дата создания уведомления
+   * @type string | Date
+   * @default ''
+   * */
+  date: string | Date;
+  /**
+   * @description текст уведомления
+   * @type string
+   * @default ''
+   * */
+  text: string;
+  /**
+   * @description приоритет уведомления
+   * @type NotificationListPriority
+   * @default 'ordinary'
+   * */
+  priority?: NotificationListPriority;
+  /**
+   * @description флаг прочтения уведомления
+   * @type boolean
+   * @default true
+   * */
+  isUnread?: boolean;
+  /**
+   * @description дополнительные действия
+   * @type React.ReactNode
+   * @default undefined
+   * */
+  actions?: React.ReactNode;
+  /**
+   * @description функция удаления уведомления
+   * @type (id: string | number) => void
+   * @default undefined
+   * */
+  onDelete?: (id: string | number) => void;
+  /**
+   * @description функция вызывается при появлении уведомления на экране
+   * @type (id: string | number) => void
+   * @default undefined
+   * */
+  onViewNotification?: (id: string | number) => void;
+};
+
 export const NotificationListItem = (props: NotificationListItemProps) => {
   const {
     id,
     title,
     date,
     text,
-    icon,
     priority = 'ordinary',
     actions,
     isUnread = true,
-    onNotificationVisible,
+    onViewNotification,
     onDelete,
   } = props;
   const ref = useRef<HTMLLIElement | null>(null);
@@ -54,14 +110,14 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
     }
   };
 
-  if (onNotificationVisible && isUnread && !!entry?.isIntersecting) {
-    onNotificationVisible(id);
+  if (onViewNotification && isUnread && entry?.isIntersecting) {
+    onViewNotification(id);
   }
 
   return (
     <ListItem ref={ref}>
       <ListItemIconSlot priority={priority}>
-        {icon ?? <ListItemPriority />}
+        <ListItemPriority />
       </ListItemIconSlot>
       <div>
         <ListItemTitle variant="h6" isUnread={isUnread}>
