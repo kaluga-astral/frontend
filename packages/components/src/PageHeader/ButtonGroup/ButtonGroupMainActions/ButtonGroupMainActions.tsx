@@ -9,14 +9,14 @@ type NestedAction = MenuItemProps & {
 
 type SingleAction = Omit<ButtonProps, 'children'> & {
   /** Флаг показа выпадающего списка при клике */
-  nested?: false;
+  isNested?: false;
   /** Название действия */
   text: string;
 };
 
 type MultipleAction = Omit<DropdownButtonProps, 'children' | 'name'> & {
   /** Флаг показа выпадающего списка при клике */
-  nested: true;
+  isNested: true;
   /** Список действий для выпадающего списка */
   actions: NestedAction[];
   /** Название действия */
@@ -34,8 +34,8 @@ export const ButtonGroupMainActions = ({
   actions,
 }: ButtonGroupMainActionProps) => {
   return actions.map((action) => {
-    if (action.nested) {
-      const { text, nested, actions: nestedActions, ...buttonProps } = action;
+    if (action.isNested) {
+      const { text, isNested, actions: nestedActions, ...buttonProps } = action;
 
       return (
         <DropdownButton key={text} name={text} {...buttonProps}>

@@ -75,7 +75,7 @@ export const Actions = () => (
           { text: 'действие 1', startIcon: <AddOutlineMd /> },
           {
             text: 'действие 2',
-            nested: true,
+            isNested: true,
             actions: [
               { text: 'действие в списке 1' },
               { text: 'действие в списке 2' },
@@ -92,7 +92,7 @@ export const Actions = () => (
   </Wrapper>
 );
 
-/** Доступ */
+/** "Хлебные крошки" */
 export const Breadcrumbs = () => (
   <Wrapper>
     <PageHeader
