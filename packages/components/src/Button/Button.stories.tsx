@@ -74,8 +74,9 @@ const ButtonsContainer = styled(Grid)`
   justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: row;
     grid-template-columns: 1fr;
+    flex-direction: row;
+
     width: 150px;
   }
 `;

@@ -7,6 +7,7 @@ export const HeaderRoot = styled.header`
   grid-area: header;
   align-items: center;
   justify-content: space-between;
+
   padding: ${({ theme }) => theme.spacing(2, 3)};
 
   background-color: ${({ theme }) => theme.palette.background.default};

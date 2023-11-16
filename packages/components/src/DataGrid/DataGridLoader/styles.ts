@@ -10,8 +10,8 @@ export const Backdrop = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: ${({ theme }) => theme.palette.background.element};
   opacity: 0.3;
+  background-color: ${({ theme }) => theme.palette.background.element};
 `;
 
 export const StyledDivider = styled(Divider)`

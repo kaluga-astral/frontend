@@ -14,7 +14,7 @@ export const OverflowTypographyWrapper = styled(Typography, {
 })<OverflowTypographyWrapperProps>`
   /* stylelint-disable-next-line */
   overflow: hidden;
-  display: ${({ hasMultipleRows }) => (hasMultipleRows ? '-webkit-box' : '')};
+  display: ${({ hasMultipleRows }) => (hasMultipleRows ? 'flex' : '')};
 
   max-width: 100%;
 

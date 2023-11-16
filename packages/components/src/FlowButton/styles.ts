@@ -6,6 +6,7 @@ export const FlowButtonWrapper = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   min-width: 300px;
   min-height: 71px;
   padding: ${({ theme: { spacing } }) => spacing(4, 5)};

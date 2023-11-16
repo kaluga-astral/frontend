@@ -21,6 +21,7 @@ const Root = styled('div')`
 
 const Row = styled('div')`
   display: flex;
+
   margin: ${({ theme }) => theme.spacing(4, 4, 4)};
 
   & > * {
@@ -28,7 +29,7 @@ const Row = styled('div')`
     flex: 1 100%;
   }
 
-  & > *:not(:first-child):not(:only-child) {
+  & > *:not(:first-child, :only-child) {
     margin-left: ${({ theme }) => theme.spacing(4)};
   }
 `;

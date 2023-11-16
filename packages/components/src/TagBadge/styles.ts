@@ -6,10 +6,9 @@ export const StyledBadge = styled(Badge)`
 
   & span.MuiBadge-badge {
     position: static;
+    transform: none;
 
     box-sizing: content-box;
     height: 16px;
-
-    transform: none;
   }
 `;

@@ -102,11 +102,12 @@ export const Sizes = () => (
 
 const GridContainer = styled(Grid)`
   gap: 10px;
+
   margin-top: 30px;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: row;
     grid-template-columns: 1fr;
+    flex-direction: row;
   }
 `;
 

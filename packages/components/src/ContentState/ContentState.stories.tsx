@@ -77,11 +77,11 @@ const useSimulateLoading = () => {
 };
 
 const BaseContentContainer = styled(Grid)`
-  align-content: center;
-  justify-content: center;
+  overflow: hidden;
+  place-content: center center;
+
   width: 384px;
   height: 384px;
-  overflow: hidden;
 `;
 
 const Form = ({
