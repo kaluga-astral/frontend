@@ -73,7 +73,15 @@ export const Actions = () => (
       actions={{
         main: [
           { text: 'действие 1', startIcon: <AddOutlineMd /> },
-          { text: 'действие 2', color: 'error' },
+          {
+            text: 'действие 2',
+            nested: true,
+            actions: [
+              { text: 'действие в списке 1' },
+              { text: 'действие в списке 2' },
+            ],
+          },
+          { text: 'действие 3', color: 'error' },
         ],
         secondary: [
           { text: 'Второстепенное действие 1' },
