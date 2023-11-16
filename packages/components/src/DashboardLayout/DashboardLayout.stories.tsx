@@ -217,7 +217,7 @@ const Sidebar = () => {
   );
 };
 
-export const ContentTooltip = () => {
+export const DashboardLayoutExample = () => {
   return (
     <DashboardLayout>
       <Header />
