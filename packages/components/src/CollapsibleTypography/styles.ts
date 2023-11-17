@@ -27,7 +27,8 @@ export const CollapsibleTypographyWrapper = styled(Typography, {
 })<CollapsibleTypographyWrapperProps>`
   /* stylelint-disable-next-line */
   overflow: hidden;
-  display: ${({ isOpenCollapse }) => (isOpenCollapse ? '' : 'flex')};
+  /* stylelint-disable-next-line */
+  display: ${({ isOpenCollapse }) => (isOpenCollapse ? '' : '-webkit-box')};
 
   max-width: 100%;
   height: ${({ currentHeight }) => currentHeight};
