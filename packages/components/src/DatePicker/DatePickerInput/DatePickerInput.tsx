@@ -44,13 +44,13 @@ export const DatePickerInput = forwardRef<
   }, [mask]);
 
   //Определяем активный обработчик focus для обертки если состояние не disabled
-  const focusHandler = useMemo(
+  const handleFocusWrapper = useMemo(
     () => (!disabled ? onFocus : undefined),
     [disabled, onFocus],
   );
 
   return (
-    <div onFocus={focusHandler} tabIndex={-1}>
+    <div onFocus={handleFocusWrapper} tabIndex={-1}>
       <DatePickerInputWrapper
         {...props}
         ref={ref}
