@@ -7,7 +7,6 @@ import { DIGITS_REGEX, KEYBOARD_KEYS } from '../../constants';
 export const useCodeState = (
   initialValue: string | undefined,
   codeLength: number,
-  setFocusIndex: (index: number) => void,
   setFocusIndexNext: (index: number) => void,
   setFocusIndexPrevious: (index: number) => void,
   onFieldChange?: (value: string) => void,
@@ -121,10 +120,9 @@ export const useCodeState = (
         ...arrayValue.slice(newArrayValue.length - 1, lastIndexOfCode),
       ]);
 
-      setFocusIndex(newArrayValue.length - 1);
+      setFocusIndexNext(newArrayValue.length - 1);
     } else {
       setArrayValue(newArrayValue);
-      setFocusIndex(arrayValue.length - 1);
     }
   };
 

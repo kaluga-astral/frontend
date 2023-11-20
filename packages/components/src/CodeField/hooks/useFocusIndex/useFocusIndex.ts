@@ -25,5 +25,5 @@ export const useFocusIndex = (codeLength: number) => {
     }
   };
 
-  return { inputRefs, setFocusIndex, setFocusIndexNext, setFocusIndexPrevious };
+  return { inputRefs, setFocusIndexNext, setFocusIndexPrevious };
 };
