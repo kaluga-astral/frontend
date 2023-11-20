@@ -12,6 +12,6 @@
     "shelljs": "^0.8.4"
   },
   "devDependencies": {
-    "@astral/eslint-config-node": "^1.8.0"
+    "@astral/eslint-config-node": "^2.0.0"
   }
 }
