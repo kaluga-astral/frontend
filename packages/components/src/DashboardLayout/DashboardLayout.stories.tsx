@@ -5,7 +5,7 @@ import {
   QuitOutlineMd,
 } from '@astral/icons';
 import { Box } from '@mui/material';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { MouseEvent, ReactElement, forwardRef } from 'react';
 
 import { Divider } from '../Divider';
@@ -37,6 +37,8 @@ const meta: Meta<typeof DashboardLayout> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof DashboardLayout>;
 
 type RouterLinkProps = {
   className?: string;
@@ -217,7 +219,24 @@ const Sidebar = () => {
   );
 };
 
-export const DashboardLayoutExample = () => {
+export const Interaction: Story = {
+  args: {
+    children: (
+      <>
+        <Header />
+        <Sidebar />
+        <DashboardLayout.Main>Main Content</DashboardLayout.Main>
+      </>
+    ),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   return (
     <DashboardLayout>
       <Header />
