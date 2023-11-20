@@ -19,7 +19,7 @@ const KEYS_IN_MASK = /\w{1,4}/g;
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, mask, size = 'medium', onFocus, ...props }, ref) => {
+>(({ onClick, mask, size = 'medium', onFocus, disabled, ...props }, ref) => {
   const [normalizedMask, maskBlocks] = useMemo(() => {
     // маска maskField соглашается работать только с разделителями имеющими символ "`" (косая кавычка) перед заменяемым элементом
     const nMask = mask?.replace('.', '.`');
@@ -43,12 +43,19 @@ export const DatePickerInput = forwardRef<
     return [nMask, blocks];
   }, [mask]);
 
+  //Определяем активный обработчик focus для обертки если состояние не disabled
+  const focusHandler = useMemo(
+    () => (!disabled ? onFocus : undefined),
+    [disabled, onFocus],
+  );
+
   return (
-    <div onFocus={onFocus} tabIndex={-1}>
+    <div onFocus={focusHandler} tabIndex={-1}>
       <DatePickerInputWrapper
         {...props}
         ref={ref}
         size={size}
+        disabled={disabled}
         mask={normalizedMask}
         unmask={false}
         blocks={maskBlocks}
