@@ -16,7 +16,7 @@ import {
 } from './constants';
 import { useCodeState, useFocusIndex } from './hooks';
 
-export type CodeFieldInputProps = {
+export type CodeFieldProps = {
   /**
    * @description Текст над полем
    */
@@ -63,7 +63,7 @@ export type CodeFieldInputProps = {
   onComplete?: (value: string) => void;
 };
 
-export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
+export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
   (
     {
       label,
@@ -108,7 +108,6 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldInputProps>(
               ref={(el) => el && (inputRefs.current[index] = el)}
               onKeyUp={(e) => onKeyUp(e, index)}
               onKeyDown={(e) => onKeyDown(e, index)}
-              onChange={() => {}}
               isError={isError}
             />
           ))}
