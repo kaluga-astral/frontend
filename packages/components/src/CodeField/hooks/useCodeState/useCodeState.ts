@@ -17,6 +17,10 @@ export const useCodeState = (
     formatInitialValue(codeLength, initialValue),
   );
 
+  const isArrayValueEmpty = () => {
+    return arrayValue.join('') === '';
+  };
+
   useEffect(() => {
     const formattedValue = arrayValue.join('');
 
@@ -49,10 +53,16 @@ export const useCodeState = (
     e.target.value = newValue;
 
     setArrayValue((preValue: CodeFieldInputType[]) => {
-      const newArrayValue = [...preValue];
+      let newArrayValue = [...preValue];
 
-      newArrayValue[index] = newValue;
-      setFocusIndexNext(index);
+      if (isArrayValueEmpty()) {
+        // всегда начинаем ввод кода с 1го инпута, если поле пустое
+        newArrayValue[0] = newValue;
+        setFocusIndexNext(0);
+      } else {
+        newArrayValue[index] = newValue;
+        setFocusIndexNext(index);
+      }
 
       return newArrayValue;
     });
