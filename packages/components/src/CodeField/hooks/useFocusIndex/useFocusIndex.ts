@@ -11,7 +11,7 @@ export const useFocusIndex = (codeLength: number) => {
     const lastIndexOfCode = codeLength - 1;
 
     if (index === lastIndexOfCode) {
-      return;
+      inputRefs.current[index].blur();
     } else {
       setFocusIndex(index + 1);
     }
