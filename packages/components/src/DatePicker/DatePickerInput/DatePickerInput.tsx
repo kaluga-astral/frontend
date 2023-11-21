@@ -50,7 +50,7 @@ export const DatePickerInput = forwardRef<
   );
 
   return (
-    <div onFocus={handleFocusWrapper} tabIndex={-1}>
+    <div onFocus={handleFocusWrapper} tabIndex={-1} aria-disabled={disabled}>
       <DatePickerInputWrapper
         {...props}
         ref={ref}

@@ -140,7 +140,7 @@ describe('DatePicker', () => {
       />,
     );
 
-    const inputWrapper = document.querySelector('div[tabindex="-1"]')!;
+    const inputWrapper = document.querySelector('div[aria-disabled]')!;
     const label = screen.getAllByText('inputLabel')[0];
     const input = screen.getByRole('textbox');
 
