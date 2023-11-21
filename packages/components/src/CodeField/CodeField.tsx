@@ -80,7 +80,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     },
     ref,
   ) => {
-    const { inputRefs, setFocusIndexNext, setFocusIndexPrevious } =
+    const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
       useFocusIndex(codeLength);
 
     const { arrayValue, onKeyDown, onKeyUp } = useCodeState(
@@ -88,6 +88,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       codeLength,
       setFocusIndexNext,
       setFocusIndexPrevious,
+      setBlur,
       onFieldChange,
       onComplete,
       disabled,

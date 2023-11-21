@@ -9,6 +9,7 @@ export const useCodeState = (
   codeLength: number,
   setFocusIndexNext: (index: number) => void,
   setFocusIndexPrevious: (index: number) => void,
+  setBlur: () => void,
   onFieldChange?: (value: string) => void,
   onComplete?: (value: string) => void,
   disabled?: boolean,
@@ -133,6 +134,7 @@ export const useCodeState = (
       setFocusIndexNext(newArrayValue.length - 1);
     } else {
       setArrayValue(newArrayValue);
+      setBlur();
     }
   };
 

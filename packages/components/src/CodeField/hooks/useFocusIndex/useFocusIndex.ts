@@ -25,5 +25,9 @@ export const useFocusIndex = (codeLength: number) => {
     }
   };
 
-  return { inputRefs, setFocusIndexNext, setFocusIndexPrevious };
+  const setBlur = () => {
+    inputRefs.current.forEach((elem) => elem.blur());
+  };
+
+  return { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur };
 };
