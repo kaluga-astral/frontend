@@ -43,6 +43,15 @@ export const Showcase: Story = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template />
     <Template
+      isSinglePicker
+      startDateProps={{
+        inputProps: { label: 'Один datePicker' },
+      }}
+      endDateProps={{
+        inputProps: { label: 'Один datePicker' },
+      }}
+    />
+    <Template
       startDateProps={{
         inputProps: { label: 'Контролируемый A' },
         value: new Date(),

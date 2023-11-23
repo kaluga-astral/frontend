@@ -232,4 +232,63 @@ describe('DateRangePicker', () => {
     await userEvents.click(document.body);
     expect(onBlur).not.toBeCalled();
   });
+
+  it('Можно выбрать две даты на одном календаре', async () => {
+    const TestComponent = () => {
+      return (
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+          }}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const inputA = screen.getByPlaceholderText('inputA');
+    const inputB = screen.getByPlaceholderText('inputB');
+
+    fireEvent.focus(inputA);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryAllByRole('tooltip').length).toBeTruthy();
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[0]);
+    });
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('17')[0]);
+    });
+
+    expect((inputA as HTMLInputElement).value).not.toBe('');
+    expect((inputB as HTMLInputElement).value).not.toBe('');
+  });
+
+  it('Props: isSinglePicker: Отображается один календарь', async () => {
+    const TestComponent = () => {
+      return (
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+          }}
+          isSinglePicker
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const inputA = screen.getByPlaceholderText('inputA');
+
+    fireEvent.focus(inputA);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.getAllByText('15').length).toBe(1);
+  });
 });
