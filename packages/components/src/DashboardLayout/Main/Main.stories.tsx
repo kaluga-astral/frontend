@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { DashboardLayout } from '../DashboardLayout';
 
 /**
- * DashboardLayout.Main
+ * DashboardLayout.Main - компонент с основным контентом дашборда, состоит из элементов передаваемых в children.
  *
  * ### [Guide]()
  */

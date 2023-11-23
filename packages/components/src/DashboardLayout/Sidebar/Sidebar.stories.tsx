@@ -11,7 +11,7 @@ import { DashboardLayout } from '../DashboardLayout';
 import { SidebarButton } from './SidebarButton';
 
 /**
- * DashboardLayout.Sidebar
+ * DashboardLayout.Sidebar - компонент боковой панели дашборда.
  *
  * ### [Guide]()
  */
@@ -145,7 +145,101 @@ export const Interaction: Story = {
   },
 };
 
-export const Example = () => {
+/**
+ - menu - описание меню, содержит в себе items - пункты меню
+ */
+export const Menu = () => {
+  return (
+    <DashboardLayout>
+      <DashboardLayout.Sidebar
+        menu={{
+          items: [
+            [
+              'documents',
+              {
+                icon: <ProfileOutlineMd />,
+                text: 'Документы',
+                items: [
+                  [
+                    'incoming-documents',
+                    {
+                      text: 'Входящие документы',
+                      active: true,
+                      component: forwardRef((props, ref) => {
+                        return (
+                          <RouterLink
+                            ref={ref}
+                            to="/incoming-documents"
+                            {...props}
+                          />
+                        );
+                      }),
+                    },
+                  ],
+                  [
+                    'outgoing-documents',
+                    {
+                      text: 'Исходящие документы',
+                      active: false,
+                      component: forwardRef((props, ref) => {
+                        return (
+                          <RouterLink
+                            ref={ref}
+                            to="/outgoing-documents"
+                            {...props}
+                          />
+                        );
+                      }),
+                    },
+                  ],
+                ],
+              },
+            ],
+            [
+              'counterparties',
+              {
+                icon: <ProfileOutlineMd />,
+                text: 'Контрагенты',
+                items: [
+                  [
+                    'invitations',
+                    {
+                      text: 'Приглашения',
+                      active: false,
+                      component: forwardRef((props, ref) => {
+                        return (
+                          <RouterLink ref={ref} to="/invitations" {...props} />
+                        );
+                      }),
+                    },
+                  ],
+                ],
+              },
+            ],
+            [
+              'organizations',
+              {
+                icon: <CompanyOutlineMd />,
+                text: 'Мои организации',
+                active: true,
+                component: forwardRef((props, ref) => {
+                  return (
+                    <RouterLink ref={ref} to="/organizations" {...props} />
+                  );
+                }),
+              },
+            ],
+          ],
+        }}
+      />
+    </DashboardLayout>
+  );
+};
+
+/**
+ - header - контент заголовка sidebar
+ */
+export const Header = () => {
   return (
     <DashboardLayout>
       <DashboardLayout.Sidebar

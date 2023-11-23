@@ -13,10 +13,11 @@ import {
 } from '../../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
+import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
 
 /**
- * DashboardLayout.Header
+ * DashboardLayout.Header - данный компонет может включать в себя информацию о продукте(product), переключатель продуктов(productSwitcher), профиль пользователя(profile) и меню организаций(organizationMenu)
  *
  * ### [Guide]()
  */
@@ -104,55 +105,180 @@ export const Interaction: Story = {
   },
 };
 
+const DashboardLayoutWrapper = styled.div`
+  max-height: 100px;
+  overflow: hidden;
+`;
+
 export const Example = () => {
   return (
-    <DashboardLayout>
-      <DashboardLayout.Header
-        productSwitcher={() => {
-          return (
-            <Box>
-              <ProductSwitcher getProducts={handleGetProducts} />
-            </Box>
-          );
-        }}
-        product={{
-          name: 'Астрал.ЭДО',
-          logo() {
-            return <Logo />;
-          },
-        }}
-        organizationMenu={{
-          currentOrganization: CURRENT_ORGANIZATION,
-          organizations: ORGANIZATIONS,
-          onAddOrganization: () => {},
-          onSelect: () => {},
-        }}
-        profile={{
-          displayName: 'Григорьев Виталий',
-          annotation: 'vitatiy_grig@mail.ru',
-          avatar: {
-            alt: 'Григорьев Виталий',
-            children: 'ГВ',
-          },
-          menu: (props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
-              </MenuItem>
-            </Menu>
-          ),
-        }}
-      />
-    </DashboardLayout>
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return (
+              <Box>
+                <ProductSwitcher getProducts={handleGetProducts} />
+              </Box>
+            );
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          organizationMenu={{
+            currentOrganization: CURRENT_ORGANIZATION,
+            organizations: ORGANIZATIONS,
+            onAddOrganization: () => {},
+            onSelect: () => {},
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            menu: (props) => (
+              <Menu {...props}>
+                <MenuItem>
+                  <ListItemIcon>
+                    <ProfileOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Мой профиль</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                  <ListItemIcon>
+                    <QuitOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Выйти</ListItemText>
+                </MenuItem>
+              </Menu>
+            ),
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+/**
+ * product - содержит информацию о продукте
+ */
+export const Product = () => {
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+/**
+ * productSwitcher - пропс для переключателя продуктов
+ */
+export const ProductSwitcherProps = () => {
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return (
+              <Box>
+                <ProductSwitcher getProducts={handleGetProducts} />
+              </Box>
+            );
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+/**
+ * profile - содержит информацию о пользователе и меню
+ */
+export const Profile = () => {
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            menu: (props) => (
+              <Menu {...props}>
+                <MenuItem>
+                  <ListItemIcon>
+                    <ProfileOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Мой профиль</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                  <ListItemIcon>
+                    <QuitOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Выйти</ListItemText>
+                </MenuItem>
+              </Menu>
+            ),
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+/**
+ * organizationMenu - меню организаций
+ */
+export const OrganizationMenu = () => {
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          organizationMenu={{
+            currentOrganization: CURRENT_ORGANIZATION,
+            organizations: ORGANIZATIONS,
+            onAddOrganization: () => {},
+            onSelect: () => {},
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
   );
 };
