@@ -124,12 +124,13 @@ describe('NotificationList', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('NotificationListFooter не виден при отсутствии isReadAllButtonVisible', () => {
+  it('NotificationListFooter не виден при isReadAllButtonVisible={false}', () => {
     renderWithTheme(
       <NotificationList
         isOpen
         notifications={notifications}
         onClose={() => {}}
+        isReadAllButtonVisible={false}
       />,
     );
 
