@@ -11,7 +11,7 @@ export const CodeFieldDigitsWrapper = styled.div`
   gap: 12px;
 `;
 
-export const Digit = styled.input<{ isError?: boolean }>`
+export const CodeFieldDigit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;
   padding: 18px 25px;

@@ -14,35 +14,39 @@ export const useCodeState = (
   onComplete?: (value: string) => void,
   disabled?: boolean,
 ) => {
-  const [arrayValue, setArrayValue] = useState<CodeFieldInputType[]>(
+  const [codeValue, setCodeValue] = useState<CodeFieldInputType[]>(
     formatInitialValue(codeLength, initialValue),
   );
 
-  const isArrayValueEmpty = () => {
-    return arrayValue.join('') === '';
+  const isCodeValueEmpty = () => {
+    return codeValue.join('') === '';
+  };
+
+  const isCodeValueFilled = () => {
+    return codeValue.join('').length === codeLength;
   };
 
   useEffect(() => {
-    const formattedValue = arrayValue.join('');
+    const formattedValue = codeValue.join('');
 
     if (onFieldChange) {
       onFieldChange(formattedValue);
     }
 
-    if (onComplete) {
+    if (onComplete && isCodeValueFilled()) {
       onComplete(formattedValue);
     }
-  }, [arrayValue]);
+  }, [codeValue]);
 
   const deletePreviousSymbol = (index: number) => {
-    let newArrayValue = [...arrayValue];
+    let newCodeValue = [...codeValue];
 
-    if (arrayValue[index]?.toString()) {
-      newArrayValue[index] = '';
-      setArrayValue(newArrayValue);
-    } else if (arrayValue[index - 1]?.toString()) {
-      newArrayValue[index - 1] = '';
-      setArrayValue(newArrayValue);
+    if (codeValue[index]?.toString()) {
+      newCodeValue[index] = '';
+      setCodeValue(newCodeValue);
+    } else if (codeValue[index - 1]?.toString()) {
+      newCodeValue[index - 1] = '';
+      setCodeValue(newCodeValue);
       setFocusIndexPrevious(index);
     }
   };
@@ -53,19 +57,19 @@ export const useCodeState = (
     // @ts-ignore
     e.target.value = newValue;
 
-    setArrayValue((preValue: CodeFieldInputType[]) => {
-      let newArrayValue = [...preValue];
+    setCodeValue((preValue: CodeFieldInputType[]) => {
+      let newCodeValue = [...preValue];
 
-      if (isArrayValueEmpty()) {
+      if (isCodeValueEmpty()) {
         // всегда начинаем ввод кода с 1го инпута, если поле пустое
-        newArrayValue[0] = newValue;
+        newCodeValue[0] = newValue;
         setFocusIndexNext(0);
       } else {
-        newArrayValue[index] = newValue;
+        newCodeValue[index] = newValue;
         setFocusIndexNext(index);
       }
 
-      return newArrayValue;
+      return newCodeValue;
     });
   };
 
@@ -86,9 +90,6 @@ export const useCodeState = (
         e.preventDefault();
 
         break;
-      case KEYBOARD_KEYS.arrowUp:
-      case KEYBOARD_KEYS.arrowDown:
-        e.preventDefault();
     }
   };
 
@@ -121,19 +122,19 @@ export const useCodeState = (
       return;
     }
 
-    const newArrayValue = cleanedValue.map((num) => Number(num));
+    const newCodeValue = cleanedValue.map((num) => Number(num));
 
-    if (newArrayValue.length < arrayValue.length) {
+    if (newCodeValue.length < codeValue.length) {
       const lastIndexOfCode = codeLength - 1;
 
-      setArrayValue([
-        ...newArrayValue,
-        ...arrayValue.slice(newArrayValue.length - 1, lastIndexOfCode),
+      setCodeValue([
+        ...newCodeValue,
+        ...codeValue.slice(newCodeValue.length - 1, lastIndexOfCode),
       ]);
 
-      setFocusIndexNext(newArrayValue.length - 1);
+      setFocusIndexNext(newCodeValue.length - 1);
     } else {
-      setArrayValue(newArrayValue);
+      setCodeValue(newCodeValue);
       setBlur();
     }
   };
@@ -146,5 +147,5 @@ export const useCodeState = (
     };
   }, []);
 
-  return { arrayValue, onKeyUp, onKeyDown };
+  return { codeValue, onKeyUp, onKeyDown };
 };

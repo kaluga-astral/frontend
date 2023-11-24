@@ -1,10 +1,10 @@
-import { CodeField, CodeFieldInputProps } from '@astral/components';
+import { CodeField, CodeFieldProps } from '@astral/components';
 
 import { WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormCodeFieldProps<FieldValues extends object> = WithFormFieldProps<
-  CodeFieldInputProps,
+  CodeFieldProps,
   FieldValues
 >;
 

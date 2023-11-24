@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useTimer } from '../../hooks';
 import { Button } from '../../Button';
@@ -23,7 +23,7 @@ type ResendCodeButtonProps = {
   /**
    * @description Время, после которого разрешен перезапрос кода (в сек)
    */
-  time: number;
+  resendTimeout: number;
   /**
    * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
@@ -33,11 +33,11 @@ type ResendCodeButtonProps = {
 const ResendCodeButton = ({
   loading,
   disabled,
-  time,
+  resendTimeout,
   onResendCode,
   isError,
 }: ResendCodeButtonProps) => {
-  const [timer, restartTimer] = useTimer(0);
+  const [timer, restartTimer] = useTimer(resendTimeout);
   const [resendCodeLoading, setResendCodeLoading] = useState(false);
 
   const showTimer = !disabled && !loading && !resendCodeLoading && timer > 0;
@@ -48,14 +48,10 @@ const ResendCodeButton = ({
 
     onResendCode()
       .then(() => {
-        restartTimer();
+        restartTimer(resendTimeout);
       })
       .finally(() => setResendCodeLoading(false));
   };
-
-  useEffect(() => {
-    restartTimer(time);
-  }, []);
 
   return (
     <ResendCodeButtonWrapper isError={isError}>

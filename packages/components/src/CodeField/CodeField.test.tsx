@@ -50,7 +50,7 @@ describe('CodeField', () => {
 
   it('Prop:time: когда timer = 0, кнопка повторной отправки кода активна', () => {
     renderWithTheme(
-      <CodeField time={0} onResendCode={() => Promise.resolve()} />,
+      <CodeField resendTimeout={0} onResendCode={() => Promise.resolve()} />,
     );
 
     const resendButton = screen.getByRole('button');

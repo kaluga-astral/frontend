@@ -1,6 +1,6 @@
 export const CODE_LENGTH_DEFAULT = 6;
 
-export const RESTART_TIME_DEFAULT = 60;
+export const RESEND_TIMEOUT_DEFAULT = 60;
 
 export const ERROR_TEXT_DEFAULT = 'Код подтверждения недействителен';
 

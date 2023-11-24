@@ -3,16 +3,16 @@ import { ReactNode, forwardRef } from 'react';
 import { FormHelperText } from '../FormHelperText';
 
 import {
+  CodeFieldDigit,
   CodeFieldDigitsWrapper,
   CodeFieldLabel,
   CodeFieldWrapper,
-  Digit,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 import {
   CODE_LENGTH_DEFAULT,
   ERROR_TEXT_DEFAULT,
-  RESTART_TIME_DEFAULT,
+  RESEND_TIMEOUT_DEFAULT,
 } from './constants';
 import { useCodeState, useFocusIndex } from './hooks';
 
@@ -24,7 +24,7 @@ export type CodeFieldProps = {
   /**
    * @description Время, после которого разрешен перезапрос кода (в сек)
    */
-  time?: number;
+  resendTimeout?: number;
   /**
    * @description Кол-во символов в поле кода
    */
@@ -67,7 +67,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
   (
     {
       label,
-      time = RESTART_TIME_DEFAULT,
+      resendTimeout = RESEND_TIMEOUT_DEFAULT,
       codeLength = CODE_LENGTH_DEFAULT,
       onResendCode,
       initialValue,
@@ -83,7 +83,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
       useFocusIndex(codeLength);
 
-    const { arrayValue, onKeyDown, onKeyUp } = useCodeState(
+    const { codeValue, onKeyDown, onKeyUp } = useCodeState(
       initialValue,
       codeLength,
       setFocusIndexNext,
@@ -94,19 +94,22 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       disabled,
     );
 
+    const setRef = (index: number) => (el: HTMLInputElement) =>
+      el && (inputRefs.current[index] = el);
+
     return (
       <CodeFieldWrapper ref={ref}>
         {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
         <CodeFieldDigitsWrapper>
-          {arrayValue.map((value, index) => (
-            <Digit
+          {codeValue.map((value, index) => (
+            <CodeFieldDigit
               type="tel"
               inputMode="numeric"
               pattern="[0-9]"
               key={index}
               disabled={disabled || loading}
               value={value ?? ''}
-              ref={(el) => el && (inputRefs.current[index] = el)}
+              ref={setRef(index)}
               onKeyUp={(e) => onKeyUp(e, index)}
               onKeyDown={(e) => onKeyDown(e, index)}
               isError={isError}
@@ -116,7 +119,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
         {onResendCode && (
           <ResendCodeButton
-            time={time}
+            resendTimeout={resendTimeout}
             disabled={disabled}
             loading={loading}
             isError={isError}
