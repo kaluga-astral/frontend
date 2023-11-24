@@ -1,6 +1,6 @@
 import {
-  CADESCOM_XML_SIGNATURE_TYPE,
-  Certificate,
+  type CADESCOM_XML_SIGNATURE_TYPE,
+  type Certificate,
   decrypt,
   sign,
   signHash,

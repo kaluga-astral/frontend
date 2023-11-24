@@ -1,4 +1,4 @@
-import { WidgetProduct } from '@astral/ui';
+import { type WidgetProduct } from '@astral/ui';
 
 import { getIdentityProducts } from '../../../../utils';
 

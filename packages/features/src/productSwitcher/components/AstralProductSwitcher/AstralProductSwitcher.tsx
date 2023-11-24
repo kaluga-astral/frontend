@@ -1,4 +1,4 @@
-import { ProductSwitcher, WidgetProduct } from '@astral/ui';
+import { ProductSwitcher, type WidgetProduct } from '@astral/ui';
 import { useState } from 'react';
 
 import { getIdentityProducts } from '../../utils';

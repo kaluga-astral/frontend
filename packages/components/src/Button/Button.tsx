@@ -1,4 +1,4 @@
-import { ElementType, forwardRef, useMemo } from 'react';
+import { type ElementType, forwardRef, useMemo } from 'react';
 import type { LoadingButtonProps } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';

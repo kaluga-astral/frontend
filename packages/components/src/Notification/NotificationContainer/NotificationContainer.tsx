@@ -1,4 +1,4 @@
-import { ToastContainerProps } from 'react-toastify';
+import { type ToastContainerProps } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import { NOTIFY_CLASSNAME, NOTIFY_POSITIONS } from '../constants';

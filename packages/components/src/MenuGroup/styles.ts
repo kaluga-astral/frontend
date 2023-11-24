@@ -3,11 +3,12 @@ import { Typography } from '../Typography';
 
 export const MenuGroupLabel = styled(Typography)`
   display: block;
+
   width: 100%;
   padding: ${({ theme }) => theme.spacing(2, 4)};
 
-  color: ${({ theme }) => theme.palette.grey[700]};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
+  color: ${({ theme }) => theme.palette.grey[700]};
 `;
 
 export const MenuGroupContent = styled.li`

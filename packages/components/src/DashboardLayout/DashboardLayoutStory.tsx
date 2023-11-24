@@ -1,7 +1,7 @@
 import { DashboardLayout } from '../DashboardLayout';
 
-import { HeaderProps } from './Header';
-import { SidebarProps } from './Sidebar';
+import { type HeaderProps } from './Header';
+import { type SidebarProps } from './Sidebar';
 
 export type DashboardLayoutStoryProps = {
   header: HeaderProps;

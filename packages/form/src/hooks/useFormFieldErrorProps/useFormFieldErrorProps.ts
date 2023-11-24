@@ -1,5 +1,5 @@
-import { TextFieldProps } from '@astral/components';
-import { ControllerFieldState } from 'react-hook-form';
+import { type TextFieldProps } from '@astral/components';
+import { type ControllerFieldState } from 'react-hook-form';
 
 type UseFormFieldErrorPropsReturn = Pick<
   TextFieldProps,

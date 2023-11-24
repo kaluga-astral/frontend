@@ -7,6 +7,7 @@ export const WidgetMenu = styled(Menu)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     width: 285px;
     min-height: 100px;
     padding: ${({ theme }) => theme.spacing(3, 0)};

@@ -1,4 +1,4 @@
-import { TagColors, TagStates, TagVariants } from './enums';
+import { type TagColors, type TagStates, type TagVariants } from './enums';
 
 export type TagColor = `${TagColors}`;
 

@@ -1,7 +1,7 @@
-import { Certificate } from '@astral/cryptopro-cades';
+import { type Certificate } from '@astral/cryptopro-cades';
 
 import { CryptoProCertificateService } from './CryptoProCertificateService';
-import { FormatedCertificate } from './CryptoProCertificateService';
+import { type FormatedCertificate } from './CryptoProCertificateService';
 
 export const formatedCertificatesList: FormatedCertificate[] = [
   {

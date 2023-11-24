@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { type ComponentMeta } from '@storybook/react';
 import { CompanyOutlineMd, ProfileOutlineMd } from '@astral/icons';
 
 import { NavMenu } from './NavMenu';

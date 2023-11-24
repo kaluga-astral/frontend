@@ -1,9 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { MenuOrganization, MenuOrganizationProps } from './MenuOrganization';
+import {
+  MenuOrganization,
+  type MenuOrganizationProps,
+} from './MenuOrganization';
 import { CURRENT_ORGANIZATION, ORGANIZATIONS } from './MenuOrganizations.stubs';
-import { Organization } from './types';
+import { type Organization } from './types';
 
 /**
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=6636-99860&mode=design&t=ZdnzBPdIiPvPyVhQ-0)

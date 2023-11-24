@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useId, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useId, useRef, useState } from 'react';
 
-import { Slide, SlideProps } from '../Slide';
+import { Slide, type SlideProps } from '../Slide';
 
 import { SliderContainer, SliderItem } from './styles';
 

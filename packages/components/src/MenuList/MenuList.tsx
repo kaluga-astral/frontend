@@ -1,4 +1,4 @@
-import { MenuListProps } from './types';
+import { type MenuListProps } from './types';
 import { StyledMenuList } from './styled';
 
 export const MenuList = ({ children, ...props }: MenuListProps) => {

@@ -1,11 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Paper } from '@mui/material';
 import {
   ChevronDOutlineMd,
   DialogOutlineMd,
   LikeOutlineMd,
 } from '@astral/icons';
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 import { DialogContent } from '../DialogContent';
 import { DialogActions } from '../DialogActions';
@@ -73,8 +73,9 @@ const ButtonsContainer = styled(Grid)`
   justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: row;
     grid-template-columns: 1fr;
+    flex-direction: row;
+
     width: 150px;
   }
 `;

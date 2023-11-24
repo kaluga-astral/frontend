@@ -1,9 +1,9 @@
 import {
   TableFooter as MuiTableFooter,
-  TableFooterProps as MuiTableFooterProps,
+  type TableFooterProps as MuiTableFooterProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../../types';
+import { type WithoutEmotionSpecific } from '../../types';
 
 export type TableFooterProps = WithoutEmotionSpecific<MuiTableFooterProps>;
 

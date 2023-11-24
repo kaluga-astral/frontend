@@ -1,6 +1,6 @@
-import { ReactNode, useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 
-import { Typography, TypographyProps } from '../../Typography';
+import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 
 import { ValueWrapper } from './styles';

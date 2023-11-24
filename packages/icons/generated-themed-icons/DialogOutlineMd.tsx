@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon, type SvgIconProps } from '@mui/material';
 
 const DialogOutlineMd: React.FunctionComponent<SvgIconProps> = ({
   ...props

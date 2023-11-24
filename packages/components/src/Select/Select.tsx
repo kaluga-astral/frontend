@@ -2,16 +2,16 @@ import {
   FormControl,
   InputLabel,
   Select as MuiSelect,
-  SelectProps as MuiSelectProps,
+  type SelectProps as MuiSelectProps,
 } from '@mui/material';
-import React, { ForwardedRef, ReactNode } from 'react';
+import React, { type ForwardedRef, type ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { Tag } from '../Tag';
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import {

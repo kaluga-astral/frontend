@@ -1,7 +1,7 @@
 import { renderWithTheme, screen } from '@astral/tests';
 import { expect } from 'vitest';
 
-import { MenuOrganizationProps } from '../MenuOrganization';
+import { type MenuOrganizationProps } from '../MenuOrganization';
 
 import { DashboardLayout } from './DashboardLayout';
 

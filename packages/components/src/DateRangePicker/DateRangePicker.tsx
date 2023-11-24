@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { Grid, GridProps } from '../Grid';
+import { Grid, type GridProps } from '../Grid';
 import {
   DEFAULT_MAX_DATE,
   DEFAULT_MIN_DATE,
@@ -10,7 +10,7 @@ import { useForwardedRef, useInputPopover } from '../hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopover } from '../DatePicker/DatePickerPopover';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
-import { DatePickerProps } from '../DatePicker';
+import { type DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useDatePickerOptions } from '../DatePicker/hooks';
 

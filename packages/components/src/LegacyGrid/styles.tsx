@@ -1,7 +1,7 @@
-import { Box, BoxProps } from '@mui/material';
+import { Box, type BoxProps } from '@mui/material';
 
 import { styled } from '../styles';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 type StyledGridProps = WithoutEmotionSpecific<BoxProps> & {
   container: boolean;
