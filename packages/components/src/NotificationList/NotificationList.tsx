@@ -1,107 +1,110 @@
-import { useEffect, useRef, useState } from 'react';
-import { SettingsOutlineMd } from '@astral/icons';
-
-import { Button } from '../Button';
-import { SideDialogHeader } from '../SideDialogHeader';
-import { IconButton } from '../IconButton';
-import { Divider } from '../Divider';
+import { useMemo, useRef, useState } from 'react';
 
 import { NotificationListItem } from './NotificationListItem';
-import { NotificationListTabs } from './NotificationListTabs/NotificationListTabs';
+import { NotificationListTabs } from './NotificationListTabs';
 import { Notification } from './types';
 import {
   NotificationListDialog,
-  NotificationListFooter,
   NotificationListHeader,
   NotificationListMain,
 } from './styles';
 import { NotificationListEmpty } from './NotificationListEmpty';
+import { NotificationListSettingsButton } from './NotificationListSettingsButton';
+import { NotificationListFooter } from './NotificationListFooter';
 
 export type NotificationListProps = {
   /**
    * @description флаг управления отображением уведомлений
-   * @type boolean
    * @default false
    * */
   isOpen: boolean;
   /**
+   * @description Заголовок списка уведомлений
+   * @default Уведомления
+   * */
+  title?: string;
+  /**
    * @description список уведомлений
-   * @type Notification[]
    * @default []
    * */
   notifications: Notification[];
   /**
    * @description список непрочитанных уведомлений
-   * @type Notification[]
    * @default undefined
    * */
   unreadNotifications?: Notification[];
   /**
    * @description источник изображения при отсутствии уведомлений
-   * @type string
    * @default undefined
    * */
   noDataImgSrc?: string;
   /**
-   * @description флаг управления отображением непрочитанных уведомлений
-   * @type boolean
-   * @default false
+   * @description описание изображения при отсутствии уведомлений
+   * @default undefined
+   * */
+  noDataImgAlt?: string;
+  /**
+   * @description флаг управляет, какие уведомления выводить при открытии списка, все/непрочитанные
+   * @default undefined
    * */
   isInitialUnreadOnly?: boolean;
   /**
-   * @description функция обработки закрытия уведомления
-   * @type () => void
+   * @description слот для отображения дополнительных компонентов в заголовке
    * */
-  onClose: () => void;
+  headerContent?: React.ReactNode;
   /**
-   * @description функция вызывается когда уведомление выводится на экран
-   * @type (id: string | number) => void
+   * @description функция для закрытия уведомлений, передает id уведомлений, попавших во viewport
    * */
-  onViewNotification?: (id: string | number) => void;
+  onClose: (viewedIds: (number | string)[]) => void;
   /**
-   * @description функция обработки прочтения всех уведомления
-   * @type (notifications: Notification[]) => void
+   * @description функция обработки нажатия на кнопку "Отметить все как прочтенные"
    * */
-  onReadAll?: (notifications: Notification[]) => void;
+  onReadAll?: () => void;
+  /**
+   * @description флаг для отображения кнопки "Отметить все как прочтенные"
+   * @default true
+   * */
+  isReadAllButtonVisible?: boolean;
   /**
    * @description функция обработки удаления уведомления
-   * @type (id: string | number) => void
    * */
   onDelete?: (id: string | number) => void;
   /**
-   * @description функция обработки нажатия на кнопку настроек
-   * @type () => void
+   * @description функция обработки нажатия на кнопку настроек, если не передавать, то кнопка не отображается
    * */
   onSettingsButtonClick?: () => void;
   /**
    * @description функция обработки смены вкладки
-   * @type () => void
    * */
   onTabChange?: () => void;
 };
 
 export const NotificationList = ({
   isOpen,
+  title = 'Уведомления',
   notifications,
   unreadNotifications,
   noDataImgSrc,
+  noDataImgAlt,
   isInitialUnreadOnly = false,
+  headerContent,
   onClose,
   onDelete,
   onReadAll,
-  onViewNotification,
+  isReadAllButtonVisible = true,
   onSettingsButtonClick,
   onTabChange,
 }: NotificationListProps) => {
-  const listRef = useRef<HTMLUListElement | null>(null);
   const [isUnreadOnly, setIsUnreadOnly] = useState(isInitialUnreadOnly);
-  const visibleNotifications = (() => {
+  const tabIndex = isUnreadOnly ? 0 : 1;
+  const viewedIds = useRef<Set<number | string>>(new Set());
+  const data = useMemo(() => {
     if (unreadNotifications && isUnreadOnly) {
       return unreadNotifications;
     }
 
     return notifications;
-  })();
+  }, [unreadNotifications, isUnreadOnly, notifications]);
 
   const handleToggleUnreadOnly = () => {
     setIsUnreadOnly((prev) => !prev);
@@ -111,56 +114,34 @@ export const NotificationList = ({
     }
   };
 
-  const renderTabs = () => {
-    if (unreadNotifications) {
-      return (
-        <NotificationListTabs
-          isUnreadOnly={isUnreadOnly}
-          onToggleUnreadOnly={handleToggleUnreadOnly}
-          notificationsCount={notifications.length}
-          unreadNotificationsCount={unreadNotifications?.length || 0}
-        />
-      );
-    }
-
-    return null;
+  const handleView = (id: string | number) => {
+    viewedIds.current.add(id);
   };
 
-  const renderFooter = () => {
-    const handleMarkAllAsRead = () => {
-      if (onReadAll) {
-        onReadAll(visibleNotifications);
-      }
-    };
-
-    if (onReadAll) {
-      return (
-        <NotificationListFooter>
-          <Button onClick={handleMarkAllAsRead} variant="light">
-            Отметить все как прочитанные
-          </Button>
-        </NotificationListFooter>
-      );
-    }
-
-    return null;
+  const handleClose = () => {
+    onClose(Array.from(viewedIds.current));
+    viewedIds.current.clear();
   };
 
   const renderContent = () => {
-    if (visibleNotifications.length) {
+    if (data.length) {
       return (
         <>
-          <NotificationListMain ref={listRef}>
-            {visibleNotifications.map((notification) => (
+          <NotificationListMain>
+            {data.map((notification) => (
               <NotificationListItem
                 key={notification.id}
                 {...notification}
                 onDelete={onDelete}
-                onViewNotification={onViewNotification}
+                onViewNotification={handleView}
               />
             ))}
           </NotificationListMain>
-          {renderFooter()}
+          <NotificationListFooter
+            onReadAllButtonClick={onReadAll}
+            isReadAllButtonVisible={isReadAllButtonVisible}
+            isReadAllButtonDisabled={unreadNotifications?.length === 0}
+          />
         </>
       );
     }
@@ -169,27 +150,29 @@ export const NotificationList = ({
       <NotificationListEmpty
         isUnreadOnly={isUnreadOnly}
         noDataImgSrc={noDataImgSrc}
+        noDataImgAlt={noDataImgAlt}
       />
     );
   };
 
-  useEffect(() => {
-    if (listRef.current) {
-      listRef.current.scrollTop = 0;
-    }
-  }, [isUnreadOnly]);
-
   return (
-    <NotificationListDialog open={isOpen} onClose={onClose}>
-      <SideDialogHeader title="Уведомления" onClose={onClose}>
-        <NotificationListHeader>
-          <IconButton variant="text" onClick={onSettingsButtonClick}>
-            <SettingsOutlineMd />
-          </IconButton>
-          <Divider orientation="vertical" />
-        </NotificationListHeader>
-      </SideDialogHeader>
-      {renderTabs()}
+    <NotificationListDialog open={isOpen} onClose={handleClose}>
+      <NotificationListHeader
+        title={title}
+        onClose={handleClose}
+        justifyContent="flex-end"
+      >
+        {headerContent}
+        <NotificationListSettingsButton onClick={onSettingsButtonClick} />
+      </NotificationListHeader>
+      {unreadNotifications && (
+        <NotificationListTabs
+          onChange={handleToggleUnreadOnly}
+          tabIndex={tabIndex}
+          notificationsCount={notifications.length}
+          unreadNotificationsCount={unreadNotifications?.length || 0}
+        />
+      )}
       {renderContent()}
     </NotificationListDialog>
   );

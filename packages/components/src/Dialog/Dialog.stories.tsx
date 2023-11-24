@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { StoryObj } from '@storybook/react';
 
 import {
   Button,
   DialogActions,
   DialogContent,
   DialogContentText,
-  LegacyGrid,
+  Grid,
   Tag,
   Typography,
   styled,
@@ -14,6 +14,8 @@ import {
 import { DialogHeader } from '../DialogHeader';
 
 import { Dialog } from './Dialog';
+
+type Story = StoryObj<typeof Dialog>;
 
 export default {
   title: 'Components/Dialog',
@@ -30,7 +32,18 @@ const Subtitle = styled(Typography)`
   }
 `;
 
-const Template: Story = () => {
+export const Interaction: Story = {
+  args: {
+    title: 'Заголовок диалога',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+const Template = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogWithHeaderOpen, setDialogWithHeaderOpen] = useState(false);
 
@@ -51,17 +64,17 @@ const Template: Story = () => {
   };
 
   return (
-    <LegacyGrid container spacing={2}>
-      <LegacyGrid>
+    <Grid container spacing={2}>
+      <Grid>
         <Button variant="light" onClick={handleClickOpen}>
           Dialog
         </Button>
-      </LegacyGrid>
-      <LegacyGrid>
+      </Grid>
+      <Grid>
         <Button variant="light" onClick={handleOpenDialogWithHeader}>
           Dialog with DialogHeader
         </Button>
-      </LegacyGrid>
+      </Grid>
       <Dialog
         title={
           <>
@@ -90,18 +103,10 @@ const Template: Story = () => {
       </Dialog>
       <Dialog open={dialogWithHeaderOpen} onClose={handleCloseDialogWithHeader}>
         <DialogHeader title="Заголовок" onClose={handleCloseDialogWithHeader}>
-          <LegacyGrid
-            spacing={2}
-            container
-            justifyContent="flex-start"
-            templateColumns="auto auto"
-            alignItems="center"
-          >
-            <Tag variant="light" label="Light Tag" color="primary" />
-            <Button variant="contained" color="primary">
-              Button
-            </Button>
-          </LegacyGrid>
+          <Tag variant="light" label="Light Tag" color="primary" />
+          <Button variant="contained" color="primary">
+            Button
+          </Button>
         </DialogHeader>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -118,13 +123,8 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </LegacyGrid>
+    </Grid>
   );
 };
 
 export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};

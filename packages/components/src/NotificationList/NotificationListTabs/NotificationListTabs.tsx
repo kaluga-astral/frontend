@@ -1,20 +1,22 @@
+import { SyntheticEvent } from 'react';
+
 import { StyledTab, StyledTabs } from './styles';
 
 type NotificationListTabsProps = {
-  isUnreadOnly: boolean;
+  tabIndex: number;
   unreadNotificationsCount: number;
   notificationsCount: number;
-  onToggleUnreadOnly: () => void;
+  onChange: (event: SyntheticEvent<Element, Event>, value: number) => void;
 };
 
 export const NotificationListTabs = ({
-  isUnreadOnly,
+  tabIndex,
   notificationsCount,
   unreadNotificationsCount,
-  onToggleUnreadOnly,
+  onChange,
 }: NotificationListTabsProps) => {
   return (
-    <StyledTabs value={isUnreadOnly ? 0 : 1} onChange={onToggleUnreadOnly}>
+    <StyledTabs value={tabIndex} onChange={onChange}>
       <StyledTab label={`Непрочитанные (${unreadNotificationsCount})`} />
       <StyledTab label={`Все (${notificationsCount})`} />
     </StyledTabs>

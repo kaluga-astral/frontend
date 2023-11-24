@@ -1,22 +1,22 @@
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
-import { NotificationListPriority } from '../types';
 import { Theme } from '../../theme';
-import { NOTIFICATION_PRIORITIES } from '../constants';
+import { NotificationPriorities } from '../enums';
 import { IconButton } from '../../IconButton';
+import { NotificationPriority } from '../types';
 
 const getPriorityColor = ({
   theme,
   priority,
 }: {
   theme: Theme;
-  priority?: NotificationListPriority;
+  priority?: NotificationPriority;
 }) => {
-  if (priority === NOTIFICATION_PRIORITIES.important) {
+  if (priority === NotificationPriorities.important) {
     return theme.palette.yellow[800];
   }
 
-  if (priority === NOTIFICATION_PRIORITIES.critical) {
+  if (priority === NotificationPriorities.critical) {
     return theme.palette.red[800];
   }
 
@@ -63,32 +63,23 @@ export const ListItemDate = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey[600]};
 `;
 
-export const ListItemPriority = styled('div')`
+export const ListItemPriority = styled('div')<{
+  priority: NotificationPriority;
+}>`
   width: ${({ theme }) => theme.spacing(2)};
   height: ${({ theme }) => theme.spacing(2)};
 
+  background-color: ${getPriorityColor};
   border-radius: 50%;
 `;
 
-export const ListItemIconSlot = styled('div')<{
-  priority: NotificationListPriority;
-}>`
+export const ListItemIconSlot = styled('div')`
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
   width: 100%;
   height: ${({ theme }) => theme.spacing(8)};
-
-  & svg {
-    max-width: ${({ theme }) => theme.spacing(4)};
-
-    color: ${getPriorityColor};
-  }
-
-  & div {
-    background-color: ${getPriorityColor};
-  }
 `;
 
 export const ListItemActions = styled('div')`

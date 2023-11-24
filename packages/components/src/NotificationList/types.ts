@@ -1,48 +1,40 @@
-import { NOTIFICATION_PRIORITIES } from './constants';
+import { NotificationPriorities } from './enums';
 
-export type NotificationListPriority =
-  (typeof NOTIFICATION_PRIORITIES)[keyof typeof NOTIFICATION_PRIORITIES];
+export type NotificationPriority = keyof typeof NotificationPriorities;
 
 export type Notification = {
   /**
    * @description уникальный идентификатор уведомления
-   * @type string | number
    * @default ''
    * */
   id: string | number;
   /**
    * @description заголовок уведомления
-   * @type string
    * @default ''
    * */
   title: string;
   /**
    * @description дата создания уведомления
-   * @type string | Date
    * @default ''
    * */
   date: string | Date;
   /**
    * @description текст уведомления
-   * @type string
    * @default ''
    * */
   text: string;
   /**
    * @description приоритет уведомления
-   * @type NotificationListPriority
    * @default 'ordinary'
    * */
-  priority?: NotificationListPriority;
+  priority?: NotificationPriority;
   /**
-   * @description флаг прочтения уведомления
-   * @type boolean
+   * @description флаг показывает, что уведомление не прочитано
    * @default true
    * */
   isUnread?: boolean;
   /**
    * @description дополнительные действия
-   * @type React.ReactNode
    * @default undefined
    * */
   actions?: React.ReactNode;

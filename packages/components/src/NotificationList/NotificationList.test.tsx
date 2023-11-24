@@ -106,7 +106,7 @@ describe('NotificationList', () => {
     expect(notificationTitle).toBeVisible();
   });
 
-  it('NotificationListFooter виден только при наличии onReadAll', () => {
+  it('NotificationListFooter виден только при наличии isReadAllButtonVisible', () => {
     const onReadAllMock = vi.fn();
 
     renderWithTheme(
@@ -114,6 +114,7 @@ describe('NotificationList', () => {
         isOpen
         notifications={notifications}
         onReadAll={onReadAllMock}
+        isReadAllButtonVisible
         onClose={() => {}}
       />,
     );
@@ -123,7 +124,7 @@ describe('NotificationList', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('NotificationListFooter не виден при отсутствии onReadAll', () => {
+  it('NotificationListFooter не виден при отсутствии isReadAllButtonVisible', () => {
     renderWithTheme(
       <NotificationList
         isOpen
@@ -135,5 +136,99 @@ describe('NotificationList', () => {
     const button = screen.queryByText('Отметить все как прочитанные');
 
     expect(button).toBeNull();
+  });
+
+  it('Props:onDelete: отображает кнопку удаления и вызывает onDelete', async () => {
+    const onDeleteMock = vi.fn();
+
+    renderWithTheme(
+      <NotificationList
+        notifications={notifications}
+        onDelete={onDeleteMock}
+        isOpen
+        onClose={() => {}}
+      />,
+    );
+
+    const listItems = screen.getAllByRole('listitem');
+    const deleteButton = listItems[0].getElementsByTagName('button')[0];
+
+    expect(deleteButton).toBeVisible();
+    await userEvents.click(deleteButton);
+    expect(onDeleteMock.mock.calls[0][0]).toEqual(1);
+  });
+
+  it('Props:actions: отображает кнопку действия', () => {
+    renderWithTheme(
+      <NotificationList
+        isOpen
+        onClose={() => {}}
+        notifications={[
+          {
+            id: 1,
+            title: 'Новое сообщение',
+            date: '2023-10-30T10:00:00',
+            text: 'У вас новое сообщение от пользователя JohnDoe.',
+            priority: 'ordinary',
+            isUnread: true,
+            actions: <button>action</button>,
+          },
+        ]}
+      />,
+    );
+
+    const notificationDeleteButton = screen.getByText('action');
+
+    expect(notificationDeleteButton).toBeVisible();
+  });
+
+  it('Props:unreadNotifications.length = 0: отображает текст "У вас пока нет новых уведомлений"', async () => {
+    renderWithTheme(
+      <NotificationList
+        isOpen
+        onClose={() => {}}
+        notifications={notifications}
+        unreadNotifications={[]}
+        isInitialUnreadOnly
+      />,
+    );
+
+    const notificationListEmptyText = screen.getByText(
+      'У вас пока нет новых уведомлений',
+    );
+
+    expect(notificationListEmptyText).toBeVisible();
+  });
+
+  it('Props:notifications.length = 0: отображает текст "У вас пока нет уведомлений"', async () => {
+    renderWithTheme(
+      <NotificationList
+        isOpen
+        onClose={() => {}}
+        notifications={[]}
+        isInitialUnreadOnly={false}
+      />,
+    );
+
+    const notificationListEmptyText = screen.getByText(
+      'У вас пока нет уведомлений',
+    );
+
+    expect(notificationListEmptyText).toBeVisible();
+  });
+
+  it('Props:noDataImgSrc: отображает картинку', async () => {
+    renderWithTheme(
+      <NotificationList
+        isOpen
+        onClose={() => {}}
+        notifications={[]}
+        noDataImgSrc="noDataImgSrc"
+      />,
+    );
+
+    const notificationListEmptyImg = screen.getByAltText('Нет уведомлений');
+
+    expect(notificationListEmptyImg).toBeVisible();
   });
 });
