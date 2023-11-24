@@ -1,10 +1,10 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 
 import { Button } from '../Button';
 
 import { Badge } from './Badge';
 
-import { BadgeProps } from '.';
+import { type BadgeProps } from '.';
 
 export default {
   title: 'Components/Badge',

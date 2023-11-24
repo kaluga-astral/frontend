@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid } from '@astral/components';
@@ -8,7 +8,7 @@ import { useForm } from '../hooks';
 import { Form } from '../Form';
 
 import { FormMaskField } from './FormMaskField';
-import { FormMaskFieldValue } from './types';
+import { type FormMaskFieldValue } from './types';
 
 /**
  * Обертка [MaskField](/story/components-maskfield--docs) для react-hook-form

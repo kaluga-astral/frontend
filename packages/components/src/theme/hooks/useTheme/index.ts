@@ -1,6 +1,6 @@
 import { useTheme as useEmotionTheme } from '@emotion/react';
 
-import { Theme } from '../../types';
+import { type Theme } from '../../types';
 
 // any необходим для коннекта темы
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

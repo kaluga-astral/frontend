@@ -1,5 +1,5 @@
-import { ListItemProps as MuiListItemProps } from '@mui/material/ListItem/ListItem';
+import { type ListItemProps as MuiListItemProps } from '@mui/material/ListItem/ListItem';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type ListItemProps = WithoutEmotionSpecific<MuiListItemProps>;

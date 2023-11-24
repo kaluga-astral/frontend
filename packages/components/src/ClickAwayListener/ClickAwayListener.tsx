@@ -1,6 +1,6 @@
 import { Children, cloneElement, useRef } from 'react';
 
-import { UseClickAwayListenerOptions, useClickAwayEffect } from '../hooks';
+import { type UseClickAwayListenerOptions, useClickAwayEffect } from '../hooks';
 
 export type ClickAwayListenerProps = Omit<
   UseClickAwayListenerOptions,

@@ -1,6 +1,6 @@
-import { Menu as MuiMenu, MenuProps as MuiMenuProps } from '@mui/material';
+import { Menu as MuiMenu, type MenuProps as MuiMenuProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type MenuProps = WithoutEmotionSpecific<MuiMenuProps>;
 

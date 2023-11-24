@@ -1,10 +1,10 @@
-import { Components, buttonClasses } from '@mui/material';
+import { type Components, buttonClasses } from '@mui/material';
 
-import { Theme } from '../types';
+import { type Theme } from '../types';
 import {
-  ButtonProps,
+  type ButtonProps,
   ButtonSizes,
-  ButtonState,
+  type ButtonState,
   ButtonStates,
   ButtonVariants,
 } from '../../Button';

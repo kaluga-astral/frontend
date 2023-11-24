@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 
 import {
   Button,
@@ -22,11 +22,11 @@ export default {
 
 const Subtitle = styled(Typography)`
   &::before {
+    content: '|';
+
     padding: ${({ theme }) => theme.spacing(0, 4)};
 
     color: ${({ theme }) => theme.palette.grey[500]};
-
-    content: '|';
   }
 `;
 

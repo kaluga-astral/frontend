@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { ChangeEvent, useState } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type ChangeEvent, useState } from 'react';
 
 import { PasswordField } from './PasswordField';
 

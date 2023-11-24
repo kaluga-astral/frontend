@@ -1,7 +1,7 @@
-import { MouseEvent, useContext, useMemo, useState } from 'react';
-import { ConfigContext, WidgetProduct } from '@astral/ui';
+import { type MouseEvent, useContext, useMemo, useState } from 'react';
+import { ConfigContext, type WidgetProduct } from '@astral/ui';
 
-import { IdentityTenantsDTO } from '../../../../types';
+import { type IdentityTenantsDTO } from '../../../../types';
 import { getIdentityTenants, getTenantsProducts } from '../../utils';
 import { ASTRAL_IDENTITY_DEFAULT_TENANT } from '../../IdentityProductSwitcher';
 

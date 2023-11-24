@@ -1,7 +1,10 @@
-import { ButtonGroupMainActions, MainAction } from './ButtonGroupMainActions';
+import {
+  ButtonGroupMainActions,
+  type MainAction,
+} from './ButtonGroupMainActions';
 import {
   ButtonGroupSecondaryActions,
-  SecondaryAction,
+  type SecondaryAction,
 } from './ButtonGroupSecondaryActions';
 import { ButtonGroupWrapper } from './styles';
 

@@ -1,4 +1,4 @@
-import { Grow, GrowProps } from '@mui/material';
+import { Grow, type GrowProps } from '@mui/material';
 
 export { Grow };
 

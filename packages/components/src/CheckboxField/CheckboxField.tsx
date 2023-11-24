@@ -1,6 +1,6 @@
-import { ReactNode, useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 
-import { Checkbox, CheckboxProps } from '../Checkbox';
+import { Checkbox, type CheckboxProps } from '../Checkbox';
 import { FormControl } from '../FormControl';
 import { FormControlLabel } from '../FormControlLabel';
 import { FormHelperText } from '../FormHelperText';

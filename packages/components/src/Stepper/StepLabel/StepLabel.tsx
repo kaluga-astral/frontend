@@ -1,10 +1,10 @@
 import {
   StepLabel as MuiStepLabel,
-  StepLabelProps as MuiStepLabelProps,
+  type StepLabelProps as MuiStepLabelProps,
 } from '@mui/material';
 
 import { StepIcon } from '../StepIcon';
-import { WithoutEmotionSpecific } from '../../types';
+import { type WithoutEmotionSpecific } from '../../types';
 
 export type StepProps = {
   /**

@@ -6,6 +6,7 @@ export const PaperHeader = styled(Paper)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: ${({ theme }) => theme.spacing(2, 3)};
 `;
 
@@ -13,6 +14,7 @@ export const PaperExampleStory = styled(Paper)`
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 202px;
   height: 96px;
   padding: ${({ theme }) => theme.spacing(2, 3)};

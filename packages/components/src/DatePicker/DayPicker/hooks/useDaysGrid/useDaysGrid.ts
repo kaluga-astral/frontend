@@ -8,7 +8,7 @@ import {
   isDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
-import { GridBuilder, GridItem } from '../../../types';
+import { type GridBuilder, type GridItem } from '../../../types';
 import {
   buildGridResult,
   compareDateDayByUTC,

@@ -1,5 +1,8 @@
-import { DateMask, DateMaskElements } from '../maskDate';
-import { BuildIsoDateStringOptions, buildIsoDate } from '../../buildIsoDate';
+import { type DateMask, DateMaskElements } from '../maskDate';
+import {
+  type BuildIsoDateStringOptions,
+  buildIsoDate,
+} from '../../buildIsoDate';
 
 type ElementsMap = Record<DateMaskElements, keyof BuildIsoDateStringOptions>;
 

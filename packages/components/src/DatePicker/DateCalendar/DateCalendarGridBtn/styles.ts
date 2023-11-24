@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import { styled } from '../../../styles';
 import { DateCalendarButton } from '../DateCalendarBtn';
-import { Theme } from '../../../theme';
-import { ButtonProps } from '../../../Button';
+import { type Theme } from '../../../theme';
+import { type ButtonProps } from '../../../Button';
 
 export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
   /**
@@ -129,11 +129,28 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
   color: ${(props) => getTextColor(props)};
 
   background-color: ${(props) => getBgColor(props)};
-
   border-radius: ${(props) => getLeftBorderRadius(props)}
     ${(props) => getRightBorderRadius(props)}
     ${(props) => getRightBorderRadius(props)}
     ${(props) => getLeftBorderRadius(props)};
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: ${({ theme }) => theme.spacing(1)};
+    left: ${({ theme }) => theme.spacing(2)};
+
+    display: ${({ isCurrentInUserLocalTime }) =>
+      isCurrentInUserLocalTime ? 'block' : 'none'};
+
+    width: calc(100% - ${({ theme }) => theme.spacing(4)});
+    height: 2px;
+
+    color: currentColor;
+
+    background-color: currentColor;
+  }
 
   /* первый элемент строки для выбранного диапазона должен иметь скругление слева */
   &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
@@ -149,22 +166,5 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
       isInSelectedRange ? theme.shape.small : ''};
     border-bottom-right-radius: ${({ theme, isInSelectedRange }) =>
       isInSelectedRange ? theme.shape.small : ''};
-  }
-
-  &::after {
-    position: absolute;
-    bottom: ${({ theme }) => theme.spacing(1)};
-    left: ${({ theme }) => theme.spacing(2)};
-
-    display: ${({ isCurrentInUserLocalTime }) =>
-      isCurrentInUserLocalTime ? 'block' : 'none'};
-    width: calc(100% - ${({ theme }) => theme.spacing(4)});
-    height: 2px;
-
-    color: currentColor;
-
-    background-color: currentColor;
-
-    content: '';
   }
 `;

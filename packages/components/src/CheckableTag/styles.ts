@@ -1,6 +1,6 @@
 import { styled } from '../styles';
-import { Tag, TagColor, TagProps, TagVariant } from '../Tag';
-import { Theme } from '../theme';
+import { Tag, type TagColor, type TagProps, type TagVariant } from '../Tag';
+import { type Theme } from '../theme';
 import { TagVariants } from '../Tag/enums';
 
 type CheckableTagStyledProps = {
@@ -145,8 +145,9 @@ export const CheckableTagHiddenInput = styled.input`
 `;
 
 export const CheckableTagStyled = styled(Tag)<CheckableTagStyledProps>`
-  background-color: ${getBgColor};
   cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
+
+  background-color: ${getBgColor};
 
   .MuiChip-label {
     color: ${getColor};

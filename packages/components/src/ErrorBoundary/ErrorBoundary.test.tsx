@@ -1,5 +1,5 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import { ConfigProvider } from '../ConfigProvider';
 import errorIllustration from '../../../ui/illustrations/error.svg';

@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import { YearPicker } from '../YearPicker';
 import { MonthPicker } from '../MonthPicker';
-import { DayPicker, MondayFirst } from '../DayPicker';
-import { PickerProps } from '../types';
+import { DayPicker, type MondayFirst } from '../DayPicker';
+import { type PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
 
 enum States {

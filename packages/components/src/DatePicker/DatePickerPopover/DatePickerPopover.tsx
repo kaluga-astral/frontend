@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import { PopperProps } from '@mui/material';
+import { type PropsWithChildren } from 'react';
+import { type PopperProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../../types';
+import { type WithoutEmotionSpecific } from '../../types';
 
 import { DatePickerPopoverInner, PopoverWrapper } from './styles';
 

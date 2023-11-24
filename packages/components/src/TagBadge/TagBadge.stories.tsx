@@ -1,9 +1,9 @@
 import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 
 import { Tag } from '../Tag';
 
-import { TagBadge, TagBadgeProps } from '.';
+import { TagBadge, type TagBadgeProps } from '.';
 
 export default {
   title: 'Components/TagBadge',

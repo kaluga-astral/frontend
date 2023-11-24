@@ -1,6 +1,6 @@
-import { FieldValues } from 'react-hook-form';
+import { type FieldValues } from 'react-hook-form';
 
-import { WithFormFieldProps } from '../../types';
+import { type WithFormFieldProps } from '../../types';
 
 type UseFormInputProps<
   TFormFieldProps extends object,
