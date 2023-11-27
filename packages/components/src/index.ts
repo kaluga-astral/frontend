@@ -180,6 +180,8 @@ export * from './Slide';
 
 export * from './Stepper';
 
+export * from './StepSlider';
+
 export * from './styles';
 
 export * from './StylesCacheProvider';
