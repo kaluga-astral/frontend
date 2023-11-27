@@ -1,6 +1,6 @@
-import { WidgetProduct } from '@astral/ui';
+import { type WidgetProduct } from '@astral/ui';
 
-import { IdentityProductsWidgetDTO } from '../../types';
+import { type IdentityProductsWidgetDTO } from '../../types';
 
 /**
  * Форматирование данных identity под виджет UIKIT

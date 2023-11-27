@@ -1,4 +1,4 @@
-import { ElementType, ReactElement, forwardRef } from 'react';
+import { type ElementType, type ReactElement, forwardRef } from 'react';
 
 import { Collapse } from '../../../Collapse';
 import { Tooltip } from '../../../Tooltip';

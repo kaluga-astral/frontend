@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
-import { MaskBlocks, MaskFieldProps } from '../../MaskField';
+import { type MaskBlocks, type MaskFieldProps } from '../../MaskField';
 
 import { DatePickerInputWrapper } from './styles';
 

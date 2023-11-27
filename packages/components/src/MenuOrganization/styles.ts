@@ -10,8 +10,8 @@ export const OrganizationsButtonWrapper = styled.div`
 export const OrganizationGroupTitle = styled.div`
   > li.${typographyClasses.root} {
     position: sticky;
-    top: 0;
     z-index: 1;
+    top: 0;
 
     padding: ${({ theme }) => theme.spacing(3, 2, 1, 3)};
 
@@ -20,9 +20,10 @@ export const OrganizationGroupTitle = styled.div`
 `;
 
 export const OrganizationsWrapper = styled.div`
+  overflow-y: auto;
+
   width: 260px;
   max-height: 310px;
-  overflow-y: auto;
 `;
 
 export const OrganizationData = styled(Grid)`

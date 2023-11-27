@@ -1,6 +1,6 @@
 import { AddOutlineMd, SearchOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { Fragment } from 'react';
 
 import { Select } from '../Select';

@@ -1,10 +1,10 @@
 import { forwardRef, useMemo } from 'react';
 import {
   CircularProgress as MuiCircularProgress,
-  CircularProgressProps as MuiCircularProgressProps,
+  type CircularProgressProps as MuiCircularProgressProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 declare module '@mui/material/CircularProgress' {
   interface CircularProgressPropsColorOverrides {

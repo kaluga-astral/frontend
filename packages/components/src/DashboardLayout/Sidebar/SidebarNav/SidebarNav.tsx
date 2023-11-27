@@ -1,4 +1,4 @@
-import { ReactElement, forwardRef } from 'react';
+import { type ReactElement, forwardRef } from 'react';
 
 export type SidebarNavProps = {
   menu: ReactElement;

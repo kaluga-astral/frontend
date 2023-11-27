@@ -1,5 +1,9 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { MouseEventHandler, PropsWithChildren, useState } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
+import {
+  type MouseEventHandler,
+  type PropsWithChildren,
+  useState,
+} from 'react';
 
 import { Grid } from '../Grid';
 import { styled } from '../styles';
@@ -76,11 +80,11 @@ const useSimulateLoading = () => {
 };
 
 const BaseContentContainer = styled(Grid)`
-  align-content: center;
-  justify-content: center;
+  overflow: hidden;
+  place-content: center center;
+
   width: 384px;
   height: 384px;
-  overflow: hidden;
 `;
 
 const Form = ({

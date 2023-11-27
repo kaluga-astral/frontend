@@ -6,13 +6,14 @@ type PageContentWrapperProps = {
 };
 
 export const PageContentWrapper = styled.article<PageContentWrapperProps>`
+  scroll-behavior: smooth;
+
+  overflow: auto;
   grid-area: content;
+
   padding: ${({ isPaddingDisabled, theme }) =>
     isPaddingDisabled ? 0 : theme.spacing(0, 6)};
-  overflow: auto;
 
   border-top: ${({ isSeparatorShown, theme }) =>
     isSeparatorShown ? `1px solid ${theme.palette.grey[300]}` : 'none'};
-
-  scroll-behavior: smooth;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon, type SvgIconProps } from '@mui/material';
 
 const NextOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon

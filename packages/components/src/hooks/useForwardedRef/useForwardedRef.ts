@@ -1,4 +1,4 @@
-import { ForwardedRef, useImperativeHandle, useRef } from 'react';
+import { type ForwardedRef, useImperativeHandle, useRef } from 'react';
 
 /**
  * @description хук позволяет использовать опциональный реф пришедший сверху, т.к. ForwardedRef может являться колбэком, это может подходить не для всех компонентов, яркий пример MaskField

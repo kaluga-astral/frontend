@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { vi } from 'vitest';
 
 import { DataGrid } from './DataGrid';
-import { DataGridColumns, DataGridSort } from './types';
+import { type DataGridColumns, type DataGridSort } from './types';
 
 describe('DataGrid', () => {
   it('Props:columns: отображаются названия колонок', () => {

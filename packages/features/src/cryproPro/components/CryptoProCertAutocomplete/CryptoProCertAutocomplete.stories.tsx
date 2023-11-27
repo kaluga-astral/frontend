@@ -1,5 +1,5 @@
-import { Certificate } from '@astral/cryptopro-cades';
-import { Story } from '@storybook/react';
+import { type Certificate } from '@astral/cryptopro-cades';
+import { type Story } from '@storybook/react';
 import { useState } from 'react';
 
 import { CryptoProCertificateService } from '../../services';

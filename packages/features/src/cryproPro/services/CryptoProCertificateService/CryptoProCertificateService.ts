@@ -1,5 +1,5 @@
 import {
-  Certificate,
+  type Certificate,
   STORE_TYPE,
   findCertificateBySkid,
   getCertificates,

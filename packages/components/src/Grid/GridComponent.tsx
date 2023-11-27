@@ -1,8 +1,8 @@
 import {
-  DetailedHTMLProps,
-  ElementType,
-  HTMLAttributes,
-  ReactNode,
+  type DetailedHTMLProps,
+  type ElementType,
+  type HTMLAttributes,
+  type ReactNode,
   forwardRef,
 } from 'react';
 

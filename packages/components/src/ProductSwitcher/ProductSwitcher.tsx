@@ -6,7 +6,7 @@ import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
 import { ProductSwitcherContent } from './ProductSwitcherContent';
-import { WidgetProduct } from './types';
+import { type WidgetProduct } from './types';
 import { WidgetMenu } from './styles';
 
 export type ProductSwitcherProps = {
