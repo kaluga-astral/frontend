@@ -141,6 +141,11 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         onMaskedEndDateChange(date);
         closePopover(undefined, 'selectOption');
       } else {
+        // Если первая дата больше второй даты, устанавливаем вторую дату равной первой
+        if (selectedEndBaseDate && date > selectedEndBaseDate) {
+          onMaskedEndDateChange(date);
+        }
+
         onMaskedStartDateChange(date);
         setIsSelectedStartDate(true);
       }
