@@ -12,4 +12,9 @@ export type PickerProps = {
    */
   rangeDate?: Date;
   onChange?: (date: Date) => void;
+
+  /**
+   * @description Флаг для использования пикера в range состоянии
+   */
+  isRange?: boolean;
 };

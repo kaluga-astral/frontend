@@ -227,6 +227,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               rangeDate={endDateProps.value}
               date={selectedStartBaseDate || startBaseDate}
               onChange={handleDayPick}
+              isRange
             />
             {!isSinglePicker && (
               <>
@@ -237,6 +238,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                   rangeDate={endDateProps.value}
                   date={selectedEndBaseDate || endBaseDate}
                   onChange={handleDayPick}
+                  isRange
                 />
               </>
             )}

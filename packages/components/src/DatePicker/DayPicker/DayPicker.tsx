@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -9,10 +9,11 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { addMonths } from '../../utils/date';
+import { DateCompareDeep, addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
 import { DAYS_IN_WEEK } from '../constants/counts';
+import { isDateBetweenSelectedAndRangeDates } from '../utils';
 
 import { DateDayPickerGridHead } from './DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './DateDayPickerGrid';
@@ -36,6 +37,7 @@ export const DayPicker = ({
   onChange,
   isMondayFirst,
   rangeDate,
+  isRange,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -53,6 +55,8 @@ export const DayPicker = ({
 
   const { month: monthCaption } =
     useContext(ConfigContext).datePickerLanguageMap;
+
+  const [hoveredDate, setHoveredDate] = useState<Date>();
 
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
@@ -79,18 +83,35 @@ export const DayPicker = ({
       <DateCalendarBody>
         <DateDayPickerGridHead isMondayFirst={isMondayFirst} />
         <DateDayPickerGridBody role="grid">
-          {grid.map(({ date, monthDay, ...props }, index) => (
-            <DateCalendarGridBtn
-              key={index}
-              onClick={() => onChange?.(date)}
-              title={dayFormat(date)}
-              lengthInRow={DAYS_IN_WEEK}
-              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
-              {...props}
-            >
-              {monthDay}
-            </DateCalendarGridBtn>
-          ))}
+          {grid.map(
+            ({ date, monthDay, isInSelectedRange, ...props }, index) => (
+              <DateCalendarGridBtn
+                key={index}
+                onClick={() => onChange?.(date)}
+                title={dayFormat(date)}
+                lengthInRow={DAYS_IN_WEEK}
+                isPreviousItemInSelectedRange={
+                  grid[index - 1]?.isInSelectedRange
+                }
+                onMouseEnter={() => {
+                  setHoveredDate(date);
+                }}
+                isInSelectedRange={
+                  isInSelectedRange ||
+                  (isRange &&
+                    isDateBetweenSelectedAndRangeDates({
+                      date,
+                      selectedDate,
+                      rangeDate: hoveredDate,
+                      deep: DateCompareDeep.day,
+                    }))
+                }
+                {...props}
+              >
+                {monthDay}
+              </DateCalendarGridBtn>
+            ),
+          )}
         </DateDayPickerGridBody>
       </DateCalendarBody>
     </DateCalendarWrapper>

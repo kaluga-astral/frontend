@@ -20,6 +20,7 @@ export const YearMonthDayPicker = ({
   rangeDate,
   selectedDate,
   isMondayFirst,
+  isRange,
 }: YearMonthDayPickerProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [currentState, setState] = useState(States.days);
@@ -91,6 +92,7 @@ export const YearMonthDayPicker = ({
           headBtnTitle={toMonthPick.single}
           onChange={onChange}
           rangeDate={rangeDate}
+          isRange={isRange}
         />
       )}
     </div>
