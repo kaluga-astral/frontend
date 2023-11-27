@@ -180,8 +180,6 @@ export * from './Slide';
 
 export * from './Stepper';
 
-export * from './StepSlider';
-
 export * from './styles';
 
 export * from './StylesCacheProvider';
@@ -223,3 +221,5 @@ export * from './Zoom';
 export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
+
+export { StepSlider, StepSliderProps } from './StepSlider';
