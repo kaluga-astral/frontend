@@ -1,6 +1,6 @@
-import { Select, SelectProps } from '@astral/components';
+import { Select, type SelectProps } from '@astral/components';
 
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormSelectProps<FieldValues extends object> = WithFormFieldProps<

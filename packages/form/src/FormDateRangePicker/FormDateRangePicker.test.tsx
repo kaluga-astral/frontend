@@ -14,7 +14,7 @@ import { useForm } from '../hooks';
 
 import {
   FormDateRangePicker,
-  FormDateRangePickerValue,
+  type FormDateRangePickerValue,
 } from './FormDateRangePicker';
 
 type FormValues = {

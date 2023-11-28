@@ -1,7 +1,7 @@
 import { Radio, css } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import { type Theme } from '../theme';
 
 import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from './constants';
 

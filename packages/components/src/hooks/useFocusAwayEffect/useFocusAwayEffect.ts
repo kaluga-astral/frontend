@@ -1,6 +1,6 @@
-import { RefObject, useEffect } from 'react';
+import { type RefObject, useEffect } from 'react';
 
-import { CloseEventReason } from '../../types';
+import { type CloseEventReason } from '../../types';
 
 type UseFocusAwayEffectOptions = {
   /**

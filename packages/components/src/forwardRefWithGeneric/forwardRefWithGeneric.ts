@@ -1,4 +1,9 @@
-import { ReactElement, Ref, RefAttributes, forwardRef } from 'react';
+import {
+  type ReactElement,
+  type Ref,
+  type RefAttributes,
+  forwardRef,
+} from 'react';
 
 /**
  * Proxy для forwardRef, который позволяет использовать generic для forwardRef. Из коробки forwardRef пользоваться generic'ом не дает

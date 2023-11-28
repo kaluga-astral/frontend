@@ -1,4 +1,4 @@
-import { BreakpointsOptions } from '@mui/material';
+import { type BreakpointsOptions } from '@mui/material';
 
 export const defaultBreakpoints: BreakpointsOptions = {
   values: {

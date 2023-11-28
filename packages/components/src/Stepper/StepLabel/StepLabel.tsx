@@ -1,13 +1,31 @@
 import {
   StepLabel as MuiStepLabel,
-  StepLabelProps as MuiStepLabelProps,
+  type StepLabelProps as MuiStepLabelProps,
 } from '@mui/material';
 
 import { StepIcon } from '../StepIcon';
-import { WithoutEmotionSpecific } from '../../types';
+import { type WithoutEmotionSpecific } from '../../types';
 
-export type StepProps = WithoutEmotionSpecific<MuiStepLabelProps>;
+export type StepProps = {
+  /**
+   * Является ли шаг в состоянии select
+   */
+  isSelected?: boolean;
+} & WithoutEmotionSpecific<MuiStepLabelProps>;
 
 export const StepLabel = (props: StepProps) => {
-  return <MuiStepLabel StepIconComponent={StepIcon} {...props} />;
+  return (
+    <MuiStepLabel
+      StepIconComponent={({ active, error, completed, icon }) =>
+        StepIcon({
+          isSelected: props.isSelected,
+          active,
+          error,
+          completed,
+          icon,
+        })
+      }
+      {...props}
+    />
+  );
 };

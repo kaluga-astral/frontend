@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid } from '@astral/components';
@@ -10,7 +10,7 @@ import { Form } from '../Form';
 
 import {
   FormDateRangePicker,
-  FormDateRangePickerValue,
+  type FormDateRangePickerValue,
 } from './FormDateRangePicker';
 
 /**

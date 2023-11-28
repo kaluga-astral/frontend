@@ -8,5 +8,6 @@ export const DashboardLayoutRoot = styled.div`
       [main-start]    "sidebar main" 1fr  [main-end] / auto 1fr
     `;
   }};
+
   height: 100vh;
 `;

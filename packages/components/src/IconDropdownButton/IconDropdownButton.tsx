@@ -1,5 +1,5 @@
 import { ClickAwayListener } from '@mui/material';
-import { ReactNode, forwardRef } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
 import { IconButton, type IconButtonProps } from '../IconButton';

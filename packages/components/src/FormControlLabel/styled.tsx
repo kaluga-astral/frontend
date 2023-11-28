@@ -2,7 +2,7 @@ import { FormControlLabel } from '@mui/material';
 
 import { styled } from '../styles';
 
-import { FormControlLabelProps } from './types';
+import { type FormControlLabelProps } from './types';
 
 export const StyledFormControlLabel = styled(
   FormControlLabel,

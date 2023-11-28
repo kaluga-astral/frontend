@@ -1,12 +1,12 @@
 import {
-  Id,
-  ToastContent,
-  ToastOptions,
-  UpdateOptions,
+  type Id,
+  type ToastContent,
+  type ToastOptions,
+  type UpdateOptions,
   toast,
 } from 'react-toastify';
 
-import { NotificationProps, Variant } from './types';
+import { type NotificationProps, type Variant } from './types';
 import { NotificationVariantTypes } from './constants';
 import { getClassNameModifierByVariant } from './utils';
 import { NOTIFICATION_VARIANT } from './NotificationTemplate/constants';

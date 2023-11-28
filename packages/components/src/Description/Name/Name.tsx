@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Typography, TypographyProps } from '../../Typography';
+import { Typography, type TypographyProps } from '../../Typography';
 import { DescriptionDashedSeparator } from '../styles';
 import { DescriptionContext } from '../DescriptionProvider';
 

@@ -1,5 +1,5 @@
-import { MouseEvent, useCallback, useMemo, useState } from 'react';
-import { Story } from '@storybook/react';
+import { type MouseEvent, useCallback, useMemo, useState } from 'react';
+import { type Story } from '@storybook/react';
 
 import { Button } from '../../Button';
 import { ListItemIcon } from '../../ListItemIcon';

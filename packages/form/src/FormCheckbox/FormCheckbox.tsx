@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
-import { CheckboxField, CheckboxProps } from '@astral/components';
+import { type ReactNode } from 'react';
+import { CheckboxField, type CheckboxProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 export type FormCheckboxProps<FieldValues extends object> = Omit<
   WithFormFieldProps<CheckboxProps, FieldValues>,
