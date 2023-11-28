@@ -30,11 +30,18 @@ const getDateFormat = (date: string | Date | null) => {
 };
 
 export type NotificationListItemProps = Notification & {
-  onDelete?: (id: string | number) => void;
+  /**
+   * @description Флаг управляет отображение кнопки удаления уведомления
+   * */
+  isDeleteButtonVisible: boolean;
+  /**
+   * @description Функция удаления уведомления
+   * */
+  onDelete?: (id: string) => void;
   /**
    * @description функция вызывается, когда уведомление полностью попало во viewport
    * */
-  onViewNotification?: (id: string | number) => void;
+  onViewNotification?: (id: string) => void;
 };
 
 export const NotificationListItem = (props: NotificationListItemProps) => {
@@ -47,6 +54,7 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
     actions,
     isUnread = true,
     onViewNotification,
+    isDeleteButtonVisible,
     onDelete,
   } = props;
   const ref = useRef<HTMLLIElement | null>(null);
@@ -87,7 +95,7 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
         </Typography>
         {actions && <ListItemActions>{actions}</ListItemActions>}
       </div>
-      {onDelete ? (
+      {isDeleteButtonVisible ? (
         <ListItemCloseButton onClick={handleDelete} variant="text" size="small">
           <CrossOutlineSm />
         </ListItemCloseButton>

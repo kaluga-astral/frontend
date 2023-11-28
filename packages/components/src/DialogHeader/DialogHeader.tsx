@@ -1,37 +1,37 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
-import {
-  DialogHeaderContent,
-  DialogHeaderContentProps,
-  DialogHeaderRoot,
-} from './styles';
+import { DialogHeaderContent, DialogHeaderRoot } from './styles';
 
-export type DialogHeaderProps = DialogHeaderContentProps & {
-  children: React.ReactNode;
+export type DialogHeaderProps = {
+  /**
+   * @description Горизонтальное выравнивание
+   * */
+  justifyContent?: CSSProperties['justifyContent'];
+  /**
+   * @description Расстояние между элементами, обернутыми в DialogHeader
+   * */
+  spacing?: number;
   /**
    * @description Заголовок
-   * @default undefined
-   * @type string
    */
   title?: string;
   /**
    * @description Кнопка для закрытия модального окна
-   * @default undefined
-   * @type function
    */
   onClose?: ModalProps['onClose'];
+  children: React.ReactNode;
 };
 
 export const DialogHeader = ({
   children,
   title,
-  justifyContent,
-  spacing,
+  justifyContent = 'flex-start',
+  spacing = 2,
   onClose,
 }: DialogHeaderProps) => {
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,7 +43,10 @@ export const DialogHeader = ({
   return (
     <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && <Typography variant="h4">{title}</Typography>}
-      <DialogHeaderContent justifyContent={justifyContent} spacing={spacing}>
+      <DialogHeaderContent
+        justifyContent={justifyContent}
+        columnSpacing={spacing}
+      >
         {children}
       </DialogHeaderContent>
       {onClose && (

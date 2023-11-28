@@ -2,7 +2,13 @@ import React from 'react';
 import { StoryObj } from '@storybook/react';
 import { SettingsOutlineMd } from '@astral/icons';
 
-import { Alert, Button, Divider, Grid, IconButton, Tag, Typography } from '..';
+import { Alert } from '../Alert';
+import { Button } from '../Button';
+import { Divider } from '../Divider';
+import { Grid } from '../Grid';
+import { IconButton } from '../IconButton';
+import { Tag } from '../Tag';
+import { Typography } from '../Typography';
 import { SideDialogActions } from '../SideDialogActions';
 import { SideDialogContent } from '../SideDialogContent';
 import { SideDialogContentText } from '../SideDialogContentText';
@@ -99,7 +105,7 @@ export const ExampleWithSideDialogHeader = () => {
     <Grid container spacing={2}>
       <Typography>
         Пример SideDialog с компонентом SideDialogHeader, который является
-        оберткой для размещения прочих компонентов в заголовок диалога.
+        оберткой для размещения прочих компонентов в заголовке.
       </Typography>
       <Grid>
         <Button variant="light" onClick={handleOpen}>

@@ -1,24 +1,26 @@
 import { Typography } from '../../Typography';
+import { NotificationListType } from '../types';
 
-import { Container, Image } from './styles';
+import {
+  NotificationListEmptyContainer,
+  NotificationListEmptyImage,
+} from './styles';
 
 type NotificationListEmptyProps = {
-  isUnreadOnly?: boolean;
-  noDataImgSrc?: string;
-  noDataImgAlt?: string;
+  listType?: NotificationListType;
+  noDataImgSrc: string;
 };
 
 export const NotificationListEmpty = ({
-  isUnreadOnly,
+  listType,
   noDataImgSrc,
-  noDataImgAlt = 'Нет уведомлений',
 }: NotificationListEmptyProps) => {
   return (
-    <Container>
-      {noDataImgSrc && <Image src={noDataImgSrc} alt={noDataImgAlt} />}
+    <NotificationListEmptyContainer>
+      <NotificationListEmptyImage src={noDataImgSrc} alt="" />
       <Typography>{`У вас пока нет ${
-        isUnreadOnly ? 'новых' : ''
+        listType === 'unread' ? 'новых' : ''
       } уведомлений`}</Typography>
-    </Container>
+    </NotificationListEmptyContainer>
   );
 };

@@ -1,24 +1,39 @@
 import { SyntheticEvent } from 'react';
 
-import { StyledTab, StyledTabs } from './styles';
+import { NotificationListType } from '../types';
+
+import { NotificationListTabsRoot, NotificationListTabsTab } from './styles';
 
 type NotificationListTabsProps = {
-  tabIndex: number;
+  listType: NotificationListType;
   unreadNotificationsCount: number;
   notificationsCount: number;
-  onChange: (event: SyntheticEvent<Element, Event>, value: number) => void;
+  onChange: (listType: NotificationListType) => void;
 };
 
 export const NotificationListTabs = ({
-  tabIndex,
+  listType,
   notificationsCount,
   unreadNotificationsCount,
   onChange,
 }: NotificationListTabsProps) => {
+  const handleChange = (
+    _: SyntheticEvent<Element, Event>,
+    value: NotificationListType,
+  ) => {
+    onChange(value);
+  };
+
   return (
-    <StyledTabs value={tabIndex} onChange={onChange}>
-      <StyledTab label={`Непрочитанные (${unreadNotificationsCount})`} />
-      <StyledTab label={`Все (${notificationsCount})`} />
-    </StyledTabs>
+    <NotificationListTabsRoot value={listType} onChange={handleChange}>
+      <NotificationListTabsTab
+        value="unread"
+        label={`Непрочитанные (${unreadNotificationsCount})`}
+      />
+      <NotificationListTabsTab
+        value="all"
+        label={`Все (${notificationsCount})`}
+      />
+    </NotificationListTabsRoot>
   );
 };

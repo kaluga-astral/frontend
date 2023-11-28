@@ -10,10 +10,6 @@ type NotificationListSettingsButtonProps = {
 export const NotificationListSettingsButton = ({
   onClick,
 }: NotificationListSettingsButtonProps) => {
-  if (!onClick) {
-    return null;
-  }
-
   return (
     <>
       <IconButton variant="text" onClick={onClick}>

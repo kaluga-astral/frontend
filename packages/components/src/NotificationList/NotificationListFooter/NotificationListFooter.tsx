@@ -5,19 +5,13 @@ import { Footer } from './styles';
 
 type NotificationListFooterProps = {
   onReadAllButtonClick?: () => void;
-  isReadAllButtonVisible?: boolean;
   isReadAllButtonDisabled?: boolean;
 };
 
 export const NotificationListFooter = ({
   onReadAllButtonClick,
-  isReadAllButtonVisible,
   isReadAllButtonDisabled,
 }: NotificationListFooterProps) => {
-  if (!isReadAllButtonVisible) {
-    return null;
-  }
-
   return (
     <Footer>
       <Tooltip

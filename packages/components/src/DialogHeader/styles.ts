@@ -1,16 +1,14 @@
+import { CSSProperties } from 'react';
+
 import { styled } from '../styles';
 
 type DialogHeaderRootProps = {
   /**
    * @description Если есть заголовок
-   * @type boolean
-   * @default undefined
    */
   hasTitle: boolean;
   /**
    * @description Если есть кнопка закрытия
-   * @type boolean
-   * @default undefined
    * */
   hasOnClose: boolean;
 };
@@ -43,24 +41,8 @@ export const DialogHeaderRoot = styled('div', {
 `;
 
 export type DialogHeaderContentProps = {
-  /**
-   * @description Горизонтальное выравнивание
-   * @type 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
-   * @default 'flex-start'
-   * */
-  justifyContent?:
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly';
-  /**
-   * @description Расстояние между элементами
-   * @type number
-   * @default 2
-   * */
-  spacing?: number;
+  justifyContent: CSSProperties['justifyContent'];
+  columnSpacing: number;
 };
 
 export const DialogHeaderContent = styled('div', {
@@ -69,9 +51,9 @@ export const DialogHeaderContent = styled('div', {
 })<DialogHeaderContentProps>`
   overflow: hidden;
   display: flex;
-  column-gap: ${({ spacing = 2, theme }) => theme.spacing(spacing)};
+  column-gap: ${({ columnSpacing, theme }) => theme.spacing(columnSpacing)};
   align-items: center;
-  justify-content: ${({ justifyContent = 'flex-start' }) => justifyContent};
+  justify-content: ${({ justifyContent }) => justifyContent};
 
   width: 100%;
   height: 100%;

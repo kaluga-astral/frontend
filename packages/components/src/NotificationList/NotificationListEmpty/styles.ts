@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const Container = styled('div')`
+export const NotificationListEmptyContainer = styled('div')`
   display: flex;
   flex-direction: column;
   row-gap: ${({ theme }) => theme.spacing(8)};
@@ -11,6 +11,6 @@ export const Container = styled('div')`
   height: 100%;
 `;
 
-export const Image = styled('img')`
+export const NotificationListEmptyImage = styled('img')`
   max-width: ${({ theme }) => theme.spacing(63)};
 `;

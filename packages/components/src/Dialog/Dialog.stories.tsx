@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { StoryObj } from '@storybook/react';
 
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  Grid,
-  Tag,
-  Typography,
-  styled,
-} from '..';
+import { Button } from '../Button';
+import { DialogActions } from '../DialogActions';
+import { DialogContent } from '../DialogContent';
+import { DialogContentText } from '../DialogContentText';
+import { Grid } from '../Grid';
+import { Tag } from '../Tag';
+import { Typography } from '../Typography';
 import { DialogHeader } from '../DialogHeader';
+import { styled } from '../styles';
 
 import { Dialog } from './Dialog';
 

@@ -6,7 +6,7 @@ import { Notification } from './types';
 
 const notifications: Notification[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Новое сообщение',
     date: '2023-10-30T10:00:00',
     text: 'У вас новое сообщение от пользователя JohnDoe.',
@@ -14,7 +14,7 @@ const notifications: Notification[] = [
     isUnread: true,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Срочное предупреждение',
     date: '2023-10-30T16:00:00',
     text: 'Срочное предупреждение: необходимо изменить пароль к учетной записи.',
@@ -22,7 +22,7 @@ const notifications: Notification[] = [
     isUnread: false,
   },
   {
-    id: 3,
+    id: '3',
     title: 'Уведомление о подписке',
     date: '2023-10-30T20:00:00',
     text: 'Благодарим вас за подписку на нашу рассылку!',
@@ -30,7 +30,7 @@ const notifications: Notification[] = [
     isUnread: false,
   },
   {
-    id: 4,
+    id: '4',
     title: 'Специальное предложение',
     date: '2023-10-31T11:00:00',
     text: 'Только сегодня! Скидка 30% на все тарифы.',
@@ -38,7 +38,7 @@ const notifications: Notification[] = [
     isUnread: true,
   },
   {
-    id: 5,
+    id: '5',
     title: 'Изменение пароля',
     date: '2023-10-31T13:00:00',
     text: 'Ваш пароль был успешно изменен.',
@@ -73,7 +73,7 @@ describe('NotificationList', () => {
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={() => {}}
-        isInitialUnreadOnly={false}
+        initialListType="all"
       />,
     );
 
@@ -91,7 +91,7 @@ describe('NotificationList', () => {
         notifications={notifications}
         unreadNotifications={unreadNotifications}
         onClose={() => {}}
-        isInitialUnreadOnly={false}
+        initialListType="all"
       />,
     );
 
@@ -156,7 +156,7 @@ describe('NotificationList', () => {
 
     expect(deleteButton).toBeVisible();
     await userEvents.click(deleteButton);
-    expect(onDeleteMock.mock.calls[0][0]).toEqual(1);
+    expect(onDeleteMock.mock.calls[0][0]).toEqual('1');
   });
 
   it('Props:actions: отображает кнопку действия', () => {
@@ -166,7 +166,7 @@ describe('NotificationList', () => {
         onClose={() => {}}
         notifications={[
           {
-            id: 1,
+            id: '1',
             title: 'Новое сообщение',
             date: '2023-10-30T10:00:00',
             text: 'У вас новое сообщение от пользователя JohnDoe.',
@@ -190,7 +190,7 @@ describe('NotificationList', () => {
         onClose={() => {}}
         notifications={notifications}
         unreadNotifications={[]}
-        isInitialUnreadOnly
+        initialListType="unread"
       />,
     );
 
@@ -207,7 +207,7 @@ describe('NotificationList', () => {
         isOpen
         onClose={() => {}}
         notifications={[]}
-        isInitialUnreadOnly={false}
+        initialListType="all"
       />,
     );
 
@@ -228,7 +228,7 @@ describe('NotificationList', () => {
       />,
     );
 
-    const notificationListEmptyImg = screen.getByAltText('Нет уведомлений');
+    const notificationListEmptyImg = screen.getByRole('img');
 
     expect(notificationListEmptyImg).toBeVisible();
   });
