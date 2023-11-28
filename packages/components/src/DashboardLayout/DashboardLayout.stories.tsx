@@ -30,7 +30,7 @@ import { SidebarButton } from './Sidebar';
  - [Sidebar (DashboardLayout.Sidebar)](/story/components-dashboardlayout-sidebar--docs)
  - [Main (DashboardLayout.Main)](/story/components-dashboardlayout-main--docs)
  *
- * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=838-13897&mode=design&t=MnwPwkjHLstGGzYg-0)
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=18560-56779&mode=design&t=8TxG2AaAq3NGPnCS-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DashboardLayout> = {
