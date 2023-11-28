@@ -19,16 +19,18 @@ import {
 } from '../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
+import { styled } from '../styles/styled';
 
 import { DashboardLayout } from './DashboardLayout';
 import { SidebarButton } from './Sidebar';
 
 /**
  * DashboardLayout - это компонент, который представляет собой основной макет для дашборда. Может включать:
- - Header (DashboardLayout.Header)
- - Sidebar (DashboardLayout.Sidebar)
- - Main (DashboardLayout.Main)
+ - [Header (DashboardLayout.Header)](/story/components-dashboardlayout-header--docs)
+ - [Sidebar (DashboardLayout.Sidebar)](/story/components-dashboardlayout-sidebar--docs)
+ - [Main (DashboardLayout.Main)](/story/components-dashboardlayout-main--docs)
  *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=838-13897&mode=design&t=MnwPwkjHLstGGzYg-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DashboardLayout> = {
@@ -81,142 +83,152 @@ const Logo = () => {
   );
 };
 
+const DashboardLayoutWrapper = styled.div`
+  width: 100%;
+`;
+
 export const Example = () => {
   return (
-    <DashboardLayout>
-      <DashboardLayout.Header
-        productSwitcher={() => {
-          return (
-            <Box>
-              <ProductSwitcher getProducts={handleGetProducts} />
-            </Box>
-          );
-        }}
-        product={{
-          name: 'Астрал.ЭДО',
-          logo() {
-            return <Logo />;
-          },
-        }}
-        organizationMenu={{
-          currentOrganization: CURRENT_ORGANIZATION,
-          organizations: ORGANIZATIONS,
-          onAddOrganization: () => {},
-          onSelect: () => {},
-        }}
-        profile={{
-          displayName: 'Григорьев Виталий',
-          annotation: 'vitatiy_grig@mail.ru',
-          avatar: {
-            alt: 'Григорьев Виталий',
-            children: 'ГВ',
-          },
-          menu: (props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
-              </MenuItem>
-            </Menu>
-          ),
-        }}
-      />
-      <DashboardLayout.Sidebar
-        header={
-          <SidebarButton startIcon={<AddOutlineMd />}>
-            Добавить документ
-          </SidebarButton>
-        }
-        menu={{
-          items: [
-            [
-              'documents',
-              {
-                icon: <ProfileOutlineMd />,
-                text: 'Документы',
-                items: [
-                  [
-                    'incoming-documents',
-                    {
-                      text: 'Входящие документы',
-                      active: true,
-                      component: forwardRef((props, ref) => {
-                        return (
-                          <RouterLink
-                            ref={ref}
-                            to="/incoming-documents"
-                            {...props}
-                          />
-                        );
-                      }),
-                    },
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return (
+              <Box>
+                <ProductSwitcher getProducts={handleGetProducts} />
+              </Box>
+            );
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          organizationMenu={{
+            currentOrganization: CURRENT_ORGANIZATION,
+            organizations: ORGANIZATIONS,
+            onAddOrganization: () => {},
+            onSelect: () => {},
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            menu: (props) => (
+              <Menu {...props}>
+                <MenuItem>
+                  <ListItemIcon>
+                    <ProfileOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Мой профиль</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                  <ListItemIcon>
+                    <QuitOutlineMd />
+                  </ListItemIcon>
+                  <ListItemText>Выйти</ListItemText>
+                </MenuItem>
+              </Menu>
+            ),
+          }}
+        />
+        <DashboardLayout.Sidebar
+          header={
+            <SidebarButton startIcon={<AddOutlineMd />}>
+              Добавить документ
+            </SidebarButton>
+          }
+          menu={{
+            items: [
+              [
+                'documents',
+                {
+                  icon: <ProfileOutlineMd />,
+                  text: 'Документы',
+                  items: [
+                    [
+                      'incoming-documents',
+                      {
+                        text: 'Входящие документы',
+                        active: true,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/incoming-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                    [
+                      'outgoing-documents',
+                      {
+                        text: 'Исходящие документы',
+                        active: false,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/outgoing-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
                   ],
-                  [
-                    'outgoing-documents',
-                    {
-                      text: 'Исходящие документы',
-                      active: false,
-                      component: forwardRef((props, ref) => {
-                        return (
-                          <RouterLink
-                            ref={ref}
-                            to="/outgoing-documents"
-                            {...props}
-                          />
-                        );
-                      }),
-                    },
+                },
+              ],
+              [
+                'counterparties',
+                {
+                  icon: <ProfileOutlineMd />,
+                  text: 'Контрагенты',
+                  items: [
+                    [
+                      'invitations',
+                      {
+                        text: 'Приглашения',
+                        active: false,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/invitations"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
                   ],
-                ],
-              },
+                },
+              ],
+              [
+                'organizations',
+                {
+                  icon: <CompanyOutlineMd />,
+                  text: 'Мои организации',
+                  active: true,
+                  component: forwardRef((props, ref) => {
+                    return (
+                      <RouterLink ref={ref} to="/organizations" {...props} />
+                    );
+                  }),
+                },
+              ],
             ],
-            [
-              'counterparties',
-              {
-                icon: <ProfileOutlineMd />,
-                text: 'Контрагенты',
-                items: [
-                  [
-                    'invitations',
-                    {
-                      text: 'Приглашения',
-                      active: false,
-                      component: forwardRef((props, ref) => {
-                        return (
-                          <RouterLink ref={ref} to="/invitations" {...props} />
-                        );
-                      }),
-                    },
-                  ],
-                ],
-              },
-            ],
-            [
-              'organizations',
-              {
-                icon: <CompanyOutlineMd />,
-                text: 'Мои организации',
-                active: true,
-                component: forwardRef((props, ref) => {
-                  return (
-                    <RouterLink ref={ref} to="/organizations" {...props} />
-                  );
-                }),
-              },
-            ],
-          ],
-        }}
-      />
-      <DashboardLayout.Main>Main Content</DashboardLayout.Main>
-    </DashboardLayout>
+          }}
+        />
+        <DashboardLayout.Main>Main Content</DashboardLayout.Main>
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
   );
 };

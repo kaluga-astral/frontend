@@ -17,8 +17,9 @@ import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
 
 /**
- * DashboardLayout.Header - данный компонет может включать в себя информацию о продукте(product), переключатель продуктов(productSwitcher), профиль пользователя(profile) и меню организаций(organizationMenu)
+ * DashboardLayout.Header - верхняя часть дашборда
  *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=95-156&mode=design&t=MnwPwkjHLstGGzYg-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DashboardLayout.Header> = {
@@ -51,7 +52,21 @@ const Logo = () => {
   );
 };
 
+const DashboardLayoutWrapper = styled.div`
+  width: 100%;
+`;
+
 export const Interaction: Story = {
+  render: (args) => {
+    return (
+      <DashboardLayoutWrapper>
+        <DashboardLayout>
+          <DashboardLayout.Header {...args} />
+          <DashboardLayout.Sidebar menu={{ items: [] }} />
+        </DashboardLayout>
+      </DashboardLayoutWrapper>
+    );
+  },
   args: {
     productSwitcher: () => {
       return (
@@ -105,11 +120,6 @@ export const Interaction: Story = {
   },
 };
 
-const DashboardLayoutWrapper = styled.div`
-  max-height: 100px;
-  overflow: hidden;
-`;
-
 export const Example = () => {
   return (
     <DashboardLayoutWrapper>
@@ -160,14 +170,12 @@ export const Example = () => {
             ),
           }}
         />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
 };
 
-/**
- * product - содержит информацию о продукте
- */
 export const Product = () => {
   return (
     <DashboardLayoutWrapper>
@@ -180,14 +188,12 @@ export const Product = () => {
             },
           }}
         />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
 };
 
-/**
- * productSwitcher - пропс для переключателя продуктов
- */
 export const ProductSwitcherProps = () => {
   return (
     <DashboardLayoutWrapper>
@@ -207,14 +213,12 @@ export const ProductSwitcherProps = () => {
             },
           }}
         />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
 };
 
-/**
- * profile - содержит информацию о пользователе и меню
- */
 export const Profile = () => {
   return (
     <DashboardLayoutWrapper>
@@ -252,14 +256,12 @@ export const Profile = () => {
             ),
           }}
         />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
 };
 
-/**
- * organizationMenu - меню организаций
- */
 export const OrganizationMenu = () => {
   return (
     <DashboardLayoutWrapper>
@@ -278,6 +280,7 @@ export const OrganizationMenu = () => {
             onSelect: () => {},
           }}
         />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
