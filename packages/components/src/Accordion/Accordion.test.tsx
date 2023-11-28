@@ -8,7 +8,7 @@ import { Typography } from '../Typography';
 import { Accordion } from './Accordion';
 
 describe('Accordion', () => {
-  it('Prop:ref: присутствует', () => {
+  it('Предоставляет доступ к ref', () => {
     const resultRef = { current: null };
 
     const AccordionWithRef = () => {

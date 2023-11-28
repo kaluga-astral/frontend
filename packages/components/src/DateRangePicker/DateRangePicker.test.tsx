@@ -20,7 +20,7 @@ describe('DateRangePicker', () => {
     vi.useRealTimers();
   });
 
-  it('Props:onChange: при выборе даты в пикере в onChange передается объект Date', async () => {
+  it('Передает в onChange объект Date при выборе даты в пикере', async () => {
     const onChangeA = vi.fn();
     const onChangeB = vi.fn();
 
@@ -60,7 +60,7 @@ describe('DateRangePicker', () => {
     );
   });
 
-  it('Props:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
+  it('Не позволяет выбрать дату меньше minDate', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -75,7 +75,7 @@ describe('DateRangePicker', () => {
     expect(btn).toBeDisabled();
   });
 
-  it('Props:minDate: в пикере можно выбрать дату равной minDate', async () => {
+  it('Позволяет  выбрать дату равной minDate', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -90,7 +90,7 @@ describe('DateRangePicker', () => {
     expect(btn).not.toBeDisabled();
   });
 
-  it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
+  it('Позволяет выбрать дату больше maxDate', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -105,7 +105,7 @@ describe('DateRangePicker', () => {
     expect(btn).toBeDisabled();
   });
 
-  it('Props:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
+  it('Позволяет выбрать дату равной maxDate', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -120,7 +120,7 @@ describe('DateRangePicker', () => {
     expect(btn).not.toBeDisabled();
   });
 
-  it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
+  it('Убирает смещение Date, если в value есть смещение', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{
@@ -138,7 +138,7 @@ describe('DateRangePicker', () => {
     expect(selected).toBeTruthy();
   });
 
-  it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
+  it('Помечает в календаре активную дату как выбранную', async () => {
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
     };
@@ -172,7 +172,7 @@ describe('DateRangePicker', () => {
     expect(selected).toBeTruthy();
   });
 
-  it('В состоянии управляемого компонента, пикер закрывается при выборе обоих дат', async () => {
+  it('Закрывает пикер при выборе обоих дат, в состоянии управляемого компонента', async () => {
     const TestComponent = () => {
       const [valueA, setValueA] = useState<Date | undefined>();
       const [valueB, setValueB] = useState<Date | undefined>();
@@ -209,7 +209,7 @@ describe('DateRangePicker', () => {
     expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
   });
 
-  it('Props:onBlur: вызывается при фокусе на стороннем элементе', async () => {
+  it('Вызывает onBlur при фокусе на стороннем элементе', async () => {
     const onBlur = vi.fn();
 
     renderWithTheme(
@@ -225,7 +225,7 @@ describe('DateRangePicker', () => {
     expect(onBlur).toBeCalled();
   });
 
-  it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {
+  it('Не вызывает onBlur при клике мимо инпута, если поповер закрыт', async () => {
     const onBlur = vi.fn();
 
     renderWithTheme(<DateRangePicker onBlur={onBlur} />);

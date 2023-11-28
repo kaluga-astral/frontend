@@ -5,7 +5,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { CheckableTag } from './CheckableTag';
 
 describe('CheckableTag', () => {
-  it('Prop:ref: присутствует', () => {
+  it('Предоставляет доступ к ref', () => {
     const resultRef = { current: null };
 
     const CheckableTagWithRef = () => {

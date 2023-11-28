@@ -7,7 +7,7 @@ import { Typography } from '../Typography';
 import { CollapsableAlert } from './CollapsableAlert';
 
 describe('CollapsableAlert', () => {
-  it('Prop:ref: присутствует', () => {
+  it('Предоставляет доступ к ref', () => {
     const resultRef = { current: null };
 
     const CollapsableAlertWithRef = () => {
