@@ -20,6 +20,7 @@ type Story = StoryObj<typeof CodeField>;
 export const Interaction: Story = {
   args: {
     label: 'Код подтверждения отправлен на test@test.ru',
+    codeLength: 6,
   },
   parameters: {
     docs: {
@@ -34,6 +35,7 @@ export const Example = () => (
   <>
     <br />
     <CodeField
+      codeLength={6}
       label="Код подтверждения отправлен на test@test.ru"
       onResendCode={() => Promise.resolve()}
     />
@@ -47,6 +49,7 @@ export const Error = () => (
     </Typography>
     <div>
       <CodeField
+        codeLength={6}
         isError={true}
         onResendCode={() => Promise.resolve()}
         initialValue={TEST_VALUE}
@@ -61,6 +64,7 @@ export const Error = () => (
     </Typography>
     <div>
       <CodeField
+        codeLength={6}
         isError={true}
         errorText="Код подтверждения неверный"
         onResendCode={() => Promise.resolve()}
@@ -73,6 +77,7 @@ export const Error = () => (
 export const Disabled = () => (
   <>
     <CodeField
+      codeLength={6}
       label="Код подтверждения отправлен на test@test.ru"
       disabled={true}
       onResendCode={() => Promise.resolve()}
@@ -84,6 +89,7 @@ export const Disabled = () => (
 export const Loading = () => (
   <>
     <CodeField
+      codeLength={6}
       label="Код подтверждения отправлен на test@test.ru"
       loading={true}
       onResendCode={() => Promise.resolve()}
@@ -94,7 +100,7 @@ export const Loading = () => (
 
 export const WithoutRestartButton = () => (
   <>
-    <CodeField loading={true} initialValue={TEST_VALUE} />
+    <CodeField codeLength={6} loading={true} initialValue={TEST_VALUE} />
   </>
 );
 

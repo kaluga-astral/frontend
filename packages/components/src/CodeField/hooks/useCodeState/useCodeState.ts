@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { ClipboardEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import { CodeFieldInputType } from '../../types';
 import { formatInitialValue } from '../../utils';
@@ -12,9 +12,8 @@ export const useCodeState = (
   setBlur: () => void,
   onFieldChange?: (value: string) => void,
   onComplete?: (value: string) => void,
-  disabled?: boolean,
 ) => {
-  const [codeValue, setCodeValue] = useState<CodeFieldInputType[]>(
+  const [codeValue, setCodeValue] = useState<CodeFieldInputType[]>(() =>
     formatInitialValue(codeLength, initialValue),
   );
 
@@ -39,55 +38,39 @@ export const useCodeState = (
   }, [codeValue]);
 
   const deletePreviousSymbol = (index: number) => {
+    // если фокус на заполненном инпуте, то очищаем его;
+    // если фокус на пустом инпуте, то очищаем предыдущий инпут.
+    const deleteIndex = codeValue[index]?.toString() ? index : index - 1;
+
     let newCodeValue = [...codeValue];
 
-    if (codeValue[index]?.toString()) {
-      newCodeValue[index] = '';
-      setCodeValue(newCodeValue);
-    } else if (codeValue[index - 1]?.toString()) {
-      newCodeValue[index - 1] = '';
-      setCodeValue(newCodeValue);
-      setFocusIndexPrevious(index);
-    }
+    newCodeValue[deleteIndex] = '';
+    setCodeValue(newCodeValue);
   };
 
-  const onChange = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
-    const newValue = parseInt(e.key);
+  const changeValue = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+    // если поле кода пустое, всегда начинаем ввод с первого инпута
+    const inputIndex = isCodeValueEmpty() ? 0 : index;
 
-    // @ts-ignore
-    e.target.value = newValue;
+    let newCodeValue = [...codeValue];
 
-    setCodeValue((preValue: CodeFieldInputType[]) => {
-      let newCodeValue = [...preValue];
-
-      if (isCodeValueEmpty()) {
-        // всегда начинаем ввод кода с 1го инпута, если поле пустое
-        newCodeValue[0] = newValue;
-        setFocusIndexNext(0);
-      } else {
-        newCodeValue[index] = newValue;
-        setFocusIndexNext(index);
-      }
-
-      return newCodeValue;
-    });
+    newCodeValue[inputIndex] = parseInt(e.key);
+    setCodeValue(newCodeValue);
+    setFocusIndexNext(inputIndex);
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     switch (e.key) {
       case KEYBOARD_KEYS.moveCaretLeft:
         setFocusIndexPrevious(index);
-        e.preventDefault();
 
         break;
       case KEYBOARD_KEYS.moveCaretRight:
         setFocusIndexNext(index);
-        e.preventDefault();
 
         break;
       case KEYBOARD_KEYS.backspace:
         deletePreviousSymbol(index);
-        e.preventDefault();
 
         break;
     }
@@ -98,18 +81,15 @@ export const useCodeState = (
 
     if (e.key === KEYBOARD_KEYS.backspace) {
       setFocusIndexPrevious(index);
-    } else if (keyCode >= 0 && keyCode <= 9) {
-      onChange(e, index);
+    } else if (
+      keyCode >= KEYBOARD_KEYS.startDigit &&
+      keyCode <= KEYBOARD_KEYS.endDigit
+    ) {
+      changeValue(e, index);
     }
   };
 
-  const onPaste = (event: ClipboardEvent) => {
-    event.preventDefault();
-
-    if (disabled) {
-      return;
-    }
-
+  const onPaste = (event: ClipboardEvent<HTMLInputElement>) => {
     let pasteText: string = event.clipboardData?.getData('text') || '';
 
     // оставляем только цифры + отсекаем лишние символы, если их кол-во больше, чем символов в коде
@@ -119,17 +99,20 @@ export const useCodeState = (
       .split('');
 
     if (cleanedValue.length === 0) {
+      // если вставлена пустота, очищаем значение
+      setCodeValue(Array.from({ length: codeLength }));
+
       return;
     }
 
     const newCodeValue = cleanedValue.map((num) => Number(num));
 
+    // если длина вставленного кода меньше, чем кол-во символов в коде,
+    // устанавливаем фокус на элемент, следующий за последним встравленным
     if (newCodeValue.length < codeValue.length) {
-      const lastIndexOfCode = codeLength - 1;
-
       setCodeValue([
         ...newCodeValue,
-        ...codeValue.slice(newCodeValue.length - 1, lastIndexOfCode),
+        ...codeValue.slice(newCodeValue.length - 1, codeLength - 1),
       ]);
 
       setFocusIndexNext(newCodeValue.length - 1);
@@ -139,13 +122,5 @@ export const useCodeState = (
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('paste', onPaste);
-
-    return () => {
-      document.removeEventListener('paste', onPaste);
-    };
-  }, []);
-
-  return { codeValue, onKeyUp, onKeyDown };
+  return { codeValue, onKeyUp, onKeyDown, onPaste };
 };

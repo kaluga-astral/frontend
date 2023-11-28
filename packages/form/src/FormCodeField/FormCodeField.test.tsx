@@ -22,7 +22,7 @@ describe('FormTextField', () => {
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormCodeField name="code" control={form.control} />
+          <FormCodeField codeLength={6} name="code" control={form.control} />
           <button type="submit">submit</button>
         </Form>
       );

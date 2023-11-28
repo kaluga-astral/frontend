@@ -6,7 +6,7 @@ export const CodeFieldWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const CodeFieldDigitsWrapper = styled.div`
+export const CodeFieldDigitsWrapper = styled.ul`
   display: flex;
   gap: 12px;
 `;

@@ -1,5 +1,3 @@
-export const CODE_LENGTH_DEFAULT = 6;
-
 export const RESEND_TIMEOUT_DEFAULT = 60;
 
 export const ERROR_TEXT_DEFAULT = 'Код подтверждения недействителен';
@@ -12,4 +10,6 @@ export const KEYBOARD_KEYS = {
   moveCaretRight: 'ArrowRight',
   arrowUp: 'ArrowUp',
   arrowDown: 'ArrowDown',
+  startDigit: 0,
+  endDigit: 9,
 };

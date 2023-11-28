@@ -4,9 +4,10 @@ import { describe, expect, it } from 'vitest';
 import { CodeField } from './CodeField';
 
 describe('CodeField', () => {
-  it('Prop:codeLength: задает кол-во символов', () => {
-    const TEST_LENGTH = 10;
+  const TEST_LENGTH = 6;
+  const TEST_FOCUS_FIELD = 4;
 
+  it('Prop:codeLength: задает кол-во символов', () => {
     renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
 
     const fields = screen.getAllByRole('textbox');
@@ -16,7 +17,12 @@ describe('CodeField', () => {
 
   it('Prop:disabled: блокирует поле', () => {
     renderWithTheme(
-      <CodeField disabled onResendCode={() => Promise.resolve()} />,
+      <CodeField
+        codeLength={TEST_LENGTH}
+        disabled
+        onResendCode={() => Promise.resolve()}
+        isAllowResendCode
+      />,
     );
 
     const fields = screen.getAllByRole('textbox');
@@ -29,7 +35,12 @@ describe('CodeField', () => {
 
   it('Prop:loading: блокирует поле', () => {
     renderWithTheme(
-      <CodeField loading onResendCode={() => Promise.resolve()} />,
+      <CodeField
+        codeLength={TEST_LENGTH}
+        loading
+        onResendCode={() => Promise.resolve()}
+        isAllowResendCode
+      />,
     );
 
     const fields = screen.getAllByRole('textbox');
@@ -41,7 +52,13 @@ describe('CodeField', () => {
   });
 
   it('Prop:time: пока timer > 0, кнопка повторной отправки кода неактивна', () => {
-    renderWithTheme(<CodeField onResendCode={() => Promise.resolve()} />);
+    renderWithTheme(
+      <CodeField
+        codeLength={TEST_LENGTH}
+        onResendCode={() => Promise.resolve()}
+        isAllowResendCode
+      />,
+    );
 
     const resendButton = screen.getByRole('button');
 
@@ -50,7 +67,12 @@ describe('CodeField', () => {
 
   it('Prop:time: когда timer = 0, кнопка повторной отправки кода активна', () => {
     renderWithTheme(
-      <CodeField resendTimeout={0} onResendCode={() => Promise.resolve()} />,
+      <CodeField
+        codeLength={TEST_LENGTH}
+        resendTimeout={0}
+        onResendCode={() => Promise.resolve()}
+        isAllowResendCode
+      />,
     );
 
     const resendButton = screen.getByRole('button');
@@ -59,7 +81,9 @@ describe('CodeField', () => {
   });
 
   it('backspace: удаляет символ в текущием поле (при наличии)', async () => {
-    renderWithTheme(<CodeField initialValue="123456" />);
+    renderWithTheme(
+      <CodeField codeLength={TEST_LENGTH} initialValue="123456" />,
+    );
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
@@ -78,7 +102,11 @@ describe('CodeField', () => {
 
   it('backspace: удаляет символ в предыдущем поле (при отсутвии в текущем поле)', async () => {
     renderWithTheme(
-      <CodeField initialValue="1234" onResendCode={() => Promise.resolve()} />,
+      <CodeField
+        codeLength={TEST_LENGTH}
+        initialValue="1234"
+        onResendCode={() => Promise.resolve()}
+      />,
     );
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
@@ -97,9 +125,7 @@ describe('CodeField', () => {
   });
 
   it('Нажатие стрелки вправо -> переводит фокус в соседнее поле справа', async () => {
-    const TEST_FOCUS_FIELD = 4;
-
-    renderWithTheme(<CodeField />);
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
 
     const fields = screen.getAllByRole('textbox');
 
@@ -109,9 +135,7 @@ describe('CodeField', () => {
   });
 
   it('Нажатие стрелки влево <- переводит фокус в соседнее поле слева', async () => {
-    const TEST_FOCUS_FIELD = 4;
-
-    renderWithTheme(<CodeField />);
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
 
     const fields = screen.getAllByRole('textbox');
 
@@ -121,9 +145,7 @@ describe('CodeField', () => {
   });
 
   it('Для ввода доступны только арабские цифры', async () => {
-    const TEST_FOCUS_FIELD = 4;
-
-    renderWithTheme(<CodeField />);
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
@@ -135,10 +157,11 @@ describe('CodeField', () => {
   it('cntl+v: вставка в поле обрезает все, кроме цифр', async () => {
     const TEST_VALUE = 'test123t4t56';
 
-    renderWithTheme(<CodeField />);
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} isAllowResendCode />);
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
     await userEvents.paste(TEST_VALUE);
 
     expect(fields.map((item) => item.value)).toStrictEqual([

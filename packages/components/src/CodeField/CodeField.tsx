@@ -9,11 +9,7 @@ import {
   CodeFieldWrapper,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
-import {
-  CODE_LENGTH_DEFAULT,
-  ERROR_TEXT_DEFAULT,
-  RESEND_TIMEOUT_DEFAULT,
-} from './constants';
+import { ERROR_TEXT_DEFAULT, RESEND_TIMEOUT_DEFAULT } from './constants';
 import { useCodeState, useFocusIndex } from './hooks';
 
 export type CodeFieldProps = {
@@ -28,7 +24,11 @@ export type CodeFieldProps = {
   /**
    * @description Кол-во символов в поле кода
    */
-  codeLength?: number;
+  codeLength: number;
+  /**
+   * @description Если true, показывается кнопка переотправки с таймером
+   */
+  isAllowResendCode?: boolean;
   /**
    * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
@@ -63,12 +63,16 @@ export type CodeFieldProps = {
   onComplete?: (value: string) => void;
 };
 
+/**
+ * @description Поле для ввода кода подтвеждения
+ */
 export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
   (
     {
       label,
       resendTimeout = RESEND_TIMEOUT_DEFAULT,
-      codeLength = CODE_LENGTH_DEFAULT,
+      codeLength,
+      isAllowResendCode = false,
       onResendCode,
       initialValue,
       loading = false,
@@ -83,7 +87,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
       useFocusIndex(codeLength);
 
-    const { codeValue, onKeyDown, onKeyUp } = useCodeState(
+    const { codeValue, onKeyDown, onKeyUp, onPaste } = useCodeState(
       initialValue,
       codeLength,
       setFocusIndexNext,
@@ -91,7 +95,6 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       setBlur,
       onFieldChange,
       onComplete,
-      disabled,
     );
 
     const setRef = (index: number) => (el: HTMLInputElement) =>
@@ -103,7 +106,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
         <CodeFieldDigitsWrapper>
           {codeValue.map((value, index) => (
             <CodeFieldDigit
-              type="tel"
+              type="text"
               inputMode="numeric"
               pattern="[0-9]"
               key={index}
@@ -113,11 +116,12 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
               onKeyUp={(e) => onKeyUp(e, index)}
               onKeyDown={(e) => onKeyDown(e, index)}
               isError={isError}
+              onPaste={(e) => !disabled && !loading && onPaste(e)}
             />
           ))}
         </CodeFieldDigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
-        {onResendCode && (
+        {isAllowResendCode && (
           <ResendCodeButton
             resendTimeout={resendTimeout}
             disabled={disabled}

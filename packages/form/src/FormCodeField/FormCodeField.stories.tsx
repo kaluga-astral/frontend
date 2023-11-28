@@ -45,7 +45,7 @@ export const Example = () => {
   return (
     <Form form={form} onSubmit={handleSubmit}>
       <Grid container spacing={2}>
-        <FormCodeField name="code" control={form.control} />
+        <FormCodeField codeLength={6} name="code" control={form.control} />
         <FormSubmitButton>Сохранить</FormSubmitButton>
       </Grid>
     </Form>

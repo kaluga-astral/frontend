@@ -27,7 +27,7 @@ type ResendCodeButtonProps = {
   /**
    * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
-  onResendCode: () => Promise<void>;
+  onResendCode?: () => Promise<void>;
 };
 
 const ResendCodeButton = ({
@@ -46,11 +46,13 @@ const ResendCodeButton = ({
   const onClick = () => {
     setResendCodeLoading(true);
 
-    onResendCode()
-      .then(() => {
-        restartTimer(resendTimeout);
-      })
-      .finally(() => setResendCodeLoading(false));
+    if (onResendCode) {
+      onResendCode()
+        .then(() => {
+          restartTimer(resendTimeout);
+        })
+        .finally(() => setResendCodeLoading(false));
+    }
   };
 
   return (
