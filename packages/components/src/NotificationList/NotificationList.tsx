@@ -1,9 +1,7 @@
-import { useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 
-import noNotificationsIllustration from '../../../ui/illustrations/no-notifications.svg';
-import errorIllustration from '../../../ui/illustrations/error.svg';
 import { ContentState } from '../ContentState';
-import { ConfigProvider } from '../ConfigProvider';
+import { ConfigContext } from '../ConfigProvider';
 
 import { NotificationListItem } from './NotificationListItem';
 import { NotificationListTabs } from './NotificationListTabs';
@@ -39,7 +37,6 @@ export type NotificationListProps = {
    * @description Сообщение об ошибке
    * */
   errorMessage?: string;
-
   /**
    * @description список уведомлений
    * */
@@ -48,10 +45,6 @@ export type NotificationListProps = {
    * @description список непрочитанных уведомлений
    * */
   unreadNotifications?: Notification[];
-  /**
-   * @description источник изображения для отображения при отсутствии уведомлений
-   * */
-  noDataImgSrc?: string;
   /**
    * @description свойство определяет, какие уведомления выводить при открытии списка, все/непрочитанные
    * */
@@ -103,7 +96,6 @@ export const NotificationList = ({
   errorMessage,
   notifications,
   unreadNotifications,
-  noDataImgSrc,
   initialListType = 'all',
   headerContent,
   isReadAllButtonVisible = true,
@@ -115,6 +107,7 @@ export const NotificationList = ({
   onTabChange,
   onRetry,
 }: NotificationListProps) => {
+  const { imagesMap } = useContext(ConfigContext);
   const [listType, setListType] =
     useState<NotificationListType>(initialListType);
   const viewedIds = useRef(new Set<string>());
@@ -177,7 +170,7 @@ export const NotificationList = ({
     return (
       <NotificationListEmpty
         listType={listType}
-        noDataImgSrc={noDataImgSrc || noNotificationsIllustration}
+        noDataImgSrc={imagesMap.noDataImgSrc}
       />
     );
   };
@@ -194,28 +187,26 @@ export const NotificationList = ({
           <NotificationListSettingsButton onClick={onSettingsButtonClick} />
         )}
       </NotificationListHeader>
-      <ConfigProvider>
-        <ContentState
-          isLoading={isLoading}
-          isError={isError}
-          errorState={{
-            imgAlt: '',
-            errorList: [errorMessage || ''],
-            onRetry: handleRetry,
-            imgSrc: errorIllustration,
-          }}
-        >
-          {unreadNotifications && (
-            <NotificationListTabs
-              onChange={handleTabChange}
-              listType={listType}
-              notificationsCount={notifications.length}
-              unreadNotificationsCount={unreadNotifications?.length || 0}
-            />
-          )}
-          {renderContent()}
-        </ContentState>
-      </ConfigProvider>
+      <ContentState
+        isLoading={isLoading}
+        isError={isError}
+        errorState={{
+          imgAlt: '',
+          errorList: [errorMessage || ''],
+          onRetry: handleRetry,
+          imgSrc: imagesMap.defaultErrorImgSrc,
+        }}
+      >
+        {unreadNotifications && (
+          <NotificationListTabs
+            onChange={handleTabChange}
+            listType={listType}
+            notificationsCount={notifications.length}
+            unreadNotificationsCount={unreadNotifications?.length || 0}
+          />
+        )}
+        {renderContent()}
+      </ContentState>
     </NotificationListDialog>
   );
 };

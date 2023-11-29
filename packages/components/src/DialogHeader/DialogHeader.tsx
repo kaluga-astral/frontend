@@ -13,9 +13,9 @@ export type DialogHeaderProps = {
    * */
   justifyContent?: CSSProperties['justifyContent'];
   /**
-   * @description Расстояние между элементами, обернутыми в DialogHeader
+   * @description Убирает расстояние между компонентами
    * */
-  spacing?: number;
+  disableSpacing?: boolean;
   /**
    * @description Заголовок
    */
@@ -31,7 +31,7 @@ export const DialogHeader = ({
   children,
   title,
   justifyContent = 'flex-start',
-  spacing = 2,
+  disableSpacing,
   onClose,
 }: DialogHeaderProps) => {
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +45,7 @@ export const DialogHeader = ({
       {title && <Typography variant="h4">{title}</Typography>}
       <DialogHeaderContent
         justifyContent={justifyContent}
-        columnSpacing={spacing}
+        columnSpacing={disableSpacing ? 0 : 2}
       >
         {children}
       </DialogHeaderContent>

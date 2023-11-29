@@ -3,10 +3,12 @@ import { Meta, StoryObj } from '@storybook/react';
 import { BellFillMd } from '@astral/icons';
 
 import noNotificationsIllustration from '../../../ui/illustrations/no-notifications.svg';
+import errorIllustration from '../../../ui/illustrations/error.svg';
 import { IconButton } from '../IconButton';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Tag } from '../Tag';
+import { ConfigProvider } from '../ConfigProvider';
 
 import { NotificationList } from './NotificationList';
 import { Notification } from './types';
@@ -132,13 +134,28 @@ export const Interaction: Story = {
     isOpen: true,
     notifications: data,
     unreadNotifications: data.filter((notification) => notification.isUnread),
-    noDataImgSrc: noNotificationsIllustration,
   },
   parameters: {
     docs: {
       disable: true,
     },
   },
+};
+
+const NotificationWidget = ({
+  notificationsCount,
+  onClick,
+}: {
+  notificationsCount: number;
+  onClick: () => void;
+}) => {
+  return (
+    <Badge badgeContent={notificationsCount} color="error" variant="standard">
+      <IconButton variant="light" onClick={onClick}>
+        <BellFillMd />
+      </IconButton>
+    </Badge>
+  );
 };
 
 export const Notifications = () => {
@@ -186,27 +203,30 @@ export const Notifications = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={unreadNotifications.length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={notifications}
-        onClose={handleClose}
-        onReadAll={handleReadAll}
-        onDelete={handleDelete}
-        initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
-        onSettingsButtonClick={() => {
-          console.log('onSettingsButtonClick');
-        }}
+      <NotificationWidget
+        notificationsCount={unreadNotifications.length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          onClose={handleClose}
+          onReadAll={handleReadAll}
+          onDelete={handleDelete}
+          initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+          onSettingsButtonClick={() => {
+            console.log('onSettingsButtonClick');
+          }}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -254,23 +274,26 @@ export const UnreadNotifications = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={notifications.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={notifications}
-        unreadNotifications={unreadNotifications}
-        onClose={handleClose}
-        onReadAll={handleReadAll}
+      <NotificationWidget
+        notificationsCount={notifications.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          unreadNotifications={unreadNotifications}
+          onClose={handleClose}
+          onReadAll={handleReadAll}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -288,29 +311,32 @@ export const Title = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={data}
-        onClose={handleClose}
-        title="Сообщения"
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={data}
+          onClose={handleClose}
+          title="Сообщения"
+        />
+      </ConfigProvider>
     </>
   );
 };
 
 /**
- *В компоненте есть логика чтения уведомлений, если сообщение полностью попало во viewport, то оно считается прочитанным.
- *При вызове onClose передаются id уведомлений, которые были прочитаны.
+ *В компоненте есть логика прочтения уведомлений, если сообщение полностью попало во viewport, то оно считается прочитанным.
+ *При вызове ```onClose``` передаются id уведомлений, которые были прочитаны.
  */
 export const OnClose = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -342,24 +368,26 @@ export const OnClose = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={unreadNotifications.length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={notifications}
-        unreadNotifications={unreadNotifications}
-        onClose={handleClose}
-        noDataImgSrc={noNotificationsIllustration}
-        initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+      <NotificationWidget
+        notificationsCount={unreadNotifications.length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          unreadNotifications={unreadNotifications}
+          onClose={handleClose}
+          initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -408,24 +436,26 @@ export const Actions = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={unreadNotifications.length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={notifications}
-        unreadNotifications={unreadNotifications}
-        onClose={handleClose}
-        noDataImgSrc={noNotificationsIllustration}
-        initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+      <NotificationWidget
+        notificationsCount={unreadNotifications.length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          unreadNotifications={unreadNotifications}
+          onClose={handleClose}
+          initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -473,29 +503,31 @@ export const HeaderContent = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={unreadNotifications.length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={notifications}
-        unreadNotifications={unreadNotifications}
-        onClose={handleClose}
-        noDataImgSrc={noNotificationsIllustration}
-        initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
-        onSettingsButtonClick={() => {}}
-        onReadAll={handleReadAll}
-        headerContent={
-          <Tag label="Важный тэг" variant="contained" color="error" />
-        }
+      <NotificationWidget
+        notificationsCount={unreadNotifications.length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          unreadNotifications={unreadNotifications}
+          onClose={handleClose}
+          initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
+          onSettingsButtonClick={() => {}}
+          onReadAll={handleReadAll}
+          headerContent={
+            <Tag label="Важный тэг" variant="contained" color="error" />
+          }
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -516,23 +548,25 @@ export const InitialListType = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={data}
-        unreadNotifications={data.filter((n) => n.isUnread)}
-        initialListType="all"
-        onClose={handleClose}
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={data}
+          unreadNotifications={data.filter((n) => n.isUnread)}
+          initialListType="all"
+          onClose={handleClose}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -550,33 +584,45 @@ export const IsLoading = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        isLoading
-        notifications={data}
-        unreadNotifications={data.filter((n) => n.isUnread)}
-        initialListType="all"
-        onClose={handleClose}
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          isLoading
+          notifications={data}
+          unreadNotifications={data.filter((n) => n.isUnread)}
+          initialListType="all"
+          onClose={handleClose}
+        />
+      </ConfigProvider>
     </>
   );
 };
 
 export const IsError = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleClick = () => {
     setIsOpen(true);
+    setIsLoading(true);
+    setError('');
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setError('Сообщения не получены');
+    }, 1000);
   };
 
   const handleClose = () => {
@@ -585,25 +631,29 @@ export const IsError = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        isError
-        errorMessage="Сообщения не получены"
-        notifications={data}
-        unreadNotifications={data.filter((n) => n.isUnread)}
-        initialListType="all"
-        onClose={handleClose}
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          isError={Boolean(error)}
+          isLoading={isLoading}
+          errorMessage={error}
+          notifications={data}
+          unreadNotifications={data.filter((n) => n.isUnread)}
+          initialListType="all"
+          onClose={handleClose}
+          onRetry={handleClick}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -624,24 +674,26 @@ export const IsReadAllButtonVisible = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={data}
-        unreadNotifications={data.filter((n) => n.isUnread)}
-        initialListType="all"
-        onClose={handleClose}
-        isReadAllButtonVisible={false}
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={data}
+          unreadNotifications={data.filter((n) => n.isUnread)}
+          initialListType="all"
+          onClose={handleClose}
+          isReadAllButtonVisible={false}
+        />
+      </ConfigProvider>
     </>
   );
 };
@@ -662,24 +714,26 @@ export const IsSettingsButtonVisible = () => {
 
   return (
     <>
-      <Badge
-        badgeContent={data.filter((n) => n.isUnread).length}
-        color="error"
-        variant="standard"
-      >
-        <IconButton variant="light" onClick={handleClick}>
-          <BellFillMd />
-        </IconButton>
-      </Badge>
-
-      <NotificationList
-        isOpen={isOpen}
-        notifications={data}
-        unreadNotifications={data.filter((n) => n.isUnread)}
-        initialListType="all"
-        onClose={handleClose}
-        isSettingsButtonVisible={false}
+      <NotificationWidget
+        notificationsCount={data.filter((n) => n.isUnread).length}
+        onClick={handleClick}
       />
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={data}
+          unreadNotifications={data.filter((n) => n.isUnread)}
+          initialListType="all"
+          onClose={handleClose}
+          isSettingsButtonVisible={false}
+        />
+      </ConfigProvider>
     </>
   );
 };

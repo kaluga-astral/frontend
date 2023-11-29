@@ -217,19 +217,4 @@ describe('NotificationList', () => {
 
     expect(notificationListEmptyText).toBeVisible();
   });
-
-  it('Props:noDataImgSrc: отображает картинку', async () => {
-    renderWithTheme(
-      <NotificationList
-        isOpen
-        onClose={() => {}}
-        notifications={[]}
-        noDataImgSrc="noDataImgSrc"
-      />,
-    );
-
-    const notificationListEmptyImg = screen.getByRole('img');
-
-    expect(notificationListEmptyImg).toBeVisible();
-  });
 });
