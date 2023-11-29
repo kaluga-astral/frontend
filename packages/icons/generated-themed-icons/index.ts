@@ -1,5 +1,9 @@
 export { default as AddOutlineMd } from './AddOutlineMd';
 
+export { default as AddCertOutlineMd } from './AddCertOutlineMd';
+
+export { default as AddOrgOutlineMd } from './AddOrgOutlineMd';
+
 export { default as AllCheckOutlineMd } from './AllCheckOutlineMd';
 
 export { default as AnalyticOutlineMd } from './AnalyticOutlineMd';
@@ -9,6 +13,8 @@ export { default as ArchiveOutlineMd } from './ArchiveOutlineMd';
 export { default as ArrowLOutlineMd } from './ArrowLOutlineMd';
 
 export { default as ArrowROutlineLg } from './ArrowROutlineLg';
+
+export { default as ArrowROutlineMd } from './ArrowROutlineMd';
 
 export { default as BasketOutlineMd } from './BasketOutlineMd';
 
