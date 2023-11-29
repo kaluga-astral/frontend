@@ -56,6 +56,8 @@ export { default as CircleErrorFillMd } from './CircleErrorFillMd';
 
 export { default as ClassmatesFillMd } from './ClassmatesFillMd';
 
+export { default as ClockOutlineMd } from './ClockOutlineMd';
+
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
 
 export { default as CompanyOutlineMd } from './CompanyOutlineMd';
@@ -117,6 +119,8 @@ export { default as FilterOutlineMd } from './FilterOutlineMd';
 export { default as FolderClOutlineMd } from './FolderClOutlineMd';
 
 export { default as FolderOpOutlineMd } from './FolderOpOutlineMd';
+
+export { default as HistoryOutlineMd } from './HistoryOutlineMd';
 
 export { default as HomeOutlineMd } from './HomeOutlineMd';
 
