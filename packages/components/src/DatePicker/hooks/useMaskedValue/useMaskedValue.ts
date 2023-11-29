@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { formatDate, isDate, parseDate } from '../../../utils/date';
+import { ConfigContext } from '../../../ConfigProvider';
 
 type Params = {
   currentValue?: Date;
@@ -34,12 +35,24 @@ export const useMaskedValue = ({
   mask,
   onChangeValue,
 }: Params): Returned => {
+  const { captureException } = useContext(ConfigContext);
+
   const [maskedValue, setMaskedValue] = useState<string>(() =>
     currentValue ? formatDate(currentValue, mask) : '',
   );
 
   const handleMaskedValueChange = (value: string) => {
     setMaskedValue(value);
+
+    // если maskedValue не является валидным Date, то игнорируем его
+    if (!isDate(parseDate(value, mask))) {
+      const errorText = `maskedValue ${value} не является валидным Date`;
+
+      console.error(errorText);
+      captureException(errorText);
+
+      return;
+    }
 
     // parseDate вернет Invalid Date при undefined. А нам надо undefined
     if (!value) {
