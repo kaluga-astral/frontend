@@ -38,6 +38,7 @@ export const Example = () => (
       codeLength={6}
       label="Код подтверждения отправлен на test@test.ru"
       onResendCode={() => Promise.resolve()}
+      isAllowResendCode
     />
   </>
 );
@@ -53,6 +54,7 @@ export const Error = () => (
         isError={true}
         onResendCode={() => Promise.resolve()}
         initialValue={TEST_VALUE}
+        isAllowResendCode
       />
     </div>
 
@@ -69,6 +71,7 @@ export const Error = () => (
         errorText="Код подтверждения неверный"
         onResendCode={() => Promise.resolve()}
         initialValue={TEST_VALUE}
+        isAllowResendCode
       />
     </div>
   </div>
@@ -82,6 +85,7 @@ export const Disabled = () => (
       disabled={true}
       onResendCode={() => Promise.resolve()}
       initialValue={TEST_VALUE}
+      isAllowResendCode
     />
   </>
 );
@@ -94,6 +98,7 @@ export const Loading = () => (
       loading={true}
       onResendCode={() => Promise.resolve()}
       initialValue={TEST_VALUE}
+      isAllowResendCode
     />
   </>
 );

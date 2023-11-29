@@ -1,5 +1,5 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { CodeField } from './CodeField';
 
@@ -157,7 +157,7 @@ describe('CodeField', () => {
   it('cntl+v: вставка в поле обрезает все, кроме цифр', async () => {
     const TEST_VALUE = 'test123t4t56';
 
-    renderWithTheme(<CodeField codeLength={TEST_LENGTH} isAllowResendCode />);
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
 
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
@@ -172,5 +172,55 @@ describe('CodeField', () => {
       '5',
       '6',
     ]);
+  });
+
+  it('cntl+v: при вставке кода длинной, равной кол-ву символов в коде, фокус снимается с элементов', async () => {
+    const TEST_VALUE = '123456';
+
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.paste(TEST_VALUE);
+    fields.map((item) => expect(item).not.toHaveFocus());
+  });
+
+  it('cntl+v: при вставке кода длинной, меньше кол-ва символов в коде, фокус на следующем элементе', async () => {
+    const TEST_VALUE = '123';
+
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.paste(TEST_VALUE);
+    expect(fields[TEST_VALUE.length]).toHaveFocus();
+  });
+
+  it('Prop:onComplete: срабатывает при заполнении поля', async () => {
+    const onComplete = vi.fn();
+
+    renderWithTheme(
+      <CodeField codeLength={TEST_LENGTH} onComplete={onComplete} />,
+    );
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    await userEvents.keyboard('12345');
+    expect(onComplete).not.toBeCalled();
+    await userEvents.keyboard('6');
+    expect(onComplete).toBeCalled();
+  });
+
+  it('Если поле кода пустое, всегда начинаем ввод с первого инпута', async () => {
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[5]);
+    await userEvents.keyboard('1');
+    expect(fields[1]).toHaveFocus();
   });
 });
