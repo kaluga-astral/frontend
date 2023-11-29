@@ -1,9 +1,9 @@
-import { ClickAwayListener, PopoverProps } from '@mui/material';
+import { ClickAwayListener, type PopoverProps } from '@mui/material';
 import { forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
 import { Menu } from '../Menu';
-import { Button, ButtonProps } from '../Button';
+import { Button, type ButtonProps } from '../Button';
 import { Chevron } from '../Chevron';
 
 export type DropdownButtonProps = Omit<ButtonProps, 'endIcon'> & {

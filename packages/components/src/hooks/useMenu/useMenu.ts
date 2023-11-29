@@ -1,6 +1,6 @@
 import {
-  ForwardedRef,
-  MutableRefObject,
+  type ForwardedRef,
+  type MutableRefObject,
   useEffect,
   useRef,
   useState,

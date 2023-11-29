@@ -1,7 +1,7 @@
 import { notify } from '@astral/ui';
 import {
-  ICryptoError,
-  ISystemInfo,
+  type ICryptoError,
+  type ISystemInfo,
   getSystemInfo,
 } from '@astral/cryptopro-cades';
 

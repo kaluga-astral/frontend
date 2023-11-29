@@ -1,9 +1,9 @@
 import {
   ListItemAvatar as MuiListItemAvatar,
-  ListItemAvatarProps as MuiListItemAvatarProps,
+  type ListItemAvatarProps as MuiListItemAvatarProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type ListItemAvatarProps =
   WithoutEmotionSpecific<MuiListItemAvatarProps>;

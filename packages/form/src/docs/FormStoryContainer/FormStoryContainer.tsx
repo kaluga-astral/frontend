@@ -1,6 +1,6 @@
 import { LegacyGrid } from '@astral/components';
 
-import { Form, FormProps } from '../../Form';
+import { Form, type FormProps } from '../../Form';
 
 // eslint-disable-next-line
 export type FormStoryContainerProps = FormProps<any>;

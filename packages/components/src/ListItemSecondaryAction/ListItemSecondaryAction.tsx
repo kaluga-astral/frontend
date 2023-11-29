@@ -1,9 +1,9 @@
 import {
   ListItemSecondaryAction as MuiListItemSecondaryAction,
-  ListItemSecondaryActionProps as MuiListItemSecondaryActionProps,
+  type ListItemSecondaryActionProps as MuiListItemSecondaryActionProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type ListItemSecondaryActionProps =
   WithoutEmotionSpecific<MuiListItemSecondaryActionProps>;

@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { ToastOptions } from 'react-toastify/dist/types';
+import { type ReactNode } from 'react';
+import { type ToastOptions } from 'react-toastify/dist/types';
 
 export type Variant = 'success' | 'warning' | 'info' | 'error';
 

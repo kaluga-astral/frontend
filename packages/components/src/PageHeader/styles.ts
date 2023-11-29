@@ -11,26 +11,31 @@ export const PageHeaderWrapper = styled.header`
     'back-btn title actions'
     'back-btn description description'
     'sub-header sub-header sub-header' / min-content 1fr auto;
+
   padding: ${({ theme }) => theme.spacing(0, 6)};
 `;
 
 export const PageHeaderBreadcrumbs = styled(Breadcrumbs)`
   grid-area: breadcrumbs;
+
   margin-bottom: ${({ theme }) => theme.spacing(1)};
 `;
 
 export const PageHeaderBackButton = styled(IconButton)`
   grid-area: back-btn;
+
   margin-right: ${({ theme }) => theme.spacing(2.5)};
 `;
 
 export const PageSubheader = styled.div`
   grid-area: sub-header;
+
   padding-top: ${({ theme }) => theme.spacing(6)};
 `;
 
 export const PageHeaderDescription = styled(Typography)`
   grid-area: description;
+
   padding-top: ${({ theme }) => theme.spacing(2)};
 `;
 

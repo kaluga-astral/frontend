@@ -1,12 +1,12 @@
-import { PropsWithChildren, forwardRef } from 'react';
+import { type PropsWithChildren, forwardRef } from 'react';
 
 import {
   MenuOrganization,
-  MenuOrganizationProps,
+  type MenuOrganizationProps,
 } from '../../MenuOrganization';
-import { Product, ProductProps } from '../../Product';
+import { Product, type ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
-import { ProfileProps } from '../../Profile';
+import { type ProfileProps } from '../../Profile';
 
 import { HeaderRoot, HeaderSection } from './styles';
 

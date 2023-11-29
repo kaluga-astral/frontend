@@ -1,10 +1,10 @@
 import {
   ToggleButton as MuiToggleButton,
-  ToggleButtonProps as MuiToggleButtonProps,
+  type ToggleButtonProps as MuiToggleButtonProps,
 } from '@mui/material';
 import { forwardRef } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type ToggleButtonProps = WithoutEmotionSpecific<MuiToggleButtonProps>;
 

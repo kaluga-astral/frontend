@@ -1,5 +1,5 @@
-import { TableCellProps } from '@mui/material';
-import { CSSProperties } from 'react';
+import { type TableCellProps } from '@mui/material';
+import { type CSSProperties } from 'react';
 
 import { styled } from '../../styles';
 import { TableCell } from '../../Table';
@@ -13,14 +13,13 @@ type StyledTableCellProps = TableCellProps & {
 export const StyledTableCell = styled(TableCell, {
   shouldForwardProp: (prop) => prop !== 'width' && prop !== 'sortable',
 })<StyledTableCellProps>`
+  cursor: ${({ sortable }) => (sortable ? 'pointer' : 'initial')};
+  user-select: none;
+
   width: ${({ width = 'auto' }) => width};
   padding: ${({ theme }) => theme.spacing(3, 4)};
 
   color: ${({ theme }) => theme.palette.grey[700]};
-
-  cursor: ${({ sortable }) => (sortable ? 'pointer' : 'initial')};
-
-  user-select: none;
 `;
 
 export const TableCellTitle = styled(Typography)`

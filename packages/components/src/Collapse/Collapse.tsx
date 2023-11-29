@@ -1,9 +1,9 @@
 import {
   Collapse as MuiCollapse,
-  CollapseProps as MuiCollapseProps,
+  type CollapseProps as MuiCollapseProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type CollapseProps = WithoutEmotionSpecific<MuiCollapseProps>;
 

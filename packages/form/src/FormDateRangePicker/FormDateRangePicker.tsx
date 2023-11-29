@@ -1,11 +1,11 @@
 import {
-  DateItemProps,
+  type DateItemProps,
   DateRangePicker,
-  DateRangePickerProps,
+  type DateRangePickerProps,
 } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 /**
  * @description Тип значения, которое сетится в state формы

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 
 import { Button } from '../Button';
 
-import { Chevron, ChevronProps } from './Chevron';
+import { Chevron, type ChevronProps } from './Chevron';
 
 export default {
   title: 'Components/Chevron',

@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { Paper, useMediaQuery, useTheme } from '@mui/material';
 import {
   DownloadOutlineMd,
@@ -12,8 +12,8 @@ import {
 import { LegacyGrid } from '../LegacyGrid';
 import { Typography } from '../Typography/Typography';
 import { Case } from '../docs';
-import { DataGrid, DataGridColumns } from '../DataGrid';
-import { ActionCell, Actions } from '../ActionCell';
+import { DataGrid, type DataGridColumns } from '../DataGrid';
+import { ActionCell, type Actions } from '../ActionCell';
 
 import { IconButton } from './IconButton';
 

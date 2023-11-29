@@ -13,6 +13,19 @@ export const NotificationsWrapper = styled.div`
   .${NOTIFY_CLASSNAME} {
     padding: 0;
 
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      display: block;
+
+      width: 100%;
+      height: 3px;
+    }
+
     &--${NotificationVariantTypes.info} {
       --toastify-color-progress-light: ${({ theme }) =>
         theme.palette.primary[800]};
@@ -56,18 +69,6 @@ export const NotificationsWrapper = styled.div`
       bottom: auto;
 
       height: 3px;
-    }
-
-    &::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      display: block;
-      width: 100%;
-      height: 3px;
-
-      content: '';
     }
   }
 `;

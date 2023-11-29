@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { RadioGroupContext } from '../RadioGroup';
-import { RadioField, RadioFieldProps } from '../RadioField';
+import { RadioField, type RadioFieldProps } from '../RadioField';
 
 export type RadioGroupFieldProps = Omit<RadioFieldProps, 'isError'>;
 

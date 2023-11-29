@@ -1,8 +1,8 @@
-import { BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
+import { type BadgeProps as MuiBadgeProps } from '@mui/material/Badge/Badge';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
-import { BadgeColor } from './types';
+import { type BadgeColor } from './types';
 import { StyledBadge } from './styles';
 
 export type BadgeProps = Omit<

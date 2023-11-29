@@ -1,9 +1,9 @@
 import {
   ListSubheader as MuiListSubheader,
-  ListSubheaderProps as MuiListSubheaderProps,
+  type ListSubheaderProps as MuiListSubheaderProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type ListSubheaderProps = WithoutEmotionSpecific<MuiListSubheaderProps>;
 

@@ -1,8 +1,8 @@
 import {
-  ButtonColors,
-  ButtonSizes,
-  ButtonStates,
-  ButtonVariants,
+  type ButtonColors,
+  type ButtonSizes,
+  type ButtonStates,
+  type ButtonVariants,
 } from './enums';
 
 declare module '@mui/material/Button' {
