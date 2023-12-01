@@ -35,6 +35,7 @@ import { MuiStepConnector } from './MuiStepConnector';
 import { MuiToggleButton } from './MuiToggleButton';
 import { MuiToggleButtonGroup } from './MuiToggleButtonGroup';
 import { MuiSwitch } from './MuiSwitch';
+import { MuiTextField } from './MuiTextField';
 
 export type FontsUrls = {
   bold: {
@@ -148,5 +149,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiStepConnector,
   MuiToggleButtonGroup,
   MuiToggleButton,
+  MuiTextField,
   MuiSwitch,
 });
