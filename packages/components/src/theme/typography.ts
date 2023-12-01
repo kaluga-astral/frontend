@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material/styles/createTypography';
-import { CSSProperties } from 'react';
+import { type Typography } from '@mui/material/styles/createTypography';
+import { type CSSProperties } from 'react';
 
 const HTML_FONT_SIZE = 14;
 

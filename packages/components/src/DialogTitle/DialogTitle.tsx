@@ -1,13 +1,13 @@
 import {
-  ModalProps,
+  type ModalProps,
   DialogTitle as MuiDialogTitle,
-  DialogTitleProps as MuiDialogTitleProps,
+  type DialogTitleProps as MuiDialogTitleProps,
 } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
-import { MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 
 import { IconButton } from '../IconButton';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type DialogTitleProps = WithoutEmotionSpecific<MuiDialogTitleProps> & {
   onClose?: ModalProps['onClose'];

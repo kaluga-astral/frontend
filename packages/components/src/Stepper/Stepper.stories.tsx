@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { useState } from 'react';
 
 import { Grid, Step, StepContent, StepLabel, Stepper, Typography } from '..';
@@ -113,9 +113,10 @@ export const Orientation = () => (
 );
 
 const ButtonsWrapper = styled.div`
-  padding: ${({ theme }) => theme.spacing(3, 10, 0, 10)};
   display: flex;
   justify-content: space-between;
+
+  padding: ${({ theme }) => theme.spacing(3, 10, 0, 10)};
 `;
 
 export const TransitionStepByStep = () => {

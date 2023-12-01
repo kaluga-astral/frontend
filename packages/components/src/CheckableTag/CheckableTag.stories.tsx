@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
-import { ChangeEvent, useState } from 'react';
+import { type Story } from '@storybook/react';
+import { type ChangeEvent, useState } from 'react';
 
-import { TagBadge, TagBadgeProps } from '../TagBadge';
+import { TagBadge, type TagBadgeProps } from '../TagBadge';
 
 import { CheckableTag } from './CheckableTag';
 

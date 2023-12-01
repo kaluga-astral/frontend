@@ -1,7 +1,7 @@
 import { Checkbox, css } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import { type Theme } from '../theme';
 
 type CheckboxStyledProps = {
   isError?: boolean;
@@ -24,7 +24,7 @@ const getErrorStyles = (theme: Theme) => css`
 export const CheckboxStyled = styled(Checkbox, {
   shouldForwardProp: (prop) => prop !== 'isError',
 })<CheckboxStyledProps>`
-  padding: 5px;
+  padding: ${({ theme }) => theme.spacing(2)};
 
   color: ${({ theme }) => theme.palette.background.element};
 
@@ -39,8 +39,8 @@ export const CheckboxStyled = styled(Checkbox, {
   }
 
   & > svg {
-    width: 1rem;
-    height: 1rem;
+    width: calc(16 / 14 * 1rem);
+    height: calc(16 / 14 * 1rem);
   }
 
   &.Mui-disabled {

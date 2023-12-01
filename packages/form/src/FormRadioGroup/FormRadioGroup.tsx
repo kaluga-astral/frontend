@@ -1,6 +1,6 @@
-import { RadioGroup, RadioGroupProps } from '@astral/components';
+import { RadioGroup, type RadioGroupProps } from '@astral/components';
 
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 export type FormRadioGroupProps<FieldValues extends object> =

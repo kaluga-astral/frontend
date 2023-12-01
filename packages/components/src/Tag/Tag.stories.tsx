@@ -1,15 +1,15 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
 import { useState } from 'react';
 
-import { DataGrid, DataGridColumns, DataGridSort } from '../DataGrid';
+import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
 import { ExampleTemplate } from '../docs/ExampleTemplate';
 import { LegacyGrid } from '../LegacyGrid';
 import { Typography } from '../Typography';
-import { ActionCell, Actions } from '../ActionCell';
+import { ActionCell, type Actions } from '../ActionCell';
 
 import { Tag } from './Tag';
 import { TagColors } from './enums';

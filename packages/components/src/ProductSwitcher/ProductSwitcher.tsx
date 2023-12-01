@@ -6,7 +6,7 @@ import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
 import { ProductSwitcherContent } from './ProductSwitcherContent';
-import { WidgetProduct } from './types';
+import { type WidgetProduct } from './types';
 import { WidgetMenu } from './styles';
 
 export type ProductSwitcherProps = {
@@ -21,6 +21,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   const handleShowProducts = async () => {
+    setIsError(false);
     handleOpenMenu();
 
     if (!products.length) {

@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 
 import { styled } from '../styles';
 
@@ -17,6 +17,7 @@ export const DialogHeaderRoot = styled('div', {
   label: 'DialogHeader-root',
   shouldForwardProp: (prop) => !['hasTitle', 'hasOnClose'].includes(prop),
 })<DialogHeaderRootProps>`
+  overflow: hidden;
   display: grid;
   grid-template-columns: ${({ hasTitle, hasOnClose }) => {
     if (hasTitle && hasOnClose) {

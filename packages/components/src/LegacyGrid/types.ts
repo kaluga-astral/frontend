@@ -1,5 +1,5 @@
-import { CSSProperties, ElementType } from 'react';
-import { Breakpoint } from '@mui/material/styles';
+import { type CSSProperties, type ElementType } from 'react';
+import { type Breakpoint } from '@mui/material/styles';
 
 type StyleCSSType<Type extends keyof CSSProperties> =
   | CSSProperties[Type]

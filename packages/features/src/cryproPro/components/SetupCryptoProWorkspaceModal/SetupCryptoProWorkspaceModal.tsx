@@ -7,7 +7,7 @@ import {
 } from '@astral/ui';
 import { RefreshOutlineMd } from '@astral/ui';
 
-import { CheckWorkspace } from '../../services/WorkspaceSetupService';
+import { type CheckWorkspace } from '../../services/WorkspaceSetupService';
 
 import { CryptoproviderInfo } from './CryptoproviderInfo';
 import { PluginInfo } from './PluginInfo';

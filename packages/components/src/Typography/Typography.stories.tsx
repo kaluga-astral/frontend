@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Grid } from '../Grid';
 import { Paper } from '../Paper';
@@ -164,4 +164,19 @@ export const Ellipsis = () => (
       документооборот
     </Typography>
   </div>
+);
+
+/**
+ * Prop ```isUpperCase``` переводит текст в верхний регистр
+ */
+export const UpperCase = () => (
+  <Grid container spacing={6}>
+    <Typography isUpperCase>
+      Электронная отчетность и документооборот{' '}
+      <Typography color="info" component="span">
+        и{' '}
+      </Typography>
+      документооборот
+    </Typography>
+  </Grid>
 );

@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { ModalProps } from '@mui/material';
+import React, { type CSSProperties } from 'react';
+import { type ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
 import { IconButton } from '../IconButton';

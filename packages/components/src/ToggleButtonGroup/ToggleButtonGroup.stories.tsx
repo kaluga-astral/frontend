@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/react';
-import { MouseEvent, useState } from 'react';
+import { type Meta } from '@storybook/react';
+import { type MouseEvent, useState } from 'react';
 
 import { ToggleButton } from '../ToggleButton';
 import { styled } from '../styles';

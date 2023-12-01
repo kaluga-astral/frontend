@@ -1,6 +1,6 @@
-import { Components } from '@mui/material';
+import { type Components } from '@mui/material';
 
-import { Theme } from '../types';
+import { type Theme } from '../types';
 import { AutocompleteSizes } from '../../Autocomplete/enums';
 
 export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
@@ -57,24 +57,26 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
 
         '::before': {
           content: '""',
-
           position: 'absolute',
           top: '50%',
           left: '50%',
-
-          display: 'block',
-          width: '50%',
-          height: '50%',
+          width: '0.6em',
+          height: '0.6em',
 
           backgroundColor: theme.palette.grey['500'],
 
           transform: 'translate(-50%, -50%)',
+
           borderRadius: '50%',
         },
+        '.MuiSvgIcon-root': {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '0.6em',
+          height: '0.6em',
 
-        '>svg': {
-          width: 16,
-          height: 16,
+          transform: 'translate(-50%, -50%)',
 
           zIndex: 1,
         },

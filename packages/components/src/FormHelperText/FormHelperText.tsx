@@ -1,9 +1,9 @@
 import {
   FormHelperText as MuiFormHelperText,
-  FormHelperTextProps as MuiFormHelperTextProps,
+  type FormHelperTextProps as MuiFormHelperTextProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { FormHelperTextContent } from './FormHelperTextContent';
 

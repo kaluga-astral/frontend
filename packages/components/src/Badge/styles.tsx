@@ -1,9 +1,9 @@
 import { Badge } from '@mui/material';
 
 import { styled } from '../styles';
-import { Theme } from '../theme';
+import { type Theme } from '../theme';
 
-import { BadgeColor } from './types';
+import { type BadgeColor } from './types';
 
 type StyledBadgeProps = {
   customColor: BadgeColor;
@@ -86,9 +86,9 @@ export const StyledBadge = styled(Badge, {
     height: 20px;
     padding: ${({ theme }) => theme.spacing(0, 1)};
 
-    color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
     font-size: ${({ theme }) => theme.typography.small.fontSize};
     line-height: 20px;
+    color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
 
     background-color: ${({ customColor, theme }) =>
       getBgColor({ customColor, theme })};

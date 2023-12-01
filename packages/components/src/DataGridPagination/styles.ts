@@ -5,6 +5,7 @@ export const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding-top: ${({ theme }) => theme.spacing(2)};
 `;
 

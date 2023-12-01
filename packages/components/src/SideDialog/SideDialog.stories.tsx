@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryObj } from '@storybook/react';
+import { type StoryObj } from '@storybook/react';
 import { SettingsOutlineMd } from '@astral/icons';
 
 import { Alert } from '../Alert';

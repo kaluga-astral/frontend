@@ -1,7 +1,7 @@
 import {
-  CSSProperties,
-  Ref,
-  RefObject,
+  type CSSProperties,
+  type Ref,
+  type RefObject,
   useEffect,
   useRef,
   useState,

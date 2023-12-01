@@ -1,5 +1,5 @@
 import {
-  BuildIsoDateStringOptions,
+  type BuildIsoDateStringOptions,
   buildIsoDateString,
 } from './buildIsoDateString';
 

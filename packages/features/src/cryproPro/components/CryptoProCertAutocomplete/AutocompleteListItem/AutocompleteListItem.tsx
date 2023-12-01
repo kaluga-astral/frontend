@@ -1,7 +1,7 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { type HTMLAttributes, type ReactNode } from 'react';
 import { ListItemAvatar, OverflowTypography } from '@astral/ui';
 
-import { CertificateType } from '../../../constants';
+import { type CertificateType } from '../../../constants';
 
 import {
   AutocompleteListAvatarIcon,

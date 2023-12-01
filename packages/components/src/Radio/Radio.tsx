@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { RadioProps as MuiRadioProps } from '@mui/material';
+import { type RadioProps as MuiRadioProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { StyledRadio } from './styles';
 import { CheckedCircleIcon, DefaultIcon } from './Icon';

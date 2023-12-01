@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StoryObj } from '@storybook/react';
+import { type StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
 import { DialogActions } from '../DialogActions';
@@ -22,11 +22,11 @@ export default {
 
 const Subtitle = styled(Typography)`
   &::before {
+    content: '|';
+
     padding: ${({ theme }) => theme.spacing(0, 4)};
 
     color: ${({ theme }) => theme.palette.grey[500]};
-
-    content: '|';
   }
 `;
 

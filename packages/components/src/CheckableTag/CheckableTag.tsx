@@ -1,13 +1,13 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { type ChangeEvent, forwardRef } from 'react';
 
-import { TagAddonProps, TagProps } from '../Tag';
+import { type TagAddonProps, type TagProps } from '../Tag';
 
 import {
   CheckableTagHiddenInput,
   CheckableTagStyled,
   CheckableTagWrapper,
 } from './styles';
-import { CheckableTagAddon } from './types';
+import { type CheckableTagAddon } from './types';
 
 export type CheckableTagProps = Omit<
   TagProps,

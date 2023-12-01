@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { type ComponentMeta } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 
 import { Typography } from '../Typography';

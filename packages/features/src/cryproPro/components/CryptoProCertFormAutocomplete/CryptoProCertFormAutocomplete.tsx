@@ -1,7 +1,7 @@
-import { Certificate } from '@astral/cryptopro-cades';
+import { type Certificate } from '@astral/cryptopro-cades';
 import {
-  AutocompleteProps,
-  WithFormFieldProps,
+  type AutocompleteProps,
+  type WithFormFieldProps,
   useFormController,
   useFormFieldErrorProps,
 } from '@astral/ui';
