@@ -5,7 +5,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { CheckableTag } from './CheckableTag';
 
 describe('CheckableTag', () => {
-  it('Предоставляет доступ к ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const CheckableTagWithRef = () => {
@@ -22,7 +22,7 @@ describe('CheckableTag', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:disabled: блокирует тег', () => {
+  it('Тэг блокируется при disabled=true', () => {
     renderWithTheme(<CheckableTag disabled />);
 
     const tag = screen.getByRole('checkbox', { hidden: true });
@@ -30,7 +30,7 @@ describe('CheckableTag', () => {
     expect(tag).toBeDisabled();
   });
 
-  it('Prop:onChange: вызывается', async () => {
+  it('onChange вызывается при нажатии на тэг', async () => {
     const label = 'Тег';
     const onChange = vi.fn();
 

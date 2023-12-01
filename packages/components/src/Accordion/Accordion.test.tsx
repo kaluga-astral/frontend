@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { InfoFillMd } from '@astral/icons';
-import { vi } from 'vitest';
+import { describe, vi } from 'vitest';
 
 import { Typography } from '../Typography';
 
 import { Accordion } from './Accordion';
 
 describe('Accordion', () => {
-  it('Предоставляет доступ к ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const AccordionWithRef = () => {
@@ -31,7 +31,7 @@ describe('Accordion', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:title: задает title', () => {
+  it('Title отображается', () => {
     renderWithTheme(
       <Accordion
         summary="Тест"
@@ -44,90 +44,94 @@ describe('Accordion', () => {
     expect(title).toBeVisible();
   });
 
-  it('Скрывает и отображает контент', async () => {
-    renderWithTheme(
-      <Accordion summary="Тест" startAdorment={<InfoFillMd color="info" />}>
-        <Typography>Контент</Typography>
-      </Accordion>,
-    );
+  describe('Контент', () => {
+    it('Отображается по нажатию на title', async () => {
+      renderWithTheme(
+        <Accordion summary="Тест" startAdorment={<InfoFillMd color="info" />}>
+          <Typography>Контент</Typography>
+        </Accordion>,
+      );
 
-    const title = screen.getByRole('button', { name: 'Тест' });
+      const title = screen.getByRole('button', { name: 'Тест' });
 
-    const content = screen.getByText('Контент');
+      const content = screen.getByText('Контент');
 
-    expect(content).not.toBeVisible();
-    await userEvents.click(title);
-    expect(content).toBeVisible();
+      expect(content).not.toBeVisible();
+      await userEvents.click(title);
+      expect(content).toBeVisible();
+    });
+
+    it('Отображается при isExpanded=true', async () => {
+      renderWithTheme(
+        <Accordion
+          summary="Тест"
+          startAdorment={<InfoFillMd color="info" />}
+          isExpanded
+        >
+          <Typography>Контент</Typography>
+        </Accordion>,
+      );
+
+      const content = screen.getByText('Контент');
+
+      expect(content).toBeVisible();
+    });
+
+    it('Скрывается при isExpanded=false', async () => {
+      renderWithTheme(
+        <Accordion
+          summary="Тест"
+          startAdorment={<InfoFillMd color="info" />}
+          isExpanded={false}
+        >
+          <Typography>Контент</Typography>
+        </Accordion>,
+      );
+
+      const content = screen.getByText('Контент');
+
+      expect(content).not.toBeVisible();
+    });
   });
 
-  it('Prop:isExpanded:true Отображает контент', async () => {
-    renderWithTheme(
-      <Accordion
-        summary="Тест"
-        startAdorment={<InfoFillMd color="info" />}
-        isExpanded
-      >
-        <Typography>Контент</Typography>
-      </Accordion>,
-    );
+  describe('onChange', () => {
+    it('Вызывается без переданного isExpanded', async () => {
+      const onChange = vi.fn();
 
-    const content = screen.getByText('Контент');
+      renderWithTheme(
+        <Accordion
+          summary="Тест"
+          startAdorment={<InfoFillMd color="info" />}
+          onChange={onChange}
+        >
+          <Typography>Контент</Typography>
+        </Accordion>,
+      );
 
-    expect(content).toBeVisible();
-  });
+      const title = screen.getByRole('button', { name: 'Тест' });
 
-  it('Prop:isExpanded:false Скрывает контент', async () => {
-    renderWithTheme(
-      <Accordion
-        summary="Тест"
-        startAdorment={<InfoFillMd color="info" />}
-        isExpanded={false}
-      >
-        <Typography>Контент</Typography>
-      </Accordion>,
-    );
+      await userEvents.click(title);
+      expect(onChange).toHaveBeenCalled();
+    });
 
-    const content = screen.getByText('Контент');
+    it('Вызывается с переданным isExpanded', async () => {
+      const onChange = vi.fn();
 
-    expect(content).not.toBeVisible();
-  });
+      renderWithTheme(
+        <Accordion
+          summary="Тест"
+          startAdorment={<InfoFillMd color="info" />}
+          isExpanded
+          onChange={onChange}
+        >
+          <Typography>Контент</Typography>
+        </Accordion>,
+      );
 
-  it('Prop:onChange Вызывается без переданного isExpanded', async () => {
-    const onChange = vi.fn();
+      const title = screen.getByRole('button', { name: 'Тест' });
 
-    renderWithTheme(
-      <Accordion
-        summary="Тест"
-        startAdorment={<InfoFillMd color="info" />}
-        onChange={onChange}
-      >
-        <Typography>Контент</Typography>
-      </Accordion>,
-    );
-
-    const title = screen.getByRole('button', { name: 'Тест' });
-
-    await userEvents.click(title);
-    expect(onChange).toHaveBeenCalled();
-  });
-
-  it('Prop:onChange Вызывается с переданным isExpanded', async () => {
-    const onChange = vi.fn();
-
-    renderWithTheme(
-      <Accordion
-        summary="Тест"
-        startAdorment={<InfoFillMd color="info" />}
-        isExpanded
-        onChange={onChange}
-      >
-        <Typography>Контент</Typography>
-      </Accordion>,
-    );
-
-    const title = screen.getByRole('button', { name: 'Тест' });
-
-    await userEvents.click(title);
-    expect(onChange).toHaveBeenCalled();
+      await userEvents.click(title);
+      expect(onChange).toHaveBeenCalled();
+    });
   });
 });

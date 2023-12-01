@@ -7,7 +7,7 @@ import { Typography } from '../Typography';
 import { CollapsableAlert } from './CollapsableAlert';
 
 describe('CollapsableAlert', () => {
-  it('Предоставляет доступ к ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const CollapsableAlertWithRef = () => {
@@ -28,7 +28,7 @@ describe('CollapsableAlert', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:title: задает title', () => {
+  it('Title отображает заголовок', () => {
     renderWithTheme(
       <CollapsableAlert title="Счет успешно сформирован">
         <Typography>Номер вашего счета: 32-0021</Typography>
@@ -38,6 +38,10 @@ describe('CollapsableAlert', () => {
     const title = screen.getByText('Счет успешно сформирован');
 
     expect(title).toBeVisible();
+  });
+
+  describe('Контент', () => {
+
   });
 
   it('Скрывает и отображает контент', async () => {

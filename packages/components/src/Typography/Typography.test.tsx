@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import { Typography } from './Typography';
 
 describe('Typography', () => {
-  it('Предоставляет доступ к ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const TypographyWithRef = () => {

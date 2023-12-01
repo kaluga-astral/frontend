@@ -6,7 +6,7 @@ import { TagBadge } from '../TagBadge';
 import { Tag } from '.';
 
 describe('Tag', () => {
-  it('Предоставляет доступ к ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const TagWithRef = () => {

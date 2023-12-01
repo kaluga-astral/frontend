@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 import { RadioField } from './RadioField';
 
 describe('RadioField', () => {
-  it('Отображает label', () => {
+  it('Prop label отображает название для поля', () => {
     renderWithTheme(<RadioField label="radio label" />);
 
     const label = screen.getByText('radio label');
@@ -12,7 +12,7 @@ describe('RadioField', () => {
     expect(label).toBeVisible();
   });
 
-  it('Делает поле обязательным', () => {
+  it('Prop required добавляет для label "*"', () => {
     renderWithTheme(
       <RadioField
         label="radio label"
@@ -28,7 +28,7 @@ describe('RadioField', () => {
     expect(asterisk).toBeVisible();
   });
 
-  it('Отображает причину блокировки поля', async () => {
+  it('Prop disabledReason отображает причину блокировки поля', async () => {
     renderWithTheme(
       <RadioField
         label="label"
