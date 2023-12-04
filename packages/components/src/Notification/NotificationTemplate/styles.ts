@@ -3,7 +3,7 @@ import { CrossOutlineSm } from '@astral/icons';
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
-import { ActionsDirection, Variant } from '../types';
+import { type ActionsDirection, type Variant } from '../types';
 
 import { getActionsDirection, getNotificationTemplateStyles } from './utils';
 
@@ -27,6 +27,7 @@ type NotificationCloseIconProps = {
 export const NotificationTemplateWrapper = styled.article<NotificationTemplateProps>`
   display: flex;
   align-items: flex-start;
+
   min-height: 56px;
   padding: ${({ theme }) => theme.spacing(4)};
   ${({ theme, variant, filled }) =>
@@ -41,6 +42,7 @@ export const NotificationFooter = styled.footer<NotificationActionsProps>`
   display: flex;
   justify-content: ${({ actionsDirection }) =>
     getActionsDirection(actionsDirection)};
+
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
@@ -56,6 +58,7 @@ export const NotificationContent = styled.div`
 export const NotificationHeader = styled.header`
   display: flex;
   align-items: center;
+
   width: 100%;
   min-height: 32px;
 `;

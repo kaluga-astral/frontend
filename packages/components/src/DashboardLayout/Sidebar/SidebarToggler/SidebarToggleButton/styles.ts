@@ -4,6 +4,7 @@ import { Button } from '../../../../Button';
 export const SidebarTogglerButtonRoot = styled(Button)`
   gap: 0;
   justify-content: flex-start;
+
   width: 100%;
   min-width: 0;
   padding: ${({ theme }) => theme.spacing(2)};

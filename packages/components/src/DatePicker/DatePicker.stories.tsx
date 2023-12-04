@@ -1,10 +1,10 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
-import { DatePicker, DatePickerProps } from './index';
+import { DatePicker, type DatePickerProps } from './index';
 
 export default {
   title: 'Components/DatePickers/DefaultDatePicker',

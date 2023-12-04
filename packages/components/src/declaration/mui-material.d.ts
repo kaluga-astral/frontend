@@ -1,7 +1,7 @@
-import { Theme as MuiTheme } from '@mui/material/styles';
+import { type Theme as MuiTheme } from '@mui/material/styles';
 
-import { Elevation, Palette, Shape } from '../theme';
-import { TypographyThemeOptions } from '../theme/typography';
+import { type Elevation, type Palette, type Shape } from '../theme';
+import { type TypographyThemeOptions } from '../theme/typography';
 
 declare module '@mui/material/styles' {
   export interface Theme

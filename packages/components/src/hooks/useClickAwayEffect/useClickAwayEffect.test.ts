@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { type RefObject } from 'react';
 import { renderHook, userEvents } from '@astral/tests';
 import { vi } from 'vitest';
 

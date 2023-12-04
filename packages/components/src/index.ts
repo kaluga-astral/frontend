@@ -144,6 +144,8 @@ export * from './PageLayoutContainer';
 
 export * from './Paper';
 
+export * from './PersonalData';
+
 export * from './Placeholder';
 
 export * from './Popover';
@@ -219,3 +221,5 @@ export * from './Zoom';
 export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
+
+export { StepSlider, StepSliderProps } from './StepSlider';

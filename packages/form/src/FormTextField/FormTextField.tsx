@@ -1,12 +1,12 @@
 import type { FocusEvent, ForwardedRef } from 'react';
 import {
   TextField,
-  TextFieldProps,
+  type TextFieldProps,
   forwardRefWithGeneric,
 } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
   TextFieldProps,

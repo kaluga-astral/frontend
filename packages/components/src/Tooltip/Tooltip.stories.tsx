@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { AddOutlineMd, InfoFillMd } from '@astral/icons';
 
@@ -102,11 +102,12 @@ export const Sizes = () => (
 
 const GridContainer = styled(Grid)`
   gap: 10px;
+
   margin-top: 30px;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: row;
     grid-template-columns: 1fr;
+    flex-direction: row;
   }
 `;
 

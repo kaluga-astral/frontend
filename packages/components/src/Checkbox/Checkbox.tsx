@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox/Checkbox';
+import { type CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox/Checkbox';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { CheckboxStyled } from './styles';
 import { CheckedIcon, DefaultIcon, IndeterminateIcon } from './icons';

@@ -20,6 +20,7 @@ export const Logo = styled('img', {
 `;
 
 export const TitleErrorContainer = styled(LegacyGrid)`
-  color: ${({ theme }) => theme.palette.error.dark};
   column-gap: ${({ theme }) => theme.spacing(2)};
+
+  color: ${({ theme }) => theme.palette.error.dark};
 `;

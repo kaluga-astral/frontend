@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 
 import { Typography } from '../Typography';
 import { styled } from '../styles';
@@ -27,6 +27,7 @@ export const CollapsibleTypographyWrapper = styled(Typography, {
 })<CollapsibleTypographyWrapperProps>`
   /* stylelint-disable-next-line */
   overflow: hidden;
+  /* stylelint-disable-next-line */
   display: ${({ isOpenCollapse }) => (isOpenCollapse ? '' : '-webkit-box')};
 
   max-width: 100%;

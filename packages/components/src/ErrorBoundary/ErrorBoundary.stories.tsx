@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 
 import { ConfigProvider } from '../ConfigProvider';
 import outdatedReleaseIllustration from '../../../ui/illustrations/outdated-release.svg';

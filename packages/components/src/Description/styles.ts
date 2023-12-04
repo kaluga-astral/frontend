@@ -18,6 +18,7 @@ export const DescriptionWrapper = styled.div<{
 
 export const DescriptionDashedSeparator = styled.div`
   flex: 1;
+
   height: 4px;
   margin-left: ${({ theme }) => theme.spacing(2)};
 

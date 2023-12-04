@@ -1,20 +1,20 @@
 import {
-  BreakpointsOptions,
-  Palette as MuiPalette,
-  PaletteColor,
-  ThemeOptions,
+  type BreakpointsOptions,
+  type Palette as MuiPalette,
+  type PaletteColor,
+  type ThemeOptions,
   createTheme as createMuiTheme,
 } from '@mui/material/styles';
 import { merge } from 'lodash-es';
 
 import { typography } from '../typography';
-import { Background, Color, getPalette } from '../palette';
-import { FontsUrls, getComponents } from '../components';
-import { Brand, SPACING } from '../constants';
+import { type Background, type Color, getPalette } from '../palette';
+import { type FontsUrls, getComponents } from '../components';
+import { type Brand, SPACING } from '../constants';
 import { elevation } from '../elevation';
 import { shape } from '../shape';
 import { defaultBreakpoints } from '../breakpoints';
-import { Theme } from '../types';
+import { type Theme } from '../types';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;

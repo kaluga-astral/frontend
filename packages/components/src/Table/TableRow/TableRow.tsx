@@ -1,9 +1,9 @@
 import {
   TableRow as MuiTableRow,
-  TableRowProps as MuiTableRowProps,
+  type TableRowProps as MuiTableRowProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../../types';
+import { type WithoutEmotionSpecific } from '../../types';
 
 export type TableRowProps = WithoutEmotionSpecific<MuiTableRowProps>;
 

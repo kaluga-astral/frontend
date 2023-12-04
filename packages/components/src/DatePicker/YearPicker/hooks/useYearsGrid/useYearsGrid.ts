@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 
 import { YEARS_IN_GRID } from '../../constants';
-import { GridBuilder, GridItem } from '../../../types';
+import { type GridBuilder, type GridItem } from '../../../types';
 import {
   DateCompareDeep,
   addYears,

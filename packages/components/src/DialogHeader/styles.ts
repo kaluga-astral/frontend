@@ -8,6 +8,7 @@ type DialogHeaderRootProps = {
 export const DialogHeaderRoot = styled('div', {
   label: 'DialogHeader-root',
 })<DialogHeaderRootProps>`
+  overflow: hidden;
   display: grid;
   grid-template-columns: ${({ hasTitle, hasOnClose }) => {
     if (hasTitle && hasOnClose) {
@@ -24,9 +25,8 @@ export const DialogHeaderRoot = styled('div', {
 
     return '1fr';
   }};
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing(4, 6)};
-  overflow: hidden;
-
   column-gap: ${({ theme }) => theme.spacing(2)};
+  align-items: center;
+
+  padding: ${({ theme }) => theme.spacing(4, 6)};
 `;

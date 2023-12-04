@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { ConfigProvider } from '../ConfigProvider';

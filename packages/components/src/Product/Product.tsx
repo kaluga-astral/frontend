@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import { ProductButton } from './styles';
-import { ProductProps } from './types';
+import { type ProductProps } from './types';
 
 export const Product = forwardRef<HTMLButtonElement, ProductProps>(
   (props, ref) => {

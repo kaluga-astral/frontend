@@ -130,4 +130,28 @@ describe('DatePicker', () => {
     await userEvents.click(document.body);
     expect(onBlur).not.toBeCalled();
   });
+
+  it('Props:disabled: popover не появляется при фокусе', async () => {
+    renderWithTheme(
+      <DatePicker
+        disabled
+        inputProps={{ label: 'inputLabel' }}
+        minDate={new Date('2022-02-09')}
+      />,
+    );
+
+    const inputWrapper = document.querySelector('div[aria-disabled]')!;
+    const label = screen.getAllByText('inputLabel')[0];
+    const input = screen.getByRole('textbox');
+
+    [inputWrapper, label, input].forEach((element) => {
+      fireEvent.focus(element);
+
+      const popover = screen.queryByRole('tooltip');
+
+      expect(popover).not.toBeInTheDocument();
+      //Сброс фокуса на элементе
+      fireEvent.focus(document.body);
+    });
+  });
 });
