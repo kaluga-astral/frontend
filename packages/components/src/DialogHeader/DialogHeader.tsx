@@ -16,13 +16,7 @@ export type DialogHeaderProps = {
    * @description Убирает расстояние между компонентами
    * */
   disableSpacing?: boolean;
-  /**
-   * @description Заголовок
-   */
   title?: string;
-  /**
-   * @description Кнопка для закрытия модального окна
-   */
   onClose?: ModalProps['onClose'];
   children: React.ReactNode;
 };

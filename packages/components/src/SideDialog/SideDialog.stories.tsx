@@ -102,7 +102,7 @@ export const ExampleWithSideDialogHeader = () => {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} rows={2}>
       <Typography>
         Пример SideDialog с компонентом SideDialogHeader, который является
         оберткой для размещения прочих компонентов в заголовке.

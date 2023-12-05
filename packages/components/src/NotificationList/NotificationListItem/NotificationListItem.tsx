@@ -60,8 +60,7 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
   const ref = useRef<HTMLLIElement | null>(null);
   const entry = useIntersection(ref, {
     root: null,
-    rootMargin: '0px',
-    threshold: 1,
+    threshold: 0.95,
   });
 
   const handleDelete = () => {
@@ -82,12 +81,11 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
         <ListItemPriority priority={priority} />
       </ListItemIconSlot>
       <div>
-        <ListItemTitle variant="h6" isUnread={isUnread}>
-          {title}
-        </ListItemTitle>
+        <ListItemTitle variant={isUnread ? 'h6' : 'ui'}>{title}</ListItemTitle>
         <ListItemDate>{getDateFormat(date)}</ListItemDate>
         <Typography
           gutterBottom={Boolean(actions)}
+          variant="ui"
           color="grey"
           colorIntensity="800"
         >
@@ -95,11 +93,11 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
         </Typography>
         {actions && <ListItemActions>{actions}</ListItemActions>}
       </div>
-      {isDeleteButtonVisible ? (
+      {isDeleteButtonVisible && (
         <ListItemCloseButton onClick={handleDelete} variant="text" size="small">
           <CrossOutlineSm />
         </ListItemCloseButton>
-      ) : null}
+      )}
     </ListItem>
   );
 };

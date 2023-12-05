@@ -47,7 +47,8 @@ export type DialogHeaderContentProps = {
 };
 
 export const DialogHeaderContent = styled('div', {
-  shouldForwardProp: (prop) => !['justifyContent', 'spacing'].includes(prop),
+  shouldForwardProp: (prop) =>
+    !['justifyContent', 'columnSpacing'].includes(prop),
   label: 'DialogHeader-content',
 })<DialogHeaderContentProps>`
   overflow: hidden;

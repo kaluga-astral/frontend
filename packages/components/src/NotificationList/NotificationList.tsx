@@ -128,6 +128,7 @@ export const NotificationList = ({
   };
 
   const handleView = (id: string) => {
+    console.log(id);
     viewedIds.current.add(id);
   };
 

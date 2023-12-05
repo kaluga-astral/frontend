@@ -349,7 +349,7 @@ export const OnClose = () => {
     setIsOpen(true);
   };
 
-  const handleClose = (viewedIds: (number | string)[]) => {
+  const handleClose = (viewedIds: string[]) => {
     setNotifications((prev) =>
       prev.map((notification) => {
         if (viewedIds.includes(notification.id)) {

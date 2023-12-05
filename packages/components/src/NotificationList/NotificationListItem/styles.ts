@@ -46,20 +46,18 @@ export const ListItem = styled('li')`
   }
 `;
 
-export const ListItemTitle = styled(Typography, {
-  shouldForwardProp: (prop) => prop !== 'isUnread',
-})<{ isUnread: boolean }>`
-  font-weight: ${({ theme, isUnread }) =>
-    isUnread
-      ? theme.typography.fontWeightBold
-      : theme.typography.fontWeightMedium};
-  line-height: ${({ theme }) => theme.typography.pxToRem(32)};
+export const ListItemTitle = styled(Typography)`
+  margin-top: ${({ theme }) => theme.spacing(1.5)};
+  margin-bottom: ${({ theme }) => theme.spacing(1)};
+
+  line-height: ${({ theme }) => theme.typography.pxToRem(20)};
   color: ${({ theme }) => theme.palette.grey[900]};
 `;
 
 export const ListItemDate = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(2)};
 
+  line-height: ${({ theme }) => theme.typography.pxToRem(20)};
   color: ${({ theme }) => theme.palette.grey[600]};
 `;
 
