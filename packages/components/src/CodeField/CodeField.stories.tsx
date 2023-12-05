@@ -1,4 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Typography } from '../Typography';
 
@@ -115,6 +116,26 @@ export const OnComplete = () => (
     />
   </>
 );
+
+export const DynamicResendTimeout = () => {
+  const [t, setT] = useState(60);
+
+  return (
+    <>
+      <button onClick={() => setT(5)}>5s</button>
+      <button onClick={() => setT(15)}>15s</button>
+      <button onClick={() => setT(60)}>60s</button>
+
+      <CodeField
+        codeLength={6}
+        label="Код подтверждения отправлен на test@test.ru"
+        onResendCode={() => Promise.resolve()}
+        isAllowResendCode
+        resendTimeout={t}
+      />
+    </>
+  );
+};
 
 export const WithoutRestartButton = () => (
   <>

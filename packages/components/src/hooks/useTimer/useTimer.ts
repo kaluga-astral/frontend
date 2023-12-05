@@ -27,16 +27,19 @@ export const useTimer = (
 ): [number, RestartTimer] => {
   const [time, setTime] = useState(startTime);
 
-  let timeInterval: ReturnType<typeof setInterval> | null = null;
   const { endTime = 1, stepMS = 1000, onExpires, onStep } = params;
   const step = stepMS / 1000;
 
-  const startTimer = () => {
-    if (timeInterval) {
-      clearInterval(timeInterval);
-    }
+  let timerId: ReturnType<typeof setInterval> | null = null;
 
-    timeInterval = setInterval(
+  const clearTimer = () => {
+    if (timerId) {
+      clearInterval(timerId);
+    }
+  };
+
+  const startTimer = () => {
+    timerId = setInterval(
       () =>
         setTime((prevTimer) => {
           if (prevTimer > endTime) {
@@ -47,36 +50,33 @@ export const useTimer = (
             }
 
             return newTime;
-          }
+          } else {
+            clearTimer();
 
-          if (timeInterval) {
-            clearInterval(timeInterval);
-          }
+            if (onExpires) {
+              onExpires();
+            }
 
-          if (onExpires) {
-            onExpires();
+            return 0;
           }
-
-          return 0;
         }),
       stepMS,
     );
   };
 
-  const restartTimer: RestartTimer = (newTime) => {
-    setTime(newTime || startTime);
+  const restartTimer: RestartTimer = () => {
+    clearTimer();
+    setTime(startTime);
     startTimer();
   };
 
   useEffect(() => {
-    startTimer();
+    restartTimer();
 
     return () => {
-      if (timeInterval) {
-        clearInterval(timeInterval);
-      }
+      clearTimer();
     };
-  }, []);
+  }, [startTime]);
 
   return [time, restartTimer];
 };

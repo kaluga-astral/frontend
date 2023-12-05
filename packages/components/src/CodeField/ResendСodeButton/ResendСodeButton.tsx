@@ -49,7 +49,7 @@ const ResendCodeButton = ({
     if (onResendCode) {
       onResendCode()
         .then(() => {
-          restartTimer(resendTimeout);
+          restartTimer();
         })
         .finally(() => setResendCodeLoading(false));
     }
