@@ -134,8 +134,7 @@ describe('DatePicker', () => {
   it('Props:disabled: popover не появляется при фокусе', async () => {
     renderWithTheme(
       <DatePicker
-        disabled
-        inputProps={{ label: 'inputLabel' }}
+        inputProps={{ label: 'inputLabel', disabled: true }}
         minDate={new Date('2022-02-09')}
       />,
     );
