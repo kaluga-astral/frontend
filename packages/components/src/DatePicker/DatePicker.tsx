@@ -61,7 +61,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       isMondayFirst,
       inputProps,
       inputRef,
-      disabled,
       value,
       className,
       minDate = DEFAULT_MIN_DATE,
@@ -100,7 +99,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           onAccept={onAccept}
           mask={mask}
           size={size}
-          disabled={disabled}
           ref={inputRef}
           onFocus={openPopover}
           onClick={openPopover}
