@@ -132,6 +132,8 @@ export * from './NavMenu';
 
 export * from './Notification';
 
+export * from './NotificationList';
+
 export * from './OverflowTypography';
 
 export * from './PageAside';
