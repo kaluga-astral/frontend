@@ -85,7 +85,7 @@ export const StepSlider = <TKeys extends DefaultKey>({
     easing = DEFAULT_EASING,
     ...restSlideProps
   } = {},
-}: StepSliderProps<TKeys>): ReactNode => {
+}: StepSliderProps<TKeys>) => {
   const keyId = useId();
   const containerRef = useRef<HTMLDivElement>(
     globalThis.document?.body as HTMLDivElement,
