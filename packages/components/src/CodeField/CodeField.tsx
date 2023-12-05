@@ -1,16 +1,17 @@
-import { ReactNode, forwardRef } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
 import { FormHelperText } from '../FormHelperText';
 
 import {
   CodeFieldDigit,
+  CodeFieldDigitsItem,
   CodeFieldDigitsWrapper,
   CodeFieldLabel,
   CodeFieldWrapper,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 import { ERROR_TEXT_DEFAULT, RESEND_TIMEOUT_DEFAULT } from './constants';
-import { useCodeState, useFocusIndex } from './hooks';
+import { useCodeState, useFocusInput } from './hooks';
 
 export type CodeFieldProps = {
   /**
@@ -85,7 +86,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     ref,
   ) => {
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
-      useFocusIndex(codeLength);
+      useFocusInput(codeLength);
 
     const { codeValue, onKeyDown, onKeyUp, onPaste } = useCodeState(
       initialValue,
@@ -97,27 +98,32 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       onComplete,
     );
 
-    const setRef = (index: number) => (el: HTMLInputElement) =>
-      el && (inputRefs.current[index] = el);
+    const setRef = (index: number) => (el: HTMLInputElement) => {
+      if (el) {
+        inputRefs.current[index] = el;
+      }
+    };
 
     return (
       <CodeFieldWrapper ref={ref}>
         {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
         <CodeFieldDigitsWrapper>
           {codeValue.map((value, index) => (
-            <CodeFieldDigit
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]"
-              key={index}
-              disabled={disabled || loading}
-              value={value ?? ''}
-              ref={setRef(index)}
-              onKeyUp={(e) => onKeyUp(e, index)}
-              onKeyDown={(e) => onKeyDown(e, index)}
-              isError={isError}
-              onPaste={(e) => !disabled && !loading && onPaste(e)}
-            />
+            <CodeFieldDigitsItem>
+              <CodeFieldDigit
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]"
+                key={index}
+                disabled={disabled || loading}
+                value={value ?? ''}
+                ref={setRef(index)}
+                onKeyUp={(e) => onKeyUp(e, index)}
+                onKeyDown={(e) => onKeyDown(e, index)}
+                isError={isError}
+                onPaste={(e) => !disabled && !loading && onPaste(e)}
+              />
+            </CodeFieldDigitsItem>
           ))}
         </CodeFieldDigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}

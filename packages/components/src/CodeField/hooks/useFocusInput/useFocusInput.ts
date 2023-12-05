@@ -3,7 +3,7 @@ import { useRef } from 'react';
 /**
  * @description предоставляет методы работы с фокусом на инпутах
  */
-export const useFocusIndex = (codeLength: number) => {
+export const useFocusInput = (codeLength: number) => {
   const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
   /**

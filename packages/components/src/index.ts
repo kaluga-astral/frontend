@@ -224,4 +224,4 @@ export * from './PasswordField';
 
 export { StepSlider, StepSliderProps } from './StepSlider';
 
-export * from './CodeField';
+export { CodeField, CodeFieldProps } from './CodeField';

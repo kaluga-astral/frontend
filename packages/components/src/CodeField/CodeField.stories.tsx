@@ -1,10 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Typography } from '../Typography';
 
 import { CodeField } from './CodeField';
 
 /**
+ * CodeField - Поле для ввода кода подтверждения, отсылаемого на телефон/email и т.п.
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=3211-52609&mode=design&t=lMvg1tmjfSIA2lhp-0)
  * ### [Guide]()
  */
@@ -33,7 +35,6 @@ const TEST_VALUE = '175629';
 
 export const Example = () => (
   <>
-    <br />
     <CodeField
       codeLength={6}
       label="Код подтверждения отправлен на test@test.ru"
@@ -99,6 +100,18 @@ export const Loading = () => (
       onResendCode={() => Promise.resolve()}
       initialValue={TEST_VALUE}
       isAllowResendCode
+    />
+  </>
+);
+
+export const OnComplete = () => (
+  <>
+    <CodeField
+      codeLength={6}
+      label="Код подтверждения отправлен на test@test.ru"
+      onResendCode={() => Promise.resolve()}
+      isAllowResendCode
+      onComplete={() => alert('onComplete вызывается, когда поле заполнено')}
     />
   </>
 );

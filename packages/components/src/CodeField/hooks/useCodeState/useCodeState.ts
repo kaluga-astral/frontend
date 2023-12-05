@@ -1,6 +1,11 @@
-import { ClipboardEvent, KeyboardEvent, useEffect, useState } from 'react';
+import {
+  type ClipboardEvent,
+  type KeyboardEvent,
+  useEffect,
+  useState,
+} from 'react';
 
-import { CodeFieldInputType } from '../../types';
+import { type CodeFieldInputType } from '../../types';
 import { formatInitialValue } from '../../utils';
 import { DIGITS_REGEX, KEYBOARD_KEYS } from '../../constants';
 
@@ -36,6 +41,10 @@ export const useCodeState = (
       onComplete(formattedValue);
     }
   }, [codeValue]);
+
+  const clearCodeValue = () => {
+    setCodeValue(Array.from({ length: codeLength }));
+  };
 
   const deletePreviousSymbol = (index: number) => {
     // если фокус на заполненном инпуте, то очищаем его;
@@ -99,8 +108,7 @@ export const useCodeState = (
       .split('');
 
     if (cleanedValue.length === 0) {
-      // если вставлена пустота, очищаем значение
-      setCodeValue(Array.from({ length: codeLength }));
+      clearCodeValue();
 
       return;
     }

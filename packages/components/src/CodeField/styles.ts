@@ -11,6 +11,10 @@ export const CodeFieldDigitsWrapper = styled.ul`
   gap: 12px;
 `;
 
+export const CodeFieldDigitsItem = styled.li`
+  list-style-type: none;
+`;
+
 export const CodeFieldDigit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;

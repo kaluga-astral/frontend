@@ -1,4 +1,4 @@
-import { CodeFieldInputType } from '../../types';
+import { type CodeFieldInputType } from '../../types';
 
 export const formatInitialValue = (
   codeLength: number,
