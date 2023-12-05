@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { IMask } from 'react-imask';
+import { type IMask } from 'react-imask';
 
 import { Grid, type GridProps } from '../Grid';
 import {
@@ -50,10 +50,6 @@ export type DateRangePickerProps = Omit<
    * @description общий обработчик для обоих инпутов, вызовется только если фокус сработает вне общего дива
    */
   onBlur?: () => void;
-  /**
-   * @description Отображать один DatePicker
-   */
-  isSinglePicker?: boolean;
 };
 
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
@@ -71,7 +67,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       maxDate = DEFAULT_MAX_DATE,
       spacing = DEFAULT_SPACING,
       size,
-      isSinglePicker,
     },
     forwardedRef,
   ) => {
@@ -229,19 +224,15 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               onChange={handleDayPick}
               isRange
             />
-            {!isSinglePicker && (
-              <>
-                <DateRangePickerSplitter />
-                <YearMonthDayPicker
-                  isMondayFirst={isMondayFirst}
-                  selectedDate={selectedStartBaseDate}
-                  rangeDate={endDateProps.value}
-                  date={selectedEndBaseDate || endBaseDate}
-                  onChange={handleDayPick}
-                  isRange
-                />
-              </>
-            )}
+            <DateRangePickerSplitter />
+            <YearMonthDayPicker
+              isMondayFirst={isMondayFirst}
+              selectedDate={selectedStartBaseDate}
+              rangeDate={endDateProps.value}
+              date={selectedEndBaseDate || endBaseDate}
+              onChange={handleDayPick}
+              isRange
+            />
           </MinMaxDateContextProvider>
         </DatePickerPopover>
       </Grid>

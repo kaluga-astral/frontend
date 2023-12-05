@@ -267,28 +267,4 @@ describe('DateRangePicker', () => {
     expect((inputA as HTMLInputElement).value).not.toBe('');
     expect((inputB as HTMLInputElement).value).not.toBe('');
   });
-
-  it('Props: isSinglePicker: Отображается один календарь', async () => {
-    const TestComponent = () => {
-      return (
-        <DateRangePicker
-          startDateProps={{
-            inputProps: { placeholder: 'inputA' },
-          }}
-          endDateProps={{
-            inputProps: { placeholder: 'inputB' },
-          }}
-          isSinglePicker
-        />
-      );
-    };
-
-    renderWithTheme(<TestComponent />);
-
-    const inputA = screen.getByPlaceholderText('inputA');
-
-    fireEvent.focus(inputA);
-    // eslint-disable-next-line testing-library/prefer-presence-queries
-    expect(screen.getAllByText('15').length).toBe(1);
-  });
 });
