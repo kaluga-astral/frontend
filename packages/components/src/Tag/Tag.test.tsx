@@ -23,7 +23,7 @@ describe('Tag', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:badge: добавляет Badge', async () => {
+  it('Дополнительный контент отображается, если передан endAddon', async () => {
     const label = 'Тег';
     const badgeContent = '12';
 

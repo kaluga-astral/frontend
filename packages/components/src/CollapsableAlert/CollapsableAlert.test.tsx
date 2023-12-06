@@ -41,48 +41,57 @@ describe('CollapsableAlert', () => {
   });
 
   describe('Контент', () => {
+    it('Скрыт по-дефолту', async () => {
+      renderWithTheme(
+        <CollapsableAlert title="Счет успешно сформирован">
+          <Typography>Контент</Typography>
+        </CollapsableAlert>,
+      );
 
-  });
+      const content = screen.getByText('Контент');
 
-  it('Скрывает и отображает контент', async () => {
-    renderWithTheme(
-      <CollapsableAlert title="Счет успешно сформирован">
-        <Typography>Контент</Typography>
-      </CollapsableAlert>,
-    );
-
-    const title = screen.getByRole('button', {
-      name: 'Счет успешно сформирован',
+      expect(content).not.toBeVisible();
     });
 
-    const content = screen.getByText('Контент');
+    it('Отображается по нажатию на header', async () => {
+      renderWithTheme(
+        <CollapsableAlert title="Счет успешно сформирован">
+          <Typography>Контент</Typography>
+        </CollapsableAlert>,
+      );
 
-    expect(content).not.toBeVisible();
-    await userEvents.click(title);
-    expect(content).toBeVisible();
-  });
+      const title = screen.getByRole('button', {
+        name: 'Счет успешно сформирован',
+      });
 
-  it('Prop:isExpanded:true Отображает контент', async () => {
-    renderWithTheme(
-      <CollapsableAlert title="Тест" isExpanded>
-        <Typography>Контент</Typography>
-      </CollapsableAlert>,
-    );
+      const content = screen.getByText('Контент');
 
-    const content = screen.getByText('Контент');
+      await userEvents.click(title);
+      expect(content).toBeVisible();
+    });
 
-    expect(content).toBeVisible();
-  });
+    it('Отображается при isExpanded=true', async () => {
+      renderWithTheme(
+        <CollapsableAlert title="Тест" isExpanded>
+          <Typography>Контент</Typography>
+        </CollapsableAlert>,
+      );
 
-  it('Prop:isExpanded:false Скрывает контент', async () => {
-    renderWithTheme(
-      <CollapsableAlert title="Тест" isExpanded={false}>
-        <Typography>Контент</Typography>
-      </CollapsableAlert>,
-    );
+      const content = screen.getByText('Контент');
 
-    const content = screen.getByText('Контент');
+      expect(content).toBeVisible();
+    });
 
-    expect(content).not.toBeVisible();
+    it('Скрыт при isExpanded=false', async () => {
+      renderWithTheme(
+        <CollapsableAlert title="Тест" isExpanded={false}>
+          <Typography>Контент</Typography>
+        </CollapsableAlert>,
+      );
+
+      const content = screen.getByText('Контент');
+
+      expect(content).not.toBeVisible();
+    });
   });
 });

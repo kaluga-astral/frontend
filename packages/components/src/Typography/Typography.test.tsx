@@ -22,7 +22,7 @@ describe('Typography', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Рендерит переданный в prop component html тэг', () => {
+  it('Рендерится переданный в prop component html тэг', () => {
     renderWithTheme(<Typography component="h1">Test text</Typography>);
 
     const typography = screen.getByRole('heading', { level: 1 });
@@ -30,7 +30,7 @@ describe('Typography', () => {
     expect(typography).toBeInTheDocument();
   });
 
-  it('Ренедрит тэг p, если prop paragraph=true', () => {
+  it('Ренедрится тэг p, если prop paragraph=true', () => {
     renderWithTheme(
       <Typography paragraph variant="h2">
         Test text
