@@ -21,7 +21,8 @@ export const PlaceholderInnerContainer = styled.div`
 export const PlaceholderImage = styled.img`
   display: block;
 
-  width: ${({ width }) => width || '100%'};
+  width: ${({ width }) => width || 'auto'};
+  max-width: 100%;
   height: ${({ height }) => height || 'auto'};
   margin: auto auto ${({ theme }) => theme.spacing(6)};
 
