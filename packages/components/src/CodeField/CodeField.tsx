@@ -1,4 +1,5 @@
 import { type ReactNode, forwardRef } from 'react';
+import Skeleton from '@mui/material/Skeleton';
 
 import { FormHelperText } from '../FormHelperText';
 
@@ -110,19 +111,23 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
         <CodeFieldDigitsWrapper>
           {codeValue.map((value, index) => (
             <CodeFieldDigitsItem>
-              <CodeFieldDigit
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]"
-                key={index}
-                disabled={disabled || loading}
-                value={value ?? ''}
-                ref={setRef(index)}
-                onKeyUp={(e) => onKeyUp(e, index)}
-                onKeyDown={(e) => onKeyDown(e, index)}
-                isError={isError}
-                onPaste={(e) => !disabled && !loading && onPaste(e)}
-              />
+              {loading ? (
+                <Skeleton variant="rounded" width={62} height={60} />
+              ) : (
+                <CodeFieldDigit
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]"
+                  key={index}
+                  disabled={disabled || loading}
+                  value={value ?? ''}
+                  ref={setRef(index)}
+                  onKeyUp={(e) => onKeyUp(e, index)}
+                  onKeyDown={(e) => onKeyDown(e, index)}
+                  isError={isError}
+                  onPaste={(e) => !disabled && !loading && onPaste(e)}
+                />
+              )}
             </CodeFieldDigitsItem>
           ))}
         </CodeFieldDigitsWrapper>
