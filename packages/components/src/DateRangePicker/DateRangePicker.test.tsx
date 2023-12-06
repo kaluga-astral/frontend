@@ -37,7 +37,7 @@ describe('DateRangePicker', () => {
       />,
     );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+    fireEvent.click(screen.getByPlaceholderText('inputA'));
 
     const dateBtnA = screen.getAllByText('15')[0];
 
