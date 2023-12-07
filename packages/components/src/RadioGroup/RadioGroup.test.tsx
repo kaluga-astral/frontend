@@ -6,7 +6,7 @@ import { RadioGroupContext } from './RadioGroupProvider';
 import { RadioGroup } from './RadioGroup';
 
 describe('RadioGroup', () => {
-  it('Позволяет получить флаг ошибки в контекте', () => {
+  it('Флаг ошибки доступен в RadioGroupContext', () => {
     const ChildComponent = () => {
       const { isError } = useContext(RadioGroupContext);
 
@@ -28,7 +28,7 @@ describe('RadioGroup', () => {
     expect(errorText).not.toBeUndefined();
   });
 
-  it('Отображает label для группы', () => {
+  it('Label отображается для группы', () => {
     renderWithTheme(<RadioGroup groupLabel="group label" />);
 
     const groupLabel = screen.getByText(/group label/i);
@@ -36,7 +36,7 @@ describe('RadioGroup', () => {
     expect(groupLabel).toBeVisible();
   });
 
-  it('Отображает индикатор обязательности, если поле required', () => {
+  it('"*" отображается, если поле required', () => {
     renderWithTheme(<RadioGroup groupLabel="radio label" required />);
 
     const asterisk = screen.getByText('*');
@@ -44,7 +44,7 @@ describe('RadioGroup', () => {
     expect(asterisk).toBeVisible();
   });
 
-  it('Отображает в tooltip ошибку поля', async () => {
+  it('Ошибка поля отображается в tooltip', async () => {
     renderWithTheme(
       <RadioGroup groupLabel="group label" isError errorText="error text" />,
     );

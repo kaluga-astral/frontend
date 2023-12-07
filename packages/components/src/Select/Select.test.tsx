@@ -7,7 +7,7 @@ import { MenuItem } from '../MenuItem';
 import { Select } from './Select';
 
 describe('Select', () => {
-  it('Предоставляет ref', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const SelectWithRef = () => {
@@ -28,32 +28,34 @@ describe('Select', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Позволяет скрыть helperText', () => {
-    renderWithTheme(<Select helperText="helper text" hideHelperText />);
-    expect(screen.queryByText('helper text')).toBeNull();
+  describe('HelperText', () => {
+    it('Скрывается, если hideHelperText=true', () => {
+      renderWithTheme(<Select helperText="helper text" hideHelperText />);
+      expect(screen.queryByText('helper text')).toBeNull();
+    });
+
+    it('Отображается в состоянии ошибки', () => {
+      renderWithTheme(<Select helperText="helper text" error />);
+      expect(screen.getByText('helper text')).toBeInTheDocument();
+    });
+
+    it('Отображается в состоянии success', () => {
+      renderWithTheme(<Select helperText="helper text" success />);
+      expect(screen.getByText('helper text')).toBeInTheDocument();
+    });
   });
 
-  it('Отображает helperText в состоянии ошибки', () => {
-    renderWithTheme(<Select helperText="helper text" error />);
-    expect(screen.getByText('helper text')).toBeInTheDocument();
-  });
-
-  it('Отображает helperText в состоянии success', () => {
-    renderWithTheme(<Select helperText="helper text" success />);
-    expect(screen.getByText('helper text')).toBeInTheDocument();
-  });
-
-  it('Отображает label', () => {
+  it('Label отображается', () => {
     renderWithTheme(<Select label="label" />);
     expect(screen.getByText('label')).toBeInTheDocument();
   });
 
-  it('Отображает placeholder', () => {
+  it('Placeholder отображается', () => {
     renderWithTheme(<Select value="" placeholder="placeholder" />);
     expect(screen.getByText('placeholder')).toBeInTheDocument();
   });
 
-  it('Отображает placeholder noData, если нет ни одного option', () => {
+  it('NoData placeholder отображается, если нет ни одного option', () => {
     renderWithTheme(
       <Select value="" defaultOpen>
         {[]}
@@ -63,7 +65,7 @@ describe('Select', () => {
     expect(screen.getByText('Нет данных')).toBeInTheDocument();
   });
 
-  it('Отображает состояние загрузки', () => {
+  it('Отображается лоадер в состоянии загрузки', () => {
     renderWithTheme(
       <Select loading value="" defaultOpen>
         {[]}
@@ -73,7 +75,7 @@ describe('Select', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
-  it('Отображает выбранные значения, если  value не пустое', () => {
+  it('Выбранные значения отображаются, если  value не пустое', () => {
     const children = [
       { value: '1', name: 'Name 1' },
       { value: '2', name: 'Name 2' },
@@ -107,7 +109,7 @@ describe('Select', () => {
     );
   });
 
-  it('Рендерит пустой инпут, если значения не выбраны', () => {
+  it('Рендерится пустой инпут, если значения не выбраны', () => {
     const children = [
       { value: '1', name: 'Name 1' },
       { value: '2', name: 'Name 2' },
