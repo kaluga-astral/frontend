@@ -6,7 +6,7 @@ import {
   ProfileOutlineMd,
   QuitOutlineMd,
 } from '@astral/icons';
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 
 import { Divider } from '../Divider';
 import { ListItemIcon } from '../ListItemIcon';
@@ -84,6 +84,7 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
+  height: 600px;
   width: 100%;
 `;
 

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
@@ -39,6 +39,7 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
+  height: 600px;
   width: 100%;
 `;
 

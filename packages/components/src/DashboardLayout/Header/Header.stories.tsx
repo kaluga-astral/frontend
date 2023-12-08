@@ -1,6 +1,6 @@
 import { ProfileOutlineMd, QuitOutlineMd } from '@astral/icons';
 import { Box } from '@mui/material';
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Divider } from '../../Divider';
 import { ListItemIcon } from '../../ListItemIcon';
@@ -53,6 +53,7 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
+  height: 600px;
   width: 100%;
 `;
 

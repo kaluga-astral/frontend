@@ -3,8 +3,8 @@ import {
   CompanyOutlineMd,
   ProfileOutlineMd,
 } from '@astral/icons';
-import { Meta, StoryObj } from '@storybook/react';
-import { MouseEvent, ReactElement, forwardRef } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type MouseEvent, type ReactElement, forwardRef } from 'react';
 
 import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
@@ -72,6 +72,7 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
+  height: 600px;
   width: 100%;
 `;
 
