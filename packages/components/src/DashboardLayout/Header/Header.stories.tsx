@@ -17,7 +17,7 @@ import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
 
 /**
- * DashboardLayout.Header - верхняя часть дашборда
+ * DashboardLayout.Header
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=95-156&mode=design&t=MnwPwkjHLstGGzYg-0)
  * ### [Guide]()
