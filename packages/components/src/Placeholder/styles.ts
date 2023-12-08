@@ -6,6 +6,7 @@ export const PlaceholderRoot = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.spacing(4)};
@@ -19,9 +20,12 @@ export const PlaceholderInnerContainer = styled.div`
 
 export const PlaceholderImage = styled.img`
   display: block;
-  width: ${({ width }) => width || '100%'};
+
+  width: ${({ width }) => width || 'auto'};
+  max-width: 100%;
   height: ${({ height }) => height || 'auto'};
   margin: auto auto ${({ theme }) => theme.spacing(6)};
+
   object-fit: contain;
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
@@ -34,16 +38,15 @@ export const PlaceholderImage = styled.img`
 export const PlaceholderTitle = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(6)};
 
-  color: ${({ theme }) => theme.palette.grey[700]};
   font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
-
+  color: ${({ theme }) => theme.palette.grey[700]};
   text-align: center;
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
     margin-bottom: ${({ theme }) => theme.spacing(4)};
 
-    color: ${({ theme }) => theme.palette.grey[900]};
     font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
+    color: ${({ theme }) => theme.palette.grey[900]};
   }
 `;
 
@@ -51,7 +54,6 @@ export const PlaceholderDescription = styled(Typography)`
   display: block;
 
   color: ${({ theme }) => theme.palette.grey[700]};
-
   text-align: center;
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
@@ -62,7 +64,6 @@ export const PlaceholderDescription = styled(Typography)`
 export const PlaceholderActions = styled.footer`
   display: flex;
   flex-wrap: wrap;
-
   gap: ${({ theme }) => theme.spacing(1)};
   justify-content: center;
 

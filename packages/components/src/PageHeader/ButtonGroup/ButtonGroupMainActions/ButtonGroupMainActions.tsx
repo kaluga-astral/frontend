@@ -1,6 +1,9 @@
-import { Button, ButtonProps } from '../../../Button';
-import { DropdownButton, DropdownButtonProps } from '../../../DropdownButton';
-import { MenuItem, MenuItemProps } from '../../../MenuItem';
+import { Button, type ButtonProps } from '../../../Button';
+import {
+  DropdownButton,
+  type DropdownButtonProps,
+} from '../../../DropdownButton';
+import { MenuItem, type MenuItemProps } from '../../../MenuItem';
 
 type NestedAction = MenuItemProps & {
   /** Название действия */

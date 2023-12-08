@@ -1,6 +1,6 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { Box, Paper, useMediaQuery, useTheme } from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { type ChangeEvent, useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
 import { LegacyGrid } from '../LegacyGrid';

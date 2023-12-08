@@ -1,10 +1,10 @@
 import { DotsVOutlineMd } from '@astral/icons';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { type ReactNode, useCallback, useMemo } from 'react';
 
-import { IconButton, IconButtonProps } from '../IconButton';
+import { IconButton, type IconButtonProps } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
-import { MenuItem, MenuItemProps } from '../MenuItem';
-import { Tooltip, TooltipProps } from '../Tooltip';
+import { MenuItem, type MenuItemProps } from '../MenuItem';
+import { Tooltip, type TooltipProps } from '../Tooltip';
 
 import { ActionCellWrapper } from './styles';
 

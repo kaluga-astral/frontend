@@ -1,4 +1,4 @@
-import { IdentityProductsWidgetDTO } from '../../types';
+import { type IdentityProductsWidgetDTO } from '../../types';
 import { formatIdentityProducts } from '../formatIdentityProducts';
 
 /**

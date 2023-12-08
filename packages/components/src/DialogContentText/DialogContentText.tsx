@@ -1,9 +1,9 @@
 import {
   DialogContentText as MuiDialogContentText,
-  DialogContentTextProps as MuiDialogContentTextProps,
+  type DialogContentTextProps as MuiDialogContentTextProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type DialogContentTextProps =
   WithoutEmotionSpecific<MuiDialogContentTextProps>;

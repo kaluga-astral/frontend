@@ -1,10 +1,10 @@
-import { FabProps as MuiFabProps } from '@mui/material';
+import { type FabProps as MuiFabProps } from '@mui/material';
 import { forwardRef } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { StyledFab } from './styles';
-import { FabColor } from './types';
+import { type FabColor } from './types';
 import { FabSizes } from './enums';
 
 export type FabProps = Omit<

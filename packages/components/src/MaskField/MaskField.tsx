@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import { IMask, IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
-import { TextField, TextFieldProps } from '../TextField';
+import { TextField, type TextFieldProps } from '../TextField';
 
 type MaskProps = IMaskInputProps<
   IMask.AnyMaskedOptions,
@@ -60,6 +60,13 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
   ({ onChange, onAccept, ...props }, ref) => {
     const maskFieldProps = { unmask: true, ...props } as IMaskInputProps;
 
+    const [inputValue, setInputValue] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocusChange = () => {
+      setIsFocused((prevIsFocused) => !prevIsFocused);
+    };
+
     const handleMaskFieldAccept = (
       value: string,
       maskRef: IMask.InputMask<IMask.AnyMaskedOptions>,
@@ -70,13 +77,22 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
       }
 
       onChange?.(value);
+      setInputValue(value);
     };
+
+    const checkIsNotLazy = useMemo(
+      () => isFocused || inputValue,
+      [isFocused, inputValue],
+    );
 
     return (
       <MaskedTextField
         {...maskFieldProps}
         inputRef={() => ref}
         onAccept={handleMaskFieldAccept}
+        onFocus={handleFocusChange}
+        onBlur={handleFocusChange}
+        lazy={!checkIsNotLazy}
       />
     );
   },

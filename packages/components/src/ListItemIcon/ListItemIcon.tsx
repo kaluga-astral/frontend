@@ -1,7 +1,7 @@
-import { ListItemIconProps as MuiListItemIconProps } from '@mui/material';
+import { type ListItemIconProps as MuiListItemIconProps } from '@mui/material';
 import { forwardRef } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { StyledListItemIcon } from './styled';
 

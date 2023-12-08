@@ -71,7 +71,7 @@ export const useMaskedValue = ({
 
     // проверяем равны ли даты
     const isEqualValueAndMaskedDate =
-      currentValue.getTime() === parseDate(maskedValue, mask).getTime();
+      currentValue.getTime() === parseDate(maskedValue, mask)?.getTime();
 
     // если даты не равны, то значит изменился currentValue из вне и надо синхронизировать maskedValue
     if (!isEqualValueAndMaskedDate) {

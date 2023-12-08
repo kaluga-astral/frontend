@@ -1,4 +1,4 @@
-import { AutocompleteCloseReason } from '@mui/base';
+import { type AutocompleteCloseReason } from '@mui/base';
 
 export type WithoutEmotionSpecific<Props> = Omit<Props, 'sx' | 'css'>;
 

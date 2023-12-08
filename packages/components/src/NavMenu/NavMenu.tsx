@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { List } from '@mui/material';
 
-import { NavMenuItem, NavMenuItemProps } from './NavMenuItem';
+import { NavMenuItem, type NavMenuItemProps } from './NavMenuItem';
 
 export type NavMenuProps = {
   /**

@@ -1,4 +1,4 @@
-import { IdentityTenantsDTO } from '../../../../types';
+import { type IdentityTenantsDTO } from '../../../../types';
 
 /**
  * Получение данных из identity

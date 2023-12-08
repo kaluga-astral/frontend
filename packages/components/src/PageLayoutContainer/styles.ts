@@ -7,6 +7,7 @@ export const PageLayoutContainerWrapper = styled.div`
     'header header' auto
     'content aside' 1fr
     / 1fr min-content;
+
   height: 100%;
   padding-top: ${({ theme }) => theme.spacing(6)};
 

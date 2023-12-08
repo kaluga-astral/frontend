@@ -7,8 +7,8 @@ import {
 } from '@astral/icons';
 import { forwardRef } from 'react';
 
-import { AlertProps } from '../Alert';
-import { Accordion, AccordionProps } from '../Accordion';
+import { type AlertProps } from '../Alert';
+import { Accordion, type AccordionProps } from '../Accordion';
 import { Collapse } from '../Collapse';
 
 import { CollapsableAlertActions } from './styles';

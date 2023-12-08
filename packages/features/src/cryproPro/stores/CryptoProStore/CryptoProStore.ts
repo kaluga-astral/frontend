@@ -1,17 +1,17 @@
 import {
-  CADESCOM_XML_SIGNATURE_TYPE,
-  Certificate,
+  type CADESCOM_XML_SIGNATURE_TYPE,
+  type Certificate,
 } from '@astral/cryptopro-cades';
 import { makeAutoObservable } from 'mobx';
 
 import {
   CryptoProCertificateService,
   CryptoProSignService,
-  FormatedCertificate,
+  type FormatedCertificate,
 } from '../../services';
 import {
-  CheckWorkspace,
-  WorkspaceSetupService,
+  type CheckWorkspace,
+  type WorkspaceSetupService,
   createWorkspaceSetupService,
 } from '../../services/WorkspaceSetupService';
 

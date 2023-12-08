@@ -1,12 +1,12 @@
-import { Components } from '@mui/material';
+import { type Components } from '@mui/material';
 
-import { Theme } from '../types';
+import { type Theme } from '../types';
 
 export const MuiStep: Components<Theme>['MuiStep'] = {
   styleOverrides: {
     horizontal({ theme }) {
       return {
-        '&:first-child': {
+        '&:first-of-type': {
           paddingLeft: 0,
         },
         padding: theme.spacing(0, 2.5),

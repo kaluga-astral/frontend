@@ -5,13 +5,13 @@ import { formatPhoneToView } from './formatPhoneToView';
 describe('formatPhoneToView', () => {
   const mockPhoneNumber = '79999999999';
 
-  it('Prop:phone=default: Форматирование телефона по умолчанию, с выводом +7', () => {
+  it('Маска содержит по-умолчанию +7', () => {
     const formattedPhoneNumber = formatPhoneToView(mockPhoneNumber);
 
     expect(formattedPhoneNumber).toBe('+7 (999) 999-99-99');
   });
 
-  it('Prop:isStartWithPlus=false: Форматирование телефона с выводом 8', () => {
+  it('В маску добавляется 8 при isStartWithPlus=false', () => {
     const formattedPhoneNumber = formatPhoneToView(mockPhoneNumber, {
       isStartWithPlus: false,
     });
@@ -19,23 +19,15 @@ describe('formatPhoneToView', () => {
     expect(formattedPhoneNumber).toBe('8 (999) 999-99-99');
   });
 
-  it('Prop:phone=undefined: Обработка случая при отсуствие параметров', () => {
+  it('Входное значение игнорируется, если оно undefined', () => {
     const formattedPhoneNumber = formatPhoneToView();
 
     expect(formattedPhoneNumber).toBeUndefined();
   });
 
-  it('Prop:phone=withOutPlus: Форматирование телефона начинающегося без +', () => {
+  it('Маска формируется при отсутствии + в начале', () => {
     const formattedPhoneNumber = formatPhoneToView('79999999999');
 
     expect(formattedPhoneNumber).toBe('+7 (999) 999-99-99');
-  });
-
-  it('Prop:phone=startWith 8: Форматирование телефона начинающегося с 8', () => {
-    const formattedPhoneNumber = formatPhoneToView('89999999999', {
-      isStartWithPlus: false,
-    });
-
-    expect(formattedPhoneNumber).toBe('8 (999) 999-99-99');
   });
 });

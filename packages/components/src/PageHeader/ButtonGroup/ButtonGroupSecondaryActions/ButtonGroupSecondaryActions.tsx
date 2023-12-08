@@ -2,7 +2,10 @@ import { DotsOutlineMd } from '@astral/icons';
 
 import { IconDropdownButton } from '../../../IconDropdownButton';
 import { ListItemText } from '../../../ListItemText';
-import { ListItemButton, ListItemButtonProps } from '../../../ListItemButton';
+import {
+  ListItemButton,
+  type ListItemButtonProps,
+} from '../../../ListItemButton';
 
 /** Модель второстепенного экшена */
 export type SecondaryAction = Omit<ListItemButtonProps, 'children'> & {

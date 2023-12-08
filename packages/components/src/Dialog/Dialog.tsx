@@ -1,10 +1,10 @@
 import {
   Dialog as MuiDialog,
-  DialogProps as MuiDialogProps,
+  type DialogProps as MuiDialogProps,
 } from '@mui/material';
 
 import { DialogTitle } from '../DialogTitle';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type DialogProps = WithoutEmotionSpecific<
   Omit<MuiDialogProps, 'title'>

@@ -1,7 +1,7 @@
-import { MaskField, MaskFieldProps } from '@astral/components';
+import { MaskField, type MaskFieldProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 const MOBILE_PHONE_MASK = '+{7} (000) 000-00-00';
 

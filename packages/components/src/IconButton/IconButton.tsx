@@ -1,7 +1,10 @@
 import { forwardRef, useMemo } from 'react';
 
 import { type ButtonProps, ButtonVariants } from '../Button';
-import { CircularProgress, CircularProgressProps } from '../CircularProgress';
+import {
+  CircularProgress,
+  type CircularProgressProps,
+} from '../CircularProgress';
 
 import { IconButtonWrapper } from './styles';
 

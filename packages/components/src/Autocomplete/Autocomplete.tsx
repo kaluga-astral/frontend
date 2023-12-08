@@ -1,27 +1,27 @@
 import {
-  AutocompleteRenderGetTagProps,
-  AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState,
+  type AutocompleteRenderGetTagProps,
+  type AutocompleteRenderInputParams,
+  type AutocompleteRenderOptionState,
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
-  AutocompleteProps as MuiAutocompleteProps,
+  type AutocompleteProps as MuiAutocompleteProps,
 } from '@mui/material';
 import { forwardRef, useCallback } from 'react';
 import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
-import { TextField, TextFieldProps } from '../TextField';
+import { TextField, type TextFieldProps } from '../TextField';
 import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 import {
   OverflowTypography,
-  OverflowedElementProps,
+  type OverflowedElementProps,
 } from '../OverflowTypography';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
-import { AutocompleteSizes } from './enums';
+import { type AutocompleteSizes } from './enums';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 

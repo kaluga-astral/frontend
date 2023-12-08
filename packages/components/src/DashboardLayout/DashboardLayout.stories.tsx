@@ -1,12 +1,12 @@
+import { type MouseEvent, type ReactElement, forwardRef } from 'react';
+import { Box } from '@mui/material';
 import {
   AddOutlineMd,
   CompanyOutlineMd,
   ProfileOutlineMd,
   QuitOutlineMd,
 } from '@astral/icons';
-import { Box } from '@mui/material';
 import { Meta } from '@storybook/react';
-import { MouseEvent, ReactElement, forwardRef } from 'react';
 
 import { Divider } from '../Divider';
 import { ListItemIcon } from '../ListItemIcon';

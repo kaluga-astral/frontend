@@ -1,6 +1,6 @@
 import { ErrorFillSm, SuccessFillSm } from '@astral/icons';
 
-import { Theme } from '../../theme';
+import { type Theme } from '../../theme';
 import { styled } from '../../styles';
 
 const getStyles = (theme: Theme) => {
