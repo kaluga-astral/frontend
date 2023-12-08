@@ -1,7 +1,7 @@
 import type { FocusEvent, ForwardedRef } from 'react';
 import {
   EmailField,
-  type EmailFieldProps,
+  type TextFieldProps,
   forwardRefWithGeneric,
 } from '@astral/components';
 
@@ -9,7 +9,7 @@ import { useFormFieldProps } from '../hooks';
 import { type WithFormFieldProps } from '../types';
 
 export type FormEmailFieldProps<FieldValues extends object> =
-  WithFormFieldProps<EmailFieldProps, FieldValues> & {
+  WithFormFieldProps<TextFieldProps, FieldValues> & {
     /**
      * @description Параметр для обрезания пробелов в текстфилде при вызове onBlur. По-умолчанию true
      * @example <FormEmailField trimmed={false} />

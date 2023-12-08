@@ -57,7 +57,7 @@ export const Statuses = () => (
   </>
 );
 
-export const Required = () => <EmailField required label="Имя" />;
+export const Required = () => <EmailField required label="Email" />;
 
 export const Sizes = () => (
   <>
