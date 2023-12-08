@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { BellFillMd } from '@astral/icons';
 
 import noNotificationsIllustration from '../../../ui/illustrations/no-notifications.svg';
@@ -11,7 +11,7 @@ import { Tag } from '../Tag';
 import { ConfigProvider } from '../ConfigProvider';
 
 import { NotificationList } from './NotificationList';
-import { Notification } from './types';
+import { type Notification } from './types';
 
 const meta: Meta<typeof NotificationList> = {
   title: 'Components/NotificationList',

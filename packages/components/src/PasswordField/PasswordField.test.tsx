@@ -21,7 +21,7 @@ describe('PasswordField', () => {
 
     const icon = screen.getByRole('button').getElementsByTagName('svg')[0];
 
-    expect(icon.id).toEqual('visibility-on');
+    expect(icon.id).toBe('visibility-on');
   });
 
   it('Prop:showSymbols: символы видны, иконка поля соответствует состоянию', () => {
@@ -33,6 +33,6 @@ describe('PasswordField', () => {
 
     const icon = screen.getByRole('button').getElementsByTagName('svg')[0];
 
-    expect(icon.id).toEqual('visibility-off');
+    expect(icon.id).toBe('visibility-off');
   });
 });
