@@ -36,7 +36,11 @@ export * from './FormSelect';
 
 export * from './FormTextField';
 
-export * from './FormEmailField';
+export {
+  FormEmailField,
+  FormEmailFieldProps,
+  FormEmailFieldValue,
+} from './FormEmailField';
 
 export * from './FormSubmitButton';
 
