@@ -1,4 +1,10 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import {
+  type SyntheticEvent,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { type IMask } from 'react-imask';
 
 import { Grid, type GridProps } from '../Grid';
@@ -21,6 +27,7 @@ import {
 
 import { DateRangePickerSplitter } from './styles';
 import { getBoundaryDate } from './utils';
+import { type DateRangeInput } from './types';
 
 const DEFAULT_SPACING = 1;
 
@@ -82,9 +89,12 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     });
 
     /**
-     * Была ли выбрана start-дата после открытия поповера
+     * Была ли выбрана start/end-дата после открытия поповера
      */
-    const [isSelectedStartDate, setIsSelectedStartDate] = useState(false);
+    const [isStartDateSelected, setIsStartDateSelected] = useState(false);
+    const [isEndDateSelected, setIsEndDateSelected] = useState(false);
+
+    const [activeInput, setActiveInput] = useState<DateRangeInput>();
 
     const startBaseDate = useBaseDateInRange({
       minDate,
@@ -131,18 +141,50 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onChangeValue: endDateProps?.onChange,
     });
 
-    const handleDayPick = (date: Date) => {
-      if (isSelectedStartDate) {
-        onMaskedEndDateChange(date);
-        closePopover(undefined, 'selectOption');
-      } else {
-        // Если первая дата больше второй даты, устанавливаем вторую дату равной первой
-        if (selectedEndBaseDate && date > selectedEndBaseDate) {
-          onMaskedEndDateChange(date);
-        }
+    const handleOpenPopover = (e: SyntheticEvent) => {
+      const isStartDate = e.target === startInputRef.current;
+      const isEndDate = e.target === endInputRef.current;
 
-        onMaskedStartDateChange(date);
-        setIsSelectedStartDate(true);
+      if (isStartDate) {
+        setActiveInput('startDate');
+      }
+
+      if (isEndDate) {
+        setActiveInput('endDate');
+      }
+
+      openPopover();
+    };
+
+    const pickStartDate = (pickedDate: Date) => {
+      onMaskedStartDateChange(pickedDate);
+      setIsStartDateSelected(true);
+      setActiveInput('endDate');
+      endInputRef.current?.focus();
+
+      if (isEndDateSelected) {
+        closePopover(undefined, 'selectOption');
+      }
+    };
+
+    const pickEndDate = (pickedDate: Date) => {
+      onMaskedEndDateChange(pickedDate);
+      setIsEndDateSelected(true);
+      setActiveInput('startDate');
+      startInputRef.current?.focus();
+
+      if (isStartDateSelected) {
+        closePopover(undefined, 'selectOption');
+      }
+    };
+
+    const handleDayPick = (pickedDate: Date) => {
+      if (activeInput === 'startDate') {
+        pickStartDate(pickedDate);
+      }
+
+      if (activeInput === 'endDate') {
+        pickEndDate(pickedDate);
       }
     };
 
@@ -161,20 +203,9 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     };
 
     useEffect(() => {
-      setIsSelectedStartDate(false);
+      setIsStartDateSelected(false);
+      setIsEndDateSelected(false);
     }, [isOpenPopover]);
-
-    useEffect(() => {
-      if (!isOpenPopover) {
-        return;
-      }
-
-      if (isSelectedStartDate) {
-        endInputRef.current?.focus();
-      } else {
-        startInputRef.current?.focus();
-      }
-    }, [isSelectedStartDate, isOpenPopover]);
 
     return (
       <Grid container spacing={spacing} ref={ref} direction="column">
@@ -186,8 +217,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={startMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptStart}
-          onFocus={openPopover}
-          onClick={openPopover}
+          onFocus={handleOpenPopover}
+          onClick={handleOpenPopover}
         />
         <DatePickerInput
           {...endDateProps.inputProps}
@@ -197,8 +228,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={endMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptEnd}
-          onFocus={openPopover}
-          onClick={openPopover}
+          onFocus={handleOpenPopover}
+          onClick={handleOpenPopover}
         />
         <DatePickerPopover
           open={isOpenPopover}
@@ -207,14 +238,21 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         >
           <MinMaxDateContextProvider
             minDate={
-              isSelectedStartDate
+              isStartDateSelected
                 ? getBoundaryDate({
                     reserve: minDate,
                     target: startDateProps.value,
                   })
                 : minDate
             }
-            maxDate={maxDate}
+            maxDate={
+              isEndDateSelected
+                ? getBoundaryDate({
+                    reserve: maxDate,
+                    target: endDateProps.value,
+                  })
+                : maxDate
+            }
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
@@ -229,7 +267,11 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               isMondayFirst={isMondayFirst}
               selectedDate={selectedStartBaseDate}
               rangeDate={endDateProps.value}
-              date={selectedEndBaseDate || endBaseDate}
+              date={
+                selectedEndBaseDate && selectedEndBaseDate > endBaseDate
+                  ? selectedEndBaseDate
+                  : endBaseDate
+              }
               onChange={handleDayPick}
               isRange
             />
