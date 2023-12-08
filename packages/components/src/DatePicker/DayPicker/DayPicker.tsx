@@ -83,35 +83,27 @@ export const DayPicker = ({
       <DateCalendarBody>
         <DateDayPickerGridHead isMondayFirst={isMondayFirst} />
         <DateDayPickerGridBody role="grid">
-          {grid.map(
-            ({ date, monthDay, isInSelectedRange, ...props }, index) => (
-              <DateCalendarGridBtn
-                key={index}
-                onClick={() => onChange?.(date)}
-                title={dayFormat(date)}
-                lengthInRow={DAYS_IN_WEEK}
-                isPreviousItemInSelectedRange={
-                  grid[index - 1]?.isInSelectedRange
-                }
-                onMouseEnter={() => {
-                  setHoveredDate(date);
-                }}
-                isInSelectedRange={
-                  isInSelectedRange ||
-                  (isRange &&
-                    isDateBetweenSelectedAndRangeDates({
-                      date,
-                      selectedDate,
-                      rangeDate: hoveredDate,
-                      deep: DateCompareDeep.day,
-                    }))
-                }
-                {...props}
-              >
-                {monthDay}
-              </DateCalendarGridBtn>
-            ),
-          )}
+          {grid.map(({ date, monthDay, ...props }, index) => (
+            <DateCalendarGridBtn
+              key={index}
+              onClick={() => onChange?.(date)}
+              title={dayFormat(date)}
+              lengthInRow={DAYS_IN_WEEK}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              onMouseEnter={() => {
+                setHoveredDate(date);
+              }}
+              isInHoveredRange={isDateBetweenSelectedAndRangeDates({
+                date,
+                selectedDate,
+                rangeDate: hoveredDate,
+                deep: DateCompareDeep.day,
+              })}
+              {...props}
+            >
+              {monthDay}
+            </DateCalendarGridBtn>
+          ))}
         </DateDayPickerGridBody>
       </DateCalendarBody>
     </DateCalendarWrapper>
