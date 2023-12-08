@@ -55,38 +55,3 @@ export const Example = () => {
     </Form>
   );
 };
-
-/**
- * Prop `trimmed` удаляет пробелы при onBlur в начале и конце строки.
- * По-дефолту данная фича включена.
- */
-export const Trim = () => {
-  const form = useForm<FormValues>({
-    resolver: resolver<FormValues>(validationSchema),
-    defaultValues: { email: '  example@domain.ru' },
-  });
-
-  const handleSubmit = form.handleSubmit(
-    (values) =>
-      new Promise<void>((resolve) => {
-        setTimeout(() => {
-          window.alert(JSON.stringify(values));
-          resolve();
-        }, 1000);
-      }),
-  );
-
-  return (
-    <Form form={form} onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <FormEmailField
-          required
-          label="Email"
-          name="email"
-          control={form.control}
-        />
-        <FormSubmitButton>Отправить</FormSubmitButton>
-      </Grid>
-    </Form>
-  );
-};

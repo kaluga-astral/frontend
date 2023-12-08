@@ -70,7 +70,7 @@ export * from './Divider';
 
 export * from './DropdownButton';
 
-export * from './EmailField';
+export { EmailField, EmailFieldProps } from './EmailField';
 
 export * from './ErrorBoundary';
 

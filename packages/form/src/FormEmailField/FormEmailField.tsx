@@ -1,41 +1,17 @@
-import type { FocusEvent, ForwardedRef } from 'react';
-import {
-  EmailField,
-  type TextFieldProps,
-  forwardRefWithGeneric,
-} from '@astral/components';
+import type { ForwardedRef } from 'react';
+import { EmailFieldProps, forwardRefWithGeneric } from '@astral/components';
 
-import { useFormFieldProps } from '../hooks';
+import { FormTextField } from '../FormTextField';
 import { type WithFormFieldProps } from '../types';
 
 export type FormEmailFieldProps<FieldValues extends object> =
-  WithFormFieldProps<TextFieldProps, FieldValues> & {
-    /**
-     * @description Параметр для обрезания пробелов в текстфилде при вызове onBlur. По-умолчанию true
-     * @example <FormEmailField trimmed={false} />
-     */
-    trimmed?: boolean;
-  };
+  WithFormFieldProps<EmailFieldProps, FieldValues>;
 
-/**
- * @description Адаптер для EmailField
- */
 function FormEmailFieldInner<T extends object>(
-  { trimmed = true, ...props }: FormEmailFieldProps<T>,
+  props: FormEmailFieldProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const fieldProps = useFormFieldProps<FormEmailFieldProps<T>, T>(props);
-
-  const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
-    if (trimmed) {
-      fieldProps.onChange(event.target.value?.trim());
-    }
-
-    fieldProps.onBlur();
-    props.onBlur?.(event);
-  };
-
-  return <EmailField {...fieldProps} ref={ref} onBlur={handleOnBlur} />;
+  return <FormTextField ref={ref} type="email" {...props} />;
 }
 
 export const FormEmailField = forwardRefWithGeneric(FormEmailFieldInner);
