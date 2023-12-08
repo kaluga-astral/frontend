@@ -1,3 +1,3 @@
-export * from './FormEmailField';
+export { FormEmailFieldProps, FormEmailField } from './FormEmailField';
 
-export * from './types';
+export { FormEmailFieldValue } from './types';
