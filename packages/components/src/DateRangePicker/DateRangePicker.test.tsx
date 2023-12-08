@@ -5,7 +5,7 @@ import {
   screen,
   userEvents,
 } from '@astral/tests';
-import { vi } from 'vitest';
+import { describe, vi } from 'vitest';
 import { useState } from 'react';
 
 import { DateRangePicker } from './DateRangePicker';
@@ -20,7 +20,7 @@ describe('DateRangePicker', () => {
     vi.useRealTimers();
   });
 
-  it('Props:onChange: при выборе даты в пикере в onChange передается объект Date', async () => {
+  it('onChange принимает объект Date при выборе даты в пикере', async () => {
     const onChangeA = vi.fn();
     const onChangeB = vi.fn();
 
@@ -60,67 +60,71 @@ describe('DateRangePicker', () => {
     );
   });
 
-  it('Props:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
-    renderWithTheme(
-      <DateRangePicker
-        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-        minDate={new Date('2022-02-09')}
-      />,
-    );
+  describe('minDate', () => {
+    it('Не позволяет выбрать дату меньше указанной', async () => {
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+          minDate={new Date('2022-02-09')}
+        />,
+      );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      fireEvent.focus(screen.getByPlaceholderText('inputA'));
 
-    const btn = screen.getAllByText('8')[0];
+      const btn = screen.getAllByText('8')[0];
 
-    expect(btn).toBeDisabled();
+      expect(btn).toBeDisabled();
+    });
+
+    it('Позволяет выбрать дату равной minDate', async () => {
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+          minDate={new Date('2022-02-09')}
+        />,
+      );
+
+      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+
+      const btn = screen.getAllByText('9')[0];
+
+      expect(btn).not.toBeDisabled();
+    });
   });
 
-  it('Props:minDate: в пикере можно выбрать дату равной minDate', async () => {
-    renderWithTheme(
-      <DateRangePicker
-        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-        minDate={new Date('2022-02-09')}
-      />,
-    );
+  describe('maxDate', () => {
+    it('Позволяет выбрать дату больше maxDate', async () => {
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+          maxDate={new Date('2022-02-09')}
+        />,
+      );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      fireEvent.focus(screen.getByPlaceholderText('inputA'));
 
-    const btn = screen.getAllByText('9')[0];
+      const btn = screen.getAllByText('10')[0];
 
-    expect(btn).not.toBeDisabled();
+      expect(btn).toBeDisabled();
+    });
+
+    it('Позволяет выбрать дату равной maxDate', async () => {
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+          maxDate={new Date('2022-02-09')}
+        />,
+      );
+
+      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+
+      const btn = screen.getAllByText('9')[0];
+
+      expect(btn).not.toBeDisabled();
+    });
   });
 
-  it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
-    renderWithTheme(
-      <DateRangePicker
-        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-        maxDate={new Date('2022-02-09')}
-      />,
-    );
-
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
-
-    const btn = screen.getAllByText('10')[0];
-
-    expect(btn).toBeDisabled();
-  });
-
-  it('Props:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
-    renderWithTheme(
-      <DateRangePicker
-        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-        maxDate={new Date('2022-02-09')}
-      />,
-    );
-
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
-
-    const btn = screen.getAllByText('9')[0];
-
-    expect(btn).not.toBeDisabled();
-  });
-
-  it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
+  it('Смещение даты для value обнуляется', async () => {
     renderWithTheme(
       <DateRangePicker
         startDateProps={{
@@ -138,7 +142,7 @@ describe('DateRangePicker', () => {
     expect(selected).toBeTruthy();
   });
 
-  it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
+  it('Активная дата помечается в календаре как выбранная', async () => {
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
     };
@@ -172,7 +176,7 @@ describe('DateRangePicker', () => {
     expect(selected).toBeTruthy();
   });
 
-  it('В состоянии управляемого компонента, пикер закрывается при выборе обоих дат', async () => {
+  it('Пикер закрывается при выборе обоих дат, в состоянии управляемого компонента', async () => {
     const TestComponent = () => {
       const [valueA, setValueA] = useState<Date | undefined>();
       const [valueB, setValueB] = useState<Date | undefined>();
@@ -209,27 +213,29 @@ describe('DateRangePicker', () => {
     expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
   });
 
-  it('Props:onBlur: вызывается при фокусе на стороннем элементе', async () => {
-    const onBlur = vi.fn();
+  describe('onBlur', () => {
+    it('Вызывается при фокусе на стороннем элементе', async () => {
+      const onBlur = vi.fn();
 
-    renderWithTheme(
-      <DateRangePicker
-        onBlur={onBlur}
-        startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-      />,
-    );
+      renderWithTheme(
+        <DateRangePicker
+          onBlur={onBlur}
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+        />,
+      );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
-    // фокус вне инпута с поповером
-    fireEvent.focus(document.body);
-    expect(onBlur).toBeCalled();
-  });
+      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      // фокус вне инпута с поповером
+      fireEvent.focus(document.body);
+      expect(onBlur).toBeCalled();
+    });
 
-  it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {
-    const onBlur = vi.fn();
+    it('Не вызывается при клике мимо инпута, если поповер закрыт', async () => {
+      const onBlur = vi.fn();
 
-    renderWithTheme(<DateRangePicker onBlur={onBlur} />);
-    await userEvents.click(document.body);
-    expect(onBlur).not.toBeCalled();
+      renderWithTheme(<DateRangePicker onBlur={onBlur} />);
+      await userEvents.click(document.body);
+      expect(onBlur).not.toBeCalled();
+    });
   });
 });
