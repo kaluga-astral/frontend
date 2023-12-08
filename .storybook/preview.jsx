@@ -1,6 +1,6 @@
 import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
-import prettier from 'prettier/standalone';
-import prettierTs from 'prettier/parser-typescript';
+import prettier from 'prettier2/standalone';
+import prettierTs from 'prettier2/parser-typescript';
 
 import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
