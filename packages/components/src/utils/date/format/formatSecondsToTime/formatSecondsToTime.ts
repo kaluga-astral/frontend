@@ -1,8 +1,3 @@
-const START_HOURS_INDEX = 11;
-const START_MINUTES_INDEX = 14;
-
-const END_INDEX = 19;
-
 const HOUR = 60 * 60; // 60 сек * 60 мин
 
 /**
@@ -13,9 +8,10 @@ export const formatSecondsToTime = (seconds: number): string => {
 
   date.setSeconds(seconds);
 
-  if (seconds >= HOUR) {
-    return date.toISOString().substring(START_HOURS_INDEX, END_INDEX);
-  } else {
-    return date.toISOString().substring(START_MINUTES_INDEX, END_INDEX);
-  }
+  return Intl.DateTimeFormat('ru', {
+    second: 'numeric',
+    minute: 'numeric',
+    timeZone: 'UTC',
+    hour: seconds >= HOUR ? 'numeric' : undefined,
+  }).format(date);
 };
