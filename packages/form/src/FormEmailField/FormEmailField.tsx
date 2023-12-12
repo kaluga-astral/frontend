@@ -1,5 +1,8 @@
 import type { ForwardedRef } from 'react';
-import { EmailFieldProps, forwardRefWithGeneric } from '@astral/components';
+import {
+  type EmailFieldProps,
+  forwardRefWithGeneric,
+} from '@astral/components';
 
 import { FormTextField } from '../FormTextField';
 import { type WithFormFieldProps } from '../types';

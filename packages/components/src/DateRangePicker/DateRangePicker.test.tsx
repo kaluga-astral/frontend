@@ -20,44 +20,59 @@ describe('DateRangePicker', () => {
     vi.useRealTimers();
   });
 
-  it('onChange принимает объект Date при выборе даты в пикере', async () => {
-    const onChangeA = vi.fn();
-    const onChangeB = vi.fn();
+  describe('onChange принимает объект Date', () => {
+    const setupPicker = () => {
+      const onChangeStartDateSpy = vi.fn();
+      const onChangeEndDateSpy = vi.fn();
 
-    renderWithTheme(
-      <DateRangePicker
-        startDateProps={{
-          onChange: onChangeA,
-          inputProps: { placeholder: 'inputA' },
-        }}
-        endDateProps={{
-          onChange: onChangeB,
-          inputProps: { placeholder: 'inputB' },
-        }}
-      />,
-    );
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{
+            onChange: onChangeStartDateSpy,
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            onChange: onChangeEndDateSpy,
+            inputProps: { placeholder: 'inputB' },
+          }}
+        />,
+      );
 
-    fireEvent.click(screen.getByPlaceholderText('inputA'));
+      fireEvent.click(screen.getByPlaceholderText('inputA'));
 
-    const dateBtnA = screen.getAllByText('15')[0];
+      return { onChangeStartDateSpy, onChangeEndDateSpy };
+    };
 
-    await userEvents.click(dateBtnA);
-    expect(onChangeA).toBeCalled();
-    expect(onChangeA.mock.calls[0][0] instanceof Date).toBeTruthy();
+    it('При выборе даты в первом пикере', async () => {
+      const { onChangeStartDateSpy } = setupPicker();
 
-    expect(onChangeA.mock.calls[0][0].toISOString()).toBe(
-      '2022-02-15T00:00:00.000Z',
-    );
+      const dateBtn = screen.getAllByText('15')[0];
 
-    const dateBtnB = screen.getAllByText('15')[1];
+      await userEvents.click(dateBtn);
+      expect(onChangeStartDateSpy).toBeCalled();
 
-    await userEvents.click(dateBtnB);
-    expect(onChangeB).toBeCalled();
-    expect(onChangeB.mock.calls[0][0] instanceof Date).toBeTruthy();
+      expect(
+        onChangeStartDateSpy.mock.calls[0][0] instanceof Date,
+      ).toBeTruthy();
 
-    expect(onChangeB.mock.calls[0][0].toISOString()).toBe(
-      '2022-03-15T00:00:00.000Z',
-    );
+      expect(onChangeStartDateSpy.mock.calls[0][0].toISOString()).toBe(
+        '2022-02-15T00:00:00.000Z',
+      );
+    });
+
+    it('При выборе даты во втором пикере', async () => {
+      const { onChangeEndDateSpy } = setupPicker();
+
+      const dateBtnB = screen.getAllByText('15')[1];
+
+      await userEvents.click(dateBtnB);
+      expect(onChangeEndDateSpy).toBeCalled();
+      expect(onChangeEndDateSpy.mock.calls[0][0] instanceof Date).toBeTruthy();
+
+      expect(onChangeEndDateSpy.mock.calls[0][0].toISOString()).toBe(
+        '2022-03-15T00:00:00.000Z',
+      );
+    });
   });
 
   describe('minDate', () => {

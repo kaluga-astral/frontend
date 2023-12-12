@@ -25,7 +25,7 @@ describe('RadioGroup', () => {
 
     const errorText = screen.getByText('error');
 
-    expect(errorText).not.toBeUndefined();
+    expect(errorText).toBeDefined();
   });
 
   it('Label отображается для группы', () => {

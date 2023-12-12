@@ -1,4 +1,4 @@
-import { NotificationPriorities } from './enums';
+import { type NotificationPriorities } from './enums';
 
 export type NotificationPriority = keyof typeof NotificationPriorities;
 

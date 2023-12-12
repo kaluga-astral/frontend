@@ -10,7 +10,7 @@ const TEST_DATA = [
 ];
 
 describe('DataGridPagination', () => {
-  test.each(TEST_DATA)(
+  it.each(TEST_DATA)(
     'Props:page=$page:totalCount=$totalCount: текст пагинации "$expected"',
     ({ totalCount, page, expected }) => {
       renderWithTheme(

@@ -1,5 +1,5 @@
 import { forwardRef, useMemo, useState } from 'react';
-import { IMask, IMaskMixin } from 'react-imask';
+import { type IMask, IMaskMixin } from 'react-imask';
 import type { IMaskInputProps } from 'react-imask/dist/mixin';
 
 import { TextField, type TextFieldProps } from '../TextField';
