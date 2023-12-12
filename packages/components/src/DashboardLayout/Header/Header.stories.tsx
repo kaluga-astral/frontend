@@ -53,6 +53,7 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
+  max-height: 600px;
   width: 100%;
 `;
 
