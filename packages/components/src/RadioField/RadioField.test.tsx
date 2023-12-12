@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 import { RadioField } from './RadioField';
 
 describe('RadioField', () => {
-  it('Prop:label: label отображается', () => {
+  it('Label отображается', () => {
     renderWithTheme(<RadioField label="radio label" />);
 
     const label = screen.getByText('radio label');
@@ -12,7 +12,7 @@ describe('RadioField', () => {
     expect(label).toBeVisible();
   });
 
-  it('Prop:required: применяет required', () => {
+  it('К label добавляется "*", если required=true', () => {
     renderWithTheme(
       <RadioField
         label="radio label"
@@ -28,7 +28,7 @@ describe('RadioField', () => {
     expect(asterisk).toBeVisible();
   });
 
-  it('Props:disabled: true disabledReason: string: При наведении отображается tooltip с текстом', async () => {
+  it('Причина блокировки поля отображается', async () => {
     renderWithTheme(
       <RadioField
         label="label"
@@ -45,21 +45,5 @@ describe('RadioField', () => {
 
     expect(tooltip).toBeInTheDocument();
     expect(tooltip).toHaveTextContent(/^disabled reason text$/);
-  });
-
-  it('Prop:required: применяет required', () => {
-    renderWithTheme(
-      <RadioField
-        label="radio label"
-        required
-        inputProps={{ role: 'radio' }}
-      />,
-    );
-
-    const input = screen.getByRole('radio');
-    const asterisk = screen.getByText('*');
-
-    expect(input).toHaveAttribute('required');
-    expect(asterisk).toBeVisible();
   });
 });

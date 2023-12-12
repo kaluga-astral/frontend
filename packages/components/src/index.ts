@@ -70,6 +70,8 @@ export * from './Divider';
 
 export * from './DropdownButton';
 
+export { EmailField, EmailFieldProps } from './EmailField';
+
 export * from './ErrorBoundary';
 
 export * from './Fab';

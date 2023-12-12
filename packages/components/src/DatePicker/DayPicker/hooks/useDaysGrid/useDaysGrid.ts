@@ -4,6 +4,7 @@ import { DAYS_IN_WEEK, MONTHS_IN_YEAR } from '../../../constants/counts';
 import {
   DateCompareDeep,
   addDays,
+  addMonths,
   buildIsoDate,
   isDate,
   isDateOutOfRange,
@@ -166,7 +167,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addDays,
+      addCb: addMonths,
       indexPrevDisabledCheck: startMonthIndex,
       indexNextDisabledCheck: lastCurrentMonthIndex,
       deep: DateCompareDeep.day,
