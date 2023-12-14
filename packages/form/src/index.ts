@@ -36,6 +36,12 @@ export * from './FormSelect';
 
 export * from './FormTextField';
 
+export {
+  FormEmailField,
+  FormEmailFieldProps,
+  FormEmailFieldValue,
+} from './FormEmailField';
+
 export * from './FormSubmitButton';
 
 export * from './FormDatePicker';
