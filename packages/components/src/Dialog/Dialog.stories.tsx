@@ -9,7 +9,6 @@ import { Grid } from '../Grid';
 import { Tag } from '../Tag';
 import { Typography } from '../Typography';
 import { DialogHeader } from '../DialogHeader';
-import { styled } from '../styles';
 
 import { Dialog } from './Dialog';
 
@@ -39,16 +38,6 @@ export const Interaction: Story = {
     },
   },
 };
-
-const Subtitle = styled(Typography)`
-  &::before {
-    content: '|';
-
-    padding: ${({ theme }) => theme.spacing(0, 4)};
-
-    color: ${({ theme }) => theme.palette.grey[500]};
-  }
-`;
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +74,7 @@ export const Example = () => {
   );
 };
 
-export const HeaderWithSubtitle = () => {
+export const CustomTitle = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -98,14 +87,16 @@ export const HeaderWithSubtitle = () => {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>With subtitle</Button>
+      <Button onClick={handleClickOpen}>Custom title</Button>
       <Dialog
         open={isOpen}
         onClose={handleClose}
         title={
           <>
             Заголовок
-            <Subtitle>Подзаголовок</Subtitle>
+            <Typography color="grey" colorIntensity="500">
+              | Подзаголовок
+            </Typography>
           </>
         }
       >
