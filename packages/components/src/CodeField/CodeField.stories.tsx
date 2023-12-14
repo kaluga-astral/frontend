@@ -105,6 +105,9 @@ export const Loading = () => (
   </>
 );
 
+/**
+ * onComplete вызывается, когда поле заполнено
+ */
 export const OnComplete = () => (
   <>
     <CodeField
