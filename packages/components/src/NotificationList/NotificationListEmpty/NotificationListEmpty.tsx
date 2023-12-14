@@ -1,5 +1,5 @@
 import { Typography } from '../../Typography';
-import { NotificationListType } from '../types';
+import { type NotificationListType } from '../types';
 
 import {
   NotificationListEmptyContainer,

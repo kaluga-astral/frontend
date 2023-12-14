@@ -3,7 +3,7 @@ import { CrossOutlineSm } from '@astral/icons';
 import { useIntersection } from 'react-use';
 
 import { Typography } from '../../Typography';
-import { Notification } from '../types';
+import { type Notification } from '../types';
 
 import {
   ListItem,

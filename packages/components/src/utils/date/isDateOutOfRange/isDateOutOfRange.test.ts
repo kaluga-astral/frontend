@@ -8,7 +8,7 @@ describe('isDateOutOfRange', () => {
 
     const result = isDateOutOfRange({ date, dateA, dateB });
 
-    expect(result).toBe(true);
+    expect(result).toBeTruthy();
   });
 
   it('При дате меньше обоих значений и ренджа ожидается true', () => {
@@ -18,7 +18,7 @@ describe('isDateOutOfRange', () => {
 
     const result = isDateOutOfRange({ date, dateA, dateB });
 
-    expect(result).toBe(true);
+    expect(result).toBeTruthy();
   });
 
   it('При дате меньше B и больше А, т.е. при вхождении даты в диапазон, ожидается false', () => {
@@ -28,7 +28,7 @@ describe('isDateOutOfRange', () => {
 
     const result = isDateOutOfRange({ date, dateA, dateB });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При дате меньше A и больше B, т.е. при вхождении даты в диапазон, ожидается false', () => {
@@ -38,7 +38,7 @@ describe('isDateOutOfRange', () => {
 
     const result = isDateOutOfRange({ date, dateA, dateB });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При совпадении даты с одним из ренджа ожидается false', () => {
@@ -48,7 +48,7 @@ describe('isDateOutOfRange', () => {
 
     const result = isDateOutOfRange({ date, dateA, dateB });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При сравнении по глубине в часах, даты с одинаковым часом, но разными минутами, ожидается false', () => {
@@ -63,7 +63,7 @@ describe('isDateOutOfRange', () => {
       deep: DateCompareDeep.hour,
     });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При сравнении по глубине в днях, даты с одинаковым днем, но разным временем, ожидается false', () => {
@@ -78,7 +78,7 @@ describe('isDateOutOfRange', () => {
       deep: DateCompareDeep.day,
     });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При сравнении по глубине в месяцах, даты с одинаковым месяцем, но разными днями, ожидается false', () => {
@@ -93,7 +93,7 @@ describe('isDateOutOfRange', () => {
       deep: DateCompareDeep.month,
     });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 
   it('При сравнении по глубине в годах, даты с одинаковым годом, но разными месяцами, ожидается false', () => {
@@ -108,6 +108,6 @@ describe('isDateOutOfRange', () => {
       deep: DateCompareDeep.year,
     });
 
-    expect(result).toBe(false);
+    expect(result).toBeFalsy();
   });
 });

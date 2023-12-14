@@ -2,7 +2,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { expect, vi } from 'vitest';
 
 import { NotificationList } from './NotificationList';
-import { Notification } from './types';
+import { type Notification } from './types';
 
 const notifications: Notification[] = [
   {
@@ -156,7 +156,7 @@ describe('NotificationList', () => {
 
     expect(deleteButton).toBeVisible();
     await userEvents.click(deleteButton);
-    expect(onDeleteMock.mock.calls[0][0]).toEqual('1');
+    expect(onDeleteMock.mock.calls[0][0]).toBe('1');
   });
 
   it('Props:actions: отображает кнопку действия', () => {

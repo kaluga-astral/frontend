@@ -1,9 +1,9 @@
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
-import { Theme } from '../../theme';
+import { type Theme } from '../../theme';
 import { NotificationPriorities } from '../enums';
 import { IconButton } from '../../IconButton';
-import { NotificationPriority } from '../types';
+import { type NotificationPriority } from '../types';
 
 const getPriorityColor = ({
   theme,

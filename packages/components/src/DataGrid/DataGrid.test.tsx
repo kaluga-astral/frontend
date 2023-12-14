@@ -71,13 +71,13 @@ describe('DataGrid', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    expect(currentSort).toBe(undefined);
+    expect(currentSort).toBeUndefined();
     await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'asc' });
     await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'desc' });
     await userEvents.click(screen.getByText('Наименование'));
-    expect(currentSort).toBe(undefined);
+    expect(currentSort).toBeUndefined();
   });
 
   it('Props:columns:field: отображает в строке данные по field', async () => {
@@ -134,24 +134,4 @@ describe('DataGrid', () => {
     await userEvents.click(screen.getByText('Vasya'));
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
   });
-
-  // TODO: https://astraltrack.atlassian.net/browse/UIKIT-309
-  // it('Props:emptyCellValue: по дефолту для пустого значения отображается -', async () => {
-  //   renderWithTheme(
-  //     <DataGrid<{ name?: string }>
-  //       keyId="name"
-  //       rows={[{}]}
-  //       columns={[
-  //         {
-  //           field: 'name',
-  //           label: 'Наименование',
-  //         },
-  //       ]}
-  //     />,
-  //   );
-  //
-  //   const emptySymbol = screen.getByText('-');
-  //
-  //   expect(emptySymbol).toBeVisible();
-  // });
 });

@@ -23,7 +23,7 @@ describe('useToggle', () => {
 
     act(() => handleActive());
     isActive = result.current[0];
-    expect(isActive).toBe(true);
+    expect(isActive).toBeTruthy();
   });
 
   it('isActive: Меняем стейт с помощью handleInactive на false', () => {
@@ -32,6 +32,6 @@ describe('useToggle', () => {
     rerender({ initialState: false });
     act(() => handleInactive());
     isActive = result.current[0];
-    expect(isActive).toBe(false);
+    expect(isActive).toBeFalsy();
   });
 });
