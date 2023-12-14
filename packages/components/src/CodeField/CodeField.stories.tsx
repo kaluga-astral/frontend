@@ -118,20 +118,21 @@ export const OnComplete = () => (
 );
 
 export const DynamicResendTimeout = () => {
-  const [t, setT] = useState(60);
+  const [timeout, setTimeout] = useState(5);
 
   return (
     <>
-      <button onClick={() => setT(5)}>5s</button>
-      <button onClick={() => setT(15)}>15s</button>
-      <button onClick={() => setT(60)}>60s</button>
+      <button onClick={() => setTimeout(5)}>5s</button>
+      <button onClick={() => setTimeout(15)}>15s</button>
+      <button onClick={() => setTimeout(60)}>60s</button>
+      <button onClick={() => setTimeout(150)}>150s</button>
 
       <CodeField
         codeLength={6}
         label="Код подтверждения отправлен на test@test.ru"
         onResendCode={() => Promise.resolve()}
         isAllowResendCode
-        resendTimeout={t}
+        resendTimeout={timeout}
       />
     </>
   );

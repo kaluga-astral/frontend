@@ -1,8 +1,7 @@
 import { useState } from 'react';
+import useCountdown from '@bradgarropy/use-countdown';
 
-import { useTimer } from '../../hooks';
 import { Button } from '../../Button';
-import { formatSecondsToTime } from '../../utils/date';
 import { Typography } from '../../Typography';
 
 import { ResendCodeButtonWrapper } from './styles';
@@ -37,11 +36,19 @@ const ResendCodeButton = ({
   onResendCode,
   isError,
 }: ResendCodeButtonProps) => {
-  const [timer, restartTimer] = useTimer(resendTimeout);
+  const {
+    formatted: time,
+    reset,
+    isActive,
+  } = useCountdown({
+    seconds: resendTimeout,
+    autoStart: true,
+  });
+
   const [resendCodeLoading, setResendCodeLoading] = useState(false);
 
-  const showTimer = !disabled && !loading && !resendCodeLoading && timer > 0;
-  const disableButton = disabled || loading || resendCodeLoading || timer > 0;
+  const showTimer = !disabled && !loading && !resendCodeLoading && isActive;
+  const disableButton = disabled || loading || resendCodeLoading || isActive;
 
   const onClick = () => {
     setResendCodeLoading(true);
@@ -49,7 +56,7 @@ const ResendCodeButton = ({
     if (onResendCode) {
       onResendCode()
         .then(() => {
-          restartTimer();
+          reset({ minutes: 0, seconds: resendTimeout });
         })
         .finally(() => setResendCodeLoading(false));
     }
@@ -62,7 +69,7 @@ const ResendCodeButton = ({
       </Button>
       {showTimer && (
         <Typography color="grey" colorIntensity="700">
-          {formatSecondsToTime(timer)}
+          {time}
         </Typography>
       )}
     </ResendCodeButtonWrapper>
