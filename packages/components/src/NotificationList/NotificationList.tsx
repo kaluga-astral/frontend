@@ -5,7 +5,7 @@ import { ConfigContext } from '../ConfigProvider';
 
 import { NotificationListItem } from './NotificationListItem';
 import { NotificationListTabs } from './NotificationListTabs';
-import { Notification, NotificationListType } from './types';
+import { type Notification, type NotificationListType } from './types';
 import {
   NotificationListDialog,
   NotificationListHeader,

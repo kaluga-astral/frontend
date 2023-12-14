@@ -1,6 +1,6 @@
-import { SyntheticEvent } from 'react';
+import { type SyntheticEvent } from 'react';
 
-import { NotificationListType } from '../types';
+import { type NotificationListType } from '../types';
 
 import { NotificationListTabsRoot, NotificationListTabsTab } from './styles';
 

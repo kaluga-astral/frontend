@@ -30,8 +30,8 @@ const setClientHeight = (value: number) => {
   });
 };
 
-describe('CollapsibleTypography ', () => {
-  it('Prop: rowsCount=1: Появляется кнопка раскрытия ', () => {
+describe('CollapsibleTypography', () => {
+  it('Prop: rowsCount=1: Появляется кнопка раскрытия', () => {
     setScrollHeight(200);
 
     renderWithTheme(

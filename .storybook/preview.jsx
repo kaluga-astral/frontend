@@ -1,6 +1,8 @@
 import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
-import prettier from 'prettier/standalone';
-import prettierTs from 'prettier/parser-typescript';
+/* Временно используется prettier v2, т.к. в более новых версиях prettier метод format асинхронный,
+* а transformSource в storybook не поддерживает асинхронные методы*/
+import prettier from 'prettier2/standalone';
+import prettierTs from 'prettier2/parser-typescript';
 
 import { ThemeProvider, styled } from '../packages/components/src'
 import { getTheme, themes } from './themes'
