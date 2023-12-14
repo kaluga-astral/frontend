@@ -10,6 +10,9 @@ export const KEYBOARD_KEYS = {
   moveCaretRight: 'ArrowRight',
   arrowUp: 'ArrowUp',
   arrowDown: 'ArrowDown',
-  startDigit: 0,
-  endDigit: 9,
+};
+
+export const DIGIT_KEYS = {
+  zeroDigit: 0,
+  nineDigit: 9,
 };

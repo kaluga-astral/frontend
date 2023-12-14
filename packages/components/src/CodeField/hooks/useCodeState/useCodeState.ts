@@ -7,7 +7,7 @@ import {
 
 import { type CodeFieldInputType } from '../../types';
 import { formatInitialValue } from '../../utils';
-import { DIGITS_REGEX, KEYBOARD_KEYS } from '../../constants';
+import { DIGITS_REGEX, DIGIT_KEYS, KEYBOARD_KEYS } from '../../constants';
 
 export const useCodeState = (
   initialValue: string | undefined,
@@ -91,8 +91,8 @@ export const useCodeState = (
     if (e.key === KEYBOARD_KEYS.backspace) {
       setFocusIndexPrevious(index);
     } else if (
-      keyCode >= KEYBOARD_KEYS.startDigit &&
-      keyCode <= KEYBOARD_KEYS.endDigit
+      keyCode >= DIGIT_KEYS.zeroDigit &&
+      keyCode <= DIGIT_KEYS.nineDigit
     ) {
       changeValue(e, index);
     }

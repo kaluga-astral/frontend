@@ -8,7 +8,7 @@ export const CodeFieldWrapper = styled.div`
 
 export const CodeFieldDigitsWrapper = styled.ul`
   display: flex;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 export const CodeFieldDigitsItem = styled.li`
@@ -18,7 +18,7 @@ export const CodeFieldDigitsItem = styled.li`
 export const CodeFieldDigit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;
-  padding: 18px 25px;
+  padding: ${({ theme }) => theme.spacing(4, 6)};
 
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: 20px;
