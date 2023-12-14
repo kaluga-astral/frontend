@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryObj } from '@storybook/react';
 
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  LegacyGrid,
-  Tag,
-  Typography,
-  styled,
-} from '..';
+import { Button } from '../Button';
+import { DialogActions } from '../DialogActions';
+import { DialogContent } from '../DialogContent';
+import { DialogContentText } from '../DialogContentText';
+import { Grid } from '../Grid';
+import { Tag } from '../Tag';
+import { Typography } from '../Typography';
 import { DialogHeader } from '../DialogHeader';
+import { styled } from '../styles';
 
 import { Dialog } from './Dialog';
+
+type Story = StoryObj<typeof Dialog>;
 
 export default {
   title: 'Components/Dialog',
@@ -30,7 +30,18 @@ const Subtitle = styled(Typography)`
   }
 `;
 
-const Template: Story = () => {
+export const Interaction: Story = {
+  args: {
+    title: 'Заголовок диалога',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+const Template = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogWithHeaderOpen, setDialogWithHeaderOpen] = useState(false);
 
@@ -51,17 +62,17 @@ const Template: Story = () => {
   };
 
   return (
-    <LegacyGrid container spacing={2}>
-      <LegacyGrid>
+    <Grid container spacing={2}>
+      <Grid>
         <Button variant="light" onClick={handleClickOpen}>
           Dialog
         </Button>
-      </LegacyGrid>
-      <LegacyGrid>
+      </Grid>
+      <Grid>
         <Button variant="light" onClick={handleOpenDialogWithHeader}>
           Dialog with DialogHeader
         </Button>
-      </LegacyGrid>
+      </Grid>
       <Dialog
         title={
           <>
@@ -110,13 +121,8 @@ const Template: Story = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </LegacyGrid>
+    </Grid>
   );
 };
 
 export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};

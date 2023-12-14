@@ -10,7 +10,7 @@ describe('parseDate', () => {
 
     const result = parseDate(date, mask, separator);
 
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
   });
 
   it('При некорректном значении "month" в date', () => {
@@ -20,7 +20,7 @@ describe('parseDate', () => {
 
     const result = parseDate(date, mask, separator);
 
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
   });
 
   it('При некорректном значении "day" в date', () => {
@@ -30,7 +30,7 @@ describe('parseDate', () => {
 
     const result = parseDate(date, mask, separator);
 
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
   });
 
   it('При пустом значении date', () => {
@@ -40,7 +40,7 @@ describe('parseDate', () => {
 
     const result = parseDate(date, mask, separator);
 
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
   });
 
   it('При пустом значении date с подчеркиваниями в MaskField', () => {
@@ -50,7 +50,7 @@ describe('parseDate', () => {
 
     const result = parseDate(date, mask, separator);
 
-    expect(result).toBe(undefined);
+    expect(result).toBeUndefined();
   });
 
   it('При корректном значении date', () => {

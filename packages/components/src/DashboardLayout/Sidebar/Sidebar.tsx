@@ -11,7 +11,7 @@ import { SidebarToggler } from './SidebarToggler';
 
 export type SidebarProps = {
   /**
-   * Пропс длея передачи контента в заголовок сайдбара
+   * Пропс для передачи контента в заголовок сайдбара
    * @example <Sidebar header={<SidebarButton />>} >
    */
   header?: ReactNode;
