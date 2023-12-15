@@ -248,8 +248,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           >
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              selectedDate={selectedStartBaseDate}
-              rangeDate={endDateProps.value}
+              selectedDate={selectedStartBaseDate || selectedEndBaseDate}
+              rangeDate={endDateProps.value || startDateProps.value}
               date={startBaseDate}
               onChange={handleDayPick}
               isRange
@@ -257,8 +257,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             <DateRangePickerSplitter />
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
-              selectedDate={selectedStartBaseDate}
-              rangeDate={endDateProps.value}
+              selectedDate={selectedStartBaseDate || selectedEndBaseDate}
+              rangeDate={endDateProps.value || startDateProps.value}
               date={endBaseDate}
               onChange={handleDayPick}
               isRange
