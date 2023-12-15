@@ -26,11 +26,7 @@ const Template: Story<DatePickerProps> = (props) => {
 
 export const Showcase: Story = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
-    <Template
-      minDate={new Date()}
-      value={new Date('2023-10-19')}
-      inputProps={{ label: 'Все по умолчанию' }}
-    />
+    <Template inputProps={{ label: 'Все по умолчанию' }} />
     <Template
       inputProps={{ label: 'Disabled default value' }}
       value={new Date('2022-11-01')}
