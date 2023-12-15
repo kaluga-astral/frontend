@@ -19,15 +19,12 @@ import { DatePickerPopover } from '../DatePicker/DatePickerPopover';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { type DatePickerProps } from '../DatePicker';
 import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
-import {
-  useBaseDateInRange,
-  useMaskedValue,
-  useSelectedBaseDate,
-} from '../DatePicker/hooks';
+import { useMaskedValue, useSelectedBaseDate } from '../DatePicker/hooks';
 
 import { DateRangePickerSplitter } from './styles';
 import { getBoundaryDate } from './utils';
 import { type DateRangeInput } from './types';
+import { useBaseRangeDates } from './hooks';
 
 const DEFAULT_SPACING = 1;
 
@@ -96,19 +93,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
 
     const [activeInput, setActiveInput] = useState<DateRangeInput>();
 
-    const startBaseDate = useBaseDateInRange({
-      minDate,
-      maxDate,
-      monthOffset: 0,
-    });
-
-    const endBaseDate = useBaseDateInRange({
-      minDate,
-      maxDate,
-      // единица здесь означает, что второй пикер будет по умолчанию отличаться от первого на 1 месяц
-      monthOffset: 1,
-    });
-
     const selectedStartBaseDate = useSelectedBaseDate({
       currentValue: startDateProps?.value,
       minDate,
@@ -119,6 +103,14 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       currentValue: endDateProps?.value,
       minDate,
       maxDate,
+    });
+
+    const { startBaseDate, endBaseDate } = useBaseRangeDates({
+      minDate,
+      maxDate,
+      shouldReturnPrevValues: isOpenPopover,
+      selectedStartDate: selectedStartBaseDate,
+      selectedEndDate: selectedEndBaseDate,
     });
 
     const {
@@ -258,7 +250,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               isMondayFirst={isMondayFirst}
               selectedDate={selectedStartBaseDate}
               rangeDate={endDateProps.value}
-              date={selectedStartBaseDate || startBaseDate}
+              date={startBaseDate}
               onChange={handleDayPick}
               isRange
             />
@@ -267,11 +259,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
               isMondayFirst={isMondayFirst}
               selectedDate={selectedStartBaseDate}
               rangeDate={endDateProps.value}
-              date={
-                selectedEndBaseDate && selectedEndBaseDate > endBaseDate
-                  ? selectedEndBaseDate
-                  : endBaseDate
-              }
+              date={endBaseDate}
               onChange={handleDayPick}
               isRange
             />

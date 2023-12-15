@@ -38,13 +38,13 @@ describe('DateRangePicker', () => {
         />,
       );
 
-      fireEvent.click(screen.getByPlaceholderText('inputA'));
-
       return { onChangeStartDateSpy, onChangeEndDateSpy };
     };
 
     it('При выборе даты в первом пикере', async () => {
       const { onChangeStartDateSpy } = setupPicker();
+
+      fireEvent.click(screen.getByPlaceholderText('inputA'));
 
       const dateBtn = screen.getAllByText('15')[0];
 
@@ -62,6 +62,8 @@ describe('DateRangePicker', () => {
 
     it('При выборе даты во втором пикере', async () => {
       const { onChangeEndDateSpy } = setupPicker();
+
+      fireEvent.click(screen.getByPlaceholderText('inputB'));
 
       const dateBtnB = screen.getAllByText('15')[1];
 
@@ -287,5 +289,113 @@ describe('DateRangePicker', () => {
 
     expect((inputA as HTMLInputElement).value).not.toBe('');
     expect((inputB as HTMLInputElement).value).not.toBe('');
+  });
+
+  it('Второй календарь отображает следующий месяц от выбранной даты первого календаря', async () => {
+    const TestComponent = () => {
+      const [dateA, setDateA] = useState<Date | undefined>();
+      const [dateB, setDateB] = useState<Date | undefined>();
+
+      return (
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+            onChange: setDateA,
+            value: dateA,
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+            onChange: setDateB,
+            value: dateB,
+          }}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const inputA = screen.getByPlaceholderText('inputA');
+    const inputB = screen.getByPlaceholderText('inputB');
+
+    fireEvent.focus(inputA);
+
+    const firstCalendarPrevMonthButton = screen.getAllByRole('button', {
+      name: 'Предыдущий месяц',
+    })[0];
+
+    await act(async () => {
+      await userEvents.click(firstCalendarPrevMonthButton);
+    });
+
+    await act(async () => {
+      await userEvents.click(firstCalendarPrevMonthButton);
+    });
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[0]);
+    });
+
+    fireEvent.focus(document.body);
+    fireEvent.focus(inputB);
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[1]);
+    });
+
+    expect((inputB as HTMLInputElement).value).toBe('15.01.2022');
+  });
+
+  it('Первый календарь отображает предыдущий месяц от выбранной даты второго календаря', async () => {
+    const TestComponent = () => {
+      const [dateA, setDateA] = useState<Date | undefined>();
+      const [dateB, setDateB] = useState<Date | undefined>();
+
+      return (
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+            onChange: setDateA,
+            value: dateA,
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+            onChange: setDateB,
+            value: dateB,
+          }}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const inputA = screen.getByPlaceholderText('inputA');
+    const inputB = screen.getByPlaceholderText('inputB');
+
+    fireEvent.focus(inputB);
+
+    const secondCalendarPrevMonthButton = screen.getAllByRole('button', {
+      name: 'Следующий месяц',
+    })[1];
+
+    await act(async () => {
+      await userEvents.click(secondCalendarPrevMonthButton);
+    });
+
+    await act(async () => {
+      await userEvents.click(secondCalendarPrevMonthButton);
+    });
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[1]);
+    });
+
+    fireEvent.focus(document.body);
+    fireEvent.focus(inputA);
+
+    await act(async () => {
+      await userEvents.click(screen.getAllByText('15')[0]);
+    });
+
+    expect((inputA as HTMLInputElement).value).toBe('15.04.2022');
   });
 });

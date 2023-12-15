@@ -134,6 +134,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
+  'isInHoveredRange',
   'lengthInRow',
 ]);
 
