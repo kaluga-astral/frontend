@@ -25,17 +25,6 @@ export type GridItem<T> = {
 } & T;
 
 export type GridBuilderResult<T> = {
-  /**
-   * @description флаг обозначающий, что дата идущая ДО календаря задизейблена, и можно выключить стрелку "назад"
-   */
-  isPrevDisabled: boolean;
-  /**
-   * @description флаг обозначающий, что дата идущая ПОСЛЕ календаря задизейблена, и можно выключить стрелку "вперед"
-   */
-  isNextDisabled: boolean;
-  /**
-   * @description массив элементов для рендера в календаре
-   */
   grid: GridItem<T>[];
 };
 
