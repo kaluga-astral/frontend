@@ -47,8 +47,11 @@ const ResendCodeButton = ({
 
   const [resendCodeLoading, setResendCodeLoading] = useState(false);
 
-  const showTimer = !disabled && !loading && !resendCodeLoading && isActive;
-  const disableButton = disabled || loading || resendCodeLoading || isActive;
+  const isTimerActive = isActive && time !== '00:00';
+  const showTimer =
+    !disabled && !loading && !resendCodeLoading && isTimerActive;
+  const disableButton =
+    disabled || loading || resendCodeLoading || isTimerActive;
 
   const onClick = () => {
     setResendCodeLoading(true);
@@ -57,6 +60,9 @@ const ResendCodeButton = ({
       onResendCode()
         .then(() => {
           reset({ minutes: 0, seconds: resendTimeout });
+        })
+        .catch((error) => {
+          console.error(error);
         })
         .finally(() => setResendCodeLoading(false));
     }

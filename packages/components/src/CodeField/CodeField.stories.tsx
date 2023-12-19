@@ -115,7 +115,7 @@ export const OnComplete = () => (
       label="Код подтверждения отправлен на test@test.ru"
       onResendCode={() => Promise.resolve()}
       isAllowResendCode
-      onComplete={() => alert('onComplete вызывается, когда поле заполнено')}
+      onComplete={(value) => alert(value)}
     />
   </>
 );

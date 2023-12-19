@@ -9,6 +9,8 @@ export const CodeFieldWrapper = styled.div`
 export const CodeFieldDigitsWrapper = styled.ul`
   display: flex;
   gap: ${({ theme }) => theme.spacing(3)};
+
+  margin: 0;
 `;
 
 export const CodeFieldDigitsItem = styled.li`

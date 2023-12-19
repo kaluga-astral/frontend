@@ -12,7 +12,7 @@ describe('CodeField', () => {
 
     const fields = screen.getAllByRole('textbox');
 
-    expect(fields.length).toBe(TEST_LENGTH);
+    expect(fields).toHaveLength(TEST_LENGTH);
   });
 
   it('Prop:disabled: блокирует поле', () => {
@@ -33,7 +33,7 @@ describe('CodeField', () => {
     expect(resendButton).toBeDisabled();
   });
 
-  it('Prop:loading: блокирует поле', () => {
+  it('Prop:loading: заменяет инпуты на скелетон', () => {
     renderWithTheme(
       <CodeField
         codeLength={TEST_LENGTH}
@@ -43,11 +43,10 @@ describe('CodeField', () => {
       />,
     );
 
-    const fields = screen.getAllByRole('textbox');
-
+    const fields = screen.queryByRole('textbox');
     const resendButton = screen.getByRole('button');
 
-    fields.forEach((field) => expect(field).toBeDisabled());
+    expect(fields).not.toBeInTheDocument();
     expect(resendButton).toBeDisabled();
   });
 
