@@ -7,6 +7,9 @@ export const MuiDialog: Components<Theme>['MuiDialog'] = {
     root({ theme }) {
       return {
         background: theme.palette.background.modalShadow,
+        '&.MuiDialog-root > .MuiBackdrop-root': {
+          backgroundColor: 'unset',
+        },
       };
     },
     paper({ theme }) {
