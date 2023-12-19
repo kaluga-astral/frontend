@@ -1,10 +1,9 @@
 import { useContext, useMemo } from 'react';
 
-import { DAYS_IN_WEEK, MONTHS_IN_YEAR } from '../../../constants/counts';
+import { DAYS_IN_WEEK } from '../../../constants/counts';
 import {
   DateCompareDeep,
   addDays,
-  addMonths,
   buildIsoDate,
   isDate,
   isDateOutOfRange,
@@ -50,7 +49,6 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
   baseDate,
   selectedDate,
   rangeDate,
-  fullSize = false,
   isMondayFirst = true,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
@@ -83,16 +81,6 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
     }
 
     /**
-     * @description счетчик указывающий на первый индекс текущего месяца
-     */
-    let startMonthIndex = 0;
-
-    /**
-     * @description счетчик указывающий на последний индекс текущего месяца
-     */
-    let lastCurrentMonthIndex = -1;
-
-    /**
      * @description текущая дата пользователя
      */
     const currentDate = new Date();
@@ -108,34 +96,6 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       /**
        * @description флаг следующего месяца относительно базовой даты
        */
-      const isNextMonth =
-        //если текущий месяц декабрь(12), то следующим для него будет январь(1)
-        (dateMonth !== MONTHS_IN_YEAR && dateMonth > month) ||
-        (month === MONTHS_IN_YEAR && dateMonth === 1);
-
-      /**
-       * @description флаг предыдущего месяца относительно базовой даты
-       */
-      const isPrevMonth =
-        // если текущий месяц январь(1), то предыдущим для него является декабрь(12)
-        dateMonth < month || (dateMonth === MONTHS_IN_YEAR && month === 1);
-      const isFirstDayOfWeek = date.getUTCDay() === firstWeekDayGap;
-
-      // проверка на необходимость продолжать заполнять массив
-      // если fullSize === false, и начался следующий месяц, и день недели понедельник, то тогда закончить заполнение
-      if (!fullSize && isNextMonth && isFirstDayOfWeek) {
-        break;
-      }
-
-      if (!isNextMonth) {
-        // если месяц еще не следующий, то инкрементируем счетчик крайнего дня месяца
-        lastCurrentMonthIndex++;
-      }
-
-      if (isPrevMonth) {
-        // если месяц предыдущий, инкрементируем счетчик первого дня месяца
-        startMonthIndex++;
-      }
 
       grid.push({
         isOutOfAvailableRange: dateMonth !== month,
@@ -167,9 +127,6 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addMonths,
-      indexPrevDisabledCheck: startMonthIndex,
-      indexNextDisabledCheck: lastCurrentMonthIndex,
       deep: DateCompareDeep.day,
     });
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
