@@ -1,5 +1,5 @@
-import React from 'react';
-import { type StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { SettingsOutlineMd } from '@astral/icons';
 
 import { Alert } from '../Alert';
@@ -8,18 +8,29 @@ import { Divider } from '../Divider';
 import { Grid } from '../Grid';
 import { IconButton } from '../IconButton';
 import { Tag } from '../Tag';
-import { Typography } from '../Typography';
-import { SideDialogActions } from '../SideDialogActions';
+import { SideDialogActions as SideDialogActionsComponent } from '../SideDialogActions';
 import { SideDialogContent } from '../SideDialogContent';
 import { SideDialogContentText } from '../SideDialogContentText';
 import { SideDialogHeader } from '../SideDialogHeader';
 
 import { SideDialog } from './SideDialog';
 
-export default {
+/**
+ * Может содержать:
+ * - [SideDialogHeader](/story/components-sidedialog-sidedialogheader--docs)
+ * - [SideDialogActions](/story/components-sidedialog-sidedialogactions--docs)
+ * - [SideDialogContent](/story/components-sidedialog-sidedialogcontent--docs)
+ * - [SideDialogContentText](/story/components-sidedialog-sidedialogcontenttext--docs)
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=657-13634&mode=design&t=LXFGf7NmF8l4oSL1-0)
+ * ### [Guide]()
+ * */
+const meta: Meta<typeof SideDialog> = {
   title: 'Components/SideDialog',
   component: SideDialog,
 };
+
+export default meta;
 
 type Story = StoryObj<typeof SideDialog>;
 
@@ -49,9 +60,7 @@ export const Example = () => {
 
   return (
     <div>
-      <Button variant="light" onClick={handleOpen}>
-        SideDialog
-      </Button>
+      <Button onClick={handleOpen}>SideDialog</Button>
       <SideDialog title="Заголовок" open={open} onClose={handleClose}>
         <SideDialogContent>
           <Alert severity="warning">
@@ -79,43 +88,73 @@ export const Example = () => {
             bibendum.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActions>
+        <SideDialogActionsComponent>
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>
           <Button onClick={handleClose}>Готово</Button>
-        </SideDialogActions>
+        </SideDialogActionsComponent>
       </SideDialog>
     </div>
   );
 };
 
-export const ExampleWithSideDialogHeader = () => {
-  const [open, setOpen] = React.useState(false);
+/**
+ * [SideDialogHeader](/story/components-sidedialog-sidedialogheader--docs)
+ * */
+export const CustomHeader = () => {
+  const [isOpenHeaderLeft, setIsOpenHeaderLeft] = useState(false);
+  const [isOpenHeaderRight, setIsOpenHeaderRight] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenHeaderLeft = () => {
+    setIsOpenHeaderLeft(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseHeaderLeft = () => {
+    setIsOpenHeaderLeft(false);
+  };
+
+  const handleOpenHeaderRight = () => {
+    setIsOpenHeaderRight(true);
+  };
+
+  const handleCloseHeaderRight = () => {
+    setIsOpenHeaderRight(false);
   };
 
   return (
-    <Grid container spacing={2} rows={2}>
-      <Typography>
-        Пример SideDialog с компонентом SideDialogHeader, который является
-        оберткой для размещения прочих компонентов в заголовке.
-      </Typography>
-      <Grid>
-        <Button variant="light" onClick={handleOpen}>
-          SideDialog with SideDialogHeader
-        </Button>
+    <>
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={handleOpenHeaderLeft}>SideDialog header left</Button>
+        <Button onClick={handleOpenHeaderRight}>SideDialog header right</Button>
       </Grid>
-      <SideDialog open={open} onClose={handleClose}>
+      <SideDialog open={isOpenHeaderRight} onClose={handleCloseHeaderRight}>
         <SideDialogHeader
           title="Заголовок"
-          onClose={handleClose}
+          onClose={handleCloseHeaderRight}
+          justifyContent="flex-start"
+        >
+          <Tag variant="light" label="Информация" color="primary" />
+        </SideDialogHeader>
+        <SideDialogContent>
+          <SideDialogContentText id="alert-dialog-description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa,
+            laboriosam doloremque aut nobis quam asperiores eveniet libero
+            aliquam, ipsum consectetur optio sapiente fugit eos quasi quidem
+            veniam laudantium consequuntur architecto.
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActionsComponent>
+          <Button variant="text" onClick={handleCloseHeaderRight}>
+            Отмена
+          </Button>
+          <Button onClick={handleCloseHeaderRight}>Готово</Button>
+        </SideDialogActionsComponent>
+      </SideDialog>
+      <SideDialog open={isOpenHeaderLeft} onClose={handleCloseHeaderLeft}>
+        <SideDialogHeader
+          title="Заголовок"
+          onClose={handleCloseHeaderLeft}
           justifyContent="flex-end"
         >
           <Tag variant="light" label="Важное" color="error" />
@@ -132,13 +171,91 @@ export const ExampleWithSideDialogHeader = () => {
             veniam laudantium consequuntur architecto.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActions>
-          <Button variant="text" onClick={handleClose}>
+        <SideDialogActionsComponent>
+          <Button variant="text" onClick={handleCloseHeaderLeft}>
             Отмена
           </Button>
-          <Button onClick={handleClose}>Готово</Button>
-        </SideDialogActions>
+          <Button onClick={handleCloseHeaderLeft}>Готово</Button>
+        </SideDialogActionsComponent>
       </SideDialog>
-    </Grid>
+    </>
+  );
+};
+
+/**
+ * [SideDialogActions](/story/components-sidedialog-sidedialogactions--docs)
+ * */
+export const SideDialogActions = () => {
+  const [isOpenDefault, setIsOpenDefault] = useState(false);
+  const [isOpenMoreActions, setIsOpenMoreActions] = useState(false);
+
+  const handleOpenDefault = () => {
+    setIsOpenDefault(true);
+  };
+
+  const handleCloseDefault = () => {
+    setIsOpenDefault(false);
+  };
+
+  const handleOpenMoreActions = () => {
+    setIsOpenMoreActions(true);
+  };
+
+  const handleCloseMoreActions = () => {
+    setIsOpenMoreActions(false);
+  };
+
+  return (
+    <>
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={handleOpenDefault}>SideDialog actions</Button>
+        <Button onClick={handleOpenMoreActions}>SideDialog more actions</Button>
+      </Grid>
+      <SideDialog
+        open={isOpenDefault}
+        onClose={handleCloseDefault}
+        title="Заголовок"
+      >
+        <SideDialogContent>
+          <SideDialogContentText>
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения.
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActionsComponent>
+          <Button variant="text" onClick={handleCloseDefault}>
+            Отмена
+          </Button>
+          <Button autoFocus onClick={handleCloseDefault}>
+            Готово
+          </Button>
+        </SideDialogActionsComponent>
+      </SideDialog>
+      <SideDialog
+        open={isOpenMoreActions}
+        onClose={handleCloseMoreActions}
+        title="Заголовок"
+      >
+        <SideDialogContent>
+          <SideDialogContentText>
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения.
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActionsComponent>
+          <Button variant="text" onClick={handleCloseMoreActions}>
+            Вернуться позже
+          </Button>
+          <Button variant="text" onClick={handleCloseMoreActions}>
+            Отмена
+          </Button>
+          <Button autoFocus onClick={handleCloseMoreActions}>
+            Готово
+          </Button>
+        </SideDialogActionsComponent>
+      </SideDialog>
+    </>
   );
 };
