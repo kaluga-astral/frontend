@@ -144,7 +144,7 @@ export const DynamicResendTimeout = () => {
 
 export const WithoutRestartButton = () => (
   <>
-    <CodeField codeLength={6} loading={true} initialValue={TEST_VALUE} />
+    <CodeField codeLength={6} initialValue={TEST_VALUE} />
   </>
 );
 
