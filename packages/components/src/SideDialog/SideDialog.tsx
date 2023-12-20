@@ -5,7 +5,9 @@ import { type WithoutEmotionSpecific } from '../types';
 
 import { StyledDrawer } from './styles';
 
-export type SideDialogProps = WithoutEmotionSpecific<MuiDrawerProps> & {
+export type SideDialogProps = WithoutEmotionSpecific<
+  Omit<MuiDrawerProps, 'anchor'>
+> & {
   title?: string;
 };
 
