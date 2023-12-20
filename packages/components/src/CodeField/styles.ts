@@ -11,6 +11,7 @@ export const CodeFieldDigitsWrapper = styled.ul`
   gap: ${({ theme }) => theme.spacing(3)};
 
   margin: 0;
+  padding: 0;
 `;
 
 export const CodeFieldDigitsItem = styled.li`
