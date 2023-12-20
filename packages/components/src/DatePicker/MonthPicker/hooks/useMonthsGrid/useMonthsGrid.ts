@@ -3,7 +3,6 @@ import { useContext, useMemo } from 'react';
 import { MONTHS_IN_YEAR } from '../../../constants/counts';
 import {
   DateCompareDeep,
-  addMonths,
   buildIsoDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
@@ -65,7 +64,6 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addMonths,
       deep: DateCompareDeep.month,
     });
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
