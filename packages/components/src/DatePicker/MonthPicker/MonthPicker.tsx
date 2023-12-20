@@ -39,7 +39,7 @@ export const MonthPicker = ({
     addCb: addYears,
   });
 
-  const { grid, isPrevDisabled, isNextDisabled } = useMonthsGrid({
+  const { grid } = useMonthsGrid({
     baseDate,
     selectedDate,
     rangeDate,
@@ -52,8 +52,8 @@ export const MonthPicker = ({
       <DateCalendarHead
         {...headProps}
         arrowPostfixTitle={yearCaption.single}
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={baseDate.getUTCFullYear()}
       />
       <DateCalendarGridLarge>
