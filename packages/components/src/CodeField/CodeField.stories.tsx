@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Typography } from '../Typography';
+import { Button } from '../Button';
 
 import { CodeField } from './CodeField';
 
@@ -125,10 +126,10 @@ export const DynamicResendTimeout = () => {
 
   return (
     <>
-      <button onClick={() => setTimeout(5)}>5s</button>
-      <button onClick={() => setTimeout(15)}>15s</button>
-      <button onClick={() => setTimeout(60)}>60s</button>
-      <button onClick={() => setTimeout(150)}>150s</button>
+      <Button onClick={() => setTimeout(5)}>5s</Button>
+      <Button onClick={() => setTimeout(15)}>15s</Button>
+      <Button onClick={() => setTimeout(60)}>60s</Button>
+      <Button onClick={() => setTimeout(150)}>150s</Button>
 
       <CodeField
         codeLength={6}
