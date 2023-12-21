@@ -1,10 +1,8 @@
 import { Tab } from '@mui/material';
-import { type TabProps as MuiTabProps } from '@mui/material';
 
 import { styled } from '../styles';
-import { type WithoutEmotionSpecific } from '../types';
 
-export type TabProps = WithoutEmotionSpecific<MuiTabProps>;
+import { type TabProps } from './Tab';
 
 export const StyledTab = styled(Tab)<TabProps>`
   min-height: 36px;
