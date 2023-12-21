@@ -1,4 +1,9 @@
-import { type RefObject, type SyntheticEvent, forwardRef } from 'react';
+import {
+  type ReactNode,
+  type RefObject,
+  type SyntheticEvent,
+  forwardRef,
+} from 'react';
 
 import { type TextFieldProps } from '../TextField';
 import { useForwardedRef, useInputPopover } from '../hooks';
@@ -48,6 +53,9 @@ export type DatePickerProps = MondayFirst &
      * @default 	'medium'
      */
     size?: 'small' | 'medium';
+    label?: ReactNode;
+    required?: boolean;
+    helperText?: ReactNode;
   };
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
@@ -67,6 +75,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       minDate = DEFAULT_MIN_DATE,
       maxDate = DEFAULT_MAX_DATE,
       size,
+      label,
+      required,
+      helperText,
     },
     forwardedRef,
   ) => {
@@ -95,6 +106,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     return (
       <div ref={ref} className={className}>
         <DatePickerInput
+          label={label}
+          required={required}
+          helperText={helperText}
           {...inputProps}
           {...calculatedInputProps}
           onAccept={onAccept}
