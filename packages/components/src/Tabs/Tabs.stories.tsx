@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { type SyntheticEvent, useState } from 'react';
 import { Box } from '@mui/material';
 
@@ -15,22 +15,53 @@ import {
   TabsShowcaseTypography2,
 } from './styles';
 
-export default {
-  title: 'Components/Tabs',
-  component: Tabs,
-};
-
 type TabPanelProps = {
   children: JSX.Element | JSX.Element[];
   value: number;
   index: number;
 };
 
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=376-5801&mode=design&t=6DlItWfeBP8xOP7n-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Tabs> = {
+  title: 'Components/Tabs',
+  component: Tabs,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Tabs>;
+
+export const Interaction: Story = {
+  args: {
+    value: 0,
+    onChange: () => {},
+    children: (
+      <>
+        <Tab label="Вкладка 1" />
+        <Tab label="Вкладка 2" />
+        <Tab label="Вкладка 3" />
+        <Tab label="Вкладка 4" />
+        <Tab label="Вкладка 5" />
+        <Tab label="Вкладка 6" disabled />
+      </>
+    ),
+  },
+  parameters: {
+    options: { showPanel: false },
+    docs: {
+      disable: true,
+    },
+  },
+};
+
 function CustomTabPanel({ children, value, index }: TabPanelProps) {
   return <div> {value == index && children} </div>;
 }
 
-export const TabsShowcase: Story = () => {
+export const Example = () => {
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
 
@@ -97,5 +128,3 @@ export const TabsShowcase: Story = () => {
     </ExampleTemplate>
   );
 };
-
-TabsShowcase.parameters = { options: { showPanel: false } };
