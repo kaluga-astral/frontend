@@ -1,33 +1,64 @@
-import { type Story } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
 
 import { Badge } from './Badge';
 
-import { type BadgeProps } from '.';
-
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=284-7165&mode=design&t=MnsiqzDLWSYbhRCJ-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
   component: Badge,
 };
 
-const Template: Story<BadgeProps> = (args) => (
-  <Badge {...args}>
+export default meta;
+
+type Story = StoryObj<typeof Badge>;
+
+export const Interaction: Story = {
+  args: {
+    color: 'error',
+    badgeContent: 999,
+    variant: 'standard',
+    invisible: false,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => (
+  <Badge color="error">
     <Button variant="contained" color="primary">
       Badge
     </Button>
   </Badge>
 );
 
-export const Default = Template.bind({});
+export const ExampleWithBadgeContent = () => (
+  <Badge color="error" badgeContent={999} variant="standard" invisible={false}>
+    <Button variant="contained" color="primary">
+      Badge
+    </Button>
+  </Badge>
+);
 
-Default.args = {
-  color: 'error',
-  badgeContent: 999,
-  variant: 'standard',
-  invisible: false,
-};
+export const ExampleWithDot = () => (
+  <Badge color="error" variant="dot" invisible={false}>
+    <Button variant="contained" color="primary">
+      Badge
+    </Button>
+  </Badge>
+);
 
-Default.parameters = {
-  controls: { expanded: true },
-};
+export const Invisible = () => (
+  <Badge color="error" badgeContent={999} variant="standard" invisible>
+    <Button variant="contained" color="primary">
+      Badge
+    </Button>
+  </Badge>
+);
