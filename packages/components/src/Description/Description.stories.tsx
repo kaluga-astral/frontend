@@ -43,7 +43,7 @@ export const Example = () => {
   );
 };
 
-export const ExampleSpaceBetween = () => {
+export const SpaceBetween = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
@@ -58,7 +58,7 @@ export const ExampleSpaceBetween = () => {
   );
 };
 
-export const ExampleSpaceBetweenWithLeader = () => {
+export const SpaceBetweenWithLeader = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
@@ -73,7 +73,7 @@ export const ExampleSpaceBetweenWithLeader = () => {
   );
 };
 
-export const ExampleColors = () => {
+export const Colors = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
