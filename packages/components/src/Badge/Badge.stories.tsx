@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Button } from '../Button';
-import { Grid } from '../Grid';
 
 import { Badge } from './Badge';
 
@@ -57,21 +56,15 @@ export const Invisible = () => {
   };
 
   return (
-    <Grid container direction="column" columnSpacing={3}>
-      <Badge
-        color="error"
-        badgeContent={999}
-        variant="standard"
-        invisible={invisible}
-      >
-        <Button variant="contained" color="primary">
-          Badge
-        </Button>
-      </Badge>
-
-      <Button onClick={handleChange} variant="light" color="primary">
+    <Badge
+      color="error"
+      badgeContent={999}
+      variant="standard"
+      invisible={invisible}
+    >
+      <Button onClick={handleChange} variant="contained" color="primary">
         {invisible ? 'Показать' : 'Скрыть'}
       </Button>
-    </Grid>
+    </Badge>
   );
 };
