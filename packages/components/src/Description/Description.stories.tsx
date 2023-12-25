@@ -43,14 +43,17 @@ export const Example = () => {
   );
 };
 
-export const SpaceBetween = () => {
+/**
+ * Prop ```leader``` добавляет dashed строку
+ */
+export const Leader = () => {
   return (
     <GridWrapper rowSpacing={3} container>
-      <Description justifyContent="space-between">
+      <Description leader>
         <Description.Name>Название поля</Description.Name>
         <Description.Value>Значение поля</Description.Value>
       </Description>
-      <Description justifyContent="space-between">
+      <Description leader>
         <Description.Name>Длинное название поля</Description.Name>
         <Description.Value>Длинное значение поля</Description.Value>
       </Description>
@@ -58,14 +61,14 @@ export const SpaceBetween = () => {
   );
 };
 
-export const SpaceBetweenWithLeader = () => {
+export const JustifyContent = () => {
   return (
     <GridWrapper rowSpacing={3} container>
-      <Description leader>
+      <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
         <Description.Value>Значение поля</Description.Value>
       </Description>
-      <Description leader>
+      <Description justifyContent="space-between">
         <Description.Name>Длинное название поля</Description.Name>
         <Description.Value>Длинное значение поля</Description.Value>
       </Description>
