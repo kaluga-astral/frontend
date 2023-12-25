@@ -1,6 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../Button';
+import { Grid } from '../Grid';
 
 import { Badge } from './Badge';
 
@@ -39,7 +41,7 @@ export const Example = () => (
   </Badge>
 );
 
-export const ExampleWithBadgeContent = () => (
+export const BadgeContent = () => (
   <Badge color="error" badgeContent={999} variant="standard" invisible={false}>
     <Button variant="contained" color="primary">
       Badge
@@ -47,7 +49,7 @@ export const ExampleWithBadgeContent = () => (
   </Badge>
 );
 
-export const ExampleWithDot = () => (
+export const WithDot = () => (
   <Badge color="error" variant="dot" invisible={false}>
     <Button variant="contained" color="primary">
       Badge
@@ -55,10 +57,29 @@ export const ExampleWithDot = () => (
   </Badge>
 );
 
-export const Invisible = () => (
-  <Badge color="error" badgeContent={999} variant="standard" invisible>
-    <Button variant="contained" color="primary">
-      Badge
-    </Button>
-  </Badge>
-);
+export const Invisible = () => {
+  const [invisible, setInvisible] = useState(true);
+
+  const handleChange = () => {
+    setInvisible((prev) => !prev);
+  };
+
+  return (
+    <Grid container direction={'column'} columnSpacing={3}>
+      <Badge
+        color="error"
+        badgeContent={999}
+        variant="standard"
+        invisible={invisible}
+      >
+        <Button variant="contained" color="primary">
+          Badge
+        </Button>
+      </Badge>
+
+      <Button onClick={handleChange} variant="light" color="primary">
+        {invisible ? 'Показать' : 'Скрыть'}
+      </Button>
+    </Grid>
+  );
+};
