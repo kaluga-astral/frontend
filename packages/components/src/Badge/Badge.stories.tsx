@@ -34,25 +34,17 @@ export const Interaction: Story = {
 };
 
 export const Example = () => (
-  <Badge color="error">
+  <Badge color="error" badgeContent={999}>
     <Button variant="contained" color="primary">
       Badge
     </Button>
   </Badge>
 );
 
-export const BadgeContent = () => (
-  <Badge color="error" badgeContent={999} variant="standard" invisible={false}>
-    <Button variant="contained" color="primary">
-      Badge
-    </Button>
-  </Badge>
-);
-
-export const WithDot = () => (
+export const Variants = () => (
   <Badge color="error" variant="dot" invisible={false}>
     <Button variant="contained" color="primary">
-      Badge
+      Dot
     </Button>
   </Badge>
 );
@@ -65,7 +57,7 @@ export const Invisible = () => {
   };
 
   return (
-    <Grid container direction={'column'} columnSpacing={3}>
+    <Grid container direction="column" columnSpacing={3}>
       <Badge
         color="error"
         badgeContent={999}
