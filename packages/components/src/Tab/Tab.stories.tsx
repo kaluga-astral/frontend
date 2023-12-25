@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { type SyntheticEvent, useState } from 'react';
 import { Stack } from '@mui/material';
 
-import { Grid } from '../Grid';
 import { Typography } from '../Typography';
 import { Tabs } from '../Tabs';
 
@@ -13,7 +12,7 @@ import { Tab } from './Tab';
  * ### [Guide]()
  */
 const meta: Meta<typeof Tab> = {
-  title: 'Components/Tab',
+  title: 'Components/Tabs/Tab',
   component: Tab,
 };
 
@@ -33,7 +32,7 @@ export const Interaction: Story = {
   },
 };
 
-export const TabsWithTab = () => {
+export const Example = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -41,23 +40,17 @@ export const TabsWithTab = () => {
   };
 
   return (
-    <Grid container spacing={2} rows={2}>
-      <Typography>
-        Пример Tab с компонентом Tabs, который является оберткой для размещения
-        прочих компонентов в заголовке.
-      </Typography>
+    <Stack gap={4}>
       <Stack gap={4}>
-        <Stack gap={4}>
-          <Typography variant="h3">Tab</Typography>
-          <Stack gap={1}>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab label="Tab" />
-              <Tab label="Tab" />
-              <Tab label="Tab" disabled />
-            </Tabs>
-          </Stack>
+        <Typography variant="h3">Tab</Typography>
+        <Stack gap={1}>
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Tab" />
+            <Tab label="Tab" />
+            <Tab label="Tab" disabled />
+          </Tabs>
         </Stack>
       </Stack>
-    </Grid>
+    </Stack>
   );
 };

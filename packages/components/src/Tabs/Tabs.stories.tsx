@@ -33,7 +33,7 @@ export const Interaction: Story = {
   },
 };
 
-export const ExampleWithTab = () => {
+export const Example = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -58,7 +58,7 @@ export const ExampleWithTab = () => {
   );
 };
 
-export const ExampleWithTabDisabled = () => {
+export const TabDisabled = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -72,12 +72,9 @@ export const ExampleWithTabDisabled = () => {
         прочих компонентов в заголовке.
       </Typography>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Вкладка 1" disabled />
+        <Tab label="Вкладка 1" />
         <Tab label="Вкладка 2" disabled />
         <Tab label="Вкладка 3" disabled />
-        <Tab label="Вкладка 4" disabled />
-        <Tab label="Вкладка 5" disabled />
-        <Tab label="Вкладка 6" disabled />
       </Tabs>
     </ExampleTemplate>
   );
