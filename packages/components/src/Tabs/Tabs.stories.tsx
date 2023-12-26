@@ -2,8 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { type SyntheticEvent, useState } from 'react';
 
 import { Tab } from '../Tab';
-import { ExampleTemplate } from '../docs';
-import { Typography } from '../Typography';
 
 import { Tabs } from './Tabs';
 
@@ -63,16 +61,10 @@ export const TabDisabled = () => {
   };
 
   return (
-    <ExampleTemplate>
-      <Typography>
-        Пример Tab с компонентом Tabs, который является оберткой для размещения
-        прочих компонентов в заголовке.
-      </Typography>
-      <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Вкладка 1" />
-        <Tab label="Вкладка 2" disabled />
-        <Tab label="Вкладка 3" disabled />
-      </Tabs>
-    </ExampleTemplate>
+    <Tabs value={value} onChange={handleChange} centered>
+      <Tab label="Вкладка 1" />
+      <Tab label="Вкладка 2" disabled />
+      <Tab label="Вкладка 3" disabled />
+    </Tabs>
   );
 };
