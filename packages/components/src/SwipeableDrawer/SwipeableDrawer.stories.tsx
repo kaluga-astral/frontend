@@ -5,6 +5,7 @@ import { SuccessFillMd } from '@astral/icons';
 import { Button } from '../Button';
 
 import { SwipeableDrawer } from './SwipeableDrawer';
+import { TextWrapper } from './styles';
 
 /**
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=657-13634&mode=design&t=5XW3dMZTIJBuSDWo-0)
@@ -38,6 +39,29 @@ export const Interaction: Story = {
   },
 };
 
+const Text = () => (
+  <TextWrapper>
+    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+    Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала
+    XVI века. В то время некий безымянный печатник создал большую коллекцию
+    размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов.
+    Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но
+    и перешагнул в электронный дизайн. Его популяризации в новое время послужили
+    публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более
+    недавнее время, программы электронной вёрстки типа Aldus PageMaker, в
+    шаблонах которых используется Lorem Ipsum. Lorem Ipsum - это текст-"рыба",
+    часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной
+    "рыбой" для текстов на латинице с начала XVI века. В то время некий
+    безымянный печатник создал большую коллекцию размеров и форм шрифтов,
+    используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно
+    пережил без заметных изменений пять веков, но и перешагнул в электронный
+    дизайн. Его популяризации в новое время послужили публикация листов Letraset
+    с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы
+    электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется
+    Lorem Ipsum.
+  </TextWrapper>
+);
+
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,105 +85,7 @@ export const Example = () => {
         isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
-        Новые документы
-      </SwipeableDrawer>
-    </>
-  );
-};
-
-/**
- * Prop ```anchor``` позволяет задать местоположение всплывающего окна
- */
-export const Anchor = () => {
-  const [isTopOpen, setIsTopOpen] = useState(false);
-  const [isRightOpen, setIsRightOpen] = useState(false);
-  const [isBottomOpen, setIsBottomOpen] = useState(false);
-  const [isLeftOpen, setIsLeftOpen] = useState(false);
-
-  const handleTopToggle = (newOpen: boolean) => () => {
-    setIsTopOpen(newOpen);
-  };
-
-  const handleRightToggle = (newOpen: boolean) => () => {
-    setIsRightOpen(newOpen);
-  };
-
-  const handleBottomToggle = (newOpen: boolean) => () => {
-    setIsBottomOpen(newOpen);
-  };
-
-  const handleLeftToggle = (newOpen: boolean) => () => {
-    setIsLeftOpen(newOpen);
-  };
-
-  return (
-    <>
-      <Button variant="contained" onClick={handleTopToggle(true)}>
-        Top
-      </Button>
-
-      <Button variant="contained" onClick={handleRightToggle(true)}>
-        Right
-      </Button>
-
-      <Button variant="contained" onClick={handleBottomToggle(true)}>
-        Bottom
-      </Button>
-
-      <Button variant="contained" onClick={handleLeftToggle(true)}>
-        Left
-      </Button>
-
-      <SwipeableDrawer
-        anchor="top"
-        open={isTopOpen}
-        onClose={handleTopToggle(false)}
-        onOpen={handleTopToggle(true)}
-        disableSwipeToOpen
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-      >
-        Новые документы
-      </SwipeableDrawer>
-
-      <SwipeableDrawer
-        anchor="right"
-        open={isRightOpen}
-        onClose={handleRightToggle(false)}
-        onOpen={handleRightToggle(true)}
-        disableSwipeToOpen
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-      >
-        Новые документы
-      </SwipeableDrawer>
-
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isBottomOpen}
-        onClose={handleBottomToggle(false)}
-        onOpen={handleBottomToggle(true)}
-        disableSwipeToOpen
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-      >
-        Новые документы
-      </SwipeableDrawer>
-
-      <SwipeableDrawer
-        anchor="left"
-        open={isLeftOpen}
-        onClose={handleLeftToggle(false)}
-        onOpen={handleLeftToggle(true)}
-        disableSwipeToOpen
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-      >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );
@@ -191,7 +117,7 @@ export const DrawerBleedingTitle = () => {
         isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );
@@ -224,7 +150,7 @@ export const DrawerBleedingIcon = () => {
         isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );
@@ -256,7 +182,7 @@ export const DrawerBleedingHeight = () => {
         isMountedOnHide={false}
         drawerBleedingHeight={306}
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );
@@ -289,7 +215,7 @@ export const TransitionDuration = () => {
         drawerBleedingHeight={306}
         transitionDuration={1005}
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );
@@ -337,7 +263,7 @@ export const Variant = () => {
         drawerBleedingHeight={306}
         variant="temporary"
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
 
       <SwipeableDrawer
@@ -351,7 +277,7 @@ export const Variant = () => {
         drawerBleedingHeight={306}
         variant="permanent"
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
 
       <SwipeableDrawer
@@ -365,7 +291,7 @@ export const Variant = () => {
         drawerBleedingHeight={306}
         variant="persistent"
       >
-        Новые документы
+        <Text />
       </SwipeableDrawer>
     </>
   );

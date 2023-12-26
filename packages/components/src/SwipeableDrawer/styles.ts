@@ -127,3 +127,7 @@ export const SwipeableDrawerBody = styled.div<SwipeableDrawerBodyProps>`
       ? theme.palette.background.default
       : theme.palette.grey[800]};
 `;
+
+export const TextWrapper = styled.div`
+  padding: 20px;
+`;
