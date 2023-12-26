@@ -8,6 +8,9 @@ import { Typography } from '../Typography';
 import { Tabs } from './Tabs';
 
 /**
+ * Может содержать:
+ *  - [Tab](/story/components-tabs-tab--docs)
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=376-5801&mode=design&t=6DlItWfeBP8xOP7n-0)
  * ### [Guide]()
  */
@@ -41,20 +44,14 @@ export const Example = () => {
   };
 
   return (
-    <ExampleTemplate>
-      <Typography>
-        Пример Tab с компонентом Tabs, который является оберткой для размещения
-        прочих компонентов в заголовке.
-      </Typography>
-      <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Вкладка 1" />
-        <Tab label="Вкладка 2" />
-        <Tab label="Вкладка 3" />
-        <Tab label="Вкладка 4" />
-        <Tab label="Вкладка 5" />
-        <Tab label="Вкладка 6" />
-      </Tabs>
-    </ExampleTemplate>
+    <Tabs value={value} onChange={handleChange} centered>
+      <Tab label="Вкладка 1" />
+      <Tab label="Вкладка 2" />
+      <Tab label="Вкладка 3" />
+      <Tab label="Вкладка 4" />
+      <Tab label="Вкладка 5" />
+      <Tab label="Вкладка 6" />
+    </Tabs>
   );
 };
 
