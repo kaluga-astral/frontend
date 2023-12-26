@@ -71,23 +71,89 @@ export const Example = () => {
  * Prop ```anchor``` позволяет задать местоположение всплывающего окна
  */
 export const Anchor = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isTopOpen, setIsTopOpen] = useState(false);
+  const [isRightOpen, setIsRightOpen] = useState(false);
+  const [isBottomOpen, setIsBottomOpen] = useState(false);
+  const [isLeftOpen, setIsLeftOpen] = useState(false);
 
-  const handleToggle = (newOpen: boolean) => () => {
-    setIsOpen(newOpen);
+  const handleTopToggle = (newOpen: boolean) => () => {
+    setIsTopOpen(newOpen);
+  };
+
+  const handleRightToggle = (newOpen: boolean) => () => {
+    setIsRightOpen(newOpen);
+  };
+
+  const handleBottomToggle = (newOpen: boolean) => () => {
+    setIsBottomOpen(newOpen);
+  };
+
+  const handleLeftToggle = (newOpen: boolean) => () => {
+    setIsLeftOpen(newOpen);
   };
 
   return (
     <>
-      <Button variant="contained" onClick={handleToggle(true)}>
-        Открыть
+      <Button variant="contained" onClick={handleTopToggle(true)}>
+        Top
+      </Button>
+
+      <Button variant="contained" onClick={handleRightToggle(true)}>
+        Right
+      </Button>
+
+      <Button variant="contained" onClick={handleBottomToggle(true)}>
+        Bottom
+      </Button>
+
+      <Button variant="contained" onClick={handleLeftToggle(true)}>
+        Left
       </Button>
 
       <SwipeableDrawer
+        anchor="top"
+        open={isTopOpen}
+        onClose={handleTopToggle(false)}
+        onOpen={handleTopToggle(true)}
+        disableSwipeToOpen
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={306}
+      >
+        Новые документы
+      </SwipeableDrawer>
+
+      <SwipeableDrawer
         anchor="right"
-        open={isOpen}
-        onClose={handleToggle(false)}
-        onOpen={handleToggle(true)}
+        open={isRightOpen}
+        onClose={handleRightToggle(false)}
+        onOpen={handleRightToggle(true)}
+        disableSwipeToOpen
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={306}
+      >
+        Новые документы
+      </SwipeableDrawer>
+
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isBottomOpen}
+        onClose={handleBottomToggle(false)}
+        onOpen={handleBottomToggle(true)}
+        disableSwipeToOpen
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={306}
+      >
+        Новые документы
+      </SwipeableDrawer>
+
+      <SwipeableDrawer
+        anchor="left"
+        open={isLeftOpen}
+        onClose={handleLeftToggle(false)}
+        onOpen={handleLeftToggle(true)}
         disableSwipeToOpen
         drawerBleedingTitle="Все новые документы"
         isMountedOnHide={false}
@@ -230,28 +296,74 @@ export const TransitionDuration = () => {
 };
 
 export const Variant = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isTemporaryOpen, setIsTemporaryOpen] = useState(false);
+  const [isPermanentOpen, setIsPermanentOpen] = useState(false);
+  const [isPersistentOpen, setIsPersistentOpen] = useState(false);
 
-  const handleToggle = (newOpen: boolean) => () => {
-    setIsOpen(newOpen);
+  const handleTemporaryToggle = (newOpen: boolean) => () => {
+    setIsTemporaryOpen(newOpen);
+  };
+
+  const handlePermanentToggle = (newOpen: boolean) => () => {
+    setIsPermanentOpen(newOpen);
+  };
+
+  const handlePersistentToggle = (newOpen: boolean) => () => {
+    setIsPersistentOpen(newOpen);
   };
 
   return (
     <>
-      <Button variant="contained" onClick={handleToggle(true)}>
-        Открыть
+      <Button variant="contained" onClick={handleTemporaryToggle(true)}>
+        Temporary
+      </Button>
+
+      <Button variant="contained" onClick={handlePermanentToggle(true)}>
+        Permanent
+      </Button>
+
+      <Button variant="contained" onClick={handlePersistentToggle(true)}>
+        Persistent
       </Button>
 
       <SwipeableDrawer
         anchor="bottom"
-        open={isOpen}
-        onClose={handleToggle(false)}
-        onOpen={handleToggle(true)}
+        open={isTemporaryOpen}
+        onClose={handleTemporaryToggle(false)}
+        onOpen={handleTemporaryToggle(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={306}
+        variant="temporary"
+      >
+        Новые документы
+      </SwipeableDrawer>
+
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isPermanentOpen}
+        onClose={handlePermanentToggle(false)}
+        onOpen={handlePermanentToggle(true)}
         disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы"
         isMountedOnHide={false}
         drawerBleedingHeight={306}
         variant="permanent"
+      >
+        Новые документы
+      </SwipeableDrawer>
+
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isPersistentOpen}
+        onClose={handlePersistentToggle(false)}
+        onOpen={handlePersistentToggle(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={306}
+        variant="persistent"
       >
         Новые документы
       </SwipeableDrawer>
