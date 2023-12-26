@@ -80,9 +80,7 @@ export const Example = () => {
         open={isOpen}
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
         <Text />
@@ -112,9 +110,7 @@ export const DrawerBleedingTitle = () => {
         open={isOpen}
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы, title немного отличается"
-        isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
         <Text />
@@ -144,10 +140,8 @@ export const DrawerBleedingIcon = () => {
         open={isOpen}
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы"
         drawerBleedingIcon={<SuccessFillMd color="success" />}
-        isMountedOnHide={false}
         drawerBleedingHeight={56}
       >
         <Text />
@@ -177,9 +171,7 @@ export const DrawerBleedingHeight = () => {
         open={isOpen}
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
         drawerBleedingHeight={306}
       >
         <Text />
@@ -209,87 +201,9 @@ export const TransitionDuration = () => {
         open={isOpen}
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
         drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
         drawerBleedingHeight={306}
         transitionDuration={1005}
-      >
-        <Text />
-      </SwipeableDrawer>
-    </>
-  );
-};
-
-export const Variant = () => {
-  const [isTemporaryOpen, setIsTemporaryOpen] = useState(false);
-  const [isPermanentOpen, setIsPermanentOpen] = useState(false);
-  const [isPersistentOpen, setIsPersistentOpen] = useState(false);
-
-  const handleTemporaryToggle = (newOpen: boolean) => () => {
-    setIsTemporaryOpen(newOpen);
-  };
-
-  const handlePermanentToggle = (newOpen: boolean) => () => {
-    setIsPermanentOpen(newOpen);
-  };
-
-  const handlePersistentToggle = (newOpen: boolean) => () => {
-    setIsPersistentOpen(newOpen);
-  };
-
-  return (
-    <>
-      <Button variant="contained" onClick={handleTemporaryToggle(true)}>
-        Temporary
-      </Button>
-
-      <Button variant="contained" onClick={handlePermanentToggle(true)}>
-        Permanent
-      </Button>
-
-      <Button variant="contained" onClick={handlePersistentToggle(true)}>
-        Persistent
-      </Button>
-
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isTemporaryOpen}
-        onClose={handleTemporaryToggle(false)}
-        onOpen={handleTemporaryToggle(true)}
-        disableSwipeToOpen={false}
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-        variant="temporary"
-      >
-        <Text />
-      </SwipeableDrawer>
-
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isPermanentOpen}
-        onClose={handlePermanentToggle(false)}
-        onOpen={handlePermanentToggle(true)}
-        disableSwipeToOpen={false}
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-        variant="permanent"
-      >
-        <Text />
-      </SwipeableDrawer>
-
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isPersistentOpen}
-        onClose={handlePersistentToggle(false)}
-        onOpen={handlePersistentToggle(true)}
-        disableSwipeToOpen={false}
-        drawerBleedingTitle="Все новые документы"
-        isMountedOnHide={false}
-        drawerBleedingHeight={306}
-        variant="persistent"
       >
         <Text />
       </SwipeableDrawer>
