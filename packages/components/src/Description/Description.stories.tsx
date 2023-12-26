@@ -19,8 +19,19 @@ export default meta;
 type Story = StoryObj<typeof Description>;
 
 export const Interaction: Story = {
+  args: {
+    children: (
+      <>
+        <Description.Name>Название поля</Description.Name>
+        <Description.Value>Значение поля</Description.Value>
+      </>
+    ),
+  },
   parameters: {
     options: { showPanel: true },
+    docs: {
+      disable: true,
+    },
   },
 };
 
