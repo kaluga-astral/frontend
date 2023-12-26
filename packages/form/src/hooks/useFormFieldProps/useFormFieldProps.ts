@@ -19,7 +19,10 @@ export const useFormFieldProps = <
 >(
   props: UseFormFieldProps<TFormFieldProps, TFieldValues>,
 ) => {
-  const { field, fieldState } = useController(props);
+  const { field, fieldState } = useController({
+    ...props,
+    disabled: undefined,
+  });
 
   const ref = useForwardedRef(field.ref);
 
@@ -30,5 +33,10 @@ export const useFormFieldProps = <
 
   const errorProps = useFormFieldErrorProps(fieldState);
 
-  return { ...inputProps, ...field, ...errorProps, inputRef: ref };
+  return {
+    ...field,
+    ...inputProps,
+    ...errorProps,
+    inputRef: ref,
+  };
 };

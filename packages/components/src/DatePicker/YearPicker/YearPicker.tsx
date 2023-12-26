@@ -29,7 +29,7 @@ export const YearPicker = ({
     date: initialDate,
     addCb: (date, direction) => addYears(date, YEARS_IN_GRID * direction),
   });
-  const { grid, isPrevDisabled, isNextDisabled } = useYearsGrid({
+  const { grid } = useYearsGrid({
     baseDate,
     selectedDate,
     rangeDate,
@@ -43,8 +43,8 @@ export const YearPicker = ({
         {...headProps}
         arrowPostfixTitle={yearCaption.plural as string}
         isPlural
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={`${grid[0]?.year}-${grid.at(-1)?.year}`}
       />
       <DateCalendarGridLarge>
