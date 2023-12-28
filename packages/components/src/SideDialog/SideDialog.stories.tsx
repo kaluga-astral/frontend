@@ -8,7 +8,7 @@ import { Divider } from '../Divider';
 import { Grid } from '../Grid';
 import { IconButton } from '../IconButton';
 import { Tag } from '../Tag';
-import { SideDialogActions as SideDialogActionsComponent } from '../SideDialogActions';
+import { SideDialogActions } from '../SideDialogActions';
 import { SideDialogContent } from '../SideDialogContent';
 import { SideDialogContentText } from '../SideDialogContentText';
 import { SideDialogHeader } from '../SideDialogHeader';
@@ -88,12 +88,12 @@ export const Example = () => {
             bibendum.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActionsComponent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleClose}>
             Отмена
           </Button>
           <Button onClick={handleClose}>Готово</Button>
-        </SideDialogActionsComponent>
+        </SideDialogActions>
       </SideDialog>
     </div>
   );
@@ -144,12 +144,12 @@ export const CustomHeader = () => {
             veniam laudantium consequuntur architecto.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActionsComponent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleCloseHeaderRight}>
             Отмена
           </Button>
           <Button onClick={handleCloseHeaderRight}>Готово</Button>
-        </SideDialogActionsComponent>
+        </SideDialogActions>
       </SideDialog>
       <SideDialog open={isOpenHeaderLeft} onClose={handleCloseHeaderLeft}>
         <SideDialogHeader
@@ -171,12 +171,12 @@ export const CustomHeader = () => {
             veniam laudantium consequuntur architecto.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActionsComponent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleCloseHeaderLeft}>
             Отмена
           </Button>
           <Button onClick={handleCloseHeaderLeft}>Готово</Button>
-        </SideDialogActionsComponent>
+        </SideDialogActions>
       </SideDialog>
     </>
   );
@@ -185,7 +185,7 @@ export const CustomHeader = () => {
 /**
  * [SideDialogActions](/story/components-sidedialog-sidedialogactions--docs)
  * */
-export const SideDialogActions = () => {
+export const CustomFooter = () => {
   const [isOpenDefault, setIsOpenDefault] = useState(false);
   const [isOpenMoreActions, setIsOpenMoreActions] = useState(false);
 
@@ -223,14 +223,14 @@ export const SideDialogActions = () => {
             контентом и в рамках работы приложения.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActionsComponent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleCloseDefault}>
             Отмена
           </Button>
           <Button autoFocus onClick={handleCloseDefault}>
             Готово
           </Button>
-        </SideDialogActionsComponent>
+        </SideDialogActions>
       </SideDialog>
       <SideDialog
         open={isOpenMoreActions}
@@ -244,7 +244,7 @@ export const SideDialogActions = () => {
             контентом и в рамках работы приложения.
           </SideDialogContentText>
         </SideDialogContent>
-        <SideDialogActionsComponent>
+        <SideDialogActions>
           <Button variant="text" onClick={handleCloseMoreActions}>
             Вернуться позже
           </Button>
@@ -254,7 +254,7 @@ export const SideDialogActions = () => {
           <Button autoFocus onClick={handleCloseMoreActions}>
             Готово
           </Button>
-        </SideDialogActionsComponent>
+        </SideDialogActions>
       </SideDialog>
     </>
   );
