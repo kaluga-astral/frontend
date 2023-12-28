@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
 import { DialogActions } from '../DialogActions';
@@ -7,16 +7,24 @@ import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { Grid } from '../Grid';
 import { Tag } from '../Tag';
-import { Dialog } from '../Dialog/Dialog';
+import { Dialog } from '../Dialog';
 
 import { DialogHeader } from './DialogHeader';
 
 type Story = StoryObj<typeof DialogHeader>;
 
-export default {
-  title: 'Components/DialogHeader',
+/**
+ * В хедере диалогового окна могут добавляться дополнительные элементы, для этого используется DialogHeader. Они могут добавляться к заголовку или закрепляться по правому краю.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=95-159&mode=design&t=5c0oZ9TMtlkNyOeB-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof DialogHeader> = {
+  title: 'Components/Dialog/DialogHeader',
   component: DialogHeader,
 };
+
+export default meta;
 
 export const Interaction: Story = {
   args: {
@@ -29,48 +37,76 @@ export const Interaction: Story = {
   },
 };
 
-const Template = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+export const Example = () => {
+  const [isOpenHeaderLeft, setIsOpenHeaderLeft] = useState(false);
+  const [isOpenHeaderRight, setIsOpenHeaderRight] = useState(false);
 
-  const handleClickOpen = () => {
-    setDialogOpen(true);
+  const handleOpenHeaderLeft = () => {
+    setIsOpenHeaderLeft(true);
   };
 
-  const handleClose = () => {
-    setDialogOpen(false);
+  const handleCloseHeaderLeft = () => {
+    setIsOpenHeaderLeft(false);
+  };
+
+  const handleOpenHeaderRight = () => {
+    setIsOpenHeaderRight(true);
+  };
+
+  const handleCloseHeaderRight = () => {
+    setIsOpenHeaderRight(false);
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid>
-        <Button variant="light" onClick={handleClickOpen}>
-          DialogHeader
-        </Button>
+    <>
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={handleOpenHeaderLeft}>Dialog header left</Button>
+        <Button onClick={handleOpenHeaderRight}>Dialog header left</Button>
       </Grid>
-      <Dialog open={dialogOpen} onClose={handleClose}>
-        <DialogHeader title="Заголовок" onClose={handleClose}>
+      <Dialog open={isOpenHeaderLeft} onClose={handleCloseHeaderLeft}>
+        <DialogHeader title="Заголовок" onClose={handleCloseHeaderLeft}>
           <Tag variant="light" label="Light Tag" color="primary" />
-          <Button variant="contained" color="primary">
-            Button
-          </Button>
         </DialogHeader>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Демонстрация диалога с компонентом DialogHeader, который позволяет
-            добавлять другие компоненты в заголовок диалога.
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="text" onClick={handleClose}>
+          <Button variant="text" onClick={handleCloseHeaderLeft}>
             Отмена
           </Button>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleCloseHeaderLeft}>
             Готово
           </Button>
         </DialogActions>
       </Dialog>
-    </Grid>
+      <Dialog open={isOpenHeaderRight} onClose={handleCloseHeaderRight}>
+        <DialogHeader
+          title="Заголовок"
+          onClose={handleCloseHeaderRight}
+          justifyContent="flex-end"
+        >
+          <Tag variant="contained" label="Light Tag" color="primary" />
+        </DialogHeader>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="text" onClick={handleCloseHeaderRight}>
+            Отмена
+          </Button>
+          <Button autoFocus onClick={handleCloseHeaderRight}>
+            Готово
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
-
-export const Default = Template.bind({});
