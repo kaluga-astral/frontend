@@ -56,7 +56,7 @@ export type DatePickerProps = MondayFirst &
     label?: ReactNode;
     required?: boolean;
     helperText?: ReactNode;
-  };
+  } & Pick<TextFieldProps, 'label' | 'required' | 'helperText'>;
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
