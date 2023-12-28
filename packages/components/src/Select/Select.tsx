@@ -51,6 +51,7 @@ const SelectInner = <Value,>(
     children,
     error,
     label,
+    fullWidth,
     ...props
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
@@ -81,7 +82,7 @@ const SelectInner = <Value,>(
   const isNoData = !Boolean(React.Children.count(children));
 
   return (
-    <FormControl error={error}>
+    <FormControl error={error} fullWidth={fullWidth}>
       {label && (
         <InputLabel htmlFor="grouped-select" required={required}>
           {label}
@@ -93,6 +94,7 @@ const SelectInner = <Value,>(
         IconComponent={ChevronDOutlineMd}
         displayEmpty
         ref={ref}
+        fullWidth={fullWidth}
       >
         <SelectPlaceholder value="">{placeholder}</SelectPlaceholder>
         {loading && (
