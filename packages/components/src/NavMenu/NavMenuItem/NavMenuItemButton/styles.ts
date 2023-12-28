@@ -9,40 +9,60 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   height: 40px;
   padding: ${({ theme }) => theme.spacing(2)};
 
-  border-radius: ${({ theme }) => theme.shape.medium};
+  border-radius: ${({ theme }) => theme.shape.small};
 
-  .MuiListItemIcon-root {
-    color: ${({ theme, selected }) => {
-      return selected ? theme.palette.primary['800'] : 'inherit';
-    }};
+  &.Mui-selected {
+    color: ${({ theme }) => theme.palette.grey['900']};
 
-    transition: ${({ theme }) => {
-      return theme.transitions.create('color', {
-        easing: theme.transitions.easing.easeIn,
-        duration: theme.transitions.duration.shortest,
-      });
-    }};
+    background-color: ${({ theme }) => theme.palette.primary['100']};
+    border-left: 3px solid ${({ theme }) => theme.palette.primary['800']};
   }
 
   &.Mui-selected:hover {
-    background-color: inherit;
+    background-color: ${({ theme }) => theme.palette.primary['100']};
+  }
+
+  &.Mui-selected:focus {
+    border: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:hover {
-    color: ${({ theme }) => theme.palette.primary['800']};
+    color: ${({ theme, selected }) =>
+      selected ? theme.palette.grey['900'] : theme.palette.primary['800']};
 
-    background-color: inherit;
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.palette.primary['100'] : 'inherit'};
 
     .MuiListItemIcon-root {
-      color: ${({ theme }) => theme.palette.primary['800']};
+      color: ${({ theme, selected }) =>
+        selected ? theme.palette.grey['900'] : theme.palette.primary['800']};
     }
   }
 
   &:active {
-    color: ${({ theme }) => theme.palette.primary['900']};
+    color: ${({ theme, selected }) =>
+      selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
+
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.palette.primary['100'] : 'inherit'};
 
     .MuiListItemIcon-root {
-      color: ${({ theme }) => theme.palette.primary['900']};
+      color: ${({ theme, selected }) =>
+        selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
+    }
+  }
+
+  &:focus {
+    color: ${({ theme, selected }) =>
+      selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
+
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.palette.primary['100'] : 'inherit'};
+    border: 2px solid ${({ theme }) => theme.palette.primary['400']};
+
+    .MuiListItemIcon-root {
+      color: ${({ theme, selected }) =>
+        selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
     }
   }
 `;
