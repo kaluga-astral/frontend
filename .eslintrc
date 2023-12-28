@@ -12,11 +12,13 @@
     ]
   },
   "overrides": [
-    // Для увеличения производительности plugin:testing-library запускается только для test.tsx файлов
     {
       "files": "**/*.test.tsx",
-      "extends": ["plugin:testing-library/react"],
-      "plugins": ["testing-library"]
+      "extends": ["@astral/eslint-config-react-vitest"]
+    },
+    {
+      "files": "**/*.test.ts",
+      "extends": ["@astral/eslint-config-vitest"]
     }
   ]
 }

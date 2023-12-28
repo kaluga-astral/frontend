@@ -216,7 +216,7 @@ describe('FormAutocomplete', () => {
     await userEvents.type(screen.getByRole('combobox'), 'Ivan');
 
     await waitFor(() => {
-      expect(onInputChange.mock.calls.length).toBe(4);
+      expect(onInputChange.mock.calls).toHaveLength(4);
     });
   });
 });

@@ -16,6 +16,7 @@ import { MuiPaper } from './MuiPaper';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
 import { MuiDialog } from './MuiDialog';
+import { MuiDrawer } from './MuiDrawer';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
@@ -134,6 +135,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogTitle,
   MuiDialogContent,
   MuiDialogActions,
+  MuiDrawer,
   MuiTableCell,
   MuiTableHead,
   MuiTableRow,

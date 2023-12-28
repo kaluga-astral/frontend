@@ -25,7 +25,7 @@ describe('DatePicker', () => {
     const onChange = vi.fn();
 
     renderWithTheme(<DatePicker onChange={onChange} />);
-    fireEvent.focus(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByRole('textbox'));
 
     const dateBtn = screen.getAllByText('10')[0];
 
@@ -58,6 +58,20 @@ describe('DatePicker', () => {
     const btn = screen.getAllByText('9')[0];
 
     expect(btn).not.toBeDisabled();
+  });
+
+  it('Props:value: в пикере можно переключить месяц когда текущее значение меньше минимального', async () => {
+    renderWithTheme(
+      <DatePicker minDate={new Date()} value={new Date('2023-09-01')} />,
+    );
+
+    fireEvent.focus(screen.getByRole('textbox'));
+
+    const nextBtn = screen.getByLabelText('Следующий месяц');
+    const prevBtn = screen.getByLabelText('Предыдущий месяц');
+
+    expect(nextBtn).not.toBeDisabled();
+    expect(prevBtn).not.toBeDisabled();
   });
 
   it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {

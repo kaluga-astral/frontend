@@ -70,6 +70,8 @@ export * from './Divider';
 
 export * from './DropdownButton';
 
+export { EmailField, EmailFieldProps } from './EmailField';
+
 export * from './ErrorBoundary';
 
 export * from './Fab';
@@ -131,6 +133,8 @@ export * from './MenuList';
 export * from './NavMenu';
 
 export * from './Notification';
+
+export * from './NotificationList';
 
 export * from './OverflowTypography';
 
@@ -223,3 +227,5 @@ export * from './forwardRefWithGeneric';
 export * from './PasswordField';
 
 export { StepSlider, StepSliderProps } from './StepSlider';
+
+export { CodeField, CodeFieldProps } from './CodeField';

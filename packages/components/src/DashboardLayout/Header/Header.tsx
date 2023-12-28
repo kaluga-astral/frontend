@@ -1,4 +1,4 @@
-import { type PropsWithChildren, forwardRef } from 'react';
+import { type PropsWithChildren, type ReactNode, forwardRef } from 'react';
 
 import {
   MenuOrganization,
@@ -15,6 +15,7 @@ export type HeaderProps = {
   productSwitcher?: (props: PropsWithChildren<{}>) => JSX.Element;
   profile?: ProfileProps;
   organizationMenu?: MenuOrganizationProps;
+  children?: ReactNode;
 };
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
@@ -23,6 +24,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     product,
     profile,
     organizationMenu,
+    children,
   } = props;
 
   return (
@@ -31,6 +33,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
         {ProductSwitcher && <ProductSwitcher />}
         <Product {...product} />
       </HeaderSection>
+      {children}
       <HeaderSection>
         {organizationMenu && <MenuOrganization {...organizationMenu} />}
         {profile && <Profile {...profile} />}

@@ -1,0 +1,1 @@
+export type CodeFieldInputType = '' | number;

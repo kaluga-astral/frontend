@@ -5,7 +5,7 @@ import { act, renderWithTheme, screen } from '@astral/tests';
 import { StepSlider } from './StepSlider';
 
 describe('StepSlider', () => {
-  it('activeStep: активируется компонент соответствующий активному шагу', async () => {
+  it('Компонент отображается, если активен его id', async () => {
     const callbacks: { setValue: (value: number) => void } = {
       setValue: () => undefined,
     };
@@ -38,11 +38,6 @@ describe('StepSlider', () => {
       callbacks.setValue(2);
     });
 
-    const itemAfter = screen.getByText('lorem 2');
-
-    expect(
-      itemAfter,
-      'ожидается, что элемент появится только после принудительной активации шага',
-    ).toBeTruthy();
+    expect(screen.getByText('lorem 2')).toBeVisible();
   });
 });
