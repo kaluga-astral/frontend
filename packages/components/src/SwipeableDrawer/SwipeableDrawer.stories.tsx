@@ -27,7 +27,6 @@ export const Interaction: Story = {
     onOpen: () => {},
     onClose: () => {},
     drawerBleedingTitle: 'Все новые документы',
-    isMountedOnHide: false,
     drawerBleedingHeight: 56,
   },
   parameters: {
