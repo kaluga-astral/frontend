@@ -11,7 +11,8 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   height: 40px;
   padding: ${({ theme }) => theme.spacing(2)};
 
-  border-radius: ${({ theme }) => theme.shape.small};
+  border-radius: 0 ${({ theme }) => theme.shape.small}
+    ${({ theme }) => theme.shape.small} 0;
 
   &.${listItemButtonClasses.selected} {
     color: ${({ theme }) => theme.palette.grey['900']};
