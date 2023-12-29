@@ -1,4 +1,6 @@
 import { ChevronDOutlineMd } from '@astral/icons';
+import listItemButtonClasses from '@mui/material/ListItemButton/listItemButtonClasses';
+import listItemIconClasses from '@mui/material/ListItemIcon/listItemIconClasses';
 
 import { styled } from '../../../styles';
 import { ListItemButton } from '../../../ListItemButton';
@@ -11,19 +13,19 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
 
   border-radius: ${({ theme }) => theme.shape.small};
 
-  &.Mui-selected {
+  &.${listItemButtonClasses.selected} {
     color: ${({ theme }) => theme.palette.grey['900']};
 
     background-color: ${({ theme }) => theme.palette.primary['100']};
-    border-left: 3px solid ${({ theme }) => theme.palette.primary['800']};
+    box-shadow: -3px 0 0 0 ${({ theme }) => theme.palette.primary['800']};
   }
 
-  &.Mui-selected:hover {
+  &.${listItemButtonClasses.selected}:hover {
     background-color: ${({ theme }) => theme.palette.primary['100']};
   }
 
-  &.Mui-selected:focus {
-    border: 2px solid ${({ theme }) => theme.palette.primary['400']};
+  &.${listItemButtonClasses.selected}:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
   }
 
   &:hover {
@@ -33,7 +35,7 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
     background-color: ${({ theme, selected }) =>
       selected ? theme.palette.primary['100'] : 'inherit'};
 
-    .MuiListItemIcon-root {
+    .${listItemIconClasses.root} {
       color: ${({ theme, selected }) =>
         selected ? theme.palette.grey['900'] : theme.palette.primary['800']};
     }
@@ -46,21 +48,21 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
     background-color: ${({ theme, selected }) =>
       selected ? theme.palette.primary['100'] : 'inherit'};
 
-    .MuiListItemIcon-root {
+    .${listItemIconClasses.root} {
       color: ${({ theme, selected }) =>
         selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
     }
   }
 
-  &:focus {
+  &:focus-visible {
     color: ${({ theme, selected }) =>
       selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
 
     background-color: ${({ theme, selected }) =>
       selected ? theme.palette.primary['100'] : 'inherit'};
-    border: 2px solid ${({ theme }) => theme.palette.primary['400']};
+    outline: 2px solid ${({ theme }) => theme.palette.primary['400']};
 
-    .MuiListItemIcon-root {
+    .${listItemIconClasses.root} {
       color: ${({ theme, selected }) =>
         selected ? theme.palette.grey['900'] : theme.palette.primary['900']};
     }
