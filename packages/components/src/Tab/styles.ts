@@ -6,7 +6,7 @@ import { type TabProps } from './Tab';
 
 export const StyledTab = styled(Tab)<TabProps>`
   min-height: 36px;
-  margin-right: 16px;
+  margin-right: ${({ theme }) => theme.spacing(4)};
   padding: 0;
 
   line-height: 20px;
