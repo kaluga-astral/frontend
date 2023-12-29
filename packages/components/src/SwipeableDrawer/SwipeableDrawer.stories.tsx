@@ -27,7 +27,6 @@ export const Interaction: Story = {
     onOpen: () => {},
     onClose: () => {},
     drawerBleedingTitle: 'Все новые документы',
-    drawerBleedingHeight: 56,
   },
   parameters: {
     options: { showPanel: true },
@@ -80,7 +79,6 @@ export const Example = () => {
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
         drawerBleedingTitle="Все новые документы"
-        drawerBleedingHeight={56}
       >
         <Text />
       </SwipeableDrawer>
@@ -110,7 +108,6 @@ export const DrawerBleedingTitle = () => {
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
         drawerBleedingTitle="Все новые документы, title немного отличается"
-        drawerBleedingHeight={56}
       >
         <Text />
       </SwipeableDrawer>
@@ -141,7 +138,6 @@ export const DrawerBleedingIcon = () => {
         onOpen={handleToggle(true)}
         drawerBleedingTitle="Все новые документы"
         drawerBleedingIcon={<SuccessFillMd color="success" />}
-        drawerBleedingHeight={56}
       >
         <Text />
       </SwipeableDrawer>
@@ -201,7 +197,6 @@ export const TransitionDuration = () => {
         onClose={handleToggle(false)}
         onOpen={handleToggle(true)}
         drawerBleedingTitle="Все новые документы"
-        drawerBleedingHeight={306}
         transitionDuration={1005}
       >
         <Text />
