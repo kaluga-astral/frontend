@@ -16,6 +16,7 @@ import { MuiPaper } from './MuiPaper';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
 import { MuiDialog } from './MuiDialog';
+import { MuiDrawer } from './MuiDrawer';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
@@ -35,6 +36,7 @@ import { MuiStepConnector } from './MuiStepConnector';
 import { MuiToggleButton } from './MuiToggleButton';
 import { MuiToggleButtonGroup } from './MuiToggleButtonGroup';
 import { MuiSwitch } from './MuiSwitch';
+import { MuiTextField } from './MuiTextField';
 
 export type FontsUrls = {
   bold: {
@@ -133,6 +135,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogTitle,
   MuiDialogContent,
   MuiDialogActions,
+  MuiDrawer,
   MuiTableCell,
   MuiTableHead,
   MuiTableRow,
@@ -148,5 +151,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiStepConnector,
   MuiToggleButtonGroup,
   MuiToggleButton,
+  MuiTextField,
   MuiSwitch,
 });
