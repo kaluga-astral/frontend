@@ -63,7 +63,7 @@ export const DayPicker = ({
     addCb: addMonths,
   });
 
-  const { grid, isPrevDisabled, isNextDisabled } = useDaysGrid({
+  const { grid } = useDaysGrid({
     baseDate,
     selectedDate,
     isMondayFirst,
@@ -76,8 +76,8 @@ export const DayPicker = ({
       <DateCalendarHead
         {...headProps}
         arrowPostfixTitle={monthCaption.single}
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={monthYearFormat(baseDate)}
       />
       <DateCalendarBody>

@@ -60,6 +60,20 @@ describe('DatePicker', () => {
     expect(btn).not.toBeDisabled();
   });
 
+  it('Props:value: в пикере можно переключить месяц когда текущее значение меньше минимального', async () => {
+    renderWithTheme(
+      <DatePicker minDate={new Date()} value={new Date('2023-09-01')} />,
+    );
+
+    fireEvent.focus(screen.getByRole('textbox'));
+
+    const nextBtn = screen.getByLabelText('Следующий месяц');
+    const prevBtn = screen.getByLabelText('Предыдущий месяц');
+
+    expect(nextBtn).not.toBeDisabled();
+    expect(prevBtn).not.toBeDisabled();
+  });
+
   it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
     renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
     fireEvent.focus(screen.getByRole('textbox'));

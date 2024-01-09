@@ -4,7 +4,6 @@ import { YEARS_IN_GRID } from '../../constants';
 import { type GridBuilder, type GridItem } from '../../../types';
 import {
   DateCompareDeep,
-  addYears,
   buildIsoDate,
   isDateOutOfRange,
 } from '../../../../utils/date';
@@ -67,7 +66,6 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addYears,
       deep: DateCompareDeep.year,
     });
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);

@@ -348,6 +348,8 @@ export const Ellipsis = () => (
 
 Тесты в проекте пишутся с использованием vitest и react-testing-library.
 
+Тесты должны соблюдать принципы, описанные в [Astral Unit Testing Guide](https://industrious-search-cdf.notion.site/Astral-Frontend-Unit-Testing-Guide-71120289ed89424e912ebe7fa8b7e39b).
+
 ## Что покрывать тестами?
 
 Тестами покрываются сущности, экспортируемые из поставляемых пакетов, к ним относятся:
@@ -359,10 +361,6 @@ export const Ellipsis = () => (
 ### Тесты для утилит
 
 Все экспортируемые утилиты должны быть покрыты тестами.
-
-Точно должно быть покрыто тестами:
-- Базовые кейсы
-- Вариативность параметров
 
 ### Тесты для компонентов
 Для тестирования компонентов используется react-testing-library + jsdom.
@@ -382,7 +380,7 @@ export const Ellipsis = () => (
 - CSS. Используемые инструменты не умеют правильно эмулировать каскад в css. Примеры таких кейсов: проверка ширины бордера элемента, проверка цвета элемента...
 
 #### Style guide
-[Здесь](https://track.astral.ru/soft/wiki/pages/viewpage.action?pageId=3772645403) описан style guide по написанию тестов.
+[Здесь](https://industrious-search-cdf.notion.site/Astral-Frontend-Unit-Testing-Style-Guide-bb6ec75b67a449f68bc8eebd36d6fec8) описан style guide по написанию тестов.
 
 ---
 
