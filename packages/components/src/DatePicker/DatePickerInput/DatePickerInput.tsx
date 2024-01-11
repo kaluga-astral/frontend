@@ -4,11 +4,16 @@ import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
 import { type MaskBlocks, type MaskFieldProps } from '../../MaskField';
+import { type TextFieldProps } from '../../TextField';
 
 import { DatePickerInputWrapper } from './styles';
 
 type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
+  /**
+   * пропсы для кастомизации корневого input элемента
+   */
+  inputProps?: Omit<TextFieldProps['inputProps'], 'onClick' | 'ref'>;
 };
 
 /**
@@ -69,6 +74,7 @@ export const DatePickerInput = forwardRef<
           ),
         }}
         inputProps={{
+          ...props.inputProps,
           ref,
           onClick,
         }}
