@@ -21,7 +21,8 @@ type UseBaseRangeDatesOprions = {
    */
   selectedEndDate?: Date;
   /**
-   * При true хук вернет предыдущие значения, не рассчитывая новые при изменении зависимостей
+   * При true хук вернет предыдущие значения, не рассчитывая новые при изменении зависимостей.
+   * Используется, что бы при выборе первой даты, второй календарь не менял активный месяц до момента повторного открытия поповера
    */
   shouldReturnPrevValues?: boolean;
   /**
@@ -73,16 +74,23 @@ export const useBaseRangeDates = ({
   });
 
   useEffect(() => {
-    if (shouldReturnPrevValues) {
-      return;
+    if (!shouldReturnPrevValues) {
+      setStartBaseDate(startBaseDateCandidate);
+      setEndBaseDate(endBaseDateCandidate);
     }
 
-    setStartBaseDate(startBaseDateCandidate);
-    setEndBaseDate(endBaseDateCandidate);
+    if (selectedStartDate) {
+      setStartBaseDate(selectedStartDate);
+    }
+
+    if (selectedEndDate) {
+      setEndBaseDate(selectedEndDate);
+    }
   }, [
     endBaseDateCandidate,
+    selectedEndDate,
+    selectedStartDate,
     shouldReturnPrevValues,
-    startBaseDate,
     startBaseDateCandidate,
   ]);
 
