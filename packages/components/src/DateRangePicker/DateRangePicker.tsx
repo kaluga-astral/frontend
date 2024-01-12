@@ -86,6 +86,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onBlur,
     });
 
+    const [hoveredDayDate, setHoveredDayDate] = useState<Date>();
+
     /**
      * Была ли выбрана start/end-дата после открытия поповера
      */
@@ -263,6 +265,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 date={startBaseDate}
                 onChange={handleDayPick}
                 isRange
+                hoveredDayDate={hoveredDayDate}
+                onDayHover={setHoveredDayDate}
               />
               <DateRangePickerSplitter />
               <YearMonthDayPicker
@@ -272,6 +276,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 date={endBaseDate}
                 onChange={handleDayPick}
                 isRange
+                hoveredDayDate={hoveredDayDate}
+                onDayHover={setHoveredDayDate}
               />
             </MinMaxDateContextProvider>
           </DatePickerPopover>

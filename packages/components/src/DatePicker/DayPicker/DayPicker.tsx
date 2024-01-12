@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -39,6 +39,8 @@ export const DayPicker = ({
   isMondayFirst,
   rangeDate,
   isRange,
+  onDayHover,
+  hoveredDayDate,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -57,8 +59,6 @@ export const DayPicker = ({
   const { month: monthCaption } =
     useContext(ConfigContext).datePickerLanguageMap;
 
-  const [hoveredDate, setHoveredDate] = useState<Date>();
-
   const { baseDate, handlePrevClick, handleNextClick } = useCalendarNavigate({
     date: initialDate,
     addCb: addMonths,
@@ -73,6 +73,19 @@ export const DayPicker = ({
     fullSize: true,
     rangeDate,
   });
+
+  const handleDayHover = (date: Date) => {
+    onDayHover?.(date);
+  };
+
+  /*
+  Убираем hover day из стейта, если курсор вышел за проделы popover
+   */
+  useEffect(() => {
+    if (!popoverHovered) {
+      onDayHover?.();
+    }
+  }, [onDayHover, popoverHovered]);
 
   return (
     <DateCalendarWrapper>
@@ -94,14 +107,15 @@ export const DayPicker = ({
               lengthInRow={DAYS_IN_WEEK}
               isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
               onMouseEnter={() => {
-                setHoveredDate(date);
+                handleDayHover(date);
               }}
               isInHoveredRange={
+                isRange &&
                 popoverHovered &&
                 isDateBetweenSelectedAndRangeDates({
                   date,
                   selectedDate,
-                  rangeDate: hoveredDate,
+                  rangeDate: hoveredDayDate,
                   deep: DateCompareDeep.day,
                 })
               }

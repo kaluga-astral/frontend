@@ -17,4 +17,14 @@ export type PickerProps = {
    * @description Флаг для использования пикера в range состоянии
    */
   isRange?: boolean;
+
+  /**
+   * @description Колбек, вызываемый при событии hover на день календаря
+   */
+  onDayHover?: (date?: Date) => void;
+
+  /**
+   * @description День, который находится в состоянии hover
+   */
+  hoveredDayDate?: Date;
 };
