@@ -45,7 +45,13 @@ export type AutocompleteProps<
 > &
   Pick<
     TextFieldProps,
-    'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
+    | 'error'
+    | 'success'
+    | 'helperText'
+    | 'label'
+    | 'required'
+    | 'inputRef'
+    | 'placeholder'
   > & {
     renderInput?: (
       props: TextFieldProps & Omit<AutocompleteRenderInputParams, 'size'>,
@@ -182,7 +188,7 @@ const AutocompleteInner = <
         </MenuItem>
       );
     },
-    [multiple, externalRenderOption],
+    [multiple, overflowOption, externalRenderOption],
   );
 
   return (
