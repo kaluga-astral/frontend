@@ -14,6 +14,7 @@ import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
 import { DAYS_IN_WEEK } from '../constants/counts';
 import { isDateBetweenSelectedAndRangeDates } from '../utils';
+import { PopoverHoveredContext } from '../PopoverHoveredContext';
 
 import { DateDayPickerGridHead } from './DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './DateDayPickerGrid';
@@ -63,6 +64,8 @@ export const DayPicker = ({
     addCb: addMonths,
   });
 
+  const { popoverHovered } = useContext(PopoverHoveredContext);
+
   const { grid } = useDaysGrid({
     baseDate,
     selectedDate,
@@ -93,12 +96,15 @@ export const DayPicker = ({
               onMouseEnter={() => {
                 setHoveredDate(date);
               }}
-              isInHoveredRange={isDateBetweenSelectedAndRangeDates({
-                date,
-                selectedDate,
-                rangeDate: hoveredDate,
-                deep: DateCompareDeep.day,
-              })}
+              isInHoveredRange={
+                popoverHovered &&
+                isDateBetweenSelectedAndRangeDates({
+                  date,
+                  selectedDate,
+                  rangeDate: hoveredDate,
+                  deep: DateCompareDeep.day,
+                })
+              }
               {...props}
             >
               {monthDay}
