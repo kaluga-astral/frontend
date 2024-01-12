@@ -38,7 +38,6 @@ export const DatePickerPopover = ({
   <PopoverWrapper
     placement="bottom-start"
     {...props}
-    disablePortal
     modifiers={[
       {
         name: 'offset',
