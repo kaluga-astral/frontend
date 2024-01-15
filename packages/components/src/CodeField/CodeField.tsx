@@ -98,6 +98,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
         setBlur,
         onFieldChange,
         onComplete,
+        isError,
       );
 
     const setRef = (index: number) => (el: HTMLInputElement) => {
