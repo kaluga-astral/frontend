@@ -130,5 +130,5 @@ export const useCodeState = (
     }
   };
 
-  return { codeValue, onKeyUp, onKeyDown, onPaste };
+  return { codeValue, onKeyUp, onKeyDown, onPaste, clearCodeValue };
 };

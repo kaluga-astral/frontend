@@ -27,6 +27,10 @@ type ResendCodeButtonProps = {
    * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
+  /**
+   * @description Фукция, очищающая поле
+   */
+  clearCodeValue: () => void;
 };
 
 const ResendCodeButton = ({
@@ -35,6 +39,7 @@ const ResendCodeButton = ({
   resendTimeout,
   onResendCode,
   isError,
+  clearCodeValue,
 }: ResendCodeButtonProps) => {
   const {
     formatted: time,
@@ -60,6 +65,7 @@ const ResendCodeButton = ({
       onResendCode()
         .then(() => {
           reset({ minutes: 0, seconds: resendTimeout });
+          clearCodeValue();
         })
         .catch((error) => {
           console.error(error);

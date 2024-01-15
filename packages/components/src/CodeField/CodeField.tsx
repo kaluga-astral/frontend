@@ -89,15 +89,16 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
       useFocusInput(codeLength);
 
-    const { codeValue, onKeyDown, onKeyUp, onPaste } = useCodeState(
-      initialValue,
-      codeLength,
-      setFocusIndexNext,
-      setFocusIndexPrevious,
-      setBlur,
-      onFieldChange,
-      onComplete,
-    );
+    const { codeValue, onKeyDown, onKeyUp, onPaste, clearCodeValue } =
+      useCodeState(
+        initialValue,
+        codeLength,
+        setFocusIndexNext,
+        setFocusIndexPrevious,
+        setBlur,
+        onFieldChange,
+        onComplete,
+      );
 
     const setRef = (index: number) => (el: HTMLInputElement) => {
       if (el) {
@@ -139,6 +140,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
             loading={loading}
             isError={isError}
             onResendCode={onResendCode}
+            clearCodeValue={clearCodeValue}
           />
         )}
       </CodeFieldWrapper>
