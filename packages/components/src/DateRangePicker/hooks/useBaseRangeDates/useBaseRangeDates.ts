@@ -80,11 +80,11 @@ export const useBaseRangeDates = ({
     }
 
     if (selectedStartDate) {
-      setStartBaseDate(selectedStartDate);
+      setStartBaseDate(startBaseDateCandidate);
     }
 
     if (selectedEndDate) {
-      setEndBaseDate(selectedEndDate);
+      setEndBaseDate(endBaseDateCandidate);
     }
   }, [
     endBaseDateCandidate,
