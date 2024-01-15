@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCountdown from '@bradgarropy/use-countdown';
 
 import { Button } from '../../Button';
@@ -58,13 +58,16 @@ const ResendCodeButton = ({
   const disableButton =
     disabled || loading || resendCodeLoading || isTimerActive;
 
+  useEffect(() => {
+    reset({ minutes: 0, seconds: resendTimeout });
+  }, [resendTimeout]);
+
   const onClick = () => {
     setResendCodeLoading(true);
 
     if (onResendCode) {
       onResendCode()
         .then(() => {
-          reset({ minutes: 0, seconds: resendTimeout });
           clearCodeValue();
         })
         .catch((error) => {
