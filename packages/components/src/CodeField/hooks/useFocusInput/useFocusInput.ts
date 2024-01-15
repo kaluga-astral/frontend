@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * @description предоставляет методы работы с фокусом на инпутах
  */
-export const useFocusInput = (codeLength: number) => {
+export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
   const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
   /**
@@ -36,11 +36,29 @@ export const useFocusInput = (codeLength: number) => {
   };
 
   /**
+   * @description установливает фокус на первом инпуте
+   */
+  const setFocusOnFirstInput = () => {
+    setFocusIndex(0);
+  };
+
+  /**
    * @description вызвает блюр на всех инпутах
    */
   const setBlur = () => {
     inputRefs.current.forEach((elem) => elem.blur());
   };
 
-  return { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur };
+  useEffect(() => {
+    if (isAutoFocus) {
+      setFocusOnFirstInput();
+    }
+  }, []);
+
+  return {
+    inputRefs,
+    setFocusIndexNext,
+    setFocusIndexPrevious,
+    setBlur,
+  };
 };
