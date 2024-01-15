@@ -6,6 +6,7 @@ export const ResendCodeButtonWrapper = styled.footer<{ isError?: boolean }>`
   align-items: baseline;
 
   margin-top: ${({ theme, isError }) => {
-    return isError ? theme.spacing(1) : theme.spacing(6) ;
+    return isError ? theme.spacing(1) : theme.spacing(6);
   }};
+  padding-bottom: 2px;
 `;
