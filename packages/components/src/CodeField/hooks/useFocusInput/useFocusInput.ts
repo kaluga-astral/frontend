@@ -36,13 +36,6 @@ export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
   };
 
   /**
-   * @description установливает фокус на первом инпуте
-   */
-  const setFocusOnFirstInput = () => {
-    setFocusIndex(0);
-  };
-
-  /**
    * @description вызвает блюр на всех инпутах
    */
   const setBlur = () => {
@@ -51,7 +44,7 @@ export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
 
   useEffect(() => {
     if (isAutoFocus) {
-      setFocusOnFirstInput();
+      setFocusIndex(0);
     }
   }, []);
 
