@@ -3,6 +3,9 @@ import { useState } from 'react';
 
 import { Typography } from '../Typography';
 import { Button } from '../Button';
+import { Dialog } from '../Dialog';
+import { DialogContent } from '../DialogContent';
+import { DialogActions as DialogActionComponent } from '../DialogActions';
 
 import { CodeField } from './CodeField';
 
@@ -185,3 +188,39 @@ export const CodeLength = () => (
     </div>
   </div>
 );
+
+export const IsAutoFocus = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClickOpen = () => {
+    setIsOpen(true);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <Button onClick={handleClickOpen}>Открыть CodeField</Button>
+      <Dialog
+        open={isOpen}
+        onClose={handleClose}
+        title="Подтверждение личности"
+      >
+        <DialogContent>
+          <CodeField
+            label="Код подтверждения отправлен на test@test.ru"
+            codeLength={6}
+            isAllowResendCode
+            onResendCode={() => Promise.resolve()}
+            isAutoFocus
+          />
+        </DialogContent>
+        <DialogActionComponent>
+          <Button variant="text" onClick={handleClose}>
+            Отмена
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+    </>
+  );
+};
