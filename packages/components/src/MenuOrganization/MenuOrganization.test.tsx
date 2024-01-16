@@ -30,4 +30,18 @@ describe('MenuOrganization', () => {
 
     expect(screen.getByText('АО Калуга-Астрал')).toBeInTheDocument();
   });
+
+  it('Компонент не рендерится, когда флаг shouldRender=false', () => {
+    renderWithTheme(
+      <MenuOrganization
+        shouldRender={false}
+        organizations={[]}
+        currentOrganization={null}
+        onSelect={() => {}}
+        onAddOrganization={() => {}}
+      />,
+    );
+
+    expect(screen.queryByRole('div')).not.toBeInTheDocument();
+  });
 });
