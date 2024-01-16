@@ -8,5 +8,5 @@ export const ResendCodeButtonWrapper = styled.footer<{ isError?: boolean }>`
   margin-top: ${({ theme, isError }) => {
     return isError ? theme.spacing(1) : theme.spacing(6);
   }};
-  padding-bottom: 2px;
+  padding-bottom: ${({ theme }) => theme.spacing(1)};
 `;
