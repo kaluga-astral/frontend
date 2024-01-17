@@ -222,4 +222,20 @@ describe('CodeField', () => {
     await userEvents.keyboard('1');
     expect(fields[1]).toHaveFocus();
   });
+
+  it('Prop:isAutoFocus: Если true, автоматически устанавливается фокус на первый инпут', async () => {
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} isAutoFocus />);
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    expect(fields[0]).toHaveFocus();
+  });
+
+  it('Prop:isAutoFocus: Если false, не устанавливается фокус на первый инпут', async () => {
+    renderWithTheme(<CodeField codeLength={TEST_LENGTH} />);
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    expect(fields[0]).not.toHaveFocus();
+  });
 });
