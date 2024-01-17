@@ -238,4 +238,100 @@ describe('CodeField', () => {
 
     expect(fields[0]).not.toHaveFocus();
   });
+
+  it('При нажатии на кнопку "отправить код повторно", введенный код сбрасывается', async () => {
+    renderWithTheme(
+      <CodeField
+        codeLength={TEST_LENGTH}
+        isAllowResendCode
+        onResendCode={() => Promise.resolve()}
+        resendTimeout={0}
+      />,
+    );
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+    const resendButton = screen.getByRole('button');
+
+    await userEvents.click(fields[0]);
+    await userEvents.keyboard('123456');
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+    ]);
+
+    await userEvents.click(resendButton);
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]);
+  });
+
+  it('При получении ошибки, введенный код сбрасывается', async () => {
+    const { rerender } = renderWithTheme(
+      <CodeField codeLength={TEST_LENGTH} isAllowResendCode isError={false} />,
+    );
+
+    const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
+
+    await userEvents.click(fields[0]);
+    await userEvents.keyboard('123456');
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+    ]);
+
+    rerender(
+      <CodeField codeLength={TEST_LENGTH} isAllowResendCode isError={true} />,
+    );
+
+    expect(fields.map((item) => item.value)).toStrictEqual([
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]);
+  });
+
+  it('Prop:resetTimeout: При изменении значения таймера, он обновляется', async () => {
+    const { rerender } = renderWithTheme(
+      <CodeField
+        codeLength={TEST_LENGTH}
+        isAllowResendCode
+        onResendCode={() => Promise.resolve()}
+        resendTimeout={60}
+      />,
+    );
+
+    const resendButton = screen.getByRole('button');
+
+    expect(resendButton).toBeDisabled();
+
+    rerender(
+      <CodeField
+        codeLength={TEST_LENGTH}
+        isAllowResendCode
+        onResendCode={() => Promise.resolve()}
+        resendTimeout={0}
+      />,
+    );
+
+    expect(resendButton).not.toBeDisabled();
+  });
 });
