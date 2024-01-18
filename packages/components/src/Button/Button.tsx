@@ -2,19 +2,17 @@ import {
   type ComponentPropsWithRef,
   type ElementType,
   type ForwardedRef,
-  forwardRef,
   useMemo,
 } from 'react';
 import type { LoadingButtonProps } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
-import type { FixedForwardRef, WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
+import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import { ButtonColors, ButtonVariants } from './enums';
 import { LoadingButtonWrapper } from './styles';
-
-const typedForwardRef = forwardRef as FixedForwardRef;
 
 export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
   WithoutEmotionSpecific<LoadingButtonProps>,
@@ -79,6 +77,6 @@ const UnwrappedButton: ForwardedRefButton = (props, ref) => {
   );
 };
 
-export const Button = typedForwardRef(UnwrappedButton);
+export const Button = forwardRefWithGeneric(UnwrappedButton);
 
 export default Button;
