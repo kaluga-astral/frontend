@@ -6,7 +6,10 @@ import { Menu } from '../Menu';
 import { Button, type ButtonProps } from '../Button';
 import { Chevron } from '../Chevron';
 
-export type DropdownButtonProps = Omit<ButtonProps, 'endIcon'> & {
+export type DropdownButtonProps = Omit<
+  ButtonProps,
+  'endIcon' | 'selected' | 'onClick'
+> & {
   /** Название кнопки */
   name: string;
   /** Пропсы Popover компонента */
@@ -25,6 +28,7 @@ export const DropdownButton = forwardRef<
         <Button
           {...props}
           ref={anchorRef}
+          selected={open}
           onClick={handleOpenMenu}
           endIcon={<Chevron isActive={open} />}
         >

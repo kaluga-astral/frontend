@@ -17,6 +17,7 @@ export const useCodeState = (
   setBlur: () => void,
   onFieldChange?: (value: string) => void,
   onComplete?: (value: string) => void,
+  isError?: boolean,
 ) => {
   const [codeValue, setCodeValue] = useState<CodeFieldInputType[]>(() =>
     formatInitialValue(codeLength, initialValue),
@@ -45,6 +46,12 @@ export const useCodeState = (
   const clearCodeValue = () => {
     setCodeValue(Array.from({ length: codeLength }));
   };
+
+  useEffect(() => {
+    if (isError) {
+      clearCodeValue();
+    }
+  }, [isError]);
 
   const deletePreviousSymbol = (index: number) => {
     // если фокус на заполненном инпуте, то очищаем его;
@@ -130,5 +137,5 @@ export const useCodeState = (
     }
   };
 
-  return { codeValue, onKeyUp, onKeyDown, onPaste };
+  return { codeValue, onKeyUp, onKeyDown, onPaste, clearCodeValue };
 };
