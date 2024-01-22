@@ -4,6 +4,8 @@ export { default as AddCertOutlineMd } from './AddCertOutlineMd';
 
 export { default as AddOrgOutlineMd } from './AddOrgOutlineMd';
 
+export { default as AddDocumentOutlineMd } from './AddDocumentOutlineMd';
+
 export { default as AllCheckOutlineMd } from './AllCheckOutlineMd';
 
 export { default as AnalyticOutlineMd } from './AnalyticOutlineMd';
