@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCountdown from '@bradgarropy/use-countdown';
 
 import { Button } from '../../Button';
@@ -27,6 +27,10 @@ type ResendCodeButtonProps = {
    * @description Фукция, которая вызовется при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
+  /**
+   * @description Фукция, очищающая поле
+   */
+  clearCodeValue: () => void;
 };
 
 const ResendCodeButton = ({
@@ -35,6 +39,7 @@ const ResendCodeButton = ({
   resendTimeout,
   onResendCode,
   isError,
+  clearCodeValue,
 }: ResendCodeButtonProps) => {
   const {
     formatted: time,
@@ -53,13 +58,17 @@ const ResendCodeButton = ({
   const disableButton =
     disabled || loading || resendCodeLoading || isTimerActive;
 
+  useEffect(() => {
+    reset({ minutes: 0, seconds: resendTimeout });
+  }, [resendTimeout]);
+
   const onClick = () => {
     setResendCodeLoading(true);
 
     if (onResendCode) {
       onResendCode()
         .then(() => {
-          reset({ minutes: 0, seconds: resendTimeout });
+          clearCodeValue();
         })
         .catch((error) => {
           console.error(error);

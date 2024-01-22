@@ -63,6 +63,10 @@ export type CodeFieldProps = {
    * @description Вызывается при заполнении поля
    */
   onComplete?: (value: string) => void;
+  /**
+   * @description Если true, автоматически устанавливает фокус на первый инпут
+   */
+  isAutoFocus?: boolean;
 };
 
 /**
@@ -83,21 +87,24 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       errorText = ERROR_TEXT_DEFAULT,
       onChange: onFieldChange,
       onComplete,
+      isAutoFocus = false,
     },
     ref,
   ) => {
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
-      useFocusInput(codeLength);
+      useFocusInput(codeLength, isAutoFocus);
 
-    const { codeValue, onKeyDown, onKeyUp, onPaste } = useCodeState(
-      initialValue,
-      codeLength,
-      setFocusIndexNext,
-      setFocusIndexPrevious,
-      setBlur,
-      onFieldChange,
-      onComplete,
-    );
+    const { codeValue, onKeyDown, onKeyUp, onPaste, clearCodeValue } =
+      useCodeState(
+        initialValue,
+        codeLength,
+        setFocusIndexNext,
+        setFocusIndexPrevious,
+        setBlur,
+        onFieldChange,
+        onComplete,
+        isError,
+      );
 
     const setRef = (index: number) => (el: HTMLInputElement) => {
       if (el) {
@@ -139,6 +146,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
             loading={loading}
             isError={isError}
             onResendCode={onResendCode}
+            clearCodeValue={clearCodeValue}
           />
         )}
       </CodeFieldWrapper>

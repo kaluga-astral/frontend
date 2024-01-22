@@ -17,6 +17,10 @@ import {
 
 export type MenuOrganizationProps = {
   /**
+   * Должен ли рендериться компонент
+   */
+  shouldRender?: boolean;
+  /**
    * Выбранная организация
    */
   currentOrganization?: Organization | null;
@@ -36,6 +40,7 @@ export type MenuOrganizationProps = {
 
 export const MenuOrganization = ({
   organizations = [],
+  shouldRender = true,
   currentOrganization,
   onAddOrganization,
   onSelect,
@@ -46,6 +51,10 @@ export const MenuOrganization = ({
     onSelect(organization);
     handleCloseMenu();
   };
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <>
