@@ -17,4 +17,5 @@ export const HeaderRoot = styled.header`
 export const HeaderSection = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(1)};
+  align-items: center;
 `;
