@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -9,10 +9,12 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { addMonths } from '../../utils/date';
+import { DateCompareDeep, addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
 import { DAYS_IN_WEEK } from '../constants/counts';
+import { isDateBetweenSelectedAndRangeDates } from '../utils';
+import { PopoverHoveredContext } from '../PopoverHoveredContext';
 
 import { DateDayPickerGridHead } from './DateDayPickerGridHead';
 import { DateDayPickerGridBody } from './DateDayPickerGrid';
@@ -36,6 +38,9 @@ export const DayPicker = ({
   onChange,
   isMondayFirst,
   rangeDate,
+  isRange,
+  onDayHover,
+  hoveredDayDate,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -59,6 +64,8 @@ export const DayPicker = ({
     addCb: addMonths,
   });
 
+  const { popoverHovered } = useContext(PopoverHoveredContext);
+
   const { grid } = useDaysGrid({
     baseDate,
     selectedDate,
@@ -66,6 +73,19 @@ export const DayPicker = ({
     fullSize: true,
     rangeDate,
   });
+
+  const handleDayHover = (date: Date) => {
+    onDayHover?.(date);
+  };
+
+  /*
+  Убираем hover day из стейта, если курсор вышел за проделы popover
+   */
+  useEffect(() => {
+    if (!popoverHovered) {
+      onDayHover?.();
+    }
+  }, [onDayHover, popoverHovered]);
 
   return (
     <DateCalendarWrapper>
@@ -86,6 +106,19 @@ export const DayPicker = ({
               title={dayFormat(date)}
               lengthInRow={DAYS_IN_WEEK}
               isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              onMouseEnter={() => {
+                handleDayHover(date);
+              }}
+              isInHoveredRange={
+                isRange &&
+                popoverHovered &&
+                isDateBetweenSelectedAndRangeDates({
+                  date,
+                  selectedDate,
+                  rangeDate: hoveredDayDate,
+                  deep: DateCompareDeep.day,
+                })
+              }
               {...props}
             >
               {monthDay}
