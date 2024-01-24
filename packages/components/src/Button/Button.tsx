@@ -35,21 +35,17 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    * Состояние кнопки - selected
    */
   selected?: boolean;
-};
-
-type ForwardedRefButton = <TComponent extends ElementType>(
-  props: ButtonProps<TComponent> &
-    Omit<
-      ComponentPropsWithRef<
-        ElementType extends TComponent ? 'button' : TComponent
-      >,
-      'ref'
+} & Omit<
+    ComponentPropsWithRef<
+      ElementType extends TComponent ? 'button' : TComponent
     >,
-  // eslint-disable-next-line
-  ref: ForwardedRef<any>,
-) => JSX.Element;
+    'ref'
+  >;
 
-const UnwrappedButton: ForwardedRefButton = (props, ref) => {
+const UnwrappedButton = <TComponent extends ElementType>(
+  props: ButtonProps<TComponent>,
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const {
     variant = ButtonVariants.Contained,
     color = ButtonColors.Primary,
