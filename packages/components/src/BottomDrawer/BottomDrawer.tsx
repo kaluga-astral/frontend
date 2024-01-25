@@ -10,21 +10,18 @@ import { DrawerBody, DrawerHeader, DrawerTitle, StyledDrawer } from './styles';
 
 export type BottomDrawerProps = {
   /**
-   * @example <BottomDrawer title="Заголовок">
-   * @description Текстовый заголовок в шапке компонента.
+   * Текстовый заголовок в шапке компонента.
    */
   title: string;
   /**
-   * @example <BottomDrawer>
+   * Остаётся ли компонент смонтированным после его скрытия.
    * @default false
-   * @description Остаётся ли компонент смонтированным после его скрытия.
    */
   isMountedOnHide?: boolean;
   /**
   /**
-   * @example <BottomDrawer drawerHeaderHeight={56}>
-   * @default 56
-   * @description Высота шапки компонента
+   * Высота шапки компонента
+   * * @default 56
    */
   drawerHeaderHeight?: number;
 } & WithoutEmotionSpecific<Omit<MuiDrawerProps, 'anchor' | 'variant'>>;
