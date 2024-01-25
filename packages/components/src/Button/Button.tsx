@@ -35,11 +35,8 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    * Состояние кнопки - selected
    */
   selected?: boolean;
-} & Omit<
-    ComponentPropsWithRef<
-      ElementType extends TComponent ? 'button' : TComponent
-    >,
-    'ref'
+} & ComponentPropsWithRef<
+    ElementType extends TComponent ? 'button' : TComponent
   >;
 
 const UnwrappedButton = <TComponent extends ElementType>(
@@ -62,8 +59,8 @@ const UnwrappedButton = <TComponent extends ElementType>(
 
   return (
     <LoadingButtonWrapper
-      ref={ref}
       {...restProps}
+      ref={ref}
       variant={variant}
       color={color}
       loadingIndicator={
