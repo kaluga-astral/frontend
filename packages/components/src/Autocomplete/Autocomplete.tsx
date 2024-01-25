@@ -19,6 +19,7 @@ import {
   type OverflowedElementProps,
 } from '../OverflowTypography';
 import { type WithoutEmotionSpecific } from '../types';
+import { CircularProgress } from '../CircularProgress';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
@@ -81,6 +82,7 @@ const AutocompleteInner = <
     closeText = 'Закрыть',
     openText = 'Открыть',
     clearText = 'Очистить',
+    loadingText = <CircularProgress color="primary" />,
     size = 'medium',
     overflowOption,
     inputRef,
@@ -202,6 +204,7 @@ const AutocompleteInner = <
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
+      loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}

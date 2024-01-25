@@ -126,6 +126,19 @@ export const Error = () => (
   </Wrapper>
 );
 
+export const Loading = () => {
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, false, false, false>
+        label="Loading"
+        loading
+        options={[]}
+        getOptionLabel={(params) => params.title}
+      />
+    </Wrapper>
+  );
+};
+
 export const Success = () => (
   <Wrapper>
     <Autocomplete<IOption, false, false, false>
