@@ -21,6 +21,10 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    */
   isInSelectedRange?: boolean;
   /**
+   * @description флаг означающий, что дата находится в hover диапазоне
+   */
+  isInHoveredRange?: boolean;
+  /**
    * @description количество элементов в строке
    */
   lengthInRow: number;
@@ -62,6 +66,7 @@ const getBgColor = ({
   theme,
   selected,
   isInSelectedRange,
+  isInHoveredRange,
 }: GetColorOptions) => {
   if (selected) {
     return theme.palette.primary[800];
@@ -71,11 +76,16 @@ const getBgColor = ({
     return theme.palette.primary[100];
   }
 
+  if (isInHoveredRange) {
+    return theme.palette.grey[100];
+  }
+
   return '';
 };
 
 const getLeftBorderRadius = ({
   isInSelectedRange,
+  isInHoveredRange,
   isPreviousItemInSelectedRange,
   selected,
   theme,
@@ -83,7 +93,10 @@ const getLeftBorderRadius = ({
   // если элемент вне выбранной зоны, это значит что нам нужно скругление слева,
   // или если он выбранный, и перед ним нету элемента внутри,
   // то тогда устанавливаем скругление слева
-  if (!isInSelectedRange || (!isPreviousItemInSelectedRange && selected)) {
+  if (
+    !(isInSelectedRange || isInHoveredRange) ||
+    (!isPreviousItemInSelectedRange && selected)
+  ) {
     return theme.shape.small;
   }
 
@@ -95,6 +108,7 @@ const getLeftBorderRadius = ({
 
 const getRightBorderRadius = ({
   isInSelectedRange,
+  isInHoveredRange,
   isPreviousItemInSelectedRange,
   selected,
   theme,
@@ -102,7 +116,10 @@ const getRightBorderRadius = ({
   // если элемент вне выбранной зоны, это значит что нам нужно скругление справа,
   // или если элемент выбранный, и перед ним есть сосед внутри выбранной зоны,
   // тогда устанавливаем скругление справа
-  if (!isInSelectedRange || (isPreviousItemInSelectedRange && selected)) {
+  if (
+    !(isInSelectedRange || isInHoveredRange) ||
+    (isPreviousItemInSelectedRange && selected)
+  ) {
     return theme.shape.small;
   }
 
@@ -117,6 +134,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
+  'isInHoveredRange',
   'lengthInRow',
 ]);
 
@@ -152,19 +170,37 @@ export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
     background-color: currentColor;
   }
 
+  &:hover {
+    border-radius: ${({ theme }) => theme.shape.small};
+    box-shadow: ${({ theme, selected }) =>
+      selected ? 'none' : `inset 0 0 0 2px ${theme.palette.grey[400]}`};
+  }
+
   /* первый элемент строки для выбранного диапазона должен иметь скругление слева */
   &:nth-of-type(${({ lengthInRow }) => lengthInRow}n + 1) {
-    border-top-left-radius: ${({ theme, isInSelectedRange }) =>
-      isInSelectedRange ? theme.shape.small : ''};
-    border-bottom-left-radius: ${({ theme, isInSelectedRange }) =>
-      isInSelectedRange ? theme.shape.small : ''};
+    border-top-left-radius: ${({
+      theme,
+      isInSelectedRange,
+      isInHoveredRange,
+    }) => (isInSelectedRange || isInHoveredRange ? theme.shape.small : '')};
+    border-bottom-left-radius: ${({
+      theme,
+      isInSelectedRange,
+      isInHoveredRange,
+    }) => (isInSelectedRange || isInHoveredRange ? theme.shape.small : '')};
   }
 
   /* последний элемент строки для выбранного диапазона должен иметь скругление справа */
   &:nth-of-type(${({ lengthInRow }) => lengthInRow}n) {
-    border-top-right-radius: ${({ theme, isInSelectedRange }) =>
-      isInSelectedRange ? theme.shape.small : ''};
-    border-bottom-right-radius: ${({ theme, isInSelectedRange }) =>
-      isInSelectedRange ? theme.shape.small : ''};
+    border-top-right-radius: ${({
+      theme,
+      isInSelectedRange,
+      isInHoveredRange,
+    }) => (isInSelectedRange || isInHoveredRange ? theme.shape.small : '')};
+    border-bottom-right-radius: ${({
+      theme,
+      isInSelectedRange,
+      isInHoveredRange,
+    }) => (isInSelectedRange || isInHoveredRange ? theme.shape.small : '')};
   }
 `;

@@ -6,7 +6,7 @@ import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { DialogActions } from '../DialogActions';
 
-type ConfirmDialogProps = {
+export type ConfirmDialogProps = {
   /**
    * @description Флаг состояния диалога (открыт-закрыт)
    */

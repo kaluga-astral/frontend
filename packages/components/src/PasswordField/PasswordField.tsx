@@ -15,7 +15,7 @@ export type PasswordFieldInputProps = TextFieldProps & {
 export const PasswordField = forwardRef<
   HTMLInputElement,
   PasswordFieldInputProps
->(({ label, disabled = false, showSymbols = false, ...props }) => {
+>(({ label, disabled = false, showSymbols = false, ...props }, ref) => {
   const [showPassword, setShowPassword] = useState(showSymbols);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -26,6 +26,7 @@ export const PasswordField = forwardRef<
 
   return (
     <TextField
+      ref={ref}
       label={label}
       type={showPassword ? 'text' : 'password'}
       disabled={disabled}

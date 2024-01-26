@@ -86,4 +86,21 @@ describe('TextField', () => {
       screen.getByText('Удачно завершился процесс проверки'),
     ).toBeInTheDocument();
   });
+
+  it('Ref доступен', () => {
+    const resultRef = { current: null };
+
+    const TextFieldWithRef = () => {
+      const ref = useRef(null);
+
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
+
+      return <TextField ref={ref} />;
+    };
+
+    renderWithTheme(<TextFieldWithRef />);
+    expect(resultRef?.current).not.toBeNull();
+  });
 });
