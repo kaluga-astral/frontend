@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import { BottomDrawer } from './BottomDrawer';
 
 describe('BottomDrawer', () => {
-  it('Prop:title: значение, переданное в drawerTitle, отображается', () => {
+  it('Title отображается', () => {
     renderWithTheme(<BottomDrawer open title="Тест"></BottomDrawer>);
 
     const title = screen.getByText('Тест');
@@ -12,7 +12,7 @@ describe('BottomDrawer', () => {
     expect(title).toBeVisible();
   });
 
-  it('Prop:onClose: функция, переданная в onClose, корректно вызывается', () => {
+  it('Функция, переданная в onClose, корректно вызывается при нажатии на кнопку закрытия', () => {
     const onCloseMockFn = vi.fn();
 
     renderWithTheme(

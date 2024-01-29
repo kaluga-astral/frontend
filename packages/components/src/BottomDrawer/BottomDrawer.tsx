@@ -10,9 +10,9 @@ import { DrawerBody, DrawerHeader, DrawerTitle, StyledDrawer } from './styles';
 
 export type BottomDrawerProps = {
   /**
-   * Текстовый заголовок в шапке компонента.
+   * Заголовок
    */
-  title: string;
+  title?: JSX.Element | JSX.Element[] | string;
   /**
    * Остаётся ли компонент смонтированным после его скрытия.
    * @default false

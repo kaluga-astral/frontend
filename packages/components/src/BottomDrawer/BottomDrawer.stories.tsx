@@ -1,37 +1,25 @@
-import { Stack } from '@mui/material';
 import { useState } from 'react';
 import { type Meta } from '@storybook/react';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
 
+import { Grid } from '../Grid';
+import { Button } from '../Button';
 import { Typography } from '../Typography';
+import { styled } from '../styles';
 
 import { BottomDrawer } from './BottomDrawer';
 
-const Root = styled('div')`
-  height: 100%;
-
-  background-color: ${({ theme }) =>
-    theme.palette.mode === 'light'
-      ? theme.palette.grey['100']
-      : theme.palette.background.default};
+const Item = styled.div`
+  text-align: center;
 `;
 
-const Row = styled('div')`
-  display: flex;
+const Skeleton = styled.div`
+  height: 150px;
 
+  background-color: ${({ theme }) => theme.palette.grey[200]};
+`;
+
+const Row = styled.div`
   margin: ${({ theme }) => theme.spacing(4, 4, 4)};
-
-  & > * {
-    display: flex;
-    flex: 1 100%;
-  }
-
-  & > *:not(:first-child, :only-child) {
-    margin-left: ${({ theme }) => theme.spacing(4)};
-  }
 `;
 
 const renderRows = (count: number) => {
@@ -40,7 +28,7 @@ const renderRows = (count: number) => {
   for (let i = 0; i < count; i++) {
     rows.push(
       <Row>
-        <Skeleton variant="rectangular" height="150px" />
+        <Skeleton />
       </Row>,
     );
   }
@@ -49,6 +37,7 @@ const renderRows = (count: number) => {
 };
 
 /**
+ * ### BottomDrawer является основой для построения мобильных компонентов. Не предназначен для прямого использования в продуктах.
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=20192-40447&mode=design&t=cmCv26DJElzmOGya-0)
  * ### [Guide]()
  */
@@ -72,14 +61,11 @@ export const Example = () => {
   };
 
   return (
-    <Stack gap={4}>
+    <Grid container spacing={4}>
       <Typography variant="h3">Варианты наполнения</Typography>
-      <Root>
-        <Box sx={{ textAlign: 'center', pt: 1 }}>
-          <Button onClick={handleToggleSmall(true)}>
-            Небольшое наполнение
-          </Button>
-        </Box>
+
+      <Item>
+        <Button onClick={handleToggleSmall(true)}>Небольшое наполнение</Button>
 
         <BottomDrawer
           open={isOpenSmall}
@@ -89,14 +75,12 @@ export const Example = () => {
         >
           {renderRows(1)}
         </BottomDrawer>
-      </Root>
+      </Item>
 
-      <Root>
-        <Box sx={{ textAlign: 'center', pt: 1 }}>
-          <Button onClick={handleToggleBig(true)}>
-            Наполнение с переполнением
-          </Button>
-        </Box>
+      <Item>
+        <Button onClick={handleToggleBig(true)}>
+          Наполнение с переполнением
+        </Button>
 
         <BottomDrawer
           open={isOpenBig}
@@ -106,7 +90,7 @@ export const Example = () => {
         >
           {renderRows(10)}
         </BottomDrawer>
-      </Root>
-    </Stack>
+      </Item>
+    </Grid>
   );
 };

@@ -14,8 +14,6 @@ export * from './BackdropStack';
 
 export * from './Badge';
 
-export * from './BottomDrawer';
-
 export * from './Breadcrumbs';
 
 export * from './Button';

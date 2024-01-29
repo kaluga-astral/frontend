@@ -1,4 +1,9 @@
-import { Drawer, type DrawerProps, Typography } from '@mui/material';
+import {
+  Drawer,
+  type DrawerProps,
+  Typography,
+  paperClasses,
+} from '@mui/material';
 
 import { styled } from '../styles';
 import { type TypographyProps } from '../Typography';
@@ -6,10 +11,11 @@ import { type TypographyProps } from '../Typography';
 import { OFFSET_TOP_SCREEN } from './constants';
 
 export const StyledDrawer = styled(Drawer)<DrawerProps>`
-  .MuiPaper-root {
+  ${`.${paperClasses.root}`} {
     max-height: calc(100vh - ${OFFSET_TOP_SCREEN});
 
-    border-radius: 8px 8px 0 0;
+    border-top-left-radius: ${({ theme }) => theme.shape.large};
+    border-top-right-radius: ${({ theme }) => theme.shape.large};
   }
 `;
 
