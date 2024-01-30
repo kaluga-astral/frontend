@@ -281,7 +281,7 @@ export const getButtonDisabledBackgroundColor = ({
     return 'transparent';
   }
 
-  return theme.palette.grey['100'];
+  return theme.palette.grey['200'];
 };
 
 export const MuiButton: Components<Theme>['MuiButton'] = {
