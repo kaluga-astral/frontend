@@ -14,12 +14,6 @@ export type BottomDrawerProps = {
    */
   title?: JSX.Element | JSX.Element[] | string;
   /**
-   * Остаётся ли компонент смонтированным после его скрытия.
-   * @default false
-   */
-  isMountedOnHide?: boolean;
-  /**
-  /**
    * Высота шапки компонента
    * * @default 56
    */
@@ -28,7 +22,6 @@ export type BottomDrawerProps = {
 
 export const BottomDrawer = ({
   title,
-  isMountedOnHide = false,
   drawerHeaderHeight = DEFAULT_HEADER_HEIGHT,
   children,
   onClose,
@@ -41,12 +34,7 @@ export const BottomDrawer = ({
   };
 
   return (
-    <StyledDrawer
-      {...props}
-      anchor="bottom"
-      ModalProps={{ keepMounted: isMountedOnHide }}
-      onClose={onClose}
-    >
+    <StyledDrawer {...props} anchor="bottom" onClose={onClose}>
       <DrawerHeader drawerHeaderHeight={drawerHeaderHeight}>
         <DrawerTitle variant="h5" noWrap>
           {title}
