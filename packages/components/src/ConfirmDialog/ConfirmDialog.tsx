@@ -1,7 +1,7 @@
 import { type ReactNode, useMemo } from 'react';
 
 import { Button, type ButtonProps } from '../Button';
-import { Dialog } from '../Dialog';
+import { Dialog, type DialogProps } from '../Dialog';
 import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { DialogActions } from '../DialogActions';
@@ -38,7 +38,16 @@ export type ConfirmDialogProps = {
      */
     cancel?: ButtonProps & { text: string };
   };
-};
+} & Pick<
+  DialogProps,
+  | 'aria-labelledby'
+  | 'aria-describedby'
+  | 'disableBackdropClick'
+  | 'disablePortal'
+  | 'disableScrollLock'
+  | 'hideBackdrop'
+  | 'keepMounted'
+>;
 
 export const ConfirmDialog = ({
   open,
@@ -46,6 +55,7 @@ export const ConfirmDialog = ({
   description,
   actions,
   onClose,
+  ...restProps
 }: ConfirmDialogProps) => {
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
 
@@ -65,7 +75,7 @@ export const ConfirmDialog = ({
   }, [actions.cancel, onClose]);
 
   return (
-    <Dialog title={title} open={open} onClose={onClose}>
+    <Dialog title={title} open={open} onClose={onClose} {...restProps}>
       {description && (
         <DialogContent>
           <DialogContentText>{description}</DialogContentText>
