@@ -8,10 +8,6 @@ import { DialogActions } from '../DialogActions';
 
 export type ConfirmDialogProps = {
   /**
-   * @description Флаг состояния диалога (открыт-закрыт)
-   */
-  open: boolean;
-  /**
    * @description Заголовок диалога
    */
   title: string;
@@ -47,6 +43,7 @@ export type ConfirmDialogProps = {
   | 'disableScrollLock'
   | 'hideBackdrop'
   | 'keepMounted'
+  | 'open'
 >;
 
 export const ConfirmDialog = ({
