@@ -4,6 +4,8 @@ export { default as AddCertOutlineMd } from './AddCertOutlineMd';
 
 export { default as AddOrgOutlineMd } from './AddOrgOutlineMd';
 
+export { default as AddDocumentOutlineMd } from './AddDocumentOutlineMd';
+
 export { default as AllCheckOutlineMd } from './AllCheckOutlineMd';
 
 export { default as AnalyticOutlineMd } from './AnalyticOutlineMd';
@@ -40,6 +42,8 @@ export { default as CassOutlineMd } from './CassOutlineMd';
 
 export { default as CertOutlineMd } from './CertOutlineMd';
 
+export { default as CertAddOutlineMd } from './CertAddOutlineMd';
+
 export { default as CheckOutlineMd } from './CheckOutlineMd';
 
 export { default as CheckOutlineSm } from './CheckOutlineSm';
@@ -61,6 +65,8 @@ export { default as ClockOutlineMd } from './ClockOutlineMd';
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
 
 export { default as CompanyOutlineMd } from './CompanyOutlineMd';
+
+export { default as CompanyAddOutlineMd } from './CompanyAddOutlineMd';
 
 export { default as CopyOutlineSm } from './CopyOutlineSm';
 

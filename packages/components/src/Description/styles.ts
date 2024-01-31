@@ -20,7 +20,7 @@ export const DescriptionDashedSeparator = styled.div`
   flex: 1;
 
   height: 4px;
-  margin-left: ${({ theme }) => theme.spacing(2)};
+  margin-right: ${({ theme }) => theme.spacing(2)};
 
   border-bottom: 1px dashed ${({ theme }) => theme.palette.grey[400]};
 `;

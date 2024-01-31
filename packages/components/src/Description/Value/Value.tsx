@@ -3,8 +3,6 @@ import { type ReactNode, useContext } from 'react';
 import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 
-import { ValueWrapper } from './styles';
-
 export type ValueProps = Pick<
   TypographyProps,
   'color' | 'variant' | 'children'
@@ -19,9 +17,5 @@ export type ValueProps = Pick<
 export const Value = ({ children, stub, ...props }: ValueProps) => {
   const { emptySymbol } = useContext(ConfigContext);
 
-  return (
-    <ValueWrapper>
-      <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
-    </ValueWrapper>
-  );
+  return <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>;
 };

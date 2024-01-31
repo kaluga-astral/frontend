@@ -5,6 +5,7 @@ import {
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
   type AutocompleteProps as MuiAutocompleteProps,
+  Popper as MuiPopper,
 } from '@mui/material';
 import { forwardRef, useCallback } from 'react';
 import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
@@ -19,9 +20,12 @@ import {
   type OverflowedElementProps,
 } from '../OverflowTypography';
 import { type WithoutEmotionSpecific } from '../types';
+import { CircularProgress } from '../CircularProgress';
+import { Typography } from '../Typography';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
+import { PopperErrorRoot } from './styles';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 
@@ -45,13 +49,28 @@ export type AutocompleteProps<
 > &
   Pick<
     TextFieldProps,
-    'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
+    | 'error'
+    | 'success'
+    | 'helperText'
+    | 'label'
+    | 'required'
+    | 'inputRef'
+    | 'placeholder'
   > & {
     renderInput?: (
       props: TextFieldProps & Omit<AutocompleteRenderInputParams, 'size'>,
     ) => ReactNode;
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
+    /**
+     * Текст ошибки, который будет отображаться в меню автокомплита
+     * Пример использования: информирование пользователя о том, что АПИ используемого сервиса в текущий момент недоступно
+     */
+    loadedDataError?: string;
+    /**
+     * флаг, отвечающий за отображение сообщения об ошибке при загрузке данных в меню автокомплита
+     */
+    isLoadedDataError?: boolean;
   };
 
 const AutocompleteInner = <
@@ -75,11 +94,14 @@ const AutocompleteInner = <
     closeText = 'Закрыть',
     openText = 'Открыть',
     clearText = 'Очистить',
+    loadingText = <CircularProgress color="primary" />,
     size = 'medium',
     overflowOption,
     inputRef,
     renderTags,
     renderInput: ExternalRenderInput,
+    loadedDataError = 'На текущий момент сервис недоступен.',
+    isLoadedDataError,
     ...restProps
   }: AutocompleteProps<
     AutocompleteValueProps,
@@ -182,7 +204,7 @@ const AutocompleteInner = <
         </MenuItem>
       );
     },
-    [multiple, externalRenderOption],
+    [multiple, overflowOption, externalRenderOption],
   );
 
   return (
@@ -192,10 +214,24 @@ const AutocompleteInner = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
+      PopperComponent={({ children, ...rest }) => (
+        <MuiPopper {...rest}>
+          {isLoadedDataError ? (
+            <PopperErrorRoot>
+              <Typography variant="body1" color="grey" colorIntensity="600">
+                {loadedDataError}
+              </Typography>
+            </PopperErrorRoot>
+          ) : (
+            children
+          )}
+        </MuiPopper>
+      )}
       renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
+      loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
