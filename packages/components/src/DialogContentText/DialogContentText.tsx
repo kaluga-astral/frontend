@@ -2,11 +2,11 @@ import { type DialogContentTextProps as MuiDialogContentTextProps } from '@mui/m
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { StyledDialogContentText } from './styles';
+import { DialogContentTextRoot } from './styles';
 
 export type DialogContentTextProps =
   WithoutEmotionSpecific<MuiDialogContentTextProps>;
 
 export const DialogContentText = (props: DialogContentTextProps) => (
-  <StyledDialogContentText {...props} />
+  <DialogContentTextRoot {...props} />
 );
