@@ -46,6 +46,7 @@
     "react-imask": "6.4.2",
     "react-toastify": "9.0.3",
     "react-use": "^17.4.0",
+    "react-virtuoso": "4.6.2",
     "@bradgarropy/use-countdown": "2.0.1"
   },
   "peerDependencies": {

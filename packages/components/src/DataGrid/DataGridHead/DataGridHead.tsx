@@ -10,6 +10,7 @@ import {
   type DataGridRow,
   type DataGridSort,
 } from '../types';
+import { DataGridInfiniteHead } from '../../DataGridInfinite/styles';
 
 export type DataGridHeadProps<
   Data extends object = DataGridRow,
@@ -17,6 +18,11 @@ export type DataGridHeadProps<
 > = {
   columns: DataGridColumns<Data>[];
   selectable: boolean;
+  /**
+   * @example <DataGridHead isInfinite />
+   * Меняет компонент шапки таблицы для DataGridInfinite
+   */
+  isInfinite?: boolean;
   onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
   sorting?: DataGridSort<SortField>;
   onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
@@ -35,6 +41,7 @@ export function DataGridHead<
   onSort,
   sorting,
   uncheckedRowsCount,
+  isInfinite,
 }: DataGridHeadProps<Data, SortField>) {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
@@ -87,7 +94,20 @@ export function DataGridHead<
     });
   }, [columns, handleSort, sorting]);
 
-  return (
+  return isInfinite ? (
+    <DataGridInfiniteHead>
+      {selectable && (
+        <TableCell padding="checkbox">
+          <Checkbox
+            checked={checked}
+            indeterminate={indeterminate}
+            onChange={onSelectAllRows}
+          />
+        </TableCell>
+      )}
+      {renderColumns}
+    </DataGridInfiniteHead>
+  ) : (
     <TableHead>
       <TableRow>
         {selectable && (
