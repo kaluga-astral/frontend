@@ -12,7 +12,11 @@ export { default as AnalyticOutlineMd } from './AnalyticOutlineMd';
 
 export { default as ArchiveOutlineMd } from './ArchiveOutlineMd';
 
+export { default as ArrowDOutlineMd } from './ArrowDOutlineMd';
+
 export { default as ArrowLOutlineMd } from './ArrowLOutlineMd';
+
+export { default as ArrowUOutlineMd } from './ArrowUOutlineMd';
 
 export { default as ArrowROutlineLg } from './ArrowROutlineLg';
 
