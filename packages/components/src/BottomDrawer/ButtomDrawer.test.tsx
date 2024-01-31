@@ -13,14 +13,10 @@ describe('BottomDrawer', () => {
   });
 
   it('Функция, переданная в onClose, корректно вызывается при нажатии на кнопку закрытия', () => {
-    const onCloseMockFn = vi.fn();
+    const onCloseSpy = vi.fn();
 
-    renderWithTheme(
-      <BottomDrawer open title="Title" onClose={onCloseMockFn} />,
-    );
-
+    renderWithTheme(<BottomDrawer open title="Title" onClose={onCloseSpy} />);
     fireEvent.click(screen.getByRole('button'));
-    expect(onCloseMockFn).toHaveBeenCalled();
-    vi.clearAllMocks();
+    expect(onCloseSpy).toHaveBeenCalled();
   });
 });

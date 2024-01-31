@@ -3,14 +3,9 @@ import { type Meta } from '@storybook/react';
 
 import { Grid } from '../Grid';
 import { Button } from '../Button';
-import { Typography } from '../Typography';
 import { styled } from '../styles';
 
 import { BottomDrawer } from './BottomDrawer';
-
-const Item = styled.div`
-  text-align: center;
-`;
 
 const Skeleton = styled.div`
   height: 150px;
@@ -49,48 +44,45 @@ const meta: Meta<typeof BottomDrawer> = {
 export default meta;
 
 export const Example = () => {
-  const [isOpenSmall, setIsOpenSmall] = useState(false);
-  const [isOpenBig, setIsOpenBig] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggleSmall = (newOpen: boolean) => () => {
-    setIsOpenSmall(newOpen);
-  };
-
-  const handleToggleBig = (newOpen: boolean) => () => {
-    setIsOpenBig(newOpen);
+  const handleToggle = (newOpen: boolean) => () => {
+    setIsOpen(newOpen);
   };
 
   return (
     <Grid container spacing={4}>
-      <Typography variant="h3">Варианты наполнения</Typography>
+      <Button onClick={handleToggle(true)}>Открыть</Button>
 
-      <Item>
-        <Button onClick={handleToggleSmall(true)}>Небольшое наполнение</Button>
+      <BottomDrawer
+        open={isOpen}
+        onClose={handleToggle(false)}
+        title="Заголовок"
+      >
+        {renderRows(1)}
+      </BottomDrawer>
+    </Grid>
+  );
+};
 
-        <BottomDrawer
-          open={isOpenSmall}
-          onClose={handleToggleSmall(false)}
-          title="Небольшое наполнение"
-          drawerHeaderHeight={56}
-        >
-          {renderRows(1)}
-        </BottomDrawer>
-      </Item>
+export const WithContentOverflow = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-      <Item>
-        <Button onClick={handleToggleBig(true)}>
-          Наполнение с переполнением
-        </Button>
+  const handleToggle = (newOpen: boolean) => () => {
+    setIsOpen(newOpen);
+  };
 
-        <BottomDrawer
-          open={isOpenBig}
-          onClose={handleToggleBig(false)}
-          title="Наполнение с переполнением"
-          drawerHeaderHeight={56}
-        >
-          {renderRows(10)}
-        </BottomDrawer>
-      </Item>
+  return (
+    <Grid container spacing={4}>
+      <Button onClick={handleToggle(true)}>Открыть</Button>
+
+      <BottomDrawer
+        open={isOpen}
+        onClose={handleToggle(false)}
+        title="Наполнение с переполнением"
+      >
+        {renderRows(10)}
+      </BottomDrawer>
     </Grid>
   );
 };
