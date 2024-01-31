@@ -10,8 +10,10 @@ type DataGridInfiniteTableContainerProps = TableContainerProps & {
 
 export const DataGridInfiniteHead = styled(TableRow)`
   background: ${({ theme }) => theme.palette.background.default};
+
   td {
-    border-bottom:${({ theme }) => `2px solid ${theme.palette.grey['300']}`};
+    border-bottom: ${({ theme }) => `2px solid ${theme.palette.grey['300']}`};
+  }
 `;
 
 export const DataGridInfiniteLoaderWrapper = styled(TableCell)`
@@ -22,6 +24,7 @@ export const DataGridInfiniteTableContainer = styled(
   TableContainer,
 )<DataGridInfiniteTableContainerProps>`
   height: 100%;
+
   tfoot {
     position: relative !important;
     z-index: auto !important;
