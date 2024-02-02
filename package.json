@@ -61,8 +61,7 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.7",
     "vitest": "^0.33.0",
-    "webpack": "^5.88.1",
-    "gitlog": "^4.0.8"
+    "webpack": "^5.88.1"
   },
   "overrides": {
     "react-json-view": {

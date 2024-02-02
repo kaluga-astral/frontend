@@ -4,47 +4,50 @@ import { expect } from 'vitest';
 import { CheckboxField } from './CheckboxField';
 
 describe('CheckboxField', () => {
-  it('Label отображается', () => {
+  it('Prop:label: лейбл отображается', () => {
     renderWithTheme(<CheckboxField label="My Checkbox" />);
     expect(screen.getByLabelText('My Checkbox')).toBeInTheDocument();
   });
 
-  describe('HelperText', () => {
-    it('Отображается при передаче props', () => {
-      renderWithTheme(
-        <CheckboxField label="My Checkbox" helperText="helper text" />,
-      );
+  it('Prop:helperText: отображается', () => {
+    renderWithTheme(
+      <CheckboxField label="My Checkbox" helperText={'helper text'} />,
+    );
 
-      expect(screen.getByText('helper text')).toBeVisible();
-    });
+    expect(screen.getByText('helper text')).toBeVisible();
+  });
 
-    it('Не отображается, если hideHelperText=true', () => {
-      renderWithTheme(
-        <CheckboxField
-          label="My Checkbox"
-          helperText="helper text"
-          hideHelperText
-        />,
-      );
+  it('Props:helperText: hideHelperText: helperText не отображается', () => {
+    renderWithTheme(
+      <CheckboxField
+        label="My Checkbox"
+        helperText={'helper text'}
+        hideHelperText
+      />,
+    );
 
-      expect(screen.queryByText('helper text')).toBeNull();
-    });
+    expect(screen.queryByText('helper text')).toBeNull();
+  });
 
-    it('Отображается в tooltip при наведении, если hideHelperText=true и isError=true', async () => {
-      renderWithTheme(
-        <CheckboxField
-          label="My Checkbox"
-          helperText="helper text"
-          hideHelperText
-          isError
-        />,
-      );
+  it('Props:helperText: hideHelperText: isError: При наведении отображается тултип с текстом-подсказкой (helperText)', async () => {
+    renderWithTheme(
+      <CheckboxField
+        label="My Checkbox"
+        helperText={'helper text'}
+        hideHelperText
+        isError
+      />,
+    );
 
-      await userEvents.hover(screen.getByLabelText('My Checkbox'));
+    const parentEl = screen.getByLabelText('helper text');
+    const helperTextEl = parentEl.querySelector('p');
 
-      const tooltip = await screen.findByRole('tooltip');
+    expect(helperTextEl).toBeNull();
+    await userEvents.hover(parentEl);
 
-      expect(tooltip).toHaveTextContent(/^helper text$/);
-    });
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip).toHaveTextContent(/^helper text$/);
   });
 });
