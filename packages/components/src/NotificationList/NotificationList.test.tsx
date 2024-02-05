@@ -106,7 +106,7 @@ describe('NotificationList', () => {
     expect(notificationTitle).toBeVisible();
   });
 
-  it('NotificationListFooter виден только при наличии footerContent', () => {
+  it('Footer виден только при наличии footerContent', () => {
     renderWithTheme(
       <NotificationList
         isOpen

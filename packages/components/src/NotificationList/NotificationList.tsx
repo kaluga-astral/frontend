@@ -27,7 +27,6 @@ export type NotificationListProps = {
   /**
    * @description флаг загрузки данных
    * */
-
   isLoading?: boolean;
   /**
    * @description флаг ошибки
@@ -115,7 +114,6 @@ export const NotificationList = ({
 
   const isEmptyData = data.length === 0;
   const isTabsVisible = Boolean(unreadNotifications);
-  const isFooterVisible = Boolean(footerContent);
 
   const handleTabChange = (type: NotificationListType) => {
     setListType(type);
@@ -188,7 +186,7 @@ export const NotificationList = ({
                 />
               ))}
             </NotificationListMain>
-            {isFooterVisible && (
+            {footerContent && (
               <NotificationListFooter>{footerContent}</NotificationListFooter>
             )}
           </>
