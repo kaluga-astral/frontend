@@ -186,15 +186,6 @@ export const Notifications = () => {
     setIsOpen(false);
   };
 
-  const handleReadAll = () => {
-    setNotifications((prev) =>
-      prev.map((notification) => ({
-        ...notification,
-        isUnread: false,
-      })),
-    );
-  };
-
   const handleDelete = (id: string | number) => {
     setNotifications((prev) =>
       prev.filter((notification) => notification.id !== id),
@@ -219,7 +210,6 @@ export const Notifications = () => {
           isOpen={isOpen}
           notifications={notifications}
           onClose={handleClose}
-          onReadAll={handleReadAll}
           onDelete={handleDelete}
           initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
           onSettingsButtonClick={() => {
@@ -291,7 +281,12 @@ export const UnreadNotifications = () => {
           notifications={notifications}
           unreadNotifications={unreadNotifications}
           onClose={handleClose}
-          onReadAll={handleReadAll}
+          isFooterVisible={unreadNotifications.length > 0}
+          footerContent={
+            <Button variant="light" onClick={handleReadAll}>
+              Отметить все как прочитанные
+            </Button>
+          }
         />
       </ConfigProvider>
     </>
@@ -492,15 +487,6 @@ export const HeaderContent = () => {
     setIsOpen(false);
   };
 
-  const handleReadAll = () => {
-    setNotifications((prev) =>
-      prev.map((notification) => ({
-        ...notification,
-        isUnread: false,
-      })),
-    );
-  };
-
   return (
     <>
       <NotificationWidget
@@ -522,9 +508,130 @@ export const HeaderContent = () => {
           onClose={handleClose}
           initialListType={unreadNotifications.length > 0 ? 'unread' : 'all'}
           onSettingsButtonClick={() => {}}
-          onReadAll={handleReadAll}
           headerContent={
             <Tag label="Важный тэг" variant="contained" color="error" />
+          }
+        />
+      </ConfigProvider>
+    </>
+  );
+};
+
+/**
+ * Слот для размещения компонентов в подвале.
+ */
+export const FooterContent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>(data);
+  const unreadNotifications = notifications.filter(
+    (notification) => notification.isUnread,
+  );
+
+  const handleClick = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = (viewedIds: (number | string)[]) => {
+    setNotifications((prev) =>
+      prev.map((notification) => {
+        if (viewedIds.includes(notification.id)) {
+          return {
+            ...notification,
+            isUnread: false,
+          };
+        }
+
+        return notification;
+      }),
+    );
+
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <NotificationWidget
+        notificationsCount={unreadNotifications.length}
+        onClick={handleClick}
+      />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          onClose={handleClose}
+          isFooterVisible
+          footerContent={
+            <Button variant="light">Кнопка в подвале списка</Button>
+          }
+        />
+      </ConfigProvider>
+    </>
+  );
+};
+
+/**
+ * Флаг для управления видимостью подвала.
+ */
+export const IsFooterVisible = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(true);
+  const [notifications, setNotifications] = useState<Notification[]>(data);
+
+  const handleClick = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = (viewedIds: (number | string)[]) => {
+    setNotifications((prev) =>
+      prev.map((notification) => {
+        if (viewedIds.includes(notification.id)) {
+          return {
+            ...notification,
+            isUnread: false,
+          };
+        }
+
+        return notification;
+      }),
+    );
+
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <NotificationWidget
+        notificationsCount={notifications.length}
+        onClick={handleClick}
+      />
+
+      <ConfigProvider
+        imagesMap={{
+          defaultErrorImgSrc: errorIllustration,
+          noDataImgSrc: noNotificationsIllustration,
+          outdatedReleaseErrorImgSrc: '',
+        }}
+      >
+        <NotificationList
+          isOpen={isOpen}
+          notifications={notifications}
+          onClose={handleClose}
+          onSettingsButtonClick={() => {}}
+          isFooterVisible={isFooterVisible}
+          footerContent={
+            <Button
+              variant="light"
+              onClick={() => setIsFooterVisible(!isFooterVisible)}
+            >
+              Скрыть подвал
+            </Button>
           }
         />
       </ConfigProvider>
@@ -652,46 +759,6 @@ export const IsError = () => {
           initialListType="all"
           onClose={handleClose}
           onRetry={handleClick}
-        />
-      </ConfigProvider>
-    </>
-  );
-};
-
-/**
- * Управляет отображением кнопки "Пометить все как прочитанные"
- */
-export const IsReadAllButtonVisible = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  return (
-    <>
-      <NotificationWidget
-        notificationsCount={data.filter((n) => n.isUnread).length}
-        onClick={handleClick}
-      />
-      <ConfigProvider
-        imagesMap={{
-          defaultErrorImgSrc: errorIllustration,
-          noDataImgSrc: noNotificationsIllustration,
-          outdatedReleaseErrorImgSrc: '',
-        }}
-      >
-        <NotificationList
-          isOpen={isOpen}
-          notifications={data}
-          unreadNotifications={data.filter((n) => n.isUnread)}
-          initialListType="all"
-          onClose={handleClose}
-          isReadAllButtonVisible={false}
         />
       </ConfigProvider>
     </>

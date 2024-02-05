@@ -8,12 +8,12 @@ import { NotificationListTabs } from './NotificationListTabs';
 import { type Notification, type NotificationListType } from './types';
 import {
   NotificationListDialog,
+  NotificationListFooter,
   NotificationListHeader,
   NotificationListMain,
 } from './styles';
 import { NotificationListEmpty } from './NotificationListEmpty';
 import { NotificationListSettingsButton } from './NotificationListSettingsButton';
-import { NotificationListFooter } from './NotificationListFooter';
 
 export type NotificationListProps = {
   /**
@@ -54,9 +54,13 @@ export type NotificationListProps = {
    * */
   headerContent?: React.ReactNode;
   /**
-   * @description флаг для отображения кнопки "Отметить все как прочтенные"
+   * @description слот для отображения дополнительных компонентов в подвале
    * */
-  isReadAllButtonVisible?: boolean;
+  footerContent?: React.ReactNode;
+  /**
+   * @description флаг для отображения подвала
+   * */
+  isFooterVisible?: boolean;
   /**
    * @description флаг для отображения кнопки настроек, если не передавать, то кнопка не отображается
    * */
@@ -65,10 +69,6 @@ export type NotificationListProps = {
    * @description функция для закрытия уведомлений, передает id уведомлений, попавших во viewport
    * */
   onClose: (viewedIds: string[]) => void;
-  /**
-   * @description функция обработки нажатия на кнопку "Отметить все как прочтенные"
-   * */
-  onReadAll?: () => void;
   /**
    * @description функция обработки удаления уведомления
    * */
@@ -81,7 +81,6 @@ export type NotificationListProps = {
    * @description функция обработки смены вкладки
    * */
   onTabChange?: () => void;
-
   /**
    * @description функция обработки нажатия на кнопку "Повторить запрос"
    * */
@@ -98,10 +97,10 @@ export const NotificationList = ({
   unreadNotifications,
   initialListType = 'all',
   headerContent,
-  isReadAllButtonVisible = true,
+  footerContent,
   isSettingsButtonVisible = true,
+  isFooterVisible,
   onClose,
-  onReadAll,
   onDelete,
   onSettingsButtonClick,
   onTabChange,
@@ -119,6 +118,9 @@ export const NotificationList = ({
     return notifications;
   }, [unreadNotifications, listType, notifications]);
 
+  const isEmptyData = data.length === 0;
+  const isTabsVisible = Boolean(unreadNotifications);
+
   const handleTabChange = (type: NotificationListType) => {
     setListType(type);
 
@@ -128,7 +130,6 @@ export const NotificationList = ({
   };
 
   const handleView = (id: string) => {
-    console.log(id);
     viewedIds.current.add(id);
   };
 
@@ -141,39 +142,6 @@ export const NotificationList = ({
     if (onRetry) {
       onRetry();
     }
-  };
-
-  const renderContent = () => {
-    if (data.length) {
-      return (
-        <>
-          <NotificationListMain>
-            {data.map((notification) => (
-              <NotificationListItem
-                key={notification.id}
-                {...notification}
-                onDelete={onDelete}
-                onViewNotification={handleView}
-                isDeleteButtonVisible={Boolean(onDelete)}
-              />
-            ))}
-          </NotificationListMain>
-          {isReadAllButtonVisible && (
-            <NotificationListFooter
-              onReadAllButtonClick={onReadAll}
-              isReadAllButtonDisabled={unreadNotifications?.length === 0}
-            />
-          )}
-        </>
-      );
-    }
-
-    return (
-      <NotificationListEmpty
-        listType={listType}
-        noDataImgSrc={imagesMap.noDataImgSrc}
-      />
-    );
   };
 
   return (
@@ -198,7 +166,7 @@ export const NotificationList = ({
           imgSrc: imagesMap.defaultErrorImgSrc,
         }}
       >
-        {unreadNotifications && (
+        {isTabsVisible && (
           <NotificationListTabs
             onChange={handleTabChange}
             listType={listType}
@@ -206,7 +174,27 @@ export const NotificationList = ({
             unreadNotificationsCount={unreadNotifications?.length || 0}
           />
         )}
-        {renderContent()}
+        {isEmptyData ? (
+          <NotificationListEmpty
+            listType={listType}
+            noDataImgSrc={imagesMap.noDataImgSrc}
+          />
+        ) : (
+          <NotificationListMain>
+            {data.map((notification) => (
+              <NotificationListItem
+                key={notification.id}
+                {...notification}
+                onDelete={onDelete}
+                onViewNotification={handleView}
+                isDeleteButtonVisible={Boolean(onDelete)}
+              />
+            ))}
+          </NotificationListMain>
+        )}
+        <NotificationListFooter isVisible={isFooterVisible && !isEmptyData}>
+          {footerContent}
+        </NotificationListFooter>
       </ContentState>
     </NotificationListDialog>
   );

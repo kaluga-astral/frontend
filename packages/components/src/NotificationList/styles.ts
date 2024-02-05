@@ -20,3 +20,12 @@ export const NotificationListMain = styled('ul')`
 export const NotificationListHeader = styled(SideDialogHeader)`
   margin-right: ${({ theme }) => theme.spacing(2)};
 `;
+
+export const NotificationListFooter = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isVisible',
+})<{ isVisible?: boolean }>`
+  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+  justify-content: flex-end;
+
+  padding: ${({ theme }) => theme.spacing(4, 6)};
+`;
