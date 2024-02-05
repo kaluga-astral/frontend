@@ -281,11 +281,12 @@ export const UnreadNotifications = () => {
           notifications={notifications}
           unreadNotifications={unreadNotifications}
           onClose={handleClose}
-          isFooterVisible={unreadNotifications.length > 0}
           footerContent={
-            <Button variant="light" onClick={handleReadAll}>
-              Отметить все как прочитанные
-            </Button>
+            unreadNotifications.length && (
+              <Button variant="light" onClick={handleReadAll}>
+                Отметить все как прочитанные
+              </Button>
+            )
           }
         />
       </ConfigProvider>
@@ -517,9 +518,6 @@ export const HeaderContent = () => {
   );
 };
 
-/**
- * Слот для размещения компонентов в подвале.
- */
 export const FooterContent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>(data);
@@ -566,72 +564,8 @@ export const FooterContent = () => {
           isOpen={isOpen}
           notifications={notifications}
           onClose={handleClose}
-          isFooterVisible
           footerContent={
             <Button variant="light">Кнопка в подвале списка</Button>
-          }
-        />
-      </ConfigProvider>
-    </>
-  );
-};
-
-/**
- * Флаг для управления видимостью подвала.
- */
-export const IsFooterVisible = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFooterVisible, setIsFooterVisible] = useState(true);
-  const [notifications, setNotifications] = useState<Notification[]>(data);
-
-  const handleClick = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = (viewedIds: (number | string)[]) => {
-    setNotifications((prev) =>
-      prev.map((notification) => {
-        if (viewedIds.includes(notification.id)) {
-          return {
-            ...notification,
-            isUnread: false,
-          };
-        }
-
-        return notification;
-      }),
-    );
-
-    setIsOpen(false);
-  };
-
-  return (
-    <>
-      <NotificationWidget
-        notificationsCount={notifications.length}
-        onClick={handleClick}
-      />
-
-      <ConfigProvider
-        imagesMap={{
-          defaultErrorImgSrc: errorIllustration,
-          noDataImgSrc: noNotificationsIllustration,
-          outdatedReleaseErrorImgSrc: '',
-        }}
-      >
-        <NotificationList
-          isOpen={isOpen}
-          notifications={notifications}
-          onClose={handleClose}
-          onSettingsButtonClick={() => {}}
-          isFooterVisible={isFooterVisible}
-          footerContent={
-            <Button
-              variant="light"
-              onClick={() => setIsFooterVisible(!isFooterVisible)}
-            >
-              Скрыть подвал
-            </Button>
           }
         />
       </ConfigProvider>

@@ -58,10 +58,6 @@ export type NotificationListProps = {
    * */
   footerContent?: React.ReactNode;
   /**
-   * @description флаг для отображения подвала
-   * */
-  isFooterVisible?: boolean;
-  /**
    * @description флаг для отображения кнопки настроек, если не передавать, то кнопка не отображается
    * */
   isSettingsButtonVisible?: boolean;
@@ -99,7 +95,6 @@ export const NotificationList = ({
   headerContent,
   footerContent,
   isSettingsButtonVisible = true,
-  isFooterVisible,
   onClose,
   onDelete,
   onSettingsButtonClick,
@@ -120,6 +115,7 @@ export const NotificationList = ({
 
   const isEmptyData = data.length === 0;
   const isTabsVisible = Boolean(unreadNotifications);
+  const isFooterVisible = Boolean(footerContent);
 
   const handleTabChange = (type: NotificationListType) => {
     setListType(type);
@@ -180,21 +176,23 @@ export const NotificationList = ({
             noDataImgSrc={imagesMap.noDataImgSrc}
           />
         ) : (
-          <NotificationListMain>
-            {data.map((notification) => (
-              <NotificationListItem
-                key={notification.id}
-                {...notification}
-                onDelete={onDelete}
-                onViewNotification={handleView}
-                isDeleteButtonVisible={Boolean(onDelete)}
-              />
-            ))}
-          </NotificationListMain>
+          <>
+            <NotificationListMain>
+              {data.map((notification) => (
+                <NotificationListItem
+                  key={notification.id}
+                  {...notification}
+                  onDelete={onDelete}
+                  onViewNotification={handleView}
+                  isDeleteButtonVisible={Boolean(onDelete)}
+                />
+              ))}
+            </NotificationListMain>
+            {isFooterVisible && (
+              <NotificationListFooter>{footerContent}</NotificationListFooter>
+            )}
+          </>
         )}
-        <NotificationListFooter isVisible={isFooterVisible && !isEmptyData}>
-          {footerContent}
-        </NotificationListFooter>
       </ContentState>
     </NotificationListDialog>
   );
