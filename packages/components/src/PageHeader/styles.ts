@@ -4,18 +4,19 @@ import { Typography } from '../Typography';
 import { Breadcrumbs } from '../Breadcrumbs';
 
 export const PageHeaderWrapper = styled.header`
-  grid-area: header;
-
   display: grid;
+  grid-area: header;
   grid-template:
     'breadcrumbs breadcrumbs breadcrumbs'
     'back-btn title actions'
     'back-btn description description'
     'sub-header sub-header sub-header' / min-content 1fr auto;
+
   padding: ${({ theme }) => theme.spacing(0, 6)};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: block;
+
     padding: unset;
   }
 `;
@@ -83,14 +84,15 @@ export const PageHeaderActions = styled.div`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     position: fixed;
+    z-index: ${({ theme }) => theme.zIndex.appBar};
     bottom: 0;
     left: 0;
-    z-index: ${({ theme }) => theme.zIndex.appBar};
 
     display: block;
+
     width: 100%;
     height: 80px;
-    padding: ${({ theme }) => theme.spacing(4)};-
+    padding: ${({ theme }) => theme.spacing(4)};
 
     background-color: ${({ theme }) => theme.palette.common.white};
     box-shadow: 0 -1px 10px 0 rgb(7 45 87 / 10%);
@@ -102,6 +104,7 @@ export const MobileHeaderWrapper = styled.div`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: flex;
+
     min-height: 48px;
     padding: ${({ theme }) => theme.spacing(0, 4)};
 

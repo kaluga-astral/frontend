@@ -19,7 +19,7 @@ export type PageLayoutProps = {
    * }} />
    * Конфигурация PageContent
    */
-  content: Omit<PageContentProps, 'isSeparatorShown'>;
+  content: Omit<PageContentProps, 'isSeparatorShown' | 'isHeaderActionsShown'>;
   /**
    * @example <PageLayout aside={{
    *  children: 'Боковая панель страницы',
@@ -31,12 +31,18 @@ export type PageLayoutProps = {
 
 export const PageLayout = (props: PageLayoutProps) => {
   const { header, content, aside } = props;
+
   const isSeparatorShown = Boolean(aside);
+  const isHeaderActionsShown = Boolean(header.actions);
 
   return (
     <PageLayoutContainer>
       <PageHeader {...header} />
-      <PageContent isSeparatorShown={isSeparatorShown} {...content} />
+      <PageContent
+        isSeparatorShown={isSeparatorShown}
+        isHeaderActionsShown={isHeaderActionsShown}
+        {...content}
+      />
       {aside && <PageAside {...aside} />}
     </PageLayoutContainer>
   );
