@@ -27,14 +27,15 @@ export type PageLayoutProps = {
    * Конфигурация PageAside
    */
   aside?: PageAsideProps;
+  className?: string;
 };
 
 export const PageLayout = (props: PageLayoutProps) => {
-  const { header, content, aside } = props;
+  const { header, content, aside, className } = props;
   const isSeparatorShown = Boolean(aside);
 
   return (
-    <PageLayoutContainer>
+    <PageLayoutContainer className={className}>
       <PageHeader {...header} />
       <PageContent isSeparatorShown={isSeparatorShown} {...content} />
       {aside && <PageAside {...aside} />}
