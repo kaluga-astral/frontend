@@ -12,4 +12,11 @@ export const PageLayoutContainerWrapper = styled.div`
   padding-top: ${({ theme }) => theme.spacing(6)};
 
   background-color: ${({ theme }) => theme.palette.common.white};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: block;
+
+    height: auto;
+    padding-top: 0;
+  }
 `;

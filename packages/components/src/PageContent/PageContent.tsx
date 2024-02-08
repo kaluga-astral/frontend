@@ -16,6 +16,10 @@ export type PageContentProps = {
    * Флаг, добавляющий стандартные отсупы (требуются не всегда)
    */
   isPaddingDisabled?: boolean;
+  /*
+   * Флаг, сообщающий о наличии actions в хедере (требуется для адаптива под мобильные устройства)
+   */
+  isHeaderActionsShown: boolean;
 };
 
 export const PageContent = (props: PageContentProps) => {
@@ -23,12 +27,14 @@ export const PageContent = (props: PageContentProps) => {
     children,
     isPaddingDisabled = true,
     isSeparatorShown = false,
+    isHeaderActionsShown,
   } = props;
 
   return (
     <PageContentWrapper
       isPaddingDisabled={isPaddingDisabled}
       isSeparatorShown={isSeparatorShown}
+      isHeaderActionsShown={isHeaderActionsShown}
     >
       {children}
     </PageContentWrapper>

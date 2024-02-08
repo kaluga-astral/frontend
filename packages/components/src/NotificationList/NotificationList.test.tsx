@@ -106,15 +106,12 @@ describe('NotificationList', () => {
     expect(notificationTitle).toBeVisible();
   });
 
-  it('NotificationListFooter виден только при наличии isReadAllButtonVisible', () => {
-    const onReadAllMock = vi.fn();
-
+  it('Footer виден только при наличии footerContent', () => {
     renderWithTheme(
       <NotificationList
         isOpen
         notifications={notifications}
-        onReadAll={onReadAllMock}
-        isReadAllButtonVisible
+        footerContent={<button>Отметить все как прочитанные</button>}
         onClose={() => {}}
       />,
     );
@@ -122,21 +119,6 @@ describe('NotificationList', () => {
     const button = screen.getByText('Отметить все как прочитанные');
 
     expect(button).toBeInTheDocument();
-  });
-
-  it('NotificationListFooter не виден при isReadAllButtonVisible={false}', () => {
-    renderWithTheme(
-      <NotificationList
-        isOpen
-        notifications={notifications}
-        onClose={() => {}}
-        isReadAllButtonVisible={false}
-      />,
-    );
-
-    const button = screen.queryByText('Отметить все как прочитанные');
-
-    expect(button).toBeNull();
   });
 
   it('Props:onDelete: отображает кнопку удаления и вызывает onDelete', async () => {
