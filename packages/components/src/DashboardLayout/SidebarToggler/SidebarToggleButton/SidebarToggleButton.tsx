@@ -1,6 +1,11 @@
 import { forwardRef } from 'react';
-import { MenuOffOutlineMd, MenuOnOutlineMd } from '@astral/icons';
+import {
+  CrossOutlineMd,
+  MenuOffOutlineMd,
+  MenuOnOutlineMd,
+} from '@astral/icons';
 
+import { useViewportType } from '../../../hooks/useViewportType';
 import { Tooltip } from '../../../Tooltip';
 import { type ButtonProps } from '../../../Button';
 
@@ -16,12 +21,16 @@ export const SidebarTogglerButton = forwardRef<
 >((props, ref) => {
   const { collapsedIn, ...restProps } = props;
 
+  const { isMobile } = useViewportType();
+
+  const MenuCloseIcon = isMobile ? CrossOutlineMd : MenuOffOutlineMd;
+
   return (
     <SidebarTogglerButtonRoot
       ref={ref}
       startIcon={
         collapsedIn ? (
-          <MenuOffOutlineMd />
+          <MenuCloseIcon />
         ) : (
           <Tooltip title="Раскрыть меню" arrow placement="right">
             <SidebarTogglerIconWrapper>

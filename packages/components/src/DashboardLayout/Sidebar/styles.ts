@@ -14,7 +14,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   border-right: 1px solid ${({ theme }) => theme.palette.grey[300]};
 
   transition: ${({ theme }) => {
-    return theme.transitions.create(['min-width', 'padding'], {
+    return theme.transitions.create(['min-width'], {
       duration: theme.transitions.duration.standard,
     });
   }};
@@ -23,15 +23,23 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
     position: absolute;
     top: 48px;
     bottom: 0;
+    transform: ${({ collapsedIn }) =>
+      collapsedIn ? 'translateX(0px)' : 'translateX(-100vw)'};
 
     overflow: hidden;
 
-    width: 0;
-    min-width: ${({ collapsedIn }) => (collapsedIn ? '100vw' : '0px')};
+    width: 100vw;
+    min-width: 100vw;
     padding: ${({ theme }) => theme.spacing(3, 0)};
 
     background-color: ${({ theme }) => theme.palette.background.default};
     border-right: 0;
+
+    transition: ${({ theme }) => {
+      return theme.transitions.create(['transform'], {
+        duration: theme.transitions.duration.standard,
+      });
+    }};
   }
 `;
 

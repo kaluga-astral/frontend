@@ -5,7 +5,7 @@ import {
   useContext,
 } from 'react';
 
-import { useViewportType } from '../../hooks';
+import { useViewportType } from '../../hooks/useViewportType';
 import { DashboardSidebarContext } from '../../DashboardSidebarProvider';
 import { Product, type ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
@@ -34,9 +34,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     children,
   } = props;
 
-  const { collapsedIn, handleTogglerChange } = useContext(
-    DashboardSidebarContext,
-  );
+  const { collapsedIn, onTogglerChange } = useContext(DashboardSidebarContext);
 
   const { isMobile } = useViewportType();
 
@@ -46,7 +44,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
         <SidebarTogglerWrapper>
           <SidebarToggler
             collapsedIn={collapsedIn}
-            onToggle={handleTogglerChange}
+            onToggle={onTogglerChange}
           />
         </SidebarTogglerWrapper>
       )}

@@ -14,6 +14,7 @@ import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { ProductSwitcher } from '../ProductSwitcher';
+import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
 
@@ -218,7 +219,30 @@ export const Example = () => {
             ],
           }}
         />
-        <DashboardLayout.Main>Main Content</DashboardLayout.Main>
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: 'Черновики',
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+            }}
+            content={{
+              children: <>Content</>,
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );

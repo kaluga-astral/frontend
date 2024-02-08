@@ -5,7 +5,7 @@ import { useLocalStorage } from '../hooks';
 
 export type DashboardSidebarContextProps = {
   collapsedIn: boolean;
-  handleTogglerChange: () => void;
+  onTogglerChange: () => void;
 };
 
 export type DashboardSidebarProviderProps =
@@ -17,9 +17,15 @@ export type DashboardSidebarProviderProps =
 export const DashboardSidebarContext =
   createContext<DashboardSidebarContextProps>({
     collapsedIn: false,
-    handleTogglerChange: () => {},
+    onTogglerChange: () => {},
   });
 
+/**
+ * Провайдер предназначен для проброса состояния боковой панел, а так же управления этим состоянием.
+ * В данный провайдер обернут компонент DashboardLayout.
+ *
+ * @param {string} localStorageKey название ключа в localStorage
+ */
 export const DashboardSidebarProvider = ({
   children,
   localStorageKey = '@astral/ui::Sidebar::collapsedIn',
@@ -63,7 +69,7 @@ export const DashboardSidebarProvider = ({
     checkScreenWidth();
   }, [matches, storageCollapsedIn]);
 
-  const handleTogglerChange = () => {
+  const onTogglerChange = () => {
     if (matches) {
       return setStorageCollapsedIn(!storageCollapsedIn);
     }
@@ -72,9 +78,7 @@ export const DashboardSidebarProvider = ({
   };
 
   return (
-    <DashboardSidebarContext.Provider
-      value={{ collapsedIn, handleTogglerChange }}
-    >
+    <DashboardSidebarContext.Provider value={{ collapsedIn, onTogglerChange }}>
       {children}
     </DashboardSidebarContext.Provider>
   );

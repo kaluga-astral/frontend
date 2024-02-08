@@ -1,6 +1,6 @@
 import { type ReactNode, forwardRef, useContext } from 'react';
 
-import { useViewportType } from '../../hooks';
+import { useViewportType } from '../../hooks/useViewportType';
 import { NavMenu, type NavMenuProps } from '../../NavMenu';
 import { DashboardSidebarContext } from '../../DashboardSidebarProvider';
 import { SidebarToggler } from '../SidebarToggler';
@@ -33,14 +33,18 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
     const { menu, header } = props;
 
-    const { collapsedIn, handleTogglerChange } = useContext(
+    const { collapsedIn, onTogglerChange } = useContext(
       DashboardSidebarContext,
     );
 
     const { isMobile } = useViewportType();
 
     return (
-      <SidebarRoot ref={ref} collapsedIn={collapsedIn}>
+      <SidebarRoot
+        ref={ref}
+        collapsedIn={collapsedIn}
+        {...{ inert: isMobile && !collapsedIn ? '' : undefined }}
+      >
         <SidebarHeader>{header}</SidebarHeader>
 
         <SidebarNav
@@ -50,7 +54,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
         {!isMobile && (
           <SidebarToggler
             collapsedIn={collapsedIn}
-            onToggle={handleTogglerChange}
+            onToggle={onTogglerChange}
           />
         )}
       </SidebarRoot>
