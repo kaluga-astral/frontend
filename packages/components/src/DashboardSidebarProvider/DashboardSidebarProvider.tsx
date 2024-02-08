@@ -4,15 +4,23 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { useLocalStorage } from '../hooks';
 
 export type DashboardSidebarContextProps = {
+  /*
+   * Флаг, отвечающий за состояние компонента
+   */
   collapsedIn: boolean;
+  /*
+   * Обработчик, позволяющий изменить состояние боковой панели
+   */
   onTogglerChange: () => void;
 };
 
-export type DashboardSidebarProviderProps =
-  Partial<DashboardSidebarContextProps> & {
-    children: ReactNode;
-    localStorageKey?: string;
-  };
+export type DashboardSidebarProviderProps = {
+  children: ReactNode;
+  /*
+   * Название ключа в localStorage
+   */
+  localStorageKey?: string;
+};
 
 export const DashboardSidebarContext =
   createContext<DashboardSidebarContextProps>({
@@ -23,8 +31,6 @@ export const DashboardSidebarContext =
 /**
  * Провайдер предназначен для проброса состояния боковой панел, а так же управления этим состоянием.
  * В данный провайдер обернут компонент DashboardLayout.
- *
- * @param {string} localStorageKey название ключа в localStorage
  */
 export const DashboardSidebarProvider = ({
   children,
