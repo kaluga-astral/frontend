@@ -84,7 +84,7 @@ export const PageHeaderActions = styled.div`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     position: fixed;
-    z-index: ${({ theme }) => theme.zIndex.appBar};
+    z-index: ${({ theme }) => theme.zIndex.appBar - 2};
     bottom: 0;
     left: 0;
 
