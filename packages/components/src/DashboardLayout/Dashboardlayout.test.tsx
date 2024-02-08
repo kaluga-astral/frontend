@@ -1,8 +1,6 @@
 import { renderWithTheme, screen } from '@astral/tests';
 import { expect } from 'vitest';
 
-import { type MenuOrganizationProps } from '../MenuOrganization';
-
 import { DashboardLayout } from './DashboardLayout';
 
 const PROFILE = {
@@ -19,7 +17,6 @@ describe('DashboardLayout', () => {
     renderWithTheme(
       <DashboardLayout>
         <DashboardLayout.Header
-          organizationMenu={undefined}
           productSwitcher={undefined}
           product={PRODUCT}
           profile={PROFILE}
@@ -35,7 +32,6 @@ describe('DashboardLayout', () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={undefined}
-          organizationMenu={{} as MenuOrganizationProps}
           product={PRODUCT}
           profile={PROFILE}
         />
