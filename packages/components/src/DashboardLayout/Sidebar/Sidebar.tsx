@@ -33,7 +33,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
     const { menu, header } = props;
 
-    const { collapsedIn, onTogglerChange } = useContext(
+    const { collapsedIn, onToggleSidebar } = useContext(
       DashboardSidebarContext,
     );
 
@@ -54,7 +54,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
         {!isMobile && (
           <SidebarToggler
             collapsedIn={collapsedIn}
-            onToggle={onTogglerChange}
+            onToggle={onToggleSidebar}
           />
         )}
       </SidebarRoot>

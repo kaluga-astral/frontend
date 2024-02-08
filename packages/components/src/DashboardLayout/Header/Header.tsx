@@ -34,7 +34,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     children,
   } = props;
 
-  const { collapsedIn, onTogglerChange } = useContext(DashboardSidebarContext);
+  const { collapsedIn, onToggleSidebar } = useContext(DashboardSidebarContext);
 
   const { isMobile } = useViewportType();
 
@@ -44,7 +44,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
         <SidebarTogglerWrapper>
           <SidebarToggler
             collapsedIn={collapsedIn}
-            onToggle={onTogglerChange}
+            onToggle={onToggleSidebar}
           />
         </SidebarTogglerWrapper>
       )}

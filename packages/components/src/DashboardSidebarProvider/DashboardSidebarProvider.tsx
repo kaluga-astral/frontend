@@ -1,6 +1,7 @@
 import { type ReactNode, createContext, useEffect, useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
+import { useViewportType } from '../hooks/useViewportType';
 import { useLocalStorage } from '../hooks';
 
 export type DashboardSidebarContextProps = {
@@ -11,7 +12,7 @@ export type DashboardSidebarContextProps = {
   /*
    * Обработчик, позволяющий изменить состояние боковой панели
    */
-  onTogglerChange: () => void;
+  onToggleSidebar: () => void;
 };
 
 export type DashboardSidebarProviderProps = {
@@ -25,7 +26,7 @@ export type DashboardSidebarProviderProps = {
 export const DashboardSidebarContext =
   createContext<DashboardSidebarContextProps>({
     collapsedIn: false,
-    onTogglerChange: () => {},
+    onToggleSidebar: () => {},
   });
 
 /**
@@ -36,7 +37,9 @@ export const DashboardSidebarProvider = ({
   children,
   localStorageKey = '@astral/ui::Sidebar::collapsedIn',
 }: DashboardSidebarProviderProps) => {
-  const [collapsedIn, setCollapsedIn] = useState(true);
+  const { isMobile } = useViewportType();
+
+  const [collapsedIn, setCollapsedIn] = useState(!isMobile);
   const [storageCollapsedIn = true, setStorageCollapsedIn] = useLocalStorage(
     localStorageKey,
     true,
@@ -72,10 +75,12 @@ export const DashboardSidebarProvider = ({
       }
     };
 
-    checkScreenWidth();
-  }, [matches, storageCollapsedIn]);
+    if (!isMobile) {
+      checkScreenWidth();
+    }
+  }, [matches, storageCollapsedIn, isMobile]);
 
-  const onTogglerChange = () => {
+  const onToggleSidebar = () => {
     if (matches) {
       return setStorageCollapsedIn(!storageCollapsedIn);
     }
@@ -84,7 +89,7 @@ export const DashboardSidebarProvider = ({
   };
 
   return (
-    <DashboardSidebarContext.Provider value={{ collapsedIn, onTogglerChange }}>
+    <DashboardSidebarContext.Provider value={{ collapsedIn, onToggleSidebar }}>
       {children}
     </DashboardSidebarContext.Provider>
   );
