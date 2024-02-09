@@ -1,20 +1,28 @@
-import { type PropsWithChildren, type ReactNode, forwardRef } from 'react';
-
 import {
-  MenuOrganization,
-  type MenuOrganizationProps,
-} from '../../MenuOrganization';
+  type PropsWithChildren,
+  type ReactNode,
+  forwardRef,
+  useContext,
+} from 'react';
+
+import { useViewportType } from '../../hooks/useViewportType';
+import { DashboardSidebarContext } from '../../DashboardSidebarProvider';
 import { Product, type ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { type ProfileProps } from '../../Profile';
+import { SidebarToggler } from '../SidebarToggler';
 
-import { HeaderRoot, HeaderSection } from './styles';
+import {
+  HeaderRoot,
+  HeaderSection,
+  ProfileWrapper,
+  SidebarTogglerWrapper,
+} from './styles';
 
 export type HeaderProps = {
   product: ProductProps;
   productSwitcher?: (props: PropsWithChildren<{}>) => JSX.Element;
   profile?: ProfileProps;
-  organizationMenu?: MenuOrganizationProps;
   children?: ReactNode;
 };
 
@@ -23,20 +31,36 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     productSwitcher: ProductSwitcher,
     product,
     profile,
-    organizationMenu,
     children,
   } = props;
 
+  const { collapsedIn, onToggleSidebar } = useContext(DashboardSidebarContext);
+
+  const { isMobile } = useViewportType();
+
   return (
     <HeaderRoot ref={ref}>
+      {isMobile && (
+        <SidebarTogglerWrapper>
+          <SidebarToggler
+            collapsedIn={collapsedIn}
+            onToggle={onToggleSidebar}
+          />
+        </SidebarTogglerWrapper>
+      )}
+
       <HeaderSection>
-        {ProductSwitcher && <ProductSwitcher />}
+        {!isMobile && ProductSwitcher && <ProductSwitcher />}
         <Product {...product} />
       </HeaderSection>
-      {children}
+
       <HeaderSection>
-        {organizationMenu && <MenuOrganization {...organizationMenu} />}
-        {profile && <Profile {...profile} />}
+        {children}
+        {profile && (
+          <ProfileWrapper>
+            <Profile {...profile} />
+          </ProfileWrapper>
+        )}
       </HeaderSection>
     </HeaderRoot>
   );
