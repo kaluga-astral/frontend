@@ -99,7 +99,7 @@ const AutocompleteInner = <
     overflowOption,
     inputRef,
     renderTags,
-    renderInput: ExternalRenderInput,
+    renderInput: externalRenderInput,
     loadedDataError = 'На текущий момент сервис недоступен.',
     isLoadedDataError,
     ...restProps
@@ -157,14 +157,14 @@ const AutocompleteInner = <
         size,
       };
 
-      return ExternalRenderInput ? (
-        <ExternalRenderInput {...generalInputParams} />
-      ) : (
-        <TextField {...generalInputParams} />
-      );
+      if (externalRenderInput) {
+        return externalRenderInput(generalInputParams);
+      }
+
+      return <TextField {...generalInputParams} />;
     },
     [
-      ExternalRenderInput,
+      externalRenderInput,
       inputRef,
       required,
       placeholder,
