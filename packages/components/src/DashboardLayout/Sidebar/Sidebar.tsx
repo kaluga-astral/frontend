@@ -15,10 +15,6 @@ export type SidebarProps = {
    */
   header?: ReactNode;
   /**
-   * Ключ по которому осуществляется персист состояния collapsedIn в localStorage
-   */
-  localStorageKey?: string;
-  /**
    * Описание меню
    */
   menu: {
