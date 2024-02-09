@@ -1,8 +1,6 @@
 import { type ReactNode, createContext } from 'react';
 
-import { useViewportType } from '../hooks/useViewportType';
-
-import { useDesktopSidebar, useMobileSidebar } from './hooks';
+import { useSidebar } from './hooks';
 
 export type DashboardSidebarContextProps = {
   /*
@@ -37,9 +35,6 @@ export const DashboardSidebarProvider = ({
   children,
   localStorageKey = '@astral/ui::Sidebar::collapsedIn',
 }: DashboardSidebarProviderProps) => {
-  const { isMobile } = useViewportType();
-
-  const useSidebar = isMobile ? useMobileSidebar : useDesktopSidebar;
   const providerValues = useSidebar(localStorageKey);
 
   return (

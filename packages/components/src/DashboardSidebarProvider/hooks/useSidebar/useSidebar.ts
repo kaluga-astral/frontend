@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import { useLocalStorage } from '../hooks';
+import { useViewportType } from '../../../hooks/useViewportType';
+import { useLocalStorage } from '../../../hooks';
 
 type ReturnedSidebarHook = {
   collapsedIn: boolean;
@@ -10,7 +11,7 @@ type ReturnedSidebarHook = {
 
 type UseMobileSidebarHook = () => ReturnedSidebarHook;
 
-export const useMobileSidebar: UseMobileSidebarHook = () => {
+const useMobileSidebar: UseMobileSidebarHook = () => {
   const [collapsedIn, setCollapsedIn] = useState(false);
 
   const onToggleSidebar = () => {
@@ -25,7 +26,7 @@ export const useMobileSidebar: UseMobileSidebarHook = () => {
 
 type UseDesktopSidebarHook = (localStorageKey: string) => ReturnedSidebarHook;
 
-export const useDesktopSidebar: UseDesktopSidebarHook = (localStorageKey) => {
+const useDesktopSidebar: UseDesktopSidebarHook = (localStorageKey) => {
   const [collapsedIn, setCollapsedIn] = useState(true);
   const [storageCollapsedIn = true, setStorageCollapsedIn] = useLocalStorage(
     localStorageKey,
@@ -77,4 +78,15 @@ export const useDesktopSidebar: UseDesktopSidebarHook = (localStorageKey) => {
     collapsedIn,
     onToggleSidebar,
   };
+};
+
+type UseDesktopHook = (localStorageKey: string) => ReturnedSidebarHook;
+
+export const useSidebar: UseDesktopHook = (localStorageKey) => {
+  const { isMobile } = useViewportType();
+
+  const mobileProviderValues = useMobileSidebar();
+  const desktopProviderValues = useDesktopSidebar(localStorageKey);
+
+  return isMobile ? mobileProviderValues : desktopProviderValues;
 };
