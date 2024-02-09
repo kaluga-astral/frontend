@@ -80,9 +80,9 @@ const useDesktopSidebar: UseDesktopSidebarHook = (localStorageKey) => {
   };
 };
 
-type UseDesktopHook = (localStorageKey: string) => ReturnedSidebarHook;
+type UseSidebarHook = (localStorageKey: string) => ReturnedSidebarHook;
 
-export const useSidebar: UseDesktopHook = (localStorageKey) => {
+export const useSidebar: UseSidebarHook = (localStorageKey) => {
   const { isMobile } = useViewportType();
 
   const mobileProviderValues = useMobileSidebar();
