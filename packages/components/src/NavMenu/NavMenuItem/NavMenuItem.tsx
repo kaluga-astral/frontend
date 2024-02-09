@@ -35,6 +35,7 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
       return active;
     }),
   );
+
   const selected = useMemo(() => {
     return opened ? false : value.active;
   }, [opened, value.active]);
