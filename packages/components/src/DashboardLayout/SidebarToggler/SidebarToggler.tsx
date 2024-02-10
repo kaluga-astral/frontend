@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 
-import { Collapse } from '../../../Collapse';
+import { Collapse } from '../../Collapse';
 
-import { SidebarTogglerContent, SidebarTogglerRoot } from './styled';
+import { SidebarTogglerContent, SidebarTogglerRoot } from './styles';
 
 export type SidebarTogglerProps = {
   collapsedIn: boolean;
