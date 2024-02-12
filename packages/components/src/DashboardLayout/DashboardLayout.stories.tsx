@@ -13,11 +13,8 @@ import { ListItemIcon } from '../ListItemIcon';
 import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
-import {
-  CURRENT_ORGANIZATION,
-  ORGANIZATIONS,
-} from '../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../ProductSwitcher';
+import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
 
@@ -105,12 +102,6 @@ export const Example = () => {
             logo() {
               return <Logo />;
             },
-          }}
-          organizationMenu={{
-            currentOrganization: CURRENT_ORGANIZATION,
-            organizations: ORGANIZATIONS,
-            onAddOrganization: () => {},
-            onSelect: () => {},
           }}
           profile={{
             displayName: 'Григорьев Виталий',
@@ -228,7 +219,30 @@ export const Example = () => {
             ],
           }}
         />
-        <DashboardLayout.Main>Main Content</DashboardLayout.Main>
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: 'Черновики',
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+            }}
+            content={{
+              children: <>Content</>,
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );

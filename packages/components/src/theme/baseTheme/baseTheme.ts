@@ -5,7 +5,6 @@ import {
   type ThemeOptions,
   createTheme as createMuiTheme,
 } from '@mui/material/styles';
-import { merge } from 'lodash-es';
 
 import { typography } from '../typography';
 import { type Background, type Color, getPalette } from '../palette';
@@ -15,6 +14,7 @@ import { elevation } from '../elevation';
 import { shape } from '../shape';
 import { defaultBreakpoints } from '../breakpoints';
 import { type Theme } from '../types';
+import { merge } from '../../utils';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -46,7 +46,7 @@ export const createTheme = (params: CreateThemeParams) => {
     palette: getPalette(brand),
     components: getComponents(fontsUrls),
   };
-  const muiTheme = createMuiTheme(merge({}, themeOptions, options));
+  const muiTheme = createMuiTheme(merge(themeOptions, options));
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return merge(muiTheme as any, { elevation, shape }) as Theme;
