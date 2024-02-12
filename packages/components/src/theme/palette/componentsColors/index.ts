@@ -1,7 +1,1 @@
-import { linkColors } from './linkColors';
-
-export type ComponentsColors = typeof componentsColors;
-
-export const componentsColors = {
-  link: linkColors,
-};
+export { type ComponentsColors, componentsColors } from './componentsColors';
