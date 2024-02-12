@@ -3,8 +3,10 @@ import {
   type DialogActionsProps as MuiDialogActionsProps,
 } from '@mui/material';
 
-import { LegacyGrid } from '../LegacyGrid';
 import { type WithoutEmotionSpecific } from '../types';
+import { Grid } from '../Grid';
+import { useViewportType } from '../hooks/useViewportType';
+import { LegacyGrid } from '../LegacyGrid';
 
 export type DialogActionsProps = WithoutEmotionSpecific<MuiDialogActionsProps>;
 
@@ -13,6 +15,18 @@ export const DialogActions = ({
   disableSpacing,
   ...props
 }: DialogActionsProps) => {
+  const { isMobile } = useViewportType();
+
+  if (isMobile) {
+    return (
+      <MuiDialogActions {...props}>
+        <Grid container spacing={disableSpacing ? 0 : 2}>
+          {children}
+        </Grid>
+      </MuiDialogActions>
+    );
+  }
+
   return (
     <MuiDialogActions {...props}>
       <LegacyGrid

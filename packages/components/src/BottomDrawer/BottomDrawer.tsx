@@ -37,14 +37,16 @@ export const BottomDrawer = ({
 
   return (
     <StyledDrawer {...props} anchor="bottom" onClose={onClose}>
-      <DrawerHeader drawerHeaderHeight={drawerHeaderHeight}>
-        <DrawerTitle variant="h5" noWrap>
-          {title}
-        </DrawerTitle>
-        <IconButton variant="text" onClick={handleClose}>
-          <CrossOutlineMd />
-        </IconButton>
-      </DrawerHeader>
+      {title && (
+        <DrawerHeader drawerHeaderHeight={drawerHeaderHeight}>
+          <DrawerTitle variant="h5" noWrap>
+            {title}
+          </DrawerTitle>
+          <IconButton variant="text" onClick={handleClose}>
+            <CrossOutlineMd />
+          </IconButton>
+        </DrawerHeader>
+      )}
 
       <DrawerBody>{children}</DrawerBody>
     </StyledDrawer>
