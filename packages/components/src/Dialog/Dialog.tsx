@@ -1,13 +1,12 @@
 import {
   Dialog as MuiDialog,
   type DialogProps as MuiDialogProps,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material';
 
 import { DialogTitle } from '../DialogTitle';
 import { type WithoutEmotionSpecific } from '../types';
 import { BottomDrawer } from '../BottomDrawer';
+import { useViewportType } from '../hooks/useViewportType';
 
 export type DialogProps = WithoutEmotionSpecific<
   Omit<MuiDialogProps, 'title'>
@@ -42,11 +41,7 @@ export const Dialog = ({
       onClose(event, reason);
     });
 
-  // TODO: заменить на useViewportType
-
-  const theme = useTheme();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isMobile } = useViewportType();
 
   if (isMobile) {
     return (
