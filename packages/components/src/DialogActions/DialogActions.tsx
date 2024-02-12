@@ -20,7 +20,7 @@ export const DialogActions = ({
   if (isMobile) {
     return (
       <MuiDialogActions {...props}>
-        <Grid container spacing={disableSpacing ? 0 : 2}>
+        <Grid container direction="row" spacing={disableSpacing ? 0 : 2}>
           {children}
         </Grid>
       </MuiDialogActions>
