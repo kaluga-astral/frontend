@@ -9,6 +9,9 @@ copy({
 buildTs({
   releaseTag: process.env.RELEASE_TAG,
   packageExports: {
-    './server': './server/index.js',
+    './server': {
+      module: './server/index.js',
+      require: './node/server/index.js',
+    },
   },
 });

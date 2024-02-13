@@ -74,11 +74,14 @@ const modifyPackageJSON = ({
     keywords,
     sideEffects: false,
     types: './index.d.ts',
-    main: './index.js',
+    main: './node/index.js',
     module: './index.js',
     browser: './index.js',
     exports: {
-      '.': './index.js',
+      '.': {
+        module: './index.js',
+        require: './node/index.js',
+      },
       ...packageExports,
     },
   };
