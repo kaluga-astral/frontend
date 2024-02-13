@@ -3,13 +3,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 import { FormHelperText } from '../FormHelperText';
 
-import {
-  CodeFieldDigit,
-  CodeFieldDigitsItem,
-  CodeFieldDigitsWrapper,
-  CodeFieldLabel,
-  CodeFieldWrapper,
-} from './styles';
+import { Styled } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 import { ERROR_TEXT_DEFAULT, RESEND_TIMEOUT_DEFAULT } from './constants';
 import { useCodeState, useFocusInput } from './hooks';
@@ -113,15 +107,15 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     };
 
     return (
-      <CodeFieldWrapper ref={ref}>
-        {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
-        <CodeFieldDigitsWrapper>
+      <Styled.Label ref={ref}>
+        {label && <Styled.Label>{label}</Styled.Label>}
+        <Styled.DigitsWrapper>
           {codeValue.map((value, index) => (
-            <CodeFieldDigitsItem>
+            <Styled.DigitsItem>
               {loading ? (
                 <Skeleton variant="rounded" width={62} height={60} />
               ) : (
-                <CodeFieldDigit
+                <Styled.Digit
                   type="text"
                   inputMode="numeric"
                   pattern="[0-9]"
@@ -135,9 +129,9 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
                   onPaste={(e) => !disabled && !loading && onPaste(e)}
                 />
               )}
-            </CodeFieldDigitsItem>
+            </Styled.DigitsItem>
           ))}
-        </CodeFieldDigitsWrapper>
+        </Styled.DigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
         {isAllowResendCode && (
           <ResendCodeButton
@@ -149,7 +143,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
             clearCodeValue={clearCodeValue}
           />
         )}
-      </CodeFieldWrapper>
+      </Styled.Label>
     );
   },
 );
