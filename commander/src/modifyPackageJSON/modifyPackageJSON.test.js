@@ -38,7 +38,7 @@ describe('modifyPackageJSON', () => {
     );
   });
 
-  it('exports содержит дефолтные значения для входной точки', () => {
+  it('Exports содержит дефолтные значения для входной точки', () => {
     modifyPackageJSON({
       releaseTag: '1.0.0',
       packageExports: { './fonts': { import: './fonts/*' } },
@@ -50,7 +50,7 @@ describe('modifyPackageJSON', () => {
     });
   });
 
-  it('packageExports добавляет в exports значения', () => {
+  it('PackageExports добавляет в exports значения', () => {
     modifyPackageJSON({
       releaseTag: '1.0.0',
       packageExports: { './fonts': { import: './fonts/*' } },
@@ -59,7 +59,7 @@ describe('modifyPackageJSON', () => {
     expect(packageFileData.exports['./fonts']).toEqual({ import: './fonts/*' });
   });
 
-  it('main поле содержит ссылку на файлы из директории node', () => {
+  it('Main поле содержит ссылку на файлы из директории node', () => {
     modifyPackageJSON({ releaseTag: '1.0.0', main: './src/index.ts' });
     expect(packageFileData.main).toBe('./node/index.js');
   });
