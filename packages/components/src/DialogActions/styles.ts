@@ -1,5 +1,5 @@
 import { Grid, type GridProps } from '../Grid';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 
 export const DialogActionsGrid = styled(Grid)<GridProps>`
   ${({ theme }) => theme.breakpoints.up('sm')} {

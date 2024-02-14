@@ -3,7 +3,7 @@ import {
   DialogContent as MuiDialogContent,
 } from '@mui/material';
 
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 
 export const DialogContentRoot = styled(MuiDialogContent)<DialogContentProps>`
   ${({ theme }) => theme.breakpoints.down('sm')} {
