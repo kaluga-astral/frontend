@@ -16,7 +16,7 @@ export const DialogActions = ({
 }: DialogActionsProps) => {
   return (
     <MuiDialogActions {...props}>
-      <DialogActionsGrid container spacing={disableSpacing ? 0 : 2}>
+      <DialogActionsGrid spacing={disableSpacing ? 0 : 2}>
         {children}
       </DialogActionsGrid>
     </MuiDialogActions>
