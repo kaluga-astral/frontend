@@ -7,6 +7,3 @@ export const DialogActionsGrid = styled(Grid)<GridProps>`
     justify-content: end;
   }
 `;
-
-// ${({ isMobile }) => !isMobile && 'justify-content: end'};
-// grid-auto-flow: ${({ isMobile }) => (isMobile ? 'row' : 'column')};
