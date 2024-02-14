@@ -4,7 +4,6 @@ import {
 } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../types';
-import { useViewportType } from '../hooks/useViewportType';
 
 import { DialogActionsGrid } from './styles';
 
@@ -15,15 +14,9 @@ export const DialogActions = ({
   disableSpacing,
   ...props
 }: DialogActionsProps) => {
-  const { isMobile } = useViewportType();
-
   return (
     <MuiDialogActions {...props}>
-      <DialogActionsGrid
-        container
-        spacing={disableSpacing ? 0 : 2}
-        isMobile={isMobile}
-      >
+      <DialogActionsGrid container spacing={disableSpacing ? 0 : 2}>
         {children}
       </DialogActionsGrid>
     </MuiDialogActions>
