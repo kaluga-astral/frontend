@@ -5,10 +5,8 @@ import {
 
 import { styled } from '../styles/styled';
 
-type DialogContentRootProps = DialogContentProps & { isMobile: boolean };
-
-export const DialogContentRoot = styled(
-  MuiDialogContent,
-)<DialogContentRootProps>`
-  padding-top: ${({ theme, isMobile }) => isMobile && theme.spacing(6)};
+export const DialogContentRoot = styled(MuiDialogContent)<DialogContentProps>`
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    padding-top: ${({ theme }) => theme.spacing(6)};
+  }
 `;
