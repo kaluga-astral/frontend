@@ -2,11 +2,13 @@ import {
   type ElementType,
   type ReactElement,
   useCallback,
+  useContext,
   useMemo,
   useState,
 } from 'react';
 
 import { Collapse } from '../../Collapse';
+import { DashboardSidebarContext } from '../../DashboardSidebarProvider';
 
 import { NavMenuItemList, type NavMenuItemListProps } from './NavMenuItemList';
 import { NavMenuItemButton } from './NavMenuItemButton';
@@ -30,6 +32,8 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
     collapsedIn,
     item: [key, value],
   } = props;
+  const { onClickNavItem } = useContext(DashboardSidebarContext);
+
   const [opened, setOpened] = useState(
     value.items?.some(([, { active }]) => {
       return active;
@@ -51,7 +55,12 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
   }, []);
 
   return (
-    <li key={key}>
+    <li
+      key={key}
+      onClick={() =>
+        onClickNavItem({ isGroupListItem: Boolean(value.items?.length) })
+      }
+    >
       <NavMenuItemButton
         opened={opened}
         collapsedIn={collapsedIn}
@@ -63,7 +72,11 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
       />
       {value.items && (
         <Collapse in={opened}>
-          <NavMenuItemList collapsedIn={collapsedIn} items={value.items} />
+          <NavMenuItemList
+            collapsedIn={collapsedIn}
+            items={value.items}
+            onClickNavItem={onClickNavItem}
+          />
         </Collapse>
       )}
     </li>

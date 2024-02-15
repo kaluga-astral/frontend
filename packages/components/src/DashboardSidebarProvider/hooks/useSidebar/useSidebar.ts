@@ -4,12 +4,15 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { useViewportType } from '../../../hooks/useViewportType';
 import { useLocalStorage } from '../../../hooks';
 
-type ReturnedSidebarHook = {
+type ReturnedSidebarHook<T extends object = object> = {
   collapsedIn: boolean;
   onToggleSidebar: () => void;
+  onClickNavItem: (params: T) => void;
 };
 
-type UseMobileSidebarHook = () => ReturnedSidebarHook;
+type UseMobileSidebarHook = () => ReturnedSidebarHook<{
+  isGroupListItem?: boolean;
+}>;
 
 const useMobileSidebar: UseMobileSidebarHook = () => {
   const [collapsedIn, setCollapsedIn] = useState(false);
@@ -18,7 +21,20 @@ const useMobileSidebar: UseMobileSidebarHook = () => {
     setCollapsedIn((currentState) => !currentState);
   };
 
+  const onClickNavItem = ({
+    isGroupListItem,
+  }: {
+    isGroupListItem?: boolean;
+  }) => {
+    if (isGroupListItem === undefined || isGroupListItem) {
+      return;
+    }
+
+    setCollapsedIn(false);
+  };
+
   return {
+    onClickNavItem,
     collapsedIn,
     onToggleSidebar,
   };
@@ -74,7 +90,12 @@ const useDesktopSidebar: UseDesktopSidebarHook = (localStorageKey) => {
     setCollapsedIn(!collapsedIn);
   };
 
+  const onClickNavItem = () => {
+    return;
+  };
+
   return {
+    onClickNavItem,
     collapsedIn,
     onToggleSidebar,
   };
