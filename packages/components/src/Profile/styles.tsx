@@ -1,3 +1,4 @@
+import { Avatar, type AvatarProps } from '../Avatar';
 import { Button } from '../Button';
 import { styled } from '../styles';
 
@@ -35,4 +36,11 @@ export const ProfileAnnotation = styled.span`
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
   color: ${({ theme }) => theme.palette.grey[500]};
+`;
+
+export const ProfileAvatar = styled(Avatar)<AvatarProps>`
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 32px;
+    height: 32px;
+  }
 `;
