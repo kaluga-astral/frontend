@@ -60,13 +60,15 @@ export const Placeholder = ({
             height={imgHeight}
           />
         )}
-        <PlaceholderTitle variant="h4">{title}</PlaceholderTitle>
+
+        <PlaceholderTitle variant="h5">{title}</PlaceholderTitle>
         {description && (
           <PlaceholderDescription variant="ui">
             {description}
           </PlaceholderDescription>
         )}
       </PlaceholderInnerContainer>
+
       {Actions && <PlaceholderActions>{Actions}</PlaceholderActions>}
     </PlaceholderRoot>
   );
