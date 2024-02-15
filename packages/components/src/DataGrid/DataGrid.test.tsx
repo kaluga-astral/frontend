@@ -21,7 +21,7 @@ describe('DataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: отображается иконка сортировки при двух или более записях', () => {
     type DataItem = {
       name: string;
     };
@@ -47,7 +47,7 @@ describe('DataGrid', () => {
     expect(icon).not.toBeNull();
   });
 
-  it('Props:columns:sortable: не отображается иконка сортировки', () => {
+  it('Props:columns:sortable: не отображается иконка сортировки при отсутствии данных или при одной записи', () => {
     const columns = [
       {
         field: 'name',
