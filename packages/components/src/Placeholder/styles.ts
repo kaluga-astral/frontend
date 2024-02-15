@@ -6,6 +6,7 @@ export const PlaceholderRoot = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.spacing(4)};
@@ -14,10 +15,9 @@ export const PlaceholderRoot = styled.div`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: grid;
-    grid-template-rows: 1fr max-content;
     grid-template-columns: 100%;
+    grid-template-rows: 1fr max-content;
   }
-}
 `;
 
 export const PlaceholderInnerContainer = styled.div`
@@ -27,13 +27,15 @@ export const PlaceholderInnerContainer = styled.div`
 
 export const PlaceholderImage = styled.img`
   display: block;
+
   width: ${({ width }) => width || 'auto'};
   max-width: 100%;
   height: ${({ height }) => height || 'auto'};
   margin-bottom: ${({ theme }) => theme.spacing(4)};
-  object-fit: contain;
 
   color: ${({ theme }) => theme.palette.grey[900]};
+
+  object-fit: contain;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     margin: auto auto ${({ theme }) => theme.spacing(8)};
@@ -69,6 +71,7 @@ export const PlaceholderActions = styled.footer`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing(2)};
   justify-content: center;
+
   margin-top: ${({ theme }) => theme.spacing(4)};
   padding-top: ${({ theme }) => theme.spacing(4)};
 
@@ -77,6 +80,7 @@ export const PlaceholderActions = styled.footer`
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing(3)};
+
     margin-top: auto;
   }
 `;
