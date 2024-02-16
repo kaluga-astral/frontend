@@ -160,6 +160,8 @@ export * from './ProductSwitcher';
 
 export * from './Profile';
 
+export * from './ProgressBar';
+
 export * from './Radio';
 
 export * from './RadioField';

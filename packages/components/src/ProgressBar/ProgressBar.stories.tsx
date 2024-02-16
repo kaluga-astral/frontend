@@ -17,12 +17,4 @@ const meta: Meta<typeof ProgressBar> = {
 
 export default meta;
 
-export const Example = ({
-  currentProgress = 25,
-  maxProgress = 100,
-}: {
-  currentProgress?: number;
-  maxProgress?: number;
-}) => (
-  <ProgressBar currentProgress={currentProgress} maxProgress={maxProgress} />
-);
+export const Example = ({ value = 25 }) => <ProgressBar value={value} />;
