@@ -1,6 +1,5 @@
 import { typographyClasses } from '@mui/material';
 
-import { Grid } from '../Grid';
 import { styled } from '../styles/styled';
 
 export const OrganizationsButtonWrapper = styled.div`
@@ -22,10 +21,5 @@ export const OrganizationGroupTitle = styled.div`
 export const OrganizationsWrapper = styled.div`
   overflow-y: auto;
 
-  width: 260px;
   max-height: 310px;
-`;
-
-export const OrganizationData = styled(Grid)`
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 `;
