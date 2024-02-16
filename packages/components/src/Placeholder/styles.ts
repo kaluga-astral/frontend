@@ -4,6 +4,7 @@ import { Typography } from '../Typography';
 export const PlaceholderRoot = styled.div`
   display: flex;
   flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(4)};
   align-items: center;
   justify-content: center;
 
@@ -71,9 +72,6 @@ export const PlaceholderActions = styled.footer`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing(2)};
   justify-content: center;
-
-  margin-top: ${({ theme }) => theme.spacing(4)};
-  padding-top: ${({ theme }) => theme.spacing(4)};
 
   color: ${({ theme }) => theme.palette.grey[900]};
 
