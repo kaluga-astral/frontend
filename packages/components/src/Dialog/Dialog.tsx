@@ -5,6 +5,8 @@ import {
 
 import { DialogTitle } from '../DialogTitle';
 import { type WithoutEmotionSpecific } from '../types';
+import { BottomDrawer } from '../BottomDrawer';
+import { useViewportType } from '../hooks/useViewportType';
 
 export type DialogProps = WithoutEmotionSpecific<
   Omit<MuiDialogProps, 'title'>
@@ -38,6 +40,16 @@ export const Dialog = ({
 
       onClose(event, reason);
     });
+
+  const { isMobile } = useViewportType();
+
+  if (isMobile) {
+    return (
+      <BottomDrawer onClose={handleClose} title={title} {...props}>
+        {children}
+      </BottomDrawer>
+    );
+  }
 
   return (
     <MuiDialog onClose={handleClose} {...props}>

@@ -18,7 +18,9 @@ export type BottomDrawerProps = {
    * * @default 56
    */
   drawerHeaderHeight?: number;
-} & WithoutEmotionSpecific<Omit<MuiDrawerProps, 'anchor' | 'variant'>>;
+} & WithoutEmotionSpecific<
+  Omit<MuiDrawerProps, 'anchor' | 'variant' | 'title'>
+>;
 
 export const BottomDrawer = ({
   title,
