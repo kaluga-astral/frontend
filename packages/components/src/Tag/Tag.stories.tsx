@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import {type StoryObj } from '@storybook/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
@@ -13,6 +13,8 @@ import { ActionCell, type Actions } from '../ActionCell';
 
 import { Tag } from './Tag';
 import { TagColors } from './enums';
+
+type Story = StoryObj<typeof Tag>;
 
 type DataType = {
   id: string;
@@ -255,206 +257,36 @@ export default {
   component: Tag,
 };
 
-export const TagShowcase: Story = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
+export const Interaction: Story = {
+  args: {
+    variant: 'light',
+    color: 'success',
+    label: 'Тэг',
+    rounded: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+    controls: {
+      expanded:true,
+    },
+    options :
+    { 
+      showPanel: true 
+    },
+  },
+};
 
+export const Example = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [sorting, setSorting] = useState<DataGridSort<SortField>>();
-
   const handleSelect = (rows: DataType[]) => setSelected(rows);
-
   const handleRowClick = () => console.log('row clicked');
-
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
-    setSorting(newSorting);
-
-  return (
-    <ExampleTemplate>
-      <Typography variant="h3" paragraph>
-        Tags
-      </Typography>
-      <br />
-      <br />
-
-      <Typography variant="ui" paragraph>
-        Тэги позволяют пользователям маркировать или фильтровать информацию.
-      </Typography>
-      <Typography variant="ui" paragraph>
-        Могут показывать количество объектов, содержащихся в категории.
-        Несколько тэгов может быть выбранно одновременно. При этом будет показан
-        контент, относящийся к каждому выбранному тэгу.
-      </Typography>
-      <br />
-      <br />
-
-      <Typography variant="h5" paragraph>
-        Типы тэгов
-      </Typography>
-
-      <ExampleTemplate.Case
-        title="Tag"
-        descriptionList={[
-          'Статичный компонент без возможности взаимодействия.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag label="Text" variant="text" />
-          <Tag label="Light gray" variant="light" color="grey" />
-          <Tag label="Light primary" variant="light" color="primary" />
-          <Tag label="Contained primary" variant="contained" color="primary" />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title=""
-        descriptionList={['Дополнительные элементы.']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag avatar={svgAvatar} label="Default" color="grey" />
-          <Tag avatar={<ManOutlineSm />} label="Default" color="grey" />
-          <Tag
-            label="Default"
-            variant="text"
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Removable Tag"
-        descriptionList={[
-          'Тэг позволяющий фильтровать контент страницы при нажатии. Тэг можно удалить при необходимости.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag
-            label="Default"
-            variant="light"
-            color="grey"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            label="Disabled"
-            disabled
-            onDelete={() => {
-              console.log('не нажмётся в дизейбле');
-            }}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title=""
-        descriptionList={['Дополнительные элементы']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag
-            avatar={svgAvatar}
-            color="grey"
-            label="Default"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            avatar={<ManOutlineSm />}
-            label="Default"
-            color="grey"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            label="Default"
-            variant="text"
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Размер тэга"
-        descriptionList={['3 стандартных размера тэга: small, medium, large.']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          alignItems="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag label="Small" variant="light" color="grey" size="small" />
-          <Tag label="Medium" variant="light" color="grey" size="medium" />
-          <Tag label="Large" variant="light" color="grey" size="large" />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Эмоциональный оттенок"
-        descriptionList={[
-          'К любому тэгу может быть добавлен эмоциональный оттенок.',
-        ]}
-      >
-        <LegacyGrid container justifyContent="center" spacing={5}>
-          <LegacyGrid
-            container
-            autoFlow={autoFlow}
-            spacing={8}
-            templateColumns="repeat(3, auto)"
-          >
-            <Tag label="Error" variant="contained" color="error" />
-            <Tag label="Success" variant="contained" color="success" />
-            <Tag label="Warning" variant="contained" color="warning" />
-          </LegacyGrid>
-          <LegacyGrid
-            container
-            autoFlow={autoFlow}
-            spacing={8}
-            templateColumns="repeat(3, auto)"
-          >
-            <Tag label="Error" variant="light" color="error" />
-            <Tag label="Success" variant="light" color="success" />
-            <Tag label="Warning" variant="light" color="warning" />
-          </LegacyGrid>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-      <br />
-
-      <Typography variant="h5" paragraph>
-        Пример использования
-      </Typography>
-
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) => 
+  setSorting(newSorting);
+  return(
+    <>
       <Stack spacing={4}>
         <DataGrid<DataType, SortField>
           keyId="id"
@@ -467,26 +299,107 @@ export const TagShowcase: Story = () => {
           sorting={sorting}
         />
       </Stack>
-    </ExampleTemplate>
-  );
+    </>
+  )
 };
 
-const Template: Story = (args) => <Tag {...args} onDelete={undefined} />;
-
-TagShowcase.parameters = { options: { showPanel: false } };
-
-export const TagStory = Template.bind({});
-
-TagStory.storyName = 'Tag';
-
-TagStory.args = {
-  variant: 'light',
-  color: 'success',
-  label: 'Тэг',
-  rounded: true,
+export const Variants = () => {
+  return(
+    <>
+      <Tag label="Text" variant="text" />
+      <Tag label="Light gray" variant="light" color="grey" />
+      <Tag label="Contained primary" variant="contained" color="primary" />
+    </>
+  )
 };
 
-TagStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+export const Colors = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+  return(
+    <>
+      <LegacyGrid container justifyContent="center" spacing={5}>
+        <LegacyGrid
+          container
+          autoFlow={autoFlow}
+          spacing={6}
+          templateColumns="repeat(2, auto)"
+          >
+            <Tag label="Primary light" variant="light" color="primary" /> 
+            <Tag label="Error light" variant="light" color="error" />
+            <Tag label="Success light" variant="light" color="success" />
+            <Tag label="Warning light" variant="light" color="warning" />
+            <Tag label="Grey light" variant="light" color="grey" /> 
+            <Tag label="Default light" variant="light" color="default" /> 
+      </LegacyGrid>
+
+        <LegacyGrid
+          container
+          autoFlow={autoFlow}
+          spacing={6}
+          templateColumns="repeat(2, auto)"
+        >
+          <Tag label="Primary contained" variant="contained" color="primary" /> 
+          <Tag label="Error contained" variant="contained" color="error" />
+          <Tag label="Success contained" variant="contained" color="success" />
+          <Tag label="Warning contained" variant="contained" color="warning" />
+          <Tag label="Grey contained" variant="contained" color="grey" /> 
+          <Tag label="Default contained" variant="contained" color="default" /> 
+        </LegacyGrid>
+      </LegacyGrid>
+    </>
+  )
+};
+
+export const Removable = () => {
+  const deleteFunc = () =>
+  {
+    console.log("deleted")
+  }
+  return(
+    <>
+      <Tag 
+        color="grey" 
+        label="Default" 
+        onDelete={deleteFunc}
+        />
+      <Tag 
+        avatar={svgAvatar} 
+        label="Default" 
+        onDelete={deleteFunc}/>
+      <Tag 
+        label="Default" 
+        variant="text" 
+        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        onDelete={deleteFunc} 
+      />
+        <Tag 
+        disabled
+        label="Disabled"  
+        onDelete={() => console.log('не нажмётся в дизейбле')}
+        />
+    </>
+  )
+};
+
+export const Sizes = () => {
+  return(
+    <>
+      <Tag label="Small" variant="light" color="grey" size="small" />
+      <Tag label="Medium" variant="light" color="grey" size="medium" />
+      <Tag label="Large" variant="light" color="grey" size="large" />
+    </>
+  )
+};
+
+export const Adornment = () => {
+  return(
+    <>
+      <Tag avatar={svgAvatar} color="grey" label="Default" />
+      <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light'/>
+      <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light' onDelete={() => console.log("deleted")}/>
+      <Tag label="Default" variant="text" endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />} />
+    </>
+  )
 };
