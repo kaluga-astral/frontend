@@ -193,14 +193,6 @@ export function DataGrid<
     return null;
   }, [noDataPlaceholder, loading]);
 
-  const processedColumns = useCallback(() => {
-    if (rows.length <= 1) {
-      return columns.map((column) => ({ ...column, sortable: false }));
-    }
-
-    return columns;
-  }, [columns, rows]);
-  
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
@@ -212,7 +204,7 @@ export function DataGrid<
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
             sorting={sorting}
-            columns={processedColumns()}
+            columns={columns}
           />
           <DataGridBody<Data>
             activeRowId={activeRowId}
