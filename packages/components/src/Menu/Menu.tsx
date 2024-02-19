@@ -5,21 +5,29 @@ import { useViewportType } from '../hooks/useViewportType';
 import { BottomDrawer } from '../BottomDrawer';
 import { MenuList } from '../MenuList';
 
-export type MenuProps = WithoutEmotionSpecific<MuiMenuProps>;
+export type MenuProps = WithoutEmotionSpecific<MuiMenuProps> & {
+  title?: string;
+};
 
-export const Menu = ({ children, onClose, open, ...props }: MenuProps) => {
+export const Menu = ({
+  children,
+  onClose,
+  open,
+  title,
+  ...restProps
+}: MenuProps) => {
   const { isMobile } = useViewportType();
 
   if (isMobile) {
     return (
-      <BottomDrawer onClose={onClose} open={open}>
+      <BottomDrawer title={title} onClose={onClose} open={open}>
         <MenuList>{children}</MenuList>
       </BottomDrawer>
     );
   }
 
   return (
-    <MuiMenu open={open} onClose={onClose} {...props}>
+    <MuiMenu open={open} onClose={onClose} {...restProps}>
       {children}
     </MuiMenu>
   );
