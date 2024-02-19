@@ -1,14 +1,10 @@
 import {type StoryObj } from '@storybook/react';
-import { useMediaQuery, useTheme } from '@mui/material';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
 import { Stack } from '@mui/material';
 import { useState } from 'react';
 
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { LegacyGrid } from '../LegacyGrid';
-import { Typography } from '../Typography';
 import { ActionCell, type Actions } from '../ActionCell';
 
 import { Tag } from './Tag';
@@ -314,40 +310,14 @@ export const Variants = () => {
 };
 
 export const Colors = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
   return(
     <>
-      <LegacyGrid container justifyContent="center" spacing={5}>
-        <LegacyGrid
-          container
-          autoFlow={autoFlow}
-          spacing={6}
-          templateColumns="repeat(2, auto)"
-          >
-            <Tag label="Primary light" variant="light" color="primary" /> 
-            <Tag label="Error light" variant="light" color="error" />
-            <Tag label="Success light" variant="light" color="success" />
-            <Tag label="Warning light" variant="light" color="warning" />
-            <Tag label="Grey light" variant="light" color="grey" /> 
-            <Tag label="Default light" variant="light" color="default" /> 
-      </LegacyGrid>
-
-        <LegacyGrid
-          container
-          autoFlow={autoFlow}
-          spacing={6}
-          templateColumns="repeat(2, auto)"
-        >
-          <Tag label="Primary contained" variant="contained" color="primary" /> 
-          <Tag label="Error contained" variant="contained" color="error" />
-          <Tag label="Success contained" variant="contained" color="success" />
-          <Tag label="Warning contained" variant="contained" color="warning" />
-          <Tag label="Grey contained" variant="contained" color="grey" /> 
-          <Tag label="Default contained" variant="contained" color="default" /> 
-        </LegacyGrid>
-      </LegacyGrid>
+      <Tag label="Primary light" variant="light" color="primary" /> 
+      <Tag label="Error contained" variant="contained" color="error" />
+      <Tag label="Success light" variant="light" color="success" />
+      <Tag label="Warning contained" variant="contained" color="warning" />
+      <Tag label="Grey" color="grey" /> 
+      <Tag label="Default" color="default" /> 
     </>
   )
 };
