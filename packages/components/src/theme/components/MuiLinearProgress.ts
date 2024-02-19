@@ -4,14 +4,17 @@ import { type Theme } from '../types';
 
 export const MuiLinearProgress: Components<Theme>['MuiLinearProgress'] = {
   styleOverrides: {
-    root() {
+    root({ theme }: { theme: Theme }) {
       return {
         width: '100%',
         borderRadius: '4px',
+        backgroundColor: theme.palette.grey[300],
       };
     },
-    bar: {
-      backgroundColor: '#6746eb',
+    barColorPrimary({ theme }: { theme: Theme }) {
+      return {
+        backgroundColor: theme.palette.primary['800'],
+      };
     },
   },
 };
