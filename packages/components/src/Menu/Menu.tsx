@@ -9,7 +9,7 @@ export type MenuProps = WithoutEmotionSpecific<MuiMenuProps> & {
   /**
    * Заголовок для отображения в мобильной версии
    */
-  title?: JSX.Element | JSX.Element[] | string;
+  title?: string;
 };
 
 export const Menu = ({
