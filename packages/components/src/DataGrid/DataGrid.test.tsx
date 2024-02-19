@@ -47,7 +47,7 @@ describe('DataGrid', () => {
     expect(icon).not.toBeNull();
   });
 
-  it('Props:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: не отображается иконка сортировки при отсутствии данных или при одной записи', () => {
     const columns = [
       {
         field: 'name',
@@ -60,7 +60,7 @@ describe('DataGrid', () => {
 
     const icon = screen.getByText('Наименование').querySelector('svg');
 
-    expect(icon).not.toBeNull();
+    expect(icon).toBeNull();
   });
 
   it('Props:columns:sortable: по клику на head cell вызывается onSort', async () => {
