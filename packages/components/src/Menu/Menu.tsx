@@ -7,7 +7,7 @@ import { MenuList } from '../MenuList';
 
 export type MenuProps = WithoutEmotionSpecific<MuiMenuProps>;
 
-export const Menu = ({ children, onClose, open, ...restProps }: MenuProps) => {
+export const Menu = ({ children, onClose, open, ...props }: MenuProps) => {
   const { isMobile } = useViewportType();
 
   if (isMobile) {
@@ -19,7 +19,7 @@ export const Menu = ({ children, onClose, open, ...restProps }: MenuProps) => {
   }
 
   return (
-    <MuiMenu open={open} onClose={onClose} {...restProps}>
+    <MuiMenu open={open} onClose={onClose} {...props}>
       {children}
     </MuiMenu>
   );

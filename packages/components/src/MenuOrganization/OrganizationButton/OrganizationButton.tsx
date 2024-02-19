@@ -6,8 +6,8 @@ import { Chevron } from '../../Chevron';
 import { OverflowTypography } from '../../OverflowTypography';
 import { Typography } from '../../Typography';
 import { OrganizationWrapper } from '../OrganizationItem/styles';
+import { OrganizationData } from '../styles';
 import { type Organization } from '../types';
-import { Grid } from '../../Grid';
 
 import { OrganizationBtn } from './styles';
 
@@ -41,14 +41,14 @@ export const OrganizationButton = forwardRef<
     >
       <OrganizationWrapper>
         <OverflowTypography variant="h6">{name}</OverflowTypography>
-        <Grid direction="column" spacing={2}>
+        <OrganizationData container spacing={2}>
           <Typography variant="caption" color="textSecondary">
             ИНН {inn}
           </Typography>
           <Typography variant="caption" color="textSecondary">
             КПП {kpp}
           </Typography>
-        </Grid>
+        </OrganizationData>
       </OrganizationWrapper>
     </OrganizationBtn>
   );

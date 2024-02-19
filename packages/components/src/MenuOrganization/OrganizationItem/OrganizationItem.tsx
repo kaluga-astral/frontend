@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { MenuItem } from '../../MenuItem';
 import { OverflowTypography } from '../../OverflowTypography';
 import { Typography } from '../../Typography';
-import { Grid } from '../../Grid';
+import { OrganizationData } from '../styles';
 
 import { OrganizationWrapper } from './styles';
 
@@ -28,14 +28,14 @@ export const OrganizationItem = forwardRef<
         >
           {name}
         </OverflowTypography>
-        <Grid direction="column" spacing={2}>
+        <OrganizationData container spacing={2}>
           <Typography variant="caption" color="textSecondary">
             ИНН {inn}
           </Typography>
           <Typography variant="caption" color="textSecondary">
             КПП {kpp}
           </Typography>
-        </Grid>
+        </OrganizationData>
       </OrganizationWrapper>
     </MenuItem>
   );
