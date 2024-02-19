@@ -200,7 +200,7 @@ export function DataGrid<
 
     return columns;
   }, [columns, rows]);
-  
+
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
