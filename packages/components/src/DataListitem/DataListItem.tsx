@@ -4,7 +4,7 @@ export type DataListItemProps = {
   children: React.ReactNode;
 
   /**
-   * Обработчик нажатия на карточку списка
+   * Обработчик нажатия на карточку
    */
   onClick?: () => void;
 };

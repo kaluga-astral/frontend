@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { type Meta } from '@storybook/react';
+import { fakerRU } from '@faker-js/faker';
 
-import { Grid } from '../Grid';
+import { styled } from '../styles';
 import { Typography } from '../Typography';
 import { DataListItem } from '../DataListitem';
 
@@ -25,36 +26,22 @@ type MockDate = {
   id: string;
   title: string;
   organization: string;
-  createDate: string;
-};
-
-const generateRandomDate = () => {
-  const start = new Date(2022, 0, 1);
-  const end = new Date();
-  const randomTimestamp =
-    start.getTime() + Math.random() * (end.getTime() - start.getTime());
-  const randomDate = new Date(randomTimestamp);
-
-  return randomDate.toISOString();
 };
 
 const generateData = (length = 16) => {
-  const ORGANIZATIONS = [
-    'ООО "Очень очень очень длинное наименование организации"',
-    'ООО "Золоты рога и бриллиантовые копыта"',
-    'ПАО "Газпром народное достояние"',
-  ];
-
   return Array.from({ length })
     .fill(null)
     .map((_, i) => ({
-      id: String(i + 1),
+      id: fakerRU.string.uuid(),
       title: `Договор на оказание услуг №${i + 1}`,
-      organization:
-        ORGANIZATIONS[Math.floor(Math.random() * ORGANIZATIONS.length)],
-      createDate: generateRandomDate(),
+      organization: fakerRU.company.name(),
     }));
 };
+
+const Container = styled.div`
+  width: 100%;
+  height: 240px;
+`;
 
 export const Example = () => {
   const [loading, setLoading] = useState(true);
@@ -83,7 +70,7 @@ export const Example = () => {
   const handleClick = () => alert('Click');
 
   return (
-    <div style={{ width: '100%', height: '240px' }}>
+    <Container>
       <DataList
         keyId="organization"
         data={slicedData}
@@ -98,20 +85,20 @@ export const Example = () => {
         )}
         onRetry={() => undefined}
       />
-    </div>
+    </Container>
   );
 };
 
 export const NoData = () => {
   return (
-    <Grid container spacing={4}>
+    <Container>
       <DataList
         keyId="id"
         data={[]}
         listItem={() => <DataListItem>item</DataListItem>}
         onRetry={() => undefined}
       />
-    </Grid>
+    </Container>
   );
 };
 
@@ -121,7 +108,7 @@ export const LoadingWithData = () => {
   const handleClick = () => alert('Click');
 
   return (
-    <div style={{ width: '100%', height: '240px' }}>
+    <Container>
       <DataList
         keyId="id"
         data={data}
@@ -134,7 +121,7 @@ export const LoadingWithData = () => {
         )}
         onRetry={() => undefined}
       />
-    </div>
+    </Container>
   );
 };
 
@@ -146,7 +133,7 @@ export const ErrorWithData = () => {
   const handleRetry = () => alert('Повторить запрос');
 
   return (
-    <div style={{ width: '100%', height: '240px' }}>
+    <Container>
       <DataList
         keyId="id"
         data={data}
@@ -159,7 +146,7 @@ export const ErrorWithData = () => {
         )}
         onRetry={handleRetry}
       />
-    </div>
+    </Container>
   );
 };
 
@@ -167,7 +154,7 @@ export const Loading = () => {
   const handleClick = () => alert('Click');
 
   return (
-    <div style={{ width: '100%', height: '240px' }}>
+    <Container>
       <DataList
         keyId="id"
         data={[]}
@@ -180,7 +167,7 @@ export const Loading = () => {
         )}
         onRetry={() => undefined}
       />
-    </div>
+    </Container>
   );
 };
 
@@ -190,7 +177,7 @@ export const Error = () => {
   const handleRetry = () => alert('Повторить запрос');
 
   return (
-    <div style={{ width: '100%', height: '240px' }}>
+    <Container>
       <DataList
         keyId="id"
         data={[]}
@@ -204,6 +191,6 @@ export const Error = () => {
         )}
         onRetry={handleRetry}
       />
-    </div>
+    </Container>
   );
 };

@@ -1,11 +1,18 @@
 import { styled } from '../../styles';
 
 export const DataListErrorRoot = styled.li`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: max-content max-content;
+  gap: ${({ theme }) => theme.spacing(3)};
+  justify-items: center;
 
-  padding: ${({ theme }) => theme.spacing(5)};
+  padding: ${({ theme }) => theme.spacing(3, 5)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    gap: ${({ theme }) => theme.spacing(4)};
+    justify-items: normal;
+
+    padding: ${({ theme }) => theme.spacing(4)};
+  }
 `;

@@ -10,7 +10,7 @@ type Props = {
 
 export const DataListError = ({ onRetry }: Props) => (
   <DataListErrorRoot>
-    <Typography>{ERROR_MESSAGE}</Typography>
+    <Typography align="center">{ERROR_MESSAGE}</Typography>
 
     <Button onClick={onRetry}>Попробовать снова</Button>
   </DataListErrorRoot>
