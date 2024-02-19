@@ -2,7 +2,7 @@ import { LinearProgress as MuiLinearProgress } from '@mui/material';
 
 export type ProgressBarProps = {
   /**
-   * Текущий прогресс загрузки (от 0 до 100, обязательный)
+   * Текущий прогресс загрузки (от 0 до 100)
    * @example <ProgressBar value={25} />
    */
   value: number;
