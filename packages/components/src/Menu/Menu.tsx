@@ -6,7 +6,10 @@ import { BottomDrawer } from '../BottomDrawer';
 import { MenuList } from '../MenuList';
 
 export type MenuProps = WithoutEmotionSpecific<MuiMenuProps> & {
-  title?: string;
+  /**
+   * Заголовок для отображения в мобильной версии
+   */
+  title?: JSX.Element | JSX.Element[] | string;
 };
 
 export const Menu = ({
