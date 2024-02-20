@@ -15,7 +15,7 @@ import {
   Content,
   Footer,
   Header,
-  Icon,
+  IconWrapper,
   Inner,
   Title,
   Wrapper,
@@ -65,7 +65,9 @@ export const NotificationTemplate = ({
 
   return (
     <Wrapper variant={variant} filled={filled}>
-      <Icon>{icon || <DefaultIcon filled={filled} variant={variant} />}</Icon>
+      <IconWrapper>
+        {icon || <DefaultIcon filled={filled} variant={variant} />}
+      </IconWrapper>
       <Inner>
         <Header>
           <Title>{title}</Title>

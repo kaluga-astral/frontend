@@ -46,7 +46,7 @@ export const Footer = styled.footer<NotificationActionsProps>`
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const Icon = styled.div`
+export const IconWrapper = styled.div`
   margin-right: ${({ theme }) => theme.spacing(3)};
   padding-top: ${({ theme }) => theme.spacing(1)};
 `;
