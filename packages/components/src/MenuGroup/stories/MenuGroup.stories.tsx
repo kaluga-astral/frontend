@@ -39,7 +39,12 @@ const Template: Story = () => {
       <Button variant="text" onClick={handleClick}>
         Products
       </Button>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+      <Menu
+        title="Products"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
         <MenuGroup label="Мои продукты">
           <StyledMenuItem onClick={handleClose}>
             <ListItemIcon>
