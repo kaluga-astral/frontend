@@ -1,5 +1,5 @@
-import { styled } from '../../../../styles';
-import { Button } from '../../../../Button';
+import { styled } from '../../../styles';
+import { Button } from '../../../Button';
 
 export const SidebarTogglerButtonRoot = styled(Button)`
   gap: 0;
