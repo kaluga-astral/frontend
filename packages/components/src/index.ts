@@ -46,6 +46,11 @@ export * from './ContentState';
 
 export * from './DashboardLayout';
 
+export {
+  DashboardSidebarContext as SidebarContext,
+  type DashboardSidebarContextProps as SidebarContextProps,
+} from './DashboardSidebarProvider';
+
 export * from './DataGrid';
 
 export * from './DataGridPagination';
