@@ -4,7 +4,7 @@ import { forwardRef, useContext } from 'react';
 import { ConfigContext } from '../../../../ConfigProvider';
 import { type DateCalendarChevronBtnProps } from '../types';
 
-import { DateCalendarPrevBtnWrapper } from './styles';
+import { StyledButton } from './styles';
 
 export const DateCalendarPrevBtn = forwardRef<
   HTMLButtonElement,
@@ -13,13 +13,13 @@ export const DateCalendarPrevBtn = forwardRef<
   const { previous } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
-    <DateCalendarPrevBtnWrapper
+    <StyledButton
       ref={ref}
       disabled={!Boolean(props.onClick)}
       title={`${isPlural ? previous.plural : previous.single} ${postfixTitle}`}
       {...props}
     >
       <PreviousOutlineMd />
-    </DateCalendarPrevBtnWrapper>
+    </StyledButton>
   );
 });

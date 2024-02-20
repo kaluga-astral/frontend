@@ -3,7 +3,7 @@ import {
   DateCalendarPrevBtn,
 } from '../DateCalendarChevronBtn';
 
-import { DateCalendarHeadBtn, DateCalendarHeadText } from './styles';
+import { HeadBtn, HeadText } from './styles';
 
 export type CommonDateCalendarHeadProps = {
   /**
@@ -58,11 +58,11 @@ export const DateCalendarHead = ({
       isPlural={isPlural}
     />
     {onHeadBtnClick ? (
-      <DateCalendarHeadBtn onClick={onHeadBtnClick} title={headBtnTitle}>
+      <HeadBtn onClick={onHeadBtnClick} title={headBtnTitle}>
         {headBtnText}
-      </DateCalendarHeadBtn>
+      </HeadBtn>
     ) : (
-      <DateCalendarHeadText role="head">{headBtnText}</DateCalendarHeadText>
+      <HeadText role="head">{headBtnText}</HeadText>
     )}
     <DateCalendarNextBtn
       postfixTitle={arrowPostfixTitle}

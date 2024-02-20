@@ -19,7 +19,7 @@ export const StyledDrawer = styled(Drawer)<DrawerProps>`
   }
 `;
 
-export const DrawerHeader = styled.header<{ drawerHeaderHeight: number }>`
+export const Header = styled.header<{ drawerHeaderHeight: number }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -31,10 +31,10 @@ export const DrawerHeader = styled.header<{ drawerHeaderHeight: number }>`
   border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
 `;
 
-export const DrawerTitle = styled(Typography)<TypographyProps>`
+export const HeaderTitle = styled(Typography)<TypographyProps>`
   margin-right: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const DrawerBody = styled.div`
+export const Body = styled.div`
   overflow-y: auto;
 `;

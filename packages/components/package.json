@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "node pack",
+    "build": "RELEASE_TAG=3.47.0 node pack",
     "publish": "npm publish ./lib",
     "tests": "vitest run",
     "tests:ci": "vitest run --reporter=junit --outputFile.junit=junit.xml",

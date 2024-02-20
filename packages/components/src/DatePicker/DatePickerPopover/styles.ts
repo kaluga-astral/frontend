@@ -2,7 +2,7 @@ import { Popper } from '@mui/material';
 
 import { styled } from '../../styles';
 
-export const DatePickerPopoverInner = styled.div`
+export const PopoverInner = styled.div`
   display: flex;
 
   padding: ${({ theme }) => theme.spacing(4)};
@@ -12,6 +12,6 @@ export const DatePickerPopoverInner = styled.div`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const PopoverWrapper = styled(Popper)`
+export const Wrapper = styled(Popper)`
   z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;

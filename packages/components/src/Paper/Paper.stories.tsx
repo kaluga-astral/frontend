@@ -11,6 +11,7 @@ import {
   SettingsFillMd,
 } from '@astral/icons';
 
+import { styled } from '../styles';
 import { ExampleTemplate } from '../docs';
 import { LegacyGrid } from '../LegacyGrid';
 import { MenuItem } from '../MenuItem';
@@ -25,18 +26,47 @@ import { Menu, type MenuProps } from '../Menu';
 import { ListItemText } from '../ListItemText';
 import { Divider } from '../Divider';
 
-import {
-  IndentWrapper,
-  PaperExampleStory,
-  PaperHeader,
-  PaperMenu,
-} from './styles';
 import { Paper } from './Paper';
 
 export default {
   title: 'Components/Paper',
   component: Paper,
 };
+
+export const PaperHeader = styled(Paper)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: ${({ theme }) => theme.spacing(2, 3)};
+`;
+
+export const PaperExampleStory = styled(Paper)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 202px;
+  height: 96px;
+  padding: ${({ theme }) => theme.spacing(2, 3)};
+`;
+
+export const IndentWrapper = styled.div`
+  padding: ${({ theme }) => theme.spacing(0, 8)};
+
+  & > :nth-child(odd) {
+    margin-bottom: ${({ theme }) => theme.spacing(5)};
+  }
+
+  & > :nth-child(even):not(:last-child) {
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
+  }
+`;
+
+export const PaperMenu = styled(Paper)`
+  width: 200px;
+  padding: ${({ theme }) => theme.spacing(1, 0)};
+`;
 
 export const PaperShowcase: Story = () => {
   const theme = useTheme();

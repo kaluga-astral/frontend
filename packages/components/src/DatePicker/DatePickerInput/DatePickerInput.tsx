@@ -6,7 +6,7 @@ import { CalendarOutlineMd } from '@astral/icons';
 import { type MaskBlocks, type MaskFieldProps } from '../../MaskField';
 import { type TextFieldProps } from '../../TextField';
 
-import { DatePickerInputWrapper } from './styles';
+import { StyledMaskField } from './styles';
 
 type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
@@ -56,7 +56,7 @@ export const DatePickerInput = forwardRef<
 
   return (
     <div onFocus={handleFocusWrapper} tabIndex={-1} aria-disabled={disabled}>
-      <DatePickerInputWrapper
+      <StyledMaskField
         {...props}
         ref={ref}
         size={size}

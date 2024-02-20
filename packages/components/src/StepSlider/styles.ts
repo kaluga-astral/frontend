@@ -4,7 +4,7 @@ type SliderContainerProps = {
   isFullWidth?: boolean;
 };
 
-export const SliderContainer = styled('div', {
+export const Wrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== 'isFullWidth',
 })<SliderContainerProps>`
   overflow: hidden;
@@ -15,7 +15,7 @@ export const SliderContainer = styled('div', {
   height: 100%;
 `;
 
-export const SliderItem = styled.div`
+export const Item = styled.div`
   overflow: auto;
   grid-area: slide;
 

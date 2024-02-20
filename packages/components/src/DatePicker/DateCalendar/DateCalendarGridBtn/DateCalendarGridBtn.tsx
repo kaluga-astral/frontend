@@ -1,3 +1,1 @@
-import { DateCalendarGridBtnWrapper } from './styles';
-
-export const DateCalendarGridBtn = DateCalendarGridBtnWrapper;
+export { DateCalendarGridBtn } from './styles';

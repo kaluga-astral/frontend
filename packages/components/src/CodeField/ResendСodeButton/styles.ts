@@ -1,6 +1,6 @@
 import { styled } from '../../styles/styled';
 
-export const ResendCodeButtonWrapper = styled.footer<{ isError?: boolean }>`
+export const Wrapper = styled.footer<{ isError?: boolean }>`
   display: flex;
   gap: 10px;
   align-items: baseline;

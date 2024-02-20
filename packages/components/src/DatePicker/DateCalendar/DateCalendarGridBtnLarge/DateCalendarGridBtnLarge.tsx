@@ -1,3 +1,1 @@
-import { DateCalendarGridBtnLargeWrapper } from './styles';
-
-export const DateCalendarGridBtnLarge = DateCalendarGridBtnLargeWrapper;
+export { DateCalendarGridBtnLarge } from './styles';

@@ -138,7 +138,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'lengthInRow',
 ]);
 
-export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
+export const DateCalendarGridBtn = styled(DateCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`

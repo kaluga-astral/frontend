@@ -2,7 +2,7 @@ import { type ReactNode, useEffect, useId, useRef, useState } from 'react';
 
 import { Slide, type SlideProps } from '../Slide';
 
-import { SliderContainer, SliderItem } from './styles';
+import { Item, Wrapper } from './styles';
 
 type Direction = SlideProps['direction'];
 
@@ -103,11 +103,7 @@ export const StepSlider = <TKeys extends DefaultKey>({
   }, [activeStep, currentStep, steps]);
 
   return (
-    <SliderContainer
-      ref={containerRef}
-      className={className}
-      isFullWidth={isFullWidth}
-    >
+    <Wrapper ref={containerRef} className={className} isFullWidth={isFullWidth}>
       {steps.map(({ component, id }, index) => (
         <Slide
           {...restSlideProps}
@@ -120,9 +116,9 @@ export const StepSlider = <TKeys extends DefaultKey>({
           direction={directionMap.get(id)}
           appear={false}
         >
-          <SliderItem>{component}</SliderItem>
+          <Item>{component}</Item>
         </Slide>
       ))}
-    </SliderContainer>
+    </Wrapper>
   );
 };

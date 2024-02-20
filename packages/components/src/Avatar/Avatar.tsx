@@ -3,10 +3,10 @@ import { forwardRef } from 'react';
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { AvatarRoot } from './styles';
+import { StyledAvatar } from './styles';
 
 export type AvatarProps = WithoutEmotionSpecific<MuiAvatarProps>;
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
-  return <AvatarRoot {...props} ref={ref} />;
+  return <StyledAvatar {...props} ref={ref} />;
 });

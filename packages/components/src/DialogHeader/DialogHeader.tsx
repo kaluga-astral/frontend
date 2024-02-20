@@ -5,7 +5,7 @@ import { CrossOutlineMd } from '@astral/icons';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
-import { DialogHeaderContent, DialogHeaderRoot } from './styles';
+import { HeaderContent, Wrapper } from './styles';
 
 export type DialogHeaderProps = {
   /**
@@ -35,14 +35,14 @@ export const DialogHeader = ({
   };
 
   return (
-    <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
+    <Wrapper hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && <Typography variant="h4">{title}</Typography>}
-      <DialogHeaderContent
+      <HeaderContent
         justifyContent={justifyContent}
         columnSpacing={disableSpacing ? 0 : 2}
       >
         {children}
-      </DialogHeaderContent>
+      </HeaderContent>
       {onClose && (
         <IconButton
           variant="text"
@@ -52,6 +52,6 @@ export const DialogHeader = ({
           <CrossOutlineMd />
         </IconButton>
       )}
-    </DialogHeaderRoot>
+    </Wrapper>
   );
 };

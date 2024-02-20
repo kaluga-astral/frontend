@@ -1,7 +1,7 @@
 import { Typography, type TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
-export const DataGridNoDataWrapper = styled.tr`
+export const Wrapper = styled.tr`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,13 +12,13 @@ export const DataGridNoDataWrapper = styled.tr`
   justify-content: center;
 `;
 
-export const DataGridNoDataFigure = styled.figure`
+export const Figure = styled.figure`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const DataGridNoDataIcon = styled.img`
+export const Icon = styled.img`
   display: block;
 
   width: ${({ width }) => `${width}px` || '100%'};
@@ -27,6 +27,6 @@ export const DataGridNoDataIcon = styled.img`
   object-fit: contain;
 `;
 
-export const DataGridNoDataFigcaption = styled(Typography)<TypographyProps>`
+export const Figcaption = styled(Typography)<TypographyProps>`
   color: ${({ theme }) => theme.palette.grey[600]};
 `;

@@ -1,7 +1,7 @@
 import { styled } from '../../../styles';
 import { DateCalendarGridBtn } from '../DateCalendarGridBtn';
 
-export const DateCalendarGridBtnLargeWrapper = styled(DateCalendarGridBtn)`
+export const DateCalendarGridBtnLarge = styled(DateCalendarGridBtn)`
   min-width: 80px;
   min-height: 52px;
   padding: ${({ theme }) => theme.spacing(4, 2)};
