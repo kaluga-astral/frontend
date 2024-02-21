@@ -1,14 +1,25 @@
-import {type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
+import { Stack, useTheme, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 
+import { Grid } from '../Grid';
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
 import { ActionCell, type Actions } from '../ActionCell';
-
 import { Tag } from './Tag';
 import { TagColors } from './enums';
+
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=427-5580&mode=design&t=PhoMqy1NqsaRreET-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Tag> = {
+  title: 'Components/Tag',
+  component: Tag,
+};
+
+export default meta;
 
 type Story = StoryObj<typeof Tag>;
 
@@ -248,10 +259,6 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export default {
-  title: 'Components/Tag',
-  component: Tag,
-};
 
 export const Interaction: Story = {
   args: {
@@ -299,77 +306,135 @@ export const Example = () => {
   )
 };
 
-export const Variants = () => {
+/**
+ * Статичный компонент без возможности взаимодействия.
+ */
+
+export const Static = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
   return(
     <>
-      <Tag label="Text" variant="text" />
-      <Tag label="Light gray" variant="light" color="grey" />
-      <Tag label="Contained primary" variant="contained" color="primary" />
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag label="Text" variant="text" />
+        <Tag label="Light gray" variant="light" color="grey" />
+        <Tag label="Light primary" variant="light" color="primary" />
+        <Tag label="Contained primary" variant="contained" color="primary" />
+      </Grid>
     </>
   )
-};
+}
+
+/**
+ * К тэгу может быть добавлен цвет.
+ */
 
 export const Colors = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
   return(
     <>
-      <Tag label="Primary light" variant="light" color="primary" /> 
-      <Tag label="Error contained" variant="contained" color="error" />
-      <Tag label="Success light" variant="light" color="success" />
-      <Tag label="Warning contained" variant="contained" color="warning" />
-      <Tag label="Grey" color="grey" /> 
-      <Tag label="Default" color="default" /> 
+      <Grid container spacing={5}>
+        <Grid container direction={autoFlow} spacing={8} columns="repeat(3, auto)">
+          <Tag label="Primary light" variant="light" color="primary" /> 
+          <Tag label="Error light" variant="light" color="error" /> 
+          <Tag label="Success light" variant="light" color="success" />
+          <Tag label="Warning light" variant="light" color="warning" />
+          <Tag label="Grey light" variant="light" color="grey" />
+          <Tag label="Default light" variant="light" color="default" />
+        </Grid>
+        <Grid container direction={autoFlow} spacing={8} columns="repeat(3, auto)">
+          <Tag label="Primary contained" variant="contained" color="primary" /> 
+          <Tag label="Error contained" variant="contained" color="error" /> 
+          <Tag label="Success contained" variant="contained" color="success" />
+          <Tag label="Warning contained" variant="contained" color="warning" />
+          <Tag label="Grey contained" variant="contained" color="grey" />
+          <Tag label="Default contained" variant="contained" color="default" />
+        </Grid>
+      </Grid>
     </>
   )
 };
 
+/**
+ * Тэг позволяющий фильтровать контент страницы при нажатии. Тэг можно удалить при необходимости.
+ */
+
 export const Removable = () => {
-  const deleteFunc = () =>
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+  
+  const handleDelete = () =>
   {
     console.log("deleted")
   }
+
   return(
     <>
-      <Tag 
-        color="grey" 
-        label="Default" 
-        onDelete={deleteFunc}
-        />
-      <Tag 
-        avatar={svgAvatar} 
-        label="Default" 
-        onDelete={deleteFunc}/>
-      <Tag 
-        label="Default" 
-        variant="text" 
-        endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        onDelete={deleteFunc} 
-      />
+      <Grid container spacing={8} direction={autoFlow}>
         <Tag 
-        disabled
-        label="Disabled"  
-        onDelete={() => console.log('не нажмётся в дизейбле')}
+          color="grey" 
+          label="Default" 
+          onDelete={handleDelete}
+          />
+        <Tag 
+          avatar={svgAvatar} 
+          label="Default" 
+          onDelete={handleDelete}/>
+        <Tag 
+          label="Default" 
+          variant="text" 
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          onDelete={handleDelete} 
         />
+        <Tag 
+          disabled
+          label="Disabled"  
+          onDelete={() => console.log('не нажмётся в дизейбле')}
+        />
+      </Grid>
     </>
   )
 };
+
+/**
+ * 3 стандартных размера тэга: small, medium, large.
+ */
 
 export const Sizes = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
   return(
     <>
-      <Tag label="Small" variant="light" color="grey" size="small" />
-      <Tag label="Medium" variant="light" color="grey" size="medium" />
-      <Tag label="Large" variant="light" color="grey" size="large" />
+      <Grid container spacing={8} direction={autoFlow} style={{ alignItems: "center" }}>
+        <Tag label="Small" variant="light" color="grey" size="small" />
+        <Tag label="Medium" variant="light" color="grey" size="medium" />
+        <Tag label="Large" variant="light" color="grey" size="large" />
+      </Grid>
     </>
   )
 };
 
+/**
+ * Дополнительные элементы.
+ */
+
 export const Adornment = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
   return(
     <>
-      <Tag avatar={svgAvatar} color="grey" label="Default" />
-      <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light'/>
-      <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light' onDelete={() => console.log("deleted")}/>
-      <Tag label="Default" variant="text" endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />} />
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag avatar={svgAvatar} color="grey" label="Default" />
+        <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light'/>
+        <Tag avatar={<ManOutlineSm />} label="Default" onDelete={() => console.log("deleted")}/>
+        <Tag label="Default" variant="text" endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />} />
+      </Grid>
     </>
   )
 };
