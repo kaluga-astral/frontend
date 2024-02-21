@@ -10,7 +10,7 @@ import {
   type DataGridRow,
   type DataGridSort,
 } from '../types';
-import { DataGridInfiniteHead } from '../../DataGridInfinite/styles';
+import { DataGridInfiniteHead } from '../styles';
 
 export type DataGridHeadProps<
   Data extends object = DataGridRow,

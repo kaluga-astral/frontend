@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { ActionCell, type Actions } from '../ActionCell';
 import { type DataGridColumns } from '../DataGrid';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 
 import { DataGridInfinite } from './DataGridInfinite';
 import { makeDataList } from './faker';

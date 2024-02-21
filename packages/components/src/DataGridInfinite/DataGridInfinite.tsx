@@ -6,16 +6,15 @@ import {
 } from 'react-virtuoso';
 import { ChevronUpOutlineMd } from '@astral/icons';
 
-import { Table, TableBody, TableCell, TableRow } from '../Table';
+import { Table, TableBody, TableRow } from '../Table';
 import { type DataGridProps, type DataGridRow } from '../DataGrid';
 import { DataGridHead } from '../DataGrid/DataGridHead';
 import { CircularProgress } from '../CircularProgress';
-import { Checkbox } from '../Checkbox';
 import { DataGridCell } from '../DataGrid/DataGridCell';
 import { useToggle } from '../hooks';
 import { useDataGridCommonUtils } from '../DataGrid/hooks';
 import { Typography } from '../Typography';
-import DataGridLoader from '../DataGrid/DataGridLoader/DataGridLoader';
+import { DataGridLoader } from '../DataGrid/DataGridLoader';
 
 import {
   DataGridInfiniteContainer,
@@ -28,6 +27,7 @@ import {
   END_OF_SCROLL_MESSAGE,
   OVERSCAN_COUNT,
 } from './constants';
+import { DataGridInfiniteTableRow } from './DataGridInfiniteTableRow';
 
 type DataGridInfiniteProps<
   Data extends Record<string, unknown>,
@@ -39,12 +39,12 @@ type DataGridInfiniteProps<
    */
   onEndReached?: () => void;
   /**
-   * @description флаг достижения конца списка
+   * флаг достижения конца списка
    */
   isEndReached?: boolean;
 };
 
-export function DataGridInfinite<
+export const DataGridInfinite = <
   Data extends Record<string, unknown> = DataGridRow,
   SortField extends keyof Data = keyof Data,
 >({
@@ -65,34 +65,39 @@ export function DataGridInfinite<
   className,
   onEndReached,
   isEndReached,
-}: DataGridInfiniteProps<Data, SortField>) {
-  const {
-    handleSelectAllRows,
-    handleSelectRow,
-    uncheckedRowsCount,
-    renderedPlaceholder,
-  } = useDataGridCommonUtils<Data>({
-    rows,
-    selectedRows,
-    keyId,
-    onSelectRow,
-    noDataPlaceholder,
-    loading,
-  });
+}: DataGridInfiniteProps<Data, SortField>) => {
+  const { handleSelectAllRows, uncheckedRowsCount, renderedPlaceholder } =
+    useDataGridCommonUtils<Data>({
+      rows,
+      selectedRows,
+      keyId,
+      onSelectRow,
+      noDataPlaceholder,
+      loading,
+    });
 
   const virtuoso = useRef<VirtuosoHandle>(null);
   const dataLength = rows?.length || 0;
-  const selectable = Boolean(onSelectRow);
+  const isSelectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
+  const handleScrollToTop = () => {
+    virtuoso.current?.scrollIntoView({ index: 0, behavior: 'smooth' });
+  };
+
+  const handleEndReach = useCallback(() => {
+    if (!isEndReached && onEndReached) {
+      onEndReached();
+    }
+  }, [isEndReached, onEndReached]);
 
   const renderCells = useCallback(
     (row: Data, rowId: string) => {
       return columns.map((cell, index) => {
-        const cellId = `${rowId}-${index}`;
+        const cellKey = `${rowId}-${index}`;
 
         return (
           <DataGridCell<Data>
-            key={cellId}
+            key={cellKey}
             row={row}
             cell={cell}
             emptyCellValue={emptyCellValue}
@@ -110,9 +115,11 @@ export function DataGridInfinite<
     (range: ListRange) => {
       if (range.startIndex > 2) {
         showStickyButton();
-      } else {
-        hideStickyButton();
+
+        return;
       }
+
+      hideStickyButton();
     },
     [hideStickyButton, showStickyButton],
   );
@@ -124,10 +131,9 @@ export function DataGridInfinite<
           className="virtuosoScroller"
           style={{ height: '100%', width: '100%' }}
           ref={virtuoso}
-          data-testid="virtuoso-scroller"
           overscan={OVERSCAN_COUNT}
           defaultItemHeight={DEFAULT_ROW_HEIGHT}
-          endReached={isEndReached ? undefined : onEndReached}
+          endReached={handleEndReach}
           rangeChanged={handleRangeChanged}
           data={rows}
           components={{
@@ -137,45 +143,19 @@ export function DataGridInfinite<
                 {rows.length ? children : renderedPlaceholder}
               </TableBody>
             )),
-            TableRow: (props) => {
-              const row = props.item;
-              const rowId = row[keyId] as string;
-              const checked =
-                selectable &&
-                Boolean(
-                  selectedRows.find(
-                    (selectedRow) => selectedRow[keyId] === rowId,
-                  ),
-                );
-              const handleRowClick = (itemRow: Data) => () => {
-                if (onRowClick) {
-                  onRowClick(itemRow);
-                }
-              };
-
-              return (
-                <TableRow
-                  key={keyId}
-                  hover={Boolean(onRowClick)}
-                  selected={activeRowId === rowId}
-                  onClick={handleRowClick(row)}
-                  {...props}
-                >
-                  {selectable && (
-                    <TableCell
-                      padding="checkbox"
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      <Checkbox
-                        checked={checked}
-                        onChange={handleSelectRow(row)}
-                      />
-                    </TableCell>
-                  )}
-                  {renderCells(row, rowId)}
-                </TableRow>
-              );
-            },
+            TableRow: ({ item, ...props }) => (
+              <DataGridInfiniteTableRow<Data>
+                renderCells={renderCells}
+                selectedRows={selectedRows}
+                keyId={keyId}
+                isSelectable={isSelectable}
+                item={item}
+                activeRowId={activeRowId}
+                onSelectRow={onSelectRow}
+                onRowClick={onRowClick}
+                {...props}
+              />
+            ),
           }}
           fixedHeaderContent={() => (
             <DataGridHead<Data, SortField>
@@ -184,7 +164,7 @@ export function DataGridInfinite<
               rowsCount={rows.length}
               uncheckedRowsCount={uncheckedRowsCount}
               onSelectAllRows={handleSelectAllRows}
-              selectable={selectable}
+              selectable={isSelectable}
               sorting={sorting}
               columns={columns}
             />
@@ -192,13 +172,13 @@ export function DataGridInfinite<
           fixedFooterContent={() => (
             <TableRow>
               <DataGridInfiniteLoaderWrapper
-                colSpan={selectable ? columns.length + 1 : columns.length}
+                colSpan={isSelectable ? columns.length + 1 : columns.length}
               >
                 {loading && Boolean(dataLength) && (
                   <CircularProgress color="primary" size="medium" />
                 )}
                 {isEndReached && (
-                  <Typography color={'textSecondary'}>
+                  <Typography color="textSecondary">
                     {END_OF_SCROLL_MESSAGE}
                   </Typography>
                 )}
@@ -211,15 +191,11 @@ export function DataGridInfinite<
             vertical="bottom"
             horizontal="right"
             icon={<ChevronUpOutlineMd />}
-            onClick={() =>
-              virtuoso.current?.scrollIntoView({ index: 0, behavior: 'smooth' })
-            }
+            onClick={handleScrollToTop}
           />
         )}
       </DataGridInfiniteTableContainer>
-      {loading && !dataLength && (
-        <DataGridLoader disabled={disabled} loading={loading} />
-      )}
+      {loading && !dataLength && <DataGridLoader disabled={disabled} loading />}
     </DataGridInfiniteContainer>
   );
-}
+};

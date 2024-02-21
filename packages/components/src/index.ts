@@ -48,6 +48,8 @@ export * from './DashboardLayout';
 
 export * from './DataGrid';
 
+export * from './DataGridInfinite';
+
 export * from './DataGridPagination';
 
 export * from './DatePicker';

@@ -1,12 +1,20 @@
 import { type TableContainerProps } from '@mui/material';
 
 import { styled } from '../styles';
-import { TableContainer } from '../Table';
+import { TableContainer, TableRow } from '../Table';
 
 type StyledTableContainerProps = TableContainerProps & {
   maxHeight?: number;
   inert?: '' | false;
 };
+
+export const DataGridInfiniteHead = styled(TableRow)`
+  background: ${({ theme }) => theme.palette.background.default};
+
+  td {
+    border-bottom: ${({ theme }) => `2px solid ${theme.palette.grey['300']}`};
+  }
+`;
 
 export const DataGridContainer = styled.div<StyledTableContainerProps>`
   position: relative;

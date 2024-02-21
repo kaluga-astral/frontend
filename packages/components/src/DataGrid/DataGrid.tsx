@@ -4,7 +4,6 @@ import { Table } from '../Table';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
-import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
   DataGridContainer,
@@ -17,6 +16,7 @@ import {
   type DataGridSort,
 } from './types';
 import { useDataGridCommonUtils } from './hooks';
+import { DataGridLoader } from './DataGridLoader';
 
 export type DataGridProps<
   Data extends Record<string, unknown> = DataGridRow,

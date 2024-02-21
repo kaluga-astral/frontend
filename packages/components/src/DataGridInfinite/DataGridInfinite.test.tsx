@@ -63,7 +63,7 @@ describe('DataGridInfinite', () => {
         width: '1%',
       },
     ];
-    const handleEndReached = vi.fn();
+    const onEndReachedSpy = vi.fn();
 
     render(
       <ThemeProvider theme={theme}>
@@ -71,7 +71,7 @@ describe('DataGridInfinite', () => {
           <DataGridInfinite
             keyId="id"
             rows={fakeData}
-            onEndReached={handleEndReached}
+            onEndReached={onEndReachedSpy}
             columns={columns}
           />
         </DataGridInfiniteWrapper>

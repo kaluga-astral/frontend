@@ -14,16 +14,16 @@ export function useDataGridCommonUtils<
   noDataPlaceholder,
   loading,
 }: {
-  rows: Data[];
+  rows?: Data[];
   selectedRows: Data[];
   keyId: string;
   onSelectRow: ((rows: Data[]) => void) | undefined;
-  noDataPlaceholder: ReactNode;
+  noDataPlaceholder?: ReactNode;
   loading?: boolean;
 }) {
   const handleSelectAllRows = useCallback(
     (event: ChangeEvent<HTMLInputElement>): void => {
-      if (!onSelectRow) {
+      if (!onSelectRow || typeof rows === 'undefined') {
         return;
       }
 
@@ -63,6 +63,10 @@ export function useDataGridCommonUtils<
   );
 
   const uncheckedRowsCount = useMemo(() => {
+    if (typeof rows === 'undefined') {
+      return 0;
+    }
+
     return rows.filter(
       (row) =>
         !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId]),
