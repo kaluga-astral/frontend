@@ -1,11 +1,6 @@
 import { type ReactNode, useMemo } from 'react';
 
-import {
-  FormHelperTextErrorIcon,
-  FormHelperTextMessage,
-  FormHelperTextSuccessIcon,
-  FormHelperTextWrapper,
-} from './styles';
+import { ErrorIcon, Message, SuccessIcon, Wrapper } from './styles';
 
 export type FormHelperTextContentProps = {
   success?: boolean;
@@ -20,11 +15,11 @@ export const FormHelperTextContent = ({
 }: FormHelperTextContentProps) => {
   const Icon = useMemo(() => {
     if (success) {
-      return <FormHelperTextSuccessIcon />;
+      return <SuccessIcon />;
     }
 
     if (error) {
-      return <FormHelperTextErrorIcon />;
+      return <ErrorIcon />;
     }
 
     return null;
@@ -32,10 +27,10 @@ export const FormHelperTextContent = ({
 
   if (children) {
     return (
-      <FormHelperTextWrapper error={error} success={success}>
+      <Wrapper error={error} success={success}>
         {Icon}
-        <FormHelperTextMessage>{children}</FormHelperTextMessage>
-      </FormHelperTextWrapper>
+        <Message>{children}</Message>
+      </Wrapper>
     );
   }
 

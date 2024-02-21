@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const MenuGroupLabel = styled(Typography)`
+export const Label = styled(Typography)`
   display: block;
 
   width: 100%;
@@ -11,7 +11,7 @@ export const MenuGroupLabel = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey[700]};
 `;
 
-export const MenuGroupContent = styled.li`
+export const Content = styled.li`
   width: 100%;
 
   & ul {

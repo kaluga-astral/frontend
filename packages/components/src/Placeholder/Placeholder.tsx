@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 
 import {
-  PlaceholderActions,
-  PlaceholderDescription,
-  PlaceholderImage,
-  PlaceholderInnerContainer,
-  PlaceholderRoot,
-  PlaceholderTitle,
+  Description,
+  Footer,
+  Image,
+  InnerContainer,
+  Title,
+  Wrapper,
 } from './styles';
 
 export type PlaceholderProps = {
@@ -50,10 +50,10 @@ export const Placeholder = ({
   Actions,
 }: PlaceholderProps) => {
   return (
-    <PlaceholderRoot>
-      <PlaceholderInnerContainer>
+    <Wrapper>
+      <InnerContainer>
         {imgSrc && (
-          <PlaceholderImage
+          <Image
             src={imgSrc}
             alt={imgAlt}
             width={imgWidth}
@@ -61,15 +61,11 @@ export const Placeholder = ({
           />
         )}
 
-        <PlaceholderTitle variant="h5">{title}</PlaceholderTitle>
-        {description && (
-          <PlaceholderDescription variant="ui">
-            {description}
-          </PlaceholderDescription>
-        )}
-      </PlaceholderInnerContainer>
+        <Title variant="h5">{title}</Title>
+        {description && <Description variant="ui">{description}</Description>}
+      </InnerContainer>
 
-      {Actions && <PlaceholderActions>{Actions}</PlaceholderActions>}
-    </PlaceholderRoot>
+      {Actions && <Footer>{Actions}</Footer>}
+    </Wrapper>
   );
 };

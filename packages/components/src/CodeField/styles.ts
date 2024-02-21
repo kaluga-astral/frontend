@@ -1,12 +1,12 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const CodeFieldWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const CodeFieldDigitsWrapper = styled.ul`
+export const DigitsWrapper = styled.ul`
   display: flex;
   gap: ${({ theme }) => theme.spacing(3)};
 
@@ -14,11 +14,11 @@ export const CodeFieldDigitsWrapper = styled.ul`
   padding: 0;
 `;
 
-export const CodeFieldDigitsItem = styled.li`
+export const DigitsItem = styled.li`
   list-style-type: none;
 `;
 
-export const CodeFieldDigit = styled.input<{ isError?: boolean }>`
+export const Digit = styled.input<{ isError?: boolean }>`
   width: 62px;
   height: 60px;
   padding: ${({ theme }) => theme.spacing(4, 6)};
@@ -36,6 +36,6 @@ export const CodeFieldDigit = styled.input<{ isError?: boolean }>`
   outline: none;
 `;
 
-export const CodeFieldLabel = styled(Typography)`
+export const FieldLabel = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;

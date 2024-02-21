@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const PageAsideWrapper = styled.aside`
+export const Wrapper = styled.aside`
   overflow: auto;
   grid-area: aside;
 

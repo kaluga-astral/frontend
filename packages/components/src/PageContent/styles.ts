@@ -6,7 +6,7 @@ type PageContentWrapperProps = {
   isHeaderActionsShown: boolean;
 };
 
-export const PageContentWrapper = styled.article<PageContentWrapperProps>`
+export const Wrapper = styled.article<PageContentWrapperProps>`
   scroll-behavior: smooth;
 
   overflow: auto;
