@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 type DataType = {
   id: string;
   documentName: string;
@@ -6,27 +8,18 @@ type DataType = {
 };
 
 const makeRandomDate = () => {
-  const start = new Date(2022, 0, 1);
-  const end = new Date();
-  const randomTimestamp =
-    start.getTime() + Math.random() * (end.getTime() - start.getTime());
-  const randomDate = new Date(randomTimestamp);
+  const randomDate = faker.date.recent();
 
   return randomDate.toISOString();
 };
 
-export const makeDataList = (
-  dataObjTemplate: DataType,
-  length: number,
-): DataType[] => {
+export const makeDataList = (length: number = 10): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
 
-  return Array.from({ length })
-    .fill(dataObjTemplate)
-    .map((_, i) => ({
-      id: String(i + 1),
-      documentName: `Документ ${i + 1}`,
-      direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
-      createDate: makeRandomDate(),
-    }));
+  return Array.from({ length }).map((_, i) => ({
+    id: faker.string.uuid(),
+    documentName: `Документ ${i + 1}`,
+    direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
+    createDate: makeRandomDate(),
+  }));
 };

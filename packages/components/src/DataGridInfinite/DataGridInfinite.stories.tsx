@@ -35,39 +35,8 @@ const DataGridInfiniteWrapper = styled.div`
   width: 100%;
 `;
 
-const generateRandomDate = () => {
-  const start = new Date(2022, 0, 1);
-  const end = new Date();
-  const randomTimestamp =
-    start.getTime() + Math.random() * (end.getTime() - start.getTime());
-  const randomDate = new Date(randomTimestamp);
-
-  return randomDate.toISOString();
-};
-
-const generateData = (dataObjTemplate: DataType): DataType[] => {
-  const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
-  const DATA_ARRAY_LENGTH = 16;
-
-  return Array.from({ length: DATA_ARRAY_LENGTH })
-    .fill(dataObjTemplate)
-    .map((_, i) => ({
-      id: String(i + 1),
-      documentName: `Документ ${i + 1}`,
-      direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
-      createDate: generateRandomDate(),
-    }));
-};
-
 export const Example = () => {
-  const DATA_OBJECT_TEMPLATE = {
-    id: '1',
-    documentName: 'Документ 1',
-    direction: 'ФНС',
-    createDate: '2022-03-24T17:50:40.206Z',
-  };
-
-  const data = generateData(DATA_OBJECT_TEMPLATE);
+  const data = makeDataList(10);
 
   const ACTIONS: Actions<DataType> = {
     main: [
@@ -137,11 +106,7 @@ export const Example = () => {
     setLoading(true);
 
     setTimeout(() => {
-      setSlicedData((prevData) => [
-        ...prevData,
-        ...makeDataList(DATA_OBJECT_TEMPLATE, 10),
-      ]);
-
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
       setIsEndReached(true);
       setLoading(false);
     }, 1500);

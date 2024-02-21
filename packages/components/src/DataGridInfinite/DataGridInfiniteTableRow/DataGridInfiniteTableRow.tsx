@@ -3,7 +3,7 @@ import { Checkbox } from '../../Checkbox';
 import { useDataGridCommonUtils } from '../../DataGrid/hooks';
 
 type DataGridInfiniteTableRowProps<Data extends Record<string, unknown>> = {
-  item: Data;
+  row: Data;
   renderCells: (row: Data, rowId: string) => JSX.Element[];
   keyId: string;
   isSelectable: boolean;
@@ -14,7 +14,7 @@ type DataGridInfiniteTableRowProps<Data extends Record<string, unknown>> = {
 };
 
 export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
-  item,
+  row,
   keyId,
   isSelectable,
   selectedRows = [],
@@ -29,7 +29,6 @@ export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
     keyId,
     onSelectRow,
   });
-  const row = item;
   const rowId = row[keyId] as string;
   const checked =
     isSelectable &&

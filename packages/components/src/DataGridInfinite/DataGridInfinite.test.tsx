@@ -22,13 +22,6 @@ const DataGridInfiniteWrapper = styled.div`
   width: 100%;
 `;
 
-const DATA_OBJECT_TEMPLATE = {
-  id: '1',
-  documentName: 'Документ 1',
-  direction: 'ФНС',
-  createDate: '2022-03-24T17:50:40.206Z',
-};
-
 type DataType = {
   id: string;
   documentName: string;
@@ -36,7 +29,7 @@ type DataType = {
   createDate: string;
 };
 
-const fakeData = makeDataList(DATA_OBJECT_TEMPLATE, 10);
+const fakeData = makeDataList(10);
 
 describe('DataGridInfinite', () => {
   it('Элементы рендерятся в таблице', async () => {
@@ -154,7 +147,7 @@ describe('DataGridInfinite', () => {
       return (
         <DataGrid<DataItem>
           keyId="name"
-          rows={[]}
+          rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
           sorting={sorting}
           onSort={handleSort}
           columns={columns}
