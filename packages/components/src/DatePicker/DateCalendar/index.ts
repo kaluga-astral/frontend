@@ -2,8 +2,8 @@ export * from './DateCalendarBody';
 
 export * from './DateCalendarHead';
 
-export * from './DateCalendarGridBtn';
+export * from './DateCalendarGridButton';
 
-export * from './DateCalendarGridBtnLarge';
+export * from './DateCalendarGridButtonLarge';
 
 export * from './styles';

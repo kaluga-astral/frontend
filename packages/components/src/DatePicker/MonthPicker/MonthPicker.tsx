@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
-  DateCalendarGridBtnLarge,
+  DateCalendarGridButtonLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
@@ -58,7 +58,7 @@ export const MonthPicker = ({
       />
       <DateCalendarGridLarge>
         {grid.map(({ month, date, ...props }, index) => (
-          <DateCalendarGridBtnLarge
+          <DateCalendarGridButtonLarge
             key={`${month}_${index}`}
             onClick={() => onChange?.(date)}
             title={titleFormat(date)}
@@ -67,7 +67,7 @@ export const MonthPicker = ({
             {...props}
           >
             {monthFormat(date)}
-          </DateCalendarGridBtnLarge>
+          </DateCalendarGridButtonLarge>
         ))}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>

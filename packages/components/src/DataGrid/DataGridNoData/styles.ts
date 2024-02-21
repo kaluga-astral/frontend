@@ -1,7 +1,7 @@
 import { Typography, type TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
-export const Wrapper = styled.tr`
+export const Row = styled.tr`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,7 +18,7 @@ export const Figure = styled.figure`
   align-items: center;
 `;
 
-export const Icon = styled.img`
+export const NoDataImg = styled.img`
   display: block;
 
   width: ${({ width }) => `${width}px` || '100%'};
