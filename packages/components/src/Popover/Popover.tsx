@@ -1,37 +1,39 @@
-import { Menu as MuiMenu, type MenuProps as MuiMenuProps } from '@mui/material';
+import {
+  Popover as MuiPopover,
+  type PopoverProps as MuiPopoverProps,
+} from '@mui/material';
 
-import { type WithoutEmotionSpecific } from '../types';
 import { useViewportType } from '../hooks/useViewportType';
 import { BottomDrawer } from '../BottomDrawer';
-import { MenuList } from '../MenuList';
+import { type WithoutEmotionSpecific } from '../types';
 
-export type MenuProps = WithoutEmotionSpecific<MuiMenuProps> & {
+export type PopoverProps = WithoutEmotionSpecific<MuiPopoverProps> & {
   /**
    * Заголовок для отображения в мобильной версии
    */
   title?: string;
 };
 
-export const Menu = ({
+export const Popover = ({
   children,
   onClose,
   open,
   title,
   ...restProps
-}: MenuProps) => {
+}: PopoverProps) => {
   const { isMobile } = useViewportType();
 
   if (isMobile) {
     return (
       <BottomDrawer title={title} onClose={onClose} open={open}>
-        <MenuList>{children}</MenuList>
+        {children}
       </BottomDrawer>
     );
   }
 
   return (
-    <MuiMenu open={open} onClose={onClose} {...restProps}>
+    <MuiPopover open={open} onClose={onClose} {...restProps}>
       {children}
-    </MuiMenu>
+    </MuiPopover>
   );
 };
