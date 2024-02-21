@@ -8,7 +8,7 @@ import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
-  DataGridContainer,
+  Container,
   DisabledTableContainer,
   StyledTableContainer,
 } from './styles';
@@ -202,7 +202,7 @@ export function DataGrid<
   }, [columns, rows]);
 
   return (
-    <DataGridContainer maxHeight={maxHeight} className={className}>
+    <Container maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
@@ -231,6 +231,6 @@ export function DataGrid<
       </TableContainer>
       <DataGridLoader disabled={disabled} loading={loading} />
       {Footer}
-    </DataGridContainer>
+    </Container>
   );
 }

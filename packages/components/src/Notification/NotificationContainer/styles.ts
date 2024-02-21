@@ -9,7 +9,7 @@ import { NOTIFY_CLASSNAME, NotificationVariantTypes } from '../constants';
 // потому что react-toastify не предоставляет,
 // достаточно контейнеров для стилизации через styled,
 // к примеру добраться до прогресс бара можно только через цсс классы
-export const NotificationsWrapper = styled.div`
+export const Wrapper = styled.div`
   .${NOTIFY_CLASSNAME} {
     padding: 0;
 
@@ -73,7 +73,7 @@ export const NotificationsWrapper = styled.div`
   }
 `;
 
-export const NotificationContainerInner = styled(ToastContainer)`
+export const Inner = styled(ToastContainer)`
   min-width: 400px;
   max-width: 400px;
 `;

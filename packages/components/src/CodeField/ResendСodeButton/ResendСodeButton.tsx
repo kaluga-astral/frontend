@@ -4,7 +4,7 @@ import useCountdown from '@bradgarropy/use-countdown';
 import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 
-import { ResendCodeButtonWrapper } from './styles';
+import { Wrapper } from './styles';
 
 type ResendCodeButtonProps = {
   /**
@@ -78,7 +78,7 @@ const ResendCodeButton = ({
   };
 
   return (
-    <ResendCodeButtonWrapper isError={isError}>
+    <Wrapper isError={isError}>
       <Button variant="link" disabled={disableButton} onClick={onClick}>
         Отправить код повторно
       </Button>
@@ -87,7 +87,7 @@ const ResendCodeButton = ({
           {time}
         </Typography>
       )}
-    </ResendCodeButtonWrapper>
+    </Wrapper>
   );
 };
 

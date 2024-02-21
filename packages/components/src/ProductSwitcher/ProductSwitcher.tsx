@@ -7,7 +7,7 @@ import { useMenu } from '../hooks';
 
 import { ProductSwitcherContent } from './ProductSwitcherContent';
 import { type WidgetProduct } from './types';
-import { WidgetMenu } from './styles';
+import { StyledMenu } from './styles';
 
 export type ProductSwitcherProps = {
   getProducts: () => Promise<Array<WidgetProduct>>;
@@ -56,7 +56,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
       >
         <ProductsFillMd />
       </IconButton>
-      <WidgetMenu
+      <StyledMenu
         open={open}
         anchorEl={anchorRef.current}
         onClose={handleCloseMenu}
@@ -66,7 +66,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
           isError={isError}
           products={products}
         />
-      </WidgetMenu>
+      </StyledMenu>
     </>
   );
 };

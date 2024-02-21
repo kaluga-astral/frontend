@@ -8,7 +8,7 @@ type OverflowTypographyWrapperProps = {
 
 // проверки на rowsCount в стилях нужны для того, чтобы элементы в одну строку обрезались бы по буквенно
 // но если нужно обрезание по нескольким строчкам, тогда элементы будут обрезаться по словам
-export const OverflowTypographyWrapper = styled(Typography, {
+export const StyledTypography = styled(Typography, {
   shouldForwardProp: (name) =>
     name !== 'rowsCount' && name !== 'hasMultipleRows',
 })<OverflowTypographyWrapperProps>`

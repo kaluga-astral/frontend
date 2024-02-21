@@ -3,7 +3,7 @@ import { type PropsWithChildren, forwardRef } from 'react';
 import { type TypographyProps } from '../Typography';
 import { Button } from '../Button';
 
-import { CollapsibleTypographyWrapper, CollapsibleWrapper } from './styles';
+import { CollapsibleWrapper, Wrapper } from './styles';
 import { useCollabsible } from './hooks';
 
 type CollapsibleProps = {
@@ -64,7 +64,7 @@ export const CollapsibleTypography = forwardRef<
 
     return (
       <CollapsibleWrapper>
-        <CollapsibleTypographyWrapper {...collapsibleProps} />
+        <Wrapper {...collapsibleProps} />
         {isCollapsable && (
           <Button variant="link" onClick={toggleCollapse}>
             {isOpenCollapse ? textHideButton : textShowButton}

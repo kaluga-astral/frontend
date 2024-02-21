@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { StyledListItemIcon } from './styled';
+import { StyledListItemIcon } from './styles';
 
 type ListItemIconProps = WithoutEmotionSpecific<MuiListItemIconProps>;
 

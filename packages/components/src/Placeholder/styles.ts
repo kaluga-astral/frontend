@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const PlaceholderRoot = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(4)};
@@ -21,12 +21,12 @@ export const PlaceholderRoot = styled.div`
   }
 `;
 
-export const PlaceholderInnerContainer = styled.div`
+export const InnerContainer = styled.div`
   max-width: 384px;
   margin: 0 auto;
 `;
 
-export const PlaceholderImage = styled.img`
+export const Image = styled.img`
   display: block;
 
   width: ${({ width }) => width || 'auto'};
@@ -43,7 +43,7 @@ export const PlaceholderImage = styled.img`
   }
 `;
 
-export const PlaceholderTitle = styled(Typography)`
+export const Title = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(2)};
 
   text-align: center;
@@ -57,7 +57,7 @@ export const PlaceholderTitle = styled(Typography)`
   }
 `;
 
-export const PlaceholderDescription = styled(Typography)`
+export const Description = styled(Typography)`
   display: block;
 
   text-align: center;
@@ -67,7 +67,7 @@ export const PlaceholderDescription = styled(Typography)`
   }
 `;
 
-export const PlaceholderActions = styled.footer`
+export const Footer = styled.footer`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing(2)};
