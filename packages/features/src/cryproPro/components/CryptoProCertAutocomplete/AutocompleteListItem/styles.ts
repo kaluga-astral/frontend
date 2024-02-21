@@ -7,7 +7,7 @@ import {
   styled,
 } from '@astral/ui';
 
-export const AvatarIcon = styled(Avatar)`
+export const StyledAvatar = styled(Avatar)`
   background-color: ${({ theme }) => theme.palette.primary[800]};
 `;
 

@@ -4,12 +4,12 @@ import { ListItemAvatar, OverflowTypography } from '@astral/ui';
 import { type CertificateType } from '../../../constants';
 
 import {
-  AvatarIcon,
   Content,
   GroupMenuItem,
   Label,
   LabelTitle,
   SideLabel,
+  StyledAvatar,
   StyledListItemIcon,
 } from './styles';
 import { getShortFullName } from './utils';
@@ -69,7 +69,7 @@ export const AutocompleteListItem = ({
     <GroupMenuItem {...restProps} disabled={disabled} checked={checked}>
       <StyledListItemIcon>
         <ListItemAvatar>
-          <AvatarIcon>{type}</AvatarIcon>
+          <StyledAvatar>{type}</StyledAvatar>
         </ListItemAvatar>
       </StyledListItemIcon>
       <Content>

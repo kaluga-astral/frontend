@@ -3,7 +3,7 @@ import { type PopperProps } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../../types';
 
-import { PopoverInner, Wrapper } from './styles';
+import { PopoverInner, StyledPopper } from './styles';
 
 /**
  * @description тупл для соответсвтия попперовскому способу задания отступов, 1е число по X, второе по Y
@@ -35,7 +35,7 @@ export const DatePickerPopover = ({
   offset = DEFAULT_OFFSET,
   ...props
 }: DatePickerPopoverProps) => (
-  <Wrapper
+  <StyledPopper
     placement="bottom-start"
     {...props}
     disablePortal
@@ -49,5 +49,5 @@ export const DatePickerPopover = ({
     ]}
   >
     <PopoverInner>{children}</PopoverInner>
-  </Wrapper>
+  </StyledPopper>
 );

@@ -12,6 +12,6 @@ export const PopoverInner = styled.div`
   box-shadow: ${({ theme }) => theme.elevation[200]};
 `;
 
-export const Wrapper = styled(Popper)`
+export const StyledPopper = styled(Popper)`
   z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;
