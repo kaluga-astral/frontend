@@ -21,7 +21,33 @@ describe('DataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: отображается иконка сортировки при двух или более записях', () => {
+    type DataItem = {
+      name: string;
+    };
+
+    const columns: DataGridColumns<DataItem>[] = [
+      {
+        field: 'name',
+        label: 'Наименование',
+        sortable: true,
+      },
+    ];
+
+    renderWithTheme(
+      <DataGrid<DataItem>
+        keyId="id"
+        rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
+        columns={columns}
+      />,
+    );
+
+    const icon = screen.getByText('Наименование').querySelector('svg');
+
+    expect(icon).not.toBeNull();
+  });
+
+  it('Props:columns:sortable: не отображается иконка сортировки при отсутствии данных или при одной записи', () => {
     const columns = [
       {
         field: 'name',
@@ -34,7 +60,7 @@ describe('DataGrid', () => {
 
     const icon = screen.getByText('Наименование').querySelector('svg');
 
-    expect(icon).not.toBeNull();
+    expect(icon).toBeNull();
   });
 
   it('Props:columns:sortable: по клику на head cell вызывается onSort', async () => {
@@ -62,7 +88,7 @@ describe('DataGrid', () => {
       return (
         <DataGrid<DataItem>
           keyId="name"
-          rows={[]}
+          rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
           sorting={sorting}
           onSort={handleSort}
           columns={columns}

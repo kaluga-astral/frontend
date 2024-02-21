@@ -1,9 +1,11 @@
-import { type ReactNode, useCallback } from 'react';
+import { type ChangeEvent, type ReactNode, useCallback, useMemo } from 'react';
 
 import { Table } from '../Table';
+import { prop, uniqBy } from '../utils';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
+import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
   DataGridContainer,
@@ -15,8 +17,6 @@ import {
   type DataGridRow,
   type DataGridSort,
 } from './types';
-import { useDataGridCommonUtils } from './hooks';
-import { DataGridLoader } from './DataGridLoader';
 
 export type DataGridProps<
   Data extends Record<string, unknown> = DataGridRow,
@@ -130,21 +130,60 @@ export function DataGrid<
   emptyCellValue,
   className,
 }: DataGridProps<Data, SortField>) {
-  const { handleSelectAllRows, handleSelectRow, uncheckedRowsCount } =
-    useDataGridCommonUtils<Data>({
-      rows,
-      selectedRows,
-      keyId,
-      onSelectRow,
-      noDataPlaceholder,
-      loading,
-    });
   const selectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
 
   const TableContainer = isTableDisabled
     ? DisabledTableContainer
     : StyledTableContainer;
+
+  const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (!onSelectRow) {
+      return;
+    }
+
+    if (event.target.checked) {
+      const mergedSelectedRows = uniqBy(
+        [...selectedRows, ...rows],
+        prop(keyId),
+      );
+
+      return onSelectRow(mergedSelectedRows);
+    }
+
+    const filteredRows = selectedRows.filter(
+      (selectedRow) => !rows.find((row) => row[keyId] === selectedRow[keyId]),
+    );
+
+    onSelectRow(filteredRows);
+  };
+
+  const handleSelectRow = useCallback(
+    (row: Data) =>
+      (event: ChangeEvent<HTMLInputElement>): void => {
+        if (!onSelectRow) {
+          return;
+        }
+
+        if (event.target.checked) {
+          return onSelectRow([...selectedRows, row]);
+        }
+
+        return onSelectRow(
+          selectedRows.filter(
+            (selectedRow) => selectedRow[keyId] !== row[keyId],
+          ),
+        );
+      },
+    [selectedRows, onSelectRow, keyId],
+  );
+
+  const uncheckedRowsCount = useMemo(() => {
+    return rows.filter(
+      (row) =>
+        !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId]),
+    ).length;
+  }, [rows, selectedRows, keyId]);
 
   const renderedPlaceholder = useCallback(() => {
     if (!loading) {
@@ -153,6 +192,14 @@ export function DataGrid<
 
     return null;
   }, [noDataPlaceholder, loading]);
+
+  const processedColumns = useCallback(() => {
+    if (rows.length <= 1) {
+      return columns.map((column) => ({ ...column, sortable: false }));
+    }
+
+    return columns;
+  }, [columns, rows]);
 
   return (
     <DataGridContainer maxHeight={maxHeight} className={className}>
@@ -165,7 +212,7 @@ export function DataGrid<
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
             sorting={sorting}
-            columns={columns}
+            columns={processedColumns()}
           />
           <DataGridBody<Data>
             activeRowId={activeRowId}

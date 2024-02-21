@@ -20,3 +20,10 @@ export const NotificationListMain = styled('ul')`
 export const NotificationListHeader = styled(SideDialogHeader)`
   margin-right: ${({ theme }) => theme.spacing(2)};
 `;
+
+export const NotificationListFooter = styled('footer')`
+  display: flex;
+  justify-content: flex-end;
+
+  padding: ${({ theme }) => theme.spacing(4, 6)};
+`;

@@ -1,4 +1,4 @@
-import { styled } from '../../../styles';
+import { styled } from '../../styles';
 
 import { SidebarTogglerButton } from './SidebarToggleButton';
 
@@ -11,4 +11,8 @@ export const SidebarTogglerContent = styled.span`
   margin-left: ${({ theme }) => theme.spacing(4)};
 
   white-space: nowrap;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: none;
+  }
 `;

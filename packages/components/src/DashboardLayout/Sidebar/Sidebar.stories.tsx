@@ -22,6 +22,9 @@ import { SidebarButton } from './SidebarButton';
 const meta: Meta<typeof DashboardLayout.Sidebar> = {
   title: 'Components/DashboardLayout/Sidebar',
   component: DashboardLayout.Sidebar,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;

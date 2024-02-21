@@ -6,13 +6,19 @@ export { default as AddOrgOutlineMd } from './AddOrgOutlineMd';
 
 export { default as AddDocumentOutlineMd } from './AddDocumentOutlineMd';
 
+export { default as AddUserOutlineMd } from './AddUserOutlineMd';
+
 export { default as AllCheckOutlineMd } from './AllCheckOutlineMd';
 
 export { default as AnalyticOutlineMd } from './AnalyticOutlineMd';
 
 export { default as ArchiveOutlineMd } from './ArchiveOutlineMd';
 
+export { default as ArrowDwnOutlineMd } from './ArrowDwnOutlineMd';
+
 export { default as ArrowLOutlineMd } from './ArrowLOutlineMd';
+
+export { default as ArrowUpOutlineMd } from './ArrowUpOutlineMd';
 
 export { default as ArrowROutlineLg } from './ArrowROutlineLg';
 
@@ -43,6 +49,8 @@ export { default as CassOutlineMd } from './CassOutlineMd';
 export { default as CertOutlineMd } from './CertOutlineMd';
 
 export { default as CertAddOutlineMd } from './CertAddOutlineMd';
+
+export { default as CertGivenOutlineMd } from './CertGivenOutlineMd';
 
 export { default as CheckOutlineMd } from './CheckOutlineMd';
 
@@ -249,3 +257,5 @@ export { default as WarningFillMd } from './WarningFillMd';
 export { default as WarningFillSm } from './WarningFillSm';
 
 export { default as WebFillMd } from './WebFillMd';
+
+export { default as UnlinkOutlineMd } from './UnlinkOutlineMd';

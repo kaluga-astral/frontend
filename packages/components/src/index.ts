@@ -46,6 +46,11 @@ export * from './ContentState';
 
 export * from './DashboardLayout';
 
+export {
+  DashboardSidebarContext as SidebarContext,
+  type DashboardSidebarContextProps as SidebarContextProps,
+} from './DashboardSidebarProvider';
+
 export * from './DataGrid';
 
 export * from './DataGridInfinite';
@@ -161,6 +166,8 @@ export * from './Product';
 export * from './ProductSwitcher';
 
 export * from './Profile';
+
+export * from './ProgressBar';
 
 export * from './Radio';
 

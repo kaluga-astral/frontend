@@ -1,5 +1,7 @@
 import { type ElementType, type ReactElement, forwardRef } from 'react';
 
+import { useViewportType } from '../../../hooks/useViewportType';
+import { type ListItemTextProps } from '../../../ListItemText';
 import { Collapse } from '../../../Collapse';
 import { Tooltip } from '../../../Tooltip';
 
@@ -33,15 +35,35 @@ export const NavMenuItemButton = forwardRef<
     ...restProps
   } = props;
 
+  const { isMobile } = useViewportType();
+
+  const isGroupTitleItem = typeof opened === 'boolean';
+
+  const navMenuItemButtonTextProps: ListItemTextProps = {
+    [isMobile && isGroupTitleItem ? 'secondary' : 'primary']: text,
+    secondaryTypographyProps: {
+      variant: isGroupTitleItem ? 'caption' : 'body1',
+    },
+  };
+
   return (
-    <NavMenuItemButtonRoot ref={ref} component={component} {...restProps}>
-      <Tooltip arrow title={!collapsedIn && text} placement="right">
-        <NavMenuItemButtonIcon>{icon}</NavMenuItemButtonIcon>
-      </Tooltip>
+    <NavMenuItemButtonRoot
+      isGroupTitleItem={isGroupTitleItem}
+      ref={ref}
+      component={component}
+      {...restProps}
+    >
+      {!isMobile && (
+        <Tooltip arrow title={!collapsedIn && text} placement="right">
+          <NavMenuItemButtonIcon>{icon}</NavMenuItemButtonIcon>
+        </Tooltip>
+      )}
+
       <Collapse orientation="horizontal" in={collapsedIn}>
-        <NavMenuItemButtonText primary={text} />
+        <NavMenuItemButtonText {...navMenuItemButtonTextProps} />
       </Collapse>
-      {typeof opened === 'boolean' && (
+
+      {isGroupTitleItem && (
         <NavMenuItemButtonChevron collapsedIn={collapsedIn} opened={opened} />
       )}
     </NavMenuItemButtonRoot>
