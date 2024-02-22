@@ -4,7 +4,6 @@ import { fakerRU } from '@faker-js/faker';
 
 import { styled } from '../styles';
 import { Typography } from '../Typography';
-import { DataListItem } from '../DataListitem';
 
 import { DataList } from './DataList';
 
@@ -22,20 +21,18 @@ const meta: Meta<typeof DataList> = {
 
 export default meta;
 
-type MockDate = {
+type MockData = {
   id: string;
   title: string;
   organization: string;
 };
 
 const generateData = (length = 16) => {
-  return Array.from({ length })
-    .fill(null)
-    .map((_, i) => ({
-      id: fakerRU.string.uuid(),
-      title: `Договор на оказание услуг №${i + 1}`,
-      organization: fakerRU.company.name(),
-    }));
+  return Array.from({ length }).map((_, i) => ({
+    id: fakerRU.string.uuid(),
+    title: `Договор на оказание услуг №${i + 1}`,
+    organization: fakerRU.company.name(),
+  }));
 };
 
 const Container = styled.div`
@@ -45,8 +42,10 @@ const Container = styled.div`
 
 export const Example = () => {
   const [loading, setLoading] = useState(true);
-  const [slicedData, setSlicedData] = useState<MockDate[]>([]);
+  const [slicedData, setSlicedData] = useState<MockData[]>([]);
   const [isEndReached, setIsEndReached] = useState(false);
+
+  const TOTAL_COUNT = 40;
 
   const data = generateData();
 
@@ -57,17 +56,23 @@ export const Example = () => {
     }, 1500);
   }, []);
 
+  useEffect(() => {
+    if (slicedData.length >= TOTAL_COUNT) {
+      setIsEndReached(true);
+    }
+  }, [slicedData]);
+
   const incrementData = () => {
     setLoading(true);
 
     setTimeout(() => {
       setSlicedData((prevData) => [...prevData, ...generateData(10)]);
-      setIsEndReached(true);
       setLoading(false);
     }, 1500);
   };
 
-  const handleClick = () => alert('Click');
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
 
   return (
     <Container>
@@ -77,25 +82,33 @@ export const Example = () => {
         onEndReached={incrementData}
         isEndReached={isEndReached}
         isLoading={loading}
-        listItem={({ title, organization }) => (
-          <DataListItem onClick={handleClick}>
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
             <Typography>{title}</Typography>
             <Typography color="secondary">{organization}</Typography>
-          </DataListItem>
+          </div>
         )}
-        onRetry={() => undefined}
+        onRetry={incrementData}
       />
     </Container>
   );
 };
 
 export const NoData = () => {
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
+
   return (
     <Container>
       <DataList
         keyId="id"
         data={[]}
-        listItem={() => <DataListItem>item</DataListItem>}
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
+            <Typography>{title}</Typography>
+            <Typography color="secondary">{organization}</Typography>
+          </div>
+        )}
         onRetry={() => undefined}
       />
     </Container>
@@ -105,7 +118,8 @@ export const NoData = () => {
 export const LoadingWithData = () => {
   const data = generateData();
 
-  const handleClick = () => alert('Click');
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
 
   return (
     <Container>
@@ -113,11 +127,11 @@ export const LoadingWithData = () => {
         keyId="id"
         data={data}
         isLoading
-        listItem={({ title, organization }) => (
-          <DataListItem onClick={handleClick}>
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
             <Typography>{title}</Typography>
             <Typography color="secondary">{organization}</Typography>
-          </DataListItem>
+          </div>
         )}
         onRetry={() => undefined}
       />
@@ -128,7 +142,8 @@ export const LoadingWithData = () => {
 export const ErrorWithData = () => {
   const data = generateData();
 
-  const handleClick = () => alert('Click');
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
 
   const handleRetry = () => alert('Повторить запрос');
 
@@ -138,11 +153,11 @@ export const ErrorWithData = () => {
         keyId="id"
         data={data}
         isError
-        listItem={({ title, organization }) => (
-          <DataListItem onClick={handleClick}>
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
             <Typography>{title}</Typography>
             <Typography color="secondary">{organization}</Typography>
-          </DataListItem>
+          </div>
         )}
         onRetry={handleRetry}
       />
@@ -151,7 +166,8 @@ export const ErrorWithData = () => {
 };
 
 export const Loading = () => {
-  const handleClick = () => alert('Click');
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
 
   return (
     <Container>
@@ -159,11 +175,11 @@ export const Loading = () => {
         keyId="id"
         data={[]}
         isLoading
-        listItem={({ title, organization }) => (
-          <DataListItem onClick={handleClick}>
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
             <Typography>{title}</Typography>
             <Typography color="secondary">{organization}</Typography>
-          </DataListItem>
+          </div>
         )}
         onRetry={() => undefined}
       />
@@ -172,7 +188,8 @@ export const Loading = () => {
 };
 
 export const Error = () => {
-  const handleClick = () => alert('Click');
+  const handleClick = (itemIndex: number) =>
+    alert(`Clicked item with index ${itemIndex}`);
 
   const handleRetry = () => alert('Повторить запрос');
 
@@ -183,11 +200,11 @@ export const Error = () => {
         data={[]}
         isError
         errorMsg="Ошибка 500"
-        listItem={({ title, organization }) => (
-          <DataListItem onClick={handleClick}>
+        itemContent={({ title, organization }, { index, className }) => (
+          <div className={className} onClick={() => handleClick(index)}>
             <Typography>{title}</Typography>
             <Typography color="secondary">{organization}</Typography>
-          </DataListItem>
+          </div>
         )}
         onRetry={handleRetry}
       />

@@ -1,6 +1,11 @@
-import { renderWithTheme, screen } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen } from '@astral/tests';
+import { vi } from 'vitest';
+// import { VirtuosoMockContext } from 'react-virtuoso';
+// import { theme } from '@astral/tests/src/theme';
+// import { fakerRU } from '@faker-js/faker';
 
-import { DataListItem } from '../DataListitem';
+// import { ThemeProvider } from '../ThemeProvider';
+// import { Typography } from '../Typography';
 
 import { DataList } from './DataList';
 
@@ -10,7 +15,7 @@ describe('DataList', () => {
       <DataList
         keyId="id"
         data={[]}
-        listItem={() => <DataListItem>item</DataListItem>}
+        itemContent={() => <div>item</div>}
         onRetry={() => undefined}
       />,
     );
@@ -26,7 +31,7 @@ describe('DataList', () => {
         keyId="id"
         data={[]}
         isError
-        listItem={() => <DataListItem>item</DataListItem>}
+        itemContent={() => <div>item</div>}
         onRetry={() => undefined}
       />,
     );
@@ -36,13 +41,13 @@ describe('DataList', () => {
     expect(title).toBeVisible();
   });
 
-  it('Отображается лоадер при isLoading=true', () => {
+  it('Лоадер отображается при isLoading=true', () => {
     renderWithTheme(
       <DataList
         keyId="id"
         data={[]}
         isLoading
-        listItem={() => <DataListItem>item</DataListItem>}
+        itemContent={() => <div>item</div>}
         onRetry={() => undefined}
       />,
     );
@@ -52,13 +57,13 @@ describe('DataList', () => {
     expect(loader).toBeVisible();
   });
 
-  it('Отображается сообщение при достижении конца списка', () => {
+  it('Сообщение "Вы достигли конца списка" отображается при достижении конца списка', () => {
     renderWithTheme(
       <DataList
         keyId="id"
         data={[{ id: '1', name: 'test' }]}
         isEndReached
-        listItem={({ name }) => <DataListItem>{name}</DataListItem>}
+        itemContent={({ name }) => <div>{name}</div>}
         onRetry={() => undefined}
       />,
     );
@@ -67,4 +72,77 @@ describe('DataList', () => {
 
     expect(title).toBeVisible();
   });
+
+  it('onRetry вызывается при нажатии на кнопку "Попробовать снова"', () => {
+    const onRetrySpy = vi.fn();
+
+    renderWithTheme(
+      <DataList
+        keyId="id"
+        data={[]}
+        isError
+        itemContent={() => <div>item</div>}
+        onRetry={onRetrySpy}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button'));
+    expect(onRetrySpy).toHaveBeenCalled();
+  });
+
+  // TODO: не удается вызвать onEndReached при скроле
+  // Заведена отдельная задача на этот тест - https://track.astral.ru/soft/browse/UIKIT-1263
+  // it('onEndReached вызывается при прокрутке до конца текущего списка', async () => {
+  //   const makeDataList = (length: number = 10) =>
+  //     Array.from({ length }).map((_, i) => ({
+  //       id: fakerRU.string.uuid(),
+  //       title: `Договор на оказание услуг №${i + 1}`,
+  //       organization: fakerRU.company.name(),
+  //     }));
+
+  //   const onEndReachedSpy = vi.fn();
+
+  //   const { container } = render(
+  //     <ThemeProvider theme={theme}>
+  //       <DataList
+  //         keyId="id"
+  //         data={makeDataList()}
+  //         isError
+  //         itemContent={({ title, organization }) => (
+  //           <div onClick={() => undefined}>
+  //             <Typography>{title}</Typography>
+  //             <Typography color="secondary">{organization}</Typography>
+  //           </div>
+  //         )}
+  //         onEndReached={onEndReachedSpy}
+  //         onRetry={() => undefined}
+  //       />
+  //     </ThemeProvider>,
+  //     {
+  //       wrapper: ({ children }) => (
+  //         <VirtuosoMockContext.Provider
+  //           value={{ viewportHeight: 300, itemHeight: 66 }}
+  //         >
+  //           {children}
+  //         </VirtuosoMockContext.Provider>
+  //       ),
+  //     },
+  //   );
+
+  //   console.log('container offsetTop 1', container.getAttributeNode);
+  //   console.log('container scrollTop 1', container.scrollTop);
+  //   console.log('container children', container.lastChild);
+  //   console.log('container offsetTop 1', container.offsetTop);
+
+  //   // Прокручиваем список до конца
+  //   // await act(async () => {
+  //   //   container.lastChild.scrollTo(0, 720); // Прокручиваем до конца списка
+  //   //   container.lastChild.dispatchEvent(new Event('scroll'));
+  //   // });
+
+  //   fireEvent.scroll(container, { target: { scrollY: 720 } }); // вот тут контейнер чую кривой
+  //   console.log('container offsetTop 2', container.offsetTop);
+  //   console.log('container scrollTop 2', container.scrollTop);
+  //   expect(onEndReachedSpy).toHaveBeenCalled();
+  // });
 });

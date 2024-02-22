@@ -1,4 +1,4 @@
-import React, {
+import {
   type Key,
   type ReactNode,
   useCallback,
@@ -13,20 +13,20 @@ import { useViewportType } from '../hooks/useViewportType';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 
-import { OVERSCAN_COUNT } from './constants';
-import { DataListEndDate } from './DataListEndData';
+import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
+import { DataListEndData } from './DataListEndData';
 import { DataListError } from './DataListError';
 import { DataListLoader } from './DataListLoader';
 import { DataListNoData } from './DataListNoData';
-import { ScrollToStartButton } from './styles';
+import { Item, ScrollToStartButton } from './styles';
 
-export type DataListProps<T> = {
-  data?: Array<T>;
+export type DataListProps<TDataItem extends Record<string, unknown>> = {
+  data?: Array<TDataItem>;
 
   /**
    * Поле, используемое в качестве ключа списка
    */
-  keyId: T[keyof T] extends Key ? keyof T : never;
+  keyId: TDataItem[keyof TDataItem] extends Key ? keyof TDataItem : never;
 
   /**
    * Название класса, применяется к корневому компоненту
@@ -36,7 +36,7 @@ export type DataListProps<T> = {
   /**
    *  Используется для отображения placeholder при отсутствии данных в таблице
    */
-  noDataPlaceholder?: React.ReactNode;
+  noDataPlaceholder?: ReactNode;
 
   /**
    *  Сообщение, отображаемое при достижении конца списка
@@ -64,9 +64,12 @@ export type DataListProps<T> = {
   isEndReached?: boolean;
 
   /**
-   * Компонент карточки
+   * Содержание карточки
    */
-  listItem: (props: T) => ReactNode;
+  itemContent: (
+    dataItem: TDataItem,
+    { index, className }: { index: number; className: string },
+  ) => ReactNode;
 
   /**
    * Функция обработки нажатия на кнопку "Повторить запрос"
@@ -79,11 +82,11 @@ export type DataListProps<T> = {
   onEndReached?: () => void;
 };
 
-export const DataList = <T extends Record<string, unknown>>({
+export const DataList = <TDataItem extends Record<string, unknown>>({
   data,
   keyId,
   className,
-  listItem: ListItem,
+  itemContent,
   noDataPlaceholder,
   endOfScrollMsg,
   errorMsg,
@@ -92,7 +95,7 @@ export const DataList = <T extends Record<string, unknown>>({
   isEndReached,
   onRetry,
   onEndReached,
-}: DataListProps<T>) => {
+}: DataListProps<TDataItem>) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
 
   const { imagesMap } = useContext(ConfigContext);
@@ -123,6 +126,12 @@ export const DataList = <T extends Record<string, unknown>>({
     [virtuoso],
   );
 
+  const handleEndReach = useCallback(() => {
+    if (!isEndReached && onEndReached) {
+      onEndReached();
+    }
+  }, [isEndReached, onEndReached]);
+
   const isDataExist = Boolean(data?.length);
 
   if (!isDataExist && !isLoading && !isError) {
@@ -146,10 +155,13 @@ export const DataList = <T extends Record<string, unknown>>({
         data={data}
         ref={virtuoso}
         overscan={OVERSCAN_COUNT}
-        endReached={onEndReached}
+        endReached={handleEndReach}
         rangeChanged={handleRangeChanged}
-        itemContent={(_, item) => (
-          <ListItem key={item[keyId] as Key} {...item} />
+        itemContent={(index, item) => (
+          <Item key={item[keyId] as Key}>
+            {itemContent &&
+              itemContent(item, { index, className: ITEM_CLASSNAME })}
+          </Item>
         )}
         components={{
           Footer: () => (
@@ -158,7 +170,7 @@ export const DataList = <T extends Record<string, unknown>>({
               {isError && <DataListError onRetry={onRetry} />}
 
               {isEndReached && (
-                <DataListEndDate endOfScrollMsg={endOfScrollMsg} />
+                <DataListEndData endOfScrollMsg={endOfScrollMsg} />
               )}
             </>
           ),

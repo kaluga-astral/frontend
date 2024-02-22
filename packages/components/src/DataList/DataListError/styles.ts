@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const DataListErrorRoot = styled.li`
+export const Item = styled.li`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: max-content max-content;

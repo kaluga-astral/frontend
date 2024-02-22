@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const DataListLoaderRoot = styled.li`
+export const Item = styled.li`
   display: flex;
   justify-content: center;
 

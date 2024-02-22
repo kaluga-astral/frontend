@@ -1,9 +1,9 @@
 import { CircularProgress } from '../../CircularProgress';
 
-import { DataListLoaderRoot } from './styles';
+import { Item } from './styles';
 
 export const DataListLoader = () => (
-  <DataListLoaderRoot>
+  <Item>
     <CircularProgress color="primary" />
-  </DataListLoaderRoot>
+  </Item>
 );
