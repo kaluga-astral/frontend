@@ -1,6 +1,6 @@
 import { styled } from '../../../styles';
 import { Button } from '../../../Button';
 
-export const DateCalendarBtnWrapper = styled(Button)`
+export const StyledButton = styled(Button)`
   min-width: auto;
 `;

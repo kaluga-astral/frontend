@@ -25,7 +25,7 @@ import { Typography } from '../Typography';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
-import { PopperErrorRoot } from './styles';
+import { PopperWrapper } from './styles';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 
@@ -217,11 +217,11 @@ const AutocompleteInner = <
       PopperComponent={({ children, ...rest }) => (
         <MuiPopper {...rest}>
           {isLoadedDataError ? (
-            <PopperErrorRoot>
+            <PopperWrapper>
               <Typography variant="body1" color="grey" colorIntensity="600">
                 {loadedDataError}
               </Typography>
-            </PopperErrorRoot>
+            </PopperWrapper>
           ) : (
             children
           )}

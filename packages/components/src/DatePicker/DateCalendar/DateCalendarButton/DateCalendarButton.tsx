@@ -3,7 +3,7 @@ import { type ReactNode, forwardRef } from 'react';
 import { type ButtonProps } from '../../../Button';
 import { DateCalendarButtonTooltip } from '../DateCalendarButtonTooltip';
 
-import { DateCalendarBtnWrapper } from './styles';
+import { StyledButton } from './styles';
 
 export type DateCalendarButtonProps = Omit<ButtonProps, 'variant'> & {
   title?: string;
@@ -15,7 +15,7 @@ export const DateCalendarButton = forwardRef<
   DateCalendarButtonProps
 >(({ title = '', disabled, selected, ...props }, ref) => (
   <DateCalendarButtonTooltip title={title} isActive={!disabled}>
-    <DateCalendarBtnWrapper
+    <StyledButton
       ref={ref}
       variant={selected ? 'contained' : 'text'}
       aria-selected={selected}

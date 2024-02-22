@@ -7,7 +7,12 @@ import {
 } from '@mui/material/styles';
 
 import { typography } from '../typography';
-import { type Background, type Color, getPalette } from '../palette';
+import {
+  type Background,
+  type Color,
+  type ComponentsColors,
+  getPalette,
+} from '../palette';
 import { type FontsUrls, getComponents } from '../components';
 import { type Brand, SPACING } from '../constants';
 import { elevation } from '../elevation';
@@ -23,6 +28,7 @@ export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   grey: Color;
   primary: PaletteColor & Color;
   background: Background;
+  components: ComponentsColors;
 };
 
 type CreateThemeParams = {

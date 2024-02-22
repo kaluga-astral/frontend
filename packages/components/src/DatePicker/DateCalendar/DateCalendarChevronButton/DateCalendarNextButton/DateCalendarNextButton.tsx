@@ -4,22 +4,22 @@ import { forwardRef, useContext } from 'react';
 import { ConfigContext } from '../../../../ConfigProvider';
 import { type DateCalendarChevronBtnProps } from '../types';
 
-import { DateCalendarNextBtnWrapper } from './styles';
+import { StyledButton } from './styles';
 
-export const DateCalendarNextBtn = forwardRef<
+export const DateCalendarNextButton = forwardRef<
   HTMLButtonElement,
   DateCalendarChevronBtnProps
 >(({ postfixTitle, isPlural, ...props }, ref) => {
   const { next } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
-    <DateCalendarNextBtnWrapper
+    <StyledButton
       ref={ref}
       disabled={!Boolean(props.onClick)}
       title={`${isPlural ? next.plural : next.single} ${postfixTitle}`}
       {...props}
     >
       <NextOutlineMd />
-    </DateCalendarNextBtnWrapper>
+    </StyledButton>
   );
 });

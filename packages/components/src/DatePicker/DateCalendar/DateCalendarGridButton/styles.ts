@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { styled } from '../../../styles';
-import { DateCalendarButton } from '../DateCalendarBtn';
+import { DateCalendarButton } from '../DateCalendarButton';
 import { type Theme } from '../../../theme';
 import { type ButtonProps } from '../../../Button';
 
@@ -138,7 +138,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'lengthInRow',
 ]);
 
-export const DateCalendarGridBtnWrapper = styled(DateCalendarButton, {
+export const DateCalendarGridButton = styled(DateCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`

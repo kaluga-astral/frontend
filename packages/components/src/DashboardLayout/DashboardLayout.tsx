@@ -5,7 +5,7 @@ import { DashboardSidebarProvider } from '../DashboardSidebarProvider';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Main } from './Main';
-import { DashboardLayoutRoot } from './styles';
+import { Wrapper } from './styles';
 
 export type DashBoardLayoutProps = {
   children: ReactNode;
@@ -16,7 +16,7 @@ export const DashboardLayout = (props: DashBoardLayoutProps) => {
 
   return (
     <DashboardSidebarProvider>
-      <DashboardLayoutRoot>{children}</DashboardLayoutRoot>
+      <Wrapper>{children}</Wrapper>
     </DashboardSidebarProvider>
   );
 };

@@ -2,7 +2,7 @@ import { type SyntheticEvent } from 'react';
 
 import { type NotificationListType } from '../types';
 
-import { NotificationListTabsRoot, NotificationListTabsTab } from './styles';
+import { StyledTab, StyledTabs } from './styles';
 
 type NotificationListTabsProps = {
   listType: NotificationListType;
@@ -25,15 +25,12 @@ export const NotificationListTabs = ({
   };
 
   return (
-    <NotificationListTabsRoot value={listType} onChange={handleChange}>
-      <NotificationListTabsTab
+    <StyledTabs value={listType} onChange={handleChange}>
+      <StyledTab
         value="unread"
         label={`Непрочитанные (${unreadNotificationsCount})`}
       />
-      <NotificationListTabsTab
-        value="all"
-        label={`Все (${notificationsCount})`}
-      />
-    </NotificationListTabsRoot>
+      <StyledTab value="all" label={`Все (${notificationsCount})`} />
+    </StyledTabs>
   );
 };

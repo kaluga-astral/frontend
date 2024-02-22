@@ -13,7 +13,7 @@ type DialogHeaderRootProps = {
   hasOnClose: boolean;
 };
 
-export const DialogHeaderRoot = styled('div', {
+export const Wrapper = styled('div', {
   label: 'DialogHeader-root',
   shouldForwardProp: (prop) => !['hasTitle', 'hasOnClose'].includes(prop),
 })<DialogHeaderRootProps>`
@@ -46,7 +46,7 @@ export type DialogHeaderContentProps = {
   columnSpacing: number;
 };
 
-export const DialogHeaderContent = styled('div', {
+export const HeaderContent = styled('div', {
   shouldForwardProp: (prop) =>
     !['justifyContent', 'columnSpacing'].includes(prop),
   label: 'DialogHeader-content',

@@ -23,7 +23,7 @@ const getPriorityColor = ({
   return theme.palette.primary.main;
 };
 
-export const ListItem = styled('li')`
+export const Wrapper = styled('li')`
   position: relative;
 
   display: grid;
@@ -46,7 +46,7 @@ export const ListItem = styled('li')`
   }
 `;
 
-export const ListItemTitle = styled(Typography)`
+export const Title = styled(Typography)`
   margin-top: ${({ theme }) => theme.spacing(1.5)};
   margin-bottom: ${({ theme }) => theme.spacing(1)};
 
@@ -54,14 +54,14 @@ export const ListItemTitle = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey[900]};
 `;
 
-export const ListItemDate = styled(Typography)`
+export const DateText = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(2)};
 
   line-height: ${({ theme }) => theme.typography.pxToRem(20)};
   color: ${({ theme }) => theme.palette.grey[600]};
 `;
 
-export const ListItemPriority = styled('div')<{
+export const Priority = styled('div')<{
   priority: NotificationPriority;
 }>`
   width: ${({ theme }) => theme.spacing(2)};
@@ -71,7 +71,7 @@ export const ListItemPriority = styled('div')<{
   border-radius: 50%;
 `;
 
-export const ListItemIconSlot = styled('div')`
+export const IconSlot = styled('div')`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -80,12 +80,12 @@ export const ListItemIconSlot = styled('div')`
   height: ${({ theme }) => theme.spacing(8)};
 `;
 
-export const ListItemActions = styled('div')`
+export const Actions = styled('div')`
   display: flex;
   column-gap: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const ListItemCloseButton = styled(IconButton)`
+export const CloseButton = styled(IconButton)`
   max-width: 100%;
 
   color: ${({ theme }) => theme.palette.grey[600]};
