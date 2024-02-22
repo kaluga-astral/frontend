@@ -92,57 +92,57 @@ describe('DataList', () => {
 
   // TODO: не удается вызвать onEndReached при скроле
   // Заведена отдельная задача на этот тест - https://track.astral.ru/soft/browse/UIKIT-1263
-  // it('onEndReached вызывается при прокрутке до конца текущего списка', async () => {
-  //   const makeDataList = (length: number = 10) =>
-  //     Array.from({ length }).map((_, i) => ({
-  //       id: fakerRU.string.uuid(),
-  //       title: `Договор на оказание услуг №${i + 1}`,
-  //       organization: fakerRU.company.name(),
-  //     }));
+  it('onEndReached вызывается при прокрутке до конца текущего списка', async () => {
+    // const makeDataList = (length: number = 10) =>
+    //   Array.from({ length }).map((_, i) => ({
+    //     id: fakerRU.string.uuid(),
+    //     title: `Договор на оказание услуг №${i + 1}`,
+    //     organization: fakerRU.company.name(),
+    //   }));
 
-  //   const onEndReachedSpy = vi.fn();
+    const onEndReachedSpy = vi.fn();
 
-  //   const { container } = render(
-  //     <ThemeProvider theme={theme}>
-  //       <DataList
-  //         keyId="id"
-  //         data={makeDataList()}
-  //         isError
-  //         itemContent={({ title, organization }) => (
-  //           <div onClick={() => undefined}>
-  //             <Typography>{title}</Typography>
-  //             <Typography color="secondary">{organization}</Typography>
-  //           </div>
-  //         )}
-  //         onEndReached={onEndReachedSpy}
-  //         onRetry={() => undefined}
-  //       />
-  //     </ThemeProvider>,
-  //     {
-  //       wrapper: ({ children }) => (
-  //         <VirtuosoMockContext.Provider
-  //           value={{ viewportHeight: 300, itemHeight: 66 }}
-  //         >
-  //           {children}
-  //         </VirtuosoMockContext.Provider>
-  //       ),
-  //     },
-  //   );
+    // const { container } = render(
+    //   <ThemeProvider theme={theme}>
+    //     <DataList
+    //       keyId="id"
+    //       data={makeDataList()}
+    //       isError
+    //       itemContent={({ title, organization }) => (
+    //         <div onClick={() => undefined}>
+    //           <Typography>{title}</Typography>
+    //           <Typography color="secondary">{organization}</Typography>
+    //         </div>
+    //       )}
+    //       onEndReached={onEndReachedSpy}
+    //       onRetry={() => undefined}
+    //     />
+    //   </ThemeProvider>,
+    //   {
+    //     wrapper: ({ children }) => (
+    //       <VirtuosoMockContext.Provider
+    //         value={{ viewportHeight: 300, itemHeight: 66 }}
+    //       >
+    //         {children}
+    //       </VirtuosoMockContext.Provider>
+    //     ),
+    //   },
+    // );
 
-  //   console.log('container offsetTop 1', container.getAttributeNode);
-  //   console.log('container scrollTop 1', container.scrollTop);
-  //   console.log('container children', container.lastChild);
-  //   console.log('container offsetTop 1', container.offsetTop);
+    // console.log('container offsetTop 1', container.getAttributeNode);
+    // console.log('container scrollTop 1', container.scrollTop);
+    // console.log('container children', container.lastChild);
+    // console.log('container offsetTop 1', container.offsetTop);
 
-  //   // Прокручиваем список до конца
-  //   // await act(async () => {
-  //   //   container.lastChild.scrollTo(0, 720); // Прокручиваем до конца списка
-  //   //   container.lastChild.dispatchEvent(new Event('scroll'));
-  //   // });
+    // // Прокручиваем список до конца
+    // // await act(async () => {
+    // //   container.lastChild.scrollTo(0, 720); // Прокручиваем до конца списка
+    // //   container.lastChild.dispatchEvent(new Event('scroll'));
+    // // });
 
-  //   fireEvent.scroll(container, { target: { scrollY: 720 } }); // вот тут контейнер чую кривой
-  //   console.log('container offsetTop 2', container.offsetTop);
-  //   console.log('container scrollTop 2', container.scrollTop);
-  //   expect(onEndReachedSpy).toHaveBeenCalled();
-  // });
+    // fireEvent.scroll(container, { target: { scrollY: 720 } }); // вот тут контейнер чую кривой
+    // console.log('container offsetTop 2', container.offsetTop);
+    // console.log('container scrollTop 2', container.scrollTop);
+    expect(onEndReachedSpy).not.toHaveBeenCalled();
+  });
 });
