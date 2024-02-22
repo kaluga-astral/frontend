@@ -4,10 +4,10 @@ import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';
 
 import {
-  AccordionChevronWrapper,
-  AccordionContentWrapper,
-  AccordionHeader,
-  AccordionSummary,
+  ChevronWrapper,
+  ContentWrapper,
+  Header,
+  Summary,
 } from './styles';
 
 export type AccordionProps = PropsWithChildren<{
@@ -60,25 +60,25 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     };
 
     const SummaryWrapper =
-      typeof summary === 'string' ? AccordionSummary : React.Fragment;
+      typeof summary === 'string' ? Summary : React.Fragment;
 
     return (
       <div ref={forwardedRef}>
-        <AccordionHeader
+        <Header
           role="button"
           onClick={handleClickHeader}
           withStartAdorment={hasStartAdorment}
         >
           {startAdorment}
           <SummaryWrapper>{summary}</SummaryWrapper>
-          <AccordionChevronWrapper>
+          <ChevronWrapper>
             <Chevron isActive={actualIsExpanded} />
-          </AccordionChevronWrapper>
-        </AccordionHeader>
+          </ChevronWrapper>
+        </Header>
         <Collapse in={actualIsExpanded}>
-          <AccordionContentWrapper withStartAdorment={hasStartAdorment}>
+          <ContentWrapper withStartAdorment={hasStartAdorment}>
             {children}
-          </AccordionContentWrapper>
+          </ContentWrapper>
         </Collapse>
       </div>
     );

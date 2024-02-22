@@ -8,8 +8,8 @@ import { Tooltip } from '../../../Tooltip';
 import {
   NavMenuItemButtonChevron,
   NavMenuItemButtonIcon,
-  NavMenuItemButtonRoot,
   NavMenuItemButtonText,
+  StyledListItemButton,
 } from './styles';
 
 export type NavMenuItemButtonProps = {
@@ -47,7 +47,7 @@ export const NavMenuItemButton = forwardRef<
   };
 
   return (
-    <NavMenuItemButtonRoot
+    <StyledListItemButton
       isGroupTitleItem={isGroupTitleItem}
       ref={ref}
       component={component}
@@ -66,6 +66,6 @@ export const NavMenuItemButton = forwardRef<
       {isGroupTitleItem && (
         <NavMenuItemButtonChevron collapsedIn={collapsedIn} opened={opened} />
       )}
-    </NavMenuItemButtonRoot>
+    </StyledListItemButton>
   );
 });

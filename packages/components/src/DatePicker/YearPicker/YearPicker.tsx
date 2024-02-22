@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
-  DateCalendarGridBtnLarge,
+  DateCalendarGridButtonLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
@@ -49,7 +49,7 @@ export const YearPicker = ({
       />
       <DateCalendarGridLarge>
         {grid.map(({ year, date, ...props }, index) => (
-          <DateCalendarGridBtnLarge
+          <DateCalendarGridButtonLarge
             key={year}
             onClick={() => onChange?.(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
@@ -57,7 +57,7 @@ export const YearPicker = ({
             {...props}
           >
             {year}
-          </DateCalendarGridBtnLarge>
+          </DateCalendarGridButtonLarge>
         ))}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>

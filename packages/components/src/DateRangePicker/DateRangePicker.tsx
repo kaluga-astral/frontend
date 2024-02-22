@@ -22,7 +22,7 @@ import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
 import { useMaskedValue, useSelectedBaseDate } from '../DatePicker/hooks';
 import { PopoverHoveredContextProvider } from '../DatePicker/PopoverHoveredContext';
 
-import { DateRangePickerSplitter } from './styles';
+import { PickerSplitter } from './styles';
 import { getBoundaryDate } from './utils';
 import { type DateRangeInput } from './types';
 import { useBaseRangeDates } from './hooks';
@@ -268,7 +268,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 hoveredDayDate={hoveredDayDate}
                 onDayHover={setHoveredDayDate}
               />
-              <DateRangePickerSplitter />
+              <PickerSplitter />
               <YearMonthDayPicker
                 isMondayFirst={isMondayFirst}
                 selectedDate={selectedStartBaseDate || selectedEndBaseDate}

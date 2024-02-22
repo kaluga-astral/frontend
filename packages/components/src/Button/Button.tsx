@@ -12,7 +12,7 @@ import type { WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import { ButtonColors, ButtonVariants } from './enums';
-import { LoadingButtonWrapper } from './styles';
+import { StyledLoadingButton } from './styles';
 
 export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
   WithoutEmotionSpecific<LoadingButtonProps>,
@@ -58,7 +58,7 @@ const UnwrappedButton = <TComponent extends ElementType>(
   }, [variant]);
 
   return (
-    <LoadingButtonWrapper
+    <StyledLoadingButton
       {...restProps}
       ref={ref}
       variant={variant}

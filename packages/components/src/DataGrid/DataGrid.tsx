@@ -8,7 +8,7 @@ import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
-  DataGridContainer,
+  Container,
   DisabledTableContainer,
   StyledTableContainer,
 } from './styles';
@@ -193,8 +193,16 @@ export function DataGrid<
     return null;
   }, [noDataPlaceholder, loading]);
 
+  const processedColumns = useCallback(() => {
+    if (rows.length <= 1) {
+      return columns.map((column) => ({ ...column, sortable: false }));
+    }
+
+    return columns;
+  }, [columns, rows]);
+
   return (
-    <DataGridContainer maxHeight={maxHeight} className={className}>
+    <Container maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
@@ -204,7 +212,7 @@ export function DataGrid<
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
             sorting={sorting}
-            columns={columns}
+            columns={processedColumns()}
           />
           <DataGridBody<Data>
             activeRowId={activeRowId}
@@ -223,6 +231,6 @@ export function DataGrid<
       </TableContainer>
       <DataGridLoader disabled={disabled} loading={loading} />
       {Footer}
-    </DataGridContainer>
+    </Container>
   );
 }

@@ -6,13 +6,13 @@ import { Typography } from '../../Typography';
 import { type Notification } from '../types';
 
 import {
-  ListItem,
-  ListItemActions,
-  ListItemCloseButton,
-  ListItemDate,
-  ListItemIconSlot,
-  ListItemPriority,
-  ListItemTitle,
+  Actions,
+  CloseButton,
+  DateText,
+  IconSlot,
+  Priority,
+  Title,
+  Wrapper,
 } from './styles';
 
 const getDateFormat = (date: string | Date | null) => {
@@ -76,13 +76,13 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
   }, [onViewNotification, entry?.isIntersecting, isUnread, id]);
 
   return (
-    <ListItem ref={ref}>
-      <ListItemIconSlot>
-        <ListItemPriority priority={priority} />
-      </ListItemIconSlot>
+    <Wrapper ref={ref}>
+      <IconSlot>
+        <Priority priority={priority} />
+      </IconSlot>
       <div>
-        <ListItemTitle variant={isUnread ? 'h6' : 'ui'}>{title}</ListItemTitle>
-        <ListItemDate>{getDateFormat(date)}</ListItemDate>
+        <Title variant={isUnread ? 'h6' : 'ui'}>{title}</Title>
+        <DateText>{getDateFormat(date)}</DateText>
         <Typography
           gutterBottom={Boolean(actions)}
           variant="ui"
@@ -91,13 +91,13 @@ export const NotificationListItem = (props: NotificationListItemProps) => {
         >
           {text}
         </Typography>
-        {actions && <ListItemActions>{actions}</ListItemActions>}
+        {actions && <Actions>{actions}</Actions>}
       </div>
       {isDeleteButtonVisible && (
-        <ListItemCloseButton onClick={handleDelete} variant="text" size="small">
+        <CloseButton onClick={handleDelete} variant="text" size="small">
           <CrossOutlineSm />
-        </ListItemCloseButton>
+        </CloseButton>
       )}
-    </ListItem>
+    </Wrapper>
   );
 };

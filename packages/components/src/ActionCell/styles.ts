@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const ActionCellWrapper = styled.div`
+export const Wrapper = styled.div`
   display: inline-flex;
   align-items: center;
 `;

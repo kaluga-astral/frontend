@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const PageLayoutContainerWrapper = styled.div`
+export const Wrapper = styled.div`
   display: grid;
   grid-row-gap: ${({ theme }) => theme.spacing(4)};
   grid-template:
