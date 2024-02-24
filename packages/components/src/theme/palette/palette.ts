@@ -8,6 +8,7 @@ import { type TypeBackground } from '@mui/material/styles/createPalette';
 import { Brand } from '../constants';
 
 import { type ColorBrand, brandPalette } from './brandPalette';
+import { type ComponentsColors, componentsColors } from './componentsColors';
 
 export type Color = {
   900: string;
@@ -37,6 +38,7 @@ type PaletteOptions = MuiPaletteOptions & {
   primary: PrimaryColorOptions;
   background: Background;
   brand: ColorBrand;
+  components: ComponentsColors;
 };
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
@@ -145,6 +147,7 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       800: brandColors.brand[800],
       background: brandColors.brand.background,
     },
+    components: componentsColors,
   };
 };
 

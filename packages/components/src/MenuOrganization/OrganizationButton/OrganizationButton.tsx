@@ -9,7 +9,7 @@ import { OrganizationWrapper } from '../OrganizationItem/styles';
 import { OrganizationData } from '../styles';
 import { type Organization } from '../types';
 
-import { OrganizationBtn } from './styles';
+import { StyledButton } from './styles';
 
 export type OrganizationButtonProps = {
   onClick: () => void;
@@ -33,7 +33,7 @@ export const OrganizationButton = forwardRef<
   const { name, inn, kpp } = currentOrganization;
 
   return (
-    <OrganizationBtn
+    <StyledButton
       ref={ref}
       variant="text"
       onClick={onClick}
@@ -50,6 +50,6 @@ export const OrganizationButton = forwardRef<
           </Typography>
         </OrganizationData>
       </OrganizationWrapper>
-    </OrganizationBtn>
+    </StyledButton>
   );
 });

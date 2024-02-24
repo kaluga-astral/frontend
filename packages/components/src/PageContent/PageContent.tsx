@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { PageContentWrapper } from './styles';
+import { Wrapper } from './styles';
 
 export type PageContentProps = {
   children: ReactNode;
@@ -31,12 +31,12 @@ export const PageContent = (props: PageContentProps) => {
   } = props;
 
   return (
-    <PageContentWrapper
+    <Wrapper
       isPaddingDisabled={isPaddingDisabled}
       isSeparatorShown={isSeparatorShown}
       isHeaderActionsShown={isHeaderActionsShown}
     >
       {children}
-    </PageContentWrapper>
+    </Wrapper>
   );
 };

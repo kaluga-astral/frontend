@@ -5,14 +5,14 @@ import { type ButtonProps } from '../Button';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
-  MobileHeaderWrapper,
-  PageHeaderActions,
-  PageHeaderBackButton,
-  PageHeaderBreadcrumbs,
-  PageHeaderDescription,
-  PageHeaderTitle,
-  PageHeaderWrapper,
+  Actions,
+  BackButton,
+  Description,
+  MobileWrapper,
   PageSubheader,
+  StyledBreadcrumbs,
+  Title,
+  Wrapper,
 } from './styles';
 
 export type PageHeaderProps = {
@@ -72,29 +72,25 @@ export const PageHeader = (props: PageHeaderProps) => {
     props;
 
   return (
-    <PageHeaderWrapper>
-      {breadcrumbs && (
-        <PageHeaderBreadcrumbs>{breadcrumbs}</PageHeaderBreadcrumbs>
-      )}
+    <Wrapper>
+      {breadcrumbs && <StyledBreadcrumbs>{breadcrumbs}</StyledBreadcrumbs>}
 
-      <MobileHeaderWrapper>
+      <MobileWrapper>
         {backButton && (
-          <PageHeaderBackButton {...backButton} variant="light">
+          <BackButton {...backButton} variant="light">
             <ArrowLOutlineMd />
-          </PageHeaderBackButton>
+          </BackButton>
         )}
-        <PageHeaderTitle variant="h3">{title}</PageHeaderTitle>
-      </MobileHeaderWrapper>
+        <Title variant="h3">{title}</Title>
+      </MobileWrapper>
 
-      {description && (
-        <PageHeaderDescription>{description}</PageHeaderDescription>
-      )}
+      {description && <Description>{description}</Description>}
       {actions && (
-        <PageHeaderActions>
+        <Actions>
           <ButtonGroup {...actions} />
-        </PageHeaderActions>
+        </Actions>
       )}
       {subheader && <PageSubheader>{subheader}</PageSubheader>}
-    </PageHeaderWrapper>
+    </Wrapper>
   );
 };

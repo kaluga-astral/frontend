@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { DateDayPickerGridHeadWrapper } from './styles';
+import { Wrapper } from './styles';
 
 const WORKDAYS = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ'];
 
@@ -14,7 +14,7 @@ type DateCalendarMonthGridHeadProps = {
 
 export const DateDayPickerGridHead = memo(
   ({ isMondayFirst = false }: DateCalendarMonthGridHeadProps) => (
-    <DateDayPickerGridHeadWrapper role="rowheader">
+    <Wrapper role="rowheader">
       {(isMondayFirst ? SUNDAY_FIRST_WEEKDAYS : MONDAY_FIRST_WEEKDAYS).map(
         (weekday, index) => (
           <span key={index} role="cell">
@@ -22,7 +22,7 @@ export const DateDayPickerGridHead = memo(
           </span>
         ),
       )}
-    </DateDayPickerGridHeadWrapper>
+    </Wrapper>
   ),
 );
 

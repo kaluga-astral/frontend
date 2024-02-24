@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react';
 import {
   type CommonDateCalendarHeadProps,
   DateCalendarBody,
-  DateCalendarGridBtn,
+  DateCalendarGridButton,
   DateCalendarHead,
   DateCalendarWrapper,
 } from '../DateCalendar';
@@ -100,7 +100,7 @@ export const DayPicker = ({
         <DateDayPickerGridHead isMondayFirst={isMondayFirst} />
         <DateDayPickerGridBody role="grid">
           {grid.map(({ date, monthDay, ...props }, index) => (
-            <DateCalendarGridBtn
+            <DateCalendarGridButton
               key={index}
               onClick={() => onChange?.(date)}
               title={dayFormat(date)}
@@ -122,7 +122,7 @@ export const DayPicker = ({
               {...props}
             >
               {monthDay}
-            </DateCalendarGridBtn>
+            </DateCalendarGridButton>
           ))}
         </DateDayPickerGridBody>
       </DateCalendarBody>

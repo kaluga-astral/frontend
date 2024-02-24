@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { PageLayoutContainerWrapper } from './styles';
+import { Wrapper } from './styles';
 
 export type PageLayoutContainerProps = {
   children: ReactNode;
@@ -11,7 +11,5 @@ export const PageLayoutContainer = ({
   children,
   className,
 }: PageLayoutContainerProps) => (
-  <PageLayoutContainerWrapper className={className}>
-    {children}
-  </PageLayoutContainerWrapper>
+  <Wrapper className={className}>{children}</Wrapper>
 );

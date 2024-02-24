@@ -3,12 +3,7 @@ import { type StepIconProps as MuiStepIconProps } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../../types';
 
-import {
-  StepDefaultIcon,
-  StepErrorIcon,
-  StepSelectIcon,
-  StepSuccessIcon,
-} from './styles';
+import { DefaultIcon, ErrorIcon, SelectIcon, SuccessIcon } from './styles';
 
 export type StepIconProps = {
   /**
@@ -21,24 +16,24 @@ export const StepIcon = (props: StepIconProps) => {
   const { active, completed, error, isSelected } = props;
 
   if (completed && error && isSelected) {
-    return <StepSelectIcon $isError />;
+    return <SelectIcon $isError />;
   }
 
   if (completed && isSelected) {
-    return <StepSelectIcon />;
+    return <SelectIcon />;
   }
 
   if (error) {
-    return <StepErrorIcon />;
+    return <ErrorIcon />;
   }
 
   if (completed) {
-    return <StepSuccessIcon />;
+    return <SuccessIcon />;
   }
 
   if (active) {
     return <StepDefaultFillMd color="primary" />;
   }
 
-  return <StepDefaultIcon />;
+  return <DefaultIcon />;
 };

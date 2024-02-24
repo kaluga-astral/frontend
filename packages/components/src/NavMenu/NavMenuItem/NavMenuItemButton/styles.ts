@@ -6,7 +6,7 @@ import { ListItemButton } from '../../../ListItemButton';
 import { ListItemIcon } from '../../../ListItemIcon';
 import { ListItemText } from '../../../ListItemText';
 
-export const NavMenuItemButtonRoot = styled(ListItemButton)<{
+export const StyledListItemButton = styled(ListItemButton)<{
   isGroupTitleItem: boolean;
 }>`
   height: 40px;

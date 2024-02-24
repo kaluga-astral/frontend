@@ -21,7 +21,7 @@ export const CollapsibleWrapper = styled.article`
   align-items: flex-start;
 `;
 
-export const CollapsibleTypographyWrapper = styled(Typography, {
+export const Wrapper = styled(Typography, {
   shouldForwardProp: (name) =>
     !collapsibleTypographyWrapperProps.includes(name),
 })<CollapsibleTypographyWrapperProps>`
