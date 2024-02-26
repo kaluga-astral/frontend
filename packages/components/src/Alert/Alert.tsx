@@ -48,8 +48,6 @@ export type AlertProps = Omit<
   display?: boolean;
 };
 
-export { AlertSeverity } from './types';
-
 export const Alert = ({
   children,
   title,
