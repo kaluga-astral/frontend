@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: block;
 
-    height: auto;
     padding-top: 0;
   }
 `;
