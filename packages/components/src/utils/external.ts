@@ -1,1 +1,1 @@
-export { uniqBy, prop, debounce, mergeDeep as merge } from 'remeda';
+export { uniqBy, prop, debounce, mergeDeep } from 'remeda';
