@@ -14,6 +14,7 @@ import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { ProductSwitcher } from '../ProductSwitcher';
+import { Placeholder } from '../Placeholder';
 import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
@@ -241,7 +242,7 @@ export const Example = () => {
               },
             }}
             content={{
-              children: <>Content</>,
+              children: <Placeholder title="Документы отсутствуют" />,
               isPaddingDisabled: false,
             }}
           />
