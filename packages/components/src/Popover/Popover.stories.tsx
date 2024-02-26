@@ -22,14 +22,6 @@ const meta: Meta<typeof Popover> = {
 
 export default meta;
 
-
-/*
-Meta - метаданные компонента 2. Описание (optional) 3. Ссылка на Figma (required) 4. Ссылка на Guide (required)
-Interaction - интерактивная story, у которой можно менять пропсы через ui
-Example - story, показывающая как компонент может применяться в проекте
-Stories - остальные кейсы для компонента
-
- */
 type Story = StoryObj<typeof Popover>;
 
 
@@ -82,11 +74,10 @@ export const Example = () => {
           <Typography>Контент Popover</Typography>
         </PopoverContainer>
       </Popover>
-      
   </>
   );
   };
-export const transformOrigin = () => {
+export const transformOrig = () => {
  
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -182,9 +173,6 @@ export const MouseOnTypography = () => {
         Наведите, чтобы открыть popover.
       </Typography>
       <Popover
-        sx={{
-          pointerEvents: 'none',
-        }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         anchorOrigin={{
