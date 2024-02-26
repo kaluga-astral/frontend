@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import { Button } from './Button';
 
 describe('Button', () => {
-  it('Prop:ref: is present', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const ButtonWithRef = () => {
@@ -22,7 +22,7 @@ describe('Button', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:disabled: блокирует кнопку', () => {
+  it('Кнопка заблокирована при disabled=true', () => {
     renderWithTheme(<Button disabled>Btn</Button>);
 
     const button = screen.getByRole('button');
@@ -30,7 +30,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('Prop:loading: блокирует кнопку', () => {
+  it('Кнопка заблокирована при loading=true', () => {
     renderWithTheme(<Button loading>Btn</Button>);
 
     const button = screen.getByRole('button');
@@ -38,7 +38,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('Prop:loading: отображается лоадер', () => {
+  it('Лоадер отображается при loading=true', () => {
     renderWithTheme(<Button loading>Btn</Button>);
 
     const loader = screen.getByRole('progressbar');

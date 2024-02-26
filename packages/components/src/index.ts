@@ -57,6 +57,8 @@ export * from './DataGridInfinite';
 
 export * from './DataGridPagination';
 
+export * from './DataList';
+
 export * from './DatePicker';
 
 export * from './DateRangePicker';
