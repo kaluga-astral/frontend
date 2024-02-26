@@ -14,7 +14,6 @@ import { Popover } from './Popover';
  * ### [Guide]()
  */
 
-
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
   component: Popover,
