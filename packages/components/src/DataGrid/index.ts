@@ -2,4 +2,4 @@ export * from './DataGrid';
 
 export * from './types';
 
-export { DataGridContainer } from './styles';
+export { Container } from './styles';

@@ -2,7 +2,7 @@ import { type TableContainerProps } from '@mui/material';
 
 import { styled } from '../styles';
 import { TableCell, TableContainer } from '../Table';
-import { DataGridContainer } from '../DataGrid';
+import { Container } from '../DataGrid';
 
 type DataGridInfiniteTableContainerProps = TableContainerProps & {
   inert?: '' | false;
@@ -23,6 +23,6 @@ export const DataGridInfiniteTableContainer = styled(
   }
 `;
 
-export const DataGridInfiniteContainer = styled(DataGridContainer)`
+export const DataGridInfiniteContainer = styled(Container)`
   min-height: 320px;
 `;

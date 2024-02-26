@@ -16,7 +16,7 @@ export const DataGridInfiniteHead = styled(TableRow)`
   }
 `;
 
-export const DataGridContainer = styled.div<StyledTableContainerProps>`
+export const Container = styled.div<StyledTableContainerProps>`
   position: relative;
 
   overflow: hidden;
