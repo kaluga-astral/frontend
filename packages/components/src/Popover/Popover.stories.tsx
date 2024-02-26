@@ -1,5 +1,6 @@
 import { type MouseEvent, useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
+
 
 import { Button } from '../Button';
 import { LegacyGrid } from '../LegacyGrid';
@@ -8,16 +9,50 @@ import { styled } from '../styles';
 
 import { Popover } from './Popover';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?type=design&node-id=8444-83809&mode=design)
+ * ### [Guide]()
+ */
+
+
+const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
   component: Popover,
 };
+
+export default meta;
+
+
+/*
+Meta - метаданные компонента 2. Описание (optional) 3. Ссылка на Figma (required) 4. Ссылка на Guide (required)
+Interaction - интерактивная story, у которой можно менять пропсы через ui
+Example - story, показывающая как компонент может применяться в проекте
+Stories - остальные кейсы для компонента
+
+ */
+type Story = StoryObj<typeof Popover>;
+
 
 const PopoverContainer = styled(LegacyGrid)`
   padding: ${({ theme }) => theme.spacing(2)};
 `;
 
-const Template: Story = () => {
+export const Interaction: Story = {
+  args: {    
+    open:true,
+    children:'контент popover',
+    anchorPosition:{ 'top': 50, 'left': 50 },
+    anchorReference:'anchorPosition'
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
+ 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -27,9 +62,8 @@ const Template: Story = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  return (
-    <>
+  return(
+  <>
       <Button variant="contained" onClick={handleClick}>
         Открыть Popover
       </Button>
@@ -41,6 +75,79 @@ const Template: Story = () => {
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
+          
+        }}
+      >
+        <PopoverContainer>
+          <Typography>Контент Popover</Typography>
+        </PopoverContainer>
+      </Popover>
+      
+  </>
+  );
+  };
+export const transformOrigin = () => {
+ 
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return(
+  <>
+      <Button variant="contained" onClick={handleClick}>
+        Открыть Popover
+      </Button>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+  
+      >
+        <PopoverContainer>
+          <Typography>Контент Popover</Typography>
+        </PopoverContainer>
+      </Popover>
+    </>
+    );
+  };
+export const Anchor = () => {
+ 
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return(
+  <>
+    <>
+      <Button variant="contained" onClick={handleClick}>
+        Открыть Popover
+      </Button>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+          
         }}
       >
         <PopoverContainer>
@@ -48,12 +155,51 @@ const Template: Story = () => {
         </PopoverContainer>
       </Popover>
     </>
+  </>
   );
 };
 
-export const Default = Template.bind({});
+export const MouseOnTypography = () => {
+ 
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+  const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  return (
+    <div>
+      <Typography
+        aria-owns={Boolean(anchorEl) ? 'mouse-over-popover' : undefined}
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+      >
+        Наведите, чтобы открыть popover.
+      </Typography>
+      <Popover
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography>Контент popover.</Typography>
+      </Popover>
+    </div>
+  );
 };
