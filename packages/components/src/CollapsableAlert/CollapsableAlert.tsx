@@ -11,7 +11,7 @@ import { type AlertProps } from '../Alert';
 import { Accordion, type AccordionProps } from '../Accordion';
 import { Collapse } from '../Collapse';
 
-import { CollapsableAlertActions } from './styles';
+import { Actions } from './styles';
 
 type CollapsableAlertProps = Pick<
   AlertProps,
@@ -62,9 +62,7 @@ export const CollapsableAlert = forwardRef<
             onChange={onExpandedChange}
           >
             {children}
-            <CollapsableAlertActions container>
-              {actions}
-            </CollapsableAlertActions>
+            <Actions container>{actions}</Actions>
           </Accordion>
         </Alert>
       </Collapse>

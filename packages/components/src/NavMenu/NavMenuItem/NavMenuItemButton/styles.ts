@@ -1,3 +1,4 @@
+import { listItemIconClasses } from '@mui/material';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { styled } from '../../../styles';
@@ -5,13 +6,15 @@ import { ListItemButton } from '../../../ListItemButton';
 import { ListItemIcon } from '../../../ListItemIcon';
 import { ListItemText } from '../../../ListItemText';
 
-export const NavMenuItemButtonRoot = styled(ListItemButton)`
+export const StyledListItemButton = styled(ListItemButton)<{
+  isGroupTitleItem: boolean;
+}>`
   height: 40px;
   padding: ${({ theme }) => theme.spacing(2)};
 
   border-radius: ${({ theme }) => theme.shape.medium};
 
-  .MuiListItemIcon-root {
+  ${listItemIconClasses.root} {
     color: ${({ theme, selected }) => {
       return selected ? theme.palette.primary['800'] : 'inherit';
     }};
@@ -33,7 +36,7 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
 
     background-color: inherit;
 
-    .MuiListItemIcon-root {
+    ${listItemIconClasses.root} {
       color: ${({ theme }) => theme.palette.primary['800']};
     }
   }
@@ -41,8 +44,22 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)`
   &:active {
     color: ${({ theme }) => theme.palette.primary['900']};
 
-    .MuiListItemIcon-root {
+    ${listItemIconClasses.root} {
       color: ${({ theme }) => theme.palette.primary['900']};
+    }
+  }
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    height: ${({ isGroupTitleItem }) => (isGroupTitleItem ? '24px' : '44px')};
+    margin-top: ${({ theme, isGroupTitleItem }) =>
+      isGroupTitleItem ? theme.spacing(4) : 0};
+    padding: ${({ theme, isGroupTitleItem }) =>
+      isGroupTitleItem ? theme.spacing(0, 5) : theme.spacing(3, 5)};
+
+    border-radius: 0;
+
+    &.Mui-selected {
+      background-color: inherit;
     }
   }
 `;
@@ -53,6 +70,10 @@ export const NavMenuItemButtonIcon = styled(ListItemIcon)`
 
 export const NavMenuItemButtonText = styled(ListItemText)`
   margin-left: ${({ theme }) => theme.spacing(4)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    margin-left: 0;
+  }
 `;
 
 export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
@@ -61,21 +82,9 @@ export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {
   opened?: boolean;
   collapsedIn: boolean;
 }>`
-  transform: ${({ opened }) => {
-    if (opened) {
-      return 'rotateZ(180deg)';
-    }
+  transform: ${({ opened }) => (opened ? 'rotateZ(180deg)' : 'rotateZ(0deg)')};
 
-    return 'rotateZ(0deg)';
-  }};
-
-  width: ${({ collapsedIn }) => {
-    if (collapsedIn) {
-      return '1em';
-    }
-
-    return '0px';
-  }};
+  width: ${({ collapsedIn }) => (collapsedIn ? '1em' : '0px')};
   margin-left: auto;
 
   transition: ${({ theme }) => {

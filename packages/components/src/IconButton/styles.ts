@@ -5,7 +5,7 @@ import {
   getButtonHeightMobile,
 } from '../theme/components/MuiButton';
 
-export const IconButtonWrapper = styled(Button, {
+export const StyledButton = styled(Button, {
   shouldForwardProp: (prop) =>
     prop !== 'startIcon' && prop !== 'endIcon' && prop !== 'loading',
 })<ButtonProps>`

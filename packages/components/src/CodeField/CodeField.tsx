@@ -4,11 +4,11 @@ import Skeleton from '@mui/material/Skeleton';
 import { FormHelperText } from '../FormHelperText';
 
 import {
-  CodeFieldDigit,
-  CodeFieldDigitsItem,
-  CodeFieldDigitsWrapper,
-  CodeFieldLabel,
-  CodeFieldWrapper,
+  Digit,
+  DigitsItem,
+  DigitsWrapper,
+  FieldLabel,
+  Wrapper,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 import { ERROR_TEXT_DEFAULT, RESEND_TIMEOUT_DEFAULT } from './constants';
@@ -113,15 +113,15 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     };
 
     return (
-      <CodeFieldWrapper ref={ref}>
-        {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
-        <CodeFieldDigitsWrapper>
+      <Wrapper ref={ref}>
+        {label && <FieldLabel>{label}</FieldLabel>}
+        <DigitsWrapper>
           {codeValue.map((value, index) => (
-            <CodeFieldDigitsItem>
+            <DigitsItem>
               {loading ? (
                 <Skeleton variant="rounded" width={62} height={60} />
               ) : (
-                <CodeFieldDigit
+                <Digit
                   type="text"
                   inputMode="numeric"
                   pattern="[0-9]"
@@ -135,9 +135,9 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
                   onPaste={(e) => !disabled && !loading && onPaste(e)}
                 />
               )}
-            </CodeFieldDigitsItem>
+            </DigitsItem>
           ))}
-        </CodeFieldDigitsWrapper>
+        </DigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
         {isAllowResendCode && (
           <ResendCodeButton
@@ -149,7 +149,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
             clearCodeValue={clearCodeValue}
           />
         )}
-      </CodeFieldWrapper>
+      </Wrapper>
     );
   },
 );

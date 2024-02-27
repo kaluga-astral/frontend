@@ -1,5 +1,6 @@
 import { type Ref, useLayoutEffect, useRef, useState } from 'react';
-import { debounce } from 'lodash-es';
+
+import { debounce } from '../../../utils';
 
 export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
   const localRef = useRef<HTMLElement>(null);
@@ -24,10 +25,10 @@ export const useOverflowed = (forwardedRef?: Ref<HTMLElement>) => {
 
           setOverflow(isScrollHeightBigger || isScrollWidthBigger);
         },
-        500,
+        { waitMs: 500 },
       );
 
-      const resizeObserver = new ResizeObserver(handleResize);
+      const resizeObserver = new ResizeObserver(handleResize.call);
       const node = ref.current;
 
       resizeObserver.observe(node);

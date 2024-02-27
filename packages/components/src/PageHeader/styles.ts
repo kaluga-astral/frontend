@@ -3,7 +3,7 @@ import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 import { Breadcrumbs } from '../Breadcrumbs';
 
-export const PageHeaderWrapper = styled.header`
+export const Wrapper = styled.header`
   display: grid;
   grid-area: header;
   grid-template:
@@ -21,7 +21,7 @@ export const PageHeaderWrapper = styled.header`
   }
 `;
 
-export const PageHeaderBreadcrumbs = styled(Breadcrumbs)`
+export const StyledBreadcrumbs = styled(Breadcrumbs)`
   grid-area: breadcrumbs;
 
   margin-bottom: ${({ theme }) => theme.spacing(1)};
@@ -31,7 +31,7 @@ export const PageHeaderBreadcrumbs = styled(Breadcrumbs)`
   }
 `;
 
-export const PageHeaderBackButton = styled(IconButton)`
+export const BackButton = styled(IconButton)`
   grid-area: back-btn;
 
   margin-right: ${({ theme }) => theme.spacing(2.5)};
@@ -52,7 +52,7 @@ export const PageSubheader = styled.div`
   }
 `;
 
-export const PageHeaderDescription = styled(Typography)`
+export const Description = styled(Typography)`
   grid-area: description;
 
   padding-top: ${({ theme }) => theme.spacing(2)};
@@ -62,7 +62,7 @@ export const PageHeaderDescription = styled(Typography)`
   }
 `;
 
-export const PageHeaderTitle = styled(Typography)`
+export const Title = styled(Typography)`
   display: flex;
   grid-area: title;
   align-items: center;
@@ -79,12 +79,12 @@ export const PageHeaderTitle = styled(Typography)`
   }
 `;
 
-export const PageHeaderActions = styled.div`
+export const Actions = styled.div`
   display: contents;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     position: fixed;
-    z-index: ${({ theme }) => theme.zIndex.appBar};
+    z-index: ${({ theme }) => theme.zIndex.appBar - 2};
     bottom: 0;
     left: 0;
 
@@ -99,7 +99,7 @@ export const PageHeaderActions = styled.div`
   }
 `;
 
-export const MobileHeaderWrapper = styled.div`
+export const MobileWrapper = styled.div`
   display: contents;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {

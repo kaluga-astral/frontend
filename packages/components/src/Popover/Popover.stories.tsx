@@ -34,6 +34,7 @@ const Template: Story = () => {
         Открыть Popover
       </Button>
       <Popover
+        title="Заголовок"
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={handleClose}

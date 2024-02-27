@@ -8,7 +8,7 @@ type StyledTableContainerProps = TableContainerProps & {
   inert?: '' | false;
 };
 
-export const DataGridContainer = styled.div<StyledTableContainerProps>`
+export const Container = styled.div<StyledTableContainerProps>`
   position: relative;
 
   overflow: hidden;

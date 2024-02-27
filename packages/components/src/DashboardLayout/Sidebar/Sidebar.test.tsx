@@ -1,17 +1,30 @@
 import { renderWithTheme, screen, waitFor } from '@astral/tests';
 import { expect } from 'vitest';
 
+import { DashboardSidebarProvider } from '../../DashboardSidebarProvider';
+
 import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
   it('Sidebar открытый при первом рендере', async () => {
-    renderWithTheme(<Sidebar menu={{ items: [] }} />);
+    renderWithTheme(
+      <DashboardSidebarProvider>
+        <Sidebar menu={{ items: [] }} />
+      </DashboardSidebarProvider>,
+    );
+
     expect(screen.getByText('Свернуть меню')).toBeVisible();
   });
 
   it('Sidebar открытый при первом рендере и закрывается при false у флага в localStorage', async () => {
     localStorage.setItem('test', 'false');
-    renderWithTheme(<Sidebar localStorageKey="test" menu={{ items: [] }} />);
+
+    renderWithTheme(
+      <DashboardSidebarProvider localStorageKey="test">
+        <Sidebar menu={{ items: [] }} />
+      </DashboardSidebarProvider>,
+    );
+
     expect(screen.getByText('Свернуть меню')).toBeVisible();
 
     await waitFor(() =>
@@ -21,7 +34,13 @@ describe('Sidebar', () => {
 
   it('Sidebar открытый при первом рендере и остается открытым при true у флага в localStorage', async () => {
     localStorage.setItem('test', 'true');
-    renderWithTheme(<Sidebar localStorageKey="test" menu={{ items: [] }} />);
+
+    renderWithTheme(
+      <DashboardSidebarProvider localStorageKey="test">
+        <Sidebar menu={{ items: [] }} />
+      </DashboardSidebarProvider>,
+    );
+
     expect(screen.getByText('Свернуть меню')).toBeVisible();
 
     await waitFor(() =>
