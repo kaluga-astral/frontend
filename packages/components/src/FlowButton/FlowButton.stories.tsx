@@ -3,7 +3,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { FlowButton } from './FlowButton';
 
 /**
- * FlowButton — это кнопка, которая запускает потоки.
+ * FlowButton — это кнопка для запуска/продолжения пользовательского сценария.
  * ### [Figma]()
  * ### [Guide]()
  */
@@ -35,7 +35,13 @@ export const Interaction: Story = {
 };
 
 export const Example = () => (
-  <FlowButton targetText="Далее" disabled={false} color="primary">
+  <FlowButton targetText="Далее" color="primary">
     Выпустить УНЭП
+  </FlowButton>
+);
+
+export const Skip = () => (
+  <FlowButton targetText="Пропустить" color="success">
+    Пропустить этот шаг
   </FlowButton>
 );
