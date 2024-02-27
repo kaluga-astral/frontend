@@ -41,7 +41,6 @@ export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
 
   return (
     <TableRow
-      key={keyId}
       hover={Boolean(onRowClick)}
       selected={activeRowId === rowId}
       onClick={handleRowClick(row)}

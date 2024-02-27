@@ -51,7 +51,16 @@ export {
   type DashboardSidebarContextProps as SidebarContextProps,
 } from './DashboardSidebarProvider';
 
-export * from './DataGrid';
+export {
+  DataGrid,
+  DataGridProps,
+  DataGridRow,
+  DataGridColumns,
+  DataGridSort,
+  SortState,
+  RenderCell,
+  CellValue,
+} from './DataGrid';
 
 export * from './DataGridInfinite';
 

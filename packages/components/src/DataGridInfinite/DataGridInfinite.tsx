@@ -29,7 +29,7 @@ import {
 } from './constants';
 import { DataGridInfiniteTableRow } from './DataGridInfiniteTableRow';
 
-type DataGridInfiniteProps<
+export type DataGridInfiniteProps<
   Data extends Record<string, unknown>,
   SortField extends keyof Data,
 > = Omit<DataGridProps<Data, SortField>, 'Footer' | 'minDisplayRows'> & {
@@ -126,7 +126,9 @@ export const DataGridInfinite = <
 
   return (
     <DataGridInfiniteContainer maxHeight={maxHeight} className={className}>
-      <DataGridInfiniteTableContainer inert={isTableDisabled ? '' : undefined}>
+      <DataGridInfiniteTableContainer
+        {...{ inert: isTableDisabled ? '' : undefined }}
+      >
         <TableVirtuoso
           className="virtuosoScroller"
           style={{ height: '100%', width: '100%' }}
@@ -136,6 +138,7 @@ export const DataGridInfinite = <
           endReached={handleEndReach}
           rangeChanged={handleRangeChanged}
           data={rows}
+          computeItemKey={(index) => `item-${index}`}
           components={{
             Table: Table,
             TableBody: React.forwardRef(({ children, ...props }, ref) => (

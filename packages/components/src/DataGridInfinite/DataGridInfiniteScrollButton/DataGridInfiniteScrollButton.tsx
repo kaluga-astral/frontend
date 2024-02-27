@@ -9,7 +9,7 @@ import { DataGridInfiniteScrollButtonWrapper } from './styles';
 export type StickyButtonProps = ButtonProps & {
   vertical: 'top' | 'bottom';
   horizontal: 'right' | 'left';
-  icon?: JSX.Element;
+  icon: JSX.Element;
   isLoading?: boolean;
 };
 
