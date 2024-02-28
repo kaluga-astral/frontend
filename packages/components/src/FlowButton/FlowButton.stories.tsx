@@ -46,19 +46,19 @@ export const TargetText = () => (
   </FlowButton>
 );
 
-export const Colors = () => (
+export const Color = () => (
   <>
     <FlowButton targetText="Начальный" color="primary">
-      Синий цвет
+      Primary
     </FlowButton>
     <FlowButton targetText="Успех" color="success">
-      Зелёный цвет
+      Success
     </FlowButton>
     <FlowButton targetText="Ошибка" color="error">
-      Красный цвет
+      Error
     </FlowButton>
     <FlowButton targetText="Предупреждение" color="warning">
-      Оранжевый цвет
+      Warning
     </FlowButton>
   </>
 );
