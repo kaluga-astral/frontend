@@ -87,7 +87,7 @@ describe('DataGridInfinite', () => {
     });
   });
 
-  it('Props:columns: Названия колонок отображаются', () => {
+  it('Названия колонок отображаются', () => {
     const columns = [
       {
         field: 'name',
@@ -104,7 +104,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:columns:sortable: Иконка сортировки отображается при sortable=true', () => {
+  it('Иконка сортировки отображается при sortable=true', () => {
     const columns = [
       {
         field: 'name',
@@ -122,7 +122,7 @@ describe('DataGridInfinite', () => {
     expect(icon).not.toBeNull();
   });
 
-  it('Props:columns:sortable: по клику на head cell вызывается onSort', async () => {
+  it('По клику на head cell вызывается onSort', async () => {
     type DataItem = {
       name: string;
     };
@@ -165,7 +165,7 @@ describe('DataGridInfinite', () => {
     expect(currentSort).toBeUndefined();
   });
 
-  it('Props:columns:field: Данные, содержащиеся в field отображаются', async () => {
+  it('Данные, содержащиеся в field отображаются', async () => {
     renderWithTheme(
       <DataGrid
         keyId="name"
@@ -184,7 +184,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:options=[]: Placeholder отображается при отсутствии данных', async () => {
+  it('Placeholder отображается при отсутствии данных', async () => {
     const columns = [
       {
         field: 'name',
@@ -199,7 +199,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:onRowClick: Есть доступ к данным из row по клику на строку', async () => {
+  it('Есть доступ к данным из row по клику на строку', async () => {
     const onRowClick = vi.fn();
 
     renderWithTheme(
