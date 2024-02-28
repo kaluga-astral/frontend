@@ -10,8 +10,11 @@ import { DataGridInfinite } from './DataGridInfinite';
 import { makeDataList } from './faker';
 
 /**
- * Бесконечный скролл. Данные отображаются вертикальным списком, количество записей определяется командой разработки в рамках конкретной таблицы, следующие записи из БД подтягиваются в таблицу при использовании скролла. Часть таблицы с наименованием столбцов фиксируется и не скролится.
+ * Таблица с бесконечным скроллом.
  *
+ * Данные отображаются вертикальным списком, количество записей определяется командой разработки в рамках конкретной таблицы, следующие записи из БД подтягиваются в таблицу при использовании скролла. Часть таблицы с наименованием столбцов фиксируется и не скролится.
+ *
+ * DataGridInfinite обладает тем же функционалом  что и [DataGrid](/docs/components-datagrid--docs)
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
  * ### [Guide]()
  */
@@ -65,22 +68,18 @@ export const Example = () => {
     {
       field: 'documentName',
       label: 'Наименование документа',
-      sortable: true,
     },
     {
       field: 'direction',
       label: 'Направление',
-      sortable: true,
     },
     {
       field: 'createDate',
       label: 'Дата создания',
-      sortable: true,
       format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
     },
     {
       label: 'Действия',
-      sortable: false,
       align: 'center',
       width: '1%',
       renderCell: (row) => {

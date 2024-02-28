@@ -32,7 +32,7 @@ type DataType = {
 const fakeData = makeDataList(10);
 
 describe('DataGridInfinite', () => {
-  it('Элементы рендерятся в таблице', async () => {
+  it('Элементы отображаются в таблице', async () => {
     const columns: DataGridColumns<DataType>[] = [
       {
         field: 'documentName',
@@ -87,7 +87,7 @@ describe('DataGridInfinite', () => {
     });
   });
 
-  it('Props:columns: отображаются названия колонок', () => {
+  it('Props:columns: Названия колонок отображаются', () => {
     const columns = [
       {
         field: 'name',
@@ -104,7 +104,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: Иконка сортировки отображается при sortable=true', () => {
     const columns = [
       {
         field: 'name',
@@ -165,7 +165,7 @@ describe('DataGridInfinite', () => {
     expect(currentSort).toBeUndefined();
   });
 
-  it('Props:columns:field: отображает в строке данные по field', async () => {
+  it('Props:columns:field: Данные, содержащиеся в field отображаются', async () => {
     renderWithTheme(
       <DataGrid
         keyId="name"
@@ -184,7 +184,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:options=[]: отображается placeholder', async () => {
+  it('Props:options=[]: Placeholder отображается при отсутствии данных', async () => {
     const columns = [
       {
         field: 'name',
@@ -199,7 +199,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:onRowClick: по клику на строку получаем данные row', async () => {
+  it('Props:onRowClick: Есть доступ к данным из row по клику на строку', async () => {
     const onRowClick = vi.fn();
 
     renderWithTheme(

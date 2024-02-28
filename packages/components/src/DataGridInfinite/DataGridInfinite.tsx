@@ -138,7 +138,6 @@ export const DataGridInfinite = <
           endReached={handleEndReach}
           rangeChanged={handleRangeChanged}
           data={rows}
-          computeItemKey={(index) => `item-${index}`}
           components={{
             Table: Table,
             TableBody: React.forwardRef(({ children, ...props }, ref) => (

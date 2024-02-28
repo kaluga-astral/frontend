@@ -53,13 +53,13 @@ export {
 
 export {
   DataGrid,
-  DataGridProps,
-  DataGridRow,
-  DataGridColumns,
-  DataGridSort,
-  SortState,
-  RenderCell,
-  CellValue,
+  type DataGridProps,
+  type DataGridRow,
+  type DataGridColumns,
+  type DataGridSort,
+  type SortState,
+  type RenderCell,
+  type CellValue,
 } from './DataGrid';
 
 export * from './DataGridInfinite';

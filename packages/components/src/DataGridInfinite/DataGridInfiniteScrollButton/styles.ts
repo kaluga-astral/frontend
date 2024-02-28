@@ -7,9 +7,7 @@ export const DataGridInfiniteScrollButtonWrapper = styled.div<{
   position: fixed;
   ${({ theme, vertical = 'bottom', horizontal = 'right' }) =>
     `
-    ${vertical === 'top' ? 'top' : 'bottom'}: ${
-      vertical === 'top' ? theme.spacing(16) : theme.spacing(4)
-    };
+   ${vertical}: ${vertical === 'top' ? theme.spacing(16) : theme.spacing(4)};
 
    ${horizontal}: ${theme.spacing(6)};
 
