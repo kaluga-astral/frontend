@@ -3,15 +3,12 @@ import { type NotificationListType } from '../types';
 
 import { EmptyImage, Wrapper } from './styles';
 
-type NotificationListEmptyProps = {
+type Props = {
   listType?: NotificationListType;
   noDataImgSrc: string;
 };
 
-export const NotificationListEmpty = ({
-  listType,
-  noDataImgSrc,
-}: NotificationListEmptyProps) => {
+export const Empty = ({ listType, noDataImgSrc }: Props) => {
   return (
     <Wrapper>
       <EmptyImage src={noDataImgSrc} alt="" />

@@ -11,7 +11,7 @@ import { Collapse } from '../../Collapse';
 import { List, type ListProps } from './List';
 import { ItemButton } from './ItemButton';
 
-export type NavMenuItemProps = {
+export type ItemProps = {
   collapsedIn: boolean;
   item: [
     key: string,
@@ -25,7 +25,7 @@ export type NavMenuItemProps = {
   ];
 };
 
-export const Item = (props: NavMenuItemProps) => {
+export const Item = (props: ItemProps) => {
   const {
     collapsedIn,
     item: [key, value],

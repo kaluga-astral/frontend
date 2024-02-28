@@ -3,12 +3,12 @@ import { useContext, useMemo, useRef, useState } from 'react';
 import { ContentState } from '../ContentState';
 import { ConfigContext } from '../ConfigProvider';
 
-import { NotificationListItem } from './NotificationListItem';
+import { ListItem } from './ListItem';
 import { NotificationListTabs } from './NotificationListTabs';
 import { type Notification, type NotificationListType } from './types';
 import { Footer, Header, List, StyledSideDialog } from './styles';
-import { NotificationListEmpty } from './NotificationListEmpty';
-import { NotificationListSettingsButton } from './NotificationListSettingsButton';
+import { Empty } from './Empty';
+import { SettingsButton } from './SettingsButton';
 
 export type NotificationListProps = {
   /**
@@ -138,7 +138,7 @@ export const NotificationList = ({
       <Header title={title} onClose={handleClose} justifyContent="flex-end">
         {headerContent}
         {isSettingsButtonVisible && (
-          <NotificationListSettingsButton onClick={onSettingsButtonClick} />
+          <SettingsButton onClick={onSettingsButtonClick} />
         )}
       </Header>
       <ContentState
@@ -160,15 +160,12 @@ export const NotificationList = ({
           />
         )}
         {isEmptyData ? (
-          <NotificationListEmpty
-            listType={listType}
-            noDataImgSrc={imagesMap.noDataImgSrc}
-          />
+          <Empty listType={listType} noDataImgSrc={imagesMap.noDataImgSrc} />
         ) : (
           <>
             <List>
               {data.map((notification) => (
-                <NotificationListItem
+                <ListItem
                   key={notification.id}
                   {...notification}
                   onDelete={onDelete}

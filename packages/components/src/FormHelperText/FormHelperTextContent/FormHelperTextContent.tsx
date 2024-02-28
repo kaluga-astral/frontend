@@ -2,13 +2,17 @@ import { type ReactNode, useMemo } from 'react';
 
 import { ErrorIcon, Message, SuccessIcon, Wrapper } from './styles';
 
-type ContentProps = {
+export type FormHelperTextContentProps = {
   success?: boolean;
   error?: boolean;
   children?: ReactNode;
 };
 
-export const Content = ({ success, error, children }: ContentProps) => {
+export const FormHelperTextContent = ({
+  success,
+  error,
+  children,
+}: FormHelperTextContentProps) => {
   const Icon = useMemo(() => {
     if (success) {
       return <SuccessIcon />;

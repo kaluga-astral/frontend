@@ -3,13 +3,11 @@ import { SettingsOutlineMd } from '@astral/icons';
 import { IconButton } from '../../IconButton';
 import { Divider } from '../../Divider';
 
-type NotificationListSettingsButtonProps = {
+type Props = {
   onClick?: () => void;
 };
 
-export const NotificationListSettingsButton = ({
-  onClick,
-}: NotificationListSettingsButtonProps) => {
+export const SettingsButton = ({ onClick }: Props) => {
   return (
     <>
       <IconButton variant="text" onClick={onClick}>

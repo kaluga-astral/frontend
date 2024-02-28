@@ -29,7 +29,7 @@ const getDateFormat = (date: string | Date | null) => {
   });
 };
 
-export type NotificationListItemProps = Notification & {
+export type ListItemProps = Notification & {
   /**
    * @description Флаг управляет отображение кнопки удаления уведомления
    * */
@@ -44,7 +44,7 @@ export type NotificationListItemProps = Notification & {
   onViewNotification?: (id: string) => void;
 };
 
-export const NotificationListItem = (props: NotificationListItemProps) => {
+export const ListItem = (props: ListItemProps) => {
   const {
     id,
     title,
