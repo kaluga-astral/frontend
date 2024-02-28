@@ -122,7 +122,7 @@ describe('DataGridInfinite', () => {
     expect(icon).not.toBeNull();
   });
 
-  it('По клику на head cell вызывается onSort', async () => {
+  it('OnSort вызывается при нажатии на head cell', async () => {
     type DataItem = {
       name: string;
     };
