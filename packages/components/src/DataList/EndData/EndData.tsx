@@ -7,7 +7,7 @@ type Props = {
   endOfScrollMsg?: string;
 };
 
-export const DataListEndData = ({
+export const EndData = ({
   endOfScrollMsg = END_OF_SCROLL_MESSAGE,
 }: Props) => (
   <Item>

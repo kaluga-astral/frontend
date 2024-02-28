@@ -5,7 +5,7 @@ import { Placeholder } from '../../Placeholder';
 
 import { NO_DATA_TEXT } from './constants';
 
-export const DataListNoData = () => {
+export const NoData = () => {
   const { imagesMap } = useContext<ConfigContextProps>(ConfigContext);
   const { noDataImgSrc } = imagesMap;
 

@@ -8,7 +8,7 @@ type Props = {
   onRetry: () => void;
 };
 
-export const DataListError = ({ onRetry }: Props) => (
+export const Error = ({ onRetry }: Props) => (
   <Item>
     <Typography align="center">{ERROR_MESSAGE}</Typography>
 

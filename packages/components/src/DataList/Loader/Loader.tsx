@@ -2,7 +2,7 @@ import { CircularProgress } from '../../CircularProgress';
 
 import { Item } from './styles';
 
-export const DataListLoader = () => (
+export const Loader = () => (
   <Item>
     <CircularProgress color="primary" />
   </Item>
