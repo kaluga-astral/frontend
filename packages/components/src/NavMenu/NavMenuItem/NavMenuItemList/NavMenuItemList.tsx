@@ -16,10 +16,11 @@ export type NavMenuItemListProps = {
       },
     ]
   >;
+  onClickNavItem: ({ isGroupListItem }: { isGroupListItem?: boolean }) => void;
 };
 
 export const NavMenuItemList = (props: NavMenuItemListProps) => {
-  const { collapsedIn, items } = props;
+  const { collapsedIn, items, onClickNavItem } = props;
 
   return (
     <List disablePadding>
@@ -27,7 +28,13 @@ export const NavMenuItemList = (props: NavMenuItemListProps) => {
         const [key, value] = item;
 
         return (
-          <li key={key}>
+          <li
+            key={key}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickNavItem({ isGroupListItem: false });
+            }}
+          >
             <NavMenuItemButton
               collapsedIn={collapsedIn}
               selected={value.active}

@@ -2,7 +2,7 @@ import { type ReactNode, createContext } from 'react';
 
 import { useSidebar } from './hooks';
 
-export type DashboardSidebarContextProps = {
+export type DashboardSidebarContextProps<T extends object = object> = {
   /*
    * Флаг, отвечающий за состояние компонента
    */
@@ -11,6 +11,10 @@ export type DashboardSidebarContextProps = {
    * Обработчик, позволяющий изменить состояние боковой панели
    */
   onToggleSidebar: () => void;
+  /*
+   * Обработчик, срабатывающий при нажатии на элемент меню навигации
+   */
+  onClickNavItem: (params: T) => void;
 };
 
 export type DashboardSidebarProviderProps = {
@@ -25,6 +29,7 @@ export const DashboardSidebarContext =
   createContext<DashboardSidebarContextProps>({
     collapsedIn: false,
     onToggleSidebar: () => {},
+    onClickNavItem: () => {},
   });
 
 /**
