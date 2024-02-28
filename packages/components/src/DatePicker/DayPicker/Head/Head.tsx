@@ -12,7 +12,7 @@ type DateCalendarMonthGridHeadProps = {
   isMondayFirst?: boolean;
 };
 
-export const DateDayPickerGridHead = memo(
+export const Head = memo(
   ({ isMondayFirst = false }: DateCalendarMonthGridHeadProps) => (
     <Wrapper role="rowheader">
       {(isMondayFirst ? SUNDAY_FIRST_WEEKDAYS : MONDAY_FIRST_WEEKDAYS).map(
@@ -26,4 +26,4 @@ export const DateDayPickerGridHead = memo(
   ),
 );
 
-DateDayPickerGridHead.displayName = 'DateDayPickerGridHead';
+Head.displayName = 'DateDayPickerGridHead';
