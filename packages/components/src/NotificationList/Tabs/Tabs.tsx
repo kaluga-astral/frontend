@@ -4,19 +4,19 @@ import { type NotificationListType } from '../types';
 
 import { StyledTab, StyledTabs } from './styles';
 
-type NotificationListTabsProps = {
+type Props = {
   listType: NotificationListType;
   unreadNotificationsCount: number;
   notificationsCount: number;
   onChange: (listType: NotificationListType) => void;
 };
 
-export const NotificationListTabs = ({
+export const Tabs = ({
   listType,
   notificationsCount,
   unreadNotificationsCount,
   onChange,
-}: NotificationListTabsProps) => {
+}: Props) => {
   const handleChange = (
     _: SyntheticEvent<Element, Event>,
     value: NotificationListType,

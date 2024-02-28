@@ -4,7 +4,7 @@ import { ContentState } from '../ContentState';
 import { ConfigContext } from '../ConfigProvider';
 
 import { ListItem } from './ListItem';
-import { NotificationListTabs } from './NotificationListTabs';
+import { Tabs } from './Tabs';
 import { type Notification, type NotificationListType } from './types';
 import { Footer, Header, List, StyledSideDialog } from './styles';
 import { Empty } from './Empty';
@@ -152,7 +152,7 @@ export const NotificationList = ({
         }}
       >
         {isTabsVisible && (
-          <NotificationListTabs
+          <Tabs
             onChange={handleTabChange}
             listType={listType}
             notificationsCount={notifications.length}
