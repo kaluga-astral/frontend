@@ -5,7 +5,7 @@ import {
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { FormHelperTextContent } from './FormHelperTextContent';
+import { Content } from './Content';
 
 export type FormHelperTextProps =
   WithoutEmotionSpecific<MuiFormHelperTextProps> & {
@@ -21,9 +21,9 @@ export const FormHelperText = ({
 }: FormHelperTextProps) => {
   return (
     <MuiFormHelperText {...props}>
-      <FormHelperTextContent error={error} success={success}>
+      <Content error={error} success={success}>
         {children}
-      </FormHelperTextContent>
+      </Content>
     </MuiFormHelperText>
   );
 };
