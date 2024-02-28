@@ -22,7 +22,7 @@ export type NavMenuItemButtonProps = {
   onClick?: () => void;
 };
 
-export const NavMenuItemButton = forwardRef<
+export const ItemButton = forwardRef<
   HTMLDivElement,
   NavMenuItemButtonProps
 >((props, ref) => {

@@ -1,10 +1,10 @@
 import { type ElementType } from 'react';
-import { List } from '@mui/material';
+import { List as MuiList } from '@mui/material';
 import { PageDotOutlineMd } from '@astral/icons';
 
-import { NavMenuItemButton } from '../NavMenuItemButton';
+import { ItemButton } from '../ItemButton';
 
-export type NavMenuItemListProps = {
+export type ListProps = {
   collapsedIn: boolean;
   items: Array<
     [
@@ -18,17 +18,17 @@ export type NavMenuItemListProps = {
   >;
 };
 
-export const NavMenuItemList = (props: NavMenuItemListProps) => {
+export const List = (props: ListProps) => {
   const { collapsedIn, items } = props;
 
   return (
-    <List disablePadding>
+    <MuiList disablePadding>
       {items.map((item) => {
         const [key, value] = item;
 
         return (
           <li key={key}>
-            <NavMenuItemButton
+            <ItemButton
               collapsedIn={collapsedIn}
               selected={value.active}
               text={value.text}
@@ -38,6 +38,6 @@ export const NavMenuItemList = (props: NavMenuItemListProps) => {
           </li>
         );
       })}
-    </List>
+    </MuiList>
   );
 };

@@ -8,8 +8,8 @@ import {
 
 import { Collapse } from '../../Collapse';
 
-import { NavMenuItemList, type NavMenuItemListProps } from './NavMenuItemList';
-import { NavMenuItemButton } from './NavMenuItemButton';
+import { List, type ListProps } from './List';
+import { ItemButton } from './ItemButton';
 
 export type NavMenuItemProps = {
   collapsedIn: boolean;
@@ -20,12 +20,12 @@ export type NavMenuItemProps = {
       text: string;
       active?: boolean;
       component?: ElementType;
-      items?: NavMenuItemListProps['items'];
+      items?: ListProps['items'];
     },
   ];
 };
 
-export const NavMenuItem = (props: NavMenuItemProps) => {
+export const Item = (props: NavMenuItemProps) => {
   const {
     collapsedIn,
     item: [key, value],
@@ -52,7 +52,7 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
 
   return (
     <li key={key}>
-      <NavMenuItemButton
+      <ItemButton
         opened={opened}
         collapsedIn={collapsedIn}
         selected={selected}
@@ -63,7 +63,7 @@ export const NavMenuItem = (props: NavMenuItemProps) => {
       />
       {value.items && (
         <Collapse in={opened}>
-          <NavMenuItemList collapsedIn={collapsedIn} items={value.items} />
+          <List collapsedIn={collapsedIn} items={value.items} />
         </Collapse>
       )}
     </li>
