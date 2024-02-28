@@ -199,7 +199,7 @@ describe('DataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Есть доступ к данным из row по клику на строку', async () => {
+  it('Данные, содержащиеся в row, передаются в onRowClick при нажатии на строку', async () => {
     const onRowClick = vi.fn();
 
     renderWithTheme(
