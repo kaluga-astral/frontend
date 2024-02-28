@@ -19,7 +19,7 @@ import { elevation } from '../elevation';
 import { shape } from '../shape';
 import { defaultBreakpoints } from '../breakpoints';
 import { type Theme } from '../types';
-import { merge } from '../../utils';
+import { mergeDeep } from '../../utils';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
   red: Color;
@@ -45,6 +45,7 @@ export const createTheme = (params: CreateThemeParams) => {
     fontsUrls,
     breakpoints = defaultBreakpoints,
   } = params;
+
   const themeOptions = {
     typography,
     breakpoints,
@@ -52,8 +53,16 @@ export const createTheme = (params: CreateThemeParams) => {
     palette: getPalette(brand),
     components: getComponents(fontsUrls),
   };
-  const muiTheme = createMuiTheme(merge(themeOptions, options));
+
+  const mergedThemeOptions = options
+    ? (mergeDeep(
+        themeOptions,
+        options as Record<string, unknown>,
+      ) as ThemeOptions)
+    : themeOptions;
+
+  const muiTheme = createMuiTheme(mergedThemeOptions);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return merge(muiTheme as any, { elevation, shape }) as Theme;
+  return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
 };
