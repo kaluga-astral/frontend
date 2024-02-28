@@ -27,4 +27,4 @@ const fontsUrls = {
   },
 };
 
-export const theme = createTheme({ brand: Brand.LKP, fontsUrls });
+export const theme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
