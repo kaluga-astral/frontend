@@ -7,7 +7,7 @@ import {
 
 import { ContentState, type ContentStateProps } from '../ContentState';
 
-import { IframeStyled, Wrapper } from './styles';
+import { StyledIframe, Wrapper } from './styles';
 import { DEFAULT_SANDBOX_POLICY } from './constants';
 
 export type IframeProps = {
@@ -80,7 +80,7 @@ export const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
           <></>
         </ContentState>
         {!isError && (
-          <IframeStyled
+          <StyledIframe
             src={src}
             ref={ref}
             hidden={isLoading}

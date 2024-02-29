@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   height: 100%;
 `;
 
-export const IframeStyled = styled.iframe`
+export const StyledIframe = styled.iframe`
   overflow: hidden;
 
   width: 100%;
