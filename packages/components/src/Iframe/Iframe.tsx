@@ -1,10 +1,16 @@
-import { type SyntheticEvent, forwardRef, useState } from 'react';
+import {
+  type IframeHTMLAttributes,
+  type SyntheticEvent,
+  forwardRef,
+  useState,
+} from 'react';
 
 import { ContentState, type ContentStateProps } from '../ContentState';
 
-import { IframeStyled, Root } from './styles';
+import { IframeStyled, Wrapper } from './styles';
+import { DEFAULT_SANDBOX_POLICY } from './constants';
 
-type IframeProps = {
+export type IframeProps = {
   /*
    * URL для отображения в iframe
    */
@@ -20,7 +26,7 @@ type IframeProps = {
   /*
    * Политики безопасности
    */
-  sandbox?: string;
+  sandbox?: IframeHTMLAttributes<HTMLIFrameElement>['sandbox'];
   /*
    * Наименование iframe
    */
@@ -29,14 +35,19 @@ type IframeProps = {
 
 export const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
   (
-    { src, loadingContent, onLoading, onError, sandbox, title }: IframeProps,
+    {
+      src,
+      loadingContent,
+      onLoading,
+      onError,
+      sandbox = DEFAULT_SANDBOX_POLICY,
+      title,
+    }: IframeProps,
     ref,
   ) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
-    const isIframeHidden = isLoading || isError;
 
     const startRefetch = () => {
       setIsError(false);
@@ -55,7 +66,7 @@ export const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
     };
 
     return (
-      <Root>
+      <Wrapper>
         <ContentState
           isLoading={isLoading}
           isError={isError}
@@ -72,18 +83,15 @@ export const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
           <IframeStyled
             src={src}
             ref={ref}
-            hidden={isIframeHidden}
-            sandbox={
-              sandbox ||
-              'allow-forms allow-modals allow-scripts allow-same-origin'
-            }
+            hidden={isLoading}
+            sandbox={sandbox}
             onLoad={handleEndLoadingIframe}
             onError={handleErrorIframe}
             onErrorCapture={handleErrorIframe}
             title={title}
           />
         )}
-      </Root>
+      </Wrapper>
     );
   },
 );
