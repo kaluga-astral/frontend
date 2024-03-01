@@ -31,6 +31,7 @@ export const StyledLink = styled(Link)`
   &:focus {
     border-radius: 4px;
     outline: 2px solid ${OUTLINE};
+    outline-offset: 1.5px;
   }
 
   .MuiSvgIcon-root {
