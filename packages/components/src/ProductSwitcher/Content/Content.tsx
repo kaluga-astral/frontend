@@ -7,17 +7,17 @@ import { type WidgetProduct } from '../types';
 
 import { Logo, ProductItem, TitleErrorContainer } from './styles';
 
-type ProductSwitcherContentProps = {
+type ContentProps = {
   isLoading: boolean;
   products: Array<WidgetProduct>;
   isError: boolean;
 };
 
-export const ProductSwitcherContent = ({
+export const Content = ({
   isLoading,
   isError,
   products = [],
-}: ProductSwitcherContentProps) => {
+}: ContentProps) => {
   return (
     <ContentState
       isLoading={isLoading}

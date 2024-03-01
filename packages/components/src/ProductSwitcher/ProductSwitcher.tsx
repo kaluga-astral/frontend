@@ -5,7 +5,7 @@ import { ConfigContext } from '../ConfigProvider';
 import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
-import { ProductSwitcherContent } from './ProductSwitcherContent';
+import { Content } from './Content';
 import { type WidgetProduct } from './types';
 import { StyledMenu } from './styles';
 
@@ -61,11 +61,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
         anchorEl={anchorRef.current}
         onClose={handleCloseMenu}
       >
-        <ProductSwitcherContent
-          isLoading={isLoading}
-          isError={isError}
-          products={products}
-        />
+        <Content isLoading={isLoading} isError={isError} products={products} />
       </StyledMenu>
     </>
   );
