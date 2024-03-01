@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgIcon } from '@mui/material';
 
-import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from './constants';
+import { CHECKED_ICON_CLASSES, DEFAULT_ICON_CLASSES } from '../constants';
 
 export const DefaultIcon: React.VFC = ({ ...props }) => (
   <SvgIcon viewBox="0 0 24 24" {...props}>
