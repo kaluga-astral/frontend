@@ -87,19 +87,14 @@ export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
 
       if (colorName) {
         return (theme: Theme) => {
-          // если такой цвет есть в палитре, то ищем его intensity
-          // или возвращаем main цвет (если для данного цвета не определены intensity)
-          // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
-          // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
-
-          // TODO: необходим рефакторинг. https://track.astral.ru/soft/browse/UIKIT-844
-          return (
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.[colorIntensity as string] ||
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.main ||
-            colorName
-          );
+          switch (colorName) {
+            case TypographyColors.text:
+              return theme.palette.text.primary;
+            case TypographyColors.textSecondary:
+              return theme.palette.text.secondary;
+            default:
+              return theme.palette[colorName]?.[colorIntensity] || colorName;
+          }
         };
       }
 

@@ -24,6 +24,9 @@ type BrandColors = {
   green?: ColorShades;
   yellow?: ColorShades;
   grey?: ColorShades;
+  error?: ColorShades;
+  warning?: ColorShades;
+  success?: ColorShades;
   brand: ColorBrand;
   primary: ColorShades;
 };

@@ -35,6 +35,9 @@ type PaletteOptions = MuiPaletteOptions & {
   green: Color;
   yellow: Color;
   grey: Color;
+  error: Color;
+  warning: Color;
+  success: Color;
   primary: PrimaryColorOptions;
   background: Background;
   brand: ColorBrand;
@@ -81,48 +84,17 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#FEF3E6',
       ...brandColors.yellow,
     },
-    primary: {
-      main: brandColors.primary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.primary,
-    },
-    secondary: {
-      main: brandColors.secondary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.secondary,
-    },
-    get success() {
-      return {
-        light: this.green[100],
-        main: this.green[600],
-        dark: this.green[800],
-        contrastText: '#FFF',
-      };
-    },
-    get warning() {
-      return {
-        light: this.yellow[100],
-        main: this.yellow[600],
-        dark: this.yellow[800],
-        contrastText: '#FFF',
-      };
-    },
-    get error() {
-      return {
-        light: this.red[100],
-        main: this.red[600],
-        dark: this.red[800],
-        contrastText: '#FFF',
-      };
-    },
-    get text() {
-      return {
-        primary: this.grey[900],
-        secondary: this.grey[700],
-        disabled: this.grey[500],
-      };
+    error: {
+      900: '#E64343',
+      800: '#F24646',
+      700: '#F35959',
+      600: '#F67E7E',
+      500: '#F79090',
+      400: '#F8A3A3',
+      300: '#FAB5B5',
+      200: '#FCDADA',
+      100: '#FEEDED',
+      ...brandColors.error,
     },
     grey: {
       900: '#072D57',
@@ -135,6 +107,56 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       200: '#EBEEF1',
       100: '#F0F4F7',
       ...brandColors.grey,
+    },
+    warning: {
+      900: '#ED8000',
+      800: '#F98700',
+      700: '#FA961F',
+      600: '#FBAB4D',
+      500: '#FBB766',
+      400: '#FDCF99',
+      300: '#FDDBB2',
+      200: '#FBE6CC',
+      100: '#FEF3E6',
+      ...brandColors.warning,
+    },
+    success: {
+      900: '#008055',
+      800: '#00875A',
+      700: '#19936A',
+      600: '#4DAB8C',
+      500: '#66B79C',
+      400: '#80C3AC',
+      300: '#99CFBD',
+      200: '#CCE7DE',
+      100: '#E6F3EF',
+      ...brandColors.success,
+    },
+    primary: {
+      main: brandColors.primary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.primary,
+    },
+    secondary: {
+      main: brandColors.secondary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.secondary,
+    },
+    get text() {
+      return {
+        primary: this.grey[900],
+        secondary: this.grey[700],
+        disabled: this.grey[500],
+      };
+    },
+    get info() {
+      console.error(
+        'Цвет "info" больше не используется, используйте другие цвета.',
+      );
+
+      return this.primary;
     },
     background: {
       default: '#FFF',
