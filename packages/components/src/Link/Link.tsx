@@ -23,11 +23,14 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ startAddon: StartAddon, endAddon: EndAddon, children, ...props }, ref) => {
     const labelContent = (
       <Grid
-        container
         component="span"
         direction="column"
         spacing={1}
-        style={{ alignItems: 'center' }}
+        style={{
+          alignItems: 'baseline',
+          justifyContent: 'flex-start',
+          display: 'inline grid',
+        }}
       >
         {StartAddon && <StartAddon />}
         <span>{children}</span>

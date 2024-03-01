@@ -8,12 +8,9 @@ const ACTIVE = '#072D57';
 const VISITED = '#762376';
 const OUTLINE = '#70AEFF';
 
-export const StyledLink = styled(Link, {
-  shouldForwardProp: (prop) => prop !== 'customColor',
-})`
+export const StyledLink = styled(Link)`
   font-size: 14px;
   color: ${DEFAULT};
-  text-decoration: none;
 
   &:active {
     color: ${ACTIVE};
@@ -25,7 +22,10 @@ export const StyledLink = styled(Link, {
 
   &:hover {
     color: ${HOVER};
-    text-decoration: underline;
+
+    span {
+      text-decoration: underline;
+    }
   }
 
   &:focus {
@@ -34,6 +34,8 @@ export const StyledLink = styled(Link, {
   }
 
   .MuiSvgIcon-root {
+    align-self: center;
+
     width: 16px;
     height: 16px;
   }
