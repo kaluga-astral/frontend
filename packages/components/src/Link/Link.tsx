@@ -8,7 +8,10 @@ import { StyledLink } from './styles';
 
 export type LinkAddon = () => ReactElement | null;
 
-export type LinkProps = WithoutEmotionSpecific<MuiLinkProps> & {
+export type LinkProps = Pick<
+  WithoutEmotionSpecific<MuiLinkProps>,
+  'rel' | 'href' | 'className' | 'classes' | 'style' | 'children' | 'key'
+> & {
   /**
    * Контент слева
    */
