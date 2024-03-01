@@ -32,15 +32,18 @@ export type PageLayoutProps = {
 
 export const PageLayout = (props: PageLayoutProps) => {
   const { header, content, aside, className } = props;
-  const isSeparatorShown = Boolean(aside);
+  const hasAside = Boolean(aside);
   const isHeaderActionsShown = Boolean(header.actions);
 
   return (
-    <PageLayoutContainer className={className}>
+    <PageLayoutContainer
+      isHeaderActionsShown={isHeaderActionsShown}
+      className={className}
+    >
       <PageHeader {...header} />
       <PageContent
-        isSeparatorShown={isSeparatorShown}
-        isHeaderActionsShown={isHeaderActionsShown}
+        isSeparatorShown={hasAside}
+        isFullHeight={hasAside}
         {...content}
       />
       {aside && <PageAside {...aside} />}

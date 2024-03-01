@@ -21,6 +21,9 @@ import { DashboardLayout } from '../DashboardLayout';
 const meta: Meta<typeof DashboardLayout.Header> = {
   title: 'Components/DashboardLayout/Header',
   component: DashboardLayout.Header,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;

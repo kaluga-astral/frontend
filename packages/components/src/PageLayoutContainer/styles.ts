@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const PageLayoutContainerWrapper = styled.div`
+export const Wrapper = styled.div<{ isHeaderActionsShown: boolean }>`
   display: grid;
   grid-row-gap: ${({ theme }) => theme.spacing(4)};
   grid-template:
@@ -14,9 +14,14 @@ export const PageLayoutContainerWrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.common.white};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: block;
+    scroll-behavior: smooth;
 
-    height: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: ${({ isHeaderActionsShown }) =>
+      isHeaderActionsShown ? '80px' : '0'};
     padding-top: 0;
   }
 `;

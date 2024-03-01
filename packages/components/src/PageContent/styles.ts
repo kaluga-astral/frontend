@@ -3,10 +3,10 @@ import { styled } from '../styles';
 type PageContentWrapperProps = {
   isPaddingDisabled?: boolean;
   isSeparatorShown?: boolean;
-  isHeaderActionsShown: boolean;
+  isFullHeight?: boolean;
 };
 
-export const PageContentWrapper = styled.article<PageContentWrapperProps>`
+export const Wrapper = styled.article<PageContentWrapperProps>`
   scroll-behavior: smooth;
 
   overflow: auto;
@@ -19,9 +19,13 @@ export const PageContentWrapper = styled.article<PageContentWrapperProps>`
     isSeparatorShown ? `1px solid ${theme.palette.grey[300]}` : 'none'};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
+    overflow: unset;
+    flex-grow: 1;
+
+    height: ${({ isFullHeight }) => (isFullHeight ? 'auto' : '100%')};
     padding: ${({ isPaddingDisabled, theme }) =>
       isPaddingDisabled ? 0 : theme.spacing(0, 4)};
-    padding-bottom: ${({ isHeaderActionsShown }) =>
-      isHeaderActionsShown ? '80px' : '0'};
+
+    border-top: none;
   }
 `;
