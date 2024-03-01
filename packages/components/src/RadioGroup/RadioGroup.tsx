@@ -9,7 +9,7 @@ import { FormControl, type FormControlProps } from '../FormControl';
 import { FormLabel } from '../FormLabel';
 import { Tooltip } from '../Tooltip';
 
-import { RadioGroupProvider } from './RadioGroupProvider';
+import { RadioGroupProvider } from './RadioGroupContext';
 
 export type RadioGroupProps = WithoutEmotionSpecific<MuiRadioGroupProps> & {
   /**

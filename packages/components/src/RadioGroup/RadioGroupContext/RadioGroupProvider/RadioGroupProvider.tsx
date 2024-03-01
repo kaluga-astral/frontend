@@ -1,19 +1,13 @@
-import { type ReactNode, createContext } from 'react';
+import { type ReactNode } from 'react';
 
-export type RadioGroupContextProps = {
-  /**
-   * @description Флаг состояния ошибки
-   */
-  isError?: boolean;
-};
+import {
+  RadioGroupContext,
+  type RadioGroupContextProps,
+} from '../RadioGroupContext';
 
 export type RadioGroupProviderProps = RadioGroupContextProps & {
   children: ReactNode;
 };
-
-export const RadioGroupContext = createContext<RadioGroupContextProps>({
-  isError: false,
-});
 
 export const RadioGroupProvider = ({
   children,
