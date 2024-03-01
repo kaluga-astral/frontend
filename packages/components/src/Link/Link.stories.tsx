@@ -1,6 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { OpenLinkOutlineSm } from '@astral/icons';
 
+import { Typography } from '../Typography';
+
 import { Link } from './Link';
 
 /**
@@ -36,11 +38,24 @@ export const Interaction: Story = {
 
 export const Example = () => (
   <>
-    <Link href="/" startAddon={() => <OpenLinkOutlineSm />}>
-      Visited
-    </Link>
-
-    <Link href="#">Default</Link>
+    <Typography>
+      Для начала работы необходимо:
+      <br />
+      <ul>
+        <li>
+          Подключить{' '}
+          <Link href="#1" startAddon={() => <OpenLinkOutlineSm />}>
+            Telegram
+          </Link>
+        </li>
+        <li>
+          Выпустить сертификат <Link href="#2">УНЭП</Link>
+        </li>
+        <li>
+          <Link href="/">Госключ</Link> для подписания документов
+        </li>
+      </ul>
+    </Typography>
   </>
 );
 
