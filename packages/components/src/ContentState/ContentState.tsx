@@ -10,7 +10,7 @@ import { ConfigContext } from '../ConfigProvider';
 import { LoadingContainer } from './styles';
 import { type ContentStateErrorProps } from './types';
 
-type ContentStateProps = {
+export type ContentStateProps = {
   /**
    * Флаг состояния загрузки
    */
