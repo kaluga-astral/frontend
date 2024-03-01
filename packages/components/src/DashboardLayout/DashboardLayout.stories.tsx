@@ -85,8 +85,8 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
-  width: 100%;
   max-height: 600px;
+  width: 100%;
 `;
 
 export const Example = () => {
