@@ -79,6 +79,9 @@ const modifyPackageJSON = ({
     browser: './index.js',
     exports: {
       '.': {
+        // Специально для vitest добавляется отдельный exports потому, что он быстро работает только с cjs, когда есть barrel files
+        // Порядок имеет значение
+        vitest: './node/index.js',
         module: './index.js',
         require: './node/index.js',
       },

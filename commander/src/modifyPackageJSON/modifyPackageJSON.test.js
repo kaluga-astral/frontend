@@ -45,6 +45,7 @@ describe('modifyPackageJSON', () => {
     });
 
     expect(packageFileData.exports['.']).toEqual({
+      vitest: './node/index.js',
       module: './index.js',
       require: './node/index.js',
     });
