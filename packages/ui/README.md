@@ -13,6 +13,8 @@
 - [Playground](#playground)
 - [Getting started with Next.js](#getting-started-with-nextjs)
 - [Migration guide](#migration-guide)
+- [Troubleshooting](#troubleshooting)
+  - [Медленно выполняются vitest тесты при импорте пакета](#медленно-выполняются-vitest-тесты-при-импорте-пакета)
 
 # [Storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com/)
 [Storybook](https://main--61baeff6f06230003a88ef8a.chromatic.com/) содержит документацию компонентов ```@astral/ui```.
@@ -329,3 +331,30 @@ import { QuitOutlineMd } from '@astral/ui';
 
 ### DatePickerProvider
 Компонент был удален, используйте ConfigProvider.
+
+# Troubleshooting
+
+## Медленно выполняются vitest тесты при импорте пакета
+
+Для того чтобы ускорить выполнение vitest тестов, необходимо добавить следующий параметр `conditions` в `vitest.config.ts`:
+
+```ts
+/// <reference types="vitest" />
+
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+export default defineConfig({
+  plugins: [react(), tsconfigPaths()],
+  resolve: {
+    conditions: ['vitest'],
+  },
+  test: {
+    environment: 'jsdom',
+  },
+});
+```
+
+В пакете есть специальное свойство `exports.vitest`, оптимизирующее парсинг пакета для vitest.
+Исходна проблема: vitest плохо работает с barrel files.
