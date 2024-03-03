@@ -235,6 +235,8 @@ export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
 
-export { StepSlider, StepSliderProps } from './StepSlider';
+export { StepSlider, type StepSliderProps } from './StepSlider';
 
-export { CodeField, CodeFieldProps } from './CodeField';
+export { CodeField, type CodeFieldProps } from './CodeField';
+
+export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
