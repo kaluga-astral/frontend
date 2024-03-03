@@ -24,7 +24,7 @@ describe('WelcomeScreen', () => {
       </WelcomeScreen>,
     );
 
-    // Лоадер отображается с задержкой в 300. Значение определено в константе LOADING_DISPLAY_DELAY_MS
+    // Лоадер отображается с задержкой в 300мс. Значение определено в константе LOADING_DISPLAY_DELAY_MS
     await new Promise((resolve) =>
       setTimeout(resolve, LOADING_DISPLAY_DELAY_MS + 100),
     );
