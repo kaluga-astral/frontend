@@ -5,7 +5,7 @@ import {
   type DescriptionContextProps,
 } from '../DescriptionContext';
 
-export type DescriptionProviderProps = DescriptionContextProps & {
+type Props = DescriptionContextProps & {
   children: ReactNode;
 };
 
@@ -13,7 +13,7 @@ export const DescriptionContextProvider = ({
   children,
   leader,
   separator,
-}: DescriptionProviderProps) => (
+}: Props) => (
   <DescriptionContext.Provider value={{ leader, separator }}>
     {children}
   </DescriptionContext.Provider>

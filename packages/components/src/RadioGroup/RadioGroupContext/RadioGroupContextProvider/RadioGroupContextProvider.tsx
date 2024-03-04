@@ -5,14 +5,14 @@ import {
   type RadioGroupContextProps,
 } from '../RadioGroupContext';
 
-export type RadioGroupProviderProps = RadioGroupContextProps & {
+export type Props = RadioGroupContextProps & {
   children: ReactNode;
 };
 
-export const RadioGroupProvider = ({
+export const RadioGroupContextProvider = ({
   children,
   isError,
-}: RadioGroupProviderProps) => {
+}: Props) => {
   return (
     <RadioGroupContext.Provider value={{ isError }}>
       {children}
