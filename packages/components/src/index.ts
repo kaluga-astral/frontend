@@ -237,6 +237,8 @@ export * from './PasswordField';
 
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
+export { Iframe, type IframeProps } from './Iframe';
+
 export { CodeField, type CodeFieldProps } from './CodeField';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
