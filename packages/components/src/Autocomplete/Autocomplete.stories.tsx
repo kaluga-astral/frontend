@@ -237,28 +237,3 @@ export const CustomRenderInput = () => (
     />
   </Wrapper>
 );
-
-export const ControlledWithRenderInput = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  return (
-    <Wrapper>
-      <Autocomplete<IOption, true, false, false>
-        label="Custom render input"
-        size="small"
-        inputValue={inputValue}
-        options={OPTIONS}
-        getOptionLabel={(params) => params.title}
-        renderOption={(props, option) => (
-          <MenuItem {...props} key={props.id}>
-            <OverflowTypography rowsCount={2}>
-              {`Custom render option - ${option.title}`}
-            </OverflowTypography>
-          </MenuItem>
-        )}
-        onInputChange={(_event, value) => setInputValue(value)}
-        renderInput={(props) => <TextField {...props} placeholder="test" />}
-      />
-    </Wrapper>
-  );
-};
