@@ -2,12 +2,16 @@ import { type PropsWithChildren, useEffect, useState } from 'react';
 import { type Meta } from '@storybook/react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
+import { styled } from '../styles';
+import { Button } from '../Button';
 import { ConfigProvider } from '../ConfigProvider';
+import { DashboardLayout } from '../DashboardLayout';
 
 import { WelcomeScreen } from './WelcomeScreen';
 
 /**
  * ### Приветственный экран для мобильных версий приложений
+ * Отображается только при первичной загрузки приложения в рамках вкладки. При обновлении страницы не отображается
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=20192-42967&mode=design&t=OBUErQX5rM7PPiQQ-0)
  * ### [Guide]()
@@ -21,6 +25,10 @@ const meta: Meta<typeof WelcomeScreen> = {
 };
 
 export default meta;
+
+const MainWrapper = styled.div`
+  padding: ${({ theme }) => theme.spacing(4)};
+`;
 
 const Container = ({ children }: PropsWithChildren) => (
   <ConfigProvider
@@ -69,29 +77,20 @@ const useMockFetch = function <TData>(
 ): UseMockFetchResult<TData> {
   const [data, setData] = useState<TData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
 
   const fetchData = () => {
     setIsLoading(true);
-    setIsError(false);
 
     setTimeout(() => {
-      const shouldError = Math.random() < 0.4;
-
-      if (shouldError) {
-        setIsLoading(false);
-        setIsError(true);
-      } else {
-        setData(mockData);
-        setIsLoading(false);
-      }
+      setData(mockData);
+      setIsLoading(false);
     }, 1000);
   };
 
   return {
     data,
     isLoading,
-    isError,
+    isError: false,
     fetch: fetchData,
   };
 };
@@ -103,6 +102,10 @@ export const Example = () => {
     fetch();
   }, []);
 
+  const handleClearStorage = () => sessionStorage.clear();
+
+  const logo = data?.logo;
+
   return (
     <Container>
       <WelcomeScreen
@@ -111,7 +114,27 @@ export const Example = () => {
         isError={isError}
         onRetry={fetch}
       >
-        Content
+        <DashboardLayout>
+          <DashboardLayout.Header
+            product={{
+              name: 'Астрал.ЭДО',
+              logo: () => logo,
+            }}
+          />
+          <DashboardLayout.Main>
+            <MainWrapper>
+              <p>
+                Приветствие отображается только при первичной загрузки
+                приложения в рамках вкладки. Для повторного просмотра
+                приветствия необходимо очистить sessionStorage
+              </p>
+
+              <Button onClick={handleClearStorage}>
+                Очистить sessionStorage
+              </Button>
+            </MainWrapper>
+          </DashboardLayout.Main>
+        </DashboardLayout>
       </WelcomeScreen>
     </Container>
   );
@@ -130,7 +153,7 @@ export const Error = () => {
 
   return (
     <Container>
-      <WelcomeScreen isError onRetry={handleRetry}>
+      <WelcomeScreen isError errorMsg="Ошибка 500" onRetry={handleRetry}>
         Content
       </WelcomeScreen>
     </Container>

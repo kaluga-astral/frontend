@@ -28,7 +28,7 @@ const createStepKeyframes = (
 const fadeFirstStep = keyframes`${createStepKeyframes('30%', '60%')}`;
 const fadeLastStep = keyframes`${createStepKeyframes('20%', '99%')}`;
 
-const appearText = keyframes`
+const appearTextKeyframes = keyframes`
   from {
     opacity: 0;
   }
@@ -92,14 +92,15 @@ export const GreetingWrapper = styled.div`
 `;
 
 export const Greeting = styled(Typography)`
-  margin-top: -15vh;
+  margin-top: -50%;
 
   font-size: ${({ theme }) => theme.typography.pxToRem(24)};
   line-height: ${({ theme }) => theme.typography.pxToRem(28)};
 
   opacity: 0;
 
-  animation: ${appearText} ${APPEAR_DURATION_TEXT_IN_LAST_STEP_MS}ms linear;
+  animation: ${appearTextKeyframes} ${APPEAR_DURATION_TEXT_IN_LAST_STEP_MS}ms
+    linear;
   animation-fill-mode: both;
   animation-delay: ${FIRST_STEP_DURATION_MS +
   APPEAR_DURATION_TEXT_IN_LAST_STEP_MS}ms;
@@ -111,7 +112,8 @@ export const UserName = styled(Typography)`
 
   opacity: 0;
 
-  animation: ${appearText} ${APPEAR_DURATION_TEXT_IN_LAST_STEP_MS}ms linear;
+  animation: ${appearTextKeyframes} ${APPEAR_DURATION_TEXT_IN_LAST_STEP_MS}ms
+    linear;
   animation-fill-mode: both;
   animation-delay: ${FIRST_STEP_DURATION_MS +
   APPEAR_DURATION_TEXT_IN_LAST_STEP_MS * 2}ms;

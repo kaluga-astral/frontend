@@ -1,13 +1,9 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode } from 'react';
 
 import { ContentState } from '../ContentState';
 import { CircularProgress } from '../CircularProgress';
 
-import {
-  ALL_DURATION_MS,
-  LOADING_DISPLAY_DELAY_MS,
-  SESSION_KEY,
-} from './constants';
+import { useWelcomeScreenStates } from './hooks';
 import {
   FirstStep,
   Greeting,
@@ -18,12 +14,46 @@ import {
 } from './styles';
 
 export type WelcomeScreenProps = {
+  /**
+   * Логотип продукта
+   */
   logo?: ReactNode;
+
+  /**
+   * Название продукта
+   */
   productName?: string;
+
+  /**
+   * Имя пользователя
+   */
   userName?: string;
+
+  /**
+   * Текст ошибки
+   */
+  errorMsg?: string;
+
+  /**
+   * Флаг загрузки данных
+   */
   isLoading?: boolean;
+
+  /**
+   * Флаг состояния ошибки
+   */
   isError?: boolean;
+
+  /**
+   * Содержимое компонента, отображению которого должно предшествовать приветствие
+   * В большинстве случаев это должен быть DashboardLayout
+   */
   children: ReactNode;
+
+  /**
+   * Функция обработки нажатия на кнопку "Повторить запрос"
+   * Должна инициализировать повторный запрос данных
+   */
   onRetry: () => void;
 };
 
@@ -31,57 +61,26 @@ export const WelcomeScreen = ({
   logo,
   productName,
   userName,
+  errorMsg,
   isLoading,
   isError,
   children,
   onRetry,
 }: WelcomeScreenProps) => {
-  const prevLoading = useRef<boolean>();
-
-  const [isShowLoader, setShowLoader] = useState(false);
-  const [isShowGreetings, setShowGreetings] = useState(false);
-
-  useEffect(() => {
-    if (isLoading && !prevLoading.current) {
-      prevLoading.current = true;
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
-    // Показываем приветствие только один раз в рамках сессии
-    const isExistSession = Boolean(sessionStorage.getItem(SESSION_KEY));
-
-    if (!isExistSession && !isLoading && !isError && prevLoading.current) {
-      sessionStorage.setItem(SESSION_KEY, 'true');
-      setShowGreetings(true);
-
-      const timer = setTimeout(() => {
-        setShowGreetings(false);
-      }, ALL_DURATION_MS);
-
-      return () => clearTimeout(timer);
-    }
-
-    return;
-  }, [isLoading, isError]);
-
-  useEffect(() => {
-    // Отложенный запуск отображения лоадера, на случай получения данных < LOADING_DISPLAY_DELAY_MS
-    const timer = setTimeout(() => {
-      setShowLoader(true);
-    }, LOADING_DISPLAY_DELAY_MS);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const { isShowLoader, isShowGreetings } = useWelcomeScreenStates({
+    isLoading,
+    isError,
+  });
 
   return (
     <ContentState
       isLoading={isLoading}
       isError={isError}
       loadingContent={
+        // Лоадер отображается с задержкой, указанной в константе LOADING_DISPLAY_DELAY_MS
         isShowLoader ? <CircularProgress color="primary" /> : <></>
       }
-      errorState={{ errorList: [''], onRetry }}
+      errorState={{ errorList: [errorMsg || ''], onRetry }}
     >
       {isShowGreetings ? (
         <>
