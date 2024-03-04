@@ -61,6 +61,8 @@ export const WelcomeScreen = ({
 
       return () => clearTimeout(timer);
     }
+
+    return;
   }, [isLoading, isError]);
 
   useEffect(() => {
