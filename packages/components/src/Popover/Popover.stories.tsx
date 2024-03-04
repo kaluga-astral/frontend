@@ -3,7 +3,6 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { type PopoverOrigin } from '@mui/material';
 
 import { Button } from '../Button';
-import { LegacyGrid } from '../LegacyGrid';
 import { Typography } from '../Typography';
 import { styled } from '../styles';
 import { Grid } from '../Grid';
@@ -24,7 +23,7 @@ export default meta;
 
 type Story = StoryObj<typeof Popover>;
 
-const PopoverContainer = styled(LegacyGrid)`
+const PopoverContainer = styled.div`
   padding: ${({ theme }) => theme.spacing(2)};
 `;
 
@@ -81,11 +80,12 @@ const GridContainer = styled(Grid)`
 
   margin-top: 30px;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${({ theme }) => theme.spacing(2)};{
     grid-template-columns: 1fr;
     flex-direction: row;
   }
 `;
+
 
 export const TransformOrigin = () => {
   const transformOriginVariants = [
@@ -105,10 +105,6 @@ export const TransformOrigin = () => {
     horizontal: 'right',
   });
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleOpen = (
     position: { vertical: string; horizontal: string },
     event: MouseEvent<HTMLButtonElement>,
@@ -118,7 +114,7 @@ export const TransformOrigin = () => {
       horizontal: position.horizontal as PopoverOrigin['horizontal'],
     });
 
-    handleClick(event);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -171,10 +167,6 @@ export const AnchorOrigin = () => {
     horizontal: 'right',
   });
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleOpen = (
     position: { vertical: string; horizontal: string },
     event: MouseEvent<HTMLButtonElement>,
@@ -184,7 +176,7 @@ export const AnchorOrigin = () => {
       horizontal: position.horizontal as PopoverOrigin['horizontal'],
     });
 
-    handleClick(event);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
