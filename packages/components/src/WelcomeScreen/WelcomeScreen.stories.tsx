@@ -104,7 +104,7 @@ export const Example = () => {
 
   const handleClearStorage = () => sessionStorage.clear();
 
-  const logo = data?.logo;
+  const Logo = () => data?.logo;
 
   return (
     <Container>
@@ -118,7 +118,7 @@ export const Example = () => {
           <DashboardLayout.Header
             product={{
               name: 'Астрал.ЭДО',
-              logo: () => logo,
+              logo: () => <Logo />,
             }}
           />
           <DashboardLayout.Main>
