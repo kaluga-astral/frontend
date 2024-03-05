@@ -21,6 +21,9 @@ import { DashboardLayout } from '../DashboardLayout';
 const meta: Meta<typeof DashboardLayout.Header> = {
   title: 'Components/DashboardLayout/Header',
   component: DashboardLayout.Header,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -49,8 +52,8 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
-  max-height: 600px;
   width: 100%;
+  max-height: 600px;
 `;
 
 export const Interaction: Story = {

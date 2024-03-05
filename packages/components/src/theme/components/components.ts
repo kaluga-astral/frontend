@@ -28,6 +28,7 @@ import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
 import { MuiListItemButton } from './MuiListItemButton';
 import { MuiListItemText } from './MuiListItemText';
+import { MuiLinearProgress } from './MuiLinearProgress';
 import { MuiTab } from './MuiTab';
 import { MuiTabs } from './MuiTabs';
 import { MuiStepLabel } from './MuiStepLabel';
@@ -144,6 +145,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCircularProgress,
   MuiListItemButton,
   MuiListItemText,
+  MuiLinearProgress,
   MuiTab,
   MuiTabs,
   MuiStepLabel,

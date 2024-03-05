@@ -14,6 +14,7 @@ import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { ProductSwitcher } from '../ProductSwitcher';
+import { Placeholder } from '../Placeholder';
 import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
@@ -33,6 +34,9 @@ import { SidebarButton } from './Sidebar';
 const meta: Meta<typeof DashboardLayout> = {
   title: 'Components/DashboardLayout',
   component: DashboardLayout,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -81,8 +85,8 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
-  max-height: 600px;
   width: 100%;
+  max-height: 600px;
 `;
 
 export const Example = () => {
@@ -238,7 +242,7 @@ export const Example = () => {
               },
             }}
             content={{
-              children: <>Content</>,
+              children: <Placeholder title="Документы отсутствуют" />,
               isPaddingDisabled: false,
             }}
           />

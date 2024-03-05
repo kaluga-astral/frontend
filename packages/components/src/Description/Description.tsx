@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 
 import { Name } from './Name';
 import { Value } from './Value';
-import { DescriptionWrapper } from './styles';
+import { Wrapper } from './styles';
 import { DescriptionProvider } from './DescriptionProvider';
 import { DEFAULT_SEPARATOR } from './constants';
 
@@ -37,9 +37,7 @@ export const Description = ({
 }: DescriptionProps) => {
   return (
     <DescriptionProvider leader={leader} separator={separator}>
-      <DescriptionWrapper justifyContent={justifyContent}>
-        {children}
-      </DescriptionWrapper>
+      <Wrapper justifyContent={justifyContent}>{children}</Wrapper>
     </DescriptionProvider>
   );
 };
