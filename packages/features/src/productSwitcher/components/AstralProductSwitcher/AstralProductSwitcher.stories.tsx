@@ -135,13 +135,58 @@ const MOCK_FETCH_IDENTITY_PRODUCT = [
       }
     },
   },
+  {
+    url: `${IDENTITY_URL}/api/products/widget?tenantId=astral&productGroupId=*`,
+    method: 'GET',
+    status: 200,
+    response: {
+      data: [
+        {
+          id: '6',
+          name: 'Группа Продукт 1',
+          productUrl: 'https://eco1',
+          description: 'Экосистема-Продукт1',
+          shortDescription: 'Экосистема-Продукт1',
+          iconFileId: 'test',
+          logoUrl: mockImage,
+          backgroundHexColor: '#2e77ff',
+          tenantId: 'eco',
+        },
+        {
+          id: '7',
+          name: 'Группа Продукт 2',
+          productUrl: 'https://eco2',
+          description: 'Экосистема-Продукт2',
+          shortDescription: 'Экосистема-Продукт2',
+          iconFileId: 'test',
+          logoUrl: mockImage,
+          backgroundHexColor: '#7756FF',
+          tenantId: 'eco',
+        },
+        {
+          id: '8',
+          name: 'Группа Продукт 3',
+          productUrl: 'https://eco3',
+          description: 'Экосистема-Продукт3',
+          shortDescription: 'Экосистема-Продукт3',
+          iconFileId: 'test',
+          logoUrl: mockImage,
+          backgroundHexColor: '#0397b3',
+          tenantId: 'eco',
+        },
+      ],
+      meta: {
+        totalCount: 3,
+      },
+    },
+  },
 ];
 
 /**
  * Реализация виджета продуктов Astral. Поддерживает мультиэкосистемность с помощью передачи параметра ```tenantId```.
  * Внутри себя содержит всю логику получения, форматирования и отображения продуктов из Identity
  *
- * Для получения информации по экосистемам и продукта, а также за параметрами: `identityUrl`,`tenantId` обращаться в команду ```Экосистема```
+ * Для получения информации по экосистемам и продукта, а также за параметрами: `identityUrl`,`tenantId`, `productGroupId` обращаться в команду ```Экосистема```
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=9236-108012&mode=design&t=j9or0RjIfmARezGD-4)
  * ### [Guide]()
  */
@@ -179,4 +224,16 @@ export const Example = () => (
  */
 export const Tenant = () => (
   <AstralProductSwitcher identityUrl={IDENTITY_URL} tenantId="eco" />
+);
+
+/**
+ * Prop ```productGroupId``` позволяет получить группу продуктов identity.
+ *
+ * Если задан ```productGroupId ```, то он имеет более высокий приоритет перед группировкой по tenantId
+ */
+export const ProductGroup = () => (
+  <AstralProductSwitcher
+    identityUrl={IDENTITY_URL}
+    productGroupId="identityGroupID"
+  />
 );

@@ -9,20 +9,28 @@ export type AstralProductSwitcherType = {
    * */
   identityUrl: string;
   /**
-   * Идентификатор экосистемы
+   * Код экосистемы
    * @default astral
    * */
   tenantId?: string;
+  /**
+   * Код группы продуктов
+   * */
+  productGroupId?: string;
 };
 
 export const AstralProductSwitcher = ({
   identityUrl,
   tenantId = 'astral',
+  productGroupId,
 }: AstralProductSwitcherType) => {
   const [products, setProducts] = useState<WidgetProduct[]>([]);
   const handleGetProducts = async () => {
     if (!products.length) {
-      const productsList = await getIdentityProducts(identityUrl, tenantId);
+      const productsList = await getIdentityProducts(identityUrl, {
+        tenantId,
+        productGroupId,
+      });
 
       setProducts(productsList);
 
