@@ -26,7 +26,9 @@ export type DataListProps<TDataItem extends Record<string, unknown>> = {
   /**
    * Поле, используемое в качестве ключа списка
    */
-  keyId: TDataItem[keyof TDataItem] extends Key ? keyof TDataItem : never;
+  keyId: Required<TDataItem>[keyof TDataItem] extends Key
+    ? keyof TDataItem
+    : never;
 
   /**
    * Название класса, применяется к корневому компоненту
