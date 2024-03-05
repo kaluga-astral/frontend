@@ -1,9 +1,13 @@
 import { styled } from '../styles';
-import { TableCell, TableContainer } from '../Table';
+import { Table, TableCell, TableContainer } from '../Table';
 import { Container } from '../DataGrid';
 
 export const DataGridInfiniteLoaderWrapper = styled(TableCell)`
   text-align: center;
+`;
+
+export const DataGridInfiniteTable = styled(Table)`
+  border-collapse: separate;
 `;
 
 export const DataGridInfiniteTableContainer = styled(TableContainer)`

@@ -6,7 +6,7 @@ import {
 } from 'react-virtuoso';
 import { ChevronUpOutlineMd } from '@astral/icons';
 
-import { Table, TableBody, TableRow } from '../Table';
+import { TableBody, TableRow } from '../Table';
 import { type DataGridProps, type DataGridRow } from '../DataGrid';
 import { DataGridHead } from '../DataGrid/DataGridHead';
 import { CircularProgress } from '../CircularProgress';
@@ -19,6 +19,7 @@ import { DataGridLoader } from '../DataGrid/DataGridLoader';
 import {
   DataGridInfiniteContainer,
   DataGridInfiniteLoaderWrapper,
+  DataGridInfiniteTable,
   DataGridInfiniteTableContainer,
 } from './styles';
 import { DataGridInfiniteScrollButton } from './DataGridInfiniteScrollButton';
@@ -139,7 +140,7 @@ export const DataGridInfinite = <
           rangeChanged={handleRangeChanged}
           data={rows}
           components={{
-            Table: Table,
+            Table: DataGridInfiniteTable,
             TableBody: React.forwardRef(({ children, ...props }, ref) => (
               <TableBody role={'tableBody'} ref={ref} {...props}>
                 {rows.length ? children : renderedPlaceholder}
