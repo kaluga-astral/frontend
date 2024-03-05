@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { ContentState } from '../ContentState';
 import { CircularProgress } from '../CircularProgress';
 
-import { useWelcomeScreenStates } from './hooks';
+import { useLogic } from './hooks';
 import {
   FirstStep,
   Greeting,
@@ -67,7 +67,7 @@ export const WelcomeScreen = ({
   children,
   onRetry,
 }: WelcomeScreenProps) => {
-  const { isShowLoader, isShowGreetings } = useWelcomeScreenStates({
+  const { isShowLoader, isShowGreetings } = useLogic({
     isLoading,
     isError,
   });

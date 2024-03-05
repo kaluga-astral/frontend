@@ -4,14 +4,11 @@ import {
   ALL_DURATION_MS,
   LOADING_DISPLAY_DELAY_MS,
   SESSION_KEY,
-} from '../constants';
+} from '../../constants';
 
-type UseWelcomeScreenStatesProps = { isLoading?: boolean; isError?: boolean };
+type UseLogicParams = { isLoading?: boolean; isError?: boolean };
 
-export const useWelcomeScreenStates = ({
-  isLoading,
-  isError,
-}: UseWelcomeScreenStatesProps) => {
+export const useLogic = ({ isLoading, isError }: UseLogicParams) => {
   // Храним предыдущее состояния лоадера. Для показа анимации из isLoading должен быть false
   // Но так как это его изначальное состояние, отслеживаем было ли оно в состоянии true
   const prevLoading = useRef<boolean>();
