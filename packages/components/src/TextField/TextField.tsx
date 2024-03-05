@@ -2,7 +2,7 @@ import { type ReactNode, forwardRef, useMemo } from 'react';
 import { TextField as MuiTextField } from '@mui/material';
 import { type TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
-import { FormHelperTextContent } from '../FormHelperText/FormHelperTextContent';
+import { FormHelperTextContent } from '../FormHelperText';
 import { type WithoutEmotionSpecific } from '../types';
 
 export type TextFieldProps = Omit<

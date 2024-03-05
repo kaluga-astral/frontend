@@ -1,12 +1,13 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
-import { Stack, useTheme, useMediaQuery } from '@mui/material';
+import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { useState } from 'react';
 
 import { Grid } from '../Grid';
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
 import { ActionCell, type Actions } from '../ActionCell';
+
 import { Tag } from './Tag';
 import { TagColors } from './enums';
 
@@ -259,7 +260,6 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-
 export const Interaction: Story = {
   args: {
     variant: 'light',
@@ -272,11 +272,10 @@ export const Interaction: Story = {
       disable: true,
     },
     controls: {
-      expanded:true,
+      expanded: true,
     },
-    options :
-    { 
-      showPanel: true 
+    options: {
+      showPanel: true,
     },
   },
 };
@@ -286,9 +285,10 @@ export const Example = () => {
   const [sorting, setSorting] = useState<DataGridSort<SortField>>();
   const handleSelect = (rows: DataType[]) => setSelected(rows);
   const handleRowClick = () => console.log('row clicked');
-  const handleSort = (newSorting: DataGridSort<SortField> | undefined) => 
-  setSorting(newSorting);
-  return(
+  const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
+    setSorting(newSorting);
+
+  return (
     <>
       <Stack spacing={4}>
         <DataGrid<DataType, SortField>
@@ -303,7 +303,7 @@ export const Example = () => {
         />
       </Stack>
     </>
-  )
+  );
 };
 
 /**
@@ -314,7 +314,8 @@ export const Static = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-  return(
+
+  return (
     <>
       <Grid container spacing={8} direction={autoFlow}>
         <Tag label="Text" variant="text" />
@@ -323,8 +324,8 @@ export const Static = () => {
         <Tag label="Contained primary" variant="contained" color="primary" />
       </Grid>
     </>
-  )
-}
+  );
+};
 
 /**
  * К тэгу может быть добавлен цвет.
@@ -334,20 +335,31 @@ export const Colors = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-  return(
+
+  return (
     <>
       <Grid container spacing={5}>
-        <Grid container direction={autoFlow} spacing={8} columns="repeat(3, auto)">
-          <Tag label="Primary light" variant="light" color="primary" /> 
-          <Tag label="Error light" variant="light" color="error" /> 
+        <Grid
+          container
+          direction={autoFlow}
+          spacing={8}
+          columns="repeat(3, auto)"
+        >
+          <Tag label="Primary light" variant="light" color="primary" />
+          <Tag label="Error light" variant="light" color="error" />
           <Tag label="Success light" variant="light" color="success" />
           <Tag label="Warning light" variant="light" color="warning" />
           <Tag label="Grey light" variant="light" color="grey" />
           <Tag label="Default light" variant="light" color="default" />
         </Grid>
-        <Grid container direction={autoFlow} spacing={8} columns="repeat(3, auto)">
-          <Tag label="Primary contained" variant="contained" color="primary" /> 
-          <Tag label="Error contained" variant="contained" color="error" /> 
+        <Grid
+          container
+          direction={autoFlow}
+          spacing={8}
+          columns="repeat(3, auto)"
+        >
+          <Tag label="Primary contained" variant="contained" color="primary" />
+          <Tag label="Error contained" variant="contained" color="error" />
           <Tag label="Success contained" variant="contained" color="success" />
           <Tag label="Warning contained" variant="contained" color="warning" />
           <Tag label="Grey contained" variant="contained" color="grey" />
@@ -355,7 +367,7 @@ export const Colors = () => {
         </Grid>
       </Grid>
     </>
-  )
+  );
 };
 
 /**
@@ -366,38 +378,30 @@ export const Removable = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-  
-  const handleDelete = () =>
-  {
-    console.log("deleted")
-  }
 
-  return(
+  const handleDelete = () => {
+    console.log('deleted');
+  };
+
+  return (
     <>
       <Grid container spacing={8} direction={autoFlow}>
-        <Tag 
-          color="grey" 
-          label="Default" 
-          onDelete={handleDelete}
-          />
-        <Tag 
-          avatar={svgAvatar} 
-          label="Default" 
-          onDelete={handleDelete}/>
-        <Tag 
-          label="Default" 
-          variant="text" 
+        <Tag color="grey" label="Default" onDelete={handleDelete} />
+        <Tag avatar={svgAvatar} label="Default" onDelete={handleDelete} />
+        <Tag
+          label="Default"
+          variant="text"
           endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-          onDelete={handleDelete} 
+          onDelete={handleDelete}
         />
-        <Tag 
+        <Tag
           disabled
-          label="Disabled"  
+          label="Disabled"
           onDelete={() => console.log('не нажмётся в дизейбле')}
         />
       </Grid>
     </>
-  )
+  );
 };
 
 /**
@@ -408,15 +412,21 @@ export const Sizes = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-  return(
+
+  return (
     <>
-      <Grid container spacing={8} direction={autoFlow} style={{ alignItems: "center" }}>
+      <Grid
+        container
+        spacing={8}
+        direction={autoFlow}
+        style={{ alignItems: 'center' }}
+      >
         <Tag label="Small" variant="light" color="grey" size="small" />
         <Tag label="Medium" variant="light" color="grey" size="medium" />
         <Tag label="Large" variant="light" color="grey" size="large" />
       </Grid>
     </>
-  )
+  );
 };
 
 /**
@@ -427,14 +437,28 @@ export const Adornment = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const autoFlow = matches ? 'row' : 'column';
-  return(
+
+  return (
     <>
       <Grid container spacing={8} direction={autoFlow}>
         <Tag avatar={svgAvatar} color="grey" label="Default" />
-        <Tag avatar={<ManOutlineSm />} label="Default" color="primary" variant='light'/>
-        <Tag avatar={<ManOutlineSm />} label="Default" onDelete={() => console.log("deleted")}/>
-        <Tag label="Default" variant="text" endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />} />
+        <Tag
+          avatar={<ManOutlineSm />}
+          label="Default"
+          color="primary"
+          variant="light"
+        />
+        <Tag
+          avatar={<ManOutlineSm />}
+          label="Default"
+          onDelete={() => console.log('deleted')}
+        />
+        <Tag
+          label="Default"
+          variant="text"
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
       </Grid>
     </>
-  )
+  );
 };

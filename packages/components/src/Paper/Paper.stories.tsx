@@ -15,7 +15,6 @@ import { styled } from '../styles';
 import { ExampleTemplate } from '../docs';
 import { LegacyGrid } from '../LegacyGrid';
 import { MenuItem } from '../MenuItem';
-import { AoIcon } from '../MenuGroup/stories/Icons';
 import { Product } from '../Product';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
@@ -84,7 +83,7 @@ export const PaperShowcase: Story = () => {
     product: {
       name: 'Астрал.Отчет',
       logo() {
-        return <AoIcon />;
+        return <BinOutlineMd />;
       },
     },
     profile: {

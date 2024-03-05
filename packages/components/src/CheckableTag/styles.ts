@@ -144,7 +144,7 @@ export const HiddenInput = styled.input`
   display: none;
 `;
 
-export const StyledTag = styled(Tag)<CheckableTagStyledProps>`
+export const StyledTag = styled(Tag)<TagProps & CheckableTagStyledProps>`
   cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
 
   background-color: ${getBgColor};
