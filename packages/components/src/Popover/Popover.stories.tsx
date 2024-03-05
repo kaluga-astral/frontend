@@ -86,7 +86,6 @@ const GridContainer = styled(Grid)`
   }
 `;
 
-
 export const TransformOrigin = () => {
   const transformOriginVariants = [
     { vertical: 'top', horizontal: 'left' },
