@@ -1,12 +1,10 @@
 import { type Meta } from '@storybook/react';
-import { useState } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Tag } from '../Tag';
 import { MenuItem } from '../MenuItem';
 import { OverflowTypography } from '../OverflowTypography';
 import { styled } from '../styles/styled';
-import { TextField } from '../TextField';
 
 import { Autocomplete } from './Autocomplete';
 
