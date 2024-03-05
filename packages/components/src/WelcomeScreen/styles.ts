@@ -26,7 +26,7 @@ const createStepKeyframes = (
 `;
 
 const fadeFirstStep = keyframes`${createStepKeyframes('30%', '60%')}`;
-const fadeLastStep = keyframes`${createStepKeyframes('20%', '99%')}`;
+const fadeLastStep = keyframes`${createStepKeyframes('20%', '90%')}`;
 
 const appearTextKeyframes = keyframes`
   from {

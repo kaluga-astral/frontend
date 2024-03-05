@@ -15,6 +15,7 @@ export const useLogic = ({ isLoading, isError }: UseLogicParams) => {
 
   const [isShowLoader, setShowLoader] = useState(false);
   const [isShowGreetings, setShowGreetings] = useState(false);
+  const [isShowContent, setShowContent] = useState(false);
 
   useEffect(() => {
     if (isLoading && !prevLoading.current) {
@@ -26,15 +27,21 @@ export const useLogic = ({ isLoading, isError }: UseLogicParams) => {
     // Показываем приветствие только один раз в рамках сессии
     const isExistSession = Boolean(sessionStorage.getItem(SESSION_KEY));
 
-    if (!isExistSession && !isLoading && !isError && prevLoading.current) {
-      sessionStorage.setItem(SESSION_KEY, 'true');
-      setShowGreetings(true);
+    if (!isLoading && !isError && prevLoading.current) {
+      if (isExistSession) {
+        // Если приветствие уже показывали, то отображаем содержимое после окончания загрузки
+        setShowContent(true);
+      } else {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        setShowGreetings(true);
 
-      const timer = setTimeout(() => {
-        setShowGreetings(false);
-      }, ALL_DURATION_MS);
+        const timer = setTimeout(() => {
+          setShowGreetings(false);
+          setShowContent(true);
+        }, ALL_DURATION_MS);
 
-      return () => clearTimeout(timer);
+        return () => clearTimeout(timer);
+      }
     }
 
     return;
@@ -49,5 +56,5 @@ export const useLogic = ({ isLoading, isError }: UseLogicParams) => {
     return () => clearTimeout(timer);
   }, []);
 
-  return { isShowLoader, isShowGreetings };
+  return { isShowLoader, isShowGreetings, isShowContent };
 };

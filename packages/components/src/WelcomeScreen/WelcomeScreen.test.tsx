@@ -9,6 +9,20 @@ describe('WelcomeScreen', () => {
     sessionStorage.clear();
   });
 
+  it('Контент не отображается при первичном рендере', () => {
+    renderWithTheme(
+      <WelcomeScreen
+        productName="Астрал.ЭДО"
+        userName="Иван Иванович"
+        onRetry={() => undefined}
+      >
+        Content
+      </WelcomeScreen>,
+    );
+
+    expect(screen.queryByText('Content')).toBeNull();
+  });
+
   it('Название продукта отображается', () => {
     const { rerender } = renderWithTheme(
       <WelcomeScreen

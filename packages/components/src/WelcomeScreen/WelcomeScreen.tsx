@@ -67,7 +67,7 @@ export const WelcomeScreen = ({
   children,
   onRetry,
 }: WelcomeScreenProps) => {
-  const { isShowLoader, isShowGreetings } = useLogic({
+  const { isShowLoader, isShowGreetings, isShowContent } = useLogic({
     isLoading,
     isError,
   });
@@ -82,7 +82,7 @@ export const WelcomeScreen = ({
       }
       errorState={{ errorList: [errorMsg || ''], onRetry }}
     >
-      {isShowGreetings ? (
+      {isShowGreetings && (
         <>
           <FirstStep>
             <ProductWrapper>
@@ -109,9 +109,9 @@ export const WelcomeScreen = ({
             </GreetingWrapper>
           </LastStep>
         </>
-      ) : (
-        children
       )}
+
+      {isShowContent && <>{children}</>}
     </ContentState>
   );
 };
