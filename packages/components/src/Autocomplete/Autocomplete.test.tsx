@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { TextField } from '../TextField';
@@ -207,5 +207,39 @@ describe('Autocomplete', () => {
     const paper = screen.getByTestId('customField');
 
     expect(paper).toBeVisible();
+  });
+
+  it('Фокус не теряется после ввода первой буквы, при использовании onInputChange в связке с renderInput', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [
+      { name: 'Vasya', surname: 'Pupkin' },
+      { name: 'Kolya', surname: 'Kolin' },
+    ];
+
+    const ControlledAutocompleteWithRenderInput = () => {
+      const [inputValue, setInputValue] = useState('');
+
+      return (
+        <Autocomplete<Option, false, false, false>
+          options={options}
+          inputValue={inputValue}
+          getOptionLabel={(option) => option.surname}
+          onInputChange={(_event, value) => setInputValue(value)}
+          renderInput={(props) => (
+            <TextField {...props} data-testid="customField" />
+          )}
+        />
+      );
+    };
+
+    renderWithTheme(<ControlledAutocompleteWithRenderInput />);
+
+    const input = await screen.findByRole('combobox');
+
+    await userEvents.click(input);
+    await userEvents.type(input, 'test');
+    expect(input).toHaveValue('test');
+    expect(input).toHaveFocus();
   });
 });
