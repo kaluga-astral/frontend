@@ -27,4 +27,4 @@ const fontsUrls = {
   },
 };
 
-export const theme = createTheme({ brand: Brand.SIGN, fontsUrls });
+export const theme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
