@@ -32,7 +32,7 @@ export const Image = styled.img`
   width: ${({ width }) => width || 'auto'};
   max-width: 100%;
   height: ${({ height }) => height || 'auto'};
-  margin-bottom: ${({ theme }) => theme.spacing(4)};
+  margin: auto auto ${({ theme }) => theme.spacing(4)};
 
   color: ${({ theme }) => theme.palette.grey[900]};
 
