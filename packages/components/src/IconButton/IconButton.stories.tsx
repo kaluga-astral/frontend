@@ -1,5 +1,4 @@
 import { type Meta } from '@storybook/react';
-
 import {
   DownloadOutlineMd,
   EyeFillMd,
@@ -60,7 +59,7 @@ export const Example = () => {
       width: '1%',
     },
   ];
-  
+
   const DATA: Columns[] = [
     {
       id: '1',
@@ -82,9 +81,7 @@ export const Example = () => {
     },
   ];
 
-  return (
-    <DataGrid rows={DATA} columns={COLUMNS} keyId={'id'} />
-  );
+  return <DataGrid rows={DATA} columns={COLUMNS} keyId={'id'} />;
 };
 
 const ButtonsContainer = styled(Grid)`
@@ -103,7 +100,7 @@ const ButtonsContainer = styled(Grid)`
 
 /**
  * Используется, когда необходимо обозначить ключевое или стартовое действие на странице. Например, начать заполнение формы или завершить работу с ней.
- * 
+ *
  * На одной странице не может находиться свыше одной акцентной кнопки. Исключение — акцентные кнопки с одинаковым действием в ряду однородных, равнозначных элементов.
  */
 

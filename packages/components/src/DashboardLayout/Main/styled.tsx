@@ -1,10 +1,10 @@
 import { styled } from '../../styles';
 
 export const MainRoot = styled.main`
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
+  grid-area: main;
   grid-column: 2;
   grid-row: 2;
-  overflow: hidden;
-  grid-area: main;
+  flex-direction: column;
 `;

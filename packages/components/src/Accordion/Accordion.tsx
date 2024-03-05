@@ -3,12 +3,7 @@ import React, { type PropsWithChildren, forwardRef, useState } from 'react';
 import { Collapse } from '../Collapse';
 import { Chevron } from '../Chevron';
 
-import {
-  ChevronWrapper,
-  ContentWrapper,
-  Header,
-  Summary,
-} from './styles';
+import { ChevronWrapper, ContentWrapper, Header, Summary } from './styles';
 
 export type AccordionProps = PropsWithChildren<{
   /**
