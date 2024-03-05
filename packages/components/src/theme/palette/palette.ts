@@ -84,18 +84,6 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#FEF3E6',
       ...brandColors.yellow,
     },
-    error: {
-      900: '#E64343',
-      800: '#F24646',
-      700: '#F35959',
-      600: '#F67E7E',
-      500: '#F79090',
-      400: '#F8A3A3',
-      300: '#FAB5B5',
-      200: '#FCDADA',
-      100: '#FEEDED',
-      ...brandColors.error,
-    },
     grey: {
       900: '#072D57',
       800: '#1D3F66',
@@ -108,30 +96,6 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#F0F4F7',
       ...brandColors.grey,
     },
-    warning: {
-      900: '#ED8000',
-      800: '#F98700',
-      700: '#FA961F',
-      600: '#FBAB4D',
-      500: '#FBB766',
-      400: '#FDCF99',
-      300: '#FDDBB2',
-      200: '#FBE6CC',
-      100: '#FEF3E6',
-      ...brandColors.warning,
-    },
-    success: {
-      900: '#008055',
-      800: '#00875A',
-      700: '#19936A',
-      600: '#4DAB8C',
-      500: '#66B79C',
-      400: '#80C3AC',
-      300: '#99CFBD',
-      200: '#CCE7DE',
-      100: '#E6F3EF',
-      ...brandColors.success,
-    },
     primary: {
       main: brandColors.primary[800],
       dark: brandColors.primary[900],
@@ -143,6 +107,17 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       dark: brandColors.primary[900],
       contrastText: '#FFF',
       ...brandColors.secondary,
+    },
+    background: {
+      default: '#FFF',
+      paper: '#FFF',
+      element: '#FAFBFC',
+      elementHover: '#EEF1F4',
+      modalShadow: '#142A438A',
+    },
+    brand: {
+      800: brandColors.brand[800],
+      background: brandColors.brand.background,
     },
     get text() {
       return {
@@ -158,16 +133,14 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
 
       return this.primary;
     },
-    background: {
-      default: '#FFF',
-      paper: '#FFF',
-      element: '#FAFBFC',
-      elementHover: '#EEF1F4',
-      modalShadow: '#142A438A',
+    get warning() {
+      return this.yellow;
     },
-    brand: {
-      800: brandColors.brand[800],
-      background: brandColors.brand.background,
+    get success() {
+      return this.green;
+    },
+    get error() {
+      return this.red;
     },
     components: componentsColors,
   };

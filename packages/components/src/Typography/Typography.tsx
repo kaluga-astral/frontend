@@ -3,17 +3,11 @@ import {
   type TypographyPropsVariantOverrides as TypographyPropsVariantOverridesMUI,
 } from '@mui/material';
 import { type Variant } from '@mui/material/styles/createTypography';
-import {
-  type ElementType,
-  type HTMLAttributes,
-  forwardRef,
-  useMemo,
-} from 'react';
+import { type ElementType, type HTMLAttributes, forwardRef } from 'react';
 
-import { type Theme } from '../theme';
-
-import { TypographyColors } from './enums';
+import { type TypographyColors } from './enums';
 import { TypographyWrapper } from './styles';
+import { useTypographyColor } from './hooks';
 
 type Intensity =
   | '900'
@@ -81,25 +75,7 @@ declare module '@mui/material/Typography' {
 
 export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
   ({ children, color, colorIntensity = '800', component, ...props }, ref) => {
-    const typographyColor = useMemo(() => {
-      // получаем название цвета по TypographyColors
-      const colorName = color && TypographyColors[color];
-
-      if (colorName) {
-        return (theme: Theme) => {
-          switch (colorName) {
-            case TypographyColors.text:
-              return theme.palette.text.primary;
-            case TypographyColors.textSecondary:
-              return theme.palette.text.secondary;
-            default:
-              return theme.palette[colorName]?.[colorIntensity] || colorName;
-          }
-        };
-      }
-
-      return;
-    }, [color, colorIntensity]);
+    const typographyColor = useTypographyColor({ color, colorIntensity });
 
     return (
       <TypographyWrapper
