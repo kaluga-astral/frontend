@@ -246,8 +246,10 @@ export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
 
+export { StepSlider, type StepSliderProps } from './StepSlider';
+
 export { Iframe, type IframeProps } from './Iframe';
 
-export { StepSlider, StepSliderProps } from './StepSlider';
+export { CodeField, type CodeFieldProps } from './CodeField';
 
-export { CodeField, CodeFieldProps } from './CodeField';
+export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';

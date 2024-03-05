@@ -7,9 +7,7 @@ type Props = {
   endOfScrollMsg?: string;
 };
 
-export const EndData = ({
-  endOfScrollMsg = END_OF_SCROLL_MESSAGE,
-}: Props) => (
+export const EndData = ({ endOfScrollMsg = END_OF_SCROLL_MESSAGE }: Props) => (
   <Item>
     <Typography>{endOfScrollMsg}</Typography>
   </Item>
