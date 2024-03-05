@@ -22,6 +22,9 @@ import { SidebarButton } from './SidebarButton';
 const meta: Meta<typeof DashboardLayout.Sidebar> = {
   title: 'Components/DashboardLayout/Sidebar',
   component: DashboardLayout.Sidebar,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -72,8 +75,8 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
-  max-height: 600px;
   width: 100%;
+  max-height: 600px;
 `;
 
 export const Interaction: Story = {

@@ -59,7 +59,7 @@ export const StyledSwipeableDrawer = styled(
   }
 `;
 
-export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
+export const Header = styled.header<SwipeableDrawerHeaderProps>`
   position: absolute;
   top: -${(props) => getHeight({ ...props })};
 
@@ -80,7 +80,7 @@ export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
   box-shadow: ${({ theme }) => theme.shadows[8]};
 `;
 
-export const SwipeableDrawerPuller = styled.div`
+export const Puller = styled.div`
   position: absolute;
   top: 0;
 
@@ -99,7 +99,7 @@ export const SwipeableDrawerPuller = styled.div`
   }
 `;
 
-export const SwipeableDrawerPullerIcon = styled.div`
+export const PullerIcon = styled.div`
   width: 14px;
   height: 2px;
 
@@ -110,11 +110,11 @@ export const SwipeableDrawerPullerIcon = styled.div`
   border-radius: ${({ theme }) => theme.shape.small};
 `;
 
-export const SwipeableDrawerTitle = styled(Typography)<TypographyProps>`
+export const Title = styled(Typography)<TypographyProps>`
   color: ${({ theme }) => theme.palette.grey[700]};
 `;
 
-export const SwipeableDrawerBody = styled.div<SwipeableDrawerBodyProps>`
+export const Body = styled.div<SwipeableDrawerBodyProps>`
   z-index: ${({ theme }) => theme.zIndex.mobileStepper};
 
   overflow: auto;

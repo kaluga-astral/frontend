@@ -6,7 +6,7 @@ import { ListItemButton } from '../../../ListItemButton';
 import { ListItemIcon } from '../../../ListItemIcon';
 import { ListItemText } from '../../../ListItemText';
 
-export const NavMenuItemButtonRoot = styled(ListItemButton)<{
+export const StyledListItemButton = styled(ListItemButton)<{
   isGroupTitleItem: boolean;
 }>`
   height: 40px;
@@ -32,8 +32,9 @@ export const NavMenuItemButtonRoot = styled(ListItemButton)<{
   }
 
   &:hover {
-    background-color: inherit;
     color: ${({ theme }) => theme.palette.primary['800']};
+
+    background-color: inherit;
 
     ${listItemIconClasses.root} {
       color: ${({ theme }) => theme.palette.primary['800']};
@@ -72,6 +73,7 @@ export const NavMenuItemButtonText = styled(ListItemText)`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     margin-left: 0;
+  }
 `;
 
 export const NavMenuItemButtonChevron = styled(ChevronDOutlineMd, {

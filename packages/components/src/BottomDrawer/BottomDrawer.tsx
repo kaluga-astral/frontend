@@ -6,7 +6,7 @@ import { type WithoutEmotionSpecific } from '../types';
 import { IconButton } from '../IconButton';
 
 import { DEFAULT_HEADER_HEIGHT } from './constants';
-import { DrawerBody, DrawerHeader, DrawerTitle, StyledDrawer } from './styles';
+import { Body, Header, HeaderTitle, StyledDrawer } from './styles';
 
 export type BottomDrawerProps = {
   /**
@@ -18,7 +18,9 @@ export type BottomDrawerProps = {
    * * @default 56
    */
   drawerHeaderHeight?: number;
-} & WithoutEmotionSpecific<Omit<MuiDrawerProps, 'anchor' | 'variant'>>;
+} & WithoutEmotionSpecific<
+  Omit<MuiDrawerProps, 'anchor' | 'variant' | 'title'>
+>;
 
 export const BottomDrawer = ({
   title,
@@ -35,16 +37,16 @@ export const BottomDrawer = ({
 
   return (
     <StyledDrawer {...props} anchor="bottom" onClose={onClose}>
-      <DrawerHeader drawerHeaderHeight={drawerHeaderHeight}>
-        <DrawerTitle variant="h5" noWrap>
+      <Header drawerHeaderHeight={drawerHeaderHeight}>
+        <HeaderTitle variant="h5" noWrap>
           {title}
-        </DrawerTitle>
+        </HeaderTitle>
         <IconButton variant="text" onClick={handleClose}>
           <CrossOutlineMd />
         </IconButton>
-      </DrawerHeader>
+      </Header>
 
-      <DrawerBody>{children}</DrawerBody>
+      <Body>{children}</Body>
     </StyledDrawer>
   );
 };

@@ -2,7 +2,7 @@ import { type ButtonProps } from '../../../Button';
 import { type DropdownButtonProps } from '../../../DropdownButton';
 import { MenuItem, type MenuItemProps } from '../../../MenuItem';
 
-import { MainActionButton, MainActionDropdownButton } from './styles';
+import { StyledButton, StyledDropdownButton } from './styles';
 
 type NestedAction = MenuItemProps & {
   /** Название действия */
@@ -40,22 +40,22 @@ export const ButtonGroupMainActions = ({
       const { text, isNested, actions: nestedActions, ...buttonProps } = action;
 
       return (
-        <MainActionDropdownButton key={text} name={text} {...buttonProps}>
+        <StyledDropdownButton key={text} name={text} {...buttonProps}>
           {nestedActions.map(({ text: nestedActionText, ...nestedProps }) => (
             <MenuItem key={nestedActionText} {...nestedProps}>
               {nestedActionText}
             </MenuItem>
           ))}
-        </MainActionDropdownButton>
+        </StyledDropdownButton>
       );
     }
 
     const { text, ...mainProps } = action;
 
     return (
-      <MainActionButton key={text} {...mainProps}>
+      <StyledButton key={text} {...mainProps}>
         {text}
-      </MainActionButton>
+      </StyledButton>
     );
   });
 };

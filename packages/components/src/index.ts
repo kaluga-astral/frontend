@@ -46,9 +46,16 @@ export * from './ContentState';
 
 export * from './DashboardLayout';
 
+export {
+  DashboardSidebarContext as SidebarContext,
+  type DashboardSidebarContextProps as SidebarContextProps,
+} from './DashboardSidebarProvider';
+
 export * from './DataGrid';
 
 export * from './DataGridPagination';
+
+export * from './DataList';
 
 export * from './DatePicker';
 
@@ -160,6 +167,8 @@ export * from './ProductSwitcher';
 
 export * from './Profile';
 
+export * from './ProgressBar';
+
 export * from './Radio';
 
 export * from './RadioField';
@@ -225,6 +234,8 @@ export * from './Zoom';
 export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
+
+export { Iframe, type IframeProps } from './Iframe';
 
 export { StepSlider, StepSliderProps } from './StepSlider';
 

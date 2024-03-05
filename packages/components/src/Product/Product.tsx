@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { ProductButton } from './styles';
+import { StyledButton } from './styles';
 import { type ProductProps } from './types';
 
 export const Product = forwardRef<HTMLButtonElement, ProductProps>(
@@ -8,14 +8,14 @@ export const Product = forwardRef<HTMLButtonElement, ProductProps>(
     const { logo: Logo, name, variant = 'text', ...restProps } = props;
 
     return (
-      <ProductButton
+      <StyledButton
         ref={ref}
         {...restProps}
         variant={variant}
         startIcon={<Logo />}
       >
         {name}
-      </ProductButton>
+      </StyledButton>
     );
   },
 );

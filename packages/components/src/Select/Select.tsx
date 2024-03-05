@@ -14,11 +14,7 @@ import { MenuItem } from '../MenuItem';
 import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import {
-  SelectPlaceholder,
-  SelectProgressWrapper,
-  SelectTagsWrapper,
-} from './styles';
+import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -59,13 +55,13 @@ const SelectInner = <Value,>(
   const renderValue = (selectedOptions: Value): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
-        <SelectTagsWrapper>
+        <TagsWrapper>
           {selectedOptions.map((option) => {
             const optionLabel = getOptionLabel(option);
 
             return <Tag key={option} color="grey" label={optionLabel} />;
           })}
-        </SelectTagsWrapper>
+        </TagsWrapper>
       );
     }
 
@@ -96,11 +92,11 @@ const SelectInner = <Value,>(
         ref={ref}
         fullWidth={fullWidth}
       >
-        <SelectPlaceholder value="">{placeholder}</SelectPlaceholder>
+        <Placeholder value="">{placeholder}</Placeholder>
         {loading && (
-          <SelectProgressWrapper>
+          <ProgressWrapper>
             <CircularProgress color="primary" />
-          </SelectProgressWrapper>
+          </ProgressWrapper>
         )}
         {!loading && children}
         {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}

@@ -6,12 +6,7 @@ import { ConfigContext } from '../ConfigProvider';
 import { NotificationListItem } from './NotificationListItem';
 import { NotificationListTabs } from './NotificationListTabs';
 import { type Notification, type NotificationListType } from './types';
-import {
-  NotificationListDialog,
-  NotificationListFooter,
-  NotificationListHeader,
-  NotificationListMain,
-} from './styles';
+import { Footer, Header, List, StyledSideDialog } from './styles';
 import { NotificationListEmpty } from './NotificationListEmpty';
 import { NotificationListSettingsButton } from './NotificationListSettingsButton';
 
@@ -139,17 +134,13 @@ export const NotificationList = ({
   };
 
   return (
-    <NotificationListDialog open={isOpen} onClose={handleClose}>
-      <NotificationListHeader
-        title={title}
-        onClose={handleClose}
-        justifyContent="flex-end"
-      >
+    <StyledSideDialog open={isOpen} onClose={handleClose}>
+      <Header title={title} onClose={handleClose} justifyContent="flex-end">
         {headerContent}
         {isSettingsButtonVisible && (
           <NotificationListSettingsButton onClick={onSettingsButtonClick} />
         )}
-      </NotificationListHeader>
+      </Header>
       <ContentState
         isLoading={isLoading}
         isError={isError}
@@ -175,7 +166,7 @@ export const NotificationList = ({
           />
         ) : (
           <>
-            <NotificationListMain>
+            <List>
               {data.map((notification) => (
                 <NotificationListItem
                   key={notification.id}
@@ -185,13 +176,11 @@ export const NotificationList = ({
                   isDeleteButtonVisible={Boolean(onDelete)}
                 />
               ))}
-            </NotificationListMain>
-            {footerContent && (
-              <NotificationListFooter>{footerContent}</NotificationListFooter>
-            )}
+            </List>
+            {footerContent && <Footer>{footerContent}</Footer>}
           </>
         )}
       </ContentState>
-    </NotificationListDialog>
+    </StyledSideDialog>
   );
 };
