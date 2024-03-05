@@ -22,50 +22,49 @@ export type NavMenuItemButtonProps = {
   onClick?: () => void;
 };
 
-export const ItemButton = forwardRef<
-  HTMLDivElement,
-  NavMenuItemButtonProps
->((props, ref) => {
-  const {
-    collapsedIn,
-    opened,
-    text,
-    icon,
-    component = 'a',
-    ...restProps
-  } = props;
+export const ItemButton = forwardRef<HTMLDivElement, NavMenuItemButtonProps>(
+  (props, ref) => {
+    const {
+      collapsedIn,
+      opened,
+      text,
+      icon,
+      component = 'a',
+      ...restProps
+    } = props;
 
-  const { isMobile } = useViewportType();
+    const { isMobile } = useViewportType();
 
-  const isGroupTitleItem = typeof opened === 'boolean';
+    const isGroupTitleItem = typeof opened === 'boolean';
 
-  const navMenuItemButtonTextProps: ListItemTextProps = {
-    [isMobile && isGroupTitleItem ? 'secondary' : 'primary']: text,
-    secondaryTypographyProps: {
-      variant: isGroupTitleItem ? 'caption' : 'body1',
-    },
-  };
+    const navMenuItemButtonTextProps: ListItemTextProps = {
+      [isMobile && isGroupTitleItem ? 'secondary' : 'primary']: text,
+      secondaryTypographyProps: {
+        variant: isGroupTitleItem ? 'caption' : 'body1',
+      },
+    };
 
-  return (
-    <StyledListItemButton
-      isGroupTitleItem={isGroupTitleItem}
-      ref={ref}
-      component={component}
-      {...restProps}
-    >
-      {!isMobile && (
-        <Tooltip arrow title={!collapsedIn && text} placement="right">
-          <NavMenuItemButtonIcon>{icon}</NavMenuItemButtonIcon>
-        </Tooltip>
-      )}
+    return (
+      <StyledListItemButton
+        isGroupTitleItem={isGroupTitleItem}
+        ref={ref}
+        component={component}
+        {...restProps}
+      >
+        {!isMobile && (
+          <Tooltip arrow title={!collapsedIn && text} placement="right">
+            <NavMenuItemButtonIcon>{icon}</NavMenuItemButtonIcon>
+          </Tooltip>
+        )}
 
-      <Collapse orientation="horizontal" in={collapsedIn}>
-        <NavMenuItemButtonText {...navMenuItemButtonTextProps} />
-      </Collapse>
+        <Collapse orientation="horizontal" in={collapsedIn}>
+          <NavMenuItemButtonText {...navMenuItemButtonTextProps} />
+        </Collapse>
 
-      {isGroupTitleItem && (
-        <NavMenuItemButtonChevron collapsedIn={collapsedIn} opened={opened} />
-      )}
-    </StyledListItemButton>
-  );
-});
+        {isGroupTitleItem && (
+          <NavMenuItemButtonChevron collapsedIn={collapsedIn} opened={opened} />
+        )}
+      </StyledListItemButton>
+    );
+  },
+);

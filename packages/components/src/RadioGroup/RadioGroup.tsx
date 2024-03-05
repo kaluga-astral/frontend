@@ -69,7 +69,9 @@ export const RadioGroup = (props: RadioGroupProps) => {
           aria-labelledby={labelId}
           row={row}
         >
-          <RadioGroupContextProvider isError={isError}>{children}</RadioGroupContextProvider>
+          <RadioGroupContextProvider isError={isError}>
+            {children}
+          </RadioGroupContextProvider>
         </MuiRadioGroup>
       </FormControl>
     </Tooltip>

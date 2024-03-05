@@ -9,10 +9,7 @@ export type Props = RadioGroupContextProps & {
   children: ReactNode;
 };
 
-export const RadioGroupContextProvider = ({
-  children,
-  isError,
-}: Props) => {
+export const RadioGroupContextProvider = ({ children, isError }: Props) => {
   return (
     <RadioGroupContext.Provider value={{ isError }}>
       {children}

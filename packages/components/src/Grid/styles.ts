@@ -46,7 +46,7 @@ export type StyledGridProps = {
 /**
  * @description Если аргумент - массив, то возвращаем его, иначе кладем аргумент в массив
  */
-const ensureArray = <T = unknown,>(arg: T | T[]): T[] =>
+const ensureArray = <T = unknown>(arg: T | T[]): T[] =>
   Array.isArray(arg) ? arg : [arg];
 
 /**
