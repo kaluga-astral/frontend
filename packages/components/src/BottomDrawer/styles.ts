@@ -12,7 +12,7 @@ import { OFFSET_TOP_SCREEN } from './constants';
 
 export const StyledDrawer = styled(Drawer)<DrawerProps>`
   ${`.${paperClasses.root}`} {
-    max-height: calc(100vh - ${OFFSET_TOP_SCREEN});
+    max-height: calc(100dvh - ${OFFSET_TOP_SCREEN});
 
     border-top-left-radius: ${({ theme }) => theme.shape.large};
     border-top-right-radius: ${({ theme }) => theme.shape.large};
