@@ -9,7 +9,7 @@ import { FormControl, type FormControlProps } from '../FormControl';
 import { FormLabel } from '../FormLabel';
 import { Tooltip } from '../Tooltip';
 
-import { RadioGroupProvider } from './RadioGroupProvider';
+import { RadioGroupContextProvider } from './RadioGroupContext';
 
 export type RadioGroupProps = WithoutEmotionSpecific<MuiRadioGroupProps> & {
   /**
@@ -69,7 +69,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
           aria-labelledby={labelId}
           row={row}
         >
-          <RadioGroupProvider isError={isError}>{children}</RadioGroupProvider>
+          <RadioGroupContextProvider isError={isError}>{children}</RadioGroupContextProvider>
         </MuiRadioGroup>
       </FormControl>
     </Tooltip>

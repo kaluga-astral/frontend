@@ -14,10 +14,10 @@ import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 
 import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
-import { DataListEndData } from './DataListEndData';
-import { DataListError } from './DataListError';
-import { DataListLoader } from './DataListLoader';
-import { DataListNoData } from './DataListNoData';
+import { EndData } from './EndData';
+import { Error } from './Error';
+import { Loader } from './Loader';
+import { NoData } from './NoData';
 import { Item, ScrollToStartButton } from './styles';
 
 export type DataListProps<TDataItem extends Record<string, unknown>> = {
@@ -135,7 +135,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
   const isDataExist = Boolean(data?.length);
 
   if (!isDataExist && !isLoading && !isError) {
-    return noDataPlaceholder || <DataListNoData />;
+    return noDataPlaceholder || <NoData />;
   }
 
   return (
@@ -166,12 +166,10 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
         components={{
           Footer: () => (
             <>
-              {isLoading && <DataListLoader />}
-              {isError && <DataListError onRetry={onRetry} />}
+              {isLoading && <Loader />}
+              {isError && <Error onRetry={onRetry} />}
 
-              {isEndReached && (
-                <DataListEndData endOfScrollMsg={endOfScrollMsg} />
-              )}
+              {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
             </>
           ),
         }}

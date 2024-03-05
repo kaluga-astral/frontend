@@ -2,7 +2,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { expect } from 'vitest';
 import { useContext } from 'react';
 
-import { RadioGroupContext } from './RadioGroupProvider';
+import { RadioGroupContext } from './RadioGroupContext';
 import { RadioGroup } from './RadioGroup';
 
 describe('RadioGroup', () => {
