@@ -171,7 +171,7 @@ export const Loading = () => {
 
   return (
     <Container>
-      <DataList
+      <DataList<MockData>
         keyId="id"
         data={[]}
         isLoading
@@ -195,7 +195,7 @@ export const Error = () => {
 
   return (
     <Container>
-      <DataList
+      <DataList<MockData>
         keyId="id"
         data={[]}
         isError
