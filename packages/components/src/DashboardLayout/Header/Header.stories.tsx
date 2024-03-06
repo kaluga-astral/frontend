@@ -7,10 +7,6 @@ import { ListItemIcon } from '../../ListItemIcon';
 import { ListItemText } from '../../ListItemText';
 import { Menu } from '../../Menu';
 import { MenuItem } from '../../MenuItem';
-import {
-  CURRENT_ORGANIZATION,
-  ORGANIZATIONS,
-} from '../../MenuOrganization/MenuOrganizations.stubs';
 import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../../styles/styled';
@@ -25,6 +21,9 @@ import { DashboardLayout } from '../DashboardLayout';
 const meta: Meta<typeof DashboardLayout.Header> = {
   title: 'Components/DashboardLayout/Header',
   component: DashboardLayout.Header,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -53,8 +52,8 @@ const Logo = () => {
 };
 
 const DashboardLayoutWrapper = styled.div`
-  max-height: 600px;
   width: 100%;
+  max-height: 600px;
 `;
 
 export const Interaction: Story = {
@@ -81,12 +80,6 @@ export const Interaction: Story = {
       logo() {
         return <Logo />;
       },
-    },
-    organizationMenu: {
-      currentOrganization: CURRENT_ORGANIZATION,
-      organizations: ORGANIZATIONS,
-      onAddOrganization: () => {},
-      onSelect: () => {},
     },
     profile: {
       displayName: 'Григорьев Виталий',
@@ -138,12 +131,6 @@ export const Example = () => {
             logo() {
               return <Logo />;
             },
-          }}
-          organizationMenu={{
-            currentOrganization: CURRENT_ORGANIZATION,
-            organizations: ORGANIZATIONS,
-            onAddOrganization: () => {},
-            onSelect: () => {},
           }}
           profile={{
             displayName: 'Григорьев Виталий',
@@ -255,30 +242,6 @@ export const Profile = () => {
                 </MenuItem>
               </Menu>
             ),
-          }}
-        />
-        <DashboardLayout.Sidebar menu={{ items: [] }} />
-      </DashboardLayout>
-    </DashboardLayoutWrapper>
-  );
-};
-
-export const OrganizationMenu = () => {
-  return (
-    <DashboardLayoutWrapper>
-      <DashboardLayout>
-        <DashboardLayout.Header
-          product={{
-            name: 'Астрал.ЭДО',
-            logo() {
-              return <Logo />;
-            },
-          }}
-          organizationMenu={{
-            currentOrganization: CURRENT_ORGANIZATION,
-            organizations: ORGANIZATIONS,
-            onAddOrganization: () => {},
-            onSelect: () => {},
           }}
         />
         <DashboardLayout.Sidebar menu={{ items: [] }} />

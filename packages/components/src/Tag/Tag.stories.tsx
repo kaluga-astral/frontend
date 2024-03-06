@@ -1,18 +1,28 @@
-import { type Story } from '@storybook/react';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { EyeFillMd, ManOutlineSm, SendOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
+import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import { useState } from 'react';
 
+import { Grid } from '../Grid';
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { LegacyGrid } from '../LegacyGrid';
-import { Typography } from '../Typography';
 import { ActionCell, type Actions } from '../ActionCell';
 
 import { Tag } from './Tag';
 import { TagColors } from './enums';
+
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=427-5580&mode=design&t=PhoMqy1NqsaRreET-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Tag> = {
+  title: 'Components/Tag',
+  component: Tag,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Tag>;
 
 type DataType = {
   id: string;
@@ -250,211 +260,36 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export default {
-  title: 'Components/Tag',
-  component: Tag,
+export const Interaction: Story = {
+  args: {
+    variant: 'light',
+    color: 'success',
+    label: 'Тэг',
+    rounded: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+    controls: {
+      expanded: true,
+    },
+    options: {
+      showPanel: true,
+    },
+  },
 };
 
-export const TagShowcase: Story = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
-
+export const Example = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [sorting, setSorting] = useState<DataGridSort<SortField>>();
-
   const handleSelect = (rows: DataType[]) => setSelected(rows);
-
   const handleRowClick = () => console.log('row clicked');
-
   const handleSort = (newSorting: DataGridSort<SortField> | undefined) =>
     setSorting(newSorting);
 
   return (
-    <ExampleTemplate>
-      <Typography variant="h3" paragraph>
-        Tags
-      </Typography>
-      <br />
-      <br />
-
-      <Typography variant="ui" paragraph>
-        Тэги позволяют пользователям маркировать или фильтровать информацию.
-      </Typography>
-      <Typography variant="ui" paragraph>
-        Могут показывать количество объектов, содержащихся в категории.
-        Несколько тэгов может быть выбранно одновременно. При этом будет показан
-        контент, относящийся к каждому выбранному тэгу.
-      </Typography>
-      <br />
-      <br />
-
-      <Typography variant="h5" paragraph>
-        Типы тэгов
-      </Typography>
-
-      <ExampleTemplate.Case
-        title="Tag"
-        descriptionList={[
-          'Статичный компонент без возможности взаимодействия.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag label="Text" variant="text" />
-          <Tag label="Light gray" variant="light" color="grey" />
-          <Tag label="Light primary" variant="light" color="primary" />
-          <Tag label="Contained primary" variant="contained" color="primary" />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title=""
-        descriptionList={['Дополнительные элементы.']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag avatar={svgAvatar} label="Default" color="grey" />
-          <Tag avatar={<ManOutlineSm />} label="Default" color="grey" />
-          <Tag
-            label="Default"
-            variant="text"
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Removable Tag"
-        descriptionList={[
-          'Тэг позволяющий фильтровать контент страницы при нажатии. Тэг можно удалить при необходимости.',
-        ]}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag
-            label="Default"
-            variant="light"
-            color="grey"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            label="Disabled"
-            disabled
-            onDelete={() => {
-              console.log('не нажмётся в дизейбле');
-            }}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title=""
-        descriptionList={['Дополнительные элементы']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag
-            avatar={svgAvatar}
-            color="grey"
-            label="Default"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            avatar={<ManOutlineSm />}
-            label="Default"
-            color="grey"
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-          <Tag
-            label="Default"
-            variant="text"
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-            onDelete={() => {
-              console.log('deleted');
-            }}
-          />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Размер тэга"
-        descriptionList={['3 стандартных размера тэга: small, medium, large.']}
-      >
-        <LegacyGrid
-          container
-          justifyContent="center"
-          alignItems="center"
-          autoFlow={autoFlow}
-          spacing={8}
-        >
-          <Tag label="Small" variant="light" color="grey" size="small" />
-          <Tag label="Medium" variant="light" color="grey" size="medium" />
-          <Tag label="Large" variant="light" color="grey" size="large" />
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Эмоциональный оттенок"
-        descriptionList={[
-          'К любому тэгу может быть добавлен эмоциональный оттенок.',
-        ]}
-      >
-        <LegacyGrid container justifyContent="center" spacing={5}>
-          <LegacyGrid
-            container
-            autoFlow={autoFlow}
-            spacing={8}
-            templateColumns="repeat(3, auto)"
-          >
-            <Tag label="Error" variant="contained" color="error" />
-            <Tag label="Success" variant="contained" color="success" />
-            <Tag label="Warning" variant="contained" color="warning" />
-          </LegacyGrid>
-          <LegacyGrid
-            container
-            autoFlow={autoFlow}
-            spacing={8}
-            templateColumns="repeat(3, auto)"
-          >
-            <Tag label="Error" variant="light" color="error" />
-            <Tag label="Success" variant="light" color="success" />
-            <Tag label="Warning" variant="light" color="warning" />
-          </LegacyGrid>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-      <br />
-      <br />
-
-      <Typography variant="h5" paragraph>
-        Пример использования
-      </Typography>
-
+    <>
       <Stack spacing={4}>
         <DataGrid<DataType, SortField>
           keyId="id"
@@ -467,26 +302,163 @@ export const TagShowcase: Story = () => {
           sorting={sorting}
         />
       </Stack>
-    </ExampleTemplate>
+    </>
   );
 };
 
-const Template: Story = (args) => <Tag {...args} onDelete={undefined} />;
+/**
+ * Статичный компонент без возможности взаимодействия.
+ */
 
-TagShowcase.parameters = { options: { showPanel: false } };
+export const Static = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
 
-export const TagStory = Template.bind({});
-
-TagStory.storyName = 'Tag';
-
-TagStory.args = {
-  variant: 'light',
-  color: 'success',
-  label: 'Тэг',
-  rounded: true,
+  return (
+    <>
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag label="Text" variant="text" />
+        <Tag label="Light gray" variant="light" color="grey" />
+        <Tag label="Light primary" variant="light" color="primary" />
+        <Tag label="Contained primary" variant="contained" color="primary" />
+      </Grid>
+    </>
+  );
 };
 
-TagStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+/**
+ * К тэгу может быть добавлен цвет.
+ */
+
+export const Colors = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  return (
+    <>
+      <Grid container spacing={5}>
+        <Grid
+          container
+          direction={autoFlow}
+          spacing={8}
+          columns="repeat(3, auto)"
+        >
+          <Tag label="Primary light" variant="light" color="primary" />
+          <Tag label="Error light" variant="light" color="error" />
+          <Tag label="Success light" variant="light" color="success" />
+          <Tag label="Warning light" variant="light" color="warning" />
+          <Tag label="Grey light" variant="light" color="grey" />
+          <Tag label="Default light" variant="light" color="default" />
+        </Grid>
+        <Grid
+          container
+          direction={autoFlow}
+          spacing={8}
+          columns="repeat(3, auto)"
+        >
+          <Tag label="Primary contained" variant="contained" color="primary" />
+          <Tag label="Error contained" variant="contained" color="error" />
+          <Tag label="Success contained" variant="contained" color="success" />
+          <Tag label="Warning contained" variant="contained" color="warning" />
+          <Tag label="Grey contained" variant="contained" color="grey" />
+          <Tag label="Default contained" variant="contained" color="default" />
+        </Grid>
+      </Grid>
+    </>
+  );
+};
+
+/**
+ * Тэг с возможностью удаления.
+ */
+
+export const Removable = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  const handleDelete = () => {
+    console.log('deleted');
+  };
+
+  return (
+    <>
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag color="grey" label="Default" onDelete={handleDelete} />
+        <Tag avatar={svgAvatar} label="Default" onDelete={handleDelete} />
+        <Tag
+          label="Default"
+          variant="text"
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          onDelete={handleDelete}
+        />
+        <Tag
+          disabled
+          label="Disabled"
+          onDelete={() => console.log('не нажмётся в дизейбле')}
+        />
+      </Grid>
+    </>
+  );
+};
+
+/**
+ * 3 стандартных размера тэга: small, medium, large.
+ */
+
+export const Sizes = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  return (
+    <>
+      <Grid
+        container
+        spacing={8}
+        direction={autoFlow}
+        style={{ alignItems: 'center' }}
+      >
+        <Tag label="Small" variant="light" color="grey" size="small" />
+        <Tag label="Medium" variant="light" color="grey" size="medium" />
+        <Tag label="Large" variant="light" color="grey" size="large" />
+      </Grid>
+    </>
+  );
+};
+
+/**
+ * Дополнительные элементы.
+ */
+
+export const Adornment = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  return (
+    <>
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag avatar={svgAvatar} color="grey" label="Default" />
+        <Tag
+          avatar={<ManOutlineSm />}
+          label="Default"
+          color="primary"
+          variant="light"
+        />
+        <Tag
+          avatar={<ManOutlineSm />}
+          label="Default"
+          onDelete={() => console.log('deleted')}
+        />
+        <Tag
+          label="Default"
+          variant="text"
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+      </Grid>
+    </>
+  );
 };

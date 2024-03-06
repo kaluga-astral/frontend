@@ -10,15 +10,15 @@ import {
 } from '../styles';
 
 import {
-  NotificationCloseButton,
-  NotificationCloseIcon,
-  NotificationContent,
-  NotificationFooter,
-  NotificationHeader,
-  NotificationIcon,
-  NotificationInner,
-  NotificationTemplateWrapper,
-  NotificationTitle,
+  CloseButton,
+  CloseIcon,
+  Content,
+  Footer,
+  Header,
+  IconWrapper,
+  Inner,
+  Title,
+  Wrapper,
 } from './styles';
 
 export type NotificationTemplateProps = ToastProps & {
@@ -64,31 +64,29 @@ export const NotificationTemplate = ({
   const handleCloseToast = () => closeToast?.();
 
   return (
-    <NotificationTemplateWrapper variant={variant} filled={filled}>
-      <NotificationIcon>
+    <Wrapper variant={variant} filled={filled}>
+      <IconWrapper>
         {icon || <DefaultIcon filled={filled} variant={variant} />}
-      </NotificationIcon>
-      <NotificationInner>
-        <NotificationHeader>
-          <NotificationTitle>{title}</NotificationTitle>
+      </IconWrapper>
+      <Inner>
+        <Header>
+          <Title>{title}</Title>
           {showCloseButton && (
-            <NotificationCloseButton
+            <CloseButton
               filled={filled}
               onClick={handleCloseToast}
               color="primary"
               variant="text"
             >
-              <NotificationCloseIcon filled={filled} />
-            </NotificationCloseButton>
+              <CloseIcon filled={filled} />
+            </CloseButton>
           )}
-        </NotificationHeader>
-        {content && <NotificationContent>{content}</NotificationContent>}
+        </Header>
+        {content && <Content>{content}</Content>}
         {actions && (
-          <NotificationFooter actionsDirection={actionsDirection}>
-            {actions}
-          </NotificationFooter>
+          <Footer actionsDirection={actionsDirection}>{actions}</Footer>
         )}
-      </NotificationInner>
-    </NotificationTemplateWrapper>
+      </Inner>
+    </Wrapper>
   );
 };

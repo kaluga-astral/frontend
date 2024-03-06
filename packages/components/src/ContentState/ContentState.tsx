@@ -10,7 +10,7 @@ import { ConfigContext } from '../ConfigProvider';
 import { LoadingContainer } from './styles';
 import { type ContentStateErrorProps } from './types';
 
-type ContentStateProps = {
+export type ContentStateProps = {
   /**
    * Флаг состояния загрузки
    */
@@ -26,7 +26,7 @@ type ContentStateProps = {
   /**
    * Параметры для отображения состояния ошибки
    */
-  errorState?: ContentStateErrorProps;
+  errorState?: Omit<ContentStateErrorProps, 'imgAlt'> & { imgAlt?: string };
   /**
    * Флаг для отображения custom состояния ошибки
    */

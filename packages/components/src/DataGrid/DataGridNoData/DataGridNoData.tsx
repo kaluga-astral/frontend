@@ -2,12 +2,7 @@ import { useContext } from 'react';
 
 import { ConfigContext, type ConfigContextProps } from '../../ConfigProvider';
 
-import {
-  DataGridNoDataFigcaption,
-  DataGridNoDataFigure,
-  DataGridNoDataIcon,
-  DataGridNoDataWrapper,
-} from './styles';
+import { Figcaption, Figure, NoDataImg, Row } from './styles';
 
 export type DataGridNoDataProps = {
   /**
@@ -35,17 +30,17 @@ export const DataGridNoData = ({
   } = useContext<ConfigContextProps>(ConfigContext);
 
   return (
-    <DataGridNoDataWrapper>
+    <Row>
       <td>
-        <DataGridNoDataFigure>
+        <Figure>
           {noDataImgSrc && (
-            <DataGridNoDataIcon src={noDataImgSrc} width={noDataIconWidth} />
+            <NoDataImg src={noDataImgSrc} width={noDataIconWidth} />
           )}
-          <DataGridNoDataFigcaption component="figcaption" variant="h4">
+          <Figcaption component="figcaption" variant="h4">
             {title}
-          </DataGridNoDataFigcaption>
-        </DataGridNoDataFigure>
+          </Figcaption>
+        </Figure>
       </td>
-    </DataGridNoDataWrapper>
+    </Row>
   );
 };

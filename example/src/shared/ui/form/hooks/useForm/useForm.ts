@@ -1,6 +1,6 @@
 import {
-  FormFieldValues,
-  UseFormProps as UseAstralFormProps,
+  type FormFieldValues,
+  type UseFormProps as UseAstralFormProps,
   UseFormReturn,
   useForm as useAstralForm,
 } from '@astral/ui';

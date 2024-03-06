@@ -6,7 +6,7 @@ import {
   ButtonGroupSecondaryActions,
   type SecondaryAction,
 } from './ButtonGroupSecondaryActions';
-import { ButtonGroupWrapper } from './styles';
+import { Wrapper } from './styles';
 
 export type ButtonGroupProps = {
   /** Основные действия */
@@ -17,9 +17,9 @@ export type ButtonGroupProps = {
 
 export const ButtonGroup = ({ main, secondary }: ButtonGroupProps) => {
   return (
-    <ButtonGroupWrapper>
+    <Wrapper>
       {secondary && <ButtonGroupSecondaryActions actions={secondary} />}
       {main && <ButtonGroupMainActions actions={main} />}
-    </ButtonGroupWrapper>
+    </Wrapper>
   );
 };

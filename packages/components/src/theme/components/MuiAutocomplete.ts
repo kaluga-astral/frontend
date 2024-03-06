@@ -43,6 +43,7 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
     },
     noOptions({ theme }) {
       return {
+        padding: theme.spacing(6, 0, 6, 3),
         color: theme.palette.grey['500'],
       };
     },
@@ -80,6 +81,13 @@ export const MuiAutocomplete: Components<Theme>['MuiAutocomplete'] = {
 
           zIndex: 1,
         },
+      };
+    },
+    loading({ theme }) {
+      return {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: theme.spacing(6, 0, 6, 0),
       };
     },
   },

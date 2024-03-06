@@ -1,14 +1,20 @@
-import { type ElementType, forwardRef, useMemo } from 'react';
+import {
+  type ComponentPropsWithRef,
+  type ElementType,
+  type ForwardedRef,
+  useMemo,
+} from 'react';
 import type { LoadingButtonProps } from '@mui/lab';
 
 import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 import type { WithoutEmotionSpecific } from '../types';
+import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import { ButtonColors, ButtonVariants } from './enums';
-import { LoadingButtonWrapper } from './styles';
+import { StyledLoadingButton } from './styles';
 
-export type ButtonProps = Omit<
+export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
   WithoutEmotionSpecific<LoadingButtonProps>,
   'variant' | 'color'
 > & {
@@ -24,41 +30,46 @@ export type ButtonProps = Omit<
   /**
    * Тип html-элемента
    */
-  component?: ElementType;
+  component?: TComponent;
   /**
    * Состояние кнопки - selected
    */
   selected?: boolean;
+} & ComponentPropsWithRef<
+    ElementType extends TComponent ? 'button' : TComponent
+  >;
+
+const UnwrappedButton = <TComponent extends ElementType>(
+  props: ButtonProps<TComponent>,
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
+  const {
+    variant = ButtonVariants.Contained,
+    color = ButtonColors.Primary,
+    ...restProps
+  } = props;
+
+  const loadingIndicatorColor = useMemo(() => {
+    if (variant !== ButtonVariants.Contained) {
+      return CircularProgressColors.PRIMARY;
+    }
+
+    return CircularProgressColors.INVERTED;
+  }, [variant]);
+
+  return (
+    <StyledLoadingButton
+      {...restProps}
+      ref={ref}
+      variant={variant}
+      color={color}
+      loadingIndicator={
+        <CircularProgress color={loadingIndicatorColor} size="small" />
+      }
+    />
+  );
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      variant = ButtonVariants.Contained,
-      color = ButtonColors.Primary,
-      ...restProps
-    } = props;
-
-    const loadingIndicatorColor = useMemo(() => {
-      if (variant !== ButtonVariants.Contained) {
-        return CircularProgressColors.PRIMARY;
-      }
-
-      return CircularProgressColors.INVERTED;
-    }, [variant]);
-
-    return (
-      <LoadingButtonWrapper
-        ref={ref}
-        {...restProps}
-        variant={variant}
-        color={color}
-        loadingIndicator={
-          <CircularProgress color={loadingIndicatorColor} size="small" />
-        }
-      />
-    );
-  },
-);
+export const Button = forwardRefWithGeneric(UnwrappedButton);
 
 export default Button;

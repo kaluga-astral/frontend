@@ -1,9 +1,9 @@
 import {
-  DateCalendarNextBtn,
-  DateCalendarPrevBtn,
-} from '../DateCalendarChevronBtn';
+  DateCalendarNextButton,
+  DateCalendarPrevButton,
+} from '../DateCalendarChevronButton';
 
-import { DateCalendarHeadBtn, DateCalendarHeadText } from './styles';
+import { HeadButton, HeadText } from './styles';
 
 export type CommonDateCalendarHeadProps = {
   /**
@@ -52,19 +52,19 @@ export const DateCalendarHead = ({
   isPlural,
 }: DateCalendarHeadProps) => (
   <>
-    <DateCalendarPrevBtn
+    <DateCalendarPrevButton
       postfixTitle={arrowPostfixTitle}
       onClick={onPrevClick}
       isPlural={isPlural}
     />
     {onHeadBtnClick ? (
-      <DateCalendarHeadBtn onClick={onHeadBtnClick} title={headBtnTitle}>
+      <HeadButton onClick={onHeadBtnClick} title={headBtnTitle}>
         {headBtnText}
-      </DateCalendarHeadBtn>
+      </HeadButton>
     ) : (
-      <DateCalendarHeadText role="head">{headBtnText}</DateCalendarHeadText>
+      <HeadText role="head">{headBtnText}</HeadText>
     )}
-    <DateCalendarNextBtn
+    <DateCalendarNextButton
       postfixTitle={arrowPostfixTitle}
       onClick={onNextClick}
       isPlural={isPlural}

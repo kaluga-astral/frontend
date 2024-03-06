@@ -10,7 +10,7 @@ export type DataGridLoaderProps = {
   disabled?: boolean;
 };
 
-const DataGridLoader = ({
+export const DataGridLoader = ({
   loading = false,
   disabled = false,
 }: DataGridLoaderProps) => {
