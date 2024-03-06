@@ -20,15 +20,18 @@ import { Loader } from './Loader';
 import { NoData } from './NoData';
 import { Item, ScrollToStartButton } from './styles';
 
+// TODO Вынести этот дженерик в отдельный пакет
+type RequiredKeys<T> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+}[keyof T];
+
 export type DataListProps<TDataItem extends Record<string, unknown>> = {
-  data?: Array<TDataItem>;
+  data: Array<TDataItem>;
 
   /**
    * Поле, используемое в качестве ключа списка
    */
-  keyId: Required<TDataItem>[keyof TDataItem] extends Key
-    ? keyof TDataItem
-    : never;
+  keyId: RequiredKeys<TDataItem>;
 
   /**
    * Название класса, применяется к корневому компоненту
