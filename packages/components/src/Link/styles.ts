@@ -1,40 +1,33 @@
 import { Link } from '@mui/material';
-import { theme } from '@astral/tests/src/theme';
 
 import { styled } from '../styles';
 
 export const StyledLink = styled(Link)`
-  padding: ${theme.spacing(0.5, 0.25, 0.5, 0)};
+  display: inline-flex;
+  gap: ${({ theme }) => theme.spacing(1)};
+  align-items: baseline;
+  justify-content: flex-start;
 
-  font-size: ${theme.typography.fontSize}px;
-  color: ${theme.palette.components.link.main};
+  font-size: ${({ theme }) => theme.typography.fontSize}px;
+  color: ${({ theme }) => theme.palette.components.link.main};
+  text-decoration: none;
 
   &:active {
-    color: ${theme.palette.components.link.active};
+    color: ${({ theme }) => theme.palette.components.link.active};
   }
 
   &:visited {
-    color: ${theme.palette.components.link.visited};
+    color: ${({ theme }) => theme.palette.components.link.visited};
   }
 
   &:hover {
-    color: ${theme.palette.components.link.hover};
-
-    * {
-      text-decoration: underline;
-    }
+    color: ${({ theme }) => theme.palette.components.link.hover};
+    text-decoration: underline;
   }
 
   &:focus {
     border-radius: 4px;
-    outline: 2px solid ${theme.palette.primary[400]};
-  }
-
-  & div {
-    display: inline-flex;
-    gap: ${theme.spacing(1)};
-    align-items: baseline;
-    justify-content: flex-start;
+    outline: 2px solid ${({ theme }) => theme.palette.primary[400]};
   }
 
   .MuiSvgIcon-root {
