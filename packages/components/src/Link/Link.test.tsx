@@ -21,23 +21,15 @@ describe('Link', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Дополнительный контент отображается, если передан startAddon или endAddon', () => {
+  it('Иконка отображается', () => {
     const label = 'Link';
-    const startAddon = 'left';
-    const endAddon = 'right';
 
-    renderWithTheme(
-      <Link
-        children={label}
-        startAddon={() => <span>{startAddon}</span>}
-        endAddon={() => <span>{endAddon}</span>}
-      />,
-    );
+    renderWithTheme(<Link children={label} withAdornment="end" />);
 
-    const startAddonElement = screen.getByText(startAddon);
-    const endAddonElement = screen.getByText(endAddon);
+    const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
-    expect(startAddonElement).toBeVisible();
-    expect(endAddonElement).toBeVisible();
+    expect(icon).toBeVisible();
+    renderWithTheme(<Link children={label} withAdornment="start" />);
+    expect(icon).toBeVisible();
   });
 });
