@@ -43,8 +43,11 @@ export const FirstStep = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
 
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
   opacity: 0;
   background-color: ${({ theme }) => theme.palette.background.paper};
 

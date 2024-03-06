@@ -4,8 +4,11 @@ import { styled } from '../styles';
 import { type WithoutEmotionSpecific } from '../types';
 
 export const StyledDrawer = styled(Drawer)<WithoutEmotionSpecific<DrawerProps>>`
-  height: 100dvh;
+  height: 100vh;
 
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
   .${drawerClasses.paper} {
     width: 30%;
   }
