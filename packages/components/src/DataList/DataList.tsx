@@ -26,7 +26,7 @@ type RequiredKeys<T> = {
 }[keyof T];
 
 export type DataListProps<TDataItem extends Record<string, unknown>> = {
-  data: Array<TDataItem>;
+  data?: Array<TDataItem>;
 
   /**
    * Поле, используемое в качестве ключа списка
