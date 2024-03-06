@@ -9,5 +9,9 @@ export const Wrapper = styled.div`
     `;
   }};
 
-  height: 100dvh;
+  height: 100vh;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
 `;
