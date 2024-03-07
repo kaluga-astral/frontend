@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 
-import { MONTHS_IN_YEAR } from '../../../constants/counts';
+import { MONTHS_IN_YEAR } from '../../../constants';
 import {
   DateCompareDeep,
   buildIsoDate,

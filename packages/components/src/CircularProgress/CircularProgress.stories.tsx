@@ -1,12 +1,10 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 
-import { CircularProgress as component } from './CircularProgress';
-import { type CircularProgressStory } from './CircularProgressStory';
-import { CircularProgressStoryTemplate } from './CircularProgressStoryTemplate';
+import { CircularProgress } from './CircularProgress';
 
-export default {
+const meta: Meta<typeof CircularProgress> = {
   title: 'Components/CircularProgress',
-  component,
+  component: CircularProgress,
   parameters: {
     options: {
       showPanel: true,
@@ -22,12 +20,8 @@ export default {
       ],
     },
   },
-} as ComponentMeta<typeof CircularProgressStory>;
-
-export const CircularProgress: ComponentStory<typeof CircularProgressStory> =
-  CircularProgressStoryTemplate.bind({});
-
-CircularProgress.args = {
-  color: 'primary',
-  size: 'medium',
 };
+
+export default meta;
+
+export const Example = () => <CircularProgress />;

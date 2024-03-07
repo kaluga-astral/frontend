@@ -1,6 +1,6 @@
 import { styled } from '../../../styles';
 import { CalendarGridPositions } from '../enums/calendarGridPositions';
-import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../../constants/counts';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../../constants';
 
 export const DateCalendarBody = styled.article`
   grid-area: ${CalendarGridPositions.body};
