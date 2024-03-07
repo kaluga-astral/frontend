@@ -15,7 +15,7 @@ type Intensity =
   | '200'
   | '100';
 
-type UseTypographyColorProps = {
+type UseTypographyColorParams = {
   /**
    * Цвет текста
    * @default undefined
@@ -31,7 +31,7 @@ type UseTypographyColorProps = {
 export const useTypographyColor = ({
   color,
   colorIntensity = '800',
-}: UseTypographyColorProps) => {
+}: UseTypographyColorParams) => {
   const theme = useTheme();
 
   return useMemo(() => {
