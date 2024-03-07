@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { TypographyColors } from '../../enums';
 import { type TypographyColor } from '../../Typography';
-import { type Theme } from '../../../theme';
+import { useTheme } from '../../../theme';
 
 type Intensity =
   | '900'
@@ -32,22 +32,22 @@ export const useTypographyColor = ({
   color,
   colorIntensity = '800',
 }: UseTypographyColorProps) => {
+  const theme = useTheme();
+
   return useMemo(() => {
     const colorName = color && TypographyColors[color];
 
     if (colorName) {
-      return (theme: Theme) => {
-        switch (colorName) {
-          case TypographyColors.text:
-            return theme.palette.text.primary;
-          case TypographyColors.textSecondary:
-            return theme.palette.text.secondary;
-          default:
-            return theme.palette[colorName]?.[colorIntensity] || colorName;
-        }
-      };
+      switch (colorName) {
+        case TypographyColors.text:
+          return theme.palette.text.primary;
+        case TypographyColors.textSecondary:
+          return theme.palette.text.secondary;
+        default:
+          return theme.palette[colorName]?.[colorIntensity] || colorName;
+      }
     }
 
-    return;
-  }, [color, colorIntensity]);
+    return undefined;
+  }, [color, colorIntensity, theme]);
 };
