@@ -24,10 +24,10 @@ export default meta;
 type MockData = {
   id: string;
   title: string;
-  organization: string;
+  organization?: string;
 };
 
-const generateData = (length = 16) => {
+const generateData = (length = 16): MockData[] => {
   return Array.from({ length }).map((_, i) => ({
     id: fakerRU.string.uuid(),
     title: `Договор на оказание услуг №${i + 1}`,
@@ -77,7 +77,7 @@ export const Example = () => {
   return (
     <Container>
       <DataList
-        keyId="organization"
+        keyId="id"
         data={slicedData}
         onEndReached={incrementData}
         isEndReached={isEndReached}
@@ -100,7 +100,7 @@ export const NoData = () => {
 
   return (
     <Container>
-      <DataList
+      <DataList<MockData>
         keyId="id"
         data={[]}
         itemContent={({ title, organization }, { index, className }) => (
@@ -171,7 +171,7 @@ export const Loading = () => {
 
   return (
     <Container>
-      <DataList
+      <DataList<MockData>
         keyId="id"
         data={[]}
         isLoading
@@ -195,7 +195,7 @@ export const Error = () => {
 
   return (
     <Container>
-      <DataList
+      <DataList<MockData>
         keyId="id"
         data={[]}
         isError
