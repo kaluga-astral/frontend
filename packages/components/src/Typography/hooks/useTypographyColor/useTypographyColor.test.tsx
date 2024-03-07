@@ -19,13 +19,16 @@ describe('useTypographyColor', () => {
     ['secondary' as TypographyColor, theme.palette.secondary[800]],
     ['text' as TypographyColor, theme.palette.text.primary],
     ['textSecondary' as TypographyColor, theme.palette.text.secondary],
-  ])('Для color=%s устанавливается цвет из темы %s', (color, expectedColor) => {
-    const { result } = renderHook(() => useTypographyColor({ color }), {
-      wrapper: ({ children }) => (
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      ),
-    });
+  ])(
+    'Для color="%s" устанавливается цвет из темы "%s"',
+    (color, expectedColor) => {
+      const { result } = renderHook(() => useTypographyColor({ color }), {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        ),
+      });
 
-    expect(result.current).toBe(expectedColor);
-  });
+      expect(result.current).toBe(expectedColor);
+    },
+  );
 });
