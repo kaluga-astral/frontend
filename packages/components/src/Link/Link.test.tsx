@@ -21,15 +21,23 @@ describe('Link', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Иконка отображается', () => {
+  it('Иконка слева отображается', () => {
+    const label = 'Link';
+
+    renderWithTheme(<Link children={label} withAdornment="start" />);
+
+    const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
+
+    expect(icon).toBeVisible();
+  });
+
+  it('Иконка справа отображается', () => {
     const label = 'Link';
 
     renderWithTheme(<Link children={label} withAdornment="end" />);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
-    expect(icon).toBeVisible();
-    renderWithTheme(<Link children={label} withAdornment="start" />);
     expect(icon).toBeVisible();
   });
 });
