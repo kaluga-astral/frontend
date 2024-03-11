@@ -35,6 +35,9 @@ type PaletteOptions = MuiPaletteOptions & {
   green: Color;
   yellow: Color;
   grey: Color;
+  error: Color;
+  warning: Color;
+  success: Color;
   primary: PrimaryColorOptions;
   background: Background;
   brand: ColorBrand;
@@ -81,49 +84,6 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#FEF3E6',
       ...brandColors.yellow,
     },
-    primary: {
-      main: brandColors.primary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.primary,
-    },
-    secondary: {
-      main: brandColors.secondary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.secondary,
-    },
-    get success() {
-      return {
-        light: this.green[100],
-        main: this.green[600],
-        dark: this.green[800],
-        contrastText: '#FFF',
-      };
-    },
-    get warning() {
-      return {
-        light: this.yellow[100],
-        main: this.yellow[600],
-        dark: this.yellow[800],
-        contrastText: '#FFF',
-      };
-    },
-    get error() {
-      return {
-        light: this.red[100],
-        main: this.red[600],
-        dark: this.red[800],
-        contrastText: '#FFF',
-      };
-    },
-    get text() {
-      return {
-        primary: this.grey[900],
-        secondary: this.grey[700],
-        disabled: this.grey[500],
-      };
-    },
     grey: {
       900: '#072D57',
       800: '#1D3F66',
@@ -136,6 +96,18 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#F0F4F7',
       ...brandColors.grey,
     },
+    primary: {
+      main: brandColors.primary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.primary,
+    },
+    secondary: {
+      main: brandColors.secondary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.secondary,
+    },
     background: {
       default: '#FFF',
       paper: '#FFF',
@@ -146,6 +118,29 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
     brand: {
       800: brandColors.brand[800],
       background: brandColors.brand.background,
+    },
+    get text() {
+      return {
+        primary: this.grey[900],
+        secondary: this.grey[700],
+        disabled: this.grey[500],
+      };
+    },
+    get info() {
+      console.error(
+        'Цвет "info" больше не используется, используйте другие цвета.',
+      );
+
+      return this.primary;
+    },
+    get warning() {
+      return this.yellow;
+    },
+    get success() {
+      return this.green;
+    },
+    get error() {
+      return this.red;
     },
     components: componentsColors,
   };
