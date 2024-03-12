@@ -7,5 +7,5 @@ import type { TypographyProps } from './Typography';
 export const TypographyWrapper = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'isUpperCase',
 })<TypographyProps>`
-  text-transform: ${({ isUpperCase }) => (isUpperCase ? 'uppercase' : '')};
+  text-transform: ${({ isUpperCase }) => (isUpperCase ? 'uppercase' : 'none')};
 ` as typeof Typography;
