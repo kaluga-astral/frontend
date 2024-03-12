@@ -11,6 +11,7 @@ export enum Brand {
   SBER = 'SBER',
   LK1C = 'LK1C',
   PLATFORM = 'PLATFORM',
+  EKO = 'EKO',
 }
 
 export const SPACING = 4;

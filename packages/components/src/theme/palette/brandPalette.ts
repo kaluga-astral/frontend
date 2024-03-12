@@ -327,6 +327,27 @@ const platformPalette: BrandColors = {
   },
 };
 
+const ekoPalette: BrandColors = {
+  primary: {
+    900: '#1A68FF',
+    800: '#0A7CFF',
+    700: '#4D89FF',
+    600: '#669AFF',
+    500: '#80ABFF',
+    400: '#99BCFF',
+    300: '#B2CDFF',
+    200: '#CCDDFF',
+    100: '#E5EEFF',
+  },
+  secondary: {
+    800: '#0A7CFF',
+  },
+  brand: {
+    800: '#0A7CFF',
+    background: '#F0F4FA',
+  },
+};
+
 export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.DEFAULT]: defaultBrandPalette,
   [Brand.AO5]: ao5Palette,
@@ -340,4 +361,5 @@ export const brandPalette: Record<Brand, BrandColors> = {
   [Brand.SBER]: sberPalette,
   [Brand.LK1C]: lk1cPalette,
   [Brand.PLATFORM]: platformPalette,
+  [Brand.EKO]: ekoPalette,
 };
