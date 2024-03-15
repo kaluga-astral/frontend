@@ -32,6 +32,8 @@ export * from './CircularProgress';
 
 export * from './ClickAwayListener';
 
+export { CodeField, type CodeFieldProps } from './CodeField';
+
 export * from './Collapse';
 
 export * from './CollapsableAlert';
@@ -88,13 +90,15 @@ export * from './Divider';
 
 export * from './DropdownButton';
 
-export { EmailField, EmailFieldProps } from './EmailField';
+export { EmailField, type EmailFieldProps } from './EmailField';
 
 export * from './ErrorBoundary';
 
 export * from './Fab';
 
 export * from './Fade';
+
+export { Feedback, type FeedbackProps } from './Feedback';
 
 export * from './FlowButton';
 
@@ -117,6 +121,8 @@ export * from './hooks';
 export * from './IconButton';
 
 export * from './IconDropdownButton';
+
+export { Iframe, type IframeProps } from './Iframe';
 
 export * from './LegacyGrid';
 
@@ -247,9 +253,5 @@ export * from './forwardRefWithGeneric';
 export * from './PasswordField';
 
 export { StepSlider, type StepSliderProps } from './StepSlider';
-
-export { Iframe, type IframeProps } from './Iframe';
-
-export { CodeField, type CodeFieldProps } from './CodeField';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';

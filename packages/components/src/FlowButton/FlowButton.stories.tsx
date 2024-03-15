@@ -35,7 +35,7 @@ export const Interaction: Story = {
 };
 
 export const Example = () => (
-  <FlowButton targetText="Далее" color="primary">
+  <FlowButton targetText="Далее" color="primary" disabled>
     Выпустить УНЭП
   </FlowButton>
 );
