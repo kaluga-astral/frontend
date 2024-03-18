@@ -134,13 +134,22 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       return this.primary;
     },
     get warning() {
-      return this.yellow;
+      return {
+        ...this.yellow,
+        contrastText: '#FFF',
+      };
     },
     get success() {
-      return this.green;
+      return {
+        ...this.green,
+        contrastText: '#FFF',
+      };
     },
     get error() {
-      return this.red;
+      return {
+        ...this.red,
+        contrastText: '#FFF',
+      };
     },
     components: componentsColors,
   };
