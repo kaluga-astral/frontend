@@ -3,6 +3,7 @@ import { type IconContainerProps as MuiIconContainerProps } from '@mui/material'
 
 import { Tooltip } from '../../Tooltip';
 
+import { TOOLTIP_ENTER_DELAY_MS } from './constants';
 import { Container } from './styles';
 
 type Props = MuiIconContainerProps & {
@@ -22,6 +23,8 @@ export const IconContainer = ({
     return (
       <Tooltip
         title={hint}
+        enterDelay={TOOLTIP_ENTER_DELAY_MS}
+        enterNextDelay={TOOLTIP_ENTER_DELAY_MS}
         slotProps={{
           popper: {
             modifiers: [

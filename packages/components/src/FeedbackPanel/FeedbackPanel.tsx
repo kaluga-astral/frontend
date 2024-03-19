@@ -48,6 +48,12 @@ export type FeedbackPanelProps = {
   errorMsg?: string;
 
   /**
+   * Ссылка на изображение, отображающееся после успешной отправки данных
+   * по умолчанию берется из ConfigContext
+   */
+  successImgSrc?: string;
+
+  /**
    * Текст вопроса
    */
   question: string;
@@ -109,6 +115,7 @@ export const FeedbackPanel = ({
   question,
   hints,
   errorMsg,
+  successImgSrc,
   isVisibleHints,
   isExtended = true,
   textFieldProps,
@@ -194,7 +201,7 @@ export const FeedbackPanel = ({
                 </StyledCollapse>
               </Form>
             ) : (
-              <SuccessPlaceholder />
+              <SuccessPlaceholder imgSrc={successImgSrc} />
             )}
           </ContentState>
         </Paper>

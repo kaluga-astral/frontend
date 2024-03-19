@@ -1,6 +1,7 @@
 import { type PropsWithChildren, useState } from 'react';
 import { type Meta } from '@storybook/react';
 
+import mailIllustration from '../../../ui/illustrations/mail.svg';
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { ConfigProvider } from '../ConfigProvider';
 import { Button } from '../Button';
@@ -89,6 +90,7 @@ export const Example = () => {
       <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
+        successImgSrc={mailIllustration}
         isVisibleHints
         hints={[
           'Очень сложно',
@@ -130,6 +132,7 @@ export const WithoutTextField = () => {
       <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
+        successImgSrc={mailIllustration}
         isLoading={isLoading}
         isExtended={false}
         onClose={handeToggle}
@@ -161,6 +164,7 @@ export const VisibleHints = () => {
       <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
+        successImgSrc={mailIllustration}
         isVisibleHints
         isLoading={isLoading}
         isExtended={false}
@@ -193,6 +197,7 @@ export const CustomHints = () => {
       <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
+        successImgSrc={mailIllustration}
         isVisibleHints
         hints={[
           'Очень сложно',
