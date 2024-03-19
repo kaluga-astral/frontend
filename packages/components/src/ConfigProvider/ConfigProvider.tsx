@@ -37,7 +37,7 @@ type ImagesMap = {
   /**
    * Изображение при успешной отправке данных (используется в FeedbackPanel)
    */
-  mailImgSrc: string;
+  mailImgSrc?: string;
 };
 
 type TechnicalSupport = {
