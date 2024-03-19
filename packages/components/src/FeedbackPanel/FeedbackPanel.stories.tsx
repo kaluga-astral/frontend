@@ -6,16 +6,16 @@ import { ConfigProvider } from '../ConfigProvider';
 import { Button } from '../Button';
 import { styled } from '../styles';
 
-import { Feedback } from './Feedback';
+import { FeedbackPanel } from './FeedbackPanel';
 
 /**
- * ### Feedback позволяет собирать обратную связь от пользователей о продукте.
+ * ### FeedbackPanel позволяет собирать обратную связь от пользователей о продукте.
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=21898-85561&mode=design&t=6jE4Wj4m0ijKFVSo-0)
  * ### [Guide]()
  */
-const meta: Meta<typeof Feedback> = {
-  title: 'Components/Feedback',
-  component: Feedback,
+const meta: Meta<typeof FeedbackPanel> = {
+  title: 'Components/FeedbackPanel',
+  component: FeedbackPanel,
 };
 
 export default meta;
@@ -86,7 +86,7 @@ export const Example = () => {
     <Container>
       <Button onClick={handeToggle}>Оценить</Button>
 
-      <Feedback
+      <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
         isVisibleHints
@@ -127,7 +127,7 @@ export const WithoutTextField = () => {
     <Container>
       <Button onClick={handeToggle}>Оценить</Button>
 
-      <Feedback
+      <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
         isLoading={isLoading}
@@ -158,7 +158,7 @@ export const VisibleHints = () => {
     <Container>
       <Button onClick={handeToggle}>Оценить</Button>
 
-      <Feedback
+      <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
         isVisibleHints
@@ -190,7 +190,7 @@ export const CustomHints = () => {
     <Container>
       <Button onClick={handeToggle}>Оценить</Button>
 
-      <Feedback
+      <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
         isVisibleHints
@@ -225,7 +225,7 @@ export const Error = () => {
     <Container>
       <Button onClick={handeToggle}>Оценить</Button>
 
-      <Feedback
+      <FeedbackPanel
         isOpen={isOpen}
         question="Вам было сложно получить электронную подпись?"
         errorMsg={error}

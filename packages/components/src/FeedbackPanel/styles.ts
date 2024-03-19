@@ -1,13 +1,13 @@
-import { formHelperTextClasses } from '@mui/material';
+import { collapseClasses, formHelperTextClasses } from '@mui/material';
 
-import { Paper } from '../Paper';
+import { Collapse } from '../Collapse';
 import { TextArea } from '../TextArea';
 import { Typography } from '../Typography';
 import { styled } from '../styles';
 
 import { EmojiRating } from './EmojiRaiting';
 
-export const StyledPaper = styled(Paper)`
+export const Container = styled.div`
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -19,12 +19,12 @@ export const Header = styled.header`
   display: flex;
   justify-content: end;
 
-  padding: 8px;
+  padding: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const Content = styled.div`
+export const Form = styled.form`
   display: grid;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing(4)};
 
   padding-bottom: ${({ theme }) => theme.spacing(5)};
 `;
@@ -38,7 +38,7 @@ export const StyledEmojiRating = styled(EmojiRating)`
 `;
 
 export const StyledTextArea = styled(TextArea)`
-  margin-top: 8px;
+  margin-top: ${({ theme }) => theme.spacing(2)};
 
   .${formHelperTextClasses.root} {
     min-height: unset;
@@ -46,19 +46,13 @@ export const StyledTextArea = styled(TextArea)`
   }
 `;
 
-export const LastStep = styled.div<{ isShow: boolean }>`
-  overflow: hidden;
-  display: grid;
-  gap: 24px;
+export const StyledCollapse = styled(Collapse)`
+  .${collapseClasses.wrapperInner} {
+    display: grid;
+    gap: ${({ theme }) => theme.spacing(6)};
 
-  max-height: ${({ isShow }) => (isShow ? '200px' : '0px')};
-  padding: ${({ theme }) => theme.spacing(0, 5)};
-
-  opacity: ${({ isShow }) => (isShow ? 1 : 0)};
-
-  transition:
-    max-height 300ms,
-    opacity 300ms;
+    padding: ${({ theme }) => theme.spacing(0, 5)};
+  }
 `;
 
 export const Footer = styled.footer`

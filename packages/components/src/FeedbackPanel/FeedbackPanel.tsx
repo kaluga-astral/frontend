@@ -1,25 +1,27 @@
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { CrossOutlineSm } from '@astral/icons';
 
 import { ContentState } from '../ContentState';
+import { Paper } from '../Paper';
 import { Button } from '../Button';
+import { Grow } from '../Grow';
 import { IconButton } from '../IconButton';
 
 import { useLogic } from './hooks';
 import { DEFAULT_TEXTFILED_LABEL } from './constants';
 import { SuccessPlaceholder } from './SuccessPlaceholder';
 import {
-  Content,
+  Container,
   Footer,
+  Form,
   Header,
-  LastStep,
+  StyledCollapse,
   StyledEmojiRating,
-  StyledPaper,
   StyledTextArea,
   StyledTypography,
 } from './styles';
 
-export type FeedbackProps = {
+export type FeedbackPanelProps = {
   /**
    * Флаг, отвечающий за отображение компонента
    */
@@ -89,7 +91,7 @@ export type FeedbackProps = {
     rating,
     feedback,
   }: {
-    rating?: number | null;
+    rating: number | null;
     feedback?: string | null;
   }) => void;
 
@@ -99,7 +101,7 @@ export type FeedbackProps = {
   onClose: () => void;
 };
 
-export const Feedback = ({
+export const FeedbackPanel = ({
   isOpen,
   isLoading,
   isError,
@@ -112,8 +114,8 @@ export const Feedback = ({
   textFieldProps,
   onSubmit,
   onClose,
-}: FeedbackProps) => {
-  const [rating, setRating] = useState<number | null>();
+}: FeedbackPanelProps) => {
+  const [rating, setRating] = useState<number | null>(null);
   const [feedback, setFeedback] = useState<string | null>();
 
   const handleClose = () => {
@@ -129,6 +131,10 @@ export const Feedback = ({
     endHook: handleClose,
   });
 
+  const handleChangeFeedback = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => setFeedback(event.target.value);
+
   const handleSubmit = () => onSubmit({ rating, feedback });
 
   if (!isOpen) {
@@ -138,58 +144,59 @@ export const Feedback = ({
   const { label = DEFAULT_TEXTFILED_LABEL, placeholder } = textFieldProps || {};
 
   return (
-    <StyledPaper className={className} elevation={2}>
-      <Header>
-        <IconButton size="small" variant="text" onClick={handleClose}>
-          <CrossOutlineSm />
-        </IconButton>
-      </Header>
+    <Grow in={isOpen}>
+      <Container>
+        <Paper className={className} elevation={2}>
+          <Header>
+            <IconButton size="small" variant="text" onClick={handleClose}>
+              <CrossOutlineSm />
+            </IconButton>
+          </Header>
 
-      <ContentState
-        isError={isError}
-        errorState={{ onRetry: handleSubmit, errorList: [errorMsg || ''] }}
-      >
-        {!isSuccess ? (
-          <Content>
-            <StyledTypography variant="h5">{question}</StyledTypography>
+          <ContentState
+            isError={isError}
+            errorState={{ onRetry: handleSubmit, errorList: [errorMsg || ''] }}
+          >
+            {!isSuccess ? (
+              <Form>
+                <StyledTypography variant="h5">{question}</StyledTypography>
 
-            <StyledEmojiRating
-              isVisibleHints={isVisibleHints}
-              hints={hints}
-              onChange={setRating}
-            />
-
-            <LastStep
-              isShow={Boolean(rating)}
-              {...{ inert: !Boolean(rating) ? '' : undefined }}
-            >
-              {isExtended && (
-                <StyledTextArea
-                  label={label}
-                  placeholder={placeholder}
-                  rows={3}
-                  value={feedback}
-                  margin="none"
-                  onChange={(event) => setFeedback(event.target.value)}
+                <StyledEmojiRating
+                  isVisibleHints={isVisibleHints}
+                  hints={hints}
+                  onChange={setRating}
                 />
-              )}
 
-              <Footer>
-                <Button
-                  size="large"
-                  loading={isLoading}
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Отправить
-                </Button>
-              </Footer>
-            </LastStep>
-          </Content>
-        ) : (
-          <SuccessPlaceholder />
-        )}
-      </ContentState>
-    </StyledPaper>
+                <StyledCollapse in={Boolean(rating)}>
+                  {isExtended && (
+                    <StyledTextArea
+                      label={label}
+                      placeholder={placeholder}
+                      rows={3}
+                      value={feedback}
+                      margin="none"
+                      onChange={handleChangeFeedback}
+                    />
+                  )}
+
+                  <Footer>
+                    <Button
+                      size="large"
+                      loading={isLoading}
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      Отправить
+                    </Button>
+                  </Footer>
+                </StyledCollapse>
+              </Form>
+            ) : (
+              <SuccessPlaceholder />
+            )}
+          </ContentState>
+        </Paper>
+      </Container>
+    </Grow>
   );
 };

@@ -10,7 +10,7 @@ export const StyledRating = styled(Rating)`
 
     padding: 0 14px;
 
-    font-size: ${({ theme }) => theme.typography.pxToRem(40)};
+    font-size: ${({ theme }) => theme.typography.pxToRem(42)};
     line-height: 1;
   }
 

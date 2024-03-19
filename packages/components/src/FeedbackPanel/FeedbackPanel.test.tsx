@@ -1,14 +1,20 @@
-import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
+import {
+  fireEvent,
+  prettyDOM,
+  renderWithTheme,
+  screen,
+  userEvents,
+} from '@astral/tests';
 import { expect, vi } from 'vitest';
 
-import { Feedback } from './Feedback';
+import { FeedbackPanel } from './FeedbackPanel';
 
-describe('Feedback', () => {
+describe('FeedbackPanel', () => {
   it('Текст вопроса отображается и соответствует переданному в prop question', () => {
     const question = 'Вам было сложно получить электронную подпись?';
 
     renderWithTheme(
-      <Feedback
+      <FeedbackPanel
         isOpen
         question={question}
         onClose={() => {}}
@@ -24,7 +30,7 @@ describe('Feedback', () => {
   describe('Tooltip с подсказкой', () => {
     it('Не отображается по умолчанию при наведении на элемент рейтинга', async () => {
       renderWithTheme(
-        <Feedback
+        <FeedbackPanel
           isOpen
           question="Вам было сложно получить электронную подпись?"
           onClose={() => {}}
@@ -32,7 +38,7 @@ describe('Feedback', () => {
         />,
       );
 
-      const happyRatingInput = screen.getByText('🙂');
+      const happyRatingInput = screen.getByLabelText('Доволен');
 
       await userEvents.hover(happyRatingInput);
 
@@ -43,7 +49,7 @@ describe('Feedback', () => {
 
     it('Отображается при isVisibleHints=true при наведении на элемент рейтинга', async () => {
       renderWithTheme(
-        <Feedback
+        <FeedbackPanel
           isOpen
           isVisibleHints
           question="Вам было сложно получить электронную подпись?"
@@ -52,7 +58,9 @@ describe('Feedback', () => {
         />,
       );
 
-      const happyRatingInput = screen.getByText('🙂');
+      const happyRatingInput = screen.getByLabelText('Доволен', {
+        selector: 'span',
+      });
 
       await userEvents.hover(happyRatingInput);
 
@@ -65,7 +73,7 @@ describe('Feedback', () => {
   describe('Текстовое поле', () => {
     it('Недоступно при isExtended=false', () => {
       renderWithTheme(
-        <Feedback
+        <FeedbackPanel
           isOpen
           isExtended={false}
           question="Вам было сложно получить электронную подпись?"
@@ -84,7 +92,7 @@ describe('Feedback', () => {
 
     it('Недоступно пока не выбрана оценка', () => {
       renderWithTheme(
-        <Feedback
+        <FeedbackPanel
           isOpen
           question="Вам было сложно получить электронную подпись?"
           textFieldProps={{
@@ -107,7 +115,7 @@ describe('Feedback', () => {
     const question = 'Вам было сложно получить электронную подпись?';
 
     renderWithTheme(
-      <Feedback
+      <FeedbackPanel
         isOpen
         question={question}
         onClose={() => {}}
@@ -122,7 +130,7 @@ describe('Feedback', () => {
 
   it('Placeholder c ошибкой отображается при isError=true', () => {
     renderWithTheme(
-      <Feedback
+      <FeedbackPanel
         isOpen
         isError
         question=""
@@ -140,7 +148,7 @@ describe('Feedback', () => {
     const onCloseSpy = vi.fn();
 
     renderWithTheme(
-      <Feedback
+      <FeedbackPanel
         isOpen
         question="Вам было сложно получить электронную подпись?"
         onClose={onCloseSpy}
@@ -157,7 +165,7 @@ describe('Feedback', () => {
     const onSubmitSpy = vi.fn();
 
     renderWithTheme(
-      <Feedback
+      <FeedbackPanel
         isOpen
         isExtended
         question={question}
@@ -169,7 +177,7 @@ describe('Feedback', () => {
       />,
     );
 
-    const happyRatingInput = screen.getByText('🙂');
+    const happyRatingInput = screen.getByLabelText('Доволен');
 
     fireEvent.click(happyRatingInput);
 

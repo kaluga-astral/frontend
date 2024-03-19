@@ -1,3 +1,5 @@
+import { svgIconClasses } from '@mui/material';
+
 import { styled } from '../../styles';
 
 export const Container = styled.span`
@@ -6,4 +8,8 @@ export const Container = styled.span`
     в результате чего имеем проблемы с отображением tooltip и прохождением тестов
   */
   pointer-events: auto !important;
+
+  .${svgIconClasses.root} {
+    font-size: inherit;
+  }
 `;

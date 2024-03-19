@@ -98,7 +98,7 @@ export * from './Fab';
 
 export * from './Fade';
 
-export { Feedback, type FeedbackProps } from './Feedback';
+export { FeedbackPanel, type FeedbackPanelProps } from './FeedbackPanel';
 
 export * from './FlowButton';
 

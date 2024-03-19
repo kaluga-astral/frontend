@@ -59,10 +59,12 @@ export const Rating = ({
     />
   );
 
+  const getLabelText = (value: number) => hints[value - 1];
+
   return (
     <StyledRating
       IconContainerComponent={renderIconContainer}
-      getLabelText={(value: number) => hints[value - 1]}
+      getLabelText={getLabelText}
       {...props}
       onChange={handleChange}
     />

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import { useInterval } from '../useInterval';
+import { useInterval } from 'react-use';
 
 type UseTimerResult = number;
 
@@ -13,7 +12,7 @@ export type UseTimerHook = (
 export const useTimer: UseTimerHook = (seconds, endTimerHook) => {
   const [timeLeft, setTimeLeft] = useState(seconds || 0);
 
-  const interval = useInterval(
+  useInterval(
     () => setTimeLeft((currentTimeLeft) => currentTimeLeft - 1),
     1000,
   );
@@ -23,10 +22,8 @@ export const useTimer: UseTimerHook = (seconds, endTimerHook) => {
       if (typeof endTimerHook === 'function') {
         endTimerHook();
       }
-
-      clearInterval(interval);
     }
-  }, [timeLeft, interval, endTimerHook]);
+  }, [timeLeft, endTimerHook]);
 
   return timeLeft;
 };
