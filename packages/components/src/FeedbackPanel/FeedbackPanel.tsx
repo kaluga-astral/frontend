@@ -2,13 +2,17 @@ import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { CrossOutlineSm } from '@astral/icons';
 
 import { ContentState } from '../ContentState';
+import { Fade } from '../Fade';
 import { Paper } from '../Paper';
 import { Button } from '../Button';
 import { Grow } from '../Grow';
 import { IconButton } from '../IconButton';
 
 import { useLogic } from './hooks';
-import { DEFAULT_TEXTFILED_LABEL } from './constants';
+import {
+  DEFAULT_TEXTFILED_LABEL,
+  DURATION_ENTER_FADE_SUCCESS_SCREEN_MS,
+} from './constants';
 import { SuccessPlaceholder } from './SuccessPlaceholder';
 import {
   Container,
@@ -201,7 +205,14 @@ export const FeedbackPanel = ({
                 </StyledCollapse>
               </Form>
             ) : (
-              <SuccessPlaceholder imgSrc={successImgSrc} />
+              <Fade
+                in={isSuccess}
+                timeout={{ enter: DURATION_ENTER_FADE_SUCCESS_SCREEN_MS }}
+              >
+                <div>
+                  <SuccessPlaceholder imgSrc={successImgSrc} />
+                </div>
+              </Fade>
             )}
           </ContentState>
         </Paper>
