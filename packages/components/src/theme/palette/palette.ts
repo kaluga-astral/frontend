@@ -134,13 +134,31 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       return this.primary;
     },
     get warning() {
-      return this.yellow;
+      return {
+        ...this.yellow,
+        light: this.yellow[100],
+        main: this.yellow[600],
+        dark: this.yellow[800],
+        contrastText: '#FFF',
+      };
     },
     get success() {
-      return this.green;
+      return {
+        ...this.green,
+        light: this.green[100],
+        main: this.green[600],
+        dark: this.green[800],
+        contrastText: '#FFF',
+      };
     },
     get error() {
-      return this.red;
+      return {
+        ...this.red,
+        light: this.red[100],
+        main: this.red[600],
+        dark: this.red[800],
+        contrastText: '#FFF',
+      };
     },
     components: componentsColors,
   };
