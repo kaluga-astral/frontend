@@ -1,10 +1,4 @@
-import {
-  fireEvent,
-  prettyDOM,
-  renderWithTheme,
-  screen,
-  userEvents,
-} from '@astral/tests';
+import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 import { expect, vi } from 'vitest';
 
 import { FeedbackPanel } from './FeedbackPanel';

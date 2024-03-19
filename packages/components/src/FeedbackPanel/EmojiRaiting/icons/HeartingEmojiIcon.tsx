@@ -4,14 +4,7 @@ import { SvgIcon, type SvgIconProps } from '@mui/material';
 const HeartingEmojiIcon: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
-  <SvgIcon
-    viewBox="0 0 42 42"
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    fill="currentColor"
-    {...props}
-  >
+  <SvgIcon viewBox="0 0 42 42" fill="currentColor" {...props}>
     <mask
       id="mask0_22533_4369"
       maskUnits="userSpaceOnUse"

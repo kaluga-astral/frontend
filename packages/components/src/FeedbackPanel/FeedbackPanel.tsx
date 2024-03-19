@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { CrossOutlineSm } from '@astral/icons';
 
 import { ContentState } from '../ContentState';
@@ -91,7 +91,7 @@ export type FeedbackPanelProps = {
     rating,
     feedback,
   }: {
-    rating: number | null;
+    rating: number;
     feedback?: string | null;
   }) => void;
 
@@ -135,7 +135,14 @@ export const FeedbackPanel = ({
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setFeedback(event.target.value);
 
-  const handleSubmit = () => onSubmit({ rating, feedback });
+  const handleSubmit = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+
+    onSubmit({ rating, feedback } as {
+      rating: number;
+      feedback?: string | null;
+    });
+  };
 
   if (!isOpen) {
     return;
@@ -158,7 +165,7 @@ export const FeedbackPanel = ({
             errorState={{ onRetry: handleSubmit, errorList: [errorMsg || ''] }}
           >
             {!isSuccess ? (
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <StyledTypography variant="h5">{question}</StyledTypography>
 
                 <StyledEmojiRating
@@ -180,12 +187,7 @@ export const FeedbackPanel = ({
                   )}
 
                   <Footer>
-                    <Button
-                      size="large"
-                      loading={isLoading}
-                      type="submit"
-                      onClick={handleSubmit}
-                    >
+                    <Button size="large" loading={isLoading} type="submit">
                       Отправить
                     </Button>
                   </Footer>

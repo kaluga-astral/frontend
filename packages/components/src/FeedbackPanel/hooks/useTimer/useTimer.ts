@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useInterval } from 'react-use';
+
+import { useInterval } from '../../../hooks';
 
 type UseTimerResult = number;
 

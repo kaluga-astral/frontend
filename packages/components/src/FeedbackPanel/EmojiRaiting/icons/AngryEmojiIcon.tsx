@@ -4,14 +4,7 @@ import { SvgIcon, type SvgIconProps } from '@mui/material';
 const AngryEmojiIcon: React.FunctionComponent<SvgIconProps> = ({
   ...props
 }) => (
-  <SvgIcon
-    viewBox="0 0 42 42"
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    fill="currentColor"
-    {...props}
-  >
+  <SvgIcon viewBox="0 0 42 42" fill="currentColor" {...props}>
     <mask id="a" maskUnits="userSpaceOnUse" x="3" y="3" width="36" height="36">
       <circle cx="21" cy="21" r="18" fill="#EBEEF1" />
     </mask>
