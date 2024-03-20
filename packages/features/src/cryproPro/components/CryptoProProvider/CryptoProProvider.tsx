@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { type PropsWithChildren } from 'react';
 
-import { SetupCryptoProWorkspaceModal } from '..';
+import { SetupCryptoProWorkspaceModal } from '../SetupCryptoProWorkspaceModal';
 import { type CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
