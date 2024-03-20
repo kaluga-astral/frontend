@@ -18,7 +18,7 @@ describe('DropdownButton', () => {
     expect(button).toBeDisabled();
   });
 
-  it('Popover закрывается gри клике на option', async () => {
+  it('Popover закрывается при клике на option', async () => {
     renderWithTheme(
       <DropdownButton name="btn">
         <MenuItem>Item</MenuItem>
