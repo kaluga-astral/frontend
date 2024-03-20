@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
 import { type ButtonProps } from '../Button';
+import { useViewportType } from '../hooks/useViewportType';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
@@ -70,6 +71,7 @@ export type PageHeaderProps = {
 export const PageHeader = (props: PageHeaderProps) => {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
+  const { isMobile } = useViewportType();
 
   return (
     <Wrapper>
@@ -81,7 +83,9 @@ export const PageHeader = (props: PageHeaderProps) => {
             <ArrowLOutlineMd />
           </BackButton>
         )}
-        <Title variant="h3">{title}</Title>
+        <Title variant="h3" noWrap={isMobile}>
+          {title}
+        </Title>
       </MobileWrapper>
 
       {description && <Description>{description}</Description>}
