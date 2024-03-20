@@ -63,9 +63,8 @@ export const Description = styled(Typography)`
 `;
 
 export const Title = styled(Typography)`
-  display: flex;
   grid-area: title;
-  align-items: center;
+  align-self: center;
 
   line-height: ${({ theme }) => theme.typography.pxToRem(32)};
 
