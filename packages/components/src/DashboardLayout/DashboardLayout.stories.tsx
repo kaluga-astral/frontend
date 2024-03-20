@@ -113,8 +113,7 @@ const Container = ({ children }: PropsWithChildren) => (
       outdatedReleaseErrorImgSrc: '',
     }}
   >
-    {children}
-    {/* <ContentWrapper>{children}</ContentWrapper> */}
+    <ContentWrapper>{children}</ContentWrapper>
   </ConfigProvider>
 );
 
