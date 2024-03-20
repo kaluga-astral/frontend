@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 
 import { ConfigContext, type ConfigContextProps } from '../../ConfigProvider';
-import { Placeholder } from '../../Placeholder';
 import { useTimer } from '../hooks';
 import { DURATION_SHOW_SUCCESS_SCREEN_MS } from '../constants';
+
+import { StyledPlaceholder } from './styles';
 
 type Props = {
   imgSrc?: string;
@@ -16,7 +17,7 @@ export const SuccessPlaceholder = ({ imgSrc }: Props) => {
   const timeLeft = useTimer(DURATION_SHOW_SUCCESS_SCREEN_MS / 1000);
 
   return (
-    <Placeholder
+    <StyledPlaceholder
       title="Спасибо за ваш отзыв!"
       description={`Окно закроется автоматически через ${timeLeft} сек`}
       imgAlt="Письмо"
