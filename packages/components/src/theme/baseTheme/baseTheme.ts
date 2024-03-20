@@ -23,7 +23,7 @@ import { mergeDeep } from '../../utils';
 
 export type Palette = Omit<MuiPalette, 'grey' | 'info' | 'background'> & {
   /**
-   *@deprecated
+   * @deprecated
    * Цвет "info" больше не используется, используйте другие цвета
    */
   info: PaletteColor & Color;
