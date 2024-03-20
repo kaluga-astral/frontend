@@ -3,6 +3,12 @@ import { styled } from '../styles';
 
 import { ITEM_CLASSNAME } from './constants';
 
+export const Wrapper = styled.div`
+  position: relative;
+
+  height: 100%;
+`;
+
 export const Item = styled.li`
   list-style-type: none;
 

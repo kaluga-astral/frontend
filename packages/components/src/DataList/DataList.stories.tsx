@@ -75,22 +75,22 @@ export const Example = () => {
     alert(`Clicked item with index ${itemIndex}`);
 
   return (
-    <Container>
-      <DataList
-        keyId="id"
-        data={slicedData}
-        onEndReached={incrementData}
-        isEndReached={isEndReached}
-        isLoading={loading}
-        itemContent={({ title, organization }, { index, className }) => (
-          <div className={className} onClick={() => handleClick(index)}>
-            <Typography>{title}</Typography>
-            <Typography color="secondary">{organization}</Typography>
-          </div>
-        )}
-        onRetry={incrementData}
-      />
-    </Container>
+    // <Container>
+    <DataList
+      keyId="id"
+      data={slicedData}
+      onEndReached={incrementData}
+      isEndReached={isEndReached}
+      isLoading={loading}
+      itemContent={({ title, organization }, { index, className }) => (
+        <div className={className} onClick={() => handleClick(index)}>
+          <Typography>{title}</Typography>
+          <Typography color="secondary">{organization}</Typography>
+        </div>
+      )}
+      onRetry={incrementData}
+    />
+    // </Container>
   );
 };
 

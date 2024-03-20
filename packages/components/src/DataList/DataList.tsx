@@ -18,7 +18,7 @@ import { EndData } from './EndData';
 import { Error } from './Error';
 import { Loader } from './Loader';
 import { NoData } from './NoData';
-import { Item, ScrollToStartButton } from './styles';
+import { Item, ScrollToStartButton, Wrapper } from './styles';
 
 // TODO Вынести этот дженерик в отдельный пакет
 // Дженерик получает из типа только обязательные поля и возвращает их как union
@@ -155,41 +155,43 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
         onRetry,
       }}
     >
-      <Virtuoso
-        className={className}
-        style={{ height: '100%' }}
-        data={data}
-        ref={virtuoso}
-        overscan={OVERSCAN_COUNT}
-        endReached={handleEndReach}
-        rangeChanged={handleRangeChanged}
-        itemContent={(index, item) => (
-          <Item key={item[keyId] as Key}>
-            {itemContent &&
-              itemContent(item, { index, className: ITEM_CLASSNAME })}
-          </Item>
+      <Wrapper>
+        <Virtuoso
+          className={className}
+          style={{ height: '100%' }}
+          data={data}
+          ref={virtuoso}
+          overscan={OVERSCAN_COUNT}
+          endReached={handleEndReach}
+          rangeChanged={handleRangeChanged}
+          itemContent={(index, item) => (
+            <Item key={item[keyId] as Key}>
+              {itemContent &&
+                itemContent(item, { index, className: ITEM_CLASSNAME })}
+            </Item>
+          )}
+          components={{
+            Footer: () => (
+              <>
+                {isLoading && <Loader />}
+                {isError && <Error onRetry={onRetry} />}
+
+                {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
+              </>
+            ),
+          }}
+        />
+
+        {isStickyButtonActive && (
+          <ScrollToStartButton
+            color="default"
+            size={isMobile ? 'medium' : 'small'}
+            onClick={handleScrollToStart}
+          >
+            <ArrowUpOutlineMd />
+          </ScrollToStartButton>
         )}
-        components={{
-          Footer: () => (
-            <>
-              {isLoading && <Loader />}
-              {isError && <Error onRetry={onRetry} />}
-
-              {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
-            </>
-          ),
-        }}
-      />
-
-      {isStickyButtonActive && (
-        <ScrollToStartButton
-          color="default"
-          size={isMobile ? 'medium' : 'small'}
-          onClick={handleScrollToStart}
-        >
-          <ArrowUpOutlineMd />
-        </ScrollToStartButton>
-      )}
+      </Wrapper>
     </ContentState>
   );
 };
