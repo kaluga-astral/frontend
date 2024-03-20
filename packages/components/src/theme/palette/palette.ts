@@ -127,10 +127,6 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       };
     },
     get info() {
-      console.error(
-        'Цвет "info" больше не используется, используйте другие цвета.',
-      );
-
       return this.primary;
     },
     get warning() {
