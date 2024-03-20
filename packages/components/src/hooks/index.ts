@@ -15,3 +15,5 @@ export * from './useClickAwayEffect';
 export * from './useFocusAwayEffect';
 
 export * from './useInputPopover';
+
+export { useInterval } from 'react-use';
