@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import { type IMask } from 'react-imask';
+import { type PopperProps } from '@mui/material';
 
 import { Grid, type GridProps } from '../Grid';
 import {
@@ -39,23 +40,28 @@ export type DateRangePickerProps = Omit<
   'onChange' | 'value' | 'onBlur' | 'inputProps'
 > & {
   /**
-   * @description специфичные пропсы для управления датой слева
+   * Специфичные пропсы для управления датой слева
    */
   startDateProps?: DateItemProps;
+
   /**
-   * @description специфичные пропсы для управления датой справа
+   * Специфичные пропсы для управления датой справа
    */
   endDateProps?: DateItemProps;
+
   /**
-   * @description отступ между инпутами дат
+   * Отступ между инпутами дат
    * @default 2
    */
   spacing?: GridProps['spacing'];
+
   /**
-   * @description общий обработчик для обоих инпутов, вызовется только если фокус сработает вне общего дива
+   * Общий обработчик для обоих инпутов, вызовется только если фокус сработает вне общего дива
    */
   onBlur?: () => void;
 };
+
+type PoperInstance = PopperProps['popperRef'];
 
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   (
@@ -79,8 +85,10 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const startInputRef = useRef<HTMLInputElement>(null);
     const endInputRef = useRef<HTMLInputElement>(null);
 
+    const [popoverEl, setPopoverEl] = useState<HTMLElement | null>(null);
+
     const { isOpenPopover, openPopover, closePopover } = useInputPopover({
-      ref,
+      ref: { current: popoverEl },
       onOpen,
       onClose,
       onBlur,
@@ -150,10 +158,13 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         setActiveInput('endDate');
       }
 
-      openPopover();
+      if (!isOpenPopover) {
+        openPopover();
+      }
     };
 
     const pickStartDate = (pickedDate: Date) => {
+      console.log('pickStartDate');
       onMaskedStartDateChange(pickedDate);
       setIsStartDateSelected(true);
       setActiveInput('endDate');
@@ -208,6 +219,16 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       setIsEndDateSelected(false);
     }, [isOpenPopover]);
 
+    const handleSetPopperRef: PoperInstance = (instance) => {
+      if (!instance) {
+        return undefined;
+      }
+
+      setPopoverEl(instance.state.elements.popper);
+    };
+
+    console.log('isOpenPopover', isOpenPopover);
+
     return (
       <Grid container spacing={spacing} ref={ref} direction="column">
         <DatePickerInput
@@ -239,6 +260,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             placement="bottom"
             onMouseEnter={handlePopoverMouseEnter}
             onMouseLeave={handlePopoverMouseLeave}
+            popperRef={handleSetPopperRef}
           >
             <MinMaxDateContextProvider
               minDate={
