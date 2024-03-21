@@ -2,7 +2,7 @@ import { type PropsWithChildren } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Global } from '@astral/ui';
 
-import { SetupCryptoProWorkspaceModal } from '..';
+import { SetupCryptoProWorkspaceModal } from '../SetupCryptoProWorkspaceModal';
 import { type CryptoProStore } from '../../stores/CryptoProStore';
 
 /**

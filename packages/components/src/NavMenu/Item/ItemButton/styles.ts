@@ -6,7 +6,9 @@ import { ListItemButton } from '../../../ListItemButton';
 import { ListItemIcon } from '../../../ListItemIcon';
 import { ListItemText } from '../../../ListItemText';
 
-export const StyledListItemButton = styled(ListItemButton)<{
+export const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'isGroupTitleItem',
+})<{
   isGroupTitleItem: boolean;
 }>`
   height: 40px;
