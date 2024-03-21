@@ -3,12 +3,10 @@ import {
   type RefObject,
   type SyntheticEvent,
   forwardRef,
-  useState,
 } from 'react';
-import { type PopperProps } from '@mui/material';
 
 import { type TextFieldProps } from '../TextField';
-import { useForwardedRef, useInputPopover } from '../hooks';
+import { useForwardedRef, usePopover } from '../hooks';
 import { type DateMask } from '../utils/date';
 import { type CloseEventReason } from '../types';
 
@@ -84,15 +82,12 @@ export type DatePickerProps = MondayFirst &
     helperText?: ReactNode;
   } & Pick<TextFieldProps, 'label' | 'required' | 'helperText'>;
 
-type PoperInstance = PopperProps['popperRef'];
-
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
     {
       onChange,
       onOpen,
       onClose,
-      onBlur,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       inputProps,
@@ -110,16 +105,23 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     forwardedRef,
   ) => {
     const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
-    const [popoverEl, setPopoverEl] = useState<HTMLElement | null>(null);
 
-    const { isOpenPopover, openPopover, closePopover } = useInputPopover({
-      ref: { current: popoverEl },
-      onOpen,
-      onClose,
-      onBlur,
-    });
+    const [anchor, actions] = usePopover();
+    const { open, close } = actions;
 
-    const handleDayPick = () => closePopover(undefined, 'selectOption');
+    const handleOpen = (event) => {
+      onOpen?.();
+      open(event);
+    };
+
+    const handleClose = () => {
+      onClose?.();
+      close();
+    };
+
+    const handleDayPick = () => {
+      handleClose();
+    };
 
     const {
       onAccept,
@@ -134,14 +136,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onChange,
     });
 
-    const handleSetPopperRef: PoperInstance = (instance) => {
-      if (!instance) {
-        return undefined;
-      }
-
-      setPopoverEl(instance.state.elements.popper);
-    };
-
     return (
       <div ref={ref} className={className}>
         <DatePickerInput
@@ -155,13 +149,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           size={size}
           disabled={disabled}
           ref={inputRef}
-          onFocus={openPopover}
-          onClick={openPopover}
+          onFocus={handleOpen}
         />
         <DatePickerPopover
-          open={isOpenPopover}
+          open={Boolean(anchor)}
           anchorEl={ref?.current}
-          popperRef={handleSetPopperRef}
+          onClose={handleClose}
         >
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker

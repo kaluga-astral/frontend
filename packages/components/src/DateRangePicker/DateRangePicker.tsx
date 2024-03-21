@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import { type IMask } from 'react-imask';
-import { type PopperProps } from '@mui/material';
 
 import { Grid, type GridProps } from '../Grid';
 import {
@@ -14,7 +13,7 @@ import {
   DEFAULT_MIN_DATE,
   MinMaxDateContextProvider,
 } from '../DatePicker/MinMaxDateContext';
-import { useForwardedRef, useInputPopover } from '../hooks';
+import { useForwardedRef, usePopover } from '../hooks';
 import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopover } from '../DatePicker/DatePickerPopover';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
@@ -54,14 +53,7 @@ export type DateRangePickerProps = Omit<
    * @default 2
    */
   spacing?: GridProps['spacing'];
-
-  /**
-   * Общий обработчик для обоих инпутов, вызовется только если фокус сработает вне общего дива
-   */
-  onBlur?: () => void;
 };
-
-type PoperInstance = PopperProps['popperRef'];
 
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   (
@@ -70,7 +62,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       endDateProps = {},
       onOpen,
       onClose,
-      onBlur,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       disabled,
@@ -85,16 +76,22 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const startInputRef = useRef<HTMLInputElement>(null);
     const endInputRef = useRef<HTMLInputElement>(null);
 
-    const [popoverEl, setPopoverEl] = useState<HTMLElement | null>(null);
-
-    const { isOpenPopover, openPopover, closePopover } = useInputPopover({
-      ref: { current: popoverEl },
-      onOpen,
-      onClose,
-      onBlur,
-    });
-
     const [hoveredDayDate, setHoveredDayDate] = useState<Date>();
+
+    const [anchor, actions] = usePopover();
+    const { open, close } = actions;
+
+    const handleOpen = (event) => {
+      onOpen?.();
+      open(event);
+    };
+
+    const handleClose = () => {
+      onClose?.();
+      close();
+    };
+
+    const isOpenPopover = Boolean(anchor);
 
     /**
      * Была ли выбрана start/end-дата после открытия поповера
@@ -159,7 +156,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
 
       if (!isOpenPopover) {
-        openPopover();
+        handleOpen(e);
       }
     };
 
@@ -170,7 +167,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       endInputRef.current?.focus();
 
       if (isEndDateSelected) {
-        closePopover(undefined, 'selectOption');
+        handleClose();
       }
     };
 
@@ -181,7 +178,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       startInputRef.current?.focus();
 
       if (isStartDateSelected) {
-        closePopover(undefined, 'selectOption');
+        handleClose();
       }
     };
 
@@ -218,14 +215,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       setIsEndDateSelected(false);
     }, [isOpenPopover]);
 
-    const handleSetPopperRef: PoperInstance = (instance) => {
-      if (!instance) {
-        return undefined;
-      }
-
-      setPopoverEl(instance.state.elements.popper);
-    };
-
     return (
       <Grid container spacing={spacing} ref={ref} direction="column">
         <DatePickerInput
@@ -253,11 +242,10 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         <PopoverHoveredContextProvider popoverHovered={isPopoverHovered}>
           <DatePickerPopover
             open={isOpenPopover}
-            anchorEl={ref?.current}
-            placement="bottom"
+            anchorEl={anchor}
             onMouseEnter={handlePopoverMouseEnter}
             onMouseLeave={handlePopoverMouseLeave}
-            popperRef={handleSetPopperRef}
+            onClose={handleClose}
           >
             <MinMaxDateContextProvider
               minDate={

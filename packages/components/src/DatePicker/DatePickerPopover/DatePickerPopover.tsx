@@ -1,9 +1,9 @@
 import { type PropsWithChildren } from 'react';
-import { type PopperProps } from '@mui/material';
 
+import { Popover, type PopoverProps } from '../../Popover';
 import { type WithoutEmotionSpecific } from '../../types';
 
-import { PopoverInner, StyledPopper } from './styles';
+import { InnerContainer } from './styles';
 
 /**
  * @description тупл для соответсвтия попперовскому способу задания отступов, 1е число по X, второе по Y
@@ -19,8 +19,8 @@ const DEFAULT_OFFSET: OffsetTuple = [
 
 export type DatePickerPopoverProps = PropsWithChildren<
   Omit<
-    WithoutEmotionSpecific<PopperProps>,
-    'children' | 'disablePortal' | 'transition' | 'modifiers'
+    WithoutEmotionSpecific<PopoverProps>,
+    'children' | 'disablePortal' | 'transition'
   >
 > & {
   /**
@@ -35,18 +35,21 @@ export const DatePickerPopover = ({
   offset = DEFAULT_OFFSET,
   ...props
 }: DatePickerPopoverProps) => (
-  <StyledPopper
-    placement="bottom-start"
+  <Popover
+    elevation={1}
+    disableAutoFocus={true}
+    disableEnforceFocus={true}
+    disableRestoreFocus={true}
     {...props}
-    modifiers={[
-      {
-        name: 'offset',
-        options: {
-          offset,
-        },
-      },
-    ]}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
   >
-    <PopoverInner>{children}</PopoverInner>
-  </StyledPopper>
+    <InnerContainer>{children}</InnerContainer>
+  </Popover>
 );
