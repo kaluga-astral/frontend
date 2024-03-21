@@ -164,7 +164,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     };
 
     const pickStartDate = (pickedDate: Date) => {
-      console.log('pickStartDate');
       onMaskedStartDateChange(pickedDate);
       setIsStartDateSelected(true);
       setActiveInput('endDate');
@@ -226,8 +225,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
 
       setPopoverEl(instance.state.elements.popper);
     };
-
-    console.log('isOpenPopover', isOpenPopover);
 
     return (
       <Grid container spacing={spacing} ref={ref} direction="column">
