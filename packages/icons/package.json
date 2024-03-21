@@ -20,7 +20,7 @@
     "@svgr/cli": "^6.2.0"
   },
   "dependencies": {
-    "@mui/material": "^5.13.0",
+    "@mui/material": "5.13.0",
     "@emotion/styled": "^11.10.6",
     "@emotion/react": "^11.10.6"
   }

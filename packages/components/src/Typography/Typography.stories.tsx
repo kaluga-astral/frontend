@@ -105,6 +105,9 @@ export const Colors = () => (
     <Typography color="text">
       text. Электронная отчетность и документооборот
     </Typography>
+    <Typography color="primary">
+      primary. Электронная отчетность и документооборот
+    </Typography>
     <Typography color="secondary">
       secondary. Электронная отчетность и документооборот
     </Typography>

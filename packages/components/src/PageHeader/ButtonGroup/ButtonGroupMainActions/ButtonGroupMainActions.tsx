@@ -1,9 +1,8 @@
-import { Button, type ButtonProps } from '../../../Button';
-import {
-  DropdownButton,
-  type DropdownButtonProps,
-} from '../../../DropdownButton';
+import { type ButtonProps } from '../../../Button';
+import { type DropdownButtonProps } from '../../../DropdownButton';
 import { MenuItem, type MenuItemProps } from '../../../MenuItem';
+
+import { StyledButton, StyledDropdownButton } from './styles';
 
 type NestedAction = MenuItemProps & {
   /** Название действия */
@@ -41,22 +40,22 @@ export const ButtonGroupMainActions = ({
       const { text, isNested, actions: nestedActions, ...buttonProps } = action;
 
       return (
-        <DropdownButton key={text} name={text} {...buttonProps}>
+        <StyledDropdownButton key={text} name={text} {...buttonProps}>
           {nestedActions.map(({ text: nestedActionText, ...nestedProps }) => (
             <MenuItem key={nestedActionText} {...nestedProps}>
               {nestedActionText}
             </MenuItem>
           ))}
-        </DropdownButton>
+        </StyledDropdownButton>
       );
     }
 
     const { text, ...mainProps } = action;
 
     return (
-      <Button key={text} {...mainProps}>
+      <StyledButton key={text} {...mainProps}>
         {text}
-      </Button>
+      </StyledButton>
     );
   });
 };

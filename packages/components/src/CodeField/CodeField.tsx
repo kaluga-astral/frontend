@@ -4,11 +4,11 @@ import Skeleton from '@mui/material/Skeleton';
 import { FormHelperText } from '../FormHelperText';
 
 import {
-  CodeFieldDigit,
-  CodeFieldDigitsItem,
-  CodeFieldDigitsWrapper,
-  CodeFieldLabel,
-  CodeFieldWrapper,
+  Digit,
+  DigitsItem,
+  DigitsWrapper,
+  FieldLabel,
+  Wrapper,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
 import { ERROR_TEXT_DEFAULT, RESEND_TIMEOUT_DEFAULT } from './constants';
@@ -63,6 +63,10 @@ export type CodeFieldProps = {
    * @description Вызывается при заполнении поля
    */
   onComplete?: (value: string) => void;
+  /**
+   * @description Если true, автоматически устанавливает фокус на первый инпут
+   */
+  isAutoFocus?: boolean;
 };
 
 /**
@@ -83,21 +87,24 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
       errorText = ERROR_TEXT_DEFAULT,
       onChange: onFieldChange,
       onComplete,
+      isAutoFocus = false,
     },
     ref,
   ) => {
     const { inputRefs, setFocusIndexNext, setFocusIndexPrevious, setBlur } =
-      useFocusInput(codeLength);
+      useFocusInput(codeLength, isAutoFocus);
 
-    const { codeValue, onKeyDown, onKeyUp, onPaste } = useCodeState(
-      initialValue,
-      codeLength,
-      setFocusIndexNext,
-      setFocusIndexPrevious,
-      setBlur,
-      onFieldChange,
-      onComplete,
-    );
+    const { codeValue, onKeyDown, onKeyUp, onPaste, clearCodeValue } =
+      useCodeState(
+        initialValue,
+        codeLength,
+        setFocusIndexNext,
+        setFocusIndexPrevious,
+        setBlur,
+        onFieldChange,
+        onComplete,
+        isError,
+      );
 
     const setRef = (index: number) => (el: HTMLInputElement) => {
       if (el) {
@@ -106,15 +113,15 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
     };
 
     return (
-      <CodeFieldWrapper ref={ref}>
-        {label && <CodeFieldLabel>{label}</CodeFieldLabel>}
-        <CodeFieldDigitsWrapper>
+      <Wrapper ref={ref}>
+        {label && <FieldLabel>{label}</FieldLabel>}
+        <DigitsWrapper>
           {codeValue.map((value, index) => (
-            <CodeFieldDigitsItem>
+            <DigitsItem>
               {loading ? (
                 <Skeleton variant="rounded" width={62} height={60} />
               ) : (
-                <CodeFieldDigit
+                <Digit
                   type="text"
                   inputMode="numeric"
                   pattern="[0-9]"
@@ -128,9 +135,9 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
                   onPaste={(e) => !disabled && !loading && onPaste(e)}
                 />
               )}
-            </CodeFieldDigitsItem>
+            </DigitsItem>
           ))}
-        </CodeFieldDigitsWrapper>
+        </DigitsWrapper>
         {isError && <FormHelperText error>{errorText}</FormHelperText>}
         {isAllowResendCode && (
           <ResendCodeButton
@@ -139,9 +146,10 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
             loading={loading}
             isError={isError}
             onResendCode={onResendCode}
+            clearCodeValue={clearCodeValue}
           />
         )}
-      </CodeFieldWrapper>
+      </Wrapper>
     );
   },
 );

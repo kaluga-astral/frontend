@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid } from '@astral/components';
@@ -8,7 +8,7 @@ import { Form } from '../Form';
 import { FormSubmitButton } from '../FormSubmitButton';
 
 import { FormCodeField } from './FormCodeField';
-import { FormCodeFieldValue } from './types';
+import { type FormCodeFieldValue } from './types';
 
 /**
  * Обертка [CodeField](/story/components-codefield--docs) для react-hook-form

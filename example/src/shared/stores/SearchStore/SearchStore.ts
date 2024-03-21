@@ -11,13 +11,16 @@ export class SearchStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  private setSearchValue = debounce((search: string) => {
-    this.search = search;
-  }, 1000);
+  private setSearchValue = debounce(
+    (search: string) => {
+      this.search = search;
+    },
+    { waitMs: 1000 },
+  );
 
   public setSearch = (search: string) => {
     this.searchValue = search;
-    this.setSearchValue(search);
+    this.setSearchValue.call(search);
   };
 }
 

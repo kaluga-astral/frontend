@@ -21,7 +21,7 @@ const getErrorStyles = (theme: Theme) => css`
   }
 `;
 
-export const CheckboxStyled = styled(Checkbox, {
+export const StyledCheckbox = styled(Checkbox, {
   shouldForwardProp: (prop) => prop !== 'isError',
 })<CheckboxStyledProps>`
   padding: ${({ theme }) => theme.spacing(2)};

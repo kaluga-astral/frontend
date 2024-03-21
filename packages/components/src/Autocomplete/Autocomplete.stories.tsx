@@ -114,6 +114,19 @@ export const MultipleCustomTags = () => (
   </Wrapper>
 );
 
+export const LoadedDataError = () => (
+  <Wrapper>
+    <Autocomplete<IOption, false, false, false>
+      label="Loaded data error"
+      options={OPTIONS}
+      isLoadedDataError
+      loadedDataError="При выполнении запроса произошла ошибка"
+      getOptionLabel={(params) => params.title}
+      error
+    />
+  </Wrapper>
+);
+
 export const Error = () => (
   <Wrapper>
     <Autocomplete<IOption, false, false, false>
@@ -125,6 +138,19 @@ export const Error = () => (
     />
   </Wrapper>
 );
+
+export const Loading = () => {
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, false, false, false>
+        label="Loading"
+        loading
+        options={[]}
+        getOptionLabel={(params) => params.title}
+      />
+    </Wrapper>
+  );
+};
 
 export const Success = () => (
   <Wrapper>

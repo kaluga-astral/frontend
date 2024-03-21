@@ -3,17 +3,12 @@ import { useContext, useMemo, useRef, useState } from 'react';
 import { ContentState } from '../ContentState';
 import { ConfigContext } from '../ConfigProvider';
 
-import { NotificationListItem } from './NotificationListItem';
-import { NotificationListTabs } from './NotificationListTabs';
+import { ListItem } from './ListItem';
+import { Tabs } from './Tabs';
 import { type Notification, type NotificationListType } from './types';
-import {
-  NotificationListDialog,
-  NotificationListHeader,
-  NotificationListMain,
-} from './styles';
-import { NotificationListEmpty } from './NotificationListEmpty';
-import { NotificationListSettingsButton } from './NotificationListSettingsButton';
-import { NotificationListFooter } from './NotificationListFooter';
+import { Footer, Header, List, StyledSideDialog } from './styles';
+import { Empty } from './Empty';
+import { SettingsButton } from './SettingsButton';
 
 export type NotificationListProps = {
   /**
@@ -27,7 +22,6 @@ export type NotificationListProps = {
   /**
    * @description флаг загрузки данных
    * */
-
   isLoading?: boolean;
   /**
    * @description флаг ошибки
@@ -54,9 +48,9 @@ export type NotificationListProps = {
    * */
   headerContent?: React.ReactNode;
   /**
-   * @description флаг для отображения кнопки "Отметить все как прочтенные"
+   * @description слот для отображения дополнительных компонентов в подвале
    * */
-  isReadAllButtonVisible?: boolean;
+  footerContent?: React.ReactNode;
   /**
    * @description флаг для отображения кнопки настроек, если не передавать, то кнопка не отображается
    * */
@@ -65,10 +59,6 @@ export type NotificationListProps = {
    * @description функция для закрытия уведомлений, передает id уведомлений, попавших во viewport
    * */
   onClose: (viewedIds: string[]) => void;
-  /**
-   * @description функция обработки нажатия на кнопку "Отметить все как прочтенные"
-   * */
-  onReadAll?: () => void;
   /**
    * @description функция обработки удаления уведомления
    * */
@@ -81,7 +71,6 @@ export type NotificationListProps = {
    * @description функция обработки смены вкладки
    * */
   onTabChange?: () => void;
-
   /**
    * @description функция обработки нажатия на кнопку "Повторить запрос"
    * */
@@ -98,10 +87,9 @@ export const NotificationList = ({
   unreadNotifications,
   initialListType = 'all',
   headerContent,
-  isReadAllButtonVisible = true,
+  footerContent,
   isSettingsButtonVisible = true,
   onClose,
-  onReadAll,
   onDelete,
   onSettingsButtonClick,
   onTabChange,
@@ -119,6 +107,9 @@ export const NotificationList = ({
     return notifications;
   }, [unreadNotifications, listType, notifications]);
 
+  const isEmptyData = data.length === 0;
+  const isTabsVisible = Boolean(unreadNotifications);
+
   const handleTabChange = (type: NotificationListType) => {
     setListType(type);
 
@@ -128,7 +119,6 @@ export const NotificationList = ({
   };
 
   const handleView = (id: string) => {
-    console.log(id);
     viewedIds.current.add(id);
   };
 
@@ -143,51 +133,14 @@ export const NotificationList = ({
     }
   };
 
-  const renderContent = () => {
-    if (data.length) {
-      return (
-        <>
-          <NotificationListMain>
-            {data.map((notification) => (
-              <NotificationListItem
-                key={notification.id}
-                {...notification}
-                onDelete={onDelete}
-                onViewNotification={handleView}
-                isDeleteButtonVisible={Boolean(onDelete)}
-              />
-            ))}
-          </NotificationListMain>
-          {isReadAllButtonVisible && (
-            <NotificationListFooter
-              onReadAllButtonClick={onReadAll}
-              isReadAllButtonDisabled={unreadNotifications?.length === 0}
-            />
-          )}
-        </>
-      );
-    }
-
-    return (
-      <NotificationListEmpty
-        listType={listType}
-        noDataImgSrc={imagesMap.noDataImgSrc}
-      />
-    );
-  };
-
   return (
-    <NotificationListDialog open={isOpen} onClose={handleClose}>
-      <NotificationListHeader
-        title={title}
-        onClose={handleClose}
-        justifyContent="flex-end"
-      >
+    <StyledSideDialog open={isOpen} onClose={handleClose}>
+      <Header title={title} onClose={handleClose} justifyContent="flex-end">
         {headerContent}
         {isSettingsButtonVisible && (
-          <NotificationListSettingsButton onClick={onSettingsButtonClick} />
+          <SettingsButton onClick={onSettingsButtonClick} />
         )}
-      </NotificationListHeader>
+      </Header>
       <ContentState
         isLoading={isLoading}
         isError={isError}
@@ -198,16 +151,33 @@ export const NotificationList = ({
           imgSrc: imagesMap.defaultErrorImgSrc,
         }}
       >
-        {unreadNotifications && (
-          <NotificationListTabs
+        {isTabsVisible && (
+          <Tabs
             onChange={handleTabChange}
             listType={listType}
             notificationsCount={notifications.length}
             unreadNotificationsCount={unreadNotifications?.length || 0}
           />
         )}
-        {renderContent()}
+        {isEmptyData ? (
+          <Empty listType={listType} noDataImgSrc={imagesMap.noDataImgSrc} />
+        ) : (
+          <>
+            <List>
+              {data.map((notification) => (
+                <ListItem
+                  key={notification.id}
+                  {...notification}
+                  onDelete={onDelete}
+                  onViewNotification={handleView}
+                  isDeleteButtonVisible={Boolean(onDelete)}
+                />
+              ))}
+            </List>
+            {footerContent && <Footer>{footerContent}</Footer>}
+          </>
+        )}
       </ContentState>
-    </NotificationListDialog>
+    </StyledSideDialog>
   );
 };

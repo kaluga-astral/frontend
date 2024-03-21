@@ -1,7 +1,7 @@
 import { styled } from '../styles/';
 import { Typography } from '../Typography';
 
-export const AccordionHeader = styled.header<{ withStartAdorment: boolean }>`
+export const Header = styled.header<{ withStartAdorment: boolean }>`
   cursor: pointer;
 
   display: grid;
@@ -10,7 +10,7 @@ export const AccordionHeader = styled.header<{ withStartAdorment: boolean }>`
     withStartAdorment ? '24px 1fr 24px' : ' 1fr 24px'};
 `;
 
-export const AccordionContentWrapper = styled.div<{
+export const ContentWrapper = styled.div<{
   withStartAdorment: boolean;
 }>`
   margin-left: ${({ theme, withStartAdorment }) =>
@@ -18,11 +18,11 @@ export const AccordionContentWrapper = styled.div<{
   padding-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const AccordionSummary = styled(Typography)`
+export const Summary = styled(Typography)`
   align-self: center;
 `;
 
-export const AccordionChevronWrapper = styled.div`
+export const ChevronWrapper = styled.div`
   overflow: hidden;
 
   width: 24px;

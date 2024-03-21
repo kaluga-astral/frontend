@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
-  DateCalendarGridBtnLarge,
+  DateCalendarGridButtonLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
@@ -11,9 +11,9 @@ import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { addYears } from '../../utils/date';
 import { type PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
-import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
-import { useYearsGrid } from './hooks/useYearsGrid';
+import { useYearsGrid } from './hooks';
 import { YEARS_IN_GRID } from './constants';
 
 type DateYearPickerProps = PickerProps & CommonDateCalendarHeadProps;
@@ -49,7 +49,7 @@ export const YearPicker = ({
       />
       <DateCalendarGridLarge>
         {grid.map(({ year, date, ...props }, index) => (
-          <DateCalendarGridBtnLarge
+          <DateCalendarGridButtonLarge
             key={year}
             onClick={() => onChange?.(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
@@ -57,7 +57,7 @@ export const YearPicker = ({
             {...props}
           >
             {year}
-          </DateCalendarGridBtnLarge>
+          </DateCalendarGridButtonLarge>
         ))}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>

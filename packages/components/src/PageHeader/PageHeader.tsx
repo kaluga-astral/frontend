@@ -2,15 +2,18 @@ import { type ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
 import { type ButtonProps } from '../Button';
+import { useViewportType } from '../hooks/useViewportType';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
-  PageHeaderBackButton,
-  PageHeaderBreadcrumbs,
-  PageHeaderDescription,
-  PageHeaderTitle,
-  PageHeaderWrapper,
+  Actions,
+  BackButton,
+  Description,
+  MobileWrapper,
   PageSubheader,
+  StyledBreadcrumbs,
+  Title,
+  Wrapper,
 } from './styles';
 
 export type PageHeaderProps = {
@@ -68,23 +71,30 @@ export type PageHeaderProps = {
 export const PageHeader = (props: PageHeaderProps) => {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
+  const { isMobile } = useViewportType();
 
   return (
-    <PageHeaderWrapper>
-      {breadcrumbs && (
-        <PageHeaderBreadcrumbs>{breadcrumbs}</PageHeaderBreadcrumbs>
+    <Wrapper>
+      {breadcrumbs && <StyledBreadcrumbs>{breadcrumbs}</StyledBreadcrumbs>}
+
+      <MobileWrapper>
+        {backButton && (
+          <BackButton {...backButton} variant="light">
+            <ArrowLOutlineMd />
+          </BackButton>
+        )}
+        <Title variant="h3" noWrap={isMobile}>
+          {title}
+        </Title>
+      </MobileWrapper>
+
+      {description && <Description>{description}</Description>}
+      {actions && (
+        <Actions>
+          <ButtonGroup {...actions} />
+        </Actions>
       )}
-      {backButton && (
-        <PageHeaderBackButton {...backButton} variant="light">
-          <ArrowLOutlineMd />
-        </PageHeaderBackButton>
-      )}
-      <PageHeaderTitle variant="h3">{title}</PageHeaderTitle>
-      {description && (
-        <PageHeaderDescription>{description}</PageHeaderDescription>
-      )}
-      {actions && <ButtonGroup {...actions} />}
       {subheader && <PageSubheader>{subheader}</PageSubheader>}
-    </PageHeaderWrapper>
+    </Wrapper>
   );
 };
