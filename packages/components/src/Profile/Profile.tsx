@@ -69,6 +69,11 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           open={open}
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
+          PaperProps={{
+            style: {
+              width: anchorRef.current?.clientWidth ?? 'auto',
+            },
+          }}
         />
       </>
     );

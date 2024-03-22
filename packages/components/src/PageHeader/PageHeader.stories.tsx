@@ -449,7 +449,7 @@ export const Example = () => (
 
 export const Default = () => (
   <Wrapper>
-    <PageHeader title="Черновик" />
+    <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
   </Wrapper>
 );
 

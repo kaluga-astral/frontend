@@ -14,7 +14,7 @@ type UseMenuResult = {
   /**
    * Элемент, к которому привязано меню
    */
-  anchorRef: MutableRefObject<null>;
+  anchorRef: MutableRefObject<HTMLButtonElement | null>;
   /**
    * Обработчик открытия меню
    */
@@ -29,7 +29,7 @@ export function useMenu(
   ref: ForwardedRef<HTMLButtonElement> | null = null,
 ): UseMenuResult {
   const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (!ref) {

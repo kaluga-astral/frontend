@@ -19,7 +19,7 @@ export const Name = ({
       <Wrapper>
         <Typography {...props} color={color}>
           {children}
-          {separator}
+          {!leader && separator}
         </Typography>
       </Wrapper>
       {leader && <DashedSeparator />}
