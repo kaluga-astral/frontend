@@ -14,7 +14,7 @@ describe('Link', () => {
         resultRef.current = ref.current;
       }, []);
 
-      return <Link ref={ref} />;
+      return <Link href="/" ref={ref} />;
     };
 
     renderWithTheme(<LinkWithRef />);
@@ -24,7 +24,7 @@ describe('Link', () => {
   it('Иконка слева отображается', () => {
     const label = 'Link';
 
-    renderWithTheme(<Link children={label} withAdornment="start" />);
+    renderWithTheme(<Link href="/" children={label} withAdornment="start" />);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
@@ -34,7 +34,7 @@ describe('Link', () => {
   it('Иконка справа отображается', () => {
     const label = 'Link';
 
-    renderWithTheme(<Link children={label} withAdornment="end" />);
+    renderWithTheme(<Link href="/" children={label} withAdornment="end" />);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
