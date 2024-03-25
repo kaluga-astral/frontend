@@ -22,9 +22,7 @@ describe('Link', () => {
   });
 
   it('Иконка слева отображается', () => {
-    const label = 'Link';
-
-    renderWithTheme(<Link href="/" children={label} withAdornment="start" />);
+    renderWithTheme(<Link href="/" withAdornment="start">Link</Link>);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
@@ -32,9 +30,7 @@ describe('Link', () => {
   });
 
   it('Иконка справа отображается', () => {
-    const label = 'Link';
-
-    renderWithTheme(<Link href="/" children={label} withAdornment="end" />);
+    renderWithTheme(<Link href="/" withAdornment="end">Link</Link>);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
