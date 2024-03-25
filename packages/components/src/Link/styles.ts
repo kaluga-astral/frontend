@@ -30,7 +30,7 @@ export const StyledLink = styled(Link)`
     outline: 2px solid ${({ theme }) => theme.palette.primary[400]};
   }
 
-.${svgIconClasses.root} {
+  .${svgIconClasses.root} {
     align-self: center;
 
     width: 16px;
