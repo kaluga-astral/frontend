@@ -4,7 +4,7 @@ import { ConfigProvider } from '../ConfigProvider';
 import outdatedReleaseIllustration from '../../../ui/illustrations/outdated-release.svg';
 import errorIllustration from '../../../ui/illustrations/error.svg';
 
-import { BuggyButton, ChunkLoadErrorButton } from './ErrorBoundary.stubs';
+import { BuggyButton, ChunkLoadErrorButton } from './faker';
 import { ErrorBoundary } from './ErrorBoundary';
 
 const meta: Meta<typeof ErrorBoundary> = {

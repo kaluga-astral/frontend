@@ -9,7 +9,7 @@ import {
   BuggyButton,
   ChunkLoadErrorButton,
   FailedFetchModuleButton,
-} from './ErrorBoundary.stubs';
+} from './faker';
 import { ErrorBoundary } from './ErrorBoundary';
 
 const TestComponent = ({ children }: { children: ReactNode }) => (
@@ -27,7 +27,7 @@ const TestComponent = ({ children }: { children: ReactNode }) => (
 );
 
 describe('ErrorBoundary', () => {
-  it('Props:children с непредвиденной ошибкой: Обрабатывается непредвиденная ошибка', async () => {
+  it('Placeholder непредвиденной ошибки отображается при всплытии исключения', async () => {
     renderWithTheme(
       <TestComponent>
         <BuggyButton />
@@ -38,7 +38,7 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('Произошла непредвиденная ошибка')).toBeVisible();
   });
 
-  it('Props:children с ошибокй загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
+  it('Placeholder ошибки загрузки chunks отображается при всплытии ошибки начинающийся на "ChunkLoadError"', async () => {
     renderWithTheme(
       <TestComponent>
         <ChunkLoadErrorButton />
@@ -49,7 +49,7 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('Обновление в сервисе')).toBeVisible();
   });
 
-  it('Props:children с ошибкой загрузки es-modules: Обрабатывается ошибка загрузки es modules', async () => {
+  it('Placeholder ошибки загрузки chunks отображается при всплытии ошибки динамического импорта', async () => {
     renderWithTheme(
       <TestComponent>
         <FailedFetchModuleButton />
