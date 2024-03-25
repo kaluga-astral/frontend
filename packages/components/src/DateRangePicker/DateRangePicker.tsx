@@ -36,7 +36,7 @@ export type DateItemProps = Pick<
 
 export type DateRangePickerProps = Omit<
   DatePickerProps,
-  'onChange' | 'value' | 'onBlur' | 'inputProps'
+  'onChange' | 'value' | 'inputProps'
 > & {
   /**
    * Специфичные пропсы для управления датой слева
@@ -62,6 +62,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       endDateProps = {},
       onOpen,
       onClose,
+      onBlur,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
       disabled,
@@ -78,20 +79,19 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
 
     const [hoveredDayDate, setHoveredDayDate] = useState<Date>();
 
-    const [anchor, actions] = usePopover();
+    const { isOpen, actions } = usePopover();
     const { open, close } = actions;
 
-    const handleOpen = (event) => {
+    const handleOpen = (event: SyntheticEvent) => {
       onOpen?.();
       open(event);
     };
 
     const handleClose = () => {
+      onBlur?.();
       onClose?.();
       close();
     };
-
-    const isOpenPopover = Boolean(anchor);
 
     /**
      * Была ли выбрана start/end-дата после открытия поповера
@@ -118,7 +118,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const { startBaseDate, endBaseDate } = useBaseRangeDates({
       minDate,
       maxDate,
-      shouldReturnPrevValues: isOpenPopover,
+      shouldReturnPrevValues: isOpen,
       selectedStartDate: selectedStartBaseDate,
       selectedEndDate: selectedEndBaseDate,
     });
@@ -155,7 +155,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         setActiveInput('endDate');
       }
 
-      if (!isOpenPopover) {
+      if (!isOpen) {
         handleOpen(e);
       }
     };
@@ -213,7 +213,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     useEffect(() => {
       setIsStartDateSelected(false);
       setIsEndDateSelected(false);
-    }, [isOpenPopover]);
+    }, [isOpen]);
 
     return (
       <Grid container spacing={spacing} ref={ref} direction="column">
@@ -225,7 +225,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={startMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptStart}
-          onFocus={handleOpenPopover}
           onClick={handleOpenPopover}
         />
         <DatePickerInput
@@ -236,13 +235,12 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={endMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptEnd}
-          onFocus={handleOpenPopover}
           onClick={handleOpenPopover}
         />
         <PopoverHoveredContextProvider popoverHovered={isPopoverHovered}>
           <DatePickerPopover
-            open={isOpenPopover}
-            anchorEl={anchor}
+            open={isOpen}
+            anchorEl={ref.current}
             onMouseEnter={handlePopoverMouseEnter}
             onMouseLeave={handlePopoverMouseLeave}
             onClose={handleClose}

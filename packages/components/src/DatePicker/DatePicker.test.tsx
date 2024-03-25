@@ -21,7 +21,7 @@ describe('DatePicker', () => {
     vi.useRealTimers();
   });
 
-  it('Props:onChange: при выборе даты в пикере в onChange передается объект Date', async () => {
+  it('ОnChange принимает объект Date при выборе даты в пикере', async () => {
     const onChange = vi.fn();
 
     renderWithTheme(<DatePicker onChange={onChange} />);
@@ -37,35 +37,52 @@ describe('DatePicker', () => {
     );
   });
 
-  it('Props:minDate: в пикере нельзя выбрать дату меньше minDate', async () => {
-    const onChange = vi.fn();
+  describe('Пикер не позволяет выбрать дату', () => {
+    it('Меньше указанной в minDate', () => {
+      renderWithTheme(<DatePicker minDate={new Date('2022-02-09')} />);
+      fireEvent.click(screen.getByRole('textbox'));
 
-    renderWithTheme(
-      <DatePicker onChange={onChange} minDate={new Date('2022-02-09')} />,
-    );
+      const btn = screen.getAllByText('8')[0];
 
-    fireEvent.focus(screen.getByRole('textbox'));
+      expect(btn).toBeDisabled();
+    });
 
-    const btn = screen.getAllByText('8')[0];
+    it('Больше указанной в maxDate', () => {
+      renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
+      fireEvent.click(screen.getByRole('textbox'));
 
-    expect(btn).toBeDisabled();
+      const btn = screen.getAllByText('10')[0];
+
+      expect(btn).toBeDisabled();
+    });
   });
 
-  it('Props:minDate: в пикере можно выбрать дату равной minDate', async () => {
-    renderWithTheme(<DatePicker minDate={new Date('2022-02-09')} />);
-    fireEvent.focus(screen.getByRole('textbox'));
+  describe('Пикер позволяет выбрать дату', () => {
+    it('Равной minDate', () => {
+      renderWithTheme(<DatePicker minDate={new Date('2022-02-09')} />);
+      fireEvent.click(screen.getByRole('textbox'));
 
-    const btn = screen.getAllByText('9')[0];
+      const btn = screen.getAllByText('9')[0];
 
-    expect(btn).not.toBeDisabled();
+      expect(btn).not.toBeDisabled();
+    });
+
+    it('Равной maxDate', () => {
+      renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
+      fireEvent.click(screen.getByRole('textbox'));
+
+      const btn = screen.getAllByText('9')[0];
+
+      expect(btn).not.toBeDisabled();
+    });
   });
 
-  it('Props:value: в пикере можно переключить месяц когда текущее значение меньше минимального', async () => {
+  it('Пикер позволяет переключить месяц когда текущее значение меньше минимального', () => {
     renderWithTheme(
       <DatePicker minDate={new Date()} value={new Date('2023-09-01')} />,
     );
 
-    fireEvent.focus(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByRole('textbox'));
 
     const nextBtn = screen.getByLabelText('Следующий месяц');
     const prevBtn = screen.getByLabelText('Предыдущий месяц');
@@ -74,34 +91,16 @@ describe('DatePicker', () => {
     expect(prevBtn).not.toBeDisabled();
   });
 
-  it('Props:maxDate: в пикере нельзя выбрать дату больше maxDate', async () => {
-    renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
-    fireEvent.focus(screen.getByRole('textbox'));
-
-    const btn = screen.getAllByText('10')[0];
-
-    expect(btn).toBeDisabled();
-  });
-
-  it('Props:maxDate: в пикере можно выбрать дату равной maxDate', async () => {
-    renderWithTheme(<DatePicker maxDate={new Date('2022-02-09')} />);
-    fireEvent.focus(screen.getByRole('textbox'));
-
-    const btn = screen.getAllByText('9')[0];
-
-    expect(btn).not.toBeDisabled();
-  });
-
-  it('Props:maxDate: в пикере выбранной отображается правильная выбранная дата при использовании даты со смещением', async () => {
+  it('Выбранная дата в пикере соответствует указанной в value', () => {
     renderWithTheme(<DatePicker value={new Date('2022-12-16T18:59:00Z')} />);
-    fireEvent.focus(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByRole('textbox'));
 
     const selected = screen.getAllByText('16')[0].getAttribute('aria-selected');
 
     expect(selected).toBeTruthy();
   });
 
-  it('Props:value: при изменении меняется выбранная дата в календаре', async () => {
+  it('Выбранная дата в календаре изменяется при изменении value', async () => {
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
     };
@@ -120,52 +119,58 @@ describe('DatePicker', () => {
       callbacks.setValue(new Date('2022-03-09'));
     });
 
-    fireEvent.focus(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByRole('textbox'));
 
     const selected = screen.getAllByText('9')[0].getAttribute('aria-selected');
 
     expect(selected).toBeTruthy();
   });
 
-  it('Props:onBlur: вызывается при фокусе на стороннем элементе', async () => {
-    const onBlur = vi.fn();
+  describe('Popover', () => {
+    it('Не появляется при фокусе', () => {
+      renderWithTheme(
+        <DatePicker
+          inputProps={{ label: 'inputLabel' }}
+          minDate={new Date('2022-02-09')}
+        />,
+      );
 
-    renderWithTheme(<DatePicker onBlur={onBlur} />);
-    fireEvent.focus(screen.getByRole('textbox'));
-    // фокус вне инпута с поповером
-    fireEvent.focus(document.body);
-    expect(onBlur).toBeCalled();
-  });
+      const label = screen.getAllByText('inputLabel')[0];
+      const input = screen.getByRole('textbox');
 
-  it('Props:onBlur: не вызывается при клике мимо инпута, если поповер закрыт', async () => {
-    const onBlur = vi.fn();
+      [label, input].forEach((element) => {
+        fireEvent.focus(element);
 
-    renderWithTheme(<DatePicker onBlur={onBlur} />);
-    await userEvents.click(document.body);
-    expect(onBlur).not.toBeCalled();
-  });
+        const popover = screen.queryByRole('presentation');
 
-  it('Props:disabled: popover не появляется при фокусе', async () => {
-    renderWithTheme(
-      <DatePicker
-        disabled
-        inputProps={{ label: 'inputLabel' }}
-        minDate={new Date('2022-02-09')}
-      />,
-    );
+        expect(popover).not.toBeInTheDocument();
+        //Сброс фокуса на элементе
+        fireEvent.focus(document.body);
+      });
+    });
 
-    const inputWrapper = document.querySelector('div[aria-disabled]')!;
-    const label = screen.getAllByText('inputLabel')[0];
-    const input = screen.getByRole('textbox');
+    it('Появляется при клике по input', () => {
+      renderWithTheme(<DatePicker />);
 
-    [inputWrapper, label, input].forEach((element) => {
-      fireEvent.focus(element);
+      const input = screen.getByRole('textbox');
 
-      const popover = screen.queryByRole('tooltip');
+      fireEvent.click(input);
+
+      const popover = screen.queryByRole('presentation');
+
+      expect(popover).toBeInTheDocument();
+    });
+
+    it('Не появляется при клике по input если disabled=true', () => {
+      renderWithTheme(<DatePicker disabled />);
+
+      const input = screen.getByRole('textbox');
+
+      fireEvent.click(input);
+
+      const popover = screen.queryByRole('presentation');
 
       expect(popover).not.toBeInTheDocument();
-      //Сброс фокуса на элементе
-      fireEvent.focus(document.body);
     });
   });
 });

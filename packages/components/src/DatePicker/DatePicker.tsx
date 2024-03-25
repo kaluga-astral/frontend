@@ -87,6 +87,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     {
       onChange,
       onOpen,
+      onBlur,
       onClose,
       mask = DEFAULT_DATE_MASK,
       isMondayFirst,
@@ -106,15 +107,16 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ) => {
     const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
-    const [anchor, actions] = usePopover();
+    const { isOpen, actions } = usePopover();
     const { open, close } = actions;
 
-    const handleOpen = (event) => {
+    const handleOpen = (event: SyntheticEvent) => {
       onOpen?.();
       open(event);
     };
 
     const handleClose = () => {
+      onBlur?.();
       onClose?.();
       close();
     };
@@ -149,11 +151,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           size={size}
           disabled={disabled}
           ref={inputRef}
-          onFocus={handleOpen}
+          onClick={handleOpen}
         />
         <DatePickerPopover
-          open={Boolean(anchor)}
-          anchorEl={ref?.current}
+          open={isOpen}
+          anchorEl={ref.current}
           onClose={handleClose}
         >
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>

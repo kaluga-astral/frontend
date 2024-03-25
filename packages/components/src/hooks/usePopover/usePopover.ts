@@ -1,19 +1,20 @@
-import { type MouseEvent, useState } from 'react';
+import { type SyntheticEvent, useState } from 'react';
 
 export type AnchorType = Element | null | undefined;
 
-export type UsePopoverResult = [
-  AnchorType,
-  {
-    open: (event: MouseEvent) => void;
+export type UsePopoverResult = {
+  isOpen: boolean;
+  anchor: AnchorType;
+  actions: {
+    open: (event: SyntheticEvent) => void;
     close: () => void;
-  },
-];
+  };
+};
 
 export const usePopover = (): UsePopoverResult => {
   const [anchor, setAnchor] = useState<AnchorType>(null);
 
-  const open = (event: MouseEvent) => setAnchor(event.currentTarget);
+  const open = (event: SyntheticEvent) => setAnchor(event.currentTarget);
 
   const close = () => setAnchor(null);
 
@@ -22,5 +23,5 @@ export const usePopover = (): UsePopoverResult => {
     close,
   };
 
-  return [anchor, actions];
+  return { isOpen: Boolean(anchor), anchor, actions };
 };

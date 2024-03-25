@@ -1,4 +1,13 @@
+import { paperClasses } from '@mui/material';
+
+import { Popover } from '../../Popover';
 import { styled } from '../../styles';
+
+export const StyledPopover = styled(Popover)`
+  .${paperClasses.root} {
+    margin-top: -12px;
+  }
+`;
 
 export const InnerContainer = styled.div`
   display: flex;
