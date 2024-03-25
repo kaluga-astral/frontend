@@ -1,4 +1,4 @@
-import { Link } from '@mui/material';
+import { Link, svgIconClasses } from '@mui/material';
 
 import { styled } from '../styles';
 
@@ -30,7 +30,7 @@ export const StyledLink = styled(Link)`
     outline: 2px solid ${({ theme }) => theme.palette.primary[400]};
   }
 
-  .MuiSvgIcon-root {
+.${svgIconClasses.root} {
     align-self: center;
 
     width: 16px;
