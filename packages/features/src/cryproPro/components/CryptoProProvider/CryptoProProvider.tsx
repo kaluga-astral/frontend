@@ -1,7 +1,8 @@
-import { observer } from 'mobx-react-lite';
 import { type PropsWithChildren } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Global } from '@astral/ui';
 
-import { SetupCryptoProWorkspaceModal } from '..';
+import { SetupCryptoProWorkspaceModal } from '../SetupCryptoProWorkspaceModal';
 import { type CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
@@ -28,6 +29,15 @@ export const CryptoProProvider = observer(
             !cryptoProStore.isPluginInstalled
           }
           onCloseButtonClick={cryptoProStore.resetIsRequestSetupWorkspace}
+        />
+
+        {/* При установленном плагине, но неактивном расширении, в Firefox и Opera инжектится нативная модалка */}
+        <Global
+          styles={{
+            '#cadesplugin_ovr': {
+              display: 'none !important',
+            },
+          }}
         />
       </>
     );

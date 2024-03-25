@@ -1,3 +1,5 @@
+const path = require('path');
+
 const shell = require('shelljs');
 
 const { TSCONFIG_PATH, DIST_DIR_NAME } = require('../constants');
@@ -19,7 +21,7 @@ const buildTs = ({
   console.log('Starting build...');
 
   const { code: buildCode } = shell.exec(
-    `tsc -p ${TSCONFIG_PATH} --module es2015 --outDir ${DIST_DIR_NAME}`,
+    `tsc -p ${TSCONFIG_PATH} --module es2015 --outDir ${DIST_DIR_NAME} && tsc -p ${TSCONFIG_PATH} --module commonjs --outDir ${DIST_DIR_NAME}${path.sep}node`,
   );
 
   if (buildCode !== 0) {

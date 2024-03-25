@@ -1,7 +1,13 @@
-import { forwardRef } from 'react';
+import { type PropsWithChildren, forwardRef } from 'react';
+
+import { type ButtonProps } from '../Button';
 
 import { StyledButton } from './styles';
-import { type ProductProps } from './types';
+
+export type ProductProps = ButtonProps & {
+  logo: (props: PropsWithChildren<{}>) => JSX.Element;
+  name: string;
+};
 
 export const Product = forwardRef<HTMLButtonElement, ProductProps>(
   (props, ref) => {

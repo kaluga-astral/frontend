@@ -20,7 +20,7 @@ import {
 import { type MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { type MondayFirst } from './DayPicker';
-import { DEFAULT_DATE_MASK } from './constants/defaultDateMask';
+import { DEFAULT_DATE_MASK } from './constants';
 import { useDatePickerOptions } from './hooks';
 
 export type DatePickerProps = MondayFirst &

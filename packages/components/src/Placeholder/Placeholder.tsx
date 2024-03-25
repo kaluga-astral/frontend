@@ -11,29 +11,40 @@ import {
 
 export type PlaceholderProps = {
   /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
+  /**
    * Ссылка на изображение
    */
   imgSrc?: string;
+
   /**
    * Описание изображения (атрибут alt)
    */
   imgAlt?: string;
+
   /**
    * ширина изображения
    */
   imgWidth?: string;
+
   /**
    * высота изображения
    */
   imgHeight?: string;
+
   /**
    * Заголовок
    */
   title: JSX.Element | JSX.Element[] | string;
+
   /**
    * Описание
    */
   description?: JSX.Element | JSX.Element[] | string;
+
   /**
    * Действия
    */
@@ -41,6 +52,7 @@ export type PlaceholderProps = {
 };
 
 export const Placeholder = ({
+  className,
   title,
   imgSrc,
   imgAlt,
@@ -50,7 +62,7 @@ export const Placeholder = ({
   Actions,
 }: PlaceholderProps) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <InnerContainer>
         {imgSrc && (
           <Image

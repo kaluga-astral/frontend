@@ -13,7 +13,13 @@ copy({
 buildTs({
   releaseTag: process.env.RELEASE_TAG,
   packageExports: {
-    './server': './server/index.js',
+    './server': {
+      // Специально для vitest добавляется отдельный exports потому, что он быстро работает только с cjs, когда есть barrel files
+      // Порядок имеет значение
+      vitest: './node/server/index.js',
+      module: './server/index.js',
+      require: './node/server/index.js',
+    },
     './fonts/*': './fonts/*',
     './illustrations/*': './illustrations/*',
   },

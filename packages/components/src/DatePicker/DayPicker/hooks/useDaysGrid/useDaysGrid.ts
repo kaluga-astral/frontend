@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 
-import { DAYS_IN_WEEK } from '../../../constants/counts';
+import { DAYS_IN_WEEK } from '../../../constants';
 import {
   DateCompareDeep,
   addDays,

@@ -3,17 +3,11 @@ import {
   type TypographyPropsVariantOverrides as TypographyPropsVariantOverridesMUI,
 } from '@mui/material';
 import { type Variant } from '@mui/material/styles/createTypography';
-import {
-  type ElementType,
-  type HTMLAttributes,
-  forwardRef,
-  useMemo,
-} from 'react';
+import { type ElementType, type HTMLAttributes, forwardRef } from 'react';
 
-import { type Theme } from '../theme';
-
-import { TypographyColors } from './enums';
+import { type TypographyColors } from './enums';
 import { TypographyWrapper } from './styles';
+import { useTypographyColor } from './hooks';
 
 type Intensity =
   | '900'
@@ -81,30 +75,7 @@ declare module '@mui/material/Typography' {
 
 export const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
   ({ children, color, colorIntensity = '800', component, ...props }, ref) => {
-    const typographyColor = useMemo(() => {
-      // получаем название цвета по TypographyColors
-      const colorName = color && TypographyColors[color];
-
-      if (colorName) {
-        return (theme: Theme) => {
-          // если такой цвет есть в палитре, то ищем его intensity
-          // или возвращаем main цвет (если для данного цвета не определены intensity)
-          // или возвращаем значение colorName (например, необходимо для таких TypographyColor, как "textSecondary",
-          // которые невозможно найти в palette потому-что поиск осуществляется по ключу "text.secondary")
-
-          // TODO: необходим рефакторинг. https://track.astral.ru/soft/browse/UIKIT-844
-          return (
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.[colorIntensity as string] ||
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (theme.palette as any)[colorName]?.main ||
-            colorName
-          );
-        };
-      }
-
-      return;
-    }, [color, colorIntensity]);
+    const typographyColor = useTypographyColor({ color, colorIntensity });
 
     return (
       <TypographyWrapper

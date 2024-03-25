@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
 import { List } from '@mui/material';
 
-import { NavMenuItem, type NavMenuItemProps } from './NavMenuItem';
+import { Item, type ItemProps } from './Item';
 
 export type NavMenuProps = {
   /**
    * Состояние свернуто/развернуто меню по горизонтали
    */
   collapsedIn?: boolean;
-  items: Array<NavMenuItemProps['item']>;
+  items: Array<ItemProps['item']>;
 };
 
 export const NavMenu = forwardRef<HTMLUListElement, NavMenuProps>(
@@ -18,9 +18,7 @@ export const NavMenu = forwardRef<HTMLUListElement, NavMenuProps>(
     return (
       <List ref={ref} disablePadding>
         {items.map((item) => {
-          return (
-            <NavMenuItem key={item[0]} collapsedIn={collapsedIn} item={item} />
-          );
+          return <Item key={item[0]} collapsedIn={collapsedIn} item={item} />;
         })}
       </List>
     );
