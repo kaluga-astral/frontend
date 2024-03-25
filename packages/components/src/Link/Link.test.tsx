@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen } from '@astral/tests';
 
-import { Link } from '.';
+import { Link } from './Link';
 
 describe('Link', () => {
   it('Ref доступен', () => {
