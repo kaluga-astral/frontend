@@ -21,7 +21,7 @@ describe('Link', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Иконка слева отображается', () => {
+  it('Иконка слева отображается при withAdornment="start"', () => {
     renderWithTheme(<Link href="/" withAdornment="start">Link</Link>);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
@@ -29,7 +29,7 @@ describe('Link', () => {
     expect(icon).toBeVisible();
   });
 
-  it('Иконка справа отображается', () => {
+  it('Иконка справа отображается при withAdornment="end"', () => {
     renderWithTheme(<Link href="/" withAdornment="end">Link</Link>);
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
