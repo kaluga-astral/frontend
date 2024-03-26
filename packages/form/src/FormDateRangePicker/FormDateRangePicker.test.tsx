@@ -134,5 +134,6 @@ describe('FormDateRangePicker', () => {
       submitValues.endDateField.toISOString().includes('2022-03-15'),
     ).toBeTruthy();
     // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
   }, 5000);
 });

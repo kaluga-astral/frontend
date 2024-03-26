@@ -5,7 +5,7 @@ import { styled } from '../../styles';
 
 export const StyledPopover = styled(Popover)`
   .${paperClasses.root} {
-    margin-top: -12px;
+    margin-top: -${({ theme }) => theme.spacing(3)};
   }
 `;
 

@@ -76,8 +76,9 @@ export const DatePickerInput = forwardRef<
         inputProps={{
           ...props.inputProps,
           ref,
-          onClick,
         }}
+        // Обрабатываем клик на контейнере, а не в инпуте, это связано с неактивной областью с иконкой (endAdornment)
+        onClick={onClick}
       />
     </div>
   );
