@@ -40,6 +40,7 @@ export const IdentityProductSwitcher = ({
     productList,
     handleChangeTenant,
     handleShowProducts,
+    isShowToggleButton,
   } = useLogic(identityUrl, handleOpenMenu);
 
   return (
@@ -80,7 +81,7 @@ export const IdentityProductSwitcher = ({
               description: 'Произошла ошибка. Повторите попытку позже.',
             }}
           >
-            {Boolean(tenants?.length) && (
+            {isShowToggleButton && (
               <TenantsToggleButtonGroup
                 exclusive
                 onChange={handleChangeTenant}

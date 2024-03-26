@@ -14,11 +14,12 @@ export const getTenantsProducts = async (
   const { hostname } = new URL(window.origin);
 
   const tenantsProducts = tenants.map(async (tenant) => {
-    const products = await getIdentityProducts(identityUrl, tenant).then(
-      (tenantProducts) =>
-        tenantProducts.filter(
-          (product) => new URL(product.url).hostname !== hostname,
-        ),
+    const products = await getIdentityProducts(identityUrl, {
+      tenantId: tenant,
+    }).then((tenantProducts) =>
+      tenantProducts.filter(
+        (product) => new URL(product.url).hostname !== hostname,
+      ),
     );
 
     return [tenant, products];

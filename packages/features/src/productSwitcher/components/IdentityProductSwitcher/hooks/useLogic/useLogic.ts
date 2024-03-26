@@ -60,6 +60,9 @@ export const useLogic = (identityUrl: string, openMenu: () => void) => {
     }
   };
 
+  const isShowToggleButton =
+    Boolean(tenants?.length) && Number(tenants?.length) > 1;
+
   return {
     handleShowProducts,
     isLoading,
@@ -68,5 +71,6 @@ export const useLogic = (identityUrl: string, openMenu: () => void) => {
     handleChangeTenant,
     tenantId,
     productList,
+    isShowToggleButton,
   };
 };
