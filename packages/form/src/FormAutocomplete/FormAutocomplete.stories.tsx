@@ -108,7 +108,7 @@ export const FreeSolo = () => {
 
   return (
     <FormStoryContainer form={form}>
-      <FormAutocomplete<FormFreeValues, IOption, true, false, true>
+      <FormAutocomplete<FormFreeValues, IOption, true, boolean, true>
         control={form.control}
         name="autocomplete"
         options={OPTIONS}
