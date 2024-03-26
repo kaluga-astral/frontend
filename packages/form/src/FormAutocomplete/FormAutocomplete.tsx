@@ -6,15 +6,21 @@ import { useFormFieldProps } from '../hooks';
 
 type AutocompleteInputChangeReason = 'input' | 'reset' | 'clear';
 
+/**
+ * Пропсы FormAutocomplete, не содержит onChange, тк как он будет перехвачен формой
+ */
 export type FormAutocompleteProps<
   FieldValues extends object,
   Option,
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
-> = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-  FieldValues
+> = Omit<
+  WithFormFieldProps<
+    AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+    FieldValues
+  >,
+  'onChange'
 >;
 
 /**
