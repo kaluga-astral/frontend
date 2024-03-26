@@ -312,7 +312,9 @@ describe('DateRangePicker', () => {
     await user.click(inputB);
     await user.click(screen.getAllByText('15')[1]);
     expect((inputB as HTMLInputElement).value).toBe('15.02.2022');
-  });
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
+  }, 5000);
 
   it('Первый календарь отображает предыдущий месяц от выбранной даты второго календаря', async () => {
     const user = userEvents.setup({
@@ -356,7 +358,9 @@ describe('DateRangePicker', () => {
     await user.click(inputA);
     await user.click(screen.getAllByText('15')[0]);
     expect((inputA as HTMLInputElement).value).toBe('15.03.2022');
-  });
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
+  }, 5000);
 
   describe('Popover', () => {
     it('Не появляется при фокусе', () => {
