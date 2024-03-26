@@ -112,7 +112,7 @@ describe('FormDateRangePicker', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.focus(screen.getByLabelText('startDate'));
+    fireEvent.click(screen.getByLabelText('startDate'));
 
     const startDateBtn = screen.getAllByText('14')[0];
     const endDateBtn = screen.getAllByText('15')[1];
