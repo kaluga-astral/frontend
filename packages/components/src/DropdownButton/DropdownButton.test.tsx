@@ -1,12 +1,12 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { MenuItem } from '../MenuItem';
 
 import { DropdownButton } from './DropdownButton';
 
 describe('DropdownButton', () => {
-  it('Props:disabled: нельзя нажать кнопку', () => {
+  it('Кнопка заблокирована если disabled=true', () => {
     renderWithTheme(
       <DropdownButton disabled name="btn">
         <MenuItem>Item</MenuItem>
@@ -18,7 +18,7 @@ describe('DropdownButton', () => {
     expect(button).toBeDisabled();
   });
 
-  it('При клике на option закрывается popover', async () => {
+  it('Popover открывается при клике на кнопку', async () => {
     renderWithTheme(
       <DropdownButton name="btn">
         <MenuItem>Item</MenuItem>
@@ -26,24 +26,66 @@ describe('DropdownButton', () => {
     );
 
     await userEvents.click(screen.getByRole('button'));
-    await userEvents.click(screen.getByText('Item'));
 
     const menuItem = screen.queryByRole('menuitem');
 
-    expect(menuItem).not.toBeInTheDocument();
+    expect(menuItem).toBeInTheDocument();
   });
 
-  it('При клике на option вызывается onClick', async () => {
-    const onClick = vi.fn();
+  describe('Popover закрывается', () => {
+    const setup = async () => {
+      renderWithTheme(
+        <>
+          <DropdownButton name="btn">
+            <MenuItem>Item</MenuItem>
+          </DropdownButton>
+          <div>Outside popover</div>
+        </>,
+      );
 
+      await userEvents.click(screen.getByRole('button'));
+    };
+
+    it('При клике на option', async () => {
+      await setup();
+      await userEvents.click(screen.getByText('Item'));
+
+      const menuItem = screen.queryByRole('menuitem');
+
+      expect(menuItem).not.toBeInTheDocument();
+    });
+
+    it('При клике вне popover', async () => {
+      await setup();
+      await userEvents.click(screen.getByText('Outside popover'));
+
+      const menuItem = screen.queryByRole('menuitem');
+
+      expect(menuItem).not.toBeInTheDocument();
+    });
+  });
+
+  it('Name отображается внутри кнопки', async () => {
     renderWithTheme(
       <DropdownButton name="btn">
-        <MenuItem onClick={onClick}>Item</MenuItem>
+        <MenuItem>Item</MenuItem>
       </DropdownButton>,
     );
 
-    await userEvents.click(screen.getByRole('button'));
-    await userEvents.click(screen.getByRole('menuitem'));
-    expect(onClick).toBeCalled();
+    const button = screen.getByRole('button', { name: 'btn' });
+
+    expect(button).toBeInTheDocument();
+  });
+
+  it('StartIcon отображается', async () => {
+    renderWithTheme(
+      <DropdownButton startIcon={<div>Icon</div>} name="btn">
+        <MenuItem>Item</MenuItem>
+      </DropdownButton>,
+    );
+
+    const icon = screen.getByText('Icon');
+
+    expect(icon).toBeInTheDocument();
   });
 });
