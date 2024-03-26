@@ -133,5 +133,5 @@ describe('FormDateRangePicker', () => {
     expect(
       submitValues.endDateField.toISOString().includes('2022-03-15'),
     ).toBeTruthy();
-  });
+  }, 5000);
 });
