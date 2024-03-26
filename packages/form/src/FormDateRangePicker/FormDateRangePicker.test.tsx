@@ -133,5 +133,6 @@ describe('FormDateRangePicker', () => {
     expect(
       submitValues.endDateField.toISOString().includes('2022-03-15'),
     ).toBeTruthy();
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
   }, 5000);
 });
