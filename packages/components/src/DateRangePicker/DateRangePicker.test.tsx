@@ -210,7 +210,9 @@ describe('DateRangePicker', () => {
   });
 
   it('Пикер закрывается при выборе обоих дат, в состоянии управляемого компонента', async () => {
-    const user = userEvents.setup();
+    const user = userEvents.setup({
+      skipHover: true,
+    });
 
     const TestComponent = () => {
       const [valueA, setValueA] = useState<Date | undefined>();
@@ -234,11 +236,12 @@ describe('DateRangePicker', () => {
 
     renderWithTheme(<TestComponent />);
     await user.click(screen.getByPlaceholderText('inputA'));
-    // eslint-disable-next-line testing-library/prefer-presence-queries
-    expect(screen.queryAllByRole('presentation').length).toBeTruthy();
     await user.click(screen.getAllByText('15')[0]);
     await user.click(screen.getAllByText('15')[1]);
-    expect(screen.queryAllByRole('presentation')).toStrictEqual([]);
+
+    const popover = screen.queryByRole('presentation');
+
+    expect(popover).not.toBeInTheDocument();
   });
 
   it('На одном календаре можно выбрать две даты', async () => {
@@ -268,7 +271,9 @@ describe('DateRangePicker', () => {
   });
 
   it('Второй календарь отображает следующий месяц от выбранной даты первого календаря', async () => {
-    const user = userEvents.setup();
+    const user = userEvents.setup({
+      skipHover: true,
+    });
 
     const TestComponent = () => {
       const [dateA, setDateA] = useState<Date | undefined>();
@@ -305,12 +310,14 @@ describe('DateRangePicker', () => {
     await user.click(screen.getAllByText('15')[0]);
     await user.keyboard('{Escape}');
     await user.click(inputB);
-    await userEvents.click(screen.getAllByText('15')[1]);
+    await user.click(screen.getAllByText('15')[1]);
     expect((inputB as HTMLInputElement).value).toBe('15.02.2022');
   });
 
   it('Первый календарь отображает предыдущий месяц от выбранной даты второго календаря', async () => {
-    const user = userEvents.setup();
+    const user = userEvents.setup({
+      skipHover: true,
+    });
 
     const TestComponent = () => {
       const [dateA, setDateA] = useState<Date | undefined>();
