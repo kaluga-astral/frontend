@@ -86,7 +86,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
+  it('Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
       const form = useForm<FormValues>({
         resolver: resolver<FormValues>(validationSchema),
@@ -108,7 +108,7 @@ describe('FormAutocomplete', () => {
     expect(input).toHaveFocus();
   });
 
-  it('Prop:freeSolo: В форму сетится значение из input', async () => {
+  it('В форму сетится значение из input при freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -146,7 +146,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: В форму сетится значение из списка при наличии значения в input', async () => {
+  it('В форму сетится значение из списка при наличии значения в input (freeSolo=true)', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -188,7 +188,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: onInputChange:  onInputChange корректно вызывается вместе с freeSolo', async () => {
+  it('OnInputChange корректно вызывается вместе с freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();
@@ -220,7 +220,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:disableClearable=false: Прячет кнопку резета, если инпут пуст', async () => {
+  it('Прячет кнопку резета, если инпут пуст', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();
@@ -255,7 +255,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:disableClearable=false: Показывает кнопку резета, если инпут содержит текст', async () => {
+  it('Показывает кнопку резета, если инпут содержит текст', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();
