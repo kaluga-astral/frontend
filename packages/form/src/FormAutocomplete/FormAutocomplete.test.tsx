@@ -86,7 +86,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Фокус на поле после клика на Submit', async () => {
+  it('Фокусирование на поле после клика на Submit', async () => {
     const TestComponent = () => {
       const form = useForm<FormValues>({
         resolver: resolver<FormValues>(validationSchema),
@@ -220,10 +220,8 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Прячет кнопку резета, если инпут пуст', async () => {
+  it('Кнопка сброса скрыта, если инпут пуст', async () => {
     type FormFreeValues = { user: Option | string };
-
-    const onInputChange = vi.fn();
 
     const clearText = 'Очистить';
 
@@ -239,7 +237,6 @@ describe('FormAutocomplete', () => {
             label="user"
             freeSolo
             options={[]}
-            onInputChange={onInputChange}
             clearText={clearText}
           />
 
@@ -255,7 +252,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Показывает кнопку резета, если инпут содержит текст', async () => {
+  it('Кнопка сброса отображается при наведении на инпут, если инпут содержит текст', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();

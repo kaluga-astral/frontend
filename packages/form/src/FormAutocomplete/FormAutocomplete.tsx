@@ -69,16 +69,9 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
-  // выключаем кнопку очистить, если инпут пустой
-  // если инпут не пустой, то передаем значение из пропсов
-  const disableClearable = !Boolean(fieldProps.value)
-    ? true
-    : Boolean(props.disableClearable);
-
   return (
     <Autocomplete
       {...fieldProps}
-      disableClearable={disableClearable as DisableClearable}
       onInputChange={handleOnInputChange}
       onChange={handleOnChange}
     />

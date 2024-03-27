@@ -6,7 +6,7 @@ import { TextField } from '../TextField';
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
+  it('При options=[] отображается плейсхолдер', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     await userEvents.click(screen.getByRole('combobox'));
 
@@ -24,7 +24,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeNull();
   });
 
-  it('Prop:getOptionLabel: позволяет отображать в popover label', async () => {
+  it('позволяет отображать в popover label при getOptionLabel=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -71,7 +71,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Props:multiple=false: в инпут сетится label после выбора option', async () => {
+  it('В инпут сетится label после выбора option при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -97,7 +97,7 @@ describe('Autocomplete', () => {
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
 
-  it('Prop:multiple: в options отображаются чекбоксы', async () => {
+  it('В options отображаются чекбоксы при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -117,7 +117,7 @@ describe('Autocomplete', () => {
     expect(checkbox).toBeVisible();
   });
 
-  it('Prop:multiple: после выбора option в инпуте появляется tag', async () => {
+  it('После выбора option в инпуте появляется tag при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -144,7 +144,7 @@ describe('Autocomplete', () => {
     expect(tag).toBeVisible();
   });
 
-  it('Prop:multiple: tag из инпута можно удалить', async () => {
+  it('Multiple=true позволяет удалить tag из инпута', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];

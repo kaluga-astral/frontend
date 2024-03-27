@@ -207,6 +207,11 @@ const AutocompleteInner = <
     [multiple, overflowOption, externalRenderOption],
   );
 
+  // выключаем кнопку очистить, если инпут пустой
+  // если инпут не пустой, то передаем значение из пропсов
+  const disableClearable =
+    !Boolean(restProps.value) || Boolean(restProps.disableClearable);
+
   return (
     <MuiAutocomplete
       {...restProps}
@@ -234,6 +239,7 @@ const AutocompleteInner = <
       loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
+      disableClearable={disableClearable as DisableClearable}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText={noOptionsText}
       closeText={closeText}
