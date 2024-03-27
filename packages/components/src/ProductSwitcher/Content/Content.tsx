@@ -45,7 +45,7 @@ export const Content = ({
         {products.map((product) => {
           return (
             <li key={product.id}>
-              <ProductItem component="a" href={product.url}>
+              <ProductItem href={product.url}>
                 <Logo src={product.logoUrl} color={product.color} />
                 <Typography variant="ui" color="grey" colorIntensity="900">
                   {product.name}

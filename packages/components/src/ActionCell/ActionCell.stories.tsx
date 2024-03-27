@@ -38,7 +38,17 @@ const ACTIONS: Actions<ColumnsType> = {
     },
   ],
   secondary: [
-    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    {
+      name: 'Редактировать',
+      onClick: () => console.log('secondary 1'),
+      disabledReason:
+        'Текущий документ не прошел  \n согласование/подписание. \n Загрузите документ повторно',
+      disabled: true,
+    },
+    {
+      name: 'Скачать',
+      href: '#',
+    },
     { name: 'Удалить', onClick: () => console.log('secondary 2') },
   ],
 };
