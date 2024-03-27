@@ -96,7 +96,7 @@ export const IdentityProductSwitcher = ({
             {productList?.map((product) => {
               return (
                 <li key={product.id}>
-                  <StyledMenuItem component="a" href={product.url}>
+                  <StyledMenuItem href={product.url}>
                     <Logo src={product.logoUrl} color={product.color} />
                     <Typography variant="ui" color="grey" colorIntensity="900">
                       {product.name}
