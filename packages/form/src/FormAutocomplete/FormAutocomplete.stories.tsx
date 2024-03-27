@@ -1,6 +1,8 @@
 import { type Meta } from '@storybook/react';
 import { array, arrayItem, min, object, or, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
+import { Button } from '@astral/components';
+import { useState } from 'react';
 
 import { useForm } from '../hooks';
 import { FormStoryContainer } from '../docs';
@@ -119,6 +121,41 @@ export const FreeSolo = () => {
         }
       />
       <FormSubmitButton>Submit</FormSubmitButton>
+    </FormStoryContainer>
+  );
+};
+
+/**
+ * Можно задать значение в форме и инпут подхватит изменения
+ */
+export const ControlledForm = () => {
+  const [, setIsUpdate] = useState(false);
+
+  const form = useForm<FormFreeValues>({
+    reValidateMode: 'onChange',
+    resolver: resolver<FormFreeValues>(validationFreeSchema),
+  });
+
+  const handleButtonClick = () => {
+    // eslint-disable-next-line quotes
+    form.setValue('autocomplete', "It's sunny today");
+    setIsUpdate(true);
+  };
+
+  return (
+    <FormStoryContainer form={form}>
+      <FormAutocomplete<FormFreeValues, IOption, true, false, true>
+        control={form.control}
+        name="autocomplete"
+        options={OPTIONS}
+        freeSolo
+        label="Form autocomplete with freeSolo"
+        getOptionLabel={(params) =>
+          typeof params === 'string' ? params : params.title
+        }
+      />
+
+      <Button onClick={handleButtonClick}>Set text</Button>
     </FormStoryContainer>
   );
 };
