@@ -140,6 +140,23 @@ describe('WelcomeScreen', () => {
     expect(title).toBeVisible();
   });
 
+  it('Анимация запускается сразу, если autoStart="true"', () => {
+    renderWithTheme(
+      <WelcomeScreen
+        isSuccessLoadData
+        productName="Астрал.ЭДО"
+        userName="Иван Иванович"
+        onRetry={() => undefined}
+      >
+        Content
+      </WelcomeScreen>,
+    );
+
+    const welcomeScreen = screen.queryByRole('presentation');
+
+    expect(welcomeScreen).toBeInTheDocument();
+  });
+
   it('Placeholder c ошибкой отображается при isError=true', () => {
     renderWithTheme(
       <WelcomeScreen isError onRetry={() => undefined}>

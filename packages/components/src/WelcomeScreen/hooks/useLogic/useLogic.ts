@@ -7,20 +7,20 @@ import {
 } from '../../constants';
 
 type UseLogicParams = {
-  autoStart?: boolean;
+  isSuccessLoadData?: boolean;
   isLoading?: boolean;
   isError?: boolean;
 };
 
 export const useLogic = ({
-  autoStart = false,
+  isSuccessLoadData = false,
   isLoading,
   isError,
 }: UseLogicParams) => {
   // Храним предыдущее состояния лоадера. Для показа анимации из isLoading должен быть false
   // Но так как это его изначальное состояние, отслеживаем было ли оно в состоянии true
-  // Cразу устанавливаем состояние, чтобы при autoStart=true выполнялись условия c prevLoading и анимация запускалась сразу
-  const prevLoading = useRef<boolean>(autoStart);
+  // Cразу устанавливаем состояние, чтобы при isSuccessLoadData=true выполнялись условия c prevLoading и анимация запускалась сразу
+  const prevLoading = useRef<boolean>(isSuccessLoadData);
 
   const [isShowLoader, setShowLoader] = useState(false);
   const [isShowGreetings, setShowGreetings] = useState(false);
