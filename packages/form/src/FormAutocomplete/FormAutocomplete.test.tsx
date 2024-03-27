@@ -219,4 +219,75 @@ describe('FormAutocomplete', () => {
       expect(onInputChange.mock.calls).toHaveLength(4);
     });
   });
+
+  it('Prop:disableClearable=false: Прячет кнопку резета, если инпут пуст', async () => {
+    type FormFreeValues = { user: Option | string };
+
+    const onInputChange = vi.fn();
+
+    const clearText = 'Очистить';
+
+    const TestComponent = () => {
+      const form = useForm<FormFreeValues>({
+        defaultValues: { user: '' },
+      });
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormAutocomplete<FormValues, Option, false, false, true>
+            name="user"
+            label="user"
+            freeSolo
+            options={[]}
+            onInputChange={onInputChange}
+            clearText={clearText}
+          />
+
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    await waitFor(() => {
+      expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
+    });
+  });
+
+  it('Prop:disableClearable=false: Показывает кнопку резета, если инпут содержит текст', async () => {
+    type FormFreeValues = { user: Option | string };
+
+    const onInputChange = vi.fn();
+
+    const clearText = 'Очистить';
+
+    const TestComponent = () => {
+      const form = useForm<FormFreeValues>({
+        defaultValues: { user: '' },
+      });
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormAutocomplete<FormValues, Option, false, false, true>
+            name="user"
+            label="user"
+            freeSolo
+            options={[]}
+            onInputChange={onInputChange}
+            clearText={clearText}
+          />
+
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    userEvents.type(screen.getByDisplayValue(''), 'some text');
+
+    await waitFor(() => {
+      expect(screen.getByTitle(clearText)).toBeInTheDocument();
+    });
+  });
 });
