@@ -6,19 +6,19 @@ import {
   useRef,
 } from 'react';
 import { type ListRange, Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
-import { ArrowUpOutlineMd } from '@astral/icons';
 
 import { useToggle } from '../hooks';
 import { useViewportType } from '../hooks/useViewportType';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
+import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
 import { EndData } from './EndData';
 import { Error } from './Error';
 import { Loader } from './Loader';
 import { NoData } from './NoData';
-import { Item, ScrollToStartButton } from './styles';
+import { Item } from './styles';
 
 // TODO Вынести этот дженерик в отдельный пакет
 // Дженерик получает из типа только обязательные поля и возвращает их как union
@@ -122,7 +122,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
     [hideStickyButton, showStickyButton],
   );
 
-  const handleScrollToStart = useCallback(
+  const handleScrollToTop = useCallback(
     () =>
       virtuoso.current?.scrollToIndex({
         index: 0,
@@ -149,7 +149,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
       isLoading={isLoading && !isDataExist}
       isError={isError && !isDataExist}
       errorState={{
-        imgAlt: 'Что-то пошло не тиак',
+        imgAlt: 'Что-то пошло не так',
         errorList: [errorMsg || ''],
         imgSrc: imagesMap.defaultErrorImgSrc,
         onRetry,
@@ -182,13 +182,10 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
       />
 
       {isStickyButtonActive && (
-        <ScrollToStartButton
-          color="default"
+        <ScrollToTopButton
           size={isMobile ? 'medium' : 'small'}
-          onClick={handleScrollToStart}
-        >
-          <ArrowUpOutlineMd />
-        </ScrollToStartButton>
+          onClick={handleScrollToTop}
+        />
       )}
     </ContentState>
   );
