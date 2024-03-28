@@ -7,7 +7,7 @@ import {
   type AutocompleteProps as MuiAutocompleteProps,
   Popper as MuiPopper,
 } from '@mui/material';
-import { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
@@ -90,6 +90,7 @@ const AutocompleteInner = <
     required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    disableClearable: externalDisableClearable,
     noOptionsText = 'Нет данных',
     closeText = 'Закрыть',
     openText = 'Открыть',
@@ -102,6 +103,7 @@ const AutocompleteInner = <
     renderInput: externalRenderInput,
     loadedDataError = 'На текущий момент сервис недоступен.',
     isLoadedDataError,
+    onChange: externalOnChange,
     ...restProps
   }: AutocompleteProps<
     AutocompleteValueProps,
@@ -111,6 +113,26 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
+  const getIsInputEmpty = (val: unknown): boolean => {
+    if (typeof val === 'string') {
+      return val === '';
+    }
+
+    if (Array.isArray(val)) {
+      return val.length === 0;
+    }
+
+    if (val === undefined || val === null) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const [disableClearable, setDisableClearable] = useState(
+    !getIsInputEmpty(restProps.value) || Boolean(externalDisableClearable),
+  );
+
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
@@ -207,6 +229,17 @@ const AutocompleteInner = <
     [multiple, overflowOption, externalRenderOption],
   );
 
+  type OnChangeT = typeof externalOnChange;
+
+  // Убираем кнопу очистки, если пользователь ввел что-либо
+  const handleOnChange: OnChangeT = (e, val, reason, details) => {
+    if (!externalDisableClearable) {
+      setDisableClearable(getIsInputEmpty(val));
+    }
+
+    externalOnChange?.call({}, e, val, reason, details);
+  };
+
   return (
     <MuiAutocomplete
       {...restProps}
@@ -227,6 +260,7 @@ const AutocompleteInner = <
           )}
         </MuiPopper>
       )}
+      onChange={handleOnChange}
       renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
@@ -234,6 +268,7 @@ const AutocompleteInner = <
       loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
+      disableClearable={disableClearable as DisableClearable}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText={noOptionsText}
       closeText={closeText}
