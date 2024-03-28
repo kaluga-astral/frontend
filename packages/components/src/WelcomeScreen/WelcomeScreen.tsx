@@ -35,6 +35,11 @@ export type WelcomeScreenProps = {
   errorMsg?: string;
 
   /**
+   * Флаг наличия данных
+   */
+  isSuccess: boolean;
+
+  /**
    * Флаг загрузки данных
    */
   isLoading?: boolean;
@@ -62,12 +67,14 @@ export const WelcomeScreen = ({
   productName,
   userName,
   errorMsg,
+  isSuccess,
   isLoading,
   isError,
   children,
   onRetry,
 }: WelcomeScreenProps) => {
   const { isShowLoader, isShowGreetings, isShowContent } = useLogic({
+    isSuccess,
     isLoading,
     isError,
   });

@@ -1,4 +1,4 @@
-import { fireEvent, prettyDOM, renderWithTheme, screen } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen } from '@astral/tests';
 import { vi } from 'vitest';
 
 import { LOADING_DISPLAY_DELAY_MS, SESSION_KEY } from './constants';
@@ -9,9 +9,10 @@ describe('WelcomeScreen', () => {
     sessionStorage.clear();
   });
 
-  it('Контент не отображается при первичном рендере', () => {
+  it('Контент не отображается если isSuccess=false', () => {
     renderWithTheme(
       <WelcomeScreen
+        isSuccess={false}
         productName="Астрал.ЭДО"
         userName="Иван Иванович"
         onRetry={() => undefined}
@@ -20,37 +21,16 @@ describe('WelcomeScreen', () => {
       </WelcomeScreen>,
     );
 
-    expect(screen.queryByText('Content')).toBeNull();
+    expect(screen.queryByText('Content')).not.toBeInTheDocument();
   });
 
   it('Название продукта отображается', () => {
-    const { rerender } = renderWithTheme(
+    renderWithTheme(
       <WelcomeScreen
+        isSuccess
         productName="Астрал.ЭДО"
         userName="Иван Иванович"
         onRetry={() => undefined}
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading={false}
       >
         Content
       </WelcomeScreen>,
@@ -62,33 +42,12 @@ describe('WelcomeScreen', () => {
   });
 
   it('Имя пользователя отображается', () => {
-    const { rerender } = renderWithTheme(
+    renderWithTheme(
       <WelcomeScreen
+        isSuccess
         productName="Астрал.ЭДО"
         userName="Иван Иванович"
         onRetry={() => undefined}
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading={false}
       >
         Content
       </WelcomeScreen>,
@@ -103,8 +62,9 @@ describe('WelcomeScreen', () => {
   it(`Содержимое отображается сразу при наличии в sessionStorage значения ${SESSION_KEY}="true"`, () => {
     sessionStorage.setItem(SESSION_KEY, 'true');
 
-    const { rerender } = renderWithTheme(
+    renderWithTheme(
       <WelcomeScreen
+        isSuccess
         productName="Астрал.ЭДО"
         userName="Иван Иванович"
         onRetry={() => undefined}
@@ -112,30 +72,6 @@ describe('WelcomeScreen', () => {
         Content
       </WelcomeScreen>,
     );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    rerender(
-      <WelcomeScreen
-        productName="Астрал.ЭДО"
-        userName="Иван Иванович"
-        onRetry={() => undefined}
-        isLoading={false}
-      >
-        Content
-      </WelcomeScreen>,
-    );
-
-    console.log(prettyDOM());
 
     const title = screen.getByText('Content');
 
@@ -144,7 +80,7 @@ describe('WelcomeScreen', () => {
 
   it('Placeholder c ошибкой отображается при isError=true', () => {
     renderWithTheme(
-      <WelcomeScreen isError onRetry={() => undefined}>
+      <WelcomeScreen isSuccess={false} isError onRetry={() => undefined}>
         Content
       </WelcomeScreen>,
     );
@@ -156,7 +92,12 @@ describe('WelcomeScreen', () => {
 
   it('Лоадер отображается при isLoading=true', async () => {
     renderWithTheme(
-      <WelcomeScreen isLoading isError={false} onRetry={() => undefined}>
+      <WelcomeScreen
+        isSuccess={false}
+        isLoading
+        isError={false}
+        onRetry={() => undefined}
+      >
         Content
       </WelcomeScreen>,
     );
@@ -175,7 +116,7 @@ describe('WelcomeScreen', () => {
     const onRetrySpy = vi.fn();
 
     renderWithTheme(
-      <WelcomeScreen isError onRetry={onRetrySpy}>
+      <WelcomeScreen isSuccess={false} isError onRetry={onRetrySpy}>
         Content
       </WelcomeScreen>,
     );
