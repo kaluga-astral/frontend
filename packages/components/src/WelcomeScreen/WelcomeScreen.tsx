@@ -35,6 +35,12 @@ export type WelcomeScreenProps = {
   errorMsg?: string;
 
   /**
+   * Позволяет проигнорировать цепочку загрузки данных, запускает анимацию сразу, при isLoading=false
+   * Применяется, когда к моменту рендера компонента данные уже есть
+   */
+  autoStart?: boolean;
+
+  /**
    * Флаг загрузки данных
    */
   isLoading?: boolean;
@@ -62,12 +68,14 @@ export const WelcomeScreen = ({
   productName,
   userName,
   errorMsg,
+  autoStart,
   isLoading,
   isError,
   children,
   onRetry,
 }: WelcomeScreenProps) => {
   const { isShowLoader, isShowGreetings, isShowContent } = useLogic({
+    autoStart,
     isLoading,
     isError,
   });

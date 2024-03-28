@@ -1,4 +1,4 @@
-import { fireEvent, prettyDOM, renderWithTheme, screen } from '@astral/tests';
+import { fireEvent, renderWithTheme, screen } from '@astral/tests';
 import { vi } from 'vitest';
 
 import { LOADING_DISPLAY_DELAY_MS, SESSION_KEY } from './constants';
@@ -134,8 +134,6 @@ describe('WelcomeScreen', () => {
         Content
       </WelcomeScreen>,
     );
-
-    console.log(prettyDOM());
 
     const title = screen.getByText('Content');
 

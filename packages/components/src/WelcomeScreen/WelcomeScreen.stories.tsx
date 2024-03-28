@@ -150,6 +150,42 @@ export const Example = () => {
   );
 };
 
+export const AutoStart = () => {
+  const data = MOCK_DATA;
+
+  const handleClearStorage = () => sessionStorage.clear();
+
+  const Logo = () => data?.logo;
+
+  return (
+    <Container>
+      <WelcomeScreen {...data} autoStart onRetry={() => undefined}>
+        <DashboardLayout>
+          <DashboardLayout.Header
+            product={{
+              name: 'Астрал.ЭДО',
+              logo: () => <Logo />,
+            }}
+          />
+          <DashboardLayout.Main>
+            <MainWrapper>
+              <p>
+                Приветствие отображается только при первичной загрузки
+                приложения в рамках вкладки. Для повторного просмотра
+                приветствия необходимо очистить sessionStorage
+              </p>
+
+              <Button onClick={handleClearStorage}>
+                Очистить sessionStorage
+              </Button>
+            </MainWrapper>
+          </DashboardLayout.Main>
+        </DashboardLayout>
+      </WelcomeScreen>
+    </Container>
+  );
+};
+
 export const Loading = () => (
   <Container>
     <WelcomeScreen isLoading onRetry={() => undefined}>
