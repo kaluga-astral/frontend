@@ -116,10 +116,13 @@ export const Example = () => {
 
   const Logo = () => data?.logo;
 
+  const isSuccess = !isLoading && !isError && Boolean(data);
+
   return (
     <Container>
       <WelcomeScreen
         {...data}
+        isSuccess={isSuccess}
         isLoading={isLoading}
         isError={isError}
         onRetry={fetch}
@@ -150,45 +153,9 @@ export const Example = () => {
   );
 };
 
-export const SuccessLoadData = () => {
-  const data = MOCK_DATA;
-
-  const handleClearStorage = () => sessionStorage.clear();
-
-  const Logo = () => data?.logo;
-
-  return (
-    <Container>
-      <WelcomeScreen {...data} isSuccessLoadData onRetry={() => undefined}>
-        <DashboardLayout>
-          <DashboardLayout.Header
-            product={{
-              name: 'Астрал.ЭДО',
-              logo: () => <Logo />,
-            }}
-          />
-          <DashboardLayout.Main>
-            <MainWrapper>
-              <p>
-                Приветствие отображается только при первичной загрузки
-                приложения в рамках вкладки. Для повторного просмотра
-                приветствия необходимо очистить sessionStorage
-              </p>
-
-              <Button onClick={handleClearStorage}>
-                Очистить sessionStorage
-              </Button>
-            </MainWrapper>
-          </DashboardLayout.Main>
-        </DashboardLayout>
-      </WelcomeScreen>
-    </Container>
-  );
-};
-
 export const Loading = () => (
   <Container>
-    <WelcomeScreen isLoading onRetry={() => undefined}>
+    <WelcomeScreen isLoading isSuccess={false} onRetry={() => undefined}>
       Content
     </WelcomeScreen>
   </Container>
@@ -199,7 +166,12 @@ export const Error = () => {
 
   return (
     <Container>
-      <WelcomeScreen isError errorMsg="Ошибка 500" onRetry={handleRetry}>
+      <WelcomeScreen
+        isError
+        isSuccess={false}
+        errorMsg="Ошибка 500"
+        onRetry={handleRetry}
+      >
         Content
       </WelcomeScreen>
     </Container>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   ALL_DURATION_MS,
@@ -7,36 +7,25 @@ import {
 } from '../../constants';
 
 type UseLogicParams = {
-  isSuccessLoadData?: boolean;
+  isSuccess?: boolean;
   isLoading?: boolean;
   isError?: boolean;
 };
 
 export const useLogic = ({
-  isSuccessLoadData = false,
+  isSuccess = false,
   isLoading,
   isError,
 }: UseLogicParams) => {
-  // Храним предыдущее состояния лоадера. Для показа анимации из isLoading должен быть false
-  // Но так как это его изначальное состояние, отслеживаем было ли оно в состоянии true
-  // Cразу устанавливаем состояние, чтобы при isSuccessLoadData=true выполнялись условия c prevLoading и анимация запускалась сразу
-  const prevLoading = useRef<boolean>(isSuccessLoadData);
-
   const [isShowLoader, setShowLoader] = useState(false);
   const [isShowGreetings, setShowGreetings] = useState(false);
   const [isShowContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    if (isLoading && !prevLoading.current) {
-      prevLoading.current = true;
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
     // Показываем приветствие только один раз в рамках сессии
     const isExistSession = Boolean(sessionStorage.getItem(SESSION_KEY));
 
-    if (!isLoading && !isError && prevLoading.current) {
+    if (isSuccess && !isLoading && !isError) {
       if (isExistSession) {
         // Если приветствие уже показывали, то отображаем содержимое после окончания загрузки
         setShowContent(true);
@@ -54,7 +43,7 @@ export const useLogic = ({
     }
 
     return;
-  }, [isLoading, isError]);
+  }, [isSuccess, isLoading, isError]);
 
   useEffect(() => {
     // Отложенный запуск отображения лоадера, на случай получения данных < LOADING_DISPLAY_DELAY_MS
