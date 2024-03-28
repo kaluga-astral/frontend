@@ -62,7 +62,7 @@ describe('WelcomeScreen', () => {
   it(`Содержимое отображается сразу при наличии в sessionStorage значения ${SESSION_KEY}="true"`, () => {
     sessionStorage.setItem(SESSION_KEY, 'true');
 
-    const { rerender } = renderWithTheme(
+    renderWithTheme(
       <WelcomeScreen
         isSuccess
         productName="Астрал.ЭДО"
