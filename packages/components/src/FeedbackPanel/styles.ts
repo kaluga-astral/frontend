@@ -9,6 +9,7 @@ import { EmojiRating } from './EmojiRaiting';
 
 export const Container = styled.div`
   position: fixed;
+  z-index: ${({ theme }) => theme.zIndex.snackbar};
   right: 20px;
   bottom: 20px;
 

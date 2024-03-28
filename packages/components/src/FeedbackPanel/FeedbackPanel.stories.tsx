@@ -6,6 +6,11 @@ import errorIllustration from '../../../ui/illustrations/error.svg';
 import { ConfigProvider } from '../ConfigProvider';
 import { Button } from '../Button';
 import { styled } from '../styles';
+import { SideDialog } from '../SideDialog';
+import { SideDialogContent } from '../SideDialogContent';
+import { Alert } from '../Alert';
+import { SideDialogContentText } from '../SideDialogContentText';
+import { SideDialogActions } from '../SideDialogActions';
 
 import { FeedbackPanel } from './FeedbackPanel';
 
@@ -241,5 +246,83 @@ export const Error = () => {
         onSubmit={handleSubmit}
       />
     </Container>
+  );
+};
+
+/**
+ * При использовании компонента вместе с модальными окнами, не забывайте добавлять им [disableEnforceFocus](https://mui.com/material-ui/react-modal/#focus-trap)
+ */
+export const WithOpenSideDialog = () => {
+  const [isFeedbackPanelOpen, setIsFeedbackPanelOpen] = useState(false);
+  const [isSideDialogOpen, setIsSideDialogOpen] = useState(false);
+
+  const { isLoading, error, fetchWithError } = useSimulateLoading();
+
+  const handeFeedbackPanelToggle = () =>
+    setIsFeedbackPanelOpen((prevState) => !prevState);
+
+  const handeSideDialogToggle = () =>
+    setIsSideDialogOpen((prevState) => !prevState);
+
+  const handleSubmit = () => {
+    fetchWithError();
+  };
+
+  return (
+    <>
+      <Container>
+        <Button onClick={handeSideDialogToggle}>SideDialog</Button>
+
+        <SideDialog
+          title="Заголовок"
+          disableEnforceFocus
+          open={isSideDialogOpen}
+          onClose={handeSideDialogToggle}
+        >
+          <SideDialogContent>
+            <Alert severity="warning">
+              Purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+              Quisque id diam vel quam.
+            </Alert>
+            <br />
+            <SideDialogContentText id="alert-dialog-description">
+              Заглушка примера текста страницы, который несет очень выжный смысл
+              для пользователя и предлагает ему варианты выбора действий с
+              контентом и в рамках работы приложения. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Arcu cursus vitae
+              congue mauris rhoncus aenean. Sit amet luctus venenatis lectus
+              magna. Vitae auctor eu augue ut lectus arcu bibendum. Dui accumsan
+              sit amet nulla facilisi morbi tempus. Condimentum lacinia quis vel
+              eros donec. Dis parturient montes nascetur ridiculus. Purus
+              faucibus ornare suspendisse sed nisi lacus sed viverra. Quisque id
+              diam vel quam. Magna sit amet purus gravida quis blandit turpis
+              cursus in. Dolor morbi non arcu risus. Sed cras ornare arcu dui
+              vivamus arcu felis bibendum ut.Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Arcu cursus vitae congue mauris
+              rhoncus aenean. Sit amet luctus venenatis lectus magna. Vitae
+              auctor eu augue ut lectus arcu bibendum.
+            </SideDialogContentText>
+          </SideDialogContent>
+          <SideDialogActions>
+            <Button variant="text" onClick={handeSideDialogToggle}>
+              Отмена
+            </Button>
+            <Button onClick={handeFeedbackPanelToggle}>Оценить</Button>
+          </SideDialogActions>
+
+          <FeedbackPanel
+            isOpen={isFeedbackPanelOpen}
+            question="Вам было сложно получить электронную подпись?"
+            errorMsg={error}
+            isLoading={isLoading}
+            isError={Boolean(error)}
+            onClose={handeFeedbackPanelToggle}
+            onSubmit={handleSubmit}
+          />
+        </SideDialog>
+      </Container>
+    </>
   );
 };
