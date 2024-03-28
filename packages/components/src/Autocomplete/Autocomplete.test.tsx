@@ -71,7 +71,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('В инпут сетится label после выбора option при multiple=true', async () => {
+  it('В инпут сетится label после выбора option', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -241,5 +241,25 @@ describe('Autocomplete', () => {
     await userEvents.type(input, 'test');
     expect(input).toHaveValue('test');
     expect(input).toHaveFocus();
+  });
+
+  it('Кнопка сброса скрыта, если инпут пуст', async () => {
+    const clearText = 'Очистить';
+
+    type Option = { name: string; surname: string };
+
+    const TestComponent = () => {
+      return (
+        <Autocomplete<Option, false, false, true>
+          label="user"
+          freeSolo
+          options={[]}
+          clearText={clearText}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
   });
 });

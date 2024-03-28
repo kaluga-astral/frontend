@@ -220,38 +220,6 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Кнопка сброса скрыта, если инпут пуст', async () => {
-    type FormFreeValues = { user: Option | string };
-
-    const clearText = 'Очистить';
-
-    const TestComponent = () => {
-      const form = useForm<FormFreeValues>({
-        defaultValues: { user: '' },
-      });
-
-      return (
-        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
-          <FormAutocomplete<FormValues, Option, false, false, true>
-            name="user"
-            label="user"
-            freeSolo
-            options={[]}
-            clearText={clearText}
-          />
-
-          <button type="submit">submit</button>
-        </Form>
-      );
-    };
-
-    renderWithTheme(<TestComponent />);
-
-    await waitFor(() => {
-      expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
-    });
-  });
-
   it('Кнопка сброса отображается при наведении на инпут, если инпут содержит текст', async () => {
     type FormFreeValues = { user: Option | string };
 
