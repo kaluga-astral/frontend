@@ -8,6 +8,8 @@ import {
 import { vi } from 'vitest';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
+import { useState } from 'react';
+import { Button } from '@astral/components';
 
 import { Form } from '../Form';
 import { useForm } from '../hooks';
@@ -217,6 +219,57 @@ describe('FormAutocomplete', () => {
 
     await waitFor(() => {
       expect(onInputChange.mock.calls).toHaveLength(4);
+    });
+  });
+
+  it('Prop:value изменяется при изменении значения формы', async () => {
+    type FormFreeValues = {
+      autocomplete: Option | string;
+    };
+
+    // eslint-disable-next-line quotes
+    const formText = "It's sunday!";
+
+    const TestComponent = () => {
+      const [, setIsUpdate] = useState(false);
+
+      const form = useForm<FormFreeValues>({
+        reValidateMode: 'onChange',
+      });
+
+      const handleButtonClick = () => {
+        form.setValue('autocomplete', formText);
+        setIsUpdate(true);
+      };
+
+      return (
+        <Form form={form}>
+          <FormAutocomplete<FormFreeValues, Option, true, false, true>
+            control={form.control}
+            name="autocomplete"
+            options={[]}
+            freeSolo
+            label="Form autocomplete with freeSolo"
+            getOptionLabel={(params) =>
+              typeof params === 'string' ? params : params.name
+            }
+          />
+
+          <Button id="set-text-btn" onClick={handleButtonClick}>
+            Set text
+          </Button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const setTextBtn = screen.getByRole('button');
+
+    userEvents.click(setTextBtn);
+
+    await waitFor(() => {
+      expect(screen.getByDisplayValue(formText)).toBeInTheDocument();
     });
   });
 });

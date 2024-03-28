@@ -38,5 +38,8 @@ export const useFormFieldProps = <
     ...inputProps,
     ...errorProps,
     inputRef: ref,
+
+    // Переопределяем дефолтное значение, если оно не задано
+    value: field.value || '',
   };
 };
