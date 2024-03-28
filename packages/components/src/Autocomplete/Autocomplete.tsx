@@ -1,14 +1,21 @@
 import {
+  type AutocompleteChangeReason,
   type AutocompleteRenderGetTagProps,
   type AutocompleteRenderInputParams,
   type AutocompleteRenderOptionState,
+  type AutocompleteValue,
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
   type AutocompleteProps as MuiAutocompleteProps,
   Popper as MuiPopper,
 } from '@mui/material';
-import { forwardRef, useCallback } from 'react';
-import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
+import type {
+  ForwardedRef,
+  HTMLAttributes,
+  ReactNode,
+  SyntheticEvent,
+} from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, type TextFieldProps } from '../TextField';
@@ -99,6 +106,7 @@ const AutocompleteInner = <
     overflowOption,
     inputRef,
     renderTags,
+    onChange: externalOnChange,
     renderInput: externalRenderInput,
     loadedDataError = 'На текущий момент сервис недоступен.',
     isLoadedDataError,
@@ -111,6 +119,11 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
+  // Убираем placeholder, если инпут пуст
+  const [isEmpty, setEmpty] = useState(
+    restProps.value || restProps.defaultValue || true,
+  );
+
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
@@ -149,7 +162,7 @@ const AutocompleteInner = <
         ...inputParams,
         inputRef,
         required,
-        placeholder,
+        placeholder: isEmpty ? placeholder : '',
         label,
         success,
         error,
@@ -164,6 +177,7 @@ const AutocompleteInner = <
       return <TextField {...generalInputParams} />;
     },
     [
+      isEmpty,
       externalRenderInput,
       inputRef,
       required,
@@ -207,6 +221,34 @@ const AutocompleteInner = <
     [multiple, overflowOption, externalRenderOption],
   );
 
+  type ValueT = AutocompleteValue<
+    AutocompleteValueProps,
+    Multiple,
+    DisableClearable,
+    FreeSolo
+  >;
+
+  // Смотрим активность пользователя, если он что-то выбрал / ввел,
+  // то ставим isEmpty в false, иначе в true
+  const handleOnChange = useCallback(
+    (
+      e: SyntheticEvent<Element, Event>,
+      val: ValueT,
+      reason: AutocompleteChangeReason,
+    ) => {
+      if (Array.isArray(val)) {
+        setEmpty(val.length === 0);
+      }
+
+      if (typeof val === 'string') {
+        setEmpty(val === '');
+      }
+
+      externalOnChange?.call({}, e, val, reason);
+    },
+    [externalOnChange],
+  );
+
   return (
     <MuiAutocomplete
       {...restProps}
@@ -214,6 +256,7 @@ const AutocompleteInner = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
+      onChange={handleOnChange}
       PopperComponent={({ children, ...rest }) => (
         <MuiPopper {...rest}>
           {isLoadedDataError ? (

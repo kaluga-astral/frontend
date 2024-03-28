@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
+import {
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+  waitFor,
+} from '@astral/tests';
 
 import { TextField } from '../TextField';
 
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
+  it('При options=[] отображается плейсхолдер', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     await userEvents.click(screen.getByRole('combobox'));
 
@@ -15,7 +21,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeVisible();
   });
 
-  it('Focus: не отображается popover', async () => {
+  it('Не отображается popover при фокусе на инпут', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
 
@@ -24,7 +30,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeNull();
   });
 
-  it('Prop:getOptionLabel: позволяет отображать в popover label', async () => {
+  it('GetOptionLabel позволяет отображать в popover label', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -71,7 +77,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Props:multiple=false: в инпут сетится label после выбора option', async () => {
+  it('В инпут сетится label после выбора option при multiple=false', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -97,7 +103,7 @@ describe('Autocomplete', () => {
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
 
-  it('Prop:multiple: в options отображаются чекбоксы', async () => {
+  it('В options отображаются чекбоксы при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -117,7 +123,7 @@ describe('Autocomplete', () => {
     expect(checkbox).toBeVisible();
   });
 
-  it('Prop:multiple: после выбора option в инпуте появляется tag', async () => {
+  it('После выбора option в инпуте появляется тег при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -144,7 +150,7 @@ describe('Autocomplete', () => {
     expect(tag).toBeVisible();
   });
 
-  it('Prop:multiple: tag из инпута можно удалить', async () => {
+  it('Тег из инпута можно удалить при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -177,7 +183,7 @@ describe('Autocomplete', () => {
     expect(tag).toBeNull();
   });
 
-  it('Prop:ref: is present', () => {
+  it('Проп ref корректно передается', () => {
     const resultRef = { current: null };
 
     const AutocompleteWithRef = () => {
@@ -194,7 +200,7 @@ describe('Autocomplete', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:renderInput: is present', async () => {
+  it('Проп renderInput рендерится на странице', async () => {
     renderWithTheme(
       <Autocomplete
         options={[]}
@@ -241,5 +247,28 @@ describe('Autocomplete', () => {
     await userEvents.type(input, 'test');
     expect(input).toHaveValue('test');
     expect(input).toHaveFocus();
+  });
+
+  it('Плейсхолдер не отображается если выбрана одна из опций при multiple=true', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+    const placeholder = 'Меня тут быть не должно';
+
+    renderWithTheme(
+      <Autocomplete<Option, true, false, false>
+        multiple
+        options={options}
+        getOptionLabel={(option) => option.surname}
+        placeholder={placeholder}
+      />,
+    );
+
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('menuitemcheckbox'));
+
+    await waitFor(() => {
+      expect(screen.queryByText(placeholder)).not.toBeInTheDocument();
+    });
   });
 });
