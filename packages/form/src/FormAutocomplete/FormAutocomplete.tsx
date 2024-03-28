@@ -12,9 +12,13 @@ export type FormAutocompleteProps<
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
-> = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-  FieldValues
+> = Omit<
+  // не содержит onChange, тк как он будет перехвачен формой
+  WithFormFieldProps<
+    AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+    FieldValues
+  >,
+  'onChange'
 >;
 
 /**
