@@ -140,7 +140,7 @@ describe('WelcomeScreen', () => {
     expect(title).toBeVisible();
   });
 
-  it('Анимация запускается сразу, если autoStart="true"', () => {
+  it('Анимация запускается сразу, если isSuccessLoadData="true"', () => {
     renderWithTheme(
       <WelcomeScreen
         isSuccessLoadData

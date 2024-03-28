@@ -150,7 +150,7 @@ export const Example = () => {
   );
 };
 
-export const AutoStart = () => {
+export const SuccessLoadData = () => {
   const data = MOCK_DATA;
 
   const handleClearStorage = () => sessionStorage.clear();
@@ -159,7 +159,7 @@ export const AutoStart = () => {
 
   return (
     <Container>
-      <WelcomeScreen {...data} autoStart onRetry={() => undefined}>
+      <WelcomeScreen {...data} isSuccessLoadData onRetry={() => undefined}>
         <DashboardLayout>
           <DashboardLayout.Header
             product={{
