@@ -4,7 +4,6 @@ import {
   TableVirtuoso,
   type VirtuosoHandle,
 } from 'react-virtuoso';
-import { ChevronUpOutlineMd } from '@astral/icons';
 
 import { TableBody, TableRow } from '../Table';
 import { type DataGridProps, type DataGridRow } from '../DataGrid';
@@ -15,6 +14,7 @@ import { useToggle } from '../hooks';
 import { useDataGridCommonUtils } from '../DataGrid/hooks';
 import { Typography } from '../Typography';
 import { DataGridLoader } from '../DataGrid/DataGridLoader';
+import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import {
   DataGridInfiniteContainer,
@@ -22,7 +22,6 @@ import {
   DataGridInfiniteTable,
   DataGridInfiniteTableContainer,
 } from './styles';
-import { DataGridInfiniteScrollButton } from './DataGridInfiniteScrollButton';
 import {
   DEFAULT_ROW_HEIGHT,
   END_OF_SCROLL_MESSAGE,
@@ -190,12 +189,7 @@ export const DataGridInfinite = <
           )}
         />
         {isStickyButtonActive && (
-          <DataGridInfiniteScrollButton
-            vertical="bottom"
-            horizontal="right"
-            icon={<ChevronUpOutlineMd />}
-            onClick={handleScrollToTop}
-          />
+          <ScrollToTopButton onClick={handleScrollToTop} />
         )}
       </DataGridInfiniteTableContainer>
       {loading && !dataLength && <DataGridLoader disabled={disabled} loading />}
