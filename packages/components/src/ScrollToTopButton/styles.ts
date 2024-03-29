@@ -1,15 +1,12 @@
 import { styled } from '../styles';
 import { Fab } from '../Fab';
 
-export const StyledFab = styled(Fab)(
-  ({ theme }) => `
+export const StyledFab = styled(Fab)`
   position: absolute;
+  right: ${({ theme }) => theme.spacing(3)};
   bottom: 30px;
 
-  right: ${theme.spacing(3)};
-
-  ${theme.breakpoints.down('sm')} {
-    right: ${theme.spacing(9)};
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    right: ${({ theme }) => theme.spacing(9)};
   }
-`,
-);
+`;
