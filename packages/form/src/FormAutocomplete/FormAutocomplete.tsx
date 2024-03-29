@@ -53,7 +53,9 @@ export const FormAutocomplete = <
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,
     value: Value,
-  ) => fieldProps.onChange(value);
+  ) => {
+    fieldProps.onChange(value);
+  };
 
   const handleOnInputChange = useCallback(
     (
