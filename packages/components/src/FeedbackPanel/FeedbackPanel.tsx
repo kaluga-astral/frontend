@@ -156,7 +156,7 @@ export const FeedbackPanel = ({
   };
 
   if (!isOpen) {
-    return;
+    return null;
   }
 
   const { label = DEFAULT_TEXTFILED_LABEL, placeholder } = textFieldProps || {};
