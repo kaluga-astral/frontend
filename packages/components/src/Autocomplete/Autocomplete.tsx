@@ -112,13 +112,8 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
-  const getIsInputEmpty = (): boolean => {
+  const checkIsInputEmpty = (): boolean => {
     const val = restProps.value;
-
-    // пользователь может ввести 0
-    if (typeof val === 'string') {
-      return val === '';
-    }
 
     // мульти ввод
     if (Array.isArray(val)) {
@@ -129,7 +124,7 @@ const AutocompleteInner = <
   };
 
   const disableClearable =
-    getIsInputEmpty() || Boolean(externalDisableClearable);
+    checkIsInputEmpty() || Boolean(externalDisableClearable);
 
   const renderDefaultTags = useCallback(
     (
