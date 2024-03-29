@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { type ToastOptions } from 'react-toastify/dist/types';
+import { type Id, type ToastContent, type UpdateOptions } from 'react-toastify';
 
 export type Variant = 'success' | 'warning' | 'info' | 'error';
 
@@ -64,3 +65,32 @@ export type NotificationProps = Omit<
    */
   showCloseButton?: boolean;
 };
+
+type NotificationOptions = Omit<NotificationProps, 'title'>;
+
+type NotificationFunction = (
+  title: NotificationProps['title'],
+  options?: NotificationOptions,
+) => number | string;
+
+type Controllable = {
+  /**
+   * @description метод создания полностью кастомной нотификации
+   */
+  custom: (content: ToastContent, options?: ToastOptions) => Id;
+  /**
+   * @description force метод для закрытия всех нотификаций, либо конкретной по айдишке
+   */
+  dismiss: (id?: Id) => void;
+  /**
+   * @description метод обновления конкретной нотификации,
+   * пригодится когда имеется контролируемый прогресс бар
+   */
+  update: (id: Id, options?: UpdateOptions) => void;
+  /**
+   * @description метод закрывающий нотификацию с контролируемым прогресс баром
+   */
+  done: (id: Id) => void;
+};
+
+export type Notify = Record<Variant, NotificationFunction> & Controllable;
