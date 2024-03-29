@@ -29,30 +29,46 @@ const StyledWrapper = styled.div`
 const InnerWrapper = styled.div`
   max-height: 100%;
   overflow-y: auto;
+
+  overscroll-behavior: none;
 `;
 
-const ListItem = styled.div<{ $background: string }>((props) => ({
-  background: props.$background,
-  height: '250px',
-  width: '100%',
-}));
+const ListItem = styled.div`
+  height: 250px;
+  width: 100%;
 
-type DivListProps = { children: ReactNode };
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-const DivList = forwardRef<HTMLDivElement, DivListProps>((props, ref) => {
-  return (
-    <StyledWrapper>
-      <InnerWrapper ref={ref}>
-        <ListItem $background="red" />
-        <ListItem $background="blue" />
-        <ListItem $background="green" />
-        <ListItem $background="orange" />
-      </InnerWrapper>
+  font-size: ${({ theme }) => theme.typography.h2.fontSize};
 
-      {props.children}
-    </StyledWrapper>
-  );
-});
+  background: ${({ theme }) => theme.palette.grey[300]};
+  border-radius: 6px;
+
+  margin-bottom: 30px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+const List = forwardRef<HTMLDivElement, { children: ReactNode }>(
+  (props, ref) => {
+    return (
+      <StyledWrapper>
+        <InnerWrapper ref={ref}>
+          <ListItem>1</ListItem>
+          <ListItem>2</ListItem>
+          <ListItem>3</ListItem>
+          <ListItem>4</ListItem>
+        </InnerWrapper>
+
+        {props.children}
+      </StyledWrapper>
+    );
+  },
+);
 
 export const Example = () => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -65,8 +81,8 @@ export const Example = () => {
   };
 
   return (
-    <DivList ref={listRef}>
+    <List ref={listRef}>
       <ScrollToTopButton onClick={onScrollClick} />
-    </DivList>
+    </List>
   );
 };

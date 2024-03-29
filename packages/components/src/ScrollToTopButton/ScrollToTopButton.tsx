@@ -1,41 +1,35 @@
-import { type MouseEvent, useCallback } from 'react';
 import { ChevronUpOutlineMd } from '@astral/icons';
 
+import { styled } from '../styles';
 import { Fab } from '../Fab';
-import { CircularProgress } from '../CircularProgress';
 import { type ButtonProps } from '../Button';
 
-import { ButtonWrapper } from './styles';
+const StyledFab = styled(Fab)`
+  position: absolute;
 
-export type ScrollToTopButtonProps = ButtonProps & {
-  isLoading?: boolean;
-};
+  ${({ theme }) =>
+    `
+      bottom: 30px;
+      right: ${theme.spacing(3)};
+
+      ${theme.breakpoints.down('sm')} {
+        right: ${theme.spacing(9)};
+      }
+    `}
+`;
 
 /**
  * Универсальная кнопка прокрутки содержимого наверх, не содержит логику
  */
-export const ScrollToTopButton = ({
-  isLoading,
-  disabled,
-  onClick,
-}: ScrollToTopButtonProps) => {
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      onClick?.(event);
-    },
-    [onClick],
-  );
-
+export const ScrollToTopButton = ({ disabled, onClick }: ButtonProps) => {
   return (
-    <ButtonWrapper vertical={'bottom'} horizontal={'right'}>
-      <Fab
-        color="default"
-        disabled={disabled}
-        onClick={handleClick}
-        size="small"
-      >
-        {isLoading ? <CircularProgress size="small" /> : <ChevronUpOutlineMd />}
-      </Fab>
-    </ButtonWrapper>
+    <StyledFab
+      color="default"
+      disabled={disabled}
+      onClick={onClick}
+      size="small"
+    >
+      <ChevronUpOutlineMd />
+    </StyledFab>
   );
 };
