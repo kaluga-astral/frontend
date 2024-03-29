@@ -2,11 +2,11 @@ import { type ReactNode } from 'react';
 import { type ToastOptions } from 'react-toastify/dist/types';
 import { type Id, type ToastContent, type UpdateOptions } from 'react-toastify';
 
-type Variant = 'success' | 'warning' | 'info' | 'error';
+export type Variant = 'success' | 'warning' | 'info' | 'error';
 
-type ActionsDirection = 'right' | 'left';
+export type ActionsDirection = 'right' | 'left';
 
-type NotificationProps = Omit<
+export type NotificationProps = Omit<
   ToastOptions,
   | 'className'
   | 'style'
