@@ -1,44 +1,11 @@
-import {
-  type Id,
-  type ToastContent,
-  type ToastOptions,
-  type UpdateOptions,
-  toast,
-} from 'react-toastify';
+import { toast } from 'react-toastify';
 
-import { type NotificationProps, type Variant } from './types';
+import { type Notify } from './types';
 import { NotificationVariantTypes } from './constants';
 import { getClassNameModifierByVariant } from './utils';
 import { NOTIFICATION_VARIANT } from './NotificationTemplate/constants';
 
-type NotificationOptions = Omit<NotificationProps, 'title'>;
-
-export type Notify = (
-  title: NotificationProps['title'],
-  options?: NotificationOptions,
-) => number | string;
-
-type Controllable = {
-  /**
-   * @description метод создания полностью кастомной нотификации
-   */
-  custom: (content: ToastContent, options?: ToastOptions) => Id;
-  /**
-   * @description force метод для закрытия всех нотификаций, либо конкретной по айдишке
-   */
-  dismiss: (id?: Id) => void;
-  /**
-   * @description метод обновления конкретной нотификации,
-   * пригодится когда имеется контролируемый прогресс бар
-   */
-  update: (id: Id, options?: UpdateOptions) => void;
-  /**
-   * @description метод закрывающий нотификацию с контролируемым прогресс баром
-   */
-  done: (id: Id) => void;
-};
-
-export const notify: Record<Variant, Notify> & Controllable = {
+export const notify: Notify = {
   success: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
