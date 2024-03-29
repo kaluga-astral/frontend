@@ -1,1 +1,4 @@
-export * from './ScrollToTopButton';
+export {
+  ScrollToTopButton,
+  type ScrollToTopButtonProps,
+} from './ScrollToTopButton';
