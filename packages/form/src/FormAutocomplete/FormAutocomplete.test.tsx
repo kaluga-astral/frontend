@@ -88,7 +88,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
+  it('Фокус появляется на поле после клика на Submit, если передан inputRef', async () => {
     const TestComponent = () => {
       const form = useForm<FormValues>({
         resolver: resolver<FormValues>(validationSchema),
@@ -110,7 +110,7 @@ describe('FormAutocomplete', () => {
     expect(input).toHaveFocus();
   });
 
-  it('Prop:freeSolo: В форму сетится значение из input', async () => {
+  it('В форму сетится значение из input при freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -148,7 +148,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: В форму сетится значение из списка при наличии значения в input', async () => {
+  it('Значение из списка задается в форму при freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -190,7 +190,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: onInputChange:  onInputChange корректно вызывается вместе с freeSolo', async () => {
+  it('OnInputChange корректно вызывается вместе с freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();
@@ -222,7 +222,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:value изменяется при изменении значения формы', async () => {
+  it('Value изменяется при изменении значения формы', async () => {
     type FormFreeValues = {
       autocomplete: Option | string;
     };
