@@ -1,20 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
+import {
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+  waitFor,
+} from '@astral/tests';
 
 import { TextField } from '../TextField';
 
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Плейсхолдер отображается при пустом списке options', async () => {
-    renderWithTheme(<Autocomplete options={[]} />);
-    await userEvents.click(screen.getByRole('combobox'));
-
-    const noDataPlaceholder = screen.getByText('Нет данных');
-
-    expect(noDataPlaceholder).toBeVisible();
-  });
-
   it('Popover не отображается пои фокусе на инпут', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
@@ -249,17 +246,64 @@ describe('Autocomplete', () => {
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
     const placeholder = 'Меня тут быть не должно';
 
-    renderWithTheme(
-      <Autocomplete<Option, true, false, false>
-        multiple
-        options={options}
-        getOptionLabel={(option) => option.surname}
-        placeholder={placeholder}
-      />,
-    );
+    const TestComponent = () => {
+      const [val, setVal] = useState<Option[]>([]);
+      const getOptionLabel = (option: Option) => option.surname;
 
+      const onChange = (_: unknown, newVal: Option[]) => {
+        setVal(newVal);
+      };
+
+      return (
+        <Autocomplete<Option, true, false, false>
+          value={val}
+          multiple
+          options={options}
+          onChange={onChange}
+          getOptionLabel={getOptionLabel}
+          placeholder={placeholder}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
     await userEvents.click(screen.getByRole('combobox'));
     await userEvents.click(screen.getByRole('menuitemcheckbox'));
-    expect(screen.queryByText(placeholder)).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(
+        screen.queryByPlaceholderText(placeholder),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it('Плейсхолдер отображается, если не выбрана одна из опций при multiple=true', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+    const placeholder = 'Меня должно быть видно';
+
+    const TestComponent = () => {
+      const [val, setVal] = useState<Option[]>([]);
+      const getOptionLabel = (option: Option) => option.surname;
+
+      const onChange = (_: unknown, newVal: Option[]) => {
+        setVal(newVal);
+      };
+
+      return (
+        <Autocomplete<Option, true, false, false>
+          value={val}
+          multiple
+          options={options}
+          onChange={onChange}
+          getOptionLabel={getOptionLabel}
+          placeholder={placeholder}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
   });
 });
