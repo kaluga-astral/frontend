@@ -90,6 +90,7 @@ const AutocompleteInner = <
     required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    disableClearable: externalDisableClearable,
     noOptionsText = 'Нет данных',
     closeText = 'Закрыть',
     openText = 'Открыть',
@@ -111,6 +112,25 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
+  const getIsInputEmpty = (): boolean => {
+    const val = restProps.value;
+
+    // пользователь может ввести 0
+    if (typeof val === 'string') {
+      return val === '';
+    }
+
+    // мульти ввод
+    if (Array.isArray(val)) {
+      return val.length === 0;
+    }
+
+    return !Boolean(val);
+  };
+
+  const disableClearable =
+    getIsInputEmpty() || Boolean(externalDisableClearable);
+
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
@@ -234,6 +254,7 @@ const AutocompleteInner = <
       loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
+      disableClearable={disableClearable as DisableClearable}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText={noOptionsText}
       closeText={closeText}
