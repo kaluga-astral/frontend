@@ -210,6 +210,8 @@ export * from './Slide';
 
 export * from './Stepper';
 
+export * from './ScrollToTopButton';
+
 export * from './styles';
 
 export * from './StylesCacheProvider';
