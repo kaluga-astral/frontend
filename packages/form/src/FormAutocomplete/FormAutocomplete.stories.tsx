@@ -89,6 +89,7 @@ export const Example = () => {
         options={OPTIONS}
         label="Form autocomplete"
         getOptionLabel={(params) => params.title}
+        placeholder="Placeholder"
       />
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
@@ -113,6 +114,7 @@ export const FreeSolo = () => {
         name="autocomplete"
         options={OPTIONS}
         freeSolo
+        placeholder="Placeholder"
         label="Form autocomplete with freeSolo"
         getOptionLabel={(params) =>
           typeof params === 'string' ? params : params.title

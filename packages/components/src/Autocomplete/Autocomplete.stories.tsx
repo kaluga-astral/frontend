@@ -1,4 +1,5 @@
 import { type Meta } from '@storybook/react';
+import { useState } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Tag } from '../Tag';
@@ -49,39 +50,60 @@ const Wrapper = styled.div`
   min-width: 300px;
 `;
 
-export const Example = () => (
-  <Wrapper>
-    <Autocomplete<IOption, false, false, false>
-      options={OPTIONS}
-      label="Выберите вариант"
-      getOptionLabel={(params) => params.title}
-    />
-  </Wrapper>
-);
+export const Example = () => {
+  const [val, setVal] = useState<IOption | null>(null);
 
-export const Multiple = () => (
-  <Wrapper>
-    <Autocomplete<IOption, true, false, false>
-      options={OPTIONS}
-      label="Multiple"
-      multiple
-      getOptionLabel={(params) => params.title}
-    />
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, false, false, false>
+        options={OPTIONS}
+        label="Выберите вариант"
+        placeholder="Placeholder"
+        value={val}
+        getOptionLabel={(params) => params.title}
+        onChange={(_, newVal) => setVal(newVal)}
+      />
+    </Wrapper>
+  );
+};
 
-export const FreeSolo = () => (
-  <Wrapper>
-    <Autocomplete<IOption, false, false, true>
-      options={OPTIONS}
-      label="FreeSolo"
-      freeSolo
-      getOptionLabel={(params) =>
-        typeof params === 'string' ? params : params.title
-      }
-    />
-  </Wrapper>
-);
+export const Multiple = () => {
+  const [val, setVal] = useState<IOption[]>([]);
+
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, true, false, false>
+        options={OPTIONS}
+        label="Multiple"
+        placeholder="Placeholder"
+        multiple
+        value={val}
+        onChange={(_, newVal) => setVal(newVal)}
+        getOptionLabel={(params) => params.title}
+      />
+    </Wrapper>
+  );
+};
+
+export const FreeSolo = () => {
+  const [val, setVal] = useState<IOption | string | null | undefined>();
+
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, false, false, true>
+        options={OPTIONS}
+        label="FreeSolo"
+        freeSolo
+        placeholder="Placeholder"
+        value={val}
+        onChange={(_, newVal) => setVal(newVal)}
+        getOptionLabel={(params) =>
+          typeof params === 'string' ? params : params.title
+        }
+      />
+    </Wrapper>
+  );
+};
 
 export const MultipleCustomTags = () => (
   <Wrapper>
@@ -89,6 +111,7 @@ export const MultipleCustomTags = () => (
       multiple
       options={OPTIONS}
       label="Multiple custom tags"
+      placeholder="Placeholder"
       getOptionLabel={(params) => params.title}
       renderTags={(tags, getTagProps) => {
         return tags.map((tag, index) => {
