@@ -1,17 +1,16 @@
-import { Popper } from '@mui/material';
+import { paperClasses } from '@mui/material';
 
+import { Popover } from '../../Popover';
 import { styled } from '../../styles';
 
-export const PopoverInner = styled.div`
+export const StyledPopover = styled(Popover)`
+  .${paperClasses.root} {
+    margin-top: -${({ theme }) => theme.spacing(3)};
+  }
+`;
+
+export const InnerContainer = styled.div`
   display: flex;
 
   padding: ${({ theme }) => theme.spacing(4)};
-
-  background: ${({ theme }) => theme.palette.common.white};
-  border-radius: ${({ theme }) => theme.shape.small};
-  box-shadow: ${({ theme }) => theme.elevation[200]};
-`;
-
-export const StyledPopper = styled(Popper)`
-  z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;

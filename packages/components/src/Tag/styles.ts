@@ -86,7 +86,7 @@ const getBgColor = ({
   }
 
   if (onDelete) {
-    return theme.palette.grey[100];
+    return theme.palette.grey[300];
   }
 
   if (customColor === TagColors.GREY) {
