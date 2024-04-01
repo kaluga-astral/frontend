@@ -8,7 +8,6 @@ import {
 import { type ListRange, Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
 
 import { useToggle } from '../hooks';
-import { useViewportType } from '../hooks/useViewportType';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 import { ScrollToTopButton } from '../ScrollToTopButton';
@@ -106,8 +105,6 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
 
   const { imagesMap } = useContext(ConfigContext);
 
-  const { isMobile } = useViewportType();
-
   const [isStickyButtonActive, showStickyButton, hideStickyButton] =
     useToggle();
 
@@ -182,10 +179,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
       />
 
       {isStickyButtonActive && (
-        <ScrollToTopButton
-          size={isMobile ? 'medium' : 'small'}
-          onClick={handleScrollToTop}
-        />
+        <ScrollToTopButton onClick={handleScrollToTop} />
       )}
     </ContentState>
   );

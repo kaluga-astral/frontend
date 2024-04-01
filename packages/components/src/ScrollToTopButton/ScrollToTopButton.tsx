@@ -4,7 +4,7 @@ import { type ButtonProps } from '../Button';
 
 import { StyledFab } from './styles';
 
-export type ScrollToTopButtonProps = ButtonProps;
+export type ScrollToTopButtonProps = Pick<ButtonProps, 'onClick'>;
 
 /**
  * Универсальная кнопка прокрутки содержимого наверх, не содержит логику
