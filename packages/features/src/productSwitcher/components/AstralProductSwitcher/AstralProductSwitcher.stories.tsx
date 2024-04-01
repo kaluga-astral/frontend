@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { AstralProductSwitcher } from './AstralProductSwitcher';
+import { ProductFiltersType } from './enums';
 
 const IDENTITY_URL = 'https://identity';
 
@@ -136,7 +137,7 @@ const MOCK_FETCH_IDENTITY_PRODUCT = [
     },
   },
   {
-    url: `${IDENTITY_URL}/api/products/widget?tenantId=astral&productGroupId=*`,
+    url: `${IDENTITY_URL}/api/products/group?groupId=*`,
     method: 'GET',
     status: 200,
     response: {
@@ -183,10 +184,10 @@ const MOCK_FETCH_IDENTITY_PRODUCT = [
 ];
 
 /**
- * Реализация виджета продуктов Astral. Поддерживает мультиэкосистемность с помощью передачи параметра ```tenantId```.
+ * Реализация виджета продуктов Astral. Поддерживает фильтрацию по группам и экосистемам с помощью параметров ```filterBy``` и```code```.
  * Внутри себя содержит всю логику получения, форматирования и отображения продуктов из Identity
  *
- * Для получения информации по экосистемам и продукта, а также за параметрами: `identityUrl`,`tenantId`, `productGroupId` обращаться в команду ```Экосистема```
+ * Для получения информации по экосистемам и продукта, а также за адресом identity, и кодами экосистемы и группы обращаться в команду ```Экосистема```
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=9236-108012&mode=design&t=j9or0RjIfmARezGD-4)
  * ### [Guide]()
  */
@@ -206,7 +207,8 @@ type Story = StoryObj<typeof AstralProductSwitcher>;
 export const Interaction: Story = {
   args: {
     identityUrl: IDENTITY_URL,
-    tenantId: 'astral',
+    filterBy: ProductFiltersType.Tenant,
+    code: 'astral',
   },
   parameters: {
     docs: {
@@ -220,20 +222,23 @@ export const Example = () => (
 );
 
 /**
- * Prop ```tenantId``` позволяет задать экосистему identity.
+ * Чтобы получить список продуктов, отфильтрованных по экосистемам, необходимо указать параметр ```filterBy``` в значение ```tenant``` и указать параметр ```code```, равный ```коду вашей экосистемы```
  */
 export const Tenant = () => (
-  <AstralProductSwitcher identityUrl={IDENTITY_URL} tenantId="eco" />
+  <AstralProductSwitcher
+    identityUrl={IDENTITY_URL}
+    filterBy={ProductFiltersType.Tenant}
+    code="eco"
+  />
 );
 
 /**
- * Prop ```productGroupId``` позволяет получить группу продуктов identity.
- *
- * Если задан ```productGroupId ```, то он имеет более высокий приоритет перед группировкой по tenantId
+ * Чтобы получить список продуктов, отфильтрованных по группам, необходимо указать параметр ```filterBy``` в значение ```group``` и указать параметр ```code```, равный ```коду вашей группы```
  */
-export const ProductGroup = () => (
+export const Group = () => (
   <AstralProductSwitcher
     identityUrl={IDENTITY_URL}
-    productGroupId="identityGroupID"
+    filterBy={ProductFiltersType.Group}
+    code="identityGroupID"
   />
 );

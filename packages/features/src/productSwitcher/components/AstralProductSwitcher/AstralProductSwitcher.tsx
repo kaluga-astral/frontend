@@ -3,41 +3,55 @@ import { useState } from 'react';
 
 import { getIdentityProducts } from '../../utils';
 
+import { ProductFiltersType } from './enums';
+import { getFilteredProducts } from './utils';
+
 export type AstralProductSwitcherType = {
   /**
    * Адрес identity
    * */
   identityUrl: string;
+  /** Тип фильтрации продуктов */
+  filterBy?: ProductFiltersType;
+  /** Код для фильтрации */
+  code?: string;
   /**
-   * Код экосистемы
-   * @default astral
+   * Наименование экосистемы
+   * @deprecated
    * */
   tenantId?: string;
-  /**
-   * Код группы продуктов
-   * */
-  productGroupId?: string;
 };
 
 export const AstralProductSwitcher = ({
   identityUrl,
-  tenantId = 'astral',
-  productGroupId,
+  filterBy = ProductFiltersType.Tenant,
+  code = 'astral',
+  tenantId,
 }: AstralProductSwitcherType) => {
   const [products, setProducts] = useState<WidgetProduct[]>([]);
   const handleGetProducts = async () => {
-    if (!products.length) {
-      const productsList = await getIdentityProducts(identityUrl, {
-        tenantId,
-        productGroupId,
-      });
+    if (products.length) {
+      return products;
+    }
+
+    // Это заглушка для обратной совместимости, убрать после релиза мажорной версии
+    if (tenantId) {
+      const productsList = await getIdentityProducts(identityUrl, tenantId);
 
       setProducts(productsList);
 
       return productsList;
     }
 
-    return products;
+    const filteredProductsList = await getFilteredProducts(
+      identityUrl,
+      filterBy,
+      code,
+    );
+
+    setProducts(filteredProductsList);
+
+    return filteredProductsList;
   };
 
   return <ProductSwitcher getProducts={handleGetProducts} />;
