@@ -75,10 +75,8 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
     // фикс фокуса при клике на submit формы
     // (достигается путем вызова ref)
     const newRef = (...args: unknown[]) => {
-      try {
-        (ref as Function)(...args);
-      } catch (e) {
-        console.error(e);
+      if (typeof ref === 'function') {
+        ref(args[0] as HTMLInputElement);
       }
 
       return ref;
