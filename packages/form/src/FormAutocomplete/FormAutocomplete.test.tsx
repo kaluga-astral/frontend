@@ -86,7 +86,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
+  it('Фокусирование на поле после клика на Submit', async () => {
     const TestComponent = () => {
       const form = useForm<FormValues>({
         resolver: resolver<FormValues>(validationSchema),
@@ -108,7 +108,7 @@ describe('FormAutocomplete', () => {
     expect(input).toHaveFocus();
   });
 
-  it('Prop:freeSolo: В форму сетится значение из input', async () => {
+  it('В форму сетится значение из input при freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -146,7 +146,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: В форму сетится значение из списка при наличии значения в input', async () => {
+  it('В форму сетится значение из списка при наличии значения в input (freeSolo=true)', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onSubmit = vi.fn();
@@ -188,7 +188,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Prop:freeSolo: onInputChange:  onInputChange корректно вызывается вместе с freeSolo', async () => {
+  it('OnInputChange корректно вызывается вместе с freeSolo=true', async () => {
     type FormFreeValues = { user: Option | string };
 
     const onInputChange = vi.fn();
@@ -217,6 +217,42 @@ describe('FormAutocomplete', () => {
 
     await waitFor(() => {
       expect(onInputChange.mock.calls).toHaveLength(4);
+    });
+  });
+
+  it('Кнопка сброса отображается при наведении на инпут, если инпут содержит текст', async () => {
+    type FormFreeValues = { user: Option | string };
+
+    const onInputChange = vi.fn();
+
+    const clearText = 'Очистить';
+
+    const TestComponent = () => {
+      const form = useForm<FormFreeValues>({
+        defaultValues: { user: '' },
+      });
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormAutocomplete<FormValues, Option, false, false, true>
+            name="user"
+            label="user"
+            freeSolo
+            options={[]}
+            onInputChange={onInputChange}
+            clearText={clearText}
+          />
+
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    userEvents.type(screen.getByDisplayValue(''), 'some text');
+
+    await waitFor(() => {
+      expect(screen.getByTitle(clearText)).toBeInTheDocument();
     });
   });
 });
