@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { AstralProductSwitcher } from './AstralProductSwitcher';
-import { ProductFiltersType } from './enums';
+import { ProductFilterType } from './enums';
 
 const IDENTITY_URL = 'https://identity';
 
@@ -207,7 +207,7 @@ type Story = StoryObj<typeof AstralProductSwitcher>;
 export const Interaction: Story = {
   args: {
     identityUrl: IDENTITY_URL,
-    filterBy: ProductFiltersType.Tenant,
+    filterBy: ProductFilterType.Tenant,
     code: 'astral',
   },
   parameters: {
@@ -227,7 +227,7 @@ export const Example = () => (
 export const Tenant = () => (
   <AstralProductSwitcher
     identityUrl={IDENTITY_URL}
-    filterBy={ProductFiltersType.Tenant}
+    filterBy={ProductFilterType.Tenant}
     code="eco"
   />
 );
@@ -238,7 +238,7 @@ export const Tenant = () => (
 export const Group = () => (
   <AstralProductSwitcher
     identityUrl={IDENTITY_URL}
-    filterBy={ProductFiltersType.Group}
+    filterBy={ProductFilterType.Group}
     code="identityGroupID"
   />
 );

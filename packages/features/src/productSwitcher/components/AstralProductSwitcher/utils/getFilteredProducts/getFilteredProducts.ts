@@ -1,5 +1,5 @@
 import { getIdentityProducts } from '../../../../utils';
-import { ProductFiltersType } from '../../enums';
+import { ProductFilterType } from '../../enums';
 import { getGroupsProducts } from '../../../../utils/getGroupsProducts';
 
 /**
@@ -14,7 +14,7 @@ export const getFilteredProducts = (
   code: string,
 ) => {
   switch (filterBy) {
-    case ProductFiltersType.Group: {
+    case ProductFilterType.Group: {
       return getGroupsProducts(identityUrl, code);
     }
     default: {

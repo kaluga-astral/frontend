@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { getIdentityProducts } from '../../utils';
 
-import { ProductFiltersType } from './enums';
+import { ProductFilterType } from './enums';
 import { getFilteredProducts } from './utils';
 
 export type AstralProductSwitcherType = {
@@ -12,11 +12,11 @@ export type AstralProductSwitcherType = {
    * */
   identityUrl: string;
   /** Тип фильтрации продуктов */
-  filterBy?: ProductFiltersType;
+  filterBy?: ProductFilterType;
   /** Код для фильтрации */
   code?: string;
   /**
-   * Наименование экосистемы
+   * Идентификатор экосистемы
    * @deprecated
    * */
   tenantId?: string;
@@ -24,7 +24,7 @@ export type AstralProductSwitcherType = {
 
 export const AstralProductSwitcher = ({
   identityUrl,
-  filterBy = ProductFiltersType.Tenant,
+  filterBy = ProductFilterType.Tenant,
   code = 'astral',
   tenantId,
 }: AstralProductSwitcherType) => {
