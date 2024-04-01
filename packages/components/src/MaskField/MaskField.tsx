@@ -50,10 +50,10 @@ export type MaskFieldProps = Omit<
   blocks?: MaskBlocks;
 };
 
-const MaskedTextField = IMaskMixin(({ inputRef, onChange, ...props }) => {
+const MaskedTextField = IMaskMixin(({ onChange, ...props }) => {
   const textFieldProps = props as TextFieldProps;
 
-  return <TextField inputRef={inputRef} {...textFieldProps} />;
+  return <TextField {...textFieldProps} />;
 });
 
 export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
@@ -72,10 +72,22 @@ export const MaskField = forwardRef<HTMLInputElement, MaskFieldProps>(
       onChange?.(value);
     };
 
+    // фикс фокуса при клике на submit формы
+    // (достигается путем вызова ref)
+    const newRef = (...args: unknown[]) => {
+      try {
+        (ref as Function)(...args);
+      } catch (e) {
+        console.error(e);
+      }
+
+      return ref;
+    };
+
     return (
       <MaskedTextField
         {...maskFieldProps}
-        inputRef={() => ref}
+        inputRef={newRef}
         onAccept={handleMaskFieldAccept}
       />
     );
