@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { mobilePhone, object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -41,8 +41,6 @@ describe('FormMobileField', () => {
 
     const input = await screen.findByRole('textbox');
 
-    await waitFor(async () => {
-      expect(input).toHaveFocus();
-    });
+    expect(input).toHaveFocus();
   });
 });
