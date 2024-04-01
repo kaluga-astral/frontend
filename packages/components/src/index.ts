@@ -156,7 +156,7 @@ export * from './MenuList';
 
 export * from './NavMenu';
 
-export * from './Notification';
+export { notify, type Notify } from './Notification';
 
 export * from './NotificationList';
 
@@ -209,6 +209,11 @@ export * from './SideDialogTitle';
 export * from './Slide';
 
 export * from './Stepper';
+
+export {
+  ScrollToTopButton,
+  type ScrollToTopButtonProps,
+} from './ScrollToTopButton';
 
 export * from './styles';
 

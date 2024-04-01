@@ -116,10 +116,13 @@ export const Example = () => {
 
   const Logo = () => data?.logo;
 
+  const isSuccess = !isLoading && !isError && Boolean(data);
+
   return (
     <Container>
       <WelcomeScreen
         {...data}
+        isSuccess={isSuccess}
         isLoading={isLoading}
         isError={isError}
         onRetry={fetch}
@@ -152,7 +155,7 @@ export const Example = () => {
 
 export const Loading = () => (
   <Container>
-    <WelcomeScreen isLoading onRetry={() => undefined}>
+    <WelcomeScreen isLoading isSuccess={false} onRetry={() => undefined}>
       Content
     </WelcomeScreen>
   </Container>
@@ -163,7 +166,12 @@ export const Error = () => {
 
   return (
     <Container>
-      <WelcomeScreen isError errorMsg="Ошибка 500" onRetry={handleRetry}>
+      <WelcomeScreen
+        isError
+        isSuccess={false}
+        errorMsg="Ошибка 500"
+        onRetry={handleRetry}
+      >
         Content
       </WelcomeScreen>
     </Container>

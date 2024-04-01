@@ -6,7 +6,7 @@ import { TextField } from '../TextField';
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
+  it('Плейсхолдер отображается при пустом списке options', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     await userEvents.click(screen.getByRole('combobox'));
 
@@ -15,7 +15,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeVisible();
   });
 
-  it('Focus: не отображается popover', async () => {
+  it('Popover не отображается пои фокусе на инпут', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
 
@@ -24,7 +24,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeNull();
   });
 
-  it('Prop:getOptionLabel: позволяет отображать в popover label', async () => {
+  it('GetOptionLabel позволяет отображать в popover label', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -48,7 +48,7 @@ describe('Autocomplete', () => {
     expect(kolya).toBeVisible();
   });
 
-  it('Закрывается popover после выбора значения', async () => {
+  it('Popover закрывается после выбора значения', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -71,7 +71,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Props:multiple=false: в инпут сетится label после выбора option', async () => {
+  it('Label сетится  в инпут после выбора option при multiple=false', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -97,7 +97,7 @@ describe('Autocomplete', () => {
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
 
-  it('Prop:multiple: в options отображаются чекбоксы', async () => {
+  it('Чекбоксы отображаются в options при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -117,7 +117,7 @@ describe('Autocomplete', () => {
     expect(checkbox).toBeVisible();
   });
 
-  it('Prop:multiple: после выбора option в инпуте появляется tag', async () => {
+  it('Тег появляется в инпуте после выбора option при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -144,7 +144,7 @@ describe('Autocomplete', () => {
     expect(tag).toBeVisible();
   });
 
-  it('Prop:multiple: tag из инпута можно удалить', async () => {
+  it('Tag из инпута можно удалить при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -177,7 +177,7 @@ describe('Autocomplete', () => {
     expect(tag).toBeNull();
   });
 
-  it('Prop:ref: is present', () => {
+  it('Ref правильно задается', () => {
     const resultRef = { current: null };
 
     const AutocompleteWithRef = () => {
@@ -194,7 +194,7 @@ describe('Autocomplete', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:renderInput: is present', async () => {
+  it('RenderInput рендерит на странице инпут', async () => {
     renderWithTheme(
       <Autocomplete
         options={[]}
@@ -241,5 +241,25 @@ describe('Autocomplete', () => {
     await userEvents.type(input, 'test');
     expect(input).toHaveValue('test');
     expect(input).toHaveFocus();
+  });
+
+  it('Кнопка сброса скрыта, если инпут пуст', async () => {
+    const clearText = 'Очистить';
+
+    type Option = { name: string; surname: string };
+
+    const TestComponent = () => {
+      return (
+        <Autocomplete<Option, false, false, true>
+          label="user"
+          freeSolo
+          options={[]}
+          clearText={clearText}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
   });
 });
