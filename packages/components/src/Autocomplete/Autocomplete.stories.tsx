@@ -105,37 +105,42 @@ export const FreeSolo = () => {
   );
 };
 
-export const MultipleCustomTags = () => (
-  <Wrapper>
-    <Autocomplete<IOption, true, false, false>
-      multiple
-      options={OPTIONS}
-      label="Multiple custom tags"
-      placeholder="Placeholder"
-      getOptionLabel={(params) => params.title}
-      renderTags={(tags, getTagProps) => {
-        return tags.map((tag, index) => {
-          const { title } = tag;
-          const { onDelete, ...tagProps } = getTagProps({ index });
-          const isCustom = index === 0;
+export const MultipleCustomTags = () => {
+  const [val, setVal] = useState<IOption[]>([]);
 
-          return (
-            <Tooltip title={isCustom && 'Custom tag'}>
-              <Tag
-                {...tagProps}
-                onDelete={isCustom ? undefined : onDelete}
-                color="warning"
-                size="small"
-                label={title}
-                variant="light"
-              />
-            </Tooltip>
-          );
-        });
-      }}
-    />
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <Autocomplete<IOption, true, false, false>
+        multiple
+        options={OPTIONS}
+        label="Multiple custom tags"
+        value={val}
+        onChange={(_, newVal) => setVal(newVal)}
+        getOptionLabel={(params) => params.title}
+        renderTags={(tags, getTagProps) => {
+          return tags.map((tag, index) => {
+            const { title } = tag;
+            const { onDelete, ...tagProps } = getTagProps({ index });
+            const isCustom = index === 0;
+
+            return (
+              <Tooltip title={isCustom && 'Custom tag'}>
+                <Tag
+                  {...tagProps}
+                  onDelete={isCustom ? undefined : onDelete}
+                  color="warning"
+                  size="small"
+                  label={title}
+                  variant="light"
+                />
+              </Tooltip>
+            );
+          });
+        }}
+      />
+    </Wrapper>
+  );
+};
 
 export const LoadedDataError = () => (
   <Wrapper>

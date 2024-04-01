@@ -293,4 +293,24 @@ describe('Autocomplete', () => {
 
     expect(checkbox).toBeVisible();
   });
+
+  it('Кнопка сброса скрыта, если инпут пуст', async () => {
+    const clearText = 'Очистить';
+
+    type Option = { name: string; surname: string };
+
+    const TestComponent = () => {
+      return (
+        <Autocomplete<Option, false, false, true>
+          label="user"
+          freeSolo
+          options={[]}
+          clearText={clearText}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
+  });
 });
