@@ -210,6 +210,11 @@ export * from './Slide';
 
 export * from './Stepper';
 
+export {
+  ScrollToTopButton,
+  type ScrollToTopButtonProps,
+} from './ScrollToTopButton';
+
 export * from './styles';
 
 export * from './StylesCacheProvider';
