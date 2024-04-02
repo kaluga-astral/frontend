@@ -55,7 +55,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('После выбора значения в форму сетится весь выбранный option', async () => {
+  it('В форму задается выбранный option', async () => {
     const user = userEvents.setup();
     const onSubmit = vi.fn();
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
