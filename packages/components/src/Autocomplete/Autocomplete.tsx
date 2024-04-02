@@ -21,10 +21,11 @@ import {
 import { type WithoutEmotionSpecific } from '../types';
 import { CircularProgress } from '../CircularProgress';
 import { Typography } from '../Typography';
+import { MenuItem } from '../MenuItem';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
-import { PopperWrapper, StyledMenuItem } from './styles';
+import { PopperWrapper } from './styles';
 import { checkIsInputEmpty } from './utils';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
@@ -195,7 +196,7 @@ const AutocompleteInner = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <StyledMenuItem {...optionProps} key={optionProps.id}>
+        <MenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
               <Checkbox role="menuitemcheckbox" checked={selected} />
@@ -207,7 +208,7 @@ const AutocompleteInner = <
           >
             {optionProps.key}
           </OverflowTypography>
-        </StyledMenuItem>
+        </MenuItem>
       );
     },
     [multiple, overflowOption, externalRenderOption],
