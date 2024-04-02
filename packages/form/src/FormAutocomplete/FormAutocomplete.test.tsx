@@ -222,7 +222,7 @@ describe('FormAutocomplete', () => {
     });
   });
 
-  it('Value изменяется при изменении значения формы', async () => {
+  it('Value инпута синхронизируется с формой при изменении значения поля формы', async () => {
     type FormFreeValues = {
       autocomplete: Option | string;
     };
@@ -268,5 +268,41 @@ describe('FormAutocomplete', () => {
 
     await userEvents.click(setTextBtn);
     expect(screen.getByDisplayValue(formText)).toBeInTheDocument();
+  });
+
+  it('Кнопка сброса отображается при наведении на инпут, если инпут содержит текст', async () => {
+    type FormFreeValues = { user: Option | string };
+
+    const onInputChange = vi.fn();
+
+    const clearText = 'Очистить';
+
+    const TestComponent = () => {
+      const form = useForm<FormFreeValues>({
+        defaultValues: { user: '' },
+      });
+
+      return (
+        <Form form={form} onSubmit={form.handleSubmit(() => undefined)}>
+          <FormAutocomplete<FormValues, Option, false, false, true>
+            name="user"
+            label="user"
+            freeSolo
+            options={[]}
+            onInputChange={onInputChange}
+            clearText={clearText}
+          />
+
+          <button type="submit">submit</button>
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    userEvents.type(screen.getByDisplayValue(''), 'some text');
+
+    await waitFor(() => {
+      expect(screen.getByTitle(clearText)).toBeInTheDocument();
+    });
   });
 });
