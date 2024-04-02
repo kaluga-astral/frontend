@@ -73,7 +73,9 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
-  const fallbackValue = '' as typeof fieldProps.value;
+  const fallbackValue = (
+    fieldProps.multiple ? [] : ''
+  ) as typeof fieldProps.value;
 
   return (
     <Autocomplete
