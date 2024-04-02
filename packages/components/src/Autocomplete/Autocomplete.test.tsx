@@ -62,7 +62,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Value принимает значение label после выбора option', async () => {
+  it('Текст инпута принимает значение надписи выбранного option', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -115,9 +115,9 @@ describe('Autocomplete', () => {
       />,
     );
 
-    const paper = screen.getByTestId('customField');
+    const input = screen.getByTestId('customField');
 
-    expect(paper).toBeVisible();
+    expect(input).toBeVisible();
   });
 
   it('Фокус не теряется после ввода первой буквы, при использовании onInputChange в связке с renderInput', async () => {
