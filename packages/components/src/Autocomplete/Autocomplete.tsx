@@ -160,28 +160,11 @@ const AutocompleteInner = <
 
   const renderInput = useCallback(
     (inputParams: AutocompleteRenderInputParams) => {
-      const getIsInputEmpty = (): boolean => {
-        const val = restProps.value;
-
-        if (Array.isArray(val)) {
-          return val.length === 0;
-        }
-
-        // Пользователь может ввести 0
-        if (typeof val === 'string') {
-          return val === '';
-        }
-
-        // undefined, null => true
-        // obj => false
-        return !Boolean(val);
-      };
-
       const generalInputParams = {
         ...inputParams,
         inputRef,
         required,
-        placeholder: !getIsInputEmpty() ? '' : placeholder,
+        placeholder: checkIsInputEmpty() ? placeholder : '',
         label,
         success,
         error,
