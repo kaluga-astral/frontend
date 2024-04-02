@@ -266,10 +266,7 @@ describe('FormAutocomplete', () => {
 
     const setTextBtn = screen.getByRole('button');
 
-    userEvents.click(setTextBtn);
-
-    await waitFor(() => {
-      expect(screen.getByDisplayValue(formText)).toBeInTheDocument();
-    });
+    await userEvents.click(setTextBtn);
+    expect(screen.getByDisplayValue(formText)).toBeInTheDocument();
   });
 });
