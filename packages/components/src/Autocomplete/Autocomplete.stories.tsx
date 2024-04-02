@@ -73,10 +73,10 @@ export const Multiple = () => {
   return (
     <Wrapper>
       <Autocomplete<IOption, true, false, false>
+        multiple
         options={OPTIONS}
         label="Multiple"
         placeholder="Placeholder"
-        multiple
         value={val}
         onChange={(_, newVal) => setVal(newVal)}
         getOptionLabel={(params) => params.title}

@@ -26,6 +26,7 @@ import { Typography } from '../Typography';
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
 import { PopperWrapper } from './styles';
+import { checkIsInputEmpty } from './utils';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 
@@ -112,19 +113,9 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
-  const checkIsInputEmpty = (): boolean => {
-    const val = restProps.value;
+  const isEmpty = checkIsInputEmpty(restProps.value);
 
-    // мульти ввод
-    if (Array.isArray(val)) {
-      return val.length === 0;
-    }
-
-    return !Boolean(val);
-  };
-
-  const disableClearable =
-    checkIsInputEmpty() || Boolean(externalDisableClearable);
+  const disableClearable = isEmpty || Boolean(externalDisableClearable);
 
   const renderDefaultTags = useCallback(
     (
@@ -164,7 +155,7 @@ const AutocompleteInner = <
         ...inputParams,
         inputRef,
         required,
-        placeholder,
+        placeholder: isEmpty ? placeholder : '',
         label,
         success,
         error,
@@ -179,6 +170,7 @@ const AutocompleteInner = <
       return <TextField {...generalInputParams} />;
     },
     [
+      isEmpty,
       externalRenderInput,
       inputRef,
       required,
