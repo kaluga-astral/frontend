@@ -10,19 +10,19 @@ export type TextFieldProps = Omit<
   'variant' | 'color'
 > & {
   /**
-   * @description Флаг отображения успешного состояния
+   * Флаг отображения успешного состояния
    */
   success?: boolean;
   /**
-   * @description Элемент который добавляется в начало
+   * Элемент, который добавляется в начало
    */
   startAdornment?: ReactNode;
   /**
-   * @description Элемент который добавляется в конец
+   * Элемент, который добавляется в конец
    */
   endAdornment?: ReactNode;
   /**
-   * @description Максимальная длина ввода
+   * Максимальная длина ввода
    */
   maxLength?: number;
 };
