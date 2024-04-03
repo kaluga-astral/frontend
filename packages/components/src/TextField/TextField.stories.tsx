@@ -36,6 +36,8 @@ export const Example = () => (
   </>
 );
 
+export const MaxLength = () => <TextField maxLength={3} label="Имя" />;
+
 export const Controlled = () => {
   const [value, setValue] = useState('');
 
