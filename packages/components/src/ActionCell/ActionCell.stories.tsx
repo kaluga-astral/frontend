@@ -31,6 +31,7 @@ const ACTIONS: Actions<ColumnsType> = {
         {
           name: 'Туда',
           onClick: () => console.log('nested 1'),
+          disabledReason: 'Не работает',
           disabled: true,
         },
         { name: 'Сюда', onClick: () => console.log('nested 2') },
@@ -38,7 +39,13 @@ const ACTIONS: Actions<ColumnsType> = {
     },
   ],
   secondary: [
-    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    {
+      name: 'Редактировать',
+      onClick: () => console.log('secondary 1'),
+      disabled: true,
+      disabledReason:
+        'Текущий документ не прошел согласование/подписание. Загрузите документ повторно',
+    },
     { name: 'Удалить', onClick: () => console.log('secondary 2') },
   ],
 };
