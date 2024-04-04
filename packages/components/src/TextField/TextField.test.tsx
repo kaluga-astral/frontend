@@ -1,4 +1,10 @@
-import { fireEvent, renderWithTheme, screen } from '@astral/tests';
+import {
+  fireEvent,
+  renderWithTheme,
+  screen,
+  userEvents,
+  waitFor,
+} from '@astral/tests';
 import { vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 
@@ -102,5 +108,25 @@ describe('TextField', () => {
 
     renderWithTheme(<TextFieldWithRef />);
     expect(resultRef?.current).not.toBeNull();
+  });
+
+  it('Максимальная длина ввода ограничивается', async () => {
+    const MAX_LENGTH = 3;
+
+    renderWithTheme(
+      <TextField
+        inputProps={{ 'data-testid': 'customField' }}
+        maxLength={MAX_LENGTH}
+        label="Имя"
+      />,
+    );
+
+    const inputElement = screen.getByTestId('customField') as HTMLInputElement;
+
+    await userEvents.type(inputElement, 'Hello');
+
+    await waitFor(() => {
+      expect(inputElement.value).toHaveLength(MAX_LENGTH);
+    });
   });
 });
