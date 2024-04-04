@@ -1,9 +1,10 @@
 import { type ReactNode, forwardRef, useMemo } from 'react';
-import { TextField as MuiTextField } from '@mui/material';
 import { type TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 
 import { FormHelperTextContent } from '../FormHelperText';
 import { type WithoutEmotionSpecific } from '../types';
+
+import { StyledTextField } from './styles';
 
 export type TextFieldProps = Omit<
   WithoutEmotionSpecific<MuiTextFieldProps>,
@@ -78,7 +79,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     }, [helperTextProp, success, error]);
 
     return (
-      <MuiTextField
+      <StyledTextField
         ref={ref}
         variant="outlined"
         fullWidth={fullWidth}
