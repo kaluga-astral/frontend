@@ -156,7 +156,7 @@ export * from './MenuList';
 
 export * from './NavMenu';
 
-export { notify, type Notify } from './Notification';
+export * from './Notification';
 
 export * from './NotificationList';
 
