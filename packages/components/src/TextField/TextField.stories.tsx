@@ -94,12 +94,3 @@ export const Adornment = () => (
     <TextField error startAdornment={<SearchOutlineMd />} label="Имя" />
   </>
 );
-
-// Лишь для визуального теста, позже кейс будет удален
-export const ClipTest = () => {
-  return (
-    <div style={{ overflow: 'hidden' }}>
-      <TextField placeholder="Placeholder" />
-    </div>
-  );
-};
