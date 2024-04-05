@@ -10,17 +10,21 @@ export type TextFieldProps = Omit<
   'variant' | 'color'
 > & {
   /**
-   * @description Флаг отображения успешного состояния
+   * Флаг отображения успешного состояния
    */
   success?: boolean;
   /**
-   * @description Элемент который добавляется в начало
+   * Элемент, который добавляется в начало
    */
   startAdornment?: ReactNode;
   /**
-   * @description Элемент который добавляется в конец
+   * Элемент, который добавляется в конец
    */
   endAdornment?: ReactNode;
+  /**
+   * Максимальная длина ввода
+   */
+  maxLength?: number;
 };
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
@@ -32,7 +36,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       fullWidth = false,
       startAdornment,
       endAdornment,
+      inputProps,
       InputProps,
+      maxLength,
       ...props
     },
     ref,
@@ -79,7 +85,15 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         error={error}
         color={color}
         helperText={helperText}
-        InputProps={{ startAdornment, endAdornment, ...InputProps }}
+        InputProps={{
+          startAdornment,
+          endAdornment,
+          ...InputProps,
+        }}
+        inputProps={{
+          maxLength,
+          ...inputProps,
+        }}
         {...props}
       />
     );
