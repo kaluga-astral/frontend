@@ -1,6 +1,8 @@
 import { type ReactNode, forwardRef, useMemo } from 'react';
-import { TextField as MuiTextField } from '@mui/material';
-import { type TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
+import {
+  TextField as MuiTextField,
+  type TextFieldProps as MuiTextFieldProps,
+} from '@mui/material';
 
 import { FormHelperTextContent } from '../FormHelperText';
 import { type WithoutEmotionSpecific } from '../types';
