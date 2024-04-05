@@ -13,7 +13,6 @@ import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, type TextFieldProps } from '../TextField';
 import { Tag } from '../Tag';
-import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 import {
   OverflowTypography,
@@ -25,7 +24,7 @@ import { Typography } from '../Typography';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
-import { PopperWrapper } from './styles';
+import { PopperWrapper, StyledMenuItem } from './styles';
 import { checkIsInputEmpty } from './utils';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
@@ -196,7 +195,7 @@ const AutocompleteInner = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <MenuItem {...optionProps} key={optionProps.id}>
+        <StyledMenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
               <Checkbox role="menuitemcheckbox" checked={selected} />
@@ -208,7 +207,7 @@ const AutocompleteInner = <
           >
             {optionProps.key}
           </OverflowTypography>
-        </MenuItem>
+        </StyledMenuItem>
       );
     },
     [multiple, overflowOption, externalRenderOption],
