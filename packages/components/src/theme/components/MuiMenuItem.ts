@@ -19,7 +19,6 @@ export const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
         [`&.${menuItemClasses.gutters}`]: {
           minHeight: theme.spacing(8),
           padding: theme.spacing(1, 10, 1, 3),
-          maxHeight: theme.spacing(13),
         },
 
         [theme.breakpoints.down('sm')]: {
