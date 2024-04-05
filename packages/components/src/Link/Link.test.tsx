@@ -22,7 +22,11 @@ describe('Link', () => {
   });
 
   it('Иконка слева отображается при withAdornment="start"', () => {
-    renderWithTheme(<Link href="/" withAdornment="start">Link</Link>);
+    renderWithTheme(
+      <Link href="/" withAdornment="start">
+        Link
+      </Link>,
+    );
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
@@ -30,7 +34,11 @@ describe('Link', () => {
   });
 
   it('Иконка справа отображается при withAdornment="end"', () => {
-    renderWithTheme(<Link href="/" withAdornment="end">Link</Link>);
+    renderWithTheme(
+      <Link href="/" withAdornment="end">
+        Link
+      </Link>,
+    );
 
     const icon = screen.getByText('Link').getElementsByTagName('svg')[0];
 
