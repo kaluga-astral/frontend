@@ -5,7 +5,7 @@ export const Wrapper = styled.div<{
 }>`
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: ${({ justifyContent }) => justifyContent};
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;

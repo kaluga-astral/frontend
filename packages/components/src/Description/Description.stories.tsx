@@ -54,6 +54,43 @@ export const Example = () => {
   );
 };
 
+export const CanCopy = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description>
+        <Description.Name>Название поля</Description.Name>
+        <Description.Value canCopy>Значение поля</Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value canCopy>Длинное значение поля</Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
+/**
+ * В данном случае copyPosition="left"
+ */
+export const CopyPosition = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description>
+        <Description.Name>Название поля</Description.Name>
+        <Description.Value canCopy copyPosition="left">
+          Значение поля
+        </Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value canCopy copyPosition="left">
+          Длинное значение поля
+        </Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
 /**
  * Prop ```leader``` добавляет dashed строку
  */
@@ -87,6 +124,21 @@ export const JustifyContent = () => {
   );
 };
 
+export const JustifyContentCanCopy = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description justifyContent="space-between">
+        <Description.Name>Название поля</Description.Name>
+        <Description.Value canCopy>Значение поля</Description.Value>
+      </Description>
+      <Description justifyContent="space-between">
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value canCopy>Длинное значение поля</Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
 export const Colors = () => {
   return (
     <GridWrapper rowSpacing={3} container>
@@ -113,6 +165,43 @@ export const Colors = () => {
       <Description>
         <Description.Name>Название показателя</Description.Name>
         <Description.Value color="primary">
+          Значение показателя
+        </Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
+export const ColorsCanCopy = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value canCopy color="grey">
+          Значение показателя
+        </Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value canCopy color="warning">
+          Значение показателя
+        </Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value canCopy color="error">
+          Значение показателя
+        </Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value canCopy color="success">
+          Значение показателя
+        </Description.Value>
+      </Description>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value canCopy color="primary">
           Значение показателя
         </Description.Value>
       </Description>
