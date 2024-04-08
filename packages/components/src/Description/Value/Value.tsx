@@ -1,4 +1,4 @@
-import { type ReactNode, useContext, useState } from 'react';
+import { type ReactElement, type ReactNode, useContext, useState } from 'react';
 
 import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
@@ -17,6 +17,14 @@ export type ValueProps = Pick<
   stub?: ReactNode;
   canCopy?: boolean;
   copyPosition?: 'left' | 'right';
+};
+
+const TooltipWrapper = (props: { children: ReactElement; title: string }) => {
+  return (
+    <Tooltip placement="bottom" title={props.title}>
+      {props.children}
+    </Tooltip>
+  );
 };
 
 export const Value = ({
@@ -55,16 +63,16 @@ export const Value = ({
   const tooltipText = isCopied ? 'Скопировано' : 'Скопировать';
 
   return (
-    <Tooltip placement="bottom" title={tooltipText}>
-      <Wrapper
-        onClick={handleClick}
-        onMouseLeave={handleMouseLeave}
-        copyPosition={copyPosition}
-      >
-        {ValueText}
+    <Wrapper
+      onClick={handleClick}
+      onMouseLeave={handleMouseLeave}
+      copyPosition={copyPosition}
+    >
+      <TooltipWrapper title={tooltipText}>{ValueText}</TooltipWrapper>
 
+      <TooltipWrapper title={tooltipText}>
         <StyledCopyIcon color={props.color as 'secondary'} />
-      </Wrapper>
-    </Tooltip>
+      </TooltipWrapper>
+    </Wrapper>
   );
 };
