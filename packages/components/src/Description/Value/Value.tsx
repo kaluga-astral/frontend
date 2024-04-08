@@ -1,12 +1,10 @@
-import { type ReactElement, type ReactNode, useContext, useState } from 'react';
-import CopyIcon from '@astral/icons/generated-themed-icons/CopyOutlineSm';
+import { type ReactNode, useContext, useState } from 'react';
 
 import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
-import { IconButton } from '../../IconButton';
 import { Tooltip } from '../../Tooltip';
 
-import { Wrapper } from './styles';
+import { StyledCopyIcon, Wrapper } from './styles';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -21,14 +19,6 @@ export type ValueProps = Pick<
   copyPosition?: 'left' | 'right';
 };
 
-const TooltipWrapper = (props: { children: ReactElement; title: string }) => {
-  return (
-    <Tooltip placement="bottom" title={props.title}>
-      {props.children}
-    </Tooltip>
-  );
-};
-
 export const Value = ({
   children,
   stub,
@@ -39,10 +29,12 @@ export const Value = ({
   const { emptySymbol } = useContext(ConfigContext);
   const [isCopied, setCopied] = useState(false);
 
+  const ValueText = (
+    <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
+  );
+
   if (!canCopy) {
-    return (
-      <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
-    );
+    return ValueText;
   }
 
   const handleClick = () => {
@@ -63,20 +55,16 @@ export const Value = ({
   const tooltipText = isCopied ? 'Скопировано' : 'Скопировать';
 
   return (
-    <Wrapper
-      onClick={handleClick}
-      onMouseLeave={handleMouseLeave}
-      copyPosition={copyPosition}
-    >
-      <TooltipWrapper title={tooltipText}>
-        <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
-      </TooltipWrapper>
+    <Tooltip placement="bottom" title={tooltipText}>
+      <Wrapper
+        onClick={handleClick}
+        onMouseLeave={handleMouseLeave}
+        copyPosition={copyPosition}
+      >
+        {ValueText}
 
-      <TooltipWrapper title={tooltipText}>
-        <IconButton aria-label="Скопировать" variant="text">
-          <CopyIcon width={16} height={16} color={props.color as 'secondary'} />
-        </IconButton>
-      </TooltipWrapper>
-    </Wrapper>
+        <StyledCopyIcon color={props.color as 'secondary'} />
+      </Wrapper>
+    </Tooltip>
   );
 };
