@@ -29,7 +29,7 @@ export type ValueProps = Pick<
 
 const TooltipWrapper = (props: { children: ReactElement; title: string }) => {
   return (
-    <Tooltip placement="bottom" title={props.title}>
+    <Tooltip withoutContainer={false} placement="bottom" title={props.title}>
       {props.children}
     </Tooltip>
   );
