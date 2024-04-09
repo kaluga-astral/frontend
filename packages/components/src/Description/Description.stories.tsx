@@ -69,6 +69,26 @@ export const CanCopy = () => {
   );
 };
 
+export const CanCopyLongText = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description>
+        <Description.Name>
+          Длинное название поля, достаточное для вызова переполнения
+        </Description.Name>
+        <Description.Value canCopy>Длинное значение поля</Description.Value>
+      </Description>
+
+      <Description>
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value canCopy>
+          Длинное значение поля, достаточное для вызова переполнения
+        </Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
 /**
  * В данном случае copyPosition="left"
  */
@@ -77,13 +97,13 @@ export const CopyPosition = () => {
     <GridWrapper rowSpacing={3} container>
       <Description>
         <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy $copyPosition="left">
+        <Description.Value canCopy copyPosition="left">
           Значение поля
         </Description.Value>
       </Description>
       <Description>
         <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value canCopy $copyPosition="left">
+        <Description.Value canCopy copyPosition="left">
           Длинное значение поля
         </Description.Value>
       </Description>

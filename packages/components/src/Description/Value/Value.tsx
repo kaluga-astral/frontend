@@ -1,10 +1,10 @@
-import { type ReactElement, type ReactNode, useContext, useState } from 'react';
+import { type ReactNode, useContext, useState } from 'react';
 
-import { Typography, type TypographyProps } from '../../Typography';
+import { type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
-import { CopyWrapper, StyledCopyIcon } from './styles';
+import { StyledCopyIcon, StyledText } from './styles';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -24,38 +24,34 @@ export type ValueProps = Pick<
   /**
    * Позиционирует иконку "копировать" (слева / справа от текста)
    */
-  $copyPosition?: 'left' | 'right';
+  copyPosition?: 'left' | 'right';
 };
 
-const TooltipWrapper = (props: { children: ReactElement; title: string }) => {
-  return (
-    <Tooltip withoutContainer={false} placement="bottom" title={props.title}>
-      {props.children}
-    </Tooltip>
-  );
-};
-
-export const Value = ({
+const ValueTextC = ({
   children,
   stub,
-  canCopy,
-  $copyPosition: copyPosition = 'right',
+  copyPosition = 'right',
   ...props
 }: ValueProps) => {
   const { emptySymbol } = useContext(ConfigContext);
+
+  return (
+    <StyledText {...props} $copyPosition={copyPosition}>
+      {children ?? stub ?? emptySymbol}
+    </StyledText>
+  );
+};
+
+export const Value = ({ canCopy, ...props }: ValueProps) => {
   const [isCopied, setCopied] = useState(false);
 
-  const ValueText = (
-    <Typography {...props}>{children ?? stub ?? emptySymbol}</Typography>
-  );
-
   if (!canCopy) {
-    return ValueText;
+    return <ValueTextC {...props} />;
   }
 
   const handleClick = () => {
     setCopied(true);
-    navigator.clipboard.writeText(children?.toString() || '');
+    navigator.clipboard.writeText(props.children?.toString() || '');
   };
 
   const handleMouseLeave = () => {
@@ -71,16 +67,18 @@ export const Value = ({
   const tooltipText = isCopied ? 'Скопировано' : 'Скопировать';
 
   return (
-    <CopyWrapper
+    <Tooltip
       onClick={handleClick}
       onMouseLeave={handleMouseLeave}
-      $copyPosition={copyPosition}
+      withoutContainer={false}
+      placement="bottom"
+      title={tooltipText}
     >
-      <TooltipWrapper title={tooltipText}>{ValueText}</TooltipWrapper>
+      <ValueTextC {...props}>
+        {props.children}
 
-      <TooltipWrapper title={tooltipText}>
         <StyledCopyIcon color={props.color as 'secondary'} />
-      </TooltipWrapper>
-    </CopyWrapper>
+      </ValueTextC>
+    </Tooltip>
   );
 };
