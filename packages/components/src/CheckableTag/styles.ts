@@ -136,7 +136,7 @@ const getColor = ({
   return null;
 };
 
-export const Wrapper = styled.label`
+export const StyledLabel = styled.label`
   width: fit-content;
 `;
 

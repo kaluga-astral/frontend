@@ -2,7 +2,7 @@ import { type ChangeEvent, forwardRef } from 'react';
 
 import { type TagAddonProps, type TagProps } from '../Tag';
 
-import { HiddenInput, StyledTag, Wrapper } from './styles';
+import { HiddenInput, StyledLabel, StyledTag } from './styles';
 import { type CheckableTagAddon } from './types';
 
 export type CheckableTagProps = Omit<
@@ -23,7 +23,6 @@ export type CheckableTagProps = Omit<
   disabled?: boolean;
   /**
    * Контент слева от label
-
    */
   startAddon?: CheckableTagAddon;
 
@@ -42,7 +41,7 @@ export type CheckableTagProps = Omit<
    * color="success"
    * checked
    * onChange={handleChecked}
-   * endAddon={(props: TagBadgeProps) => ( <TagBadge {...props} badgeContent={'12'} />)}
+   * endAddon={(props: TagBadgeProps) => (<TagBadge {...props} badgeContent={'12'} />)}
  * />
 
  */
@@ -72,7 +71,7 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
       ) : null;
 
     return (
-      <Wrapper>
+      <StyledLabel>
         <HiddenInput
           type="checkbox"
           ref={ref}
@@ -89,7 +88,7 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           endAddon={checkableEndAddon}
           {...tagProps}
         />
-      </Wrapper>
+      </StyledLabel>
     );
   },
 );
