@@ -117,7 +117,7 @@ describe('CheckableTag', () => {
 
     const sut = (
       <CheckableTag
-        checked={true}
+        checked
         onChange={handleChangeSpy}
         startAddon={Addon}
         endAddon={Addon}
