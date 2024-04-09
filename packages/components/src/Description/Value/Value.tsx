@@ -1,6 +1,6 @@
 import { type ReactNode, useContext, useState } from 'react';
 
-import { type TypographyProps } from '../../Typography';
+import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
@@ -27,31 +27,25 @@ export type ValueProps = Pick<
   copyPosition?: 'left' | 'right';
 };
 
-const ValueTextC = ({
+export const Value = ({
+  canCopy,
+  copyPosition = 'right',
   children,
   stub,
-  copyPosition = 'right',
   ...props
 }: ValueProps) => {
+  const [isCopied, setCopied] = useState(false);
   const { emptySymbol } = useContext(ConfigContext);
 
-  return (
-    <StyledText {...props} $copyPosition={copyPosition}>
-      {children ?? stub ?? emptySymbol}
-    </StyledText>
-  );
-};
-
-export const Value = ({ canCopy, ...props }: ValueProps) => {
-  const [isCopied, setCopied] = useState(false);
+  const resultChildren = children ?? stub ?? emptySymbol;
 
   if (!canCopy) {
-    return <ValueTextC {...props} />;
+    return <Typography children={resultChildren} {...props} />;
   }
 
   const handleClick = () => {
     setCopied(true);
-    navigator.clipboard.writeText(props.children?.toString() || '');
+    navigator.clipboard.writeText(children?.toString() || '');
   };
 
   const handleMouseLeave = () => {
@@ -74,11 +68,23 @@ export const Value = ({ canCopy, ...props }: ValueProps) => {
       placement="bottom"
       title={tooltipText}
     >
-      <ValueTextC {...props}>
-        {props.children}
+      <StyledText {...props}>
+        {copyPosition === 'left' && (
+          <StyledCopyIcon
+            $copyPosition={copyPosition}
+            color={props.color as 'secondary'}
+          />
+        )}
 
-        <StyledCopyIcon color={props.color as 'secondary'} />
-      </ValueTextC>
+        {resultChildren}
+
+        {copyPosition === 'right' && (
+          <StyledCopyIcon
+            $copyPosition={copyPosition}
+            color={props.color as 'secondary'}
+          />
+        )}
+      </StyledText>
     </Tooltip>
   );
 };

@@ -85,6 +85,13 @@ export const CanCopyLongText = () => {
           Длинное значение поля, достаточное для вызова переполнения
         </Description.Value>
       </Description>
+
+      <Description>
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value canCopy copyPosition="left">
+          Длинное значение поля, достаточное для вызова переполнения
+        </Description.Value>
+      </Description>
     </GridWrapper>
   );
 };
