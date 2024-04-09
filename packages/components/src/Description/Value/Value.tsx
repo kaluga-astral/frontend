@@ -4,7 +4,7 @@ import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
-import { StyledCopyIcon, Wrapper } from './styles';
+import { CopyWrapper, StyledCopyIcon } from './styles';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -63,7 +63,7 @@ export const Value = ({
   const tooltipText = isCopied ? 'Скопировано' : 'Скопировать';
 
   return (
-    <Wrapper
+    <CopyWrapper
       onClick={handleClick}
       onMouseLeave={handleMouseLeave}
       copyPosition={copyPosition}
@@ -73,6 +73,6 @@ export const Value = ({
       <TooltipWrapper title={tooltipText}>
         <StyledCopyIcon color={props.color as 'secondary'} />
       </TooltipWrapper>
-    </Wrapper>
+    </CopyWrapper>
   );
 };

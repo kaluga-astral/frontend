@@ -4,12 +4,20 @@ import { styled } from '../../styles';
 
 import { type ValueProps } from './Value';
 
-export const Wrapper = styled.div<ValueProps>`
+export const CopyWrapper = styled.div<ValueProps>`
+  cursor: pointer;
+
   display: flex;
   flex-direction: ${(props) =>
     props.copyPosition === 'left' ? 'row-reverse' : 'row'};
-  column-gap: ${({ theme }) => theme.spacing(2)};
+  column-gap: ${({ theme }) => theme.spacing(1)};
   align-items: center;
+
+  &:hover {
+    p {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export const StyledCopyIcon = styled(CopyOutlineSm)`
