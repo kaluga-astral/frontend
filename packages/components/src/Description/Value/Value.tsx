@@ -24,7 +24,7 @@ export type ValueProps = Pick<
   /**
    * Позиционирует иконку "копировать" (слева / справа от текста)
    */
-  copyPosition?: 'left' | 'right';
+  $copyPosition?: 'left' | 'right';
 };
 
 const TooltipWrapper = (props: { children: ReactElement; title: string }) => {
@@ -39,7 +39,7 @@ export const Value = ({
   children,
   stub,
   canCopy,
-  copyPosition = 'right',
+  $copyPosition: copyPosition = 'right',
   ...props
 }: ValueProps) => {
   const { emptySymbol } = useContext(ConfigContext);
@@ -74,7 +74,7 @@ export const Value = ({
     <CopyWrapper
       onClick={handleClick}
       onMouseLeave={handleMouseLeave}
-      copyPosition={copyPosition}
+      $copyPosition={copyPosition}
     >
       <TooltipWrapper title={tooltipText}>{ValueText}</TooltipWrapper>
 

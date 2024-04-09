@@ -8,8 +8,8 @@ export const CopyWrapper = styled.div<ValueProps>`
   cursor: pointer;
 
   display: flex;
-  flex-direction: ${(props) =>
-    props.copyPosition === 'left' ? 'row-reverse' : 'row'};
+  flex-direction: ${({ $copyPosition }) =>
+    $copyPosition === 'left' ? 'row-reverse' : 'row'};
   column-gap: ${({ theme }) => theme.spacing(1)};
   align-items: center;
 
