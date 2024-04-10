@@ -1,4 +1,4 @@
-import { Certificate } from '@astral/cryptopro-cades';
+import { type Certificate } from '@astral/cryptopro-cades';
 import {
   Dialog,
   DialogContent,
@@ -6,7 +6,7 @@ import {
   Switch,
   Typography,
 } from '@astral/ui';
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { useState } from 'react';
 
 import { CryptoProCertAutocomplete } from '..';

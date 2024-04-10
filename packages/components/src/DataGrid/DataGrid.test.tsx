@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { vi } from 'vitest';
 
 import { DataGrid } from './DataGrid';
-import { DataGridColumns, DataGridSort } from './types';
+import { type DataGridColumns, type DataGridSort } from './types';
 
 describe('DataGrid', () => {
   it('Props:columns: отображаются названия колонок', () => {
@@ -21,7 +21,33 @@ describe('DataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('Props:columns:sortable: отображается иконка сортировки', () => {
+  it('Props:columns:sortable: отображается иконка сортировки при двух или более записях', () => {
+    type DataItem = {
+      name: string;
+    };
+
+    const columns: DataGridColumns<DataItem>[] = [
+      {
+        field: 'name',
+        label: 'Наименование',
+        sortable: true,
+      },
+    ];
+
+    renderWithTheme(
+      <DataGrid<DataItem>
+        keyId="id"
+        rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
+        columns={columns}
+      />,
+    );
+
+    const icon = screen.getByText('Наименование').querySelector('svg');
+
+    expect(icon).not.toBeNull();
+  });
+
+  it('Props:columns:sortable: не отображается иконка сортировки при отсутствии данных или при одной записи', () => {
     const columns = [
       {
         field: 'name',
@@ -34,7 +60,7 @@ describe('DataGrid', () => {
 
     const icon = screen.getByText('Наименование').querySelector('svg');
 
-    expect(icon).not.toBeNull();
+    expect(icon).toBeNull();
   });
 
   it('Props:columns:sortable: по клику на head cell вызывается onSort', async () => {
@@ -62,7 +88,7 @@ describe('DataGrid', () => {
       return (
         <DataGrid<DataItem>
           keyId="name"
-          rows={[]}
+          rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
           sorting={sorting}
           onSort={handleSort}
           columns={columns}
@@ -71,13 +97,13 @@ describe('DataGrid', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    expect(currentSort).toBe(undefined);
+    expect(currentSort).toBeUndefined();
     await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'asc' });
     await userEvents.click(screen.getByText('Наименование'));
     expect(currentSort).toEqual({ fieldId: 'name', sort: 'desc' });
     await userEvents.click(screen.getByText('Наименование'));
-    expect(currentSort).toBe(undefined);
+    expect(currentSort).toBeUndefined();
   });
 
   it('Props:columns:field: отображает в строке данные по field', async () => {
@@ -134,24 +160,4 @@ describe('DataGrid', () => {
     await userEvents.click(screen.getByText('Vasya'));
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
   });
-
-  // TODO: https://astraltrack.atlassian.net/browse/UIKIT-309
-  // it('Props:emptyCellValue: по дефолту для пустого значения отображается -', async () => {
-  //   renderWithTheme(
-  //     <DataGrid<{ name?: string }>
-  //       keyId="name"
-  //       rows={[{}]}
-  //       columns={[
-  //         {
-  //           field: 'name',
-  //           label: 'Наименование',
-  //         },
-  //       ]}
-  //     />,
-  //   );
-  //
-  //   const emptySymbol = screen.getByText('-');
-  //
-  //   expect(emptySymbol).toBeVisible();
-  // });
 });

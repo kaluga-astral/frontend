@@ -1,45 +1,64 @@
-import { Story } from '@storybook/react';
-
-import { ExampleTemplate } from '../docs';
-import { LegacyGrid } from '../LegacyGrid';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { FlowButton } from './FlowButton';
 
-export default {
+/**
+ * FlowButton — это кнопка для запуска/продолжения пользовательского сценария.
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof FlowButton> = {
   title: 'Components/FlowButton',
   component: FlowButton,
 };
 
-export const FlowButtonShowcase: Story = () => {
-  return (
-    <ExampleTemplate>
-      <LegacyGrid container justifyContent="flex-start" spacing={4}>
-        <FlowButton targetText="Далее">Выпустить УНЭП</FlowButton>
-      </LegacyGrid>
-    </ExampleTemplate>
-  );
+export default meta;
+
+type Story = StoryObj<typeof FlowButton>;
+
+export const Interaction: Story = {
+  args: {
+    children: 'Выпустить УНЭП',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+    options: {
+      showPanel: true,
+    },
+    controls: {
+      expanded: true,
+    },
+  },
 };
 
-FlowButtonShowcase.parameters = { options: { showPanel: false } };
-
-const Template: Story = (args) => (
-  <FlowButton {...args} targetText="Далее">
+export const Example = () => (
+  <FlowButton targetText="Далее" color="primary">
     Выпустить УНЭП
   </FlowButton>
 );
 
-export const FlowButtonStory = Template.bind({});
+export const TargetText = () => (
+  <FlowButton targetText="Пропустить" color="success">
+    Пропустить этот шаг
+  </FlowButton>
+);
 
-FlowButtonStory.storyName = 'FlowButton';
-
-FlowButtonStory.args = {
-  disabled: false,
-  color: 'primary',
-  variant: 'contained',
-  size: 'medium',
-};
-
-FlowButtonStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+export const Color = () => (
+  <>
+    <FlowButton targetText="Начальный" color="primary">
+      Primary
+    </FlowButton>
+    <FlowButton targetText="Успех" color="success">
+      Success
+    </FlowButton>
+    <FlowButton targetText="Ошибка" color="error">
+      Error
+    </FlowButton>
+    <FlowButton targetText="Предупреждение" color="warning">
+      Warning
+    </FlowButton>
+  </>
+);

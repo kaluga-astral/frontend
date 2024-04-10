@@ -1,9 +1,12 @@
 import { forwardRef, useMemo } from 'react';
 
 import { type ButtonProps, ButtonVariants } from '../Button';
-import { CircularProgress, CircularProgressProps } from '../CircularProgress';
+import {
+  CircularProgress,
+  type CircularProgressProps,
+} from '../CircularProgress';
 
-import { IconButtonWrapper } from './styles';
+import { StyledButton } from './styles';
 
 export type IconButtonProps = ButtonProps & {
   /**
@@ -24,7 +27,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     }, [variant]);
 
     return (
-      <IconButtonWrapper
+      <StyledButton
         loading={loading}
         variant={variant}
         tabIndex={loading ? -1 : 0}
@@ -36,7 +39,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ) : (
           children
         )}
-      </IconButtonWrapper>
+      </StyledButton>
     );
   },
 );

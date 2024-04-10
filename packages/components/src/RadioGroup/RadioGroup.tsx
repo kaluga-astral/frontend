@@ -1,15 +1,15 @@
 import {
   RadioGroup as MuiRadioGroup,
-  RadioGroupProps as MuiRadioGroupProps,
+  type RadioGroupProps as MuiRadioGroupProps,
 } from '@mui/material';
-import { ReactNode, useId } from 'react';
+import { type ReactNode, useId } from 'react';
 
-import { WithoutEmotionSpecific } from '../types';
-import { FormControl, FormControlProps } from '../FormControl';
+import { type WithoutEmotionSpecific } from '../types';
+import { FormControl, type FormControlProps } from '../FormControl';
 import { FormLabel } from '../FormLabel';
 import { Tooltip } from '../Tooltip';
 
-import { RadioGroupProvider } from './RadioGroupProvider';
+import { RadioGroupContextProvider } from './RadioGroupContext';
 
 export type RadioGroupProps = WithoutEmotionSpecific<MuiRadioGroupProps> & {
   /**
@@ -69,7 +69,9 @@ export const RadioGroup = (props: RadioGroupProps) => {
           aria-labelledby={labelId}
           row={row}
         >
-          <RadioGroupProvider isError={isError}>{children}</RadioGroupProvider>
+          <RadioGroupContextProvider isError={isError}>
+            {children}
+          </RadioGroupContextProvider>
         </MuiRadioGroup>
       </FormControl>
     </Tooltip>

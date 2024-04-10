@@ -1,7 +1,9 @@
-import { Tab as MuiTab, TabProps as MuiTabProps } from '@mui/material';
+import { type TabProps as MuiTabProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
+
+import { StyledTab } from './styles';
 
 export type TabProps = WithoutEmotionSpecific<MuiTabProps>;
 
-export const Tab = (props: TabProps) => <MuiTab {...props} />;
+export const Tab = (props: TabProps) => <StyledTab {...props} />;

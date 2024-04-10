@@ -5,9 +5,9 @@ import { ConfigContext } from '../ConfigProvider';
 import { IconButton } from '../IconButton';
 import { useMenu } from '../hooks';
 
-import { ProductSwitcherContent } from './ProductSwitcherContent';
-import { WidgetProduct } from './types';
-import { WidgetMenu } from './styles';
+import { Content } from './Content';
+import { type WidgetProduct } from './types';
+import { StyledMenu } from './styles';
 
 export type ProductSwitcherProps = {
   getProducts: () => Promise<Array<WidgetProduct>>;
@@ -21,6 +21,7 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
   const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
   const handleShowProducts = async () => {
+    setIsError(false);
     handleOpenMenu();
 
     if (!products.length) {
@@ -55,17 +56,13 @@ export const ProductSwitcher = ({ getProducts }: ProductSwitcherProps) => {
       >
         <ProductsFillMd />
       </IconButton>
-      <WidgetMenu
+      <StyledMenu
         open={open}
         anchorEl={anchorRef.current}
         onClose={handleCloseMenu}
       >
-        <ProductSwitcherContent
-          isLoading={isLoading}
-          isError={isError}
-          products={products}
-        />
-      </WidgetMenu>
+        <Content isLoading={isLoading} isError={isError} products={products} />
+      </StyledMenu>
     </>
   );
 };

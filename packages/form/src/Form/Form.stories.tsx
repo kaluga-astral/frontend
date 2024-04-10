@@ -1,10 +1,10 @@
-import { Story } from '@storybook/react';
+import { type Story } from '@storybook/react';
 import { LegacyGrid } from '@astral/components';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
 import { useForm } from '../hooks';
-import { FormTextField, FormTextFieldValue } from '../FormTextField';
+import { FormTextField, type FormTextFieldValue } from '../FormTextField';
 import { FormSubmitButton } from '../FormSubmitButton';
 
 import { Form } from './Form';

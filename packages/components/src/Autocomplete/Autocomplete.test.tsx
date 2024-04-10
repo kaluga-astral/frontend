@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { TextField } from '../TextField';
@@ -6,16 +6,7 @@ import { TextField } from '../TextField';
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Prop:options: при пустом массиве отображается плейсхолдер', async () => {
-    renderWithTheme(<Autocomplete options={[]} />);
-    await userEvents.click(screen.getByRole('combobox'));
-
-    const noDataPlaceholder = screen.getByText('Нет данных');
-
-    expect(noDataPlaceholder).toBeVisible();
-  });
-
-  it('Focus: не отображается popover', async () => {
+  it('Popover не отображается пои фокусе на инпут', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
 
@@ -24,7 +15,7 @@ describe('Autocomplete', () => {
     expect(noDataPlaceholder).toBeNull();
   });
 
-  it('Prop:getOptionLabel: позволяет отображать в popover label', async () => {
+  it('GetOptionLabel позволяет отображать в popover label', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -48,7 +39,7 @@ describe('Autocomplete', () => {
     expect(kolya).toBeVisible();
   });
 
-  it('Закрывается popover после выбора значения', async () => {
+  it('Popover закрывается после выбора значения', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -71,7 +62,7 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('option')).toBeNull();
   });
 
-  it('Props:multiple=false: в инпут сетится label после выбора option', async () => {
+  it('Текст инпута принимает значение надписи выбранного option', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [
@@ -97,54 +88,133 @@ describe('Autocomplete', () => {
     expect(input).toHaveAttribute('value', 'Pupkin');
   });
 
-  it('Prop:multiple: в options отображаются чекбоксы', async () => {
-    type Option = { name: string; surname: string };
+  it('Ref доступен', () => {
+    const resultRef = { current: null };
 
-    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+    const AutocompleteWithRef = () => {
+      const ref = useRef(null);
 
+      useEffect(() => {
+        resultRef.current = ref.current;
+      }, []);
+
+      return <Autocomplete options={[]} ref={ref} />;
+    };
+
+    renderWithTheme(<AutocompleteWithRef />);
+    expect(resultRef?.current).not.toBeNull();
+  });
+
+  it('RenderInput рендерит на странице инпут', async () => {
     renderWithTheme(
-      <Autocomplete<Option, true, false, false>
-        multiple
-        options={options}
-        getOptionLabel={(option) => option.surname}
+      <Autocomplete
+        options={[]}
+        renderInput={(props) => (
+          <TextField {...props} data-testid="customField" />
+        )}
       />,
     );
 
-    await userEvents.click(screen.getByRole('combobox'));
+    const input = screen.getByTestId('customField');
 
-    const checkbox = screen.getByRole('menuitemcheckbox');
-
-    expect(checkbox).toBeVisible();
+    expect(input).toBeVisible();
   });
 
-  it('Prop:multiple: после выбора option в инпуте появляется tag', async () => {
+  it('Фокус не теряется после ввода первой буквы, при использовании onInputChange в связке с renderInput', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [
+      { name: 'Vasya', surname: 'Pupkin' },
+      { name: 'Kolya', surname: 'Kolin' },
+    ];
+
+    const ControlledAutocompleteWithRenderInput = () => {
+      const [inputValue, setInputValue] = useState('');
+
+      return (
+        <Autocomplete<Option, false, false, false>
+          options={options}
+          inputValue={inputValue}
+          getOptionLabel={(option) => option.surname}
+          onInputChange={(_event, value) => setInputValue(value)}
+          renderInput={(props) => (
+            <TextField {...props} data-testid="customField" />
+          )}
+        />
+      );
+    };
+
+    renderWithTheme(<ControlledAutocompleteWithRenderInput />);
+
+    const input = await screen.findByRole('combobox');
+
+    await userEvents.click(input);
+    await userEvents.type(input, 'test');
+    expect(input).toHaveValue('test');
+    expect(input).toHaveFocus();
+  });
+
+  it('Плейсхолдер отображается, если не выбрана одна из опций при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+    const placeholder = 'Меня должно быть видно';
 
-    renderWithTheme(
-      <Autocomplete<Option, true, false, false>
-        multiple
-        options={options}
-        getOptionLabel={(option) => option.surname}
-      />,
-    );
+    const TestComponent = () => {
+      const [val, setVal] = useState<Option[]>([]);
+      const getOptionLabel = (option: Option) => option.surname;
 
-    await userEvents.click(screen.getByRole('combobox'));
-    await userEvents.click(screen.getByRole('menuitemcheckbox'));
+      const onChange = (_: unknown, newVal: Option[]) => {
+        setVal(newVal);
+      };
 
-    const checkbox = screen
-      .getByRole('menuitemcheckbox')
-      .getElementsByTagName('input')[0];
+      return (
+        <Autocomplete<Option, true, false, false>
+          value={val}
+          multiple
+          options={options}
+          onChange={onChange}
+          getOptionLabel={getOptionLabel}
+          placeholder={placeholder}
+        />
+      );
+    };
 
-    expect(checkbox).toBeChecked();
-
-    const tag = screen.getByRole('button', { name: 'Pupkin' });
-
-    expect(tag).toBeVisible();
+    renderWithTheme(<TestComponent />);
+    expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
   });
 
-  it('Prop:multiple: tag из инпута можно удалить', async () => {
+  it('Плейсхолдер не отображается, если выбрана одна из опций при multiple=true', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+    const placeholder = 'Меня тут быть не должно';
+
+    const TestComponent = () => {
+      const [val, setVal] = useState<Option[]>([...options]);
+      const getOptionLabel = (option: Option) => option.surname;
+
+      const onChange = (_: unknown, newVal: Option[]) => {
+        setVal(newVal);
+      };
+
+      return (
+        <Autocomplete<Option, true, false, false>
+          value={val}
+          multiple
+          options={options}
+          onChange={onChange}
+          getOptionLabel={getOptionLabel}
+          placeholder={placeholder}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.queryByPlaceholderText(placeholder)).not.toBeInTheDocument();
+  });
+
+  it('Tag из инпута можно удалить при multiple=true', async () => {
     type Option = { name: string; surname: string };
 
     const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
@@ -177,35 +247,70 @@ describe('Autocomplete', () => {
     expect(tag).toBeNull();
   });
 
-  it('Prop:ref: is present', () => {
-    const resultRef = { current: null };
+  it('Тег появляется в инпуте после выбора option при multiple=true', async () => {
+    type Option = { name: string; surname: string };
 
-    const AutocompleteWithRef = () => {
-      const ref = useRef(null);
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
 
-      useEffect(() => {
-        resultRef.current = ref.current;
-      }, []);
-
-      return <Autocomplete options={[]} ref={ref} />;
-    };
-
-    renderWithTheme(<AutocompleteWithRef />);
-    expect(resultRef?.current).not.toBeNull();
-  });
-
-  it('Prop:renderInput: is present', async () => {
     renderWithTheme(
-      <Autocomplete
-        options={[]}
-        renderInput={(props) => (
-          <TextField {...props} data-testid="customField" />
-        )}
+      <Autocomplete<Option, true, false, false>
+        multiple
+        options={options}
+        getOptionLabel={(option) => option.surname}
       />,
     );
 
-    const paper = screen.getByTestId('customField');
+    await userEvents.click(screen.getByRole('combobox'));
+    await userEvents.click(screen.getByRole('menuitemcheckbox'));
 
-    expect(paper).toBeVisible();
+    const checkbox = screen
+      .getByRole('menuitemcheckbox')
+      .getElementsByTagName('input')[0];
+
+    expect(checkbox).toBeChecked();
+
+    const tag = screen.getByRole('button', { name: 'Pupkin' });
+
+    expect(tag).toBeVisible();
+  });
+
+  it('Чекбоксы отображаются в options при multiple=true', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+    renderWithTheme(
+      <Autocomplete<Option, true, false, false>
+        multiple
+        options={options}
+        getOptionLabel={(option) => option.surname}
+      />,
+    );
+
+    await userEvents.click(screen.getByRole('combobox'));
+
+    const checkbox = screen.getByRole('menuitemcheckbox');
+
+    expect(checkbox).toBeVisible();
+  });
+
+  it('Кнопка сброса скрыта, если инпут пуст', async () => {
+    const clearText = 'Очистить';
+
+    type Option = { name: string; surname: string };
+
+    const TestComponent = () => {
+      return (
+        <Autocomplete<Option, false, false, true>
+          label="user"
+          freeSolo
+          options={[]}
+          clearText={clearText}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+    expect(screen.queryByTitle(clearText)).not.toBeInTheDocument();
   });
 });

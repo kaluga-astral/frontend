@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 
-import { Typography, TypographyProps } from '../../Typography';
-import { DescriptionDashedSeparator } from '../styles';
-import { DescriptionContext } from '../DescriptionProvider';
+import { Typography, type TypographyProps } from '../../Typography';
+import { DescriptionContext } from '../DescriptionContext';
+
+import { DashedSeparator, Wrapper } from './styles';
 
 export type NameProps = Pick<TypographyProps, 'color' | 'variant' | 'children'>;
 
@@ -15,11 +16,13 @@ export const Name = ({
 
   return (
     <>
-      <Typography {...props} color={color}>
-        {children}
-        {separator}
-      </Typography>
-      {leader && <DescriptionDashedSeparator />}
+      <Wrapper>
+        <Typography {...props} color={color}>
+          {children}
+          {!leader && separator}
+        </Typography>
+      </Wrapper>
+      {leader && <DashedSeparator />}
     </>
   );
 };

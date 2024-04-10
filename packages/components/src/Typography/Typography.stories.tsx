@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Grid } from '../Grid';
 import { Paper } from '../Paper';
@@ -104,6 +104,9 @@ export const Colors = () => (
     <Typography>default. Электронная отчетность и документооборот</Typography>
     <Typography color="text">
       text. Электронная отчетность и документооборот
+    </Typography>
+    <Typography color="primary">
+      primary. Электронная отчетность и документооборот
     </Typography>
     <Typography color="secondary">
       secondary. Электронная отчетность и документооборот

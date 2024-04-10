@@ -1,4 +1,4 @@
-import { TableContainerProps } from '@mui/material';
+import { type TableContainerProps } from '@mui/material';
 
 import { styled } from '../styles';
 import { TableContainer } from '../Table';
@@ -8,15 +8,16 @@ type StyledTableContainerProps = TableContainerProps & {
   inert?: '' | false;
 };
 
-export const DataGridContainer = styled.div<StyledTableContainerProps>`
+export const Container = styled.div<StyledTableContainerProps>`
   position: relative;
 
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+
   width: 100%;
   height: 100%;
   max-height: ${({ maxHeight }) => (maxHeight ? `${maxHeight}px` : 'initial')};
-  overflow: hidden;
 `;
 
 export const StyledTableContainer = styled(TableContainer, {
@@ -26,8 +27,8 @@ export const StyledTableContainer = styled(TableContainer, {
 `;
 
 export const DisabledTableContainer = styled(StyledTableContainer)`
+  pointer-events: none;
+
   background: ${({ theme }) => theme.palette.background.element};
   mix-blend-mode: luminosity;
-
-  pointer-events: none;
 `;

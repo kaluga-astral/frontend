@@ -1,11 +1,11 @@
 import {
   SwipeableDrawer,
-  SwipeableDrawerProps,
+  type SwipeableDrawerProps,
   Typography,
 } from '@mui/material';
 
 import { styled } from '../styles';
-import { TypographyProps } from '../Typography';
+import { type TypographyProps } from '../Typography';
 
 type SwipeableDrawerHeaderProps = {
   drawerBleedingHeight: number;
@@ -29,7 +29,7 @@ const getHeight = ({
 const calcMaxBodyHeight = ({
   drawerBleedingHeight,
 }: SwipeableDrawerHeaderProps): string =>
-  `calc(100vh - ${drawerBleedingHeight}px * 2)`;
+  `calc(100dvh - ${drawerBleedingHeight}px * 2)`;
 
 /**
  * @description Определение плавной анимации полного скрытия компонента.
@@ -41,7 +41,7 @@ const getUnmountTransform = ({
   ModalProps,
 }: SwipeableDrawerProps): string => {
   return !ModalProps?.keepMounted && !open
-    ? 'translateY(100vh) !important'
+    ? 'translateY(100dvh) !important'
     : 'none';
 };
 
@@ -49,9 +49,9 @@ export const StyledSwipeableDrawer = styled(
   SwipeableDrawer,
 )<SwipeableDrawerProps>`
   .MuiPaper-root {
-    overflow: visible;
-
     transform: ${(props) => getUnmountTransform({ ...props })};
+
+    overflow: visible;
   }
 
   .MuiBackdrop-root {
@@ -59,16 +59,18 @@ export const StyledSwipeableDrawer = styled(
   }
 `;
 
-export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
+export const Header = styled.header<SwipeableDrawerHeaderProps>`
   position: absolute;
   top: -${(props) => getHeight({ ...props })};
 
   display: flex;
   justify-content: center;
+
   width: 100%;
   height: ${(props) => getHeight({ ...props })};
   padding: ${({ theme }) => theme.spacing(6, 6, 3, 6)};
 
+  visibility: visible;
   background-color: ${({ theme }) =>
     theme.palette.mode === 'light'
       ? theme.palette.background.default
@@ -76,16 +78,16 @@ export const SwipeableDrawerHeader = styled.header<SwipeableDrawerHeaderProps>`
   border-top-left-radius: ${({ theme }) => theme.shape.medium};
   border-top-right-radius: ${({ theme }) => theme.shape.medium};
   box-shadow: ${({ theme }) => theme.shadows[8]};
-  visibility: visible;
 `;
 
-export const SwipeableDrawerPuller = styled.div`
+export const Puller = styled.div`
   position: absolute;
   top: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 24px;
   height: 24px;
 
@@ -97,7 +99,7 @@ export const SwipeableDrawerPuller = styled.div`
   }
 `;
 
-export const SwipeableDrawerPullerIcon = styled.div`
+export const PullerIcon = styled.div`
   width: 14px;
   height: 2px;
 
@@ -108,16 +110,17 @@ export const SwipeableDrawerPullerIcon = styled.div`
   border-radius: ${({ theme }) => theme.shape.small};
 `;
 
-export const SwipeableDrawerTitle = styled(Typography)<TypographyProps>`
+export const Title = styled(Typography)<TypographyProps>`
   color: ${({ theme }) => theme.palette.grey[700]};
 `;
 
-export const SwipeableDrawerBody = styled.div<SwipeableDrawerBodyProps>`
+export const Body = styled.div<SwipeableDrawerBodyProps>`
   z-index: ${({ theme }) => theme.zIndex.mobileStepper};
+
+  overflow: auto;
 
   height: 100%;
   max-height: ${(props) => calcMaxBodyHeight({ ...props })};
-  overflow: auto;
 
   background-color: ${({ theme }) =>
     theme.palette.mode === 'light'

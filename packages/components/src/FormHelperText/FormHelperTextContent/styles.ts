@@ -1,6 +1,6 @@
 import { ErrorFillSm, SuccessFillSm } from '@astral/icons';
 
-import { Theme } from '../../theme';
+import { type Theme } from '../../theme';
 import { styled } from '../../styles';
 
 const getStyles = (theme: Theme) => {
@@ -16,7 +16,7 @@ type WrapperProps = {
 };
 
 // flex необходим, для того, чтобы span не менял высоту полей и имел фиксированную высоту в 16px
-export const FormHelperTextWrapper = styled.span<WrapperProps>`
+export const Wrapper = styled.span<WrapperProps>`
   display: flex;
 
   color: ${({ success, error, theme }) => {
@@ -32,14 +32,14 @@ export const FormHelperTextWrapper = styled.span<WrapperProps>`
   }};
 `;
 
-export const FormHelperTextSuccessIcon = styled(SuccessFillSm)`
+export const SuccessIcon = styled(SuccessFillSm)`
   ${({ theme }) => getStyles(theme)}
 `;
 
-export const FormHelperTextErrorIcon = styled(ErrorFillSm)`
+export const ErrorIcon = styled(ErrorFillSm)`
   ${({ theme }) => getStyles(theme)}
 `;
 
-export const FormHelperTextMessage = styled.span`
+export const Message = styled.span`
   vertical-align: middle;
 `;

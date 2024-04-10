@@ -36,6 +36,12 @@ export * from './FormSelect';
 
 export * from './FormTextField';
 
+export {
+  FormEmailField,
+  FormEmailFieldProps,
+  FormEmailFieldValue,
+} from './FormEmailField';
+
 export * from './FormSubmitButton';
 
 export * from './FormDatePicker';
@@ -43,6 +49,8 @@ export * from './FormDatePicker';
 export * from './FormDateRangePicker';
 
 export * from './FormPasswordField';
+
+export * from './FormCodeField';
 
 export * from './Form';
 

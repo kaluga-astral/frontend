@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
-import { SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
+import { type ReactNode } from 'react';
+import { type SwipeableDrawerProps as MuiSwipeableDrawerProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 import {
+  Body,
+  Header,
+  Puller,
+  PullerIcon,
   StyledSwipeableDrawer,
-  SwipeableDrawerBody,
-  SwipeableDrawerHeader,
-  SwipeableDrawerPuller,
-  SwipeableDrawerPullerIcon,
-  SwipeableDrawerTitle,
+  Title,
 } from './styles';
 
 export type SwipeableDrawerProps = {
@@ -52,19 +52,13 @@ export const SwipeableDrawer = ({
       swipeAreaWidth={drawerBleedingHeight}
       ModalProps={{ keepMounted: isMountedOnHide }}
     >
-      <SwipeableDrawerHeader drawerBleedingHeight={drawerBleedingHeight}>
-        <SwipeableDrawerPuller>
-          {drawerBleedingIcon || <SwipeableDrawerPullerIcon />}
-        </SwipeableDrawerPuller>
+      <Header drawerBleedingHeight={drawerBleedingHeight}>
+        <Puller>{drawerBleedingIcon || <PullerIcon />}</Puller>
 
-        <SwipeableDrawerTitle noWrap>
-          {drawerBleedingTitle}
-        </SwipeableDrawerTitle>
-      </SwipeableDrawerHeader>
+        <Title noWrap>{drawerBleedingTitle}</Title>
+      </Header>
 
-      <SwipeableDrawerBody drawerBleedingHeight={drawerBleedingHeight}>
-        {children}
-      </SwipeableDrawerBody>
+      <Body drawerBleedingHeight={drawerBleedingHeight}>{children}</Body>
     </StyledSwipeableDrawer>
   );
 };

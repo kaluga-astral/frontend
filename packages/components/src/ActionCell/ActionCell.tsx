@@ -1,12 +1,12 @@
 import { DotsVOutlineMd } from '@astral/icons';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { type ReactNode, useCallback, useMemo } from 'react';
 
-import { IconButton, IconButtonProps } from '../IconButton';
+import { IconButton, type IconButtonProps } from '../IconButton';
 import { IconDropdownButton } from '../IconDropdownButton';
-import { MenuItem, MenuItemProps } from '../MenuItem';
-import { Tooltip, TooltipProps } from '../Tooltip';
+import { MenuItem, type MenuItemProps } from '../MenuItem';
+import { Tooltip, type TooltipProps } from '../Tooltip';
 
-import { ActionCellWrapper } from './styles';
+import { Wrapper } from './styles';
 
 export type NestedAction<T> = MenuItemProps & {
   /**
@@ -168,9 +168,9 @@ export function ActionCell<T>({
   }, [secondary, handleActionClick]);
 
   return (
-    <ActionCellWrapper onClick={(event) => event.stopPropagation()}>
+    <Wrapper onClick={(event) => event.stopPropagation()}>
       {main.map(renderMainAction)}
       {renderSecondaryActions}
-    </ActionCellWrapper>
+    </Wrapper>
   );
 }

@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider as MuiLocalizationProvider } from '@mui/lab';
-import { LocalizationProviderProps as MuiLocalizationProviderProps } from '@mui/lab';
+import { type LocalizationProviderProps as MuiLocalizationProviderProps } from '@mui/lab';
 
 export type LocalizationProviderProps = Omit<
   MuiLocalizationProviderProps,

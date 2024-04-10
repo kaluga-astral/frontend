@@ -1,7 +1,7 @@
 import { useController } from 'react-hook-form';
 import { useForwardedRef } from '@astral/components';
 
-import { FieldValues, WithFormFieldProps } from '../../types';
+import { type FieldValues, type WithFormFieldProps } from '../../types';
 import { useFormFieldErrorProps } from '../useFormFieldErrorProps';
 import { useFormInputProps } from '../useFormInputProps';
 
@@ -19,7 +19,10 @@ export const useFormFieldProps = <
 >(
   props: UseFormFieldProps<TFormFieldProps, TFieldValues>,
 ) => {
-  const { field, fieldState } = useController(props);
+  const { field, fieldState } = useController({
+    ...props,
+    disabled: undefined,
+  });
 
   const ref = useForwardedRef(field.ref);
 
@@ -30,5 +33,10 @@ export const useFormFieldProps = <
 
   const errorProps = useFormFieldErrorProps(fieldState);
 
-  return { ...inputProps, ...field, ...errorProps, inputRef: ref };
+  return {
+    ...field,
+    ...inputProps,
+    ...errorProps,
+    inputRef: ref,
+  };
 };

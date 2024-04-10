@@ -1,13 +1,9 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { type ChangeEvent, forwardRef } from 'react';
 
-import { TagAddonProps, TagProps } from '../Tag';
+import { type TagAddonProps, type TagProps } from '../Tag';
 
-import {
-  CheckableTagHiddenInput,
-  CheckableTagStyled,
-  CheckableTagWrapper,
-} from './styles';
-import { CheckableTagAddon } from './types';
+import { HiddenInput, StyledTag, Wrapper } from './styles';
+import { type CheckableTagAddon } from './types';
 
 export type CheckableTagProps = Omit<
   TagProps,
@@ -76,15 +72,15 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
       ) : null;
 
     return (
-      <CheckableTagWrapper>
-        <CheckableTagHiddenInput
+      <Wrapper>
+        <HiddenInput
           type="checkbox"
           ref={ref}
           checked={checked}
           onChange={onChange}
           disabled={disabled}
         />
-        <CheckableTagStyled
+        <StyledTag
           checked={checked}
           variant={variant}
           color={color}
@@ -93,7 +89,7 @@ export const CheckableTag = forwardRef<HTMLInputElement, CheckableTagProps>(
           endAddon={checkableEndAddon}
           {...tagProps}
         />
-      </CheckableTagWrapper>
+      </Wrapper>
     );
   },
 );

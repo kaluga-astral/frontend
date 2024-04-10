@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@astral/components';
+import { Button, type ButtonProps } from '@astral/components';
 
 import { useFormContext } from '../hooks';
 

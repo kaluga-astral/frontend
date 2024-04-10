@@ -1,6 +1,6 @@
-import { ReactNode, forwardRef } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
-import { MainRoot } from './styled';
+import { MainRoot } from './styles';
 
 export type MainProps = { children: ReactNode };
 

@@ -8,7 +8,7 @@ import { MenuGroup } from '../MenuGroup';
 
 import { OrganizationButton } from './OrganizationButton';
 import { OrganizationItem } from './OrganizationItem';
-import { Organization } from './types';
+import { type Organization } from './types';
 import {
   OrganizationGroupTitle,
   OrganizationsButtonWrapper,
@@ -16,6 +16,10 @@ import {
 } from './styles';
 
 export type MenuOrganizationProps = {
+  /**
+   * Должен ли рендериться компонент
+   */
+  shouldRender?: boolean;
   /**
    * Выбранная организация
    */
@@ -36,6 +40,7 @@ export type MenuOrganizationProps = {
 
 export const MenuOrganization = ({
   organizations = [],
+  shouldRender = true,
   currentOrganization,
   onAddOrganization,
   onSelect,
@@ -46,6 +51,10 @@ export const MenuOrganization = ({
     onSelect(organization);
     handleCloseMenu();
   };
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <>

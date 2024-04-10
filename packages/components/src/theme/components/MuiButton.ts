@@ -1,10 +1,10 @@
-import { Components, buttonClasses } from '@mui/material';
+import { type Components, buttonClasses } from '@mui/material';
 
-import { Theme } from '../types';
+import { type Theme } from '../types';
 import {
-  ButtonProps,
+  type ButtonProps,
   ButtonSizes,
-  ButtonState,
+  type ButtonState,
   ButtonStates,
   ButtonVariants,
 } from '../../Button';
@@ -281,7 +281,7 @@ export const getButtonDisabledBackgroundColor = ({
     return 'transparent';
   }
 
-  return theme.palette.grey['100'];
+  return theme.palette.grey['200'];
 };
 
 export const MuiButton: Components<Theme>['MuiButton'] = {

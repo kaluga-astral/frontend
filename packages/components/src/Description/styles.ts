@@ -1,6 +1,6 @@
 import { styled } from '../styles';
 
-export const DescriptionWrapper = styled.div<{
+export const Wrapper = styled.div<{
   justifyContent?: 'space-between' | 'start';
 }>`
   display: flex;
@@ -14,12 +14,4 @@ export const DescriptionWrapper = styled.div<{
       font-size: ${({ theme }) => theme.typography.fontSize};
     }
   }
-`;
-
-export const DescriptionDashedSeparator = styled.div`
-  flex: 1;
-  height: 4px;
-  margin-left: ${({ theme }) => theme.spacing(2)};
-
-  border-bottom: 1px dashed ${({ theme }) => theme.palette.grey[400]};
 `;

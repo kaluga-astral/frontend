@@ -1,49 +1,51 @@
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
+import { describe, vi } from 'vitest';
 
 import { ClickAwayListener } from './ClickAwayListener';
 
 describe('ClickAwayListener', () => {
-  it('Props:isActive=true: при клике внутри onClickAway не вызывается', async () => {
-    const onClickAway = vi.fn();
+  describe('onClickAway не вызывается', () => {
+    it('При isActive=true и клике внутри children', async () => {
+      const onClickAwaySpy = vi.fn();
 
-    renderWithTheme(
-      <ClickAwayListener onClickAway={onClickAway} isActive={true}>
-        <div>Lorem</div>
-      </ClickAwayListener>,
-    );
+      renderWithTheme(
+        <ClickAwayListener onClickAway={onClickAwaySpy} isActive={true}>
+          <div>Lorem</div>
+        </ClickAwayListener>,
+      );
 
-    const div = screen.getByText('Lorem');
+      const div = screen.getByText('Lorem');
 
-    await userEvents.click(div);
-    expect(onClickAway).toBeCalledTimes(0);
+      await userEvents.click(div);
+      expect(onClickAwaySpy).not.toBeCalled();
+    });
+
+    it('При isActive=false и клике внутри children', async () => {
+      const onClickAwaySpy = vi.fn();
+
+      renderWithTheme(
+        <ClickAwayListener onClickAway={onClickAwaySpy} isActive={false}>
+          <div>Lorem</div>
+        </ClickAwayListener>,
+      );
+
+      const div = screen.getByText('Lorem');
+
+      await userEvents.click(div);
+      expect(onClickAwaySpy).not.toBeCalled();
+    });
   });
 
-  it('Props:isActive=false: при клике внутри onClickAway не вызывается', async () => {
-    const onClickAway = vi.fn();
+  it('onClickAway вызывается при isActive=true: и клике снаружи children', async () => {
+    const onClickAwaySpy = vi.fn();
 
     renderWithTheme(
-      <ClickAwayListener onClickAway={onClickAway} isActive={false}>
-        <div>Lorem</div>
-      </ClickAwayListener>,
-    );
-
-    const div = screen.getByText('Lorem');
-
-    await userEvents.click(div);
-    expect(onClickAway).toBeCalledTimes(0);
-  });
-
-  it('Props:isActive=true: при клике снаружи, onClickAway вызывается', async () => {
-    const onClickAway = vi.fn();
-
-    renderWithTheme(
-      <ClickAwayListener onClickAway={onClickAway} isActive={true}>
+      <ClickAwayListener onClickAway={onClickAwaySpy} isActive={true}>
         <div>Lorem</div>
       </ClickAwayListener>,
     );
 
     await userEvents.click(document.body);
-    expect(onClickAway).toBeCalledTimes(1);
+    expect(onClickAwaySpy).toBeCalled();
   });
 });

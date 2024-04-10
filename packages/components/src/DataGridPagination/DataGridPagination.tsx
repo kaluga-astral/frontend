@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { Pagination } from '../Pagination';
-import { PaginationProps } from '../Pagination';
+import { type PaginationProps } from '../Pagination';
 
 import { PaginationWrapper, Range } from './styles';
 

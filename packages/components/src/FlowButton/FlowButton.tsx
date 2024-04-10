@@ -3,9 +3,9 @@ import { ArrowROutlineLg } from '@astral/icons';
 
 import { Typography } from '../Typography';
 import { LegacyGrid } from '../LegacyGrid';
-import { ButtonProps } from '../Button';
+import { type ButtonProps } from '../Button';
 
-import { FlowButtonWrapper, TargetTextWrapper } from './styles';
+import { StyledButton, TargetTextWrapper } from './styles';
 
 export type FlowButtonProps = Omit<
   ButtonProps,
@@ -22,7 +22,7 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
     const { children, targetText, ...restProps } = props;
 
     return (
-      <FlowButtonWrapper
+      <StyledButton
         ref={ref}
         endIcon={<ArrowROutlineLg width={32} height={32} />}
         {...restProps}
@@ -31,7 +31,7 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
           <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
           <Typography variant="h6">{children}</Typography>
         </LegacyGrid>
-      </FlowButtonWrapper>
+      </StyledButton>
     );
   },
 );

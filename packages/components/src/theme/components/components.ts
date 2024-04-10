@@ -1,7 +1,7 @@
 import type {} from '@mui/lab/themeAugmentation';
-import { Components } from '@mui/material';
+import { type Components } from '@mui/material';
 
-import { Theme } from '../types';
+import { type Theme } from '../types';
 
 import { MuiAlert } from './MuiAlert';
 import { MuiButton } from './MuiButton';
@@ -16,6 +16,7 @@ import { MuiPaper } from './MuiPaper';
 import { MuiTypography } from './MuiTypography';
 import { MuiAutocomplete } from './MuiAutocomplete';
 import { MuiDialog } from './MuiDialog';
+import { MuiDrawer } from './MuiDrawer';
 import { MuiDialogTitle } from './MuiDialogTitle';
 import { MuiDialogContent } from './MuiDialogContent';
 import { MuiDialogActions } from './MuiDialogActions';
@@ -27,6 +28,7 @@ import { MuiMenuItem } from './MuiMenuItem';
 import { MuiCircularProgress } from './MuiCircularProgress';
 import { MuiListItemButton } from './MuiListItemButton';
 import { MuiListItemText } from './MuiListItemText';
+import { MuiLinearProgress } from './MuiLinearProgress';
 import { MuiTab } from './MuiTab';
 import { MuiTabs } from './MuiTabs';
 import { MuiStepLabel } from './MuiStepLabel';
@@ -35,6 +37,7 @@ import { MuiStepConnector } from './MuiStepConnector';
 import { MuiToggleButton } from './MuiToggleButton';
 import { MuiToggleButtonGroup } from './MuiToggleButtonGroup';
 import { MuiSwitch } from './MuiSwitch';
+import { MuiTextField } from './MuiTextField';
 
 export type FontsUrls = {
   bold: {
@@ -133,6 +136,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiDialogTitle,
   MuiDialogContent,
   MuiDialogActions,
+  MuiDrawer,
   MuiTableCell,
   MuiTableHead,
   MuiTableRow,
@@ -141,6 +145,7 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiCircularProgress,
   MuiListItemButton,
   MuiListItemText,
+  MuiLinearProgress,
   MuiTab,
   MuiTabs,
   MuiStepLabel,
@@ -148,5 +153,6 @@ export const getComponents = (fontUrls: FontsUrls): Components<Theme> => ({
   MuiStepConnector,
   MuiToggleButtonGroup,
   MuiToggleButton,
+  MuiTextField,
   MuiSwitch,
 });

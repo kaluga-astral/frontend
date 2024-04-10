@@ -1,21 +1,29 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-import { PageContentWrapper } from './styles';
+import { Wrapper } from './styles';
 
 export type PageContentProps = {
   children: ReactNode;
+
   /**
    * @example <PageContent isSeparatorShown />
    * @default false
    * Флаг, отображающий границу шапки
    */
   isSeparatorShown?: boolean;
+
   /**
    * @example <PageContent isPaddingDisabled>Контент</PageContent>
    * @default true
    * Флаг, добавляющий стандартные отсупы (требуются не всегда)
    */
   isPaddingDisabled?: boolean;
+
+  /*
+   * Флаг, растягивающий контейнер на 100% высоты (используется только для мобильных устройств)
+   * Для десктопа высота контейнера всегда 100%
+   */
+  isFullHeight?: boolean;
 };
 
 export const PageContent = (props: PageContentProps) => {
@@ -23,14 +31,16 @@ export const PageContent = (props: PageContentProps) => {
     children,
     isPaddingDisabled = true,
     isSeparatorShown = false,
+    isFullHeight,
   } = props;
 
   return (
-    <PageContentWrapper
+    <Wrapper
       isPaddingDisabled={isPaddingDisabled}
       isSeparatorShown={isSeparatorShown}
+      isFullHeight={isFullHeight}
     >
       {children}
-    </PageContentWrapper>
+    </Wrapper>
   );
 };

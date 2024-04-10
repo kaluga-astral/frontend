@@ -1,4 +1,8 @@
-import { DateCompareDeep, isDate, isDateOutOfRange } from '@astral/utils';
+import {
+  type DateCompareDeep,
+  isDate,
+  isDateOutOfRange,
+} from '../../../utils/date';
 
 type IsDateBetweenSelectedAndRangeDatesOptions = {
   date: Date;

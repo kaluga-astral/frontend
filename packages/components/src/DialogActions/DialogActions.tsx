@@ -1,10 +1,11 @@
 import {
   DialogActions as MuiDialogActions,
-  DialogActionsProps as MuiDialogActionsProps,
+  type DialogActionsProps as MuiDialogActionsProps,
 } from '@mui/material';
 
-import { LegacyGrid } from '../LegacyGrid';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
+
+import { StyledGrid } from './styles';
 
 export type DialogActionsProps = WithoutEmotionSpecific<MuiDialogActionsProps>;
 
@@ -15,14 +16,7 @@ export const DialogActions = ({
 }: DialogActionsProps) => {
   return (
     <MuiDialogActions {...props}>
-      <LegacyGrid
-        container
-        autoFlow="column"
-        justifyContent="end"
-        spacing={disableSpacing ? 0 : 2}
-      >
-        {children}
-      </LegacyGrid>
+      <StyledGrid spacing={disableSpacing ? 0 : 2}>{children}</StyledGrid>
     </MuiDialogActions>
   );
 };

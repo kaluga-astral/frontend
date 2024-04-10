@@ -1,10 +1,11 @@
-import { ReactNode, useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 
-import { Checkbox, CheckboxProps } from '../Checkbox';
+import { type CheckboxProps } from '../Checkbox';
 import { FormControl } from '../FormControl';
-import { FormControlLabel } from '../FormControlLabel';
 import { FormHelperText } from '../FormHelperText';
 import { Tooltip } from '../Tooltip';
+
+import { StyledCheckbox, StyledFormControlledLabel } from './styles';
 
 export type CheckboxFieldProps = CheckboxProps & {
   /**
@@ -48,8 +49,8 @@ export const CheckboxField = ({
         placement="bottom-start"
         withoutContainer={false}
       >
-        <FormControlLabel
-          control={<Checkbox isError={isError} {...restProps} />}
+        <StyledFormControlledLabel
+          control={<StyledCheckbox isError={isError} {...restProps} />}
           label={label}
         />
       </Tooltip>

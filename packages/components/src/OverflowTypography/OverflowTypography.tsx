@@ -1,11 +1,11 @@
 import { forwardRef } from 'react';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 import { Tooltip } from '../Tooltip';
-import { TooltipProps as BasicTooltipProps } from '../Tooltip';
-import { TypographyProps } from '../Typography';
+import { type TooltipProps as BasicTooltipProps } from '../Tooltip';
+import { type TypographyProps } from '../Typography';
 
-import { OverflowTypographyWrapper } from './styles';
+import { StyledTypography } from './styles';
 import { useOverflowed } from './hooks';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
@@ -57,11 +57,11 @@ export const OverflowTypography = forwardRef<
     if (children && isOverflowed) {
       return (
         <Tooltip title={children} disableInteractive {...tooltipProps}>
-          <OverflowTypographyWrapper {...typographyProps} />
+          <StyledTypography {...typographyProps} />
         </Tooltip>
       );
     }
 
-    return <OverflowTypographyWrapper {...typographyProps} />;
+    return <StyledTypography {...typographyProps} />;
   },
 );

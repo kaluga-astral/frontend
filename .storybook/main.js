@@ -4,7 +4,7 @@ module.exports = {
     '../docs/**/*.mdx',
     '../packages/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: ['storybook-addon-swc', '@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['storybook-addon-swc', '@storybook/addon-links', '@storybook/addon-essentials', 'storybook-addon-mock'],
   staticDirs: ['./public'],
   features: {
     // https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#emotion11-quasi-compatibility

@@ -1,9 +1,9 @@
 import {
   Divider as MuiDivider,
-  DividerProps as MuiDividerProps,
+  type DividerProps as MuiDividerProps,
 } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
 export type DividerProps = WithoutEmotionSpecific<MuiDividerProps>;
 

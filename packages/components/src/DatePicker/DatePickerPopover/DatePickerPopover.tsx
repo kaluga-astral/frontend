@@ -1,53 +1,35 @@
-import { PropsWithChildren } from 'react';
-import { PopperProps } from '@mui/material';
+import { type PropsWithChildren } from 'react';
 
-import { WithoutEmotionSpecific } from '../../types';
+import { type PopoverProps } from '../../Popover';
+import { type WithoutEmotionSpecific } from '../../types';
 
-import { DatePickerPopoverInner, PopoverWrapper } from './styles';
-
-/**
- * @description тупл для соответсвтия попперовскому способу задания отступов, 1е число по X, второе по Y
- */
-export type OffsetTuple = [number, number];
-
-const DEFAULT_OFFSET: OffsetTuple = [
-  0, /**
-   * @description минус 12, потому что мы используем в качестве рефа грид/див,
-   * в котором создают лишние отступы плейсхолдеры для ошибок валидации
-   */ -12,
-];
+import { InnerContainer, StyledPopover } from './styles';
 
 export type DatePickerPopoverProps = PropsWithChildren<
   Omit<
-    WithoutEmotionSpecific<PopperProps>,
-    'children' | 'disablePortal' | 'transition' | 'modifiers'
+    WithoutEmotionSpecific<PopoverProps>,
+    'children' | 'disablePortal' | 'transition'
   >
-> & {
-  /**
-   * @description оффсет появления поппера от якоря
-   * @default [0, -12]
-   */
-  offset?: OffsetTuple;
-};
+>;
 
 export const DatePickerPopover = ({
   children,
-  offset = DEFAULT_OFFSET,
   ...props
 }: DatePickerPopoverProps) => (
-  <PopoverWrapper
-    placement="bottom-start"
+  <StyledPopover
+    elevation={1}
+    disableAutoFocus={true}
+    disableRestoreFocus={true}
     {...props}
-    disablePortal
-    modifiers={[
-      {
-        name: 'offset',
-        options: {
-          offset,
-        },
-      },
-    ]}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
   >
-    <DatePickerPopoverInner>{children}</DatePickerPopoverInner>
-  </PopoverWrapper>
+    <InnerContainer>{children}</InnerContainer>
+  </StyledPopover>
 );

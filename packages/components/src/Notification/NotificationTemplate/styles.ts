@@ -3,7 +3,7 @@ import { CrossOutlineSm } from '@astral/icons';
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
-import { ActionsDirection, Variant } from '../types';
+import { type ActionsDirection, type Variant } from '../types';
 
 import { getActionsDirection, getNotificationTemplateStyles } from './utils';
 
@@ -24,49 +24,52 @@ type NotificationCloseIconProps = {
   filled: boolean;
 };
 
-export const NotificationTemplateWrapper = styled.article<NotificationTemplateProps>`
+export const Wrapper = styled.article<NotificationTemplateProps>`
   display: flex;
   align-items: flex-start;
+
   min-height: 56px;
   padding: ${({ theme }) => theme.spacing(4)};
   ${({ theme, variant, filled }) =>
     getNotificationTemplateStyles(theme, variant, filled)}
 `;
 
-export const NotificationInner = styled.div`
+export const Inner = styled.div`
   flex-grow: 1;
 `;
 
-export const NotificationFooter = styled.footer<NotificationActionsProps>`
+export const Footer = styled.footer<NotificationActionsProps>`
   display: flex;
   justify-content: ${({ actionsDirection }) =>
     getActionsDirection(actionsDirection)};
+
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const NotificationIcon = styled.div`
+export const IconWrapper = styled.div`
   margin-right: ${({ theme }) => theme.spacing(3)};
   padding-top: ${({ theme }) => theme.spacing(1)};
 `;
 
-export const NotificationContent = styled.div`
+export const Content = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const NotificationHeader = styled.header`
+export const Header = styled.header`
   display: flex;
   align-items: center;
+
   width: 100%;
   min-height: 32px;
 `;
 
-export const NotificationCloseIcon = styled(CrossOutlineSm, {
+export const CloseIcon = styled(CrossOutlineSm, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseIconProps>`
   color: ${({ theme, filled }) => filled && theme.palette.background.default};
 `;
 
-export const NotificationCloseButton = styled(IconButton, {
+export const CloseButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseButtonProps>`
   padding: 0;
@@ -76,7 +79,7 @@ export const NotificationCloseButton = styled(IconButton, {
   }
 `;
 
-export const NotificationTitle = styled(Typography)`
+export const Title = styled(Typography)`
   flex: 1;
 
   font-weight: ${({ theme }) => theme.typography.fontWeightMedium};

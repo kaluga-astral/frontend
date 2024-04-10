@@ -1,22 +1,24 @@
-import { useContext } from 'react';
-import { addMonths } from '@astral/utils';
+import { useContext, useEffect } from 'react';
 
 import {
-  CommonDateCalendarHeadProps,
+  type CommonDateCalendarHeadProps,
   DateCalendarBody,
-  DateCalendarGridBtn,
+  DateCalendarGridButton,
   DateCalendarHead,
   DateCalendarWrapper,
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
-import { PickerProps } from '../types';
+import { type PickerProps } from '../types';
+import { DateCompareDeep, addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
-import { DAYS_IN_WEEK } from '../constants/counts';
+import { DAYS_IN_WEEK } from '../constants';
+import { isDateBetweenSelectedAndRangeDates } from '../utils';
+import { PopoverHoveredContext } from '../PopoverHoveredContext';
 
-import { DateDayPickerGridHead } from './DateDayPickerGridHead';
-import { DateDayPickerGridBody } from './DateDayPickerGrid';
-import { useDaysGrid } from './hooks/useDaysGrid';
+import { Head } from './Head';
+import { Body } from './styles';
+import { useDaysGrid } from './hooks';
 
 export type MondayFirst = {
   /**
@@ -36,6 +38,9 @@ export const DayPicker = ({
   onChange,
   isMondayFirst,
   rangeDate,
+  isRange,
+  onDayHover,
+  hoveredDayDate,
   ...headProps
 }: DateDayPickerProps) => {
   const monthYearFormat = useLocaleDateTimeFormat({
@@ -59,7 +64,9 @@ export const DayPicker = ({
     addCb: addMonths,
   });
 
-  const { grid, isPrevDisabled, isNextDisabled } = useDaysGrid({
+  const { popoverHovered } = useContext(PopoverHoveredContext);
+
+  const { grid } = useDaysGrid({
     baseDate,
     selectedDate,
     isMondayFirst,
@@ -67,31 +74,57 @@ export const DayPicker = ({
     rangeDate,
   });
 
+  const handleDayHover = (date: Date) => {
+    onDayHover?.(date);
+  };
+
+  /*
+  Убираем hover day из стейта, если курсор вышел за проделы popover
+   */
+  useEffect(() => {
+    if (!popoverHovered) {
+      onDayHover?.();
+    }
+  }, [onDayHover, popoverHovered]);
+
   return (
     <DateCalendarWrapper>
       <DateCalendarHead
         {...headProps}
         arrowPostfixTitle={monthCaption.single}
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={monthYearFormat(baseDate)}
       />
       <DateCalendarBody>
-        <DateDayPickerGridHead isMondayFirst={isMondayFirst} />
-        <DateDayPickerGridBody role="grid">
+        <Head isMondayFirst={isMondayFirst} />
+        <Body role="grid">
           {grid.map(({ date, monthDay, ...props }, index) => (
-            <DateCalendarGridBtn
+            <DateCalendarGridButton
               key={index}
               onClick={() => onChange?.(date)}
               title={dayFormat(date)}
               lengthInRow={DAYS_IN_WEEK}
               isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              onMouseEnter={() => {
+                handleDayHover(date);
+              }}
+              isInHoveredRange={
+                isRange &&
+                popoverHovered &&
+                isDateBetweenSelectedAndRangeDates({
+                  date,
+                  selectedDate,
+                  rangeDate: hoveredDayDate,
+                  deep: DateCompareDeep.day,
+                })
+              }
               {...props}
             >
               {monthDay}
-            </DateCalendarGridBtn>
+            </DateCalendarGridButton>
           ))}
-        </DateDayPickerGridBody>
+        </Body>
       </DateCalendarBody>
     </DateCalendarWrapper>
   );

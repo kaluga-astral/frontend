@@ -1,9 +1,10 @@
 import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
 
-export const SelectTagsWrapper = styled.div`
+export const TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   margin-bottom: -${({ theme }) => theme.spacing(1)};
 
   .MuiChip-root {
@@ -21,10 +22,11 @@ export const SelectTagsWrapper = styled.div`
   }
 `;
 
-export const SelectProgressWrapper = styled.div`
+export const ProgressWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   min-height: 64px;
 
   .MuiCircularProgress-root {
@@ -34,6 +36,6 @@ export const SelectProgressWrapper = styled.div`
   }
 `;
 
-export const SelectPlaceholder = styled(MenuItem)`
+export const Placeholder = styled(MenuItem)`
   display: none;
 `;

@@ -1,20 +1,20 @@
 import { useContext } from 'react';
-import { addYears } from '@astral/utils';
 
 import {
-  CommonDateCalendarHeadProps,
-  DateCalendarGridBtnLarge,
+  type CommonDateCalendarHeadProps,
+  DateCalendarGridButtonLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
-import { PickerProps } from '../types';
+import { type PickerProps } from '../types';
+import { addYears } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
-import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
-import { useMonthsGrid } from './hooks/useMonthsGrid';
+import { useMonthsGrid } from './hooks';
 
 type DateMonthPickerProps = PickerProps & CommonDateCalendarHeadProps;
 
@@ -39,7 +39,7 @@ export const MonthPicker = ({
     addCb: addYears,
   });
 
-  const { grid, isPrevDisabled, isNextDisabled } = useMonthsGrid({
+  const { grid } = useMonthsGrid({
     baseDate,
     selectedDate,
     rangeDate,
@@ -52,13 +52,13 @@ export const MonthPicker = ({
       <DateCalendarHead
         {...headProps}
         arrowPostfixTitle={yearCaption.single}
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={baseDate.getUTCFullYear()}
       />
       <DateCalendarGridLarge>
         {grid.map(({ month, date, ...props }, index) => (
-          <DateCalendarGridBtnLarge
+          <DateCalendarGridButtonLarge
             key={`${month}_${index}`}
             onClick={() => onChange?.(date)}
             title={titleFormat(date)}
@@ -67,7 +67,7 @@ export const MonthPicker = ({
             {...props}
           >
             {monthFormat(date)}
-          </DateCalendarGridBtnLarge>
+          </DateCalendarGridButtonLarge>
         ))}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>

@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { EyeFillMd, SearchOutlineMd } from '@astral/icons';
-import { ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 
 import { TextField } from './TextField';
 
@@ -35,6 +35,8 @@ export const Example = () => (
     <TextField label="Disabled" disabled />
   </>
 );
+
+export const MaxLength = () => <TextField maxLength={3} label="Имя" />;
 
 export const Controlled = () => {
   const [value, setValue] = useState('');

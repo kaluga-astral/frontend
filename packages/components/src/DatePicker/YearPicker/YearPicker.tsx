@@ -1,19 +1,19 @@
 import { useContext } from 'react';
-import { addYears } from '@astral/utils';
 
 import {
-  CommonDateCalendarHeadProps,
-  DateCalendarGridBtnLarge,
+  type CommonDateCalendarHeadProps,
+  DateCalendarGridButtonLarge,
   DateCalendarGridLarge,
   DateCalendarHead,
   DateCalendarWrapper,
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
-import { PickerProps } from '../types';
+import { addYears } from '../../utils/date';
+import { type PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
-import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
-import { useYearsGrid } from './hooks/useYearsGrid';
+import { useYearsGrid } from './hooks';
 import { YEARS_IN_GRID } from './constants';
 
 type DateYearPickerProps = PickerProps & CommonDateCalendarHeadProps;
@@ -29,7 +29,7 @@ export const YearPicker = ({
     date: initialDate,
     addCb: (date, direction) => addYears(date, YEARS_IN_GRID * direction),
   });
-  const { grid, isPrevDisabled, isNextDisabled } = useYearsGrid({
+  const { grid } = useYearsGrid({
     baseDate,
     selectedDate,
     rangeDate,
@@ -43,13 +43,13 @@ export const YearPicker = ({
         {...headProps}
         arrowPostfixTitle={yearCaption.plural as string}
         isPlural
-        onPrevClick={!isPrevDisabled ? handlePrevClick : undefined}
-        onNextClick={!isNextDisabled ? handleNextClick : undefined}
+        onPrevClick={handlePrevClick}
+        onNextClick={handleNextClick}
         headBtnText={`${grid[0]?.year}-${grid.at(-1)?.year}`}
       />
       <DateCalendarGridLarge>
         {grid.map(({ year, date, ...props }, index) => (
-          <DateCalendarGridBtnLarge
+          <DateCalendarGridButtonLarge
             key={year}
             onClick={() => onChange?.(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
@@ -57,7 +57,7 @@ export const YearPicker = ({
             {...props}
           >
             {year}
-          </DateCalendarGridBtnLarge>
+          </DateCalendarGridButtonLarge>
         ))}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>

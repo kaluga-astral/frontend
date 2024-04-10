@@ -1,13 +1,12 @@
 import { useContext, useMemo } from 'react';
+
+import { MONTHS_IN_YEAR } from '../../../constants';
 import {
   DateCompareDeep,
-  addMonths,
   buildIsoDate,
   isDateOutOfRange,
-} from '@astral/utils';
-
-import { MONTHS_IN_YEAR } from '../../../constants/counts';
-import { GridBuilder, GridItem } from '../../../types';
+} from '../../../../utils/date';
+import { type GridBuilder, type GridItem } from '../../../types';
 import {
   buildGridResult,
   isDateBetweenSelectedAndRangeDates,
@@ -65,7 +64,6 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addMonths,
       deep: DateCompareDeep.month,
     });
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);

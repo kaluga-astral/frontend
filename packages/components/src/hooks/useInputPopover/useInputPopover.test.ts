@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { type RefObject } from 'react';
 import { act, fireEvent, renderHook, userEvents } from '@astral/tests';
 import { expect, vi } from 'vitest';
 
@@ -63,14 +63,14 @@ describe('useInputPopover', () => {
     });
 
     rerender();
-    expect(result.current.isOpenPopover).toBe(true);
+    expect(result.current.isOpenPopover).toBeTruthy();
 
     await act(() => {
       result.current.closePopover();
     });
 
     rerender();
-    expect(result.current.isOpenPopover).toBe(false);
+    expect(result.current.isOpenPopover).toBeFalsy();
   });
 
   it('стейт активности = false при использовании расширенных способов: фокус по внешнему инпуту', async () => {
@@ -83,7 +83,7 @@ describe('useInputPopover', () => {
     rerender();
     fireEvent.focus(inputOut);
     rerender();
-    expect(result.current.isOpenPopover).toBe(false);
+    expect(result.current.isOpenPopover).toBeFalsy();
   });
 
   it('стейт активности = false при использовании расширенных способов: клик по Escape', async () => {
@@ -95,7 +95,7 @@ describe('useInputPopover', () => {
 
     await userEvents.keyboard('{Escape}');
     rerender();
-    expect(result.current.isOpenPopover).toBe(false);
+    expect(result.current.isOpenPopover).toBeFalsy();
   });
 
   it('стейт активности = false при использовании расширенных способов: клик вне отслеживаемого рефа', async () => {
@@ -107,7 +107,7 @@ describe('useInputPopover', () => {
 
     await userEvents.click(document.body);
     rerender();
-    expect(result.current.isOpenPopover).toBe(false);
+    expect(result.current.isOpenPopover).toBeFalsy();
   });
 
   it('если закрыть поппер через closePopper, onBlur не вызывается', async () => {

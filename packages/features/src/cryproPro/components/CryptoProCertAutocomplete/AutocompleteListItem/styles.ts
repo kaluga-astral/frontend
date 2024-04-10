@@ -3,38 +3,38 @@ import {
   ListItemIcon,
   MenuItem,
   OverflowTypography,
-  TypographyProps,
+  type TypographyProps,
   styled,
 } from '@astral/ui';
 
-export const AutocompleteListAvatarIcon = styled(Avatar)`
+export const StyledAvatar = styled(Avatar)`
   background-color: ${({ theme }) => theme.palette.primary[800]};
 `;
 
-export const AutocompleteListItemLabel = styled.div`
+export const Label = styled.div`
   display: flex;
   flex-direction: column;
+
   width: 80%;
 `;
 
-export const AutocompleteListItemSideLabel = styled.div`
+export const SideLabel = styled.div`
   display: flex;
   align-self: start;
   justify-content: end;
+
   width: 20%;
 `;
 
-export const AutocompleteListItemLabelTitle = styled(
-  OverflowTypography,
-)<TypographyProps>`
-  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+export const LabelTitle = styled(OverflowTypography)<TypographyProps>`
   font-size: ${({ theme }) => theme.typography.fontSize};
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
 `;
 
-export const AutocompleteListItemIcon = styled(ListItemIcon)`
+export const StyledListItemIcon = styled(ListItemIcon)`
   display: flex;
-  align-self: center;
-  justify-self: center;
+  place-self: center center;
+
   padding-left: ${({ theme }) => theme.spacing(4)};
 `;
 
@@ -44,12 +44,14 @@ export const GroupMenuItem = styled(MenuItem, {
   ${({ theme, checked }) =>
     checked && `background-color: ${theme.palette.primary[100]};`}
   align-items: flex-start;
+
   padding: 0;
 `;
 
-export const AutocompleteListItemContent = styled(MenuItem)`
+export const Content = styled(MenuItem)`
   justify-content: space-around;
   justify-items: start;
+
   width: 100%;
   margin-left: 0;
   padding: ${({ theme }) => theme.spacing(2, 4, 2, 0)};

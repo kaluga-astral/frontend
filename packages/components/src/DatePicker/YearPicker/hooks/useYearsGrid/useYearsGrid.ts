@@ -1,13 +1,12 @@
 import { useContext, useMemo } from 'react';
-import {
-  DateCompareDeep,
-  addYears,
-  buildIsoDate,
-  isDateOutOfRange,
-} from '@astral/utils';
 
 import { YEARS_IN_GRID } from '../../constants';
-import { GridBuilder, GridItem } from '../../../types';
+import { type GridBuilder, type GridItem } from '../../../types';
+import {
+  DateCompareDeep,
+  buildIsoDate,
+  isDateOutOfRange,
+} from '../../../../utils/date';
 import {
   buildGridResult,
   isDateBetweenSelectedAndRangeDates,
@@ -67,7 +66,6 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
       grid,
       dateA: minDate,
       dateB: maxDate,
-      addCb: addYears,
       deep: DateCompareDeep.year,
     });
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);

@@ -4,7 +4,7 @@ import { renderWithTheme, screen } from '@astral/tests';
 import { FlowButton } from './FlowButton';
 
 describe('FlowButton', () => {
-  it('Prop:ref: is present', () => {
+  it('Ref доступен', () => {
     const resultRef = { current: null };
 
     const ButtonWithRef = () => {
@@ -25,7 +25,7 @@ describe('FlowButton', () => {
     expect(resultRef?.current).not.toBeNull();
   });
 
-  it('Prop:disabled: блокирует кнопку', () => {
+  it('Кнопка заблокирована, если disabled=true', () => {
     renderWithTheme(
       <FlowButton targetText="Далее" disabled>
         Выпустить УНЭП
@@ -35,5 +35,13 @@ describe('FlowButton', () => {
     const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
+  });
+
+  it('TargetText отображается в кнопке', () => {
+    renderWithTheme(<FlowButton targetText="Далее">Выпустить УНЭП</FlowButton>);
+
+    const button = screen.getByRole('button', { name: /Далее/ });
+
+    expect(button).toBeInTheDocument();
   });
 });

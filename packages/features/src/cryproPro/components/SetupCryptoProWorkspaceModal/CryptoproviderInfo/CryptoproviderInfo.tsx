@@ -2,9 +2,9 @@ import { Button, Description, Tooltip } from '@astral/ui';
 import { InfoFillSm, OpenLinkOutlineMd } from '@astral/ui';
 
 import { WorkspaceInfoItem } from '../styles';
-import { CheckWorkspace } from '../../../services';
+import { type CheckWorkspace } from '../../../services';
 
-import { CryptoproviderInfoIconWrapper } from './styles';
+import { IconWrapper } from './styles';
 
 type Props = {
   workspaceSetupInfo: CheckWorkspace;
@@ -17,12 +17,12 @@ export const CryptoproviderInfo = ({ workspaceSetupInfo }: Props) => {
         <>
           Нет данных
           <Tooltip
-            title="Данные о криптопровайдере будут получены после 
+            title="Данные о криптопровайдере будут получены после
           установки приложения “КриптоПро ЭЦП Browser plug-in” и обновления страницы браузера."
           >
-            <CryptoproviderInfoIconWrapper>
+            <IconWrapper>
               <InfoFillSm />
-            </CryptoproviderInfoIconWrapper>
+            </IconWrapper>
           </Tooltip>
         </>
       );

@@ -1,13 +1,14 @@
 import {
-  PaletteOptions as MuiPaletteOptions,
-  PaletteColorOptions,
-  SimplePaletteColorOptions,
+  type PaletteOptions as MuiPaletteOptions,
+  type PaletteColorOptions,
+  type SimplePaletteColorOptions,
 } from '@mui/material';
-import { TypeBackground } from '@mui/material/styles/createPalette';
+import { type TypeBackground } from '@mui/material/styles/createPalette';
 
 import { Brand } from '../constants';
 
-import { ColorBrand, brandPalette } from './brandPalette';
+import { type ColorBrand, brandPalette } from './brandPalette';
+import { type ComponentsColors, componentsColors } from './componentsColors';
 
 export type Color = {
   900: string;
@@ -34,9 +35,13 @@ type PaletteOptions = MuiPaletteOptions & {
   green: Color;
   yellow: Color;
   grey: Color;
+  error: Color;
+  warning: Color;
+  success: Color;
   primary: PrimaryColorOptions;
   background: Background;
   brand: ColorBrand;
+  components: ComponentsColors;
 };
 
 export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
@@ -79,49 +84,6 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#FEF3E6',
       ...brandColors.yellow,
     },
-    primary: {
-      main: brandColors.primary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.primary,
-    },
-    secondary: {
-      main: brandColors.secondary[800],
-      dark: brandColors.primary[900],
-      contrastText: '#FFF',
-      ...brandColors.secondary,
-    },
-    get success() {
-      return {
-        light: this.green[100],
-        main: this.green[600],
-        dark: this.green[800],
-        contrastText: '#FFF',
-      };
-    },
-    get warning() {
-      return {
-        light: this.yellow[100],
-        main: this.yellow[600],
-        dark: this.yellow[800],
-        contrastText: '#FFF',
-      };
-    },
-    get error() {
-      return {
-        light: this.red[100],
-        main: this.red[600],
-        dark: this.red[800],
-        contrastText: '#FFF',
-      };
-    },
-    get text() {
-      return {
-        primary: this.grey[900],
-        secondary: this.grey[700],
-        disabled: this.grey[500],
-      };
-    },
     grey: {
       900: '#072D57',
       800: '#1D3F66',
@@ -134,6 +96,18 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       100: '#F0F4F7',
       ...brandColors.grey,
     },
+    primary: {
+      main: brandColors.primary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.primary,
+    },
+    secondary: {
+      main: brandColors.secondary[800],
+      dark: brandColors.primary[900],
+      contrastText: '#FFF',
+      ...brandColors.secondary,
+    },
     background: {
       default: '#FFF',
       paper: '#FFF',
@@ -145,6 +119,44 @@ export const getPalette = (brand: Brand = Brand.DEFAULT): PaletteOptions => {
       800: brandColors.brand[800],
       background: brandColors.brand.background,
     },
+    get text() {
+      return {
+        primary: this.grey[900],
+        secondary: this.grey[700],
+        disabled: this.grey[500],
+      };
+    },
+    get info() {
+      return this.primary;
+    },
+    get warning() {
+      return {
+        ...this.yellow,
+        light: this.yellow[100],
+        main: this.yellow[600],
+        dark: this.yellow[800],
+        contrastText: '#FFF',
+      };
+    },
+    get success() {
+      return {
+        ...this.green,
+        light: this.green[100],
+        main: this.green[600],
+        dark: this.green[800],
+        contrastText: '#FFF',
+      };
+    },
+    get error() {
+      return {
+        ...this.red,
+        light: this.red[100],
+        main: this.red[600],
+        dark: this.red[800],
+        contrastText: '#FFF',
+      };
+    },
+    components: componentsColors,
   };
 };
 

@@ -1,11 +1,17 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { type ChangeEvent, useCallback, useMemo } from 'react';
 
 import { TableHead } from '../../Table/TableHead';
 import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { SortStates } from '../enums';
 import { DataGridHeadColumn } from '../DataGridHeadColumn';
-import { DataGridColumns, DataGridRow, DataGridSort } from '../types';
+import {
+  type DataGridColumns,
+  type DataGridRow,
+  type DataGridSort,
+} from '../types';
+
+import { DataGridInfiniteHead } from './styles';
 
 export type DataGridHeadProps<
   Data extends object = DataGridRow,
@@ -13,6 +19,11 @@ export type DataGridHeadProps<
 > = {
   columns: DataGridColumns<Data>[];
   selectable: boolean;
+  /**
+   * @example <DataGridHead isInfinite />
+   * Меняет компонент шапки таблицы для DataGridInfinite
+   */
+  isInfinite?: boolean;
   onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
   sorting?: DataGridSort<SortField>;
   onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
@@ -31,6 +42,7 @@ export function DataGridHead<
   onSort,
   sorting,
   uncheckedRowsCount,
+  isInfinite,
 }: DataGridHeadProps<Data, SortField>) {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
@@ -83,7 +95,20 @@ export function DataGridHead<
     });
   }, [columns, handleSort, sorting]);
 
-  return (
+  return isInfinite ? (
+    <DataGridInfiniteHead>
+      {selectable && (
+        <TableCell padding="checkbox">
+          <Checkbox
+            checked={checked}
+            indeterminate={indeterminate}
+            onChange={onSelectAllRows}
+          />
+        </TableCell>
+      )}
+      {renderColumns}
+    </DataGridInfiniteHead>
+  ) : (
     <TableHead>
       <TableRow>
         {selectable && (

@@ -1,27 +1,31 @@
 import {
-  AutocompleteRenderGetTagProps,
-  AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState,
+  type AutocompleteRenderGetTagProps,
+  type AutocompleteRenderInputParams,
+  type AutocompleteRenderOptionState,
   ListItemIcon,
   Autocomplete as MuiAutocomplete,
-  AutocompleteProps as MuiAutocompleteProps,
+  type AutocompleteProps as MuiAutocompleteProps,
+  Popper as MuiPopper,
 } from '@mui/material';
 import { forwardRef, useCallback } from 'react';
 import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
-import { TextField, TextFieldProps } from '../TextField';
+import { TextField, type TextFieldProps } from '../TextField';
 import { Tag } from '../Tag';
-import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 import {
   OverflowTypography,
-  OverflowedElementProps,
+  type OverflowedElementProps,
 } from '../OverflowTypography';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
+import { CircularProgress } from '../CircularProgress';
+import { Typography } from '../Typography';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
-import { AutocompleteSizes } from './enums';
+import { type AutocompleteSizes } from './enums';
+import { PopperWrapper, StyledMenuItem } from './styles';
+import { checkIsInputEmpty } from './utils';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 
@@ -45,13 +49,28 @@ export type AutocompleteProps<
 > &
   Pick<
     TextFieldProps,
-    'error' | 'success' | 'helperText' | 'label' | 'required' | 'inputRef'
+    | 'error'
+    | 'success'
+    | 'helperText'
+    | 'label'
+    | 'required'
+    | 'inputRef'
+    | 'placeholder'
   > & {
     renderInput?: (
       props: TextFieldProps & Omit<AutocompleteRenderInputParams, 'size'>,
     ) => ReactNode;
     size?: AutocompleteSize;
     overflowOption?: OverflowedElementProps;
+    /**
+     * Текст ошибки, который будет отображаться в меню автокомплита
+     * Пример использования: информирование пользователя о том, что АПИ используемого сервиса в текущий момент недоступно
+     */
+    loadedDataError?: string;
+    /**
+     * флаг, отвечающий за отображение сообщения об ошибке при загрузке данных в меню автокомплита
+     */
+    isLoadedDataError?: boolean;
   };
 
 const AutocompleteInner = <
@@ -71,15 +90,19 @@ const AutocompleteInner = <
     required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    disableClearable: externalDisableClearable,
     noOptionsText = 'Нет данных',
     closeText = 'Закрыть',
     openText = 'Открыть',
     clearText = 'Очистить',
+    loadingText = <CircularProgress color="primary" />,
     size = 'medium',
     overflowOption,
     inputRef,
     renderTags,
-    renderInput: ExternalRenderInput,
+    renderInput: externalRenderInput,
+    loadedDataError = 'На текущий момент сервис недоступен.',
+    isLoadedDataError,
     ...restProps
   }: AutocompleteProps<
     AutocompleteValueProps,
@@ -89,6 +112,10 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
+  const isEmpty = checkIsInputEmpty(restProps.value);
+
+  const disableClearable = isEmpty || Boolean(externalDisableClearable);
+
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
@@ -127,7 +154,7 @@ const AutocompleteInner = <
         ...inputParams,
         inputRef,
         required,
-        placeholder,
+        placeholder: isEmpty ? placeholder : '',
         label,
         success,
         error,
@@ -135,14 +162,15 @@ const AutocompleteInner = <
         size,
       };
 
-      return ExternalRenderInput ? (
-        <ExternalRenderInput {...generalInputParams} />
-      ) : (
-        <TextField {...generalInputParams} />
-      );
+      if (externalRenderInput) {
+        return externalRenderInput(generalInputParams);
+      }
+
+      return <TextField {...generalInputParams} />;
     },
     [
-      ExternalRenderInput,
+      isEmpty,
+      externalRenderInput,
       inputRef,
       required,
       placeholder,
@@ -167,7 +195,7 @@ const AutocompleteInner = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <MenuItem {...optionProps} key={optionProps.id}>
+        <StyledMenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
               <Checkbox role="menuitemcheckbox" checked={selected} />
@@ -179,10 +207,10 @@ const AutocompleteInner = <
           >
             {optionProps.key}
           </OverflowTypography>
-        </MenuItem>
+        </StyledMenuItem>
       );
     },
-    [multiple, externalRenderOption],
+    [multiple, overflowOption, externalRenderOption],
   );
 
   return (
@@ -192,12 +220,27 @@ const AutocompleteInner = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
+      PopperComponent={({ children, ...rest }) => (
+        <MuiPopper {...rest}>
+          {isLoadedDataError ? (
+            <PopperWrapper>
+              <Typography variant="body1" color="grey" colorIntensity="600">
+                {loadedDataError}
+              </Typography>
+            </PopperWrapper>
+          ) : (
+            children
+          )}
+        </MuiPopper>
+      )}
       renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
+      loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
+      disableClearable={disableClearable as DisableClearable}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText={noOptionsText}
       closeText={closeText}

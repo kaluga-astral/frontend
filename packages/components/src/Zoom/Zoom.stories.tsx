@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Paper, Switch } from '@mui/material';
-import { Theme } from '@mui/material/styles';
-import { Story } from '@storybook/react';
+import { type Theme } from '@mui/material/styles';
+import { type Story } from '@storybook/react';
 
 import { FormControlLabel } from '../FormControlLabel';
 

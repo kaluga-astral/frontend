@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
-import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox/Checkbox';
+import { type CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox/Checkbox';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 
-import { CheckboxStyled } from './styles';
+import { StyledCheckbox } from './styles';
 import { CheckedIcon, DefaultIcon, IndeterminateIcon } from './icons';
 
 export type CheckboxProps = Omit<
@@ -27,7 +27,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
     ref,
   ) => {
     return (
-      <CheckboxStyled
+      <StyledCheckbox
         ref={ref}
         icon={icon}
         checkedIcon={checkedIcon}

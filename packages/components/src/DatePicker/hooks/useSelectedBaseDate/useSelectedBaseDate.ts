@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+
 import {
   DateCompareDeep,
   areDatesSame,
   isDate,
   isDateOutOfRange,
-} from '@astral/utils';
-
-import { MinMaxDate } from '../../types';
+} from '../../../utils/date';
+import { type MinMaxDate } from '../../types';
 
 type UseSelectedBaseDateOptions = {
   currentValue?: Date;

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { addMonths, buildIsoDate } from '@astral/utils';
 
-import { MinMaxDate } from '../../types';
+import { type MinMaxDate } from '../../types';
+import { addMonths, buildIsoDate } from '../../../utils/date';
 
 type UseBaseDateInRangeOptions = MinMaxDate & {
   /**
@@ -10,6 +10,11 @@ type UseBaseDateInRangeOptions = MinMaxDate & {
    * @default 0
    */
   monthOffset?: number;
+
+  /**
+   * @description Дата для инициализации опорной даты,
+   */
+  initialDate?: Date;
 };
 
 /**
@@ -19,9 +24,10 @@ export const useBaseDateInRange = ({
   minDate,
   maxDate,
   monthOffset = 0,
+  initialDate,
 }: UseBaseDateInRangeOptions): Date =>
   useMemo(() => {
-    const currentDate = addMonths(new Date(), monthOffset);
+    const currentDate = addMonths(initialDate || new Date(), monthOffset);
     const baseDate = buildIsoDate({
       year: currentDate.getUTCFullYear(),
       month: currentDate.getUTCMonth() + 1,
@@ -38,4 +44,4 @@ export const useBaseDateInRange = ({
     }
 
     return baseDate;
-  }, [minDate, maxDate, monthOffset]);
+  }, [initialDate, minDate, maxDate, monthOffset]);

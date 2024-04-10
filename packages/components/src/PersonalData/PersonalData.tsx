@@ -1,5 +1,5 @@
 import {
-  FunctionComponentElement,
+  type FunctionComponentElement,
   cloneElement,
   isValidElement,
   useContext,

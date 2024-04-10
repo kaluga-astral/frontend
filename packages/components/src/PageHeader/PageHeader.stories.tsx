@@ -1,270 +1,566 @@
-import { AddOutlineMd, SearchOutlineMd } from '@astral/icons';
-import { Stack } from '@mui/material';
-import { Story } from '@storybook/react';
-import { Fragment } from 'react';
+import { type Meta } from '@storybook/react';
+import {
+  AddOutlineMd,
+  CompanyOutlineMd,
+  EyeFillMd,
+  ProfileOutlineMd,
+  QuitOutlineMd,
+  SearchOutlineMd,
+  SendOutlineMd,
+  SettingsFillMd,
+} from '@astral/icons';
+import { Box, Stack } from '@mui/material';
+import { type ChangeEvent, Fragment, useState } from 'react';
 
-import { ExampleTemplate } from '../docs';
-import { Select } from '../Select';
+import { styled } from '../styles';
 import { TextField } from '../TextField';
-import { Typography } from '../Typography';
+import { Select } from '../Select';
+import { ActionCell, type Actions as ActionsCellProps } from '../ActionCell';
+import { DashboardLayout } from '../DashboardLayout';
+import { type SidebarProps } from '../DashboardLayout/Sidebar';
+import { DataGrid, type DataGridColumns } from '../DataGrid';
+import { DataGridPagination } from '../DataGridPagination';
+import { Divider } from '../Divider';
+import { ListItemIcon } from '../ListItemIcon';
+import { ListItemText } from '../ListItemText';
+import { Menu, type MenuProps } from '../Menu';
+import { MenuItem } from '../MenuItem';
+import { PageLayout } from '../PageLayout';
+import { ProductSwitcher } from '../ProductSwitcher';
+import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 
-import { PageHeader, PageHeaderProps } from './PageHeader';
-import { PageHeaderDashboardStory } from './PageHeaderDashboardStory';
+import { PageHeader } from './PageHeader';
 
-export default {
+type DataType = {
+  id: string;
+  documentName: string;
+  direction: string;
+  createDate: string;
+};
+
+const ACTIONS: ActionsCellProps<DataType> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+    },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
+      ],
+    },
+  ],
+  secondary: [
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
+  ],
+};
+
+const data: DataType[] = [
+  {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '2',
+    documentName: 'Документ 2',
+    direction: 'ФСС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '3',
+    documentName: 'Документ 3',
+    direction: 'ПФР',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '4',
+    documentName: 'Документ 4',
+    direction: 'РПН',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '5',
+    documentName: 'Документ 5',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '6',
+    documentName: 'Документ 6',
+    direction: 'РПН',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '7',
+    documentName: 'Документ 7',
+    direction: 'ПФР',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '8',
+    documentName: 'Документ 8',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '9',
+    documentName: 'Документ 9',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '10',
+    documentName: 'Документ 10',
+    direction: 'ФСС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '11',
+    documentName: 'Документ 11',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '12',
+    documentName: 'Документ 12',
+    direction: 'РПН',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '13',
+    documentName: 'Документ 13',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '15',
+    documentName: 'Документ 14',
+    direction: 'ФСС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '14',
+    documentName: 'Документ 15',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+  {
+    id: '16',
+    documentName: 'Документ 12',
+    direction: 'РПН',
+    createDate: '2022-03-24T17:50:40.206Z',
+  },
+];
+
+const columns: DataGridColumns<DataType>[] = [
+  {
+    field: 'documentName',
+    label: 'Наименование документа',
+    sortable: true,
+  },
+  {
+    field: 'direction',
+    label: 'Направление',
+    sortable: true,
+  },
+  {
+    field: 'createDate',
+    label: 'Дата создания',
+    sortable: true,
+    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+  },
+  {
+    label: 'Действия',
+    sortable: false,
+    align: 'center',
+    width: '1%',
+    renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+  },
+];
+
+export const PageHeaderDashboardStory = () => {
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));
+  const [page, setPage] = useState<number>(1);
+
+  const header = {
+    productSwitcher() {
+      return (
+        <Box>
+          <ProductSwitcher getProducts={handleGetProducts} />
+        </Box>
+      );
+    },
+    product: {
+      name: 'Астрал.ЭДО',
+      logo() {
+        return (
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.5 6.10352e-05C5.1195 6.10352e-05 4 1.11956 4 2.50006V3.00006H13.75C15.545 3.00006 17 4.45506 17 6.25006V11.2501C17 12.2166 16.2165 13.0001 15.25 13.0001H8.75C7.7835 13.0001 7 12.2166 7 11.2501V8.00006H5C4.4475 8.00006 4 8.44756 4 9.00006V13.5001C4 14.8806 5.1195 16.0001 6.5 16.0001H17.5C18.8805 16.0001 20 14.8806 20 13.5001V2.50006C20 1.11956 18.8805 6.10352e-05 17.5 6.10352e-05H6.5Z"
+              fill="#8566FF"
+            />
+            <path
+              d="M2.5 4.00006C1.1195 4.00006 0 5.11956 0 6.50006V17.5001C0 18.8806 1.1195 20.0001 2.5 20.0001H13.5C14.8805 20.0001 16 18.8806 16 17.5001V17.0001H6.25C4.455 17.0001 3 15.5451 3 13.7501V8.75006C3 7.78356 3.7835 7.00006 4.75 7.00006H11.25C12.2165 7.00006 13 7.78356 13 8.75006V12.0001H15C15.5525 12.0001 16 11.5526 16 11.0001V6.50006C16 5.11956 14.8805 4.00006 13.5 4.00006H2.5Z"
+              fill="#5D3FD4"
+            />
+          </svg>
+        );
+      },
+    },
+    profile: {
+      displayName: 'Григорьев Виталий',
+      annotation: 'vitatiy_grig@mail.ru',
+      avatar: {
+        alt: 'Григорьев Виталий',
+        children: 'ГВ',
+      },
+      menu(props: MenuProps) {
+        return (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мой профиль</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мои организации</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>Настройки</ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Выйти</ListItemText>
+            </MenuItem>
+          </Menu>
+        );
+      },
+    },
+  };
+  const sidebar = {
+    menu: {
+      items: [
+        [
+          'documents',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Документы',
+            items: [
+              [
+                'incoming-documents',
+                {
+                  text: 'Входящие документы',
+                  active: true,
+                },
+              ],
+              [
+                'outgoing-documents',
+                {
+                  text: 'Исходящие документы',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'counterparties',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Контрагенты',
+            items: [
+              [
+                'invitations',
+                {
+                  text: 'Приглашения',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'organizations',
+          {
+            icon: <CompanyOutlineMd />,
+            text: 'Мои организации',
+            active: true,
+          },
+        ],
+      ],
+    },
+  } as SidebarProps;
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DashboardLayout>
+      <DashboardLayout.Header {...header} />
+      <DashboardLayout.Sidebar {...sidebar} />
+      <DashboardLayout.Main>
+        <PageLayout
+          header={{
+            title: 'Черновики',
+            breadcrumbs: [
+              <Fragment key="1">Первый текст</Fragment>,
+              <Fragment key="2">Текст с разделителем</Fragment>,
+              <Fragment key="3">Текст с разделителем</Fragment>,
+            ],
+            actions: {
+              main: [
+                {
+                  text: 'Основное действие',
+                  startIcon: <AddOutlineMd />,
+                },
+              ],
+              secondary: [
+                {
+                  text: 'Кнопка',
+                },
+              ],
+            },
+            subheader: (
+              <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+                <TextField
+                  placeholder="Поиск на странице..."
+                  size="small"
+                  InputProps={{
+                    startAdornment: <SearchOutlineMd />,
+                  }}
+                />
+                <Select value="" placeholder="Выберите вариант" size="small" />
+                <Select value="" placeholder="Выберите вариант" size="small" />
+              </Stack>
+            ),
+          }}
+          content={{
+            children: (
+              <DataGrid
+                keyId="id"
+                rows={slicedData}
+                columns={columns}
+                selectedRows={selected}
+                onSelectRow={handleSelect}
+                onRowClick={handleRowClick}
+                minDisplayRows={10}
+                loading={loading}
+                Footer={
+                  <DataGridPagination
+                    totalCount={data.length}
+                    onChange={handleChangePage}
+                    page={page}
+                  />
+                }
+              />
+            ),
+            isPaddingDisabled: false,
+          }}
+        />
+      </DashboardLayout.Main>
+    </DashboardLayout>
+  );
+};
+
+/**
+ * **PageHeader** — вводная часть страницы, состоит из группы вводных или навигационных элементов.<br>
+ * Данный компонент является составным. В него входят: **Header** и **Subheader**.
+ *
+ * **Header**<br>
+ * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
+ *
+ * **Subheader**<br>
+ * “Второй” заголовок на странице.<br>
+ * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сотрировки данных) и кнопку дополнительных фильтров на странице.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof PageHeader> = {
   title: 'Components/PageLayout/PageHeader',
   component: PageHeader,
 };
 
-export const Showcase: Story = () => {
-  return (
-    <ExampleTemplate>
-      <Typography paragraph variant="h3">
-        Page Header
-      </Typography>
-      <Typography paragraph>
-        Page Header — вводная часть страницы, состоит из группы вводных или
-        навигационных элементов.
-      </Typography>
-      <Typography paragraph>
-        Данный компонент является составным. В него входят: Header и Subheader.
-      </Typography>
-      <Typography variant="h4" paragraph>
-        Header
-      </Typography>
-      <Typography>
-        Данный компонет включает в себя заголовок страницы. Второстепенными
-        элементами могут быть: кнопки действий на странице, breadcrumbs (хлебные
-        крошки, или навигация), текст.
-      </Typography>
-      <ExampleTemplate.Case
-        title="Simple header"
-        descriptionList={[
-          'Включает в себя только заголовок страницы.',
-          'Компонент используется в случаях, когда на странице у пользователя нет дополнителных действий, которые относятся ко всему разделу.',
-        ]}
-      >
-        <PageHeader title="Черновики" />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Header with button"
-        descriptionList={[
-          'Включает в себя заголовок страницы и кнопки.',
-          'Кнопки действий, которые относятся ко всему разделу, располагаются в правой части страницы согласно внутренней сетке на уровне Заголовка.',
-          'На странице рядом можно разместить до 3х кнопок: крайняя справа - кнопка основного действия, последующие - второстепенные кнопки. Если на странице у пользователя есть необходимость разместить более 3х кнопок, то второстепенные кнопки могут быть объединены в выпадающий список (кнопка с тремя точками).',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          actions={{
-            main: [
-              {
-                text: 'Основное действие',
-                startIcon: <AddOutlineMd />,
-              },
-            ],
-            secondary: [
-              {
-                text: 'Кнопка',
-              },
-            ],
-          }}
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Header with breadcrumbs"
-        descriptionList={[
-          'Включает в себя “хлебные крошки” и заголовок страницы.  Может применяться с кнопками действий на странице и без них.',
-          '“Хлебные крошки” располагаются над заголовком страницы.',
-          'Компонент используется в случаях, когда есть необходимость отображения пути до текущей страницы.',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          actions={{
-            main: [
-              {
-                text: 'Основное действие',
-                startIcon: <AddOutlineMd />,
-              },
-            ],
-            secondary: [
-              {
-                text: 'Кнопка',
-              },
-            ],
-          }}
-          breadcrumbs={[
-            <Fragment key="1">Первый текст</Fragment>,
-            <Fragment key="2">Текст с разделителем</Fragment>,
-            <Fragment key="3">Текст с разделителем</Fragment>,
-          ]}
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Header with text"
-        descriptionList={[
-          'Включает в себя заголовок страницы и текст. Может применяться с кнопками действий на странице и без них.',
-          'Располагается под заголовком страницы.',
-          'Компонент используется в случаях, когда есть необходимость отображения поясняющего текста к данным на странице.',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          actions={{
-            main: [
-              {
-                text: 'Основное действие',
-                startIcon: <AddOutlineMd />,
-              },
-            ],
-            secondary: [
-              {
-                text: 'Кнопка',
-              },
-            ],
-          }}
-          description="В таблице представлены данные, которые..."
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Header with breadcrumbs + text"
-        descriptionList={[
-          'Включает в себя заголовок страницы, навигационную панель и текст. Может применяться с кнопками действий на странице и без них.',
-          'Компонент используется в случаях, когда есть необходимость отображения поясняющего текста к данным и пути до текущей страницы.',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          actions={{
-            main: [
-              {
-                text: 'Основное действие',
-                startIcon: <AddOutlineMd />,
-              },
-            ],
-            secondary: [
-              {
-                text: 'Кнопка',
-              },
-            ],
-          }}
-          description="В таблице представлены данные, которые..."
-          breadcrumbs={[
-            <Fragment key="1">Первый текст</Fragment>,
-            <Fragment key="2">Текст с разделителем</Fragment>,
-            <Fragment key="3">Текст с разделителем</Fragment>,
-          ]}
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Header with back"
-        descriptionList={[
-          'Включает в себя заголовок страницы и кнопку “Назад”. Может применяться как с другми элементами хдера: кнопками действий и текстом, так и без них.',
-          'Располагается слева от заголовка страницы.',
-          'Компонент используется в случаях, когда произошел переход внутри одной страницы на другую.',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          actions={{
-            main: [
-              {
-                text: 'Основное действие',
-                startIcon: <AddOutlineMd />,
-              },
-            ],
-            secondary: [
-              {
-                text: 'Кнопка',
-              },
-            ],
-          }}
-          description="Text"
-          backButton={{}}
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case
-        title="Subheader"
-        descriptionList={[
-          'Subheader - это “второй” заголовок на странице.',
-          'Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сотрировки данных) и кнопку дополнительных фильтров на странице.',
-          'Поиск занимает крайнее левое положение, а кнопка фильтра - крайнее правое положение на странице согласно внутренней сетке.',
-          'Фастфильтры или элементы сортировки при наличии поиска располагются справа от него, или при его отсутствии - занимают крайнее левое положение на странице. Их количество в строке может использоваться от 1 до 6.',
-          'Отображение компонента:',
-        ]}
-      >
-        <PageHeader
-          title="Черновики"
-          subheader={
-            <Stack flexDirection="row" flexWrap="wrap" gap={2}>
-              <TextField
-                placeholder="Поиск на странице..."
-                size="small"
-                InputProps={{
-                  startAdornment: <SearchOutlineMd />,
-                }}
-              />
-              <Select value="" placeholder="Выберите вариант" size="small" />
-              <Select value="" placeholder="Выберите вариант" size="small" />
-              <Select value="" placeholder="Выберите вариант" size="small" />
-              <Select value="" placeholder="Выберите вариант" size="small" />
-            </Stack>
-          }
-        />
-      </ExampleTemplate.Case>
-      <ExampleTemplate.Case title="Пример использования" fullWidth>
-        <PageHeaderDashboardStory />
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
-  );
-};
+export default meta;
 
-Showcase.parameters = { options: { showPanel: false } };
+const Wrapper = styled.div`
+  width: 100%;
+  padding-block: ${({ theme }) => theme.spacing(5)};
+`;
 
-const Template: Story<PageHeaderProps> = (args) => <PageHeader {...args} />;
+export const Example = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
+      }}
+      backButton={{}}
+    />
+  </Wrapper>
+);
 
-export const PageHeaderStory = Template.bind({});
+export const Default = () => (
+  <Wrapper>
+    <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
+  </Wrapper>
+);
 
-PageHeaderStory.storyName = 'Default';
-
-PageHeaderStory.args = {
-  title: 'Заголовок',
-  description: 'Описание',
-  breadcrumbs: [
-    <Fragment key="1">Первый текст</Fragment>,
-    <Fragment key="2">Текст с разделителем</Fragment>,
-    <Fragment key="3">Текст с разделителем</Fragment>,
-  ],
-  actions: {
-    main: [
-      {
-        text: 'Основное действие',
-      },
-    ],
-    secondary: [
-      {
-        text: 'Кнопка',
-      },
-    ],
-  },
-  subheader: (
-    <TextField
-      placeholder="Поиск на странице..."
-      size="small"
-      InputProps={{
-        startAdornment: <SearchOutlineMd />,
+/** Кнопки действий. Доступно 2 варианта отображения: основной и второстепенный.
+ *
+ * В основном варианте действия отображаются в "полном формате кнопок"<br>
+ * Во второстепенном варианте действия трансформируются в выпадающий список
+ * */
+export const Actions = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          {
+            text: 'действие 2',
+            isNested: true,
+            actions: [
+              { text: 'действие в списке 1' },
+              { text: 'действие в списке 2' },
+            ],
+          },
+          { text: 'действие 3', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
       }}
     />
-  ),
-};
+  </Wrapper>
+);
 
-PageHeaderStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+/** "Хлебные крошки" */
+export const Breadcrumbs = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      breadcrumbs={[
+        <Fragment key="1">Первый текст</Fragment>,
+        <Fragment key="2">Текст с разделителем</Fragment>,
+        <Fragment key="3">Текст с разделителем</Fragment>,
+      ]}
+    />
+  </Wrapper>
+);
+
+/** Предназначена для обработки действия возврата на предыдущую страницу */
+export const BackButton = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      backButton={{ onClick: () => console.log('go back') }}
+    />
+  </Wrapper>
+);
+
+/** Блок, распологающийся после заголовка. Может быть полезен, если необходимо добавить описание к текущей странице */
+export const HeaderDescription = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      description="Вы находитесь на странице, которая..."
+    />
+  </Wrapper>
+);
+
+/** Subheader - это “второй” заголовок на странице.
+ *
+ * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сотрировки данных) и кнопку дополнительных фильтров на странице.
+ * Поиск занимает крайнее левое положение, а кнопка фильтра - крайнее правое положение на странице согласно внутренней сетке.
+ * Фастфильтры или элементы сортировки при наличии поиска располагются справа от него, или при его отсутствии - занимают крайнее левое положение на странице. Их количество в строке может использоваться от 1 до 6.
+ * */
+export const Subheader = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      description="Вы находитесь на странице, которая содержит Subheader"
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
+      }}
+      subheader={
+        <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+          <TextField
+            placeholder="Поиск на странице..."
+            size="small"
+            InputProps={{
+              startAdornment: <SearchOutlineMd />,
+            }}
+          />
+          <Select value="" placeholder="Выберите вариант" size="small" />
+          <Select value="" placeholder="Выберите вариант" size="small" />
+          <Select value="" placeholder="Выберите вариант" size="small" />
+          <Select value="" placeholder="Выберите вариант" size="small" />
+        </Stack>
+      }
+    />
+  </Wrapper>
+);
+
+/** Пример использования  */
+export const Usage = () => (
+  <Wrapper>
+    <PageHeaderDashboardStory />
+  </Wrapper>
+);

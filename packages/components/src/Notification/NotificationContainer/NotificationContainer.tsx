@@ -1,9 +1,9 @@
-import { ToastContainerProps } from 'react-toastify';
+import { type ToastContainerProps } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import { NOTIFY_CLASSNAME, NOTIFY_POSITIONS } from '../constants';
 
-import { NotificationContainerInner, NotificationsWrapper } from './styles';
+import { Inner, Wrapper } from './styles';
 
 if (typeof window !== 'undefined') {
   injectStyle();
@@ -14,8 +14,8 @@ export type NotificationContainerProps = Omit<ToastContainerProps, 'theme'> & {
 };
 
 export const NotificationContainer = (props: NotificationContainerProps) => (
-  <NotificationsWrapper>
-    <NotificationContainerInner
+  <Wrapper>
+    <Inner
       {...props}
       pauseOnFocusLoss
       position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
@@ -28,5 +28,5 @@ export const NotificationContainer = (props: NotificationContainerProps) => (
       toastClassName={NOTIFY_CLASSNAME}
       progressClassName={`${NOTIFY_CLASSNAME}__progress`}
     />
-  </NotificationsWrapper>
+  </Wrapper>
 );

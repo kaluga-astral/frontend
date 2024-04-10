@@ -2,23 +2,19 @@ import {
   FormControl,
   InputLabel,
   Select as MuiSelect,
-  SelectProps as MuiSelectProps,
+  type SelectProps as MuiSelectProps,
 } from '@mui/material';
-import React, { ForwardedRef, ReactNode } from 'react';
+import React, { type ForwardedRef, type ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { Tag } from '../Tag';
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import {
-  SelectPlaceholder,
-  SelectProgressWrapper,
-  SelectTagsWrapper,
-} from './styles';
+import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -51,6 +47,7 @@ const SelectInner = <Value,>(
     children,
     error,
     label,
+    fullWidth,
     ...props
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
@@ -58,13 +55,13 @@ const SelectInner = <Value,>(
   const renderValue = (selectedOptions: Value): ReactNode => {
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
-        <SelectTagsWrapper>
+        <TagsWrapper>
           {selectedOptions.map((option) => {
             const optionLabel = getOptionLabel(option);
 
             return <Tag key={option} color="grey" label={optionLabel} />;
           })}
-        </SelectTagsWrapper>
+        </TagsWrapper>
       );
     }
 
@@ -81,7 +78,7 @@ const SelectInner = <Value,>(
   const isNoData = !Boolean(React.Children.count(children));
 
   return (
-    <FormControl error={error}>
+    <FormControl error={error} fullWidth={fullWidth}>
       {label && (
         <InputLabel htmlFor="grouped-select" required={required}>
           {label}
@@ -93,12 +90,13 @@ const SelectInner = <Value,>(
         IconComponent={ChevronDOutlineMd}
         displayEmpty
         ref={ref}
+        fullWidth={fullWidth}
       >
-        <SelectPlaceholder value="">{placeholder}</SelectPlaceholder>
+        <Placeholder value="">{placeholder}</Placeholder>
         {loading && (
-          <SelectProgressWrapper>
+          <ProgressWrapper>
             <CircularProgress color="primary" />
-          </SelectProgressWrapper>
+          </ProgressWrapper>
         )}
         {!loading && children}
         {!loading && isNoData && <MenuItem disabled>Нет данных</MenuItem>}

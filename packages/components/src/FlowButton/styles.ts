@@ -2,10 +2,11 @@ import { styled } from '../styles';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
 
-export const FlowButtonWrapper = styled(Button)`
+export const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   min-width: 300px;
   min-height: 71px;
   padding: ${({ theme: { spacing } }) => spacing(4, 5)};

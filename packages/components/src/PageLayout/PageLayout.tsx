@@ -1,6 +1,6 @@
-import { PageAside, PageAsideProps } from '../PageAside';
-import { PageContent, PageContentProps } from '../PageContent';
-import { PageHeader, PageHeaderProps } from '../PageHeader';
+import { PageAside, type PageAsideProps } from '../PageAside';
+import { PageContent, type PageContentProps } from '../PageContent';
+import { PageHeader, type PageHeaderProps } from '../PageHeader';
 import { PageLayoutContainer } from '../PageLayoutContainer';
 
 export type PageLayoutProps = {
@@ -19,7 +19,7 @@ export type PageLayoutProps = {
    * }} />
    * Конфигурация PageContent
    */
-  content: Omit<PageContentProps, 'isSeparatorShown'>;
+  content: Omit<PageContentProps, 'isSeparatorShown' | 'isHeaderActionsShown'>;
   /**
    * @example <PageLayout aside={{
    *  children: 'Боковая панель страницы',
@@ -27,16 +27,25 @@ export type PageLayoutProps = {
    * Конфигурация PageAside
    */
   aside?: PageAsideProps;
+  className?: string;
 };
 
 export const PageLayout = (props: PageLayoutProps) => {
-  const { header, content, aside } = props;
-  const isSeparatorShown = Boolean(aside);
+  const { header, content, aside, className } = props;
+  const hasAside = Boolean(aside);
+  const isHeaderActionsShown = Boolean(header.actions);
 
   return (
-    <PageLayoutContainer>
+    <PageLayoutContainer
+      isHeaderActionsShown={isHeaderActionsShown}
+      className={className}
+    >
       <PageHeader {...header} />
-      <PageContent isSeparatorShown={isSeparatorShown} {...content} />
+      <PageContent
+        isSeparatorShown={hasAside}
+        isFullHeight={hasAside}
+        {...content}
+      />
       {aside && <PageAside {...aside} />}
     </PageLayoutContainer>
   );

@@ -1,12 +1,15 @@
-import { ClickAwayListener, PopoverProps } from '@mui/material';
+import { ClickAwayListener, type PopoverProps } from '@mui/material';
 import { forwardRef } from 'react';
 
 import { useMenu } from '../hooks';
 import { Menu } from '../Menu';
-import { Button, ButtonProps } from '../Button';
+import { Button, type ButtonProps } from '../Button';
 import { Chevron } from '../Chevron';
 
-export type DropdownButtonProps = Omit<ButtonProps, 'endIcon'> & {
+export type DropdownButtonProps = Omit<
+  ButtonProps,
+  'endIcon' | 'selected' | 'onClick'
+> & {
   /** Название кнопки */
   name: string;
   /** Пропсы Popover компонента */
@@ -25,6 +28,7 @@ export const DropdownButton = forwardRef<
         <Button
           {...props}
           ref={anchorRef}
+          selected={open}
           onClick={handleOpenMenu}
           endIcon={<Chevron isActive={open} />}
         >

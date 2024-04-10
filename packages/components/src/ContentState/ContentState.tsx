@@ -1,6 +1,6 @@
-import { ReactNode, useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 
-import { Placeholder, PlaceholderProps } from '../Placeholder';
+import { Placeholder, type PlaceholderProps } from '../Placeholder';
 import { CircularProgress } from '../CircularProgress';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
@@ -8,9 +8,9 @@ import { ErrorBoundary } from '../ErrorBoundary';
 import { ConfigContext } from '../ConfigProvider';
 
 import { LoadingContainer } from './styles';
-import { ContentStateErrorProps } from './types';
+import { type ContentStateErrorProps } from './types';
 
-type ContentStateProps = {
+export type ContentStateProps = {
   /**
    * Флаг состояния загрузки
    */
@@ -26,7 +26,7 @@ type ContentStateProps = {
   /**
    * Параметры для отображения состояния ошибки
    */
-  errorState?: ContentStateErrorProps;
+  errorState?: Omit<ContentStateErrorProps, 'imgAlt'> & { imgAlt?: string };
   /**
    * Флаг для отображения custom состояния ошибки
    */

@@ -1,16 +1,16 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { type HTMLAttributes, type ReactNode } from 'react';
 import { ListItemAvatar, OverflowTypography } from '@astral/ui';
 
-import { CertificateType } from '../../../constants';
+import { type CertificateType } from '../../../constants';
 
 import {
-  AutocompleteListAvatarIcon,
-  AutocompleteListItemContent,
-  AutocompleteListItemIcon,
-  AutocompleteListItemLabel,
-  AutocompleteListItemLabelTitle,
-  AutocompleteListItemSideLabel,
+  Content,
   GroupMenuItem,
+  Label,
+  LabelTitle,
+  SideLabel,
+  StyledAvatar,
+  StyledListItemIcon,
 } from './styles';
 import { getShortFullName } from './utils';
 
@@ -39,19 +39,19 @@ const AutocompleteListItemLabelGroup = ({
   sidetitle,
 }: AutocompleteListItemLabelGroupProps) => (
   <>
-    <AutocompleteListItemLabel>
+    <Label>
       <OverflowTypography>
-        <AutocompleteListItemLabelTitle>{title}</AutocompleteListItemLabelTitle>
+        <LabelTitle>{title}</LabelTitle>
       </OverflowTypography>
       <OverflowTypography color="grey" colorIntensity="600">
         {subtitle}
       </OverflowTypography>
-    </AutocompleteListItemLabel>
-    <AutocompleteListItemSideLabel>
+    </Label>
+    <SideLabel>
       <OverflowTypography color="grey" colorIntensity="600">
         {sidetitle}
       </OverflowTypography>
-    </AutocompleteListItemSideLabel>
+    </SideLabel>
   </>
 );
 
@@ -67,12 +67,12 @@ export const AutocompleteListItem = ({
 }: AutocompleteListItemProps) => {
   return (
     <GroupMenuItem {...restProps} disabled={disabled} checked={checked}>
-      <AutocompleteListItemIcon>
+      <StyledListItemIcon>
         <ListItemAvatar>
-          <AutocompleteListAvatarIcon>{type}</AutocompleteListAvatarIcon>
+          <StyledAvatar>{type}</StyledAvatar>
         </ListItemAvatar>
-      </AutocompleteListItemIcon>
-      <AutocompleteListItemContent>
+      </StyledListItemIcon>
+      <Content>
         <AutocompleteListItemLabelGroup
           title={title}
           subtitle={
@@ -83,7 +83,7 @@ export const AutocompleteListItem = ({
           }
           sidetitle={getShortFullName(sidetitle)}
         />
-      </AutocompleteListItemContent>
+      </Content>
     </GroupMenuItem>
   );
 };

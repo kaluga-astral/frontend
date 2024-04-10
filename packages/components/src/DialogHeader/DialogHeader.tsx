@@ -1,25 +1,30 @@
-import React from 'react';
-import { ModalProps } from '@mui/material';
+import React, { type CSSProperties } from 'react';
+import { type ModalProps } from '@mui/material';
 import { CrossOutlineMd } from '@astral/icons';
 
-import { GridContainerProps, LegacyGrid } from '../LegacyGrid';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 
-import { DialogHeaderRoot } from './styles';
+import { HeaderContent, Wrapper } from './styles';
 
 export type DialogHeaderProps = {
-  children: React.ReactNode;
-  justifyContent?: GridContainerProps['justifyContent'];
-  title?: string;
+  /**
+   * @description Горизонтальное выравнивание
+   * */
+  justifyContent?: CSSProperties['justifyContent'];
+  /**
+   * @description Убирает расстояние между компонентами
+   * */
   disableSpacing?: boolean;
+  title?: string;
   onClose?: ModalProps['onClose'];
+  children: React.ReactNode;
 };
 
 export const DialogHeader = ({
   children,
-  justifyContent = 'left',
   title,
+  justifyContent = 'flex-start',
   disableSpacing,
   onClose,
 }: DialogHeaderProps) => {
@@ -30,17 +35,14 @@ export const DialogHeader = ({
   };
 
   return (
-    <DialogHeaderRoot hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
+    <Wrapper hasTitle={Boolean(title)} hasOnClose={Boolean(onClose)}>
       {title && <Typography variant="h4">{title}</Typography>}
-      <LegacyGrid
-        container
+      <HeaderContent
         justifyContent={justifyContent}
-        alignItems="center"
-        autoFlow="column"
-        spacing={disableSpacing ? 0 : 2}
+        columnSpacing={disableSpacing ? 0 : 2}
       >
         {children}
-      </LegacyGrid>
+      </HeaderContent>
       {onClose && (
         <IconButton
           variant="text"
@@ -50,6 +52,6 @@ export const DialogHeader = ({
           <CrossOutlineMd />
         </IconButton>
       )}
-    </DialogHeaderRoot>
+    </Wrapper>
   );
 };

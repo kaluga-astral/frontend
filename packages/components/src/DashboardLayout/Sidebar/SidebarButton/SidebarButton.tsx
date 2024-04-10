@@ -1,28 +1,28 @@
 import { forwardRef, useContext } from 'react';
 
-import { ButtonProps } from '../../../Button';
+import { type ButtonProps } from '../../../Button';
 import { Collapse } from '../../../Collapse';
 import { Tooltip } from '../../../Tooltip';
-import { SidebarContext } from '../SidebarProvider';
+import { DashboardSidebarContext } from '../../../DashboardSidebarProvider';
 
 import { SidebarButton as Button } from './styles';
 
 export const SidebarButton = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const { children } = props;
-    const { isOpen } = useContext(SidebarContext);
+    const { collapsedIn } = useContext(DashboardSidebarContext);
 
     return (
       <Tooltip
         arrow
         title={children}
         placement="right"
-        disableFocusListener={isOpen}
-        disableHoverListener={isOpen}
-        disableTouchListener={isOpen}
+        disableFocusListener={collapsedIn}
+        disableHoverListener={collapsedIn}
+        disableTouchListener={collapsedIn}
       >
-        <Button ref={ref} isOpen={isOpen} {...props}>
-          <Collapse orientation="horizontal" in={isOpen}>
+        <Button ref={ref} isOpen={collapsedIn} {...props}>
+          <Collapse orientation="horizontal" in={collapsedIn}>
             {children}
           </Collapse>
         </Button>

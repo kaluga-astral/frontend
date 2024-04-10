@@ -3,12 +3,17 @@ import { forwardRef, useMemo } from 'react';
 import { InputAdornment } from '@mui/material';
 import { CalendarOutlineMd } from '@astral/icons';
 
-import { MaskBlocks, MaskFieldProps } from '../../MaskField';
+import { type MaskBlocks, type MaskFieldProps } from '../../MaskField';
+import { type TextFieldProps } from '../../TextField';
 
-import { DatePickerInputWrapper } from './styles';
+import { StyledMaskField } from './styles';
 
 type DatePickerInputProps = Omit<MaskFieldProps, 'mask' | 'autofix'> & {
   mask: string;
+  /**
+   * пропсы для кастомизации корневого input элемента
+   */
+  inputProps?: Omit<TextFieldProps['inputProps'], 'onClick' | 'ref'>;
 };
 
 /**
@@ -19,7 +24,7 @@ const KEYS_IN_MASK = /\w{1,4}/g;
 export const DatePickerInput = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
->(({ onClick, mask, size = 'medium', onFocus, ...props }, ref) => {
+>(({ onClick, mask, size = 'medium', onFocus, disabled, ...props }, ref) => {
   const [normalizedMask, maskBlocks] = useMemo(() => {
     // маска maskField соглашается работать только с разделителями имеющими символ "`" (косая кавычка) перед заменяемым элементом
     const nMask = mask?.replace('.', '.`');
@@ -43,12 +48,19 @@ export const DatePickerInput = forwardRef<
     return [nMask, blocks];
   }, [mask]);
 
+  //Определяем активный обработчик focus для обертки если состояние не disabled
+  const handleFocusWrapper = useMemo(
+    () => (!disabled ? onFocus : undefined),
+    [disabled, onFocus],
+  );
+
   return (
-    <div onFocus={onFocus} tabIndex={-1}>
-      <DatePickerInputWrapper
+    <div onFocus={handleFocusWrapper} tabIndex={-1} aria-disabled={disabled}>
+      <StyledMaskField
         {...props}
         ref={ref}
         size={size}
+        disabled={disabled}
         mask={normalizedMask}
         unmask={false}
         blocks={maskBlocks}
@@ -56,15 +68,17 @@ export const DatePickerInput = forwardRef<
         fullWidth
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end" disablePointerEvents>
+            <InputAdornment position="end">
               <CalendarOutlineMd />
             </InputAdornment>
           ),
         }}
         inputProps={{
+          ...props.inputProps,
           ref,
-          onClick,
         }}
+        // Обрабатываем клик на контейнере, а не в инпуте, это связано с неактивной областью с иконкой (endAdornment)
+        onClick={onClick}
       />
     </div>
   );

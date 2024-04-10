@@ -1,13 +1,12 @@
-import {
-  DialogContentText as MuiDialogContentText,
-  DialogContentTextProps as MuiDialogContentTextProps,
-} from '@mui/material';
+import { type DialogContentTextProps as MuiDialogContentTextProps } from '@mui/material';
 
-import { WithoutEmotionSpecific } from '../types';
+import { type WithoutEmotionSpecific } from '../types';
+
+import { StyledDialogContentText } from './styles';
 
 export type DialogContentTextProps =
   WithoutEmotionSpecific<MuiDialogContentTextProps>;
 
 export const DialogContentText = (props: DialogContentTextProps) => (
-  <MuiDialogContentText {...props} />
+  <StyledDialogContentText {...props} />
 );

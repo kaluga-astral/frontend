@@ -1,39 +1,50 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import {
-  PlaceholderActions,
-  PlaceholderDescription,
-  PlaceholderImage,
-  PlaceholderInnerContainer,
-  PlaceholderRoot,
-  PlaceholderTitle,
+  Description,
+  Footer,
+  Image,
+  InnerContainer,
+  Title,
+  Wrapper,
 } from './styles';
 
 export type PlaceholderProps = {
   /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
+  /**
    * Ссылка на изображение
    */
   imgSrc?: string;
+
   /**
    * Описание изображения (атрибут alt)
    */
   imgAlt?: string;
+
   /**
    * ширина изображения
    */
   imgWidth?: string;
+
   /**
    * высота изображения
    */
   imgHeight?: string;
+
   /**
    * Заголовок
    */
   title: JSX.Element | JSX.Element[] | string;
+
   /**
    * Описание
    */
   description?: JSX.Element | JSX.Element[] | string;
+
   /**
    * Действия
    */
@@ -41,6 +52,7 @@ export type PlaceholderProps = {
 };
 
 export const Placeholder = ({
+  className,
   title,
   imgSrc,
   imgAlt,
@@ -50,24 +62,22 @@ export const Placeholder = ({
   Actions,
 }: PlaceholderProps) => {
   return (
-    <PlaceholderRoot>
-      <PlaceholderInnerContainer>
+    <Wrapper className={className}>
+      <InnerContainer>
         {imgSrc && (
-          <PlaceholderImage
+          <Image
             src={imgSrc}
             alt={imgAlt}
             width={imgWidth}
             height={imgHeight}
           />
         )}
-        <PlaceholderTitle variant="h4">{title}</PlaceholderTitle>
-        {description && (
-          <PlaceholderDescription variant="ui">
-            {description}
-          </PlaceholderDescription>
-        )}
-      </PlaceholderInnerContainer>
-      {Actions && <PlaceholderActions>{Actions}</PlaceholderActions>}
-    </PlaceholderRoot>
+
+        <Title variant="h5">{title}</Title>
+        {description && <Description variant="ui">{description}</Description>}
+      </InnerContainer>
+
+      {Actions && <Footer>{Actions}</Footer>}
+    </Wrapper>
   );
 };

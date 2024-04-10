@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import { YearPicker } from '../YearPicker';
 import { MonthPicker } from '../MonthPicker';
-import { DayPicker, MondayFirst } from '../DayPicker';
-import { PickerProps } from '../types';
+import { DayPicker, type MondayFirst } from '../DayPicker';
+import { type PickerProps } from '../types';
 import { ConfigContext } from '../../ConfigProvider';
 
 enum States {
@@ -20,6 +20,9 @@ export const YearMonthDayPicker = ({
   rangeDate,
   selectedDate,
   isMondayFirst,
+  isRange,
+  hoveredDayDate,
+  onDayHover,
 }: YearMonthDayPickerProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [currentState, setState] = useState(States.days);
@@ -91,6 +94,9 @@ export const YearMonthDayPicker = ({
           headBtnTitle={toMonthPick.single}
           onChange={onChange}
           rangeDate={rangeDate}
+          isRange={isRange}
+          hoveredDayDate={hoveredDayDate}
+          onDayHover={onDayHover}
         />
       )}
     </div>

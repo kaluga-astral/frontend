@@ -1,5 +1,5 @@
-import { MouseEvent, useCallback, useMemo, useState } from 'react';
-import { Story } from '@storybook/react';
+import { type MouseEvent, useCallback, useMemo, useState } from 'react';
+import { type Story } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
@@ -35,7 +35,12 @@ const Template: Story = () => {
       <Button variant="text" onClick={handleClick}>
         Profile
       </Button>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+      <Menu
+        title="Profile"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <ProfileOutlineMd />

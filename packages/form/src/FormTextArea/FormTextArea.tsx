@@ -1,7 +1,7 @@
-import { TextArea, TextAreaProps } from '@astral/components';
+import { TextArea, type TextAreaProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
   TextAreaProps,

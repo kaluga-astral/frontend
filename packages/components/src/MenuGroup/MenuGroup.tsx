@@ -1,6 +1,6 @@
-import { ReactNode, useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 
-import { MenuGroupContent, MenuGroupLabel } from './styles';
+import { Content, Label } from './styles';
 
 export type MenuGroupProps = {
   children: ReactNode;
@@ -16,12 +16,12 @@ export const MenuGroup = (props: MenuGroupProps) => {
 
   return (
     <>
-      <MenuGroupLabel component="li" variant="h7">
+      <Label component="li" variant="h7">
         {upperCasedLabel}
-      </MenuGroupLabel>
-      <MenuGroupContent>
+      </Label>
+      <Content>
         <ul>{children}</ul>
-      </MenuGroupContent>
+      </Content>
     </>
   );
 };

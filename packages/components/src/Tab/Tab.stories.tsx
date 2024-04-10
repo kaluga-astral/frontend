@@ -1,18 +1,38 @@
-import { Story } from '@storybook/react';
-import { SyntheticEvent, useState } from 'react';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { type SyntheticEvent, useState } from 'react';
 import { Stack } from '@mui/material';
 
-import { Tabs } from '../Tabs';
 import { Typography } from '../Typography';
+import { Tabs } from '../Tabs';
 
 import { Tab } from './Tab';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=376-5801&mode=design&t=6DlItWfeBP8xOP7n-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Tab> = {
   title: 'Components/Tabs/Tab',
   component: Tab,
 };
 
-export const TabShowcase: Story = () => {
+export default meta;
+
+type Story = StoryObj<typeof Tab>;
+
+export const Interaction: Story = {
+  args: {
+    label: 'Tab',
+  },
+  parameters: {
+    options: { showPanel: false },
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -34,5 +54,3 @@ export const TabShowcase: Story = () => {
     </Stack>
   );
 };
-
-TabShowcase.parameters = { options: { showPanel: false } };

@@ -1,7 +1,7 @@
-import { MaskField, MaskFieldProps } from '@astral/components';
+import { MaskField, type MaskFieldProps } from '@astral/components';
 
 import { useFormFieldProps } from '../hooks';
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 
 export type FormMaskFieldProps<FieldValues extends object> = WithFormFieldProps<
   MaskFieldProps,

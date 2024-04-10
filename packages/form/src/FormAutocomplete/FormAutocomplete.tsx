@@ -1,7 +1,7 @@
-import { Autocomplete, AutocompleteProps } from '@astral/components';
-import { SyntheticEvent, useCallback } from 'react';
+import { Autocomplete, type AutocompleteProps } from '@astral/components';
+import { type SyntheticEvent, useCallback } from 'react';
 
-import { WithFormFieldProps } from '../types';
+import { type WithFormFieldProps } from '../types';
 import { useFormFieldProps } from '../hooks';
 
 type AutocompleteInputChangeReason = 'input' | 'reset' | 'clear';
@@ -12,9 +12,13 @@ export type FormAutocompleteProps<
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
-> = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-  FieldValues
+> = Omit<
+  // не содержит onChange, тк как он будет перехвачен формой
+  WithFormFieldProps<
+    AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+    FieldValues
+  >,
+  'onChange'
 >;
 
 /**
@@ -49,7 +53,9 @@ export const FormAutocomplete = <
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,
     value: Value,
-  ) => fieldProps.onChange(value);
+  ) => {
+    fieldProps.onChange(value);
+  };
 
   const handleOnInputChange = useCallback(
     (
@@ -67,9 +73,14 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
+  const fallbackValue = (
+    fieldProps.multiple ? [] : ''
+  ) as typeof fieldProps.value;
+
   return (
     <Autocomplete
       {...fieldProps}
+      value={fieldProps.value || fallbackValue}
       onInputChange={handleOnInputChange}
       onChange={handleOnChange}
     />

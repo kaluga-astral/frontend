@@ -1,3 +1,3 @@
 export * from './RadioGroup';
 
-export { RadioGroupContext } from './RadioGroupProvider';
+export { RadioGroupContext } from './RadioGroupContext';

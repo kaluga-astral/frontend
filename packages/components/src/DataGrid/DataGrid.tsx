@@ -1,18 +1,22 @@
-import { ChangeEvent, ReactNode, useCallback, useMemo } from 'react';
-import { uniqBy } from 'lodash-es';
+import { type ChangeEvent, type ReactNode, useCallback, useMemo } from 'react';
 
 import { Table } from '../Table';
+import { prop, uniqBy } from '../utils';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
 import DataGridLoader from './DataGridLoader/DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
-  DataGridContainer,
+  Container,
   DisabledTableContainer,
   StyledTableContainer,
 } from './styles';
-import { DataGridColumns, DataGridRow, DataGridSort } from './types';
+import {
+  type DataGridColumns,
+  type DataGridRow,
+  type DataGridSort,
+} from './types';
 
 export type DataGridProps<
   Data extends Record<string, unknown> = DataGridRow,
@@ -139,7 +143,10 @@ export function DataGrid<
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = uniqBy([...selectedRows, ...rows], keyId);
+      const mergedSelectedRows = uniqBy(
+        [...selectedRows, ...rows],
+        prop(keyId),
+      );
 
       return onSelectRow(mergedSelectedRows);
     }
@@ -186,8 +193,16 @@ export function DataGrid<
     return null;
   }, [noDataPlaceholder, loading]);
 
+  const processedColumns = useCallback(() => {
+    if (rows.length <= 1) {
+      return columns.map((column) => ({ ...column, sortable: false }));
+    }
+
+    return columns;
+  }, [columns, rows]);
+
   return (
-    <DataGridContainer maxHeight={maxHeight} className={className}>
+    <Container maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
         <Table stickyHeader>
           <DataGridHead<Data, SortField>
@@ -197,7 +212,7 @@ export function DataGrid<
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
             sorting={sorting}
-            columns={columns}
+            columns={processedColumns()}
           />
           <DataGridBody<Data>
             activeRowId={activeRowId}
@@ -216,6 +231,6 @@ export function DataGrid<
       </TableContainer>
       <DataGridLoader disabled={disabled} loading={loading} />
       {Footer}
-    </DataGridContainer>
+    </Container>
   );
 }
