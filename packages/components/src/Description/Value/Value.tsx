@@ -5,6 +5,7 @@ import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
 import { StyledCopyIcon, StyledTypography } from './styles';
+import { COPIED_TEXT, COPY_ERR_TEXT, COPY_TEXT } from './constants';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -65,11 +66,11 @@ export const Value = ({
   const getTooltipText = (): string => {
     switch (status) {
       case 'copied':
-        return 'Скопировано';
+        return COPIED_TEXT;
       case 'error':
-        return 'Ошибка копирования';
+        return COPY_ERR_TEXT;
       default:
-        return 'Скопировать';
+        return COPY_TEXT;
     }
   };
   const tooltipText = getTooltipText();
