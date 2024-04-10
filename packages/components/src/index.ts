@@ -126,6 +126,8 @@ export { Iframe, type IframeProps } from './Iframe';
 
 export * from './LegacyGrid';
 
+export { Link, LinkProps } from './Link';
+
 export * from './List';
 
 export * from './ListItem';
