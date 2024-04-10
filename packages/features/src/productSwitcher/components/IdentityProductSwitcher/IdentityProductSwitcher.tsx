@@ -11,12 +11,14 @@ import {
 import {
   ErrorContainer,
   Logo,
+  LogoWrapper,
   StyledMenu,
   StyledMenuItem,
   TenantToggleButton,
   TenantsToggleButtonGroup,
 } from './styles';
 import { useLogic } from './hooks';
+import { LOGO_WRAPPER_CLASSNAME } from './constants';
 
 export const ASTRAL_IDENTITY_DEFAULT_TENANT = 'astral';
 
@@ -97,7 +99,9 @@ export const IdentityProductSwitcher = ({
               return (
                 <li key={product.id}>
                   <StyledMenuItem component="a" href={product.url}>
-                    <Logo src={product.logoUrl} color={product.color} />
+                    <LogoWrapper className={LOGO_WRAPPER_CLASSNAME}>
+                      <Logo src={product.logoUrl} color={product.color} />
+                    </LogoWrapper>
                     <Typography variant="ui" color="grey" colorIntensity="900">
                       {product.name}
                     </Typography>

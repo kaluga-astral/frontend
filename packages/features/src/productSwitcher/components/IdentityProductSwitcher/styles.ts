@@ -7,6 +7,8 @@ import {
   styled,
 } from '@astral/ui';
 
+import { LOGO_WRAPPER_CLASSNAME } from './constants';
+
 export const StyledMenu = styled(Menu)`
   .MuiPaper-root > .MuiList-root {
     display: flex;
@@ -20,10 +22,32 @@ export const StyledMenu = styled(Menu)`
   }
 `;
 
+export const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+`;
+
 // as typeof MenuItem необходим для возможности прокинуть component
 // https://github.com/mui/material-ui/issues/15695
 export const StyledMenuItem = styled(MenuItem)`
   padding-left: ${({ theme }) => theme.spacing(6)};
+
+  /* Стили чисто для демонстрации */
+  &:hover {
+    .${LOGO_WRAPPER_CLASSNAME} {
+      /* Перекрывается background'ом img'а */
+      background-color: ${({ theme }) => theme.palette.background.elementHover};
+
+      /* Ломает существующие иконки */
+      img {
+        background-color: ${({ theme }) =>
+          theme.palette.background.elementHover};
+      }
+    }
+  }
 ` as typeof MenuItem;
 
 export const Logo = styled('img', {
