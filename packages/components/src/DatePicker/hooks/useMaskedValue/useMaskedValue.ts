@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { formatDate, isDate, parseDate } from '@astral/utils';
+
+import { formatDate, isDate, parseDate } from '../../../utils/date';
 
 type Params = {
   currentValue?: Date;

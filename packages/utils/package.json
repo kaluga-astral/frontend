@@ -14,7 +14,8 @@
     "tests:ci": "cross-env LC_ALL=ru vitest run --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "dayjs": "1.11.10"
+    "dayjs": "1.11.10",
+    "remeda": "^1.40.1"
   },
   "devDependencies": {
     "@astral/tests": "*"

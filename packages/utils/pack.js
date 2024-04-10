@@ -4,7 +4,6 @@ rmDist();
 
 copy({
   sourcesDirPath: './src',
-  files: ['declarations.d.ts'],
   targetPath: '.',
 });
 
