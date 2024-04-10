@@ -19,11 +19,8 @@ type StyledCopyIconProps = SvgIconProps & {
 };
 
 export const StyledCopyIcon = styled(CopyOutlineSm)<StyledCopyIconProps>`
-  /* Добавляем горизонтальный отступ от текста */
   margin-right: ${({ $copyPosition, theme }) =>
     $copyPosition === 'left' ? theme.spacing(1) : ''};
-
-  /* Выравниваем иконку по вертикали */
   margin-bottom: -4px;
   margin-left: ${({ $copyPosition, theme }) =>
     $copyPosition === 'right' ? theme.spacing(1) : ''};
