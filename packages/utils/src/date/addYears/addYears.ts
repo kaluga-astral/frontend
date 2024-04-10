@@ -6,5 +6,5 @@ import dayjs from 'dayjs';
  * @param {number} count количество лет которые надо прибавить (при отрицательном значении отнять)
  * @return {Date} Возвращает новую дату с прибавленным количеством лет
  */
-export const addYears = (date: Date, count: number) =>
+export const addYears = (date: Date, count: number): Date =>
   dayjs(date).add(count, 'y').toDate();

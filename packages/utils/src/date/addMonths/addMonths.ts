@@ -6,5 +6,5 @@ import dayjs from 'dayjs';
  * @param {number} count количество месяцев которые надо прибавить (при отрицательном значении отнять)
  * @return {Date} Возвращает новую дату с прибавленным количеством месяцев
  */
-export const addMonths = (date: Date, count: number) =>
+export const addMonths = (date: Date, count: number): Date =>
   dayjs(date).add(count, 'M').toDate();
