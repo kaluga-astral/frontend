@@ -1,5 +1,5 @@
 export enum CopyStatus {
-  Copied,
-  Error,
-  CanCopy,
+  Copied = 'Скопировано',
+  Error = 'Ошибка копирования',
+  CanCopy = 'Скопировать',
 }

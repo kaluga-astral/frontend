@@ -61,25 +61,13 @@ export const Value = ({
     }
   };
 
-  const getTooltipText = (): string => {
-    switch (status) {
-      case CopyStatus.Copied:
-        return 'Скопировано';
-      case CopyStatus.Error:
-        return 'Ошибка копирования';
-      default:
-        return 'Скопировать';
-    }
-  };
-  const tooltipText = getTooltipText();
-
   return (
     <Tooltip
       onClick={handleClick}
       onMouseLeave={handleMouseLeave}
       withoutContainer={false}
       placement="bottom"
-      title={tooltipText}
+      title={status}
     >
       <StyledTypography {...props}>
         {copyPosition === 'left' && (
