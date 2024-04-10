@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import { createInterface } from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
-import { createTheme } from '../baseTheme';
+import { createSnapshotTheme } from '../baseTheme';
 import { Brand } from '../../constants';
 
 const fontsUrls = {
@@ -24,8 +24,7 @@ const fontsUrls = {
   },
 };
 
-const theme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
-// const theme = createThemeEssential({ brand: Brand.DEFAULT, fontsUrls });
+const theme = createSnapshotTheme({ brand: Brand.DEFAULT, fontsUrls });
 
 (async () => {
   const json = JSON.stringify(theme);

@@ -1,6 +1,6 @@
 import { Brand } from '../constants';
 
-import { createTheme } from './baseTheme';
+import { createSnapshotTheme, createTheme } from './baseTheme';
 import themeSnapshot from './snapshot.json';
 
 describe('createTheme', () => {
@@ -67,7 +67,7 @@ describe('createTheme', () => {
   });
 
   it('Тема совпадает с эталонным снепшотом', () => {
-    const curTheme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
+    const curTheme = createSnapshotTheme({ brand: Brand.DEFAULT, fontsUrls });
     const curThemeJson = JSON.stringify(curTheme);
 
     expect(JSON.parse(curThemeJson)).toEqual(themeSnapshot);

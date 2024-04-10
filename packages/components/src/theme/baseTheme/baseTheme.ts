@@ -75,3 +75,28 @@ export const createTheme = (params: CreateThemeParams) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
 };
+
+// функция получения темы для снепшота
+export const createSnapshotTheme = (params: CreateThemeParams) => {
+  const theme = createTheme(params);
+  const spacingResults = [];
+  const breakpointResults = [];
+
+  // Вычисляем значения геттеров
+  for (let i = 0; i < 15; i++) {
+    spacingResults.push(theme.spacing(i));
+  }
+
+  for (const key of ['sm', 'md', 'lg', 'xl', 'xs']) {
+    breakpointResults.push(theme.breakpoints.down(key as 'sm'));
+  }
+
+  // Записываем их в объект для сериализации
+  return {
+    ...theme,
+    computedGetters: {
+      spacing: spacingResults,
+      breakPoints: breakpointResults,
+    },
+  };
+};
