@@ -1,6 +1,7 @@
 import { Brand } from '../constants';
 
 import { createTheme } from './baseTheme';
+import themeSnapshot from './snapshot.json';
 
 describe('createTheme', () => {
   const fontsUrls = {
@@ -63,5 +64,12 @@ describe('createTheme', () => {
     expect(theme.elevation[100]).toBe(
       '0px 0px 1px 0px #072D574F, 0px 1px 1px 0px #072D5740;',
     );
+  });
+
+  it('Тема совпадает с эталонным снепшотом', () => {
+    const curTheme = createTheme({ brand: Brand.DEFAULT, fontsUrls });
+    const curThemeJson = JSON.stringify(curTheme);
+
+    expect(JSON.parse(curThemeJson)).toEqual(themeSnapshot);
   });
 });
