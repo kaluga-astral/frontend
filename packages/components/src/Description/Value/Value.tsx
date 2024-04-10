@@ -4,7 +4,7 @@ import { Typography, type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
-import { StyledCopyIcon, StyledText } from './styles';
+import { StyledCopyIcon, StyledTypography } from './styles';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -27,6 +27,8 @@ export type ValueProps = Pick<
   copyPosition?: 'left' | 'right';
 };
 
+type CopyStatus = 'error' | 'copied' | 'canCopy';
+
 export const Value = ({
   canCopy,
   copyPosition = 'right',
@@ -34,7 +36,7 @@ export const Value = ({
   stub,
   ...props
 }: ValueProps) => {
-  const [isCopied, setCopied] = useState(false);
+  const [status, setStatus] = useState<CopyStatus>('canCopy');
   const { emptySymbol } = useContext(ConfigContext);
 
   const resultChildren = children ?? stub ?? emptySymbol;
@@ -44,21 +46,33 @@ export const Value = ({
   }
 
   const handleClick = () => {
-    setCopied(true);
-    navigator.clipboard.writeText(children?.toString() || '');
+    navigator.clipboard
+      .writeText(children?.toString() || '')
+      .then(() => setStatus('copied'))
+      .catch(() => setStatus('error'));
   };
 
   const handleMouseLeave = () => {
-    if (isCopied) {
+    if (status !== 'canCopy') {
       // Ставим таймер чтобы тултип успел скрыться
       // В ином случае пользователь увидит изменение текста
       setTimeout(() => {
-        setCopied(false);
+        setStatus('canCopy');
       }, 100);
     }
   };
 
-  const tooltipText = isCopied ? 'Скопировано' : 'Скопировать';
+  const getTooltipText = (): string => {
+    switch (status) {
+      case 'copied':
+        return 'Скопировано';
+      case 'error':
+        return 'Ошибка копирования';
+      default:
+        return 'Скопировать';
+    }
+  };
+  const tooltipText = getTooltipText();
 
   return (
     <Tooltip
@@ -68,7 +82,7 @@ export const Value = ({
       placement="bottom"
       title={tooltipText}
     >
-      <StyledText {...props}>
+      <StyledTypography {...props}>
         {copyPosition === 'left' && (
           <StyledCopyIcon
             $copyPosition={copyPosition}
@@ -84,7 +98,7 @@ export const Value = ({
             color={props.color as 'secondary'}
           />
         )}
-      </StyledText>
+      </StyledTypography>
     </Tooltip>
   );
 };

@@ -6,7 +6,7 @@ import { Typography } from '../../Typography';
 
 import { type ValueProps } from './Value';
 
-export const StyledText = styled(Typography)`
+export const StyledTypography = styled(Typography)`
   cursor: pointer;
 
   &:hover {
@@ -19,17 +19,17 @@ type StyledCopyIconProps = SvgIconProps & {
 };
 
 export const StyledCopyIcon = styled(CopyOutlineSm)<StyledCopyIconProps>`
+  /* Добавляем горизонтальный отступ от текста */
   margin-right: ${({ $copyPosition, theme }) =>
     $copyPosition === 'left' ? theme.spacing(1) : ''};
 
   /* Выравниваем иконку по вертикали */
   margin-bottom: -4px;
-
-  /* Добавляем горизонтальный отступ от текста */
   margin-left: ${({ $copyPosition, theme }) =>
     $copyPosition === 'right' ? theme.spacing(1) : ''};
 
-  font-size: ${({ theme }) => theme.spacing(4)};
+  /* Задаем размер иконки */
+  font-size: 16px;
 
   fill: ${({ color }) => color};
 `;
