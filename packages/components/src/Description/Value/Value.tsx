@@ -5,7 +5,7 @@ import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
 import { StyledCopyIcon, StyledTypography } from './styles';
-import { COPIED_TEXT, COPY_ERR_TEXT, COPY_TEXT } from './constants';
+import { CopyStatus } from './constants';
 
 export type ValueProps = Pick<
   TypographyProps,
@@ -28,8 +28,6 @@ export type ValueProps = Pick<
   copyPosition?: 'left' | 'right';
 };
 
-type CopyStatus = 'error' | 'copied' | 'canCopy';
-
 export const Value = ({
   canCopy,
   copyPosition = 'right',
@@ -37,7 +35,7 @@ export const Value = ({
   stub,
   ...props
 }: ValueProps) => {
-  const [status, setStatus] = useState<CopyStatus>('canCopy');
+  const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
   const { emptySymbol } = useContext(ConfigContext);
 
   const resultChildren = children ?? stub ?? emptySymbol;
@@ -49,28 +47,28 @@ export const Value = ({
   const handleClick = () => {
     navigator.clipboard
       .writeText(children?.toString() || '')
-      .then(() => setStatus('copied'))
-      .catch(() => setStatus('error'));
+      .then(() => setStatus(CopyStatus.Copied))
+      .catch(() => setStatus(CopyStatus.Error));
   };
 
   const handleMouseLeave = () => {
-    if (status !== 'canCopy') {
+    if (status !== CopyStatus.CanCopy) {
       // Ставим таймер чтобы тултип успел скрыться
       // В ином случае пользователь увидит изменение текста
       setTimeout(() => {
-        setStatus('canCopy');
+        setStatus(CopyStatus.CanCopy);
       }, 100);
     }
   };
 
   const getTooltipText = (): string => {
     switch (status) {
-      case 'copied':
-        return COPIED_TEXT;
-      case 'error':
-        return COPY_ERR_TEXT;
+      case CopyStatus.Copied:
+        return 'Скопировано';
+      case CopyStatus.Error:
+        return 'Ошибка копирования';
       default:
-        return COPY_TEXT;
+        return 'Скопировать';
     }
   };
   const tooltipText = getTooltipText();
