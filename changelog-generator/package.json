@@ -1,0 +1,16 @@
+{
+  "name": "@astral/changelog-generator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "gitlog": "4.0.8",
+    "telegraf": "~4.15.3"
+  },
+  "devDependencies": {
+    "@astral/eslint-config-node": "^2.4.0"
+  }
+}
