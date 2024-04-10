@@ -5,7 +5,7 @@ import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
 import { StyledCopyIcon, StyledTypography } from './styles';
-import { CopyStatus } from './constants';
+import { CopyStatus } from './enums';
 
 export type ValueProps = Pick<
   TypographyProps,
