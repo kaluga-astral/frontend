@@ -30,7 +30,8 @@
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint --fix",
-    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix",
+    "snapshot:theme": "node ./src/theme/baseTheme/utils/generateSnapshot.ts"
   },
   "dependencies": {
     "@astral/icons": "*",
