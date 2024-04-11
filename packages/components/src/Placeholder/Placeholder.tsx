@@ -8,8 +8,10 @@ import {
   Title,
   Wrapper,
 } from './styles';
+import { IMAGE_HEIGHT, IMAGE_WIDTH, TITLE_HEADER_LEVEL } from './constants';
+import { Size } from './enums';
 
-type PlaceholderSize = 'sm' | 'md' | 'lg';
+type PlaceholderSize = 'small' | 'medium' | 'large';
 
 export type PlaceholderProps = {
   /**
@@ -65,55 +67,26 @@ export const Placeholder = ({
   title,
   imgSrc,
   imgAlt,
-  imgWidth,
-  imgHeight,
   description,
   Actions,
-  size = 'md',
+  size: externalSize = 'small',
+  imgWidth,
+  imgHeight,
 }: PlaceholderProps) => {
-  // Для совместимости с текущим кодом учитывается imgWidth & imgHeight
-  const getImgWidth = () => {
-    if (imgWidth) {
-      return imgWidth;
-    }
-
-    switch (size) {
-      case 'sm':
-        return '239px';
-      case 'md':
-        return '323px';
+  // Нужно чтобы не заставлять других разработчиков
+  // писать size={'small' as PlaceholderProps[size]}
+  const getSizeEnum = () => {
+    switch (externalSize) {
+      case 'small':
+        return Size.Small;
+      case 'medium':
+        return Size.Medium;
       default:
-        return '458px';
+        return Size.Large;
     }
   };
 
-  const getImgHeight = () => {
-    if (imgHeight) {
-      return imgHeight;
-    }
-
-    switch (size) {
-      case 'sm':
-        return '119px';
-
-      case 'md':
-        return '161px';
-
-      default:
-        return '229px';
-    }
-  };
-
-  const getTitleVariant = (): 'h3' | 'h4' | 'h5' => {
-    switch (size) {
-      case 'sm':
-        return 'h5';
-      case 'md':
-        return 'h4';
-      default:
-        return 'h3';
-    }
-  };
+  const size = getSizeEnum();
 
   return (
     <Wrapper $size={size} className={className}>
@@ -122,13 +95,13 @@ export const Placeholder = ({
           <Image
             src={imgSrc}
             alt={imgAlt}
-            width={getImgWidth()}
-            height={getImgHeight()}
+            width={imgWidth || IMAGE_WIDTH[size]}
+            height={imgHeight || IMAGE_HEIGHT[size]}
             $size={size}
           />
         )}
 
-        <Title $size={size} variant={getTitleVariant()}>
+        <Title $size={size} variant={TITLE_HEADER_LEVEL[size] as 'h5'}>
           {title}
         </Title>
 

@@ -3,6 +3,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
 import certificatesNotFound from '../../../ui/illustrations/certificates-not-found.svg';
+import { styled } from '../styles';
 
 import { Placeholder } from './Placeholder';
 
@@ -59,18 +60,24 @@ export const Example = () => (
   />
 );
 
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+`;
+
 /**
  * Можно задать размеры: sm, md, large
  */
 export const Size = () => {
   return (
-    <div>
+    <List>
       <Placeholder
         title="Заголовок страницы"
         description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
         imgSrc={certificatesNotFound}
         imgAlt="альтернативный текст изображения"
-        size="sm"
+        size="small"
         Actions={
           <>
             <Button variant="text">Вернуться</Button>
@@ -84,7 +91,7 @@ export const Size = () => {
         description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
         imgSrc={certificatesNotFound}
         imgAlt="альтернативный текст изображения"
-        size="md"
+        size="medium"
         Actions={
           <>
             <Button variant="text">Вернуться</Button>
@@ -98,7 +105,7 @@ export const Size = () => {
         description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
         imgSrc={certificatesNotFound}
         imgAlt="альтернативный текст изображения"
-        size="lg"
+        size="large"
         Actions={
           <>
             <Button variant="text">Вернуться</Button>
@@ -106,6 +113,6 @@ export const Size = () => {
           </>
         }
       />
-    </div>
+    </List>
   );
 };
