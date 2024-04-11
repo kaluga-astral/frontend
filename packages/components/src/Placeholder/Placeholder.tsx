@@ -9,6 +9,8 @@ import {
   Wrapper,
 } from './styles';
 
+type PlaceholderSize = 'sm' | 'md' | 'lg';
+
 export type PlaceholderProps = {
   /**
    * Название класса, применяется к корневому компоненту
@@ -26,11 +28,13 @@ export type PlaceholderProps = {
   imgAlt?: string;
 
   /**
+   * @deprecated
    * ширина изображения
    */
   imgWidth?: string;
 
   /**
+   * @deprecated
    * высота изображения
    */
   imgHeight?: string;
@@ -49,6 +53,11 @@ export type PlaceholderProps = {
    * Действия
    */
   Actions?: ReactNode;
+
+  /**
+   * Задает общий размер компонента (sm, md, lg)
+   */
+  size?: PlaceholderSize;
 };
 
 export const Placeholder = ({
@@ -60,21 +69,74 @@ export const Placeholder = ({
   imgHeight,
   description,
   Actions,
+  size = 'md',
 }: PlaceholderProps) => {
+  // Для совместимости с текущим кодом учитывается imgWidth & imgHeight
+  const getImgWidth = () => {
+    if (imgWidth) {
+      return imgWidth;
+    }
+
+    switch (size) {
+      case 'sm':
+        return '239px';
+      case 'md':
+        return '323px';
+      default:
+        return '458px';
+    }
+  };
+
+  const getImgHeight = () => {
+    if (imgHeight) {
+      return imgHeight;
+    }
+
+    switch (size) {
+      case 'sm':
+        return '119px';
+
+      case 'md':
+        return '161px';
+
+      default:
+        return '229px';
+    }
+  };
+
+  const getTitleVariant = (): 'h3' | 'h4' | 'h5' => {
+    switch (size) {
+      case 'sm':
+        return 'h5';
+      case 'md':
+        return 'h4';
+      default:
+        return 'h3';
+    }
+  };
+
   return (
-    <Wrapper className={className}>
-      <InnerContainer>
+    <Wrapper $size={size} className={className}>
+      <InnerContainer $size={size}>
         {imgSrc && (
           <Image
             src={imgSrc}
             alt={imgAlt}
-            width={imgWidth}
-            height={imgHeight}
+            width={getImgWidth()}
+            height={getImgHeight()}
+            $size={size}
           />
         )}
 
-        <Title variant="h5">{title}</Title>
-        {description && <Description variant="ui">{description}</Description>}
+        <Title $size={size} variant={getTitleVariant()}>
+          {title}
+        </Title>
+
+        {description && (
+          <Description $size={size} variant="ui">
+            {description}
+          </Description>
+        )}
       </InnerContainer>
 
       {Actions && <Footer>{Actions}</Footer>}

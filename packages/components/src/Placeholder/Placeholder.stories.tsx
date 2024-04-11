@@ -58,3 +58,54 @@ export const Example = () => (
     }
   />
 );
+
+/**
+ * Можно задать размеры: sm, md, large
+ */
+export const Size = () => {
+  return (
+    <div>
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="sm"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="md"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="lg"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+    </div>
+  );
+};
