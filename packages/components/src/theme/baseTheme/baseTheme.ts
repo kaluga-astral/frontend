@@ -73,14 +73,14 @@ export const createTheme = (params: CreateThemeParams) => {
   const muiTheme = createMuiTheme(mergedThemeOptions);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
+  return mergeDeep(muiTheme as any, { elevation, shape }) as unknown as Theme;
 };
 
 // функция получения темы для снепшота
 export const createSnapshotTheme = (params: CreateThemeParams) => {
   const theme = createTheme(params);
-  const spacingResults = [];
-  const breakpointResults = [];
+  const spacingResults: string[] = [];
+  const breakpointResults: string[] = [];
 
   // Вычисляем значения геттеров
   for (let i = 0; i < 15; i++) {

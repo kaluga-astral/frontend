@@ -24,9 +24,8 @@ const fontsUrls = {
   },
 };
 
-const theme = createSnapshotTheme({ brand: Brand.DEFAULT, fontsUrls });
-
 (async () => {
+  const theme = createSnapshotTheme({ brand: Brand.DEFAULT, fontsUrls });
   const json = JSON.stringify(theme);
   const relPath = './src/theme/baseTheme/snapshot.json';
 
