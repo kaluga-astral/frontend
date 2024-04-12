@@ -8,10 +8,14 @@ import {
   Title,
   Wrapper,
 } from './styles';
-import { IMAGE_HEIGHT, IMAGE_WIDTH, TITLE_HEADER_LEVEL } from './constants';
-import { type Size } from './enums';
+import {
+  IMAGE_HEIGHT,
+  IMAGE_WIDTH,
+  type SIZE,
+  TITLE_HEADER_LEVEL,
+} from './constants';
 
-type PlaceholderSize = 'small' | 'medium' | 'large';
+export type PlaceholderSize = (typeof SIZE)[keyof typeof SIZE];
 
 export type PlaceholderProps = {
   /**
@@ -69,12 +73,10 @@ export const Placeholder = ({
   imgAlt,
   description,
   Actions,
-  size: externalSize = 'small',
+  size = 'small',
   imgWidth,
   imgHeight,
 }: PlaceholderProps) => {
-  const size = externalSize as Size;
-
   return (
     <Wrapper $size={size} className={className}>
       <InnerContainer $size={size}>

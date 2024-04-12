@@ -1,18 +1,18 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-import { Size } from './enums';
-import { MAX_INNER_WIDTH } from './constants';
+import { MAX_INNER_WIDTH, SIZE } from './constants';
+import { type PlaceholderSize } from './Placeholder';
 
 type WithSize = {
-  $size: Size;
+  $size: PlaceholderSize;
 };
 
 export const Wrapper = styled.div<WithSize>`
   display: flex;
   flex-direction: column;
   gap: ${({ theme, $size }) =>
-    $size === Size.Small ? theme.spacing(4) : theme.spacing(6)};
+    $size === SIZE.Small ? theme.spacing(4) : theme.spacing(6)};
   align-items: center;
   justify-content: center;
 
@@ -43,7 +43,7 @@ export const Image = styled.img<WithSize>`
   height: ${({ height }) => height || 'auto'};
   margin: auto auto
     ${({ theme, $size }) =>
-      $size === Size.Small ? theme.spacing(4) : theme.spacing(6)};
+      $size === SIZE.Small ? theme.spacing(4) : theme.spacing(6)};
 
   color: ${({ theme }) => theme.palette.grey[900]};
 
@@ -56,7 +56,7 @@ export const Image = styled.img<WithSize>`
 
 export const Title = styled(Typography)<WithSize>`
   margin-bottom: ${({ theme, $size }) =>
-    $size === Size.Medium ? theme.spacing(2) : theme.spacing(4)};
+    $size === SIZE.Medium ? theme.spacing(2) : theme.spacing(4)};
 
   text-align: center;
 
@@ -73,7 +73,7 @@ export const Description = styled(Typography)<WithSize>`
   display: block;
 
   font-size: ${({ $size, theme }) =>
-    $size === Size.Large
+    $size === SIZE.Large
       ? theme.typography.pxToRem(16)
       : theme.typography.body1.fontSize};
   text-align: center;
