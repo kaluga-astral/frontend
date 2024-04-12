@@ -38,10 +38,7 @@ const Header = ({ price }: { price: string }) => (
 export const Example = () => {
   const [value, setValue] = useState('one');
 
-  console.log(value);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('click');
     setValue(event.target.value);
   };
 
