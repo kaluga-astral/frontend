@@ -66,9 +66,6 @@ const List = styled.div`
   row-gap: 50px;
 `;
 
-/**
- * Можно задать размеры: sm, md, large
- */
 export const Size = () => {
   return (
     <List>

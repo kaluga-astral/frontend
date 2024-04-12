@@ -22,4 +22,4 @@ export const TITLE_HEADER_LEVEL = {
   [Size.Small]: 'h5',
   [Size.Medium]: 'h4',
   [Size.Large]: 'h3',
-};
+} as const;

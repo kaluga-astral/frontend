@@ -57,7 +57,7 @@ export type PlaceholderProps = {
   Actions?: ReactNode;
 
   /**
-   * Задает общий размер компонента (sm, md, lg)
+   * Задает общий размер компонента
    */
   size?: PlaceholderSize;
 };
@@ -101,7 +101,7 @@ export const Placeholder = ({
           />
         )}
 
-        <Title $size={size} variant={TITLE_HEADER_LEVEL[size] as 'h5'}>
+        <Title $size={size} variant={TITLE_HEADER_LEVEL[size]}>
           {title}
         </Title>
 
