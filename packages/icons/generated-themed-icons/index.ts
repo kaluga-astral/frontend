@@ -26,6 +26,8 @@ export { default as ArrowROutlineMd } from './ArrowROutlineMd';
 
 export { default as BasketOutlineMd } from './BasketOutlineMd';
 
+export { default as BellOutlineMd } from './BellOutlineMd';
+
 export { default as BellFillMd } from './BellFillMd';
 
 export { default as BinOutlineMd } from './BinOutlineMd';
@@ -243,6 +245,8 @@ export { default as StepDefaultFillMd } from './StepDefaultFillMd';
 export { default as SuccessFillMd } from './SuccessFillMd';
 
 export { default as SuccessFillSm } from './SuccessFillSm';
+
+export { default as SupportOutlineMd } from './SupportOutlineMd';
 
 export { default as SupportFillMd } from './SupportFillMd';
 
