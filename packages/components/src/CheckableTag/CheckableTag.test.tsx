@@ -1,13 +1,6 @@
 import { useEffect, useRef } from 'react';
-import {
-  describe,
-  expect,
-  it,
-  renderWithTheme,
-  screen,
-  userEvents,
-  vi,
-} from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
+import { describe, expect, it, vi } from 'vitest';
 
 import { CheckableTag } from './CheckableTag';
 import { type CheckableTagAddon } from './types';
@@ -33,45 +26,47 @@ describe('CheckableTag', () => {
   it('Callback Ref доступен', () => {
     const callbackRefSpy = vi.fn();
 
-    const sut = <CheckableTag ref={callbackRefSpy} />;
-
-    renderWithTheme(sut);
+    renderWithTheme(<CheckableTag ref={callbackRefSpy} />);
     expect(callbackRefSpy).toBeCalledWith(expect.any(HTMLElement));
   });
 
-  it('Компонент получает checked состояние при передаче checked=true через props', () => {
-    const handleChangeSpy = vi.fn();
+  it('Компонент работает с data атрибутами', () => {
+    const tagTestId = 'test-id';
 
-    const sut = <CheckableTag checked={true} onChange={handleChangeSpy} />;
+    renderWithTheme(<CheckableTag data-testid={tagTestId} />);
 
-    renderWithTheme(sut);
+    const tag = screen.queryByTestId(tagTestId);
 
-    const sutNode = screen.getByRole('checkbox', { hidden: true });
-
-    expect(sutNode).toBeChecked();
+    expect(tag).toBeVisible();
   });
 
-  it('Компонент дизейблится при disabled=true', () => {
-    const sut = <CheckableTag disabled />;
+  it('Компонент получает checked состояние, если checked=true', () => {
+    const handleChangeSpy = vi.fn();
 
-    renderWithTheme(sut);
+    renderWithTheme(<CheckableTag checked={true} onChange={handleChangeSpy} />);
 
-    const tagNode = screen.getByRole('checkbox', { hidden: true });
+    const checkbox = screen.getByRole('checkbox', { hidden: true });
 
-    expect(tagNode).toBeDisabled();
+    expect(checkbox).toBeChecked();
+  });
+
+  it('Компонент получает disabled состояние, если disabled=true', () => {
+    renderWithTheme(<CheckableTag disabled />);
+
+    const checkbox = screen.getByRole('checkbox', { hidden: true });
+
+    expect(checkbox).toBeDisabled();
   });
 
   it('OnChange вызывается при нажатии на тег', async () => {
     const label = 'Тег';
     const handleChangeSpy = vi.fn();
 
-    const sut = <CheckableTag label={label} onChange={handleChangeSpy} />;
+    renderWithTheme(<CheckableTag label={label} onChange={handleChangeSpy} />);
 
-    renderWithTheme(sut);
+    const checkbox = screen.getByText(label);
 
-    const sutNode = screen.getByText(label);
-
-    await userEvents.click(sutNode);
+    await userEvents.click(checkbox);
     expect(handleChangeSpy).toHaveBeenCalled();
   });
 
@@ -82,13 +77,11 @@ describe('CheckableTag', () => {
       <span data-testid={addonTestId} />
     );
 
-    const sut = <CheckableTag startAddon={StartAddon} />;
+    renderWithTheme(<CheckableTag startAddon={StartAddon} />);
 
-    renderWithTheme(sut);
+    const startAddon = screen.getByTestId(addonTestId);
 
-    const addonNode = screen.getByTestId(addonTestId);
-
-    expect(addonNode).toBeInTheDocument();
+    expect(startAddon).toBeInTheDocument();
   });
 
   it('Дополнительный компонент отображается при передаче через endAddon', () => {
@@ -98,16 +91,14 @@ describe('CheckableTag', () => {
       <span data-testid={addonTestId} />
     );
 
-    const sut = <CheckableTag endAddon={EndAddon} />;
+    renderWithTheme(<CheckableTag endAddon={EndAddon} />);
 
-    renderWithTheme(sut);
+    const endAddon = screen.getByTestId(addonTestId);
 
-    const endAddonNode = screen.getByTestId(addonTestId);
-
-    expect(endAddonNode).toBeInTheDocument();
+    expect(endAddon).toBeInTheDocument();
   });
 
-  it('Дополнительные компоненты получают checked prop при передаче checked=true через props', () => {
+  it('Дополнительные компоненты получают checked prop при передаче checked=true', () => {
     const addonTestId = 'addonTestId';
     const handleChangeSpy = vi.fn();
 
@@ -115,25 +106,23 @@ describe('CheckableTag', () => {
       <span data-testid={addonTestId}>{String(checked)}</span>
     );
 
-    const sut = (
+    renderWithTheme(
       <CheckableTag
         checked
         onChange={handleChangeSpy}
         startAddon={Addon}
         endAddon={Addon}
-      />
+      />,
     );
 
-    renderWithTheme(sut);
-
-    const addonNodeList = screen
+    const addonList = screen
       .getAllByTestId(addonTestId)
       .filter((node) => node.textContent === 'true');
 
-    expect(addonNodeList).toHaveLength(2);
+    expect(addonList).toHaveLength(2);
   });
 
-  it('Дополнительные компоненты получают disabled prop при передаче disabled=true через props', () => {
+  it('Дополнительные компоненты получают disabled prop при передаче disabled=true', () => {
     const addonTestId = 'addonTestId';
     const handleChangeSpy = vi.fn();
 
@@ -141,21 +130,19 @@ describe('CheckableTag', () => {
       <span data-testid={addonTestId}>{String(disabled)}</span>
     );
 
-    const sut = (
+    renderWithTheme(
       <CheckableTag
         disabled
         onChange={handleChangeSpy}
         startAddon={Addon}
         endAddon={Addon}
-      />
+      />,
     );
 
-    renderWithTheme(sut);
-
-    const addonNodeList = screen
+    const addonList = screen
       .getAllByTestId(addonTestId)
       .filter((node) => node.textContent === 'true');
 
-    expect(addonNodeList).toHaveLength(2);
+    expect(addonList).toHaveLength(2);
   });
 });

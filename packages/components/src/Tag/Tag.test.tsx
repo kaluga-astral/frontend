@@ -1,12 +1,6 @@
 import { useEffect, useRef } from 'react';
-import {
-  describe,
-  expect,
-  it,
-  renderWithTheme,
-  screen,
-  vi,
-} from '@astral/tests';
+import { renderWithTheme, screen } from '@astral/tests';
+import { describe, expect, it, vi } from 'vitest';
 
 import { TagBadge } from '../TagBadge';
 
@@ -33,79 +27,65 @@ describe('Tag', () => {
   it('Callback Ref доступен', () => {
     const callbackRefSpy = vi.fn();
 
-    const sut = <Tag ref={callbackRefSpy} />;
-
-    renderWithTheme(sut);
+    renderWithTheme(<Tag ref={callbackRefSpy} />);
     expect(callbackRefSpy).toBeCalledWith(expect.any(HTMLElement));
   });
 
-  it('Rest props перенаправляются в DOM node компонента', () => {
-    const sutTestId = 'test-id';
-    const testProps = {
-      'data-test-prop': 'test-prop',
-    };
+  it('Компонент работает с data атрибутами', () => {
+    const tagTestId = 'test-id';
 
-    const sut = <Tag {...testProps} data-testid={sutTestId} />;
+    renderWithTheme(<Tag data-testid={tagTestId} />);
 
-    renderWithTheme(sut);
+    const tag = screen.queryByTestId(tagTestId);
 
-    const domElement = screen.getByTestId(sutTestId);
-    const testProp = domElement.getAttribute('data-test-prop');
-
-    expect(testProp).toBe(testProps['data-test-prop']);
+    expect(tag).toBeVisible();
   });
 
   it('Дополнительный контент отображается, если передан startAddon', () => {
     const label = 'Тег';
     const badgeContent = '12';
 
-    const sut = (
+    renderWithTheme(
       <Tag
         label={label}
         startAddon={(props) => (
           <TagBadge {...props} badgeContent={badgeContent} />
         )}
-      />
+      />,
     );
 
-    renderWithTheme(sut);
+    const badge = screen.getByText(badgeContent);
 
-    const badgeElement = screen.getByText(badgeContent);
-
-    expect(badgeElement).toBeVisible();
+    expect(badge).toBeVisible();
   });
 
   it('Дополнительный контент отображается, если передан endAddon', () => {
     const label = 'Тег';
     const badgeContent = '12';
 
-    const sut = (
+    renderWithTheme(
       <Tag
         label={label}
         endAddon={(props) => (
           <TagBadge {...props} badgeContent={badgeContent} />
         )}
-      />
+      />,
     );
 
-    renderWithTheme(sut);
+    const badge = screen.getByText(badgeContent);
 
-    const badgeElement = screen.getByText(badgeContent);
-
-    expect(badgeElement).toBeVisible();
+    expect(badge).toBeVisible();
   });
 
-  it('Возможно передать кастомную иконку удаления при переданном обработчике onDelete', () => {
-    const iconTestId = 'custom-icon';
+  it('Кастомная иконка удаления отображается при переданном пропсе onDelete', () => {
     const handleDeleteSpy = vi.fn();
-    const customIcon = <div data-testid={iconTestId} />;
+    const deleteIconTestId = 'custom-icon';
+    const customIcon = <div data-testid={deleteIconTestId} />;
 
-    const sut = <Tag onDelete={handleDeleteSpy} deleteIcon={customIcon} />;
+    renderWithTheme(<Tag onDelete={handleDeleteSpy} deleteIcon={customIcon} />);
 
-    renderWithTheme(sut);
+    const deleteIcon = screen.queryByTestId(deleteIconTestId);
 
-    const icon = screen.getByTestId(iconTestId);
-
-    expect(icon).toBeVisible();
+    expect(deleteIcon).toBeVisible();
   });
 });
