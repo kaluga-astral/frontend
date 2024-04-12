@@ -73,20 +73,7 @@ export const Placeholder = ({
   imgWidth,
   imgHeight,
 }: PlaceholderProps) => {
-  // Нужно чтобы не заставлять других разработчиков
-  // писать size={'small' as PlaceholderProps[size]}
-  const getSizeEnum = () => {
-    switch (externalSize) {
-      case 'small':
-        return Size.Small;
-      case 'medium':
-        return Size.Medium;
-      default:
-        return Size.Large;
-    }
-  };
-
-  const size = getSizeEnum();
+  const size = Size[externalSize as keyof typeof Size];
 
   return (
     <Wrapper $size={size} className={className}>
