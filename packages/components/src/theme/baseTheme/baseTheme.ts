@@ -73,7 +73,7 @@ export const createTheme = (params: CreateThemeParams) => {
   const muiTheme = createMuiTheme(mergedThemeOptions);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return mergeDeep(muiTheme as any, { elevation, shape }) as unknown as Theme;
+  return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
 };
 
 // функция получения темы для снепшота
