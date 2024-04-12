@@ -29,7 +29,7 @@ const getHeight = ({
 const calcMaxBodyHeight = ({
   drawerBleedingHeight,
 }: SwipeableDrawerHeaderProps): string =>
-  `calc(100vh - ${drawerBleedingHeight}px * 2)`;
+  `calc(100dvh - ${drawerBleedingHeight}px * 2)`;
 
 /**
  * @description Определение плавной анимации полного скрытия компонента.
@@ -41,7 +41,7 @@ const getUnmountTransform = ({
   ModalProps,
 }: SwipeableDrawerProps): string => {
   return !ModalProps?.keepMounted && !open
-    ? 'translateY(100vh) !important'
+    ? 'translateY(100dvh) !important'
     : 'none';
 };
 

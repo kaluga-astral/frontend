@@ -49,7 +49,9 @@ export const FormAutocomplete = <
   const handleOnChange = <Value,>(
     _event: SyntheticEvent<Element, Event>,
     value: Value,
-  ) => fieldProps.onChange(value);
+  ) => {
+    fieldProps.onChange(value);
+  };
 
   const handleOnInputChange = useCallback(
     (
@@ -67,9 +69,14 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
+  const fallbackValue = (
+    fieldProps.multiple ? [] : ''
+  ) as typeof fieldProps.value;
+
   return (
     <Autocomplete
       {...fieldProps}
+      value={fieldProps.value || fallbackValue}
       onInputChange={handleOnInputChange}
       onChange={handleOnChange}
     />

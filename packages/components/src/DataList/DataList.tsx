@@ -6,19 +6,24 @@ import {
   useRef,
 } from 'react';
 import { type ListRange, Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
-import { ArrowUpOutlineMd } from '@astral/icons';
 
 import { useToggle } from '../hooks';
-import { useViewportType } from '../hooks/useViewportType';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
+import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
-import { DataListEndData } from './DataListEndData';
-import { DataListError } from './DataListError';
-import { DataListLoader } from './DataListLoader';
-import { DataListNoData } from './DataListNoData';
-import { Item, ScrollToStartButton } from './styles';
+import { EndData } from './EndData';
+import { Error } from './Error';
+import { Loader } from './Loader';
+import { NoData } from './NoData';
+import { Item } from './styles';
+
+// TODO Вынести этот дженерик в отдельный пакет
+// Дженерик получает из типа только обязательные поля и возвращает их как union
+type RequiredKeys<T> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+}[keyof T];
 
 export type DataListProps<TDataItem extends Record<string, unknown>> = {
   data?: Array<TDataItem>;
@@ -26,7 +31,7 @@ export type DataListProps<TDataItem extends Record<string, unknown>> = {
   /**
    * Поле, используемое в качестве ключа списка
    */
-  keyId: TDataItem[keyof TDataItem] extends Key ? keyof TDataItem : never;
+  keyId: RequiredKeys<TDataItem>;
 
   /**
    * Название класса, применяется к корневому компоненту
@@ -100,8 +105,6 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
 
   const { imagesMap } = useContext(ConfigContext);
 
-  const { isMobile } = useViewportType();
-
   const [isStickyButtonActive, showStickyButton, hideStickyButton] =
     useToggle();
 
@@ -116,7 +119,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
     [hideStickyButton, showStickyButton],
   );
 
-  const handleScrollToStart = useCallback(
+  const handleScrollToTop = useCallback(
     () =>
       virtuoso.current?.scrollToIndex({
         index: 0,
@@ -135,7 +138,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
   const isDataExist = Boolean(data?.length);
 
   if (!isDataExist && !isLoading && !isError) {
-    return noDataPlaceholder || <DataListNoData />;
+    return noDataPlaceholder || <NoData />;
   }
 
   return (
@@ -143,7 +146,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
       isLoading={isLoading && !isDataExist}
       isError={isError && !isDataExist}
       errorState={{
-        imgAlt: 'Что-то пошло не тиак',
+        imgAlt: 'Что-то пошло не так',
         errorList: [errorMsg || ''],
         imgSrc: imagesMap.defaultErrorImgSrc,
         onRetry,
@@ -166,25 +169,17 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
         components={{
           Footer: () => (
             <>
-              {isLoading && <DataListLoader />}
-              {isError && <DataListError onRetry={onRetry} />}
+              {isLoading && <Loader />}
+              {isError && <Error onRetry={onRetry} />}
 
-              {isEndReached && (
-                <DataListEndData endOfScrollMsg={endOfScrollMsg} />
-              )}
+              {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
             </>
           ),
         }}
       />
 
       {isStickyButtonActive && (
-        <ScrollToStartButton
-          color="default"
-          size={isMobile ? 'medium' : 'small'}
-          onClick={handleScrollToStart}
-        >
-          <ArrowUpOutlineMd />
-        </ScrollToStartButton>
+        <ScrollToTopButton onClick={handleScrollToTop} />
       )}
     </ContentState>
   );

@@ -12,9 +12,9 @@ import { type PickerProps } from '../types';
 import { addYears } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
-import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants/counts';
+import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
-import { useMonthsGrid } from './hooks/useMonthsGrid';
+import { useMonthsGrid } from './hooks';
 
 type DateMonthPickerProps = PickerProps & CommonDateCalendarHeadProps;
 

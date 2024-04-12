@@ -42,13 +42,15 @@ describe('DateRangePicker', () => {
     };
 
     it('При выборе даты в первом пикере', async () => {
+      const user = userEvents.setup();
+
       const { onChangeStartDateSpy } = setupPicker();
 
-      fireEvent.click(screen.getByPlaceholderText('inputA'));
+      await user.click(screen.getByPlaceholderText('inputA'));
 
       const dateBtn = screen.getAllByText('15')[0];
 
-      await userEvents.click(dateBtn);
+      await user.click(dateBtn);
       expect(onChangeStartDateSpy).toBeCalled();
 
       expect(
@@ -61,13 +63,15 @@ describe('DateRangePicker', () => {
     });
 
     it('При выборе даты во втором пикере', async () => {
+      const user = userEvents.setup();
+
       const { onChangeEndDateSpy } = setupPicker();
 
-      fireEvent.click(screen.getByPlaceholderText('inputB'));
+      await user.click(screen.getByPlaceholderText('inputB'));
 
       const dateBtnB = screen.getAllByText('15')[1];
 
-      await userEvents.click(dateBtnB);
+      await user.click(dateBtnB);
       expect(onChangeEndDateSpy).toBeCalled();
       expect(onChangeEndDateSpy.mock.calls[0][0] instanceof Date).toBeTruthy();
 
@@ -77,8 +81,10 @@ describe('DateRangePicker', () => {
     });
   });
 
-  describe('minDate', () => {
-    it('Не позволяет выбрать дату меньше указанной', async () => {
+  describe('Пикер не позволяет выбрать дату', () => {
+    it('Меньше указанной в minDate', async () => {
+      const user = userEvents.setup();
+
       renderWithTheme(
         <DateRangePicker
           startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -86,14 +92,35 @@ describe('DateRangePicker', () => {
         />,
       );
 
-      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      await user.click(screen.getByPlaceholderText('inputA'));
 
       const btn = screen.getAllByText('8')[0];
 
       expect(btn).toBeDisabled();
     });
 
-    it('Позволяет выбрать дату равной minDate', async () => {
+    it('Больше указанной в maxDate', async () => {
+      const user = userEvents.setup();
+
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
+          maxDate={new Date('2022-02-12')}
+        />,
+      );
+
+      await user.click(screen.getByPlaceholderText('inputA'));
+
+      const btn = screen.getAllByText('13')[0];
+
+      expect(btn).toBeDisabled();
+    });
+  });
+
+  describe('Пикер позволяет выбрать дату', () => {
+    it('Равной minDate', async () => {
+      const user = userEvents.setup();
+
       renderWithTheme(
         <DateRangePicker
           startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -101,16 +128,16 @@ describe('DateRangePicker', () => {
         />,
       );
 
-      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      await user.click(screen.getByPlaceholderText('inputA'));
 
       const btn = screen.getAllByText('9')[0];
 
       expect(btn).not.toBeDisabled();
     });
-  });
 
-  describe('maxDate', () => {
-    it('Позволяет выбрать дату больше maxDate', async () => {
+    it('Равной maxDate', async () => {
+      const user = userEvents.setup();
+
       renderWithTheme(
         <DateRangePicker
           startDateProps={{ inputProps: { placeholder: 'inputA' } }}
@@ -118,22 +145,7 @@ describe('DateRangePicker', () => {
         />,
       );
 
-      fireEvent.focus(screen.getByPlaceholderText('inputA'));
-
-      const btn = screen.getAllByText('10')[0];
-
-      expect(btn).toBeDisabled();
-    });
-
-    it('Позволяет выбрать дату равной maxDate', async () => {
-      renderWithTheme(
-        <DateRangePicker
-          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-          maxDate={new Date('2022-02-09')}
-        />,
-      );
-
-      fireEvent.focus(screen.getByPlaceholderText('inputA'));
+      await user.click(screen.getByPlaceholderText('inputA'));
 
       const btn = screen.getAllByText('9')[0];
 
@@ -142,6 +154,8 @@ describe('DateRangePicker', () => {
   });
 
   it('Смещение даты для value обнуляется', async () => {
+    const user = userEvents.setup();
+
     renderWithTheme(
       <DateRangePicker
         startDateProps={{
@@ -152,7 +166,7 @@ describe('DateRangePicker', () => {
       />,
     );
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+    await user.click(screen.getByPlaceholderText('inputA'));
 
     const selected = screen.getAllByText('16')[0].getAttribute('aria-selected');
 
@@ -160,6 +174,8 @@ describe('DateRangePicker', () => {
   });
 
   it('Активная дата помечается в календаре как выбранная', async () => {
+    const user = userEvents.setup();
+
     const callbacks: { setValue: (date?: Date) => void } = {
       setValue: () => undefined,
     };
@@ -186,7 +202,7 @@ describe('DateRangePicker', () => {
       callbacks.setValue(new Date('2022-03-09'));
     });
 
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
+    await user.click(screen.getByPlaceholderText('inputA'));
 
     const selected = screen.getAllByText('9')[0].getAttribute('aria-selected');
 
@@ -194,6 +210,10 @@ describe('DateRangePicker', () => {
   });
 
   it('Пикер закрывается при выборе обоих дат, в состоянии управляемого компонента', async () => {
+    const user = userEvents.setup({
+      skipHover: true,
+    });
+
     const TestComponent = () => {
       const [valueA, setValueA] = useState<Date | undefined>();
       const [valueB, setValueB] = useState<Date | undefined>();
@@ -215,83 +235,46 @@ describe('DateRangePicker', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.focus(screen.getByPlaceholderText('inputA'));
-    // eslint-disable-next-line testing-library/prefer-presence-queries
-    expect(screen.queryAllByRole('tooltip').length).toBeTruthy();
+    await user.click(screen.getByPlaceholderText('inputA'));
+    await user.click(screen.getAllByText('15')[0]);
+    await user.click(screen.getAllByText('15')[1]);
 
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[0]);
-    });
+    const popover = screen.queryByRole('presentation');
 
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[1]);
-    });
-
-    expect(screen.queryAllByRole('tooltip')).toStrictEqual([]);
+    expect(popover).not.toBeInTheDocument();
   });
 
-  describe('onBlur', () => {
-    it('Вызывается при фокусе на стороннем элементе', async () => {
-      const onBlur = vi.fn();
+  it('На одном календаре можно выбрать две даты', async () => {
+    const user = userEvents.setup();
 
-      renderWithTheme(
-        <DateRangePicker
-          onBlur={onBlur}
-          startDateProps={{ inputProps: { placeholder: 'inputA' } }}
-        />,
-      );
-
-      fireEvent.focus(screen.getByPlaceholderText('inputA'));
-      // фокус вне инпута с поповером
-      fireEvent.focus(document.body);
-      expect(onBlur).toBeCalled();
-    });
-
-    it('Не вызывается при клике мимо инпута, если поповер закрыт', async () => {
-      const onBlur = vi.fn();
-
-      renderWithTheme(<DateRangePicker onBlur={onBlur} />);
-      await userEvents.click(document.body);
-      expect(onBlur).not.toBeCalled();
-    });
-  });
-
-  it('Можно выбрать две даты на одном календаре', async () => {
-    const TestComponent = () => {
-      return (
-        <DateRangePicker
-          startDateProps={{
-            inputProps: { placeholder: 'inputA' },
-          }}
-          endDateProps={{
-            inputProps: { placeholder: 'inputB' },
-          }}
-        />
-      );
-    };
-
-    renderWithTheme(<TestComponent />);
+    renderWithTheme(
+      <DateRangePicker
+        startDateProps={{
+          inputProps: { placeholder: 'inputA' },
+        }}
+        endDateProps={{
+          inputProps: { placeholder: 'inputB' },
+        }}
+      />,
+    );
 
     const inputA = screen.getByPlaceholderText('inputA');
     const inputB = screen.getByPlaceholderText('inputB');
 
-    fireEvent.focus(inputA);
+    await user.click(inputA);
     // eslint-disable-next-line testing-library/prefer-presence-queries
-    expect(screen.queryAllByRole('tooltip').length).toBeTruthy();
-
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[0]);
-    });
-
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('17')[0]);
-    });
-
+    expect(screen.queryAllByRole('presentation').length).toBeTruthy();
+    await user.click(screen.getAllByText('15')[0]);
+    await user.click(screen.getAllByText('17')[0]);
     expect((inputA as HTMLInputElement).value).not.toBe('');
     expect((inputB as HTMLInputElement).value).not.toBe('');
   });
 
   it('Второй календарь отображает следующий месяц от выбранной даты первого календаря', async () => {
+    const user = userEvents.setup({
+      skipHover: true,
+    });
+
     const TestComponent = () => {
       const [dateA, setDateA] = useState<Date | undefined>();
       const [dateB, setDateB] = useState<Date | undefined>();
@@ -317,35 +300,27 @@ describe('DateRangePicker', () => {
     const inputA = screen.getByPlaceholderText('inputA');
     const inputB = screen.getByPlaceholderText('inputB');
 
-    fireEvent.focus(inputA);
+    await user.click(inputA);
 
     const firstCalendarPrevMonthButton = screen.getAllByRole('button', {
       name: 'Предыдущий месяц',
     })[0];
 
-    await act(async () => {
-      await userEvents.click(firstCalendarPrevMonthButton);
-    });
-
-    await act(async () => {
-      await userEvents.click(firstCalendarPrevMonthButton);
-    });
-
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[0]);
-    });
-
-    fireEvent.focus(document.body);
-    fireEvent.focus(inputB);
-
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[1]);
-    });
-
-    expect((inputB as HTMLInputElement).value).toBe('15.01.2022');
-  });
+    await user.click(firstCalendarPrevMonthButton);
+    await user.click(screen.getAllByText('15')[0]);
+    await user.keyboard('{Escape}');
+    await user.click(inputB);
+    await user.click(screen.getAllByText('15')[1]);
+    expect((inputB as HTMLInputElement).value).toBe('15.02.2022');
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
+  }, 5000);
 
   it('Первый календарь отображает предыдущий месяц от выбранной даты второго календаря', async () => {
+    const user = userEvents.setup({
+      skipHover: true,
+    });
+
     const TestComponent = () => {
       const [dateA, setDateA] = useState<Date | undefined>();
       const [dateB, setDateB] = useState<Date | undefined>();
@@ -371,31 +346,89 @@ describe('DateRangePicker', () => {
     const inputA = screen.getByPlaceholderText('inputA');
     const inputB = screen.getByPlaceholderText('inputB');
 
-    fireEvent.focus(inputB);
+    await user.click(inputB);
 
     const secondCalendarPrevMonthButton = screen.getAllByRole('button', {
       name: 'Следующий месяц',
     })[1];
 
-    await act(async () => {
-      await userEvents.click(secondCalendarPrevMonthButton);
+    await user.click(secondCalendarPrevMonthButton);
+    await user.click(screen.getAllByText('15')[1]);
+    await user.keyboard('{Escape}');
+    await user.click(inputA);
+    await user.click(screen.getAllByText('15')[0]);
+    expect((inputA as HTMLInputElement).value).toBe('15.03.2022');
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
+  }, 5000);
+
+  describe('Popover', () => {
+    it('Не появляется при фокусе', () => {
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+          }}
+        />,
+      );
+
+      const inputA = screen.getByPlaceholderText('inputA');
+
+      fireEvent.focus(inputA);
+
+      const popover = screen.queryByRole('presentation');
+
+      expect(popover).not.toBeInTheDocument();
     });
 
-    await act(async () => {
-      await userEvents.click(secondCalendarPrevMonthButton);
+    it('Появляется при клике по input', async () => {
+      const user = userEvents.setup();
+
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+          }}
+        />,
+      );
+
+      const inputA = screen.getByPlaceholderText('inputA');
+
+      await user.click(inputA);
+
+      const popover = screen.queryByRole('presentation');
+
+      expect(popover).toBeInTheDocument();
     });
 
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[1]);
+    it('Не появляется при клике по input если disabled=true', async () => {
+      const user = userEvents.setup();
+
+      renderWithTheme(
+        <DateRangePicker
+          disabled
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+          endDateProps={{
+            inputProps: { placeholder: 'inputB' },
+          }}
+        />,
+      );
+
+      const inputA = screen.getByPlaceholderText('inputA');
+
+      await user.click(inputA);
+
+      const popover = screen.queryByRole('presentation');
+
+      expect(popover).not.toBeInTheDocument();
     });
-
-    fireEvent.focus(document.body);
-    fireEvent.focus(inputA);
-
-    await act(async () => {
-      await userEvents.click(screen.getAllByText('15')[0]);
-    });
-
-    expect((inputA as HTMLInputElement).value).toBe('15.04.2022');
   });
 });

@@ -1,9 +1,14 @@
-import { forwardRef } from 'react';
-import { ClickAwayListener } from '@mui/material';
+import { type PropsWithChildren, forwardRef } from 'react';
+import {
+  type AvatarProps,
+  ClickAwayListener,
+  type MenuProps,
+} from '@mui/material';
 
 import { useMenu } from '../hooks';
 import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
+import { type WithoutEmotionSpecific } from '../types';
 
 import {
   ProfileAnnotation,
@@ -13,7 +18,27 @@ import {
   ProfileRoot,
   ProfileUser,
 } from './styles';
-import { type ProfileProps } from './types';
+
+export type ProfileProps = {
+  /**
+   * Имя профиля
+   */
+  displayName: string;
+  /**
+   * Дополнительная информация (например email или username)
+   */
+  annotation?: string;
+  /**
+   * Аватарка профиля
+   */
+  avatar?: AvatarProps;
+  /**
+   * Выпадающее меню
+   */
+  menu: (
+    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
+  ) => JSX.Element;
+};
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {
@@ -44,6 +69,11 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           open={open}
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
+          PaperProps={{
+            style: {
+              width: anchorRef.current?.clientWidth ?? 'auto',
+            },
+          }}
         />
       </>
     );

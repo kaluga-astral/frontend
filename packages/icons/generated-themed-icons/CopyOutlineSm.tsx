@@ -1,7 +1,7 @@
-import React from 'react';
+import { type FC } from 'react';
 import { SvgIcon, type SvgIconProps } from '@mui/material';
 
-const CopyOutlineSm: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
+const CopyOutlineSm: FC<SvgIconProps> = (props) => (
   <SvgIcon
     viewBox="0 0 16 16"
     xmlns="http://www.w3.org/2000/svg"

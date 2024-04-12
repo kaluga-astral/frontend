@@ -112,7 +112,7 @@ describe('FormDateRangePicker', () => {
     };
 
     renderWithTheme(<TestComponent />);
-    fireEvent.focus(screen.getByLabelText('startDate'));
+    fireEvent.click(screen.getByLabelText('startDate'));
 
     const startDateBtn = screen.getAllByText('14')[0];
     const endDateBtn = screen.getAllByText('15')[1];
@@ -133,5 +133,7 @@ describe('FormDateRangePicker', () => {
     expect(
       submitValues.endDateField.toISOString().includes('2022-03-15'),
     ).toBeTruthy();
-  });
+    // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
+    // https://track.astral.ru/soft/browse/UIKIT-1352
+  }, 5000);
 });

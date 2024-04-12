@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { Typography, type TypographyProps } from '../../Typography';
-import { DescriptionContext } from '../DescriptionProvider';
+import { DescriptionContext } from '../DescriptionContext';
 
 import { DashedSeparator, Wrapper } from './styles';
 
@@ -19,7 +19,7 @@ export const Name = ({
       <Wrapper>
         <Typography {...props} color={color}>
           {children}
-          {separator}
+          {!leader && separator}
         </Typography>
       </Wrapper>
       {leader && <DashedSeparator />}

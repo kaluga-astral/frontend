@@ -1,4 +1,3 @@
-import { Fab } from '../Fab';
 import { styled } from '../styles';
 
 import { ITEM_CLASSNAME } from './constants';
@@ -28,16 +27,5 @@ export const Item = styled.li`
 
       border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
     }
-  }
-`;
-
-export const ScrollToStartButton = styled(Fab)`
-  position: absolute;
-  bottom: ${({ theme }) => theme.spacing(8)};
-  left: ${({ theme }) => theme.spacing(10)};
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    bottom: ${({ theme }) => theme.spacing(7)};
-    left: ${({ theme }) => theme.spacing(4)};
   }
 `;
