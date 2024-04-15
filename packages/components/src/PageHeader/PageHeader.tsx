@@ -60,7 +60,7 @@ export type PageHeaderProps<BackBtnProps = {}> = {
    */
   actions?: ButtonGroupProps;
   /**
-   * @description Пропсы для кнопки назада, можно дополнить через generic PageHeader'а
+   * @description Пропсы для кнопки назад, можно дополнить через generic PageHeader'а
    * @example
    * <PageHeader<{to: string}>
    *  backButton={{
