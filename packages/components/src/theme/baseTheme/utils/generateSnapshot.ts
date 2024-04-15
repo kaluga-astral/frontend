@@ -27,7 +27,7 @@ const fontsUrls = {
 (async () => {
   const theme = createSnapshotTheme({ brand: Brand.DEFAULT, fontsUrls });
   const json = JSON.stringify(theme);
-  const relPath = './src/theme/baseTheme/snapshot.json';
+  const relPath = './snapshots/theme.snapshot.json';
 
   const rl = createInterface({ input, output });
 

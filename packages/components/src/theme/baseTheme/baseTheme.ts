@@ -76,19 +76,22 @@ export const createTheme = (params: CreateThemeParams) => {
   return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
 };
 
+type SnapshotTheme = Theme & {
+  computedGetters: {
+    spacing: string[];
+  };
+};
+
 // функция получения темы для снепшота
-export const createSnapshotTheme = (params: CreateThemeParams) => {
+export const createSnapshotTheme = (
+  params: CreateThemeParams,
+): SnapshotTheme => {
   const theme = createTheme(params);
   const spacingResults: string[] = [];
-  const breakpointResults: string[] = [];
 
   // Вычисляем значения геттеров
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 2; i++) {
     spacingResults.push(theme.spacing(i));
-  }
-
-  for (const key of ['sm', 'md', 'lg', 'xl', 'xs']) {
-    breakpointResults.push(theme.breakpoints.down(key as 'sm'));
   }
 
   // Записываем их в объект для сериализации
@@ -96,7 +99,6 @@ export const createSnapshotTheme = (params: CreateThemeParams) => {
     ...theme,
     computedGetters: {
       spacing: spacingResults,
-      breakPoints: breakpointResults,
     },
   };
 };

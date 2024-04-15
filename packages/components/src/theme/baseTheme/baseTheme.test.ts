@@ -1,7 +1,7 @@
 import { Brand } from '../constants';
+import themeSnapshot from '../../../snapshots/theme.snapshot.json';
 
 import { createSnapshotTheme, createTheme } from './baseTheme';
-import themeSnapshot from './snapshot.json';
 
 describe('createTheme', () => {
   const fontsUrls = {
