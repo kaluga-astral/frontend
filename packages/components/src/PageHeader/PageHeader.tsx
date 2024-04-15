@@ -16,7 +16,7 @@ import {
   Wrapper,
 } from './styles';
 
-export type PageHeaderProps = {
+export type PageHeaderProps<BackBtnProps = {}> = {
   /**
    * @example <PageHeader title="Заголовок страницы" />
    * Заголовок страницы
@@ -60,15 +60,21 @@ export type PageHeaderProps = {
    */
   actions?: ButtonGroupProps;
   /**
-   * @example <PageHeader backButton={{
-   *  onClick: () => {},
-   * }} />
-   * Кнопка назад
+   * @description Пропсы для кнопки назада, можно дополнить через generic PageHeader'а
+   * @example
+   * <PageHeader<{to: string}>
+   *  backButton={{
+   *    onClick: () => {},
+   *    to: '/'
+   *  }}
+   * />
    */
-  backButton?: Omit<ButtonProps, 'children' | 'variant'>;
+  backButton?: Omit<ButtonProps, 'children' | 'variant'> & BackBtnProps;
 };
 
-export const PageHeader = (props: PageHeaderProps) => {
+export function PageHeader<BackBtnProps = {}>(
+  props: PageHeaderProps<BackBtnProps>,
+) {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
   const { isMobile } = useViewportType();
@@ -97,4 +103,4 @@ export const PageHeader = (props: PageHeaderProps) => {
       {subheader && <PageSubheader>{subheader}</PageSubheader>}
     </Wrapper>
   );
-};
+}
