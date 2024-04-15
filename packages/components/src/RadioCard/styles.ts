@@ -36,7 +36,19 @@ export const Wrapper = styled.div<{ $disabled?: boolean }>`
 `;
 
 export const StyledRadio = styled(Radio)`
-  display: none;
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;
 
 export const Content = styled.div`

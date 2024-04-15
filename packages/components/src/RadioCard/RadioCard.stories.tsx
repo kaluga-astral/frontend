@@ -25,6 +25,12 @@ const HeaderWrapper = styled.div`
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: inside;
+`;
+
 const Header = ({ price }: { price: string }) => (
   <HeaderWrapper>
     <Typography variant="h5">
@@ -45,25 +51,25 @@ export const Example = () => {
   return (
     <RadioGroup name="test" value={value} onChange={handleChange}>
       <RadioCard header={<Header price="2 500" />} value="one">
-        <ul>
+        <List>
           <li>Создание доверенностей от одной организации</li>
           <li>В пакете до 2 доверенностей</li>
           <li>На 12 месяцев</li>
-        </ul>
+        </List>
       </RadioCard>
       <RadioCard header={<Header price="5 000" />} value="two">
-        <ul>
+        <List>
           <li>Создание доверенностей от одной организации</li>
           <li>В пакете до 5 доверенностей</li>
           <li>На 12 месяцев</li>
-        </ul>
+        </List>
       </RadioCard>
       <RadioCard disabled header={<Header price="10 000" />} value="three">
-        <ul>
+        <List>
           <li>Создание доверенностей от одной организации</li>
           <li>В пакете от 5 доверенностей</li>
           <li>На 12 месяцев</li>
-        </ul>
+        </List>
       </RadioCard>
     </RadioGroup>
   );
@@ -79,11 +85,11 @@ export const Disabled = () => {
   return (
     <RadioGroup name="test" value={value} onChange={handleChange}>
       <RadioCard disabled header={<Header price="10 000" />} value="three">
-        <ul>
+        <List>
           <li>Создание доверенностей от одной организации</li>
           <li>В пакете от 5 доверенностей</li>
           <li>На 12 месяцев</li>
-        </ul>
+        </List>
       </RadioCard>
     </RadioGroup>
   );
