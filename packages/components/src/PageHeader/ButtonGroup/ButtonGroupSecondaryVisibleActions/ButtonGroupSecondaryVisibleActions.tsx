@@ -4,10 +4,11 @@ import { type ButtonProps } from '../../../Button';
 import { IconButton } from '../../../IconButton';
 import { Tooltip } from '../../../Tooltip';
 
-/** Модель основного экшена */
+/** Модель второстепенного видимого экшена */
 export type SecondaryVisibleAction = Omit<ButtonProps, 'children'> & {
   /** Название действия */
   name: string;
+  /** Иконка */
   icon: ReactNode;
 };
 

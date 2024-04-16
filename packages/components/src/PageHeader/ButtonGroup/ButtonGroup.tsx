@@ -15,8 +15,9 @@ import { Wrapper } from './styles';
 export type ButtonGroupProps = {
   /** Основные действия */
   main?: MainAction[];
-  /** Второстепенные действия */
+  /** Второстепенные действия, спрятанные за троеточием */
   secondary?: SecondaryAction[];
+  /** Видимые второстепенные действия */
   secondaryVisible?: SecondaryVisibleAction[];
 };
 
