@@ -475,6 +475,10 @@ export const Actions = () => (
           },
           { text: 'действие 3', color: 'error' },
         ],
+        secondaryVisible: [
+          { name: 'О компании', icon: <CompanyOutlineMd /> },
+          { name: 'Добавить', icon: <AddOutlineMd /> },
+        ],
         secondary: [
           { text: 'Второстепенное действие 1' },
           { text: 'Второстепенное действие 2' },
