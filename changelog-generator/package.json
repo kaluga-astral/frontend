@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node src/index.js"
+    "start": "ts-node src/main.ts"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
@@ -11,6 +11,7 @@
     "telegraf": "~4.15.3"
   },
   "devDependencies": {
-    "@astral/eslint-config-node": "^2.4.0"
+    "@astral/eslint-config-node": "^2.4.0",
+    "ts-node": "^10.9.2"
   }
 }

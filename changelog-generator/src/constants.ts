@@ -1,4 +1,4 @@
-const COMMIT_TYPE = {
+export const COMMIT_TYPE = {
   Feat: 'feat',
   Refactor: 'refactor',
   Bug: 'bug',
@@ -6,9 +6,9 @@ const COMMIT_TYPE = {
   Chore: 'chore',
   Build: 'build',
   Doc: 'doc',
-};
+} as const;
 
-const GROUP_HEADERS = {
+export const GROUP_HEADERS = {
   [COMMIT_TYPE.Feat]: '✨ Features',
   [COMMIT_TYPE.Refactor]: '🛠 Refactors',
   [COMMIT_TYPE.Bug]: '🐞 Bugs',
@@ -17,5 +17,3 @@ const GROUP_HEADERS = {
   [COMMIT_TYPE.Build]: '📦 Build',
   [COMMIT_TYPE.Doc]: '📑 Docs',
 };
-
-module.exports = { COMMIT_TYPE, GROUP_HEADERS };

@@ -1,15 +1,13 @@
-const fs = require('node:fs');
+import fs from 'node:fs';
 
-class FileService {
+export class FileService {
   static writeFile(filePath, content) {
     fs.writeFile(filePath, content, (error) => {
       if (error) {
-        console.error('Ошибка при записи файла:', error);
+        throw Error(`Ошибка при записи файла: ${error}`);
       } else {
         console.log(`Файл успешно создан: ${filePath}`);
       }
     });
   }
 }
-
-module.exports = { FileService };
