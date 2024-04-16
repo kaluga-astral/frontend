@@ -12,13 +12,9 @@ export type FormAutocompleteProps<
   Multiple extends boolean,
   DisableClearable extends boolean,
   FreeSolo extends boolean,
-> = Omit<
-  // не содержит onChange, тк как он будет перехвачен формой
-  WithFormFieldProps<
-    AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-    FieldValues
-  >,
-  'onChange'
+> = WithFormFieldProps<
+  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
+  FieldValues
 >;
 
 /**
@@ -73,9 +69,14 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
+  const fallbackValue = (
+    fieldProps.multiple ? [] : ''
+  ) as typeof fieldProps.value;
+
   return (
     <Autocomplete
       {...fieldProps}
+      value={fieldProps.value || fallbackValue}
       onInputChange={handleOnInputChange}
       onChange={handleOnChange}
     />
