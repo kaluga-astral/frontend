@@ -9,6 +9,7 @@ import {
 } from './utils';
 import { GitService, FileService, MarkdownService } from './services';
 import { COMMIT_TYPE, GROUP_HEADERS } from './constants';
+import type { FilteredCommit } from './types';
 
 const currentDate = new Date();
 const startDate = subtractDays(currentDate, PERIOD_IN_DAYS);
@@ -17,11 +18,9 @@ const endDate = currentDate;
 const gitlog = new GitService();
 const results = gitlog.getCommitList(startDate, endDate);
 
-console.log('resaults', results);
-
 // Удаляем промежуточные коммиты
 const filteredParseResults = results.filter((commit) => {
-  if (!commit?.type) {
+  if (!commit?.type || !commit?.us) {
     return false;
   }
 
@@ -35,7 +34,7 @@ const filteredParseResults = results.filter((commit) => {
   }
 
   return true;
-});
+}) as FilteredCommit[];
 
 const lastCommitWithVersion = filteredParseResults.find((commit) =>
   Boolean(commit?.version),
@@ -49,7 +48,7 @@ const markdownService = new MarkdownService(
 
 const markdownMarkup = markdownService.getMarkup(
   filteredParseResults,
-  lastCommitWithVersion?.version,
+  lastCommitWithVersion?.version || '',
   startDate,
   endDate,
 );

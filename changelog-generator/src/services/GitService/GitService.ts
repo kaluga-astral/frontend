@@ -3,19 +3,17 @@ import gitlog from 'gitlog';
 import type { Commit, CommitType } from '../../types';
 
 interface IGitService {
-  getCommitList: (startDate: Date, endDate: Date) => Array<Commit | undefined>;
+  getCommitList: (startDate: Date, endDate: Date) => Array<Commit>;
 };
 
 type ParseMetaResult = {
-  type?: CommitType | null;
-  us: string
-  component?: string | null;
+  type: CommitType | undefined;
+  us: string | undefined;
+  component: string | undefined;
 };
 
 export class GitService implements IGitService {
-  getCommitList(startDate: Date, endDate: Date): Array<Commit | undefined> {
-    console.log('startDate', startDate, typeof startDate);
-
+  getCommitList(startDate: Date, endDate: Date): Array<Commit> {
     const results = gitlog({
       // after и before указано что принимает только string, но по факту работает с объектом Date
       after: startDate as unknown as string,
@@ -32,7 +30,13 @@ export class GitService implements IGitService {
     const [meta, description] = subject.split(':');
   
     if (!meta || !description) {
-      return undefined;
+      return {
+        version: undefined,
+        type: undefined,
+        us: undefined,
+        component: undefined,
+        title: undefined,
+      };
     }
   
     const version = this.parseVersion(tag);
@@ -50,7 +54,7 @@ export class GitService implements IGitService {
     };
   }
 
-  private formatTitle(title?: string) {
+  private formatTitle(title: string) {
     if (!title) {
       return undefined;
     }
@@ -62,7 +66,7 @@ export class GitService implements IGitService {
   private parseVersion(tag: string) {
     const versionMatch = tag.match(/tag: (v[\d.]+)/);
   
-    return versionMatch ? versionMatch[1] : '';
+    return versionMatch ? versionMatch[1] : undefined;
   }
   
   private parseMeta(meta: string) {

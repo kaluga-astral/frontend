@@ -1,31 +1,39 @@
 import { dateToView } from '../../utils';
-import type { Commit, CommitType } from '../../types';
+import type { FilteredCommit, CommitType } from '../../types';
 
 interface IMarkdownService {
-  getMarkup: (commits: Commit[], lastVersion: string, startDate: string, endDate: string) => string;
+  getMarkup: (commits: FilteredCommit[], lastVersion: string, startDate: string, endDate: string) => string;
 };
 
-type Story = Omit<Commit, 'type'>;
+type Story = Omit<FilteredCommit, 'type'>;
 
 export class MarkdownService implements IMarkdownService {
-  constructor(private readonly groupHeaders: any, private readonly generateBaseLinkToJira: any, private readonly generateBaseLinkToStorybook: any) {}
+  constructor(
+    private readonly groupHeaders: Record<CommitType, string>,
+    private readonly generateBaseLinkToJira: (us: string) => string,
+    private readonly generateBaseLinkToStorybook: (component: string) => string,
+  ) {}
 
-  getMarkup(commits: Commit[], lastVersion: string, startDate: string | Date, endDate: string | Date) {
+  getMarkup(commits: FilteredCommit[], lastVersion: string, startDate: string | Date, endDate: string | Date) {
     const flatChangelog = commits.map(({ type, ...story }) => ({
       type,
       story: this.generateChangelogItem(type, story),
     }));
 
-    const groupedChangelog = flatChangelog.reduce(
+    const groupedChangelog = flatChangelog.reduce<Record<CommitType, string[]>>(
       (acc, { type, story }) => ({
         ...acc,
         [type]: [...(acc[type] || []), story],
       }),
-      {},
-    ) as Record<CommitType, string[]>;
+      // иначе необходимо инициализировать аккумулятор, чтобы он удовлетворял типу Record<CommitType, string[]>
+      // при генерации changelogBody проверять что массив не пустой
+      {} as any,
+    );
 
-    const changelogBody = Object.entries(groupedChangelog).reduce(
-      (acc, [type, stories]: [any, string[]]) =>
+    const groupedChangelogArray = Object.entries(groupedChangelog) as [CommitType, string[]][];
+
+    const changelogBody = groupedChangelogArray.reduce(
+      (acc, [type, stories]) =>
         `${acc}\n\n--- \n\n#### ${this.groupHeaders[type]}\n${stories.join('\n')}`,
       '',
     );
@@ -47,10 +55,10 @@ export class MarkdownService implements IMarkdownService {
     const { component, title, us, version } = story;
 
     if (Object.is(type, 'feat')) {
-      return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}). Посмотреть в ${this.generateLinkToStorybook(component)}. ${version}`;
+      return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}).` + (component ? `Посмотреть в ${this.generateLinkToStorybook(component)}.` : '') + (version || '');
     }
 
-    return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}). ${version}`;
+    return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}). ${version || ''}`;
   }
 
   private generateLinkToJira(us: string) {

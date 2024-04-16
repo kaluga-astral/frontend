@@ -2,6 +2,7 @@
   "compilerOptions": {
     "lib": ["ES2016"],
     "esModuleInterop": true,
+    "strict": true,
   },
   "include": ["src"],
 }

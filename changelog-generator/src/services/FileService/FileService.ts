@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 export class FileService {
-  static writeFile(filePath, content) {
+  static writeFile(filePath: string, content: string) {
     fs.writeFile(filePath, content, (error) => {
       if (error) {
         throw Error(`Ошибка при записи файла: ${error}`);
