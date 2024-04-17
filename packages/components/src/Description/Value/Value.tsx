@@ -62,30 +62,26 @@ export const Value = ({
   };
 
   return (
-    <Tooltip
-      onClick={handleClick}
-      onMouseLeave={handleMouseLeave}
-      withoutContainer={false}
-      placement="bottom"
-      title={status}
-    >
-      <StyledTypography {...props}>
-        {copyPosition === 'left' && (
-          <StyledCopyIcon
-            $copyPosition={copyPosition}
-            color={props.color as 'secondary'}
-          />
-        )}
+    <div onMouseLeave={handleMouseLeave}>
+      <Tooltip placement="bottom" title={status}>
+        <StyledTypography {...props} onClick={handleClick}>
+          {copyPosition === 'left' && (
+            <StyledCopyIcon
+              $copyPosition={copyPosition}
+              color={props.color as 'secondary'}
+            />
+          )}
 
-        {resultChildren}
+          {resultChildren}
 
-        {copyPosition === 'right' && (
-          <StyledCopyIcon
-            $copyPosition={copyPosition}
-            color={props.color as 'secondary'}
-          />
-        )}
-      </StyledTypography>
-    </Tooltip>
+          {copyPosition === 'right' && (
+            <StyledCopyIcon
+              $copyPosition={copyPosition}
+              color={props.color as 'secondary'}
+            />
+          )}
+        </StyledTypography>
+      </Tooltip>
+    </div>
   );
 };
