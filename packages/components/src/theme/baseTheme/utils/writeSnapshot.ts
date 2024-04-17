@@ -2,8 +2,9 @@ import { writeFile } from 'node:fs/promises';
 import { createInterface } from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
-import { createSnapshotTheme } from '../baseTheme';
 import { Brand } from '../../constants';
+
+import { createSnapshotTheme } from './createSnapshotTheme';
 
 const fontsUrls = {
   bold: {

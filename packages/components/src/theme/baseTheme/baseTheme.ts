@@ -40,7 +40,7 @@ export type Palette = Omit<MuiPalette, 'grey' | 'info' | 'background'> & {
   components: ComponentsColors;
 };
 
-type CreateThemeParams = {
+export type CreateThemeParams = {
   brand: Brand;
   options?: ThemeOptions;
   fontsUrls: FontsUrls;
@@ -74,31 +74,4 @@ export const createTheme = (params: CreateThemeParams) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return mergeDeep(muiTheme as any, { elevation, shape }) as Theme;
-};
-
-type SnapshotTheme = Theme & {
-  computedGetters: {
-    spacing: string[];
-  };
-};
-
-// функция получения темы для снепшота
-export const createSnapshotTheme = (
-  params: CreateThemeParams,
-): SnapshotTheme => {
-  const theme = createTheme(params);
-  const spacingResults: string[] = [];
-
-  // Вычисляем значения геттеров
-  for (let i = 0; i < 2; i++) {
-    spacingResults.push(theme.spacing(i));
-  }
-
-  // Записываем их в объект для сериализации
-  return {
-    ...theme,
-    computedGetters: {
-      spacing: spacingResults,
-    },
-  };
 };
