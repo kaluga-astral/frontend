@@ -58,6 +58,38 @@ describe('CheckableTag', () => {
     expect(checkbox).toBeDisabled();
   });
 
+  it('OnDelete не вызывается при нажатии на иконку удаления, при disabled=true', async () => {
+    const handleDeleteSpy = vi.fn();
+    const deleteIconTestId = 'deleteIconTestId';
+    const checkDeleteInteractionRegex = /pointer-events: none/;
+    const deleteIcon = <span data-testid={deleteIconTestId} />;
+
+    renderWithTheme(
+      <CheckableTag
+        disabled
+        onDelete={handleDeleteSpy}
+        deleteIcon={deleteIcon}
+      />,
+    );
+
+    const deleteIconElement = screen.getByTestId(deleteIconTestId);
+
+    await expect(() => userEvents.click(deleteIconElement)).rejects.toThrow(
+      checkDeleteInteractionRegex,
+    );
+  });
+
+  it('OnChange не вызывается при нажатии на тег, при disabled=true', async () => {
+    const handleChangeSpy = vi.fn();
+
+    renderWithTheme(<CheckableTag disabled onChange={handleChangeSpy} />);
+
+    const checkbox = screen.getByRole('checkbox', { hidden: true });
+
+    await userEvents.click(checkbox);
+    expect(handleChangeSpy).not.toHaveBeenCalled();
+  });
+
   it('OnChange вызывается при нажатии на тег', async () => {
     const label = 'Тег';
     const handleChangeSpy = vi.fn();
