@@ -63,13 +63,8 @@ export const Value = ({
 
   return (
     <div onMouseLeave={handleMouseLeave}>
-      <Tooltip
-        onClick={handleClick}
-        withoutContainer={false}
-        placement="bottom"
-        title={status}
-      >
-        <StyledTypography {...props}>
+      <Tooltip placement="bottom" title={status}>
+        <StyledTypography {...props} onClick={handleClick}>
           {copyPosition === 'left' && (
             <StyledCopyIcon
               $copyPosition={copyPosition}
