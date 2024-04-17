@@ -30,7 +30,8 @@
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint --fix",
-    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix",
+    "snapshot:theme": "ts-node -T ./src/theme/baseTheme/utils/writeSnapshot.ts"
   },
   "dependencies": {
     "@astral/icons": "*",
@@ -53,6 +54,7 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@astral/tests": "*"
+    "@astral/tests": "*",
+    "ts-node": "^10.9.2"
   }
 }
