@@ -94,6 +94,18 @@ describe('Tag', () => {
     expect(deleteIcon).toBeVisible();
   });
 
+  it('OnClick вызывается при нажатии на тег', async () => {
+    const onClickSpy = vi.fn();
+    const tagTestId = 'tagTestId';
+
+    renderWithTheme(<Tag onClick={onClickSpy} data-testid={tagTestId} />);
+
+    const tag = screen.getByTestId(tagTestId);
+
+    await userEvents.click(tag);
+    expect(onClickSpy).toBeCalled();
+  });
+
   it('OnClick не вызывается при нажатии на тег, если disabled=true', async () => {
     const tagTestId = 'tagTestId';
 
@@ -104,6 +116,20 @@ describe('Tag', () => {
     await expect(() => userEvents.click(tag)).rejects.toThrow(
       CHECK_INTERACTION_REGEXP,
     );
+  });
+
+  it('OnDelete вызывается при нажатии на иконку удаления', async () => {
+    const onDeleteSpy = vi.fn();
+    const deleteIconTestId = 'deleteIconTestId';
+
+    const deleteIcon = <span data-testid={deleteIconTestId} />;
+
+    renderWithTheme(<Tag onDelete={onDeleteSpy} deleteIcon={deleteIcon} />);
+
+    const deleteIconElement = screen.getByTestId(deleteIconTestId);
+
+    await userEvents.click(deleteIconElement);
+    expect(onDeleteSpy).toBeCalled();
   });
 
   it('OnDelete не вызывается при нажатии на иконку удаления, если disabled=true', async () => {
