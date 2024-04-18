@@ -1,5 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { renderWithTheme, screen } from '@astral/tests';
+import {
+  CHECK_INTERACTION_REGEXP,
+  renderWithTheme,
+  screen,
+  userEvents,
+} from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TagBadge } from '../TagBadge';
@@ -78,14 +83,43 @@ describe('Tag', () => {
   });
 
   it('Кастомная иконка удаления отображается при переданном пропсе onDelete', () => {
-    const handleDeleteSpy = vi.fn();
+    const onDeleteSpy = vi.fn();
     const deleteIconTestId = 'custom-icon';
     const customIcon = <div data-testid={deleteIconTestId} />;
 
-    renderWithTheme(<Tag onDelete={handleDeleteSpy} deleteIcon={customIcon} />);
+    renderWithTheme(<Tag onDelete={onDeleteSpy} deleteIcon={customIcon} />);
 
     const deleteIcon = screen.queryByTestId(deleteIconTestId);
 
     expect(deleteIcon).toBeVisible();
+  });
+
+  it('OnClick не вызывается при нажатии на тег, если disabled=true', async () => {
+    const tagTestId = 'tagTestId';
+
+    renderWithTheme(<Tag disabled data-testid={tagTestId} />);
+
+    const tag = screen.getByTestId(tagTestId);
+
+    await expect(() => userEvents.click(tag)).rejects.toThrow(
+      CHECK_INTERACTION_REGEXP,
+    );
+  });
+
+  it('OnDelete не вызывается при нажатии на иконку удаления, если disabled=true', async () => {
+    const onDeleteSpy = vi.fn();
+    const deleteIconTestId = 'deleteIconTestId';
+
+    const deleteIcon = <span data-testid={deleteIconTestId} />;
+
+    renderWithTheme(
+      <Tag disabled onDelete={onDeleteSpy} deleteIcon={deleteIcon} />,
+    );
+
+    const deleteIconElement = screen.getByTestId(deleteIconTestId);
+
+    await expect(() => userEvents.click(deleteIconElement)).rejects.toThrow(
+      CHECK_INTERACTION_REGEXP,
+    );
   });
 });

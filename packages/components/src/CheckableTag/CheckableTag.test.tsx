@@ -1,5 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { renderWithTheme, screen, userEvents } from '@astral/tests';
+import {
+  CHECK_INTERACTION_REGEXP,
+  renderWithTheme,
+  screen,
+  userEvents,
+} from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
 
 import { CheckableTag } from './CheckableTag';
@@ -40,17 +45,17 @@ describe('CheckableTag', () => {
     expect(tag).toBeVisible();
   });
 
-  it('Компонент получает checked состояние, если checked=true', () => {
-    const handleChangeSpy = vi.fn();
+  it('Чекбокс получает состояние checked, если checked=true', () => {
+    const onChangeSpy = vi.fn();
 
-    renderWithTheme(<CheckableTag checked={true} onChange={handleChangeSpy} />);
+    renderWithTheme(<CheckableTag checked={true} onChange={onChangeSpy} />);
 
     const checkbox = screen.getByRole('checkbox', { hidden: true });
 
     expect(checkbox).toBeChecked();
   });
 
-  it('Компонент получает disabled состояние, если disabled=true', () => {
+  it('Чекбокс получает состояние disabled, если disabled=true', () => {
     renderWithTheme(<CheckableTag disabled />);
 
     const checkbox = screen.getByRole('checkbox', { hidden: true });
@@ -59,50 +64,45 @@ describe('CheckableTag', () => {
   });
 
   it('OnDelete не вызывается при нажатии на иконку удаления, при disabled=true', async () => {
-    const handleDeleteSpy = vi.fn();
+    const onDeleteSpy = vi.fn();
     const deleteIconTestId = 'deleteIconTestId';
-    const checkDeleteInteractionRegex = /pointer-events: none/;
     const deleteIcon = <span data-testid={deleteIconTestId} />;
 
     renderWithTheme(
-      <CheckableTag
-        disabled
-        onDelete={handleDeleteSpy}
-        deleteIcon={deleteIcon}
-      />,
+      <CheckableTag disabled onDelete={onDeleteSpy} deleteIcon={deleteIcon} />,
     );
 
     const deleteIconElement = screen.getByTestId(deleteIconTestId);
 
     await expect(() => userEvents.click(deleteIconElement)).rejects.toThrow(
-      checkDeleteInteractionRegex,
+      CHECK_INTERACTION_REGEXP,
     );
   });
 
   it('OnChange не вызывается при нажатии на тег, при disabled=true', async () => {
-    const handleChangeSpy = vi.fn();
+    const onChangeSpy = vi.fn();
 
-    renderWithTheme(<CheckableTag disabled onChange={handleChangeSpy} />);
+    renderWithTheme(<CheckableTag disabled onChange={onChangeSpy} />);
 
     const checkbox = screen.getByRole('checkbox', { hidden: true });
 
     await userEvents.click(checkbox);
-    expect(handleChangeSpy).not.toHaveBeenCalled();
+    expect(onChangeSpy).not.toHaveBeenCalled();
   });
 
   it('OnChange вызывается при нажатии на тег', async () => {
     const label = 'Тег';
-    const handleChangeSpy = vi.fn();
+    const onChangeSpy = vi.fn();
 
-    renderWithTheme(<CheckableTag label={label} onChange={handleChangeSpy} />);
+    renderWithTheme(<CheckableTag label={label} onChange={onChangeSpy} />);
 
     const checkbox = screen.getByText(label);
 
     await userEvents.click(checkbox);
-    expect(handleChangeSpy).toHaveBeenCalled();
+    expect(onChangeSpy).toHaveBeenCalled();
   });
 
-  it('Дополнительный компонент отображается при передаче через startAddon', () => {
+  it('Вложенный компонент отображается при передаче через startAddon', () => {
     const addonTestId = 'addonTestId';
 
     const StartAddon: CheckableTagAddon = () => (
@@ -116,7 +116,7 @@ describe('CheckableTag', () => {
     expect(startAddon).toBeInTheDocument();
   });
 
-  it('Дополнительный компонент отображается при передаче через endAddon', () => {
+  it('Вложенный компонент отображается при передаче через endAddon', () => {
     const addonTestId = 'addonTestId';
 
     const EndAddon: CheckableTagAddon = () => (
@@ -130,9 +130,9 @@ describe('CheckableTag', () => {
     expect(endAddon).toBeInTheDocument();
   });
 
-  it('Дополнительные компоненты получают checked prop при передаче checked=true', () => {
+  it('Вложенные компоненты получают prop checked при передаче checked=true', () => {
     const addonTestId = 'addonTestId';
-    const handleChangeSpy = vi.fn();
+    const onChangeSpy = vi.fn();
 
     const Addon: CheckableTagAddon = ({ checked }) => (
       <span data-testid={addonTestId}>{String(checked)}</span>
@@ -141,7 +141,7 @@ describe('CheckableTag', () => {
     renderWithTheme(
       <CheckableTag
         checked
-        onChange={handleChangeSpy}
+        onChange={onChangeSpy}
         startAddon={Addon}
         endAddon={Addon}
       />,
@@ -154,9 +154,9 @@ describe('CheckableTag', () => {
     expect(addonList).toHaveLength(2);
   });
 
-  it('Дополнительные компоненты получают disabled prop при передаче disabled=true', () => {
+  it('Вложенные компоненты получают prop disabled при передаче disabled=true', () => {
     const addonTestId = 'addonTestId';
-    const handleChangeSpy = vi.fn();
+    const onChangeSpy = vi.fn();
 
     const Addon: CheckableTagAddon = ({ disabled }) => (
       <span data-testid={addonTestId}>{String(disabled)}</span>
@@ -165,7 +165,7 @@ describe('CheckableTag', () => {
     renderWithTheme(
       <CheckableTag
         disabled
-        onChange={handleChangeSpy}
+        onChange={onChangeSpy}
         startAddon={Addon}
         endAddon={Addon}
       />,
