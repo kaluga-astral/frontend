@@ -7,14 +7,14 @@ import {
 import React, { type ForwardedRef, type ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
-import { Tag } from '../Tag';
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
 import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
+import { Placeholder, ProgressWrapper, StyledTag, TagsWrapper } from './styles';
+import { useLogic } from './hooks/useLogic';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -35,6 +35,47 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   label?: string;
 };
 
+export type SelectArrayValueProps = {
+  selectedOptions: string[];
+  getOptionLabel: (value: string | number) => string | number;
+};
+
+function SelectArrayValue({
+  selectedOptions,
+  getOptionLabel,
+}: SelectArrayValueProps) {
+  const { maxItems, tagsContainerRef, handleResize } = useLogic({
+    selectedOptions: selectedOptions,
+    getOptionLabel,
+  });
+
+  return (
+    <TagsWrapper onResize={handleResize} ref={tagsContainerRef}>
+      {selectedOptions.slice(0, maxItems).map((option, i) => {
+        const optionLabel = getOptionLabel(option as string | number);
+        const shrinks = i == maxItems - 1 && maxItems < selectedOptions.length;
+
+        return (
+          <StyledTag
+            key={option as string}
+            color="grey"
+            label={optionLabel}
+            $shrinks={shrinks}
+          />
+        );
+      })}
+
+      {maxItems < selectedOptions.length && (
+        <StyledTag
+          key="more"
+          color="grey"
+          label={`+${selectedOptions.length - maxItems}`}
+        />
+      )}
+    </TagsWrapper>
+  );
+}
+
 const SelectInner = <Value,>(
   {
     required,
@@ -53,18 +94,17 @@ const SelectInner = <Value,>(
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const renderValue = (selectedOptions: Value): ReactNode => {
+    // Массив с выбранными опциями
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
       return (
-        <TagsWrapper>
-          {selectedOptions.map((option) => {
-            const optionLabel = getOptionLabel(option);
-
-            return <Tag key={option} color="grey" label={optionLabel} />;
-          })}
-        </TagsWrapper>
+        <SelectArrayValue
+          getOptionLabel={getOptionLabel}
+          selectedOptions={selectedOptions}
+        />
       );
     }
 
+    // Пустой массив или пустая строка
     if (
       (Array.isArray(selectedOptions) || typeof selectedOptions === 'string') &&
       !selectedOptions.length
@@ -72,6 +112,7 @@ const SelectInner = <Value,>(
       return placeholder;
     }
 
+    // Строка
     return getOptionLabel(selectedOptions as string | number);
   };
 

@@ -1,9 +1,10 @@
 import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
+import { Tag, type TagProps } from '../Tag';
 
 export const TagsWrapper = styled.div`
+  overflow: hidden;
   display: flex;
-  flex-wrap: wrap;
 
   margin-bottom: -${({ theme }) => theme.spacing(1)};
 
@@ -38,4 +39,19 @@ export const ProgressWrapper = styled.div`
 
 export const Placeholder = styled(MenuItem)`
   display: none;
+`;
+
+type StyledTagProps = TagProps & {
+  $shrinks?: boolean;
+};
+
+export const StyledTag = styled(Tag)<StyledTagProps>`
+  min-width: ${({ $shrinks }) => ($shrinks ? '30px' : 'unset')};
+  max-width: 246px;
+
+  & {
+    .MuiBox-root {
+      display: inline;
+    }
+  }
 `;
