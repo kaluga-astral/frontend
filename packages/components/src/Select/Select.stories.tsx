@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
+// import { styled } from '../styles';
 
 import { Select } from './Select';
 
@@ -131,7 +132,7 @@ export const Disabled = () => {
   return (
     <>
       <Select
-        label="Standart"
+        label="Standard"
         onChange={handleSingleChange}
         value={singleValue}
         placeholder="Выберите вариант"
@@ -261,7 +262,7 @@ export const Multiple = () => {
   };
 
   return (
-    <Stack width={FIX_WIDTH_SELECT}>
+    <Stack width="100%" maxWidth={FIX_WIDTH_SELECT}>
       <Select
         placeholder="Выберите вариант"
         value={multipleValue}

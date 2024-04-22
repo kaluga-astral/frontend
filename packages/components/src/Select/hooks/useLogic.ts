@@ -1,4 +1,10 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { type SelectArrayValueProps } from '../Select';
 
@@ -11,7 +17,7 @@ export function useLogic({
 
   const tagsContainerRef = useRef<HTMLDivElement>(null);
 
-  const recomputeMaxItems = () => {
+  const recomputeMaxItems = useCallback(() => {
     const containerEl = tagsContainerRef.current;
 
     if (!containerEl) {
@@ -26,7 +32,8 @@ export function useLogic({
     };
 
     const overflow = computeOverflow(containerEl);
-    const gapWidth = parseInt(window.getComputedStyle(containerEl).gap);
+    const containerStyles = window.getComputedStyle(containerEl);
+    const gapWidth = parseInt(containerStyles.columnGap);
 
     // Слишком много тегов, скрываем лишние,
     // убирая по одному с конца, пока не уместятся
@@ -38,26 +45,28 @@ export function useLogic({
       while (reducedWidth < overflow && removedItems < children.length) {
         const child = children[children.length - 1 - removedItems];
 
-        reducedWidth += child.getBoundingClientRect().width;
-        reducedWidth += gapWidth;
+        reducedWidth += child.getBoundingClientRect().width + gapWidth;
         removedItems += 1;
       }
 
-      setMaxItems(children.length - removedItems);
+      // Сохраняем как минимум один тег
+      const newMaxItems = Math.max(children.length - removedItems, 1);
+
+      setMaxItems(newMaxItems);
     }
 
+    // Вычисляем ширину всех дочерних элементов
+    const children = Array.from(containerEl.children);
+    const curChildrenWidth = children
+      .map((c) => c.getBoundingClientRect().width)
+      .reduce((a, b) => a + b + gapWidth, 0);
+
+    // Вычисляем доступную ширину для новых тегов
+    const availableWidth =
+      containerEl.getBoundingClientRect().width - curChildrenWidth;
+
     // Пытаемся показать больше тегов
-    if (maxItems < selectedOptions.length) {
-      // Вычисляем ширину всех дочерних элементов
-      const children = Array.from(containerEl.children);
-      const curChildrenWidth = children
-        .map((c) => c.getBoundingClientRect().width)
-        .reduce((a, b) => a + b, 0);
-
-      // Вычисляем доступную ширину для новых тегов
-      const availableWidth =
-        containerEl.getBoundingClientRect().width - curChildrenWidth;
-
+    if (availableWidth > 0 && maxItems < selectedOptions.length) {
       let addedWidth = 0;
       let addedItems = 0;
 
@@ -68,10 +77,7 @@ export function useLogic({
       clone.style.visibility = 'hidden';
       document.body.appendChild(clone);
 
-      while (
-        addedWidth < availableWidth &&
-        addedItems < selectedOptions.length - maxItems
-      ) {
+      while (addedItems < selectedOptions.length - maxItems) {
         const childClone = clone.lastChild!.cloneNode(true) as HTMLSpanElement;
 
         // Добавляем еще один тег и записываем его ширину
@@ -82,27 +88,43 @@ export function useLogic({
 
         const newTagWidth = childClone.getBoundingClientRect().width;
 
-        addedItems += 1;
-        addedWidth += newTagWidth;
-        addedWidth += gapWidth;
-      }
+        const deltaWidth = newTagWidth + gapWidth;
+        const newAddedWidth = addedWidth + deltaWidth;
 
-      if (addedWidth < availableWidth) {
-        setMaxItems(maxItems + addedItems);
+        if (newAddedWidth > availableWidth) {
+          break;
+        }
+
+        addedItems += 1;
+        addedWidth += deltaWidth;
       }
 
       // Удаляем клон из body
       document.body.removeChild(clone);
+      setMaxItems(maxItems + addedItems);
     }
-  };
+  }, [getOptionLabel, maxItems, selectedOptions]);
 
   useLayoutEffect(() => {
     recomputeMaxItems();
-  });
+  }, [recomputeMaxItems]);
+
+  useEffect(() => {
+    if (!tagsContainerRef.current) {
+      return;
+    }
+
+    const observer = new ResizeObserver(() => recomputeMaxItems());
+
+    observer.observe(tagsContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [recomputeMaxItems]);
 
   return {
     maxItems,
     tagsContainerRef,
-    handleResize: recomputeMaxItems,
   };
 }

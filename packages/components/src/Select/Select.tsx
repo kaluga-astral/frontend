@@ -44,13 +44,13 @@ function SelectArrayValue({
   selectedOptions,
   getOptionLabel,
 }: SelectArrayValueProps) {
-  const { maxItems, tagsContainerRef, handleResize } = useLogic({
-    selectedOptions: selectedOptions,
+  const { maxItems, tagsContainerRef } = useLogic({
+    selectedOptions,
     getOptionLabel,
   });
 
   return (
-    <TagsWrapper onResize={handleResize} ref={tagsContainerRef}>
+    <TagsWrapper ref={tagsContainerRef}>
       {selectedOptions.slice(0, maxItems).map((option, i) => {
         const optionLabel = getOptionLabel(option as string | number);
         const shrinks = i == maxItems - 1 && maxItems < selectedOptions.length;

@@ -5,6 +5,7 @@ import { Tag, type TagProps } from '../Tag';
 export const TagsWrapper = styled.div`
   overflow: hidden;
   display: flex;
+  column-gap: ${({ theme }) => theme.spacing(1)};
 
   margin-bottom: -${({ theme }) => theme.spacing(1)};
 
@@ -45,7 +46,9 @@ type StyledTagProps = TagProps & {
   $shrinks?: boolean;
 };
 
-export const StyledTag = styled(Tag)<StyledTagProps>`
+export const StyledTag = styled(Tag, {
+  shouldForwardProp: (prop) => prop !== '$shrinks',
+})<StyledTagProps>`
   min-width: ${({ $shrinks }) => ($shrinks ? '30px' : 'unset')};
   max-width: 246px;
 
