@@ -74,6 +74,8 @@ export { default as ClockOutlineMd } from './ClockOutlineMd';
 
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
 
+export { default as CloseFillSm } from './CloseFillSm';
+
 export { default as CompanyOutlineMd } from './CompanyOutlineMd';
 
 export { default as CompanyAddOutlineMd } from './CompanyAddOutlineMd';
