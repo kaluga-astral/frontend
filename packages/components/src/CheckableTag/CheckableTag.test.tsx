@@ -98,51 +98,53 @@ describe('CheckableTag', () => {
     });
   });
 
-  it('Вложенные компоненты получают prop checked при передаче checked=true', () => {
-    const addonTestId = 'addonTestId';
-    const onChangeSpy = vi.fn();
+  describe('Вложенные компоненты получают', () => {
+    it('Prop checked при передаче checked=true', () => {
+      const addonTestId = 'addonTestId';
+      const onChangeSpy = vi.fn();
 
-    const Addon: CheckableTagAddon = ({ checked }) => (
-      <span data-testid={addonTestId}>{String(checked)}</span>
-    );
+      const Addon: CheckableTagAddon = ({ checked }) => (
+        <span data-testid={addonTestId}>{String(checked)}</span>
+      );
 
-    renderWithTheme(
-      <CheckableTag
-        checked
-        onChange={onChangeSpy}
-        startAddon={Addon}
-        endAddon={Addon}
-      />,
-    );
+      renderWithTheme(
+        <CheckableTag
+          checked
+          onChange={onChangeSpy}
+          startAddon={Addon}
+          endAddon={Addon}
+        />,
+      );
 
-    const addonList = screen
-      .getAllByTestId(addonTestId)
-      .filter((node) => node.textContent === 'true');
+      const addonList = screen
+        .getAllByTestId(addonTestId)
+        .filter((node) => node.textContent === 'true');
 
-    expect(addonList).toHaveLength(2);
-  });
+      expect(addonList).toHaveLength(2);
+    });
 
-  it('Вложенные компоненты получают prop disabled при передаче disabled=true', () => {
-    const addonTestId = 'addonTestId';
-    const onChangeSpy = vi.fn();
+    it('Prop disabled при передаче disabled=true', () => {
+      const addonTestId = 'addonTestId';
+      const onChangeSpy = vi.fn();
 
-    const Addon: CheckableTagAddon = ({ disabled }) => (
-      <span data-testid={addonTestId}>{String(disabled)}</span>
-    );
+      const Addon: CheckableTagAddon = ({ disabled }) => (
+        <span data-testid={addonTestId}>{String(disabled)}</span>
+      );
 
-    renderWithTheme(
-      <CheckableTag
-        disabled
-        onChange={onChangeSpy}
-        startAddon={Addon}
-        endAddon={Addon}
-      />,
-    );
+      renderWithTheme(
+        <CheckableTag
+          disabled
+          onChange={onChangeSpy}
+          startAddon={Addon}
+          endAddon={Addon}
+        />,
+      );
 
-    const addonList = screen
-      .getAllByTestId(addonTestId)
-      .filter((node) => node.textContent === 'true');
+      const addonList = screen
+        .getAllByTestId(addonTestId)
+        .filter((node) => node.textContent === 'true');
 
-    expect(addonList).toHaveLength(2);
+      expect(addonList).toHaveLength(2);
+    });
   });
 });
