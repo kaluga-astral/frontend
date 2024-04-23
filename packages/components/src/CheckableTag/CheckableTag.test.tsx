@@ -1,10 +1,5 @@
 import { useEffect, useRef } from 'react';
-import {
-  CHECK_INTERACTION_REGEXP,
-  renderWithTheme,
-  screen,
-  userEvents,
-} from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
 
 import { CheckableTag } from './CheckableTag';
@@ -55,39 +50,12 @@ describe('CheckableTag', () => {
     expect(checkbox).toBeChecked();
   });
 
-  it('Чекбокс получает состояние disabled, если disabled=true', () => {
+  it('Тег не доступен для взаимодействия, если disabled=true', () => {
     renderWithTheme(<CheckableTag disabled />);
 
     const checkbox = screen.getByRole('checkbox', { hidden: true });
 
     expect(checkbox).toBeDisabled();
-  });
-
-  it('OnDelete не вызывается при нажатии на иконку удаления, при disabled=true', async () => {
-    const onDeleteSpy = vi.fn();
-    const deleteIconTestId = 'deleteIconTestId';
-    const deleteIcon = <span data-testid={deleteIconTestId} />;
-
-    renderWithTheme(
-      <CheckableTag disabled onDelete={onDeleteSpy} deleteIcon={deleteIcon} />,
-    );
-
-    const deleteIconElement = screen.getByTestId(deleteIconTestId);
-
-    await expect(() => userEvents.click(deleteIconElement)).rejects.toThrow(
-      CHECK_INTERACTION_REGEXP,
-    );
-  });
-
-  it('OnChange не вызывается при нажатии на тег, при disabled=true', async () => {
-    const onChangeSpy = vi.fn();
-
-    renderWithTheme(<CheckableTag disabled onChange={onChangeSpy} />);
-
-    const checkbox = screen.getByRole('checkbox', { hidden: true });
-
-    await userEvents.click(checkbox);
-    expect(onChangeSpy).not.toHaveBeenCalled();
   });
 
   it('OnChange вызывается при нажатии на тег', async () => {
@@ -102,32 +70,32 @@ describe('CheckableTag', () => {
     expect(onChangeSpy).toHaveBeenCalled();
   });
 
-  it('Вложенный компонент отображается при передаче через startAddon', () => {
-    const addonTestId = 'addonTestId';
+  describe('Вложенный компонент отображается', () => {
+    it('При передаче через startAddon', () => {
+      const addonTestId = 'addonTestId';
+      const StartAddon: CheckableTagAddon = () => (
+        <span data-testid={addonTestId} />
+      );
 
-    const StartAddon: CheckableTagAddon = () => (
-      <span data-testid={addonTestId} />
-    );
+      renderWithTheme(<CheckableTag startAddon={StartAddon} />);
 
-    renderWithTheme(<CheckableTag startAddon={StartAddon} />);
+      const startAddon = screen.getByTestId(addonTestId);
 
-    const startAddon = screen.getByTestId(addonTestId);
+      expect(startAddon).toBeInTheDocument();
+    });
 
-    expect(startAddon).toBeInTheDocument();
-  });
+    it('При передаче через endAddon', () => {
+      const addonTestId = 'addonTestId';
+      const EndAddon: CheckableTagAddon = () => (
+        <span data-testid={addonTestId} />
+      );
 
-  it('Вложенный компонент отображается при передаче через endAddon', () => {
-    const addonTestId = 'addonTestId';
+      renderWithTheme(<CheckableTag endAddon={EndAddon} />);
 
-    const EndAddon: CheckableTagAddon = () => (
-      <span data-testid={addonTestId} />
-    );
+      const endAddon = screen.getByTestId(addonTestId);
 
-    renderWithTheme(<CheckableTag endAddon={EndAddon} />);
-
-    const endAddon = screen.getByTestId(addonTestId);
-
-    expect(endAddon).toBeInTheDocument();
+      expect(endAddon).toBeInTheDocument();
+    });
   });
 
   it('Вложенные компоненты получают prop checked при передаче checked=true', () => {

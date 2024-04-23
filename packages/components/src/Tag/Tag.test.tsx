@@ -1,10 +1,5 @@
 import { useEffect, useRef } from 'react';
-import {
-  CHECK_INTERACTION_REGEXP,
-  renderWithTheme,
-  screen,
-  userEvents,
-} from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TagBadge } from '../TagBadge';
@@ -12,6 +7,8 @@ import { TagBadge } from '../TagBadge';
 import { Tag } from './Tag';
 
 describe('Tag', () => {
+  const CHECK_INTERACTION_REGEXP = /pointer-events: none/;
+
   it('Ref доступен', () => {
     const resultRefMock = { current: null };
 
@@ -46,40 +43,42 @@ describe('Tag', () => {
     expect(tag).toBeVisible();
   });
 
-  it('Дополнительный контент отображается, если передан startAddon', () => {
-    const label = 'Тег';
-    const badgeContent = '12';
+  describe('Дополнительный контент отображается', () => {
+    it('Если передан startAddon', () => {
+      const label = 'Тег';
+      const badgeContent = '12';
 
-    renderWithTheme(
-      <Tag
-        label={label}
-        startAddon={(props) => (
-          <TagBadge {...props} badgeContent={badgeContent} />
-        )}
-      />,
-    );
+      renderWithTheme(
+        <Tag
+          label={label}
+          startAddon={(props) => (
+            <TagBadge {...props} badgeContent={badgeContent} />
+          )}
+        />,
+      );
 
-    const badge = screen.getByText(badgeContent);
+      const badge = screen.getByText(badgeContent);
 
-    expect(badge).toBeVisible();
-  });
+      expect(badge).toBeVisible();
+    });
 
-  it('Дополнительный контент отображается, если передан endAddon', () => {
-    const label = 'Тег';
-    const badgeContent = '12';
+    it('Если передан endAddon', () => {
+      const label = 'Тег';
+      const badgeContent = '12';
 
-    renderWithTheme(
-      <Tag
-        label={label}
-        endAddon={(props) => (
-          <TagBadge {...props} badgeContent={badgeContent} />
-        )}
-      />,
-    );
+      renderWithTheme(
+        <Tag
+          label={label}
+          endAddon={(props) => (
+            <TagBadge {...props} badgeContent={badgeContent} />
+          )}
+        />,
+      );
 
-    const badge = screen.getByText(badgeContent);
+      const badge = screen.getByText(badgeContent);
 
-    expect(badge).toBeVisible();
+      expect(badge).toBeVisible();
+    });
   });
 
   it('Кастомная иконка удаления отображается при переданном пропсе onDelete', () => {
@@ -106,7 +105,7 @@ describe('Tag', () => {
     expect(onClickSpy).toBeCalled();
   });
 
-  it('OnClick не вызывается при нажатии на тег, если disabled=true', async () => {
+  it('Тег не доступен для взаимодействия, если disabled=true', async () => {
     const tagTestId = 'tagTestId';
 
     renderWithTheme(<Tag disabled data-testid={tagTestId} />);
