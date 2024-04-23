@@ -50,7 +50,7 @@ describe('CheckableTag', () => {
     expect(checkbox).toBeChecked();
   });
 
-  it('Тег не доступен для взаимодействия, если disabled=true', () => {
+  it('Тег недоступен для взаимодействия, если disabled=true', () => {
     renderWithTheme(<CheckableTag disabled />);
 
     const checkbox = screen.getByRole('checkbox', { hidden: true });

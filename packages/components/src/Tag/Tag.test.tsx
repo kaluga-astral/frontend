@@ -105,18 +105,6 @@ describe('Tag', () => {
     expect(onClickSpy).toBeCalled();
   });
 
-  it('Тег не доступен для взаимодействия, если disabled=true', async () => {
-    const tagTestId = 'tagTestId';
-
-    renderWithTheme(<Tag disabled data-testid={tagTestId} />);
-
-    const tag = screen.getByTestId(tagTestId);
-
-    await expect(() => userEvents.click(tag)).rejects.toThrow(
-      CHECK_INTERACTION_REGEXP,
-    );
-  });
-
   it('OnDelete вызывается при нажатии на иконку удаления', async () => {
     const onDeleteSpy = vi.fn();
     const deleteIconTestId = 'deleteIconTestId';
@@ -131,17 +119,28 @@ describe('Tag', () => {
     expect(onDeleteSpy).toBeCalled();
   });
 
-  it('OnDelete не вызывается при нажатии на иконку удаления, если disabled=true', async () => {
-    const onDeleteSpy = vi.fn();
+  it('Тег недоступен для взаимодействия, если disabled=true', async () => {
+    const tagTestId = 'tagTestId';
     const deleteIconTestId = 'deleteIconTestId';
+    const onDeleteSpy = vi.fn();
 
     const deleteIcon = <span data-testid={deleteIconTestId} />;
 
     renderWithTheme(
-      <Tag disabled onDelete={onDeleteSpy} deleteIcon={deleteIcon} />,
+      <Tag
+        disabled
+        data-testid={tagTestId}
+        onDelete={onDeleteSpy}
+        deleteIcon={deleteIcon}
+      />,
     );
 
+    const tag = screen.getByTestId(tagTestId);
     const deleteIconElement = screen.getByTestId(deleteIconTestId);
+
+    await expect(() => userEvents.click(tag)).rejects.toThrow(
+      CHECK_INTERACTION_REGEXP,
+    );
 
     await expect(() => userEvents.click(deleteIconElement)).rejects.toThrow(
       CHECK_INTERACTION_REGEXP,
