@@ -3,6 +3,7 @@ import {
   InputLabel,
   Select as MuiSelect,
   type SelectProps as MuiSelectProps,
+  type SelectChangeEvent,
 } from '@mui/material';
 import React, { type ForwardedRef, type ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
@@ -13,8 +14,8 @@ import { MenuItem } from '../MenuItem';
 import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import { Placeholder, ProgressWrapper, StyledTag, TagsWrapper } from './styles';
-import { useLogic } from './hooks/useLogic';
+import { Placeholder, ProgressWrapper } from './styles';
+import { SelectTagsList } from './SelectTagsList';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -35,47 +36,6 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   label?: string;
 };
 
-export type SelectArrayValueProps = {
-  selectedOptions: string[];
-  getOptionLabel: (value: string | number) => string | number;
-};
-
-function SelectArrayValue({
-  selectedOptions,
-  getOptionLabel,
-}: SelectArrayValueProps) {
-  const { maxItems, tagsContainerRef } = useLogic({
-    selectedOptions,
-    getOptionLabel,
-  });
-
-  return (
-    <TagsWrapper ref={tagsContainerRef}>
-      {selectedOptions.slice(0, maxItems).map((option, i) => {
-        const optionLabel = getOptionLabel(option as string | number);
-        const shrinks = i == maxItems - 1 && maxItems < selectedOptions.length;
-
-        return (
-          <StyledTag
-            key={option as string}
-            color="grey"
-            label={optionLabel}
-            $shrinks={shrinks}
-          />
-        );
-      })}
-
-      {maxItems < selectedOptions.length && (
-        <StyledTag
-          key="more"
-          color="grey"
-          label={`+${selectedOptions.length - maxItems}`}
-        />
-      )}
-    </TagsWrapper>
-  );
-}
-
 const SelectInner = <Value,>(
   {
     required,
@@ -89,6 +49,7 @@ const SelectInner = <Value,>(
     error,
     label,
     fullWidth,
+    onChange: externalOnChange,
     ...props
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
@@ -96,8 +57,13 @@ const SelectInner = <Value,>(
   const renderValue = (selectedOptions: Value): ReactNode => {
     // Массив с выбранными опциями
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
+      const handleOnChange = externalOnChange as (
+        e: SelectChangeEvent<string[]>,
+      ) => void;
+
       return (
-        <SelectArrayValue
+        <SelectTagsList
+          onChange={handleOnChange}
           getOptionLabel={getOptionLabel}
           selectedOptions={selectedOptions}
         />
@@ -132,6 +98,7 @@ const SelectInner = <Value,>(
         displayEmpty
         ref={ref}
         fullWidth={fullWidth}
+        onChange={externalOnChange}
       >
         <Placeholder value="">{placeholder}</Placeholder>
         {loading && (

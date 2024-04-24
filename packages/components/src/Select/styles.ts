@@ -1,28 +1,5 @@
 import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
-import { Tag, type TagProps } from '../Tag';
-
-export const TagsWrapper = styled.div`
-  overflow: hidden;
-  display: flex;
-  column-gap: ${({ theme }) => theme.spacing(1)};
-
-  margin-bottom: -${({ theme }) => theme.spacing(1)};
-
-  .MuiChip-root {
-    margin-bottom: ${({ theme }) => theme.spacing(1)};
-
-    background-color: ${({ theme }) => theme.palette.grey['300']};
-  }
-
-  .MuiChip-root:hover {
-    background-color: ${({ theme }) => theme.palette.grey['300']};
-  }
-
-  .MuiChip-root:not(:last-of-type) {
-    margin-right: ${({ theme }) => theme.spacing(1)};
-  }
-`;
 
 export const ProgressWrapper = styled.div`
   display: flex;
@@ -40,21 +17,4 @@ export const ProgressWrapper = styled.div`
 
 export const Placeholder = styled(MenuItem)`
   display: none;
-`;
-
-type StyledTagProps = TagProps & {
-  $shrinks?: boolean;
-};
-
-export const StyledTag = styled(Tag, {
-  shouldForwardProp: (prop) => prop !== '$shrinks',
-})<StyledTagProps>`
-  min-width: ${({ $shrinks }) => ($shrinks ? '30px' : 'unset')};
-  max-width: 246px;
-
-  & {
-    .MuiBox-root {
-      display: inline;
-    }
-  }
 `;

@@ -1,17 +1,20 @@
 import {
+  type MouseEvent,
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
+import { type SelectChangeEvent } from '@mui/material';
 
-import { type SelectArrayValueProps } from '../Select';
+import { type SelectTagsListProps } from '../../SelectTagsList';
 
 export function useLogic({
   selectedOptions,
   getOptionLabel,
-}: SelectArrayValueProps) {
+  onChange,
+}: SelectTagsListProps) {
   // Сколько тегов можно отобразить в инпуте
   const [maxItems, setMaxItems] = useState(50);
 
@@ -123,8 +126,45 @@ export function useLogic({
     };
   }, [recomputeMaxItems]);
 
+  const handleTagMouseDown = (
+    e: MouseEvent<HTMLDivElement>,
+    tagValue: string | number,
+  ) => {
+    const isSvg = e.target instanceof SVGElement;
+
+    // Кликнули по телу тега
+    if (!isSvg) {
+      return;
+    }
+
+    // Кликнули по кнопке удаления
+    e.preventDefault();
+    e.stopPropagation();
+
+    const changeEvent = {
+      target: {
+        ...e.target,
+        value: selectedOptions.filter((opt) => opt !== tagValue),
+      },
+    } as SelectChangeEvent<string[]>;
+
+    onChange(changeEvent, undefined);
+  };
+
+  const getTagProps = (option: string | number, index: number) => {
+    const label = getOptionLabel(option as string);
+    const shrinks = index == maxItems - 1 && maxItems < selectedOptions.length;
+
+    const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+      handleTagMouseDown(e, option);
+    };
+
+    return { label, shrinks, onMouseDown };
+  };
+
   return {
     maxItems,
     tagsContainerRef,
+    getTagProps,
   };
 }
