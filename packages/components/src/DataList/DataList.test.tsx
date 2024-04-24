@@ -12,7 +12,7 @@ import { DataList } from './DataList';
 describe('DataList', () => {
   it('Placeholder отображается при отсутствии данных', () => {
     renderWithTheme(
-      <DataList
+      <DataList<{ id: string }>
         keyId="id"
         data={[]}
         itemContent={() => <div>item</div>}
@@ -27,7 +27,7 @@ describe('DataList', () => {
 
   it('Placeholder c ошибкой отображается при isError=true', () => {
     renderWithTheme(
-      <DataList
+      <DataList<{ id: string }>
         keyId="id"
         data={[]}
         isError
@@ -43,7 +43,7 @@ describe('DataList', () => {
 
   it('Лоадер отображается при isLoading=true', () => {
     renderWithTheme(
-      <DataList
+      <DataList<{ id: string }>
         keyId="id"
         data={[]}
         isLoading
@@ -77,7 +77,7 @@ describe('DataList', () => {
     const onRetrySpy = vi.fn();
 
     renderWithTheme(
-      <DataList
+      <DataList<{ id: string }>
         keyId="id"
         data={[]}
         isError

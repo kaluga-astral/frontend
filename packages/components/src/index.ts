@@ -32,6 +32,8 @@ export * from './CircularProgress';
 
 export * from './ClickAwayListener';
 
+export { CodeField, type CodeFieldProps } from './CodeField';
+
 export * from './Collapse';
 
 export * from './CollapsableAlert';
@@ -88,13 +90,15 @@ export * from './Divider';
 
 export * from './DropdownButton';
 
-export { EmailField, EmailFieldProps } from './EmailField';
+export { EmailField, type EmailFieldProps } from './EmailField';
 
 export * from './ErrorBoundary';
 
 export * from './Fab';
 
 export * from './Fade';
+
+export { FeedbackPanel, type FeedbackPanelProps } from './FeedbackPanel';
 
 export * from './FlowButton';
 
@@ -118,7 +122,11 @@ export * from './IconButton';
 
 export * from './IconDropdownButton';
 
+export { Iframe, type IframeProps } from './Iframe';
+
 export * from './LegacyGrid';
+
+export { Link, LinkProps } from './Link';
 
 export * from './List';
 
@@ -182,6 +190,8 @@ export * from './ProgressBar';
 
 export * from './Radio';
 
+export { RadioCard, type RadioCardProps } from './RadioCard';
+
 export * from './RadioField';
 
 export * from './RadioGroup';
@@ -203,6 +213,11 @@ export * from './SideDialogTitle';
 export * from './Slide';
 
 export * from './Stepper';
+
+export {
+  ScrollToTopButton,
+  type ScrollToTopButtonProps,
+} from './ScrollToTopButton';
 
 export * from './styles';
 
@@ -247,9 +262,5 @@ export * from './forwardRefWithGeneric';
 export * from './PasswordField';
 
 export { StepSlider, type StepSliderProps } from './StepSlider';
-
-export { Iframe, type IframeProps } from './Iframe';
-
-export { CodeField, type CodeFieldProps } from './CodeField';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';

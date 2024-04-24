@@ -7,6 +7,7 @@ const imagesMapDefault = {
   noDataImgSrc: '',
   defaultErrorImgSrc: '',
   outdatedReleaseErrorImgSrc: '',
+  mailImgSrc: '',
 };
 
 const techSupDefault = {
@@ -22,14 +23,21 @@ type ImagesMap = {
    * Изображение при отсутствии данных (используется в DataGrid)
    */
   noDataImgSrc: string;
+
   /**
    * Изображение при ошибке (используется в ContentState)
    */
+
   defaultErrorImgSrc: string;
   /**
    * Изображение при ошибке загрузки актуальных чанков (используется в ContentState/ErrorBoundary)
    */
   outdatedReleaseErrorImgSrc: string;
+
+  /**
+   * Изображение при успешной отправке данных (используется в FeedbackPanel)
+   */
+  mailImgSrc?: string;
 };
 
 type TechnicalSupport = {

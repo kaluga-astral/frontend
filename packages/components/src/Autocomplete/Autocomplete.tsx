@@ -13,7 +13,6 @@ import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, type TextFieldProps } from '../TextField';
 import { Tag } from '../Tag';
-import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
 import {
   OverflowTypography,
@@ -25,7 +24,8 @@ import { Typography } from '../Typography';
 
 import { DEFAULT_AUTOCOMPLETE_ELEMENT_ROWS_COUNT } from './constants';
 import { type AutocompleteSizes } from './enums';
-import { PopperWrapper } from './styles';
+import { PopperWrapper, StyledMenuItem } from './styles';
+import { checkIsInputEmpty } from './utils';
 
 export type { AutocompleteRenderGetTagProps } from '@mui/material';
 
@@ -90,6 +90,7 @@ const AutocompleteInner = <
     required,
     renderOption: externalRenderOption,
     isOptionEqualToValue: externalOptionEqualToValue,
+    disableClearable: externalDisableClearable,
     noOptionsText = 'Нет данных',
     closeText = 'Закрыть',
     openText = 'Открыть',
@@ -111,6 +112,10 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
+  const isEmpty = checkIsInputEmpty(restProps.value);
+
+  const disableClearable = isEmpty || Boolean(externalDisableClearable);
+
   const renderDefaultTags = useCallback(
     (
       tags: AutocompleteValueProps[],
@@ -149,7 +154,7 @@ const AutocompleteInner = <
         ...inputParams,
         inputRef,
         required,
-        placeholder,
+        placeholder: isEmpty ? placeholder : '',
         label,
         success,
         error,
@@ -164,6 +169,7 @@ const AutocompleteInner = <
       return <TextField {...generalInputParams} />;
     },
     [
+      isEmpty,
       externalRenderInput,
       inputRef,
       required,
@@ -189,7 +195,7 @@ const AutocompleteInner = <
       const selected = Boolean(optionProps['aria-selected']);
 
       return (
-        <MenuItem {...optionProps} key={optionProps.id}>
+        <StyledMenuItem {...optionProps} key={optionProps.id}>
           {multiple && (
             <ListItemIcon>
               <Checkbox role="menuitemcheckbox" checked={selected} />
@@ -201,7 +207,7 @@ const AutocompleteInner = <
           >
             {optionProps.key}
           </OverflowTypography>
-        </MenuItem>
+        </StyledMenuItem>
       );
     },
     [multiple, overflowOption, externalRenderOption],
@@ -234,6 +240,7 @@ const AutocompleteInner = <
       loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}
+      disableClearable={disableClearable as DisableClearable}
       componentsProps={{ clearIndicator: { disableRipple: true } }}
       noOptionsText={noOptionsText}
       closeText={closeText}

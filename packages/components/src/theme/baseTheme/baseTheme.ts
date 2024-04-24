@@ -21,17 +21,26 @@ import { defaultBreakpoints } from '../breakpoints';
 import { type Theme } from '../types';
 import { mergeDeep } from '../../utils';
 
-export type Palette = Omit<MuiPalette, 'grey' | 'background'> & {
+export type Palette = Omit<MuiPalette, 'grey' | 'info' | 'background'> & {
+  /**
+   * @deprecated
+   * Цвет "info" больше не используется, используйте другие цвета
+   */
+  info: PaletteColor & Color;
   red: Color;
   green: Color;
   yellow: Color;
   grey: Color;
+  error: Color;
+  warning: Color;
+  success: Color;
   primary: PaletteColor & Color;
+  secondary: PaletteColor & Color;
   background: Background;
   components: ComponentsColors;
 };
 
-type CreateThemeParams = {
+export type CreateThemeParams = {
   brand: Brand;
   options?: ThemeOptions;
   fontsUrls: FontsUrls;

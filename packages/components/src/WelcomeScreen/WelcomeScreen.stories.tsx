@@ -30,6 +30,16 @@ const MainWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(4)};
 `;
 
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+
+  /* Добавляем опциональность на dvh, для корректной проверки компонента через browserstack под старыми браузерами */
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+`;
+
 const Container = ({ children }: PropsWithChildren) => (
   <ConfigProvider
     imagesMap={{
@@ -38,7 +48,7 @@ const Container = ({ children }: PropsWithChildren) => (
       outdatedReleaseErrorImgSrc: '',
     }}
   >
-    <div style={{ width: '100%', height: '100dvh' }}>{children}</div>
+    <ContentWrapper>{children}</ContentWrapper>
   </ConfigProvider>
 );
 
@@ -106,10 +116,13 @@ export const Example = () => {
 
   const Logo = () => data?.logo;
 
+  const isSuccess = !isLoading && !isError && Boolean(data);
+
   return (
     <Container>
       <WelcomeScreen
         {...data}
+        isSuccess={isSuccess}
         isLoading={isLoading}
         isError={isError}
         onRetry={fetch}
@@ -142,7 +155,7 @@ export const Example = () => {
 
 export const Loading = () => (
   <Container>
-    <WelcomeScreen isLoading onRetry={() => undefined}>
+    <WelcomeScreen isLoading isSuccess={false} onRetry={() => undefined}>
       Content
     </WelcomeScreen>
   </Container>
@@ -153,7 +166,12 @@ export const Error = () => {
 
   return (
     <Container>
-      <WelcomeScreen isError errorMsg="Ошибка 500" onRetry={handleRetry}>
+      <WelcomeScreen
+        isError
+        isSuccess={false}
+        errorMsg="Ошибка 500"
+        onRetry={handleRetry}
+      >
         Content
       </WelcomeScreen>
     </Container>
