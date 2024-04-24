@@ -21,8 +21,6 @@ export function useLogic({
   const tagsContainerRef = useRef<HTMLDivElement>(null);
 
   const recomputeMaxItems = () => {
-    console.log('RECOMPUTE');
-
     const containerEl = tagsContainerRef.current;
 
     if (!containerEl) {
