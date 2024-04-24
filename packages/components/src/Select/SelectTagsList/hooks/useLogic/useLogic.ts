@@ -1,6 +1,5 @@
 import {
   type MouseEvent,
-  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -18,9 +17,12 @@ export function useLogic({
   // Сколько тегов можно отобразить в инпуте
   const [maxItems, setMaxItems] = useState(50);
 
+  const ignoreResizeRef = useRef(false);
   const tagsContainerRef = useRef<HTMLDivElement>(null);
 
-  const recomputeMaxItems = useCallback(() => {
+  const recomputeMaxItems = () => {
+    console.log('RECOMPUTE');
+
     const containerEl = tagsContainerRef.current;
 
     if (!containerEl) {
@@ -81,23 +83,27 @@ export function useLogic({
       document.body.appendChild(clone);
 
       while (addedItems < selectedOptions.length - maxItems) {
+        // Клонируем последний тег
         const childClone = clone.lastChild!.cloneNode(true) as HTMLSpanElement;
 
-        // Добавляем еще один тег и записываем его ширину
+        // Получаем текст следующего тега
         const newTagValue = getOptionLabel(selectedOptions[maxItems]);
 
         childClone.textContent = newTagValue as string;
         clone.appendChild(childClone);
 
+        // Считаем ширину с учетом добавленного тега
         const newTagWidth = childClone.getBoundingClientRect().width;
 
         const deltaWidth = newTagWidth + gapWidth;
         const newAddedWidth = addedWidth + deltaWidth;
 
+        // Переполнение, стопаемся
         if (newAddedWidth > availableWidth) {
           break;
         }
 
+        // Место есть, добавляем еще один тег
         addedItems += 1;
         addedWidth += deltaWidth;
       }
@@ -106,25 +112,36 @@ export function useLogic({
       document.body.removeChild(clone);
       setMaxItems(maxItems + addedItems);
     }
-  }, [getOptionLabel, maxItems, selectedOptions]);
+  };
 
   useLayoutEffect(() => {
     recomputeMaxItems();
-  }, [recomputeMaxItems]);
+    // Не пересчитываем ширину контейнера, так как сами ее модифицировали
+    ignoreResizeRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOptions]);
 
   useEffect(() => {
     if (!tagsContainerRef.current) {
       return;
     }
 
-    const observer = new ResizeObserver(() => recomputeMaxItems());
+    const observer = new ResizeObserver(() => {
+      if (ignoreResizeRef.current) {
+        ignoreResizeRef.current = false;
+
+        return;
+      }
+
+      recomputeMaxItems();
+    });
 
     observer.observe(tagsContainerRef.current);
 
     return () => {
       observer.disconnect();
     };
-  }, [recomputeMaxItems]);
+  });
 
   const handleTagMouseDown = (
     e: MouseEvent<HTMLDivElement>,
