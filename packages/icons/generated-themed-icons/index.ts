@@ -74,6 +74,8 @@ export { default as ClockOutlineMd } from './ClockOutlineMd';
 
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
 
+export { default as CloseFillSm } from './CloseFillSm';
+
 export { default as CompanyOutlineMd } from './CompanyOutlineMd';
 
 export { default as CompanyAddOutlineMd } from './CompanyAddOutlineMd';
@@ -91,6 +93,8 @@ export { default as CrossOutlineSm } from './CrossOutlineSm';
 export { default as CrossSmOutlineSm } from './CrossSmOutlineSm';
 
 export { default as DialogOutlineMd } from './DialogOutlineMd';
+
+export { default as DocsArrayOutlineMd } from './DocsArrayOutlineMd';
 
 export { default as DocumentOutlineMd } from './DocumentOutlineMd';
 
@@ -161,6 +165,8 @@ export { default as MailFillSm } from './MailFillSm';
 export { default as MailOutlineMd } from './MailOutlineMd';
 
 export { default as ManOutlineSm } from './ManOutlineSm';
+
+export { default as MarkDocOutlineMd } from './MarkDocOutlineMd';
 
 export { default as MedListOutlineMd } from './MedListOutlineMd';
 
@@ -251,6 +257,12 @@ export { default as TelegramFillMd } from './TelegramFillMd';
 export { default as TreeOutlineMd } from './TreeOutlineMd';
 
 export { default as UploadOutlineMd } from './UploadOutlineMd';
+
+export { default as UserArrowDownOutlineMd } from './UserArrowDownOutlineMd';
+
+export { default as UserArrowUpOutlineMd } from './UserArrowUpOutlineMd';
+
+export { default as UserCrossOutlineMd } from './UserCrossOutlineMd';
 
 export { default as VkFillMd } from './VkFillMd';
 
