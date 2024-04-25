@@ -8,7 +8,13 @@ type WithSize = {
   $size: PlaceholderSize;
 };
 
-export const Wrapper = styled.div<WithSize>`
+const shouldForwardProp = (propName: string) => {
+  return propName !== '$size';
+};
+
+export const Wrapper = styled('div', {
+  shouldForwardProp,
+})<WithSize>`
   display: flex;
   flex-direction: column;
   gap: ${({ theme, $size }) =>
@@ -30,12 +36,16 @@ export const Wrapper = styled.div<WithSize>`
   }
 `;
 
-export const InnerContainer = styled.div<WithSize>`
+export const InnerContainer = styled('div', {
+  shouldForwardProp,
+})<WithSize>`
   max-width: ${({ $size }) => MAX_INNER_WIDTH[$size]};
   margin: 0 auto;
 `;
 
-export const Image = styled.img<WithSize>`
+export const Image = styled('img', {
+  shouldForwardProp,
+})<WithSize>`
   display: block;
 
   width: ${({ width }) => width || 'auto'};
@@ -54,9 +64,11 @@ export const Image = styled.img<WithSize>`
   }
 `;
 
-export const Title = styled(Typography)<WithSize>`
+export const Title = styled(Typography, {
+  shouldForwardProp,
+})<WithSize>`
   margin-bottom: ${({ theme, $size }) =>
-    $size === SIZE.Medium ? theme.spacing(2) : theme.spacing(4)};
+    $size === SIZE.Small ? theme.spacing(2) : theme.spacing(4)};
 
   text-align: center;
 
@@ -69,7 +81,9 @@ export const Title = styled(Typography)<WithSize>`
   }
 `;
 
-export const Description = styled(Typography)<WithSize>`
+export const Description = styled(Typography, {
+  shouldForwardProp,
+})<WithSize>`
   display: block;
 
   font-size: ${({ $size, theme }) =>
