@@ -1,12 +1,14 @@
 import { type MouseEvent } from 'react';
 
+import { type TagProps } from '../../../Tag';
+
 import { StyledTag } from './styles';
 
 type SelectTagProps = {
   /**
    * Текст тега
    */
-  label: string | number;
+  label: TagProps['label'];
 
   /**
    * Может ли текст сузиться путем обрезания части символов

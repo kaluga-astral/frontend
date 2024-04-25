@@ -22,7 +22,7 @@ export const SelectTagsList = ({
   getOptionLabel,
   onChange,
 }: SelectTagsListProps) => {
-  const { maxItems, tagsContainerRef, getTagProps } = useLogic({
+  const { maxItems, tagsContainerRef, visibleOptions, getTagProps } = useLogic({
     selectedOptions,
     getOptionLabel,
     onChange,
@@ -30,7 +30,7 @@ export const SelectTagsList = ({
 
   return (
     <TagsWrapper ref={tagsContainerRef}>
-      {selectedOptions.slice(0, maxItems).map((option, i) => {
+      {visibleOptions.map((option, i) => {
         const tagProps = getTagProps(option, i);
 
         return <SelectTag key={option} {...tagProps} />;

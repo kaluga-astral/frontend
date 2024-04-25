@@ -8,6 +8,7 @@ import {
 import { type SelectChangeEvent } from '@mui/material';
 
 import { type SelectTagsListProps } from '../../SelectTagsList';
+import { getElementByText } from '../../utils';
 
 export function useLogic({
   selectedOptions,
@@ -15,101 +16,106 @@ export function useLogic({
   onChange,
 }: SelectTagsListProps) {
   // Сколько тегов можно отобразить в инпуте
-  const [maxItems, setMaxItems] = useState(50);
+  const [maxItems, setMaxItems] = useState(1);
 
   const ignoreResizeRef = useRef(false);
   const tagsContainerRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Рассчитывает сколько тегов можно добавить в контейнер
+   */
+  const getTagsCountToAdd = (
+    containerClone: HTMLDivElement,
+    availableWidth: number,
+    gap: number,
+  ): number => {
+    // Получаем текст первого тега, чтобы по нему найти текстовый узел
+    const firstTagText = getOptionLabel(selectedOptions[0]) as string;
+
+    // Маунтим клон в body, чтобы узнать ширину дочерних элементов
+    document.body.appendChild(containerClone);
+
+    // Пытаемся показать больше тегов
+    let addedWidth = 0;
+    let addedItems = 0;
+
+    // Добавляем теги, пока не закончится место
+    // Начинаем со второго элемента, так как первый уже есть
+    for (let i = 1; i < selectedOptions.length; i += 1) {
+      // Клонируем последний тег
+      const childClone = containerClone.firstChild!.cloneNode(
+        true,
+      ) as HTMLSpanElement;
+
+      // Получаем текст следующего тега
+      const newTagText = getOptionLabel(selectedOptions[i]) as string;
+
+      // Ищем текстовый узел внутри тега
+      const textNode = getElementByText(childClone, firstTagText);
+
+      if (!textNode) {
+        throw new Error('Could not find text node');
+      }
+
+      // Заменяем текст в теге
+      textNode.textContent = newTagText;
+      // Считаем ширину с учетом добавленного тега
+      containerClone.appendChild(childClone);
+
+      const newTagWidth = childClone.getBoundingClientRect().width;
+
+      const deltaWidth = newTagWidth + gap;
+      const newAddedWidth = addedWidth + deltaWidth;
+
+      // Переполнение, стопаемся
+      if (newAddedWidth > availableWidth) {
+        break;
+      }
+
+      // Место есть, добавляем еще один тег
+      addedItems += 1;
+      addedWidth += deltaWidth;
+    }
+
+    // Удаляем клон из body
+    document.body.removeChild(containerClone);
+
+    return addedItems;
+  };
 
   const recomputeMaxItems = () => {
     const containerEl = tagsContainerRef.current;
 
     if (!containerEl) {
-      return;
+      throw new Error('Tags container ref is not set');
     }
 
-    const computeOverflow = (el: HTMLDivElement) => {
-      const rawContainerWidth = el.scrollWidth;
-      const clampedContainerWidth = el.getBoundingClientRect().width;
-
-      return rawContainerWidth - clampedContainerWidth;
-    };
-
-    const overflow = computeOverflow(containerEl);
+    // Вычисляем отступы между тегами
     const containerStyles = window.getComputedStyle(containerEl);
-    const gapWidth = parseInt(containerStyles.columnGap);
+    const gap = parseInt(containerStyles.columnGap);
 
-    // Слишком много тегов, скрываем лишние,
-    // убирая по одному с конца, пока не уместятся
-    if (overflow > 0) {
-      let reducedWidth = 0;
-      let removedItems = 0;
-      const children = containerEl.children;
-
-      while (reducedWidth < overflow && removedItems < children.length) {
-        const child = children[children.length - 1 - removedItems];
-
-        reducedWidth += child.getBoundingClientRect().width + gapWidth;
-        removedItems += 1;
-      }
-
-      // Сохраняем как минимум один тег
-      const newMaxItems = Math.max(children.length - removedItems, 1);
-
-      setMaxItems(newMaxItems);
-    }
-
-    // Вычисляем ширину всех дочерних элементов
-    const children = Array.from(containerEl.children);
-    const curChildrenWidth = children
-      .map((c) => c.getBoundingClientRect().width)
-      .reduce((a, b) => a + b + gapWidth, 0);
+    // Вычисляем ширину первого тега
+    const firstChildWidth =
+      containerEl.firstElementChild!.getBoundingClientRect().width;
 
     // Вычисляем доступную ширину для новых тегов
     const availableWidth =
-      containerEl.getBoundingClientRect().width - curChildrenWidth;
+      containerEl.getBoundingClientRect().width - firstChildWidth;
 
-    // Пытаемся показать больше тегов
-    if (availableWidth > 0 && maxItems < selectedOptions.length) {
-      let addedWidth = 0;
-      let addedItems = 0;
+    // Клонируем контейнер для тегов
+    const clone = containerEl.cloneNode(true) as HTMLDivElement;
 
-      // Клонируем контейнер для тегов
-      const clone = containerEl.cloneNode(true) as HTMLDivElement;
-
-      // Маунтим невидимый клон в body, чтобы узнать ширину дочерних элементов
-      clone.style.visibility = 'hidden';
-      document.body.appendChild(clone);
-
-      while (addedItems < selectedOptions.length - maxItems) {
-        // Клонируем последний тег
-        const childClone = clone.lastChild!.cloneNode(true) as HTMLSpanElement;
-
-        // Получаем текст следующего тега
-        const newTagValue = getOptionLabel(selectedOptions[maxItems]);
-
-        childClone.textContent = newTagValue as string;
-        clone.appendChild(childClone);
-
-        // Считаем ширину с учетом добавленного тега
-        const newTagWidth = childClone.getBoundingClientRect().width;
-
-        const deltaWidth = newTagWidth + gapWidth;
-        const newAddedWidth = addedWidth + deltaWidth;
-
-        // Переполнение, стопаемся
-        if (newAddedWidth > availableWidth) {
-          break;
-        }
-
-        // Место есть, добавляем еще один тег
-        addedItems += 1;
-        addedWidth += deltaWidth;
-      }
-
-      // Удаляем клон из body
-      document.body.removeChild(clone);
-      setMaxItems(maxItems + addedItems);
+    // Убираем все элементы кроме первого
+    while (clone.children.length > 1) {
+      clone.removeChild(clone.lastElementChild!);
     }
+
+    // Маунтим невидимый клон в body, чтобы узнать ширину дочерних элементов
+    clone.style.visibility = 'hidden';
+
+    const addedItems = getTagsCountToAdd(clone, availableWidth, gap);
+
+    setMaxItems(1 + addedItems);
   };
 
   useLayoutEffect(() => {
@@ -124,6 +130,7 @@ export function useLogic({
       return;
     }
 
+    // Пересчитываем maxItems при ресайзе контейнера
     const observer = new ResizeObserver(() => {
       if (ignoreResizeRef.current) {
         ignoreResizeRef.current = false;
@@ -136,10 +143,9 @@ export function useLogic({
 
     observer.observe(tagsContainerRef.current);
 
-    return () => {
-      observer.disconnect();
-    };
-  });
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOptions]);
 
   const handleTagMouseDown = (
     e: MouseEvent<HTMLDivElement>,
@@ -177,8 +183,11 @@ export function useLogic({
     return { label, shrinks, onMouseDown };
   };
 
+  const visibleOptions = selectedOptions.slice(0, maxItems);
+
   return {
     maxItems,
+    visibleOptions,
     tagsContainerRef,
     getTagProps,
   };
