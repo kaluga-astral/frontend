@@ -119,6 +119,10 @@ export function useLogic({
   };
 
   useLayoutEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     recomputeMaxItems();
     // Не пересчитываем ширину контейнера, так как сами ее модифицировали
     ignoreResizeRef.current = true;
@@ -126,8 +130,12 @@ export function useLogic({
   }, [selectedOptions]);
 
   useEffect(() => {
-    if (!tagsContainerRef.current) {
+    if (typeof window === 'undefined') {
       return;
+    }
+
+    if (!tagsContainerRef.current) {
+      throw new Error('Tags container ref is not set');
     }
 
     // Пересчитываем maxItems при ресайзе контейнера
