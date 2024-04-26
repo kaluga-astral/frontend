@@ -1,8 +1,9 @@
-import { type ReactNode } from 'react';
+import { type ComponentProps, type ElementType, type ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
 import { type ButtonProps } from '../Button';
 import { useViewportType } from '../hooks/useViewportType';
+import { type Theme } from '../theme';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
@@ -16,7 +17,9 @@ import {
   Wrapper,
 } from './styles';
 
-export type PageHeaderProps = {
+export type PageHeaderProps<
+  TBackButtonComponent extends ElementType = ElementType,
+> = {
   /**
    * @example <PageHeader title="Заголовок страницы" />
    * Заголовок страницы
@@ -56,19 +59,29 @@ export type PageHeaderProps = {
    *    },
    *  ]
    * }} />
-   * Набор кнопок, видимые кофигурируются через объект main, скрытые в меню - через secondary
+   * Набор кнопок, видимые конфигурируются через объект main, скрытые в меню - через secondary
    */
   actions?: ButtonGroupProps;
   /**
-   * @example <PageHeader backButton={{
-   *  onClick: () => {},
-   * }} />
-   * Кнопка назад
+   * @example
+   * <PageHeader<{to: string}>
+   *  backButton={{
+   *    onClick: () => {},
+   *    to: '/'
+   *  }}
+   * />
    */
-  backButton?: Omit<ButtonProps, 'children' | 'variant'>;
+  backButton?: Omit<ButtonProps, 'children' | 'variant'> & {
+    component?: TBackButtonComponent;
+    theme?: Theme | undefined;
+  } & ComponentProps<
+      ElementType extends TBackButtonComponent ? 'button' : TBackButtonComponent
+    >;
 };
 
-export const PageHeader = (props: PageHeaderProps) => {
+export function PageHeader<TBackButtonComponent extends ElementType>(
+  props: PageHeaderProps<TBackButtonComponent>,
+) {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
   const { isMobile } = useViewportType();
@@ -97,4 +110,4 @@ export const PageHeader = (props: PageHeaderProps) => {
       {subheader && <PageSubheader>{subheader}</PageSubheader>}
     </Wrapper>
   );
-};
+}
