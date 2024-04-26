@@ -5,7 +5,7 @@ import {
   type SelectProps as MuiSelectProps,
   type SelectChangeEvent,
 } from '@mui/material';
-import React, { type ForwardedRef, type ReactNode } from 'react';
+import { type ForwardedRef, type ReactNode } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { FormHelperText } from '../FormHelperText';
@@ -14,8 +14,14 @@ import { MenuItem } from '../MenuItem';
 import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import { Placeholder, ProgressWrapper } from './styles';
+import {
+  Placeholder,
+  ProgressWrapper,
+  StyledCrossIcon,
+  StyledIconButton,
+} from './styles';
 import { SelectTagsList } from './SelectTagsList';
+import { useLogic } from './hooks';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -36,6 +42,16 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   label?: string;
 };
 
+type ClearButtonProps = {
+  onClick: () => void;
+};
+
+const ClearButton = ({ onClick }: ClearButtonProps) => (
+  <StyledIconButton onClick={onClick} variant="light">
+    <StyledCrossIcon />
+  </StyledIconButton>
+);
+
 const SelectInner = <Value,>(
   {
     required,
@@ -54,6 +70,12 @@ const SelectInner = <Value,>(
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
+  const { isShowingClearButton, isNoData, onClearAll } = useLogic({
+    ...props,
+    children,
+    onChange: externalOnChange,
+  });
+
   const renderValue = (selectedOptions: Value): ReactNode => {
     // Массив с выбранными опциями
     if (Array.isArray(selectedOptions) && selectedOptions.length) {
@@ -82,8 +104,6 @@ const SelectInner = <Value,>(
     return getOptionLabel(selectedOptions as string | number);
   };
 
-  const isNoData = !Boolean(React.Children.count(children));
-
   return (
     <FormControl error={error} fullWidth={fullWidth}>
       {label && (
@@ -99,6 +119,11 @@ const SelectInner = <Value,>(
         ref={ref}
         fullWidth={fullWidth}
         onChange={externalOnChange}
+        endAdornment={
+          isShowingClearButton ? (
+            <ClearButton onClick={onClearAll} />
+          ) : undefined
+        }
       >
         <Placeholder value="">{placeholder}</Placeholder>
         {loading && (
