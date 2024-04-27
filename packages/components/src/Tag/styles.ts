@@ -105,15 +105,15 @@ const getBgColor = ({
     },
   };
 
-  if (!customVariant) {
-    return backgroundColorVariants.contained.primary;
-  }
-
   if (customVariant && customColor) {
     return backgroundColorVariants[customVariant][customColor];
   }
 
-  return theme.palette.background.element;
+  if (!customVariant && customColor) {
+    return backgroundColorVariants.contained[customColor];
+  }
+
+  return theme.palette.grey[300];
 };
 
 const getColor = ({
@@ -148,6 +148,10 @@ const getColor = ({
       grey: theme.palette.grey[900],
     },
   };
+
+  if (!customVariant && !customColor) {
+    return theme.palette.grey[900];
+  }
 
   if (!customVariant && customColor !== 'grey') {
     return theme.palette.common.white;
@@ -194,7 +198,7 @@ const getDeleteIconBgColor = ({
       error: theme.palette.red[600],
       success: theme.palette.green[600],
       warning: theme.palette.yellow[600],
-      grey: theme.palette.grey[300],
+      grey: theme.palette.grey[100],
       default: theme.palette.grey[300],
     },
     light: {
@@ -220,10 +224,14 @@ const getDeleteIconBgColor = ({
     }
 
     if (!customVariant && !customColor) {
-      return hoverColors.contained.primary;
+      return hoverColors.contained.grey;
     }
 
-    return hoverColors.light.default;
+    if (!customVariant && customColor) {
+      return hoverColors.contained[customColor];
+    }
+
+    return hoverColors.contained.grey;
   }
 
   return 'transparent';
@@ -243,6 +251,15 @@ export const getDeleteIconColor = ({
   }
 
   if (!customVariant && !customColor) {
+    return theme.palette.grey[900];
+  }
+
+  if (
+    !customVariant &&
+    customColor &&
+    customColor !== 'grey' &&
+    customColor !== 'default'
+  ) {
     return theme.palette.common.white;
   }
 

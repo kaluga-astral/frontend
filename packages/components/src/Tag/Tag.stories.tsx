@@ -323,7 +323,6 @@ export const Static = () => {
         <Tag label="Light gray" variant="light" color="grey" />
         <Tag label="Light primary" variant="light" color="primary" />
         <Tag label="Contained primary" variant="contained" color="primary" />
-        <Tag label="Contained Removable" variant="contained" color="success" />
       </Grid>
     </>
   );
@@ -367,6 +366,40 @@ export const Colors = () => {
           <Tag label="Gray contained" variant="contained" color="grey" />
           <Tag label="Default contained" variant="contained" color="default" />
         </Grid>
+      </Grid>
+    </>
+  );
+};
+
+/**
+ * Тэг с возможностью удаления.
+ */
+
+export const Removable = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  const handleDelete = () => {
+    console.log('deleted');
+  };
+
+  return (
+    <>
+      <Grid container spacing={8} direction={autoFlow}>
+        <Tag color="grey" label="Default" onDelete={handleDelete} />
+        <Tag avatar={svgAvatar} label="Default" onDelete={handleDelete} />
+        <Tag
+          label="Default"
+          variant="text"
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          onDelete={handleDelete}
+        />
+        <Tag
+          disabled
+          label="Disabled"
+          onDelete={() => console.log('не нажмётся в дизейбле')}
+        />
       </Grid>
     </>
   );
@@ -492,40 +525,6 @@ export const ColorsRemovable = () => {
         </List>
       </RowContainer>
     </Grid>
-  );
-};
-
-/**
- * Тэг с возможностью удаления.
- */
-
-export const Removable = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
-
-  const handleDelete = () => {
-    console.log('deleted');
-  };
-
-  return (
-    <>
-      <Grid container spacing={8} direction={autoFlow}>
-        <Tag color="grey" label="Default" onDelete={handleDelete} />
-        <Tag avatar={svgAvatar} label="Default" onDelete={handleDelete} />
-        <Tag
-          label="Default"
-          variant="text"
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-          onDelete={handleDelete}
-        />
-        <Tag
-          disabled
-          label="Disabled"
-          onDelete={() => console.log('не нажмётся в дизейбле')}
-        />
-      </Grid>
-    </>
   );
 };
 
