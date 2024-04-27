@@ -7,6 +7,7 @@ import { Grid } from '../Grid';
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
 import { ActionCell, type Actions } from '../ActionCell';
+import { styled } from '../styles';
 
 import { Tag } from './Tag';
 import { TagColors } from './enums';
@@ -371,113 +372,125 @@ export const Colors = () => {
   );
 };
 
-export const ColorsRemovable = () => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const autoFlow = matches ? 'row' : 'column';
+const StyledTag = styled(Tag)`
+  width: fit-content;
+`;
 
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+`;
+
+export const ColorsRemovable = () => {
   const onRm = () => {};
 
   return (
     <Grid container spacing={5}>
-      <Grid
-        container
-        direction={autoFlow}
-        spacing={3}
-        columns="repeat(3, auto)"
-      >
-        <Tag
-          label="Primary removable"
-          variant="contained"
-          color="primary"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Error removable"
-          variant="contained"
-          color="error"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Success removable"
-          variant="contained"
-          color="success"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Warning removable"
-          variant="contained"
-          color="warning"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Gray removable"
-          variant="contained"
-          color="grey"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Default removable"
-          variant="contained"
-          color="default"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-      </Grid>
-      <Grid
-        container
-        direction={autoFlow}
-        spacing={8}
-        columns="repeat(3, auto)"
-      >
-        <Tag
-          label="Primary removable light"
-          variant="light"
-          color="primary"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Error removable light"
-          variant="light"
-          color="error"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Success removable light"
-          variant="light"
-          color="success"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Warning removable light"
-          variant="light"
-          color="warning"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Grey removable light"
-          variant="light"
-          color="grey"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-        <Tag
-          label="Default removable light"
-          variant="light"
-          color="default"
-          onDelete={onRm}
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
-        />
-      </Grid>
+      <RowContainer>
+        <span>Contained</span>
+
+        <List>
+          <StyledTag
+            label="Primary"
+            variant="contained"
+            color="primary"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Error"
+            variant="contained"
+            color="error"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Success"
+            variant="contained"
+            color="success"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Warning"
+            variant="contained"
+            color="warning"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Gray"
+            variant="contained"
+            color="grey"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Default"
+            variant="contained"
+            color="default"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+        </List>
+      </RowContainer>
+
+      <RowContainer>
+        <span>Light</span>
+
+        <List>
+          <StyledTag
+            label="Primary light"
+            variant="light"
+            color="primary"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Error light"
+            variant="light"
+            color="error"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Success light"
+            variant="light"
+            color="success"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Warning"
+            variant="light"
+            color="warning"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Gray light"
+            variant="light"
+            color="grey"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+          <StyledTag
+            label="Default light"
+            variant="light"
+            color="default"
+            onDelete={onRm}
+            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          />
+        </List>
+      </RowContainer>
     </Grid>
   );
 };

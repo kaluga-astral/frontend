@@ -86,10 +86,6 @@ const getBgColor = ({
     return 'transparent';
   }
 
-  if (customColor === TagColors.GREY) {
-    return theme.palette.grey[100];
-  }
-
   const backgroundColorVariants = {
     contained: {
       primary: theme.palette.primary.main,
