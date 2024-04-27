@@ -50,7 +50,7 @@ const getHoverBgColor = ({
       grey: theme.palette.grey[200],
       default: theme.palette.grey[200],
     },
-  };
+  } as TagColorsKit;
 
   if (variant && color) {
     return hoverBgColors[variant][color];

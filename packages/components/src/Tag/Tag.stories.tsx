@@ -322,6 +322,7 @@ export const Static = () => {
         <Tag label="Light gray" variant="light" color="grey" />
         <Tag label="Light primary" variant="light" color="primary" />
         <Tag label="Contained primary" variant="contained" color="primary" />
+        <Tag label="Contained Removable" variant="contained" color="success" />
       </Grid>
     </>
   );
@@ -349,7 +350,7 @@ export const Colors = () => {
           <Tag label="Error light" variant="light" color="error" />
           <Tag label="Success light" variant="light" color="success" />
           <Tag label="Warning light" variant="light" color="warning" />
-          <Tag label="Grey light" variant="light" color="grey" />
+          <Tag label="Gray light" variant="light" color="grey" />
           <Tag label="Default light" variant="light" color="default" />
         </Grid>
         <Grid
@@ -362,11 +363,122 @@ export const Colors = () => {
           <Tag label="Error contained" variant="contained" color="error" />
           <Tag label="Success contained" variant="contained" color="success" />
           <Tag label="Warning contained" variant="contained" color="warning" />
-          <Tag label="Grey contained" variant="contained" color="grey" />
+          <Tag label="Gray contained" variant="contained" color="grey" />
           <Tag label="Default contained" variant="contained" color="default" />
         </Grid>
       </Grid>
     </>
+  );
+};
+
+export const ColorsRemovable = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const autoFlow = matches ? 'row' : 'column';
+
+  const onRm = () => {};
+
+  return (
+    <Grid container spacing={5}>
+      <Grid
+        container
+        direction={autoFlow}
+        spacing={3}
+        columns="repeat(3, auto)"
+      >
+        <Tag
+          label="Primary removable"
+          variant="contained"
+          color="primary"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Error removable"
+          variant="contained"
+          color="error"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Success removable"
+          variant="contained"
+          color="success"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Warning removable"
+          variant="contained"
+          color="warning"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Gray removable"
+          variant="contained"
+          color="grey"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Default removable"
+          variant="contained"
+          color="default"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+      </Grid>
+      <Grid
+        container
+        direction={autoFlow}
+        spacing={8}
+        columns="repeat(3, auto)"
+      >
+        <Tag
+          label="Primary removable light"
+          variant="light"
+          color="primary"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Error removable light"
+          variant="light"
+          color="error"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Success removable light"
+          variant="light"
+          color="success"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Warning removable light"
+          variant="light"
+          color="warning"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Grey removable light"
+          variant="light"
+          color="grey"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+        <Tag
+          label="Default removable light"
+          variant="light"
+          color="default"
+          onDelete={onRm}
+          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
