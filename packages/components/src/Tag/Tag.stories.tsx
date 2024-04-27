@@ -320,7 +320,7 @@ export const Static = () => {
     <>
       <Grid container spacing={8} direction={autoFlow}>
         <Tag label="Text" variant="text" />
-        <Tag label="Light gray" variant="light" color="grey" />
+        <Tag label="Light Grey" variant="light" color="grey" />
         <Tag label="Light primary" variant="light" color="primary" />
         <Tag label="Contained primary" variant="contained" color="primary" />
       </Grid>
@@ -331,7 +331,6 @@ export const Static = () => {
 /**
  * К тэгу может быть добавлен цвет.
  */
-
 export const Colors = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -350,7 +349,7 @@ export const Colors = () => {
           <Tag label="Error light" variant="light" color="error" />
           <Tag label="Success light" variant="light" color="success" />
           <Tag label="Warning light" variant="light" color="warning" />
-          <Tag label="Gray light" variant="light" color="grey" />
+          <Tag label="Grey light" variant="light" color="grey" />
           <Tag label="Default light" variant="light" color="default" />
         </Grid>
         <Grid
@@ -363,7 +362,7 @@ export const Colors = () => {
           <Tag label="Error contained" variant="contained" color="error" />
           <Tag label="Success contained" variant="contained" color="success" />
           <Tag label="Warning contained" variant="contained" color="warning" />
-          <Tag label="Gray contained" variant="contained" color="grey" />
+          <Tag label="Grey contained" variant="contained" color="grey" />
           <Tag label="Default contained" variant="contained" color="default" />
         </Grid>
       </Grid>
@@ -374,7 +373,6 @@ export const Colors = () => {
 /**
  * Тэг с возможностью удаления.
  */
-
 export const Removable = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -392,7 +390,7 @@ export const Removable = () => {
         <Tag
           label="Default"
           variant="text"
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           onDelete={handleDelete}
         />
         <Tag
@@ -404,10 +402,6 @@ export const Removable = () => {
     </>
   );
 };
-
-const StyledTag = styled(Tag)`
-  width: fit-content;
-`;
 
 const RowContainer = styled.div`
   display: flex;
@@ -423,7 +417,12 @@ const List = styled.div`
 `;
 
 export const ColorsRemovable = () => {
-  const onRm = () => {};
+  const handleDelete = () => {
+    console.log(
+      // eslint-disable-next-line quotes
+      "It's GRAY, I believe in american english supremacy!",
+    );
+  };
 
   return (
     <Grid container spacing={5}>
@@ -431,47 +430,47 @@ export const ColorsRemovable = () => {
         <span>Contained</span>
 
         <List>
-          <StyledTag
+          <Tag
             label="Primary"
             variant="contained"
             color="primary"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Error"
             variant="contained"
             color="error"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Success"
             variant="contained"
             color="success"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Warning"
             variant="contained"
             color="warning"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
-            label="Gray"
+          <Tag
+            label="Grey"
             variant="contained"
             color="grey"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Default"
             variant="contained"
             color="default"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
         </List>
       </RowContainer>
@@ -480,47 +479,47 @@ export const ColorsRemovable = () => {
         <span>Light</span>
 
         <List>
-          <StyledTag
+          <Tag
             label="Primary light"
             variant="light"
             color="primary"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Error light"
             variant="light"
             color="error"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Success light"
             variant="light"
             color="success"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Warning"
             variant="light"
             color="warning"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
-            label="Gray light"
+          <Tag
+            label="Grey light"
             variant="light"
             color="grey"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
-          <StyledTag
+          <Tag
             label="Default light"
             variant="light"
             color="default"
-            onDelete={onRm}
-            endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           />
         </List>
       </RowContainer>
@@ -580,7 +579,7 @@ export const Adornment = () => {
         <Tag
           label="Default"
           variant="text"
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
         />
       </Grid>
     </>

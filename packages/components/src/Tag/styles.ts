@@ -1,4 +1,5 @@
 import { Chip, type ChipProps } from '@mui/material';
+import { badgeClasses } from '@mui/base';
 
 import { styled } from '../styles';
 import { type Theme } from '../theme';
@@ -250,19 +251,6 @@ export const getDeleteIconColor = ({
     return theme.palette.common.white;
   }
 
-  if (!customVariant && !customColor) {
-    return theme.palette.grey[900];
-  }
-
-  if (
-    !customVariant &&
-    customColor &&
-    customColor !== 'grey' &&
-    customColor !== 'default'
-  ) {
-    return theme.palette.common.white;
-  }
-
   return theme.palette.grey[900];
 };
 
@@ -351,7 +339,7 @@ export const StyledTag = styled(Chip, {
     height: 16px;
   }
 
-  & span.MuiBadge-badge {
+  & .${badgeClasses.badge} {
     ${({ theme, customColor, customVariant }) =>
       (customColor === 'grey' || customColor === 'default') &&
       customVariant === 'light' &&
