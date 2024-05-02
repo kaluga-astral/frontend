@@ -101,7 +101,7 @@ const AutocompleteInner = <
     inputRef,
     renderTags,
     renderInput: externalRenderInput,
-    loadedDataError = 'Ошибка загрузки данных.',
+    loadedDataError = 'Ошибка загрузки данных',
     isLoadedDataError,
     ...restProps
   }: AutocompleteProps<
