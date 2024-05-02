@@ -22,6 +22,7 @@ export const Container = styled.div<StyledTableContainerProps>`
   & {
     td,
     th {
+      padding-right: ${({ theme }) => theme.spacing(2)};
       padding-left: ${({ theme }) => theme.spacing(2)};
     }
   }
