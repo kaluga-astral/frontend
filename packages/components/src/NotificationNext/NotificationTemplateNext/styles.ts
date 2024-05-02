@@ -42,6 +42,12 @@ export const Inner = styled.div`
   flex-grow: 1;
 
   overflow-wrap: anywhere;
+
+  .Toastify__progress-bar--wrp {
+    top: 0;
+
+    height: 3px;
+  }
 `;
 
 export const Header = styled.header`
@@ -81,9 +87,9 @@ export const CloseIcon = styled(CrossOutlineSm, {
 export const CloseButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseButtonProps>`
-  align-self: flex-start;
+  align-self: center;
 
-  margin-left: 16px;
+  margin-left: ${({ theme }) => theme.spacing(4)};
   padding: 0;
 
   &:hover {
