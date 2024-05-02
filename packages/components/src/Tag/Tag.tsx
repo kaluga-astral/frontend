@@ -51,8 +51,8 @@ export type TagProps = Omit<
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (
     {
-      color,
-      variant,
+      color = 'grey',
+      variant = 'contained',
       deleteIcon,
       size = 'small',
       label,

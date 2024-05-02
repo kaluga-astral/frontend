@@ -223,16 +223,6 @@ const getDeleteIconBgColor = ({
     if (customVariant === 'text') {
       return hoverColors.light.grey;
     }
-
-    if (!customVariant && !customColor) {
-      return hoverColors.contained.grey;
-    }
-
-    if (!customVariant && customColor) {
-      return hoverColors.contained[customColor];
-    }
-
-    return hoverColors.contained.grey;
   }
 
   return 'transparent';

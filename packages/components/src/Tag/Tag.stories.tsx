@@ -320,7 +320,7 @@ export const Static = () => {
     <>
       <Grid container spacing={8} direction={autoFlow}>
         <Tag label="Text" variant="text" />
-        <Tag label="Light Grey" variant="light" color="grey" />
+        <Tag label="Light grey" variant="light" color="grey" />
         <Tag label="Light primary" variant="light" color="primary" />
         <Tag label="Contained primary" variant="contained" color="primary" />
       </Grid>
@@ -418,10 +418,7 @@ const List = styled.div`
 
 export const ColorsRemovable = () => {
   const handleDelete = () => {
-    console.log(
-      // eslint-disable-next-line quotes
-      "It's GRAY, I believe in american english supremacy!",
-    );
+    console.log('Delete called');
   };
 
   return (
