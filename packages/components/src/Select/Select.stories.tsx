@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 
 import { MenuItem } from '../MenuItem';
 import { Checkbox } from '../Checkbox';
-// import { styled } from '../styles';
 
 import { Select } from './Select';
 

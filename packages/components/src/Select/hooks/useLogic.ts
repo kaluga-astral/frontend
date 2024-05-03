@@ -1,5 +1,5 @@
 import { type SelectChangeEvent } from '@mui/material';
-import { Children } from 'react';
+import { Children, useState } from 'react';
 
 import { type SelectProps } from '../Select';
 
@@ -7,7 +7,13 @@ export function useLogic<Value>({
   value,
   onChange,
   children,
+  open: externalIsOpened,
 }: SelectProps<Value>) {
+  const [isOpened, setOpened] = useState(externalIsOpened || false);
+
+  const openSelect = () => setOpened(true);
+  const closeSelect = () => setOpened(false);
+
   const onClearAll = () => {
     // Очищаем значение только если оно массив
     if (!Array.isArray(value)) {
@@ -30,8 +36,11 @@ export function useLogic<Value>({
   const isNoData = !Boolean(Children.count(children));
 
   return {
+    isOpened,
     isNoData,
     isShowingClearButton,
+    openSelect,
+    closeSelect,
     onClearAll,
   };
 }

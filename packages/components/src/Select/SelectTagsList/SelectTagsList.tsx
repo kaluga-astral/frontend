@@ -1,6 +1,6 @@
 import { type SelectChangeEvent } from '@mui/material';
 
-import { useLogic } from './hooks/useLogic';
+import { useLogic } from './hooks';
 import { TagsWrapper } from './styles';
 import { SelectTag } from './SelectTag';
 
@@ -12,6 +12,8 @@ export type SelectTagsListProps = {
     event: SelectChangeEvent<string[]>,
     child: React.ReactNode,
   ) => void;
+
+  openMenu: () => void;
 };
 
 /**
@@ -21,11 +23,13 @@ export const SelectTagsList = ({
   selectedOptions,
   getOptionLabel,
   onChange,
+  openMenu,
 }: SelectTagsListProps) => {
   const { maxItems, tagsContainerRef, visibleOptions, getTagProps } = useLogic({
     selectedOptions,
     getOptionLabel,
     onChange,
+    openMenu,
   });
 
   return (
@@ -37,7 +41,11 @@ export const SelectTagsList = ({
       })}
 
       {maxItems < selectedOptions.length && (
-        <SelectTag key="more" label={`+${selectedOptions.length - maxItems}`} />
+        <SelectTag
+          key="more"
+          label={`+${selectedOptions.length - maxItems}`}
+          onClick={openMenu}
+        />
       )}
     </TagsWrapper>
   );

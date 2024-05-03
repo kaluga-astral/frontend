@@ -70,7 +70,14 @@ const SelectInner = <Value,>(
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
-  const { isShowingClearButton, isNoData, onClearAll } = useLogic({
+  const {
+    isOpened,
+    isShowingClearButton,
+    isNoData,
+    onClearAll,
+    openSelect,
+    closeSelect,
+  } = useLogic({
     ...props,
     children,
     onChange: externalOnChange,
@@ -85,6 +92,7 @@ const SelectInner = <Value,>(
 
       return (
         <SelectTagsList
+          openMenu={openSelect}
           onChange={handleOnChange}
           getOptionLabel={getOptionLabel}
           selectedOptions={selectedOptions}
@@ -113,6 +121,9 @@ const SelectInner = <Value,>(
       )}
       <MuiSelect
         {...props}
+        open={isOpened}
+        onOpen={openSelect}
+        onClose={closeSelect}
         renderValue={renderValue}
         IconComponent={ChevronDOutlineMd}
         displayEmpty

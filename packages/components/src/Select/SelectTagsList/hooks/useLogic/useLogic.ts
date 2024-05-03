@@ -9,11 +9,13 @@ import { type SelectChangeEvent } from '@mui/material';
 
 import { type SelectTagsListProps } from '../../SelectTagsList';
 import { getElementByText } from '../../utils';
+import { CLEAR_BUTTON_SIZE } from '../../../constants';
 
 export function useLogic({
   selectedOptions,
   getOptionLabel,
   onChange,
+  openMenu,
 }: SelectTagsListProps) {
   // Сколько тегов можно отобразить в инпуте
   const [maxItems, setMaxItems] = useState(1);
@@ -100,7 +102,9 @@ export function useLogic({
 
     // Вычисляем доступную ширину для новых тегов
     const availableWidth =
-      containerEl.getBoundingClientRect().width - firstChildWidth;
+      containerEl.getBoundingClientRect().width -
+      firstChildWidth -
+      CLEAR_BUTTON_SIZE;
 
     // Клонируем контейнер для тегов
     const clone = containerEl.cloneNode(true) as HTMLDivElement;
@@ -182,13 +186,27 @@ export function useLogic({
 
   const getTagProps = (option: string | number, index: number) => {
     const label = getOptionLabel(option as string);
-    const shrinks = index == maxItems - 1 && maxItems < selectedOptions.length;
+    const shrinks = index == maxItems - 1 && maxItems <= selectedOptions.length;
 
     const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
       handleTagMouseDown(e, option);
     };
 
-    return { label, shrinks, onMouseDown };
+    const onClick = () => {
+      openMenu();
+    };
+
+    const onDelete = () => {
+      const changeEvent = {
+        target: {
+          value: selectedOptions.filter((opt) => opt !== option),
+        },
+      } as SelectChangeEvent<string[]>;
+
+      onChange(changeEvent, undefined);
+    };
+
+    return { label, shrinks, onMouseDown, onClick, onDelete };
   };
 
   const visibleOptions = selectedOptions.slice(0, maxItems);

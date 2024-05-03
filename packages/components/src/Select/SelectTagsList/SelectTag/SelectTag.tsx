@@ -3,6 +3,7 @@ import { type MouseEvent } from 'react';
 import { type TagProps } from '../../../Tag';
 
 import { StyledTag } from './styles';
+import { useLogic } from './hooks';
 
 type SelectTagProps = {
   /**
@@ -16,23 +17,34 @@ type SelectTagProps = {
   shrinks?: boolean;
 
   /**
-   * Хендлер mouseDown для удаления тега
+   * Хендлер удаления тега
    */
-  onMouseDown?: (e: MouseEvent<HTMLDivElement>) => void;
+  onDelete?: () => void;
+
+  /**
+   * Хендлер клика по тегу
+   */
+  onClick: (e: MouseEvent<HTMLDivElement>) => void;
 };
 
 /**
  * Тег что отображается в инпуте Select'а
  */
-export const SelectTag = ({ label, shrinks, onMouseDown }: SelectTagProps) => {
-  const handleDelete = onMouseDown ? () => {} : undefined;
+export const SelectTag = ({
+  label,
+  shrinks,
+  onDelete,
+  onClick,
+}: SelectTagProps) => {
+  const { onMouseDown } = useLogic();
 
   return (
     <StyledTag
       color="grey"
       label={label}
       $shrinks={shrinks}
-      onDelete={handleDelete}
+      onDelete={onDelete}
+      onClick={onClick}
       onMouseDown={onMouseDown}
     />
   );
