@@ -38,18 +38,6 @@ export const Wrapper = styled.article<NotificationTemplateProps>`
     getNotificationTemplateStyles(theme, variant, filled)}
 `;
 
-export const Inner = styled.div`
-  flex-grow: 1;
-
-  overflow-wrap: anywhere;
-
-  .Toastify__progress-bar--wrp {
-    top: 0;
-
-    height: 3px;
-  }
-`;
-
 export const Header = styled.header`
   display: flex;
   align-items: center;

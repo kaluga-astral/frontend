@@ -1,7 +1,11 @@
 import { type ToastContainerProps } from 'react-toastify-next';
 import { injectStyle } from 'react-toastify-next/dist/inject-style';
 
-import { NOTIFY_CLASSNAME, NOTIFY_POSITIONS } from '../constants';
+import {
+  NOTIFY_CLASSNAME,
+  NOTIFY_CONTAINER_ID,
+  NOTIFY_POSITIONS,
+} from '../constants';
 
 import { Inner, Wrapper } from './styles';
 
@@ -9,16 +13,21 @@ if (typeof window !== 'undefined') {
   injectStyle();
 }
 
-export type NotificationContainerProps = Omit<ToastContainerProps, 'theme'> & {
+export type NotificationContainerProps = Omit<
+  ToastContainerProps,
+  'theme' | 'stacked'
+> & {
   hideProgressBar?: boolean;
 };
 
-export const NotificationContainerNext = (
-  props: NotificationContainerProps,
-) => (
+export const NotificationContainerNext = ({
+  containerId = NOTIFY_CONTAINER_ID,
+  ...props
+}: NotificationContainerProps) => (
   <Wrapper>
     <Inner
       {...props}
+      containerId={containerId}
       pauseOnFocusLoss
       position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
       newestOnTop={false}

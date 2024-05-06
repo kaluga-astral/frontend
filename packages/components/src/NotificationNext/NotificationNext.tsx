@@ -2,7 +2,7 @@ import { toast } from 'react-toastify-next';
 
 import { type Notify } from './types';
 import { NotificationVariantTypes } from './constants';
-import { getClassNameModifierByVariant } from './utils';
+import { getClassNameModifierByVariant, getNotifyOptions } from './utils';
 import { NOTIFICATION_VARIANT } from './NotificationTemplateNext/constants';
 
 export const notify: Notify = {
@@ -15,7 +15,7 @@ export const notify: Notify = {
           NotificationVariantTypes.success,
           options.hideProgressBar,
         ),
-        ...options,
+        ...getNotifyOptions({ ...options }),
       },
     ),
   info: (title, { icon, ...options } = {}) =>
@@ -27,7 +27,7 @@ export const notify: Notify = {
           NotificationVariantTypes.info,
           options.hideProgressBar,
         ),
-        ...options,
+        ...getNotifyOptions({ ...options }),
       },
     ),
   warning: (title, { icon, ...options } = {}) =>
@@ -39,7 +39,7 @@ export const notify: Notify = {
           NotificationVariantTypes.warning,
           options.hideProgressBar,
         ),
-        ...options,
+        ...getNotifyOptions({ ...options }),
       },
     ),
   error: (title, { icon, ...options } = {}) =>
@@ -51,7 +51,7 @@ export const notify: Notify = {
           NotificationVariantTypes.error,
           options.hideProgressBar,
         ),
-        ...options,
+        ...getNotifyOptions({ ...options }),
       },
     ),
   custom: toast,

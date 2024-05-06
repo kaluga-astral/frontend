@@ -70,10 +70,18 @@ export type NotificationProps = Omit<
   icon?: ReactNode;
 
   /**
-   * Опциональный пропс позволяющий отключить кнопку рендера крестика закрытия нотификации
+   * Опциональный пропс, позволяющий отключить кнопку рендера крестика закрытия нотификации
    * @default true
    */
   showCloseButton?: boolean;
+
+  /**
+   * Опциональный пропс, позволяющий сделать уведомление статичным (отключается таймер и прогресс-бар),
+   * а так же выводящий его в отдельном контейнере.
+   * Необходимо использовать только в паре с контейнером со стеком (NotificationStackContainer)
+   * @default false
+   */
+  isStatic?: boolean;
 };
 
 type NotificationOptions = Omit<NotificationProps, 'title'>;

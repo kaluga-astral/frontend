@@ -32,20 +32,32 @@ export const Wrapper = styled.div`
   right: 0;
   bottom: 0;
 
-  width: 400px;
+  width: 424px;
 
   &.${NOTIFY_CONTAINER_CLASSNAME} {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     justify-content: end;
 
-    height: 100dvh;
+    height: 100vh;
 
-    .Toastify {
-      overflow-y: auto;
+    @supports (height: 100dvh) {
+      height: 100dvh;
+    }
 
-      padding-left: ${({ theme }) => theme.spacing(6)};
+    .Toastify:not(:last-child) {
+      overflow: hidden;
+    }
+  }
+
+  /* Для контейнера с стандартными уведомлениями показываем в стеке не более 3-x */
+  .Toastify:not(:last-child) {
+    .${NOTIFY_CLASSNAME} {
+      &:not(:nth-last-child(-n + 3)) {
+        transform: unset;
+
+        opacity: 0;
+      }
     }
   }
 
@@ -63,7 +75,7 @@ export const Wrapper = styled.div`
       top: 0;
       left: 0;
 
-      display: block;
+      display: none;
 
       width: 100%;
       height: 3px;
@@ -134,19 +146,28 @@ export const Wrapper = styled.div`
 
 export const Inner = styled(ToastContainer)`
   position: relative !important;
+  right: 0 !important;
   bottom: 0 !important;
 
+  width: 100%;
   min-width: 400px;
-  max-width: 400px;
+  max-width: 424px;
   padding-bottom: 0 !important;
 
   &:hover {
+    overflow-y: auto;
+
+    width: 100%;
+    height: 100%;
+
     .${NOTIFY_CLASSNAME} {
       position: relative;
       transform: unset;
 
       height: auto;
       min-height: 92px;
+
+      opacity: 1 !important;
     }
 
     .${NOTIFY_CLASSNAME}__content {
@@ -169,8 +190,10 @@ export const Inner = styled(ToastContainer)`
 export const CloseButton = styled(Button)`
   right: ${({ theme }) => theme.spacing(3)};
 
-  width: 100%;
+  width: 400px;
+  margin-top: ${({ theme }) => theme.spacing(2)};
   margin-bottom: ${({ theme }) => theme.spacing(3)};
+  margin-left: ${({ theme }) => theme.spacing(4)};
 
   animation: ${fade} 500ms linear;
 `;

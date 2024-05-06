@@ -17,7 +17,6 @@ import {
   Footer,
   Header,
   IconWrapper,
-  Inner,
   Title,
   Wrapper,
 } from './styles';
@@ -48,7 +47,7 @@ type DefaultIconProps = {
 const DefaultIcon = ({ variant, filled }: DefaultIconProps) => {
   const Icon = mapOfNotificationIcons[variant];
 
-  return <Icon filled={filled} />;
+  return <Icon $filled={filled} />;
 };
 
 export const NotificationTemplateNext = ({
@@ -66,7 +65,6 @@ export const NotificationTemplateNext = ({
 
   return (
     <Wrapper variant={variant} filled={filled}>
-      {/* <Inner> */}
       <Header>
         <IconWrapper>
           {icon || <DefaultIcon filled={filled} variant={variant} />}
@@ -98,7 +96,6 @@ export const NotificationTemplateNext = ({
           {actions}
         </Footer>
       )}
-      {/* </Inner> */}
     </Wrapper>
   );
 };

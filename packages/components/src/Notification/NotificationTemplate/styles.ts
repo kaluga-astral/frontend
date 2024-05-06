@@ -25,15 +25,11 @@ type NotificationCloseIconProps = {
 };
 
 export const Wrapper = styled.article<NotificationTemplateProps>`
-  position: relative;
-
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
 
-  min-height: 32px;
+  min-height: 56px;
   padding: ${({ theme }) => theme.spacing(4)};
-
   ${({ theme, variant, filled }) =>
     getNotificationTemplateStyles(theme, variant, filled)}
 `;
@@ -44,32 +40,29 @@ export const Inner = styled.div`
   overflow-wrap: anywhere;
 `;
 
+export const Footer = styled.footer<NotificationActionsProps>`
+  display: flex;
+  justify-content: ${({ actionsDirection }) =>
+    getActionsDirection(actionsDirection)};
+
+  margin-top: ${({ theme }) => theme.spacing(2)};
+`;
+
+export const IconWrapper = styled.div`
+  margin-right: ${({ theme }) => theme.spacing(3)};
+  padding-top: ${({ theme }) => theme.spacing(1)};
+`;
+
+export const Content = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(2)};
+`;
+
 export const Header = styled.header`
   display: flex;
   align-items: center;
 
   width: 100%;
   min-height: 32px;
-`;
-
-export const Content = styled.div`
-  margin-top: ${({ theme }) => theme.spacing(2)};
-  margin-left: calc(24px + 8px);
-`;
-
-export const Footer = styled.footer<NotificationActionsProps>`
-  display: flex;
-  justify-content: ${({ actionsDirection }) =>
-    getActionsDirection(actionsDirection)};
-
-  width: 100%;
-  margin-top: ${({ theme }) => theme.spacing(2)};
-`;
-
-export const IconWrapper = styled.div`
-  display: flex;
-
-  margin-right: ${({ theme }) => theme.spacing(2)};
 `;
 
 export const CloseIcon = styled(CrossOutlineSm, {
@@ -83,7 +76,6 @@ export const CloseButton = styled(IconButton, {
 })<NotificationCloseButtonProps>`
   align-self: flex-start;
 
-  margin-left: 16px;
   padding: 0;
 
   &:hover {

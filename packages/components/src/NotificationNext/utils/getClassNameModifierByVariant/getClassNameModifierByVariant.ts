@@ -1,5 +1,5 @@
-import { type Variant } from '../types';
-import { NOTIFY_CLASSNAME } from '../constants';
+import { type Variant } from '../../types';
+import { NOTIFY_CLASSNAME } from '../../constants';
 
 /**
  * метод создания имени класса прогресс бара для последующей стилизации

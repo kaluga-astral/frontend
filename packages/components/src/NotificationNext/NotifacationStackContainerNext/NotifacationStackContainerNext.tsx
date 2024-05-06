@@ -4,10 +4,12 @@ import { injectStyle } from 'react-toastify-next/dist/inject-style';
 import {
   NOTIFY_CLASSNAME,
   NOTIFY_CONTAINER_CLASSNAME,
+  NOTIFY_CONTAINER_ID,
   NOTIFY_POSITIONS,
+  NOTIFY_STATIC_CONTAINER_ID,
 } from '../constants';
 
-import { useLogic } from './hooks';
+import { useLogic } from './useLogic';
 import { type Id } from './types';
 import { CloseButton, Inner, Wrapper } from './styles';
 
@@ -17,16 +19,15 @@ if (typeof window !== 'undefined') {
 
 export type NotificationStackContainerProps = Omit<
   ToastContainerProps,
-  'containerId' | 'limit' | 'theme' | 'position'
+  'limit' | 'theme' | 'position' | 'stacked'
 > & {
-  containerId: Id;
-  loadedContainerId: Id;
+  staticContainerId?: Id;
   hideProgressBar?: boolean;
 };
 
 export const NotificationStackContainerNext = ({
-  containerId,
-  loadedContainerId,
+  containerId = NOTIFY_CONTAINER_ID,
+  staticContainerId = NOTIFY_STATIC_CONTAINER_ID,
   closeButton,
   ...props
 }: NotificationStackContainerProps) => {
@@ -40,7 +41,6 @@ export const NotificationStackContainerNext = ({
         {...props}
         stacked
         containerId={containerId}
-        autoClose={500000}
         pauseOnFocusLoss
         position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
         newestOnTop={false}
@@ -55,12 +55,12 @@ export const NotificationStackContainerNext = ({
 
       {isVisibleCloseButton && (
         <CloseButton size="small" variant="light" onClick={closeAll}>
-          Скрыть уведомления
+          Закрыть уведомления
         </CloseButton>
       )}
 
       <Inner
-        containerId={loadedContainerId}
+        containerId={staticContainerId}
         position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
         newestOnTop={false}
         closeOnClick={false}

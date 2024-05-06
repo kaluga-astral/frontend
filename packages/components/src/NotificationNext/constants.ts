@@ -17,3 +17,7 @@ export const NOTIFY_POSITIONS = {
 export const NOTIFY_CONTAINER_CLASSNAME = 'astral-notify-container';
 
 export const NOTIFY_CLASSNAME = 'astral-notify';
+
+export const NOTIFY_CONTAINER_ID = 'notify-container';
+
+export const NOTIFY_STATIC_CONTAINER_ID = 'static-notify-container';

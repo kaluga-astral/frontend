@@ -9,6 +9,8 @@ import { TextField } from '../TextField';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
 
+import { sleep } from './utils';
+import { NOTIFY_CONTAINER_ID, NOTIFY_STATIC_CONTAINER_ID } from './constants';
 import { notify } from './NotificationNext';
 import { NotificationStackContainerNext } from './NotifacationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
@@ -108,7 +110,7 @@ export const Types = () => {
 
   return (
     <ExampleStack>
-      <NotificationContainerNext containerId="types" autoClose={500000} />
+      <NotificationContainerNext containerId="types" />
 
       <Stack direction="column" gap={2}>
         <Button onClick={handleInfo}>info</Button>
@@ -206,7 +208,7 @@ export const HideProgressBar = () => {
 
   return (
     <ExampleStack>
-      <NotificationContainerNext stacked containerId="hide-progress-bar" />
+      <NotificationContainerNext containerId="hide-progress-bar" />
 
       <Stack direction="row" gap={2}>
         <Button onClick={handleErrorWithContentWithoutProgressBar}>
@@ -218,10 +220,27 @@ export const HideProgressBar = () => {
 };
 
 export const WithStack = () => {
+  const handleInfo = () => {
+    notify.info('Загрузка завершена', {
+      filled: false,
+    });
+  };
+
   const handleSuccess = () => {
     notify.success('Операция успешно завершена', {
       filled: false,
-      containerId: 'stack',
+    });
+  };
+
+  const handleWarning = () => {
+    notify.warning('Внимание', {
+      filled: false,
+    });
+  };
+
+  const handleError = () => {
+    notify.error('Соединение потеряно', {
+      filled: false,
     });
   };
 
@@ -231,25 +250,20 @@ export const WithStack = () => {
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
-      containerId: 'stack',
     });
   };
 
-  const functionThatReturnPromise = (time: number) =>
-    new Promise((resolve) => setTimeout(resolve, time));
-
   const handleWithLoading = async () => {
     const id = toast.loading('Загрузка документов...', {
-      containerId: 'stack-loaded',
+      containerId: NOTIFY_STATIC_CONTAINER_ID,
     });
 
-    await functionThatReturnPromise(3000);
+    await sleep(3000);
     notify.dismiss(id);
-    await functionThatReturnPromise(1000);
 
     notify.success('Документы загружены', {
       filled: false,
-      containerId: 'stack',
+      containerId: NOTIFY_CONTAINER_ID,
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
     });
@@ -257,12 +271,19 @@ export const WithStack = () => {
 
   return (
     <ExampleStack>
-      <NotificationStackContainerNext
-        containerId="stack"
-        loadedContainerId="stack-loaded"
-      />
+      <NotificationStackContainerNext />
 
       <Stack direction="column" gap={2}>
+        <Button onClick={handleInfo}>Notify info</Button>
+
+        <Button onClick={handleWarning} color="warning">
+          Notify warning
+        </Button>
+
+        <Button onClick={handleError} color="error">
+          Notify error
+        </Button>
+
         <Button onClick={handleSuccess} color="success">
           Notify success
         </Button>
@@ -273,6 +294,65 @@ export const WithStack = () => {
 
         <Button onClick={handleWithLoading} color="primary">
           Notify with loading
+        </Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+export const Static = () => {
+  const handleInfo = () => {
+    notify.info('Загрузка завершена', {
+      containerId: 'static-static',
+      filled: false,
+      isStatic: true,
+    });
+  };
+
+  const handleSuccess = () => {
+    notify.success('Операция успешно завершена', {
+      containerId: 'static-static',
+      filled: false,
+      isStatic: true,
+    });
+  };
+
+  const handleWarning = () => {
+    notify.warning('Внимание', {
+      containerId: 'static-static',
+      filled: false,
+      isStatic: true,
+    });
+  };
+
+  const handleError = () => {
+    notify.error('Соединение потеряно', {
+      containerId: 'static-static',
+      filled: false,
+      isStatic: true,
+    });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationStackContainerNext
+        containerId="static"
+        staticContainerId="static-static"
+      />
+
+      <Stack direction="column" gap={2}>
+        <Button onClick={handleInfo}>Static notify info</Button>
+
+        <Button onClick={handleWarning} color="warning">
+          Static notify warning
+        </Button>
+
+        <Button onClick={handleError} color="error">
+          Static notify error
+        </Button>
+
+        <Button onClick={handleSuccess} color="success">
+          Static notify success
         </Button>
       </Stack>
     </ExampleStack>

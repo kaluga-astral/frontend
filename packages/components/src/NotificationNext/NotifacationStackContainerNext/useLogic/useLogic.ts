@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { type ToastItem, toast } from 'react-toastify-next';
 
-import { useHover } from '../useHover';
-import { type Id } from '../../types';
+import { sleep } from '../../utils';
+import { type Id } from '../types';
+
+import { useHover } from './hooks';
 
 type UseLogicParams = {
   containerId: Id;
@@ -12,12 +14,19 @@ export const useLogic = ({
   containerId: externalContainerId,
 }: UseLogicParams) => {
   const [toasts, setToasts] = useState<Id[]>([]);
+  const [container, setContainer] = useState<Element | null>();
 
-  const container = document.querySelector(
-    `#${externalContainerId}`,
-  ) as Element;
+  useEffect(() => {
+    if (toasts.length) {
+      const scrollContainer = document.querySelector(
+        `#${externalContainerId} .Toastify__toast-container`,
+      ) as Element;
 
-  const { isHovered: isHoveredContainer } = useHover(container);
+      setContainer(scrollContainer);
+    }
+  }, [externalContainerId, toasts]);
+
+  const { isHovered: isHoveredContainer } = useHover(container as Element);
 
   const handleAddToast = ({ id, containerId }: ToastItem) => {
     if (Object.is(containerId, externalContainerId)) {
@@ -54,11 +63,18 @@ export const useLogic = ({
       return undefined;
     }
 
-    const isScroll = container?.scrollHeight > container?.clientHeight;
+    (async () => {
+      const isScroll = container?.scrollHeight > container?.clientHeight;
 
-    if (isScroll) {
-      container.scrollTop = container.scrollHeight;
-    }
+      if (isScroll) {
+        await sleep(200);
+
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    })();
   }, [container, isHoveredContainer]);
 
   const closeAll = () => {
