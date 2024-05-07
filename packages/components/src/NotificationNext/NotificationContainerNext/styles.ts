@@ -13,6 +13,8 @@ export const Wrapper = styled.div`
   .${NOTIFY_CLASSNAME} {
     padding: 0;
 
+    box-shadow: ${({ theme }) => theme.elevation[300]};
+
     &::after {
       content: '';
 
