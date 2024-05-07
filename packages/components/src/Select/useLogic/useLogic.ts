@@ -1,5 +1,5 @@
 import { type SelectChangeEvent } from '@mui/material';
-import { Children, useState } from 'react';
+import { Children, useRef, useState } from 'react';
 
 import { type SelectProps } from '../Select';
 
@@ -10,6 +10,7 @@ export function useLogic<Value>({
   open: externalIsOpened,
 }: SelectProps<Value>) {
   const [isOpened, setOpened] = useState(externalIsOpened || false);
+  const resetButtonRef = useRef<HTMLButtonElement>(null);
 
   const openSelect = () => setOpened(true);
   const closeSelect = () => setOpened(false);
@@ -39,6 +40,7 @@ export function useLogic<Value>({
     isOpened,
     isNoData,
     isShowingClearButton,
+    resetButtonRef,
     openSelect,
     closeSelect,
     onClearAll,

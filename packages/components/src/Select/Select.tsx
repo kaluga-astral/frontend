@@ -5,7 +5,7 @@ import {
   type SelectProps as MuiSelectProps,
   type SelectChangeEvent,
 } from '@mui/material';
-import { type ForwardedRef, type ReactNode } from 'react';
+import { type ForwardedRef, type ReactNode, forwardRef } from 'react';
 import { ChevronDOutlineMd } from '@astral/icons';
 
 import { FormHelperText } from '../FormHelperText';
@@ -21,7 +21,7 @@ import {
   StyledIconButton,
 } from './styles';
 import { SelectTagsList } from './SelectTagsList';
-import { useLogic } from './hooks';
+import { useLogic } from './useLogic';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -46,10 +46,12 @@ type ClearButtonProps = {
   onClick: () => void;
 };
 
-const ClearButton = ({ onClick }: ClearButtonProps) => (
-  <StyledIconButton onClick={onClick} variant="light">
-    <StyledCrossIcon />
-  </StyledIconButton>
+const ClearButton = forwardRef<HTMLButtonElement, ClearButtonProps>(
+  ({ onClick }, ref) => (
+    <StyledIconButton ref={ref} onClick={onClick} variant="text">
+      <StyledCrossIcon />
+    </StyledIconButton>
+  ),
 );
 
 const SelectInner = <Value,>(
@@ -77,6 +79,7 @@ const SelectInner = <Value,>(
     onClearAll,
     openSelect,
     closeSelect,
+    resetButtonRef,
   } = useLogic({
     ...props,
     children,
@@ -92,6 +95,7 @@ const SelectInner = <Value,>(
 
       return (
         <SelectTagsList
+          resetButtonRef={resetButtonRef}
           openMenu={openSelect}
           onChange={handleOnChange}
           getOptionLabel={getOptionLabel}
@@ -132,7 +136,7 @@ const SelectInner = <Value,>(
         onChange={externalOnChange}
         endAdornment={
           isShowingClearButton ? (
-            <ClearButton onClick={onClearAll} />
+            <ClearButton ref={resetButtonRef} onClick={onClearAll} />
           ) : undefined
         }
       >

@@ -3,7 +3,7 @@ import { type MouseEvent } from 'react';
 import { type TagProps } from '../../../Tag';
 
 import { StyledTag } from './styles';
-import { useLogic } from './hooks';
+import { useLogic } from './useLogic';
 
 type SelectTagProps = {
   /**

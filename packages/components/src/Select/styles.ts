@@ -4,8 +4,6 @@ import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
 import { IconButton } from '../IconButton';
 
-import { CLEAR_BUTTON_SIZE } from './constants';
-
 export const ProgressWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,8 +26,6 @@ export const StyledIconButton = styled(IconButton)`
   position: absolute;
   right: 0;
 
-  width: ${CLEAR_BUTTON_SIZE}px;
-  height: ${CLEAR_BUTTON_SIZE}px;
   margin-right: ${({ theme }) => theme.spacing(9)};
   padding: 0;
 

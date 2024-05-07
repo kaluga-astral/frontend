@@ -1,17 +1,11 @@
-import {
-  type MouseEvent,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { type SelectChangeEvent } from '@mui/material';
 
-import { type SelectTagsListProps } from '../../SelectTagsList';
-import { getElementByText } from '../../utils';
-import { CLEAR_BUTTON_SIZE } from '../../../constants';
+import { type SelectTagsListProps } from '../SelectTagsList';
+import { getElementByText } from '../utils';
 
 export function useLogic({
+  resetButtonRef,
   selectedOptions,
   getOptionLabel,
   onChange,
@@ -100,11 +94,15 @@ export function useLogic({
     const firstChildWidth =
       containerEl.firstElementChild!.getBoundingClientRect().width;
 
+    // Получаем ширину кнопки сброса, по дефолту 32px
+    const resetButtonWidth =
+      resetButtonRef?.current?.getBoundingClientRect().width || 32;
+
     // Вычисляем доступную ширину для новых тегов
     const availableWidth =
       containerEl.getBoundingClientRect().width -
       firstChildWidth -
-      CLEAR_BUTTON_SIZE;
+      resetButtonWidth;
 
     // Клонируем контейнер для тегов
     const clone = containerEl.cloneNode(true) as HTMLDivElement;
@@ -159,38 +157,9 @@ export function useLogic({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOptions]);
 
-  const handleTagMouseDown = (
-    e: MouseEvent<HTMLDivElement>,
-    tagValue: string | number,
-  ) => {
-    const isSvg = e.target instanceof SVGElement;
-
-    // Кликнули по телу тега
-    if (!isSvg) {
-      return;
-    }
-
-    // Кликнули по кнопке удаления
-    e.preventDefault();
-    e.stopPropagation();
-
-    const changeEvent = {
-      target: {
-        ...e.target,
-        value: selectedOptions.filter((opt) => opt !== tagValue),
-      },
-    } as SelectChangeEvent<string[]>;
-
-    onChange(changeEvent, undefined);
-  };
-
   const getTagProps = (option: string | number, index: number) => {
     const label = getOptionLabel(option as string);
     const shrinks = index == maxItems - 1 && maxItems <= selectedOptions.length;
-
-    const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-      handleTagMouseDown(e, option);
-    };
 
     const onClick = () => {
       openMenu();
@@ -206,7 +175,7 @@ export function useLogic({
       onChange(changeEvent, undefined);
     };
 
-    return { label, shrinks, onMouseDown, onClick, onDelete };
+    return { label, shrinks, onClick, onDelete };
   };
 
   const visibleOptions = selectedOptions.slice(0, maxItems);

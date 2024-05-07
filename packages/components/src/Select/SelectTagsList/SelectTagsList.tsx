@@ -1,6 +1,7 @@
 import { type SelectChangeEvent } from '@mui/material';
+import { type RefObject } from 'react';
 
-import { useLogic } from './hooks';
+import { useLogic } from './useLogic';
 import { TagsWrapper } from './styles';
 import { SelectTag } from './SelectTag';
 
@@ -14,18 +15,22 @@ export type SelectTagsListProps = {
   ) => void;
 
   openMenu: () => void;
+
+  resetButtonRef: RefObject<HTMLButtonElement>;
 };
 
 /**
  * Список тегов для селекта
  */
 export const SelectTagsList = ({
+  resetButtonRef,
   selectedOptions,
   getOptionLabel,
   onChange,
   openMenu,
 }: SelectTagsListProps) => {
   const { maxItems, tagsContainerRef, visibleOptions, getTagProps } = useLogic({
+    resetButtonRef,
     selectedOptions,
     getOptionLabel,
     onChange,
