@@ -15,8 +15,8 @@ export const useHover = (element?: Element) => {
     element.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      element?.removeEventListener('mouseenter', handleMouseEnter);
-      element?.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [element]);
 

@@ -1,10 +1,10 @@
 import { type ActionsDirection } from '../../../types';
 
 export const getActionsDirection = (direction: ActionsDirection) => {
-  const MAP_OF_DIRECTIONS = {
+  const DIRECTIONS_MAP = {
     right: 'flex-end',
     left: 'flex-start',
   };
 
-  return MAP_OF_DIRECTIONS[direction];
+  return DIRECTIONS_MAP[direction];
 };

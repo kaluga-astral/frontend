@@ -60,13 +60,13 @@ export const useLogic = ({
 
   useEffect(() => {
     if (!isHoveredContainer || !container) {
-      return undefined;
+      return;
     }
 
     (async () => {
-      const isScroll = container?.scrollHeight > container?.clientHeight;
+      const hasScroll = container?.scrollHeight > container?.clientHeight;
 
-      if (isScroll) {
+      if (hasScroll) {
         await sleep(200);
 
         container.scrollTo({

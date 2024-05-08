@@ -15,7 +15,7 @@ export const getNotificationTemplateStyles = (
     return defaultColors;
   }
 
-  const mapOfStyles = {
+  const stylesMap = {
     info: {
       color: theme.palette.primary.contrastText,
       background: theme.palette.grey[600],
@@ -34,5 +34,5 @@ export const getNotificationTemplateStyles = (
     },
   };
 
-  return mapOfStyles[variant];
+  return stylesMap[variant];
 };
