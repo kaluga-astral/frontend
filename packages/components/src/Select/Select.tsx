@@ -6,7 +6,7 @@ import {
   type SelectChangeEvent,
 } from '@mui/material';
 import { type ForwardedRef, type ReactNode, forwardRef } from 'react';
-import { ChevronDOutlineMd } from '@astral/icons';
+import { ChevronDOutlineMd, CloseFillSm } from '@astral/icons';
 
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
@@ -17,7 +17,7 @@ import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 import {
   Placeholder,
   ProgressWrapper,
-  StyledCrossIcon,
+  // StyledCrossIcon,
   StyledIconButton,
 } from './styles';
 import { SelectTagsList } from './SelectTagsList';
@@ -49,7 +49,7 @@ type ClearButtonProps = {
 const ClearButton = forwardRef<HTMLButtonElement, ClearButtonProps>(
   ({ onClick }, ref) => (
     <StyledIconButton ref={ref} onClick={onClick} variant="text">
-      <StyledCrossIcon />
+      <CloseFillSm />
     </StyledIconButton>
   ),
 );

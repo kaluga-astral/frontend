@@ -1,5 +1,3 @@
-import { CrossSmOutlineSm } from '@astral/icons';
-
 import { styled } from '../styles';
 import { MenuItem } from '../MenuItem';
 import { IconButton } from '../IconButton';
@@ -35,15 +33,14 @@ export const StyledIconButton = styled(IconButton)`
     width: 16px;
     height: 16px;
 
-    background-color: ${({ theme }) => theme.palette.grey['500']};
-    border-radius: 50%;
+    fill: ${({ theme }) => theme.palette.grey['500']};
   }
 
   &:hover {
     background-color: transparent;
 
     svg {
-      background-color: ${({ theme }) => theme.palette.grey['700']};
+      fill: ${({ theme }) => theme.palette.grey['700']};
     }
   }
 
@@ -52,11 +49,4 @@ export const StyledIconButton = styled(IconButton)`
     height: 32px;
     padding: ${({ theme }) => theme.spacing(1)};
   }
-`;
-
-export const StyledCrossIcon = styled(CrossSmOutlineSm)`
-  width: 16px;
-  height: 16px;
-
-  fill: ${({ theme }) => theme.palette.common.white};
 `;
