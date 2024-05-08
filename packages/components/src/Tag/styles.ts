@@ -1,4 +1,5 @@
 import { Chip, type ChipProps } from '@mui/material';
+import { badgeClasses } from '@mui/base';
 
 import { styled } from '../styles';
 import { type Theme } from '../theme';
@@ -33,6 +34,7 @@ const HEIGHTS: Record<TagSize, string> = {
 export const getBadgeColor = (args: {
   tagColor?: TagColor;
   variant?: TagVariant;
+  theme: Theme;
 }) => {
   const { tagColor, variant } = args;
 
@@ -59,6 +61,7 @@ const getShape = ({ theme, rounded }: StyledTagThemeProps): string => {
 
   return theme.shape.small;
 };
+
 const getDeleteIconBorderRadius = ({
   theme,
   rounded,
@@ -75,7 +78,6 @@ const getBgColor = ({
   customColor,
   customVariant,
   disabled,
-  onDelete,
 }: StyledTagThemeProps): string => {
   if (disabled) {
     return theme.palette.grey[100];
@@ -85,21 +87,13 @@ const getBgColor = ({
     return 'transparent';
   }
 
-  if (onDelete) {
-    return theme.palette.grey[300];
-  }
-
-  if (customColor === TagColors.GREY) {
-    return theme.palette.grey[100];
-  }
-
   const backgroundColorVariants = {
     contained: {
       primary: theme.palette.primary.main,
       error: theme.palette.red[800],
       success: theme.palette.green[800],
       warning: theme.palette.yellow[800],
-      grey: theme.palette.grey[100],
+      grey: theme.palette.grey[300],
       default: theme.palette.background.element,
     },
     light: {
@@ -112,15 +106,15 @@ const getBgColor = ({
     },
   };
 
-  if (!customVariant) {
-    return backgroundColorVariants.contained.primary;
-  }
-
   if (customVariant && customColor) {
     return backgroundColorVariants[customVariant][customColor];
   }
 
-  return theme.palette.background.element;
+  if (!customVariant && customColor) {
+    return backgroundColorVariants.contained[customColor];
+  }
+
+  return theme.palette.grey[300];
 };
 
 const getColor = ({
@@ -128,13 +122,12 @@ const getColor = ({
   customColor,
   customVariant,
   disabled,
-  onDelete,
 }: StyledTagThemeProps): string => {
   if (disabled) {
     return theme.palette.text.disabled;
   }
 
-  if (onDelete || customVariant === 'text') {
+  if (customVariant === 'text') {
     return theme.palette.grey[900];
   }
 
@@ -156,6 +149,14 @@ const getColor = ({
       grey: theme.palette.grey[900],
     },
   };
+
+  if (!customVariant && !customColor) {
+    return theme.palette.grey[900];
+  }
+
+  if (!customVariant && customColor !== 'grey') {
+    return theme.palette.common.white;
+  }
 
   if (!customColor) {
     return textColorVariants.contained.default;
@@ -189,18 +190,58 @@ const getTagLabelPadding = ({
 const getDeleteIconBgColor = ({
   theme,
   iconState,
+  customVariant,
+  customColor,
 }: StyledTagThemeProps & { iconState: TagState }): string => {
-  const bgColorDeleteIcon = {
-    default: 'transparent',
-    hover: theme.palette.red[100],
-    active: theme.palette.red[200],
+  const hoverColors = {
+    contained: {
+      primary: theme.palette.primary[600],
+      error: theme.palette.red[600],
+      success: theme.palette.green[600],
+      warning: theme.palette.yellow[600],
+      grey: theme.palette.grey[100],
+      default: theme.palette.grey[300],
+    },
+    light: {
+      primary: theme.palette.primary[300],
+      error: theme.palette.red[300],
+      success: theme.palette.green[300],
+      warning: theme.palette.yellow[300],
+      grey: theme.palette.grey[300],
+      default: theme.palette.grey[300],
+    },
   };
 
-  if (iconState) {
-    return bgColorDeleteIcon[iconState];
+  if (iconState !== 'default') {
+    if (
+      (customVariant === 'contained' || customVariant == 'light') &&
+      customColor
+    ) {
+      return hoverColors[customVariant][customColor || 'default'];
+    }
+
+    if (customVariant === 'text') {
+      return hoverColors.light.grey;
+    }
   }
 
   return 'transparent';
+};
+
+export const getDeleteIconColor = ({
+  customVariant,
+  customColor,
+  theme,
+}: StyledTagThemeProps) => {
+  if (
+    customVariant === 'contained' &&
+    customColor !== 'grey' &&
+    customColor !== 'default'
+  ) {
+    return theme.palette.common.white;
+  }
+
+  return theme.palette.grey[900];
 };
 
 export const StyledTag = styled(Chip, {
@@ -250,21 +291,21 @@ export const StyledTag = styled(Chip, {
     height: 20px;
     margin: 0;
 
-    color: ${({ theme }) => theme.palette.grey[800]};
+    color: ${getDeleteIconColor};
 
     background: ${(props) =>
       getDeleteIconBgColor({ ...props, iconState: TagStates.DEFAULT })};
     border-radius: ${getDeleteIconBorderRadius};
 
     &:hover {
-      color: ${({ theme }) => theme.palette.grey[800]};
+      color: ${getDeleteIconColor};
 
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.HOVER })};
     }
 
     &:active {
-      color: ${({ theme }) => theme.palette.grey[800]};
+      color: ${getDeleteIconColor};
 
       background: ${(props) =>
         getDeleteIconBgColor({ ...props, iconState: TagStates.ACTIVE })};
@@ -286,5 +327,22 @@ export const StyledTag = styled(Chip, {
   .MuiChip-icon {
     width: 16px;
     height: 16px;
+  }
+
+  & .${badgeClasses.badge} {
+    ${({ theme, customColor, customVariant }) =>
+      (customColor === 'grey' || customColor === 'default') &&
+      customVariant === 'light' &&
+      `
+      background-color: ${theme.palette.grey[800]};
+      color: ${theme.palette.common.white};
+    `};
+
+    ${({ theme, customColor, customVariant }) =>
+      (customColor === 'grey' || customColor === 'default') &&
+      customVariant === 'contained' &&
+      `
+      color: ${theme.palette.grey[800]};
+    `};
   }
 `;

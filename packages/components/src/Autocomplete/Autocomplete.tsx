@@ -101,7 +101,7 @@ const AutocompleteInner = <
     inputRef,
     renderTags,
     renderInput: externalRenderInput,
-    loadedDataError = 'На текущий момент сервис недоступен.',
+    loadedDataError = 'Ошибка загрузки данных',
     isLoadedDataError,
     ...restProps
   }: AutocompleteProps<
