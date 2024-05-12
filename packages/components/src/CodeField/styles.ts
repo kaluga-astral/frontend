@@ -29,6 +29,7 @@ export const Digit = styled.input<{ isError?: boolean }>`
   color: ${({ theme, isError }) => {
     return isError ? theme.palette.error.dark : theme.palette.grey[900];
   }};
+  text-align: center;
 
   background: ${({ theme }) => theme.palette.background.elementHover};
   border: unset;

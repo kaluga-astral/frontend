@@ -126,6 +126,8 @@ export { Iframe, type IframeProps } from './Iframe';
 
 export * from './LegacyGrid';
 
+export { Link, LinkProps } from './Link';
+
 export * from './List';
 
 export * from './ListItem';
@@ -156,7 +158,7 @@ export * from './MenuList';
 
 export * from './NavMenu';
 
-export { notify, type Notify } from './Notification';
+export * from './Notification';
 
 export * from './NotificationList';
 
@@ -187,6 +189,8 @@ export * from './Profile';
 export * from './ProgressBar';
 
 export * from './Radio';
+
+export { RadioCard, type RadioCardProps } from './RadioCard';
 
 export * from './RadioField';
 

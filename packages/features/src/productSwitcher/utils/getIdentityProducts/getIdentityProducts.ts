@@ -4,13 +4,13 @@ import { formatIdentityProducts } from '../formatIdentityProducts';
 /**
  * Получение данных из identity
  * @param identityUrl - адрес identity
- * @param tenantId - идентификатор экосистемы
+ * @param tenant - код экосистемы
  */
 export const getIdentityProducts = async (
   identityUrl: string,
-  tenantId: string = 'astral',
+  tenant: string = 'astral',
 ) => {
-  return fetch(`${identityUrl}/api/products/widget?tenantId=${tenantId}`)
+  return fetch(`${identityUrl}/api/products/widget?tenantId=${tenant}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);
