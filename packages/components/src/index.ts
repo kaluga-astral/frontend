@@ -198,6 +198,8 @@ export * from './ProgressBar';
 
 export * from './Radio';
 
+export { RadioCard, type RadioCardProps } from './RadioCard';
+
 export * from './RadioField';
 
 export * from './RadioGroup';

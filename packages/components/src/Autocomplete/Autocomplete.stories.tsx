@@ -148,7 +148,7 @@ export const LoadedDataError = () => (
       label="Loaded data error"
       options={OPTIONS}
       isLoadedDataError
-      loadedDataError="При выполнении запроса произошла ошибка"
+      loadedDataError="Ошибка загрузки данных"
       getOptionLabel={(params) => params.title}
       error
     />

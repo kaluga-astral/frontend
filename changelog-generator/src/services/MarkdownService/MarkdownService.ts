@@ -3,6 +3,7 @@ import type { FilteredCommit, CommitType } from '../../types';
 
 interface IMarkdownService {
   getMarkup: (commits: FilteredCommit[], lastVersion: string, startDate: string, endDate: string) => string;
+  extractUsByType: (chahgelog: string, commitType: CommitType) => string[];
 };
 
 type Story = Omit<FilteredCommit, 'type'>;
@@ -44,6 +45,13 @@ export class MarkdownService implements IMarkdownService {
     );
   }
 
+  extractUsByType(chahgelog: string, commitType: CommitType) {
+    const startPosition = chahgelog.indexOf(this.groupHeaders[commitType]) + this.groupHeaders[commitType].length;
+    const endPosition =  chahgelog.indexOf('---', startPosition);
+    
+    return chahgelog.substring(startPosition, endPosition).trim().split('\n');
+  }
+
   private generateChangelogHeader(lastVersion: string, startDate: string | Date, endDate: string | Date) {
     return (
       `# Новое за период с ${dateToView(startDate)} по ${dateToView(endDate)} \n\n` +
@@ -55,7 +63,7 @@ export class MarkdownService implements IMarkdownService {
     const { component, title, us, version } = story;
 
     if (Object.is(type, 'feat')) {
-      return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}).` + (component ? `Посмотреть в ${this.generateLinkToStorybook(component)}.` : '') + (version || '');
+      return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}).` + (component ? ` Посмотреть в ${this.generateLinkToStorybook(component)}. ` : '') + (version || '');
     }
 
     return ` - ${component ? `${component}.` : ''} ${title} (${this.generateLinkToJira(us)}). ${version || ''}`;

@@ -1,8 +1,9 @@
 import { type ReactNode, useMemo } from 'react';
 
-import { TableCell } from '../../Table';
 import { type DataGridColumns } from '../types';
 import { OverflowTypography } from '../../OverflowTypography';
+
+import { StyledTableCell } from './styles';
 
 export type CellProps<Data extends object> = {
   row: Data;
@@ -28,13 +29,13 @@ export function DataGridCell<Data extends object>({
   }, [field, format, row, emptyCellValue]);
 
   return (
-    <TableCell align={align}>
+    <StyledTableCell align={align}>
       {renderCell && renderCell(row)}
       {!renderCell && (
         <OverflowTypography rowsCount={2}>
           <>{formattedValue}</>
         </OverflowTypography>
       )}
-    </TableCell>
+    </StyledTableCell>
   );
 }

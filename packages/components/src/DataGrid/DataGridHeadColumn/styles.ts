@@ -17,7 +17,7 @@ export const StyledTableCell = styled(TableCell, {
   user-select: none;
 
   width: ${({ width = 'auto' }) => width};
-  padding: ${({ theme }) => theme.spacing(3, 4)};
+  padding: ${({ theme }) => theme.spacing(3, 2)};
 
   color: ${({ theme }) => theme.palette.grey[700]};
 `;
