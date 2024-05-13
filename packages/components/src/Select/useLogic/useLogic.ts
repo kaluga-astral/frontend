@@ -8,8 +8,11 @@ export function useLogic<Value>({
   onChange,
   children,
   open: externalIsOpened,
+  defaultOpen,
 }: SelectProps<Value>) {
-  const [isOpened, setOpened] = useState(externalIsOpened || false);
+  const [isOpened, setOpened] = useState(
+    defaultOpen || externalIsOpened || false,
+  );
   const resetButtonRef = useRef<HTMLButtonElement>(null);
 
   const openSelect = () => setOpened(true);
