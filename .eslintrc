@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["@astral/eslint-config-react-ts", "plugin:@cspell/recommended"],
+  "extends": ["@astral/eslint-config-react-ts"],
 
   "env": {
     "node": true
@@ -14,13 +14,6 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "packageDir": ["./", "./"] }
-    ],
-
-    "@cspell/spellchecker": [
-      "error",
-      {
-        "configFile": ".cspell.json"
-      }
     ]
   },
 

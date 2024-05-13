@@ -23,7 +23,7 @@
   "dictionaryDefinitions": [
     {
       "name": "general",
-      "path": "./project-words.txt",
+      "path": ".cspell-ignore",
       "description": "Слова, разрешенные во всем проекте"
     }
   ],
