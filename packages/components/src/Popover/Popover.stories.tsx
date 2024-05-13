@@ -82,10 +82,8 @@ const GridContainer = styled(Grid)`
 
   ${({ theme }) => theme.spacing(2)};
 
-{
-    grid-template-columns: 1fr;
-    flex-direction: row;
-  }
+  grid-template-columns: 1fr;
+  flex-direction: row;
 `;
 
 export const TransformOrigin = () => {
