@@ -155,7 +155,7 @@ export type DocumentPackagesNetworkDTO = {
    * */
   rejectionReason?: string;
   /**
-   * @description Коментарий запросившего подпись или расшифровку.
+   * @description Комментарий запросившего подпись или расшифровку.
    * */
   comment?: string;
   /**

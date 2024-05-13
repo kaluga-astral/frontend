@@ -5,11 +5,15 @@ module.exports = {
   ],
 
   'packages/components/**/*.{js,jsx,ts,tsx}': [
-    'npm run lint --workspace=@astral/components',
+    (fileNames) =>
+      `npm run lint --workspace=@astral/components -- ${fileNames.join(' ')}`,
     () => 'npm run lint:types --workspace=@astral/components',
   ],
   'packages/components/**/styles.{ts,tsx}': [
-    'npm run lint:styles --workspace=@astral/components',
+    (fileNames) =>
+      `npm run lint:styles --workspace=@astral/components -- ${fileNames.join(
+        ' ',
+      )}`,
   ],
 
   'packages/icons/**/*.{js,jsx,ts,tsx}': [
@@ -18,16 +22,21 @@ module.exports = {
   ],
 
   'packages/form/**/*.{js,jsx,ts,tsx}': [
-    'npm run lint --workspace=@astral/form',
+    (fileNames) =>
+      `npm run lint --workspace=@astral/form -- ${fileNames.join(' ')}`,
     () => 'npm run lint:types --workspace=@astral/form',
   ],
 
   'packages/features/**/*.{js,jsx,ts,tsx}': [
-    'npm run lint --workspace=@astral/features',
+    (fileNames) =>
+      `npm run lint --workspace=@astral/features -- ${fileNames.join(' ')}`,
     () => 'npm run lint:types --workspace=@astral/features',
   ],
   'packages/features/**/styles.{ts,tsx}': [
-    'npm run lint:styles --workspace=@astral/features',
+    (fileNames) =>
+      `npm run lint:styles --workspace=@astral/features -- ${fileNames.join(
+        ' ',
+      )}`,
   ],
 
   'commander/**/*.{js}': ['npm run lint --workspace=@astral/commander'],

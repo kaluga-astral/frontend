@@ -21,32 +21,32 @@ export default meta;
 // Задаем размеры листа
 const StyledWrapper = styled.div`
   position: relative;
-  height: 250px;
+
   width: 100%;
+  height: 250px;
 `;
 
 // Задаем скролл
 const InnerWrapper = styled.div`
-  max-height: 100%;
   overflow-y: auto;
-
   overscroll-behavior: none;
+
+  max-height: 100%;
 `;
 
 const ListItem = styled.div`
-  height: 250px;
-  width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 250px;
+  margin-bottom: 30px;
 
   font-size: ${({ theme }) => theme.typography.h2.fontSize};
 
   background: ${({ theme }) => theme.palette.grey[300]};
   border-radius: 6px;
-
-  margin-bottom: 30px;
 
   &:last-of-type {
     margin-bottom: 0;

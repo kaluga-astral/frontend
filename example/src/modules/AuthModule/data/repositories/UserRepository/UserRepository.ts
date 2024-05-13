@@ -13,7 +13,7 @@ import {
 import { UserPersonDTO } from './dto';
 
 /**
- * @description Repository для работы с даннми юзере
+ * @description Repository для работы с данными юзера
  * */
 export class UserRepository {
   public fullInfoCacheKey = ['fullInfoCacheKey'];

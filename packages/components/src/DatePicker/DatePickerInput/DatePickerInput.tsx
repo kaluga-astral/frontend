@@ -32,7 +32,7 @@ export const DatePickerInput = forwardRef<
 
     // создаем массив элементов, попадающих под регулярку
     mask.match(KEYS_IN_MASK)?.forEach((maskPart) => {
-      // Число, с колличество цифр "9" равному колличеству букв части маски.
+      // Число, с количество цифр "9" равному количеству букв части маски.
       // Например, для части ключа 'ГГГГ' результат будет 9999
       const to = Number(String.prototype.padStart(maskPart.length, '9'));
 

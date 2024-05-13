@@ -32,7 +32,7 @@ export type CodeFieldProps = {
    */
   isAllowResendCode?: boolean;
   /**
-   * @description Фукция, которая вызовется при перезапросе кода по кнопке
+   * @description Функция, которая вызовется при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
   /**
@@ -70,7 +70,7 @@ export type CodeFieldProps = {
 };
 
 /**
- * @description Поле для ввода кода подтвеждения
+ * @description Поле для ввода кода подтверждения
  */
 export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
   (

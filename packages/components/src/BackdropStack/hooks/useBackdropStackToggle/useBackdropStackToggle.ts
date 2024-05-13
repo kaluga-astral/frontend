@@ -3,7 +3,7 @@ import { type SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { backdropStackManager } from '../../services/BackdropStackManager';
 import { type CloseEventReason } from '../../../types';
 /**
- * @description необязательные настройки для использоввания хука
+ * @description необязательные настройки для использования хука
  */
 type Options = {
   /**

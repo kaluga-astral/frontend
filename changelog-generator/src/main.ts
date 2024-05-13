@@ -71,6 +71,6 @@ const message = telegramService.generateMessage({ startDate, endDate, lastVersio
 telegramService.sendMessage(message)
   .then(() => console.log('Сообщение успешно отправлено в Telegram-канал'))
   .catch((error) => {
-    console.error('Ошибка при отпрвки сообщения в Telegram-канал: ', error);
+    console.error('Ошибка при отправки сообщения в Telegram-канал: ', error);
     process.exit(1);
   });

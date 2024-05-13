@@ -1,4 +1,11 @@
 {
+  "ts-node": {
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "CommonJS",
+      "moduleResolution": "Node16"
+    }
+  },
   "compilerOptions": {
     "module": "esnext",
     "lib": [

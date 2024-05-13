@@ -34,7 +34,7 @@ const PLACEHOLDER_TYPE_ERROR: Record<TypeError, ReactNode> = {
 };
 
 /**
- * Компонент, который перехватывает ошибки в оберутых в него компонентах.
+ * Компонент, который перехватывает ошибки в обернутых в него компонентах.
  * При перехвате ошибки осуществляется ее отправка в captureException
  * @example <ErrorBoundary><InsecureComponent/></ErrorBoundary>
  */

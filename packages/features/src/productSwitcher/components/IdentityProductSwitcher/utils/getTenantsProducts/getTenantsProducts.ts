@@ -4,7 +4,7 @@ import { getIdentityProducts } from '../../../../utils';
 
 /**
  * Получение всех продуктов из разных экосистем и группировка в единую мапу
- * @param identityUrl - сслыка на identity
+ * @param identityUrl - ссылка на identity
  * @param tenants - список экосистем, чтобы была возможность не все экосистемы показывать в виджете.
  */
 export const getTenantsProducts = async (

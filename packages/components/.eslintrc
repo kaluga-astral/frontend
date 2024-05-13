@@ -4,6 +4,13 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "packageDir": ["./", "../../"] }
+    ],
+
+    "@cspell/spellchecker": [
+      "error",
+      {
+        "configFile": "../../.cspell.json"
+      }
     ]
   }
 }

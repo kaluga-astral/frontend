@@ -80,7 +80,9 @@ const GridContainer = styled(Grid)`
 
   margin-top: 30px;
 
-  ${({ theme }) => theme.spacing(2)};{
+  ${({ theme }) => theme.spacing(2)};
+
+{
     grid-template-columns: 1fr;
     flex-direction: row;
   }

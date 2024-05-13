@@ -6,15 +6,15 @@ import { useState } from 'react';
 type Arguments = unknown[];
 
 /**
- * @description хэндлер принимающий на вход неизвестное колличество аргументов, неизвестного вида
+ * @description хэндлер принимающий на вход неизвестное количество аргументов, неизвестного вида
  */
 type Handler<Args extends Arguments> = (...a: Args) => void;
 /**
- * @description хэндлер на открытие с неизвестным колличеством аргументов, неизвестного вида
+ * @description хэндлер на открытие с неизвестным количеством аргументов, неизвестного вида
  */
 type OpenHandler<Args extends Arguments> = Handler<Args>;
 /**
- * @description хэндлер на закрытие с неизвестным колличеством аргументов, неизвестного вида
+ * @description хэндлер на закрытие с неизвестным количеством аргументов, неизвестного вида
  */
 type CloseHandler<Args extends Arguments> = Handler<Args>;
 
