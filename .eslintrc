@@ -8,8 +8,6 @@
 
   "ignorePatterns": ["lib", "build", "node_modules"],
 
-  "plugins": ["@cspell"],
-
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",

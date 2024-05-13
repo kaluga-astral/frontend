@@ -20,7 +20,8 @@ module.exports = {
 
   'packages/icons/**/*.{js,jsx,ts,tsx}': [
     (fileNames) => `npm run spellcheck ${fileNames.join(' ')}`,
-    (fileNames) => `npm run lint --workspace=@astral/icons -- ${fileNames.join(' ')}`,
+    (fileNames) =>
+      `npm run lint --workspace=@astral/icons -- ${fileNames.join(' ')}`,
     () => 'npm run lint:types --workspace=@astral/icons',
   ],
 
