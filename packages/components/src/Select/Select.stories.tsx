@@ -25,7 +25,7 @@ export default meta;
 
 type Story = StoryObj<typeof Select>;
 
-const FIX_WIDTH_SELECT = 150;
+const FIX_WIDTH_SELECT = 360;
 
 const OPTIONS: string[] = [
   'Value 1',
@@ -42,8 +42,9 @@ const MULTIPLE_OPTIONS: Array<{ value: string; name: string }> = [
   { value: '1', name: 'Валерий 1' },
   { value: '2', name: 'Валерий 2' },
   { value: '3', name: 'Валерий 3' },
-  { value: '4', name: 'Валерий 4' },
-  { value: '5', name: 'Валерий 5' },
+  { value: '4', name: 'Длинное название' },
+  { value: '5', name: 'Куда более длинное название' },
+  { value: '6', name: 'Реально куда более длинное название, очень большое' },
 ];
 
 export const Interaction: Story = {
@@ -130,7 +131,7 @@ export const Disabled = () => {
   return (
     <>
       <Select
-        label="Standart"
+        label="Standard"
         onChange={handleSingleChange}
         value={singleValue}
         placeholder="Выберите вариант"
@@ -260,7 +261,7 @@ export const Multiple = () => {
   };
 
   return (
-    <Stack width={FIX_WIDTH_SELECT}>
+    <Stack width="100%" maxWidth={FIX_WIDTH_SELECT}>
       <Select
         placeholder="Выберите вариант"
         value={multipleValue}

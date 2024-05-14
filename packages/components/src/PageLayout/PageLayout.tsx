@@ -1,36 +1,56 @@
+import { type ElementType } from 'react';
+
 import { PageAside, type PageAsideProps } from '../PageAside';
 import { PageContent, type PageContentProps } from '../PageContent';
 import { PageHeader, type PageHeaderProps } from '../PageHeader';
 import { PageLayoutContainer } from '../PageLayoutContainer';
 
-export type PageLayoutProps = {
+export type PageLayoutProps<
+  TMainActionComponent extends ElementType = ElementType,
+  TSecondaryActionComponent extends ElementType = ElementType,
+  TBackButtonComponent extends ElementType = ElementType,
+> = {
   /**
+   * Конфигурация PageHeader
    * @example <PageLayout header={{
    *  title: 'Заголовок страницы',
    *  description: 'Описание страницы',
    * }} />
-   * Конфигурация PageHeader
    */
-  header: PageHeaderProps;
+  header: PageHeaderProps<
+    TMainActionComponent,
+    TSecondaryActionComponent,
+    TBackButtonComponent
+  >;
   /**
+   * Конфигурация PageContent
    * @example <PageLayout content={{
    *  children: 'Контент страницы',
    *  isPaddingDisabled: false,
    * }} />
-   * Конфигурация PageContent
    */
   content: Omit<PageContentProps, 'isSeparatorShown' | 'isHeaderActionsShown'>;
   /**
+   * Конфигурация PageAside
    * @example <PageLayout aside={{
    *  children: 'Боковая панель страницы',
    * }} />
-   * Конфигурация PageAside
    */
   aside?: PageAsideProps;
   className?: string;
 };
 
-export const PageLayout = (props: PageLayoutProps) => {
+export const PageLayout = <
+  TMainActionComponent extends ElementType,
+  TSecondaryActionComponent extends ElementType,
+  TBackButtonComponent extends ElementType,
+>(
+  props: PageLayoutProps<
+    TMainActionComponent,
+    TSecondaryActionComponent,
+    TBackButtonComponent
+  >,
+) => {
   const { header, content, aside, className } = props;
   const hasAside = Boolean(aside);
   const isHeaderActionsShown = Boolean(header.actions);
