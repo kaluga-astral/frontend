@@ -18,24 +18,27 @@ import {
 } from './styles';
 
 export type PageHeaderProps<
+  TMainActionComponent extends ElementType = ElementType,
+  TSecondaryActionComponent extends ElementType = ElementType,
   TBackButtonComponent extends ElementType = ElementType,
 > = {
   /**
-   * @example <PageHeader title="Заголовок страницы" />
    * Заголовок страницы
+   * @example <PageHeader title="Заголовок страницы" />
    */
   title: ReactNode;
   /**
-   * @example <PageHeader description="Описание страницы" />
    * Описание страницы
+   * @example <PageHeader description="Описание страницы" />
    */
   description?: ReactNode;
   /**
-   * @example <PageHeader subheader={<TextField placeholder="Поиск на странице..." size="small" />} />
    * Набор компонент, отображаемый в нижней части блока
+   * @example <PageHeader subheader={<TextField placeholder="Поиск на странице..." size="small" />} />
    */
   subheader?: ReactNode;
   /**
+   * Хлебные крошки
    * @example <PageHeader breadcrumbs={
    *  [
    *    <Link>Первая ссылка</Link>,
@@ -43,10 +46,10 @@ export type PageHeaderProps<
    *    <>Текст</>,
    *  ]
    * } />
-   * Хлебные крошки
    */
   breadcrumbs?: ReactNode[];
   /**
+   * Набор кнопок, видимые конфигурируются через объект main, скрытые в меню - через secondary
    * @example <PageHeader actions={{
    *  main: [
    *    {
@@ -59,15 +62,14 @@ export type PageHeaderProps<
    *    },
    *  ]
    * }} />
-   * Набор кнопок, видимые конфигурируются через объект main, скрытые в меню - через secondary
    */
-  actions?: ButtonGroupProps;
+  actions?: ButtonGroupProps<TMainActionComponent, TSecondaryActionComponent>;
   /**
+   * Кнопка возврата на предыдущий экран
    * @example
-   * <PageHeader<{to: string}>
+   * <PageHeader
    *  backButton={{
    *    onClick: () => {},
-   *    to: '/'
    *  }}
    * />
    */
@@ -79,9 +81,17 @@ export type PageHeaderProps<
     >;
 };
 
-export function PageHeader<TBackButtonComponent extends ElementType>(
-  props: PageHeaderProps<TBackButtonComponent>,
-) {
+export const PageHeader = <
+  TMainActionComponent extends ElementType,
+  TSecondaryActionComponent extends ElementType,
+  TBackButtonComponent extends ElementType,
+>(
+  props: PageHeaderProps<
+    TMainActionComponent,
+    TSecondaryActionComponent,
+    TBackButtonComponent
+  >,
+) => {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
   const { isMobile } = useViewportType();
@@ -110,4 +120,4 @@ export function PageHeader<TBackButtonComponent extends ElementType>(
       {subheader && <PageSubheader>{subheader}</PageSubheader>}
     </Wrapper>
   );
-}
+};
