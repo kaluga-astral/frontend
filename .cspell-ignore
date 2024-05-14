@@ -2,7 +2,7 @@
 // Это явно надо вынести в отдельный рефактор, так как ошибка затрагивает половину кода...
 Adorment
 
-// Популярное псевдо латинское слово, проще вынести в white list
+// Популярное псевдо латинское слово
 adipisicing
 
 archivate
@@ -47,8 +47,6 @@ elit
 emailfield
 esia
 Eсли
-figcaption
-Figcaption
 firstname
 Firstname
 formated
@@ -64,10 +62,7 @@ hookform
 HTMLI
 HTMLLI
 HTMLU
-iframe
-Iframe
 imask
-instanceof
 internalerrorplaceholder
 IPINN
 Ivanov
@@ -89,7 +84,6 @@ Middlename
 mobx
 monokai
 navpanes
-nbsp
 nextjs
 noopener
 noreferrer
@@ -131,11 +125,9 @@ Succes
 svgr
 Swipeable
 tanstack
-tbody
 testid
 textbox
 TEXTFILED
-tfoot
 themeprovider
 toastify
 togglebuttongroup
@@ -351,4 +343,3 @@ webp
 экшенов
 эмитит
 эмитом
-אַחַת

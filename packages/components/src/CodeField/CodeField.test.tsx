@@ -149,6 +149,7 @@ describe('CodeField', () => {
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    /* cspell:disable-next-line */
     await userEvents.keyboard('fF&^Ⅷאַחַת');
     expect(fields[TEST_FOCUS_FIELD].value).toBe('');
   });
