@@ -3,7 +3,7 @@ import type { FilteredCommit, CommitType } from '../../types';
 
 interface IMarkdownService {
   getMarkup: (commits: FilteredCommit[], lastVersion: string, startDate: string, endDate: string) => string;
-  extractUsByType: (chahgelog: string, commitType: CommitType) => string[];
+  extractUsByType: (changelog: string, commitType: CommitType) => string[];
 };
 
 type Story = Omit<FilteredCommit, 'type'>;
@@ -45,11 +45,11 @@ export class MarkdownService implements IMarkdownService {
     );
   }
 
-  extractUsByType(chahgelog: string, commitType: CommitType) {
-    const startPosition = chahgelog.indexOf(this.groupHeaders[commitType]) + this.groupHeaders[commitType].length;
-    const endPosition =  chahgelog.indexOf('---', startPosition);
+  extractUsByType(changelog: string, commitType: CommitType) {
+    const startPosition = changelog.indexOf(this.groupHeaders[commitType]) + this.groupHeaders[commitType].length;
+    const endPosition =  changelog.indexOf('---', startPosition);
     
-    return chahgelog.substring(startPosition, endPosition).trim().split('\n');
+    return changelog.substring(startPosition, endPosition).trim().split('\n');
   }
 
   private generateChangelogHeader(lastVersion: string, startDate: string | Date, endDate: string | Date) {

@@ -28,5 +28,5 @@
     }
   ],
 
-  "dictionaries": ["general"]
+  "dictionaries": ["general", "typescript", "node", "css", "html"]
 }
