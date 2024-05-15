@@ -1,4 +1,4 @@
-import React, { type ComponentProps, type ElementType } from 'react';
+import { type ComponentProps, type ElementType } from 'react';
 
 import { type ButtonProps } from '../../../Button';
 import { type DropdownButtonProps } from '../../../DropdownButton';
