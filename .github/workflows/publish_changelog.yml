@@ -1,4 +1,4 @@
-name: Publish changelog
+name: Publish changelog 1
 
 on:
   schedule:
