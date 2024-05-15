@@ -64,3 +64,26 @@ export const Selected = () => {
     </MenuList>
   );
 };
+
+export const Disabled = () => {
+  return (
+    <MenuList>
+      <MenuItem
+        disabled
+        tooltipPlacement="left"
+        disabledReason="Действие недоступно. Попробуйте позднее"
+      >
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Мой профиль
+      </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Выход
+      </MenuItem>
+    </MenuList>
+  );
+};
