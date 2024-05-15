@@ -1,4 +1,4 @@
-name: Publish changelog
+name: Publish changelog 1
 
 on:
   schedule:
@@ -22,7 +22,7 @@ jobs:
         run: npm i
 
       - name: Publish
-        if: ${{ ! contains(fromJson($HOLIDAYS), steps.date.outputs.date)) }}
+        if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date)) }}
         run: npm run start
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}

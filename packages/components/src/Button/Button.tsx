@@ -35,8 +35,13 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    * Состояние кнопки - selected
    */
   selected?: boolean;
-} & ComponentPropsWithRef<
-    ElementType extends TComponent ? 'button' : TComponent
+  // TODO Хак через Omit позволяет решить проблему с потерей типов для props
+  // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
+} & Omit<
+    ComponentPropsWithRef<
+      ElementType extends TComponent ? 'button' : TComponent
+    >,
+    ''
   >;
 
 const UnwrappedButton = <TComponent extends ElementType>(
