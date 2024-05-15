@@ -1,4 +1,4 @@
-import { type ComponentProps, type ElementType } from 'react';
+import React, { type ComponentProps, type ElementType } from 'react';
 
 import { type ButtonProps } from '../../../Button';
 import { type DropdownButtonProps } from '../../../DropdownButton';
@@ -29,8 +29,13 @@ type SingleAction<TMainActionComponent extends ElementType> = Omit<
    * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
    */
   component?: TMainActionComponent;
-} & ComponentProps<
-    ElementType extends TMainActionComponent ? 'button' : TMainActionComponent
+  // TODO Хак через Omit позволяет решить проблему с потерей типов для props
+  // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
+} & Omit<
+    ComponentProps<
+      ElementType extends TMainActionComponent ? 'button' : TMainActionComponent
+    >,
+    ''
   >;
 
 type MultipleAction<TMainActionComponent extends ElementType> = Omit<
@@ -56,8 +61,13 @@ type MultipleAction<TMainActionComponent extends ElementType> = Omit<
    * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
    */
   component?: TMainActionComponent;
-} & ComponentProps<
-    ElementType extends TMainActionComponent ? 'button' : TMainActionComponent
+  // TODO Хак через Omit позволяет решить проблему с потерей типов для props
+  // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
+} & Omit<
+    ComponentProps<
+      ElementType extends TMainActionComponent ? 'button' : TMainActionComponent
+    >,
+    ''
   >;
 
 /** Модель основного экшена */
