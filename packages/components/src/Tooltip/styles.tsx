@@ -27,6 +27,7 @@ export const StyledTooltip = styled(
       size === TooltipSizes.SMALL
         ? theme.typography.small.lineHeight
         : theme.typography.ui.lineHeight};
+    white-space: pre-line;
 
     background-color: ${({ theme }) => theme.palette.grey[900]};
     border-radius: ${({ theme }) => theme.shape.small};

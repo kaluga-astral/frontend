@@ -203,3 +203,32 @@ export const Disabled = () => (
     </Tooltip>
   </Stack>
 );
+
+/**
+ * При использовании символа \n в пропсе title будет происходить перенос текста на новую строку
+ */
+export const NewLineCharacter = () => {
+  const titleWithNewLineCharacter =
+    'Текущий документ не прошел \n согласование/подписание. \n Загрузите документ повторно';
+  const titleWithoutNewLineCharacter =
+    'Текущий документ не прошел согласование/подписание. Загрузите документ повторно';
+
+  return (
+    <GridContainer container columns={2}>
+      <Tooltip title={titleWithNewLineCharacter} placement="top" size="small">
+        <Button color="primary" variant="contained" size="large">
+          С использованием переноса
+        </Button>
+      </Tooltip>
+      <Tooltip
+        title={titleWithoutNewLineCharacter}
+        placement="top"
+        size="small"
+      >
+        <Button color="primary" variant="contained" size="large">
+          Без использования переноса
+        </Button>
+      </Tooltip>
+    </GridContainer>
+  );
+};
