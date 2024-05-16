@@ -14,15 +14,15 @@ jobs:
       run:
         working-directory: ./changelog-generator
     steps:
-      - name: Get current date (month and date)
-        id: date
-        run: echo "::set-output name=date::$(date +'%d.%m')"
+     # - name: Get current date (month and date)
+     #   id: date
+     #   run: echo "::set-output name=date::$(date +'%d.%m')"
 
       - name: Install dependencies
         run: npm i
 
       - name: Publish
-        if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
+     #   if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
         run: npm run start
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}
