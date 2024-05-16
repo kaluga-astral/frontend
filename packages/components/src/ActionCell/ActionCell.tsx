@@ -33,15 +33,19 @@ export type ActionsCellProps<T> = {
    */
   row: T;
   /**
-   * Позиция тултипа
+   * @deprecated Положение тултипа инкапсулировано внутри ActionCell
    */
   tooltipPlacement?: TooltipProps['placement'];
+};
+
+const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
+  mainAction: 'top',
+  secondaryAction: 'left',
 };
 
 export function ActionCell<T>({
   actions: { main = [], secondary = [] },
   row,
-  tooltipPlacement,
 }: ActionsCellProps<T>) {
   const handleActionClick = useCallback(
     (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
@@ -61,7 +65,7 @@ export function ActionCell<T>({
         return (
           <MainAction
             key={action.name}
-            tooltipPlacement={tooltipPlacement}
+            tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
           />
@@ -69,7 +73,7 @@ export function ActionCell<T>({
       })}
       <SecondaryActions
         actions={secondary}
-        tooltipPlacement={tooltipPlacement}
+        tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
         onActionClick={handleActionClick}
       />
     </Wrapper>
