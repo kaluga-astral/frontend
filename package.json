@@ -14,6 +14,8 @@
     "@astral/illustrations": "*",
     "@astral/prettier-config": "^2.4.0",
     "@astral/stylelint-config-styled": "^2.4.0",
+    "@cspell/dict-la": "^1.0.0",
+    "@cspell/dict-ru_ru": "^2.2.1",
     "@faker-js/faker": "^8.4.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
@@ -41,6 +43,7 @@
     "commitlint": "^18.4.3",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
+    "cspell": "^8.8.1",
     "eslint": "^8.54.0",
     "eslint-plugin-testing-library": "^5.9.1",
     "husky": "^4.3.8",
@@ -78,7 +81,9 @@
     "lint:types": "npm run lint:types --workspaces --if-present",
     "lint:styles": "npm run lint:styles:all --workspaces --if-present",
     "tests": "npm run tests --workspaces --if-present",
-    "tests:ci": "npm run tests:ci --workspaces --if-present"
+    "tests:ci": "npm run tests:ci --workspaces --if-present",
+    "spellcheck:all": "cspell .",
+    "spellcheck": "cspell"
   },
   "dependencies": {
     "eslint-plugin-prettier": "^5.0.1"

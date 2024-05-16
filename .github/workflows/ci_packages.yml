@@ -53,6 +53,22 @@ jobs:
       - name: Run stylelint
         run: npm run lint:styles
 
+  spellCheck:
+    name: Running spell check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install dependencies
+        run: npm i
+      - name: Run spell-check
+        run: npm run spellcheck:all
+
   test:
     name: Running tests
     runs-on: ubuntu-latest

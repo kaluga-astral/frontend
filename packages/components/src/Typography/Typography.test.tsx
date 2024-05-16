@@ -30,7 +30,7 @@ describe('Typography', () => {
     expect(typography).toBeInTheDocument();
   });
 
-  it('Ренедрится тэг p, если prop paragraph=true', () => {
+  it('Рендерится тэг p, если prop paragraph=true', () => {
     renderWithTheme(
       <Typography paragraph variant="h2">
         Test text

@@ -39,7 +39,7 @@ export const useCollabsible = (
       const node = ref.current;
       /**
        * Eсли isOpenCollapse=false то в стилях webkit-line-clamp = rowsCount
-       * Получаем клиентскую высоту, она будет равна колличеству строк умноженой на высоту строки
+       * Получаем клиентскую высоту, она будет равна количеству строк умноженной на высоту строки
        */
       const clientH = node.getBoundingClientRect().height;
       const scrollH = node.scrollHeight;

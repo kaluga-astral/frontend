@@ -411,7 +411,7 @@ export const PageHeaderDashboardStory = () => {
  *
  * **Subheader**<br>
  * “Второй” заголовок на странице.<br>
- * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сотрировки данных) и кнопку дополнительных фильтров на странице.
+ * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
  * ### [Guide]()
@@ -518,13 +518,14 @@ export const BackButton = () => (
 );
 
 const StyledLink = styled.a`
-  grid-area: back-btn;
-  line-height: 1.7rem;
-  vertical-align: middle;
   display: inline-flex;
+  grid-area: back-btn;
   align-items: center;
 
   margin-right: 10px;
+
+  line-height: 1.7rem;
+  vertical-align: middle;
 `;
 
 const CustomLink = ({ to }: { to: string }) => {

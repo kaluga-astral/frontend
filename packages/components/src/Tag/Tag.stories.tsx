@@ -412,7 +412,6 @@ const RowContainer = styled.div`
 const List = styled.div`
   display: flex;
   flex-wrap: wrap;
-
   gap: 8px;
 `;
 

@@ -35,7 +35,7 @@ export class TelegramService implements ITelegramService {
       `Актуальная версия пакетов на ${dateToView(endDate)} - ***${lastVersion}***\n\n\n` + `***✨ Features***\n\n`;
 
     const endMsgTemplate =
-      `👀 Полный список реализованых фич можно посмотреть ${this.generateLinkToChangelog('здесь', fileName, 'features')}\n\n\n` +
+      `👀 Полный список реализованных фич можно посмотреть ${this.generateLinkToChangelog('здесь', fileName, 'features')}\n\n\n` +
       `***🐞 Bugs***\n\n` +
       `Список исправленных багов смотрим ${this.generateLinkToChangelog('тут', fileName, 'bugs')} 👈`;
 

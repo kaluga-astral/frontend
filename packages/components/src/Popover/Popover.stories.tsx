@@ -76,14 +76,13 @@ export const Example = () => {
 };
 
 const GridContainer = styled(Grid)`
+  grid-template-columns: 1fr;
+  flex-direction: row;
   gap: 10px;
 
   margin-top: 30px;
 
-  ${({ theme }) => theme.spacing(2)};{
-    grid-template-columns: 1fr;
-    flex-direction: row;
-  }
+  ${({ theme }) => theme.spacing(2)};
 `;
 
 export const TransformOrigin = () => {
