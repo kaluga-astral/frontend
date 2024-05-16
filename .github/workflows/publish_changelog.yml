@@ -19,10 +19,12 @@ jobs:
      #   run: echo "::set-output name=date::$(date +'%d.%m')"
 
       - name: Install dependencies
+        working-directory: ./changelog-generator
         run: npm i
 
       - name: Publish
      #   if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
+        working-directory: ./changelog-generator
         run: npm run start
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}
