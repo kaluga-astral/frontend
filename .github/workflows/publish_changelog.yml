@@ -14,6 +14,7 @@ jobs:
       run:
         working-directory: ./changelog-generator
     steps:
+      - uses: actions/checkout@v4
      # - name: Get current date (month and date)
      #   id: date
      #   run: echo "::set-output name=date::$(date +'%d.%m')"
