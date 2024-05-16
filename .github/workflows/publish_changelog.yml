@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../../../changelog-generator
+        working-directory: ./changelog-generator
     steps:
       - name: Get current date (month and date)
         id: date
