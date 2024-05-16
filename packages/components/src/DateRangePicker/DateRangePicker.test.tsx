@@ -430,5 +430,30 @@ describe('DateRangePicker', () => {
 
       expect(popover).not.toBeInTheDocument();
     });
+
+    it('Дата выбирается, если поповер открыт кликом по иконке', async () => {
+      const user = userEvents.setup();
+
+      renderWithTheme(
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+        />,
+      );
+
+      const calendarEndAdornment = screen.getAllByTitle(
+        'calendarEndAdornment',
+      )[0];
+
+      const dayButton = screen.getAllByText('15')[0];
+
+      await user.click(calendarEndAdornment);
+      await user.click(dayButton);
+
+      const inputA = screen.getByPlaceholderText('inputA');
+
+      expect((inputA as HTMLInputElement).value).not.toBe('');
+    });
   });
 });

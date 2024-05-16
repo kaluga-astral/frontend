@@ -68,7 +68,7 @@ export const DatePickerInput = forwardRef<
         fullWidth
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
+            <InputAdornment position="end" title="calendarEndAdornment">
               <CalendarOutlineMd />
             </InputAdornment>
           ),

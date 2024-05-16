@@ -143,17 +143,16 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onChangeValue: endDateProps?.onChange,
     });
 
-    const handleOpenPopover = (e: SyntheticEvent) => {
-      const isStartDate = e.target === startInputRef.current;
-      const isEndDate = e.target === endInputRef.current;
+    const handleClickStartInput = (e: SyntheticEvent) => {
+      setActiveInput('startDate');
 
-      if (isStartDate) {
-        setActiveInput('startDate');
+      if (!isOpen) {
+        handleOpen(e);
       }
+    };
 
-      if (isEndDate) {
-        setActiveInput('endDate');
-      }
+    const handleClickEndInput = (e: SyntheticEvent) => {
+      setActiveInput('endDate');
 
       if (!isOpen) {
         handleOpen(e);
@@ -225,7 +224,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={startMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptStart}
-          onClick={handleOpenPopover}
+          onClick={handleClickStartInput}
         />
         <DatePickerInput
           {...endDateProps.inputProps}
@@ -235,7 +234,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           value={endMaskedValue}
           disabled={disabled}
           onAccept={handleAcceptEnd}
-          onClick={handleOpenPopover}
+          onClick={handleClickEndInput}
         />
         <PopoverHoveredContextProvider popoverHovered={isPopoverHovered}>
           <DatePickerPopover
