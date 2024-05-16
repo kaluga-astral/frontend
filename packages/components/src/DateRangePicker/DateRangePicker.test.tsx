@@ -434,7 +434,7 @@ describe('DateRangePicker', () => {
     it('Дата выбирается, если поповер открыт кликом по иконке', async () => {
       const user = userEvents.setup();
 
-      renderWithTheme(
+      const { baseElement } = renderWithTheme(
         <DateRangePicker
           startDateProps={{
             inputProps: { placeholder: 'inputA' },
@@ -442,9 +442,7 @@ describe('DateRangePicker', () => {
         />,
       );
 
-      const calendarEndAdornment = screen.getAllByTitle(
-        'calendarEndAdornment',
-      )[0];
+      const calendarEndAdornment = baseElement.getElementsByTagName('svg')[0];
 
       await user.click(calendarEndAdornment);
 
