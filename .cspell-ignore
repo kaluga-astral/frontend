@@ -1,18 +1,14 @@
-// TODO https://track.astral.ru/soft/browse/SHRD-30
-// Это явно надо вынести в отдельный рефактор, так как ошибка затрагивает половину кода...
-Adorment
-
-// Популярное псевдо латинское слово
 adipisicing
-
+// TODO https://track.astral.ru/soft/browse/SHRD-30
+Adorment
 archivate
 astralproductswitcher
 astralui
-autoflow
 autoclose
 Autoclose
 Autocomplite
 autofix
+autoflow
 bradgarropy
 browserstack
 CADESCOM
@@ -234,6 +230,7 @@ webp
 лэйблом
 мапу
 массивe
+маунтим
 мобилку
 модалка
 модалки
@@ -276,6 +273,7 @@ webp
 реакт
 регулярка
 регулярку
+ресайзе
 Релизнуть
 релизятся
 рендера
@@ -285,9 +283,9 @@ webp
 Рендерится
 рендерить
 рендериться
+ренжа
 рест
 реэкспортит
-ренжа
 сertificate
 Сode
 сompanies
@@ -306,6 +304,7 @@ webp
 стейт
 стейта
 стейтом
+стопаемся
 стор
 Стор
 стрингу
@@ -331,6 +330,7 @@ webp
 филдов
 фича
 флоу
+хендлер
 ховере
 хэндлер
 хэша
