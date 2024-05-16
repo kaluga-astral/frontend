@@ -39,7 +39,7 @@
 ```@astral/icons``` - пакет, содержащий иконки, доступные в дизайн-системе.
 
 # Playground
-Доступен [Codesandbox](https://codesandbox.io/p/sandbox/sleepy-chatterjee-8mv9ml?file=%2Fsrc%2FPlayground%2FPlayground.tsx%3A12%2C1) для проверки фукнционала.
+Доступен [Codesandbox](https://codesandbox.io/p/sandbox/sleepy-chatterjee-8mv9ml?file=%2Fsrc%2FPlayground%2FPlayground.tsx%3A12%2C1) для проверки функционала.
 
 # Getting started with Next.js
 
@@ -196,6 +196,8 @@ Breaking changes:
 ```tsx
 import noDataImgSrc from '@astral/ui/illustrations/no-data.svg';
 import outdatedReleaseErrorImgSrc from '@astral/ui/illustrations/outdated-release.svg';
+
+/* cspell:disable-next-line */
 import errorImgSrc from 'static/erorr-inmg.png';
 
 const App = () => {
@@ -221,7 +223,7 @@ Breaking changes:
 - Удалены пропсы, которые являлись css правилами (margin, border, mr...)
 - Prop ```color``` принимает только ```string```. Удалена возможность использовать для color функцию
 
-Актуальные props находяться [здесь](https://main--61baeff6f06230003a88ef8a.chromatic.com/?path=/docs/components-typography--showcase).
+Актуальные props находятся [здесь](https://main--61baeff6f06230003a88ef8a.chromatic.com/?path=/docs/components-typography--showcase).
 
 ### Grid
 
@@ -297,7 +299,7 @@ import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
 import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
 ```
 
-И внести соответвующие правки в конфиг сборщика для того, чтобы @astral/ui/fonts обрабатывались как шрифты.
+И внести соответствующие правки в конфиг сборщика для того, чтобы @astral/ui/fonts обрабатывались как шрифты.
 
 ### illustrations
 Пакет ```@astral/illustrations``` включен в пакет ```@astral/ui```.
@@ -312,7 +314,7 @@ import certImgSrc from '@astral/illustrations/cert.svg';
 import certImgSrc from '@astral/ui/illustrations/cert.svg';
 ```
 
-И внести соответвующие правки в конфиг сборщика для того, чтобы @astral/ui/fonts обрабатывались как шрифты.
+И внести соответствующие правки в конфиг сборщика для того, чтобы @astral/ui/fonts обрабатывались как шрифты.
 
 ### @astral/form 
 Все элементы пакета ```@astral/form``` получили префиксы form.

@@ -18,8 +18,8 @@ import { DataGridInfinite } from './DataGridInfinite';
 import { makeDataList } from './faker';
 
 const DataGridInfiniteWrapper = styled.div`
-  height: 400px;
   width: 100%;
+  height: 400px;
 `;
 
 type DataType = {

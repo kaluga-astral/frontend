@@ -1,7 +1,7 @@
 import { DateCompareDeep, isDateOutOfRange } from './isDateOutOfRange';
 
 describe('isDateOutOfRange', () => {
-  it('При дате больше обоих значений и ренджа ожидается true', () => {
+  it('При дате больше обоих значений и ренжа ожидается true', () => {
     const date = new Date('2022-12-22T00:00:00.000Z');
     const dateA = new Date('2022-12-10T00:00:00.000Z');
     const dateB = new Date('2022-12-21T00:00:00.000Z');
@@ -11,7 +11,7 @@ describe('isDateOutOfRange', () => {
     expect(result).toBeTruthy();
   });
 
-  it('При дате меньше обоих значений и ренджа ожидается true', () => {
+  it('При дате меньше обоих значений и ренжа ожидается true', () => {
     const date = new Date('2022-12-02T00:00:00.000Z');
     const dateA = new Date('2022-12-10T00:00:00.000Z');
     const dateB = new Date('2022-12-21T00:00:00.000Z');
@@ -41,7 +41,7 @@ describe('isDateOutOfRange', () => {
     expect(result).toBeFalsy();
   });
 
-  it('При совпадении даты с одним из ренджа ожидается false', () => {
+  it('При совпадении даты с одним из ренжа ожидается false', () => {
     const date = new Date('2022-12-10T00:00:00.000Z');
     const dateA = new Date('2022-12-10T00:00:00.000Z');
     const dateB = new Date('2022-12-21T00:00:00.000Z');

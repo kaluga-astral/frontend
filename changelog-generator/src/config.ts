@@ -15,6 +15,6 @@ export const CHANGELOG_DIR_PATH = path.resolve(__dirname, '..', '..', 'changelog
 export const CHANGELOG_DIR_URL = 'https://github.com/kaluga-astral/frontend/blob/main/changelog/';
 
 /**
- * Кол-во дней периода, за который генерируем chahgelog
+ * Кол-во дней периода, за который генерируем changelog
  */
 export const PERIOD_IN_DAYS = 14;

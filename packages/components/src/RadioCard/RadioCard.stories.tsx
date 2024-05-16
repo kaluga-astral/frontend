@@ -28,6 +28,7 @@ const HeaderWrapper = styled.div`
 const List = styled.ul`
   margin: 0;
   padding: 0;
+
   list-style: inside;
 `;
 

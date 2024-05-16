@@ -1,6 +1,6 @@
 export * from './NotificationNext';
 
-export * from './NotifacationStackContainerNext';
+export * from './NotificationStackContainerNext';
 
 export * from './NotificationContainerNext';
 

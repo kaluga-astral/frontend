@@ -75,7 +75,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       // helperText из mui/TextField имеет тип ReactNode | undefined;
       // однако если helperText={null} вспомогательный текст просто перестает
       // рендериться, поэтому необходимо передавать что-то отличное от null
-      // но при этом не отображаеющеся на странице
+      // но при этом не отображающиеся на странице
       return <></>;
     }, [helperTextProp, success, error]);
 

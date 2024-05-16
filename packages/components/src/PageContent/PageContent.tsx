@@ -15,7 +15,7 @@ export type PageContentProps = {
   /**
    * @example <PageContent isPaddingDisabled>Контент</PageContent>
    * @default true
-   * Флаг, добавляющий стандартные отсупы (требуются не всегда)
+   * Флаг, добавляющий стандартные отступы (требуются не всегда)
    */
   isPaddingDisabled?: boolean;
 
