@@ -446,9 +446,10 @@ describe('DateRangePicker', () => {
         'calendarEndAdornment',
       )[0];
 
+      await user.click(calendarEndAdornment);
+
       const dayButton = screen.getAllByText('15')[0];
 
-      await user.click(calendarEndAdornment);
       await user.click(dayButton);
 
       const inputA = screen.getByPlaceholderText('inputA');
