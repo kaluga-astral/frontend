@@ -23,7 +23,7 @@ jobs:
      #   run: echo "::set-output name=date::$(date +'%d.%m')"
 
       - name: Create file
-      - uses: "finnp/create-file-action@master"
+        uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "dir/fileName.txt"
           FILE_DATA: "file content"
