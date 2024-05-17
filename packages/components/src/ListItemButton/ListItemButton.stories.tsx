@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { List } from '../List';
@@ -17,7 +17,7 @@ export default {
   component: ListItemButton,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [open, setOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
 

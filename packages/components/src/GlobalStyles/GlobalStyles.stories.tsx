@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { GlobalStyles } from './GlobalStyles';
 
@@ -7,7 +7,7 @@ export default {
   component: GlobalStyles,
 };
 
-const Template: Story = (args) => (
+const Template: StoryFn = (args) => (
   <GlobalStyles {...args}>
     <div style={{ width: '150vw', height: '150vh' }}>
       Съешь же ещё этих мягких французских булок да выпей чаю

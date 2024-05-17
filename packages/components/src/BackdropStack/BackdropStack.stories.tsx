@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useRef, useState } from 'react';
 import { Box, MenuItem, Popover } from '@mui/material';
 
@@ -147,7 +147,7 @@ const MotivationPart = () => {
   );
 };
 
-const Template: Story<{}> = () => {
+const Template: StoryFn<{}> = () => {
   const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
 
   return (

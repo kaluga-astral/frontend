@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
@@ -18,7 +18,7 @@ export default {
   component: MenuList,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <MenuList>
       <MenuItem>

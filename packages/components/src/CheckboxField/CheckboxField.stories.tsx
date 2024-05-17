@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Stack } from '@mui/material';
 
 import { ExampleTemplate } from '../docs';
@@ -10,7 +10,7 @@ export default {
   component: null,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <ExampleTemplate>
       <ExampleTemplate.Case title="CheckboxField">
