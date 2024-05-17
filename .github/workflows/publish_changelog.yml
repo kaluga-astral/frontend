@@ -14,14 +14,15 @@ jobs:
     defaults:
       run:
         working-directory: ./changelog-generator
-    container:
-      image: node:18
-      volumes:
-        - /changelog:/changelog
+    # container:
+    #   image: node:18
+    #   volumes:
+    #     - /changelog:/changelog
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+
      # - name: Get current date (month and date)
      #   id: date
      #   run: echo "::set-output name=date::$(date +'%d.%m')"
