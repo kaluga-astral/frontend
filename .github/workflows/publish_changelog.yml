@@ -6,7 +6,7 @@ on: workflow_dispatch
 
 env:
   HOLIDAYS: '["31.12", "01.01", "02.01", "03.01", "04.01", "05.01", "06.01", "07.01", "08.01", "23.02", "08.03"]'
-  CHANGELOG_DIR_PATH: '../changelog'
+  # CHANGELOG_DIR_PATH: '../changelog'
 
 jobs:
   changelog-generate:
@@ -14,14 +14,14 @@ jobs:
     defaults:
       run:
         working-directory: ./changelog-generator
-    container:
-      image: node:18
-      volumes:
-        - /changelog:/changelog
+    # container:
+    #   image: node:18
+    #   volumes:
+    #     - /changelog:/changelog
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: main-changelog
      # - name: Get current date (month and date)
      #   id: date
      #   run: echo "::set-output name=date::$(date +'%d.%m')"
@@ -40,3 +40,9 @@ jobs:
           STORYBOOK_URL: ${{ secrets.STORYBOOK_URL }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN_TEST }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
+
+      - name: Commit changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Add changelog
+          branch: main-changelog
