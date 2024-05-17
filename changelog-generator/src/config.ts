@@ -1,13 +1,13 @@
 import path from 'path';
 
-const { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = process.env; 
+const { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, CHANGELOG_DIR_PATH: EXTERNAL_CHANGELOG_DIR_PATH } = process.env; 
 
 export { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID }
 
 /**
  * Путь до директории, куда сохраняем md-файлы
  */
-export const CHANGELOG_DIR_PATH = path.resolve(__dirname, '..', '..', 'changelog');
+export const CHANGELOG_DIR_PATH = EXTERNAL_CHANGELOG_DIR_PATH || path.resolve(__dirname, '..', '..', 'changelog');
 
 /**
  * Адрес до директории с ченжлогом
