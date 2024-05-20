@@ -21,7 +21,9 @@ jobs:
 
       - name: Get current date (month and date)
         id: date
-        run: echo "::set-output name=date::$(date +'%d.%m')"
+        # run: echo "::set-output name=date::$(date +'%d.%m')"
+        run: echo "{date}=$(date +'%d.%m')" >> $GITHUB_OUTPUT
+
 
       - name: Install dependencies
         run: npm i
