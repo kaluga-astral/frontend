@@ -6,7 +6,6 @@ on: workflow_dispatch
 
 env:
   HOLIDAYS: '["31.12", "01.01", "02.01", "03.01", "04.01", "05.01", "06.01", "07.01", "08.01", "23.02", "08.03"]'
-  # CHANGELOG_DIR_PATH: '../changelog'
 
 jobs:
   changelog-generate:
@@ -14,25 +13,21 @@ jobs:
     defaults:
       run:
         working-directory: ./changelog-generator
-    # container:
-    #   image: node:18
-    #   volumes:
-    #     - /changelog:/changelog
+
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
 
-     # - name: Get current date (month and date)
-     #   id: date
-     #   run: echo "::set-output name=date::$(date +'%d.%m')"
-
+      - name: Get current date (month and date)
+        id: date
+        run: echo "::set-output name=date::$(date +'%d.%m')"
 
       - name: Install dependencies
         run: npm i
 
       - name: Publish
-     #   if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
+        if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
         run: npm run start
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}
