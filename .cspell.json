@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,ru,la",
+  "languageId": "ts,tsx",
+  "import": [
+    "@cspell/dict-ru_ru/cspell-ext.json",
+    "@cspell/dict-la/cspell-ext.json",
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/coverage/**",
+    "**/public/**",
+    "**/*.js",
+    "**/*.json",
+    "**/*.html",
+    "**/*.svg",
+    "**/*.txt",
+    "**/storybook-static/**"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "general",
+      "path": ".cspell-ignore",
+      "description": "Слова, разрешенные во всем проекте"
+    }
+  ],
+
+  "dictionaries": ["general", "typescript", "node", "css", "html"]
+}

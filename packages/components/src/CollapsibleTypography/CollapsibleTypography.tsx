@@ -9,7 +9,7 @@ import { useCollabsible } from './hooks';
 type CollapsibleProps = {
   /**
    * @example <CollapsibleTypography rowsCount={2} />
-   * Максимиально отображаемое колличество строк
+   * Максимально отображаемое количество строк
    */
   rowsCount?: number;
   /**

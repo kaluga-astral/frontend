@@ -12,7 +12,7 @@ import { Paper } from '../Paper';
 import { sleep } from './utils';
 import { NOTIFY_CONTAINER_ID, NOTIFY_STATIC_CONTAINER_ID } from './constants';
 import { notify } from './NotificationNext';
-import { NotificationStackContainerNext } from './NotifacationStackContainerNext';
+import { NotificationStackContainerNext } from './NotificationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
 import { NotificationTemplateNext } from './NotificationTemplateNext';
 

@@ -38,7 +38,7 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('Произошла непредвиденная ошибка')).toBeVisible();
   });
 
-  it('Props:children с ошибокй загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
+  it('Props:children с ошибкой загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
     renderWithTheme(
       <TestComponent>
         <ChunkLoadErrorButton />

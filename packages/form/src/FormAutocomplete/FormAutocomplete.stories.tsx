@@ -101,7 +101,7 @@ export const Example = () => {
 /**
  * Prop `freeSolo`: если true, значение в input не будет связано со списком options.
  *
- * В данные формы могут быть установлены как строка из input, так и обьект из списка.
+ * В данные формы могут быть установлены как строка из input, так и объект из списка.
  */
 export const FreeSolo = () => {
   const form = useForm<FormFreeValues>({

@@ -7,14 +7,14 @@ export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
   const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
   /**
-   * @description установливает фокус на инпуте
+   * @description устанавливает фокус на инпуте
    */
   const setFocusIndex = (index: number) => {
     inputRefs.current[index].focus();
   };
 
   /**
-   * @description установливает фокус на следующем инпуте
+   * @description устанавливает фокус на следующем инпуте
    */
   const setFocusIndexNext = (index: number) => {
     const lastIndexOfCode = codeLength - 1;
@@ -27,7 +27,7 @@ export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
   };
 
   /**
-   * @description установливает фокус на предыдущем инпуте
+   * @description устанавливает фокус на предыдущем инпуте
    */
   const setFocusIndexPrevious = (index: number) => {
     if (index !== 0) {
@@ -36,7 +36,7 @@ export const useFocusInput = (codeLength: number, isAutoFocus?: boolean) => {
   };
 
   /**
-   * @description вызвает блюр на всех инпутах
+   * @description вызывает блюр на всех инпутах
    */
   const setBlur = () => {
     inputRefs.current.forEach((elem) => elem.blur());

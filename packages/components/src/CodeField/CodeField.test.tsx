@@ -79,7 +79,7 @@ describe('CodeField', () => {
     expect(resendButton).not.toBeDisabled();
   });
 
-  it('backspace: удаляет символ в текущием поле (при наличии)', async () => {
+  it('backspace: удаляет символ в текущем поле (при наличии)', async () => {
     renderWithTheme(
       <CodeField codeLength={TEST_LENGTH} initialValue="123456" />,
     );
@@ -99,7 +99,7 @@ describe('CodeField', () => {
     ]);
   });
 
-  it('backspace: удаляет символ в предыдущем поле (при отсутвии в текущем поле)', async () => {
+  it('backspace: удаляет символ в предыдущем поле (при отсутствии в текущем поле)', async () => {
     renderWithTheme(
       <CodeField
         codeLength={TEST_LENGTH}
@@ -149,6 +149,7 @@ describe('CodeField', () => {
     const fields: HTMLInputElement[] = screen.getAllByRole('textbox');
 
     await userEvents.click(fields[TEST_FOCUS_FIELD]);
+    /* cspell:disable-next-line */
     await userEvents.keyboard('fF&^Ⅷאַחַת');
     expect(fields[TEST_FOCUS_FIELD].value).toBe('');
   });

@@ -1,31 +1,47 @@
 name: Publish changelog
 
-on:
-  schedule:
-    - cron: '0 10 * * 1'
+on: workflow_dispatch
+  # schedule:
+  #   - cron: '*/10 * * * *'
 
 env:
   HOLIDAYS: '["31.12", "01.01", "02.01", "03.01", "04.01", "05.01", "06.01", "07.01", "08.01", "23.02", "08.03"]'
+  # CHANGELOG_DIR_PATH: '../changelog'
 
 jobs:
   changelog-generate:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: changelog-generator
+        working-directory: ./changelog-generator
+    # container:
+    #   image: node:18
+    #   volumes:
+    #     - /changelog:/changelog
     steps:
-      - name: Get current date (month and date)
-        id: date
-        run: echo "::set-output name=date::$(date +'%d.%m')"
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+     # - name: Get current date (month and date)
+     #   id: date
+     #   run: echo "::set-output name=date::$(date +'%d.%m')"
+
 
       - name: Install dependencies
         run: npm i
 
       - name: Publish
-        if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date)) }}
+     #   if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
         run: npm run start
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}
           STORYBOOK_URL: ${{ secrets.STORYBOOK_URL }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN_TEST }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
+
+      - name: Commit changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Add changelog
+          branch: main-changelog
