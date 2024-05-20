@@ -27,6 +27,11 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Last commit
+        shell: bash
+        run: |
+            git log
+
       - name: Create changelog file
         if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
         run: npm run changelog-generate
