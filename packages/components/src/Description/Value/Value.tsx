@@ -38,7 +38,7 @@ export const Value = ({
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
   const { emptySymbol } = useContext(ConfigContext);
 
-  const resultChildren = children ?? stub ?? emptySymbol;
+  const resultChildren = children || stub || emptySymbol;
 
   if (!canCopy) {
     return <Typography children={resultChildren} {...props} />;

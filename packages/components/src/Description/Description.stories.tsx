@@ -206,3 +206,14 @@ export const ColorsCanCopy = () => {
     </GridWrapper>
   );
 };
+
+export const EmptyValue = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description>
+        <Description.Name>Название показателя</Description.Name>
+        <Description.Value></Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
