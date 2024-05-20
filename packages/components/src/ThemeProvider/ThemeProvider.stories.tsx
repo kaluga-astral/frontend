@@ -5,7 +5,7 @@ import { Brand, createTheme } from '../theme';
 import { ThemeProvider } from './ThemeProvider';
 
 const meta: Meta<typeof ThemeProvider> = {
-  title: 'ThemeProvider',
+  title: 'Components/Theme/ThemeProvider',
   component: ThemeProvider,
 
   tags: ['!autodocs'],
