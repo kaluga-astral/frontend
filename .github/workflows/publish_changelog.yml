@@ -43,5 +43,6 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
-          # branch: main
-          commit-message: 'Adding a new changelog file'
+          branch: add-changelog
+          commit-message: Adding a new changelog file
+          title: Adding a new changelog file
