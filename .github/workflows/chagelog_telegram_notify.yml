@@ -6,7 +6,7 @@ on:
     paths: [changelog/**]
 
 jobs:
-  changelog-generate:
+  changelog-telegram-notify:
     runs-on: ubuntu-latest
     defaults:
       run:

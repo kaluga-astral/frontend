@@ -28,7 +28,7 @@ jobs:
         run: npm i
 
       - name: Create changelog file
-       if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
+        if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
         run: npm run changelog-generate
         env:
           JIRA_URL: ${{ secrets.JIRA_URL }}
