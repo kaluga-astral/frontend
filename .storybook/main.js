@@ -30,12 +30,6 @@ module.exports = {
 
   staticDirs: ['./public'],
 
-  features: {
-    // https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#emotion11-quasi-compatibility
-    // у storybook в 6 версии есть проблемы с 11 emotion - не работает темиация
-    emotionAlias: false,
-  },
-
   framework: {
     name: getAbsolutePath("@storybook/react-webpack5"),
     options: {}
@@ -78,6 +72,8 @@ module.exports = {
   },
 }
 
+// Сторибук использует абсолютные пути в моно репах
+// Функция автоматически сгенерена при миграции до 8 версии
 function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
 }
