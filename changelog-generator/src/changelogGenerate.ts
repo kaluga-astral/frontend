@@ -18,6 +18,8 @@ const endDate = currentDate;
 const gitlog = new GitService();
 const results = gitlog.getCommitList(startDate, endDate);
 
+console.log('>>>> results', results);
+
 // Удаляем промежуточные коммиты
 const filteredParseResults = results.filter((commit) => {
   if (!commit?.type || !commit?.us) {
