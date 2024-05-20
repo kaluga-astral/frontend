@@ -45,7 +45,7 @@ module.exports = {
       )}`,
   ],
 
-  'commander/**/*.{js}': ['npm run lint --workspace=@astral/commander'],
+  'commander/**/*.js': ['npm run lint --workspace=@astral/commander'],
 
-  'PRTitleLinter/**/*.{js}': ['npm run lint --workspace=@astral/PRTitleLinter'],
+  'PRTitleLinter/**/*.js': ['npm run lint --workspace=@astral/PRTitleLinter'],
 };
