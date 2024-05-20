@@ -40,8 +40,8 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN_TEST }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
 
-      - name: Commit changelog
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: Add changelog
-          branch: main-changelog
+          branch: main
+          commit-message: 'Adding a new changelog file'
