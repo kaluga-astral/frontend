@@ -19,9 +19,9 @@ jobs:
         with:
           ref: main
 
-     - name: Get current date (month and date)
-       id: date
-       run: echo "{date}=$(date +'%d.%m')" >> $GITHUB_OUTPUT
+      - name: Get current date (month and date)
+        id: date
+        run: echo "{date}=$(date +'%d.%m')" >> $GITHUB_OUTPUT
 
 
       - name: Install dependencies
