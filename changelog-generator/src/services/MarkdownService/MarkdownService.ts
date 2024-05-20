@@ -47,9 +47,22 @@ export class MarkdownService implements IMarkdownService {
 
   extractUsByType(changelog: string, commitType: CommitType) {
     const startPosition = changelog.indexOf(this.groupHeaders[commitType]) + this.groupHeaders[commitType].length;
-    const endPosition =  changelog.indexOf('---', startPosition);
+    
+    let endPosition = changelog.indexOf('---', startPosition);
+    endPosition = Object.is(endPosition, -1) ? changelog.length : endPosition;
     
     return changelog.substring(startPosition, endPosition).trim().split('\n');
+  }
+
+  extractLastVersion(changelog: string) {
+    console.log(changelog);
+    const matchVersion = changelog.match(/v\d+.\d+.\d+/);
+
+    if (matchVersion) {
+      return matchVersion[0];
+    }
+  
+    return '';  
   }
 
   private generateChangelogHeader(lastVersion: string, startDate: string | Date, endDate: string | Date) {

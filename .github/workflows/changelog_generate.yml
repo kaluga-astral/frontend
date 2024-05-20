@@ -1,0 +1,44 @@
+name: Changelog generate
+
+on: workflow_dispatch
+  # schedule:
+  #   - cron: '*/10 * * * *'
+
+env:
+  HOLIDAYS: '["31.12", "01.01", "02.01", "03.01", "04.01", "05.01", "06.01", "07.01", "08.01", "23.02", "08.03"]'
+
+jobs:
+  changelog-generate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./changelog-generator
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+     - name: Get current date (month and date)
+       id: date
+       run: echo "{date}=$(date +'%d.%m')" >> $GITHUB_OUTPUT
+
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Create changelog file
+       if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
+        run: npm run changelog-generate
+        env:
+          JIRA_URL: ${{ secrets.JIRA_URL }}
+          STORYBOOK_URL: ${{ secrets.STORYBOOK_URL }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN_TEST }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_TEST }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: add-changelog
+          commit-message: Adding a new changelog file
+          title: Adding a new changelog file
