@@ -10,4 +10,18 @@ export class FileService {
       }
     });
   }
+
+  static readFile(filePath: string): string {
+    if (!fs.existsSync(filePath)) {
+      throw Error(`Файл не найден: ${filePath}`);
+    }
+
+    try {
+      const content = fs.readFileSync(filePath);
+
+      return content.toString();
+    } catch (error) {
+      throw Error(`Ошибка при чтении файла: ${error}`);
+    }
+  }
 }
