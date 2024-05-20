@@ -59,6 +59,8 @@ export function ActionCell<T>({
     event.stopPropagation();
   };
 
+  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
+
   return (
     <Wrapper onClick={handleWrapperClick}>
       {main.map((action) => {
@@ -71,11 +73,13 @@ export function ActionCell<T>({
           />
         );
       })}
-      <SecondaryActions
-        actions={secondary}
-        tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
-        onActionClick={handleActionClick}
-      />
+      {isSecondaryActionsAvailable && (
+        <SecondaryActions
+          actions={secondary}
+          tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
+          onActionClick={handleActionClick}
+        />
+      )}
     </Wrapper>
   );
 }
