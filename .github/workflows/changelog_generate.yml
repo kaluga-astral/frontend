@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
 
       - name: Get current date (month and date)
         id: date
@@ -26,11 +27,6 @@ jobs:
 
       - name: Install dependencies
         run: npm i
-
-      - name: Last commit
-        shell: bash
-        run: |
-            git log
 
       - name: Create changelog file
         if: ${{ ! contains(fromJson(env.HOLIDAYS), steps.date.outputs.date) }}
