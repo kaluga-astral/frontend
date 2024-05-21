@@ -18,9 +18,9 @@ buildTs({
     },
     './next': {
       // Секция для компонентов, для которых необходим react >= 18 версии
-      vitest: './node/server/next.js',
-      module: './server/next.js',
-      require: './node/server/next.js',
+      vitest: './node/next.js',
+      module: './next.js',
+      require: './node/next.js',
     },
   },
 });
