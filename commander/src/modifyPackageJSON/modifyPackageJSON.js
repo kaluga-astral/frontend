@@ -12,7 +12,7 @@ const updateDepsVersions = (packageDeps, rootPackageVersion) =>
       return newPackageDeps;
     }
 
-    return { ...newPackageDeps, [packageName]: `^${rootPackageVersion}` };
+    return { ...newPackageDeps, [packageName]: `${rootPackageVersion}` };
   }, packageDeps);
 
 const updatePackagesVersions = (packageJSONPath, rootPackageVersion) => {
