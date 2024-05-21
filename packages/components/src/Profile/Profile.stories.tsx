@@ -1,4 +1,4 @@
-import { type ComponentMeta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 import {
   CompanyOutlineMd,
@@ -18,7 +18,7 @@ import { Profile } from './Profile';
 export default {
   title: 'Components/Profile',
   component: Profile,
-} as ComponentMeta<typeof Profile>;
+} as Meta<typeof Profile>;
 
 export const Showcase = () => {
   return (
