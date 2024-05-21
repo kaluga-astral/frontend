@@ -66,24 +66,28 @@ const Template: Story = ({
   };
 
   return (
-    <Root>
-      <Box sx={{ textAlign: 'center', pt: 1 }}>
-        <Button onClick={handleToggle(true)}>Open</Button>
-      </Box>
+    <>
+      <h2 style={{ color: 'red' }}>Этот компонент устарел!</h2>
 
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isOpen}
-        onClose={handleToggle(false)}
-        onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
-        drawerBleedingTitle={drawerBleedingTitle}
-        isMountedOnHide={isMountedOnHide}
-        drawerBleedingHeight={drawerBleedingHeight}
-      >
-        {renderRows(1)}
-      </SwipeableDrawer>
-    </Root>
+      <Root>
+        <Box sx={{ textAlign: 'center', pt: 1 }}>
+          <Button onClick={handleToggle(true)}>Open</Button>
+        </Box>
+
+        <SwipeableDrawer
+          anchor="bottom"
+          open={isOpen}
+          onClose={handleToggle(false)}
+          onOpen={handleToggle(true)}
+          disableSwipeToOpen={false}
+          drawerBleedingTitle={drawerBleedingTitle}
+          isMountedOnHide={isMountedOnHide}
+          drawerBleedingHeight={drawerBleedingHeight}
+        >
+          {renderRows(1)}
+        </SwipeableDrawer>
+      </Root>
+    </>
   );
 };
 
