@@ -73,7 +73,6 @@ module.exports = {
 }
 
 // Сторибук использует абсолютные пути в моно репозиториях
-// Функция автоматически сгенерена при миграции до 8 версии
 function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
 }
