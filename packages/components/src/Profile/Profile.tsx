@@ -1,4 +1,4 @@
-import { type PropsWithChildren, forwardRef } from 'react';
+import { type PropsWithChildren, forwardRef, useRef } from 'react';
 import {
   type AvatarProps,
   ClickAwayListener,
@@ -11,6 +11,7 @@ import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
 
 import {
+  MenuContainer,
   ProfileAnnotation,
   ProfileAvatar,
   ProfileCredentials,
@@ -45,15 +46,12 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { displayName, annotation, avatar = {}, menu: Menu } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
+    const menuContainerRef = useRef<HTMLDivElement>(null);
     const { isMobile } = useViewportType();
 
     return (
       <>
-        <ClickAwayListener
-          css={{ background: 'red' }}
-          ref={ref}
-          onClickAway={handleCloseMenu}
-        >
+        <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             {isMobile ? (
               <ProfileAvatar {...avatar} />
@@ -69,25 +67,28 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             {!isMobile && <Chevron isActive={open} />}
           </ProfileRoot>
         </ClickAwayListener>
-        <Menu
-          open={open}
-          anchorEl={anchorRef.current}
-          onClose={handleCloseMenu}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          PaperProps={{
-            style: {
-              maxWidth: 300,
-              minWidth: 200,
-            },
-          }}
-        />
+        <MenuContainer ref={menuContainerRef}>
+          <Menu
+            open={open}
+            anchorEl={anchorRef.current}
+            onClose={handleCloseMenu}
+            container={menuContainerRef.current}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            PaperProps={{
+              style: {
+                maxWidth: 300,
+                minWidth: 200,
+              },
+            }}
+          />
+        </MenuContainer>
       </>
     );
   },

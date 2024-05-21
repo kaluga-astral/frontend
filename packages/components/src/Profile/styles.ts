@@ -1,8 +1,11 @@
+import { menuItemClasses } from '@mui/material';
+
 import { Avatar, type AvatarProps } from '../Avatar';
 import { Button } from '../Button';
 import { styled } from '../styles';
 
 export const ProfileRoot = styled(Button)`
+  overflow: hidden;
   display: flex;
   align-items: center;
 
@@ -18,14 +21,12 @@ export const ProfileUser = styled.div`
   gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
 
-  width: 100%;
   min-width: 100px;
 `;
 
 export const ProfileCredentials = styled.div`
   display: block;
 
-  width: 100%;
   min-width: 50px;
 `;
 
@@ -52,5 +53,18 @@ export const ProfileAvatar = styled(Avatar)<AvatarProps>`
   ${({ theme }) => theme.breakpoints.down('sm')} {
     width: 32px;
     height: 32px;
+  }
+`;
+
+export const MenuContainer = styled.div`
+  .${menuItemClasses.gutters} {
+    padding-right: ${({ theme }) => theme.spacing(2)};
+    padding-left: ${({ theme }) => theme.spacing(2)};
+  }
+
+  span {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
   }
 `;

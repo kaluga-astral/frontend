@@ -138,15 +138,15 @@ export const Showcase = () => {
   );
 };
 
-export const LongName = () => {
+export const TotalOverflow = () => {
   return (
     <Stack gap={4}>
       <Box>
         <Profile
-          displayName="Константинопольский Конституционный Константин"
+          displayName="Константинопольский Конституционный Констебль"
           annotation="vitatiy_grig@mail.ru"
           avatar={{
-            alt: 'Константинопольский Константин',
+            alt: 'Константинопольский Конституционный Констебль',
             children: 'КК',
           }}
           menu={(props) => (
@@ -161,7 +161,9 @@ export const LongName = () => {
                 <ListItemIcon>
                   <CompanyOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мои организации</ListItemText>
+                <ListItemText>
+                  Мои организации с излишним количеством текста
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
