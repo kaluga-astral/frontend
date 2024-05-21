@@ -73,6 +73,7 @@ module.exports = {
 }
 
 // Сторибук использует абсолютные пути в моно репозиториях
+// https://github.com/storybookjs/storybook/discussions/24687
 function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
 }
