@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Paper, useMediaQuery, useTheme } from '@mui/material';
 
 import { Typography } from '../Typography';
@@ -16,7 +16,7 @@ export default {
   component: Switch,
 };
 
-export const SwitchShowcase: Story = () => {
+export const SwitchShowcase: StoryFn = () => {
   const theme = useTheme();
 
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -157,7 +157,7 @@ export const SwitchShowcase: Story = () => {
 
 SwitchShowcase.parameters = { options: { showPanel: false } };
 
-const Template: Story = (args) => <Switch {...args} />;
+const Template: StoryFn = (args) => <Switch {...args} />;
 
 export const SwitchStory = Template.bind({});
 

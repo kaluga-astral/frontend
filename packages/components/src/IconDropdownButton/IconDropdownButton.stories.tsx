@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { DotsVOutlineMd, EditOutlineMd } from '@astral/icons';
 
@@ -98,7 +98,7 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const IconDropdownButtonShowcase: Story = () => {
+export const IconDropdownButtonShowcase: StoryFn = () => {
   return (
     <ExampleTemplate>
       <Typography variant="h3" paragraph>
@@ -223,7 +223,7 @@ export const IconDropdownButtonShowcase: Story = () => {
   );
 };
 
-const Template: Story = (args) => (
+const Template: StoryFn = (args) => (
   <IconDropdownButton icon={<DotsVOutlineMd />} {...args} aria-label="Меню" />
 );
 
