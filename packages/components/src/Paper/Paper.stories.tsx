@@ -1,5 +1,5 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryFn } from '@storybook/react';
 import {
   BinOutlineMd,
   CaseOutlineMd,
@@ -27,12 +27,14 @@ import { Divider } from '../Divider';
 
 import { Paper } from './Paper';
 
-export default {
+const meta: Meta<typeof Paper> = {
   title: 'Components/Paper',
   component: Paper,
 };
 
-export const PaperHeader = styled(Paper)`
+export default meta;
+
+const PaperHeader = styled(Paper)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,7 +42,7 @@ export const PaperHeader = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2, 3)};
 `;
 
-export const PaperExampleStory = styled(Paper)`
+const PaperExampleStory = styled(Paper)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +52,7 @@ export const PaperExampleStory = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2, 3)};
 `;
 
-export const IndentWrapper = styled.div`
+const IndentWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(0, 8)};
 
   & > :nth-child(odd) {
@@ -62,7 +64,7 @@ export const IndentWrapper = styled.div`
   }
 `;
 
-export const PaperMenu = styled(Paper)`
+const PaperMenu = styled(Paper)`
   width: 200px;
   padding: ${({ theme }) => theme.spacing(1, 0)};
 `;
@@ -251,28 +253,3 @@ export const PaperShowcase: StoryFn = () => {
 };
 
 PaperShowcase.parameters = { options: { showPanel: false } };
-
-const Template: StoryFn = (args) => <PaperExampleStory {...args} />;
-
-export const PaperStory = Template.bind({});
-
-PaperStory.storyName = 'Default';
-
-PaperStory.args = {
-  elevation: 1,
-  children: 'Elevation',
-};
-
-PaperStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-  backgrounds: {
-    default: 'grey',
-    values: [
-      {
-        name: 'grey',
-        value: '#eee',
-      },
-    ],
-  },
-};
