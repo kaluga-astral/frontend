@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -54,7 +54,7 @@ export default {
   component: SwipeableDrawer,
 };
 
-const Template: Story = ({
+const Template: StoryFn = ({
   drawerBleedingTitle,
   isMountedOnHide,
   drawerBleedingHeight,
@@ -102,7 +102,7 @@ SwipeableDrawerStory.parameters = {
   controls: { expanded: true },
 };
 
-export const SwipeableDrawerShowcase: Story = () => {
+export const SwipeableDrawerShowcase: StoryFn = () => {
   const [isOpenSmall, setIsOpenSmall] = useState(false);
   const [isOpenBig, setIsOpenBig] = useState(false);
 

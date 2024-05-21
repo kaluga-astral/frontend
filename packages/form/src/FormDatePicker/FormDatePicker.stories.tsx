@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -19,7 +19,7 @@ const validationSchema = object<FormValues>({
   dateField: date(),
 });
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });

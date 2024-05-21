@@ -1,5 +1,5 @@
 import { FormControlLabel, Switch } from '@astral/ui';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import {
@@ -14,7 +14,7 @@ export default {
   component: null,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const workspaceSetupService = createWorkspaceSetupService();
   const [workspaceSetupInfo, setWorkspaceSetupInfo] = useState(

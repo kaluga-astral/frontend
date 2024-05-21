@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Box, Popper } from '@mui/material';
 import { useRef, useState } from 'react';
 
@@ -13,7 +13,7 @@ export default {
   title: 'Components/ClickAwayListener',
 };
 
-const Template: Story<{}> = () => {
+const Template: StoryFn<{}> = () => {
   const [isActive, setActive] = useState(false);
 
   const ref = useRef(null);

@@ -1,6 +1,6 @@
 import { InfoFillSm } from '@astral/icons';
 import { Avatar } from '@mui/material';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -14,7 +14,7 @@ export default {
   component: ListItemAvatar,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
       <ListItem>

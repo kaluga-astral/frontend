@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { type ComponentMeta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
@@ -9,7 +9,7 @@ import { Product } from './Product';
 export default {
   title: 'Components/Product',
   component: Product,
-} as ComponentMeta<typeof Product>;
+} as Meta<typeof Product>;
 
 const AdaptedLink = forwardRef<HTMLAnchorElement>((props, ref) => {
   // eslint-disable-next-line react/jsx-props-no-spreading

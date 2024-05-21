@@ -6,7 +6,7 @@ import {
   Switch,
   Typography,
 } from '@astral/ui';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { CryptoProCertAutocomplete } from '..';
@@ -19,7 +19,7 @@ export default {
   component: null,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [cryptoProStore] = useState(new CryptoProStore());
