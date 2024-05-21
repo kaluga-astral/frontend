@@ -27,3 +27,30 @@ const CardWrapper = styled.article`
 - отступы (```theme.spacing```)
 - размеры шрифтов (```theme.typography```)
 - цвета (```theme.palette```)
+
+## Пропсы для стилей
+Если вашему компоненту стилей нужны пропсы, которые не должны передаваться дальше, то есть 2 подхода:
+
+### Ручная проверка с использованием shouldForwardProp
+
+```ts
+import { styled } from '@astral/ui';
+
+const Element = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})<{ isActive: boolean }>`
+  background-color: ${({ theme, isActive }) =>
+    isActive ? theme.palette.primary.main : theme.palette.background.default};
+`;
+```
+
+### Именование пропсов с префиксом `$`
+
+```ts
+import { styled } from '@astral/ui';
+
+const Element = styled('div')<{ $isActive: boolean }>`
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.palette.primary.main : theme.palette.background.default};
+`;
+```
