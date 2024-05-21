@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { Tag } from '../Tag';
 
@@ -10,7 +10,7 @@ export default {
   component: TagBadge,
 };
 
-const Template: Story = (args) => <TagBadge {...args} />;
+const Template: StoryFn = (args) => <TagBadge {...args} />;
 
 const baseProps = {
   label: 'Тэг',
@@ -19,7 +19,7 @@ const baseProps = {
   ),
 };
 
-export const ShowcaseColor: Story = () => (
+export const ShowcaseColor: StoryFn = () => (
   <Stack direction="column" gap={2}>
     <Stack direction="row" gap={2}>
       <Tag color="warning" variant="contained" {...baseProps} />

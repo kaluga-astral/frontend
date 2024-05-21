@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -10,7 +10,7 @@ export default {
   component: ListItemText,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <List>
       <ListItem>

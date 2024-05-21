@@ -1,5 +1,5 @@
 import { type MouseEvent, useCallback, useMemo, useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { Button } from '../Button';
 import { ListItemIcon } from '../ListItemIcon';
@@ -239,7 +239,7 @@ export const Ap2Icon = () => (
   </svg>
 );
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 
