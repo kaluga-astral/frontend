@@ -197,5 +197,7 @@ export const CloseButton = styled(Button)`
   margin-bottom: ${({ theme }) => theme.spacing(3)};
   margin-left: ${({ theme }) => theme.spacing(4)};
 
+  box-shadow: ${({ theme }) => theme.elevation[300]};
+
   animation: ${fade} 500ms linear;
 `;

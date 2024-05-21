@@ -5,7 +5,7 @@ import {
   SendOutlineMd,
 } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { type ChangeEvent, Fragment, useState } from 'react';
 
 import { ActionCell, type Actions } from '../ActionCell';
@@ -181,7 +181,7 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const Showcase: Story = () => {
+export const Showcase: StoryFn = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));

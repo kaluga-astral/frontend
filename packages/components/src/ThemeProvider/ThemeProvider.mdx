@@ -1,21 +1,19 @@
-import { Meta, ArgsTable } from '@storybook/blocks';
+import { Meta, ArgTypes } from '@storybook/blocks';
+import { ThemeProvider } from './ThemeProvider';
+import ThemeProviderMeta from './ThemeProvider.stories';
 
-<Meta title="Components/Theme/ThemeProvider" />
+<Meta title="Components/Theme/ThemeProvider" of={ThemeProviderMeta} />
 
 # ThemeProvider
 
 Предназначен для синхронизации [темы](/story/components-theme-theme--docs) между всеми компонентами ui-kit.
 
-Приложение должно быть обернуто в ```ThemeProvider``` для корректной работы.
+Приложение должно быть обернуто в `ThemeProvider` для корректной работы.
 
 ## Example
 
 ```tsx
-import {
-  Brand,
-  createTheme,
-  styled
-} from '@astral/ui';
+import { Brand, createTheme, styled } from '@astral/ui';
 
 import UbuntuBoldWoff from '@astral/ui/fonts/UbuntuBold.woff';
 import UbuntuBoldWoff2 from '@astral/ui/fonts/UbuntuBold.woff2';
@@ -59,7 +57,8 @@ const App = () => (
 ```
 
 ## useTheme
-Для доступа к ```theme``` внутри компонента можно использовать ```useTheme```.
+
+Для доступа к `theme` внутри компонента можно использовать `useTheme`.
 
 ```tsx
 import { useTheme } from '@astral/ui';
@@ -77,4 +76,4 @@ const Card = () => {
 
 # API
 
-<ArgsTable />
+<ArgTypes />

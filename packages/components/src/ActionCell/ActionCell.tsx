@@ -33,15 +33,19 @@ export type ActionsCellProps<T> = {
    */
   row: T;
   /**
-   * Позиция тултипа
+   * @deprecated Положение тултипа инкапсулировано внутри ActionCell
    */
   tooltipPlacement?: TooltipProps['placement'];
+};
+
+const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
+  mainAction: 'top',
+  secondaryAction: 'left',
 };
 
 export function ActionCell<T>({
   actions: { main = [], secondary = [] },
   row,
-  tooltipPlacement,
 }: ActionsCellProps<T>) {
   const handleActionClick = useCallback(
     (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
@@ -55,23 +59,27 @@ export function ActionCell<T>({
     event.stopPropagation();
   };
 
+  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
+
   return (
     <Wrapper onClick={handleWrapperClick}>
       {main.map((action) => {
         return (
           <MainAction
             key={action.name}
-            tooltipPlacement={tooltipPlacement}
+            tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
           />
         );
       })}
-      <SecondaryActions
-        actions={secondary}
-        tooltipPlacement={tooltipPlacement}
-        onActionClick={handleActionClick}
-      />
+      {isSecondaryActionsAvailable && (
+        <SecondaryActions
+          actions={secondary}
+          tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
+          onActionClick={handleActionClick}
+        />
+      )}
     </Wrapper>
   );
 }

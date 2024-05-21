@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -13,7 +13,7 @@ export default {
   component: ListSubheader,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
       <ListItem>

@@ -1,4 +1,4 @@
-import { Title, Subtitle, Description, ArgsTable, Stories } from '@storybook/blocks';
+import { Title, Description, ArgTypes, Stories } from '@storybook/blocks';
 /* Временно используется prettier v2, т.к. в более новых версиях prettier метод format асинхронный,
 * а transformSource в storybook не поддерживает асинхронные методы*/
 import prettier from 'prettier2/standalone';
@@ -30,6 +30,7 @@ export default {
       </ThemeProvider>
     )
   ],
+
   globalTypes: {
     theme: {
       name: 'Theme',
@@ -42,6 +43,7 @@ export default {
       }
     }
   },
+
   parameters: {
     docs: {
       // единый шаблон для генерации mdx
@@ -51,7 +53,7 @@ export default {
           <Description />
           <Stories />
           <Title>API</Title>
-          <ArgsTable />
+          <ArgTypes />
         </>
       ),
       // storybook по-дефолту криво отображает код в source блоках. Здесь вручную подключается prettier для форматирования кода
@@ -61,6 +63,8 @@ export default {
           plugins: [prettierTs],
         }),
     },
-  }
+  },
+
+  tags: ['autodocs']
 };
 

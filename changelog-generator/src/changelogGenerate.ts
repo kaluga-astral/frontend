@@ -1,14 +1,13 @@
 import path from 'path';
 
-import { CHANGELOG_DIR_PATH, PERIOD_IN_DAYS, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from './config';
+import { CHANGELOG_DIR_PATH, PERIOD_IN_DAYS } from './config';
 import {
   dateToView,
-  generateLinkToChangelog,
   generateLinkToJira,
   generateLinkToStorybook,
   subtractDays,
 } from './utils';
-import { GitService, FileService, MarkdownService, TelegramService } from './services';
+import { GitService, FileService, MarkdownService } from './services';
 import { COMMIT_TYPE, GROUP_HEADERS } from './constants';
 import type { FilteredCommit } from './types';
 
@@ -59,18 +58,3 @@ const markdownMarkup = markdownService.getMarkup(
 const fileName = `${dateToView(startDate)} - ${dateToView(endDate)}.md`;
 
 FileService.writeFile(path.resolve(CHANGELOG_DIR_PATH, fileName), markdownMarkup);
-
-const telegramService = new TelegramService(TELEGRAM_TOKEN as string, TELEGRAM_CHAT_ID as string, generateLinkToChangelog);
-
-const featuresList = markdownService.extractUsByType(markdownMarkup, COMMIT_TYPE.Feat);
-// Выводим до 5 us из раздела Features
-const changelogFeatures = featuresList.slice(0, 5).join('\n');
-
-const message = telegramService.generateMessage({ startDate, endDate, lastVersion, fileName, changelogFeatures });
-
-telegramService.sendMessage(message)
-  .then(() => console.log('Сообщение успешно отправлено в Telegram-канал'))
-  .catch((error) => {
-    console.error('Ошибка при отправки сообщения в Telegram-канал: ', error);
-    process.exit(1);
-  });
