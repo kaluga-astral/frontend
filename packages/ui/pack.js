@@ -20,6 +20,12 @@ buildTs({
       module: './server/index.js',
       require: './node/server/index.js',
     },
+    './next': {
+      // Секция для компонентов, для которых необходим react >= 18 версии
+      vitest: './node/server/next.js',
+      module: './server/next.js',
+      require: './node/server/next.js',
+    },
     './fonts/*': './fonts/*',
     './illustrations/*': './illustrations/*',
   },
