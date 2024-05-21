@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { ListItemButton } from '../ListItemButton';
 import { ListItemText } from '../ListItemText';
@@ -12,7 +12,7 @@ export default {
   component: Divider,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <List>
       <ListItem>

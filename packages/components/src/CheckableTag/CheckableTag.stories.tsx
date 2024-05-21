@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { type ChangeEvent, useState } from 'react';
 
 import { TagBadge, type TagBadgeProps } from '../TagBadge';
@@ -11,9 +11,9 @@ export default {
   component: CheckableTag,
 };
 
-const Template: Story = (args) => <CheckableTag {...args} />;
+const Template: StoryFn = (args) => <CheckableTag {...args} />;
 
-export const ShowcaseColor: Story = () => {
+export const ShowcaseColor: StoryFn = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = (event: ChangeEvent<HTMLInputElement>) =>

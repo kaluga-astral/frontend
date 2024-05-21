@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { LegacyGrid } from '@astral/components';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
@@ -20,7 +20,7 @@ const validationSchema = object<FormValues>({
   name: string(),
 });
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });

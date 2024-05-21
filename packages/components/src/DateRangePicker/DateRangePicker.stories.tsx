@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -18,7 +18,7 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: Story<DateRangePickerProps> = (args) => {
+const Template: StoryFn<DateRangePickerProps> = (args) => {
   const [dateA, setDateA] = useState<Date | undefined>(
     args.startDateProps?.value,
   );
@@ -39,7 +39,7 @@ const Template: Story<DateRangePickerProps> = (args) => {
   );
 };
 
-export const Showcase: Story = () => (
+export const Showcase: StoryFn = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template />
     <Template

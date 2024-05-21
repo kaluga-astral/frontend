@@ -1,5 +1,5 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { type CellValue, DataGrid, type DataGridColumns } from '../DataGrid';
 
@@ -76,7 +76,7 @@ const data = [
   },
 ];
 
-const Template: Story = (args) => {
+const Template: StoryFn = (args) => {
   const columns: DataGridColumns<ColumnsType>[] = [
     {
       field: 'documentName',
@@ -104,7 +104,7 @@ const Template: Story = (args) => {
   );
 };
 
-export const OnlyMainActions: Story = (args) => {
+export const OnlyMainActions: StoryFn = (args) => {
   const columns: DataGridColumns<ColumnsType>[] = [
     {
       field: 'documentName',

@@ -38,6 +38,9 @@ export type SwipeableDrawerProps = {
   drawerBleedingHeight?: number;
 } & WithoutEmotionSpecific<MuiSwipeableDrawerProps>;
 
+/**
+  @deprecated
+ */
 export const SwipeableDrawer = ({
   drawerBleedingTitle,
   isMountedOnHide = false,

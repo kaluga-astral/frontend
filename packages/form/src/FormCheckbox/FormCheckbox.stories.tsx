@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useEffect } from 'react';
 import { boolean, object, optional } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
@@ -42,7 +42,7 @@ const validationSchema2 = object<Form2Values>({
   fieldName4: boolean(),
 });
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const form1 = useForm<Form1Values>({
     mode: 'onChange',
     defaultValues: {

@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -12,7 +12,7 @@ export default {
   component: ListItemIcon,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <List>
       <ListItem selected={0 === 0}>

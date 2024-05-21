@@ -1,5 +1,5 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import {
   BinOutlineMd,
   CaseOutlineMd,
@@ -67,7 +67,7 @@ export const PaperMenu = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(1, 0)};
 `;
 
-export const PaperShowcase: Story = () => {
+export const PaperShowcase: StoryFn = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('lg'));
   const autoFlow = matches ? 'row' : 'column';
@@ -252,7 +252,7 @@ export const PaperShowcase: Story = () => {
 
 PaperShowcase.parameters = { options: { showPanel: false } };
 
-const Template: Story = (args) => <PaperExampleStory {...args} />;
+const Template: StoryFn = (args) => <PaperExampleStory {...args} />;
 
 export const PaperStory = Template.bind({});
 

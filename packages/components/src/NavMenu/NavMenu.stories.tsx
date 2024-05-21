@@ -1,4 +1,4 @@
-import { type ComponentMeta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { CompanyOutlineMd, ProfileOutlineMd } from '@astral/icons';
 
 import { NavMenu } from './NavMenu';
@@ -6,7 +6,7 @@ import { NavMenu } from './NavMenu';
 export default {
   title: 'Components/NavMenu',
   component: NavMenu,
-} as ComponentMeta<typeof NavMenu>;
+} as Meta<typeof NavMenu>;
 
 export const Default = () => {
   return (
