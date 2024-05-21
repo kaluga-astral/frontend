@@ -17,7 +17,7 @@
     "@astral/ui": "*",
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.0",
-    "@astral/cryptopro-cades": "^1.5.1"
+    "@astral/cryptopro-cades": "1.5.1"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
