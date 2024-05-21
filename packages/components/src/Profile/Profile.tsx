@@ -49,7 +49,11 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
 
     return (
       <>
-        <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
+        <ClickAwayListener
+          css={{ background: 'red' }}
+          ref={ref}
+          onClickAway={handleCloseMenu}
+        >
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             {isMobile ? (
               <ProfileAvatar {...avatar} />
@@ -69,9 +73,18 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           open={open}
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
           PaperProps={{
             style: {
-              width: anchorRef.current?.clientWidth ?? 'auto',
+              maxWidth: 300,
+              minWidth: 200,
             },
           }}
         />

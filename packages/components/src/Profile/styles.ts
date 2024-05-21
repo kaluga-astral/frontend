@@ -6,6 +6,7 @@ export const ProfileRoot = styled(Button)`
   display: flex;
   align-items: center;
 
+  max-width: 300px;
   height: auto;
   padding: ${({ theme }) => theme.spacing(0.5, 0.5, 0.5, 2)};
 
@@ -16,18 +17,27 @@ export const ProfileUser = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
+
+  width: 100%;
+  min-width: 100px;
 `;
 
 export const ProfileCredentials = styled.div`
   display: block;
+
+  width: 100%;
+  min-width: 50px;
 `;
 
 export const ProfileDisplayName = styled.span`
+  overflow: hidden;
   display: block;
 
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   line-height: ${({ theme }) => theme.typography.pxToRem(14)};
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ProfileAnnotation = styled.span`

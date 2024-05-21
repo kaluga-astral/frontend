@@ -137,3 +137,49 @@ export const Showcase = () => {
     </Stack>
   );
 };
+
+export const LongName = () => {
+  return (
+    <Stack gap={4}>
+      <Box>
+        <Profile
+          displayName="Константинопольский Конституционный Константин"
+          annotation="vitatiy_grig@mail.ru"
+          avatar={{
+            alt: 'Константинопольский Константин',
+            children: 'КК',
+          }}
+          menu={(props) => (
+            <Menu {...props}>
+              <MenuItem>
+                <ListItemIcon>
+                  <ProfileOutlineMd />
+                </ListItemIcon>
+                <ListItemText>Мой профиль</ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon>
+                  <CompanyOutlineMd />
+                </ListItemIcon>
+                <ListItemText>Мои организации</ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon>
+                  <SettingsFillMd />
+                </ListItemIcon>
+                <ListItemText>Настройки</ListItemText>
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <ListItemIcon>
+                  <QuitOutlineMd />
+                </ListItemIcon>
+                <ListItemText>Выйти</ListItemText>
+              </MenuItem>
+            </Menu>
+          )}
+        />
+      </Box>
+    </Stack>
+  );
+};
