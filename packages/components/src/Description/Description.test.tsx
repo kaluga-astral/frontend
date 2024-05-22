@@ -89,7 +89,7 @@ describe('Description', () => {
   it('Значение копируется в буфер обмена при клике на текст, если canCopy=true', async () => {
     const valueText = 'get_rekt';
 
-    const writeTextSpy = vi.fn();
+    const writeTextSpy = vi.fn(() => Promise.resolve());
 
     Object.assign(navigator, {
       clipboard: {
