@@ -5,7 +5,7 @@ export type FormatPhoneOptions = {
 /**
  * Форматирование номера телефона по маске
  * @param phone - строка номера телефона без маски
- * @param {options} isStartWithPlus - начинать с +7 или с 8
+ * @param {options} isStartWithPlus - номер телефона будет начинаться с +7
  */
 export const formatPhoneToView = (
   phone?: string,
