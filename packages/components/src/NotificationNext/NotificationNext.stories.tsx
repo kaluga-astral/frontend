@@ -19,6 +19,7 @@ import { NotificationTemplateNext } from './NotificationTemplateNext';
 /**
  * ### Компонент для организации уведомлений
  * В отличии от компонента Notification основан на react-toastify 10 версии. Предназначен для использования на проектах с версией React >= 18
+ * Импорт компонента осуществляется из @astral/components/next или @astral/ui/next
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=10626%3A132675&t=0Rur6xF3mW3knhlm-1)
  * ### [Guide]()
