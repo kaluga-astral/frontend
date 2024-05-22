@@ -13,7 +13,7 @@
   "typesVersions": {
     "*": {
       "next": [
-        "src/next/index.ts"
+        "src/next.ts"
       ],
       "server": [
         "src/server/index.ts"

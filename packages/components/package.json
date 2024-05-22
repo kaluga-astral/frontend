@@ -14,7 +14,7 @@
         "src/server/index.ts"
       ],
       "next": [
-        "src/next/index.ts"
+        "src/next.ts"
       ],
       "declaration/emotion": [
         "src/declaration/emotion.d.ts"
