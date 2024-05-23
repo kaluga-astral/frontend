@@ -69,7 +69,7 @@ feat(UIKIT-123,Button): Добавлен props color
 feat(UIKIT-123, Button): Добавлен props color
 ```
 
-#### Для изменений в icons и fonts необходимо указывыать scope
+#### Для изменений в icons и fonts необходимо указывать scope
 
 ##### Valid
 ```
