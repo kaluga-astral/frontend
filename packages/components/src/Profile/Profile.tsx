@@ -12,7 +12,6 @@ import { type WithoutEmotionSpecific } from '../types';
 import { OverflowTypography } from '../OverflowTypography';
 
 import {
-  MenuContainer,
   ProfileAnnotation,
   ProfileAvatar,
   ProfileDisplayName,
@@ -67,28 +66,26 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             {!isMobile && <Chevron isActive={open} />}
           </ProfileRoot>
         </ClickAwayListener>
-        <MenuContainer ref={menuContainerRef}>
-          <Menu
-            open={open}
-            anchorEl={anchorRef.current}
-            onClose={handleCloseMenu}
-            container={menuContainerRef.current}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            PaperProps={{
-              style: {
-                maxWidth: 300,
-                minWidth: 200,
-              },
-            }}
-          />
-        </MenuContainer>
+        <Menu
+          open={open}
+          anchorEl={anchorRef.current}
+          onClose={handleCloseMenu}
+          container={menuContainerRef.current}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          PaperProps={{
+            style: {
+              maxWidth: 300,
+              minWidth: 200,
+            },
+          }}
+        />
       </>
     );
   },

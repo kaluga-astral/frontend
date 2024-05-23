@@ -51,11 +51,3 @@ export const ProfileAvatar = styled(Avatar)<AvatarProps>`
     height: 32px;
   }
 `;
-
-export const MenuContainer = styled.div`
-  span {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-  }
-`;

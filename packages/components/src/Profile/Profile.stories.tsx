@@ -8,10 +8,11 @@ import {
 } from '@astral/icons';
 
 import { ListItemIcon } from '../ListItemIcon';
-import { ListItemText } from '../ListItemText';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
+import { ListItemText } from '../ListItemText';
+import { OverflowTypography } from '../OverflowTypography';
 
 import { Profile } from './Profile';
 
@@ -37,26 +38,36 @@ export const Showcase = () => {
                 <ListItemIcon>
                   <ProfileOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <CompanyOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мои организации</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>
+                    Мои организации
+                  </OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <SettingsFillMd />
                 </ListItemIcon>
-                <ListItemText>Настройки</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Настройки</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem>
                 <ListItemIcon>
                   <QuitOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Выйти</OverflowTypography>
+                </ListItemText>
               </MenuItem>
             </Menu>
           )}
@@ -75,26 +86,36 @@ export const Showcase = () => {
                 <ListItemIcon>
                   <ProfileOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <CompanyOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мои организации</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>
+                    Мои организации
+                  </OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <SettingsFillMd />
                 </ListItemIcon>
-                <ListItemText>Настройки</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Настройки</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem>
                 <ListItemIcon>
                   <QuitOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Выйти</OverflowTypography>
+                </ListItemText>
               </MenuItem>
             </Menu>
           )}
@@ -109,26 +130,37 @@ export const Showcase = () => {
                 <ListItemIcon>
                   <ProfileOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <CompanyOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мои организации</ListItemText>
+
+                <ListItemText>
+                  <OverflowTypography noWrap>
+                    Мои организации
+                  </OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <SettingsFillMd />
                 </ListItemIcon>
-                <ListItemText>Настройки</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Настройки</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem>
                 <ListItemIcon>
                   <QuitOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Выйти</OverflowTypography>
+                </ListItemText>
               </MenuItem>
             </Menu>
           )}
@@ -155,28 +187,37 @@ export const TotalOverflow = () => {
                 <ListItemIcon>
                   <ProfileOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Мой профиль</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <CompanyOutlineMd />
                 </ListItemIcon>
                 <ListItemText>
-                  Мои организации с излишним количеством текста
+                  <OverflowTypography noWrap>
+                    Мои организации с излишним количеством текста
+                  </OverflowTypography>
                 </ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <SettingsFillMd />
                 </ListItemIcon>
-                <ListItemText>Настройки</ListItemText>
+
+                <ListItemText>
+                  <OverflowTypography noWrap>Настройки</OverflowTypography>
+                </ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem>
                 <ListItemIcon>
                   <QuitOutlineMd />
                 </ListItemIcon>
-                <ListItemText>Выйти</ListItemText>
+                <ListItemText>
+                  <OverflowTypography noWrap>Выйти</OverflowTypography>
+                </ListItemText>
               </MenuItem>
             </Menu>
           )}
