@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { type WidgetProduct } from '@astral/ui';
 
 import { type IdentityProductsWidgetDTO } from '../../types';

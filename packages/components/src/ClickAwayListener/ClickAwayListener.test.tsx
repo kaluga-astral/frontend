@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { describe, vi } from 'vitest';
 
 import { ClickAwayListener } from './ClickAwayListener';
 
