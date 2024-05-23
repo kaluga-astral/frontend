@@ -7,6 +7,8 @@
 -  ```@astral/form```
 -  ```@astral/icons```
 
+```@astral/ui/next``` - компоненты, для работы которых необходим react >= 18 версии
+
 # Table of contents
 - [Storybook](#storybook)
 - [Introduction](#introduction)

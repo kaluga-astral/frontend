@@ -1,6 +1,5 @@
-import { vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { expect } from 'vitest';
 
 import { RadioCard } from './RadioCard';
 

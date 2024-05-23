@@ -1,5 +1,5 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { vi } from 'vitest';
 
 import { LOADING_DISPLAY_DELAY_MS, SESSION_KEY } from './constants';
 import { WelcomeScreen } from './WelcomeScreen';

@@ -5,12 +5,16 @@
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./next": "./next/index.ts",
     "./server": "./src/server/index.ts",
     "./fonts/*": "./fonts/*",
     "./illustrations/*": "./illustrations/*"
   },
   "typesVersions": {
     "*": {
+      "next": [
+        "src/next.ts"
+      ],
       "server": [
         "src/server/index.ts"
       ],

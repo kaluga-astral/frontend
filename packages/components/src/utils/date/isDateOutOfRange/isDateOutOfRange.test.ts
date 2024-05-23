@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { DateCompareDeep, isDateOutOfRange } from './isDateOutOfRange';
 
 describe('isDateOutOfRange', () => {

@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen, waitFor } from '@astral/tests';
-import { describe } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { MenuItem } from '../MenuItem';

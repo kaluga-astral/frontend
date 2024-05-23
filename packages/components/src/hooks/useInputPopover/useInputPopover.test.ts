@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from 'vitest';
 import { type RefObject } from 'react';
 import { act, fireEvent, renderHook, userEvents } from '@astral/tests';
-import { expect, vi } from 'vitest';
 
 import { useInputPopover } from './useInputPopover';
 

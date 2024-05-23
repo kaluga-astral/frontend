@@ -1,5 +1,5 @@
-import { renderWithTheme } from '@astral/tests';
 import { describe, expect, it } from 'vitest';
+import { renderWithTheme } from '@astral/tests';
 import { useEffect, useRef } from 'react';
 
 import { Grid } from './Grid';

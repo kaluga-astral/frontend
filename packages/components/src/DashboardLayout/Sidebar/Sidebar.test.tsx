@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen, waitFor } from '@astral/tests';
-import { expect } from 'vitest';
 
 import { DashboardSidebarProvider } from '../../DashboardSidebarProvider';
 

@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { renderHook, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
 
 import { useEscapeClickEffect } from './useEscapeClickEffect';
 
