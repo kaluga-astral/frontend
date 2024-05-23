@@ -1,5 +1,5 @@
-import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { describe, expect, it } from 'vitest';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { MenuItem } from '../MenuItem';
 

@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { describe, expect, it, vi } from 'vitest';
 
 import { CheckableTag } from './CheckableTag';
 import { type CheckableTagAddon } from './types';

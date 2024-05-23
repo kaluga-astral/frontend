@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen } from '@astral/tests';
-import { expect } from 'vitest';
 
 import { MenuOrganization } from './MenuOrganization';
 import { CURRENT_ORGANIZATION, ORGANIZATIONS } from './MenuOrganizations.stubs';

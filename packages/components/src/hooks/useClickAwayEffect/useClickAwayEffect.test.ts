@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from 'vitest';
 import { type RefObject } from 'react';
 import { renderHook, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
 
 import { useClickAwayEffect } from './useClickAwayEffect';
 

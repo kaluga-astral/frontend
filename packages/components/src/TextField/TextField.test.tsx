@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import {
   fireEvent,
   renderWithTheme,
@@ -5,7 +6,6 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
-import { vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { TextField } from './TextField';
