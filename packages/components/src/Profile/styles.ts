@@ -1,5 +1,3 @@
-import { menuItemClasses } from '@mui/material';
-
 import { Avatar, type AvatarProps } from '../Avatar';
 import { Button } from '../Button';
 import { styled } from '../styles';
@@ -57,11 +55,6 @@ export const ProfileAvatar = styled(Avatar)<AvatarProps>`
 `;
 
 export const MenuContainer = styled.div`
-  .${menuItemClasses.gutters} {
-    padding-right: ${({ theme }) => theme.spacing(2)};
-    padding-left: ${({ theme }) => theme.spacing(2)};
-  }
-
   span {
     overflow: hidden;
 
