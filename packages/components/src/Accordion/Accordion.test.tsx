@@ -1,7 +1,7 @@
+import { describe, expect, it, vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { InfoFillMd } from '@astral/icons';
-import { describe, vi } from 'vitest';
 
 import { Typography } from '../Typography';
 

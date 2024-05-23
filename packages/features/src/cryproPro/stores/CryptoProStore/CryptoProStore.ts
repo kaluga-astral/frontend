@@ -93,11 +93,20 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод получения списка сертификатов
+   * @description Метод получения списка сертификатов.
+   * При повторном вызове возвращает сертификаты из кэша.
    * */
   public getCertificateList = async () => {
     this.certificateList =
       await this.cryptoProCertificateService.getCertificateList();
+  };
+
+  /**
+   * @description Метод получения списка сертификатов. Игнорирует кэш
+   * */
+  public refetchCertificateList = async () => {
+    this.certificateList =
+      await this.cryptoProCertificateService.getCertificateList(true);
   };
 
   /**

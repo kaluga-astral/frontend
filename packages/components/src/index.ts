@@ -162,14 +162,6 @@ export * from './Notification';
 
 export * from './NotificationList';
 
-export {
-  notify as notifyNext,
-  NotificationContainerNext,
-  NotificationStackContainerNext,
-  NOTIFY_POSITIONS,
-  type Notify as NotifyNext,
-} from './NotificationNext';
-
 export * from './OverflowTypography';
 
 export * from './PageAside';

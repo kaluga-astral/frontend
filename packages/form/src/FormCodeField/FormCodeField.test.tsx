@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';

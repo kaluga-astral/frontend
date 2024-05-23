@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { Brand } from '../constants';
 import themeSnapshot from '../../../snapshots/theme.snapshot.json';
 

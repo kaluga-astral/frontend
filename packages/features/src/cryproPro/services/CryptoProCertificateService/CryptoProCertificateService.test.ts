@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { type Certificate } from '@astral/cryptopro-cades';
 
 import { CryptoProCertificateService } from './CryptoProCertificateService';

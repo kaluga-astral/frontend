@@ -8,7 +8,14 @@ import { StyledLink } from './styles';
 
 export type LinkProps = Pick<
   WithoutEmotionSpecific<MuiLinkProps>,
-  'rel' | 'href' | 'className' | 'classes' | 'style' | 'children' | 'key'
+  | 'rel'
+  | 'href'
+  | 'className'
+  | 'classes'
+  | 'style'
+  | 'children'
+  | 'key'
+  | 'target'
 > & {
   /**
    * Добавление иконки
