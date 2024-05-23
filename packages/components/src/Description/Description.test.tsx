@@ -1,5 +1,5 @@
-import { renderWithTheme, screen } from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
+import { renderWithTheme, screen } from '@astral/tests';
 
 import { Description } from './Description';
 import { DEFAULT_SEPARATOR, DEFAULT_SYMBOL } from './constants';

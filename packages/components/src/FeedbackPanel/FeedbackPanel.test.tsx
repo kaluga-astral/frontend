@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
-import { expect, vi } from 'vitest';
 
 import { FeedbackPanel } from './FeedbackPanel';
 

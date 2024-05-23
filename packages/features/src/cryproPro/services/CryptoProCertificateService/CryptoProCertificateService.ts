@@ -26,9 +26,10 @@ export type FormatedCertificate = {
 export class CryptoProCertificateService {
   /**
    * @description Метод получения списка сертификатов
+   * @param resetCache - сбросить кэш и произвести повторный поиск сертификатов
    * */
-  public getCertificateList = () => {
-    return getCertificates(STORE_TYPE.ALL);
+  public getCertificateList = (resetCache?: boolean) => {
+    return getCertificates(STORE_TYPE.ALL, resetCache);
   };
 
   /**

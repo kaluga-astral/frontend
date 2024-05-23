@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen } from '@astral/tests';
 
 import { Paper } from './Paper';
