@@ -23,9 +23,7 @@ export const ProfileUser = styled.div`
 `;
 
 export const ProfileCredentials = styled.div`
-  display: block;
-
-  min-width: 50px;
+  overflow: hidden;
 `;
 
 export const ProfileDisplayName = styled.span`

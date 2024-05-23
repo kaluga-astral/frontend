@@ -9,12 +9,12 @@ import { useMenu } from '../hooks';
 import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
+import { OverflowTypography } from '../OverflowTypography';
 
 import {
   MenuContainer,
   ProfileAnnotation,
   ProfileAvatar,
-  ProfileCredentials,
   ProfileDisplayName,
   ProfileRoot,
   ProfileUser,
@@ -57,10 +57,10 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               <ProfileAvatar {...avatar} />
             ) : (
               <ProfileUser>
-                <ProfileCredentials>
+                <OverflowTypography noWrap>
                   <ProfileDisplayName>{displayName}</ProfileDisplayName>
                   <ProfileAnnotation>{annotation}</ProfileAnnotation>
-                </ProfileCredentials>
+                </OverflowTypography>
                 <ProfileAvatar {...avatar} />
               </ProfileUser>
             )}
