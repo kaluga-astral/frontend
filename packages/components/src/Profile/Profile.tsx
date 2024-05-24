@@ -1,4 +1,4 @@
-import { type PropsWithChildren, forwardRef, useRef } from 'react';
+import { type PropsWithChildren, forwardRef } from 'react';
 import {
   type AvatarProps,
   ClickAwayListener,
@@ -9,11 +9,11 @@ import { useMenu } from '../hooks';
 import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
-import { OverflowTypography } from '../OverflowTypography';
 
 import {
   ProfileAnnotation,
   ProfileAvatar,
+  ProfileCredentials,
   ProfileDisplayName,
   ProfileRoot,
   ProfileUser,
@@ -45,7 +45,6 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { displayName, annotation, avatar = {}, menu: Menu } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
-    const menuContainerRef = useRef<HTMLDivElement>(null);
     const { isMobile } = useViewportType();
 
     return (
@@ -56,10 +55,11 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               <ProfileAvatar {...avatar} />
             ) : (
               <ProfileUser>
-                <OverflowTypography noWrap>
+                <ProfileCredentials>
                   <ProfileDisplayName>{displayName}</ProfileDisplayName>
+
                   <ProfileAnnotation>{annotation}</ProfileAnnotation>
-                </OverflowTypography>
+                </ProfileCredentials>
                 <ProfileAvatar {...avatar} />
               </ProfileUser>
             )}
@@ -70,7 +70,6 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           open={open}
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
-          container={menuContainerRef.current}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',

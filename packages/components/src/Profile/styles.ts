@@ -1,5 +1,6 @@
 import { Avatar, type AvatarProps } from '../Avatar';
 import { Button } from '../Button';
+import { OverflowTypography } from '../OverflowTypography';
 import { styled } from '../styles';
 
 export const ProfileRoot = styled(Button)`
@@ -15,31 +16,23 @@ export const ProfileRoot = styled(Button)`
 `;
 
 export const ProfileUser = styled.div`
+  overflow: hidden;
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
-
-  min-width: 100px;
 `;
 
 export const ProfileCredentials = styled.div`
   overflow: hidden;
 `;
 
-export const ProfileDisplayName = styled.span`
-  overflow: hidden;
-  display: block;
-
+export const ProfileDisplayName = styled(OverflowTypography)`
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
   line-height: ${({ theme }) => theme.typography.pxToRem(14)};
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
-export const ProfileAnnotation = styled.span`
-  display: block;
-
+export const ProfileAnnotation = styled(OverflowTypography)`
   font-size: ${({ theme }) => theme.typography.pxToRem(12)};
   line-height: ${({ theme }) => theme.typography.pxToRem(16)};
   color: ${({ theme }) => theme.palette.grey[500]};
