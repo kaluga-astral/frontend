@@ -1,0 +1,23 @@
+{
+  "name": "@astral/utils",
+  "browser": "./src/index.ts",
+  "main": "./src/index.ts",
+  "version": "3.0.0",
+  "scripts": {
+    "build": "node pack",
+    "publish": "npm publish ./lib",
+    "lint:types": "tsc --noEmit",
+    "lint": "eslint --fix --quiet",
+    "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
+    "lint:styles": "stylelint --fix",
+    "tests": "cross-env LC_ALL=ru vitest run",
+    "tests:ci": "cross-env LC_ALL=ru vitest run --reporter=junit --outputFile.junit=junit.xml"
+  },
+  "dependencies": {
+    "dayjs": "1.11.10",
+    "remeda": "^1.40.1"
+  },
+  "devDependencies": {
+    "@astral/tests": "*"
+  }
+}
