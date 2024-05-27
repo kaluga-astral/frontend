@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { Button } from '../Button';
 
@@ -10,7 +10,7 @@ export default {
   component: Chevron,
 };
 
-const Template: Story<ChevronProps> = (args) => {
+const Template: StoryFn<ChevronProps> = (args) => {
   const [isActive, setActive] = useState(args.isActive);
 
   return (

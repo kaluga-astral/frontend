@@ -1,77 +1,26 @@
-import { DotsVOutlineMd } from '@astral/icons';
-import { type ReactNode, useCallback, useMemo } from 'react';
+import { type MouseEventHandler, useCallback } from 'react';
 
-import { IconButton, type IconButtonProps } from '../IconButton';
-import { IconDropdownButton } from '../IconDropdownButton';
-import { MenuItem, type MenuItemProps } from '../MenuItem';
-import { Tooltip, type TooltipProps } from '../Tooltip';
+import { type TooltipProps } from '../Tooltip';
 
 import { Wrapper } from './styles';
-
-export type NestedAction<T> = MenuItemProps & {
-  /**
-   * Обработчик действия
-   */
-  onClick?: (row: T) => void;
-  /**
-   * Название действия
-   */
-  name: string;
-};
-
-export type SingleAction<T> = {
-  /**
-   * Иконка действия
-   */
-  icon?: ReactNode;
-  /**
-   * Обработчик действия
-   */
-  onClick?: (row: T) => void;
-  /**
-   * Название действия
-   */
-  name: string;
-  /**
-   * Флаг показа выпадающего списка при клике
-   */
-  nested?: false;
-};
-
-export type MultipleAction<T> = MenuItemProps & {
-  /**
-   * Иконка действия
-   */
-  icon: ReactNode;
-  /**
-   * Список действий для выпадающего списка
-   */
-  actions: Array<NestedAction<T>>;
-  /**
-   * Флаг показа выпадающего списка при клике
-   */
-  nested: true;
-  /**
-   * Название действия
-   */
-  name: string;
-};
-
-export type MainAction<T> =
-  | (IconButtonProps & SingleAction<T>)
-  | MultipleAction<T>;
-
-export type SecondaryAction<T> = MenuItemProps & SingleAction<T>;
+import { MainAction } from './MainAction';
+import {
+  type MainActionKind,
+  type NestedAction,
+  type SecondaryActionKind,
+  type SingleAction,
+} from './types';
+import { SecondaryActions } from './SecondaryAction';
 
 export type Actions<T> = {
   /**
    * Основные действия
    */
-  main: MainAction<T>[];
+  main: MainActionKind<T>[];
   /**
    * Второстепенные действия
    */
-  secondary?: SecondaryAction<T>[];
+  secondary?: SecondaryActionKind<T>[];
 };
 
 export type ActionsCellProps<T> = {
@@ -84,15 +33,19 @@ export type ActionsCellProps<T> = {
    */
   row: T;
   /**
-   * Позиция тултипа
+   * @deprecated Положение тултипа инкапсулировано внутри ActionCell
    */
   tooltipPlacement?: TooltipProps['placement'];
+};
+
+const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
+  mainAction: 'top',
+  secondaryAction: 'left',
 };
 
 export function ActionCell<T>({
   actions: { main = [], secondary = [] },
   row,
-  tooltipPlacement,
 }: ActionsCellProps<T>) {
   const handleActionClick = useCallback(
     (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
@@ -102,75 +55,31 @@ export function ActionCell<T>({
     [row],
   );
 
-  const renderMainAction = useCallback(
-    (action: MainAction<T>) => {
-      if (action.nested) {
-        const { name, actions, icon, disabled } = action;
+  const handleWrapperClick: MouseEventHandler<HTMLDivElement> = (event) => {
+    event.stopPropagation();
+  };
 
-        return (
-          <Tooltip
-            key={name}
-            title={name}
-            placement={tooltipPlacement}
-            withoutContainer={!disabled}
-          >
-            <IconDropdownButton icon={icon} variant="text" disabled={disabled}>
-              {actions.map(({ name: nestedActionName, onClick, ...props }) => (
-                <MenuItem
-                  key={nestedActionName}
-                  onClick={handleActionClick(onClick)}
-                  {...props}
-                >
-                  {nestedActionName}
-                </MenuItem>
-              ))}
-            </IconDropdownButton>
-          </Tooltip>
-        );
-      }
-
-      const { onClick, name, icon, nested, ...props } = action;
-
-      return (
-        <Tooltip
-          key={name}
-          title={name}
-          placement={tooltipPlacement}
-          withoutContainer={!props.disabled}
-        >
-          <IconButton
-            variant="text"
-            onClick={handleActionClick(onClick)}
-            {...props}
-          >
-            {icon}
-          </IconButton>
-        </Tooltip>
-      );
-    },
-    [handleActionClick, tooltipPlacement],
-  );
-
-  const renderSecondaryActions = useMemo(() => {
-    if (!Boolean(secondary.length)) {
-      return null;
-    }
-
-    return (
-      <IconDropdownButton icon={<DotsVOutlineMd />} variant="text">
-        {secondary.map(({ name, onClick, nested, ...props }) => (
-          <MenuItem key={name} onClick={handleActionClick(onClick)} {...props}>
-            {name}
-          </MenuItem>
-        ))}
-      </IconDropdownButton>
-    );
-  }, [secondary, handleActionClick]);
+  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
 
   return (
-    <Wrapper onClick={(event) => event.stopPropagation()}>
-      {main.map(renderMainAction)}
-      {renderSecondaryActions}
+    <Wrapper onClick={handleWrapperClick}>
+      {main.map((action) => {
+        return (
+          <MainAction
+            key={action.name}
+            tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
+            onActionClick={handleActionClick}
+            action={action}
+          />
+        );
+      })}
+      {isSecondaryActionsAvailable && (
+        <SecondaryActions
+          actions={secondary}
+          tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
+          onActionClick={handleActionClick}
+        />
+      )}
     </Wrapper>
   );
 }

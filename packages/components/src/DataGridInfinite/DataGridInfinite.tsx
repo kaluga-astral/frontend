@@ -6,7 +6,7 @@ import {
 } from 'react-virtuoso';
 
 import { TableBody, TableRow } from '../Table';
-import { type DataGridProps, type DataGridRow } from '../DataGrid';
+import { Container, type DataGridProps, type DataGridRow } from '../DataGrid';
 import { DataGridHead } from '../DataGrid/DataGridHead';
 import { CircularProgress } from '../CircularProgress';
 import { DataGridCell } from '../DataGrid/DataGridCell';
@@ -17,7 +17,6 @@ import { DataGridLoader } from '../DataGrid/DataGridLoader';
 import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import {
-  DataGridInfiniteContainer,
   DataGridInfiniteLoaderWrapper,
   DataGridInfiniteTable,
   DataGridInfiniteTableContainer,
@@ -125,7 +124,7 @@ export const DataGridInfinite = <
   );
 
   return (
-    <DataGridInfiniteContainer maxHeight={maxHeight} className={className}>
+    <Container maxHeight={maxHeight} className={className}>
       <DataGridInfiniteTableContainer
         {...{ inert: isTableDisabled ? '' : undefined }}
       >
@@ -193,6 +192,6 @@ export const DataGridInfinite = <
         )}
       </DataGridInfiniteTableContainer>
       {loading && !dataLength && <DataGridLoader disabled={disabled} loading />}
-    </DataGridInfiniteContainer>
+    </Container>
   );
 };

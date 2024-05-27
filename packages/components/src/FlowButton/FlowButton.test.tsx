@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { useEffect, useRef } from 'react';
 import { renderWithTheme, screen } from '@astral/tests';
 

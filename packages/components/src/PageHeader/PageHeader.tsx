@@ -1,8 +1,9 @@
-import { type ReactNode } from 'react';
+import { type ComponentProps, type ElementType, type ReactNode } from 'react';
 import { ArrowLOutlineMd } from '@astral/icons';
 
 import { type ButtonProps } from '../Button';
 import { useViewportType } from '../hooks/useViewportType';
+import { type Theme } from '../theme';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
@@ -16,23 +17,28 @@ import {
   Wrapper,
 } from './styles';
 
-export type PageHeaderProps = {
+export type PageHeaderProps<
+  TMainActionComponent extends ElementType = ElementType,
+  TSecondaryActionComponent extends ElementType = ElementType,
+  TBackButtonComponent extends ElementType = ElementType,
+> = {
   /**
-   * @example <PageHeader title="Заголовок страницы" />
    * Заголовок страницы
+   * @example <PageHeader title="Заголовок страницы" />
    */
   title: ReactNode;
   /**
-   * @example <PageHeader description="Описание страницы" />
    * Описание страницы
+   * @example <PageHeader description="Описание страницы" />
    */
   description?: ReactNode;
   /**
-   * @example <PageHeader subheader={<TextField placeholder="Поиск на странице..." size="small" />} />
    * Набор компонент, отображаемый в нижней части блока
+   * @example <PageHeader subheader={<TextField placeholder="Поиск на странице..." size="small" />} />
    */
   subheader?: ReactNode;
   /**
+   * Хлебные крошки
    * @example <PageHeader breadcrumbs={
    *  [
    *    <Link>Первая ссылка</Link>,
@@ -40,10 +46,10 @@ export type PageHeaderProps = {
    *    <>Текст</>,
    *  ]
    * } />
-   * Хлебные крошки
    */
   breadcrumbs?: ReactNode[];
   /**
+   * Набор кнопок, видимые конфигурируются через объект main, скрытые в меню - через secondary
    * @example <PageHeader actions={{
    *  main: [
    *    {
@@ -56,19 +62,36 @@ export type PageHeaderProps = {
    *    },
    *  ]
    * }} />
-   * Набор кнопок, видимые кофигурируются через объект main, скрытые в меню - через secondary
    */
-  actions?: ButtonGroupProps;
+  actions?: ButtonGroupProps<TMainActionComponent, TSecondaryActionComponent>;
   /**
-   * @example <PageHeader backButton={{
-   *  onClick: () => {},
-   * }} />
-   * Кнопка назад
+   * Кнопка возврата на предыдущий экран
+   * @example
+   * <PageHeader
+   *  backButton={{
+   *    onClick: () => {},
+   *  }}
+   * />
    */
-  backButton?: Omit<ButtonProps, 'children' | 'variant'>;
+  backButton?: Omit<ButtonProps, 'children' | 'variant'> & {
+    component?: TBackButtonComponent;
+    theme?: Theme | undefined;
+  } & ComponentProps<
+      ElementType extends TBackButtonComponent ? 'button' : TBackButtonComponent
+    >;
 };
 
-export const PageHeader = (props: PageHeaderProps) => {
+export const PageHeader = <
+  TMainActionComponent extends ElementType,
+  TSecondaryActionComponent extends ElementType,
+  TBackButtonComponent extends ElementType,
+>(
+  props: PageHeaderProps<
+    TMainActionComponent,
+    TSecondaryActionComponent,
+    TBackButtonComponent
+  >,
+) => {
   const { title, description, subheader, breadcrumbs, actions, backButton } =
     props;
   const { isMobile } = useViewportType();

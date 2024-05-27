@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import {
   render,
   renderWithTheme,
@@ -5,7 +6,6 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
-import { vi } from 'vitest';
 import { VirtuosoMockContext } from 'react-virtuoso';
 import { theme } from '@astral/tests/src/theme';
 import { useState } from 'react';
@@ -18,8 +18,8 @@ import { DataGridInfinite } from './DataGridInfinite';
 import { makeDataList } from './faker';
 
 const DataGridInfiniteWrapper = styled.div`
-  height: 400px;
   width: 100%;
+  height: 400px;
 `;
 
 type DataType = {

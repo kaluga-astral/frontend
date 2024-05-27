@@ -20,7 +20,7 @@ export type TypographyThemeOptions = Typography & {
   code: CustomTypographyVariantStyle;
 };
 
-// Т.к. нет досутпа к теме, написал функцию для конвертации px в rem
+// Т.к. нет доступа к теме, написал функцию для конвертации px в rem
 export const pxToRem = (
   fontSize: number,
   htmlFontSize: number = HTML_FONT_SIZE,

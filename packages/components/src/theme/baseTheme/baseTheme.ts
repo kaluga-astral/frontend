@@ -40,7 +40,7 @@ export type Palette = Omit<MuiPalette, 'grey' | 'info' | 'background'> & {
   components: ComponentsColors;
 };
 
-type CreateThemeParams = {
+export type CreateThemeParams = {
   brand: Brand;
   options?: ThemeOptions;
   fontsUrls: FontsUrls;

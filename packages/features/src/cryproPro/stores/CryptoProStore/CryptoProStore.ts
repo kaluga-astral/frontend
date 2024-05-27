@@ -14,6 +14,7 @@ import {
   type WorkspaceSetupService,
   createWorkspaceSetupService,
 } from '../../services/WorkspaceSetupService';
+import { type FileData } from '../../types';
 
 /**
  * @description Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро
@@ -92,11 +93,20 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод получения списка сертификатов
+   * @description Метод получения списка сертификатов.
+   * При повторном вызове возвращает сертификаты из кэша.
    * */
   public getCertificateList = async () => {
     this.certificateList =
       await this.cryptoProCertificateService.getCertificateList();
+  };
+
+  /**
+   * @description Метод получения списка сертификатов. Игнорирует кэш
+   * */
+  public refetchCertificateList = async () => {
+    this.certificateList =
+      await this.cryptoProCertificateService.getCertificateList(true);
   };
 
   /**
@@ -133,19 +143,19 @@ export class CryptoProStore {
   /**
    * @description Метод подписания в формате CMS
    * @param certificate сертификат пользователя
-   * @param fileBuffer данные для подписания в виде массива байт либо в формате Base64 строки
+   * @param fileData данные для подписания в виде массива байт либо, в формате Base64 строки
    * @param detach присоединять подпись к данным или отдельно?
    * @param includeCertChain включать в результат всю цепочку?
    * */
   public signCms = async (
     certificate: Certificate,
-    fileBuffer: ArrayBuffer,
+    fileData: FileData,
     detach?: boolean,
     includeCertChain?: boolean,
   ) => {
     return this.cryptoProSignService.signCms(
       certificate,
-      fileBuffer,
+      fileData,
       detach,
       includeCertChain,
     );
@@ -154,17 +164,17 @@ export class CryptoProStore {
   /**
    * @description Метод подписания хэша указанным сертификатом в формате CMS
    * @param certificate сертификат пользователя
-   * @param data данные для подписания в виде массива байт хэша либо сам хэш в формате hex строки (в любом регистре)
-   * * @param includeCertChain включать в результат всю цепочку?
+   * @param fileData данные для подписания в виде массива байт хэша, либо сам хэш в формате hex строки (в любом регистре)
+   * @param includeCertChain включать в результат всю цепочку?
    * */
   public signHashCms = async (
     certificate: Certificate,
-    fileBuffer: ArrayBuffer,
+    fileData: FileData,
     includeCertChain?: boolean,
   ) => {
     return this.cryptoProSignService.signHashCms(
       certificate,
-      fileBuffer,
+      fileData,
       includeCertChain,
     );
   };
@@ -172,26 +182,26 @@ export class CryptoProStore {
   /**
    * @description Метод подписания указанным сертификатом в формате XmlDSig
    * @param certificate сертификат пользователя
-   * @param data данные для подписания в виде массива байт либо в формате Base64 строки
+   * @param fileData данные для подписания в виде массива байт, либо в формате Base64 строки
    * @param xmlSignatureType тип xml подписи
    * */
   public signXmlCms = async (
     certificate: Certificate,
-    fileBuffer: ArrayBuffer,
+    fileData: FileData,
     xmlSignatureType: CADESCOM_XML_SIGNATURE_TYPE,
   ) => {
     return this.cryptoProSignService.signXmlCms(
       certificate,
-      fileBuffer,
+      fileData,
       xmlSignatureType,
     );
   };
 
   /**
    * @description Метод расшифровки данных
-   * @param encryptedData данные для расшифрования в виде массива байт либо в формате Base64 строки
+   * @param fileData данные для расшифрования в виде массива байт, либо в формате Base64 строки
    * */
-  public decryptCms = async (fileBuffer: ArrayBuffer) => {
-    return this.cryptoProSignService.decryptCms(fileBuffer);
+  public decryptCms = async (fileData: FileData) => {
+    return this.cryptoProSignService.decryptCms(fileData);
   };
 }

@@ -1,5 +1,5 @@
-import { renderWithTheme, screen } from '@astral/tests';
-import { describe } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { renderWithTheme, screen, waitFor } from '@astral/tests';
 import { useEffect, useRef } from 'react';
 
 import { MenuItem } from '../MenuItem';
@@ -55,14 +55,16 @@ describe('Select', () => {
     expect(screen.getByText('placeholder')).toBeInTheDocument();
   });
 
-  it('NoData placeholder отображается, если нет ни одного option', () => {
+  it('NoData placeholder отображается, если нет ни одного option', async () => {
     renderWithTheme(
       <Select value="" defaultOpen>
         {[]}
       </Select>,
     );
 
-    expect(screen.getByText('Нет данных')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Нет данных')).toBeInTheDocument();
+    });
   });
 
   it('Отображается лоадер в состоянии загрузки', () => {
@@ -81,6 +83,7 @@ describe('Select', () => {
       { value: '2', name: 'Name 2' },
       { value: '3', name: 'Name 3' },
     ];
+
     const getOptionLabel = (selectedOption: string | number) => {
       return (
         children.find((child) => child.value === selectedOption)?.name || ''
@@ -89,7 +92,7 @@ describe('Select', () => {
 
     renderWithTheme(
       <Select
-        value={['1', '3']}
+        value={['1']}
         placeholder="placeholder"
         multiple
         getOptionLabel={getOptionLabel}
@@ -104,9 +107,7 @@ describe('Select', () => {
       </Select>,
     );
 
-    ['Name 1', 'Name 3'].map((resultValue) =>
-      expect(screen.getByText(resultValue)).toBeInTheDocument(),
-    );
+    expect(screen.getByText('Name 1')).toBeInTheDocument();
   });
 
   it('Рендерится пустой инпут, если значения не выбраны', () => {

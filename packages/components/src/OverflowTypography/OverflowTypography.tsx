@@ -14,7 +14,7 @@ export type OverflowedProps = {
   /**
    * @example <OverflowTypography rowsCount={2} />
    * @default 1
-   * @description опорная единица по которой определяется максимиально отображаемое колличество строк
+   * @description опорная единица по которой определяется максимально отображаемое количество строк
    */
   rowsCount?: number;
 };

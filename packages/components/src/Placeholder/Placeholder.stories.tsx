@@ -3,6 +3,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
 import certificatesNotFound from '../../../ui/illustrations/certificates-not-found.svg';
+import { styled } from '../styles';
 
 import { Placeholder } from './Placeholder';
 
@@ -58,3 +59,57 @@ export const Example = () => (
     }
   />
 );
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+`;
+
+export const Size = () => {
+  return (
+    <List>
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="small"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="medium"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+
+      <Placeholder
+        title="Заголовок страницы"
+        description="Текст для пользователя, разъясняющий принципы работы раздела или подсказки по работе в нем."
+        imgSrc={certificatesNotFound}
+        imgAlt="альтернативный текст изображения"
+        size="large"
+        Actions={
+          <>
+            <Button variant="text">Вернуться</Button>
+            <Button>ОК</Button>
+          </>
+        }
+      />
+    </List>
+  );
+};

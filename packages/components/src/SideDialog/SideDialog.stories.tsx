@@ -69,7 +69,8 @@ export const Example = () => {
           </Alert>
           <br />
           <SideDialogContentText id="alert-dialog-description">
-            Заглушка примера текста страницы, который несет очень выжный смысл
+            {/* cSpell:disable */}
+            Заглушка примера текста страницы, который несет очень важный смысл
             для пользователя и предлагает ему варианты выбора действий с
             контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
             consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -86,6 +87,7 @@ export const Example = () => {
             Arcu cursus vitae congue mauris rhoncus aenean. Sit amet luctus
             venenatis lectus magna. Vitae auctor eu augue ut lectus arcu
             bibendum.
+            {/* cSpell:enable */}
           </SideDialogContentText>
         </SideDialogContent>
         <SideDialogActions>

@@ -32,8 +32,8 @@ type DataType = {
 type SortField = 'documentName' | 'direction' | 'createDate';
 
 const DataGridInfiniteWrapper = styled.div`
-  height: 400px;
   width: 100%;
+  height: 400px;
 `;
 
 export const Example = () => {

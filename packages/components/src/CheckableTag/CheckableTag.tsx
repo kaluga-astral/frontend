@@ -23,7 +23,6 @@ export type CheckableTagProps = Omit<
   disabled?: boolean;
   /**
    * Контент слева от label
-
    */
   startAddon?: CheckableTagAddon;
 
@@ -42,7 +41,7 @@ export type CheckableTagProps = Omit<
    * color="success"
    * checked
    * onChange={handleChecked}
-   * endAddon={(props: TagBadgeProps) => ( <TagBadge {...props} badgeContent={'12'} />)}
+   * endAddon={(props: TagBadgeProps) => (<TagBadge {...props} badgeContent={'12'} />)}
  * />
 
  */

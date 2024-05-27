@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Paper, Switch } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 
 import { FormControlLabel } from '../FormControlLabel';
 
@@ -28,7 +28,7 @@ const icon = (
   </Paper>
 );
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChange = () => {

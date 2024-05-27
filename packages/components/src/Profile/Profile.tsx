@@ -57,6 +57,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               <ProfileUser>
                 <ProfileCredentials>
                   <ProfileDisplayName>{displayName}</ProfileDisplayName>
+
                   <ProfileAnnotation>{annotation}</ProfileAnnotation>
                 </ProfileCredentials>
                 <ProfileAvatar {...avatar} />
@@ -69,9 +70,18 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           open={open}
           anchorEl={anchorRef.current}
           onClose={handleCloseMenu}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
           PaperProps={{
             style: {
-              width: anchorRef.current?.clientWidth ?? 'auto',
+              maxWidth: 300,
+              minWidth: 200,
             },
           }}
         />

@@ -54,7 +54,7 @@ const createDirectionMap = <TKeys extends DefaultKey>(
 export type StepSliderProps<TKeys extends DefaultKey> = {
   className?: string;
   /**
-   * @description текущий активный шаг, должен сопадать с id одного из элементов steps
+   * @description текущий активный шаг, должен совпадать с id одного из элементов steps
    */
   activeStep: TKeys;
   /**

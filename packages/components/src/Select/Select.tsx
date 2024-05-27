@@ -3,18 +3,25 @@ import {
   InputLabel,
   Select as MuiSelect,
   type SelectProps as MuiSelectProps,
+  type SelectChangeEvent,
 } from '@mui/material';
-import React, { type ForwardedRef, type ReactNode } from 'react';
-import { ChevronDOutlineMd } from '@astral/icons';
+import { type ForwardedRef, type ReactNode, forwardRef } from 'react';
+import { ChevronDOutlineMd, CloseFillSm } from '@astral/icons';
 
-import { Tag } from '../Tag';
 import { FormHelperText } from '../FormHelperText';
 import { CircularProgress } from '../CircularProgress';
 import { MenuItem } from '../MenuItem';
 import { type WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
-import { Placeholder, ProgressWrapper, TagsWrapper } from './styles';
+import {
+  Placeholder,
+  ProgressWrapper,
+  // StyledCrossIcon,
+  StyledIconButton,
+} from './styles';
+import { SelectTagsList } from './SelectTagsList';
+import { useLogic } from './useLogic';
 
 export type SelectProps<Value> = WithoutEmotionSpecific<
   Omit<MuiSelectProps<Value>, 'variant'>
@@ -35,6 +42,18 @@ export type SelectProps<Value> = WithoutEmotionSpecific<
   label?: string;
 };
 
+type ClearButtonProps = {
+  onClick: () => void;
+};
+
+const ClearButton = forwardRef<HTMLButtonElement, ClearButtonProps>(
+  ({ onClick }, ref) => (
+    <StyledIconButton ref={ref} onClick={onClick} variant="text">
+      <CloseFillSm />
+    </StyledIconButton>
+  ),
+);
+
 const SelectInner = <Value,>(
   {
     required,
@@ -48,23 +67,44 @@ const SelectInner = <Value,>(
     error,
     label,
     fullWidth,
+    onChange: externalOnChange,
     ...props
   }: SelectProps<Value>,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
-  const renderValue = (selectedOptions: Value): ReactNode => {
-    if (Array.isArray(selectedOptions) && selectedOptions.length) {
-      return (
-        <TagsWrapper>
-          {selectedOptions.map((option) => {
-            const optionLabel = getOptionLabel(option);
+  const {
+    isOpened,
+    isShowingClearButton,
+    isNoData,
+    onClearAll,
+    openSelect,
+    closeSelect,
+    resetButtonRef,
+  } = useLogic({
+    ...props,
+    children,
+    onChange: externalOnChange,
+  });
 
-            return <Tag key={option} color="grey" label={optionLabel} />;
-          })}
-        </TagsWrapper>
+  const renderValue = (selectedOptions: Value): ReactNode => {
+    // Массив с выбранными опциями
+    if (Array.isArray(selectedOptions) && selectedOptions.length) {
+      const handleOnChange = externalOnChange as (
+        e: SelectChangeEvent<string[]>,
+      ) => void;
+
+      return (
+        <SelectTagsList
+          resetButtonRef={resetButtonRef}
+          openMenu={openSelect}
+          onChange={handleOnChange}
+          getOptionLabel={getOptionLabel}
+          selectedOptions={selectedOptions}
+        />
       );
     }
 
+    // Пустой массив или пустая строка
     if (
       (Array.isArray(selectedOptions) || typeof selectedOptions === 'string') &&
       !selectedOptions.length
@@ -72,10 +112,9 @@ const SelectInner = <Value,>(
       return placeholder;
     }
 
+    // Строка
     return getOptionLabel(selectedOptions as string | number);
   };
-
-  const isNoData = !Boolean(React.Children.count(children));
 
   return (
     <FormControl error={error} fullWidth={fullWidth}>
@@ -86,11 +125,20 @@ const SelectInner = <Value,>(
       )}
       <MuiSelect
         {...props}
+        open={isOpened}
+        onOpen={openSelect}
+        onClose={closeSelect}
         renderValue={renderValue}
         IconComponent={ChevronDOutlineMd}
         displayEmpty
         ref={ref}
         fullWidth={fullWidth}
+        onChange={externalOnChange}
+        endAdornment={
+          isShowingClearButton ? (
+            <ClearButton ref={resetButtonRef} onClick={onClearAll} />
+          ) : undefined
+        }
       >
         <Placeholder value="">{placeholder}</Placeholder>
         {loading && (

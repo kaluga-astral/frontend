@@ -36,6 +36,8 @@ export const Wrapper = styled.article<NotificationTemplateProps>`
 
 export const Inner = styled.div`
   flex-grow: 1;
+
+  overflow-wrap: anywhere;
 `;
 
 export const Footer = styled.footer<NotificationActionsProps>`
@@ -72,6 +74,8 @@ export const CloseIcon = styled(CrossOutlineSm, {
 export const CloseButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'filled',
 })<NotificationCloseButtonProps>`
+  align-self: flex-start;
+
   padding: 0;
 
   &:hover {

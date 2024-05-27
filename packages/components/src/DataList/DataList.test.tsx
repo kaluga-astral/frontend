@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { vi } from 'vitest';
 // import { VirtuosoMockContext } from 'react-virtuoso';
 // import { theme } from '@astral/tests/src/theme';
 // import { fakerRU } from '@faker-js/faker';

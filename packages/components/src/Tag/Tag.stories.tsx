@@ -7,6 +7,7 @@ import { Grid } from '../Grid';
 import { DataGrid, type DataGridColumns, type DataGridSort } from '../DataGrid';
 import { TagBadge } from '../TagBadge';
 import { ActionCell, type Actions } from '../ActionCell';
+import { styled } from '../styles';
 
 import { Tag } from './Tag';
 import { TagColors } from './enums';
@@ -319,7 +320,7 @@ export const Static = () => {
     <>
       <Grid container spacing={8} direction={autoFlow}>
         <Tag label="Text" variant="text" />
-        <Tag label="Light gray" variant="light" color="grey" />
+        <Tag label="Light grey" variant="light" color="grey" />
         <Tag label="Light primary" variant="light" color="primary" />
         <Tag label="Contained primary" variant="contained" color="primary" />
       </Grid>
@@ -330,7 +331,6 @@ export const Static = () => {
 /**
  * К тэгу может быть добавлен цвет.
  */
-
 export const Colors = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -373,7 +373,6 @@ export const Colors = () => {
 /**
  * Тэг с возможностью удаления.
  */
-
 export const Removable = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -391,7 +390,7 @@ export const Removable = () => {
         <Tag
           label="Default"
           variant="text"
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
           onDelete={handleDelete}
         />
         <Tag
@@ -401,6 +400,126 @@ export const Removable = () => {
         />
       </Grid>
     </>
+  );
+};
+
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const List = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+export const ColorsRemovable = () => {
+  const handleDelete = () => {
+    console.log('Delete called');
+  };
+
+  return (
+    <Grid container spacing={5}>
+      <RowContainer>
+        <span>Contained</span>
+
+        <List>
+          <Tag
+            label="Primary"
+            variant="contained"
+            color="primary"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Error"
+            variant="contained"
+            color="error"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Success"
+            variant="contained"
+            color="success"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Warning"
+            variant="contained"
+            color="warning"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Grey"
+            variant="contained"
+            color="grey"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Default"
+            variant="contained"
+            color="default"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+        </List>
+      </RowContainer>
+
+      <RowContainer>
+        <span>Light</span>
+
+        <List>
+          <Tag
+            label="Primary light"
+            variant="light"
+            color="primary"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Error light"
+            variant="light"
+            color="error"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Success light"
+            variant="light"
+            color="success"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Warning"
+            variant="light"
+            color="warning"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Grey light"
+            variant="light"
+            color="grey"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+          <Tag
+            label="Default light"
+            variant="light"
+            color="default"
+            onDelete={handleDelete}
+            endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
+          />
+        </List>
+      </RowContainer>
+    </Grid>
   );
 };
 
@@ -456,7 +575,7 @@ export const Adornment = () => {
         <Tag
           label="Default"
           variant="text"
-          endAddon={(props) => <TagBadge {...props} badgeContent={'12'} />}
+          endAddon={(props) => <TagBadge {...props} badgeContent="21" />}
         />
       </Grid>
     </>

@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Box, Paper, useMediaQuery, useTheme } from '@mui/material';
 import { type ChangeEvent, useEffect, useState } from 'react';
 
@@ -19,7 +19,7 @@ export default {
   component: Checkbox,
 };
 
-export const CheckboxShowcase: Story = () => {
+export const CheckboxShowcase: StoryFn = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState([true, false]);
   const theme = useTheme();
@@ -201,7 +201,7 @@ export const CheckboxShowcase: Story = () => {
 
 CheckboxShowcase.parameters = { options: { showPanel: false } };
 
-const Template: Story = (args) => (
+const Template: StoryFn = (args) => (
   <FormControlLabel control={<Checkbox {...args} />} label="Текст" />
 );
 

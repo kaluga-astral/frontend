@@ -1,3 +1,4 @@
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   act,
   fireEvent,
@@ -5,7 +6,6 @@ import {
   screen,
   userEvents,
 } from '@astral/tests';
-import { describe, vi } from 'vitest';
 import { useState } from 'react';
 
 import { DateRangePicker } from './DateRangePicker';
@@ -429,6 +429,30 @@ describe('DateRangePicker', () => {
       const popover = screen.queryByRole('presentation');
 
       expect(popover).not.toBeInTheDocument();
+    });
+
+    it('Дата выбирается, если поповер открыт кликом по иконке', async () => {
+      const user = userEvents.setup();
+
+      const { baseElement } = renderWithTheme(
+        <DateRangePicker
+          startDateProps={{
+            inputProps: { placeholder: 'inputA' },
+          }}
+        />,
+      );
+
+      const calendarEndAdornment = baseElement.getElementsByTagName('svg')[0];
+
+      await user.click(calendarEndAdornment);
+
+      const dayButton = screen.getAllByText('15')[0];
+
+      await user.click(dayButton);
+
+      const inputA = screen.getByPlaceholderText('inputA');
+
+      expect((inputA as HTMLInputElement).value).not.toBe('');
     });
   });
 });

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { type ReactNode } from 'react';
 
@@ -38,7 +39,7 @@ describe('ErrorBoundary', () => {
     expect(screen.getByText('Произошла непредвиденная ошибка')).toBeVisible();
   });
 
-  it('Props:children с ошибокй загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
+  it('Props:children с ошибкой загрузки chunk: Обрабатывается ошибка загрузки chunk', async () => {
     renderWithTheme(
       <TestComponent>
         <ChunkLoadErrorButton />

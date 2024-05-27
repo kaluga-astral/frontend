@@ -8,6 +8,14 @@ import {
   Title,
   Wrapper,
 } from './styles';
+import {
+  IMAGE_HEIGHT,
+  IMAGE_WIDTH,
+  type SIZE,
+  TITLE_HEADER_LEVEL,
+} from './constants';
+
+export type PlaceholderSize = (typeof SIZE)[keyof typeof SIZE];
 
 export type PlaceholderProps = {
   /**
@@ -26,11 +34,13 @@ export type PlaceholderProps = {
   imgAlt?: string;
 
   /**
+   * @deprecated
    * ширина изображения
    */
   imgWidth?: string;
 
   /**
+   * @deprecated
    * высота изображения
    */
   imgHeight?: string;
@@ -49,6 +59,11 @@ export type PlaceholderProps = {
    * Действия
    */
   Actions?: ReactNode;
+
+  /**
+   * Задает общий размер компонента
+   */
+  size?: PlaceholderSize;
 };
 
 export const Placeholder = ({
@@ -56,25 +71,34 @@ export const Placeholder = ({
   title,
   imgSrc,
   imgAlt,
-  imgWidth,
-  imgHeight,
   description,
   Actions,
+  size = 'small',
+  imgWidth,
+  imgHeight,
 }: PlaceholderProps) => {
   return (
-    <Wrapper className={className}>
-      <InnerContainer>
+    <Wrapper $size={size} className={className}>
+      <InnerContainer $size={size}>
         {imgSrc && (
           <Image
             src={imgSrc}
             alt={imgAlt}
-            width={imgWidth}
-            height={imgHeight}
+            width={imgWidth || IMAGE_WIDTH[size]}
+            height={imgHeight || IMAGE_HEIGHT[size]}
+            $size={size}
           />
         )}
 
-        <Title variant="h5">{title}</Title>
-        {description && <Description variant="ui">{description}</Description>}
+        <Title $size={size} variant={TITLE_HEADER_LEVEL[size]}>
+          {title}
+        </Title>
+
+        {description && (
+          <Description $size={size} variant="ui">
+            {description}
+          </Description>
+        )}
       </InnerContainer>
 
       {Actions && <Footer>{Actions}</Footer>}

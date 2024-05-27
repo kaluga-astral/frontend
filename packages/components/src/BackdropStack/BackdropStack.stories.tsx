@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useRef, useState } from 'react';
 import { Box, MenuItem, Popover } from '@mui/material';
 
@@ -129,7 +129,7 @@ const MotivationPart = () => {
     <>
       <Typography variant="h2">Мотивация</Typography>
       <Typography variant="code">
-        Абстрактный компонент, предназначенный для предотвращения случаного
+        Абстрактный компонент, предназначенный для предотвращения случайного
         нажатия пользователем по бэкдропу/оверлею/серой зоне модального окна.
         <br />
         Кейс состоит в том, что если внутри модального окна, пользователь
@@ -147,7 +147,7 @@ const MotivationPart = () => {
   );
 };
 
-const Template: Story<{}> = () => {
+const Template: StoryFn<{}> = () => {
   const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
 
   return (

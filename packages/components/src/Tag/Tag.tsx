@@ -5,6 +5,7 @@ import { type ChipProps as MuiTagProps } from '@mui/material';
 import { LegacyGrid } from '../LegacyGrid';
 import { type WithoutEmotionSpecific } from '../types';
 import { type BadgeColor } from '../Badge';
+import { useTheme } from '../theme';
 
 import { StyledTag, getBadgeColor } from './styles';
 import { type TagColor, type TagSize, type TagVariant } from './types';
@@ -50,8 +51,8 @@ export type TagProps = Omit<
 export const Tag = forwardRef<HTMLDivElement, TagProps>(
   (
     {
-      color,
-      variant,
+      color = 'grey',
+      variant = 'contained',
       deleteIcon,
       size = 'small',
       label,
@@ -61,6 +62,8 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     },
     ref,
   ) => {
+    const theme = useTheme();
+
     const labelContent = (
       <LegacyGrid
         container
@@ -71,11 +74,23 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         spacing={1}
       >
         {StartAddon && (
-          <StartAddon color={getBadgeColor({ variant, tagColor: color })} />
+          <StartAddon
+            color={getBadgeColor({
+              variant,
+              tagColor: color,
+              theme,
+            })}
+          />
         )}
         {label}
         {EndAddon && (
-          <EndAddon color={getBadgeColor({ variant, tagColor: color })} />
+          <EndAddon
+            color={getBadgeColor({
+              variant,
+              tagColor: color,
+              theme,
+            })}
+          />
         )}
       </LegacyGrid>
     );

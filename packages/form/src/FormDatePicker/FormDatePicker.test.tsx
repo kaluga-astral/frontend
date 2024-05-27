@@ -1,5 +1,5 @@
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { vi } from 'vitest';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 

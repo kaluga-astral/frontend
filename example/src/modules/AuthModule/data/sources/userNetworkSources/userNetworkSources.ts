@@ -3,7 +3,7 @@ import { apiHttpClient } from '@example/shared';
 import { UserLogoutNetworkDTO, UserPersonNetworkDTO } from './dto';
 
 /**
- * @description Запросы на auth-server для получение информаци о пользователе
+ * @description Запросы на auth-server для получение информами о пользователе
  * */
 export const userNetworkSources = {
   /**

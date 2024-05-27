@@ -1,16 +1,20 @@
 {
   "root": true,
   "extends": ["@astral/eslint-config-react-ts"],
+
   "env": {
     "node": true
   },
+
   "ignorePatterns": ["lib", "build", "node_modules"],
+
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "packageDir": ["./", "./"] }
     ]
   },
+
   "overrides": [
     {
       "files": "**/*.test.tsx",

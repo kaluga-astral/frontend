@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen } from '@astral/tests';
 
 import { Description } from './Description';
@@ -83,5 +84,28 @@ describe('Description', () => {
     const childrenElement = screen.getByText('0');
 
     expect(childrenElement).toBeInTheDocument();
+  });
+
+  it('Значение копируется в буфер обмена при клике на текст, если canCopy=true', async () => {
+    const valueText = 'get_rekt';
+
+    const writeTextSpy = vi.fn(() => Promise.resolve());
+
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: writeTextSpy,
+      },
+    });
+
+    renderWithTheme(
+      <Description>
+        <Description.Value canCopy>{valueText}</Description.Value>
+      </Description>,
+    );
+
+    const childrenElement = screen.getByText(valueText);
+
+    await childrenElement.click();
+    expect(writeTextSpy).toBeCalled();
   });
 });

@@ -1,0 +1,19 @@
+{
+  "name": "@astral/changelog-generator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "changelog-generate": "ts-node src/changelogGenerate.ts",
+    "telegram-notify": "ts-node src/telegramNotify.ts"
+
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "gitlog": "4.0.8",
+    "telegraf": "~4.15.3"
+  },
+  "devDependencies": {
+    "@astral/eslint-config-node": "^2.4.0",
+    "ts-node": "^10.9.2"
+  }
+}

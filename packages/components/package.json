@@ -5,12 +5,16 @@
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./next": "./src/next.ts",
     "./server": "./src/server/index.ts"
   },
   "typesVersions": {
     "*": {
       "server": [
         "src/server/index.ts"
+      ],
+      "next": [
+        "src/next.ts"
       ],
       "declaration/emotion": [
         "src/declaration/emotion.d.ts"
@@ -30,7 +34,8 @@
     "lint": "eslint --fix --quiet",
     "lint:all": "eslint \"**/*.{ts,tsx}\" --fix --quiet",
     "lint:styles": "stylelint --fix",
-    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix"
+    "lint:styles:all": "stylelint \"**/*.{ts,tsx}\" --fix",
+    "snapshot:theme": "ts-node -T ./src/theme/baseTheme/utils/writeSnapshot.ts"
   },
   "dependencies": {
     "@astral/icons": "*",
@@ -45,6 +50,7 @@
     "dayjs": "^1.11.5",
     "react-imask": "6.4.2",
     "react-toastify": "9.0.3",
+    "react-toastify-next": "npm:react-toastify@10.0.5",
     "react-use": "^17.4.0",
     "react-virtuoso": "^4.6.3",
     "remeda": "^1.40.1"
@@ -53,6 +59,7 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
-    "@astral/tests": "*"
+    "@astral/tests": "*",
+    "ts-node": "^10.9.2"
   }
 }
