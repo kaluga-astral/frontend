@@ -3,6 +3,7 @@ import { injectStyle } from 'react-toastify-next/dist/inject-style';
 
 import {
   NOTIFY_CLASSNAME,
+  NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME,
   NOTIFY_CONTAINER_CLASSNAME,
   NOTIFY_CONTAINER_ID,
   NOTIFY_POSITIONS,
@@ -31,7 +32,12 @@ export const NotificationStackContainerNext = ({
   closeButton,
   ...props
 }: NotificationStackContainerProps) => {
-  const { isVisibleCloseButton, isHoveredContainer, closeAll } = useLogic({
+  const {
+    isVisibleCloseButton,
+    isHoveredContainer,
+    isStartedClosingNotify,
+    closeAll,
+  } = useLogic({
     containerId,
   });
 
@@ -40,6 +46,7 @@ export const NotificationStackContainerNext = ({
       <Inner
         {...props}
         stacked
+        autoClose={500000}
         containerId={containerId}
         pauseOnFocusLoss
         position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
@@ -54,7 +61,16 @@ export const NotificationStackContainerNext = ({
       />
 
       {isVisibleCloseButton && (
-        <CloseButton size="small" variant="light" onClick={closeAll}>
+        <CloseButton
+          size="small"
+          variant="light"
+          className={
+            isStartedClosingNotify
+              ? NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME
+              : ''
+          }
+          onClick={closeAll}
+        >
           Закрыть уведомления
         </CloseButton>
       )}
