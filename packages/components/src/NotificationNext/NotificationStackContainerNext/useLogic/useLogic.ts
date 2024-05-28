@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { type ToastItem, toast } from 'react-toastify-next';
 
 import { sleep } from '../../utils';
+import { NOTIFY_CLASSNAME, NOTIFY_NO_TRANSITION_ATTR } from '../../constants';
 import { type Id } from '../types';
 
 import { useHover } from './hooks';
@@ -15,6 +16,8 @@ export const useLogic = ({
 }: UseLogicParams) => {
   const [toasts, setToasts] = useState<Id[]>([]);
   const [container, setContainer] = useState<Element | null>();
+  const [isStartedClosingNotify, setStartedClosingNotify] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (toasts.length) {
@@ -25,6 +28,34 @@ export const useLogic = ({
       setContainer(scrollContainer);
     }
   }, [externalContainerId, toasts]);
+
+  // Ориентируемся на data-атрибут для отключении анимации стека при добавлении нового уведомления
+  const handleAddNoTransitionAttr = () => {
+    const elements = document.querySelectorAll(`.${NOTIFY_CLASSNAME}`);
+
+    elements.forEach((element) =>
+      element.setAttribute(NOTIFY_NO_TRANSITION_ATTR, 'true'),
+    );
+  };
+
+  const handleRemoveNoTransitionAttr = () => {
+    const elements = document.querySelectorAll(
+      `.${NOTIFY_CLASSNAME}[${NOTIFY_NO_TRANSITION_ATTR}='true']`,
+    );
+
+    elements.forEach((element) =>
+      element.removeAttribute(NOTIFY_NO_TRANSITION_ATTR),
+    );
+  };
+
+  useEffect(() => {
+    handleRemoveNoTransitionAttr();
+
+    // Синхронизирует скрытие кнопки при ручном закрытии всех уведомлений
+    if (!toasts.length) {
+      setStartedClosingNotify(false);
+    }
+  }, [toasts]);
 
   const { isHovered: isHoveredContainer } = useHover(container as Element);
 
@@ -45,6 +76,7 @@ export const useLogic = ({
   const handleChange = ({ status, ...rest }: ToastItem) => {
     if (Object.is(status, 'added')) {
       handleAddToast({ status, ...rest });
+      handleAddNoTransitionAttr();
     }
 
     if (Object.is(status, 'removed')) {
@@ -64,11 +96,12 @@ export const useLogic = ({
     }
 
     (async () => {
+      // Ожидаем пока отработает анимация и стек с уведомлениями раскроется
+      await sleep(300);
+
       const hasScroll = container?.scrollHeight > container?.clientHeight;
 
       if (hasScroll) {
-        await sleep(200);
-
         container.scrollTo({
           top: container.scrollHeight,
           behavior: 'smooth',
@@ -78,10 +111,16 @@ export const useLogic = ({
   }, [container, isHoveredContainer]);
 
   const closeAll = () => {
+    setStartedClosingNotify(true);
     toast.dismiss({ containerId: externalContainerId });
   };
 
   const isVisibleCloseButton = Boolean(toasts.length);
 
-  return { isVisibleCloseButton, isHoveredContainer, closeAll };
+  return {
+    isVisibleCloseButton,
+    isHoveredContainer,
+    isStartedClosingNotify,
+    closeAll,
+  };
 };

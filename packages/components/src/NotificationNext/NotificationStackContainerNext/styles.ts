@@ -3,8 +3,13 @@ import { ToastContainer } from 'react-toastify-next';
 import { Button } from '../../Button';
 import { keyframes, styled } from '../../styles';
 import {
+  NOTIFY_ANIMATION_IN_CLASSNAME,
+  NOTIFY_ANIMATION_OUT_CLASSNAME,
   NOTIFY_CLASSNAME,
+  NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME,
   NOTIFY_CONTAINER_CLASSNAME,
+  NOTIFY_HEIGHT,
+  NOTIFY_NO_TRANSITION_ATTR,
   NotificationVariantTypes,
 } from '../constants';
 
@@ -20,6 +25,25 @@ const fade = keyframes`
   }
 `;
 
+const leaveIn = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0px);
+  }
+`;
+
+const leaveOut = keyframes`
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+`;
+
 // используем дополнительный враппер,
 // потому что styled для ToastContainer не умеет работать с theme внутри
 // использовать бэм классы для стилизации пришлось,
@@ -32,7 +56,7 @@ export const Wrapper = styled.div`
   right: 0;
   bottom: 0;
 
-  width: 424px;
+  width: 432px;
 
   &.${NOTIFY_CONTAINER_CLASSNAME} {
     display: flex;
@@ -50,25 +74,31 @@ export const Wrapper = styled.div`
     }
   }
 
-  /* Для контейнера с стандартными уведомлениями показываем в стеке не более 3-x */
-  .Toastify:not(:last-child) {
-    .${NOTIFY_CLASSNAME} {
-      &:not(:nth-last-child(-n + 3)) {
-        transform: unset;
+  .${NOTIFY_ANIMATION_IN_CLASSNAME} {
+    animation: ${leaveIn} ease-in-out 0.34s;
+    animation-fill-mode: both;
+  }
 
-        opacity: 0;
-      }
-    }
+  .${NOTIFY_ANIMATION_OUT_CLASSNAME} {
+    animation: ${leaveOut} ease-in-out 0.34s;
+    animation-fill-mode: both;
   }
 
   .${NOTIFY_CLASSNAME} {
     overflow: hidden !important;
 
     width: 400px;
-    height: 92px;
+    height: ${NOTIFY_HEIGHT};
+    margin-bottom: ${({ theme }) => theme.spacing(3)};
     padding: 0;
 
     box-shadow: ${({ theme }) => theme.elevation[300]};
+
+    transition: ${({ theme }) =>
+      theme.transitions.create(['transform', 'margin-bottom'], {
+        duration: theme.transitions.duration.short,
+        easing: 'ease-in-out',
+      })};
 
     &::after {
       content: '';
@@ -144,6 +174,32 @@ export const Wrapper = styled.div`
         easing: theme.transitions.easing.easeInOut,
       })};
   }
+
+  /* Стили для уведомлений в стеке */
+  .Toastify:not(:last-child) {
+    .${NOTIFY_CLASSNAME} {
+      position: relative;
+      transform: scale(var(--s));
+
+      &:not(:last-of-type) {
+        margin-bottom: calc(
+          ${({ theme }) => theme.spacing(4)} - ${NOTIFY_HEIGHT}
+        );
+      }
+
+      /* В свернутом виде показываем не более 3-x уведомлений */
+      &:not(:nth-last-child(-n + 3)) {
+        margin-bottom: -${NOTIFY_HEIGHT};
+
+        opacity: 0;
+      }
+
+      /* Отключаем анимацию при появлении нового уведомления */
+      &[${NOTIFY_NO_TRANSITION_ATTR}='true'] {
+        transition-duration: 0s !important;
+      }
+    }
+  }
 `;
 
 export const Inner = styled(ToastContainer)`
@@ -153,11 +209,12 @@ export const Inner = styled(ToastContainer)`
 
   width: 100%;
   min-width: 400px;
-  max-width: 424px;
+  max-width: 432px;
   padding-bottom: 0 !important;
+  padding-left: ${({ theme }) => theme.spacing(3)} !important;
 
   &:hover {
-    overflow-y: auto;
+    overflow: hidden auto;
 
     width: 100%;
     height: 100%;
@@ -167,7 +224,8 @@ export const Inner = styled(ToastContainer)`
       transform: unset;
 
       height: auto;
-      min-height: 92px;
+      min-height: ${NOTIFY_HEIGHT};
+      margin-bottom: ${({ theme }) => theme.spacing(3)} !important;
 
       opacity: 1 !important;
     }
@@ -195,9 +253,17 @@ export const CloseButton = styled(Button)`
   width: 400px;
   margin-top: ${({ theme }) => theme.spacing(2)};
   margin-bottom: ${({ theme }) => theme.spacing(3)};
-  margin-left: ${({ theme }) => theme.spacing(4)};
+  margin-left: ${({ theme }) => theme.spacing(6)};
 
   box-shadow: ${({ theme }) => theme.elevation[300]};
 
   animation: ${fade} 500ms linear;
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.elevation[300]};
+  }
+
+  &.${NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME} {
+    opacity: 0;
+  }
 `;
