@@ -10,6 +10,9 @@ Autocomplite
 autodocs
 autofix
 autoflow
+adddays
+addmonths
+addyears
 bradgarropy
 browserstack
 CADESCOM
@@ -52,6 +55,7 @@ Formated
 Forwardable
 fullname
 fullscreen
+formatphonetoview
 gitlog
 Gost
 GOST
@@ -137,6 +141,7 @@ vitejs
 vitest
 Vitest
 webp
+zeropad
 Автогенерация
 автокомплита
 автокомплитом
