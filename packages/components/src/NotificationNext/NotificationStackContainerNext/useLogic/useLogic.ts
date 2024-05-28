@@ -29,6 +29,7 @@ export const useLogic = ({
     }
   }, [externalContainerId, toasts]);
 
+  // Ориентируемся на data-атрибут для отключении анимации стека при добавлении нового уведомления
   const handleAddNoTransitionAttr = () => {
     const elements = document.querySelectorAll(`.${NOTIFY_CLASSNAME}`);
 

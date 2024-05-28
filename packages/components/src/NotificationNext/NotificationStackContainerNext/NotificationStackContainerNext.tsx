@@ -1,6 +1,7 @@
 import { type ToastContainerProps } from 'react-toastify-next';
 import { injectStyle } from 'react-toastify-next/dist/inject-style';
 
+import { classNames } from '../../utils';
 import {
   NOTIFY_CLASSNAME,
   NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME,
@@ -42,11 +43,14 @@ export const NotificationStackContainerNext = ({
   });
 
   return (
-    <Wrapper className={isHoveredContainer ? NOTIFY_CONTAINER_CLASSNAME : ''}>
+    <Wrapper
+      className={classNames({
+        [NOTIFY_CONTAINER_CLASSNAME]: isHoveredContainer,
+      })}
+    >
       <Inner
         {...props}
         stacked
-        autoClose={500000}
         containerId={containerId}
         pauseOnFocusLoss
         position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
@@ -64,11 +68,10 @@ export const NotificationStackContainerNext = ({
         <CloseButton
           size="small"
           variant="light"
-          className={
-            isStartedClosingNotify
-              ? NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME
-              : ''
-          }
+          className={classNames({
+            [NOTIFY_CLOSE_BUTTON_ANIMATION_OUT_CLASSNAME]:
+              isStartedClosingNotify,
+          })}
           onClick={closeAll}
         >
           Закрыть уведомления
