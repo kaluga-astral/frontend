@@ -2,9 +2,7 @@ import { Tab } from '@mui/material';
 
 import { styled } from '../styles';
 
-import { type TabProps } from './Tab';
-
-export const StyledTab = styled(Tab)<TabProps>`
+export const StyledTab = styled(Tab)`
   min-height: 36px;
   margin-right: ${({ theme }) => theme.spacing(4)};
   padding: 0;
