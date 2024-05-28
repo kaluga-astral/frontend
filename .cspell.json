@@ -18,7 +18,8 @@
     "**/*.html",
     "**/*.svg",
     "**/*.txt",
-    "**/storybook-static/**"
+    "**/storybook-static/**",
+    "**/changelog/**"
   ],
   "dictionaryDefinitions": [
     {
