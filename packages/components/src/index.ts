@@ -210,6 +210,8 @@ export * from './SideDialogContentText';
 
 export * from './SideDialogTitle';
 
+export { Skeleton, type SkeletonProps } from './Skeleton';
+
 export * from './Slide';
 
 export * from './Stepper';
