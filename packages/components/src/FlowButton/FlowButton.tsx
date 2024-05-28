@@ -9,7 +9,7 @@ import { StyledButton, TargetTextWrapper } from './styles';
 
 export type FlowButtonProps = Omit<
   ButtonProps,
-  'loading' | 'loadingIndicator' | 'loadingPosition' | 'size' | 'variant'
+  'loadingIndicator' | 'loadingPosition' | 'size' | 'variant'
 > & {
   /**
    * @targetText Текст на кнопке, указывающей направление по флоу
