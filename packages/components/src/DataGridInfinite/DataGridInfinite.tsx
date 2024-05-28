@@ -20,6 +20,7 @@ import {
   DataGridInfiniteLoaderWrapper,
   DataGridInfiniteTable,
   DataGridInfiniteTableContainer,
+  FooterRow,
 } from './styles';
 import {
   DEFAULT_ROW_HEIGHT,
@@ -171,7 +172,7 @@ export const DataGridInfinite = <
             />
           )}
           fixedFooterContent={() => (
-            <TableRow>
+            <FooterRow>
               <DataGridInfiniteLoaderWrapper
                 colSpan={isSelectable ? columns.length + 1 : columns.length}
               >
@@ -184,7 +185,7 @@ export const DataGridInfinite = <
                   </Typography>
                 )}
               </DataGridInfiniteLoaderWrapper>
-            </TableRow>
+            </FooterRow>
           )}
         />
         {isStickyButtonActive && (
