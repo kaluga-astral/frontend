@@ -5,7 +5,7 @@ import {
   type VirtuosoHandle,
 } from 'react-virtuoso';
 
-import { TableBody, TableRow } from '../Table';
+import { TableBody } from '../Table';
 import { Container, type DataGridProps, type DataGridRow } from '../DataGrid';
 import { DataGridHead } from '../DataGrid/DataGridHead';
 import { CircularProgress } from '../CircularProgress';
