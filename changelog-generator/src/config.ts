@@ -1,8 +1,8 @@
 import path from 'path';
 
-const { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, CHANGELOG_DIR_PATH: EXTERNAL_CHANGELOG_DIR_PATH } = process.env; 
+const { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_NEWS_CHAT_ID, CHANGELOG_DIR_PATH: EXTERNAL_CHANGELOG_DIR_PATH } = process.env; 
 
-export { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID }
+export { JIRA_URL, STORYBOOK_URL, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID: TELEGRAM_NEWS_CHAT_ID }
 
 /**
  * Путь до директории, куда сохраняем md-файлы
@@ -17,4 +17,4 @@ export const CHANGELOG_DIR_URL = 'https://github.com/kaluga-astral/frontend/blob
 /**
  * Кол-во дней периода, за который генерируем changelog
  */
-export const PERIOD_IN_DAYS = 15;
+export const PERIOD_IN_DAYS = 14;
