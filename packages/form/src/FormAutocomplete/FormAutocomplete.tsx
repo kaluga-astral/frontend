@@ -69,8 +69,12 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
+  // Внимание, костыль.
+  // React-hook-form в последних версиях стал требовать для всех полей указывать defaultValues. Если defaultValues не указывать, то form.setValue работать не будет.
+  // Это breaking changes для наших проектов. Текущее решение прокидывает в input дефолтное значение, которое rhf может получить через ref и обработать так, как мы ожидаем
+  // fallbackValue не установится в state формы, это нужно только для ожидаемой работы rhf
   const fallbackValue = (
-    fieldProps.multiple ? [] : ''
+    fieldProps.multiple ? [] : null
   ) as typeof fieldProps.value;
 
   return (

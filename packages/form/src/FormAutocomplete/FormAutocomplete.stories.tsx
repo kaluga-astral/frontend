@@ -78,7 +78,6 @@ const validationFreeSchema = object<FormFreeValues>({
 
 export const Example = () => {
   const form = useForm<FormValues>({
-    defaultValues: { autocomplete: [OPTIONS[0]] },
     resolver: resolver<FormValues>(validationSchema),
   });
 
@@ -105,7 +104,6 @@ export const Example = () => {
  */
 export const FreeSolo = () => {
   const form = useForm<FormFreeValues>({
-    defaultValues: { autocomplete: '' },
     resolver: resolver<FormFreeValues>(validationFreeSchema),
   });
 
