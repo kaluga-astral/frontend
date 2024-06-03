@@ -35,7 +35,6 @@ describe('FormEmailField', () => {
     const submitSpy = vi.fn();
 
     const TestComponent = () => {
-      const ref = useRef(null);
       const form = useForm<{ email: string }>();
 
       return (
@@ -44,7 +43,6 @@ describe('FormEmailField', () => {
             name="email"
             label="email"
             control={form.control}
-            ref={ref}
           />
           <FormSubmitButton>Отправить</FormSubmitButton>
         </Form>
