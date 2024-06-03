@@ -39,11 +39,7 @@ describe('FormEmailField', () => {
 
       return (
         <Form form={form} onSubmit={form.handleSubmit(submitSpy)}>
-          <FormEmailField
-            name="email"
-            label="email"
-            control={form.control}
-          />
+          <FormEmailField name="email" label="email" control={form.control} />
           <FormSubmitButton>Отправить</FormSubmitButton>
         </Form>
       );
