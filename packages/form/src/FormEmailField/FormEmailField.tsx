@@ -1,11 +1,12 @@
 import type { ForwardedRef } from 'react';
 import {
+  EmailField,
   type EmailFieldProps,
   forwardRefWithGeneric,
 } from '@astral/components';
 
-import { FormTextField } from '../FormTextField';
 import { type WithFormFieldProps } from '../types';
+import { useFormFieldProps } from '../hooks';
 
 export type FormEmailFieldProps<FieldValues extends object> =
   WithFormFieldProps<EmailFieldProps, FieldValues>;
@@ -14,7 +15,9 @@ function FormEmailFieldInner<T extends object>(
   props: FormEmailFieldProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  return <FormTextField ref={ref} type="email" {...props} />;
+  const fieldProps = useFormFieldProps<FormEmailFieldProps<T>, T>(props);
+
+  return <EmailField {...fieldProps} ref={ref} />;
 }
 
 export const FormEmailField = forwardRefWithGeneric(FormEmailFieldInner);
