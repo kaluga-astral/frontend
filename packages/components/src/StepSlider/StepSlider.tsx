@@ -1,5 +1,6 @@
-import { type ReactNode, useEffect, useId, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 
+import { useId } from '../hooks/useId';
 import { Slide, type SlideProps } from '../Slide';
 
 import { Item, Wrapper } from './styles';
