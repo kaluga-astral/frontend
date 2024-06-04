@@ -2,8 +2,9 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from '@mui/material';
-import { type ReactNode, useId } from 'react';
+import { type ReactNode } from 'react';
 
+import { useId } from '../hooks/useId';
 import { type WithoutEmotionSpecific } from '../types';
 import { FormControl, type FormControlProps } from '../FormControl';
 import { FormLabel } from '../FormLabel';
