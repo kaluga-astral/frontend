@@ -1,4 +1,8 @@
-import { type TooltipProps as MuiTooltipProps, Tooltip } from '@mui/material';
+import {
+  type TooltipProps as MuiTooltipProps,
+  Tooltip,
+  tooltipClasses,
+} from '@mui/material';
 
 import { styled } from '../styles';
 import { type WithoutEmotionSpecific } from '../types';
@@ -15,7 +19,7 @@ export const StyledTooltip = styled(
     <Tooltip {...props} classes={{ popper: className }} />
   ),
 )`
-  & .MuiTooltip-tooltip {
+  & .${tooltipClasses.tooltip} {
     margin: 0;
 
     font-size: ${({ size, theme }) =>
@@ -33,27 +37,27 @@ export const StyledTooltip = styled(
     border-radius: ${({ theme }) => theme.shape.small};
   }
 
-  & .MuiTooltip-arrow {
+  & .${tooltipClasses.arrow} {
     color: ${({ theme }) => theme.palette.grey[900]};
   }
 
-  &&[data-popper-placement*='top'] .MuiTooltip-tooltip {
-    margin-bottom: ${({ theme }) => theme.spacing(3)};
+  &&[data-popper-placement*='top'] .${tooltipClasses.tooltip} {
+    margin-bottom: ${({ theme }) => theme.spacing(1)};
   }
 
-  &&[data-popper-placement*='bottom'] .MuiTooltip-tooltip {
-    margin-top: ${({ theme }) => theme.spacing(3)};
+  &&[data-popper-placement*='bottom'] .${tooltipClasses.tooltip} {
+    margin-top: ${({ theme }) => theme.spacing(1)};
   }
 
-  &&[data-popper-placement*='left'] .MuiTooltip-tooltip {
-    margin-right: ${({ theme }) => theme.spacing(2)};
+  &&[data-popper-placement*='left'] .${tooltipClasses.tooltip} {
+    margin-right: ${({ theme }) => theme.spacing(1)};
   }
 
-  &&[data-popper-placement*='right'] .MuiTooltip-tooltip {
-    margin-left: ${({ theme }) => theme.spacing(2)};
+  &&[data-popper-placement*='right'] .${tooltipClasses.tooltip} {
+    margin-left: ${({ theme }) => theme.spacing(1)};
   }
 `;
 
-export const TooltipContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   display: inherit;
 `;

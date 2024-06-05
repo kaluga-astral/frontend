@@ -251,6 +251,8 @@ export * from './ToggleButtonGroup';
 
 export * from './Tooltip';
 
+export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
+
 export * from './types';
 
 export * from './Typography';
