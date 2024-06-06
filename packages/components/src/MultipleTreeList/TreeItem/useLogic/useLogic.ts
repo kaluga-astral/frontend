@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
-import { useCollapse } from '../hooks';
-import { type CheckedTreeItemProps } from '../types';
+import { type TreeItemProps } from '../../types';
 
 import {
   checkIsIndeterminate,
@@ -10,13 +9,11 @@ import {
 } from './utils';
 
 type UseLogicProps = Pick<
-  CheckedTreeItemProps,
+  TreeItemProps,
   'id' | 'value' | 'children' | 'onChange'
 >;
 
 export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
-  const { isOpen, handleToggle } = useCollapse();
-
   const childrenIds = useMemo(() => getAllChildrenId(children), [children]);
   const isSelected = checkIsSelected(value, id);
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
@@ -30,13 +27,18 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
       value?.includes(childrenId),
     );
 
-    if (isEveryChildChecked) {
+    console.log(id, 'isEveryChildChecked', isEveryChildChecked);
+
+    if (!isSelected && isEveryChildChecked) {
+      console.log('Add root: ', id);
       onChange?.((selectedIds) => [...(selectedIds || []), id]);
     }
 
-    if (!isEveryChildChecked) {
+    if (isSelected && !isEveryChildChecked) {
+      console.log('Delete root: ', id);
+
       onChange?.((selectedIds = []) =>
-        selectedIds?.filter((selectedId) => selectedId !== id),
+        selectedIds.filter((selectedId) => selectedId !== id),
       );
     }
   }, [value, childrenIds]);
@@ -62,10 +64,8 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
   };
 
   return {
-    isOpen,
     isSelected,
     isIndeterminate,
-    handleToggle,
     handleChange,
   };
 };

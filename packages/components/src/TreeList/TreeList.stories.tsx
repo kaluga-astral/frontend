@@ -3,23 +3,23 @@ import { type Meta } from '@storybook/react';
 
 import { styled } from '../styles';
 
-import { TreeLikeList } from './TreeLikeList';
+import { TreeList } from './TreeList';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21329-76225&t=ocy6798zA4pD2nYD-0)
  * ### [Guide]()
- * Дерево объектов - интерактивный компонент, который поддерживает вложенность объектов,
- * позволяет выбрать один объект (single select) или множество (multiselect) объектов из списка,
+ * TreeList - интерактивный компонент, который поддерживает вложенность объектов,
+ * позволяет выбрать один объект из списка,
  * свернуть (скрыть) и развернуть (показать) вложенные элементы
  */
-const meta: Meta<typeof TreeLikeList> = {
-  title: 'Components/TreeLikeList',
-  component: TreeLikeList,
+const meta: Meta<typeof TreeList> = {
+  title: 'Components/TreeList',
+  component: TreeList,
 };
 
 export default meta;
 
-const TREE_LIST_MOCK_DATA = [
+const FAKE_TREE_LIST_DATA = [
   {
     id: '1',
     label: 'Group 1',
@@ -78,35 +78,20 @@ const TREE_LIST_MOCK_DATA = [
       },
     ],
   },
-  {
-    id: '3',
-    label: 'Item 3',
-  },
 ];
 
 export const Example = () => {
   const [value, setValue] = useState<string | undefined>();
 
-  return (
-    <TreeLikeList
-      data={TREE_LIST_MOCK_DATA}
-      value={value}
-      onChange={setValue}
-    />
-  );
-};
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
 
-export const Multiple = () => {
-  const [value, setValue] = useState<Array<string> | undefined>();
-
-  return (
-    <TreeLikeList
-      multiple
-      data={TREE_LIST_MOCK_DATA}
-      value={value}
-      onChange={setValue}
-    />
-  );
+  return <TreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
 const Table = styled.table`
@@ -130,12 +115,19 @@ const Row = ({
 );
 
 export const CustomComponents = () => {
-  const [value, setValue] = useState<Array<string> | undefined>();
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
 
   return (
-    <TreeLikeList
-      multiple
-      data={TREE_LIST_MOCK_DATA}
+    <TreeList
+      data={fakeData}
       value={value}
       componentList={Table}
       componentItem={Row}

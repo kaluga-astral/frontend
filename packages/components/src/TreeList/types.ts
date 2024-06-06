@@ -1,7 +1,6 @@
 import { type ComponentProps, type ElementType, type ReactNode } from 'react';
 
 type Value = string | undefined;
-type MultipleValue = Array<string> | undefined;
 
 export type TreeData = {
   /**
@@ -62,67 +61,15 @@ export type TreeItemProps<
   onChange?: (value: Value) => void;
 };
 
-export type CheckedTreeItemProps<
+export type TreeListProps<
   TComponentList extends ElementType = ElementType,
   TComponentItem extends ElementType = ElementType,
-> = Omit<
-  TreeItemProps<TComponentList, TComponentItem>,
-  'value' | 'onChange'
-> & {
-  /**
-   * Выбранные значения
-   */
-  value?: MultipleValue;
-
-  /**
-   * Функция, которая запускается при изменении состояния
-   */
-  onChange?: (
-    value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  ) => void;
-};
-
-type SingleTreeLikeListProps = {
-  /**
-   * Если `true`, значение `value` должно быть массивом, и компонент будет поддерживать множественный выбор.
-   */
-  multiple?: never;
-
+> = {
   /**
    * Выбранные значения
    */
   value?: Value;
 
-  /**
-   * Функция, которая запускается при изменении состояния.
-   */
-  onChange?: (value: Value) => void;
-};
-
-type MultipleTreeLikeListProps = {
-  /**
-   * Если `true`, значение `value` должно быть массивом, и компонент будет поддерживать множественный выбор.
-   * @default 'false'
-   */
-  multiple: true;
-
-  /**
-   * Выбранные значения
-   */
-  value?: MultipleValue;
-
-  /**
-   * Функция, которая запускается при изменении состояния.
-   */
-  onChange?: (
-    value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  ) => void;
-};
-
-export type TreeLikeListProps<
-  TComponentList extends ElementType = ElementType,
-  TComponentItem extends ElementType = ElementType,
-> = (SingleTreeLikeListProps | MultipleTreeLikeListProps) & {
   /**
    * Данные, которые необходимо отобразить в виде дерева.
    */
@@ -154,4 +101,9 @@ export type TreeLikeListProps<
    * Props, специфичные для компонента Item
    */
   itemProps?: ComponentProps<TComponentItem>;
+
+  /**
+   * Функция, которая запускается при изменении состояния.
+   */
+  onChange?: (value: Value) => void;
 };

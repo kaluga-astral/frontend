@@ -156,6 +156,11 @@ export * from './MenuItem';
 
 export * from './MenuList';
 
+export {
+  MultipleTreeList,
+  type MultipleTreeListProps,
+} from './MultipleTreeList';
+
 export * from './NavMenu';
 
 export * from './Notification';
@@ -251,7 +256,9 @@ export * from './ToggleButtonGroup';
 
 export * from './Tooltip';
 
-export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
+export { TreeItem, type TreeItemProps } from './TreeItem';
+
+export { TreeList, type TreeListProps } from './TreeList';
 
 export * from './types';
 
