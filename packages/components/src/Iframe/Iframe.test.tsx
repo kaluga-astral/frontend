@@ -30,6 +30,16 @@ describe('Iframe', () => {
     expect(iframe).toHaveAttribute('src', 'https://example.com');
   });
 
+  it('Sandbox не применяется, если указать пустую строку', () => {
+    renderWithTheme(
+      <Iframe title="test iframe" sandbox="" src="https://example.com" />,
+    );
+
+    const iframe = screen.getByTitle('test iframe');
+
+    expect(iframe).not.toHaveAttribute('sandbox');
+  });
+
   it('onError вызывается при ошибке', async () => {
     const onErrorSpy = vi.fn();
 
