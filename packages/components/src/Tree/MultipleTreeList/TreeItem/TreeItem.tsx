@@ -1,4 +1,9 @@
-import { type FunctionComponent, type SyntheticEvent } from 'react';
+import {
+  type Dispatch,
+  type FunctionComponent,
+  type SetStateAction,
+  type SyntheticEvent,
+} from 'react';
 
 import { Checkbox } from '../../../Checkbox';
 import { FormControlLabel } from '../../../FormControlLabel';
@@ -26,9 +31,10 @@ export type TreeItemProps = TreeData & {
   /**
    * Функция, которая запускается при выборе item
    */
-  onChange?: (
-    value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  ) => void;
+  // onChange?: (
+  //   value: MultipleValue | ((value: MultipleValue) => Array<string>),
+  // ) => void;
+  onChange?: Dispatch<SetStateAction<MultipleValue>>;
 };
 
 const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (

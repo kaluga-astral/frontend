@@ -1,4 +1,9 @@
-import { type FunctionComponent, type ReactNode } from 'react';
+import {
+  type Dispatch,
+  type FunctionComponent,
+  type ReactNode,
+  type SetStateAction,
+} from 'react';
 
 export type MultipleValue = Array<string> | undefined;
 
@@ -43,7 +48,8 @@ export type MultipleTreeListProps = {
   /**
    * Функция, которая запускается при изменении состояния.
    */
-  onChange?: (
-    value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  ) => void;
+  // onChange?: (
+  //   value: MultipleValue | ((value: MultipleValue) => Array<string>),
+  // ) => void;
+  onChange?: Dispatch<SetStateAction<MultipleValue>>;
 };
