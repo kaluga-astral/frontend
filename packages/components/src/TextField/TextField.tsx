@@ -1,4 +1,4 @@
-import { type ReactNode, forwardRef, useMemo } from 'react';
+import { type FocusEvent, type ReactNode, forwardRef, useMemo } from 'react';
 import {
   TextField as MuiTextField,
   type TextFieldProps as MuiTextFieldProps,
@@ -27,6 +27,11 @@ export type TextFieldProps = Omit<
    * Максимальная длина ввода
    */
   maxLength?: number;
+  /**
+   * @description Параметр для обрезания пробелов в текст филде при вызове onBlur. По-умолчанию true
+   * @example <FormTextField trimmed={false} />
+   */
+  trimmed?: boolean;
 };
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
@@ -41,6 +46,8 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       inputProps,
       InputProps,
       maxLength,
+      trimmed = true,
+      onBlur,
       ...props
     },
     ref,
@@ -79,6 +86,19 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       return <></>;
     }, [helperTextProp, success, error]);
 
+    const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+      if (trimmed) {
+        const newValue = event.target.value?.trim();
+
+        props.onChange?.({
+          ...event,
+          target: { ...event.target, value: newValue },
+        });
+      }
+
+      onBlur?.(event);
+    };
+
     return (
       <MuiTextField
         ref={ref}
@@ -96,6 +116,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           maxLength,
           ...inputProps,
         }}
+        onBlur={handleOnBlur}
         {...props}
       />
     );

@@ -129,4 +129,52 @@ describe('TextField', () => {
       expect(inputElement.value).toHaveLength(MAX_LENGTH);
     });
   });
+
+  it('При переводе фокуса с инпута пробел в конце текста удаляется', async () => {
+    const onChangeMock = vi.fn();
+
+    renderWithTheme(
+      <TextField
+        inputProps={{ 'data-testid': 'textFieldForTrim' }}
+        onChange={(e) => onChangeMock(e.target.value)}
+      />,
+    );
+
+    const inputElement = screen.getByTestId(
+      'textFieldForTrim',
+    ) as HTMLInputElement;
+
+    await userEvents.type(inputElement, 'test ');
+    await userEvents.tab();
+
+    await waitFor(() => {
+      expect(onChangeMock.mock.lastCall).toEqual(['test']);
+    });
+
+    vi.clearAllMocks();
+  });
+
+  it('При переводе фокуса с инпута вызывается переданный onBlur', async () => {
+    const onBlurMock = vi.fn();
+
+    renderWithTheme(
+      <TextField
+        inputProps={{ 'data-testid': 'textFieldForOnBlur' }}
+        onBlur={(e) => onBlurMock(e.target.value)}
+      />,
+    );
+
+    const inputElement = screen.getByTestId(
+      'textFieldForOnBlur',
+    ) as HTMLInputElement;
+
+    await userEvents.type(inputElement, 'test');
+    await userEvents.tab();
+
+    await waitFor(() => {
+      expect(onBlurMock.mock.lastCall).toEqual(['test']);
+    });
+
+    vi.clearAllMocks();
+  });
 });
