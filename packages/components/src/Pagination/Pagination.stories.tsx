@@ -36,12 +36,6 @@ export const Example = () => (
   </>
 );
 
-export const FirstAndLastButtons = () => (
-  <>
-    <Pagination count={10} showFirstButton showLastButton />
-  </>
-);
-
 export const HideButtons = () => (
   <>
     <Pagination count={10} hidePrevButton hideNextButton />
