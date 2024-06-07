@@ -189,12 +189,7 @@ describe('MultipleTreeList', () => {
       ]);
 
       return (
-        <MultipleTreeList
-          multiple
-          value={value}
-          data={fakeData}
-          onChange={setValue}
-        />
+        <MultipleTreeList value={value} data={fakeData} onChange={setValue} />
       );
     };
 
