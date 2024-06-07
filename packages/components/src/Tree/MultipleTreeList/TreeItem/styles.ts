@@ -1,5 +1,5 @@
 import { TreeItem } from '../../TreeItem';
-import { styled } from '../../styles';
+import { styled } from '../../../styles';
 
 export const StyledItemContent = styled(TreeItem)`
   & > div {

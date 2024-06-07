@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { Typography } from '../Typography';
+import { Typography } from '../../Typography';
 
 import { TreeList, type TreeListProps } from './TreeList';
 
@@ -50,7 +50,7 @@ describe('TreeList', () => {
       },
     ];
 
-    const renderItem: TreeListProps['renderItem'] = (id, label) => (
+    const renderItem: TreeListProps['renderItem'] = ({ id, label }) => (
       <Typography component="div">
         #{id}. {label}
       </Typography>

@@ -1,7 +1,7 @@
-import { type ReactNode, type SyntheticEvent } from 'react';
+import { type FunctionComponent, type SyntheticEvent } from 'react';
 
-import { Checkbox } from '../../Checkbox';
-import { FormControlLabel } from '../../FormControlLabel';
+import { Checkbox } from '../../../Checkbox';
+import { FormControlLabel } from '../../../FormControlLabel';
 import type { MultipleValue, TreeData } from '../types';
 
 import { useLogic } from './useLogic';
@@ -16,7 +16,7 @@ export type TreeItemProps = TreeData & {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: (id: string, label: ReactNode) => JSX.Element;
+  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
 
   /**
    * Уровень вложенности в дереве
@@ -31,7 +31,7 @@ export type TreeItemProps = TreeData & {
   ) => void;
 };
 
-const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = (_, label) => (
+const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (
   <>{label}</>
 );
 
@@ -43,6 +43,7 @@ export const TreeItem = ({
   children = [],
   value,
   onChange,
+  ...props
 }: TreeItemProps) => {
   const { isSelected, isIndeterminate, handleChange } = useLogic({
     id,
@@ -66,7 +67,7 @@ export const TreeItem = ({
                 indeterminate={isSelected ? false : isIndeterminate}
               />
             }
-            label={renderItem(id, label)}
+            label={renderItem({ id, label, ...props })}
             onChange={handleChange}
             onClick={handleClick}
           />
@@ -96,7 +97,7 @@ export const TreeItem = ({
       label={
         <FormControlLabel
           control={<Checkbox checked={isSelected} />}
-          label={renderItem(id, label)}
+          label={renderItem({ id, label, ...props })}
           onChange={handleChange}
           onClick={handleClick}
         />

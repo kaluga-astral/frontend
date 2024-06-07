@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type FunctionComponent } from 'react';
 
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
 import type { TreeData, Value } from '../types';
@@ -15,7 +15,7 @@ export type TreeItemProps = TreeData & {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: (id: string, label: ReactNode) => JSX.Element;
+  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
 
   /**
    * Уровень вложенности в дереве
@@ -28,7 +28,7 @@ export type TreeItemProps = TreeData & {
   onChange?: (value: Value) => void;
 };
 
-const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = (_, label) => (
+const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (
   <Label variant="ui">{label}</Label>
 );
 
@@ -40,6 +40,7 @@ export const TreeItem = ({
   children = [],
   value,
   onChange,
+  ...props
 }: TreeItemProps) => {
   const { isSelected, handleChange } = useLogic({
     id,
@@ -53,7 +54,7 @@ export const TreeItem = ({
         isRoot
         isSelected={isSelected}
         component="li"
-        label={renderItem(id, label)}
+        label={renderItem({ id, label, ...props })}
         level={level}
         onClick={handleChange}
       >
@@ -77,7 +78,7 @@ export const TreeItem = ({
     <BaseTreeItem
       isSelected={isSelected}
       component="li"
-      label={renderItem(id, label)}
+      label={renderItem({ id, label, ...props })}
       level={level}
       onClick={handleChange}
     />

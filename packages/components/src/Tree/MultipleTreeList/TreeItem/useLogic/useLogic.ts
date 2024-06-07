@@ -28,7 +28,7 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
     );
 
     if (!isSelected && isEveryChildChecked) {
-      onChange?.((selectedIds) => [...(selectedIds || []), id]);
+      onChange?.((selectedIds = []) => [...selectedIds, id]);
     }
 
     if (isSelected && !isEveryChildChecked) {

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { useState } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { Typography } from '../Typography';
+import { Typography } from '../../Typography';
 
 import {
   MultipleTreeList,
@@ -54,7 +54,7 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    const renderItem: MultipleTreeListProps['renderItem'] = (id, label) => (
+    const renderItem: MultipleTreeListProps['renderItem'] = ({ id, label }) => (
       <Typography component="div">
         #{id}. {label}
       </Typography>
@@ -120,7 +120,7 @@ describe('MultipleTreeList', () => {
     expect(checked).toHaveLength(2);
   });
 
-  it('Родительская группа выделяется, если все дочернии элементы выбраны', async () => {
+  it('Родительская группа выделяется, если все дочерние элементы выбраны', async () => {
     const fakeData = [
       {
         id: '1',
@@ -163,7 +163,7 @@ describe('MultipleTreeList', () => {
     expect(checked).toHaveLength(3);
   });
 
-  it('Все дочернии элементы отключаются, если выключить родительскую группу', async () => {
+  it('Все дочерние элементы отключаются, если выключить родительскую группу', async () => {
     const fakeData = [
       {
         id: '1',

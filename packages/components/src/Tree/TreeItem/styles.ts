@@ -1,7 +1,7 @@
 import { ChevronROutlineMd } from '@astral/icons';
 
-import { IconButton } from '../IconButton';
-import { styled } from '../styles';
+import { IconButton } from '../../IconButton';
+import { styled } from '../../styles';
 
 import { COLLAPSE_BUTTON_WIDTH, TREE_LINE_WIDTH } from './constants';
 

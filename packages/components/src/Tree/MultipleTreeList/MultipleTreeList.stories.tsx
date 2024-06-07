@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import { type Meta } from '@storybook/react';
 
-import { Typography } from '../Typography';
-import { styled } from '../styles';
+import { Typography } from '../../Typography';
+import { styled } from '../../styles';
 
-import { TreeList, type TreeListProps } from './TreeList';
+import {
+  MultipleTreeList,
+  type MultipleTreeListProps,
+} from './MultipleTreeList';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21329-76225&t=ocy6798zA4pD2nYD-0)
  * ### [Guide]()
- * TreeList - интерактивный компонент, который поддерживает вложенность объектов,
- * позволяет выбрать один объект из списка,
+ * MultipleTreeList - интерактивный компонент, который поддерживает вложенность объектов,
+ * позволяет выбрать или множество (multiselect) объектов из списка,
  * свернуть (скрыть) и развернуть (показать) вложенные элементы
  */
-const meta: Meta<typeof TreeList> = {
-  title: 'Components/TreeList',
-  component: TreeList,
+const meta: Meta<typeof MultipleTreeList> = {
+  title: 'Components/Tree/MultipleTreeList',
+  component: MultipleTreeList,
 };
 
 export default meta;
@@ -82,7 +85,7 @@ const FAKE_TREE_LIST_DATA = [
 ];
 
 export const Example = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -92,7 +95,7 @@ export const Example = () => {
     },
   ];
 
-  return <TreeList data={fakeData} value={value} onChange={setValue} />;
+  return <MultipleTreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
 const Item = styled.div`
@@ -103,7 +106,7 @@ const Item = styled.div`
 `;
 
 export const RenderItem = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -113,7 +116,7 @@ export const RenderItem = () => {
     },
   ];
 
-  const renderItem: TreeListProps['renderItem'] = (id, label) => (
+  const renderItem: MultipleTreeListProps['renderItem'] = ({ id, label }) => (
     <Item>
       <Typography variant="caption">#{id}</Typography>
       <Typography color="textSecondary">{label}</Typography>
@@ -121,7 +124,7 @@ export const RenderItem = () => {
   );
 
   return (
-    <TreeList
+    <MultipleTreeList
       data={fakeData}
       value={value}
       renderItem={renderItem}

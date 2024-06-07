@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type FunctionComponent, type ReactNode } from 'react';
 
 export type MultipleValue = Array<string> | undefined;
 
@@ -14,7 +14,7 @@ export type TreeData = {
   label: ReactNode;
 
   /**
-   * Дочернии элементы
+   * Дочерние элементы
    */
   children?: TreeData[];
 };
@@ -38,7 +38,7 @@ export type MultipleTreeListProps = {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: (id: string, label: ReactNode) => JSX.Element;
+  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
 
   /**
    * Функция, которая запускается при изменении состояния.
