@@ -266,3 +266,5 @@ export * from './PasswordField';
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
+
+export * from './Pagination';
