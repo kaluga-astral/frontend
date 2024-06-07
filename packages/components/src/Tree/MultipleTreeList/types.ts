@@ -48,8 +48,5 @@ export type MultipleTreeListProps = {
   /**
    * Функция, которая запускается при изменении состояния.
    */
-  // onChange?: (
-  //   value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  // ) => void;
-  onChange?: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: Dispatch<SetStateAction<MultipleValue>>;
 };

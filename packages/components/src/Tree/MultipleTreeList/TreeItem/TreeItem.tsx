@@ -31,10 +31,7 @@ export type TreeItemProps = TreeData & {
   /**
    * Функция, которая запускается при выборе item
    */
-  // onChange?: (
-  //   value: MultipleValue | ((value: MultipleValue) => Array<string>),
-  // ) => void;
-  onChange?: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: Dispatch<SetStateAction<MultipleValue>>;
 };
 
 const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (

@@ -28,18 +28,18 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
     );
 
     if (!isSelected && isEveryChildChecked) {
-      onChange?.((selectedIds = []) => [...selectedIds, id]);
+      onChange((selectedIds = []) => [...selectedIds, id]);
     }
 
     if (isSelected && !isEveryChildChecked) {
-      onChange?.((selectedIds = []) =>
+      onChange((selectedIds = []) =>
         selectedIds.filter((selectedId) => selectedId !== id),
       );
     }
   }, [value, childrenIds]);
 
   const handleChange = () => {
-    onChange?.((selectedIds = []) => {
+    onChange((selectedIds = []) => {
       if (children) {
         if (selectedIds.includes(id)) {
           return selectedIds.filter(
