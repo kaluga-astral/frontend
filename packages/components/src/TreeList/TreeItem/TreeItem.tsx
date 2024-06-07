@@ -1,17 +1,42 @@
+import { type ReactNode } from 'react';
+
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
-import { type TreeItemProps } from '../types';
+import type { TreeData, Value } from '../types';
 
 import { useLogic } from './useLogic';
 import { Label, List } from './styles';
+
+export type TreeItemProps = TreeData & {
+  /**
+   * Выбранные значения
+   */
+  value?: Value;
+
+  /**
+   * Render-props, позволяет более гибко настраивать содержимое item
+   */
+  renderItem?: (id: string, label: ReactNode) => JSX.Element;
+
+  /**
+   * Уровень вложенности в дереве
+   */
+  level: number;
+
+  /**
+   * Функция, которая запускается при выборе item
+   */
+  onChange?: (value: Value) => void;
+};
+
+const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = (_, label) => (
+  <Label variant="ui">{label}</Label>
+);
 
 export const TreeItem = ({
   id,
   label,
   level,
-  componentList = 'ul',
-  componentItem = 'li',
-  listProps,
-  itemProps,
+  renderItem = DEFAULT_RENDER_ITEM,
   children = [],
   value,
   onChange,
@@ -27,20 +52,17 @@ export const TreeItem = ({
       <BaseTreeItem
         isRoot
         isSelected={isSelected}
-        label={<Label variant="ui">{label}</Label>}
+        component="li"
+        label={renderItem(id, label)}
         level={level}
-        component={componentItem}
         onClick={handleChange}
       >
-        <List {...listProps} as={componentList}>
+        <List>
           {children.map((child) => (
             <TreeItem
               key={child.id}
               {...child}
-              componentList={componentList}
-              componentItem={componentItem}
-              listProps={listProps}
-              itemProps={itemProps}
+              renderItem={renderItem}
               level={level + 1}
               value={value}
               onChange={onChange}
@@ -54,9 +76,9 @@ export const TreeItem = ({
   return (
     <BaseTreeItem
       isSelected={isSelected}
-      label={<Label variant="ui">{label}</Label>}
+      component="li"
+      label={renderItem(id, label)}
       level={level}
-      component={componentItem}
       onClick={handleChange}
     />
   );

@@ -1,4 +1,4 @@
-import { type TreeItemProps } from '../../types';
+import { type TreeItemProps } from '../TreeItem';
 
 type UseLogicProps = Pick<TreeItemProps, 'id' | 'value' | 'onChange'>;
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
-import { type TreeItemProps } from '../../types';
+import { type TreeItemProps } from '../TreeItem';
 
 import {
   checkIsIndeterminate,
@@ -27,16 +27,11 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
       value?.includes(childrenId),
     );
 
-    console.log(id, 'isEveryChildChecked', isEveryChildChecked);
-
     if (!isSelected && isEveryChildChecked) {
-      console.log('Add root: ', id);
       onChange?.((selectedIds) => [...(selectedIds || []), id]);
     }
 
     if (isSelected && !isEveryChildChecked) {
-      console.log('Delete root: ', id);
-
       onChange?.((selectedIds = []) =>
         selectedIds.filter((selectedId) => selectedId !== id),
       );

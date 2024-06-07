@@ -1,18 +1,45 @@
+import { type ReactNode, type SyntheticEvent } from 'react';
+
 import { Checkbox } from '../../Checkbox';
 import { FormControlLabel } from '../../FormControlLabel';
-import { type TreeItemProps } from '../types';
+import type { MultipleValue, TreeData } from '../types';
 
 import { useLogic } from './useLogic';
 import { List, StyledItemContent } from './styles';
+
+export type TreeItemProps = TreeData & {
+  /**
+   * Выбранные значения
+   */
+  value?: MultipleValue;
+
+  /**
+   * Render-props, позволяет более гибко настраивать содержимое item
+   */
+  renderItem?: (id: string, label: ReactNode) => JSX.Element;
+
+  /**
+   * Уровень вложенности в дереве
+   */
+  level: number;
+
+  /**
+   * Функция, которая запускается при выборе item
+   */
+  onChange?: (
+    value: MultipleValue | ((value: MultipleValue) => Array<string>),
+  ) => void;
+};
+
+const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = (_, label) => (
+  <>{label}</>
+);
 
 export const TreeItem = ({
   id,
   label,
   level,
-  componentList = 'ul',
-  componentItem = 'li',
-  listProps,
-  itemProps,
+  renderItem = DEFAULT_RENDER_ITEM,
   children = [],
   value,
   onChange,
@@ -24,9 +51,7 @@ export const TreeItem = ({
     onChange,
   });
 
-  console.count(id);
-
-  const handleClick = (event) => event.stopPropagation();
+  const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
   if (children.length) {
     return (
@@ -41,24 +66,20 @@ export const TreeItem = ({
                 indeterminate={isSelected ? false : isIndeterminate}
               />
             }
-            label={label}
+            label={renderItem(id, label)}
             onChange={handleChange}
             onClick={handleClick}
           />
         }
         level={level}
-        component={componentItem}
         onClick={handleChange}
       >
-        <List {...listProps} as={componentList}>
+        <List>
           {children.map((child) => (
             <TreeItem
               key={child.id}
               {...child}
-              componentList={componentList}
-              componentItem={componentItem}
-              listProps={listProps}
-              itemProps={itemProps}
+              renderItem={renderItem}
               level={level + 1}
               value={value}
               onChange={onChange}
@@ -75,13 +96,12 @@ export const TreeItem = ({
       label={
         <FormControlLabel
           control={<Checkbox checked={isSelected} />}
-          label={label}
+          label={renderItem(id, label)}
           onChange={handleChange}
           onClick={handleClick}
         />
       }
       level={level}
-      component={componentItem}
       onClick={handleChange}
     />
   );

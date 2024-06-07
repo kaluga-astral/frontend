@@ -2,7 +2,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { useState } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { MultipleTreeList } from './MultipleTreeList';
+import { Typography } from '../Typography';
+
+import {
+  MultipleTreeList,
+  type MultipleTreeListProps,
+} from './MultipleTreeList';
 
 describe('MultipleTreeList', () => {
   it('Label опции отображается', () => {
@@ -41,7 +46,7 @@ describe('MultipleTreeList', () => {
     expect(label).not.toBeVisible();
   });
 
-  it('Кастомный компонент, указанный в componentList, применяется для списка', () => {
+  it('RenderItem применяется к содержимому', () => {
     const fakeData = [
       {
         id: '1',
@@ -49,32 +54,17 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    const { container } = renderWithTheme(
-      <MultipleTreeList data={fakeData} componentList="section" />,
+    const renderItem: MultipleTreeListProps['renderItem'] = (id, label) => (
+      <Typography component="div">
+        #{id}. {label}
+      </Typography>
     );
 
-    // Делаем поиск через container, так как нет возможности найти тег через getBy*
-    // eslint-disable-next-line testing-library/no-container
-    const customElement = container.querySelector('section');
-
-    expect(customElement).toBeInTheDocument();
-  });
-
-  it('Кастомный компонент, указанный в componentItem, применяется для элемента списка', () => {
-    const fakeData = [
-      {
-        id: '1',
-        label: 'Item 1',
-      },
-    ];
-
-    const { container } = renderWithTheme(
-      <MultipleTreeList data={fakeData} componentList="article" />,
+    renderWithTheme(
+      <MultipleTreeList data={fakeData} renderItem={renderItem} />,
     );
 
-    // Делаем поиск через container, так как нет возможности найти тег через getBy*
-    // eslint-disable-next-line testing-library/no-container
-    const customElement = container.querySelector('article');
+    const customElement = screen.getByText('#1. Item 1');
 
     expect(customElement).toBeInTheDocument();
   });

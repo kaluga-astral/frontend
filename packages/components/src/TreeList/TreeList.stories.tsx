@@ -1,9 +1,10 @@
-import { type ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { type Meta } from '@storybook/react';
 
+import { Typography } from '../Typography';
 import { styled } from '../styles';
 
-import { TreeList } from './TreeList';
+import { TreeList, type TreeListProps } from './TreeList';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21329-76225&t=ocy6798zA4pD2nYD-0)
@@ -94,27 +95,14 @@ export const Example = () => {
   return <TreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
-const Table = styled.table`
-  width: 100%;
-
-  border-collapse: collapse;
+const Item = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(1)};
+  align-items: baseline;
+  padding-left: ${({ theme }) => theme.spacing(1)};
 `;
 
-const Row = ({
-  className,
-  children,
-  color,
-}: {
-  color: 'red' | 'blue';
-  className?: string;
-  children?: ReactNode;
-}) => (
-  <tr className={className} style={{ color }}>
-    {children}
-  </tr>
-);
-
-export const CustomComponents = () => {
+export const RenderItem = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeData = [
@@ -125,15 +113,18 @@ export const CustomComponents = () => {
     },
   ];
 
+  const renderItem: TreeListProps['renderItem'] = (id, label) => (
+    <Item>
+      <Typography variant="caption">#{id}</Typography>
+      <Typography color="textSecondary">{label}</Typography>
+    </Item>
+  );
+
   return (
     <TreeList
       data={fakeData}
       value={value}
-      componentList={Table}
-      componentItem={Row}
-      itemProps={{
-        color: 'blue',
-      }}
+      renderItem={renderItem}
       onChange={setValue}
     />
   );

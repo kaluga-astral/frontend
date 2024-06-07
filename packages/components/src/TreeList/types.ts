@@ -1,6 +1,6 @@
-import { type ComponentProps, type ElementType, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-type Value = string | undefined;
+export type Value = string | undefined;
 
 export type TreeData = {
   /**
@@ -19,52 +19,7 @@ export type TreeData = {
   children?: TreeData[];
 };
 
-export type TreeItemProps<
-  TComponentList extends ElementType = ElementType,
-  TComponentItem extends ElementType = ElementType,
-> = TreeData & {
-  /**
-   * Выбранные значения
-   */
-  value?: Value;
-
-  /**
-   * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент.
-   * @default 'ul'
-   */
-  componentList?: TComponentList;
-
-  /**
-   * Компонент, используемый для корневого узла элемента списка. Либо строка для использования элемента HTML, либо компонент.
-   * @default 'li'
-   */
-  componentItem?: TComponentItem;
-
-  /**
-   * Props, специфичные для компонента List
-   */
-  listProps?: ComponentProps<TComponentList>;
-
-  /**
-   * Props, специфичные для компонента Item
-   */
-  itemProps?: ComponentProps<TComponentItem>;
-
-  /**
-   * Уровень вложенности в дереве
-   */
-  level: number;
-
-  /**
-   * Функция, которая запускается при изменении состояния
-   */
-  onChange?: (value: Value) => void;
-};
-
-export type TreeListProps<
-  TComponentList extends ElementType = ElementType,
-  TComponentItem extends ElementType = ElementType,
-> = {
+export type TreeListProps = {
   /**
    * Выбранные значения
    */
@@ -81,26 +36,9 @@ export type TreeListProps<
   className?: string;
 
   /**
-   * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент.
-   * @default 'ul'
+   * Render-props, позволяет более гибко настраивать содержимое item
    */
-  componentList?: TComponentList;
-
-  /**
-   * Компонент, используемый для корневого узла элемента списка. Либо строка для использования элемента HTML, либо компонент.
-   * @default 'li'
-   */
-  componentItem?: TComponentItem;
-
-  /**
-   * Props, специфичные для компонента List
-   */
-  listProps?: ComponentProps<TComponentList>;
-
-  /**
-   * Props, специфичные для компонента Item
-   */
-  itemProps?: ComponentProps<TComponentItem>;
+  renderItem?: (id: string, label: ReactNode) => JSX.Element;
 
   /**
    * Функция, которая запускается при изменении состояния.

@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { TreeList } from './TreeList';
+import { Typography } from '../Typography';
+
+import { TreeList, type TreeListProps } from './TreeList';
 
 describe('TreeList', () => {
   it('Label опции отображается', () => {
@@ -40,7 +42,7 @@ describe('TreeList', () => {
     expect(label).not.toBeVisible();
   });
 
-  it('Кастомный компонент, указанный в componentList, применяется для списка', () => {
+  it('RenderItem применяется к содержимому', () => {
     const fakeData = [
       {
         id: '1',
@@ -48,32 +50,15 @@ describe('TreeList', () => {
       },
     ];
 
-    const { container } = renderWithTheme(
-      <TreeList data={fakeData} componentList="section" />,
+    const renderItem: TreeListProps['renderItem'] = (id, label) => (
+      <Typography component="div">
+        #{id}. {label}
+      </Typography>
     );
 
-    // Делаем поиск через container, так как нет возможности найти тег через getBy*
-    // eslint-disable-next-line testing-library/no-container
-    const customElement = container.querySelector('section');
+    renderWithTheme(<TreeList data={fakeData} renderItem={renderItem} />);
 
-    expect(customElement).toBeInTheDocument();
-  });
-
-  it('Кастомный компонент, указанный в componentItem, применяется для элемента списка', () => {
-    const fakeData = [
-      {
-        id: '1',
-        label: 'Item 1',
-      },
-    ];
-
-    const { container } = renderWithTheme(
-      <TreeList data={fakeData} componentList="article" />,
-    );
-
-    // Делаем поиск через container, так как нет возможности найти тег через getBy*
-    // eslint-disable-next-line testing-library/no-container
-    const customElement = container.querySelector('article');
+    const customElement = screen.getByText('#1. Item 1');
 
     expect(customElement).toBeInTheDocument();
   });
