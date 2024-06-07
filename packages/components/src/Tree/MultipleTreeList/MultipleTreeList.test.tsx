@@ -11,6 +11,8 @@ import {
 
 describe('MultipleTreeList', () => {
   it('Label опции отображается', () => {
+    const onChangeSpy = vi.fn();
+
     const fakeData = [
       {
         id: '1',
@@ -18,7 +20,9 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    renderWithTheme(<MultipleTreeList data={fakeData} />);
+    renderWithTheme(
+      <MultipleTreeList data={fakeData} onChange={onChangeSpy} />,
+    );
 
     const label = screen.getByText('Item 1');
 
@@ -26,6 +30,8 @@ describe('MultipleTreeList', () => {
   });
 
   it('Вложенные элементы не отображаются, если группа не раскрыта', () => {
+    const onChangeSpy = vi.fn();
+
     const fakeData = [
       {
         id: '1',
@@ -39,7 +45,9 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    renderWithTheme(<MultipleTreeList data={fakeData} />);
+    renderWithTheme(
+      <MultipleTreeList data={fakeData} onChange={onChangeSpy} />,
+    );
 
     const label = screen.queryByText('Item 1');
 
@@ -47,6 +55,8 @@ describe('MultipleTreeList', () => {
   });
 
   it('RenderItem применяется к содержимому', () => {
+    const onChangeSpy = vi.fn();
+
     const fakeData = [
       {
         id: '1',
@@ -61,7 +71,11 @@ describe('MultipleTreeList', () => {
     );
 
     renderWithTheme(
-      <MultipleTreeList data={fakeData} renderItem={renderItem} />,
+      <MultipleTreeList
+        data={fakeData}
+        renderItem={renderItem}
+        onChange={onChangeSpy}
+      />,
     );
 
     const customElement = screen.getByText('#1. Item 1');
