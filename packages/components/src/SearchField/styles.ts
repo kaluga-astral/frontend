@@ -1,6 +1,12 @@
+import { SearchOutlineMd } from '@astral/icons';
+
 import { styled } from '../styles';
 import { IconButton } from '../IconButton';
 import { TextField } from '../TextField';
+
+export const StyledSearchIcon = styled(SearchOutlineMd)`
+  color: ${({ theme }) => theme.palette.grey[600]};
+`;
 
 export const StyledIconButton = styled(IconButton)<{
   isActive: boolean;
