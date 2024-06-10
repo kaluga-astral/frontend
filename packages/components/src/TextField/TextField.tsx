@@ -28,7 +28,8 @@ export type TextFieldProps = Omit<
    */
   maxLength?: number;
   /**
-   * @description Параметр для обрезания пробелов в текст филде при вызове onBlur. По-умолчанию true
+   * Параметр для обрезания пробелов в текст филде при вызове onBlur.
+   * @default true
    * @example <TextField trimmed={false} />
    */
   trimmed?: boolean;
