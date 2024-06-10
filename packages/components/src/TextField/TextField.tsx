@@ -117,7 +117,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           maxLength,
           ...inputProps,
         }}
-        onBlur={handleOnBlur}
+        onBlur={handleBlur}
         {...props}
       />
     );
