@@ -267,4 +267,4 @@ export { StepSlider, type StepSliderProps } from './StepSlider';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
 
-export { Pagination, PaginationProps } from './Pagination';
+export { Pagination, type PaginationProps } from './Pagination';
