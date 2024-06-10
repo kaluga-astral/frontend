@@ -84,7 +84,7 @@ export const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
             src={src}
             ref={ref}
             hidden={isLoading}
-            sandbox={sandbox}
+            {...{ sandbox: sandbox || undefined }}
             onLoad={handleEndLoadingIframe}
             onError={handleErrorIframe}
             onErrorCapture={handleErrorIframe}

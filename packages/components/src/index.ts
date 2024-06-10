@@ -210,6 +210,8 @@ export * from './SideDialogContentText';
 
 export * from './SideDialogTitle';
 
+export { Skeleton, type SkeletonProps } from './Skeleton';
+
 export * from './Slide';
 
 export * from './Stepper';
@@ -271,3 +273,5 @@ export * from './PasswordField';
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
+
+export { Pagination, type PaginationProps } from './Pagination';

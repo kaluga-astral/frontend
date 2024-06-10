@@ -275,3 +275,5 @@ export { default as WarningFillSm } from './WarningFillSm';
 export { default as WebFillMd } from './WebFillMd';
 
 export { default as UnlinkOutlineMd } from './UnlinkOutlineMd';
+
+export { default as UnlockOutlineMd } from './UnlockOutlineMd';
