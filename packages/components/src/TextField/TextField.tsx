@@ -87,7 +87,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       return <></>;
     }, [helperTextProp, success, error]);
 
-    const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
       if (trimmed) {
         const newValue = event.target.value?.trim();
 
