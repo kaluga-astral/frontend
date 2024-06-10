@@ -1,9 +1,9 @@
 import { type ChangeEvent, forwardRef, useState } from 'react';
 
-import { TextField, type TextFieldProps } from '../TextField';
+import { type TextFieldProps } from '../TextField';
 import { CrossOutlineMd, SearchOutlineMd } from '../../../icons';
 
-import { StyledIconButton } from './styles';
+import { StyledIconButton, StyledTextField } from './styles';
 
 export type SearchFieldProps = Omit<
   TextFieldProps,
@@ -39,7 +39,7 @@ export const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
     const isClearButtonActive = Boolean(value.length);
 
     return (
-      <TextField
+      <StyledTextField
         margin={margin}
         placeholder={placeholder}
         startAdornment={<SearchOutlineMd />}
