@@ -253,6 +253,13 @@ export * from './ToggleButtonGroup';
 
 export * from './Tooltip';
 
+export {
+  TreeList,
+  type TreeListProps,
+  MultipleTreeList,
+  type MultipleTreeListProps,
+} from './Tree';
+
 export * from './types';
 
 export * from './Typography';
@@ -266,3 +273,5 @@ export * from './PasswordField';
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';
+
+export { Pagination, type PaginationProps } from './Pagination';
