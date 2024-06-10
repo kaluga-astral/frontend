@@ -19,7 +19,6 @@ type Story = StoryObj<typeof SearchField>;
 export const Interaction: Story = {
   args: {
     label: 'Имя',
-    helperText: 'Смотрите имя в паспорте',
   },
   parameters: {
     docs: {
@@ -56,11 +55,3 @@ export const Sizes = () => (
 );
 
 export const FullWidth = () => <SearchField fullWidth />;
-
-export const HelperText = () => (
-  <>
-    <SearchField helperText="Поясняю поле" />
-    <SearchField error helperText="Поясняю ошибку поля" />
-    <SearchField success helperText="Поясняю success статус" />
-  </>
-);
