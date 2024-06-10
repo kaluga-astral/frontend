@@ -253,6 +253,13 @@ export * from './ToggleButtonGroup';
 
 export * from './Tooltip';
 
+export {
+  TreeList,
+  type TreeListProps,
+  MultipleTreeList,
+  type MultipleTreeListProps,
+} from './Tree';
+
 export * from './types';
 
 export * from './Typography';
