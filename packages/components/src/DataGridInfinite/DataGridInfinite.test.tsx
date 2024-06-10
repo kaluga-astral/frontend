@@ -220,7 +220,7 @@ describe('DataGridInfinite', () => {
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
   });
 
-  it('Текст "Конец списка" показывается, если была вызвана функция onEndReached', async () => {
+  it('Текст "Конец списка" показывается, если была дополнительная загрузка данных', async () => {
     const TestComponent = () => {
       const [isEndReached, setIsEndReached] = useState(false);
 
@@ -261,7 +261,7 @@ describe('DataGridInfinite', () => {
     expect(endText).toBeVisible();
   });
 
-  it('Текст "Конец списка" не показывается, если не была вызвана функция onEndReached', async () => {
+  it('Текст "Конец списка" не показывается, если не было дополнительной загрузки данных', async () => {
     const TestComponent = () => {
       const handleReachEnd = vi.fn();
 
