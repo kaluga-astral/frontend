@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   type ListRange,
   TableVirtuoso,
@@ -80,6 +80,8 @@ export const DataGridInfinite = <
   const dataLength = rows?.length || 0;
   const isSelectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
+  const [isLoadedMoreThanOne, setIsLoadedMoreThanOne] = useState(false);
+  const showEndText = isLoadedMoreThanOne && isEndReached;
   const handleScrollToTop = () => {
     virtuoso.current?.scrollIntoView({ index: 0, behavior: 'smooth' });
   };
@@ -87,6 +89,7 @@ export const DataGridInfinite = <
   const handleEndReach = useCallback(() => {
     if (!isEndReached && onEndReached) {
       onEndReached();
+      setIsLoadedMoreThanOne(true);
     }
   }, [isEndReached, onEndReached]);
 
@@ -179,7 +182,7 @@ export const DataGridInfinite = <
                 {loading && Boolean(dataLength) && (
                   <CircularProgress color="primary" size="medium" />
                 )}
-                {isEndReached && (
+                {showEndText && (
                   <Typography color="textSecondary">
                     {END_OF_SCROLL_MESSAGE}
                   </Typography>
