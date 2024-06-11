@@ -77,11 +77,13 @@ export const DataGridInfinite = <
     });
 
   const virtuoso = useRef<VirtuosoHandle>(null);
+  const [isLoadedMoreThanOne, setIsLoadedMoreThanOne] = useState(false);
+
   const dataLength = rows?.length || 0;
   const isSelectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
-  const [isLoadedMoreThanOne, setIsLoadedMoreThanOne] = useState(false);
-  const showEndText = isLoadedMoreThanOne && isEndReached;
+  const isVisibleEndText = isLoadedMoreThanOne && isEndReached;
+
   const handleScrollToTop = () => {
     virtuoso.current?.scrollIntoView({ index: 0, behavior: 'smooth' });
   };
@@ -182,7 +184,7 @@ export const DataGridInfinite = <
                 {loading && Boolean(dataLength) && (
                   <CircularProgress color="primary" size="medium" />
                 )}
-                {showEndText && (
+                {isVisibleEndText && (
                   <Typography color="textSecondary">
                     {END_OF_SCROLL_MESSAGE}
                   </Typography>
