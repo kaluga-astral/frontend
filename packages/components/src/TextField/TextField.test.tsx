@@ -136,7 +136,7 @@ describe('TextField', () => {
     renderWithTheme(
       <TextField
         inputProps={{ 'data-testid': 'textFieldForTrim' }}
-        onChange={(e) => onChangeMock(e.target.value)}
+        onChange={(e) => onChangeSpy(e.target.value)}
       />,
     );
 
@@ -148,19 +148,19 @@ describe('TextField', () => {
     await userEvents.tab();
 
     await waitFor(() => {
-      expect(onChangeMock.mock.lastCall).toEqual(['test']);
+      expect(onChangeSpy.mock.lastCall).toEqual(['test']);
     });
 
     vi.clearAllMocks();
   });
 
-  it('При переводе фокуса с инпута вызывается переданный onBlur', async () => {
+  it('Переданный onBlur вызывается при переводе фокуса с инпута', async () => {
     const onBlurSpy = vi.fn();
 
     renderWithTheme(
       <TextField
         inputProps={{ 'data-testid': 'textFieldForOnBlur' }}
-        onBlur={(e) => onBlurMock(e.target.value)}
+        onBlur={(e) => onBlurSpy(e.target.value)}
       />,
     );
 
@@ -172,7 +172,7 @@ describe('TextField', () => {
     await userEvents.tab();
 
     await waitFor(() => {
-      expect(onBlurMock.mock.lastCall).toEqual(['test']);
+      expect(onBlurSpy.mock.lastCall).toEqual(['test']);
     });
 
     vi.clearAllMocks();
