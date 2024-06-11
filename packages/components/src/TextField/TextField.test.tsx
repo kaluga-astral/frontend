@@ -131,7 +131,7 @@ describe('TextField', () => {
   });
 
   it('При переводе фокуса с инпута пробел в конце текста удаляется', async () => {
-    const onChangeMock = vi.fn();
+    const onChangeSpy = vi.fn();
 
     renderWithTheme(
       <TextField
