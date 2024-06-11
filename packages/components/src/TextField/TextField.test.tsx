@@ -155,7 +155,7 @@ describe('TextField', () => {
   });
 
   it('При переводе фокуса с инпута вызывается переданный onBlur', async () => {
-    const onBlurMock = vi.fn();
+    const onBlurSpy = vi.fn();
 
     renderWithTheme(
       <TextField
