@@ -37,7 +37,9 @@ export const Description = ({
 }: DescriptionProps) => {
   return (
     <DescriptionContextProvider leader={leader} separator={separator}>
-      <Wrapper justifyContent={justifyContent}>{children}</Wrapper>
+      <Wrapper leader={leader} justifyContent={justifyContent}>
+        {children}
+      </Wrapper>
     </DescriptionContextProvider>
   );
 };

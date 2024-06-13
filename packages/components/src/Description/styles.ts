@@ -2,11 +2,13 @@ import { styled } from '../styles';
 
 export const Wrapper = styled.div<{
   justifyContent?: 'space-between' | 'start';
+  leader?: boolean;
 }>`
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
   justify-content: ${({ justifyContent }) => justifyContent};
+
+  text-align: ${({ leader }) => (leader ? 'right' : 'left')};
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
 

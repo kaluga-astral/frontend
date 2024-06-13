@@ -2,11 +2,15 @@ import { styled } from '../../styles';
 
 export const Wrapper = styled.div`
   margin-right: ${({ theme }) => theme.spacing(2)};
+  padding-right: 8px;
+
+  text-align: left;
 `;
 
 export const DashedSeparator = styled.div`
   flex: 1;
 
+  min-width: 12px;
   height: 4px;
   margin-right: ${({ theme }) => theme.spacing(2)};
 
