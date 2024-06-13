@@ -77,6 +77,10 @@ export const useLogic = ({
     if (Object.is(status, 'added')) {
       handleAddToast({ status, ...rest });
       handleAddNoTransitionAttr();
+      // Снимаем флаг запуска анимации на закрытие, если происходит добавление уведомлений.
+      // Позволяет решить проблему отображения кнопки закрытия уведомлений,
+      // при условии что пользователь нажал на нее, но новые уведомления продолжают появляться
+      setStartedClosingNotify(false);
     }
 
     if (Object.is(status, 'removed')) {
