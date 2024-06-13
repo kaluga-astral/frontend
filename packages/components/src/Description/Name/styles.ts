@@ -2,7 +2,6 @@ import { styled } from '../../styles';
 
 export const Wrapper = styled.div`
   margin-right: ${({ theme }) => theme.spacing(2)};
-  padding-right: ${({ theme }) => theme.spacing(2)};
 
   text-align: left;
 `;
