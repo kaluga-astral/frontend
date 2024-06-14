@@ -6,11 +6,20 @@ import { Typography } from '../../Typography';
 
 import { type ValueProps } from './Value';
 
-export const StyledTypography = styled(Typography)`
-  cursor: pointer;
+type StyledTypographyProps = {
+  $canCopy: ValueProps['canCopy'];
+};
+
+export const StyledTypography = styled(Typography)<StyledTypographyProps>`
+  cursor: ${({ $canCopy }) => ($canCopy ? 'pointer' : 'default')};
+
+  min-width: 0;
+
+  hyphens: auto;
+  overflow-wrap: break-word;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: ${({ $canCopy }) => ($canCopy ? 'underline' : 'none')};
   }
 `;
 

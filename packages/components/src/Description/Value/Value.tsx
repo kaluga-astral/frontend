@@ -1,6 +1,6 @@
 import { type ReactNode, useContext, useState } from 'react';
 
-import { Typography, type TypographyProps } from '../../Typography';
+import { type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 
@@ -41,7 +41,13 @@ export const Value = ({
   const resultChildren = children || stub || emptySymbol;
 
   if (!canCopy) {
-    return <Typography children={resultChildren} {...props} />;
+    return (
+      <StyledTypography
+        $canCopy={canCopy}
+        children={resultChildren}
+        {...props}
+      />
+    );
   }
 
   const handleClick = () => {
@@ -64,7 +70,7 @@ export const Value = ({
   return (
     <div onMouseLeave={handleMouseLeave}>
       <Tooltip placement="bottom" title={status}>
-        <StyledTypography {...props} onClick={handleClick}>
+        <StyledTypography $canCopy={canCopy} {...props} onClick={handleClick}>
           {copyPosition === 'left' && (
             <StyledCopyIcon
               $copyPosition={copyPosition}

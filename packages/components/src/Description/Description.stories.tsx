@@ -39,6 +39,14 @@ const GridWrapper = styled(Grid)`
   justify-content: center;
 `;
 
+const DescriptionWrapper = styled(Grid)`
+  width: 600px;
+`;
+
+const Label = styled('div')`
+  min-width: 200px;
+`;
+
 export const Example = () => {
   return (
     <GridWrapper rowSpacing={3} container>
@@ -133,6 +141,48 @@ export const JustifyContentCanCopy = () => {
         <Description.Name>Длинное название поля</Description.Name>
         <Description.Value canCopy>Длинное значение поля</Description.Value>
       </Description>
+    </GridWrapper>
+  );
+};
+
+export const LongLabelValue = () => {
+  return (
+    <GridWrapper rowSpacing={4} container>
+      <DescriptionWrapper>
+        <Description>
+          <Label>
+            <Description.Name>
+              Длинное название поля, которое не помещается в одну строку
+            </Description.Name>
+          </Label>
+          <Description.Value>
+            Длинное значение поля Длинное значение поля Длинное значение поля
+          </Description.Value>
+        </Description>
+      </DescriptionWrapper>
+      <DescriptionWrapper>
+        <Description>
+          <Description.Name>
+            Длинное название поля, которое не помещается в одну строку
+          </Description.Name>
+          <Description.Value>Длинное значение поля</Description.Value>
+        </Description>
+      </DescriptionWrapper>
+    </GridWrapper>
+  );
+};
+
+export const LongDescriptionValueLeader = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <DescriptionWrapper>
+        <Description leader>
+          <Description.Name>Название поля</Description.Name>
+          <Description.Value>
+            Длинное значение поля Длинное значение поля Длинное значение поля
+          </Description.Value>
+        </Description>
+      </DescriptionWrapper>
     </GridWrapper>
   );
 };

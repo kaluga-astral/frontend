@@ -1,6 +1,9 @@
 import { styled } from '../../styles';
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-shrink: 0;
+
   margin-right: ${({ theme }) => theme.spacing(2)};
 
   text-align: left;
