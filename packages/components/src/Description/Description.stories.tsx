@@ -45,38 +45,30 @@ const StyledDescriptionName = styled(Description.Name)`
 `;
 
 export const Example = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description>
-        <Description.Name>{longData.descriptionName}</Description.Name>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const CanCopy = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy>{data.descriptionValue}</Description.Value>
-      </Description>
-      <Description>
-        <Description.Name>{longData.descriptionName}</Description.Name>
-        <Description.Value canCopy>
-          {longData.descriptionValue}
-        </Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -86,19 +78,18 @@ export const CanCopy = () => {
  * По дефолту copyPosition="right", можно задать "left"
  */
 export const CopyPosition = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy>{data.descriptionValue}</Description.Value>
       </Description>
       <Description>
-        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy copyPosition="left">
-          {longData.descriptionValue}
+          {data.descriptionValue}
         </Description.Value>
       </Description>
     </GridWrapper>
@@ -109,17 +100,17 @@ export const CopyPosition = () => {
  * Prop ```leader``` добавляет dashed строку
  */
 export const Leader = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
+  const longData = makeLongDescriptionData(5);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description leader>
-        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Name>Длинное название поля</Description.Name>
         <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
@@ -127,17 +118,17 @@ export const Leader = () => {
 };
 
 export const JustifyContent = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
+  const longData = makeLongDescriptionData(2);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
@@ -145,17 +136,17 @@ export const JustifyContent = () => {
 };
 
 export const JustifyContentCanCopy = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const data = makeDescriptionData(3);
+  const longData = makeLongDescriptionData(10);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy>{data.descriptionValue}</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy>
           {longData.descriptionValue}
         </Description.Value>
@@ -165,7 +156,7 @@ export const JustifyContentCanCopy = () => {
 };
 
 export const LongLabelValue = () => {
-  const longData = makeLongDescriptionData();
+  const longData = makeLongDescriptionData(10);
 
   return (
     <GridWrapper rowSpacing={4} container>
@@ -184,13 +175,12 @@ export const LongLabelValue = () => {
 };
 
 export const LongDescriptionValueLeader = () => {
-  const data = makeDescriptionData();
-  const longData = makeLongDescriptionData();
+  const longData = makeLongDescriptionData(15);
 
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Name>{longData.descriptionName}</Description.Name>
         <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>

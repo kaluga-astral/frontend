@@ -5,8 +5,6 @@ export const Wrapper = styled.div`
 
   max-width: 93%;
   margin-right: ${({ theme }) => theme.spacing(2)};
-
-  text-align: left;
 `;
 
 export const DashedSeparator = styled.div`

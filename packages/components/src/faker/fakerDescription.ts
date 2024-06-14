@@ -1,20 +1,24 @@
-import { faker } from '@faker-js/faker/locale/ru';
+import { fakerRU } from '@faker-js/faker';
 
 type DescriptionType = {
   descriptionName: string;
   descriptionValue: string;
 };
 
-export const makeDescriptionData = (): DescriptionType => {
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const makeDescriptionData = (wordCount: number): DescriptionType => {
   return {
-    descriptionName: faker.company.name(),
-    descriptionValue: faker.lorem.words(4),
+    descriptionName: capitalizeFirstLetter(fakerRU.company.name()),
+    descriptionValue: capitalizeFirstLetter(fakerRU.lorem.sentence(wordCount)),
   };
 };
 
-export const makeLongDescriptionData = (): DescriptionType => {
+export const makeLongDescriptionData = (wordCount: number): DescriptionType => {
   return {
-    descriptionName: `${faker.company.name()} ${faker.lorem.word('longest')}`,
-    descriptionValue: faker.lorem.words(10),
+    descriptionName: capitalizeFirstLetter(fakerRU.lorem.sentence(6)),
+    descriptionValue: capitalizeFirstLetter(fakerRU.lorem.sentence(wordCount)),
   };
 };
