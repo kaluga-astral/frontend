@@ -41,13 +41,7 @@ export const Value = ({
   const resultChildren = children || stub || emptySymbol;
 
   if (!canCopy) {
-    return (
-      <StyledTypography
-        $canCopy={canCopy}
-        children={resultChildren}
-        {...props}
-      />
-    );
+    return <StyledTypography children={resultChildren} {...props} />;
   }
 
   const handleClick = () => {

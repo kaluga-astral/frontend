@@ -7,13 +7,11 @@ import { Typography } from '../../Typography';
 import { type ValueProps } from './Value';
 
 type StyledTypographyProps = {
-  $canCopy: ValueProps['canCopy'];
+  $canCopy?: boolean;
 };
 
 export const StyledTypography = styled(Typography)<StyledTypographyProps>`
   cursor: ${({ $canCopy }) => ($canCopy ? 'pointer' : 'default')};
-
-  min-width: 0;
 
   hyphens: auto;
   overflow-wrap: break-word;

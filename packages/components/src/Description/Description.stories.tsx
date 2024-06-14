@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 
 import { styled } from '../styles';
 import { Grid } from '../Grid';
+import { makeDescriptionData, makeLongDescriptionData } from '../faker';
 
 import { Description } from './Description';
 
@@ -39,39 +40,43 @@ const GridWrapper = styled(Grid)`
   justify-content: center;
 `;
 
-const DescriptionWrapper = styled(Grid)`
-  width: 600px;
-`;
-
-const Label = styled('div')`
-  min-width: 200px;
+const StyledDescriptionName = styled(Description.Name)`
+  width: 250px;
 `;
 
 export const Example = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description>
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>Длинное значение поля</Description.Value>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const CanCopy = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
       </Description>
       <Description>
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value canCopy>Длинное значение поля</Description.Value>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value canCopy>
+          {longData.descriptionValue}
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -81,16 +86,19 @@ export const CanCopy = () => {
  * По дефолту copyPosition="right", можно задать "left"
  */
 export const CopyPosition = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
       </Description>
       <Description>
-        <Description.Name>Название поля</Description.Name>
+        <Description.Name>{longData.descriptionName}</Description.Name>
         <Description.Value canCopy copyPosition="left">
-          Значение поля
+          {longData.descriptionValue}
         </Description.Value>
       </Description>
     </GridWrapper>
@@ -101,88 +109,90 @@ export const CopyPosition = () => {
  * Prop ```leader``` добавляет dashed строку
  */
 export const Leader = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description leader>
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>Длинное значение поля</Description.Value>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const JustifyContent = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value>{data.descriptionValue}</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>Длинное значение поля</Description.Value>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const JustifyContentCanCopy = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>Значение поля</Description.Value>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value canCopy>Длинное значение поля</Description.Value>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value canCopy>
+          {longData.descriptionValue}
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const LongLabelValue = () => {
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={4} container>
-      <DescriptionWrapper>
-        <Description>
-          <Label>
-            <Description.Name>
-              Длинное название поля, которое не помещается в одну строку
-            </Description.Name>
-          </Label>
-          <Description.Value>
-            Длинное значение поля Длинное значение поля Длинное значение поля
-          </Description.Value>
-        </Description>
-      </DescriptionWrapper>
-      <DescriptionWrapper>
-        <Description>
-          <Description.Name>
-            Длинное название поля, которое не помещается в одну строку
-          </Description.Name>
-          <Description.Value>Длинное значение поля</Description.Value>
-        </Description>
-      </DescriptionWrapper>
+      <Description>
+        <Description.Name>{longData.descriptionName}</Description.Name>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
+      </Description>
+      <Description>
+        <StyledDescriptionName>
+          {longData.descriptionName}
+        </StyledDescriptionName>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
+      </Description>
     </GridWrapper>
   );
 };
 
 export const LongDescriptionValueLeader = () => {
+  const data = makeDescriptionData();
+  const longData = makeLongDescriptionData();
+
   return (
     <GridWrapper rowSpacing={3} container>
-      <DescriptionWrapper>
-        <Description leader>
-          <Description.Name>Название поля</Description.Name>
-          <Description.Value>
-            Длинное значение поля Длинное значение поля Длинное значение поля
-          </Description.Value>
-        </Description>
-      </DescriptionWrapper>
+      <Description leader>
+        <Description.Name>{data.descriptionName}</Description.Name>
+        <Description.Value>{longData.descriptionValue}</Description.Value>
+      </Description>
     </GridWrapper>
   );
 };
