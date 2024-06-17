@@ -43,6 +43,10 @@ const StyledDescriptionName = styled(Description.Name)`
   width: 250px;
 `;
 
+const StyledDescriptionValue = styled(Description.Value)`
+  width: 300px;
+`;
+
 export const Example = () => {
   return (
     <GridWrapper rowSpacing={3} container>
@@ -52,7 +56,9 @@ export const Example = () => {
       </Description>
       <Description>
         <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>Длинное значение поля</Description.Value>
+        <StyledDescriptionValue>
+          Длинное значение поля которое переносится на следующую строку
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
@@ -121,10 +127,10 @@ export const JustifyContent = () => {
         <Description.Value>Значение поля c JustifyContent</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>
+        <Description.Name>Длинное название поля</Description.Name>
+        <StyledDescriptionValue>
           Длинное значение поля с использование JustifyContent
-        </Description.Value>
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
@@ -141,10 +147,10 @@ export const JustifyContentCanCopy = () => {
       </Description>
       <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>
+        <StyledDescriptionValue canCopy copyPosition="left">
           Длинное значение поля с использование JustifyContent которое можно
           скопировать
-        </Description.Value>
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
