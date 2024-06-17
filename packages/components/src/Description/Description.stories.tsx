@@ -2,7 +2,6 @@ import { type Meta, type StoryObj } from '@storybook/react';
 
 import { styled } from '../styles';
 import { Grid } from '../Grid';
-import { makeDescriptionData, makeLongDescriptionData } from '../faker';
 
 import { Description } from './Description';
 
@@ -45,30 +44,28 @@ const StyledDescriptionName = styled(Description.Name)`
 `;
 
 export const Example = () => {
-  const data = makeDescriptionData(3);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
         <Description.Name>Название поля</Description.Name>
-        <Description.Value>{data.descriptionValue}</Description.Value>
+        <Description.Value>Значение поля</Description.Value>
       </Description>
       <Description>
         <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>{data.descriptionValue}</Description.Value>
+        <Description.Value>Длинное значение поля</Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const CanCopy = () => {
-  const data = makeDescriptionData(3);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
         <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
+        <Description.Value canCopy>
+          Значение поля которое можно скопировать
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -78,18 +75,18 @@ export const CanCopy = () => {
  * По дефолту copyPosition="right", можно задать "left"
  */
 export const CopyPosition = () => {
-  const data = makeDescriptionData(3);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
         <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
+        <Description.Value canCopy>
+          Значение поля с иконкой справа
+        </Description.Value>
       </Description>
       <Description>
         <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy copyPosition="left">
-          {data.descriptionValue}
+          Значение поля с иконкой слева
         </Description.Value>
       </Description>
     </GridWrapper>
@@ -100,55 +97,53 @@ export const CopyPosition = () => {
  * Prop ```leader``` добавляет dashed строку
  */
 export const Leader = () => {
-  const data = makeDescriptionData(3);
-  const longData = makeLongDescriptionData(5);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
         <Description.Name>Название поля</Description.Name>
-        <Description.Value>{data.descriptionValue}</Description.Value>
+        <Description.Value>Значение поля с сепаратором</Description.Value>
       </Description>
       <Description leader>
         <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Value>
+          Длинное значение поля с сепаратором
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const JustifyContent = () => {
-  const data = makeDescriptionData(3);
-  const longData = makeLongDescriptionData(2);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
-        <Description.Value>{data.descriptionValue}</Description.Value>
+        <Description.Value>Значение поля c JustifyContent</Description.Value>
       </Description>
       <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Value>
+          Длинное значение поля с использование JustifyContent
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const JustifyContentCanCopy = () => {
-  const data = makeDescriptionData(3);
-  const longData = makeLongDescriptionData(10);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>{data.descriptionValue}</Description.Value>
+        <Description.Value canCopy>
+          Значение поля с JustifyContent
+        </Description.Value>
       </Description>
       <Description justifyContent="space-between">
         <Description.Name>Название поля</Description.Name>
         <Description.Value canCopy>
-          {longData.descriptionValue}
+          Длинное значение поля с использование JustifyContent которое можно
+          скопировать
         </Description.Value>
       </Description>
     </GridWrapper>
@@ -156,32 +151,38 @@ export const JustifyContentCanCopy = () => {
 };
 
 export const LongLabelValue = () => {
-  const longData = makeLongDescriptionData(10);
-
   return (
     <GridWrapper rowSpacing={4} container>
       <Description>
-        <Description.Name>{longData.descriptionName}</Description.Name>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Name>
+          Длинное название поля которое не переносится на следующую строку
+        </Description.Name>
+        <Description.Value>
+          Длинное значение поля которое переносится на следующую строку
+        </Description.Value>
       </Description>
       <Description>
         <StyledDescriptionName>
-          {longData.descriptionName}
+          Длинное название поля которое переносится на следующую строку
         </StyledDescriptionName>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Value>
+          Длинное значение поля которое не переносится на следующую строку
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
 };
 
 export const LongDescriptionValueLeader = () => {
-  const longData = makeLongDescriptionData(15);
-
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>{longData.descriptionName}</Description.Name>
-        <Description.Value>{longData.descriptionValue}</Description.Value>
+        <Description.Name>
+          Длинное название поля которое не переносится на следующую строку
+        </Description.Name>
+        <Description.Value>
+          Очень длинное значение поля которое переносится на следующую строку
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
