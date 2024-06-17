@@ -40,7 +40,7 @@ const GridWrapper = styled(Grid)`
 `;
 
 const StyledDescriptionName = styled(Description.Name)`
-  width: 250px;
+  width: 200px;
 `;
 
 const StyledDescriptionValue = styled(Description.Value)`
@@ -51,13 +51,13 @@ export const Example = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля</Description.Value>
+        <Description.Name>ИНН</Description.Name>
+        <Description.Value>295995231495</Description.Value>
       </Description>
       <Description>
-        <Description.Name>Длинное название поля</Description.Name>
+        <Description.Name>Описание</Description.Name>
         <StyledDescriptionValue>
-          Длинное значение поля которое переносится на следующую строку
+          ИНН физического лица является последовательностью из 12 цифр
         </StyledDescriptionValue>
       </Description>
     </GridWrapper>
@@ -68,10 +68,8 @@ export const CanCopy = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>
-          Значение поля которое можно скопировать
-        </Description.Value>
+        <Description.Name>КПП</Description.Name>
+        <Description.Value canCopy>293144576</Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -84,15 +82,13 @@ export const CopyPosition = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>
-          Значение поля с иконкой справа
-        </Description.Value>
+        <Description.Name>КПП</Description.Name>
+        <Description.Value canCopy>293144576</Description.Value>
       </Description>
       <Description>
-        <Description.Name>Название поля</Description.Name>
+        <Description.Name>Снилс</Description.Name>
         <Description.Value canCopy copyPosition="left">
-          Значение поля с иконкой слева
+          23339576886
         </Description.Value>
       </Description>
     </GridWrapper>
@@ -106,14 +102,12 @@ export const Leader = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля с сепаратором</Description.Value>
+        <Description.Name>ФИО</Description.Name>
+        <Description.Value>Швецова М. Д.</Description.Value>
       </Description>
       <Description leader>
-        <Description.Name>Длинное название поля</Description.Name>
-        <Description.Value>
-          Длинное значение поля с сепаратором
-        </Description.Value>
+        <Description.Name>ФИО</Description.Name>
+        <Description.Value>Швецова Мария Дмитриевна</Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -123,14 +117,12 @@ export const JustifyContent = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value>Значение поля c JustifyContent</Description.Value>
+        <Description.Name>ФИО</Description.Name>
+        <Description.Value>Швецова М. Д.</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>Длинное название поля</Description.Name>
-        <StyledDescriptionValue>
-          Длинное значение поля с использование JustifyContent
-        </StyledDescriptionValue>
+        <Description.Name>ФИО</Description.Name>
+        <Description.Value>Швецова Мария Дмитриевна</Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -140,17 +132,14 @@ export const JustifyContentCanCopy = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <Description.Value canCopy>
-          Значение поля с JustifyContent
-        </Description.Value>
+        <Description.Name>ИНН</Description.Name>
+        <Description.Value canCopy>295995231495</Description.Value>
       </Description>
       <Description justifyContent="space-between">
-        <Description.Name>Название поля</Description.Name>
-        <StyledDescriptionValue canCopy copyPosition="left">
-          Длинное значение поля с использование JustifyContent которое можно
-          скопировать
-        </StyledDescriptionValue>
+        <Description.Name>Описание</Description.Name>
+        <Description.Value canCopy copyPosition="left">
+          ИНН физического лица является последовательностью из 12 цифр
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
@@ -160,20 +149,18 @@ export const LongLabelValue = () => {
   return (
     <GridWrapper rowSpacing={4} container>
       <Description>
-        <Description.Name>
-          Длинное название поля которое не переносится на следующую строку
-        </Description.Name>
+        <Description.Name>Описания ИНН юридического лица</Description.Name>
         <Description.Value>
-          Длинное значение поля которое переносится на следующую строку
+          ИНН юридического лица — последовательность из 10 арабских цифр
         </Description.Value>
       </Description>
       <Description>
         <StyledDescriptionName>
-          Длинное название поля которое переносится на следующую строку
+          Описания ИНН юридического лица
         </StyledDescriptionName>
-        <Description.Value>
-          Длинное значение поля которое не переносится на следующую строку
-        </Description.Value>
+        <StyledDescriptionValue>
+          ИНН юридического лица — последовательность из 10 арабских цифр
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
@@ -183,12 +170,10 @@ export const LongDescriptionValueLeader = () => {
   return (
     <GridWrapper rowSpacing={3} container>
       <Description leader>
-        <Description.Name>
-          Длинное название поля которое не переносится на следующую строку
-        </Description.Name>
-        <Description.Value>
-          Очень длинное значение поля которое переносится на следующую строку
-        </Description.Value>
+        <Description.Name>Описания ИНН юридического лица</Description.Name>
+        <StyledDescriptionValue>
+          ИНН юридического лица — последовательность из 10 арабских цифр
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
