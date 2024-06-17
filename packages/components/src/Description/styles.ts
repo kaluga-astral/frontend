@@ -1,12 +1,14 @@
 import { styled } from '../styles';
 
-export const Wrapper = styled.div<{
-  justifyContent?: 'space-between' | 'start';
+export const Wrapper = styled('div', {
+  shouldForwardProp: (prop) => prop !== '$justifyContent' && prop !== '$leader',
+})<{
+  $justifyContent?: 'space-between' | 'start';
 }>`
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
-  justify-content: ${({ justifyContent }) => justifyContent};
+  justify-content: ${({ $justifyContent }) => $justifyContent};
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
 
