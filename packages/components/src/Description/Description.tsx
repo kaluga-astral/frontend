@@ -27,6 +27,11 @@ export type DescriptionProps = {
    * Определяет разделитель между Name Value
    */
   separator?: string;
+
+  /**
+   * Определяет тип корневого HTML-элемента
+   */
+  component?: 'div' | 'dl';
 };
 
 export const Description = ({
@@ -34,10 +39,13 @@ export const Description = ({
   justifyContent = 'start',
   leader = false,
   separator = DEFAULT_SEPARATOR,
+  component = 'dl',
 }: DescriptionProps) => {
   return (
     <DescriptionContextProvider leader={leader} separator={separator}>
-      <Wrapper $justifyContent={justifyContent}>{children}</Wrapper>
+      <Wrapper $justifyContent={justifyContent} as={component}>
+        {children}
+      </Wrapper>
     </DescriptionContextProvider>
   );
 };

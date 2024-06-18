@@ -44,7 +44,12 @@ export const Value = ({
 
   if (!canCopy) {
     return (
-      <StyledTypography children={resultChildren} $leader={leader} {...props} />
+      <StyledTypography
+        component="dd"
+        children={resultChildren}
+        $leader={leader}
+        {...props}
+      />
     );
   }
 
@@ -66,7 +71,7 @@ export const Value = ({
   };
 
   return (
-    <div onMouseLeave={handleMouseLeave}>
+    <dd onMouseLeave={handleMouseLeave}>
       <Tooltip placement="bottom" title={status}>
         <StyledTypography
           $canCopy={canCopy}
@@ -91,6 +96,6 @@ export const Value = ({
           )}
         </StyledTypography>
       </Tooltip>
-    </div>
+    </dd>
   );
 };
