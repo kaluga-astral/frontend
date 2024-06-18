@@ -179,6 +179,26 @@ export const LongDescriptionValueLeader = () => {
   );
 };
 
+/**
+ * По дефолту component="dl", можно задать "div", при построении списков и наличии внешнего контейнера из dl
+ */
+export const DescriptionList = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <dl>
+        <Description component="div">
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>295995231495</Description.Value>
+        </Description>
+        <Description component="div">
+          <Description.Name>КПП</Description.Name>
+          <Description.Value>293144576</Description.Value>
+        </Description>
+      </dl>
+    </GridWrapper>
+  );
+};
+
 export const Colors = () => {
   return (
     <GridWrapper rowSpacing={3} container>

@@ -9,6 +9,8 @@ export const Wrapper = styled('div', {
   align-items: baseline;
   justify-content: ${({ $justifyContent }) => $justifyContent};
 
+  margin: 0;
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
 

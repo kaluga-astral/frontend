@@ -29,7 +29,7 @@ export type DescriptionProps = {
   separator?: string;
 
   /**
-   * Определяет тип HTML-элемента Description
+   * Определяет тип корневого HTML-элемента
    */
   component?: 'div' | 'dl';
 };
