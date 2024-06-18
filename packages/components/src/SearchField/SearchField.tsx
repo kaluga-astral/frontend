@@ -1,4 +1,4 @@
-import { type ChangeEvent, forwardRef, useState } from 'react';
+import { type ChangeEvent, forwardRef, useRef, useState } from 'react';
 
 import { type TextFieldProps } from '../TextField';
 import { CrossOutlineMd } from '../../../icons';
@@ -25,6 +25,8 @@ export const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
   ) => {
     const [value, setValue] = useState(`${defaultValue || propsValue || ''}`);
 
+    const inputRef = useRef<HTMLInputElement>();
+
     const handleChangeValue = (
       event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
@@ -34,6 +36,11 @@ export const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
 
     const handleClickClearValue = () => {
       setValue('');
+      inputRef.current?.focus();
+    };
+
+    const handleClickStartAdornment = () => {
+      inputRef.current?.focus();
     };
 
     const isClearButtonActive = Boolean(value.length);
@@ -42,7 +49,9 @@ export const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
       <StyledTextField
         margin={margin}
         placeholder={placeholder}
-        startAdornment={<StyledSearchIcon />}
+        startAdornment={
+          <StyledSearchIcon onClick={handleClickStartAdornment} />
+        }
         disabled={disabled}
         endAdornment={
           <StyledIconButton
@@ -57,6 +66,7 @@ export const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         onChange={handleChangeValue}
         value={value}
         ref={ref}
+        inputRef={inputRef}
         {...props}
       />
     );
