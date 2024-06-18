@@ -33,4 +33,30 @@ describe('SearchField', () => {
 
     expect(input).toHaveAttribute('value', '');
   });
+
+  it('Фокус устанавливается на input при клике по иконке поиска', async () => {
+    const { baseElement } = renderWithTheme(
+      <SearchField defaultValue="test" />,
+    );
+
+    const searchStartAdornment = baseElement.getElementsByTagName('svg')[0];
+
+    await userEvents.click(searchStartAdornment);
+
+    const input = screen.queryByRole('textbox');
+
+    expect(input).toHaveFocus();
+  });
+
+  it('Фокус устанавливается на input при клике по кнопке удаления значения', async () => {
+    renderWithTheme(<SearchField defaultValue="test" />);
+
+    const clearBtn = screen.getByRole('button');
+
+    await userEvents.click(clearBtn);
+
+    const input = screen.queryByRole('textbox');
+
+    expect(input).toHaveFocus();
+  });
 });
