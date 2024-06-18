@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
-  shouldForwardProp: (prop) => prop !== '$justifyContent' && prop !== '$leader',
+  shouldForwardProp: (prop) => prop !== '$justifyContent' && prop !== 'as',
 })<{
   $justifyContent?: 'space-between' | 'start';
 }>`

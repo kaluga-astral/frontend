@@ -4,7 +4,7 @@ type WrapperProps = {
   $leader?: boolean;
 };
 
-export const Wrapper = styled('div', {
+export const Wrapper = styled('dt', {
   shouldForwardProp: (prop) => prop !== '$leader',
 })<WrapperProps>`
   flex-shrink: 0;
