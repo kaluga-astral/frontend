@@ -1,7 +1,7 @@
 import { type ChangeEvent, forwardRef, useRef, useState } from 'react';
+import { CrossOutlineMd } from '@astral/icons';
 
 import { type TextFieldProps } from '../TextField';
-import { CrossOutlineMd } from '../../../icons';
 
 import { StyledIconButton, StyledSearchIcon, StyledTextField } from './styles';
 
