@@ -96,6 +96,11 @@ export const Variants = () => (
     <Typography variant="overline">
       overline. Электронная отчетность и документооборот
     </Typography>
+    <Typography variant="h5">
+      <Typography variant="inherit">
+        inherit. Электронная отчетность и документооборот
+      </Typography>
+    </Typography>
   </Grid>
 );
 
