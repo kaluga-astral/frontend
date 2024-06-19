@@ -63,6 +63,7 @@ export const Description = styled(Typography)`
 `;
 
 export const Title = styled(Typography)`
+  overflow: hidden;
   grid-area: title;
   align-self: center;
 
