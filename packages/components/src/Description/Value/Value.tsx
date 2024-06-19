@@ -5,7 +5,7 @@ import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
 import { DescriptionContext } from '../DescriptionContext';
 
-import { StyledCopyIcon, StyledTypography } from './styles';
+import { StyledCopyIcon, StyledTypography, Wrapper } from './styles';
 import { CopyStatus } from './enums';
 
 export type ValueProps = Pick<
@@ -71,7 +71,7 @@ export const Value = ({
   };
 
   return (
-    <dd onMouseLeave={handleMouseLeave}>
+    <Wrapper onMouseLeave={handleMouseLeave}>
       <Tooltip placement="bottom" title={status}>
         <StyledTypography
           $canCopy={canCopy}
@@ -96,6 +96,6 @@ export const Value = ({
           )}
         </StyledTypography>
       </Tooltip>
-    </dd>
+    </Wrapper>
   );
 };

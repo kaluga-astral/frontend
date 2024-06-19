@@ -40,7 +40,7 @@ const GridWrapper = styled(Grid)`
 `;
 
 const StyledDescriptionName = styled(Description.Name)`
-  width: 200px;
+  width: 100px;
 `;
 
 const StyledDescriptionValue = styled(Description.Value)`
@@ -195,6 +195,26 @@ export const DescriptionList = () => {
           <Description.Value>293144576</Description.Value>
         </Description>
       </dl>
+    </GridWrapper>
+  );
+};
+
+/**
+ * В случаях при длинном значении Value и коротком значении Name,
+ * следует ограничить ширину Name через css и переносить его на несколько строк
+ */
+export const ShortLabelWithLongValue = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description leader>
+        <StyledDescriptionName>Полное именование</StyledDescriptionName>
+        <Description.Value>
+          _тест_ОАО "Тестовое коммерческое профессиональное учреждение
+          Специальное управление службы №007 Министерство Внутренней Разработки
+          по делам тестирования, исправления, чрезвычайным ситуациям и
+          ликвидации последствии действия багов"
+        </Description.Value>
+      </Description>
     </GridWrapper>
   );
 };

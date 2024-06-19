@@ -41,3 +41,7 @@ export const StyledCopyIcon = styled(CopyOutlineSm)<StyledCopyIconProps>`
 
   fill: ${({ color }) => color};
 `;
+
+export const Wrapper = styled.dd`
+  margin: 0;
+`;
