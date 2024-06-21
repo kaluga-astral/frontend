@@ -1,7 +1,9 @@
 import { type MouseEvent, useState } from 'react';
 
-export const useLogic = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
+type UseLogicProps = { isDefaultExpanded: boolean };
+
+export const useLogic = ({ isDefaultExpanded }: UseLogicProps) => {
+  const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
 
   const handleToggle = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();

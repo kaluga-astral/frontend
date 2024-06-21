@@ -1,23 +1,8 @@
-import { type FunctionComponent, type ReactNode } from 'react';
+import { type FunctionComponent } from 'react';
+
+import type { TreeListData } from '../types';
 
 export type Value = string | undefined;
-
-export type TreeData = {
-  /**
-   * Идентификатор элемента в дереве
-   */
-  id: string;
-
-  /**
-   * Подпись или иное содержимое элемента
-   */
-  label: ReactNode;
-
-  /**
-   * Дочерние элементы
-   */
-  children?: TreeData[];
-};
 
 export type TreeListProps = {
   /**
@@ -28,7 +13,7 @@ export type TreeListProps = {
   /**
    * Данные, которые необходимо отобразить в виде дерева.
    */
-  data: TreeData[];
+  data: TreeListData[];
 
   /**
    * Название класса, применяется к корневому компоненту.
@@ -36,9 +21,21 @@ export type TreeListProps = {
   className?: string;
 
   /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default 'false'
+   */
+  isInitialExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isExpanded=true
+   * @default '10'
+   */
+  expandedLevel?: number;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Функция, которая запускается при изменении состояния.

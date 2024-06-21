@@ -39,6 +39,12 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   level: number;
 
   /**
+   * Если true, то вложенный список будет раскрыт
+   * @default 'false'
+   */
+  isDefaultExpanded?: boolean;
+
+  /**
    * Функция, которая запускается при нажатии на элемента списка.
    */
   onClick?: () => void;
@@ -49,12 +55,13 @@ export const TreeItem = ({
   children,
   className,
   isSelected,
+  isDefaultExpanded = false,
   level = 0,
   component = 'div',
   onClick,
   ...props
 }: TreeItemProps) => {
-  const { isOpen, handleToggle } = useLogic();
+  const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
 
   if (children) {
     return (
