@@ -27,7 +27,7 @@ export type TreeItemProps = TreeData & {
    * Если true, то дерево будет раскрыто по умолчанию
    * @default false
    */
-  isExpanded?: boolean;
+  isInitialExpanded?: boolean;
 
   /**
    * Уровень раскрытия дерева по умолчанию, при isExpanded=true
@@ -51,7 +51,7 @@ export const TreeItem = ({
   renderItem = DEFAULT_RENDER_ITEM,
   children = [],
   value,
-  isExpanded,
+  isInitialExpanded,
   expandedLevel,
   onChange,
   ...props
@@ -60,7 +60,7 @@ export const TreeItem = ({
     id,
     value,
     level,
-    isExpanded,
+    isInitialExpanded,
     expandedLevel,
     onChange,
   });
@@ -83,7 +83,7 @@ export const TreeItem = ({
               {...child}
               renderItem={renderItem}
               level={level + 1}
-              isExpanded={isExpanded}
+              isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
               value={value}
               onChange={onChange}

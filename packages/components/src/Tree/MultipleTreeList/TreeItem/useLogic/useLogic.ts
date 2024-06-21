@@ -14,7 +14,7 @@ type UseLogicProps = Pick<
   | 'value'
   | 'children'
   | 'level'
-  | 'isExpanded'
+  | 'isInitialExpanded'
   | 'expandedLevel'
   | 'onChange'
 >;
@@ -24,7 +24,7 @@ export const useLogic = ({
   value,
   children,
   level,
-  isExpanded,
+  isInitialExpanded,
   expandedLevel,
   onChange,
 }: UseLogicProps) => {
@@ -32,7 +32,7 @@ export const useLogic = ({
   const isSelected = checkIsSelected(value, id);
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
 
-  const isDefaultExpanded = isExpanded && level <= expandedLevel - 1;
+  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
   useEffect(() => {
     if (!childrenIds.length) {

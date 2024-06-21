@@ -28,7 +28,7 @@ export type MultipleTreeListProps = {
    * Если true, то дерево будет раскрыто по умолчанию
    * @default 'false'
    */
-  isExpanded?: boolean;
+  isInitialExpanded?: boolean;
 
   /**
    * Уровень раскрытия дерева по умолчанию, при isExpanded=true

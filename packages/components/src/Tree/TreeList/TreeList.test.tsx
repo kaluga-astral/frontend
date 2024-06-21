@@ -42,7 +42,7 @@ describe('TreeList', () => {
     expect(label).not.toBeVisible();
   });
 
-  it('Вложенные элементы отображаются по умолчанию, если isExpanded=true', () => {
+  it('Вложенные элементы отображаются по умолчанию, если isInitialExpanded=true', () => {
     const fakeData = [
       {
         id: '1',
@@ -56,14 +56,14 @@ describe('TreeList', () => {
       },
     ];
 
-    renderWithTheme(<TreeList data={fakeData} isExpanded />);
+    renderWithTheme(<TreeList data={fakeData} isInitialExpanded />);
 
     const label = screen.queryByText('Item 1');
 
     expect(label).toBeVisible();
   });
 
-  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isExpanded=true', () => {
+  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
     const fakeData = [
       {
         id: '1',
@@ -83,7 +83,9 @@ describe('TreeList', () => {
       },
     ];
 
-    renderWithTheme(<TreeList data={fakeData} isExpanded expandedLevel={1} />);
+    renderWithTheme(
+      <TreeList data={fakeData} isInitialExpanded expandedLevel={1} />,
+    );
 
     const label = screen.queryByText('SubItem 1');
 

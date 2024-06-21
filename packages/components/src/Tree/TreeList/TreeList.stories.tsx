@@ -130,6 +130,9 @@ export const RenderItem = () => {
   );
 };
 
+/**
+ * При наличии флага `isInitialExpanded=true` дерево будет раскрыто по умолчанию
+ */
 export const Expanded = () => {
   const [value, setValue] = useState<string | undefined>();
 
@@ -142,10 +145,18 @@ export const Expanded = () => {
   ];
 
   return (
-    <TreeList data={fakeData} value={value} isExpanded onChange={setValue} />
+    <TreeList
+      data={fakeData}
+      value={value}
+      isInitialExpanded
+      onChange={setValue}
+    />
   );
 };
 
+/**
+ * expandedLevel позволяет ограничить глубину раскрытия дерева при `isInitialExpanded=true`
+ */
 export const ExpandedLevel = () => {
   const [value, setValue] = useState<string | undefined>();
 
@@ -161,7 +172,7 @@ export const ExpandedLevel = () => {
     <TreeList
       data={fakeData}
       value={value}
-      isExpanded
+      isInitialExpanded
       expandedLevel={1}
       onChange={setValue}
     />

@@ -54,7 +54,7 @@ describe('MultipleTreeList', () => {
     expect(label).not.toBeVisible();
   });
 
-  it('Вложенные элементы отображаются по умолчанию, если isExpanded=true', () => {
+  it('Вложенные элементы отображаются по умолчанию, если isInitialExpanded=true', () => {
     const onChangeSpy = vi.fn();
 
     const fakeData = [
@@ -71,7 +71,11 @@ describe('MultipleTreeList', () => {
     ];
 
     renderWithTheme(
-      <MultipleTreeList data={fakeData} isExpanded onChange={onChangeSpy} />,
+      <MultipleTreeList
+        data={fakeData}
+        isInitialExpanded
+        onChange={onChangeSpy}
+      />,
     );
 
     const label = screen.queryByText('Item 1');
@@ -79,7 +83,7 @@ describe('MultipleTreeList', () => {
     expect(label).toBeVisible();
   });
 
-  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isExpanded=true', () => {
+  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
     const onChangeSpy = vi.fn();
 
     const fakeData = [
@@ -104,7 +108,7 @@ describe('MultipleTreeList', () => {
     renderWithTheme(
       <MultipleTreeList
         data={fakeData}
-        isExpanded
+        isInitialExpanded
         expandedLevel={1}
         onChange={onChangeSpy}
       />,
