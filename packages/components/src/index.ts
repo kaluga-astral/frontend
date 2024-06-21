@@ -76,6 +76,8 @@ export * from './DateRangePicker';
 
 export * from './Description';
 
+export * from './DescriptionList';
+
 export * from './Dialog';
 
 export * from './DialogActions';

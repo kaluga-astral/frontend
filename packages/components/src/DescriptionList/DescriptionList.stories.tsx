@@ -1,11 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { styled } from '../styles';
 import { Grid } from '../Grid';
 
-import { DescriptionList, type DescriptionListProps } from './DescriptionList';
+import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
 /**
+ * Компонент для упрощенного построения UI списка формата name: value, использующий для отображения элементов компонент [Description](/docs/components-description--docs)
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=9482-124414&t=voulOUycMV4eKx39-0)
  * ### [Guide]()
  */
@@ -24,12 +24,12 @@ export const Interaction: Story = {
       {
         name: 'ИНН',
         value: '295995231495',
-        options: { maxWidth: '200px', color: 'primary', canCopy: true },
+        options: { nameMaxWidth: '200px', color: 'primary', canCopy: true },
       },
       {
         name: 'Описание',
         value: 'ИНН физического лица является последовательностью из 12 цифр',
-        options: { maxWidth: '300px', color: 'error' },
+        options: { nameMaxWidth: '300px', color: 'error' },
       },
     ],
     justifyContent: 'space-between',
@@ -44,12 +44,8 @@ export const Interaction: Story = {
   },
 };
 
-const GridWrapper = styled(Grid)`
-  justify-content: center;
-`;
-
 export const Example = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ИНН',
       value: '295995231495',
@@ -60,15 +56,15 @@ export const Example = () => {
       value: 'ИНН физического лица является последовательностью из 12 цифр',
     },
     {
-      name: 'Снилс',
+      name: 'СНИЛС',
       value: '',
     },
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
@@ -76,22 +72,22 @@ export const Example = () => {
  * ```canCopy``` можно задать для каждого элемента списка отдельно
  */
 export const CanCopy = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ИНН',
       value: '295995231495',
       options: { canCopy: true },
     },
     {
-      name: 'Снилс',
+      name: 'СНИЛС',
       value: '23339576886',
     },
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
@@ -99,35 +95,39 @@ export const CanCopy = () => {
  * По дефолту copyPosition="right", можно задать "left"
  */
 export const CopyPosition = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ИНН',
       value: '295995231495',
       options: { canCopy: true, copyPosition: 'left' },
     },
     {
-      name: 'Снилс',
+      name: 'СНИЛС',
       value: '23339576886',
       options: { canCopy: true },
     },
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
 /**
- * По дефолту ширина Label не ограничена, можно задать maxWidth для фиксированной длины
+ * По дефолту ширина Name не ограничена, можно задать ```nameMaxWidth``` для фиксированной длины
  */
-export const MaxWidth = () => {
-  const items: DescriptionListProps['items'] = [
+export const NameMaxWidth = () => {
+  const items: DescriptionListItem[] = [
     {
-      name: 'Описания ИНН юридического лица',
-      value: 'ИНН юридического лица — последовательность из 10 арабских цифр',
-      options: { maxWidth: '150px' },
+      name: 'Полное именование',
+      value:
+        '_тест_ОАО "Тестовое коммерческое профессиональное учреждение\n' +
+        '          Специальное управление службы №007 Министерство Внутренней Разработки\n' +
+        '          по делам тестирования, исправления, чрезвычайным ситуациям и\n' +
+        '          ликвидации последствии действия багов"',
+      options: { nameMaxWidth: '100px' },
     },
     {
       name: 'Описания ИНН юридического лица',
@@ -136,9 +136,9 @@ export const MaxWidth = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
@@ -146,7 +146,7 @@ export const MaxWidth = () => {
  * Prop ```justifyContent``` по дефолту start, можно задать space-between для всего списка
  */
 export const JustifyContent = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ФИО',
       value: 'Швецова М. Д.',
@@ -158,14 +158,14 @@ export const JustifyContent = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} justifyContent="space-between" />
-    </GridWrapper>
+    </Grid>
   );
 };
 
 export const JustifyContentCanCopy = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ФИО',
       value: 'Швецова М. Д.',
@@ -179,9 +179,9 @@ export const JustifyContentCanCopy = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} justifyContent="space-between" />
-    </GridWrapper>
+    </Grid>
   );
 };
 
@@ -189,7 +189,7 @@ export const JustifyContentCanCopy = () => {
  * Prop ```leader``` добавляет dashed строку
  */
 export const Leader = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ФИО',
       value: 'Швецова М. Д.',
@@ -201,14 +201,33 @@ export const Leader = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} leader />
-    </GridWrapper>
+    </Grid>
+  );
+};
+
+export const Separator = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'ФИО',
+      value: 'Швецова М. Д.',
+    },
+    {
+      name: 'ФИО',
+      value: 'Швецова Мария Дмитриевна',
+    },
+  ];
+
+  return (
+    <Grid>
+      <DescriptionList items={items} separator="-" />
+    </Grid>
   );
 };
 
 export const Colors = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'Название показателя',
       value: 'Значение показателя',
@@ -237,14 +256,14 @@ export const Colors = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
 export const ColorsCanCopy = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'Название показателя',
       value: 'Значение показателя',
@@ -273,27 +292,27 @@ export const ColorsCanCopy = () => {
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };
 
 export const EmptyValue = () => {
-  const items: DescriptionListProps['items'] = [
+  const items: DescriptionListItem[] = [
     {
       name: 'ФИО',
       value: 'Швецова М. Д',
     },
     {
-      name: 'Снилс',
+      name: 'СНИЛС',
       value: '',
     },
   ];
 
   return (
-    <GridWrapper rowSpacing={3} container>
+    <Grid>
       <DescriptionList items={items} />
-    </GridWrapper>
+    </Grid>
   );
 };

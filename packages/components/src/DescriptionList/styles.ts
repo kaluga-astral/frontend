@@ -2,16 +2,16 @@ import { Description } from '../Description';
 import { styled } from '../styles';
 
 type DescriptionNameProps = {
-  $maxWidth?: string;
+  $nameMaxWidth?: string;
 };
 
 export const StyledDescriptionName = styled(Description.Name, {
   shouldForwardProp: (prop) => prop !== '$maxWidth',
 })<DescriptionNameProps>`
-  max-width: ${({ $maxWidth }) => $maxWidth};
+  max-width: ${({ $nameMaxWidth }) => ($nameMaxWidth ? $nameMaxWidth : 'none')};
 `;
 
 export const Wrapper = styled.dl`
   display: grid;
-  row-gap: 8px;
+  row-gap: ${({ theme }) => theme.spacing(1)};
 `;

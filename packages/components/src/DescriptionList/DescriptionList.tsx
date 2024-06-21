@@ -1,67 +1,53 @@
 import { type ReactNode } from 'react';
 
-import { Description } from '../Description';
-import { type TypographyProps } from '../Typography';
-import { DEFAULT_SEPARATOR } from '../Description/constants';
+import { Description, type DescriptionProps } from '../Description';
+import { type ValueProps } from '../Description/Value';
 
 import { StyledDescriptionName, Wrapper } from './styles';
 
-export type DescriptionOptions = Pick<TypographyProps, 'color'> & {
-  maxWidth?: string;
-  canCopy?: boolean;
-  copyPosition?: 'left' | 'right';
+export type DescriptionOptions = Pick<
+  ValueProps,
+  'canCopy' | 'copyPosition' | 'color'
+> & {
+  nameMaxWidth?: string;
 };
 
-export type DescriptionItem = {
+export type DescriptionListItem = {
   name: ReactNode;
   value: ReactNode;
   options?: DescriptionOptions;
 };
 
-export type DescriptionListProps = {
+export type DescriptionListProps = Pick<
+  DescriptionProps,
+  'justifyContent' | 'leader' | 'separator'
+> & {
   /**
-   * Элементы Description.Name и Description.Value, объект options
+   * Список отображаемых "name: value"
    */
-  items: DescriptionItem[];
-  /**
-   * Позиционирует элементы либо по разным краям, либо по левому краю
-   */
-  justifyContent?: 'space-between' | 'start';
-  /**
-   * Добавляет dashed разделитель, заполняющего свободное пространство между Name Value
-   */
-  leader?: boolean;
-  /**
-   * Определяет разделитель между Name Value
-   */
-  separator?: string;
+  items: DescriptionListItem[];
 };
 
-export const DescriptionList = ({
-  items,
-  justifyContent = 'start',
-  leader = false,
-  separator = DEFAULT_SEPARATOR,
-}: DescriptionListProps) => {
+export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
   return (
     <Wrapper>
-      {items.map((item, index) => (
+      {items.map(({ name, value, options }, index) => (
         <Description
           key={index}
-          justifyContent={justifyContent}
-          leader={leader}
-          separator={separator}
+          justifyContent={props.justifyContent}
+          leader={props.leader}
+          separator={props.separator}
           component="div"
         >
-          <StyledDescriptionName $maxWidth={item.options?.maxWidth}>
-            {item.name}
+          <StyledDescriptionName $nameMaxWidth={options?.nameMaxWidth}>
+            {name}
           </StyledDescriptionName>
           <Description.Value
-            canCopy={item.options?.canCopy}
-            color={item.options?.color}
-            copyPosition={item.options?.copyPosition}
+            canCopy={options?.canCopy}
+            color={options?.color}
+            copyPosition={options?.copyPosition}
           >
-            {item.value}
+            {value}
           </Description.Value>
         </Description>
       ))}
