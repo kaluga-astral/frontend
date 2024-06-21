@@ -1,7 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { Grid } from '../Grid';
-
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
 /**
@@ -61,11 +59,7 @@ export const Example = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 /**
@@ -84,11 +78,7 @@ export const CanCopy = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 /**
@@ -108,11 +98,7 @@ export const CopyPosition = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 /**
@@ -135,11 +121,7 @@ export const NameMaxWidth = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 /**
@@ -157,11 +139,7 @@ export const JustifyContent = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} justifyContent="space-between" />
-    </Grid>
-  );
+  return <DescriptionList items={items} justifyContent="space-between" />;
 };
 
 export const JustifyContentCanCopy = () => {
@@ -178,11 +156,7 @@ export const JustifyContentCanCopy = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} justifyContent="space-between" />
-    </Grid>
-  );
+  return <DescriptionList items={items} justifyContent="space-between" />;
 };
 
 /**
@@ -200,11 +174,7 @@ export const Leader = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} leader />
-    </Grid>
-  );
+  return <DescriptionList items={items} leader />;
 };
 
 export const Separator = () => {
@@ -219,11 +189,7 @@ export const Separator = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} separator="-" />
-    </Grid>
-  );
+  return <DescriptionList items={items} separator="-" />;
 };
 
 export const Colors = () => {
@@ -255,11 +221,7 @@ export const Colors = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 export const ColorsCanCopy = () => {
@@ -291,11 +253,7 @@ export const ColorsCanCopy = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
 
 export const EmptyValue = () => {
@@ -310,9 +268,5 @@ export const EmptyValue = () => {
     },
   ];
 
-  return (
-    <Grid>
-      <DescriptionList items={items} />
-    </Grid>
-  );
+  return <DescriptionList items={items} />;
 };
