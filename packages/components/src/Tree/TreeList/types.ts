@@ -1,6 +1,6 @@
 import { type FunctionComponent } from 'react';
 
-import type { TreeData } from '../types';
+import type { TreeListData } from '../types';
 
 export type Value = string | undefined;
 
@@ -13,7 +13,7 @@ export type TreeListProps = {
   /**
    * Данные, которые необходимо отобразить в виде дерева.
    */
-  data: TreeData[];
+  data: TreeListData[];
 
   /**
    * Название класса, применяется к корневому компоненту.
@@ -35,7 +35,7 @@ export type TreeListProps = {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Функция, которая запускается при изменении состояния.

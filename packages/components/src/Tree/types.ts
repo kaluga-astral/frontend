@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-export type TreeData = {
+export type TreeListData = {
   /**
    * Идентификатор элемента в дереве
    */
@@ -14,5 +14,5 @@ export type TreeData = {
   /**
    * Дочерние элементы
    */
-  children?: TreeData[];
+  children?: TreeListData[];
 };

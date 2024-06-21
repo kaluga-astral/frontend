@@ -1,13 +1,13 @@
 import { type FunctionComponent } from 'react';
 
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
-import type { TreeData } from '../../types';
+import type { TreeListData } from '../../types';
 import type { Value } from '../types';
 
 import { useLogic } from './useLogic';
 import { Label, List } from './styles';
 
-export type TreeItemProps = TreeData & {
+export type TreeItemProps = TreeListData & {
   /**
    * Выбранные значения
    */
@@ -16,7 +16,7 @@ export type TreeItemProps = TreeData & {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Уровень вложенности в дереве

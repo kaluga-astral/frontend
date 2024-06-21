@@ -7,13 +7,13 @@ import {
 
 import { Checkbox } from '../../../Checkbox';
 import { FormControlLabel } from '../../../FormControlLabel';
-import type { TreeData } from '../../types';
+import type { TreeListData } from '../../types';
 import type { MultipleValue } from '../types';
 
 import { useLogic } from './useLogic';
 import { List, StyledItemContent } from './styles';
 
-export type TreeItemProps = TreeData & {
+export type TreeItemProps = TreeListData & {
   /**
    * Выбранные значения
    */
@@ -22,7 +22,7 @@ export type TreeItemProps = TreeData & {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Уровень вложенности в дереве

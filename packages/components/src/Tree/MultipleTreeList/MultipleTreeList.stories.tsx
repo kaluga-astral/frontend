@@ -136,7 +136,7 @@ export const RenderItem = () => {
 /**
  * При наличии флага `isInitialExpanded=true` дерево будет раскрыто по умолчанию
  */
-export const Expanded = () => {
+export const InitialExpanded = () => {
   const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [

@@ -1,7 +1,7 @@
-import type { TreeData } from '../../../../../types';
+import type { TreeListData } from '../../../../../types';
 
 export const getAllChildrenId = (
-  children: Array<TreeData> | undefined,
+  children: Array<TreeListData> | undefined,
 ): Array<string> => {
   if (!children || !children?.length) {
     return [];
@@ -9,7 +9,7 @@ export const getAllChildrenId = (
 
   let ids: Array<string> = [];
 
-  const traverse = (items: Array<TreeData>) => {
+  const traverse = (items: Array<TreeListData>) => {
     items.forEach((item) => {
       ids.push(item.id);
 

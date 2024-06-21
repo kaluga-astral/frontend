@@ -4,7 +4,7 @@ import {
   type SetStateAction,
 } from 'react';
 
-import type { TreeData } from '../types';
+import type { TreeListData } from '../types';
 
 export type MultipleValue = Array<string> | undefined;
 
@@ -17,7 +17,7 @@ export type MultipleTreeListProps = {
   /**
    * Данные, которые необходимо отобразить в виде дерева.
    */
-  data: TreeData[];
+  data: TreeListData[];
 
   /**
    * Название класса, применяется к корневому компоненту.
@@ -39,7 +39,7 @@ export type MultipleTreeListProps = {
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Функция, которая запускается при изменении состояния.

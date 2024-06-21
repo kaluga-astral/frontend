@@ -258,7 +258,7 @@ export {
   type TreeListProps,
   MultipleTreeList,
   type MultipleTreeListProps,
-  type TreeData,
+  type TreeListData,
 } from './Tree';
 
 export * from './types';
