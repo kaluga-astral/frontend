@@ -10,6 +10,7 @@ export const MultipleTreeList = ({
   data,
   value,
   className,
+  expandedLevel = 10,
   ...props
 }: MultipleTreeListProps) => (
   <List className={className}>
@@ -19,6 +20,7 @@ export const MultipleTreeList = ({
         value={value}
         {...item}
         level={INITIAL_LEVEL}
+        expandedLevel={expandedLevel}
         {...props}
       />
     ))}

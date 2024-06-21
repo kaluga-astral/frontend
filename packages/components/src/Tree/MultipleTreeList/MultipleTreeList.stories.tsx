@@ -132,3 +132,46 @@ export const RenderItem = () => {
     />
   );
 };
+
+export const Expanded = () => {
+  const [value, setValue] = useState<Array<string> | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <MultipleTreeList
+      data={fakeData}
+      value={value}
+      isExpanded
+      onChange={setValue}
+    />
+  );
+};
+
+export const ExpandedLevel = () => {
+  const [value, setValue] = useState<Array<string> | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <MultipleTreeList
+      data={fakeData}
+      value={value}
+      isExpanded
+      expandedLevel={1}
+      onChange={setValue}
+    />
+  );
+};

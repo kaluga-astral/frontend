@@ -1,4 +1,4 @@
-import { type TreeData } from '../../../../types';
+import type { TreeData } from '../../../../../types';
 
 export const getAllChildrenId = (
   children: Array<TreeData> | undefined,

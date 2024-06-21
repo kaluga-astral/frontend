@@ -1,7 +1,8 @@
 import { type FunctionComponent } from 'react';
 
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
-import type { TreeData, Value } from '../types';
+import type { TreeData } from '../../types';
+import type { Value } from '../types';
 
 import { useLogic } from './useLogic';
 import { Label, List } from './styles';
@@ -23,6 +24,17 @@ export type TreeItemProps = TreeData & {
   level: number;
 
   /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default false
+   */
+  isExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isExpanded=true
+   */
+  expandedLevel: number;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange?: (value: Value) => void;
@@ -39,12 +51,17 @@ export const TreeItem = ({
   renderItem = DEFAULT_RENDER_ITEM,
   children = [],
   value,
+  isExpanded,
+  expandedLevel,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, handleChange } = useLogic({
+  const { isSelected, isDefaultExpanded, handleChange } = useLogic({
     id,
     value,
+    level,
+    isExpanded,
+    expandedLevel,
     onChange,
   });
 
@@ -53,6 +70,7 @@ export const TreeItem = ({
       <BaseTreeItem
         isRoot
         isSelected={isSelected}
+        isDefaultExpanded={isDefaultExpanded}
         component="li"
         label={renderItem({ id, label, ...props })}
         level={level}
@@ -65,6 +83,8 @@ export const TreeItem = ({
               {...child}
               renderItem={renderItem}
               level={level + 1}
+              isExpanded={isExpanded}
+              expandedLevel={expandedLevel}
               value={value}
               onChange={onChange}
             />

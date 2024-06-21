@@ -1,28 +1,12 @@
 import {
   type Dispatch,
   type FunctionComponent,
-  type ReactNode,
   type SetStateAction,
 } from 'react';
 
+import type { TreeData } from '../types';
+
 export type MultipleValue = Array<string> | undefined;
-
-export type TreeData = {
-  /**
-   * Идентификатор элемента в дереве
-   */
-  id: string;
-
-  /**
-   * Подпись или иное содержимое элемента
-   */
-  label: ReactNode;
-
-  /**
-   * Дочерние элементы
-   */
-  children?: TreeData[];
-};
 
 export type MultipleTreeListProps = {
   /**
@@ -39,6 +23,18 @@ export type MultipleTreeListProps = {
    * Название класса, применяется к корневому компоненту.
    */
   className?: string;
+
+  /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default 'false'
+   */
+  isExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isExpanded=true
+   * @default '10'
+   */
+  expandedLevel?: number;
 
   /**
    * Render-props, позволяет более гибко настраивать содержимое item

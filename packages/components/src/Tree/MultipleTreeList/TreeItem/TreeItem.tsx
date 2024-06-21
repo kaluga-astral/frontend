@@ -7,7 +7,8 @@ import {
 
 import { Checkbox } from '../../../Checkbox';
 import { FormControlLabel } from '../../../FormControlLabel';
-import type { MultipleValue, TreeData } from '../types';
+import type { TreeData } from '../../types';
+import type { MultipleValue } from '../types';
 
 import { useLogic } from './useLogic';
 import { List, StyledItemContent } from './styles';
@@ -29,6 +30,17 @@ export type TreeItemProps = TreeData & {
   level: number;
 
   /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default false
+   */
+  isExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isExpanded=true
+   */
+  expandedLevel: number;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange: Dispatch<SetStateAction<MultipleValue>>;
@@ -45,15 +57,21 @@ export const TreeItem = ({
   renderItem = DEFAULT_RENDER_ITEM,
   children = [],
   value,
+  isExpanded,
+  expandedLevel,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isIndeterminate, handleChange } = useLogic({
-    id,
-    value,
-    children,
-    onChange,
-  });
+  const { isSelected, isIndeterminate, isDefaultExpanded, handleChange } =
+    useLogic({
+      id,
+      value,
+      children,
+      level,
+      isExpanded,
+      expandedLevel,
+      onChange,
+    });
 
   const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
@@ -62,6 +80,7 @@ export const TreeItem = ({
       <StyledItemContent
         isRoot
         isSelected={isSelected}
+        isDefaultExpanded={isDefaultExpanded}
         label={
           <FormControlLabel
             control={
@@ -85,6 +104,8 @@ export const TreeItem = ({
               {...child}
               renderItem={renderItem}
               level={level + 1}
+              isExpanded={isExpanded}
+              expandedLevel={expandedLevel}
               value={value}
               onChange={onChange}
             />
