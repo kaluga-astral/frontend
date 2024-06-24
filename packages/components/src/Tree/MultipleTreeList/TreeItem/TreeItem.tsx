@@ -7,11 +7,12 @@ import {
 
 import { Checkbox } from '../../../Checkbox';
 import { FormControlLabel } from '../../../FormControlLabel';
+import { Tooltip } from '../../../Tooltip';
 import type { TreeListData } from '../../types';
 import type { MultipleValue } from '../types';
 
 import { useLogic } from './useLogic';
-import { List, StyledItemContent } from './styles';
+import { List, SelectChildrenButton, StyledItemContent } from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -41,6 +42,11 @@ export type TreeItemProps = TreeListData & {
   expandedLevel: number;
 
   /**
+   * Стратегия выбора дочерних элементов при включении родительского элемента
+   */
+  selectStrategy: 'default' | 'no-children';
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange: Dispatch<SetStateAction<MultipleValue>>;
@@ -59,19 +65,27 @@ export const TreeItem = ({
   value,
   isInitialExpanded,
   expandedLevel,
+  selectStrategy,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isIndeterminate, isDefaultExpanded, handleChange } =
-    useLogic({
-      id,
-      value,
-      children,
-      level,
-      isInitialExpanded,
-      expandedLevel,
-      onChange,
-    });
+  const {
+    isSelected,
+    isIndeterminate,
+    isDefaultExpanded,
+    isVisibleSelectChildrenButton,
+    handleSelectChildren,
+    handleChange,
+  } = useLogic({
+    id,
+    value,
+    children,
+    level,
+    isInitialExpanded,
+    expandedLevel,
+    selectStrategy,
+    onChange,
+  });
 
   const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
@@ -84,10 +98,25 @@ export const TreeItem = ({
         label={
           <FormControlLabel
             control={
-              <Checkbox
-                checked={isSelected}
-                indeterminate={isSelected ? false : isIndeterminate}
-              />
+              <Tooltip
+                placement="right"
+                title={
+                  isVisibleSelectChildrenButton && (
+                    <SelectChildrenButton
+                      variant="text"
+                      onClick={handleSelectChildren}
+                    >
+                      Отметить вложенные
+                    </SelectChildrenButton>
+                  )
+                }
+              >
+                <Checkbox
+                  checked={isSelected}
+                  indeterminate={isSelected ? false : isIndeterminate}
+                  onChange={handleChange}
+                />
+              </Tooltip>
             }
             label={renderItem({ id, label, ...props })}
             onChange={handleChange}
@@ -106,6 +135,7 @@ export const TreeItem = ({
               level={level + 1}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              selectStrategy={selectStrategy}
               value={value}
               onChange={onChange}
             />

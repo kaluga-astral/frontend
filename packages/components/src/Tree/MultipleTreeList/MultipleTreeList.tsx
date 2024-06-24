@@ -11,6 +11,7 @@ export const MultipleTreeList = ({
   value,
   className,
   expandedLevel = 10,
+  selectStrategy = 'default',
   ...props
 }: MultipleTreeListProps) => (
   <List className={className}>
@@ -21,6 +22,7 @@ export const MultipleTreeList = ({
         {...item}
         level={INITIAL_LEVEL}
         expandedLevel={expandedLevel}
+        selectStrategy={selectStrategy}
         {...props}
       />
     ))}

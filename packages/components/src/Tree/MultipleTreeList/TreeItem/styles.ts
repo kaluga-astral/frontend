@@ -1,3 +1,4 @@
+import { Button } from '../../../Button';
 import { TreeItem } from '../../TreeItem';
 import { styled } from '../../../styles';
 
@@ -13,4 +14,8 @@ export const List = styled.ul`
   padding: 0;
 
   list-style-type: none;
+`;
+
+export const SelectChildrenButton = styled(Button)`
+  color: ${({ theme }) => theme.palette.grey[100]};
 `;

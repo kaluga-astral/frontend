@@ -16,6 +16,7 @@ type UseLogicProps = Pick<
   | 'level'
   | 'isInitialExpanded'
   | 'expandedLevel'
+  | 'selectStrategy'
   | 'onChange'
 >;
 
@@ -26,22 +27,26 @@ export const useLogic = ({
   level,
   isInitialExpanded,
   expandedLevel,
+  selectStrategy,
   onChange,
 }: UseLogicProps) => {
   const childrenIds = useMemo(() => getAllChildrenId(children), [children]);
   const isSelected = checkIsSelected(value, id);
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
 
+  const isEveryChildChecked = childrenIds.every((childrenId) =>
+    value?.includes(childrenId),
+  );
+
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+  const isStrategyNoChildren = Object.is(selectStrategy, 'no-children');
+  const isVisibleSelectChildrenButton =
+    isStrategyNoChildren && !isEveryChildChecked;
 
   useEffect(() => {
-    if (!childrenIds.length) {
+    if (!childrenIds.length || isStrategyNoChildren) {
       return undefined;
     }
-
-    const isEveryChildChecked = childrenIds.every((childrenId) =>
-      value?.includes(childrenId),
-    );
 
     if (!isSelected && isEveryChildChecked) {
       onChange((selectedIds = []) => [...selectedIds, id]);
@@ -52,25 +57,39 @@ export const useLogic = ({
         selectedIds.filter((selectedId) => selectedId !== id),
       );
     }
-  }, [value, childrenIds]);
+  }, [value, childrenIds, isEveryChildChecked]);
+
+  const handleSelectChildren = () => {
+    onChange((selectedIds = []) => {
+      const newAddingIds = childrenIds.filter(
+        (childrenId) => !selectedIds.includes(childrenId),
+      );
+
+      return [...selectedIds, ...newAddingIds];
+    });
+  };
 
   const handleChange = () => {
-    onChange((selectedIds = []) => {
-      if (children) {
-        if (selectedIds.includes(id)) {
-          return selectedIds.filter(
-            (selectedId) => ![id, ...childrenIds].includes(selectedId),
-          );
-        }
-
-        return [...selectedIds, id, ...childrenIds];
-      } else {
+    if (!childrenIds.length || isStrategyNoChildren) {
+      onChange((selectedIds = []) => {
         if (selectedIds.includes(id)) {
           return selectedIds.filter((selectedId) => selectedId !== id);
         }
 
         return [...selectedIds, id];
+      });
+
+      return;
+    }
+
+    onChange((selectedIds = []) => {
+      if (selectedIds.includes(id)) {
+        return selectedIds.filter(
+          (selectedId) => ![id, ...childrenIds].includes(selectedId),
+        );
       }
+
+      return [...selectedIds, id, ...childrenIds];
     });
   };
 
@@ -78,6 +97,8 @@ export const useLogic = ({
     isSelected,
     isIndeterminate,
     isDefaultExpanded,
+    isVisibleSelectChildrenButton,
+    handleSelectChildren,
     handleChange,
   };
 };
