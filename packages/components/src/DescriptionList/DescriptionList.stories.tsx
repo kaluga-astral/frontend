@@ -1,5 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
+import { Tag } from '../Tag';
+
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
 /**
@@ -33,6 +35,7 @@ export const Interaction: Story = {
     justifyContent: 'space-between',
     leader: true,
     separator: ':',
+    variant: 'tag',
   },
   parameters: {
     options: { showPanel: true },
@@ -190,6 +193,61 @@ export const Separator = () => {
   ];
 
   return <DescriptionList items={items} separator="-" />;
+};
+
+export const CustomRenderOption = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: {
+        color: 'warning',
+        renderOption: (optionProps, { value, options }) => (
+          <div key={optionProps.key}>
+            <Tag label={value} variant="light" color={options?.color} />
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+    },
+  ];
+
+  return <DescriptionList items={items} />;
+};
+
+export const VariantTag = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: { color: 'grey' },
+    },
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: { color: 'warning' },
+    },
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: { color: 'error' },
+    },
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: { color: 'success' },
+    },
+    {
+      name: 'Название показателя',
+      value: 'Значение показателя',
+      options: { color: 'primary' },
+    },
+  ];
+
+  return <DescriptionList items={items} variant="tag" />;
 };
 
 export const Colors = () => {
