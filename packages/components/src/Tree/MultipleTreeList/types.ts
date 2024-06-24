@@ -42,6 +42,12 @@ export type MultipleTreeListProps = {
   renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
+   * Стратегия выбора дочерних элементов при включении родительского элемента
+   * @default  'default'
+   */
+  selectStrategy?: 'default' | 'no-children';
+
+  /**
    * Функция, которая запускается при изменении состояния.
    */
   onChange: Dispatch<SetStateAction<MultipleValue>>;

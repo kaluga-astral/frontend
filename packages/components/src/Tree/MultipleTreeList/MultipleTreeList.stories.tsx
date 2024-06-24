@@ -181,3 +181,27 @@ export const ExpandedLevel = () => {
     />
   );
 };
+
+/**
+ * При стратегии `no-children` включение родительского чекбокса не приведет к включению дочерних элементов
+ */
+export const SelectStrategy = () => {
+  const [value, setValue] = useState<Array<string> | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <MultipleTreeList
+      data={fakeData}
+      value={value}
+      selectStrategy="no-children"
+      onChange={setValue}
+    />
+  );
+};
