@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Tag } from '../Tag';
+import { Typography } from '../Typography';
 
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
@@ -212,7 +213,9 @@ export const CustomRenderOption = () => {
       name: 'Название показателя',
       value: 'Значение показателя',
       options: {
-        renderOption: (_, value) => <h1>{value}</h1>,
+        renderOption: (_, value) => (
+          <Typography color="primary">{value}</Typography>
+        ),
       },
     },
   ];
