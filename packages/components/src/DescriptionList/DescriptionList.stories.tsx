@@ -202,7 +202,7 @@ export const CustomRenderOption = () => {
       value: 'Значение показателя',
       options: {
         color: 'warning',
-        renderOption: (optionProps, value) => (
+        renderOption: (value, optionProps) => (
           <div>
             <Tag label={value} variant="light" color={optionProps?.color} />
           </div>
@@ -213,7 +213,7 @@ export const CustomRenderOption = () => {
       name: 'Название показателя',
       value: 'Значение показателя',
       options: {
-        renderOption: (_, value) => (
+        renderOption: (value) => (
           <Typography color="primary">{value}</Typography>
         ),
       },
