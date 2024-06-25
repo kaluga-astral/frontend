@@ -24,7 +24,7 @@ const items: DescriptionListItem[] = [
 ];
 
 describe('DescriptionList', () => {
-  it('Корректное отображение списка элементов', () => {
+  it('Отображение списка элементов, без заданных options', () => {
     const itemsWithoutOptions: DescriptionListItem[] = [
       {
         name: 'Название показателя 1',
@@ -47,7 +47,7 @@ describe('DescriptionList', () => {
     });
   });
 
-  it('Props:separator: Если определен, отображает указанный разделитель', () => {
+  it('Отображается указанный разделитель, если задан separator', () => {
     const customSeparator = ';';
 
     renderWithTheme(
@@ -63,24 +63,20 @@ describe('DescriptionList', () => {
     });
   });
 
-  it('Render props: Если определен, отображает измененное поведение Value', () => {
+  it('Value меняет поведение, при renderOption', () => {
     const renderPropsItems: DescriptionListItem[] = [
       {
         name: 'Название показателя 1',
         value: 'Значение показателя 1',
         options: {
-          renderOption: (_, value) => (
-            <p data-testid="custom-render">{value}</p>
-          ),
+          renderOption: (value) => <p data-testid="custom-render">{value}</p>,
         },
       },
       {
         name: 'Название показателя 2',
         value: 'Значение показателя 2',
         options: {
-          renderOption: (_, value) => (
-            <h3 data-testid="custom-render">{value}</h3>
-          ),
+          renderOption: (value) => <h3 data-testid="custom-render">{value}</h3>,
         },
       },
     ];
@@ -113,7 +109,7 @@ describe('DescriptionList', () => {
     });
   });
 
-  it('Props:color: Если определен, отображает правильный цвет текста для элемента списка', () => {
+  it('Цвет текста меняется, если есть color', () => {
     renderWithTheme(<DescriptionList items={items} />);
 
     const colorMap: { [key: string]: string } = {
@@ -134,7 +130,7 @@ describe('DescriptionList', () => {
     });
   });
 
-  it('Props:nameMaxWidth: Если определен, ограничивает максимальную ширину Name', () => {
+  it('Максимальная ширина Name ограничивается, при nameMaxWidth', () => {
     renderWithTheme(<DescriptionList items={items} />);
 
     items.forEach(({ name, options }) => {
