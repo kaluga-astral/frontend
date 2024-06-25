@@ -5,7 +5,7 @@ import { DEFAULT_SEPARATOR } from '../Description/constants';
 
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
-const items: DescriptionListItem[] = [
+const FAKE_ITEMS: DescriptionListItem[] = [
   {
     name: 'Название показателя 1',
     value: 'Значение показателя 1',
@@ -51,10 +51,10 @@ describe('DescriptionList', () => {
     const customSeparator = ';';
 
     renderWithTheme(
-      <DescriptionList items={items} separator={customSeparator} />,
+      <DescriptionList items={FAKE_ITEMS} separator={customSeparator} />,
     );
 
-    items.forEach((item) => {
+    FAKE_ITEMS.forEach((item) => {
       expect(
         screen.getByText(`${item.name}${customSeparator}` as string),
       ).toBeInTheDocument();
@@ -99,9 +99,9 @@ describe('DescriptionList', () => {
       },
     });
 
-    renderWithTheme(<DescriptionList items={items} />);
+    renderWithTheme(<DescriptionList items={FAKE_ITEMS} />);
 
-    items.forEach(({ value }) => {
+    FAKE_ITEMS.forEach(({ value }) => {
       const valueElement = screen.getByText(value as string);
 
       valueElement.click();
@@ -110,14 +110,14 @@ describe('DescriptionList', () => {
   });
 
   it('Цвет текста меняется, если есть color', () => {
-    renderWithTheme(<DescriptionList items={items} />);
+    renderWithTheme(<DescriptionList items={FAKE_ITEMS} />);
 
     const colorMap: { [key: string]: string } = {
       success: 'rgb(0, 135, 90)', // (#00875A)
       error: 'rgb(242, 70, 70)', // (#F24646)
     };
 
-    items.forEach(({ value, options }) => {
+    FAKE_ITEMS.forEach(({ value, options }) => {
       const valueElement = screen.getByText(value as string);
 
       expect(valueElement).toBeInTheDocument();
@@ -131,9 +131,9 @@ describe('DescriptionList', () => {
   });
 
   it('Максимальная ширина Name ограничивается, при nameMaxWidth', () => {
-    renderWithTheme(<DescriptionList items={items} />);
+    renderWithTheme(<DescriptionList items={FAKE_ITEMS} />);
 
-    items.forEach(({ name, options }) => {
+    FAKE_ITEMS.forEach(({ name, options }) => {
       const expectedMaxWidth = options?.nameMaxWidth ?? 'none';
       const nameElement = screen.getByText(
         `${name}${DEFAULT_SEPARATOR}` as string,
