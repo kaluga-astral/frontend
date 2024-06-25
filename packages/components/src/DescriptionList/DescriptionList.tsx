@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode, useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 
 import { Description, type DescriptionProps } from '../Description';
 import { type ValueProps } from '../Description/Value';
@@ -11,10 +11,14 @@ export type DescriptionOptions = Pick<
   'canCopy' | 'copyPosition' | 'color'
 > & {
   nameMaxWidth?: string;
+  /**
+   *  Вариант отображения Value в списке
+   */
+  variant?: 'tag';
   color?: TagColor;
   renderOption?: (
-    optionProps: HTMLAttributes<HTMLDivElement> & { key?: string },
-    { name, value, options }: DescriptionListItem,
+    optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
+    value: ReactNode,
   ) => ReactNode;
 };
 
@@ -32,65 +36,66 @@ export type DescriptionListProps = Pick<
    * Список отображаемых "name: value"
    */
   items: DescriptionListItem[];
-  /**
-   * Отображение Value в виде компонента Tag
-   * @default tag
-   */
-  variant?: 'tag';
 };
 
 export const DescriptionList = ({
   items,
-  variant,
-  ...props
+  justifyContent,
+  leader,
+  separator,
 }: DescriptionListProps) => {
-  const renderOption = useCallback(
+  const renderValue = useCallback(
     (
-      optionProps: HTMLAttributes<HTMLDivElement> & { key?: string },
-      { name, value, options }: DescriptionListItem,
+      optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
+      value: ReactNode,
     ) => {
-      if (options?.renderOption) {
-        return options?.renderOption(optionProps, { name, value, options });
+      const { renderOption, color, canCopy, copyPosition, variant } =
+        optionProps;
+
+      if (renderOption) {
+        return renderOption(optionProps, value);
+      }
+
+      if (variant) {
+        return (
+          <Description.Value>
+            <Tag label={value} color={color} variant="light" />
+          </Description.Value>
+        );
       }
 
       return (
-        <Description
-          key={optionProps.key}
-          justifyContent={props.justifyContent}
-          leader={props.leader}
-          separator={props.separator}
-          component="div"
+        <Description.Value
+          canCopy={canCopy}
+          color={color}
+          copyPosition={copyPosition}
         >
-          <StyledDescriptionName $nameMaxWidth={options?.nameMaxWidth}>
-            {name}
-          </StyledDescriptionName>
-          {variant ? (
-            <Description.Value>
-              <Tag label={value} color={options?.color} variant="light" />
-            </Description.Value>
-          ) : (
-            <Description.Value
-              canCopy={options?.canCopy}
-              color={options?.color}
-              copyPosition={options?.copyPosition}
-            >
-              {value}
-            </Description.Value>
-          )}
-        </Description>
+          {value}
+        </Description.Value>
       );
     },
-    [props.justifyContent, props.leader, props.separator, variant],
+    [],
   );
 
   return (
     <Wrapper>
-      {items.map((item, index) => {
-        const optionProps: HTMLAttributes<HTMLDivElement> & { key?: string } = {
-          key: `description-item-${index}`,
-        };
+      {items.map(({ name, value, options }) => {
+        const { nameMaxWidth, ...restOptions } = options || {};
 
-        return renderOption(optionProps, item);
+        return (
+          <Description
+            key={`${name}:${value}`}
+            justifyContent={justifyContent}
+            leader={leader}
+            separator={separator}
+            component="div"
+          >
+            <StyledDescriptionName $nameMaxWidth={nameMaxWidth}>
+              {name}
+            </StyledDescriptionName>
+            {renderValue(restOptions, value)}
+          </Description>
+        );
       })}
     </Wrapper>
   );

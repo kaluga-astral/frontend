@@ -35,7 +35,6 @@ export const Interaction: Story = {
     justifyContent: 'space-between',
     leader: true,
     separator: ':',
-    variant: 'tag',
   },
   parameters: {
     options: { showPanel: true },
@@ -202,9 +201,9 @@ export const CustomRenderOption = () => {
       value: 'Значение показателя',
       options: {
         color: 'warning',
-        renderOption: (optionProps, { value, options }) => (
-          <div key={optionProps.key}>
-            <Tag label={value} variant="light" color={options?.color} />
+        renderOption: (optionProps, value) => (
+          <div>
+            <Tag label={value} variant="light" color={optionProps?.color} />
           </div>
         ),
       },
@@ -212,6 +211,9 @@ export const CustomRenderOption = () => {
     {
       name: 'Название показателя',
       value: 'Значение показателя',
+      options: {
+        renderOption: (_, value) => <h1>{value}</h1>,
+      },
     },
   ];
 
@@ -223,31 +225,31 @@ export const VariantTag = () => {
     {
       name: 'Название показателя',
       value: 'Значение показателя',
-      options: { color: 'grey' },
+      options: { color: 'grey', variant: 'tag' },
     },
     {
       name: 'Название показателя',
       value: 'Значение показателя',
-      options: { color: 'warning' },
+      options: { color: 'warning', variant: 'tag' },
     },
     {
       name: 'Название показателя',
       value: 'Значение показателя',
-      options: { color: 'error' },
+      options: { color: 'error', variant: 'tag' },
     },
     {
       name: 'Название показателя',
       value: 'Значение показателя',
-      options: { color: 'success' },
+      options: { color: 'success', variant: 'tag' },
     },
     {
       name: 'Название показателя',
       value: 'Значение показателя',
-      options: { color: 'primary' },
+      options: { color: 'primary', variant: 'tag' },
     },
   ];
 
-  return <DescriptionList items={items} variant="tag" />;
+  return <DescriptionList items={items} />;
 };
 
 export const Colors = () => {

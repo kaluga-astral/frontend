@@ -79,7 +79,7 @@ export * from './Description';
 export {
   DescriptionList,
   type DescriptionListProps,
-  DescriptionListItem,
+  type DescriptionListItem,
 } from './DescriptionList';
 
 export * from './Dialog';

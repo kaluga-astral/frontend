@@ -14,4 +14,6 @@ export const StyledDescriptionName = styled(Description.Name, {
 export const Wrapper = styled.dl`
   display: grid;
   row-gap: ${({ theme }) => theme.spacing(1)};
+
+  margin: 0;
 `;
