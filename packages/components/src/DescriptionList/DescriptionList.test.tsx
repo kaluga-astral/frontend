@@ -59,7 +59,7 @@ describe('DescriptionList', () => {
         name: 'Название показателя 1',
         value: 'Значение показателя 1',
         options: {
-          renderOption: (value) => <p data-testid="custom-render">{value}</p>,
+          renderValue: (value) => <p data-testid="custom-render">{value}</p>,
         },
       },
     ];
