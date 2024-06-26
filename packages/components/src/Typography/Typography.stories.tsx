@@ -99,6 +99,19 @@ export const Variants = () => (
   </Grid>
 );
 
+/**
+ * При указании inherit будут унаследованы все стили родителя
+ */
+export const VariantInherit = () => (
+  <Grid container spacing={6}>
+    <Typography variant="h5">
+      <Typography variant="inherit">
+        inherit. Электронная отчетность и документооборот
+      </Typography>
+    </Typography>
+  </Grid>
+);
+
 export const Colors = () => (
   <Grid container spacing={6}>
     <Typography>default. Электронная отчетность и документооборот</Typography>

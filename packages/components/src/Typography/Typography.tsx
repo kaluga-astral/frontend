@@ -1,8 +1,8 @@
 import {
   type TypographyProps as MuiTypographyProps,
+  type TypographyVariant as MuiTypographyVariant,
   type TypographyPropsVariantOverrides as TypographyPropsVariantOverridesMUI,
 } from '@mui/material';
-import { type Variant } from '@mui/material/styles/createTypography';
 import { type ElementType, type HTMLAttributes, forwardRef } from 'react';
 
 import { type TypographyColors } from './enums';
@@ -31,6 +31,8 @@ type TypographyPropsBase = Pick<
   'paragraph' | 'noWrap' | 'align' | 'gutterBottom' | 'children'
 >;
 
+type TypographyVariant = MuiTypographyVariant | 'inherit';
+
 export type TypographyProps = TypographyPropsBase & {
   /**
    * @description Цвет текста
@@ -41,7 +43,7 @@ export type TypographyProps = TypographyPropsBase & {
    * @description Применяет стили оформления темы
    * @default 'body1'
    */
-  variant?: Variant | keyof TypographyPropsVariantOverridesMUI;
+  variant?: TypographyVariant | keyof TypographyPropsVariantOverridesMUI;
   /**
    * @description Интенсивность цвета, будет применена для цвета, у которого есть градации
    * @default '800'

@@ -10,6 +10,7 @@ export const TreeList = ({
   data,
   value,
   className,
+  expandedLevel = 10,
   ...props
 }: TreeListProps) => (
   <List className={className}>
@@ -19,6 +20,7 @@ export const TreeList = ({
         value={value}
         {...item}
         level={INITIAL_LEVEL}
+        expandedLevel={expandedLevel}
         {...props}
       />
     ))}

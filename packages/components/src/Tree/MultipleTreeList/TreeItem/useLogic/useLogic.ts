@@ -10,13 +10,35 @@ import {
 
 type UseLogicProps = Pick<
   TreeItemProps,
-  'id' | 'value' | 'children' | 'onChange'
+  | 'id'
+  | 'value'
+  | 'children'
+  | 'level'
+  | 'isInitialExpanded'
+  | 'expandedLevel'
+  | 'disabledItems'
+  | 'onChange'
 >;
 
-export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
-  const childrenIds = useMemo(() => getAllChildrenId(children), [children]);
+export const useLogic = ({
+  id,
+  value,
+  children,
+  level,
+  isInitialExpanded,
+  expandedLevel,
+  disabledItems,
+  onChange,
+}: UseLogicProps) => {
+  const childrenIds = useMemo(
+    () => getAllChildrenId(children, disabledItems),
+    [children],
+  );
   const isSelected = checkIsSelected(value, id);
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
+
+  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+  const isDisabled = disabledItems?.includes(id);
 
   useEffect(() => {
     if (!childrenIds.length) {
@@ -61,6 +83,8 @@ export const useLogic = ({ id, value, children, onChange }: UseLogicProps) => {
   return {
     isSelected,
     isIndeterminate,
+    isDefaultExpanded,
+    isDisabled,
     handleChange,
   };
 };

@@ -28,6 +28,7 @@ import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
+import { OverflowTypography } from '../OverflowTypography';
 
 import { PageHeader } from './PageHeader';
 
@@ -450,6 +451,19 @@ export const Example = () => (
 export const Default = () => (
   <Wrapper>
     <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
+  </Wrapper>
+);
+
+export const LongTitle = () => (
+  <Wrapper>
+    <PageHeader
+      title={
+        <OverflowTypography variant="inherit">
+          Очень длинный заголовок черновика, который должен отображаться в одну
+          строку и не переноситься
+        </OverflowTypography>
+      }
+    />
   </Wrapper>
 );
 

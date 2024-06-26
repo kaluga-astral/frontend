@@ -54,6 +54,71 @@ describe('MultipleTreeList', () => {
     expect(label).not.toBeVisible();
   });
 
+  it('Вложенные элементы отображаются по умолчанию, если isInitialExpanded=true', () => {
+    const onChangeSpy = vi.fn();
+
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Group',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <MultipleTreeList
+        data={fakeData}
+        isInitialExpanded
+        onChange={onChangeSpy}
+      />,
+    );
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).toBeVisible();
+  });
+
+  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
+    const onChangeSpy = vi.fn();
+
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Group',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1',
+            children: [
+              {
+                id: '111',
+                label: 'SubItem 1',
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <MultipleTreeList
+        data={fakeData}
+        isInitialExpanded
+        expandedLevel={1}
+        onChange={onChangeSpy}
+      />,
+    );
+
+    const label = screen.queryByText('SubItem 1');
+
+    expect(label).not.toBeVisible();
+  });
+
   it('RenderItem применяется к содержимому', () => {
     const onChangeSpy = vi.fn();
 
@@ -101,6 +166,29 @@ describe('MultipleTreeList', () => {
 
     await userEvents.click(labelOne);
     expect(onChangeSpy).toHaveBeenCalled();
+  });
+
+  it('Элемент не доступен для взаимодействия, если содержится в disabledItems', async () => {
+    const onChangeSpy = vi.fn();
+
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+      },
+    ];
+
+    renderWithTheme(
+      <MultipleTreeList
+        data={fakeData}
+        disabledItems={['1']}
+        onChange={onChangeSpy}
+      />,
+    );
+
+    const checkbox = screen.getByRole('checkbox', { hidden: true });
+
+    expect(checkbox).toBeDisabled();
   });
 
   it('Выбранные значения отображаются, если value не пустое', () => {

@@ -27,8 +27,9 @@ export const Item = styled('li', {
 `;
 
 export const ItemContent = styled('div', {
-  shouldForwardProp: (prop) => !['$isSelected', '$level'].includes(prop),
-})<{ $isSelected: boolean; $level: number }>`
+  shouldForwardProp: (prop) =>
+    !['$isSelected', '$isDisabled', '$level'].includes(prop),
+})<{ $isSelected: boolean; $isDisabled: boolean; $level: number }>`
   cursor: pointer;
 
   position: relative;
@@ -40,6 +41,9 @@ export const ItemContent = styled('div', {
   padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
   padding-left: ${({ theme, $level }) =>
     `calc(${theme.spacing($level * 7)} + ${theme.spacing(7)})`};
+
+  color: ${({ theme, $isDisabled }) =>
+    $isDisabled ? theme.palette.text.disabled : theme.palette.text.primary};
 
   background-color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.palette.primary[100] : 'transparent'};
@@ -81,6 +85,8 @@ export const CollapseButton = styled(IconButton)`
   width: ${COLLAPSE_BUTTON_WIDTH};
   height: 24px;
   margin-left: -${COLLAPSE_BUTTON_WIDTH};
+
+  color: inherit;
 
   &:hover {
     background-color: ${({ theme }) => theme.palette.grey[300]};

@@ -1,28 +1,12 @@
 import {
   type Dispatch,
   type FunctionComponent,
-  type ReactNode,
   type SetStateAction,
 } from 'react';
 
+import type { TreeListData } from '../types';
+
 export type MultipleValue = Array<string> | undefined;
-
-export type TreeData = {
-  /**
-   * Идентификатор элемента в дереве
-   */
-  id: string;
-
-  /**
-   * Подпись или иное содержимое элемента
-   */
-  label: ReactNode;
-
-  /**
-   * Дочерние элементы
-   */
-  children?: TreeData[];
-};
 
 export type MultipleTreeListProps = {
   /**
@@ -33,7 +17,7 @@ export type MultipleTreeListProps = {
   /**
    * Данные, которые необходимо отобразить в виде дерева.
    */
-  data: TreeData[];
+  data: TreeListData[];
 
   /**
    * Название класса, применяется к корневому компоненту.
@@ -41,9 +25,26 @@ export type MultipleTreeListProps = {
   className?: string;
 
   /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default 'false'
+   */
+  isInitialExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isExpanded=true
+   * @default '10'
+   */
+  expandedLevel?: number;
+
+  /**
+   * Список `value` элементов дерева, которые не доступны для взаимодействия
+   */
+  disabledItems?: MultipleValue;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
-  renderItem?: FunctionComponent<Omit<TreeData, 'children'>>;
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Функция, которая запускается при изменении состояния.

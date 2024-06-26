@@ -129,3 +129,76 @@ export const RenderItem = () => {
     />
   );
 };
+
+/**
+ * При наличии флага `isInitialExpanded=true` дерево будет раскрыто по умолчанию
+ */
+export const InitialExpanded = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <TreeList
+      data={fakeData}
+      value={value}
+      isInitialExpanded
+      onChange={setValue}
+    />
+  );
+};
+
+/**
+ * expandedLevel позволяет ограничить глубину раскрытия дерева при `isInitialExpanded=true`
+ */
+export const ExpandedLevel = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <TreeList
+      data={fakeData}
+      value={value}
+      isInitialExpanded
+      expandedLevel={1}
+      onChange={setValue}
+    />
+  );
+};
+
+/**
+ * `disabledItems` позволяет заблокировать указанные элементы для взаимодействия.
+ */
+export const DisabledItems = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <TreeList
+      data={fakeData}
+      value={value}
+      disabledItems={['21', '3']}
+      onChange={setValue}
+    />
+  );
+};
