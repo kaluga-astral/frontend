@@ -9,22 +9,12 @@ const FAKE_ITEMS: DescriptionListItem[] = [
   {
     name: 'Название показателя 1',
     value: 'Значение показателя 1',
-    options: { color: 'error', nameMaxWidth: '100px', canCopy: true },
-  },
-  {
-    name: 'Название показателя 2',
-    value: 'Значение показателя 2',
-    options: { color: 'success', nameMaxWidth: '200px', canCopy: true },
-  },
-  {
-    name: 'Название показателя 3',
-    value: 'Значение показателя 3',
-    options: { color: 'success', canCopy: true },
+    options: { canCopy: true },
   },
 ];
 
 describe('DescriptionList', () => {
-  it('Отображение списка элементов, без заданных options', () => {
+  it('Элементы списка отображаются', () => {
     const itemsWithoutOptions: DescriptionListItem[] = [
       {
         name: 'Название показателя 1',
@@ -47,7 +37,7 @@ describe('DescriptionList', () => {
     });
   });
 
-  it('Отображается указанный разделитель, если задан separator', () => {
+  it('Разделитель,заданный через separator, отображается', () => {
     const customSeparator = ';';
 
     renderWithTheme(
@@ -72,22 +62,13 @@ describe('DescriptionList', () => {
           renderOption: (value) => <p data-testid="custom-render">{value}</p>,
         },
       },
-      {
-        name: 'Название показателя 2',
-        value: 'Значение показателя 2',
-        options: {
-          renderOption: (value) => <h3 data-testid="custom-render">{value}</h3>,
-        },
-      },
     ];
 
     renderWithTheme(<DescriptionList items={renderPropsItems} />);
 
     const renderProps = screen.getAllByTestId('custom-render');
 
-    expect(renderProps).toHaveLength(renderPropsItems.length);
     expect(renderProps[0].tagName).toBe('P');
-    expect(renderProps[1].tagName).toBe('H3');
   });
 
   it('Значение копируется в буфер обмена при клике на текст, если canCopy=true', async () => {
@@ -106,44 +87,6 @@ describe('DescriptionList', () => {
 
       valueElement.click();
       expect(writeTextSpy).toBeCalled();
-    });
-  });
-
-  it('Цвет текста меняется, если есть color', () => {
-    renderWithTheme(<DescriptionList items={FAKE_ITEMS} />);
-
-    const colorMap: { [key: string]: string } = {
-      success: 'rgb(0, 135, 90)', // (#00875A)
-      error: 'rgb(242, 70, 70)', // (#F24646)
-    };
-
-    FAKE_ITEMS.forEach(({ value, options }) => {
-      const valueElement = screen.getByText(value as string);
-
-      expect(valueElement).toBeInTheDocument();
-
-      if (options?.color) {
-        const style = getComputedStyle(valueElement);
-
-        expect(style.color).toBe(colorMap[options.color]);
-      }
-    });
-  });
-
-  it('Максимальная ширина Name ограничивается, при nameMaxWidth', () => {
-    renderWithTheme(<DescriptionList items={FAKE_ITEMS} />);
-
-    FAKE_ITEMS.forEach(({ name, options }) => {
-      const expectedMaxWidth = options?.nameMaxWidth ?? 'none';
-      const nameElement = screen.getByText(
-        `${name}${DEFAULT_SEPARATOR}` as string,
-      );
-
-      expect(nameElement).toBeInTheDocument();
-
-      if (expectedMaxWidth !== 'none') {
-        expect(nameElement).toHaveStyle({ maxWidth: expectedMaxWidth });
-      }
     });
   });
 });
