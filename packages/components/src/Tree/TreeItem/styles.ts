@@ -45,7 +45,7 @@ export const ItemContent = styled('div', {
   shouldForwardProp: (prop) =>
     !['$isSelected', '$isDisabled', '$level'].includes(prop),
 })<{ $isSelected: boolean; $isDisabled: boolean; $level: number }>`
-  cursor: pointer;
+  cursor: ${({ $isDisabled }) => ($isDisabled ? 'default' : 'pointer')};
 
   position: relative;
 

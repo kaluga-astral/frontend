@@ -30,6 +30,10 @@ export const useLogic = ({
   const nextLevel = level + 1;
 
   const handleChange = () => {
+    if (isDisabled) {
+      return;
+    }
+
     onChange((selectedIds = []) => {
       if (selectedIds.includes(id)) {
         return selectedIds.filter((selectedId) => selectedId !== id);
