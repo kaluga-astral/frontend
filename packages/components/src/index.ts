@@ -76,6 +76,12 @@ export * from './DateRangePicker';
 
 export * from './Description';
 
+export {
+  DescriptionList,
+  type DescriptionListProps,
+  type DescriptionListItem,
+} from './DescriptionList';
+
 export * from './Dialog';
 
 export * from './DialogActions';
