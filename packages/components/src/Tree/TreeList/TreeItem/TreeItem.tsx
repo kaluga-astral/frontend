@@ -35,6 +35,11 @@ export type TreeItemProps = TreeListData & {
   expandedLevel: number;
 
   /**
+   * Список `value` элементов дерева, которые не доступны для взаимодействия
+   */
+  disabledItems?: Array<string>;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange?: (value: Value) => void;
@@ -53,15 +58,17 @@ export const TreeItem = ({
   value,
   isInitialExpanded,
   expandedLevel,
+  disabledItems,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, handleChange } = useLogic({
+  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
     id,
     value,
     level,
     isInitialExpanded,
     expandedLevel,
+    disabledItems,
     onChange,
   });
 
@@ -71,6 +78,7 @@ export const TreeItem = ({
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
+        isDisabled={isDisabled}
         component="li"
         label={renderItem({ id, label, ...props })}
         level={level}
@@ -85,6 +93,7 @@ export const TreeItem = ({
               level={level + 1}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              disabledItems={disabledItems}
               value={value}
               onChange={onChange}
             />
@@ -97,6 +106,7 @@ export const TreeItem = ({
   return (
     <BaseTreeItem
       isSelected={isSelected}
+      isDisabled={isDisabled}
       component="li"
       label={renderItem({ id, label, ...props })}
       level={level}

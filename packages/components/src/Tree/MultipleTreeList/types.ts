@@ -37,6 +37,11 @@ export type MultipleTreeListProps = {
   expandedLevel?: number;
 
   /**
+   * Список `value` элементов дерева, которые не доступны для взаимодействия
+   */
+  disabledItems?: MultipleValue;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
   renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;

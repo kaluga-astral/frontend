@@ -168,6 +168,29 @@ describe('MultipleTreeList', () => {
     expect(onChangeSpy).toHaveBeenCalled();
   });
 
+  it('Элемент не доступен для взаимодействия, если содержится в disabledItems', async () => {
+    const onChangeSpy = vi.fn();
+
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+      },
+    ];
+
+    renderWithTheme(
+      <MultipleTreeList
+        data={fakeData}
+        disabledItems={['1']}
+        onChange={onChangeSpy}
+      />,
+    );
+
+    const checkbox = screen.getByRole('checkbox', { hidden: true });
+
+    expect(checkbox).toBeDisabled();
+  });
+
   it('Выбранные значения отображаются, если value не пустое', () => {
     const fakeData = [
       {

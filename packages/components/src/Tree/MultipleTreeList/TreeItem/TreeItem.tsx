@@ -41,6 +41,11 @@ export type TreeItemProps = TreeListData & {
   expandedLevel: number;
 
   /**
+   * Список `value` элементов дерева, которые не доступны для взаимодействия
+   */
+  disabledItems?: MultipleValue;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange: Dispatch<SetStateAction<MultipleValue>>;
@@ -59,19 +64,26 @@ export const TreeItem = ({
   value,
   isInitialExpanded,
   expandedLevel,
+  disabledItems,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isIndeterminate, isDefaultExpanded, handleChange } =
-    useLogic({
-      id,
-      value,
-      children,
-      level,
-      isInitialExpanded,
-      expandedLevel,
-      onChange,
-    });
+  const {
+    isSelected,
+    isIndeterminate,
+    isDefaultExpanded,
+    isDisabled,
+    handleChange,
+  } = useLogic({
+    id,
+    value,
+    children,
+    level,
+    isInitialExpanded,
+    expandedLevel,
+    disabledItems,
+    onChange,
+  });
 
   const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
@@ -81,6 +93,8 @@ export const TreeItem = ({
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
+        isDisabled={isDisabled}
+        component="li"
         label={
           <FormControlLabel
             control={
@@ -90,6 +104,7 @@ export const TreeItem = ({
               />
             }
             label={renderItem({ id, label, ...props })}
+            disabled={isDisabled}
             onChange={handleChange}
             onClick={handleClick}
           />
@@ -106,6 +121,7 @@ export const TreeItem = ({
               level={level + 1}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              disabledItems={disabledItems}
               value={value}
               onChange={onChange}
             />
@@ -118,10 +134,13 @@ export const TreeItem = ({
   return (
     <StyledItemContent
       isSelected={isSelected}
+      isDisabled={isDisabled}
+      component="li"
       label={
         <FormControlLabel
           control={<Checkbox checked={isSelected} />}
           label={renderItem({ id, label, ...props })}
+          disabled={isDisabled}
           onChange={handleChange}
           onClick={handleClick}
         />
