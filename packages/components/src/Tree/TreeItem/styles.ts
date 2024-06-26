@@ -86,7 +86,9 @@ export const ItemContent = styled('div', {
   }
 
   &:hover {
-    background-color: ${({ theme, $isSelected, $isDisabled }) => getBackgroundColorOnHover(theme, $isSelected, $isDisabled)}
+    background-color: ${({ theme, $isSelected, $isDisabled }) =>
+      getBackgroundColorOnHover(theme, $isSelected, $isDisabled)};
+  }
 `;
 
 export const CollapseButton = styled(IconButton)<{
