@@ -1,0 +1,1 @@
+export { checkIsSelected } from './checkIsSelected';

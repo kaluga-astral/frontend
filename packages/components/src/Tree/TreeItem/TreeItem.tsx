@@ -45,6 +45,12 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   isDisabled?: boolean;
 
   /**
+   * Если true, то список можно будет развернуть даже если установлен `isDisabled=true`
+   * @default 'false'
+   */
+  isNotBlockingExpandList?: boolean;
+
+  /**
    * Если true, то вложенный список будет раскрыт
    * @default 'false'
    */
@@ -63,6 +69,7 @@ export const TreeItem = ({
   isSelected,
   isDisabled = false,
   isDefaultExpanded = false,
+  isNotBlockingExpandList = false,
   level = 0,
   component = 'div',
   onClick,
@@ -77,7 +84,9 @@ export const TreeItem = ({
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
-          {...{ inert: isDisabled ? '' : undefined }}
+          {...{
+            inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
+          }}
           onClick={onClick}
         >
           <CollapseButton variant="text" onClick={handleToggle}>
