@@ -27,6 +27,8 @@ export const useLogic = ({
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
   const isDisabled = disabledItems?.includes(id);
 
+  const nextLevel = level + 1;
+
   const handleChange = () => {
     onChange((selectedIds = []) => {
       if (selectedIds.includes(id)) {
@@ -41,6 +43,7 @@ export const useLogic = ({
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    nextLevel,
     handleChange,
   };
 };

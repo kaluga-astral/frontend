@@ -206,4 +206,90 @@ describe('TreeLikeList', () => {
 
     expect(checked).toHaveLength(2);
   });
+
+  it('Родительская группа не выделяется, если все дочерние элементы выбраны', async () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Group',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1',
+          },
+          {
+            id: '12',
+            label: 'Item 2',
+          },
+        ],
+      },
+    ];
+
+    const TestComponent = () => {
+      const [value, setValue] = useState<string[] | undefined>();
+
+      return (
+        <TreeLikeList
+          value={value}
+          data={fakeData}
+          isInitialExpanded
+          onChange={setValue}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const labelOne = screen.getByText('Item 1');
+    const labelTwo = screen.getByText('Item 2');
+
+    await userEvents.click(labelOne);
+    await userEvents.click(labelTwo);
+
+    const checked = screen.getAllByRole('checkbox', { checked: true });
+
+    expect(checked).toHaveLength(2);
+  });
+
+  it('Дочернии элементы не выделяются, если выбран родительский элемент', async () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Group',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1',
+          },
+          {
+            id: '12',
+            label: 'Item 2',
+          },
+        ],
+      },
+    ];
+
+    const TestComponent = () => {
+      const [value, setValue] = useState<string[] | undefined>();
+
+      return (
+        <TreeLikeList
+          value={value}
+          data={fakeData}
+          isInitialExpanded
+          onChange={setValue}
+        />
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const label = screen.getByText('Group');
+
+    await userEvents.click(label);
+
+    const checked = screen.getAllByRole('checkbox', { checked: true });
+
+    expect(checked).toHaveLength(1);
+  });
 });

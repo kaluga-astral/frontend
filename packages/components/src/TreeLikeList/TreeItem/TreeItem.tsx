@@ -68,16 +68,20 @@ export const TreeItem = ({
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
-    id,
-    value,
-    level,
-    isInitialExpanded,
-    expandedLevel,
-    disabledItems,
-    onChange,
-  });
+  const { isSelected, isDefaultExpanded, isDisabled, nextLevel, handleChange } =
+    useLogic({
+      id,
+      value,
+      level,
+      isInitialExpanded,
+      expandedLevel,
+      disabledItems,
+      onChange,
+    });
 
+  /**
+   * Предотвращаем всплытие события, так как клик в области чекбокса или label вызывает обработчик на уровне всего item
+   */
   const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
   if (children.length) {
@@ -107,7 +111,7 @@ export const TreeItem = ({
               key={child.id}
               {...child}
               renderItem={renderItem}
-              level={level + 1}
+              level={nextLevel}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
               disabledItems={disabledItems}

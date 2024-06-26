@@ -89,7 +89,11 @@ export const TreeItem = ({
           }}
           onClick={onClick}
         >
-          <CollapseButton variant="text" onClick={handleToggle}>
+          <CollapseButton
+            $isNotBlockingExpandList={isNotBlockingExpandList}
+            variant="text"
+            onClick={handleToggle}
+          >
             <ChevronIcon $isActive={isOpen} />
           </CollapseButton>
           {label}
