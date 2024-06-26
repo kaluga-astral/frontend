@@ -39,6 +39,12 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   level: number;
 
   /**
+   * Если true, то элемент будет не доступен для взаимодействия
+   * @default 'false'
+   */
+  isDisabled?: boolean;
+
+  /**
    * Если true, то вложенный список будет раскрыт
    * @default 'false'
    */
@@ -55,6 +61,7 @@ export const TreeItem = ({
   children,
   className,
   isSelected,
+  isDisabled = false,
   isDefaultExpanded = false,
   level = 0,
   component = 'div',
@@ -66,7 +73,13 @@ export const TreeItem = ({
   if (children) {
     return (
       <Item {...props} $level={level} as={component} className={className}>
-        <ItemContent $isSelected={isSelected} $level={level} onClick={onClick}>
+        <ItemContent
+          $isSelected={isSelected}
+          $isDisabled={isDisabled}
+          $level={level}
+          {...{ inert: isDisabled ? '' : undefined }}
+          onClick={onClick}
+        >
           <CollapseButton variant="text" onClick={handleToggle}>
             <ChevronIcon $isActive={isOpen} />
           </CollapseButton>
@@ -80,7 +93,13 @@ export const TreeItem = ({
 
   return (
     <Item {...props} $level={level} as={component} className={className}>
-      <ItemContent $isSelected={isSelected} $level={level} onClick={onClick}>
+      <ItemContent
+        $isSelected={isSelected}
+        $isDisabled={isDisabled}
+        $level={level}
+        {...{ inert: isDisabled ? '' : undefined }}
+        onClick={onClick}
+      >
         {label}
       </ItemContent>
     </Item>

@@ -178,3 +178,27 @@ export const ExpandedLevel = () => {
     />
   );
 };
+
+/**
+ * `disabledItems` позволяет заблокировать указанные элементы для взаимодействия.
+ */
+export const DisabledItems = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+    },
+  ];
+
+  return (
+    <TreeList
+      data={fakeData}
+      value={value}
+      disabledItems={['21', '3']}
+      onChange={setValue}
+    />
+  );
+};
