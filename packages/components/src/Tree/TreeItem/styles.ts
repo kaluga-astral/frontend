@@ -86,7 +86,8 @@ export const CollapseButton = styled(IconButton)`
   height: 24px;
   margin-left: -${COLLAPSE_BUTTON_WIDTH};
 
-  color: inherit;
+  // color: inherit;
+  // color: unset;
 
   &:hover {
     background-color: ${({ theme }) => theme.palette.grey[300]};
