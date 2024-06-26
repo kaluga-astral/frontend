@@ -16,7 +16,7 @@ export type DescriptionOptions = Pick<
    */
   variant?: 'tag' | 'default';
   color?: TagColor;
-  renderOption?: (
+  renderValue?: (
     value: ReactNode,
     optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
   ) => ReactNode;
@@ -39,16 +39,16 @@ export type DescriptionListProps = Pick<
 };
 
 export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
-  const renderValue = useCallback(
+  const render = useCallback(
     (
       value: ReactNode,
       optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
     ) => {
-      const { renderOption, color, canCopy, copyPosition, variant } =
+      const { renderValue, color, canCopy, copyPosition, variant } =
         optionProps;
 
-      if (renderOption) {
-        return renderOption(value, optionProps);
+      if (renderValue) {
+        return renderValue(value, optionProps);
       }
 
       if (variant) {
@@ -82,7 +82,7 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
             <StyledDescriptionName $nameMaxWidth={nameMaxWidth}>
               {name}
             </StyledDescriptionName>
-            {renderValue(value, restOptions)}
+            {render(value, restOptions)}
           </Description>
         );
       })}

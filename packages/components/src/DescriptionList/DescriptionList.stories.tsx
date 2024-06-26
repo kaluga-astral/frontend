@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Tag } from '../Tag';
 import { Typography } from '../Typography';
+import { styled } from '../styles';
 
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
@@ -44,6 +45,10 @@ export const Interaction: Story = {
     },
   },
 };
+
+const Wrapper = styled.div`
+  width: 400px;
+`;
 
 export const Example = () => {
   const items: DescriptionListItem[] = [
@@ -202,7 +207,7 @@ export const CustomRenderOption = () => {
       value: 'Значение показателя',
       options: {
         color: 'warning',
-        renderOption: (value, optionProps) => (
+        renderValue: (value, optionProps) => (
           <div>
             <Tag label={value} variant="light" color={optionProps?.color} />
           </div>
@@ -213,7 +218,7 @@ export const CustomRenderOption = () => {
       name: 'Название показателя',
       value: 'Значение показателя',
       options: {
-        renderOption: (value) => (
+        renderValue: (value) => (
           <Typography color="primary">{value}</Typography>
         ),
       },
@@ -253,6 +258,45 @@ export const VariantTag = () => {
   ];
 
   return <DescriptionList items={items} />;
+};
+
+export const LongDescriptionValueLeader = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'Полное наименование',
+      value: 'ПРЕДСТАВИТЕЛЬСТВО АО"КАЛУГА АСТРАЛ" (Г.БАРНАУЛ)#1 ',
+    },
+    {
+      name: 'Краткое наименование',
+      value: 'АО"КАЛУГА АСТРАЛ"',
+    },
+  ];
+
+  return (
+    <Wrapper>
+      <DescriptionList items={items} leader />
+    </Wrapper>
+  );
+};
+
+export const LongNameValue = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'Описания ИНН юридического лица',
+      value: 'ИНН юридического лица — последовательность из 10 арабских цифр',
+    },
+    {
+      name: 'Описания ИНН юридического лица',
+      value: 'ИНН юридического лица — последовательность из 10 арабских цифр"',
+      options: { nameMaxWidth: '100px' },
+    },
+  ];
+
+  return (
+    <Wrapper>
+      <DescriptionList items={items} />
+    </Wrapper>
+  );
 };
 
 export const Colors = () => {
