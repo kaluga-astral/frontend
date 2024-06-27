@@ -1,17 +1,23 @@
-import { type FunctionComponent } from 'react';
+import {
+  type Dispatch,
+  type FunctionComponent,
+  type SetStateAction,
+  type SyntheticEvent,
+} from 'react';
 
-import { TreeItem as BaseTreeItem } from '../../TreeItem';
-import type { TreeListData } from '../../types';
-import type { Value } from '../types';
+import { Checkbox } from '../../Checkbox';
+import { FormControlLabel } from '../../FormControlLabel';
+import type { TreeListData } from '../../Tree';
+import type { MultipleValue } from '../types';
 
 import { useLogic } from './useLogic';
-import { Label, List } from './styles';
+import { List, StyledItemContent } from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
    * Выбранные значения
    */
-  value?: Value;
+  value?: MultipleValue;
 
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
@@ -37,16 +43,16 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: Array<string>;
+  disabledItems?: MultipleValue;
 
   /**
    * Функция, которая запускается при выборе item
    */
-  onChange?: (value: Value) => void;
+  onChange: Dispatch<SetStateAction<MultipleValue>>;
 };
 
 const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (
-  <Label variant="ui">{label}</Label>
+  <>{label}</>
 );
 
 export const TreeItem = ({
@@ -62,25 +68,40 @@ export const TreeItem = ({
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
-    id,
-    value,
-    level,
-    isInitialExpanded,
-    expandedLevel,
-    disabledItems,
-    onChange,
-  });
+  const { isSelected, isDefaultExpanded, isDisabled, nextLevel, handleChange } =
+    useLogic({
+      id,
+      value,
+      level,
+      isInitialExpanded,
+      expandedLevel,
+      disabledItems,
+      onChange,
+    });
+
+  /**
+   * Предотвращаем всплытие события, так как клик в области чекбокса или label вызывает обработчик на уровне всего item
+   */
+  const handleClick = (event: SyntheticEvent) => event.stopPropagation();
 
   if (children.length) {
     return (
-      <BaseTreeItem
+      <StyledItemContent
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        isNotBlockingExpandList
         component="li"
-        label={renderItem({ id, label, ...props })}
+        label={
+          <FormControlLabel
+            control={<Checkbox checked={isSelected} />}
+            label={renderItem({ id, label, ...props })}
+            disabled={isDisabled}
+            onChange={handleChange}
+            onClick={handleClick}
+          />
+        }
         level={level}
         onClick={handleChange}
       >
@@ -90,7 +111,7 @@ export const TreeItem = ({
               key={child.id}
               {...child}
               renderItem={renderItem}
-              level={level + 1}
+              level={nextLevel}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
               disabledItems={disabledItems}
@@ -99,16 +120,24 @@ export const TreeItem = ({
             />
           ))}
         </List>
-      </BaseTreeItem>
+      </StyledItemContent>
     );
   }
 
   return (
-    <BaseTreeItem
+    <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
       component="li"
-      label={renderItem({ id, label, ...props })}
+      label={
+        <FormControlLabel
+          control={<Checkbox checked={isSelected} />}
+          label={renderItem({ id, label, ...props })}
+          disabled={isDisabled}
+          onChange={handleChange}
+          onClick={handleClick}
+        />
+      }
       level={level}
       onClick={handleChange}
     />

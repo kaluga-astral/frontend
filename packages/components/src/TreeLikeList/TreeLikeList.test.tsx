@@ -2,14 +2,11 @@ import { describe, expect, it, vi } from 'vitest';
 import { useState } from 'react';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { Typography } from '../../Typography';
+import { Typography } from '../Typography';
 
-import {
-  MultipleTreeList,
-  type MultipleTreeListProps,
-} from './MultipleTreeList';
+import { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
-describe('MultipleTreeList', () => {
+describe('TreeLikeList', () => {
   it('Label опции отображается', () => {
     const onChangeSpy = vi.fn();
 
@@ -20,9 +17,7 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    renderWithTheme(
-      <MultipleTreeList data={fakeData} onChange={onChangeSpy} />,
-    );
+    renderWithTheme(<TreeLikeList data={fakeData} onChange={onChangeSpy} />);
 
     const label = screen.getByText('Item 1');
 
@@ -45,9 +40,7 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    renderWithTheme(
-      <MultipleTreeList data={fakeData} onChange={onChangeSpy} />,
-    );
+    renderWithTheme(<TreeLikeList data={fakeData} onChange={onChangeSpy} />);
 
     const label = screen.queryByText('Item 1');
 
@@ -71,11 +64,7 @@ describe('MultipleTreeList', () => {
     ];
 
     renderWithTheme(
-      <MultipleTreeList
-        data={fakeData}
-        isInitialExpanded
-        onChange={onChangeSpy}
-      />,
+      <TreeLikeList data={fakeData} isInitialExpanded onChange={onChangeSpy} />,
     );
 
     const label = screen.queryByText('Item 1');
@@ -106,7 +95,7 @@ describe('MultipleTreeList', () => {
     ];
 
     renderWithTheme(
-      <MultipleTreeList
+      <TreeLikeList
         data={fakeData}
         isInitialExpanded
         expandedLevel={1}
@@ -129,14 +118,14 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    const renderItem: MultipleTreeListProps['renderItem'] = ({ id, label }) => (
+    const renderItem: TreeLikeListProps['renderItem'] = ({ id, label }) => (
       <Typography component="div">
         #{id}. {label}
       </Typography>
     );
 
     renderWithTheme(
-      <MultipleTreeList
+      <TreeLikeList
         data={fakeData}
         renderItem={renderItem}
         onChange={onChangeSpy}
@@ -158,9 +147,7 @@ describe('MultipleTreeList', () => {
       },
     ];
 
-    renderWithTheme(
-      <MultipleTreeList data={fakeData} onChange={onChangeSpy} />,
-    );
+    renderWithTheme(<TreeLikeList data={fakeData} onChange={onChangeSpy} />);
 
     const labelOne = screen.getByText('Item 1');
 
@@ -179,7 +166,7 @@ describe('MultipleTreeList', () => {
     ];
 
     renderWithTheme(
-      <MultipleTreeList
+      <TreeLikeList
         data={fakeData}
         disabledItems={['1']}
         onChange={onChangeSpy}
@@ -210,9 +197,7 @@ describe('MultipleTreeList', () => {
     const TestComponent = () => {
       const [value, setValue] = useState<string[] | undefined>(['1', '2']);
 
-      return (
-        <MultipleTreeList value={value} data={fakeData} onChange={setValue} />
-      );
+      return <TreeLikeList value={value} data={fakeData} onChange={setValue} />;
     };
 
     renderWithTheme(<TestComponent />);
@@ -222,7 +207,7 @@ describe('MultipleTreeList', () => {
     expect(checked).toHaveLength(2);
   });
 
-  it('Родительская группа выделяется, если все дочерние элементы выбраны', async () => {
+  it('Родительская группа не выделяется, если все дочерние элементы выбраны', async () => {
     const fakeData = [
       {
         id: '1',
@@ -244,15 +229,16 @@ describe('MultipleTreeList', () => {
       const [value, setValue] = useState<string[] | undefined>();
 
       return (
-        <MultipleTreeList value={value} data={fakeData} onChange={setValue} />
+        <TreeLikeList
+          value={value}
+          data={fakeData}
+          isInitialExpanded
+          onChange={setValue}
+        />
       );
     };
 
     renderWithTheme(<TestComponent />);
-
-    const collapseButton = screen.getByRole('button');
-
-    await userEvents.click(collapseButton);
 
     const labelOne = screen.getByText('Item 1');
     const labelTwo = screen.getByText('Item 2');
@@ -262,10 +248,10 @@ describe('MultipleTreeList', () => {
 
     const checked = screen.getAllByRole('checkbox', { checked: true });
 
-    expect(checked).toHaveLength(3);
+    expect(checked).toHaveLength(2);
   });
 
-  it('Все дочерние элементы отключаются, если выключить родительскую группу', async () => {
+  it('Дочернии элементы не выделяются, если выбран родительский элемент', async () => {
     const fakeData = [
       {
         id: '1',
@@ -284,27 +270,26 @@ describe('MultipleTreeList', () => {
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<string[] | undefined>([
-        '1',
-        '11',
-        '12',
-      ]);
+      const [value, setValue] = useState<string[] | undefined>();
 
       return (
-        <MultipleTreeList value={value} data={fakeData} onChange={setValue} />
+        <TreeLikeList
+          value={value}
+          data={fakeData}
+          isInitialExpanded
+          onChange={setValue}
+        />
       );
     };
 
     renderWithTheme(<TestComponent />);
 
-    const groupLabel = screen.getByText('Group');
-    const collapseButton = screen.getByRole('button');
+    const label = screen.getByText('Group');
 
-    await userEvents.click(groupLabel);
-    await userEvents.click(collapseButton);
+    await userEvents.click(label);
 
-    const checked = screen.queryAllByRole('checkbox', { checked: true });
+    const checked = screen.getAllByRole('checkbox', { checked: true });
 
-    expect(checked).toHaveLength(0);
+    expect(checked).toHaveLength(1);
   });
 });

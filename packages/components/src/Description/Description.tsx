@@ -23,8 +23,8 @@ export type DescriptionProps = {
   leader?: boolean;
 
   /**
-   * @default ':'
    * Определяет разделитель между Name Value
+   * @default ':'
    */
   separator?: string;
 

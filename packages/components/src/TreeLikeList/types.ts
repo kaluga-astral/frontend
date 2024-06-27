@@ -4,11 +4,11 @@ import {
   type SetStateAction,
 } from 'react';
 
-import type { TreeListData } from '../types';
+import type { TreeListData } from '../Tree';
 
 export type MultipleValue = Array<string> | undefined;
 
-export type MultipleTreeListProps = {
+export type TreeLikeListProps = {
   /**
    * Выбранные значения
    */

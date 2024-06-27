@@ -1,5 +1,7 @@
 import { type TreeItemProps } from '../TreeItem';
 
+import { checkIsSelected } from './utils';
+
 type UseLogicProps = Pick<
   TreeItemProps,
   | 'id'
@@ -20,18 +22,32 @@ export const useLogic = ({
   disabledItems,
   onChange,
 }: UseLogicProps) => {
-  const isSelected = Object.is(value, id);
+  const isSelected = checkIsSelected(value, id);
+
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
   const isDisabled = disabledItems?.includes(id);
 
+  const nextLevel = level + 1;
+
   const handleChange = () => {
-    onChange?.(id);
+    if (isDisabled) {
+      return;
+    }
+
+    onChange((selectedIds = []) => {
+      if (selectedIds.includes(id)) {
+        return selectedIds.filter((selectedId) => selectedId !== id);
+      }
+
+      return [...selectedIds, id];
+    });
   };
 
   return {
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    nextLevel,
     handleChange,
   };
 };

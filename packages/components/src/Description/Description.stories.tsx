@@ -6,8 +6,9 @@ import { Grid } from '../Grid';
 import { Description } from './Description';
 
 /**
+ * Для отображения списка значений использовать [DescriptionList](/docs/components-descriptionlist--docs)
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=1-347&mode=design&t=MnsiqzDLWSYbhRCJ-0)
- * ### [Guide]()
+ * ### [Guide](https://track.astral.ru/soft/wiki/pages/viewpage.action?pageId=3821274520)
  */
 const meta: Meta<typeof Description> = {
   title: 'Components/Description',

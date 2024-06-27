@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { type Meta } from '@storybook/react';
 
-import { Typography } from '../../Typography';
-import { styled } from '../../styles';
+import { Typography } from '../Typography';
+import { styled } from '../styles';
 
-import { TreeList, type TreeListProps } from './TreeList';
+import { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21329-76225&t=ocy6798zA4pD2nYD-0)
  * ### [Guide]()
- * TreeList - интерактивный компонент, который поддерживает вложенность объектов,
- * позволяет выбрать один объект из списка,
- * свернуть (скрыть) и развернуть (показать) вложенные элементы
+ * TreeLikeList - интерактивный компонент, который поддерживает вложенность объектов,
+ * позволяет выбрать множество (multiselect) объектов из списка,
+ * свернуть (скрыть) и развернуть (показать) вложенные элементы.
+ * Работает как обычный список в контексте выбора элементов, это означает что выбор родителя не влияет на дочерние элементы, а выбор дочерних на родителя.
  */
-const meta: Meta<typeof TreeList> = {
-  title: 'Components/Tree/TreeList',
-  component: TreeList,
+const meta: Meta<typeof TreeLikeList> = {
+  title: 'Components/Tree/TreeLikeList',
+  component: TreeLikeList,
 };
 
 export default meta;
@@ -82,7 +83,7 @@ const FAKE_TREE_LIST_DATA = [
 ];
 
 export const Example = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -92,7 +93,7 @@ export const Example = () => {
     },
   ];
 
-  return <TreeList data={fakeData} value={value} onChange={setValue} />;
+  return <TreeLikeList data={fakeData} value={value} onChange={setValue} />;
 };
 
 const Item = styled.div`
@@ -103,7 +104,7 @@ const Item = styled.div`
 `;
 
 export const RenderItem = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -113,7 +114,7 @@ export const RenderItem = () => {
     },
   ];
 
-  const renderItem: TreeListProps['renderItem'] = ({ id, label }) => (
+  const renderItem: TreeLikeListProps['renderItem'] = ({ id, label }) => (
     <Item>
       <Typography variant="caption">#{id}</Typography>
       <Typography color="textSecondary">{label}</Typography>
@@ -121,7 +122,7 @@ export const RenderItem = () => {
   );
 
   return (
-    <TreeList
+    <TreeLikeList
       data={fakeData}
       value={value}
       renderItem={renderItem}
@@ -134,7 +135,7 @@ export const RenderItem = () => {
  * При наличии флага `isInitialExpanded=true` дерево будет раскрыто по умолчанию
  */
 export const InitialExpanded = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -145,7 +146,7 @@ export const InitialExpanded = () => {
   ];
 
   return (
-    <TreeList
+    <TreeLikeList
       data={fakeData}
       value={value}
       isInitialExpanded
@@ -155,10 +156,10 @@ export const InitialExpanded = () => {
 };
 
 /**
- * expandedLevel позволяет ограничить глубину раскрытия дерева при `isInitialExpanded=true`
+ * `expandedLevel` позволяет ограничить глубину раскрытия дерева при `isInitialExpanded=true`
  */
 export const ExpandedLevel = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -169,7 +170,7 @@ export const ExpandedLevel = () => {
   ];
 
   return (
-    <TreeList
+    <TreeLikeList
       data={fakeData}
       value={value}
       isInitialExpanded
@@ -183,7 +184,7 @@ export const ExpandedLevel = () => {
  * `disabledItems` позволяет заблокировать указанные элементы для взаимодействия.
  */
 export const DisabledItems = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
     ...FAKE_TREE_LIST_DATA,
@@ -194,7 +195,7 @@ export const DisabledItems = () => {
   ];
 
   return (
-    <TreeList
+    <TreeLikeList
       data={fakeData}
       value={value}
       disabledItems={['21', '3']}
