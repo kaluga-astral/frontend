@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { Tag, type TagColor } from '../Tag';
+import { Tag } from '../Tag';
 import { Typography } from '../Typography';
 import { styled } from '../styles';
 
@@ -209,11 +209,7 @@ export const CustomRenderOption = () => {
         color: 'warning',
         renderValue: (value, optionProps) => (
           <div>
-            <Tag
-              label={value}
-              variant="light"
-              color={optionProps?.color as TagColor}
-            />
+            <Tag label={value} variant="light" color={optionProps?.color} />
           </div>
         ),
       },
