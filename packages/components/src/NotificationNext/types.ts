@@ -20,7 +20,6 @@ export type NotificationProps = Omit<
   | 'onOpen'
   | 'onClose'
   | 'type'
-  | 'toastId'
   | 'updateId'
   | 'data'
   | 'closeButton'
