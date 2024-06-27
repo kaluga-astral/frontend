@@ -267,6 +267,8 @@ export {
   type TreeListData,
 } from './Tree';
 
+export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
+
 export * from './types';
 
 export * from './Typography';

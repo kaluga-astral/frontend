@@ -2,8 +2,23 @@ import { ChevronROutlineMd } from '@astral/icons';
 
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
+import { type Theme } from '../../theme';
 
 import { COLLAPSE_BUTTON_WIDTH, TREE_LINE_WIDTH } from './constants';
+
+const getBackgroundColorOnHover = (
+  theme: Theme,
+  isSelected: boolean,
+  isDisabled: boolean,
+) => {
+  if (isDisabled) {
+    return 'transparent';
+  }
+
+  return isSelected
+    ? theme.palette.primary[100]
+    : theme.palette.background.elementHover;
+};
 
 export const Item = styled('li', {
   shouldForwardProp: (prop) => !['as', '$level'].includes(prop),
@@ -30,7 +45,7 @@ export const ItemContent = styled('div', {
   shouldForwardProp: (prop) =>
     !['$isSelected', '$isDisabled', '$level'].includes(prop),
 })<{ $isSelected: boolean; $isDisabled: boolean; $level: number }>`
-  cursor: pointer;
+  cursor: ${({ $isDisabled }) => ($isDisabled ? 'default' : 'pointer')};
 
   position: relative;
 
@@ -71,14 +86,14 @@ export const ItemContent = styled('div', {
   }
 
   &:hover {
-    background-color: ${({ theme, $isSelected }) =>
-      $isSelected
-        ? theme.palette.primary[100]
-        : theme.palette.background.elementHover};
+    background-color: ${({ theme, $isSelected, $isDisabled }) =>
+      getBackgroundColorOnHover(theme, $isSelected, $isDisabled)};
   }
 `;
 
-export const CollapseButton = styled(IconButton)`
+export const CollapseButton = styled(IconButton)<{
+  $isNotBlockingExpandList?: boolean;
+}>`
   position: relative;
   z-index: 1;
 
@@ -86,7 +101,8 @@ export const CollapseButton = styled(IconButton)`
   height: 24px;
   margin-left: -${COLLAPSE_BUTTON_WIDTH};
 
-  color: inherit;
+  color: ${({ theme, $isNotBlockingExpandList }) =>
+    $isNotBlockingExpandList ? theme.palette.text.primary : 'inherit'};
 
   &:hover {
     background-color: ${({ theme }) => theme.palette.grey[300]};
