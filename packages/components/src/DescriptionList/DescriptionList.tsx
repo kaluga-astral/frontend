@@ -14,8 +14,8 @@ export type DescriptionOptions = Pick<
   /**
    *  Вариант отображения Value в списке
    */
-  color?: TagColor;
   variant?: 'tag' | 'default';
+  color?: TagColor;
   renderValue?: (
     value: ReactNode,
     optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
