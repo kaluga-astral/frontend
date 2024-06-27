@@ -33,18 +33,37 @@ const InnerMenuItem = <TComponent extends ElementType>(
   props: MenuItemProps<TComponent>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { disabledReason, disabled, title, tooltipPlacement, ...rest } = props;
+  const {
+    disabledReason,
+    disabled,
+    component,
+    title,
+    tooltipPlacement,
+    ...rest
+  } = props;
 
-  return (
-    <Tooltip
-      key={title}
-      title={disabledReason}
-      placement={tooltipPlacement}
-      withoutContainer={!disabled}
-    >
-      <MuiMenuItem {...rest} disabled={disabled} title={title} ref={ref} />
-    </Tooltip>
-  );
+  if (disabled || component) {
+    return (
+      <li>
+        <Tooltip
+          key={title}
+          title={disabledReason}
+          placement={tooltipPlacement}
+          withoutContainer={!disabled}
+        >
+          <MuiMenuItem
+            {...rest}
+            disabled={disabled}
+            title={title}
+            ref={ref}
+            component={component ?? 'div'}
+          />
+        </Tooltip>
+      </li>
+    );
+  }
+
+  return <MuiMenuItem {...rest} title={title} ref={ref} />;
 };
 
 export const MenuItem = forwardRefWithGeneric(InnerMenuItem);
