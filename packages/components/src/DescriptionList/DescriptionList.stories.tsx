@@ -1,8 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { Tag } from '../Tag';
 import { Typography } from '../Typography';
 import { styled } from '../styles';
+import { Button } from '../Button';
 
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
@@ -206,12 +206,7 @@ export const CustomRenderOption = () => {
       name: 'Название показателя',
       value: 'Значение показателя',
       options: {
-        color: 'warning',
-        renderValue: (value, optionProps) => (
-          <div>
-            <Tag label={value} variant="light" color={optionProps?.color} />
-          </div>
-        ),
+        renderValue: (value) => <Button variant="text">{value}</Button>,
       },
     },
     {
