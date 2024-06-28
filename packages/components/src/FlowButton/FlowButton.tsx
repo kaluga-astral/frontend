@@ -12,7 +12,7 @@ export type FlowButtonProps = Omit<
   'loadingIndicator' | 'loadingPosition' | 'size' | 'variant'
 > & {
   /**
-   * @targetText Текст на кнопке, указывающей направление по флоу
+   * Текст на кнопке, указывающей направление по флоу
    * */
   targetText?: string;
 };
