@@ -36,7 +36,7 @@ const InnerMenuItem = <TComponent extends ElementType>(
   const {
     disabledReason,
     disabled,
-    component,
+    component = 'div',
     title,
     tooltipPlacement,
     ...rest
@@ -55,7 +55,7 @@ const InnerMenuItem = <TComponent extends ElementType>(
           disabled={disabled}
           title={title}
           ref={ref}
-          component={component ?? 'div'}
+          component={component}
         />
       </Tooltip>
     </li>
