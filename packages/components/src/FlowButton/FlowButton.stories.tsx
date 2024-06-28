@@ -52,6 +52,14 @@ export const TargetText = () => (
   </FlowButton>
 );
 
+export const WithoutTargetText = () => (
+  <FlowButton>Подписать запрос</FlowButton>
+);
+
+export const DisabledFlowButton = () => (
+  <FlowButton disabled>Подписать запрос</FlowButton>
+);
+
 export const Color = () => (
   <>
     <FlowButton targetText="Начальный" color="primary">
