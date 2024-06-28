@@ -1,7 +1,31 @@
 import { ToastContainer } from 'react-toastify-next';
 
-import { styled } from '../../styles';
-import { NOTIFY_CLASSNAME, NotificationVariantTypes } from '../constants';
+import { keyframes, styled } from '../../styles';
+import {
+  NOTIFY_ANIMATION_IN_CLASSNAME,
+  NOTIFY_ANIMATION_OUT_CLASSNAME,
+  NOTIFY_CLASSNAME,
+  NotificationVariantTypes,
+} from '../constants';
+
+const leaveIn = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0px);
+  }
+`;
+
+const leaveOut = keyframes`
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+`;
 
 // используем дополнительный враппер,
 // потому что styled для ToastContainer не умеет работать с theme внутри
@@ -10,6 +34,16 @@ import { NOTIFY_CLASSNAME, NotificationVariantTypes } from '../constants';
 // достаточно контейнеров для стилизации через styled,
 // к примеру добраться до прогресс бара можно только через цсс классы
 export const Wrapper = styled.div`
+  .${NOTIFY_ANIMATION_IN_CLASSNAME} {
+    animation: ${leaveIn} ease-in-out 0.34s;
+    animation-fill-mode: both;
+  }
+
+  .${NOTIFY_ANIMATION_OUT_CLASSNAME} {
+    animation: ${leaveOut} ease-in-out 0.34s;
+    animation-fill-mode: both;
+  }
+
   .${NOTIFY_CLASSNAME} {
     padding: 0;
 
