@@ -33,17 +33,32 @@ const InnerMenuItem = <TComponent extends ElementType>(
   props: MenuItemProps<TComponent>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { disabledReason, disabled, title, tooltipPlacement, ...rest } = props;
+  const {
+    disabledReason,
+    disabled,
+    component = 'div',
+    title,
+    tooltipPlacement,
+    ...rest
+  } = props;
 
   return (
-    <Tooltip
-      key={title}
-      title={disabledReason}
-      placement={tooltipPlacement}
-      withoutContainer={!disabled}
-    >
-      <MuiMenuItem {...rest} disabled={disabled} title={title} ref={ref} />
-    </Tooltip>
+    <li>
+      <Tooltip
+        key={title}
+        title={disabled && disabledReason}
+        placement={tooltipPlacement}
+        withoutContainer={!disabled}
+      >
+        <MuiMenuItem
+          {...rest}
+          disabled={disabled}
+          title={title}
+          ref={ref}
+          component={component}
+        />
+      </Tooltip>
+    </li>
   );
 };
 
