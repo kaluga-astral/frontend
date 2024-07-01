@@ -17,4 +17,4 @@ export const CHANGELOG_DIR_URL = 'https://github.com/kaluga-astral/frontend/blob
 /**
  * Кол-во дней периода, за который генерируем changelog
  */
-export const PERIOD_IN_DAYS = 14;
+export const PERIOD_IN_DAYS = 7;
