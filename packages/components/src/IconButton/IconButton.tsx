@@ -55,5 +55,3 @@ const UnwrappedIconButton = <TComponent extends ElementType>(
 };
 
 export const IconButton = forwardRefWithGeneric(UnwrappedIconButton);
-
-export default IconButton;
