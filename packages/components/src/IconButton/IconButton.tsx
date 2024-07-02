@@ -12,7 +12,7 @@ import { StyledButton } from './styles';
 export type IconButtonProps<TComponent extends ElementType> =
   ButtonProps<TComponent> & {
     /**
-     * @description Флаг отображения индикатора загрузки
+     * Флаг отображения индикатора загрузки
      * @example <IconButton loading />
      */
     loading?: boolean;
