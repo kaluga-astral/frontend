@@ -4,6 +4,7 @@ import { ArrowLOutlineMd } from '@astral/icons';
 import { type ButtonProps } from '../Button';
 import { useViewportType } from '../hooks/useViewportType';
 import { type Theme } from '../theme';
+import { OverflowTypography } from '../OverflowTypography';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
@@ -107,7 +108,7 @@ export const PageHeader = <
           </BackButton>
         )}
         <Title variant="h3" noWrap={isMobile}>
-          {title}
+          <OverflowTypography variant="inherit">{title}</OverflowTypography>
         </Title>
       </MobileWrapper>
 
