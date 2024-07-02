@@ -1,4 +1,4 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, type SyntheticEvent, useState } from 'react';
 
 import { type DataGridRowProps } from '../DataGridRow';
 
@@ -25,7 +25,7 @@ export const useLogic = <TData extends Record<string, unknown>>({
     selectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
 
-  const handleOpenTooltip = (event: MouseEvent<HTMLElement>) => {
+  const handleOpenTooltip = (event: SyntheticEvent<Element, Event>) => {
     const element = event.target as HTMLElement;
     const target = element.closest('td');
 
@@ -60,6 +60,7 @@ export const useLogic = <TData extends Record<string, unknown>>({
   };
 
   return {
+    isDisabled,
     tableRowProps: {
       hover: Boolean(!isDisabled && onRowClick),
       selected: activeRowId === rowId,

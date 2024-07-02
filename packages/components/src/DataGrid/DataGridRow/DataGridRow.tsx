@@ -24,7 +24,7 @@ export const DataGridRow = <TData extends Record<string, unknown>>({
   children,
   ...props
 }: DataGridRowProps<TData>) => {
-  const { checkboxProps, tableRowProps, tooltipProps } = useLogic({
+  const { isDisabled, checkboxProps, tableRowProps, tooltipProps } = useLogic({
     selectable,
     ...props,
   });
@@ -37,7 +37,13 @@ export const DataGridRow = <TData extends Record<string, unknown>>({
             padding="checkbox"
             onClick={(event) => event.stopPropagation()}
           >
-            <Checkbox {...checkboxProps} />
+            {isDisabled ? (
+              <div {...{ inert: isDisabled ? '' : undefined }}>
+                <Checkbox {...checkboxProps} />
+              </div>
+            ) : (
+              <Checkbox {...checkboxProps} />
+            )}
           </TableCell>
         )}
         {children}
