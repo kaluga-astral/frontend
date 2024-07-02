@@ -7,48 +7,48 @@ import { useFormFieldProps } from '../hooks';
 type AutocompleteInputChangeReason = 'input' | 'reset' | 'clear';
 
 export type FormAutocompleteProps<
-  FieldValues extends object,
-  Option,
-  Multiple extends boolean,
-  DisableClearable extends boolean,
-  FreeSolo extends boolean,
+  TFieldValues extends object,
+  TOption,
+  TMultiple extends boolean,
+  TDisableClearable extends boolean,
+  TFreeSolo extends boolean,
 > = WithFormFieldProps<
-  AutocompleteProps<Option, Multiple, DisableClearable, FreeSolo>,
-  FieldValues
+  AutocompleteProps<TOption, TMultiple, TDisableClearable, TFreeSolo>,
+  TFieldValues
 >;
 
 /**
  * @description Адаптер для Select
  */
 export const FormAutocomplete = <
-  FieldValues extends object,
-  Option,
-  Multiple extends boolean,
-  DisableClearable extends boolean,
-  FreeSolo extends boolean,
+  TFieldValues extends object,
+  TOption,
+  TMultiple extends boolean,
+  TDisableClearable extends boolean,
+  TFreeSolo extends boolean,
 >(
   props: FormAutocompleteProps<
-    FieldValues,
-    Option,
-    Multiple,
-    DisableClearable,
-    FreeSolo
+    TFieldValues,
+    TOption,
+    TMultiple,
+    TDisableClearable,
+    TFreeSolo
   >,
 ) => {
   const fieldProps = useFormFieldProps<
     FormAutocompleteProps<
-      FieldValues,
-      Option,
-      Multiple,
-      DisableClearable,
-      FreeSolo
+      TFieldValues,
+      TOption,
+      TMultiple,
+      TDisableClearable,
+      TFreeSolo
     >,
-    FieldValues
+    TFieldValues
   >(props);
 
-  const handleOnChange = <Value,>(
+  const handleOnChange = <TValue,>(
     _event: SyntheticEvent<Element, Event>,
-    value: Value,
+    value: TValue,
   ) => {
     fieldProps.onChange(value);
   };
@@ -69,8 +69,12 @@ export const FormAutocomplete = <
     [fieldProps.freeSolo, fieldProps.onInputChange],
   );
 
+  // Внимание, костыль.
+  // React-hook-form в последних версиях стал требовать для всех полей указывать defaultValues. Если defaultValues не указывать, то form.setValue работать не будет.
+  // Это breaking changes для наших проектов. Текущее решение прокидывает в input дефолтное значение, которое rhf может получить через ref и обработать так, как мы ожидаем
+  // fallbackValue не установится в state формы, это нужно только для ожидаемой работы rhf
   const fallbackValue = (
-    fieldProps.multiple ? [] : ''
+    fieldProps.multiple ? [] : null
   ) as typeof fieldProps.value;
 
   return (

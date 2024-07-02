@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import {
   fireEvent,
   renderWithTheme,
@@ -5,7 +6,6 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
-import { vi } from 'vitest';
 import { useEffect, useRef } from 'react';
 
 import { TextField } from './TextField';
@@ -128,5 +128,53 @@ describe('TextField', () => {
     await waitFor(() => {
       expect(inputElement.value).toHaveLength(MAX_LENGTH);
     });
+  });
+
+  it('Пробел в конце текста удаляется при переводе фокуса с инпута', async () => {
+    const onChangeSpy = vi.fn();
+
+    renderWithTheme(
+      <TextField
+        inputProps={{ 'data-testid': 'textFieldForTrim' }}
+        onChange={(e) => onChangeSpy(e.target.value)}
+      />,
+    );
+
+    const inputElement = screen.getByTestId(
+      'textFieldForTrim',
+    ) as HTMLInputElement;
+
+    await userEvents.type(inputElement, 'test ');
+    await userEvents.tab();
+
+    await waitFor(() => {
+      expect(onChangeSpy.mock.lastCall).toEqual(['test']);
+    });
+
+    vi.clearAllMocks();
+  });
+
+  it('Переданный onBlur вызывается при переводе фокуса с инпута', async () => {
+    const onBlurSpy = vi.fn();
+
+    renderWithTheme(
+      <TextField
+        inputProps={{ 'data-testid': 'textFieldForOnBlur' }}
+        onBlur={(e) => onBlurSpy(e.target.value)}
+      />,
+    );
+
+    const inputElement = screen.getByTestId(
+      'textFieldForOnBlur',
+    ) as HTMLInputElement;
+
+    await userEvents.type(inputElement, 'test');
+    await userEvents.tab();
+
+    await waitFor(() => {
+      expect(onBlurSpy.mock.lastCall).toEqual(['test']);
+    });
+
+    vi.clearAllMocks();
   });
 });

@@ -1,3 +1,4 @@
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   act,
   fireEvent,
@@ -5,7 +6,6 @@ import {
   screen,
   userEvents,
 } from '@astral/tests';
-import { describe, vi } from 'vitest';
 import { useState } from 'react';
 
 import { DateRangePicker } from './DateRangePicker';

@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useState } from 'react';
-import { vi } from 'vitest';
 
 import { DataGrid } from './DataGrid';
 import { type DataGridColumns, type DataGridSort } from './types';

@@ -1,11 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   type ListRange,
   TableVirtuoso,
   type VirtuosoHandle,
 } from 'react-virtuoso';
 
-import { TableBody, TableRow } from '../Table';
+import { TableBody } from '../Table';
 import { Container, type DataGridProps, type DataGridRow } from '../DataGrid';
 import { DataGridHead } from '../DataGrid/DataGridHead';
 import { CircularProgress } from '../CircularProgress';
@@ -20,6 +20,7 @@ import {
   DataGridInfiniteLoaderWrapper,
   DataGridInfiniteTable,
   DataGridInfiniteTableContainer,
+  FooterRow,
 } from './styles';
 import {
   DEFAULT_ROW_HEIGHT,
@@ -76,9 +77,13 @@ export const DataGridInfinite = <
     });
 
   const virtuoso = useRef<VirtuosoHandle>(null);
+  const [isLoadedMoreThanOne, setIsLoadedMoreThanOne] = useState(false);
+
   const dataLength = rows?.length || 0;
   const isSelectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
+  const isVisibleEndText = isLoadedMoreThanOne && isEndReached;
+
   const handleScrollToTop = () => {
     virtuoso.current?.scrollIntoView({ index: 0, behavior: 'smooth' });
   };
@@ -86,6 +91,7 @@ export const DataGridInfinite = <
   const handleEndReach = useCallback(() => {
     if (!isEndReached && onEndReached) {
       onEndReached();
+      setIsLoadedMoreThanOne(true);
     }
   }, [isEndReached, onEndReached]);
 
@@ -171,20 +177,20 @@ export const DataGridInfinite = <
             />
           )}
           fixedFooterContent={() => (
-            <TableRow>
+            <FooterRow>
               <DataGridInfiniteLoaderWrapper
                 colSpan={isSelectable ? columns.length + 1 : columns.length}
               >
                 {loading && Boolean(dataLength) && (
                   <CircularProgress color="primary" size="medium" />
                 )}
-                {isEndReached && (
+                {isVisibleEndText && (
                   <Typography color="textSecondary">
                     {END_OF_SCROLL_MESSAGE}
                   </Typography>
                 )}
               </DataGridInfiniteLoaderWrapper>
-            </TableRow>
+            </FooterRow>
           )}
         />
         {isStickyButtonActive && (

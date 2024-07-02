@@ -275,3 +275,17 @@ export { default as WarningFillSm } from './WarningFillSm';
 export { default as WebFillMd } from './WebFillMd';
 
 export { default as UnlinkOutlineMd } from './UnlinkOutlineMd';
+
+export { default as UnlockOutlineMd } from './UnlockOutlineMd';
+
+export { default as DocOutlineMd } from './DocOutlineMd';
+
+export { default as BankOutlineMd } from './BankOutlineMd';
+
+export { default as CashReceiptOutlineMd } from './CashReceiptOutlineMd';
+
+export { default as DivisionsOutlineMd } from './DivisionsOutlineMd';
+
+export { default as ProxyOutlineMd } from './ProxyOutlineMd';
+
+export { default as QrOutlineMd } from './QrOutlineMd';

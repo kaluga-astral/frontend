@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { Box, type BoxProps, Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
@@ -24,7 +24,7 @@ const Item = (props: BoxProps) => (
   />
 );
 
-const Template: Story = ({
+const Template: StoryFn = ({
   container,
   templateColumns,
   templateRows,
@@ -79,7 +79,7 @@ const Template: Story = ({
   );
 };
 
-export const Showcase: Story = () => (
+export const Showcase: StoryFn = () => (
   <Stack gap={2}>
     <Typography variant="h3">Grid Container Props</Typography>
     <Stack gap={1}>

@@ -68,8 +68,11 @@ export class WorkspaceSetupService {
 
     try {
       resultInfo = await getSystemInfo();
+      this.isPluginInstalled = true;
     } catch (error) {
       const pluginError = error as ICryptoError;
+
+      this.isPluginInstalled = true;
 
       switch (pluginError.code) {
         case PLUGIN_NOT_INSTALLED_CODE:
@@ -88,7 +91,6 @@ export class WorkspaceSetupService {
         }
       }
     } finally {
-      this.isPluginInstalled = resultInfo.cryptoProInstalled;
       this.hasCryptoProvider = Boolean(resultInfo.cryptoProviderName?.length);
       this.cspVersion = resultInfo.cspVersion;
       this.hasErrors = !(this.isPluginInstalled && this.hasCryptoProvider);

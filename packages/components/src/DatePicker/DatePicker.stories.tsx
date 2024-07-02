@@ -1,4 +1,4 @@
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -18,13 +18,13 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: Story<DatePickerProps> = (props) => {
+const Template: StoryFn<DatePickerProps> = (props) => {
   const [date, setDate] = useState<Date | undefined>();
 
   return <DatePicker value={date} onChange={setDate} {...props} />;
 };
 
-export const Showcase: Story = () => (
+export const Showcase: StoryFn = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template inputProps={{ label: 'Все по умолчанию' }} />
     <Template
@@ -58,7 +58,7 @@ export const Showcase: Story = () => (
   </LegacyGrid>
 );
 
-export const Default: Story<DatePickerProps> = (props) => {
+export const Default: StoryFn<DatePickerProps> = (props) => {
   const [date, setDate] = useState<Date | undefined>();
 
   return <DatePicker {...props} value={date} onChange={setDate} />;

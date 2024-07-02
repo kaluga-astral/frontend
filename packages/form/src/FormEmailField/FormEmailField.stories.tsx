@@ -55,3 +55,37 @@ export const Example = () => {
     </Form>
   );
 };
+
+/**
+ * Trim для `<input type="email" />` работает для тэга из коробки.
+ * Есть особенности: в submit и state формы всегда будет попадать email без пробелов, но в input пробелы отображаются.
+ * Описанное поведение реализовано браузерами и изменить его невозможно.
+ */
+export const Trim = () => {
+  const form = useForm<FormValues>({
+    defaultValues: { email: '  email@email.com  ' },
+    resolver: resolver<FormValues>(validationSchema),
+  });
+
+  const handleSubmit = form.handleSubmit(
+    (values) =>
+      new Promise<void>((resolve) => {
+        window.alert(JSON.stringify(values));
+        resolve();
+      }),
+  );
+
+  return (
+    <Form form={form} onSubmit={handleSubmit}>
+      <Grid container spacing={2}>
+        <FormEmailField
+          required
+          label="Email"
+          name="email"
+          control={form.control}
+        />
+        <FormSubmitButton>Отправить</FormSubmitButton>
+      </Grid>
+    </Form>
+  );
+};

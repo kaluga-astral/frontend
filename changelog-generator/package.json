@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node src/main.ts"
+    "changelog-generate": "ts-node src/changelogGenerate.ts",
+    "telegram-notify": "ts-node src/telegramNotify.ts"
+
   },
   "dependencies": {
     "dayjs": "^1.11.10",

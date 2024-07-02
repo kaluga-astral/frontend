@@ -1,0 +1,29 @@
+name: Changelog Telegaram notification
+
+on:
+  push:
+    branches: [main]
+    paths: [changelog/**]
+
+jobs:
+  changelog-telegram-notify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./changelog-generator
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Publish
+        run: npm run telegram-notify
+        env:
+          JIRA_URL: ${{ secrets.JIRA_URL }}
+          STORYBOOK_URL: ${{ secrets.STORYBOOK_URL }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_NEWS_CHAT_ID }}

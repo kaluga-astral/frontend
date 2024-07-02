@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -54,7 +54,7 @@ export default {
   component: SwipeableDrawer,
 };
 
-const Template: Story = ({
+const Template: StoryFn = ({
   drawerBleedingTitle,
   isMountedOnHide,
   drawerBleedingHeight,
@@ -66,24 +66,28 @@ const Template: Story = ({
   };
 
   return (
-    <Root>
-      <Box sx={{ textAlign: 'center', pt: 1 }}>
-        <Button onClick={handleToggle(true)}>Open</Button>
-      </Box>
+    <>
+      <h2 style={{ color: 'red' }}>Этот компонент устарел!</h2>
 
-      <SwipeableDrawer
-        anchor="bottom"
-        open={isOpen}
-        onClose={handleToggle(false)}
-        onOpen={handleToggle(true)}
-        disableSwipeToOpen={false}
-        drawerBleedingTitle={drawerBleedingTitle}
-        isMountedOnHide={isMountedOnHide}
-        drawerBleedingHeight={drawerBleedingHeight}
-      >
-        {renderRows(1)}
-      </SwipeableDrawer>
-    </Root>
+      <Root>
+        <Box sx={{ textAlign: 'center', pt: 1 }}>
+          <Button onClick={handleToggle(true)}>Open</Button>
+        </Box>
+
+        <SwipeableDrawer
+          anchor="bottom"
+          open={isOpen}
+          onClose={handleToggle(false)}
+          onOpen={handleToggle(true)}
+          disableSwipeToOpen={false}
+          drawerBleedingTitle={drawerBleedingTitle}
+          isMountedOnHide={isMountedOnHide}
+          drawerBleedingHeight={drawerBleedingHeight}
+        >
+          {renderRows(1)}
+        </SwipeableDrawer>
+      </Root>
+    </>
   );
 };
 
@@ -102,7 +106,7 @@ SwipeableDrawerStory.parameters = {
   controls: { expanded: true },
 };
 
-export const SwipeableDrawerShowcase: Story = () => {
+export const SwipeableDrawerShowcase: StoryFn = () => {
   const [isOpenSmall, setIsOpenSmall] = useState(false);
   const [isOpenBig, setIsOpenBig] = useState(false);
 

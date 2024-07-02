@@ -16,7 +16,7 @@ export const Name = ({
 
   return (
     <>
-      <Wrapper>
+      <Wrapper $leader={leader}>
         <Typography {...props} color={color}>
           {children}
           {!leader && separator}

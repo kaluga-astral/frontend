@@ -40,10 +40,24 @@ export const Example = () => (
   </FlowButton>
 );
 
+export const Loading = () => (
+  <FlowButton loading targetText="Завершить" color="primary">
+    Выпустить УНЭП
+  </FlowButton>
+);
+
 export const TargetText = () => (
   <FlowButton targetText="Пропустить" color="success">
     Пропустить этот шаг
   </FlowButton>
+);
+
+export const WithoutTargetText = () => (
+  <FlowButton>Подписать запрос</FlowButton>
+);
+
+export const DisabledFlowButton = () => (
+  <FlowButton disabled>Подписать запрос</FlowButton>
 );
 
 export const Color = () => (

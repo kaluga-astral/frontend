@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { renderHook } from '@astral/tests';
 import { theme } from '@astral/tests/src/theme';
 

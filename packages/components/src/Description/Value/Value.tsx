@@ -1,10 +1,11 @@
 import { type ReactNode, useContext, useState } from 'react';
 
-import { Typography, type TypographyProps } from '../../Typography';
+import { type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
 import { Tooltip } from '../../Tooltip';
+import { DescriptionContext } from '../DescriptionContext';
 
-import { StyledCopyIcon, StyledTypography } from './styles';
+import { StyledCopyIcon, StyledTypography, Wrapper } from './styles';
 import { CopyStatus } from './enums';
 
 export type ValueProps = Pick<
@@ -35,13 +36,21 @@ export const Value = ({
   stub,
   ...props
 }: ValueProps) => {
+  const { leader } = useContext(DescriptionContext);
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
   const { emptySymbol } = useContext(ConfigContext);
 
   const resultChildren = children || stub || emptySymbol;
 
   if (!canCopy) {
-    return <Typography children={resultChildren} {...props} />;
+    return (
+      <StyledTypography
+        component="dd"
+        children={resultChildren}
+        $leader={leader}
+        {...props}
+      />
+    );
   }
 
   const handleClick = () => {
@@ -62,9 +71,14 @@ export const Value = ({
   };
 
   return (
-    <div onMouseLeave={handleMouseLeave}>
+    <Wrapper onMouseLeave={handleMouseLeave}>
       <Tooltip placement="bottom" title={status}>
-        <StyledTypography {...props} onClick={handleClick}>
+        <StyledTypography
+          $canCopy={canCopy}
+          $leader={leader}
+          {...props}
+          onClick={handleClick}
+        >
           {copyPosition === 'left' && (
             <StyledCopyIcon
               $copyPosition={copyPosition}
@@ -82,6 +96,6 @@ export const Value = ({
           )}
         </StyledTypography>
       </Tooltip>
-    </div>
+    </Wrapper>
   );
 };

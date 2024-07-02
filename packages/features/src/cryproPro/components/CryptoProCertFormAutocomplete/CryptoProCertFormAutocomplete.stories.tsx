@@ -1,6 +1,6 @@
 import { type Certificate } from '@astral/cryptopro-cades';
 import { Form, useForm } from '@astral/ui';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import { useState } from 'react';
 
 import { CryptoProCertificateService } from '../../services';
@@ -16,7 +16,7 @@ type FormValues = {
   autocomplete: Certificate[];
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [certificateList, setCertificateList] = useState([] as Certificate[]);
 
   const form = useForm<FormValues>({

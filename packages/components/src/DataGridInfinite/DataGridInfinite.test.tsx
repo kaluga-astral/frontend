@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import {
   render,
   renderWithTheme,
@@ -5,7 +6,6 @@ import {
   userEvents,
   waitFor,
 } from '@astral/tests';
-import { vi } from 'vitest';
 import { VirtuosoMockContext } from 'react-virtuoso';
 import { theme } from '@astral/tests/src/theme';
 import { useState } from 'react';
@@ -218,5 +218,84 @@ describe('DataGridInfinite', () => {
 
     await userEvents.click(screen.getByText('Vasya'));
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
+  });
+
+  it('Текст "Конец списка" показывается, если была дополнительная загрузка данных', async () => {
+    const TestComponent = () => {
+      const [isEndReached, setIsEndReached] = useState(false);
+
+      const handleReachEnd = () => {
+        setIsEndReached(true);
+      };
+
+      return (
+        <ThemeProvider theme={theme}>
+          <DataGridInfinite
+            rows={[{ name: 'Vasya' }]}
+            keyId="name"
+            columns={[
+              {
+                field: 'name',
+                label: 'Наименование',
+              },
+            ]}
+            isEndReached={isEndReached}
+            onEndReached={handleReachEnd}
+          />
+        </ThemeProvider>
+      );
+    };
+
+    render(<TestComponent />, {
+      wrapper: ({ children }) => (
+        <VirtuosoMockContext.Provider
+          value={{ viewportHeight: 300, itemHeight: 100 }}
+        >
+          {children}
+        </VirtuosoMockContext.Provider>
+      ),
+    });
+
+    const endText = screen.getByText('Конец списка');
+
+    expect(endText).toBeVisible();
+  });
+
+  it('Текст "Конец списка" не показывается, если не было дополнительной загрузки данных', async () => {
+    const TestComponent = () => {
+      const handleReachEnd = vi.fn();
+
+      return (
+        <ThemeProvider theme={theme}>
+          <DataGridInfinite
+            rows={[{ name: 'Vasya' }]}
+            keyId="name"
+            columns={[
+              {
+                field: 'name',
+                label: 'Наименование',
+              },
+            ]}
+            isEndReached={true}
+            onEndReached={handleReachEnd}
+          />
+        </ThemeProvider>
+      );
+    };
+
+    render(<TestComponent />, {
+      wrapper: ({ children }) => (
+        <VirtuosoMockContext.Provider
+          value={{ viewportHeight: 300, itemHeight: 100 }}
+        >
+          {children}
+        </VirtuosoMockContext.Provider>
+      ),
+    });
+
+    const endText = screen.queryByText('Конец списка');
+
+    expect(endText).not.toBeInTheDocument();
+    vi.clearAllMocks();
   });
 });

@@ -1,5 +1,5 @@
-import { renderWithTheme, screen } from '@astral/tests';
 import { describe, expect, it, vi } from 'vitest';
+import { renderWithTheme, screen } from '@astral/tests';
 
 import { Description } from './Description';
 import { DEFAULT_SEPARATOR, DEFAULT_SYMBOL } from './constants';
@@ -89,7 +89,7 @@ describe('Description', () => {
   it('Значение копируется в буфер обмена при клике на текст, если canCopy=true', async () => {
     const valueText = 'get_rekt';
 
-    const writeTextSpy = vi.fn();
+    const writeTextSpy = vi.fn(() => Promise.resolve());
 
     Object.assign(navigator, {
       clipboard: {

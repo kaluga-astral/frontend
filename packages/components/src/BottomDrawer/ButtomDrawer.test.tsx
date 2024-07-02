@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, renderWithTheme, screen } from '@astral/tests';
-import { vi } from 'vitest';
 
 import { BottomDrawer } from './BottomDrawer';
 

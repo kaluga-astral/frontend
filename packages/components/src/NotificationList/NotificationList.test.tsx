@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
-import { expect, vi } from 'vitest';
 
 import { NotificationList } from './NotificationList';
 import { type Notification } from './types';

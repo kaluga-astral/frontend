@@ -1,5 +1,5 @@
 import { type MouseEvent, useCallback, useMemo, useState } from 'react';
-import { type Story } from '@storybook/react';
+import { type StoryFn } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
@@ -18,7 +18,7 @@ export default {
   component: Menu,
 };
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 

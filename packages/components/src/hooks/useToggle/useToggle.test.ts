@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { act, renderHook } from '@astral/tests';
 
 import { useToggle } from './useToggle';
