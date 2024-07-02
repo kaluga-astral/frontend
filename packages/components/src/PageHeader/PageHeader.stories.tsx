@@ -31,6 +31,7 @@ import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { OverflowTypography } from '../OverflowTypography';
 
 import { PageHeader } from './PageHeader';
+import { Filename } from './Filename';
 
 type DataType = {
   id: string;
@@ -462,6 +463,20 @@ export const LongTitle = () => (
           Очень длинный заголовок черновика, который должен отображаться в одну
           строку и не переноситься
         </OverflowTypography>
+      }
+    />
+  </Wrapper>
+);
+
+export const fileExtension = () => (
+  <Wrapper>
+    <PageHeader
+      title={
+        <Filename
+          title="Наименование работ, оборудования, сетей, систем
+        и конструктивных элементов выполняемых номинированными субподрядчиками
+        и/или третьими лицами.txt"
+        />
       }
     />
   </Wrapper>
