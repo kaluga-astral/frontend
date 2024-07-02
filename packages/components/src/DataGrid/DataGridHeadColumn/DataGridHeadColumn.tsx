@@ -8,19 +8,19 @@ import { type DataGridRow, type DataGridSort } from '../types';
 import { StyledTableCell, TableCellTitle } from './styles';
 
 export type DataGridHeadColumnProps<
-  Data = DataGridRow,
-  SortField extends keyof Data = keyof Data,
+  TData = DataGridRow,
+  TSortField extends keyof TData = keyof TData,
 > = {
-  onSort: (field: SortField) => void;
-  sorting?: DataGridSort<SortField>;
+  onSort: (field: TSortField) => void;
+  sorting?: DataGridSort<TSortField>;
   label?: string;
   sortable?: boolean;
   align?: TableCellProps['align'];
-  field?: keyof Data;
+  field?: keyof TData;
   width?: CSSProperties['width'];
 };
 
-export function DataGridHeadColumn<Data, SortField extends keyof Data>({
+export const DataGridHeadColumn = <TData, TSortField extends keyof TData>({
   onSort,
   field,
   sortable,
@@ -28,7 +28,7 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
   label,
   sorting,
   width,
-}: DataGridHeadColumnProps<Data, SortField>) {
+}: DataGridHeadColumnProps<TData, TSortField>) => {
   const sortIcon = useMemo(() => {
     if (!sortable) {
       return null;
@@ -50,7 +50,7 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
 
   const handleSortClick = () => {
     if (field && sortable) {
-      onSort(field as SortField);
+      onSort(field as TSortField);
     }
   };
 
@@ -67,4 +67,4 @@ export function DataGridHeadColumn<Data, SortField extends keyof Data>({
       </TableCellTitle>
     </StyledTableCell>
   );
-}
+};
