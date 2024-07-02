@@ -1,15 +1,15 @@
 export const checkIsDisabled = (
   isDisabled: boolean | undefined,
-  matrix: Array<boolean> | undefined,
+  availableCellsByIndex: Array<number> | undefined,
   index: number,
 ) => {
   if (!isDisabled) {
     return false;
   }
 
-  if (!matrix) {
+  if (!availableCellsByIndex) {
     return true;
   }
 
-  return matrix[index] || false;
+  return !availableCellsByIndex.includes(index);
 };

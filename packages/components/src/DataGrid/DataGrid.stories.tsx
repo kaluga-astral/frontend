@@ -871,9 +871,9 @@ export const WithDisabledRow = () => {
 };
 
 /**
- * Через матрицу можно указать перечень блокируемых ячеек
+ * `isDisabledLastCell` позволяет не блокировать последнюю ячейку
  */
-export const WithDisabledMatrixRow = () => {
+export const DisabledLastCell = () => {
   const DATA_OBJECT_TEMPLATE = {
     id: '1',
     documentName: 'Документ 1',
@@ -883,7 +883,7 @@ export const WithDisabledMatrixRow = () => {
 
   const data = generateData(DATA_OBJECT_TEMPLATE, {
     isDisabled: true,
-    disabledMatrix: [true, true, true, false],
+    isDisabledLastCell: false,
     disabledReason: 'Нет доступа',
   });
 

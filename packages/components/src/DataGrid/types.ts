@@ -12,12 +12,12 @@ export type RenderCell<Data> = (params: Data) => ReactNode;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DataGridRow = Record<string, any>;
 
-export type DataGridSort<SortField> = {
+export type DataGridSort<TSortField> = {
   /**
    * @example {fieldId: 'test'}
    * Значение поля сортируемой колонки
    */
-  fieldId: SortField;
+  fieldId: TSortField;
 
   /**
    * @example {sort: 'asc'}
@@ -26,12 +26,12 @@ export type DataGridSort<SortField> = {
   sort: SortState;
 };
 
-export type DataGridColumns<Data extends object> = {
+export type DataGridColumns<TData extends object> = {
   /**
    * @example {field: 'test'}
    * Значение ключа поля данных для колонки
    */
-  field?: keyof Data;
+  field?: keyof TData;
 
   /**
    * @example {label: 'Тестовая колонка'}
@@ -50,13 +50,13 @@ export type DataGridColumns<Data extends object> = {
    * @example {renderCell: (row) => <div>Hello Cell</div>'}
    * Кастомное отображение ячеек для колонки
    */
-  renderCell?: RenderCell<Data>;
+  renderCell?: RenderCell<TData>;
 
   /**
    * @example {format: (row) => new Date(row.createDate).toLocaleDateString()}
    * Функция для кастомного форматирования данных ячеек для колонки
    */
-  format?: (data: Data) => CellValue;
+  format?: (data: TData) => CellValue;
 
   /**
    * @example {align: 'left'}
@@ -78,9 +78,10 @@ export type DataGridRowOptions = {
   isDisabled?: boolean;
 
   /**
-   * Через матрицу можно точечно настраивать блокируемые ячейки
+   * Если true, последняя ячейка не будет блокироваться при `isDisabled=true`
+   * @default 'true'
    */
-  disabledMatrix?: Array<boolean>;
+  isDisabledLastCell?: boolean;
 
   /**
    * Причина блокировки строки

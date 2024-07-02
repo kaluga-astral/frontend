@@ -7,21 +7,21 @@ import { DataGridRow } from '../DataGridRow';
 import { checkIsDisabled } from './utils';
 import { StyledTableBody } from './styles';
 
-export type DataGridBodyProps<Data extends Record<string, unknown>> = {
-  columns: DataGridColumns<Data>[];
-  keyId: keyof Data;
+export type DataGridBodyProps<TData extends Record<string, unknown>> = {
+  columns: DataGridColumns<TData>[];
+  keyId: keyof TData;
   activeRowId?: string;
-  onRowClick?: (row: Data) => void;
+  onRowClick?: (row: TData) => void;
   selectable?: boolean;
-  selectedRows?: Array<Data>;
-  rows: (Data & { options?: DataGridRowOptions })[];
-  onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
+  selectedRows?: Array<TData>;
+  rows: Array<TData & { options?: DataGridRowOptions }>;
+  onSelectRow: (row: TData) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
   emptyCellValue?: ReactNode;
   noDataPlaceholder?: ReactNode;
 };
 
-export const DataGridBody = <Data extends Record<string, unknown>>({
+export const DataGridBody = <TData extends Record<string, unknown>>({
   rows,
   columns,
   selectable,
@@ -33,21 +33,26 @@ export const DataGridBody = <Data extends Record<string, unknown>>({
   activeRowId,
   emptyCellValue,
   noDataPlaceholder,
-}: DataGridBodyProps<Data>) => {
+}: DataGridBodyProps<TData>) => {
   const renderCells = useCallback(
-    (row: Data, rowId: string, options?: DataGridRowOptions) => {
-      const { isDisabled, disabledMatrix } = options || {};
+    (row: TData, rowId: string, options?: DataGridRowOptions) => {
+      const { isDisabled, isDisabledLastCell = true } = options || {};
+
+      const availableCellsByIndex = !isDisabledLastCell
+        ? [columns.length - 1]
+        : undefined;
 
       return columns.map((cell, index) => {
         const cellId = `${rowId}-${index}`;
+
         const isDisabledCell = checkIsDisabled(
           isDisabled,
-          disabledMatrix,
+          availableCellsByIndex,
           index,
         );
 
         return (
-          <DataGridCell<Data>
+          <DataGridCell<TData>
             key={cellId}
             row={row}
             cell={cell}
@@ -62,12 +67,12 @@ export const DataGridBody = <Data extends Record<string, unknown>>({
 
   const renderedRows = useMemo(() => {
     return rows.map(({ options, ...row }) => {
-      const rowId = (row as Data)[keyId] as string;
+      const rowId = (row as TData)[keyId] as string;
 
       return (
         <DataGridRow
           key={rowId}
-          row={row as Data}
+          row={row as TData}
           selectable={selectable}
           selectedRows={selectedRows}
           options={options}
@@ -76,7 +81,7 @@ export const DataGridBody = <Data extends Record<string, unknown>>({
           onSelectRow={onSelectRow}
           onRowClick={onRowClick}
         >
-          {renderCells(row as Data, rowId, options)}
+          {renderCells(row as TData, rowId, options)}
         </DataGridRow>
       );
     });

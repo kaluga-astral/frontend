@@ -6,18 +6,18 @@ import { type DataGridColumns } from '../types';
 
 import { StyledTableCell } from './styles';
 
-export type CellProps<Data extends object> = TableCellProps & {
-  row: Data;
-  cell: DataGridColumns<Data>;
+export type CellProps<TData extends object> = TableCellProps & {
+  row: TData;
+  cell: DataGridColumns<TData>;
   emptyCellValue?: ReactNode;
 };
 
-export const DataGridCell = <Data extends object>({
+export const DataGridCell = <TData extends object>({
   row,
   cell: { field, renderCell, format, align = 'left' },
   emptyCellValue = '-',
   isDisabled,
-}: CellProps<Data>) => {
+}: CellProps<TData>) => {
   const formattedValue = useMemo(() => {
     if (format) {
       return format(row);
