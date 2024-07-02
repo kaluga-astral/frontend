@@ -1,4 +1,4 @@
-import { EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { BinOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { type Meta } from '@storybook/react';
 import { type ChangeEvent, useEffect, useState } from 'react';
 
@@ -7,7 +7,11 @@ import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
 
 import { DataGrid } from './DataGrid';
-import { type DataGridColumns, type DataGridSort } from './types';
+import type {
+  DataGridColumns,
+  DataGridRowOptions,
+  DataGridSort,
+} from './types';
 
 /**
  * DataGrid — отображает информацию в удобном для просмотра виде. Может включать:
@@ -31,6 +35,7 @@ type DataType = {
   direction: string;
   createDate: string;
 };
+
 type SortField = 'documentName' | 'direction' | 'createDate';
 
 const generateRandomDate = () => {
@@ -43,7 +48,10 @@ const generateRandomDate = () => {
   return randomDate.toISOString();
 };
 
-const generateData = (dataObjTemplate: DataType): DataType[] => {
+const generateData = (
+  dataObjTemplate: DataType,
+  options?: DataGridRowOptions,
+): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
   const DATA_ARRAY_LENGTH = 16;
 
@@ -54,6 +62,7 @@ const generateData = (dataObjTemplate: DataType): DataType[] => {
       documentName: `Документ ${i + 1}`,
       direction: DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)],
       createDate: generateRandomDate(),
+      options: Math.random() < 0.5 ? options : undefined,
     }));
 };
 
@@ -778,6 +787,168 @@ export const WithDisabledContent = () => {
       loading={loading}
       disabled={true}
       onRowClick={handleRowClick}
+    />
+  );
+};
+
+export const WithDisabledRow = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE, {
+    isDisabled: true,
+    disabledReason: 'Нет доступа',
+  });
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      selectedRows={selected}
+      onRowClick={handleRowClick}
+      onSelectRow={handleSelect}
+    />
+  );
+};
+
+/**
+ * Через матрицу можно указать перечень блокируемых ячеек
+ */
+export const WithDisabledMatrixRow = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE, {
+    isDisabled: true,
+    disabledMatrix: [true, true, true, false],
+    disabledReason: 'Нет доступа',
+  });
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      loading={loading}
+      selectedRows={selected}
+      onRowClick={handleRowClick}
+      onSelectRow={handleSelect}
     />
   );
 };

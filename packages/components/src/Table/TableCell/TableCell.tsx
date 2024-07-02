@@ -1,10 +1,26 @@
-import {
-  TableCell as MuiTableCell,
-  type TableCellProps as MuiTableCellProps,
-} from '@mui/material';
+import { forwardRef } from 'react';
+import { type TableCellProps as MuiTableCellProps } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../../types';
 
-export type TableCellProps = WithoutEmotionSpecific<MuiTableCellProps>;
+import { StyledTableCell } from './styles';
 
-export const TableCell = (props: TableCellProps) => <MuiTableCell {...props} />;
+export type TableCellProps = WithoutEmotionSpecific<MuiTableCellProps> & {
+  isDisabled?: boolean;
+};
+
+export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
+  (props: TableCellProps, ref) => {
+    const { isDisabled, children, ...rest } = props;
+
+    return (
+      <StyledTableCell $isDisabled={isDisabled} {...rest} ref={ref}>
+        {isDisabled ? (
+          <div {...{ inert: isDisabled ? '' : undefined }}>{children}</div>
+        ) : (
+          children
+        )}
+      </StyledTableCell>
+    );
+  },
+);

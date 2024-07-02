@@ -18,6 +18,7 @@ export type DataGridSort<SortField> = {
    * Значение поля сортируемой колонки
    */
   fieldId: SortField;
+
   /**
    * @example {sort: 'asc'}
    * Значение возрастающий или убывающий сортировки (asc | desc)
@@ -31,35 +32,58 @@ export type DataGridColumns<Data extends object> = {
    * Значение ключа поля данных для колонки
    */
   field?: keyof Data;
+
   /**
    * @example {label: 'Тестовая колонка'}
    * Название колонки таблицы
    */
   label?: string;
+
   /**
    * @example {sortable: 'true'}
    * Флажок включающий сортировку колонки
    */
   sortable?: boolean;
   pointer?: boolean;
+
   /**
    * @example {renderCell: (row) => <div>Hello Cell</div>'}
    * Кастомное отображение ячеек для колонки
    */
   renderCell?: RenderCell<Data>;
+
   /**
    * @example {format: (row) => new Date(row.createDate).toLocaleDateString()}
    * Функция для кастомного форматирования данных ячеек для колонки
    */
   format?: (data: Data) => CellValue;
+
   /**
    * @example {align: 'left'}
    * CSS свойство размещения контента в ячейке
    */
   align?: TableCellProps['align'];
+
   /**
    * @example {width: '100%'}
    * CSS свойство ширины ячейки
    */
   width?: CSSProperties['width'];
+};
+
+export type DataGridRowOptions = {
+  /**
+   * Если true, строка будет недоступна для взаимодействия
+   */
+  isDisabled?: boolean;
+
+  /**
+   * Через матрицу можно точечно настраивать блокируемые ячейки
+   */
+  disabledMatrix?: Array<boolean>;
+
+  /**
+   * Причина блокировки строки
+   */
+  disabledReason?: string;
 };
