@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import {
-  SecondsCountDown,
-  type SecondsCountDownParams,
-} from './SecondsCountDown';
+import { SecondsCountDown, type SecondsCountDownParams } from '../../utils';
 
 type UseSecondsTimerOptions = Pick<
   SecondsCountDownParams,

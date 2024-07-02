@@ -1,4 +1,4 @@
-import { formatDate } from '../../../utils/date';
+import { formatDate } from '../date';
 
 const MSECONDS_PER_SECOND = 1000;
 
