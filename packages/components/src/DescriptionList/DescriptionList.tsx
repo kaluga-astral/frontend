@@ -15,7 +15,6 @@ export type DescriptionOptions = Pick<
    *  Вариант отображения Value в списке
    */
   variant?: 'tag' | 'default';
-  color?: TagColor;
   renderValue?: (
     value: ReactNode,
     optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
@@ -54,7 +53,7 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
       if (variant) {
         return (
           <Description.Value>
-            <Tag label={value} color={color} variant="light" />
+            <Tag label={value} color={color as TagColor} variant="light" />
           </Description.Value>
         );
       }

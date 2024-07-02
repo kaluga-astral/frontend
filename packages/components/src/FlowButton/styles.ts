@@ -8,7 +8,7 @@ export const StyledButton = styled(Button)`
   justify-content: space-between;
 
   min-width: 300px;
-  min-height: 71px;
+  min-height: 68px;
   padding: ${({ theme: { spacing } }) => spacing(4, 5)};
 
   border-radius: ${({ theme: { shape } }) => shape.medium};

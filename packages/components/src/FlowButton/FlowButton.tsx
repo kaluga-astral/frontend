@@ -12,9 +12,9 @@ export type FlowButtonProps = Omit<
   'loadingIndicator' | 'loadingPosition' | 'size' | 'variant'
 > & {
   /**
-   * @targetText Текст на кнопке, указывающей направление по флоу
+   * Текст на кнопке, указывающей направление по флоу
    * */
-  targetText: string;
+  targetText?: string;
 };
 
 export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
@@ -28,7 +28,9 @@ export const FlowButton = forwardRef<HTMLButtonElement, FlowButtonProps>(
         {...restProps}
       >
         <LegacyGrid container justifyItems="start">
-          <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
+          {targetText && (
+            <TargetTextWrapper variant="h7">{targetText}</TargetTextWrapper>
+          )}
           <Typography variant="h6">{children}</Typography>
         </LegacyGrid>
       </StyledButton>
