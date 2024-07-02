@@ -2,8 +2,8 @@ import { Switch as MuiSwitch, switchClasses } from '@mui/material';
 
 import { styled } from '../styles';
 
-export const Switch = styled(MuiSwitch)`
+export const StyledSwitch = styled(MuiSwitch)`
   .Mui-focusVisible + .${switchClasses.track} {
-    border: 2px solid #70aeff;
+    border: 2px solid ${({ theme }) => theme.palette.primary[400]};
   }
 `;
