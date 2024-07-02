@@ -39,7 +39,7 @@ describe('DataGrid', () => {
 
     renderWithTheme(
       <DataGrid<DataItem>
-        keyId="id"
+        keyId="name"
         rows={[{ name: 'Vasya' }, { name: 'Petya' }]}
         columns={columns}
       />,
@@ -181,9 +181,7 @@ describe('DataGrid', () => {
       />,
     );
 
-    const title = screen.getByText('Vasya');
-
-    expect(title).toBeDisabled;
+    expect(screen.getByText('Vasya')).toBeDisabled;
   });
 
   it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {
