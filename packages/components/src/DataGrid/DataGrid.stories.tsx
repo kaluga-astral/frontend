@@ -818,22 +818,18 @@ export const WithDisabledRow = () => {
     {
       field: 'documentName',
       label: 'Наименование документа',
-      sortable: true,
     },
     {
       field: 'direction',
       label: 'Направление',
-      sortable: true,
     },
     {
       field: 'createDate',
       label: 'Дата создания',
-      sortable: true,
       format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
     },
     {
       label: 'Действия',
-      sortable: false,
       align: 'center',
       width: '1%',
       renderCell: (row) => {
@@ -901,22 +897,18 @@ export const DisabledLastCell = () => {
     {
       field: 'documentName',
       label: 'Наименование документа',
-      sortable: true,
     },
     {
       field: 'direction',
       label: 'Направление',
-      sortable: true,
     },
     {
       field: 'createDate',
       label: 'Дата создания',
-      sortable: true,
       format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
     },
     {
       label: 'Действия',
-      sortable: false,
       align: 'center',
       width: '1%',
       renderCell: (row) => {

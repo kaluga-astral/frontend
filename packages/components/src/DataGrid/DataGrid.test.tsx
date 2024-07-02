@@ -1,9 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useState } from 'react';
+import { BinOutlineMd } from '@astral/icons';
+
+import { ActionCell } from '../ActionCell';
 
 import { DataGrid } from './DataGrid';
-import { type DataGridColumns, type DataGridSort } from './types';
+import type { DataGridColumns, DataGridSort } from './types';
 
 describe('DataGrid', () => {
   it('Props:columns: отображаются названия колонок', () => {
@@ -159,5 +162,73 @@ describe('DataGrid', () => {
 
     await userEvents.click(screen.getByText('Vasya'));
     expect(onRowClick.mock.calls[0][0]).toEqual({ name: 'Vasya' });
+  });
+
+  it('Строка не доступна для взаимодействия, если isDisabled=true', async () => {
+    const onRowClick = vi.fn();
+
+    renderWithTheme(
+      <DataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya', options: { isDisabled: true } }]}
+        onRowClick={onRowClick}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+      />,
+    );
+
+    const title = screen.getByText('Vasya');
+
+    expect(title).toBeDisabled;
+  });
+
+  it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {
+    const onDeleteSpy = vi.fn();
+
+    const ACTIONS = {
+      main: [
+        {
+          icon: <BinOutlineMd />,
+          name: 'Удалить',
+          onClick: onDeleteSpy,
+        },
+      ],
+    };
+
+    renderWithTheme(
+      <DataGrid
+        keyId="name"
+        rows={[
+          {
+            name: 'Vasya',
+            options: { isDisabled: true, isDisabledLastCell: false },
+          },
+        ]}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+          {
+            label: 'Действия',
+            sortable: false,
+            align: 'center',
+            width: '1%',
+            renderCell: (row) => {
+              return <ActionCell actions={ACTIONS} row={row} />;
+            },
+          },
+        ]}
+      />,
+    );
+
+    const button = screen.getByRole('button');
+
+    await userEvents.click(button);
+    expect(onDeleteSpy).toHaveBeenCalled();
   });
 });

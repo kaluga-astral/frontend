@@ -25,7 +25,17 @@ export const useLogic = <TData extends Record<string, unknown>>({
     selectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
 
-  const handleOpenTooltip = () => setVisibleTooltip(true);
+  const handleOpenTooltip = (event: MouseEvent<HTMLElement>) => {
+    const element = event.target as HTMLElement;
+    const target = element.closest('td');
+
+    const disabledCell = target?.querySelector('div[inert]');
+
+    if (disabledCell) {
+      setVisibleTooltip(true);
+    }
+  };
+
   const handleCloseTooltip = () => setVisibleTooltip(false);
 
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
@@ -41,7 +51,7 @@ export const useLogic = <TData extends Record<string, unknown>>({
     }
   };
 
-  const handleRowClick = (row: TData, isDisabled?: boolean) => () => {
+  const handleRowClick = () => {
     if (isDisabled) {
       return undefined;
     }
@@ -53,7 +63,7 @@ export const useLogic = <TData extends Record<string, unknown>>({
     tableRowProps: {
       hover: Boolean(!isDisabled && onRowClick),
       selected: activeRowId === rowId,
-      onClick: handleRowClick(row, isDisabled),
+      onClick: handleRowClick,
       onMouseMove: handleMouseMove,
     },
     tooltipProps: {
