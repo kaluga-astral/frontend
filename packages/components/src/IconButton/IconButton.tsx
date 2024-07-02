@@ -9,7 +9,7 @@ import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
 
 import { StyledButton } from './styles';
 
-export type IconButtonProps<TComponent extends ElementType> =
+export type IconButtonProps<TComponent extends ElementType = ElementType> =
   ButtonProps<TComponent> & {
     /**
      * Флаг отображения индикатора загрузки
