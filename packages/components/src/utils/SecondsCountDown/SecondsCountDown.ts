@@ -1,6 +1,6 @@
 import { formatDate } from '../date';
 
-const MSECONDS_PER_SECOND = 1000;
+const M_SECONDS_PER_SECOND = 1000;
 
 export type SecondsCountDownParams = {
   /**
@@ -63,7 +63,7 @@ export class SecondsCountDown {
   }
 
   private createTargetDateBySecond = (seconds = 0) =>
-    new Date(Date.now() + seconds * MSECONDS_PER_SECOND);
+    new Date(Date.now() + seconds * M_SECONDS_PER_SECOND);
 
   private setTextTime = (text: string) => {
     this.textTime = text;
@@ -89,7 +89,7 @@ export class SecondsCountDown {
 
       this.timer = setTimeout(() => {
         this.run();
-      }, MSECONDS_PER_SECOND);
+      }, M_SECONDS_PER_SECOND);
 
       return this.setActivity(true);
     }
