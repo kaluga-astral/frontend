@@ -279,6 +279,8 @@ export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
 
+export { SecondsCountDown } from './utils';
+
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
 export { WelcomeScreen, type WelcomeScreenProps } from './WelcomeScreen';

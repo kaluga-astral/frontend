@@ -23,6 +23,5 @@ export const formatDate = (
   mask
     .split(separator)
     .map((element) => elementsMap[element as DateMaskElements]?.(date))
-    .filter(Boolean)
     .map((value) => zeroPad(value, 2))
     .join(separator);
