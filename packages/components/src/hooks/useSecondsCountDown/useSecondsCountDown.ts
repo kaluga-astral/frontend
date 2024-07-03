@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { SecondsCountDown, type SecondsCountDownParams } from '../../utils';
 
-type UseSecondsTimerOptions = Pick<
+type UseSecondsTimerParams = Pick<
   SecondsCountDownParams,
   'targetDate' | 'isInitialTimerActive' | 'seconds'
 >;
@@ -14,7 +14,7 @@ export const useSecondsCountDown = ({
   targetDate,
   isInitialTimerActive,
   seconds,
-}: UseSecondsTimerOptions) => {
+}: UseSecondsTimerParams) => {
   const [textTime, setTextTime] = useState('');
 
   const [isTimerActive, setTimerActive] = useState(isInitialTimerActive);
@@ -44,6 +44,6 @@ export const useSecondsCountDown = ({
     /**
      *  метод перезапуска таймера к нужной дате или на нужное количество секунд
      */
-    resetTimer: timer.reset,
+    resetTimer: timer.restart,
   };
 };

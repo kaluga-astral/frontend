@@ -76,7 +76,7 @@ export class SecondsCountDown {
   };
 
   private get difference() {
-    return Math.max(+this.targetDate - +new Date(), 0);
+    return Math.max(+this.targetDate - Date.now(), 0);
   }
 
   private get textDifference() {
@@ -102,7 +102,7 @@ export class SecondsCountDown {
   /**
    * метод для перезапуска таймера на новую дату
    */
-  public reset = (value: Date | number) => {
+  public restart = (value: Date | number) => {
     this.destroy();
 
     this.targetDate =

@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { SecondsCountDown } from './SecondsCountDown';
 
-describe('SecondsCountDown tests', () => {
+describe('SecondsCountDown', () => {
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['Date', 'setTimeout'] });
     vi.setSystemTime('2022-02-10T00:00:00.000Z');
@@ -28,7 +28,7 @@ describe('SecondsCountDown tests', () => {
     expect(sut.textTime).toBe('00:50');
   });
 
-  it('Значение seconds игнорируется и значение таймера при создании равно разнице текущей даты и указанной даты, и значение seconds игнорируется', () => {
+  it('Значение seconds игнорируется при наличии targetDate', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:50.000Z'),
       seconds: 60,
@@ -75,7 +75,7 @@ describe('SecondsCountDown tests', () => {
     expect(sut.isTimerActive).toBeTruthy();
   });
 
-  it('Флаг активности false при targetDate меньше текущей', () => {
+  it('Флаг активности таймера false при targetDate меньше текущей', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-09T00:00:00.000Z'),
     });
@@ -110,25 +110,25 @@ describe('SecondsCountDown tests', () => {
     expect(sut.textTime).toBe('00:50');
   });
 
-  it('Действующий таймер изменяет целевое время при использовании метода reset', () => {
+  it('Действующий таймер изменяет целевое время при использовании метода restart', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:10.000Z'),
     });
 
-    sut.reset(new Date('2022-02-10T00:00:50.000Z'));
+    sut.restart(new Date('2022-02-10T00:00:50.000Z'));
     expect(sut.textTime).toBe('00:50');
   });
 
-  it('Действующий таймер изменяет целевое время при использовании метода reset и при указании в нем кол-ва секунд', () => {
+  it('Действующий таймер изменяет целевое время при использовании метода restart и при указании в нем кол-ва секунд', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:10.000Z'),
     });
 
-    sut.reset(50);
+    sut.restart(50);
     expect(sut.textTime).toBe('00:50');
   });
 
-  it('Отработавший таймер изменяет целевое время при использовании метода reset', () => {
+  it('Отработавший таймер изменяет целевое время при использовании метода restart', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:50.000Z'),
     });
@@ -139,11 +139,11 @@ describe('SecondsCountDown tests', () => {
     }
 
     // сбрасываем таймер к значению больше текущей
-    sut.reset(new Date('2022-02-10T00:01:40.000Z'));
+    sut.restart(new Date('2022-02-10T00:01:40.000Z'));
     expect(sut.textTime).toBe('00:50');
   });
 
-  it('Флаг активности отработавшего таймера включается при использовании метода reset', () => {
+  it('Флаг активности отработавшего таймера включается при использовании метода restart', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:50.000Z'),
     });
@@ -154,7 +154,7 @@ describe('SecondsCountDown tests', () => {
     }
 
     // сбрасываем таймер к значению больше текущей
-    sut.reset(new Date('2022-02-10T00:01:40.000Z'));
+    sut.restart(new Date('2022-02-10T00:01:40.000Z'));
     expect(sut.isTimerActive).toBeTruthy();
   });
 });

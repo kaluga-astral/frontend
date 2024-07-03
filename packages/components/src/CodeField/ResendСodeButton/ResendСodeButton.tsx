@@ -24,11 +24,11 @@ type ResendCodeButtonProps = {
    */
   resendTimeout: number;
   /**
-   * метод вызываемый при перезапросе кода по кнопке
+   * Метод вызываемый при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
   /**
-   * метод очищающий поле
+   * Метод очищающий поле
    */
   clearCodeValue: () => void;
 };
