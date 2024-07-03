@@ -16,7 +16,7 @@ export function useDataGridCommonUtils<
 }: {
   rows?: Data[];
   selectedRows: Data[];
-  keyId: string;
+  keyId: keyof Data;
   onSelectRow: ((rows: Data[]) => void) | undefined;
   noDataPlaceholder?: ReactNode;
   loading?: boolean;
