@@ -286,6 +286,8 @@ export { default as CashReceiptOutlineMd } from './CashReceiptOutlineMd';
 
 export { default as DivisionsOutlineMd } from './DivisionsOutlineMd';
 
+export { default as OutcomingDocumentOutlineMd } from './OutcomingDocumentOutlineMd';
+
 export { default as ProxyOutlineMd } from './ProxyOutlineMd';
 
 export { default as QrOutlineMd } from './QrOutlineMd';

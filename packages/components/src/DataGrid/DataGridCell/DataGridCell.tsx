@@ -1,21 +1,23 @@
 import { type ReactNode, useMemo } from 'react';
 
-import { type DataGridColumns } from '../types';
 import { OverflowTypography } from '../../OverflowTypography';
+import { type TableCellProps } from '../../Table';
+import { type DataGridColumns } from '../types';
 
 import { StyledTableCell } from './styles';
 
-export type CellProps<Data extends object> = {
-  row: Data;
-  cell: DataGridColumns<Data>;
+export type CellProps<TData extends object> = TableCellProps & {
+  row: TData;
+  cell: DataGridColumns<TData>;
   emptyCellValue?: ReactNode;
 };
 
-export function DataGridCell<Data extends object>({
+export const DataGridCell = <TData extends object>({
   row,
   cell: { field, renderCell, format, align = 'left' },
   emptyCellValue = '-',
-}: CellProps<Data>) {
+  isDisabled,
+}: CellProps<TData>) => {
   const formattedValue = useMemo(() => {
     if (format) {
       return format(row);
@@ -29,7 +31,7 @@ export function DataGridCell<Data extends object>({
   }, [field, format, row, emptyCellValue]);
 
   return (
-    <StyledTableCell align={align}>
+    <StyledTableCell isDisabled={isDisabled} align={align}>
       {renderCell && renderCell(row)}
       {!renderCell && (
         <OverflowTypography rowsCount={2}>
@@ -38,4 +40,4 @@ export function DataGridCell<Data extends object>({
       )}
     </StyledTableCell>
   );
-}
+};
