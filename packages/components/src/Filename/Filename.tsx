@@ -1,4 +1,6 @@
-import { StyleOverflowTypography, Wrapper } from './styles';
+import { OverflowTypography } from '../OverflowTypography';
+
+import { Wrapper } from './styles';
 import { getFileExtension } from './utils';
 
 export type FileNameProps = {
@@ -17,9 +19,9 @@ export const Filename = ({ children }: FileNameProps) => {
 
   return (
     <Wrapper>
-      <StyleOverflowTypography variant="inherit">
+      <OverflowTypography variant="inherit">
         {fileNameWithoutExtension}
-      </StyleOverflowTypography>
+      </OverflowTypography>
       <span>{fileExtension}</span>
     </Wrapper>
   );

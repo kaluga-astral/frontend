@@ -28,8 +28,8 @@ import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
-import { OverflowTypography } from '../OverflowTypography';
 import { Filename } from '../Filename';
+import { Typography } from '../Typography';
 
 import { PageHeader } from './PageHeader';
 
@@ -457,13 +457,33 @@ export const Default = () => (
 
 export const LongTitle = () => (
   <Wrapper>
+    <PageHeader title="Очень длинный заголовок черновика, который должен отображаться в одну" />
+  </Wrapper>
+);
+
+/**
+ * Если title не является строкой, Overflow работать не будет
+ */
+export const CustomTitle = () => (
+  <Wrapper>
     <PageHeader
       title={
-        <OverflowTypography variant="inherit">
-          Очень длинный заголовок черновика, который должен отображаться в одну
-          строку и не переноситься
-        </OverflowTypography>
+        <Typography variant="inherit">
+          Очень длинный заголовок черновика, который не будет отображаться в
+          одну строку
+        </Typography>
       }
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
+      }}
+      backButton={{}}
     />
   </Wrapper>
 );
@@ -474,7 +494,7 @@ export const FileExtension = () => (
       title={
         <Filename>
           Приложение 10. К ТФ договора Ген.подряда на проектирование и
-          проведение ремонтных работ ММ, МК, МА по единому РСР.txt
+          проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
         </Filename>
       }
       actions={{

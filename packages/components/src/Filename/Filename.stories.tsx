@@ -6,7 +6,7 @@ import { Grid } from '../Grid';
 import { Filename } from './Filename';
 
 /**
- * Filename аналогичен компоненту [OverflowTypography](/story/components-overflowtypography--docs)
+ * Filename применяется для отображения названий файлов, с автоматической проверкой текстового переполнения
  *
  * ### [Figma]()
  * ### [Guide]()
@@ -24,7 +24,7 @@ export const Interaction: Story = {
   args: {
     children:
       'Версия 1.0Приложение No 10к Договору подряда No КрФ/15331/24 от\n' +
-      '25.04.2024 г.txt',
+      '25.04.2024 г.pdf',
   },
   parameters: {
     docs: {
@@ -41,13 +41,13 @@ export const LongFileName = () => {
   return (
     <Filename>
       Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-      25.04.2024 г.xml.dist
+      25.04.2024 г.pdf
     </Filename>
   );
 };
 
 export const ShortFileName = () => {
-  return <Filename>Приложение №10.txt</Filename>;
+  return <Filename>Приложение №10.pdf</Filename>;
 };
 
 export const ComplexFileExtension = () => {
