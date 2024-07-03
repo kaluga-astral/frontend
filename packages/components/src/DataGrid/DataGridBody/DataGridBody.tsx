@@ -1,27 +1,27 @@
 import { type ChangeEvent, type ReactNode, useCallback, useMemo } from 'react';
 
-import { TableCell, TableRow } from '../../Table';
 import { DataGridCell } from '../DataGridCell';
-import { Checkbox } from '../../Checkbox';
-import { type DataGridColumns, type DataGridRow } from '../types';
+import type { DataGridColumns, DataGridRowOptions } from '../types';
+import { DataGridRow } from '../DataGridRow';
 
+import { checkIsDisabled } from './utils';
 import { StyledTableBody } from './styles';
 
-export type DataGridBodyProps<Data extends Record<string, unknown>> = {
-  columns: DataGridColumns<Data>[];
-  keyId: keyof DataGridRow;
+export type DataGridBodyProps<TData extends Record<string, unknown>> = {
+  columns: DataGridColumns<TData>[];
+  keyId: keyof TData;
   activeRowId?: string;
-  onRowClick?: (row: Data) => void;
+  onRowClick?: (row: TData) => void;
   selectable?: boolean;
-  selectedRows?: Array<Data>;
-  rows: Data[];
-  onSelectRow: (row: Data) => (event: ChangeEvent<HTMLInputElement>) => void;
+  selectedRows?: Array<TData>;
+  rows: Array<TData & { options?: DataGridRowOptions }>;
+  onSelectRow: (row: TData) => (event: ChangeEvent<HTMLInputElement>) => void;
   minDisplayRows: number;
   emptyCellValue?: ReactNode;
   noDataPlaceholder?: ReactNode;
 };
 
-export function DataGridBody<Data extends Record<string, unknown>>({
+export const DataGridBody = <TData extends Record<string, unknown>>({
   rows,
   columns,
   selectable,
@@ -33,18 +33,31 @@ export function DataGridBody<Data extends Record<string, unknown>>({
   activeRowId,
   emptyCellValue,
   noDataPlaceholder,
-}: DataGridBodyProps<Data>) {
+}: DataGridBodyProps<TData>) => {
   const renderCells = useCallback(
-    (row: Data, rowId: string) => {
+    (row: TData, rowId: string, options?: DataGridRowOptions) => {
+      const { isDisabled, isDisabledLastCell = true } = options || {};
+
+      const availableCellsByIndex = !isDisabledLastCell
+        ? [columns.length - 1]
+        : undefined;
+
       return columns.map((cell, index) => {
         const cellId = `${rowId}-${index}`;
 
+        const isDisabledCell = checkIsDisabled(
+          isDisabled,
+          availableCellsByIndex,
+          index,
+        );
+
         return (
-          <DataGridCell<Data>
+          <DataGridCell<TData>
             key={cellId}
             row={row}
             cell={cell}
             emptyCellValue={emptyCellValue}
+            isDisabled={isDisabledCell}
           />
         );
       });
@@ -52,38 +65,24 @@ export function DataGridBody<Data extends Record<string, unknown>>({
     [columns],
   );
 
-  const handleRowClick = (row: Data) => () => {
-    if (onRowClick) {
-      onRowClick(row);
-    }
-  };
-
   const renderedRows = useMemo(() => {
-    return rows.map((row) => {
-      const rowId = row[keyId] as string;
-      const checked =
-        selectable &&
-        Boolean(
-          selectedRows.find((selectedRow) => selectedRow[keyId] === rowId),
-        );
+    return rows.map(({ options, ...row }) => {
+      const rowId = (row as TData)[keyId] as string;
 
       return (
-        <TableRow
+        <DataGridRow
           key={rowId}
-          hover={Boolean(onRowClick)}
-          selected={activeRowId === rowId}
-          onClick={handleRowClick(row)}
+          row={row as TData}
+          selectable={selectable}
+          selectedRows={selectedRows}
+          options={options}
+          keyId={keyId}
+          activeRowId={activeRowId}
+          onSelectRow={onSelectRow}
+          onRowClick={onRowClick}
         >
-          {selectable && (
-            <TableCell
-              padding="checkbox"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <Checkbox checked={checked} onChange={onSelectRow(row)} />
-            </TableCell>
-          )}
-          {renderCells(row, rowId)}
-        </TableRow>
+          {renderCells(row as TData, rowId, options)}
+        </DataGridRow>
       );
     });
   }, [rows, keyId, selectable, selectedRows, onSelectRow, onRowClick, columns]);
@@ -93,4 +92,4 @@ export function DataGridBody<Data extends Record<string, unknown>>({
       {rows.length ? renderedRows : noDataPlaceholder}
     </StyledTableBody>
   );
-}
+};

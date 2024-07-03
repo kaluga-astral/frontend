@@ -14,10 +14,10 @@ import {
 import { DataGridInfiniteHead } from './styles';
 
 export type DataGridHeadProps<
-  Data extends object = DataGridRow,
-  SortField extends keyof Data = keyof Data,
+  TData extends object = DataGridRow,
+  TSortField extends keyof TData = keyof TData,
 > = {
-  columns: DataGridColumns<Data>[];
+  columns: DataGridColumns<TData>[];
   selectable: boolean;
   /**
    * @example <DataGridHead isInfinite />
@@ -25,15 +25,15 @@ export type DataGridHeadProps<
    */
   isInfinite?: boolean;
   onSelectAllRows: (event: ChangeEvent<HTMLInputElement>) => void;
-  sorting?: DataGridSort<SortField>;
-  onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
+  sorting?: DataGridSort<TSortField>;
+  onSort?: (sorting: DataGridSort<TSortField> | undefined) => void;
   uncheckedRowsCount: number;
   rowsCount: number;
 };
 
-export function DataGridHead<
-  Data extends object,
-  SortField extends keyof Data,
+export const DataGridHead = <
+  TData extends object,
+  TSortField extends keyof TData,
 >({
   columns,
   selectable,
@@ -43,7 +43,7 @@ export function DataGridHead<
   sorting,
   uncheckedRowsCount,
   isInfinite,
-}: DataGridHeadProps<Data, SortField>) {
+}: DataGridHeadProps<TData, TSortField>) => {
   const checked = useMemo(
     () => !Boolean(uncheckedRowsCount) && rowsCount > 0,
     [uncheckedRowsCount, rowsCount],
@@ -55,7 +55,7 @@ export function DataGridHead<
   );
 
   const handleSort = useCallback(
-    (field: SortField) => {
+    (field: TSortField) => {
       if (!onSort) {
         return;
       }
@@ -81,7 +81,7 @@ export function DataGridHead<
   const renderColumns = useMemo(() => {
     return columns.map(({ field, label, sortable, align, width }) => {
       return (
-        <DataGridHeadColumn<Data, SortField>
+        <DataGridHeadColumn<TData, TSortField>
           key={label}
           sorting={sorting}
           field={field}
@@ -124,4 +124,4 @@ export function DataGridHead<
       </TableRow>
     </TableHead>
   );
-}
+};

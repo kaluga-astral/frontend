@@ -2,18 +2,20 @@ import { TableCell, TableRow } from '../../Table';
 import { Checkbox } from '../../Checkbox';
 import { useDataGridCommonUtils } from '../../DataGrid/hooks';
 
-type DataGridInfiniteTableRowProps<Data extends Record<string, unknown>> = {
-  row: Data;
-  renderCells: (row: Data, rowId: string) => JSX.Element[];
-  keyId: string;
+type DataGridInfiniteTableRowProps<TData extends Record<string, unknown>> = {
+  row: TData;
+  renderCells: (row: TData, rowId: string) => JSX.Element[];
+  keyId: keyof TData;
   isSelectable: boolean;
-  selectedRows: Data[];
-  onRowClick?: ((row: Data) => void) | undefined;
-  onSelectRow?: (row: Data[]) => void;
+  selectedRows: TData[];
+  onRowClick?: ((row: TData) => void) | undefined;
+  onSelectRow?: (row: TData[]) => void;
   activeRowId?: string;
 };
 
-export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
+export const DataGridInfiniteTableRow = <
+  TData extends Record<string, unknown>,
+>({
   row,
   keyId,
   isSelectable,
@@ -23,8 +25,8 @@ export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
   activeRowId,
   renderCells,
   ...props
-}: DataGridInfiniteTableRowProps<Data>) => {
-  const { handleSelectRow } = useDataGridCommonUtils<Data>({
+}: DataGridInfiniteTableRowProps<TData>) => {
+  const { handleSelectRow } = useDataGridCommonUtils<TData>({
     selectedRows,
     keyId,
     onSelectRow,
@@ -33,7 +35,7 @@ export const DataGridInfiniteTableRow = <Data extends Record<string, unknown>>({
   const checked =
     isSelectable &&
     Boolean(selectedRows.find((selectedRow) => selectedRow[keyId] === rowId));
-  const handleRowClick = (itemRow: Data) => () => {
+  const handleRowClick = (itemRow: TData) => () => {
     if (onRowClick) {
       onRowClick(itemRow);
     }
