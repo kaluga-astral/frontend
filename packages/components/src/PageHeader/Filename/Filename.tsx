@@ -1,22 +1,20 @@
 import { OverflowTypography } from '../../OverflowTypography';
 
 import { Wrapper } from './styles';
-import { useLogic } from './useLogic';
+import { getFileExtension } from './utils';
 
-export type FileProps = {
+export type FileNameProps = {
   /**
    * Название файла
    */
-  title: string;
+  name: string;
 };
 
-export const Filename = ({ title }: FileProps) => {
-  const { getFileExtension } = useLogic();
-
+export const Filename = ({ name }: FileNameProps) => {
   return (
     <Wrapper>
-      <OverflowTypography variant="inherit">{title}</OverflowTypography>
-      <span>{getFileExtension(title)}</span>
+      <OverflowTypography variant="inherit">{name}</OverflowTypography>
+      <span>{getFileExtension(name)}</span>
     </Wrapper>
   );
 };

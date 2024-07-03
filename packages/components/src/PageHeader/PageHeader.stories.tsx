@@ -468,12 +468,12 @@ export const LongTitle = () => (
   </Wrapper>
 );
 
-export const fileExtension = () => (
+export const FileExtension = () => (
   <Wrapper>
     <PageHeader
       title={
         <Filename
-          title="Наименование работ, оборудования, сетей, систем
+          name="Наименование работ, оборудования, сетей, систем
         и конструктивных элементов выполняемых номинированными субподрядчиками
         и/или третьими лицами.txt"
         />
