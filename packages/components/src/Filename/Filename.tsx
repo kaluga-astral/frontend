@@ -1,5 +1,3 @@
-import { Children, type ReactNode } from 'react';
-
 import { StyleOverflowTypography, Wrapper } from './styles';
 import { getFileExtension } from './utils';
 
@@ -7,15 +5,14 @@ export type FileNameProps = {
   /**
    * Название файла
    */
-  children: ReactNode;
+  children: string;
 };
 
 export const Filename = ({ children }: FileNameProps) => {
-  const fileName = Children.toArray(children).join('');
-  const fileExtension = getFileExtension(fileName);
-  const fileNameWithoutExtension = fileName.slice(
+  const fileExtension = getFileExtension(children);
+  const fileNameWithoutExtension = children.slice(
     0,
-    fileName.length - fileExtension.length,
+    children.length - fileExtension.length,
   );
 
   return (
