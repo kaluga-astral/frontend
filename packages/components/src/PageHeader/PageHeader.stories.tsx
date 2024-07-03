@@ -28,9 +28,10 @@ import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
+import { OverflowTypography } from '../OverflowTypography';
+import { Filename } from '../Filename';
 
 import { PageHeader } from './PageHeader';
-import { Filename } from './Filename';
 
 type DataType = {
   id: string;
@@ -457,8 +458,12 @@ export const Default = () => (
 export const LongTitle = () => (
   <Wrapper>
     <PageHeader
-      title="Очень длинный заголовок черновика, который должен отображаться в одну
-          строку и не переноситься"
+      title={
+        <OverflowTypography variant="inherit">
+          Очень длинный заголовок черновика, который должен отображаться в одну
+          строку и не переноситься
+        </OverflowTypography>
+      }
     />
   </Wrapper>
 );
@@ -467,12 +472,22 @@ export const FileExtension = () => (
   <Wrapper>
     <PageHeader
       title={
-        <Filename
-          name="Наименование работ, оборудования, сетей, систем
-        и конструктивных элементов выполняемых номинированными субподрядчиками
-        и/или третьими лицами.txt"
-        />
+        <Filename>
+          Приложение 10. К ТФ договора Ген.подряда на проектирование и
+          проведение ремонтных работ ММ, МК, МА по единому РСР.txt
+        </Filename>
       }
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
+      }}
+      backButton={{}}
     />
   </Wrapper>
 );
