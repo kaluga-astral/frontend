@@ -42,7 +42,7 @@ export const useSecondsCountDown = ({
      */
     textTime: textTime || timer.textTime,
     /**
-     *  метод перезапуска таймера к нужной датe или на нужное количество секунд
+     *  метод перезапуска таймера к нужной дате или на нужное количество секунд
      */
     resetTimer: timer.reset,
   };
