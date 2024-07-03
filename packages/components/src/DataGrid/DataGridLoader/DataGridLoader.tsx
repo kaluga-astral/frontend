@@ -22,5 +22,3 @@ export const DataGridLoader = ({
     </LoaderWrapper>
   );
 };
-
-export default DataGridLoader;

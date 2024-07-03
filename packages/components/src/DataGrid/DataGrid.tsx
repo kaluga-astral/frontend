@@ -5,29 +5,34 @@ import { prop, uniqBy } from '../utils';
 
 import { DataGridHead } from './DataGridHead';
 import { DataGridBody } from './DataGridBody';
-import DataGridLoader from './DataGridLoader/DataGridLoader';
+import { DataGridLoader } from './DataGridLoader';
 import { DataGridNoData } from './DataGridNoData';
 import {
   Container,
   DisabledTableContainer,
   StyledTableContainer,
 } from './styles';
-import {
-  type DataGridColumns,
-  type DataGridRow,
-  type DataGridSort,
+import type {
+  DataGridColumns,
+  DataGridRow,
+  DataGridRowOptions,
+  DataGridSort,
 } from './types';
 
 export type DataGridProps<
-  Data extends Record<string, unknown> = DataGridRow,
-  SortField extends keyof Data = keyof Data,
+  TData extends Record<string, unknown> = DataGridRow,
+  TSortField extends keyof TData = keyof TData,
 > = {
-  className?: string;
   /**
-   * @example <DataGrid rows={[{name: 'test'}]} />
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
+  /**
    * Массив данных для таблицы
    */
-  rows: Data[];
+  rows: Array<TData & { options?: DataGridRowOptions }>;
+
   /**
    * @example <DataGrid columns={[
    *   {
@@ -37,80 +42,84 @@ export type DataGridProps<
    *   }]} />
    * Конфигурация колонок для таблицы
    */
-  columns: DataGridColumns<Data>[];
+  columns: DataGridColumns<TData>[];
+
   /**
-   * @example <DataGrid activeRowId={activeId} />
    * Идентификатор активного элемента массива rows. Выделяет активную строку в таблице
    */
   activeRowId?: string;
-  keyId: keyof DataGridRow;
+
+  keyId: keyof TData;
+
   /**
-   * @example <DataGrid onRowClick={(row) => console.log('clicked')} />
    * Обработчик клика строки таблицы
    */
-  onRowClick?: (row: Data) => void;
+  onRowClick?: (row: TData) => void;
+
   /**
    * @example <DataGrid selectedRows={[{name: 'test'}]} />
    * Массив выбранных строк
    */
-  selectedRows?: Array<Data>;
+  selectedRows?: Array<TData>;
+
   /**
-   * @example <DataGrid onSelectRow={(row) => console.log(select)} />
    * Обработчик выбора строки
    */
-  onSelectRow?: (row: Data[]) => void;
+  onSelectRow?: (row: TData[]) => void;
+
   /**
    * @example <DataGrid sorting={{fieldId: 'test', sort: 'asc'}} />
    * Параметры сортируемой колонки
    */
-  sorting?: DataGridSort<SortField>;
+  sorting?: DataGridSort<TSortField>;
+
   /**
    * @example <DataGrid onSort={({fieldId: 'test', sort: 'asc'}) => console.log('sorted')} />
    * Обработчик сортировки
    */
-  onSort?: (sorting: DataGridSort<SortField> | undefined) => void;
+  onSort?: (sorting: DataGridSort<TSortField> | undefined) => void;
+
   /**
-   * @example <DataGrid  Footer={<DataGridPagination />} />
    * Компонент кастомного футера (н-р Pagination)
    */
   Footer?: ReactNode;
+
   /**
-   * @example <DataGrid  noDataPlaceholder={<DataGridNoData />} />
    *  Используется для отображения placeholder при отсутствии данных в таблице
    */
   noDataPlaceholder?: ReactNode;
+
   /**
-   * @example <DataGrid  maxHeight={900} />
    * Максимальная высота для таблицы
    */
   maxHeight?: number;
+
   /**
-   * @example <DataGrid  loading={true} />
    * Флажок загрузки данных
    */
   loading?: boolean;
+
   /**
-   * @example <DataGrid  disabled={true} />
    * Флажок блокировки таблицы
    */
   disabled?: boolean;
+
   /**
-   * @default '-'
-   * @example <DataGrid  emptyCellValue{'Нет данных'} />
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
+   * @default '-'
    */
   emptyCellValue?: ReactNode;
+
   /**
+   * Используется для отображения переданного кол-ва строк при отсутствии данных
    * @default 10
-   * @example <DataGrid  minDisplayRows{10} />
-   *  Используется для отображения переданного кол-ва строк при отсутствии данных
    */
   minDisplayRows?: number;
 };
 
-export function DataGrid<
-  Data extends Record<string, unknown> = DataGridRow,
-  SortField extends keyof Data = keyof Data,
+export const DataGrid = <
+  TData extends Record<string, unknown> = DataGridRow,
+  TSortField extends keyof TData = keyof TData,
 >({
   columns,
   rows = [],
@@ -129,9 +138,11 @@ export function DataGrid<
   activeRowId,
   emptyCellValue,
   className,
-}: DataGridProps<Data, SortField>) {
+}: DataGridProps<TData, TSortField>) => {
   const selectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
+
+  const availableRows = rows.filter((row) => !row.options?.isDisabled);
 
   const TableContainer = isTableDisabled
     ? DisabledTableContainer
@@ -144,7 +155,7 @@ export function DataGrid<
 
     if (event.target.checked) {
       const mergedSelectedRows = uniqBy(
-        [...selectedRows, ...rows],
+        [...selectedRows, ...availableRows],
         prop(keyId),
       );
 
@@ -159,7 +170,7 @@ export function DataGrid<
   };
 
   const handleSelectRow = useCallback(
-    (row: Data) =>
+    (row: TData) =>
       (event: ChangeEvent<HTMLInputElement>): void => {
         if (!onSelectRow) {
           return;
@@ -179,11 +190,11 @@ export function DataGrid<
   );
 
   const uncheckedRowsCount = useMemo(() => {
-    return rows.filter(
+    return availableRows.filter(
       (row) =>
         !selectedRows.find((selectedRow) => selectedRow[keyId] === row[keyId]),
     ).length;
-  }, [rows, selectedRows, keyId]);
+  }, [availableRows, selectedRows, keyId]);
 
   const renderedPlaceholder = useCallback(() => {
     if (!loading) {
@@ -205,16 +216,16 @@ export function DataGrid<
     <Container maxHeight={maxHeight} className={className}>
       <TableContainer inert={isTableDisabled ? '' : undefined}>
         <Table stickyHeader>
-          <DataGridHead<Data, SortField>
+          <DataGridHead<TData, TSortField>
             onSort={onSort}
-            rowsCount={rows.length}
+            rowsCount={availableRows.length}
             uncheckedRowsCount={uncheckedRowsCount}
             onSelectAllRows={handleSelectAllRows}
             selectable={selectable}
             sorting={sorting}
             columns={processedColumns()}
           />
-          <DataGridBody<Data>
+          <DataGridBody<TData>
             activeRowId={activeRowId}
             keyId={keyId}
             selectedRows={selectedRows}
@@ -233,4 +244,4 @@ export function DataGrid<
       {Footer}
     </Container>
   );
-}
+};

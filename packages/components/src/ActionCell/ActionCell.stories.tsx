@@ -1,7 +1,7 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { type StoryFn } from '@storybook/react';
 
-import { type CellValue, DataGrid, type DataGridColumns } from '../DataGrid';
+import { DataGrid, type DataGridColumns } from '../DataGrid';
 
 import { ActionCell, type Actions } from './ActionCell';
 
@@ -10,9 +10,9 @@ export default {
   component: ActionCell,
 };
 
-type ColumnsType = {
+type DataType = {
+  id: string;
   documentName: string;
-  action: CellValue;
 };
 
 const MAIN_ACTIONS = [
@@ -49,12 +49,12 @@ const SECONDARY_ACTIONS = [
   { name: 'Удалить', onClick: () => console.log('secondary 2') },
 ];
 
-const ACTIONS: Actions<ColumnsType> = {
+const ACTIONS: Actions<DataType> = {
   main: MAIN_ACTIONS,
   secondary: SECONDARY_ACTIONS,
 };
 
-const ACTIONS_WITHOUT_SECONDARY: Actions<ColumnsType> = {
+const ACTIONS_WITHOUT_SECONDARY: Actions<DataType> = {
   main: MAIN_ACTIONS,
 };
 
@@ -77,14 +77,13 @@ const data = [
 ];
 
 const Template: StoryFn = (args) => {
-  const columns: DataGridColumns<ColumnsType>[] = [
+  const columns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
       label: 'Документ',
       sortable: false,
     },
     {
-      field: 'action',
       label: 'Действия',
       sortable: false,
       width: '10%',
@@ -105,14 +104,13 @@ const Template: StoryFn = (args) => {
 };
 
 export const OnlyMainActions: StoryFn = (args) => {
-  const columns: DataGridColumns<ColumnsType>[] = [
+  const columns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
       label: 'Документ',
       sortable: false,
     },
     {
-      field: 'action',
       label: 'Действия',
       sortable: false,
       width: '10%',
