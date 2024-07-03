@@ -6,6 +6,7 @@ import { Tooltip } from '../../Tooltip';
 import type { DataGridRowOptions } from '../types';
 
 import { useLogic } from './useLogic';
+import { DisabledCellContent } from './styles';
 
 export type DataGridRowProps<TData extends Record<string, unknown>> = {
   keyId: keyof TData;
@@ -38,9 +39,9 @@ export const DataGridRow = <TData extends Record<string, unknown>>({
             onClick={(event) => event.stopPropagation()}
           >
             {isDisabled ? (
-              <div {...{ inert: isDisabled ? '' : undefined }}>
+              <DisabledCellContent {...{ inert: isDisabled ? '' : undefined }}>
                 <Checkbox {...checkboxProps} />
-              </div>
+              </DisabledCellContent>
             ) : (
               <Checkbox {...checkboxProps} />
             )}

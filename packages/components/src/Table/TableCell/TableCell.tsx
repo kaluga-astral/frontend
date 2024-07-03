@@ -3,7 +3,7 @@ import { type TableCellProps as MuiTableCellProps } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../../types';
 
-import { StyledTableCell } from './styles';
+import { DisabledCellContent, StyledTableCell } from './styles';
 
 export type TableCellProps = WithoutEmotionSpecific<MuiTableCellProps> & {
   isDisabled?: boolean;
@@ -16,7 +16,9 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <StyledTableCell $isDisabled={isDisabled} {...rest} ref={ref}>
         {isDisabled ? (
-          <div {...{ inert: isDisabled ? '' : undefined }}>{children}</div>
+          <DisabledCellContent {...{ inert: isDisabled ? '' : undefined }}>
+            {children}
+          </DisabledCellContent>
         ) : (
           children
         )}
