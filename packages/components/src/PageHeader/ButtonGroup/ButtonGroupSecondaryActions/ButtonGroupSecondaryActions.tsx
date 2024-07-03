@@ -20,10 +20,15 @@ export type SecondaryAction<TSecondaryActionComponent extends ElementType> =
      * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
      */
     component?: TSecondaryActionComponent;
-  } & ComponentProps<
-      ElementType extends TSecondaryActionComponent
-        ? 'button'
-        : TSecondaryActionComponent
+    // TODO Хак через Omit позволяет решить проблему с потерей типов для props
+    // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
+  } & Omit<
+      ComponentProps<
+        ElementType extends TSecondaryActionComponent
+          ? 'button'
+          : TSecondaryActionComponent
+      >,
+      ''
     >;
 
 export type ButtonGroupSecondaryActionProps<
