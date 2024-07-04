@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { type MouseEvent, useState } from 'react';
 
 import { ToggleButtonGroup } from '../ToggleButtonGroup';
@@ -19,6 +19,21 @@ const meta: Meta<typeof ToggleButton> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof ToggleButton>;
+
+export const Interaction: Story = {
+  args: {
+    color: 'primary',
+    children: 'Toggle Button',
+    selected: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => {
   const [value, setValue] = useState('val1');
