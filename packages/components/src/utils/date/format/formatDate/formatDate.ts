@@ -13,7 +13,7 @@ const elementsMap: ElementsMap = {
 };
 
 /**
- * @description утилита для генерации строковой даты по заданной маске
+ * утилита для генерации строковой даты по заданной маске
  */
 export const formatDate = (
   date: Date,
@@ -23,5 +23,6 @@ export const formatDate = (
   mask
     .split(separator)
     .map((element) => elementsMap[element as DateMaskElements]?.(date))
+    .filter(Number.isInteger)
     .map((value) => zeroPad(value, 2))
     .join(separator);
