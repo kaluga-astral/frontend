@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useEffect, useState } from 'react';
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { styled } from '../styles';
@@ -25,6 +25,8 @@ const meta: Meta<typeof WelcomeScreen> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof WelcomeScreen>;
 
 const MainWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(4)};
@@ -103,6 +105,74 @@ const useMockFetch = function <TData>(
     isError: false,
     fetch: fetchData,
   };
+};
+
+export const Interaction: Story = {
+  args: {
+    productName: 'Астрал',
+    userName: 'Иван Иванович',
+    isLoading: false,
+    isError: false,
+    isSuccess: true,
+    errorMsg: 'Ошибка 500',
+  },
+  render: (args) => {
+    const { data, fetch } = useMockFetch({
+      ...MOCK_DATA,
+      productName: args.productName,
+      userName: args.userName,
+    });
+
+    const Logo = () => data?.logo;
+
+    useEffect(() => {
+      fetch();
+    }, []);
+
+    const handleClearStorage = () => sessionStorage.clear();
+
+    const isSuccess = !args.isLoading && !args.isError && Boolean(data);
+
+    return (
+      <Container>
+        <WelcomeScreen
+          {...data}
+          isSuccess={isSuccess}
+          isLoading={args.isLoading}
+          isError={args.isError}
+          errorMsg={args.errorMsg}
+          onRetry={fetch}
+        >
+          <DashboardLayout>
+            <DashboardLayout.Header
+              product={{
+                name: args.productName || '',
+                logo: () => <Logo />,
+              }}
+            />
+            <DashboardLayout.Main>
+              <MainWrapper>
+                <p>
+                  Приветствие отображается только при первичной загрузки
+                  приложения в рамках вкладки. Для повторного просмотра
+                  приветствия необходимо очистить sessionStorage
+                </p>
+
+                <Button onClick={handleClearStorage}>
+                  Очистить sessionStorage
+                </Button>
+              </MainWrapper>
+            </DashboardLayout.Main>
+          </DashboardLayout>
+        </WelcomeScreen>
+      </Container>
+    );
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 export const Example = () => {
