@@ -12,10 +12,10 @@ export type SecondsCountDownParams = {
    */
   onUpdateActivity?: (isActive: boolean) => void;
   /**
-   * флаг изначальной активности таймера
+   * флаг изначальной активности счетчика
    * @default true
    */
-  isInitialTimerActive?: boolean;
+  isInitialActive?: boolean;
   /**
    * количество секунд на которые должен запуститься таймер
    * игнорируется, если передан targetDate
@@ -37,9 +37,9 @@ export class SecondsCountDown {
   private targetDate: Date;
 
   /**
-   * флаг активности таймера
+   * флаг активности счетчика
    */
-  public isTimerActive: boolean;
+  public isActive: boolean;
 
   /**
    * текстовое представление таймера в формате mm:ss
@@ -47,7 +47,7 @@ export class SecondsCountDown {
   public textTime: string;
 
   constructor(private readonly params: SecondsCountDownParams) {
-    this.isTimerActive = params.isInitialTimerActive ?? true;
+    this.isActive = params.isInitialActive ?? true;
 
     this.targetDate = this.params.targetDate
       ? this.params.targetDate
@@ -55,7 +55,7 @@ export class SecondsCountDown {
 
     this.textTime = this.textDifference;
 
-    if (!this.isTimerActive) {
+    if (!this.isActive) {
       return;
     }
 
@@ -71,7 +71,7 @@ export class SecondsCountDown {
   };
 
   private setActivity = (isActive: boolean) => {
-    this.isTimerActive = isActive;
+    this.isActive = isActive;
     this.params.onUpdateActivity?.(isActive);
   };
 
@@ -105,8 +105,13 @@ export class SecondsCountDown {
   public restart = (value: Date | number) => {
     this.destroy();
 
-    this.targetDate =
-      typeof value === 'number' ? this.createTargetDateBySecond(value) : value;
+    if (typeof value === 'number') {
+      this.targetDate = this.createTargetDateBySecond(value);
+    } else if (value?.constructor?.name === 'Date') {
+      this.targetDate = value;
+    } else {
+      return;
+    }
 
     this.run();
   };

@@ -4,46 +4,54 @@ import { SecondsCountDown, type SecondsCountDownParams } from '../../utils';
 
 type UseSecondsTimerParams = Pick<
   SecondsCountDownParams,
-  'targetDate' | 'isInitialTimerActive' | 'seconds'
+  'targetDate' | 'isInitialActive' | 'seconds'
 >;
+
+type UseSecondsCountDownResult = {
+  /**
+   *  флаг активности таймера
+   */
+  isActive: boolean;
+  /**
+   *  время в текстовом формате mm:ss
+   */
+  textTime: string;
+  /**
+   *  метод перезапуска таймера к нужной дате или на нужное количество секунд
+   */
+  resetTimer: (value: Date | number) => void;
+};
 
 /**
  *  хук, предоставляющий функционал с текстом убывающего времени
  */
 export const useSecondsCountDown = ({
   targetDate,
-  isInitialTimerActive,
+  isInitialActive,
   seconds,
-}: UseSecondsTimerParams) => {
+}: UseSecondsTimerParams): UseSecondsCountDownResult => {
   const [textTime, setTextTime] = useState('');
 
-  const [isTimerActive, setTimerActive] = useState(isInitialTimerActive);
+  const [isCountDownActive, setCountDownActive] = useState(
+    Boolean(isInitialActive),
+  );
 
-  const timer = useState(
+  const countDown = useState(
     () =>
       new SecondsCountDown({
         targetDate,
-        isInitialTimerActive,
+        isInitialActive: isInitialActive,
         seconds,
         onUpdateText: setTextTime,
-        onUpdateActivity: setTimerActive,
+        onUpdateActivity: setCountDownActive,
       }),
   )[0];
 
-  useEffect(() => () => timer.destroy(), [timer]);
+  useEffect(() => () => countDown.destroy(), [countDown]);
 
   return {
-    /**
-     *  флаг активности таймера
-     */
-    isActive: isTimerActive,
-    /**
-     *  время в текстовом формате mm:ss
-     */
-    textTime: textTime || timer.textTime,
-    /**
-     *  метод перезапуска таймера к нужной дате или на нужное количество секунд
-     */
-    resetTimer: timer.restart,
+    isActive: isCountDownActive,
+    textTime: textTime || countDown.textTime,
+    resetTimer: countDown.restart,
   };
 };

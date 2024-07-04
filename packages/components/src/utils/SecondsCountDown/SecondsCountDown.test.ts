@@ -72,7 +72,7 @@ describe('SecondsCountDown', () => {
       targetDate: new Date('2022-02-10T00:00:50.000Z'),
     });
 
-    expect(sut.isTimerActive).toBeTruthy();
+    expect(sut.isActive).toBeTruthy();
   });
 
   it('Флаг активности таймера false при targetDate меньше текущей', () => {
@@ -80,7 +80,7 @@ describe('SecondsCountDown', () => {
       targetDate: new Date('2022-02-09T00:00:00.000Z'),
     });
 
-    expect(sut.isTimerActive).toBeFalsy();
+    expect(sut.isActive).toBeFalsy();
   });
 
   it('Флаг активности таймера переключается в false по истечении времени', () => {
@@ -93,13 +93,13 @@ describe('SecondsCountDown', () => {
       vi.runOnlyPendingTimers();
     }
 
-    expect(sut.isTimerActive).toBeFalsy();
+    expect(sut.isActive).toBeFalsy();
   });
 
-  it('Значение таймера не изменяется, если isInitialTimerActive = false', () => {
+  it('Значение таймера не изменяется, если isInitialActive = false', () => {
     const sut = new SecondsCountDown({
       targetDate: new Date('2022-02-10T00:00:50.000Z'),
-      isInitialTimerActive: false,
+      isInitialActive: false,
     });
 
     // эмулируем ожидание
@@ -155,6 +155,6 @@ describe('SecondsCountDown', () => {
 
     // сбрасываем таймер к значению больше текущей
     sut.restart(new Date('2022-02-10T00:01:40.000Z'));
-    expect(sut.isTimerActive).toBeTruthy();
+    expect(sut.isActive).toBeTruthy();
   });
 });
