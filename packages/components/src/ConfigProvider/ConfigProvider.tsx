@@ -69,7 +69,7 @@ export type ConfigContextProps = {
   imagesMap: ImagesMap;
   /**
    * Символ для пустого значения
-   * @default '-'
+   * @default '—'
    */
   emptySymbol: string;
   /**
@@ -99,7 +99,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   captureException: (error) => console.error(error),
   imagesMap: imagesMapDefault,
   techSup: techSupDefault,
-  emptySymbol: '-',
+  emptySymbol: '—',
   hidePersonalDataClassname: defaultHidePersonalDataClassname,
   hidePersonalData: true,
 });
@@ -109,7 +109,7 @@ export const ConfigProvider = ({
   language = 'ru',
   datePickerLanguageMap = russianMap,
   captureException,
-  emptySymbol = '-',
+  emptySymbol = '—',
   imagesMap = imagesMapDefault,
   techSup = techSupDefault,
   hidePersonalData = true,
