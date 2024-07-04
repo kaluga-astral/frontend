@@ -24,7 +24,7 @@ export const Interaction: Story = {
   args: {
     children:
       'Версия 1.0Приложение No 10к Договору подряда No КрФ/15331/24 от\n' +
-      '25.04.2024 г.pdf',
+      '25.04.2024.pdf',
   },
   parameters: {
     docs: {
@@ -39,32 +39,44 @@ const GridWrapper = styled(Grid)`
 
 export const LongFileName = () => {
   return (
-    <Filename>
-      Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-      25.04.2024 г.pdf
-    </Filename>
+    <div style={{ maxWidth: '400px' }}>
+      <Filename>
+        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
+        25.04.2024.pdf
+      </Filename>
+    </div>
   );
 };
 
 export const ShortFileName = () => {
-  return <Filename>Приложение №10.pdf</Filename>;
+  return (
+    <div style={{ maxWidth: '400px' }}>
+      <Filename>Приложение №10.pdf</Filename>
+    </div>
+  );
 };
 
 export const ComplexFileExtension = () => {
   return (
     <GridWrapper rowSpacing={3}>
-      <Filename>
-        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-        25.04.2024 г.xml.dist
-      </Filename>
-      <Filename>
-        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-        25.04.2024 г.tar.xz
-      </Filename>
-      <Filename>
-        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-        25.04.2024 г.xml.orig
-      </Filename>
+      <div style={{ maxWidth: '400px' }}>
+        <Filename>
+          Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
+          25.04.2024.xml.dist
+        </Filename>
+      </div>
+      <div style={{ maxWidth: '400px' }}>
+        <Filename>
+          Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
+          25.04.2024.tar.xz
+        </Filename>
+      </div>
+      <div style={{ maxWidth: '400px' }}>
+        <Filename>
+          Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
+          25.04.2024.xml.orig
+        </Filename>
+      </div>
     </GridWrapper>
   );
 };

@@ -492,7 +492,7 @@ export const FileExtension = () => (
   <Wrapper>
     <PageHeader
       title={
-        <Filename>
+        <Filename variant="inherit">
           Приложение 10. К ТФ договора Ген.подряда на проектирование и
           проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
         </Filename>

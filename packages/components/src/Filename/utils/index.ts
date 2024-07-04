@@ -1,1 +1,1 @@
-export * from './getFileExtension';
+export * from './truncateString';
