@@ -1,19 +1,23 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta} from '@storybook/react';
 import { Box, Popper } from '@mui/material';
 import { useRef, useState } from 'react';
 
-import { Typography } from '../Typography';
 import { Button } from '../Button';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { LegacyGrid } from '../LegacyGrid';
 
 import { ClickAwayListener } from './ClickAwayListener';
 
-export default {
+/**
+ * Абстрактный компонент, предназначенный для отлавливания кликов снаружи кастомных компонентов. Для более узких кейсов, где требуется управление рефом, используйте хук useClickAwayEffect
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof ClickAwayListener> = {
   title: 'Components/ClickAwayListener',
 };
 
-const Template: StoryFn<{}> = () => {
+export default meta;
+
+export const Example = () => {
   const [isActive, setActive] = useState(false);
 
   const ref = useRef(null);
@@ -23,16 +27,6 @@ const Template: StoryFn<{}> = () => {
   };
 
   return (
-    <ExampleTemplate>
-      <Typography variant="h3">ClickAwayListener</Typography>
-      <Typography paragraph>
-        Абстрактный компонент, предназначенный для отлавливания кликов снаружи
-        кастомных компонентов. Для более узких кейсов, где требуется управление
-        рефом, используйте хук useClickAwayEffect
-      </Typography>
-
-      <ExampleTemplate.Case title="Пример">
-        <LegacyGrid container justifyContent="center">
           <ClickAwayListener onClickAway={handleClickAway} isActive={isActive}>
             <div>
               <Button ref={ref} onClick={() => setActive(true)}>
@@ -41,7 +35,7 @@ const Template: StoryFn<{}> = () => {
               <Popper
                 open={isActive}
                 anchorEl={ref?.current}
-                placement="bottom-start"
+                placement="right"
                 disablePortal
                 modifiers={[
                   {
@@ -64,14 +58,5 @@ const Template: StoryFn<{}> = () => {
               </Popper>
             </div>
           </ClickAwayListener>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  controls: { expanded: true },
 };

@@ -1,15 +1,20 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Box, type BoxProps, Stack } from '@mui/material';
 
 import { Typography } from '../Typography';
 
 import { LegacyGrid } from './LegacyGrid';
-import { type GridContainerProps, type GridElementsProps } from './types';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof LegacyGrid> = {
   title: 'Components/LegacyGrid',
   component: LegacyGrid,
 };
+
+export default meta;
 
 const Item = (props: BoxProps) => (
   <Box
@@ -24,64 +29,29 @@ const Item = (props: BoxProps) => (
   />
 );
 
-const Template: StoryFn = ({
-  container,
-  templateColumns,
-  templateRows,
-  templateAreas,
-  columnSpacing,
-  rowSpacing,
-  spacing,
-  justifyItems,
-  alignItems,
-  justifyContent,
-  alignContent,
-  autoColumns,
-  autoRows,
-  autoFlow,
-  column,
-  row,
-  area,
-  justifySelf,
-  alignSelf,
-}) => {
-  const containerProps: GridContainerProps = {
-    container,
-    templateColumns,
-    templateRows,
-    templateAreas,
-    columnSpacing,
-    rowSpacing,
-    spacing,
-    justifyItems,
-    alignItems,
-    justifyContent,
-    alignContent,
-    autoColumns,
-    autoRows,
-    autoFlow,
-  };
-  const elementProps: GridElementsProps = {
-    column,
-    row,
-    area,
-    justifySelf,
-    alignSelf,
-  };
+type Story = StoryObj<typeof LegacyGrid>;
 
-  return (
-    <LegacyGrid {...containerProps}>
-      <LegacyGrid {...elementProps}>
+export const Interaction: Story = {
+  args: {
+    children: (<><Item>Item 1</Item> <Item>Item 2</Item></>),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => (
+    <LegacyGrid container>
+      <LegacyGrid>
         <Item>Grid Item 1</Item>
       </LegacyGrid>
       <Item>Item 2</Item>
     </LegacyGrid>
-  );
-};
+);
 
-export const Showcase: StoryFn = () => (
-  <Stack gap={2}>
-    <Typography variant="h3">Grid Container Props</Typography>
+export const Grid_Container_Props = () => (
     <Stack gap={1}>
       <Typography variant="ui">Grid Container</Typography>
       <div>
@@ -200,7 +170,8 @@ export const Showcase: StoryFn = () => (
         </LegacyGrid>
       </div>
     </Stack>
-    <Typography variant="h3">Grid children props</Typography>
+);
+export const Grid_Children_Props = () => (
     <Stack gap={1}>
       <Typography variant="ui">Grid column</Typography>
       <div>
@@ -221,7 +192,8 @@ export const Showcase: StoryFn = () => (
         </LegacyGrid>
       </div>
     </Stack>
-    <Typography variant="h3">Breakpoints Props</Typography>
+);
+export const Breakpoints_Props = () => (
     <Stack gap={1}>
       <div>
         <LegacyGrid
@@ -236,18 +208,5 @@ export const Showcase: StoryFn = () => (
         </LegacyGrid>
       </div>
     </Stack>
-  </Stack>
 );
 
-Showcase.parameters = { options: { showPanel: false } };
-
-export const Default = Template.bind({});
-
-Default.args = {
-  container: true,
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};

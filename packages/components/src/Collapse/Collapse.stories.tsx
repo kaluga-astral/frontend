@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { List } from '../List';
@@ -10,12 +10,32 @@ import { Chevron } from '../Chevron';
 
 import { Collapse } from './Collapse';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Collapse> = {
   title: 'Components/Collapse',
   component: Collapse,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof Collapse>;
+
+export const Interaction: Story = {
+  args: {
+    children: 'Content',
+    in: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [open, setOpen] = useState(true);
 
   const handleClick = () => {
@@ -49,11 +69,4 @@ const Template: StoryFn = () => {
       </Collapse>
     </List>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

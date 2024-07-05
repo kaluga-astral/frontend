@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 
 import { ListItemButton } from '../ListItemButton';
 import { ListItemText } from '../ListItemText';
@@ -7,12 +7,18 @@ import { ListItem } from '../ListItem';
 
 import { Divider } from './Divider';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Divider> = {
   title: 'Components/Divider',
   component: Divider,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+export const Example = () => {
   return (
     <List>
       <ListItem>
@@ -32,11 +38,4 @@ const Template: StoryFn = () => {
       <Divider />
     </List>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { date, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -8,10 +8,15 @@ import { useForm } from '../hooks';
 
 import { FormDatePicker, type FormDatePickerValue } from './FormDatePicker';
 
-export default {
+/**
+ * Обертка [DatePicker](/story/components-datepickers-defaultdatepicker--docs) для react-hook-form
+ */
+const meta: Meta<typeof FormDatePicker> = {
   title: 'Form/FormDatePicker',
-  component: null,
+  component: FormDatePicker,
 };
+
+export default meta;
 
 type FormValues = { dateField: FormDatePickerValue };
 
@@ -19,7 +24,7 @@ const validationSchema = object<FormValues>({
   dateField: date(),
 });
 
-const Template: StoryFn = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
@@ -34,11 +39,4 @@ const Template: StoryFn = () => {
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

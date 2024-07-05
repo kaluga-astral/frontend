@@ -1,6 +1,6 @@
 import { InfoFillSm } from '@astral/icons';
 import { Avatar } from '@mui/material';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -9,12 +9,31 @@ import { ListSubheader } from '../ListSubheader';
 
 import { ListItemAvatar } from './ListItemAvatar';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof ListItemAvatar> = {
   title: 'Components/List/ListItemAvatar',
   component: ListItemAvatar,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof ListItemAvatar>;
+
+export const Interaction: Story = {
+  args: {
+    children: <Avatar> <InfoFillSm /> </Avatar>,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
       <ListItem>
@@ -27,11 +46,4 @@ const Template: StoryFn = () => {
       </ListItem>
     </List>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

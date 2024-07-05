@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
@@ -8,12 +8,31 @@ import { ListItemText } from '../ListItemText';
 
 import { ListSubheader } from './ListSubheader';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof ListSubheader> = {
   title: 'Components/List/ListSubheader',
   component: ListSubheader,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof ListSubheader>;
+
+export const Interaction: Story = {
+  args: {
+    children: 'Subheader',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   return (
     <List subheader={<ListSubheader>Subheader</ListSubheader>}>
       <ListItem>
@@ -24,11 +43,4 @@ const Template: StoryFn = () => {
       </ListItem>
     </List>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

@@ -1,14 +1,32 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
-import { DateRangePicker, type DateRangePickerProps } from './index';
+import { DateRangePicker } from './index';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof DateRangePicker> = {
   title: 'Components/DatePickers/DateRangePicker',
   component: DateRangePicker,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof DateRangePicker>;
+
+export const Interaction: Story = {
+  args: {
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 const normalizedCurrentDate = buildIsoDate({
@@ -18,7 +36,7 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: StoryFn<DateRangePickerProps> = (args) => {
+const Template = (args) => {
   const [dateA, setDateA] = useState<Date | undefined>(
     args.startDateProps?.value,
   );
@@ -39,7 +57,29 @@ const Template: StoryFn<DateRangePickerProps> = (args) => {
   );
 };
 
-export const Showcase: StoryFn = () => (
+export const Example = Template.bind({});
+
+Example.args = {
+  startDateProps: {
+    inputProps: {
+      label: 'Дата начала:',
+      placeholder: 'Выберите дату',
+      error: false,
+      helperText: undefined,
+    },
+  },
+  endDateProps: {
+    inputProps: {
+      label: 'Дата окончания:',
+      placeholder: 'Выберите дату',
+      error: false,
+      helperText: undefined,
+    },
+  },
+  disabled: false,
+};
+
+export const Showcase = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template />
     <Template
@@ -99,29 +139,3 @@ export const Showcase: StoryFn = () => (
   </LegacyGrid>
 );
 
-export const Default = Template.bind({});
-
-Default.args = {
-  startDateProps: {
-    inputProps: {
-      label: 'Дата начала:',
-      placeholder: 'Выберите дату',
-      error: false,
-      helperText: undefined,
-    },
-  },
-  endDateProps: {
-    inputProps: {
-      label: 'Дата окончания:',
-      placeholder: 'Выберите дату',
-      error: false,
-      helperText: undefined,
-    },
-  },
-  disabled: false,
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};

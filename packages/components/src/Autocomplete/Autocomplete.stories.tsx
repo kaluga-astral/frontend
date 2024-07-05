@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Tooltip } from '../Tooltip';
@@ -49,6 +49,22 @@ const OPTIONS: IOption[] = [
 const Wrapper = styled.div`
   min-width: 300px;
 `;
+
+type Story = StoryObj<typeof Autocomplete>;
+
+export const Interaction: Story = {
+  args: {
+    options: OPTIONS,
+    label: "Выберите вариант",
+    placeholder: "Placeholder",
+    getOptionLabel: (params) => params.title,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => {
   const [val, setVal] = useState<IOption | null>(null);

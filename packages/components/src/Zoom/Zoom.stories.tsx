@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { Box, Paper, Switch } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { FormControlLabel } from '../FormControlLabel';
 
 import { Zoom } from './Zoom';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Zoom> = {
   title: 'Components/Transitions/Zoom',
   component: Zoom,
 };
+
+export default meta;
 
 const icon = (
   <Paper sx={{ m: 1 }} elevation={4}>
@@ -28,7 +34,21 @@ const icon = (
   </Paper>
 );
 
-const Template: StoryFn = () => {
+type Story = StoryObj<typeof Zoom>;
+
+export const Interaction: Story = {
+  args: {
+    children: icon,
+    in: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChange = () => {
@@ -52,11 +72,4 @@ const Template: StoryFn = () => {
       </Box>
     </Box>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };
