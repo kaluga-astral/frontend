@@ -1,9 +1,17 @@
 import { useMemo } from 'react';
+import { type SelectChangeEvent } from '@mui/material';
 
 import { Pagination } from '../Pagination';
 import { type PaginationProps } from '../Pagination';
+import { MenuItem } from '../MenuItem';
 
-import { PaginationWrapper, Range } from './styles';
+import {
+  PaginationWrapper,
+  Range,
+  RangeSelector,
+  RangeWrapper,
+  StyledSelect,
+} from './styles';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
@@ -18,13 +26,18 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    * Текущая страница
    */
   page: number;
+  /**
+   * Выбор количества записей на странице с помощью селектора
+   */
+  onSetCount?: (rowsPerPage: number) => void;
 };
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = 10,
+  rowsPerPage = 5,
   totalCount,
   className,
+  onSetCount,
   ...props
 }: DataGridPaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);
@@ -48,15 +61,43 @@ export const DataGridPagination = ({
 
     return rowsPerPage * page;
   }, [page, rowsPerPage, totalCount]);
-  const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
 
-  if (totalCount <= rowsPerPage) {
+  const formattedRange = useMemo(() => {
+    return `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
+  }, [rangeStart, rowsPerPage, rangeEnd]);
+
+  if (totalCount <= rowsPerPage && !onSetCount) {
     return null;
   }
 
+  const handleChangeRowsPerPage = (event: SelectChangeEvent<unknown>) => {
+    if (onSetCount) {
+      onSetCount(Number(event.target.value));
+    }
+  };
+
+  const OPTIONS: string[] = ['5', '10', '20', '25', '50', '100'];
+
   return (
     <PaginationWrapper className={className}>
-      <Range variant="h6">{formattedRange}</Range>
+      <RangeWrapper>
+        {onSetCount && (
+          <>
+            <RangeSelector variant="body1">Строк на странице:</RangeSelector>
+            <StyledSelect
+              value={rowsPerPage}
+              onChange={handleChangeRowsPerPage}
+            >
+              {OPTIONS.map((option) => (
+                <MenuItem value={option} key={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </StyledSelect>
+          </>
+        )}
+        <Range variant="h6">{formattedRange}</Range>
+      </RangeWrapper>
       <Pagination count={count} page={page} {...props} />
     </PaginationWrapper>
   );
