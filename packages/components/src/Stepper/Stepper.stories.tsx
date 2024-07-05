@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Grid, Step, StepContent, StepLabel, Stepper, Typography } from '..';
@@ -16,11 +16,35 @@ const meta: Meta<typeof Stepper> = {
 
 export default meta;
 
+type Story = StoryObj<typeof Stepper>;
+
+export const Interaction: Story = {
+  args: {
+    children: [
+      <Step>
+        <StepLabel>Step 1</StepLabel>
+      </Step>,
+      <Step>
+        <StepLabel>Step 2</StepLabel>
+      </Step>,
+      <Step>
+        <StepLabel>Step 3</StepLabel>
+      </Step>,
+    ],
+    activeStep: 1,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+/**
+ * Stepper default
+ */
 export const Example = () => (
   <Grid>
-    <Typography paragraph variant="h4">
-      Stepper default
-    </Typography>
     <Stepper activeStep={2}>
       <Step>
         <StepLabel>Completed</StepLabel>
@@ -38,11 +62,11 @@ export const Example = () => (
   </Grid>
 );
 
+/**
+ * Stepper со стрелочным коннектором
+ */
 export const Connector = () => (
   <Grid>
-    <Typography paragraph variant="h4">
-      Stepper со стрелочным коннектором
-    </Typography>
     <Stepper connector="arrow" activeStep={2}>
       <Step>
         <StepLabel>Completed</StepLabel>
@@ -60,11 +84,11 @@ export const Connector = () => (
   </Grid>
 );
 
+/**
+ * Stepper c альтернативным лэйблом
+ */
 export const AlternativeLabel = () => (
   <Grid>
-    <Typography paragraph variant="h4">
-      Stepper c альтернативным лэйблом
-    </Typography>
     <Stepper alternativeLabel activeStep={2}>
       <Step>
         <StepLabel>Completed</StepLabel>
@@ -82,11 +106,11 @@ export const AlternativeLabel = () => (
   </Grid>
 );
 
+/**
+ * Вертикальный Stepper(все элементы активны)
+ */
 export const Orientation = () => (
   <Grid>
-    <Typography paragraph variant="h4">
-      Вертикальный Stepper(все элементы активны)
-    </Typography>
     <Stepper orientation={'vertical'} activeStep={4}>
       <Step active={true}>
         <StepLabel>Completed</StepLabel>
@@ -119,6 +143,9 @@ const ButtonsWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(3, 10, 0, 10)};
 `;
 
+/**
+ * Stepper c переключением шагов(все шаги завершены)
+ */
 export const TransitionStepByStep = () => {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -143,9 +170,6 @@ export const TransitionStepByStep = () => {
 
   return (
     <Grid>
-      <Typography paragraph variant="h4">
-        Stepper c переключением шагов(все шаги завершены)
-      </Typography>
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((item, index) => (
           <Step key={index} completed={true}>
