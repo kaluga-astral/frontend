@@ -12,10 +12,6 @@ import { ListSubheader } from '../ListSubheader';
 
 import { ListItemButton } from './ListItemButton';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItemButton> = {
   title: 'Components/List/ListItemButton',
   component: ListItemButton,

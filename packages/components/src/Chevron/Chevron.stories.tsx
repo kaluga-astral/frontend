@@ -5,10 +5,6 @@ import { Button } from '../Button';
 
 import { Chevron } from './Chevron';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof Chevron> = {
   title: 'Components/Chevron',
   component: Chevron,
@@ -19,8 +15,7 @@ export default meta;
 type Story = StoryObj<typeof Chevron>;
 
 export const Interaction: Story = {
-  args: {
-  },
+  args: {},
   parameters: {
     docs: {
       disable: true,
@@ -38,4 +33,3 @@ export const Example = () => {
     </>
   );
 };
-

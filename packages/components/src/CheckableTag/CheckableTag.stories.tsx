@@ -7,7 +7,7 @@ import { TagBadge, type TagBadgeProps } from '../TagBadge';
 import { CheckableTag } from './CheckableTag';
 
 /**
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=427-5580&t=NrGSkPDdR1WstBqT-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof CheckableTag> = {
@@ -32,7 +32,7 @@ export const Interaction: Story = {
   },
 };
 
-export const ShowcaseColor = () => {
+export const Example = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = (event: ChangeEvent<HTMLInputElement>) =>
@@ -87,4 +87,3 @@ export const ShowcaseColor = () => {
     </Stack>
   );
 };
-

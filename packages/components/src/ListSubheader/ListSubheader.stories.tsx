@@ -8,10 +8,6 @@ import { ListItemText } from '../ListItemText';
 
 import { ListSubheader } from './ListSubheader';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListSubheader> = {
   title: 'Components/List/ListSubheader',
   component: ListSubheader,

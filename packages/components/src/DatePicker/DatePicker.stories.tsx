@@ -1,13 +1,13 @@
-import { type Meta, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryFn, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
-import { DatePicker } from './index';
+import { DatePicker, type DatePickerProps } from './index';
 
 /**
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=735-12817&t=NdgfZ0Hm3cEsi2ev-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DatePicker> = {
@@ -20,8 +20,7 @@ export default meta;
 type Story = StoryObj<typeof DatePicker>;
 
 export const Interaction: Story = {
-  args: {
-  },
+  args: {},
   parameters: {
     docs: {
       disable: true,
@@ -39,18 +38,22 @@ const normalizedCurrentDate = buildIsoDate({
 export const Example = () => {
   const [date, setDate] = useState<Date | undefined>();
 
-  return <DatePicker 
-    inputProps={{
-      label: 'Дата начала:', 
-      error: false, 
-      helperText: undefined, 
-      placeholder: 'Выберите дату'}} 
-    disabled={false}
-    value={date} 
-    onChange={setDate} />;
+  return (
+    <DatePicker
+      inputProps={{
+        label: 'Дата начала:',
+        error: false,
+        helperText: undefined,
+        placeholder: 'Выберите дату',
+      }}
+      disabled={false}
+      value={date}
+      onChange={setDate}
+    />
+  );
 };
 
-const Template = (props) => {
+const Template: StoryFn<DatePickerProps> = (props) => {
   const [date, setDate] = useState<Date | undefined>();
 
   return <DatePicker value={date} onChange={setDate} {...props} />;

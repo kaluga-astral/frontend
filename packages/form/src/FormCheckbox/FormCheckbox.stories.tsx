@@ -58,35 +58,35 @@ export const Example = () => {
   });
 
   return (
-      <FormStoryContainer form={form}>
-        <FormCheckbox
-          control={form.control}
-          name="fieldName1"
-          title={
-            <>
-              Lorem ipsum dolor sit amet <a href="/">some link in label</a>{' '}
-              lorem ipsum
-            </>
-          }
-        />
-        <FormCheckbox
-          control={form.control}
-          name="fieldName2"
-          title="Form checkbox field"
-        />
-        <FormCheckbox
-          control={form.control}
-          name="fieldName3"
-          title="Required field with helper text"
-        />
-        <FormCheckbox
-          control={form.control}
-          hideHelperText
-          name="fieldName4"
-          title="Required field with tooltip"
-        />
-        <FormSubmitButton>Submit</FormSubmitButton>
-      </FormStoryContainer>
+    <FormStoryContainer form={form}>
+      <FormCheckbox
+        control={form.control}
+        name="fieldName1"
+        title={
+          <>
+            Lorem ipsum dolor sit amet <a href="/">some link in label</a>
+            lorem ipsum
+          </>
+        }
+      />
+      <FormCheckbox
+        control={form.control}
+        name="fieldName2"
+        title="Form checkbox field"
+      />
+      <FormCheckbox
+        control={form.control}
+        name="fieldName3"
+        title="Required field with helper text"
+      />
+      <FormCheckbox
+        control={form.control}
+        hideHelperText
+        name="fieldName4"
+        title="Required field with tooltip"
+      />
+      <FormSubmitButton>Submit</FormSubmitButton>
+    </FormStoryContainer>
   );
 };
 
@@ -108,26 +108,26 @@ export const Validation = () => {
   }, [form.trigger]);
 
   return (
-  <FormStoryContainer form={form}>
-    <LegacyGrid
-      container
-      justifyContent="center"
-      autoFlow="column"
-      spacing={4}
-    >
-      <FormCheckbox
-        control={form.control}
-        name="check1"
-        title="Текст"
-        hideHelperText
-      />
-      <FormCheckbox
-        control={form.control}
-        isError
-        name="check2"
-        title="Текст"
-      />
-    </LegacyGrid>
-  </FormStoryContainer>
-  )
-}
+    <FormStoryContainer form={form}>
+      <LegacyGrid
+        container
+        justifyContent="center"
+        autoFlow="column"
+        spacing={4}
+      >
+        <FormCheckbox
+          control={form.control}
+          name="check1"
+          title="Текст"
+          hideHelperText
+        />
+        <FormCheckbox
+          control={form.control}
+          isError
+          name="check2"
+          title="Текст"
+        />
+      </LegacyGrid>
+    </FormStoryContainer>
+  );
+};

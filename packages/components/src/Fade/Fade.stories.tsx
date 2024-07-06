@@ -7,10 +7,6 @@ import { FormControlLabel } from '../FormControlLabel';
 
 import { Fade } from './Fade';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof Fade> = {
   title: 'Components/Fade',
   component: Fade,

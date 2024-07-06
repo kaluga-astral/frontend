@@ -10,10 +10,6 @@ import { ListSubheader } from '../ListSubheader';
 
 import { ListItem } from './ListItem';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItem> = {
   title: 'Components/List/ListItem',
   component: ListItem,

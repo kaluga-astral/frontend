@@ -7,10 +7,6 @@ import { FormControlLabel } from '../FormControlLabel';
 
 import { Zoom } from './Zoom';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof Zoom> = {
   title: 'Components/Transitions/Zoom',
   component: Zoom,

@@ -7,10 +7,6 @@ import { ListItemText } from '../ListItemText';
 
 import { ListItemIcon } from './ListItemIcon';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItemIcon> = {
   title: 'Components/List/ListItemIcon',
   component: ListItemIcon,

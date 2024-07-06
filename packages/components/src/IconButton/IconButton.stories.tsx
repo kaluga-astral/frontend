@@ -31,9 +31,14 @@ export default meta;
 type Story = StoryObj<typeof IconButton>;
 
 export const Interaction: Story = {
-  args: {
-    children: <PrintOutlineMd />,
+  render: (args) => {
+    return (
+      <IconButton {...args}>
+        <PrintOutlineMd />
+      </IconButton>
+    );
   },
+  args: {},
   parameters: {
     docs: {
       disable: true,

@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj} from '@storybook/react';
-import { Box, Paper} from '@mui/material';
+import { type Meta, type StoryObj } from '@storybook/react';
+import { Box, Paper } from '@mui/material';
 import { type ChangeEvent, useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -15,11 +15,7 @@ import { Checkbox } from './Checkbox';
 /**
  * Checkbox — это элемент графического пользовательского интерфейса, позволяющий пользователю управлять параметром с двумя состояниями — ☑ включено и ☐ отключено.
  *
- * Компонент полезен в использовании для следующих сценариев:
- *  - Когда необходимо выбрать один или несколько элементов из набора.
- *  - Когда необходимо включить/выключить какие-то опции.
- * 
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=322-5837&t=NrGSkPDdR1WstBqT-0)
  * ### [Guide]()
  */
 
@@ -49,6 +45,7 @@ export const Interaction: Story = {
 export const Example = () => {
   const [loading, setLoading] = useState(false);
   const handleClick = () => setLoading(true);
+
   return (
     <Paper style={{ width: 500 }}>
       <DialogTitle>Форма обратной связи</DialogTitle>
@@ -77,7 +74,7 @@ export const Example = () => {
 /**
  * Базовый вид компонента.
  */
-export const Checkbox_Basic = () => (
+export const CheckboxBasic = () => (
   <>
     <Checkbox />
     <Checkbox disabled />
@@ -88,7 +85,7 @@ export const Checkbox_Basic = () => (
 /**
  * Обычно чекбокс используется с текстом, к которому он относится.
  */
-export const Checkbox_Label = () => (
+export const CheckboxLabel = () => (
   <>
     <FormControlLabel control={<Checkbox />} label="Текст" />
     <FormControlLabel control={<Checkbox disabled />} label="Текст" />
@@ -116,34 +113,31 @@ export const Indeterminate = () => {
   };
 
   return (
-  <>
-    <div>
-      <FormControlLabel
-        label="Заголовок"
-        control={
-          <Checkbox
-            checked={checked[0] && checked[1]}
-            indeterminate={checked[0] !== checked[1]}
-            onChange={handleChange1}
+    <>
+      <div>
+        <FormControlLabel
+          label="Заголовок"
+          control={
+            <Checkbox
+              checked={checked[0] && checked[1]}
+              indeterminate={checked[0] !== checked[1]}
+              onChange={handleChange1}
+            />
+          }
+        />
+        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+          <FormControlLabel
+            label="Вариант 1"
+            control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
           />
-        }
-      />
-      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-        <FormControlLabel
-          label="Вариант 1"
-          control={
-            <Checkbox checked={checked[0]} onChange={handleChange2} />
-          }
-        />
-        <FormControlLabel
-          label="Вариант 2"
-          control={
-            <Checkbox checked={checked[1]} onChange={handleChange3} />
-          }
-        />
-      </Box>
-    </div>
-  </>
+          <FormControlLabel
+            label="Вариант 2"
+            control={<Checkbox checked={checked[1]} onChange={handleChange3} />
+}
+          />
+        </Box>
+      </div>
+    </>
   );
 };
 
@@ -152,10 +146,7 @@ export const Indeterminate = () => {
  */
 export const Error = () => (
   <>
-    <FormControlLabel
-      control={<Checkbox isError={true} />}
-      label="Текст"
-    />
+    <FormControlLabel control={<Checkbox isError={true} />} label="Текст" />
     <FormControlLabel
       control={<Checkbox checked isError={true} />}
       label="Текст"

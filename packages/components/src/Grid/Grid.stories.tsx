@@ -9,7 +9,7 @@ import { Grid } from './Grid';
 /**
  * Grid предназначен для группировки элементов в обоих направлениях.
  *
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=41-33&t=h03SfwalY0oSqRCX-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof Grid> = {
@@ -35,7 +35,11 @@ export const Interaction: Story = {
     container: true,
     rows: 2,
     rowSpacing: 3,
-    children: (<><Typography>Item 1</Typography> <Typography>Item 2</Typography></>),
+    children: (
+      <>
+        <Typography>Item 1</Typography> <Typography>Item 2</Typography>
+      </>
+    ),
   },
   parameters: {
     docs: {

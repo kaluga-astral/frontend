@@ -11,7 +11,7 @@ import { Chevron } from '../Chevron';
 import { Collapse } from './Collapse';
 
 /**
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=1419-36705&t=yQqm76BDLLq6X8aL-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof Collapse> = {

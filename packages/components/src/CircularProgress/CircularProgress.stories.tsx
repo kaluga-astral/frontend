@@ -25,8 +25,7 @@ const meta: Meta<typeof CircularProgress> = {
 type Story = StoryObj<typeof CircularProgress>;
 
 export const Interaction: Story = {
-  args: {
-  },
+  args: {},
   parameters: {
     docs: {
       disable: true,

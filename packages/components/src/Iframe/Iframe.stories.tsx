@@ -10,9 +10,6 @@ import { Iframe } from './Iframe';
 
 /**
  * Iframe позволяет отображать контент из указанного URL.
- *
- * ### [Figma]()
- * ### [Guide]()
  */
 const meta: Meta<typeof Iframe> = {
   title: 'Components/Iframe',
@@ -25,7 +22,7 @@ type Story = StoryObj<typeof Iframe>;
 
 export const Interaction: Story = {
   args: {
-    src: "https://www.youtube.com/embed/k85mRPqvMbE",
+    src: 'https://www.youtube.com/embed/k85mRPqvMbE',
   },
   parameters: {
     docs: {

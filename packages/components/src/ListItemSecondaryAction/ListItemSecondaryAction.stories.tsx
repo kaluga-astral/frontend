@@ -8,10 +8,6 @@ import { ListItemText } from '../ListItemText';
 
 import { ListItemSecondaryAction } from './ListItemSecondaryAction';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItemSecondaryAction> = {
   title: 'Components/List/ListItemSecondaryActionItem',
   component: ListItemSecondaryAction,

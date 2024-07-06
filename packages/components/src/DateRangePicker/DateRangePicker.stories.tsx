@@ -1,13 +1,13 @@
-import { type Meta, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryFn, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
 import { addDays, buildIsoDate } from '../utils/date';
 
-import { DateRangePicker } from './index';
+import { DateRangePicker, type DateRangePickerProps } from './index';
 
 /**
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=735-12817&t=NdgfZ0Hm3cEsi2ev-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DateRangePicker> = {
@@ -20,8 +20,7 @@ export default meta;
 type Story = StoryObj<typeof DateRangePicker>;
 
 export const Interaction: Story = {
-  args: {
-  },
+  args: {},
   parameters: {
     docs: {
       disable: true,
@@ -36,7 +35,7 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template = (args) => {
+const Template: StoryFn<DateRangePickerProps> = (args) => {
   const [dateA, setDateA] = useState<Date | undefined>(
     args.startDateProps?.value,
   );
@@ -138,4 +137,3 @@ export const Showcase = () => (
     />
   </LegacyGrid>
 );
-

@@ -33,7 +33,7 @@ const renderRows = (count: number) => {
 
 /**
  * BottomDrawer является основой для построения мобильных компонентов. Не предназначен для прямого использования в продуктах.
- * 
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=20192-40447&mode=design&t=cmCv26DJElzmOGya-0)
  * ### [Guide]()
  */
@@ -48,7 +48,7 @@ type Story = StoryObj<typeof BottomDrawer>;
 
 export const Interaction: Story = {
   args: {
-    title: "Заголовок",
+    title: 'Заголовок',
     open: true,
   },
   parameters: {

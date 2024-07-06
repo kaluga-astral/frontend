@@ -9,10 +9,6 @@ import { ListSubheader } from '../ListSubheader';
 
 import { ListItemAvatar } from './ListItemAvatar';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItemAvatar> = {
   title: 'Components/List/ListItemAvatar',
   component: ListItemAvatar,
@@ -24,7 +20,11 @@ type Story = StoryObj<typeof ListItemAvatar>;
 
 export const Interaction: Story = {
   args: {
-    children: <Avatar> <InfoFillSm /> </Avatar>,
+    children: (
+      <Avatar>
+        <InfoFillSm />
+      </Avatar>
+    ),
   },
   parameters: {
     docs: {

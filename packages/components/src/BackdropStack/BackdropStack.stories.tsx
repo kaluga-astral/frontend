@@ -11,11 +11,6 @@ import { useBackdropStackToggle } from '../BackdropStack';
 import { DatePicker } from '../DatePicker';
 import { styled } from '../styles';
 
-/**
- *
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta = {
   title: 'Components/BackdropStack',
 };

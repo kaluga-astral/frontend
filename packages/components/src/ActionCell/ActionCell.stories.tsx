@@ -61,6 +61,11 @@ const ACTIONS: Actions<DataType> = {
   secondary: SECONDARY_ACTIONS,
 };
 
+const INTERACTION_ACTIONS: Actions<unknown> = {
+  main: MAIN_ACTIONS,
+  secondary: SECONDARY_ACTIONS,
+};
+
 const ACTIONS_WITHOUT_SECONDARY: Actions<DataType> = {
   main: MAIN_ACTIONS,
 };
@@ -87,7 +92,7 @@ type Story = StoryObj<typeof ActionCell>;
 
 export const Interaction: Story = {
   args: {
-    actions: ACTIONS,
+    actions: INTERACTION_ACTIONS,
   },
   parameters: {
     docs: {
@@ -113,12 +118,7 @@ export const Example = () => {
   ];
 
   return (
-    <DataGrid
-      rows={data}
-      columns={columns}
-      keyId="id"
-      onSort={() => {}}
-    />
+    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
   );
 };
 
@@ -141,11 +141,6 @@ export const OnlyMainActions = () => {
   ];
 
   return (
-    <DataGrid
-      rows={data}
-      columns={columns}
-      keyId="id"
-      onSort={() => {}}
-    />
+    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
   );
 };

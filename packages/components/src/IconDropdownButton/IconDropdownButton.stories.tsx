@@ -3,23 +3,14 @@ import { Stack } from '@mui/material';
 import { DotsVOutlineMd, EditOutlineMd } from '@astral/icons';
 
 import { MenuItem } from '../MenuItem';
-import { Typography } from '../Typography';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
 import { DataGrid, type DataGridColumns } from '../DataGrid';
 import { IconButton } from '../IconButton';
-import { styled } from '../styles';
-import { Paper } from '../Paper';
 
 import { IconDropdownButton } from './IconDropdownButton';
 
-const PaperWrapper = styled(Paper)`
-  width: 70%;
-  padding: ${({ theme }) => theme.spacing(6)};
-`;
-
 /**
  * IconDropdownButton - позволяет компактно разместить несколько вариантов действия в одном элементе. В большинстве случаев в качестве такого элемента выступает кнопка или пункт меню. Вызывается по клику или наведению на элемент.
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=94-0&t=h03SfwalY0oSqRCX-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof IconDropdownButton> = {
@@ -187,7 +178,7 @@ export const Text = () => (
 /**
  * Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.
  */
-export const Button_Size = () => (
+export const ButtonSize = () => (
   <>
     <IconDropdownButton
       variant="light"

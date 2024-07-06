@@ -14,10 +14,6 @@ import { IconButton } from '../IconButton';
 
 import { List } from './List';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof List> = {
   title: 'Components/List',
   component: List,
@@ -29,7 +25,11 @@ type Story = StoryObj<typeof List>;
 
 export const Interaction: Story = {
   args: {
-    children: (<><ListItem>Item 1</ListItem> <ListItem>Item 2</ListItem></>),
+    children: (
+      <>
+        <ListItem>Item 1</ListItem> <ListItem>Item 2</ListItem>
+      </>
+    ),
   },
   parameters: {
     docs: {

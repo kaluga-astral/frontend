@@ -50,14 +50,14 @@ const Wrapper = styled.div`
   min-width: 300px;
 `;
 
-type Story = StoryObj<typeof Autocomplete>;
+type Story = StoryObj<typeof Autocomplete<IOption, false, false, false>>;
 
 export const Interaction: Story = {
   args: {
     options: OPTIONS,
-    label: "Выберите вариант",
-    placeholder: "Placeholder",
-    getOptionLabel: (params) => params.title,
+    label: 'Выберите вариант',
+    placeholder: 'Placeholder',
+    getOptionLabel: (params: IOption) => params.title,
   },
   parameters: {
     docs: {

@@ -7,10 +7,6 @@ import { FormControlLabel } from '../FormControlLabel';
 
 import { Grow } from './Grow';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof Grow> = {
   title: 'Components/Transitions/Grow',
   component: Grow,

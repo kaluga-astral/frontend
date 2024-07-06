@@ -16,7 +16,7 @@ import { FeedbackPanel } from './FeedbackPanel';
 
 /**
  * FeedbackPanel позволяет собирать обратную связь от пользователей о продукте.
- * 
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=21898-85561&mode=design&t=6jE4Wj4m0ijKFVSo-0)
  * ### [Guide]()
  */
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof FeedbackPanel>;
 export const Interaction: Story = {
   args: {
     isOpen: true,
-    question: "Вам было сложно получить электронную подпись?",
+    question: 'Вам было сложно получить электронную подпись?',
     successImgSrc: mailIllustration,
     textFieldProps: {
       placeholder: 'Что оказалось сложным, а что удобным?',

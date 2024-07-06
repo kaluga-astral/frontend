@@ -5,10 +5,6 @@ import { ListItem } from '../ListItem';
 
 import { ListItemText } from './ListItemText';
 
-/**
- * ### [Figma]()
- * ### [Guide]()
- */
 const meta: Meta<typeof ListItemText> = {
   title: 'Components/List/ListItemText',
   component: ListItemText,
@@ -20,7 +16,7 @@ type Story = StoryObj<typeof ListItemText>;
 
 export const Interaction: Story = {
   args: {
-    primary: "Text",
+    primary: 'Text',
   },
   parameters: {
     docs: {

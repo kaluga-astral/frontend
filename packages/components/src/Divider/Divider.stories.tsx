@@ -8,7 +8,7 @@ import { ListItem } from '../ListItem';
 import { Divider } from './Divider';
 
 /**
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=578-20865&t=NdgfZ0Hm3cEsi2ev-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof Divider> = {
