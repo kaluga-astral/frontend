@@ -3,7 +3,7 @@ import { Typography } from '../Typography';
 
 export const StyledTypography = styled(Typography)`
   max-width: 100%;
-  margin: 0 ${({ theme }) => theme.spacing(3)} 0 0;
+  margin-right: ${({ theme }) => theme.spacing(3)};
 
   white-space: nowrap;
 `;

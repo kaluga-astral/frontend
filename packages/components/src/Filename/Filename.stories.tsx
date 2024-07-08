@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { styled } from '../styles/styled';
-import { Grid } from '../Grid';
 
 import { Filename } from './Filename';
 
@@ -33,50 +32,51 @@ export const Interaction: Story = {
   },
 };
 
-const GridWrapper = styled(Grid)`
-  justify-content: center;
+const GridWrapper = styled.div`
+  max-width: 400px;
+  margin: 0 auto 10px;
 `;
 
 export const LongFileName = () => {
   return (
-    <div style={{ maxWidth: '400px' }}>
+    <GridWrapper>
       <Filename>
         Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
         25.04.2024.pdf
       </Filename>
-    </div>
+    </GridWrapper>
   );
 };
 
 export const ShortFileName = () => {
   return (
-    <div style={{ maxWidth: '400px' }}>
+    <GridWrapper>
       <Filename>Приложение №10.pdf</Filename>
-    </div>
+    </GridWrapper>
   );
 };
 
 export const ComplexFileExtension = () => {
   return (
-    <GridWrapper rowSpacing={3}>
-      <div style={{ maxWidth: '400px' }}>
+    <div>
+      <GridWrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.xml.dist
         </Filename>
-      </div>
-      <div style={{ maxWidth: '400px' }}>
+      </GridWrapper>
+      <GridWrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.tar.xz
         </Filename>
-      </div>
-      <div style={{ maxWidth: '400px' }}>
+      </GridWrapper>
+      <GridWrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.xml.orig
         </Filename>
-      </div>
-    </GridWrapper>
+      </GridWrapper>
+    </div>
   );
 };

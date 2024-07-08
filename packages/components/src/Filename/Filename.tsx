@@ -2,14 +2,17 @@ import { forwardRef } from 'react';
 
 import { type TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 import { type TypographyProps } from '../Typography';
-import { useOverflowed } from '../OverflowTypography/hooks';
 
 import { StyledTypography } from './styles';
-import { useLogic } from './hooks';
+import { useLogic } from './useLogic';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
-type TooltipCustomizable = {
+export type FileNameProps = TypographyProps & {
+  /**
+   * Название файла
+   */
+  children: string;
   /**
    * Cпособ кастомизировать тултип при необходимости
    * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
@@ -17,27 +20,15 @@ type TooltipCustomizable = {
   tooltipProps?: Omit<TooltipProps, 'children'>;
 };
 
-type FileElementProps = TooltipCustomizable & TypographyProps;
-
-export type FileNameProps = FileElementProps & {
-  /**
-   * Название файла
-   */
-  children: string;
-};
-
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
   ({ tooltipProps, children, ...props }, forwardedRef) => {
-    const { ref } = useOverflowed(forwardedRef);
-    const truncatedChildren = useLogic(children, ref);
+    const { typographyProps, isTruncated } = useLogic(
+      children,
+      forwardedRef,
+      props,
+    );
 
-    const typographyProps = {
-      ...props,
-      ref,
-      children: truncatedChildren,
-    };
-
-    if (truncatedChildren !== children) {
+    if (isTruncated) {
       return (
         <Tooltip title={children} disableInteractive {...tooltipProps}>
           <StyledTypography {...typographyProps} />
