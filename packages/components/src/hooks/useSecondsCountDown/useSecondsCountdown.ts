@@ -23,7 +23,7 @@ type UseSecondsCountdownResult = {
 };
 
 /**
- *  Хук, предоставляющий функционал с текстом убывающего времени
+ *  Хук, предоставляющий функционал с текстом убывающих секунд
  */
 export const useSecondsCountdown = ({
   targetDate,

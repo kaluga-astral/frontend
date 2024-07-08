@@ -29,7 +29,7 @@ export type SecondsCountdownParams = {
 };
 
 /**
- * вспомогательный класс, предоставляющий функционал с текстом убывающего времени
+ * вспомогательный класс, предоставляющий функционал с текстом убывающих секунд
  */
 export class SecondsCountdown {
   private timer = 0 as unknown as ReturnType<typeof setTimeout>;

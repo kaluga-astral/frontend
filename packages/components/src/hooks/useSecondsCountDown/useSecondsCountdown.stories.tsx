@@ -7,7 +7,7 @@ import { Grid } from '../../Grid';
 import { useSecondsCountdown } from './useSecondsCountdown';
 
 /**
- * useSecondsCountdown предназначен для создания счетчика секунд
+ * useSecondsCountdown предоставляет функционал с текстом убывающих секунд
  *
  * ### [Figma]()
  * ### [Guide]()
