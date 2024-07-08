@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { ProgressBar } from './ProgressBar';
 
@@ -13,6 +13,19 @@ import { ProgressBar } from './ProgressBar';
 const meta: Meta<typeof ProgressBar> = {
   title: 'Components/ProgressBar',
   component: ProgressBar,
+};
+
+type Story = StoryObj<typeof ProgressBar>;
+
+export const Interaction: Story = {
+  args: {
+    value: 33,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 export default meta;
