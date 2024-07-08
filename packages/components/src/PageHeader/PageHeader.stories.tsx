@@ -428,6 +428,16 @@ export default meta;
 const Wrapper = styled.div`
   width: 100%;
   padding-block: ${({ theme }) => theme.spacing(5)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    min-height: 48px;
+    padding-top: ${({ theme }) => theme.spacing(4)};
+    overflow-wrap: break-word;
+    background-color: ${({ theme }) => theme.palette.grey[100]};
+`;
+
+const StyledTypography = styled(Typography)`
+  min-height: 100px;
 `;
 
 export const Example = () => (
@@ -468,10 +478,10 @@ export const CustomTitle = () => (
   <Wrapper>
     <PageHeader
       title={
-        <Typography variant="inherit">
+        <StyledTypography variant="inherit">
           Очень длинный заголовок черновика, который не будет отображаться в
           одну строку
-        </Typography>
+        </StyledTypography>
       }
       actions={{
         main: [
@@ -492,10 +502,12 @@ export const FileExtension = () => (
   <Wrapper>
     <PageHeader
       title={
-        <Filename variant="inherit">
-          Приложение 10. К ТФ договора Ген.подряда на проектирование и
-          проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
-        </Filename>
+        <div style={{ minHeight: '100px' }}>
+          <Filename variant="inherit">
+            Приложение 10. К ТФ договора Ген.подряда на проектирование и
+            проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
+          </Filename>
+        </div>
       }
       actions={{
         main: [
