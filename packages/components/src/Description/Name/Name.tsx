@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 import { Typography, type TypographyProps } from '../../Typography';
 import { DescriptionContext } from '../DescriptionContext';
+import { useViewportType } from '../../hooks/useViewportType';
 
 import { DashedSeparator, Wrapper } from './styles';
 
@@ -13,6 +14,7 @@ export const Name = ({
   ...props
 }: NameProps) => {
   const { leader, separator } = useContext(DescriptionContext);
+  const { isMobile } = useViewportType();
 
   return (
     <>
@@ -22,7 +24,7 @@ export const Name = ({
           {!leader && separator}
         </Typography>
       </Wrapper>
-      {leader && <DashedSeparator />}
+      {leader && !isMobile && <DashedSeparator />}
     </>
   );
 };
