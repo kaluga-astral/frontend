@@ -38,11 +38,11 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = 10,
+  rowsPerPage = 20,
   totalCount,
   className,
   onSetCount,
-  selectOptions = [5, 10, 20, 25, 50, 100],
+  selectOptions = [20, 50, 100],
   ...props
 }: DataGridPaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);

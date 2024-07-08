@@ -53,7 +53,7 @@ const generateData = (
   options?: DataGridRowOptions,
 ): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
-  const DATA_ARRAY_LENGTH = 16;
+  const DATA_ARRAY_LENGTH = 36;
 
   return Array.from({ length: DATA_ARRAY_LENGTH })
     .fill(dataObjTemplate)
@@ -348,7 +348,7 @@ export const WithPagination = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice((page - 1) * 10, page * 10));
+      setSlicedData(data.slice((page - 1) * 20, page * 20));
       setLoading(false);
     }, 1500);
   }, []);
@@ -378,6 +378,7 @@ export const WithPagination = () => {
       Footer={
         <DataGridPagination
           totalCount={data.length}
+          rowsPerPage={10}
           onChange={handleChangePage}
           page={page}
         />
@@ -818,6 +819,7 @@ export const WithCheckbox = () => {
       onSelectRow={handleSelect}
       Footer={
         <DataGridPagination
+          rowsPerPage={10}
           totalCount={data.length}
           onChange={handleChangePage}
           page={page}
