@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   AddOutlineMd,
   CompanyOutlineMd,
@@ -187,7 +187,79 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const PageHeaderDashboardStory = () => {
+/**
+ * **PageHeader** — вводная часть страницы, состоит из группы вводных или навигационных элементов.<br>
+ * Данный компонент является составным. В него входят: **Header** и **Subheader**.
+ *
+ * **Header**<br>
+ * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
+ *
+ * **Subheader**<br>
+ * “Второй” заголовок на странице.<br>
+ * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof PageHeader> = {
+  title: 'Components/PageLayout/PageHeader',
+  component: PageHeader,
+};
+
+export default meta;
+
+const Wrapper = styled.div`
+  width: 100%;
+  padding-block: ${({ theme }) => theme.spacing(5)};
+`;
+
+type Story = StoryObj<typeof PageHeader>;
+
+export const Interaction: Story = {
+  args: {
+    title: 'PageHeader',
+    description: 'PageHeader description',
+    subheader: (
+      <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+        <TextField
+          placeholder="Поиск"
+          defaultValue="PageHeader subheader"
+          size="small"
+          InputProps={{
+            startAdornment: <SearchOutlineMd />,
+          }}
+        />
+        <Select value="" placeholder="Выберите вариант" size="small" />
+        <Select value="" placeholder="Выберите вариант" size="small" />
+      </Stack>
+    ),
+    actions: {
+      main: [
+        { text: 'main action 1', startIcon: <AddOutlineMd /> },
+        { text: 'main action 2', color: 'error' },
+      ],
+      secondary: [
+        { text: 'secondary action 1' },
+        { text: 'secondary action 2' },
+      ],
+    },
+    breadcrumbs: [
+      <Fragment key="1">1 breadcrumb</Fragment>,
+      <Fragment key="2">2 breadcrumb</Fragment>,
+      <Fragment key="3">3 breadcrumb</Fragment>,
+    ],
+    backButton: {
+      onClick: () => console.log('backButton clicked'),
+    },
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));
@@ -403,51 +475,6 @@ export const PageHeaderDashboardStory = () => {
   );
 };
 
-/**
- * **PageHeader** — вводная часть страницы, состоит из группы вводных или навигационных элементов.<br>
- * Данный компонент является составным. В него входят: **Header** и **Subheader**.
- *
- * **Header**<br>
- * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
- *
- * **Subheader**<br>
- * “Второй” заголовок на странице.<br>
- * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
- *
- * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
- * ### [Guide]()
- */
-const meta: Meta<typeof PageHeader> = {
-  title: 'Components/PageLayout/PageHeader',
-  component: PageHeader,
-};
-
-export default meta;
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding-block: ${({ theme }) => theme.spacing(5)};
-`;
-
-export const Example = () => (
-  <Wrapper>
-    <PageHeader
-      title="Черновик"
-      actions={{
-        main: [
-          { text: 'действие 1', startIcon: <AddOutlineMd /> },
-          { text: 'действие 2', color: 'error' },
-        ],
-        secondary: [
-          { text: 'Второстепенное действие 1' },
-          { text: 'Второстепенное действие 2' },
-        ],
-      }}
-      backButton={{}}
-    />
-  </Wrapper>
-);
-
 export const Default = () => (
   <Wrapper>
     <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
@@ -610,8 +637,8 @@ export const Subheader = () => (
 );
 
 /** Пример использования  */
-export const Usage = () => (
-  <Wrapper>
-    <PageHeaderDashboardStory />
-  </Wrapper>
-);
+// export const Usage = () => (
+//   <Wrapper>
+//     <PageHeaderDashboardStory />
+//   </Wrapper>
+// );
