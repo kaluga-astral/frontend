@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 import {
   CompanyOutlineMd,
@@ -16,10 +16,72 @@ import { OverflowTypography } from '../OverflowTypography';
 
 import { Profile } from './Profile';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=17119-17523)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof Profile> = {
   title: 'Components/Profile',
   component: Profile,
-} as Meta<typeof Profile>;
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Profile>;
+
+export const Interaction: Story = {
+  args: {
+    displayName: 'Иванов Иван',
+    annotation: 'ivanov_ivan@mail.ru',
+    avatar: {
+      alt: 'Иванов Иван',
+      children: 'ИИ',
+    },
+    menu: (props) => (
+      <Menu {...props}>
+        <MenuItem>
+          <ListItemIcon>
+            <ProfileOutlineMd />
+          </ListItemIcon>
+          <ListItemText>
+            <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+          </ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <CompanyOutlineMd />
+          </ListItemIcon>
+          <ListItemText>
+            <OverflowTypography noWrap>Мои организации</OverflowTypography>
+          </ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <SettingsFillMd />
+          </ListItemIcon>
+          <ListItemText>
+            <OverflowTypography noWrap>Настройки</OverflowTypography>
+          </ListItemText>
+        </MenuItem>
+        <Divider />
+        <MenuItem>
+          <ListItemIcon>
+            <QuitOutlineMd />
+          </ListItemIcon>
+          <ListItemText>
+            <OverflowTypography noWrap>Выйти</OverflowTypography>
+          </ListItemText>
+        </MenuItem>
+      </Menu>
+    ),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Showcase = () => {
   return (
