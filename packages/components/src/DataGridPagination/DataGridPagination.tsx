@@ -1,17 +1,11 @@
-import { useMemo } from 'react';
-import { type SelectChangeEvent } from '@mui/material';
-
 import { Pagination } from '../Pagination';
 import { type PaginationProps } from '../Pagination';
 import { MenuItem } from '../MenuItem';
+import { Typography } from '../Typography';
 
-import {
-  PaginationWrapper,
-  Range,
-  RangeSelector,
-  RangeWrapper,
-  StyledSelect,
-} from './styles';
+import { PaginationWrapper, Range, RangeWrapper, StyledSelect } from './styles';
+import { useLogic } from './useLogic';
+import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTION } from './constants';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
@@ -27,71 +21,44 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    */
   page: number;
   /**
-   * Выбор количества записей на странице с помощью селектора
+   * Коллбэк для установки количества отображаемых элементов на странице
    */
-  onSetCount?: (rowsPerPage: number) => void;
+  onSetCountPerPage?: (rowsPerPage: number) => void;
   /**
-   * Массив значений селектора
+   * Конфигурация списка кол-ва элементов, отображаемых на одной странице
    */
-  selectOptions?: number[];
+  rowsPerPageOptions?: number[];
 };
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = 20,
+  rowsPerPage = ROWS_PER_PAGE,
   totalCount,
   className,
-  onSetCount,
-  selectOptions = [20, 50, 100],
+  onSetCountPerPage,
+  rowsPerPageOptions = ROWS_PER_PAGE_OPTION,
   ...props
 }: DataGridPaginationProps) => {
-  const count = Math.ceil(totalCount / rowsPerPage);
-  const rangeStart = useMemo(
-    () => (page - 1) * rowsPerPage + 1,
-    [page, rowsPerPage],
-  );
-  const rangeEnd = useMemo(() => {
-    const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
+  const logic = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
 
-    if (isLastPage) {
-      // получаем оставшееся кол-во строк на последней странице
-      const lastPageRowsCount = totalCount % rowsPerPage;
-
-      if (lastPageRowsCount) {
-        // Вычисляем итоговое количество строк. Пример: totalCount=26
-        // (10 * 3) - (10 - 6) = 30 - 4 = 26
-        return rowsPerPage * page - (rowsPerPage - lastPageRowsCount);
-      }
-    }
-
-    return rowsPerPage * page;
-  }, [page, rowsPerPage, totalCount]);
-
-  const formattedRange = useMemo(() => {
-    return `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
-  }, [rangeStart, rowsPerPage, rangeEnd]);
-
-  if (totalCount <= rowsPerPage && !onSetCount) {
+  if (!logic) {
     return null;
   }
 
-  const handleChangeRowsPerPage = (event: SelectChangeEvent<unknown>) => {
-    if (onSetCount) {
-      onSetCount(Number(event.target.value));
-    }
-  };
+  const { formattedRange, count, handleChangeRowsPerPage } = logic;
 
   return (
     <PaginationWrapper className={className}>
       <RangeWrapper>
-        {onSetCount && (
+        {onSetCountPerPage && (
           <>
-            <RangeSelector variant="body1">Строк на странице:</RangeSelector>
+            <Typography variant="body1">Строк на странице:</Typography>
             <StyledSelect
+              size="small"
               value={rowsPerPage}
               onChange={handleChangeRowsPerPage}
             >
-              {selectOptions.map((option) => (
+              {rowsPerPageOptions.map((option) => (
                 <MenuItem value={option} key={option}>
                   {option}
                 </MenuItem>
@@ -99,7 +66,7 @@ export const DataGridPagination = ({
             </StyledSelect>
           </>
         )}
-        <Range variant="h6">{formattedRange}</Range>
+        <Range variant="h6">{formattedRange()}</Range>
       </RangeWrapper>
       <Pagination count={count} page={page} {...props} />
     </PaginationWrapper>
