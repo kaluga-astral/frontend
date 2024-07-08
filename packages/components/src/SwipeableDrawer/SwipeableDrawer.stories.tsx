@@ -1,23 +1,28 @@
 import { Stack } from '@mui/material';
 import { useState } from 'react';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
 import { Typography } from '../Typography';
+import { Button } from '../Button';
 
 import { SwipeableDrawer } from './SwipeableDrawer';
 
-const Root = styled('div')`
-  height: 100%;
+/**
+ *
+ * ### [Figma]()
+ * ### [Guide]()
+ */
 
-  background-color: ${({ theme }) =>
-    theme.palette.mode === 'light'
-      ? theme.palette.grey['100']
-      : theme.palette.background.default};
-`;
+const meta: Meta<typeof SwipeableDrawer> = {
+  title: 'Components/SwipeableDrawer',
+  component: SwipeableDrawer,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof SwipeableDrawer>;
 
 const Row = styled('div')`
   display: flex;
@@ -49,124 +54,174 @@ const renderRows = (count: number) => {
   return rows;
 };
 
-export default {
-  title: 'Components/SwipeableDrawer',
-  component: SwipeableDrawer,
+export const Interaction: Story = {
+  args: {
+    anchor: 'bottom',
+    open: true,
+    disableSwipeToOpen: false,
+    drawerBleedingTitle: 'SwipeableDrawer',
+    children: [<Skeleton variant="rectangular" height="150px" />],
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
-const Template: StoryFn = ({
-  drawerBleedingTitle,
-  isMountedOnHide,
-  drawerBleedingHeight,
-}) => {
+export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [drawerBleedingHeight, setDrawerBleedingHeight] = useState(0);
 
   const handleToggle = (newOpen: boolean) => () => {
     setIsOpen(newOpen);
+    setDrawerBleedingHeight(newOpen ? 56 : 0);
   };
 
   return (
     <>
-      <h2 style={{ color: 'red' }}>Этот компонент устарел!</h2>
-
-      <Root>
-        <Box sx={{ textAlign: 'center', pt: 1 }}>
-          <Button onClick={handleToggle(true)}>Open</Button>
-        </Box>
-
-        <SwipeableDrawer
-          anchor="bottom"
-          open={isOpen}
-          onClose={handleToggle(false)}
-          onOpen={handleToggle(true)}
-          disableSwipeToOpen={false}
-          drawerBleedingTitle={drawerBleedingTitle}
-          isMountedOnHide={isMountedOnHide}
-          drawerBleedingHeight={drawerBleedingHeight}
-        >
-          {renderRows(1)}
-        </SwipeableDrawer>
-      </Root>
+      <Typography variant="h2" style={{ color: 'red' }}>
+        Этот компонент устарел!
+      </Typography>
+      <Button onClick={handleToggle(true)}>Open</Button>
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isOpen}
+        onClose={handleToggle(false)}
+        onOpen={handleToggle(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle="Все новые документы"
+        isMountedOnHide={false}
+        drawerBleedingHeight={drawerBleedingHeight}
+      >
+        {renderRows(1)}
+      </SwipeableDrawer>
     </>
   );
 };
 
-export const SwipeableDrawerStory = Template.bind({});
+export const Anchor = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [drawerBleedingHeight, setDrawerBleedingHeight] = useState(0);
+  const [drawerAnchor, setDrawerAnchor] = useState<
+    'left' | 'top' | 'right' | 'bottom'
+  >('bottom');
 
-SwipeableDrawerStory.storyName = 'SwipeableDrawer';
+  const handleToggle =
+    (newOpen: boolean, anchor?: 'left' | 'top' | 'right' | 'bottom') => () => {
+      setIsOpen(newOpen);
+      setDrawerBleedingHeight(newOpen ? 56 : 0);
+      anchor && setDrawerAnchor(anchor);
+    };
 
-SwipeableDrawerStory.args = {
-  drawerBleedingTitle: 'Все новые документы',
-  isMountedOnHide: false,
-  drawerBleedingHeight: 56,
+  return (
+    <>
+      <Button onClick={handleToggle(true, 'top')}>Top</Button>
+      <Button onClick={handleToggle(true, 'right')}>Right</Button>
+      <Button onClick={handleToggle(true, 'bottom')}>Bottom</Button>
+      <Button onClick={handleToggle(true, 'left')}>Left</Button>
+      <SwipeableDrawer
+        anchor={drawerAnchor}
+        open={isOpen}
+        onClose={handleToggle(false)}
+        onOpen={handleToggle(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle={drawerAnchor ? drawerAnchor : 'SwipeableDrawer'}
+        isMountedOnHide={false}
+        drawerBleedingHeight={drawerBleedingHeight}
+      >
+        {renderRows(1)}
+      </SwipeableDrawer>
+    </>
+  );
 };
 
-SwipeableDrawerStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
+export const Variant = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [drawerVariant, setDrawerVariant] = useState<
+    'permanent' | 'persistent' | 'temporary'
+  >('temporary');
+  const [drawerBleedingHeight, setDrawerBleedingHeight] = useState(0);
+
+  const handleToggle =
+    (newOpen: boolean, variant?: 'permanent' | 'persistent' | 'temporary') =>
+    () => {
+      setIsOpen(newOpen);
+      setDrawerBleedingHeight(newOpen ? 56 : 0);
+      variant && setDrawerVariant(variant);
+    };
+
+  return (
+    <>
+      <Button onClick={handleToggle(true, 'permanent')}>permanent</Button>
+      <Button onClick={handleToggle(true, 'persistent')}>persistent</Button>
+      <Button onClick={handleToggle(true, 'temporary')}>temporary</Button>
+      <SwipeableDrawer
+        anchor="bottom"
+        variant={drawerVariant}
+        open={isOpen}
+        onClose={handleToggle(false)}
+        onOpen={handleToggle(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle={drawerVariant ? drawerVariant : 'SwipeableDrawer'}
+        isMountedOnHide={false}
+        drawerBleedingHeight={drawerBleedingHeight}
+      >
+        {renderRows(1)}
+      </SwipeableDrawer>
+    </>
+  );
 };
 
-export const SwipeableDrawerShowcase: StoryFn = () => {
+/**
+ * Варианты наполнения
+ */
+export const Filling = () => {
+  const [drawerBleedingHeight, setDrawerBleedingHeight] = useState(0);
   const [isOpenSmall, setIsOpenSmall] = useState(false);
   const [isOpenBig, setIsOpenBig] = useState(false);
 
   const handleToggleSmall = (newOpen: boolean) => () => {
     setIsOpenSmall(newOpen);
+    setDrawerBleedingHeight(newOpen ? 56 : 0);
   };
 
   const handleToggleBig = (newOpen: boolean) => () => {
     setIsOpenBig(newOpen);
+    setDrawerBleedingHeight(newOpen ? 56 : 0);
   };
 
   return (
     <Stack gap={4}>
-      <Typography variant="h3">Варианты наполнения</Typography>
-      <Root>
-        <Box sx={{ textAlign: 'center', pt: 1 }}>
-          <Button onClick={handleToggleSmall(true)}>
-            Небольшое наполнение
-          </Button>
-        </Box>
+      <Button onClick={handleToggleSmall(true)}>Небольшое наполнение</Button>
 
-        <SwipeableDrawer
-          anchor="bottom"
-          open={isOpenSmall}
-          onClose={handleToggleSmall(false)}
-          onOpen={handleToggleSmall(true)}
-          disableSwipeToOpen={false}
-          drawerBleedingTitle="Не большое наполнение"
-          drawerBleedingHeight={56}
-        >
-          {renderRows(1)}
-        </SwipeableDrawer>
-      </Root>
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isOpenSmall}
+        onClose={handleToggleSmall(false)}
+        onOpen={handleToggleSmall(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle="Не большое наполнение"
+        drawerBleedingHeight={drawerBleedingHeight}
+      >
+        {renderRows(1)}
+      </SwipeableDrawer>
 
-      <Root>
-        <Box sx={{ textAlign: 'center', pt: 1 }}>
-          <Button onClick={handleToggleBig(true)}>
-            Наполнение с переполнением
-          </Button>
-        </Box>
+      <Button onClick={handleToggleBig(true)}>
+        Наполнение с переполнением
+      </Button>
 
-        <SwipeableDrawer
-          anchor="bottom"
-          open={isOpenBig}
-          onClose={handleToggleBig(false)}
-          onOpen={handleToggleBig(true)}
-          disableSwipeToOpen={false}
-          drawerBleedingTitle="Наполнение с переполнением"
-          drawerBleedingHeight={56}
-        >
-          {renderRows(10)}
-        </SwipeableDrawer>
-      </Root>
+      <SwipeableDrawer
+        anchor="bottom"
+        open={isOpenBig}
+        onClose={handleToggleBig(false)}
+        onOpen={handleToggleBig(true)}
+        disableSwipeToOpen={false}
+        drawerBleedingTitle="Наполнение с переполнением"
+        drawerBleedingHeight={drawerBleedingHeight}
+      >
+        {renderRows(10)}
+      </SwipeableDrawer>
     </Stack>
   );
-};
-
-SwipeableDrawerShowcase.storyName = 'SwipeableDrawer Showcase';
-
-SwipeableDrawerShowcase.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };
