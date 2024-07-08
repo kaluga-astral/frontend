@@ -6,6 +6,12 @@ import { MenuList } from '../MenuList';
 
 import { MenuItem, type MenuItemProps } from './MenuItem';
 
+/**
+ *
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=9187-105430)
+ * ### [Guide]()
+ */
+
 const meta: Meta<typeof MenuItem> = {
   title: 'Components/Menu/MenuItem',
   component: MenuItem,
