@@ -1,1 +1,1 @@
-export * from './useSecondsCountDown';
+export * from './useSecondsCountdown';

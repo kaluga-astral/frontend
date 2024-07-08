@@ -279,7 +279,7 @@ export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
 
-export { SecondsCountDown } from './utils';
+export { SecondsCountdown as UNSTABLE_SecondsCountdownService } from './services';
 
 export { StepSlider, type StepSliderProps } from './StepSlider';
 

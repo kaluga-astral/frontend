@@ -1,8 +1,8 @@
-import { formatDate } from '../date';
+import { formatDate } from '../../utils/date';
 
 const M_SECONDS_PER_SECOND = 1000;
 
-export type SecondsCountDownParams = {
+export type SecondsCountdownParams = {
   /**
    * Метод для синхронизации устанавливаемого значения таймера с внутренним
    */
@@ -31,7 +31,7 @@ export type SecondsCountDownParams = {
 /**
  * вспомогательный класс, предоставляющий функционал с текстом убывающего времени
  */
-export class SecondsCountDown {
+export class SecondsCountdown {
   private timer = 0 as unknown as ReturnType<typeof setTimeout>;
 
   private targetDate: Date;
@@ -46,7 +46,7 @@ export class SecondsCountDown {
    */
   public textTime: string;
 
-  constructor(private readonly params: SecondsCountDownParams) {
+  constructor(private readonly params: SecondsCountdownParams) {
     this.isActive = params.isInitialActive ?? true;
 
     this.targetDate = this.params.targetDate
@@ -101,13 +101,15 @@ export class SecondsCountDown {
 
   /**
    * Метод для перезапуска таймера на новую дату
+   * @enum number - количество секунд от текущего момента
+   * @enum Date - дата к которой должен стартовать счетчик
    */
   public restart = (value: Date | number) => {
     this.destroy();
 
     if (typeof value === 'number') {
       this.targetDate = this.createTargetDateBySecond(value);
-    } else if (value?.constructor?.name === 'Date') {
+    } else if (!isNaN(Number(+value))) {
       this.targetDate = value;
     } else {
       return;

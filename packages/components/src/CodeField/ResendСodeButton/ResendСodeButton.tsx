@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '../../Button';
 import { Typography } from '../../Typography';
-import { useSecondsCountDown } from '../../hooks';
+import { useSecondsCountdown } from '../../hooks';
 
 import { Wrapper } from './styles';
 
@@ -44,8 +44,8 @@ const ResendCodeButton = ({
   const {
     isActive,
     textTime: time,
-    resetTimer,
-  } = useSecondsCountDown({
+    restart,
+  } = useSecondsCountdown({
     seconds: resendTimeout,
   });
 
@@ -58,7 +58,7 @@ const ResendCodeButton = ({
     disabled || loading || resendCodeLoading || isTimerActive;
 
   useEffect(() => {
-    resetTimer(resendTimeout);
+    restart(resendTimeout);
   }, [resendTimeout]);
 
   const onClick = () => {
