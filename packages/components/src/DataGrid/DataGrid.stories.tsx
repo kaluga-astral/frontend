@@ -130,7 +130,7 @@ export const WithSelect = () => {
   const [loading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   useEffect(() => {
     setTimeout(() => {
@@ -182,6 +182,7 @@ export const WithSelect = () => {
           onChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onSetCount={handleChangeRowsPerPage}
+          selectOptions={[5, 10, 15, 50, 100]}
           page={page}
         />
       }

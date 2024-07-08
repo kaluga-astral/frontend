@@ -30,14 +30,19 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    * Выбор количества записей на странице с помощью селектора
    */
   onSetCount?: (rowsPerPage: number) => void;
+  /**
+   * Массив значений селектора
+   */
+  selectOptions?: number[];
 };
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = 5,
+  rowsPerPage = 10,
   totalCount,
   className,
   onSetCount,
+  selectOptions = [5, 10, 20, 25, 50, 100],
   ...props
 }: DataGridPaginationProps) => {
   const count = Math.ceil(totalCount / rowsPerPage);
@@ -76,8 +81,6 @@ export const DataGridPagination = ({
     }
   };
 
-  const OPTIONS: string[] = ['5', '10', '20', '25', '50', '100'];
-
   return (
     <PaginationWrapper className={className}>
       <RangeWrapper>
@@ -88,7 +91,7 @@ export const DataGridPagination = ({
               value={rowsPerPage}
               onChange={handleChangeRowsPerPage}
             >
-              {OPTIONS.map((option) => (
+              {selectOptions.map((option) => (
                 <MenuItem value={option} key={option}>
                   {option}
                 </MenuItem>
