@@ -1,0 +1,9 @@
+export const getGridTemplateColumns = (columns, selectable?: boolean) => {
+  const columnsWidth = columns.map(({ width }) => width || '1fr');
+
+  if (selectable) {
+    columnsWidth.unshift('max-content');
+  }
+
+  return columnsWidth.join(' ');
+};

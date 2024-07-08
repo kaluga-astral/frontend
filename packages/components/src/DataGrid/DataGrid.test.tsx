@@ -181,7 +181,7 @@ describe('DataGrid', () => {
       />,
     );
 
-    expect(screen.getByText('Vasya')).toBeDisabled;
+    expect(screen.getByText('Vasya')).toBeDisabled();
   });
 
   it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {

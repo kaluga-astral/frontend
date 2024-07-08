@@ -117,6 +117,10 @@ export type DataGridProps<
   minDisplayRows?: number;
 };
 
+/**
+ * @deprecated
+ * Используйте NewDateGrid
+ */
 export const DataGrid = <
   TData extends Record<string, unknown> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
