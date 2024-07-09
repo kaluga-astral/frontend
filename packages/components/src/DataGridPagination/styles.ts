@@ -1,3 +1,5 @@
+import { formControlClasses } from '@mui/material';
+
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 import { Select } from '../Select';
@@ -19,7 +21,7 @@ export const RangeWrapper = styled.div`
   gap: ${({ theme }) => theme.spacing(3)};
   align-items: center;
 
-  .MuiFormControl-root {
+  .${formControlClasses.root} {
     flex-direction: unset;
   }
 `;

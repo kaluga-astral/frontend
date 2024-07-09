@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { type SelectChangeEvent } from '@mui/material';
 
 export const useLogic = (
@@ -8,40 +8,36 @@ export const useLogic = (
   onSetCountPerPage?: (rowsPerPage: number) => void,
 ) => {
   const count = Math.ceil(totalCount / rowsPerPage);
+  const [isVisiblePagination, setIsVisiblePagination] = useState(true);
   const rangeStart = useMemo(
     () => (page - 1) * rowsPerPage + 1,
     [page, rowsPerPage],
   );
   const rangeEnd = useMemo(() => {
-    const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
+    const end = page * rowsPerPage;
 
-    if (isLastPage) {
-      // получаем оставшееся кол-во строк на последней странице
-      const lastPageRowsCount = totalCount % rowsPerPage;
-
-      if (lastPageRowsCount) {
-        // Вычисляем итоговое количество строк. Пример: totalCount=26
-        // (10 * 3) - (10 - 6) = 30 - 4 = 26
-        return rowsPerPage * page - (rowsPerPage - lastPageRowsCount);
-      }
-    }
-
-    return rowsPerPage * page;
+    return end < totalCount ? end : totalCount;
   }, [page, rowsPerPage, totalCount]);
 
   const formattedRange = () => {
     return `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
   };
 
-  if (totalCount <= rowsPerPage && !onSetCountPerPage) {
-    return null;
-  }
+  // useMemo позволяет избежать постоянного Re-rendering
+  useMemo(() => {
+    if (totalCount <= rowsPerPage && !onSetCountPerPage) {
+      setIsVisiblePagination(false);
+    }
+  }, [totalCount, rowsPerPage, onSetCountPerPage]);
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent<unknown>) => {
-    if (onSetCountPerPage) {
-      onSetCountPerPage?.(Number(event.target.value));
-    }
+    onSetCountPerPage?.(Number(event.target.value));
   };
 
-  return { handleChangeRowsPerPage, formattedRange, count };
+  return {
+    handleChangeRowsPerPage,
+    formattedRange,
+    count,
+    isVisiblePagination,
+  };
 };

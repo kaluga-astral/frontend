@@ -5,7 +5,10 @@ import { Typography } from '../Typography';
 
 import { PaginationWrapper, Range, RangeWrapper, StyledSelect } from './styles';
 import { useLogic } from './useLogic';
-import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTION } from './constants';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  DEFAULT_ROWS_PER_PAGE_OPTION,
+} from './constants';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
@@ -32,20 +35,23 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = ROWS_PER_PAGE,
+  rowsPerPage = DEFAULT_ROWS_PER_PAGE,
   totalCount,
   className,
   onSetCountPerPage,
-  rowsPerPageOptions = ROWS_PER_PAGE_OPTION,
+  rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTION,
   ...props
 }: DataGridPaginationProps) => {
-  const logic = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
+  const {
+    formattedRange,
+    count,
+    handleChangeRowsPerPage,
+    isVisiblePagination,
+  } = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
 
-  if (!logic) {
+  if (!isVisiblePagination) {
     return null;
   }
-
-  const { formattedRange, count, handleChangeRowsPerPage } = logic;
 
   return (
     <PaginationWrapper className={className}>
