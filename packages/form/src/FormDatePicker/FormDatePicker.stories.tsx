@@ -8,9 +8,6 @@ import { useForm } from '../hooks';
 
 import { FormDatePicker, type FormDatePickerValue } from './FormDatePicker';
 
-/**
- * Обертка [DatePicker](/story/components-datepickers-defaultdatepicker--docs) для react-hook-form
- */
 const meta: Meta<typeof FormDatePicker> = {
   title: 'Form/FormDatePicker',
   component: FormDatePicker,
