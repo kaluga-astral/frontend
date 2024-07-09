@@ -17,6 +17,9 @@ export type SecondaryAction<TSecondaryActionComponent extends ElementType> =
      */
     text: string;
     tooltipPlacement?: TooltipProps['placement'];
+    /**
+     * Текст тултипа при наведении на элемент меню
+     */
     note?: string;
     /**
      * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
@@ -39,9 +42,7 @@ export type ButtonGroupSecondaryActionProps<
   actions: SecondaryAction<TSecondaryActionComponent>[];
 };
 
-const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
-  secondaryAction: 'left',
-};
+const TOOLTIP_PLACEMENT = 'left';
 
 export const ButtonGroupSecondaryActions = <
   TSecondaryActionComponent extends ElementType = ElementType,
@@ -56,7 +57,7 @@ export const ButtonGroupSecondaryActions = <
     <IconDropdownButton icon={<DotsOutlineMd />} variant="light">
       {actions.map(({ text, ...secondaryProps }) => (
         <ListItemButton
-          tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
+          tooltipPlacement={TOOLTIP_PLACEMENT}
           {...secondaryProps}
           key={text}
         >

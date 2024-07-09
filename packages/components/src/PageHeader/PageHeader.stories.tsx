@@ -447,6 +447,10 @@ export const Example = () => (
   </Wrapper>
 );
 
+/**
+ * Для отображения Tooltip на заблокированном элементе необходимо использовать prop ```disableReason``` и ```disabled```.<br>
+ * Так же можно выводить Tooltip на не заблокированном элементе с помощью prop ```note```
+ */
 export const TooltipSecondaryAction = () => (
   <Wrapper>
     <PageHeader
