@@ -23,6 +23,7 @@ export const useLogic = <
   isDisabled,
   onSelectRow,
 }: UseLogicParams<TData, TSortField>) => {
+  const isNoData = Boolean(rows?.length);
   const isSelectable = Boolean(onSelectRow);
   const isDataGridDisabled = isLoading || isDisabled;
 
@@ -56,7 +57,7 @@ export const useLogic = <
         prop(keyId),
       );
 
-      return onSelectRow(mergedSelectedRows);
+      onSelectRow(mergedSelectedRows);
     }
 
     const filteredRows = selectedRows.filter(
@@ -77,7 +78,7 @@ export const useLogic = <
           return onSelectRow([...selectedRows, row]);
         }
 
-        return onSelectRow(
+        onSelectRow(
           selectedRows.filter(
             (selectedRow) => selectedRow[keyId] !== row[keyId],
           ),
@@ -100,6 +101,10 @@ export const useLogic = <
       gridColumns,
       isSelectable,
       onSelectRow: handleSelectRow,
+    },
+    loaderProps: {
+      isLoading: isNoData && isLoading,
+      isDisabled,
     },
   };
 };

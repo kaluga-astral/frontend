@@ -1,6 +1,6 @@
 import { type CSSProperties, type ReactNode } from 'react';
 
-import { type SortStates } from './enums';
+import type { SortStates } from './enums';
 
 export type AlignVariant = 'left' | 'center' | 'right';
 
@@ -65,7 +65,7 @@ export type DataGridColumns<TData extends object> = {
 
   /**
    * @example {width: '100%'}
-   * CSS свойство ширины ячейки
+   * Ширина ячейка. Допустимые единицы: px, %, fr
    */
   width?: CSSProperties['width'];
 };

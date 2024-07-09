@@ -143,6 +143,8 @@ export const DataGrid = <
   emptyCellValue,
   className,
 }: DataGridProps<TData, TSortField>) => {
+  console.warn('Deprecated. Используйте NewDataGrid');
+
   const selectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
 

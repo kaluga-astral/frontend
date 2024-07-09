@@ -1,4 +1,7 @@
-export const getGridTemplateColumns = (columns, selectable?: boolean) => {
+export const getGridTemplateColumns = (
+  columns: Array<{ width?: string | number }>,
+  selectable?: boolean,
+) => {
   const columnsWidth = columns.map(({ width }) => width || '1fr');
 
   if (selectable) {

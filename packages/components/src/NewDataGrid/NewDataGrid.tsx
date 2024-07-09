@@ -3,6 +3,7 @@ import { type ReactNode, useCallback } from 'react';
 import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
+import { Loader } from './Loader';
 import { NoData } from './NoData';
 import { Container, DataGridWrapper, DisabledDataGridWrapper } from './styles';
 import type {
@@ -134,7 +135,8 @@ export const NewDataGrid = <
 >(
   props: NewDataGridProps<TData, TSortField>,
 ) => {
-  const { isDataGridDisabled, headProps, bodyProps } = useLogic(props);
+  const { isDataGridDisabled, headProps, bodyProps, loaderProps } =
+    useLogic(props);
 
   const {
     columns,
@@ -195,6 +197,8 @@ export const NewDataGrid = <
           onRetry={onRetry}
         />
       </TableContainer>
+
+      <Loader {...loaderProps} />
 
       {Footer}
     </Container>

@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 
 import { OverflowTypography } from '../../OverflowTypography';
-import { type DataGridColumns } from '../types';
+import type { DataGridColumns } from '../types';
 
 import { useLogic } from './useLogic';
 import { Wrapper } from './styles';

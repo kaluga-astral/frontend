@@ -165,13 +165,13 @@ describe('DataGrid', () => {
   });
 
   it('Строка не доступна для взаимодействия, если isDisabled=true', async () => {
-    const onRowClick = vi.fn();
+    const onClickSpy = vi.fn();
 
     renderWithTheme(
       <DataGrid
         keyId="name"
         rows={[{ name: 'Vasya', options: { isDisabled: true } }]}
-        onRowClick={onRowClick}
+        onRowClick={onClickSpy}
         columns={[
           {
             field: 'name',
@@ -181,7 +181,8 @@ describe('DataGrid', () => {
       />,
     );
 
-    expect(screen.getByText('Vasya')).toBeDisabled();
+    await userEvents.click(screen.getByText('Vasya'));
+    expect(onClickSpy).not.toHaveBeenCalled();
   });
 
   it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {

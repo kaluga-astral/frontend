@@ -1,15 +1,12 @@
 import { Typography, type TypographyProps } from '../../Typography';
 import { styled } from '../../styles';
 
-export const Wrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+export const Wrapper = styled.article`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  height: 100%;
 `;
 
 export const Figure = styled.figure`

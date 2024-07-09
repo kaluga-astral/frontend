@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const Wrapper = styled.div<{
+export const Wrapper = styled.li<{
   $gridColumns: string;
   $isHovered?: boolean;
   $isSelected?: boolean;

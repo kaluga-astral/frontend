@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const Wrapper = styled.div<{ $gridColumns: string }>`
+export const Wrapper = styled.header<{ $gridColumns: string }>`
   display: grid;
   grid-template-columns: ${({ $gridColumns }) => $gridColumns};
 

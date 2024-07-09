@@ -503,6 +503,69 @@ export const WithCheckbox = () => {
 };
 
 /**
+ * В качестве значения параметра width должны указываться явные единицы: `px`, `%`, `fr`.
+ * При использовании таких значений, как auto, max-content, min-content, которые автоматически подстраиваются под ширину содержимого, сетка может сломаться.
+ * Если значение не указано, то автоматически задается `1fr`
+ */
+export const WidthOptions = () => {
+  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+      width: '2fr',
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+      width: '1fr',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+      width: '15%',
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
  * Prop ```disabled``` позволяет заблокировать контент
  */
 export const WithDisabledContent = () => {
