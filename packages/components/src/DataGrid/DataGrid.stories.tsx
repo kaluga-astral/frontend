@@ -19,8 +19,8 @@ import type {
  - Навигацию
  - Инструменты для запроса и обработки данных
  *
- * **Компонент устарел и больше не будет поддерживаться.**
- * **Используйте NewDataGrid, который построен на css grid.**
+ * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
+ * **Используйте [NewDataGrid](https://main--61baeff6f06230003a88ef8a.chromatic.com/?path=/docs/components-newdatagrid--docs), который построен на css grid.**
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
  * ### [Guide]()

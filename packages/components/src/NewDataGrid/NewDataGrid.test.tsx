@@ -198,7 +198,7 @@ describe('NewDataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('Лоадер отображается при isLoading=true', async () => {
+  it('Лоадер отображается при isLoading=true при первом отображении', async () => {
     renderWithTheme(
       <NewDataGrid
         keyId="id"
