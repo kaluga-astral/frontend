@@ -7,6 +7,7 @@ import {
   ListItemButton,
   type ListItemButtonProps,
 } from '../../../ListItemButton';
+import { type TooltipProps } from '../../../Tooltip';
 
 /** Модель второстепенного экшена */
 export type SecondaryAction<TSecondaryActionComponent extends ElementType> =
@@ -15,7 +16,8 @@ export type SecondaryAction<TSecondaryActionComponent extends ElementType> =
      * Название действия
      */
     text: string;
-
+    tooltipPlacement?: TooltipProps['placement'];
+    note?: string;
     /**
      * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
      */
@@ -37,6 +39,10 @@ export type ButtonGroupSecondaryActionProps<
   actions: SecondaryAction<TSecondaryActionComponent>[];
 };
 
+const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
+  secondaryAction: 'left',
+};
+
 export const ButtonGroupSecondaryActions = <
   TSecondaryActionComponent extends ElementType = ElementType,
 >({
@@ -49,7 +55,11 @@ export const ButtonGroupSecondaryActions = <
   return (
     <IconDropdownButton icon={<DotsOutlineMd />} variant="light">
       {actions.map(({ text, ...secondaryProps }) => (
-        <ListItemButton {...secondaryProps} key={text}>
+        <ListItemButton
+          tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
+          {...secondaryProps}
+          key={text}
+        >
           <ListItemText primary={text} />
         </ListItemButton>
       ))}

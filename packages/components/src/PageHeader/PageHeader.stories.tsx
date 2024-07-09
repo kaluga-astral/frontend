@@ -447,6 +447,31 @@ export const Example = () => (
   </Wrapper>
 );
 
+export const TooltipSecondaryAction = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'Отправка по маршруту', disabled: true },
+          { text: 'Выбор получателя' },
+        ],
+        secondary: [
+          { text: 'Выбор получателя', disabled: true },
+          {
+            text: 'Сменить подразделение',
+            disabled: true,
+            disabledReason: 'На данный момент заблокировано',
+          },
+          { text: 'Копировать', note: 'Можно что-то скопировать' },
+          { text: 'Удалить', note: 'Можно что-то удалить' },
+        ],
+      }}
+      backButton={{}}
+    />
+  </Wrapper>
+);
+
 export const Default = () => (
   <Wrapper>
     <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
