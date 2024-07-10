@@ -106,7 +106,7 @@ export * from './Fade';
 
 export { FeedbackPanel, type FeedbackPanelProps } from './FeedbackPanel';
 
-export { Filename } from './Filename';
+export { Filename, type FileNameProps } from './Filename';
 
 export * from './FlowButton';
 

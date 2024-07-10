@@ -32,51 +32,51 @@ export const Interaction: Story = {
   },
 };
 
-const GridWrapper = styled.div`
+const Wrapper = styled.div`
   max-width: 400px;
   margin: 0 auto 10px;
 `;
 
 export const LongFileName = () => {
   return (
-    <GridWrapper>
+    <Wrapper>
       <Filename>
         Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
         25.04.2024.pdf
       </Filename>
-    </GridWrapper>
+    </Wrapper>
   );
 };
 
 export const ShortFileName = () => {
   return (
-    <GridWrapper>
+    <Wrapper>
       <Filename>Приложение №10.pdf</Filename>
-    </GridWrapper>
+    </Wrapper>
   );
 };
 
 export const ComplexFileExtension = () => {
   return (
     <div>
-      <GridWrapper>
+      <Wrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.xml.dist
         </Filename>
-      </GridWrapper>
-      <GridWrapper>
+      </Wrapper>
+      <Wrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.tar.xz
         </Filename>
-      </GridWrapper>
-      <GridWrapper>
+      </Wrapper>
+      <Wrapper>
         <Filename>
           Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
           25.04.2024.xml.orig
         </Filename>
-      </GridWrapper>
+      </Wrapper>
     </div>
   );
 };

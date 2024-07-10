@@ -337,70 +337,87 @@ export const PageHeaderDashboardStory = () => {
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   return (
-    <DashboardLayout>
-      <DashboardLayout.Header {...header} />
-      <DashboardLayout.Sidebar {...sidebar} />
-      <DashboardLayout.Main>
-        <PageLayout
-          header={{
-            title: 'Черновики',
-            breadcrumbs: [
-              <Fragment key="1">Первый текст</Fragment>,
-              <Fragment key="2">Текст с разделителем</Fragment>,
-              <Fragment key="3">Текст с разделителем</Fragment>,
-            ],
-            actions: {
-              main: [
-                {
-                  text: 'Основное действие',
-                  startIcon: <AddOutlineMd />,
-                },
+    <div style={{ maxWidth: '800px' }}>
+      <DashboardLayout>
+        <DashboardLayout.Header {...header} />
+        <DashboardLayout.Sidebar {...sidebar} />
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: (
+                <div style={{ minHeight: '100px' }}>
+                  <Filename variant="inherit">
+                    Приложение 10. К ТФ договора Ген.подряда на проектирование и
+                    проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
+                  </Filename>
+                </div>
+              ),
+              breadcrumbs: [
+                <Fragment key="1">Первый текст</Fragment>,
+                <Fragment key="2">Текст с разделителем</Fragment>,
+                <Fragment key="3">Текст с разделителем</Fragment>,
               ],
-              secondary: [
-                {
-                  text: 'Кнопка',
-                },
-              ],
-            },
-            subheader: (
-              <Stack flexDirection="row" flexWrap="wrap" gap={2}>
-                <TextField
-                  placeholder="Поиск на странице..."
-                  size="small"
-                  InputProps={{
-                    startAdornment: <SearchOutlineMd />,
-                  }}
-                />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-              </Stack>
-            ),
-          }}
-          content={{
-            children: (
-              <DataGrid
-                keyId="id"
-                rows={slicedData}
-                columns={columns}
-                selectedRows={selected}
-                onSelectRow={handleSelect}
-                onRowClick={handleRowClick}
-                minDisplayRows={10}
-                loading={loading}
-                Footer={
-                  <DataGridPagination
-                    totalCount={data.length}
-                    onChange={handleChangePage}
-                    page={page}
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+              subheader: (
+                <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+                  <TextField
+                    placeholder="Поиск на странице..."
+                    size="small"
+                    InputProps={{
+                      startAdornment: <SearchOutlineMd />,
+                    }}
                   />
-                }
-              />
-            ),
-            isPaddingDisabled: false,
-          }}
-        />
-      </DashboardLayout.Main>
-    </DashboardLayout>
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                </Stack>
+              ),
+            }}
+            content={{
+              children: (
+                <DataGrid
+                  keyId="id"
+                  rows={slicedData}
+                  columns={columns}
+                  selectedRows={selected}
+                  onSelectRow={handleSelect}
+                  onRowClick={handleRowClick}
+                  minDisplayRows={10}
+                  loading={loading}
+                  Footer={
+                    <DataGridPagination
+                      totalCount={data.length}
+                      onChange={handleChangePage}
+                      page={page}
+                    />
+                  }
+                />
+              ),
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
+      </DashboardLayout>
+    </div>
   );
 };
 

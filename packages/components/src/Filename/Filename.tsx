@@ -28,14 +28,14 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
       props,
     );
 
-    if (isTruncated) {
-      return (
-        <Tooltip title={children} disableInteractive {...tooltipProps}>
-          <StyledTypography {...typographyProps} />
-        </Tooltip>
-      );
-    }
-
-    return <StyledTypography {...typographyProps} />;
+    return (
+      <Tooltip
+        title={isTruncated && children}
+        disableInteractive
+        {...tooltipProps}
+      >
+        <StyledTypography {...typographyProps} />
+      </Tooltip>
+    );
   },
 );
