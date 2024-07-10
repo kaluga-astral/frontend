@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { type TableCellProps as MuiTableCellProps } from '@mui/material';
+import type { TableCellProps as MuiTableCellProps } from '@mui/material';
 
-import { type WithoutEmotionSpecific } from '../../types';
+import type { WithoutEmotionSpecific } from '../../types';
 
 import { StyledTableCell } from './styles';
 
@@ -16,6 +16,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <StyledTableCell $isDisabled={isDisabled} {...rest} ref={ref}>
         {isDisabled ? (
+          // eslint-disable-next-line react/jsx-props-no-spreading
           <div {...{ inert: isDisabled ? '' : undefined }}>{children}</div>
         ) : (
           children
