@@ -1,16 +1,35 @@
 import { Stack } from '@mui/material';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Tag } from '../Tag';
 
 import { TagBadge, type TagBadgeProps } from '.';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=284-7165)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof TagBadge> = {
   title: 'Components/TagBadge',
   component: TagBadge,
 };
 
-const Template: StoryFn = (args) => <TagBadge {...args} />;
+export default meta;
+
+type Story = StoryObj<typeof TagBadge>;
+
+export const Interaction: Story = {
+  args: {
+    color: 'primary',
+    badgeContent: '12',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 const baseProps = {
   label: 'Тэг',
@@ -19,7 +38,11 @@ const baseProps = {
   ),
 };
 
-export const ShowcaseColor: StoryFn = () => (
+export const Example = () => (
+  <Tag variant="contained" color="primary" {...baseProps} />
+);
+
+export const Color = () => (
   <Stack direction="column" gap={2}>
     <Stack direction="row" gap={2}>
       <Tag color="warning" variant="contained" {...baseProps} />
@@ -31,16 +54,4 @@ export const ShowcaseColor: StoryFn = () => (
   </Stack>
 );
 
-ShowcaseColor.parameters = { options: { showPanel: false } };
-
-export const Default = Template.bind({});
-
-Default.args = {
-  color: 'primary',
-  badgeContent: '12',
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+export const Default = () => <TagBadge color="primary" badgeContent="12" />;
