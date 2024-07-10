@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { type TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 import { type TypographyProps } from '../Typography';
 
-import { StyledTypography } from './styles';
+import { Extension, StyledTypography, Wrapper } from './styles';
 import { useLogic } from './useLogic';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
@@ -22,7 +22,7 @@ export type FileNameProps = TypographyProps & {
 
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
   ({ tooltipProps, children, ...props }, forwardedRef) => {
-    const { typographyProps, isTruncated } = useLogic(
+    const { typographyProps, isOverflowed, ext } = useLogic(
       children,
       forwardedRef,
       props,
@@ -30,11 +30,14 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
 
     return (
       <Tooltip
-        title={isTruncated && children}
+        title={isOverflowed && children}
         disableInteractive
         {...tooltipProps}
       >
-        <StyledTypography {...typographyProps} />
+        <Wrapper>
+          <StyledTypography {...typographyProps} />
+          <Extension>{ext}</Extension>
+        </Wrapper>
       </Tooltip>
     );
   },

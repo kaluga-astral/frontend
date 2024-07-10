@@ -1,3 +1,3 @@
-export * from './truncateString';
-
 export * from './findExtension';
+
+export * from './truncateString';

@@ -1,26 +1,17 @@
 import { findExtension } from '../findExtension';
 
-import { ELLIPSIS } from './constants';
-
-export const truncateString = (fileName: string, maxLength: number): string => {
-  if (fileName.length <= maxLength) {
-    return fileName;
-  }
-
+export const truncateString = (fileName: string) => {
   const extension = findExtension(fileName);
 
   if (fileName.endsWith(extension)) {
-    const beforeExtension = fileName.slice(
-      fileName.length - extension.length - 2,
-      fileName.length - extension.length,
-    );
+    const baseName = fileName.slice(0, fileName.length - extension.length - 2);
+    const ext = fileName.slice(fileName.length - extension.length - 2);
 
-    return `${fileName.slice(0, maxLength - ELLIPSIS.length - extension.length)}${ELLIPSIS}${beforeExtension}${extension}`;
+    return { baseName, ext };
+  } else {
+    const baseName = fileName.slice(0, fileName.length - 2);
+    const ext = fileName.slice(fileName.length - 2);
+
+    return { baseName, ext };
   }
-
-  let truncatedFilename = fileName.slice(0, maxLength - ELLIPSIS.length);
-
-  truncatedFilename += ELLIPSIS;
-
-  return truncatedFilename;
 };
