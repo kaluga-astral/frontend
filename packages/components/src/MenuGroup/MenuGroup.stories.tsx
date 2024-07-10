@@ -1,5 +1,5 @@
 import { type MouseEvent, useCallback, useMemo, useState } from 'react';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
 import { ListItemIcon } from '../ListItemIcon';
@@ -10,10 +10,20 @@ import { Typography } from '../Typography';
 
 import { MenuGroup } from './MenuGroup';
 
-export default {
-  title: 'Components/Menu/MenuGroup',
+/**
+ *
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21288-188895)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof MenuGroup> = {
+  title: 'Components/MenuGroup',
   component: MenuGroup,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof MenuGroup>;
 
 const StyledMenuItem = styled(MenuItem)`
   height: 48px;
@@ -22,6 +32,102 @@ const StyledMenuItem = styled(MenuItem)`
 const StyledLabel = styled(Typography)`
   font-size: ${({ theme }) => theme.typography.h5.fontSize};
 `;
+
+export const Interaction: Story = {
+  args: {
+    children: [
+      <MenuItem>
+        <Typography>Item 1</Typography>
+      </MenuItem>,
+      <MenuItem>
+        <Typography>Item 2</Typography>
+      </MenuItem>,
+      <MenuItem>
+        <Typography>Item 3</Typography>
+      </MenuItem>,
+    ],
+    label: 'MenuGroup',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
+
+  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
+
+  return (
+    <>
+      <Button variant="text" onClick={handleClick}>
+        Products
+      </Button>
+      <Menu
+        title="Products"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuGroup label="Мои продукты">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Отчет</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ApIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <EdoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ЭДО</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
+        <MenuGroup label="Больше продуктов от a-soft">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <KedoIcon />
+            </ListItemIcon>
+            <StyledLabel>Кадровый ЭДО</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AsIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Скрин</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <OfdIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ОФД</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Ap2Icon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
+      </Menu>
+    </>
+  );
+};
 
 export const AoIcon = () => (
   <svg
@@ -234,84 +340,3 @@ export const Ap2Icon = () => (
     </defs>
   </svg>
 );
-
-const Template: StoryFn = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
-
-  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setAnchorEl(null);
-  }, []);
-
-  return (
-    <>
-      <Button variant="text" onClick={handleClick}>
-        Products
-      </Button>
-      <Menu
-        title="Products"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuGroup label="Мои продукты">
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <AoIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Отчет</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <ApIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Подпись</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <EdoIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.ЭДО</StyledLabel>
-          </StyledMenuItem>
-        </MenuGroup>
-        <MenuGroup label="Больше продуктов от a-soft">
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <KedoIcon />
-            </ListItemIcon>
-            <StyledLabel>Кадровый ЭДО</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <AsIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Скрин</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <OfdIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.ОФД</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <Ap2Icon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Подпись</StyledLabel>
-          </StyledMenuItem>
-        </MenuGroup>
-      </Menu>
-    </>
-  );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
