@@ -2,8 +2,9 @@ import { Pagination } from '../Pagination';
 import { type PaginationProps } from '../Pagination';
 import { MenuItem } from '../MenuItem';
 import { Typography } from '../Typography';
+import { Select } from '../Select';
 
-import { PaginationWrapper, Range, RangeWrapper, StyledSelect } from './styles';
+import { PaginationWrapper, Range, RangeWrapper } from './styles';
 import { useLogic } from './useLogic';
 import {
   DEFAULT_ROWS_PER_PAGE,
@@ -44,7 +45,7 @@ export const DataGridPagination = ({
 }: DataGridPaginationProps) => {
   const {
     formattedRange,
-    count,
+    pageCount,
     handleChangeRowsPerPage,
     isVisiblePagination,
   } = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
@@ -59,7 +60,7 @@ export const DataGridPagination = ({
         {onSetCountPerPage && (
           <>
             <Typography variant="body1">Строк на странице:</Typography>
-            <StyledSelect
+            <Select
               size="small"
               value={rowsPerPage}
               onChange={handleChangeRowsPerPage}
@@ -69,12 +70,12 @@ export const DataGridPagination = ({
                   {option}
                 </MenuItem>
               ))}
-            </StyledSelect>
+            </Select>
           </>
         )}
         <Range variant="h6">{formattedRange()}</Range>
       </RangeWrapper>
-      <Pagination count={count} page={page} {...props} />
+      <Pagination count={pageCount} page={page} {...props} />
     </PaginationWrapper>
   );
 };

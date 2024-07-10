@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react';
 import { type SelectChangeEvent } from '@mui/material';
 
 export const useLogic = (
@@ -7,28 +6,21 @@ export const useLogic = (
   page: number,
   onSetCountPerPage?: (rowsPerPage: number) => void,
 ) => {
-  const count = Math.ceil(totalCount / rowsPerPage);
-  const [isVisiblePagination, setIsVisiblePagination] = useState(true);
-  const rangeStart = useMemo(
-    () => (page - 1) * rowsPerPage + 1,
-    [page, rowsPerPage],
-  );
-  const rangeEnd = useMemo(() => {
+  const pageCount = Math.ceil(totalCount / rowsPerPage);
+  const rangeStart = (page - 1) * rowsPerPage + 1;
+  const rangeEnd = () => {
     const end = page * rowsPerPage;
 
     return end < totalCount ? end : totalCount;
-  }, [page, rowsPerPage, totalCount]);
-
-  const formattedRange = () => {
-    return `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
   };
 
-  // useMemo позволяет избежать постоянного Re-rendering
-  useMemo(() => {
-    if (totalCount <= rowsPerPage && !onSetCountPerPage) {
-      setIsVisiblePagination(false);
-    }
-  }, [totalCount, rowsPerPage, onSetCountPerPage]);
+  const formattedRange = () => {
+    return `${rangeStart} — ${rangeEnd()} из ${totalCount} записей`;
+  };
+
+  const isVisiblePagination = !(
+    !onSetCountPerPage && totalCount <= rowsPerPage
+  );
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent<unknown>) => {
     onSetCountPerPage?.(Number(event.target.value));
@@ -37,7 +29,7 @@ export const useLogic = (
   return {
     handleChangeRowsPerPage,
     formattedRange,
-    count,
+    pageCount,
     isVisiblePagination,
   };
 };

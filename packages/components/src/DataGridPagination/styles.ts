@@ -2,7 +2,6 @@ import { formControlClasses } from '@mui/material';
 
 import { styled } from '../styles';
 import { Typography } from '../Typography';
-import { Select } from '../Select';
 
 export const PaginationWrapper = styled.div`
   display: flex;
@@ -24,10 +23,4 @@ export const RangeWrapper = styled.div`
   .${formControlClasses.root} {
     flex-direction: unset;
   }
-`;
-
-export const StyledSelect = styled(Select)`
-  margin: 0;
-
-  border: 2px solid ${({ theme }) => theme.palette.grey['300']};
 `;
