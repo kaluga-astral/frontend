@@ -1,4 +1,4 @@
-import { type Meta, type StoryFn, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -53,7 +53,7 @@ export const Example = () => {
   );
 };
 
-const Template: StoryFn<DatePickerProps> = (props) => {
+const Template = (props: DatePickerProps) => {
   const [date, setDate] = useState<Date | undefined>();
 
   return <DatePicker value={date} onChange={setDate} {...props} />;

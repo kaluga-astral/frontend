@@ -1,4 +1,4 @@
-import { type Meta, type StoryFn, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -35,7 +35,7 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: StoryFn<DateRangePickerProps> = (args) => {
+const Template = (args: DateRangePickerProps) => {
   const [dateA, setDateA] = useState<Date | undefined>(
     args.startDateProps?.value,
   );
@@ -56,27 +56,27 @@ const Template: StoryFn<DateRangePickerProps> = (args) => {
   );
 };
 
-export const Example = Template.bind({});
-
-Example.args = {
-  startDateProps: {
-    inputProps: {
-      label: 'Дата начала:',
-      placeholder: 'Выберите дату',
-      error: false,
-      helperText: undefined,
-    },
-  },
-  endDateProps: {
-    inputProps: {
-      label: 'Дата окончания:',
-      placeholder: 'Выберите дату',
-      error: false,
-      helperText: undefined,
-    },
-  },
-  disabled: false,
-};
+export const Example = () => (
+  <Template
+    startDateProps={{
+      inputProps: {
+        label: 'Дата начала:',
+        placeholder: 'Выберите дату',
+        error: false,
+        helperText: undefined,
+      },
+    }}
+    endDateProps={{
+      inputProps: {
+        label: 'Дата окончания:',
+        placeholder: 'Выберите дату',
+        error: false,
+        helperText: undefined,
+      },
+    }}
+    disabled={false}
+  />
+);
 
 export const Showcase = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
