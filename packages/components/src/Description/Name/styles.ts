@@ -22,4 +22,8 @@ export const DashedSeparator = styled.div`
   margin-right: ${({ theme }) => theme.spacing(2)};
 
   border-bottom: 1px dashed ${({ theme }) => theme.palette.grey[400]};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: none;
+  }
 `;
