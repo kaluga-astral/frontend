@@ -55,80 +55,6 @@ export const Interaction: Story = {
   },
 };
 
-export const Example = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
-
-  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setAnchorEl(null);
-  }, []);
-
-  return (
-    <>
-      <Button variant="text" onClick={handleClick}>
-        Products
-      </Button>
-      <Menu
-        title="Products"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuGroup label="Мои продукты">
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <AoIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Отчет</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <ApIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Подпись</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <EdoIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.ЭДО</StyledLabel>
-          </StyledMenuItem>
-        </MenuGroup>
-        <MenuGroup label="Больше продуктов от a-soft">
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <KedoIcon />
-            </ListItemIcon>
-            <StyledLabel>Кадровый ЭДО</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <AsIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Скрин</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <OfdIcon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.ОФД</StyledLabel>
-          </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <Ap2Icon />
-            </ListItemIcon>
-            <StyledLabel>Астрал.Подпись</StyledLabel>
-          </StyledMenuItem>
-        </MenuGroup>
-      </Menu>
-    </>
-  );
-};
-
 export const AoIcon = () => (
   <svg
     width="20"
@@ -340,3 +266,77 @@ export const Ap2Icon = () => (
     </defs>
   </svg>
 );
+
+export const Example = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
+
+  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
+
+  return (
+    <>
+      <Button variant="text" onClick={handleClick}>
+        Products
+      </Button>
+      <Menu
+        title="Products"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuGroup label="Мои продукты">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Отчет</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <ApIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <EdoIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ЭДО</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
+        <MenuGroup label="Больше продуктов от a-soft">
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <KedoIcon />
+            </ListItemIcon>
+            <StyledLabel>Кадровый ЭДО</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <AsIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Скрин</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <OfdIcon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.ОФД</StyledLabel>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Ap2Icon />
+            </ListItemIcon>
+            <StyledLabel>Астрал.Подпись</StyledLabel>
+          </StyledMenuItem>
+        </MenuGroup>
+      </Menu>
+    </>
+  );
+};
