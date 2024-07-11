@@ -1,12 +1,11 @@
-import {
-  Dialog as MuiDialog,
-  type DialogProps as MuiDialogProps,
-} from '@mui/material';
+import { type DialogProps as MuiDialogProps } from '@mui/material';
 
 import { DialogTitle } from '../DialogTitle';
 import { type WithoutEmotionSpecific } from '../types';
 import { BottomDrawer } from '../BottomDrawer';
 import { useViewportType } from '../hooks/useViewportType';
+
+import { StyledDialog } from './styles';
 
 export type DialogProps = WithoutEmotionSpecific<
   Omit<MuiDialogProps, 'title'>
@@ -52,9 +51,9 @@ export const Dialog = ({
   }
 
   return (
-    <MuiDialog onClose={handleClose} {...props}>
+    <StyledDialog onClose={handleClose} {...props}>
       {title && <DialogTitle onClose={onClose}>{title}</DialogTitle>}
       {children}
-    </MuiDialog>
+    </StyledDialog>
   );
 };
