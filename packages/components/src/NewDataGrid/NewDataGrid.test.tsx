@@ -50,7 +50,7 @@ describe('NewDataGrid', () => {
   });
 
   describe('Иконка сортировки', () => {
-    it('Отображается при двух или более записях', () => {
+    it('Отображается при двух или более записях и sortable=true', () => {
       renderWithTheme(
         <NewDataGrid
           keyId="name"
@@ -71,7 +71,7 @@ describe('NewDataGrid', () => {
       expect(icon).not.toBeNull();
     });
 
-    it('Не отображается при отсутствии данных', () => {
+    it('Не отображается при отсутствии данных и sortable=true', () => {
       renderWithTheme(
         <NewDataGrid
           keyId="name"
@@ -80,6 +80,7 @@ describe('NewDataGrid', () => {
             {
               field: 'name',
               label: 'Наименование',
+              sortable: true,
             },
           ]}
           onRetry={() => {}}
@@ -91,7 +92,7 @@ describe('NewDataGrid', () => {
       expect(icon).toBeNull();
     });
 
-    it('Не отображается при одной записи', () => {
+    it('Не отображается при одной записи и sortable=true', () => {
       renderWithTheme(
         <NewDataGrid
           keyId="name"
@@ -316,7 +317,7 @@ describe('NewDataGrid', () => {
             label: 'Действия',
             sortable: false,
             align: 'center',
-            width: '1%',
+            width: '100px',
             renderCell: (row) => {
               return <ActionCell actions={ACTIONS} row={row} />;
             },
