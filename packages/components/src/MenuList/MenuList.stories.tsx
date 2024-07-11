@@ -9,7 +9,6 @@ import {
 import { Divider } from '../Divider';
 import { ListItemText } from '../ListItemText';
 import { ListItemIcon } from '../ListItemIcon';
-import { Typography } from '../Typography';
 import { MenuItem } from '../index';
 
 import { MenuList } from './MenuList';
