@@ -1,10 +1,9 @@
-import { type ChangeEvent, Children, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { Box, Paper, Switch } from '@mui/material';
 import { type Theme } from '@mui/material/styles';
-import { type Meta, type StoryFn, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { FormControlLabel } from '../FormControlLabel';
-import { Grid } from '../Grid';
 
 import { Slide } from './Slide';
 
@@ -108,7 +107,9 @@ export const Direction = () => {
         break;
     }
 
-    direction && setSlideDirection(direction);
+    if (direction) {
+      setSlideDirection(direction);
+    }
   };
 
   return (
