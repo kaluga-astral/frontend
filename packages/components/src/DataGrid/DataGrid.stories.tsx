@@ -57,7 +57,7 @@ const generateData = (
   options?: DataGridRowOptions,
 ): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
-  const DATA_ARRAY_LENGTH = 16;
+  const DATA_ARRAY_LENGTH = 36;
 
   return Array.from({ length: DATA_ARRAY_LENGTH })
     .fill(dataObjTemplate)
@@ -258,7 +258,260 @@ export const WithPagination = () => {
       Footer={
         <DataGridPagination
           totalCount={data.length}
+          rowsPerPage={10}
           onChange={handleChangePage}
+          page={page}
+        />
+      }
+    />
+  );
+};
+
+/**
+ * Prop ```onSetCountPerPage``` Позволяет управлять постраничным отображением данных в таблице
+ */
+export const WithDefaultSelectOptionPerPage = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(20);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * rowsPerPage, page * rowsPerPage));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      setSlicedData(
+        data.slice((newPage - 1) * rowsPerPage, newPage * rowsPerPage),
+      );
+    }, 1500);
+  };
+
+  const handleChangeRowsPerPage = (newRowsPerPage: number) => {
+    setLoading(true);
+    setRowsPerPage(newRowsPerPage);
+    setPage(1);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice(0, newRowsPerPage));
+    }, 1500);
+  };
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      loading={loading}
+      Footer={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onSetCountPerPage={handleChangeRowsPerPage}
+          page={page}
+        />
+      }
+    />
+  );
+};
+
+/**
+ * Prop ```rowsPerPageOptions``` позволяет задать собственные значения постраничного отображения элементов
+ */
+export const WithCustomSelectOptionPerPage = () => {
+  const DATA_OBJECT_TEMPLATE = {
+    id: '1',
+    documentName: 'Документ 1',
+    direction: 'ФНС',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+  const CUSTOM_OPTION = [10, 15, 20, 30];
+
+  const data = generateData(DATA_OBJECT_TEMPLATE);
+
+  const ACTIONS: Actions<DataType> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'direction',
+      label: 'Направление',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '1%',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice((page - 1) * rowsPerPage, page * rowsPerPage));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      setSlicedData(
+        data.slice((newPage - 1) * rowsPerPage, newPage * rowsPerPage),
+      );
+    }, 1500);
+  };
+
+  const handleChangeRowsPerPage = (newRowsPerPage: number) => {
+    setLoading(true);
+    setRowsPerPage(newRowsPerPage);
+    setPage(1);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice(0, newRowsPerPage));
+    }, 1500);
+  };
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <DataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      loading={loading}
+      Footer={
+        <DataGridPagination
+          totalCount={data.length}
+          onChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onSetCountPerPage={handleChangeRowsPerPage}
+          rowsPerPageOptions={CUSTOM_OPTION}
           page={page}
         />
       }
@@ -698,6 +951,7 @@ export const WithCheckbox = () => {
       onSelectRow={handleSelect}
       Footer={
         <DataGridPagination
+          rowsPerPage={10}
           totalCount={data.length}
           onChange={handleChangePage}
           page={page}
