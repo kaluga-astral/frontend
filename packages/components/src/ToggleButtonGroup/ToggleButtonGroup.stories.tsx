@@ -101,7 +101,7 @@ export const Exclusive = () => {
     selectedValue: string,
   ) => {
     if (selectedValue) {
-      setValue1(selectedValue);
+      setValue1([selectedValue]);
     }
   };
   const handleChange2 = (
