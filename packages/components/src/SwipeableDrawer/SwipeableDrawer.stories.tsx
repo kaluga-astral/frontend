@@ -111,7 +111,10 @@ export const Anchor = () => {
     (newOpen: boolean, anchor?: 'left' | 'top' | 'right' | 'bottom') => () => {
       setIsOpen(newOpen);
       setDrawerBleedingHeight(newOpen ? 56 : 0);
-      anchor && setDrawerAnchor(anchor);
+
+      if (anchor) {
+        setDrawerAnchor(anchor);
+      }
     };
 
   return (
@@ -148,7 +151,10 @@ export const Variant = () => {
     () => {
       setIsOpen(newOpen);
       setDrawerBleedingHeight(newOpen ? 56 : 0);
-      variant && setDrawerVariant(variant);
+
+      if (variant) {
+        setDrawerVariant(variant);
+      }
     };
 
   return (
