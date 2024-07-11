@@ -116,58 +116,6 @@ export const Interaction: Story = {
     isSuccess: true,
     errorMsg: 'Ошибка 500',
   },
-  render: (args) => {
-    const { data, fetch } = useMockFetch({
-      ...MOCK_DATA,
-      productName: args.productName,
-      userName: args.userName,
-    });
-
-    const Logo = () => data?.logo;
-
-    useEffect(() => {
-      fetch();
-    }, []);
-
-    const handleClearStorage = () => sessionStorage.clear();
-
-    const isSuccess = !args.isLoading && !args.isError && Boolean(data);
-
-    return (
-      <Container>
-        <WelcomeScreen
-          {...data}
-          isSuccess={isSuccess}
-          isLoading={args.isLoading}
-          isError={args.isError}
-          errorMsg={args.errorMsg}
-          onRetry={fetch}
-        >
-          <DashboardLayout>
-            <DashboardLayout.Header
-              product={{
-                name: args.productName || '',
-                logo: () => <Logo />,
-              }}
-            />
-            <DashboardLayout.Main>
-              <MainWrapper>
-                <p>
-                  Приветствие отображается только при первичной загрузки
-                  приложения в рамках вкладки. Для повторного просмотра
-                  приветствия необходимо очистить sessionStorage
-                </p>
-
-                <Button onClick={handleClearStorage}>
-                  Очистить sessionStorage
-                </Button>
-              </MainWrapper>
-            </DashboardLayout.Main>
-          </DashboardLayout>
-        </WelcomeScreen>
-      </Container>
-    );
-  },
   parameters: {
     docs: {
       disable: true,
