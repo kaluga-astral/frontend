@@ -447,6 +447,35 @@ export const Example = () => (
   </Wrapper>
 );
 
+/**
+ * Для отображения Tooltip на заблокированном элементе необходимо использовать prop ```disableReason``` и ```disabled```.<br>
+ * Так же можно выводить Tooltip на не заблокированном элементе с помощью prop ```note```
+ */
+export const TooltipSecondaryAction = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'Отправка по маршруту', disabled: true },
+          { text: 'Выбор получателя' },
+        ],
+        secondary: [
+          { text: 'Выбор получателя', disabled: true },
+          {
+            text: 'Сменить подразделение',
+            disabled: true,
+            disabledReason: 'На данный момент заблокировано',
+          },
+          { text: 'Копировать', note: 'Можно что-то скопировать' },
+          { text: 'Удалить', note: 'Можно что-то удалить' },
+        ],
+      }}
+      backButton={{}}
+    />
+  </Wrapper>
+);
+
 export const Default = () => (
   <Wrapper>
     <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
