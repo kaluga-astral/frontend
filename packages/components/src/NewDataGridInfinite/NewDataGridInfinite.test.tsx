@@ -148,7 +148,7 @@ describe('NewDataGridInfinite', () => {
     expect(title).toBeVisible();
   });
 
-  it('Лоадер отображается при isLoading=true', () => {
+  it('Лоадер отображается при первичной загрузке данных', () => {
     renderWithTheme(
       <NewDataGridInfinite
         keyId="id"
@@ -169,7 +169,7 @@ describe('NewDataGridInfinite', () => {
     expect(loader).toBeVisible();
   });
 
-  it(`Сообщение "${END_OF_SCROLL_MESSAGE}" отображается при достижении конца списка`, () => {
+  it('Сообщение отображается при достижении конца списка', () => {
     renderWithTheme(
       <NewDataGridInfinite
         keyId="id"

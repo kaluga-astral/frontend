@@ -3,6 +3,7 @@ import { Virtuoso } from 'react-virtuoso';
 
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
+import { CircularProgress } from '../CircularProgress';
 import { checkIsDisabled } from '../NewDataGrid/Body/utils';
 import {
   Container,
@@ -17,11 +18,11 @@ import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import { DEFAULT_ROW_HEIGHT, OVERSCAN_COUNT } from './constants';
 import { useLogic } from './useLogic';
+import { List } from './List';
 import { EndData } from './EndData';
 import { Error } from './Error';
-import { Loader } from './Loader';
 import { NoData } from './NoData';
-import { DataGridWrapper } from './styles';
+import { DataGridWrapper, FooterRow } from './styles';
 
 export type NewDataGridInfiniteProps<
   TData extends Record<string, unknown>,
@@ -144,29 +145,37 @@ export const NewDataGridInfinite = <
             itemContent={(_, { options, ...row }) => {
               const rowId = (row as TData)[keyId] as string;
 
-              return (
-                <Row
-                  {...rowProps}
-                  key={rowId}
-                  row={row as TData}
-                  selectedRows={selectedRows}
-                  options={options}
-                  keyId={keyId}
-                  activeRowId={activeRowId}
-                  onRowClick={onRowClick}
-                >
-                  {renderCells(row as TData, rowId, options)}
-                </Row>
-              );
+              return <>{renderCells(row as TData, rowId, options)}</>;
             }}
             components={{
+              // @ts-ignore
+              // Требует HTMLDivElement, а для элемента списка используем HTMLUListElement
+              List,
+              Item: ({ children, item, ...itemProps }) => {
+                const { options, ...row } = item;
+
+                return (
+                  <Row
+                    {...rowProps}
+                    {...itemProps}
+                    row={row as TData}
+                    selectedRows={selectedRows}
+                    options={options}
+                    keyId={keyId}
+                    activeRowId={activeRowId}
+                    onRowClick={onRowClick}
+                  >
+                    {children}
+                  </Row>
+                );
+              },
               EmptyPlaceholder: () => <>{noDataPlaceholder || <NoData />}</>,
               Footer: () => (
-                <>
-                  {isLoading && <Loader />}
+                <FooterRow>
+                  {isLoading && <CircularProgress color="primary" />}
                   {isError && <Error onRetry={onRetry} />}
                   {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
-                </>
+                </FooterRow>
               ),
             }}
           />

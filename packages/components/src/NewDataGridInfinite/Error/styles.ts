@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
 
-export const Item = styled.li`
+export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: max-content max-content;
