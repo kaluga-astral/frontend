@@ -117,6 +117,10 @@ export type DataGridProps<
   minDisplayRows?: number;
 };
 
+/**
+ * @deprecated
+ * Используйте NewDateGrid
+ */
 export const DataGrid = <
   TData extends Record<string, unknown> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
@@ -139,6 +143,8 @@ export const DataGrid = <
   emptyCellValue,
   className,
 }: DataGridProps<TData, TSortField>) => {
+  console.warn('Deprecated. Используйте NewDataGrid');
+
   const selectable = Boolean(onSelectRow);
   const isTableDisabled = loading || disabled;
 

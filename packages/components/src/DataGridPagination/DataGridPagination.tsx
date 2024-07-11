@@ -1,9 +1,15 @@
-import { useMemo } from 'react';
-
 import { Pagination } from '../Pagination';
 import { type PaginationProps } from '../Pagination';
+import { MenuItem } from '../MenuItem';
+import { Typography } from '../Typography';
+import { Select } from '../Select';
 
-import { PaginationWrapper, Range } from './styles';
+import { PaginationWrapper, Range, RangeWrapper } from './styles';
+import { useLogic } from './useLogic';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  DEFAULT_ROWS_PER_PAGE_OPTION,
+} from './constants';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
@@ -18,46 +24,58 @@ export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
    * Текущая страница
    */
   page: number;
+  /**
+   * Коллбэк для установки количества отображаемых элементов на странице
+   */
+  onSetCountPerPage?: (rowsPerPage: number) => void;
+  /**
+   * Конфигурация списка кол-ва элементов, отображаемых на одной странице
+   */
+  rowsPerPageOptions?: number[];
 };
 
 export const DataGridPagination = ({
   page,
-  rowsPerPage = 10,
+  rowsPerPage = DEFAULT_ROWS_PER_PAGE,
   totalCount,
   className,
+  onSetCountPerPage,
+  rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTION,
   ...props
 }: DataGridPaginationProps) => {
-  const count = Math.ceil(totalCount / rowsPerPage);
-  const rangeStart = useMemo(
-    () => (page - 1) * rowsPerPage + 1,
-    [page, rowsPerPage],
-  );
-  const rangeEnd = useMemo(() => {
-    const isLastPage = Math.ceil(totalCount / rowsPerPage) === page;
+  const {
+    formattedRange,
+    pageCount,
+    handleChangeRowsPerPage,
+    isVisiblePagination,
+  } = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
 
-    if (isLastPage) {
-      // получаем оставшееся кол-во строк на последней странице
-      const lastPageRowsCount = totalCount % rowsPerPage;
-
-      if (lastPageRowsCount) {
-        // Вычисляем итоговое количество строк. Пример: totalCount=26
-        // (10 * 3) - (10 - 6) = 30 - 4 = 26
-        return rowsPerPage * page - (rowsPerPage - lastPageRowsCount);
-      }
-    }
-
-    return rowsPerPage * page;
-  }, [page, rowsPerPage, totalCount]);
-  const formattedRange = `${rangeStart} — ${rangeEnd} из ${totalCount} записей`;
-
-  if (totalCount <= rowsPerPage) {
+  if (!isVisiblePagination) {
     return null;
   }
 
   return (
     <PaginationWrapper className={className}>
-      <Range variant="h6">{formattedRange}</Range>
-      <Pagination count={count} page={page} {...props} />
+      <RangeWrapper>
+        {onSetCountPerPage && (
+          <>
+            <Typography variant="body1">Строк на странице:</Typography>
+            <Select
+              size="small"
+              value={rowsPerPage}
+              onChange={handleChangeRowsPerPage}
+            >
+              {rowsPerPageOptions.map((option) => (
+                <MenuItem value={option} key={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          </>
+        )}
+        <Range variant="h6">{formattedRange()}</Range>
+      </RangeWrapper>
+      <Pagination count={pageCount} page={page} {...props} />
     </PaginationWrapper>
   );
 };
