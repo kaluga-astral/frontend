@@ -675,6 +675,7 @@ const Wrapper = styled.div`
     padding-top: ${({ theme }) => theme.spacing(4)};
     overflow-wrap: break-word;
     background-color: ${({ theme }) => theme.palette.grey[100]};
+  }
 `;
 
 const StyledTypography = styled(Typography)`
