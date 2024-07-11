@@ -55,7 +55,7 @@ export const Interaction: Story = {
   },
 };
 
-export const AoIcon = () => (
+const AoIcon = () => (
   <svg
     width="20"
     height="20"
@@ -85,7 +85,7 @@ export const AoIcon = () => (
   </svg>
 );
 
-export const ApIcon = () => (
+const ApIcon = () => (
   <svg
     width="20"
     height="20"
@@ -115,7 +115,7 @@ export const ApIcon = () => (
   </svg>
 );
 
-export const EdoIcon = () => (
+const EdoIcon = () => (
   <svg
     width="20"
     height="20"
@@ -141,7 +141,7 @@ export const EdoIcon = () => (
   </svg>
 );
 
-export const KedoIcon = () => (
+const KedoIcon = () => (
   <svg
     width="20"
     height="20"
@@ -175,7 +175,7 @@ export const KedoIcon = () => (
   </svg>
 );
 
-export const AsIcon = () => (
+const AsIcon = () => (
   <svg
     width="20"
     height="20"
@@ -211,7 +211,7 @@ export const AsIcon = () => (
   </svg>
 );
 
-export const OfdIcon = () => (
+const OfdIcon = () => (
   <svg
     width="20"
     height="20"
@@ -237,7 +237,7 @@ export const OfdIcon = () => (
   </svg>
 );
 
-export const Ap2Icon = () => (
+const Ap2Icon = () => (
   <svg
     width="20"
     height="20"
@@ -340,3 +340,5 @@ export const Example = () => {
     </>
   );
 };
+
+export { AoIcon, ApIcon, EdoIcon, KedoIcon, AsIcon, OfdIcon, Ap2Icon };
