@@ -20,23 +20,6 @@ export default meta;
 
 type Story = StoryObj<typeof Product>;
 
-export const Interaction: Story = {
-  args: {
-    logo: () => <img src={ofdLogoSrc} />,
-    name: 'Астрал.ОФД',
-  },
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
-};
-
-const AdaptedLink = forwardRef<HTMLAnchorElement>((props, ref) => {
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <a ref={ref} {...props} href="#123" />;
-});
-
 const ofdLogoSrc = URL.createObjectURL(
   new Blob(
     [
@@ -64,6 +47,23 @@ const ofdLogoSrc = URL.createObjectURL(
     { type: 'image/svg+xml' },
   ),
 );
+
+export const Interaction: Story = {
+  args: {
+    logo: () => <img src={ofdLogoSrc} />,
+    name: 'Астрал.ОФД',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+const AdaptedLink = forwardRef<HTMLAnchorElement>((props, ref) => {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <a ref={ref} {...props} href="#123" />;
+});
 
 export const Example = () => (
   <Stack gap={4}>
