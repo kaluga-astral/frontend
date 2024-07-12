@@ -75,6 +75,7 @@ const IndentWrapper = styled.div`
 const PaperMenu = styled(Paper)`
   width: 200px;
   padding: ${({ theme }) => theme.spacing(1, 0)};
+  list-style-type: none;
 `;
 
 export const Interaction: Story = {
@@ -157,9 +158,7 @@ export const Example = () => {
 
   return (
     <IndentWrapper>
-      <Typography variant="h6" color="grey" colorIntensity="900">
-        Пример использования 1: Хедер (Header)
-      </Typography>
+      <Typography variant="h6">Header</Typography>
 
       <PaperHeader>
         <div>
@@ -170,42 +169,32 @@ export const Example = () => {
         <Profile {...header.profile} />
       </PaperHeader>
 
-      <Typography variant="h6" color="grey" colorIntensity="900">
-        Пример использования 2: Выпадающий список (Dropdown)
-      </Typography>
+      <Typography variant="h6">Выпадающий список (Dropdown)</Typography>
 
       <PaperMenu>
         <MenuItem>
           <ListItemIcon>
             <CaseOutlineMd />
           </ListItemIcon>
-          <Typography variant="ui" color="grey" colorIntensity="900">
-            Список дел
-          </Typography>
+          <Typography variant="ui">Список дел</Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <EditFillMd />
           </ListItemIcon>
-          <Typography variant="ui" color="grey" colorIntensity="900">
-            Редактировать
-          </Typography>
+          <Typography variant="ui">Редактировать</Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <DocumentOutlineMd />
           </ListItemIcon>
-          <Typography variant="ui" color="grey" colorIntensity="900">
-            Новый документ
-          </Typography>
+          <Typography variant="ui">Новый документ</Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <BinOutlineMd />
           </ListItemIcon>
-          <Typography variant="ui" color="grey" colorIntensity="900">
-            Удалить
-          </Typography>
+          <Typography variant="ui">Удалить</Typography>
         </MenuItem>
       </PaperMenu>
     </IndentWrapper>
@@ -216,11 +205,15 @@ export const Example = () => {
  * ##### Отображение высоты
  *
  * Высота бумаги визуально разделяется тенью, чем больше тень, тем выше находится объект.
+ * ###### Elevation-0
+ * Не имеет тени и соответственно высоты. Например рабочая область любого реестра (таблицы).
+ * ###### Elevation-1
+ * Используется для отображения различной информации объединенной под карточку, а так же различные варианты выпадающих списков.
+ *
  */
 export const Elevation = () => {
   return (
     <Grid container rowSpacing={4}>
-      {/* elevation={0} = нет тени */}
       <Paper elevation={0}>
         <PaperContentWrapper>
           <Typography variant="h6" color="grey" colorIntensity="700">
@@ -228,7 +221,6 @@ export const Elevation = () => {
           </Typography>
         </PaperContentWrapper>
       </Paper>
-      {/* elevation={1} Тень 200 */}
       <Paper>
         <PaperContentWrapper>
           <Typography variant="h6" color="grey" colorIntensity="700">
@@ -236,7 +228,6 @@ export const Elevation = () => {
           </Typography>
         </PaperContentWrapper>
       </Paper>
-      {/* elevation={2} Тень 300 */}
       <Paper elevation={2}>
         <PaperContentWrapper>
           <Typography variant="h6" color="grey" colorIntensity="700">
