@@ -3,84 +3,75 @@ import { Badge } from '@mui/material';
 import { styled } from '../styles';
 import { type Theme } from '../theme';
 
-import { type BadgeColor } from './types';
+import { type BadgeColor, type BadgeVariantsColor } from './types';
 
 type StyledBadgeProps = {
   customColor: BadgeColor;
   withBorder?: boolean;
+  variantColor: BadgeVariantsColor;
 };
 
 type StyledBadgeThemeProps = StyledBadgeProps & { theme: Theme };
 
-const getBgColor = ({ customColor, theme }: StyledBadgeThemeProps): string => {
-  if (customColor === 'grey') {
-    return theme.palette.grey[300];
-  }
-
-  if (customColor === 'errorLight') {
-    return theme.palette.error.light;
-  }
-
-  if (customColor === 'success') {
-    return theme.palette.success.main;
-  }
-
-  if (customColor === 'primary') {
-    return theme.palette.primary.main;
-  }
+const getBgColor = ({
+  customColor,
+  theme,
+  variantColor,
+}: StyledBadgeThemeProps): string => {
+  const colors = {
+    contained: {
+      grey: theme.palette.grey[800],
+      primary: theme.palette.primary[800],
+      error: theme.palette.red[800],
+      success: theme.palette.green[800],
+      warning: theme.palette.yellow[800],
+      default: theme.palette.primary.main,
+    },
+    light: {
+      grey: theme.palette.grey[300],
+      primary: theme.palette.primary[100],
+      error: theme.palette.red[100],
+      success: theme.palette.green[100],
+      warning: theme.palette.yellow[100],
+      default: theme.palette.primary.main,
+    },
+  };
 
   if (customColor === 'white') {
     return theme.palette.background.default;
   }
 
-  if (customColor === 'warning') {
-    return theme.palette.warning.main;
-  }
-
-  if (customColor === 'error') {
-    return theme.palette.error.dark;
-  }
-
-  return theme.palette.primary.main;
+  return colors[variantColor][customColor || 'default'];
 };
 
 const getTextColor = ({
   customColor,
   theme,
+  variantColor,
 }: StyledBadgeThemeProps): string => {
-  if (customColor === 'grey') {
-    return theme.palette.text.primary;
-  }
-
-  if (customColor === 'primary') {
-    return theme.palette.primary.contrastText;
-  }
+  const lightTextColor = {
+    grey: theme.palette.grey[900],
+    primary: theme.palette.primary[900],
+    error: theme.palette.red[900],
+    success: theme.palette.green[900],
+    warning: theme.palette.yellow[900],
+    default: theme.palette.primary.contrastText,
+  };
 
   if (customColor === 'white') {
     return theme.palette.grey[900];
   }
 
-  if (customColor === 'error') {
-    return theme.palette.error.contrastText;
+  if (variantColor === 'contained') {
+    return theme.palette.common.white;
   }
 
-  if (customColor === 'errorLight') {
-    return theme.palette.error.dark;
-  }
-
-  if (customColor === 'success') {
-    return theme.palette.primary.contrastText;
-  }
-
-  if (customColor === 'warning') {
-    return theme.palette.error.contrastText;
-  }
-
-  return theme.palette.primary.contrastText;
+  return lightTextColor[customColor || 'default'];
 };
 
 export const StyledBadge = styled(Badge, {
-  shouldForwardProp: (prop) => prop !== 'customColor' && prop !== 'withBorder',
+  shouldForwardProp: (prop) =>
+    prop !== 'customColor' && prop !== 'withBorder' && prop !== 'variantColor',
 })<StyledBadgeProps>`
   .MuiBadge-badge {
     height: 20px;
@@ -88,10 +79,11 @@ export const StyledBadge = styled(Badge, {
 
     font-size: ${({ theme }) => theme.typography.small.fontSize};
     line-height: 20px;
-    color: ${({ customColor, theme }) => getTextColor({ customColor, theme })};
+    color: ${({ customColor, theme, variantColor }) =>
+      getTextColor({ customColor, theme, variantColor })};
 
-    background-color: ${({ customColor, theme }) =>
-      getBgColor({ customColor, theme })};
+    background-color: ${({ customColor, theme, variantColor }) =>
+      getBgColor({ customColor, theme, variantColor })};
     border: ${({ withBorder, theme }) =>
       withBorder ? `2px solid ${theme.palette.common.white}` : 'none'};
     border-radius: ${({ withBorder }) => (withBorder ? '12px' : null)};

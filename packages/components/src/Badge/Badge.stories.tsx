@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Button } from '../Button';
+import { Grid } from '../Grid';
 
 import { Badge } from './Badge';
 
@@ -66,5 +67,127 @@ export const Invisible = () => {
         {invisible ? 'Показать' : 'Скрыть'}
       </Button>
     </Badge>
+  );
+};
+
+export const VariantsColor = () => {
+  return (
+    <Grid spacing={10} columns={6}>
+      <Badge
+        color="grey"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          grey
+        </Button>
+      </Badge>
+      <Badge
+        color="primary"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          primary
+        </Button>
+      </Badge>
+      <Badge
+        color="error"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          error
+        </Button>
+      </Badge>
+      <Badge
+        color="success"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          success
+        </Button>
+      </Badge>
+      <Badge
+        color="warning"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          warning
+        </Button>
+      </Badge>
+      <Badge
+        color="white"
+        badgeContent={999}
+        variant="standard"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          white
+        </Button>
+      </Badge>
+      <Badge
+        color="grey"
+        badgeContent={999}
+        variant="standard"
+        variantColor="light"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          grey
+        </Button>
+      </Badge>
+      <Badge
+        color="primary"
+        badgeContent={999}
+        variant="standard"
+        variantColor="light"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          primary
+        </Button>
+      </Badge>
+      <Badge
+        color="error"
+        badgeContent={999}
+        variant="standard"
+        variantColor="light"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          error
+        </Button>
+      </Badge>
+      <Badge
+        color="success"
+        badgeContent={999}
+        variant="standard"
+        variantColor="light"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          success
+        </Button>
+      </Badge>
+      <Badge
+        color="warning"
+        badgeContent={999}
+        variant="standard"
+        variantColor="light"
+        invisible={false}
+      >
+        <Button variant="contained" color="primary">
+          warning
+        </Button>
+      </Badge>
+    </Grid>
   );
 };
