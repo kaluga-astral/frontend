@@ -4,12 +4,13 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 
-import { Typography } from '../Typography';
 import { Button } from '../Button';
 
 import { SwipeableDrawer } from './SwipeableDrawer';
 
 /**
+ *
+ * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
  *
  * ### [Figma]()
  * ### [Guide]()
@@ -80,9 +81,6 @@ export const Example = () => {
 
   return (
     <>
-      <Typography variant="h2" style={{ color: 'red' }}>
-        Этот компонент устарел!
-      </Typography>
       <Button onClick={handleToggle(true)}>Open</Button>
       <SwipeableDrawer
         anchor="bottom"
