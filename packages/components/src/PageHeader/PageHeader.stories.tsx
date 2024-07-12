@@ -194,7 +194,7 @@ const columns: DataGridColumns<DataType>[] = [
  * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
  *
  * **Subheader**<br>
- * “Второй” заголовок на странице.<br>
+ * Область, для размещения дополнительных действий<br>
  * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
@@ -473,9 +473,10 @@ export const Example = () => {
     </DashboardLayout>
   );
 };
+
 export const Default = () => (
   <Wrapper>
-    <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
+    <PageHeader title="Черновик" />
   </Wrapper>
 );
 
@@ -626,6 +627,31 @@ export const Subheader = () => (
           <Select value="" placeholder="Выберите вариант" size="small" />
         </Stack>
       }
+    />
+  </Wrapper>
+);
+
+export const TooltipSecondaryAction = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'Отправка по маршруту', disabled: true },
+          { text: 'Выбор получателя' },
+        ],
+        secondary: [
+          { text: 'Выбор получателя', disabled: true },
+          {
+            text: 'Сменить подразделение',
+            disabled: true,
+            disabledReason: 'На данный момент заблокировано',
+          },
+          { text: 'Копировать', note: 'Можно что-то скопировать' },
+          { text: 'Удалить', note: 'Можно что-то удалить' },
+        ],
+      }}
+      backButton={{}}
     />
   </Wrapper>
 );
