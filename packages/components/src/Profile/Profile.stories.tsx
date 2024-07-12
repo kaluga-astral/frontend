@@ -83,152 +83,149 @@ export const Interaction: Story = {
   },
 };
 
-export const Showcase = () => {
+export const Example = () => {
   return (
-    <Stack gap={4}>
-      <Box>
-        <Profile
-          displayName="Григорьев Виталий"
-          annotation="vitatiy_grig@mail.ru"
-          avatar={{
-            alt: 'Григорьев Виталий',
-            children: 'ГВ',
-          }}
-          menu={(props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <CompanyOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>
-                    Мои организации
-                  </OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <SettingsFillMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Настройки</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Выйти</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-            </Menu>
-          )}
-        />
-      </Box>
-      <Box>
-        <Profile
-          displayName="Григорьев Виталий"
-          avatar={{
-            alt: 'Григорьев Виталий',
-            children: 'ГВ',
-          }}
-          menu={(props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <CompanyOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>
-                    Мои организации
-                  </OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <SettingsFillMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Настройки</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Выйти</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-            </Menu>
-          )}
-        />
-      </Box>
-      <Box>
-        <Profile
-          displayName="Григорьев Виталий"
-          menu={(props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <CompanyOutlineMd />
-                </ListItemIcon>
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        menu={(props) => (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мои организации</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Настройки</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Выйти</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+          </Menu>
+        )}
+      />
+    </Box>
+  );
+};
 
-                <ListItemText>
-                  <OverflowTypography noWrap>
-                    Мои организации
-                  </OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <SettingsFillMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Настройки</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Выйти</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-            </Menu>
-          )}
-        />
-      </Box>
-    </Stack>
+export const WithAvatar = () => {
+  return (
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        avatar={{
+          alt: 'Григорьев Виталий',
+          children: 'ГВ',
+        }}
+        menu={(props) => (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мои организации</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Настройки</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Выйти</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+          </Menu>
+        )}
+      />
+    </Box>
+  );
+};
+
+export const WithAnnotation = () => {
+  return (
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        annotation="vitatiy_grig@mail.ru"
+        menu={(props) => (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Мои организации</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Настройки</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Выйти</OverflowTypography>
+              </ListItemText>
+            </MenuItem>
+          </Menu>
+        )}
+      />
+    </Box>
   );
 };
 
