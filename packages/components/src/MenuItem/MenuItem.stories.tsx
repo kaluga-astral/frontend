@@ -76,7 +76,6 @@ export const Disabled = () => {
     <MenuList>
       <MenuItem
         disabled
-        tooltipPlacement="left"
         disabledReason="Действие недоступно. Попробуйте позднее"
       >
         <ListItemIcon>
