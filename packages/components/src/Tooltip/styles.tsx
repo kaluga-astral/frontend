@@ -38,6 +38,7 @@ export const StyledTooltip = styled(
   }
 
   & .${tooltipClasses.arrow} {
+    font-size: ${({ theme }) => theme.typography.small.fontSize};
     color: ${({ theme }) => theme.palette.grey[900]};
   }
 
