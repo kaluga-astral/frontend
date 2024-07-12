@@ -42,7 +42,7 @@ export type ButtonGroupSecondaryActionProps<
   actions: SecondaryAction<TSecondaryActionComponent>[];
 };
 
-const TOOLTIP_PLACEMENT = 'left';
+const TOOLTIP_PLACEMENT = 'right';
 
 export const ButtonGroupSecondaryActions = <
   TSecondaryActionComponent extends ElementType = ElementType,
