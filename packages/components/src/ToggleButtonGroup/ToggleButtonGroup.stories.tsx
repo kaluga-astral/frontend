@@ -94,36 +94,19 @@ export const Orientation = () => (
 );
 
 export const Exclusive = () => {
-  const [value1, setValue1] = useState(['val1']);
-  const [value2, setValue2] = useState('val1');
-  const handleChange1 = (
+  const [value, setValue] = useState('val1');
+  const handleChange = (
     _event: MouseEvent<HTMLElement>,
     selectedValue: string,
   ) => {
     if (selectedValue) {
-      setValue1([selectedValue]);
-    }
-  };
-  const handleChange2 = (
-    _event: MouseEvent<HTMLElement>,
-    selectedValue: string,
-  ) => {
-    if (selectedValue) {
-      setValue2(selectedValue);
+      setValue(selectedValue);
     }
   };
 
   return (
     <Grid spacing={6}>
-      <Typography>Default</Typography>
-      <ToggleButtonGroup onChange={handleChange1} value={value1}>
-        <ToggleButton value="val1">Toggle button</ToggleButton>
-        <ToggleButton value="val2">Toggle button</ToggleButton>
-        <ToggleButton value="val3">Toggle button</ToggleButton>
-      </ToggleButtonGroup>
-
-      <Typography>Exclusive</Typography>
-      <ToggleButtonGroup exclusive onChange={handleChange2} value={value2}>
+      <ToggleButtonGroup exclusive onChange={handleChange} value={value}>
         <ToggleButton value="val1">Toggle button</ToggleButton>
         <ToggleButton value="val2">Toggle button</ToggleButton>
         <ToggleButton value="val3">Toggle button</ToggleButton>
