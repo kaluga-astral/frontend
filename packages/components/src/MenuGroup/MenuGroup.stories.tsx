@@ -340,5 +340,3 @@ export const Example = () => {
     </>
   );
 };
-
-export { AoIcon, ApIcon, EdoIcon, KedoIcon, AsIcon, OfdIcon, Ap2Icon };
