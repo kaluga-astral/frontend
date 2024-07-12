@@ -1,4 +1,5 @@
 import { type Ref } from 'react';
+import { type TypographyVariant } from '@mui/material';
 
 import { type FileNameProps } from '../Filename';
 import { useOverflowed } from '../../OverflowTypography/hooks';
@@ -9,17 +10,18 @@ import { truncateString } from './utils';
 type UseLogicParams = {
   children: string;
   ref: Ref<HTMLElement>;
-  props: Omit<FileNameProps, 'children' | 'tooltipProps'>;
+  props: Omit<FileNameProps, 'children' | 'tooltipProps' | 'style'>;
+  variant: 'inherit' | TypographyVariant;
 };
 
 type UseLogicResult = {
   typographyProps: TypographyProps;
   isOverflowed: boolean;
-  suffixWithExtension: string;
+  ExtensionProps: TypographyProps;
 };
 
 export const useLogic = (params: UseLogicParams): UseLogicResult => {
-  const { ref: forwardedRef, children, props } = params;
+  const { ref: forwardedRef, children, props, variant } = params;
   const { ref, isOverflowed } = useOverflowed(forwardedRef);
 
   const { baseName, suffixWithExtension } = truncateString(children);
@@ -28,7 +30,14 @@ export const useLogic = (params: UseLogicParams): UseLogicResult => {
     ...props,
     ref,
     children: baseName,
+    variant,
   };
 
-  return { typographyProps, isOverflowed, suffixWithExtension };
+  const ExtensionProps = {
+    ...props,
+    children: suffixWithExtension,
+    variant,
+  };
+
+  return { typographyProps, isOverflowed, ExtensionProps };
 };

@@ -571,7 +571,7 @@ export const PageHeaderFilenameDashboardStory = () => {
           <PageLayout
             header={{
               title: (
-                <Filename variant="inherit">
+                <Filename>
                   Приложение 10. К ТФ договора Ген.подряда на проектирование и
                   проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
                 </Filename>
@@ -774,7 +774,7 @@ export const FileExtension = () => (
     <PageHeader
       title={
         <div style={{ minHeight: '100px' }}>
-          <Filename variant="inherit">
+          <Filename>
             Приложение 10. К ТФ договора Ген.подряда на проектирование и
             проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
           </Filename>

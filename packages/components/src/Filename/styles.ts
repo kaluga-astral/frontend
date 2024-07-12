@@ -17,6 +17,6 @@ export const Wrapper = styled.div`
   margin-right: ${({ theme }) => theme.spacing(3)};
 `;
 
-export const Extension = styled.p`
+export const Extension = styled(Typography)`
   margin: 0;
 `;
