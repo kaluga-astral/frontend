@@ -13,11 +13,12 @@ type UseLogicParams = FileNameProps & {
 type UseLogicResult = {
   typographyProps: TypographyProps;
   isOverflowed: boolean;
+  children: string;
   ExtensionProps: TypographyProps;
 };
 
 export const useLogic = (params: UseLogicParams): UseLogicResult => {
-  const { ref: forwardedRef, children, ...props } = params;
+  const { ref: forwardedRef, children, tooltipProps, style, ...props } = params;
   const { ref, isOverflowed } = useOverflowed(forwardedRef);
 
   const { baseName, suffixWithExtension } = truncateString(children);
@@ -33,5 +34,10 @@ export const useLogic = (params: UseLogicParams): UseLogicResult => {
     children: suffixWithExtension,
   };
 
-  return { typographyProps, isOverflowed, ExtensionProps };
+  return {
+    typographyProps,
+    isOverflowed,
+    ExtensionProps,
+    children,
+  };
 };

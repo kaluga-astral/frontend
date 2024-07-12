@@ -27,16 +27,14 @@ export type FileNameProps = Omit<TypographyProps, 'variant'> & {
 };
 
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
-  (
-    { tooltipProps, children, style, variant = 'inherit', ...props },
-    forwardedRef,
-  ) => {
-    const { typographyProps, isOverflowed, ExtensionProps } = useLogic({
-      children,
-      ref: forwardedRef,
-      props,
-      variant,
-    });
+  (props, forwardedRef) => {
+    const { typographyProps, isOverflowed, ExtensionProps, children } =
+      useLogic({
+        ...props,
+        ref: forwardedRef,
+      });
+
+    const { tooltipProps, style } = props;
 
     return (
       <Tooltip
