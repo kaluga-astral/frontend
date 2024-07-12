@@ -2,7 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { useEffect, useState } from 'react';
 
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 import { ActionCell, type Actions } from '../ActionCell';
 import {
   type DataGridColumns,

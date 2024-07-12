@@ -5,13 +5,13 @@ import { SUFFIX_LENGTH } from './constants';
 export const truncateString = (fileName: string) => {
   const fileExtension = findExtension(fileName);
 
-  if (fileName.endsWith(fileExtension)) {
+  if (fileExtension && fileName.endsWith(fileExtension)) {
     const baseName = fileName.slice(
       0,
       fileName.length - fileExtension.length - SUFFIX_LENGTH,
     );
     const suffixWithExtension = fileName.slice(
-      fileName.length - fileExtension.length - SUFFIX_LENGTH,
+      -fileExtension.length - SUFFIX_LENGTH,
     );
 
     return { baseName, suffixWithExtension };
