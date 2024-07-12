@@ -1,3 +1,5 @@
+import { formControlClasses } from '@mui/material';
+
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
@@ -11,4 +13,14 @@ export const PaginationWrapper = styled.div`
 
 export const Range = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey['700']};
+`;
+
+export const RangeWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(3)};
+  align-items: center;
+
+  .${formControlClasses.root} {
+    flex-direction: unset;
+  }
 `;
