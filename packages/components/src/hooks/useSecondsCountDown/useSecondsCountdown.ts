@@ -42,7 +42,7 @@ export const useSecondsCountdown = ({
         targetDate,
         isInitialActive: isInitialActive,
         seconds,
-        onUpdateText: setTextTime,
+        onUpdateTextTime: setTextTime,
         onUpdateActivity: setCountDownActive,
       }),
   );

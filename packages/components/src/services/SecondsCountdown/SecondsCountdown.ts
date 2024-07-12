@@ -6,7 +6,7 @@ export type SecondsCountdownParams = {
   /**
    * Метод для синхронизации устанавливаемого значения таймера с внутренним
    */
-  onUpdateText?: (text: string) => void;
+  onUpdateTextTime?: (text: string) => void;
   /**
    * Метод для синхронизации устанавливаемого значения флага активности с внутренним
    */
@@ -67,7 +67,7 @@ export class SecondsCountdown {
 
   private setTextTime = (text: string) => {
     this.textTime = text;
-    this.params.onUpdateText?.(text);
+    this.params.onUpdateTextTime?.(text);
   };
 
   private setActivity = (isActive: boolean) => {
