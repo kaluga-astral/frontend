@@ -10,11 +10,7 @@ export const findExtension = (filename: string): string => {
   const extensionIndex = filename.lastIndexOf('.');
 
   if (extensionIndex !== -1) {
-    const extension = filename.slice(extensionIndex);
-
-    if (extension.length <= 5) {
-      return extension;
-    }
+    return filename.slice(extensionIndex);
   }
 
   return '';

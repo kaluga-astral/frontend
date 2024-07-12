@@ -22,11 +22,11 @@ export type FileNameProps = TypographyProps & {
 
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
   ({ tooltipProps, children, ...props }, forwardedRef) => {
-    const { typographyProps, isOverflowed, ext } = useLogic(
+    const { typographyProps, isOverflowed, suffixWithExtension } = useLogic({
       children,
-      forwardedRef,
+      ref: forwardedRef,
       props,
-    );
+    });
 
     return (
       <Tooltip
@@ -36,7 +36,7 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
       >
         <Wrapper>
           <StyledTypography {...typographyProps} />
-          <Extension>{ext}</Extension>
+          <Extension>{suffixWithExtension}</Extension>
         </Wrapper>
       </Tooltip>
     );

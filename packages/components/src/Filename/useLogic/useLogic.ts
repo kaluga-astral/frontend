@@ -2,17 +2,27 @@ import { type Ref } from 'react';
 
 import { type FileNameProps } from '../Filename';
 import { useOverflowed } from '../../OverflowTypography/hooks';
+import { type TypographyProps } from '../../Typography';
 
 import { truncateString } from './utils';
 
-export const useLogic = (
-  children: string,
-  forwardedRef: Ref<HTMLElement>,
-  props: Omit<FileNameProps, 'children' | 'tooltipProps'>,
-) => {
+type UseLogicParams = {
+  children: string;
+  ref: Ref<HTMLElement>;
+  props: Omit<FileNameProps, 'children' | 'tooltipProps'>;
+};
+
+type UseLogicResult = {
+  typographyProps: TypographyProps;
+  isOverflowed: boolean;
+  suffixWithExtension: string;
+};
+
+export const useLogic = (params: UseLogicParams): UseLogicResult => {
+  const { ref: forwardedRef, children, props } = params;
   const { ref, isOverflowed } = useOverflowed(forwardedRef);
 
-  const { baseName, ext } = truncateString(children);
+  const { baseName, suffixWithExtension } = truncateString(children);
 
   const typographyProps = {
     ...props,
@@ -20,5 +30,5 @@ export const useLogic = (
     children: baseName,
   };
 
-  return { typographyProps, isOverflowed, ext };
+  return { typographyProps, isOverflowed, suffixWithExtension };
 };

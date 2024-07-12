@@ -1,17 +1,24 @@
 import { findExtension } from '../findExtension';
 
+import { SUFFIX_LENGTH } from './constants';
+
 export const truncateString = (fileName: string) => {
-  const extension = findExtension(fileName);
+  const fileExtension = findExtension(fileName);
 
-  if (fileName.endsWith(extension)) {
-    const baseName = fileName.slice(0, fileName.length - extension.length - 2);
-    const ext = fileName.slice(fileName.length - extension.length - 2);
+  if (fileName.endsWith(fileExtension)) {
+    const baseName = fileName.slice(
+      0,
+      fileName.length - fileExtension.length - SUFFIX_LENGTH,
+    );
+    const suffixWithExtension = fileName.slice(
+      fileName.length - fileExtension.length - SUFFIX_LENGTH,
+    );
 
-    return { baseName, ext };
-  } else {
-    const baseName = fileName.slice(0, fileName.length - 2);
-    const ext = fileName.slice(fileName.length - 2);
-
-    return { baseName, ext };
+    return { baseName, suffixWithExtension };
   }
+
+  const baseName = fileName.slice(0, -SUFFIX_LENGTH);
+  const suffixWithExtension = fileName.slice(-SUFFIX_LENGTH);
+
+  return { baseName, suffixWithExtension };
 };

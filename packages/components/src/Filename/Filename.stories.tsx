@@ -102,7 +102,7 @@ const generateData = (
   const DATA_ARRAY_LENGTH = 16;
   const DOCUMENT_NAMES = [
     <Filename style={{ width: '150px' }}>
-      api-еисжс.-спецификация-api.docs
+      api-единая.-спецификация-api.docs
     </Filename>,
     <Filename style={{ width: '100px' }}>
       OS_FINAL_BDW_FW24_MeA_21022024.pdf
@@ -123,26 +123,7 @@ const generateData = (
     }));
 };
 
-export const LongFileName = () => {
-  return (
-    <Wrapper>
-      <Filename>
-        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
-        25.04.2024.pdf
-      </Filename>
-    </Wrapper>
-  );
-};
-
-export const ShortFileName = () => {
-  return (
-    <Wrapper>
-      <Filename>Приложение №10.pdf</Filename>
-    </Wrapper>
-  );
-};
-
-export const DataGridFilename = () => {
+export const Example = () => {
   const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
 
   const columns: DataGridColumns<DataType>[] = [
@@ -198,6 +179,25 @@ export const DataGridFilename = () => {
       onSelectRow={handleSelect}
       onRetry={() => {}}
     />
+  );
+};
+
+export const LongFileName = () => {
+  return (
+    <Wrapper>
+      <Filename>
+        Версия 1.0 Приложение No 10к Договору подряда No КрФ/15331/24 от
+        25.04.2024.pdf
+      </Filename>
+    </Wrapper>
+  );
+};
+
+export const ShortFileName = () => {
+  return (
+    <Wrapper>
+      <Filename>Приложение №10.pdf</Filename>
+    </Wrapper>
   );
 };
 
