@@ -166,6 +166,11 @@ export * from './NavMenu';
 
 export { NewDataGrid, type NewDataGridProps } from './NewDataGrid';
 
+export {
+  NewDataGridInfinite,
+  type NewDataGridInfiniteProps,
+} from './NewDataGridInfinite';
+
 export * from './Notification';
 
 export * from './NotificationList';
