@@ -164,6 +164,8 @@ export * from './MenuList';
 
 export * from './NavMenu';
 
+export { NewDataGrid, type NewDataGridProps } from './NewDataGrid';
+
 export * from './Notification';
 
 export * from './NotificationList';
