@@ -63,9 +63,19 @@ export const Example = () => {
  * Переключатель имеет два состояния: выключен и включен.
  */
 export const Types = () => (
-  <Grid container columns={2} rows={2} spacing={6}>
+  <Grid container columns={2}>
     <Switch />
+  </Grid>
+);
+
+export const Checked = () => (
+  <Grid container columns={2}>
     <Switch checked />
+  </Grid>
+);
+
+export const Disabled = () => (
+  <Grid container columns={2}>
     <Switch disabled />
     <Switch checked disabled />
   </Grid>
