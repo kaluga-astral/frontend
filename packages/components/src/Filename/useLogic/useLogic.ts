@@ -18,18 +18,27 @@ type UseLogicResult = {
 };
 
 export const useLogic = (params: UseLogicParams): UseLogicResult => {
-  const { ref: forwardedRef, children, tooltipProps, style, ...props } = params;
+  const {
+    ref: forwardedRef,
+    children,
+    tooltipProps,
+    style,
+    variant = 'inherit',
+    ...props
+  } = params;
   const { ref, isOverflowed } = useOverflowed(forwardedRef);
 
   const { baseName, suffixWithExtension } = truncateString(children);
 
   const typographyProps = {
     ...props,
+    variant,
     ref,
     children: baseName,
   };
 
   const ExtensionProps = {
+    variant,
     ...props,
     children: suffixWithExtension,
   };
