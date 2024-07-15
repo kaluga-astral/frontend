@@ -18,4 +18,6 @@ export * from './useFocusAwayEffect';
 
 export * from './useInputPopover';
 
+export { useSecondsCountdown } from './useSecondsCountDown';
+
 export { useInterval } from 'react-use';
