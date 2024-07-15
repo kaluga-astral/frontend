@@ -32,10 +32,10 @@ export const Badge = ({
   ...props
 }: BadgeProps) => (
   <StyledBadge
-    customColor={color}
+    $customColor={color}
     max={max}
-    withBorder={withBorder}
-    variantColor={variantColor}
+    $withBorder={withBorder}
+    $variantColor={variantColor}
     {...props}
   >
     {children}

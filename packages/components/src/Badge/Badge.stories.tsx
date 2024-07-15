@@ -73,63 +73,33 @@ export const Invisible = () => {
 export const VariantsColor = () => {
   return (
     <Grid spacing={10} columns={6}>
-      <Badge
-        color="grey"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="grey" badgeContent={999} variant="standard">
+        <Button fullWidth variant="light" color="primary">
           grey
         </Button>
       </Badge>
-      <Badge
-        color="primary"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="primary" badgeContent={999} variant="standard">
+        <Button variant="light" color="primary">
           primary
         </Button>
       </Badge>
-      <Badge
-        color="error"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="error" badgeContent={999} variant="standard">
+        <Button fullWidth variant="light" color="error">
           error
         </Button>
       </Badge>
-      <Badge
-        color="success"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="success" badgeContent={999} variant="standard">
+        <Button fullWidth variant="light" color="success">
           success
         </Button>
       </Badge>
-      <Badge
-        color="warning"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="warning" badgeContent={999} variant="standard">
+        <Button fullWidth variant="light" color="warning">
           warning
         </Button>
       </Badge>
-      <Badge
-        color="white"
-        badgeContent={999}
-        variant="standard"
-        invisible={false}
-      >
-        <Button variant="contained" color="primary">
+      <Badge color="white" badgeContent={999} variant="standard">
+        <Button fullWidth variant="contained" color="primary">
           white
         </Button>
       </Badge>
@@ -138,9 +108,8 @@ export const VariantsColor = () => {
         badgeContent={999}
         variant="standard"
         variantColor="light"
-        invisible={false}
       >
-        <Button variant="contained" color="primary">
+        <Button fullWidth variant="contained" color="primary">
           grey
         </Button>
       </Badge>
@@ -149,9 +118,8 @@ export const VariantsColor = () => {
         badgeContent={999}
         variant="standard"
         variantColor="light"
-        invisible={false}
       >
-        <Button variant="contained" color="primary">
+        <Button fullWidth variant="contained" color="primary">
           primary
         </Button>
       </Badge>
@@ -160,9 +128,8 @@ export const VariantsColor = () => {
         badgeContent={999}
         variant="standard"
         variantColor="light"
-        invisible={false}
       >
-        <Button variant="contained" color="primary">
+        <Button fullWidth variant="contained" color="error">
           error
         </Button>
       </Badge>
@@ -171,9 +138,8 @@ export const VariantsColor = () => {
         badgeContent={999}
         variant="standard"
         variantColor="light"
-        invisible={false}
       >
-        <Button variant="contained" color="primary">
+        <Button fullWidth variant="contained" color="success">
           success
         </Button>
       </Badge>
@@ -182,9 +148,8 @@ export const VariantsColor = () => {
         badgeContent={999}
         variant="standard"
         variantColor="light"
-        invisible={false}
       >
-        <Button variant="contained" color="primary">
+        <Button fullWidth variant="contained" color="warning">
           warning
         </Button>
       </Badge>
