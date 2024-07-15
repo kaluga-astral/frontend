@@ -230,7 +230,7 @@ export const Elevation = () => {
       </Paper>
       <Paper elevation={2}>
         <PaperContentWrapper>
-          <Typography variant="h6" color="grey" colorIntensity="700">
+          <Typography variant="h6">
             Elevation-2
           </Typography>
         </PaperContentWrapper>
