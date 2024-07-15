@@ -6,15 +6,21 @@ import { type TypographyProps } from '../../Typography';
 
 import { truncateString } from './utils';
 
+type SpanProps = {
+  children: string;
+  ref?: Ref<HTMLElement>;
+};
+
 type UseLogicParams = FileNameProps & {
   ref: Ref<HTMLElement>;
 };
 
 type UseLogicResult = {
-  typographyProps: TypographyProps;
   isOverflowed: boolean;
   children: string;
-  ExtensionProps: TypographyProps;
+  baseNameProps: SpanProps;
+  extensionProps: SpanProps;
+  typographyProps: TypographyProps;
 };
 
 export const useLogic = (params: UseLogicParams): UseLogicResult => {
@@ -22,7 +28,6 @@ export const useLogic = (params: UseLogicParams): UseLogicResult => {
     ref: forwardedRef,
     children,
     tooltipProps,
-    style,
     variant = 'inherit',
     ...props
   } = params;
@@ -31,22 +36,24 @@ export const useLogic = (params: UseLogicParams): UseLogicResult => {
   const { baseName, suffixWithExtension } = truncateString(children);
 
   const typographyProps = {
-    ...props,
     variant,
+    ...props,
+  };
+
+  const baseNameProps = {
     ref,
     children: baseName,
   };
 
-  const ExtensionProps = {
-    variant,
-    ...props,
+  const extensionProps = {
     children: suffixWithExtension,
   };
 
   return {
     typographyProps,
+    baseNameProps,
     isOverflowed,
-    ExtensionProps,
+    extensionProps,
     children,
   };
 };

@@ -4,7 +4,7 @@ import { type TypographyVariant } from '@mui/material';
 import { type TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 import { type TypographyProps } from '../Typography';
 
-import { Extension, StyledTypography, Wrapper } from './styles';
+import { Extension, FileBaseName, Wrapper } from './styles';
 import { useLogic } from './useLogic';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
@@ -28,13 +28,18 @@ export type FileNameProps = Omit<TypographyProps, 'variant'> & {
 
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
   (props, forwardedRef) => {
-    const { typographyProps, isOverflowed, ExtensionProps, children } =
-      useLogic({
-        ...props,
-        ref: forwardedRef,
-      });
+    const {
+      typographyProps,
+      isOverflowed,
+      extensionProps,
+      baseNameProps,
+      children,
+    } = useLogic({
+      ...props,
+      ref: forwardedRef,
+    });
 
-    const { tooltipProps, style } = props;
+    const { tooltipProps } = props;
 
     return (
       <Tooltip
@@ -42,9 +47,9 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
         disableInteractive
         {...tooltipProps}
       >
-        <Wrapper style={style}>
-          <StyledTypography {...typographyProps} />
-          <Extension {...ExtensionProps} />
+        <Wrapper {...typographyProps}>
+          <FileBaseName {...baseNameProps} />
+          <Extension {...extensionProps} />
         </Wrapper>
       </Tooltip>
     );

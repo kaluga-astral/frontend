@@ -1,7 +1,7 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const StyledTypography = styled(Typography)`
+export const FileBaseName = styled.span`
   overflow: hidden;
 
   max-width: 100%;
@@ -10,13 +10,13 @@ export const StyledTypography = styled(Typography)`
   white-space: nowrap;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Typography)`
   display: flex;
   justify-content: center;
 
   margin-right: ${({ theme }) => theme.spacing(3)};
 `;
 
-export const Extension = styled(Typography)`
+export const Extension = styled.span`
   margin: 0;
 `;
