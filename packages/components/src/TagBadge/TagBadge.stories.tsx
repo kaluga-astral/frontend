@@ -43,7 +43,7 @@ export const Example = () => (
 );
 
 export const Default = () => <TagBadge color="primary" badgeContent="12" />;
-
+// TODO Доработать сторю в рамках https://track.astral.ru/soft/browse/UIKIT-1639
 export const Color = () => (
   <Stack direction="column" gap={2}>
     <Stack direction="row" gap={2}>
