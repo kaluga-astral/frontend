@@ -40,12 +40,6 @@ export type PlaceholderProps = {
   imgWidth?: string;
 
   /**
-   * @deprecated
-   * высота изображения
-   */
-  imgHeight?: string;
-
-  /**
    * Заголовок
    */
   title: JSX.Element | JSX.Element[] | string;
@@ -75,7 +69,6 @@ export const Placeholder = ({
   Actions,
   size = 'small',
   imgWidth,
-  imgHeight,
 }: PlaceholderProps) => {
   return (
     <Wrapper $size={size} className={className}>
@@ -85,7 +78,7 @@ export const Placeholder = ({
             src={imgSrc}
             alt={imgAlt}
             width={imgWidth || IMAGE_WIDTH[size]}
-            height={imgHeight || IMAGE_HEIGHT[size]}
+            height={IMAGE_HEIGHT[size]}
             $size={size}
           />
         )}
