@@ -4,7 +4,7 @@ import { type TypographyVariant } from '@mui/material';
 import { type TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
 import { type TypographyProps } from '../Typography';
 
-import { Extension, FileBaseName, Wrapper } from './styles';
+import { FileBaseName, StyledTypography } from './styles';
 import { useLogic } from './useLogic';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
@@ -19,6 +19,7 @@ export type FileNameProps = Omit<TypographyProps, 'variant'> & {
    * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
    */
   tooltipProps?: Omit<TooltipProps, 'children'>;
+
   /**
    * Применяет стили оформления темы
    * @default inherit
@@ -28,18 +29,12 @@ export type FileNameProps = Omit<TypographyProps, 'variant'> & {
 
 export const Filename = forwardRef<HTMLElement, FileNameProps>(
   (props, forwardedRef) => {
-    const {
-      typographyProps,
-      isOverflowed,
-      extensionProps,
-      baseNameProps,
-      children,
-    } = useLogic({
+    const { isOverflowed, suffixWithExtension, baseNameProps } = useLogic({
       ...props,
       ref: forwardedRef,
     });
 
-    const { tooltipProps } = props;
+    const { tooltipProps, variant = 'inherit', children, ...restProps } = props;
 
     return (
       <Tooltip
@@ -47,10 +42,10 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
         disableInteractive
         {...tooltipProps}
       >
-        <Wrapper {...typographyProps}>
+        <StyledTypography variant={variant} {...restProps}>
           <FileBaseName {...baseNameProps} />
-          <Extension {...extensionProps} />
-        </Wrapper>
+          <span>{suffixWithExtension}</span>
+        </StyledTypography>
       </Tooltip>
     );
   },

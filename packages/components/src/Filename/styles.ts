@@ -10,13 +10,9 @@ export const FileBaseName = styled.span`
   white-space: nowrap;
 `;
 
-export const Wrapper = styled(Typography)`
+export const StyledTypography = styled(Typography)`
   display: flex;
   justify-content: center;
 
   margin-right: ${({ theme }) => theme.spacing(3)};
-`;
-
-export const Extension = styled.span`
-  margin: 0;
 `;
