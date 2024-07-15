@@ -216,7 +216,7 @@ export const Elevation = () => {
     <Grid container rowSpacing={4}>
       <Paper elevation={0}>
         <PaperContentWrapper>
-          <Typography variant="h6" color="grey" colorIntensity="700">
+          <Typography variant="h6">
             Elevation-0
           </Typography>
         </PaperContentWrapper>
