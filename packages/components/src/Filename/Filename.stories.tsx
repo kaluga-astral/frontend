@@ -101,13 +101,9 @@ const generateData = (
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
   const DATA_ARRAY_LENGTH = 16;
   const DOCUMENT_NAMES = [
-    <Filename style={{ width: '150px' }}>
-      api-единая.-спецификация-api.docs
-    </Filename>,
-    <Filename style={{ width: '100px' }}>
-      OS_FINAL_BDW_FW24_MeA_21022024.pdf
-    </Filename>,
-    <Filename style={{ width: '100px' }}>OS_FINAL_BDW_FW24_MeA.pdf</Filename>,
+    <Filename>api-единая.-спецификация-api.docs</Filename>,
+    <Filename>OS_FINAL_BDW_FW24_MeA_21022024.pdf</Filename>,
+    <Filename>OS_FINAL_BDW_FW24_MeA.pdf</Filename>,
     <Filename>OS_FINAL.pdf</Filename>,
   ];
 
