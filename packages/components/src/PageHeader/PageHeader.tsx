@@ -108,7 +108,11 @@ export const PageHeader = <
           </BackButton>
         )}
         <Title variant="h3" noWrap={isMobile}>
-          <OverflowTypography variant="inherit">{title}</OverflowTypography>
+          {typeof title === 'string' ? (
+            <OverflowTypography variant="inherit">{title}</OverflowTypography>
+          ) : (
+            title
+          )}
         </Title>
       </MobileWrapper>
 
