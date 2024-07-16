@@ -13,6 +13,4 @@ export const FileBaseName = styled.span`
 export const StyledTypography = styled(Typography)`
   display: flex;
   justify-content: center;
-
-  margin-right: ${({ theme }) => theme.spacing(3)};
 `;
