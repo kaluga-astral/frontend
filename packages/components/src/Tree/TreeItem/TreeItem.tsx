@@ -22,6 +22,11 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   label: ReactNode;
 
   /**
+   * Подзаголовок, который будет отображено под элементом списка.
+   */
+  subtitle?: ReactNode;
+
+  /**
    * Содержимое, отображающееся при раскрытии элемента.
    * При наличии children item будет отображен как родительский элемент.
    */
@@ -64,6 +69,7 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 
 export const TreeItem = ({
   label,
+  subtitle,
   children,
   className,
   isSelected,
@@ -84,6 +90,7 @@ export const TreeItem = ({
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
+          $subtitle={subtitle}
           {...{
             inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
           }}
@@ -109,6 +116,7 @@ export const TreeItem = ({
       <ItemContent
         $isSelected={isSelected}
         $isDisabled={isDisabled}
+        $subtitle={subtitle}
         $level={level}
         {...{ inert: isDisabled ? '' : undefined }}
         onClick={onClick}

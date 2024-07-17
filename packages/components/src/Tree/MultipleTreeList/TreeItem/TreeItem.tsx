@@ -5,13 +5,17 @@ import {
   type SyntheticEvent,
 } from 'react';
 
-import { Checkbox } from '../../../Checkbox';
-import { FormControlLabel } from '../../../FormControlLabel';
 import type { TreeListData } from '../../types';
 import type { MultipleValue } from '../types';
+import { ItemWrapper, Label, SubTitle } from '../../TreeList/TreeItem/styles';
 
 import { useLogic } from './useLogic';
-import { List, StyledItemContent } from './styles';
+import {
+  List,
+  StyledCheckbox,
+  StyledFormControlLabel,
+  StyledItemContent,
+} from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -51,13 +55,20 @@ export type TreeItemProps = TreeListData & {
   onChange: Dispatch<SetStateAction<MultipleValue>>;
 };
 
-const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (
-  <>{label}</>
+const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({
+  label,
+  subtitle,
+}) => (
+  <ItemWrapper>
+    <Label variant="ui">{label}</Label>
+    {subtitle && <SubTitle variant="small">{subtitle}</SubTitle>}
+  </ItemWrapper>
 );
 
 export const TreeItem = ({
   id,
   label,
+  subtitle,
   level,
   renderItem = DEFAULT_RENDER_ITEM,
   children = [],
@@ -94,16 +105,19 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        subtitle={subtitle}
         component="li"
         label={
-          <FormControlLabel
+          <StyledFormControlLabel
+            $subtitle={subtitle}
             control={
-              <Checkbox
+              <StyledCheckbox
+                $subtitle={subtitle}
                 checked={isSelected}
                 indeterminate={isSelected ? false : isIndeterminate}
               />
             }
-            label={renderItem({ id, label, ...props })}
+            label={renderItem({ id, label, subtitle, ...props })}
             disabled={isDisabled}
             onChange={handleChange}
             onClick={handleClick}
@@ -135,11 +149,13 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
+      subtitle={subtitle}
       component="li"
       label={
-        <FormControlLabel
-          control={<Checkbox checked={isSelected} />}
-          label={renderItem({ id, label, ...props })}
+        <StyledFormControlLabel
+          $subtitle={subtitle}
+          control={<StyledCheckbox $subtitle={subtitle} checked={isSelected} />}
+          label={renderItem({ id, label, subtitle, ...props })}
           disabled={isDisabled}
           onChange={handleChange}
           onClick={handleClick}

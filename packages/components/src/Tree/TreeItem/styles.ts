@@ -1,4 +1,5 @@
 import { ChevronROutlineMd } from '@astral/icons';
+import { type ReactNode } from 'react';
 
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
@@ -43,14 +44,19 @@ export const Item = styled('li', {
 
 export const ItemContent = styled('div', {
   shouldForwardProp: (prop) =>
-    !['$isSelected', '$isDisabled', '$level'].includes(prop),
-})<{ $isSelected: boolean; $isDisabled: boolean; $level: number }>`
+    !['$isSelected', '$isDisabled', '$level', '$subtitle'].includes(prop),
+})<{
+  $isSelected: boolean;
+  $isDisabled: boolean;
+  $level: number;
+  $subtitle?: ReactNode;
+}>`
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'default' : 'pointer')};
 
   position: relative;
 
   display: flex;
-  align-items: center;
+  align-items: ${({ $subtitle }) => ($subtitle ? 'flex-start' : 'center')};
 
   min-height: 32px;
   padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
@@ -78,7 +84,7 @@ export const ItemContent = styled('div', {
       `calc(100% - (${COLLAPSE_BUTTON_WIDTH} + ${$level}px) * ${$level})`};
 
     width: ${TREE_LINE_WIDTH};
-    height: 50%;
+    height: ${({ $subtitle }) => ($subtitle ? '40%' : '50%')};
 
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
