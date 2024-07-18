@@ -27,12 +27,12 @@ const FAKE_TREE_LIST_DATA = [
   {
     id: '1',
     label: 'Group 1',
-    subtitle: 'Group 1 subtitle',
+    note: 'Group 1 subtitle',
     children: [
       {
         id: '11',
         label: 'Item 1.1',
-        subtitle: 'Item 1.1 subtitle',
+        note: 'Item 1.1 subtitle',
       },
       {
         id: '12',
@@ -47,12 +47,12 @@ const FAKE_TREE_LIST_DATA = [
       {
         id: '21',
         label: 'Group 2.1',
-        subtitle: 'Group 2.1 subtitle',
+        note: 'Group 2.1 subtitle',
         children: [
           {
             id: '211',
             label: 'Item 2.1.1',
-            subtitle: 'Item 2.1.1 subtitle',
+            note: 'Item 2.1.1 subtitle',
           },
           {
             id: '212',
@@ -106,6 +106,7 @@ const Item = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(1)};
   align-items: baseline;
+  flex-direction: column;
   padding-left: ${({ theme }) => theme.spacing(1)};
 `;
 
@@ -120,10 +121,17 @@ export const RenderItem = () => {
     },
   ];
 
-  const renderItem: MultipleTreeListProps['renderItem'] = ({ id, label }) => (
+  const renderItem: MultipleTreeListProps['renderItem'] = ({
+    renderCollapseButton,
+    label,
+    note,
+  }) => (
     <Item>
-      <Typography variant="caption">#{id}</Typography>
-      <Typography color="textSecondary">{label}</Typography>
+      <div>
+        {renderCollapseButton && renderCollapseButton()}
+        <Typography variant="caption">{label}</Typography>
+      </div>
+      {note && <Typography color="success">{note}</Typography>}
     </Item>
   );
 

@@ -1,9 +1,10 @@
 import { ChevronROutlineMd } from '@astral/icons';
-import { type ReactNode } from 'react';
 
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
 import { type Theme } from '../../theme';
+import { Typography } from '../../Typography';
+import { OverflowTypography } from '../../OverflowTypography';
 
 import { COLLAPSE_BUTTON_WIDTH, TREE_LINE_WIDTH } from './constants';
 
@@ -44,19 +45,18 @@ export const Item = styled('li', {
 
 export const ItemContent = styled('div', {
   shouldForwardProp: (prop) =>
-    !['$isSelected', '$isDisabled', '$level', '$subtitle'].includes(prop),
+    !['$isSelected', '$isDisabled', '$level'].includes(prop),
 })<{
   $isSelected: boolean;
   $isDisabled: boolean;
   $level: number;
-  $subtitle?: ReactNode;
 }>`
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'default' : 'pointer')};
 
   position: relative;
 
   display: flex;
-  align-items: ${({ $subtitle }) => ($subtitle ? 'flex-start' : 'center')};
+  align-items: center;
 
   min-height: 32px;
   padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
@@ -75,7 +75,7 @@ export const ItemContent = styled('div', {
       duration: theme.transitions.duration.shortest,
     })};
 
-  &::before {
+  & > div::before {
     content: '';
 
     position: absolute;
@@ -84,7 +84,7 @@ export const ItemContent = styled('div', {
       `calc(100% - (${COLLAPSE_BUTTON_WIDTH} + ${$level}px) * ${$level})`};
 
     width: ${TREE_LINE_WIDTH};
-    height: ${({ $subtitle }) => ($subtitle ? '40%' : '50%')};
+    height: 50%;
 
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
@@ -132,4 +132,22 @@ export const List = styled.ul`
   padding: 0;
 
   list-style-type: none;
+`;
+
+export const Label = styled(Typography)`
+  display: flex;
+  align-items: center;
+
+  margin-left: ${({ theme }) => theme.spacing(1)};
+`;
+
+export const Note = styled(OverflowTypography)`
+  margin-left: ${({ theme }) => theme.spacing(1)};
+
+  color: ${({ theme }) => theme.palette.grey[600]};
+`;
+
+export const ItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

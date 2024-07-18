@@ -5,7 +5,8 @@ import type { TreeListData } from '../../types';
 import type { Value } from '../types';
 
 import { useLogic } from './useLogic';
-import { ItemWrapper, Label, List, SubTitle } from './styles';
+// import { ItemWrapper, Label, List, SubTitle } from './styles';
+import { List } from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -45,29 +46,26 @@ export type TreeItemProps = TreeListData & {
   onChange?: (value: Value) => void;
 };
 
-const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({
-  label,
-  subtitle,
-}) => (
-  <ItemWrapper>
-    <Label variant="ui">{label}</Label>
-    {subtitle && <SubTitle variant="small">{subtitle}</SubTitle>}
-  </ItemWrapper>
-);
+// const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label, note }) => (
+//   <ItemWrapper>
+//     <Label variant="ui">{label}</Label>
+//     {note && <SubTitle variant="small">{note}</SubTitle>}
+//   </ItemWrapper>
+// );
 
 export const TreeItem = ({
   id,
   label,
-  subtitle,
+  note,
   level,
-  renderItem = DEFAULT_RENDER_ITEM,
+  renderItem,
   children = [],
   value,
   isInitialExpanded,
   expandedLevel,
   disabledItems,
   onChange,
-  ...props
+  // ...props
 }: TreeItemProps) => {
   const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
     id,
@@ -87,8 +85,9 @@ export const TreeItem = ({
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
         component="li"
-        label={renderItem({ id, label, subtitle, ...props })}
-        subtitle={subtitle}
+        label={label}
+        renderItem={renderItem}
+        note={note}
         level={level}
         onClick={handleChange}
       >
@@ -116,9 +115,10 @@ export const TreeItem = ({
       <BaseTreeItem
         isSelected={isSelected}
         isDisabled={isDisabled}
-        subtitle={subtitle}
         component="li"
-        label={renderItem({ id, label, subtitle, ...props })}
+        label={label}
+        renderItem={renderItem}
+        note={note}
         level={level}
         onClick={handleChange}
       />

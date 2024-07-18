@@ -25,24 +25,24 @@ const FAKE_TREE_LIST_DATA = [
   {
     id: '1',
     label: 'Group 1',
-    subtitle: 'Group 1 subtitle',
+    note: 'Group 1 subtitle',
     children: [
       {
         id: '11',
         label: 'Item 1.1',
-        subtitle: 'Item 1.1 subtitle',
+        note: 'Item 1.1 subtitle',
       },
       {
         id: '12',
         label: 'Item 1.2',
-        subtitle: 'Item 1.2 subtitle',
+        note: 'Item 1.2 subtitle',
       },
     ],
   },
   {
     id: '2',
     label: 'Group 2',
-    subtitle: 'Group 2 subtitle',
+    note: 'Group 2 subtitle',
     children: [
       {
         id: '21',
@@ -51,7 +51,7 @@ const FAKE_TREE_LIST_DATA = [
           {
             id: '211',
             label: 'Item 2.1.1',
-            subtitle: 'Item 2.1.1 subtitle',
+            note: 'Item 2.1.1 subtitle',
           },
           {
             id: '212',
@@ -78,7 +78,7 @@ const FAKE_TREE_LIST_DATA = [
               {
                 id: '2213',
                 label: 'Item 2.2.1.3',
-                subtitle: 'Item 2.2.1.3 subtitle',
+                note: 'Item 2.2.1.3 subtitle',
               },
             ],
           },
@@ -105,6 +105,7 @@ export const Example = () => {
 const Item = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(1)};
+  flex-direction: column;
   align-items: baseline;
   padding-left: ${({ theme }) => theme.spacing(1)};
 `;
@@ -120,10 +121,17 @@ export const RenderItem = () => {
     },
   ];
 
-  const renderItem: TreeLikeListProps['renderItem'] = ({ id, label }) => (
+  const renderItem: TreeLikeListProps['renderItem'] = ({
+    renderCollapseButton,
+    note,
+    label,
+  }) => (
     <Item>
-      <Typography variant="caption">#{id}</Typography>
-      <Typography color="textSecondary">{label}</Typography>
+      <div>
+        {renderCollapseButton && renderCollapseButton()}
+        <Typography variant="caption">{label}</Typography>
+      </div>
+      <Typography color="success">{note}</Typography>
     </Item>
   );
 

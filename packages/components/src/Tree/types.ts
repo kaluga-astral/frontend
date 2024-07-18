@@ -4,7 +4,7 @@ export type TreeListData = {
   /**
    * Идентификатор элемента в дереве
    */
-  id: string;
+  id?: string;
 
   /**
    * Подпись или иное содержимое элемента
@@ -14,10 +14,12 @@ export type TreeListData = {
   /**
    * Подзаголовок элемента дерева
    */
-  subtitle?: ReactNode;
+  note?: ReactNode;
 
   /**
    * Дочерние элементы
    */
   children?: TreeListData[];
+
+  renderCollapseButton?: () => JSX.Element;
 };
