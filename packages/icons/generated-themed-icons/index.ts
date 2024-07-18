@@ -293,3 +293,5 @@ export { default as OutcomingDocumentOutlineMd } from './OutcomingDocumentOutlin
 export { default as ProxyOutlineMd } from './ProxyOutlineMd';
 
 export { default as QrOutlineMd } from './QrOutlineMd';
+
+export { default as SentMessageOutlineMd } from './SentMessageOutlineMd';
