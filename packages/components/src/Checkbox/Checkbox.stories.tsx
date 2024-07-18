@@ -71,12 +71,12 @@ export const Example = () => {
   );
 };
 
-/**
- * Базовый вид компонента.
- */
-export const CheckboxBasic = () => (
+export const CheckboxDefault = () => <Checkbox />;
+
+export const CheckboxChecked = () => <Checkbox checked />;
+
+export const CheckboxDisabled = () => (
   <>
-    <Checkbox />
     <Checkbox disabled />
     <Checkbox disabled checked />
   </>
@@ -132,8 +132,7 @@ export const Indeterminate = () => {
           />
           <FormControlLabel
             label="Вариант 2"
-            control={<Checkbox checked={checked[1]} onChange={handleChange3} />
-}
+            control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
           />
         </Box>
       </div>
@@ -153,4 +152,3 @@ export const Error = () => (
     />
   </>
 );
-

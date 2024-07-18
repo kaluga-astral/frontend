@@ -90,6 +90,66 @@ export const Example = () => {
   );
 };
 
+export const Disabled = () => {
+  const form = useForm<Form1Values>({
+    mode: 'onChange',
+    defaultValues: {
+      check1: false,
+      check2: true,
+    },
+    resolver: resolver<Form1Values>(validationSchema1),
+  });
+
+  return (
+    <FormStoryContainer form={form}>
+      <LegacyGrid
+        container
+        justifyContent="center"
+        autoFlow="column"
+        spacing={4}
+      >
+        <FormCheckbox control={form.control} name="check1" title="Текст" />
+        <FormCheckbox
+          control={form.control}
+          disabled
+          name="check2"
+          title="Текст"
+        />
+      </LegacyGrid>
+    </FormStoryContainer>
+  );
+};
+
+export const Required = () => {
+  const form = useForm<Form1Values>({
+    mode: 'onChange',
+    defaultValues: {
+      check1: false,
+      check2: false,
+    },
+    resolver: resolver<Form1Values>(validationSchema1),
+  });
+
+  return (
+    <FormStoryContainer form={form}>
+      <LegacyGrid
+        container
+        justifyContent="center"
+        autoFlow="column"
+        spacing={4}
+      >
+        <FormCheckbox control={form.control} name="check1" title="Текст" />
+        <FormCheckbox
+          control={form.control}
+          required
+          name="check2"
+          title="Текст"
+        />
+      </LegacyGrid>
+    </FormStoryContainer>
+  );
+};
+
 /**
  * Валидация компонента может быть, когда в результате обработки значения в форме произошла ошибка.
  */

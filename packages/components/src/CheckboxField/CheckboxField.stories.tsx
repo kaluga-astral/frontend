@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { Stack } from '@mui/material';
 
 import { CheckboxField } from './CheckboxField';
 
@@ -24,22 +23,28 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
-  return (
-    <Stack gap={4} mx={2}>
-      <CheckboxField label="Текст (default)" />
-      <CheckboxField label="Текст (helper text)" helperText={'helper text'} />
-      <CheckboxField label="Текст (error)" helperText={'helper text'} isError />
-      <CheckboxField
-        label="Текст (error, tooltip)"
-        helperText={'helper text'}
-        isError
-        hideHelperText
-      />
-      <CheckboxField
-        label="Текст (success)"
-        helperText={'helper text'}
-        isSuccess
-      />
-    </Stack>
-  );
+  return <CheckboxField label="Текст" helperText={'helper text'} />;
 };
+
+export const Default = () => <CheckboxField label="Текст (default)" />;
+
+export const HelperText = () => (
+  <CheckboxField label="Текст (helper text)" helperText={'helper text'} />
+);
+
+export const Error = () => (
+  <CheckboxField label="Текст (error)" helperText={'helper text'} isError />
+);
+
+export const ErrorTooltip = () => (
+  <CheckboxField
+    label="Текст (error, tooltip)"
+    helperText={'helper text'}
+    isError
+    hideHelperText
+  />
+);
+
+export const Success = () => (
+  <CheckboxField label="Текст (success)" helperText={'helper text'} isSuccess />
+);

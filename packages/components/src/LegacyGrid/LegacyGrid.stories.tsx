@@ -5,6 +5,10 @@ import { Typography } from '../Typography';
 
 import { LegacyGrid } from './LegacyGrid';
 
+/**
+ * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
+ * **Используйте [NewDataGrid](/story/components-newdatagrid--docs), который построен на css grid.**
+ */
 const meta: Meta<typeof LegacyGrid> = {
   title: 'Components/LegacyGrid',
   component: LegacyGrid,

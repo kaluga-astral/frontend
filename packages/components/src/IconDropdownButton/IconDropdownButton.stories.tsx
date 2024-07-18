@@ -116,7 +116,7 @@ export const Example = () => (
 /**
  * Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.
  */
-export const Light = () => (
+export const Default = () => (
   <>
     <IconDropdownButton
       variant="light"
@@ -126,16 +126,7 @@ export const Light = () => (
       {children}
     </IconDropdownButton>
     <IconDropdownButton
-      disabled
-      variant="light"
-      icon={<DotsVOutlineMd />}
-      aria-label="Меню"
-    >
-      {children}
-    </IconDropdownButton>
-    <IconDropdownButton
-      loading
-      variant="light"
+      variant="text"
       icon={<DotsVOutlineMd />}
       aria-label="Меню"
     >
@@ -144,13 +135,11 @@ export const Light = () => (
   </>
 );
 
-/**
- * Кнопка требующая наименьшего внимания.
- */
-export const Text = () => (
+export const Disabled = () => (
   <>
     <IconDropdownButton
-      variant="text"
+      disabled
+      variant="light"
       icon={<DotsVOutlineMd />}
       aria-label="Меню"
     >
@@ -159,6 +148,19 @@ export const Text = () => (
     <IconDropdownButton
       disabled
       variant="text"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+  </>
+);
+
+export const Loading = () => (
+  <>
+    <IconDropdownButton
+      loading
+      variant="light"
       icon={<DotsVOutlineMd />}
       aria-label="Меню"
     >

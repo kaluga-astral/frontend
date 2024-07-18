@@ -4,6 +4,8 @@ import { ListItemButton } from '../ListItemButton';
 import { ListItemText } from '../ListItemText';
 import { List } from '../List';
 import { ListItem } from '../ListItem';
+import { Grid } from '../Grid';
+import { styled } from '../styles';
 
 import { Divider } from './Divider';
 
@@ -17,6 +19,12 @@ const meta: Meta<typeof Divider> = {
 };
 
 export default meta;
+
+const Item = styled.div`
+  padding: 10px;
+  align-items: flex-center;
+  text-align: center;
+`;
 
 export const Example = () => {
   return (
@@ -39,3 +47,15 @@ export const Example = () => {
     </List>
   );
 };
+
+export const Orientation = () => (
+  <>
+    <Grid container rows={2} columns={2} rowSpacing={5}>
+      <Item>Horizontal</Item>
+      <Divider orientation="horizontal" flexItem />
+      <Item>Vertical</Item>
+      <Divider orientation="vertical" flexItem />
+      <Item></Item>
+    </Grid>
+  </>
+);

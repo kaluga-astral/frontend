@@ -36,3 +36,17 @@ export const Interaction: Story = {
 export default meta;
 
 export const Example = () => <CircularProgress />;
+
+export const Color = () => (
+  <>
+    <CircularProgress color="primary" />
+    <CircularProgress color="inverted" />
+  </>
+);
+
+export const Size = () => (
+  <>
+    <CircularProgress size="small" />
+    <CircularProgress size="medium" />
+  </>
+);
