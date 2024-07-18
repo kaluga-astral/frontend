@@ -70,6 +70,8 @@ export { default as CircleErrorFillMd } from './CircleErrorFillMd';
 
 export { default as ClassmatesFillMd } from './ClassmatesFillMd';
 
+export { default as ClockFillSm } from './ClockFillSm';
+
 export { default as ClockOutlineMd } from './ClockOutlineMd';
 
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
