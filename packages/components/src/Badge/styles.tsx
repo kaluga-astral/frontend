@@ -71,7 +71,7 @@ const getTextColor = ({
 
 export const StyledBadge = styled(Badge, {
   shouldForwardProp: (prop) =>
-    !['customColor', 'withBorder', 'variantColor'].includes(prop),
+    !['$customColor', '$withBorder', '$variantColor'].includes(prop),
 })<StyledBadgeProps>`
   .MuiBadge-badge {
     height: 20px;
