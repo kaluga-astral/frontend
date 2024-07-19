@@ -6,7 +6,12 @@ import { type Theme } from '../../theme';
 import { Typography } from '../../Typography';
 import { OverflowTypography } from '../../OverflowTypography';
 
-import { COLLAPSE_BUTTON_WIDTH, TREE_LINE_WIDTH } from './constants';
+import {
+  COLLAPSE_BUTTON_WIDTH,
+  GAP_WIDTH,
+  HALF_PADDING_COLLAPSE_BUTTON_WIDTH,
+  TREE_LINE_WIDTH,
+} from './constants';
 
 const getBackgroundColorOnHover = (
   theme: Theme,
@@ -34,7 +39,7 @@ export const Item = styled('li', {
     z-index: 1;
     top: 0;
     transform: ${({ $level }) =>
-      `translateX(calc(-${TREE_LINE_WIDTH} + (${COLLAPSE_BUTTON_WIDTH} + ${$level}px) * ${$level}))`};
+      `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
 
     width: 0;
     height: 100%;
@@ -75,20 +80,22 @@ export const ItemContent = styled('div', {
       duration: theme.transitions.duration.shortest,
     })};
 
-  & > div::before {
+  &::before {
     content: '';
 
     position: absolute;
+    z-index: 1;
     top: 0;
-    right: ${({ $level }) =>
-      `calc(100% - (${COLLAPSE_BUTTON_WIDTH} + ${$level}px) * ${$level})`};
+    left: 0;
+    transform: ${({ $level }) =>
+      `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
 
-    width: ${TREE_LINE_WIDTH};
-    height: 50%;
+    width: 0;
+    height: 20%;
 
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
+    //border: 0;
   }
 
   &:hover {
@@ -150,4 +157,29 @@ export const Note = styled(OverflowTypography)`
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const TestWrapper = styled('div', {
+  shouldForwardProp: (prop) => prop !== '$level',
+})<{ $level: number }>`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: -42px;
+
+    width: ${TREE_LINE_WIDTH};
+    height: 50%;
+
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
+  }
 `;

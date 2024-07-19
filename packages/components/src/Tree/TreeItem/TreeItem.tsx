@@ -16,6 +16,7 @@ import {
   ItemWrapper,
   Label,
   Note,
+  TestWrapper,
 } from './styles';
 import { useLogic } from './useLogic';
 
@@ -129,10 +130,10 @@ export const TreeItem = ({
             renderItem({ renderCollapseButton, label, note })
           ) : (
             <ItemWrapper>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <TestWrapper $level={level}>
                 {renderCollapseButton()}
                 <Label>{label}</Label>
-              </div>
+              </TestWrapper>
               {note && <Note>{note}</Note>}
             </ItemWrapper>
           )}
@@ -156,7 +157,9 @@ export const TreeItem = ({
           renderItem({ label, note })
         ) : (
           <ItemWrapper>
-            <Label>{label}</Label>
+            <TestWrapper $level={level}>
+              <Label>{label}</Label>
+            </TestWrapper>
             {note && <Note>{note}</Note>}
           </ItemWrapper>
         )}

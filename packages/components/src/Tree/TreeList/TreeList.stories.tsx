@@ -34,6 +34,7 @@ const FAKE_TREE_LIST_DATA = [
       {
         id: '12',
         label: 'Item 1.2',
+        note: 'Group 1 subtitle',
       },
     ],
   },
@@ -53,6 +54,7 @@ const FAKE_TREE_LIST_DATA = [
           {
             id: '212',
             label: 'Item 2.1.2',
+            note: 'Item 2.1.2.2',
           },
         ],
       },
@@ -67,6 +69,32 @@ const FAKE_TREE_LIST_DATA = [
               {
                 id: '2211',
                 label: 'Item 2.2.1.1',
+                children: [
+                  {
+                    id: '2211',
+                    label: 'Item 2.2.1.1',
+                    children: [
+                      {
+                        id: '2211',
+                        label: 'Item 2.2.1.1',
+                        children: [
+                          {
+                            id: '2211',
+                            label: 'Item 2.2.1.1',
+                          },
+                        ],
+                      },
+                      {
+                        id: '2211',
+                        label: 'Item 2.2.1.1',
+                      },
+                    ],
+                  },
+                  {
+                    id: '2211',
+                    label: 'Item 2.2.1.1',
+                  },
+                ],
               },
               {
                 id: '2212',
