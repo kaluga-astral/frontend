@@ -1,23 +1,10 @@
 import { TreeItem } from '../../TreeItem';
 import { styled } from '../../../styles';
-import {
-  COLLAPSE_BUTTON_WIDTH,
-  GAP_WIDTH,
-  HALF_PADDING_COLLAPSE_BUTTON_WIDTH,
-} from '../../TreeItem/constants';
 
-export const StyledItemContent = styled(TreeItem, {
-  shouldForwardProp: (prop) => !['$level'].includes(prop),
-})<{
-  $level: number;
-}>`
-  & > div {
+export const StyledItemContent = styled(TreeItem)`
+  & > div > div {
+    padding-top: 0;
     padding-bottom: 0;
-  }
-
-  & > div > div::before {
-    transform: ${({ $level }) =>
-      `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH} - 1px) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
   }
 `;
 

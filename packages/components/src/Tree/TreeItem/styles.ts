@@ -10,6 +10,7 @@ import {
   COLLAPSE_BUTTON_WIDTH,
   GAP_WIDTH,
   HALF_PADDING_COLLAPSE_BUTTON_WIDTH,
+  ITEM_PADDING,
   TREE_LINE_WIDTH,
 } from './constants';
 
@@ -64,7 +65,7 @@ export const ItemContent = styled('div', {
   align-items: center;
 
   min-height: 32px;
-  padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
+  padding: ${({ theme }) => theme.spacing(0, 4, 0, 0)};
   padding-left: ${({ theme, $level }) =>
     `calc(${theme.spacing($level * 7)} + ${theme.spacing(7)})`};
 
@@ -79,24 +80,6 @@ export const ItemContent = styled('div', {
       easing: theme.transitions.easing.easeIn,
       duration: theme.transitions.duration.shortest,
     })};
-
-  &::before {
-    content: '';
-
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    transform: ${({ $level }) =>
-      `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
-
-    width: 0;
-    height: 20%;
-
-    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
-    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
-    //border: 0;
-  }
 
   &:hover {
     background-color: ${({ theme, $isSelected, $isDisabled }) =>
@@ -157,6 +140,8 @@ export const Note = styled(OverflowTypography)`
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  padding: ${({ theme }) => theme.spacing(1, 0, 1, 0)};
 `;
 
 export const TestWrapper = styled('div', {
@@ -167,16 +152,19 @@ export const TestWrapper = styled('div', {
   display: flex;
   align-items: center;
 
+  min-height: 32px;
+
   &::before {
     content: '';
 
     position: absolute;
     z-index: 1;
     top: 0;
-    left: -42px;
+    left: calc(${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} - ${ITEM_PADDING});
 
     width: ${TREE_LINE_WIDTH};
-    height: 50%;
+    height: calc(50% + 4px);
+    margin-top: ${({ theme }) => theme.spacing(-1)};
 
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};

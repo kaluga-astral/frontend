@@ -37,6 +37,7 @@ const FAKE_TREE_LIST_DATA = [
       {
         id: '12',
         label: 'Item 1.2',
+        note: 'Item 1.2 subtitle',
       },
     ],
   },
