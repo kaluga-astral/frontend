@@ -248,10 +248,7 @@ export * from './Tab';
 
 export * from './Table';
 
-export {
-  TableDescriptionCell,
-  type TableDescriptionCellProps,
-} from './TableDescriptionCell';
+export { DescriptionCell, type DescriptionCellProps } from './DescriptionCell';
 
 export * from './Tabs';
 

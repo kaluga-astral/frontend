@@ -1,28 +1,25 @@
 import { describe, expect } from 'vitest';
 import { renderWithTheme, screen } from '@astral/tests';
 
-import { TableDescriptionCell } from './TableDescriptionCell';
+import { DescriptionCell } from './DescriptionCell';
 
-describe('TableDescriptionCell', () => {
-  it('Title опции отображается', () => {
-    const fakeData = 'Заголовок';
+describe('DescriptionCell', () => {
+  it('Title отображается', () => {
+    const fakeTitle = 'Заголовок';
 
-    renderWithTheme(<TableDescriptionCell title={fakeData} />);
+    renderWithTheme(<DescriptionCell title={fakeTitle} />);
 
     const title = screen.getByText('Заголовок');
 
     expect(title).toBeInTheDocument();
   });
 
-  it('SubTitle опции отображается', () => {
-    const fakeDataTitle = 'Заголовок';
-    const fakeDataSubTitle = 'Подзаголовок';
+  it('SubTitle отображается', () => {
+    const fakeTitle = 'Заголовок';
+    const fakeSubTitle = 'Подзаголовок';
 
     renderWithTheme(
-      <TableDescriptionCell
-        title={fakeDataTitle}
-        subtitle={fakeDataSubTitle}
-      />,
+      <DescriptionCell title={fakeTitle} subtitle={fakeSubTitle} />,
     );
 
     const subtitle = screen.getByText('Подзаголовок');
@@ -30,8 +27,8 @@ describe('TableDescriptionCell', () => {
     expect(subtitle).toBeInTheDocument();
   });
 
-  it('Icon опции отображается', () => {
-    const fakeData = 'Заголовок';
+  it('Icon отображается', () => {
+    const fakeTitle = 'Заголовок';
     const Icon = () => {
       return (
         <svg
@@ -71,7 +68,7 @@ describe('TableDescriptionCell', () => {
       );
     };
 
-    renderWithTheme(<TableDescriptionCell title={fakeData} icon={<Icon />} />);
+    renderWithTheme(<DescriptionCell title={fakeTitle} icon={<Icon />} />);
 
     const icon = screen.getByRole('svg');
 

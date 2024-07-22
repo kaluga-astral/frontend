@@ -1,11 +1,13 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
 
-export const DescriptionCellWrapper = styled.div`
+export const Wrapper = styled('div', {
+  shouldForwardProp: (prop) => prop != '$iconPosition',
+})<{ $iconPosition?: string }>`
   display: flex;
+  flex-direction: ${({ $iconPosition }) =>
+    $iconPosition === 'right' && 'row-reverse'};
   align-items: center;
-
-  padding-left: ${({ theme }) => theme.spacing(2)};
 
   transition: ${({ theme }) =>
     theme.transitions.create('background-color', {
@@ -18,15 +20,12 @@ export const DescriptionCellWrapper = styled.div`
   }
 `;
 
-export const IconWrapper = styled('div', {
-  shouldForwardProp: (prop) => prop != '$iconPosition',
-})<{ $iconPosition?: string }>`
+export const IconWrapper = styled.div`
   display: flex;
 
-  padding-right: ${({ theme, $iconPosition }) =>
-    $iconPosition === 'right' && theme.spacing(2)};
-
   & > svg {
+    display: block;
+
     width: 24px;
     height: 24px;
   }

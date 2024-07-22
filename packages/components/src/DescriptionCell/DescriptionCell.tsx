@@ -2,14 +2,9 @@ import { type ReactNode } from 'react';
 
 import { Typography } from '../Typography';
 
-import {
-  DescriptionCellWrapper,
-  IconWrapper,
-  ItemWrapper,
-  SubTitle,
-} from './styles';
+import { IconWrapper, ItemWrapper, SubTitle, Wrapper } from './styles';
 
-export type TableDescriptionCellProps = {
+export type DescriptionCellProps = {
   /**
    * Заголовок элемента таблицы
    */
@@ -28,22 +23,19 @@ export type TableDescriptionCellProps = {
   iconPosition?: 'left' | 'right';
 };
 
-export const TableDescriptionCell = ({
+export const DescriptionCell = ({
   title,
   icon,
   subtitle,
   iconPosition = 'left',
-}: TableDescriptionCellProps) => {
+}: DescriptionCellProps) => {
   return (
-    <DescriptionCellWrapper>
-      {iconPosition === 'left' && <IconWrapper>{icon}</IconWrapper>}
+    <Wrapper $iconPosition={iconPosition}>
+      <IconWrapper>{icon}</IconWrapper>
       <ItemWrapper>
         <Typography>{title}</Typography>
         {subtitle && <SubTitle>{subtitle}</SubTitle>}
       </ItemWrapper>
-      {iconPosition === 'right' && (
-        <IconWrapper $iconPosition={iconPosition}>{icon}</IconWrapper>
-      )}
-    </DescriptionCellWrapper>
+    </Wrapper>
   );
 };

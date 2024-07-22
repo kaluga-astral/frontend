@@ -7,24 +7,24 @@ import {
   type DataGridRowOptions,
   NewDataGrid,
 } from '../NewDataGrid';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 
-import { TableDescriptionCell } from './TableDescriptionCell';
+import { DescriptionCell } from './DescriptionCell';
 
 /**
  *
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=838-13898&t=arJijCE59mNvh6io-0)
  * ### [Guide]()
  */
 
-const meta: Meta<typeof TableDescriptionCell> = {
-  title: 'Components/TableDescriptionCell',
-  component: TableDescriptionCell,
+const meta: Meta<typeof DescriptionCell> = {
+  title: 'Components/DescriptionCell',
+  component: DescriptionCell,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TableDescriptionCell>;
+type Story = StoryObj<typeof DescriptionCell>;
 
 const Icon = () => {
   return (
@@ -89,7 +89,7 @@ const StyledDescriptionName = styled(Description.Name)`
 
 export const Example = () => {
   return (
-    <TableDescriptionCell
+    <DescriptionCell
       title="Заголовок"
       icon={<Icon />}
       subtitle="Подзаголовок"
@@ -99,7 +99,7 @@ export const Example = () => {
 
 export const DescriptionSubtitle = () => {
   return (
-    <TableDescriptionCell
+    <DescriptionCell
       title="Прибыль"
       subtitle={
         <Description>
@@ -119,12 +119,12 @@ export const DescriptionSubtitle = () => {
 export const IconPosition = () => {
   return (
     <Wrapper>
-      <TableDescriptionCell
+      <DescriptionCell
         title="Заголовок"
         subtitle="Подзаголовок"
         icon={<Icon />}
       />
-      <TableDescriptionCell
+      <DescriptionCell
         title="Заголовок"
         subtitle="Подзаголовок"
         iconPosition="right"
@@ -146,8 +146,8 @@ export const DataGridDescriptionCell = () => {
 
   const FAKE_DATA_OBJECT_TEMPLATE = {
     id: '1',
-    documentName: <TableDescriptionCell title="НДС" />,
-    product: <TableDescriptionCell title="1C отчетность" />,
+    documentName: <DescriptionCell title="НДС" />,
+    product: <DescriptionCell title="1C отчетность" />,
     createDate: '2022-03-24T17:50:40.206Z',
   };
 
@@ -166,7 +166,7 @@ export const DataGridDescriptionCell = () => {
     options?: DataGridRowOptions,
   ): DataType[] => {
     const PRODUCT = [
-      <TableDescriptionCell
+      <DescriptionCell
         icon={<Icon />}
         title="1С Отчетность"
         subtitle={
@@ -176,7 +176,7 @@ export const DataGridDescriptionCell = () => {
           </Description>
         }
       />,
-      <TableDescriptionCell
+      <DescriptionCell
         icon={<Icon />}
         title="Астрал.Отчет 5.0"
         subtitle={
@@ -186,7 +186,7 @@ export const DataGridDescriptionCell = () => {
           </Description>
         }
       />,
-      <TableDescriptionCell
+      <DescriptionCell
         icon={<Icon />}
         title="Астрал.Отчет 4.0"
         subtitle={
@@ -199,7 +199,7 @@ export const DataGridDescriptionCell = () => {
     ];
     const DATA_ARRAY_LENGTH = 16;
     const DOCUMENT_NAMES = [
-      <TableDescriptionCell
+      <DescriptionCell
         title="НДС"
         subtitle={
           <Description>
@@ -208,7 +208,7 @@ export const DataGridDescriptionCell = () => {
           </Description>
         }
       />,
-      <TableDescriptionCell
+      <DescriptionCell
         title="Прибыль"
         subtitle={
           <Description>
@@ -217,7 +217,7 @@ export const DataGridDescriptionCell = () => {
           </Description>
         }
       />,
-      <TableDescriptionCell
+      <DescriptionCell
         title="Бухгалтерский отчет"
         subtitle={
           <Description>
