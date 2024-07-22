@@ -11,6 +11,7 @@ type HeadCellProps = {
 export const Wrapper = styled('div', {
   shouldForwardProp: (prop) => !['$align', '$isDisabled'].includes(prop),
 })<HeadCellProps>`
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: ${({ $align }) => alignToJustifyContent($align)};

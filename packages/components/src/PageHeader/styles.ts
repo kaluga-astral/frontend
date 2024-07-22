@@ -67,6 +67,8 @@ export const Title = styled(Typography)`
   grid-area: title;
   align-self: center;
 
+  margin-right: ${({ theme }) => theme.spacing(3)};
+
   line-height: ${({ theme }) => theme.typography.pxToRem(32)};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {

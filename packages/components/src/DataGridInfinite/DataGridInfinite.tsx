@@ -44,6 +44,10 @@ export type DataGridInfiniteProps<
   isEndReached?: boolean;
 };
 
+/**
+ * @deprecated
+ * Используйте NewDateGridInfinite
+ */
 export const DataGridInfinite = <
   Data extends Record<string, unknown> = DataGridRow,
   SortField extends keyof Data = keyof Data,
@@ -66,6 +70,8 @@ export const DataGridInfinite = <
   onEndReached,
   isEndReached,
 }: DataGridInfiniteProps<Data, SortField>) => {
+  console.warn('Deprecated. Используйте NewDateGridInfinite');
+
   const { handleSelectAllRows, uncheckedRowsCount, renderedPlaceholder } =
     useDataGridCommonUtils<Data>({
       rows,

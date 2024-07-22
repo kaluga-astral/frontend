@@ -70,6 +70,8 @@ export { default as CircleErrorFillMd } from './CircleErrorFillMd';
 
 export { default as ClassmatesFillMd } from './ClassmatesFillMd';
 
+export { default as ClockFillSm } from './ClockFillSm';
+
 export { default as ClockOutlineMd } from './ClockOutlineMd';
 
 export { default as ClockwiseOutlineMd } from './ClockwiseOutlineMd';
@@ -291,3 +293,5 @@ export { default as OutcomingDocumentOutlineMd } from './OutcomingDocumentOutlin
 export { default as ProxyOutlineMd } from './ProxyOutlineMd';
 
 export { default as QrOutlineMd } from './QrOutlineMd';
+
+export { default as SentMessageOutlineMd } from './SentMessageOutlineMd';
