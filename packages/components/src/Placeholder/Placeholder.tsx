@@ -78,7 +78,7 @@ export const Placeholder = ({
             src={imgSrc}
             alt={imgAlt}
             width={imgWidth || IMAGE_WIDTH[size]}
-            height={IMAGE_HEIGHT[size]}
+            height={imgWidth ? 'auto' : IMAGE_HEIGHT[size]}
             $size={size}
           />
         )}
