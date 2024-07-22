@@ -64,6 +64,11 @@ const Icon = () => {
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Interaction: Story = {
   args: {
     title: 'Заголовок',
@@ -87,7 +92,6 @@ export const Example = () => {
     <TableDescriptionCell
       title="Заголовок"
       icon={<Icon />}
-      // iconPosition="right"
       subtitle="Подзаголовок"
     />
   );
@@ -104,6 +108,29 @@ export const DescriptionSubtitle = () => {
         </Description>
       }
     />
+  );
+};
+
+/**
+ * С помощью prop ```iconPosition``` можно позиционировать иконку слева или справа от текста.
+ * По дефолту left
+ */
+
+export const IconPosition = () => {
+  return (
+    <Wrapper>
+      <TableDescriptionCell
+        title="Заголовок"
+        subtitle="Подзаголовок"
+        icon={<Icon />}
+      />
+      <TableDescriptionCell
+        title="Заголовок"
+        subtitle="Подзаголовок"
+        iconPosition="right"
+        icon={<Icon />}
+      />
+    </Wrapper>
   );
 };
 
