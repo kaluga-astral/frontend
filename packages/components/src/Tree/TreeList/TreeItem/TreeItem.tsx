@@ -40,6 +40,11 @@ export type TreeItemProps = TreeListData & {
   disabledItems?: Array<string>;
 
   /**
+   * Кортеж `value` элементов дерева, которые не доступны для взаимодействия и `reason` причина блокировки
+   */
+  disableReasonItems?: Array<[string, string]>;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange?: (value: Value) => void;
@@ -59,16 +64,24 @@ export const TreeItem = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
+  disableReasonItems,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
+  const {
+    isSelected,
+    isDefaultExpanded,
+    isDisabled,
+    handleChange,
+    disableReason,
+  } = useLogic({
     id,
     value,
     level,
     isInitialExpanded,
     expandedLevel,
     disabledItems,
+    disableReasonItems,
     onChange,
   });
 
@@ -79,6 +92,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         component="li"
         label={renderItem({ id, label, ...props })}
         level={level}
@@ -93,6 +107,7 @@ export const TreeItem = ({
               level={level + 1}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              disableReasonItems={disableReasonItems}
               disabledItems={disabledItems}
               value={value}
               onChange={onChange}
@@ -107,6 +122,7 @@ export const TreeItem = ({
     <BaseTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       component="li"
       label={renderItem({ id, label, ...props })}
       level={level}

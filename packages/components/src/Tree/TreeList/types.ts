@@ -38,6 +38,11 @@ export type TreeListProps = {
   disabledItems?: Array<string>;
 
   /**
+   * Кортеж `value` элементов дерева, которые не доступны для взаимодействия и `reason` причина блокировки
+   */
+  disableReasonItems?: Array<[string, string]>;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
   renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;

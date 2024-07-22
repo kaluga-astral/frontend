@@ -1,6 +1,7 @@
 import { type ComponentProps, type ElementType, type ReactNode } from 'react';
 
 import { Collapse } from '../../Collapse';
+import { Tooltip } from '../../Tooltip';
 
 import { ChevronIcon, CollapseButton, Item, ItemContent } from './styles';
 import { useLogic } from './useLogic';
@@ -43,6 +44,10 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
    * @default 'false'
    */
   isDisabled?: boolean;
+  /**
+   * Текст тултипа при заблокированном состоянии элемента дерева
+   */
+  disableReason?: string;
 
   /**
    * Если true, то список можно будет развернуть даже если установлен `isDisabled=true`
@@ -68,6 +73,7 @@ export const TreeItem = ({
   className,
   isSelected,
   isDisabled = false,
+  disableReason,
   isDefaultExpanded = false,
   isNotBlockingExpandList = false,
   level = 0,
@@ -77,28 +83,37 @@ export const TreeItem = ({
 }: TreeItemProps) => {
   const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
 
+  if (disableReason) {
+    console.log(disableReason);
+  }
+
   if (children) {
     return (
       <Item {...props} $level={level} as={component} className={className}>
-        <ItemContent
-          $isSelected={isSelected}
-          $isDisabled={isDisabled}
-          $level={level}
-          {...{
-            inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
-          }}
-          onClick={onClick}
+        <Tooltip
+          title={isDisabled && disableReason}
+          withoutContainer={!isDisabled}
+          placement="bottom-start"
         >
-          <CollapseButton
-            $isNotBlockingExpandList={isNotBlockingExpandList}
-            variant="text"
-            onClick={handleToggle}
+          <ItemContent
+            $isSelected={isSelected}
+            $isDisabled={isDisabled}
+            $level={level}
+            {...{
+              inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
+            }}
+            onClick={onClick}
           >
-            <ChevronIcon $isActive={isOpen} />
-          </CollapseButton>
-          {label}
-        </ItemContent>
-
+            <CollapseButton
+              $isNotBlockingExpandList={isNotBlockingExpandList}
+              variant="text"
+              onClick={handleToggle}
+            >
+              <ChevronIcon $isActive={isOpen} />
+            </CollapseButton>
+            {label}
+          </ItemContent>
+        </Tooltip>
         <Collapse in={isOpen}>{children}</Collapse>
       </Item>
     );
@@ -106,15 +121,21 @@ export const TreeItem = ({
 
   return (
     <Item {...props} $level={level} as={component} className={className}>
-      <ItemContent
-        $isSelected={isSelected}
-        $isDisabled={isDisabled}
-        $level={level}
-        {...{ inert: isDisabled ? '' : undefined }}
-        onClick={onClick}
+      <Tooltip
+        title={isDisabled && disableReason}
+        withoutContainer={!isDisabled}
+        placement="bottom-start"
       >
-        {label}
-      </ItemContent>
+        <ItemContent
+          $isSelected={isSelected}
+          $isDisabled={isDisabled}
+          $level={level}
+          {...{ inert: isDisabled ? '' : undefined }}
+          onClick={onClick}
+        >
+          {label}
+        </ItemContent>
+      </Tooltip>
     </Item>
   );
 };

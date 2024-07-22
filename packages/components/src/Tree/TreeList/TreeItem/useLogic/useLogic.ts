@@ -8,6 +8,7 @@ type UseLogicProps = Pick<
   | 'isInitialExpanded'
   | 'expandedLevel'
   | 'disabledItems'
+  | 'disableReasonItems'
   | 'onChange'
 >;
 
@@ -18,11 +19,14 @@ export const useLogic = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
+  disableReasonItems,
   onChange,
 }: UseLogicProps) => {
   const isSelected = Object.is(value, id);
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
   const isDisabled = disabledItems?.includes(id);
+  const disableReason =
+    disableReasonItems && Object.fromEntries(disableReasonItems)[id];
 
   const handleChange = () => {
     onChange?.(id);
@@ -32,6 +36,7 @@ export const useLogic = ({
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     handleChange,
   };
 };
