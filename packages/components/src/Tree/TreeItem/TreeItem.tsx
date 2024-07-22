@@ -83,17 +83,13 @@ export const TreeItem = ({
 }: TreeItemProps) => {
   const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
 
-  if (disableReason) {
-    console.log(disableReason);
-  }
-
   if (children) {
     return (
       <Item {...props} $level={level} as={component} className={className}>
         <Tooltip
           title={isDisabled && disableReason}
           withoutContainer={!isDisabled}
-          placement="bottom-start"
+          placement="bottom"
         >
           <ItemContent
             $isSelected={isSelected}
@@ -124,7 +120,7 @@ export const TreeItem = ({
       <Tooltip
         title={isDisabled && disableReason}
         withoutContainer={!isDisabled}
-        placement="bottom-start"
+        placement="bottom"
       >
         <ItemContent
           $isSelected={isSelected}

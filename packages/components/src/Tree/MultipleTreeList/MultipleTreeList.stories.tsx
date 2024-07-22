@@ -202,6 +202,10 @@ export const DisabledItems = () => {
       data={fakeData}
       value={value}
       disabledItems={['21', '3']}
+      disableReasonItems={[
+        ['21', 'Элемент 21 не доступен'],
+        ['3', 'Элемент 3 не доступен'],
+      ]}
       onChange={setValue}
     />
   );

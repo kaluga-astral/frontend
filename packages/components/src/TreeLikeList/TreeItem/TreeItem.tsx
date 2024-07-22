@@ -46,6 +46,11 @@ export type TreeItemProps = TreeListData & {
   disabledItems?: MultipleValue;
 
   /**
+   * Кортеж `value` элементов дерева, которые не доступны для взаимодействия и `reason` причина блокировки
+   */
+  disableReasonItems?: Array<[string, string]>;
+
+  /**
    * Функция, которая запускается при выборе item
    */
   onChange: Dispatch<SetStateAction<MultipleValue>>;
@@ -65,19 +70,27 @@ export const TreeItem = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
+  disableReasonItems,
   onChange,
   ...props
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, nextLevel, handleChange } =
-    useLogic({
-      id,
-      value,
-      level,
-      isInitialExpanded,
-      expandedLevel,
-      disabledItems,
-      onChange,
-    });
+  const {
+    isSelected,
+    isDefaultExpanded,
+    isDisabled,
+    disableReason,
+    nextLevel,
+    handleChange,
+  } = useLogic({
+    id,
+    value,
+    level,
+    isInitialExpanded,
+    expandedLevel,
+    disabledItems,
+    disableReasonItems,
+    onChange,
+  });
 
   /**
    * Предотвращаем всплытие события, так как клик в области чекбокса или label вызывает обработчик на уровне всего item
@@ -91,6 +104,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         isNotBlockingExpandList
         component="li"
         label={
@@ -114,6 +128,7 @@ export const TreeItem = ({
               level={nextLevel}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              disableReasonItems={disableReasonItems}
               disabledItems={disabledItems}
               value={value}
               onChange={onChange}
@@ -128,6 +143,7 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       component="li"
       label={
         <FormControlLabel

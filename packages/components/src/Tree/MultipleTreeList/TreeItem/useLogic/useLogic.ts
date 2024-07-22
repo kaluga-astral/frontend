@@ -17,6 +17,7 @@ type UseLogicProps = Pick<
   | 'isInitialExpanded'
   | 'expandedLevel'
   | 'disabledItems'
+  | 'disableReasonItems'
   | 'onChange'
 >;
 
@@ -28,6 +29,7 @@ export const useLogic = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
+  disableReasonItems,
   onChange,
 }: UseLogicProps) => {
   const childrenIds = useMemo(
@@ -39,6 +41,8 @@ export const useLogic = ({
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
   const isDisabled = disabledItems?.includes(id);
+  const disableReason =
+    disableReasonItems && Object.fromEntries(disableReasonItems)[id];
 
   useEffect(() => {
     if (!childrenIds.length) {
@@ -85,6 +89,7 @@ export const useLogic = ({
     isIndeterminate,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     handleChange,
   };
 };
