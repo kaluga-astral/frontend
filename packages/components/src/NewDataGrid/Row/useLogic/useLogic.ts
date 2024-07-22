@@ -1,4 +1,9 @@
-import { type MouseEvent, type SyntheticEvent, useState } from 'react';
+import {
+  type MouseEvent,
+  type MouseEventHandler,
+  type SyntheticEvent,
+  useState,
+} from 'react';
 
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
@@ -8,13 +13,20 @@ type UseLogicParams<TData extends Record<string, unknown>> = RowProps<TData>;
 export const useLogic = <TData extends Record<string, unknown>>({
   keyId,
   row,
+  level,
   activeRowId,
   options,
+  isInitialExpanded = false,
+  expandedLevel,
   isSelectable,
   selectedRows,
   onSelectRow,
   onRowClick,
 }: UseLogicParams<TData>) => {
+  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+
+  const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
+
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
   const { isDisabled, disabledReason } = options || {};
@@ -23,6 +35,11 @@ export const useLogic = <TData extends Record<string, unknown>>({
   const isChecked =
     isSelectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
+
+  const handleToggle = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setOpen((currentState) => !currentState);
+  };
 
   const handleOpenTooltip = (event: SyntheticEvent<Element, Event>) => {
     const element = event.target as HTMLElement;
@@ -57,7 +74,8 @@ export const useLogic = <TData extends Record<string, unknown>>({
   };
 
   return {
-    isDisabled,
+    isOpen,
+    handleToggle,
     rowProps: {
       $isHovered: Boolean(!isDisabled && onRowClick),
       $isSelected: activeRowId === rowId,
@@ -74,6 +92,9 @@ export const useLogic = <TData extends Record<string, unknown>>({
       checked: isChecked,
       disabled: isDisabled,
       onChange: onSelectRow(row),
+    },
+    nestedChildrenProps: {
+      isOpen,
     },
   };
 };

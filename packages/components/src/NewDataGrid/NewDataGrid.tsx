@@ -1,5 +1,10 @@
 import { type ReactNode, useCallback } from 'react';
 
+import {
+  EXPANDED_LEVEL_BY_DEFAULT,
+  INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  MIN_DISPLAY_ROWS_BY_DEFAULT,
+} from './constants';
 import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
@@ -63,7 +68,7 @@ export type NewDataGridProps<
   /**
    * Компонент кастомного футера (например Pagination)
    */
-  Footer?: ReactNode;
+  footer?: ReactNode;
 
   /**
    *  Используется для отображения placeholder при отсутствии данных в таблице
@@ -94,6 +99,24 @@ export type NewDataGridProps<
    * Текст ошибки
    */
   errorMsg?: string;
+
+  /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   * @default 'false'
+   */
+  isInitialExpanded?: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при `isInitialExpanded=true`
+   * @default '1'
+   */
+  expandedLevel?: number;
+
+  /**
+   * Количество отображаемых по умолчанию дочерних элементов
+   * @default '2'
+   */
+  initialOpenedNestedChildrenCount?: number;
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -144,12 +167,15 @@ export const NewDataGrid = <
     selectedRows = [],
     sorting,
     maxHeight,
-    minDisplayRows = 10,
+    minDisplayRows = MIN_DISPLAY_ROWS_BY_DEFAULT,
     errorMsg,
-    Footer,
+    footer,
     noDataPlaceholder,
     isLoading,
     isError,
+    isInitialExpanded = false,
+    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
+    initialOpenedNestedChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
     keyId,
     activeRowId,
     emptyCellValue,
@@ -189,6 +215,9 @@ export const NewDataGrid = <
           rows={rows}
           columns={columns}
           emptyCellValue={emptyCellValue}
+          isInitialExpanded={isInitialExpanded}
+          expandedLevel={expandedLevel}
+          initialOpenedNestedChildrenCount={initialOpenedNestedChildrenCount}
           isLoading={isLoading}
           isError={isError}
           errorMsg={errorMsg}
@@ -200,7 +229,7 @@ export const NewDataGrid = <
 
       <Loader {...loaderProps} />
 
-      {Footer}
+      {footer && footer}
     </Container>
   );
 };

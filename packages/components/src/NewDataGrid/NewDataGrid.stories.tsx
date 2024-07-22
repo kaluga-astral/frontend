@@ -1,6 +1,6 @@
 import { BinOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
 import { type Meta } from '@storybook/react';
-import { type ChangeEvent, useEffect, useState } from 'react';
+import { type ChangeEvent, type ReactNode, useEffect, useState } from 'react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { ActionCell, type Actions } from '../ActionCell';
@@ -224,7 +224,7 @@ export const WithPagination = () => {
       rows={slicedData}
       columns={columns}
       isLoading={isLoading}
-      Footer={
+      footer={
         <DataGridPagination
           totalCount={fakeData.length}
           onChange={handleChangePage}
@@ -488,7 +488,7 @@ export const WithCheckbox = () => {
       columns={columns}
       isLoading={isLoading}
       selectedRows={selected}
-      Footer={
+      footer={
         <DataGridPagination
           totalCount={fakeData.length}
           onChange={handleChangePage}
@@ -566,7 +566,7 @@ export const WidthOptions = () => {
 };
 
 /**
- * Prop ```disabled``` позволяет заблокировать контент
+ * Prop `disabled` позволяет заблокировать контент
  */
 export const WithDisabledContent = () => {
   const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
@@ -754,6 +754,845 @@ export const DisabledLastCell = () => {
 
   return (
     <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ * Таблица можем работать с вложенными структурами
+ */
+export const Tree = () => {
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '32',
+          documentName: 'Договор №45678',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          children: [
+            {
+              id: '321',
+              documentName: 'Пункт договора Договор №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+            {
+              id: '322',
+              documentName: 'Дополнение к договору №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+          ],
+        },
+        {
+          id: '33',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  return (
+    <NewDataGrid
+      keyId="id"
+      rows={fakeData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ *  Используя пропс `isInitialExpanded` можно раскрыть вложенные структуру при первичном отображении
+ */
+export const TreeWithInitialExpanded = () => {
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '32',
+          documentName: 'Договор №45678',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          children: [
+            {
+              id: '321',
+              documentName: 'Пункт договора Договор №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+            {
+              id: '322',
+              documentName: 'Дополнение к договору №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+          ],
+        },
+        {
+          id: '33',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  return (
+    <NewDataGrid
+      keyId="id"
+      rows={fakeData}
+      columns={columns}
+      isInitialExpanded
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ *  Используя пропс `expandedLevel` можно настраивать глубину раскрытия дерева при первичном отображении, если `isInitialExpanded=true`
+ */
+export const TreeWithExpandedLevel = () => {
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '32',
+          documentName: 'Договор №45678',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          children: [
+            {
+              id: '321',
+              documentName: 'Пункт договора Договор №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+            {
+              id: '322',
+              documentName: 'Дополнение к договору №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+          ],
+        },
+        {
+          id: '33',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  return (
+    <NewDataGrid
+      keyId="id"
+      rows={fakeData}
+      columns={columns}
+      isInitialExpanded
+      expandedLevel={3}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ *  Пропс `initialOpenedNestedChildrenCount` позволяет настраивать количество отображаемых элементов при раскрытии корневого элемента.
+ *  Элементы, сверх этого значения, будут скрыты под кнопку "Показать все"
+ */
+export const TreeWithInitialOpenedNestedChildrenCount = () => {
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '32',
+          documentName: 'Договор №45678',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '33',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '34',
+          documentName: 'Договор №123',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '35',
+          documentName: 'Договор №569-4',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '36',
+          documentName: 'Договор №00056789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+        {
+          id: '37',
+          documentName: 'Договор №00022889',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  return (
+    <NewDataGrid
+      keyId="id"
+      rows={fakeData}
+      columns={columns}
+      isInitialExpanded
+      initialOpenedNestedChildrenCount={5}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ * Таблица с древовидной структурой так же работает в варианте с множественным выбором (чекбоксы)
+ */
+export const TreeWithCheckbox = () => {
+  type SortFieldWithNested = 'documentName' | 'recipient' | 'createDate';
+
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    actions?: ReactNode | object;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          options: {
+            isDisabled: true,
+            disabledReason: 'Нет доступа',
+          },
+        },
+        {
+          id: '32',
+          documentName: 'Договор №45678',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          children: [
+            {
+              id: '321',
+              documentName: 'Пункт договора Договор №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+            {
+              id: '322',
+              documentName: 'Дополнение к договору №56789',
+              recipient: 'ООО "Волшебные документы"',
+              createDate: generateRandomDate(),
+            },
+          ],
+        },
+        {
+          id: '33',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataWithNestedType[]>([]);
+  const [selected, setSelected] = useState<DataWithNestedType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  const handleSelect = (rows: DataWithNestedType[]) => setSelected(rows);
+
+  return (
+    <NewDataGrid<DataWithNestedType, SortFieldWithNested>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
+ *  Используя `options` и `renderCell` на уровне данных ячейки, можно точечно настраивать отображаемые данные,
+ *  например указать кастомный список действий для вложенных элементов
+ */
+export const TreeWithCustomCell = () => {
+  type SortFieldWithNested = 'documentName' | 'recipient' | 'createDate';
+
+  type DataWithNestedType = {
+    id: string;
+    documentName: string;
+    recipient: string;
+    createDate: string;
+    actions?: ReactNode | object;
+    children?: Array<DataWithNestedType>;
+  };
+
+  const fakeData: Array<DataWithNestedType> = [
+    {
+      id: '1',
+      documentName: 'Договор на поставку',
+      recipient: 'ИП Иванов О.В.',
+      createDate: generateRandomDate(),
+    },
+    {
+      id: '2',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Новая организация"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '21',
+          documentName: 'Договор №123',
+          recipient: 'ФНС',
+          createDate: generateRandomDate(),
+          actions: {
+            options: {
+              renderCell: (row) => {
+                return (
+                  <ActionCell
+                    actions={{
+                      main: [
+                        {
+                          icon: <EyeFillMd />,
+                          name: 'Просмотреть',
+                          onClick: () => console.log('main'),
+                        },
+                      ],
+                    }}
+                    row={row}
+                  />
+                );
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      id: '3',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Волшебные документы"',
+      createDate: generateRandomDate(),
+      children: [
+        {
+          id: '31',
+          documentName: 'Договор №34567',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          actions: {
+            options: {
+              renderCell: (row) => {
+                return (
+                  <ActionCell
+                    actions={{
+                      main: [
+                        {
+                          icon: <EyeFillMd />,
+                          name: 'Просмотреть',
+                          onClick: () => console.log('main'),
+                        },
+                      ],
+                    }}
+                    row={row}
+                  />
+                );
+              },
+            },
+          },
+        },
+        {
+          id: '32',
+          documentName: 'Договор №56789',
+          recipient: 'ООО "Волшебные документы"',
+          createDate: generateRandomDate(),
+          actions: {
+            options: {
+              renderCell: (row) => {
+                return (
+                  <ActionCell
+                    actions={{
+                      main: [
+                        {
+                          icon: <EyeFillMd />,
+                          name: 'Просмотреть',
+                          onClick: () => console.log('main'),
+                        },
+                      ],
+                    }}
+                    row={row}
+                  />
+                );
+              },
+            },
+          },
+        },
+      ],
+    },
+  ];
+
+  const ACTIONS: Actions<DataWithNestedType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => console.log('delete'),
+      },
+    ],
+  };
+
+  const columns: DataGridColumns<DataWithNestedType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataWithNestedType[]>([]);
+  const [selected, setSelected] = useState<DataWithNestedType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataWithNestedType) =>
+    console.log('row clicked', row);
+
+  const handleSelect = (rows: DataWithNestedType[]) => setSelected(rows);
+
+  return (
+    <NewDataGrid<DataWithNestedType, SortFieldWithNested>
       keyId="id"
       rows={slicedData}
       columns={columns}

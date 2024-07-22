@@ -1,14 +1,28 @@
 import { type ReactNode } from 'react';
 
 import { OverflowTypography } from '../../OverflowTypography';
-import type { DataGridColumns } from '../types';
+import type { DataGridColumns, DataGridRowOptions } from '../types';
 
 import { useLogic } from './useLogic';
 import { Wrapper } from './styles';
 
 export type CellProps<TData extends object> = {
+  /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
+  /**
+   * Данные строки для отображения
+   */
   row: TData;
+
   cell: DataGridColumns<TData>;
+
+  /**
+   * Дополнительное содержимое ячейки, которое будет распложено справа
+   */
+  startAdornment?: ReactNode;
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -21,18 +35,27 @@ export type CellProps<TData extends object> = {
   isDisabled?: boolean;
 };
 
-export const Cell = <TData extends object>(props: CellProps<TData>) => {
-  const { formattedValue } = useLogic(props);
+export const Cell = <TData extends Record<string, unknown>>(
+  props: CellProps<TData>,
+) => {
+  const { formattedValue, hasStartAdornment } = useLogic(props);
 
-  const { row, cell, isDisabled } = props;
-  const { renderCell, align = 'left' } = cell;
+  const { className, startAdornment, row, cell, isDisabled } = props;
+  const { field, renderCell: baseRenderCell, align = 'left' } = cell;
+  const { options = {} } = row[field] || {};
+  const { renderCell: customRenderCell } = options;
+
+  const renderCell = customRenderCell || baseRenderCell;
 
   return (
     <Wrapper
       $isDisabled={isDisabled}
       $align={align}
+      $hasStartAdornment={hasStartAdornment}
+      className={className}
       {...{ inert: isDisabled ? '' : undefined }}
     >
+      {startAdornment && startAdornment}
       {renderCell && renderCell(row)}
       {!renderCell && (
         <OverflowTypography rowsCount={2}>

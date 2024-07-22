@@ -1,1 +1,11 @@
-export const ROW_HEIGHT = 44;
+export const MIN_ROW_HEIGHT = 44;
+
+export const ROOT_ACTION_CELL_WIDTH = 32;
+
+export const TREE_LINE_WIDTH = ROOT_ACTION_CELL_WIDTH / 2;
+
+export const MIN_DISPLAY_ROWS_BY_DEFAULT = 10;
+
+export const EXPANDED_LEVEL_BY_DEFAULT = 1;
+
+export const INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT = 2;

@@ -4,7 +4,7 @@ import { Virtuoso } from 'react-virtuoso';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 import { CircularProgress } from '../CircularProgress';
-import { checkIsDisabled } from '../NewDataGrid/Body/utils';
+import { checkIsDisabled } from '../NewDataGrid/Row/utils';
 import {
   Container,
   type DataGridRow,

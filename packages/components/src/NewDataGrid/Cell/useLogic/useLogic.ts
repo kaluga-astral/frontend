@@ -8,6 +8,7 @@ export const useLogic = <TData extends object>({
   row,
   cell,
   emptyCellValue,
+  startAdornment,
 }: UseLogicParams<TData>) => {
   const { format, field } = cell;
 
@@ -23,5 +24,7 @@ export const useLogic = <TData extends object>({
     return emptyCellValue;
   }, [field, format, row, emptyCellValue]);
 
-  return { formattedValue };
+  const hasStartAdornment = Boolean(startAdornment);
+
+  return { formattedValue, hasStartAdornment };
 };

@@ -55,33 +55,41 @@ export type HeadProps<
 export const Head = <TData extends object, TSortField extends keyof TData>(
   props: HeadProps<TData, TSortField>,
 ) => {
-  const { handleSort, checkboxProps } = useLogic(props);
+  const { checkboxProps, handleSort } = useLogic(props);
 
   const { columns, gridColumns, isSelectable, sorting, onSelectAllRows } =
     props;
 
   const renderColumns = useMemo(() => {
-    return columns.map(({ field, label, sortable, align }) => (
-      <HeadCell<TData, TSortField>
-        key={label}
-        sorting={sorting}
-        field={field}
-        label={label}
-        sortable={sortable}
-        align={align}
-        onSort={handleSort}
-      />
-    ));
+    return columns.map(({ field, label, sortable, align }, index) => {
+      const isFirstCell = !Boolean(index);
+
+      const startAdornmentRender = () => {
+        if (!isFirstCell || !isSelectable) {
+          return null;
+        }
+
+        return (
+          <CheckboxCell>
+            <Checkbox {...checkboxProps} onChange={onSelectAllRows} />
+          </CheckboxCell>
+        );
+      };
+
+      return (
+        <HeadCell<TData, TSortField>
+          key={label}
+          sorting={sorting}
+          field={field}
+          label={label}
+          isSortable={sortable}
+          align={align}
+          startAdornment={startAdornmentRender()}
+          onSort={handleSort}
+        />
+      );
+    });
   }, [columns, handleSort, sorting]);
 
-  return (
-    <Wrapper $gridColumns={gridColumns}>
-      {isSelectable && (
-        <CheckboxCell>
-          <Checkbox {...checkboxProps} onChange={onSelectAllRows} />
-        </CheckboxCell>
-      )}
-      {renderColumns}
-    </Wrapper>
-  );
+  return <Wrapper $gridColumns={gridColumns}>{renderColumns}</Wrapper>;
 };

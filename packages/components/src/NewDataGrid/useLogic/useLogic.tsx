@@ -1,6 +1,6 @@
 import { type ChangeEvent, useCallback, useMemo } from 'react';
 
-import { prop, uniqBy } from '../../utils';
+import { prop, uniqueBy } from '../../utils';
 import { type NewDataGridProps } from '../NewDataGrid';
 import type { DataGridRow } from '../types';
 
@@ -28,8 +28,7 @@ export const useLogic = <
   const isDataGridDisabled = isLoading || isDisabled;
 
   const availableRows = rows.filter((row) => !row.options?.isDisabled);
-
-  const gridColumns = getGridTemplateColumns(columns, isSelectable);
+  const gridColumns = getGridTemplateColumns(columns);
 
   const uncheckedRowsCount = useMemo(() => {
     return availableRows.filter(
@@ -52,12 +51,12 @@ export const useLogic = <
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = uniqBy(
+      const mergedSelectedRows = uniqueBy(
         [...selectedRows, ...availableRows],
         prop(keyId),
       );
 
-      onSelectRow(mergedSelectedRows);
+      return onSelectRow(mergedSelectedRows);
     }
 
     const filteredRows = selectedRows.filter(

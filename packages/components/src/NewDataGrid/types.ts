@@ -4,14 +4,26 @@ import type { SortStates } from './enums';
 
 export type AlignVariant = 'left' | 'center' | 'right';
 
-export type CellValue = string | number | boolean | Date | undefined | object;
-
 export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DataGridRow = Record<string, any>;
+export type CellOptions<CellValue> = {
+  renderCell?: RenderCell<CellValue>;
+};
+
+export type CellValue =
+  | string
+  | number
+  | boolean
+  | Date
+  | undefined
+  | {
+      children?: CellValue;
+      options?: CellOptions<CellValue>;
+    };
+
+export type DataGridRow = Record<string, CellValue>;
 
 export type DataGridSort<TSortField> = {
   /**
