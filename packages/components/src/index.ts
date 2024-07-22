@@ -248,6 +248,11 @@ export * from './Tab';
 
 export * from './Table';
 
+export {
+  TableDescriptionCell,
+  type TableDescriptionCellProps,
+} from './TableDescriptionCell';
+
 export * from './Tabs';
 
 export * from './Tag';
