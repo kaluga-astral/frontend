@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { useRef, useState } from 'react';
 import { Box, MenuItem, Popover } from '@mui/material';
 
@@ -11,9 +11,11 @@ import { useBackdropStackToggle } from '../BackdropStack';
 import { DatePicker } from '../DatePicker';
 import { styled } from '../styles';
 
-export default {
+const meta: Meta = {
   title: 'Components/BackdropStack',
 };
+
+export default meta;
 
 type Option = {
   value: string;
@@ -147,7 +149,7 @@ const MotivationPart = () => {
   );
 };
 
-const Template: StoryFn<{}> = () => {
+export const Example = () => {
   const { isOpened, handleOpen, handleClose } = useBackdropStackToggle();
 
   return (
@@ -173,10 +175,4 @@ const Template: StoryFn<{}> = () => {
       </Dialog>
     </>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  controls: { expanded: true },
 };

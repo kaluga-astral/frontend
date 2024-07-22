@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { LegacyGrid } from '../LegacyGrid';
@@ -6,9 +6,26 @@ import { addDays, buildIsoDate } from '../utils/date';
 
 import { DatePicker, type DatePickerProps } from './index';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=735-12817&t=NdgfZ0Hm3cEsi2ev-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof DatePicker> = {
   title: 'Components/DatePickers/DefaultDatePicker',
   component: DatePicker,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof DatePicker>;
+
+export const Interaction: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 const normalizedCurrentDate = buildIsoDate({
@@ -18,13 +35,31 @@ const normalizedCurrentDate = buildIsoDate({
   hour: 1,
 });
 
-const Template: StoryFn<DatePickerProps> = (props) => {
+export const Example = () => {
+  const [date, setDate] = useState<Date | undefined>();
+
+  return (
+    <DatePicker
+      inputProps={{
+        label: 'Дата начала:',
+        error: false,
+        helperText: undefined,
+        placeholder: 'Выберите дату',
+      }}
+      disabled={false}
+      value={date}
+      onChange={setDate}
+    />
+  );
+};
+
+const Template = (props: DatePickerProps) => {
   const [date, setDate] = useState<Date | undefined>();
 
   return <DatePicker value={date} onChange={setDate} {...props} />;
 };
 
-export const Showcase: StoryFn = () => (
+export const Showcase = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template inputProps={{ label: 'Все по умолчанию' }} />
     <Template
@@ -57,24 +92,3 @@ export const Showcase: StoryFn = () => (
     />
   </LegacyGrid>
 );
-
-export const Default: StoryFn<DatePickerProps> = (props) => {
-  const [date, setDate] = useState<Date | undefined>();
-
-  return <DatePicker {...props} value={date} onChange={setDate} />;
-};
-
-Default.args = {
-  inputProps: {
-    label: 'Дата начала:',
-    error: false,
-    helperText: undefined,
-    placeholder: 'Выберите дату',
-  },
-  disabled: false,
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};

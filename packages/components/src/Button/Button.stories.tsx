@@ -26,9 +26,10 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Interaction: Story = {
-  args: {
-    children: 'Click me',
+  render: (args) => {
+    return <Button {...args}>Click me</Button>;
   },
+  args: {},
   parameters: {
     docs: {
       disable: true,

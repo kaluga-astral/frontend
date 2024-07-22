@@ -1,32 +1,35 @@
 import { useState } from 'react';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
 
-import { Chevron, type ChevronProps } from './Chevron';
+import { Chevron } from './Chevron';
 
-export default {
+const meta: Meta<typeof Chevron> = {
   title: 'Components/Chevron',
   component: Chevron,
 };
 
-const Template: StoryFn<ChevronProps> = (args) => {
-  const [isActive, setActive] = useState(args.isActive);
+export default meta;
+
+type Story = StoryObj<typeof Chevron>;
+
+export const Interaction: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
+  const [isActive, setActive] = useState(false);
 
   return (
     <>
       <Button onClick={() => setActive(!isActive)}>Toggle</Button>
-      <Chevron {...args} isActive={isActive} />
+      <Chevron isActive={isActive} />
     </>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.args = {
-  isActive: false,
-};
-
-Default.parameters = {
-  controls: { expanded: true },
 };
