@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
 import { Description } from '../Description';
@@ -24,7 +24,7 @@ const meta: Meta<typeof TableDescriptionCell> = {
 
 export default meta;
 
-// type Story = StoryObj<typeof TableDescriptionCell>;
+type Story = StoryObj<typeof TableDescriptionCell>;
 
 const Icon = () => {
   return (
@@ -62,6 +62,20 @@ const Icon = () => {
       </defs>
     </svg>
   );
+};
+
+export const Interaction: Story = {
+  args: {
+    title: 'Заголовок',
+    subtitle: 'Подзаголовок',
+    icon: <Icon />,
+    iconPosition: 'left',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 const StyledDescriptionName = styled(Description.Name)`
