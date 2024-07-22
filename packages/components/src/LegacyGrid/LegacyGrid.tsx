@@ -8,7 +8,7 @@ export type LegacyGridProps = GridContainerProps &
 
 /**
  * @deprecated
- * Используйте NewDateGrid
+ * Используйте Grid
  */
 export const LegacyGrid = forwardRef<HTMLElement, LegacyGridProps>(
   (

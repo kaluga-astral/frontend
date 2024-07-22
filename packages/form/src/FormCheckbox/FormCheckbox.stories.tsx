@@ -35,8 +35,8 @@ type Form2Values = {
 };
 
 const validationSchema1 = object<Form1Values>({
-  check1: boolean(),
-  check2: optional(boolean()),
+  check1: optional(boolean()),
+  check2: boolean(),
 });
 
 const validationSchema2 = object<Form2Values>({

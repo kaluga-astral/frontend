@@ -7,7 +7,7 @@ import { LegacyGrid } from './LegacyGrid';
 
 /**
  * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
- * **Используйте [NewDataGrid](/story/components-newdatagrid--docs), который построен на css grid.**
+ * **Используйте [Grid](/story/components-grid--docs)**
  */
 const meta: Meta<typeof LegacyGrid> = {
   title: 'Components/LegacyGrid',
@@ -138,7 +138,7 @@ export const GridContainerProps = () => (
     </div>
     <Typography variant="ui">Grid Auto Rows</Typography>
     <div>
-    <LegacyGrid container autoRows="40px" spacing={1}>
+      <LegacyGrid container autoRows="40px" spacing={1}>
         <LegacyGrid column="1" row="span 2">
           <Item>span 2</Item>
         </LegacyGrid>

@@ -28,11 +28,3 @@ export const Interaction: Story = {
 };
 
 export const Example = () => <Avatar>АЛ</Avatar>;
-
-export const Size = () => (
-  <>
-    <Avatar style={{ width: 24, height: 24 }}>АЛ</Avatar>
-    <Avatar style={{ width: 48, height: 48 }}>АЛ</Avatar>
-    <Avatar style={{ width: 72, height: 72 }}>АЛ</Avatar>
-  </>
-);
