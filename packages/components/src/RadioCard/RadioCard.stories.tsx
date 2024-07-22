@@ -1,5 +1,5 @@
 import { type ChangeEvent, useState } from 'react';
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { RadioGroup } from '../RadioGroup';
 import { Typography } from '../Typography';
@@ -41,6 +41,20 @@ const Header = ({ price }: { price: string }) => (
     <Typography variant="h5">{price} руб.</Typography>
   </HeaderWrapper>
 );
+
+type Story = StoryObj<typeof RadioCard>;
+
+export const Interaction: Story = {
+  args: {
+    header: <Typography variant="h5">RadioCard Header</Typography>,
+    children: <Typography>RadioCard content</Typography>,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => {
   const [value, setValue] = useState('one');

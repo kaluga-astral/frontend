@@ -13,6 +13,12 @@ import { ConfigProvider } from '../ConfigProvider';
 import { NotificationList } from './NotificationList';
 import { type Notification } from './types';
 
+/**
+ *
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21302-194345)
+ * ### [Guide]()
+ */
+
 const meta: Meta<typeof NotificationList> = {
   title: 'Components/NotificationList',
   component: NotificationList,

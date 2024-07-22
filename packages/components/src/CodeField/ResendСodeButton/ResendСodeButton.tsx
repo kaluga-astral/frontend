@@ -1,34 +1,34 @@
 import { useEffect, useState } from 'react';
-import useCountdown from '@bradgarropy/use-countdown';
 
 import { Button } from '../../Button';
 import { Typography } from '../../Typography';
+import { useSecondsCountdown } from '../../hooks';
 
 import { Wrapper } from './styles';
 
 type ResendCodeButtonProps = {
   /**
-   * @description Если true, показываются символы, редактирование запрещено
+   * Если true, показываются символы, редактирование запрещено
    */
   disabled: boolean;
   /**
-   * @description Если true, показывается анимация загрузки
+   * Если true, показывается анимация загрузки
    */
   loading: boolean;
   /**
-   * @description Флаг состояния ошибки
+   * Флаг состояния ошибки
    */
   isError: boolean;
   /**
-   * @description Время, после которого разрешен перезапрос кода (в сек)
+   * Время, после которого разрешен перезапрос кода (в сек)
    */
   resendTimeout: number;
   /**
-   * @description Функция, которая вызовется при перезапросе кода по кнопке
+   * Метод вызываемый при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
   /**
-   * @description Функция, очищающая поле
+   * Метод очищающий поле
    */
   clearCodeValue: () => void;
 };
@@ -42,12 +42,11 @@ const ResendCodeButton = ({
   clearCodeValue,
 }: ResendCodeButtonProps) => {
   const {
-    formatted: time,
-    reset,
     isActive,
-  } = useCountdown({
+    textTime: time,
+    restart,
+  } = useSecondsCountdown({
     seconds: resendTimeout,
-    autoStart: true,
   });
 
   const [resendCodeLoading, setResendCodeLoading] = useState(false);
@@ -59,7 +58,7 @@ const ResendCodeButton = ({
     disabled || loading || resendCodeLoading || isTimerActive;
 
   useEffect(() => {
-    reset({ minutes: 0, seconds: resendTimeout });
+    restart(resendTimeout);
   }, [resendTimeout]);
 
   const onClick = () => {

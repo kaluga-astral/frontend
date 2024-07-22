@@ -38,23 +38,24 @@ export const StyledTooltip = styled(
   }
 
   & .${tooltipClasses.arrow} {
+    font-size: ${({ theme }) => theme.typography.small.fontSize};
     color: ${({ theme }) => theme.palette.grey[900]};
   }
 
   &&[data-popper-placement*='top'] .${tooltipClasses.tooltip} {
-    margin-bottom: ${({ theme }) => theme.spacing(1)};
+    margin-bottom: ${({ theme }) => theme.spacing(2)};
   }
 
   &&[data-popper-placement*='bottom'] .${tooltipClasses.tooltip} {
-    margin-top: ${({ theme }) => theme.spacing(1)};
+    margin-top: ${({ theme }) => theme.spacing(2)};
   }
 
   &&[data-popper-placement*='left'] .${tooltipClasses.tooltip} {
-    margin-right: ${({ theme }) => theme.spacing(1)};
+    margin-right: ${({ theme }) => theme.spacing(2)};
   }
 
   &&[data-popper-placement*='right'] .${tooltipClasses.tooltip} {
-    margin-left: ${({ theme }) => theme.spacing(1)};
+    margin-left: ${({ theme }) => theme.spacing(2)};
   }
 `;
 
