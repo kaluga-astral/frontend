@@ -10,6 +10,11 @@ import { SidebarNav } from './SidebarNav';
 
 export type SidebarProps = {
   /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
+  /**
    * Пропс для передачи контента в заголовок сайдбара
    * @example <Sidebar header={<SidebarButton />>} >
    */
@@ -27,7 +32,7 @@ export type SidebarProps = {
 
 export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
   (props, ref) => {
-    const { menu, header } = props;
+    const { className, menu, header } = props;
 
     const { collapsedIn, onToggleSidebar } = useContext(
       DashboardSidebarContext,
@@ -39,6 +44,7 @@ export const Sidebar = forwardRef<HTMLBaseElement, SidebarProps>(
       <SidebarRoot
         ref={ref}
         collapsedIn={collapsedIn}
+        className={className}
         {...{ inert: isMobile && !collapsedIn ? '' : undefined }}
       >
         <SidebarHeader>{header}</SidebarHeader>

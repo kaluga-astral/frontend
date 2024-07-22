@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useEffect, useState } from 'react';
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import { styled } from '../styles';
@@ -25,6 +25,8 @@ const meta: Meta<typeof WelcomeScreen> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof WelcomeScreen>;
 
 const MainWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(4)};
@@ -103,6 +105,22 @@ const useMockFetch = function <TData>(
     isError: false,
     fetch: fetchData,
   };
+};
+
+export const Interaction: Story = {
+  args: {
+    productName: 'Астрал',
+    userName: 'Иван Иванович',
+    isLoading: false,
+    isError: false,
+    isSuccess: true,
+    errorMsg: 'Ошибка 500',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
 export const Example = () => {

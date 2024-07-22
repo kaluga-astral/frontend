@@ -106,6 +106,8 @@ export * from './Fade';
 
 export { FeedbackPanel, type FeedbackPanelProps } from './FeedbackPanel';
 
+export { Filename, type FileNameProps } from './Filename';
+
 export * from './FlowButton';
 
 export * from './FormControl';
@@ -165,6 +167,11 @@ export * from './MenuList';
 export * from './NavMenu';
 
 export { NewDataGrid, type NewDataGridProps } from './NewDataGrid';
+
+export {
+  NewDataGridInfinite,
+  type NewDataGridInfiniteProps,
+} from './NewDataGridInfinite';
 
 export * from './Notification';
 
@@ -280,6 +287,8 @@ export * from './Zoom';
 export * from './forwardRefWithGeneric';
 
 export * from './PasswordField';
+
+export { SecondsCountdown as UNSTABLE_SecondsCountdownService } from './services';
 
 export { StepSlider, type StepSliderProps } from './StepSlider';
 
