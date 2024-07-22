@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Avatar } from './Avatar';
 
@@ -13,5 +13,18 @@ const meta: Meta<typeof Avatar> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Avatar>;
+
+export const Interaction: Story = {
+  args: {
+    children: 'АЛ',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => <Avatar>АЛ</Avatar>;
