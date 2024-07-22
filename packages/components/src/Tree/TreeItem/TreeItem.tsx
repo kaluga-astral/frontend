@@ -15,8 +15,8 @@ import {
   ItemContent,
   ItemWrapper,
   Label,
+  LabelWrapper,
   Note,
-  TestWrapper,
 } from './styles';
 import { useLogic } from './useLogic';
 
@@ -88,6 +88,7 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 } & Omit<ComponentProps<TComponent>, ''>;
 
 export const TreeItem = ({
+  id,
   label,
   note,
   renderItem,
@@ -127,13 +128,15 @@ export const TreeItem = ({
           onClick={onClick}
         >
           {renderItem ? (
-            renderItem({ renderCollapseButton, label, note })
+            <LabelWrapper $level={level}>
+              {renderItem({ renderCollapseButton, label, note, id })}
+            </LabelWrapper>
           ) : (
             <ItemWrapper>
-              <TestWrapper $level={level}>
+              <LabelWrapper $level={level}>
                 {renderCollapseButton()}
                 <Label>{label}</Label>
-              </TestWrapper>
+              </LabelWrapper>
               {note && <Note>{note}</Note>}
             </ItemWrapper>
           )}
@@ -154,12 +157,14 @@ export const TreeItem = ({
         onClick={onClick}
       >
         {renderItem ? (
-          renderItem({ label, note })
+          <LabelWrapper $level={level}>
+            {renderItem({ label, note, id })}
+          </LabelWrapper>
         ) : (
           <ItemWrapper>
-            <TestWrapper $level={level}>
+            <LabelWrapper $level={level}>
               <Label>{label}</Label>
-            </TestWrapper>
+            </LabelWrapper>
             {note && <Note>{note}</Note>}
           </ItemWrapper>
         )}

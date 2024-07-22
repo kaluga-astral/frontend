@@ -5,7 +5,6 @@ import type { TreeListData } from '../../types';
 import type { Value } from '../types';
 
 import { useLogic } from './useLogic';
-// import { ItemWrapper, Label, List, SubTitle } from './styles';
 import { List } from './styles';
 
 export type TreeItemProps = TreeListData & {
@@ -46,13 +45,6 @@ export type TreeItemProps = TreeListData & {
   onChange?: (value: Value) => void;
 };
 
-// const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label, note }) => (
-//   <ItemWrapper>
-//     <Label variant="ui">{label}</Label>
-//     {note && <SubTitle variant="small">{note}</SubTitle>}
-//   </ItemWrapper>
-// );
-
 export const TreeItem = ({
   id,
   label,
@@ -65,7 +57,6 @@ export const TreeItem = ({
   expandedLevel,
   disabledItems,
   onChange,
-  // ...props
 }: TreeItemProps) => {
   const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
     id,
@@ -80,6 +71,7 @@ export const TreeItem = ({
   if (children.length) {
     return (
       <BaseTreeItem
+        id={id}
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
@@ -113,6 +105,7 @@ export const TreeItem = ({
   return (
     <>
       <BaseTreeItem
+        id={id}
         isSelected={isSelected}
         isDisabled={isDisabled}
         component="li"

@@ -70,7 +70,6 @@ export const TreeItem = ({
   expandedLevel,
   disabledItems,
   onChange,
-  // ...props
 }: TreeItemProps) => {
   const {
     isSelected,
@@ -109,7 +108,7 @@ export const TreeItem = ({
                 indeterminate={isSelected ? false : isIndeterminate}
               />
             }
-            label={renderItem ? renderItem({ label, note }) : label}
+            label={renderItem ? renderItem({ label, note, id }) : label}
             disabled={isDisabled}
             onChange={handleChange}
             onClick={handleClick}
@@ -146,7 +145,7 @@ export const TreeItem = ({
       label={
         <FormControlLabel
           control={<Checkbox checked={isSelected} />}
-          label={renderItem ? renderItem({ label, note }) : label}
+          label={renderItem ? renderItem({ label, note, id }) : label}
           disabled={isDisabled}
           onChange={handleChange}
           onClick={handleClick}

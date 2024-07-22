@@ -144,7 +144,7 @@ export const ItemWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing(1, 0, 1, 0)};
 `;
 
-export const TestWrapper = styled('div', {
+export const LabelWrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== '$level',
 })<{ $level: number }>`
   position: relative;
