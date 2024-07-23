@@ -197,10 +197,11 @@ export const DisabledItems = () => {
     <TreeList
       data={fakeData}
       value={value}
-      disabledItems={['21', '3']}
-      disableReasonItems={[
-        ['21', 'Элемент 21 не доступен'],
-        ['3', 'Элемент 3 не доступен'],
+      // disabledItems={['21', '3']}
+      disabledItems={[
+        { id: 21, disableReason: 'тест' },
+        '3',
+        { id: 22, disableReason: 'Заблокировано' },
       ]}
       onChange={setValue}
     />
