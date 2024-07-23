@@ -12,14 +12,15 @@ import { Loader } from './Loader';
 import { NoData } from './NoData';
 import { Container, DataGridWrapper, DisabledDataGridWrapper } from './styles';
 import type {
+  CellValue,
   DataGridColumns,
   DataGridRow,
-  DataGridRowOptions,
+  DataGridRowWithOptions,
   DataGridSort,
 } from './types';
 
 export type NewDataGridProps<
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = {
   /**
@@ -30,7 +31,7 @@ export type NewDataGridProps<
   /**
    * Массив данных для таблицы
    */
-  rows: Array<TData & { options?: DataGridRowOptions }>;
+  rows: DataGridRowWithOptions<TData>[];
 
   /**
    * @example <DataGrid columns={[
@@ -116,7 +117,7 @@ export type NewDataGridProps<
    * Количество отображаемых по умолчанию дочерних элементов
    * @default '2'
    */
-  initialOpenedNestedChildrenCount?: number;
+  initialVisibleChildrenCount?: number;
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -153,7 +154,7 @@ export type NewDataGridProps<
 };
 
 export const NewDataGrid = <
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >(
   props: NewDataGridProps<TData, TSortField>,
@@ -175,7 +176,7 @@ export const NewDataGrid = <
     isError,
     isInitialExpanded = false,
     expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
-    initialOpenedNestedChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
     keyId,
     activeRowId,
     emptyCellValue,
@@ -217,7 +218,7 @@ export const NewDataGrid = <
           emptyCellValue={emptyCellValue}
           isInitialExpanded={isInitialExpanded}
           expandedLevel={expandedLevel}
-          initialOpenedNestedChildrenCount={initialOpenedNestedChildrenCount}
+          initialVisibleChildrenCount={initialVisibleChildrenCount}
           isLoading={isLoading}
           isError={isError}
           errorMsg={errorMsg}

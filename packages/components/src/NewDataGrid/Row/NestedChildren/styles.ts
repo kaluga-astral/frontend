@@ -9,7 +9,7 @@ export const NestedRows = styled.ul<{ $level: number }>`
 
   list-style: none;
 
-  li &::before {
+  &::before {
     content: '';
 
     position: absolute;

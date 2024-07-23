@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 
 import { OverflowTypography } from '../../OverflowTypography';
-import type { DataGridColumns, DataGridRowOptions } from '../types';
+import type { CellValue, DataGridColumns } from '../types';
 
 import { useLogic } from './useLogic';
 import { Wrapper } from './styles';
 
-export type CellProps<TData extends object> = {
+export type CellProps<TData extends Record<string, CellValue>> = {
   /**
    * Название класса, применяется к корневому компоненту
    */
@@ -35,17 +35,13 @@ export type CellProps<TData extends object> = {
   isDisabled?: boolean;
 };
 
-export const Cell = <TData extends Record<string, unknown>>(
+export const Cell = <TData extends Record<string, CellValue>>(
   props: CellProps<TData>,
 ) => {
   const { formattedValue, hasStartAdornment } = useLogic(props);
 
   const { className, startAdornment, row, cell, isDisabled } = props;
-  const { field, renderCell: baseRenderCell, align = 'left' } = cell;
-  const { options = {} } = row[field] || {};
-  const { renderCell: customRenderCell } = options;
-
-  const renderCell = customRenderCell || baseRenderCell;
+  const { renderCell, align = 'left' } = cell;
 
   return (
     <Wrapper

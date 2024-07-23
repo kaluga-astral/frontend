@@ -3,12 +3,12 @@ import { type ChangeEvent, type ReactNode, useContext, useMemo } from 'react';
 import { ConfigContext } from '../../ConfigProvider';
 import { ContentState } from '../../ContentState';
 import { Row } from '../Row';
-import type { DataGridColumns, DataGridRowOptions } from '../types';
+import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
 import { useLogic } from './useLogic';
 import { Wrapper } from './styles';
 
-export type BodyProps<TData extends Record<string, unknown>> = {
+export type BodyProps<TData extends Record<string, CellValue>> = {
   /**
    * Конфигурация колонок для таблицы
    */
@@ -58,7 +58,7 @@ export type BodyProps<TData extends Record<string, unknown>> = {
   /**
    * Количество отображаемых по умолчанию дочерних элементов
    */
-  initialOpenedNestedChildrenCount: number;
+  initialVisibleChildrenCount: number;
 
   /**
    * Если true, то будет отображаться чекбокс для выбора элемента
@@ -73,7 +73,7 @@ export type BodyProps<TData extends Record<string, unknown>> = {
   /**
    * Массив данных для отображения
    */
-  rows: Array<TData & { options?: DataGridRowOptions }>;
+  rows: Array<TData & { options?: DataGridRowOptions<TData> }>;
 
   /**
    * Используется для отображения переданного кол-ва строк при отсутствии данных
@@ -108,7 +108,7 @@ export type BodyProps<TData extends Record<string, unknown>> = {
 
 const INITIAL_LEVEL = 0;
 
-export const Body = <TData extends Record<string, unknown>>(
+export const Body = <TData extends Record<string, CellValue>>(
   props: BodyProps<TData>,
 ) => {
   const { imagesMap } = useContext(ConfigContext);

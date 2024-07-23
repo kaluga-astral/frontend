@@ -8,22 +8,7 @@ export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
 
-export type CellOptions<CellValue> = {
-  renderCell?: RenderCell<CellValue>;
-};
-
-export type CellValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | undefined
-  | {
-      children?: CellValue;
-      options?: CellOptions<CellValue>;
-    };
-
-export type DataGridRow = Record<string, CellValue>;
+export type CellValue = string | number | boolean | Date | undefined | object;
 
 export type DataGridSort<TSortField> = {
   /**
@@ -39,7 +24,7 @@ export type DataGridSort<TSortField> = {
   sort: SortState;
 };
 
-export type DataGridColumns<TData extends object> = {
+export type DataGridColumns<TData extends Record<string, CellValue>> = {
   /**
    * @example {field: 'test'}
    * Значение ключа поля данных для колонки
@@ -82,7 +67,20 @@ export type DataGridColumns<TData extends object> = {
   width?: CSSProperties['width'];
 };
 
-export type DataGridRowOptions = {
+export type DataGridRowOptionColumns<TData extends Record<string, CellValue>> =
+  {
+    /**
+     * Значение ключа поля данных для колонки
+     */
+    field: keyof TData;
+
+    /**
+     * Кастомное отображение ячеек для колонки
+     */
+    renderCell?: RenderCell<TData>;
+  };
+
+export type DataGridRowOptions<TData extends Record<string, CellValue>> = {
   /**
    * Если true, строка будет недоступна для взаимодействия
    */
@@ -98,4 +96,16 @@ export type DataGridRowOptions = {
    * Причина блокировки строки
    */
   disabledReason?: string;
+
+  /**
+   * Настройка отображения колонок дочерних элементов
+   */
+  childrenColumns?: DataGridRowOptionColumns<TData>[];
+};
+
+export type DataGridRow = Record<string, CellValue>;
+
+export type DataGridRowWithOptions<TData extends DataGridRow> = TData & {
+  options?: DataGridRowOptions<TData>;
+  children?: DataGridRowWithOptions<TData>[];
 };

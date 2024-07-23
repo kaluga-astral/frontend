@@ -332,4 +332,109 @@ describe('NewDataGrid', () => {
     await userEvents.click(button);
     expect(onDeleteSpy).toHaveBeenCalled();
   });
+
+  it('Вложенные элементы не отображаются, если группа не раскрыта', () => {
+    const fakeData = [
+      {
+        id: 1,
+        name: 'Group',
+        children: [
+          {
+            name: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).not.toBeVisible();
+  });
+
+  it('Вложенные элементы отображаются по умолчанию, если isInitialExpanded=true', () => {
+    const fakeData = [
+      {
+        id: 1,
+        name: 'Group',
+        children: [
+          {
+            name: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        isInitialExpanded
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).toBeVisible();
+  });
+
+  it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
+    const fakeData = [
+      {
+        id: '1',
+        name: 'Group',
+        children: [
+          {
+            id: '11',
+            name: 'Item 1',
+            children: [
+              {
+                id: '111',
+                name: 'SubItem 1',
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        isInitialExpanded
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('SubItem 1');
+
+    expect(label).not.toBeVisible();
+  });
 });

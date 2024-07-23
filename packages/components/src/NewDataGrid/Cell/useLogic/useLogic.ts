@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 
+import type { CellValue } from '../../types';
 import type { CellProps } from '../Cell';
 
-type UseLogicParams<TData extends object> = CellProps<TData>;
+type UseLogicParams<TData extends Record<string, CellValue>> = CellProps<TData>;
 
-export const useLogic = <TData extends object>({
+export const useLogic = <TData extends Record<string, CellValue>>({
   row,
   cell,
   emptyCellValue,

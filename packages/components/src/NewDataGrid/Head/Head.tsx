@@ -2,13 +2,18 @@ import { type ChangeEvent, useMemo } from 'react';
 
 import { Checkbox } from '../../Checkbox';
 import { HeadCell } from '../HeadCell';
-import type { DataGridColumns, DataGridRow, DataGridSort } from '../types';
+import type {
+  CellValue,
+  DataGridColumns,
+  DataGridRow,
+  DataGridSort,
+} from '../types';
 
 import { useLogic } from './useLogic';
 import { CheckboxCell, Wrapper } from './styles';
 
 export type HeadProps<
-  TData extends object = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = {
   /**
@@ -52,7 +57,10 @@ export type HeadProps<
   onSort?: (sorting: DataGridSort<TSortField> | undefined) => void;
 };
 
-export const Head = <TData extends object, TSortField extends keyof TData>(
+export const Head = <
+  TData extends Record<string, CellValue>,
+  TSortField extends keyof TData,
+>(
   props: HeadProps<TData, TSortField>,
 ) => {
   const { checkboxProps, handleSort } = useLogic(props);
@@ -89,7 +97,7 @@ export const Head = <TData extends object, TSortField extends keyof TData>(
         />
       );
     });
-  }, [columns, handleSort, sorting]);
+  }, [columns, sorting, handleSort]);
 
   return <Wrapper $gridColumns={gridColumns}>{renderColumns}</Wrapper>;
 };

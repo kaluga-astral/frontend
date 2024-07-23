@@ -1,8 +1,9 @@
+import type { CellValue } from '../../types';
 import { type BodyProps } from '../Body';
 
-type UseLogicParams<TData extends Record<string, unknown>> = BodyProps<TData>;
+type UseLogicParams<TData extends Record<string, CellValue>> = BodyProps<TData>;
 
-export const useLogic = <TData extends Record<string, unknown>>({
+export const useLogic = <TData extends Record<string, CellValue>>({
   isLoading,
   isError,
   rows,

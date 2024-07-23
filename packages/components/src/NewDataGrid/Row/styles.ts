@@ -5,6 +5,8 @@ import { styled } from '../../styles';
 import { ROOT_ACTION_CELL_WIDTH, TREE_LINE_WIDTH } from '../constants';
 import { Cell } from '../Cell';
 
+import { HIDDEN_CHILDREN_ROW_CLASSNAME } from './constants';
+
 export const Wrapper = styled.li<{
   $gridColumns: string;
   $level: number;
@@ -34,11 +36,12 @@ export const Wrapper = styled.li<{
       $isHovered ? theme.palette.background.elementHover : 'transparent'};
   }
 
-  &:not(:last-of-type)::before {
+  &:not(:last-of-type)::before,
+  &.${HIDDEN_CHILDREN_ROW_CLASSNAME}::before {
     content: '';
 
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     top: 0;
     transform: ${({ $level }) =>
       `translateX(calc(${ROOT_ACTION_CELL_WIDTH}px * ${$level} - ${TREE_LINE_WIDTH}px))`};

@@ -1,17 +1,16 @@
-import {
-  type MouseEvent,
-  type MouseEventHandler,
-  type SyntheticEvent,
-  useState,
-} from 'react';
+import { type MouseEvent, type SyntheticEvent, useMemo, useState } from 'react';
 
+import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
 
-type UseLogicParams<TData extends Record<string, unknown>> = RowProps<TData>;
+import { mergeColumnsOptions } from './utils';
 
-export const useLogic = <TData extends Record<string, unknown>>({
+type UseLogicParams<TData extends Record<string, CellValue>> = RowProps<TData>;
+
+export const useLogic = <TData extends Record<string, CellValue>>({
   keyId,
+  columns,
   row,
   level,
   activeRowId,
@@ -35,6 +34,11 @@ export const useLogic = <TData extends Record<string, unknown>>({
   const isChecked =
     isSelectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
+
+  const childrenColumns = useMemo(
+    () => mergeColumnsOptions(columns, options?.childrenColumns),
+    [columns, options],
+  );
 
   const handleToggle = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -75,6 +79,7 @@ export const useLogic = <TData extends Record<string, unknown>>({
 
   return {
     isOpen,
+    childrenColumns,
     handleToggle,
     rowProps: {
       $isHovered: Boolean(!isDisabled && onRowClick),

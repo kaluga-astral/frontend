@@ -2,7 +2,7 @@ import { type ChangeEvent, type ReactNode, useCallback } from 'react';
 
 import { Checkbox } from '../../Checkbox';
 import { Tooltip } from '../../Tooltip';
-import type { DataGridColumns, DataGridRowOptions } from '../types';
+import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
 import { checkIsDisabled } from './utils';
 import { useLogic } from './useLogic';
@@ -17,7 +17,12 @@ import {
   Wrapper,
 } from './styles';
 
-export type RowProps<TData extends Record<string, unknown>> = {
+export type RowProps<TData extends Record<string, CellValue>> = {
+  /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
   /**
    * Поле, которое будет использоваться в качестве ключа
    */
@@ -46,7 +51,7 @@ export type RowProps<TData extends Record<string, unknown>> = {
   /**
    * Вложенные элементы
    */
-  nestedChildren: Array<TData & { options?: DataGridRowOptions }>;
+  nestedChildren: Array<TData & { options?: DataGridRowOptions<TData> }>;
 
   /**
    * Идентификатор активного элемента массива rows. Выделяет активную строку в таблице
@@ -66,7 +71,7 @@ export type RowProps<TData extends Record<string, unknown>> = {
   /**
    * Количество отображаемых по умолчанию дочерних элементов
    */
-  initialOpenedNestedChildrenCount: number;
+  initialVisibleChildrenCount: number;
 
   /**
    * Если true, то будет отображаться чекбокс для выбора элемента
@@ -87,7 +92,7 @@ export type RowProps<TData extends Record<string, unknown>> = {
   /**
    * Дополнительные настройки строки
    */
-  options?: DataGridRowOptions;
+  options?: DataGridRowOptions<TData>;
 
   /**
    * Обработчик выбора строки
@@ -100,11 +105,12 @@ export type RowProps<TData extends Record<string, unknown>> = {
   onRowClick?: (row: TData) => void;
 };
 
-export const Row = <TData extends Record<string, unknown>>(
+export const Row = <TData extends Record<string, CellValue>>(
   props: RowProps<TData>,
 ) => {
   const {
     isOpen,
+    childrenColumns,
     handleToggle,
     checkboxProps,
     rowProps,
@@ -113,6 +119,7 @@ export const Row = <TData extends Record<string, unknown>>(
   } = useLogic(props);
 
   const {
+    className,
     row,
     options,
     isSelectable,
@@ -121,7 +128,7 @@ export const Row = <TData extends Record<string, unknown>>(
     expandedLevel,
     level,
     nestedChildren,
-    initialOpenedNestedChildrenCount,
+    initialVisibleChildrenCount,
     columns,
     emptyCellValue,
     selectedRows,
@@ -133,7 +140,7 @@ export const Row = <TData extends Record<string, unknown>>(
 
   const { isDisabled, isDisabledLastCell = true } = options || {};
 
-  const startAdornmentRender = () => {
+  const renderStartAdornment = () => {
     if (!nestedChildren?.length && !isSelectable) {
       return null;
     }
@@ -185,7 +192,7 @@ export const Row = <TData extends Record<string, unknown>>(
           row={row}
           cell={cell}
           emptyCellValue={emptyCellValue}
-          startAdornment={isFirstCell && startAdornmentRender()}
+          startAdornment={isFirstCell && renderStartAdornment()}
           isDisabled={isDisabledCell}
         />
       );
@@ -198,6 +205,7 @@ export const Row = <TData extends Record<string, unknown>>(
         <Wrapper
           $level={level}
           $gridColumns={gridColumns}
+          className={className}
           {...{ [DISABLE_ROW_ATTR]: isDisabled }}
           {...rowProps}
         >
@@ -210,7 +218,7 @@ export const Row = <TData extends Record<string, unknown>>(
         data={nestedChildren}
         keyId={keyId}
         level={level}
-        initialOpenedNestedChildrenCount={initialOpenedNestedChildrenCount}
+        initialVisibleChildrenCount={initialVisibleChildrenCount}
         renderRow={({ key, ...nestedRowProps }) => (
           <Row<TData>
             key={key}
@@ -220,9 +228,9 @@ export const Row = <TData extends Record<string, unknown>>(
             gridColumns={gridColumns}
             isInitialExpanded={isInitialExpanded}
             expandedLevel={expandedLevel}
-            initialOpenedNestedChildrenCount={initialOpenedNestedChildrenCount}
+            initialVisibleChildrenCount={initialVisibleChildrenCount}
             activeRowId={activeRowId}
-            columns={columns}
+            columns={childrenColumns}
             onSelectRow={onSelectRow}
             onRowClick={onRowClick}
           />
