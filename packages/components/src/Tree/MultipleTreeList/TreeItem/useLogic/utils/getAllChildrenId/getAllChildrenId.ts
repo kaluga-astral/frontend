@@ -1,9 +1,9 @@
 import type { TreeListData } from '../../../../../types';
-import type { MultipleValue } from '../../../../types';
+import type { DisabledItems } from '../../../../types';
 
 export const getAllChildrenId = (
   children: Array<TreeListData> | undefined,
-  disabledItems?: MultipleValue,
+  disabledItems?: Array<DisabledItems>,
 ): Array<string> => {
   if (!children || !children?.length) {
     return [];
@@ -11,12 +11,25 @@ export const getAllChildrenId = (
 
   let ids: Array<string> = [];
 
+  const isDisabledItems = (id: string): boolean => {
+    if (!disabledItems) {
+      return false;
+    }
+
+    return disabledItems.some((item) => {
+      if (typeof item === 'string') {
+        return item === id;
+      } else {
+        return item.id.toString() === id;
+      }
+    });
+  };
   const traverse = (
     items: Array<TreeListData>,
     isExternalDisabled?: boolean | undefined,
   ) => {
     items.forEach((item) => {
-      const isDisabled = isExternalDisabled || disabledItems?.includes(item.id);
+      const isDisabled = isExternalDisabled || isDisabledItems(item.id);
 
       if (!isDisabled) {
         ids.push(item.id);

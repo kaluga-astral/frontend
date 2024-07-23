@@ -10,9 +10,10 @@ type UseLogicProps = Pick<
   | 'isInitialExpanded'
   | 'expandedLevel'
   | 'disabledItems'
-  | 'disableReasonItems'
   | 'onChange'
 >;
+
+type DisableItem = { id: number; disableReason?: string };
 
 export const useLogic = ({
   id,
@@ -21,15 +22,24 @@ export const useLogic = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
-  disableReasonItems,
   onChange,
 }: UseLogicProps) => {
   const isSelected = checkIsSelected(value, id);
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
-  const isDisabled = disabledItems?.includes(id);
-  const disableReason =
-    disableReasonItems && Object.fromEntries(disableReasonItems)[id];
+
+  const formatDisabledItems: Array<DisableItem> =
+    disabledItems?.map((item) => {
+      if (typeof item === 'string') {
+        return { id: parseInt(item) };
+      } else {
+        return item;
+      }
+    }) || [];
+
+  const findItem = formatDisabledItems.find((item) => item.id === parseInt(id));
+  const isDisabled = !!findItem;
+  const disableReason = findItem?.disableReason;
 
   const nextLevel = level + 1;
 

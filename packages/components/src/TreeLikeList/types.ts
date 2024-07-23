@@ -8,6 +8,8 @@ import type { TreeListData } from '../Tree';
 
 export type MultipleValue = Array<string> | undefined;
 
+export type DisabledItems = string | { id: number; disableReason?: string };
+
 export type TreeLikeListProps = {
   /**
    * Выбранные значения
@@ -39,12 +41,7 @@ export type TreeLikeListProps = {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
-
-  /**
-   * Кортеж `value` элементов дерева, которые не доступны для взаимодействия и `reason` причина блокировки
-   */
-  disableReasonItems?: Array<[string, string]>;
+  disabledItems?: Array<DisabledItems>;
 
   /**
    * Render-props, позволяет более гибко настраивать содержимое item

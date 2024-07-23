@@ -8,8 +8,7 @@ import {
 import { Checkbox } from '../../../Checkbox';
 import { FormControlLabel } from '../../../FormControlLabel';
 import type { TreeListData } from '../../types';
-import type { MultipleValue } from '../types';
-import { Tooltip } from '../../../Tooltip';
+import type { DisabledItems, MultipleValue } from '../types';
 
 import { useLogic } from './useLogic';
 import { List, StyledItemContent } from './styles';
@@ -44,12 +43,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
-
-  /**
-   * Кортеж `value` элементов дерева, которые не доступны для взаимодействия и `reason` причина блокировки
-   */
-  disableReasonItems?: Array<[string, string]>;
+  disabledItems?: Array<DisabledItems>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -71,7 +65,6 @@ export const TreeItem = ({
   isInitialExpanded,
   expandedLevel,
   disabledItems,
-  disableReasonItems,
   onChange,
   ...props
 }: TreeItemProps) => {
@@ -90,7 +83,6 @@ export const TreeItem = ({
     isInitialExpanded,
     expandedLevel,
     disabledItems,
-    disableReasonItems,
     onChange,
   });
 
@@ -103,27 +95,21 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
-        // disableReason={disableReason}
+        disableReason={disableReason}
         component="li"
         label={
-          <Tooltip
-            title={isDisabled && disableReason}
-            // placement="bottom-start"
-            withoutContainer={!isDisabled}
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={isSelected}
-                  indeterminate={isSelected ? false : isIndeterminate}
-                />
-              }
-              label={renderItem({ id, label, ...props })}
-              disabled={isDisabled}
-              onChange={handleChange}
-              onClick={handleClick}
-            />
-          </Tooltip>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={isSelected}
+                indeterminate={isSelected ? false : isIndeterminate}
+              />
+            }
+            label={renderItem({ id, label, ...props })}
+            disabled={isDisabled}
+            onChange={handleChange}
+            onClick={handleClick}
+          />
         }
         level={level}
         onClick={handleChange}
@@ -138,7 +124,6 @@ export const TreeItem = ({
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
               disabledItems={disabledItems}
-              disableReasonItems={disableReasonItems}
               value={value}
               onChange={onChange}
             />
@@ -152,22 +137,16 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
-      // disableReason={disableReason}
+      disableReason={disableReason}
       component="li"
       label={
-        <Tooltip
-          title={isDisabled && disableReason}
-          // placement="bottom-start"
-          withoutContainer={!isDisabled}
-        >
-          <FormControlLabel
-            control={<Checkbox checked={isSelected} />}
-            label={renderItem({ id, label, ...props })}
-            disabled={isDisabled}
-            onChange={handleChange}
-            onClick={handleClick}
-          />
-        </Tooltip>
+        <FormControlLabel
+          control={<Checkbox checked={isSelected} />}
+          label={renderItem({ id, label, ...props })}
+          disabled={isDisabled}
+          onChange={handleChange}
+          onClick={handleClick}
+        />
       }
       level={level}
       onClick={handleChange}
