@@ -51,13 +51,6 @@ export type TreeItemProps = TreeListData & {
   onChange: Dispatch<SetStateAction<MultipleValue>>;
 };
 
-// const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label, note }) => (
-//   <ItemWrapper>
-//     <Label variant="ui">{label}</Label>
-//     {note && <SubTitle variant="small">{note}</SubTitle>}
-//   </ItemWrapper>
-// );
-
 export const TreeItem = ({
   id,
   label,

@@ -129,7 +129,8 @@ export const TreeItem = ({
         >
           {renderItem ? (
             <LabelWrapper $level={level}>
-              {renderItem({ renderCollapseButton, label, note, id })}
+              {renderCollapseButton()}
+              {renderItem({ label, note, id })}
             </LabelWrapper>
           ) : (
             <ItemWrapper>
@@ -137,7 +138,7 @@ export const TreeItem = ({
                 {renderCollapseButton()}
                 <Label>{label}</Label>
               </LabelWrapper>
-              {note && <Note>{note}</Note>}
+              {note && <Note color="textSecondary">{note}</Note>}
             </ItemWrapper>
           )}
         </ItemContent>
@@ -165,7 +166,7 @@ export const TreeItem = ({
             <LabelWrapper $level={level}>
               <Label>{label}</Label>
             </LabelWrapper>
-            {note && <Note>{note}</Note>}
+            {note && <Note color="textSecondary">{note}</Note>}
           </ItemWrapper>
         )}
       </ItemContent>

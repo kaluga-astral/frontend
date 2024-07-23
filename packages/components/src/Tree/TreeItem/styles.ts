@@ -10,7 +10,6 @@ import {
   COLLAPSE_BUTTON_WIDTH,
   GAP_WIDTH,
   HALF_PADDING_COLLAPSE_BUTTON_WIDTH,
-  ITEM_PADDING,
   TREE_LINE_WIDTH,
 } from './constants';
 
@@ -65,7 +64,7 @@ export const ItemContent = styled('div', {
   align-items: center;
 
   min-height: 32px;
-  padding: ${({ theme }) => theme.spacing(0, 4, 0, 0)};
+  padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
   padding-left: ${({ theme, $level }) =>
     `calc(${theme.spacing($level * 7)} + ${theme.spacing(7)})`};
 
@@ -133,15 +132,10 @@ export const Label = styled(Typography)`
 
 export const Note = styled(OverflowTypography)`
   margin-left: ${({ theme }) => theme.spacing(1)};
-
-  color: ${({ theme }) => theme.palette.grey[600]};
 `;
 
 export const ItemWrapper = styled.div`
-  display: flex;
   flex-direction: column;
-
-  padding: ${({ theme }) => theme.spacing(1, 0, 1, 0)};
 `;
 
 export const LabelWrapper = styled('div', {
@@ -152,19 +146,19 @@ export const LabelWrapper = styled('div', {
   display: flex;
   align-items: center;
 
-  min-height: 32px;
-
   &::before {
     content: '';
 
     position: absolute;
     z-index: 1;
-    top: 0;
-    left: calc(${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} - ${ITEM_PADDING});
+    top: ${({ theme }) => theme.spacing(-2)};
+    left: calc(
+      ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} -
+        (${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * 2
+    );
 
     width: ${TREE_LINE_WIDTH};
-    height: calc(50% + 4px);
-    margin-top: ${({ theme }) => theme.spacing(-1)};
+    height: ${({ theme }) => `calc(50% + ${theme.spacing(2)})`};
 
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};

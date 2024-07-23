@@ -174,21 +174,16 @@ export const RenderItem = () => {
   const [value, setValue] = useState<Array<string> | undefined>();
 
   const fakeData = [
-    ...FAKE_TREE_LIST_DATA,
+    ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
       label: 'Item 3',
     },
   ];
 
-  const renderItem: TreeLikeListProps['renderItem'] = ({
-    renderCollapseButton,
-    note,
-    label,
-  }) => (
+  const renderItem: TreeLikeListProps['renderItem'] = ({ note, label }) => (
     <Item>
       <div>
-        {renderCollapseButton && renderCollapseButton()}
         <Typography variant="caption">{label}</Typography>
       </div>
       <Typography color="success">{note}</Typography>
