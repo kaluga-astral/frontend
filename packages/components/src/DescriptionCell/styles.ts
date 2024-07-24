@@ -11,16 +11,6 @@ export const Wrapper = styled('div', {
     $iconPosition === 'right' && 'row-reverse'};
   gap: ${({ theme, $icon }) => $icon && theme.spacing(2)};
   align-items: center;
-
-  transition: ${({ theme }) =>
-    theme.transitions.create('background-color', {
-      easing: theme.transitions.easing.easeIn,
-      duration: theme.transitions.duration.shortest,
-    })};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.background.elementHover};
-  }
 `;
 
 export const IconWrapper = styled.div`
