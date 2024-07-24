@@ -64,7 +64,7 @@ export const ItemContent = styled('div', {
   align-items: center;
 
   min-height: 32px;
-  padding: ${({ theme }) => theme.spacing(1, 4, 1, 0)};
+  padding-right: ${({ theme }) => theme.spacing(4)};
   padding-left: ${({ theme, $level }) =>
     `calc(${theme.spacing($level * 7)} + ${theme.spacing(7)})`};
 
@@ -130,13 +130,7 @@ export const Label = styled(Typography)`
   margin-left: ${({ theme }) => theme.spacing(1)};
 `;
 
-export const Note = styled(OverflowTypography)`
-  margin-left: ${({ theme }) => theme.spacing(1)};
-`;
-
-export const ItemWrapper = styled.div`
-  flex-direction: column;
-`;
+export const Note = styled(OverflowTypography)``;
 
 export const LabelWrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== '$level',

@@ -13,7 +13,6 @@ import {
   CollapseButton,
   Item,
   ItemContent,
-  ItemWrapper,
   Label,
   LabelWrapper,
   Note,
@@ -133,13 +132,17 @@ export const TreeItem = ({
               {renderItem({ label, note, id })}
             </LabelWrapper>
           ) : (
-            <ItemWrapper>
+            <div>
               <LabelWrapper $level={level}>
                 {renderCollapseButton()}
                 <Label>{label}</Label>
               </LabelWrapper>
-              {note && <Note color="textSecondary">{note}</Note>}
-            </ItemWrapper>
+              {note && (
+                <Note variant="small" color="textSecondary">
+                  {note}
+                </Note>
+              )}
+            </div>
           )}
         </ItemContent>
 
@@ -162,12 +165,16 @@ export const TreeItem = ({
             {renderItem({ label, note, id })}
           </LabelWrapper>
         ) : (
-          <ItemWrapper>
+          <div>
             <LabelWrapper $level={level}>
               <Label>{label}</Label>
             </LabelWrapper>
-            {note && <Note color="textSecondary">{note}</Note>}
-          </ItemWrapper>
+            {note && (
+              <Note variant="small" color="textSecondary">
+                {note}
+              </Note>
+            )}
+          </div>
         )}
       </ItemContent>
     </Item>

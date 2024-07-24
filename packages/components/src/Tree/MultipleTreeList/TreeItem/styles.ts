@@ -9,7 +9,11 @@ export const StyledItemContent = styled(TreeItem)`
     padding-bottom: 0;
 
     & > .${typographyClasses.root} {
-      margin-left: ${({ theme }) => theme.spacing(9)};
+      margin-left: ${({ theme }) => theme.spacing(8)};
+    }
+
+    & > div > .${typographyClasses.root} {
+      margin-left: unset;
     }
   }
 `;
