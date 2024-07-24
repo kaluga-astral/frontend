@@ -58,7 +58,6 @@ export const Example = () => {
   const handleBack = () => {
     if (activeStep !== 0) {
       setActiveStep((prev) => prev - 1);
-      steps[0].error = true;
     }
   };
 
