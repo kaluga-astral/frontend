@@ -30,7 +30,7 @@ export const DescriptionCell = ({
   iconPosition = 'left',
 }: DescriptionCellProps) => {
   return (
-    <Wrapper $iconPosition={iconPosition}>
+    <Wrapper $iconPosition={iconPosition} $icon={icon}>
       <IconWrapper>{icon}</IconWrapper>
       <ItemWrapper>
         <Typography>{title}</Typography>

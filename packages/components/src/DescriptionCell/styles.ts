@@ -1,14 +1,15 @@
 import { typographyClasses } from '@mui/material';
+import { type ReactNode } from 'react';
 
 import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
-  shouldForwardProp: (prop) => prop != '$iconPosition',
-})<{ $iconPosition?: string }>`
+  shouldForwardProp: (prop) => !['$iconPosition', '$icon'].includes(prop),
+})<{ $iconPosition?: string; $icon: ReactNode }>`
   display: flex;
   flex-direction: ${({ $iconPosition }) =>
     $iconPosition === 'right' && 'row-reverse'};
-  gap: ${({ theme }) => theme.spacing(2)};
+  gap: ${({ theme, $icon }) => $icon && theme.spacing(2)};
   align-items: center;
 
   transition: ${({ theme }) =>
