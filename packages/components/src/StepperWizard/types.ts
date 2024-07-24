@@ -1,5 +1,7 @@
+import { type ReactNode } from 'react';
+
 export type Steps = {
-  label: string;
-  error: boolean;
-  completed?: boolean;
+  label?: ReactNode;
+  error?: boolean;
+  stepContent?: ReactNode;
 }[];

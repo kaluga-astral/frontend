@@ -2,13 +2,13 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Button, Grid } from '..';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
 
 import { StepperWizard } from './StepperWizard';
 import { type Steps } from './types';
 
 /**
- * StepperWizard - фасад для работы с компонентом Stepper
+ * StepperWizard - фасад для работы с базовыми компонентами Stepper
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=427-5578&mode=design&t=cAVE2DuNhtiUtoF6-0)
  * ### [Guide]()
@@ -48,9 +48,17 @@ const ButtonsWrapper = styled.div`
 export const Example = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const steps: Steps = [
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3', error: true },
+    { label: 'Step 4' },
+  ];
+
   const handleBack = () => {
     if (activeStep !== 0) {
       setActiveStep((prev) => prev - 1);
+      steps[0].error = true;
     }
   };
 
@@ -60,16 +68,9 @@ export const Example = () => {
     }
   };
 
-  const steps: Steps = [
-    { label: 'Step 1', error: false },
-    { label: 'Step 2', error: false, completed: true },
-    { label: 'Step 3', error: true },
-    { label: 'Step 4', error: false },
-  ];
-
   return (
     <Grid>
-      <StepperWizard activeStep={activeStep} steps={steps} />
+      <StepperWizard connector="arrow" activeStep={activeStep} steps={steps} />
       <ButtonsWrapper>
         <Button variant="link" onClick={handleBack}>
           BACK
