@@ -46,6 +46,7 @@ const defaultGetOptionLabel = (
 
 /**
  * @description Autocomplete с сертификатами
+ * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  */
 export const CryptoProCertAutocomplete = <
   Multiple extends boolean,

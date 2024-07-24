@@ -3,6 +3,7 @@ export type BadgeColor =
   | 'grey'
   | 'white'
   | 'warning'
-  | 'errorLight'
   | 'error'
   | 'success';
+
+export type BadgeVariantsColor = 'contained' | 'light';

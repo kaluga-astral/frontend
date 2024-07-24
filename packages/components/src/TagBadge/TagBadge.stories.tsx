@@ -43,7 +43,8 @@ export const Example = () => (
 );
 
 export const Default = () => <TagBadge color="primary" badgeContent="12" />;
-// TODO Доработать сторю в рамках https://track.astral.ru/soft/browse/UIKIT-1639
+
+// TODO Доработать истории в рамках https://track.astral.ru/soft/browse/UIKIT-1639
 export const Color = () => (
   <Stack direction="column" gap={2}>
     <Stack direction="row" gap={2}>
@@ -81,12 +82,6 @@ export const Color = () => (
         {...baseProps}
         endAddon={(props) => (
           <TagBadge {...props} color="white" badgeContent="12" />
-        )}
-      />
-      <Tag
-        {...baseProps}
-        endAddon={(props) => (
-          <TagBadge {...props} color="errorLight" badgeContent="12" />
         )}
       />
     </Stack>
@@ -131,13 +126,6 @@ export const Color = () => (
         color="default"
         endAddon={(props) => (
           <TagBadge {...props} color="white" badgeContent="12" />
-        )}
-      />
-      <Tag
-        {...baseProps}
-        color="error"
-        endAddon={(props) => (
-          <TagBadge {...props} color="errorLight" badgeContent="12" />
         )}
       />
     </Stack>
@@ -193,7 +181,7 @@ export const Variant = () => (
         label="contained"
         variant="contained"
         endAddon={(props) => (
-          <TagBadge {...props} color="errorLight" badgeContent="12" />
+          <TagBadge {...props} color="error" badgeContent="12" />
         )}
       />
     </Stack>
@@ -259,12 +247,7 @@ export const Variant = () => (
         label="contained"
         variant="contained"
         endAddon={(props) => (
-          <TagBadge
-            {...props}
-            variant="dot"
-            color="errorLight"
-            badgeContent="12"
-          />
+          <TagBadge {...props} variant="dot" color="error" badgeContent="12" />
         )}
       />
     </Stack>

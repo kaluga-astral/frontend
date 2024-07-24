@@ -23,7 +23,6 @@ export const SuccessPlaceholder = ({ imgSrc }: Props) => {
       imgAlt="Письмо"
       imgSrc={imgSrc || mailImgSrc}
       imgWidth="100px"
-      imgHeight="100px"
     />
   );
 };

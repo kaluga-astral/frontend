@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { LegacyGrid } from '@astral/components';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
@@ -9,10 +9,17 @@ import { FormSubmitButton } from '../FormSubmitButton';
 
 import { Form } from './Form';
 
-export default {
+/**
+ *
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+const meta: Meta<typeof Form> = {
   title: 'Form/Form',
-  component: null,
+  component: Form,
 };
+
+export default meta;
 
 type FormValues = { name: FormTextFieldValue };
 
@@ -20,7 +27,7 @@ const validationSchema = object<FormValues>({
   name: string(),
 });
 
-const Template: StoryFn = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
@@ -45,11 +52,4 @@ const Template: StoryFn = () => {
       </LegacyGrid>
     </Form>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

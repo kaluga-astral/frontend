@@ -1,26 +1,24 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { DotsVOutlineMd, EditOutlineMd } from '@astral/icons';
 
 import { MenuItem } from '../MenuItem';
-import { Typography } from '../Typography';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
 import { DataGrid, type DataGridColumns } from '../DataGrid';
 import { IconButton } from '../IconButton';
-import { styled } from '../styles';
-import { Paper } from '../Paper';
 
 import { IconDropdownButton } from './IconDropdownButton';
 
-const PaperWrapper = styled(Paper)`
-  width: 70%;
-  padding: ${({ theme }) => theme.spacing(6)};
-`;
-
-export default {
+/**
+ * IconDropdownButton - позволяет компактно разместить несколько вариантов действия в одном элементе. В большинстве случаев в качестве такого элемента выступает кнопка или пункт меню. Вызывается по клику или наведению на элемент.
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=94-0&t=h03SfwalY0oSqRCX-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof IconDropdownButton> = {
   title: 'Components/IconDropdownButton',
   component: IconDropdownButton,
 };
+
+export default meta;
 
 type DataType = {
   id: string;
@@ -98,149 +96,106 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const IconDropdownButtonShowcase: StoryFn = () => {
-  return (
-    <ExampleTemplate>
-      <Typography variant="h3" paragraph>
-        IconDropdownButton
-      </Typography>
-      <br />
-      <br />
+type Story = StoryObj<typeof IconDropdownButton>;
 
-      <Typography variant="ui" paragraph>
-        IconDropdownButton - позволяет компактно разместить несколько вариантов
-        действия в одном элементе.
-      </Typography>
-      <Typography variant="ui" paragraph>
-        В большинстве случаев в качестве такого элемента выступает кнопка или
-        пункт меню. Вызывается по клику или наведению на элемент.
-      </Typography>
-      <br />
-
-      <ExampleTemplate.Case
-        title="Light"
-        descriptionList={[
-          'Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.',
-        ]}
-      >
-        <Stack gap={8} direction="row" justifyContent="center">
-          <IconDropdownButton
-            variant="light"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-          <IconDropdownButton
-            disabled
-            variant="light"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-          <IconDropdownButton
-            loading
-            variant="light"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-        </Stack>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Text"
-        descriptionList={['Кнопка требующая наименьшего внимания.']}
-      >
-        <Stack gap={8} direction="row" justifyContent="center">
-          <IconDropdownButton
-            variant="text"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-          <IconDropdownButton
-            disabled
-            variant="text"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-          <IconDropdownButton
-            loading
-            variant="text"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-        </Stack>
-      </ExampleTemplate.Case>
-
-      <ExampleTemplate.Case
-        title="Размер кнопки"
-        descriptionList={[
-          'Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.',
-        ]}
-      >
-        <Stack
-          gap={8}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <IconDropdownButton
-            variant="light"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-          <IconDropdownButton
-            size="large"
-            variant="light"
-            icon={<DotsVOutlineMd />}
-            aria-label="Меню"
-          >
-            {children}
-          </IconDropdownButton>
-        </Stack>
-      </ExampleTemplate.Case>
-      <br />
-
-      <Typography variant="h5" paragraph>
-        Пример использования
-      </Typography>
-
-      <PaperWrapper>
-        <DataGrid keyId="id" rows={slicedData} columns={columns} />
-      </PaperWrapper>
-    </ExampleTemplate>
-  );
+export const Interaction: Story = {
+  args: {
+    icon: <DotsVOutlineMd />,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
 };
 
-const Template: StoryFn = (args) => (
-  <IconDropdownButton icon={<DotsVOutlineMd />} {...args} aria-label="Меню" />
+export const Example = () => (
+  <DataGrid keyId="id" rows={slicedData} columns={columns} />
 );
 
-IconDropdownButtonShowcase.parameters = { options: { showPanel: false } };
+/**
+ * Кнопка может помещаться на одной строке с другими компонентами и не предполагает привлечения обязательного внимания всех пользователей. При взаимодействии со страницей часть пользователей не воспользуется кнопкой, но она может быть нужна определенной группе пользователей.
+ */
+export const Default = () => (
+  <>
+    <IconDropdownButton
+      variant="light"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+    <IconDropdownButton
+      variant="text"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+  </>
+);
 
-export const IconDropdownButtonStory = Template.bind({});
+export const Disabled = () => (
+  <>
+    <IconDropdownButton
+      disabled
+      variant="light"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+    <IconDropdownButton
+      disabled
+      variant="text"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+  </>
+);
 
-IconDropdownButtonStory.storyName = 'IconDropdownButton';
+export const Loading = () => (
+  <>
+    <IconDropdownButton
+      loading
+      variant="light"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+    <IconDropdownButton
+      loading
+      variant="text"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+  </>
+);
 
-IconDropdownButtonStory.args = {
-  icon: <DotsVOutlineMd />,
-  variant: 'contained',
-  color: 'primary',
-  children,
-};
-
-IconDropdownButtonStory.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
-};
+/**
+ * Существует 2 стандартных размера кноки: большой и стандартный. Большая используется для промостраниц и сайтов, стандартная в интерфейсах.
+ */
+export const ButtonSize = () => (
+  <>
+    <IconDropdownButton
+      variant="light"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+    <IconDropdownButton
+      size="large"
+      variant="light"
+      icon={<DotsVOutlineMd />}
+      aria-label="Меню"
+    >
+      {children}
+    </IconDropdownButton>
+  </>
+);

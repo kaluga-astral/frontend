@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Typography } from '../Typography';
 import { styled } from '../styles';
@@ -9,7 +9,7 @@ import { Grid } from './Grid';
 /**
  * Grid предназначен для группировки элементов в обоих направлениях.
  *
- * ### [Figma]()
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=41-33&t=h03SfwalY0oSqRCX-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof Grid> = {
@@ -27,6 +27,26 @@ const Item = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.grey[300]};
   border-radius: 3px;
 `;
+
+type Story = StoryObj<typeof Grid>;
+
+export const Interaction: Story = {
+  args: {
+    container: true,
+    rows: 2,
+    rowSpacing: 3,
+    children: (
+      <>
+        <Typography>Item 1</Typography> <Typography>Item 2</Typography>
+      </>
+    ),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 const Wrapper = styled.div`
   min-width: 500px;

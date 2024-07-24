@@ -1,5 +1,5 @@
 import { HomeOutlineMd } from '@astral/icons';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { List } from '../List';
@@ -12,12 +12,27 @@ import { ListSubheader } from '../ListSubheader';
 
 import { ListItemButton } from './ListItemButton';
 
-export default {
+const meta: Meta<typeof ListItemButton> = {
   title: 'Components/List/ListItemButton',
   component: ListItemButton,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof ListItemButton>;
+
+export const Interaction: Story = {
+  args: {
+    children: 'Button',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [open, setOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
@@ -94,11 +109,4 @@ const Template: StoryFn = () => {
       </List>
     </>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };
