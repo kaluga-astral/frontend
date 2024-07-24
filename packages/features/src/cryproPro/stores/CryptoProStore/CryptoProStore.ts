@@ -18,6 +18,7 @@ import { type FileData } from '../../types';
 
 /**
  * @description Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро
+ * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  * */
 export class CryptoProStore {
   /**
