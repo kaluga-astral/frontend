@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 
 import { Typography } from '../Typography';
 
-import { IconWrapper, ItemWrapper, SubTitle, Wrapper } from './styles';
+import { IconWrapper, ItemWrapper, Wrapper } from './styles';
 
 export type DescriptionCellProps = {
   /**
@@ -34,7 +34,11 @@ export const DescriptionCell = ({
       <IconWrapper>{icon}</IconWrapper>
       <ItemWrapper>
         <Typography>{title}</Typography>
-        {subtitle && <SubTitle>{subtitle}</SubTitle>}
+        {subtitle && (
+          <Typography color="textSecondary" variant="small">
+            {subtitle}
+          </Typography>
+        )}
       </ItemWrapper>
     </Wrapper>
   );

@@ -1,5 +1,4 @@
 import { styled } from '../styles';
-import { Typography } from '../Typography';
 
 export const Wrapper = styled('div', {
   shouldForwardProp: (prop) => prop != '$iconPosition',
@@ -7,6 +6,7 @@ export const Wrapper = styled('div', {
   display: flex;
   flex-direction: ${({ $iconPosition }) =>
     $iconPosition === 'right' && 'row-reverse'};
+  gap: ${({ theme }) => theme.spacing(2)};
   align-items: center;
 
   transition: ${({ theme }) =>
@@ -21,8 +21,6 @@ export const Wrapper = styled('div', {
 `;
 
 export const IconWrapper = styled.div`
-  display: flex;
-
   & > svg {
     display: block;
 
@@ -34,10 +32,4 @@ export const IconWrapper = styled.div`
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  padding: ${({ theme }) => theme.spacing(2)};
-`;
-
-export const SubTitle = styled(Typography)`
-  color: ${({ theme }) => theme.palette.grey[600]};
 `;
