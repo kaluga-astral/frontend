@@ -100,7 +100,6 @@ export const TreeItem = ({
           />
         }
         level={level}
-        renderItem={renderItem}
         onClick={handleChange}
       >
         <List>
@@ -126,7 +125,6 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
-      renderItem={renderItem}
       note={renderItem ? null : note}
       component="li"
       label={

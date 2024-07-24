@@ -91,7 +91,6 @@ export const TreeItem = ({
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
         note={renderItem ? null : note}
-        renderItem={renderItem}
         component="li"
         label={
           <FormControlLabel
@@ -144,7 +143,6 @@ export const TreeItem = ({
           onClick={handleClick}
         />
       }
-      renderItem={renderItem}
       level={level}
       onClick={handleChange}
     />

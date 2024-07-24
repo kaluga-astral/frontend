@@ -170,6 +170,11 @@ const Item = styled.div`
   padding-left: ${({ theme }) => theme.spacing(1)};
 `;
 
+const LabelWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
 export const RenderItem = () => {
   const [value, setValue] = useState<Array<string> | undefined>();
 
@@ -181,9 +186,12 @@ export const RenderItem = () => {
     },
   ];
 
-  const renderItem: TreeLikeListProps['renderItem'] = ({ note, label }) => (
+  const renderItem: TreeLikeListProps['renderItem'] = ({ note, label, id }) => (
     <Item>
-      <Typography>{label}</Typography>
+      <LabelWrapper>
+        <Typography variant="code">#{id}</Typography>
+        <Typography>{label}</Typography>
+      </LabelWrapper>
       {note && (
         <Typography variant="h7" color="success">
           {note}
