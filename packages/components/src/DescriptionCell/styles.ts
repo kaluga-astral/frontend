@@ -35,13 +35,10 @@ export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  & > .${typographyClasses.root} > dl > dt > .${typographyClasses.root} {
-    font-size: unset;
-    color: unset;
-  }
-
-  & > .${typographyClasses.root} > dl > .${typographyClasses.root} {
-    font-size: unset;
-    color: unset;
+  dl {
+    .${typographyClasses.root} {
+      font-size: unset;
+      color: unset;
+    }
   }
 `;
