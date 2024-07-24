@@ -11,6 +11,10 @@ export const StyledItemContent = styled(TreeItem)`
     & > .${typographyClasses.root} {
       margin-left: ${({ theme }) => theme.spacing(8)};
     }
+
+    & > div > .${typographyClasses.root} {
+      margin-left: unset;
+    }
   }
 `;
 

@@ -118,7 +118,7 @@ const FAKE_NOTE_TREE_LIST_DATA = [
           {
             id: '212',
             label: 'Item 2.1.2',
-            note: 'Item 2.1.2.2',
+            note: 'Item 2.1.2 subtitle',
           },
         ],
       },
@@ -185,10 +185,12 @@ export const RenderItem = () => {
 
   const renderItem: MultipleTreeListProps['renderItem'] = ({ label, note }) => (
     <Item>
-      <div>
-        <Typography variant="caption">{label}</Typography>
-      </div>
-      {note && <Typography color="success">{note}</Typography>}
+      <Typography>{label}</Typography>
+      {note && (
+        <Typography variant="h7" color="success">
+          {note}
+        </Typography>
+      )}
     </Item>
   );
 

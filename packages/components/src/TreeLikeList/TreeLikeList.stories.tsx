@@ -183,10 +183,12 @@ export const RenderItem = () => {
 
   const renderItem: TreeLikeListProps['renderItem'] = ({ note, label }) => (
     <Item>
-      <div>
-        <Typography variant="caption">{label}</Typography>
-      </div>
-      <Typography color="success">{note}</Typography>
+      <Typography>{label}</Typography>
+      {note && (
+        <Typography variant="h7" color="success">
+          {note}
+        </Typography>
+      )}
     </Item>
   );
 
