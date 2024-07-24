@@ -1,3 +1,5 @@
+import { typographyClasses } from '@mui/material';
+
 import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
@@ -32,4 +34,14 @@ export const IconWrapper = styled.div`
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  & > .${typographyClasses.root} > dl > dt > .${typographyClasses.root} {
+    font-size: unset;
+    color: unset;
+  }
+
+  & > .${typographyClasses.root} > dl > .${typographyClasses.root} {
+    font-size: unset;
+    color: unset;
+  }
 `;

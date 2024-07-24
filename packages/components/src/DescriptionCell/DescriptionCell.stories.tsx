@@ -7,7 +7,7 @@ import {
   type DataGridRowOptions,
   NewDataGrid,
 } from '../NewDataGrid';
-import { styled } from '../styles';
+import { Grid } from '../Grid';
 
 import { DescriptionCell } from './DescriptionCell';
 
@@ -64,11 +64,6 @@ const Icon = () => {
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const Interaction: Story = {
   args: {
     title: 'Заголовок',
@@ -82,10 +77,6 @@ export const Interaction: Story = {
     },
   },
 };
-
-const StyledDescriptionName = styled(Description.Name)`
-  color: unset;
-`;
 
 export const Example = () => {
   return (
@@ -103,7 +94,7 @@ export const DescriptionSubtitle = () => {
       title="Прибыль"
       subtitle={
         <Description>
-          <StyledDescriptionName>Направление</StyledDescriptionName>
+          <Description.Name>Направление</Description.Name>
           <Description.Value>ФНС</Description.Value>
         </Description>
       }
@@ -118,7 +109,7 @@ export const DescriptionSubtitle = () => {
 
 export const IconPosition = () => {
   return (
-    <Wrapper>
+    <Grid rowSpacing={2}>
       <DescriptionCell
         title="Заголовок"
         subtitle="Подзаголовок"
@@ -130,7 +121,7 @@ export const IconPosition = () => {
         iconPosition="right"
         icon={<Icon />}
       />
-    </Wrapper>
+    </Grid>
   );
 };
 
@@ -171,7 +162,7 @@ export const DataGridDescriptionCell = () => {
         title="1С Отчетность"
         subtitle={
           <Description>
-            <StyledDescriptionName>ID</StyledDescriptionName>
+            <Description.Name>ID</Description.Name>
             <Description.Value>a17fee3e-07d6-4488</Description.Value>
           </Description>
         }
@@ -181,7 +172,7 @@ export const DataGridDescriptionCell = () => {
         title="Астрал.Отчет 5.0"
         subtitle={
           <Description>
-            <StyledDescriptionName>ID</StyledDescriptionName>
+            <Description.Name>ID</Description.Name>
             <Description.Value>bb6a549b-5b5a-402f</Description.Value>
           </Description>
         }
@@ -191,7 +182,7 @@ export const DataGridDescriptionCell = () => {
         title="Астрал.Отчет 4.0"
         subtitle={
           <Description>
-            <StyledDescriptionName>ID</StyledDescriptionName>
+            <Description.Name>ID</Description.Name>
             <Description.Value>d76a51ad-1a83-423b</Description.Value>
           </Description>
         }
@@ -203,7 +194,7 @@ export const DataGridDescriptionCell = () => {
         title="НДС"
         subtitle={
           <Description>
-            <StyledDescriptionName>Направление</StyledDescriptionName>
+            <Description.Name>Направление</Description.Name>
             <Description.Value>ФНС</Description.Value>
           </Description>
         }
@@ -212,7 +203,7 @@ export const DataGridDescriptionCell = () => {
         title="Прибыль"
         subtitle={
           <Description>
-            <StyledDescriptionName>Направление</StyledDescriptionName>
+            <Description.Name>Направление</Description.Name>
             <Description.Value>ФНС</Description.Value>
           </Description>
         }
@@ -221,7 +212,7 @@ export const DataGridDescriptionCell = () => {
         title="Бухгалтерский отчет"
         subtitle={
           <Description>
-            <StyledDescriptionName>Направление</StyledDescriptionName>
+            <Description.Name>Направление</Description.Name>
             <Description.Value>ФНС</Description.Value>
           </Description>
         }
