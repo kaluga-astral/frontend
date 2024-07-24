@@ -70,6 +70,48 @@ export const Invisible = () => {
   );
 };
 
+export const AnchorOrigin = () => {
+  return (
+    <Grid spacing={10} columns={2}>
+      <Badge color="grey" badgeContent={4} variant="standard">
+        <Button fullWidth variant="light" color="primary">
+          grey
+        </Button>
+      </Badge>
+      <Badge
+        color="grey"
+        badgeContent={4}
+        variant="standard"
+        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+      >
+        <Button fullWidth variant="light" color="primary">
+          grey
+        </Button>
+      </Badge>
+      <Badge
+        color="grey"
+        badgeContent={4}
+        variant="standard"
+        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+      >
+        <Button fullWidth variant="light" color="primary">
+          grey
+        </Button>
+      </Badge>
+      <Badge
+        color="grey"
+        badgeContent={4}
+        variant="standard"
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <Button fullWidth variant="light" color="primary">
+          grey
+        </Button>
+      </Badge>
+    </Grid>
+  );
+};
+
 export const VariantsColor = () => {
   return (
     <Grid spacing={10} columns={6}>
