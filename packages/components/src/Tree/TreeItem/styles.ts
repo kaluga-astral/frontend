@@ -42,7 +42,7 @@ export const Item = styled('li', {
       `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
 
     width: 0;
-    height: 100%;
+    height: 110%;
 
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
   }
@@ -130,7 +130,9 @@ export const Label = styled(Typography)`
   margin-left: ${({ theme }) => theme.spacing(1)};
 `;
 
-export const Note = styled(OverflowTypography)``;
+export const Note = styled(OverflowTypography)`
+  margin-left: ${({ theme }) => theme.spacing(1)}}
+`;
 
 export const LabelWrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== '$level',
@@ -145,14 +147,14 @@ export const LabelWrapper = styled('div', {
 
     position: absolute;
     z-index: 1;
-    top: ${({ theme }) => theme.spacing(-2)};
+    top: ${({ theme }) => theme.spacing(-1)};
     left: calc(
       ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} -
         (${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * 2
     );
 
     width: ${TREE_LINE_WIDTH};
-    height: ${({ theme }) => `calc(50% + ${theme.spacing(2)})`};
+    height: ${({ theme }) => `calc(50% + ${theme.spacing(1)})`};
 
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
