@@ -3,6 +3,7 @@ import { type Meta } from '@storybook/react';
 
 import { Typography } from '../Typography';
 import { styled } from '../styles';
+import { Description } from '../Description';
 
 import { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
@@ -85,60 +86,70 @@ const FAKE_TREE_LIST_DATA = [
 const FAKE_NOTE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Group 1',
-    note: 'Group 1 subtitle',
+    label: 'Наименование организации 1',
+    note: 'Руководство',
     children: [
       {
         id: '11',
-        label: 'Item 1.1',
-        note: 'Item 1.1 subtitle',
+        label: 'Подразделение 1.1',
+        note: (
+          <Description>
+            <Description.Name>Руководитель</Description.Name>
+            <Description.Value>Иванов И.И.</Description.Value>
+          </Description>
+        ),
       },
       {
         id: '12',
-        label: 'Item 1.2',
-        note: 'Group 1 subtitle',
+        label: 'Подразделение 1.2',
+        note: 'Закрыто',
       },
     ],
   },
   {
     id: '2',
-    label: 'Group 2',
+    label: 'Наименование организации 2',
+    note: 'Руководство',
     children: [
       {
         id: '21',
-        label: 'Group 2.1',
-        note: 'Group 2.1 subtitle',
+        label: 'Подразделение 2.1',
         children: [
           {
             id: '211',
-            label: 'Item 2.1.1',
+            label: 'Подразделение 2.1.1',
           },
           {
             id: '212',
-            label: 'Item 2.1.2',
-            note: 'Item 2.1.2.2',
+            label: 'Подразделение 2.1.2',
+            note: (
+              <Description>
+                <Description.Name>Руководитель</Description.Name>
+                <Description.Value>Иванов И.И.</Description.Value>
+              </Description>
+            ),
           },
         ],
       },
       {
         id: '22',
-        label: 'Group 2.2',
+        label: 'Подразделение 2.2',
         children: [
           {
             id: '221',
-            label: 'Item 2.2.1',
+            label: 'Подразделение 2.2.1',
             children: [
               {
                 id: '2211',
-                label: 'Item 2.2.1.1',
+                label: 'Подразделение 2.2.1.1',
               },
               {
                 id: '2212',
-                label: 'Item 2.2.1.2',
+                label: 'Подразделение 2.2.1.2',
               },
               {
                 id: '2213',
-                label: 'Item 2.2.1.3',
+                label: 'Подразделение 2.2.1.3',
               },
             ],
           },
@@ -220,8 +231,13 @@ export const NoteItem = () => {
     ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
-      label: 'Item 3',
-      note: 'Item 3 subtitle',
+      label: 'Подразделение 3',
+      note: (
+        <Description>
+          <Description.Name>Руководитель</Description.Name>
+          <Description.Value>Иванов И.И.</Description.Value>
+        </Description>
+      ),
     },
   ];
 

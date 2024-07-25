@@ -1,4 +1,5 @@
 import { ChevronROutlineMd } from '@astral/icons';
+import { typographyClasses } from '@mui/material';
 
 import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
@@ -131,7 +132,15 @@ export const Label = styled(Typography)`
 `;
 
 export const Note = styled(OverflowTypography)`
+  display: flex;
   margin-left: ${({ theme }) => theme.spacing(1)}}
+
+  dl {
+    .${typographyClasses.root} {
+      font-size: unset;
+      color: unset;
+    }
+  }
 `;
 
 export const LabelWrapper = styled('div', {
