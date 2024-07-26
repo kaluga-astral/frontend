@@ -152,6 +152,8 @@ export const LabelWrapper = styled('div', {
   display: flex;
   align-items: center;
 
+  padding: ${({ theme }) => theme.spacing(1, 0)};
+
   &::before {
     content: '';
 
