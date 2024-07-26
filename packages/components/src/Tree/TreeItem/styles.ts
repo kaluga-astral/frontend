@@ -133,7 +133,8 @@ export const Label = styled(Typography)`
 
 export const Note = styled(OverflowTypography)`
   display: flex;
-  margin-left: ${({ theme }) => theme.spacing(1)}}
+
+  margin-left: ${({ theme }) => theme.spacing(1)};
 
   dl {
     .${typographyClasses.root} {
