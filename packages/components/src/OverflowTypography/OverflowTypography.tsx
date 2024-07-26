@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 import { type PropsWithChildren } from 'react';
 
 import { Tooltip } from '../Tooltip';
@@ -24,7 +24,13 @@ type TooltipCustomizable = {
    * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
    * @description способ кастомизировать тултип при необходимости
    */
-  tooltipProps?: Omit<TooltipProps, 'children' | 'title'>;
+  tooltipProps?: Omit<TooltipProps, 'children' | 'title'> & {
+    /**
+     * Кастомный контент внутри tooltip. Данный props перекрывает дефолтный текст,
+     * когда строка не вмещается в контейнер
+     */
+    title?: ReactNode;
+  };
 };
 
 export type OverflowedElementProps = OverflowedProps &
