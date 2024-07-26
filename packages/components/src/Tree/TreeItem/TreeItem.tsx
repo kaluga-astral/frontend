@@ -81,15 +81,11 @@ export const TreeItem = ({
   onClick,
   ...props
 }: TreeItemProps) => {
-  const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
-
-  const handleClick = (props) => {
-    if (isDisabled) {
-      return;
-    }
-
-    onClick(props);
-  };
+  const { isOpen, handleToggle, handleClick } = useLogic({
+    isDefaultExpanded,
+    onClick,
+    isDisabled,
+  });
 
   if (children) {
     return (
@@ -97,7 +93,7 @@ export const TreeItem = ({
         <Tooltip
           title={isDisabled && disableReason}
           withoutContainer={!isDisabled}
-          placement="bottom"
+          placement="bottom-start"
         >
           <ItemContent
             $isSelected={isSelected}
@@ -107,7 +103,7 @@ export const TreeItem = ({
           >
             <CollapseButton
               $isNotBlockingExpandList={isNotBlockingExpandList}
-              disabled={isDisabled}
+              disabled={!isNotBlockingExpandList && isDisabled}
               variant="text"
               onClick={handleToggle}
             >
@@ -126,7 +122,7 @@ export const TreeItem = ({
       <Tooltip
         title={isDisabled && disableReason}
         withoutContainer={!isDisabled}
-        placement="bottom"
+        placement="bottom-start"
       >
         <ItemContent
           $isSelected={isSelected}

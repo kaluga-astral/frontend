@@ -152,4 +152,36 @@ describe('TreeList', () => {
     await userEvents.click(labelOne);
     expect(onChangeSpy).toBeCalledWith('1');
   });
+
+  it('DisabledItem принимает различные типы данных', () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1.1',
+          },
+        ],
+      },
+      {
+        id: '2',
+        label: 'Item 2',
+      },
+    ];
+
+    renderWithTheme(
+      <TreeList
+        data={fakeData}
+        disabledItems={[{ id: 1, disableReason: 'Заблокировано' }, '2']}
+        isInitialExpanded
+      />,
+    );
+
+    const label = screen.getByText('Item 1.1');
+
+    screen.debug();
+    expect(label).not.toBeVisible();
+  });
 });

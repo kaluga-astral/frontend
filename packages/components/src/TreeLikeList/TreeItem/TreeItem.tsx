@@ -98,7 +98,6 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
-        // disableReason={disableReason}
         isNotBlockingExpandList
         component="li"
         label={
@@ -142,12 +141,12 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
-      // disableReason={disableReason}
       component="li"
       label={
         <Tooltip
           title={isDisabled && disableReason}
           withoutContainer={!isDisabled}
+          placement="bottom-start"
         >
           <FormControlLabel
             control={<Checkbox checked={isSelected} />}
