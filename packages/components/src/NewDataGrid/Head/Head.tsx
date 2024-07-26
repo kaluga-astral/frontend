@@ -97,7 +97,14 @@ export const Head = <
         />
       );
     });
-  }, [columns, sorting, handleSort]);
+  }, [
+    columns,
+    sorting,
+    isSelectable,
+    checkboxProps,
+    onSelectAllRows,
+    handleSort,
+  ]);
 
   return <Wrapper $gridColumns={gridColumns}>{renderColumns}</Wrapper>;
 };

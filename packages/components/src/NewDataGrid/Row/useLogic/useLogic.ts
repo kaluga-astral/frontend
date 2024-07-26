@@ -1,5 +1,13 @@
-import { type MouseEvent, type SyntheticEvent, useMemo, useState } from 'react';
+import {
+  type MouseEvent,
+  type SyntheticEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
+import { DataGridContext } from '../../DataGridContext';
 import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
@@ -24,16 +32,25 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
-  const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
+  const { checkIsOpened, toggleOpenItems } = useContext(DataGridContext);
 
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
   const { isDisabled, disabledReason } = options || {};
 
   const rowId = row[keyId] as string;
+
+  useEffect(() => {
+    if (isDefaultExpanded) {
+      toggleOpenItems(rowId);
+    }
+  }, []);
+
   const isChecked =
     isSelectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
+
+  const isOpen = checkIsOpened(rowId);
 
   const childrenColumns = useMemo(
     () => mergeColumnsOptions(columns, options?.childrenColumns),
@@ -42,7 +59,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 
   const handleToggle = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    setOpen((currentState) => !currentState);
+    toggleOpenItems(rowId);
   };
 
   const handleOpenTooltip = (event: SyntheticEvent<Element, Event>) => {
@@ -80,6 +97,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   return {
     isOpen,
     childrenColumns,
+    rowId,
     handleToggle,
     rowProps: {
       $isHovered: Boolean(!isDisabled && onRowClick),
@@ -100,6 +118,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     },
     nestedChildrenProps: {
       isOpen,
+      rowId,
     },
   };
 };

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { render, renderWithTheme, screen, userEvents } from '@astral/tests';
 import { VirtuosoMockContext } from 'react-virtuoso';
+import { render, renderWithTheme, screen, userEvents } from '@astral/tests';
 import { theme } from '@astral/tests/src/theme';
 import { BinOutlineMd } from '@astral/icons';
 

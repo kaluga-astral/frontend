@@ -10,7 +10,7 @@ import type { DataGridColumns } from '../NewDataGrid';
 import { styled } from '../styles';
 
 import { NewDataGridInfinite } from './NewDataGridInfinite';
-import { makeDataList } from './faker';
+import { makeDataList, makeDataListWithTree } from './faker';
 
 /**
  * Таблица с бесконечным скроллом построенная на css grid
@@ -29,10 +29,12 @@ export default meta;
 type DataType = {
   id: string;
   documentName: string;
-  direction: string;
+  recipient: string;
   createDate: string;
+  actions?: object;
 };
-type SortField = 'documentName' | 'direction' | 'createDate';
+
+type SortField = 'documentName' | 'recipient' | 'createDate';
 
 const FAKE_ACTIONS: Actions<DataType> = {
   main: [
@@ -57,6 +59,35 @@ const FAKE_ACTIONS: Actions<DataType> = {
   ],
 };
 
+const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
+  {
+    field: 'documentName',
+    label: 'Наименование документа',
+    sortable: true,
+  },
+  {
+    field: 'recipient',
+    label: 'Получатель',
+    sortable: true,
+  },
+  {
+    field: 'createDate',
+    label: 'Дата создания',
+    sortable: true,
+    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+  },
+  {
+    field: 'actions',
+    label: 'Действия',
+    sortable: false,
+    align: 'center',
+    width: '120px',
+    renderCell: (row) => {
+      return <ActionCell actions={FAKE_ACTIONS} row={row} />;
+    },
+  },
+];
+
 const DataGridInfiniteWrapper = styled.div`
   width: 100%;
   height: 400px;
@@ -65,29 +96,7 @@ const DataGridInfiniteWrapper = styled.div`
 export const Example = () => {
   const data = makeDataList(10);
 
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -136,30 +145,122 @@ export const Example = () => {
   );
 };
 
+export const WithTree = () => {
+  const data = makeDataListWithTree(10);
+
+  const columns = FAKE_COLUMNS;
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          selectedRows={selected}
+          onSelectRow={handleSelect}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
+export const WithTreeLongList = () => {
+  const data = makeDataListWithTree(10, { childrenCount: 50 });
+
+  const columns = FAKE_COLUMNS;
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(data.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          selectedRows={selected}
+          onSelectRow={handleSelect}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
 export const NoData = () => {
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -188,29 +289,7 @@ export const NoData = () => {
 export const LoadingWithData = () => {
   const data = makeDataList(10);
 
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -240,29 +319,7 @@ export const LoadingWithData = () => {
 export const ErrorWithData = () => {
   const data = makeDataList(10);
 
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -290,29 +347,7 @@ export const ErrorWithData = () => {
 };
 
 export const Loading = () => {
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -340,29 +375,7 @@ export const Loading = () => {
 };
 
 export const Error = () => {
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'direction',
-      label: 'Направление',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = FAKE_COLUMNS;
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');

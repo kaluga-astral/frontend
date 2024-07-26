@@ -10,31 +10,8 @@ import { HIDDEN_CHILDREN_ROW_CLASSNAME } from './constants';
 export const Wrapper = styled.li<{
   $gridColumns: string;
   $level: number;
-  $isHovered?: boolean;
-  $isSelected?: boolean;
 }>`
   position: relative;
-
-  display: grid;
-  grid-template-columns: ${({ $gridColumns }) => $gridColumns};
-
-  list-style: none;
-
-  background-color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.palette.primary[100] : 'transparent'};
-
-  transition: ${({ theme }) => {
-    return theme.transitions.create(['background-color'], {
-      duration: theme.transitions.duration.short,
-    });
-  }};
-
-  &:hover {
-    cursor: ${({ $isHovered }) => ($isHovered ? 'pointer' : 'default')};
-
-    background-color: ${({ theme, $isHovered }) =>
-      $isHovered ? theme.palette.background.elementHover : 'transparent'};
-  }
 
   &:not(:last-of-type)::before,
   &.${HIDDEN_CHILDREN_ROW_CLASSNAME}::before {
@@ -50,6 +27,31 @@ export const Wrapper = styled.li<{
     height: 100%;
 
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
+  }
+`;
+
+export const ContentWrapper = styled.div<{
+  $isHovered?: boolean;
+  $isSelected?: boolean;
+  $gridColumns: string;
+}>`
+  display: grid;
+  grid-template-columns: ${({ $gridColumns }) => $gridColumns};
+
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.palette.primary[100] : 'transparent'};
+
+  transition: ${({ theme }) => {
+    return theme.transitions.create(['background-color'], {
+      duration: theme.transitions.duration.short,
+    });
+  }};
+
+  &:hover {
+    cursor: ${({ $isHovered }) => ($isHovered ? 'pointer' : 'default')};
+
+    background-color: ${({ theme, $isHovered }) =>
+      $isHovered ? theme.palette.background.elementHover : 'transparent'};
   }
 `;
 

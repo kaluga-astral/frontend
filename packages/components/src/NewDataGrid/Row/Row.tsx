@@ -14,6 +14,7 @@ import {
   ChevronIcon,
   CollapseButton,
   CollapseCell,
+  ContentWrapper,
   Wrapper,
 } from './styles';
 
@@ -111,6 +112,7 @@ export const Row = <TData extends Record<string, CellValue>>(
   const {
     isOpen,
     childrenColumns,
+    rowId,
     handleToggle,
     checkboxProps,
     rowProps,
@@ -136,6 +138,9 @@ export const Row = <TData extends Record<string, CellValue>>(
     keyId,
     onSelectRow,
     onRowClick,
+    // В этот rest-оператор попадают специфичные пропсы (атрибуты) virtuoso
+    // Необходимы для NewDataGrigInfinite
+    ...selfProps
   } = props;
 
   const { isDisabled, isDisabledLastCell = true } = options || {};
@@ -167,8 +172,6 @@ export const Row = <TData extends Record<string, CellValue>>(
     );
   };
 
-  const rowId = (row as TData)[keyId] as string;
-
   const renderCells = useCallback(() => {
     const availableCellsByIndex = !isDisabledLastCell
       ? [columns.length - 1]
@@ -199,43 +202,70 @@ export const Row = <TData extends Record<string, CellValue>>(
     });
   }, [isOpen, columns]);
 
+  const renderRow = useCallback(
+    ({
+      key,
+      ...nestedRowProps
+    }: { key: string } & Pick<
+      RowProps<TData>,
+      'row' | 'options' | 'nestedChildren' | 'level' | 'className'
+    >) => (
+      <Row<TData>
+        key={key}
+        keyId={keyId}
+        {...nestedRowProps}
+        isSelectable={isSelectable}
+        selectedRows={selectedRows}
+        gridColumns={gridColumns}
+        isInitialExpanded={isInitialExpanded}
+        expandedLevel={expandedLevel}
+        initialVisibleChildrenCount={initialVisibleChildrenCount}
+        activeRowId={activeRowId}
+        columns={childrenColumns}
+        onSelectRow={onSelectRow}
+        onRowClick={onRowClick}
+      />
+    ),
+    [
+      keyId,
+      isSelectable,
+      selectedRows,
+      gridColumns,
+      isInitialExpanded,
+      expandedLevel,
+      initialVisibleChildrenCount,
+      activeRowId,
+      childrenColumns,
+      onSelectRow,
+      onRowClick,
+    ],
+  );
+
   return (
-    <>
+    <Wrapper
+      $level={level}
+      $gridColumns={gridColumns}
+      className={className}
+      {...selfProps}
+    >
       <Tooltip followCursor arrow={false} {...tooltipProps}>
-        <Wrapper
-          $level={level}
+        <ContentWrapper
           $gridColumns={gridColumns}
-          className={className}
           {...{ [DISABLE_ROW_ATTR]: isDisabled }}
           {...rowProps}
         >
           {renderCells()}
-        </Wrapper>
+        </ContentWrapper>
       </Tooltip>
 
       <NestedChildren
         {...nestedChildrenProps}
-        data={nestedChildren}
-        keyId={keyId}
+        data={nestedChildren as Array<TData>}
+        keyId={keyId as string}
         level={level}
         initialVisibleChildrenCount={initialVisibleChildrenCount}
-        renderRow={({ key, ...nestedRowProps }) => (
-          <Row<TData>
-            key={key}
-            {...nestedRowProps}
-            isSelectable={isSelectable}
-            selectedRows={selectedRows}
-            gridColumns={gridColumns}
-            isInitialExpanded={isInitialExpanded}
-            expandedLevel={expandedLevel}
-            initialVisibleChildrenCount={initialVisibleChildrenCount}
-            activeRowId={activeRowId}
-            columns={childrenColumns}
-            onSelectRow={onSelectRow}
-            onRowClick={onRowClick}
-          />
-        )}
+        renderRow={renderRow}
       />
-    </>
+    </Wrapper>
   );
 };

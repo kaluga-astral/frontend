@@ -2,6 +2,7 @@ import { type ChangeEvent, type ReactNode, useContext, useMemo } from 'react';
 
 import { ConfigContext } from '../../ConfigProvider';
 import { ContentState } from '../../ContentState';
+import { DataGridContextProvider } from '../DataGridContext';
 import { Row } from '../Row';
 import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
@@ -125,7 +126,7 @@ export const Body = <TData extends Record<string, CellValue>>(
     keyId,
     noDataPlaceholder,
     onRetry,
-    ...restProps
+    ...rowProps
   } = props;
 
   const renderedRows = useMemo(() => {
@@ -141,25 +142,27 @@ export const Body = <TData extends Record<string, CellValue>>(
           keyId={keyId}
           level={INITIAL_LEVEL}
           nestedChildren={children as Array<TData>}
-          {...restProps}
+          {...rowProps}
         />
       );
     });
-  }, [rows, keyId, selectedRows]);
+  }, [rows, keyId, selectedRows, rowProps]);
 
   return (
-    <Wrapper $isEmpty={isNoData} $minDisplayRows={minDisplayRows}>
-      <ContentState
-        {...contentStateProps}
-        errorState={{
-          imgAlt: 'Что-то пошло не так',
-          errorList: [errorMsg || ''],
-          imgSrc: imagesMap.defaultErrorImgSrc,
-          onRetry,
-        }}
-      >
-        {rows.length ? renderedRows : noDataPlaceholder}
-      </ContentState>
-    </Wrapper>
+    <DataGridContextProvider>
+      <Wrapper $isEmpty={isNoData} $minDisplayRows={minDisplayRows}>
+        <ContentState
+          {...contentStateProps}
+          errorState={{
+            imgAlt: 'Что-то пошло не так',
+            errorList: [errorMsg || ''],
+            imgSrc: imagesMap.defaultErrorImgSrc,
+            onRetry,
+          }}
+        >
+          {rows.length ? renderedRows : noDataPlaceholder}
+        </ContentState>
+      </Wrapper>
+    </DataGridContextProvider>
   );
 };

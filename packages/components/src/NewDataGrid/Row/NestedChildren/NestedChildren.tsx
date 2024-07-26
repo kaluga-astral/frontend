@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, memo } from 'react';
 
 import { Button } from '../../../Button';
 import { Collapse } from '../../../Collapse';
@@ -25,6 +25,11 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
   keyId: keyof TData;
 
   /**
+   * Идентификатор строки
+   */
+  rowId: string;
+
+  /**
    * Уровень вложенности в дереве
    */
   level: number;
@@ -36,7 +41,6 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
 
   renderRow: ({
     key,
-    keyId,
     level,
     row,
     nestedChildren,
@@ -45,7 +49,6 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
   }: {
     key: string;
     row: TData;
-    keyId: keyof TData;
     level: number;
     nestedChildren: Array<TData & { options?: DataGridRowOptions<TData> }>;
     options?: DataGridRowOptions<TData>;
@@ -53,68 +56,67 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
   }) => ReactElement;
 };
 
-export const NestedChildren = <TData extends Record<string, CellValue>>(
-  props: NestedChildrenProps<TData>,
-) => {
-  const {
-    isShowAllChildren,
-    isOtherChildren,
-    nextLevel,
-    initialVisibleChildren,
-    otherChildren,
-    handleToggleShowAllChildren,
-  } = useLogic(props);
+export const NestedChildren = memo(
+  <TData extends Record<string, CellValue>>(
+    props: NestedChildrenProps<TData>,
+  ) => {
+    const {
+      isShowAllChildren,
+      nextLevel,
+      initialVisibleChildren,
+      otherChildren,
+      handleToggleShowAllChildren,
+    } = useLogic(props);
 
-  const { isOpen, data, keyId, level, renderRow } = props;
+    const { isOpen, data, keyId, level, renderRow } = props;
 
-  if (!data || !data.length) {
-    return null;
-  }
+    if (!data || !data.length) {
+      return null;
+    }
 
-  return (
-    <Collapse in={isOpen} component="li">
-      <NestedRows $level={level}>
-        {initialVisibleChildren.map(({ children, options, ...nestedRow }) => {
-          const nestedRowId = (nestedRow as TData)[keyId] as string;
+    return (
+      <Collapse in={isOpen} unmountOnExit>
+        <NestedRows $level={level}>
+          {initialVisibleChildren.map(({ children, options, ...nestedRow }) => {
+            const nestedRowId = (nestedRow as TData)[keyId] as string;
 
-          return renderRow({
-            key: nestedRowId,
-            row: nestedRow as TData,
-            options,
-            nestedChildren: children as Array<TData>,
-            keyId,
-            level: nextLevel,
-          });
-        })}
+            return renderRow({
+              key: nestedRowId,
+              row: nestedRow as TData,
+              options,
+              nestedChildren: children as Array<TData>,
+              level: nextLevel,
+            });
+          })}
 
-        {isOtherChildren && (
-          <>
-            <Collapse in={isShowAllChildren} component="li">
-              <NestedRows $level={level}>
-                {otherChildren.map(({ children, options, ...nestedRow }) => {
-                  const nestedRowId = (nestedRow as TData)[keyId] as string;
+          {isOpen && (
+            <>
+              <Collapse in={isShowAllChildren} unmountOnExit>
+                <NestedRows $level={level}>
+                  {otherChildren.map(({ children, options, ...nestedRow }) => {
+                    const nestedRowId = (nestedRow as TData)[keyId] as string;
 
-                  return renderRow({
-                    key: nestedRowId,
-                    keyId,
-                    row: nestedRow as TData,
-                    options,
-                    nestedChildren: children as Array<TData>,
-                    level: nextLevel,
-                    className: HIDDEN_CHILDREN_ROW_CLASSNAME,
-                  });
-                })}
-              </NestedRows>
-            </Collapse>
+                    return renderRow({
+                      key: nestedRowId,
+                      row: nestedRow as TData,
+                      options,
+                      nestedChildren: children as Array<TData>,
+                      level: nextLevel,
+                      className: HIDDEN_CHILDREN_ROW_CLASSNAME,
+                    });
+                  })}
+                </NestedRows>
+              </Collapse>
 
-            <MoreButtonRow $level={nextLevel}>
-              <Button variant="link" onClick={handleToggleShowAllChildren}>
-                {isShowAllChildren ? 'Скрыть' : 'Показать все'}
-              </Button>
-            </MoreButtonRow>
-          </>
-        )}
-      </NestedRows>
-    </Collapse>
-  );
-};
+              <MoreButtonRow $level={nextLevel}>
+                <Button variant="link" onClick={handleToggleShowAllChildren}>
+                  {isShowAllChildren ? 'Скрыть' : 'Показать все'}
+                </Button>
+              </MoreButtonRow>
+            </>
+          )}
+        </NestedRows>
+      </Collapse>
+    );
+  },
+);

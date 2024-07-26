@@ -362,7 +362,7 @@ describe('NewDataGrid', () => {
 
     const label = screen.queryByText('Item 1');
 
-    expect(label).not.toBeVisible();
+    expect(label).not.toBeInTheDocument();
   });
 
   it('Вложенные элементы отображаются по умолчанию, если isInitialExpanded=true', () => {
@@ -435,6 +435,6 @@ describe('NewDataGrid', () => {
 
     const label = screen.queryByText('SubItem 1');
 
-    expect(label).not.toBeVisible();
+    expect(label).not.toBeInTheDocument();
   });
 });

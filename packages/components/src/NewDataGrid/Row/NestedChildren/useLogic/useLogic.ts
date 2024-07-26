@@ -1,5 +1,6 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, useContext } from 'react';
 
+import { DataGridContext } from '../../../DataGridContext';
 import type { CellValue } from '../../../types';
 import { type NestedChildrenProps } from '../NestedChildren';
 
@@ -7,27 +8,28 @@ type UseLogicParams<TData extends Record<string, CellValue>> =
   NestedChildrenProps<TData>;
 
 export const useLogic = <TData extends Record<string, CellValue>>({
+  rowId,
   data,
   level,
   initialVisibleChildrenCount,
 }: UseLogicParams<TData>) => {
-  const [isShowAllChildren, setShowAllChildren] = useState<boolean>(false);
+  const { checkIsMoreOpened, toggleOpenMoreItems } =
+    useContext(DataGridContext);
 
   const nextLevel = level + 1;
 
   const initialVisibleChildren = data?.slice(0, initialVisibleChildrenCount);
   const otherChildren = data?.slice(initialVisibleChildrenCount);
 
-  const isOtherChildren = Boolean(otherChildren?.length);
+  const isShowAllChildren = checkIsMoreOpened(rowId);
 
   const handleToggleShowAllChildren = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
-    setShowAllChildren((currentState) => !currentState);
+    toggleOpenMoreItems(rowId);
   };
 
   return {
     isShowAllChildren,
-    isOtherChildren,
     initialVisibleChildren,
     otherChildren,
     nextLevel,

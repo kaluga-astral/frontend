@@ -1162,7 +1162,6 @@ export const TreeWithCheckbox = () => {
   }, []);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
   const handleSelect = (rows: DataType[]) => setSelected(rows);
 
   return (

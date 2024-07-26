@@ -2,17 +2,17 @@ import { type ChangeEvent, useCallback, useMemo } from 'react';
 
 import { prop, uniqueBy } from '../../utils';
 import { type NewDataGridProps } from '../NewDataGrid';
-import type { DataGridRow } from '../types';
+import type { CellValue, DataGridRow } from '../types';
 
 import { getGridTemplateColumns } from './utils';
 
 type UseLogicParams<
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = NewDataGridProps<TData, TSortField>;
 
 export const useLogic = <
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >({
   keyId,
