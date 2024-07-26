@@ -1,6 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { CompanyOutlineMd, ProfileOutlineMd } from '@astral/icons';
 
+import { OverflowTypography } from '../OverflowTypography';
+
 import { NavMenu } from './NavMenu';
 
 /**
@@ -68,6 +70,40 @@ export const Example = () => {
           {
             icon: <ProfileOutlineMd />,
             text: 'Входящие документы',
+            active: true,
+          },
+        ],
+        [
+          'organizations',
+          {
+            icon: <CompanyOutlineMd />,
+            text: 'Мои организации',
+          },
+        ],
+      ]}
+    />
+  );
+};
+
+/**
+ * text props - ReactNode, поэтому вместо string можно передать любой компонент
+ */
+export const OverflowText = () => {
+  return (
+    <NavMenu
+      items={[
+        [
+          'incoming-documents',
+          {
+            icon: <ProfileOutlineMd />,
+            text: (
+              <OverflowTypography
+                tooltipProps={{ placement: 'right' }}
+                style={{ width: '150px' }}
+              >
+                Входящие документы Иванова Ивана Васильевича
+              </OverflowTypography>
+            ),
             active: true,
           },
         ],

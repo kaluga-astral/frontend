@@ -24,7 +24,7 @@ type TooltipCustomizable = {
    * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
    * @description способ кастомизировать тултип при необходимости
    */
-  tooltipProps?: Omit<TooltipProps, 'children'>;
+  tooltipProps?: Omit<TooltipProps, 'children' | 'title'>;
 };
 
 export type OverflowedElementProps = OverflowedProps &
