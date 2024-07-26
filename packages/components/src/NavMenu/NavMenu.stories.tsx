@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { CompanyOutlineMd, ProfileOutlineMd } from '@astral/icons';
 
 import { OverflowTypography } from '../OverflowTypography';
+import { styled } from '../styles';
 
 import { NavMenu } from './NavMenu';
 
@@ -89,6 +90,10 @@ export const Example = () => {
  * text props - ReactNode, поэтому вместо string можно передать любой компонент
  */
 export const OverflowText = () => {
+  const StyledOverflowTypography = styled(OverflowTypography)`
+    width: 150px;
+  `;
+
   return (
     <NavMenu
       items={[
@@ -97,12 +102,9 @@ export const OverflowText = () => {
           {
             icon: <ProfileOutlineMd />,
             text: (
-              <OverflowTypography
-                tooltipProps={{ placement: 'right' }}
-                style={{ width: '150px' }}
-              >
+              <StyledOverflowTypography tooltipProps={{ placement: 'right' }}>
                 Входящие документы Иванова Ивана Васильевича
-              </OverflowTypography>
+              </StyledOverflowTypography>
             ),
             active: true,
           },
