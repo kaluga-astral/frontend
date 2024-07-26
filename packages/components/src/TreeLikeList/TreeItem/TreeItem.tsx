@@ -9,6 +9,7 @@ import { Checkbox } from '../../Checkbox';
 import { FormControlLabel } from '../../FormControlLabel';
 import type { TreeListData } from '../../Tree';
 import type { DisabledItems, MultipleValue } from '../types';
+import { Tooltip } from '../../Tooltip';
 
 import { useLogic } from './useLogic';
 import { List, StyledItemContent } from './styles';
@@ -97,17 +98,23 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
-        disableReason={disableReason}
+        // disableReason={disableReason}
         isNotBlockingExpandList
         component="li"
         label={
-          <FormControlLabel
-            control={<Checkbox checked={isSelected} />}
-            label={renderItem({ id, label, ...props })}
-            disabled={isDisabled}
-            onChange={handleChange}
-            onClick={handleClick}
-          />
+          <Tooltip
+            title={isDisabled && disableReason}
+            withoutContainer={!isDisabled}
+            placement="bottom-start"
+          >
+            <FormControlLabel
+              control={<Checkbox checked={isSelected} />}
+              label={renderItem({ id, label, ...props })}
+              disabled={isDisabled}
+              onChange={handleChange}
+              onClick={handleClick}
+            />
+          </Tooltip>
         }
         level={level}
         onClick={handleChange}
@@ -135,16 +142,21 @@ export const TreeItem = ({
     <StyledItemContent
       isSelected={isSelected}
       isDisabled={isDisabled}
-      disableReason={disableReason}
+      // disableReason={disableReason}
       component="li"
       label={
-        <FormControlLabel
-          control={<Checkbox checked={isSelected} />}
-          label={renderItem({ id, label, ...props })}
-          disabled={isDisabled}
-          onChange={handleChange}
-          onClick={handleClick}
-        />
+        <Tooltip
+          title={isDisabled && disableReason}
+          withoutContainer={!isDisabled}
+        >
+          <FormControlLabel
+            control={<Checkbox checked={isSelected} />}
+            label={renderItem({ id, label, ...props })}
+            disabled={isDisabled}
+            onChange={handleChange}
+            onClick={handleClick}
+          />
+        </Tooltip>
       }
       level={level}
       onClick={handleChange}

@@ -200,7 +200,7 @@ export const DisabledItems = () => {
       value={value}
       disabledItems={[
         { id: 21, disableReason: 'тест' },
-        '3',
+        { id: 3, disableReason: '123' },
         { id: 22, disableReason: 'Заблокировано' },
       ]}
       onChange={setValue}

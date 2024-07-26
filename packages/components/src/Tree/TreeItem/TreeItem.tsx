@@ -83,6 +83,14 @@ export const TreeItem = ({
 }: TreeItemProps) => {
   const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
 
+  const handleClick = (props) => {
+    if (isDisabled) {
+      return;
+    }
+
+    onClick(props);
+  };
+
   if (children) {
     return (
       <Item {...props} $level={level} as={component} className={className}>
@@ -95,13 +103,11 @@ export const TreeItem = ({
             $isSelected={isSelected}
             $isDisabled={isDisabled}
             $level={level}
-            {...{
-              inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
-            }}
-            onClick={onClick}
+            onClick={handleClick}
           >
             <CollapseButton
               $isNotBlockingExpandList={isNotBlockingExpandList}
+              disabled={isDisabled}
               variant="text"
               onClick={handleToggle}
             >
@@ -126,8 +132,7 @@ export const TreeItem = ({
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
-          {...{ inert: isDisabled ? '' : undefined }}
-          onClick={onClick}
+          onClick={handleClick}
         >
           {label}
         </ItemContent>
