@@ -1,4 +1,4 @@
-import { typographyClasses } from '@mui/material';
+import { checkboxClasses, typographyClasses } from '@mui/material';
 
 import { TreeItem } from '../../Tree';
 import { styled } from '../../styles';
@@ -12,12 +12,15 @@ export const StyledItemContent = styled(TreeItem)`
     padding-bottom: 0;
 
     & > .${typographyClasses.root} {
-      margin-top: ${({ theme }) => theme.spacing(-1)};
       margin-left: ${({ theme }) => theme.spacing(8)};
     }
 
     & > div > .${typographyClasses.root} {
       margin-left: unset;
+
+      & > label .${checkboxClasses.root} {
+        padding: ${({ theme }) => theme.spacing(0, 2)};
+      }
     }
 
     & > div::before {
