@@ -153,7 +153,7 @@ describe('TreeList', () => {
     expect(onChangeSpy).toBeCalledWith('1');
   });
 
-  it('DisabledItem принимает различные типы данных', () => {
+  it('Tooltip появляется если disabledItems имеет disableReason', () => {
     const fakeData = [
       {
         id: '1',
@@ -175,13 +175,11 @@ describe('TreeList', () => {
       <TreeList
         data={fakeData}
         disabledItems={[{ id: 1, disableReason: 'Заблокировано' }, '2']}
-        isInitialExpanded
       />,
     );
 
-    const label = screen.getByText('Item 1.1');
+    const label = screen.getByLabelText('Заблокировано');
 
-    screen.debug();
-    expect(label).not.toBeVisible();
+    expect(label).toBeInTheDocument();
   });
 });
