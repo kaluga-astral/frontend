@@ -11,7 +11,6 @@ import { NavMenu } from './NavMenu';
  * ### [Figma]()
  * ### [Guide]()
  */
-
 const meta: Meta<typeof NavMenu> = {
   title: 'Components/NavMenu',
   component: NavMenu,

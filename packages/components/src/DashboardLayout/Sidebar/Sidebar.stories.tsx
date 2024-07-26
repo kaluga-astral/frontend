@@ -6,7 +6,7 @@ import {
 import { type Meta, type StoryObj } from '@storybook/react';
 import { type MouseEvent, type ReactElement, forwardRef } from 'react';
 
-import { styled } from '../../styles/styled';
+import { styled } from '../../styles';
 import { DashboardLayout } from '../DashboardLayout';
 import { OverflowTypography } from '../../OverflowTypography';
 
@@ -511,6 +511,10 @@ export const SidebarButtonInHeader = () => {
  * text prop - ReactNode, поэтому в него можно передать любой кастомный компонент, например OverflowTypography
  */
 export const CustomItemText = () => {
+  const CustomNavItemText = styled(OverflowTypography)`
+    width: 170px;
+  `;
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -530,12 +534,9 @@ export const CustomItemText = () => {
                 {
                   icon: <ProfileOutlineMd />,
                   text: (
-                    <OverflowTypography
-                      tooltipProps={{ placement: 'right' }}
-                      style={{ width: 170 }}
-                    >
+                    <CustomNavItemText tooltipProps={{ placement: 'right' }}>
                       Документы Иванова Ивана Васильевича
-                    </OverflowTypography>
+                    </CustomNavItemText>
                   ),
                   items: [
                     [
