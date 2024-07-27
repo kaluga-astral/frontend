@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 import { Description } from '../Description';
 import {
@@ -78,12 +78,145 @@ export const Interaction: Story = {
   },
 };
 
+type DataType = {
+  id: string;
+  documentName: { title: string; name: string; value: string };
+  product: { icon: ReactNode; title: string; name: string; value: string };
+  createDate: string;
+};
+
+type SortField = 'documentName' | 'product' | 'createDate';
+
+const FAKE_DATA_OBJECT_TEMPLATE = {
+  id: '1',
+  documentName: { title: 'НДС', name: 'Направление', value: 'ФНС' },
+  product: {
+    icon: <Icon />,
+    title: '1С Отчетность',
+    name: 'ID',
+    value: 'a17fee3e-07d6-4488',
+  },
+  createDate: '2022-03-24T17:50:40.206Z',
+};
+
+const generateRandomDate = () => {
+  const start = new Date(2022, 0, 1);
+  const end = new Date();
+  const randomTimestamp =
+    start.getTime() + Math.random() * (end.getTime() - start.getTime());
+  const randomDate = new Date(randomTimestamp);
+
+  return randomDate.toISOString();
+};
+
+const generateData = (
+  dataObjTemplate: DataType,
+  options?: DataGridRowOptions,
+): DataType[] => {
+  const PRODUCT = [
+    {
+      icon: <Icon />,
+      title: '1C Отчетность',
+      name: 'ID',
+      value: 'a17fee3e-07d6-4488',
+    },
+    {
+      icon: <Icon />,
+      title: 'Астрал.Отчет 5.0',
+      name: 'ID',
+      value: 'bb6a549b-5b5a-402f',
+    },
+    {
+      icon: <Icon />,
+      title: 'Астрал.Отчет 4.0',
+      name: 'ID',
+      value: 'd76a51ad-1a83-423b',
+    },
+  ];
+  const DATA_ARRAY_LENGTH = 16;
+  const DOCUMENT_NAMES = [
+    { title: 'НДС', name: 'Направление', value: 'ФНС' },
+    { title: 'Прибыль', name: 'Направление', value: 'ФНС' },
+    { title: 'Бухгалтерский отчет', name: 'Направление', value: 'ФНС' },
+  ];
+
+  return Array.from({ length: DATA_ARRAY_LENGTH })
+    .fill(dataObjTemplate)
+    .map((_, i) => ({
+      id: String(i + 1),
+      documentName:
+        DOCUMENT_NAMES[Math.floor(Math.random() * DOCUMENT_NAMES.length)],
+      product: PRODUCT[Math.floor(Math.random() * PRODUCT.length)],
+      createDate: generateRandomDate(),
+      options: Math.random() < 0.5 ? options : undefined,
+    }));
+};
+
 export const Example = () => {
+  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Документа',
+      sortable: true,
+      renderCell: ({ documentName }) => (
+        <DescriptionCell
+          title={documentName.title}
+          subtitle={
+            <Description>
+              <Description.Name>{documentName.name}</Description.Name>
+              <Description.Value>{documentName.value}</Description.Value>
+            </Description>
+          }
+        />
+      ),
+    },
+    {
+      field: 'product',
+      label: 'Продукт',
+      sortable: true,
+      renderCell: ({ product }) => (
+        <DescriptionCell
+          title={product.title}
+          icon={product.icon}
+          subtitle={
+            <Description>
+              <Description.Name>{product.name}</Description.Name>
+              <Description.Value>{product.value}</Description.Value>
+            </Description>
+          }
+        />
+      ),
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
   return (
-    <DescriptionCell
-      title="Заголовок"
-      icon={<Icon />}
-      subtitle="Подзаголовок"
+    <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
     />
   );
 };
@@ -122,155 +255,5 @@ export const IconPosition = () => {
         icon={<Icon />}
       />
     </Grid>
-  );
-};
-
-export const DataGridDescriptionCell = () => {
-  type DataType = {
-    id: string;
-    documentName: JSX.Element;
-    product: JSX.Element;
-    createDate: string;
-  };
-
-  type SortField = 'documentName' | 'product' | 'createDate';
-
-  const FAKE_DATA_OBJECT_TEMPLATE = {
-    id: '1',
-    documentName: <DescriptionCell title="НДС" />,
-    product: <DescriptionCell title="1C отчетность" />,
-    createDate: '2022-03-24T17:50:40.206Z',
-  };
-
-  const generateRandomDate = () => {
-    const start = new Date(2022, 0, 1);
-    const end = new Date();
-    const randomTimestamp =
-      start.getTime() + Math.random() * (end.getTime() - start.getTime());
-    const randomDate = new Date(randomTimestamp);
-
-    return randomDate.toISOString();
-  };
-
-  const generateData = (
-    dataObjTemplate: DataType,
-    options?: DataGridRowOptions,
-  ): DataType[] => {
-    const PRODUCT = [
-      <DescriptionCell
-        icon={<Icon />}
-        title="1С Отчетность"
-        subtitle={
-          <Description>
-            <Description.Name>ID</Description.Name>
-            <Description.Value>a17fee3e-07d6-4488</Description.Value>
-          </Description>
-        }
-      />,
-      <DescriptionCell
-        icon={<Icon />}
-        title="Астрал.Отчет 5.0"
-        subtitle={
-          <Description>
-            <Description.Name>ID</Description.Name>
-            <Description.Value>bb6a549b-5b5a-402f</Description.Value>
-          </Description>
-        }
-      />,
-      <DescriptionCell
-        icon={<Icon />}
-        title="Астрал.Отчет 4.0"
-        subtitle={
-          <Description>
-            <Description.Name>ID</Description.Name>
-            <Description.Value>d76a51ad-1a83-423b</Description.Value>
-          </Description>
-        }
-      />,
-    ];
-    const DATA_ARRAY_LENGTH = 16;
-    const DOCUMENT_NAMES = [
-      <DescriptionCell
-        title="НДС"
-        subtitle={
-          <Description>
-            <Description.Name>Направление</Description.Name>
-            <Description.Value>ФНС</Description.Value>
-          </Description>
-        }
-      />,
-      <DescriptionCell
-        title="Прибыль"
-        subtitle={
-          <Description>
-            <Description.Name>Направление</Description.Name>
-            <Description.Value>ФНС</Description.Value>
-          </Description>
-        }
-      />,
-      <DescriptionCell
-        title="Бухгалтерский отчет"
-        subtitle={
-          <Description>
-            <Description.Name>Направление</Description.Name>
-            <Description.Value>ФНС</Description.Value>
-          </Description>
-        }
-      />,
-    ];
-
-    return Array.from({ length: DATA_ARRAY_LENGTH })
-      .fill(dataObjTemplate)
-      .map((_, i) => ({
-        id: String(i + 1),
-        documentName:
-          DOCUMENT_NAMES[Math.floor(Math.random() * DOCUMENT_NAMES.length)],
-        product: PRODUCT[Math.floor(Math.random() * PRODUCT.length)],
-        createDate: generateRandomDate(),
-        options: Math.random() < 0.5 ? options : undefined,
-      }));
-  };
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
-
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Документа',
-      sortable: true,
-    },
-    {
-      field: 'product',
-      label: 'Продукт',
-      sortable: true,
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      sortable: true,
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-  ];
-
-  const [isLoading, setLoading] = useState(true);
-  const [slicedData, setSlicedData] = useState<DataType[]>([]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
-      setLoading(false);
-    }, 1500);
-  }, []);
-
-  const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
-  return (
-    <NewDataGrid<DataType, SortField>
-      keyId="id"
-      rows={slicedData}
-      columns={columns}
-      isLoading={isLoading}
-      onRowClick={handleRowClick}
-      onRetry={() => {}}
-    />
   );
 };
