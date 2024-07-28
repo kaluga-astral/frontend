@@ -8,6 +8,7 @@ import {
 import { Collapse } from '../../Collapse';
 import { type TreeListData } from '../types';
 
+import { TREE_ITEM_NOTE_CLASSNAME } from './constants';
 import {
   ChevronIcon,
   CollapseButton,
@@ -132,17 +133,21 @@ export const TreeItem = ({
               {renderItem({ label, note, id })}
             </LabelWrapper>
           ) : (
-            <div>
+            <>
               <LabelWrapper $level={level}>
                 {renderCollapseButton()}
                 <Label>{label}</Label>
               </LabelWrapper>
               {note && (
-                <Note variant="small" color="textSecondary">
+                <Note
+                  className={TREE_ITEM_NOTE_CLASSNAME}
+                  variant="small"
+                  color="textSecondary"
+                >
                   {note}
                 </Note>
               )}
-            </div>
+            </>
           )}
         </ItemContent>
 
@@ -165,16 +170,20 @@ export const TreeItem = ({
             {renderItem({ label, note, id })}
           </LabelWrapper>
         ) : (
-          <div>
+          <>
             <LabelWrapper $level={level}>
               <Label>{label}</Label>
             </LabelWrapper>
             {note && (
-              <Note variant="small" color="textSecondary">
+              <Note
+                className={TREE_ITEM_NOTE_CLASSNAME}
+                variant="small"
+                color="textSecondary"
+              >
                 {note}
               </Note>
             )}
-          </div>
+          </>
         )}
       </ItemContent>
     </Item>

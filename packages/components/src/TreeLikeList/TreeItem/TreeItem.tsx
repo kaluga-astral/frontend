@@ -8,10 +8,9 @@ import {
 import type { TreeListData } from '../../Tree';
 import type { MultipleValue } from '../types';
 import { FormControlLabel } from '../../FormControlLabel';
-import { Checkbox } from '../../Checkbox';
 
 import { useLogic } from './useLogic';
-import { List, StyledItemContent } from './styles';
+import { List, StyledCheckbox, StyledTreeItem } from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -82,7 +81,7 @@ export const TreeItem = ({
 
   if (children.length) {
     return (
-      <StyledItemContent
+      <StyledTreeItem
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
@@ -92,7 +91,7 @@ export const TreeItem = ({
         component="li"
         label={
           <FormControlLabel
-            control={<Checkbox checked={isSelected} />}
+            control={<StyledCheckbox checked={isSelected} />}
             label={renderItem ? renderItem({ label, note, id }) : label}
             disabled={isDisabled}
             onChange={handleChange}
@@ -117,19 +116,19 @@ export const TreeItem = ({
             />
           ))}
         </List>
-      </StyledItemContent>
+      </StyledTreeItem>
     );
   }
 
   return (
-    <StyledItemContent
+    <StyledTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
       note={renderItem ? null : note}
       component="li"
       label={
         <FormControlLabel
-          control={<Checkbox checked={isSelected} />}
+          control={<StyledCheckbox checked={isSelected} />}
           label={renderItem ? renderItem({ label, note, id }) : label}
           disabled={isDisabled}
           onChange={handleChange}

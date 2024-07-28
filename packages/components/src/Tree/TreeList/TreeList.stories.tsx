@@ -85,76 +85,25 @@ const FAKE_TREE_LIST_DATA = [
 const FAKE_NOTE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Наименование организации 1',
-    note: 'Руководство',
+    label: 'Group 1',
+    note: 'Note for group 1',
     children: [
       {
         id: '11',
-        label: 'Подразделение 1.1',
-        note: (
-          <Description>
-            <Description.Name>Руководитель</Description.Name>
-            <Description.Value>Иванов И.И.</Description.Value>
-          </Description>
-        ),
+        label: 'Item 1.1',
+        note: 'Note for item 1.1',
       },
       {
         id: '12',
-        label: 'Подразделение 1.2',
-        note: 'Закрыто',
+        label: 'Item 1.2',
+        note: 'Note for item 1.2',
       },
     ],
   },
   {
     id: '2',
-    label: 'Наименование организации 2',
-    note: 'Руководство',
-    children: [
-      {
-        id: '21',
-        label: 'Подразделение 2.1',
-        children: [
-          {
-            id: '211',
-            label: 'Подразделение 2.1.1',
-          },
-          {
-            id: '212',
-            label: 'Подразделение 2.1.2',
-            note: (
-              <Description>
-                <Description.Name>Руководитель</Description.Name>
-                <Description.Value>Иванов И.И.</Description.Value>
-              </Description>
-            ),
-          },
-        ],
-      },
-      {
-        id: '22',
-        label: 'Подразделение 2.2',
-        children: [
-          {
-            id: '221',
-            label: 'Подразделение 2.2.1',
-            children: [
-              {
-                id: '2211',
-                label: 'Подразделение 2.2.1.1',
-              },
-              {
-                id: '2212',
-                label: 'Подразделение 2.2.1.2',
-              },
-              {
-                id: '2213',
-                label: 'Подразделение 2.2.1.3',
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    label: 'Group 2',
+    note: 'Note for group 2',
   },
 ];
 
@@ -172,13 +121,28 @@ export const Example = () => {
   return <TreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
-const Item = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(1)};
-  flex-direction: column;
-  align-items: baseline;
-  padding-left: ${({ theme }) => theme.spacing(1)};
-`;
+/**
+ * С помощью `note` можно задавать подзаголовок элементам дерева
+ */
+export const NoteItem = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_NOTE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Item 3',
+      note: (
+        <Description>
+          <Description.Name>Name</Description.Name>
+          <Description.Value>description value</Description.Value>
+        </Description>
+      ),
+    },
+  ];
+
+  return <TreeList data={fakeData} value={value} onChange={setValue} />;
+};
 
 export const RenderItem = () => {
   const [value, setValue] = useState<string | undefined>();
@@ -191,13 +155,17 @@ export const RenderItem = () => {
     },
   ];
 
+  const CustomItem = styled.div`
+    padding-left: ${({ theme }) => theme.spacing(1)};
+  `;
+
   const renderItem: TreeListProps['renderItem'] = ({ note, label }) => (
-    <Item>
-      <div>
-        <Typography variant="caption">#{label}</Typography>
-      </div>
+    <CustomItem>
+      <Typography component="div" variant="caption">
+        #{label}
+      </Typography>
       {note && <Typography variant="h7">{note}</Typography>}
-    </Item>
+    </CustomItem>
   );
 
   return (
@@ -208,29 +176,6 @@ export const RenderItem = () => {
       onChange={setValue}
     />
   );
-};
-
-/**
- * С помощью ```note``` можно задавать подзаголовок элементам дерева
- */
-export const NoteItem = () => {
-  const [value, setValue] = useState<string | undefined>();
-
-  const fakeData = [
-    ...FAKE_NOTE_TREE_LIST_DATA,
-    {
-      id: '3',
-      label: 'Подразделение 3',
-      note: (
-        <Description>
-          <Description.Name>Руководитель</Description.Name>
-          <Description.Value>Иванов И.И.</Description.Value>
-        </Description>
-      ),
-    },
-  ];
-
-  return <TreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
 /**
