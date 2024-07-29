@@ -1,9 +1,10 @@
 import { renderWithTheme, screen } from '@astral/tests';
+import { expect } from 'vitest';
 
 import { StepperWizard } from './StepperWizard';
 
 describe('StepperWizard', () => {
-  it('Шаги отображаются если переданы в steps', () => {
+  it('Шаги отображаются, если переданы в steps', () => {
     renderWithTheme(
       <StepperWizard
         activeStep={0}
@@ -11,11 +12,11 @@ describe('StepperWizard', () => {
       />,
     );
 
-    expect(screen.getByText('Step1')).toBeInTheDocument();
-    expect(screen.getByText('Step2')).toBeInTheDocument();
+    expect(screen.getByText('Step1')).toBeVisible();
+    expect(screen.getByText('Step2')).toBeVisible();
   });
 
-  it('Контент шага отображается если шаг активен', () => {
+  it('Контент шага отображается, если шаг активен', () => {
     renderWithTheme(
       <StepperWizard
         activeStep={1}
@@ -26,10 +27,10 @@ describe('StepperWizard', () => {
       />,
     );
 
-    expect(screen.getByText('Контент шага 2')).toBeInTheDocument();
+    expect(screen.getByText('Контент шага 2')).toBeVisible();
   });
 
-  it('Контент шага не отображается если шаг не активен', () => {
+  it('Контент шага не отображается, если шаг не активен', () => {
     renderWithTheme(
       <StepperWizard
         activeStep={1}
