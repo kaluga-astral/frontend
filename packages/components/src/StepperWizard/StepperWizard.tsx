@@ -8,7 +8,7 @@ import {
 
 import { type Steps } from './types';
 
-type StepperWizardProps = StepperProps & {
+type StepperWizardProps = Omit<StepperProps, 'children'> & {
   steps: Steps;
 };
 
