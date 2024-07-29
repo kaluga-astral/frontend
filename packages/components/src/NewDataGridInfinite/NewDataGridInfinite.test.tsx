@@ -263,7 +263,6 @@ describe('NewDataGridInfinite', () => {
     render(
       <ThemeProvider theme={theme}>
         <DataGridInfiniteWrapper>
-          {' '}
           <NewDataGridInfinite
             keyId="name"
             rows={[

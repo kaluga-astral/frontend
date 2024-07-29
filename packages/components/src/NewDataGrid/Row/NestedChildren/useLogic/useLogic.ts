@@ -22,6 +22,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   const otherChildren = data?.slice(initialVisibleChildrenCount);
 
   const isShowAllChildren = checkIsMoreOpened(rowId);
+  const isShowMoreButton = Boolean(otherChildren?.length);
 
   const handleToggleShowAllChildren = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -30,6 +31,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 
   return {
     isShowAllChildren,
+    isShowMoreButton,
     initialVisibleChildren,
     otherChildren,
     nextLevel,

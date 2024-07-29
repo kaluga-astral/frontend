@@ -8,7 +8,7 @@ export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
 
-export type CellValue = string | number | boolean | Date | undefined | object;
+export type CellValue = unknown;
 
 export type DataGridSort<TSortField> = {
   /**

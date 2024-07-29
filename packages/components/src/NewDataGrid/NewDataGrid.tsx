@@ -102,22 +102,27 @@ export type NewDataGridProps<
   errorMsg?: string;
 
   /**
-   * Если true, то дерево будет раскрыто по умолчанию
-   * @default 'false'
+   * Опции для отображения древовидных списков
    */
-  isInitialExpanded?: boolean;
+  tree?: {
+    /**
+     * Если true, то дерево будет раскрыто по умолчанию
+     * @default 'false'
+     */
+    isInitialExpanded?: boolean;
 
-  /**
-   * Уровень раскрытия дерева по умолчанию, при `isInitialExpanded=true`
-   * @default '1'
-   */
-  expandedLevel?: number;
+    /**
+     * Уровень раскрытия дерева по умолчанию, при `isInitialExpanded=true`
+     * @default '1'
+     */
+    expandedLevel?: number;
 
-  /**
-   * Количество отображаемых по умолчанию дочерних элементов
-   * @default '2'
-   */
-  initialVisibleChildrenCount?: number;
+    /**
+     * Количество отображаемых по умолчанию дочерних элементов
+     * @default '2'
+     */
+    initialVisibleChildrenCount?: number;
+  };
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -174,9 +179,7 @@ export const NewDataGrid = <
     noDataPlaceholder,
     isLoading,
     isError,
-    isInitialExpanded = false,
-    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
-    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+    tree,
     keyId,
     activeRowId,
     emptyCellValue,
@@ -185,6 +188,12 @@ export const NewDataGrid = <
     onSort,
     onRetry,
   } = props;
+
+  const {
+    isInitialExpanded = false,
+    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
+    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  } = tree || {};
 
   const TableContainer = isDataGridDisabled
     ? DisabledDataGridWrapper

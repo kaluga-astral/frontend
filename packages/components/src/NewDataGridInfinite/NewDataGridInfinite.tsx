@@ -76,24 +76,28 @@ export const NewDataGridInfinite = <
     selectedRows = [],
     sorting,
     maxHeight,
-    onRowClick,
-    isInitialExpanded = false,
     isLoading,
     isDisabled,
-    onSort,
     keyId,
     activeRowId,
     emptyCellValue,
-    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
-    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+    tree,
     className,
     isEndReached,
     isError,
     endOfScrollMsg,
     errorMsg,
     noDataPlaceholder,
+    onRowClick,
+    onSort,
     onRetry,
   } = props;
+
+  const {
+    isInitialExpanded = false,
+    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
+    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  } = tree || {};
 
   const TableContainer = isDisabled ? DisabledDataGridWrapper : DataGridWrapper;
 

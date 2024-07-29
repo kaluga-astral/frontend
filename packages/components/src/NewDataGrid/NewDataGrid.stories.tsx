@@ -434,8 +434,6 @@ export const WidthOptions = () => {
     },
   ]);
 
-  console.log('columns', columns);
-
   const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -748,7 +746,8 @@ export const Tree = () => {
 };
 
 /**
- *  Используя пропс `isInitialExpanded` можно раскрыть вложенные структуру при первичном отображении
+ * Использую пропс `tree` можно настраивать поведение таблицы при работе с древовидной структурой данных.
+ * Параметр `isInitialExpanded` позволяет раскрыть вложенные структуру при первичном отображении
  */
 export const TreeWithInitialExpanded = () => {
   const ACTIONS: Actions<DataType> = {
@@ -840,7 +839,9 @@ export const TreeWithInitialExpanded = () => {
       keyId="id"
       rows={fakeData}
       columns={columns}
-      isInitialExpanded
+      tree={{
+        isInitialExpanded: true,
+      }}
       onRowClick={handleRowClick}
       onRetry={() => {}}
     />
@@ -940,8 +941,10 @@ export const TreeWithExpandedLevel = () => {
       keyId="id"
       rows={fakeData}
       columns={columns}
-      isInitialExpanded
-      expandedLevel={3}
+      tree={{
+        isInitialExpanded: true,
+        expandedLevel: 3,
+      }}
       onRowClick={handleRowClick}
       onRetry={() => {}}
     />
@@ -1052,8 +1055,10 @@ export const TreeWithInitialVisibleChildrenCount = () => {
       keyId="id"
       rows={fakeData}
       columns={columns}
-      isInitialExpanded
-      initialVisibleChildrenCount={5}
+      tree={{
+        isInitialExpanded: true,
+        initialVisibleChildrenCount: 5,
+      }}
       onRowClick={handleRowClick}
       onRetry={() => {}}
     />

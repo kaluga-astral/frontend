@@ -1,10 +1,13 @@
 import { faker } from '@faker-js/faker';
 
+import { type DataGridRowOptionColumns } from '../NewDataGrid';
+
 type DataType = {
   id: string;
   documentName: string;
   recipient: string;
   createDate: string;
+  actions?: object;
 };
 
 const makeRandomDate = () => {
@@ -30,7 +33,10 @@ export const makeDataList = (length: number = 10): DataType[] => {
 
 export const makeDataListWithTree = (
   length: number = 10,
-  options?: { childrenCount?: number },
+  options?: {
+    childrenCount?: number;
+    childrenColumns?: DataGridRowOptionColumns<DataType>[];
+  },
 ): DataType[] => {
   const RECIPIENTS = [
     'ИП Иванов О.В.',
@@ -38,7 +44,7 @@ export const makeDataListWithTree = (
     'ООО "Волшебные документы"',
   ];
 
-  const { childrenCount = 3 } = options || {};
+  const { childrenCount = 3, childrenColumns } = options || {};
 
   return Array.from({ length }).map((_, i) => {
     const recipient = RECIPIENTS[Math.floor(Math.random() * RECIPIENTS.length)];
@@ -50,6 +56,9 @@ export const makeDataListWithTree = (
       documentName: isTree ? 'Пакет документов' : `Договор №${i + 1}`,
       recipient,
       createDate,
+      options: {
+        childrenColumns,
+      },
       children: isTree
         ? Array.from({ length: childrenCount }).map((__, childrenIndex) => ({
             id: faker.string.uuid(),

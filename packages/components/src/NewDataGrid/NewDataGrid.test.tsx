@@ -381,7 +381,9 @@ describe('NewDataGrid', () => {
     renderWithTheme(
       <NewDataGrid
         keyId="name"
-        isInitialExpanded
+        tree={{
+          isInitialExpanded: true,
+        }}
         columns={[
           {
             field: 'name',
@@ -421,7 +423,9 @@ describe('NewDataGrid', () => {
     renderWithTheme(
       <NewDataGrid
         keyId="name"
-        isInitialExpanded
+        tree={{
+          isInitialExpanded: true,
+        }}
         columns={[
           {
             field: 'name',
@@ -434,6 +438,88 @@ describe('NewDataGrid', () => {
     );
 
     const label = screen.queryByText('SubItem 1');
+
+    expect(label).not.toBeInTheDocument();
+  });
+
+  it('Кнопка "Показать все" отображается, если количество дочерних элементов больше значения, указанного в initialVisibleChildrenCount', () => {
+    const fakeData = [
+      {
+        id: '1',
+        name: 'Group',
+        children: [
+          {
+            id: '11',
+            name: 'Item 1',
+          },
+          {
+            id: '12',
+            name: 'Item 2',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        tree={{
+          isInitialExpanded: true,
+          initialVisibleChildrenCount: 1,
+        }}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Показать все');
+
+    expect(label).toBeVisible();
+  });
+
+  it('Кнопка "Показать все" не отображается, если количество дочерних элементов меньше значения, указанного в initialVisibleChildrenCount', () => {
+    const fakeData = [
+      {
+        id: '1',
+        name: 'Group',
+        children: [
+          {
+            id: '11',
+            name: 'Item 1',
+          },
+          {
+            id: '12',
+            name: 'Item 2',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        tree={{
+          isInitialExpanded: true,
+          initialVisibleChildrenCount: 2,
+        }}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Показать все');
 
     expect(label).not.toBeInTheDocument();
   });

@@ -62,6 +62,7 @@ export const NestedChildren = memo(
   ) => {
     const {
       isShowAllChildren,
+      isShowMoreButton,
       nextLevel,
       initialVisibleChildren,
       otherChildren,
@@ -108,11 +109,13 @@ export const NestedChildren = memo(
                 </NestedRows>
               </Collapse>
 
-              <MoreButtonRow $level={nextLevel}>
-                <Button variant="link" onClick={handleToggleShowAllChildren}>
-                  {isShowAllChildren ? 'Скрыть' : 'Показать все'}
-                </Button>
-              </MoreButtonRow>
+              {isShowMoreButton && (
+                <MoreButtonRow $level={nextLevel}>
+                  <Button variant="link" onClick={handleToggleShowAllChildren}>
+                    {isShowAllChildren ? 'Скрыть' : 'Показать все'}
+                  </Button>
+                </MoreButtonRow>
+              )}
             </>
           )}
         </NestedRows>
