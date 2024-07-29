@@ -1,7 +1,7 @@
 import { Checkbox } from '../../../Checkbox';
 import { TREE_ITEM_NOTE_CLASSNAME, TreeItem } from '../../TreeItem';
 import { styled } from '../../../styles';
-import { listContainer } from '../../../theme/mixins';
+import { listContainer } from '../../../styles/mixins';
 
 export const StyledCheckbox = styled(Checkbox)`
   padding-top: 0;

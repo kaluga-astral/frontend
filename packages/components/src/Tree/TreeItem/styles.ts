@@ -3,7 +3,7 @@ import { typographyClasses } from '@mui/material';
 
 import { styled } from '../../styles';
 import { type Theme } from '../../theme';
-import { listContainer } from '../../theme/mixins';
+import { listContainer } from '../../styles/mixins';
 import { DESCRIPTION_ROOT_CLASSNAME } from '../../Description';
 import { IconButton } from '../../IconButton';
 import { Typography } from '../../Typography';

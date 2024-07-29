@@ -88,25 +88,25 @@ const FAKE_TREE_LIST_DATA = [
 const FAKE_NOTE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Group 1',
-    note: 'Note for group 1',
+    label: 'Организация 1',
+    note: 'Руководитель',
     children: [
       {
         id: '11',
-        label: 'Item 1.1',
-        note: 'Note for item 1.1',
+        label: 'Подразделение 1.1',
+        note: 'Руководитель',
       },
       {
         id: '12',
-        label: 'Item 1.2',
-        note: 'Note for item 1.2',
+        label: 'Подразделение 1.2',
+        note: 'Руководитель',
       },
     ],
   },
   {
     id: '2',
-    label: 'Group 2',
-    note: 'Note for group 2',
+    label: 'Организация 2',
+    note: 'Руководитель',
   },
 ];
 
@@ -134,11 +134,11 @@ export const NoteItem = () => {
     ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
-      label: 'Item 3',
+      label: 'Организация 3',
       note: (
         <Description>
-          <Description.Name>Name</Description.Name>
-          <Description.Value>description value</Description.Value>
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>1234567890</Description.Value>
         </Description>
       ),
     },
@@ -154,11 +154,11 @@ export const RenderItem = () => {
     ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
-      label: 'Item 3',
+      label: 'Организация 3',
       note: (
         <Description>
-          <Description.Name>Name</Description.Name>
-          <Description.Value>description value</Description.Value>
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>1234567890</Description.Value>
         </Description>
       ),
     },
