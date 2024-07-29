@@ -6,10 +6,10 @@ import {
   type StepperProps,
 } from '../Stepper';
 
-import { type Step as StepType } from './types';
+import { type StepInfo } from './types';
 
 type StepperWizardProps = Omit<StepperProps, 'children'> & {
-  steps: StepType[];
+  steps: StepInfo[];
 };
 
 export const StepperWizard = ({
