@@ -7,6 +7,7 @@ import {
 
 import { Collapse } from '../../Collapse';
 import { type TreeListData } from '../types';
+import { Tooltip } from '../../Tooltip';
 
 import { TOOLTIP_PLACEMENT, TREE_ITEM_NOTE_CLASSNAME } from './constants';
 import {
@@ -17,7 +18,6 @@ import {
   Label,
   LabelWrapper,
   Note,
-  StyledTooltip,
 } from './styles';
 import { useLogic } from './useLogic';
 
@@ -136,7 +136,7 @@ export const TreeItem = ({
           $level={level}
           onClick={handleClick}
         >
-          <StyledTooltip
+          <Tooltip
             title={isDisabled && disableReason}
             placement={TOOLTIP_PLACEMENT}
             withoutContainer={!isDisabled}
@@ -163,7 +163,7 @@ export const TreeItem = ({
                 )}
               </>
             )}
-          </StyledTooltip>
+          </Tooltip>
         </ItemContent>
 
         <Collapse in={isOpen}>{children}</Collapse>
@@ -179,7 +179,7 @@ export const TreeItem = ({
         $level={level}
         onClick={handleClick}
       >
-        <StyledTooltip
+        <Tooltip
           title={isDisabled && disableReason}
           placement={TOOLTIP_PLACEMENT}
           withoutContainer={!isDisabled}
@@ -204,7 +204,7 @@ export const TreeItem = ({
               )}
             </>
           )}
-        </StyledTooltip>
+        </Tooltip>
       </ItemContent>
     </Item>
   );

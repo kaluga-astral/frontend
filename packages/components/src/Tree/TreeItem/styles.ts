@@ -1,5 +1,5 @@
 import { ChevronROutlineMd } from '@astral/icons';
-import { tooltipClasses, typographyClasses } from '@mui/material';
+import { typographyClasses } from '@mui/material';
 
 import { styled } from '../../styles';
 import { type Theme } from '../../theme';
@@ -8,7 +8,6 @@ import { DESCRIPTION_ROOT_CLASSNAME } from '../../Description';
 import { IconButton } from '../../IconButton';
 import { Typography } from '../../Typography';
 import { OverflowTypography } from '../../OverflowTypography';
-import { Tooltip } from '../../Tooltip';
 
 import {
   COLLAPSE_BUTTON_WIDTH,
@@ -172,12 +171,5 @@ export const Note = styled(OverflowTypography)`
       font-size: inherit;
       color: inherit;
     }
-  }
-`;
-
-export const StyledTooltip = styled(Tooltip)`
-  .${tooltipClasses.arrow} {
-    // transform: unset !important;
-    // left: ${({ theme }) => theme.spacing(2)} !important;
   }
 `;
