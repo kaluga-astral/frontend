@@ -22,7 +22,7 @@ export const StepperWizard = ({
         <Step key={index}>
           <StepLabel
             isSelected={stepperProps.activeStep === index}
-            error={step.error}
+            error={step.isError}
           >
             {step.label}
           </StepLabel>

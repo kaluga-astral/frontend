@@ -231,6 +231,8 @@ export * from './Slide';
 
 export * from './Stepper';
 
+export * from './StepperWizard';
+
 export {
   ScrollToTopButton,
   type ScrollToTopButtonProps,
