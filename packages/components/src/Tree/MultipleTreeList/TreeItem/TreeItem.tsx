@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import type { TreeListData } from '../../types';
-import type { MultipleValue } from '../types';
+import type { DisabledItems, MultipleValue } from '../types';
 import { FormControlLabel } from '../../../FormControlLabel';
 
 import { useLogic } from './useLogic';
@@ -42,7 +42,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
+  disabledItems?: Array<DisabledItems>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -67,6 +67,7 @@ export const TreeItem = ({
     isSelected,
     isIndeterminate,
     isDefaultExpanded,
+    disableReason,
     isDisabled,
     handleChange,
   } = useLogic({
@@ -89,6 +90,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         note={renderItem ? null : note}
         component="li"
         label={
@@ -131,6 +133,7 @@ export const TreeItem = ({
     <StyledTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       note={renderItem ? null : note}
       component="li"
       label={

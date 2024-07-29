@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import type { TreeListData } from '../../Tree';
-import type { MultipleValue } from '../types';
+import type { DisabledItems, MultipleValue } from '../types';
 import { FormControlLabel } from '../../FormControlLabel';
 
 import { useLogic } from './useLogic';
@@ -42,7 +42,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
+  disabledItems?: Array<DisabledItems>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -63,16 +63,22 @@ export const TreeItem = ({
   disabledItems,
   onChange,
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, nextLevel, handleChange } =
-    useLogic({
-      id,
-      value,
-      level,
-      isInitialExpanded,
-      expandedLevel,
-      disabledItems,
-      onChange,
-    });
+  const {
+    isSelected,
+    isDefaultExpanded,
+    disableReason,
+    isDisabled,
+    nextLevel,
+    handleChange,
+  } = useLogic({
+    id,
+    value,
+    level,
+    isInitialExpanded,
+    expandedLevel,
+    disabledItems,
+    onChange,
+  });
 
   /**
    * Предотвращаем всплытие события, так как клик в области чекбокса или label вызывает обработчик на уровне всего item
@@ -85,6 +91,7 @@ export const TreeItem = ({
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
+        disableReason={disableReason}
         isDisabled={isDisabled}
         note={renderItem ? null : note}
         isNotBlockingExpandList
@@ -124,6 +131,7 @@ export const TreeItem = ({
     <StyledTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       note={renderItem ? null : note}
       component="li"
       label={

@@ -22,7 +22,6 @@ export const useLogic = ({
       onClick();
     }
   };
-
   const handleToggle = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setOpen((currentState) => !currentState);

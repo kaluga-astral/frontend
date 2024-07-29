@@ -3,6 +3,7 @@ import { type FunctionComponent } from 'react';
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
 import type { TreeListData } from '../../types';
 import type { Value } from '../types';
+import { type DisabledItems } from '../types';
 
 import { useLogic } from './useLogic';
 import { List } from './styles';
@@ -37,7 +38,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: Array<string>;
+  disabledItems?: Array<DisabledItems>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -58,7 +59,13 @@ export const TreeItem = ({
   disabledItems,
   onChange,
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
+  const {
+    isSelected,
+    isDefaultExpanded,
+    isDisabled,
+    disableReason,
+    handleChange,
+  } = useLogic({
     id,
     value,
     level,
@@ -76,6 +83,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         component="li"
         label={label}
         renderItem={renderItem}
@@ -108,6 +116,7 @@ export const TreeItem = ({
         id={id}
         isSelected={isSelected}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         component="li"
         label={label}
         renderItem={renderItem}
