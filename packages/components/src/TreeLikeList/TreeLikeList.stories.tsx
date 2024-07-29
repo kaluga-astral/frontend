@@ -259,7 +259,11 @@ export const DisabledItems = () => {
     <TreeLikeList
       data={fakeData}
       value={value}
-      disabledItems={['21', '3']}
+      disabledItems={[
+        { id: 21, disableReason: 'тест' },
+        { id: 3, disableReason: '123' },
+        { id: 22, disableReason: 'Заблокировано' },
+      ]}
       onChange={setValue}
     />
   );
