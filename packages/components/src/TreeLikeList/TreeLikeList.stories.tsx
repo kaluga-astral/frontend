@@ -86,76 +86,25 @@ const FAKE_TREE_LIST_DATA = [
 const FAKE_NOTE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Наименование организации 1',
-    note: 'Руководство',
+    label: 'Организация 1',
+    note: 'Руководитель',
     children: [
       {
         id: '11',
         label: 'Подразделение 1.1',
-        note: (
-          <Description>
-            <Description.Name>Руководитель</Description.Name>
-            <Description.Value>Иванов И.И.</Description.Value>
-          </Description>
-        ),
+        note: 'Руководитель',
       },
       {
         id: '12',
         label: 'Подразделение 1.2',
-        note: 'Закрыто',
+        note: 'Руководитель',
       },
     ],
   },
   {
     id: '2',
-    label: 'Наименование организации 2',
-    note: 'Руководство',
-    children: [
-      {
-        id: '21',
-        label: 'Подразделение 2.1',
-        children: [
-          {
-            id: '211',
-            label: 'Подразделение 2.1.1',
-          },
-          {
-            id: '212',
-            label: 'Подразделение 2.1.2',
-            note: (
-              <Description>
-                <Description.Name>Руководитель</Description.Name>
-                <Description.Value>Иванов И.И.</Description.Value>
-              </Description>
-            ),
-          },
-        ],
-      },
-      {
-        id: '22',
-        label: 'Подразделение 2.2',
-        children: [
-          {
-            id: '221',
-            label: 'Подразделение 2.2.1',
-            children: [
-              {
-                id: '2211',
-                label: 'Подразделение 2.2.1.1',
-              },
-              {
-                id: '2212',
-                label: 'Подразделение 2.2.1.2',
-              },
-              {
-                id: '2213',
-                label: 'Подразделение 2.2.1.3',
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    label: 'Организация 2',
+    note: 'Руководитель',
   },
 ];
 
@@ -173,18 +122,28 @@ export const Example = () => {
   return <TreeLikeList data={fakeData} value={value} onChange={setValue} />;
 };
 
-const Item = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(1)};
-  flex-direction: column;
-  align-items: baseline;
-  padding-left: ${({ theme }) => theme.spacing(1)};
-`;
+/**
+ * С помощью `note` можно задавать подзаголовок элементам дерева
+ */
+export const NoteItem = () => {
+  const [value, setValue] = useState<Array<string> | undefined>();
 
-const LabelWrapper = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(1)};
-`;
+  const fakeData = [
+    ...FAKE_NOTE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Организация 3',
+      note: (
+        <Description>
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>1234567890</Description.Value>
+        </Description>
+      ),
+    },
+  ];
+
+  return <TreeLikeList data={fakeData} value={value} onChange={setValue} />;
+};
 
 export const RenderItem = () => {
   const [value, setValue] = useState<Array<string> | undefined>();
@@ -193,22 +152,34 @@ export const RenderItem = () => {
     ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
-      label: 'Item 3',
+      label: 'Организация 3',
+      note: (
+        <Description>
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>1234567890</Description.Value>
+        </Description>
+      ),
     },
   ];
 
-  const renderItem: TreeLikeListProps['renderItem'] = ({ note, label, id }) => (
-    <Item>
-      <LabelWrapper>
-        <Typography variant="code">#{id}</Typography>
-        <Typography>{label}</Typography>
-      </LabelWrapper>
+  const CustomItem = styled.div`
+    padding-left: ${({ theme }) => theme.spacing(1)};
+  `;
+
+  const renderItem: TreeLikeListProps['renderItem'] = ({ label, note, id }) => (
+    <CustomItem>
+      <Typography>
+        <Typography color="textSecondary" component="span">
+          #{id}
+        </Typography>
+        &nbsp;{label}
+      </Typography>
       {note && (
         <Typography variant="h7" color="success">
           {note}
         </Typography>
       )}
-    </Item>
+    </CustomItem>
   );
 
   return (
@@ -219,29 +190,6 @@ export const RenderItem = () => {
       onChange={setValue}
     />
   );
-};
-
-/**
- * С помощью ```note``` можно задавать подзаголовок элементам дерева
- */
-export const NoteItem = () => {
-  const [value, setValue] = useState<Array<string> | undefined>();
-
-  const fakeData = [
-    ...FAKE_NOTE_TREE_LIST_DATA,
-    {
-      id: '3',
-      label: 'Подразделение 3',
-      note: (
-        <Description>
-          <Description.Name>Руководитель</Description.Name>
-          <Description.Value>Иванов И.И.</Description.Value>
-        </Description>
-      ),
-    },
-  ];
-
-  return <TreeLikeList data={fakeData} value={value} onChange={setValue} />;
 };
 
 /**

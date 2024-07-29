@@ -1,9 +1,11 @@
 import { ChevronROutlineMd } from '@astral/icons';
 import { typographyClasses } from '@mui/material';
 
-import { IconButton } from '../../IconButton';
 import { styled } from '../../styles';
 import { type Theme } from '../../theme';
+import { listContainer } from '../../styles/mixins';
+import { DESCRIPTION_ROOT_CLASSNAME } from '../../Description';
+import { IconButton } from '../../IconButton';
 import { Typography } from '../../Typography';
 import { OverflowTypography } from '../../OverflowTypography';
 
@@ -43,7 +45,7 @@ export const Item = styled('li', {
       `translateX(calc(((${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * ${$level}) - ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH}))`};
 
     width: 0;
-    height: 110%;
+    height: 100%;
 
     border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
   }
@@ -62,10 +64,10 @@ export const ItemContent = styled('div', {
   position: relative;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   min-height: 32px;
-  padding-right: ${({ theme }) => theme.spacing(4)};
+  padding: ${({ theme }) => theme.spacing(0, 4, 1, 0)};
   padding-left: ${({ theme, $level }) =>
     `calc(${theme.spacing($level * 7)} + ${theme.spacing(7)})`};
 
@@ -118,10 +120,40 @@ export const ChevronIcon = styled(ChevronROutlineMd, {
 `;
 
 export const List = styled.ul`
-  margin: 0;
-  padding: 0;
+  ${listContainer};
+`;
 
-  list-style-type: none;
+export const LabelWrapper = styled('div', {
+  shouldForwardProp: (prop) => prop !== '$level',
+})<{ $level: number }>`
+  position: relative;
+
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+
+  padding-top: ${({ theme }) => theme.spacing(1)};
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: calc(
+      ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} -
+        (${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * 2
+    );
+
+    width: ${TREE_LINE_WIDTH};
+
+    /* Добавляем к высоте половину нижнего отступа, который не входит в высоту текущего элемента */
+    height: ${({ theme }) => `calc(50% + ${theme.spacing(1)}/2)`};
+
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
+  }
 `;
 
 export const Label = styled(Typography)`
@@ -132,44 +164,12 @@ export const Label = styled(Typography)`
 `;
 
 export const Note = styled(OverflowTypography)`
-  display: flex;
-
   margin-left: ${({ theme }) => theme.spacing(1)};
 
-  dl {
+  .${DESCRIPTION_ROOT_CLASSNAME} {
     .${typographyClasses.root} {
-      font-size: unset;
-      color: unset;
+      font-size: inherit;
+      color: inherit;
     }
-  }
-`;
-
-export const LabelWrapper = styled('div', {
-  shouldForwardProp: (prop) => prop !== '$level',
-})<{ $level: number }>`
-  position: relative;
-
-  display: flex;
-  align-items: center;
-
-  padding: ${({ theme }) => theme.spacing(1, 0)};
-
-  &::before {
-    content: '';
-
-    position: absolute;
-    z-index: 1;
-    top: ${({ theme }) => theme.spacing(-1)};
-    left: calc(
-      ${HALF_PADDING_COLLAPSE_BUTTON_WIDTH} -
-        (${COLLAPSE_BUTTON_WIDTH} + ${GAP_WIDTH}) * 2
-    );
-
-    width: ${TREE_LINE_WIDTH};
-    height: ${({ theme }) => `calc(50% + ${theme.spacing(1)})`};
-
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
-    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
-    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
   }
 `;
