@@ -18,7 +18,7 @@ export const StepperWizard = ({
 }: StepperWizardProps) => {
   return (
     <Stepper {...stepperProps}>
-      {steps.map((step, index) => (
+      {steps.map(({ label, isError }, index) => (
         <Step key={index}>
           <StepLabel
             isSelected={stepperProps.activeStep === index}
