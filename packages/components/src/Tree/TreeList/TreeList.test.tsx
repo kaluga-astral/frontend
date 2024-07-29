@@ -21,6 +21,22 @@ describe('TreeList', () => {
     expect(label).toBeVisible();
   });
 
+  it('Note опции отображается', () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+        note: 'Item 1 subtitle',
+      },
+    ];
+
+    renderWithTheme(<TreeList data={fakeData} />);
+
+    const note = screen.getByText('Item 1 subtitle');
+
+    expect(note).toBeVisible();
+  });
+
   it('Вложенные элементы не отображаются, если группа не раскрыта', () => {
     const fakeData = [
       {

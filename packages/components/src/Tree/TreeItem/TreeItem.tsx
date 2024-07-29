@@ -1,8 +1,23 @@
-import { type ComponentProps, type ElementType, type ReactNode } from 'react';
+import {
+  type ComponentProps,
+  type ElementType,
+  type FunctionComponent,
+  type ReactNode,
+} from 'react';
 
 import { Collapse } from '../../Collapse';
+import { type TreeListData } from '../types';
 
-import { ChevronIcon, CollapseButton, Item, ItemContent } from './styles';
+import { TREE_ITEM_NOTE_CLASSNAME } from './constants';
+import {
+  ChevronIcon,
+  CollapseButton,
+  Item,
+  ItemContent,
+  Label,
+  LabelWrapper,
+  Note,
+} from './styles';
 import { useLogic } from './useLogic';
 
 export type TreeItemProps<TComponent extends ElementType = ElementType> = {
@@ -20,6 +35,16 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
    * Содержимое, которое будет отображено внутри элемента списка.
    */
   label: ReactNode;
+
+  /**
+   * Подзаголовок, который будет отображено под элементом списка.
+   */
+  note?: ReactNode;
+
+  /**
+   * Render-props, позволяет более гибко настраивать содержимое item
+   */
+  renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
 
   /**
    * Содержимое, отображающееся при раскрытии элемента.
@@ -63,7 +88,10 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 } & Omit<ComponentProps<TComponent>, ''>;
 
 export const TreeItem = ({
+  id,
   label,
+  note,
+  renderItem,
   children,
   className,
   isSelected,
@@ -77,6 +105,16 @@ export const TreeItem = ({
 }: TreeItemProps) => {
   const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
 
+  const renderCollapseButton = () => (
+    <CollapseButton
+      $isNotBlockingExpandList={isNotBlockingExpandList}
+      variant="text"
+      onClick={handleToggle}
+    >
+      <ChevronIcon $isActive={isOpen} />
+    </CollapseButton>
+  );
+
   if (children) {
     return (
       <Item {...props} $level={level} as={component} className={className}>
@@ -89,14 +127,28 @@ export const TreeItem = ({
           }}
           onClick={onClick}
         >
-          <CollapseButton
-            $isNotBlockingExpandList={isNotBlockingExpandList}
-            variant="text"
-            onClick={handleToggle}
-          >
-            <ChevronIcon $isActive={isOpen} />
-          </CollapseButton>
-          {label}
+          {renderItem ? (
+            <LabelWrapper $level={level}>
+              {renderCollapseButton()}
+              {renderItem({ label, note, id })}
+            </LabelWrapper>
+          ) : (
+            <>
+              <LabelWrapper $level={level}>
+                {renderCollapseButton()}
+                <Label>{label}</Label>
+              </LabelWrapper>
+              {note && (
+                <Note
+                  className={TREE_ITEM_NOTE_CLASSNAME}
+                  variant="small"
+                  color="textSecondary"
+                >
+                  {note}
+                </Note>
+              )}
+            </>
+          )}
         </ItemContent>
 
         <Collapse in={isOpen}>{children}</Collapse>
@@ -113,7 +165,26 @@ export const TreeItem = ({
         {...{ inert: isDisabled ? '' : undefined }}
         onClick={onClick}
       >
-        {label}
+        {renderItem ? (
+          <LabelWrapper $level={level}>
+            {renderItem({ label, note, id })}
+          </LabelWrapper>
+        ) : (
+          <>
+            <LabelWrapper $level={level}>
+              <Label>{label}</Label>
+            </LabelWrapper>
+            {note && (
+              <Note
+                className={TREE_ITEM_NOTE_CLASSNAME}
+                variant="small"
+                color="textSecondary"
+              >
+                {note}
+              </Note>
+            )}
+          </>
+        )}
       </ItemContent>
     </Item>
   );
