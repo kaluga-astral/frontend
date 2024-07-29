@@ -24,7 +24,6 @@ export const OutdatedReleasePlaceholder = () => {
       imgAlt="Обновление в сервисе"
       imgSrc={imagesMap.outdatedReleaseErrorImgSrc}
       imgWidth="324px"
-      imgHeight="162px"
       Actions={<Button onClick={handleClickRefresh}>Обновить страницу</Button>}
     />
   );

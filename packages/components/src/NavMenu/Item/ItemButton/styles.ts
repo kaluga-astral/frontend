@@ -30,7 +30,7 @@ export const StyledListItemButton = styled(ListItemButton, {
   }
 
   &.Mui-selected:hover {
-    background-color: inherit;
+    background-color: ${({ theme }) => theme.palette.grey[100]};
   }
 
   &:hover {

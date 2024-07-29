@@ -12,6 +12,9 @@ import { makeDataList } from './faker';
 /**
  * Таблица с бесконечным скроллом.
  *
+ * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
+ * **Используйте [NewDataGridInfinite](/docs/components-newdatagridinfinite--docs), который построен на css grid.**
+ *
  * DataGridInfinite обладает тем же функционалом  что и [DataGrid](/docs/components-datagrid--docs)
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
  * ### [Guide]()

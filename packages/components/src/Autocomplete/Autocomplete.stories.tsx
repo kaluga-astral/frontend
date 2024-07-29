@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Tooltip } from '../Tooltip';
@@ -20,12 +20,12 @@ const meta: Meta<typeof Autocomplete> = {
 
 export default meta;
 
-type IOption = {
+type Option = {
   value: string;
   title: string;
 };
 
-const OPTIONS: IOption[] = [
+const OPTIONS: Option[] = [
   { value: '1', title: 'Value 1' },
   { value: '2', title: 'Value 2' },
   { value: '3', title: 'Value 3' },
@@ -50,12 +50,28 @@ const Wrapper = styled.div`
   min-width: 300px;
 `;
 
+type Story = StoryObj<typeof Autocomplete<Option, false, false, false>>;
+
+export const Interaction: Story = {
+  args: {
+    options: OPTIONS,
+    label: 'Выберите вариант',
+    placeholder: 'Placeholder',
+    getOptionLabel: (params: Option) => params.title,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
 export const Example = () => {
-  const [val, setVal] = useState<IOption | null>(null);
+  const [val, setVal] = useState<Option | null>(null);
 
   return (
     <Wrapper>
-      <Autocomplete<IOption, false, false, false>
+      <Autocomplete<Option, false, false, false>
         options={OPTIONS}
         label="Выберите вариант"
         placeholder="Placeholder"
@@ -68,11 +84,11 @@ export const Example = () => {
 };
 
 export const Multiple = () => {
-  const [val, setVal] = useState<IOption[]>([]);
+  const [val, setVal] = useState<Option[]>([]);
 
   return (
     <Wrapper>
-      <Autocomplete<IOption, true, false, false>
+      <Autocomplete<Option, true, false, false>
         multiple
         options={OPTIONS}
         label="Multiple"
@@ -86,11 +102,11 @@ export const Multiple = () => {
 };
 
 export const FreeSolo = () => {
-  const [val, setVal] = useState<IOption | string | null | undefined>();
+  const [val, setVal] = useState<Option | string | null | undefined>();
 
   return (
     <Wrapper>
-      <Autocomplete<IOption, false, false, true>
+      <Autocomplete<Option, false, false, true>
         options={OPTIONS}
         label="FreeSolo"
         freeSolo
@@ -106,11 +122,11 @@ export const FreeSolo = () => {
 };
 
 export const MultipleCustomTags = () => {
-  const [val, setVal] = useState<IOption[]>([]);
+  const [val, setVal] = useState<Option[]>([]);
 
   return (
     <Wrapper>
-      <Autocomplete<IOption, true, false, false>
+      <Autocomplete<Option, true, false, false>
         multiple
         options={OPTIONS}
         label="Multiple custom tags"
@@ -144,7 +160,7 @@ export const MultipleCustomTags = () => {
 
 export const LoadedDataError = () => (
   <Wrapper>
-    <Autocomplete<IOption, false, false, false>
+    <Autocomplete<Option, false, false, false>
       label="Loaded data error"
       options={OPTIONS}
       isLoadedDataError
@@ -157,7 +173,7 @@ export const LoadedDataError = () => (
 
 export const Error = () => (
   <Wrapper>
-    <Autocomplete<IOption, false, false, false>
+    <Autocomplete<Option, false, false, false>
       label="Error"
       options={OPTIONS}
       helperText="Ошибка"
@@ -170,7 +186,7 @@ export const Error = () => (
 export const Loading = () => {
   return (
     <Wrapper>
-      <Autocomplete<IOption, false, false, false>
+      <Autocomplete<Option, false, false, false>
         label="Loading"
         loading
         options={[]}
@@ -182,7 +198,7 @@ export const Loading = () => {
 
 export const Success = () => (
   <Wrapper>
-    <Autocomplete<IOption, false, false, false>
+    <Autocomplete<Option, false, false, false>
       label="Success"
       options={OPTIONS}
       helperText="Успех"
@@ -194,7 +210,7 @@ export const Success = () => (
 
 export const Small = () => (
   <Wrapper>
-    <Autocomplete<IOption, false, false, false>
+    <Autocomplete<Option, false, false, false>
       label="Small"
       size="small"
       options={OPTIONS}
@@ -205,7 +221,7 @@ export const Small = () => (
 
 export const NoData = () => (
   <Wrapper>
-    <Autocomplete<IOption, true, false, false>
+    <Autocomplete<Option, true, false, false>
       label="No data"
       size="small"
       multiple
@@ -218,7 +234,7 @@ export const NoData = () => (
 
 export const CustomRenderOption = () => (
   <Wrapper>
-    <Autocomplete<IOption, false, false, false>
+    <Autocomplete<Option, false, false, false>
       label="Custom render option"
       size="small"
       options={OPTIONS}
@@ -236,7 +252,7 @@ export const CustomRenderOption = () => (
 
 export const CustomRenderInput = () => (
   <Wrapper>
-    <Autocomplete<IOption, true, false, false>
+    <Autocomplete<Option, true, false, false>
       label="Custom render input"
       size="small"
       options={OPTIONS}

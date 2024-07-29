@@ -1,6 +1,7 @@
 import {
   type ElementType,
   type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -17,7 +18,7 @@ export type ItemProps = {
     key: string,
     value: {
       icon: ReactElement;
-      text: string;
+      text: ReactNode;
       active?: boolean;
       component?: ElementType;
       items?: ListProps['items'];

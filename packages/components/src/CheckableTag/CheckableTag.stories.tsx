@@ -1,19 +1,38 @@
 import { Stack } from '@mui/material';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { type ChangeEvent, useState } from 'react';
 
 import { TagBadge, type TagBadgeProps } from '../TagBadge';
 
 import { CheckableTag } from './CheckableTag';
 
-export default {
+/**
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=427-5580&t=NrGSkPDdR1WstBqT-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof CheckableTag> = {
   title: 'Components/CheckableTag',
   component: CheckableTag,
 };
 
-const Template: StoryFn = (args) => <CheckableTag {...args} />;
+export default meta;
 
-export const ShowcaseColor: StoryFn = () => {
+type Story = StoryObj<typeof CheckableTag>;
+
+export const Interaction: Story = {
+  args: {
+    variant: 'light',
+    color: 'success',
+    label: 'Тэг Checkable',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = (event: ChangeEvent<HTMLInputElement>) =>
@@ -67,19 +86,4 @@ export const ShowcaseColor: StoryFn = () => {
       />
     </Stack>
   );
-};
-
-ShowcaseColor.parameters = { options: { showPanel: false } };
-
-export const Default = Template.bind({});
-
-Default.args = {
-  variant: 'light',
-  color: 'success',
-  label: 'Тэг Checkable',
-};
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

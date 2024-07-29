@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { type PropsWithChildren, useRef, useState } from 'react';
 
 import { Grid } from '../Grid';
@@ -10,9 +10,6 @@ import { Iframe } from './Iframe';
 
 /**
  * Iframe позволяет отображать контент из указанного URL.
- *
- * ### [Figma]()
- * ### [Guide]()
  */
 const meta: Meta<typeof Iframe> = {
   title: 'Components/Iframe',
@@ -20,6 +17,19 @@ const meta: Meta<typeof Iframe> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Iframe>;
+
+export const Interaction: Story = {
+  args: {
+    src: 'https://www.youtube.com/embed/k85mRPqvMbE',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 const Container = ({ children }: PropsWithChildren) => {
   return (

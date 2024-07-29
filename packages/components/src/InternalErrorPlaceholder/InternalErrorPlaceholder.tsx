@@ -36,7 +36,6 @@ export const InternalErrorPlaceholder = () => {
       imgAlt="Непредвиденная ошибка"
       imgSrc={imagesMap.defaultErrorImgSrc}
       imgWidth="324px"
-      imgHeight="162px"
       Actions={<Button onClick={handleClickRefresh}>Обновить страницу</Button>}
     />
   );

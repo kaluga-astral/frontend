@@ -1,5 +1,5 @@
 import { DotOutlineSm, HomeOutlineMd } from '@astral/icons';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Link } from '@mui/material';
 
@@ -14,12 +14,31 @@ import { IconButton } from '../IconButton';
 
 import { List } from './List';
 
-export default {
+const meta: Meta<typeof List> = {
   title: 'Components/List',
   component: List,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof List>;
+
+export const Interaction: Story = {
+  args: {
+    children: (
+      <>
+        <ListItem>Item 1</ListItem> <ListItem>Item 2</ListItem>
+      </>
+    ),
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [open, setOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
   const [listOpen, setListOpen] = useState(true);
@@ -229,11 +248,4 @@ const Template: StoryFn = () => {
       </List>
     </>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };
