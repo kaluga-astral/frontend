@@ -13,6 +13,8 @@ export const Wrapper = styled('div', {
   shouldForwardProp: (prop) =>
     !['$align', '$isDisabled', '$hasStartAdornment'].includes(prop),
 })<HeadCellProps>`
+  /* При развертывании на стенде откуда-то добавляется overflow: hidden; */
+  overflow: unset;
   display: flex;
   align-items: center;
   justify-content: ${({ $align }) => alignToJustifyContent($align)};
