@@ -5,26 +5,33 @@ import {
   SendOutlineMd,
 } from '@astral/icons';
 import { Stack } from '@mui/material';
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { type ChangeEvent, Fragment, useState } from 'react';
 
 import { ActionCell, type Actions } from '../ActionCell';
 import { DataGrid, type DataGridColumns } from '../DataGrid';
 import { DataGridPagination } from '../DataGridPagination';
 import { ExampleTemplate } from '../docs';
-import { LegacyGrid } from '../LegacyGrid';
 import { List } from '../List';
 import { ListItem } from '../ListItem';
 import { Select } from '../Select';
 import { TextField } from '../TextField';
 import { Typography } from '../Typography';
+import { Grid } from '../Grid';
 
 import { PageLayout } from './PageLayout';
 
-export default {
+/**
+ *__Layouts__ — это варианты наполнения страниц под разные сценарии.
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=1097-40660)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof PageLayout> = {
   title: 'Components/PageLayout',
   component: PageLayout,
 };
+
+export default meta;
 
 type DataType = {
   id: string;
@@ -181,7 +188,11 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const Showcase: StoryFn = () => {
+/**
+ * Типы компонента
+ */
+
+export const Types = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));
@@ -206,15 +217,6 @@ export const Showcase: StoryFn = () => {
 
   return (
     <ExampleTemplate>
-      <Typography paragraph variant="h3">
-        Layouts
-      </Typography>
-      <Typography paragraph>
-        Layouts — это варианты наполнения страниц под разные сценарии.
-      </Typography>
-      <Typography variant="h4" paragraph>
-        Типы компонента
-      </Typography>
       <ExampleTemplate.Case
         title="Table"
         fullWidth
@@ -244,11 +246,7 @@ export const Showcase: StoryFn = () => {
               ],
             },
             subheader: (
-              <LegacyGrid
-                container
-                templateColumns="240px repeat(2, 192px)"
-                spacing={2}
-              >
+              <Grid container columns="240px repeat(2, 192px)" spacing={2}>
                 <TextField
                   placeholder="Поиск на странице..."
                   size="small"
@@ -259,7 +257,7 @@ export const Showcase: StoryFn = () => {
                 />
                 <Select value="" placeholder="Выберите вариант" size="small" />
                 <Select value="" placeholder="Выберите вариант" size="small" />
-              </LegacyGrid>
+              </Grid>
             ),
           }}
           content={{
@@ -333,7 +331,7 @@ export const Showcase: StoryFn = () => {
           content={{
             children: (
               <Stack padding={8}>
-                <LegacyGrid container justifyContent="center">
+                <Grid container>
                   <Typography variant="h4" align="center">
                     Налоговый расчет по авансовому платежу по налогу на
                     имущество&nbsp;организаций
@@ -357,7 +355,7 @@ export const Showcase: StoryFn = () => {
                     <TextField label="Наименование организации" fullWidth />
                     <TextField label="Контактный телефон" fullWidth />
                   </Stack>
-                </LegacyGrid>
+                </Grid>
               </Stack>
             ),
           }}
@@ -387,5 +385,3 @@ export const Showcase: StoryFn = () => {
     </ExampleTemplate>
   );
 };
-
-Showcase.parameters = { options: { showPanel: false } };

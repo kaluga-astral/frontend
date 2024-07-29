@@ -1,0 +1,16 @@
+export const COMPLEX_EXTENSIONS: string[] = [
+  '.xml.dist',
+  '.xml.tpl',
+  '.xml.gz',
+  '.xml.bz2',
+  '.xml.zip',
+  '.xml.enc',
+  '.xml.sig',
+  '.xml.metadata',
+  '.xml.backup',
+  '.xml.orig',
+  '.tar.gz',
+  '.tar.bz2',
+  '.tar.xz',
+  '.tar.lz',
+];

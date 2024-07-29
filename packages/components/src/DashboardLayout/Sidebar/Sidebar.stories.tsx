@@ -6,8 +6,9 @@ import {
 import { type Meta, type StoryObj } from '@storybook/react';
 import { type MouseEvent, type ReactElement, forwardRef } from 'react';
 
-import { styled } from '../../styles/styled';
+import { styled } from '../../styles';
 import { DashboardLayout } from '../DashboardLayout';
+import { OverflowTypography } from '../../OverflowTypography';
 
 import { SidebarButton } from './SidebarButton';
 
@@ -188,7 +189,7 @@ export const Interaction: Story = {
   },
 };
 
-export const Menu = () => {
+export const Example = () => {
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -496,6 +497,81 @@ export const SidebarButtonInHeader = () => {
                       <RouterLink ref={ref} to="/organizations" {...props} />
                     );
                   }),
+                },
+              ],
+            ],
+          }}
+        />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+/**
+ * text prop - ReactNode, поэтому в него можно передать любой кастомный компонент, например OverflowTypography
+ */
+export const CustomItemText = () => {
+  const CustomNavItemText = styled(OverflowTypography)`
+    width: 170px;
+  `;
+
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          product={{
+            name: 'Астрал',
+            logo() {
+              return <Logo />;
+            },
+          }}
+        />
+        <DashboardLayout.Sidebar
+          menu={{
+            items: [
+              [
+                'documents',
+                {
+                  icon: <ProfileOutlineMd />,
+                  text: (
+                    <CustomNavItemText tooltipProps={{ placement: 'right' }}>
+                      Документы Иванова Ивана Васильевича
+                    </CustomNavItemText>
+                  ),
+                  items: [
+                    [
+                      'incoming-documents',
+                      {
+                        text: 'Входящие документы',
+                        active: true,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/incoming-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                    [
+                      'outgoing-documents',
+                      {
+                        text: 'Исходящие документы',
+                        active: false,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/outgoing-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                  ],
                 },
               ],
             ],

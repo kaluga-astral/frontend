@@ -250,6 +250,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     >
       <Tooltip followCursor arrow={false} {...tooltipProps}>
         <ContentWrapper
+          $level={level}
           $gridColumns={gridColumns}
           {...{ [DISABLE_ROW_ATTR]: isDisabled }}
           {...rowProps}

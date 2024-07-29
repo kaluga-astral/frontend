@@ -4,7 +4,7 @@ import { Name } from './Name';
 import { Value } from './Value';
 import { Wrapper } from './styles';
 import { DescriptionContextProvider } from './DescriptionContext';
-import { DEFAULT_SEPARATOR } from './constants';
+import { DEFAULT_SEPARATOR, DESCRIPTION_ROOT_CLASSNAME } from './constants';
 
 export type DescriptionProps = {
   /**
@@ -43,7 +43,11 @@ export const Description = ({
 }: DescriptionProps) => {
   return (
     <DescriptionContextProvider leader={leader} separator={separator}>
-      <Wrapper $justifyContent={justifyContent} as={component}>
+      <Wrapper
+        $justifyContent={justifyContent}
+        className={DESCRIPTION_ROOT_CLASSNAME}
+        as={component}
+      >
         {children}
       </Wrapper>
     </DescriptionContextProvider>

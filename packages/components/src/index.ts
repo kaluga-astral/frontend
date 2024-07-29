@@ -106,6 +106,8 @@ export * from './Fade';
 
 export { FeedbackPanel, type FeedbackPanelProps } from './FeedbackPanel';
 
+export { Filename, type FileNameProps } from './Filename';
+
 export * from './FlowButton';
 
 export * from './FormControl';
@@ -245,6 +247,8 @@ export * from './Switch';
 export * from './Tab';
 
 export * from './Table';
+
+export { DescriptionCell, type DescriptionCellProps } from './DescriptionCell';
 
 export * from './Tabs';
 

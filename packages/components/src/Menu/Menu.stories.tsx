@@ -1,5 +1,5 @@
 import { type MouseEvent, useCallback, useMemo, useState } from 'react';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
@@ -13,12 +13,60 @@ import { MenuItem } from '../MenuItem';
 
 import { Menu } from './Menu';
 
-export default {
+/**
+ *
+ * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=21288-190921)
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   component: Menu,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof Menu>;
+
+export const Interaction: Story = {
+  args: {
+    title: 'Menu',
+    open: true,
+    children: [
+      <MenuItem>
+        <ListItemIcon>
+          <SettingsFillMd />
+        </ListItemIcon>
+        Item 1
+      </MenuItem>,
+      <MenuItem>
+        <ListItemIcon>
+          <CompanyOutlineMd />
+        </ListItemIcon>
+        Item 2
+      </MenuItem>,
+      <MenuItem>
+        <ListItemIcon>
+          <SettingsFillMd />
+        </ListItemIcon>
+        Item 3
+      </MenuItem>,
+      <MenuItem>
+        <ListItemIcon>
+          <SettingsFillMd />
+        </ListItemIcon>
+        Item 4
+      </MenuItem>,
+    ],
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
 
@@ -68,11 +116,4 @@ const Template: StoryFn = () => {
       </Menu>
     </>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

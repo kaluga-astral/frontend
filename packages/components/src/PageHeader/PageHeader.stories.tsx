@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   AddOutlineMd,
   CompanyOutlineMd,
@@ -28,6 +28,8 @@ import { MenuItem } from '../MenuItem';
 import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
+import { Filename } from '../Filename';
+import { Typography } from '../Typography';
 
 import { PageHeader } from './PageHeader';
 
@@ -186,7 +188,90 @@ const columns: DataGridColumns<DataType>[] = [
   },
 ];
 
-export const PageHeaderDashboardStory = () => {
+/**
+ * **PageHeader** — вводная часть страницы, состоит из группы вводных или навигационных элементов.<br>
+ * Данный компонент является составным. В него входят: **Header** и **Subheader**.
+ *
+ * **Header**<br>
+ * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
+ *
+ * **Subheader**<br>
+ * Область, для размещения дополнительных действий<br>
+ * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
+ *
+ * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
+ * ### [Guide]()
+ */
+const meta: Meta<typeof PageHeader> = {
+  title: 'Components/PageLayout/PageHeader',
+  component: PageHeader,
+};
+
+export default meta;
+
+const Wrapper = styled.div`
+  width: 100%;
+  padding-block: ${({ theme }) => theme.spacing(5)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    min-height: 48px;
+    padding-top: ${({ theme }) => theme.spacing(4)};
+    overflow-wrap: break-word;
+    background-color: ${({ theme }) => theme.palette.grey[100]};
+  }
+`;
+
+const StyledTypography = styled(Typography)`
+  min-height: 100px;
+`;
+
+type Story = StoryObj<typeof PageHeader>;
+
+export const Interaction: Story = {
+  args: {
+    title: 'PageHeader',
+    description: 'PageHeader description',
+    subheader: (
+      <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+        <TextField
+          placeholder="Поиск"
+          defaultValue="PageHeader subheader"
+          size="small"
+          InputProps={{
+            startAdornment: <SearchOutlineMd />,
+          }}
+        />
+        <Select value="" placeholder="Выберите вариант" size="small" />
+        <Select value="" placeholder="Выберите вариант" size="small" />
+      </Stack>
+    ),
+    actions: {
+      main: [
+        { text: 'main action 1', startIcon: <AddOutlineMd /> },
+        { text: 'main action 2', color: 'error' },
+      ],
+      secondary: [
+        { text: 'secondary action 1' },
+        { text: 'secondary action 2' },
+      ],
+    },
+    breadcrumbs: [
+      <Fragment key="1">1 breadcrumb</Fragment>,
+      <Fragment key="2">2 breadcrumb</Fragment>,
+      <Fragment key="3">3 breadcrumb</Fragment>,
+    ],
+    backButton: {
+      onClick: () => console.log('backButton clicked'),
+    },
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const [selected, setSelected] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));
@@ -335,100 +420,315 @@ export const PageHeaderDashboardStory = () => {
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   return (
-    <DashboardLayout>
-      <DashboardLayout.Header {...header} />
-      <DashboardLayout.Sidebar {...sidebar} />
-      <DashboardLayout.Main>
-        <PageLayout
-          header={{
-            title: 'Черновики',
-            breadcrumbs: [
-              <Fragment key="1">Первый текст</Fragment>,
-              <Fragment key="2">Текст с разделителем</Fragment>,
-              <Fragment key="3">Текст с разделителем</Fragment>,
-            ],
-            actions: {
-              main: [
-                {
-                  text: 'Основное действие',
-                  startIcon: <AddOutlineMd />,
-                },
+    <div style={{ maxWidth: '800px' }}>
+      <DashboardLayout>
+        <DashboardLayout.Header {...header} />
+        <DashboardLayout.Sidebar {...sidebar} />
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: 'Черновики',
+              breadcrumbs: [
+                <Fragment key="1">Первый текст</Fragment>,
+                <Fragment key="2">Текст с разделителем</Fragment>,
+                <Fragment key="3">Текст с разделителем</Fragment>,
               ],
-              secondary: [
-                {
-                  text: 'Кнопка',
-                },
-              ],
-            },
-            subheader: (
-              <Stack flexDirection="row" flexWrap="wrap" gap={2}>
-                <TextField
-                  placeholder="Поиск на странице..."
-                  size="small"
-                  InputProps={{
-                    startAdornment: <SearchOutlineMd />,
-                  }}
-                />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-                <Select value="" placeholder="Выберите вариант" size="small" />
-              </Stack>
-            ),
-          }}
-          content={{
-            children: (
-              <DataGrid
-                keyId="id"
-                rows={slicedData}
-                columns={columns}
-                selectedRows={selected}
-                onSelectRow={handleSelect}
-                onRowClick={handleRowClick}
-                minDisplayRows={10}
-                loading={loading}
-                Footer={
-                  <DataGridPagination
-                    totalCount={data.length}
-                    onChange={handleChangePage}
-                    page={page}
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+              subheader: (
+                <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+                  <TextField
+                    placeholder="Поиск на странице..."
+                    size="small"
+                    InputProps={{
+                      startAdornment: <SearchOutlineMd />,
+                    }}
                   />
-                }
-              />
-            ),
-            isPaddingDisabled: false,
-          }}
-        />
-      </DashboardLayout.Main>
-    </DashboardLayout>
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                </Stack>
+              ),
+            }}
+            content={{
+              children: (
+                <DataGrid
+                  keyId="id"
+                  rows={slicedData}
+                  columns={columns}
+                  selectedRows={selected}
+                  onSelectRow={handleSelect}
+                  onRowClick={handleRowClick}
+                  minDisplayRows={10}
+                  loading={loading}
+                  Footer={
+                    <DataGridPagination
+                      totalCount={data.length}
+                      onChange={handleChangePage}
+                      page={page}
+                    />
+                  }
+                />
+              ),
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
+      </DashboardLayout>
+    </div>
   );
 };
 
-/**
- * **PageHeader** — вводная часть страницы, состоит из группы вводных или навигационных элементов.<br>
- * Данный компонент является составным. В него входят: **Header** и **Subheader**.
- *
- * **Header**<br>
- * Данный компонет включает в себя заголовок страницы, кнопки действий на странице, breadcrumbs (хлебные крошки или навигация), текст.
- *
- * **Subheader**<br>
- * “Второй” заголовок на странице.<br>
- * Включает в себя: поиск, фастфильтры (быстрые фильтры или элементы сортировки данных) и кнопку дополнительных фильтров на странице.
- *
- * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=2932-43969&mode=design&t=UTzuwHtFDCCqlzje-0)
- * ### [Guide]()
- */
-const meta: Meta<typeof PageHeader> = {
-  title: 'Components/PageLayout/PageHeader',
-  component: PageHeader,
+export const ExampleWithFilename = () => {
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [slicedData, setSlicedData] = useState<DataType[]>(data.slice(0, 10));
+  const [page, setPage] = useState<number>(1);
+
+  const header = {
+    productSwitcher() {
+      return (
+        <Box>
+          <ProductSwitcher getProducts={handleGetProducts} />
+        </Box>
+      );
+    },
+    product: {
+      name: 'Астрал.ЭДО',
+      logo() {
+        return (
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.5 6.10352e-05C5.1195 6.10352e-05 4 1.11956 4 2.50006V3.00006H13.75C15.545 3.00006 17 4.45506 17 6.25006V11.2501C17 12.2166 16.2165 13.0001 15.25 13.0001H8.75C7.7835 13.0001 7 12.2166 7 11.2501V8.00006H5C4.4475 8.00006 4 8.44756 4 9.00006V13.5001C4 14.8806 5.1195 16.0001 6.5 16.0001H17.5C18.8805 16.0001 20 14.8806 20 13.5001V2.50006C20 1.11956 18.8805 6.10352e-05 17.5 6.10352e-05H6.5Z"
+              fill="#8566FF"
+            />
+            <path
+              d="M2.5 4.00006C1.1195 4.00006 0 5.11956 0 6.50006V17.5001C0 18.8806 1.1195 20.0001 2.5 20.0001H13.5C14.8805 20.0001 16 18.8806 16 17.5001V17.0001H6.25C4.455 17.0001 3 15.5451 3 13.7501V8.75006C3 7.78356 3.7835 7.00006 4.75 7.00006H11.25C12.2165 7.00006 13 7.78356 13 8.75006V12.0001H15C15.5525 12.0001 16 11.5526 16 11.0001V6.50006C16 5.11956 14.8805 4.00006 13.5 4.00006H2.5Z"
+              fill="#5D3FD4"
+            />
+          </svg>
+        );
+      },
+    },
+    profile: {
+      displayName: 'Григорьев Виталий',
+      annotation: 'vitatiy_grig@mail.ru',
+      avatar: {
+        alt: 'Григорьев Виталий',
+        children: 'ГВ',
+      },
+      menu(props: MenuProps) {
+        return (
+          <Menu {...props}>
+            <MenuItem>
+              <ListItemIcon>
+                <ProfileOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мой профиль</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <CompanyOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Мои организации</ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsFillMd />
+              </ListItemIcon>
+              <ListItemText>Настройки</ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>Выйти</ListItemText>
+            </MenuItem>
+          </Menu>
+        );
+      },
+    },
+  };
+  const sidebar = {
+    menu: {
+      items: [
+        [
+          'documents',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Документы',
+            items: [
+              [
+                'incoming-documents',
+                {
+                  text: 'Входящие документы',
+                  active: true,
+                },
+              ],
+              [
+                'outgoing-documents',
+                {
+                  text: 'Исходящие документы',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'counterparties',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Контрагенты',
+            items: [
+              [
+                'invitations',
+                {
+                  text: 'Приглашения',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'organizations',
+          {
+            icon: <CompanyOutlineMd />,
+            text: 'Мои организации',
+            active: true,
+          },
+        ],
+      ],
+    },
+  } as SidebarProps;
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(data.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <div style={{ maxWidth: '800px' }}>
+      <DashboardLayout>
+        <DashboardLayout.Header {...header} />
+        <DashboardLayout.Sidebar {...sidebar} />
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: (
+                <Filename>
+                  Приложение 10. К ТФ договора Ген.подряда на проектирование и
+                  проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
+                </Filename>
+              ),
+              breadcrumbs: [
+                <Fragment key="1">Первый текст</Fragment>,
+                <Fragment key="2">Текст с разделителем</Fragment>,
+                <Fragment key="3">Текст с разделителем</Fragment>,
+              ],
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+              subheader: (
+                <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+                  <TextField
+                    placeholder="Поиск на странице..."
+                    size="small"
+                    InputProps={{
+                      startAdornment: <SearchOutlineMd />,
+                    }}
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                </Stack>
+              ),
+            }}
+            content={{
+              children: (
+                <DataGrid
+                  keyId="id"
+                  rows={slicedData}
+                  columns={columns}
+                  selectedRows={selected}
+                  onSelectRow={handleSelect}
+                  onRowClick={handleRowClick}
+                  minDisplayRows={10}
+                  loading={loading}
+                  Footer={
+                    <DataGridPagination
+                      totalCount={data.length}
+                      onChange={handleChangePage}
+                      page={page}
+                    />
+                  }
+                />
+              ),
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
+      </DashboardLayout>
+    </div>
+  );
 };
 
-export default meta;
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding-block: ${({ theme }) => theme.spacing(5)};
-`;
-
-export const Example = () => (
+export const Default = () => (
   <Wrapper>
     <PageHeader
       title="Черновик"
@@ -447,28 +747,32 @@ export const Example = () => (
   </Wrapper>
 );
 
+export const LongTitle = () => (
+  <Wrapper>
+    <PageHeader title="Очень длинный заголовок черновика, который должен отображаться в одну" />
+  </Wrapper>
+);
+
 /**
- * Для отображения Tooltip на заблокированном элементе необходимо использовать prop ```disableReason``` и ```disabled```.<br>
- * Так же можно выводить Tooltip на не заблокированном элементе с помощью prop ```note```
+ * Если title не является строкой, Overflow работать не будет
  */
-export const TooltipSecondaryAction = () => (
+export const CustomTitle = () => (
   <Wrapper>
     <PageHeader
-      title="Черновик"
+      title={
+        <StyledTypography variant="inherit">
+          Очень длинный заголовок черновика, который не будет отображаться в
+          одну строку
+        </StyledTypography>
+      }
       actions={{
         main: [
-          { text: 'Отправка по маршруту', disabled: true },
-          { text: 'Выбор получателя' },
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
         ],
         secondary: [
-          { text: 'Выбор получателя', disabled: true },
-          {
-            text: 'Сменить подразделение',
-            disabled: true,
-            disabledReason: 'На данный момент заблокировано',
-          },
-          { text: 'Копировать', note: 'Можно что-то скопировать' },
-          { text: 'Удалить', note: 'Можно что-то удалить' },
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
         ],
       }}
       backButton={{}}
@@ -476,17 +780,28 @@ export const TooltipSecondaryAction = () => (
   </Wrapper>
 );
 
-export const Default = () => (
-  <Wrapper>
-    <PageHeader title="Очень_очень_очень_очень_длинный_заголовок" />
-  </Wrapper>
-);
-
-export const LongTitle = () => (
+export const FileExtension = () => (
   <Wrapper>
     <PageHeader
-      title="Очень длинный заголовок черновика, который должен отображаться в одну
-          строку и не переноситься"
+      title={
+        <div style={{ minHeight: '100px' }}>
+          <Filename>
+            Приложение 10. К ТФ договора Ген.подряда на проектирование и
+            проведение ремонтных работ ММ, МК, МА по единому РСР.pdf
+          </Filename>
+        </div>
+      }
+      actions={{
+        main: [
+          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          { text: 'действие 2', color: 'error' },
+        ],
+        secondary: [
+          { text: 'Второстепенное действие 1' },
+          { text: 'Второстепенное действие 2' },
+        ],
+      }}
+      backButton={{}}
     />
   </Wrapper>
 );
@@ -633,9 +948,31 @@ export const Subheader = () => (
   </Wrapper>
 );
 
-/** Пример использования  */
-export const Usage = () => (
+/**
+ * Для отображения Tooltip на заблокированном элементе необходимо использовать prop ```disableReason``` и ```disabled```.<br>
+ * Так же можно выводить Tooltip на не заблокированном элементе с помощью prop ```note```
+ */
+export const TooltipSecondaryAction = () => (
   <Wrapper>
-    <PageHeaderDashboardStory />
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          { text: 'Отправка по маршруту', disabled: true },
+          { text: 'Выбор получателя' },
+        ],
+        secondary: [
+          { text: 'Выбор получателя', disabled: true },
+          {
+            text: 'Сменить подразделение',
+            disabled: true,
+            disabledReason: 'На данный момент заблокировано',
+          },
+          { text: 'Копировать', note: 'Можно что-то скопировать' },
+          { text: 'Удалить', note: 'Можно что-то удалить' },
+        ],
+      }}
+      backButton={{}}
+    />
   </Wrapper>
 );

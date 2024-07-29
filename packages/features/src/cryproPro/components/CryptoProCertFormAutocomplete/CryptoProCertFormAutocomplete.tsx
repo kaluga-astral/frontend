@@ -20,6 +20,7 @@ export type CryptoProCertFormAutocompleteProps<
 
 /**
  * @description Autocomplete с сертификатами для формы
+ * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  */
 export const CryptoProCertFormAutocomplete = <
   Multiple extends boolean = false,

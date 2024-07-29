@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -9,10 +9,15 @@ import { useForm } from '../hooks';
 import { FormTextArea } from './FormTextArea';
 import { type FormTextAreaValue } from './types';
 
-export default {
+/**
+ * Обертка [TextArea](/story/components-textarea--docs) для react-hook-form
+ */
+const meta: Meta<typeof FormTextArea> = {
   title: 'Form/FormTextarea',
-  component: null,
+  component: FormTextArea,
 };
+
+export default meta;
 
 type FormValues = { textareaField: FormTextAreaValue };
 
@@ -20,7 +25,7 @@ const validationSchema = object<FormValues>({
   textareaField: string(),
 });
 
-const Template: StoryFn = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
@@ -36,11 +41,4 @@ const Template: StoryFn = () => {
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

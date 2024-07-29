@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Rating } from './Rating';
 
@@ -15,6 +15,19 @@ const meta: Meta<typeof Rating> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Rating>;
+
+export const Interaction: Story = {
+  args: {
+    value: 3,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => {
   const [value, setValue] = useState<number | null>(null);

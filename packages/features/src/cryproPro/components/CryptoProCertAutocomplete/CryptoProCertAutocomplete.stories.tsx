@@ -30,6 +30,9 @@ const Template: StoryFn = () => {
   );
 };
 
+/**
+ * **❗️❗️❗️ Компонент больше не поддерживается. Используйте [@astral-private/crypto](https://cryptodocs.astralnalog.ru/)**
+ */
 export const Default = Template.bind({});
 
 Default.parameters = {

@@ -19,6 +19,9 @@ type SetupCryptoProWorkspaceModalProps = {
   workspaceSetupInfo: CheckWorkspace;
 };
 
+/**
+  @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
+ */
 export const SetupCryptoProWorkspaceModal = ({
   isDialogOpen,
   onCloseButtonClick,

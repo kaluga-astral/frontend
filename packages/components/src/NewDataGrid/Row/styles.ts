@@ -34,7 +34,10 @@ export const ContentWrapper = styled.div<{
   $isHovered?: boolean;
   $isSelected?: boolean;
   $gridColumns: string;
+  $level: number;
 }>`
+  position: relative;
+
   display: grid;
   grid-template-columns: ${({ $gridColumns }) => $gridColumns};
 
@@ -47,6 +50,22 @@ export const ContentWrapper = styled.div<{
     });
   }};
 
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    transform: ${({ $level }) =>
+      `translateX(calc(${ROOT_ACTION_CELL_WIDTH}px * ${$level} - ${TREE_LINE_WIDTH}px))`};
+
+    width: ${TREE_LINE_WIDTH}px;
+    height: 50%;
+
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
+    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
+  }
+
   &:hover {
     cursor: ${({ $isHovered }) => ($isHovered ? 'pointer' : 'default')};
 
@@ -56,24 +75,7 @@ export const ContentWrapper = styled.div<{
 `;
 
 export const CellStyled = styled(Cell)<{ $level: number }>`
-  position: relative;
-
   margin-left: ${({ $level }) => `${$level * ROOT_ACTION_CELL_WIDTH}px`};
-
-  &:first-of-type::before {
-    content: '';
-
-    position: absolute;
-    top: 0;
-    left: -${TREE_LINE_WIDTH}px;
-
-    width: ${TREE_LINE_WIDTH}px;
-    height: 50%;
-
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[400]};
-    border-left: 1px solid ${({ theme }) => theme.palette.grey[400]};
-    border-radius: 0 0 0 ${({ theme }) => theme.shape.small};
-  }
 `;
 
 export const CheckboxCell = styled.div`
