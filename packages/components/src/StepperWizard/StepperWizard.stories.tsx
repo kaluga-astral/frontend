@@ -1,7 +1,8 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button, Grid } from '..';
+import { Button } from '../Button';
+import { Grid } from '../Grid';
 import { styled } from '../styles';
 
 import { StepperWizard } from './StepperWizard';
