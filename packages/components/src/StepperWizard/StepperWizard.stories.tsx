@@ -6,7 +6,7 @@ import { Grid } from '../Grid';
 import { styled } from '../styles';
 
 import { StepperWizard } from './StepperWizard';
-import { type Steps } from './types';
+import { type Step } from './types';
 
 /**
  * StepperWizard - фасад для работы с базовыми компонентами Stepper
@@ -50,7 +50,7 @@ const ButtonsWrapper = styled.div`
 export const Example = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps: Steps = [
+  const steps: Step[] = [
     { label: 'Step 1' },
     { label: 'Step 2' },
     { label: 'Step 3' },
@@ -87,7 +87,7 @@ export const Example = () => {
 export const Error = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps: Steps = [
+  const steps: Step[] = [
     { label: 'Step 1' },
     { label: 'Step 2', isError: true },
     { label: 'Step 3' },
@@ -124,7 +124,7 @@ export const Error = () => {
 export const ConnectorArrow = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps: Steps = [
+  const steps: Step[] = [
     { label: 'Step 1' },
     { label: 'Step 2' },
     { label: 'Step 3' },
@@ -160,7 +160,7 @@ export const ConnectorArrow = () => {
 export const AlternativeLabel = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps: Steps = [
+  const steps: Step[] = [
     { label: 'Step 1' },
     { label: 'Step 2' },
     { label: 'Step 3' },
@@ -196,7 +196,7 @@ export const AlternativeLabel = () => {
 export const StepContent = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps: Steps = [
+  const steps: Step[] = [
     { label: 'Step 1', stepContent: 'Описание для шага 1' },
     { label: 'Step 2', stepContent: 'Описание для шага 2' },
     { label: 'Step 3', stepContent: 'Описание для шага 3' },

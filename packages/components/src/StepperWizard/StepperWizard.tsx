@@ -6,10 +6,10 @@ import {
   type StepperProps,
 } from '../Stepper';
 
-import { type Steps } from './types';
+import { type Step as StepType } from './types';
 
 type StepperWizardProps = Omit<StepperProps, 'children'> & {
-  steps: Steps;
+  steps: StepType[];
 };
 
 export const StepperWizard = ({
@@ -18,15 +18,15 @@ export const StepperWizard = ({
 }: StepperWizardProps) => {
   return (
     <Stepper {...stepperProps}>
-      {steps.map(({ label, isError }, index) => (
+      {steps.map(({ label, isError, stepContent }, index) => (
         <Step key={index}>
           <StepLabel
             isSelected={stepperProps.activeStep === index}
-            error={step.isError}
+            error={isError}
           >
-            {step.label}
+            {label}
           </StepLabel>
-          <StepContent>{step.stepContent}</StepContent>
+          <StepContent>{stepContent}</StepContent>
         </Step>
       ))}
     </Stepper>
