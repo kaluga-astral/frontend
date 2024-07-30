@@ -6,11 +6,11 @@ import errorIllustration from '../../../ui/illustrations/error.svg';
 import noDataIllustration from '../../../ui/illustrations/no-data.svg';
 import { ConfigProvider } from '../ConfigProvider';
 import { ActionCell, type Actions } from '../ActionCell';
-import type { DataGridColumns } from '../NewDataGrid';
+import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
 
 import { NewDataGridInfinite } from './NewDataGridInfinite';
-import { makeDataList, makeDataListWithTree } from './faker';
+import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
 
 /**
  * Таблица с бесконечным скроллом построенная на css grid
@@ -95,7 +95,16 @@ const DataGridInfiniteWrapper = styled.div`
 
 export const Example = () => {
   const columns = FAKE_COLUMNS;
-  const fakeData = makeDataList(10);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(9),
+  ];
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -146,7 +155,23 @@ export const Example = () => {
 
 export const WithTree = () => {
   const columns = FAKE_COLUMNS;
-  const fakeData = makeDataListWithTree(10);
+  const fakeData = [
+    {
+      id: '123456789',
+      documentName: 'Пакет документов',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Договор №12345678',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+        },
+      ],
+    },
+    ...makeDataListWithTree(9),
+  ];
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -161,62 +186,6 @@ export const WithTree = () => {
   }, []);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
-  const handleSelect = (rows: DataType[]) => setSelected(rows);
-
-  const incrementData = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
-      setIsEndReached(true);
-      setLoading(false);
-    }, 1500);
-  };
-
-  return (
-    <ConfigProvider
-      imagesMap={{
-        defaultErrorImgSrc: errorIllustration,
-        noDataImgSrc: noDataIllustration,
-        outdatedReleaseErrorImgSrc: '',
-      }}
-    >
-      <DataGridInfiniteWrapper>
-        <NewDataGridInfinite<DataType, SortField>
-          keyId="id"
-          rows={slicedData}
-          isLoading={isLoading}
-          isEndReached={isEndReached}
-          columns={columns}
-          selectedRows={selected}
-          onSelectRow={handleSelect}
-          onEndReached={incrementData}
-          onRowClick={handleRowClick}
-          onRetry={() => {}}
-        />
-      </DataGridInfiniteWrapper>
-    </ConfigProvider>
-  );
-};
-
-export const WithTreeLongList = () => {
-  const columns = FAKE_COLUMNS;
-  const fakeData = makeDataListWithTree(10, { childrenCount: 50 });
-
-  const [isLoading, setLoading] = useState(true);
-  const [slicedData, setSlicedData] = useState<DataType[]>([]);
-  const [selected, setSelected] = useState<DataType[]>([]);
-  const [isEndReached, setIsEndReached] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
-      setLoading(false);
-    }, 1500);
-  }, []);
-
-  const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
   const handleSelect = (rows: DataType[]) => setSelected(rows);
 
   const incrementData = () => {
@@ -262,29 +231,60 @@ export const WithTreeLongList = () => {
 export const TreeWithOverrideColumns = () => {
   const columns = FAKE_COLUMNS;
 
-  const fakeData = makeDataListWithTree(10, {
-    childrenColumns: [
-      {
-        field: 'actions',
-        renderCell: (row) => {
-          return (
-            <ActionCell
-              actions={{
-                main: [
-                  {
-                    icon: <EyeFillMd />,
-                    name: 'Просмотреть',
-                    onClick: () => console.log('main'),
-                  },
-                ],
-              }}
-              row={row}
-            />
-          );
-        },
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        childrenColumns: [
+          {
+            field: 'actions',
+            renderCell: (row) => {
+              return (
+                <ActionCell
+                  actions={{
+                    main: [
+                      {
+                        icon: <EyeFillMd />,
+                        name: 'Просмотреть',
+                        onClick: () => console.log('main'),
+                      },
+                    ],
+                  }}
+                  row={row}
+                />
+              );
+            },
+          },
+        ],
       },
-    ],
-  });
+    },
+    ...makeDataListWithTree(9, {
+      childrenColumns: [
+        {
+          field: 'actions',
+          renderCell: (row) => {
+            return (
+              <ActionCell
+                actions={{
+                  main: [
+                    {
+                      icon: <EyeFillMd />,
+                      name: 'Просмотреть',
+                      onClick: () => console.log('main'),
+                    },
+                  ],
+                }}
+                row={row}
+              />
+            );
+          },
+        },
+      ],
+    }),
+  ];
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -367,8 +367,16 @@ export const NoData = () => {
 
 export const LoadingWithData = () => {
   const columns = FAKE_COLUMNS;
-  const data = makeDataList(10);
 
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(9),
+  ];
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
 
@@ -383,7 +391,7 @@ export const LoadingWithData = () => {
       <DataGridInfiniteWrapper>
         <NewDataGridInfinite<DataType, SortField>
           keyId="id"
-          rows={data}
+          rows={fakeData}
           isLoading
           columns={columns}
           onRowClick={handleRowClick}
@@ -396,7 +404,16 @@ export const LoadingWithData = () => {
 
 export const ErrorWithData = () => {
   const columns = FAKE_COLUMNS;
-  const data = makeDataList(10);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(9),
+  ];
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -412,7 +429,7 @@ export const ErrorWithData = () => {
       <DataGridInfiniteWrapper>
         <NewDataGridInfinite<DataType, SortField>
           keyId="id"
-          rows={data}
+          rows={fakeData}
           isError
           columns={columns}
           onRowClick={handleRowClick}

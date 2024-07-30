@@ -16,7 +16,7 @@ const RECIPIENTS = [
   'ООО "Волшебные документы"',
 ];
 
-const makeRandomDate = () => {
+export const makeRandomDate = () => {
   const randomDate = faker.date.recent();
 
   return randomDate.toISOString();
