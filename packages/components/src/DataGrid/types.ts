@@ -3,7 +3,7 @@ import { type TableCellProps } from '@mui/material';
 
 import { type SortStates } from './enums';
 
-export type CellValue = unknown;
+export type CellValue = string | number | boolean | Date | undefined | object;
 
 export type SortState = `${SortStates}`;
 
