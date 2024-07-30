@@ -8,13 +8,8 @@ import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
 
 import { NewDataGrid } from './NewDataGrid';
-import type {
-  CellValue,
-  DataGridColumns,
-  DataGridRowOptions,
-  DataGridRowWithOptions,
-  DataGridSort,
-} from './types';
+import type { DataGridColumns, DataGridSort } from './types';
+import { makeColumns, makeDataList, makeDataListWithTree } from './faker';
 
 /**
  * NewDataGrid — отображает информацию в удобном для просмотра виде. Может включать:
@@ -41,9 +36,6 @@ type DataType = {
   createDate: string;
   actions?: object;
 };
-
-type DataRowType<TData extends Record<string, CellValue>> =
-  DataGridRowWithOptions<TData>;
 
 type SortField = 'documentName' | 'recipient' | 'createDate';
 
@@ -106,70 +98,12 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
   },
 ];
 
-const generateRandomDate = () => {
-  const start = new Date(2022, 0, 1);
-  const end = new Date();
-  const randomTimestamp =
-    start.getTime() + Math.random() * (end.getTime() - start.getTime());
-  const randomDate = new Date(randomTimestamp);
-
-  return randomDate.toISOString();
-};
-
-const generateColumns = (
-  columnsTemplate: DataGridColumns<DataType>[],
-  mergedColumns: DataGridColumns<DataType>[] = [],
-): DataGridColumns<DataType>[] => {
-  const mergedColumnsMap = mergedColumns.reduce(
-    (acc, { field, ...columnsOptions }) => {
-      if (field) {
-        return {
-          ...acc,
-          [field]: columnsOptions,
-        };
-      }
-
-      return acc;
-    },
-    {},
-  );
-
-  return columnsTemplate.map((column) => ({
-    ...column,
-    // @ts-ignore
-    ...(mergedColumnsMap[column?.field] || {}),
-  }));
-};
-
-const generateData = <TData extends Record<string, CellValue>>(
-  dataObjTemplate: TData,
-  options?: DataGridRowOptions<TData>,
-): DataRowType<TData>[] => {
-  const RECIPIENTS = [
-    'ИП Иванов О.В.',
-    'ООО "Новая организация"',
-    'ООО "Волшебные документы"',
-  ];
-
-  const DATA_ARRAY_LENGTH = 16;
-
-  return Array.from({ length: DATA_ARRAY_LENGTH })
-    .fill(dataObjTemplate)
-    .map((_, i) => ({
-      id: String(i + 1),
-      documentName: `Договор №${i + 1}`,
-      recipient: RECIPIENTS[Math.floor(Math.random() * RECIPIENTS.length)],
-      createDate: generateRandomDate(),
-      options: Math.random() < 0.5 ? options : {},
-    })) as unknown as DataRowType<TData>[];
-};
-
 /**
  * DataGrid без пагинации
  */
 export const Example = () => {
-  const columns = FAKE_COLUMNS;
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -200,8 +134,8 @@ export const Example = () => {
  * Внизу таблицы есть область, в которой слева отображается счетчик данных на странице из общего количества данных, справа - кнопки с нумерацией страниц таблицы для переключения между ними.
  */
 export const WithPagination = () => {
-  const columns = FAKE_COLUMNS;
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -253,8 +187,8 @@ export const WithPagination = () => {
  * DataGrid с сортировкой
  */
 export const WithSorting = () => {
-  const columns = FAKE_COLUMNS;
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -348,8 +282,8 @@ export const WithSorting = () => {
  * Prop `activeRowId` позволяет отобразить активный ряд в таблице в зависимости от значения prop `keyId`
  */
 export const WithActiveRow = () => {
-  const columns = FAKE_COLUMNS;
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -381,8 +315,8 @@ export const WithActiveRow = () => {
  * В страничном варинте таблицы при выборе checkbox в datagrid_header выбираются все значения на странице
  */
 export const WithCheckbox = () => {
-  const columns = generateColumns(FAKE_COLUMNS, []);
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
@@ -419,7 +353,7 @@ export const WithCheckbox = () => {
  * Если значение не указано, то автоматически задается `1fr`
  */
 export const WidthOptions = () => {
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'documentName',
       width: '2fr',
@@ -434,7 +368,7 @@ export const WidthOptions = () => {
     },
   ]);
 
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [isLoading, setLoading] = useState(true);
@@ -464,35 +398,8 @@ export const WidthOptions = () => {
  * Prop `disabled` позволяет заблокировать контент
  */
 export const WithDisabledContent = () => {
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
-
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Наименование документа',
-      sortable: true,
-    },
-    {
-      field: 'recipient',
-      label: 'Получатель',
-      sortable: true,
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      sortable: true,
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      sortable: false,
-      align: 'center',
-      width: '120px',
-      renderCell: (row) => {
-        return <ActionCell actions={FAKE_ACTIONS} row={row} />;
-      },
-    },
-  ];
+  const columns = makeColumns(FAKE_COLUMNS);
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [isLoading, setLoading] = useState(true);
@@ -520,11 +427,6 @@ export const WithDisabledContent = () => {
 };
 
 export const WithDisabledRow = () => {
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE, {
-    isDisabled: true,
-    disabledReason: 'Нет доступа',
-  });
-
   const ACTIONS: Actions<DataType> = {
     main: [
       {
@@ -535,29 +437,19 @@ export const WithDisabledRow = () => {
     ],
   };
 
-  const columns: DataGridColumns<DataType>[] = [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
-      field: 'documentName',
-      label: 'Наименование документа',
-    },
-    {
-      field: 'recipient',
-      label: 'Получатель',
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      align: 'center',
-      width: '120px',
+      field: 'actions',
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS} row={row} />;
       },
     },
-  ];
+  ]);
+
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE, {
+    isDisabled: true,
+    disabledReason: 'Нет доступа',
+  });
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
@@ -602,7 +494,7 @@ export const DisabledLastCell = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -611,7 +503,7 @@ export const DisabledLastCell = () => {
     },
   ]);
 
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE, {
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE, {
     isDisabled: true,
     isDisabledLastCell: false,
     disabledReason: 'Нет доступа',
@@ -660,7 +552,7 @@ export const Tree = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -669,68 +561,7 @@ export const Tree = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '32',
-          documentName: 'Договор №45678',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-          children: [
-            {
-              id: '321',
-              documentName: 'Пункт договора Договор №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-            {
-              id: '322',
-              documentName: 'Дополнение к договору №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-          ],
-        },
-        {
-          id: '33',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+  const fakeData = makeDataListWithTree(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
@@ -760,7 +591,7 @@ export const TreeWithInitialExpanded = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -769,68 +600,7 @@ export const TreeWithInitialExpanded = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '32',
-          documentName: 'Договор №45678',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-          children: [
-            {
-              id: '321',
-              documentName: 'Пункт договора Договор №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-            {
-              id: '322',
-              documentName: 'Дополнение к договору №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-          ],
-        },
-        {
-          id: '33',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+  const fakeData = makeDataListWithTree(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
@@ -862,7 +632,7 @@ export const TreeWithExpandedLevel = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -871,68 +641,7 @@ export const TreeWithExpandedLevel = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '32',
-          documentName: 'Договор №45678',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-          children: [
-            {
-              id: '321',
-              documentName: 'Пункт договора Договор №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-            {
-              id: '322',
-              documentName: 'Дополнение к договору №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-          ],
-        },
-        {
-          id: '33',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+  const fakeData = makeDataListWithTree(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
@@ -966,7 +675,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -975,78 +684,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '32',
-          documentName: 'Договор №45678',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '33',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '34',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '35',
-          documentName: 'Договор №569-4',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '36',
-          documentName: 'Договор №00056789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '37',
-          documentName: 'Договор №00022889',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+  const fakeData = makeDataListWithTree(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
@@ -1079,7 +717,7 @@ export const TreeWithCheckbox = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -1088,72 +726,7 @@ export const TreeWithCheckbox = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-          options: {
-            isDisabled: true,
-            disabledReason: 'Нет доступа',
-          },
-        },
-        {
-          id: '32',
-          documentName: 'Договор №45678',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-          children: [
-            {
-              id: '321',
-              documentName: 'Пункт договора Договор №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-            {
-              id: '322',
-              documentName: 'Дополнение к договору №56789',
-              recipient: 'ООО "Волшебные документы"',
-              createDate: generateRandomDate(),
-            },
-          ],
-        },
-        {
-          id: '33',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+  const fakeData = makeDataListWithTree(10);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
@@ -1198,7 +771,7 @@ export const TreeWithOverrideColumns = () => {
     ],
   };
 
-  const columns = generateColumns(FAKE_COLUMNS, [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
       field: 'actions',
       renderCell: (row) => {
@@ -1207,94 +780,29 @@ export const TreeWithOverrideColumns = () => {
     },
   ]);
 
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '1',
-      documentName: 'Договор на поставку',
-      recipient: 'ИП Иванов О.В.',
-      createDate: generateRandomDate(),
-    },
-    {
-      id: '2',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Новая организация"',
-      createDate: generateRandomDate(),
-      options: {
-        childrenColumns: [
-          {
-            field: 'actions',
-            renderCell: (row) => {
-              return (
-                <ActionCell
-                  actions={{
-                    main: [
-                      {
-                        icon: <EyeFillMd />,
-                        name: 'Просмотреть',
-                        onClick: () => console.log('main'),
-                      },
-                    ],
-                  }}
-                  row={row}
-                />
-              );
-            },
-          },
-        ],
+  const fakeData = makeDataListWithTree(10, {
+    childrenColumns: [
+      {
+        field: 'actions',
+        renderCell: (row) => {
+          return (
+            <ActionCell
+              actions={{
+                main: [
+                  {
+                    icon: <EyeFillMd />,
+                    name: 'Просмотреть',
+                    onClick: () => console.log('main'),
+                  },
+                ],
+              }}
+              row={row}
+            />
+          );
+        },
       },
-      children: [
-        {
-          id: '21',
-          documentName: 'Договор №123',
-          recipient: 'ООО "Новая организация"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-    {
-      id: '3',
-      documentName: 'Пакет документов',
-      recipient: 'ООО "Волшебные документы"',
-      createDate: generateRandomDate(),
-      options: {
-        childrenColumns: [
-          {
-            field: 'actions',
-            renderCell: (row) => {
-              return (
-                <ActionCell
-                  actions={{
-                    main: [
-                      {
-                        icon: <EyeFillMd />,
-                        name: 'Просмотреть',
-                        onClick: () => console.log('main'),
-                      },
-                    ],
-                  }}
-                  row={row}
-                />
-              );
-            },
-          },
-        ],
-      },
-      children: [
-        {
-          id: '31',
-          documentName: 'Договор №34567',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-        {
-          id: '32',
-          documentName: 'Договор №56789',
-          recipient: 'ООО "Волшебные документы"',
-          createDate: generateRandomDate(),
-        },
-      ],
-    },
-  ];
+    ],
+  });
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
@@ -1329,8 +837,6 @@ export const TreeWithOverrideColumns = () => {
  * Состояние загрузки регулируется полем `loading` экшенов переданных в `<ActionCell/>`
  */
 export const WithLoaderInButton = () => {
-  const fakeData = generateData(FAKE_DATA_OBJECT_TEMPLATE);
-
   const ACTIONS_WITH_LOADER: Actions<DataType> = {
     main: [
       {
@@ -1350,33 +856,16 @@ export const WithLoaderInButton = () => {
     ],
   };
 
-  const columnsWithLoader: DataGridColumns<DataType>[] = [
+  const columns = makeColumns(FAKE_COLUMNS, [
     {
-      field: 'documentName',
-      label: 'Наименование документа',
-      sortable: true,
-    },
-    {
-      field: 'recipient',
-      label: 'Получатель',
-      sortable: true,
-    },
-    {
-      field: 'createDate',
-      label: 'Дата создания',
-      sortable: true,
-      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-    },
-    {
-      label: 'Действия',
-      sortable: false,
-      align: 'center',
-      width: '120px',
+      field: 'actions',
       renderCell: (row) => {
         return <ActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
       },
     },
-  ];
+  ]);
+
+  const fakeData = makeDataList(FAKE_DATA_OBJECT_TEMPLATE);
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [isLoading, setLoading] = useState(true);
@@ -1394,7 +883,7 @@ export const WithLoaderInButton = () => {
     <NewDataGrid<DataType, SortField>
       keyId="id"
       rows={slicedData}
-      columns={columnsWithLoader}
+      columns={columns}
       isLoading={isLoading}
       onRowClick={handleRowClick}
       onRetry={() => {}}

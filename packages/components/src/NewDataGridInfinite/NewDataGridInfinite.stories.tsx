@@ -94,9 +94,8 @@ const DataGridInfiniteWrapper = styled.div`
 `;
 
 export const Example = () => {
-  const data = makeDataList(10);
-
   const columns = FAKE_COLUMNS;
+  const fakeData = makeDataList(10);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -104,7 +103,7 @@ export const Example = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice(0, 10));
+      setSlicedData(fakeData.slice(0, 10));
       setLoading(false);
     }, 1500);
   }, []);
@@ -146,9 +145,8 @@ export const Example = () => {
 };
 
 export const WithTree = () => {
-  const data = makeDataListWithTree(10);
-
   const columns = FAKE_COLUMNS;
+  const fakeData = makeDataListWithTree(10);
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -157,13 +155,12 @@ export const WithTree = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice(0, 10));
+      setSlicedData(fakeData.slice(0, 10));
       setLoading(false);
     }, 1500);
   }, []);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
   const handleSelect = (rows: DataType[]) => setSelected(rows);
 
   const incrementData = () => {
@@ -203,9 +200,8 @@ export const WithTree = () => {
 };
 
 export const WithTreeLongList = () => {
-  const data = makeDataListWithTree(10, { childrenCount: 50 });
-
   const columns = FAKE_COLUMNS;
+  const fakeData = makeDataListWithTree(10, { childrenCount: 50 });
 
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
@@ -214,7 +210,7 @@ export const WithTreeLongList = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice(0, 10));
+      setSlicedData(fakeData.slice(0, 10));
       setLoading(false);
     }, 1500);
   }, []);
@@ -264,7 +260,9 @@ export const WithTreeLongList = () => {
  *  например указать кастомный список действий для вложенных элементов
  */
 export const TreeWithOverrideColumns = () => {
-  const data = makeDataListWithTree(10, {
+  const columns = FAKE_COLUMNS;
+
+  const fakeData = makeDataListWithTree(10, {
     childrenColumns: [
       {
         field: 'actions',
@@ -288,8 +286,6 @@ export const TreeWithOverrideColumns = () => {
     ],
   });
 
-  const columns = FAKE_COLUMNS;
-
   const [isLoading, setLoading] = useState(true);
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
@@ -297,7 +293,7 @@ export const TreeWithOverrideColumns = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(data.slice(0, 10));
+      setSlicedData(fakeData.slice(0, 10));
       setLoading(false);
     }, 1500);
   }, []);
@@ -370,9 +366,8 @@ export const NoData = () => {
 };
 
 export const LoadingWithData = () => {
-  const data = makeDataList(10);
-
   const columns = FAKE_COLUMNS;
+  const data = makeDataList(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');
@@ -400,9 +395,8 @@ export const LoadingWithData = () => {
 };
 
 export const ErrorWithData = () => {
-  const data = makeDataList(10);
-
   const columns = FAKE_COLUMNS;
+  const data = makeDataList(10);
 
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
   const handleRetry = () => alert('Повторить запрос');

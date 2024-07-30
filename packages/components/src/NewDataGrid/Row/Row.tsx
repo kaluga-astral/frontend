@@ -193,7 +193,7 @@ export const Row = <TData extends Record<string, CellValue>>(
           key={cellId}
           $level={isFirstCell ? level : 0}
           row={row}
-          cell={cell}
+          cell={cell as DataGridColumns<Record<string, CellValue>>}
           emptyCellValue={emptyCellValue}
           startAdornment={isFirstCell && renderStartAdornment()}
           isDisabled={isDisabledCell}
@@ -265,6 +265,7 @@ export const Row = <TData extends Record<string, CellValue>>(
         keyId={keyId as string}
         level={level}
         initialVisibleChildrenCount={initialVisibleChildrenCount}
+        // @ts-ignore
         renderRow={renderRow}
       />
     </Wrapper>
