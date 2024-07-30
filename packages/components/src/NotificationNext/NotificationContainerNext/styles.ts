@@ -27,6 +27,25 @@ const leaveOut = keyframes`
   }
 `;
 
+const leaveInMobile = keyframes`
+  from{
+    transform: translateY(-100%);
+  }
+  to{
+    transform: translateY(0px);
+  }
+`;
+
+const leaveOutMobile = keyframes`
+  from{
+    transform: translateY(0px);
+  }
+  to{
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+`;
+
 // используем дополнительный враппер,
 // потому что styled для ToastContainer не умеет работать с theme внутри
 // использовать бэм классы для стилизации пришлось,
@@ -37,11 +56,19 @@ export const Wrapper = styled.div`
   .${NOTIFY_ANIMATION_IN_CLASSNAME} {
     animation: ${leaveIn} ease-in-out 0.34s;
     animation-fill-mode: both;
+    ${({ theme }) => theme.breakpoints.down('sm')} {
+      animation: ${leaveInMobile} ease-in-out 0.34s;
+      animation-fill-mode: both;
+    }
   }
 
   .${NOTIFY_ANIMATION_OUT_CLASSNAME} {
     animation: ${leaveOut} ease-in-out 0.34s;
     animation-fill-mode: both;
+    ${({ theme }) => theme.breakpoints.down('sm')} {
+      animation: ${leaveOutMobile} ease-in-out 0.34s;
+      animation-fill-mode: both;
+    }
   }
 
   .${NOTIFY_CLASSNAME} {
@@ -118,4 +145,12 @@ export const Wrapper = styled.div`
 export const Inner = styled(ToastContainer)`
   min-width: 400px;
   max-width: 400px;
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 100%;
+    max-width: unset;
+
+    @media only screen and (width <= 480px) {
+      margin: 12px;
+    }
+  }
 `;
