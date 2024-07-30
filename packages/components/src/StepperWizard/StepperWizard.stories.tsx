@@ -51,10 +51,10 @@ export const Example = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps: StepWizard[] = [
-    { label: 'Step 1' },
-    { label: 'Step 2' },
-    { label: 'Step 3' },
-    { label: 'Step 4' },
+    { label: 'Step 1', stepContent: 'Описание для шага 1' },
+    { label: 'Step 2', stepContent: 'Описание для шага 2' },
+    { label: 'Step 3', stepContent: 'Описание для шага 3' },
+    { label: 'Step 4', stepContent: 'Описание для шага 4' },
   ];
 
   const handleBack = () => {
@@ -193,6 +193,26 @@ export const AlternativeLabel = () => {
   );
 };
 
+export const Orientation = () => {
+  const [activeStep] = useState(0);
+
+  const steps: StepWizard[] = [
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3' },
+  ];
+
+  return (
+    <Grid>
+      <StepperWizard
+        orientation="vertical"
+        activeStep={activeStep}
+        steps={steps}
+      />
+    </Grid>
+  );
+};
+
 export const StepContent = () => {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -216,11 +236,7 @@ export const StepContent = () => {
 
   return (
     <Grid>
-      <StepperWizard
-        orientation="vertical"
-        activeStep={activeStep}
-        steps={steps}
-      />
+      <StepperWizard activeStep={activeStep} steps={steps} />
       <ButtonsWrapper>
         <Button variant="link" onClick={handleBack}>
           BACK
