@@ -311,7 +311,7 @@ describe('TreeLikeList', () => {
     expect(checked).toHaveLength(1);
   });
 
-  it('Tooltip появляется если disabledItems имеет disableReason', () => {
+  it('Причина блокировки поля отображается', async () => {
     const onChangeSpy = vi.fn();
 
     const fakeData = [
@@ -339,9 +339,13 @@ describe('TreeLikeList', () => {
       />,
     );
 
-    const label = screen.getByLabelText('Заблокировано');
+    const label = screen.getByText('Item 1');
 
-    expect(label).toBeInTheDocument();
+    await userEvents.hover(label);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeInTheDocument();
   });
 
   it('DisabledItems блокирует взаимодействие с элементами', async () => {
