@@ -8,7 +8,7 @@ import type { TreeListData } from '../types';
 
 export type MultipleValue = Array<string> | undefined;
 
-export type DisabledItems = string | { id: number; disableReason?: string };
+export type DisabledItems = string | { id: string; disableReason?: string };
 
 export type MultipleTreeListProps = {
   /**

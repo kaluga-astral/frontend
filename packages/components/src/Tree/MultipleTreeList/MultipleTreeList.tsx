@@ -1,3 +1,7 @@
+import { useMemo } from 'react';
+
+import { getFormatDisabledItems } from '../utils';
+
 import { TreeItem } from './TreeItem';
 import { type MultipleTreeListProps } from './types';
 import { List } from './styles';
@@ -11,18 +15,27 @@ export const MultipleTreeList = ({
   value,
   className,
   expandedLevel = 10,
+  disabledItems,
   ...props
-}: MultipleTreeListProps) => (
-  <List className={className}>
-    {data.map((item) => (
-      <TreeItem
-        key={item.id}
-        value={value}
-        {...item}
-        level={INITIAL_LEVEL}
-        expandedLevel={expandedLevel}
-        {...props}
-      />
-    ))}
-  </List>
-);
+}: MultipleTreeListProps) => {
+  const formattedDisabledItems = useMemo(
+    () => getFormatDisabledItems(disabledItems),
+    [disabledItems],
+  );
+
+  return (
+    <List className={className}>
+      {data.map((item) => (
+        <TreeItem
+          key={item.id}
+          value={value}
+          {...item}
+          level={INITIAL_LEVEL}
+          expandedLevel={expandedLevel}
+          disabledItems={formattedDisabledItems}
+          {...props}
+        />
+      ))}
+    </List>
+  );
+};

@@ -20,7 +20,7 @@ export const getAllChildrenId = (
       if (typeof item === 'string') {
         return item === id;
       } else {
-        return item.id.toString() === id;
+        return item.id === id;
       }
     });
   };

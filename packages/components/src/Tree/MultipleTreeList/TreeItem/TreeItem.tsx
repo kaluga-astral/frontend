@@ -6,8 +6,9 @@ import {
 } from 'react';
 
 import type { TreeListData } from '../../types';
-import type { DisabledItems, MultipleValue } from '../types';
+import type { MultipleValue } from '../types';
 import { FormControlLabel } from '../../../FormControlLabel';
+import { type FormatDisableItem } from '../../utils';
 
 import { useLogic } from './useLogic';
 import { List, StyledCheckbox, StyledTreeItem } from './styles';
@@ -42,7 +43,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: Array<DisabledItems>;
+  disabledItems?: Array<FormatDisableItem>;
 
   /**
    * Функция, которая запускается при выборе item

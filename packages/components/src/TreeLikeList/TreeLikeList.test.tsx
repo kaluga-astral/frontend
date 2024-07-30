@@ -334,7 +334,7 @@ describe('TreeLikeList', () => {
     renderWithTheme(
       <TreeLikeList
         data={fakeData}
-        disabledItems={[{ id: 1, disableReason: 'Заблокировано' }, '2']}
+        disabledItems={[{ id: '1', disableReason: 'Заблокировано' }, '2']}
         onChange={onChangeSpy}
       />,
     );

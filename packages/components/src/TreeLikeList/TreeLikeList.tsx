@@ -1,3 +1,7 @@
+import { useMemo } from 'react';
+
+import { getFormatDisabledItems } from '../Tree/utils';
+
 import { TreeItem } from './TreeItem';
 import { type TreeLikeListProps } from './types';
 import { List } from './styles';
@@ -11,18 +15,27 @@ export const TreeLikeList = ({
   value,
   className,
   expandedLevel = 10,
+  disabledItems,
   ...props
-}: TreeLikeListProps) => (
-  <List className={className}>
-    {data.map((item) => (
-      <TreeItem
-        key={item.id}
-        value={value}
-        {...item}
-        level={INITIAL_LEVEL}
-        expandedLevel={expandedLevel}
-        {...props}
-      />
-    ))}
-  </List>
-);
+}: TreeLikeListProps) => {
+  const formattedDisabledItems = useMemo(
+    () => getFormatDisabledItems(disabledItems),
+    [disabledItems],
+  );
+
+  return (
+    <List className={className}>
+      {data.map((item) => (
+        <TreeItem
+          key={item.id}
+          value={value}
+          {...item}
+          level={INITIAL_LEVEL}
+          expandedLevel={expandedLevel}
+          disabledItems={formattedDisabledItems}
+          {...props}
+        />
+      ))}
+    </List>
+  );
+};

@@ -351,7 +351,7 @@ describe('MultipleTreeList', () => {
     renderWithTheme(
       <MultipleTreeList
         data={fakeData}
-        disabledItems={[{ id: 1, disableReason: 'Заблокировано' }, '2']}
+        disabledItems={[{ id: '1', disableReason: 'Заблокировано' }, '2']}
         onChange={onChangeSpy}
       />,
     );
