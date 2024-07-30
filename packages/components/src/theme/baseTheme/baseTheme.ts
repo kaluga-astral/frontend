@@ -25,6 +25,7 @@ export type Palette = Omit<MuiPalette, 'grey' | 'info' | 'background'> & {
   /**
    * @deprecated
    * Цвет "info" больше не используется, используйте другие цвета
+   * Причина отказа от поддержки: данный цвет отсутствует на макетах ui-kit
    */
   info: PaletteColor & Color;
   red: Color;

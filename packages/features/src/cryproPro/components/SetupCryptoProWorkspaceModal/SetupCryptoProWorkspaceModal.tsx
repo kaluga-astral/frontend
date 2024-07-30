@@ -20,7 +20,8 @@ type SetupCryptoProWorkspaceModalProps = {
 };
 
 /**
-  @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
+ * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
+ * Причина отказа от поддержки: поддержка функционала теперь осуществляется централизовано командой Астрал-Софт в закрытом контуре.
  */
 export const SetupCryptoProWorkspaceModal = ({
   isDialogOpen,
