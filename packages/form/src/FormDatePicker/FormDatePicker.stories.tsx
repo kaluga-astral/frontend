@@ -37,3 +37,19 @@ export const Example = () => {
     </FormStoryContainer>
   );
 };
+
+export const DefaultValue = () => {
+  const form = useForm<FormValues>({
+    resolver: resolver<FormValues>(validationSchema),
+  });
+
+  return (
+    <FormStoryContainer form={form}>
+      <FormDatePicker
+        inputProps={{ label: 'FormDatePicker', required: true }}
+        control={form.control}
+        name="dateField"
+      />
+    </FormStoryContainer>
+  );
+};

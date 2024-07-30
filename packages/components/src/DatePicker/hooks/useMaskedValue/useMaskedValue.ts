@@ -8,7 +8,7 @@ type Params = {
   /**
    * @description Изменение value для DatePicker
    * */
-  onChangeValue?: (date?: Date) => void;
+  onChangeValue?: (date?: Date | null) => void;
 };
 
 type Returned = {
@@ -41,9 +41,9 @@ export const useMaskedValue = ({
   const handleMaskedValueChange = (value: string) => {
     setMaskedValue(value);
 
-    // parseDate вернет Invalid Date при undefined. А нам надо undefined
+    // При отсутствии value указываем null, так как если задать undefined, то отобразится defaultValue при наличии
     if (!value) {
-      onChangeValue?.(undefined);
+      onChangeValue?.(null);
     } else {
       onChangeValue?.(parseDate(value, mask));
     }
