@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import {
   DownloadOutlineMd,
   EyeFillMd,
@@ -27,6 +27,24 @@ const meta: Meta<typeof IconButton> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof IconButton>;
+
+export const Interaction: Story = {
+  render: (args) => {
+    return (
+      <IconButton {...args}>
+        <PrintOutlineMd />
+      </IconButton>
+    );
+  },
+  args: {},
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 type Columns = { id: string; name: string; code: string; ref: string };
 

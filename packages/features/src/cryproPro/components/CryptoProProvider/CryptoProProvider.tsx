@@ -7,6 +7,7 @@ import { type CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
  * @description Провайдер, который в случае отсутствия или неактивности
+ * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  * КриптоПро browser plug-in или отсутствия КриптоПро провайдера на
  * устройстве пользователя - отображает окно настройки рабочего места
  * @param children все что необходимо обернуть в провайдер

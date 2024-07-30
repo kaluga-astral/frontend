@@ -1,16 +1,31 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { List } from '../List';
 import { ListItem } from '../ListItem';
 
 import { ListItemText } from './ListItemText';
 
-export default {
+const meta: Meta<typeof ListItemText> = {
   title: 'Components/List/ListItemText',
   component: ListItemText,
 };
 
-const Template: StoryFn = () => {
+export default meta;
+
+type Story = StoryObj<typeof ListItemText>;
+
+export const Interaction: Story = {
+  args: {
+    primary: 'Text',
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   return (
     <List>
       <ListItem>
@@ -21,11 +36,4 @@ const Template: StoryFn = () => {
       </ListItem>
     </List>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

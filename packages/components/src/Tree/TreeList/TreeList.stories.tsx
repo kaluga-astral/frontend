@@ -3,6 +3,7 @@ import { type Meta } from '@storybook/react';
 
 import { Typography } from '../../Typography';
 import { styled } from '../../styles';
+import { Description } from '../../Description';
 
 import { TreeList, type TreeListProps } from './TreeList';
 
@@ -81,6 +82,31 @@ const FAKE_TREE_LIST_DATA = [
   },
 ];
 
+const FAKE_NOTE_TREE_LIST_DATA = [
+  {
+    id: '1',
+    label: 'Организация 1',
+    note: 'Руководитель',
+    children: [
+      {
+        id: '11',
+        label: 'Подразделение 1.1',
+        note: 'Руководитель',
+      },
+      {
+        id: '12',
+        label: 'Подразделение 1.2',
+        note: 'Руководитель',
+      },
+    ],
+  },
+  {
+    id: '2',
+    label: 'Организация 2',
+    note: 'Руководитель',
+  },
+];
+
 export const Example = () => {
   const [value, setValue] = useState<string | undefined>();
 
@@ -95,29 +121,51 @@ export const Example = () => {
   return <TreeList data={fakeData} value={value} onChange={setValue} />;
 };
 
-const Item = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(1)};
-  align-items: baseline;
-  padding-left: ${({ theme }) => theme.spacing(1)};
-`;
+/**
+ * С помощью `note` можно задавать подзаголовок элементам дерева
+ */
+export const NoteItem = () => {
+  const [value, setValue] = useState<string | undefined>();
+
+  const fakeData = [
+    ...FAKE_NOTE_TREE_LIST_DATA,
+    {
+      id: '3',
+      label: 'Организация 3',
+      note: (
+        <Description>
+          <Description.Name>ИНН</Description.Name>
+          <Description.Value>1234567890</Description.Value>
+        </Description>
+      ),
+    },
+  ];
+
+  return <TreeList data={fakeData} value={value} onChange={setValue} />;
+};
 
 export const RenderItem = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeData = [
-    ...FAKE_TREE_LIST_DATA,
+    ...FAKE_NOTE_TREE_LIST_DATA,
     {
       id: '3',
-      label: 'Item 3',
+      label: 'Организация 3',
     },
   ];
 
-  const renderItem: TreeListProps['renderItem'] = ({ id, label }) => (
-    <Item>
-      <Typography variant="caption">#{id}</Typography>
-      <Typography color="textSecondary">{label}</Typography>
-    </Item>
+  const CustomItem = styled.div`
+    padding-left: ${({ theme }) => theme.spacing(1)};
+  `;
+
+  const renderItem: TreeListProps['renderItem'] = ({ note, label }) => (
+    <CustomItem>
+      <Typography component="div" variant="caption">
+        #{label}
+      </Typography>
+      {note && <Typography variant="h7">{note}</Typography>}
+    </CustomItem>
   );
 
   return (

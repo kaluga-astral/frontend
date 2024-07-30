@@ -5,7 +5,7 @@ import type { TreeListData } from '../../types';
 import type { Value } from '../types';
 
 import { useLogic } from './useLogic';
-import { Label, List } from './styles';
+import { List } from './styles';
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -45,22 +45,18 @@ export type TreeItemProps = TreeListData & {
   onChange?: (value: Value) => void;
 };
 
-const DEFAULT_RENDER_ITEM: TreeItemProps['renderItem'] = ({ label }) => (
-  <Label variant="ui">{label}</Label>
-);
-
 export const TreeItem = ({
   id,
   label,
+  note,
   level,
-  renderItem = DEFAULT_RENDER_ITEM,
+  renderItem,
   children = [],
   value,
   isInitialExpanded,
   expandedLevel,
   disabledItems,
   onChange,
-  ...props
 }: TreeItemProps) => {
   const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
     id,
@@ -75,12 +71,15 @@ export const TreeItem = ({
   if (children.length) {
     return (
       <BaseTreeItem
+        id={id}
         isRoot
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
         component="li"
-        label={renderItem({ id, label, ...props })}
+        label={label}
+        renderItem={renderItem}
+        note={note}
         level={level}
         onClick={handleChange}
       >
@@ -104,13 +103,18 @@ export const TreeItem = ({
   }
 
   return (
-    <BaseTreeItem
-      isSelected={isSelected}
-      isDisabled={isDisabled}
-      component="li"
-      label={renderItem({ id, label, ...props })}
-      level={level}
-      onClick={handleChange}
-    />
+    <>
+      <BaseTreeItem
+        id={id}
+        isSelected={isSelected}
+        isDisabled={isDisabled}
+        component="li"
+        label={label}
+        renderItem={renderItem}
+        note={note}
+        level={level}
+        onClick={handleChange}
+      />
+    </>
   );
 };

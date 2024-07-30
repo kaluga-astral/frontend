@@ -1,4 +1,4 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { mobilePhone, object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
@@ -9,10 +9,12 @@ import { useForm } from '../hooks';
 import { FormMobilePhoneField } from './FormMobilePhoneField';
 import { type FormMobilePhoneFieldValue } from './types';
 
-export default {
+const meta: Meta<typeof FormMobilePhoneField> = {
   title: 'Form/FormMobilePhoneField',
-  component: null,
+  component: FormMobilePhoneField,
 };
+
+export default meta;
 
 const validationSchema = object<FormValues>({
   phoneField: string(mobilePhone()),
@@ -20,7 +22,7 @@ const validationSchema = object<FormValues>({
 
 type FormValues = { phoneField: FormMobilePhoneFieldValue };
 
-const Template: StoryFn = () => {
+export const Example = () => {
   const form = useForm<FormValues>({
     resolver: resolver<FormValues>(validationSchema),
   });
@@ -36,11 +38,4 @@ const Template: StoryFn = () => {
       <FormSubmitButton>Submit</FormSubmitButton>
     </FormStoryContainer>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

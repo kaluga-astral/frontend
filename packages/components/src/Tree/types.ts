@@ -12,6 +12,11 @@ export type TreeListData = {
   label: ReactNode;
 
   /**
+   * Подзаголовок элемента дерева
+   */
+  note?: ReactNode;
+
+  /**
    * Дочерние элементы
    */
   children?: TreeListData[];
