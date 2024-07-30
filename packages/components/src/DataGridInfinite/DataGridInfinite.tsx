@@ -46,7 +46,7 @@ export type DataGridInfiniteProps<
 
 /**
  * @deprecated
- * Используйте NewDateGridInfinite
+ * Используйте NewDateGridInfinite. Причина отказа от поддержки: DataGrid построен на неконтролируемой табличной верстке, которая не поддерживает вложенность
  */
 export const DataGridInfinite = <
   Data extends Record<string, unknown> = DataGridRow,

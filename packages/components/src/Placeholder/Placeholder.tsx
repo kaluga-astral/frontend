@@ -35,7 +35,7 @@ export type PlaceholderProps = {
 
   /**
    * @deprecated
-   * ширина изображения
+   * Ширина изображения. Причина отказа от поддержки: ширина теперь высчитывается на основе prop size
    */
   imgWidth?: string;
 
