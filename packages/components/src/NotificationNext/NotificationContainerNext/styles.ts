@@ -89,6 +89,10 @@ export const Wrapper = styled.div`
       height: 3px;
     }
 
+    ${({ theme }) => theme.breakpoints.down('sm')} {
+      margin-bottom: ${({ theme }) => theme.spacing(3)};
+    }
+
     .Toastify__progress-bar--wrp {
       top: 0;
 
@@ -140,17 +144,20 @@ export const Wrapper = styled.div`
       height: 3px;
     }
   }
+
+  @media only screen and (width <= 480px) {
+    .Toastify__toast-container {
+      width: 100%;
+      padding: ${({ theme }) => theme.spacing(2, 4, 0, 4)};
+    }
+  }
 `;
 
 export const Inner = styled(ToastContainer)`
   min-width: 400px;
   max-width: 400px;
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    width: 100%;
+    min-width: unset;
     max-width: unset;
-
-    @media only screen and (width <= 480px) {
-      margin: 12px;
-    }
   }
 `;
