@@ -8,7 +8,7 @@ import {
 
 import { type StepWizard } from './types';
 
-type StepperWizardProps = Omit<StepperProps, 'children'> & {
+export type StepperWizardProps = Omit<StepperProps, 'children'> & {
   steps: StepWizard[];
 };
 

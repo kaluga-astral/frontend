@@ -231,7 +231,11 @@ export * from './Slide';
 
 export * from './Stepper';
 
-export { StepperWizard, type StepperWizardProps, type  StepWizard } from './StepperWizard';
+export {
+  StepperWizard,
+  type StepperWizardProps,
+  type StepWizard,
+} from './StepperWizard';
 
 export {
   ScrollToTopButton,
