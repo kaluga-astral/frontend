@@ -26,9 +26,9 @@ type Story = StoryObj<typeof StepperWizard>;
 export const Interaction: Story = {
   args: {
     steps: [
-      { label: 'Step 1', isError: false, stepContent: 'Описание для шага 1' },
-      { label: 'Step 2', isError: false, stepContent: 'Описание для шага 2' },
-      { label: 'Step 3', isError: false, stepContent: 'Описание для шага 3' },
+      { label: 'Step 1', isError: false },
+      { label: 'Step 2', isError: false },
+      { label: 'Step 3', isError: false },
     ],
     activeStep: 1,
     orientation: 'vertical',
@@ -51,10 +51,10 @@ export const Example = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps: StepWizard[] = [
-    { label: 'Step 1', stepContent: 'Описание для шага 1' },
-    { label: 'Step 2', stepContent: 'Описание для шага 2' },
-    { label: 'Step 3', stepContent: 'Описание для шага 3' },
-    { label: 'Step 4', stepContent: 'Описание для шага 4' },
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3' },
+    { label: 'Step 4' },
   ];
 
   const handleBack = () => {
@@ -209,42 +209,6 @@ export const Orientation = () => {
         activeStep={activeStep}
         steps={steps}
       />
-    </Grid>
-  );
-};
-
-export const StepContent = () => {
-  const [activeStep, setActiveStep] = useState(0);
-
-  const steps: StepWizard[] = [
-    { label: 'Step 1', stepContent: 'Описание для шага 1' },
-    { label: 'Step 2', stepContent: 'Описание для шага 2' },
-    { label: 'Step 3', stepContent: 'Описание для шага 3' },
-  ];
-
-  const handleBack = () => {
-    if (activeStep !== 0) {
-      setActiveStep((prev) => prev - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (activeStep < 3) {
-      setActiveStep((prev) => prev + 1);
-    }
-  };
-
-  return (
-    <Grid>
-      <StepperWizard activeStep={activeStep} steps={steps} />
-      <ButtonsWrapper>
-        <Button variant="link" onClick={handleBack}>
-          BACK
-        </Button>
-        <Button variant="link" onClick={handleNext}>
-          NEXT
-        </Button>
-      </ButtonsWrapper>
     </Grid>
   );
 };

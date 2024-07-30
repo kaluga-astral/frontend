@@ -15,32 +15,4 @@ describe('StepperWizard', () => {
     expect(screen.getByText('Step1')).toBeVisible();
     expect(screen.getByText('Step2')).toBeVisible();
   });
-
-  it('Контент шага отображается, если шаг активен', () => {
-    renderWithTheme(
-      <StepperWizard
-        activeStep={1}
-        steps={[
-          { label: 'Step1', stepContent: 'Контент шага 1' },
-          { label: 'Step2', stepContent: 'Контент шага 2' },
-        ]}
-      />,
-    );
-
-    expect(screen.getByText('Контент шага 2')).toBeVisible();
-  });
-
-  it('Контент шага не отображается, если шаг не активен', () => {
-    renderWithTheme(
-      <StepperWizard
-        activeStep={1}
-        steps={[
-          { label: 'Step1', stepContent: 'Контент шага 1' },
-          { label: 'Step2', stepContent: 'Контент шага 2' },
-        ]}
-      />,
-    );
-
-    expect(screen.queryByText('Контент шага 1')).not.toBeInTheDocument();
-  });
 });
