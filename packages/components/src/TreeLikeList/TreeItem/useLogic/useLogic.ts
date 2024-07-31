@@ -26,10 +26,9 @@ export const useLogic = ({
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
-  const findItem =
-    disabledItems && disabledItems.find((item) => item.id === id);
-  const isDisabled = !!findItem;
-  const disableReason = findItem?.disableReason;
+  const disabledItem = disabledItems?.find((item) => item.id === id);
+  const isDisabled = Boolean(disabledItem);
+  const disableReason = disabledItem?.disableReason;
 
   const nextLevel = level + 1;
 
