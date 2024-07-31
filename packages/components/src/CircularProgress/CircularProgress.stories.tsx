@@ -1,4 +1,4 @@
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { CircularProgress } from './CircularProgress';
 
@@ -22,6 +22,31 @@ const meta: Meta<typeof CircularProgress> = {
   },
 };
 
+type Story = StoryObj<typeof CircularProgress>;
+
+export const Interaction: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
 export default meta;
 
 export const Example = () => <CircularProgress />;
+
+export const Color = () => (
+  <>
+    <CircularProgress color="primary" />
+    <CircularProgress color="inverted" />
+  </>
+);
+
+export const Size = () => (
+  <>
+    <CircularProgress size="small" />
+    <CircularProgress size="medium" />
+  </>
+);

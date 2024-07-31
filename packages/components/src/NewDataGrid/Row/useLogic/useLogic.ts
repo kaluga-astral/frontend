@@ -1,28 +1,66 @@
-import { type MouseEvent, type SyntheticEvent, useState } from 'react';
+import {
+  type MouseEvent,
+  type SyntheticEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
+import { DataGridContext } from '../../DataGridContext';
+import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
 
-type UseLogicParams<TData extends Record<string, unknown>> = RowProps<TData>;
+import { mergeColumnsOptions } from './utils';
 
-export const useLogic = <TData extends Record<string, unknown>>({
+type UseLogicParams<TData extends Record<string, CellValue>> = RowProps<TData>;
+
+export const useLogic = <TData extends Record<string, CellValue>>({
   keyId,
+  columns,
   row,
+  level,
   activeRowId,
   options,
+  isInitialExpanded = false,
+  expandedLevel,
   isSelectable,
   selectedRows,
   onSelectRow,
   onRowClick,
 }: UseLogicParams<TData>) => {
+  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+
+  const { checkIsOpened, toggleOpenItems } = useContext(DataGridContext);
+
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
   const { isDisabled, disabledReason } = options || {};
 
   const rowId = row[keyId] as string;
+
+  useEffect(() => {
+    if (isDefaultExpanded) {
+      toggleOpenItems(rowId);
+    }
+  }, []);
+
   const isChecked =
     isSelectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
+
+  const isOpen = checkIsOpened(rowId);
+
+  const childrenColumns = useMemo(
+    () => mergeColumnsOptions(columns, options?.childrenColumns),
+    [columns, options],
+  );
+
+  const handleToggle = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    toggleOpenItems(rowId);
+  };
 
   const handleOpenTooltip = (event: SyntheticEvent<Element, Event>) => {
     const element = event.target as HTMLElement;
@@ -57,7 +95,10 @@ export const useLogic = <TData extends Record<string, unknown>>({
   };
 
   return {
-    isDisabled,
+    isOpen,
+    childrenColumns,
+    rowId,
+    handleToggle,
     rowProps: {
       $isHovered: Boolean(!isDisabled && onRowClick),
       $isSelected: activeRowId === rowId,
@@ -74,6 +115,10 @@ export const useLogic = <TData extends Record<string, unknown>>({
       checked: isChecked,
       disabled: isDisabled,
       onChange: onSelectRow(row),
+    },
+    nestedChildrenProps: {
+      isOpen,
+      rowId,
     },
   };
 };

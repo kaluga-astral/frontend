@@ -1,24 +1,28 @@
-import { Typography } from '../../Typography';
 import { styled } from '../../styles';
+import { Typography } from '../../Typography';
 import { alignToJustifyContent } from '../utils';
 import type { AlignVariant } from '../types';
 
 type HeadCellProps = {
   $align?: AlignVariant;
-  $sortable?: boolean;
+  $isSortable?: boolean;
+  $hasStartAdornment?: boolean;
 };
 
 export const Wrapper = styled('div', {
-  shouldForwardProp: (prop) => !['$align', '$sortable'].includes(prop),
+  shouldForwardProp: (prop) =>
+    !['$align', '$isSortable', '$hasStartAdornment'].includes(prop),
 })<HeadCellProps>`
-  cursor: ${({ $sortable }) => ($sortable ? 'pointer' : 'initial')};
+  cursor: ${({ $isSortable }) => ($isSortable ? 'pointer' : 'initial')};
   user-select: none;
 
   display: flex;
   align-items: center;
   justify-content: ${({ $align }) => alignToJustifyContent($align)};
 
-  padding: ${({ theme }) => theme.spacing(3, 2)};
+  height: 40px;
+  padding: ${({ theme, $hasStartAdornment }) =>
+    $hasStartAdornment ? theme.spacing(1, 2, 1, 0) : theme.spacing(1, 2)};
 
   color: ${({ theme }) => theme.palette.grey[700]};
 `;

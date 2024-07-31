@@ -1,4 +1,4 @@
-import { type ElementType } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 import { List as MuiList } from '@mui/material';
 import { PageDotOutlineMd } from '@astral/icons';
 
@@ -10,7 +10,7 @@ export type ListProps = {
     [
       key: string,
       value: {
-        text: string;
+        text: ReactNode;
         active: boolean;
         component: ElementType;
       },

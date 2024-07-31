@@ -35,15 +35,9 @@ export type PlaceholderProps = {
 
   /**
    * @deprecated
-   * ширина изображения
+   * Ширина изображения. Причина отказа от поддержки: ширина теперь высчитывается на основе prop size
    */
   imgWidth?: string;
-
-  /**
-   * @deprecated
-   * высота изображения
-   */
-  imgHeight?: string;
 
   /**
    * Заголовок
@@ -75,7 +69,6 @@ export const Placeholder = ({
   Actions,
   size = 'small',
   imgWidth,
-  imgHeight,
 }: PlaceholderProps) => {
   return (
     <Wrapper $size={size} className={className}>
@@ -85,7 +78,7 @@ export const Placeholder = ({
             src={imgSrc}
             alt={imgAlt}
             width={imgWidth || IMAGE_WIDTH[size]}
-            height={imgHeight || IMAGE_HEIGHT[size]}
+            height={imgWidth ? 'auto' : IMAGE_HEIGHT[size]}
             $size={size}
           />
         )}

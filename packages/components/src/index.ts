@@ -232,6 +232,12 @@ export * from './Slide';
 export * from './Stepper';
 
 export {
+  StepperWizard,
+  type StepperWizardProps,
+  type StepWizard,
+} from './StepperWizard';
+
+export {
   ScrollToTopButton,
   type ScrollToTopButtonProps,
 } from './ScrollToTopButton';
@@ -247,6 +253,8 @@ export * from './Switch';
 export * from './Tab';
 
 export * from './Table';
+
+export { DescriptionCell, type DescriptionCellProps } from './DescriptionCell';
 
 export * from './Tabs';
 

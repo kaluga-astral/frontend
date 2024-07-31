@@ -7,7 +7,8 @@ export type LegacyGridProps = GridContainerProps &
   GridElementsProps & { children?: ReactNode };
 
 /**
- * @description Deprecated
+ * @deprecated
+ * Используйте Grid. Причина отказа от поддержки: нарушение правила использования css prop в рендере компонента
  */
 export const LegacyGrid = forwardRef<HTMLElement, LegacyGridProps>(
   (

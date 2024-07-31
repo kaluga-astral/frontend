@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type Meta } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Grid } from '../Grid';
 import { Button } from '../Button';
@@ -32,7 +32,9 @@ const renderRows = (count: number) => {
 };
 
 /**
- * ### BottomDrawer является основой для построения мобильных компонентов. Не предназначен для прямого использования в продуктах.
+ * BottomDrawer является основой для построения мобильных компонентов. Не предназначен для прямого использования в продуктах.
+ * BottomDrawer используется для реализации адаптива всплывающих элементов. Например, [Dialog](/docs/components-dialog--docs), [Menu]((/docs/components-menu--docs)), [Popover]((/docs/components-popover--docs))....
+ *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=20192-40447&mode=design&t=cmCv26DJElzmOGya-0)
  * ### [Guide]()
  */
@@ -42,6 +44,20 @@ const meta: Meta<typeof BottomDrawer> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof BottomDrawer>;
+
+export const Interaction: Story = {
+  args: {
+    title: 'Заголовок',
+    open: true,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);

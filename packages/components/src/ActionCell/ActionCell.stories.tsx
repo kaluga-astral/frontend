@@ -1,14 +1,21 @@
 import { EyeFillMd, SendOutlineMd } from '@astral/icons';
-import { type StoryFn } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 
 import { DataGrid, type DataGridColumns } from '../DataGrid';
 
 import { ActionCell, type Actions } from './ActionCell';
 
-export default {
+/**
+ * ### [Figma]()
+ * ### [Guide]()
+ */
+
+const meta: Meta<typeof ActionCell> = {
   title: 'Components/ActionCell',
   component: ActionCell,
 };
+
+export default meta;
 
 type DataType = {
   id: string;
@@ -54,6 +61,11 @@ const ACTIONS: Actions<DataType> = {
   secondary: SECONDARY_ACTIONS,
 };
 
+const INTERACTION_ACTIONS: Actions<unknown> = {
+  main: MAIN_ACTIONS,
+  secondary: SECONDARY_ACTIONS,
+};
+
 const ACTIONS_WITHOUT_SECONDARY: Actions<DataType> = {
   main: MAIN_ACTIONS,
 };
@@ -76,7 +88,20 @@ const data = [
   },
 ];
 
-const Template: StoryFn = (args) => {
+type Story = StoryObj<typeof ActionCell>;
+
+export const Interaction: Story = {
+  args: {
+    actions: INTERACTION_ACTIONS,
+  },
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+};
+
+export const Example = () => {
   const columns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
@@ -93,17 +118,11 @@ const Template: StoryFn = (args) => {
   ];
 
   return (
-    <DataGrid
-      {...args}
-      rows={data}
-      columns={columns}
-      keyId="id"
-      onSort={() => {}}
-    />
+    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
   );
 };
 
-export const OnlyMainActions: StoryFn = (args) => {
+export const OnlyMainActions = () => {
   const columns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
@@ -122,19 +141,6 @@ export const OnlyMainActions: StoryFn = (args) => {
   ];
 
   return (
-    <DataGrid
-      {...args}
-      rows={data}
-      columns={columns}
-      keyId="id"
-      onSort={() => {}}
-    />
+    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  options: { showPanel: true },
-  controls: { expanded: true },
 };

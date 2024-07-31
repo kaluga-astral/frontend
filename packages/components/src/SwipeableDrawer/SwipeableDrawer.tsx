@@ -39,7 +39,7 @@ export type SwipeableDrawerProps = {
 } & WithoutEmotionSpecific<MuiSwipeableDrawerProps>;
 
 /**
-  @deprecated
+  @deprecated Используйте BottomDrawer. Причина отказа от поддержки: сложный UI/UX с крайними кейсами
  */
 export const SwipeableDrawer = ({
   drawerBleedingTitle,

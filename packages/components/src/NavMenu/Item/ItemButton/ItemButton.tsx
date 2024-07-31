@@ -1,4 +1,9 @@
-import { type ElementType, type ReactElement, forwardRef } from 'react';
+import {
+  type ElementType,
+  type ReactElement,
+  type ReactNode,
+  forwardRef,
+} from 'react';
 
 import { useViewportType } from '../../../hooks/useViewportType';
 import { type ListItemTextProps } from '../../../ListItemText';
@@ -16,7 +21,7 @@ export type NavMenuItemButtonProps = {
   opened?: boolean;
   collapsedIn: boolean;
   selected?: boolean;
-  text: string;
+  text: ReactNode;
   icon: ReactElement;
   component?: ElementType;
   onClick?: () => void;

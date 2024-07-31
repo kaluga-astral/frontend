@@ -1,19 +1,21 @@
-import { type StoryFn } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import { Box, Popper } from '@mui/material';
 import { useRef, useState } from 'react';
 
-import { Typography } from '../Typography';
 import { Button } from '../Button';
-import { ExampleTemplate } from '../docs/ExampleTemplate';
-import { LegacyGrid } from '../LegacyGrid';
 
 import { ClickAwayListener } from './ClickAwayListener';
 
-export default {
+/**
+ * Абстрактный компонент, предназначенный для отлавливания кликов снаружи кастомных компонентов. Для более узких кейсов, где требуется управление рефом, используйте хук useClickAwayEffect
+ */
+const meta: Meta<typeof ClickAwayListener> = {
   title: 'Components/ClickAwayListener',
 };
 
-const Template: StoryFn<{}> = () => {
+export default meta;
+
+export const Example = () => {
   const [isActive, setActive] = useState(false);
 
   const ref = useRef(null);
@@ -23,55 +25,36 @@ const Template: StoryFn<{}> = () => {
   };
 
   return (
-    <ExampleTemplate>
-      <Typography variant="h3">ClickAwayListener</Typography>
-      <Typography paragraph>
-        Абстрактный компонент, предназначенный для отлавливания кликов снаружи
-        кастомных компонентов. Для более узких кейсов, где требуется управление
-        рефом, используйте хук useClickAwayEffect
-      </Typography>
-
-      <ExampleTemplate.Case title="Пример">
-        <LegacyGrid container justifyContent="center">
-          <ClickAwayListener onClickAway={handleClickAway} isActive={isActive}>
-            <div>
-              <Button ref={ref} onClick={() => setActive(true)}>
-                открыть поппер
-              </Button>
-              <Popper
-                open={isActive}
-                anchorEl={ref?.current}
-                placement="bottom-start"
-                disablePortal
-                modifiers={[
-                  {
-                    name: 'offset',
-                    options: {
-                      offset: [0, 8],
-                    },
-                  },
-                ]}
-              >
-                <Box
-                  padding={4}
-                  maxWidth={300}
-                  borderRadius={3}
-                  border="1px solid black"
-                >
-                  Клик внутри родителя поппера и кнопки не закроет поппер, а
-                  клик снаружи закроет его
-                </Box>
-              </Popper>
-            </div>
-          </ClickAwayListener>
-        </LegacyGrid>
-      </ExampleTemplate.Case>
-    </ExampleTemplate>
+    <ClickAwayListener onClickAway={handleClickAway} isActive={isActive}>
+      <div>
+        <Button ref={ref} onClick={() => setActive(true)}>
+          открыть поппер
+        </Button>
+        <Popper
+          open={isActive}
+          anchorEl={ref?.current}
+          placement="right"
+          disablePortal
+          modifiers={[
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 8],
+              },
+            },
+          ]}
+        >
+          <Box
+            padding={4}
+            maxWidth={300}
+            borderRadius={3}
+            border="1px solid black"
+          >
+            Клик внутри родителя поппера и кнопки не закроет поппер, а клик
+            снаружи закроет его
+          </Box>
+        </Popper>
+      </div>
+    </ClickAwayListener>
   );
-};
-
-export const Default = Template.bind({});
-
-Default.parameters = {
-  controls: { expanded: true },
 };
