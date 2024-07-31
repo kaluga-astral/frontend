@@ -1,19 +1,19 @@
 import { type ChangeEvent, useCallback, useMemo, useRef } from 'react';
 import type { ListRange, VirtuosoHandle } from 'react-virtuoso';
 
-import { prop, uniqBy } from '../../utils';
+import { prop, uniqueBy } from '../../utils';
 import { useToggle } from '../../hooks';
 import { getGridTemplateColumns } from '../../NewDataGrid/useLogic/utils';
-import type { DataGridRow } from '../../NewDataGrid';
+import type { CellValue, DataGridRow } from '../../NewDataGrid';
 import { type NewDataGridInfiniteProps } from '../NewDataGridInfinite';
 
 type UseLogicParams<
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = NewDataGridInfiniteProps<TData, TSortField>;
 
 export const useLogic = <
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >({
   keyId,
@@ -37,7 +37,7 @@ export const useLogic = <
 
   const availableRows = rows.filter((row) => !row.options?.isDisabled);
 
-  const gridColumns = getGridTemplateColumns(columns, isSelectable);
+  const gridColumns = getGridTemplateColumns(columns);
 
   const handleEndReach = useCallback(() => {
     if (!isEndReached && onEndReached) {
@@ -71,12 +71,12 @@ export const useLogic = <
     }
 
     if (event.target.checked) {
-      const mergedSelectedRows = uniqBy(
+      const mergedSelectedRows = uniqueBy(
         [...selectedRows, ...availableRows],
         prop(keyId),
       );
 
-      onSelectRow(mergedSelectedRows);
+      return onSelectRow(mergedSelectedRows);
     }
 
     const filteredRows = selectedRows.filter(

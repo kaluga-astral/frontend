@@ -2,13 +2,18 @@ import { type ChangeEvent, useMemo } from 'react';
 
 import { Checkbox } from '../../Checkbox';
 import { HeadCell } from '../HeadCell';
-import type { DataGridColumns, DataGridRow, DataGridSort } from '../types';
+import type {
+  CellValue,
+  DataGridColumns,
+  DataGridRow,
+  DataGridSort,
+} from '../types';
 
 import { useLogic } from './useLogic';
 import { CheckboxCell, Wrapper } from './styles';
 
 export type HeadProps<
-  TData extends object = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = {
   /**
@@ -52,36 +57,54 @@ export type HeadProps<
   onSort?: (sorting: DataGridSort<TSortField> | undefined) => void;
 };
 
-export const Head = <TData extends object, TSortField extends keyof TData>(
+export const Head = <
+  TData extends Record<string, CellValue>,
+  TSortField extends keyof TData,
+>(
   props: HeadProps<TData, TSortField>,
 ) => {
-  const { handleSort, checkboxProps } = useLogic(props);
+  const { checkboxProps, handleSort } = useLogic(props);
 
   const { columns, gridColumns, isSelectable, sorting, onSelectAllRows } =
     props;
 
   const renderColumns = useMemo(() => {
-    return columns.map(({ field, label, sortable, align }) => (
-      <HeadCell<TData, TSortField>
-        key={label}
-        sorting={sorting}
-        field={field}
-        label={label}
-        sortable={sortable}
-        align={align}
-        onSort={handleSort}
-      />
-    ));
-  }, [columns, handleSort, sorting]);
+    return columns.map(({ field, label, sortable, align }, index) => {
+      const isFirstCell = !Boolean(index);
 
-  return (
-    <Wrapper $gridColumns={gridColumns}>
-      {isSelectable && (
-        <CheckboxCell>
-          <Checkbox {...checkboxProps} onChange={onSelectAllRows} />
-        </CheckboxCell>
-      )}
-      {renderColumns}
-    </Wrapper>
-  );
+      const startAdornmentRender = () => {
+        if (!isFirstCell || !isSelectable) {
+          return null;
+        }
+
+        return (
+          <CheckboxCell>
+            <Checkbox {...checkboxProps} onChange={onSelectAllRows} />
+          </CheckboxCell>
+        );
+      };
+
+      return (
+        <HeadCell<TData, TSortField>
+          key={label}
+          sorting={sorting}
+          field={field}
+          label={label}
+          isSortable={sortable}
+          align={align}
+          startAdornment={startAdornmentRender()}
+          onSort={handleSort}
+        />
+      );
+    });
+  }, [
+    columns,
+    sorting,
+    isSelectable,
+    checkboxProps,
+    onSelectAllRows,
+    handleSort,
+  ]);
+
+  return <Wrapper $gridColumns={gridColumns}>{renderColumns}</Wrapper>;
 };

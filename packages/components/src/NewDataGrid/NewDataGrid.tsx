@@ -1,5 +1,10 @@
 import { type ReactNode, useCallback } from 'react';
 
+import {
+  EXPANDED_LEVEL_BY_DEFAULT,
+  INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  MIN_DISPLAY_ROWS_BY_DEFAULT,
+} from './constants';
 import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
@@ -7,14 +12,15 @@ import { Loader } from './Loader';
 import { NoData } from './NoData';
 import { Container, DataGridWrapper, DisabledDataGridWrapper } from './styles';
 import type {
+  CellValue,
   DataGridColumns,
   DataGridRow,
-  DataGridRowOptions,
+  DataGridRowWithOptions,
   DataGridSort,
 } from './types';
 
 export type NewDataGridProps<
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = {
   /**
@@ -25,7 +31,7 @@ export type NewDataGridProps<
   /**
    * Массив данных для таблицы
    */
-  rows: Array<TData & { options?: DataGridRowOptions }>;
+  rows: DataGridRowWithOptions<TData>[];
 
   /**
    * @example <DataGrid columns={[
@@ -63,7 +69,7 @@ export type NewDataGridProps<
   /**
    * Компонент кастомного футера (например Pagination)
    */
-  Footer?: ReactNode;
+  footer?: ReactNode;
 
   /**
    *  Используется для отображения placeholder при отсутствии данных в таблице
@@ -94,6 +100,29 @@ export type NewDataGridProps<
    * Текст ошибки
    */
   errorMsg?: string;
+
+  /**
+   * Опции для отображения древовидных списков
+   */
+  tree?: {
+    /**
+     * Если true, то дерево будет раскрыто по умолчанию
+     * @default 'false'
+     */
+    isInitialExpanded?: boolean;
+
+    /**
+     * Уровень раскрытия дерева по умолчанию, при `isInitialExpanded=true`
+     * @default '1'
+     */
+    expandedLevel?: number;
+
+    /**
+     * Количество отображаемых по умолчанию дочерних элементов
+     * @default '2'
+     */
+    initialVisibleChildrenCount?: number;
+  };
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
@@ -130,7 +159,7 @@ export type NewDataGridProps<
 };
 
 export const NewDataGrid = <
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >(
   props: NewDataGridProps<TData, TSortField>,
@@ -144,12 +173,13 @@ export const NewDataGrid = <
     selectedRows = [],
     sorting,
     maxHeight,
-    minDisplayRows = 10,
+    minDisplayRows = MIN_DISPLAY_ROWS_BY_DEFAULT,
     errorMsg,
-    Footer,
+    footer,
     noDataPlaceholder,
     isLoading,
     isError,
+    tree,
     keyId,
     activeRowId,
     emptyCellValue,
@@ -158,6 +188,12 @@ export const NewDataGrid = <
     onSort,
     onRetry,
   } = props;
+
+  const {
+    isInitialExpanded = false,
+    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
+    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  } = tree || {};
 
   const TableContainer = isDataGridDisabled
     ? DisabledDataGridWrapper
@@ -189,6 +225,9 @@ export const NewDataGrid = <
           rows={rows}
           columns={columns}
           emptyCellValue={emptyCellValue}
+          isInitialExpanded={isInitialExpanded}
+          expandedLevel={expandedLevel}
+          initialVisibleChildrenCount={initialVisibleChildrenCount}
           isLoading={isLoading}
           isError={isError}
           errorMsg={errorMsg}
@@ -200,7 +239,7 @@ export const NewDataGrid = <
 
       <Loader {...loaderProps} />
 
-      {Footer}
+      {footer && footer}
     </Container>
   );
 };

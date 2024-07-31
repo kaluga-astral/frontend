@@ -212,7 +212,7 @@ export default meta;
 const Wrapper = styled.div`
   width: 100%;
   padding-block: ${({ theme }) => theme.spacing(5)};
-  
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
     min-height: 48px;
     padding-top: ${({ theme }) => theme.spacing(4)};

@@ -1,23 +1,43 @@
-import { type ChangeEvent, type ReactNode } from 'react';
+import { type ChangeEvent, type ReactNode, useCallback } from 'react';
 
 import { Checkbox } from '../../Checkbox';
 import { Tooltip } from '../../Tooltip';
-import type { DataGridRowOptions } from '../types';
+import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
+import { checkIsDisabled } from './utils';
 import { useLogic } from './useLogic';
 import { DISABLE_ROW_ATTR } from './constants';
-import { CheckboxCell, Wrapper } from './styles';
+import { NestedChildren } from './NestedChildren';
+import {
+  CellStyled,
+  CheckboxCell,
+  ChevronIcon,
+  CollapseButton,
+  CollapseCell,
+  ContentWrapper,
+  Wrapper,
+} from './styles';
 
-export type RowProps<TData extends Record<string, unknown>> = {
+export type RowProps<TData extends Record<string, CellValue>> = {
+  /**
+   * Название класса, применяется к корневому компоненту
+   */
+  className?: string;
+
   /**
    * Поле, которое будет использоваться в качестве ключа
    */
   keyId: keyof TData;
 
   /**
-   * Массив данных для отображения
+   * Данные строки для отображения
    */
   row: TData;
+
+  /**
+   * Конфигурация колонок для таблицы
+   */
+  columns: DataGridColumns<TData>[];
 
   /**
    * Конфигурация ширины колонок
@@ -25,9 +45,34 @@ export type RowProps<TData extends Record<string, unknown>> = {
   gridColumns: string;
 
   /**
+   * Уровень вложенности в дереве
+   */
+  level: number;
+
+  /**
+   * Вложенные элементы
+   */
+  nestedChildren: Array<TData & { options?: DataGridRowOptions<TData> }>;
+
+  /**
    * Идентификатор активного элемента массива rows. Выделяет активную строку в таблице
    */
   activeRowId?: string;
+
+  /**
+   * Если true, то дерево будет раскрыто по умолчанию
+   */
+  isInitialExpanded: boolean;
+
+  /**
+   * Уровень раскрытия дерева по умолчанию, при isInitialExpanded=true
+   */
+  expandedLevel: number;
+
+  /**
+   * Количество отображаемых по умолчанию дочерних элементов
+   */
+  initialVisibleChildrenCount: number;
 
   /**
    * Если true, то будет отображаться чекбокс для выбора элемента
@@ -40,14 +85,15 @@ export type RowProps<TData extends Record<string, unknown>> = {
   selectedRows?: Array<TData>;
 
   /**
-   * Дополнительные настройки строки
+   * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
+   * @default '-'
    */
-  options?: DataGridRowOptions;
+  emptyCellValue?: ReactNode;
 
   /**
-   * Содержимое строки
+   * Дополнительные настройки строки
    */
-  children: ReactNode;
+  options?: DataGridRowOptions<TData>;
 
   /**
    * Обработчик выбора строки
@@ -60,20 +106,60 @@ export type RowProps<TData extends Record<string, unknown>> = {
   onRowClick?: (row: TData) => void;
 };
 
-export const Row = <TData extends Record<string, unknown>>(
+export const Row = <TData extends Record<string, CellValue>>(
   props: RowProps<TData>,
 ) => {
-  const { isDisabled, checkboxProps, rowProps, tooltipProps } = useLogic(props);
+  const {
+    isOpen,
+    childrenColumns,
+    rowId,
+    handleToggle,
+    checkboxProps,
+    rowProps,
+    tooltipProps,
+    nestedChildrenProps,
+  } = useLogic(props);
 
-  const { isSelectable, gridColumns, children } = props;
+  const {
+    className,
+    row,
+    options,
+    isSelectable,
+    gridColumns,
+    isInitialExpanded,
+    expandedLevel,
+    level,
+    nestedChildren,
+    initialVisibleChildrenCount,
+    columns,
+    emptyCellValue,
+    selectedRows,
+    activeRowId,
+    keyId,
+    onSelectRow,
+    onRowClick,
+    // В этот rest-оператор попадают специфичные пропсы (атрибуты) virtuoso
+    // Необходимы для NewDataGrigInfinite
+    ...selfProps
+  } = props;
 
-  return (
-    <Tooltip followCursor arrow={false} {...tooltipProps}>
-      <Wrapper
-        $gridColumns={gridColumns}
-        {...{ [DISABLE_ROW_ATTR]: isDisabled }}
-        {...rowProps}
-      >
+  const { isDisabled, isDisabledLastCell = true } = options || {};
+
+  const renderStartAdornment = () => {
+    if (!nestedChildren?.length && !isSelectable) {
+      return null;
+    }
+
+    return (
+      <>
+        {nestedChildren?.length && (
+          <CollapseCell>
+            <CollapseButton variant="text" onClick={handleToggle}>
+              <ChevronIcon $isActive={isOpen} />
+            </CollapseButton>
+          </CollapseCell>
+        )}
+
         {isSelectable && (
           <CheckboxCell
             {...{ inert: isDisabled ? '' : undefined }}
@@ -82,8 +168,106 @@ export const Row = <TData extends Record<string, unknown>>(
             <Checkbox {...checkboxProps} />
           </CheckboxCell>
         )}
-        {children}
-      </Wrapper>
-    </Tooltip>
+      </>
+    );
+  };
+
+  const renderCells = useCallback(() => {
+    const availableCellsByIndex = !isDisabledLastCell
+      ? [columns.length - 1]
+      : undefined;
+
+    return columns?.map((cell, index) => {
+      const cellId = `${rowId}-${index}`;
+
+      const isDisabledCell = checkIsDisabled(
+        isDisabled,
+        availableCellsByIndex,
+        index,
+      );
+
+      const isFirstCell = !Boolean(index);
+
+      return (
+        <CellStyled
+          key={cellId}
+          $level={isFirstCell ? level : 0}
+          row={row}
+          cell={cell as DataGridColumns<Record<string, CellValue>>}
+          emptyCellValue={emptyCellValue}
+          startAdornment={isFirstCell && renderStartAdornment()}
+          isDisabled={isDisabledCell}
+        />
+      );
+    });
+  }, [isOpen, columns]);
+
+  const renderRow = useCallback(
+    ({
+      key,
+      ...nestedRowProps
+    }: { key: string } & Pick<
+      RowProps<TData>,
+      'row' | 'options' | 'nestedChildren' | 'level' | 'className'
+    >) => (
+      <Row<TData>
+        key={key}
+        keyId={keyId}
+        {...nestedRowProps}
+        isSelectable={isSelectable}
+        selectedRows={selectedRows}
+        gridColumns={gridColumns}
+        isInitialExpanded={isInitialExpanded}
+        expandedLevel={expandedLevel}
+        initialVisibleChildrenCount={initialVisibleChildrenCount}
+        activeRowId={activeRowId}
+        columns={childrenColumns}
+        onSelectRow={onSelectRow}
+        onRowClick={onRowClick}
+      />
+    ),
+    [
+      keyId,
+      isSelectable,
+      selectedRows,
+      gridColumns,
+      isInitialExpanded,
+      expandedLevel,
+      initialVisibleChildrenCount,
+      activeRowId,
+      childrenColumns,
+      onSelectRow,
+      onRowClick,
+    ],
+  );
+
+  return (
+    <Wrapper
+      $level={level}
+      $gridColumns={gridColumns}
+      className={className}
+      {...selfProps}
+    >
+      <Tooltip followCursor arrow={false} {...tooltipProps}>
+        <ContentWrapper
+          $level={level}
+          $gridColumns={gridColumns}
+          {...{ [DISABLE_ROW_ATTR]: isDisabled }}
+          {...rowProps}
+        >
+          {renderCells()}
+        </ContentWrapper>
+      </Tooltip>
+
+      <NestedChildren
+        {...nestedChildrenProps}
+        data={nestedChildren as Array<TData>}
+        keyId={keyId as string}
+        level={level}
+        initialVisibleChildrenCount={initialVisibleChildrenCount}
+        // @ts-ignore
+        renderRow={renderRow}
+      />
+    </Wrapper>
   );
 };
