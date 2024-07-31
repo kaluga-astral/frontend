@@ -927,6 +927,64 @@ export const TreeWithCheckbox = () => {
 };
 
 /**
+ * Указав значение `isNotSelectable` в `options` можно сделать строку не доступной для выбора
+ */
+export const TreeWithOptionIsNotSelectable = () => {
+  const columns = makeColumns(FAKE_COLUMNS);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Пакет документов',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        isNotSelectable: true,
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Договор №12345678',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+        },
+      ],
+    },
+    ...makeDataListWithTree(9, {
+      isNotSelectable: true,
+    }),
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  return (
+    <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
  * `options` и `childrenColumns` на уровне строки, позволяет настраивать отображение дочерних элементов,
  *  например указать кастомный список действий для вложенных элементов
  */
