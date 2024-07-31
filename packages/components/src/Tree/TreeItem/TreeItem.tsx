@@ -88,33 +88,29 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   isDefaultExpanded?: boolean;
 
   /**
-   * Функция, которая запускается при нажатии на элемента списка.
+   * Функция, которая запускается при нажатии на элемент списка.
    */
   onClick?: () => void;
 } & Omit<ComponentProps<TComponent>, ''>;
 
-export const TreeItem = ({
-  id,
-  label,
-  note,
-  renderItem,
-  children,
-  className,
-  isSelected,
-  isDisabled = false,
-  disableReason,
-  isDefaultExpanded = false,
-  isNotBlockingExpandList = false,
-  level = 0,
-  component = 'div',
-  onClick,
-  ...props
-}: TreeItemProps) => {
-  const { isOpen, handleToggle, handleClick } = useLogic({
-    isDefaultExpanded,
+export const TreeItem = (props: TreeItemProps) => {
+  const {
+    id,
+    label,
+    note,
+    renderItem,
+    children,
+    className,
+    isSelected,
+    isDisabled = false,
+    disableReason,
+    isNotBlockingExpandList = false,
+    level = 0,
+    component = 'div',
     onClick,
-    isDisabled,
-  });
+    ...restProps
+  } = props;
+  const { isOpen, handleToggle, handleClick, tooltipProps } = useLogic(props);
 
   const renderCollapseButton = () => (
     <CollapseButton
@@ -129,18 +125,14 @@ export const TreeItem = ({
 
   if (children) {
     return (
-      <Item {...props} $level={level} as={component} className={className}>
+      <Item {...restProps} $level={level} as={component} className={className}>
         <ItemContent
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
           onClick={handleClick}
         >
-          <Tooltip
-            title={isDisabled && disableReason}
-            placement={TOOLTIP_PLACEMENT}
-            withoutContainer={!isDisabled}
-          >
+          <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
             {renderItem ? (
               <LabelWrapper $level={level}>
                 {renderCollapseButton()}
@@ -172,18 +164,14 @@ export const TreeItem = ({
   }
 
   return (
-    <Item {...props} $level={level} as={component} className={className}>
+    <Item {...restProps} $level={level} as={component} className={className}>
       <ItemContent
         $isSelected={isSelected}
         $isDisabled={isDisabled}
         $level={level}
         onClick={handleClick}
       >
-        <Tooltip
-          title={isDisabled && disableReason}
-          placement={TOOLTIP_PLACEMENT}
-          withoutContainer={!isDisabled}
-        >
+        <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
           {renderItem ? (
             <LabelWrapper $level={level}>
               {renderItem({ label, note, id })}

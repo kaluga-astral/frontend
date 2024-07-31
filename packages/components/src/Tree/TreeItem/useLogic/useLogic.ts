@@ -1,15 +1,14 @@
 import { type MouseEvent, useState } from 'react';
 
-type UseLogicProps = {
-  isDefaultExpanded: boolean;
-  onClick?: () => void;
-  isDisabled: boolean;
-};
+import { type TreeItemProps } from '../TreeItem';
+
+type UseLogicProps = TreeItemProps;
 
 export const useLogic = ({
-  isDefaultExpanded,
+  isDefaultExpanded = false,
   onClick,
   isDisabled,
+  disableReason,
 }: UseLogicProps) => {
   const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
 
@@ -27,9 +26,15 @@ export const useLogic = ({
     setOpen((currentState) => !currentState);
   };
 
+  const tooltipProps = {
+    title: disableReason,
+    withoutContainer: !isDisabled,
+  };
+
   return {
     isOpen,
     handleToggle,
     handleClick,
+    tooltipProps,
   };
 };

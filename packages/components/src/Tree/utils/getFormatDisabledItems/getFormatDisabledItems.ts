@@ -1,6 +1,6 @@
 import { type DisabledItemValue } from '../../TreeList/types';
 
-export type FormatDisableItem = { id: string; disableReason?: string };
+type FormatDisableItem = { id: string; disableReason?: string };
 
 export const getFormatDisabledItems = (
   disabledItems: Array<DisabledItemValue> | null | undefined,
