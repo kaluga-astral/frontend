@@ -36,16 +36,6 @@ const leaveInMobile = keyframes`
   }
 `;
 
-const leaveOutMobile = keyframes`
-  from{
-    transform: translateY(0px);
-  }
-  to{
-    transform: translateY(-100%);
-    visibility: hidden;
-  }
-`;
-
 // используем дополнительный враппер,
 // потому что styled для ToastContainer не умеет работать с theme внутри
 // использовать бэм классы для стилизации пришлось,
@@ -66,7 +56,7 @@ export const Wrapper = styled.div`
     animation: ${leaveOut} ease-in-out 0.34s;
     animation-fill-mode: both;
     ${({ theme }) => theme.breakpoints.down('sm')} {
-      animation: ${leaveOutMobile} ease-in-out 0.34s;
+      animation: ${leaveOut} ease-in-out 0.34s;
       animation-fill-mode: both;
     }
   }
