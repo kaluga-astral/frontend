@@ -8,17 +8,21 @@ type UseLogicParams<
 
 export const useLogic = <TData, TSortField extends keyof TData>({
   field,
-  sortable,
+  isSortable,
+  startAdornment,
   onSort,
 }: UseLogicParams<TData, TSortField>) => {
+  const hasStartAdornment = Boolean(startAdornment);
+
   const handleSortClick = () => {
-    if (field && sortable) {
+    if (field && isSortable) {
       onSort(field as TSortField);
     }
   };
 
   return {
     wrapperProps: {
+      $hasStartAdornment: hasStartAdornment,
       onClick: handleSortClick,
     },
   };

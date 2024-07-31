@@ -371,6 +371,62 @@ export const Ellipsis = () => (
 
 ---
 
+### Фейковые данные для использования в story
+
+#### Подготовка данных
+
+В stories необходимо использовать фейковые данные для демонстрации кейсов.
+
+Для подготовки набора данных необходимо использовать методы для генерации фейковых данных.
+[Пример](https://github.com/kaluga-astral/frontend/blob/main/packages/components/src/NewDataGridInfinite/faker.ts):
+- Методы для генерации фейковых данных должны находится в файле `faker.ts`
+
+#### Коллекции
+
+При использовании фейковых коллекций внутри story необходимо вручную описывать первый элемент массива:
+```tsx
+export const LoadingWithData = () => {
+  const columns: DataGridColumns<DataItem>  = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    ...FAKE_COLUMNS,
+  ];
+  const data: DataGridRowWithOptions<DataItem> = [
+    {
+      id: '1',
+      documentName: 'Договор 1'
+    },
+    ...makeDataList(9),
+  ];
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataItem, SortField>
+          keyId="id"
+          rows={data}
+          isLoading
+          columns={columns}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+```
+
+Данное правило позволяет улучшить UX чтения документации - разработчик видит какой тип данных принимает компонент.
+
+---
+
 # Тестирование
 
 Тесты в проекте пишутся с использованием vitest и react-testing-library.
