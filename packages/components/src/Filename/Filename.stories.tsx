@@ -96,7 +96,7 @@ const generateRandomDate = () => {
 
 const generateData = (
   dataObjTemplate: DataType,
-  options?: DataGridRowOptions,
+  options?: DataGridRowOptions<DataType>,
 ): DataType[] => {
   const DIRECTIONS = ['ФНС', 'ФСС', 'ПФР', 'РПН'];
   const DATA_ARRAY_LENGTH = 16;

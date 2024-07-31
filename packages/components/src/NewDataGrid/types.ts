@@ -4,14 +4,11 @@ import type { SortStates } from './enums';
 
 export type AlignVariant = 'left' | 'center' | 'right';
 
-export type CellValue = string | number | boolean | Date | undefined | object;
-
 export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DataGridRow = Record<string, any>;
+export type CellValue = unknown;
 
 export type DataGridSort<TSortField> = {
   /**
@@ -27,7 +24,7 @@ export type DataGridSort<TSortField> = {
   sort: SortState;
 };
 
-export type DataGridColumns<TData extends object> = {
+export type DataGridColumns<TData extends Record<string, CellValue>> = {
   /**
    * @example {field: 'test'}
    * Значение ключа поля данных для колонки
@@ -70,7 +67,20 @@ export type DataGridColumns<TData extends object> = {
   width?: CSSProperties['width'];
 };
 
-export type DataGridRowOptions = {
+export type DataGridRowOptionColumns<TData extends Record<string, CellValue>> =
+  {
+    /**
+     * Значение ключа поля данных для колонки
+     */
+    field: keyof TData;
+
+    /**
+     * Кастомное отображение ячеек для колонки
+     */
+    renderCell?: RenderCell<TData>;
+  };
+
+export type DataGridRowOptions<TData extends Record<string, CellValue>> = {
   /**
    * Если true, строка будет недоступна для взаимодействия
    */
@@ -86,4 +96,16 @@ export type DataGridRowOptions = {
    * Причина блокировки строки
    */
   disabledReason?: string;
+
+  /**
+   * Настройка отображения колонок дочерних элементов
+   */
+  childrenColumns?: DataGridRowOptionColumns<TData>[];
+};
+
+export type DataGridRow = Record<string, CellValue>;
+
+export type DataGridRowWithOptions<TData extends DataGridRow> = TData & {
+  options?: DataGridRowOptions<TData>;
+  children?: DataGridRowWithOptions<TData>[];
 };

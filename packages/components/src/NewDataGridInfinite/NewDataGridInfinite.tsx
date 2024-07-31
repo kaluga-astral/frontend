@@ -1,33 +1,39 @@
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 import { CircularProgress } from '../CircularProgress';
-import { checkIsDisabled } from '../NewDataGrid/Body/utils';
 import {
+  type CellValue,
   Container,
   type DataGridRow,
-  type DataGridRowOptions,
+  EXPANDED_LEVEL_BY_DEFAULT,
+  INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
   type NewDataGridProps,
 } from '../NewDataGrid';
+import { DataGridContextProvider } from '../NewDataGrid/DataGridContext';
 import { Head } from '../NewDataGrid/Head';
 import { Row } from '../NewDataGrid/Row';
-import { Cell } from '../NewDataGrid/Cell';
 import { ScrollToTopButton } from '../ScrollToTopButton';
 
-import { DEFAULT_ROW_HEIGHT, OVERSCAN_COUNT } from './constants';
+import { OVERSCAN_COUNT } from './constants';
 import { useLogic } from './useLogic';
 import { List } from './List';
 import { EndData } from './EndData';
 import { Error } from './Error';
 import { NoData } from './NoData';
-import { DataGridWrapper, FooterRow } from './styles';
+import {
+  Backdrop,
+  DataGridWrapper,
+  DisabledDataGridWrapper,
+  FooterRow,
+} from './styles';
 
 export type NewDataGridInfiniteProps<
-  TData extends Record<string, unknown>,
+  TData extends Record<string, CellValue>,
   TSortField extends keyof TData,
-> = Omit<NewDataGridProps<TData, TSortField>, 'Footer' | 'minDisplayRows'> & {
+> = Omit<NewDataGridProps<TData, TSortField>, 'footer' | 'minDisplayRows'> & {
   /**
    * Флаг достижения конца списка
    */
@@ -44,8 +50,10 @@ export type NewDataGridInfiniteProps<
   onEndReached?: () => void;
 };
 
+const INITIAL_LEVEL = 0;
+
 export const NewDataGridInfinite = <
-  TData extends Record<string, unknown> = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >(
   props: NewDataGridInfiniteProps<TData, TSortField>,
@@ -68,123 +76,107 @@ export const NewDataGridInfinite = <
     selectedRows = [],
     sorting,
     maxHeight,
-    onRowClick,
     isLoading,
     isDisabled,
-    onSort,
     keyId,
     activeRowId,
     emptyCellValue,
+    tree,
     className,
     isEndReached,
     isError,
     endOfScrollMsg,
     errorMsg,
     noDataPlaceholder,
+    onRowClick,
+    onSort,
     onRetry,
   } = props;
 
-  const renderCells = useCallback(
-    (row: TData, rowId: string, options?: DataGridRowOptions) => {
-      const { isDisabledLastCell = true } = options || {};
+  const {
+    isInitialExpanded = false,
+    expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
+    initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
+  } = tree || {};
 
-      const availableCellsByIndex = !isDisabledLastCell
-        ? [columns.length - 1]
-        : undefined;
-
-      return columns.map((cell, index) => {
-        const cellId = `${rowId}-${index}`;
-
-        const isDisabledCell = checkIsDisabled(
-          isDisabled,
-          availableCellsByIndex,
-          index,
-        );
-
-        return (
-          <Cell<TData>
-            key={cellId}
-            row={row}
-            cell={cell}
-            emptyCellValue={emptyCellValue}
-            isDisabled={isDisabledCell}
-          />
-        );
-      });
-    },
-    [columns],
-  );
+  const TableContainer = isDisabled ? DisabledDataGridWrapper : DataGridWrapper;
 
   return (
-    <Container $maxHeight={maxHeight} className={className}>
-      <DataGridWrapper {...{ inert: isDataGridDisabled ? '' : undefined }}>
-        <Head<TData, TSortField>
-          {...headProps}
-          onSort={onSort}
-          rowsCount={rows.length}
-          sorting={sorting}
-          columns={columns}
-        />
-
-        <ContentState
-          isLoading={isLoading && !isNoData}
-          isError={isError && !isNoData}
-          errorState={{
-            imgAlt: 'Что-то пошло не так',
-            errorList: [errorMsg || ''],
-            imgSrc: imagesMap.defaultErrorImgSrc,
-            onRetry,
-          }}
-        >
-          <Virtuoso
-            {...virtuosoProps}
-            style={{ height: '100%' }}
-            overscan={OVERSCAN_COUNT}
-            defaultItemHeight={DEFAULT_ROW_HEIGHT}
-            data={rows}
-            itemContent={(_, { options, ...row }) => {
-              const rowId = (row as TData)[keyId] as string;
-
-              return <>{renderCells(row as TData, rowId, options)}</>;
-            }}
-            components={{
-              // @ts-ignore
-              // Требует HTMLDivElement, а для элемента списка используем HTMLUListElement
-              List,
-              Item: ({ children, item, ...itemProps }) => {
-                const { options, ...row } = item;
-
-                return (
-                  <Row
-                    {...rowProps}
-                    {...itemProps}
-                    row={row as TData}
-                    selectedRows={selectedRows}
-                    options={options}
-                    keyId={keyId}
-                    activeRowId={activeRowId}
-                    onRowClick={onRowClick}
-                  >
-                    {children}
-                  </Row>
-                );
-              },
-              EmptyPlaceholder: () => <>{noDataPlaceholder || <NoData />}</>,
-              Footer: () => (
-                <FooterRow>
-                  {isLoading && <CircularProgress color="primary" />}
-                  {isError && <Error onRetry={onRetry} />}
-                  {isEndReached && <EndData endOfScrollMsg={endOfScrollMsg} />}
-                </FooterRow>
-              ),
-            }}
+    <DataGridContextProvider>
+      <Container $maxHeight={maxHeight} className={className}>
+        <TableContainer {...{ inert: isDataGridDisabled ? '' : undefined }}>
+          <Head<TData, TSortField>
+            {...headProps}
+            onSort={onSort}
+            rowsCount={rows.length}
+            sorting={sorting}
+            columns={columns}
           />
-        </ContentState>
 
-        {isStickyButtonActive && (
-          <ScrollToTopButton {...scrollToTopButtonProps} />
-        )}
-      </DataGridWrapper>
-    </Container>
+          <ContentState
+            isLoading={isLoading && !isNoData}
+            isError={isError && !isNoData}
+            errorState={{
+              imgAlt: 'Что-то пошло не так',
+              errorList: [errorMsg || ''],
+              imgSrc: imagesMap.defaultErrorImgSrc,
+              onRetry,
+            }}
+          >
+            <Virtuoso
+              {...virtuosoProps}
+              style={{ height: '100%' }}
+              overscan={OVERSCAN_COUNT}
+              data={rows}
+              components={{
+                // @ts-ignore
+                // Требует HTMLDivElement, а для элемента списка используем HTMLUListElement
+                // https://github.com/petyosi/react-virtuoso/issues/864
+                List,
+                Item: ({ children, item, ...itemProps }) => {
+                  const { children: nestedChildren, options, ...row } = item;
+
+                  return (
+                    <Row
+                      {...rowProps}
+                      {...itemProps}
+                      row={row as TData}
+                      columns={columns}
+                      selectedRows={selectedRows}
+                      options={options}
+                      keyId={keyId}
+                      activeRowId={activeRowId}
+                      level={INITIAL_LEVEL}
+                      nestedChildren={nestedChildren as Array<TData>}
+                      isInitialExpanded={isInitialExpanded}
+                      expandedLevel={expandedLevel}
+                      initialVisibleChildrenCount={initialVisibleChildrenCount}
+                      emptyCellValue={emptyCellValue}
+                      onRowClick={onRowClick}
+                    />
+                  );
+                },
+                EmptyPlaceholder: () => <>{noDataPlaceholder || <NoData />}</>,
+                Footer: () => (
+                  <FooterRow>
+                    {isLoading && <CircularProgress color="primary" />}
+                    {isError && <Error onRetry={onRetry} />}
+                    {isEndReached && (
+                      <EndData endOfScrollMsg={endOfScrollMsg} />
+                    )}
+                  </FooterRow>
+                ),
+              }}
+            />
+          </ContentState>
+
+          {isStickyButtonActive && (
+            <ScrollToTopButton {...scrollToTopButtonProps} />
+          )}
+
+          {isDisabled && <Backdrop />}
+        </TableContainer>
+      </Container>
+    </DataGridContextProvider>
   );
 };

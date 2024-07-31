@@ -1,6 +1,11 @@
 import { styled } from '../../styles';
+import { ROOT_ACTION_CELL_WIDTH } from '../constants';
 
-export const Wrapper = styled.header<{ $gridColumns: string }>`
+export const Wrapper = styled('header', {
+  shouldForwardProp: (prop) => !['$gridColumns'].includes(prop),
+})<{
+  $gridColumns: string;
+}>`
   display: grid;
   grid-template-columns: ${({ $gridColumns }) => $gridColumns};
 
@@ -8,5 +13,9 @@ export const Wrapper = styled.header<{ $gridColumns: string }>`
 `;
 
 export const CheckboxCell = styled.div`
-  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: ${ROOT_ACTION_CELL_WIDTH}px;
 `;

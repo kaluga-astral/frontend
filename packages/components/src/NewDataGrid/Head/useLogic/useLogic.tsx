@@ -1,16 +1,16 @@
 import { useCallback, useMemo } from 'react';
 
 import { SortStates } from '../../enums';
-import type { DataGridRow } from '../../types';
+import type { CellValue, DataGridRow } from '../../types';
 import { type HeadProps } from '../Head';
 
 type UseLogicParams<
-  TData extends object = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 > = HeadProps<TData, TSortField>;
 
 export const useLogic = <
-  TData extends object = DataGridRow,
+  TData extends Record<string, CellValue> = DataGridRow,
   TSortField extends keyof TData = keyof TData,
 >({
   rowsCount,
