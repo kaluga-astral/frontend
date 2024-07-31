@@ -94,6 +94,7 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 } & Omit<ComponentProps<TComponent>, ''>;
 
 export const TreeItem = (props: TreeItemProps) => {
+  const { isOpen, handleToggle, handleClick, tooltipProps } = useLogic(props);
   const {
     id,
     label,
@@ -110,8 +111,6 @@ export const TreeItem = (props: TreeItemProps) => {
     onClick,
     ...restProps
   } = props;
-  const { isOpen, handleToggle, handleClick, tooltipProps } = useLogic(props);
-
   const renderCollapseButton = () => (
     <CollapseButton
       $isNotBlockingExpandList={isNotBlockingExpandList}
