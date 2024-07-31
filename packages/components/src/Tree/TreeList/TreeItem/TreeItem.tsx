@@ -3,10 +3,11 @@ import { type FunctionComponent } from 'react';
 import { TreeItem as BaseTreeItem } from '../../TreeItem';
 import type { TreeListData } from '../../types';
 import type { Value } from '../types';
-import { type FormatDisableItem } from '../../utils';
 
 import { useLogic } from './useLogic';
 import { List } from './styles';
+
+type FormatDisableItem = { id: string; disableReason?: string };
 
 export type TreeItemProps = TreeListData & {
   /**

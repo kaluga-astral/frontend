@@ -1,1 +1,1 @@
-export * from './getFormatDisabledItems';
+export { getFormatDisabledItems } from './getFormatDisabledItems';

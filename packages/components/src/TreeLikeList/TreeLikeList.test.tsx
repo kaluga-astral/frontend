@@ -345,7 +345,8 @@ describe('TreeLikeList', () => {
 
     const tooltip = await screen.findByRole('tooltip');
 
-    expect(tooltip).toBeInTheDocument();
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent('Заблокировано');
   });
 
   it('DisabledItems блокирует взаимодействие с элементами', async () => {

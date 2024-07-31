@@ -1,10 +1,7 @@
-import { useMemo } from 'react';
-
-import { getFormatDisabledItems } from '../Tree/utils';
-
 import { TreeItem } from './TreeItem';
 import { type TreeLikeListProps } from './types';
 import { List } from './styles';
+import { useLogic } from './useLogic';
 
 export type { TreeLikeListProps };
 
@@ -18,10 +15,7 @@ export const TreeLikeList = ({
   disabledItems,
   ...props
 }: TreeLikeListProps) => {
-  const formattedDisabledItems = useMemo(
-    () => getFormatDisabledItems(disabledItems),
-    [disabledItems],
-  );
+  const { formattedDisabledItems } = useLogic({ disabledItems });
 
   return (
     <List className={className}>

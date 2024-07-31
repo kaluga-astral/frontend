@@ -4,7 +4,7 @@ import type { TreeListData } from '../types';
 
 export type Value = string | undefined;
 
-export type DisabledItem = string | { id: string; disableReason?: string };
+export type DisabledItemValue = string | { id: string; disableReason?: string };
 
 export type TreeListProps = {
   /**
@@ -37,7 +37,7 @@ export type TreeListProps = {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: Array<DisabledItem>;
+  disabledItems?: Array<DisabledItemValue>;
 
   /**
    * Render-props, позволяет более гибко настраивать содержимое item

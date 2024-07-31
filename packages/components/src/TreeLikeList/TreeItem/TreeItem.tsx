@@ -8,10 +8,11 @@ import {
 import type { TreeListData } from '../../Tree';
 import type { MultipleValue } from '../types';
 import { FormControlLabel } from '../../FormControlLabel';
-import { type FormatDisableItem } from '../../Tree/utils';
 
 import { useLogic } from './useLogic';
 import { List, StyledCheckbox, StyledTreeItem } from './styles';
+
+type FormatDisableItem = { id: string; disableReason?: string };
 
 export type TreeItemProps = TreeListData & {
   /**

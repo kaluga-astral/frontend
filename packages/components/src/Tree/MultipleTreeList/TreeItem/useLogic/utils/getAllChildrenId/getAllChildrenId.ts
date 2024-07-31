@@ -1,9 +1,9 @@
 import type { TreeListData } from '../../../../../types';
-import type { DisabledItems } from '../../../../types';
+import type { DisabledItemValue } from '../../../../types';
 
 export const getAllChildrenId = (
   children: Array<TreeListData> | undefined,
-  disabledItems?: Array<DisabledItems>,
+  disabledItems?: Array<DisabledItemValue>,
 ): Array<string> => {
   if (!children || !children?.length) {
     return [];
