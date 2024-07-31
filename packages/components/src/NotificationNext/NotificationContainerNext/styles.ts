@@ -28,10 +28,10 @@ const leaveOut = keyframes`
 `;
 
 const leaveInMobile = keyframes`
-  from{
+  from {
     transform: translateY(-100%);
   }
-  to{
+  to {
     transform: translateY(0px);
   }
 `;
@@ -46,6 +46,7 @@ export const Wrapper = styled.div`
   .${NOTIFY_ANIMATION_IN_CLASSNAME} {
     animation: ${leaveIn} ease-in-out 0.34s;
     animation-fill-mode: both;
+
     ${({ theme }) => theme.breakpoints.down('sm')} {
       animation: ${leaveInMobile} ease-in-out 0.34s;
       animation-fill-mode: both;
@@ -55,10 +56,6 @@ export const Wrapper = styled.div`
   .${NOTIFY_ANIMATION_OUT_CLASSNAME} {
     animation: ${leaveOut} ease-in-out 0.34s;
     animation-fill-mode: both;
-    ${({ theme }) => theme.breakpoints.down('sm')} {
-      animation: ${leaveOut} ease-in-out 0.34s;
-      animation-fill-mode: both;
-    }
   }
 
   .${NOTIFY_CLASSNAME} {
@@ -134,20 +131,16 @@ export const Wrapper = styled.div`
       height: 3px;
     }
   }
-
-  @media only screen and (width <= 480px) {
-    .Toastify__toast-container {
-      width: 100%;
-      padding: ${({ theme }) => theme.spacing(2, 4, 0, 4)};
-    }
-  }
 `;
 
 export const Inner = styled(ToastContainer)`
   min-width: 400px;
   max-width: 400px;
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 100%;
     min-width: unset;
     max-width: unset;
+    padding: ${({ theme }) => theme.spacing(2, 4, 0, 4)};
   }
 `;
