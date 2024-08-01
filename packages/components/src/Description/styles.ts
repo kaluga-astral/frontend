@@ -2,19 +2,22 @@ import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
   shouldForwardProp: (prop) =>
-    prop !== '$justifyContent' && prop !== 'as' && prop !== '$mobileDirection',
+    !['$justifyContent', 'as', '$direction'].includes(prop),
 })<{
   $justifyContent?: 'space-between' | 'start';
-  $mobileDirection?: 'column' | 'row';
+  $direction?: 'default' | 'column' | 'row';
 }>`
   display: flex;
+  flex-direction: ${({ $direction }) =>
+    $direction === 'default' ? 'row' : $direction};
   align-items: baseline;
   justify-content: ${({ $justifyContent }) => $justifyContent};
 
   margin: 0;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: ${({ $mobileDirection }) => $mobileDirection};
+    flex-direction: ${({ $direction }) =>
+      $direction === 'default' ? 'column' : $direction};
 
     .MuiTypography-root {
       font-size: ${({ theme }) => theme.typography.fontSize};

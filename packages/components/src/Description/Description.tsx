@@ -1,16 +1,11 @@
 import { type ReactNode } from 'react';
 
-import { useViewportType } from '../hooks/useViewportType';
-
 import { Name } from './Name';
 import { Value } from './Value';
 import { Wrapper } from './styles';
 import { DescriptionContextProvider } from './DescriptionContext';
-import {
-  DEFAULT_SEPARATOR,
-  DESCRIPTION_ROOT_CLASSNAME,
-  WITHOUT_SEPARATOR,
-} from './constants';
+import { DESCRIPTION_ROOT_CLASSNAME } from './constants';
+import { useLogic } from './useLogic';
 
 export type DescriptionProps = {
   /**
@@ -40,32 +35,23 @@ export type DescriptionProps = {
   component?: 'div' | 'dl';
 
   /**
-   * Определяет перенос строк на мобильном устройстве
-   * @default 'column'
+   * Определяет перенос строк
+   * @default 'default'
    */
-  mobileDirection?: 'column' | 'row';
+  direction?: 'default' | 'column' | 'row';
 };
 
-export const Description = ({
-  children,
-  justifyContent = 'start',
-  leader = false,
-  separator = DEFAULT_SEPARATOR,
-  component = 'dl',
-  mobileDirection = 'column',
-}: DescriptionProps) => {
-  const { isMobile } = useViewportType();
-  const hasSeparator = isMobile && mobileDirection === 'column';
+export const Description = (props: DescriptionProps) => {
+  const { descriptionContextProviderProps, direction } = useLogic(props);
+
+  const { justifyContent = 'start', component = 'dl', children } = props;
 
   return (
-    <DescriptionContextProvider
-      leader={leader}
-      separator={hasSeparator ? WITHOUT_SEPARATOR : separator}
-    >
+    <DescriptionContextProvider {...descriptionContextProviderProps}>
       <Wrapper
         $justifyContent={justifyContent}
         className={DESCRIPTION_ROOT_CLASSNAME}
-        $mobileDirection={mobileDirection}
+        $direction={direction}
         as={component}
       >
         {children}

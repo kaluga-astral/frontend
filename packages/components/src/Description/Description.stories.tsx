@@ -51,11 +51,11 @@ const StyledDescriptionValue = styled(Description.Value)`
 export const Example = () => {
   return (
     <GridWrapper rowSpacing={3} container>
-      <Description mobileDirection="row">
+      <Description>
         <Description.Name>ИНН</Description.Name>
         <Description.Value>295995231495</Description.Value>
       </Description>
-      <Description mobileDirection="row">
+      <Description>
         <Description.Name>Описание</Description.Name>
         <StyledDescriptionValue>
           ИНН физического лица является последовательностью из 12 цифр
@@ -109,6 +109,26 @@ export const Leader = () => {
       <Description leader>
         <Description.Name>ФИО</Description.Name>
         <Description.Value>Швецова Мария Дмитриевна</Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
+/**
+ * Prop ```direction``` определяет перенос строк
+ */
+export const Direction = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description direction="row">
+        <Description.Name>ИНН</Description.Name>
+        <Description.Value>295995231495</Description.Value>
+      </Description>
+      <Description direction="column">
+        <Description.Name>Описание</Description.Name>
+        <StyledDescriptionValue>
+          ИНН физического лица является последовательностью из 12 цифр
+        </StyledDescriptionValue>
       </Description>
     </GridWrapper>
   );
