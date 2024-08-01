@@ -119,7 +119,7 @@ export type DataGridProps<
 
 /**
  * @deprecated
- * Используйте NewDateGrid
+ * Используйте NewDateGrid. Причина отказа от поддержки: DataGrid построен на неконтролируемой табличной верстке, которая не поддерживает вложенность
  */
 export const DataGrid = <
   TData extends Record<string, unknown> = DataGridRow,

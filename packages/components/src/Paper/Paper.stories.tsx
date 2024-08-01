@@ -216,23 +216,17 @@ export const Elevation = () => {
     <Grid container rowSpacing={4}>
       <Paper elevation={0}>
         <PaperContentWrapper>
-          <Typography variant="h6">
-            Elevation-0
-          </Typography>
+          <Typography variant="h6">Elevation-0</Typography>
         </PaperContentWrapper>
       </Paper>
       <Paper>
         <PaperContentWrapper>
-          <Typography variant="h6">
-            Elevation-1
-          </Typography>
+          <Typography variant="h6">Elevation-1</Typography>
         </PaperContentWrapper>
       </Paper>
       <Paper elevation={2}>
         <PaperContentWrapper>
-          <Typography variant="h6">
-            Elevation-2
-          </Typography>
+          <Typography variant="h6">Elevation-2</Typography>
         </PaperContentWrapper>
       </Paper>
     </Grid>

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 import { SortDownFillSm, SortFillSm, SortUpFillSm } from '@astral/icons';
 
 import { SortStates } from '../enums';
@@ -14,9 +14,20 @@ export type HeadCellProps<
   onSort: (field: TSortField) => void;
   sorting?: DataGridSort<TSortField>;
   label?: string;
-  sortable?: boolean;
+
+  isSortable?: boolean;
+
+  /**
+   * Выравнивание содержимого ячейки по горизонтали
+   */
   align?: AlignVariant;
+
   field?: keyof TData;
+
+  /**
+   * Дополнительное содержимое ячейки, которое будет распложено справа
+   */
+  startAdornment?: ReactNode;
 };
 
 export const HeadCell = <TData, TSortField extends keyof TData>(
@@ -24,10 +35,10 @@ export const HeadCell = <TData, TSortField extends keyof TData>(
 ) => {
   const { wrapperProps } = useLogic(props);
 
-  const { field, sortable, align, label, sorting } = props;
+  const { startAdornment, field, isSortable, align, label, sorting } = props;
 
   const sortIcon = useMemo(() => {
-    if (!sortable) {
+    if (!isSortable) {
       return null;
     }
 
@@ -43,10 +54,11 @@ export const HeadCell = <TData, TSortField extends keyof TData>(
       default:
         return <SortFillSm />;
     }
-  }, [sorting, sortable, field]);
+  }, [sorting, isSortable, field]);
 
   return (
-    <Wrapper $align={align} $sortable={sortable} {...wrapperProps}>
+    <Wrapper $align={align} $isSortable={isSortable} {...wrapperProps}>
+      {startAdornment && startAdornment}
       <StyledTypography variant="pointer">
         {label}
         {sortIcon}
