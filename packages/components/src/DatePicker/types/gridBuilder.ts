@@ -36,11 +36,11 @@ type GridBuilderOptions<T = {}> = {
   /**
    * @description выбранная дата, будет использоваться для сверки элемента массива с этой датой на предмет совпадения
    */
-  selectedDate?: Date;
+  selectedDate?: Date | null;
   /**
    * @description дата, относительно которой будет происходить сравнение на попадание в выбранный интервал
    */
-  rangeDate?: Date;
+  rangeDate?: Date | null;
 } & T;
 
 export type GridBuilder<Item = {}, Options = {}> = (
