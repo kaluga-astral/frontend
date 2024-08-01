@@ -1,10 +1,16 @@
 import { type ReactNode } from 'react';
 
+import { useViewportType } from '../hooks/useViewportType';
+
 import { Name } from './Name';
 import { Value } from './Value';
 import { Wrapper } from './styles';
 import { DescriptionContextProvider } from './DescriptionContext';
-import { DEFAULT_SEPARATOR, DESCRIPTION_ROOT_CLASSNAME } from './constants';
+import {
+  DEFAULT_SEPARATOR,
+  DESCRIPTION_ROOT_CLASSNAME,
+  WITHOUT_SEPARATOR,
+} from './constants';
 
 export type DescriptionProps = {
   /**
@@ -32,6 +38,11 @@ export type DescriptionProps = {
    * Определяет тип корневого HTML-элемента
    */
   component?: 'div' | 'dl';
+
+  /**
+   * Определяет перенос строк на мобильном устройстве
+   */
+  mobileDirection?: 'column' | 'row';
 };
 
 export const Description = ({
@@ -40,12 +51,20 @@ export const Description = ({
   leader = false,
   separator = DEFAULT_SEPARATOR,
   component = 'dl',
+  mobileDirection = 'column',
 }: DescriptionProps) => {
+  const { isMobile } = useViewportType();
+  const hasSeparator = isMobile && mobileDirection === 'column';
+
   return (
-    <DescriptionContextProvider leader={leader} separator={separator}>
+    <DescriptionContextProvider
+      leader={leader}
+      separator={hasSeparator ? WITHOUT_SEPARATOR : separator}
+    >
       <Wrapper
         $justifyContent={justifyContent}
         className={DESCRIPTION_ROOT_CLASSNAME}
+        $mobileDirection={mobileDirection}
         as={component}
       >
         {children}

@@ -51,11 +51,11 @@ const StyledDescriptionValue = styled(Description.Value)`
 export const Example = () => {
   return (
     <GridWrapper rowSpacing={3} container>
-      <Description>
+      <Description mobileDirection="row">
         <Description.Name>ИНН</Description.Name>
         <Description.Value>295995231495</Description.Value>
       </Description>
-      <Description>
+      <Description mobileDirection="row">
         <Description.Name>Описание</Description.Name>
         <StyledDescriptionValue>
           ИНН физического лица является последовательностью из 12 цифр

@@ -1,9 +1,11 @@
 import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
-  shouldForwardProp: (prop) => prop !== '$justifyContent' && prop !== 'as',
+  shouldForwardProp: (prop) =>
+    prop !== '$justifyContent' && prop !== 'as' && prop !== '$mobileDirection',
 })<{
   $justifyContent?: 'space-between' | 'start';
+  $mobileDirection?: 'column' | 'row';
 }>`
   display: flex;
   align-items: baseline;
@@ -12,7 +14,7 @@ export const Wrapper = styled('div', {
   margin: 0;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: column;
+    flex-direction: ${({ $mobileDirection }) => $mobileDirection};
 
     .MuiTypography-root {
       font-size: ${({ theme }) => theme.typography.fontSize};
