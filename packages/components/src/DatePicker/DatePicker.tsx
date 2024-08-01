@@ -53,7 +53,7 @@ export type DatePickerProps = MondayFirst &
     /**
      * Принимает только Date object, включая невалидную дату Invalid date
      */
-    value?: Date;
+    value?: Date | null;
 
     /**
      * Название класса, применяется к корневому компоненту

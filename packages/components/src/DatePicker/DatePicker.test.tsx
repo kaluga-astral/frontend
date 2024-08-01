@@ -121,7 +121,7 @@ describe('DatePicker', () => {
     };
 
     const TestComponent = () => {
-      const [value, setValue] = useState<Date | undefined>();
+      const [value, setValue] = useState<Date | null>();
 
       callbacks.setValue = setValue;
 

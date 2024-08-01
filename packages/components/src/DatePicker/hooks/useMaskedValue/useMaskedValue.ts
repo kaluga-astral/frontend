@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { formatDate, isDate, parseDate } from '../../../utils/date';
 
 type Params = {
-  currentValue?: Date;
+  currentValue?: Date | null;
   mask: string;
   /**
    * @description Изменение value для DatePicker

@@ -8,7 +8,7 @@ import { type MinMaxDate, type PickerProps } from '../../types';
 type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   mask: string;
   onChange?: (date?: Date | null) => void;
-  currentValue?: Date;
+  currentValue?: Date | null;
   /**
    * @description смещение базовой даты в месяцах.
    * ожидается использование в DateRangePicker, для создания опорной даты второго календаря,
