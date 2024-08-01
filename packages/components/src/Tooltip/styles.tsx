@@ -61,4 +61,5 @@ export const StyledTooltip = styled(
 
 export const ContentWrapper = styled.div`
   display: inherit;
+  flex-direction: inherit;
 `;

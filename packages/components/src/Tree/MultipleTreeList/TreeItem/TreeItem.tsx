@@ -12,6 +12,8 @@ import { FormControlLabel } from '../../../FormControlLabel';
 import { useLogic } from './useLogic';
 import { List, StyledCheckbox, StyledTreeItem } from './styles';
 
+type FormatDisableItem = { id: string; disableReason?: string };
+
 export type TreeItemProps = TreeListData & {
   /**
    * Выбранные значения
@@ -42,7 +44,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
+  disabledItems?: Array<FormatDisableItem>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -67,6 +69,7 @@ export const TreeItem = ({
     isSelected,
     isIndeterminate,
     isDefaultExpanded,
+    disableReason,
     isDisabled,
     handleChange,
   } = useLogic({
@@ -89,6 +92,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         note={renderItem ? null : note}
         component="li"
         label={
@@ -131,6 +135,7 @@ export const TreeItem = ({
     <StyledTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       note={renderItem ? null : note}
       component="li"
       label={
