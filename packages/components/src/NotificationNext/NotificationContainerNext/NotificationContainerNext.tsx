@@ -38,7 +38,7 @@ export const NotificationContainerNext = ({
         }
         newestOnTop={true}
         closeOnClick={false}
-        draggable={false}
+        draggable={isMobile}
         rtl={false}
         closeButton={false}
         bodyClassName={`${NOTIFY_CLASSNAME}__body`}
