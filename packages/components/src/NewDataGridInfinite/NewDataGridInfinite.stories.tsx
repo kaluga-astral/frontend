@@ -248,9 +248,24 @@ export const TreeWithOptionIsNotSelectable = () => {
         },
       ],
     },
-    ...makeDataListWithTree(9, {
-      isNotSelectable: true,
-    }),
+    {
+      id: '1234544545',
+      documentName: 'Пакет документов',
+      recipient: 'ООО "Купи Продай"',
+      createDate: makeRandomDate(),
+      options: {
+        isNotSelectable: true,
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Договор №12345678',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+        },
+      ],
+    },
+    ...makeDataList(8),
   ];
 
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
