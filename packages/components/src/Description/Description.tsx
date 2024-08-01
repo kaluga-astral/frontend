@@ -41,6 +41,7 @@ export type DescriptionProps = {
 
   /**
    * Определяет перенос строк на мобильном устройстве
+   * @default 'column'
    */
   mobileDirection?: 'column' | 'row';
 };
