@@ -37,7 +37,7 @@ export type HeadProps<
   sorting?: DataGridSort<TSortField>;
 
   /**
-   * Общее количество строк
+   * Общее количество строк, доступных для выбора
    */
   rowsCount: number;
 
