@@ -7,6 +7,8 @@ import type { Value } from '../types';
 import { useLogic } from './useLogic';
 import { List } from './styles';
 
+type FormatDisableItem = { id: string; disableReason?: string };
+
 export type TreeItemProps = TreeListData & {
   /**
    * Выбранные значения
@@ -37,7 +39,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: Array<string>;
+  disabledItems?: Array<FormatDisableItem>;
 
   /**
    * Функция, которая запускается при выборе item
@@ -58,7 +60,13 @@ export const TreeItem = ({
   disabledItems,
   onChange,
 }: TreeItemProps) => {
-  const { isSelected, isDefaultExpanded, isDisabled, handleChange } = useLogic({
+  const {
+    isSelected,
+    isDefaultExpanded,
+    isDisabled,
+    disableReason,
+    handleChange,
+  } = useLogic({
     id,
     value,
     level,
@@ -76,6 +84,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         component="li"
         label={label}
         renderItem={renderItem}
@@ -108,6 +117,7 @@ export const TreeItem = ({
         id={id}
         isSelected={isSelected}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         component="li"
         label={label}
         renderItem={renderItem}

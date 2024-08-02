@@ -25,7 +25,10 @@ export const useLogic = ({
   const isSelected = checkIsSelected(value, id);
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
-  const isDisabled = disabledItems?.includes(id);
+
+  const disabledItem = disabledItems?.find((item) => item.id === id);
+  const isDisabled = Boolean(disabledItem);
+  const disableReason = disabledItem?.disableReason;
 
   const nextLevel = level + 1;
 
@@ -47,6 +50,7 @@ export const useLogic = ({
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     nextLevel,
     handleChange,
   };

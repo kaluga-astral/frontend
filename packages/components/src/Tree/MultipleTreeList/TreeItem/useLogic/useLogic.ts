@@ -38,7 +38,10 @@ export const useLogic = ({
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
-  const isDisabled = disabledItems?.includes(id);
+
+  const disabledItem = disabledItems?.find((item) => item.id === id);
+  const isDisabled = Boolean(disabledItem);
+  const disableReason = disabledItem?.disableReason;
 
   useEffect(() => {
     if (!childrenIds.length) {
@@ -85,6 +88,7 @@ export const useLogic = ({
     isIndeterminate,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     handleChange,
   };
 };

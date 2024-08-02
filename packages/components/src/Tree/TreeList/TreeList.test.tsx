@@ -168,4 +168,68 @@ describe('TreeList', () => {
     await userEvents.click(labelOne);
     expect(onChangeSpy).toBeCalledWith('1');
   });
+
+  it('Причина блокировки поля отображается', async () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1.1',
+          },
+        ],
+      },
+      {
+        id: '2',
+        label: 'Item 2',
+      },
+    ];
+
+    renderWithTheme(
+      <TreeList
+        data={fakeData}
+        disabledItems={[{ id: '1', disableReason: 'Заблокировано' }, '2']}
+      />,
+    );
+
+    const label = screen.getByText('Item 1');
+
+    await userEvents.hover(label);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent('Заблокировано');
+  });
+
+  it('DisabledItems блокирует взаимодействие с элементами', async () => {
+    const onChangeSpy = vi.fn();
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Item 1',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1.1',
+          },
+        ],
+      },
+      {
+        id: '2',
+        label: 'Item 2',
+      },
+    ];
+
+    renderWithTheme(
+      <TreeList data={fakeData} disabledItems={['1']} onChange={onChangeSpy} />,
+    );
+
+    const label = screen.getByText('Item 1');
+
+    await userEvents.click(label);
+    expect(onChangeSpy).not.toBeCalledWith('1');
+  });
 });

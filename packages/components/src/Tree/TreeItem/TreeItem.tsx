@@ -7,8 +7,9 @@ import {
 
 import { Collapse } from '../../Collapse';
 import { type TreeListData } from '../types';
+import { Tooltip } from '../../Tooltip';
 
-import { TREE_ITEM_NOTE_CLASSNAME } from './constants';
+import { TOOLTIP_PLACEMENT, TREE_ITEM_NOTE_CLASSNAME } from './constants';
 import {
   ChevronIcon,
   CollapseButton,
@@ -70,6 +71,11 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   isDisabled?: boolean;
 
   /**
+   * Текст тултипа при заблокированном состоянии элемента дерева
+   */
+  disableReason?: string;
+
+  /**
    * Если true, то список можно будет развернуть даже если установлен `isDisabled=true`
    * @default 'false'
    */
@@ -82,32 +88,33 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   isDefaultExpanded?: boolean;
 
   /**
-   * Функция, которая запускается при нажатии на элемента списка.
+   * Функция, которая запускается при нажатии на элемент списка.
    */
   onClick?: () => void;
 } & Omit<ComponentProps<TComponent>, ''>;
 
-export const TreeItem = ({
-  id,
-  label,
-  note,
-  renderItem,
-  children,
-  className,
-  isSelected,
-  isDisabled = false,
-  isDefaultExpanded = false,
-  isNotBlockingExpandList = false,
-  level = 0,
-  component = 'div',
-  onClick,
-  ...props
-}: TreeItemProps) => {
-  const { isOpen, handleToggle } = useLogic({ isDefaultExpanded });
-
+export const TreeItem = (props: TreeItemProps) => {
+  const { isOpen, handleToggle, handleClick, tooltipProps } = useLogic(props);
+  const {
+    id,
+    label,
+    note,
+    renderItem,
+    children,
+    className,
+    isSelected,
+    isDisabled = false,
+    disableReason,
+    isNotBlockingExpandList = false,
+    level = 0,
+    component = 'div',
+    onClick,
+    ...restProps
+  } = props;
   const renderCollapseButton = () => (
     <CollapseButton
       $isNotBlockingExpandList={isNotBlockingExpandList}
+      disabled={!isNotBlockingExpandList && isDisabled}
       variant="text"
       onClick={handleToggle}
     >
@@ -117,25 +124,60 @@ export const TreeItem = ({
 
   if (children) {
     return (
-      <Item {...props} $level={level} as={component} className={className}>
+      <Item {...restProps} $level={level} as={component} className={className}>
         <ItemContent
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
-          {...{
-            inert: isDisabled && !isNotBlockingExpandList ? '' : undefined,
-          }}
-          onClick={onClick}
+          onClick={handleClick}
         >
+          <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
+            {renderItem ? (
+              <LabelWrapper $level={level}>
+                {renderCollapseButton()}
+                {renderItem({ label, note, id })}
+              </LabelWrapper>
+            ) : (
+              <>
+                <LabelWrapper $level={level}>
+                  {renderCollapseButton()}
+                  <Label>{label}</Label>
+                </LabelWrapper>
+                {note && (
+                  <Note
+                    className={TREE_ITEM_NOTE_CLASSNAME}
+                    variant="small"
+                    color="textSecondary"
+                  >
+                    {note}
+                  </Note>
+                )}
+              </>
+            )}
+          </Tooltip>
+        </ItemContent>
+
+        <Collapse in={isOpen}>{children}</Collapse>
+      </Item>
+    );
+  }
+
+  return (
+    <Item {...restProps} $level={level} as={component} className={className}>
+      <ItemContent
+        $isSelected={isSelected}
+        $isDisabled={isDisabled}
+        $level={level}
+        onClick={handleClick}
+      >
+        <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
           {renderItem ? (
             <LabelWrapper $level={level}>
-              {renderCollapseButton()}
               {renderItem({ label, note, id })}
             </LabelWrapper>
           ) : (
             <>
               <LabelWrapper $level={level}>
-                {renderCollapseButton()}
                 <Label>{label}</Label>
               </LabelWrapper>
               {note && (
@@ -149,42 +191,7 @@ export const TreeItem = ({
               )}
             </>
           )}
-        </ItemContent>
-
-        <Collapse in={isOpen}>{children}</Collapse>
-      </Item>
-    );
-  }
-
-  return (
-    <Item {...props} $level={level} as={component} className={className}>
-      <ItemContent
-        $isSelected={isSelected}
-        $isDisabled={isDisabled}
-        $level={level}
-        {...{ inert: isDisabled ? '' : undefined }}
-        onClick={onClick}
-      >
-        {renderItem ? (
-          <LabelWrapper $level={level}>
-            {renderItem({ label, note, id })}
-          </LabelWrapper>
-        ) : (
-          <>
-            <LabelWrapper $level={level}>
-              <Label>{label}</Label>
-            </LabelWrapper>
-            {note && (
-              <Note
-                className={TREE_ITEM_NOTE_CLASSNAME}
-                variant="small"
-                color="textSecondary"
-              >
-                {note}
-              </Note>
-            )}
-          </>
-        )}
+        </Tooltip>
       </ItemContent>
     </Item>
   );
