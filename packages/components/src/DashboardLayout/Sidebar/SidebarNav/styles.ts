@@ -1,5 +1,5 @@
 import { styled } from '../../../styles';
 
 export const Navigation = styled.nav`
-  overflow: auto;
+  overflow-y: auto;
 `;
