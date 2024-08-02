@@ -45,11 +45,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
 `;
 
 export const SidebarHeader = styled.div`
-  display: contents;
-
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: block;
-
     padding: ${({ theme }) => theme.spacing(0, 4)};
   }
 `;
