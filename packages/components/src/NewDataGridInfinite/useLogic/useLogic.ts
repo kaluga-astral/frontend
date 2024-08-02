@@ -35,7 +35,9 @@ export const useLogic = <
   const isSelectable = Boolean(onSelectRow);
   const isDataGridDisabled = isDisabled || (!isNoData && isLoading);
 
-  const availableRows = rows.filter((row) => !row.options?.isDisabled);
+  const availableRows = rows.filter(
+    (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
+  );
 
   const gridColumns = getGridTemplateColumns(columns);
 
@@ -120,9 +122,10 @@ export const useLogic = <
       rangeChanged: handleRangeChanged,
     },
     headProps: {
-      isSelectable,
+      rowsCount: availableRows.length,
       uncheckedRowsCount: uncheckedRowsCount,
       gridColumns,
+      isSelectable,
       onSelectAllRows: handleSelectAllRows,
     },
     rowProps: {
