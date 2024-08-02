@@ -3,6 +3,7 @@ import { styled } from '../../styles';
 export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   z-index: ${({ theme }) => theme.zIndex.appBar - 1};
 
+  overflow: hidden;
   display: flex;
   grid-area: sidebar;
   flex-direction: column;
@@ -44,11 +45,7 @@ export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
 `;
 
 export const SidebarHeader = styled.div`
-  display: contents;
-
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: block;
-
     padding: ${({ theme }) => theme.spacing(0, 4)};
   }
 `;
