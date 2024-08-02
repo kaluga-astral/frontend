@@ -22,7 +22,10 @@ export const useLogic = ({
 }: UseLogicProps) => {
   const isSelected = Object.is(value, id);
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
-  const isDisabled = disabledItems?.includes(id);
+
+  const disabledItem = disabledItems?.find((item) => item.id === id);
+  const isDisabled = Boolean(disabledItem);
+  const disableReason = disabledItem?.disableReason;
 
   const handleChange = () => {
     onChange?.(id);
@@ -32,6 +35,7 @@ export const useLogic = ({
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     handleChange,
   };
 };
