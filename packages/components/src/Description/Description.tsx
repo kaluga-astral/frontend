@@ -44,10 +44,18 @@ export type DescriptionProps = {
 export const Description = (props: DescriptionProps) => {
   const { descriptionContextProviderProps, direction } = useLogic(props);
 
-  const { justifyContent = 'start', component = 'dl', children } = props;
+  const {
+    justifyContent = 'start',
+    component = 'dl',
+    children,
+    leader = false,
+  } = props;
 
   return (
-    <DescriptionContextProvider {...descriptionContextProviderProps}>
+    <DescriptionContextProvider
+      leader={leader}
+      {...descriptionContextProviderProps}
+    >
       <Wrapper
         $justifyContent={justifyContent}
         className={DESCRIPTION_ROOT_CLASSNAME}

@@ -6,7 +6,6 @@ type UseLogicParams = DescriptionProps;
 
 export const useLogic = ({
   direction = 'default',
-  leader = false,
   separator = DEFAULT_SEPARATOR,
 }: UseLogicParams) => {
   const { isMobile } = useViewportType();
@@ -16,7 +15,6 @@ export const useLogic = ({
 
   const descriptionContextProviderProps = {
     separator: hasSeparator ? '' : separator,
-    leader: leader,
   };
 
   return { descriptionContextProviderProps, direction };
