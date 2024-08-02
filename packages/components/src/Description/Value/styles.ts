@@ -21,8 +21,9 @@ export const StyledTypography = styled(Typography, {
   hyphens: auto;
   text-align: ${({ $leader }) => ($leader ? 'right' : 'left')};
   overflow-wrap: break-word;
+
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    text-align: ${({ $direction }) => $direction != 'row' && 'left'};
+    text-align: ${({ $direction }) => ($direction != 'row' ? 'left' : 'right')};
   }
 
   &:hover {
