@@ -1,4 +1,4 @@
-import { type PropsWithChildren, forwardRef } from 'react';
+import { type PropsWithChildren, type ReactNode, forwardRef } from 'react';
 import {
   type AvatarProps,
   ClickAwayListener,
@@ -10,6 +10,7 @@ import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
 
+import { MenuList } from './MenuList';
 import {
   ProfileAnnotation,
   ProfileAvatar,
@@ -18,6 +19,27 @@ import {
   ProfileRoot,
   ProfileUser,
 } from './styles';
+
+export type MenuListType = {
+  icon: ReactNode;
+  title: string;
+  onClick: () => void;
+};
+
+type ProfileWithMenu = {
+  /**
+   * Выпадающее меню
+   */
+  menu: (
+    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
+  ) => JSX.Element;
+  menuList?: never;
+};
+
+type ProfileWithMenuList = {
+  menuList: Array<MenuListType>;
+  menu?: never;
+};
 
 export type ProfileProps = {
   /**
@@ -32,17 +54,19 @@ export type ProfileProps = {
    * Аватарка профиля
    */
   avatar?: AvatarProps;
-  /**
-   * Выпадающее меню
-   */
-  menu: (
-    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
-  ) => JSX.Element;
-};
+  onExitClick?: () => {};
+} & (ProfileWithMenu | ProfileWithMenuList);
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {
-    const { displayName, annotation, avatar = {}, menu: Menu } = props;
+    const {
+      displayName,
+      annotation,
+      avatar = {},
+      menu: Menu,
+      menuList,
+      onExitClick,
+    } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     const { isMobile } = useViewportType();
@@ -66,25 +90,29 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             {!isMobile && <Chevron isActive={open} />}
           </ProfileRoot>
         </ClickAwayListener>
-        <Menu
-          open={open}
-          anchorEl={anchorRef.current}
-          onClose={handleCloseMenu}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          PaperProps={{
-            style: {
-              maxWidth: 300,
-              minWidth: 200,
-            },
-          }}
-        />
+        {Menu ? (
+          <Menu
+            open={open}
+            anchorEl={anchorRef.current}
+            onClose={handleCloseMenu}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            PaperProps={{
+              style: {
+                maxWidth: 300,
+                minWidth: 200,
+              },
+            }}
+          />
+        ) : (
+          <MenuList menuList={menuList} onExitClick={onExitClick} />
+        )}
       </>
     );
   },
