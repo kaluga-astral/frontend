@@ -42,10 +42,18 @@ const GridWrapper = styled(Grid)`
 
 const StyledDescriptionName = styled(Description.Name)`
   width: 100px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: unset;
+  }
 `;
 
 const StyledDescriptionValue = styled(Description.Value)`
   width: 300px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: unset;
+  }
 `;
 
 export const Example = () => {
