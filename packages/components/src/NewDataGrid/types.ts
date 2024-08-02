@@ -93,6 +93,11 @@ export type DataGridRowOptions<TData extends Record<string, CellValue>> = {
   isDisabledLastCell?: boolean;
 
   /**
+   * Если true, строка не будет доступна для выбора
+   */
+  isNotSelectable?: boolean;
+
+  /**
    * Причина блокировки строки
    */
   disabledReason?: string;

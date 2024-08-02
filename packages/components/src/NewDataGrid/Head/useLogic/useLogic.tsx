@@ -28,6 +28,8 @@ export const useLogic = <
     [uncheckedRowsCount, rowsCount],
   );
 
+  const isDisabled = !rowsCount;
+
   const handleSort = useCallback(
     (field: TSortField) => {
       if (!onSort) {
@@ -56,6 +58,7 @@ export const useLogic = <
     handleSort,
     checkboxProps: {
       checked: isChecked,
+      disabled: isDisabled,
       indeterminate: isIndeterminate,
     },
   };
