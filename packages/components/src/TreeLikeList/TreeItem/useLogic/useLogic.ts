@@ -15,7 +15,7 @@ type UseLogicProps = Pick<
 
 export const useLogic = ({
   id,
-  value,
+  value = [],
   level,
   isInitialExpanded,
   expandedLevel,
@@ -37,13 +37,11 @@ export const useLogic = ({
       return;
     }
 
-    onChange((selectedIds = []) => {
-      if (selectedIds.includes(id)) {
-        return selectedIds.filter((selectedId) => selectedId !== id);
-      }
+    if (value.includes(id)) {
+      return onChange(value.filter((selectedId) => selectedId !== id));
+    }
 
-      return [...selectedIds, id];
-    });
+    onChange([...value, id]);
   };
 
   return {
