@@ -3,6 +3,7 @@ import { styled } from '../../styles';
 export const SidebarRoot = styled.aside<{ collapsedIn: boolean }>`
   z-index: ${({ theme }) => theme.zIndex.appBar - 1};
 
+  overflow: hidden;
   display: flex;
   grid-area: sidebar;
   flex-direction: column;
