@@ -14,7 +14,7 @@ type UseBaseDateInRangeOptions = MinMaxDate & {
   /**
    * @description Дата для инициализации опорной даты,
    */
-  initialDate?: Date;
+  initialDate?: Date | null;
 };
 
 /**

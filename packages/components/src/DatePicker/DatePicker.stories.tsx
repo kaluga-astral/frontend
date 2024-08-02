@@ -36,7 +36,7 @@ const normalizedCurrentDate = buildIsoDate({
 });
 
 export const Example = () => {
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | null>();
 
   return (
     <DatePicker
@@ -54,7 +54,7 @@ export const Example = () => {
 };
 
 const Template = (props: DatePickerProps) => {
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | null>();
 
   return <DatePicker value={date} onChange={setDate} {...props} />;
 };

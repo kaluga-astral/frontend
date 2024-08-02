@@ -143,7 +143,11 @@ export const Row = <TData extends Record<string, CellValue>>(
     ...selfProps
   } = props;
 
-  const { isDisabled, isDisabledLastCell = true } = options || {};
+  const {
+    isDisabled,
+    isDisabledLastCell = true,
+    isNotSelectable,
+  } = options || {};
 
   const renderStartAdornment = () => {
     if (!nestedChildren?.length && !isSelectable) {
@@ -160,7 +164,7 @@ export const Row = <TData extends Record<string, CellValue>>(
           </CollapseCell>
         )}
 
-        {isSelectable && (
+        {isSelectable && !isNotSelectable && (
           <CheckboxCell
             {...{ inert: isDisabled ? '' : undefined }}
             onClick={(event) => event.stopPropagation()}
