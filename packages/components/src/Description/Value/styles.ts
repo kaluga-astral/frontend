@@ -9,10 +9,12 @@ import { type ValueProps } from './Value';
 type StyledTypographyProps = {
   $leader?: boolean;
   $canCopy?: boolean;
+  $direction: string;
 };
 
 export const StyledTypography = styled(Typography, {
-  shouldForwardProp: (prop) => prop !== '$canCopy' && prop !== '$leader',
+  shouldForwardProp: (prop) =>
+    !['$canCopy', '$leader', '$direction'].includes(prop),
 })<StyledTypographyProps>`
   cursor: ${({ $canCopy }) => ($canCopy ? 'pointer' : 'default')};
 
@@ -22,6 +24,10 @@ export const StyledTypography = styled(Typography, {
 
   &:hover {
     text-decoration: ${({ $canCopy }) => ($canCopy ? 'underline' : 'none')};
+  }
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    text-align: ${({ $direction }) => $direction === 'row' && 'right'};
   }
 `;
 

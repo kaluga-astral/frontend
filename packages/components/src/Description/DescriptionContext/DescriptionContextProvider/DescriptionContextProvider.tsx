@@ -13,8 +13,9 @@ export const DescriptionContextProvider = ({
   children,
   leader,
   separator,
+  direction,
 }: Props) => (
-  <DescriptionContext.Provider value={{ leader, separator }}>
+  <DescriptionContext.Provider value={{ leader, separator, direction }}>
     {children}
   </DescriptionContext.Provider>
 );

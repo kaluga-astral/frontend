@@ -54,6 +54,7 @@ export const Description = (props: DescriptionProps) => {
   return (
     <DescriptionContextProvider
       leader={leader}
+      direction={direction}
       {...descriptionContextProviderProps}
     >
       <Wrapper
