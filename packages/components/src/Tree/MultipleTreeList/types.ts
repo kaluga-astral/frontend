@@ -1,8 +1,4 @@
-import {
-  type Dispatch,
-  type FunctionComponent,
-  type SetStateAction,
-} from 'react';
+import { type FunctionComponent } from 'react';
 
 import type { TreeListData } from '../types';
 
@@ -51,5 +47,5 @@ export type MultipleTreeListProps = {
   /**
    * Функция, которая запускается при изменении состояния.
    */
-  onChange: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: (value: MultipleValue) => void;
 };
