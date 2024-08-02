@@ -34,11 +34,12 @@ export const makeDataList = (length: number = 10): DataType[] => {
 export const makeDataListWithTree = (
   length: number = 10,
   options?: {
+    isNotSelectable?: boolean;
     childrenCount?: number;
     childrenColumns?: DataGridRowOptionColumns<DataType>[];
   },
 ): DataType[] => {
-  const { childrenCount = 3, childrenColumns } = options || {};
+  const { isNotSelectable, childrenCount = 3, childrenColumns } = options || {};
 
   return Array.from({ length }).map((_, i) => {
     const recipient = RECIPIENTS[Math.floor(Math.random() * RECIPIENTS.length)];
@@ -51,6 +52,7 @@ export const makeDataListWithTree = (
       recipient,
       createDate,
       options: {
+        isNotSelectable,
         childrenColumns,
       },
       children: isTree

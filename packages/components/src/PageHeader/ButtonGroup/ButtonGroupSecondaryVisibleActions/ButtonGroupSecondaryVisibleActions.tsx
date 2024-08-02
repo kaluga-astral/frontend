@@ -10,6 +10,8 @@ export type SecondaryVisibleAction = Omit<ButtonProps, 'children'> & {
   name: string;
   /** Иконка */
   icon: ReactNode;
+  /** Текст тултипа в случае дизейбла кнопки */
+  disableReason?: string;
 };
 
 export type ButtonGroupMainActionProps = {
@@ -20,11 +22,21 @@ export const ButtonGroupSecondaryVisibleActions = ({
   actions,
 }: ButtonGroupMainActionProps) => {
   return actions.map((action) => {
-    const { name, icon, ...mainProps } = action;
+    const { name, icon, disableReason, disabled, onClick, ...mainProps } =
+      action;
 
     return (
-      <Tooltip title={name}>
-        <IconButton variant="light" name={name} key={name} {...mainProps}>
+      <Tooltip
+        title={disabled ? disableReason : name}
+        withoutContainer={!disabled}
+      >
+        <IconButton
+          variant="light"
+          key={name}
+          name={name}
+          disabled={disabled}
+          {...mainProps}
+        >
           {icon}
         </IconButton>
       </Tooltip>
