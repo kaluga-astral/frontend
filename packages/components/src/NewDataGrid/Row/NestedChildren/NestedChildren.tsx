@@ -92,7 +92,7 @@ export const NestedChildren = memo(
 
           {isOpen && (
             <>
-              <Collapse in={isShowAllChildren} unmountOnExit>
+              <Collapse in={isShowAllChildren} component="li" unmountOnExit>
                 <NestedRows $level={level}>
                   {otherChildren.map(({ children, options, ...nestedRow }) => {
                     const nestedRowId = (nestedRow as TData)[keyId] as string;
