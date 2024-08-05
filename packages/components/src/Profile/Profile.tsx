@@ -1,14 +1,21 @@
-import { type PropsWithChildren, type ReactNode, forwardRef } from 'react';
+import {
+  type FunctionComponent,
+  type PropsWithChildren,
+  type ReactNode,
+  forwardRef,
+} from 'react';
 import {
   type AvatarProps,
   ClickAwayListener,
   type MenuProps,
 } from '@mui/material';
+import { QuitOutlineMd } from '@astral/icons';
 
 import { useMenu } from '../hooks';
 import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
+import { IconButton } from '../IconButton';
 
 import { MenuList } from './MenuList';
 import {
@@ -19,11 +26,12 @@ import {
   ProfileRoot,
   ProfileUser,
 } from './styles';
+import { useLogic } from './useLogic';
 
 export type MenuListType = {
   icon: ReactNode;
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 type ProfileWithMenu = {
@@ -37,7 +45,7 @@ type ProfileWithMenu = {
 };
 
 type ProfileWithMenuList = {
-  menuList: Array<MenuListType>;
+  menuList?: Array<MenuListType>;
   menu?: never;
 };
 
@@ -54,7 +62,8 @@ export type ProfileProps = {
    * Аватарка профиля
    */
   avatar?: AvatarProps;
-  onExitClick?: () => {};
+  onExitClick?: () => void;
+  renderItem?: FunctionComponent<Omit<MenuListType, 'onClick'>>;
 } & (ProfileWithMenu | ProfileWithMenuList);
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
@@ -66,18 +75,25 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       menu: Menu,
       menuList,
       onExitClick,
+      renderItem,
     } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     const { isMobile } = useViewportType();
 
+    const { hasMenuItem } = useLogic(props);
+
     return (
       <>
         <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
-            {isMobile ? (
-              <ProfileAvatar {...avatar} />
-            ) : (
+            {isMobile && hasMenuItem && (
+              <IconButton onClick={onExitClick} variant="text">
+                <QuitOutlineMd />
+              </IconButton>
+            )}
+            {isMobile && !hasMenuItem && <ProfileAvatar {...avatar} />}
+            {!isMobile && (
               <ProfileUser>
                 <ProfileCredentials>
                   <ProfileDisplayName>{displayName}</ProfileDisplayName>
@@ -111,7 +127,28 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             }}
           />
         ) : (
-          <MenuList menuList={menuList} onExitClick={onExitClick} />
+          <MenuList
+            open={hasMenuItem ? false : open}
+            anchorEl={anchorRef.current}
+            renderItem={renderItem}
+            menuList={menuList}
+            onExitClick={onExitClick}
+            onClose={handleCloseMenu}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            PaperProps={{
+              style: {
+                maxWidth: 300,
+                minWidth: 200,
+              },
+            }}
+          />
         )}
       </>
     );

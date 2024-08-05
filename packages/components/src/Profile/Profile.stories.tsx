@@ -13,8 +13,9 @@ import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
 import { ListItemText } from '../ListItemText';
 import { OverflowTypography } from '../OverflowTypography';
+import { Tag } from '../Tag';
 
-import { Profile } from './Profile';
+import { Profile, type ProfileProps } from './Profile';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=17119-17523)
@@ -81,6 +82,38 @@ export const Interaction: Story = {
       disable: true,
     },
   },
+};
+
+export const TestNewMenuListProfile = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
+  const renderItem: ProfileProps['renderItem'] = ({ icon, title }) => (
+    <>
+      <ListItemText>
+        <Tag label={title} color="success" />
+      </ListItemText>
+      <ListItemIcon>{icon}</ListItemIcon>
+    </>
+  );
+
+  return (
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        menuList={menuList}
+        renderItem={renderItem}
+        onExitClick={() => console.log('Выход')}
+      />
+    </Box>
+  );
 };
 
 export const Example = () => {
