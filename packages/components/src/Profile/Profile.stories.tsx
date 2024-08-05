@@ -13,7 +13,9 @@ import { MenuItem } from '../MenuItem';
 import { Divider } from '../Divider';
 import { ListItemText } from '../ListItemText';
 import { OverflowTypography } from '../OverflowTypography';
-import { Tag } from '../Tag';
+import { Typography } from '../Typography';
+import { IconButton } from '../IconButton';
+import { styled } from '../styles';
 
 import { Profile, type ProfileProps } from './Profile';
 
@@ -84,37 +86,10 @@ export const Interaction: Story = {
   },
 };
 
-export const TestNewMenuListProfile = () => {
-  const menuList = [
-    {
-      icon: <ProfileOutlineMd />,
-      title: 'Мой профиль',
-      onClick: () => console.log('Мой профиль'),
-    },
-    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
-    { icon: <SettingsFillMd />, title: 'Настройки' },
-  ];
-
-  const renderItem: ProfileProps['renderItem'] = ({ icon, title }) => (
-    <>
-      <ListItemText>
-        <Tag label={title} color="success" />
-      </ListItemText>
-      <ListItemIcon>{icon}</ListItemIcon>
-    </>
-  );
-
-  return (
-    <Box>
-      <Profile
-        displayName="Григорьев Виталий"
-        menuList={menuList}
-        renderItem={renderItem}
-        onExitClick={() => console.log('Выход')}
-      />
-    </Box>
-  );
-};
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const Example = () => {
   return (
@@ -158,6 +133,94 @@ export const Example = () => {
             </MenuItem>
           </Menu>
         )}
+      />
+    </Box>
+  );
+};
+
+/**
+ * prop ```menuList``` принимает массив данных для отображения и заменяет prop ```menu```
+ */
+
+export const MenuList = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
+  return (
+    <Box>
+      <Profile displayName="Григорьев Виталий" menuList={menuList} />
+    </Box>
+  );
+};
+
+/**
+ * prop ```onExitClick``` функция, которая вызывается при выходе
+ */
+
+export const OnExitClick = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
+  const onExitClick = () => console.log('Выход');
+
+  return (
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        menuList={menuList}
+        onExitClick={onExitClick}
+      />
+    </Box>
+  );
+};
+
+/**
+ * prop ```renderItem``` позволяет задать свое отображение для MenuItem
+ */
+
+export const RenderItem = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
+  const renderItem: ProfileProps['renderItem'] = ({ title, icon }) => (
+    <Wrapper>
+      <Typography variant="caption" color="primary">
+        {title}
+      </Typography>
+      <IconButton variant="text">{icon}</IconButton>
+    </Wrapper>
+  );
+
+  const onExitClick = () => console.log('Выход');
+
+  return (
+    <Box>
+      <Profile
+        displayName="Григорьев Виталий"
+        menuList={menuList}
+        onExitClick={onExitClick}
+        renderItem={renderItem}
       />
     </Box>
   );
