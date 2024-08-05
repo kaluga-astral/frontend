@@ -4,7 +4,8 @@ import { Name } from './Name';
 import { Value } from './Value';
 import { Wrapper } from './styles';
 import { DescriptionContextProvider } from './DescriptionContext';
-import { DEFAULT_SEPARATOR, DESCRIPTION_ROOT_CLASSNAME } from './constants';
+import { DESCRIPTION_ROOT_CLASSNAME } from './constants';
+import { useLogic } from './useLogic';
 
 export type DescriptionProps = {
   /**
@@ -32,20 +33,34 @@ export type DescriptionProps = {
    * Определяет тип корневого HTML-элемента
    */
   component?: 'div' | 'dl';
+
+  /**
+   * Определяет перенос строк
+   * @default 'default'
+   */
+  direction?: 'default' | 'column' | 'row';
 };
 
-export const Description = ({
-  children,
-  justifyContent = 'start',
-  leader = false,
-  separator = DEFAULT_SEPARATOR,
-  component = 'dl',
-}: DescriptionProps) => {
+export const Description = (props: DescriptionProps) => {
+  const { descriptionContextProviderProps, direction } = useLogic(props);
+
+  const {
+    justifyContent = 'start',
+    component = 'dl',
+    children,
+    leader = false,
+  } = props;
+
   return (
-    <DescriptionContextProvider leader={leader} separator={separator}>
+    <DescriptionContextProvider
+      leader={leader}
+      direction={direction}
+      {...descriptionContextProviderProps}
+    >
       <Wrapper
         $justifyContent={justifyContent}
         className={DESCRIPTION_ROOT_CLASSNAME}
+        $direction={direction}
         as={component}
       >
         {children}

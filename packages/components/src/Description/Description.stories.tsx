@@ -42,10 +42,18 @@ const GridWrapper = styled(Grid)`
 
 const StyledDescriptionName = styled(Description.Name)`
   width: 100px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: unset;
+  }
 `;
 
 const StyledDescriptionValue = styled(Description.Value)`
   width: 300px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: unset;
+  }
 `;
 
 export const Example = () => {
@@ -109,6 +117,29 @@ export const Leader = () => {
       <Description leader>
         <Description.Name>ФИО</Description.Name>
         <Description.Value>Швецова Мария Дмитриевна</Description.Value>
+      </Description>
+    </GridWrapper>
+  );
+};
+
+/**
+ * Prop ```direction``` определяет как располагаются Name и Value.
+ * Так же изменяет расположение для мобильных устройств.
+ * ```default``` значение указывает на позиционирование row для больших экранов и column для мобильных устройств
+ *
+ */
+export const Direction = () => {
+  return (
+    <GridWrapper rowSpacing={3} container>
+      <Description direction="row">
+        <Description.Name>ИНН</Description.Name>
+        <Description.Value>295995231495</Description.Value>
+      </Description>
+      <Description direction="column">
+        <Description.Name>Описание</Description.Name>
+        <Description.Value>
+          ИНН физического лица является последовательностью из 12 цифр
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
