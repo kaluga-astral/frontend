@@ -123,7 +123,10 @@ export const Leader = () => {
 };
 
 /**
- * Prop ```direction``` определяет перенос строк
+ * Prop ```direction``` определяет как располагаются Name и Value.
+ * Так же изменяет расположение для мобильных устройств.
+ * ```default``` значение указывает на позиционирование row для больших экранов и column для мобильных устройств
+ *
  */
 export const Direction = () => {
   return (
@@ -134,9 +137,9 @@ export const Direction = () => {
       </Description>
       <Description direction="column">
         <Description.Name>Описание</Description.Name>
-        <StyledDescriptionValue>
+        <Description.Value>
           ИНН физического лица является последовательностью из 12 цифр
-        </StyledDescriptionValue>
+        </Description.Value>
       </Description>
     </GridWrapper>
   );
