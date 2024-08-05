@@ -15,11 +15,11 @@ type UseBaseRangeDatesOprions = {
   /**
    * Выбранная start дата
    */
-  selectedStartDate?: Date;
+  selectedStartDate?: Date | null;
   /**
    * Выбранная end дата
    */
-  selectedEndDate?: Date;
+  selectedEndDate?: Date | null;
   /**
    * При true хук вернет предыдущие значения, не рассчитывая новые при изменении зависимостей.
    * Используется, что бы при выборе первой даты, второй календарь не менял активный месяц до момента повторного открытия поповера

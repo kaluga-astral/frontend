@@ -74,6 +74,30 @@ describe('FormDatePicker', () => {
     expect(submitValues.date.toISOString().includes('2022-02-09')).toBeTruthy();
   });
 
+  it('Значение в поле сбрасывается при ручном удалении символов в input, если изначально значение было задано через defaultValues', async () => {
+    const TestComponent = () => {
+      const form = useForm<{ date: FormDatePickerValue }>({
+        defaultValues: {
+          date: new Date(),
+        },
+      });
+
+      return (
+        <Form name="form" form={form}>
+          <FormDatePicker name="date" inputProps={{ label: 'date' }} />
+        </Form>
+      );
+    };
+
+    renderWithTheme(<TestComponent />);
+
+    const input = await screen.findByRole('textbox', { name: /date/i });
+
+    expect(input).toHaveValue('10.02.2022');
+    await userEvents.clear(input);
+    expect(input).toHaveValue('');
+  });
+
   it('Prop:inputRef: Фокус на поле после клика на Submit', async () => {
     const TestComponent = () => {
       const form = useForm<FormValues>({

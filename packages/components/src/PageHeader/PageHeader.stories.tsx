@@ -832,8 +832,16 @@ export const Actions = () => (
           { text: 'действие 3', color: 'error' },
         ],
         secondaryVisible: [
-          { name: 'О компании', icon: <CompanyOutlineMd /> },
-          { name: 'Добавить', icon: <AddOutlineMd /> },
+          {
+            name: 'О компании',
+            icon: <CompanyOutlineMd />,
+          },
+          {
+            name: 'Добавить',
+            icon: <AddOutlineMd />,
+            disabled: true,
+            disableReason: 'Действие недоступно, т.к. у вас недостаточно прав',
+          },
         ],
         secondary: [
           { text: 'Второстепенное действие 1' },

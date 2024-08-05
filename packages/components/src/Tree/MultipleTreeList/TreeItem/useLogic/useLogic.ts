@@ -22,7 +22,7 @@ type UseLogicProps = Pick<
 
 export const useLogic = ({
   id,
-  value,
+  value = [],
   children,
   level,
   isInitialExpanded,
@@ -32,7 +32,7 @@ export const useLogic = ({
 }: UseLogicProps) => {
   const childrenIds = useMemo(
     () => getAllChildrenId(children, disabledItems),
-    [children],
+    [children, disabledItems],
   );
   const isSelected = checkIsSelected(value, id);
   const isIndeterminate = checkIsIndeterminate(value, childrenIds);
@@ -53,34 +53,32 @@ export const useLogic = ({
     );
 
     if (!isSelected && isEveryChildChecked) {
-      onChange((selectedIds = []) => [...selectedIds, id]);
+      onChange([...value, id]);
     }
 
     if (isSelected && !isEveryChildChecked) {
-      onChange((selectedIds = []) =>
-        selectedIds.filter((selectedId) => selectedId !== id),
-      );
+      onChange(value.filter((selectedId) => selectedId !== id));
     }
   }, [value, childrenIds]);
 
   const handleChange = () => {
-    onChange((selectedIds = []) => {
-      if (children) {
-        if (selectedIds.includes(id)) {
-          return selectedIds.filter(
+    if (children) {
+      if (value.includes(id)) {
+        return onChange(
+          value.filter(
             (selectedId) => ![id, ...childrenIds].includes(selectedId),
-          );
-        }
-
-        return [...selectedIds, id, ...childrenIds];
-      } else {
-        if (selectedIds.includes(id)) {
-          return selectedIds.filter((selectedId) => selectedId !== id);
-        }
-
-        return [...selectedIds, id];
+          ),
+        );
       }
-    });
+
+      onChange([...value, id, ...childrenIds]);
+    } else {
+      if (value.includes(id)) {
+        return onChange(value.filter((selectedId) => selectedId !== id));
+      }
+
+      onChange([...value, id]);
+    }
   };
 
   return {
