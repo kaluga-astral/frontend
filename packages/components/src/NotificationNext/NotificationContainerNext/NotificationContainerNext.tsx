@@ -27,6 +27,12 @@ export const NotificationContainerNext = ({
 }: NotificationContainerProps) => {
   const { isMobile } = useViewportType();
 
+  console.log(
+    'render NotificationContainerNext',
+    NOTIFY_CONTAINER_ID,
+    isMobile,
+  );
+
   return (
     <Wrapper>
       <Inner
