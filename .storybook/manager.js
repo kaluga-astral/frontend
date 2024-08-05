@@ -1,6 +1,6 @@
 import { addons } from '@storybook/manager-api';
 
-import { create } from '@storybook/theming/create';
+import { create } from '@storybook/theming';
 
 import logoSrc from './public/logo.svg';
 
