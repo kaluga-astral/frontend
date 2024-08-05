@@ -56,13 +56,15 @@ export const ButtonGroupSecondaryActions = <
   return (
     <IconDropdownButton icon={<DotsOutlineMd />} variant="light">
       {actions.map(({ text, ...secondaryProps }) => (
-        <ListItemButton
-          tooltipPlacement={TOOLTIP_PLACEMENT}
-          {...secondaryProps}
-          key={text}
-        >
-          <ListItemText primary={text} />
-        </ListItemButton>
+        <li>
+          <ListItemButton
+            tooltipPlacement={TOOLTIP_PLACEMENT}
+            {...secondaryProps}
+            key={text}
+          >
+            <ListItemText primary={text} />
+          </ListItemButton>
+        </li>
       ))}
     </IconDropdownButton>
   );
