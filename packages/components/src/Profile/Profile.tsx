@@ -30,7 +30,7 @@ import { useLogic } from './useLogic';
 
 export type MenuListType = {
   icon: ReactNode;
-  title: string;
+  title: ReactNode;
   onClick?: () => void;
 };
 
@@ -62,7 +62,21 @@ export type ProfileProps = {
    * Аватарка профиля
    */
   avatar?: AvatarProps;
-  onExitClick?: () => void;
+  /**
+   * Отображение кнопки выхода
+   */
+  exitButton?: { onClick: () => void };
+  /**
+   * @example
+   * const renderItem: ProfileProps['renderItem'] = ({ title, icon }) => (
+   *     <Wrapper>
+   *       <Typography variant="caption" color="primary">
+   *         {title}
+   *       </Typography>
+   *       <IconButton variant="text">{icon}</IconButton>
+   *     </Wrapper>
+   *   );
+   */
   renderItem?: FunctionComponent<Omit<MenuListType, 'onClick'>>;
 } & (ProfileWithMenu | ProfileWithMenuList);
 
@@ -74,7 +88,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       avatar = {},
       menu: Menu,
       menuList,
-      onExitClick,
+      exitButton,
       renderItem,
     } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
@@ -88,7 +102,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
         <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
             {isMobile && hasMenuItem && (
-              <IconButton onClick={onExitClick} variant="text">
+              <IconButton onClick={exitButton?.onClick} variant="text">
                 <QuitOutlineMd />
               </IconButton>
             )}
@@ -132,7 +146,7 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             anchorEl={anchorRef.current}
             renderItem={renderItem}
             menuList={menuList}
-            onExitClick={onExitClick}
+            onExitClick={exitButton?.onClick}
             onClose={handleCloseMenu}
             anchorOrigin={{
               vertical: 'bottom',
