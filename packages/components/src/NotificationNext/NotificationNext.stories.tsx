@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { toast } from 'react-toastify-next';
 
 import { Button } from '../Button';
 import { CircularProgress } from '../CircularProgress';
@@ -9,10 +8,7 @@ import { TextField } from '../TextField';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
 
-import { sleep } from './utils';
-import { NOTIFY_CONTAINER_ID, NOTIFY_STATIC_CONTAINER_ID } from './constants';
 import { notify } from './NotificationNext';
-import { NotificationStackContainerNext } from './NotificationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
 import { NotificationTemplateNext } from './NotificationTemplateNext';
 
@@ -214,146 +210,6 @@ export const HideProgressBar = () => {
       <Stack direction="row" gap={2}>
         <Button onClick={handleErrorWithContentWithoutProgressBar}>
           Hide progress bar
-        </Button>
-      </Stack>
-    </ExampleStack>
-  );
-};
-
-export const WithStack = () => {
-  const handleInfo = () => {
-    notify.info('Загрузка завершена', {
-      filled: false,
-    });
-  };
-
-  const handleSuccess = () => {
-    notify.success('Операция успешно завершена', {
-      filled: false,
-    });
-  };
-
-  const handleWarning = () => {
-    notify.warning('Внимание', {
-      filled: false,
-    });
-  };
-
-  const handleError = () => {
-    notify.error('Соединение потеряно', {
-      filled: false,
-    });
-  };
-
-  const handleSuccessWithContent = () => {
-    notify.success('Операция успешно завершена и заголовок в две строки', {
-      filled: false,
-      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-      actions: <Button variant="link">Подробнее</Button>,
-      actionsDirection: 'right',
-    });
-  };
-
-  const handleWithLoading = async () => {
-    const id = toast.loading('Загрузка документов...', {
-      containerId: NOTIFY_STATIC_CONTAINER_ID,
-    });
-
-    await sleep(3000);
-    notify.dismiss(id);
-
-    notify.success('Документы загружены', {
-      filled: false,
-      containerId: NOTIFY_CONTAINER_ID,
-      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-      actions: <Button variant="link">Подробнее</Button>,
-    });
-  };
-
-  return (
-    <ExampleStack>
-      <NotificationStackContainerNext />
-
-      <Stack direction="column" gap={2}>
-        <Button onClick={handleInfo}>Notify info</Button>
-
-        <Button onClick={handleWarning} color="warning">
-          Notify warning
-        </Button>
-
-        <Button onClick={handleError} color="error">
-          Notify error
-        </Button>
-
-        <Button onClick={handleSuccess} color="success">
-          Notify success
-        </Button>
-
-        <Button onClick={handleSuccessWithContent} color="success">
-          Notify success with content
-        </Button>
-
-        <Button onClick={handleWithLoading} color="primary">
-          Notify with loading
-        </Button>
-      </Stack>
-    </ExampleStack>
-  );
-};
-
-export const Static = () => {
-  const handleInfo = () => {
-    notify.info('Загрузка завершена', {
-      containerId: 'static-static',
-      filled: false,
-      isStatic: true,
-    });
-  };
-
-  const handleSuccess = () => {
-    notify.success('Операция успешно завершена', {
-      containerId: 'static-static',
-      filled: false,
-      isStatic: true,
-    });
-  };
-
-  const handleWarning = () => {
-    notify.warning('Внимание', {
-      containerId: 'static-static',
-      filled: false,
-      isStatic: true,
-    });
-  };
-
-  const handleError = () => {
-    notify.error('Соединение потеряно', {
-      containerId: 'static-static',
-      filled: false,
-      isStatic: true,
-    });
-  };
-
-  return (
-    <ExampleStack>
-      <NotificationStackContainerNext
-        containerId="static"
-        staticContainerId="static-static"
-      />
-
-      <Stack direction="column" gap={2}>
-        <Button onClick={handleInfo}>Static notify info</Button>
-
-        <Button onClick={handleWarning} color="warning">
-          Static notify warning
-        </Button>
-
-        <Button onClick={handleError} color="error">
-          Static notify error
-        </Button>
-
-        <Button onClick={handleSuccess} color="success">
-          Static notify success
         </Button>
       </Stack>
     </ExampleStack>
