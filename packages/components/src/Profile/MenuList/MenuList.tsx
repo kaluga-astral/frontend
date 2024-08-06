@@ -1,4 +1,4 @@
-import { Menu as MuiMenu, type MenuProps as MuiMenuProps } from '@mui/material';
+import { type MenuProps as MuiMenuProps } from '@mui/material';
 import { QuitOutlineMd } from '@astral/icons';
 
 import { type ProfileMenuItemData } from '../Profile';
@@ -10,8 +10,9 @@ import { ListItemIcon } from '../../ListItemIcon';
 import { ListItemText } from '../../ListItemText';
 import { OverflowTypography } from '../../OverflowTypography';
 import { Divider } from '../../Divider';
+import { MenuList as StyledMenuList } from '../../MenuList';
 
-import { StyledMenuList } from './styles';
+import { StyledMenu } from './styles';
 
 type MenuListProps = WithoutEmotionSpecific<MuiMenuProps> & {
   menuList?: Array<ProfileMenuItemData>;
@@ -59,7 +60,7 @@ export const MenuList = (props: MenuListProps) => {
   }
 
   return (
-    <MuiMenu open={open} onClose={onClose} {...restProps}>
+    <StyledMenu open={open} onClose={onClose} {...restProps}>
       {menuList?.map(({ render, icon, title, onClick }) =>
         render ? (
           render({ icon, title, onClick })
@@ -83,6 +84,6 @@ export const MenuList = (props: MenuListProps) => {
           </ListItemText>
         </StyledMenuItem>
       )}
-    </MuiMenu>
+    </StyledMenu>
   );
 };
