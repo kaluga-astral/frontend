@@ -164,6 +164,42 @@ export const Example = () => {
   );
 };
 
+export const WithoutProfileMenu = () => {
+  const onExitClick = () => console.log('Выход');
+
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return (
+              <Box>
+                <ProductSwitcher getProducts={handleGetProducts} />
+              </Box>
+            );
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            exitButton: { onClick: onExitClick },
+          }}
+        />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
 export const Product = () => {
   return (
     <DashboardLayoutWrapper>

@@ -9,13 +9,11 @@ import {
   ClickAwayListener,
   type MenuProps,
 } from '@mui/material';
-import { QuitOutlineMd } from '@astral/icons';
 
 import { useMenu } from '../hooks';
 import { Chevron } from '../Chevron';
 import { useViewportType } from '../hooks/useViewportType';
 import { type WithoutEmotionSpecific } from '../types';
-import { IconButton } from '../IconButton';
 
 import { MenuList } from './MenuList';
 import {
@@ -26,17 +24,28 @@ import {
   ProfileRoot,
   ProfileUser,
 } from './styles';
-import { useLogic } from './useLogic';
 
-export type MenuListType = {
+export type MenuItem = {
   icon: ReactNode;
   title: ReactNode;
   onClick?: () => void;
+  /**
+   * @example
+   * const render: MenuItem['render'] = ({ title, icon, onClick }) => (
+   *     <Wrapper onClick={onClick}>
+   *       <Typography variant="caption" color="primary">
+   *         {title}
+   *       </Typography>
+   *       <IconButton variant="text">{icon}</IconButton>
+   *     </Wrapper>
+   *   );
+   */
+  render?: FunctionComponent<Omit<MenuItem, 'render'>>;
 };
 
 type ProfileWithMenu = {
   /**
-   * Выпадающее меню
+   * Кастомный рендер menu. Перекрывает menuList и exitButton
    */
   menu: (
     props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
@@ -45,7 +54,10 @@ type ProfileWithMenu = {
 };
 
 type ProfileWithMenuList = {
-  menuList?: Array<MenuListType>;
+  /**
+   * Рендер menu через массив данных. Перекрывает menu и может использоваться с exitButton
+   */
+  menuList?: Array<MenuItem>;
   menu?: never;
 };
 
@@ -63,21 +75,9 @@ export type ProfileProps = {
    */
   avatar?: AvatarProps;
   /**
-   * Отображение кнопки выхода
+   * Отображение кнопки выхода и действие на нее
    */
   exitButton?: { onClick: () => void };
-  /**
-   * @example
-   * const renderItem: ProfileProps['renderItem'] = ({ title, icon }) => (
-   *     <Wrapper>
-   *       <Typography variant="caption" color="primary">
-   *         {title}
-   *       </Typography>
-   *       <IconButton variant="text">{icon}</IconButton>
-   *     </Wrapper>
-   *   );
-   */
-  renderItem?: FunctionComponent<Omit<MenuListType, 'onClick'>>;
 } & (ProfileWithMenu | ProfileWithMenuList);
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
@@ -89,25 +89,18 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       menu: Menu,
       menuList,
       exitButton,
-      renderItem,
     } = props;
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     const { isMobile } = useViewportType();
 
-    const { hasMenuItem } = useLogic(props);
-
     return (
       <>
         <ClickAwayListener ref={ref} onClickAway={handleCloseMenu}>
           <ProfileRoot ref={anchorRef} variant="text" onClick={handleOpenMenu}>
-            {isMobile && hasMenuItem && (
-              <IconButton onClick={exitButton?.onClick} variant="text">
-                <QuitOutlineMd />
-              </IconButton>
-            )}
-            {isMobile && !hasMenuItem && <ProfileAvatar {...avatar} />}
-            {!isMobile && (
+            {isMobile ? (
+              <ProfileAvatar {...avatar} />
+            ) : (
               <ProfileUser>
                 <ProfileCredentials>
                   <ProfileDisplayName>{displayName}</ProfileDisplayName>
@@ -142,11 +135,10 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
           />
         ) : (
           <MenuList
-            open={hasMenuItem ? false : open}
+            open={open}
             anchorEl={anchorRef.current}
-            renderItem={renderItem}
             menuList={menuList}
-            onExitClick={exitButton?.onClick}
+            exitButton={exitButton}
             onClose={handleCloseMenu}
             anchorOrigin={{
               vertical: 'bottom',
@@ -155,12 +147,6 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             transformOrigin={{
               vertical: 'top',
               horizontal: 'right',
-            }}
-            PaperProps={{
-              style: {
-                maxWidth: 300,
-                minWidth: 200,
-              },
             }}
           />
         )}

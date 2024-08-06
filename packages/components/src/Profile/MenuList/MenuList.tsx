@@ -1,27 +1,28 @@
 import { Menu as MuiMenu, type MenuProps as MuiMenuProps } from '@mui/material';
 import { QuitOutlineMd } from '@astral/icons';
-import { type FunctionComponent } from 'react';
 
-import { type MenuListType } from '../Profile';
+import { type MenuItem } from '../Profile';
 import { type WithoutEmotionSpecific } from '../../types';
 import { useViewportType } from '../../hooks/useViewportType';
 import { BottomDrawer } from '../../BottomDrawer';
-import { MenuList as StyledMenuList } from '../../MenuList';
-import { MenuItem } from '../../MenuItem';
+import { MenuItem as StyledMenuItem } from '../../MenuItem';
 import { ListItemIcon } from '../../ListItemIcon';
 import { ListItemText } from '../../ListItemText';
 import { OverflowTypography } from '../../OverflowTypography';
 import { Divider } from '../../Divider';
 
+import { StyledMenuList } from './styles';
+
 type MenuListProps = WithoutEmotionSpecific<MuiMenuProps> & {
-  menuList?: Array<MenuListType>;
-  onExitClick?: () => void;
-  renderItem?: FunctionComponent<Omit<MenuListType, 'onClick'>>;
+  menuList?: Array<MenuItem>;
+  exitButton?: { onClick: () => void };
 };
 
+/**
+ * Компонент для рендера menu с помощью массива данных
+ */
 export const MenuList = (props: MenuListProps) => {
-  const { open, onClose, menuList, onExitClick, renderItem, ...restProps } =
-    props;
+  const { open, onClose, menuList, exitButton, ...restProps } = props;
 
   const { isMobile } = useViewportType();
 
@@ -29,29 +30,29 @@ export const MenuList = (props: MenuListProps) => {
     return (
       <BottomDrawer onClose={onClose} open={open}>
         <StyledMenuList>
-          {menuList?.map(({ icon, title, onClick }) => (
-            <MenuItem onClick={onClick}>
-              {renderItem ? (
-                <>{renderItem({ icon, title })}</>
-              ) : (
-                <>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>
-                    <OverflowTypography noWrap>{title}</OverflowTypography>
-                  </ListItemText>
-                </>
-              )}
-            </MenuItem>
-          ))}
-          <Divider />
-          <MenuItem onClick={onExitClick}>
-            <ListItemIcon>
-              <QuitOutlineMd />
-            </ListItemIcon>
-            <ListItemText>
-              <OverflowTypography noWrap>Выйти</OverflowTypography>
-            </ListItemText>
-          </MenuItem>
+          {menuList?.map(({ render, icon, title, onClick }) =>
+            render ? (
+              render({ icon, title, onClick })
+            ) : (
+              <StyledMenuItem onClick={onClick}>
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText>
+                  <OverflowTypography noWrap>{title}</OverflowTypography>
+                </ListItemText>
+              </StyledMenuItem>
+            ),
+          )}
+          {exitButton && <Divider />}
+          {exitButton && (
+            <StyledMenuItem onClick={exitButton.onClick}>
+              <ListItemIcon>
+                <QuitOutlineMd />
+              </ListItemIcon>
+              <ListItemText>
+                <OverflowTypography noWrap>Выйти</OverflowTypography>
+              </ListItemText>
+            </StyledMenuItem>
+          )}
         </StyledMenuList>
       </BottomDrawer>
     );
@@ -59,29 +60,29 @@ export const MenuList = (props: MenuListProps) => {
 
   return (
     <MuiMenu open={open} onClose={onClose} {...restProps}>
-      {menuList?.map(({ icon, title, onClick }) => (
-        <MenuItem onClick={onClick}>
-          {renderItem ? (
-            <>{renderItem({ icon, title })}</>
-          ) : (
-            <>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>{title}</OverflowTypography>
-              </ListItemText>
-            </>
-          )}
-        </MenuItem>
-      ))}
-      <Divider />
-      <MenuItem onClick={onExitClick}>
-        <ListItemIcon>
-          <QuitOutlineMd />
-        </ListItemIcon>
-        <ListItemText>
-          <OverflowTypography noWrap>Выйти</OverflowTypography>
-        </ListItemText>
-      </MenuItem>
+      {menuList?.map(({ render, icon, title, onClick }) =>
+        render ? (
+          render({ icon, title, onClick })
+        ) : (
+          <StyledMenuItem onClick={onClick}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText>
+              <OverflowTypography noWrap>{title}</OverflowTypography>
+            </ListItemText>
+          </StyledMenuItem>
+        ),
+      )}
+      {exitButton && <Divider />}
+      {exitButton && (
+        <StyledMenuItem onClick={exitButton.onClick}>
+          <ListItemIcon>
+            <QuitOutlineMd />
+          </ListItemIcon>
+          <ListItemText>
+            <OverflowTypography noWrap>Выйти</OverflowTypography>
+          </ListItemText>
+        </StyledMenuItem>
+      )}
     </MuiMenu>
   );
 };

@@ -15,9 +15,9 @@ import { ListItemText } from '../ListItemText';
 import { OverflowTypography } from '../OverflowTypography';
 import { Typography } from '../Typography';
 import { IconButton } from '../IconButton';
-import { styled } from '../styles';
+import { Grid } from '../Grid';
 
-import { Profile, type ProfileProps } from './Profile';
+import { type MenuItem as MenuItemType, Profile } from './Profile';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=17119-17523)
@@ -86,11 +86,6 @@ export const Interaction: Story = {
   },
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const Example = () => {
   return (
     <Box>
@@ -154,17 +149,17 @@ export const MenuList = () => {
   ];
 
   return (
-    <Box>
+    <Grid>
       <Profile displayName="Григорьев Виталий" menuList={menuList} />
-    </Box>
+    </Grid>
   );
 };
 
 /**
- * prop ```onExitClick``` функция, которая вызывается при выходе
+ * prop ```exitButton``` объект, который добавляет кнопку выхода и действие на нее
  */
 
-export const OnExitClick = () => {
+export const ExitButton = () => {
   const menuList = [
     {
       icon: <ProfileOutlineMd />,
@@ -175,16 +170,18 @@ export const OnExitClick = () => {
     { icon: <SettingsFillMd />, title: 'Настройки' },
   ];
 
-  const onExitClick = () => console.log('Выход');
+  const exitButton = {
+    onClick: () => console.log('Выход'),
+  };
 
   return (
-    <Box>
+    <Grid>
       <Profile
         displayName="Григорьев Виталий"
         menuList={menuList}
-        onExitClick={onExitClick}
+        exitButton={exitButton}
       />
-    </Box>
+    </Grid>
   );
 };
 
@@ -193,36 +190,41 @@ export const OnExitClick = () => {
  */
 
 export const RenderItem = () => {
+  const renderItem: MenuItemType['render'] = ({ title, icon }) => (
+    <MenuItem>
+      <Typography variant="caption" color="primary">
+        {title}
+      </Typography>
+      <IconButton variant="text">{icon}</IconButton>
+    </MenuItem>
+  );
   const menuList = [
     {
       icon: <ProfileOutlineMd />,
       title: 'Мой профиль',
       onClick: () => console.log('Мой профиль'),
+      render: renderItem,
     },
-    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    {
+      icon: <CompanyOutlineMd />,
+      title: 'Мои организации',
+      render: renderItem,
+    },
     { icon: <SettingsFillMd />, title: 'Настройки' },
   ];
 
-  const renderItem: ProfileProps['renderItem'] = ({ title, icon }) => (
-    <Wrapper>
-      <Typography variant="caption" color="primary">
-        {title}
-      </Typography>
-      <IconButton variant="text">{icon}</IconButton>
-    </Wrapper>
-  );
-
-  const onExitClick = () => console.log('Выход');
+  const exitButton = {
+    onClick: () => console.log('Выход'),
+  };
 
   return (
-    <Box>
+    <Grid>
       <Profile
         displayName="Григорьев Виталий"
         menuList={menuList}
-        onExitClick={onExitClick}
-        renderItem={renderItem}
+        exitButton={exitButton}
       />
-    </Box>
+    </Grid>
   );
 };
 
