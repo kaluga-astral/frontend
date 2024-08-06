@@ -25,13 +25,6 @@ type NotificationCloseIconProps = {
 };
 
 export const Wrapper = styled.article<NotificationTemplateProps>`
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  min-height: 32px;
   padding: ${({ theme }) => theme.spacing(4)};
 
   ${({ theme, variant, filled }) =>
@@ -47,8 +40,7 @@ export const Header = styled.header`
 `;
 
 export const Content = styled.div`
-  margin-top: ${({ theme }) => theme.spacing(2)};
-  margin-left: calc(24px + 8px);
+
 `;
 
 export const Footer = styled.footer<NotificationActionsProps>`
