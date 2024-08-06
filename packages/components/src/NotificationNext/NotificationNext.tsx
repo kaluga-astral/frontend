@@ -20,11 +20,6 @@ export const notify: Notify = {
       ({ toastProps }) =>
         NOTIFICATION_VARIANT.success({ ...options, icon, title }, toastProps),
       {
-        className: getClassNameModifierByVariant(
-          NotificationVariantTypes.success,
-          options.hideProgressBar,
-        ),
-        transition: leave,
         ...getNotifyOptions({ ...options }),
       },
     ),
@@ -33,11 +28,6 @@ export const notify: Notify = {
       ({ toastProps }) =>
         NOTIFICATION_VARIANT.info({ ...options, icon, title }, toastProps),
       {
-        className: getClassNameModifierByVariant(
-          NotificationVariantTypes.info,
-          options.hideProgressBar,
-        ),
-        transition: leave,
         ...getNotifyOptions({ ...options }),
       },
     ),
