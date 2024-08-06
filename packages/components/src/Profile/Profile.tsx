@@ -25,22 +25,22 @@ import {
   ProfileUser,
 } from './styles';
 
-export type MenuItem = {
+export type MenuItemData = {
   icon: ReactNode;
   title: ReactNode;
   onClick?: () => void;
   /**
    * @example
-   * const render: MenuItem['render'] = ({ title, icon, onClick }) => (
-   *     <Wrapper onClick={onClick}>
+   *  const renderItem: MenuItem['render'] = ({ title, icon }) => (
+   *     <MenuItem>
    *       <Typography variant="caption" color="primary">
    *         {title}
    *       </Typography>
    *       <IconButton variant="text">{icon}</IconButton>
-   *     </Wrapper>
+   *     </MenuItem>
    *   );
    */
-  render?: FunctionComponent<Omit<MenuItem, 'render'>>;
+  render?: FunctionComponent<Omit<MenuItemData, 'render'>>;
 };
 
 type ProfileWithMenu = {
@@ -57,7 +57,7 @@ type ProfileWithMenuList = {
   /**
    * Рендер menu через массив данных. Перекрывает menu и может использоваться с exitButton
    */
-  menuList?: Array<MenuItem>;
+  menuList?: Array<MenuItemData>;
   menu?: never;
 };
 

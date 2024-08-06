@@ -17,7 +17,7 @@ import { Typography } from '../Typography';
 import { IconButton } from '../IconButton';
 import { Grid } from '../Grid';
 
-import { type MenuItem as MenuItemType, Profile } from './Profile';
+import { type MenuItemData, Profile } from './Profile';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=17119-17523)
@@ -189,8 +189,8 @@ export const ExitButton = () => {
  * prop ```renderItem``` позволяет задать свое отображение для MenuItem
  */
 
-export const RenderItem = () => {
-  const renderItem: MenuItemType['render'] = ({ title, icon }) => (
+export const RenderCustomItem = () => {
+  const renderItem: MenuItemData['render'] = ({ title, icon }) => (
     <MenuItem>
       <Typography variant="caption" color="primary">
         {title}

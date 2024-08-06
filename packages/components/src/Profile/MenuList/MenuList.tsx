@@ -1,7 +1,7 @@
 import { Menu as MuiMenu, type MenuProps as MuiMenuProps } from '@mui/material';
 import { QuitOutlineMd } from '@astral/icons';
 
-import { type MenuItem } from '../Profile';
+import { type MenuItemData } from '../Profile';
 import { type WithoutEmotionSpecific } from '../../types';
 import { useViewportType } from '../../hooks/useViewportType';
 import { BottomDrawer } from '../../BottomDrawer';
@@ -14,7 +14,7 @@ import { Divider } from '../../Divider';
 import { StyledMenuList } from './styles';
 
 type MenuListProps = WithoutEmotionSpecific<MuiMenuProps> & {
-  menuList?: Array<MenuItem>;
+  menuList?: Array<MenuItemData>;
   exitButton?: { onClick: () => void };
 };
 
