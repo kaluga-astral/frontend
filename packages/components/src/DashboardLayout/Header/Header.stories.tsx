@@ -1,14 +1,9 @@
-import { ProfileOutlineMd, QuitOutlineMd } from '@astral/icons';
+import { ProfileOutlineMd } from '@astral/icons';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { Divider } from '../../Divider';
-import { ListItemIcon } from '../../ListItemIcon';
-import { ListItemText } from '../../ListItemText';
-import { Menu } from '../../Menu';
-import { MenuItem } from '../../MenuItem';
 import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
-import { styled } from '../../styles/styled';
+import { styled } from '../../styles';
 import { DashboardLayout } from '../DashboardLayout';
 import { Grid } from '../../Grid';
 
@@ -27,6 +22,14 @@ const meta: Meta<typeof DashboardLayout.Header> = {
 };
 
 export default meta;
+
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+];
 
 type Story = StoryObj<typeof DashboardLayout.Header>;
 
@@ -88,23 +91,8 @@ export const Interaction: Story = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      menu: (props) => (
-        <Menu {...props}>
-          <MenuItem>
-            <ListItemIcon>
-              <ProfileOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Мой профиль</ListItemText>
-          </MenuItem>
-          <Divider />
-          <MenuItem>
-            <ListItemIcon>
-              <QuitOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Выйти</ListItemText>
-          </MenuItem>
-        </Menu>
-      ),
+      menuList: FAKE_MENU_LIST,
+      exitButton: { onClick: () => console.log('Выход') },
     },
   },
   parameters: {
@@ -139,23 +127,8 @@ export const Example = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menu: (props) => (
-              <Menu {...props}>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ProfileOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Мой профиль</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <QuitOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Выйти</ListItemText>
-                </MenuItem>
-              </Menu>
-            ),
+            menuList: FAKE_MENU_LIST,
+            exitButton: { onClick: () => console.log('Выход') },
           }}
         />
         <DashboardLayout.Sidebar menu={{ items: [] }} />
@@ -261,23 +234,8 @@ export const Profile = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menu: (props) => (
-              <Menu {...props}>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ProfileOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Мой профиль</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <QuitOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Выйти</ListItemText>
-                </MenuItem>
-              </Menu>
-            ),
+            menuList: FAKE_MENU_LIST,
+            exitButton: { onClick: () => console.log('Выход') },
           }}
         />
         <DashboardLayout.Sidebar menu={{ items: [] }} />

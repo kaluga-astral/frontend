@@ -1,23 +1,17 @@
 import { type MouseEvent, type ReactElement, forwardRef } from 'react';
-import { Box } from '@mui/material';
 import {
   AddOutlineMd,
   CompanyOutlineMd,
   ProfileOutlineMd,
-  QuitOutlineMd,
 } from '@astral/icons';
 import { type Meta } from '@storybook/react';
 
-import { Divider } from '../Divider';
-import { ListItemIcon } from '../ListItemIcon';
-import { ListItemText } from '../ListItemText';
-import { Menu } from '../Menu';
-import { MenuItem } from '../MenuItem';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { Placeholder } from '../Placeholder';
 import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
-import { styled } from '../styles/styled';
+import { styled } from '../styles';
+import { Grid } from '../Grid';
 
 import { DashboardLayout } from './DashboardLayout';
 import { SidebarButton } from './Sidebar';
@@ -40,6 +34,14 @@ const meta: Meta<typeof DashboardLayout> = {
 };
 
 export default meta;
+
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+];
 
 type RouterLinkProps = {
   className?: string;
@@ -96,9 +98,9 @@ export const Example = () => {
         <DashboardLayout.Header
           productSwitcher={() => {
             return (
-              <Box>
+              <Grid>
                 <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
+              </Grid>
             );
           }}
           product={{
@@ -114,23 +116,155 @@ export const Example = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menu: (props) => (
-              <Menu {...props}>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ProfileOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Мой профиль</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <QuitOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Выйти</ListItemText>
-                </MenuItem>
-              </Menu>
-            ),
+            menuList: FAKE_MENU_LIST,
+            exitButton: { onClick: () => console.log('Выход') },
+          }}
+        />
+        <DashboardLayout.Sidebar
+          header={
+            <SidebarButton startIcon={<AddOutlineMd />}>
+              Добавить документ
+            </SidebarButton>
+          }
+          menu={{
+            items: [
+              [
+                'documents',
+                {
+                  icon: <ProfileOutlineMd />,
+                  text: 'Документы',
+                  items: [
+                    [
+                      'incoming-documents',
+                      {
+                        text: 'Входящие документы',
+                        active: true,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/incoming-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                    [
+                      'outgoing-documents',
+                      {
+                        text: 'Исходящие документы',
+                        active: false,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/outgoing-documents"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                  ],
+                },
+              ],
+              [
+                'counterparties',
+                {
+                  icon: <ProfileOutlineMd />,
+                  text: 'Контрагенты',
+                  items: [
+                    [
+                      'invitations',
+                      {
+                        text: 'Приглашения',
+                        active: false,
+                        component: forwardRef((props, ref) => {
+                          return (
+                            <RouterLink
+                              ref={ref}
+                              to="/invitations"
+                              {...props}
+                            />
+                          );
+                        }),
+                      },
+                    ],
+                  ],
+                },
+              ],
+              [
+                'organizations',
+                {
+                  icon: <CompanyOutlineMd />,
+                  text: 'Мои организации',
+                  active: true,
+                  component: forwardRef((props, ref) => {
+                    return (
+                      <RouterLink ref={ref} to="/organizations" {...props} />
+                    );
+                  }),
+                },
+              ],
+            ],
+          }}
+        />
+        <DashboardLayout.Main>
+          <PageLayout
+            header={{
+              title: 'Черновики',
+              actions: {
+                main: [
+                  {
+                    text: 'Основное действие',
+                    startIcon: <AddOutlineMd />,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+            }}
+            content={{
+              children: <Placeholder title="Документы отсутствуют" />,
+              isPaddingDisabled: false,
+            }}
+          />
+        </DashboardLayout.Main>
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+export const ExitButton = () => {
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return (
+              <Grid>
+                <ProductSwitcher getProducts={handleGetProducts} />
+              </Grid>
+            );
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            exitButton: { onClick: () => console.log('Выход') },
           }}
         />
         <DashboardLayout.Sidebar
