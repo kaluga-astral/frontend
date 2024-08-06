@@ -9,14 +9,12 @@ export const useLogic = ({ profile }: UseLogicParams) => {
   const desktopProfileRender = Boolean(profile) && !isMobile;
 
   const mobileProfileRender =
-    (Boolean(profile?.menu || profile?.menuList) ||
-      Boolean(profile?.exitButton)) &&
-    isMobile;
+    Boolean(profile?.menu || profile?.menuList) && isMobile;
 
   const exitButtonRender =
     isMobile &&
     !Boolean(profile?.menu || profile?.menuList) &&
-    profile?.exitButton;
+    Boolean(profile?.exitButton);
 
   return { exitButtonRender, desktopProfileRender, mobileProfileRender };
 };
