@@ -52,8 +52,9 @@ export const Item = (props: ItemProps) => {
   }, []);
 
   return (
-    <li key={key}>
+    <>
       <ItemButton
+        key={key}
         opened={opened}
         collapsedIn={collapsedIn}
         selected={selected}
@@ -67,6 +68,6 @@ export const Item = (props: ItemProps) => {
           <List collapsedIn={collapsedIn} items={value.items} />
         </Collapse>
       )}
-    </li>
+    </>
   );
 };

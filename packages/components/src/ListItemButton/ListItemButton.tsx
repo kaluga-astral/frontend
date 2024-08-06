@@ -28,7 +28,7 @@ export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
     const { disabledReason, disabled, tooltipPlacement, note } = props;
 
     return (
-      <>
+      <li>
         <Tooltip
           title={disabled ? disabledReason : note}
           placement={tooltipPlacement}
@@ -41,7 +41,7 @@ export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
             disableRipple
           />
         </Tooltip>
-      </>
+      </li>
     );
   },
 );
