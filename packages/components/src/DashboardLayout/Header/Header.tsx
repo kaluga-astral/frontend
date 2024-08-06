@@ -37,7 +37,8 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     children,
   } = props;
 
-  const { hasProfileMenu } = useLogic(props);
+  const { exitButtonRender, desktopProfileRender, mobileProfileRender } =
+    useLogic(props);
 
   const { collapsedIn, onToggleSidebar } = useContext(DashboardSidebarContext);
 
@@ -61,21 +62,21 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
 
       <HeaderSection>
         {children}
-        {profile && !isMobile && (
+        {desktopProfileRender && (
           <ProfileWrapper>
-            <Profile {...profile} />
+            <Profile {...(profile as ProfileProps)} />
           </ProfileWrapper>
         )}
-        {profile && !hasProfileMenu && isMobile && (
+        {exitButtonRender && (
           <ProfileWrapper>
-            <IconButton onClick={profile.exitButton?.onClick} variant="text">
+            <IconButton onClick={profile?.exitButton?.onClick} variant="text">
               <QuitOutlineMd />
             </IconButton>
           </ProfileWrapper>
         )}
-        {profile && isMobile && hasProfileMenu && (
+        {mobileProfileRender && (
           <ProfileWrapper>
-            <Profile {...profile} />
+            <Profile {...(profile as ProfileProps)} />
           </ProfileWrapper>
         )}
       </HeaderSection>

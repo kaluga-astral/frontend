@@ -1,9 +1,22 @@
 import { type HeaderProps } from '../Header';
+import { useViewportType } from '../../../hooks/useViewportType';
 
 type UseLogicParams = HeaderProps;
 
 export const useLogic = ({ profile }: UseLogicParams) => {
-  const hasProfileMenu = Boolean(profile?.menu || profile?.menuList);
+  const { isMobile } = useViewportType();
 
-  return { hasProfileMenu };
+  const desktopProfileRender = Boolean(profile) && !isMobile;
+
+  const mobileProfileRender =
+    (Boolean(profile?.menu || profile?.menuList) ||
+      Boolean(profile?.exitButton)) &&
+    isMobile;
+
+  const exitButtonRender =
+    isMobile &&
+    !Boolean(profile?.menu || profile?.menuList) &&
+    profile?.exitButton;
+
+  return { exitButtonRender, desktopProfileRender, mobileProfileRender };
 };

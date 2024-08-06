@@ -43,24 +43,6 @@ export type ProfileMenuItemData = {
   render?: FunctionComponent<Omit<ProfileMenuItemData, 'render'>>;
 };
 
-type ProfileWithMenu = {
-  /**
-   * Кастомный рендер menu. Перекрывает menuList и exitButton
-   */
-  menu: (
-    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
-  ) => JSX.Element;
-  menuList?: never;
-};
-
-type ProfileWithMenuList = {
-  /**
-   * Рендер menu через массив данных. Перекрывает menu и может использоваться с exitButton
-   */
-  menuList?: Array<ProfileMenuItemData>;
-  menu?: never;
-};
-
 export type ProfileProps = {
   /**
    * Имя профиля
@@ -75,10 +57,20 @@ export type ProfileProps = {
    */
   avatar?: AvatarProps;
   /**
+   * Кастомный рендер menu. Перекрывает menuList и exitButton
+   */
+  menu?: (
+    props: PropsWithChildren<WithoutEmotionSpecific<MenuProps>>,
+  ) => JSX.Element;
+  /**
+   * Рендер menu через массив данных. Перекрывает menu и может использоваться с exitButton
+   */
+  menuList?: Array<ProfileMenuItemData>;
+  /**
    * Отображение кнопки выхода и действие на нее
    */
   exitButton?: { onClick: () => void };
-} & (ProfileWithMenu | ProfileWithMenuList);
+};
 
 export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   (props, ref) => {
@@ -93,6 +85,12 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const { open, anchorRef, handleOpenMenu, handleCloseMenu } = useMenu();
 
     const { isMobile } = useViewportType();
+
+    if (!Menu && !menuList && !exitButton) {
+      console.error(
+        'Profile должен иметь один из следующих props: menu, menuList, exitButton',
+      );
+    }
 
     return (
       <>
