@@ -25,7 +25,7 @@ import {
   ProfileUser,
 } from './styles';
 
-export type MenuItemData = {
+export type ProfileMenuItemData = {
   icon: ReactNode;
   title: ReactNode;
   onClick?: () => void;
@@ -40,7 +40,7 @@ export type MenuItemData = {
    *     </MenuItem>
    *   );
    */
-  render?: FunctionComponent<Omit<MenuItemData, 'render'>>;
+  render?: FunctionComponent<Omit<ProfileMenuItemData, 'render'>>;
 };
 
 type ProfileWithMenu = {
@@ -57,7 +57,7 @@ type ProfileWithMenuList = {
   /**
    * Рендер menu через массив данных. Перекрывает menu и может использоваться с exitButton
    */
-  menuList?: Array<MenuItemData>;
+  menuList?: Array<ProfileMenuItemData>;
   menu?: never;
 };
 

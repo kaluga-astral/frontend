@@ -1,5 +1,4 @@
 import { ProfileOutlineMd, QuitOutlineMd } from '@astral/icons';
-import { Box } from '@mui/material';
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Divider } from '../../Divider';
@@ -11,6 +10,7 @@ import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../../styles/styled';
 import { DashboardLayout } from '../DashboardLayout';
+import { Grid } from '../../Grid';
 
 /**
  * DashboardLayout.Header
@@ -70,9 +70,9 @@ export const Interaction: Story = {
   args: {
     productSwitcher: () => {
       return (
-        <Box>
+        <Grid>
           <ProductSwitcher getProducts={handleGetProducts} />
-        </Box>
+        </Grid>
       );
     },
     product: {
@@ -121,9 +121,9 @@ export const Example = () => {
         <DashboardLayout.Header
           productSwitcher={() => {
             return (
-              <Box>
+              <Grid>
                 <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
+              </Grid>
             );
           }}
           product={{
@@ -164,7 +164,7 @@ export const Example = () => {
   );
 };
 
-export const WithoutProfileMenu = () => {
+export const ExitButton = () => {
   const onExitClick = () => console.log('Выход');
 
   return (
@@ -173,9 +173,9 @@ export const WithoutProfileMenu = () => {
         <DashboardLayout.Header
           productSwitcher={() => {
             return (
-              <Box>
+              <Grid>
                 <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
+              </Grid>
             );
           }}
           product={{
@@ -225,9 +225,9 @@ export const ProductSwitcherProps = () => {
         <DashboardLayout.Header
           productSwitcher={() => {
             return (
-              <Box>
+              <Grid>
                 <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
+              </Grid>
             );
           }}
           product={{

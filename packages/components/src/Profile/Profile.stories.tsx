@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { Box, Stack } from '@mui/material';
 import {
   CompanyOutlineMd,
   ProfileOutlineMd,
@@ -17,7 +16,7 @@ import { Typography } from '../Typography';
 import { IconButton } from '../IconButton';
 import { Grid } from '../Grid';
 
-import { type MenuItemData, Profile } from './Profile';
+import { Profile, type ProfileMenuItemData } from './Profile';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=17119-17523)
@@ -31,6 +30,16 @@ const meta: Meta<typeof Profile> = {
 
 export default meta;
 
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+  { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+  { icon: <SettingsFillMd />, title: 'Настройки' },
+];
+
 type Story = StoryObj<typeof Profile>;
 
 export const Interaction: Story = {
@@ -41,43 +50,7 @@ export const Interaction: Story = {
       alt: 'Иванов Иван',
       children: 'ИИ',
     },
-    menu: (props) => (
-      <Menu {...props}>
-        <MenuItem>
-          <ListItemIcon>
-            <ProfileOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-          </ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <CompanyOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            <OverflowTypography noWrap>Мои организации</OverflowTypography>
-          </ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <SettingsFillMd />
-          </ListItemIcon>
-          <ListItemText>
-            <OverflowTypography noWrap>Настройки</OverflowTypography>
-          </ListItemText>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <QuitOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            <OverflowTypography noWrap>Выйти</OverflowTypography>
-          </ListItemText>
-        </MenuItem>
-      </Menu>
-    ),
+    menuList: FAKE_MENU_LIST,
   },
   parameters: {
     docs: {
@@ -88,7 +61,19 @@ export const Interaction: Story = {
 
 export const Example = () => {
   return (
-    <Box>
+    <Grid>
+      <Profile displayName="Григорьев Виталий" menuList={FAKE_MENU_LIST} />
+    </Grid>
+  );
+};
+
+/**
+ * prop ```menu``` кастомный рендер menu. Перекрывает menuList и exitButton
+ */
+
+export const CustomMenu = () => {
+  return (
+    <Grid>
       <Profile
         displayName="Григорьев Виталий"
         menu={(props) => (
@@ -129,28 +114,6 @@ export const Example = () => {
           </Menu>
         )}
       />
-    </Box>
-  );
-};
-
-/**
- * prop ```menuList``` принимает массив данных для отображения и заменяет prop ```menu```
- */
-
-export const MenuList = () => {
-  const menuList = [
-    {
-      icon: <ProfileOutlineMd />,
-      title: 'Мой профиль',
-      onClick: () => console.log('Мой профиль'),
-    },
-    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
-    { icon: <SettingsFillMd />, title: 'Настройки' },
-  ];
-
-  return (
-    <Grid>
-      <Profile displayName="Григорьев Виталий" menuList={menuList} />
     </Grid>
   );
 };
@@ -160,16 +123,6 @@ export const MenuList = () => {
  */
 
 export const ExitButton = () => {
-  const menuList = [
-    {
-      icon: <ProfileOutlineMd />,
-      title: 'Мой профиль',
-      onClick: () => console.log('Мой профиль'),
-    },
-    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
-    { icon: <SettingsFillMd />, title: 'Настройки' },
-  ];
-
   const exitButton = {
     onClick: () => console.log('Выход'),
   };
@@ -178,7 +131,7 @@ export const ExitButton = () => {
     <Grid>
       <Profile
         displayName="Григорьев Виталий"
-        menuList={menuList}
+        menuList={FAKE_MENU_LIST}
         exitButton={exitButton}
       />
     </Grid>
@@ -190,7 +143,7 @@ export const ExitButton = () => {
  */
 
 export const RenderCustomItem = () => {
-  const renderItem: MenuItemData['render'] = ({ title, icon }) => (
+  const renderItem: ProfileMenuItemData['render'] = ({ title, icon }) => (
     <MenuItem>
       <Typography variant="caption" color="primary">
         {title}
@@ -230,156 +183,56 @@ export const RenderCustomItem = () => {
 
 export const WithAvatar = () => {
   return (
-    <Box>
+    <Grid>
       <Profile
         displayName="Григорьев Виталий"
         avatar={{
           alt: 'Григорьев Виталий',
           children: 'ГВ',
         }}
-        menu={(props) => (
-          <Menu {...props}>
-            <MenuItem>
-              <ListItemIcon>
-                <ProfileOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <CompanyOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мои организации</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <SettingsFillMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Настройки</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem>
-              <ListItemIcon>
-                <QuitOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Выйти</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-          </Menu>
-        )}
+        menuList={FAKE_MENU_LIST}
       />
-    </Box>
+    </Grid>
   );
 };
 
 export const WithAnnotation = () => {
   return (
-    <Box>
+    <Grid>
       <Profile
         displayName="Григорьев Виталий"
         annotation="vitatiy_grig@mail.ru"
-        menu={(props) => (
-          <Menu {...props}>
-            <MenuItem>
-              <ListItemIcon>
-                <ProfileOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <CompanyOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мои организации</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <SettingsFillMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Настройки</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem>
-              <ListItemIcon>
-                <QuitOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Выйти</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-          </Menu>
-        )}
+        menuList={FAKE_MENU_LIST}
       />
-    </Box>
+    </Grid>
   );
 };
 
 export const TotalOverflow = () => {
-  return (
-    <Stack gap={4}>
-      <Box>
-        <Profile
-          displayName="Константинопольский Конституционный Констебль"
-          annotation="vitatiy_grig@mail.ru"
-          avatar={{
-            alt: 'Константинопольский Конституционный Констебль',
-            children: 'КК',
-          }}
-          menu={(props) => (
-            <Menu {...props}>
-              <MenuItem>
-                <ListItemIcon>
-                  <ProfileOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <CompanyOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>
-                    Мои организации с излишним количеством текста
-                  </OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <SettingsFillMd />
-                </ListItemIcon>
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    {
+      icon: <CompanyOutlineMd />,
+      title: 'Мои организации с излишним количеством текста',
+    },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
 
-                <ListItemText>
-                  <OverflowTypography noWrap>Настройки</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <QuitOutlineMd />
-                </ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>Выйти</OverflowTypography>
-                </ListItemText>
-              </MenuItem>
-            </Menu>
-          )}
-        />
-      </Box>
-    </Stack>
+  return (
+    <Grid>
+      <Profile
+        displayName="Константинопольский Конституционный Констебль"
+        annotation="vitatiy_grig@mail.ru"
+        avatar={{
+          alt: 'Константинопольский Конституционный Констебль',
+          children: 'КК',
+        }}
+        menuList={menuList}
+      />
+    </Grid>
   );
 };
