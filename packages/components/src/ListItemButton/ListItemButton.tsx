@@ -37,7 +37,7 @@ export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
       withoutContainer = false,
     } = props;
 
-    if (withoutContainer) {
+    const renderListItemButton = () => {
       return (
         <Tooltip
           title={disabled ? disabledReason : note}
@@ -52,23 +52,12 @@ export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
           />
         </Tooltip>
       );
+    };
+
+    if (withoutContainer) {
+      return renderListItemButton();
     }
 
-    return (
-      <li>
-        <Tooltip
-          title={disabled ? disabledReason : note}
-          placement={tooltipPlacement}
-          withoutContainer={!disabled}
-        >
-          <MuiListItemButton
-            ref={ref}
-            component="div"
-            {...props}
-            disableRipple
-          />
-        </Tooltip>
-      </li>
-    );
+    return <li>{renderListItemButton()}</li>;
   },
 );
