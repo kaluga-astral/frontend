@@ -21,14 +21,24 @@ export type ListItemButtonProps = Omit<
    */
   note?: string;
   component?: ElementType;
+  /**
+   * withoutContainer необходим для обратной совместимости и рендерит компонент без тега li
+   */
+  withoutContainer?: boolean;
 };
 
 export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
   (props, ref) => {
-    const { disabledReason, disabled, tooltipPlacement, note } = props;
+    const {
+      disabledReason,
+      disabled,
+      tooltipPlacement,
+      note,
+      withoutContainer = false,
+    } = props;
 
-    return (
-      <li>
+    const renderListItemButton = () => {
+      return (
         <Tooltip
           title={disabled ? disabledReason : note}
           placement={tooltipPlacement}
@@ -41,7 +51,13 @@ export const ListItemButton = forwardRef<HTMLDivElement, ListItemButtonProps>(
             disableRipple
           />
         </Tooltip>
-      </li>
-    );
+      );
+    };
+
+    if (withoutContainer) {
+      return renderListItemButton();
+    }
+
+    return <li>{renderListItemButton()}</li>;
   },
 );
