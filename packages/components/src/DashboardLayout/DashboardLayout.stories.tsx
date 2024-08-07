@@ -11,7 +11,6 @@ import { Placeholder } from '../Placeholder';
 import { PageLayout } from '../PageLayout';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles';
-import { Grid } from '../Grid';
 
 import { DashboardLayout } from './DashboardLayout';
 import { SidebarButton } from './Sidebar';
@@ -97,11 +96,7 @@ export const Example = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Grid>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Grid>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
@@ -245,11 +240,7 @@ export const ExitButton = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Grid>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Grid>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',

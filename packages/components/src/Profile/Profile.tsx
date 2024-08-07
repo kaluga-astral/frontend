@@ -3,6 +3,7 @@ import {
   type PropsWithChildren,
   type ReactNode,
   forwardRef,
+  useEffect,
 } from 'react';
 import {
   type AvatarProps,
@@ -86,11 +87,13 @@ export const Profile = forwardRef<HTMLDivElement, ProfileProps>(
 
     const { isMobile } = useViewportType();
 
-    if (!Menu && !menuList && !exitButton) {
-      console.error(
-        'Profile должен иметь один из следующих props: menu, menuList, exitButton',
-      );
-    }
+    useEffect(() => {
+      if (!Menu && !menuList && !exitButton) {
+        console.error(
+          'Profile должен иметь один из следующих props: menu, menuList, exitButton',
+        );
+      }
+    }, []);
 
     return (
       <>

@@ -12,7 +12,7 @@ import { OverflowTypography } from '../../OverflowTypography';
 import { Divider } from '../../Divider';
 import { MenuList as StyledMenuList } from '../../MenuList';
 
-import { StyledMenu } from './styles';
+import { ExitMenuItem, StyledMenu } from './styles';
 
 type MenuListProps = WithoutEmotionSpecific<MuiMenuProps> & {
   menuList?: Array<ProfileMenuItemData>;
@@ -26,41 +26,8 @@ export const MenuList = (props: MenuListProps) => {
   const { open, onClose, menuList, exitButton, ...restProps } = props;
 
   const { isMobile } = useViewportType();
-
-  if (isMobile) {
-    return (
-      <BottomDrawer onClose={onClose} open={open}>
-        <StyledMenuList>
-          {menuList?.map(({ render, icon, title, onClick }) =>
-            render ? (
-              render({ icon, title, onClick })
-            ) : (
-              <StyledMenuItem onClick={onClick}>
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText>
-                  <OverflowTypography noWrap>{title}</OverflowTypography>
-                </ListItemText>
-              </StyledMenuItem>
-            ),
-          )}
-          {exitButton && <Divider />}
-          {exitButton && (
-            <StyledMenuItem onClick={exitButton.onClick}>
-              <ListItemIcon>
-                <QuitOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Выйти</OverflowTypography>
-              </ListItemText>
-            </StyledMenuItem>
-          )}
-        </StyledMenuList>
-      </BottomDrawer>
-    );
-  }
-
-  return (
-    <StyledMenu open={open} onClose={onClose} {...restProps}>
+  const renderMenuList = () => (
+    <>
       {menuList?.map(({ render, icon, title, onClick }) =>
         render ? (
           render({ icon, title, onClick })
@@ -74,16 +41,31 @@ export const MenuList = (props: MenuListProps) => {
         ),
       )}
       {exitButton && <Divider />}
-      {exitButton && (
-        <StyledMenuItem onClick={exitButton.onClick}>
-          <ListItemIcon>
-            <QuitOutlineMd />
-          </ListItemIcon>
-          <ListItemText>
-            <OverflowTypography noWrap>Выйти</OverflowTypography>
-          </ListItemText>
-        </StyledMenuItem>
-      )}
+      <ExitMenuItem
+        exitButton={Boolean(exitButton)}
+        onClick={exitButton?.onClick}
+      >
+        <ListItemIcon>
+          <QuitOutlineMd />
+        </ListItemIcon>
+        <ListItemText>
+          <OverflowTypography noWrap>Выйти</OverflowTypography>
+        </ListItemText>
+      </ExitMenuItem>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <BottomDrawer onClose={onClose} open={open}>
+        <StyledMenuList>{renderMenuList()}</StyledMenuList>
+      </BottomDrawer>
+    );
+  }
+
+  return (
+    <StyledMenu open={open} onClose={onClose} {...restProps}>
+      {renderMenuList()}
     </StyledMenu>
   );
 };

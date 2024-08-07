@@ -6,15 +6,14 @@ type UseLogicParams = HeaderProps;
 export const useLogic = ({ profile }: UseLogicParams) => {
   const { isMobile } = useViewportType();
 
-  const desktopProfileRender = Boolean(profile) && !isMobile;
+  const isShowProfile =
+    (Boolean(profile) && !isMobile) ||
+    (Boolean(profile?.menu || profile?.menuList) && isMobile);
 
-  const mobileProfileRender =
-    Boolean(profile?.menu || profile?.menuList) && isMobile;
-
-  const exitButtonRender =
+  const isShowExitButton =
     isMobile &&
     !Boolean(profile?.menu || profile?.menuList) &&
     Boolean(profile?.exitButton);
 
-  return { exitButtonRender, desktopProfileRender, mobileProfileRender };
+  return { isShowExitButton, isShowProfile };
 };

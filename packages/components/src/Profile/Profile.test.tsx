@@ -149,4 +149,20 @@ describe('Profile', () => {
 
     expect(exitButton).toBeVisible();
   });
+
+  it('Кнопка exit не отображается если не передан exitButton', async () => {
+    const fakeDisplayName = 'Григорьев Виталий';
+
+    renderWithTheme(
+      <Profile displayName={fakeDisplayName} menuList={FAKE_MENU_LIST} />,
+    );
+
+    const profile = screen.getByText(fakeDisplayName);
+
+    await userEvents.click(profile);
+
+    const exitButton = screen.queryByRole('button', { name: 'Выйти' });
+
+    expect(exitButton).toBeNull();
+  });
 });

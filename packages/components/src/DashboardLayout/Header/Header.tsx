@@ -12,9 +12,9 @@ import { Product, type ProductProps } from '../../Product';
 import { Profile } from '../../Profile';
 import { type ProfileProps } from '../../Profile';
 import { SidebarToggler } from '../SidebarToggler';
-import { IconButton } from '../../IconButton';
 
 import {
+  ExitButton,
   HeaderRoot,
   HeaderSection,
   ProfileWrapper,
@@ -37,8 +37,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     children,
   } = props;
 
-  const { exitButtonRender, desktopProfileRender, mobileProfileRender } =
-    useLogic(props);
+  const { isShowExitButton, isShowProfile } = useLogic(props);
 
   const { collapsedIn, onToggleSidebar } = useContext(DashboardSidebarContext);
 
@@ -62,23 +61,18 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
 
       <HeaderSection>
         {children}
-        {desktopProfileRender && (
+        {profile && isShowProfile && (
           <ProfileWrapper>
-            <Profile {...(profile as ProfileProps)} />
+            <Profile {...profile} />
           </ProfileWrapper>
         )}
-        {exitButtonRender && (
-          <ProfileWrapper>
-            <IconButton onClick={profile?.exitButton?.onClick} variant="text">
-              <QuitOutlineMd />
-            </IconButton>
-          </ProfileWrapper>
-        )}
-        {mobileProfileRender && (
-          <ProfileWrapper>
-            <Profile {...(profile as ProfileProps)} />
-          </ProfileWrapper>
-        )}
+        <ExitButton
+          isShowExitButton={isShowExitButton}
+          onClick={profile?.exitButton?.onClick}
+          variant="text"
+        >
+          <QuitOutlineMd />
+        </ExitButton>
       </HeaderSection>
     </HeaderRoot>
   );

@@ -14,7 +14,6 @@ import { ListItemText } from '../ListItemText';
 import { OverflowTypography } from '../OverflowTypography';
 import { Typography } from '../Typography';
 import { IconButton } from '../IconButton';
-import { Grid } from '../Grid';
 
 import { Profile, type ProfileMenuItemData } from './Profile';
 
@@ -60,11 +59,7 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
-  return (
-    <Grid>
-      <Profile displayName="Григорьев Виталий" menuList={FAKE_MENU_LIST} />
-    </Grid>
-  );
+  return <Profile displayName="Григорьев Виталий" menuList={FAKE_MENU_LIST} />;
 };
 
 /**
@@ -73,48 +68,46 @@ export const Example = () => {
 
 export const CustomMenu = () => {
   return (
-    <Grid>
-      <Profile
-        displayName="Григорьев Виталий"
-        menu={(props) => (
-          <Menu {...props}>
-            <MenuItem>
-              <ListItemIcon>
-                <ProfileOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мой профиль</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <CompanyOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Мои организации</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon>
-                <SettingsFillMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Настройки</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem>
-              <ListItemIcon>
-                <QuitOutlineMd />
-              </ListItemIcon>
-              <ListItemText>
-                <OverflowTypography noWrap>Выйти</OverflowTypography>
-              </ListItemText>
-            </MenuItem>
-          </Menu>
-        )}
-      />
-    </Grid>
+    <Profile
+      displayName="Григорьев Виталий"
+      menu={(props) => (
+        <Menu {...props}>
+          <MenuItem>
+            <ListItemIcon>
+              <ProfileOutlineMd />
+            </ListItemIcon>
+            <ListItemText>
+              <OverflowTypography noWrap>Мой профиль</OverflowTypography>
+            </ListItemText>
+          </MenuItem>
+          <MenuItem>
+            <ListItemIcon>
+              <CompanyOutlineMd />
+            </ListItemIcon>
+            <ListItemText>
+              <OverflowTypography noWrap>Мои организации</OverflowTypography>
+            </ListItemText>
+          </MenuItem>
+          <MenuItem>
+            <ListItemIcon>
+              <SettingsFillMd />
+            </ListItemIcon>
+            <ListItemText>
+              <OverflowTypography noWrap>Настройки</OverflowTypography>
+            </ListItemText>
+          </MenuItem>
+          <Divider />
+          <MenuItem>
+            <ListItemIcon>
+              <QuitOutlineMd />
+            </ListItemIcon>
+            <ListItemText>
+              <OverflowTypography noWrap>Выйти</OverflowTypography>
+            </ListItemText>
+          </MenuItem>
+        </Menu>
+      )}
+    />
   );
 };
 
@@ -128,13 +121,11 @@ export const ExitButton = () => {
   };
 
   return (
-    <Grid>
-      <Profile
-        displayName="Григорьев Виталий"
-        menuList={FAKE_MENU_LIST}
-        exitButton={exitButton}
-      />
-    </Grid>
+    <Profile
+      displayName="Григорьев Виталий"
+      menuList={FAKE_MENU_LIST}
+      exitButton={exitButton}
+    />
   );
 };
 
@@ -171,40 +162,34 @@ export const RenderCustomItem = () => {
   };
 
   return (
-    <Grid>
-      <Profile
-        displayName="Григорьев Виталий"
-        menuList={menuList}
-        exitButton={exitButton}
-      />
-    </Grid>
+    <Profile
+      displayName="Григорьев Виталий"
+      menuList={menuList}
+      exitButton={exitButton}
+    />
   );
 };
 
 export const WithAvatar = () => {
   return (
-    <Grid>
-      <Profile
-        displayName="Григорьев Виталий"
-        avatar={{
-          alt: 'Григорьев Виталий',
-          children: 'ГВ',
-        }}
-        menuList={FAKE_MENU_LIST}
-      />
-    </Grid>
+    <Profile
+      displayName="Григорьев Виталий"
+      avatar={{
+        alt: 'Григорьев Виталий',
+        children: 'ГВ',
+      }}
+      menuList={FAKE_MENU_LIST}
+    />
   );
 };
 
 export const WithAnnotation = () => {
   return (
-    <Grid>
-      <Profile
-        displayName="Григорьев Виталий"
-        annotation="vitatiy_grig@mail.ru"
-        menuList={FAKE_MENU_LIST}
-      />
-    </Grid>
+    <Profile
+      displayName="Григорьев Виталий"
+      annotation="vitatiy_grig@mail.ru"
+      menuList={FAKE_MENU_LIST}
+    />
   );
 };
 
@@ -223,16 +208,14 @@ export const TotalOverflow = () => {
   ];
 
   return (
-    <Grid>
-      <Profile
-        displayName="Константинопольский Конституционный Констебль"
-        annotation="vitatiy_grig@mail.ru"
-        avatar={{
-          alt: 'Константинопольский Конституционный Констебль',
-          children: 'КК',
-        }}
-        menuList={menuList}
-      />
-    </Grid>
+    <Profile
+      displayName="Константинопольский Конституционный Констебль"
+      annotation="vitatiy_grig@mail.ru"
+      avatar={{
+        alt: 'Константинопольский Конституционный Констебль',
+        children: 'КК',
+      }}
+      menuList={menuList}
+    />
   );
 };
