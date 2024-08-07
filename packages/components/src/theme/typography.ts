@@ -75,7 +75,7 @@ export const typography: Partial<TypographyThemeOptions> = {
     return {
       fontSize: pxToRem(14, this.htmlFontSize),
       fontWeight: this.fontWeightMedium,
-      lineHeight: pxToRem(16, this.htmlFontSize),
+      lineHeight: pxToRem(20, this.htmlFontSize),
     };
   },
   get h7() {
