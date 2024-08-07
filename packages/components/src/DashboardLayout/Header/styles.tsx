@@ -41,15 +41,14 @@ export const HeaderSection = styled.div`
 `;
 
 export const ProfileWrapper = styled('div', {
-  shouldForwardProp: (prop) => !['isShowExitButton'].includes(prop),
+  shouldForwardProp: (prop) => !['$isShowProfile'].includes(prop),
 })<{
-  isShowExitButton?: boolean;
+  $isShowProfile: boolean;
 }>`
   display: contents;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: ${({ isShowExitButton }) =>
-      isShowExitButton === false ? 'none' : 'block'};
+    display: ${({ $isShowProfile }) => ($isShowProfile ? 'block' : 'none')};
 
     margin-left: auto;
   }
@@ -64,7 +63,7 @@ export const ExitButton = styled(IconButton, {
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: ${({ $isShowExitButton }) =>
-      $isShowExitButton === false ? 'none' : 'block'};
+      $isShowExitButton === false ? 'none' : 'flex'};
 
     margin-left: auto;
   }

@@ -60,7 +60,7 @@ describe('Header', () => {
       </DashboardLayout>,
     );
 
-    const exitButton = screen.getByTitle('exitButton');
+    const exitButton = screen.getByTitle('Выход');
 
     expect(exitButton).not.toBeVisible();
   });
