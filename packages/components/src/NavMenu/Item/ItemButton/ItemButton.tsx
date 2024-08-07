@@ -54,6 +54,7 @@ export const ItemButton = forwardRef<HTMLDivElement, NavMenuItemButtonProps>(
         isGroupTitleItem={isGroupTitleItem}
         ref={ref}
         component={component}
+        withoutContainer={true}
         {...restProps}
       >
         {!isMobile && (
