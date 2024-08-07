@@ -36,7 +36,7 @@ export const NotificationContainerNext = ({
         position={
           isMobile ? NOTIFY_POSITIONS.TOP_CENTER : NOTIFY_POSITIONS.BOTTOM_RIGHT
         }
-        newestOnTop={true}
+        newestOnTop={false}
         closeOnClick={false}
         draggable={false}
         rtl={false}
