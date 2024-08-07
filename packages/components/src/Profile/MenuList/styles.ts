@@ -12,7 +12,7 @@ export const StyledMenu = styled(Menu)`
 `;
 
 export const ExitMenuItem = styled(MenuItem, {
-  shouldForwardProp: (prop) => !['exitButton'].includes(prop),
-})<{ exitButton: boolean }>`
-  display: ${({ exitButton }) => exitButton === false && 'none'};
+  shouldForwardProp: (prop) => !['$exitButton'].includes(prop),
+})<{ $exitButton: boolean }>`
+  display: ${({ $exitButton }) => $exitButton === false && 'none'};
 `;

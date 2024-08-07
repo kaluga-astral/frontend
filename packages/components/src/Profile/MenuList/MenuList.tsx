@@ -42,7 +42,7 @@ export const MenuList = (props: MenuListProps) => {
       )}
       {exitButton && <Divider />}
       <ExitMenuItem
-        exitButton={Boolean(exitButton)}
+        $exitButton={Boolean(exitButton)}
         onClick={exitButton?.onClick}
       >
         <ListItemIcon>

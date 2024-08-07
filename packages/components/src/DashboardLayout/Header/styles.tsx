@@ -56,15 +56,15 @@ export const ProfileWrapper = styled('div', {
 `;
 
 export const ExitButton = styled(IconButton, {
-  shouldForwardProp: (prop) => !['isShowExitButton'].includes(prop),
+  shouldForwardProp: (prop) => !['$isShowExitButton'].includes(prop),
 })<{
-  isShowExitButton: boolean;
+  $isShowExitButton: boolean;
 }>`
   display: none;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: ${({ isShowExitButton }) =>
-      isShowExitButton === false ? 'none' : 'block'};
+    display: ${({ $isShowExitButton }) =>
+      $isShowExitButton === false ? 'none' : 'block'};
 
     margin-left: auto;
   }

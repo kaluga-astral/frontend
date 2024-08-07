@@ -67,8 +67,9 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
           </ProfileWrapper>
         )}
         <ExitButton
-          isShowExitButton={isShowExitButton}
+          $isShowExitButton={isShowExitButton}
           onClick={profile?.exitButton?.onClick}
+          title="exitButton"
           variant="text"
         >
           <QuitOutlineMd />
