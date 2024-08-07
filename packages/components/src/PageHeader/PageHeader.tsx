@@ -5,6 +5,7 @@ import { type ButtonProps } from '../Button';
 import { useViewportType } from '../hooks/useViewportType';
 import { type Theme } from '../theme';
 import { OverflowTypography } from '../OverflowTypography';
+import { Typography } from '../Typography';
 
 import { ButtonGroup, type ButtonGroupProps } from './ButtonGroup';
 import {
@@ -109,14 +110,24 @@ export const PageHeader = <
         )}
         <Title variant="h3" noWrap={isMobile}>
           {typeof title === 'string' ? (
-            <OverflowTypography variant="inherit">{title}</OverflowTypography>
+            <OverflowTypography component="div" variant="inherit">
+              {title}
+            </OverflowTypography>
           ) : (
-            title
+            <Typography component="div" role="heading" aria-level={3}>
+              {title}
+            </Typography>
           )}
         </Title>
       </MobileWrapper>
 
-      {description && <Description>{description}</Description>}
+      {description && typeof description !== 'string' ? (
+        <Description component="div" role="heading" aria-level={4}>
+          {description}
+        </Description>
+      ) : (
+        <Description>{description}</Description>
+      )}
       {actions && (
         <Actions>
           <ButtonGroup {...actions} />
