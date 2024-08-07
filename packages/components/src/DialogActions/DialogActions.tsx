@@ -1,11 +1,8 @@
-import {
-  DialogActions as MuiDialogActions,
-  type DialogActionsProps as MuiDialogActionsProps,
-} from '@mui/material';
+import { type DialogActionsProps as MuiDialogActionsProps } from '@mui/material';
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { StyledGrid } from './styles';
+import { StyledDialogActions, StyledGrid } from './styles';
 
 export type DialogActionsProps = WithoutEmotionSpecific<MuiDialogActionsProps>;
 
@@ -15,8 +12,8 @@ export const DialogActions = ({
   ...props
 }: DialogActionsProps) => {
   return (
-    <MuiDialogActions {...props}>
+    <StyledDialogActions {...props}>
       <StyledGrid spacing={disableSpacing ? 0 : 2}>{children}</StyledGrid>
-    </MuiDialogActions>
+    </StyledDialogActions>
   );
 };

@@ -15,7 +15,7 @@ type UseLogicProps = Pick<
 
 export const useLogic = ({
   id,
-  value,
+  value = [],
   level,
   isInitialExpanded,
   expandedLevel,
@@ -25,7 +25,10 @@ export const useLogic = ({
   const isSelected = checkIsSelected(value, id);
 
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
-  const isDisabled = disabledItems?.includes(id);
+
+  const disabledItem = disabledItems?.find((item) => item.id === id);
+  const isDisabled = Boolean(disabledItem);
+  const disableReason = disabledItem?.disableReason;
 
   const nextLevel = level + 1;
 
@@ -34,19 +37,18 @@ export const useLogic = ({
       return;
     }
 
-    onChange((selectedIds = []) => {
-      if (selectedIds.includes(id)) {
-        return selectedIds.filter((selectedId) => selectedId !== id);
-      }
+    if (value.includes(id)) {
+      return onChange(value.filter((selectedId) => selectedId !== id));
+    }
 
-      return [...selectedIds, id];
-    });
+    onChange([...value, id]);
   };
 
   return {
     isSelected,
     isDefaultExpanded,
     isDisabled,
+    disableReason,
     nextLevel,
     handleChange,
   };

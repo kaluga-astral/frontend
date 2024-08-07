@@ -1,9 +1,4 @@
-import {
-  type Dispatch,
-  type FunctionComponent,
-  type SetStateAction,
-  type SyntheticEvent,
-} from 'react';
+import { type FunctionComponent, type SyntheticEvent } from 'react';
 
 import type { TreeListData } from '../../types';
 import type { MultipleValue } from '../types';
@@ -11,6 +6,8 @@ import { FormControlLabel } from '../../../FormControlLabel';
 
 import { useLogic } from './useLogic';
 import { List, StyledCheckbox, StyledTreeItem } from './styles';
+
+type FormatDisableItem = { id: string; disableReason?: string };
 
 export type TreeItemProps = TreeListData & {
   /**
@@ -42,12 +39,12 @@ export type TreeItemProps = TreeListData & {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
+  disabledItems?: Array<FormatDisableItem>;
 
   /**
    * Функция, которая запускается при выборе item
    */
-  onChange: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: (value: MultipleValue) => void;
 };
 
 export const TreeItem = ({
@@ -67,6 +64,7 @@ export const TreeItem = ({
     isSelected,
     isIndeterminate,
     isDefaultExpanded,
+    disableReason,
     isDisabled,
     handleChange,
   } = useLogic({
@@ -89,6 +87,7 @@ export const TreeItem = ({
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
+        disableReason={disableReason}
         note={renderItem ? null : note}
         component="li"
         label={
@@ -131,6 +130,7 @@ export const TreeItem = ({
     <StyledTreeItem
       isSelected={isSelected}
       isDisabled={isDisabled}
+      disableReason={disableReason}
       note={renderItem ? null : note}
       component="li"
       label={

@@ -166,7 +166,11 @@ export * from './MenuList';
 
 export * from './NavMenu';
 
-export { NewDataGrid, type NewDataGridProps } from './NewDataGrid';
+export {
+  NewDataGrid,
+  type NewDataGridProps,
+  type DataGridColumns as NewDataGridColumns,
+} from './NewDataGrid';
 
 export {
   NewDataGridInfinite,

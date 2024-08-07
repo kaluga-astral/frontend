@@ -1,6 +1,7 @@
 import { TreeItem } from './TreeItem';
 import { type MultipleTreeListProps } from './types';
 import { List } from './styles';
+import { useLogic } from './useLogic';
 
 export type { MultipleTreeListProps };
 
@@ -11,18 +12,24 @@ export const MultipleTreeList = ({
   value,
   className,
   expandedLevel = 10,
+  disabledItems,
   ...props
-}: MultipleTreeListProps) => (
-  <List className={className}>
-    {data.map((item) => (
-      <TreeItem
-        key={item.id}
-        value={value}
-        {...item}
-        level={INITIAL_LEVEL}
-        expandedLevel={expandedLevel}
-        {...props}
-      />
-    ))}
-  </List>
-);
+}: MultipleTreeListProps) => {
+  const { formattedDisabledItems } = useLogic({ disabledItems });
+
+  return (
+    <List className={className}>
+      {data.map((item) => (
+        <TreeItem
+          key={item.id}
+          value={value}
+          {...item}
+          level={INITIAL_LEVEL}
+          expandedLevel={expandedLevel}
+          disabledItems={formattedDisabledItems}
+          {...props}
+        />
+      ))}
+    </List>
+  );
+};

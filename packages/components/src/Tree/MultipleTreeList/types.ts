@@ -1,12 +1,10 @@
-import {
-  type Dispatch,
-  type FunctionComponent,
-  type SetStateAction,
-} from 'react';
+import { type FunctionComponent } from 'react';
 
 import type { TreeListData } from '../types';
 
 export type MultipleValue = Array<string> | undefined;
+
+export type DisabledItemValue = string | { id: string; disableReason?: string };
 
 export type MultipleTreeListProps = {
   /**
@@ -39,7 +37,7 @@ export type MultipleTreeListProps = {
   /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
-  disabledItems?: MultipleValue;
+  disabledItems?: Array<DisabledItemValue>;
 
   /**
    * Render-props, позволяет более гибко настраивать содержимое item
@@ -49,5 +47,5 @@ export type MultipleTreeListProps = {
   /**
    * Функция, которая запускается при изменении состояния.
    */
-  onChange: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: (value: MultipleValue) => void;
 };

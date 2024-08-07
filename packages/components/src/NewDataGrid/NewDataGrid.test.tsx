@@ -242,6 +242,52 @@ describe('NewDataGrid', () => {
     expect(onClickSpy.mock.calls[0][0]).toEqual({ name: 'Vasya' });
   });
 
+  it('Чекбокс отображается в шапке и строке, если для таблицы указан onSelectRow', async () => {
+    const onSelectRowSpy = vi.fn();
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya' }]}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        onSelectRow={onSelectRowSpy}
+        onRetry={() => {}}
+      />,
+    );
+
+    const checkboxes = screen.queryAllByRole('checkbox');
+
+    expect(checkboxes).toHaveLength(2);
+  });
+
+  it('Чекбокс не отображается для строки при наличии опции isNotSelectable, если для таблицы указан onSelectRow', async () => {
+    const onSelectRowSpy = vi.fn();
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya', options: { isNotSelectable: true } }]}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        onSelectRow={onSelectRowSpy}
+        onRetry={() => {}}
+      />,
+    );
+
+    const checkboxes = screen.queryAllByRole('checkbox');
+
+    expect(checkboxes).toHaveLength(1);
+  });
+
   it('OnRetry вызывается при нажатии на кнопку "Попробовать снова"', async () => {
     const onRetrySpy = vi.fn();
 

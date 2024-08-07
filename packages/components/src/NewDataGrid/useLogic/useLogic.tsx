@@ -27,7 +27,10 @@ export const useLogic = <
   const isSelectable = Boolean(onSelectRow);
   const isDataGridDisabled = isLoading || isDisabled;
 
-  const availableRows = rows.filter((row) => !row.options?.isDisabled);
+  const availableRows = rows.filter(
+    (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
+  );
+
   const gridColumns = getGridTemplateColumns(columns);
 
   const uncheckedRowsCount = useMemo(() => {
