@@ -31,7 +31,7 @@ export type ProfileMenuItemData = {
   onClick?: () => void;
   /**
    * @example
-   *  const renderItem: MenuItem['render'] = ({ title, icon }) => (
+   *  const renderItem: ProfileMenuItemData['render'] = ({ title, icon }) => (
    *     <MenuItem>
    *       <Typography variant="caption" color="primary">
    *         {title}
