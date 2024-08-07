@@ -117,6 +117,7 @@ export const PageHeader = <
           <Title
             component="div"
             role="heading"
+            variant="h3"
             aria-level={3}
             noWrap={isMobile}
           >
