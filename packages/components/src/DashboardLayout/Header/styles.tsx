@@ -41,29 +41,28 @@ export const HeaderSection = styled.div`
 `;
 
 export const ProfileWrapper = styled('div', {
-  shouldForwardProp: (prop) => !['$isShowProfile'].includes(prop),
+  shouldForwardProp: (prop) => !['$isShow'].includes(prop),
 })<{
-  $isShowProfile: boolean;
+  $isShow: boolean;
 }>`
   display: contents;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: ${({ $isShowProfile }) => ($isShowProfile ? 'block' : 'none')};
+    display: ${({ $isShow }) => ($isShow ? 'block' : 'none')};
 
     margin-left: auto;
   }
 `;
 
 export const ExitButton = styled(IconButton, {
-  shouldForwardProp: (prop) => !['$isShowExitButton'].includes(prop),
+  shouldForwardProp: (prop) => !['$isShow'].includes(prop),
 })<{
-  $isShowExitButton: boolean;
+  $isShow: boolean;
 }>`
   display: none;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: ${({ $isShowExitButton }) =>
-      $isShowExitButton === false ? 'none' : 'flex'};
+    display: ${({ $isShow }) => (!$isShow ? 'none' : 'flex')};
 
     margin-left: auto;
   }

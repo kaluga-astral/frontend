@@ -62,12 +62,12 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
       <HeaderSection>
         {children}
         {profile && (
-          <ProfileWrapper $isShowProfile={isShowProfile}>
+          <ProfileWrapper $isShow={isShowProfile}>
             <Profile {...profile} />
           </ProfileWrapper>
         )}
         <ExitButton
-          $isShowExitButton={isShowExitButton}
+          $isShow={isShowExitButton}
           onClick={profile?.exitButton?.onClick}
           title="Выход"
           variant="text"

@@ -5,7 +5,6 @@ import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../../styles';
 import { DashboardLayout } from '../DashboardLayout';
-import { Grid } from '../../Grid';
 import { Menu } from '../../Menu';
 import { MenuItem } from '../../MenuItem';
 import { ListItemIcon } from '../../ListItemIcon';
@@ -77,11 +76,7 @@ export const Interaction: Story = {
   },
   args: {
     productSwitcher: () => {
-      return (
-        <Grid>
-          <ProductSwitcher getProducts={handleGetProducts} />
-        </Grid>
-      );
+      return <ProductSwitcher getProducts={handleGetProducts} />;
     },
     product: {
       name: 'Астрал.ЭДО',
@@ -113,11 +108,7 @@ export const Example = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Grid>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Grid>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
@@ -150,11 +141,7 @@ export const ExitButton = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Grid>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Grid>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
@@ -202,11 +189,7 @@ export const ProductSwitcherProps = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Grid>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Grid>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
