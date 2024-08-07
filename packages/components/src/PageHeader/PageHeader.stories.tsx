@@ -30,7 +30,6 @@ import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { Filename } from '../Filename';
 import { Typography } from '../Typography';
-import { Description } from '../Description';
 
 import { PageHeader } from './PageHeader';
 
@@ -927,12 +926,7 @@ export const Subheader = () => (
   <Wrapper>
     <PageHeader
       title="Черновик"
-      description={
-        <Description>
-          <Description.Name>123</Description.Name>
-          <Description.Value>456</Description.Value>
-        </Description>
-      }
+      description="Вы находитесь на странице, которая содержит Subheader"
       actions={{
         main: [
           { text: 'действие 1', startIcon: <AddOutlineMd /> },
