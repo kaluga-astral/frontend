@@ -175,15 +175,15 @@ export default App;
 ```ts
 type ImagesMap = {
   /**
-   * @description изображение при отсутствии данных (используется в DataGrid)
+   * изображение при отсутствии данных (используется в DataGrid)
    */
   noDataImgSrc: string;
   /**
-   * @description изображение при ошибке (используется в ContentState)
+   * изображение при ошибке (используется в ContentState)
    */
   defaultErrorImgSrc: string;
   /**
-   * @description изображение при ошибке при обновлении продукта (используется в ContentState/ErrorBoundary)
+   * изображение при ошибке при обновлении продукта (используется в ContentState/ErrorBoundary)
    */
   outdatedReleaseErrorImgSrc: string;
 };

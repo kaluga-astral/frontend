@@ -14,7 +14,7 @@ export type OverflowedProps = {
   /**
    * @example <OverflowTypography rowsCount={2} />
    * @default 1
-   * @description опорная единица по которой определяется максимально отображаемое количество строк
+   * опорная единица по которой определяется максимально отображаемое количество строк
    */
   rowsCount?: number;
 };
@@ -22,7 +22,7 @@ export type OverflowedProps = {
 type TooltipCustomizable = {
   /**
    * @example <OverflowTypography tooltipProps={{placement: 'top-start'}} />
-   * @description способ кастомизировать тултип при необходимости
+   * способ кастомизировать тултип при необходимости
    */
   tooltipProps?: Omit<TooltipProps, 'children' | 'title'> & {
     /**

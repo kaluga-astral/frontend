@@ -33,7 +33,7 @@ export type CheckableTagProps = Omit<
 };
 
 /**
- * @description Тег с возможностью быть checked (по логике Checkbox)
+ * Тег с возможностью быть checked (по логике Checkbox)
  * @example
  * <CheckableTag
    * label="tag"

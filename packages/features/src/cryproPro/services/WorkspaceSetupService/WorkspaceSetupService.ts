@@ -19,33 +19,33 @@ export type CheckWorkspace = {
 };
 
 /**
- * @description Сервис для настройки рабочего места
+ * Сервис для настройки рабочего места
  * */
 export class WorkspaceSetupService {
   /**
-   * @description Флаг установки плагина КриптоПро
+   * Флаг установки плагина КриптоПро
    * */
   public isPluginInstalled = false;
 
   /**
-   * @description Версия криптопровайдера КриптоПро
+   * Версия криптопровайдера КриптоПро
    * */
   public cspVersion: string | null = null;
 
   /**
-   * @description Флаг наличия ошибок
+   * Флаг наличия ошибок
    * */
   public hasErrors = false;
 
   /**
-   * @description Флаг установки криптопровайдера КриптоПро
+   * Флаг установки криптопровайдера КриптоПро
    * */
   private hasCryptoProvider = false;
 
   private static instance: WorkspaceSetupService | null = null;
 
   /**
-   * @description Флаг выполнения проверки рабочего места
+   * Флаг выполнения проверки рабочего места
    * */
   public isLoading = false;
 
@@ -59,7 +59,7 @@ export class WorkspaceSetupService {
   }
 
   /**
-   * @description Метод проверки состояния рабочего места
+   * Метод проверки состояния рабочего места
    * */
   public checkWorkspace = async (): Promise<CheckWorkspace> => {
     this.isLoading = true;
@@ -106,7 +106,7 @@ export class WorkspaceSetupService {
   };
 
   /**
-   * @description Метод сброса ошибок
+   * Метод сброса ошибок
    * */
   public resetErrors = () => {
     this.hasErrors = false;

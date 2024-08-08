@@ -7,7 +7,7 @@ export type RadioGroupFieldProps = Omit<RadioFieldProps, 'isError'>;
 
 /**
  *
- * @description Компонент RadioField, адаптирован под использование внутри RadioGroup,
+ * Компонент RadioField, адаптирован под использование внутри RadioGroup,
  * Использует контекст RadioGroupContext
  */
 export const RadioGroupField = (props: RadioGroupFieldProps) => {

@@ -3,7 +3,7 @@ const shell = require('shelljs');
 const { DIST_DIR_NAME } = require('../constants');
 
 /**
- * @description Команда для удаление директории предыдущего билда
+ * Команда для удаление директории предыдущего билда
  * */
 const rmDist = () => {
   console.log('Remove prev dist directory');

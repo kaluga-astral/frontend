@@ -31,15 +31,15 @@ const getDateFormat = (date: string | Date | null) => {
 
 export type ListItemProps = Notification & {
   /**
-   * @description Флаг управляет отображение кнопки удаления уведомления
+   * Флаг управляет отображение кнопки удаления уведомления
    * */
   isDeleteButtonVisible: boolean;
   /**
-   * @description Функция удаления уведомления
+   * Функция удаления уведомления
    * */
   onDelete?: (id: string) => void;
   /**
-   * @description функция вызывается, когда уведомление полностью попало во viewport
+   * функция вызывается, когда уведомление полностью попало во viewport
    * */
   onViewNotification?: (id: string) => void;
 };

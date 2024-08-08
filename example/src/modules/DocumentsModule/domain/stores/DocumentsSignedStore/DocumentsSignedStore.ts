@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
-import { ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 
 import {
-  AsyncStateStore,
-  DataGridSort,
-  DataGridStore,
-  SearchStore,
-  UseQueryResult,
+  type AsyncStateStore,
+  type DataGridSort,
+  type DataGridStore,
+  type SearchStore,
+  type UseQueryResult,
   createAsyncStateStore,
   createDataGridStore,
   createSearchStore,
@@ -15,11 +15,11 @@ import {
 
 import {
   DocumentPackagesIncludes,
-  DocumentPackagesListDTO,
-  DocumentPackagesListInputDTO,
+  type DocumentPackagesListDTO,
+  type DocumentPackagesListInputDTO,
   RegistryType,
 } from '../../../data';
-import { DocumentsSignedListSorting } from '../../types';
+import { type DocumentsSignedListSorting } from '../../types';
 import {
   DocumentsSignedListInit,
   FETCH_SIGNED_DOCUMENTS_ERROR_MESSAGE,
@@ -27,17 +27,17 @@ import {
 
 export class DocumentsSignedListStore {
   /**
-   * @description Тип запрашиваемого документа
+   * Тип запрашиваемого документа
    * */
   private readonly documentType: RegistryType = RegistryType.Completed;
 
   /**
-   * @description Список пакетов документов
+   * Список пакетов документов
    * */
   public signed: DocumentPackagesListDTO = DocumentsSignedListInit;
 
   /**
-   * @description Флажок отключения кнопок действий в хедере
+   * Флажок отключения кнопок действий в хедере
    * */
 
   public searchState: SearchStore;
@@ -54,7 +54,7 @@ export class DocumentsSignedListStore {
   }
 
   /**
-   * @description Fetch Data
+   * Fetch Data
    * */
   public getFetchQueryParams = (): DocumentPackagesListInputDTO => ({
     filter: this.searchState.search,
@@ -93,7 +93,7 @@ export class DocumentsSignedListStore {
   }
 
   /**
-   * @description Header Search
+   * Header Search
    * */
   get searchValue() {
     return this.searchState.searchValue;
@@ -104,7 +104,7 @@ export class DocumentsSignedListStore {
   };
 
   /**
-   * @description Sorting
+   * Sorting
    * */
   get sorting() {
     return this.dataGridState.sorting;
@@ -117,7 +117,7 @@ export class DocumentsSignedListStore {
   };
 
   /**
-   * @description Pagination
+   * Pagination
    * */
   get page() {
     return this.dataGridState.page;

@@ -4,21 +4,21 @@ import { type CloseEventReason } from '../../types';
 
 type UseFocusAwayEffectOptions = {
   /**
-   * @description реф на дом ноду, blur вне которой надо отслеживать
+   * реф на дом ноду, blur вне которой надо отслеживать
    */
   ref: RefObject<HTMLElement>;
   /**
-   * @description колбэк который будет вызываться при нажатии вне рефа
+   * колбэк который будет вызываться при нажатии вне рефа
    */
   onFocusAway: (e: FocusEvent, reason: CloseEventReason) => void;
   /**
-   * @description флаг активности
+   * флаг активности
    */
   isActive: boolean;
 };
 
 /**
- * @description хук позволяющий подписаться на потерю фокуса вне указанного рефа,
+ * хук позволяющий подписаться на потерю фокуса вне указанного рефа,
  * логика схожа с useClickAwayEffect,
  * подойдет для использования в кастомных попперах
  */

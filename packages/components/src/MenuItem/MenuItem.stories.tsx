@@ -52,6 +52,28 @@ export const Example = () => {
   );
 };
 
+/**
+ * prop ```note``` выводит Tooltip на не заблокированном элементе меню
+ */
+export const Note = () => {
+  return (
+    <MenuList>
+      <MenuItem note="Перейти в профиль">
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Мой профиль
+      </MenuItem>
+      <MenuItem>
+        <ListItemIcon>
+          <ProfileOutlineMd />
+        </ListItemIcon>
+        Выход
+      </MenuItem>
+    </MenuList>
+  );
+};
+
 export const Selected = () => {
   return (
     <MenuList>

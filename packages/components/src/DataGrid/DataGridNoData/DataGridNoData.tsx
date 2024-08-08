@@ -10,13 +10,13 @@ export type DataGridNoDataProps = {
    * тк без изображения текст форматируется в 2 строки
    * @default 'Нет\u00a0данных'
    * @example <DataGridNoData title='Нет данных' />
-   * @description Заголовок
+   * Заголовок
    */
   title?: string;
   /**
    * @default 250
    * @example <DataGridNoData noDataIconWidth={250} />
-   * @description Ширина иконки (высота рассчитывается пропорционально ширине)
+   * Ширина иконки (высота рассчитывается пропорционально ширине)
    */
   noDataIconWidth?: number;
 };

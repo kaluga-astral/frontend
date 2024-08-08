@@ -1,219 +1,219 @@
-import { TableInputDTO, TableMetaDTO } from '@example/shared';
+import { type TableInputDTO, type TableMetaDTO } from '@example/shared';
 
 import {
-  DocumentOperationType,
-  DocumentPackageOwner,
-  DocumentPackageState,
-  DocumentPackagesIncludes,
-  DocumentState,
-  PossibleOperationOnDocument,
-  PossibleOperationOnDocumentPackage,
-  RegistryType,
+  type DocumentOperationType,
+  type DocumentPackageOwner,
+  type DocumentPackageState,
+  type DocumentPackagesIncludes,
+  type DocumentState,
+  type PossibleOperationOnDocument,
+  type PossibleOperationOnDocumentPackage,
+  type RegistryType,
 } from './enums';
 
 /**
- * @description Модель данных документа
+ * Модель данных документа
  * */
 export type DocumentNetworkDTO = {
   /**
-   * @description Идентификатор документа.
+   * Идентификатор документа.
    * */
   documentId: string;
   /**
-   * @description Ссылка на получение файла для подписания или расшифровки.
+   * Ссылка на получение файла для подписания или расшифровки.
    * */
   documentContentUrl?: string;
   /**
-   * @description Идентификатор пакета документов.
+   * Идентификатор пакета документов.
    * */
   documentPackageId: string;
   /**
-   * @description Отображаемое имя.
+   * Отображаемое имя.
    * */
   displayName?: string;
   /**
-   * @description URL адрес, где можно запросить печатную форму документа.
+   * URL адрес, где можно запросить печатную форму документа.
    * */
   printFormUrl?: string;
   /**
-   * @description Тип операции над документом.
+   * Тип операции над документом.
    * */
   documentOperationType: DocumentOperationType;
   /**
-   * @description Тип запрашиваемой операции (для отображения пользователю).
+   * Тип запрашиваемой операции (для отображения пользователю).
    * */
   operationDisplayName?: string;
   /**
-   * @description Идентификатор результирующего файла, артефакта криптооперации.
+   * Идентификатор результирующего файла, артефакта криптооперации.
    * */
   resultFileId: string;
   /**
-   * @description Ссылка на загрузку файла.
+   * Ссылка на загрузку файла.
    * */
   resultFileUrl?: string;
   /**
-   * @description Наименование результирующего файла, артефакта криптооперации.
+   * Наименование результирующего файла, артефакта криптооперации.
    * */
   resultFileName: string;
   /**
-   * @description Статус документа.
+   * Статус документа.
    * */
   state: DocumentState;
   /**
-   * @description Описание состояния документа.
+   * Описание состояния документа.
    * */
   stateDisplayName?: string;
   /**
-   * @description Дата-время обработки.
+   * Дата-время обработки.
    * */
   proccessedAt?: string;
   /**
-   * @description Список доступных действий над документом.
+   * Список доступных действий над документом.
    * */
   allowedActions: PossibleOperationOnDocument[];
 };
 
 /**
- * @description Модель данных заявителя документа
+ * Модель данных заявителя документа
  * */
 export type RequesterNetworkDTO = {
   /**
-   * @description Идентификатор пользователя экосистемы.
+   * Идентификатор пользователя экосистемы.
    * */
   userId: string;
   /**
-   * @description Электронная почта.
+   * Электронная почта.
    * */
   email?: string;
 };
 
 /**
- * @description Модель данных сертификата подписанта
+ * Модель данных сертификата подписанта
  * */
 export type CertificateInfoDto = {
   /**
-   * @description ФИО подписанта
+   * ФИО подписанта
    * */
   person: string;
   /**
-   * @description Название организации/ИП
+   * Название организации/ИП
    * */
   organization?: string;
   /**
-   * @description ИНН организации
+   * ИНН организации
    * */
   organizationInn?: string;
   /**
-   * @description ИНН подписанта
+   * ИНН подписанта
    * */
   innFl: string;
 };
 
 /**
- * @description Модель данных исполнителя документа
+ * Модель данных исполнителя документа
  * */
 export type PerformerNetworkDTO = RequesterNetworkDTO;
 
 /**
- * @description Модель данных пакета документов
+ * Модель данных пакета документов
  * */
 export type DocumentPackagesNetworkDTO = {
   /**
-   * @description Идентификатор пакета документов.
+   * Идентификатор пакета документов.
    * */
   documentPackageId: string;
   /**
-   * @description Идентификатор трассировки.
+   * Идентификатор трассировки.
    * */
   traceId: string;
   /**
-   * @description Сервис-инициатор криптооперации.
+   * Сервис-инициатор криптооперации.
    * */
   owner?: DocumentPackageOwner;
   /**
-   * @description Наименование пакета документов.
+   * Наименование пакета документов.
    * */
   displayName?: string;
   /**
-   * @description Заявитель документа
+   * Заявитель документа
    * */
   requester: RequesterNetworkDTO;
   /**
-   * @description Исполнитель документа
+   * Исполнитель документа
    * */
   performer: PerformerNetworkDTO;
   /**
-   * @description Состояние запроса.
+   * Состояние запроса.
    * */
   state: DocumentPackageState;
   /**
-   * @description Описание состояния пакета.
+   * Описание состояния пакета.
    * */
   stateDisplayName?: string;
   /**
-   * @description Причина отклонения обработки пакета документов.
+   * Причина отклонения обработки пакета документов.
    * */
   rejectionReason?: string;
   /**
-   * @description Комментарий запросившего подпись или расшифровку.
+   * Комментарий запросившего подпись или расшифровку.
    * */
   comment?: string;
   /**
-   * @description Дата-время создания пакета.
+   * Дата-время создания пакета.
    * */
   createdAt: string;
   /**
-   * @description Дата-время обновления записи.
+   * Дата-время обновления записи.
    * */
   updatedAt?: string;
   /**
-   * @description Дата-время завершения обработки.
+   * Дата-время завершения обработки.
    * */
   completedAt?: string;
   /**
-   * @description Дата-время истечения срока ожидания выполнения.
+   * Дата-время истечения срока ожидания выполнения.
    * */
   expiresAt?: string;
   /**
-   * @description Удалить данные после указанной даты.
+   * Удалить данные после указанной даты.
    * */
   deleteAfter?: string;
   /**
-   * @description Параметры для выбора сертификата.
+   * Параметры для выбора сертификата.
    * */
   certificateSelector?: string;
   /**
-   * @description Данные подписанта - ФИО.
+   * Данные подписанта - ФИО.
    * */
   certificateInfo?: CertificateInfoDto;
   /**
-   * @description Список документов в пакете.
+   * Список документов в пакете.
    * */
   documents: DocumentNetworkDTO[];
   /**
-   * @description Список доступных действий над пакетом.
+   * Список доступных действий над пакетом.
    * */
   allowedActions: PossibleOperationOnDocumentPackage[];
 };
 
 export type DocumentPackagesListNetworkDTO = TableMetaDTO & {
   /**
-   * @description Список пакетов документов
+   * Список пакетов документов
    * */
   items: DocumentPackagesNetworkDTO[];
 };
 
 export type DocumentPackagesListInputNetworkDTO = TableInputDTO & {
   /**
-   * @description Тип реестра.
+   * Тип реестра.
    * */
   registryType: RegistryType;
   /**
-   * @description Статус пакетов документов.
+   * Статус пакетов документов.
    * */
   documentPackageState?: DocumentPackageState;
   /**
-   * @description Строка поиска.
+   * Строка поиска.
    * */
   includes?: DocumentPackagesIncludes;
 };

@@ -7,7 +7,7 @@ type UseFormFieldErrorPropsReturn = Pick<
 >;
 
 /**
- * @description хук предназначен для предоставления пропсов для отображения ошибки field
+ * хук предназначен для предоставления пропсов для отображения ошибки field
  */
 export const useFormFieldErrorProps = (
   fieldState: Pick<ControllerFieldState, 'error'>,

@@ -15,25 +15,25 @@ import {
 export type SwipeableDrawerProps = {
   /**
    * @example <StyledSwipeableDrawer drawerBleedingTitle="Заголовок">
-   * @description Текстовый заголовок в шапке компонента.
+   * Текстовый заголовок в шапке компонента.
    */
   drawerBleedingTitle: string;
   /**
    * @example <StyledSwipeableDrawer>
    * @default false
-   * @description Остаётся ли компонент смонтированным после его скрытия.
+   * Остаётся ли компонент смонтированным после его скрытия.
    */
   isMountedOnHide?: boolean;
   /**
    * @example <StyledSwipeableDrawer>
    * @default undefined
-   * @description Иконка в шапке компонента (над заголовком).
+   * Иконка в шапке компонента (над заголовком).
    */
   drawerBleedingIcon?: ReactNode;
   /**
    * @example <StyledSwipeableDrawer drawerBleedingIcon={56}>
    * @default 56
-   * @description Высота шапки компонента и невидимого перетаскиваемого элемента.
+   * Высота шапки компонента и невидимого перетаскиваемого элемента.
    */
   drawerBleedingHeight?: number;
 } & WithoutEmotionSpecific<MuiSwipeableDrawerProps>;

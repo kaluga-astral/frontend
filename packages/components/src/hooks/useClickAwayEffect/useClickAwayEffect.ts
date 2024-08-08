@@ -4,25 +4,25 @@ import { type CloseEventReason } from '../../types';
 
 export type UseClickAwayListenerOptions = {
   /**
-   * @description реф на дом ноду, клик вне которой надо отслеживать
+   * реф на дом ноду, клик вне которой надо отслеживать
    */
   ref: RefObject<HTMLElement>;
   /**
-   * @description колбэк который будет вызываться при нажатии вне рефа
+   * колбэк который будет вызываться при нажатии вне рефа
    */
   onClickAway: (e: PointerEvent, reason: CloseEventReason) => void;
   /**
-   * @description флаг активности
+   * флаг активности
    */
   isActive: boolean;
   /**
-   * @description флаг необходимости предотвращать всплытие, подойдет когда используется внутри модалки
+   * флаг необходимости предотвращать всплытие, подойдет когда используется внутри модалки
    */
   preventBubbling?: boolean;
 };
 
 /**
- * @description хук позволяющий подписаться на клик вне указанного рефа,
+ * хук позволяющий подписаться на клик вне указанного рефа,
  * подойдет для использования в кастомных попперах
  */
 export const useClickAwayEffect = ({

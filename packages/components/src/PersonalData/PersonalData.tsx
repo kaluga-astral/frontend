@@ -14,13 +14,13 @@ type WithClassName = {
 
 type PersonalDataProps<TProps extends WithClassName> = {
   /**
-   * @description дочерний элемент который должен уметь принимать className
+   * дочерний элемент который должен уметь принимать className
    */
   children: FunctionComponentElement<TProps>;
 };
 
 /**
- * @description компонент для обогащения дочернего элемента цсс классом для сокрытия персональной информации от трекеров
+ * компонент для обогащения дочернего элемента цсс классом для сокрытия персональной информации от трекеров
  */
 export const PersonalData = <TProps extends WithClassName>({
   children,

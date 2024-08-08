@@ -9,7 +9,7 @@ export type FormMaskFieldProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description Адаптер для MaskField
+ * Адаптер для MaskField
  */
 export const FormMaskField = <FieldValues extends object>(
   props: FormMaskFieldProps<FieldValues>,

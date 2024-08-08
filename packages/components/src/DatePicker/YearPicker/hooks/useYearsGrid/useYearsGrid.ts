@@ -15,7 +15,7 @@ import { MinMaxDateContext } from '../../../MinMaxDateContext';
 
 export type YearItem = {
   /**
-   * @description номер года для рендера в календаре
+   * номер года для рендера в календаре
    */
   year: number;
 };
