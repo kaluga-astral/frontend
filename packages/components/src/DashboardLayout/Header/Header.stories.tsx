@@ -55,6 +55,14 @@ const DashboardLayoutWrapper = styled.div`
   max-height: 600px;
 `;
 
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+];
+
 export const Interaction: Story = {
   render: (args) => {
     return (
@@ -83,13 +91,7 @@ export const Interaction: Story = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      menuList: [
-        {
-          icon: <ProfileOutlineMd />,
-          title: 'Мой профиль',
-          onClick: () => console.log('Мой профиль'),
-        },
-      ],
+      menuList: FAKE_MENU_LIST,
       exitButton: { onClick: () => console.log('Выход') },
     },
   },

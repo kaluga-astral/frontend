@@ -29,6 +29,14 @@ const meta: Meta<typeof Profile> = {
 
 export default meta;
 
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+];
+
 type Story = StoryObj<typeof Profile>;
 
 export const Interaction: Story = {
@@ -39,15 +47,7 @@ export const Interaction: Story = {
       alt: 'Иванов Иван',
       children: 'ИИ',
     },
-    menuList: [
-      {
-        icon: <ProfileOutlineMd />,
-        title: 'Мой профиль',
-        onClick: () => console.log('Мой профиль'),
-      },
-      { icon: <CompanyOutlineMd />, title: 'Мои организации' },
-      { icon: <SettingsFillMd />, title: 'Настройки' },
-    ],
+    menuList: FAKE_MENU_LIST,
   },
   parameters: {
     docs: {
