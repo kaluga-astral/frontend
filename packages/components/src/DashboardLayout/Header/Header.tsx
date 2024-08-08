@@ -4,6 +4,7 @@ import {
   forwardRef,
   useContext,
 } from 'react';
+import { QuitOutlineMd } from '@astral/icons';
 
 import { useViewportType } from '../../hooks/useViewportType';
 import { DashboardSidebarContext } from '../../DashboardSidebarProvider';
@@ -13,11 +14,13 @@ import { type ProfileProps } from '../../Profile';
 import { SidebarToggler } from '../SidebarToggler';
 
 import {
+  ExitButton,
   HeaderRoot,
   HeaderSection,
   ProfileWrapper,
   SidebarTogglerWrapper,
 } from './styles';
+import { useLogic } from './useLogic';
 
 export type HeaderProps = {
   product: ProductProps;
@@ -33,6 +36,8 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
     profile,
     children,
   } = props;
+
+  const { isShowExitButton, isShowProfile } = useLogic(props);
 
   const { collapsedIn, onToggleSidebar } = useContext(DashboardSidebarContext);
 
@@ -57,10 +62,18 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
       <HeaderSection>
         {children}
         {profile && (
-          <ProfileWrapper>
+          <ProfileWrapper $isShow={isShowProfile}>
             <Profile {...profile} />
           </ProfileWrapper>
         )}
+        <ExitButton
+          $isShow={isShowExitButton}
+          onClick={profile?.exitButton?.onClick}
+          title="Выход"
+          variant="text"
+        >
+          <QuitOutlineMd />
+        </ExitButton>
       </HeaderSection>
     </HeaderRoot>
   );

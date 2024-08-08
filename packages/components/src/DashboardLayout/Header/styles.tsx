@@ -1,4 +1,5 @@
 import { styled } from '../../styles';
+import { IconButton } from '../../IconButton';
 
 export const HeaderRoot = styled.header`
   z-index: ${({ theme }) => theme.zIndex.appBar};
@@ -39,11 +40,29 @@ export const HeaderSection = styled.div`
   }
 `;
 
-export const ProfileWrapper = styled.div`
+export const ProfileWrapper = styled('div', {
+  shouldForwardProp: (prop) => !['$isShow'].includes(prop),
+})<{
+  $isShow: boolean;
+}>`
   display: contents;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: block;
+    display: ${({ $isShow }) => ($isShow ? 'block' : 'none')};
+
+    margin-left: auto;
+  }
+`;
+
+export const ExitButton = styled(IconButton, {
+  shouldForwardProp: (prop) => !['$isShow'].includes(prop),
+})<{
+  $isShow: boolean;
+}>`
+  display: none;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: ${({ $isShow }) => (!$isShow ? 'none' : 'flex')};
 
     margin-left: auto;
   }

@@ -1,16 +1,15 @@
 import { ProfileOutlineMd, QuitOutlineMd } from '@astral/icons';
-import { Box } from '@mui/material';
 import { type Meta, type StoryObj } from '@storybook/react';
 
-import { Divider } from '../../Divider';
-import { ListItemIcon } from '../../ListItemIcon';
-import { ListItemText } from '../../ListItemText';
-import { Menu } from '../../Menu';
-import { MenuItem } from '../../MenuItem';
 import { ProductSwitcher } from '../../ProductSwitcher';
 import { handleGetProducts } from '../../ProductSwitcher/ProductSwitcher.stub';
-import { styled } from '../../styles/styled';
+import { styled } from '../../styles';
 import { DashboardLayout } from '../DashboardLayout';
+import { Menu } from '../../Menu';
+import { MenuItem } from '../../MenuItem';
+import { ListItemIcon } from '../../ListItemIcon';
+import { ListItemText } from '../../ListItemText';
+import { Divider } from '../../Divider';
 
 /**
  * DashboardLayout.Header
@@ -56,6 +55,14 @@ const DashboardLayoutWrapper = styled.div`
   max-height: 600px;
 `;
 
+const FAKE_MENU_LIST = [
+  {
+    icon: <ProfileOutlineMd />,
+    title: 'Мой профиль',
+    onClick: () => console.log('Мой профиль'),
+  },
+];
+
 export const Interaction: Story = {
   render: (args) => {
     return (
@@ -69,11 +76,7 @@ export const Interaction: Story = {
   },
   args: {
     productSwitcher: () => {
-      return (
-        <Box>
-          <ProductSwitcher getProducts={handleGetProducts} />
-        </Box>
-      );
+      return <ProductSwitcher getProducts={handleGetProducts} />;
     },
     product: {
       name: 'Астрал.ЭДО',
@@ -88,23 +91,8 @@ export const Interaction: Story = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      menu: (props) => (
-        <Menu {...props}>
-          <MenuItem>
-            <ListItemIcon>
-              <ProfileOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Мой профиль</ListItemText>
-          </MenuItem>
-          <Divider />
-          <MenuItem>
-            <ListItemIcon>
-              <QuitOutlineMd />
-            </ListItemIcon>
-            <ListItemText>Выйти</ListItemText>
-          </MenuItem>
-        </Menu>
-      ),
+      menuList: FAKE_MENU_LIST,
+      exitButton: { onClick: () => console.log('Выход') },
     },
   },
   parameters: {
@@ -115,16 +103,20 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+  ];
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Box>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
@@ -139,23 +131,40 @@ export const Example = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menu: (props) => (
-              <Menu {...props}>
-                <MenuItem>
-                  <ListItemIcon>
-                    <ProfileOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Мой профиль</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <QuitOutlineMd />
-                  </ListItemIcon>
-                  <ListItemText>Выйти</ListItemText>
-                </MenuItem>
-              </Menu>
-            ),
+            menuList: menuList,
+            exitButton: { onClick: () => console.log('Выход') },
+          }}
+        />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+export const ExitButton = () => {
+  const onExitClick = () => console.log('Выход');
+
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          productSwitcher={() => {
+            return <ProductSwitcher getProducts={handleGetProducts} />;
+          }}
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            exitButton: { onClick: onExitClick },
           }}
         />
         <DashboardLayout.Sidebar menu={{ items: [] }} />
@@ -188,11 +197,7 @@ export const ProductSwitcherProps = () => {
       <DashboardLayout>
         <DashboardLayout.Header
           productSwitcher={() => {
-            return (
-              <Box>
-                <ProductSwitcher getProducts={handleGetProducts} />
-              </Box>
-            );
+            return <ProductSwitcher getProducts={handleGetProducts} />;
           }}
           product={{
             name: 'Астрал.ЭДО',
@@ -208,6 +213,42 @@ export const ProductSwitcherProps = () => {
 };
 
 export const Profile = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+  ];
+
+  return (
+    <DashboardLayoutWrapper>
+      <DashboardLayout>
+        <DashboardLayout.Header
+          product={{
+            name: 'Астрал.ЭДО',
+            logo() {
+              return <Logo />;
+            },
+          }}
+          profile={{
+            displayName: 'Григорьев Виталий',
+            annotation: 'vitatiy_grig@mail.ru',
+            avatar: {
+              alt: 'Григорьев Виталий',
+              children: 'ГВ',
+            },
+            menuList: menuList,
+            exitButton: { onClick: () => console.log('Выход') },
+          }}
+        />
+        <DashboardLayout.Sidebar menu={{ items: [] }} />
+      </DashboardLayout>
+    </DashboardLayoutWrapper>
+  );
+};
+
+export const ProfileCustomMenu = () => {
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
