@@ -24,6 +24,7 @@ export type MenuItemProps<TComponent extends ElementType = ElementType> =
     note?: string;
     /**
      * Позиционирование тултипа
+     * @default left
      */
     tooltipPlacement?: TooltipProps['placement'];
     /**
@@ -45,7 +46,7 @@ const InnerMenuItem = <TComponent extends ElementType>(
     disabled,
     component = 'div',
     title,
-    tooltipPlacement,
+    tooltipPlacement = 'left',
     note,
     ...rest
   } = props;
