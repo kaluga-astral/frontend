@@ -1,13 +1,13 @@
 import { makeAutoObservable } from 'mobx';
-import { ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 
 import {
-  AsyncStateStore,
-  DataGridSort,
-  DataGridStore,
+  type AsyncStateStore,
+  type DataGridSort,
+  type DataGridStore,
   FilterStore,
-  SearchStore,
-  UseQueryResult,
+  type SearchStore,
+  type UseQueryResult,
   createAsyncStateStore,
   createDataGridStore,
   createSearchStore,
@@ -15,13 +15,16 @@ import {
 } from '@example/shared';
 
 import {
-  DocumentPackageState,
+  type DocumentPackageState,
   DocumentPackagesIncludes,
-  DocumentPackagesListDTO,
-  DocumentPackagesListInputDTO,
+  type DocumentPackagesListDTO,
+  type DocumentPackagesListInputDTO,
   RegistryType,
 } from '../../../data';
-import { ArchivedFilters, DocumentsUnsignedListSorting } from '../../types';
+import {
+  type ArchivedFilters,
+  type DocumentsUnsignedListSorting,
+} from '../../types';
 import {
   DocumentsUnsignedListInit,
   FETCH_UNSIGNED_DOCUMENTS_ERROR_MESSAGE,
@@ -29,12 +32,12 @@ import {
 
 export class DocumentsArchivedStore {
   /**
-   * @description Тип запрашиваемого документа
+   * Тип запрашиваемого документа
    * */
   private readonly documentType: RegistryType = RegistryType.Archived;
 
   /**
-   * @description Список пакетов документов
+   * Список пакетов документов
    * */
   public archived: DocumentPackagesListDTO = DocumentsUnsignedListInit;
 
@@ -55,7 +58,7 @@ export class DocumentsArchivedStore {
   }
 
   /**
-   * @description Fetch Data
+   * Fetch Data
    * */
   public getFetchQueryParams = (): DocumentPackagesListInputDTO => ({
     documentPackageState: this.filters.status,
@@ -95,7 +98,7 @@ export class DocumentsArchivedStore {
   }
 
   /**
-   * @description Header Search
+   * Header Search
    * */
   get searchValue() {
     return this.searchState.searchValue;
@@ -110,7 +113,7 @@ export class DocumentsArchivedStore {
   };
 
   /**
-   * @description Sorting
+   * Sorting
    * */
   get sorting() {
     return this.dataGridState.sorting;
@@ -123,7 +126,7 @@ export class DocumentsArchivedStore {
   };
 
   /**
-   * @description Pagination
+   * Pagination
    * */
   get page() {
     return this.dataGridState.page;
@@ -138,7 +141,7 @@ export class DocumentsArchivedStore {
   };
 
   /**
-   * @description Page Filters
+   * Page Filters
    * */
   get filters() {
     return this.filtersState.filters;

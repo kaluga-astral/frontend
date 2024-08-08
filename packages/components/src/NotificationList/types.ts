@@ -6,31 +6,31 @@ export type NotificationListType = 'all' | 'unread';
 
 export type Notification = {
   /**
-   * @description уникальный идентификатор уведомления
+   * уникальный идентификатор уведомления
    * */
   id: string;
   /**
-   * @description заголовок уведомления
+   * заголовок уведомления
    * */
   title: string;
   /**
-   * @description дата создания уведомления
+   * дата создания уведомления
    * */
   date: string | Date;
   /**
-   * @description текст уведомления
+   * текст уведомления
    * */
   text: string;
   /**
-   * @description приоритет уведомления
+   * приоритет уведомления
    * */
   priority?: NotificationPriority;
   /**
-   * @description флаг показывает, что уведомление не прочитано
+   * флаг показывает, что уведомление не прочитано
    * */
   isUnread?: boolean;
   /**
-   * @description дополнительные действия
+   * дополнительные действия
    * */
   actions?: React.ReactNode;
 };

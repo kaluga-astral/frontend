@@ -27,7 +27,7 @@ export type CheckboxFieldProps = CheckboxProps & {
 };
 
 /**
- * @description Составной компонент чекбокса. Содержит label, tooltip, helperText и т.д.
+ * Составной компонент чекбокса. Содержит label, tooltip, helperText и т.д.
  */
 export const CheckboxField = ({
   isSuccess,

@@ -1,19 +1,22 @@
 import {
-  QueryClient,
-  RepositoryFetchParams,
+  type QueryClient,
+  type RepositoryFetchParams,
   createCachedQuery,
   queryClient as queryClientInstance,
 } from '@example/shared';
 
 import {
-  DocumentsNetworkSources,
+  type DocumentsNetworkSources,
   documentNetworkSources as documentNetworkSourcesInstance,
 } from '../../sources';
 
-import { DocumentPackagesListDTO, DocumentPackagesListInputDTO } from './dto';
+import {
+  type DocumentPackagesListDTO,
+  type DocumentPackagesListInputDTO,
+} from './dto';
 
 /**
- * @description Репозиторий для работы с документами
+ * Репозиторий для работы с документами
  * */
 export class DocumentsRepository {
   private readonly documentsCacheID = 'documentsCacheID';
@@ -32,7 +35,7 @@ export class DocumentsRepository {
   ];
 
   /**
-   * @description Получение списка пакетов документов
+   * Получение списка пакетов документов
    * */
   public getDocumentPackages = async (
     params: DocumentPackagesListInputDTO,
@@ -42,9 +45,8 @@ export class DocumentsRepository {
       this.queryClient,
       this.getDocumentsCacheQuery(params),
       async () => {
-        const result = await this.documentsNetworkSources.getDocumentsPackages(
-          params,
-        );
+        const result =
+          await this.documentsNetworkSources.getDocumentsPackages(params);
 
         return result.data;
       },

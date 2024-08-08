@@ -26,7 +26,7 @@ export type RadioFieldProps = Omit<RadioProps, 'title' | 'LinkComponent'> & {
 };
 
 /**
- * @description Составной компонент radio. Содержит label, tooltip и т.п.
+ * Составной компонент radio. Содержит label, tooltip и т.п.
  */
 export const RadioField = ({
   id,

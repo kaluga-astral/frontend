@@ -11,7 +11,7 @@ export type UseFormFieldProps<
 > = WithFormFieldProps<TFormFieldProps, TFieldValues>;
 
 /**
- * @description хук предназначен для получения пропсов при инициализации нового поля в RHF
+ * хук предназначен для получения пропсов при инициализации нового поля в RHF
  */
 export const useFormFieldProps = <
   TFormFieldProps extends object,

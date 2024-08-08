@@ -8,12 +8,12 @@ const { modifyPackageJSON } = require('../modifyPackageJSON');
 
 const buildTs = ({
   /**
-   * @description Новая версия пакета
+   * Новая версия пакета
    * @example modifyPackageJSON({ releaseTag: '1.1.0' })
    * */
   releaseTag,
   /**
-   * @description Какие exports в package.json присутсвуют для данного пакета
+   * Какие exports в package.json присутсвуют для данного пакета
    * @example modifyPackageJSON({ packageExports: { fonts: { import: './fonts/*' }  } })
    * */
   packageExports,

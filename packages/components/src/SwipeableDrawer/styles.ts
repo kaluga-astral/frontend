@@ -16,14 +16,14 @@ type SwipeableDrawerBodyProps = {
 };
 
 /**
- * @description Вывод высоты шапки компонента.
+ * Вывод высоты шапки компонента.
  */
 const getHeight = ({
   drawerBleedingHeight,
 }: SwipeableDrawerHeaderProps): string => `${drawerBleedingHeight}px`;
 
 /**
- * @description Расчет максимальной высоты тела компонента с учетом абсолютно
+ * Расчет максимальной высоты тела компонента с учетом абсолютно
  * позиционированной шапки, плюс отступ от верха экрана в размер шапки.
  */
 const calcMaxBodyHeight = ({
@@ -32,7 +32,7 @@ const calcMaxBodyHeight = ({
   `calc(100dvh - ${drawerBleedingHeight}px * 2)`;
 
 /**
- * @description Определение плавной анимации полного скрытия компонента.
+ * Определение плавной анимации полного скрытия компонента.
  * Предусматривает для <SwipeableDrawer keepMounted={false} /> переопределение
  * базового "transition" плавно выводя компонент за рамки видимой области экрана.
  */

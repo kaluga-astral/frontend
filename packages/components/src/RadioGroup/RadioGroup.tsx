@@ -14,30 +14,30 @@ import { RadioGroupContextProvider } from './RadioGroupContext';
 
 export type RadioGroupProps = WithoutEmotionSpecific<MuiRadioGroupProps> & {
   /**
-   * @description Флаг состояния ошибки
+   * Флаг состояния ошибки
    */
   isError?: boolean;
   /**
-   * @description Текстовая информация об ошибке, будет отображен в тултипе при isError: true
+   * Текстовая информация об ошибке, будет отображен в тултипе при isError: true
    */
   errorText?: ReactNode;
   /**
-   * @description Лейбл для группы
+   * Лейбл для группы
    */
   groupLabel?: string;
   /**
-   * @description Лейбл будет помечен как обязательный
+   * Лейбл будет помечен как обязательный
    */
   required?: boolean;
 
   /**
-   * @description Пропсы для управления FormControl
+   * Пропсы для управления FormControl
    */
   formControlProps?: Omit<FormControlProps, 'error'>;
 };
 
 /**
- * @description Компонент RadioGroup с расширенным функционалом
+ * Компонент RadioGroup с расширенным функционалом
  */
 export const RadioGroup = (props: RadioGroupProps) => {
   const {

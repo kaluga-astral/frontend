@@ -1,7 +1,7 @@
 import { isDate } from '../isDate';
 
 /**
- * @description утилита для сверки совпадения дат, или их отсутствия
+ * утилита для сверки совпадения дат, или их отсутствия
  */
 export const areDatesSame = (
   a: Date | null | undefined,

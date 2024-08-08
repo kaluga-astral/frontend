@@ -1,66 +1,66 @@
 /**
- * @description Полное имя пользователя
+ * Полное имя пользователя
  * */
 export type UserFullNameDTO = {
   /**
-   * @description Имя пользователя
+   * Имя пользователя
    * */
   name: string;
   /**
-   * @description Фамилия пользователя
+   * Фамилия пользователя
    * */
   surname: string;
   /**
-   * @description Отчество пользователя
+   * Отчество пользователя
    * */
   patronymic?: string;
 };
 
 /**
- * @description Персональная и контактная информация пользователя
+ * Персональная и контактная информация пользователя
  * */
 export type UserPersonNetworkDTO = {
   /**
-   * @description Цвет аватара
+   * Цвет аватара
    * */
   avatarHexColor?: string;
   /**
-   * @description Дата рождения
+   * Дата рождения
    * */
   birthDate?: string;
   /**
-   * @description Выводимая информация пользователя
+   * Выводимая информация пользователя
    * */
   displayedName: string;
   /**
-   * @description Электронная почта
+   * Электронная почта
    * */
   email?: string;
   /**
-   * @description Идентификатор для входа через гос. услуги
+   * Идентификатор для входа через гос. услуги
    * */
   esiaId?: string;
   /**
-   * @description Полное имя пользователя
+   * Полное имя пользователя
    * */
   fullName: UserFullNameDTO;
   /**
-   * @description телефон пользователя
+   * телефон пользователя
    * */
   phone?: string;
   /**
-   * @description Короткая выводимая информация о пользователе
+   * Короткая выводимая информация о пользователе
    * */
   shortDisplayedName?: string;
   /**
-   * @description Идентификатор для входа через телеграм
+   * Идентификатор для входа через телеграм
    * */
   telegramId?: string;
 };
 
 export type UserLogoutNetworkDTO = {
   /**
-   * @description Адрес выхода из системы
+   * Адрес выхода из системы
    * */
   redirectUrl: string;
 };

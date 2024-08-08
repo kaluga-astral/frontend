@@ -4,11 +4,11 @@ import { styled } from '../styles';
 
 type DialogHeaderRootProps = {
   /**
-   * @description Если есть заголовок
+   * Если есть заголовок
    */
   hasTitle: boolean;
   /**
-   * @description Если есть кнопка закрытия
+   * Если есть кнопка закрытия
    * */
   hasOnClose: boolean;
 };

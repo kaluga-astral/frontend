@@ -22,7 +22,7 @@ import { useDaysGrid } from './hooks';
 
 export type MondayFirst = {
   /**
-   * @description флаг рендера календаря дней начиная с понедельника
+   * флаг рендера календаря дней начиная с понедельника
    * @default true
    */
   isMondayFirst?: boolean;

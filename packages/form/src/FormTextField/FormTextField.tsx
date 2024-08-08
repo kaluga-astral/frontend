@@ -14,7 +14,7 @@ export type FormTextFieldProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description Адаптер для TextField
+ * Адаптер для TextField
  */
 function FormTextFieldInner<T extends object>(
   props: FormTextFieldProps<T>,

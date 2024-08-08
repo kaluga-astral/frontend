@@ -8,7 +8,7 @@ import { useFormFieldProps } from '../hooks';
 import { type WithFormFieldProps } from '../types';
 
 /**
- * @description Тип значения, которое сетится в state формы
+ * Тип значения, которое сетится в state формы
  */
 export type FormDateRangePickerValue = Date;
 
@@ -17,18 +17,18 @@ export type FormDateRangePickerProps<FieldValues extends object> = Omit<
   'startDateProps' | 'endDateProps'
 > & {
   /**
-   * @description пропсы для управления датой слева
+   * пропсы для управления датой слева
    */
   startDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
 
   /**
-   * @description пропсы для управления датой справа
+   * пропсы для управления датой справа
    */
   endDateProps: WithFormFieldProps<DateItemProps, FieldValues>;
 };
 
 /**
- * @description DateRangePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
+ * DateRangePicker для формы. Инкапсулирует дефолтную валидацию на валидность даты
  */
 export const FormDateRangePicker = <FieldValues extends object>({
   startDateProps,

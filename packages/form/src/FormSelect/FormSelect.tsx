@@ -9,7 +9,7 @@ export type FormSelectProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description Адаптер для Select
+ * Адаптер для Select
  */
 export const FormSelect = <FieldValues extends object>(
   props: FormSelectProps<FieldValues>,

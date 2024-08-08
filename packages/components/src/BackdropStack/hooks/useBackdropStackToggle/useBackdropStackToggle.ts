@@ -3,12 +3,12 @@ import { type SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { backdropStackManager } from '../../services/BackdropStackManager';
 import { type CloseEventReason } from '../../../types';
 /**
- * @description необязательные настройки для использования хука
+ * необязательные настройки для использования хука
  */
 type Options = {
   /**
    * @default undefined
-   * @description айдишка, которая записывается в стек при открытии, если не передана, будет сгенерирована автоматически
+   * айдишка, которая записывается в стек при открытии, если не передана, будет сгенерирована автоматически
    */
   id?: string;
 };
@@ -16,15 +16,15 @@ type Options = {
 type ReturnElements = {
   /**
    * @initial false
-   * @description стейт для контроля состояния открытости элемента, следует использовать, если у элемента могут быть свои дочерние всплываемые элементы
+   * стейт для контроля состояния открытости элемента, следует использовать, если у элемента могут быть свои дочерние всплываемые элементы
    */
   isOpened: boolean;
   /**
-   * @description метод вызываемый при открытии элемента
+   * метод вызываемый при открытии элемента
    */
   handleOpen: () => void;
   /**
-   * @description метод вызываемый при закрытии элемента, внутри него определяется состояние isOpened
+   * метод вызываемый при закрытии элемента, внутри него определяется состояние isOpened
    */
   handleClose: (
     event?: SyntheticEvent<Element, Event> | Event | {},
@@ -35,7 +35,7 @@ type ReturnElements = {
 type UseBackdropStackToggleFunc = (options?: Options) => ReturnElements;
 
 /**
- * @description хук предназначен для быстрого использования backdropStackManager в реакт компонентах, хранит неуправляемый стейт, если вам нужно управлять этим стейтом, воспользуйтесь backdropStackManager в своем компоненте напрямую.
+ * хук предназначен для быстрого использования backdropStackManager в реакт компонентах, хранит неуправляемый стейт, если вам нужно управлять этим стейтом, воспользуйтесь backdropStackManager в своем компоненте напрямую.
  */
 export const useBackdropStackToggle: UseBackdropStackToggleFunc = ({
   id: parentId,

@@ -35,27 +35,27 @@ type TypographyVariant = MuiTypographyVariant | 'inherit';
 
 export type TypographyProps = TypographyPropsBase & {
   /**
-   * @description Цвет текста
+   * Цвет текста
    * @default undefined
    */
   color?: TypographyColor;
   /**
-   * @description Применяет стили оформления темы
+   * Применяет стили оформления темы
    * @default 'body1'
    */
   variant?: TypographyVariant | keyof TypographyPropsVariantOverridesMUI;
   /**
-   * @description Интенсивность цвета, будет применена для цвета, у которого есть градации
+   * Интенсивность цвета, будет применена для цвета, у которого есть градации
    * @default '800'
    */
   colorIntensity?: Intensity;
   /**
-   * @description Тип HTML - элемента
+   * Тип HTML - элемента
    * @default 'p'
    */
   component?: ComponentProp;
   /**
-   * @description Верхний регистр дочерних элементов
+   * Верхний регистр дочерних элементов
    * @default false
    */
   isUpperCase?: boolean;

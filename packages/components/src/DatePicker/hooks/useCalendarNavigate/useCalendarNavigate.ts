@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 
 type UseCalendarNavigateProps = {
   /**
-   * @description опорная дата, относительно которой будет идти переключение
+   * опорная дата, относительно которой будет идти переключение
    */
   date: Date;
   /**
-   * @description колбэк отвечающий за переключение опорной даты
+   * колбэк отвечающий за переключение опорной даты
    * @example addDays || addMonths || addYears
    */
   addCb: (date: Date, count: number) => Date;
 };
 
 /**
- * @description хук для навигации в календаре по опорной дате
+ * хук для навигации в календаре по опорной дате
  */
 export const useCalendarNavigate = ({
   date,
