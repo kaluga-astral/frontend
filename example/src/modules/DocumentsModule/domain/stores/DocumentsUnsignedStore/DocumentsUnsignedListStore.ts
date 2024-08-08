@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
-import { ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 
 import {
-  AsyncStateStore,
-  DataGridSort,
-  DataGridStore,
-  SearchStore,
-  UseQueryResult,
+  type AsyncStateStore,
+  type DataGridSort,
+  type DataGridStore,
+  type SearchStore,
+  type UseQueryResult,
   createAsyncStateStore,
   createDataGridStore,
   createSearchStore,
@@ -14,12 +14,12 @@ import {
 } from '@example/shared';
 
 import {
-  DocumentPackagesDTO,
-  DocumentPackagesListDTO,
-  DocumentPackagesListInputDTO,
+  type DocumentPackagesDTO,
+  type DocumentPackagesListDTO,
+  type DocumentPackagesListInputDTO,
   RegistryType,
 } from '../../../data';
-import { DocumentsUnsignedListSorting } from '../../types';
+import { type DocumentsUnsignedListSorting } from '../../types';
 import {
   DocumentsUnsignedListInit,
   FETCH_UNSIGNED_DOCUMENTS_ERROR_MESSAGE,
@@ -27,17 +27,17 @@ import {
 
 export class DocumentsUnsignedListStore {
   /**
-   * @description Тип запрашиваемого документа
+   * Тип запрашиваемого документа
    * */
   private readonly documentType: RegistryType = RegistryType.New;
 
   /**
-   * @description Список пакетов документов
+   * Список пакетов документов
    * */
   public unsigned: DocumentPackagesListDTO = DocumentsUnsignedListInit;
 
   /**
-   * @description Флажок отключения кнопок действий в хедере
+   * Флажок отключения кнопок действий в хедере
    * */
   public isDisabledHeaderActions: boolean = true;
 
@@ -55,7 +55,7 @@ export class DocumentsUnsignedListStore {
   }
 
   /**
-   * @description Fetch Data
+   * Fetch Data
    * */
   public getFetchQueryParams = (): DocumentPackagesListInputDTO => ({
     filter: this.searchState.search,
@@ -93,7 +93,7 @@ export class DocumentsUnsignedListStore {
   }
 
   /**
-   * @description Header Search
+   * Header Search
    * */
   get searchValue() {
     return this.searchState.searchValue;
@@ -104,7 +104,7 @@ export class DocumentsUnsignedListStore {
   };
 
   /**
-   * @description Sorting
+   * Sorting
    * */
   get sorting() {
     return this.dataGridState.sorting;
@@ -117,7 +117,7 @@ export class DocumentsUnsignedListStore {
   };
 
   /**
-   * @description Selected
+   * Selected
    * */
   get selected() {
     return this.dataGridState.selected;
@@ -129,7 +129,7 @@ export class DocumentsUnsignedListStore {
   };
 
   /**
-   * @description Pagination
+   * Pagination
    * */
   get page() {
     return this.dataGridState.page;

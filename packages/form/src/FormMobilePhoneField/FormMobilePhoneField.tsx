@@ -9,7 +9,7 @@ export type FormMobilePhoneFieldProps<FieldValues extends object> =
   WithFormFieldProps<Omit<MaskFieldProps, 'mask'>, FieldValues>;
 
 /**
- * @description Поле для ввода личного мобильного номера телефона, начинающего на 79
+ * Поле для ввода личного мобильного номера телефона, начинающего на 79
  */
 export const FormMobilePhoneField = <FieldValues extends object>({
   ...props

@@ -23,7 +23,7 @@ export type TagBadgeProps = Omit<BadgeProps, 'color' | 'withBorder'> & {
 };
 
 /**
- * @description Badge для использования внутри компонента Tag
+ * Badge для использования внутри компонента Tag
  */
 export const TagBadge = ({
   color = 'primary',

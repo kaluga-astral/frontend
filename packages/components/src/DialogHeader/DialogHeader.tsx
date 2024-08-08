@@ -9,11 +9,11 @@ import { HeaderContent, Wrapper } from './styles';
 
 export type DialogHeaderProps = {
   /**
-   * @description Горизонтальное выравнивание
+   * Горизонтальное выравнивание
    * */
   justifyContent?: CSSProperties['justifyContent'];
   /**
-   * @description Убирает расстояние между компонентами
+   * Убирает расстояние между компонентами
    * */
   disableSpacing?: boolean;
   title?: string;

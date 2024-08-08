@@ -3,7 +3,7 @@ import { type Components } from '@mui/material';
 import { type Theme } from '../types';
 
 /**
- * @description Подставить нужную тень
+ * Подставить нужную тень
  * @param {number|undefined} elevation - Значение пропса "elevation"
  * @param {Theme} theme - Объект темы
  * @return {string} Вернёт значение "box-shadow" из "theme"

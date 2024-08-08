@@ -1,59 +1,59 @@
 export type PaginationInputDTO = {
   /**
-   * @description Количество записей на странице.
+   * Количество записей на странице.
    * */
   pageSize?: number;
   /**
-   * @description Номер текущей выбранной страницы.
+   * Номер текущей выбранной страницы.
    * */
   pageIndex?: number;
 };
 
 export type FiltersInputDTO = {
   /**
-   * @description Дата начала запрашиваемого периода.
+   * Дата начала запрашиваемого периода.
    * */
   startDate?: string;
   /**
-   * @description Дата окончания запрашиваемого периода.
+   * Дата окончания запрашиваемого периода.
    * */
   endDate?: string;
   /**
-   * @description Строка поиска.
+   * Строка поиска.
    * */
   filter?: string;
 };
 
 export type SortingInputDTO = {
   /**
-   * @description Наименование сортируемого поля.
+   * Наименование сортируемого поля.
    * */
   sortBy?: string;
   /**
-   * @description Тип сортировки.
+   * Тип сортировки.
    * */
   sortType?: string;
 };
 
 export type PaginationMetaDTO = {
   /**
-   * @description Номер страницы.
+   * Номер страницы.
    * */
   pageIndex: number;
   /**
-   * @description Количество элементов на странице.
+   * Количество элементов на странице.
    * */
   pageSize: number;
   /**
-   * @description Общие число страниц.
+   * Общие число страниц.
    * */
   totalPages: number;
   /**
-   * @description Наличие предыдущей страницы.
+   * Наличие предыдущей страницы.
    * */
   hasPreviousPage: boolean;
   /**
-   * @description Наличие следующей страницы.
+   * Наличие следующей страницы.
    * */
   hasNextPage: boolean;
   indexFrom: number;
@@ -63,33 +63,33 @@ export type PaginationMetaDTO = {
 
 export type FiltersMetaDTO = {
   /**
-   * @description Дата начала запрашиваемого периода.
+   * Дата начала запрашиваемого периода.
    * */
   startDate?: string;
   /**
-   * @description Дата окончания запрашиваемого периода.
+   * Дата окончания запрашиваемого периода.
    * */
   endDate?: string;
   /**
-   * @description Строка поиска.
+   * Строка поиска.
    * */
   filter?: string;
 };
 
 export type SortingMetaDTO = {
   /**
-   * @description Наименование сортируемого поля.
+   * Наименование сортируемого поля.
    * */
   sortBy?: string;
   /**
-   * @description Тип сортировки.
+   * Тип сортировки.
    * */
   sortType?: string;
 };
 
 export type MetaDTO = {
   /**
-   * @description Общие число элементов.
+   * Общие число элементов.
    * */
   totalCount: number;
 };

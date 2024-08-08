@@ -5,7 +5,7 @@ import { useFormContext } from '../hooks';
 export type FormSubmitButtonProps = Omit<ButtonProps, 'type'>;
 
 /**
- * @description Используется для форм, отображает состояние загрузки, когда форма isSubmitting
+ * Используется для форм, отображает состояние загрузки, когда форма isSubmitting
  */
 export const FormSubmitButton = ({
   children,

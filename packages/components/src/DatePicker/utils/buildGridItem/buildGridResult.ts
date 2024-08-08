@@ -3,7 +3,7 @@ import { type IsDateOutOfRangeOptions } from '../../../utils/date';
 
 type BuildGridResultOptions<T> = {
   /**
-   * @description массив элементов для рендера в календаре
+   * массив элементов для рендера в календаре
    */
   grid: GridItem<T>[];
 } & Omit<IsDateOutOfRangeOptions, 'date'>;

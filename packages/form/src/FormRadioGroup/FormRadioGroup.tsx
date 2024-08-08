@@ -7,7 +7,7 @@ export type FormRadioGroupProps<FieldValues extends object> =
   WithFormFieldProps<RadioGroupProps, FieldValues>;
 
 /**
- * @description Адаптер RadioGroup для формы
+ * Адаптер RadioGroup для формы
  */
 export const FormRadioGroup = <FieldValues extends object>(
   props: FormRadioGroupProps<FieldValues>,

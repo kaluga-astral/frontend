@@ -6,28 +6,28 @@ type Params = {
   currentValue?: Date | null;
   mask: string;
   /**
-   * @description Изменение value для DatePicker
+   * Изменение value для DatePicker
    * */
   onChangeValue?: (date?: Date | null) => void;
 };
 
 type Returned = {
   /**
-   * @description Value для MaskField
+   * Value для MaskField
    * */
   maskedValue: string;
   /**
-   * @description Изменение maskedValue по Date
+   * Изменение maskedValue по Date
    * */
   onMaskedDateChange: (date: Date) => void;
   /**
-   * @description Изменение maskedValue
+   * Изменение maskedValue
    * */
   onMaskedValueChange: (value: string) => void;
 };
 
 /**
- * @description Хук для управления значением для MaskField
+ * Хук для управления значением для MaskField
  */
 export const useMaskedValue = ({
   currentValue,

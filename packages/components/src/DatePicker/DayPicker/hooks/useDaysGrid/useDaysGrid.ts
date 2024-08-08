@@ -18,25 +18,25 @@ import { MinMaxDateContext } from '../../../MinMaxDateContext';
 
 export type DayItem = {
   /**
-   * @description Флаг обозначающий, что дата не попадает в предполагаемый диапазон к выбору,
+   * Флаг обозначающий, что дата не попадает в предполагаемый диапазон к выбору,
    * но эту дату все равно можно выбрать, например календарь на декабрь 22го года, начинается с понедельника 28го ноября,
    * и вот этот кусочек ноября будет вне целевого диапазона
    */
   isOutOfAvailableRange: boolean;
   /**
-   * @description день месяца, 1 - 31
+   * день месяца, 1 - 31
    */
   monthDay: number;
 };
 
 type BuildMonthGridOptions = {
   /**
-   * @description для сборки календаря в полный размер, для соответствия с дизайном в rangePicker
+   * для сборки календаря в полный размер, для соответствия с дизайном в rangePicker
    * @default false
    */
   fullSize?: boolean;
   /**
-   * @description Флаг обозначающий, что надо отрендерить массив, где понедельник в календаре идет вначале
+   * Флаг обозначающий, что надо отрендерить массив, где понедельник в календаре идет вначале
    * @default true
    */
   isMondayFirst?: boolean;
@@ -57,22 +57,22 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
     const grid: GridItem<DayItem>[] = [];
 
     /**
-     * @description нормализованный номер месяца от базовой даты
+     * нормализованный номер месяца от базовой даты
      */
     const month = baseDate.getUTCMonth() + 1;
 
     /**
-     * @description получаем новую дату, т.к. пропс может содержать дни, часы, минуты, что собьет наш счет
+     * получаем новую дату, т.к. пропс может содержать дни, часы, минуты, что собьет наш счет
      */
     const startDate = buildIsoDate({ year: baseDate.getUTCFullYear(), month });
 
     /**
-     * @description отступ для компенсации первого дня недели, 1 для понедельника, 0 для воскресенья
+     * отступ для компенсации первого дня недели, 1 для понедельника, 0 для воскресенья
      */
     const firstWeekDayGap = Number(isMondayFirst);
 
     /**
-     * @description номер первого дня текущего месяца в календаре, зависит от флага isMondayFirst
+     * номер первого дня текущего месяца в календаре, зависит от флага isMondayFirst
      */
     let startWeekDay = startDate.getUTCDay();
 
@@ -81,7 +81,7 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
     }
 
     /**
-     * @description текущая дата пользователя
+     * текущая дата пользователя
      */
     const currentDate = new Date();
 
@@ -90,11 +90,11 @@ export const useDaysGrid: GridBuilder<DayItem, BuildMonthGridOptions> = ({
       // текущая дата в счетчике
       const date = addDays(startDate, i - startWeekDay);
       /**
-       * @description нормализованный номер месяца
+       * нормализованный номер месяца
        */
       const dateMonth = date.getUTCMonth() + 1;
       /**
-       * @description флаг следующего месяца относительно базовой даты
+       * флаг следующего месяца относительно базовой даты
        */
 
       grid.push({

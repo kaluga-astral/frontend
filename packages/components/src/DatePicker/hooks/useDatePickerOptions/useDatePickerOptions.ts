@@ -10,13 +10,13 @@ type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   onChange?: (date?: Date | null) => void;
   currentValue?: Date | null;
   /**
-   * @description смещение базовой даты в месяцах.
+   * смещение базовой даты в месяцах.
    * ожидается использование в DateRangePicker, для создания опорной даты второго календаря,
    * @default 0
    */
   monthOffset?: number;
   /**
-   * @description колбэк на выбор даты в пикере
+   * колбэк на выбор даты в пикере
    */
   onDatePick: () => void;
 };
@@ -29,22 +29,22 @@ type UseMaskedValueAndSelectedBaseDateReturn = {
     onChange?: (value: string) => void,
   ) => void;
   /**
-   * @description пропсы необходимые для работы пикеров
+   * пропсы необходимые для работы пикеров
    */
   pickerProps: PickerProps;
   /**
-   * @description пропсы необходимые для работы инпутов
+   * пропсы необходимые для работы инпутов
    */
   inputProps: {
     /**
-     * @description строковое значение даты для инпута с маской
+     * строковое значение даты для инпута с маской
      */
     value: string;
   };
 };
 
 /**
- * @description хук объединяющий повторяющуюся логику в работе DatePicker и RangeDatePicker:
+ * хук объединяющий повторяющуюся логику в работе DatePicker и RangeDatePicker:
  * опорная дата;
  * значение для маски;
  * обработчик изменения значения маски;

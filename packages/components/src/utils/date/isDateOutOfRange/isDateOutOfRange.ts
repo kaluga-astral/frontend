@@ -1,7 +1,7 @@
 import { buildIsoDate } from '../buildIsoDate';
 
 /**
- * @description глубина сравнивания, даты могут быть равны по году, но разные по месяцу, и т.д.
+ * глубина сравнивания, даты могут быть равны по году, но разные по месяцу, и т.д.
  */
 export enum DateCompareDeep {
   year,
@@ -14,11 +14,11 @@ export enum DateCompareDeep {
 
 export type IsDateOutOfRangeOptions = {
   /**
-   * @description опорная дата, которая сравнивается с minDate и maxDate
+   * опорная дата, которая сравнивается с minDate и maxDate
    */
   date: Date;
   /**
-   * @description глубина сравнивания, даты могут быть равны по году, но разные по месяцу, и т.д.
+   * глубина сравнивания, даты могут быть равны по году, но разные по месяцу, и т.д.
    */
   deep?: DateCompareDeep;
   dateA: Date;
@@ -36,7 +36,7 @@ export const buildDateByDeep = (date: Date, deep: DateCompareDeep): Date =>
   });
 
 /**
- * @description утилита занимающаяся числовым сравнением дат на НЕ вхождение даты в промежуток между А и B
+ * утилита занимающаяся числовым сравнением дат на НЕ вхождение даты в промежуток между А и B
  */
 const checkDateOnOutOfRange = ({
   date,
@@ -46,7 +46,7 @@ const checkDateOnOutOfRange = ({
   !((dateA >= date && date >= dateB) || (dateB >= date && date >= dateA));
 
 /**
- * @description утилита проверки даты на НЕ вхождение в указанный диапазон между A и B, с учетом глубины сравнения
+ * утилита проверки даты на НЕ вхождение в указанный диапазон между A и B, с учетом глубины сравнения
  */
 export const isDateOutOfRange = ({
   date,

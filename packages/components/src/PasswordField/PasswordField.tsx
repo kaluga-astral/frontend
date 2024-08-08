@@ -7,7 +7,7 @@ import { TextField, type TextFieldProps } from '../TextField';
 
 export type PasswordFieldInputProps = TextFieldProps & {
   /**
-   * @description если true, показываются символы пароля
+   * если true, показываются символы пароля
    */
   showSymbols?: boolean;
 };

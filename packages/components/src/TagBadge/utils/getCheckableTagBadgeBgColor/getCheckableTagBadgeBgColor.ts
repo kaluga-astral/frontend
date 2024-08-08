@@ -1,7 +1,7 @@
 import { type BadgeColor } from '../../../Badge';
 
 /**
- * @description Утилита для получения цвета TagBadge,
+ * Утилита для получения цвета TagBadge,
  * в зависимости от его состояния disabled и checked, и полученного цвета color из props
  * @param {Object} disabled - Состояние disabled тега.
  * @param {Object} checked - Состояние checked тега.

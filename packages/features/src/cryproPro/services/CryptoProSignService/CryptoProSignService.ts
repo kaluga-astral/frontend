@@ -10,11 +10,11 @@ import {
 import { type FileData } from '../../types';
 
 /**
- * @description Сервис для методов подписания КриптоПро
+ * Сервис для методов подписания КриптоПро
  * */
 export class CryptoProSignService {
   /**
-   * @description Метод подписания в формате CMS
+   * Метод подписания в формате CMS
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт, либо в формате Base64 строки
    * @param detach присоединять подпись к данным или отдельно?
@@ -30,7 +30,7 @@ export class CryptoProSignService {
   };
 
   /**
-   * @description Метод подписания хэша указанным сертификатом в формате CMS
+   * Метод подписания хэша указанным сертификатом в формате CMS
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт хэша, либо сам хэш в формате hex строки (в любом регистре)
    * @param includeCertChain включать в результат всю цепочку?
@@ -44,7 +44,7 @@ export class CryptoProSignService {
   };
 
   /**
-   * @description Метод подписания указанным сертификатом в формате XmlDSig
+   * Метод подписания указанным сертификатом в формате XmlDSig
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт, либо в формате Base64 строки
    * @param xmlSignatureType тип xml подписи
@@ -58,7 +58,7 @@ export class CryptoProSignService {
   };
 
   /**
-   * @description Метод расшифровки данных
+   * Метод расшифровки данных
    * @param fileData данные для расшифрования в виде массива байт, либо в формате Base64 строки
    * */
   public decryptCms = async (fileData: FileData) => {

@@ -9,7 +9,7 @@ export type FormCodeFieldProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description Адаптер для CodeField
+ * Адаптер для CodeField
  */
 export const FormCodeField = <FieldValues extends object>(
   props: FormCodeFieldProps<FieldValues>,

@@ -1,23 +1,26 @@
 import { makeAutoObservable } from 'mobx';
 
 import {
-  AsyncStateStore,
-  UseQueryResult,
+  type AsyncStateStore,
+  type UseQueryResult,
   createAsyncStateStore,
   notify,
 } from '@example/shared';
-import { UserPersonDTO, userRepository } from '@example/modules/AuthModule';
+import {
+  type UserPersonDTO,
+  userRepository,
+} from '@example/modules/AuthModule';
 
 const FETCH_USER_DATA_ERROR_MESSAGE = 'Ошибка при получении данных';
 
 class HeaderLogic {
   /**
-   * @description Асинхронное состояние
+   * Асинхронное состояние
    * */
   asyncState: AsyncStateStore;
 
   /**
-   * @description Информация о пользователе
+   * Информация о пользователе
    * */
   user: Pick<UserPersonDTO, 'displayedName' | 'email' | 'shortDisplayedName'> =
     {
@@ -32,7 +35,7 @@ class HeaderLogic {
   }
 
   /**
-   * @description Выход из продукта
+   * Выход из продукта
    * */
   public logout = () => {
     userRepository
@@ -48,7 +51,7 @@ class HeaderLogic {
   };
 
   /**
-   * @description Добавление данных о пользователе в стор
+   * Добавление данных о пользователе в стор
    * */
   public setUserData = ({
     data,
@@ -76,7 +79,7 @@ class HeaderLogic {
   };
 
   /**
-   * @description Получение продуктов для виджета
+   * Получение продуктов для виджета
    * */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public handleGetProducts = () => [] as any;

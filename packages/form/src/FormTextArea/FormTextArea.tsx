@@ -9,7 +9,7 @@ export type FormTextAreaProps<FieldValues extends object> = WithFormFieldProps<
 >;
 
 /**
- * @description Адаптер для TextArea
+ * Адаптер для TextArea
  */
 export const FormTextArea = <FieldValues extends object>(
   props: FormTextAreaProps<FieldValues>,
