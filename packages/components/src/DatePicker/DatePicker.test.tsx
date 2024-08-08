@@ -9,6 +9,7 @@ import {
 import { useState } from 'react';
 
 import { DatePicker } from './DatePicker';
+import { DEFAULT_PLACEHOLDER } from './constants';
 
 // Протестировать любые кейсы, связанные с MaskFiled невозможно из-за того, что MaskField использует методы, не эмулируемые в rtl
 describe('DatePicker', () => {
@@ -190,6 +191,24 @@ describe('DatePicker', () => {
       const popover = screen.queryByRole('presentation');
 
       expect(popover).not.toBeInTheDocument();
+    });
+
+    it('Placeholder по умолчанию отображается если не задан в inputProps', () => {
+      renderWithTheme(<DatePicker disabled />);
+
+      const placeholder = screen.getByPlaceholderText(DEFAULT_PLACEHOLDER);
+
+      expect(placeholder).toBeVisible();
+    });
+
+    it('Placeholder заданный в inputProps отображается', () => {
+      renderWithTheme(
+        <DatePicker disabled inputProps={{ placeholder: 'Введите дату' }} />,
+      );
+
+      const placeholder = screen.getByPlaceholderText('Введите дату');
+
+      expect(placeholder).toBeVisible();
     });
   });
 });
