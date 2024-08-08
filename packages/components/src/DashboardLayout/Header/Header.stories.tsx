@@ -27,14 +27,6 @@ const meta: Meta<typeof DashboardLayout.Header> = {
 
 export default meta;
 
-const FAKE_MENU_LIST = [
-  {
-    icon: <ProfileOutlineMd />,
-    title: 'Мой профиль',
-    onClick: () => console.log('Мой профиль'),
-  },
-];
-
 type Story = StoryObj<typeof DashboardLayout.Header>;
 
 const Logo = () => {
@@ -91,7 +83,13 @@ export const Interaction: Story = {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       },
-      menuList: FAKE_MENU_LIST,
+      menuList: [
+        {
+          icon: <ProfileOutlineMd />,
+          title: 'Мой профиль',
+          onClick: () => console.log('Мой профиль'),
+        },
+      ],
       exitButton: { onClick: () => console.log('Выход') },
     },
   },
@@ -103,6 +101,14 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+  ];
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -123,7 +129,7 @@ export const Example = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menuList: FAKE_MENU_LIST,
+            menuList: menuList,
             exitButton: { onClick: () => console.log('Выход') },
           }}
         />
@@ -205,6 +211,14 @@ export const ProductSwitcherProps = () => {
 };
 
 export const Profile = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+  ];
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -222,7 +236,7 @@ export const Profile = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menuList: FAKE_MENU_LIST,
+            menuList: menuList,
             exitButton: { onClick: () => console.log('Выход') },
           }}
         />

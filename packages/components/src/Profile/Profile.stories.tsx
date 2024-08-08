@@ -29,16 +29,6 @@ const meta: Meta<typeof Profile> = {
 
 export default meta;
 
-const FAKE_MENU_LIST = [
-  {
-    icon: <ProfileOutlineMd />,
-    title: 'Мой профиль',
-    onClick: () => console.log('Мой профиль'),
-  },
-  { icon: <CompanyOutlineMd />, title: 'Мои организации' },
-  { icon: <SettingsFillMd />, title: 'Настройки' },
-];
-
 type Story = StoryObj<typeof Profile>;
 
 export const Interaction: Story = {
@@ -49,7 +39,15 @@ export const Interaction: Story = {
       alt: 'Иванов Иван',
       children: 'ИИ',
     },
-    menuList: FAKE_MENU_LIST,
+    menuList: [
+      {
+        icon: <ProfileOutlineMd />,
+        title: 'Мой профиль',
+        onClick: () => console.log('Мой профиль'),
+      },
+      { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+      { icon: <SettingsFillMd />, title: 'Настройки' },
+    ],
   },
   parameters: {
     docs: {
@@ -59,7 +57,17 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
-  return <Profile displayName="Григорьев Виталий" menuList={FAKE_MENU_LIST} />;
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
+  return <Profile displayName="Григорьев Виталий" menuList={menuList} />;
 };
 
 /**
@@ -116,6 +124,15 @@ export const CustomMenu = () => {
  */
 
 export const ExitButton = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
   const exitButton = {
     onClick: () => console.log('Выход'),
   };
@@ -123,7 +140,7 @@ export const ExitButton = () => {
   return (
     <Profile
       displayName="Григорьев Виталий"
-      menuList={FAKE_MENU_LIST}
+      menuList={menuList}
       exitButton={exitButton}
     />
   );
@@ -171,6 +188,16 @@ export const RenderCustomItem = () => {
 };
 
 export const WithAvatar = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
   return (
     <Profile
       displayName="Григорьев Виталий"
@@ -178,17 +205,27 @@ export const WithAvatar = () => {
         alt: 'Григорьев Виталий',
         children: 'ГВ',
       }}
-      menuList={FAKE_MENU_LIST}
+      menuList={menuList}
     />
   );
 };
 
 export const WithAnnotation = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+    { icon: <CompanyOutlineMd />, title: 'Мои организации' },
+    { icon: <SettingsFillMd />, title: 'Настройки' },
+  ];
+
   return (
     <Profile
       displayName="Григорьев Виталий"
       annotation="vitatiy_grig@mail.ru"
-      menuList={FAKE_MENU_LIST}
+      menuList={menuList}
     />
   );
 };

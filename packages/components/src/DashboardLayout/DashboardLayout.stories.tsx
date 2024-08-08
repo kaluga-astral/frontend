@@ -34,14 +34,6 @@ const meta: Meta<typeof DashboardLayout> = {
 
 export default meta;
 
-const FAKE_MENU_LIST = [
-  {
-    icon: <ProfileOutlineMd />,
-    title: 'Мой профиль',
-    onClick: () => console.log('Мой профиль'),
-  },
-];
-
 type RouterLinkProps = {
   className?: string;
   to: string;
@@ -91,6 +83,14 @@ const DashboardLayoutWrapper = styled.div`
 `;
 
 export const Example = () => {
+  const menuList = [
+    {
+      icon: <ProfileOutlineMd />,
+      title: 'Мой профиль',
+      onClick: () => console.log('Мой профиль'),
+    },
+  ];
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -111,7 +111,7 @@ export const Example = () => {
               alt: 'Григорьев Виталий',
               children: 'ГВ',
             },
-            menuList: FAKE_MENU_LIST,
+            menuList: menuList,
             exitButton: { onClick: () => console.log('Выход') },
           }}
         />
