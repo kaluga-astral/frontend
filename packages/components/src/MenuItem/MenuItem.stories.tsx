@@ -52,6 +52,9 @@ export const Example = () => {
   );
 };
 
+/**
+ * prop ```note``` выводит Tooltip на не заблокированном элементе меню
+ */
 export const Note = () => {
   return (
     <MenuList>
