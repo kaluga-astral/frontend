@@ -53,6 +53,12 @@ export const Example = () => {
   );
 };
 
+export const StartAdornment = () => {
+  const [date, setDate] = useState<Date | null>();
+
+  return <DatePicker startAdornment="c" value={date} onChange={setDate} />;
+};
+
 const Template = (props: DatePickerProps) => {
   const [date, setDate] = useState<Date | null>();
 
@@ -90,6 +96,5 @@ export const Showcase = () => (
       minDate={addDays(normalizedCurrentDate, -90)}
       maxDate={addDays(normalizedCurrentDate, -80)}
     />
-    <Template label="startAdornment" startAdornment="c" />
   </LegacyGrid>
 );
