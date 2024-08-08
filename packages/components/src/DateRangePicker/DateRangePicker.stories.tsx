@@ -78,6 +78,19 @@ export const Example = () => (
   />
 );
 
+export const StartAdornment = () => (
+  <Template
+    startDateProps={{
+      startAdornment: 'c',
+      inputProps: { label: 'startAdornment' },
+    }}
+    endDateProps={{
+      startAdornment: 'по',
+      inputProps: { label: 'startAdornment' },
+    }}
+  />
+);
+
 export const Showcase = () => (
   <LegacyGrid container spacing={6} autoFlow="row">
     <Template />

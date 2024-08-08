@@ -34,6 +34,7 @@ export const DatePickerInput = forwardRef<
       onFocus,
       disabled,
       placeholder = DEFAULT_PLACEHOLDER,
+      startAdornment,
       ...props
     },
     ref,
@@ -86,6 +87,7 @@ export const DatePickerInput = forwardRef<
                 <CalendarOutlineMd />
               </InputAdornment>
             ),
+            startAdornment: startAdornment,
           }}
           inputProps={{
             ...props.inputProps,
