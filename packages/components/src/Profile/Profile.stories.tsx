@@ -130,7 +130,7 @@ export const ExitButton = () => {
 };
 
 /**
- * prop ```renderItem``` позволяет задать свое отображение для MenuItem
+ * prop ```render``` позволяет задать свое отображение для MenuItem
  */
 
 export const RenderCustomItem = () => {
