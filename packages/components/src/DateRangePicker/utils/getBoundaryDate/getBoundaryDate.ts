@@ -8,7 +8,7 @@ type GetBoundaryDateParams = {
   /**
    * @description целевая дата
    */
-  target?: Date;
+  target?: Date | null;
   /**
    * @description смещение в днях
    */

@@ -9,7 +9,7 @@ import {
 import { type MinMaxDate } from '../../types';
 
 type UseSelectedBaseDateOptions = {
-  currentValue?: Date;
+  currentValue?: Date | undefined | null;
 } & MinMaxDate;
 
 /**
@@ -21,12 +21,14 @@ export const useSelectedBaseDate = ({
   currentValue,
   minDate,
   maxDate,
-}: UseSelectedBaseDateOptions): Date | undefined => {
-  const [baseDate, setBaseDate] = useState<Date | undefined>(currentValue);
+}: UseSelectedBaseDateOptions): Date | undefined | null => {
+  const [baseDate, setBaseDate] = useState<Date | undefined | null>(
+    currentValue,
+  );
 
   useEffect(() => {
     if (!isDate(currentValue)) {
-      setBaseDate(undefined);
+      setBaseDate(null);
 
       return;
     }
@@ -44,7 +46,7 @@ export const useSelectedBaseDate = ({
         deep: DateCompareDeep.day,
       })
     ) {
-      setBaseDate(undefined);
+      setBaseDate(null);
     } else {
       setBaseDate(currentValue);
     }

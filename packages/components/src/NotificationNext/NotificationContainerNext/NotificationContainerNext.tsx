@@ -6,6 +6,7 @@ import {
   NOTIFY_CONTAINER_ID,
   NOTIFY_POSITIONS,
 } from '../constants';
+import { useViewportType } from '../../hooks/useViewportType';
 
 import { Inner, Wrapper } from './styles';
 
@@ -23,21 +24,27 @@ export type NotificationContainerProps = Omit<
 export const NotificationContainerNext = ({
   containerId = NOTIFY_CONTAINER_ID,
   ...props
-}: NotificationContainerProps) => (
-  <Wrapper>
-    <Inner
-      {...props}
-      containerId={containerId}
-      pauseOnFocusLoss
-      position={NOTIFY_POSITIONS.BOTTOM_RIGHT}
-      newestOnTop={false}
-      closeOnClick={false}
-      draggable={false}
-      rtl={false}
-      closeButton={false}
-      bodyClassName={`${NOTIFY_CLASSNAME}__body`}
-      toastClassName={NOTIFY_CLASSNAME}
-      progressClassName={`${NOTIFY_CLASSNAME}__progress`}
-    />
-  </Wrapper>
-);
+}: NotificationContainerProps) => {
+  const { isMobile } = useViewportType();
+
+  return (
+    <Wrapper>
+      <Inner
+        {...props}
+        containerId={containerId}
+        pauseOnFocusLoss
+        position={
+          isMobile ? NOTIFY_POSITIONS.TOP_CENTER : NOTIFY_POSITIONS.BOTTOM_RIGHT
+        }
+        newestOnTop={false}
+        closeOnClick={false}
+        draggable={false}
+        rtl={false}
+        closeButton={false}
+        bodyClassName={`${NOTIFY_CLASSNAME}__body`}
+        toastClassName={NOTIFY_CLASSNAME}
+        progressClassName={`${NOTIFY_CLASSNAME}__progress`}
+      />
+    </Wrapper>
+  );
+};

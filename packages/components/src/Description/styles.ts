@@ -1,18 +1,23 @@
 import { styled } from '../styles';
 
 export const Wrapper = styled('div', {
-  shouldForwardProp: (prop) => prop !== '$justifyContent' && prop !== 'as',
+  shouldForwardProp: (prop) =>
+    !['$justifyContent', 'as', '$direction'].includes(prop),
 })<{
   $justifyContent?: 'space-between' | 'start';
+  $direction?: 'default' | 'column' | 'row';
 }>`
   display: flex;
+  flex-direction: ${({ $direction }) =>
+    $direction === 'default' ? 'row' : $direction};
   align-items: baseline;
   justify-content: ${({ $justifyContent }) => $justifyContent};
 
   margin: 0;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: column;
+    flex-direction: ${({ $direction }) =>
+      $direction === 'default' ? 'column' : $direction};
 
     .MuiTypography-root {
       font-size: ${({ theme }) => theme.typography.fontSize};

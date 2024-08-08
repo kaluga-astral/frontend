@@ -1,9 +1,4 @@
-import {
-  type Dispatch,
-  type FunctionComponent,
-  type SetStateAction,
-  type SyntheticEvent,
-} from 'react';
+import { type FunctionComponent, type SyntheticEvent } from 'react';
 
 import type { TreeListData } from '../../Tree';
 import type { MultipleValue } from '../types';
@@ -49,7 +44,7 @@ export type TreeItemProps = TreeListData & {
   /**
    * Функция, которая запускается при выборе item
    */
-  onChange: Dispatch<SetStateAction<MultipleValue>>;
+  onChange: (value: MultipleValue) => void;
 };
 
 export const TreeItem = ({

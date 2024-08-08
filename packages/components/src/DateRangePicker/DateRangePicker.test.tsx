@@ -181,7 +181,7 @@ describe('DateRangePicker', () => {
     };
 
     const TestComponent = () => {
-      const [value, setValue] = useState<Date | undefined>();
+      const [value, setValue] = useState<Date | null>();
 
       callbacks.setValue = setValue;
 
@@ -215,8 +215,8 @@ describe('DateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [valueA, setValueA] = useState<Date | undefined>();
-      const [valueB, setValueB] = useState<Date | undefined>();
+      const [valueA, setValueA] = useState<Date | null>();
+      const [valueB, setValueB] = useState<Date | null>();
 
       return (
         <DateRangePicker
@@ -276,8 +276,8 @@ describe('DateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [dateA, setDateA] = useState<Date | undefined>();
-      const [dateB, setDateB] = useState<Date | undefined>();
+      const [dateA, setDateA] = useState<Date | null>();
+      const [dateB, setDateB] = useState<Date | null>();
 
       return (
         <DateRangePicker
@@ -322,8 +322,8 @@ describe('DateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [dateA, setDateA] = useState<Date | undefined>();
-      const [dateB, setDateB] = useState<Date | undefined>();
+      const [dateA, setDateA] = useState<Date | null>();
+      const [dateB, setDateB] = useState<Date | null>();
 
       return (
         <DateRangePicker

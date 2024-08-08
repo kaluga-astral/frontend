@@ -107,16 +107,32 @@ export const PageHeader = <
             <ArrowLOutlineMd />
           </BackButton>
         )}
-        <Title variant="h3" noWrap={isMobile}>
-          {typeof title === 'string' ? (
-            <OverflowTypography variant="inherit">{title}</OverflowTypography>
-          ) : (
-            title
-          )}
-        </Title>
+        {typeof title === 'string' ? (
+          <Title variant="h3" noWrap={isMobile}>
+            <OverflowTypography component="div" variant="inherit">
+              {title}
+            </OverflowTypography>
+          </Title>
+        ) : (
+          <Title
+            component="div"
+            role="heading"
+            variant="h3"
+            aria-level={3}
+            noWrap={isMobile}
+          >
+            {title}
+          </Title>
+        )}
       </MobileWrapper>
 
-      {description && <Description>{description}</Description>}
+      {description && typeof description !== 'string' ? (
+        <Description component="div" role="heading" aria-level={4}>
+          {description}
+        </Description>
+      ) : (
+        <Description>{description}</Description>
+      )}
       {actions && (
         <Actions>
           <ButtonGroup {...actions} />

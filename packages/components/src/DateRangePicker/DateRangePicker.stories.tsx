@@ -36,10 +36,10 @@ const normalizedCurrentDate = buildIsoDate({
 });
 
 const Template = (args: DateRangePickerProps) => {
-  const [dateA, setDateA] = useState<Date | undefined>(
+  const [dateA, setDateA] = useState<Date | undefined | null>(
     args.startDateProps?.value,
   );
-  const [dateB, setDateB] = useState<Date | undefined>(
+  const [dateB, setDateB] = useState<Date | undefined | null>(
     args.endDateProps?.value,
   );
 
