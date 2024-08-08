@@ -36,7 +36,8 @@ export const Value = ({
   stub,
   ...props
 }: ValueProps) => {
-  const { leader } = useContext(DescriptionContext);
+  const { leader, direction } = useContext(DescriptionContext);
+
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
   const { emptySymbol } = useContext(ConfigContext);
 
@@ -45,6 +46,7 @@ export const Value = ({
   if (!canCopy) {
     return (
       <StyledTypography
+        $direction={direction}
         component="dd"
         children={resultChildren}
         $leader={leader}
@@ -74,6 +76,7 @@ export const Value = ({
     <Wrapper onMouseLeave={handleMouseLeave}>
       <Tooltip placement="bottom" title={status}>
         <StyledTypography
+          $direction={direction}
           $canCopy={canCopy}
           $leader={leader}
           {...props}

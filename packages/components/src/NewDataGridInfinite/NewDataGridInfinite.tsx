@@ -108,7 +108,6 @@ export const NewDataGridInfinite = <
           <Head<TData, TSortField>
             {...headProps}
             onSort={onSort}
-            rowsCount={rows.length}
             sorting={sorting}
             columns={columns}
           />

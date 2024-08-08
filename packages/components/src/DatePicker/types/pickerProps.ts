@@ -6,11 +6,11 @@ export type PickerProps = {
   /**
    * @description выбранная дата, будет подсвечена в календаре
    */
-  selectedDate?: Date;
+  selectedDate?: Date | null;
   /**
    * @description дата, относительно которой будет происходить сравнение на попадание в выбранный интервал
    */
-  rangeDate?: Date;
+  rangeDate?: Date | null;
   onChange?: (date: Date) => void;
 
   /**

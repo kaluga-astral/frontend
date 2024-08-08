@@ -6,8 +6,8 @@ import {
 
 type IsDateBetweenSelectedAndRangeDatesOptions = {
   date: Date;
-  selectedDate?: Date;
-  rangeDate?: Date;
+  selectedDate?: Date | null;
+  rangeDate?: Date | null;
   deep: DateCompareDeep;
 };
 

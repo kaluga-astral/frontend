@@ -34,7 +34,7 @@ export type DatePickerProps = MondayFirst &
     /**
      * Обработчик изменения состояния. Передает только Date object, если дата невалидна, то будет Invalid date
      */
-    onChange?: (date?: Date) => void;
+    onChange?: (date?: Date | null) => void;
 
     onBlur?: () => void;
     onOpen?: () => void;
@@ -53,7 +53,7 @@ export type DatePickerProps = MondayFirst &
     /**
      * Принимает только Date object, включая невалидную дату Invalid date
      */
-    value?: Date;
+    value?: Date | null;
 
     /**
      * Название класса, применяется к корневому компоненту
