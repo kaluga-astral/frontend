@@ -1,8 +1,8 @@
-import { Autocomplete, AutocompleteProps } from '../../external';
+import { Autocomplete, type AutocompleteProps } from '../../external';
 import {
-  WithFormFieldProps,
-  useFormFieldErrorProps,
+  type WithFormFieldProps,
   useFormController,
+  useFormFieldErrorProps,
 } from '../external';
 
 export type FormAutocompleteProps<
@@ -17,7 +17,7 @@ export type FormAutocompleteProps<
 >;
 
 /**
- * @description Autocomplete для формы
+ * Autocomplete для формы
  */
 export function FormAutocomplete<
   Option,

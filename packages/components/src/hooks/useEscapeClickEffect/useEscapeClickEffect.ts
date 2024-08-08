@@ -4,21 +4,21 @@ import { type CloseEventReason } from '../../types';
 
 export type UseEscapeClickEffectProps = {
   /**
-   * @description колбэк который будет вызываться при нажатии на кнопку `esc`
+   * колбэк который будет вызываться при нажатии на кнопку `esc`
    */
   onEscape?: (event: Event, reason: CloseEventReason) => void;
   /**
-   * @description флаг активности
+   * флаг активности
    */
   isActive: boolean;
   /**
-   * @description флаг необходимости предотвращать всплытие, подойдет когда используется внутри модалки
+   * флаг необходимости предотвращать всплытие, подойдет когда используется внутри модалки
    */
   preventBubbling?: boolean;
 };
 
 /**
- * @description хук клика по кнопке клавиатуры `esc`
+ * хук клика по кнопке клавиатуры `esc`
  */
 export const useEscapeClickEffect = ({
   onEscape,

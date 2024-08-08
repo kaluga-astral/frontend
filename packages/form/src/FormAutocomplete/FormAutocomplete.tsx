@@ -18,7 +18,7 @@ export type FormAutocompleteProps<
 >;
 
 /**
- * @description Адаптер для Select
+ * Адаптер для Select
  */
 export const FormAutocomplete = <
   TFieldValues extends object,

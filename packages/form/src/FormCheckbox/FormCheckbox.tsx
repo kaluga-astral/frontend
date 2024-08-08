@@ -17,7 +17,7 @@ export type FormCheckboxProps<FieldValues extends object> = Omit<
 };
 
 /**
- * @description Адаптер для CheckboxField
+ * Адаптер для CheckboxField
  */
 export const FormCheckbox = <FieldValues extends object>({
   success,

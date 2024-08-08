@@ -21,11 +21,11 @@ export type FormatedCertificate = {
 };
 
 /**
- * @description Сервис для сертификатов КриптоПро
+ * Сервис для сертификатов КриптоПро
  * */
 export class CryptoProCertificateService {
   /**
-   * @description Метод получения списка сертификатов
+   * Метод получения списка сертификатов
    * @param resetCache - сбросить кэш и произвести повторный поиск сертификатов
    * */
   public getCertificateList = (resetCache?: boolean) => {
@@ -33,7 +33,7 @@ export class CryptoProCertificateService {
   };
 
   /**
-   * @description Метод получения сертификата по skid
+   * Метод получения сертификата по skid
    * */
   public getCertificateBySkid = (
     skid: string,
@@ -45,7 +45,7 @@ export class CryptoProCertificateService {
   };
 
   /**
-   * @description Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
+   * Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
    * */
   public filterCertificateList = (
     certificates: Certificate[],
@@ -74,7 +74,7 @@ export class CryptoProCertificateService {
   };
 
   /**
-   * @description Метод приведения списка сертификатов к интерфейсу FormatedCertificate
+   * Метод приведения списка сертификатов к интерфейсу FormatedCertificate
    * */
   public formatCertificateList = (
     certificates: Certificate[],

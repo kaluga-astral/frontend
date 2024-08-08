@@ -1,5 +1,5 @@
 /**
- * @description Тип операции над документом.
+ * Тип операции над документом.
  * */
 export enum DocumentOperationType {
   Unknown = 'Unknown',
@@ -13,7 +13,7 @@ export enum DocumentOperationType {
 }
 
 /**
- * @description Сервис-инициатор криптооперации.
+ * Сервис-инициатор криптооперации.
  * */
 export enum DocumentPackageOwner {
   Unknown = 'Unknown',
@@ -26,7 +26,7 @@ export enum DocumentPackageOwner {
 }
 
 /**
- * @description Состояние запроса.
+ * Состояние запроса.
  * */
 export enum DocumentPackageState {
   Unknown = 'Unknown',
@@ -38,7 +38,7 @@ export enum DocumentPackageState {
 }
 
 /**
- * @description Какие сущности включить в ответ.
+ * Какие сущности включить в ответ.
  * */
 export enum DocumentPackagesIncludes {
   None = 'None',
@@ -48,7 +48,7 @@ export enum DocumentPackagesIncludes {
 }
 
 /**
- * @description Статус документа.
+ * Статус документа.
  * */
 export enum DocumentState {
   Unknown = 'Unknown',
@@ -57,7 +57,7 @@ export enum DocumentState {
 }
 
 /**
- * @description Список доступных действий над документом.
+ * Список доступных действий над документом.
  * */
 export enum PossibleOperationOnDocument {
   None = 'None',
@@ -68,7 +68,7 @@ export enum PossibleOperationOnDocument {
 }
 
 /**
- * @description Список доступных действий над пакетом.
+ * Список доступных действий над пакетом.
  * */
 export enum PossibleOperationOnDocumentPackage {
   None = 'None',
@@ -79,7 +79,7 @@ export enum PossibleOperationOnDocumentPackage {
 }
 
 /**
- * @description Тип реестра.
+ * Тип реестра.
  * */
 export enum RegistryType {
   Unknown = 'Unknown',

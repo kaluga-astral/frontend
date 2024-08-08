@@ -1,19 +1,19 @@
 import {
-  QueryClient,
-  RepositoryFetchParams,
+  type QueryClient,
+  type RepositoryFetchParams,
   createCachedQuery,
   queryClient as queryClientInstance,
 } from '@example/shared';
 
 import {
-  UserNetworkSources,
+  type UserNetworkSources,
   userNetworkSources as userNetworkSourcesInstance,
 } from '../../sources';
 
-import { UserPersonDTO } from './dto';
+import { type UserPersonDTO } from './dto';
 
 /**
- * @description Repository для работы с данными юзера
+ * Repository для работы с данными юзера
  * */
 export class UserRepository {
   public fullInfoCacheKey = ['fullInfoCacheKey'];
@@ -29,12 +29,12 @@ export class UserRepository {
   }
 
   /**
-   * @description Выход пользователя из системы
+   * Выход пользователя из системы
    * */
   public logout = () => this.userNetworkSources.logout();
 
   /**
-   * @description Получение информации о пользователе
+   * Получение информации о пользователе
    * */
   public getPersonInfo = (params?: RepositoryFetchParams) =>
     createCachedQuery<UserPersonDTO>(

@@ -15,7 +15,7 @@ import { MinMaxDateContext } from '../../../MinMaxDateContext';
 
 export type MonthItem = {
   /**
-   * @description нормализованный день месяца для использования в календаре
+   * нормализованный день месяца для использования в календаре
    */
   month: number;
 };

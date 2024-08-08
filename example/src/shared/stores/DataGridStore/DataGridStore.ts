@@ -1,11 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 
-import { DataGridSort } from '@example/shared';
-import { DocumentPackagesDTO } from '@example/modules/DocumentsModule';
+import { type DataGridSort } from '@example/shared';
+import { type DocumentPackagesDTO } from '@example/modules/DocumentsModule';
 
-import { SelectedRowStore, createSelectedStore } from '../SelectedRowStore';
-import { PaginationStore, createPaginationStore } from '../PaginationStore';
-import { SortingStore, createSortingStore } from '../SortingStore';
+import {
+  type SelectedRowStore,
+  createSelectedStore,
+} from '../SelectedRowStore';
+import {
+  type PaginationStore,
+  createPaginationStore,
+} from '../PaginationStore';
+import { type SortingStore, createSortingStore } from '../SortingStore';
 
 export class DataGridStore<Sorting> {
   public paginationState: PaginationStore;
@@ -22,7 +28,7 @@ export class DataGridStore<Sorting> {
   }
 
   /**
-   * @description Pagination
+   * Pagination
    * */
   get page() {
     return this.paginationState.page;
@@ -41,7 +47,7 @@ export class DataGridStore<Sorting> {
   };
 
   /**
-   * @description Sorting
+   * Sorting
    * */
   get sorting() {
     return this.sortingState.sorting;
@@ -52,7 +58,7 @@ export class DataGridStore<Sorting> {
   };
 
   /**
-   * @description Selected
+   * Selected
    * */
   get selected() {
     return this.selectedRowState.selected;

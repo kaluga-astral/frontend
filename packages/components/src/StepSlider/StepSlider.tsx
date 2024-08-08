@@ -55,25 +55,25 @@ const createDirectionMap = <TKeys extends DefaultKey>(
 export type StepSliderProps<TKeys extends DefaultKey> = {
   className?: string;
   /**
-   * @description текущий активный шаг, должен совпадать с id одного из элементов steps
+   * текущий активный шаг, должен совпадать с id одного из элементов steps
    */
   activeStep: TKeys;
   /**
-   * @description массив шагов, порядок элемента в массивe имеет значение
+   * массив шагов, порядок элемента в массивe имеет значение
    */
   steps: Step<TKeys>[];
   /**
-   * @description растягивает на всю доступную ширину
+   * растягивает на всю доступную ширину
    */
   isFullWidth?: boolean;
   /**
-   * @description пропсы для кастомизации поведения Slide
+   * пропсы для кастомизации поведения Slide
    */
   slideProps?: Omit<SlideProps, 'direction' | 'in' | 'children' | 'appear'>;
 };
 
 /**
- * @description Компонент предназначенный для анимированного переключения активного элемента
+ * Компонент предназначенный для анимированного переключения активного элемента
  */
 export const StepSlider = <TKeys extends DefaultKey>({
   activeStep,

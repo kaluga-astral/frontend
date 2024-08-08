@@ -1,14 +1,14 @@
 import {
-  UseQueryOptions as UseTanStackQueryOptions,
-  UseQueryResult as UseTanStackQueryResult,
+  type UseQueryOptions as UseTanStackQueryOptions,
+  type UseQueryResult as UseTanStackQueryResult,
   useQuery as useTanStackQuery,
 } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 import {
-  DataError,
+  type DataError,
   QueryClientCache,
-  QueryFetchPolicy,
+  type QueryFetchPolicy,
 } from '../../../services';
 
 type DefaultError = DataError<Record<string, unknown>>;
@@ -18,7 +18,7 @@ export type UseQueryOptions<TData, TError = DefaultError> = Omit<
   'cacheTime' | 'staleTime'
 > & {
   /**
-   * @description Указывает на то, как кэшировать запрос. Аналог fetchPolicy в apollo
+   * Указывает на то, как кэшировать запрос. Аналог fetchPolicy в apollo
    * */
   fetchPolicy?: QueryFetchPolicy;
 };

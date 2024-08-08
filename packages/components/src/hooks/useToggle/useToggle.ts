@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
 /**
- * @description тип обозначающий какой угодно рест аргументов
+ * тип обозначающий какой угодно рест аргументов
  */
 type Arguments = unknown[];
 
 /**
- * @description хэндлер принимающий на вход неизвестное количество аргументов, неизвестного вида
+ * хэндлер принимающий на вход неизвестное количество аргументов, неизвестного вида
  */
 type Handler<Args extends Arguments> = (...a: Args) => void;
 /**
- * @description хэндлер на открытие с неизвестным количеством аргументов, неизвестного вида
+ * хэндлер на открытие с неизвестным количеством аргументов, неизвестного вида
  */
 type OpenHandler<Args extends Arguments> = Handler<Args>;
 /**
- * @description хэндлер на закрытие с неизвестным количеством аргументов, неизвестного вида
+ * хэндлер на закрытие с неизвестным количеством аргументов, неизвестного вида
  */
 type CloseHandler<Args extends Arguments> = Handler<Args>;
 
@@ -23,7 +23,7 @@ type UseToggleResultTuple<
   OpenArgs extends Arguments,
 > = [
   /**
-   * @description флаг активности состояния
+   * флаг активности состояния
    */
   boolean,
   OpenHandler<OpenArgs>,
@@ -35,21 +35,21 @@ type UseToggleOptions<
   OpenArgs extends Arguments,
 > = {
   /**
-   * @description изначальное состояние активности
+   * изначальное состояние активности
    */
   initialState?: boolean;
   /**
-   * @description коллбэк на открытие
+   * коллбэк на открытие
    */
   onActive?: OpenHandler<OpenArgs>;
   /**
-   * @description коллбэк на закрытие
+   * коллбэк на закрытие
    */
   onInactive?: CloseHandler<CloseArgs>;
 };
 
 /**
- * @description хук хранящий стейт активности, и предоставляющий методы переключения с проксируемыми аргументами, позволяет уменьшить бойлерплейт код
+ * хук хранящий стейт активности, и предоставляющий методы переключения с проксируемыми аргументами, позволяет уменьшить бойлерплейт код
  */
 export const useToggle = <
   CloseArgs extends Arguments,

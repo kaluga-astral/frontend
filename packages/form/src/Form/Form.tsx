@@ -6,7 +6,7 @@ import { type UseFormReturn } from '../hooks';
 export type FormProps<FormValues extends object> =
   FormHTMLAttributes<HTMLFormElement> & {
     /**
-     * @description Значение, которое возвращает useForm. Необходимо для передачи в FormContext
+     * Значение, которое возвращает useForm. Необходимо для передачи в FormContext
      * @example
      * ```tsx
      * import { Form, useForm } from '@astral/form';
@@ -30,7 +30,7 @@ export type FormProps<FormValues extends object> =
   };
 
 /**
- * @description Компонент, инкапсулирующий FormProvider
+ * Компонент, инкапсулирующий FormProvider
  * @example
  * ```tsx
  * import { Form, useForm } from '@astral/form';

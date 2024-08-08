@@ -16,7 +16,7 @@ type UseFormInputReturn<
 >;
 
 /**
- * @description хук предназначен для получения props input'а без системных props RHF, таких как: control.
+ * хук предназначен для получения props input'а без системных props RHF, таких как: control.
  * Это необходимо для того, чтобы лишние props не попадали в DOM-дерево
  */
 export const useFormInputProps = <

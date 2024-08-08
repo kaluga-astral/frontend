@@ -8,28 +8,28 @@ import { DialogActions } from '../DialogActions';
 
 export type ConfirmDialogProps = {
   /**
-   * @description Заголовок диалога
+   * Заголовок диалога
    */
   title: string;
   /**
-   * @description Вспомогательный текст
+   * Вспомогательный текст
    */
   description?: ReactNode;
   /**
-   * @description Функция для закрытия диалога
+   * Функция для закрытия диалога
    */
   onClose: () => void;
   /**
-   * @description Параметры кнопок действий
+   * Параметры кнопок действий
    */
   actions: {
     /**
-     * @description Параметры кнопки подтверждения
+     * Параметры кнопки подтверждения
      * @example <ConfirmDialog actions={{ confirm: { text: 'Название кнопки' }}}
      */
     confirm: ButtonProps & { text: string };
     /**
-     * @description Параметры кнопки отмены. В качестве действия onClick по-умолчанию используется пропс onClose
+     * Параметры кнопки отмены. В качестве действия onClick по-умолчанию используется пропс onClose
      * @example <ConfirmDialog actions={{ cancel: { text: 'Название кнопки' }}}
      */
     cancel?: ButtonProps & { text: string };

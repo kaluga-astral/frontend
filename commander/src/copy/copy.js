@@ -5,21 +5,21 @@ const recursiveCopy = require('recursive-copy');
 const { DIST_DIR_NAME } = require('../constants');
 
 /**
- * @description Команда для копирования файлов в lib директорию
+ * Команда для копирования файлов в lib директорию
  * */
 const copy = ({
   /**
-   * @description Путь до директории с исходными файлами
+   * Путь до директории с исходными файлами
    * @example copy({ sourcesDirPath: './src', files: ['declaration.d.ts'] })
    * */
   sourcesDirPath,
   /**
-   * @description Список файлов, которые необходимо скопировать. По дефолту копирует всю директории
+   * Список файлов, которые необходимо скопировать. По дефолту копирует всю директории
    * @example copy({ sourcesDirPath: './src', files: ['declaration.d.ts', '**\/*.ttf'] })
    * */
   files,
   /**
-   * @description Путь до директории, вложенной в lib, d которую скопируются файлы. По дефолту создает ту же директорию, из которой копируются файлы
+   * Путь до директории, вложенной в lib, d которую скопируются файлы. По дефолту создает ту же директорию, из которой копируются файлы
    * @example copy({ sourcesDirPath: './src', targetPath: '.' })
    * */
   targetPath,

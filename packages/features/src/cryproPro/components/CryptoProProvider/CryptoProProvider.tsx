@@ -6,7 +6,7 @@ import { SetupCryptoProWorkspaceModal } from '../SetupCryptoProWorkspaceModal';
 import { type CryptoProStore } from '../../stores/CryptoProStore';
 
 /**
- * @description Провайдер, который в случае отсутствия или неактивности
+ * Провайдер, который в случае отсутствия или неактивности
  * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  * Причина отказа от поддержки: поддержка функционала теперь осуществляется централизовано командой Астрал-Софт в закрытом контуре.
  * КриптоПро browser plug-in или отсутствия КриптоПро провайдера на

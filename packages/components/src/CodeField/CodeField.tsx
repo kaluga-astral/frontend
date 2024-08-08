@@ -16,61 +16,61 @@ import { useCodeState, useFocusInput } from './hooks';
 
 export type CodeFieldProps = {
   /**
-   * @description Текст над полем
+   * Текст над полем
    */
   label?: string;
   /**
-   * @description Время, после которого разрешен перезапрос кода (в сек)
+   * Время, после которого разрешен перезапрос кода (в сек)
    */
   resendTimeout?: number;
   /**
-   * @description Кол-во символов в поле кода
+   * Кол-во символов в поле кода
    */
   codeLength: number;
   /**
-   * @description Если true, показывается кнопка переотправки с таймером
+   * Если true, показывается кнопка переотправки с таймером
    */
   isAllowResendCode?: boolean;
   /**
-   * @description Функция, которая вызовется при перезапросе кода по кнопке
+   * Функция, которая вызовется при перезапросе кода по кнопке
    */
   onResendCode?: () => Promise<void>;
   /**
-   * @description Начальное значение поля
+   * Начальное значение поля
    */
   initialValue?: string;
   /**
-   * @description Если true, показывается анимация загрузки
+   * Если true, показывается анимация загрузки
    */
   loading?: boolean;
   /**
-   * @description Если true, показываются символы, редактирование запрещено
+   * Если true, показываются символы, редактирование запрещено
    */
   disabled?: boolean;
   /**
-   * @description Флаг состояния ошибки
+   * Флаг состояния ошибки
    */
   isError?: boolean;
   /**
-   * @description Текстовая информация об ошибке, будет отображен при isError: true
+   * Текстовая информация об ошибке, будет отображен при isError: true
    */
   errorText?: ReactNode;
   /**
-   * @description Вызывается при изменении поля
+   * Вызывается при изменении поля
    */
   onChange?: (value: string) => void;
   /**
-   * @description Вызывается при заполнении поля
+   * Вызывается при заполнении поля
    */
   onComplete?: (value: string) => void;
   /**
-   * @description Если true, автоматически устанавливает фокус на первый инпут
+   * Если true, автоматически устанавливает фокус на первый инпут
    */
   isAutoFocus?: boolean;
 };
 
 /**
- * @description Поле для ввода кода подтверждения
+ * Поле для ввода кода подтверждения
  */
 export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
   (

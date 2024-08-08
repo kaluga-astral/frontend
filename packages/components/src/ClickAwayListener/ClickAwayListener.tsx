@@ -11,7 +11,7 @@ export type ClickAwayListenerProps = Omit<
 };
 
 /**
- * @description компонент предоставляющий обертку для работы с хуком useClickAwayEffect
+ * компонент предоставляющий обертку для работы с хуком useClickAwayEffect
  */
 export const ClickAwayListener = ({
   onClickAway,

@@ -17,38 +17,38 @@ import {
 import { type FileData } from '../../types';
 
 /**
- * @description Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро
+ * Стор для работы с сертификатами и выполнения криптоопераций. Является фасадом для сервисом КриптоПро
  * @deprecated Используйте пакет @astral-private/crypto https://cryptodocs.astralnalog.ru/
  * Причина отказа от поддержки: поддержка функционала теперь осуществляется централизовано командой Астрал-Софт в закрытом контуре.
  * */
 export class CryptoProStore {
   /**
-   * @description Флаг для открытия окна настройки рабочего места
+   * Флаг для открытия окна настройки рабочего места
    * */
   public isRequestSetupWorkspace: boolean = false;
 
   /**
-   * @description Флаг установки плагина
+   * Флаг установки плагина
    * */
   public isPluginInstalled: boolean = false;
 
   /**
-   * @description Список сертификатов
+   * Список сертификатов
    * */
   public certificateList: Certificate[] = [];
 
   /**
-   * @description Список сертификатов приведенный к интерфейсу FormatedCertificate
+   * Список сертификатов приведенный к интерфейсу FormatedCertificate
    * */
   public formatedCertificateList: FormatedCertificate[] = [];
 
   /**
-   * @description Сертификат, найденный по Skid
+   * Сертификат, найденный по Skid
    * */
   public certificateBySkid?: Certificate = {} as Certificate;
 
   /**
-   * @description Информация о настройках рабочего места
+   * Информация о настройках рабочего места
    * */
   public workspaceSetupInfo: CheckWorkspace = {} as CheckWorkspace;
 
@@ -77,7 +77,7 @@ export class CryptoProStore {
   }
 
   /**
-   * @description Метод проверки настройки рабочего места
+   * Метод проверки настройки рабочего места
    * */
   public checkWorkspace = async () => {
     this.workspaceSetupInfo = await this.workspaceSetupService
@@ -88,14 +88,14 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод сброса флага для открытия окна настройки рабочего места
+   * Метод сброса флага для открытия окна настройки рабочего места
    * */
   public resetIsRequestSetupWorkspace = async () => {
     this.isRequestSetupWorkspace = false;
   };
 
   /**
-   * @description Метод получения списка сертификатов.
+   * Метод получения списка сертификатов.
    * При повторном вызове возвращает сертификаты из кэша.
    * */
   public getCertificateList = async () => {
@@ -104,7 +104,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод получения списка сертификатов. Игнорирует кэш
+   * Метод получения списка сертификатов. Игнорирует кэш
    * */
   public refetchCertificateList = async () => {
     this.certificateList =
@@ -112,7 +112,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод получения сертификата по skid
+   * Метод получения сертификата по skid
    * */
   public getCertificateBySkid = async (skid: string) => {
     this.certificateBySkid =
@@ -120,7 +120,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
+   * Метод фильтрации списка сертификатов по ключам: subjectKeyId, innLe, inn
    * */
   public filterCertificateList = (
     certificates: Certificate[],
@@ -134,7 +134,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод приведения списка сертификатов к интерфейсу FormatedCertificate
+   * Метод приведения списка сертификатов к интерфейсу FormatedCertificate
    * * @param certificates список сертификатов
    * */
   public formatCertificateList = (certificates: Certificate[]) => {
@@ -143,7 +143,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод подписания в формате CMS
+   * Метод подписания в формате CMS
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт либо, в формате Base64 строки
    * @param detach присоединять подпись к данным или отдельно?
@@ -164,7 +164,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод подписания хэша указанным сертификатом в формате CMS
+   * Метод подписания хэша указанным сертификатом в формате CMS
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт хэша, либо сам хэш в формате hex строки (в любом регистре)
    * @param includeCertChain включать в результат всю цепочку?
@@ -182,7 +182,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод подписания указанным сертификатом в формате XmlDSig
+   * Метод подписания указанным сертификатом в формате XmlDSig
    * @param certificate сертификат пользователя
    * @param fileData данные для подписания в виде массива байт, либо в формате Base64 строки
    * @param xmlSignatureType тип xml подписи
@@ -200,7 +200,7 @@ export class CryptoProStore {
   };
 
   /**
-   * @description Метод расшифровки данных
+   * Метод расшифровки данных
    * @param fileData данные для расшифрования в виде массива байт, либо в формате Base64 строки
    * */
   public decryptCms = async (fileData: FileData) => {
