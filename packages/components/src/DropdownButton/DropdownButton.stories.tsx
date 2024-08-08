@@ -70,6 +70,52 @@ export const StartIcon = () => {
   );
 };
 
+export const Note = () => {
+  const dropdownItems = (
+    <>
+      <MenuItem note="Перейти в профиль" onClick={() => console.log('v1')}>
+        Профиль
+      </MenuItem>
+      <MenuItem onClick={() => console.log('v3')}>Выход</MenuItem>
+    </>
+  );
+
+  return (
+    <DropdownButton
+      startIcon={<DialogOutlineMd />}
+      variant="light"
+      name="With icon"
+    >
+      {dropdownItems}
+    </DropdownButton>
+  );
+};
+
+export const DisableReason = () => {
+  const dropdownItems = (
+    <>
+      <MenuItem
+        disabledReason="Заблокировано"
+        disabled
+        onClick={() => console.log('v1')}
+      >
+        Профиль
+      </MenuItem>
+      <MenuItem onClick={() => console.log('v3')}>Выход</MenuItem>
+    </>
+  );
+
+  return (
+    <DropdownButton
+      startIcon={<DialogOutlineMd />}
+      variant="light"
+      name="With icon"
+    >
+      {dropdownItems}
+    </DropdownButton>
+  );
+};
+
 /** Для стилизации основной кнопки доступны ButtonProps */
 export const ButtonProps = () => (
   <Grid container rowSpacing={5}>
