@@ -18,7 +18,7 @@ import { DatePickerInput } from '../DatePicker/DatePickerInput';
 import { DatePickerPopover } from '../DatePicker/DatePickerPopover';
 import { YearMonthDayPicker } from '../DatePicker/YearMonthDayPicker';
 import { type DatePickerProps } from '../DatePicker';
-import { DEFAULT_DATE_MASK } from '../DatePicker/constants/defaultDateMask';
+import { DEFAULT_DATE_MASK } from '../DatePicker/constants';
 import { useMaskedValue, useSelectedBaseDate } from '../DatePicker/hooks';
 import { PopoverHoveredContextProvider } from '../DatePicker/PopoverHoveredContext';
 
