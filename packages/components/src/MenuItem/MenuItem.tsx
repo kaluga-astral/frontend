@@ -18,6 +18,14 @@ export type MenuItemProps<TComponent extends ElementType = ElementType> =
      * Текст тултипа при заблокированном состоянии элемента меню
      */
     disabledReason?: string;
+    /**
+     * Текст тултипа при наведении на элемент меню
+     */
+    note?: string;
+    /**
+     * Позиционирование тултипа
+     * @default left
+     */
     tooltipPlacement?: TooltipProps['placement'];
     /**
      * Тип элемента
@@ -38,7 +46,8 @@ const InnerMenuItem = <TComponent extends ElementType>(
     disabled,
     component = 'div',
     title,
-    tooltipPlacement,
+    tooltipPlacement = 'left',
+    note,
     ...rest
   } = props;
 
@@ -46,7 +55,7 @@ const InnerMenuItem = <TComponent extends ElementType>(
     <li>
       <Tooltip
         key={title}
-        title={disabled && disabledReason}
+        title={disabled ? disabledReason : note}
         placement={tooltipPlacement}
         withoutContainer={!disabled}
       >
