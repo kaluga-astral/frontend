@@ -1,7 +1,7 @@
 import { type ReactNode, createContext, useEffect } from 'react';
 
 import { type LanguageMap } from '../DatePicker/types';
-import { russianMap } from '../DatePicker/constants/russianMap';
+import { russianMap } from '../DatePicker/constants';
 
 const imagesMapDefault = {
   noDataImgSrc: '',
