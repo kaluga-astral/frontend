@@ -135,5 +135,15 @@ export const Showcase = () => (
       minDate={addDays(normalizedCurrentDate, -90)}
       maxDate={addDays(normalizedCurrentDate, -80)}
     />
+    <Template
+      startDateProps={{
+        startAdornment: 'c',
+        inputProps: { label: 'startAdornment' },
+      }}
+      endDateProps={{
+        startAdornment: 'по',
+        inputProps: { label: 'startAdornment' },
+      }}
+    />
   </LegacyGrid>
 );

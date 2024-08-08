@@ -39,6 +39,32 @@ describe('DatePicker', () => {
     );
   });
 
+  it('StartAdornment отображается', () => {
+    renderWithTheme(<DatePicker startAdornment="по" />);
+
+    const startAdornment = screen.getByText('по');
+
+    expect(startAdornment).toBeVisible();
+  });
+
+  it('Placeholder по умолчанию отображается если не задан в inputProps', () => {
+    renderWithTheme(<DatePicker disabled />);
+
+    const placeholder = screen.getByPlaceholderText(DEFAULT_PLACEHOLDER);
+
+    expect(placeholder).toBeVisible();
+  });
+
+  it('Placeholder заданный в inputProps отображается', () => {
+    renderWithTheme(
+      <DatePicker disabled inputProps={{ placeholder: 'Введите дату' }} />,
+    );
+
+    const placeholder = screen.getByPlaceholderText('Введите дату');
+
+    expect(placeholder).toBeVisible();
+  });
+
   describe('Пикер не позволяет выбрать дату', () => {
     it('Меньше указанной в minDate', async () => {
       const user = userEvents.setup();
@@ -191,24 +217,6 @@ describe('DatePicker', () => {
       const popover = screen.queryByRole('presentation');
 
       expect(popover).not.toBeInTheDocument();
-    });
-
-    it('Placeholder по умолчанию отображается если не задан в inputProps', () => {
-      renderWithTheme(<DatePicker disabled />);
-
-      const placeholder = screen.getByPlaceholderText(DEFAULT_PLACEHOLDER);
-
-      expect(placeholder).toBeVisible();
-    });
-
-    it('Placeholder заданный в inputProps отображается', () => {
-      renderWithTheme(
-        <DatePicker disabled inputProps={{ placeholder: 'Введите дату' }} />,
-      );
-
-      const placeholder = screen.getByPlaceholderText('Введите дату');
-
-      expect(placeholder).toBeVisible();
     });
   });
 });

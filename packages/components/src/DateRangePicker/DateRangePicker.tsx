@@ -31,7 +31,7 @@ const DEFAULT_SPACING = 1;
 
 export type DateItemProps = Pick<
   DatePickerProps,
-  'onChange' | 'value' | 'inputProps'
+  'onChange' | 'value' | 'inputProps' | 'startAdornment'
 >;
 
 export type DateRangePickerProps = Omit<
@@ -219,6 +219,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         <DatePickerInput
           {...startDateProps.inputProps}
           ref={startInputRef}
+          startAdornment={startDateProps.startAdornment}
           mask={mask}
           size={size}
           value={startMaskedValue}
@@ -228,6 +229,7 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         />
         <DatePickerInput
           {...endDateProps.inputProps}
+          startAdornment={endDateProps.startAdornment}
           ref={endInputRef}
           size={size}
           mask={mask}

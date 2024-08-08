@@ -80,6 +80,11 @@ export type DatePickerProps = MondayFirst &
      * Вспомогательный текст под полем ввода
      */
     helperText?: ReactNode;
+
+    /**
+     * Элемент в начале инпута
+     */
+    startAdornment?: ReactNode;
   } & Pick<TextFieldProps, 'label' | 'required' | 'helperText'>;
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
@@ -102,6 +107,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       label,
       required,
       helperText,
+      startAdornment,
     },
     forwardedRef,
   ) => {
@@ -141,6 +147,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     return (
       <div ref={ref} className={className}>
         <DatePickerInput
+          startAdornment={startAdornment}
           label={label}
           required={required}
           helperText={helperText}

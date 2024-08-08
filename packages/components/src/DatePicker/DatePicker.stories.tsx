@@ -90,5 +90,6 @@ export const Showcase = () => (
       minDate={addDays(normalizedCurrentDate, -90)}
       maxDate={addDays(normalizedCurrentDate, -80)}
     />
+    <Template label="startAdornment" startAdornment="c" />
   </LegacyGrid>
 );
