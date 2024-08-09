@@ -50,25 +50,35 @@ describe('NewDataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it('EmptyCellValue отображается если нет данных', async () => {
-    renderWithTheme(
-      <NewDataGrid
-        keyId="name"
-        rows={[{ name: 'Vasya' }, {}, { name: 'Petya' }]}
-        columns={[
-          {
-            field: 'name',
-            label: 'Наименование',
-          },
-        ]}
-        onRetry={() => {}}
-      />,
-    );
+  it.each([
+    [undefined, '—'],
+    [null, '—'],
+    ['', '—'],
+    [NaN, '—'],
+    [0, 0],
+    ['Vasya', 'Vasya'],
+  ])(
+    'EmptyCellValue отображается если нет данных',
+    async (cell, expectedCell) => {
+      renderWithTheme(
+        <NewDataGrid
+          keyId="cell"
+          rows={[{ cell: cell }]}
+          columns={[
+            {
+              field: 'cell',
+              label: 'Наименование',
+            },
+          ]}
+          onRetry={() => {}}
+        />,
+      );
 
-    const emptyCell = screen.getByText('—');
+      const emptyCell = screen.getByText(expectedCell);
 
-    expect(emptyCell).toBeVisible();
-  });
+      expect(emptyCell).toBeVisible();
+    },
+  );
 
   it('EmptyCellValue отображается если format возвращает не валидные данные', async () => {
     type DataTypeEmptyCell = {
