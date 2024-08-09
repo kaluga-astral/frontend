@@ -31,7 +31,6 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    * Тип html-элемента
    */
   component?: TComponent;
-
   /**
    * Состояние кнопки - selected
    */
@@ -52,9 +51,6 @@ const UnwrappedButton = <TComponent extends ElementType>(
   const {
     variant = ButtonVariants.Contained,
     color = ButtonColors.Primary,
-    disabled,
-    disabledReason,
-    note,
     ...restProps
   } = props;
 
@@ -70,7 +66,6 @@ const UnwrappedButton = <TComponent extends ElementType>(
     <StyledLoadingButton
       {...restProps}
       ref={ref}
-      disabled={disabled}
       variant={variant}
       color={color}
       loadingIndicator={
