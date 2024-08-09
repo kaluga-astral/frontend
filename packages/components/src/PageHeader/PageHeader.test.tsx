@@ -4,7 +4,7 @@ import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { PageHeader } from './PageHeader';
 
 describe('PageHeader', () => {
-  it('Tooltip отображается при note и disabled=false основных действий', async () => {
+  it('Note для основных действий отображается в tooltip', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
@@ -29,7 +29,7 @@ describe('PageHeader', () => {
     expect(tooltip).toHaveTextContent('Кнопка');
   });
 
-  it('Tooltip отображается при disabledReason и disabled=true основных действий', async () => {
+  it('DisabledReason для основных действий отображается в tooltip при disabled=true', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
@@ -55,7 +55,7 @@ describe('PageHeader', () => {
     expect(tooltip).toHaveTextContent('Заблокировано');
   });
 
-  it('Tooltip отображается при disabledReason и disabled=true вторичных действий', async () => {
+  it('DisabledReason для вторичных действий отображается в tooltip при disabled=true', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
@@ -85,7 +85,7 @@ describe('PageHeader', () => {
     expect(tooltip).toHaveTextContent('Заблокировано');
   });
 
-  it('Tooltip отображается при note и disabled=false вторичных действий', async () => {
+  it('Note для вторичных действий отображается в tooltip', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
@@ -114,7 +114,7 @@ describe('PageHeader', () => {
     expect(tooltip).toHaveTextContent('Кнопка');
   });
 
-  it('Tooltip отображается при disableReason и disabled=true вторичных видимых действий', async () => {
+  it('DisabledReason для вторичных видимых действий отображается в tooltip при disabled=true', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
@@ -141,7 +141,7 @@ describe('PageHeader', () => {
     expect(tooltip).toHaveTextContent('Заблокировано');
   });
 
-  it('Tooltip отображается для вторичных видимых действий при disabled=false', async () => {
+  it('Tooltip отображается для вторичных видимых действий', async () => {
     renderWithTheme(
       <PageHeader
         title="Черновик"
