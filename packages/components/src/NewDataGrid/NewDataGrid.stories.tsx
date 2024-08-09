@@ -672,22 +672,11 @@ export const EmptyCellValue = () => {
     ...makeDataList(fakeDataTemplate),
   ];
 
-  const [isLoading, setLoading] = useState(true);
-  const [slicedData, setSlicedData] = useState<DataTypeEmptyCell[]>([]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
-      setLoading(false);
-    }, 1500);
-  }, []);
-
   return (
     <NewDataGrid<DataTypeEmptyCell>
       keyId="id"
-      rows={slicedData}
+      rows={fakeData}
       columns={columns}
-      isLoading={isLoading}
       onRetry={() => {}}
     />
   );
