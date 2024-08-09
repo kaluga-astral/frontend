@@ -1,4 +1,6 @@
-import { type ReactNode, useCallback } from 'react';
+import { type ReactNode, useCallback, useContext } from 'react';
+
+import { ConfigContext } from '../ConfigProvider';
 
 import {
   EXPANDED_LEVEL_BY_DEFAULT,
@@ -126,7 +128,7 @@ export type NewDataGridProps<
 
   /**
    * Заглушка для пустых ячеек (если отсутствует field и filter и renderCell)
-   * @default '-'
+   * @default '—'
    */
   emptyCellValue?: ReactNode;
 
@@ -166,6 +168,7 @@ export const NewDataGrid = <
 ) => {
   const { isDataGridDisabled, headProps, bodyProps, loaderProps } =
     useLogic(props);
+  const { emptySymbol } = useContext(ConfigContext);
 
   const {
     columns,
@@ -182,7 +185,7 @@ export const NewDataGrid = <
     tree,
     keyId,
     activeRowId,
-    emptyCellValue,
+    emptyCellValue = emptySymbol,
     className,
     onRowClick,
     onSort,
