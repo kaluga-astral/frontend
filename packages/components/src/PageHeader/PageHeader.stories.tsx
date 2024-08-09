@@ -820,7 +820,10 @@ export const Actions = () => (
       title="Черновик"
       actions={{
         main: [
-          { text: 'действие 1', startIcon: <AddOutlineMd /> },
+          {
+            text: 'действие 1',
+            startIcon: <AddOutlineMd />,
+          },
           {
             text: 'действие 2',
             isNested: true,
@@ -978,6 +981,47 @@ export const TooltipSecondaryAction = () => (
           },
           { text: 'Копировать', note: 'Можно что-то скопировать' },
           { text: 'Удалить', note: 'Можно что-то удалить' },
+        ],
+      }}
+      backButton={{}}
+    />
+  </Wrapper>
+);
+
+export const TooltipMainAction = () => (
+  <Wrapper>
+    <PageHeader
+      title="Черновик"
+      actions={{
+        main: [
+          {
+            text: 'Отправка по маршруту',
+            disabled: true,
+            disabledReason: 'Заблокировано',
+          },
+          {
+            text: 'Выбор получателя',
+            note: 'Здесь можно выбрать несколько получателей',
+          },
+          {
+            text: 'Выберите документ',
+            isNested: true,
+            disabled: true,
+            disabledReason: 'На данный момент не доступно',
+            actions: [
+              { text: 'действие в списке 1' },
+              { text: 'действие в списке 2' },
+            ],
+          },
+        ],
+        secondary: [
+          { text: 'Выбор получателя', disabled: true },
+          {
+            text: 'Сменить подразделение',
+            disabled: true,
+          },
+          { text: 'Копировать' },
+          { text: 'Удалить' },
         ],
       }}
       backButton={{}}

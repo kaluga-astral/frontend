@@ -10,6 +10,7 @@ import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 import type { WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
+import { Tooltip } from '../Tooltip';
 
 import { ButtonColors, ButtonVariants } from './enums';
 import { StyledLoadingButton } from './styles';
@@ -34,6 +35,8 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
   /**
    * Состояние кнопки - selected
    */
+  disabledReason?: string;
+  note?: string;
   selected?: boolean;
   // TODO Хак через Omit позволяет решить проблему с потерей типов для props
   // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
@@ -51,6 +54,9 @@ const UnwrappedButton = <TComponent extends ElementType>(
   const {
     variant = ButtonVariants.Contained,
     color = ButtonColors.Primary,
+    disabled,
+    disabledReason,
+    note,
     ...restProps
   } = props;
 
@@ -63,15 +69,21 @@ const UnwrappedButton = <TComponent extends ElementType>(
   }, [variant]);
 
   return (
-    <StyledLoadingButton
-      {...restProps}
-      ref={ref}
-      variant={variant}
-      color={color}
-      loadingIndicator={
-        <CircularProgress color={loadingIndicatorColor} size="small" />
-      }
-    />
+    <Tooltip
+      title={disabled ? disabledReason : note}
+      withoutContainer={!disabled}
+    >
+      <StyledLoadingButton
+        {...restProps}
+        ref={ref}
+        disabled={disabled}
+        variant={variant}
+        color={color}
+        loadingIndicator={
+          <CircularProgress color={loadingIndicatorColor} size="small" />
+        }
+      />
+    </Tooltip>
   );
 };
 

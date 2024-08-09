@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { renderWithTheme, screen } from '@astral/tests';
+import { renderWithTheme, screen, userEvents } from '@astral/tests';
 import { useEffect, useRef } from 'react';
 
 import { Button } from './Button';
@@ -44,5 +44,35 @@ describe('Button', () => {
     const loader = screen.getByRole('progressbar');
 
     expect(loader).toBeVisible();
+  });
+
+  it('Tooltip отображается при note и disabled=false', async () => {
+    renderWithTheme(<Button note="Кнопка">Btn</Button>);
+
+    const button = screen.getByRole('button');
+
+    await userEvents.hover(button);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent('Кнопка');
+  });
+
+  it('Tooltip отображается при disabledReason и disabled=true', async () => {
+    renderWithTheme(
+      <Button disabledReason="Заблокировано" disabled>
+        Btn
+      </Button>,
+    );
+
+    const item = screen.getByLabelText('Заблокировано');
+
+    await userEvents.hover(item);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent('Заблокировано');
   });
 });
