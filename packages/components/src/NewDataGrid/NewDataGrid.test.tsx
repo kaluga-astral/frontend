@@ -7,7 +7,7 @@ import { ActionCell } from '../ActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
-import { EMPTY_CELL_SYMBOL } from './constants';
+import { type DataGridRowWithOptions } from './types';
 
 describe('NewDataGrid', () => {
   it('Названия колонок отображаются', () => {
@@ -65,7 +65,46 @@ describe('NewDataGrid', () => {
       />,
     );
 
-    const emptyCell = screen.getByText(EMPTY_CELL_SYMBOL);
+    const emptyCell = screen.getByText('—');
+
+    expect(emptyCell).toBeVisible();
+  });
+
+  it('EmptyCellValue отображается если format возвращает не валидные данные', async () => {
+    type DataTypeEmptyCell = {
+      id: string;
+      recipient?: string;
+    };
+
+    const fakeColumns: DataGridColumns<DataTypeEmptyCell>[] = [
+      {
+        field: 'recipient',
+        label: 'Получатель',
+        sortable: true,
+        format: ({ recipient }) => recipient,
+      },
+    ];
+
+    const fakeData: DataGridRowWithOptions<DataTypeEmptyCell>[] = [
+      {
+        id: '1',
+      },
+      {
+        id: '2',
+        recipient: 'ИП Иванов О.В.',
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="id"
+        rows={fakeData}
+        columns={fakeColumns}
+        onRetry={() => {}}
+      />,
+    );
+
+    const emptyCell = screen.getByText('—');
 
     expect(emptyCell).toBeVisible();
   });

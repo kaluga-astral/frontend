@@ -13,8 +13,16 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const { format, field } = cell;
 
+  const isValidFormatValue = (value: CellValue): boolean => {
+    return (
+      value !== null &&
+      value !== undefined &&
+      value !== '' &&
+      !Number.isNaN(value)
+    );
+  };
   const formattedValue = useMemo(() => {
-    if (format && format(row) !== undefined) {
+    if (format && isValidFormatValue(format(row))) {
       return format(row);
     }
 
