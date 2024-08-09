@@ -33,10 +33,16 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    */
   component?: TComponent;
   /**
-   * Состояние кнопки - selected
+   * Текст тултипа при заблокированном состоянии кнопки
    */
   disabledReason?: string;
+  /**
+   * Текст тултипа при наведении на кнопку
+   */
   note?: string;
+  /**
+   * Состояние кнопки - selected
+   */
   selected?: boolean;
   // TODO Хак через Omit позволяет решить проблему с потерей типов для props
   // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
