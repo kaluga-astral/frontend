@@ -16,6 +16,14 @@ type DataType = {
   actions?: object;
 };
 
+type CommonDataType = {
+  id: string;
+  documentName?: string;
+  recipient?: string;
+  createDate: string;
+  actions?: object;
+};
+
 const RECIPIENTS = [
   'ИП Иванов О.В.',
   'ООО "Новая организация"',
@@ -28,10 +36,10 @@ export const makeRandomDate = () => {
   return randomDate.toISOString();
 };
 
-export const makeColumns = (
-  columnsTemplate: DataGridColumns<DataType>[],
-  mergedColumns: DataGridColumns<DataType>[] = [],
-): DataGridColumns<DataType>[] => {
+export const makeColumns = <T extends CommonDataType>(
+  columnsTemplate: DataGridColumns<T>[],
+  mergedColumns: DataGridColumns<T>[] = [],
+): DataGridColumns<T>[] => {
   const mergedColumnsMap = mergedColumns.reduce(
     (acc, { field, ...columnsOptions }) => {
       if (field) {

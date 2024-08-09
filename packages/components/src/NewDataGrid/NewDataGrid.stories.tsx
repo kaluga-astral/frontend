@@ -88,6 +88,7 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
     field: 'recipient',
     label: 'Получатель',
     sortable: true,
+    format: ({ recipient }) => recipient,
   },
   {
     field: 'createDate',
@@ -119,7 +120,6 @@ export const Example = () => {
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
     },
-    ...makeDataList(FAKE_DATA_TEMPLATE),
   ];
 
   const [isLoading, setLoading] = useState(true);
@@ -622,6 +622,108 @@ export const DisabledLastCell = () => {
       isLoading={isLoading}
       selectedRows={selected}
       onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+export const EmptyCellValue = () => {
+  type DataTypeEmptyCell = {
+    id: string;
+    documentName?: string;
+    recipient?: string;
+    createDate: string;
+    actions?: object;
+  };
+
+  const fakeDataTemplate: DataTypeEmptyCell = {
+    id: '1',
+    documentName: 'Договор №1',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const fakeActions: Actions<DataTypeEmptyCell> = {
+    main: [
+      {
+        icon: <EyeFillMd />,
+        name: 'Просмотреть',
+        onClick: () => console.log('main'),
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const fakeColumns: DataGridColumns<DataTypeEmptyCell>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+      format: ({ recipient }) => recipient,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <ActionCell row={row} actions={fakeActions} />;
+      },
+    },
+  ];
+
+  const columns = makeColumns(fakeColumns);
+  const fakeData: DataGridRowWithOptions<DataTypeEmptyCell>[] = [
+    {
+      id: '123456789',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(fakeDataTemplate),
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataTypeEmptyCell[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataTypeEmptyCell) =>
+    console.log('row clicked', row);
+
+  return (
+    <NewDataGrid<DataTypeEmptyCell>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
       onRowClick={handleRowClick}
       onRetry={() => {}}
     />

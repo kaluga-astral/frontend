@@ -14,11 +14,11 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   const { format, field } = cell;
 
   const formattedValue = useMemo(() => {
-    if (format) {
+    if (format && format(row) !== undefined) {
       return format(row);
     }
 
-    if (field) {
+    if (field && row[field] !== undefined) {
       return row[field];
     }
 
