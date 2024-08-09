@@ -10,7 +10,6 @@ import { CircularProgress } from '../CircularProgress';
 import { CircularProgressColors } from '../CircularProgress/constants';
 import type { WithoutEmotionSpecific } from '../types';
 import { forwardRefWithGeneric } from '../forwardRefWithGeneric';
-import { Tooltip } from '../Tooltip';
 
 import { ButtonColors, ButtonVariants } from './enums';
 import { StyledLoadingButton } from './styles';
@@ -32,14 +31,7 @@ export type ButtonProps<TComponent extends ElementType = ElementType> = Omit<
    * Тип html-элемента
    */
   component?: TComponent;
-  /**
-   * Текст тултипа при заблокированном состоянии кнопки
-   */
-  disabledReason?: string;
-  /**
-   * Текст тултипа при наведении на кнопку
-   */
-  note?: string;
+
   /**
    * Состояние кнопки - selected
    */
@@ -75,21 +67,16 @@ const UnwrappedButton = <TComponent extends ElementType>(
   }, [variant]);
 
   return (
-    <Tooltip
-      title={disabled ? disabledReason : note}
-      withoutContainer={!disabled}
-    >
-      <StyledLoadingButton
-        {...restProps}
-        ref={ref}
-        disabled={disabled}
-        variant={variant}
-        color={color}
-        loadingIndicator={
-          <CircularProgress color={loadingIndicatorColor} size="small" />
-        }
-      />
-    </Tooltip>
+    <StyledLoadingButton
+      {...restProps}
+      ref={ref}
+      disabled={disabled}
+      variant={variant}
+      color={color}
+      loadingIndicator={
+        <CircularProgress color={loadingIndicatorColor} size="small" />
+      }
+    />
   );
 };
 
