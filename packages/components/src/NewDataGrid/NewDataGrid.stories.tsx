@@ -120,6 +120,7 @@ export const Example = () => {
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
     },
+    ...makeDataList(FAKE_DATA_TEMPLATE),
   ];
 
   const [isLoading, setLoading] = useState(true);
