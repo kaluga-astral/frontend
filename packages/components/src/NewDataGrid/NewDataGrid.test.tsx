@@ -7,6 +7,7 @@ import { ActionCell } from '../ActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
+import { EMPTY_CELL_SYMBOL } from './constants';
 
 describe('NewDataGrid', () => {
   it('Названия колонок отображаются', () => {
@@ -47,6 +48,26 @@ describe('NewDataGrid', () => {
     const title = screen.getByText('Vasya');
 
     expect(title).toBeVisible();
+  });
+
+  it('EmptyCellValue отображается если нет данных', async () => {
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya' }, {}, { name: 'Petya' }]}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        onRetry={() => {}}
+      />,
+    );
+
+    const emptyCell = screen.getByText(EMPTY_CELL_SYMBOL);
+
+    expect(emptyCell).toBeVisible();
   });
 
   describe('Иконка сортировки', () => {
