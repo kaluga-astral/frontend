@@ -1,5 +1,11 @@
-import { EyeFillMd, SendOutlineMd } from '@astral/icons';
+import {
+  BinOutlineMd,
+  EyeFillMd,
+  SaveOutlineMd,
+  SendOutlineMd,
+} from '@astral/icons';
 import { type Meta, type StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
 
 import { DataGrid, type DataGridColumns } from '../DataGrid';
 
@@ -143,4 +149,56 @@ export const OnlyMainActions = () => {
   return (
     <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
   );
+};
+
+export const LoaderActions = () => {
+  type DataTypeActions = {
+    id: string;
+    actions?: object;
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+    }
+  }, [loading]);
+
+  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+    isBlockingOperation: loading,
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        loading: loading,
+        onClick: () => setLoading((prevState) => !prevState),
+      },
+      {
+        icon: <SaveOutlineMd />,
+        name: 'Сохранить',
+      },
+      {
+        icon: <SendOutlineMd />,
+        nested: true,
+        name: 'Отправить',
+        actions: [
+          { name: 'Туда', onClick: () => console.log('nested 1') },
+          { name: 'Сюда', onClick: () => console.log('nested 2') },
+        ],
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+    ],
+  };
+
+  const fakeData: DataTypeActions = {
+    id: '123456789',
+  };
+
+  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
 };

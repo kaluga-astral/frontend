@@ -21,6 +21,10 @@ export type Actions<T> = {
    * Второстепенные действия
    */
   secondary?: SecondaryActionKind<T>[];
+  /**
+   * Флаг для блокировки всех действий
+   */
+  isBlockingOperation?: boolean;
 };
 
 export type ActionsCellProps<T> = {
@@ -44,7 +48,7 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
 };
 
 export function ActionCell<T>({
-  actions: { main = [], secondary = [] },
+  actions: { main = [], secondary = [], isBlockingOperation = false },
   row,
 }: ActionsCellProps<T>) {
   const handleActionClick = useCallback(
@@ -70,11 +74,13 @@ export function ActionCell<T>({
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
+            isBlockingOperation={isBlockingOperation}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
+          isBlockingOperation={isBlockingOperation}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}

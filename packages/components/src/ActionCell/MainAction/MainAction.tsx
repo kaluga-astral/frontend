@@ -8,15 +8,23 @@ type MainActionProps<T> = {
   action: MainActionKind<T>;
   onActionClick: ActionCellHandler<T>;
   tooltipPlacement: TooltipProps['placement'];
+  isBlockingOperation?: boolean;
 };
 
 export const MainAction = <T,>({
   action,
   onActionClick,
   tooltipPlacement,
+  isBlockingOperation = false,
 }: MainActionProps<T>) => {
   if ('actions' in action) {
-    const { icon, disabled, disabledReason, name, actions } = action;
+    const {
+      icon,
+      disabled = isBlockingOperation,
+      disabledReason,
+      name,
+      actions,
+    } = action;
 
     return (
       <Tooltip
@@ -43,7 +51,13 @@ export const MainAction = <T,>({
     );
   }
 
-  const { onClick, name, icon, disabledReason, disabled } = action;
+  const {
+    onClick,
+    name,
+    icon,
+    disabledReason,
+    disabled = isBlockingOperation,
+  } = action;
 
   return (
     <Tooltip
@@ -52,7 +66,12 @@ export const MainAction = <T,>({
       placement={tooltipPlacement}
       withoutContainer={!disabled}
     >
-      <IconButton {...action} variant="text" onClick={onActionClick(onClick)}>
+      <IconButton
+        disabled={disabled}
+        {...action}
+        variant="text"
+        onClick={onActionClick(onClick)}
+      >
         {icon}
       </IconButton>
     </Tooltip>
