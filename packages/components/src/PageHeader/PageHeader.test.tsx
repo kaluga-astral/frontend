@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import { PageHeader } from './PageHeader';
@@ -164,5 +164,29 @@ describe('PageHeader', () => {
 
     expect(tooltip).toBeVisible();
     expect(tooltip).toHaveTextContent('Отправка по маршруту');
+  });
+
+  it('OnClick вызывается при нажатии на вторичные видимые действия', async () => {
+    const onClickSpy = vi.fn();
+
+    renderWithTheme(
+      <PageHeader
+        title="Черновик"
+        actions={{
+          secondaryVisible: [
+            {
+              name: 'Отправка по маршруту',
+              icon: <svg />,
+              onClick: onClickSpy,
+            },
+          ],
+        }}
+      />,
+    );
+
+    const button = screen.getByRole('button');
+
+    await userEvents.click(button);
+    expect(onClickSpy).toBeCalled();
   });
 });
