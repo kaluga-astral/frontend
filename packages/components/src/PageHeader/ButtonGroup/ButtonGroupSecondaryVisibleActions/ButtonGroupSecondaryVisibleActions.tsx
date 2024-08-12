@@ -26,12 +26,12 @@ export const ButtonGroupSecondaryVisibleActions = ({
 
     return (
       <Tooltip
+        key={name}
         title={disabled ? disableReason : name}
         withoutContainer={!disabled}
       >
         <IconButton
           variant="light"
-          key={name}
           name={name}
           disabled={disabled}
           {...mainProps}
