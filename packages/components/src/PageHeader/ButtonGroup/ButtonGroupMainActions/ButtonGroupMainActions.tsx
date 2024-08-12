@@ -117,12 +117,12 @@ export const ButtonGroupMainActions = <
 
       return (
         <Tooltip
+          key={text}
           title={disabled ? disabledReason : note}
           withoutContainer={!disabled}
         >
           <StyledDropdownButton
             {...buttonProps}
-            key={text}
             disabled={disabled}
             name={text}
           >
@@ -141,10 +141,11 @@ export const ButtonGroupMainActions = <
 
     return (
       <Tooltip
+        key={text}
         title={disabled ? disabledReason : note}
         withoutContainer={!disabled}
       >
-        <StyledButton {...mainProps} disabled={disabled} key={text}>
+        <StyledButton {...mainProps} disabled={disabled}>
           {text}
         </StyledButton>
       </Tooltip>
