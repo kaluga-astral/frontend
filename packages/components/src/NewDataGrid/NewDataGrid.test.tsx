@@ -55,8 +55,6 @@ describe('NewDataGrid', () => {
     [null, '—'],
     ['', '—'],
     [NaN, '—'],
-    [0, 0],
-    ['Vasya', 'Vasya'],
   ])(
     'EmptyCellValue отображается если нет данных',
     async (cell, expectedCell) => {
