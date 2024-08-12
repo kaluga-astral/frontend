@@ -13,7 +13,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const { format, field } = cell;
 
-  const isValidValue = (value: CellValue | keyof TData): boolean => {
+  const isValidValue = (value: CellValue): boolean => {
     return Boolean(value) || value === 0;
   };
 

@@ -50,14 +50,9 @@ describe('NewDataGrid', () => {
     expect(title).toBeVisible();
   });
 
-  it.each([
-    [undefined, '—'],
-    [null, '—'],
-    ['', '—'],
-    [NaN, '—'],
-  ])(
+  it.each([undefined, null, '', NaN, '—'])(
     'EmptyCellValue отображается если нет данных',
-    async (cell, expectedCell) => {
+    async (cell) => {
       renderWithTheme(
         <NewDataGrid
           keyId="cell"
@@ -72,7 +67,7 @@ describe('NewDataGrid', () => {
         />,
       );
 
-      const emptyCell = screen.getByText(expectedCell);
+      const emptyCell = screen.getByText('—');
 
       expect(emptyCell).toBeVisible();
     },

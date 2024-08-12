@@ -10,16 +10,16 @@ import type {
 
 type DataType = {
   id: string;
-  documentName: string;
-  recipient: string;
+  documentName?: string;
+  recipient?: string;
   createDate: string;
   actions?: object;
 };
 
-type CommonDataType = {
+type TreeDataType = {
   id: string;
-  documentName?: string;
-  recipient?: string;
+  documentName: string;
+  recipient: string;
   createDate: string;
   actions?: object;
 };
@@ -36,7 +36,7 @@ export const makeRandomDate = () => {
   return randomDate.toISOString();
 };
 
-export const makeColumns = <T extends CommonDataType>(
+export const makeColumns = <T extends DataType>(
   columnsTemplate: DataGridColumns<T>[],
   mergedColumns: DataGridColumns<T>[] = [],
 ): DataGridColumns<T>[] => {
@@ -78,14 +78,14 @@ export const makeDataList = <TData extends Record<string, CellValue>>(
     })) as unknown as DataGridRowWithOptions<TData>[];
 };
 
-export const makeDataListWithTree = (
+export const makeDataListWithTree = <T extends DataType>(
   length: number = 10,
   options?: {
     isNotSelectable?: boolean;
     childrenCount?: number;
-    childrenColumns?: DataGridRowOptionColumns<DataType>[];
+    childrenColumns?: DataGridRowOptionColumns<T>[];
   },
-): DataType[] => {
+): T[] => {
   const { isNotSelectable, childrenCount = 3, childrenColumns } = options || {};
 
   return Array.from({ length }).map((_, i) => {
