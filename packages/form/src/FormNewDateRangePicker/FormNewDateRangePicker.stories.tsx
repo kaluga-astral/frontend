@@ -60,12 +60,14 @@ export const Example = () => {
             name="dateField"
             startDateProps={{
               inputProps: {
-                label: 'Дата начала:',
+                label: 'Дата начала',
+                required: true,
               },
             }}
             endDateProps={{
               inputProps: {
-                label: 'Дата окончания:',
+                label: 'Дата окончания',
+                required: true,
               },
             }}
             control={form.control}
