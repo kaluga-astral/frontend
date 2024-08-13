@@ -652,7 +652,6 @@ export const EmptyCellValue = () => {
       field: 'recipient',
       label: 'Получатель',
       sortable: true,
-      format: ({ recipient }) => recipient,
     },
     {
       field: 'createDate',
