@@ -114,13 +114,14 @@ describe('ActionCell', () => {
     expect(tooltip).toHaveTextContent('Удалить');
   });
 
-  it('Кнопки заблокированы, при isBlockingOperation=true', async () => {
+  it('Кнопки заблокированы, при isBlockingOperation=true и loading=true', async () => {
     const fakeAction: Actions<DataTypeActions> = {
       isBlockingOperation: true,
       main: [
         {
           icon: <svg />,
           name: 'Удалить',
+          loading: true,
         },
       ],
       secondary: [

@@ -1,16 +1,10 @@
-import { type MouseEventHandler, useCallback } from 'react';
-
 import { type TooltipProps } from '../Tooltip';
 
 import { Wrapper } from './styles';
 import { MainAction } from './MainAction';
-import {
-  type MainActionKind,
-  type NestedAction,
-  type SecondaryActionKind,
-  type SingleAction,
-} from './types';
+import { type MainActionKind, type SecondaryActionKind } from './types';
 import { SecondaryActions } from './SecondaryAction';
+import { useLogic } from './useLogic';
 
 export type Actions<T> = {
   /**
@@ -47,23 +41,15 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export function ActionCell<T>({
-  actions: { main = [], secondary = [], isBlockingOperation = false },
-  row,
-}: ActionsCellProps<T>) {
-  const handleActionClick = useCallback(
-    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
-      () => {
-        onClick?.(row);
-      },
-    [row],
-  );
-
-  const handleWrapperClick: MouseEventHandler<HTMLDivElement> = (event) => {
-    event.stopPropagation();
-  };
-
-  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
+export function ActionCell<T>(props: ActionsCellProps<T>) {
+  const {
+    isBlockingAction,
+    isSecondaryActionsAvailable,
+    handleActionClick,
+    handleWrapperClick,
+  } = useLogic(props);
+  const { actions } = props;
+  const { main = [], secondary = [], isBlockingOperation = false } = actions;
 
   return (
     <Wrapper onClick={handleWrapperClick}>
@@ -74,13 +60,13 @@ export function ActionCell<T>({
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
-            isBlockingOperation={isBlockingOperation}
+            isBlockingOperation={isBlockingOperation && isBlockingAction}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
-          isBlockingOperation={isBlockingOperation}
+          isBlockingOperation={isBlockingOperation && isBlockingAction}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}

@@ -7,7 +7,8 @@ import {
 import { type Meta, type StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
-import { DataGrid, type DataGridColumns } from '../DataGrid';
+// import { DataGrid, type DataGridColumns } from '../DataGrid';
+import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
 import { ActionCell, type Actions } from './ActionCell';
 
@@ -117,38 +118,19 @@ export const Example = () => {
     {
       label: 'Действия',
       sortable: false,
-      width: '10%',
+      width: '120px',
       align: 'right',
       renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
     },
   ];
 
   return (
-    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
+    <NewDataGrid rows={data} columns={columns} keyId="id" onRetry={() => {}} />
   );
 };
 
 export const OnlyMainActions = () => {
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Документ',
-      sortable: false,
-    },
-    {
-      label: 'Действия',
-      sortable: false,
-      width: '10%',
-      align: 'right',
-      renderCell: (row) => (
-        <ActionCell actions={ACTIONS_WITHOUT_SECONDARY} row={row} />
-      ),
-    },
-  ];
-
-  return (
-    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
-  );
+  return <ActionCell actions={ACTIONS_WITHOUT_SECONDARY} row={data[1]} />;
 };
 
 export const LoaderActions = () => {
@@ -168,31 +150,64 @@ export const LoaderActions = () => {
   }, [loading]);
 
   const FAKE_ACTIONS: Actions<DataTypeActions> = {
-    isBlockingOperation: loading,
     main: [
       {
         icon: <BinOutlineMd />,
         name: 'Удалить',
-        loading: loading,
         onClick: () => setLoading((prevState) => !prevState),
+        loading: loading,
       },
       {
         icon: <SaveOutlineMd />,
         name: 'Сохранить',
       },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+      { name: 'Удалить' },
+    ],
+  };
+
+  const fakeData: DataTypeActions = {
+    id: '123456789',
+  };
+
+  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
+};
+
+export const BlockingOperations = () => {
+  type DataTypeActions = {
+    id: string;
+    actions?: object;
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+    }
+  }, [loading]);
+
+  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+    isBlockingOperation: true,
+    main: [
       {
-        icon: <SendOutlineMd />,
-        nested: true,
-        name: 'Отправить',
-        actions: [
-          { name: 'Туда', onClick: () => console.log('nested 1') },
-          { name: 'Сюда', onClick: () => console.log('nested 2') },
-        ],
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => setLoading((prevState) => !prevState),
+        loading: loading,
+      },
+      {
+        icon: <SaveOutlineMd />,
+        name: 'Сохранить',
       },
     ],
     secondary: [
       { name: 'Редактировать', onClick: () => console.log('secondary 1') },
-      { name: 'Удалить', onClick: () => console.log('secondary 2') },
+      { name: 'Удалить' },
     ],
   };
 
