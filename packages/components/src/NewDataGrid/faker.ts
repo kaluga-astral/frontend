@@ -78,14 +78,14 @@ export const makeDataList = <TData extends Record<string, CellValue>>(
     })) as unknown as DataGridRowWithOptions<TData>[];
 };
 
-export const makeDataListWithTree = <T extends DataType>(
+export const makeDataListWithTree = (
   length: number = 10,
   options?: {
     isNotSelectable?: boolean;
     childrenCount?: number;
-    childrenColumns?: DataGridRowOptionColumns<T>[];
+    childrenColumns?: DataGridRowOptionColumns<TreeDataType>[];
   },
-): T[] => {
+): TreeDataType[] => {
   const { isNotSelectable, childrenCount = 3, childrenColumns } = options || {};
 
   return Array.from({ length }).map((_, i) => {
