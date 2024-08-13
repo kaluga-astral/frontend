@@ -2,7 +2,7 @@ import { type TooltipProps } from '../Tooltip';
 
 import { Wrapper } from './styles';
 import { MainAction } from './MainAction';
-import { type MainActionKind, type SecondaryActionKind } from './types';
+import type { MainActionKind, SecondaryActionKind } from './types';
 import { SecondaryActions } from './SecondaryAction';
 import { useLogic } from './useLogic';
 
@@ -16,7 +16,7 @@ export type Actions<T> = {
    */
   secondary?: SecondaryActionKind<T>[];
   /**
-   * Флаг для блокировки всех действий
+   * Флаг при значении true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
    */
   isBlockingOperation?: boolean;
 };
@@ -41,13 +41,14 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export function ActionCell<T>(props: ActionsCellProps<T>) {
+export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
   const {
     isBlockingAction,
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
   } = useLogic(props);
+
   const { actions } = props;
   const { main = [], secondary = [], isBlockingOperation = false } = actions;
 
@@ -74,4 +75,4 @@ export function ActionCell<T>(props: ActionsCellProps<T>) {
       )}
     </Wrapper>
   );
-}
+};

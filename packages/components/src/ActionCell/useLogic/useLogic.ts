@@ -8,11 +8,12 @@ import {
 import { type ActionsCellProps } from '../ActionCell';
 import { type NestedAction, type SingleAction } from '../types';
 
-type UseLogicParams<T> = ActionsCellProps<T>;
+type UseLogicParams<Action> = ActionsCellProps<Action>;
 
 export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
   const [isBlockingAction, setIsBlockingAction] = useState(false);
   const { main, secondary } = actions;
+
   const isLoading = main.some((action) => {
     if ('actions' in action) {
       return false;

@@ -163,7 +163,6 @@ export const LoaderActions = () => {
     ],
     secondary: [
       { name: 'Редактировать', onClick: () => console.log('secondary 1') },
-      { name: 'Удалить' },
     ],
   };
 
@@ -206,7 +205,6 @@ export const BlockingOperations = () => {
     ],
     secondary: [
       { name: 'Редактировать', onClick: () => console.log('secondary 1') },
-      { name: 'Удалить' },
     ],
   };
 
