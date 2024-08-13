@@ -7,7 +7,6 @@ import {
 import { type Meta, type StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 
-// import { DataGrid, type DataGridColumns } from '../DataGrid';
 import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
 import { ActionCell, type Actions } from './ActionCell';
