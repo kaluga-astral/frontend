@@ -56,7 +56,7 @@ describe('NewDataGrid', () => {
       renderWithTheme(
         <NewDataGrid
           keyId="cell"
-          rows={[{ cell: cell }]}
+          rows={[{ cell }]}
           columns={[
             {
               field: 'cell',
@@ -64,6 +64,7 @@ describe('NewDataGrid', () => {
             },
           ]}
           onRetry={() => {}}
+          emptyCellValue="—"
         />,
       );
 
