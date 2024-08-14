@@ -89,9 +89,9 @@ export const ItemContent = styled('div', {
   }
 `;
 
-export const CollapseButton = styled(IconButton)<{
-  $isNotBlockingExpandList?: boolean;
-}>`
+export const CollapseButton = styled(IconButton, {
+  shouldForwardProp: (prop) => !['$isNotBlockingExpandList'].includes(prop),
+})<{ $isNotBlockingExpandList?: boolean }>`
   position: relative;
   z-index: 1;
 
