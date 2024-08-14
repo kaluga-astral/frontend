@@ -105,6 +105,7 @@ describe('NewDataGrid', () => {
         rows={fakeData}
         columns={fakeColumns}
         onRetry={() => {}}
+        emptyCellValue="—"
       />,
     );
 
