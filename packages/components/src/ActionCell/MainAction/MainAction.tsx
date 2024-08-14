@@ -54,10 +54,12 @@ export const MainAction = <T,>({
 
   const { onClick, name, icon, disabledReason, disabled, loading } = action;
 
+  const title = !loading && (disabledReason || name);
+
   return (
     <Tooltip
       key={name}
-      title={!loading && (disabledReason || name)}
+      title={title}
       placement={tooltipPlacement}
       withoutContainer={!disabled}
     >
