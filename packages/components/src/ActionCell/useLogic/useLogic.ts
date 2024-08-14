@@ -3,7 +3,7 @@ import { type MouseEventHandler, useCallback } from 'react';
 import { type ActionsCellProps } from '../ActionCell';
 import type { NestedAction, SingleAction } from '../types';
 
-type UseLogicParams<TActionCell> = ActionsCellProps<TActionCell>;
+type UseLogicParams<TRowData> = ActionsCellProps<TRowData>;
 
 export const useLogic = <TRowData>({
   actions,
