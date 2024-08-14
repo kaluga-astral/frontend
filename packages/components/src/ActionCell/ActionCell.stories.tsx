@@ -138,31 +138,37 @@ export const LoaderActions = () => {
     actions?: object;
   };
 
-  const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
 
   useEffect(() => {
-    if (loading) {
+    if (deleteLoading) {
       setTimeout(() => {
-        setLoading(false);
+        setDeleteLoading(false);
       }, 1500);
     }
-  }, [loading]);
+
+    if (saveLoading) {
+      setTimeout(() => {
+        setSaveLoading(false);
+      }, 1500);
+    }
+  }, [deleteLoading, saveLoading]);
 
   const FAKE_ACTIONS: Actions<DataTypeActions> = {
     main: [
       {
         icon: <BinOutlineMd />,
         name: 'Удалить',
-        onClick: () => setLoading((prevState) => !prevState),
-        loading: loading,
+        onClick: () => setDeleteLoading((prevState) => !prevState),
+        loading: deleteLoading,
       },
       {
         icon: <SaveOutlineMd />,
         name: 'Сохранить',
+        loading: saveLoading,
+        onClick: () => setSaveLoading((prevState) => !prevState),
       },
-    ],
-    secondary: [
-      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
     ],
   };
 
@@ -179,15 +185,22 @@ export const BlockingOperations = () => {
     actions?: object;
   };
 
-  const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
 
   useEffect(() => {
-    if (loading) {
+    if (deleteLoading) {
       setTimeout(() => {
-        setLoading(false);
+        setDeleteLoading(false);
       }, 1500);
     }
-  }, [loading]);
+
+    if (saveLoading) {
+      setTimeout(() => {
+        setSaveLoading(false);
+      }, 1500);
+    }
+  }, [deleteLoading, saveLoading]);
 
   const FAKE_ACTIONS: Actions<DataTypeActions> = {
     isBlockingOperation: true,
@@ -195,12 +208,14 @@ export const BlockingOperations = () => {
       {
         icon: <BinOutlineMd />,
         name: 'Удалить',
-        onClick: () => setLoading((prevState) => !prevState),
-        loading: loading,
+        onClick: () => setDeleteLoading((prevState) => !prevState),
+        loading: deleteLoading,
       },
       {
         icon: <SaveOutlineMd />,
         name: 'Сохранить',
+        onClick: () => setSaveLoading((prevState) => !prevState),
+        loading: saveLoading,
       },
     ],
     secondary: [

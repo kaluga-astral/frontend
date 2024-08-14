@@ -1,9 +1,4 @@
-import {
-  type MouseEventHandler,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { type MouseEventHandler, useCallback } from 'react';
 
 import { type ActionsCellProps } from '../ActionCell';
 import { type NestedAction, type SingleAction } from '../types';
@@ -11,15 +6,14 @@ import { type NestedAction, type SingleAction } from '../types';
 type UseLogicParams<Action> = ActionsCellProps<Action>;
 
 export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
-  const [isBlockingAction, setIsBlockingAction] = useState(false);
-  const { main, secondary } = actions;
+  const { main, secondary, isBlockingOperation = false } = actions;
 
   const isLoading = main.some((action) => {
     if ('actions' in action) {
       return false;
     }
 
-    return action?.loading === true;
+    return action?.loading;
   });
 
   const handleActionClick = useCallback(
@@ -36,18 +30,12 @@ export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
 
   const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
 
-  useEffect(() => {
-    if (isLoading) {
-      setIsBlockingAction(true);
-    } else {
-      setIsBlockingAction(false);
-    }
-  }, [isLoading]);
+  const isDisabledAction = isLoading && isBlockingOperation;
 
   return {
-    isBlockingAction,
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
+    isDisabledAction,
   };
 };

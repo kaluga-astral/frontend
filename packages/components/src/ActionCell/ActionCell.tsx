@@ -43,14 +43,14 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
 
 export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
   const {
-    isBlockingAction,
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
+    isDisabledAction,
   } = useLogic(props);
 
   const { actions } = props;
-  const { main = [], secondary = [], isBlockingOperation = false } = actions;
+  const { main = [], secondary = [] } = actions;
 
   return (
     <Wrapper onClick={handleWrapperClick}>
@@ -61,13 +61,13 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
-            isBlockingOperation={isBlockingOperation && isBlockingAction}
+            isDisabled={isDisabledAction}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
-          isBlockingOperation={isBlockingOperation && isBlockingAction}
+          isDisabled={isDisabledAction}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}

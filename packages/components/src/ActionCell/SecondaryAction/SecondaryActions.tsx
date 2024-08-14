@@ -9,20 +9,20 @@ type SecondaryActionsProps<T> = {
   actions: SecondaryActionKind<T>[];
   onActionClick: ActionCellHandler<T>;
   tooltipPlacement: TooltipProps['placement'];
-  isBlockingOperation?: boolean;
+  isDisabled?: boolean;
 };
 
 export const SecondaryActions = <T,>({
   actions,
   onActionClick,
   tooltipPlacement,
-  isBlockingOperation = false,
+  isDisabled = false,
 }: SecondaryActionsProps<T>) => {
   return (
     <IconDropdownButton
       icon={<DotsVOutlineMd />}
       variant="text"
-      disabled={isBlockingOperation}
+      disabled={isDisabled}
     >
       {actions.map((secondaryAction) => {
         const { onClick, name } = secondaryAction;
