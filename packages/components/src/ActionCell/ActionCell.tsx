@@ -47,7 +47,6 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
     handleActionClick,
     handleWrapperClick,
     isDisabledAction,
-    isLoading,
   } = useLogic(props);
 
   const { actions } = props;
@@ -63,7 +62,6 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
             onActionClick={handleActionClick}
             action={action}
             isDisabled={isDisabledAction}
-            disableTooltip={isLoading}
           />
         );
       })}

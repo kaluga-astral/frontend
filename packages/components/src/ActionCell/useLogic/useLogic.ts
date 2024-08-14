@@ -5,10 +5,10 @@ import type { NestedAction, SingleAction } from '../types';
 
 type UseLogicParams<TActionCell> = ActionsCellProps<TActionCell>;
 
-export const useLogic = <TActionCell>({
+export const useLogic = <TRowData>({
   actions,
   row,
-}: UseLogicParams<TActionCell>) => {
+}: UseLogicParams<TRowData>) => {
   const { main, secondary, isBlockingOperation = false } = actions;
 
   const isLoading = main.some((action) => {
@@ -22,8 +22,8 @@ export const useLogic = <TActionCell>({
   const handleActionClick = useCallback(
     (
       onClick:
-        | SingleAction<TActionCell>['onClick']
-        | NestedAction<TActionCell>['onClick'],
+        | SingleAction<TRowData>['onClick']
+        | NestedAction<TRowData>['onClick'],
     ) =>
       () => {
         onClick?.(row);
@@ -44,6 +44,5 @@ export const useLogic = <TActionCell>({
     handleActionClick,
     handleWrapperClick,
     isDisabledAction,
-    isLoading,
   };
 };

@@ -12,10 +12,6 @@ type MainActionProps<T> = {
    *  Если true, action не доступен
    */
   isDisabled?: boolean;
-  /**
-   *  Если true, не выводит тултип элемента
-   */
-  disableTooltip?: boolean;
 };
 
 export const MainAction = <T,>({
@@ -23,7 +19,6 @@ export const MainAction = <T,>({
   onActionClick,
   tooltipPlacement,
   isDisabled,
-  disableTooltip = false,
 }: MainActionProps<T>) => {
   if ('actions' in action) {
     const { icon, disabled, disabledReason, name, actions } = action;
@@ -31,7 +26,7 @@ export const MainAction = <T,>({
     return (
       <Tooltip
         key={name}
-        title={!disableTooltip && (disabledReason || name)}
+        title={disabledReason || name}
         placement={tooltipPlacement}
         withoutContainer={!disabled}
       >
@@ -57,12 +52,12 @@ export const MainAction = <T,>({
     );
   }
 
-  const { onClick, name, icon, disabledReason, disabled } = action;
+  const { onClick, name, icon, disabledReason, disabled, loading } = action;
 
   return (
     <Tooltip
       key={name}
-      title={!disableTooltip && (disabledReason || name)}
+      title={!loading && (disabledReason || name)}
       placement={tooltipPlacement}
       withoutContainer={!disabled}
     >
