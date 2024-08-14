@@ -628,6 +628,58 @@ export const DisabledLastCell = () => {
   );
 };
 
+export const EmptyCellValue = () => {
+  type DataTypeEmptyCell = {
+    id: string;
+    documentName?: string;
+    recipient?: string;
+    createDate: string;
+  };
+
+  const fakeDataTemplate: DataTypeEmptyCell = {
+    id: '1',
+    documentName: 'Договор №1',
+    createDate: '2022-03-24T17:50:40.206Z',
+  };
+
+  const fakeColumns: DataGridColumns<DataTypeEmptyCell>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+  ];
+
+  const columns = makeColumns(fakeColumns);
+  const fakeData: DataGridRowWithOptions<DataTypeEmptyCell>[] = [
+    {
+      id: '123456789',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(fakeDataTemplate),
+  ];
+
+  return (
+    <NewDataGrid<DataTypeEmptyCell>
+      keyId="id"
+      rows={fakeData}
+      columns={columns}
+      onRetry={() => {}}
+    />
+  );
+};
+
 /**
  * Таблица можем работать с вложенными структурами
  */
