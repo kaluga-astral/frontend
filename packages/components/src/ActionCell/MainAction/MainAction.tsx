@@ -1,7 +1,7 @@
 import { IconDropdownButton } from '../../IconDropdownButton';
 import { MenuItem } from '../../MenuItem';
 import { IconButton } from '../../IconButton';
-import { type ActionCellHandler, type MainActionKind } from '../types';
+import type { ActionCellHandler, MainActionKind } from '../types';
 import { Tooltip, type TooltipProps } from '../../Tooltip';
 
 type MainActionProps<T> = {
