@@ -9,6 +9,9 @@ type SecondaryActionsProps<T> = {
   actions: SecondaryActionKind<T>[];
   onActionClick: ActionCellHandler<T>;
   tooltipPlacement: TooltipProps['placement'];
+  /**
+   *  Если true, action не доступен
+   */
   isDisabled?: boolean;
 };
 

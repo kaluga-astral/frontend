@@ -8,32 +8,38 @@ type MainActionProps<T> = {
   action: MainActionKind<T>;
   onActionClick: ActionCellHandler<T>;
   tooltipPlacement: TooltipProps['placement'];
+  /**
+   *  Если true, action не доступен
+   */
   isDisabled?: boolean;
+  /**
+   *  Если true, не выводит тултип элемента
+   */
+  disableTooltip?: boolean;
 };
 
 export const MainAction = <T,>({
   action,
   onActionClick,
   tooltipPlacement,
-  isDisabled = false,
+  isDisabled,
+  disableTooltip = false,
 }: MainActionProps<T>) => {
   if ('actions' in action) {
-    const {
-      icon,
-      disabled = isDisabled,
-      disabledReason,
-      name,
-      actions,
-    } = action;
+    const { icon, disabled, disabledReason, name, actions } = action;
 
     return (
       <Tooltip
         key={name}
-        title={disabledReason || name}
+        title={!disableTooltip && (disabledReason || name)}
         placement={tooltipPlacement}
         withoutContainer={!disabled}
       >
-        <IconDropdownButton icon={icon} variant="text" disabled={disabled}>
+        <IconDropdownButton
+          icon={icon}
+          variant="text"
+          disabled={isDisabled || disabled}
+        >
           {actions.map(
             ({ name: nestedActionName, onClick: onClickNested, ...props }) => (
               <MenuItem
@@ -51,17 +57,17 @@ export const MainAction = <T,>({
     );
   }
 
-  const { onClick, name, icon, disabledReason, disabled = isDisabled } = action;
+  const { onClick, name, icon, disabledReason, disabled } = action;
 
   return (
     <Tooltip
       key={name}
-      title={disabledReason || name}
+      title={!disableTooltip && (disabledReason || name)}
       placement={tooltipPlacement}
       withoutContainer={!disabled}
     >
       <IconButton
-        disabled={disabled}
+        disabled={isDisabled || disabled}
         {...action}
         variant="text"
         onClick={onActionClick(onClick)}

@@ -16,7 +16,7 @@ export type Actions<T> = {
    */
   secondary?: SecondaryActionKind<T>[];
   /**
-   * Флаг при значении true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
+   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
    */
   isBlockingOperation?: boolean;
 };
@@ -47,6 +47,7 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
     handleActionClick,
     handleWrapperClick,
     isDisabledAction,
+    isLoading,
   } = useLogic(props);
 
   const { actions } = props;
@@ -62,6 +63,7 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
             onActionClick={handleActionClick}
             action={action}
             isDisabled={isDisabledAction}
+            disableTooltip={isLoading}
           />
         );
       })}

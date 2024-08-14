@@ -1,11 +1,14 @@
 import { type MouseEventHandler, useCallback } from 'react';
 
 import { type ActionsCellProps } from '../ActionCell';
-import { type NestedAction, type SingleAction } from '../types';
+import type { NestedAction, SingleAction } from '../types';
 
-type UseLogicParams<Action> = ActionsCellProps<Action>;
+type UseLogicParams<TActionCell> = ActionsCellProps<TActionCell>;
 
-export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
+export const useLogic = <TActionCell>({
+  actions,
+  row,
+}: UseLogicParams<TActionCell>) => {
   const { main, secondary, isBlockingOperation = false } = actions;
 
   const isLoading = main.some((action) => {
@@ -17,7 +20,11 @@ export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
   });
 
   const handleActionClick = useCallback(
-    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
+    (
+      onClick:
+        | SingleAction<TActionCell>['onClick']
+        | NestedAction<TActionCell>['onClick'],
+    ) =>
       () => {
         onClick?.(row);
       },
@@ -37,5 +44,6 @@ export const useLogic = <T>({ actions, row }: UseLogicParams<T>) => {
     handleActionClick,
     handleWrapperClick,
     isDisabledAction,
+    isLoading,
   };
 };
