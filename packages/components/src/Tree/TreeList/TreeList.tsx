@@ -7,27 +7,27 @@ export type { TreeListProps };
 
 const INITIAL_LEVEL = 0;
 
-export const TreeList = ({
-  data,
-  value,
-  className,
-  expandedLevel = 10,
-  disabledItems,
-  ...props
-}: TreeListProps) => {
-  const { formattedDisabledItems } = useLogic({ disabledItems });
+export const TreeList = (props: TreeListProps) => {
+  const { listProps, itemProps } = useLogic(props);
+
+  const {
+    data,
+    className,
+    expandedLevel = 10,
+    disabledItems,
+    ...restProps
+  } = props;
 
   return (
-    <List className={className}>
+    <List className={className} {...listProps}>
       {data.map((item) => (
         <TreeItem
           key={item.id}
-          value={value}
           {...item}
           level={INITIAL_LEVEL}
           expandedLevel={expandedLevel}
-          disabledItems={formattedDisabledItems}
-          {...props}
+          {...itemProps}
+          {...restProps}
         />
       ))}
     </List>
