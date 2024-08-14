@@ -7,6 +7,7 @@ import { ActionCell } from '../ActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
+import { type DataGridRowWithOptions } from './types';
 
 describe('NewDataGrid', () => {
   it('Названия колонок отображаются', () => {
@@ -47,6 +48,70 @@ describe('NewDataGrid', () => {
     const title = screen.getByText('Vasya');
 
     expect(title).toBeVisible();
+  });
+
+  it.each([undefined, null, '', NaN, '—'])(
+    'EmptyCellValue отображается если нет данных',
+    async (cell) => {
+      renderWithTheme(
+        <NewDataGrid
+          keyId="cell"
+          rows={[{ cell }]}
+          columns={[
+            {
+              field: 'cell',
+              label: 'Наименование',
+            },
+          ]}
+          onRetry={() => {}}
+          emptyCellValue="—"
+        />,
+      );
+
+      const emptyCell = screen.getByText('—');
+
+      expect(emptyCell).toBeVisible();
+    },
+  );
+
+  it('EmptyCellValue отображается если format возвращает не валидные данные', async () => {
+    type DataTypeEmptyCell = {
+      id: string;
+      recipient?: string;
+    };
+
+    const fakeColumns: DataGridColumns<DataTypeEmptyCell>[] = [
+      {
+        field: 'recipient',
+        label: 'Получатель',
+        sortable: true,
+        format: ({ recipient }) => recipient,
+      },
+    ];
+
+    const fakeData: DataGridRowWithOptions<DataTypeEmptyCell>[] = [
+      {
+        id: '1',
+      },
+      {
+        id: '2',
+        recipient: 'ИП Иванов О.В.',
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="id"
+        rows={fakeData}
+        columns={fakeColumns}
+        onRetry={() => {}}
+        emptyCellValue="—"
+      />,
+    );
+
+    const emptyCell = screen.getByText('—');
+
+    expect(emptyCell).toBeVisible();
   });
 
   describe('Иконка сортировки', () => {
