@@ -1,4 +1,5 @@
 import {
+  type ComponentProps,
   type ElementType,
   type ReactElement,
   type ReactNode,
@@ -12,7 +13,7 @@ import { Collapse } from '../../Collapse';
 import { List, type ListProps } from './List';
 import { ItemButton } from './ItemButton';
 
-export type ItemProps = {
+export type ItemProps<TComponent extends ElementType = ElementType> = {
   collapsedIn: boolean;
   item: [
     key: string,
@@ -20,26 +21,43 @@ export type ItemProps = {
       icon: ReactElement;
       text: ReactNode;
       active?: boolean;
-      component?: ElementType;
       items?: ListProps['items'];
-    },
+      component?: TComponent;
+      // TODO Хак через Omit позволяет решить проблему с потерей типов для props
+      // Необходимо решить в рамках тех.долга https://track.astral.ru/soft/browse/UIKIT-1451
+    } & Omit<
+      ComponentProps<ElementType extends TComponent ? 'button' : TComponent>,
+      ''
+    >,
   ];
 };
 
-export const Item = (props: ItemProps) => {
+export const Item = <TComponent extends ElementType>(
+  props: ItemProps<TComponent>,
+) => {
   const {
     collapsedIn,
-    item: [key, value],
+    item: [, value],
   } = props;
+
+  const {
+    active: externalActive,
+    icon,
+    items,
+    text,
+    component,
+    ...componentProps
+  } = value;
+
   const [opened, setOpened] = useState(
-    value.items?.some(([, { active }]) => {
+    items?.some(([, { active }]) => {
       return active;
     }),
   );
 
   const selected = useMemo(() => {
-    return opened ? false : value.active;
-  }, [opened, value.active]);
+    return opened ? false : externalActive;
+  }, [opened, externalActive]);
 
   const handleClick = useCallback(() => {
     setOpened((prevValue) => {
@@ -52,19 +70,21 @@ export const Item = (props: ItemProps) => {
   }, []);
 
   return (
-    <li key={key}>
+    <li>
       <ItemButton
         opened={opened}
         collapsedIn={collapsedIn}
         selected={selected}
-        text={value.text}
-        icon={value.icon}
-        component={value.component}
+        text={text}
+        icon={icon}
+        component={component}
+        {...componentProps}
         onClick={handleClick}
       />
-      {value.items && (
+
+      {items && (
         <Collapse in={opened}>
-          <List collapsedIn={collapsedIn} items={value.items} />
+          <List collapsedIn={collapsedIn} items={items} />
         </Collapse>
       )}
     </li>

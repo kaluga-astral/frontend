@@ -3,6 +3,7 @@ import { type ComponentProps, type ElementType } from 'react';
 import { type ButtonProps } from '../../../Button';
 import { type DropdownButtonProps } from '../../../DropdownButton';
 import { MenuItem, type MenuItemProps } from '../../../MenuItem';
+import { Tooltip } from '../../../Tooltip';
 
 import { StyledButton, StyledDropdownButton } from './styles';
 
@@ -24,6 +25,14 @@ type SingleAction<TMainActionComponent extends ElementType> = Omit<
    * Название действия
    */
   text: string;
+  /**
+   * Текст тултипа при заблокированном состоянии кнопки
+   */
+  disabledReason?: string;
+  /**
+   * Текст тултипа при наведении на кнопку
+   */
+  note?: string;
 
   /**
    * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
@@ -57,6 +66,14 @@ type MultipleAction<TMainActionComponent extends ElementType> = Omit<
    */
   text: string;
 
+  /**
+   * Текст тултипа при заблокированном состоянии кнопки
+   */
+  disabledReason?: string;
+  /**
+   * Текст тултипа при наведении на кнопку
+   */
+  note?: string;
   /**
    * Компонент, используемый для корневого узла. Либо строка для использования элемента HTML, либо компонент
    */
@@ -92,26 +109,46 @@ export const ButtonGroupMainActions = <
         text,
         isNested,
         actions: nestedActions,
+        disabled,
+        disabledReason,
+        note,
         ...buttonProps
       } = action as MultipleAction<TMainActionComponent>;
 
       return (
-        <StyledDropdownButton {...buttonProps} key={text} name={text}>
-          {nestedActions.map(({ text: nestedActionText, ...nestedProps }) => (
-            <MenuItem key={nestedActionText} {...nestedProps}>
-              {nestedActionText}
-            </MenuItem>
-          ))}
-        </StyledDropdownButton>
+        <Tooltip
+          key={text}
+          title={disabled ? disabledReason : note}
+          withoutContainer={!disabled}
+        >
+          <StyledDropdownButton
+            {...buttonProps}
+            disabled={disabled}
+            name={text}
+          >
+            {nestedActions.map(({ text: nestedActionText, ...nestedProps }) => (
+              <MenuItem key={nestedActionText} {...nestedProps}>
+                {nestedActionText}
+              </MenuItem>
+            ))}
+          </StyledDropdownButton>
+        </Tooltip>
       );
     }
 
-    const { text, ...mainProps } = action as SingleAction<TMainActionComponent>;
+    const { text, disabled, disabledReason, note, ...mainProps } =
+      action as SingleAction<TMainActionComponent>;
 
     return (
-      <StyledButton {...mainProps} key={text}>
-        {text}
-      </StyledButton>
+      <Tooltip
+        key={text}
+        title={disabled ? disabledReason : note}
+        withoutContainer={!disabled}
+      >
+        <StyledButton {...mainProps} disabled={disabled}>
+          {text}
+        </StyledButton>
+      </Tooltip>
     );
   });
 };
