@@ -108,6 +108,28 @@ describe('TreeList', () => {
     expect(label).not.toBeVisible();
   });
 
+  it('Вложенный элемент отображается по умолчанию, если он активный', () => {
+    const fakeData = [
+      {
+        id: '1',
+        label: 'Group',
+        children: [
+          {
+            id: '11',
+            label: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    window.HTMLElement.prototype.scrollIntoView = () => {};
+    renderWithTheme(<TreeList value="11" data={fakeData} isInitialExpanded />);
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).toBeVisible();
+  });
+
   it('RenderItem применяется к содержимому', () => {
     const fakeData = [
       {
