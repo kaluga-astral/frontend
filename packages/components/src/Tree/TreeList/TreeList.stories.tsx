@@ -134,7 +134,7 @@ export const Example = () => {
       label: 'Item 3',
     },
     {
-      id: '3',
+      id: '4',
       label: 'Item 4',
     },
   ];

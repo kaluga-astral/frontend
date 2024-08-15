@@ -15,8 +15,6 @@ export const useLogic = ({ value, data, disabledItems }: UseLogicParams) => {
 
   useEffect(() => {
     if (listRef.current && value) {
-      console.log('ref', listRef.current);
-
       const targetItem = listRef.current.querySelector(`
         li[id="${prefixId}${value}"]`);
 
@@ -24,7 +22,7 @@ export const useLogic = ({ value, data, disabledItems }: UseLogicParams) => {
         targetItem.scrollIntoView({ block: 'center' });
       }
     }
-  }, [listRef, prefixId, value]);
+  }, [listRef, prefixId, data]);
 
   const formattedDisabledItems = useMemo(
     () => getFormatDisabledItems(disabledItems),
