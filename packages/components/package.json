@@ -54,7 +54,7 @@
     "react-toastify-next": "npm:react-toastify@10.0.5",
     "react-use": "^17.4.0",
     "react-virtuoso": "^4.6.3",
-    "remeda": "^1.40.1"
+    "remeda": "^1.61.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
