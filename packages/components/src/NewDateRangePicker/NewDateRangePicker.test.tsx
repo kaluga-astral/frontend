@@ -52,9 +52,9 @@ describe('NewDateRangePicker', () => {
       const dateBtn = screen.getAllByText('15')[0];
 
       await user.click(dateBtn);
-      expect(onChangeSpy.mock.calls[0][0].from instanceof Date).toBeTruthy();
+      expect(onChangeSpy.mock.calls[0][0].start instanceof Date).toBeTruthy();
 
-      expect(onChangeSpy.mock.calls[0][0].from.toISOString()).toBe(
+      expect(onChangeSpy.mock.calls[0][0].start.toISOString()).toBe(
         '2022-02-15T00:00:00.000Z',
       );
     });
@@ -70,9 +70,9 @@ describe('NewDateRangePicker', () => {
 
       await user.click(dateBtnB);
       expect(onChangeSpy).toBeCalled();
-      expect(onChangeSpy.mock.calls[0][0].to instanceof Date).toBeTruthy();
+      expect(onChangeSpy.mock.calls[0][0].end instanceof Date).toBeTruthy();
 
-      expect(onChangeSpy.mock.calls[0][0].to.toISOString()).toBe(
+      expect(onChangeSpy.mock.calls[0][0].end.toISOString()).toBe(
         '2022-03-15T00:00:00.000Z',
       );
     });
@@ -155,7 +155,7 @@ describe('NewDateRangePicker', () => {
 
     renderWithTheme(
       <NewDateRangePicker
-        value={{ from: new Date('2022-12-16T18:59:00Z') }}
+        value={{ start: new Date('2022-12-16T18:59:00Z') }}
         startDateProps={{
           inputProps: { placeholder: 'inputA' },
         }}
@@ -178,7 +178,7 @@ describe('NewDateRangePicker', () => {
     };
 
     const TestComponent = () => {
-      const [date, setDate] = useState<DateRangePickerValue | null>();
+      const [date, setDate] = useState<DateRangePickerValue>();
 
       callbacks.setDate = setDate;
 
@@ -196,7 +196,7 @@ describe('NewDateRangePicker', () => {
     renderWithTheme(<TestComponent />);
 
     await act(() => {
-      callbacks.setDate({ from: new Date('2022-03-09') });
+      callbacks.setDate({ start: new Date('2022-03-09') });
     });
 
     await user.click(screen.getByPlaceholderText('inputA'));
@@ -212,7 +212,7 @@ describe('NewDateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [date, setDate] = useState<DateRangePickerValue | null>();
+      const [date, setDate] = useState<DateRangePickerValue>();
 
       return (
         <NewDateRangePicker
@@ -270,7 +270,7 @@ describe('NewDateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [date, setDate] = useState<DateRangePickerValue | null>();
+      const [date, setDate] = useState<DateRangePickerValue>();
 
       return (
         <NewDateRangePicker
@@ -313,7 +313,7 @@ describe('NewDateRangePicker', () => {
     });
 
     const TestComponent = () => {
-      const [date, setDate] = useState<DateRangePickerValue | null>();
+      const [date, setDate] = useState<DateRangePickerValue>();
 
       return (
         <NewDateRangePicker

@@ -23,8 +23,8 @@ type FormValues = {
 
 const validationSchema = object<FormValues>({
   dateField: object({
-    from: date(),
-    to: date(),
+    start: date(),
+    end: date(),
   }),
 });
 
@@ -121,11 +121,11 @@ describe('FormDateRangePicker', () => {
     const [submitValues] = onSubmit.mock.calls[0];
 
     expect(
-      submitValues.dateField.from.toISOString().includes('2022-02-14'),
+      submitValues.dateField.start.toISOString().includes('2022-02-14'),
     ).toBeTruthy();
 
     expect(
-      submitValues.dateField.to.toISOString().includes('2022-03-15'),
+      submitValues.dateField.end.toISOString().includes('2022-03-15'),
     ).toBeTruthy();
     // TODO Разобраться со скоростью выполнения теста, в ci падает по таймауту в 3s, на локале выполняется примерно за 1.3s
     // https://track.astral.ru/soft/browse/UIKIT-1352

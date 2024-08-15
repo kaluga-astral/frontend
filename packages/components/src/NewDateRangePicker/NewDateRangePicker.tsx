@@ -10,6 +10,7 @@ import {
   PopoverHoveredContextProvider,
   YearMonthDayPicker,
 } from '../DatePicker';
+import { type TextFieldProps } from '../TextField';
 
 import { useLogic } from './useLogic';
 import { PickerSplitter, StyledDatePickerInput } from './styles';
@@ -17,14 +18,20 @@ import { PickerSplitter, StyledDatePickerInput } from './styles';
 const DEFAULT_SPACING = 1;
 
 export type DateRangePickerValue = {
-  from?: Date | null;
-  to?: Date | null;
-} | null;
+  start?: Date | null;
+  end?: Date | null;
+};
 
-export type DateItemProps = Pick<
+// Формируем новый тип inputProps, но дополнительно удаляем вложенный inputProps
+type LimitedInputProps = {
+  inputProps: Omit<TextFieldProps, 'ref' | 'value' | 'inputProps' | 'onChange'>;
+}['inputProps'];
+
+type DateItemProps = Pick<
   DatePickerProps,
-  'inputProps' | 'startAdornment'
->;
+  'startAdornment' | 'inputProps' | 'label'
+> &
+  LimitedInputProps;
 
 export type DateRangePickerProps = Omit<
   DatePickerProps,
@@ -94,12 +101,18 @@ export const NewDateRangePicker = forwardRef<
     helperText,
   } = props;
 
+  const { inputProps: startDateInputProps, ...restStartDateProps } =
+    startDateProps || {};
+
+  const { inputProps: endDateInputProps, ...restEndDateProps } =
+    endDateProps || {};
+
   return (
     <Grid>
       <Grid container spacing={spacing} ref={ref} direction="column">
         <StyledDatePickerInput
-          {...startDateProps.inputProps}
-          startAdornment={startDateProps.startAdornment}
+          {...startDateInputProps}
+          {...restStartDateProps}
           // TODO Пропс margin=none пока не работает, поэтому стилизуем компонент
           // https://track.astral.ru/soft/browse/UIKIT-1333
           margin="none"
@@ -111,8 +124,8 @@ export const NewDateRangePicker = forwardRef<
         />
 
         <StyledDatePickerInput
-          {...endDateProps.inputProps}
-          startAdornment={endDateProps.startAdornment}
+          {...endDateInputProps}
+          {...restEndDateProps}
           margin="none"
           size={size}
           mask={mask}
@@ -122,9 +135,9 @@ export const NewDateRangePicker = forwardRef<
         />
       </Grid>
 
-      {helperText && (
-        <FormHelperText error={isError}>{helperText}</FormHelperText>
-      )}
+      <FormHelperText error={isError}>
+        {helperText && helperText}
+      </FormHelperText>
 
       <PopoverHoveredContextProvider {...popoverHoveredContextProviderProps}>
         <DatePickerPopover {...datePickerPopoverProps}>

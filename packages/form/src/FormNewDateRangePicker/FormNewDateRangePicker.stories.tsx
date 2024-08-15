@@ -1,5 +1,5 @@
 import { type Meta } from '@storybook/react';
-import { date, object } from '@astral/validations';
+import { object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid, styled } from '@astral/components';
 
@@ -27,10 +27,25 @@ type FormValues = {
 };
 
 const validationSchema = object<FormValues>({
-  dateField: object({
-    from: date(),
-    to: date(),
-  }),
+  // @ts-ignore
+  // Ошибка по отсутствию свойства define и типизации ctx
+  // TODO: Необходимо реализовать новое правило валидации и заменить на него
+  // https://track.astral.ru/soft/browse/UIKIT-1704
+  dateField: (value: FormValues['dateField'], ctx) => {
+    if (!(value.start && value.end)) {
+      return ctx.createError({
+        message: 'Обязательно',
+        code: 'required',
+      });
+    }
+
+    if (value.start > value.end) {
+      return ctx.createError({
+        message: 'Дата начала не может быть позже даты окончания',
+        code: 'no-valid',
+      });
+    }
+  },
 });
 
 const ExampleWrapper = styled.div`

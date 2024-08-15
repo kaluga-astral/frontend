@@ -39,27 +39,23 @@ const normalizedCurrentDate = buildIsoDate({
 
 export const Example = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: {
-          label: 'Дата начала',
-          placeholder: 'Выберите дату',
-          error: false,
-          helperText: undefined,
-        },
+        label: 'Дата начала',
+        placeholder: 'Выберите дату',
+        error: false,
+        helperText: undefined,
       }}
       endDateProps={{
-        inputProps: {
-          label: 'Дата окончания',
-          placeholder: 'Выберите дату',
-          error: false,
-          helperText: undefined,
-        },
+        label: 'Дата окончания',
+        placeholder: 'Выберите дату',
+        error: false,
+        helperText: undefined,
       }}
       value={date}
       onChange={setDate}
@@ -69,19 +65,19 @@ export const Example = () => {
 
 export const StartAdornment = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
         startAdornment: 'c',
-        inputProps: { label: 'Дата начала' },
+        label: 'Дата начала',
       }}
       endDateProps={{
         startAdornment: 'по',
-        inputProps: { label: 'Дата окончания' },
+        label: 'Дата окончания',
       }}
       value={date}
       onChange={setDate}
@@ -91,21 +87,17 @@ export const StartAdornment = () => {
 
 export const Disabled = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: normalizedCurrentDate,
-    to: addDays(normalizedCurrentDate, 10),
+    start: normalizedCurrentDate,
+    end: addDays(normalizedCurrentDate, 10),
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: {
-          label: 'Дата начала',
-        },
+        label: 'Дата начала',
       }}
       endDateProps={{
-        inputProps: {
-          label: 'Дата окончания',
-        },
+        label: 'Дата окончания',
       }}
       value={date}
       isDisabled
@@ -116,17 +108,19 @@ export const Disabled = () => {
 
 export const Required = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: { label: 'Дата начала', required: true },
+        label: 'Дата начала',
+        required: true,
       }}
       endDateProps={{
-        inputProps: { label: 'Дата окончания', required: true },
+        label: 'Дата окончания',
+        required: true,
       }}
       value={date}
       onChange={setDate}
@@ -136,17 +130,17 @@ export const Required = () => {
 
 export const HelperText = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: { label: 'Дата начала' },
+        label: 'Дата начала',
       }}
       endDateProps={{
-        inputProps: { label: 'Дата окончания' },
+        label: 'Дата окончания',
       }}
       helperText="Вспомогательный текст, относящийся к обоим полям"
       value={date}
@@ -157,17 +151,17 @@ export const HelperText = () => {
 
 export const Error = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: { label: 'Дата начала' },
+        label: 'Дата начала',
       }}
       endDateProps={{
-        inputProps: { label: 'Дата окончания' },
+        label: 'Дата окончания',
       }}
       isError={true}
       helperText="Дата начала не может быть раньше даты окончания"
@@ -179,21 +173,17 @@ export const Error = () => {
 
 export const MinDate = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: {
-          label: 'Дата начала',
-        },
+        label: 'Дата начала',
       }}
       endDateProps={{
-        inputProps: {
-          label: 'Дата окончания',
-        },
+        label: 'Дата окончания',
       }}
       minDate={addDays(normalizedCurrentDate, 90)}
       value={date}
@@ -204,21 +194,17 @@ export const MinDate = () => {
 
 export const MaxDate = () => {
   const [date, setDate] = useState<DateRangePickerValue | undefined>({
-    from: null,
-    to: null,
+    start: null,
+    end: null,
   });
 
   return (
     <NewDateRangePicker
       startDateProps={{
-        inputProps: {
-          label: 'Дата начала',
-        },
+        label: 'Дата начала',
       }}
       endDateProps={{
-        inputProps: {
-          label: 'Дата окончания',
-        },
+        label: 'Дата окончания',
       }}
       maxDate={addDays(normalizedCurrentDate, 90)}
       value={date}

@@ -61,13 +61,13 @@ export const useLogic = (
   }, [isOpen]);
 
   const selectedStartBaseDate = useSelectedBaseDate({
-    currentValue: value?.from,
+    currentValue: value?.start,
     minDate,
     maxDate,
   });
 
   const selectedEndBaseDate = useSelectedBaseDate({
-    currentValue: value?.to,
+    currentValue: value?.end,
     minDate,
     maxDate,
   });
@@ -81,17 +81,17 @@ export const useLogic = (
   });
 
   const handleChangeStartDate = (startDateValue?: Date | null) =>
-    onChange?.({ ...value, from: startDateValue });
+    onChange?.({ ...value, start: startDateValue });
 
   const handleChangeEndDate = (endDateValue?: Date | null) =>
-    onChange?.({ ...value, to: endDateValue });
+    onChange?.({ ...value, end: endDateValue });
 
   const {
     maskedValue: startMaskedValue,
     onMaskedValueChange: onMaskedStartValueChange,
     onMaskedDateChange: onMaskedStartDateChange,
   } = useMaskedValue({
-    currentValue: value?.from,
+    currentValue: value?.start,
     mask,
     onChangeValue: handleChangeStartDate,
   });
@@ -101,7 +101,7 @@ export const useLogic = (
     onMaskedValueChange: onMaskedEndValueChange,
     onMaskedDateChange: onMaskedEndDateChange,
   } = useMaskedValue({
-    currentValue: value?.to,
+    currentValue: value?.end,
     mask,
     onChangeValue: handleChangeEndDate,
   });
@@ -211,19 +211,19 @@ export const useLogic = (
       minDate: isStartDateSelected
         ? getBoundaryDate({
             reserve: minDate,
-            target: value?.from,
+            target: value?.start,
           })
         : minDate,
       maxDate: isEndDateSelected
         ? getBoundaryDate({
             reserve: maxDate,
-            target: value?.to,
+            target: value?.end,
           })
         : maxDate,
     },
     startYearMonthDayPickerProps: {
       selectedDate: selectedStartBaseDate || selectedEndBaseDate,
-      rangeDate: value?.to || value?.from,
+      rangeDate: value?.end || value?.start,
       date: startBaseDate,
       hoveredDayDate: hoveredDayDate,
       onDayHover: setHoveredDayDate,
@@ -231,7 +231,7 @@ export const useLogic = (
     },
     endYearMonthDayPickerProps: {
       selectedDate: selectedStartBaseDate || selectedEndBaseDate,
-      rangeDate: value?.to || value?.from,
+      rangeDate: value?.end || value?.start,
       date: endBaseDate,
       hoveredDayDate: hoveredDayDate,
       onDayHover: setHoveredDayDate,
