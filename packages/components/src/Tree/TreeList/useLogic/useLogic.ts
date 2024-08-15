@@ -22,7 +22,7 @@ export const useLogic = ({ value, data, disabledItems }: UseLogicParams) => {
         targetItem.scrollIntoView({ block: 'center' });
       }
     }
-  }, [listRef, prefixId, data]);
+  }, [listRef, prefixId]);
 
   const formattedDisabledItems = useMemo(
     () => getFormatDisabledItems(disabledItems),
