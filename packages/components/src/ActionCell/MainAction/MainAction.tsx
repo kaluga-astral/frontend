@@ -1,19 +1,24 @@
 import { IconDropdownButton } from '../../IconDropdownButton';
 import { MenuItem } from '../../MenuItem';
 import { IconButton } from '../../IconButton';
-import { type ActionCellHandler, type MainActionKind } from '../types';
+import type { ActionCellHandler, MainActionKind } from '../types';
 import { Tooltip, type TooltipProps } from '../../Tooltip';
 
 type MainActionProps<T> = {
   action: MainActionKind<T>;
   onActionClick: ActionCellHandler<T>;
   tooltipPlacement: TooltipProps['placement'];
+  /**
+   *  Если true, action не доступен
+   */
+  isDisabled?: boolean;
 };
 
 export const MainAction = <T,>({
   action,
   onActionClick,
   tooltipPlacement,
+  isDisabled,
 }: MainActionProps<T>) => {
   if ('actions' in action) {
     const { icon, disabled, disabledReason, name, actions } = action;
@@ -25,7 +30,11 @@ export const MainAction = <T,>({
         placement={tooltipPlacement}
         withoutContainer={!disabled}
       >
-        <IconDropdownButton icon={icon} variant="text" disabled={disabled}>
+        <IconDropdownButton
+          icon={icon}
+          variant="text"
+          disabled={isDisabled || disabled}
+        >
           {actions.map(
             ({ name: nestedActionName, onClick: onClickNested, ...props }) => (
               <MenuItem
@@ -43,16 +52,23 @@ export const MainAction = <T,>({
     );
   }
 
-  const { onClick, name, icon, disabledReason, disabled } = action;
+  const { onClick, name, icon, disabledReason, disabled, loading } = action;
+
+  const title = !loading && (disabledReason || name);
 
   return (
     <Tooltip
       key={name}
-      title={disabledReason || name}
+      title={title}
       placement={tooltipPlacement}
       withoutContainer={!disabled}
     >
-      <IconButton {...action} variant="text" onClick={onActionClick(onClick)}>
+      <IconButton
+        disabled={isDisabled || disabled}
+        {...action}
+        variant="text"
+        onClick={onActionClick(onClick)}
+      >
         {icon}
       </IconButton>
     </Tooltip>
