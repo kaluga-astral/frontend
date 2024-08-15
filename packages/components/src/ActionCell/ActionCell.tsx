@@ -1,16 +1,10 @@
-import { type MouseEventHandler, useCallback } from 'react';
-
 import { type TooltipProps } from '../Tooltip';
 
 import { Wrapper } from './styles';
 import { MainAction } from './MainAction';
-import {
-  type MainActionKind,
-  type NestedAction,
-  type SecondaryActionKind,
-  type SingleAction,
-} from './types';
+import type { MainActionKind, SecondaryActionKind } from './types';
 import { SecondaryActions } from './SecondaryAction';
+import { useLogic } from './useLogic';
 
 export type Actions<T> = {
   /**
@@ -21,6 +15,10 @@ export type Actions<T> = {
    * Второстепенные действия
    */
   secondary?: SecondaryActionKind<T>[];
+  /**
+   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
+   */
+  isBlockingOperation?: boolean;
 };
 
 export type ActionsCellProps<T> = {
@@ -43,23 +41,16 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export function ActionCell<T>({
-  actions: { main = [], secondary = [] },
-  row,
-}: ActionsCellProps<T>) {
-  const handleActionClick = useCallback(
-    (onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick']) =>
-      () => {
-        onClick?.(row);
-      },
-    [row],
-  );
+export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
+  const {
+    isSecondaryActionsAvailable,
+    handleActionClick,
+    handleWrapperClick,
+    isDisabledAction,
+  } = useLogic(props);
 
-  const handleWrapperClick: MouseEventHandler<HTMLDivElement> = (event) => {
-    event.stopPropagation();
-  };
-
-  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
+  const { actions } = props;
+  const { main = [], secondary = [] } = actions;
 
   return (
     <Wrapper onClick={handleWrapperClick}>
@@ -70,11 +61,13 @@ export function ActionCell<T>({
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
+            isDisabled={isDisabledAction}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
+          isDisabled={isDisabledAction}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}
@@ -82,4 +75,4 @@ export function ActionCell<T>({
       )}
     </Wrapper>
   );
-}
+};
