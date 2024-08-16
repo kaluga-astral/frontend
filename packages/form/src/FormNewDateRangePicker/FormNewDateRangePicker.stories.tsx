@@ -1,5 +1,5 @@
 import { type Meta } from '@storybook/react';
-import { object } from '@astral/validations';
+import { createRule, object } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 import { Grid, styled } from '@astral/components';
 
@@ -28,11 +28,11 @@ type FormValues = {
 
 const validationSchema = object<FormValues>({
   // @ts-ignore
-  // Ошибка по отсутствию свойства define и типизации ctx
+  // Ошибка по отсутствию свойства define
   // TODO: Необходимо реализовать новое правило валидации и заменить на него
   // https://track.astral.ru/soft/browse/UIKIT-1704
-  dateField: (value: FormValues['dateField'], ctx) => {
-    if (!(value.start && value.end)) {
+  dateField: createRule<FormDateRangePickerValue, FormValues>((value, ctx) => {
+    if (!value?.start || !value?.end) {
       return ctx.createError({
         message: 'Обязательно',
         code: 'required',
@@ -45,7 +45,9 @@ const validationSchema = object<FormValues>({
         code: 'no-valid',
       });
     }
-  },
+
+    return undefined;
+  }),
 });
 
 const ExampleWrapper = styled.div`
@@ -74,16 +76,12 @@ export const Example = () => {
           <FormNewDateRangePicker
             name="dateField"
             startDateProps={{
-              inputProps: {
-                label: 'Дата начала',
-                required: true,
-              },
+              label: 'Дата начала',
+              required: true,
             }}
             endDateProps={{
-              inputProps: {
-                label: 'Дата окончания',
-                required: true,
-              },
+              label: 'Дата окончания',
+              required: true,
             }}
             control={form.control}
           />

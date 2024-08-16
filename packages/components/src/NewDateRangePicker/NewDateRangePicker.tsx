@@ -108,8 +108,8 @@ export const NewDateRangePicker = forwardRef<
     endDateProps || {};
 
   return (
-    <Grid>
-      <Grid container spacing={spacing} ref={ref} direction="column">
+    <Grid ref={ref}>
+      <Grid container spacing={spacing} direction="column">
         <StyledDatePickerInput
           {...startDateInputProps}
           {...restStartDateProps}
