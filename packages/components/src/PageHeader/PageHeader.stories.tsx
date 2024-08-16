@@ -29,6 +29,7 @@ import { PageLayout } from '../PageLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { Filename } from '../Filename';
+import { Tag } from '../Tag';
 import { Typography } from '../Typography';
 
 import { PageHeader } from './PageHeader';
@@ -762,7 +763,8 @@ export const CustomTitle = () => (
       title={
         <StyledTypography variant="inherit">
           Очень длинный заголовок черновика, который не будет отображаться в
-          одну строку
+          одну строку &nbsp;
+          <Tag label="Статус" color="primary" variant="light" size="medium" />
         </StyledTypography>
       }
       actions={{
