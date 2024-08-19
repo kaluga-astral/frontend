@@ -55,6 +55,10 @@ export type DateRangePickerProps = Omit<
   spacing?: GridProps['spacing'];
 };
 
+/**
+ * @deprecated
+ * Используйте NewDateRangePicker. Причина отказа от поддержки: компонент использует два независимых поля, в следствии чего есть проблемы с отображением валидации
+ */
 export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
   (
     {
