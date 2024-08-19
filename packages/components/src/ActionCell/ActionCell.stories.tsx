@@ -1,7 +1,13 @@
-import { EyeFillMd, SendOutlineMd } from '@astral/icons';
+import {
+  BinOutlineMd,
+  EyeFillMd,
+  SaveOutlineMd,
+  SendOutlineMd,
+} from '@astral/icons';
 import { type Meta, type StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
 
-import { DataGrid, type DataGridColumns } from '../DataGrid';
+import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
 import { ActionCell, type Actions } from './ActionCell';
 
@@ -111,36 +117,115 @@ export const Example = () => {
     {
       label: 'Действия',
       sortable: false,
-      width: '10%',
+      width: '120px',
       align: 'right',
       renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
     },
   ];
 
   return (
-    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
+    <NewDataGrid rows={data} columns={columns} keyId="id" onRetry={() => {}} />
   );
 };
 
 export const OnlyMainActions = () => {
-  const columns: DataGridColumns<DataType>[] = [
-    {
-      field: 'documentName',
-      label: 'Документ',
-      sortable: false,
-    },
-    {
-      label: 'Действия',
-      sortable: false,
-      width: '10%',
-      align: 'right',
-      renderCell: (row) => (
-        <ActionCell actions={ACTIONS_WITHOUT_SECONDARY} row={row} />
-      ),
-    },
-  ];
+  return <ActionCell actions={ACTIONS_WITHOUT_SECONDARY} row={data[1]} />;
+};
 
-  return (
-    <DataGrid rows={data} columns={columns} keyId="id" onSort={() => {}} />
-  );
+export const LoaderActions = () => {
+  type DataTypeActions = {
+    id: string;
+    actions?: object;
+  };
+
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+
+  useEffect(() => {
+    if (deleteLoading) {
+      setTimeout(() => {
+        setDeleteLoading(false);
+      }, 1500);
+    }
+
+    if (saveLoading) {
+      setTimeout(() => {
+        setSaveLoading(false);
+      }, 1500);
+    }
+  }, [deleteLoading, saveLoading]);
+
+  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => setDeleteLoading((prevState) => !prevState),
+        loading: deleteLoading,
+      },
+      {
+        icon: <SaveOutlineMd />,
+        name: 'Сохранить',
+        loading: saveLoading,
+        onClick: () => setSaveLoading((prevState) => !prevState),
+      },
+    ],
+  };
+
+  const fakeData: DataTypeActions = {
+    id: '123456789',
+  };
+
+  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
+};
+
+export const BlockingOperations = () => {
+  type DataTypeActions = {
+    id: string;
+    actions?: object;
+  };
+
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+
+  useEffect(() => {
+    if (deleteLoading) {
+      setTimeout(() => {
+        setDeleteLoading(false);
+      }, 1500);
+    }
+
+    if (saveLoading) {
+      setTimeout(() => {
+        setSaveLoading(false);
+      }, 1500);
+    }
+  }, [deleteLoading, saveLoading]);
+
+  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+    isBlockingOperation: true,
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        onClick: () => setDeleteLoading((prevState) => !prevState),
+        loading: deleteLoading,
+      },
+      {
+        icon: <SaveOutlineMd />,
+        name: 'Сохранить',
+        onClick: () => setSaveLoading((prevState) => !prevState),
+        loading: saveLoading,
+      },
+    ],
+    secondary: [
+      { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    ],
+  };
+
+  const fakeData: DataTypeActions = {
+    id: '123456789',
+  };
+
+  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
 };

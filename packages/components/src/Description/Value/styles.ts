@@ -35,7 +35,9 @@ type StyledCopyIconProps = SvgIconProps & {
   $copyPosition: ValueProps['copyPosition'];
 };
 
-export const StyledCopyIcon = styled(CopyOutlineSm)<StyledCopyIconProps>`
+export const StyledCopyIcon = styled(CopyOutlineSm, {
+  shouldForwardProp: (prop) => !['$copyPosition'].includes(prop),
+})<StyledCopyIconProps>`
   margin-right: ${({ $copyPosition, theme }) =>
     $copyPosition === 'left' ? theme.spacing(1) : ''};
   margin-bottom: -4px;

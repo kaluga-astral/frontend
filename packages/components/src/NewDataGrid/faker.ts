@@ -10,6 +10,14 @@ import type {
 
 type DataType = {
   id: string;
+  documentName?: string;
+  recipient?: string;
+  createDate: string;
+  actions?: object;
+};
+
+type TreeDataType = {
+  id: string;
   documentName: string;
   recipient: string;
   createDate: string;
@@ -28,10 +36,10 @@ export const makeRandomDate = () => {
   return randomDate.toISOString();
 };
 
-export const makeColumns = (
-  columnsTemplate: DataGridColumns<DataType>[],
-  mergedColumns: DataGridColumns<DataType>[] = [],
-): DataGridColumns<DataType>[] => {
+export const makeColumns = <T extends DataType>(
+  columnsTemplate: DataGridColumns<T>[],
+  mergedColumns: DataGridColumns<T>[] = [],
+): DataGridColumns<T>[] => {
   const mergedColumnsMap = mergedColumns.reduce(
     (acc, { field, ...columnsOptions }) => {
       if (field) {
@@ -75,9 +83,9 @@ export const makeDataListWithTree = (
   options?: {
     isNotSelectable?: boolean;
     childrenCount?: number;
-    childrenColumns?: DataGridRowOptionColumns<DataType>[];
+    childrenColumns?: DataGridRowOptionColumns<TreeDataType>[];
   },
-): DataType[] => {
+): TreeDataType[] => {
   const { isNotSelectable, childrenCount = 3, childrenColumns } = options || {};
 
   return Array.from({ length }).map((_, i) => {

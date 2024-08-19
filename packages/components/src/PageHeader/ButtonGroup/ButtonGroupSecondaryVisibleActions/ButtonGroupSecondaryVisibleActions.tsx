@@ -22,17 +22,16 @@ export const ButtonGroupSecondaryVisibleActions = ({
   actions,
 }: ButtonGroupMainActionProps) => {
   return actions.map((action) => {
-    const { name, icon, disableReason, disabled, onClick, ...mainProps } =
-      action;
+    const { name, icon, disableReason, disabled, ...mainProps } = action;
 
     return (
       <Tooltip
+        key={name}
         title={disabled ? disableReason : name}
         withoutContainer={!disabled}
       >
         <IconButton
           variant="light"
-          key={name}
           name={name}
           disabled={disabled}
           {...mainProps}
