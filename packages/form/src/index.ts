@@ -20,42 +20,6 @@ export {
   RegisterOptions as FormRegisterOptions,
 } from 'react-hook-form';
 
-export * from './FormAutocomplete';
-
-export * from './FormMaskField';
-
-export * from './FormMobilePhoneField';
-
-export * from './FormTextArea';
-
-export * from './FormCheckbox';
-
-export * from './FormRadioGroup';
-
-export * from './FormSelect';
-
-export * from './FormTextField';
-
-export {
-  FormEmailField,
-  FormEmailFieldProps,
-  FormEmailFieldValue,
-} from './FormEmailField';
-
-export * from './FormSubmitButton';
-
-export * from './FormDatePicker';
-
-export * from './FormDateRangePicker';
-
-export * from './FormPasswordField';
-
-export * from './FormCodeField';
-
-export * from './Form';
-
-export * from './types';
-
 // нельзя экспортить через * потому, что есть пересечение с export * from 'react-hook-form';
 export {
   useForm,
@@ -66,4 +30,46 @@ export {
   useFormFieldProps,
 } from './hooks';
 
+export * from './Form';
+
+export * from './FormAutocomplete';
+
+export * from './FormCheckbox';
+
+export * from './FormCodeField';
+
+export * from './FormDatePicker';
+
+export * from './FormDateRangePicker';
+
+export {
+  FormEmailField,
+  type FormEmailFieldProps,
+  type FormEmailFieldValue,
+} from './FormEmailField';
+
+export * from './FormMaskField';
+
+export * from './FormMobilePhoneField';
+
+export {
+  FormNewDateRangePicker,
+  type FormDateRangePickerProps as FormNewDateRangePickerProps,
+  type FormDateRangePickerValue as NewFormDateRangePickerValue,
+} from './FormNewDateRangePicker';
+
+export * from './FormPasswordField';
+
 export { FormProvider } from './FormProvider';
+
+export * from './FormRadioGroup';
+
+export * from './FormSelect';
+
+export * from './FormSubmitButton';
+
+export * from './FormTextArea';
+
+export * from './FormTextField';
+
+export * from './types';
