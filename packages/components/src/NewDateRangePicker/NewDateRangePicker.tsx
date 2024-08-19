@@ -27,7 +27,7 @@ type LimitedInputProps = {
   inputProps: Omit<TextFieldProps, 'ref' | 'value' | 'inputProps' | 'onChange'>;
 }['inputProps'];
 
-type DateItemProps = Pick<
+export type DateItemProps = Pick<
   DatePickerProps,
   'startAdornment' | 'inputProps' | 'label'
 > &
