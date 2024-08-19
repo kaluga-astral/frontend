@@ -16,6 +16,11 @@ export type TreeItemProps = TreeListData & {
   value?: Value;
 
   /**
+   * Уникальный префикс для идентификаторов в рамках дерева
+   */
+  prefixId?: string;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
   renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
@@ -37,6 +42,11 @@ export type TreeItemProps = TreeListData & {
   expandedLevel: number;
 
   /**
+   * Цепочка идентификаторов до выбранного элемента дерева
+   */
+  chainToSelectedItem?: Array<Value>;
+
+  /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
   disabledItems?: Array<FormatDisableItem>;
@@ -47,40 +57,36 @@ export type TreeItemProps = TreeListData & {
   onChange?: (value: Value) => void;
 };
 
-export const TreeItem = ({
-  id,
-  label,
-  note,
-  level,
-  renderItem,
-  children = [],
-  value,
-  isInitialExpanded,
-  expandedLevel,
-  disabledItems,
-  onChange,
-}: TreeItemProps) => {
+export const TreeItem = (props: TreeItemProps) => {
   const {
     isSelected,
     isDefaultExpanded,
     isDisabled,
     disableReason,
     handleChange,
-  } = useLogic({
+  } = useLogic(props);
+
+  const {
     id,
-    value,
+    prefixId,
+    label,
+    note,
     level,
+    renderItem,
+    children = [],
+    value,
     isInitialExpanded,
     expandedLevel,
+    chainToSelectedItem,
     disabledItems,
     onChange,
-  });
+  } = props;
 
   if (children.length) {
     return (
       <BaseTreeItem
         id={id}
-        isRoot
+        prefixId={prefixId}
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         isDisabled={isDisabled}
@@ -97,10 +103,12 @@ export const TreeItem = ({
             <TreeItem
               key={child.id}
               {...child}
+              prefixId={prefixId}
               renderItem={renderItem}
               level={level + 1}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              chainToSelectedItem={chainToSelectedItem}
               disabledItems={disabledItems}
               value={value}
               onChange={onChange}
@@ -115,6 +123,7 @@ export const TreeItem = ({
     <>
       <BaseTreeItem
         id={id}
+        prefixId={prefixId}
         isSelected={isSelected}
         isDisabled={isDisabled}
         disableReason={disableReason}

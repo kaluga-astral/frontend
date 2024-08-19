@@ -28,6 +28,11 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
   className?: string;
 
   /**
+   * Уникальный префикс для идентификаторов в рамках дерева
+   */
+  prefixId?: string;
+
+  /**
    * Если true, item выделяется как активный.
    */
   isSelected: boolean;
@@ -94,9 +99,12 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 } & Omit<ComponentProps<TComponent>, ''>;
 
 export const TreeItem = (props: TreeItemProps) => {
-  const { isOpen, handleToggle, handleClick, tooltipProps } = useLogic(props);
+  const { isOpen, handleToggle, handleClick, itemProps, tooltipProps } =
+    useLogic(props);
+
   const {
     id,
+    prefixId,
     label,
     note,
     renderItem,
@@ -105,12 +113,14 @@ export const TreeItem = (props: TreeItemProps) => {
     isSelected,
     isDisabled = false,
     disableReason,
+    isDefaultExpanded,
     isNotBlockingExpandList = false,
     level = 0,
     component = 'div',
     onClick,
     ...restProps
   } = props;
+
   const renderCollapseButton = () => (
     <CollapseButton
       $isNotBlockingExpandList={isNotBlockingExpandList}
@@ -124,7 +134,13 @@ export const TreeItem = (props: TreeItemProps) => {
 
   if (children) {
     return (
-      <Item {...restProps} $level={level} as={component} className={className}>
+      <Item
+        {...restProps}
+        $level={level}
+        as={component}
+        className={className}
+        {...itemProps}
+      >
         <ItemContent
           $isSelected={isSelected}
           $isDisabled={isDisabled}
@@ -143,6 +159,7 @@ export const TreeItem = (props: TreeItemProps) => {
                   {renderCollapseButton()}
                   <Label>{label}</Label>
                 </LabelWrapper>
+
                 {note && (
                   <Note
                     className={TREE_ITEM_NOTE_CLASSNAME}
@@ -163,7 +180,13 @@ export const TreeItem = (props: TreeItemProps) => {
   }
 
   return (
-    <Item {...restProps} $level={level} as={component} className={className}>
+    <Item
+      {...restProps}
+      $level={level}
+      as={component}
+      className={className}
+      {...itemProps}
+    >
       <ItemContent
         $isSelected={isSelected}
         $isDisabled={isDisabled}

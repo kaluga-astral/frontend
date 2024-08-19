@@ -107,18 +107,43 @@ const FAKE_NOTE_TREE_LIST_DATA = [
   },
 ];
 
+const Wrapper = styled.div`
+  height: 240px;
+  overflow-y: auto;
+`;
+
 export const Example = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<string | undefined>('211');
 
   const fakeData = [
+    {
+      id: 'a',
+      label: 'Item A',
+    },
+    {
+      id: 'b',
+      label: 'Item B',
+    },
+    {
+      id: 'c',
+      label: 'Item C',
+    },
     ...FAKE_TREE_LIST_DATA,
     {
       id: '3',
       label: 'Item 3',
     },
+    {
+      id: '4',
+      label: 'Item 4',
+    },
   ];
 
-  return <TreeList data={fakeData} value={value} onChange={setValue} />;
+  return (
+    <Wrapper>
+      <TreeList data={fakeData} value={value} onChange={setValue} />
+    </Wrapper>
+  );
 };
 
 /**
