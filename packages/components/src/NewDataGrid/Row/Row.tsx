@@ -118,7 +118,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     rowProps,
     tooltipProps,
     nestedChildrenProps,
-    blockOperation,
+    isBlockingRow,
   } = useLogic(props);
 
   const {
@@ -150,7 +150,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     isDisabled,
   } = options || {};
 
-  const disabled = blockOperation || isDisabled;
+  const disabled = isBlockingRow || isDisabled;
 
   const renderStartAdornment = () => {
     if (!nestedChildren?.length && !isSelectable) {

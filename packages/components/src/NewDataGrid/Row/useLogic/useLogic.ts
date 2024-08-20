@@ -41,7 +41,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     row[keyId as keyof TData] as string
   ] as Actions<TData>;
 
-  const blockOperation = currentActions?.main.some((action) => {
+  const isBlockingRow = currentActions?.main.some((action) => {
     if ('actions' in action) {
       return false;
     }
@@ -55,7 +55,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 
   const { isDisabled, disabledReason, loadingNote } = options || {};
 
-  const disabled = isDisabled || blockOperation;
+  const disabled = isDisabled || isBlockingRow;
 
   const rowId = row[keyId] as string;
 
@@ -117,7 +117,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     isOpen,
     childrenColumns,
     rowId,
-    blockOperation,
+    isBlockingRow,
     handleToggle,
     rowProps: {
       $isHovered: Boolean(!disabled && onRowClick),
