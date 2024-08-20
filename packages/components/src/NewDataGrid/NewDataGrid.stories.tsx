@@ -1246,7 +1246,7 @@ export const TreeWithOverrideColumns = () => {
 };
 
 /**
- * Состояние загрузки регулируется полем `loading` экшенов переданных в `<DataGridActionCell/>`
+ * Состояние загрузки регулируется полем `loading` экшенов переданных в `<ActionCell/>`
  */
 export const WithLoaderInButton = () => {
   const ACTIONS_WITH_LOADER: Actions<DataType> = {
