@@ -13,9 +13,14 @@ export type FormAutocompleteProps<
   TDisableClearable extends boolean,
   TFreeSolo extends boolean,
 > = WithFormFieldProps<
-  AutocompleteProps<TOption, TMultiple, TDisableClearable, TFreeSolo>,
+  Omit<
+    AutocompleteProps<TOption, TMultiple, TDisableClearable, TFreeSolo>,
+    'onChange'
+  >,
   TFieldValues
->;
+> & {
+  onChange?: (value: TFieldValues) => void;
+};
 
 /**
  * Адаптер для Select
