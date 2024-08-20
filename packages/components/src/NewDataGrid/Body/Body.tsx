@@ -149,7 +149,7 @@ export const Body = <TData extends Record<string, CellValue>>(
   }, [rows, keyId, selectedRows, rowProps]);
 
   return (
-    <DataGridContextProvider>
+    <DataGridContextProvider keyId={keyId as string}>
       <Wrapper $isEmpty={isNoData} $minDisplayRows={minDisplayRows}>
         <ContentState
           {...contentStateProps}

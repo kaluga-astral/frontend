@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { DataGridContext } from '../../DataGridContext';
-import type { CellValue } from '../../types';
+import type { Actions, CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
 
@@ -32,11 +32,30 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
-  const { checkIsOpened, toggleOpenItems } = useContext(DataGridContext);
+  const { checkIsOpened, toggleOpenItems, actions } =
+    useContext(DataGridContext);
 
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
-  const { isDisabled, disabledReason } = options || {};
+  const currentActions = actions[
+    row[keyId as keyof TData] as string
+  ] as Actions<TData>;
+
+  const blockOperation = currentActions?.main.some((action) => {
+    if ('actions' in action) {
+      return false;
+    }
+
+    if (action.loading) {
+      return action.isBlockingOperation && action.loading;
+    }
+
+    return false;
+  });
+
+  const { isDisabled, disabledReason, loadingNote } = options || {};
+
+  const disabled = isDisabled || blockOperation;
 
   const rowId = row[keyId] as string;
 
@@ -74,7 +93,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   const handleCloseTooltip = () => setVisibleTooltip(false);
 
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
-    if (!isDisabled) {
+    if (!disabled) {
       return;
     }
 
@@ -87,7 +106,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   };
 
   const handleRowClick = () => {
-    if (isDisabled) {
+    if (disabled) {
       return undefined;
     }
 
@@ -98,22 +117,23 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     isOpen,
     childrenColumns,
     rowId,
+    blockOperation,
     handleToggle,
     rowProps: {
-      $isHovered: Boolean(!isDisabled && onRowClick),
+      $isHovered: Boolean(!disabled && onRowClick),
       $isSelected: activeRowId === rowId,
       onClick: handleRowClick,
       onMouseMove: handleMouseMove,
     },
     tooltipProps: {
       open: isVisibleTooltip,
-      title: isDisabled && disabledReason,
+      title: (isDisabled && disabledReason) || loadingNote,
       onOpen: handleOpenTooltip,
       onClose: handleCloseTooltip,
     },
     checkboxProps: {
       checked: isChecked,
-      disabled: isDisabled,
+      disabled: disabled,
       onChange: onSelectRow(row),
     },
     nestedChildrenProps: {

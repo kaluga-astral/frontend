@@ -19,6 +19,7 @@ import {
   makeDataListWithTree,
   makeRandomDate,
 } from './faker';
+import { FakeActionCell } from './FakeActionCell';
 
 /**
  * NewDataGrid — отображает информацию в удобном для просмотра виде. Может включать:
@@ -61,6 +62,7 @@ const FAKE_ACTIONS: Actions<DataType> = {
       icon: <EyeFillMd />,
       name: 'Просмотреть',
       onClick: () => console.log('main'),
+      isBlockingOperation: true,
     },
     {
       icon: <SendOutlineMd />,
@@ -628,6 +630,82 @@ export const DisabledLastCell = () => {
   );
 };
 
+export const ActionsDataGrid = () => {
+  const fakeColumns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <FakeActionCell row={row} />;
+      },
+    },
+  ];
+
+  const columns = makeColumns(fakeColumns);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        loadingNote: 'Происходит удаление элемента',
+        disabledReason: 'Заблокировано',
+        isDisabled: true,
+      },
+    },
+    ...makeDataList(FAKE_DATA_TEMPLATE).map((item) => ({
+      ...item,
+      options: {
+        loadingNote: 'Происходит удаление элемента',
+      },
+    })),
+  ];
+
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <NewDataGrid<DataType>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      isLoading={loading}
+      onRetry={() => {}}
+    />
+  );
+};
+
 export const EmptyCellValue = () => {
   type DataTypeEmptyCell = {
     id: string;
@@ -1168,7 +1246,7 @@ export const TreeWithOverrideColumns = () => {
 };
 
 /**
- * Состояние загрузки регулируется полем `loading` экшенов переданных в `<ActionCell/>`
+ * Состояние загрузки регулируется полем `loading` экшенов переданных в `<DataGridActionCell/>`
  */
 export const WithLoaderInButton = () => {
   const ACTIONS_WITH_LOADER: Actions<DataType> = {

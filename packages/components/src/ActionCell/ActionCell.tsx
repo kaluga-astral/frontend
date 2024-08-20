@@ -15,10 +15,6 @@ export type Actions<T> = {
    * Второстепенные действия
    */
   secondary?: SecondaryActionKind<T>[];
-  /**
-   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
-   */
-  isBlockingOperation?: boolean;
 };
 
 export type ActionsCellProps<T> = {
@@ -46,7 +42,7 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
-    isDisabledAction,
+    isBlockingOperation,
   } = useLogic(props);
 
   const { actions } = props;
@@ -61,13 +57,13 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
-            isDisabled={isDisabledAction}
+            isDisabled={isBlockingOperation}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
-          isDisabled={isDisabledAction}
+          isDisabled={isBlockingOperation}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}

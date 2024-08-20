@@ -1,33 +1,24 @@
 import type { MouseEventHandler, ReactNode } from 'react';
 
-import type { TooltipProps } from '../Tooltip';
 import type { MenuItemProps } from '../MenuItem';
 import type { IconButtonProps } from '../IconButton';
 
-export type SecondaryActionKind<T> = MenuItemProps &
-  SingleAction<T> & {
-    /**
-     * Причина дизейбла
-     */
-    disabledReason?: TooltipProps['title'];
-  };
-
-export type NestedAction<T> = MenuItemProps & {
+export type NestedAction<TAction> = MenuItemProps & {
   /**
    * Обработчик действия
    */
-  onClick?: (row: T) => void;
+  onClick?: (row: TAction) => void;
   /**
    * Название действия
    */
   name: string;
 };
 
-export type SingleAction<T> = {
+export type SingleAction<TAction> = {
   /**
-   * Причина дизейбла
+   * Причина блокировки действия
    */
-  disabledReason?: TooltipProps['title'];
+  disabledReason?: string;
   /**
    * Иконка действия
    */
@@ -35,7 +26,7 @@ export type SingleAction<T> = {
   /**
    * Обработчик действия
    */
-  onClick?: (row: T) => void;
+  onClick?: (row: TAction) => void;
   /**
    * Название действия
    */
@@ -50,7 +41,7 @@ export type SingleAction<T> = {
   isBlockingOperation?: boolean;
 };
 
-export type MultipleAction<T> = MenuItemProps & {
+export type MultipleAction<TAction> = MenuItemProps & {
   /**
    * Иконка действия
    */
@@ -58,7 +49,7 @@ export type MultipleAction<T> = MenuItemProps & {
   /**
    * Список действий для выпадающего списка
    */
-  actions: Array<NestedAction<T>>;
+  actions: Array<NestedAction<TAction>>;
   /**
    * Флаг показа выпадающего списка при клике
    */
@@ -69,12 +60,20 @@ export type MultipleAction<T> = MenuItemProps & {
   name: string;
 };
 
-export type ActionCellHandler<T> = (
-  onClick: SingleAction<T>['onClick'] | NestedAction<T>['onClick'],
+export type ActionCellHandler<TAction> = (
+  onClick: SingleAction<TAction>['onClick'] | NestedAction<TAction>['onClick'],
 ) =>
   | MouseEventHandler<HTMLButtonElement | HTMLAnchorElement | HTMLLIElement>
   | undefined;
 
-export type MainActionKind<T> =
-  | (IconButtonProps & SingleAction<T>)
-  | MultipleAction<T>;
+export type MainActionKind<TAction> =
+  | (IconButtonProps & SingleAction<TAction>)
+  | MultipleAction<TAction>;
+
+export type SecondaryActionKind<TAction> = MenuItemProps &
+  SingleAction<TAction> & {
+    /**
+     * Причина блокировки действия
+     */
+    disabledReason?: string;
+  };

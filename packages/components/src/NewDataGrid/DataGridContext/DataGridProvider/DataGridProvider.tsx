@@ -4,6 +4,7 @@ import { DataGridContext } from '../DataGridContext';
 
 type DataGridContextProviderProps = {
   children: ReactNode;
+  keyId: string;
 };
 
 type KeyType = string;
@@ -20,9 +21,17 @@ const ROW_FLAGS_BY_DEFAULT: RowFlags = {
 
 export const DataGridContextProvider = ({
   children,
+  keyId,
 }: DataGridContextProviderProps) => {
   const [openedItems, setOpenedItems] = useState<Record<KeyType, RowFlags>>({});
+  const [actions, setActions] = useState<Record<KeyType, object>>({});
 
+  const updateAction = (key: KeyType, action: object) => {
+    setActions((prevState) => ({
+      ...prevState,
+      [key]: action,
+    }));
+  };
   const checkIsOpened = (key: KeyType) => {
     if (openedItems[key]) {
       return true;
@@ -75,6 +84,9 @@ export const DataGridContextProvider = ({
         checkIsMoreOpened,
         toggleOpenItems,
         toggleOpenMoreItems,
+        keyId,
+        updateAction,
+        actions,
       }}
     >
       {children}

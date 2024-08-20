@@ -1,22 +1,22 @@
 import { type MouseEventHandler, useCallback } from 'react';
 
-import { type ActionsCellProps } from '../ActionCell';
-import type { NestedAction, SingleAction } from '../types';
+import { type NewActionCellProps } from '../NewActionCell';
+import { type NestedAction, type SingleAction } from '../../ActionCell/types';
 
-type UseLogicParams<TRowData> = ActionsCellProps<TRowData>;
+type UseLogicParams<TRowData> = NewActionCellProps<TRowData>;
 
 export const useLogic = <TRowData>({
-  actions,
   row,
+  actions,
 }: UseLogicParams<TRowData>) => {
-  const { main, secondary } = actions;
+  const { main } = actions;
 
   const isBlockingOperation = main.some((action) => {
     if ('actions' in action) {
       return false;
     }
 
-    return action?.isBlockingOperation && action?.loading;
+    return action.isBlockingOperation && action.loading;
   });
 
   const handleActionClick = useCallback(
@@ -35,12 +35,5 @@ export const useLogic = <TRowData>({
     event.stopPropagation();
   };
 
-  const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
-
-  return {
-    isSecondaryActionsAvailable,
-    handleActionClick,
-    handleWrapperClick,
-    isBlockingOperation,
-  };
+  return { isBlockingOperation, handleActionClick, handleWrapperClick };
 };

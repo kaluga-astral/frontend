@@ -1,5 +1,10 @@
 import { type CSSProperties, type ReactNode } from 'react';
 
+import {
+  type MainActionKind,
+  type SecondaryActionKind,
+} from '../ActionCell/types';
+
 import type { SortStates } from './enums';
 
 export type AlignVariant = 'left' | 'center' | 'right';
@@ -7,6 +12,17 @@ export type AlignVariant = 'left' | 'center' | 'right';
 export type SortState = `${SortStates}`;
 
 export type RenderCell<Data> = (params: Data) => ReactNode;
+
+export type Actions<TActions> = {
+  /**
+   * Основные действия
+   */
+  main: MainActionKind<TActions>[];
+  /**
+   * Второстепенные действия
+   */
+  secondary?: SecondaryActionKind<TActions>[];
+};
 
 export type CellValue = unknown;
 
@@ -106,6 +122,10 @@ export type DataGridRowOptions<TData extends Record<string, CellValue>> = {
    * Настройка отображения колонок дочерних элементов
    */
   childrenColumns?: DataGridRowOptionColumns<TData>[];
+  /**
+   * Причина блокировки строки во время загрузки
+   */
+  loadingNote?: string;
 };
 
 export type DataGridRow = Record<string, CellValue>;

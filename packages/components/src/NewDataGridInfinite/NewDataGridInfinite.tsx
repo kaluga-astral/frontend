@@ -102,7 +102,7 @@ export const NewDataGridInfinite = <
   const TableContainer = isDisabled ? DisabledDataGridWrapper : DataGridWrapper;
 
   return (
-    <DataGridContextProvider>
+    <DataGridContextProvider keyId={keyId as string}>
       <Container $maxHeight={maxHeight} className={className}>
         <TableContainer {...{ inert: isDataGridDisabled ? '' : undefined }}>
           <Head<TData, TSortField>

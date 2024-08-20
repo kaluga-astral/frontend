@@ -116,12 +116,12 @@ describe('ActionCell', () => {
 
   it('Кнопки заблокированы, при isBlockingOperation=true и loading=true', async () => {
     const fakeAction: Actions<DataTypeActions> = {
-      isBlockingOperation: true,
       main: [
         {
           icon: <svg />,
           name: 'Удалить',
           loading: true,
+          isBlockingOperation: true,
         },
       ],
       secondary: [
