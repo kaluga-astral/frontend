@@ -19,7 +19,7 @@ export type FormAutocompleteProps<
   >,
   TFieldValues
 > & {
-  onChange?: (value: TFieldValues) => void;
+  onChange?: (value: TOption) => void;
 };
 
 /**
