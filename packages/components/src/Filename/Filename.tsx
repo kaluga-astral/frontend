@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { type TypographyVariant } from '@mui/material';
 
 import { type TooltipProps as BasicTooltipProps, Tooltip } from '../Tooltip';
-import { Typography, type TypographyProps } from '../Typography';
+import { type TypographyProps } from '../Typography';
 
 import { FileBaseName, StyledTypography } from './styles';
 import { useLogic } from './useLogic';
@@ -50,7 +50,7 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
       >
         <StyledTypography $align={align} variant={variant} {...restProps}>
           <FileBaseName {...baseNameProps} />
-          <Typography component="span">{suffixWithExtension}</Typography>
+          <span>{suffixWithExtension}</span>
         </StyledTypography>
       </Tooltip>
     );
