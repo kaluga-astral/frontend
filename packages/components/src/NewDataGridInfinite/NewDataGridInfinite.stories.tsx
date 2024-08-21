@@ -8,9 +8,11 @@ import { ConfigProvider } from '../ConfigProvider';
 import { ActionCell, type Actions } from '../ActionCell';
 import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
+import { FakeActionCell } from '../NewDataGrid/FakeActionCell';
+import { makeColumns } from '../NewDataGrid/faker';
 
-import { NewDataGridInfinite } from './NewDataGridInfinite';
 import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
+import { NewDataGridInfinite } from './NewDataGridInfinite';
 
 /**
  * Таблица с бесконечным скроллом построенная на css grid
@@ -128,6 +130,105 @@ export const Example = () => {
       setLoading(false);
     }, 1500);
   };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
+export const ActionsDataGrid = () => {
+  const fakeColumns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <FakeActionCell row={row} />;
+      },
+    },
+  ];
+
+  const columns = makeColumns(fakeColumns);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        loadingNote: 'Происходит удаление элемента',
+        disabledReason: 'Заблокировано',
+        isDisabled: true,
+      },
+    },
+    ...makeDataList(9).map((item) => ({
+      ...item,
+      options: {
+        loadingNote: 'Происходит удаление элемента',
+      },
+    })),
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   return (
     <ConfigProvider

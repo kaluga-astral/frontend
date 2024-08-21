@@ -9,6 +9,11 @@ type DataGridContextProviderProps = {
 
 type KeyType = string;
 
+type DisabledRows = {
+  key: string;
+  loadingNote?: string;
+};
+
 type RowFlags = {
   isOpenedItems: true;
   iOpenedMoreItems: boolean;
@@ -24,13 +29,19 @@ export const DataGridContextProvider = ({
   keyId,
 }: DataGridContextProviderProps) => {
   const [openedItems, setOpenedItems] = useState<Record<KeyType, RowFlags>>({});
-  const [actions, setActions] = useState<Record<KeyType, object>>({});
 
-  const updateAction = (key: KeyType, action: object) => {
-    setActions((prevState) => ({
-      ...prevState,
-      [key]: action,
-    }));
+  const [disabledRowsData, setDisabledRowsData] = useState<DisabledRows[]>([]);
+
+  const addDisabledRow = (key: string, loadingNote?: string) => {
+    setDisabledRowsData((prevState) => {
+      return [...prevState, { key, loadingNote }];
+    });
+  };
+
+  const removeDisabledRow = (key: string) => {
+    setDisabledRowsData((prevState) => {
+      return prevState.filter((row) => row.key !== key);
+    });
   };
   const checkIsOpened = (key: KeyType) => {
     if (openedItems[key]) {
@@ -85,8 +96,9 @@ export const DataGridContextProvider = ({
         toggleOpenItems,
         toggleOpenMoreItems,
         keyId,
-        updateAction,
-        actions,
+        addDisabledRow,
+        removeDisabledRow,
+        disabledRowsData,
       }}
     >
       {children}

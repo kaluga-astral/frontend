@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { DataGridContext } from '../../DataGridContext';
-import type { Actions, CellValue } from '../../types';
+import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
 
@@ -32,32 +32,28 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
-  const { checkIsOpened, toggleOpenItems, actions } =
+  const { checkIsOpened, toggleOpenItems, disabledRowsData } =
     useContext(DataGridContext);
 
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
-  const currentActions = actions[
-    row[keyId as keyof TData] as string
-  ] as Actions<TData>;
+  const rowId = row[keyId] as string;
 
-  const isBlockingRow = currentActions?.main.some((action) => {
-    if ('actions' in action) {
-      return false;
-    }
+  const loadingNote = disabledRowsData.find(
+    (disabledRowData) => disabledRowData.key === rowId,
+  )?.loadingNote;
 
-    if (action.loading) {
-      return action.isBlockingOperation && action.loading;
-    }
+  if (rowId === '1') {
+    console.log(loadingNote);
+  }
 
-    return false;
-  });
+  const isBlockingRow = disabledRowsData.some(
+    (disabledRow) => disabledRow.key === rowId,
+  );
 
-  const { isDisabled, disabledReason, loadingNote } = options || {};
+  const { isDisabled, disabledReason } = options || {};
 
   const disabled = isDisabled || isBlockingRow;
-
-  const rowId = row[keyId] as string;
 
   useEffect(() => {
     if (isDefaultExpanded) {
@@ -89,7 +85,6 @@ export const useLogic = <TData extends Record<string, CellValue>>({
       setVisibleTooltip(true);
     }
   };
-
   const handleCloseTooltip = () => setVisibleTooltip(false);
 
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
@@ -127,7 +122,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     },
     tooltipProps: {
       open: isVisibleTooltip,
-      title: (isDisabled && disabledReason) || loadingNote,
+      title: isDisabled && disabledReason,
       onOpen: handleOpenTooltip,
       onClose: handleCloseTooltip,
     },

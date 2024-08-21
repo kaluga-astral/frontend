@@ -45,7 +45,7 @@ export type SingleAction<T> = {
    */
   nested?: false;
   /**
-   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
+   * Если true, блокирует взаимодействие с actions
    */
   isBlockingOperation?: boolean;
 };

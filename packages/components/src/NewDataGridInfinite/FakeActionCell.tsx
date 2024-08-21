@@ -37,7 +37,6 @@ export const FakeActionCell = <Action,>({
           name: 'Удалить',
           onClick: handleDelete,
           loading: isDeleting,
-          loadingNote: 'Происходит удаление',
           isBlockingOperation: true,
         },
         {
@@ -45,8 +44,6 @@ export const FakeActionCell = <Action,>({
           name: 'Сохранить',
           loading: isSaving,
           onClick: handleSave,
-          loadingNote: 'Происходит сохранение',
-          isBlockingOperation: true,
         },
       ],
       secondary: [

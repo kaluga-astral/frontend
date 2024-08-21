@@ -36,9 +36,13 @@ export type SingleAction<TAction> = {
    */
   nested?: false;
   /**
-   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
+   * Если true, блокирует взаимодействие с actions
    */
   isBlockingOperation?: boolean;
+  /**
+   * Причина блокировки строки во время загрузки
+   */
+  loadingNote?: string;
 };
 
 export type MultipleAction<TAction> = MenuItemProps & {
@@ -58,6 +62,10 @@ export type MultipleAction<TAction> = MenuItemProps & {
    * Название действия
    */
   name: string;
+  /**
+   * Причина блокировки строки во время загрузки
+   */
+  loadingNote?: string;
 };
 
 export type ActionCellHandler<TAction> = (

@@ -669,17 +669,11 @@ export const ActionsDataGrid = () => {
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
       options: {
-        loadingNote: 'Происходит удаление элемента',
         disabledReason: 'Заблокировано',
         isDisabled: true,
       },
     },
-    ...makeDataList(FAKE_DATA_TEMPLATE).map((item) => ({
-      ...item,
-      options: {
-        loadingNote: 'Происходит удаление элемента',
-      },
-    })),
+    ...makeDataList(FAKE_DATA_TEMPLATE),
   ];
 
   const [loading, setLoading] = useState(true);

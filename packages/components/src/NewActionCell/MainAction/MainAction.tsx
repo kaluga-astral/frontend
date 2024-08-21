@@ -68,6 +68,7 @@ export const MainAction = <TAction,>({
     disabled,
     loading,
     isBlockingOperation,
+    loadingNote,
     ...actions
   } = action;
 

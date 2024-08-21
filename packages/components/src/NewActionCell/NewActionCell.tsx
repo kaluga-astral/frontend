@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-
 import { SecondaryActions } from '../ActionCell/SecondaryAction';
 import { type TooltipProps } from '../Tooltip';
-import { DataGridContext } from '../NewDataGrid/DataGridContext';
 
 import type { MainActionKind, SecondaryActionKind } from './types';
 import { useLogic } from './useLogic';
@@ -37,27 +34,12 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
 };
 
 export const NewActionCell = <TRow,>(props: NewActionCellProps<TRow>) => {
-  const { isBlockingOperation, handleWrapperClick, handleActionClick } =
+  const { isDisabledAction, handleWrapperClick, handleActionClick } =
     useLogic(props);
 
-  const { actions, row } = props;
+  const { actions } = props;
 
   const { main, secondary } = actions;
-
-  const {
-    keyId,
-    updateAction,
-    actions: dataGridActions,
-  } = useContext(DataGridContext);
-
-  const currentKey = row[keyId as keyof TRow] as string;
-
-  if (
-    (dataGridActions && !dataGridActions[currentKey]) ||
-    dataGridActions[currentKey] !== actions
-  ) {
-    updateAction(currentKey, actions);
-  }
 
   return (
     <Wrapper onClick={handleWrapperClick}>
@@ -67,7 +49,7 @@ export const NewActionCell = <TRow,>(props: NewActionCellProps<TRow>) => {
             key={action.name}
             action={action}
             onActionClick={handleActionClick}
-            isDisabled={isBlockingOperation}
+            isDisabled={isDisabledAction}
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
           />
         );
@@ -77,7 +59,7 @@ export const NewActionCell = <TRow,>(props: NewActionCellProps<TRow>) => {
           actions={secondary}
           onActionClick={handleActionClick}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
-          isDisabled={isBlockingOperation}
+          isDisabled={isDisabledAction}
         />
       )}
     </Wrapper>

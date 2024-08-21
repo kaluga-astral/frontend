@@ -42,7 +42,7 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
-    isBlockingOperation,
+    isDisabledAction,
   } = useLogic(props);
 
   const { actions } = props;
@@ -57,13 +57,13 @@ export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
             tooltipPlacement={TOOLTIP_PLACEMENT.mainAction}
             onActionClick={handleActionClick}
             action={action}
-            isDisabled={isBlockingOperation}
+            isDisabled={isDisabledAction}
           />
         );
       })}
       {isSecondaryActionsAvailable && (
         <SecondaryActions
-          isDisabled={isBlockingOperation}
+          isDisabled={isDisabledAction}
           actions={secondary}
           tooltipPlacement={TOOLTIP_PLACEMENT.secondaryAction}
           onActionClick={handleActionClick}

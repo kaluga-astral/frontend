@@ -1,13 +1,19 @@
 import { createContext } from 'react';
 
+type DisabledRows = {
+  key: string;
+  loadingNote?: string;
+};
+
 export type DataGridContextProps = {
   checkIsOpened: (key: string) => boolean;
   checkIsMoreOpened: (key: string) => boolean;
   toggleOpenItems: (key: string) => void;
   toggleOpenMoreItems: (key: string) => void;
   keyId: string;
-  actions: Record<string, object>;
-  updateAction: (key: string, actions: object) => void;
+  disabledRowsData: DisabledRows[];
+  addDisabledRow: (key: string, loadingNote?: string) => void;
+  removeDisabledRow: (key: string) => void;
 };
 
 export const DataGridContext = createContext<DataGridContextProps>({
@@ -15,7 +21,8 @@ export const DataGridContext = createContext<DataGridContextProps>({
   checkIsMoreOpened: () => false,
   toggleOpenItems: () => {},
   toggleOpenMoreItems: () => {},
-  updateAction: () => {},
+  addDisabledRow: () => {},
+  removeDisabledRow: () => {},
+  disabledRowsData: [],
   keyId: '',
-  actions: { main: [] },
 });

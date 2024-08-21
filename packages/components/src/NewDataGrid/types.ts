@@ -122,10 +122,6 @@ export type DataGridRowOptions<TData extends Record<string, CellValue>> = {
    * Настройка отображения колонок дочерних элементов
    */
   childrenColumns?: DataGridRowOptionColumns<TData>[];
-  /**
-   * Причина блокировки строки во время загрузки
-   */
-  loadingNote?: string;
 };
 
 export type DataGridRow = Record<string, CellValue>;

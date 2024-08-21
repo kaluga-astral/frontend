@@ -11,7 +11,7 @@ export const useLogic = <TRowData>({
 }: UseLogicParams<TRowData>) => {
   const { main, secondary } = actions;
 
-  const isBlockingOperation = main.some((action) => {
+  const isDisabledAction = main.some((action) => {
     if ('actions' in action) {
       return false;
     }
@@ -41,6 +41,6 @@ export const useLogic = <TRowData>({
     isSecondaryActionsAvailable,
     handleActionClick,
     handleWrapperClick,
-    isBlockingOperation,
+    isDisabledAction,
   };
 };
