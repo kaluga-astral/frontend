@@ -38,14 +38,9 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
   const rowId = row[keyId] as string;
-
-  const loadingNote = disabledRowsData.find(
-    (disabledRowData) => disabledRowData.key === rowId,
-  )?.loadingNote;
-
-  if (rowId === '1') {
-    console.log(loadingNote);
-  }
+  const loadingNote =
+    disabledRowsData.find((disabledRowData) => disabledRowData.key === rowId)
+      ?.loadingNote || 'Завершено';
 
   const isBlockingRow = disabledRowsData.some(
     (disabledRow) => disabledRow.key === rowId,
@@ -122,7 +117,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     },
     tooltipProps: {
       open: isVisibleTooltip,
-      title: isDisabled && disabledReason,
+      title: (isDisabled && disabledReason) || loadingNote,
       onOpen: handleOpenTooltip,
       onClose: handleCloseTooltip,
     },

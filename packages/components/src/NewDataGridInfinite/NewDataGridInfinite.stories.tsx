@@ -8,9 +8,9 @@ import { ConfigProvider } from '../ConfigProvider';
 import { ActionCell, type Actions } from '../ActionCell';
 import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
-import { FakeActionCell } from '../NewDataGrid/FakeActionCell';
 import { makeColumns } from '../NewDataGrid/faker';
 
+import { FakeActionCell } from './FakeActionCell';
 import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
 import { NewDataGridInfinite } from './NewDataGridInfinite';
 
@@ -194,17 +194,11 @@ export const ActionsDataGrid = () => {
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
       options: {
-        loadingNote: 'Происходит удаление элемента',
         disabledReason: 'Заблокировано',
         isDisabled: true,
       },
     },
-    ...makeDataList(9).map((item) => ({
-      ...item,
-      options: {
-        loadingNote: 'Происходит удаление элемента',
-      },
-    })),
+    ...makeDataList(9),
   ];
 
   const [isLoading, setLoading] = useState(true);

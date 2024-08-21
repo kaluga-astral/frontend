@@ -38,12 +38,14 @@ export const FakeActionCell = <Action,>({
           onClick: handleDelete,
           loading: isDeleting,
           isBlockingOperation: true,
+          loadingNote: 'Происходит удаление элемента',
         },
         {
           icon: <SaveOutlineMd />,
           name: 'Сохранить',
           loading: isSaving,
           onClick: handleSave,
+          loadingNote: 'Происходит сохранение элемента',
         },
       ],
       secondary: [
