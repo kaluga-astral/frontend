@@ -21,3 +21,5 @@ export * from './useInputPopover';
 export { useSecondsCountdown } from './useSecondsCountDown';
 
 export { useInterval } from 'react-use';
+
+export { useViewportType } from './useViewportType';
