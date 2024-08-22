@@ -25,7 +25,7 @@ import { NotificationTemplateNext } from './NotificationTemplateNext';
  * ### [Guide]()
  */
 const meta: Meta<typeof NotificationTemplateNext> = {
-  title: 'Components/NotificationNext',
+  title: 'Components/Data Display/NotificationNext',
   component: NotificationTemplateNext,
 };
 

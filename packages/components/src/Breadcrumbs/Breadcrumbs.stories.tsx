@@ -19,7 +19,7 @@ import { Breadcrumbs } from './';
  */
 
 const meta: Meta<typeof Breadcrumbs> = {
-  title: 'Components/Breadcrumbs',
+  title: 'Components/Data Display/Breadcrumbs',
   component: Breadcrumbs,
 };
 

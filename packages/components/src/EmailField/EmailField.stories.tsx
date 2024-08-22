@@ -9,7 +9,7 @@ import { EmailField } from './EmailField';
  * ### [Guide]()
  */
 const meta: Meta<typeof EmailField> = {
-  title: 'Components/EmailField',
+  title: 'Components/Inputs/EmailField',
   component: EmailField,
 };
 

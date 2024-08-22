@@ -21,7 +21,7 @@ import { makeDataList } from './faker';
  * ### [Guide]()
  */
 const meta: Meta<typeof DataGridInfinite> = {
-  title: 'Components/DataGridInfinite',
+  title: 'Components/Deprecated/DataGridInfinite',
   component: DataGridInfinite,
 };
 

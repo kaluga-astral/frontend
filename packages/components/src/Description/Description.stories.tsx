@@ -11,7 +11,7 @@ import { Description } from './Description';
  * ### [Guide](https://track.astral.ru/soft/wiki/pages/viewpage.action?pageId=3821274520)
  */
 const meta: Meta<typeof Description> = {
-  title: 'Components/Description',
+  title: 'Components/Data Display/Description',
   component: Description,
 };
 

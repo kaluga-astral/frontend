@@ -17,7 +17,7 @@ import { WelcomeScreen } from './WelcomeScreen';
  * ### [Guide]()
  */
 const meta: Meta<typeof WelcomeScreen> = {
-  title: 'Components/WelcomeScreen',
+  title: 'Components/Utils/WelcomeScreen',
   component: WelcomeScreen,
   parameters: {
     layout: 'fullscreen',

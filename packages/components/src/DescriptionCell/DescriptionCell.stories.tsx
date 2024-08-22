@@ -18,7 +18,7 @@ import { DescriptionCell } from './DescriptionCell';
  */
 
 const meta: Meta<typeof DescriptionCell> = {
-  title: 'Components/DescriptionCell',
+  title: 'Components/Data Display/DescriptionCell',
   component: DescriptionCell,
 };
 

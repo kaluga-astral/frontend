@@ -11,7 +11,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItem } from './ListItem';
 
 const meta: Meta<typeof ListItem> = {
-  title: 'Components/List/ListItem',
+  title: 'Components/Data Display/List/ListItem',
   component: ListItem,
 };
 

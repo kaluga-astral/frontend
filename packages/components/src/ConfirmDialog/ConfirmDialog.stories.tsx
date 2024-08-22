@@ -13,7 +13,7 @@ import { ConfirmDialog } from './ConfirmDialog';
  * ### [Guide]()
  */
 const meta: Meta<typeof ConfirmDialog> = {
-  title: 'Components/ConfirmDialog',
+  title: 'Components/Feedback/ConfirmDialog',
   component: ConfirmDialog,
 };
 

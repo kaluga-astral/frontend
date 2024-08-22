@@ -19,7 +19,7 @@ import { Filename } from './Filename';
  * ### [Guide]()
  */
 const meta: Meta<typeof Filename> = {
-  title: 'Components/Filename',
+  title: 'Components/Data Display/Filename',
   component: Filename,
 };
 

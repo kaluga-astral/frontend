@@ -12,7 +12,7 @@ import { Skeleton } from './Skeleton';
  * Компонент предназначен для отрисовки запасного содержимого в момент загрузки данных
  */
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components/Skeleton',
+  title: 'Components/Feedback/Skeleton',
   component: Skeleton,
 };
 

@@ -12,7 +12,7 @@ import { DatePicker } from '../DatePicker';
 import { styled } from '../styles';
 
 const meta: Meta = {
-  title: 'Components/BackdropStack',
+  title: 'Components/Utils/BackdropStack',
 };
 
 export default meta;

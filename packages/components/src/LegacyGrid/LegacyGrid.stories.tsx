@@ -10,7 +10,7 @@ import { LegacyGrid } from './LegacyGrid';
  * **Используйте [Grid](/story/components-grid--docs)**
  */
 const meta: Meta<typeof LegacyGrid> = {
-  title: 'Components/LegacyGrid',
+  title: 'Components/Deprecated/LegacyGrid',
   component: LegacyGrid,
 };
 

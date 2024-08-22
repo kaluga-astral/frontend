@@ -12,7 +12,7 @@ import { Tab } from './Tab';
  * ### [Guide]()
  */
 const meta: Meta<typeof Tab> = {
-  title: 'Components/Tabs/Tab',
+  title: 'Components/Navigation/Tabs/Tab',
   component: Tab,
 };
 

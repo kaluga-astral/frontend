@@ -18,7 +18,7 @@ import { SwipeableDrawer } from './SwipeableDrawer';
  */
 
 const meta: Meta<typeof SwipeableDrawer> = {
-  title: 'Components/SwipeableDrawer',
+  title: 'Components/Deprecated/SwipeableDrawer',
   component: SwipeableDrawer,
 };
 

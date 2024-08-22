@@ -12,7 +12,7 @@ import { DescriptionList, type DescriptionListItem } from './DescriptionList';
  * ### [Guide]()
  */
 const meta: Meta<typeof DescriptionList> = {
-  title: 'Components/DescriptionList',
+  title: 'Components/Data Display/DescriptionList',
   component: DescriptionList,
 };
 

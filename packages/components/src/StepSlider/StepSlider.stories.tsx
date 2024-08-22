@@ -16,7 +16,7 @@ import { StepSlider } from './StepSlider';
  */
 
 const meta: Meta<typeof StepSlider> = {
-  title: 'Components/StepSlider',
+  title: 'Components/Navigation/StepSlider',
   component: StepSlider,
 };
 

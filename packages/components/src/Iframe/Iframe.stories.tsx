@@ -12,7 +12,7 @@ import { Iframe } from './Iframe';
  * Iframe позволяет отображать контент из указанного URL.
  */
 const meta: Meta<typeof Iframe> = {
-  title: 'Components/Iframe',
+  title: 'Components/Data Display/Iframe',
   component: Iframe,
 };
 

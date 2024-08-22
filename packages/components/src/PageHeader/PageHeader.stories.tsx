@@ -204,7 +204,7 @@ const columns: DataGridColumns<DataType>[] = [
  * ### [Guide]()
  */
 const meta: Meta<typeof PageHeader> = {
-  title: 'Components/PageLayout/PageHeader',
+  title: 'Components/Layout/PageLayout/PageHeader',
   component: PageHeader,
 };
 

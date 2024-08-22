@@ -26,7 +26,7 @@ import { SideDialog } from './SideDialog';
  * ### [Guide]()
  * */
 const meta: Meta<typeof SideDialog> = {
-  title: 'Components/SideDialog',
+  title: 'Components/Feedback/SideDialog',
   component: SideDialog,
 };
 

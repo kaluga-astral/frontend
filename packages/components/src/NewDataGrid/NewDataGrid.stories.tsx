@@ -32,7 +32,7 @@ import {
  * ### [Guide]()
  */
 const meta: Meta<typeof NewDataGrid> = {
-  title: 'Components/NewDataGrid',
+  title: 'Components/Data Display/NewDataGrid',
   component: NewDataGrid,
 };
 

@@ -15,7 +15,7 @@ import { Alert } from './Alert';
  * ### [Guide]()
  */
 const meta: Meta<typeof Alert> = {
-  title: 'Components/Alert',
+  title: 'Components/Feedback/Alert',
   component: Alert,
 };
 

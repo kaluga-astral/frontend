@@ -13,7 +13,7 @@ import { type Organization } from './types';
  * ### [Guide]()
  */
 const meta: Meta<typeof MenuOrganization> = {
-  title: 'Components/MenuOrganization',
+  title: 'Components/Navigation/MenuOrganization',
   component: MenuOrganization,
 };
 

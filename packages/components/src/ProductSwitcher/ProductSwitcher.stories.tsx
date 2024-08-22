@@ -10,7 +10,7 @@ import { handleGetProducts, handleReject } from './ProductSwitcher.stub';
  * ### [Guide]()
  */
 const meta: Meta<typeof ProductSwitcher> = {
-  title: 'Components/ProductSwitcher',
+  title: 'Components/Utils/ProductSwitcher',
   component: ProductSwitcher,
 };
 

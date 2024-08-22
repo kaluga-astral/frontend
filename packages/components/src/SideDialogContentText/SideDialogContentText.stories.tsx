@@ -17,7 +17,7 @@ type Story = StoryObj<typeof SideDialogContentText>;
  * ### [Guide]()
  */
 const meta: Meta<typeof SideDialogContentText> = {
-  title: 'Components/SideDialog/SideDialogContentText',
+  title: 'Components/Feedback/SideDialog/SideDialogContentText',
   component: SideDialogContentText,
 };
 

@@ -11,7 +11,7 @@ import { Link } from './Link';
  * ### [Guide]()
  */
 const meta: Meta<typeof Link> = {
-  title: 'Components/Link',
+  title: 'Components/Navigation/Link',
   component: Link,
 };
 

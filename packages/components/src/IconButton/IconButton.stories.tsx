@@ -22,7 +22,7 @@ import { IconButton } from './IconButton';
  * ### [Guide]()
  */
 const meta: Meta<typeof IconButton> = {
-  title: 'Components/IconButton',
+  title: 'Components/Buttons/IconButton',
   component: IconButton,
 };
 

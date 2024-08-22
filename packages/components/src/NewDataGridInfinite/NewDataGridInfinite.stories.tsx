@@ -20,7 +20,7 @@ import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
  * ### [Guide]()
  */
 const meta: Meta<typeof NewDataGridInfinite> = {
-  title: 'Components/NewDataGridInfinite',
+  title: 'Components/Data Display/NewDataGridInfinite',
   component: NewDataGridInfinite,
 };
 

@@ -8,7 +8,7 @@ import { BuggyButton, ChunkLoadErrorButton } from './ErrorBoundary.stubs';
 import { ErrorBoundary } from './ErrorBoundary';
 
 const meta: Meta<typeof ErrorBoundary> = {
-  title: 'Components/ErrorBoundary',
+  title: 'Components/Utils/ErrorBoundary',
   component: ErrorBoundary,
 };
 

@@ -15,7 +15,7 @@ import { Placeholder } from './Placeholder';
  * ### [Guide]()
  */
 const meta: Meta<typeof Placeholder> = {
-  title: 'Components/Placeholder',
+  title: 'Components/Data Display/Placeholder',
   component: Placeholder,
 };
 

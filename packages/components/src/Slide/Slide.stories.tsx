@@ -12,7 +12,7 @@ import { Slide } from './Slide';
  * ### [Guide]()
  */
 const meta: Meta<typeof Slide> = {
-  title: 'Components/Slide',
+  title: 'Components/Buttons/Slide',
   component: Slide,
 };
 

@@ -17,7 +17,7 @@ import { TagColors } from './enums';
  * ### [Guide]()
  */
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag',
+  title: 'Components/Data Display/Tag',
   component: Tag,
 };
 

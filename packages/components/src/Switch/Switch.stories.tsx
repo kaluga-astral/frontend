@@ -19,7 +19,7 @@ import { Switch } from './Switch';
  * ### [Guide]()
  */
 const meta: Meta<typeof Switch> = {
-  title: 'Components/Switch',
+  title: 'Components/Buttons/Switch',
   component: Switch,
 };
 

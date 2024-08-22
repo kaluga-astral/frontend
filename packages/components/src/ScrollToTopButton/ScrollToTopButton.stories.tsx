@@ -12,7 +12,7 @@ import { ScrollToTopButton } from './ScrollToTopButton';
  * ### [Guide]()
  */
 const meta: Meta<typeof ScrollToTopButton> = {
-  title: 'Components/ScrollToTopButton',
+  title: 'Components/Utils/ScrollToTopButton',
   component: ScrollToTopButton,
 };
 

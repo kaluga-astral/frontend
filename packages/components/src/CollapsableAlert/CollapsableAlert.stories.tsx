@@ -15,7 +15,7 @@ import { CollapsableAlert } from './CollapsableAlert';
  * ### [Guide]()
  */
 const meta: Meta<typeof CollapsableAlert> = {
-  title: 'Components/CollapsableAlert',
+  title: 'Components/Feedback/CollapsableAlert',
   component: CollapsableAlert,
 };
 

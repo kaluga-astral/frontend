@@ -34,7 +34,7 @@ import { Paper } from './Paper';
  */
 
 const meta: Meta<typeof Paper> = {
-  title: 'Components/Paper',
+  title: 'Components/Layout/Paper',
   component: Paper,
 };
 

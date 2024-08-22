@@ -3,7 +3,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 import { GlobalStyles } from './GlobalStyles';
 
 const meta: Meta<typeof GlobalStyles> = {
-  title: 'Components/GlobalStyles',
+  title: 'Components/Utils/GlobalStyles',
   component: GlobalStyles,
 };
 

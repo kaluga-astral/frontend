@@ -39,7 +39,7 @@ const renderRows = (count: number) => {
  * ### [Guide]()
  */
 const meta: Meta<typeof BottomDrawer> = {
-  title: 'Components/BottomDrawer',
+  title: 'Components/Navigation/BottomDrawer',
   component: BottomDrawer,
 };
 

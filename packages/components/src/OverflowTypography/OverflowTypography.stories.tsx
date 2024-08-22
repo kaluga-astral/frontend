@@ -11,7 +11,7 @@ import { OverflowTypography } from './OverflowTypography';
  */
 
 const meta: Meta<typeof OverflowTypography> = {
-  title: 'Components/OverflowTypography',
+  title: 'Components/Data Display/OverflowTypography',
   component: OverflowTypography,
 };
 

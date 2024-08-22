@@ -17,7 +17,7 @@ import { ActionCell, type Actions } from './ActionCell';
  */
 
 const meta: Meta<typeof ActionCell> = {
-  title: 'Components/ActionCell',
+  title: 'Components/Data Display/ActionCell',
   component: ActionCell,
 };
 

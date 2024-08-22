@@ -24,7 +24,7 @@ import { ContentState } from './ContentState';
  * ### [Guide]()
  */
 const meta: Meta<typeof ContentState> = {
-  title: 'Components/ContentState',
+  title: 'Components/Data Display/ContentState',
   component: ContentState,
 };
 
