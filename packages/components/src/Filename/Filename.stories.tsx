@@ -42,6 +42,7 @@ export const Interaction: Story = {
 
 const Wrapper = styled.div`
   max-width: 400px;
+  min-width: 200px;
   margin: 0 auto 10px;
 `;
 
@@ -194,6 +195,25 @@ export const ShortFileName = () => {
     <Wrapper>
       <Filename>Приложение №10.pdf</Filename>
     </Wrapper>
+  );
+};
+
+/**
+ * prop ```align``` позволяет позиционировать текст
+ */
+export const Align = () => {
+  return (
+    <div>
+      <Wrapper>
+        <Filename>Приложение №10.pdf</Filename>
+      </Wrapper>
+      <Wrapper>
+        <Filename align="center">Приложение №10.pdf</Filename>
+      </Wrapper>
+      <Wrapper>
+        <Filename align="right">Приложение №10.pdf</Filename>
+      </Wrapper>
+    </div>
   );
 };
 

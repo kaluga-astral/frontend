@@ -10,7 +10,9 @@ export const FileBaseName = styled.span`
   white-space: nowrap;
 `;
 
-export const StyledTypography = styled(Typography)`
+export const StyledTypography = styled(Typography, {
+  shouldForwardProp: (prop) => !['$align'].includes(prop),
+})<{ $align: string }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ $align }) => $align};
 `;
