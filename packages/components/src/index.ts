@@ -200,6 +200,12 @@ export * from './PageLayoutContainer';
 
 export * from './Paper';
 
+export {
+  ComplianceStatus,
+  ComplianceStatusProps,
+  ComplianceStatusItem,
+} from './ComplianceStatus';
+
 export * from './PersonalData';
 
 export * from './Placeholder';
