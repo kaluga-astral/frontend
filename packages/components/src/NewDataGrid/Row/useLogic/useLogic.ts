@@ -107,7 +107,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     isOpen,
     childrenColumns,
     rowId,
-    isBlockingRow,
+    disabled,
     handleToggle,
     rowProps: {
       $isHovered: Boolean(!disabled && onRowClick),
