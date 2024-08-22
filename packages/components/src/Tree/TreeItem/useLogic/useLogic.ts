@@ -1,4 +1,4 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 
 import { type TreeItemProps } from '../TreeItem';
 
@@ -13,6 +13,10 @@ export const useLogic = ({
   onClick,
 }: UseLogicProps) => {
   const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
+
+  useEffect(() => {
+    setOpen(isDefaultExpanded);
+  }, [isDefaultExpanded]);
 
   const handleClick = () => {
     if (isDisabled) {

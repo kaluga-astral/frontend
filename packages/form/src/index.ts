@@ -54,6 +54,12 @@ export * from './FormCodeField';
 
 export * from './Form';
 
+export {
+  FormTreeAutocomplete,
+  type FormTreeAutocompleteProps,
+  type FormTreeAutocompleteValue,
+} from './FormTreeAutocomplete';
+
 export * from './types';
 
 // нельзя экспортить через * потому, что есть пересечение с export * from 'react-hook-form';
