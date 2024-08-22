@@ -15,7 +15,7 @@ import { IconButton } from '../IconButton';
 import { List } from './List';
 
 const meta: Meta<typeof List> = {
-  title: 'Components/Data Display/List',
+  title: 'Components/List',
   component: List,
 };
 

@@ -13,7 +13,7 @@ import { RadioCard } from './RadioCard';
  */
 
 const meta: Meta<typeof RadioCard> = {
-  title: 'Components/Inputs/RadioCard',
+  title: 'Components/RadioCard',
   component: RadioCard,
 };
 

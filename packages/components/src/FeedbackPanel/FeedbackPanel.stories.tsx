@@ -21,7 +21,7 @@ import { FeedbackPanel } from './FeedbackPanel';
  * ### [Guide]()
  */
 const meta: Meta<typeof FeedbackPanel> = {
-  title: 'Components/Feedback/FeedbackPanel',
+  title: 'Components/FeedbackPanel',
   component: FeedbackPanel,
 };
 

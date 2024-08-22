@@ -16,7 +16,7 @@ import { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
  * Работает как обычный список в контексте выбора элементов, это означает что выбор родителя не влияет на дочерние элементы, а выбор дочерних на родителя.
  */
 const meta: Meta<typeof TreeLikeList> = {
-  title: 'Components/Data Display/Tree/TreeLikeList',
+  title: 'Components/Tree/TreeLikeList',
   component: TreeLikeList,
 };
 

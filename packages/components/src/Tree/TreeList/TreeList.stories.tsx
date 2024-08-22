@@ -15,7 +15,7 @@ import { TreeList, type TreeListProps } from './TreeList';
  * свернуть (скрыть) и развернуть (показать) вложенные элементы
  */
 const meta: Meta<typeof TreeList> = {
-  title: 'Components/Data Display/Tree/TreeList',
+  title: 'Components/Tree/TreeList',
   component: TreeList,
 };
 

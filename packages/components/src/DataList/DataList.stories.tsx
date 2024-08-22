@@ -15,7 +15,7 @@ import { DataList } from './DataList';
  * ### [Guide]()
  */
 const meta: Meta<typeof DataList> = {
-  title: 'Components/Data Display/DataList',
+  title: 'Components/DataList',
   component: DataList,
 };
 

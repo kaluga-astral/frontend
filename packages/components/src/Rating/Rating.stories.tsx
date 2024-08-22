@@ -10,7 +10,7 @@ import { Rating } from './Rating';
  * ### [Guide]()
  */
 const meta: Meta<typeof Rating> = {
-  title: 'Components/Feedback/Rating',
+  title: 'Components/Rating',
   component: Rating,
 };
 

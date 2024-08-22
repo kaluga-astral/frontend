@@ -20,7 +20,7 @@ import { MenuList } from './MenuList';
  */
 
 const meta: Meta<typeof MenuList> = {
-  title: 'Components/Navigation/MenuList',
+  title: 'Components/MenuList',
   component: MenuList,
 };
 

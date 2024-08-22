@@ -11,7 +11,7 @@ import { ProgressBar } from './ProgressBar';
  */
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Components/Feedback/ProgressBar',
+  title: 'Components/ProgressBar',
   component: ProgressBar,
 };
 

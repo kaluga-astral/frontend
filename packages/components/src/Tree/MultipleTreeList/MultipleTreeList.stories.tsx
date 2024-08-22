@@ -18,7 +18,7 @@ import {
  * свернуть (скрыть) и развернуть (показать) вложенные элементы
  */
 const meta: Meta<typeof MultipleTreeList> = {
-  title: 'Components/Data Display/Tree/MultipleTreeList',
+  title: 'Components/Tree/MultipleTreeList',
   component: MultipleTreeList,
 };
 

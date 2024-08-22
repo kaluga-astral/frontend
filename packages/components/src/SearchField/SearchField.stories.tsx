@@ -8,7 +8,7 @@ import { SearchField } from './SearchField';
  * ### [Guide]()
  */
 const meta: Meta<typeof SearchField> = {
-  title: 'Components/Inputs/SearchField',
+  title: 'Components/SearchField',
   component: SearchField,
 };
 

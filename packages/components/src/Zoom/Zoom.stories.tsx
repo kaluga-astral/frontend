@@ -8,7 +8,7 @@ import { FormControlLabel } from '../FormControlLabel';
 import { Zoom } from './Zoom';
 
 const meta: Meta<typeof Zoom> = {
-  title: 'Components/Transitions/Zoom',
+  title: 'Components/Utils/Transitions/Zoom',
   component: Zoom,
 };
 
