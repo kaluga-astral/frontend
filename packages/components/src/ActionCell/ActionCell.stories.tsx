@@ -12,6 +12,8 @@ import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 import { ActionCell, type Actions } from './ActionCell';
 
 /**
+ * Компонент ActionCell не предназначен для использования в NewDataGrid. Используйте [NewActionCell](/docs/components-newactioncell--docs)
+ *
  * ### [Figma]()
  * ### [Guide]()
  */
