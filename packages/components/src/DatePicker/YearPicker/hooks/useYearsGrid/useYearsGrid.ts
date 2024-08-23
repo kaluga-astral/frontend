@@ -1,17 +1,17 @@
 import { useContext, useMemo } from 'react';
 
 import { YEARS_IN_GRID } from '../../constants';
-import { type GridBuilder, type GridItem } from '../../../types';
 import {
   DateCompareDeep,
   buildIsoDate,
+  checkIsDateBetweenSelectedAndRangeDates,
   isDateOutOfRange,
 } from '../../../../utils/date';
-import {
-  buildGridResult,
-  isDateBetweenSelectedAndRangeDates,
-} from '../../../utils';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
+import {
+  type CalendarGridBuilder,
+  type CalendarGridItem,
+} from '../../../../types';
 
 export type YearItem = {
   /**
@@ -24,7 +24,7 @@ export type YearItem = {
 // если делать без него, то опорный год будет отрендерен в самом начале списка
 const YEAR_OFFSET = 4;
 
-export const useYearsGrid: GridBuilder<YearItem> = ({
+export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
   baseDate,
   selectedDate,
   rangeDate,
@@ -32,7 +32,7 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
   return useMemo(() => {
-    const grid: GridItem<YearItem>[] = [];
+    const grid: CalendarGridItem<YearItem>[] = [];
 
     const baseYear = baseDate.getUTCFullYear();
     const currentYear = new Date().getFullYear();
@@ -47,7 +47,7 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
         year,
         selected: selectedYear === year,
         isCurrentInUserLocalTime: year === currentYear,
-        isInSelectedRange: isDateBetweenSelectedAndRangeDates({
+        isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
           date,
           selectedDate,
           rangeDate,
@@ -62,11 +62,6 @@ export const useYearsGrid: GridBuilder<YearItem> = ({
       });
     }
 
-    return buildGridResult({
-      grid,
-      dateA: minDate,
-      dateB: maxDate,
-      deep: DateCompareDeep.year,
-    });
+    return { grid };
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };

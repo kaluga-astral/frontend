@@ -11,7 +11,10 @@ type IsDateBetweenSelectedAndRangeDatesOptions = {
   deep: DateCompareDeep;
 };
 
-export const isDateBetweenSelectedAndRangeDates = ({
+/**
+ * утилита проверки даты на то, что она попадает в указанный диапазон
+ */
+export const checkIsDateBetweenSelectedAndRangeDates = ({
   selectedDate,
   rangeDate,
   date,

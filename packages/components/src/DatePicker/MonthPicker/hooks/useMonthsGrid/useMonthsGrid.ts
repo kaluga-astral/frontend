@@ -1,17 +1,17 @@
 import { useContext, useMemo } from 'react';
 
-import { MONTHS_IN_YEAR } from '../../../constants';
 import {
   DateCompareDeep,
+  MONTHS_IN_YEAR,
   buildIsoDate,
+  checkIsDateBetweenSelectedAndRangeDates,
   isDateOutOfRange,
 } from '../../../../utils/date';
-import { type GridBuilder, type GridItem } from '../../../types';
-import {
-  buildGridResult,
-  isDateBetweenSelectedAndRangeDates,
-} from '../../../utils';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
+import {
+  type CalendarGridBuilder,
+  type CalendarGridItem,
+} from '../../../../types';
 
 export type MonthItem = {
   /**
@@ -20,7 +20,7 @@ export type MonthItem = {
   month: number;
 };
 
-export const useMonthsGrid: GridBuilder<MonthItem> = ({
+export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
   baseDate,
   selectedDate,
   rangeDate,
@@ -28,7 +28,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
   return useMemo(() => {
-    const grid: GridItem<MonthItem>[] = [];
+    const grid: CalendarGridItem<MonthItem>[] = [];
     const startDate = buildIsoDate({ year: baseDate.getUTCFullYear() });
     const year = startDate.getUTCFullYear();
     const currentDate = new Date();
@@ -45,7 +45,7 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
         selected: selectedMonth === i && selectedYear === year,
         month: i + 1,
         isCurrentInUserLocalTime: i === currentMonth && year === currentYear,
-        isInSelectedRange: isDateBetweenSelectedAndRangeDates({
+        isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
           date,
           selectedDate,
           rangeDate,
@@ -60,11 +60,6 @@ export const useMonthsGrid: GridBuilder<MonthItem> = ({
       });
     }
 
-    return buildGridResult<MonthItem>({
-      grid,
-      dateA: minDate,
-      dateB: maxDate,
-      deep: DateCompareDeep.month,
-    });
+    return { grid };
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };

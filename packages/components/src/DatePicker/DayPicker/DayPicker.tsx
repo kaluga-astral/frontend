@@ -9,12 +9,16 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { DateCompareDeep, addMonths } from '../../utils/date';
+import {
+  DAYS_IN_WEEK,
+  DateCompareDeep,
+  addMonths,
+  checkIsDateBetweenSelectedAndRangeDates,
+} from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
 import { ConfigContext } from '../../ConfigProvider';
-import { DAYS_IN_WEEK } from '../constants';
-import { isDateBetweenSelectedAndRangeDates } from '../utils';
 import { PopoverHoveredContext } from '../PopoverHoveredContext';
+import { MinMaxDateContext } from '../MinMaxDateContext';
 
 import { Head } from './Head';
 import { Body } from './styles';
@@ -66,12 +70,14 @@ export const DayPicker = ({
 
   const { popoverHovered } = useContext(PopoverHoveredContext);
 
+  const { maxDate, minDate } = useContext(MinMaxDateContext);
   const { grid } = useDaysGrid({
     baseDate,
     selectedDate,
     isMondayFirst,
-    fullSize: true,
     rangeDate,
+    maxDate,
+    minDate,
   });
 
   const handleDayHover = (date: Date) => {
@@ -112,7 +118,7 @@ export const DayPicker = ({
               isInHoveredRange={
                 isRange &&
                 popoverHovered &&
-                isDateBetweenSelectedAndRangeDates({
+                checkIsDateBetweenSelectedAndRangeDates({
                   date,
                   selectedDate,
                   rangeDate: hoveredDayDate,

@@ -1,7 +1,7 @@
 /**
  * элемент для рендера в календаре
  */
-export type GridItem<T> = {
+export type CalendarGridItem<T> = {
   /**
    * дата календаря, будет использована в качестве опорной при выборе в календаре
    */
@@ -25,7 +25,7 @@ export type GridItem<T> = {
 } & T;
 
 export type GridBuilderResult<T> = {
-  grid: GridItem<T>[];
+  grid: CalendarGridItem<T>[];
 };
 
 type GridBuilderOptions<T = {}> = {
@@ -43,6 +43,6 @@ type GridBuilderOptions<T = {}> = {
   rangeDate?: Date | null;
 } & T;
 
-export type GridBuilder<Item = {}, Options = {}> = (
+export type CalendarGridBuilder<Item = {}, Options = {}> = (
   options: GridBuilderOptions<Options>,
 ) => GridBuilderResult<Item>;
