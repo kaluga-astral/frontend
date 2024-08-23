@@ -66,6 +66,14 @@ export type MultipleAction<TAction> = MenuItemProps & {
    * Причина блокировки строки во время загрузки
    */
   loadingNote?: string;
+  /**
+   * Если true, блокирует взаимодействие с actions
+   */
+  isBlockingOperation?: boolean;
+  /**
+   * Если true, происходит загрузка
+   */
+  loading?: boolean;
 };
 
 export type ActionCellHandler<TAction> = (
@@ -84,4 +92,8 @@ export type SecondaryActionKind<TAction> = MenuItemProps &
      * Причина блокировки действия
      */
     disabledReason?: string;
+    /**
+     * Если true, происходит загрузка
+     */
+    loading?: boolean;
   };
