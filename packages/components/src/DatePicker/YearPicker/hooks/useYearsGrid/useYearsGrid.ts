@@ -62,6 +62,6 @@ export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
       });
     }
 
-    return { grid };
+    return grid;
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };

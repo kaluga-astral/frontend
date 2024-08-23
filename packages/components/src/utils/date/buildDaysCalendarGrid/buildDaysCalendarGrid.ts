@@ -31,8 +31,8 @@ type BuildMonthGridOptions = {
   maxDate: Date;
 };
 
-const MAX_ROWS = 6;
-const MAX_DAYS_IN_GRID = MAX_ROWS * DAYS_IN_WEEK;
+const FULL_ROWS_COUNT = 6;
+const FULL_DAYS_COUNT = FULL_ROWS_COUNT * DAYS_IN_WEEK;
 
 export const buildDaysCalendarGrid: CalendarGridBuilder<
   CalendarGridItemDay,
@@ -45,8 +45,6 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
   baseDate,
   isMondayFirst = true,
 }) => {
-  const grid: CalendarGridItem<CalendarGridItemDay>[] = [];
-
   /**
    * нормализованный номер месяца от базовой даты
    */
@@ -76,10 +74,11 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
    */
   const currentDate = new Date();
 
-  // считчик начинается с отступа, чтобы соответствовать выбранному типу календаря (первый понедельник/воскресенье)
-  for (let i = firstWeekDayGap; i < MAX_DAYS_IN_GRID + firstWeekDayGap; i++) {
+  return Array.from({ length: FULL_DAYS_COUNT }).map<
+    CalendarGridItem<CalendarGridItemDay>
+  >((_, index) => {
     // текущая дата в счетчике
-    const date = addDays(startDate, i - startWeekDay);
+    const date = addDays(startDate, index - startWeekDay + firstWeekDayGap);
     /**
      * нормализованный номер месяца
      */
@@ -88,9 +87,9 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
      * флаг следующего месяца относительно базовой даты
      */
 
-    grid.push({
+    return {
       isOutOfAvailableRange: dateMonth !== month,
-      index: i - firstWeekDayGap,
+      index,
       selected:
         (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
         (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),
@@ -112,8 +111,6 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
         dateB: maxDate,
         deep: DateCompareDeep.day,
       }),
-    });
-  }
-
-  return { grid };
+    };
+  });
 };

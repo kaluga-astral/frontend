@@ -73,7 +73,7 @@ export const StaticDaysCalendar = ({
   const isAbleToHover = Boolean(onDayHover);
   const id = useId();
 
-  const { grid } = useMemo(
+  const grid = useMemo(
     () =>
       buildDaysCalendarGrid({
         baseDate,

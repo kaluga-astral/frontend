@@ -29,7 +29,7 @@ export const YearPicker = ({
     date: initialDate,
     addCb: (date, direction) => addYears(date, YEARS_IN_GRID * direction),
   });
-  const { grid } = useYearsGrid({
+  const grid = useYearsGrid({
     baseDate,
     selectedDate,
     rangeDate,

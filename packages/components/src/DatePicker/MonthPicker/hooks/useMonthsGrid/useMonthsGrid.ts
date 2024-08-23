@@ -60,6 +60,6 @@ export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
       });
     }
 
-    return { grid };
+    return grid;
   }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
 };

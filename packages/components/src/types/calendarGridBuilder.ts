@@ -24,9 +24,7 @@ export type CalendarGridItem<T> = {
   disabled: boolean;
 } & T;
 
-export type GridBuilderResult<T> = {
-  grid: CalendarGridItem<T>[];
-};
+export type GridBuilderResult<T> = CalendarGridItem<T>[];
 
 type GridBuilderOptions<T = {}> = {
   /**

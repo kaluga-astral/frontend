@@ -39,7 +39,7 @@ export const MonthPicker = ({
     addCb: addYears,
   });
 
-  const { grid } = useMonthsGrid({
+  const grid = useMonthsGrid({
     baseDate,
     selectedDate,
     rangeDate,
