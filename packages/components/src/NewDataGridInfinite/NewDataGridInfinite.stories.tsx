@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react';
-import { EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  BinOutlineMd,
+  EditOutlineMd,
+  EyeFillMd,
+  SendOutlineMd,
+} from '@astral/icons';
 import { type Meta } from '@storybook/react';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
 import noDataIllustration from '../../../ui/illustrations/no-data.svg';
 import { ConfigProvider } from '../ConfigProvider';
-import { ActionCell, type Actions } from '../ActionCell';
+import {
+  type ActionCellProps,
+  type Actions,
+  NewActionCell,
+} from '../NewActionCell';
 import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
 import { makeColumns } from '../NewDataGrid/faker';
 
-import { FakeActionCell } from './FakeActionCell';
 import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
 import { NewDataGridInfinite } from './NewDataGridInfinite';
 
 /**
  * Таблица с бесконечным скроллом построенная на css grid
  *
- * NewDataGridInfinite обладает тем же функционалом  что и [NewDataGrid](/docs/components-newdatagrid--docs)
+ * NewDataGridInfinite обладает тем же функционалом что и [NewDataGrid](/docs/components-newdatagrid--docs)
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
  * ### [Guide]()
  */
@@ -85,10 +93,77 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '120px',
     renderCell: (row) => {
-      return <ActionCell actions={FAKE_ACTIONS} row={row} />;
+      return <NewActionCell actions={FAKE_ACTIONS} row={row} />;
     },
   },
 ];
+
+type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
+
+const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isSigning, setIsSigning] = useState(false);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleDelete = () => {
+    setIsDeleting(true);
+  };
+
+  const handleSign = () => {
+    setIsSigning(true);
+  };
+
+  useEffect(() => {
+    if (isEditing) {
+      setTimeout(() => setIsEditing(false), 1500);
+    }
+
+    if (isDeleting) {
+      setTimeout(() => setIsDeleting(false), 1500);
+    }
+
+    if (isSigning) {
+      setTimeout(() => setIsSigning(false), 1500);
+    }
+  }, [isEditing, isDeleting, isSigning]);
+
+  const fakeActions = useMemo(
+    () => ({
+      main: [
+        {
+          icon: <EditOutlineMd />,
+          name: 'Редактировать',
+          loading: isEditing,
+          onClick: handleEdit,
+        },
+        {
+          icon: <BinOutlineMd />,
+          name: 'Удалить',
+          loading: isDeleting,
+          loadingNote: 'Происходит удаление',
+          isBlockingOperation: true,
+          onClick: handleDelete,
+        },
+      ],
+      secondary: [
+        {
+          name: 'Подписать',
+          loading: isSigning,
+          loadingNote: 'Происходит подписание',
+          isBlockingOperation: true,
+          onClick: handleSign,
+        },
+      ],
+    }),
+    [isEditing, isDeleting, isSigning],
+  );
+
+  return <NewActionCell actions={fakeActions} row={row} />;
+};
 
 const DataGridInfiniteWrapper = styled.div`
   width: 100%;
@@ -193,10 +268,6 @@ export const ActionsDataGrid = () => {
       documentName: 'Договор №12345678',
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
-      options: {
-        disabledReason: 'Заблокировано',
-        isDisabled: true,
-      },
     },
     ...makeDataList(9),
   ];
@@ -421,7 +492,7 @@ export const TreeWithOverrideColumns = () => {
             field: 'actions',
             renderCell: (row) => {
               return (
-                <ActionCell
+                <NewActionCell
                   actions={{
                     main: [
                       {
@@ -445,7 +516,7 @@ export const TreeWithOverrideColumns = () => {
           field: 'actions',
           renderCell: (row) => {
             return (
-              <ActionCell
+              <NewActionCell
                 actions={{
                   main: [
                     {

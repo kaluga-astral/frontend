@@ -11,6 +11,7 @@ import { DataGridContext } from '../../DataGridContext';
 import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
 import { type RowProps } from '../Row';
+import { RowContext } from '../RowContext';
 
 import { mergeColumnsOptions } from './utils';
 
@@ -32,23 +33,19 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 }: UseLogicParams<TData>) => {
   const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
 
-  const { checkIsOpened, toggleOpenItems, disabledRowsData } =
-    useContext(DataGridContext);
+  const { checkIsOpened, toggleOpenItems } = useContext(DataGridContext);
+  const { isDisabled, disabledReason } = useContext(RowContext);
 
   const [isVisibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
   const rowId = row[keyId] as string;
-  const loadingNote =
-    disabledRowsData.find((disabledRowData) => disabledRowData.key === rowId)
-      ?.loadingNote || 'Завершено';
 
-  const isBlockingRow = disabledRowsData.some(
-    (disabledRow) => disabledRow.key === rowId,
-  );
+  const {
+    isDisabled: isExternalDisabled,
+    disabledReason: externalDisabledReason,
+  } = options || {};
 
-  const { isDisabled, disabledReason } = options || {};
-
-  const disabled = isDisabled || isBlockingRow;
+  const disabled = isDisabled || isExternalDisabled;
 
   useEffect(() => {
     if (isDefaultExpanded) {
@@ -117,7 +114,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     },
     tooltipProps: {
       open: isVisibleTooltip,
-      title: (isDisabled && disabledReason) || loadingNote,
+      title: isDisabled ? externalDisabledReason || disabledReason : undefined,
       onOpen: handleOpenTooltip,
       onClose: handleCloseTooltip,
     },
