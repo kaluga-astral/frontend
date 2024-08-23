@@ -27,7 +27,7 @@ import type {
  *
  */
 const meta: Meta<typeof DataGrid> = {
-  title: 'Components/Data Display/DataGrid',
+  title: 'Components/DataGrid',
   component: DataGrid,
 };
 
