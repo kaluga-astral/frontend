@@ -37,6 +37,11 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
+/**
+ * @deprecated
+ * Используйте NewActionCell. Причина отказа от поддержки: ActionCell не работает с контекстом NewDataGrid, и не позволяет
+ * управлять состояниями строки при взаимодействии с действиями
+ */
 export const ActionCell = <T,>(props: ActionsCellProps<T>) => {
   const {
     isSecondaryActionsAvailable,

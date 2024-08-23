@@ -3,12 +3,12 @@ import { BinOutlineMd, EditOutlineMd, SaveOutlineMd } from '@astral/icons';
 import { useEffect, useState } from 'react';
 
 import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
-import { ActionCell, type Actions } from '../ActionCell';
 
-import { NewActionCell } from './NewActionCell';
+import { type Actions, NewActionCell } from './NewActionCell';
 
 /**
- * NewActionCell предназначен для использования в компоненте NewDataGrid и NewDataGridInfinite
+ * NewActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
+ * Работает с контекстом NewDataGrid и позволяет управлять состояниями строки при взаимодействии с действиями
  *
  * ### [Figma]()
  * ### [Guide]()
@@ -93,7 +93,7 @@ export const Example = () => {
       sortable: false,
       width: '120px',
       align: 'right',
-      renderCell: (row) => <ActionCell actions={FAKE_ACTIONS} row={row} />,
+      renderCell: (row) => <NewActionCell actions={FAKE_ACTIONS} row={row} />,
     },
   ];
 
@@ -151,7 +151,7 @@ export const LoaderActions = () => {
     id: '123456789',
   };
 
-  return <ActionCell actions={fakeActions} row={fakeData} />;
+  return <NewActionCell actions={fakeActions} row={fakeData} />;
 };
 
 export const BlockingOperations = () => {
@@ -202,5 +202,5 @@ export const BlockingOperations = () => {
     id: '123456789',
   };
 
-  return <ActionCell actions={fakeActions} row={fakeData} />;
+  return <NewActionCell actions={fakeActions} row={fakeData} />;
 };
