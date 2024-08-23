@@ -15,7 +15,7 @@ import { Popover } from './Popover';
  */
 
 const meta: Meta<typeof Popover> = {
-  title: 'Components/Layout/Popover',
+  title: 'Components/Popover',
   component: Popover,
 };
 

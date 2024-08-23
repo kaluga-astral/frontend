@@ -11,7 +11,7 @@ import { PersonalData } from './PersonalData';
  * ### [Guide]()
  */
 const meta: Meta<typeof PersonalData> = {
-  title: 'Components/Utils/PersonalData',
+  title: 'Components/PersonalData',
   component: PersonalData,
 };
 

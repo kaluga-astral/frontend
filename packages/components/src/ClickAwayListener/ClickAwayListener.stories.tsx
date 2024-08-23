@@ -10,7 +10,7 @@ import { ClickAwayListener } from './ClickAwayListener';
  * Абстрактный компонент, предназначенный для отлавливания кликов снаружи кастомных компонентов. Для более узких кейсов, где требуется управление рефом, используйте хук useClickAwayEffect
  */
 const meta: Meta<typeof ClickAwayListener> = {
-  title: 'Components/Utils/ClickAwayListener',
+  title: 'Components/ClickAwayListener',
 };
 
 export default meta;

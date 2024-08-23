@@ -26,7 +26,7 @@ type Story = StoryObj<typeof Dialog>;
  * ### [Guide]()
  */
 const meta: Meta<typeof Dialog> = {
-  title: 'Components/Feedback/Dialog',
+  title: 'Components/Dialog',
   component: Dialog,
 };
 

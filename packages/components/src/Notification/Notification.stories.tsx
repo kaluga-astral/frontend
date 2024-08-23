@@ -18,7 +18,7 @@ import { NotificationTemplate } from './NotificationTemplate';
  * ### [Guide]()
  */
 const meta: Meta<typeof NotificationTemplate> = {
-  title: 'Components/Data Display/Notification',
+  title: 'Components/Notification',
   component: NotificationTemplate,
 };
 

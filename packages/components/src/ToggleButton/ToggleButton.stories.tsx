@@ -14,7 +14,7 @@ import { ToggleButton } from './ToggleButton';
  * ### [Guide]()
  */
 const meta: Meta<typeof ToggleButton> = {
-  title: 'Components/Buttons/ToggleButton',
+  title: 'Components/ToggleButton',
   component: ToggleButton,
 };
 

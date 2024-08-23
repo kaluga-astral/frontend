@@ -6,7 +6,7 @@ import { Button } from '../Button';
 import { Chevron } from './Chevron';
 
 const meta: Meta<typeof Chevron> = {
-  title: 'Components/Feedback/Chevron',
+  title: 'Components/Chevron',
   component: Chevron,
 };
 

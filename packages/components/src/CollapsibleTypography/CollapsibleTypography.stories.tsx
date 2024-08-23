@@ -9,7 +9,7 @@ import { CollapsibleTypography } from './CollapsibleTypography';
  */
 
 const meta: Meta<typeof CollapsibleTypography> = {
-  title: 'Components/CollapsibleTypography',
+  title: 'Components/Data Display/CollapsibleTypography',
   component: CollapsibleTypography,
 };
 

@@ -15,7 +15,7 @@ import { ToggleButtonGroup } from './ToggleButtonGroup';
  */
 
 const meta: Meta<typeof ToggleButtonGroup> = {
-  title: 'Components/Buttons/ToggleButtonGroup',
+  title: 'Components/ToggleButtonGroup',
   component: ToggleButtonGroup,
 };
 

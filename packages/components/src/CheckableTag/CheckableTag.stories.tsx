@@ -11,7 +11,7 @@ import { CheckableTag } from './CheckableTag';
  * ### [Guide]()
  */
 const meta: Meta<typeof CheckableTag> = {
-  title: 'Components/Buttons/CheckableTag',
+  title: 'Components/CheckableTag',
   component: CheckableTag,
 };
 
