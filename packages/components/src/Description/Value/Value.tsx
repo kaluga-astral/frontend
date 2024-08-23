@@ -1,4 +1,9 @@
-import { type ReactNode, useContext, useState } from 'react';
+import {
+  type ReactNode,
+  type SyntheticEvent,
+  useContext,
+  useState,
+} from 'react';
 
 import { type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
@@ -55,7 +60,9 @@ export const Value = ({
     );
   }
 
-  const handleClick = () => {
+  const handleClick = (event: SyntheticEvent<HTMLElement>) => {
+    event.stopPropagation();
+
     navigator.clipboard
       .writeText(children?.toString() || '')
       .then(() => setStatus(CopyStatus.Copied))

@@ -12,6 +12,10 @@ import { type WithFormFieldProps } from '../types';
  */
 export type FormDateRangePickerValue = Date;
 
+/**
+ * @deprecated
+ * Используйте FormNewDateRangePicker. Причина отказа от поддержки: компонент использует два независимых поля, в следствии чего есть проблемы с отображением валидации
+ */
 export type FormDateRangePickerProps<FieldValues extends object> = Omit<
   DateRangePickerProps,
   'startDateProps' | 'endDateProps'

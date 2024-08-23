@@ -5,10 +5,12 @@ import { type TreeItemProps } from '../TreeItem';
 type UseLogicProps = TreeItemProps;
 
 export const useLogic = ({
+  id,
+  prefixId,
   isDefaultExpanded = false,
-  onClick,
   isDisabled,
   disableReason,
+  onClick,
 }: UseLogicProps) => {
   const [isOpen, setOpen] = useState<boolean>(isDefaultExpanded);
 
@@ -26,15 +28,18 @@ export const useLogic = ({
     setOpen((currentState) => !currentState);
   };
 
-  const tooltipProps = {
-    title: disableReason,
-    withoutContainer: !isDisabled,
-  };
+  const idAttr = prefixId ? `${prefixId}${id}` : id;
 
   return {
     isOpen,
     handleToggle,
     handleClick,
-    tooltipProps,
+    itemProps: {
+      id: idAttr,
+    },
+    tooltipProps: {
+      title: disableReason,
+      withoutContainer: !isDisabled,
+    },
   };
 };

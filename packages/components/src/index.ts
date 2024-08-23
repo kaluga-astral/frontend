@@ -70,7 +70,7 @@ export * from './DataGridPagination';
 
 export * from './DataList';
 
-export * from './DatePicker';
+export { DatePicker, type DatePickerProps } from './DatePicker';
 
 export * from './DateRangePicker';
 
@@ -182,6 +182,13 @@ export {
   NewDataGridInfinite,
   type NewDataGridInfiniteProps,
 } from './NewDataGridInfinite';
+
+export {
+  NewDateRangePicker,
+  type DateItemProps as NewDateItemProps,
+  type DateRangePickerValue as NewDateRangePickerValue,
+  type DateRangePickerProps as NewDateRangePickerProps,
+} from './NewDateRangePicker';
 
 export * from './Notification';
 

@@ -34,7 +34,13 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
       ref: forwardedRef,
     });
 
-    const { tooltipProps, variant = 'inherit', children, ...restProps } = props;
+    const {
+      tooltipProps,
+      variant = 'inherit',
+      children,
+      align = 'left',
+      ...restProps
+    } = props;
 
     return (
       <Tooltip
@@ -42,7 +48,7 @@ export const Filename = forwardRef<HTMLElement, FileNameProps>(
         disableInteractive
         {...tooltipProps}
       >
-        <StyledTypography variant={variant} {...restProps}>
+        <StyledTypography $align={align} variant={variant} {...restProps}>
           <FileBaseName {...baseNameProps} />
           <span>{suffixWithExtension}</span>
         </StyledTypography>
