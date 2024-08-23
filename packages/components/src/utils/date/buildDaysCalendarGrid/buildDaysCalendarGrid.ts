@@ -7,7 +7,7 @@ import { compareDateDayByUTC } from '../compareDateDayByUTC';
 import { DateCompareDeep, isDateOutOfRange } from '../isDateOutOfRange';
 import { checkIsDateBetweenSelectedAndRangeDates } from '../checkIsDateBetweenSelectedAndRangeDates';
 
-export type DayItem = {
+export type CalendarGridItemDay = {
   /**
    * Флаг обозначающий, что дата не попадает в предполагаемый диапазон к выбору,
    * но эту дату все равно можно выбрать, например календарь на декабрь 22го года, начинается с понедельника 28го ноября,
@@ -18,6 +18,7 @@ export type DayItem = {
    * день месяца, 1 - 31
    */
   monthDay: number;
+  index: number;
 };
 
 type BuildMonthGridOptions = {
@@ -34,7 +35,7 @@ const MAX_ROWS = 6;
 const MAX_DAYS_IN_GRID = MAX_ROWS * DAYS_IN_WEEK;
 
 export const buildDaysCalendarGrid: CalendarGridBuilder<
-  DayItem,
+  CalendarGridItemDay,
   BuildMonthGridOptions
 > = ({
   minDate,
@@ -44,7 +45,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
   baseDate,
   isMondayFirst = true,
 }) => {
-  const grid: CalendarGridItem<DayItem>[] = [];
+  const grid: CalendarGridItem<CalendarGridItemDay>[] = [];
 
   /**
    * нормализованный номер месяца от базовой даты
@@ -89,6 +90,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
 
     grid.push({
       isOutOfAvailableRange: dateMonth !== month,
+      index: i - firstWeekDayGap,
       selected:
         (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
         (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),

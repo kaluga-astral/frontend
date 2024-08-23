@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 
-import { ConfigContext } from '../../../ConfigProvider';
+import { ConfigContext } from '../../ConfigProvider';
 
 type UseLocaleDateTimeFormatOptions = Intl.DateTimeFormatOptions;
 

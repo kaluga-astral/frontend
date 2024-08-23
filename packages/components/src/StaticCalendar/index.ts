@@ -1,0 +1,1 @@
+export { StaticDaysCalendar } from './StaticDaysCalendar';

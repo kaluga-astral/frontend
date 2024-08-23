@@ -10,7 +10,7 @@ import {
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
 import { addYears } from '../../utils/date';
-import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
+import { useLocaleDateTimeFormat } from '../../hooks';
 import { ConfigContext } from '../../ConfigProvider';
 import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
@@ -61,7 +61,7 @@ export const MonthPicker = ({
           <DateCalendarGridButtonLarge
             key={`${month}_${index}`}
             onClick={() => onChange?.(date)}
-            title={titleFormat(date)}
+            tooltipTitle={titleFormat(date)}
             lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
             isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
             {...props}
