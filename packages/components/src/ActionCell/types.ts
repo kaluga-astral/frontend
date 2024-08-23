@@ -7,7 +7,7 @@ import type { IconButtonProps } from '../IconButton';
 export type SecondaryActionKind<T> = MenuItemProps &
   SingleAction<T> & {
     /**
-     * Причина дизейбла
+     * Причина блокировки
      */
     disabledReason?: TooltipProps['title'];
   };
@@ -17,6 +17,7 @@ export type NestedAction<T> = MenuItemProps & {
    * Обработчик действия
    */
   onClick?: (row: T) => void;
+
   /**
    * Название действия
    */
@@ -25,25 +26,30 @@ export type NestedAction<T> = MenuItemProps & {
 
 export type SingleAction<T> = {
   /**
-   * Причина дизейбла
+   * Причина блокировки
    */
   disabledReason?: TooltipProps['title'];
+
   /**
    * Иконка действия
    */
   icon?: ReactNode;
+
   /**
    * Обработчик действия
    */
   onClick?: (row: T) => void;
+
   /**
    * Название действия
    */
   name: string;
+
   /**
    * Флаг показа выпадающего списка при клике
    */
   nested?: false;
+
   /**
    * Если true, блокирует взаимодействие с actions
    */
@@ -55,14 +61,17 @@ export type MultipleAction<T> = MenuItemProps & {
    * Иконка действия
    */
   icon: ReactNode;
+
   /**
    * Список действий для выпадающего списка
    */
   actions: Array<NestedAction<T>>;
+
   /**
    * Флаг показа выпадающего списка при клике
    */
   nested: true;
+
   /**
    * Название действия
    */

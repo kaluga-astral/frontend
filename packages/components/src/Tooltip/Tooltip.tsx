@@ -12,6 +12,7 @@ export type TooltipProps = WithoutEmotionSpecific<MuiTooltipProps> & {
    * Размер тултипа
    */
   size?: TooltipSize;
+
   /**
    * При значении false оборачивает компонент в div. По-умолчанию true
    * Это позволяет показывать тултипы на задизейбленных компонентах
@@ -31,25 +32,21 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...restProps
     } = props;
 
-    if (title) {
-      return (
-        <StyledTooltip
-          ref={ref}
-          title={title}
-          size={size}
-          placement={placement}
-          arrow
-          {...restProps}
-        >
-          {withoutContainer ? (
-            children
-          ) : (
-            <ContentWrapper>{children}</ContentWrapper>
-          )}
-        </StyledTooltip>
-      );
-    }
-
-    return children;
+    return (
+      <StyledTooltip
+        ref={ref}
+        title={title}
+        size={size}
+        placement={placement}
+        arrow
+        {...restProps}
+      >
+        {withoutContainer ? (
+          children
+        ) : (
+          <ContentWrapper>{children}</ContentWrapper>
+        )}
+      </StyledTooltip>
+    );
   },
 );

@@ -9,12 +9,13 @@ import {
   Container,
   type DataGridRow,
   EXPANDED_LEVEL_BY_DEFAULT,
+  Head,
   INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
   type NewDataGridProps,
+  Row,
+  RowContextProvider,
 } from '../NewDataGrid';
 import { DataGridContextProvider } from '../NewDataGrid/DataGridContext';
-import { Head } from '../NewDataGrid/Head';
-import { Row } from '../NewDataGrid/Row';
 import { ScrollToTopButton } from '../ScrollToTopButton';
 
 import { OVERSCAN_COUNT } from './constants';
@@ -102,7 +103,7 @@ export const NewDataGridInfinite = <
   const TableContainer = isDisabled ? DisabledDataGridWrapper : DataGridWrapper;
 
   return (
-    <DataGridContextProvider keyId={keyId as string}>
+    <DataGridContextProvider>
       <Container $maxHeight={maxHeight} className={className}>
         <TableContainer {...{ inert: isDataGridDisabled ? '' : undefined }}>
           <Head<TData, TSortField>
@@ -136,23 +137,27 @@ export const NewDataGridInfinite = <
                   const { children: nestedChildren, options, ...row } = item;
 
                   return (
-                    <Row
-                      {...rowProps}
-                      {...itemProps}
-                      row={row as TData}
-                      columns={columns}
-                      selectedRows={selectedRows}
-                      options={options}
-                      keyId={keyId}
-                      activeRowId={activeRowId}
-                      level={INITIAL_LEVEL}
-                      nestedChildren={nestedChildren as Array<TData>}
-                      isInitialExpanded={isInitialExpanded}
-                      expandedLevel={expandedLevel}
-                      initialVisibleChildrenCount={initialVisibleChildrenCount}
-                      emptyCellValue={emptyCellValue}
-                      onRowClick={onRowClick}
-                    />
+                    <RowContextProvider>
+                      <Row
+                        {...rowProps}
+                        {...itemProps}
+                        row={row as TData}
+                        columns={columns}
+                        selectedRows={selectedRows}
+                        options={options}
+                        keyId={keyId}
+                        activeRowId={activeRowId}
+                        level={INITIAL_LEVEL}
+                        nestedChildren={nestedChildren as Array<TData>}
+                        isInitialExpanded={isInitialExpanded}
+                        expandedLevel={expandedLevel}
+                        initialVisibleChildrenCount={
+                          initialVisibleChildrenCount
+                        }
+                        emptyCellValue={emptyCellValue}
+                        onRowClick={onRowClick}
+                      />
+                    </RowContextProvider>
                   );
                 },
                 EmptyPlaceholder: () => <>{noDataPlaceholder || <NoData />}</>,

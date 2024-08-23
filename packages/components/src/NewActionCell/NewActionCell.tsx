@@ -11,19 +11,21 @@ export type Actions<TAction> = {
    * Основные действия
    */
   main: MainActionKind<TAction>[];
+
   /**
    * Вторичные действия
    */
   secondary?: SecondaryActionKind<TAction>[];
 };
 
-export type NewActionCellProps<TRow> = {
+export type ActionCellProps<TRow> = {
   /**
    * Действия
    */
   actions: Actions<TRow>;
+
   /**
-   * Данные строки NewDataGrid
+   * Данные строки
    */
   row: TRow;
 };
@@ -33,12 +35,11 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export const NewActionCell = <TRow,>(props: NewActionCellProps<TRow>) => {
+export const NewActionCell = <TRow,>(props: ActionCellProps<TRow>) => {
   const { isDisabledAction, handleWrapperClick, handleActionClick } =
     useLogic(props);
 
   const { actions } = props;
-
   const { main, secondary } = actions;
 
   return (

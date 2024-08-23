@@ -4,15 +4,9 @@ import { DataGridContext } from '../DataGridContext';
 
 type DataGridContextProviderProps = {
   children: ReactNode;
-  keyId: string;
 };
 
 type KeyType = string;
-
-type DisabledRows = {
-  key: string;
-  loadingNote?: string;
-};
 
 type RowFlags = {
   isOpenedItems: true;
@@ -26,23 +20,9 @@ const ROW_FLAGS_BY_DEFAULT: RowFlags = {
 
 export const DataGridContextProvider = ({
   children,
-  keyId,
 }: DataGridContextProviderProps) => {
   const [openedItems, setOpenedItems] = useState<Record<KeyType, RowFlags>>({});
 
-  const [disabledRowsData, setDisabledRowsData] = useState<DisabledRows[]>([]);
-
-  const addDisabledRow = (key: string, loadingNote?: string) => {
-    setDisabledRowsData((prevState) => {
-      return [...prevState, { key, loadingNote }];
-    });
-  };
-
-  const removeDisabledRow = (key: string) => {
-    setDisabledRowsData((prevState) => {
-      return prevState.filter((row) => row.key !== key);
-    });
-  };
   const checkIsOpened = (key: KeyType) => {
     if (openedItems[key]) {
       return true;
@@ -95,10 +75,6 @@ export const DataGridContextProvider = ({
         checkIsMoreOpened,
         toggleOpenItems,
         toggleOpenMoreItems,
-        keyId,
-        addDisabledRow,
-        removeDisabledRow,
-        disabledRowsData,
       }}
     >
       {children}

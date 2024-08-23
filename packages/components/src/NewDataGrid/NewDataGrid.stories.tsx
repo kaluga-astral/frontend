@@ -1,11 +1,20 @@
-import { BinOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { type ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { type Meta } from '@storybook/react';
-import { type ChangeEvent, useEffect, useState } from 'react';
+import {
+  BinOutlineMd,
+  EditOutlineMd,
+  EyeFillMd,
+  SendOutlineMd,
+} from '@astral/icons';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
-import { ActionCell, type Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
+import {
+  type ActionCellProps,
+  type Actions,
+  NewActionCell,
+} from '../NewActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type {
@@ -19,7 +28,6 @@ import {
   makeDataListWithTree,
   makeRandomDate,
 } from './faker';
-import { FakeActionCell } from './FakeActionCell';
 
 /**
  * NewDataGrid — отображает информацию в удобном для просмотра виде. Может включать:
@@ -104,10 +112,77 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '120px',
     renderCell: (row) => {
-      return <ActionCell actions={FAKE_ACTIONS} row={row} />;
+      return <NewActionCell actions={FAKE_ACTIONS} row={row} />;
     },
   },
 ];
+
+type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
+
+const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isSigning, setIsSigning] = useState(false);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleDelete = () => {
+    setIsDeleting(true);
+  };
+
+  const handleSign = () => {
+    setIsSigning(true);
+  };
+
+  useEffect(() => {
+    if (isEditing) {
+      setTimeout(() => setIsEditing(false), 1500);
+    }
+
+    if (isDeleting) {
+      setTimeout(() => setIsDeleting(false), 1500);
+    }
+
+    if (isSigning) {
+      setTimeout(() => setIsSigning(false), 1500);
+    }
+  }, [isEditing, isDeleting, isSigning]);
+
+  const fakeActions = useMemo(
+    () => ({
+      main: [
+        {
+          icon: <EditOutlineMd />,
+          name: 'Редактировать',
+          loading: isEditing,
+          onClick: handleEdit,
+        },
+        {
+          icon: <BinOutlineMd />,
+          name: 'Удалить',
+          loading: isDeleting,
+          loadingNote: 'Происходит удаление',
+          isBlockingOperation: true,
+          onClick: handleDelete,
+        },
+      ],
+      secondary: [
+        {
+          name: 'Подписать',
+          loading: isSigning,
+          loadingNote: 'Происходит подписание',
+          isBlockingOperation: true,
+          onClick: handleSign,
+        },
+      ],
+    }),
+    [isEditing, isDeleting, isSigning],
+  );
+
+  return <NewActionCell actions={fakeActions} row={row} />;
+};
 
 /**
  * DataGrid без пагинации
@@ -508,7 +583,7 @@ export const WithDisabledRow = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -577,7 +652,7 @@ export const DisabledLastCell = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -668,10 +743,6 @@ export const ActionsDataGrid = () => {
       documentName: 'Договор №12345678',
       recipient: 'ПАО "Первый завод"',
       createDate: makeRandomDate(),
-      options: {
-        disabledReason: 'Заблокировано',
-        isDisabled: true,
-      },
     },
     ...makeDataList(FAKE_DATA_TEMPLATE),
   ];
@@ -770,7 +841,7 @@ export const Tree = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -825,7 +896,7 @@ export const TreeWithInitialExpanded = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -882,7 +953,7 @@ export const TreeWithExpandedLevel = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -941,7 +1012,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -999,7 +1070,7 @@ export const TreeWithCheckbox = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1142,7 +1213,7 @@ export const TreeWithOverrideColumns = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1167,7 +1238,7 @@ export const TreeWithOverrideColumns = () => {
             field: 'actions',
             renderCell: (row) => {
               return (
-                <ActionCell
+                <NewActionCell
                   actions={{
                     main: [
                       {
@@ -1191,7 +1262,7 @@ export const TreeWithOverrideColumns = () => {
           field: 'actions',
           renderCell: (row) => {
             return (
-              <ActionCell
+              <NewActionCell
                 actions={{
                   main: [
                     {
@@ -1266,7 +1337,7 @@ export const WithLoaderInButton = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
+        return <NewActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
       },
     },
   ]);

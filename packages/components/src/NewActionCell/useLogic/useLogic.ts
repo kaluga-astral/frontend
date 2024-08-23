@@ -5,45 +5,33 @@ import {
   useEffect,
 } from 'react';
 
-import { type NewActionCellProps } from '../NewActionCell';
-import { type NestedAction, type SingleAction } from '../../ActionCell/types';
-import { DataGridContext } from '../../NewDataGrid/DataGridContext';
+import { RowContext } from '../../NewDataGrid';
+import { type ActionCellProps } from '../NewActionCell';
+import type { NestedAction, SingleAction } from '../types';
 
-type UseLogicParams<TRowData> = NewActionCellProps<TRowData>;
+type UseLogicParams<TRowData> = ActionCellProps<TRowData>;
 
 export const useLogic = <TRowData>({
   row,
   actions,
 }: UseLogicParams<TRowData>) => {
-  const { main } = actions;
+  const { main, secondary } = actions;
 
-  const { keyId, addDisabledRow, removeDisabledRow } =
-    useContext(DataGridContext);
+  const { addDisabledRow, removeDisabledRow } = useContext(RowContext);
 
-  const isDisabledAction = main.some((action) => {
-    if ('actions' in action) {
-      return false;
-    }
+  const blockingAction = [...main, ...(secondary || [])].find(
+    (action) => action.isBlockingOperation && action.loading,
+  );
 
-    return action.isBlockingOperation && action.loading;
-  });
-
-  const currentKey = row[keyId as keyof TRowData] as string;
+  const isDisabledAction = Boolean(blockingAction);
 
   useEffect(() => {
-    const blockingAction = main.find(
-      (action) =>
-        !('actions' in action) && action.isBlockingOperation && action.loading,
-    );
-
-    const loadingNote = blockingAction?.loadingNote;
-
-    if (isDisabledAction) {
-      addDisabledRow(currentKey, loadingNote);
-    } else {
-      removeDisabledRow(currentKey);
+    if (blockingAction) {
+      return addDisabledRow(blockingAction?.loadingNote);
     }
-  }, [isDisabledAction, currentKey, main]);
+
+    removeDisabledRow();
+  }, [blockingAction]);
 
   const handleActionClick = useCallback(
     (
