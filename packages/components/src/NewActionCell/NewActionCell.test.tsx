@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { ActionCell, type Actions } from './ActionCell';
+import { type Actions, NewActionCell } from './NewActionCell';
 
 type DataTypeActions = {
   id: string;
@@ -12,7 +12,7 @@ const FAKE_DATA: DataTypeActions = {
   id: '123456789',
 };
 
-describe('ActionCell', () => {
+describe('NewActionCell', () => {
   it('Основные действия отображаются', () => {
     const fakeAction: Actions<DataTypeActions> = {
       main: [
@@ -23,7 +23,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const button = screen.getByRole('button');
 
@@ -43,7 +43,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const button = screen.getByRole('button');
 
@@ -66,7 +66,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const button = screen.getByRole('button');
 
@@ -85,7 +85,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const button = screen.getByRole('button');
 
@@ -102,7 +102,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const button = screen.getByRole('button');
 
@@ -132,7 +132,7 @@ describe('ActionCell', () => {
       ],
     };
 
-    renderWithTheme(<ActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
 
     const buttons = screen.getAllByRole('button');
 
