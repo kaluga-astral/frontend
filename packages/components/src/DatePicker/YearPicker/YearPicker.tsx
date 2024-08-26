@@ -32,7 +32,10 @@ export const YearPicker = ({
   const grid = useYearsGrid({
     baseDate,
     selectedDate,
-    rangeDate,
+    selectedRanges:
+      selectedDate && rangeDate
+        ? [{ dateA: selectedDate, dateB: rangeDate }]
+        : null,
   });
 
   const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;

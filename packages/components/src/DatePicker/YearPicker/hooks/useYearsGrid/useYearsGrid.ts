@@ -4,7 +4,7 @@ import { YEARS_IN_GRID } from '../../constants';
 import {
   DateCompareDeep,
   buildIsoDate,
-  checkIsDateBetweenSelectedAndRangeDates,
+  checkIsDateInRange,
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
@@ -27,7 +27,7 @@ const YEAR_OFFSET = 4;
 export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
   baseDate,
   selectedDate,
-  rangeDate,
+  selectedRanges,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
@@ -47,12 +47,15 @@ export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
         year,
         isSelected: selectedYear === year,
         isCurrentInUserLocalTime: year === currentYear,
-        isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
-          date,
-          selectedDate,
-          rangeDate,
-          deep: DateCompareDeep.year,
-        }),
+        isInSelectedRange:
+          selectedRanges?.some(({ dateA, dateB }) =>
+            checkIsDateInRange({
+              date,
+              dateA,
+              dateB,
+              deep: DateCompareDeep.year,
+            }),
+          ) ?? false,
         isDisabled: isDateOutOfRange({
           date,
           dateA: minDate,
@@ -63,5 +66,5 @@ export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
     }
 
     return grid;
-  }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
+  }, [baseDate, selectedDate, maxDate, minDate, selectedRanges]);
 };

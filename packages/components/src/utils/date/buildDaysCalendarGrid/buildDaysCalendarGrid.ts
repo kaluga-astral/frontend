@@ -5,7 +5,7 @@ import { addDays } from '../addDays';
 import { isDate } from '../isDate';
 import { compareDateDayByUTC } from '../compareDateDayByUTC';
 import { DateCompareDeep, isDateOutOfRange } from '../isDateOutOfRange';
-import { checkIsDateBetweenSelectedAndRangeDates } from '../checkIsDateBetweenSelectedAndRangeDates';
+import { checkIsDateInRange } from '../checkIsDateInRange';
 
 export type CalendarGridItemDay = {
   /**
@@ -28,15 +28,24 @@ export type CalendarGridItemDay = {
   index: number;
 };
 
-type BuildMonthGridOptions = {
+type BuildDaysCalendarGridOptions = {
   /**
    * Флаг обозначающий, что надо отрендерить массив, где понедельник в календаре идет вначале
    * @default true
    */
   isMondayFirst?: boolean;
+  /**
+   * Дата, которая находится в состоянии hover
+   */
   hoveredDate?: Date | null;
-  minDate?: Date;
-  maxDate?: Date;
+  /**
+   * Минимальная дата. Для дат меньше или равной этой isDisabled будет равен true
+   */
+  minDate?: Date | null;
+  /**
+   * Максимальная. Для дат больше или равной этой isDisabled будет равен true
+   */
+  maxDate?: Date | null;
 };
 
 const FULL_ROWS_COUNT = 6;
@@ -44,12 +53,12 @@ const FULL_DAYS_COUNT = FULL_ROWS_COUNT * DAYS_IN_WEEK;
 
 export const buildDaysCalendarGrid: CalendarGridBuilder<
   CalendarGridItemDay,
-  BuildMonthGridOptions
+  BuildDaysCalendarGridOptions
 > = ({
   minDate,
   maxDate,
   selectedDate,
-  rangeDate,
+  selectedRanges,
   hoveredDate,
   baseDate,
   isMondayFirst = true,
@@ -97,23 +106,31 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
       isOutOfAvailableRange: dateMonth !== month,
       index,
       isSelected:
-        (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
-        (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),
+        ((isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
+          selectedRanges?.some(
+            ({ dateA, dateB }) =>
+              compareDateDayByUTC(dateA, date) ||
+              compareDateDayByUTC(dateB, date),
+          )) ??
+        false,
       isCurrentInUserLocalTime:
         date.getUTCFullYear() === currentDate.getFullYear() &&
         date.getUTCDate() === currentDate.getDate() &&
         date.getUTCMonth() === currentDate.getMonth(),
       date,
-      isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
+      isInSelectedRange:
+        selectedRanges?.some(({ dateA, dateB }) =>
+          checkIsDateInRange({
+            date,
+            dateA,
+            dateB,
+            deep: DateCompareDeep.day,
+          }),
+        ) ?? false,
+      isInHoveredRange: checkIsDateInRange({
         date,
-        selectedDate,
-        rangeDate,
-        deep: DateCompareDeep.day,
-      }),
-      isInHoveredRange: checkIsDateBetweenSelectedAndRangeDates({
-        date,
-        selectedDate,
-        rangeDate: hoveredDate,
+        dateA: selectedDate,
+        dateB: hoveredDate,
         deep: DateCompareDeep.day,
       }),
       monthDay: date.getUTCDate(),

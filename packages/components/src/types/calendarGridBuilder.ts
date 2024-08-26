@@ -26,6 +26,17 @@ export type CalendarGridItem<T> = {
 
 export type GridBuilderResult<T> = CalendarGridItem<T>[];
 
+type SelectedRange = {
+  /**
+   * Дата промежутка, может быть как началом, так и концом
+   */
+  dateA: Date;
+  /**
+   * Дата промежутка, может быть как началом, так и концом
+   */
+  dateB: Date;
+};
+
 type GridBuilderOptions<T = {}> = {
   /**
    * опорная дата, для построения массива календаря
@@ -36,9 +47,9 @@ type GridBuilderOptions<T = {}> = {
    */
   selectedDate?: Date | null;
   /**
-   * дата, относительно которой будет происходить сравнение на попадание в выбранный интервал
+   * Массив выбранных промежутков
    */
-  rangeDate?: Date | null;
+  selectedRanges?: SelectedRange[] | null;
 } & T;
 
 export type CalendarGridBuilder<Item = {}, Options = {}> = (

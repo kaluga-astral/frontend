@@ -4,6 +4,7 @@ import {
   type CalendarGridItemDay,
   DAYS_IN_WEEK,
   buildDaysCalendarGrid,
+  formatDate,
 } from '../../utils/date';
 import { StaticCalendarGridButton } from '../StaticCalendarGridButton';
 import { type CalendarGridItem } from '../../types';
@@ -14,30 +15,15 @@ import { Body } from './styles';
 type Item = CalendarGridItem<CalendarGridItemDay>;
 
 type StaticDaysCalendarProps = {
-  minDate: Date;
-  maxDate: Date;
-  /**
-   * выбранная дата, будет подсвечена в календаре
-   */
-  selectedDate?: Date | null;
-  /**
-   * дата, относительно которой будет происходить сравнение на попадание в выбранный интервал
-   */
-  rangeDate?: Date | null;
   onChange?: (date: Date) => void;
   /**
    * Колбек, вызываемый при событии hover на день календаря
    */
   onDayHover?: (date?: Date) => void;
-
   /**
    * День, который находится в состоянии hover
    */
   hoveredDate?: Date;
-  /**
-   * опорная дата, относительно которой потребуется построить календарь
-   */
-  baseDate: Date;
   /**
    * флаг рендера календаря дней начиная с понедельника
    * @default true
@@ -52,7 +38,16 @@ type StaticDaysCalendarProps = {
    * Контент, который необходимо отрендерить в контенте каждого элемента
    */
   DayContent: (item: Item) => ReactNode;
-};
+} & Pick<
+  Parameters<typeof buildDaysCalendarGrid>[0],
+  | 'baseDate'
+  | 'selectedDate'
+  | 'isMondayFirst'
+  | 'minDate'
+  | 'maxDate'
+  | 'hoveredDate'
+  | 'selectedRanges'
+>;
 
 export const StaticDaysCalendar = ({
   minDate,
@@ -61,12 +56,12 @@ export const StaticDaysCalendar = ({
   baseDate,
   onDayHover,
   hoveredDate,
-  rangeDate,
   onChange,
   isMondayFirst,
   className,
   DayTooltipTitle,
   DayContent,
+  selectedRanges,
 }: StaticDaysCalendarProps) => {
   const isAbleToHover = Boolean(onDayHover);
   const id = useId();
@@ -76,13 +71,13 @@ export const StaticDaysCalendar = ({
       buildDaysCalendarGrid({
         baseDate,
         selectedDate,
-        rangeDate,
         isMondayFirst,
         minDate,
         maxDate,
         hoveredDate,
+        selectedRanges,
       }),
-    [baseDate, selectedDate, maxDate, minDate, rangeDate, hoveredDate],
+    [baseDate, selectedDate, maxDate, minDate, hoveredDate, selectedRanges],
   );
 
   return (
@@ -94,6 +89,11 @@ export const StaticDaysCalendar = ({
             key={`${id}_${index}`}
             disabled={props.isDisabled}
             selected={props.isSelected}
+            component={!onChange ? 'time' : undefined}
+            //@ts-ignore пропс обозначающий значение даты, необходим для тега time
+            datetime={
+              !onChange ? formatDate(props.date, 'YYYY-MM-DD', '-') : undefined
+            }
             isOutOfAvailableRange={props.isOutOfAvailableRange}
             isCurrentInUserLocalTime={props.isCurrentInUserLocalTime}
             isInSelectedRange={props.isInSelectedRange}

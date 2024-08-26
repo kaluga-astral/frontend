@@ -6,20 +6,20 @@ import {
 
 type IsDateBetweenSelectedAndRangeDatesOptions = {
   date: Date;
-  selectedDate?: Date | null;
-  rangeDate?: Date | null;
+  dateA?: Date | null;
+  dateB?: Date | null;
   deep: DateCompareDeep;
 };
 
 /**
  * утилита проверки даты на то, что она попадает в указанный диапазон
  */
-export const checkIsDateBetweenSelectedAndRangeDates = ({
-  selectedDate,
-  rangeDate,
+export const checkIsDateInRange = ({
+  dateA,
+  dateB,
   date,
   deep,
 }: IsDateBetweenSelectedAndRangeDatesOptions): boolean =>
-  isDate(selectedDate) &&
-  isDate(rangeDate) &&
-  !isDateOutOfRange({ date, dateA: selectedDate, dateB: rangeDate, deep });
+  isDate(dateA) &&
+  isDate(dateB) &&
+  !isDateOutOfRange({ date, dateA, dateB, deep });

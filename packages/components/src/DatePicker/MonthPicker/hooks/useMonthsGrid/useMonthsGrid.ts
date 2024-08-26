@@ -4,7 +4,7 @@ import {
   DateCompareDeep,
   MONTHS_IN_YEAR,
   buildIsoDate,
-  checkIsDateBetweenSelectedAndRangeDates,
+  checkIsDateInRange,
   isDateOutOfRange,
 } from '../../../../utils/date';
 import { MinMaxDateContext } from '../../../MinMaxDateContext';
@@ -23,7 +23,7 @@ export type MonthItem = {
 export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
   baseDate,
   selectedDate,
-  rangeDate,
+  selectedRanges,
 }) => {
   const { maxDate, minDate } = useContext(MinMaxDateContext);
 
@@ -45,12 +45,15 @@ export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
         isSelected: selectedMonth === i && selectedYear === year,
         month: i + 1,
         isCurrentInUserLocalTime: i === currentMonth && year === currentYear,
-        isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
-          date,
-          selectedDate,
-          rangeDate,
-          deep: DateCompareDeep.month,
-        }),
+        isInSelectedRange:
+          selectedRanges?.some(({ dateA, dateB }) =>
+            checkIsDateInRange({
+              date,
+              dateA,
+              dateB,
+              deep: DateCompareDeep.month,
+            }),
+          ) ?? false,
         isDisabled: isDateOutOfRange({
           date,
           dateA: minDate,
@@ -61,5 +64,5 @@ export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
     }
 
     return grid;
-  }, [baseDate, selectedDate, maxDate, minDate, rangeDate]);
+  }, [baseDate, selectedDate, maxDate, minDate, selectedRanges]);
 };

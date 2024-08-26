@@ -14,6 +14,8 @@ export type DatePickerPopoverProps = PropsWithChildren<
 
 export const DatePickerPopover = ({
   children,
+  onMouseEnter,
+  onMouseLeave,
   ...props
 }: DatePickerPopoverProps) => (
   <StyledPopover
@@ -30,6 +32,8 @@ export const DatePickerPopover = ({
       horizontal: 'left',
     }}
   >
-    <InnerContainer>{children}</InnerContainer>
+    <InnerContainer onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {children}
+    </InnerContainer>
   </StyledPopover>
 );

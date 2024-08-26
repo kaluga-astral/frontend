@@ -16,7 +16,7 @@ export * from './format';
 
 export * from './buildDaysCalendarGrid';
 
-export * from './checkIsDateBetweenSelectedAndRangeDates';
+export * from './checkIsDateInRange';
 
 export * from './compareDateDayByUTC';
 

@@ -88,7 +88,11 @@ export const DayPicker = ({
         baseDate={baseDate}
         onDayHover={onDayHover}
         hoveredDate={hoveredDayDate}
-        rangeDate={rangeDate}
+        selectedRanges={
+          rangeDate && selectedDate
+            ? [{ dateA: selectedDate, dateB: rangeDate }]
+            : null
+        }
         onChange={onChange}
         isMondayFirst={isMondayFirst}
       />

@@ -87,11 +87,15 @@ describe('buildDaysCalendarGrid', () => {
     expect(sut[22].isCurrentInUserLocalTime).toBeTruthy();
   });
 
-  it('Флаг isInSelectedRange равен true для дней которые попадают в интервал между selectedDate и rangeDate', () => {
+  it('Флаг isInSelectedRange равен true для дней которые попадают в один из интервалов selectedRanges', () => {
     const sut = buildDaysCalendarGrid({
       baseDate: new Date('2024-08-01T00:00:00Z'),
-      selectedDate: new Date('2024-08-01T00:00:00Z'),
-      rangeDate: new Date('2024-08-10T00:00:00Z'),
+      selectedRanges: [
+        {
+          dateA: new Date('2024-08-01T00:00:00Z'),
+          dateB: new Date('2024-08-10T00:00:00Z'),
+        },
+      ],
     });
 
     sut
@@ -113,15 +117,28 @@ describe('buildDaysCalendarGrid', () => {
       .forEach(({ isInHoveredRange }) => expect(isInHoveredRange).toBeTruthy());
   });
 
-  it('Флаг isSelected равен true для дней совпадающих с rangeDate и selectedDate', () => {
+  it('Флаг isSelected равен true для дней совпадающих с крайними датами в selectedRange', () => {
     const sut = buildDaysCalendarGrid({
       baseDate: new Date('2024-08-01T00:00:00Z'),
-      selectedDate: new Date('2024-08-01T00:00:00Z'),
-      rangeDate: new Date('2024-08-10T00:00:00Z'),
+      selectedRanges: [
+        {
+          dateA: new Date('2024-08-01T00:00:00Z'),
+          dateB: new Date('2024-08-10T00:00:00Z'),
+        },
+      ],
     });
 
     expect(sut[3].isSelected).toBeTruthy();
     expect(sut[12].isSelected).toBeTruthy();
+  });
+
+  it('Флаг isSelected равен true для дня совпадающего selectedDate', () => {
+    const sut = buildDaysCalendarGrid({
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+      selectedDate: new Date('2024-08-01T00:00:00Z'),
+    });
+
+    expect(sut[3].isSelected).toBeTruthy();
   });
 
   it('Значение date равно дате соответствующего дня', () => {
