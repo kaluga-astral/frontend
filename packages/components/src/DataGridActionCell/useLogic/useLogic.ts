@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import { RowContext } from '../../NewDataGrid';
-import { type ActionCellProps } from '../NewActionCell';
+import { type ActionCellProps } from '../DataGridActionCell';
 import type { NestedAction, SingleAction } from '../types';
 
 type UseLogicParams<TRowData> = ActionCellProps<TRowData>;

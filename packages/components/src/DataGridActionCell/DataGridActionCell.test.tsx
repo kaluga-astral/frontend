@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { type Actions, NewActionCell } from './NewActionCell';
+import { type Actions, DataGridActionCell } from './DataGridActionCell';
 
 type DataTypeActions = {
   id: string;
@@ -23,7 +23,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const button = screen.getByRole('button');
 
@@ -43,7 +45,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const button = screen.getByRole('button');
 
@@ -66,7 +70,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const button = screen.getByRole('button');
 
@@ -85,7 +91,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const button = screen.getByRole('button');
 
@@ -102,7 +110,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const button = screen.getByRole('button');
 
@@ -132,7 +142,9 @@ describe('NewActionCell', () => {
       ],
     };
 
-    renderWithTheme(<NewActionCell actions={fakeAction} row={FAKE_DATA} />);
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
 
     const buttons = screen.getAllByRole('button');
 

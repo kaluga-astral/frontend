@@ -13,8 +13,8 @@ import { ConfigProvider } from '../ConfigProvider';
 import {
   type ActionCellProps,
   type Actions,
-  NewActionCell,
-} from '../NewActionCell';
+  DataGridActionCell,
+} from '../DataGridActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type {
@@ -112,77 +112,12 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '120px',
     renderCell: (row) => {
-      return <NewActionCell actions={FAKE_ACTIONS} row={row} />;
+      return <DataGridActionCell actions={FAKE_ACTIONS} row={row} />;
     },
   },
 ];
 
 type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
-
-const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isSigning, setIsSigning] = useState(false);
-
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleDelete = () => {
-    setIsDeleting(true);
-  };
-
-  const handleSign = () => {
-    setIsSigning(true);
-  };
-
-  useEffect(() => {
-    if (isEditing) {
-      setTimeout(() => setIsEditing(false), 1500);
-    }
-
-    if (isDeleting) {
-      setTimeout(() => setIsDeleting(false), 1500);
-    }
-
-    if (isSigning) {
-      setTimeout(() => setIsSigning(false), 1500);
-    }
-  }, [isEditing, isDeleting, isSigning]);
-
-  const fakeActions = useMemo(
-    () => ({
-      main: [
-        {
-          icon: <EditOutlineMd />,
-          name: 'Редактировать',
-          loading: isEditing,
-          onClick: handleEdit,
-        },
-        {
-          icon: <BinOutlineMd />,
-          name: 'Удалить',
-          loading: isDeleting,
-          loadingNote: 'Происходит удаление',
-          isBlockingOperation: true,
-          onClick: handleDelete,
-        },
-      ],
-      secondary: [
-        {
-          name: 'Подписать',
-          loading: isSigning,
-          loadingNote: 'Происходит подписание',
-          isBlockingOperation: true,
-          onClick: handleSign,
-        },
-      ],
-    }),
-    [isEditing, isDeleting, isSigning],
-  );
-
-  return <NewActionCell actions={fakeActions} row={row} />;
-};
 
 /**
  * DataGrid без пагинации
@@ -583,7 +518,7 @@ export const WithDisabledRow = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -652,7 +587,7 @@ export const DisabledLastCell = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -705,7 +640,75 @@ export const DisabledLastCell = () => {
   );
 };
 
+/**
+ * При состоянии loading=true и isBlockingOperation=true у действия, строка блокируется и появляется тултип с ```loadingNote```
+ */
 export const ActionsDataGrid = () => {
+  const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isSigning, setIsSigning] = useState(false);
+
+    const handleEdit = () => {
+      setIsEditing(true);
+    };
+
+    const handleDelete = () => {
+      setIsDeleting(true);
+    };
+
+    const handleSign = () => {
+      setIsSigning(true);
+    };
+
+    useEffect(() => {
+      if (isEditing) {
+        setTimeout(() => setIsEditing(false), 1500);
+      }
+
+      if (isDeleting) {
+        setTimeout(() => setIsDeleting(false), 1500);
+      }
+
+      if (isSigning) {
+        setTimeout(() => setIsSigning(false), 1500);
+      }
+    }, [isEditing, isDeleting, isSigning]);
+
+    const fakeActions = useMemo(
+      () => ({
+        main: [
+          {
+            icon: <EditOutlineMd />,
+            name: 'Редактировать',
+            loading: isEditing,
+            onClick: handleEdit,
+          },
+          {
+            icon: <BinOutlineMd />,
+            name: 'Удалить',
+            loading: isDeleting,
+            loadingNote: 'Происходит удаление',
+            isBlockingOperation: true,
+            onClick: handleDelete,
+          },
+        ],
+        secondary: [
+          {
+            name: 'Подписать',
+            loading: isSigning,
+            loadingNote: 'Происходит подписание',
+            isBlockingOperation: true,
+            onClick: handleSign,
+          },
+        ],
+      }),
+      [isEditing, isDeleting, isSigning],
+    );
+
+    return <DataGridActionCell actions={fakeActions} row={row} />;
+  };
+
   const fakeColumns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
@@ -841,7 +844,7 @@ export const Tree = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -896,7 +899,7 @@ export const TreeWithInitialExpanded = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -953,7 +956,7 @@ export const TreeWithExpandedLevel = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1012,7 +1015,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1070,7 +1073,7 @@ export const TreeWithCheckbox = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1213,7 +1216,7 @@ export const TreeWithOverrideColumns = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS} row={row} />;
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1238,7 +1241,7 @@ export const TreeWithOverrideColumns = () => {
             field: 'actions',
             renderCell: (row) => {
               return (
-                <NewActionCell
+                <DataGridActionCell
                   actions={{
                     main: [
                       {
@@ -1262,7 +1265,7 @@ export const TreeWithOverrideColumns = () => {
           field: 'actions',
           renderCell: (row) => {
             return (
-              <NewActionCell
+              <DataGridActionCell
                 actions={{
                   main: [
                     {
@@ -1337,7 +1340,7 @@ export const WithLoaderInButton = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <NewActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
+        return <DataGridActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
       },
     },
   ]);

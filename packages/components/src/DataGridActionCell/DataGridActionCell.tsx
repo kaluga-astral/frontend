@@ -35,7 +35,7 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export const NewActionCell = <TRow,>(props: ActionCellProps<TRow>) => {
+export const DataGridActionCell = <TRow,>(props: ActionCellProps<TRow>) => {
   const { isDisabledAction, handleWrapperClick, handleActionClick } =
     useLogic(props);
 
