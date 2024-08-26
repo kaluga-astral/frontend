@@ -40,6 +40,11 @@ export type OptionsModalProps = Omit<DialogProps, 'open' | 'onChange'> & {
   isLoadingError?: boolean;
 
   /**
+   * Текст ошибки при загрузке данных
+   */
+  loadingErrorMsg?: string;
+
+  /**
    * Функция для поиска элементов по дереву, если не определено, то будет использован встроенный поиск
    */
   filterOptions?: (node: TreeListData, searchValue: string) => boolean;
@@ -75,6 +80,7 @@ export const OptionsModal = (props: OptionsModalProps) => {
     options,
     isLoading,
     isLoadingError,
+    loadingErrorMsg,
     treeProps,
     filterOptions,
     onChange,
@@ -89,7 +95,7 @@ export const OptionsModal = (props: OptionsModalProps) => {
     }
 
     if (isLoadingError) {
-      return <Error onRetry={onRetry} />;
+      return <Error loadingErrorMsg={loadingErrorMsg} onRetry={onRetry} />;
     }
 
     if (isNoResult) {

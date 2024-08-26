@@ -25,59 +25,83 @@ export default meta;
 const FAKE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Group 1',
+    label: 'ООО "Новая организация"',
     children: [
       {
         id: '11',
-        label: 'Item 1.1',
+        label: 'Отдел продаж',
       },
       {
         id: '12',
-        label: 'Item 1.2',
+        label: 'Отдел закупок',
       },
     ],
   },
   {
     id: '2',
-    label: 'Group 2',
+    label: 'ООО "Волшебные документы"',
+  },
+  {
+    id: '3',
+    label: 'ПАО "Завод №1"',
     children: [
       {
-        id: '21',
-        label: 'Group 2.1',
+        id: '31',
+        label: 'Отдел продаж',
+      },
+      {
+        id: '32',
+        label: 'Отдел снабжения',
+      },
+      {
+        id: '33',
+        label: 'Бухгалтерия',
+      },
+    ],
+  },
+  {
+    id: '4',
+    label: 'ИП Золотой С.И."',
+  },
+  {
+    id: '5',
+    label: 'ЗАО "ТехноИнновации"',
+    children: [
+      {
+        id: '51',
+        label: 'Департамент финансов',
         children: [
           {
-            id: '211',
-            label: 'Item 2.1.1',
+            id: '511',
+            label: 'Отдел бухгалтерии',
           },
           {
-            id: '212',
-            label: 'Item 2.1.2',
+            id: '512',
+            label: 'Отдел бюджетирования',
           },
         ],
       },
       {
-        id: '22',
-        label: 'Group 2.2',
+        id: '52',
+        label: 'ЗАО "ТехноИнновации"',
         children: [
           {
-            id: '221',
-            label: 'Item 2.2.1',
-            children: [
-              {
-                id: '2211',
-                label: 'Item 2.2.1.1',
-              },
-              {
-                id: '2212',
-                label: 'Item 2.2.1.2',
-              },
-              {
-                id: '2213',
-                label: 'Item 2.2.1.3',
-              },
-            ],
+            id: '521',
+            label: 'Отдел маркетинговых коммуникаций',
+          },
+          {
+            id: '522',
+            label: 'Отдел исследований и анализа',
+          },
+          {
+            id: '523',
+            label: 'Отдел продаж',
           },
         ],
+      },
+      {
+        id: '53',
+        label: 'Департамент информационных технологий',
       },
     ],
   },
@@ -86,25 +110,54 @@ const FAKE_TREE_LIST_DATA = [
 const FAKE_NOTE_TREE_LIST_DATA = [
   {
     id: '1',
-    label: 'Организация 1',
-    note: 'Руководитель',
+    label: 'ООО "Новая организация"',
+    note: '',
     children: [
       {
         id: '11',
-        label: 'Подразделение 1.1',
-        note: 'Руководитель',
+        label: 'Отдел продаж',
+        note: 'sale@new-org.ru',
       },
       {
         id: '12',
-        label: 'Подразделение 1.2',
-        note: 'Руководитель',
+        label: 'Отдел закупок',
+        /* cSpell:ignore zakupki */
+        note: 'zakupki@new-org.ru',
       },
     ],
   },
   {
     id: '2',
-    label: 'Организация 2',
-    note: 'Руководитель',
+    label: 'ООО "Волшебные документы"',
+    note: 'magicdocuments@mail.ru',
+  },
+  {
+    id: '3',
+    label: 'ПАО "Завод №1"',
+    note: '',
+    children: [
+      {
+        id: '31',
+        label: 'Отдел продаж',
+        note: 'sale@zavod1.ru',
+      },
+      {
+        id: '32',
+        label: 'Отдел снабжения',
+        /* cSpell:ignore zakupki */
+        note: 'zakupki@zavod1.ru',
+      },
+      {
+        id: '33',
+        label: 'Бухгалтерия',
+        note: 'buh@zavod1.ru',
+      },
+    ],
+  },
+  {
+    id: '4',
+    label: 'ИП Золотой С.И."',
+    note: 'zolotoy@mail.ru',
   },
 ];
 
@@ -112,11 +165,12 @@ export const Example = () => {
   const [value, setValue] = useState<string | undefined>('3');
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
+      note: 'ip_ivanov@gmail.com',
     },
+    ...FAKE_NOTE_TREE_LIST_DATA,
   ];
 
   return (
@@ -136,11 +190,11 @@ export const Disabled = () => {
   const [value, setValue] = useState<string | undefined>('3');
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
     },
+    ...FAKE_TREE_LIST_DATA,
   ];
 
   return (
@@ -161,11 +215,12 @@ export const Required = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
+      note: 'ip_ivanov@gmail.com',
     },
+    ...FAKE_TREE_LIST_DATA,
   ];
 
   return (
@@ -186,18 +241,19 @@ export const Error = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
+      note: 'ip_ivanov@gmail.com',
     },
+    ...FAKE_TREE_LIST_DATA,
   ];
 
   return (
     <TreeAutocomplete
       label="Название"
       isError
-      helperText="Обязательное"
+      helperText="Обязательно"
       options={fakeOptions}
       value={value}
       dialogProps={{
@@ -216,12 +272,12 @@ export const FilterOptions = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
-      note: 'Синий',
+      id: '10',
+      label: 'ИП Иванов О.В.',
+      note: 'ip_ivanov@gmail.com',
     },
+    ...FAKE_NOTE_TREE_LIST_DATA,
   ];
 
   const filterOptions: TreeAutocompleteProps['filterOptions'] = (
@@ -249,15 +305,18 @@ export const FilterOptions = () => {
   );
 };
 
+/**
+ * Используя `treeProps` можно сконфигурировать дерево опций, например указать список недоступных для выбора элементов
+ */
 export const DisabledItems = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeOptions = [
-    ...FAKE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Item 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
     },
+    ...FAKE_TREE_LIST_DATA,
   ];
 
   return (
@@ -284,11 +343,12 @@ export const RenderItem = () => {
   const [value, setValue] = useState<string | undefined>();
 
   const fakeOptions = [
-    ...FAKE_NOTE_TREE_LIST_DATA,
     {
-      id: '3',
-      label: 'Организация 3',
+      id: '10',
+      label: 'ИП Иванов О.В.',
+      note: 'ip_ivanov@gmail.com',
     },
+    ...FAKE_NOTE_TREE_LIST_DATA,
   ];
 
   const CustomItem = styled.div`
@@ -341,6 +401,9 @@ export const Loading = () => {
   );
 };
 
+/**
+ * `loadingErrorMsg` позволяет указать кастомный текст ошибки при загрузке данных
+ */
 export const LoadingError = () => {
   const [value, setValue] = useState<string | undefined>();
 
@@ -352,6 +415,7 @@ export const LoadingError = () => {
       isLoadingError
       options={[]}
       value={value}
+      loadingErrorMsg="Ошибка загрузки списка опций"
       dialogProps={{
         title: 'Выбор элемента',
       }}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type KeyboardEvent, type SyntheticEvent, useState } from 'react';
 
 import { type TreeAutocompleteProps } from '../TreeAutocomplete';
 
@@ -9,7 +9,19 @@ type UseLogicProps = TreeAutocompleteProps;
 export const useLogic = ({ value, options }: UseLogicProps) => {
   const [isOpen, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (event: SyntheticEvent<HTMLDivElement>) => {
+    if (event.type === 'click') {
+      return setOpen(true);
+    }
+
+    if (
+      event.type === 'keydown' &&
+      (event as KeyboardEvent<HTMLDivElement>).code === 'Enter'
+    ) {
+      return setOpen(true);
+    }
+  };
+
   const handleClose = () => setOpen(false);
 
   const valueToRender = value
@@ -20,6 +32,7 @@ export const useLogic = ({ value, options }: UseLogicProps) => {
     inputProps: {
       value: valueToRender,
       onClick: handleOpen,
+      onKeyDown: handleOpen,
     },
     optionsModalProps: {
       isOpen,

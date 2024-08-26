@@ -46,12 +46,17 @@ export type TreeAutocompleteProps = {
   isLoadingError?: boolean;
 
   /**
+   * Текст ошибки при загрузке данных
+   */
+  loadingErrorMsg?: string;
+
+  /**
    * Предназначен для конфигурации всплывающего окна
    */
   dialogProps: Omit<DialogProps, 'open' | 'onClose'>;
 
   /**
-   * Предназначен для конфигурации всплывающего окна
+   * Предназначен для конфигурации дерева опций
    */
   treeProps?: TreeAutocompleteTreeProps;
 
@@ -95,6 +100,7 @@ export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
     isError,
     isLoading,
     isLoadingError,
+    loadingErrorMsg,
     filterOptions,
     dialogProps,
     treeProps,
@@ -118,6 +124,7 @@ export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
         options={options}
         isLoading={isLoading}
         isLoadingError={isLoadingError}
+        loadingErrorMsg={loadingErrorMsg}
         filterOptions={filterOptions}
         treeProps={treeProps}
         {...dialogProps}

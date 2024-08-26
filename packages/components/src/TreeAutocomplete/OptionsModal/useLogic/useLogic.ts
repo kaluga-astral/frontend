@@ -26,6 +26,8 @@ type UseLogicResult = {
 
 export const useLogic = ({
   isOpen,
+  isLoading,
+  isLoadingError,
   initialValue,
   options,
   filterOptions,
@@ -48,6 +50,12 @@ export const useLogic = ({
     }
   }, [isOpen]);
 
+  const filteredOptions = useMemo(
+    () =>
+      searchValue ? findInTree(options, searchValue, filterOptions) : options,
+    [options, searchValue],
+  );
+
   const handleChangeSearchField = (event: ChangeEvent<HTMLInputElement>) =>
     setSearchValue(event.target.value);
 
@@ -57,16 +65,15 @@ export const useLogic = ({
   const handleClose = (event: SyntheticEvent<HTMLButtonElement>) =>
     onClose?.(event, 'escapeKeyDown');
 
+  const handleCancel = (event: SyntheticEvent<HTMLButtonElement>) => {
+    onChange?.(undefined);
+    handleClose(event);
+  };
+
   const handleClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     onChange?.(value);
     handleClose(event);
   };
-
-  const filteredOptions = useMemo(
-    () =>
-      searchValue ? findInTree(options, searchValue, filterOptions) : options,
-    [options, searchValue],
-  );
 
   const isNoResult = Boolean(searchValue) && !filteredOptions.length;
   const isDisabledButton = !value || isNoResult;
@@ -75,6 +82,7 @@ export const useLogic = ({
     isNoResult,
     searchFieldProps: {
       value: searchValue,
+      disabled: isLoading || isLoadingError,
       onChange: handleChangeSearchField,
     },
     treeListProps: {
@@ -84,7 +92,7 @@ export const useLogic = ({
       onChange: handleChange,
     },
     cancelButtonProps: {
-      onClick: handleClose,
+      onClick: handleCancel,
     },
     confirmButtonProps: {
       disabled: isDisabledButton,

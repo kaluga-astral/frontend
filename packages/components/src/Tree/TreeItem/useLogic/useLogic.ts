@@ -1,4 +1,10 @@
-import { type MouseEvent, useEffect, useState } from 'react';
+import {
+  type KeyboardEvent,
+  type MouseEvent,
+  type SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 
 import { type TreeItemProps } from '../TreeItem';
 
@@ -18,15 +24,23 @@ export const useLogic = ({
     setOpen(isDefaultExpanded);
   }, [isDefaultExpanded]);
 
-  const handleClick = () => {
+  const handleClick = (event: SyntheticEvent<HTMLDivElement>) => {
     if (isDisabled) {
       return;
     }
 
-    if (onClick) {
-      onClick();
+    if (event.type === 'click') {
+      return onClick?.();
+    }
+
+    if (
+      event.type === 'keydown' &&
+      (event as KeyboardEvent<HTMLDivElement>).code === 'Enter'
+    ) {
+      return onClick?.();
     }
   };
+
   const handleToggle = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setOpen((currentState) => !currentState);
@@ -40,6 +54,10 @@ export const useLogic = ({
     handleClick,
     itemProps: {
       id: idAttr,
+    },
+    itemContentProps: {
+      onClick: handleClick,
+      onKeyDown: handleClick,
     },
     tooltipProps: {
       title: disableReason,

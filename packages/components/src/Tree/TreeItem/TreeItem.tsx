@@ -99,7 +99,7 @@ export type TreeItemProps<TComponent extends ElementType = ElementType> = {
 } & Omit<ComponentProps<TComponent>, ''>;
 
 export const TreeItem = (props: TreeItemProps) => {
-  const { isOpen, handleToggle, handleClick, itemProps, tooltipProps } =
+  const { isOpen, handleToggle, itemProps, itemContentProps, tooltipProps } =
     useLogic(props);
 
   const {
@@ -145,7 +145,8 @@ export const TreeItem = (props: TreeItemProps) => {
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
-          onClick={handleClick}
+          tabIndex={0}
+          {...itemContentProps}
         >
           <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
             {renderItem ? (
@@ -191,7 +192,8 @@ export const TreeItem = (props: TreeItemProps) => {
         $isSelected={isSelected}
         $isDisabled={isDisabled}
         $level={level}
-        onClick={handleClick}
+        tabIndex={0}
+        {...itemContentProps}
       >
         <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
           {renderItem ? (

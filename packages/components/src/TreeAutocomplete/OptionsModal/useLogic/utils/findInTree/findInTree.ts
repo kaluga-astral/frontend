@@ -5,7 +5,22 @@ const defaultFilterOptions = (node: TreeListData, searchValue: string) => {
     return;
   }
 
-  return node.label.includes(searchValue);
+  const preparedSearchValue = searchValue.trim().toLowerCase();
+  const preparedLabel = node.label.toLowerCase();
+
+  const resultByLabel = preparedLabel.includes(preparedSearchValue);
+
+  if (resultByLabel) {
+    return resultByLabel;
+  }
+
+  if (typeof node.note !== 'string') {
+    return;
+  }
+
+  const preparedNote = node.note.toLowerCase();
+
+  return preparedNote.includes(preparedSearchValue);
 };
 
 export const findInTree = (

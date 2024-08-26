@@ -82,13 +82,9 @@ export const Example = () => {
       }),
   );
 
-  const GridContainer = styled(Grid)`
-    width: 200px;
-  `;
-
   return (
     <Form form={form} onSubmit={handleSubmit}>
-      <GridContainer container>
+      <Grid container spacing={2}>
         <FormTreeAutocomplete
           name="treeAutocomplete"
           label="Название"
@@ -99,7 +95,7 @@ export const Example = () => {
           control={form.control}
         />
         <FormSubmitButton>Submit</FormSubmitButton>
-      </GridContainer>
+      </Grid>
     </Form>
   );
 };
