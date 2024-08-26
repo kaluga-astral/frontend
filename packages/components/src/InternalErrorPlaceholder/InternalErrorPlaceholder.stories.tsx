@@ -10,7 +10,7 @@ import { InternalErrorPlaceholder } from './InternalErrorPlaceholder';
  *
  */
 const meta: Meta<typeof InternalErrorPlaceholder> = {
-  title: 'Components/Placeholders/InternalErrorPlaceholder',
+  title: 'Components/Data Display/Placeholders/InternalErrorPlaceholder',
   component: InternalErrorPlaceholder,
 };
 

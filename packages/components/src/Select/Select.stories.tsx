@@ -17,7 +17,7 @@ import { Select } from './Select';
  * ### [Guide]()
  */
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Components/Inputs/Select',
   component: Select,
 };
 

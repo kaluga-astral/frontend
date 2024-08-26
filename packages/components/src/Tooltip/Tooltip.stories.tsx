@@ -14,7 +14,7 @@ import { Tooltip } from './Tooltip';
  * ### [Guide]()
  */
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Tooltip',
+  title: 'Components/Data Display/Tooltip',
   component: Tooltip,
 };
 

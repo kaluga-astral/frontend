@@ -17,7 +17,7 @@ import { MenuGroup } from './MenuGroup';
  */
 
 const meta: Meta<typeof MenuGroup> = {
-  title: 'Components/Menu/MenuGroup',
+  title: 'Components/Navigation/Menu/MenuGroup',
   component: MenuGroup,
 };
 

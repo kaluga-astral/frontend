@@ -15,7 +15,7 @@ import { type StepWizard } from './types';
  * ### [Guide]()
  */
 const meta: Meta<typeof StepperWizard> = {
-  title: 'Components/StepperWizard',
+  title: 'Components/Navigation/StepperWizard',
   component: StepperWizard,
 };
 
