@@ -4,19 +4,19 @@ import { useEffect, useState } from 'react';
 
 import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
-import { type Actions, NewActionCell } from './NewActionCell';
+import { type Actions, DataGridActionCell } from './DataGridActionCell';
 
 /**
- * NewActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
+ * DataGridActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
  * Работает с контекстом NewDataGrid и позволяет управлять состояниями строки при взаимодействии с действиями
  *
  * ### [Figma]()
  * ### [Guide]()
  */
 
-const meta: Meta<typeof NewActionCell> = {
-  title: 'Components/NewActionCell',
-  component: NewActionCell,
+const meta: Meta<typeof DataGridActionCell> = {
+  title: 'Components/DataGridActionCell',
+  component: DataGridActionCell,
 };
 
 export default meta;
@@ -68,7 +68,7 @@ const FAKE_DATA = [
   },
 ];
 
-type Story = StoryObj<typeof NewActionCell>;
+type Story = StoryObj<typeof DataGridActionCell>;
 
 export const Interaction: Story = {
   args: {
@@ -93,7 +93,9 @@ export const Example = () => {
       sortable: false,
       width: '120px',
       align: 'right',
-      renderCell: (row) => <NewActionCell actions={FAKE_ACTIONS} row={row} />,
+      renderCell: (row) => (
+        <DataGridActionCell actions={FAKE_ACTIONS} row={row} />
+      ),
     },
   ];
 
@@ -151,7 +153,7 @@ export const LoaderActions = () => {
     id: '123456789',
   };
 
-  return <NewActionCell actions={fakeActions} row={fakeData} />;
+  return <DataGridActionCell actions={fakeActions} row={fakeData} />;
 };
 
 export const BlockingOperations = () => {
@@ -202,5 +204,5 @@ export const BlockingOperations = () => {
     id: '123456789',
   };
 
-  return <NewActionCell actions={fakeActions} row={fakeData} />;
+  return <DataGridActionCell actions={fakeActions} row={fakeData} />;
 };
