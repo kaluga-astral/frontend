@@ -1,28 +1,22 @@
-import {
-  BinOutlineMd,
-  EyeFillMd,
-  SaveOutlineMd,
-  SendOutlineMd,
-} from '@astral/icons';
 import { type Meta, type StoryObj } from '@storybook/react';
+import { BinOutlineMd, EditOutlineMd, SaveOutlineMd } from '@astral/icons';
 import { useEffect, useState } from 'react';
 
 import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
-import { ActionCell, type Actions } from './ActionCell';
+import { type Actions, NewActionCell } from './NewActionCell';
 
 /**
- * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
- * **Используйте [NewActionCell](/docs/components-newactioncell--docs)
- * Причина отказа от поддержки: ActionCell не работает с контекстом NewDataGrid, и не позволяет
- * управлять состояниями строки при взаимодействии с действиями
+ * NewActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
+ * Работает с контекстом NewDataGrid и позволяет управлять состояниями строки при взаимодействии с действиями
+ *
  * ### [Figma]()
  * ### [Guide]()
  */
 
-const meta: Meta<typeof ActionCell> = {
-  title: 'Components/ActionCell',
-  component: ActionCell,
+const meta: Meta<typeof NewActionCell> = {
+  title: 'Components/NewActionCell',
+  component: NewActionCell,
 };
 
 export default meta;
@@ -32,77 +26,53 @@ type DataType = {
   documentName: string;
 };
 
-const MAIN_ACTIONS = [
-  {
-    icon: <EyeFillMd />,
-    name: 'Просмотреть нельзя',
-    disabled: true,
-    onClick: () => console.log('main'),
-  },
-  {
-    icon: <SendOutlineMd />,
-    nested: true,
-    name: 'Отправить',
-    actions: [
-      {
-        name: 'Туда',
-        onClick: () => console.log('nested 1'),
-        disabledReason: 'Не работает',
-        disabled: true,
+const FAKE_ACTIONS = {
+  main: [
+    {
+      icon: <EditOutlineMd />,
+      name: 'Редактировать',
+      onClick: () => {
+        console.log('Редактировать');
       },
-      { name: 'Сюда', onClick: () => console.log('nested 2') },
-    ],
-  },
-];
-
-const SECONDARY_ACTIONS = [
-  {
-    name: 'Редактировать',
-    onClick: () => console.log('secondary 1'),
-    disabled: true,
-    disabledReason:
-      'Текущий документ не прошел согласование/подписание. Загрузите документ повторно',
-  },
-  { name: 'Удалить', onClick: () => console.log('secondary 2') },
-];
-
-const ACTIONS: Actions<DataType> = {
-  main: MAIN_ACTIONS,
-  secondary: SECONDARY_ACTIONS,
+    },
+    {
+      icon: <BinOutlineMd />,
+      name: 'Удалить',
+      onClick: () => {
+        console.log('Удалить');
+      },
+    },
+  ],
+  secondary: [
+    {
+      name: 'Подписать',
+      onClick: () => {
+        console.log('Подписать');
+      },
+    },
+  ],
 };
 
-const INTERACTION_ACTIONS: Actions<unknown> = {
-  main: MAIN_ACTIONS,
-  secondary: SECONDARY_ACTIONS,
-};
-
-const ACTIONS_WITHOUT_SECONDARY: Actions<DataType> = {
-  main: MAIN_ACTIONS,
-};
-
-const data = [
+const FAKE_DATA = [
   {
     id: '1',
     documentName: 'Документ 1',
-    action: () => {},
   },
   {
     id: '2',
     documentName: 'Документ 2',
-    action: () => {},
   },
   {
     id: '3',
     documentName: 'Документ 3',
-    action: () => {},
   },
 ];
 
-type Story = StoryObj<typeof ActionCell>;
+type Story = StoryObj<typeof NewActionCell>;
 
 export const Interaction: Story = {
   args: {
-    actions: INTERACTION_ACTIONS,
+    actions: FAKE_ACTIONS,
   },
   parameters: {
     docs: {
@@ -123,17 +93,18 @@ export const Example = () => {
       sortable: false,
       width: '120px',
       align: 'right',
-      renderCell: (row) => <ActionCell actions={ACTIONS} row={row} />,
+      renderCell: (row) => <NewActionCell actions={FAKE_ACTIONS} row={row} />,
     },
   ];
 
   return (
-    <NewDataGrid rows={data} columns={columns} keyId="id" onRetry={() => {}} />
+    <NewDataGrid
+      rows={FAKE_DATA}
+      columns={columns}
+      keyId="id"
+      onRetry={() => {}}
+    />
   );
-};
-
-export const OnlyMainActions = () => {
-  return <ActionCell actions={ACTIONS_WITHOUT_SECONDARY} row={data[1]} />;
 };
 
 export const LoaderActions = () => {
@@ -159,7 +130,7 @@ export const LoaderActions = () => {
     }
   }, [deleteLoading, saveLoading]);
 
-  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+  const fakeActions: Actions<DataTypeActions> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -180,7 +151,7 @@ export const LoaderActions = () => {
     id: '123456789',
   };
 
-  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
+  return <NewActionCell actions={fakeActions} row={fakeData} />;
 };
 
 export const BlockingOperations = () => {
@@ -206,7 +177,7 @@ export const BlockingOperations = () => {
     }
   }, [deleteLoading, saveLoading]);
 
-  const FAKE_ACTIONS: Actions<DataTypeActions> = {
+  const fakeActions: Actions<DataTypeActions> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -231,5 +202,5 @@ export const BlockingOperations = () => {
     id: '123456789',
   };
 
-  return <ActionCell actions={FAKE_ACTIONS} row={fakeData} />;
+  return <NewActionCell actions={fakeActions} row={fakeData} />;
 };
