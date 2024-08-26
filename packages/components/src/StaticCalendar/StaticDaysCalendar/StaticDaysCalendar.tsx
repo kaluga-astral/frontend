@@ -3,9 +3,7 @@ import { type ReactNode, useId, useMemo } from 'react';
 import {
   type CalendarGridItemDay,
   DAYS_IN_WEEK,
-  DateCompareDeep,
   buildDaysCalendarGrid,
-  checkIsDateBetweenSelectedAndRangeDates,
 } from '../../utils/date';
 import { StaticCalendarGridButton } from '../StaticCalendarGridButton';
 import { type CalendarGridItem } from '../../types';
@@ -35,7 +33,7 @@ type StaticDaysCalendarProps = {
   /**
    * День, который находится в состоянии hover
    */
-  hoveredDayDate?: Date;
+  hoveredDate?: Date;
   /**
    * опорная дата, относительно которой потребуется построить календарь
    */
@@ -62,7 +60,7 @@ export const StaticDaysCalendar = ({
   selectedDate,
   baseDate,
   onDayHover,
-  hoveredDayDate,
+  hoveredDate,
   rangeDate,
   onChange,
   isMondayFirst,
@@ -82,8 +80,9 @@ export const StaticDaysCalendar = ({
         isMondayFirst,
         minDate,
         maxDate,
+        hoveredDate,
       }),
-    [baseDate, selectedDate, maxDate, minDate, rangeDate],
+    [baseDate, selectedDate, maxDate, minDate, rangeDate, hoveredDate],
   );
 
   return (
@@ -105,15 +104,7 @@ export const StaticDaysCalendar = ({
             onMouseEnter={
               isAbleToHover ? () => onDayHover?.(props.date) : undefined
             }
-            isInHoveredRange={
-              isAbleToHover &&
-              checkIsDateBetweenSelectedAndRangeDates({
-                date: props.date,
-                selectedDate,
-                rangeDate: hoveredDayDate,
-                deep: DateCompareDeep.day,
-              })
-            }
+            isInHoveredRange={props.isInHoveredRange}
           >
             <DayContent {...props} />
           </StaticCalendarGridButton>

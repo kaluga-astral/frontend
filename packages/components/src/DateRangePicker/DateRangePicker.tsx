@@ -274,7 +274,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 rangeDate={endDateProps.value || startDateProps.value}
                 date={startBaseDate}
                 onChange={handleDayPick}
-                isRange
                 hoveredDayDate={hoveredDayDate}
                 onDayHover={setHoveredDayDate}
               />
@@ -285,7 +284,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 rangeDate={endDateProps.value || startDateProps.value}
                 date={endBaseDate}
                 onChange={handleDayPick}
-                isRange
                 hoveredDayDate={hoveredDayDate}
                 onDayHover={setHoveredDayDate}
               />

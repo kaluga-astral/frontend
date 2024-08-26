@@ -15,9 +15,16 @@ export type CalendarGridItemDay = {
    */
   isOutOfAvailableRange: boolean;
   /**
+   * Флаг, обозначающий что дата не попадает в ховер диапазон
+   */
+  isInHoveredRange: boolean;
+  /**
    * день месяца, 1 - 31
    */
   monthDay: number;
+  /**
+   * Порядковый номер в общем массиве
+   */
   index: number;
 };
 
@@ -27,6 +34,7 @@ type BuildMonthGridOptions = {
    * @default true
    */
   isMondayFirst?: boolean;
+  hoveredDate?: Date | null;
   minDate?: Date;
   maxDate?: Date;
 };
@@ -42,6 +50,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
   maxDate,
   selectedDate,
   rangeDate,
+  hoveredDate,
   baseDate,
   isMondayFirst = true,
 }) => {
@@ -83,9 +92,6 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
      * нормализованный номер месяца
      */
     const dateMonth = date.getUTCMonth() + 1;
-    /**
-     * флаг следующего месяца относительно базовой даты
-     */
 
     return {
       isOutOfAvailableRange: dateMonth !== month,
@@ -102,6 +108,12 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
         date,
         selectedDate,
         rangeDate,
+        deep: DateCompareDeep.day,
+      }),
+      isInHoveredRange: checkIsDateBetweenSelectedAndRangeDates({
+        date,
+        selectedDate,
+        rangeDate: hoveredDate,
         deep: DateCompareDeep.day,
       }),
       monthDay: date.getUTCDate(),

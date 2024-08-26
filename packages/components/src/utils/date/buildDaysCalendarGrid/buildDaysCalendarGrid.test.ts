@@ -55,24 +55,17 @@ describe('buildDaysCalendarGrid', () => {
     it('Равен true для дат которые меньше minDate', () => {
       sut
         .slice(0, 3)
-        .map((item) => item.isDisabled)
-        .forEach((item) => expect(item).toBeTruthy());
+        .forEach(({ isDisabled }) => expect(isDisabled).toBeTruthy());
     });
 
     it('Равен false дат, находящихся в промежутке меньше minDate и maxDate', () => {
-      expect(sut[4].isDisabled).toBeFalsy();
-
       sut
         .slice(4, 8)
-        .map((item) => item.isDisabled)
-        .forEach((item) => expect(item).toBeFalsy());
+        .forEach(({ isDisabled }) => expect(isDisabled).toBeFalsy());
     });
 
     it('Равен true для дат которые больше maxDate', () => {
-      sut
-        .slice(9)
-        .map((item) => item.isDisabled)
-        .forEach((item) => expect(item).toBeTruthy());
+      sut.slice(9).forEach(({ isDisabled }) => expect(isDisabled).toBeTruthy());
     });
   });
 
@@ -83,8 +76,7 @@ describe('buildDaysCalendarGrid', () => {
 
     sut
       .slice(3, 34)
-      .map((item) => item.monthDay)
-      .forEach((monthDay, index) => expect(monthDay).toBe(index + 1));
+      .forEach(({ monthDay }, index) => expect(monthDay).toBe(index + 1));
   });
 
   it('Флаг isCurrentInUserLocalTime равен true для дня совпадающего с текущим днем пользователя', () => {
@@ -104,8 +96,21 @@ describe('buildDaysCalendarGrid', () => {
 
     sut
       .slice(3, 12)
-      .map((item) => item.isInSelectedRange)
-      .forEach((flag) => expect(flag).toBeTruthy());
+      .forEach(({ isInSelectedRange }) =>
+        expect(isInSelectedRange).toBeTruthy(),
+      );
+  });
+
+  it('Флаг isInHoveredRange равен true для дней которые попадают в интервал между selectedDate и hoveredDate', () => {
+    const sut = buildDaysCalendarGrid({
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+      selectedDate: new Date('2024-08-01T00:00:00Z'),
+      hoveredDate: new Date('2024-08-10T00:00:00Z'),
+    });
+
+    sut
+      .slice(3, 12)
+      .forEach(({ isInHoveredRange }) => expect(isInHoveredRange).toBeTruthy());
   });
 
   it('Флаг isSelected равен true для дней совпадающих с rangeDate и selectedDate', () => {
@@ -129,6 +134,16 @@ describe('buildDaysCalendarGrid', () => {
         //29 июля пн, первый день в календаре для августа
         new Date(2024, 6, 29 + index, 0, -1 * new Date().getTimezoneOffset()),
       );
+    });
+  });
+
+  it('Значение index равно порядковому номеру в массиве', () => {
+    const sut = buildDaysCalendarGrid({
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+    });
+
+    sut.forEach((item, arrIndex) => {
+      expect(item.index).toBe(arrIndex);
     });
   });
 });
