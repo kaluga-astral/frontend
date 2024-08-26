@@ -9,7 +9,7 @@ import { Placeholder } from './Placeholder';
 
 /**
  * Предназначен для отображения статусов. Используется внутри [ContentState](/story/components-contentstate--docs).
- * Примеры частных реализаций представлены в [InternalErrorPlaceholder](?path=/docs/components-placeholders-internalerrorplaceholder--docs) и [OutdatedReleasePlaceholder](?path=/docs/components-placeholders-outdatedreleaseplaceholder--docs)
+ * Примеры частных реализаций представлены в [InternalErrorPlaceholder](?path=/docs/components-data-display-placeholders-internalerrorplaceholder--docs) и [OutdatedReleasePlaceholder](?path=/docs/components-data-display-placeholders-outdatedreleaseplaceholder--docs)
  *
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=735-12816&mode=design&t=lMvg1tmjfSIA2lhp-0)
  * ### [Guide]()

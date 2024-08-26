@@ -4,7 +4,7 @@ import { OverflowTypography } from './OverflowTypography';
 
 /**
  * ##Мотивация
- * Вариация [Typography](/story/components-typography--docs) элемента, с автоматической проверкой на переполнение текстового контента, и если есть переполнение, то тогда добавляется кастомизируемая обертка ```Tooltip```.
+ * Вариация [Typography](/story/components-data-display-typography--docs) элемента, с автоматической проверкой на переполнение текстового контента, и если есть переполнение, то тогда добавляется кастомизируемая обертка ```Tooltip```.
  *
  * ### [Figma]()
  * ### [Guide]()
