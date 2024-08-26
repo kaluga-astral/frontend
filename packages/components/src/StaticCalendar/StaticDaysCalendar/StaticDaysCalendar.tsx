@@ -47,6 +47,7 @@ type MainButtonProps = Item &
     'DayContent' | 'DayTooltipTitle' | 'onDayHover'
   > & {
     isPreviousItemInSelectedRange?: boolean;
+    isNextItemInSelectedRange?: boolean;
     onClick?: (date: Date) => void;
   };
 
@@ -56,6 +57,7 @@ const MainButton = ({
   DayTooltipTitle,
   onDayHover,
   isPreviousItemInSelectedRange,
+  isNextItemInSelectedRange,
   ...props
 }: MainButtonProps) => (
   <StaticCalendarGridButton
@@ -71,6 +73,7 @@ const MainButton = ({
     tooltipTitle={DayTooltipTitle?.(props)}
     lengthInRow={DAYS_IN_WEEK}
     isPreviousItemInSelectedRange={isPreviousItemInSelectedRange}
+    isNextItemInSelectedRange={isNextItemInSelectedRange}
     onMouseEnter={
       Boolean(onDayHover) ? () => onDayHover?.(props.date) : undefined
     }
@@ -126,6 +129,7 @@ export const StaticDaysCalendar = ({
             <MainButton
               key={`${id}_${index}`}
               isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              isNextItemInSelectedRange={grid[index + 1]?.isInSelectedRange}
               {...item}
               onClick={onChange}
               onDayHover={onDayHover}

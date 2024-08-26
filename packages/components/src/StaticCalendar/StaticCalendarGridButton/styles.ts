@@ -33,6 +33,13 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    * флаг, означающий, что предыдущий элемент находится в выбранном диапазоне
    */
   isPreviousItemInSelectedRange?: boolean;
+  /**
+   * флаг, означающий, что предыдущий элемент находится в выбранном диапазоне
+   */
+  isNextItemInSelectedRange?: boolean;
+  /**
+   * флаг, означающий, что следующий элемент находится в выбранном диапазоне
+   */
   isNotInteractable?: boolean;
 };
 
@@ -110,7 +117,7 @@ const getLeftBorderRadius = ({
 const getRightBorderRadius = ({
   isInSelectedRange,
   isInHoveredRange,
-  isPreviousItemInSelectedRange,
+  isNextItemInSelectedRange,
   selected,
   theme,
 }: DateCalendarDayBtnWrapperProps & WithTheme) => {
@@ -119,7 +126,7 @@ const getRightBorderRadius = ({
   // тогда устанавливаем скругление справа
   if (
     !(isInSelectedRange || isInHoveredRange) ||
-    (isPreviousItemInSelectedRange && selected)
+    (!isNextItemInSelectedRange && selected)
   ) {
     return theme.shape.small;
   }
@@ -132,6 +139,7 @@ const getRightBorderRadius = ({
 
 const nonForwardableProps = new Set<PropertyKey>([
   'isPreviousItemInSelectedRange',
+  'isNextItemInSelectedRange',
   'isCurrentInUserLocalTime',
   'isOutOfAvailableRange',
   'isInSelectedRange',
