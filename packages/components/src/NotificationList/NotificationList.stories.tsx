@@ -20,7 +20,7 @@ import { type Notification } from './types';
  */
 
 const meta: Meta<typeof NotificationList> = {
-  title: 'Components/Features/NotificationList',
+  title: 'Components/NotificationList',
   component: NotificationList,
 };
 

@@ -12,7 +12,7 @@ import { Product } from './Product';
  */
 
 const meta: Meta<typeof Product> = {
-  title: 'Components/Features/Product',
+  title: 'Components/Product',
   component: Product,
 };
 
