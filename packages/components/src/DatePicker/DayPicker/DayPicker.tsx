@@ -81,7 +81,6 @@ export const DayPicker = ({
       />
       <StaticDaysCalendarWrapper
         DayTooltipTitle={({ date }) => dayFormat(date)}
-        DayContent={({ monthDay }) => monthDay}
         minDate={minDate}
         maxDate={maxDate}
         selectedDate={selectedDate}

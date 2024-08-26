@@ -13,9 +13,9 @@ type DateCalendarMonthGridHeadProps = {
 };
 
 export const Head = memo(
-  ({ isMondayFirst = false }: DateCalendarMonthGridHeadProps) => (
+  ({ isMondayFirst = true }: DateCalendarMonthGridHeadProps) => (
     <Wrapper role="rowheader">
-      {(isMondayFirst ? SUNDAY_FIRST_WEEKDAYS : MONDAY_FIRST_WEEKDAYS).map(
+      {(isMondayFirst ? MONDAY_FIRST_WEEKDAYS : SUNDAY_FIRST_WEEKDAYS).map(
         (weekday, index) => (
           <span key={index} role="cell">
             {weekday}

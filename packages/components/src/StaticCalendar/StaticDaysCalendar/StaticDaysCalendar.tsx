@@ -1,10 +1,9 @@
-import { type ReactNode, useId, useMemo } from 'react';
+import { type ReactNode, useCallback, useId, useMemo } from 'react';
 
 import {
   type CalendarGridItemDay,
   DAYS_IN_WEEK,
   buildDaysCalendarGrid,
-  formatDate,
 } from '../../utils/date';
 import { StaticCalendarGridButton } from '../StaticCalendarGridButton';
 import { type CalendarGridItem } from '../../types';
@@ -20,24 +19,17 @@ type StaticDaysCalendarProps = {
    * Колбек, вызываемый при событии hover на день календаря
    */
   onDayHover?: (date?: Date) => void;
-  /**
-   * День, который находится в состоянии hover
-   */
-  hoveredDate?: Date;
-  /**
-   * флаг рендера календаря дней начиная с понедельника
-   * @default true
-   */
-  isMondayFirst?: boolean;
   className?: string;
   /**
    * Контент, который необходимо отрендерить в тултипе для каждого дня
    */
-  DayTooltipTitle: (item: Item) => ReactNode;
+  DayTooltipTitle?: (item: Item) => ReactNode;
   /**
    * Контент, который необходимо отрендерить в контенте каждого элемента
+   * @default по умолчанию рендерится день месяца
    */
-  DayContent: (item: Item) => ReactNode;
+  DayContent?: (item: Item) => ReactNode;
+  hideOutOfAvailableRangeElements?: boolean;
 } & Pick<
   Parameters<typeof buildDaysCalendarGrid>[0],
   | 'baseDate'
@@ -49,6 +41,45 @@ type StaticDaysCalendarProps = {
   | 'selectedRanges'
 >;
 
+type MainButtonProps = Item &
+  Pick<
+    StaticDaysCalendarProps,
+    'DayContent' | 'DayTooltipTitle' | 'onDayHover'
+  > & {
+    isPreviousItemInSelectedRange?: boolean;
+    onClick?: (date: Date) => void;
+  };
+
+const MainButton = ({
+  onClick,
+  DayContent,
+  DayTooltipTitle,
+  onDayHover,
+  isPreviousItemInSelectedRange,
+  ...props
+}: MainButtonProps) => (
+  <StaticCalendarGridButton
+    disabled={props.isDisabled}
+    selected={props.isSelected}
+    aria-selected={props.isSelected}
+    component={!onClick ? 'time' : undefined}
+    isNotInteractable={!Boolean(onClick)}
+    isOutOfAvailableRange={props.isOutOfAvailableRange}
+    isCurrentInUserLocalTime={props.isCurrentInUserLocalTime}
+    isInSelectedRange={props.isInSelectedRange}
+    onClick={() => onClick?.(props.date)}
+    tooltipTitle={DayTooltipTitle?.(props)}
+    lengthInRow={DAYS_IN_WEEK}
+    isPreviousItemInSelectedRange={isPreviousItemInSelectedRange}
+    onMouseEnter={
+      Boolean(onDayHover) ? () => onDayHover?.(props.date) : undefined
+    }
+    isInHoveredRange={props.isInHoveredRange}
+  >
+    {DayContent ? DayContent(props) : props.monthDay}
+  </StaticCalendarGridButton>
+);
+
 export const StaticDaysCalendar = ({
   minDate,
   maxDate,
@@ -57,13 +88,13 @@ export const StaticDaysCalendar = ({
   onDayHover,
   hoveredDate,
   onChange,
-  isMondayFirst,
+  isMondayFirst = true,
   className,
   DayTooltipTitle,
   DayContent,
   selectedRanges,
+  hideOutOfAvailableRangeElements,
 }: StaticDaysCalendarProps) => {
-  const isAbleToHover = Boolean(onDayHover);
   const id = useId();
 
   const grid = useMemo(
@@ -80,35 +111,31 @@ export const StaticDaysCalendar = ({
     [baseDate, selectedDate, maxDate, minDate, hoveredDate, selectedRanges],
   );
 
+  const checkRenderRequirements = useCallback(
+    (item: Item) =>
+      hideOutOfAvailableRangeElements ? !item.isOutOfAvailableRange : true,
+    [hideOutOfAvailableRangeElements],
+  );
+
   return (
     <article className={className}>
       <Head isMondayFirst={isMondayFirst} />
       <Body role="grid">
-        {grid.map((props, index) => (
-          <StaticCalendarGridButton
-            key={`${id}_${index}`}
-            disabled={props.isDisabled}
-            selected={props.isSelected}
-            component={!onChange ? 'time' : undefined}
-            //@ts-ignore пропс обозначающий значение даты, необходим для тега time
-            datetime={
-              !onChange ? formatDate(props.date, 'YYYY-MM-DD', '-') : undefined
-            }
-            isOutOfAvailableRange={props.isOutOfAvailableRange}
-            isCurrentInUserLocalTime={props.isCurrentInUserLocalTime}
-            isInSelectedRange={props.isInSelectedRange}
-            onClick={() => onChange?.(props.date)}
-            tooltipTitle={<DayTooltipTitle {...props} />}
-            lengthInRow={DAYS_IN_WEEK}
-            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
-            onMouseEnter={
-              isAbleToHover ? () => onDayHover?.(props.date) : undefined
-            }
-            isInHoveredRange={props.isInHoveredRange}
-          >
-            <DayContent {...props} />
-          </StaticCalendarGridButton>
-        ))}
+        {grid.map((item, index) =>
+          checkRenderRequirements(item) ? (
+            <MainButton
+              key={`${id}_${index}`}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              {...item}
+              onClick={onChange}
+              onDayHover={onDayHover}
+              DayTooltipTitle={DayTooltipTitle}
+              DayContent={DayContent}
+            />
+          ) : (
+            <div key={`${id}_${index}`} />
+          ),
+        )}
       </Body>
     </article>
   );

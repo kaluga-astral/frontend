@@ -1,4 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import { Grid } from '../../Grid';
+import { Typography } from '../../Typography';
+import { useLocaleDateTimeFormat } from '../../hooks';
 
 import { StaticDaysCalendar } from './StaticDaysCalendar';
 
@@ -29,24 +34,10 @@ export const Interaction: Story = {
   },
 };
 
-const dayFormat = Intl.DateTimeFormat('ru', {
-  weekday: 'short',
-  year: '2-digit',
-  month: 'short',
-  day: '2-digit',
-  timeZone: 'UTC',
-}).format;
-
 export const Example = () => {
   const baseDate = new Date();
 
-  return (
-    <StaticDaysCalendar
-      baseDate={baseDate}
-      DayContent={({ monthDay }) => monthDay}
-      DayTooltipTitle={({ date }) => dayFormat(date)}
-    />
-  );
+  return <StaticDaysCalendar baseDate={baseDate} />;
 };
 
 /**
@@ -72,8 +63,113 @@ export const SelectedRanges = () => {
           dateB: new Date('2024-08-28T00:00:00.000Z'),
         },
       ]}
-      DayContent={({ monthDay }) => monthDay}
+    />
+  );
+};
+
+/**
+ * Пропс, по которому скрываются элементы выходящие за границы месяца
+ */
+export const HideOutOfAvailableRangeElements = () => {
+  const baseDate = new Date();
+
+  return (
+    <StaticDaysCalendar baseDate={baseDate} hideOutOfAvailableRangeElements />
+  );
+};
+
+/**
+ * Пропс коллбэк, который вызывается при наведении на одну из дат
+ */
+export const OnDayHover = () => {
+  const [hovered, setHovered] = useState<Date | undefined>();
+  const baseDate = new Date();
+
+  return (
+    <Grid spacing={5}>
+      <Typography>hovered: {hovered?.toISOString()}</Typography>
+      <StaticDaysCalendar
+        baseDate={baseDate}
+        onDayHover={(date) => setHovered(date)}
+      />
+    </Grid>
+  );
+};
+
+/**
+ * Пропс предназначенный для отображения предварительного промежутка выбираемого диапазона,
+ * для корректного отображения требуется наличие selectedDate
+ */
+export const HoveredDate = () => {
+  const [hovered, setHovered] = useState<Date | undefined>();
+  const baseDate = new Date();
+
+  return (
+    <StaticDaysCalendar
+      baseDate={baseDate}
+      selectedDate={baseDate}
+      hoveredDate={hovered}
+      onDayHover={(date) => setHovered(date)}
+    />
+  );
+};
+
+/**
+ * Пропс флаг предназначенный для отображения календаря, где воскресенье - первый день недели. По умолчанию равен true.
+ */
+export const IsMondayFirst = () => {
+  const baseDate = new Date();
+
+  return <StaticDaysCalendar baseDate={baseDate} isMondayFirst={false} />;
+};
+
+/**
+ * Пропс коллбэк вызываемый на каждый клик по дате в календаре
+ */
+export const OnChange = () => {
+  const [clicked, setClicked] = useState<Date | undefined>();
+  const baseDate = new Date();
+
+  return (
+    <Grid spacing={5}>
+      <Typography>last clicked {clicked?.toISOString()}</Typography>
+      <StaticDaysCalendar baseDate={baseDate} onChange={setClicked} />
+    </Grid>
+  );
+};
+
+/**
+ * Пропс ответственный за рендер контента в тултипе при наведении на элемент календаря
+ */
+export const DayTooltipTitle = () => {
+  const baseDate = new Date();
+
+  const dayFormat = useLocaleDateTimeFormat({
+    weekday: 'short',
+    year: '2-digit',
+    month: 'short',
+    day: '2-digit',
+    timeZone: 'UTC',
+  });
+
+  return (
+    <StaticDaysCalendar
+      baseDate={baseDate}
       DayTooltipTitle={({ date }) => dayFormat(date)}
+    />
+  );
+};
+
+/**
+ * Пропс ответственный за рендер контента внутри каждого элемента
+ */
+export const DayContent = () => {
+  const baseDate = new Date();
+
+  return (
+    <StaticDaysCalendar
+      baseDate={baseDate}
+      DayContent={({ monthDay }) => <span>{monthDay}</span>}
     />
   );
 };

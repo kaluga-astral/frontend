@@ -33,6 +33,7 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    * флаг, означающий, что предыдущий элемент находится в выбранном диапазоне
    */
   isPreviousItemInSelectedRange?: boolean;
+  isNotInteractable?: boolean;
 };
 
 type WithTheme = {
@@ -136,12 +137,15 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isInSelectedRange',
   'isInHoveredRange',
   'lengthInRow',
+  'isNotInteractable',
 ]);
 
 export const StaticCalendarGridButton = styled(StaticCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`
+  cursor: ${({ isNotInteractable }) => (isNotInteractable ? 'initial' : '')};
+
   position: relative;
 
   color: ${(props) => getTextColor(props)};
