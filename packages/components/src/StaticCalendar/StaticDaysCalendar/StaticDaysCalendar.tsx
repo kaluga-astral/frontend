@@ -93,8 +93,8 @@ export const StaticDaysCalendar = ({
         {grid.map((props, index) => (
           <StaticCalendarGridButton
             key={`${id}_${index}`}
-            disabled={props.disabled}
-            selected={props.selected}
+            disabled={props.isDisabled}
+            selected={props.isSelected}
             isOutOfAvailableRange={props.isOutOfAvailableRange}
             isCurrentInUserLocalTime={props.isCurrentInUserLocalTime}
             isInSelectedRange={props.isInSelectedRange}

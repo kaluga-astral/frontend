@@ -9,7 +9,7 @@ export type CalendarGridItem<T> = {
   /**
    * флаг, обозначающий, что дата совпадает с выбранным
    */
-  selected: boolean;
+  isSelected: boolean;
   /**
    * флаг, обозначающий, что дата совпадает с текущей датой пользователя
    */
@@ -21,7 +21,7 @@ export type CalendarGridItem<T> = {
   /**
    * флаг, обозначающий что элемент будет не доступен к выбору
    */
-  disabled: boolean;
+  isDisabled: boolean;
 } & T;
 
 export type GridBuilderResult<T> = CalendarGridItem<T>[];

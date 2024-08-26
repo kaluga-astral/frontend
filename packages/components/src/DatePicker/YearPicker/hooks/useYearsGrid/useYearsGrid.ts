@@ -45,7 +45,7 @@ export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
       grid.push({
         date,
         year,
-        selected: selectedYear === year,
+        isSelected: selectedYear === year,
         isCurrentInUserLocalTime: year === currentYear,
         isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
           date,
@@ -53,7 +53,7 @@ export const useYearsGrid: CalendarGridBuilder<YearItem> = ({
           rangeDate,
           deep: DateCompareDeep.year,
         }),
-        disabled: isDateOutOfRange({
+        isDisabled: isDateOutOfRange({
           date,
           dateA: minDate,
           dateB: maxDate,

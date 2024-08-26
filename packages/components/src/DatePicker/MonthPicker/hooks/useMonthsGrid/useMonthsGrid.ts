@@ -42,7 +42,7 @@ export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
 
       grid.push({
         date,
-        selected: selectedMonth === i && selectedYear === year,
+        isSelected: selectedMonth === i && selectedYear === year,
         month: i + 1,
         isCurrentInUserLocalTime: i === currentMonth && year === currentYear,
         isInSelectedRange: checkIsDateBetweenSelectedAndRangeDates({
@@ -51,7 +51,7 @@ export const useMonthsGrid: CalendarGridBuilder<MonthItem> = ({
           rangeDate,
           deep: DateCompareDeep.month,
         }),
-        disabled: isDateOutOfRange({
+        isDisabled: isDateOutOfRange({
           date,
           dateA: minDate,
           dateB: maxDate,

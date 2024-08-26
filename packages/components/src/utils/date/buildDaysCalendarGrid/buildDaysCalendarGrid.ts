@@ -27,8 +27,8 @@ type BuildMonthGridOptions = {
    * @default true
    */
   isMondayFirst?: boolean;
-  minDate: Date;
-  maxDate: Date;
+  minDate?: Date;
+  maxDate?: Date;
 };
 
 const FULL_ROWS_COUNT = 6;
@@ -90,7 +90,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
     return {
       isOutOfAvailableRange: dateMonth !== month,
       index,
-      selected:
+      isSelected:
         (isDate(selectedDate) && compareDateDayByUTC(selectedDate, date)) ||
         (isDate(rangeDate) && compareDateDayByUTC(rangeDate, date)),
       isCurrentInUserLocalTime:
@@ -105,12 +105,15 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
         deep: DateCompareDeep.day,
       }),
       monthDay: date.getUTCDate(),
-      disabled: isDateOutOfRange({
-        date,
-        dateA: minDate,
-        dateB: maxDate,
-        deep: DateCompareDeep.day,
-      }),
+      isDisabled:
+        minDate && maxDate
+          ? isDateOutOfRange({
+              date,
+              dateA: minDate,
+              dateB: maxDate,
+              deep: DateCompareDeep.day,
+            })
+          : false,
     };
   });
 };

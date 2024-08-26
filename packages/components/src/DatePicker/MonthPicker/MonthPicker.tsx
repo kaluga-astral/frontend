@@ -57,18 +57,22 @@ export const MonthPicker = ({
         headBtnText={baseDate.getUTCFullYear()}
       />
       <DateCalendarGridLarge>
-        {grid.map(({ month, date, ...props }, index) => (
-          <DateCalendarGridButtonLarge
-            key={`${month}_${index}`}
-            onClick={() => onChange?.(date)}
-            tooltipTitle={titleFormat(date)}
-            lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
-            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
-            {...props}
-          >
-            {monthFormat(date)}
-          </DateCalendarGridButtonLarge>
-        ))}
+        {grid.map(
+          ({ month, date, isDisabled, isSelected, ...props }, index) => (
+            <DateCalendarGridButtonLarge
+              key={`${month}_${index}`}
+              onClick={() => onChange?.(date)}
+              tooltipTitle={titleFormat(date)}
+              lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              disabled={isDisabled}
+              selected={isSelected}
+              {...props}
+            >
+              {monthFormat(date)}
+            </DateCalendarGridButtonLarge>
+          ),
+        )}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>
   );
