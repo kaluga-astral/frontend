@@ -12,6 +12,10 @@ import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 import { ActionCell, type Actions } from './ActionCell';
 
 /**
+ * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
+ * **Используйте [NewActionCell](/docs/components-newactioncell--docs)
+ * Причина отказа от поддержки: ActionCell не работает с контекстом NewDataGrid, и не позволяет
+ * управлять состояниями строки при взаимодействии с действиями
  * ### [Figma]()
  * ### [Guide]()
  */
@@ -203,13 +207,13 @@ export const BlockingOperations = () => {
   }, [deleteLoading, saveLoading]);
 
   const FAKE_ACTIONS: Actions<DataTypeActions> = {
-    isBlockingOperation: true,
     main: [
       {
         icon: <BinOutlineMd />,
         name: 'Удалить',
         onClick: () => setDeleteLoading((prevState) => !prevState),
         loading: deleteLoading,
+        isBlockingOperation: true,
       },
       {
         icon: <SaveOutlineMd />,

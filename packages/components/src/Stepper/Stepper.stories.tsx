@@ -10,7 +10,7 @@ import { styled } from '../styles';
  * ### [Guide]()
  */
 const meta: Meta<typeof Stepper> = {
-  title: 'Components/Stepper',
+  title: 'Components/Navigation/Stepper',
   component: Stepper,
 };
 

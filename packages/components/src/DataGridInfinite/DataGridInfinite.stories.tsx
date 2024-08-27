@@ -13,7 +13,7 @@ import { makeDataList } from './faker';
  * Таблица с бесконечным скроллом.
  *
  * **❗️❗️❗️ Компонент устарел и больше не будет поддерживаться.**
- * **Используйте [NewDataGridInfinite](/docs/components-newdatagridinfinite--docs), который построен на css grid.**
+ * **Используйте [NewDataGridInfinite](/docs/components-data-display-newdatagridinfinite--docs), который построен на css grid.**
  * Причина отказа от поддержки: DataGrid построен на неконтролируемой табличной верстке, которая не поддерживает вложенность
  *
  * DataGridInfinite обладает тем же функционалом  что и [DataGrid](/docs/components-datagrid--docs)
@@ -21,7 +21,7 @@ import { makeDataList } from './faker';
  * ### [Guide]()
  */
 const meta: Meta<typeof DataGridInfinite> = {
-  title: 'Components/DataGridInfinite',
+  title: 'Components/Data Display/DataGridInfinite',
   component: DataGridInfinite,
 };
 

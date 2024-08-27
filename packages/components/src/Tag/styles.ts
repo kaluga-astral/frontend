@@ -1,5 +1,4 @@
 import { Chip, type ChipProps } from '@mui/material';
-import { badgeClasses } from '@mui/base';
 
 import { styled } from '../styles';
 import { type Theme } from '../theme';
@@ -327,22 +326,5 @@ export const StyledTag = styled(Chip, {
   .MuiChip-icon {
     width: 16px;
     height: 16px;
-  }
-
-  & .${badgeClasses.badge} {
-    ${({ theme, customColor, customVariant }) =>
-      (customColor === 'grey' || customColor === 'default') &&
-      customVariant === 'light' &&
-      `
-      background-color: ${theme.palette.grey[800]};
-      color: ${theme.palette.common.white};
-    `};
-
-    ${({ theme, customColor, customVariant }) =>
-      (customColor === 'grey' || customColor === 'default') &&
-      customVariant === 'contained' &&
-      `
-      color: ${theme.palette.grey[800]};
-    `};
   }
 `;

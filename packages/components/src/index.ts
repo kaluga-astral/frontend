@@ -167,6 +167,12 @@ export * from './MenuList';
 export * from './NavMenu';
 
 export {
+  NewActionCell,
+  type Actions as NewActions,
+  type ActionCellProps as NewActionCellProps,
+} from './NewActionCell';
+
+export {
   NewDataGrid,
   type NewDataGridProps,
   type DataGridColumns as NewDataGridColumns,

@@ -8,7 +8,7 @@ import { ListItemText } from '../ListItemText';
 import { ListItemIcon } from './ListItemIcon';
 
 const meta: Meta<typeof ListItemIcon> = {
-  title: 'Components/List/ListItemIcon',
+  title: 'Components/Data Display/List/ListItemIcon',
   component: ListItemIcon,
 };
 

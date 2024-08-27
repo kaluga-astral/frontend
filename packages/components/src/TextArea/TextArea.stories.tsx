@@ -8,7 +8,7 @@ import { TextArea } from './TextArea';
  * ### [Guide]()
  */
 const meta: Meta<typeof TextArea> = {
-  title: 'Components/TextArea',
+  title: 'Components/Inputs/TextArea',
   component: TextArea,
 };
 

@@ -1,11 +1,20 @@
-import { BinOutlineMd, EyeFillMd, SendOutlineMd } from '@astral/icons';
+import { type ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { type Meta } from '@storybook/react';
-import { type ChangeEvent, useEffect, useState } from 'react';
+import {
+  BinOutlineMd,
+  EditOutlineMd,
+  EyeFillMd,
+  SendOutlineMd,
+} from '@astral/icons';
 
 import errorIllustration from '../../../ui/illustrations/error.svg';
-import { ActionCell, type Actions } from '../ActionCell';
 import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
+import {
+  type ActionCellProps,
+  type Actions,
+  NewActionCell,
+} from '../NewActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type {
@@ -32,7 +41,7 @@ import {
  * ### [Guide]()
  */
 const meta: Meta<typeof NewDataGrid> = {
-  title: 'Components/NewDataGrid',
+  title: 'Components/Data Display/NewDataGrid',
   component: NewDataGrid,
 };
 
@@ -61,6 +70,7 @@ const FAKE_ACTIONS: Actions<DataType> = {
       icon: <EyeFillMd />,
       name: 'Просмотреть',
       onClick: () => console.log('main'),
+      isBlockingOperation: true,
     },
     {
       icon: <SendOutlineMd />,
@@ -102,10 +112,77 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
     align: 'center',
     width: '120px',
     renderCell: (row) => {
-      return <ActionCell actions={FAKE_ACTIONS} row={row} />;
+      return <NewActionCell actions={FAKE_ACTIONS} row={row} />;
     },
   },
 ];
+
+type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
+
+const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isSigning, setIsSigning] = useState(false);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleDelete = () => {
+    setIsDeleting(true);
+  };
+
+  const handleSign = () => {
+    setIsSigning(true);
+  };
+
+  useEffect(() => {
+    if (isEditing) {
+      setTimeout(() => setIsEditing(false), 1500);
+    }
+
+    if (isDeleting) {
+      setTimeout(() => setIsDeleting(false), 1500);
+    }
+
+    if (isSigning) {
+      setTimeout(() => setIsSigning(false), 1500);
+    }
+  }, [isEditing, isDeleting, isSigning]);
+
+  const fakeActions = useMemo(
+    () => ({
+      main: [
+        {
+          icon: <EditOutlineMd />,
+          name: 'Редактировать',
+          loading: isEditing,
+          onClick: handleEdit,
+        },
+        {
+          icon: <BinOutlineMd />,
+          name: 'Удалить',
+          loading: isDeleting,
+          loadingNote: 'Происходит удаление',
+          isBlockingOperation: true,
+          onClick: handleDelete,
+        },
+      ],
+      secondary: [
+        {
+          name: 'Подписать',
+          loading: isSigning,
+          loadingNote: 'Происходит подписание',
+          isBlockingOperation: true,
+          onClick: handleSign,
+        },
+      ],
+    }),
+    [isEditing, isDeleting, isSigning],
+  );
+
+  return <NewActionCell actions={fakeActions} row={row} />;
+};
 
 /**
  * DataGrid без пагинации
@@ -506,7 +583,7 @@ export const WithDisabledRow = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -575,7 +652,7 @@ export const DisabledLastCell = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -623,6 +700,72 @@ export const DisabledLastCell = () => {
       selectedRows={selected}
       onSelectRow={handleSelect}
       onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+export const ActionsDataGrid = () => {
+  const fakeColumns: DataGridColumns<DataType>[] = [
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <FakeActionCell row={row} />;
+      },
+    },
+  ];
+
+  const columns = makeColumns(fakeColumns);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(FAKE_DATA_TEMPLATE),
+  ];
+
+  const [loading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  return (
+    <NewDataGrid<DataType>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      onRowClick={handleRowClick}
+      isLoading={loading}
       onRetry={() => {}}
     />
   );
@@ -698,7 +841,7 @@ export const Tree = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -753,7 +896,7 @@ export const TreeWithInitialExpanded = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -810,7 +953,7 @@ export const TreeWithExpandedLevel = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -869,7 +1012,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -927,7 +1070,7 @@ export const TreeWithCheckbox = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1070,7 +1213,7 @@ export const TreeWithOverrideColumns = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS} row={row} />;
+        return <NewActionCell actions={ACTIONS} row={row} />;
       },
     },
   ]);
@@ -1095,7 +1238,7 @@ export const TreeWithOverrideColumns = () => {
             field: 'actions',
             renderCell: (row) => {
               return (
-                <ActionCell
+                <NewActionCell
                   actions={{
                     main: [
                       {
@@ -1119,7 +1262,7 @@ export const TreeWithOverrideColumns = () => {
           field: 'actions',
           renderCell: (row) => {
             return (
-              <ActionCell
+              <NewActionCell
                 actions={{
                   main: [
                     {
@@ -1194,7 +1337,7 @@ export const WithLoaderInButton = () => {
     {
       field: 'actions',
       renderCell: (row) => {
-        return <ActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
+        return <NewActionCell actions={ACTIONS_WITH_LOADER} row={row} />;
       },
     },
   ]);

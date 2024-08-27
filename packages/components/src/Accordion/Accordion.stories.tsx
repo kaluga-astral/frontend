@@ -16,7 +16,7 @@ import { Accordion } from './Accordion';
  * ### [Guide]()
  */
 const meta: Meta<typeof Accordion> = {
-  title: 'Components/Accordion',
+  title: 'Components/Data Display/Accordion',
   component: Accordion,
 };
 
