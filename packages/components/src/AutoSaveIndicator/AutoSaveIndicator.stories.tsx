@@ -1,27 +1,29 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { ProfileOutlineMd } from '@astral/icons';
+import { useState } from 'react';
 
 import { DashboardLayout } from '../DashboardLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
 import { Grid } from '../Grid';
+import { Button } from '../Button';
 
-import { AutoSave } from './AutoSave';
+import { AutoSaveIndicator } from './AutoSaveIndicator';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=28356-409&t=YR0epNNIklP0h3Fu-0)
  * ### [Guide]()
  */
 
-const meta: Meta<typeof AutoSave> = {
-  title: 'Components/AutoSave',
-  component: AutoSave,
+const meta: Meta<typeof AutoSaveIndicator> = {
+  title: 'Components/AutoSaveIndicator',
+  component: AutoSaveIndicator,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof AutoSave>;
+type Story = StoryObj<typeof AutoSaveIndicator>;
 
 const Logo = () => {
   return (
@@ -67,6 +69,30 @@ export const Example = () => {
     },
   ];
 
+  const [isLoading, setLoading] = useState(false);
+
+  const [isSuccess, setSuccess] = useState(false);
+
+  const [isError, setError] = useState(false);
+
+  const handleSave = () => {
+    setLoading(true);
+    setSuccess(false);
+    setError(false);
+
+    const hasError = Math.random() < 0.5;
+
+    setTimeout(() => {
+      if (hasError) {
+        setLoading(false);
+        setError(true);
+      } else {
+        setSuccess(true);
+        setLoading(false);
+      }
+    }, 4000);
+  };
+
   return (
     <DashboardLayoutWrapper>
       <DashboardLayout>
@@ -93,8 +119,19 @@ export const Example = () => {
             },
           }}
         >
-          <AutoSave onRetry={() => {}} errorMsg="123" />
+          <AutoSaveIndicator
+            onRetry={() => {
+              handleSave();
+            }}
+            isLoading={isLoading}
+            isError={isError}
+            isSuccess={isSuccess}
+            errorMsg="Ошибка автосохранения"
+          />
         </DashboardLayout.Header>
+        <DashboardLayout.Main>
+          <Button onClick={handleSave}>Сохранить данные</Button>
+        </DashboardLayout.Main>
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
@@ -103,21 +140,21 @@ export const Example = () => {
 export const State = () => {
   return (
     <Grid spacing={3}>
-      <AutoSave onRetry={() => {}} errorMsg="Изменения не сохранены" />
-      <AutoSave
+      <AutoSaveIndicator onRetry={() => {}} errorMsg="Изменения не сохранены" />
+      <AutoSaveIndicator
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
-        state="isLoading"
+        isLoading
       />
-      <AutoSave
+      <AutoSaveIndicator
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
-        state="isError"
+        isError
       />
-      <AutoSave
+      <AutoSaveIndicator
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
-        state="isSuccess"
+        isSuccess
       />
     </Grid>
   );

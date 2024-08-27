@@ -22,8 +22,6 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-
-  padding: ${({ theme }) => theme.spacing(2, 0)};
 `;
 
 export const StyledTypography = styled(Typography)`
@@ -33,7 +31,7 @@ export const StyledTypography = styled(Typography)`
 `;
 
 export const LoadingIcon = styled(AutosaveLoaderFillMd)`
-  animation: ${loading} 2s infinite;
+  animation: ${loading} 1.5s infinite;
 `;
 
 export const ErrorIcon = styled(AutosaveErrorFillMd)`
@@ -58,4 +56,15 @@ export const StyledTooltip = styled(Tooltip)`
   & .${tooltipClasses.tooltip} {
     max-width: none;
   }
+`;
+
+export const StyledButton = styled(Typography)`
+  cursor: pointer;
+
+  align-self: flex-end;
+
+  padding: ${({ theme }) => theme.spacing(0, 2)};
+
+  background: none;
+  border: none;
 `;
