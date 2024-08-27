@@ -3,9 +3,11 @@ import {
   AutosaveFillMd,
   AutosaveLoaderFillMd,
 } from '@astral/icons';
+import { tooltipClasses } from '@mui/material';
 
 import { keyframes, styled } from '../styles';
 import { Typography } from '../Typography';
+import { Tooltip } from '../Tooltip';
 
 const loading = keyframes`
   0%, 100%{
@@ -50,4 +52,10 @@ export const ErrorWrapper = styled.div`
 export const PopoverContent = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const StyledTooltip = styled(Tooltip)`
+  & .${tooltipClasses.tooltip} {
+    max-width: none;
+  }
 `;

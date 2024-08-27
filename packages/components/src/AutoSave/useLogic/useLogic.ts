@@ -1,4 +1,5 @@
 import { type RefObject, useEffect, useState } from 'react';
+import { type PopoverOrigin } from '@mui/material';
 
 type UseLogicParams = { ref: RefObject<HTMLDivElement> };
 
@@ -24,10 +25,13 @@ export const useLogic = ({ ref }: UseLogicParams) => {
       open: open,
       onClose: handleClose,
       anchorEl: ref.current,
-      anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+      anchorOrigin: {
+        vertical: 'bottom' as PopoverOrigin['vertical'],
+        horizontal: 'center' as PopoverOrigin['horizontal'],
+      },
       transformOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
+        horizontal: 'center' as PopoverOrigin['horizontal'],
+        vertical: 'top' as PopoverOrigin['vertical'],
       },
     },
   };

@@ -12,6 +12,7 @@ import {
   ErrorWrapper,
   LoadingIcon,
   PopoverContent,
+  StyledTooltip,
   StyledTypography,
   SuccessIcon,
   Wrapper,
@@ -27,41 +28,47 @@ import {
 import { useLogic } from './useLogic';
 
 export type AutoSaveProps = {
+  /**
+   * Функция обработки нажатия на кнопку "Повторить попытку"
+   */
   onRetry: () => void;
+  /**
+   * Текст тултипа при ошибке автосохранения
+   */
   errorMsg: string;
+  /**
+   * Состояние сохранения, если состояние не указано, то `default`
+   */
   state?: 'isLoading' | 'isError' | 'isSuccess';
+  /**
+   * Если true, Popover не будет показан при первой сессии
+   */
+  withoutPopover?: boolean;
 };
 
 export const AutoSave = forwardRef<HTMLDivElement, AutoSaveProps>(
   (props, forwardedRef) => {
     const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
-    const { state, errorMsg, onRetry } = props;
+    const { state, errorMsg, onRetry, withoutPopover } = props;
 
     const { popoverProps, handleClose } = useLogic({ ref });
 
-    return (
-      <>
-        <Wrapper ref={ref}>
-          {!state && (
+    const renderContent = () => {
+      switch (state) {
+        case 'isLoading':
+          return (
             <>
-              <StyledTypography variant="caption" {...props}>
-                {DEFAULT_STATE}
-              </StyledTypography>
-              <AutosaveFillMd />
-            </>
-          )}
-          {state === 'isLoading' && (
-            <>
-              <StyledTypography variant="caption" {...props}>
+              <StyledTypography variant="caption">
                 {LOADING_STATE}
               </StyledTypography>
               <LoadingIcon />
             </>
-          )}
-          {state === 'isError' && (
+          );
+        case 'isError':
+          return (
             <>
               <ErrorWrapper>
-                <StyledTypography variant="caption" {...props}>
+                <StyledTypography variant="caption">
                   {ERROR_STATE}
                 </StyledTypography>
                 <StyledTypography
@@ -80,24 +87,48 @@ export const AutoSave = forwardRef<HTMLDivElement, AutoSaveProps>(
                 <ErrorIcon />
               </Tooltip>
             </>
-          )}
-          {state === 'isSuccess' && (
+          );
+        case 'isSuccess':
+          return (
             <>
-              <StyledTypography variant="caption" {...props}>
+              <StyledTypography variant="caption">
                 {SUCCESS_STATE}
               </StyledTypography>
               <SuccessIcon />
             </>
-          )}
-        </Wrapper>
-        <Popover {...popoverProps}>
-          <PopoverContent>
-            <Typography>{POPOVER_MESSAGE}</Typography>
-            <IconButton variant="text" onClick={handleClose}>
-              <CrossOutlineMd />
-            </IconButton>
-          </PopoverContent>
-        </Popover>
+          );
+        default:
+          return (
+            <>
+              <StyledTypography variant="caption">
+                {DEFAULT_STATE}
+              </StyledTypography>
+              <StyledTooltip
+                title={POPOVER_MESSAGE}
+                placement="bottom"
+                //withoutContainer=false необходим для размещения тултипа на иконку
+                withoutContainer={false}
+              >
+                <AutosaveFillMd />
+              </StyledTooltip>
+            </>
+          );
+      }
+    };
+
+    return (
+      <>
+        <Wrapper ref={ref}>{renderContent()}</Wrapper>
+        {!withoutPopover && (
+          <Popover {...popoverProps}>
+            <PopoverContent>
+              <Typography>{POPOVER_MESSAGE}</Typography>
+              <IconButton variant="text" onClick={handleClose}>
+                <CrossOutlineMd />
+              </IconButton>
+            </PopoverContent>
+          </Popover>
+        )}
       </>
     );
   },
