@@ -40,16 +40,12 @@ export type AutoSaveProps = {
    * Состояние сохранения, если состояние не указано, то `default`
    */
   state?: 'isLoading' | 'isError' | 'isSuccess';
-  /**
-   * Если true, Popover не будет показан при первой сессии
-   */
-  withoutPopover?: boolean;
 };
 
 export const AutoSave = forwardRef<HTMLDivElement, AutoSaveProps>(
   (props, forwardedRef) => {
     const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
-    const { state, errorMsg, onRetry, withoutPopover } = props;
+    const { state, errorMsg, onRetry } = props;
 
     const { popoverProps, handleClose } = useLogic({ ref });
 
@@ -119,16 +115,14 @@ export const AutoSave = forwardRef<HTMLDivElement, AutoSaveProps>(
     return (
       <>
         <Wrapper ref={ref}>{renderContent()}</Wrapper>
-        {!withoutPopover && (
-          <Popover {...popoverProps}>
-            <PopoverContent>
-              <Typography>{POPOVER_MESSAGE}</Typography>
-              <IconButton variant="text" onClick={handleClose}>
-                <CrossOutlineMd />
-              </IconButton>
-            </PopoverContent>
-          </Popover>
-        )}
+        <Popover {...popoverProps}>
+          <PopoverContent>
+            <Typography>{POPOVER_MESSAGE}</Typography>
+            <IconButton variant="text" onClick={handleClose}>
+              <CrossOutlineMd />
+            </IconButton>
+          </PopoverContent>
+        </Popover>
       </>
     );
   },

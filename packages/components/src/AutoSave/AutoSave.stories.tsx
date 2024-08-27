@@ -103,28 +103,21 @@ export const Example = () => {
 export const State = () => {
   return (
     <Grid spacing={3}>
-      <AutoSave
-        onRetry={() => {}}
-        errorMsg="Изменения не сохранены"
-        withoutPopover
-      />
+      <AutoSave onRetry={() => {}} errorMsg="Изменения не сохранены" />
       <AutoSave
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
         state="isLoading"
-        withoutPopover
       />
       <AutoSave
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
         state="isError"
-        withoutPopover
       />
       <AutoSave
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
         state="isSuccess"
-        withoutPopover
       />
     </Grid>
   );
