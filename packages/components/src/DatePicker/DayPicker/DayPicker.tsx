@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useMemo } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -70,6 +70,21 @@ export const DayPicker = ({
     }
   }, [onDayHover, popoverHovered]);
 
+  const renderDayTooltipTitle = useCallback(
+    ({ date }: { date: Date }) => {
+      return dayFormat(date);
+    },
+    [dayFormat],
+  );
+
+  const selectedRanges = useMemo(() => {
+    if (!selectedDate || !rangeDate) {
+      return null;
+    }
+
+    return [{ dateA: selectedDate, dateB: rangeDate }];
+  }, [selectedDate, rangeDate]);
+
   return (
     <DateCalendarWrapper>
       <DateCalendarHead
@@ -80,18 +95,14 @@ export const DayPicker = ({
         headBtnText={monthYearFormat(baseDate)}
       />
       <StaticDaysCalendarWrapper
-        DayTooltipTitle={({ date }) => dayFormat(date)}
+        renderDayTooltipTitle={renderDayTooltipTitle}
         minDate={minDate}
         maxDate={maxDate}
         selectedDate={selectedDate}
         baseDate={baseDate}
         onDayHover={onDayHover}
         hoveredDate={hoveredDayDate}
-        selectedRanges={
-          rangeDate && selectedDate
-            ? [{ dateA: selectedDate, dateB: rangeDate }]
-            : null
-        }
+        selectedRanges={selectedRanges}
         onChange={onChange}
         isMondayFirst={isMondayFirst}
       />

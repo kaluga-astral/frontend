@@ -139,9 +139,10 @@ export const OnChange = () => {
 };
 
 /**
- * Пропс ответственный за рендер контента в тултипе при наведении на элемент календаря
+ * Пропс ответственный за рендер контента в тултипе при наведении на элемент календаря.
+ * Для оптимальной работы требуется передавать не анонимную функцию
  */
-export const DayTooltipTitle = () => {
+export const RenderDayTooltipTitle = () => {
   const baseDate = new Date();
 
   const dayFormat = useLocaleDateTimeFormat({
@@ -155,21 +156,22 @@ export const DayTooltipTitle = () => {
   return (
     <StaticDaysCalendar
       baseDate={baseDate}
-      DayTooltipTitle={({ date }) => dayFormat(date)}
+      renderDayTooltipTitle={({ date }) => dayFormat(date)}
     />
   );
 };
 
 /**
- * Пропс ответственный за рендер контента внутри каждого элемента
+ * Пропс ответственный за рендер контента внутри каждого элемента.
+ * Для оптимальной работы требуется передавать не анонимную функцию
  */
-export const DayContent = () => {
+export const RenderDayContent = () => {
   const baseDate = new Date();
 
   return (
     <StaticDaysCalendar
       baseDate={baseDate}
-      DayContent={({ monthDay }) => <span>{monthDay}</span>}
+      renderDayContent={({ monthDay }) => <span>{monthDay}</span>}
     />
   );
 };

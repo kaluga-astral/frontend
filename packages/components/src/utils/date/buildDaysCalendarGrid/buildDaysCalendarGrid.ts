@@ -49,7 +49,8 @@ type BuildDaysCalendarGridOptions = {
 };
 
 const FULL_ROWS_COUNT = 6;
-const FULL_DAYS_COUNT = FULL_ROWS_COUNT * DAYS_IN_WEEK;
+
+export const DAYS_CALENDAR_ITEMS_COUNT = FULL_ROWS_COUNT * DAYS_IN_WEEK;
 
 export const buildDaysCalendarGrid: CalendarGridBuilder<
   CalendarGridItemDay,
@@ -92,7 +93,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
    */
   const currentDate = new Date();
 
-  return Array.from({ length: FULL_DAYS_COUNT }).map<
+  return Array.from({ length: DAYS_CALENDAR_ITEMS_COUNT }).map<
     CalendarGridItem<CalendarGridItemDay>
   >((_, index) => {
     // текущая дата в счетчике

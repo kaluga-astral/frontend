@@ -21,7 +21,7 @@ describe('StaticDaysCalendar', () => {
     renderWithTheme(
       <StaticDaysCalendar
         baseDate={baseDate}
-        DayContent={({ date }) => formatDate(date, 'YYYY-MM-DD', '-')}
+        renderDayContent={({ date }) => formatDate(date, 'YYYY-MM-DD', '-')}
       />,
     );
 
@@ -69,23 +69,23 @@ describe('StaticDaysCalendar', () => {
     expect(items).toHaveLength(28);
   });
 
-  it('DayTooltipTitle вызывается для каждого элемента', () => {
+  it('renderDayTooltipTitle вызывается для каждого элемента', () => {
     const spy = vi.fn();
     const baseDate = new Date('2022-02-10T00:00:00.000Z');
 
     renderWithTheme(
-      <StaticDaysCalendar baseDate={baseDate} DayTooltipTitle={spy} />,
+      <StaticDaysCalendar baseDate={baseDate} renderDayTooltipTitle={spy} />,
     );
 
     expect(spy).toBeCalledTimes(42);
   });
 
-  it('DayContent вызывается для каждого элемента', () => {
+  it('renderDayContent вызывается для каждого элемента', () => {
     const spy = vi.fn();
     const baseDate = new Date('2022-02-10T00:00:00.000Z');
 
     renderWithTheme(
-      <StaticDaysCalendar baseDate={baseDate} DayContent={spy} />,
+      <StaticDaysCalendar baseDate={baseDate} renderDayContent={spy} />,
     );
 
     expect(spy).toBeCalledTimes(42);

@@ -1,6 +1,7 @@
 import {
   type SyntheticEvent,
   forwardRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -185,15 +186,18 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
     };
 
-    const handleDayPick = (pickedDate: Date) => {
-      if (activeInput === 'startDate') {
-        pickStartDate(pickedDate);
-      }
+    const handleDayPick = useCallback(
+      (pickedDate: Date) => {
+        if (activeInput === 'startDate') {
+          pickStartDate(pickedDate);
+        }
 
-      if (activeInput === 'endDate') {
-        pickEndDate(pickedDate);
-      }
-    };
+        if (activeInput === 'endDate') {
+          pickEndDate(pickedDate);
+        }
+      },
+      [activeInput, pickEndDate],
+    );
 
     const handleAcceptStart = (
       _: string,
