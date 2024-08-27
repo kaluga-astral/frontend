@@ -1,22 +1,26 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { BinOutlineMd, EditOutlineMd, SaveOutlineMd } from '@astral/icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { type DataGridColumns, NewDataGrid } from '../NewDataGrid';
 
-import { type Actions, NewActionCell } from './NewActionCell';
+import {
+  DataGridActionCell,
+  type DataGridActionCellProps,
+  type DataGridActions,
+} from './DataGridActionCell';
 
 /**
- * NewActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
+ * DataGridActionCell предназначен для использования в компонентах NewDataGrid и NewDataGridInfinite.
  * Работает с контекстом NewDataGrid и позволяет управлять состояниями строки при взаимодействии с действиями
  *
  * ### [Figma]()
  * ### [Guide]()
  */
 
-const meta: Meta<typeof NewActionCell> = {
-  title: 'Components/NewActionCell',
-  component: NewActionCell,
+const meta: Meta<typeof DataGridActionCell> = {
+  title: 'Components/DataGridActionCell',
+  component: DataGridActionCell,
 };
 
 export default meta;
@@ -68,7 +72,7 @@ const FAKE_DATA = [
   },
 ];
 
-type Story = StoryObj<typeof NewActionCell>;
+type Story = StoryObj<typeof DataGridActionCell>;
 
 export const Interaction: Story = {
   args: {
@@ -82,6 +86,73 @@ export const Interaction: Story = {
 };
 
 export const Example = () => {
+  type FakeActionCellProps<TRow> = Pick<DataGridActionCellProps<TRow>, 'row'>;
+
+  const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isSigning, setIsSigning] = useState(false);
+
+    const handleEdit = () => {
+      setIsEditing(true);
+    };
+
+    const handleDelete = () => {
+      setIsDeleting(true);
+    };
+
+    const handleSign = () => {
+      setIsSigning(true);
+    };
+
+    useEffect(() => {
+      if (isEditing) {
+        setTimeout(() => setIsEditing(false), 1500);
+      }
+
+      if (isDeleting) {
+        setTimeout(() => setIsDeleting(false), 1500);
+      }
+
+      if (isSigning) {
+        setTimeout(() => setIsSigning(false), 1500);
+      }
+    }, [isEditing, isDeleting, isSigning]);
+
+    const fakeActions = useMemo(
+      () => ({
+        main: [
+          {
+            icon: <EditOutlineMd />,
+            name: 'Редактировать',
+            loading: isEditing,
+            onClick: handleEdit,
+          },
+          {
+            icon: <BinOutlineMd />,
+            name: 'Удалить',
+            loading: isDeleting,
+            loadingNote: 'Происходит удаление',
+            isBlockingOperation: true,
+            onClick: handleDelete,
+          },
+        ],
+        secondary: [
+          {
+            name: 'Подписать',
+            loading: isSigning,
+            loadingNote: 'Происходит подписание',
+            isBlockingOperation: true,
+            onClick: handleSign,
+          },
+        ],
+      }),
+      [isEditing, isDeleting, isSigning],
+    );
+
+    return <DataGridActionCell actions={fakeActions} row={row} />;
+  };
+
   const columns: DataGridColumns<DataType>[] = [
     {
       field: 'documentName',
@@ -93,7 +164,7 @@ export const Example = () => {
       sortable: false,
       width: '120px',
       align: 'right',
-      renderCell: (row) => <NewActionCell actions={FAKE_ACTIONS} row={row} />,
+      renderCell: (row) => <FakeActionCell row={row} />,
     },
   ];
 
@@ -130,7 +201,7 @@ export const LoaderActions = () => {
     }
   }, [deleteLoading, saveLoading]);
 
-  const fakeActions: Actions<DataTypeActions> = {
+  const fakeActions: DataGridActions<DataTypeActions> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -151,7 +222,7 @@ export const LoaderActions = () => {
     id: '123456789',
   };
 
-  return <NewActionCell actions={fakeActions} row={fakeData} />;
+  return <DataGridActionCell actions={fakeActions} row={fakeData} />;
 };
 
 export const BlockingOperations = () => {
@@ -177,7 +248,7 @@ export const BlockingOperations = () => {
     }
   }, [deleteLoading, saveLoading]);
 
-  const fakeActions: Actions<DataTypeActions> = {
+  const fakeActions: DataGridActions<DataTypeActions> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -202,5 +273,5 @@ export const BlockingOperations = () => {
     id: '123456789',
   };
 
-  return <NewActionCell actions={fakeActions} row={fakeData} />;
+  return <DataGridActionCell actions={fakeActions} row={fakeData} />;
 };
