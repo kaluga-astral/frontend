@@ -279,3 +279,38 @@ export const DialogActions = () => {
     </>
   );
 };
+
+export const Size = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <Button onClick={handleClickOpen}>Default dialog</Button>
+      <Dialog open={isOpen} onClose={handleClose} title="Заголовок" size="xl">
+        <DialogContent>
+          <DialogContentText>
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActionComponent>
+          <Button variant="text" onClick={handleClose}>
+            Отмена
+          </Button>
+          <Button autoFocus onClick={handleClose}>
+            Готово
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+    </>
+  );
+};

@@ -18,6 +18,8 @@ export type DialogProps = WithoutEmotionSpecific<
    * Отключить кликабельность фонового компонента
    */
   disableBackdropClick?: boolean;
+
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };
 
 export const Dialog = ({
@@ -25,6 +27,7 @@ export const Dialog = ({
   title,
   disableBackdropClick,
   onClose,
+  size = 'md',
   ...props
 }: DialogProps) => {
   const handleClose =
@@ -51,7 +54,7 @@ export const Dialog = ({
   }
 
   return (
-    <StyledDialog onClose={handleClose} {...props}>
+    <StyledDialog $size={size} onClose={handleClose} {...props}>
       {title && <DialogTitle onClose={onClose}>{title}</DialogTitle>}
       {children}
     </StyledDialog>
