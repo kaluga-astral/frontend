@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import { type Actions, DataGridActionCell } from './DataGridActionCell';
+import { DataGridActionCell, type DataGridActions } from './DataGridActionCell';
 
 type DataTypeActions = {
   id: string;
@@ -12,9 +12,9 @@ const FAKE_DATA: DataTypeActions = {
   id: '123456789',
 };
 
-describe('NewActionCell', () => {
+describe('DataGridActionCell', () => {
   it('Основные действия отображаются', () => {
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [
         {
           icon: <svg />,
@@ -33,7 +33,7 @@ describe('NewActionCell', () => {
   });
 
   it('Второстепенные действия отображаются', async () => {
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [],
       secondary: [
         {
@@ -60,7 +60,7 @@ describe('NewActionCell', () => {
 
   it('OnClick вызывается при нажатии на основные действия', async () => {
     const onClickSpy = vi.fn();
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [
         {
           icon: <svg />,
@@ -81,7 +81,7 @@ describe('NewActionCell', () => {
   });
 
   it('Кнопка блокируется, если disabled=true', () => {
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [
         {
           icon: <svg />,
@@ -101,7 +101,7 @@ describe('NewActionCell', () => {
   });
 
   it('Tooltip отображается для основных действий', async () => {
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [
         {
           icon: <svg />,
@@ -125,7 +125,7 @@ describe('NewActionCell', () => {
   });
 
   it('Кнопки заблокированы, при isBlockingOperation=true и loading=true', async () => {
-    const fakeAction: Actions<DataTypeActions> = {
+    const fakeAction: DataGridActions<DataTypeActions> = {
       main: [
         {
           icon: <svg />,

@@ -6,10 +6,10 @@ import {
 } from 'react';
 
 import { RowContext } from '../../NewDataGrid';
-import { type ActionCellProps } from '../DataGridActionCell';
+import { type DataGridActionCellProps } from '../DataGridActionCell';
 import type { NestedAction, SingleAction } from '../types';
 
-type UseLogicParams<TRowData> = ActionCellProps<TRowData>;
+type UseLogicParams<TRowData> = DataGridActionCellProps<TRowData>;
 
 export const useLogic = <TRowData>({
   row,

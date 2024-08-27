@@ -72,7 +72,7 @@ export const MainAction = <TAction,>({
     ...actions
   } = action;
 
-  const title = !loading && (disabledReason || name);
+  const title = disabledReason || name;
 
   return (
     <Tooltip

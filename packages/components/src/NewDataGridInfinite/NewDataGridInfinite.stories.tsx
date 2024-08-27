@@ -11,9 +11,9 @@ import errorIllustration from '../../../ui/illustrations/error.svg';
 import noDataIllustration from '../../../ui/illustrations/no-data.svg';
 import { ConfigProvider } from '../ConfigProvider';
 import {
-  type ActionCellProps,
-  type Actions,
   DataGridActionCell,
+  type DataGridActionCellProps,
+  type DataGridActions,
 } from '../DataGridActionCell';
 import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
@@ -46,7 +46,7 @@ type DataType = {
 
 type SortField = 'documentName' | 'recipient' | 'createDate';
 
-const FAKE_ACTIONS: Actions<DataType> = {
+const FAKE_ACTIONS: DataGridActions<DataType> = {
   main: [
     {
       icon: <EyeFillMd />,
@@ -98,7 +98,7 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
   },
 ];
 
-type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
+type FakeActionCellProps<TRow> = Pick<DataGridActionCellProps<TRow>, 'row'>;
 
 const DataGridInfiniteWrapper = styled.div`
   width: 100%;
@@ -166,7 +166,7 @@ export const Example = () => {
 };
 
 /**
- * При состоянии loading=true и isBlockingOperation=true у действия, строка блокируется и появляется тултип с ```loadingNote```
+ * При состоянии `loading=true` и `isBlockingOperation=true` у действия, строка блокируется и появляется тултип с `loadingNote`
  */
 export const ActionsDataGrid = () => {
   const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {

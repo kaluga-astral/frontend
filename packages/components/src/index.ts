@@ -66,8 +66,8 @@ export {
 
 export {
   DataGridActionCell,
-  type Actions as DataGridActions,
-  type ActionCellProps as DataGridActionCellProps,
+  type DataGridActions,
+  type DataGridActionCellProps,
 } from './DataGridActionCell';
 
 export * from './DataGridInfinite';

@@ -11,9 +11,9 @@ import errorIllustration from '../../../ui/illustrations/error.svg';
 import { DataGridPagination } from '../DataGridPagination';
 import { ConfigProvider } from '../ConfigProvider';
 import {
-  type ActionCellProps,
-  type Actions,
   DataGridActionCell,
+  type DataGridActionCellProps,
+  type DataGridActions,
 } from '../DataGridActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
@@ -64,7 +64,7 @@ const FAKE_DATA_TEMPLATE: DataType = {
   createDate: '2022-03-24T17:50:40.206Z',
 };
 
-const FAKE_ACTIONS: Actions<DataType> = {
+const FAKE_ACTIONS: DataGridActions<DataType> = {
   main: [
     {
       icon: <EyeFillMd />,
@@ -117,7 +117,7 @@ const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
   },
 ];
 
-type FakeActionCellProps<TRow> = Pick<ActionCellProps<TRow>, 'row'>;
+type FakeActionCellProps<TRow> = Pick<DataGridActionCellProps<TRow>, 'row'>;
 
 /**
  * DataGrid без пагинации
@@ -504,7 +504,7 @@ export const WithDisabledContent = () => {
 };
 
 export const WithDisabledRow = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -573,7 +573,7 @@ export const WithDisabledRow = () => {
  * `isDisabledLastCell` позволяет не блокировать последнюю ячейку
  */
 export const DisabledLastCell = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -641,7 +641,7 @@ export const DisabledLastCell = () => {
 };
 
 /**
- * При состоянии loading=true и isBlockingOperation=true у действия, строка блокируется и появляется тултип с ```loadingNote```
+ * При состоянии `loading=true` и `isBlockingOperation=true` у действия, строка блокируется и появляется тултип с `loadingNote`
  */
 export const ActionsDataGrid = () => {
   const FakeActionCell = <TRow,>({ row }: FakeActionCellProps<TRow>) => {
@@ -830,7 +830,7 @@ export const EmptyCellValue = () => {
  * Таблица можем работать с вложенными структурами
  */
 export const Tree = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -885,7 +885,7 @@ export const Tree = () => {
  * Параметр `isInitialExpanded` позволяет раскрыть вложенные структуру при первичном отображении
  */
 export const TreeWithInitialExpanded = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -942,7 +942,7 @@ export const TreeWithInitialExpanded = () => {
  *  Используя пропс `expandedLevel` можно настраивать глубину раскрытия дерева при первичном отображении, если `isInitialExpanded=true`
  */
 export const TreeWithExpandedLevel = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -1001,7 +1001,7 @@ export const TreeWithExpandedLevel = () => {
  *  Элементы, сверх этого значения, будут скрыты под кнопку "Показать все"
  */
 export const TreeWithInitialVisibleChildrenCount = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -1059,7 +1059,7 @@ export const TreeWithInitialVisibleChildrenCount = () => {
  * Таблица с древовидной структурой так же работает в варианте с множественным выбором (чекбоксы)
  */
 export const TreeWithCheckbox = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -1202,7 +1202,7 @@ export const TreeWithOptionIsNotSelectable = () => {
  *  например указать кастомный список действий для вложенных элементов
  */
 export const TreeWithOverrideColumns = () => {
-  const ACTIONS: Actions<DataType> = {
+  const ACTIONS: DataGridActions<DataType> = {
     main: [
       {
         icon: <BinOutlineMd />,
@@ -1317,7 +1317,7 @@ export const TreeWithOverrideColumns = () => {
  * Состояние загрузки регулируется полем `loading` экшенов переданных в `<ActionCell/>`
  */
 export const WithLoaderInButton = () => {
-  const ACTIONS_WITH_LOADER: Actions<DataType> = {
+  const ACTIONS_WITH_LOADER: DataGridActions<DataType> = {
     main: [
       {
         icon: <EyeFillMd />,
