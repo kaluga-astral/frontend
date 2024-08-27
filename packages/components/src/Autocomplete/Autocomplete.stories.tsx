@@ -14,7 +14,7 @@ import { Autocomplete } from './Autocomplete';
  * ### [Guide]()
  */
 const meta: Meta<typeof Autocomplete> = {
-  title: 'Components/Autocomplete',
+  title: 'Components/Inputs/Autocomplete',
   component: Autocomplete,
 };
 

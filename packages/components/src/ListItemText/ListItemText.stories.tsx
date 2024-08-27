@@ -6,7 +6,7 @@ import { ListItem } from '../ListItem';
 import { ListItemText } from './ListItemText';
 
 const meta: Meta<typeof ListItemText> = {
-  title: 'Components/List/ListItemText',
+  title: 'Components/Data Display/List/ListItemText',
   component: ListItemText,
 };
 

@@ -19,18 +19,18 @@ import type { DataGridColumns, DataGridRowWithOptions } from '../NewDataGrid';
 import { styled } from '../styles';
 import { makeColumns } from '../NewDataGrid/faker';
 
-import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
 import { NewDataGridInfinite } from './NewDataGridInfinite';
+import { makeDataList, makeDataListWithTree, makeRandomDate } from './faker';
 
 /**
  * Таблица с бесконечным скроллом построенная на css grid
  *
- * NewDataGridInfinite обладает тем же функционалом что и [NewDataGrid](/docs/components-newdatagrid--docs)
+ * NewDataGridInfinite обладает тем же функционалом  что и [NewDataGrid](/docs/components-data-display-newdatagrid--docs)
  * ### [Figma](https://www.figma.com/file/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?type=design&node-id=12407-146186&mode=design&t=sBor9IJ3F3TqLcos-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof NewDataGridInfinite> = {
-  title: 'Components/NewDataGridInfinite',
+  title: 'Components/Data Display/NewDataGridInfinite',
   component: NewDataGridInfinite,
 };
 

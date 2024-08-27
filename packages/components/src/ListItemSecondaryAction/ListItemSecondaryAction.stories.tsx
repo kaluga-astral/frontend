@@ -9,7 +9,7 @@ import { ListItemText } from '../ListItemText';
 import { ListItemSecondaryAction } from './ListItemSecondaryAction';
 
 const meta: Meta<typeof ListItemSecondaryAction> = {
-  title: 'Components/List/ListItemSecondaryActionItem',
+  title: 'Components/Data Display/List/ListItemSecondaryActionItem',
   component: ListItemSecondaryAction,
 };
 

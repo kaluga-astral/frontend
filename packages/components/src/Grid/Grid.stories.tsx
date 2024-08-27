@@ -13,7 +13,7 @@ import { Grid } from './Grid';
  * ### [Guide]()
  */
 const meta: Meta<typeof Grid> = {
-  title: 'Components/Grid',
+  title: 'Components/Layout/Grid',
   component: Grid,
 };
 
