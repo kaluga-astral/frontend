@@ -145,43 +145,45 @@ export const StaticDaysCalendar = ({
   selectedDate,
   hoveredDate,
   isMondayFirst = true,
+  baseDate,
   ...props
 }: StaticDaysCalendarProps) => {
-  const accumulator = useMemo(() => new Map(), []);
+  const accumulator = useMemo(() => new Map(), [baseDate]);
 
   const { dateA: memoizedSelectedDate, dateB: memoizedHoveredDate } = useMemo(
     () =>
       optimizeRangeDates({
-        baseDate: props.baseDate,
+        baseDate: baseDate,
         dateA: selectedDate,
         dateB: hoveredDate,
         isMondayFirst: isMondayFirst,
         accumulator,
       }),
-    [hoveredDate, selectedDate],
+    [hoveredDate, selectedDate, baseDate],
   );
 
   const memoizedSelectedRanges = useMemo(
-    () => filterSelectedRanges(props.baseDate, isMondayFirst, selectedRanges),
-    [selectedRanges],
+    () => filterSelectedRanges(baseDate, isMondayFirst, selectedRanges),
+    [selectedRanges, baseDate],
   );
 
   const { dateA: memoizedMinDate, dateB: memoizedMaxDate } = useMemo(
     () =>
       optimizeRangeDates({
-        baseDate: props.baseDate,
+        baseDate: baseDate,
         dateA: minDate,
         dateB: maxDate,
         isMondayFirst: isMondayFirst,
         accumulator,
       }),
-    [minDate, maxDate],
+    [minDate, maxDate, baseDate],
   );
 
   return (
     <StaticDaysCalendarInner
       {...props}
       isMondayFirst={isMondayFirst}
+      baseDate={baseDate}
       selectedDate={memoizedSelectedDate}
       hoveredDate={memoizedHoveredDate}
       selectedRanges={memoizedSelectedRanges}
