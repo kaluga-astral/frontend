@@ -14,28 +14,6 @@ describe('optimizeRangeDates', () => {
       expect(sut.dateB).toBeNull();
     });
 
-    it('При отсутствующем dateB', () => {
-      const sut = optimizeRangeDates({
-        baseDate: new Date('2024-08-01T00:00:00.000Z'),
-        dateA: new Date('2024-06-019T00:00:00.000Z'),
-        accumulator: new Map(),
-      });
-
-      expect(sut.dateA).toBeNull();
-      expect(sut.dateB).toBeNull();
-    });
-
-    it('При отсутствующем dateA', () => {
-      const sut = optimizeRangeDates({
-        baseDate: new Date('2024-08-01T00:00:00.000Z'),
-        dateB: new Date('2024-06-019T00:00:00.000Z'),
-        accumulator: new Map(),
-      });
-
-      expect(sut.dateA).toBeNull();
-      expect(sut.dateB).toBeNull();
-    });
-
     it('При dateA меньше чем значения календаря и при dateB меньше чем значения календаря', () => {
       const sut = optimizeRangeDates({
         baseDate: new Date('2024-08-01T00:00:00.000Z'),
@@ -59,6 +37,50 @@ describe('optimizeRangeDates', () => {
       expect(sut.dateA).toBeNull();
       expect(sut.dateB).toBeNull();
     });
+  });
+
+  it('Рассчитанный dateA на один день больше основного диапазона и dateB равен null при переданном dateA больше основного диапазона и при отсутствующем переданном dateB', () => {
+    const sut = optimizeRangeDates({
+      baseDate: new Date('2024-08-01T00:00:00.000Z'),
+      dateA: new Date('2024-09-30T00:00:00.000Z'),
+      accumulator: new Map(),
+    });
+
+    expect(sut.dateA).toStrictEqual(new Date('2024-09-08T00:00:00.000Z'));
+    expect(sut.dateB).toBeNull();
+  });
+
+  it('Рассчитанный dateA на один день меньше основного диапазона и dateB равен null при переданном dateA меньше основного диапазона и при отсутствующем переданном dateB', () => {
+    const sut = optimizeRangeDates({
+      baseDate: new Date('2024-08-01T00:00:00.000Z'),
+      dateA: new Date('2024-05-30T00:00:00.000Z'),
+      accumulator: new Map(),
+    });
+
+    expect(sut.dateA).toStrictEqual(new Date('2024-07-27T00:00:00.000Z'));
+    expect(sut.dateB).toBeNull();
+  });
+
+  it('Рассчитанный dateB на один день больше основного диапазона и dateA равен null при переданном dateB больше основного диапазона и при отсутствующем переданном dateA', () => {
+    const sut = optimizeRangeDates({
+      baseDate: new Date('2024-08-01T00:00:00.000Z'),
+      dateB: new Date('2024-09-30T00:00:00.000Z'),
+      accumulator: new Map(),
+    });
+
+    expect(sut.dateA).toBeNull();
+    expect(sut.dateB).toStrictEqual(new Date('2024-09-08T00:00:00.000Z'));
+  });
+
+  it('Рассчитанный dateB на один день меньше основного диапазона и dateA равен null при переданном dateB меньше основного диапазона и при отсутствующем переданном dateA', () => {
+    const sut = optimizeRangeDates({
+      baseDate: new Date('2024-08-01T00:00:00.000Z'),
+      dateB: new Date('2024-05-30T00:00:00.000Z'),
+      accumulator: new Map(),
+    });
+
+    expect(sut.dateA).toBeNull();
+    expect(sut.dateB).toStrictEqual(new Date('2024-07-27T00:00:00.000Z'));
   });
 
   it('Рассчитанный dateA меньше основного календаря на один день и рассчитанный dateB равен переданному значению при переданном dateB в основном диапазоне и переданном dateA меньше основного диапазона', () => {

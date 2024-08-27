@@ -8,7 +8,24 @@ const getFromAccumulator = (date: Date, accumulator: Map<string, Date>) => {
     accumulator.set(key, date);
   }
 
-  return accumulator.get(key);
+  return accumulator.get(key)!;
+};
+
+const getBySingle = (
+  date: Date | null | undefined,
+  beforeStart: Date,
+  afterEnd: Date,
+) => {
+  if (!date) {
+    return null;
+  }
+
+  const isLessThanStart = date <= beforeStart;
+  const isMoreThanEnd = date >= afterEnd;
+
+  return (
+    (isLessThanStart && beforeStart) || (isMoreThanEnd && afterEnd) || date
+  );
 };
 
 type OptimizeRangeDatesParams = Pick<
@@ -35,57 +52,34 @@ export const optimizeRangeDates = ({
   isMondayFirst,
   accumulator,
 }: OptimizeRangeDatesParams): {
-  dateA?: Date | null;
-  dateB?: Date | null;
+  dateA: Date | null;
+  dateB: Date | null;
 } => {
-  if (!dateA || !dateB) {
+  if (!dateA && !dateB) {
     return { dateA: null, dateB: null };
   }
 
   const { startDate, endDate } = makeEdgeDates(baseDate, isMondayFirst);
-
-  const isALessThanStartDate = dateA < startDate;
-  const isBLessThanStartDate = dateB < startDate;
-
-  const isAMoreThanEndDate = dateA > endDate;
-  const isBMoreThanEndDate = dateB > endDate;
-
-  if (
-    (isALessThanStartDate && isBLessThanStartDate) ||
-    (isAMoreThanEndDate && isBMoreThanEndDate)
-  ) {
-    return { dateA: null, dateB: null };
-  }
-
   const beforeStart = getFromAccumulator(addDays(startDate, -1), accumulator);
   const afterEnd = getFromAccumulator(addDays(endDate, 1), accumulator);
 
-  if (isALessThanStartDate && isBMoreThanEndDate) {
-    return { dateA: beforeStart, dateB: afterEnd };
+  if (dateA && dateB) {
+    const isALessThanStart = dateA < startDate;
+    const isBLessThanStart = dateB < startDate;
+
+    const isAMoreThanEnd = dateA > endDate;
+    const isBMoreThanEnd = dateB > endDate;
+
+    if (
+      (isALessThanStart && isBLessThanStart) ||
+      (isAMoreThanEnd && isBMoreThanEnd)
+    ) {
+      return { dateA: null, dateB: null };
+    }
   }
 
-  if (isAMoreThanEndDate && isBLessThanStartDate) {
-    return { dateA: afterEnd, dateB: beforeStart };
-  }
-
-  const isAInMiddle = dateA >= startDate && dateA <= endDate;
-  const isBInMiddle = dateB >= startDate && dateB <= endDate;
-
-  if (isAInMiddle && isBLessThanStartDate) {
-    return { dateA, dateB: beforeStart };
-  }
-
-  if (isAInMiddle && isBMoreThanEndDate) {
-    return { dateA, dateB: afterEnd };
-  }
-
-  if (isALessThanStartDate && isBInMiddle) {
-    return { dateA: beforeStart, dateB };
-  }
-
-  if (isAMoreThanEndDate && isBInMiddle) {
-    return { dateA: afterEnd, dateB };
-  }
-
-  return { dateA, dateB };
+  return {
+    dateA: getBySingle(dateA, beforeStart, afterEnd),
+    dateB: getBySingle(dateB, beforeStart, afterEnd),
+  };
 };
