@@ -14,7 +14,7 @@ import { IconDropdownButton } from './IconDropdownButton';
  * ### [Guide]()
  */
 const meta: Meta<typeof IconDropdownButton> = {
-  title: 'Components/IconDropdownButton',
+  title: 'Components/Buttons/IconDropdownButton',
   component: IconDropdownButton,
 };
 

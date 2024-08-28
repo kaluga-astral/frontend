@@ -7,12 +7,12 @@ import { Button } from '../Button';
 import { DescriptionList, type DescriptionListItem } from './DescriptionList';
 
 /**
- * Компонент для упрощенного построения UI списка формата name: value, использующий для отображения элементов компонент [Description](/docs/components-description--docs)
+ * Компонент для упрощенного построения UI списка формата name: value, использующий для отображения элементов компонент [Description](/docs/components-data-display-description--docs)
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=9482-124414&t=voulOUycMV4eKx39-0)
  * ### [Guide]()
  */
 const meta: Meta<typeof DescriptionList> = {
-  title: 'Components/DescriptionList',
+  title: 'Components/Data Display/DescriptionList',
   component: DescriptionList,
 };
 

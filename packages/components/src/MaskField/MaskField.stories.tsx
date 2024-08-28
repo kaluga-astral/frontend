@@ -12,7 +12,7 @@ import { MaskField } from './MaskField';
  * ### [Guide]()
  */
 const meta: Meta<typeof MaskField> = {
-  title: 'Components/MaskField',
+  title: 'Components/Inputs/MaskField',
   component: MaskField,
 };
 

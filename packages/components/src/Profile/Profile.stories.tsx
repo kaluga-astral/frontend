@@ -23,7 +23,7 @@ import { Profile, type ProfileMenuItemData } from './Profile';
  */
 
 const meta: Meta<typeof Profile> = {
-  title: 'Components/Profile',
+  title: 'Components/Data Display/Profile',
   component: Profile,
 };
 

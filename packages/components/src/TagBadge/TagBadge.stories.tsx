@@ -11,7 +11,7 @@ import { TagBadge } from '.';
  */
 
 const meta: Meta<typeof TagBadge> = {
-  title: 'Components/TagBadge',
+  title: 'Components/Data Display/TagBadge',
   component: TagBadge,
 };
 

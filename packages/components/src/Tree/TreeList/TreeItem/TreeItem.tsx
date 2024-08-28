@@ -63,6 +63,7 @@ export const TreeItem = (props: TreeItemProps) => {
     isDefaultExpanded,
     isDisabled,
     disableReason,
+    nextLevel,
     handleChange,
   } = useLogic(props);
 
@@ -105,7 +106,7 @@ export const TreeItem = (props: TreeItemProps) => {
               {...child}
               prefixId={prefixId}
               renderItem={renderItem}
-              level={level + 1}
+              level={nextLevel}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
               chainToSelectedItem={chainToSelectedItem}

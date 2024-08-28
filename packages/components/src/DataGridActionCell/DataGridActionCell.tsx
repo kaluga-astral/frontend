@@ -1,12 +1,12 @@
-import { SecondaryActions } from '../ActionCell/SecondaryAction';
 import { type TooltipProps } from '../Tooltip';
 
+import { SecondaryActions } from './SecondaryAction';
 import type { MainActionKind, SecondaryActionKind } from './types';
 import { useLogic } from './useLogic';
 import { Wrapper } from './styles';
 import { MainAction } from './MainAction';
 
-export type Actions<TAction> = {
+export type DataGridActions<TAction> = {
   /**
    * Основные действия
    */
@@ -18,11 +18,11 @@ export type Actions<TAction> = {
   secondary?: SecondaryActionKind<TAction>[];
 };
 
-export type ActionCellProps<TRow> = {
+export type DataGridActionCellProps<TRow> = {
   /**
    * Действия
    */
-  actions: Actions<TRow>;
+  actions: DataGridActions<TRow>;
 
   /**
    * Данные строки
@@ -35,7 +35,9 @@ const TOOLTIP_PLACEMENT: Record<string, TooltipProps['placement']> = {
   secondaryAction: 'left',
 };
 
-export const NewActionCell = <TRow,>(props: ActionCellProps<TRow>) => {
+export const DataGridActionCell = <TRow,>(
+  props: DataGridActionCellProps<TRow>,
+) => {
   const { isDisabledAction, handleWrapperClick, handleActionClick } =
     useLogic(props);
 

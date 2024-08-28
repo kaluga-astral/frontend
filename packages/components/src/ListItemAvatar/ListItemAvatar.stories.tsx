@@ -10,7 +10,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItemAvatar } from './ListItemAvatar';
 
 const meta: Meta<typeof ListItemAvatar> = {
-  title: 'Components/List/ListItemAvatar',
+  title: 'Components/Data Display/List/ListItemAvatar',
   component: ListItemAvatar,
 };
 

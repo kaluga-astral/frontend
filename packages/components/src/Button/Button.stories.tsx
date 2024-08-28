@@ -17,7 +17,7 @@ import { styled } from '../styles';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Components/Buttons/Button',
   component: Button,
 };
 

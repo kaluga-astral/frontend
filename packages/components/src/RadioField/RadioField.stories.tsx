@@ -13,7 +13,7 @@ import { RadioField } from './RadioField';
  * ### [Guide]()
  */
 const meta: Meta<typeof RadioField> = {
-  title: 'Components/RadioField',
+  title: 'Components/Inputs/RadioField',
   component: RadioField,
 };
 
