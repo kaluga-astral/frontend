@@ -70,7 +70,7 @@ export const ComplianceStatus = ({
   return (
     <Wrapper $background={backgroundColor}>
       {title && (
-        <OverflowTypography variant="button" component="h4">
+        <OverflowTypography variant="h6" component="h4">
           {title}
         </OverflowTypography>
       )}
