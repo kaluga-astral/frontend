@@ -13,7 +13,8 @@ export type SideDialogProps = WithoutEmotionSpecific<
   title?: string;
   /**
    * Размер SideDialog
-   * */
+   * @default sm
+   */
   size?: SideDialogSize;
 };
 

@@ -3,13 +3,12 @@ import { Drawer, type DrawerProps, drawerClasses } from '@mui/material';
 import { styled } from '../styles';
 import { type WithoutEmotionSpecific } from '../types';
 
+import { SIZES } from './constants';
+
 type SideDialogSize = 'xs' | 'sm' | 'md' | 'lg';
 
-const sizes = {
-  xs: '460px',
-  sm: '520px',
-  md: '620px',
-  lg: '800px',
+const getSize = (size: SideDialogSize) => {
+  return SIZES[size] || SIZES.sm;
 };
 
 export const StyledDrawer = styled(Drawer, {
@@ -21,6 +20,6 @@ export const StyledDrawer = styled(Drawer, {
     height: 100dvh;
   }
   .${drawerClasses.paper} {
-    width: ${({ $size }) => sizes[$size]};
+    width: ${({ $size }) => getSize($size)};
   }
 `;
