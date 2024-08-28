@@ -50,6 +50,8 @@ export const ErrorWrapper = styled.div`
 export const PopoverContent = styled.div`
   display: flex;
   align-items: center;
+
+  margin: ${({ theme }) => theme.spacing(2)};
 `;
 
 export const StyledTooltip = styled(Tooltip)`
@@ -67,4 +69,8 @@ export const StyledButton = styled(Typography)`
 
   background: none;
   border: none;
+`;
+
+export const PopoverTypography = styled(Typography)`
+  padding-right: ${({ theme }) => theme.spacing(2)};
 `;

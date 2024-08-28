@@ -1,9 +1,8 @@
-import { AutosaveFillMd, CrossOutlineMd } from '@astral/icons';
+import { AutosaveFillMd, CrossOutlineSm } from '@astral/icons';
 import { forwardRef } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Popover } from '../Popover';
-import { Typography } from '../Typography';
 import { useForwardedRef } from '../hooks';
 import { IconButton } from '../IconButton';
 
@@ -12,6 +11,7 @@ import {
   ErrorWrapper,
   LoadingIcon,
   PopoverContent,
+  PopoverTypography,
   StyledButton,
   StyledTooltip,
   StyledTypography,
@@ -127,9 +127,9 @@ export const AutoSaveIndicator = forwardRef<HTMLDivElement, AutoSaveProps>(
         <Wrapper ref={ref}>{renderContent()}</Wrapper>
         <Popover {...popoverProps}>
           <PopoverContent>
-            <Typography>{POPOVER_MESSAGE}</Typography>
+            <PopoverTypography>{POPOVER_MESSAGE}</PopoverTypography>
             <IconButton variant="text" onClick={handleClose}>
-              <CrossOutlineMd />
+              <CrossOutlineSm />
             </IconButton>
           </PopoverContent>
         </Popover>

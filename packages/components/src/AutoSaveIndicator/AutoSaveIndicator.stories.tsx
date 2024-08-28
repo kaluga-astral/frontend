@@ -1,13 +1,37 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { ProfileOutlineMd } from '@astral/icons';
-import { useState } from 'react';
+import {
+  CompanyOutlineMd,
+  EyeFillMd,
+  ProfileOutlineMd,
+  SearchOutlineMd,
+  SendOutlineMd,
+} from '@astral/icons';
+import { Fragment, useEffect, useState } from 'react';
+import { Stack } from '@mui/material';
 
 import { DashboardLayout } from '../DashboardLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
 import { handleGetProducts } from '../ProductSwitcher/ProductSwitcher.stub';
 import { styled } from '../styles/styled';
+import { type SidebarProps } from '../DashboardLayout/Sidebar';
+import { TextField } from '../TextField';
+import { Select } from '../Select';
+import { PageLayout } from '../PageLayout';
+import {
+  DataGridActionCell,
+  type DataGridActions,
+} from '../DataGridActionCell';
+import {
+  type DataGridColumns,
+  type DataGridRowWithOptions,
+  NewDataGrid,
+} from '../NewDataGrid';
 import { Grid } from '../Grid';
-import { Button } from '../Button';
+import {
+  makeColumns,
+  makeDataList,
+  makeRandomDate,
+} from '../NewDataGrid/faker';
 
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
@@ -51,6 +75,74 @@ const DashboardLayoutWrapper = styled.div`
   max-height: 600px;
 `;
 
+type DataType = {
+  id: string;
+  documentName: string;
+  recipient: string;
+  createDate: string;
+  actions?: object;
+};
+
+const FAKE_DATA_TEMPLATE: DataType = {
+  id: '1',
+  documentName: 'Договор №1',
+  recipient: 'ИП Иванов О.В.',
+  createDate: '2022-03-24T17:50:40.206Z',
+};
+
+const FAKE_ACTIONS: DataGridActions<DataType> = {
+  main: [
+    {
+      icon: <EyeFillMd />,
+      name: 'Просмотреть',
+      onClick: () => console.log('main'),
+      isBlockingOperation: true,
+    },
+    {
+      icon: <SendOutlineMd />,
+      nested: true,
+      name: 'Отправить',
+      actions: [
+        { name: 'Туда', onClick: () => console.log('nested 1') },
+        { name: 'Сюда', onClick: () => console.log('nested 2') },
+      ],
+    },
+  ],
+  secondary: [
+    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
+    { name: 'Удалить', onClick: () => console.log('secondary 2') },
+  ],
+};
+
+const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
+  {
+    field: 'documentName',
+    label: 'Наименование документа',
+    sortable: true,
+  },
+  {
+    field: 'recipient',
+    label: 'Получатель',
+    sortable: true,
+  },
+  {
+    field: 'createDate',
+    label: 'Дата создания',
+    sortable: true,
+    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+  },
+  {
+    field: 'actions',
+    label: 'Действия',
+    sortable: false,
+    align: 'center',
+    width: '120px',
+    renderCell: (row) => {
+      return <DataGridActionCell actions={FAKE_ACTIONS} row={row} />;
+    },
+  },
+];
+
 export const Interaction: Story = {
   args: {},
   parameters: {
@@ -69,11 +161,80 @@ export const Example = () => {
     },
   ];
 
+  const columns = makeColumns(FAKE_COLUMNS);
+
+  const sidebar = {
+    menu: {
+      items: [
+        [
+          'documents',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Документы',
+            items: [
+              [
+                'incoming-documents',
+                {
+                  text: 'Входящие документы',
+                  active: true,
+                },
+              ],
+              [
+                'outgoing-documents',
+                {
+                  text: 'Исходящие документы',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'counterparties',
+          {
+            icon: <ProfileOutlineMd />,
+            text: 'Контрагенты',
+            items: [
+              [
+                'invitations',
+                {
+                  text: 'Приглашения',
+                  active: false,
+                },
+              ],
+            ],
+          },
+        ],
+        [
+          'organizations',
+          {
+            icon: <CompanyOutlineMd />,
+            text: 'Мои организации',
+            active: true,
+          },
+        ],
+      ],
+    },
+  } as SidebarProps;
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
   const [isLoading, setLoading] = useState(false);
 
   const [isSuccess, setSuccess] = useState(false);
 
   const [isError, setError] = useState(false);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(FAKE_DATA_TEMPLATE),
+  ];
 
   const handleSave = () => {
     setLoading(true);
@@ -92,6 +253,12 @@ export const Example = () => {
       }
     }, 4000);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+    }, 1500);
+  }, []);
 
   return (
     <DashboardLayoutWrapper>
@@ -129,8 +296,64 @@ export const Example = () => {
             errorMsg="Ошибка автосохранения"
           />
         </DashboardLayout.Header>
+        <DashboardLayout.Sidebar {...sidebar} />
         <DashboardLayout.Main>
-          <Button onClick={handleSave}>Сохранить данные</Button>
+          <PageLayout
+            header={{
+              title: 'Черновики',
+              breadcrumbs: [
+                <Fragment key="1">Первый текст</Fragment>,
+                <Fragment key="2">Текст с разделителем</Fragment>,
+                <Fragment key="3">Текст с разделителем</Fragment>,
+              ],
+              actions: {
+                main: [
+                  {
+                    text: 'Сохранить данные',
+                    onClick: handleSave,
+                  },
+                ],
+                secondary: [
+                  {
+                    text: 'Кнопка',
+                  },
+                ],
+              },
+              subheader: (
+                <Stack flexDirection="row" flexWrap="wrap" gap={2}>
+                  <TextField
+                    placeholder="Поиск на странице..."
+                    size="small"
+                    InputProps={{
+                      startAdornment: <SearchOutlineMd />,
+                    }}
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                  <Select
+                    value=""
+                    placeholder="Выберите вариант"
+                    size="small"
+                  />
+                </Stack>
+              ),
+            }}
+            content={{
+              children: (
+                <NewDataGrid<DataType>
+                  keyId="id"
+                  rows={slicedData}
+                  columns={columns}
+                  isLoading={isLoading}
+                  onRowClick={handleRowClick}
+                  onRetry={() => {}}
+                />
+              ),
+            }}
+          />
         </DashboardLayout.Main>
       </DashboardLayout>
     </DashboardLayoutWrapper>
