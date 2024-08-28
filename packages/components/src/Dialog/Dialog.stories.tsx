@@ -367,7 +367,7 @@ export const Size = () => {
           <Button onClick={handleCloseXs} variant="light" color="error">
             Отклонить
           </Button>
-          <Button onClick={handleCloseXl} variant="light" color="success">
+          <Button onClick={handleCloseXs} variant="light" color="success">
             Принять
           </Button>
         </DialogActionComponent>
@@ -380,7 +380,7 @@ export const Size = () => {
           <Button onClick={handleCloseSm} variant="light" color="error">
             Отклонить
           </Button>
-          <Button onClick={handleCloseXl} variant="light" color="success">
+          <Button onClick={handleCloseSm} variant="light" color="success">
             Принять
           </Button>
         </DialogActionComponent>
@@ -393,7 +393,7 @@ export const Size = () => {
           <Button onClick={handleCloseMd} variant="light" color="error">
             Отклонить
           </Button>
-          <Button onClick={handleCloseXl} variant="light" color="success">
+          <Button onClick={handleCloseMd} variant="light" color="success">
             Принять
           </Button>
         </DialogActionComponent>
@@ -406,7 +406,7 @@ export const Size = () => {
           <Button onClick={handleCloseLg} variant="light" color="error">
             Отклонить
           </Button>
-          <Button onClick={handleCloseXl} variant="light" color="success">
+          <Button onClick={handleCloseLg} variant="light" color="success">
             Принять
           </Button>
         </DialogActionComponent>
