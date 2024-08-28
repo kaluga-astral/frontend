@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { type ButtonProps } from '../../../Button';
+import { type DialogProps } from '../../../Dialog';
 import { type SearchFieldProps } from '../../../SearchField';
 import { type TreeListProps } from '../../../Tree';
 import { type OptionsModalProps } from '../OptionsModal';
@@ -19,6 +20,7 @@ type UseLogicParams = OptionsModalProps;
 type UseLogicResult = {
   isNoResult: boolean;
   searchFieldProps: SearchFieldProps;
+  modalProps: Partial<DialogProps>;
   treeListProps: TreeListProps;
   cancelButtonProps: ButtonProps;
   confirmButtonProps: ButtonProps;
@@ -62,17 +64,19 @@ export const useLogic = ({
   const handleChange = (newValue: TreeAutocompleteValue | undefined) =>
     setValue(newValue);
 
-  const handleClose = (event: SyntheticEvent<HTMLButtonElement>) =>
+  const handleClose = (event: SyntheticEvent<HTMLButtonElement>) => {
+    setValue(initialValue);
     onClose?.(event, 'escapeKeyDown');
+  };
 
   const handleCancel = (event: SyntheticEvent<HTMLButtonElement>) => {
-    onChange?.(undefined);
-    handleClose(event);
+    setValue(initialValue);
+    onClose?.(event, 'escapeKeyDown');
   };
 
   const handleClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     onChange?.(value);
-    handleClose(event);
+    onClose?.(event, 'escapeKeyDown');
   };
 
   const isNoResult = Boolean(searchValue) && !filteredOptions.length;
@@ -80,6 +84,9 @@ export const useLogic = ({
 
   return {
     isNoResult,
+    modalProps: {
+      onClose: handleClose,
+    },
     searchFieldProps: {
       value: searchValue,
       disabled: isLoading || isLoadingError,

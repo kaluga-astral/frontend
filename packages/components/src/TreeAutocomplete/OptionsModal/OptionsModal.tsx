@@ -69,6 +69,7 @@ export const OptionsModal = (props: OptionsModalProps) => {
   const {
     isNoResult,
     searchFieldProps,
+    modalProps,
     treeListProps,
     cancelButtonProps,
     confirmButtonProps,
@@ -106,7 +107,12 @@ export const OptionsModal = (props: OptionsModalProps) => {
   };
 
   return (
-    <Dialog {...externalDialogProps} open={isOpen} onClose={onClose}>
+    <Dialog
+      {...externalDialogProps}
+      disableRestoreFocus
+      open={isOpen}
+      {...modalProps}
+    >
       <StyledDialogContent>
         <SearchField fullWidth {...searchFieldProps} />
 

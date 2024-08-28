@@ -145,7 +145,6 @@ export const TreeItem = (props: TreeItemProps) => {
           $isSelected={isSelected}
           $isDisabled={isDisabled}
           $level={level}
-          tabIndex={0}
           {...itemContentProps}
         >
           <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>
@@ -192,7 +191,6 @@ export const TreeItem = (props: TreeItemProps) => {
         $isSelected={isSelected}
         $isDisabled={isDisabled}
         $level={level}
-        tabIndex={0}
         {...itemContentProps}
       >
         <Tooltip placement={TOOLTIP_PLACEMENT} {...tooltipProps}>

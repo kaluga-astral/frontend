@@ -3,7 +3,6 @@ import { Grid } from '@astral/components';
 import { object, string } from '@astral/validations';
 import { resolver } from '@astral/validations-react-hook-form-resolver';
 
-import { styled } from '../../../components/src/styles';
 import { Form } from '../Form';
 import { FormSubmitButton } from '../FormSubmitButton';
 import { useForm } from '../hooks';
@@ -88,6 +87,7 @@ export const Example = () => {
         <FormTreeAutocomplete
           name="treeAutocomplete"
           label="Название"
+          required
           options={fakeOptions}
           dialogProps={{
             title: 'Выбор элемента',

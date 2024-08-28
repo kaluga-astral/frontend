@@ -47,6 +47,7 @@ export const useLogic = ({
   };
 
   const idAttr = prefixId ? `${prefixId}${id}` : id;
+  const tabIndex = isDisabled ? -1 : 0;
 
   return {
     isOpen,
@@ -56,6 +57,7 @@ export const useLogic = ({
       id: idAttr,
     },
     itemContentProps: {
+      tabIndex,
       onClick: handleClick,
       onKeyDown: handleClick,
     },

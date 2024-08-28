@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { type DialogProps } from '../Dialog';
 import { type TextFieldProps } from '../TextField';
 import { type TreeListData, type TreeListProps } from '../Tree';
@@ -90,10 +92,14 @@ export type TreeAutocompleteProps = {
   | 'onChange'
 >;
 
-export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
+export const TreeAutocomplete = forwardRef<
+  HTMLInputElement,
+  TreeAutocompleteProps
+>((props, forwardedRef) => {
   const { inputProps, optionsModalProps } = useLogic(props);
 
   const {
+    className,
     value,
     options,
     isDisabled,
@@ -104,6 +110,7 @@ export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
     filterOptions,
     dialogProps,
     treeProps,
+    onBlur,
     onRetry,
     onChange,
     ...externalInputProps
@@ -112,6 +119,8 @@ export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
   return (
     <>
       <Input
+        // @ts-ignore
+        ref={forwardedRef}
         disabled={isDisabled}
         error={isError}
         {...externalInputProps}
@@ -134,4 +143,4 @@ export const TreeAutocomplete = (props: TreeAutocompleteProps) => {
       />
     </>
   );
-};
+});
