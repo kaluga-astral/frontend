@@ -6,23 +6,23 @@ import {
 
 import { styled } from '../styles';
 
-const sizes = {
-  xs: { minWidth: '300px', maxWidth: '399px' },
-  sm: { minWidth: '400px', maxWidth: '499px' },
-  md: { minWidth: '500px', maxWidth: '599px' },
-  lg: { minWidth: '600px', maxWidth: '699px' },
-  xl: { minWidth: '700px', maxWidth: '980px' },
+import { SIZES } from './constants';
+
+type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+const getSize = (size: DialogSize) => {
+  return SIZES[size] || SIZES.md;
 };
 
 export const StyledDialog = styled(MuiDialog, {
   shouldForwardProp: (prop) => !['$size'].includes(prop),
-})<{ $size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }>`
+})<{ $size: DialogSize }>`
   &.${dialogClasses.root} .${backdropClasses.root} {
     background-color: ${({ theme }) => theme.palette.background.modalShadow};
   }
   .${dialogClasses.paper} {
-    min-width: ${({ $size }) => sizes[$size].minWidth};
-    max-width: ${({ $size }) => sizes[$size].maxWidth}
+    min-width: ${({ $size }) => getSize($size).minWidth};
+    max-width: ${({ $size }) => getSize($size).maxWidth}
     }
   }
 `;

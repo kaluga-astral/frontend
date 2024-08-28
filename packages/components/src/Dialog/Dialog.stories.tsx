@@ -9,6 +9,7 @@ import { DialogHeader } from '../DialogHeader';
 import { Grid } from '../Grid';
 import { Tag } from '../Tag';
 import { Typography } from '../Typography';
+import { DescriptionList, type DescriptionListItem } from '../DescriptionList';
 
 import { Dialog } from './Dialog';
 
@@ -43,6 +44,41 @@ export const Interaction: Story = {
     },
   },
 };
+
+const FAKE_ITEMS: DescriptionListItem[] = [
+  {
+    name: 'Дата поступления',
+    value: '12.06.2024 в 11:11',
+  },
+  {
+    name: 'Тип заявки',
+    value: 'Создание',
+  },
+  {
+    name: 'ID учетной записи',
+    value: '4d1f0594-bc22-4660-8e7d-83a024126ef3',
+  },
+  {
+    name: 'ID док-оборота',
+    value: '222a1343-rf12-6660-1e3q-88a911143yr1',
+  },
+  {
+    name: 'ИНН',
+    value: '77724528768',
+  },
+  {
+    name: 'КПП',
+    value: '772401001',
+  },
+  {
+    name: 'Конфигурация',
+    value: 'Значение показателя',
+  },
+  {
+    name: 'Удостоверенный центр',
+    value: 'УЦ «Калуга Астрал»',
+  },
+];
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -281,33 +317,110 @@ export const DialogActions = () => {
 };
 
 export const Size = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openXs, setOpenXs] = useState(false);
+  const [openSm, setOpenSm] = useState(false);
+  const [openMd, setOpenMd] = useState(false);
+  const [openLg, setOpenLg] = useState(false);
+  const [openXl, setOpenXl] = useState(false);
 
-  const handleClickOpen = () => {
-    setIsOpen(true);
+  const handleCloseXs = () => {
+    setOpenXs(false);
+  };
+  const handleCloseSm = () => {
+    setOpenSm(false);
+  };
+  const handleCloseMd = () => {
+    setOpenMd(false);
+  };
+  const handleCloseLg = () => {
+    setOpenLg(false);
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleCloseXl = () => {
+    setOpenXl(false);
   };
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Default dialog</Button>
-      <Dialog open={isOpen} onClose={handleClose} title="Заголовок" size="xl">
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={() => setOpenXs((prevState) => !prevState)}>
+          Dialog xs size
+        </Button>
+        <Button onClick={() => setOpenSm((prevState) => !prevState)}>
+          Dialog sm size
+        </Button>
+        <Button onClick={() => setOpenMd((prevState) => !prevState)}>
+          Dialog md size
+        </Button>
+        <Button onClick={() => setOpenLg((prevState) => !prevState)}>
+          Dialog lg size
+        </Button>
+        <Button onClick={() => setOpenXl((prevState) => !prevState)}>
+          Dialog xl size
+        </Button>
+      </Grid>
+      <Dialog open={openXs} onClose={handleCloseXs} title="Заявка" size="xs">
         <DialogContent>
-          <DialogContentText>
-            Заглушка примера текста страницы, который несет очень важный смысл
-            для пользователя и предлагает ему варианты выбора действий с
-            контентом и в рамках работы приложения.
-          </DialogContentText>
+          <DescriptionList items={FAKE_ITEMS} leader />
         </DialogContent>
         <DialogActionComponent>
-          <Button variant="text" onClick={handleClose}>
-            Отмена
+          <Button onClick={handleCloseXs} variant="light" color="error">
+            Отклонить
           </Button>
-          <Button autoFocus onClick={handleClose}>
-            Готово
+          <Button onClick={handleCloseXl} variant="light" color="success">
+            Принять
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+      <Dialog open={openSm} onClose={handleCloseSm} title="Заявка" size="sm">
+        <DialogContent>
+          <DescriptionList items={FAKE_ITEMS} leader />
+        </DialogContent>
+        <DialogActionComponent>
+          <Button onClick={handleCloseSm} variant="light" color="error">
+            Отклонить
+          </Button>
+          <Button onClick={handleCloseXl} variant="light" color="success">
+            Принять
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+      <Dialog open={openMd} onClose={handleCloseMd} title="Заявка" size="md">
+        <DialogContent>
+          <DescriptionList items={FAKE_ITEMS} leader />
+        </DialogContent>
+        <DialogActionComponent>
+          <Button onClick={handleCloseMd} variant="light" color="error">
+            Отклонить
+          </Button>
+          <Button onClick={handleCloseXl} variant="light" color="success">
+            Принять
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+      <Dialog open={openLg} onClose={handleCloseLg} title="Заявка" size="lg">
+        <DialogContent>
+          <DescriptionList items={FAKE_ITEMS} leader />
+        </DialogContent>
+        <DialogActionComponent>
+          <Button onClick={handleCloseLg} variant="light" color="error">
+            Отклонить
+          </Button>
+          <Button onClick={handleCloseXl} variant="light" color="success">
+            Принять
+          </Button>
+        </DialogActionComponent>
+      </Dialog>
+      <Dialog open={openXl} onClose={handleCloseXl} title="Заявка" size="xl">
+        <DialogContent>
+          <DescriptionList items={FAKE_ITEMS} leader />
+        </DialogContent>
+        <DialogActionComponent>
+          <Button onClick={handleCloseXl} variant="light" color="error">
+            Отклонить
+          </Button>
+          <Button onClick={handleCloseXl} variant="light" color="success">
+            Принять
           </Button>
         </DialogActionComponent>
       </Dialog>
