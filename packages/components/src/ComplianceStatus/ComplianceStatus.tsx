@@ -1,7 +1,6 @@
 import { type ReactNode, useId } from 'react';
 
 import { OverflowTypography } from '../OverflowTypography';
-import { type TypographyColor } from '../Typography';
 
 import {
   EmptyIcon,
@@ -51,12 +50,6 @@ export type ComplianceStatusProps = {
   backgroundColor?: BackgroundColor;
 };
 
-const TEXT_COLOR_BY_STATUS: Record<ItemStatus, TypographyColor> = {
-  default: 'grey',
-  reject: 'error',
-  success: 'grey',
-};
-
 const ICON_BY_STATUS: Record<ItemStatus, JSX.Element> = {
   default: <EmptyIcon />,
   success: <SuccessIcon />,
@@ -84,11 +77,7 @@ export const ComplianceStatus = ({
         {itemsList.map(({ text, status }, index) => (
           <Item key={`${id}_${index}`}>
             {ICON_BY_STATUS[status]}
-            <OverflowTypography
-              color={TEXT_COLOR_BY_STATUS[status]}
-              colorIntensity="900"
-              rowsCount={2}
-            >
+            <OverflowTypography color="grey" colorIntensity="900" rowsCount={2}>
               {text}
             </OverflowTypography>
           </Item>
