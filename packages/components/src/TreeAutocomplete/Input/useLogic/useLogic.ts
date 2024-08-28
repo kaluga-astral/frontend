@@ -7,6 +7,7 @@ type UseLogicParams = InputProps;
 
 export const useLogic = ({
   value,
+  disabled,
   inputRef: externalInputRef,
   onChange,
 }: UseLogicParams) => {
@@ -20,7 +21,7 @@ export const useLogic = ({
     inputRef.current?.focus();
   };
 
-  const isVisibleClearButton = Boolean(value);
+  const isVisibleClearButton = !disabled && Boolean(value);
 
   return {
     inputRef,
