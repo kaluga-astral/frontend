@@ -14,6 +14,8 @@ import {
 
 type ItemStatus = 'success' | 'reject' | 'default';
 
+type BackgroundColor = 'grey' | 'primary';
+
 export type ComplianceStatusItem = {
   /**
    * Текст для отображения в элементе списка
@@ -39,9 +41,14 @@ export type ComplianceStatusProps = {
    */
   children?: ReactNode;
   /**
-   * элементы списка
+   * Элементы списка
    */
   itemsList: ComplianceStatusItem[];
+  /**
+   * Фоновый цвет
+   * @default grey
+   */
+  backgroundColor?: BackgroundColor;
 };
 
 const TEXT_COLOR_BY_STATUS: Record<ItemStatus, TypographyColor> = {
@@ -61,11 +68,12 @@ export const ComplianceStatus = ({
   itemsList,
   children,
   subtitle,
+  backgroundColor = 'grey',
 }: ComplianceStatusProps) => {
   const id = useId();
 
   return (
-    <Wrapper>
+    <Wrapper $background={backgroundColor}>
       {title && (
         <OverflowTypography variant="button" component="h4">
           {title}

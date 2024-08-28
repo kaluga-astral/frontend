@@ -1,14 +1,15 @@
-import { CloseFillSm, SuccessFillSm } from '@astral/icons';
+import { CloseFillSm, DotOutlineSm, SuccessFillSm } from '@astral/icons';
 
 import { styled } from '../styles';
 
-export const Wrapper = styled('article')`
+export const Wrapper = styled('article')<{ $background: 'grey' | 'primary' }>`
   display: grid;
   grid-gap: ${({ theme }) => theme.spacing(3)};
 
   padding: ${({ theme }) => theme.spacing(3, 6)};
 
-  background-color: ${({ theme }) => theme.palette.primary[100]};
+  background-color: ${({ theme, $background }) =>
+    theme.palette[$background][100]};
   border-radius: ${({ theme }) => theme.shape.small};
 `;
 
@@ -28,43 +29,22 @@ export const Item = styled('li')`
   grid-template-columns: auto 1fr;
 `;
 
-const ICON_SIZE = `
-  min-width: 16px;
-  min-height: 16px;
+const DefaultIcon = styled.div`
   width: 16px;
+  min-width: 16px;
   height: 16px;
+  min-height: 16px;
+  margin-top: ${({ theme }) => theme.spacing(0.5)};
 `;
 
-export const EmptyIcon = styled('div')`
-  position: relative;
+export const EmptyIcon = styled(DefaultIcon)`
+  color: ${({ theme }) => theme.palette.grey[800]};
+`.withComponent(DotOutlineSm);
 
-  color: ${({ theme }) => theme.palette.grey[300]};
-  ${ICON_SIZE}
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: block;
-
-    min-width: calc(100% - 4px);
-    min-height: calc(100% - 4px);
-
-    background-color: currentColor;
-    border-radius: 50%;
-  }
-`;
-
-export const RejectIcon = styled(CloseFillSm)`
+export const RejectIcon = styled(DefaultIcon)`
   color: ${({ theme }) => theme.palette.error[900]};
-  ${ICON_SIZE}
-`;
+`.withComponent(CloseFillSm);
 
-export const SuccessIcon = styled(SuccessFillSm)`
+export const SuccessIcon = styled(DefaultIcon)`
   color: ${({ theme }) => theme.palette.success[900]};
-  ${ICON_SIZE}
-`;
+`.withComponent(SuccessFillSm);
