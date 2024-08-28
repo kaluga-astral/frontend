@@ -64,6 +64,12 @@ export {
   type CellValue,
 } from './DataGrid';
 
+export {
+  DataGridActionCell,
+  type DataGridActions,
+  type DataGridActionCellProps,
+} from './DataGridActionCell';
+
 export * from './DataGridInfinite';
 
 export * from './DataGridPagination';

@@ -27,7 +27,7 @@ import { PageLayout } from './PageLayout';
  * ### [Guide]()
  */
 const meta: Meta<typeof PageLayout> = {
-  title: 'Components/PageLayout',
+  title: 'Components/Layout/PageLayout',
   component: PageLayout,
 };
 

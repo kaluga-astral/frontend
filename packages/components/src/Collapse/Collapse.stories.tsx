@@ -15,7 +15,7 @@ import { Collapse } from './Collapse';
  * ### [Guide]()
  */
 const meta: Meta<typeof Collapse> = {
-  title: 'Components/Collapse',
+  title: 'Components/Data Display/Collapse',
   component: Collapse,
 };
 

@@ -7,6 +7,7 @@ import { BinOutlineMd } from '@astral/icons';
 import { styled } from '../styles';
 import { ThemeProvider } from '../ThemeProvider';
 import { ActionCell } from '../ActionCell';
+import { DataGridActionCell } from '../DataGridActionCell';
 
 import { END_OF_SCROLL_MESSAGE } from './constants';
 import { NewDataGridInfinite } from './NewDataGridInfinite';
@@ -317,6 +318,120 @@ describe('NewDataGridInfinite', () => {
 
     await userEvents.click(screen.getByText('Vasya'));
     expect(onClickSpy).not.toHaveBeenCalled();
+  });
+
+  it('Строка не доступна для взаимодействия, если loading=true и isBlockingOperation=true', async () => {
+    const onClickSpy = vi.fn();
+
+    const FAKE_ACTIONS = {
+      main: [
+        {
+          name: 'Удалить',
+          loading: true,
+          loadingNote: 'Происходит удаление',
+          isBlockingOperation: true,
+        },
+      ],
+    };
+
+    render(
+      <ThemeProvider theme={theme}>
+        <DataGridInfiniteWrapper>
+          <NewDataGridInfinite
+            keyId="name"
+            rows={[{ name: 'Vasya' }]}
+            columns={[
+              {
+                field: 'name',
+                label: 'Наименование',
+              },
+              {
+                field: 'actions',
+                label: 'Действие',
+                renderCell: (row) => (
+                  <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
+                ),
+              },
+            ]}
+            onRetry={() => {}}
+            onRowClick={onClickSpy}
+          />
+        </DataGridInfiniteWrapper>
+      </ThemeProvider>,
+      {
+        wrapper: ({ children }) => (
+          <VirtuosoMockContext.Provider
+            value={{ viewportHeight: 300, itemHeight: 100 }}
+          >
+            {children}
+          </VirtuosoMockContext.Provider>
+        ),
+      },
+    );
+
+    await userEvents.click(screen.getByText('Vasya'));
+    expect(onClickSpy).not.toHaveBeenCalled();
+  });
+
+  it('Tooltip c причиной блокировки при загрузке отображается, если loading=true и isBlockingOperation=true', async () => {
+    const onClickSpy = vi.fn();
+
+    const fakeLoadingNote = 'Происходит удаление';
+
+    const FAKE_ACTIONS = {
+      main: [
+        {
+          name: 'Удалить',
+          loading: true,
+          loadingNote: fakeLoadingNote,
+          isBlockingOperation: true,
+        },
+      ],
+    };
+
+    render(
+      <ThemeProvider theme={theme}>
+        <DataGridInfiniteWrapper>
+          <NewDataGridInfinite
+            keyId="name"
+            rows={[{ name: 'Vasya' }]}
+            columns={[
+              {
+                field: 'name',
+                label: 'Наименование',
+              },
+              {
+                field: 'actions',
+                label: 'Действие',
+                renderCell: (row) => (
+                  <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
+                ),
+              },
+            ]}
+            onRetry={() => {}}
+            onRowClick={onClickSpy}
+          />
+        </DataGridInfiniteWrapper>
+      </ThemeProvider>,
+      {
+        wrapper: ({ children }) => (
+          <VirtuosoMockContext.Provider
+            value={{ viewportHeight: 300, itemHeight: 100 }}
+          >
+            {children}
+          </VirtuosoMockContext.Provider>
+        ),
+      },
+    );
+
+    const row = screen.getByLabelText(fakeLoadingNote);
+
+    await userEvents.hover(row);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent(fakeLoadingNote);
   });
 
   it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {

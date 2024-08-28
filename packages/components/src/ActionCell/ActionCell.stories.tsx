@@ -203,13 +203,13 @@ export const BlockingOperations = () => {
   }, [deleteLoading, saveLoading]);
 
   const FAKE_ACTIONS: Actions<DataTypeActions> = {
-    isBlockingOperation: true,
     main: [
       {
         icon: <BinOutlineMd />,
         name: 'Удалить',
         onClick: () => setDeleteLoading((prevState) => !prevState),
         loading: deleteLoading,
+        isBlockingOperation: true,
       },
       {
         icon: <SaveOutlineMd />,

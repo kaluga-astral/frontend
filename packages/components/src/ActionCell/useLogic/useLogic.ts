@@ -9,14 +9,14 @@ export const useLogic = <TRowData>({
   actions,
   row,
 }: UseLogicParams<TRowData>) => {
-  const { main, secondary, isBlockingOperation = false } = actions;
+  const { main, secondary } = actions;
 
-  const isLoading = main.some((action) => {
+  const isDisabledAction = main.some((action) => {
     if ('actions' in action) {
       return false;
     }
 
-    return action?.loading;
+    return action?.isBlockingOperation && action?.loading;
   });
 
   const handleActionClick = useCallback(
@@ -36,8 +36,6 @@ export const useLogic = <TRowData>({
   };
 
   const isSecondaryActionsAvailable = secondary && secondary.length >= 1;
-
-  const isDisabledAction = isLoading && isBlockingOperation;
 
   return {
     isSecondaryActionsAvailable,

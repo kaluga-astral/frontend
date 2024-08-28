@@ -13,7 +13,7 @@ import { ListSubheader } from '../ListSubheader';
 import { ListItemButton } from './ListItemButton';
 
 const meta: Meta<typeof ListItemButton> = {
-  title: 'Components/List/ListItemButton',
+  title: 'Components/Data Display/List/ListItemButton',
   component: ListItemButton,
 };
 

@@ -11,7 +11,7 @@ import { Badge } from './Badge';
  * ### [Guide]()
  */
 const meta: Meta<typeof Badge> = {
-  title: 'Components/Badge',
+  title: 'Components/Data Display/Badge',
   component: Badge,
 };
 
