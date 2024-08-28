@@ -11,6 +11,9 @@ export type SideDialogProps = WithoutEmotionSpecific<
   Omit<MuiDrawerProps, 'anchor'>
 > & {
   title?: string;
+  /**
+   * Размер SideDialog
+   * */
   size?: SideDialogSize;
 };
 

@@ -261,3 +261,209 @@ export const CustomFooter = () => {
     </>
   );
 };
+
+/**
+ * prop `size` определяет размер SideDialog, по дефолту `sm`
+ * */
+export const Sizes = () => {
+  const [openXs, setOpenXs] = useState(false);
+  const [openSm, setOpenSm] = useState(false);
+  const [openMd, setOpenMd] = useState(false);
+  const [openLg, setOpenLg] = useState(false);
+
+  const handleCloseXs = () => {
+    setOpenXs(false);
+  };
+  const handleCloseSm = () => {
+    setOpenSm(false);
+  };
+  const handleCloseMd = () => {
+    setOpenMd(false);
+  };
+  const handleCloseLg = () => {
+    setOpenLg(false);
+  };
+
+  return (
+    <>
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={() => setOpenXs((prevState) => !prevState)}>
+          SideDialog xs size
+        </Button>
+        <Button onClick={() => setOpenSm((prevState) => !prevState)}>
+          SideDialog sm size
+        </Button>
+        <Button onClick={() => setOpenMd((prevState) => !prevState)}>
+          SideDialog md size
+        </Button>
+        <Button onClick={() => setOpenLg((prevState) => !prevState)}>
+          SideDialog lg size
+        </Button>
+      </Grid>
+      <SideDialog
+        title="Заголовок"
+        open={openXs}
+        onClose={handleCloseXs}
+        size="xs"
+      >
+        <SideDialogContent>
+          <Alert severity="warning">
+            Purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+            Quisque id diam vel quam.
+          </Alert>
+          <br />
+          <SideDialogContentText id="alert-dialog-description">
+            {/* cSpell:disable */}
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Arcu cursus vitae congue mauris
+            rhoncus aenean. Sit amet luctus venenatis lectus magna. Vitae auctor
+            eu augue ut lectus arcu bibendum. Dui accumsan sit amet nulla
+            facilisi morbi tempus. Condimentum lacinia quis vel eros donec. Dis
+            parturient montes nascetur ridiculus. Purus faucibus ornare
+            suspendisse sed nisi lacus sed viverra. Quisque id diam vel quam.
+            Magna sit amet purus gravida quis blandit turpis cursus in. Dolor
+            morbi non arcu risus. Sed cras ornare arcu dui vivamus arcu felis
+            bibendum ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Arcu cursus vitae congue mauris rhoncus aenean. Sit amet luctus
+            venenatis lectus magna. Vitae auctor eu augue ut lectus arcu
+            bibendum.
+            {/* cSpell:enable */}
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="text" onClick={handleCloseXs}>
+            Отмена
+          </Button>
+          <Button onClick={handleCloseXs}>Готово</Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openSm}
+        onClose={handleCloseSm}
+        size="sm"
+      >
+        <SideDialogContent>
+          <Alert severity="warning">
+            Purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+            Quisque id diam vel quam.
+          </Alert>
+          <br />
+          <SideDialogContentText id="alert-dialog-description">
+            {/* cSpell:disable */}
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Arcu cursus vitae congue mauris
+            rhoncus aenean. Sit amet luctus venenatis lectus magna. Vitae auctor
+            eu augue ut lectus arcu bibendum. Dui accumsan sit amet nulla
+            facilisi morbi tempus. Condimentum lacinia quis vel eros donec. Dis
+            parturient montes nascetur ridiculus. Purus faucibus ornare
+            suspendisse sed nisi lacus sed viverra. Quisque id diam vel quam.
+            Magna sit amet purus gravida quis blandit turpis cursus in. Dolor
+            morbi non arcu risus. Sed cras ornare arcu dui vivamus arcu felis
+            bibendum ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Arcu cursus vitae congue mauris rhoncus aenean. Sit amet luctus
+            venenatis lectus magna. Vitae auctor eu augue ut lectus arcu
+            bibendum.
+            {/* cSpell:enable */}
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="text" onClick={handleCloseSm}>
+            Отмена
+          </Button>
+          <Button onClick={handleCloseSm}>Готово</Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openMd}
+        onClose={handleCloseMd}
+        size="md"
+      >
+        <SideDialogContent>
+          <Alert severity="warning">
+            Purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+            Quisque id diam vel quam.
+          </Alert>
+          <br />
+          <SideDialogContentText id="alert-dialog-description">
+            {/* cSpell:disable */}
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Arcu cursus vitae congue mauris
+            rhoncus aenean. Sit amet luctus venenatis lectus magna. Vitae auctor
+            eu augue ut lectus arcu bibendum. Dui accumsan sit amet nulla
+            facilisi morbi tempus. Condimentum lacinia quis vel eros donec. Dis
+            parturient montes nascetur ridiculus. Purus faucibus ornare
+            suspendisse sed nisi lacus sed viverra. Quisque id diam vel quam.
+            Magna sit amet purus gravida quis blandit turpis cursus in. Dolor
+            morbi non arcu risus. Sed cras ornare arcu dui vivamus arcu felis
+            bibendum ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Arcu cursus vitae congue mauris rhoncus aenean. Sit amet luctus
+            venenatis lectus magna. Vitae auctor eu augue ut lectus arcu
+            bibendum.
+            {/* cSpell:enable */}
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="text" onClick={handleCloseMd}>
+            Отмена
+          </Button>
+          <Button onClick={handleCloseMd}>Готово</Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openLg}
+        onClose={handleCloseLg}
+        size="lg"
+      >
+        <SideDialogContent>
+          <Alert severity="warning">
+            Purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+            Quisque id diam vel quam.
+          </Alert>
+          <br />
+          <SideDialogContentText id="alert-dialog-description">
+            {/* cSpell:disable */}
+            Заглушка примера текста страницы, который несет очень важный смысл
+            для пользователя и предлагает ему варианты выбора действий с
+            контентом и в рамках работы приложения. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Arcu cursus vitae congue mauris
+            rhoncus aenean. Sit amet luctus venenatis lectus magna. Vitae auctor
+            eu augue ut lectus arcu bibendum. Dui accumsan sit amet nulla
+            facilisi morbi tempus. Condimentum lacinia quis vel eros donec. Dis
+            parturient montes nascetur ridiculus. Purus faucibus ornare
+            suspendisse sed nisi lacus sed viverra. Quisque id diam vel quam.
+            Magna sit amet purus gravida quis blandit turpis cursus in. Dolor
+            morbi non arcu risus. Sed cras ornare arcu dui vivamus arcu felis
+            bibendum ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Arcu cursus vitae congue mauris rhoncus aenean. Sit amet luctus
+            venenatis lectus magna. Vitae auctor eu augue ut lectus arcu
+            bibendum.
+            {/* cSpell:enable */}
+          </SideDialogContentText>
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="text" onClick={handleCloseLg}>
+            Отмена
+          </Button>
+          <Button onClick={handleCloseLg}>Готово</Button>
+        </SideDialogActions>
+      </SideDialog>
+    </>
+  );
+};
