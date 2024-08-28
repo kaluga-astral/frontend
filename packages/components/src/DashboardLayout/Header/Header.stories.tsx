@@ -18,7 +18,7 @@ import { Divider } from '../../Divider';
  * ### [Guide]()
  */
 const meta: Meta<typeof DashboardLayout.Header> = {
-  title: 'Components/DashboardLayout/Header',
+  title: 'Components/Layout/DashboardLayout/Header',
   component: DashboardLayout.Header,
   parameters: {
     layout: 'fullscreen',

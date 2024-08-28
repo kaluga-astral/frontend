@@ -7,7 +7,7 @@ import { Radio } from './Radio';
  * ### [Guide]()
  */
 const meta: Meta<typeof Radio> = {
-  title: 'Components/Radio',
+  title: 'Components/Inputs/Radio',
   component: Radio,
 };
 

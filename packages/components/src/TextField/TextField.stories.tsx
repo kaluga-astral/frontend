@@ -9,7 +9,7 @@ import { TextField } from './TextField';
  * ### [Guide]()
  */
 const meta: Meta<typeof TextField> = {
-  title: 'Components/TextField',
+  title: 'Components/Inputs/TextField',
   component: TextField,
 };
 

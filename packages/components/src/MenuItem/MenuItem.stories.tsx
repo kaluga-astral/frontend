@@ -13,7 +13,7 @@ import { MenuItem, type MenuItemProps } from './MenuItem';
  */
 
 const meta: Meta<typeof MenuItem> = {
-  title: 'Components/Menu/MenuItem',
+  title: 'Components/Navigation/Menu/MenuItem',
   component: MenuItem,
 };
 

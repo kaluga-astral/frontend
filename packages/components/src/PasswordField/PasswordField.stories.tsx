@@ -8,7 +8,7 @@ import { PasswordField } from './PasswordField';
  * ### [Guide]()
  */
 const meta: Meta<typeof PasswordField> = {
-  title: 'Components/PasswordField',
+  title: 'Components/Inputs/PasswordField',
   component: PasswordField,
 };
 

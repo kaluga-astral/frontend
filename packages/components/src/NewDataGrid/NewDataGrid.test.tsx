@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BinOutlineMd } from '@astral/icons';
 
 import { ActionCell } from '../ActionCell';
-import { NewActionCell } from '../NewActionCell';
+import { DataGridActionCell } from '../DataGridActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
@@ -425,7 +425,7 @@ describe('NewDataGrid', () => {
             field: 'actions',
             label: 'Действия',
             renderCell: (row) => (
-              <NewActionCell row={row} actions={FAKE_ACTIONS} />
+              <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
             ),
           },
         ]}
@@ -466,7 +466,7 @@ describe('NewDataGrid', () => {
             field: 'actions',
             label: 'Действия',
             renderCell: (row) => (
-              <NewActionCell row={row} actions={FAKE_ACTIONS} />
+              <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
             ),
           },
         ]}

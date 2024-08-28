@@ -14,7 +14,7 @@ import { Divider } from './Divider';
  * ### [Guide]()
  */
 const meta: Meta<typeof Divider> = {
-  title: 'Components/Divider',
+  title: 'Components/Data Display/Divider',
   component: Divider,
 };
 
