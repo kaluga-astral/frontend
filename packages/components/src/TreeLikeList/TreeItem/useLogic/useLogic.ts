@@ -1,17 +1,9 @@
+import { type MultipleValue } from '../../types';
 import { type TreeItemProps } from '../TreeItem';
 
 import { checkIsSelected } from './utils';
 
-type UseLogicProps = Pick<
-  TreeItemProps,
-  | 'id'
-  | 'value'
-  | 'level'
-  | 'isInitialExpanded'
-  | 'expandedLevel'
-  | 'disabledItems'
-  | 'onChange'
->;
+type UseLogicProps = TreeItemProps;
 
 export const useLogic = ({
   id,
@@ -19,12 +11,20 @@ export const useLogic = ({
   level,
   isInitialExpanded,
   expandedLevel,
+  chainsToSelectedItem = [],
   disabledItems,
   onChange,
 }: UseLogicProps) => {
   const isSelected = checkIsSelected(value, id);
 
-  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+  const flatChainsToSelectedItem: MultipleValue = chainsToSelectedItem?.reduce(
+    (acc, chain: MultipleValue) => [...(acc || []), ...(chain || [])],
+    [],
+  );
+
+  const isDefaultExpanded =
+    flatChainsToSelectedItem?.includes(id) ||
+    (isInitialExpanded && level <= expandedLevel - 1);
 
   const disabledItem = disabledItems?.find((item) => item.id === id);
   const isDisabled = Boolean(disabledItem);

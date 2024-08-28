@@ -9,7 +9,7 @@ import { FlowButton } from './FlowButton';
  */
 
 const meta: Meta<typeof FlowButton> = {
-  title: 'Components/FlowButton',
+  title: 'Components/Buttons/FlowButton',
   component: FlowButton,
 };
 

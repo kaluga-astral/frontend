@@ -16,7 +16,7 @@ import { CodeField } from './CodeField';
  * ### [Guide]()
  */
 const meta: Meta<typeof CodeField> = {
-  title: 'Components/CodeField',
+  title: 'Components/Inputs/CodeField',
   component: CodeField,
 };
 

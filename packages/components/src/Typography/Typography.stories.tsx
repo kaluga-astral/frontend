@@ -13,7 +13,7 @@ import { Typography } from './Typography';
  * ### [Guide]()
  */
 const meta: Meta<typeof Typography> = {
-  title: 'Components/Typography',
+  title: 'Components/Data Display/Typography',
   component: Typography,
 };
 

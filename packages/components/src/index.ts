@@ -66,6 +66,12 @@ export {
   type CellValue,
 } from './DataGrid';
 
+export {
+  DataGridActionCell,
+  type DataGridActions,
+  type DataGridActionCellProps,
+} from './DataGridActionCell';
+
 export * from './DataGridInfinite';
 
 export * from './DataGridPagination';
@@ -167,12 +173,6 @@ export * from './MenuItem';
 export * from './MenuList';
 
 export * from './NavMenu';
-
-export {
-  NewActionCell,
-  type Actions as NewActions,
-  type ActionCellProps as NewActionCellProps,
-} from './NewActionCell';
 
 export {
   NewDataGrid,
