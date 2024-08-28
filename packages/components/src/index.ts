@@ -208,8 +208,8 @@ export * from './Paper';
 
 export {
   ComplianceStatus,
-  ComplianceStatusProps,
-  ComplianceStatusItem,
+  type ComplianceStatusProps,
+  type ComplianceStatusItem,
 } from './ComplianceStatus';
 
 export * from './PersonalData';

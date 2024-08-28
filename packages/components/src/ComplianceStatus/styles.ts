@@ -1,6 +1,7 @@
 import { CloseFillSm, DotOutlineSm, SuccessFillSm } from '@astral/icons';
 
 import { styled } from '../styles';
+import { listContainer } from '../styles/mixins';
 
 export const Wrapper = styled('article')<{ $background: 'grey' | 'primary' }>`
   display: grid;
@@ -17,10 +18,7 @@ export const Inner = styled('ul')`
   display: grid;
   grid-gap: ${({ theme }) => theme.spacing(3)};
 
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
+  ${listContainer};
 `;
 
 export const Item = styled('li')`

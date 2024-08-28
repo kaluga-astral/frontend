@@ -38,19 +38,23 @@ export const Interaction: Story = {
 export const Example = () => {
   return (
     <ComplianceStatus
-      title="Lorem ipsum"
+      title="Требования к паролю"
       itemsList={[
         {
           status: 'default',
-          text: 'Lorem ipsum dolor sit.',
+          text: 'Латинские символы разного регистра (A-Z, a-z)',
+        },
+        {
+          status: 'default',
+          text: 'Не менее 8 символов',
         },
         {
           status: 'success',
-          text: 'Lorem ipsum dolor sit amet, consectetur.',
+          text: 'Арабские цифры (0-9)',
         },
         {
           status: 'reject',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, dicta?',
+          text: 'Знаки пунктуации (!”$%&’()+,-./:;<=>?@[]^_{|}”)',
         },
       ]}
     />
@@ -63,19 +67,29 @@ export const Example = () => {
 export const Children = () => {
   return (
     <ComplianceStatus
-      title="Lorem ipsum"
+      title="Требования к паролю"
       itemsList={[
         {
           status: 'default',
-          text: 'Lorem ipsum dolor sit.',
+          text: 'Латинские символы разного регистра (A-Z, a-z)',
+        },
+        {
+          status: 'default',
+          text: 'Не менее 8 символов',
+        },
+        {
+          status: 'success',
+          text: 'Арабские цифры (0-9)',
+        },
+        {
+          status: 'reject',
+          text: 'Знаки пунктуации (!”$%&’()+,-./:;<=>?@[]^_{|}”)',
         },
       ]}
     >
       <Typography>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aut
-        corporis cumque dignissimos dolore, fugiat, laudantium nam numquam
-        perferendis, possimus quisquam quo vitae. Eos quas quisquam quos sit
-        voluptate? Deleniti!
+        Пожалуйста, убедитесь что введенное значение соответствует правилам,
+        указанными выше
       </Typography>
     </ComplianceStatus>
   );
@@ -87,19 +101,29 @@ export const Children = () => {
 export const Subtitle = () => {
   return (
     <ComplianceStatus
-      title="Lorem ipsum"
+      title="Требования к паролю"
       subtitle={
         <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-          aut corporis cumque dignissimos dolore, fugiat, laudantium nam numquam
-          perferendis, possimus quisquam quo vitae. Eos quas quisquam quos sit
-          voluptate? Deleniti!
+          Пожалуйста, убедитесь что введенное значение соответствует указанными
+          ниже правилам
         </Typography>
       }
       itemsList={[
         {
           status: 'default',
-          text: 'Lorem ipsum dolor sit.',
+          text: 'Латинские символы разного регистра (A-Z, a-z)',
+        },
+        {
+          status: 'default',
+          text: 'Не менее 8 символов',
+        },
+        {
+          status: 'success',
+          text: 'Арабские цифры (0-9)',
+        },
+        {
+          status: 'reject',
+          text: 'Знаки пунктуации (!”$%&’()+,-./:;<=>?@[]^_{|}”)',
         },
       ]}
     />
@@ -112,20 +136,24 @@ export const Subtitle = () => {
 export const BackgroundColor = () => {
   return (
     <ComplianceStatus
-      title="Lorem ipsum"
+      title="Требования к паролю"
       backgroundColor="primary"
       itemsList={[
         {
           status: 'default',
-          text: 'Lorem ipsum dolor sit.',
+          text: 'Латинские символы разного регистра (A-Z, a-z)',
+        },
+        {
+          status: 'default',
+          text: 'Не менее 8 символов',
         },
         {
           status: 'success',
-          text: 'Lorem ipsum dolor sit amet, consectetur.',
+          text: 'Арабские цифры (0-9)',
         },
         {
           status: 'reject',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, dicta?',
+          text: 'Знаки пунктуации (!”$%&’()+,-./:;<=>?@[]^_{|}”)',
         },
       ]}
     />

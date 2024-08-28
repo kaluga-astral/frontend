@@ -1,6 +1,8 @@
-import { type ReactNode, useId } from 'react';
+import { type ReactNode } from 'react';
 
+import { useId } from '../hooks/useId';
 import { OverflowTypography } from '../OverflowTypography';
+import { Typography } from '../Typography';
 
 import {
   EmptyIcon,
@@ -77,9 +79,7 @@ export const ComplianceStatus = ({
         {itemsList.map(({ text, status }, index) => (
           <Item key={`${id}_${index}`}>
             {ICON_BY_STATUS[status]}
-            <OverflowTypography color="grey" colorIntensity="900" rowsCount={2}>
-              {text}
-            </OverflowTypography>
+            <Typography>{text}</Typography>
           </Item>
         ))}
       </Inner>
