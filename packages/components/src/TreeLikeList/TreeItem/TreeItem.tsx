@@ -16,6 +16,11 @@ export type TreeItemProps = TreeListData & {
   value?: MultipleValue;
 
   /**
+   * Уникальный префикс для идентификаторов в рамках дерева
+   */
+  prefixId?: string;
+
+  /**
    * Render-props, позволяет более гибко настраивать содержимое item
    */
   renderItem?: FunctionComponent<Omit<TreeListData, 'children'>>;
@@ -37,6 +42,11 @@ export type TreeItemProps = TreeListData & {
   expandedLevel: number;
 
   /**
+   * Цепочки идентификаторов до выбранных элементов дерева
+   */
+  chainsToSelectedItem?: Array<MultipleValue>;
+
+  /**
    * Список `value` элементов дерева, которые не доступны для взаимодействия
    */
   disabledItems?: Array<FormatDisableItem>;
@@ -47,19 +57,7 @@ export type TreeItemProps = TreeListData & {
   onChange: (value: MultipleValue) => void;
 };
 
-export const TreeItem = ({
-  id,
-  label,
-  note,
-  level,
-  renderItem,
-  children = [],
-  value,
-  isInitialExpanded,
-  expandedLevel,
-  disabledItems,
-  onChange,
-}: TreeItemProps) => {
+export const TreeItem = (props: TreeItemProps) => {
   const {
     isSelected,
     isDefaultExpanded,
@@ -67,15 +65,23 @@ export const TreeItem = ({
     isDisabled,
     nextLevel,
     handleChange,
-  } = useLogic({
+  } = useLogic(props);
+
+  const {
     id,
-    value,
+    prefixId,
+    label,
+    note,
     level,
+    renderItem,
+    children = [],
+    value,
     isInitialExpanded,
     expandedLevel,
+    chainsToSelectedItem,
     disabledItems,
     onChange,
-  });
+  } = props;
 
   /**
    * Предотвращаем всплытие события, так как клик в области чекбокса или label вызывает обработчик на уровне всего item
@@ -85,7 +91,8 @@ export const TreeItem = ({
   if (children.length) {
     return (
       <StyledTreeItem
-        isRoot
+        id={id}
+        prefixId={prefixId}
         isSelected={isSelected}
         isDefaultExpanded={isDefaultExpanded}
         disableReason={disableReason}
@@ -109,11 +116,13 @@ export const TreeItem = ({
           {children.map((child) => (
             <TreeItem
               key={child.id}
+              prefixId={prefixId}
               {...child}
               renderItem={renderItem}
               level={nextLevel}
               isInitialExpanded={isInitialExpanded}
               expandedLevel={expandedLevel}
+              chainsToSelectedItem={chainsToSelectedItem}
               disabledItems={disabledItems}
               value={value}
               onChange={onChange}
@@ -126,6 +135,8 @@ export const TreeItem = ({
 
   return (
     <StyledTreeItem
+      id={id}
+      prefixId={prefixId}
       isSelected={isSelected}
       isDisabled={isDisabled}
       disableReason={disableReason}
