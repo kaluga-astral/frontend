@@ -7,7 +7,7 @@ import { BinOutlineMd } from '@astral/icons';
 import { styled } from '../styles';
 import { ThemeProvider } from '../ThemeProvider';
 import { ActionCell } from '../ActionCell';
-import { NewActionCell } from '../NewActionCell';
+import { DataGridActionCell } from '../DataGridActionCell';
 
 import { END_OF_SCROLL_MESSAGE } from './constants';
 import { NewDataGridInfinite } from './NewDataGridInfinite';
@@ -349,7 +349,7 @@ describe('NewDataGridInfinite', () => {
                 field: 'actions',
                 label: 'Действие',
                 renderCell: (row) => (
-                  <NewActionCell row={row} actions={FAKE_ACTIONS} />
+                  <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
                 ),
               },
             ]}
@@ -404,7 +404,7 @@ describe('NewDataGridInfinite', () => {
                 field: 'actions',
                 label: 'Действие',
                 renderCell: (row) => (
-                  <NewActionCell row={row} actions={FAKE_ACTIONS} />
+                  <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
                 ),
               },
             ]}

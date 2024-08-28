@@ -24,7 +24,7 @@ type SecondaryActionProps<TAction> = {
   tooltipPlacement?: TooltipProps['placement'];
 };
 
-export const SecondaryAct = <TAction,>({
+export const SecondaryActions = <TAction,>({
   actions,
   onActionClick,
   tooltipPlacement,
