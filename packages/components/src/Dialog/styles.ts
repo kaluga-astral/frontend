@@ -22,7 +22,6 @@ export const StyledDialog = styled(MuiDialog, {
   }
   .${dialogClasses.paper} {
     min-width: ${({ $size }) => getSize($size).minWidth};
-    max-width: ${({ $size }) => getSize($size).maxWidth}
-    }
+    max-width: ${({ $size }) => getSize($size).maxWidth};
   }
 `;
