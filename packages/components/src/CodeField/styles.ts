@@ -19,7 +19,9 @@ export const DigitsItem = styled.li`
 `;
 
 export const Digit = styled.input<{ isError?: boolean }>`
-  width: 62px;
+  width: 100%;
+  min-width: 44px;
+  max-width: 60px;
   height: 60px;
   padding: ${({ theme }) => theme.spacing(4, 6)};
 
