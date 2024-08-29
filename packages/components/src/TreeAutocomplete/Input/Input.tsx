@@ -18,7 +18,7 @@ const ClearButton = ({ disabled, onClick }: IconButtonProps) => (
   </StyledIconButton>
 );
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLDivElement, InputProps>(
   (props, forwardedRef) => {
     const { inputRef, isVisibleClearButton, handleClearAll } = useLogic(props);
 

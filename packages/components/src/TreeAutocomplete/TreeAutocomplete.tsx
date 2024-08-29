@@ -93,7 +93,7 @@ export type TreeAutocompleteProps = {
 >;
 
 export const TreeAutocomplete = forwardRef<
-  HTMLInputElement,
+  HTMLDivElement,
   TreeAutocompleteProps
 >((props, forwardedRef) => {
   const { inputProps, optionsModalProps } = useLogic(props);
@@ -119,7 +119,6 @@ export const TreeAutocomplete = forwardRef<
   return (
     <>
       <Input
-        // @ts-ignore
         ref={forwardedRef}
         disabled={isDisabled}
         error={isError}

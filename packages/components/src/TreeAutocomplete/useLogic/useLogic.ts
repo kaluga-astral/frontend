@@ -1,10 +1,7 @@
 import {
   type FocusEvent,
-  type ForwardedRef,
   type KeyboardEvent,
   type SyntheticEvent,
-  useEffect,
-  useRef,
   useState,
 } from 'react';
 
@@ -17,23 +14,20 @@ type UseLogicProps = TreeAutocompleteProps;
 export const useLogic = ({ value, options, onBlur }: UseLogicProps) => {
   const [isOpen, setOpen] = useState(false);
 
-  const handleInputBlur = (event: SyntheticEvent<HTMLInputElement>) => {
+  const handleInputBlur = (event: FocusEvent<HTMLInputElement>) => {
     // Если произошла потеря фокуса, но открылась окно поиска элемента, то не вызываем onBlur, так как произойдет преждевременная валидация
     if (!isOpen) {
-      onBlur?.(event as FocusEvent<HTMLInputElement>);
+      onBlur?.(event);
     }
   };
 
-  const handleOpen = (event: SyntheticEvent<HTMLInputElement>) => {
-    if (event.type === 'click') {
-      return setOpen(true);
-    }
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-    if (
-      event.type === 'keydown' &&
-      (event as KeyboardEvent<HTMLInputElement>).code === 'Enter'
-    ) {
-      return setOpen(true);
+  const handleKeyDow = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === 'Enter') {
+      setOpen(true);
     }
   };
 
@@ -51,7 +45,7 @@ export const useLogic = ({ value, options, onBlur }: UseLogicProps) => {
       value: valueToRender,
       onBlur: handleInputBlur,
       onClick: handleOpen,
-      onKeyDown: handleOpen,
+      onKeyDown: handleKeyDow,
     },
     optionsModalProps: {
       isOpen,
