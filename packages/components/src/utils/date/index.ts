@@ -19,5 +19,3 @@ export * from './buildDaysCalendarGrid';
 export * from './checkIsDateInRange';
 
 export * from './compareDateDayByUTC';
-
-export * from './constants';

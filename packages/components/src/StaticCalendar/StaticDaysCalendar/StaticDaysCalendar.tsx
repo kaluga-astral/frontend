@@ -1,4 +1,4 @@
-import { type ReactNode, memo, useCallback, useId, useMemo } from 'react';
+import { type ReactNode, memo, useCallback, useMemo } from 'react';
 
 import {
   type CalendarGridItemDay,
@@ -6,15 +6,16 @@ import {
 } from '../../utils/date';
 import { type CalendarGridItem } from '../../types';
 import { checkIsDeepEqual } from '../../utils/external';
+import { useId } from '../../hooks/useId';
 
 import { Head } from './Head';
 import { Body } from './styles';
-import { filterSelectedRanges, optimizeRangeDates } from './utils';
-import { MainButton } from './MainButton';
+import { DayButton } from './DayButton';
+import { useLogic } from './useLogic';
 
 type Item = CalendarGridItem<CalendarGridItemDay>;
 
-type StaticDaysCalendarProps = {
+export type StaticDaysCalendarProps = {
   onChange?: (date: Date) => void;
   /**
    * Колбек, вызываемый при событии hover на день календаря
@@ -105,7 +106,7 @@ const StaticDaysCalendarInner = memo(
         <Body role="grid">
           {grid.map((item, index) =>
             checkRenderRequirements(item) ? (
-              <MainButton
+              <DayButton
                 key={`${id}_${index}`}
                 isPreviousItemInSelectedRange={
                   grid[index - 1]?.isInSelectedRange
@@ -162,36 +163,21 @@ export const StaticDaysCalendar = ({
   baseDate,
   ...props
 }: StaticDaysCalendarProps) => {
-  const accumulator = useMemo(() => new Map(), [baseDate]);
-
-  const { dateA: memoizedSelectedDate, dateB: memoizedHoveredDate } = useMemo(
-    () =>
-      optimizeRangeDates({
-        baseDate: baseDate,
-        dateA: selectedDate,
-        dateB: hoveredDate,
-        isMondayFirst: isMondayFirst,
-        accumulator,
-      }),
-    [hoveredDate, selectedDate, baseDate],
-  );
-
-  const memoizedSelectedRanges = useMemo(
-    () => filterSelectedRanges(baseDate, isMondayFirst, selectedRanges),
-    [selectedRanges, baseDate],
-  );
-
-  const { dateA: memoizedMinDate, dateB: memoizedMaxDate } = useMemo(
-    () =>
-      optimizeRangeDates({
-        baseDate: baseDate,
-        dateA: minDate,
-        dateB: maxDate,
-        isMondayFirst: isMondayFirst,
-        accumulator,
-      }),
-    [minDate, maxDate, baseDate],
-  );
+  const {
+    memoizedSelectedDate,
+    memoizedHoveredDate,
+    memoizedSelectedRanges,
+    memoizedMinDate,
+    memoizedMaxDate,
+  } = useLogic({
+    selectedRanges,
+    maxDate,
+    minDate,
+    selectedDate,
+    hoveredDate,
+    isMondayFirst,
+    baseDate,
+  });
 
   return (
     <StaticDaysCalendarInner

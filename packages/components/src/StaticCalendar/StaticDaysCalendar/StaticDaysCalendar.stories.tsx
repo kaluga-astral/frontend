@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Grid } from '../../Grid';
 import { Typography } from '../../Typography';
@@ -10,7 +10,7 @@ import { StaticDaysCalendar } from './StaticDaysCalendar';
 
 /**
  * Компонент для рендера тела календаря дней месяца.
- * Пере используется в DatePicker'ах. Так же подойдет для использования в самостоятельном календаре года
+ * Используется в DatePicker'ах. Так же подойдет для использования в самостоятельном календаре года
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=8444-79862&t=vXnyZRaIujmxoFPy-4)
  * ### [Guide]()
  */
@@ -116,7 +116,7 @@ export const HoveredDate = () => {
 };
 
 /**
- * Пропс флаг предназначенный для отображения календаря, где воскресенье - первый день недели. По умолчанию равен true.
+ * Предназначен для отображения календаря, где понедельник - первый день недели. По умолчанию равен true.
  */
 export const IsMondayFirst = () => {
   const baseDate = new Date();
@@ -125,7 +125,7 @@ export const IsMondayFirst = () => {
 };
 
 /**
- * Пропс коллбэк вызываемый на каждый клик по дате в календаре
+ * Коллбэк вызываемый при клике по дате в календаре
  */
 export const OnChange = () => {
   const [clicked, setClicked] = useState<Date | undefined>();
@@ -154,10 +154,15 @@ export const RenderDayTooltipTitle = () => {
     timeZone: 'UTC',
   });
 
+  const renderDayTooltipTitle = useCallback(
+    ({ date }: { date: Date }) => dayFormat(date),
+    [],
+  );
+
   return (
     <StaticDaysCalendar
       baseDate={baseDate}
-      renderDayTooltipTitle={({ date }) => dayFormat(date)}
+      renderDayTooltipTitle={renderDayTooltipTitle}
     />
   );
 };
@@ -169,10 +174,15 @@ export const RenderDayTooltipTitle = () => {
 export const RenderDayContent = () => {
   const baseDate = new Date();
 
+  const renderDayContent = useCallback(
+    ({ monthDay }: { monthDay: number }) => <span>{monthDay}</span>,
+    [],
+  );
+
   return (
     <StaticDaysCalendar
       baseDate={baseDate}
-      renderDayContent={({ monthDay }) => <span>{monthDay}</span>}
+      renderDayContent={renderDayContent}
     />
   );
 };

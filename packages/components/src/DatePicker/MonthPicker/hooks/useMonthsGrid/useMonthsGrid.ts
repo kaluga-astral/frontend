@@ -2,7 +2,6 @@ import { useContext, useMemo } from 'react';
 
 import {
   DateCompareDeep,
-  MONTHS_IN_YEAR,
   buildIsoDate,
   checkIsDateInRange,
   isDateOutOfRange,
@@ -12,6 +11,7 @@ import {
   type CalendarGridBuilder,
   type CalendarGridItem,
 } from '../../../../types';
+import { MONTHS_IN_YEAR } from '../../../../constants';
 
 export type MonthItem = {
   /**

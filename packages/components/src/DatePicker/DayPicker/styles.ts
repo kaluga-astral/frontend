@@ -1,5 +1,5 @@
 import { styled } from '../../styles';
-import { DAYS_IN_WEEK } from '../../utils/date';
+import { DAYS_IN_WEEK } from '../../constants';
 
 export const Body = styled.div`
   display: grid;

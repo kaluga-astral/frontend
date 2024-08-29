@@ -5,7 +5,7 @@ import { StaticCalendarButton } from '../StaticCalendarButton';
 import { type Theme } from '../../theme';
 import { type ButtonProps } from '../../Button';
 
-export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
+type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
   /**
    * флаг означающий, что дата находится вне доступного диапазона,
    * Если принимает значение true, то это значит, что дата находится вне целевого диапазона, предназначенного для выбора. Текст кнопки будет иметь серый оттенок.
@@ -40,7 +40,7 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
   /**
    * флаг, означающий, что следующий элемент находится в выбранном диапазоне
    */
-  isNotInteractable?: boolean;
+  $isNotInteractable?: boolean;
   /**
    * флаг, означающий, что день является выходным
    */
@@ -162,7 +162,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isInSelectedRange',
   'isInHoveredRange',
   'lengthInRow',
-  'isNotInteractable',
+  '$isNotInteractable',
   'isHoliday',
 ]);
 
@@ -170,7 +170,7 @@ export const StaticCalendarGridButton = styled(StaticCalendarButton, {
   shouldForwardProp: (propName: PropertyKey) =>
     !nonForwardableProps.has(propName),
 })<DateCalendarDayBtnWrapperProps>`
-  cursor: ${({ isNotInteractable }) => (isNotInteractable ? 'initial' : '')};
+  cursor: ${({ $isNotInteractable }) => ($isNotInteractable ? 'initial' : '')};
 
   position: relative;
 

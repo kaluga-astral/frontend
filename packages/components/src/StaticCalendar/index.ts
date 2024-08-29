@@ -1,1 +1,6 @@
-export { StaticDaysCalendar } from './StaticDaysCalendar';
+export {
+  StaticDaysCalendar,
+  type StaticDaysCalendarProps,
+} from './StaticDaysCalendar';
+
+export { StaticCalendarButton } from './StaticCalendarButton';

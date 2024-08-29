@@ -1,9 +1,9 @@
+import { DAYS_IN_WEEK } from '../../../../../constants';
 import {
   DAYS_CALENDAR_ITEMS_COUNT,
-  DAYS_IN_WEEK,
   addDays,
   buildIsoDate,
-} from '../../../../utils/date';
+} from '../../../../../utils/date';
 
 /**
  * Утилита создающая крайние даты для основного диапазона

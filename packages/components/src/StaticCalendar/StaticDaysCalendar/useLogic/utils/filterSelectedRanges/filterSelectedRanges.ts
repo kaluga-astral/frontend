@@ -1,4 +1,4 @@
-import { DateCompareDeep, checkIsDateInRange } from '../../../../utils/date';
+import { DateCompareDeep, checkIsDateInRange } from '../../../../../utils/date';
 import { makeEdgeDates } from '../makeEdgeDates';
 
 type Range = {
