@@ -184,8 +184,6 @@ export const StaticCalendarGridButton = styled(StaticCalendarButton, {
 
   &:hover {
     border-radius: ${({ theme }) => theme.shape.small};
-    box-shadow: ${({ theme, selected }) =>
-      selected ? 'none' : `inset 0 0 0 2px ${theme.palette.grey[400]}`};
   }
 
   /* первый элемент строки для выбранного диапазона должен иметь скругление слева */
