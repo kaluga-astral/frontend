@@ -218,6 +218,7 @@ describe('TreeLikeList', () => {
       return <TreeLikeList value={value} data={fakeData} onChange={setValue} />;
     };
 
+    window.HTMLElement.prototype.scrollIntoView = () => {};
     renderWithTheme(<TestComponent />);
 
     const checked = screen.getAllByRole('checkbox', { checked: true });

@@ -6,6 +6,7 @@ export const useLogic = ({
   id,
   value,
   level,
+  options,
   isInitialExpanded,
   expandedLevel,
   chainToSelectedItem = [],
@@ -13,13 +14,26 @@ export const useLogic = ({
   onChange,
 }: UseLogicProps) => {
   const isSelected = Object.is(value, id);
-  const isDefaultExpanded =
-    chainToSelectedItem.includes(id) ||
-    (isInitialExpanded && level <= expandedLevel - 1);
+
+  const checkIsDefaultExpanded = () => {
+    if (chainToSelectedItem.includes(id)) {
+      return true;
+    }
+
+    if (options?.hasOwnProperty('isDefaultExpanded')) {
+      return options.isDefaultExpanded;
+    }
+
+    return isInitialExpanded && level <= expandedLevel - 1;
+  };
+
+  const isDefaultExpanded = checkIsDefaultExpanded();
 
   const disabledItem = disabledItems?.find((item) => item.id === id);
   const isDisabled = Boolean(disabledItem);
   const disableReason = disabledItem?.disableReason;
+
+  const nextLevel = level + 1;
 
   const handleChange = () => {
     onChange?.(id);
@@ -30,6 +44,7 @@ export const useLogic = ({
     isDefaultExpanded,
     isDisabled,
     disableReason,
+    nextLevel,
     handleChange,
   };
 };

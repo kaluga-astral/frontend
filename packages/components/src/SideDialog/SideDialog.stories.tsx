@@ -12,6 +12,8 @@ import { SideDialogActions } from '../SideDialogActions';
 import { SideDialogContent } from '../SideDialogContent';
 import { SideDialogContentText } from '../SideDialogContentText';
 import { SideDialogHeader } from '../SideDialogHeader';
+import { Typography } from '../Typography';
+import { DescriptionList, type DescriptionListItem } from '../DescriptionList';
 
 import { SideDialog } from './SideDialog';
 
@@ -255,6 +257,209 @@ export const CustomFooter = () => {
           </Button>
           <Button autoFocus onClick={handleCloseMoreActions}>
             Готово
+          </Button>
+        </SideDialogActions>
+      </SideDialog>
+    </>
+  );
+};
+
+/**
+ * prop `size` определяет размер SideDialog, по дефолту `sm`
+ * */
+export const Sizes = () => {
+  const [openXs, setOpenXs] = useState(false);
+  const [openSm, setOpenSm] = useState(false);
+  const [openMd, setOpenMd] = useState(false);
+  const [openLg, setOpenLg] = useState(false);
+
+  const items: DescriptionListItem[] = [
+    {
+      name: 'Дата поступления',
+      value: '12.06.2024 в 11:11',
+    },
+    {
+      name: 'Тип заявки',
+      value: 'Создание',
+    },
+    {
+      name: 'ID учетной записи',
+      value: '4d1f0594-bc22-4660-8e7d-83a024126ef3',
+    },
+    {
+      name: 'ID док-оборота',
+      value: '222a1343-rf12-6660-1e3q-88a911143yr1',
+    },
+    {
+      name: 'Полное наименование',
+      value: 'ООО «АкцептЗайчатинаСТОНал»',
+    },
+    {
+      name: 'ИНН',
+      value: '77724528768',
+    },
+    {
+      name: 'КПП',
+      value: '772401001',
+    },
+    {
+      name: 'Конфигурация',
+      value: 'Значение показателя',
+    },
+    {
+      name: 'Удостоверенный центр',
+      value: 'УЦ «Калуга Астрал»',
+    },
+  ];
+
+  const partnerItems: DescriptionListItem[] = [
+    {
+      name: 'Офис',
+      value: 'АО «Калуга Астрал» ОПС ЭДО',
+    },
+    {
+      name: 'Центр продаж',
+      value: 'АО «Калуга Астрал»',
+    },
+    {
+      name: 'ID партнера',
+      value: '4d1f0594-bc22-4660-8e7d-83a024126ef3',
+    },
+  ];
+  const handleCloseXs = () => {
+    setOpenXs(false);
+  };
+  const handleCloseSm = () => {
+    setOpenSm(false);
+  };
+  const handleCloseMd = () => {
+    setOpenMd(false);
+  };
+  const handleCloseLg = () => {
+    setOpenLg(false);
+  };
+
+  return (
+    <>
+      <Grid container columns={2} spacing={2}>
+        <Button onClick={() => setOpenXs((prevState) => !prevState)}>
+          SideDialog xs size
+        </Button>
+        <Button onClick={() => setOpenSm((prevState) => !prevState)}>
+          SideDialog sm size
+        </Button>
+        <Button onClick={() => setOpenMd((prevState) => !prevState)}>
+          SideDialog md size
+        </Button>
+        <Button onClick={() => setOpenLg((prevState) => !prevState)}>
+          SideDialog lg size
+        </Button>
+      </Grid>
+      <SideDialog
+        title="Заявка"
+        open={openXs}
+        onClose={handleCloseXs}
+        size="xs"
+      >
+        <SideDialogContent>
+          <Typography variant="h6">Реквизиты абонента</Typography>
+          <br />
+          <DescriptionList items={items} leader />
+          <br />
+          <Typography variant="h6">Данные партнера</Typography>
+          <br />
+          <DescriptionList items={partnerItems} leader />
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="light" onClick={handleCloseXs}>
+            Ручная проверка
+          </Button>
+          <Button onClick={handleCloseXs} variant="light">
+            Абонент Нотариус
+          </Button>
+          <Button onClick={handleCloseXs} variant="light" color="error">
+            Отклонить
+          </Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openSm}
+        onClose={handleCloseSm}
+        size="sm"
+      >
+        <SideDialogContent>
+          <Typography variant="h6">Реквизиты абонента</Typography>
+          <br />
+          <DescriptionList items={items} leader />
+          <br />
+          <Typography variant="h6">Данные партнера</Typography>
+          <br />
+          <DescriptionList items={partnerItems} leader />
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="light" onClick={handleCloseXs}>
+            Ручная проверка
+          </Button>
+          <Button onClick={handleCloseXs} variant="light">
+            Абонент Нотариус
+          </Button>
+          <Button onClick={handleCloseXs} variant="light" color="error">
+            Отклонить
+          </Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openMd}
+        onClose={handleCloseMd}
+        size="md"
+      >
+        <SideDialogContent>
+          <Typography variant="h6">Реквизиты абонента</Typography>
+          <br />
+          <DescriptionList items={items} leader />
+          <br />
+          <Typography variant="h6">Данные партнера</Typography>
+          <br />
+          <DescriptionList items={partnerItems} leader />
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="light" onClick={handleCloseXs}>
+            Ручная проверка
+          </Button>
+          <Button onClick={handleCloseXs} variant="light">
+            Абонент Нотариус
+          </Button>
+          <Button onClick={handleCloseXs} variant="light" color="error">
+            Отклонить
+          </Button>
+        </SideDialogActions>
+      </SideDialog>
+      <SideDialog
+        title="Заголовок"
+        open={openLg}
+        onClose={handleCloseLg}
+        size="lg"
+      >
+        <SideDialogContent>
+          <Typography variant="h6">Реквизиты абонента</Typography>
+          <br />
+          <DescriptionList items={items} leader />
+          <br />
+          <Typography variant="h6">Данные партнера</Typography>
+          <br />
+          <DescriptionList items={partnerItems} leader />
+        </SideDialogContent>
+        <SideDialogActions>
+          <Button variant="light" onClick={handleCloseXs}>
+            Ручная проверка
+          </Button>
+          <Button onClick={handleCloseXs} variant="light">
+            Абонент Нотариус
+          </Button>
+          <Button onClick={handleCloseXs} variant="light" color="error">
+            Отклонить
           </Button>
         </SideDialogActions>
       </SideDialog>

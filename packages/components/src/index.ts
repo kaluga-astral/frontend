@@ -206,6 +206,12 @@ export * from './PageLayoutContainer';
 
 export * from './Paper';
 
+export {
+  ComplianceStatus,
+  type ComplianceStatusProps,
+  type ComplianceStatusItem,
+} from './ComplianceStatus';
+
 export * from './PersonalData';
 
 export * from './Placeholder';
@@ -300,6 +306,13 @@ export {
   type MultipleTreeListProps,
   type TreeListData,
 } from './Tree';
+
+export {
+  TreeAutocomplete,
+  type TreeAutocompleteProps,
+  type TreeAutocompleteTreeProps,
+  type TreeAutocompleteValue,
+} from './TreeAutocomplete';
 
 export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
