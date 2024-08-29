@@ -30,7 +30,7 @@ export const useLogic = ({
 
   const handleOnClick = Boolean(onClick) ? () => onClick?.(date) : undefined;
 
-  const component = Boolean(onClick) ? ('time' as ElementType) : undefined;
+  const component = !Boolean(onClick) ? ('time' as ElementType) : undefined;
 
   const isNotInteractable = !Boolean(onClick);
 
