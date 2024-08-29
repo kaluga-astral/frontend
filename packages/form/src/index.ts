@@ -64,6 +64,12 @@ export { FormProvider } from './FormProvider';
 
 export * from './FormRadioGroup';
 
+export {
+  FormTreeAutocomplete,
+  type FormTreeAutocompleteProps,
+  type FormTreeAutocompleteValue,
+} from './FormTreeAutocomplete';
+
 export * from './FormSelect';
 
 export * from './FormSubmitButton';
