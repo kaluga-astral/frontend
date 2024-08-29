@@ -15,10 +15,6 @@ export type Actions<T> = {
    * Второстепенные действия
    */
   secondary?: SecondaryActionKind<T>[];
-  /**
-   * Если true, блокирует взаимодействие с actions, если одна из них имеет состояние loading
-   */
-  isBlockingOperation?: boolean;
 };
 
 export type ActionsCellProps<T> = {

@@ -12,7 +12,7 @@ import { NavMenu } from './NavMenu';
  * ### [Guide]()
  */
 const meta: Meta<typeof NavMenu> = {
-  title: 'Components/NavMenu',
+  title: 'Components/Navigation/NavMenu',
   component: NavMenu,
 };
 

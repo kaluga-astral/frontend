@@ -64,6 +64,12 @@ export {
   type CellValue,
 } from './DataGrid';
 
+export {
+  DataGridActionCell,
+  type DataGridActions,
+  type DataGridActionCellProps,
+} from './DataGridActionCell';
+
 export * from './DataGridInfinite';
 
 export * from './DataGridPagination';
@@ -199,6 +205,12 @@ export * from './PageLayout';
 export * from './PageLayoutContainer';
 
 export * from './Paper';
+
+export {
+  ComplianceStatus,
+  type ComplianceStatusProps,
+  type ComplianceStatusItem,
+} from './ComplianceStatus';
 
 export * from './PersonalData';
 

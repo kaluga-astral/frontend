@@ -118,6 +118,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     rowProps,
     tooltipProps,
     nestedChildrenProps,
+    disabled,
   } = useLogic(props);
 
   const {
@@ -139,15 +140,11 @@ export const Row = <TData extends Record<string, CellValue>>(
     onSelectRow,
     onRowClick,
     // В этот rest-оператор попадают специфичные пропсы (атрибуты) virtuoso
-    // Необходимы для NewDataGrigInfinite
+    // Необходимы для NewDataGridInfinite
     ...selfProps
   } = props;
 
-  const {
-    isDisabled,
-    isDisabledLastCell = true,
-    isNotSelectable,
-  } = options || {};
+  const { isDisabledLastCell = true, isNotSelectable } = options || {};
 
   const renderStartAdornment = () => {
     if (!nestedChildren?.length && !isSelectable) {
@@ -166,7 +163,7 @@ export const Row = <TData extends Record<string, CellValue>>(
 
         {isSelectable && !isNotSelectable && (
           <CheckboxCell
-            {...{ inert: isDisabled ? '' : undefined }}
+            {...{ inert: disabled ? '' : undefined }}
             onClick={(event) => event.stopPropagation()}
           >
             <Checkbox {...checkboxProps} />
@@ -185,7 +182,7 @@ export const Row = <TData extends Record<string, CellValue>>(
       const cellId = `${rowId}-${index}`;
 
       const isDisabledCell = checkIsDisabled(
-        isDisabled,
+        disabled,
         availableCellsByIndex,
         index,
       );
@@ -204,7 +201,7 @@ export const Row = <TData extends Record<string, CellValue>>(
         />
       );
     });
-  }, [isOpen, columns]);
+  }, [isOpen, columns, disabled]);
 
   const renderRow = useCallback(
     ({
@@ -256,7 +253,7 @@ export const Row = <TData extends Record<string, CellValue>>(
         <ContentWrapper
           $level={level}
           $gridColumns={gridColumns}
-          {...{ [DISABLE_ROW_ATTR]: isDisabled }}
+          {...{ [DISABLE_ROW_ATTR]: disabled }}
           {...rowProps}
         >
           {renderCells()}

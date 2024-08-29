@@ -4,6 +4,7 @@ import { ConfigContext } from '../../ConfigProvider';
 import { ContentState } from '../../ContentState';
 import { DataGridContextProvider } from '../DataGridContext';
 import { Row } from '../Row';
+import { RowContextProvider } from '../Row/RowContext';
 import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
 import { useLogic } from './useLogic';
@@ -134,16 +135,17 @@ export const Body = <TData extends Record<string, CellValue>>(
       const rowId = (row as TData)[keyId] as string;
 
       return (
-        <Row
-          key={rowId}
-          row={row as TData}
-          selectedRows={selectedRows}
-          options={options}
-          keyId={keyId}
-          level={INITIAL_LEVEL}
-          nestedChildren={children as Array<TData>}
-          {...rowProps}
-        />
+        <RowContextProvider key={rowId}>
+          <Row
+            row={row as TData}
+            selectedRows={selectedRows}
+            options={options}
+            keyId={keyId}
+            level={INITIAL_LEVEL}
+            nestedChildren={children as Array<TData>}
+            {...rowProps}
+          />
+        </RowContextProvider>
       );
     });
   }, [rows, keyId, selectedRows, rowProps]);

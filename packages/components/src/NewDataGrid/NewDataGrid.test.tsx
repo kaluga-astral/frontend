@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BinOutlineMd } from '@astral/icons';
 
 import { ActionCell } from '../ActionCell';
+import { DataGridActionCell } from '../DataGridActionCell';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
@@ -395,6 +396,92 @@ describe('NewDataGrid', () => {
 
     await userEvents.click(screen.getByText('Vasya'));
     expect(onClickSpy).not.toHaveBeenCalled();
+  });
+
+  it('Строка не доступна для взаимодействия, если loading=true и isBlockingOperation=true', async () => {
+    const onClickSpy = vi.fn();
+
+    const FAKE_ACTIONS = {
+      main: [
+        {
+          name: 'Удалить',
+          loading: true,
+          isBlockingOperation: true,
+        },
+      ],
+    };
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya' }]}
+        onRowClick={onClickSpy}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+          {
+            field: 'actions',
+            label: 'Действия',
+            renderCell: (row) => (
+              <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
+            ),
+          },
+        ]}
+        onRetry={() => {}}
+      />,
+    );
+
+    await userEvents.click(screen.getByText('Vasya'));
+    expect(onClickSpy).not.toHaveBeenCalled();
+  });
+
+  it('Tooltip c причиной блокировки при загрузке отображается, если loading=true и isBlockingOperation=true', async () => {
+    const onClickSpy = vi.fn();
+
+    const fakeLoadingNote = 'Происходит удаление';
+    const FAKE_ACTIONS = {
+      main: [
+        {
+          name: 'Удалить',
+          loading: true,
+          loadingNote: fakeLoadingNote,
+          isBlockingOperation: true,
+        },
+      ],
+    };
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        rows={[{ name: 'Vasya' }]}
+        onRowClick={onClickSpy}
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+          {
+            field: 'actions',
+            label: 'Действия',
+            renderCell: (row) => (
+              <DataGridActionCell row={row} actions={FAKE_ACTIONS} />
+            ),
+          },
+        ]}
+        onRetry={() => {}}
+      />,
+    );
+
+    const row = screen.getByLabelText(fakeLoadingNote);
+
+    await userEvents.hover(row);
+
+    const tooltip = await screen.findByRole('tooltip');
+
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent(fakeLoadingNote);
   });
 
   it('Последняя ячейка доступна для взаимодействия, если isDisabled=true и isDisabledLastCell=false', async () => {

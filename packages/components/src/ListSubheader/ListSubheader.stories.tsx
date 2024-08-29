@@ -9,7 +9,7 @@ import { ListItemText } from '../ListItemText';
 import { ListSubheader } from './ListSubheader';
 
 const meta: Meta<typeof ListSubheader> = {
-  title: 'Components/List/ListSubheader',
+  title: 'Components/Data Display/List/ListSubheader',
   component: ListSubheader,
 };
 

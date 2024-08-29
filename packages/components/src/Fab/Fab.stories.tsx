@@ -12,7 +12,7 @@ import { Fab } from './Fab';
  * ### [Guide]()
  */
 const meta: Meta<typeof Fab> = {
-  title: 'Components/Fab',
+  title: 'Components/Buttons/Fab',
   component: Fab,
 };
 
