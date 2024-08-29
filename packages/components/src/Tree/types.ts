@@ -20,4 +20,15 @@ export type TreeListData = {
    * Дочерние элементы
    */
   children?: TreeListData[];
+
+  /**
+   * Предназначены для точечной конфигурации
+   */
+  options?: {
+    /**
+     * Если true, то вложенный список будет раскрыт
+     * @default 'false'
+     */
+    isDefaultExpanded?: boolean;
+  };
 };

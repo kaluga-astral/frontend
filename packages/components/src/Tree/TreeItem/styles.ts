@@ -87,6 +87,12 @@ export const ItemContent = styled('div', {
     background-color: ${({ theme, $isSelected, $isDisabled }) =>
       getBackgroundColorOnHover(theme, $isSelected, $isDisabled)};
   }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.palette.background.elementHover};
+    border: 0;
+    outline: 0;
+  }
 `;
 
 export const CollapseButton = styled(IconButton, {
