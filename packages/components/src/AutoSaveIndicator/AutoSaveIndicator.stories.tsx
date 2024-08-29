@@ -7,7 +7,7 @@ import {
   SendOutlineMd,
 } from '@astral/icons';
 import { Fragment, useEffect, useState } from 'react';
-import { Stack } from '@mui/material';
+import { type SelectChangeEvent, Stack } from '@mui/material';
 
 import { DashboardLayout } from '../DashboardLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
@@ -32,6 +32,7 @@ import {
   makeDataList,
   makeRandomDate,
 } from '../NewDataGrid/faker';
+import { MenuItem } from '../MenuItem';
 
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
@@ -229,6 +230,8 @@ export const Example = () => {
 
   const [isError, setError] = useState(false);
 
+  const [singleValue, setSingleValue] = useState('');
+
   const fakeData: DataGridRowWithOptions<DataType>[] = [
     {
       id: '123456789',
@@ -239,7 +242,11 @@ export const Example = () => {
     ...makeDataList(FAKE_DATA_TEMPLATE),
   ];
 
-  const handleSave = () => {
+  const handleSave = (event?: SelectChangeEvent<typeof singleValue>) => {
+    if (event) {
+      setSingleValue(event.target.value);
+    }
+
     setLoading(true);
     setSuccess(false);
     setError(false);
@@ -316,10 +323,6 @@ export const Example = () => {
               actions: {
                 main: [
                   {
-                    text: 'Сохранить данные',
-                    onClick: handleSave,
-                  },
-                  {
                     text: 'Отчисть sessionStorage',
                     onClick: handleClearStorage,
                   },
@@ -345,10 +348,17 @@ export const Example = () => {
                     size="small"
                   />
                   <Select
-                    value=""
-                    placeholder="Выберите вариант"
+                    value={singleValue}
+                    placeholder="При выборе произойдет автосохранение"
                     size="small"
-                  />
+                    onChange={handleSave}
+                  >
+                    {['Договор №12345678', 'Договор №1'].map((option) => (
+                      <MenuItem value={option} key={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </Stack>
               ),
             }}
