@@ -163,4 +163,16 @@ describe('buildDaysCalendarGrid', () => {
       expect(item.index).toBe(arrIndex);
     });
   });
+
+  it('Элемент имеет данные производственного календаря, при переданном в метод productionCalendarStorage', () => {
+    const sut = buildDaysCalendarGrid({
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+      productionCalendarStorage: new Map([
+        ['2024-08-01T00:00:00.000Z', { isHoliday: true, typeName: 'foo' }],
+      ]),
+    });
+
+    expect(sut[3].isHoliday).toBeTruthy();
+    expect(sut[3].typeName).toBe('foo');
+  });
 });

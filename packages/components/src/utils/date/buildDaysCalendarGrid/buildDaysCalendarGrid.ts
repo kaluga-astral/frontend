@@ -1,4 +1,8 @@
-import type { CalendarGridBuilder, CalendarGridItem } from '../../../types';
+import {
+  type CalendarGridBuilder,
+  type CalendarGridItem,
+  type ProductionCalendar,
+} from '../../../types';
 import { buildIsoDate } from '../buildIsoDate';
 import { DAYS_IN_WEEK } from '../constants';
 import { addDays } from '../addDays';
@@ -26,7 +30,7 @@ export type CalendarGridItemDay = {
    * Порядковый номер в общем массиве
    */
   index: number;
-};
+} & Partial<ProductionCalendar.Day>;
 
 type BuildDaysCalendarGridOptions = {
   /**
@@ -46,6 +50,10 @@ type BuildDaysCalendarGridOptions = {
    * Максимальная. Для дат больше или равной этой isDisabled будет равен true
    */
   maxDate?: Date | null;
+  /**
+   * Хранилище данных по датам производственного календаря
+   */
+  productionCalendarStorage?: ProductionCalendar.Storage | null;
 };
 
 const FULL_ROWS_COUNT = 6;
@@ -63,6 +71,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
   hoveredDate,
   baseDate,
   isMondayFirst = true,
+  productionCalendarStorage,
 }) => {
   /**
    * нормализованный номер месяца от базовой даты
@@ -103,7 +112,12 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
      */
     const dateMonth = date.getUTCMonth() + 1;
 
+    const productionCalendarDay = productionCalendarStorage?.get(
+      date.toISOString(),
+    );
+
     return {
+      ...productionCalendarDay,
       isOutOfAvailableRange: dateMonth !== month,
       index,
       isSelected:

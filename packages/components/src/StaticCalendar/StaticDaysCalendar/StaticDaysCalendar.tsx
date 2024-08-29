@@ -45,6 +45,7 @@ type StaticDaysCalendarProps = {
   | 'maxDate'
   | 'hoveredDate'
   | 'selectedRanges'
+  | 'productionCalendarStorage'
 >;
 
 const StaticDaysCalendarInner = memo(
@@ -62,6 +63,7 @@ const StaticDaysCalendarInner = memo(
     renderDayContent,
     selectedRanges,
     hideOutOfAvailableRangeElements,
+    productionCalendarStorage,
   }: StaticDaysCalendarProps) => {
     const id = useId();
 
@@ -75,8 +77,17 @@ const StaticDaysCalendarInner = memo(
           maxDate,
           hoveredDate,
           selectedRanges,
+          productionCalendarStorage,
         }),
-      [baseDate, selectedDate, maxDate, minDate, hoveredDate, selectedRanges],
+      [
+        baseDate,
+        selectedDate,
+        maxDate,
+        minDate,
+        hoveredDate,
+        selectedRanges,
+        productionCalendarStorage,
+      ],
     );
 
     const checkRenderRequirements = useCallback(
@@ -87,7 +98,10 @@ const StaticDaysCalendarInner = memo(
 
     return (
       <article className={className}>
-        <Head isMondayFirst={isMondayFirst} />
+        <Head
+          isMondayFirst={isMondayFirst}
+          hasHolidays={Boolean(productionCalendarStorage)}
+        />
         <Body role="grid">
           {grid.map((item, index) =>
             checkRenderRequirements(item) ? (

@@ -41,6 +41,10 @@ export type DateCalendarDayBtnWrapperProps = Omit<ButtonProps, 'variant'> & {
    * флаг, означающий, что следующий элемент находится в выбранном диапазоне
    */
   isNotInteractable?: boolean;
+  /**
+   * флаг, означающий, что день является выходным
+   */
+  isHoliday?: boolean;
 };
 
 type WithTheme = {
@@ -54,13 +58,26 @@ const getTextColor = ({
   isCurrentInUserLocalTime,
   isOutOfAvailableRange,
   selected,
+  isHoliday,
 }: GetColorOptions) => {
   if (selected) {
+    if (isHoliday) {
+      return theme.palette.error[400];
+    }
+
     return theme.palette.common.white;
   }
 
   if (isOutOfAvailableRange) {
+    if (isHoliday) {
+      return theme.palette.error[600];
+    }
+
     return theme.palette.grey[600];
+  }
+
+  if (isHoliday) {
+    return theme.palette.error[900];
   }
 
   if (!selected && isCurrentInUserLocalTime) {
@@ -146,6 +163,7 @@ const nonForwardableProps = new Set<PropertyKey>([
   'isInHoveredRange',
   'lengthInRow',
   'isNotInteractable',
+  'isHoliday',
 ]);
 
 export const StaticCalendarGridButton = styled(StaticCalendarButton, {
@@ -155,8 +173,6 @@ export const StaticCalendarGridButton = styled(StaticCalendarButton, {
   cursor: ${({ isNotInteractable }) => (isNotInteractable ? 'initial' : '')};
 
   position: relative;
-
-  color: ${(props) => getTextColor(props)};
 
   background-color: ${(props) => getBgColor(props)};
   border-radius: ${(props) => getLeftBorderRadius(props)}
@@ -180,6 +196,11 @@ export const StaticCalendarGridButton = styled(StaticCalendarButton, {
     color: currentColor;
 
     background-color: currentColor;
+  }
+
+  &,
+  &:hover {
+    color: ${(props) => getTextColor(props)};
   }
 
   &:hover {

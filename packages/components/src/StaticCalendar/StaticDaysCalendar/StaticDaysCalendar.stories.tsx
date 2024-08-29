@@ -1,9 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Grid } from '../../Grid';
 import { Typography } from '../../Typography';
 import { useLocaleDateTimeFormat } from '../../hooks';
+import { type ProductionCalendar } from '../../types';
 
 import { StaticDaysCalendar } from './StaticDaysCalendar';
 
@@ -172,6 +173,134 @@ export const RenderDayContent = () => {
     <StaticDaysCalendar
       baseDate={baseDate}
       renderDayContent={({ monthDay }) => <span>{monthDay}</span>}
+    />
+  );
+};
+
+const REST_OF_MAYS_HOLIDAYS: [string, ProductionCalendar.Day][] = [
+  [
+    '2024-05-11T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+  [
+    '2024-05-12T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+  [
+    '2024-05-18T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+  [
+    '2024-05-19T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+  [
+    '2024-05-25T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+  [
+    '2024-05-26T00:00:00.000Z',
+    {
+      isHoliday: true,
+      typeName: 'Выходной день',
+    },
+  ],
+];
+
+export const ProductionCalendarStorage = () => {
+  const baseDate = new Date('2024-05-01T00:00:00.000Z');
+  const dayFormat = useLocaleDateTimeFormat({
+    weekday: 'short',
+    year: '2-digit',
+    month: 'short',
+    day: '2-digit',
+    timeZone: 'UTC',
+  });
+  const productionCalendarStorage = useMemo(
+    () =>
+      new Map<string, ProductionCalendar.Day>([
+        [
+          '2024-05-01T00:00:00.000Z',
+          {
+            description: 'Праздник весны и труда',
+            isHoliday: true,
+            typeName: 'Государственный праздник',
+          },
+        ],
+        [
+          '2024-05-04T00:00:00.000Z',
+          {
+            isHoliday: true,
+            typeName: 'Выходной день',
+          },
+        ],
+        [
+          '2024-05-05T00:00:00.000Z',
+          {
+            isHoliday: true,
+            typeName: 'Выходной день',
+          },
+        ],
+        [
+          '2024-05-08T00:00:00.000Z',
+          {
+            isHoliday: false,
+            typeName: 'Предпраздничный сокращенный рабочий день',
+          },
+        ],
+        [
+          '2024-05-09T00:00:00.000Z',
+          {
+            isHoliday: true,
+            typeName: 'Государственный праздник',
+            description: 'День Победы',
+          },
+        ],
+        [
+          '2024-05-10T00:00:00.000Z',
+          {
+            isHoliday: true,
+            typeName: 'Дополнительный / перенесенный выходной день',
+            description: 'Перенос с субботы 6 января',
+          },
+        ],
+        ...REST_OF_MAYS_HOLIDAYS,
+      ]),
+    [],
+  );
+
+  return (
+    <StaticDaysCalendar
+      baseDate={baseDate}
+      renderDayTooltipTitle={({ typeName, description, date }) => (
+        <>
+          <Typography>{dayFormat(date)}</Typography>
+          <Typography>{typeName}</Typography>
+          <Typography>{description}</Typography>
+        </>
+      )}
+      productionCalendarStorage={productionCalendarStorage}
+      selectedRanges={[
+        {
+          dateA: new Date('2024-05-06T00:00:00Z'),
+          dateB: new Date('2024-05-12T00:00:00Z'),
+        },
+      ]}
     />
   );
 };

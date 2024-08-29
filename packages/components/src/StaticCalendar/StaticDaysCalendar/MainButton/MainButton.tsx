@@ -25,6 +25,7 @@ export const MainButton = ({
   ...props
 }: MainButtonProps) => (
   <StaticCalendarGridButton
+    isHoliday={props.isHoliday}
     disabled={props.isDisabled}
     selected={props.isSelected}
     aria-selected={props.isSelected}
