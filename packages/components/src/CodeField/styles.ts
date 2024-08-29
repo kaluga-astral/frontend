@@ -23,7 +23,6 @@ export const Digit = styled.input<{ isError?: boolean }>`
   min-width: 44px;
   max-width: 60px;
   height: 60px;
-  padding: ${({ theme }) => theme.spacing(4, 6)};
 
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: 20px;
