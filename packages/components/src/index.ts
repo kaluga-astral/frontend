@@ -312,6 +312,13 @@ export {
   type TreeListData,
 } from './Tree';
 
+export {
+  TreeAutocomplete,
+  type TreeAutocompleteProps,
+  type TreeAutocompleteTreeProps,
+  type TreeAutocompleteValue,
+} from './TreeAutocomplete';
+
 export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
 export * from './types';
