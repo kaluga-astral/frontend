@@ -8,6 +8,7 @@ import { tooltipClasses } from '@mui/material';
 import { keyframes, styled } from '../styles';
 import { Typography } from '../Typography';
 import { Tooltip } from '../Tooltip';
+import { Button } from '../Button';
 
 const loading = keyframes`
   0%, 100%{
@@ -60,12 +61,16 @@ export const StyledTooltip = styled(Tooltip)`
   }
 `;
 
-export const StyledButton = styled(Typography)`
+export const StyledButton = styled(Button)`
   cursor: pointer;
 
   align-self: flex-end;
 
+  height: 16px;
   padding: ${({ theme }) => theme.spacing(0, 2)};
+
+  font-size: 12px;
+  line-height: 16px;
 
   background: none;
   border: none;

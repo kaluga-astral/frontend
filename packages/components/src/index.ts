@@ -6,7 +6,10 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
-export { AutoSaveIndicator, type AutoSaveProps } from './AutoSaveIndicator';
+export {
+  AutoSaveIndicator,
+  type AutoSaveIndicatorProps,
+} from './AutoSaveIndicator';
 
 export * from './Avatar';
 

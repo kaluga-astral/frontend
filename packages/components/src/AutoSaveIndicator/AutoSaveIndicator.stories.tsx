@@ -43,6 +43,9 @@ import { AutoSaveIndicator } from './AutoSaveIndicator';
 const meta: Meta<typeof AutoSaveIndicator> = {
   title: 'Components/AutoSaveIndicator',
   component: AutoSaveIndicator,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -254,6 +257,10 @@ export const Example = () => {
     }, 4000);
   };
 
+  const handleClearStorage = () => {
+    sessionStorage.clear();
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setSlicedData(fakeData.slice(0, 10));
@@ -311,6 +318,10 @@ export const Example = () => {
                   {
                     text: 'Сохранить данные',
                     onClick: handleSave,
+                  },
+                  {
+                    text: 'Отчисть sessionStorage',
+                    onClick: handleClearStorage,
                   },
                 ],
                 secondary: [
