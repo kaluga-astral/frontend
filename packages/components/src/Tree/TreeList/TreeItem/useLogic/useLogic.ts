@@ -21,6 +21,8 @@ export const useLogic = ({
   const isDisabled = Boolean(disabledItem);
   const disableReason = disabledItem?.disableReason;
 
+  const nextLevel = level + 1;
+
   const handleChange = () => {
     onChange?.(id);
   };
@@ -30,6 +32,7 @@ export const useLogic = ({
     isDefaultExpanded,
     isDisabled,
     disableReason,
+    nextLevel,
     handleChange,
   };
 };
