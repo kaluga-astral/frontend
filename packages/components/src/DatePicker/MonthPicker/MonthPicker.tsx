@@ -10,7 +10,7 @@ import {
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
 import { addYears } from '../../utils/date';
-import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
+import { useLocaleDateTimeFormat } from '../../hooks';
 import { ConfigContext } from '../../ConfigProvider';
 import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';
 
@@ -39,10 +39,13 @@ export const MonthPicker = ({
     addCb: addYears,
   });
 
-  const { grid } = useMonthsGrid({
+  const grid = useMonthsGrid({
     baseDate,
     selectedDate,
-    rangeDate,
+    selectedRanges:
+      selectedDate && rangeDate
+        ? [{ dateA: selectedDate, dateB: rangeDate }]
+        : null,
   });
 
   const { year: yearCaption } = useContext(ConfigContext).datePickerLanguageMap;
@@ -57,18 +60,22 @@ export const MonthPicker = ({
         headBtnText={baseDate.getUTCFullYear()}
       />
       <DateCalendarGridLarge>
-        {grid.map(({ month, date, ...props }, index) => (
-          <DateCalendarGridButtonLarge
-            key={`${month}_${index}`}
-            onClick={() => onChange?.(date)}
-            title={titleFormat(date)}
-            lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
-            isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
-            {...props}
-          >
-            {monthFormat(date)}
-          </DateCalendarGridButtonLarge>
-        ))}
+        {grid.map(
+          ({ month, date, isDisabled, isSelected, ...props }, index) => (
+            <DateCalendarGridButtonLarge
+              key={`${month}_${index}`}
+              onClick={() => onChange?.(date)}
+              tooltipTitle={titleFormat(date)}
+              lengthInRow={ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID}
+              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
+              disabled={isDisabled}
+              selected={isSelected}
+              {...props}
+            >
+              {monthFormat(date)}
+            </DateCalendarGridButtonLarge>
+          ),
+        )}
       </DateCalendarGridLarge>
     </DateCalendarWrapper>
   );

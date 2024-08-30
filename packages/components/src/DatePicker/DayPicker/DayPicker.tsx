@@ -1,24 +1,18 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useMemo } from 'react';
 
 import {
   type CommonDateCalendarHeadProps,
-  DateCalendarBody,
-  DateCalendarGridButton,
   DateCalendarHead,
   DateCalendarWrapper,
+  StaticDaysCalendarWrapper,
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { DateCompareDeep, addMonths } from '../../utils/date';
-import { useLocaleDateTimeFormat } from '../hooks/useLocaleDateTimeFormat';
+import { addMonths } from '../../utils/date';
+import { useLocaleDateTimeFormat } from '../../hooks';
 import { ConfigContext } from '../../ConfigProvider';
-import { DAYS_IN_WEEK } from '../constants';
-import { isDateBetweenSelectedAndRangeDates } from '../utils';
 import { PopoverHoveredContext } from '../PopoverHoveredContext';
-
-import { Head } from './Head';
-import { Body } from './styles';
-import { useDaysGrid } from './hooks';
+import { MinMaxDateContext } from '../MinMaxDateContext';
 
 export type MondayFirst = {
   /**
@@ -38,7 +32,6 @@ export const DayPicker = ({
   onChange,
   isMondayFirst,
   rangeDate,
-  isRange,
   onDayHover,
   hoveredDayDate,
   ...headProps
@@ -66,17 +59,7 @@ export const DayPicker = ({
 
   const { popoverHovered } = useContext(PopoverHoveredContext);
 
-  const { grid } = useDaysGrid({
-    baseDate,
-    selectedDate,
-    isMondayFirst,
-    fullSize: true,
-    rangeDate,
-  });
-
-  const handleDayHover = (date: Date) => {
-    onDayHover?.(date);
-  };
+  const { maxDate, minDate } = useContext(MinMaxDateContext);
 
   /*
   Убираем hover day из стейта, если курсор вышел за проделы popover
@@ -87,6 +70,21 @@ export const DayPicker = ({
     }
   }, [onDayHover, popoverHovered]);
 
+  const renderDayTooltipTitle = useCallback(
+    ({ date }: { date: Date }) => {
+      return dayFormat(date);
+    },
+    [dayFormat],
+  );
+
+  const selectedRanges = useMemo(() => {
+    if (!selectedDate || !rangeDate) {
+      return null;
+    }
+
+    return [{ dateA: selectedDate, dateB: rangeDate }];
+  }, [selectedDate, rangeDate]);
+
   return (
     <DateCalendarWrapper>
       <DateCalendarHead
@@ -96,36 +94,18 @@ export const DayPicker = ({
         onNextClick={handleNextClick}
         headBtnText={monthYearFormat(baseDate)}
       />
-      <DateCalendarBody>
-        <Head isMondayFirst={isMondayFirst} />
-        <Body role="grid">
-          {grid.map(({ date, monthDay, ...props }, index) => (
-            <DateCalendarGridButton
-              key={index}
-              onClick={() => onChange?.(date)}
-              title={dayFormat(date)}
-              lengthInRow={DAYS_IN_WEEK}
-              isPreviousItemInSelectedRange={grid[index - 1]?.isInSelectedRange}
-              onMouseEnter={() => {
-                handleDayHover(date);
-              }}
-              isInHoveredRange={
-                isRange &&
-                popoverHovered &&
-                isDateBetweenSelectedAndRangeDates({
-                  date,
-                  selectedDate,
-                  rangeDate: hoveredDayDate,
-                  deep: DateCompareDeep.day,
-                })
-              }
-              {...props}
-            >
-              {monthDay}
-            </DateCalendarGridButton>
-          ))}
-        </Body>
-      </DateCalendarBody>
+      <StaticDaysCalendarWrapper
+        renderDayTooltipTitle={renderDayTooltipTitle}
+        minDate={minDate}
+        maxDate={maxDate}
+        selectedDate={selectedDate}
+        baseDate={baseDate}
+        onDayHover={onDayHover}
+        hoveredDate={hoveredDayDate}
+        selectedRanges={selectedRanges}
+        onChange={onChange}
+        isMondayFirst={isMondayFirst}
+      />
     </DateCalendarWrapper>
   );
 };

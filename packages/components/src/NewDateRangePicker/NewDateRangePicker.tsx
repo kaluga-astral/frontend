@@ -143,7 +143,6 @@ export const NewDateRangePicker = forwardRef<
         <DatePickerPopover {...datePickerPopoverProps}>
           <MinMaxDateContextProvider {...minMaxDateContextProviderProps}>
             <YearMonthDayPicker
-              isRange
               isMondayFirst={isMondayFirst}
               {...startYearMonthDayPickerProps}
             />
@@ -151,7 +150,6 @@ export const NewDateRangePicker = forwardRef<
             <PickerSplitter />
 
             <YearMonthDayPicker
-              isRange
               isMondayFirst={isMondayFirst}
               {...endYearMonthDayPickerProps}
             />

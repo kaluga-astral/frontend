@@ -18,6 +18,8 @@ export * from './useFocusAwayEffect';
 
 export * from './useInputPopover';
 
+export { useLocaleDateTimeFormat } from './useLocaleDateTimeFormat';
+
 export { useSecondsCountdown } from './useSecondsCountDown';
 
 export { useInterval } from 'react-use';
