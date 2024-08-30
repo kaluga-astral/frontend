@@ -151,6 +151,13 @@ export const Row = <TData extends Record<string, CellValue>>(
       return null;
     }
 
+    const hasNestedChildren = nestedChildren?.length > 0;
+    const hasCheckbox = isSelectable && !isNotSelectable;
+
+    if (!hasNestedChildren && !hasCheckbox) {
+      return null;
+    }
+
     return (
       <>
         {nestedChildren?.length && (
