@@ -1,10 +1,10 @@
-import { type RefObject, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { type PopoverOrigin } from '@mui/material';
 
-type UseLogicParams = { ref: RefObject<HTMLDivElement> };
-
-export const useLogic = ({ ref }: UseLogicParams) => {
+export const useLogic = () => {
   const [open, setOpen] = useState(false);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const popoverShow = sessionStorage.getItem('popoverShow');
@@ -20,6 +20,7 @@ export const useLogic = ({ ref }: UseLogicParams) => {
   };
 
   return {
+    ref,
     handleClose,
     popoverProps: {
       open: open,

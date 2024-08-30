@@ -1,32 +1,15 @@
-import { AutosaveFillMd, CrossOutlineSm } from '@astral/icons';
-import { forwardRef } from 'react';
+import { CrossOutlineSm } from '@astral/icons';
 
-import { Tooltip } from '../Tooltip';
 import { Popover } from '../Popover';
-import { useForwardedRef } from '../hooks';
 import { IconButton } from '../IconButton';
 
-import {
-  ErrorIcon,
-  ErrorWrapper,
-  LoadingIcon,
-  PopoverContent,
-  PopoverTypography,
-  StyledButton,
-  StyledTooltip,
-  StyledTypography,
-  SuccessIcon,
-  Wrapper,
-} from './styles';
-import {
-  DEFAULT_STATE,
-  ERROR_STATE,
-  LOADING_STATE,
-  ON_RETRY_MESSAGE,
-  POPOVER_MESSAGE,
-  SUCCESS_STATE,
-} from './constants';
+import { PopoverContent, PopoverTypography, Wrapper } from './styles';
+import { POPOVER_MESSAGE } from './constants';
 import { useLogic } from './useLogic';
+import { ErrorState } from './ErrorState';
+import { LoadingState } from './LoadingState';
+import { SuccessState } from './SuccessState';
+import { DefaultState } from './DefaultState';
 
 export type AutoSaveIndicatorProps = {
   /**
@@ -51,62 +34,24 @@ export type AutoSaveIndicatorProps = {
   isSuccess?: boolean;
 };
 
-export const AutoSaveIndicator = forwardRef<
-  HTMLDivElement,
-  AutoSaveIndicatorProps
->((props, forwardedRef) => {
-  const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
+export const AutoSaveIndicator = (props: AutoSaveIndicatorProps) => {
   const { isSuccess, isError, isLoading, errorMsg, onRetry } = props;
 
-  const { popoverProps, handleClose } = useLogic({ ref });
+  const { popoverProps, handleClose, ref } = useLogic();
   const renderContent = () => {
     if (isLoading) {
-      return (
-        <>
-          <StyledTypography variant="caption">{LOADING_STATE}</StyledTypography>
-          <LoadingIcon />
-        </>
-      );
+      return <LoadingState />;
     }
 
     if (isError) {
-      return (
-        <>
-          <ErrorWrapper>
-            <StyledTypography variant="caption">{ERROR_STATE}</StyledTypography>
-            <StyledButton onClick={onRetry} variant="link" color="primary">
-              {ON_RETRY_MESSAGE}
-            </StyledButton>
-          </ErrorWrapper>
-          <Tooltip title={errorMsg} placement="bottom" withoutContainer={false}>
-            <ErrorIcon />
-          </Tooltip>
-        </>
-      );
+      return <ErrorState onRetry={onRetry} errorMsg={errorMsg} />;
     }
 
     if (isSuccess) {
-      return (
-        <>
-          <StyledTypography variant="caption">{SUCCESS_STATE}</StyledTypography>
-          <SuccessIcon />
-        </>
-      );
+      return <SuccessState />;
     }
 
-    return (
-      <>
-        <StyledTypography variant="caption">{DEFAULT_STATE}</StyledTypography>
-        <StyledTooltip
-          title={POPOVER_MESSAGE}
-          placement="bottom"
-          // withoutContainer=false необходим для размещения тултипа на иконку
-          withoutContainer={false}
-        >
-          <AutosaveFillMd />
-        </StyledTooltip>
-      </>
-    );
+    return <DefaultState />;
   };
 
   return (
@@ -122,4 +67,4 @@ export const AutoSaveIndicator = forwardRef<
       </Popover>
     </>
   );
-});
+};
