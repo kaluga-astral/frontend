@@ -265,7 +265,7 @@ export const Example = () => {
   };
 
   const handleClearStorage = () => {
-    sessionStorage.clear();
+    localStorage.clear();
   };
 
   useEffect(() => {
@@ -323,7 +323,7 @@ export const Example = () => {
               actions: {
                 main: [
                   {
-                    text: 'Отчисть sessionStorage',
+                    text: 'Отчисть localStorage',
                     onClick: handleClearStorage,
                   },
                 ],

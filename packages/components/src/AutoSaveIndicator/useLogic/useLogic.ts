@@ -7,7 +7,7 @@ export const useLogic = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const popoverShow = sessionStorage.getItem('popoverShow');
+    const popoverShow = localStorage.getItem('popoverShow');
 
     if (!popoverShow) {
       setOpen(true);
@@ -16,7 +16,7 @@ export const useLogic = () => {
 
   const handleClose = () => {
     setOpen(false);
-    sessionStorage.setItem('popoverShow', 'true');
+    localStorage.setItem('popoverShow', 'true');
   };
 
   return {
