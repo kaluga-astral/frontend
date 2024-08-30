@@ -10,18 +10,14 @@ export const ErrorWrapper = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-  cursor: pointer;
-
   align-self: flex-end;
 
   height: 16px;
   padding: ${({ theme }) => theme.spacing(0, 2)};
 
-  font-size: 12px;
-  line-height: 16px;
-
-  background: none;
-  border: none;
+  font-size: ${({ theme }) => theme.typography.h7.fontSize};
+  font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
+  line-height: ${({ theme }) => theme.typography.h8.lineHeight};
 `;
 
 export const ErrorIcon = styled(AutosaveErrorFillMd)`
@@ -29,7 +25,5 @@ export const ErrorIcon = styled(AutosaveErrorFillMd)`
 `;
 
 export const StyledTypography = styled(Typography)`
-  align-self: flex-end;
-
   padding-right: ${({ theme }) => theme.spacing(2)};
 `;

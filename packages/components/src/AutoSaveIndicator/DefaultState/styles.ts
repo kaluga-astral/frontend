@@ -11,7 +11,5 @@ export const StyledTooltip = styled(Tooltip)`
 `;
 
 export const StyledTypography = styled(Typography)`
-  align-self: flex-end;
-
   padding-right: ${({ theme }) => theme.spacing(2)};
 `;

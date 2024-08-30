@@ -18,7 +18,5 @@ export const LoadingIcon = styled(AutosaveLoaderFillMd)`
 `;
 
 export const StyledTypography = styled(Typography)`
-  align-self: flex-end;
-
   padding-right: ${({ theme }) => theme.spacing(2)};
 `;
