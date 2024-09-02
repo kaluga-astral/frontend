@@ -16,6 +16,10 @@ export const Container = styled('div', {
 `;
 
 export const DataGridWrapper = styled.div`
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
   height: 100%;
 `;
 
