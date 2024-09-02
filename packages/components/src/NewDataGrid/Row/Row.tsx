@@ -147,9 +147,7 @@ export const Row = <TData extends Record<string, CellValue>>(
   const { isDisabledLastCell = true, isNotSelectable } = options || {};
 
   const renderStartAdornment = () => {
-    const hasCheckbox = isSelectable && !isNotSelectable;
-
-    if (!nestedChildren?.length && (!isSelectable || !hasCheckbox)) {
+    if (!nestedChildren?.length && (!isSelectable || isNotSelectable)) {
       return null;
     }
 
