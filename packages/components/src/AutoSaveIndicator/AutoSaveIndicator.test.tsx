@@ -2,27 +2,40 @@ import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import {
-  DEFAULT_STATE,
-  ERROR_STATE,
-  LOADING_STATE,
+  ERROR_MESSAGE,
+  LOADING_MESSAGE,
   ON_RETRY_MESSAGE,
-  POPOVER_MESSAGE,
-  SUCCESS_STATE,
+  SUCCESS_MESSAGE,
 } from './constants';
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
 describe('AutoSaveIndicator', () => {
-  it.each([
-    [{ isSuccess: true }, SUCCESS_STATE],
-    [{ isError: true }, ERROR_STATE],
-    [{ isLoading: true }, LOADING_STATE],
-    [{}, DEFAULT_STATE],
-  ])('Состояния отображаются', (props, expectedState) => {
+  it('Состояние загрузки отображается', () => {
     renderWithTheme(
-      <AutoSaveIndicator onRetry={() => {}} errorMsg="" {...props} />,
+      <AutoSaveIndicator onRetry={() => {}} errorMsg="" isLoading />,
     );
 
-    const label = screen.getByText(expectedState);
+    const label = screen.getByText(LOADING_MESSAGE);
+
+    expect(label).toBeVisible();
+  });
+
+  it('Состояние ошибки отображается', () => {
+    renderWithTheme(
+      <AutoSaveIndicator onRetry={() => {}} errorMsg="" isError />,
+    );
+
+    const label = screen.getByText(ERROR_MESSAGE);
+
+    expect(label).toBeVisible();
+  });
+
+  it('Состояние успешного сохранения отображается', () => {
+    renderWithTheme(
+      <AutoSaveIndicator onRetry={() => {}} errorMsg="" isSuccess />,
+    );
+
+    const label = screen.getByText(SUCCESS_MESSAGE);
 
     expect(label).toBeVisible();
   });
@@ -47,20 +60,27 @@ describe('AutoSaveIndicator', () => {
   it('Тултип отображается, если состояние не передано', async () => {
     renderWithTheme(<AutoSaveIndicator onRetry={() => {}} errorMsg="" />);
 
-    const item = screen.getByLabelText(POPOVER_MESSAGE);
+    const item = screen.getByLabelText(
+      'Изменения на этой странице сохраняются автоматически',
+    );
 
     await userEvents.hover(item);
 
     const tooltip = await screen.findByRole('tooltip');
 
     expect(tooltip).toBeVisible();
-    expect(tooltip).toHaveTextContent(POPOVER_MESSAGE);
+
+    expect(tooltip).toHaveTextContent(
+      'Изменения на этой странице сохраняются автоматически',
+    );
   });
 
   it('Popover отображается', () => {
     renderWithTheme(<AutoSaveIndicator onRetry={() => {}} errorMsg="" />);
 
-    const item = screen.getByText(POPOVER_MESSAGE);
+    const item = screen.getByText(
+      'Изменения на этой странице сохраняются автоматически',
+    );
 
     expect(item).toBeVisible();
   });

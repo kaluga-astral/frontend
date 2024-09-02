@@ -1,4 +1,4 @@
-import { ERROR_STATE, ON_RETRY_MESSAGE } from '../constants';
+import { ERROR_MESSAGE, ON_RETRY_MESSAGE } from '../constants';
 import { Tooltip } from '../../Tooltip';
 
 import {
@@ -25,7 +25,7 @@ export const ErrorState = (props: ErrorStateProps) => {
   return (
     <>
       <ErrorWrapper>
-        <StyledTypography variant="caption">{ERROR_STATE}</StyledTypography>
+        <StyledTypography variant="caption">{ERROR_MESSAGE}</StyledTypography>
         <StyledButton onClick={onRetry} variant="link" color="primary">
           {ON_RETRY_MESSAGE}
         </StyledButton>

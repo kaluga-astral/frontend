@@ -5,10 +5,10 @@ import { styled } from '../../styles/styled';
 import { Typography } from '../../Typography';
 
 const loading = keyframes`
-  0%, 100%{
+  0%, 100% {
     opacity: 1;
   }
-  50%{
+  50% {
     opacity: 0.2;
   }
 `;

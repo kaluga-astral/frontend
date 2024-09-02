@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
-import { type PopoverOrigin } from '@mui/material';
+
+import { useLocalStorage } from '../../hooks';
+import { IS_POPOVER_SHOW } from '../constants';
 
 export const useLogic = () => {
   const [open, setOpen] = useState(false);
 
+  const [storageIsPopoverShow, setStorageIsPopoverShow] = useLocalStorage(
+    IS_POPOVER_SHOW,
+    true,
+  );
+
+  console.log(storageIsPopoverShow);
+
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const popoverShow = localStorage.getItem('popoverShow');
-
-    if (!popoverShow) {
+    if (storageIsPopoverShow) {
       setOpen(true);
     }
   }, []);
 
   const handleClose = () => {
     setOpen(false);
-    localStorage.setItem('popoverShow', 'true');
+    setStorageIsPopoverShow(false);
   };
 
   return {
@@ -26,14 +33,6 @@ export const useLogic = () => {
       open: open,
       onClose: handleClose,
       anchorEl: ref.current,
-      anchorOrigin: {
-        vertical: 'bottom' as PopoverOrigin['vertical'],
-        horizontal: 'center' as PopoverOrigin['horizontal'],
-      },
-      transformOrigin: {
-        horizontal: 'center' as PopoverOrigin['horizontal'],
-        vertical: 'top' as PopoverOrigin['vertical'],
-      },
     },
   };
 };

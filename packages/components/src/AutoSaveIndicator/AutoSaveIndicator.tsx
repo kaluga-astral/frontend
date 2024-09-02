@@ -4,7 +4,6 @@ import { Popover } from '../Popover';
 import { IconButton } from '../IconButton';
 
 import { PopoverContent, PopoverTypography, Wrapper } from './styles';
-import { POPOVER_MESSAGE } from './constants';
 import { useLogic } from './useLogic';
 import { ErrorState } from './ErrorState';
 import { LoadingState } from './LoadingState';
@@ -38,6 +37,7 @@ export const AutoSaveIndicator = (props: AutoSaveIndicatorProps) => {
   const { isSuccess, isError, isLoading, errorMsg, onRetry } = props;
 
   const { popoverProps, handleClose, ref } = useLogic();
+
   const renderContent = () => {
     if (isLoading) {
       return <LoadingState />;
@@ -57,9 +57,21 @@ export const AutoSaveIndicator = (props: AutoSaveIndicatorProps) => {
   return (
     <>
       <Wrapper ref={ref}>{renderContent()}</Wrapper>
-      <Popover {...popoverProps}>
+      <Popover
+        {...popoverProps}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          horizontal: 'center',
+          vertical: 'top',
+        }}
+      >
         <PopoverContent>
-          <PopoverTypography>{POPOVER_MESSAGE}</PopoverTypography>
+          <PopoverTypography>
+            Изменения на этой странице сохраняются автоматически
+          </PopoverTypography>
           <IconButton variant="text" onClick={handleClose}>
             <CrossOutlineSm />
           </IconButton>
