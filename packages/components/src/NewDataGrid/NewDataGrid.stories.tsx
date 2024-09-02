@@ -1145,6 +1145,9 @@ export const TreeWithOptionIsNotSelectable = () => {
           documentName: 'Договор №12345678',
           recipient: 'ПАО "Первый завод"',
           createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
         },
       ],
     },
