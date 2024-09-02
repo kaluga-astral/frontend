@@ -6,7 +6,7 @@ import {
 import { styled } from '../styles';
 
 export const StyledDialogContent = styled(MuiDialogContent)<DialogContentProps>`
-  padding-bottom: ${({ theme }) => theme.spacing(6)};
+  padding: ${({ theme }) => theme.spacing(0, 6)};
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     padding: ${({ theme }) => theme.spacing(5, 4)};
