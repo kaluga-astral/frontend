@@ -201,17 +201,6 @@ export const Example = () => {
   );
 };
 
-/**
- * ##### Variant: outlined и elevation
- *
- * Бумага имеет два варианта отображения: outlined и elevation.
- * ###### Outlined
- * Вариант с обводкой.
- * ###### Elevation
- * Вариант с тенью.
- *
- */
-
 export const Variants = () => {
   return (
     <Grid container columnSpacing={4} columns="1fr 1fr">
