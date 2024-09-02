@@ -4,7 +4,7 @@ import { Grid, type GridProps } from '../Grid';
 import { styled } from '../styles';
 
 export const StyledDialogActions = styled(DialogActions)`
-  padding-top: 0;
+  padding: ${({ theme }) => theme.spacing(4)};
 `;
 
 export const StyledGrid = styled(Grid)<GridProps>`
