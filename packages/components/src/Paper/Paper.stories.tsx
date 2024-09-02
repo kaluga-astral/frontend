@@ -202,6 +202,34 @@ export const Example = () => {
 };
 
 /**
+ * ##### Variant: outlined и elevation
+ *
+ * Бумага имеет два варианта отображения: outlined и elevation.
+ * ###### Outlined
+ * Вариант с обводкой.
+ * ###### Elevation
+ * Вариант с тенью.
+ *
+ */
+
+export const Variants = () => {
+  return (
+    <Grid container columnSpacing={4} columns="1fr 1fr">
+      <Paper variant="outlined">
+        <PaperContentWrapper>
+          <Typography variant="h6">Outlined</Typography>
+        </PaperContentWrapper>
+      </Paper>
+      <Paper variant="elevation">
+        <PaperContentWrapper>
+          <Typography variant="h6">Elevation</Typography>
+        </PaperContentWrapper>
+      </Paper>
+    </Grid>
+  );
+};
+
+/**
  * ##### Отображение высоты
  *
  * Высота бумаги визуально разделяется тенью, чем больше тень, тем выше находится объект.
