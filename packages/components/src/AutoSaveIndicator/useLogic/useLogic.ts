@@ -11,8 +11,6 @@ export const useLogic = () => {
     true,
   );
 
-  console.log(storageIsPopoverShow);
-
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
