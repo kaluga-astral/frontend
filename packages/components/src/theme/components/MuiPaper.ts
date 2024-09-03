@@ -29,9 +29,9 @@ export const MuiPaper: Components<Theme>['MuiPaper'] = {
         boxShadow: getShadow(elevation, theme),
       };
     },
-    rounded({ theme }) {
+    outlined({ theme }) {
       return {
-        borderRadius: theme.shape.small,
+        border: `1px solid ${theme.palette.grey[300]}`,
       };
     },
   },

@@ -201,6 +201,23 @@ export const Example = () => {
   );
 };
 
+export const Variants = () => {
+  return (
+    <Grid container columnSpacing={4} columns="1fr 1fr">
+      <Paper variant="outlined">
+        <PaperContentWrapper>
+          <Typography variant="h6">Outlined</Typography>
+        </PaperContentWrapper>
+      </Paper>
+      <Paper variant="elevation">
+        <PaperContentWrapper>
+          <Typography variant="h6">Elevation</Typography>
+        </PaperContentWrapper>
+      </Paper>
+    </Grid>
+  );
+};
+
 /**
  * ##### Отображение высоты
  *
