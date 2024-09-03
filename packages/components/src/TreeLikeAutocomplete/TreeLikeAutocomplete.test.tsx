@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { fireEvent, renderWithTheme, screen, userEvents } from '@astral/tests';
 
 import {
-  TreeAutocomplete,
-  type TreeAutocompleteProps,
-} from './TreeAutocomplete';
-import { type TreeAutocompleteValue } from './types';
+  TreeLikeAutocomplete,
+  type TreeLikeAutocompleteProps,
+} from './TreeLikeAutocomplete';
+import { type TreeLikeAutocompleteValue } from './types';
 
-describe('TreeAutocomplete', () => {
+describe('TreeLikeAutocomplete', () => {
   it('Label отображается', async () => {
     renderWithTheme(
-      <TreeAutocomplete
+      <TreeLikeAutocomplete
         label="TreeAutocompleteField"
         options={[]}
         dialogProps={{ title: 'Выбор элемента' }}
@@ -21,33 +21,33 @@ describe('TreeAutocomplete', () => {
     expect(screen.getByLabelText('TreeAutocompleteField')).toBeVisible();
   });
 
-  it('Value отображается', async () => {
+  it('Тэг отображается', async () => {
     renderWithTheme(
-      <TreeAutocomplete
-        value="1"
+      <TreeLikeAutocomplete
+        value={['1']}
         options={[{ id: '1', label: 'test' }]}
         dialogProps={{ title: 'Выбор элемента' }}
       />,
     );
 
-    const input = screen.queryByRole('textbox');
+    const tag = screen.queryByRole('button', { name: 'test' });
 
-    expect(input).toHaveAttribute('value', 'test');
+    expect(tag).toBeVisible();
   });
 
   it('Value сбрасывается при клике по кнопке очистки поля', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue | undefined>(
-        '1',
+      const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>(
+        ['1'],
       );
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -58,72 +58,36 @@ describe('TreeAutocomplete', () => {
 
     renderWithTheme(<TestComponent />);
 
-    const clearBtn = screen.getByRole('button');
+    const clearBtn = screen.getByRole('button', { name: 'Очистить' });
 
     await userEvents.click(clearBtn);
 
-    const input = screen.queryByRole('textbox');
+    const tag = screen.queryByRole('button', { name: 'test' });
 
-    expect(input).toHaveAttribute('value', '');
+    expect(tag).not.toBeInTheDocument();
   });
 
   it('Кнопка очистки поля не отображается, если инпут пуст', async () => {
     renderWithTheme(
-      <TreeAutocomplete
+      <TreeLikeAutocomplete
         options={[]}
         dialogProps={{ title: 'Выбор элемента' }}
       />,
     );
 
-    const clearBtn = screen.queryByRole('button');
+    const clearBtn = screen.queryByRole('button', { name: 'Очистить' });
 
     expect(clearBtn).not.toBeInTheDocument();
   });
 
-  it('Выбранное значение отображается в инпуте', async () => {
-    const options: TreeAutocompleteProps['options'] = [
-      { id: '1', label: 'Vasya' },
-      { id: '2', label: 'Kolya' },
-    ];
-
-    const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
-
-      return (
-        <TreeAutocomplete
-          value={value}
-          label="test"
-          options={options}
-          dialogProps={{ title: 'Выбор элемента' }}
-          onChange={setValue}
-        />
-      );
-    };
-
-    renderWithTheme(<TestComponent />);
-
-    const input = screen.getByRole('textbox');
-
-    await userEvents.click(input);
-
-    const option = screen.getByText('Vasya');
-
-    await userEvents.click(option);
-
-    const confirmButton = screen.getByText('Выбрать');
-
-    await userEvents.click(confirmButton);
-    expect(input).toHaveAttribute('value', 'Vasya');
-  });
-
   it('Модальное окно отображается после нажатия по полю ввода', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     renderWithTheme(
-      <TreeAutocomplete
+      <TreeLikeAutocomplete
         options={options}
         dialogProps={{ title: 'Выбор элемента' }}
       />,
@@ -137,16 +101,16 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Модальное окно закрывается после выбора значения', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -172,13 +136,13 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Заголовок модального окна отображается', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     renderWithTheme(
-      <TreeAutocomplete
+      <TreeLikeAutocomplete
         options={options}
         dialogProps={{ title: 'Выбор элемента' }}
       />,
@@ -192,16 +156,16 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Кнопка подтверждения выбора заблокирована, если ничего не выбрано в списке', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -219,16 +183,16 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Лоадер отображается при isLoading=true', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -247,16 +211,16 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Placeholder отображается, если нет результатов поиска', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -280,16 +244,16 @@ describe('TreeAutocomplete', () => {
   });
 
   it('Placeholder c ошибкой отображается при isLoadingError=true', async () => {
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
@@ -310,16 +274,16 @@ describe('TreeAutocomplete', () => {
   it('OnRetry вызывается при нажатии на кнопку "Попробовать снова"', async () => {
     const onRetrySpy = vi.fn();
 
-    const options: TreeAutocompleteProps['options'] = [
+    const options: TreeLikeAutocompleteProps['options'] = [
       { id: '1', label: 'Vasya' },
       { id: '2', label: 'Kolya' },
     ];
 
     const TestComponent = () => {
-      const [value, setValue] = useState<TreeAutocompleteValue>();
+      const [value, setValue] = useState<TreeLikeAutocompleteValue>();
 
       return (
-        <TreeAutocomplete
+        <TreeLikeAutocomplete
           value={value}
           options={options}
           dialogProps={{ title: 'Выбор элемента' }}
