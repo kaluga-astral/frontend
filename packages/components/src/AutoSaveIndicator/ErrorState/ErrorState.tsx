@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, ON_RETRY_MESSAGE } from '../constants';
+import { ERROR_MESSAGE } from '../constants';
 import { Tooltip } from '../../Tooltip';
 
 import {
@@ -16,7 +16,7 @@ type ErrorStateProps = {
   /**
    * Текст тултипа при ошибке автосохранения
    */
-  errorMsg: string;
+  errorMsg?: string;
 };
 
 export const ErrorState = (props: ErrorStateProps) => {
@@ -27,7 +27,7 @@ export const ErrorState = (props: ErrorStateProps) => {
       <ErrorWrapper>
         <StyledTypography variant="caption">{ERROR_MESSAGE}</StyledTypography>
         <StyledButton onClick={onRetry} variant="link" color="primary">
-          {ON_RETRY_MESSAGE}
+          Повторить попытку
         </StyledButton>
       </ErrorWrapper>
       <Tooltip title={errorMsg} placement="bottom" withoutContainer={false}>

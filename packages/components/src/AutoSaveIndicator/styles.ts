@@ -14,6 +14,6 @@ export const PopoverContent = styled.div`
   margin: ${({ theme }) => theme.spacing(2)};
 `;
 
-export const PopoverTypography = styled(Typography)`
+export const StyledTypography = styled(Typography)`
   padding-right: ${({ theme }) => theme.spacing(2)};
 `;

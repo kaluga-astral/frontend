@@ -3,7 +3,7 @@ import { CrossOutlineSm } from '@astral/icons';
 import { Popover } from '../Popover';
 import { IconButton } from '../IconButton';
 
-import { PopoverContent, PopoverTypography, Wrapper } from './styles';
+import { PopoverContent, StyledTypography, Wrapper } from './styles';
 import { useLogic } from './useLogic';
 import { ErrorState } from './ErrorState';
 import { LoadingState } from './LoadingState';
@@ -18,7 +18,7 @@ export type AutoSaveIndicatorProps = {
   /**
    * Текст тултипа при ошибке автосохранения
    */
-  errorMsg: string;
+  errorMsg?: string;
   /**
    * Состояние сохранения
    */
@@ -69,9 +69,9 @@ export const AutoSaveIndicator = (props: AutoSaveIndicatorProps) => {
         }}
       >
         <PopoverContent>
-          <PopoverTypography>
+          <StyledTypography>
             Изменения на этой странице сохраняются автоматически
-          </PopoverTypography>
+          </StyledTypography>
           <IconButton variant="text" onClick={handleClose}>
             <CrossOutlineSm />
           </IconButton>

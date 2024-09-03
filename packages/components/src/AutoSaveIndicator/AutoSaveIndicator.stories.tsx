@@ -1,13 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import {
   CompanyOutlineMd,
-  EyeFillMd,
   ProfileOutlineMd,
   SearchOutlineMd,
-  SendOutlineMd,
 } from '@astral/icons';
-import { Fragment, useEffect, useState } from 'react';
-import { type SelectChangeEvent, Stack } from '@mui/material';
+import { Fragment, useState } from 'react';
+import { Stack } from '@mui/material';
 
 import { DashboardLayout } from '../DashboardLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
@@ -17,22 +15,10 @@ import { type SidebarProps } from '../DashboardLayout/Sidebar';
 import { TextField } from '../TextField';
 import { Select } from '../Select';
 import { PageLayout } from '../PageLayout';
-import {
-  DataGridActionCell,
-  type DataGridActions,
-} from '../DataGridActionCell';
-import {
-  type DataGridColumns,
-  type DataGridRowWithOptions,
-  NewDataGrid,
-} from '../NewDataGrid';
 import { Grid } from '../Grid';
-import {
-  makeColumns,
-  makeDataList,
-  makeRandomDate,
-} from '../NewDataGrid/faker';
 import { MenuItem } from '../MenuItem';
+import { DatePicker } from '../DatePicker';
+import { TextArea } from '../TextArea';
 
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
@@ -44,9 +30,6 @@ import { AutoSaveIndicator } from './AutoSaveIndicator';
 const meta: Meta<typeof AutoSaveIndicator> = {
   title: 'Components/AutoSaveIndicator',
   component: AutoSaveIndicator,
-  parameters: {
-    layout: 'fullscreen',
-  },
 };
 
 export default meta;
@@ -79,73 +62,9 @@ const DashboardLayoutWrapper = styled.div`
   max-height: 600px;
 `;
 
-type DataType = {
-  id: string;
-  documentName: string;
-  recipient: string;
-  createDate: string;
-  actions?: object;
-};
-
-const FAKE_DATA_TEMPLATE: DataType = {
-  id: '1',
-  documentName: 'Договор №1',
-  recipient: 'ИП Иванов О.В.',
-  createDate: '2022-03-24T17:50:40.206Z',
-};
-
-const FAKE_ACTIONS: DataGridActions<DataType> = {
-  main: [
-    {
-      icon: <EyeFillMd />,
-      name: 'Просмотреть',
-      onClick: () => console.log('main'),
-      isBlockingOperation: true,
-    },
-    {
-      icon: <SendOutlineMd />,
-      nested: true,
-      name: 'Отправить',
-      actions: [
-        { name: 'Туда', onClick: () => console.log('nested 1') },
-        { name: 'Сюда', onClick: () => console.log('nested 2') },
-      ],
-    },
-  ],
-  secondary: [
-    { name: 'Редактировать', onClick: () => console.log('secondary 1') },
-    { name: 'Удалить', onClick: () => console.log('secondary 2') },
-  ],
-};
-
-const FAKE_COLUMNS: DataGridColumns<DataType>[] = [
-  {
-    field: 'documentName',
-    label: 'Наименование документа',
-    sortable: true,
-  },
-  {
-    field: 'recipient',
-    label: 'Получатель',
-    sortable: true,
-  },
-  {
-    field: 'createDate',
-    label: 'Дата создания',
-    sortable: true,
-    format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
-  },
-  {
-    field: 'actions',
-    label: 'Действия',
-    sortable: false,
-    align: 'center',
-    width: '120px',
-    renderCell: (row) => {
-      return <DataGridActionCell actions={FAKE_ACTIONS} row={row} />;
-    },
-  },
-];
+const GridWrapper = styled(Grid)`
+  padding: ${({ theme }) => theme.spacing(0, 4)};
+`;
 
 export const Interaction: Story = {
   args: {},
@@ -164,8 +83,6 @@ export const Example = () => {
       onClick: () => console.log('Мой профиль'),
     },
   ];
-
-  const columns = makeColumns(FAKE_COLUMNS);
 
   const sidebar = {
     menu: {
@@ -221,32 +138,13 @@ export const Example = () => {
     },
   } as SidebarProps;
 
-  const [slicedData, setSlicedData] = useState<DataType[]>([]);
-  const handleRowClick = (row: DataType) => console.log('row clicked', row);
-
   const [isLoading, setLoading] = useState(false);
 
   const [isSuccess, setSuccess] = useState(false);
 
   const [isError, setError] = useState(false);
 
-  const [singleValue, setSingleValue] = useState('');
-
-  const fakeData: DataGridRowWithOptions<DataType>[] = [
-    {
-      id: '123456789',
-      documentName: 'Договор №12345678',
-      recipient: 'ПАО "Первый завод"',
-      createDate: makeRandomDate(),
-    },
-    ...makeDataList(FAKE_DATA_TEMPLATE),
-  ];
-
-  const handleSave = (event?: SelectChangeEvent<typeof singleValue>) => {
-    if (event) {
-      setSingleValue(event.target.value);
-    }
-
+  const handleSave = () => {
     setLoading(true);
     setSuccess(false);
     setError(false);
@@ -267,12 +165,6 @@ export const Example = () => {
   const handleClearStorage = () => {
     localStorage.clear();
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
-    }, 1500);
-  }, []);
 
   return (
     <DashboardLayoutWrapper>
@@ -348,7 +240,7 @@ export const Example = () => {
                     size="small"
                   />
                   <Select
-                    value={singleValue}
+                    value=""
                     placeholder="При выборе произойдет автосохранение"
                     size="small"
                     onChange={handleSave}
@@ -364,14 +256,30 @@ export const Example = () => {
             }}
             content={{
               children: (
-                <NewDataGrid<DataType>
-                  keyId="id"
-                  rows={slicedData}
-                  columns={columns}
-                  isLoading={isLoading}
-                  onRowClick={handleRowClick}
-                  onRetry={() => {}}
-                />
+                <GridWrapper rowSpacing={3} container>
+                  <TextField
+                    onBlur={handleSave}
+                    placeholder="Введите имя"
+                    label="Имя"
+                  />
+                  <TextField
+                    onBlur={handleSave}
+                    placeholder="Введите фамилию"
+                    label="Фамилия"
+                  />
+                  <DatePicker
+                    inputProps={{
+                      label: 'Дата рождения:',
+                      placeholder: 'Выберите дату',
+                    }}
+                    onChange={handleSave}
+                  />
+                  <TextArea
+                    onBlur={handleSave}
+                    rows={4}
+                    placeholder="Введите информацию о себе"
+                  />
+                </GridWrapper>
               ),
             }}
           />
@@ -385,21 +293,13 @@ export const State = () => {
   return (
     <Grid spacing={3}>
       <AutoSaveIndicator onRetry={() => {}} errorMsg="Изменения не сохранены" />
-      <AutoSaveIndicator
-        onRetry={() => {}}
-        errorMsg="Изменения не сохранены"
-        isLoading
-      />
+      <AutoSaveIndicator onRetry={() => {}} isLoading />
       <AutoSaveIndicator
         onRetry={() => {}}
         errorMsg="Изменения не сохранены"
         isError
       />
-      <AutoSaveIndicator
-        onRetry={() => {}}
-        errorMsg="Изменения не сохранены"
-        isSuccess
-      />
+      <AutoSaveIndicator onRetry={() => {}} isSuccess />
     </Grid>
   );
 };

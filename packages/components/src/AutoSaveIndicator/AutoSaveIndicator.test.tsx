@@ -1,12 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { renderWithTheme, screen, userEvents } from '@astral/tests';
 
-import {
-  ERROR_MESSAGE,
-  LOADING_MESSAGE,
-  ON_RETRY_MESSAGE,
-  SUCCESS_MESSAGE,
-} from './constants';
+import { ERROR_MESSAGE, LOADING_MESSAGE, SUCCESS_MESSAGE } from './constants';
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
 describe('AutoSaveIndicator', () => {
@@ -40,7 +35,7 @@ describe('AutoSaveIndicator', () => {
     expect(label).toBeVisible();
   });
 
-  it('Тултип отображается, если isError=true', async () => {
+  it('Текст ошибки отображается, если isError=true', async () => {
     const errorMsg = 'Ошибка автосохранения';
 
     renderWithTheme(
@@ -92,7 +87,7 @@ describe('AutoSaveIndicator', () => {
       <AutoSaveIndicator onRetry={onRetrySpy} errorMsg="" isError />,
     );
 
-    const item = screen.getByText(ON_RETRY_MESSAGE);
+    const item = screen.getByText('Повторить попытку');
 
     await userEvents.click(item);
     expect(onRetrySpy).toBeCalled();
