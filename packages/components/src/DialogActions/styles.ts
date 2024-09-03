@@ -5,6 +5,10 @@ import { styled } from '../styles';
 
 export const StyledDialogActions = styled(DialogActions)`
   padding-top: 0;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    padding: ${({ theme }) => theme.spacing(4)};
+  }
 `;
 
 export const StyledGrid = styled(Grid)<GridProps>`
