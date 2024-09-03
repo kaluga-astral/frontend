@@ -11,7 +11,6 @@ import {
 } from './TreeLikeAutocomplete';
 import type { TreeLikeAutocompleteValue } from './types';
 
-/* cSpell:ignore treelikeautocomplete */
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=29018-26806&t=KlO3eS3OpSUPrLex-0)
  * ### [Guide]()
