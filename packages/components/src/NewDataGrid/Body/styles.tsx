@@ -5,6 +5,8 @@ export const Wrapper = styled('ul', {
   shouldForwardProp: (prop) =>
     prop !== '$isEmpty' && prop !== '$minDisplayRows',
 })<{ $isEmpty: boolean; $minDisplayRows: number }>`
+  overflow-y: auto;
+
   height: ${({ $isEmpty, $minDisplayRows }) =>
     $isEmpty ? `${MIN_ROW_HEIGHT * $minDisplayRows}px` : '100%'};
   margin: 0;

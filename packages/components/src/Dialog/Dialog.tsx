@@ -1,11 +1,14 @@
 import { type DialogProps as MuiDialogProps } from '@mui/material';
+import { type MouseEvent } from 'react';
 
 import { DialogTitle } from '../DialogTitle';
-import { type WithoutEmotionSpecific } from '../types';
+import type { WithoutEmotionSpecific } from '../types';
 import { BottomDrawer } from '../BottomDrawer';
-import { useViewportType } from '../hooks/useViewportType';
+import { useViewportType } from '../hooks';
 
 import { StyledDialog } from './styles';
+
+type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type DialogProps = WithoutEmotionSpecific<
   Omit<MuiDialogProps, 'title'>
@@ -18,6 +21,11 @@ export type DialogProps = WithoutEmotionSpecific<
    * Отключить кликабельность фонового компонента
    */
   disableBackdropClick?: boolean;
+  /**
+   * Размер Dialog
+   * @default md
+   */
+  size?: DialogSize;
 };
 
 export const Dialog = ({
@@ -25,12 +33,13 @@ export const Dialog = ({
   title,
   disableBackdropClick,
   onClose,
+  size = 'md',
   ...props
 }: DialogProps) => {
   const handleClose =
     onClose &&
     ((
-      event: React.MouseEvent<HTMLButtonElement>,
+      event: MouseEvent<HTMLButtonElement>,
       reason: 'backdropClick' | 'escapeKeyDown',
     ) => {
       if (disableBackdropClick && reason == 'backdropClick') {
@@ -51,7 +60,7 @@ export const Dialog = ({
   }
 
   return (
-    <StyledDialog onClose={handleClose} {...props}>
+    <StyledDialog $size={size} onClose={handleClose} {...props}>
       {title && <DialogTitle onClose={onClose}>{title}</DialogTitle>}
       {children}
     </StyledDialog>

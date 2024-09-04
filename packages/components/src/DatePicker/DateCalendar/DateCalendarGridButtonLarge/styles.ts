@@ -1,7 +1,7 @@
+import { StaticCalendarGridButton } from '../../../StaticCalendar/StaticCalendarGridButton';
 import { styled } from '../../../styles';
-import { DateCalendarGridButton } from '../DateCalendarGridButton';
 
-export const DateCalendarGridButtonLarge = styled(DateCalendarGridButton)`
+export const DateCalendarGridButtonLarge = styled(StaticCalendarGridButton)`
   min-width: 80px;
   min-height: 52px;
   padding: ${({ theme }) => theme.spacing(4, 2)};

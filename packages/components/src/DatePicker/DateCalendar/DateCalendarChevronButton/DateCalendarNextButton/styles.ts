@@ -1,7 +1,7 @@
 import { styled } from '../../../../styles';
 import { CalendarGridPositions } from '../../enums/calendarGridPositions';
-import { StyledDateCalendarButton } from '../styles';
+import { StaticCalendarButton } from '../../../../StaticCalendar/StaticCalendarButton';
 
-export const StyledButton = styled(StyledDateCalendarButton)`
+export const Wrapper = styled(StaticCalendarButton)`
   grid-area: ${CalendarGridPositions.next};
 `;

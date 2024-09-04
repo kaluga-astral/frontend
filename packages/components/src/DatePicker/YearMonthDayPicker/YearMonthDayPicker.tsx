@@ -20,7 +20,6 @@ export const YearMonthDayPicker = ({
   rangeDate,
   selectedDate,
   isMondayFirst,
-  isRange,
   hoveredDayDate,
   onDayHover,
 }: YearMonthDayPickerProps) => {
@@ -94,7 +93,6 @@ export const YearMonthDayPicker = ({
           headBtnTitle={toMonthPick.single}
           onChange={onChange}
           rangeDate={rangeDate}
-          isRange={isRange}
           hoveredDayDate={hoveredDayDate}
           onDayHover={onDayHover}
         />

@@ -58,7 +58,7 @@ export const DateCalendarHead = ({
       isPlural={isPlural}
     />
     {onHeadBtnClick ? (
-      <HeadButton onClick={onHeadBtnClick} title={headBtnTitle}>
+      <HeadButton onClick={onHeadBtnClick} tooltipTitle={headBtnTitle}>
         {headBtnText}
       </HeadButton>
     ) : (
