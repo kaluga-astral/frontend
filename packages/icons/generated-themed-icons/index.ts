@@ -24,6 +24,12 @@ export { default as ArrowROutlineLg } from './ArrowROutlineLg';
 
 export { default as ArrowROutlineMd } from './ArrowROutlineMd';
 
+export { default as AutosaveErrorFillMd } from './AutosaveErrorFillMd';
+
+export { default as AutosaveFillMd } from './AutosaveFillMd';
+
+export { default as AutosaveLoaderFillMd } from './AutosaveLoaderFillMd';
+
 export { default as BasketOutlineMd } from './BasketOutlineMd';
 
 export { default as BellOutlineMd } from './BellOutlineMd';

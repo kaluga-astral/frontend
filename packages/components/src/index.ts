@@ -6,6 +6,11 @@ export * from './Alert';
 
 export * from './Autocomplete';
 
+export {
+  AutoSaveIndicator,
+  type AutoSaveIndicatorProps,
+} from './AutoSaveIndicator';
+
 export * from './Avatar';
 
 export * from './ClickAwayListener';
