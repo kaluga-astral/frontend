@@ -70,7 +70,7 @@ describe('AutoSaveIndicator', () => {
     );
   });
 
-  it('Popover отображается', () => {
+  it('Popover с сообщением отображается при первой загрузке', () => {
     renderWithTheme(<AutoSaveIndicator onRetry={() => {}} errorMsg="" />);
 
     const item = screen.getByText(

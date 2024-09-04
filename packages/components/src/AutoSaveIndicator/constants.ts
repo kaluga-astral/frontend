@@ -6,4 +6,4 @@ export const SUCCESS_MESSAGE = 'Изменения сохранены';
 
 export const LOADING_MESSAGE = 'Сохраняем...';
 
-export const IS_POPOVER_SHOW = 'astralui-autosaveOnboard';
+export const AUTOSAVE_ON_BOARD = 'astralui-autosaveOnboard';
