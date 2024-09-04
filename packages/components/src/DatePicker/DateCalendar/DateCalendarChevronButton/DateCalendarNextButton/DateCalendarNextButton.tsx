@@ -4,7 +4,7 @@ import { forwardRef, useContext } from 'react';
 import { ConfigContext } from '../../../../ConfigProvider';
 import { type DateCalendarChevronBtnProps } from '../types';
 
-import { StyledButton } from './styles';
+import { Wrapper } from './styles';
 
 export const DateCalendarNextButton = forwardRef<
   HTMLButtonElement,
@@ -13,13 +13,13 @@ export const DateCalendarNextButton = forwardRef<
   const { next } = useContext(ConfigContext).datePickerLanguageMap;
 
   return (
-    <StyledButton
+    <Wrapper
       ref={ref}
       disabled={!Boolean(props.onClick)}
-      title={`${isPlural ? next.plural : next.single} ${postfixTitle}`}
+      tooltipTitle={`${isPlural ? next.plural : next.single} ${postfixTitle}`}
       {...props}
     >
       <NextOutlineMd />
-    </StyledButton>
+    </Wrapper>
   );
 });

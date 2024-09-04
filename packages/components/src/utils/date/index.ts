@@ -13,3 +13,9 @@ export * from './isDateOutOfRange';
 export * from './areDatesSame';
 
 export * from './format';
+
+export * from './buildDaysCalendarGrid';
+
+export * from './checkIsDateInRange';
+
+export * from './compareDateDayByUTC';

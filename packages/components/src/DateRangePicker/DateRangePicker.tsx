@@ -1,6 +1,7 @@
 import {
   type SyntheticEvent,
   forwardRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -185,15 +186,18 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
     };
 
-    const handleDayPick = (pickedDate: Date) => {
-      if (activeInput === 'startDate') {
-        pickStartDate(pickedDate);
-      }
+    const handleDayPick = useCallback(
+      (pickedDate: Date) => {
+        if (activeInput === 'startDate') {
+          pickStartDate(pickedDate);
+        }
 
-      if (activeInput === 'endDate') {
-        pickEndDate(pickedDate);
-      }
-    };
+        if (activeInput === 'endDate') {
+          pickEndDate(pickedDate);
+        }
+      },
+      [activeInput, pickEndDate],
+    );
 
     const handleAcceptStart = (
       _: string,
@@ -274,7 +278,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 rangeDate={endDateProps.value || startDateProps.value}
                 date={startBaseDate}
                 onChange={handleDayPick}
-                isRange
                 hoveredDayDate={hoveredDayDate}
                 onDayHover={setHoveredDayDate}
               />
@@ -285,7 +288,6 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 rangeDate={endDateProps.value || startDateProps.value}
                 date={endBaseDate}
                 onChange={handleDayPick}
-                isRange
                 hoveredDayDate={hoveredDayDate}
                 onDayHover={setHoveredDayDate}
               />

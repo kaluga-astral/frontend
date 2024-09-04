@@ -76,6 +76,11 @@ export * from './DataGridPagination';
 
 export * from './DataList';
 
+export {
+  type StaticDaysCalendarProps,
+  StaticDaysCalendar,
+} from './StaticCalendar';
+
 export { DatePicker, type DatePickerProps } from './DatePicker';
 
 export * from './DateRangePicker';
