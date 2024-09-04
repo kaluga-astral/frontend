@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useLocalStorage } from '../../hooks';
-import { AUTOSAVE_ON_BOARD } from '../constants';
+import { AUTOSAVE_POPOVER } from '../constants';
 
 export const useLogic = () => {
   const [open, setOpen] = useState(false);
 
   const [storageOnBoardShow, setStorageOnBoardShow] = useLocalStorage(
-    AUTOSAVE_ON_BOARD,
+    AUTOSAVE_POPOVER,
     true,
   );
 
