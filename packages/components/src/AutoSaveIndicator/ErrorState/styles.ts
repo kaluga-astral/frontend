@@ -12,7 +12,7 @@ export const ErrorWrapper = styled.div`
 export const StyledButton = styled(Button)`
   align-self: flex-end;
 
-  height: 16px;
+  height: unset;
   padding: ${({ theme }) => theme.spacing(0, 2)};
 
   font-size: ${({ theme }) => theme.typography.h7.fontSize};

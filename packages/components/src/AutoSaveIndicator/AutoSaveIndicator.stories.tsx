@@ -30,6 +30,9 @@ import { AutoSaveIndicator } from './AutoSaveIndicator';
 const meta: Meta<typeof AutoSaveIndicator> = {
   title: 'Components/AutoSaveIndicator',
   component: AutoSaveIndicator,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;
@@ -64,6 +67,13 @@ const DashboardLayoutWrapper = styled.div`
 
 const GridWrapper = styled(Grid)`
   padding: ${({ theme }) => theme.spacing(0, 4)};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: ${({ theme }) => theme.spacing(10)};
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 export const Interaction: Story = {
@@ -291,7 +301,7 @@ export const Example = () => {
 
 export const State = () => {
   return (
-    <Grid spacing={3}>
+    <Wrapper>
       <AutoSaveIndicator onRetry={() => {}} errorMsg="Изменения не сохранены" />
       <AutoSaveIndicator onRetry={() => {}} isLoading />
       <AutoSaveIndicator
@@ -300,6 +310,6 @@ export const State = () => {
         isError
       />
       <AutoSaveIndicator onRetry={() => {}} isSuccess />
-    </Grid>
+    </Wrapper>
   );
 };
