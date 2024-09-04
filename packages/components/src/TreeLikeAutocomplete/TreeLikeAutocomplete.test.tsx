@@ -12,13 +12,13 @@ describe('TreeLikeAutocomplete', () => {
   it('Label отображается', async () => {
     renderWithTheme(
       <TreeLikeAutocomplete
-        label="TreeAutocompleteField"
+        label="TreeLikeAutocompleteField"
         options={[]}
         dialogProps={{ title: 'Выбор элемента' }}
       />,
     );
 
-    expect(screen.getByLabelText('TreeAutocompleteField')).toBeVisible();
+    expect(screen.getByLabelText('TreeLikeAutocompleteField')).toBeVisible();
   });
 
   it('Тэг отображается', async () => {

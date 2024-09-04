@@ -18,8 +18,6 @@ export const StyledTextField = styled(TextField)`
     width: 0;
     height: 0;
     padding: 0;
-
-    opacity: 0;
   }
 `;
 
