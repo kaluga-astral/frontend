@@ -324,6 +324,13 @@ export {
   type TreeAutocompleteValue,
 } from './TreeAutocomplete';
 
+export {
+  TreeLikeAutocomplete,
+  type TreeLikeAutocompleteProps,
+  type TreeLikeAutocompleteTreeProps,
+  type TreeLikeAutocompleteValue,
+} from './TreeLikeAutocomplete';
+
 export { TreeLikeList, type TreeLikeListProps } from './TreeLikeList';
 
 export * from './types';
