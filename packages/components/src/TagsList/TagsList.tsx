@@ -40,6 +40,10 @@ export type TagsListProps<TData extends TagValue = TagValue> = {
   onClick: (value: MouseEvent<HTMLDivElement>) => void;
 };
 
+/**
+ * Предназначен для отображения списка тегов в таких компонентах как: Select, Autocomplete, TreeLikeAutocomplete
+ * Не предназначен для использования в продуктах, не экспортируется из пакета
+ */
 export const TagsList = <TData extends TagValue>(
   props: TagsListProps<TData>,
 ) => {

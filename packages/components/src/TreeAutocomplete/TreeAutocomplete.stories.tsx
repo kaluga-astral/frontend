@@ -16,7 +16,7 @@ import {
  * TreeAutocomplete - Компонент предназначен для выбора значения из опций, имеющих древовидную структуру, с поддержкой поиска.
  */
 const meta: Meta<typeof TreeAutocomplete> = {
-  title: 'Components/TreeAutocomplete',
+  title: 'Components/Tree/TreeAutocomplete',
   component: TreeAutocomplete,
 };
 

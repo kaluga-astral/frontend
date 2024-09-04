@@ -17,7 +17,7 @@ import type { TreeLikeAutocompleteValue } from './types';
  * TreeLikeAutocomplete - Компонент предназначен для множественного выбора значений из списка, имеющего древовидную структуру, с поддержкой поиска.
  */
 const meta: Meta<typeof TreeLikeAutocomplete> = {
-  title: 'Components/TreeLikeAutocomplete',
+  title: 'Components/Tree/TreeLikeAutocomplete',
   component: TreeLikeAutocomplete,
 };
 
@@ -288,14 +288,14 @@ export const FilterOptions = () => {
   ];
 
   const filterOptions: TreeLikeAutocompleteProps['filterOptions'] = (
-    node,
+    option,
     searchValue,
   ) => {
-    if (typeof node.label !== 'string') {
+    if (typeof option.label !== 'string') {
       return false;
     }
 
-    return node.label.includes(searchValue);
+    return option.label.includes(searchValue);
   };
 
   return (

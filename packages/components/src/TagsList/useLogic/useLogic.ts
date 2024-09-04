@@ -4,7 +4,7 @@ import { getElementByText } from '../utils';
 import { type TagsListProps } from '../TagsList';
 import type { TagValue } from '../types';
 
-type UseLogicParams<TData> = TagsListProps<TData>;
+type UseLogicParams<TData extends TagValue> = TagsListProps<TData>;
 
 export const useLogic = <TData extends TagValue>({
   data = [],

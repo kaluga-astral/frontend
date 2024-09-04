@@ -15,8 +15,6 @@ export const StyledTextField = styled(TextField)`
   }
 
   .${inputBaseClasses.input} {
-    pointer-events: none;
-
     width: 0;
     height: 0;
     padding: 0;
