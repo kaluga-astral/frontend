@@ -5,19 +5,20 @@ import { styled } from '../styles';
 import { Typography } from '../Typography';
 
 import {
-  TreeAutocomplete,
-  type TreeAutocompleteProps,
-  type TreeAutocompleteTreeProps,
-} from './TreeAutocomplete';
+  TreeLikeAutocomplete,
+  type TreeLikeAutocompleteProps,
+  type TreeLikeAutocompleteTreeProps,
+} from './TreeLikeAutocomplete';
+import type { TreeLikeAutocompleteValue } from './types';
 
 /**
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(%D0%90%D0%9A%D0%A2%D0%A3%D0%90%D0%9B%D0%AC%D0%9D%D0%9E)?node-id=29018-26806&t=KlO3eS3OpSUPrLex-0)
  * ### [Guide]()
- * TreeAutocomplete - Компонент предназначен для выбора значения из опций, имеющих древовидную структуру, с поддержкой поиска.
+ * TreeLikeAutocomplete - Компонент предназначен для множественного выбора значений из списка, имеющего древовидную структуру, с поддержкой поиска.
  */
-const meta: Meta<typeof TreeAutocomplete> = {
-  title: 'Components/Tree/TreeAutocomplete',
-  component: TreeAutocomplete,
+const meta: Meta<typeof TreeLikeAutocomplete> = {
+  title: 'Components/Tree/TreeLikeAutocomplete',
+  component: TreeLikeAutocomplete,
 };
 
 export default meta;
@@ -162,7 +163,10 @@ const FAKE_NOTE_TREE_LIST_DATA = [
 ];
 
 export const Example = () => {
-  const [value, setValue] = useState<string | undefined>('3');
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>([
+    '12',
+    '3',
+  ]);
 
   const fakeOptions = [
     {
@@ -174,7 +178,7 @@ export const Example = () => {
   ];
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       options={fakeOptions}
       value={value}
@@ -187,7 +191,10 @@ export const Example = () => {
 };
 
 export const Disabled = () => {
-  const [value, setValue] = useState<string | undefined>('3');
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>([
+    '12',
+    '3',
+  ]);
 
   const fakeOptions = [
     {
@@ -198,7 +205,7 @@ export const Disabled = () => {
   ];
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       isDisabled
       options={fakeOptions}
@@ -212,7 +219,7 @@ export const Disabled = () => {
 };
 
 export const Required = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const fakeOptions = [
     {
@@ -224,7 +231,7 @@ export const Required = () => {
   ];
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       required
       options={fakeOptions}
@@ -238,7 +245,7 @@ export const Required = () => {
 };
 
 export const Error = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const fakeOptions = [
     {
@@ -250,7 +257,7 @@ export const Error = () => {
   ];
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       isError
       helperText="Обязательно"
@@ -269,7 +276,7 @@ export const Error = () => {
  * Например можно организовать поиск только по `label`
  */
 export const FilterOptions = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const fakeOptions = [
     {
@@ -280,19 +287,19 @@ export const FilterOptions = () => {
     ...FAKE_NOTE_TREE_LIST_DATA,
   ];
 
-  const filterOptions: TreeAutocompleteProps['filterOptions'] = (
-    node,
+  const filterOptions: TreeLikeAutocompleteProps['filterOptions'] = (
+    option,
     searchValue,
   ) => {
-    if (typeof node.label !== 'string') {
+    if (typeof option.label !== 'string') {
       return false;
     }
 
-    return node.label.includes(searchValue);
+    return option.label.includes(searchValue);
   };
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       options={fakeOptions}
       value={value}
@@ -309,7 +316,7 @@ export const FilterOptions = () => {
  * Используя `treeProps` можно сконфигурировать дерево опций, например указать список недоступных для выбора элементов
  */
 export const DisabledItems = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const fakeOptions = [
     {
@@ -320,7 +327,7 @@ export const DisabledItems = () => {
   ];
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       required
       options={fakeOptions}
@@ -340,7 +347,7 @@ export const DisabledItems = () => {
 };
 
 export const RenderItem = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const fakeOptions = [
     {
@@ -355,7 +362,7 @@ export const RenderItem = () => {
     padding-left: ${({ theme }) => theme.spacing(1)};
   `;
 
-  const renderItem: TreeAutocompleteTreeProps['renderItem'] = ({
+  const renderItem: TreeLikeAutocompleteTreeProps['renderItem'] = ({
     note,
     label,
   }) => (
@@ -368,7 +375,7 @@ export const RenderItem = () => {
   );
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       required
       options={fakeOptions}
@@ -385,10 +392,10 @@ export const RenderItem = () => {
 };
 
 export const Loading = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       isLoading
       options={[]}
@@ -405,12 +412,12 @@ export const Loading = () => {
  * `loadingErrorMsg` позволяет указать кастомный текст ошибки при загрузке данных
  */
 export const LoadingError = () => {
-  const [value, setValue] = useState<string | undefined>();
+  const [value, setValue] = useState<TreeLikeAutocompleteValue | undefined>();
 
   const handleRetry = () => alert('Retry');
 
   return (
-    <TreeAutocomplete
+    <TreeLikeAutocomplete
       label="Название"
       isLoadingError
       options={[]}
