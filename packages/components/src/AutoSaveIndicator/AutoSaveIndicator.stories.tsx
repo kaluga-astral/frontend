@@ -225,7 +225,7 @@ export const Example = () => {
               actions: {
                 main: [
                   {
-                    text: 'Отчисть localStorage',
+                    text: 'Очистить localStorage',
                     onClick: handleClearStorage,
                   },
                 ],
