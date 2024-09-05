@@ -12,4 +12,8 @@ export const DateCalendarWrapper = styled.div`
 
   min-width: 288px;
   min-height: 256px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    padding: ${({ theme }) => theme.spacing(5, 4)};
+  }
 `;

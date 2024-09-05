@@ -6,9 +6,10 @@ import {
 } from 'react';
 
 import { type TextFieldProps } from '../TextField';
-import { useForwardedRef, usePopover } from '../hooks';
+import { useForwardedRef, usePopover, useViewportType } from '../hooks';
 import { type DateMask } from '../utils/date';
 import { type CloseEventReason } from '../types';
+import { Button } from '../Button';
 
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopover } from './DatePickerPopover';
@@ -113,6 +114,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ) => {
     const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
+    const { isMobile } = useViewportType();
+
+    const isTitleShow = isMobile && typeof label === 'string';
+
     const { isOpen, actions } = usePopover();
     const { open, close } = actions;
 
@@ -128,7 +133,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     };
 
     const handleDayPick = () => {
-      handleClose();
+      if (!isMobile) {
+        handleClose();
+      }
     };
 
     const {
@@ -143,6 +150,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       currentValue: value,
       onChange,
     });
+
+    const isButtonShow = Boolean(value) && isMobile;
 
     return (
       <div ref={ref} className={className}>
@@ -164,12 +173,16 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           open={isOpen}
           anchorEl={ref.current}
           onClose={handleClose}
+          title={isTitleShow ? label : ''}
         >
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
               {...pickerProps}
             />
+            {isButtonShow && (
+              <Button>Выбрать {calculatedInputProps.value}</Button>
+            )}
           </MinMaxDateContextProvider>
         </DatePickerPopover>
       </div>
