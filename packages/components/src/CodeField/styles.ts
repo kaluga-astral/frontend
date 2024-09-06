@@ -47,7 +47,6 @@ export const FieldLabel = styled(Typography)`
 `;
 
 export const StyledSkeleton = styled(Skeleton)`
-  width: 100%;
   min-width: 44px;
   max-width: 60px;
 `;
