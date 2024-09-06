@@ -1,5 +1,4 @@
 import { type ReactNode, forwardRef } from 'react';
-import Skeleton from '@mui/material/Skeleton';
 
 import { FormHelperText } from '../FormHelperText';
 
@@ -8,6 +7,7 @@ import {
   DigitsItem,
   DigitsWrapper,
   FieldLabel,
+  StyledSkeleton,
   Wrapper,
 } from './styles';
 import ResendCodeButton from './ResendСodeButton/ResendСodeButton';
@@ -119,7 +119,7 @@ export const CodeField = forwardRef<HTMLInputElement, CodeFieldProps>(
           {codeValue.map((value, index) => (
             <DigitsItem>
               {loading ? (
-                <Skeleton variant="rounded" width={62} height={60} />
+                <StyledSkeleton variant="rounded" height={60} />
               ) : (
                 <Digit
                   type="text"
