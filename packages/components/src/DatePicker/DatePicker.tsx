@@ -9,7 +9,6 @@ import { type TextFieldProps } from '../TextField';
 import { useForwardedRef, usePopover, useViewportType } from '../hooks';
 import { type DateMask } from '../utils/date';
 import { type CloseEventReason } from '../types';
-import { Button } from '../Button';
 
 import { DatePickerInput } from './DatePickerInput';
 import { DatePickerPopover } from './DatePickerPopover';
@@ -23,6 +22,7 @@ import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { type MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants';
 import { useDatePickerOptions } from './hooks';
+import { StyledButton, Wrapper } from './styles';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -180,8 +180,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               isMondayFirst={isMondayFirst}
               {...pickerProps}
             />
-            {isButtonShow && (
-              <Button>Выбрать {calculatedInputProps.value}</Button>
+            {isMobile && (
+              <Wrapper $isVisible={isButtonShow}>
+                <StyledButton onClick={handleClose}>
+                  Выбрать {calculatedInputProps.value}
+                </StyledButton>
+              </Wrapper>
             )}
           </MinMaxDateContextProvider>
         </DatePickerPopover>

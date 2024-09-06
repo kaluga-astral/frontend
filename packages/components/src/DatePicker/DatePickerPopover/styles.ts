@@ -16,5 +16,7 @@ export const InnerContainer = styled.div`
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     display: unset;
+
+    padding: unset;
   }
 `;
