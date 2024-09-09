@@ -46,7 +46,7 @@ export const Example = () => {
         placeholder: 'Выберите дату',
       }}
       disabled={false}
-      label="День рождения"
+      label="Дата рождения"
       value={date}
       onChange={setDate}
     />

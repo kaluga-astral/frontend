@@ -151,7 +151,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onChange,
     });
 
-    const isButtonShow = Boolean(value) && isMobile;
+    const isDisabledButton = !Boolean(value);
 
     return (
       <div ref={ref} className={className}>
@@ -173,7 +173,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           open={isOpen}
           anchorEl={ref.current}
           onClose={handleClose}
-          title={isTitleShow ? label : ''}
+          title={isTitleShow ? label : undefined}
         >
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker
@@ -181,9 +181,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {...pickerProps}
             />
             {isMobile && (
-              <Wrapper $isVisible={isButtonShow}>
-                <StyledButton onClick={handleClose}>
-                  Выбрать {calculatedInputProps.value}
+              <Wrapper>
+                <StyledButton onClick={handleClose} disabled={isDisabledButton}>
+                  {isDisabledButton
+                    ? 'Выберите дату'
+                    : `Выбрать ${calculatedInputProps.value}`}
                 </StyledButton>
               </Wrapper>
             )}
