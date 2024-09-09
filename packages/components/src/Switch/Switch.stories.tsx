@@ -86,32 +86,45 @@ export const Disabled = () => (
  */
 export const SwitchWithText = () => (
   <Grid container spacing={4} columns={4}>
-    <FormControlLabel control={<Switch />} label="Text" />
     <FormControlLabel
       control={<Switch />}
-      label="Text"
+      label={<Typography variant="subtitle1">Text</Typography>}
+    />
+    <FormControlLabel
+      control={<Switch />}
+      label={<Typography variant="subtitle1">Text</Typography>}
       labelPlacement="start"
     />
 
-    <FormControlLabel control={<Switch />} disabled label="Text" />
+    <FormControlLabel
+      control={<Switch />}
+      label={<Typography variant="subtitle1">Text</Typography>}
+    />
     <FormControlLabel
       control={<Switch />}
       disabled
-      label="Text"
+      label={<Typography variant="subtitle1">Text</Typography>}
       labelPlacement="start"
     />
 
-    <FormControlLabel control={<Switch checked />} label="Text" />
     <FormControlLabel
       control={<Switch checked />}
-      label="Text"
+      label={<Typography variant="subtitle1">Text</Typography>}
+    />
+    <FormControlLabel
+      control={<Switch checked />}
+      label={<Typography variant="subtitle1">Text</Typography>}
       labelPlacement="start"
     />
 
-    <FormControlLabel control={<Switch checked />} label="Text" disabled />
     <FormControlLabel
       control={<Switch checked />}
-      label="Text"
+      label={<Typography variant="subtitle1">Text</Typography>}
+      disabled
+    />
+    <FormControlLabel
+      control={<Switch checked />}
+      label={<Typography variant="subtitle1">Text</Typography>}
       labelPlacement="start"
       disabled
     />
@@ -126,6 +139,9 @@ export const Sizes = () => (
     <Switch size="small" />
     <FormControlLabel control={<Switch size="small" />} label="Text" />
     <Switch />
-    <FormControlLabel control={<Switch />} label="Text" />
+    <FormControlLabel
+      control={<Switch />}
+      label={<Typography variant="subtitle1">Text</Typography>}
+    />
   </Grid>
 );
