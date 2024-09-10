@@ -170,8 +170,6 @@ export const NewDataGrid = <
     useLogic(props);
   const { emptySymbol } = useContext(ConfigContext);
 
-  console.log(rowsRef.current);
-
   const {
     columns,
     rows = [],
@@ -193,8 +191,6 @@ export const NewDataGrid = <
     onSort,
     onRetry,
   } = props;
-
-  console.log(rows);
 
   const {
     isInitialExpanded = false,
