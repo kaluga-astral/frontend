@@ -166,9 +166,11 @@ export const NewDataGrid = <
 >(
   props: NewDataGridProps<TData, TSortField>,
 ) => {
-  const { isDataGridDisabled, headProps, bodyProps, loaderProps } =
+  const { isDataGridDisabled, headProps, bodyProps, loaderProps, rowsRef } =
     useLogic(props);
   const { emptySymbol } = useContext(ConfigContext);
+
+  console.log(rowsRef.current);
 
   const {
     columns,
@@ -191,6 +193,8 @@ export const NewDataGrid = <
     onSort,
     onRetry,
   } = props;
+
+  console.log(rows);
 
   const {
     isInitialExpanded = false,
@@ -225,7 +229,7 @@ export const NewDataGrid = <
           keyId={keyId}
           selectedRows={selectedRows}
           minDisplayRows={minDisplayRows}
-          rows={rows}
+          rows={isLoading ? rowsRef.current : rows}
           columns={columns}
           emptyCellValue={emptyCellValue}
           isInitialExpanded={isInitialExpanded}

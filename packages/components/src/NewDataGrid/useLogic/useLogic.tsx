@@ -1,4 +1,4 @@
-import { type ChangeEvent, useCallback, useMemo } from 'react';
+import { type ChangeEvent, useCallback, useMemo, useRef } from 'react';
 
 import { prop, uniqueBy } from '../../utils';
 import { type NewDataGridProps } from '../NewDataGrid';
@@ -30,6 +30,12 @@ export const useLogic = <
   const availableRows = rows.filter(
     (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
   );
+
+  const rowsRef = useRef<TData[]>(rows);
+
+  if (!isLoading) {
+    rowsRef.current = rows;
+  }
 
   const gridColumns = getGridTemplateColumns(columns);
 
@@ -108,5 +114,6 @@ export const useLogic = <
       isLoading: isNoData && isLoading,
       isDisabled,
     },
+    rowsRef,
   };
 };
