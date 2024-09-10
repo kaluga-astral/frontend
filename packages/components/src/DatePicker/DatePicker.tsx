@@ -6,7 +6,6 @@ import {
 } from 'react';
 
 import { type TextFieldProps } from '../TextField';
-import { useForwardedRef, usePopover, useViewportType } from '../hooks';
 import { type DateMask } from '../utils/date';
 import { type CloseEventReason } from '../types';
 
@@ -21,8 +20,8 @@ import { type MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { type MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants';
-import { useDatePickerOptions } from './hooks';
-import { StyledButton, Wrapper } from './styles';
+import { ButtonWrapper, StyledButton } from './styles';
+import { useLogic } from './useLogic';
 
 export type DatePickerProps = MondayFirst &
   Partial<MinMaxDate> & {
@@ -89,69 +88,34 @@ export type DatePickerProps = MondayFirst &
   } & Pick<TextFieldProps, 'label' | 'required' | 'helperText'>;
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  (
-    {
-      onChange,
-      onOpen,
-      onBlur,
-      onClose,
-      mask = DEFAULT_DATE_MASK,
-      isMondayFirst,
-      inputProps,
-      inputRef,
-      disabled,
-      value,
+  (props, forwardedRef) => {
+    const {
+      ref,
+      pickerProps,
+      calculatedInputProps,
+      handleOpen,
+      handleClose,
+      onAccept,
+      isDisabledButton,
+      isMobile,
+      datePickerProps,
+    } = useLogic({ ...props, forwardedRef });
+
+    const {
       className,
-      minDate = DEFAULT_MIN_DATE,
-      maxDate = DEFAULT_MAX_DATE,
-      size,
+      startAdornment,
       label,
       required,
       helperText,
-      startAdornment,
-    },
-    forwardedRef,
-  ) => {
-    const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
-
-    const { isMobile } = useViewportType();
-
-    const isTitleShow = isMobile && typeof label === 'string';
-
-    const { isOpen, actions } = usePopover();
-    const { open, close } = actions;
-
-    const handleOpen = (event: SyntheticEvent) => {
-      onOpen?.();
-      open(event);
-    };
-
-    const handleClose = () => {
-      onBlur?.();
-      onClose?.();
-      close();
-    };
-
-    const handleDayPick = () => {
-      if (!isMobile) {
-        handleClose();
-      }
-    };
-
-    const {
-      onAccept,
-      inputProps: calculatedInputProps,
-      pickerProps,
-    } = useDatePickerOptions({
-      maxDate,
-      minDate,
-      mask,
-      onDatePick: handleDayPick,
-      currentValue: value,
-      onChange,
-    });
-
-    const isDisabledButton = !Boolean(value);
+      inputProps,
+      mask = DEFAULT_DATE_MASK,
+      size,
+      disabled,
+      inputRef,
+      minDate = DEFAULT_MIN_DATE,
+      maxDate = DEFAULT_MAX_DATE,
+      isMondayFirst,
+    } = props;
 
     return (
       <div ref={ref} className={className}>
@@ -169,25 +133,20 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           ref={inputRef}
           onClick={handleOpen}
         />
-        <DatePickerPopover
-          open={isOpen}
-          anchorEl={ref.current}
-          onClose={handleClose}
-          title={isTitleShow ? label : undefined}
-        >
+        <DatePickerPopover {...datePickerProps}>
           <MinMaxDateContextProvider minDate={minDate} maxDate={maxDate}>
             <YearMonthDayPicker
               isMondayFirst={isMondayFirst}
               {...pickerProps}
             />
             {isMobile && (
-              <Wrapper>
+              <ButtonWrapper>
                 <StyledButton onClick={handleClose} disabled={isDisabledButton}>
                   {isDisabledButton
                     ? 'Выберите дату'
                     : `Выбрать ${calculatedInputProps.value}`}
                 </StyledButton>
-              </Wrapper>
+              </ButtonWrapper>
             )}
           </MinMaxDateContextProvider>
         </DatePickerPopover>
