@@ -6,12 +6,11 @@ export const StyledSwitch = styled(MuiSwitch)`
   .Mui-focusVisible {
     border: 2px solid ${({ theme }) => theme.palette.primary[400]};
   }
-
   ${`.${switchClasses.track}`}::before {
-    background-image: none;
+    display: none;
   }
 
   ${`.${switchClasses.track}`}::after {
-    background-image: none;
+    display: none;
   }
 `;

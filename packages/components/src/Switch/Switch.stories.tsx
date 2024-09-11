@@ -88,43 +88,75 @@ export const SwitchWithText = () => (
   <Grid container spacing={4} columns={4}>
     <FormControlLabel
       control={<Switch />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
     />
     <FormControlLabel
       control={<Switch />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
       labelPlacement="start"
     />
 
     <FormControlLabel
       control={<Switch />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
     />
     <FormControlLabel
       control={<Switch />}
       disabled
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
       labelPlacement="start"
     />
 
     <FormControlLabel
       control={<Switch checked />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
     />
     <FormControlLabel
       control={<Switch checked />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
       labelPlacement="start"
     />
 
     <FormControlLabel
       control={<Switch checked />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
       disabled
     />
     <FormControlLabel
       control={<Switch checked />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
       labelPlacement="start"
       disabled
     />
@@ -141,7 +173,11 @@ export const Sizes = () => (
     <Switch />
     <FormControlLabel
       control={<Switch />}
-      label={<Typography variant="subtitle1">Text</Typography>}
+      label={
+        <Typography variant="subtitle1" component="span">
+          Text
+        </Typography>
+      }
     />
   </Grid>
 );
