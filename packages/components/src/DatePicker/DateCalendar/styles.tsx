@@ -8,12 +8,17 @@ export const DateCalendarWrapper = styled.div`
   grid-template:
     '${CalendarGridPositions.prev} ${CalendarGridPositions.head} ${CalendarGridPositions.next}' auto
     '${CalendarGridPositions.body} ${CalendarGridPositions.body} ${CalendarGridPositions.body}' 1fr
-    / 48px 1fr 48px;
+    / 32px 1fr 32px;
 
   min-width: 288px;
   min-height: 256px;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
+    grid-template:
+      '${CalendarGridPositions.prev} ${CalendarGridPositions.head} ${CalendarGridPositions.next}' auto
+      '${CalendarGridPositions.body} ${CalendarGridPositions.body} ${CalendarGridPositions.body}' 1fr
+      / 48px 1fr 48px;
+
     height: 430px;
     padding: ${({ theme }) => theme.spacing(5, 4)};
   }

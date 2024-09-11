@@ -94,10 +94,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       pickerProps,
       calculatedInputProps,
       handleOpen,
-      handleClose,
       onAccept,
       isDisabledButton,
       isMobile,
+      handleConfirm,
+      DatePickerInputProps,
       datePickerProps,
     } = useLogic({ ...props, forwardedRef });
 
@@ -125,7 +126,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           required={required}
           helperText={helperText}
           {...inputProps}
-          {...calculatedInputProps}
+          {...DatePickerInputProps}
           onAccept={onAccept}
           mask={mask}
           size={size}
@@ -141,7 +142,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             />
             {isMobile && (
               <ButtonWrapper>
-                <StyledButton onClick={handleClose} disabled={isDisabledButton}>
+                <StyledButton
+                  onClick={handleConfirm}
+                  disabled={isDisabledButton}
+                >
                   {isDisabledButton
                     ? 'Выберите дату'
                     : `Выбрать ${calculatedInputProps.value}`}

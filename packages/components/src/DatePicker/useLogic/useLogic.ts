@@ -1,8 +1,8 @@
-import { type Ref, type SyntheticEvent } from 'react';
+import { type Ref, type SyntheticEvent, useState } from 'react';
 
 import { type DatePickerProps } from '../DatePicker';
 import { useForwardedRef, usePopover, useViewportType } from '../../hooks';
-import { useDatePickerOptions } from '../hooks';
+import { useDatePickerOptions, useMaskedValue } from '../hooks';
 import { DEFAULT_DATE_MASK } from '../constants';
 import { DEFAULT_MAX_DATE, DEFAULT_MIN_DATE } from '../MinMaxDateContext';
 
@@ -24,6 +24,14 @@ export const useLogic = ({
 }: UseLogicParams) => {
   const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
+  const [initialDate, setInitialDate] = useState(value);
+
+  const { maskedValue } = useMaskedValue({
+    currentValue: initialDate,
+    mask,
+    onChangeValue: onChange,
+  });
+
   const { isMobile } = useViewportType();
 
   const isTitleShow = isMobile && typeof label === 'string';
@@ -37,6 +45,10 @@ export const useLogic = ({
   };
 
   const handleClose = () => {
+    if (isMobile && value !== initialDate) {
+      onChange?.(initialDate);
+    }
+
     onBlur?.();
     onClose?.();
     close();
@@ -61,6 +73,11 @@ export const useLogic = ({
     onChange,
   });
 
+  const handleConfirm = () => {
+    setInitialDate(value);
+    handleClose();
+  };
+
   const isDisabledButton = !Boolean(value);
 
   const datePickerProps = {
@@ -70,10 +87,16 @@ export const useLogic = ({
     title: isTitleShow ? label : undefined,
   };
 
+  const DatePickerInputProps = {
+    value: isMobile ? maskedValue : calculatedInputProps.value,
+  };
+
   return {
     handleOpen,
     handleClose,
+    handleConfirm,
     isDisabledButton,
+    DatePickerInputProps,
     onAccept,
     pickerProps,
     calculatedInputProps,
