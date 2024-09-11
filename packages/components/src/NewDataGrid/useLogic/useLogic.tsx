@@ -23,7 +23,7 @@ export const useLogic = <
 >({
   keyId,
   columns,
-  rows,
+  rows = [],
   selectedRows = [],
   isLoading,
   isDisabled,
@@ -37,11 +37,11 @@ export const useLogic = <
     (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
   );
 
-  const rowsRef = useRef<TData[]>([]);
+  const prevRowsRef = useRef<TData[]>([]);
 
   useEffect(() => {
     if (!isLoading) {
-      rowsRef.current = rows;
+      prevRowsRef.current = rows;
     }
   }, [rows, isLoading]);
 
@@ -103,6 +103,8 @@ export const useLogic = <
     [selectedRows, onSelectRow, keyId],
   );
 
+  const renderRows = isLoading ? prevRowsRef.current : rows;
+
   return {
     isDataGridDisabled,
     headProps: {
@@ -122,6 +124,6 @@ export const useLogic = <
       isLoading: isNoData && isLoading,
       isDisabled,
     },
-    rowsRef,
+    renderRows,
   };
 };
