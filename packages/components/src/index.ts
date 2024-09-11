@@ -21,6 +21,10 @@ export * from './Badge';
 
 export * from './Breadcrumbs';
 
+export * from './BulletList';
+
+export * from './BulletListItem';
+
 export * from './Button';
 
 export * from './ButtonBase';
