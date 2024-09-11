@@ -9,6 +9,9 @@ export type BulletListProps = Omit<
   'dense'
 >;
 
+/**
+ * Список элементов с маркерами
+ */
 export const BulletList = (props: BulletListProps) => {
   return <StyledList {...props} />;
 };
