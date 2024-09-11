@@ -11,7 +11,7 @@ import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
 import { Loader } from './Loader';
-import { NoData } from './NoData';
+import { NoData, type NoDataProps } from './NoData';
 import { Container, DataGridWrapper, DisabledDataGridWrapper } from './styles';
 import type {
   CellValue,
@@ -158,6 +158,10 @@ export type NewDataGridProps<
    * Обработчик сортировки
    */
   onSort?: (sorting: DataGridSort<TSortField> | undefined) => void;
+  /**
+   * Используется для кастомизации компонента, использующегося в сценарии отсутствия данных
+   */
+  noDataOptions?: NoDataProps;
 };
 
 export const NewDataGrid = <
@@ -189,6 +193,7 @@ export const NewDataGrid = <
     className,
     onRowClick,
     onSort,
+    noDataOptions,
     onRetry,
   } = props;
 
@@ -204,11 +209,11 @@ export const NewDataGrid = <
 
   const renderedPlaceholder = useCallback(() => {
     if (!isLoading) {
-      return noDataPlaceholder || <NoData />;
+      return noDataPlaceholder || <NoData {...noDataOptions} />;
     }
 
     return null;
-  }, [noDataPlaceholder, isLoading]);
+  }, [noDataPlaceholder, noDataOptions, isLoading]);
 
   return (
     <Container $maxHeight={maxHeight} className={className}>
