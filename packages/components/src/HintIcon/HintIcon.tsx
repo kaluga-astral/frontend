@@ -1,6 +1,11 @@
-import { Tooltip } from '../Tooltip';
+import { useState } from 'react';
 
-import { getIcon } from './utils';
+import { Tooltip } from '../Tooltip';
+import { BottomDrawer } from '../BottomDrawer';
+import { useViewportType } from '../hooks';
+
+import { Icon } from './Icon';
+import { DrawerContent } from './styles';
 
 export type HintIconProps = {
   variant: 'question' | 'info';
@@ -15,11 +20,29 @@ export type HintIconProps = {
 export const HintIcon = (props: HintIconProps) => {
   const { variant, title, note, iconOption } = props;
 
-  const { variant: iconOptionVariant = 'fill' } = iconOption || {};
+  const [open, setOpen] = useState(false);
+
+  const { isMobile } = useViewportType();
+  const handleOpen = () => {
+    if (isMobile) {
+      setOpen((prevState) => !prevState);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <Tooltip title={note}>
-      <div>{getIcon(variant, iconOptionVariant)}</div>
-    </Tooltip>
+    <>
+      <Tooltip title={note} placement="bottom">
+        <div onClick={handleOpen}>
+          <Icon variant={variant} iconOption={iconOption} />
+        </div>
+      </Tooltip>
+      <BottomDrawer title={title} open={open} onClose={handleClose}>
+        <DrawerContent>{note}</DrawerContent>
+      </BottomDrawer>
+    </>
   );
 };
