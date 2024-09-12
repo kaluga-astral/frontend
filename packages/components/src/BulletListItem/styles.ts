@@ -1,17 +1,12 @@
 import { DotOutlineSm } from '@astral/icons';
 
 import { styled } from '../styles';
-import { Typography } from '../Typography';
 
-export const Root = styled('div')`
+export const Wrapper = styled('li')`
   display: flex;
   align-items: center;
 `;
 
 export const Icon = styled(DotOutlineSm)`
   align-self: start;
-`;
-
-export const ListItem = styled(Typography)`
-  list-style-type: none;
 `;

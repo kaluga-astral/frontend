@@ -37,8 +37,8 @@ const Container = styled('div')`
 
 export const Example = () => {
   return (
-    <BulletList>
-      <Container>
+    <Container>
+      <BulletList>
         <BulletListItem>Текст 1</BulletListItem>
         <BulletListItem>
           Длинный текст для примера переноса строки
@@ -48,7 +48,7 @@ export const Example = () => {
           Тултип для длинного текста
         </BulletListItem>
         <BulletListItem>Текст 2</BulletListItem>
-      </Container>
-    </BulletList>
+      </BulletList>
+    </Container>
   );
 };

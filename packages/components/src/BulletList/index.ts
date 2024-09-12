@@ -1,1 +1,1 @@
-export * from './BulletList';
+export { BulletListProps, BulletList } from './BulletList';

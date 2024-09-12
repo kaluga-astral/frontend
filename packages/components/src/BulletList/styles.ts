@@ -1,7 +1,8 @@
-import { List } from '@mui/material';
-
+import { listContainer } from '../styles/mixins';
 import { styled } from '../styles';
 
-export const StyledList = styled(List)`
+export const Wrapper = styled('ul')`
   list-style-type: none;
+
+  ${listContainer};
 `;

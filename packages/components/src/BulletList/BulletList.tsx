@@ -2,7 +2,7 @@ import { type ListProps as MuiListProps } from '@mui/material/List';
 
 import { type WithoutEmotionSpecific } from '../types';
 
-import { StyledList } from './styles';
+import { Wrapper } from './styles';
 
 export type BulletListProps = Omit<
   WithoutEmotionSpecific<MuiListProps>,
@@ -13,5 +13,7 @@ export type BulletListProps = Omit<
  * Список элементов с маркерами
  */
 export const BulletList = (props: BulletListProps) => {
-  return <StyledList {...props} />;
+  const { children } = props;
+
+  return <Wrapper {...props}>{children}</Wrapper>;
 };
