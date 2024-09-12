@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { toast } from 'react-toastify-next';
@@ -15,6 +16,7 @@ import { notify } from './NotificationNext';
 import { NotificationStackContainerNext } from './NotificationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
 import { NotificationTemplateNext } from './NotificationTemplateNext';
+import type { Notify } from './types';
 
 /**
  * ### Компонент для организации уведомлений
@@ -109,21 +111,33 @@ export const Types = () => {
     });
   };
 
+  const handleProgress = () => {
+    notify.progress('Подписание документов', {
+      filled: false,
+      containerId: 'types',
+    });
+  };
+
   return (
     <ExampleStack>
       <NotificationContainerNext containerId="types" />
 
       <Stack direction="column" gap={2}>
         <Button onClick={handleInfo}>info</Button>
+
         <Button onClick={handleSuccess} color="success">
           success
         </Button>
+
         <Button onClick={handleWarning} color="warning">
           warning
         </Button>
+
         <Button onClick={handleError} color="error">
           error
         </Button>
+
+        <Button onClick={handleProgress}>progress</Button>
       </Stack>
     </ExampleStack>
   );
@@ -214,6 +228,80 @@ export const HideProgressBar = () => {
       <Stack direction="row" gap={2}>
         <Button onClick={handleErrorWithContentWithoutProgressBar}>
           Hide progress bar
+        </Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+/**
+ * Предназначен для отображения состояния асинхронной операции с массивом элементов, например массовая отправка или подписание документов
+ * `notify.progress` возвращает объект с методами: `update`, `success` и `error`
+ */
+export const ProgressNotify = () => {
+  const [isStarted, setStarted] = useState(false);
+  const notifyRef = useRef<ReturnType<Notify['progress']>>();
+
+  const handleProgressNotify = () => {
+    const progressNotify = notify.progress('Подписание документов 1 из 3', {
+      content: 'Подписывается документ №001',
+      containerId: 'progress-notify',
+    });
+
+    notifyRef.current = progressNotify;
+    setStarted(true);
+  };
+
+  const handleUpdate = () => {
+    notifyRef.current?.update('Подписание документов 2 из 3', {
+      content: 'Подписывается документ №002',
+      containerId: 'progress-notify',
+    });
+  };
+
+  const handleSuccess = () => {
+    notifyRef.current?.success('Документы подписаны', {
+      content: '3 документа успешно подписано',
+      containerId: 'progress-notify',
+    });
+  };
+
+  const handleError = () => {
+    notifyRef.current?.error('Ошибка подписания документов', {
+      content: 'Не удалось подписать документы',
+      containerId: 'progress-notify',
+      actions: <Button variant="link">Подробнее</Button>,
+    });
+  };
+
+  const handleReset = () => {
+    setStarted(false);
+    toast.dismiss({ containerId: 'progress-notify' });
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainerNext containerId="progress-notify" />
+
+      <Stack gap={2}>
+        <Button disabled={isStarted} onClick={handleProgressNotify}>
+          {!isStarted ? 'Start progress notify' : 'Started...'}
+        </Button>
+
+        <Button disabled={!isStarted} onClick={handleUpdate}>
+          Update notify
+        </Button>
+
+        <Button disabled={!isStarted} color="success" onClick={handleSuccess}>
+          Success notify
+        </Button>
+
+        <Button disabled={!isStarted} color="error" onClick={handleError}>
+          Error notify
+        </Button>
+
+        <Button disabled={!isStarted} variant="light" onClick={handleReset}>
+          Сбросить
         </Button>
       </Stack>
     </ExampleStack>

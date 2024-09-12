@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import { type ToastProps } from 'react-toastify-next/dist/types';
 
+import { CircularProgress } from '../../CircularProgress';
 import { NOTIFY_CLASSNAME } from '../constants';
 import { type ActionsDirection, type Variant } from '../types';
 import {
@@ -37,6 +38,7 @@ const mapOfNotificationIcons = {
   success: SuccessNotificationIcon,
   warning: WarningNotificationIcon,
   error: ErrorNotificationIcon,
+  progress: InfoNotificationIcon,
 };
 
 type DefaultIconProps = {
@@ -45,6 +47,10 @@ type DefaultIconProps = {
 };
 
 const DefaultIcon = ({ variant, filled }: DefaultIconProps) => {
+  if (Object.is(variant, 'progress')) {
+    return <CircularProgress color="primary" size="medium" />;
+  }
+
   const Icon = mapOfNotificationIcons[variant];
 
   return <Icon $filled={filled} />;

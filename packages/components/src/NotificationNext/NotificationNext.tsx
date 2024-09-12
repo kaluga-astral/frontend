@@ -67,6 +67,68 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+  progress: (title, options = {}) => {
+    const toastId = toast(
+      ({ toastProps }) =>
+        NOTIFICATION_VARIANT.progress(
+          { ...options, title, showCloseButton: false },
+          toastProps,
+        ),
+      {
+        className: getClassNameModifierByVariant(
+          NotificationVariantTypes.progress,
+          true,
+        ),
+        transition: leave,
+        icon: false,
+        closeButton: false,
+        ...getNotifyOptions({ ...options, isStatic: true }),
+      },
+    );
+
+    return {
+      update: (updateTitle, updateOptions) =>
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.progress(
+              { ...updateOptions, title: updateTitle, showCloseButton: false },
+              toastProps,
+            ),
+          ...getNotifyOptions({ ...options, isStatic: true }),
+        }),
+
+      success: (successTitle, successOptions) => {
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.success(
+              { ...successOptions, title: successTitle },
+              toastProps,
+            ),
+          className: getClassNameModifierByVariant(
+            NotificationVariantTypes.success,
+            true,
+          ),
+          type: NotificationVariantTypes.success,
+          ...getNotifyOptions({ ...options, isStatic: true }),
+        });
+      },
+
+      error: (errorTitle, errorOptions) =>
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.error(
+              { ...errorOptions, title: errorTitle },
+              toastProps,
+            ),
+          className: getClassNameModifierByVariant(
+            NotificationVariantTypes.error,
+            true,
+          ),
+          type: NotificationVariantTypes.error,
+          ...getNotifyOptions({ ...options, isStatic: true }),
+        }),
+    };
+  },
   custom: toast,
   dismiss: toast.dismiss,
   update: toast.update,
