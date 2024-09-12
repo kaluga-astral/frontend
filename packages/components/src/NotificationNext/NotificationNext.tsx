@@ -28,6 +28,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   info: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -41,6 +42,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   warning: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -54,6 +56,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   error: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -67,66 +70,84 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
-  progress: (title, options = {}) => {
-    const toastId = toast(
-      ({ toastProps }) =>
-        NOTIFICATION_VARIANT.progress(
-          { ...options, title, showCloseButton: false },
-          toastProps,
-        ),
-      {
-        className: getClassNameModifierByVariant(
-          NotificationVariantTypes.progress,
-          true,
-        ),
-        transition: leave,
-        icon: false,
-        closeButton: false,
-        ...getNotifyOptions({ ...options, isStatic: true }),
-      },
-    );
+
+  initProgress: (initialOptions = {}) => {
+    let toastId: string | number;
 
     return {
-      update: (updateTitle, updateOptions) =>
+      start: (title, options) => {
+        toastId = toast(
+          ({ toastProps }) =>
+            NOTIFICATION_VARIANT.progress(
+              { ...initialOptions, ...options, title, showCloseButton: false },
+              toastProps,
+            ),
+          {
+            className: getClassNameModifierByVariant(
+              NotificationVariantTypes.progress,
+              true,
+            ),
+            transition: leave,
+            icon: false,
+            closeButton: false,
+            ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+          },
+        );
+      },
+
+      update: (title, options) => {
         notify.update(toastId, {
           render: ({ toastProps }) =>
             NOTIFICATION_VARIANT.progress(
-              { ...updateOptions, title: updateTitle, showCloseButton: false },
+              {
+                ...options,
+                title,
+                showCloseButton: false,
+              },
               toastProps,
             ),
-          ...getNotifyOptions({ ...options, isStatic: true }),
-        }),
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+        });
+      },
 
-      success: (successTitle, successOptions) => {
+      success: (title, options) => {
         notify.update(toastId, {
           render: ({ toastProps }) =>
-            NOTIFICATION_VARIANT.success(
-              { ...successOptions, title: successTitle },
-              toastProps,
-            ),
+            NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
           className: getClassNameModifierByVariant(
             NotificationVariantTypes.success,
             true,
           ),
           type: NotificationVariantTypes.success,
-          ...getNotifyOptions({ ...options, isStatic: true }),
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
         });
       },
 
-      error: (errorTitle, errorOptions) =>
+      error: (title, options) => {
         notify.update(toastId, {
           render: ({ toastProps }) =>
-            NOTIFICATION_VARIANT.error(
-              { ...errorOptions, title: errorTitle },
-              toastProps,
-            ),
+            NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
           className: getClassNameModifierByVariant(
             NotificationVariantTypes.error,
             true,
           ),
           type: NotificationVariantTypes.error,
-          ...getNotifyOptions({ ...options, isStatic: true }),
-        }),
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+        });
+      },
+
+      stop: () => {
+        if (initialOptions?.containerId) {
+          toast.dismiss({
+            id: toastId,
+            containerId: initialOptions.containerId,
+          });
+
+          return;
+        }
+
+        toast.dismiss(toastId);
+      },
     };
   },
   custom: toast,

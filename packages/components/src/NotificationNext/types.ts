@@ -133,12 +133,11 @@ type Controllable = {
 
 export type Notify = Record<VariantWithoutProgress, NotificationFunction> &
   Controllable & {
-    progress: (
-      title: NotificationProps['title'],
-      options?: NotificationProgressOptions,
-    ) => {
+    initProgress: (options?: NotificationProgressOptions) => {
+      start: NotificationProgressFunction;
       update: NotificationProgressFunction;
       success: NotificationProgressFunction;
       error: NotificationProgressFunction;
+      stop: () => void;
     };
   };

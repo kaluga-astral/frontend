@@ -80,10 +80,11 @@ export const NotificationTemplateNext = ({
 
         {showCloseButton && (
           <CloseButton
+            aria-label="Закрыть уведомление"
             filled={filled}
-            onClick={handleCloseToast}
             color="primary"
             variant="text"
+            onClick={handleCloseToast}
           >
             <CloseIcon filled={filled} />
           </CloseButton>

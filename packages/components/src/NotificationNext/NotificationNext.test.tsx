@@ -1,26 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { renderWithTheme, screen, userEvents, waitFor } from '@astral/tests';
-import { useRef } from 'react';
 import { toast } from 'react-toastify-next';
 
 import { Button } from '../Button';
 
 import { notify } from './NotificationNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
-import type { Notify } from './types';
 
 describe('NotificationNext', () => {
-  afterEach(() => {
-    toast.dismiss({ containerId: 'progress-notify' });
-  });
-
   describe('Progress notify', () => {
+    afterEach(() => {
+      toast.dismiss({ containerId: 'progress-notify' });
+    });
+
     it('Отображается с переданным заголовком', async () => {
       const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
         const handleProgressNotify = () => {
-          notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -42,10 +43,13 @@ describe('NotificationNext', () => {
 
     it('Отображается с переданным содержимым', async () => {
       const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
         const handleProgressNotify = () => {
-          notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -67,21 +71,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новый заголовок, указанный в методе update', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
         const handleUpdate = () => {
-          notifyRef.current?.update('Update title', {
+          progressNotify.update('Update title', {
             content: 'Update content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -110,21 +112,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новое содержимое, указанное в методе update', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
         const handleUpdate = () => {
-          notifyRef.current?.update('Update title', {
+          progressNotify.update('Update title', {
             content: 'Update content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -153,21 +153,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новый заголовок, указанный в методе success', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
-        const handleUpdate = () => {
-          notifyRef.current?.update('Success title', {
+        const handleSuccess = () => {
+          progressNotify.update('Success title', {
             content: 'Success content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -175,7 +173,7 @@ describe('NotificationNext', () => {
           <>
             <NotificationContainerNext containerId="progress-notify" />
             <Button onClick={handleProgressNotify}>Notify</Button>
-            <Button onClick={handleUpdate}>Success</Button>
+            <Button onClick={handleSuccess}>Success</Button>
           </>
         );
       };
@@ -196,21 +194,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новое содержимое, указанное в методе success', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
-        const handleUpdate = () => {
-          notifyRef.current?.update('Success title', {
+        const handleSuccess = () => {
+          progressNotify.update('Success title', {
             content: 'Success content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -218,7 +214,7 @@ describe('NotificationNext', () => {
           <>
             <NotificationContainerNext containerId="progress-notify" />
             <Button onClick={handleProgressNotify}>Notify</Button>
-            <Button onClick={handleUpdate}>Success</Button>
+            <Button onClick={handleSuccess}>Success</Button>
           </>
         );
       };
@@ -239,21 +235,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новый заголовок, указанный в методе error', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
-        const handleUpdate = () => {
-          notifyRef.current?.update('Error title', {
+        const handleError = () => {
+          progressNotify.update('Error title', {
             content: 'Error content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -261,7 +255,7 @@ describe('NotificationNext', () => {
           <>
             <NotificationContainerNext containerId="progress-notify" />
             <Button onClick={handleProgressNotify}>Notify</Button>
-            <Button onClick={handleUpdate}>Error</Button>
+            <Button onClick={handleError}>Error</Button>
           </>
         );
       };
@@ -282,21 +276,19 @@ describe('NotificationNext', () => {
 
     it('Устанавливается новое содержимое, указанное в методе error', async () => {
       const TestComponent = () => {
-        const notifyRef = useRef<ReturnType<Notify['progress']>>();
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
 
         const handleProgressNotify = () => {
-          const progressNotify = notify.progress('Title', {
+          progressNotify.start('Title', {
             content: 'Content',
-            containerId: 'progress-notify',
           });
-
-          notifyRef.current = progressNotify;
         };
 
-        const handleUpdate = () => {
-          notifyRef.current?.update('Error title', {
+        const handleError = () => {
+          progressNotify.update('Error title', {
             content: 'Error content',
-            containerId: 'progress-notify',
           });
         };
 
@@ -304,7 +296,7 @@ describe('NotificationNext', () => {
           <>
             <NotificationContainerNext containerId="progress-notify" />
             <Button onClick={handleProgressNotify}>Notify</Button>
-            <Button onClick={handleUpdate}>Error</Button>
+            <Button onClick={handleError}>Error</Button>
           </>
         );
       };
@@ -320,6 +312,127 @@ describe('NotificationNext', () => {
 
       await waitFor(() => {
         expect(screen.getByText('Error content')).toBeVisible();
+      });
+    });
+
+    it('Кнопка закрытия уведомления не отображается, если оно в состоянии progress', async () => {
+      const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const handleProgressNotify = () => {
+          progressNotify.start('Title', {
+            content: 'Content',
+          });
+        };
+
+        return (
+          <>
+            <NotificationContainerNext containerId="progress-notify" />
+            <Button onClick={handleProgressNotify}>Notify</Button>
+          </>
+        );
+      };
+
+      renderWithTheme(<TestComponent />);
+
+      const startButton = screen.getByText('Notify');
+
+      await userEvents.click(startButton);
+
+      const closeButton = screen.queryByRole('button', {
+        name: 'Закрыть уведомление',
+      });
+
+      expect(closeButton).not.toBeInTheDocument();
+    });
+
+    it('Кнопка закрытия уведомления отображается, если оно в состоянии success', async () => {
+      const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const handleProgressNotify = () => {
+          progressNotify.start('Title', {
+            content: 'Content',
+          });
+        };
+
+        const handleSuccess = () => {
+          progressNotify.success('Success title', {
+            content: 'Success content',
+          });
+        };
+
+        return (
+          <>
+            <NotificationContainerNext containerId="progress-notify" />
+            <Button onClick={handleProgressNotify}>Notify</Button>
+            <Button onClick={handleSuccess}>Success</Button>
+          </>
+        );
+      };
+
+      renderWithTheme(<TestComponent />);
+
+      const startButton = screen.getByText('Notify');
+      const successButton = screen.getByText('Success');
+
+      await userEvents.click(startButton);
+      await userEvents.click(successButton);
+
+      await waitFor(() => {
+        const closeButton = screen.queryByRole('button', {
+          name: 'Закрыть уведомление',
+        });
+
+        expect(closeButton).toBeInTheDocument();
+      });
+    });
+
+    it('Кнопка закрытия уведомления отображается, если оно в состоянии error', async () => {
+      const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const handleProgressNotify = () => {
+          progressNotify.start('Title', {
+            content: 'Content',
+          });
+        };
+
+        const handleError = () => {
+          progressNotify.error('Error title', {
+            content: 'Error content',
+          });
+        };
+
+        return (
+          <>
+            <NotificationContainerNext containerId="progress-notify" />
+            <Button onClick={handleProgressNotify}>Notify</Button>
+            <Button onClick={handleError}>Error</Button>
+          </>
+        );
+      };
+
+      renderWithTheme(<TestComponent />);
+
+      const startButton = screen.getByText('Notify');
+      const errorButton = screen.getByText('Error');
+
+      await userEvents.click(startButton);
+      await userEvents.click(errorButton);
+
+      await waitFor(() => {
+        const closeButton = screen.queryByRole('button', {
+          name: 'Закрыть уведомление',
+        });
+
+        expect(closeButton).toBeInTheDocument();
       });
     });
   });

@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { toast } from 'react-toastify-next';
 
 import { Button } from '../Button';
 import { CircularProgress } from '../CircularProgress';
@@ -10,13 +9,11 @@ import { TextField } from '../TextField';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
 
-import { sleep } from './utils';
-import { NOTIFY_CONTAINER_ID, NOTIFY_STATIC_CONTAINER_ID } from './constants';
+import { NOTIFY_STATIC_CONTAINER_ID } from './constants';
 import { notify } from './NotificationNext';
 import { NotificationStackContainerNext } from './NotificationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
 import { NotificationTemplateNext } from './NotificationTemplateNext';
-import type { Notify } from './types';
 
 /**
  * ### Компонент для организации уведомлений
@@ -63,6 +60,7 @@ export const Example = () => {
     notify.success('Успешно', {
       filled: false,
       content: 'Поле сохранено',
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'example',
     });
   };
@@ -86,6 +84,7 @@ export const Types = () => {
   const handleInfo = () => {
     notify.info('Загрузка завершена', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -93,6 +92,7 @@ export const Types = () => {
   const handleSuccess = () => {
     notify.success('Операция успешно завершена', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -100,6 +100,7 @@ export const Types = () => {
   const handleWarning = () => {
     notify.warning('Внимание', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -107,6 +108,7 @@ export const Types = () => {
   const handleError = () => {
     notify.error('Соединение потеряно', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -150,6 +152,7 @@ export const AutoClose = () => {
       showCloseButton: false,
       autoClose: 10000,
       icon: <CircularProgress color="primary" size="medium" />,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'autoclose',
     });
   };
@@ -172,6 +175,7 @@ export const Content = () => {
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'content',
     });
   };
@@ -194,6 +198,7 @@ export const Icon = () => {
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
       icon: <CircularProgress color="primary" size="medium" />,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'icon',
     });
   };
@@ -217,6 +222,7 @@ export const HideProgressBar = () => {
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
       hideProgressBar: true,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'hide-progress-bar',
     });
   };
@@ -236,47 +242,46 @@ export const HideProgressBar = () => {
 
 /**
  * Предназначен для отображения состояния асинхронной операции с массивом элементов, например массовая отправка или подписание документов
- * `notify.progress` возвращает объект с методами: `update`, `success` и `error`
+ * `notify.initProgress` возвращает объект с методами: `start`, `update`, `success`, `error` и `stop`
  */
 export const ProgressNotify = () => {
   const [isStarted, setStarted] = useState(false);
-  const notifyRef = useRef<ReturnType<Notify['progress']>>();
+
+  const progressNotify = notify.initProgress({
+    // containerId необходимо для storybook, так как на одном экране несколько контейнеров
+    containerId: 'progress-notify',
+  });
 
   const handleProgressNotify = () => {
-    const progressNotify = notify.progress('Подписание документов 1 из 3', {
+    progressNotify.start('Подписание документов 1 из 3', {
       content: 'Подписывается документ №001',
-      containerId: 'progress-notify',
     });
 
-    notifyRef.current = progressNotify;
     setStarted(true);
   };
 
   const handleUpdate = () => {
-    notifyRef.current?.update('Подписание документов 2 из 3', {
+    progressNotify.update('Подписание документов 2 из 3', {
       content: 'Подписывается документ №002',
-      containerId: 'progress-notify',
     });
   };
 
   const handleSuccess = () => {
-    notifyRef.current?.success('Документы подписаны', {
+    progressNotify.success('Документы подписаны', {
       content: '3 документа успешно подписано',
-      containerId: 'progress-notify',
     });
   };
 
   const handleError = () => {
-    notifyRef.current?.error('Ошибка подписания документов', {
+    progressNotify.error('Ошибка подписания документов', {
       content: 'Не удалось подписать документы',
-      containerId: 'progress-notify',
       actions: <Button variant="link">Подробнее</Button>,
     });
   };
 
-  const handleReset = () => {
+  const handleClose = () => {
+    progressNotify.stop();
     setStarted(false);
-    toast.dismiss({ containerId: 'progress-notify' });
   };
 
   return (
@@ -300,7 +305,7 @@ export const ProgressNotify = () => {
           Error notify
         </Button>
 
-        <Button disabled={!isStarted} variant="light" onClick={handleReset}>
+        <Button disabled={!isStarted} variant="light" onClick={handleClose}>
           Сбросить
         </Button>
       </Stack>
@@ -333,28 +338,25 @@ export const WithStack = () => {
     });
   };
 
+  const handleProgress = () => {
+    const progressNotify = notify.initProgress({
+      containerId: NOTIFY_STATIC_CONTAINER_ID,
+    });
+
+    progressNotify.start('Загрузка документов...');
+
+    setTimeout(
+      () => progressNotify.success('Документы успешно загружены'),
+      3000,
+    );
+  };
+
   const handleSuccessWithContent = () => {
     notify.success('Операция успешно завершена и заголовок в две строки', {
       filled: false,
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
-    });
-  };
-
-  const handleWithLoading = async () => {
-    const id = toast.loading('Загрузка документов...', {
-      containerId: NOTIFY_STATIC_CONTAINER_ID,
-    });
-
-    await sleep(3000);
-    notify.dismiss(id);
-
-    notify.success('Документы загружены', {
-      filled: false,
-      containerId: NOTIFY_CONTAINER_ID,
-      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-      actions: <Button variant="link">Подробнее</Button>,
     });
   };
 
@@ -381,8 +383,8 @@ export const WithStack = () => {
           Notify success with content
         </Button>
 
-        <Button onClick={handleWithLoading} color="primary">
-          Notify with loading
+        <Button onClick={handleProgress} color="primary">
+          Notify progress
         </Button>
       </Stack>
     </ExampleStack>
@@ -392,6 +394,7 @@ export const WithStack = () => {
 export const Static = () => {
   const handleInfo = () => {
     notify.info('Загрузка завершена', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -400,6 +403,7 @@ export const Static = () => {
 
   const handleSuccess = () => {
     notify.success('Операция успешно завершена', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -408,6 +412,7 @@ export const Static = () => {
 
   const handleWarning = () => {
     notify.warning('Внимание', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -416,6 +421,7 @@ export const Static = () => {
 
   const handleError = () => {
     notify.error('Соединение потеряно', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
