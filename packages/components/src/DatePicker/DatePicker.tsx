@@ -20,7 +20,7 @@ import { type MinMaxDate } from './types';
 import { YearMonthDayPicker } from './YearMonthDayPicker';
 import { type MondayFirst } from './DayPicker';
 import { DEFAULT_DATE_MASK } from './constants';
-import { ButtonWrapper, StyledButton } from './styles';
+import { ButtonWrapper, ConfirmButton } from './styles';
 import { useLogic } from './useLogic';
 
 export type DatePickerProps = MondayFirst &
@@ -92,12 +92,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const {
       ref,
       pickerProps,
-      calculatedInputProps,
       handleOpen,
       onAccept,
-      isDisabledButton,
+      confirmButtonProps,
       isMobile,
-      handleConfirm,
       DatePickerInputProps,
       datePickerProps,
     } = useLogic({ ...props, forwardedRef });
@@ -142,14 +140,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             />
             {isMobile && (
               <ButtonWrapper>
-                <StyledButton
-                  onClick={handleConfirm}
-                  disabled={isDisabledButton}
-                >
-                  {isDisabledButton
-                    ? 'Выберите дату'
-                    : `Выбрать ${calculatedInputProps.value}`}
-                </StyledButton>
+                <ConfirmButton {...confirmButtonProps} />
               </ButtonWrapper>
             )}
           </MinMaxDateContextProvider>

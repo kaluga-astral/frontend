@@ -2,7 +2,7 @@ import { styled } from '../styles';
 import { Button } from '../Button';
 import { rgba } from '../utils/colors';
 
-export const StyledButton = styled(Button)`
+export const ConfirmButton = styled(Button)`
   width: 100%;
 `;
 

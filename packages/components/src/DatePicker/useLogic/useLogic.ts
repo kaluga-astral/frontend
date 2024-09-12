@@ -24,10 +24,12 @@ export const useLogic = ({
 }: UseLogicParams) => {
   const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
-  const [initialDate, setInitialDate] = useState(value);
+  const [selectDate, setSelectDate] = useState(value);
+
+  console.log(selectDate);
 
   const { maskedValue } = useMaskedValue({
-    currentValue: initialDate,
+    currentValue: selectDate,
     mask,
     onChangeValue: onChange,
   });
@@ -45,8 +47,8 @@ export const useLogic = ({
   };
 
   const handleClose = () => {
-    if (isMobile && value !== initialDate) {
-      onChange?.(initialDate);
+    if (isMobile && value !== selectDate) {
+      onChange?.(selectDate);
     }
 
     onBlur?.();
@@ -74,11 +76,9 @@ export const useLogic = ({
   });
 
   const handleConfirm = () => {
-    setInitialDate(value);
+    setSelectDate(value);
     handleClose();
   };
-
-  const isDisabledButton = !Boolean(value);
 
   const datePickerProps = {
     open: isOpen,
@@ -91,15 +91,21 @@ export const useLogic = ({
     value: isMobile ? maskedValue : calculatedInputProps.value,
   };
 
+  const confirmButtonProps = {
+    onClick: handleConfirm,
+    disabled: !Boolean(value),
+    children: !Boolean(value)
+      ? 'Выберите дату'
+      : `Выбрать ${calculatedInputProps.value}`,
+  };
+
   return {
     handleOpen,
     handleClose,
-    handleConfirm,
-    isDisabledButton,
+    confirmButtonProps,
     DatePickerInputProps,
     onAccept,
     pickerProps,
-    calculatedInputProps,
     ref,
     isMobile,
     datePickerProps,
