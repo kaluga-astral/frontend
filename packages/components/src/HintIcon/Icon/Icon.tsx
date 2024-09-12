@@ -7,16 +7,18 @@ type IconProps = Pick<HintIconProps, 'variant' | 'iconOption'>;
 
 export const Icon = ({ variant, iconOption }: IconProps) => {
   const iconColor = useIconColor({ color: iconOption?.color });
+
+  const { variant: iconOptionVariant = 'fill' } = iconOption || {};
   const getIcon = () => {
     switch (variant) {
       case 'info':
-        return iconOption?.variant === 'fill' ? (
+        return iconOptionVariant === 'fill' ? (
           <InfoFill $color={iconColor} />
         ) : (
           <InfoOutline $color={iconColor} />
         );
       case 'question':
-        return iconOption?.variant === 'fill' ? (
+        return iconOptionVariant === 'fill' ? (
           <QuestionFill $color={iconColor} />
         ) : (
           <QuestionOutline $color={iconColor} />
