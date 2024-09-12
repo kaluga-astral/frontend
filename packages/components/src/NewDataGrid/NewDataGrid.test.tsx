@@ -798,8 +798,8 @@ describe('NewDataGrid', () => {
       />,
     );
 
-    const label2 = screen.getByText(documentName);
+    const updateLabel = screen.getByText(documentName);
 
-    expect(label2).toBeVisible();
+    expect(updateLabel).toBeVisible();
   });
 });
