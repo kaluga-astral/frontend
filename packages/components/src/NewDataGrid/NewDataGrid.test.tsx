@@ -5,6 +5,7 @@ import { BinOutlineMd } from '@astral/icons';
 
 import { ActionCell } from '../ActionCell';
 import { DataGridActionCell } from '../DataGridActionCell';
+import { DataGridPagination } from '../DataGridPagination';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
@@ -720,5 +721,85 @@ describe('NewDataGrid', () => {
     const label = screen.queryByText('Показать все');
 
     expect(label).not.toBeInTheDocument();
+  });
+
+  it('Предыдущие данные показываются при переключении пагинации и isLoading=true', async () => {
+    const documentName = 'Договор №1';
+
+    type DataType = {
+      id: string;
+      documentName: string;
+    };
+
+    const firstPageData: DataGridRowWithOptions<DataType>[] = [
+      {
+        id: '1',
+        documentName: 'Договор №1',
+      },
+      {
+        id: '2',
+        documentName: 'Договор №2',
+      },
+    ];
+
+    const secondPageData: DataGridRowWithOptions<DataType>[] = [
+      {
+        id: '3',
+        documentName: 'Договор №3',
+      },
+      {
+        id: '4',
+        documentName: 'Договор №4',
+      },
+    ];
+
+    const pageCount = firstPageData.length + secondPageData.length;
+    const { rerender } = renderWithTheme(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={firstPageData}
+        isLoading={false}
+        footer={
+          <DataGridPagination rowsPerPage={2} totalCount={pageCount} page={1} />
+        }
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.getByText(documentName);
+
+    expect(label).toBeVisible();
+
+    const paginationButton = await screen.findByLabelText('Go to page 2');
+
+    await userEvents.click(paginationButton);
+
+    rerender(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={secondPageData}
+        isLoading={true}
+        footer={
+          <DataGridPagination rowsPerPage={2} totalCount={pageCount} page={2} />
+        }
+        onRetry={() => {}}
+      />,
+    );
+
+    const label2 = screen.getByText(documentName);
+
+    expect(label2).toBeVisible();
   });
 });
