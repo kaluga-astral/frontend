@@ -26,8 +26,6 @@ export const useLogic = ({
 
   const [selectDate, setSelectDate] = useState(value);
 
-  console.log(selectDate);
-
   const { maskedValue } = useMaskedValue({
     currentValue: selectDate,
     mask,
