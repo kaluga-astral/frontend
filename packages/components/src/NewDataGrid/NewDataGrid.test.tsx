@@ -739,17 +739,6 @@ describe('NewDataGrid', () => {
       },
     ];
 
-    const newPageData: DataGridRowWithOptions<DataType>[] = [
-      {
-        id: '3',
-        documentName: 'Договор №3',
-      },
-      {
-        id: '4',
-        documentName: 'Договор №4',
-      },
-    ];
-
     const { rerender } = renderWithTheme(
       <NewDataGrid
         keyId="id"
@@ -773,7 +762,7 @@ describe('NewDataGrid', () => {
             label: 'Наименование',
           },
         ]}
-        rows={newPageData}
+        rows={[]}
         isLoading={true}
         onRetry={() => {}}
       />,
