@@ -435,5 +435,77 @@ describe('NotificationNext', () => {
         expect(closeButton).toBeInTheDocument();
       });
     });
+
+    it('Можно запустить только одно уведомление из одного инстанса', async () => {
+      const TestComponent = () => {
+        const progressNotify = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const handleProgressNotify = () => {
+          progressNotify.start('Title', {
+            content: 'Content',
+          });
+        };
+
+        return (
+          <>
+            <NotificationContainerNext containerId="progress-notify" />
+            <Button onClick={handleProgressNotify}>Notify</Button>
+          </>
+        );
+      };
+
+      renderWithTheme(<TestComponent />);
+
+      const startButton = screen.getByText('Notify');
+
+      await userEvents.click(startButton);
+      await userEvents.click(startButton);
+
+      const notifications = screen.queryAllByRole('alert');
+
+      expect(notifications).toHaveLength(1);
+    });
+
+    it('Можно запустить несколько уведомлений из нескольких инстансов', async () => {
+      const TestComponent = () => {
+        const progressNotifyOne = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const progressNotifyTwo = notify.initProgress({
+          containerId: 'progress-notify',
+        });
+
+        const handleProgressNotifyOne = () => {
+          progressNotifyOne.start('Title');
+        };
+
+        const handleProgressNotifyTwo = () => {
+          progressNotifyTwo.start('Title');
+        };
+
+        return (
+          <>
+            <NotificationContainerNext containerId="progress-notify" />
+            <Button onClick={handleProgressNotifyOne}>Notify one</Button>
+            <Button onClick={handleProgressNotifyTwo}>Notify two</Button>
+          </>
+        );
+      };
+
+      renderWithTheme(<TestComponent />);
+
+      const startOneButton = screen.getByText('Notify one');
+      const startTwoButton = screen.getByText('Notify two');
+
+      await userEvents.click(startOneButton);
+      await userEvents.click(startTwoButton);
+
+      const notifications = screen.queryAllByRole('alert');
+
+      expect(notifications).toHaveLength(2);
+    });
   });
 });

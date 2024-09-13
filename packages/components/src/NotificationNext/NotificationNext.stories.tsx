@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 
@@ -245,69 +245,137 @@ export const HideProgressBar = () => {
  * `notify.initProgress` возвращает объект с методами: `start`, `update`, `success`, `error` и `stop`
  */
 export const ProgressNotify = () => {
-  const [isStarted, setStarted] = useState(false);
+  const [isStartedSign, setStartedSign] = useState(false);
+  const [isStartedSend, setStartedSend] = useState(false);
 
-  const progressNotify = notify.initProgress({
-    // containerId необходимо для storybook, так как на одном экране несколько контейнеров
-    containerId: 'progress-notify',
-  });
+  const progressSignNotify = useMemo(
+    () =>
+      notify.initProgress({
+        // containerId необходимо для storybook, так как на одном экране несколько контейнеров
+        containerId: 'progress-notify',
+      }),
+    [],
+  );
 
-  const handleProgressNotify = () => {
-    progressNotify.start('Подписание документов 1 из 3', {
+  const progressSendNotify = useMemo(
+    () =>
+      notify.initProgress({
+        // containerId необходимо для storybook, так как на одном экране несколько контейнеров
+        containerId: 'progress-notify',
+      }),
+    [],
+  );
+
+  const handleProgressSignNotify = () => {
+    progressSignNotify.start('Подписание документов 1 из 3', {
       content: 'Подписывается документ №001',
     });
 
-    setStarted(true);
+    setStartedSign(true);
   };
 
-  const handleUpdate = () => {
-    progressNotify.update('Подписание документов 2 из 3', {
+  const handleUpdatesSignNotify = () => {
+    progressSignNotify.update('Подписание документов 2 из 3', {
       content: 'Подписывается документ №002',
     });
   };
 
-  const handleSuccess = () => {
-    progressNotify.success('Документы подписаны', {
+  const handleSuccessSignNotify = () => {
+    progressSignNotify.success('Документы подписаны', {
       content: '3 документа успешно подписано',
     });
   };
 
-  const handleError = () => {
-    progressNotify.error('Ошибка подписания документов', {
+  const handleErrorsSignNotify = () => {
+    progressSignNotify.error('Ошибка подписания документов', {
       content: 'Не удалось подписать документы',
       actions: <Button variant="link">Подробнее</Button>,
     });
   };
 
-  const handleClose = () => {
-    progressNotify.stop();
-    setStarted(false);
+  const handleClosesSignNotify = () => {
+    progressSignNotify.stop();
+    setStartedSign(false);
+  };
+
+  const handleProgressNotifySendNotify = () => {
+    progressSendNotify.start('Отправка документов 1 из 3', {
+      content: 'Отправляется документ №111',
+    });
+
+    setStartedSend(true);
+  };
+
+  const handleUpdateSendNotify = () => {
+    progressSendNotify.update('Отправка документов 2 из 3', {
+      content: 'Отправляется документ №112',
+    });
+  };
+
+  const handleCloseSendNotify = () => {
+    progressSendNotify.stop();
+    setStartedSend(false);
   };
 
   return (
     <ExampleStack>
       <NotificationContainerNext containerId="progress-notify" />
 
-      <Stack gap={2}>
-        <Button disabled={isStarted} onClick={handleProgressNotify}>
-          {!isStarted ? 'Start progress notify' : 'Started...'}
-        </Button>
+      <Stack direction="row" gap={2}>
+        <Stack gap={2}>
+          <Button disabled={isStartedSign} onClick={handleProgressSignNotify}>
+            {!isStartedSign ? 'Start sign notify' : 'Started...'}
+          </Button>
 
-        <Button disabled={!isStarted} onClick={handleUpdate}>
-          Update notify
-        </Button>
+          <Button disabled={!isStartedSign} onClick={handleUpdatesSignNotify}>
+            Update notify
+          </Button>
 
-        <Button disabled={!isStarted} color="success" onClick={handleSuccess}>
-          Success notify
-        </Button>
+          <Button
+            disabled={!isStartedSign}
+            color="success"
+            onClick={handleSuccessSignNotify}
+          >
+            Success notify
+          </Button>
 
-        <Button disabled={!isStarted} color="error" onClick={handleError}>
-          Error notify
-        </Button>
+          <Button
+            disabled={!isStartedSign}
+            color="error"
+            onClick={handleErrorsSignNotify}
+          >
+            Error notify
+          </Button>
 
-        <Button disabled={!isStarted} variant="light" onClick={handleClose}>
-          Сбросить
-        </Button>
+          <Button
+            disabled={!isStartedSign}
+            variant="light"
+            onClick={handleClosesSignNotify}
+          >
+            Сбросить
+          </Button>
+        </Stack>
+
+        <Stack gap={2}>
+          <Button
+            disabled={isStartedSend}
+            onClick={handleProgressNotifySendNotify}
+          >
+            {!isStartedSend ? 'Start send notify' : 'Started...'}
+          </Button>
+
+          <Button disabled={!isStartedSend} onClick={handleUpdateSendNotify}>
+            Update notify
+          </Button>
+
+          <Button
+            disabled={!isStartedSend}
+            variant="light"
+            onClick={handleCloseSendNotify}
+          >
+            Сбросить
+          </Button>
+        </Stack>
       </Stack>
     </ExampleStack>
   );

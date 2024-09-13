@@ -72,10 +72,16 @@ export const notify: Notify = {
     ),
 
   initProgress: (initialOptions = {}) => {
-    let toastId: string | number;
+    let toastId: string | number | undefined;
 
     return {
       start: (title, options) => {
+        if (toastId) {
+          return console.warn(
+            `Уведомление с идентификатором ${toastId} уже запущено. Для инициализации нового уведомления используйте initProgress`,
+          );
+        }
+
         toastId = toast(
           ({ toastProps }) =>
             NOTIFICATION_VARIANT.progress(
@@ -96,6 +102,12 @@ export const notify: Notify = {
       },
 
       update: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
         notify.update(toastId, {
           render: ({ toastProps }) =>
             NOTIFICATION_VARIANT.progress(
@@ -111,6 +123,12 @@ export const notify: Notify = {
       },
 
       success: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
         notify.update(toastId, {
           render: ({ toastProps }) =>
             NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
@@ -124,6 +142,12 @@ export const notify: Notify = {
       },
 
       error: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
         notify.update(toastId, {
           render: ({ toastProps }) =>
             NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
@@ -143,10 +167,13 @@ export const notify: Notify = {
             containerId: initialOptions.containerId,
           });
 
+          toastId = undefined;
+
           return;
         }
 
         toast.dismiss(toastId);
+        toastId = undefined;
       },
     };
   },
