@@ -3,10 +3,11 @@ import { type PropsWithChildren } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { type TooltipProps as BasicTooltipProps } from '../Tooltip';
-import { type TypographyProps } from '../Typography';
+import { Typography, type TypographyProps } from '../Typography';
 
-import { StyledTypography } from './styles';
+import { StyledTypography, Wrapper } from './styles';
 import { useOverflowed } from './hooks';
+import { truncateString } from './utils';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
@@ -31,6 +32,10 @@ type TooltipCustomizable = {
      */
     title?: ReactNode;
   };
+  /**
+   * Количество отображаемых после сокращения в конце символов
+   */
+  visibleLastSymbolsCount?: number;
 };
 
 export type OverflowedElementProps = OverflowedProps &
@@ -47,7 +52,13 @@ export const OverflowTypography = forwardRef<
   OverflowedTypographyProps
 >(
   (
-    { tooltipProps, children, rowsCount = DEFAULT_ROWS_COUNT, ...props },
+    {
+      tooltipProps,
+      children,
+      rowsCount = DEFAULT_ROWS_COUNT,
+      visibleLastSymbolsCount,
+      ...props
+    },
     forwardedRef,
   ) => {
     const { ref, isOverflowed } = useOverflowed(forwardedRef);
@@ -59,6 +70,37 @@ export const OverflowTypography = forwardRef<
       rowsCount,
       hasMultipleRows: rowsCount > DEFAULT_ROWS_COUNT,
     };
+
+    const canSlice = children && typeof children === 'string';
+
+    if (canSlice && isOverflowed && visibleLastSymbolsCount) {
+      const { firstPartLabel, secondPartLabel } = truncateString(
+        visibleLastSymbolsCount,
+        children,
+      );
+
+      const { align = 'left' } = props;
+
+      return (
+        <Tooltip title={children} disableInteractive {...tooltipProps}>
+          <Wrapper $align={align}>
+            <StyledTypography
+              component="span"
+              children={firstPartLabel}
+              ref={ref}
+              hasMultipleRows={false}
+              rowsCount={1}
+              {...props}
+            />
+            <Typography
+              children={secondPartLabel}
+              {...props}
+              component="span"
+            />
+          </Wrapper>
+        </Tooltip>
+      );
+    }
 
     if (children && isOverflowed) {
       return (

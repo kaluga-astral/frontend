@@ -88,3 +88,18 @@ export const TooltipProps = () => {
     </div>
   );
 };
+
+/**
+ * Prop `visibleLastSymbolsCount` позволяет задавать число отображаемых символов после сокращения
+ */
+export const VisibleLastSymbols = () => {
+  return (
+    <div style={{ maxWidth: '200px' }}>
+      <OverflowTypography visibleLastSymbolsCount={10}>
+        With custom tooltip settings. Lorem ipsum dolor sit amet, consecrate
+        adipisicing elit. Assumenda autem debitis eligendi inventore magni nobis
+        perspiciatis quisquam ratione, unde vel?
+      </OverflowTypography>
+    </div>
+  );
+};
