@@ -5,7 +5,6 @@ import { BinOutlineMd } from '@astral/icons';
 
 import { ActionCell } from '../ActionCell';
 import { DataGridActionCell } from '../DataGridActionCell';
-import { DataGridPagination } from '../DataGridPagination';
 
 import { NewDataGrid } from './NewDataGrid';
 import type { DataGridColumns, DataGridSort } from './types';
@@ -723,15 +722,13 @@ describe('NewDataGrid', () => {
     expect(label).not.toBeInTheDocument();
   });
 
-  it('Предыдущие данные показываются при переключении пагинации и isLoading=true', async () => {
-    const documentName = 'Договор №1';
-
+  it('Предыдущие данные отображаются при isLoading=true', async () => {
     type DataType = {
       id: string;
       documentName: string;
     };
 
-    const firstPageData: DataGridRowWithOptions<DataType>[] = [
+    const pageData: DataGridRowWithOptions<DataType>[] = [
       {
         id: '1',
         documentName: 'Договор №1',
@@ -742,7 +739,7 @@ describe('NewDataGrid', () => {
       },
     ];
 
-    const secondPageData: DataGridRowWithOptions<DataType>[] = [
+    const newPageData: DataGridRowWithOptions<DataType>[] = [
       {
         id: '3',
         documentName: 'Договор №3',
@@ -753,7 +750,6 @@ describe('NewDataGrid', () => {
       },
     ];
 
-    const pageCount = firstPageData.length + secondPageData.length;
     const { rerender } = renderWithTheme(
       <NewDataGrid
         keyId="id"
@@ -763,22 +759,10 @@ describe('NewDataGrid', () => {
             label: 'Наименование',
           },
         ]}
-        rows={firstPageData}
-        isLoading={false}
-        footer={
-          <DataGridPagination rowsPerPage={2} totalCount={pageCount} page={1} />
-        }
+        rows={pageData}
         onRetry={() => {}}
       />,
     );
-
-    const label = screen.getByText(documentName);
-
-    expect(label).toBeVisible();
-
-    const paginationButton = await screen.findByLabelText('Go to page 2');
-
-    await userEvents.click(paginationButton);
 
     rerender(
       <NewDataGrid
@@ -789,17 +773,16 @@ describe('NewDataGrid', () => {
             label: 'Наименование',
           },
         ]}
-        rows={secondPageData}
+        rows={newPageData}
         isLoading={true}
-        footer={
-          <DataGridPagination rowsPerPage={2} totalCount={pageCount} page={2} />
-        }
         onRetry={() => {}}
       />,
     );
 
-    const updateLabel = screen.getByText(documentName);
+    pageData.forEach(({ documentName }) => {
+      const label = screen.getByText(documentName);
 
-    expect(updateLabel).toBeVisible();
+      expect(label).toBeVisible();
+    });
   });
 });
