@@ -48,4 +48,13 @@ export const NOTIFICATION_VARIANT: Record<Variant, NotifyAction> = {
       )}
     />
   ),
+  progress: (options, notifyContent) => (
+    <NotificationTemplateNext
+      {...getNotificationTemplateProps(
+        options,
+        notifyContent,
+        NotificationVariantTypes.progress,
+      )}
+    />
+  ),
 };
