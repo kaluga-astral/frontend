@@ -24,10 +24,10 @@ export const useLogic = ({
 }: UseLogicParams) => {
   const ref = useForwardedRef<HTMLDivElement>(forwardedRef);
 
-  const [selectDate, setSelectDate] = useState(value);
+  const [selectedDate, setSelectedDate] = useState(value);
 
   const { maskedValue } = useMaskedValue({
-    currentValue: selectDate,
+    currentValue: selectedDate,
     mask,
     onChangeValue: onChange,
   });
@@ -45,8 +45,8 @@ export const useLogic = ({
   };
 
   const handleClose = () => {
-    if (isMobile && value !== selectDate) {
-      onChange?.(selectDate);
+    if (isMobile && value !== selectedDate) {
+      onChange?.(selectedDate);
     }
 
     onBlur?.();
@@ -74,7 +74,7 @@ export const useLogic = ({
   });
 
   const handleConfirm = () => {
-    setSelectDate(value);
+    setSelectedDate(value);
     handleClose();
   };
 
