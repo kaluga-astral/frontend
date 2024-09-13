@@ -114,10 +114,11 @@ export const Types = () => {
   };
 
   const handleProgress = () => {
-    notify.progress('Подписание документов', {
-      filled: false,
+    const progressNotify = notify.initProgress({
       containerId: 'types',
     });
+
+    progressNotify.start('Загрузка документов...');
   };
 
   return (
