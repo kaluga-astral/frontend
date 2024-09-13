@@ -1,5 +1,5 @@
-import { useTheme } from '../../../../theme';
-import { IconColor } from '../../../enums';
+import { useTheme } from '../../../../../theme';
+import { IconColor } from '../../../../enums';
 
 type UseIconColorParams = {
   color?: IconColor;

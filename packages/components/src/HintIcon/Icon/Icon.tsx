@@ -1,5 +1,4 @@
 import { type HintIconProps } from '../HintIcon';
-import { ICONS } from '../constants';
 import { Tooltip } from '../../Tooltip';
 
 import { IconWrapper } from './styles';
@@ -13,14 +12,14 @@ export type IconProps = Pick<
 };
 
 export const Icon = (props: IconProps) => {
-  const { iconOptionVariant, iconColor } = useLogic(props);
+  const { getIcon, iconColor } = useLogic(props);
 
-  const { variant, onClick, note } = props;
+  const { onClick, note } = props;
 
   return (
     <Tooltip title={note} placement="bottom">
       <IconWrapper onClick={onClick} $color={iconColor}>
-        {ICONS[variant][iconOptionVariant]}
+        {getIcon()}
       </IconWrapper>
     </Tooltip>
   );
