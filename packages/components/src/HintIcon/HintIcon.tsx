@@ -1,8 +1,7 @@
-import { Tooltip } from '../Tooltip';
 import { BottomDrawer } from '../BottomDrawer';
 
 import { Icon } from './Icon';
-import { DrawerContent, IconWrapper } from './styles';
+import { DrawerContent } from './styles';
 import { useLogic } from './useLogic';
 
 export type HintIconProps = {
@@ -42,11 +41,12 @@ export const HintIcon = (props: HintIconProps) => {
 
   return (
     <>
-      <Tooltip title={note} placement="bottom">
-        <IconWrapper onClick={handleOpen}>
-          <Icon variant={variant} iconOption={iconOption} />
-        </IconWrapper>
-      </Tooltip>
+      <Icon
+        onClick={handleOpen}
+        variant={variant}
+        iconOption={iconOption}
+        note={note}
+      />
       <BottomDrawer title={title} open={open} onClose={handleClose}>
         <DrawerContent>{note}</DrawerContent>
       </BottomDrawer>

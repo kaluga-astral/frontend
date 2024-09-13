@@ -7,7 +7,7 @@ describe('HintIcon', () => {
   it('Иконка отображается', () => {
     renderWithTheme(<HintIcon variant="info" title="" note="info" />);
 
-    const icon = screen.getByLabelText('info').getElementsByTagName('svg')[0];
+    const icon = screen.getByLabelText('info').querySelector('svg');
 
     expect(icon).toBeVisible();
   });
@@ -15,9 +15,11 @@ describe('HintIcon', () => {
   it('Тултип отображается при наведении', async () => {
     renderWithTheme(<HintIcon variant="info" title="" note="info" />);
 
-    const icon = screen.getByLabelText('info').getElementsByTagName('svg')[0];
+    const icon = screen.getByLabelText('info').querySelector('svg');
 
-    await userEvents.hover(icon);
+    if (icon) {
+      await userEvents.hover(icon);
+    }
 
     const tooltip = await screen.findByRole('tooltip');
 

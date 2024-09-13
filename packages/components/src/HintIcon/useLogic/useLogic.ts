@@ -6,6 +6,7 @@ export const useLogic = () => {
   const [open, setOpen] = useState(false);
 
   const { isMobile } = useViewportType();
+
   const handleOpen = () => {
     if (isMobile) {
       setOpen((prevState) => !prevState);
@@ -13,7 +14,9 @@ export const useLogic = () => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    if (isMobile) {
+      setOpen(false);
+    }
   };
 
   return {

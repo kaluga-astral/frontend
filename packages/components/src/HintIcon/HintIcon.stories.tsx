@@ -48,7 +48,6 @@ export const Example = () => {
         <HintIcon
           variant="info"
           title="ИНН"
-          iconOption={{ color: 'grey' }}
           note="ИНН — это идентификационный номер налогоплательщика."
         />
       </StyledDescriptionValue>
@@ -97,7 +96,7 @@ export const Color = () => {
   );
 };
 
-export const OptionsVariant = () => {
+export const IconOptionsVariant = () => {
   return (
     <>
       <HintIcon

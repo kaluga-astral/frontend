@@ -7,11 +7,11 @@ import {
 
 export const ICONS = {
   question: {
-    fill: QuestionFillMd,
-    outline: QuestionOutlineMd,
+    fill: <QuestionFillMd />,
+    outline: <QuestionOutlineMd />,
   },
   info: {
-    fill: InfoFillMd,
-    outline: InfoOutlineMd,
+    fill: <InfoFillMd />,
+    outline: <InfoOutlineMd />,
   },
 };

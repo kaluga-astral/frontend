@@ -1,32 +1,27 @@
 import { type HintIconProps } from '../HintIcon';
-import { useIconColor } from '../hooks';
+import { ICONS } from '../constants';
+import { Tooltip } from '../../Tooltip';
 
-import { InfoFill, InfoOutline, QuestionFill, QuestionOutline } from './styles';
+import { IconWrapper } from './styles';
+import { useLogic } from './useLogic';
 
-type IconProps = Pick<HintIconProps, 'variant' | 'iconOption'>;
+export type IconProps = Pick<
+  HintIconProps,
+  'variant' | 'iconOption' | 'note'
+> & {
+  onClick: () => void;
+};
 
-export const Icon = ({ variant, iconOption }: IconProps) => {
-  const iconColor = useIconColor({ color: iconOption?.color });
+export const Icon = (props: IconProps) => {
+  const { iconOptionVariant, iconColor } = useLogic(props);
 
-  const { variant: iconOptionVariant = 'fill' } = iconOption || {};
-  const getIcon = () => {
-    switch (variant) {
-      case 'info':
-        return iconOptionVariant === 'fill' ? (
-          <InfoFill $color={iconColor} />
-        ) : (
-          <InfoOutline $color={iconColor} />
-        );
-      case 'question':
-        return iconOptionVariant === 'fill' ? (
-          <QuestionFill $color={iconColor} />
-        ) : (
-          <QuestionOutline $color={iconColor} />
-        );
-      default:
-        return null;
-    }
-  };
+  const { variant, onClick, note } = props;
 
-  return <>{getIcon()}</>;
+  return (
+    <Tooltip title={note} placement="bottom">
+      <IconWrapper onClick={onClick} $color={iconColor}>
+        {ICONS[variant][iconOptionVariant]}
+      </IconWrapper>
+    </Tooltip>
+  );
 };
