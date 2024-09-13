@@ -13,7 +13,7 @@ export type BulletListProps = Omit<
  * Список элементов с маркерами
  */
 export const BulletList = (props: BulletListProps) => {
-  const { children } = props;
+  const { children, ...restProps } = props;
 
-  return <Wrapper {...props}>{children}</Wrapper>;
+  return <Wrapper {...restProps}>{children}</Wrapper>;
 };

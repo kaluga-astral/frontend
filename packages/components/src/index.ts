@@ -21,9 +21,9 @@ export * from './Badge';
 
 export * from './Breadcrumbs';
 
-export * from './BulletList';
+export { BulletListProps, BulletList } from './BulletList';
 
-export * from './BulletListItem';
+export { BulletListItemProps, BulletListItem } from './BulletListItem';
 
 export * from './Button';
 

@@ -1,1 +1,1 @@
-export { ListItemProps, BulletListItem } from './BulletListItem';
+export * from './BulletListItem';

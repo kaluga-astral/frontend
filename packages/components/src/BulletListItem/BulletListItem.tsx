@@ -3,18 +3,18 @@ import { type WithoutEmotionSpecific } from '../types';
 
 import { Icon, Wrapper } from './styles';
 
-export type ListItemProps = WithoutEmotionSpecific<TypographyProps>;
+export type BulletListItemProps = WithoutEmotionSpecific<TypographyProps>;
 
 /**
  * Элемент с маркерами
  */
-export const BulletListItem = (props: ListItemProps) => {
-  const { children } = props;
+export const BulletListItem = (props: BulletListItemProps) => {
+  const { children, ...restProps } = props;
 
   return (
     <Wrapper>
       <Icon />
-      <Typography component="span" {...props}>
+      <Typography component="span" {...restProps}>
         {children}
       </Typography>
     </Wrapper>
