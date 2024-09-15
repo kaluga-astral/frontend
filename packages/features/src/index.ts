@@ -8,5 +8,4 @@ export {
 export {
   AutoSaveIndicatorStore,
   useInitAutoSaveIndicatorStore,
-  autoSaveIndicatorStoreInstance,
 } from './AutoSaveIndicatorService';

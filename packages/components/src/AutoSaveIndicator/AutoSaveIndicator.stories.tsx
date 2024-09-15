@@ -6,6 +6,11 @@ import {
 } from '@astral/icons';
 import { Fragment, useState } from 'react';
 import { Stack } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import {
+  AutoSaveIndicatorStore,
+  useInitAutoSaveIndicatorStore,
+} from '@astral/features';
 
 import { DashboardLayout } from '../DashboardLayout';
 import { ProductSwitcher } from '../ProductSwitcher';
@@ -23,6 +28,7 @@ import { TextArea } from '../TextArea';
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
 /**
+ * Для декларативной работы с компонентом стоит использовать [AutoSaveIndicatorStore](https://github.com/kaluga-astral/frontend/tree/feat/UIKIT-1743/packages/features)
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=28356-409&t=YR0epNNIklP0h3Fu-0)
  * ### [Guide]()
  */
@@ -85,7 +91,7 @@ export const Interaction: Story = {
   },
 };
 
-export const Example = () => {
+const ObservableExample = observer(() => {
   const menuList = [
     {
       icon: <ProfileOutlineMd />,
@@ -148,26 +154,24 @@ export const Example = () => {
     },
   } as SidebarProps;
 
-  const [isLoading, setLoading] = useState(false);
+  const autosaveIndicatorInstance = new AutoSaveIndicatorStore();
+  const [autosaveIndicatorStore] = useState(autosaveIndicatorInstance);
 
-  const [isSuccess, setSuccess] = useState(false);
-
-  const [isError, setError] = useState(false);
+  useInitAutoSaveIndicatorStore(autosaveIndicatorStore);
 
   const handleSave = () => {
-    setLoading(true);
-    setSuccess(false);
-    setError(false);
+    autosaveIndicatorStore.progress();
 
     const hasError = Math.random() < 0.5;
 
     setTimeout(() => {
       if (hasError) {
-        setLoading(false);
-        setError(true);
+        autosaveIndicatorStore.setError({
+          message: 'Ошибка автосохранения',
+          onRetry: handleSave,
+        });
       } else {
-        setSuccess(true);
-        setLoading(false);
+        autosaveIndicatorStore.success();
       }
     }, 4000);
   };
@@ -202,15 +206,7 @@ export const Example = () => {
             },
           }}
         >
-          <AutoSaveIndicator
-            onRetry={() => {
-              handleSave();
-            }}
-            isLoading={isLoading}
-            isError={isError}
-            isSuccess={isSuccess}
-            errorMsg="Ошибка автосохранения"
-          />
+          <AutoSaveIndicator {...autosaveIndicatorStore.values} />
         </DashboardLayout.Header>
         <DashboardLayout.Sidebar {...sidebar} />
         <DashboardLayout.Main>
@@ -297,6 +293,10 @@ export const Example = () => {
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
+});
+
+export const Example = () => {
+  return <ObservableExample />;
 };
 
 export const State = () => {

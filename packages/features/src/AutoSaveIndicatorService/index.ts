@@ -1,3 +1,3 @@
-export * from './AutoSaveIndicatorStore';
+export * from './stores/AutoSaveIndicatorStore';
 
-export * from './useInitAutoSaveIndicatorStore';
+export * from './hooks/useInitAutoSaveIndicatorStore';

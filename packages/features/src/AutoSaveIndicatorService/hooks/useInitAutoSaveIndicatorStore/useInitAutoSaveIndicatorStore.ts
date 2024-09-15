@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { type AutoSaveIndicatorStore } from '../AutoSaveIndicatorStore';
+import { type AutoSaveIndicatorStore } from '../../stores/AutoSaveIndicatorStore';
 
 type UseInitAutoSaveIndicatorStoreParams = AutoSaveIndicatorStore;
 

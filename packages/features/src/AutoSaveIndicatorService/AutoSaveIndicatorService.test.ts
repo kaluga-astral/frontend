@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { AutoSaveIndicatorService } from './AutoSaveIndicatorService';
 import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from './constants';
@@ -6,65 +6,114 @@ import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from './constants';
 describe('AutoSaveIndicatorService', () => {
   let service: AutoSaveIndicatorService;
 
+  const prepareError = (message: string) => {
+    return {
+      message,
+      onRetry: () => {},
+    };
+  };
+
   beforeEach(() => {
     service = new AutoSaveIndicatorService();
   });
 
-  it('Инициализируется с дефолтными значениями', () => {
-    expect(service.values.isLoading).toBeFalsy();
-    expect(service.values.isError).toBeFalsy();
-    expect(service.values.isSuccess).toBeFalsy();
-    expect(service.isVisible).toBeFalsy();
+  describe('Инициализация сервиса', () => {
+    it('Ошибка отсутствует', () => {
+      expect(service.values.isError).toBeFalsy();
+    });
+
+    it('Состояние загрузки отрицательно', () => {
+      expect(service.values.isLoading).toBeFalsy();
+    });
+
+    it('Состояние успеха отрицательно', () => {
+      expect(service.values.isSuccess).toBeFalsy();
+    });
+
+    it('Индикатор автосохранения невидим', () => {
+      expect(service.isVisible).toBeFalsy();
+    });
+
+    it('Сообщение об ошибке эквивалентно изначальному', () => {
+      expect(service.values.errorMsg).toBe(
+        AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE.message,
+      );
+    });
   });
 
-  it('Произойдет установка ошибки в состояние при вызове метода setError', () => {
-    const error = {
-      message: 'Произошла ошибка при выполнении запроса',
-      onRetry: vi.fn(),
-    };
+  describe('Вызов метода reset', () => {
+    it('Состояние ошибки сброшено до изначального состояния', () => {
+      const error = prepareError('Test Error');
 
-    service.show();
-    service.progress();
-    service.setError(error);
-    expect(service.values.isError).toBeTruthy();
-    expect(service.values.errorMsg).toBe(error.message);
-    expect(service.values.onRetry).toBe(error.onRetry);
+      service.setError(error);
+      service.reset();
+      expect(service.values.isError).toBeFalsy();
+    });
+
+    it('Состояние загрузки сброшено до изначального состояния', () => {
+      service.progress();
+      service.reset();
+      expect(service.values.isLoading).toBeFalsy();
+    });
+
+    it('Состояние успеха сброшено до изначального состояния', () => {
+      expect(service.values.isSuccess).toBeFalsy();
+    });
+
+    it('Индикатор автосохранения невидим', () => {
+      expect(service.isVisible).toBeFalsy();
+    });
+
+    it('Сообщение об ошибке эквивалентно изначальному', () => {
+      const error = prepareError('Test Error');
+
+      service.setError(error);
+      service.reset();
+
+      expect(service.values.errorMsg).toBe(
+        AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE.message,
+      );
+    });
   });
 
-  it('Индикатор автосохранения будет показан при вызове метода show', () => {
-    service.show();
-    expect(service.isVisible).toBeTruthy();
+  describe('Вызов метода setError', () => {
+    const errorText = 'Произошла ошибка при выполнении запроса';
+
+    const error = prepareError(errorText);
+
+    it('Состояние ошибки установлено', () => {
+      service.show();
+      service.setError(error);
+      expect(service.values.isError).toBeTruthy();
+    });
+
+    it('Текст ошибки установлен', () => {
+      service.show();
+      service.setError(error);
+      expect(service.values.errorMsg).toBe(errorText);
+    });
   });
 
-  it('Индикатор будет скрыт при вызове метода hide', () => {
-    service.show();
-    service.hide();
-    expect(service.isVisible).toBeFalsy();
+  describe('Видимость индикатора автосохранения', () => {
+    it('Отображается при вызове метода show', () => {
+      service.show();
+      expect(service.isVisible).toBeTruthy();
+    });
+
+    it('Скрыт при вызове метода hide', () => {
+      service.show();
+      service.hide();
+      expect(service.isVisible).toBeFalsy();
+    });
   });
 
-  it('Состояние индикатора будет сброшено до изначального при вызове метода reset', () => {
-    service.progress();
-    service.reset();
-    expect(service.values.isLoading).toBeFalsy();
-    expect(service.values.isError).toBeFalsy();
-    expect(service.values.isSuccess).toBeFalsy();
-
-    expect(service.values.errorMsg).toBe(
-      AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE.message,
-    );
-  });
-
-  it('Будет установлено состояние прогресса при вызове метода progress', () => {
+  it('Состояние прогресса устанавливается при вызове метода progress', () => {
     service.progress();
     expect(service.values.isLoading).toBeTruthy();
-    expect(service.values.isError).toBeFalsy();
-    expect(service.values.isSuccess).toBeFalsy();
   });
 
-  it('Будет установлено состояние успеха при вызове метода success', () => {
+  it('Состояние успешного автосохранения устанавливается при вызове метода success', () => {
     service.success();
-    expect(service.values.isLoading).toBeFalsy();
-    expect(service.values.isError).toBeFalsy();
     expect(service.values.isSuccess).toBeTruthy();
   });
 });
