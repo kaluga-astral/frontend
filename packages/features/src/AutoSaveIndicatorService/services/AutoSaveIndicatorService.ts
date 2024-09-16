@@ -1,4 +1,5 @@
-import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from './constants';
+import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from '../constants';
+
 import {
   type AutoSaveIndicatorErrorState,
   type IAutoSaveIndicatorService,
@@ -25,14 +26,14 @@ export class AutoSaveIndicatorService implements IAutoSaveIndicatorService {
   private error = AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE;
 
   /**
-   * Метод для отображения компонента
+   * Отображает компонента
    */
   public show = () => {
     this.isShouldBeVisible = true;
   };
 
   /**
-   * Метод для сброса состояния до изначального
+   * Сбрасывает состояние до изначального
    */
   public reset = () => {
     this.status = AutoSaveIndicatorStatus.Idle;
@@ -40,7 +41,7 @@ export class AutoSaveIndicatorService implements IAutoSaveIndicatorService {
   };
 
   /**
-   * Метод для скрытия компонента
+   * Скрывает компонент
    */
   public hide = () => {
     this.isShouldBeVisible = false;
@@ -48,14 +49,14 @@ export class AutoSaveIndicatorService implements IAutoSaveIndicatorService {
   };
 
   /**
-   * Метод для индикации состояния загрузки во время сохранения
+   * Отображает состояния загрузки во время сохранения
    */
   public progress = () => {
     this.status = AutoSaveIndicatorStatus.Progress;
   };
 
   /**
-   * Метод для индикации состояния успеха
+   * Отображает состояния успеха
    */
   public success = () => {
     this.status = AutoSaveIndicatorStatus.Success;
@@ -63,7 +64,7 @@ export class AutoSaveIndicatorService implements IAutoSaveIndicatorService {
   };
 
   /**
-   * Метод для установки текста ошибки и функции обратного вызова, которая должна сработать при клике на кнопку
+   * Устанавливает текст ошибки и callback, который должен сработать при клике на кнопку
    */
   public setError = (error: AutoSaveIndicatorErrorState) => {
     this.status = AutoSaveIndicatorStatus.Error;

@@ -4,7 +4,7 @@ import {
   ProfileOutlineMd,
   SearchOutlineMd,
 } from '@astral/icons';
-import { Fragment, useState } from 'react';
+import { Fragment, type ReactNode, useState } from 'react';
 import { Stack } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import {
@@ -28,7 +28,7 @@ import { TextArea } from '../TextArea';
 import { AutoSaveIndicator } from './AutoSaveIndicator';
 
 /**
- * Для декларативной работы с компонентом стоит использовать [AutoSaveIndicatorStore](https://github.com/kaluga-astral/frontend/tree/feat/UIKIT-1743/packages/features)
+ * Для декларативной работы с компонентом стоит использовать [AutoSaveIndicatorStore](https://www.npmjs.com/package/@astral/features?activeTab=readme)
  * ### [Figma](https://www.figma.com/design/3ghN4WjSgkKx5rETR64jqh/Sirius-Design-System-(АКТУАЛЬНО)?node-id=28356-409&t=YR0epNNIklP0h3Fu-0)
  * ### [Guide]()
  */
@@ -91,7 +91,13 @@ export const Interaction: Story = {
   },
 };
 
-const ObservableExample = observer(() => {
+type ExamplePageProps = {
+  headerSlot: ReactNode;
+  onSave: () => void;
+};
+
+// Вынесено для исключения дублирования разметки
+const BasePage = ({ headerSlot, onSave }: ExamplePageProps) => {
   const menuList = [
     {
       icon: <ProfileOutlineMd />,
@@ -154,28 +160,6 @@ const ObservableExample = observer(() => {
     },
   } as SidebarProps;
 
-  const autosaveIndicatorInstance = new AutoSaveIndicatorStore();
-  const [autosaveIndicatorStore] = useState(autosaveIndicatorInstance);
-
-  useInitAutoSaveIndicatorStore(autosaveIndicatorStore);
-
-  const handleSave = () => {
-    autosaveIndicatorStore.progress();
-
-    const hasError = Math.random() < 0.5;
-
-    setTimeout(() => {
-      if (hasError) {
-        autosaveIndicatorStore.setError({
-          message: 'Ошибка автосохранения',
-          onRetry: handleSave,
-        });
-      } else {
-        autosaveIndicatorStore.success();
-      }
-    }, 4000);
-  };
-
   const handleClearStorage = () => {
     localStorage.clear();
   };
@@ -206,7 +190,7 @@ const ObservableExample = observer(() => {
             },
           }}
         >
-          <AutoSaveIndicator {...autosaveIndicatorStore.values} />
+          {headerSlot}
         </DashboardLayout.Header>
         <DashboardLayout.Sidebar {...sidebar} />
         <DashboardLayout.Main>
@@ -249,7 +233,7 @@ const ObservableExample = observer(() => {
                     value=""
                     placeholder="При выборе произойдет автосохранение"
                     size="small"
-                    onChange={handleSave}
+                    onChange={onSave}
                   >
                     {['Договор №12345678', 'Договор №1'].map((option) => (
                       <MenuItem value={option} key={option}>
@@ -264,12 +248,12 @@ const ObservableExample = observer(() => {
               children: (
                 <GridWrapper rowSpacing={3} container>
                   <TextField
-                    onBlur={handleSave}
+                    onBlur={onSave}
                     placeholder="Введите имя"
                     label="Имя"
                   />
                   <TextField
-                    onBlur={handleSave}
+                    onBlur={onSave}
                     placeholder="Введите фамилию"
                     label="Фамилия"
                   />
@@ -278,10 +262,10 @@ const ObservableExample = observer(() => {
                       label: 'Дата рождения:',
                       placeholder: 'Выберите дату',
                     }}
-                    onChange={handleSave}
+                    onChange={onSave}
                   />
                   <TextArea
-                    onBlur={handleSave}
+                    onBlur={onSave}
                     rows={4}
                     placeholder="Введите информацию о себе"
                   />
@@ -293,10 +277,99 @@ const ObservableExample = observer(() => {
       </DashboardLayout>
     </DashboardLayoutWrapper>
   );
+};
+
+/**
+ * Пример базового использования
+ */
+export const Example = () => {
+  const [isLoading, setLoading] = useState(false);
+
+  const [isSuccess, setSuccess] = useState(false);
+
+  const [isError, setError] = useState(false);
+
+  const handleSave = () => {
+    setLoading(true);
+    setSuccess(false);
+    setError(false);
+
+    const hasError = Math.random() < 0.5;
+
+    setTimeout(() => {
+      if (hasError) {
+        setLoading(false);
+        setError(true);
+      } else {
+        setSuccess(true);
+        setLoading(false);
+      }
+    }, 4000);
+  };
+
+  return (
+    <BasePage
+      headerSlot={
+        <AutoSaveIndicator
+          onRetry={() => {
+            handleSave();
+          }}
+          isLoading={isLoading}
+          isError={isError}
+          isSuccess={isSuccess}
+          errorMsg="Ошибка автосохранения"
+        />
+      }
+      onSave={handleSave}
+    />
+  );
+};
+
+/**
+ * Пример компонента с использованием MobX store {@link https://www.npmjs.com/package/@astral/features?activeTab=readme|AutoSaveIndicatorStore}
+ * из библиотеки @astral/features
+ */
+const StoreIntegration = observer(() => {
+  const autosaveIndicatorInstance = new AutoSaveIndicatorStore();
+  const [autosaveIndicatorStore] = useState(autosaveIndicatorInstance);
+
+  useInitAutoSaveIndicatorStore(autosaveIndicatorStore);
+
+  const handleSave = () => {
+    autosaveIndicatorStore.progress();
+
+    const hasError = Math.random() < 0.5;
+
+    setTimeout(() => {
+      if (hasError) {
+        autosaveIndicatorStore.setError({
+          message: 'Ошибка автосохранения',
+          onRetry: handleSave,
+        });
+      } else {
+        autosaveIndicatorStore.success();
+      }
+    }, 4000);
+  };
+
+  return (
+    <BasePage
+      headerSlot={
+        <AutoSaveIndicator
+          onRetry={autosaveIndicatorStore.values.onRetry}
+          errorMsg={autosaveIndicatorStore.values.errorMsg}
+          isError={autosaveIndicatorStore.values.isError}
+          isLoading={autosaveIndicatorStore.values.isLoading}
+          isSuccess={autosaveIndicatorStore.values.isSuccess}
+        />
+      }
+      onSave={handleSave}
+    />
+  );
 });
 
-export const Example = () => {
-  return <ObservableExample />;
+export const ExampleWithMobxStore = () => {
+  return <StoreIntegration />;
 };
 
 export const State = () => {

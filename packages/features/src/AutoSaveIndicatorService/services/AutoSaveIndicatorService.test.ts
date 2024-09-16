@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from '../constants';
+
 import { AutoSaveIndicatorService } from './AutoSaveIndicatorService';
-import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from './constants';
 
 describe('AutoSaveIndicatorService', () => {
   let sut: AutoSaveIndicatorService;
@@ -17,7 +18,7 @@ describe('AutoSaveIndicatorService', () => {
     sut = new AutoSaveIndicatorService();
   });
 
-  describe('Инициализация сервиса', () => {
+  describe('При инициализации сервиса:', () => {
     it('Ошибка отсутствует', () => {
       expect(sut.values.isError).toBeFalsy();
     });
@@ -42,7 +43,7 @@ describe('AutoSaveIndicatorService', () => {
   });
 
   describe('Метод reset', () => {
-    it('Состояние ошибки будет сброшено до изначального состояния при вызове метода', () => {
+    it('Состояние ошибки сбрасывается до изначального состояния при вызове метода', () => {
       const error = prepareError('Test Error');
 
       sut.setError(error);
@@ -50,17 +51,17 @@ describe('AutoSaveIndicatorService', () => {
       expect(sut.values.isError).toBeFalsy();
     });
 
-    it('Состояние загрузки сброшено до изначального состояния при вызове метода', () => {
+    it('Состояние загрузки сбрасывается до изначального состояния при вызове метода', () => {
       sut.progress();
       sut.reset();
       expect(sut.values.isLoading).toBeFalsy();
     });
 
-    it('Состояние успеха сброшено до изначального состояния при вызове метода', () => {
+    it('Состояние успеха сбрасывается до изначального состояния при вызове метода', () => {
       expect(sut.values.isSuccess).toBeFalsy();
     });
 
-    it('Индикатор автосохранения скроется при вызове метода', () => {
+    it('Индикатор автосохранения скрывается при вызове метода', () => {
       expect(sut.isVisible).toBeFalsy();
     });
 
@@ -81,13 +82,13 @@ describe('AutoSaveIndicatorService', () => {
 
     const error = prepareError(errorText);
 
-    it('Состояние ошибки установлено при вызове метода', () => {
+    it('Состояние ошибки устанавливается при вызове метода', () => {
       sut.show();
       sut.setError(error);
       expect(sut.values.isError).toBeTruthy();
     });
 
-    it('Текст ошибки установлен при вызове метода', () => {
+    it('Текст ошибки устанавливается при вызове метода', () => {
       sut.show();
       sut.setError(error);
       expect(sut.values.errorMsg).toBe(errorText);

@@ -12,7 +12,7 @@ describe('AutoSaveIndicatorStore', () => {
     expect(sut.isVisible).toBeTruthy();
   });
 
-  it('Сообщение об ошибке установлено при вызове метода setError', async () => {
+  it('Сообщение об ошибке устанавливается при вызове метода setError', async () => {
     const sut = new AutoSaveIndicatorStore();
     const errorMessage = 'Test Error';
 

@@ -19,39 +19,50 @@
 #### API AutoSaveIndicatorStore
 Свойства:
 
-- **values** - пропсы, необходимые для работы компонента
-- **isVisible** - флаг, определяющий видимость индикатора на странице
+- ``values`` - пропсы, необходимые для работы компонента
+- ``isVisible`` - флаг, определяющий видимость индикатора на странице
 
 Методы:
 
-**show** - Установки значения **isVisible** в true
+``show`` - Установка значения ``isVisible`` в true
 
-**hide** - Установки значения **isVisible** в false 
+``hide`` - Установка значения ``isVisible`` в false 
 
-**progress** - Установки индикации автосохранения (isLoading)
+``progress`` - Установка индикации автосохранения (аналог ``setIsLoading``)
 
-**success** - Установки успешного состояния автосохранения
+``success`` - Установка успешного состояния автосохранения
 
-**setError** - Установки состояния ошибки. 
+``setError`` - Установка состояния ошибки. 
 
 Параметры метода: 
-- **message** - сообщение об ошибке, которое будет отображаться над кнопкой повторения запроса
-- **onRetry** - коллбэк, который будет выполнен при нажатии на кнопку повторения запроса.
+- ``message`` - сообщение об ошибке, которое будет отображаться над кнопкой повторения запроса
+- ``onRetry`` - коллбэк, который будет выполнен при нажатии на кнопку повторения запроса.
 
-**reset** - Метод для сброса состояния стора до изначального.
+``reset`` - Сброс состояния стора до изначального.
  
 #### Инициализация
 
-Необходимо создать инстанс AutoSaveIndicatorStore, затем вызвать хук useInitAutoSaveIndicatorStore на уровне скрина, где
-предполагается использование автосейва. 
+1. Необходимо создать инстанс AutoSaveIndicatorStore, 
+
+```
+shared/stores
+
+import { AutoSaveIndicatorStore } from "@astral/features"
+
+export const autoSaveIndicatorInstance = new AutoSaveIndicatorStore();
+```
+
+2. Вызвать хук на скрине, где предполагается использование индикатора автосохранения и передать в него созданный инстанс
 
 Внутри данного хука содержится следующая логика:
-- При монтировании вызывается метод **show**.
-- При размонтировании вызывается метод **hide** и **reset**. Вызов последнего необходим, так как предполагается использование
+- При монтировании вызывается метод ``show``.
+- При размонтировании вызывается метод ``hide`` и ``reset``. Вызов последнего необходим, так как предполагается использование
   данного стора в качестве синглтона
 
 ``` ts
 screen
+
+import { autoSaveIndicatorInstance } from "@example/shared"
 
 export const ExampleScreen = observer(() => {
   const [autoSaveIndicatorStore] = useState(autoSaveIndicatorStoreInstance);
@@ -67,10 +78,12 @@ export const ExampleScreen = observer(() => {
 });
 ```
 
-Пример размещения AutoSaveIndicator будет выглядеть следующим образом:
+Пример использования AutoSaveIndicator на лэйауте будет выглядеть следующим образом:
 
 ``` tsx
 modules/layout/features/MainLayout/Header
+
+import { autoSaveIndicatorStoreInstance } from "@example/shared"
 
 export const Header = observer(() => {
   const [autoSaveIndicatorStore] = useState(autoSaveIndicatorStoreInstance);
