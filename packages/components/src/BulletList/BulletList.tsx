@@ -1,13 +1,10 @@
-import { type ListProps as MuiListProps } from '@mui/material/List';
-
-import { type WithoutEmotionSpecific } from '../types';
+import { type PropsWithChildren } from 'react';
 
 import { Wrapper } from './styles';
 
-export type BulletListProps = Omit<
-  WithoutEmotionSpecific<MuiListProps>,
-  'dense'
->;
+export type BulletListProps = PropsWithChildren<{
+  className?: string;
+}>;
 
 /**
  * Список элементов с маркерами
