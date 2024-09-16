@@ -136,7 +136,7 @@ export type NewDataGridProps<
 
   /**
    * Опции для отображения вложенных списков
-   * Применяется если variant="tree"
+   * Применяется если variant="subrows"
    */
   subrows?: {
     /**
