@@ -1418,6 +1418,12 @@ export const NoData = () => {
         isLoading={isLoading}
         onRowClick={handleRowClick}
         onRetry={() => {}}
+        noDataOptions={{
+          action: {
+            text: 'Сбросить фильтры',
+            onClick: () => {},
+          },
+        }}
       />
     </ConfigProvider>
   );

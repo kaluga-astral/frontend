@@ -114,7 +114,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     },
     tooltipProps: {
       open: isVisibleTooltip,
-      title: isDisabled ? externalDisabledReason || disabledReason : undefined,
+      title: disabled ? externalDisabledReason || disabledReason : undefined,
       onOpen: handleOpenTooltip,
       onClose: handleCloseTooltip,
     },
