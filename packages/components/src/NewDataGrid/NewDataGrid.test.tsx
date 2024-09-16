@@ -598,6 +598,39 @@ describe('NewDataGrid', () => {
     expect(label).toBeVisible();
   });
 
+  it('Вложенные элементы отображаются по умолчанию, если variant=subrows', () => {
+    const fakeData = [
+      {
+        id: 1,
+        name: 'Group',
+        children: [
+          {
+            name: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        variant="subrows"
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).toBeVisible();
+  });
+
   it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
     const fakeData = [
       {
