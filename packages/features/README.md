@@ -107,7 +107,7 @@ import {
 class UIStore {
   constructor(
     private readonly repository: Repository,
-    private readonly autosaveIndicactorStore: AutoSaveIndicatorStore,
+    private readonly autosaveIndicatorStore: AutoSaveIndicatorStore,
   ) {
     makeAutoObservable(
       this,
@@ -119,17 +119,17 @@ class UIStore {
   }
 
   public makeMutation = (requestParam: string) => {
-    this.autosaveIndicactorStore.progress();
+    this.autosaveIndicatorStore.progress();
 
     this.repository.makeMutation
       .async({
         requestParam,
       })
       .then(() => {
-        this.autosaveIndicactorStore.success()
+        this.autosaveIndicatorStore.success()
       })
       .catch((e) => {
-        this.autosaveIndicactorStore.setError({
+        this.autosaveIndicatorStore.setError({
           message: 'Что-то пошло не так',
           onRetry: () => {
             this.makeMutation(requestParam);
