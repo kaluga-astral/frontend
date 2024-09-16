@@ -5,6 +5,9 @@ import { Dialog, type DialogProps } from '../Dialog';
 import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { DialogActions } from '../DialogActions';
+import { useViewportType } from '../hooks';
+
+import { CancelButton } from './styles';
 
 export type ConfirmDialogProps = {
   /**
@@ -55,21 +58,30 @@ export const ConfirmDialog = ({
   ...restProps
 }: ConfirmDialogProps) => {
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
+  const { isMobile } = useViewportType();
 
   const renderCancelButton = useMemo(() => {
     if (actions.cancel) {
-      const { text: cancelText, ...cancelButtonProps } = actions.cancel;
+      const {
+        text: cancelText,
+        variant = isMobile ? 'light' : 'text',
+        ...cancelButtonProps
+      } = actions.cancel;
       const handleCancelClick = actions.cancel?.onClick || onClose;
 
       return (
-        <Button {...cancelButtonProps} onClick={handleCancelClick}>
+        <CancelButton
+          variant={variant}
+          {...cancelButtonProps}
+          onClick={handleCancelClick}
+        >
           {cancelText}
-        </Button>
+        </CancelButton>
       );
     }
 
     return null;
-  }, [actions.cancel, onClose]);
+  }, [actions.cancel, onClose, isMobile]);
 
   return (
     <Dialog title={title} open={open} onClose={onClose} {...restProps}>

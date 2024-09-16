@@ -64,7 +64,7 @@ export const Example = () => {
         onClose={handleClose}
         actions={{
           confirm: { text: 'Да', onClick: handleConfirm, loading },
-          cancel: { text: 'Нет', variant: 'text' },
+          cancel: { text: 'Нет' },
         }}
       />
     </div>
