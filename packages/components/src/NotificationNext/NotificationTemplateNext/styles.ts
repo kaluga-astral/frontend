@@ -43,12 +43,12 @@ export const Header = styled.header`
   align-items: center;
 
   width: 100%;
-  min-height: 32px;
+  min-height: 24px;
 `;
 
 export const Content = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)};
-  margin-left: calc(24px + 8px);
+  margin-left: ${({ theme }) => `calc(24px + ${theme.spacing(3)})`};
 `;
 
 export const Footer = styled.footer<NotificationActionsProps>`
@@ -57,13 +57,13 @@ export const Footer = styled.footer<NotificationActionsProps>`
     getActionsDirection(actionsDirection)};
 
   width: 100%;
-  margin-top: ${({ theme }) => theme.spacing(2)};
+  margin-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 export const IconWrapper = styled.div`
   display: flex;
 
-  margin-right: ${({ theme }) => theme.spacing(2)};
+  margin-right: ${({ theme }) => theme.spacing(3)};
 `;
 
 export const CloseIcon = styled(CrossOutlineSm, {
@@ -77,6 +77,8 @@ export const CloseButton = styled(IconButton, {
 })<NotificationCloseButtonProps>`
   align-self: center;
 
+  width: 24px;
+  height: 24px;
   margin-left: ${({ theme }) => theme.spacing(4)};
   padding: 0;
 

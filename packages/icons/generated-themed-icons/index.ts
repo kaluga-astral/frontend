@@ -216,6 +216,8 @@ export { default as ProfileOutlineMd } from './ProfileOutlineMd';
 
 export { default as QuestionFillMd } from './QuestionFillMd';
 
+export { default as QuestionOutlineMd } from './QuestionOutlineMd';
+
 export { default as QuitOutlineMd } from './QuitOutlineMd';
 
 export { default as RefreshOutlineMd } from './RefreshOutlineMd';

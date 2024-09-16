@@ -721,4 +721,57 @@ describe('NewDataGrid', () => {
 
     expect(label).not.toBeInTheDocument();
   });
+
+  it('Предыдущие данные отображаются при isLoading=true', async () => {
+    type DataType = {
+      id: string;
+      documentName: string;
+    };
+
+    const pageData: DataGridRowWithOptions<DataType>[] = [
+      {
+        id: '1',
+        documentName: 'Договор №1',
+      },
+      {
+        id: '2',
+        documentName: 'Договор №2',
+      },
+    ];
+
+    const { rerender } = renderWithTheme(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={pageData}
+        onRetry={() => {}}
+      />,
+    );
+
+    rerender(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={[]}
+        isLoading={true}
+        onRetry={() => {}}
+      />,
+    );
+
+    pageData.forEach(({ documentName }) => {
+      const label = screen.getByText(documentName);
+
+      expect(label).toBeVisible();
+    });
+  });
 });
