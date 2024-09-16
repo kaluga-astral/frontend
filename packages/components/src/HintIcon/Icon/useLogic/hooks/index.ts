@@ -1,0 +1,1 @@
+export { useIconColor } from './useIconColor';
