@@ -69,6 +69,11 @@ export type DataListProps<TDataItem extends Record<string, unknown>> = {
   isEndReached?: boolean;
 
   /**
+   * Флаг достижения конца списка
+   */
+  // scrollerRef?: (element: HTMLElement | null) => void;
+
+  /**
    * Содержание карточки
    */
   itemContent: (
@@ -98,6 +103,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
   isLoading,
   isError,
   isEndReached,
+  // scrollerRef,
   onRetry,
   onEndReached,
 }: DataListProps<TDataItem>) => {
@@ -160,12 +166,15 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
         overscan={OVERSCAN_COUNT}
         endReached={handleEndReach}
         rangeChanged={handleRangeChanged}
-        itemContent={(index, item) => (
-          <Item key={item[keyId] as Key}>
-            {itemContent &&
-              itemContent(item, { index, className: ITEM_CLASSNAME })}
-          </Item>
-        )}
+        // scrollerRef={scrollerRef}
+        itemContent={(index, item) => {
+          return (
+            <Item key={item[keyId] as Key}>
+              {itemContent &&
+                itemContent(item, { index, className: ITEM_CLASSNAME })}
+            </Item>
+          );
+        }}
         components={{
           Footer: () => (
             <>
@@ -177,7 +186,6 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
           ),
         }}
       />
-
       {isStickyButtonActive && (
         <ScrollToTopButton onClick={handleScrollToTop} />
       )}
