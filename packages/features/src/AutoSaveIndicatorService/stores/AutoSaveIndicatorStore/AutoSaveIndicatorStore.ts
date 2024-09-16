@@ -2,6 +2,9 @@ import { makeAutoObservable } from 'mobx';
 
 import { AutoSaveIndicatorService } from '../../AutoSaveIndicatorService';
 
+/**
+ * Стор для декларативной работы с компонентом AutoSaveIndicator
+ */
 export class AutoSaveIndicatorStore {
   private readonly autoSaveIndicatorService: AutoSaveIndicatorService =
     new AutoSaveIndicatorService();
@@ -19,7 +22,7 @@ export class AutoSaveIndicatorStore {
   }
 
   /**
-   * Метод для индикации состояния сохранения данных
+   * Метод для отображения компонента
    */
   public get show() {
     return this.autoSaveIndicatorService.show;

@@ -4,7 +4,7 @@ import { AutoSaveIndicatorService } from './AutoSaveIndicatorService';
 import { AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE } from './constants';
 
 describe('AutoSaveIndicatorService', () => {
-  let service: AutoSaveIndicatorService;
+  let sut: AutoSaveIndicatorService;
 
   const prepareError = (message: string) => {
     return {
@@ -14,106 +14,106 @@ describe('AutoSaveIndicatorService', () => {
   };
 
   beforeEach(() => {
-    service = new AutoSaveIndicatorService();
+    sut = new AutoSaveIndicatorService();
   });
 
   describe('Инициализация сервиса', () => {
     it('Ошибка отсутствует', () => {
-      expect(service.values.isError).toBeFalsy();
+      expect(sut.values.isError).toBeFalsy();
     });
 
     it('Состояние загрузки отрицательно', () => {
-      expect(service.values.isLoading).toBeFalsy();
+      expect(sut.values.isLoading).toBeFalsy();
     });
 
     it('Состояние успеха отрицательно', () => {
-      expect(service.values.isSuccess).toBeFalsy();
+      expect(sut.values.isSuccess).toBeFalsy();
     });
 
     it('Индикатор автосохранения невидим', () => {
-      expect(service.isVisible).toBeFalsy();
+      expect(sut.isVisible).toBeFalsy();
     });
 
     it('Сообщение об ошибке эквивалентно изначальному', () => {
-      expect(service.values.errorMsg).toBe(
+      expect(sut.values.errorMsg).toBe(
         AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE.message,
       );
     });
   });
 
-  describe('Вызов метода reset', () => {
-    it('Состояние ошибки сброшено до изначального состояния', () => {
+  describe('Метод reset', () => {
+    it('Состояние ошибки будет сброшено до изначального состояния при вызове метода', () => {
       const error = prepareError('Test Error');
 
-      service.setError(error);
-      service.reset();
-      expect(service.values.isError).toBeFalsy();
+      sut.setError(error);
+      sut.reset();
+      expect(sut.values.isError).toBeFalsy();
     });
 
-    it('Состояние загрузки сброшено до изначального состояния', () => {
-      service.progress();
-      service.reset();
-      expect(service.values.isLoading).toBeFalsy();
+    it('Состояние загрузки сброшено до изначального состояния при вызове метода', () => {
+      sut.progress();
+      sut.reset();
+      expect(sut.values.isLoading).toBeFalsy();
     });
 
-    it('Состояние успеха сброшено до изначального состояния', () => {
-      expect(service.values.isSuccess).toBeFalsy();
+    it('Состояние успеха сброшено до изначального состояния при вызове метода', () => {
+      expect(sut.values.isSuccess).toBeFalsy();
     });
 
-    it('Индикатор автосохранения невидим', () => {
-      expect(service.isVisible).toBeFalsy();
+    it('Индикатор автосохранения скроется при вызове метода', () => {
+      expect(sut.isVisible).toBeFalsy();
     });
 
-    it('Сообщение об ошибке эквивалентно изначальному', () => {
+    it('Сообщение об ошибке эквивалентно изначальному при вызове метода', () => {
       const error = prepareError('Test Error');
 
-      service.setError(error);
-      service.reset();
+      sut.setError(error);
+      sut.reset();
 
-      expect(service.values.errorMsg).toBe(
+      expect(sut.values.errorMsg).toBe(
         AUTO_SAVE_INDICATOR_DEFAULT_ERROR_STATE.message,
       );
     });
   });
 
-  describe('Вызов метода setError', () => {
+  describe('Метод setError', () => {
     const errorText = 'Произошла ошибка при выполнении запроса';
 
     const error = prepareError(errorText);
 
-    it('Состояние ошибки установлено', () => {
-      service.show();
-      service.setError(error);
-      expect(service.values.isError).toBeTruthy();
+    it('Состояние ошибки установлено при вызове метода', () => {
+      sut.show();
+      sut.setError(error);
+      expect(sut.values.isError).toBeTruthy();
     });
 
-    it('Текст ошибки установлен', () => {
-      service.show();
-      service.setError(error);
-      expect(service.values.errorMsg).toBe(errorText);
+    it('Текст ошибки установлен при вызове метода', () => {
+      sut.show();
+      sut.setError(error);
+      expect(sut.values.errorMsg).toBe(errorText);
     });
   });
 
   describe('Видимость индикатора автосохранения', () => {
     it('Отображается при вызове метода show', () => {
-      service.show();
-      expect(service.isVisible).toBeTruthy();
+      sut.show();
+      expect(sut.isVisible).toBeTruthy();
     });
 
-    it('Скрыт при вызове метода hide', () => {
-      service.show();
-      service.hide();
-      expect(service.isVisible).toBeFalsy();
+    it('Скрывается при вызове метода hide', () => {
+      sut.show();
+      sut.hide();
+      expect(sut.isVisible).toBeFalsy();
     });
   });
 
   it('Состояние прогресса устанавливается при вызове метода progress', () => {
-    service.progress();
-    expect(service.values.isLoading).toBeTruthy();
+    sut.progress();
+    expect(sut.values.isLoading).toBeTruthy();
   });
 
   it('Состояние успешного автосохранения устанавливается при вызове метода success', () => {
-    service.success();
-    expect(service.values.isSuccess).toBeTruthy();
+    sut.success();
+    expect(sut.values.isSuccess).toBeTruthy();
   });
 });
