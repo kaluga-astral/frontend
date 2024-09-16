@@ -1,13 +1,13 @@
-import { type ReactNode, useMemo } from 'react';
+import { type ReactNode } from 'react';
 
 import { Button, type ButtonProps } from '../Button';
 import { Dialog, type DialogProps } from '../Dialog';
 import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { DialogActions } from '../DialogActions';
-import { useViewportType } from '../hooks';
 
 import { CancelButton } from './styles';
+import { useLogic } from './useLogic';
 
 export type ConfirmDialogProps = {
   /**
@@ -49,39 +49,12 @@ export type ConfirmDialogProps = {
   | 'open'
 >;
 
-export const ConfirmDialog = ({
-  open,
-  title,
-  description,
-  actions,
-  onClose,
-  ...restProps
-}: ConfirmDialogProps) => {
+export const ConfirmDialog = (props: ConfirmDialogProps) => {
+  const { isShowCancelButton, cancelButtonProps } = useLogic(props);
+
+  const { open, title, description, actions, onClose, ...restProps } = props;
+
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
-  const { isMobile } = useViewportType();
-
-  const renderCancelButton = useMemo(() => {
-    if (actions.cancel) {
-      const {
-        text: cancelText,
-        variant = isMobile ? 'light' : 'text',
-        ...cancelButtonProps
-      } = actions.cancel;
-      const handleCancelClick = actions.cancel?.onClick || onClose;
-
-      return (
-        <CancelButton
-          variant={variant}
-          {...cancelButtonProps}
-          onClick={handleCancelClick}
-        >
-          {cancelText}
-        </CancelButton>
-      );
-    }
-
-    return null;
-  }, [actions.cancel, onClose, isMobile]);
 
   return (
     <Dialog title={title} open={open} onClose={onClose} {...restProps}>
@@ -91,7 +64,7 @@ export const ConfirmDialog = ({
         </DialogContent>
       )}
       <DialogActions>
-        {renderCancelButton}
+        {isShowCancelButton && <CancelButton {...cancelButtonProps} />}
         <Button {...confirmButtonProps}>{confirmText}</Button>
       </DialogActions>
     </Dialog>
