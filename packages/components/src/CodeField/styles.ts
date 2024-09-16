@@ -18,6 +18,9 @@ export const DigitsWrapper = styled.ul`
 export const DigitsItem = styled.li`
   flex-grow: 1;
 
+  min-width: 44px;
+  max-width: 60px;
+
   list-style-type: none;
 `;
 
