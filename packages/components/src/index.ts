@@ -140,6 +140,8 @@ export * from './Grid';
 
 export * from './Grow';
 
+export { HintIcon, type HintIconProps } from './HintIcon';
+
 export * from './hooks';
 
 export * from './IconButton';
