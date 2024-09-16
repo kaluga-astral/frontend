@@ -32,6 +32,7 @@ export const getNotificationTemplateStyles = (
       color: theme.palette.primary.contrastText,
       background: theme.palette.red[600],
     },
+    progress: defaultColors,
   };
 
   return stylesMap[variant];
