@@ -1,4 +1,10 @@
-import { type ChangeEvent, useCallback, useMemo } from 'react';
+import {
+  type ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 import { prop, uniqueBy } from '../../utils';
 import { type NewDataGridProps } from '../NewDataGrid';
@@ -17,7 +23,7 @@ export const useLogic = <
 >({
   keyId,
   columns,
-  rows,
+  rows = [],
   selectedRows = [],
   isLoading,
   isDisabled,
@@ -30,6 +36,14 @@ export const useLogic = <
   const availableRows = rows.filter(
     (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
   );
+
+  const prevRowsRef = useRef<TData[]>([]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      prevRowsRef.current = rows;
+    }
+  }, [rows, isLoading]);
 
   const gridColumns = getGridTemplateColumns(columns);
 
@@ -89,6 +103,8 @@ export const useLogic = <
     [selectedRows, onSelectRow, keyId],
   );
 
+  const renderRows = isLoading ? prevRowsRef.current : rows;
+
   return {
     isDataGridDisabled,
     headProps: {
@@ -108,5 +124,6 @@ export const useLogic = <
       isLoading: isNoData && isLoading,
       isDisabled,
     },
+    renderRows,
   };
 };

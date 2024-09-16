@@ -3,6 +3,7 @@ export enum NotificationVariantTypes {
   success = 'success',
   warning = 'warning',
   error = 'error',
+  progress = 'progress',
 }
 
 export const NOTIFY_POSITIONS = {
