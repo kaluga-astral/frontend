@@ -96,9 +96,10 @@ export const VisibleLastSymbols = () => {
   return (
     <div style={{ maxWidth: '200px' }}>
       <OverflowTypography visibleLastSymbolsCount={10}>
-        With custom tooltip settings. Lorem ipsum dolor sit amet, consecrate
-        adipisicing elit. Assumenda autem debitis eligendi inventore magni nobis
-        perspiciatis quisquam ratione, unde vel?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi
+        consectetur corporis dolores eos, esse eum expedita hic minima
+        molestias, nobis odio qui quisquam rem saepe ut, velit voluptate
+        voluptates!
       </OverflowTypography>
     </div>
   );
