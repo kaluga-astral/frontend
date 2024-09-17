@@ -8,6 +8,7 @@ import { Cell } from '../Cell';
 import { HIDDEN_CHILDREN_ROW_CLASSNAME } from './constants';
 
 export const Wrapper = styled.li<{
+  $isShowConnector: boolean;
   $gridColumns: string;
   $level: number;
 }>`
@@ -23,6 +24,8 @@ export const Wrapper = styled.li<{
     transform: ${({ $level }) =>
       `translateX(calc(${ROOT_ACTION_CELL_WIDTH}px * ${$level} - ${TREE_LINE_WIDTH}px))`};
 
+    display: ${({ $isShowConnector }) => ($isShowConnector ? 'block' : 'none')};
+
     width: 0;
     height: 100%;
 
@@ -31,6 +34,7 @@ export const Wrapper = styled.li<{
 `;
 
 export const ContentWrapper = styled.div<{
+  $isShowConnector: boolean;
   $isHovered?: boolean;
   $isSelected?: boolean;
   $gridColumns: string;
@@ -57,6 +61,8 @@ export const ContentWrapper = styled.div<{
     top: 0;
     transform: ${({ $level }) =>
       `translateX(calc(${ROOT_ACTION_CELL_WIDTH}px * ${$level} - ${TREE_LINE_WIDTH}px))`};
+
+    display: ${({ $isShowConnector }) => ($isShowConnector ? 'block' : 'none')};
 
     width: ${TREE_LINE_WIDTH}px;
     height: 50%;

@@ -2,6 +2,7 @@ import { type ChangeEvent, type ReactNode, useCallback } from 'react';
 
 import { Checkbox } from '../../Checkbox';
 import { Tooltip } from '../../Tooltip';
+import { Variant } from '../enums';
 import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
 import { checkIsDisabled } from './utils';
@@ -40,6 +41,11 @@ export type RowProps<TData extends Record<string, CellValue>> = {
   columns: DataGridColumns<TData>[];
 
   /**
+   * Вариант отображения вложенных элементов
+   */
+  variant: `${Variant}`;
+
+  /**
    * Конфигурация ширины колонок
    */
   gridColumns: string;
@@ -73,6 +79,12 @@ export type RowProps<TData extends Record<string, CellValue>> = {
    * Количество отображаемых по умолчанию дочерних элементов
    */
   initialVisibleChildrenCount: number;
+
+  /**
+   * Номер колонки, в которой будет расположена кнопка "Показать все"
+   * Работает только для `variant="subrows"`
+   */
+  moreButtonColumnPosition: number;
 
   /**
    * Если true, то будет отображаться чекбокс для выбора элемента
@@ -111,6 +123,7 @@ export const Row = <TData extends Record<string, CellValue>>(
 ) => {
   const {
     isOpen,
+    isShowConnector,
     childrenColumns,
     rowId,
     handleToggle,
@@ -125,6 +138,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     className,
     row,
     options,
+    variant,
     isSelectable,
     gridColumns,
     isInitialExpanded,
@@ -132,6 +146,7 @@ export const Row = <TData extends Record<string, CellValue>>(
     level,
     nestedChildren,
     initialVisibleChildrenCount,
+    moreButtonColumnPosition,
     columns,
     emptyCellValue,
     selectedRows,
@@ -147,13 +162,18 @@ export const Row = <TData extends Record<string, CellValue>>(
   const { isDisabledLastCell = true, isNotSelectable } = options || {};
 
   const renderStartAdornment = () => {
-    if (!nestedChildren?.length && (!isSelectable || isNotSelectable)) {
+    const isTreeVariant = Object.is(variant, Variant.Tree);
+
+    if (
+      (!nestedChildren?.length || !isTreeVariant) &&
+      (!isSelectable || isNotSelectable)
+    ) {
       return null;
     }
 
     return (
       <>
-        {nestedChildren?.length && (
+        {nestedChildren?.length && isTreeVariant && (
           <CollapseCell>
             <CollapseButton variant="text" onClick={handleToggle}>
               <ChevronIcon $isActive={isOpen} />
@@ -215,12 +235,14 @@ export const Row = <TData extends Record<string, CellValue>>(
         key={key}
         keyId={keyId}
         {...nestedRowProps}
+        variant={variant}
         isSelectable={isSelectable}
         selectedRows={selectedRows}
         gridColumns={gridColumns}
         isInitialExpanded={isInitialExpanded}
         expandedLevel={expandedLevel}
         initialVisibleChildrenCount={initialVisibleChildrenCount}
+        moreButtonColumnPosition={moreButtonColumnPosition}
         activeRowId={activeRowId}
         columns={childrenColumns}
         onSelectRow={onSelectRow}
@@ -229,12 +251,14 @@ export const Row = <TData extends Record<string, CellValue>>(
     ),
     [
       keyId,
+      variant,
       isSelectable,
       selectedRows,
       gridColumns,
       isInitialExpanded,
       expandedLevel,
       initialVisibleChildrenCount,
+      moreButtonColumnPosition,
       activeRowId,
       childrenColumns,
       onSelectRow,
@@ -245,6 +269,7 @@ export const Row = <TData extends Record<string, CellValue>>(
   return (
     <Wrapper
       $level={level}
+      $isShowConnector={isShowConnector}
       $gridColumns={gridColumns}
       className={className}
       {...selfProps}
@@ -252,6 +277,7 @@ export const Row = <TData extends Record<string, CellValue>>(
       <Tooltip followCursor arrow={false} {...tooltipProps}>
         <ContentWrapper
           $level={level}
+          $isShowConnector={isShowConnector}
           $gridColumns={gridColumns}
           {...{ [DISABLE_ROW_ATTR]: disabled }}
           {...rowProps}
@@ -265,7 +291,10 @@ export const Row = <TData extends Record<string, CellValue>>(
         data={nestedChildren as Array<TData>}
         keyId={keyId as string}
         level={level}
+        variant={variant}
+        gridColumns={gridColumns}
         initialVisibleChildrenCount={initialVisibleChildrenCount}
+        moreButtonColumnPosition={moreButtonColumnPosition}
         // @ts-ignore
         renderRow={renderRow}
       />

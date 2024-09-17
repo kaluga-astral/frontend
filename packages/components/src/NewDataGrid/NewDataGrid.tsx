@@ -7,6 +7,7 @@ import {
   INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
   MIN_DISPLAY_ROWS_BY_DEFAULT,
 } from './constants';
+import { Variant } from './enums';
 import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
@@ -104,7 +105,14 @@ export type NewDataGridProps<
   errorMsg?: string;
 
   /**
+   * Вариант отображения вложенных элементов
+   * @default 'tree'
+   */
+  variant?: `${Variant}`;
+
+  /**
    * Опции для отображения древовидных списков
+   * Применяется если variant="tree"
    */
   tree?: {
     /**
@@ -124,6 +132,30 @@ export type NewDataGridProps<
      * @default '2'
      */
     initialVisibleChildrenCount?: number;
+  };
+
+  /**
+   * Опции для отображения вложенных списков
+   * Применяется если variant="subrows"
+   */
+  subrows?: {
+    /**
+     * Уровень раскрытия дочерних элементов по умолчанию, при `isInitialExpanded=true`
+     * @default '1'
+     */
+    expandedLevel?: number;
+
+    /**
+     * Количество отображаемых по умолчанию дочерних элементов
+     * @default '2'
+     */
+    initialVisibleChildrenCount?: number;
+
+    /**
+     * Номер колонки, в которой будет расположена кнопка "Показать все"
+     * @default 1
+     */
+    moreButtonColumnPosition?: number;
   };
 
   /**
@@ -170,8 +202,15 @@ export const NewDataGrid = <
 >(
   props: NewDataGridProps<TData, TSortField>,
 ) => {
-  const { isDataGridDisabled, headProps, bodyProps, loaderProps, renderRows } =
-    useLogic(props);
+  const {
+    isDataGridDisabled,
+    treeRenderConfig,
+    headProps,
+    bodyProps,
+    loaderProps,
+    renderRows,
+  } = useLogic(props);
+
   const { emptySymbol } = useContext(ConfigContext);
 
   const {
@@ -181,11 +220,12 @@ export const NewDataGrid = <
     maxHeight,
     minDisplayRows = MIN_DISPLAY_ROWS_BY_DEFAULT,
     errorMsg,
+    variant = Variant.Tree,
     footer,
     noDataPlaceholder,
     isLoading,
     isError,
-    tree,
+    subrows,
     keyId,
     activeRowId,
     emptyCellValue = emptySymbol,
@@ -196,11 +236,13 @@ export const NewDataGrid = <
     onRetry,
   } = props;
 
+  const { moreButtonColumnPosition = 1 } = subrows || {};
+
   const {
     isInitialExpanded = false,
     expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
     initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
-  } = tree || {};
+  } = treeRenderConfig || {};
 
   const TableContainer = isDataGridDisabled
     ? DisabledDataGridWrapper
@@ -231,10 +273,12 @@ export const NewDataGrid = <
           minDisplayRows={minDisplayRows}
           rows={renderRows}
           columns={columns}
+          variant={variant}
           emptyCellValue={emptyCellValue}
           isInitialExpanded={isInitialExpanded}
           expandedLevel={expandedLevel}
           initialVisibleChildrenCount={initialVisibleChildrenCount}
+          moreButtonColumnPosition={moreButtonColumnPosition}
           isLoading={isLoading}
           isError={isError}
           errorMsg={errorMsg}

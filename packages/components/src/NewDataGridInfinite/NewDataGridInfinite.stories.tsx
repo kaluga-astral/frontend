@@ -427,8 +427,8 @@ export const TreeWithOptionIsNotSelectable = () => {
       },
       children: [
         {
-          id: '1234567890',
-          documentName: 'Договор №12345678',
+          id: '1234567891',
+          documentName: 'Договор 1234567891',
           recipient: 'ПАО "Первый завод"',
           createDate: makeRandomDate(),
         },
@@ -579,6 +579,175 @@ export const TreeWithOverrideColumns = () => {
           isLoading={isLoading}
           isEndReached={isEndReached}
           columns={columns}
+          selectedRows={selected}
+          onSelectRow={handleSelect}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
+/**
+ * Возможно отображение дочерних элементов в виде вложенных строк. Для этого необходимо указать `variant="subrows"`
+ * В таком варианте отображения вложенные элементы отображаются сразу и только часть из них прячется под кнопку "Показать все"
+ */
+export const Subrows = () => {
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <DataGridActionCell actions={FAKE_ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'УКД № 47',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        childrenColumns: [
+          {
+            field: 'recipient',
+            renderCell: () => null,
+          },
+          {
+            field: 'actions',
+            renderCell: () => null,
+          },
+        ],
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Акт № УТ000006319',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+        {
+          id: '1234567891',
+          documentName: 'Торг-12 № 1446',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+        {
+          id: '1234567892',
+          documentName: 'Счет-фактура №1237',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+      ],
+    },
+    {
+      id: '1234544545',
+      documentName: 'УКД № 46',
+      recipient: 'ООО "Купи Продай"',
+      createDate: makeRandomDate(),
+      options: {
+        childrenColumns: [
+          {
+            field: 'recipient',
+            renderCell: () => null,
+          },
+          {
+            field: 'actions',
+            renderCell: () => null,
+          },
+        ],
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Счет-фактура №1231',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+      ],
+    },
+    ...makeDataList(8),
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          variant="subrows"
+          subrows={{
+            moreButtonColumnPosition: 2,
+          }}
           selectedRows={selected}
           onSelectRow={handleSelect}
           onEndReached={incrementData}
