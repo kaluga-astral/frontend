@@ -12,10 +12,9 @@ export const useLogic = ({ actions, onClose }: UseLogicParams) => {
   const cancelVariant = isMobile ? 'light' : 'text';
   const handleCancelClick = cancel?.onClick || onClose;
 
-  const { text, variant = cancelVariant, ...restProps } = actions?.cancel || {};
+  const { variant = cancelVariant, ...restProps } = actions?.cancel || {};
 
   const cancelButtonProps = {
-    children: text,
     variant,
     onClick: handleCancelClick,
     ...restProps,
