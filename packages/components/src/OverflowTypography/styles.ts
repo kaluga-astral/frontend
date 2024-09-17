@@ -31,6 +31,8 @@ export const Wrapper = styled(Typography, {
   shouldForwardProp: (prop) => !['$align'].includes(prop),
 })<{ $align: string }>`
   display: flex;
-  white-space: nowrap;
+
   justify-content: ${({ $align }) => $align};
+
+  white-space: nowrap;
 `;
