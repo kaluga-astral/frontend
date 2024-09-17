@@ -1317,6 +1317,153 @@ export const TreeWithOverrideColumns = () => {
 };
 
 /**
+ * Возможно отображение дочерних элементов в виде вложенных строк. Для этого необходимо указать `variant="subrows"`
+ * В таком варианте отображения вложенные элементы отображаются сразу и только часть из них прячется под кнопку "Показать все"
+ */
+export const Subrows = () => {
+  const columns: DataGridColumns<DataType>[] = [
+    {
+      field: 'recipient',
+      label: 'Получатель',
+      sortable: true,
+    },
+    {
+      field: 'documentName',
+      label: 'Наименование документа',
+      sortable: true,
+    },
+    {
+      field: 'createDate',
+      label: 'Дата создания',
+      sortable: true,
+      format: ({ createDate }) => new Date(createDate).toLocaleDateString(),
+    },
+    {
+      field: 'actions',
+      label: 'Действия',
+      sortable: false,
+      align: 'center',
+      width: '120px',
+      renderCell: (row) => {
+        return <DataGridActionCell actions={FAKE_ACTIONS} row={row} />;
+      },
+    },
+  ];
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'УКД № 47',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        childrenColumns: [
+          {
+            field: 'recipient',
+            renderCell: () => null,
+          },
+          {
+            field: 'actions',
+            renderCell: () => null,
+          },
+        ],
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Акт № УТ000006319',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+        {
+          id: '1234567891',
+          documentName: 'Торг-12 № 1446',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+        {
+          id: '1234567892',
+          documentName: 'Счет-фактура №1237',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+      ],
+    },
+    {
+      id: '1234544545',
+      documentName: 'УКД № 46',
+      recipient: 'ООО "Купи Продай"',
+      createDate: makeRandomDate(),
+      options: {
+        childrenColumns: [
+          {
+            field: 'recipient',
+            renderCell: () => null,
+          },
+          {
+            field: 'actions',
+            renderCell: () => null,
+          },
+        ],
+      },
+      children: [
+        {
+          id: '1234567890',
+          documentName: 'Счет-фактура №1231',
+          recipient: 'ПАО "Первый завод"',
+          createDate: makeRandomDate(),
+          options: {
+            isNotSelectable: true,
+          },
+        },
+      ],
+    },
+    ...makeDataList(FAKE_DATA_TEMPLATE),
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  return (
+    <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      variant="subrows"
+      subrows={{
+        moreButtonColumnPosition: 2,
+      }}
+      isLoading={isLoading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
+/**
  * Состояние загрузки регулируется полем `loading` экшенов переданных в `<ActionCell/>`
  */
 export const WithLoaderInButton = () => {

@@ -60,7 +60,10 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
+    "@astral/features": "^3.0.0",
     "@astral/tests": "*",
+    "mobx": "6.6.2",
+    "mobx-react-lite": "3.4.0",
     "ts-node": "^10.9.2"
   }
 }

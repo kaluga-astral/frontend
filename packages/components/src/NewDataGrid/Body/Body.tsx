@@ -5,6 +5,7 @@ import { ContentState } from '../../ContentState';
 import { DataGridContextProvider } from '../DataGridContext';
 import { Row } from '../Row';
 import { RowContextProvider } from '../Row/RowContext';
+import type { Variant } from '../enums';
 import type { CellValue, DataGridColumns, DataGridRowOptions } from '../types';
 
 import { useLogic } from './useLogic';
@@ -63,6 +64,12 @@ export type BodyProps<TData extends Record<string, CellValue>> = {
   initialVisibleChildrenCount: number;
 
   /**
+   * Номер колонки, в которой будет расположена кнопка "Показать все"
+   * Работает только для `variant="subrows"`
+   */
+  moreButtonColumnPosition: number;
+
+  /**
    * Если true, то будет отображаться чекбокс для выбора элемента
    */
   isSelectable?: boolean;
@@ -76,6 +83,11 @@ export type BodyProps<TData extends Record<string, CellValue>> = {
    * Массив данных для отображения
    */
   rows: Array<TData & { options?: DataGridRowOptions<TData> }>;
+
+  /**
+   * Вариант отображения вложенных элементов
+   */
+  variant: `${Variant}`;
 
   /**
    * Используется для отображения переданного кол-ва строк при отсутствии данных

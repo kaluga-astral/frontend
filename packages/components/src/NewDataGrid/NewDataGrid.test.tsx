@@ -598,6 +598,39 @@ describe('NewDataGrid', () => {
     expect(label).toBeVisible();
   });
 
+  it('Вложенные элементы отображаются по умолчанию, если variant=subrows', () => {
+    const fakeData = [
+      {
+        id: 1,
+        name: 'Group',
+        children: [
+          {
+            name: 'Item 1',
+          },
+        ],
+      },
+    ];
+
+    renderWithTheme(
+      <NewDataGrid
+        keyId="name"
+        variant="subrows"
+        columns={[
+          {
+            field: 'name',
+            label: 'Наименование',
+          },
+        ]}
+        rows={fakeData}
+        onRetry={() => {}}
+      />,
+    );
+
+    const label = screen.queryByText('Item 1');
+
+    expect(label).toBeVisible();
+  });
+
   it('Вложенные элементы не отображаются по умолчанию, если находятся вне диапазона expandedLevel при isInitialExpanded=true', () => {
     const fakeData = [
       {
@@ -720,5 +753,58 @@ describe('NewDataGrid', () => {
     const label = screen.queryByText('Показать все');
 
     expect(label).not.toBeInTheDocument();
+  });
+
+  it('Предыдущие данные отображаются при isLoading=true', async () => {
+    type DataType = {
+      id: string;
+      documentName: string;
+    };
+
+    const pageData: DataGridRowWithOptions<DataType>[] = [
+      {
+        id: '1',
+        documentName: 'Договор №1',
+      },
+      {
+        id: '2',
+        documentName: 'Договор №2',
+      },
+    ];
+
+    const { rerender } = renderWithTheme(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={pageData}
+        onRetry={() => {}}
+      />,
+    );
+
+    rerender(
+      <NewDataGrid
+        keyId="id"
+        columns={[
+          {
+            field: 'documentName',
+            label: 'Наименование',
+          },
+        ]}
+        rows={[]}
+        isLoading={true}
+        onRetry={() => {}}
+      />,
+    );
+
+    pageData.forEach(({ documentName }) => {
+      const label = screen.getByText(documentName);
+
+      expect(label).toBeVisible();
+    });
   });
 });
