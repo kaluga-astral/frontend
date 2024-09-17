@@ -90,7 +90,8 @@ export const TooltipProps = () => {
 };
 
 /**
- * Prop `visibleLastSymbolsCount` позволяет задавать число отображаемых символов после сокращения
+ * Prop `visibleLastSymbolsCount` позволяет задавать число отображаемых символов после сокращения,
+ * при использовании `visibleLastSymbolsCount` не работает props `rowsCount`
  */
 export const VisibleLastSymbols = () => {
   return (
