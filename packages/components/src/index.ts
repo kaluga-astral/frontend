@@ -21,6 +21,10 @@ export * from './Badge';
 
 export * from './Breadcrumbs';
 
+export { type BulletListProps, BulletList } from './BulletList';
+
+export { type BulletListItemProps, BulletListItem } from './BulletListItem';
+
 export * from './Button';
 
 export * from './ButtonBase';
@@ -139,6 +143,8 @@ export * from './GlobalStyles';
 export * from './Grid';
 
 export * from './Grow';
+
+export { HintIcon, type HintIconProps } from './HintIcon';
 
 export * from './hooks';
 

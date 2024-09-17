@@ -208,13 +208,13 @@ export const NewDataGrid = <
     headProps,
     bodyProps,
     loaderProps,
+    renderRows,
   } = useLogic(props);
 
   const { emptySymbol } = useContext(ConfigContext);
 
   const {
     columns,
-    rows = [],
     selectedRows = [],
     sorting,
     maxHeight,
@@ -271,7 +271,7 @@ export const NewDataGrid = <
           keyId={keyId}
           selectedRows={selectedRows}
           minDisplayRows={minDisplayRows}
-          rows={rows}
+          rows={renderRows}
           columns={columns}
           variant={variant}
           emptyCellValue={emptyCellValue}

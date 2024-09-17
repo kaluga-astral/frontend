@@ -3,14 +3,17 @@ import { SvgIcon, type SvgIconProps } from '@mui/material';
 
 const InfoOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
   <SvgIcon
-    viewBox="0 0 80 80"
+    viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
     height="1em"
     fill="currentColor"
     {...props}
   >
-    <path d="M51.7 68.3a30.8 30.8 0 1 1-23.5-57 30.8 30.8 0 0 1 23.5 57Zm-27 8.2A39.6 39.6 0 1 0 55.2 3.3a39.6 39.6 0 0 0-30.3 73.2ZM40 31a4.4 4.4 0 0 1 4.4 4.4v22a4.4 4.4 0 1 1-8.9 0v-22A4.4 4.4 0 0 1 40 31Zm0-13.2a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8Z" />
+    <path
+      fillRule="evenodd"
+      d="M14.679 18.467A7.001 7.001 0 0 1 5 12a7 7 0 1 1 9.679 6.467zm-6.123 1.848a9 9 0 1 0 6.888-16.63 9 9 0 0 0-6.888 16.63zM12 10a1 1 0 0 1 1 1v5a1 1 0 0 1-2 0v-5a1 1 0 0 1 1-1zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+    />
   </SvgIcon>
 );
 
