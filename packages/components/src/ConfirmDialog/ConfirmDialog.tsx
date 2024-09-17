@@ -59,6 +59,7 @@ export const ConfirmDialog = (props: ConfirmDialogProps) => {
   const {
     text: cancelText,
     variant,
+    onClick,
     ...restCancelProps
   } = actions.cancel || {};
 
