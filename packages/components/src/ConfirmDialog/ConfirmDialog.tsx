@@ -56,7 +56,11 @@ export const ConfirmDialog = (props: ConfirmDialogProps) => {
 
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
 
-  const { text: cancelText } = actions.cancel || {};
+  const {
+    text: cancelText,
+    variant,
+    ...restCancelProps
+  } = actions.cancel || {};
 
   return (
     <Dialog title={title} open={open} onClose={onClose} {...restProps}>
@@ -67,7 +71,9 @@ export const ConfirmDialog = (props: ConfirmDialogProps) => {
       )}
       <DialogActions>
         {isShowCancelButton && (
-          <CancelButton {...cancelButtonProps}>{cancelText}</CancelButton>
+          <CancelButton {...restCancelProps} {...cancelButtonProps}>
+            {cancelText}
+          </CancelButton>
         )}
         <Button {...confirmButtonProps}>{confirmText}</Button>
       </DialogActions>
