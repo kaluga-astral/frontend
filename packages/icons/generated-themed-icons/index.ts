@@ -402,8 +402,6 @@ export { default as DocIncomingOutlineMd } from './DocIncomingOutlineMd';
 
 export { default as DocNoSignatureOutlineMd } from './DocNoSignatureOutlineMd';
 
-export { default as DocOutcomingOutlineMd } from './DocOutcomingOutlineMd';
-
 export { default as OutcomingDocumentOutlineMd } from './OutcomingDocumentOutlineMd';
 
 export { default as ProxyOutlineMd } from './ProxyOutlineMd';
