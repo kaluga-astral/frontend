@@ -47,6 +47,8 @@ export * from './CollapsibleTypography';
 
 export * from './ConfigProvider';
 
+export { ConfirmAction, type ConfirmActionProps } from './ConfirmAction';
+
 export * from './ConfirmDialog';
 
 export * from './ContentState';
