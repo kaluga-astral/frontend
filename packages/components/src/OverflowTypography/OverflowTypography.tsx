@@ -66,20 +66,20 @@ export const OverflowTypography = forwardRef<
     children,
     rowsCount = DEFAULT_ROWS_COUNT,
     visibleLastSymbolsCount,
+    align = 'left',
     ...restProps
   } = props;
 
   const typographyProps = {
     ...restProps,
     ref,
+    align,
     children,
     rowsCount,
     hasMultipleRows: rowsCount > DEFAULT_ROWS_COUNT,
   };
 
   if (isTruncatedStringVisible) {
-    const { align = 'left' } = props;
-
     return (
       <Tooltip title={children} disableInteractive {...tooltipProps}>
         <Wrapper $align={align}>
