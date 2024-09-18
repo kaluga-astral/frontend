@@ -148,8 +148,6 @@ export { default as DocumentsOutlineMd } from './DocumentsOutlineMd';
 
 export { default as DocumentsOutlineSm } from './DocumentsOutlineSm';
 
-export { default as DotMdOutlineSm } from './DotMdOutlineSm';
-
 export { default as DotOutlineSm } from './DotOutlineSm';
 
 export { default as DotsOutlineMd } from './DotsOutlineMd';
