@@ -38,6 +38,7 @@ export const CopyTypography = (props: CopyTypographyProps) => {
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
         component="div"
+        color={color}
         {...restProps}
       >
         {copyPosition === 'left' && (
