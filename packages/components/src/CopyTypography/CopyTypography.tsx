@@ -15,7 +15,7 @@ export type CopyTypographyProps = TypographyProps & {
    */
   copyPosition?: 'right' | 'left';
   /**
-   * Показывает в тултипе текст, который будет скопирован при нажатии
+   * Если `true`, в тултипе будет отображаться текст, который будет скопирован при нажатии
    */
   isShowCopyText?: boolean;
 };
@@ -37,15 +37,22 @@ export const CopyTypography = (props: CopyTypographyProps) => {
       <Wrapper
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        $copyPosition={copyPosition}
         component="div"
         {...restProps}
       >
+        {copyPosition === 'left' && (
+          <StyledCopyIcon
+            $copyPosition={copyPosition}
+            color={color as 'secondary'}
+          />
+        )}
         {children}
-        <StyledCopyIcon
-          $copyPosition={copyPosition}
-          color={color as 'secondary'}
-        />
+        {copyPosition === 'right' && (
+          <StyledCopyIcon
+            $copyPosition={copyPosition}
+            color={color as 'secondary'}
+          />
+        )}
       </Wrapper>
     </Tooltip>
   );

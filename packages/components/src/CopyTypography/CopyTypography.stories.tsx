@@ -9,7 +9,7 @@ import { CopyTypography } from './CopyTypography';
 /**
  * ### [Figma]()
  * ### [Guide]()
- * Компонент является оберткой для других компонентов и позволяет скопировать текст в буфер обмена
+ * Компонент позволяет скопировать содержимое в буфер обмена
  */
 
 const meta: Meta<typeof CopyTypography> = {
@@ -36,16 +36,15 @@ export const Interaction: Story = {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
+const OverflowWrapper = styled.div`
+  width: 150px;
+`;
+
 export const Example = () => {
-  return (
-    <CopyTypography copyText="Швецова М. Д.">
-      <Typography>Швецова М. Д.</Typography>
-    </CopyTypography>
-  );
+  return <CopyTypography>Швецова М. Д.</CopyTypography>;
 };
 
 /**
@@ -79,16 +78,16 @@ export const CopyText = () => {
 
 /**
  * prop `isShowCopyText` показывает в тултипе текст, который будет скопирован.
- * Необходимо так же убирать тултип вложенных компонентов для избежания их наложения
+ * Необходимо отключать тултип у вложенных компонентов, при их наличии, для избежания их наложения
  */
 export const IsShowCopyText = () => {
   return (
-    <Wrapper>
+    <OverflowWrapper>
       <CopyTypography copyText="Швецова Мария Дмитриевна" isShowCopyText>
         <OverflowTypography tooltipProps={{ title: undefined }}>
           Швецова Мария Дмитриевна
         </OverflowTypography>
       </CopyTypography>
-    </Wrapper>
+    </OverflowWrapper>
   );
 };
