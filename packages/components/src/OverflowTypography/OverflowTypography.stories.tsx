@@ -40,7 +40,7 @@ const Wrapper = styled.div`
 export const Example = () => {
   return (
     <Wrapper>
-      <OverflowTypography align="right">
+      <OverflowTypography>
         Not enough long text for special behavior.
       </OverflowTypography>
       <br />
