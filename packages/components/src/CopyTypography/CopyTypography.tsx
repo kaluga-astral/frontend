@@ -5,8 +5,19 @@ import { StyledCopyIcon, Wrapper } from './styles';
 import { useLogic } from './useLogic';
 
 export type CopyTypographyProps = TypographyProps & {
+  /**
+   * Текст, который будет скопирован. Перекрывает обычное копирование если children является строкой
+   */
   copyText?: string;
+  /**
+   * Отображает иконку слева или справа от текста
+   * @default right
+   */
   copyPosition?: 'right' | 'left';
+  /**
+   * Показывает в тултипе текст, который будет скопирован при нажатии
+   */
+  isShowCopyText?: boolean;
 };
 
 export const CopyTypography = (props: CopyTypographyProps) => {
@@ -14,14 +25,15 @@ export const CopyTypography = (props: CopyTypographyProps) => {
     children,
     copyPosition = 'right',
     copyText,
+    isShowCopyText,
     color,
     ...restProps
   } = props;
 
-  const { handleMouseLeave, status, handleClick } = useLogic(props);
+  const { handleMouseLeave, handleClick, tooltipTitle } = useLogic(props);
 
   return (
-    <Tooltip title={status} disableInteractive placement="bottom">
+    <Tooltip title={tooltipTitle} disableInteractive placement="bottom">
       <Wrapper
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}

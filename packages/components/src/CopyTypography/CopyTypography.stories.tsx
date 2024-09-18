@@ -2,6 +2,7 @@ import { type Meta, type StoryObj } from '@storybook/react';
 
 import { Typography } from '../Typography';
 import { styled } from '../styles';
+import { OverflowTypography } from '../OverflowTypography';
 
 import { CopyTypography } from './CopyTypography';
 
@@ -35,6 +36,7 @@ export const Interaction: Story = {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 200px;
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
@@ -70,6 +72,22 @@ export const CopyText = () => {
       </CopyTypography>
       <CopyTypography copyText="Швецова М. Д.">
         <Typography>Швецова М. Д.</Typography>
+      </CopyTypography>
+    </Wrapper>
+  );
+};
+
+/**
+ * prop `isShowCopyText` показывает в тултипе текст, который будет скопирован.
+ * Необходимо так же убирать тултип вложенных компонентов для избежания их наложения
+ */
+export const IsShowCopyText = () => {
+  return (
+    <Wrapper>
+      <CopyTypography copyText="Швецова Мария Дмитриевна" isShowCopyText>
+        <OverflowTypography tooltipProps={{ title: undefined }}>
+          Швецова Мария Дмитриевна
+        </OverflowTypography>
       </CopyTypography>
     </Wrapper>
   );

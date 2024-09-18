@@ -5,7 +5,11 @@ import { CopyStatus } from '../enums';
 
 type UseLogicParams = CopyTypographyProps;
 
-export const useLogic = ({ children, copyText }: UseLogicParams) => {
+export const useLogic = ({
+  children,
+  copyText,
+  isShowCopyText,
+}: UseLogicParams) => {
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
 
   const handleMouseLeave = () => {
@@ -25,5 +29,7 @@ export const useLogic = ({ children, copyText }: UseLogicParams) => {
       .catch(() => setStatus(CopyStatus.Error));
   };
 
-  return { handleMouseLeave, handleClick, status };
+  const tooltipTitle = isShowCopyText ? `${status}: ${copyText}` : status;
+
+  return { handleMouseLeave, handleClick, tooltipTitle };
 };
