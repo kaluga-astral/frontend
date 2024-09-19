@@ -1,14 +1,10 @@
-import { type TypographyProps } from '../Typography';
-import { OverflowTypography } from '../OverflowTypography';
+import {
+  OverflowTypography,
+  type OverflowedTypographyProps,
+} from '../OverflowTypography';
 
-export type GuidTypographyProps = TypographyProps;
+export type GuidTypographyProps = OverflowedTypographyProps;
 
 export const GuidTypography = (props: GuidTypographyProps) => {
-  return (
-    <OverflowTypography
-      visibleLastSymbolsCount={4}
-      tooltipProps={{ title: undefined }}
-      {...props}
-    />
-  );
+  return <OverflowTypography visibleLastSymbolsCount={4} {...props} />;
 };

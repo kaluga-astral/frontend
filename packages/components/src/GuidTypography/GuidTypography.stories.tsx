@@ -44,7 +44,8 @@ export const Example = () => {
 };
 
 /**
- * Для возможности копирования `guid` необходимо использовать CopyTypography и пропс `copyText`
+ * Для возможности копирования `guid` необходимо использовать CopyTypography и пропс `copyText`.
+ * Необходимо отключать тултип через `tooltipProps` для избежания их наложения.
  */
 
 export const CopyGuid = () => {
@@ -53,7 +54,9 @@ export const CopyGuid = () => {
   return (
     <CopyTypography copyText={guid} isShowCopyText>
       <Wrapper>
-        <GuidTypography>{guid}</GuidTypography>
+        <GuidTypography tooltipProps={{ title: undefined }}>
+          {guid}
+        </GuidTypography>
       </Wrapper>
     </CopyTypography>
   );
