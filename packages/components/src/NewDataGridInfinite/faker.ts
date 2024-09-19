@@ -22,12 +22,20 @@ export const makeRandomDate = () => {
   return randomDate.toISOString();
 };
 
-export const makeDataList = (length: number = 10): DataType[] => {
+export const makeDataList = (
+  length: number = 10,
+  options?: {
+    isDisabled?: boolean;
+    isDisabledLastCell?: boolean;
+    disabledReason?: string;
+  },
+): DataType[] => {
   return Array.from({ length }).map((_, i) => ({
     id: faker.string.uuid(),
     documentName: `Договор №${i + 1}`,
     recipient: RECIPIENTS[Math.floor(Math.random() * RECIPIENTS.length)],
     createDate: makeRandomDate(),
+    options: Math.random() < 0.4 ? options : {},
   }));
 };
 

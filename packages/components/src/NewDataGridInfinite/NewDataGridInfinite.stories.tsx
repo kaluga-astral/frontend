@@ -165,6 +165,142 @@ export const Example = () => {
   );
 };
 
+export const WithDisabledRow = () => {
+  const columns = FAKE_COLUMNS;
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        isDisabled: true,
+        disabledReason: 'Нет доступа',
+      },
+    },
+    ...makeDataList(9, { isDisabled: true, disabledReason: 'Нет доступа' }),
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
+/**
+ * `isDisabledLastCell` позволяет не блокировать последнюю ячейку
+ */
+export const DisabledLastCell = () => {
+  const columns = FAKE_COLUMNS;
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+      options: {
+        isDisabled: true,
+        isDisabledLastCell: false,
+        disabledReason: 'Нет доступа',
+      },
+    },
+    ...makeDataList(9, {
+      isDisabled: true,
+      isDisabledLastCell: false,
+      disabledReason: 'Нет доступа',
+    }),
+  ];
+
+  const [isLoading, setLoading] = useState(true);
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [isEndReached, setIsEndReached] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const incrementData = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setSlicedData((prevData) => [...prevData, ...makeDataList(10)]);
+      setIsEndReached(true);
+      setLoading(false);
+    }, 1500);
+  };
+
+  return (
+    <ConfigProvider
+      imagesMap={{
+        defaultErrorImgSrc: errorIllustration,
+        noDataImgSrc: noDataIllustration,
+        outdatedReleaseErrorImgSrc: '',
+      }}
+    >
+      <DataGridInfiniteWrapper>
+        <NewDataGridInfinite<DataType, SortField>
+          keyId="id"
+          rows={slicedData}
+          isLoading={isLoading}
+          isEndReached={isEndReached}
+          columns={columns}
+          onEndReached={incrementData}
+          onRowClick={handleRowClick}
+          onRetry={() => {}}
+        />
+      </DataGridInfiniteWrapper>
+    </ConfigProvider>
+  );
+};
+
 /**
  * При состоянии `loading=true` и `isBlockingOperation=true` у действия, строка блокируется и появляется тултип с `loadingNote`
  */
