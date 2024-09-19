@@ -1,8 +1,16 @@
 import { SvgIcon, type SvgIconProps } from '@mui/material';
 import { type Meta } from '@storybook/react';
-import { type FunctionComponent, type ReactNode } from 'react';
+import {
+  type FunctionComponent,
+  type ReactNode,
+  type SyntheticEvent,
+  useState,
+} from 'react';
 
-import { LegacyGrid, OverflowTypography } from '../components';
+import { Button, LegacyGrid, OverflowTypography } from '../components';
+
+// eslint-disable-next-line import/order
+import { CopyOutlineSm } from './generated-themed-icons';
 
 // Автогенерация
 // eslint-disable-next-line import/extensions
@@ -74,29 +82,65 @@ const meta: Meta<typeof SvgIcon> = {
 export default meta;
 
 // @ts-ignore
-const Icon = ({ component: Component, name, size, ...props }) => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '100px',
-      justifySelf: 'center',
-    }}
-  >
-    <Component
-      {...props}
-      style={{ ...props.style, width: size, height: size }}
-    />
-    <OverflowTypography
-      style={{
-        marginTop: '20px',
-      }}
+const Icon = ({ component: Component, name, size, ...props }) => {
+  const [isVisibleCopy, setIsVisibleCopy] = useState<boolean>(false);
+
+  const handleMouseLeave = () => setIsVisibleCopy(false);
+
+  const handleMouseEnter = () => setIsVisibleCopy(true);
+  const handleClick = (event: SyntheticEvent<HTMLElement>) => {
+    event.stopPropagation();
+    navigator.clipboard.writeText(name);
+  };
+
+  return (
+    <Button
+      variant="text"
+      onClick={handleClick}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      style={{ height: '80px', padding: 'unset' }}
     >
-      {name}
-    </OverflowTypography>
-  </div>
-);
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100px',
+          justifySelf: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {isVisibleCopy && (
+            <CopyOutlineSm
+              style={{ fontSize: '16px', position: 'absolute', left: 0 }}
+            />
+          )}
+          <Component
+            {...props}
+            style={{ ...props.style, width: size, height: size }}
+          />
+        </div>
+
+        <OverflowTypography
+          style={{
+            marginTop: '20px',
+          }}
+        >
+          {name}
+        </OverflowTypography>
+      </div>
+    </Button>
+  );
+};
 
 const IconGallery = ({ children }: { children: ReactNode }) => (
   <div style={{ width: '100%' }}>
