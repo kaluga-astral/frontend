@@ -16,6 +16,12 @@ type MainButtonProps = Item & {
   isNextItemInSelectedRange?: boolean;
   onClick?: (date: Date) => void;
   onDayHover?: (date?: Date) => void;
+  /**
+   * Пропс отвечающий за отключение возможности взаимодействия с тултипом
+   * @deprecated временное решение, и в последующем будет убрано
+   * @default true
+   */
+  disableTooltipInteractive?: boolean;
 };
 
 export const DayButton = ({
@@ -23,6 +29,7 @@ export const DayButton = ({
   renderDayContent,
   renderDayTooltipTitle,
   onDayHover,
+  disableTooltipInteractive,
   ...props
 }: MainButtonProps) => {
   const {
@@ -57,6 +64,7 @@ export const DayButton = ({
       isNextItemInSelectedRange={props.isNextItemInSelectedRange}
       onMouseEnter={handleMouseEnter}
       isInHoveredRange={props.isInHoveredRange}
+      disableInteractive={disableTooltipInteractive}
     >
       {handleRenderDayContent(props)}
     </StaticCalendarGridButton>

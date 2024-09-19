@@ -1,5 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
+import { styled } from '../styles';
+
 import { OverflowTypography } from './OverflowTypography';
 
 /**
@@ -31,9 +33,13 @@ export const Interaction: Story = {
   },
 };
 
+const Wrapper = styled.div`
+  max-width: 500px;
+`;
+
 export const Example = () => {
   return (
-    <div style={{ maxWidth: '600px' }}>
+    <Wrapper>
       <OverflowTypography>
         Not enough long text for special behavior.
       </OverflowTypography>
@@ -42,7 +48,7 @@ export const Example = () => {
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aut
         delectus dolorem ea, explicabo illo minus nostrum quae quod veniam.
       </OverflowTypography>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -53,7 +59,7 @@ export const Example = () => {
  */
 export const RowsCount = () => {
   return (
-    <div style={{ maxWidth: '600px' }}>
+    <Wrapper>
       <OverflowTypography>
         default props, Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Atque aut delectus dolorem ea, explicabo illo minus nostrum quae quod
@@ -65,7 +71,7 @@ export const RowsCount = () => {
         sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui,
         tempore.
       </OverflowTypography>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -74,7 +80,7 @@ export const RowsCount = () => {
  */
 export const TooltipProps = () => {
   return (
-    <div style={{ maxWidth: '600px' }}>
+    <Wrapper>
       <OverflowTypography
         tooltipProps={{
           title: 'custom tooltip, with separate settings',
@@ -85,6 +91,23 @@ export const TooltipProps = () => {
         adipisicing elit. Assumenda autem debitis eligendi inventore magni nobis
         perspiciatis quisquam ratione, unde vel?
       </OverflowTypography>
-    </div>
+    </Wrapper>
+  );
+};
+
+/**
+ * Prop `visibleLastSymbolsCount` позволяет задавать число отображаемых символов после сокращения.
+ * При использовании `visibleLastSymbolsCount` не работает props `rowsCount`
+ */
+export const VisibleLastSymbols = () => {
+  return (
+    <Wrapper>
+      <OverflowTypography visibleLastSymbolsCount={10}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi
+        consectetur corporis dolores eos, esse eum expedita hic minima
+        molestias, nobis odio qui quisquam rem saepe ut, velit voluptate
+        voluptates!
+      </OverflowTypography>
+    </Wrapper>
   );
 };
