@@ -30,7 +30,12 @@ export const CopyTypography = (props: CopyTypographyProps) => {
     ...restProps
   } = props;
 
-  const { handleMouseLeave, handleClick, tooltipTitle } = useLogic(props);
+  const renderIcon = () => (
+    <StyledCopyIcon $copyPosition={copyPosition} color={color as 'secondary'} />
+  );
+
+  const { handleMouseLeave, handleClick, tooltipTitle, isIconOnLeft } =
+    useLogic(props);
 
   return (
     <Tooltip title={tooltipTitle} disableInteractive placement="bottom">
@@ -41,19 +46,9 @@ export const CopyTypography = (props: CopyTypographyProps) => {
         color={color}
         {...restProps}
       >
-        {copyPosition === 'left' && (
-          <StyledCopyIcon
-            $copyPosition={copyPosition}
-            color={color as 'secondary'}
-          />
-        )}
+        {isIconOnLeft && renderIcon()}
         {children}
-        {copyPosition === 'right' && (
-          <StyledCopyIcon
-            $copyPosition={copyPosition}
-            color={color as 'secondary'}
-          />
-        )}
+        {!isIconOnLeft && renderIcon()}
       </Wrapper>
     </Tooltip>
   );

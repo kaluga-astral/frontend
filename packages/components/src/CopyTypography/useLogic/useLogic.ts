@@ -9,6 +9,7 @@ export const useLogic = ({
   children,
   copyText,
   isShowCopyText,
+  copyPosition,
 }: UseLogicParams) => {
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.CanCopy);
 
@@ -31,5 +32,7 @@ export const useLogic = ({
 
   const tooltipTitle = isShowCopyText ? `${status}: ${copyText}` : status;
 
-  return { handleMouseLeave, handleClick, tooltipTitle };
+  const isIconOnLeft = copyPosition === 'left';
+
+  return { handleMouseLeave, handleClick, tooltipTitle, isIconOnLeft };
 };
