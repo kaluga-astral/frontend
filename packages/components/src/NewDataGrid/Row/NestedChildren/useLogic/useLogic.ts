@@ -1,6 +1,7 @@
 import { type MouseEvent, useContext } from 'react';
 
 import { DataGridContext } from '../../../DataGridContext';
+import { Variant } from '../../../enums';
 import type { CellValue } from '../../../types';
 import { type NestedChildrenProps } from '../NestedChildren';
 
@@ -11,12 +12,14 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   rowId,
   data,
   level,
+  variant,
   initialVisibleChildrenCount,
 }: UseLogicParams<TData>) => {
   const { checkIsMoreOpened, toggleOpenMoreItems } =
     useContext(DataGridContext);
 
-  const nextLevel = level + 1;
+  const isTreeVariant = Object.is(variant, Variant.Tree);
+  const nextLevel = isTreeVariant ? level + 1 : 0;
 
   const initialVisibleChildren = data?.slice(0, initialVisibleChildrenCount);
   const otherChildren = data?.slice(initialVisibleChildrenCount);
@@ -32,6 +35,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   return {
     isShowAllChildren,
     isShowMoreButton,
+    isShowConnector: isTreeVariant,
     initialVisibleChildren,
     otherChildren,
     nextLevel,

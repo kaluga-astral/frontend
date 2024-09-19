@@ -1,6 +1,6 @@
+import { useMemo, useState } from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { toast } from 'react-toastify-next';
 
 import { Button } from '../Button';
 import { CircularProgress } from '../CircularProgress';
@@ -9,8 +9,7 @@ import { TextField } from '../TextField';
 import { styled } from '../styles';
 import { Paper } from '../Paper';
 
-import { sleep } from './utils';
-import { NOTIFY_CONTAINER_ID, NOTIFY_STATIC_CONTAINER_ID } from './constants';
+import { NOTIFY_STATIC_CONTAINER_ID } from './constants';
 import { notify } from './NotificationNext';
 import { NotificationStackContainerNext } from './NotificationStackContainerNext';
 import { NotificationContainerNext } from './NotificationContainerNext';
@@ -61,6 +60,7 @@ export const Example = () => {
     notify.success('Успешно', {
       filled: false,
       content: 'Поле сохранено',
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'example',
     });
   };
@@ -84,6 +84,7 @@ export const Types = () => {
   const handleInfo = () => {
     notify.info('Загрузка завершена', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -91,6 +92,7 @@ export const Types = () => {
   const handleSuccess = () => {
     notify.success('Операция успешно завершена', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -98,6 +100,7 @@ export const Types = () => {
   const handleWarning = () => {
     notify.warning('Внимание', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
   };
@@ -105,8 +108,17 @@ export const Types = () => {
   const handleError = () => {
     notify.error('Соединение потеряно', {
       filled: false,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'types',
     });
+  };
+
+  const handleProgress = () => {
+    const progressNotify = notify.initProgress({
+      containerId: 'types',
+    });
+
+    progressNotify.start('Загрузка документов...');
   };
 
   return (
@@ -115,15 +127,20 @@ export const Types = () => {
 
       <Stack direction="column" gap={2}>
         <Button onClick={handleInfo}>info</Button>
+
         <Button onClick={handleSuccess} color="success">
           success
         </Button>
+
         <Button onClick={handleWarning} color="warning">
           warning
         </Button>
+
         <Button onClick={handleError} color="error">
           error
         </Button>
+
+        <Button onClick={handleProgress}>progress</Button>
       </Stack>
     </ExampleStack>
   );
@@ -136,6 +153,7 @@ export const AutoClose = () => {
       showCloseButton: false,
       autoClose: 10000,
       icon: <CircularProgress color="primary" size="medium" />,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'autoclose',
     });
   };
@@ -158,6 +176,7 @@ export const Content = () => {
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'content',
     });
   };
@@ -180,6 +199,7 @@ export const Icon = () => {
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
       icon: <CircularProgress color="primary" size="medium" />,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'icon',
     });
   };
@@ -203,6 +223,7 @@ export const HideProgressBar = () => {
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
       hideProgressBar: true,
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'hide-progress-bar',
     });
   };
@@ -215,6 +236,147 @@ export const HideProgressBar = () => {
         <Button onClick={handleErrorWithContentWithoutProgressBar}>
           Hide progress bar
         </Button>
+      </Stack>
+    </ExampleStack>
+  );
+};
+
+/**
+ * Предназначен для отображения состояния асинхронной операции с массивом элементов, например массовая отправка или подписание документов
+ * `notify.initProgress` возвращает объект с методами: `start`, `update`, `success`, `error` и `stop`
+ */
+export const ProgressNotify = () => {
+  const [isStartedSign, setStartedSign] = useState(false);
+  const [isStartedSend, setStartedSend] = useState(false);
+
+  const progressSignNotify = useMemo(
+    () =>
+      notify.initProgress({
+        // containerId необходимо для storybook, так как на одном экране несколько контейнеров
+        containerId: 'progress-notify',
+      }),
+    [],
+  );
+
+  const progressSendNotify = useMemo(
+    () =>
+      notify.initProgress({
+        // containerId необходимо для storybook, так как на одном экране несколько контейнеров
+        containerId: 'progress-notify',
+      }),
+    [],
+  );
+
+  const handleProgressSignNotify = () => {
+    progressSignNotify.start('Подписание документов 1 из 3', {
+      content: 'Подписывается документ №001',
+    });
+
+    setStartedSign(true);
+  };
+
+  const handleUpdatesSignNotify = () => {
+    progressSignNotify.update('Подписание документов 2 из 3', {
+      content: 'Подписывается документ №002',
+    });
+  };
+
+  const handleSuccessSignNotify = () => {
+    progressSignNotify.success('Документы подписаны', {
+      content: '3 документа успешно подписано',
+    });
+  };
+
+  const handleErrorsSignNotify = () => {
+    progressSignNotify.error('Ошибка подписания документов', {
+      content: 'Не удалось подписать документы',
+      actions: <Button variant="link">Подробнее</Button>,
+    });
+  };
+
+  const handleClosesSignNotify = () => {
+    progressSignNotify.stop();
+    setStartedSign(false);
+  };
+
+  const handleProgressNotifySendNotify = () => {
+    progressSendNotify.start('Отправка документов 1 из 3', {
+      content: 'Отправляется документ №111',
+    });
+
+    setStartedSend(true);
+  };
+
+  const handleUpdateSendNotify = () => {
+    progressSendNotify.update('Отправка документов 2 из 3', {
+      content: 'Отправляется документ №112',
+    });
+  };
+
+  const handleCloseSendNotify = () => {
+    progressSendNotify.stop();
+    setStartedSend(false);
+  };
+
+  return (
+    <ExampleStack>
+      <NotificationContainerNext containerId="progress-notify" />
+
+      <Stack direction="row" gap={2}>
+        <Stack gap={2}>
+          <Button disabled={isStartedSign} onClick={handleProgressSignNotify}>
+            {!isStartedSign ? 'Start sign notify' : 'Started...'}
+          </Button>
+
+          <Button disabled={!isStartedSign} onClick={handleUpdatesSignNotify}>
+            Update notify
+          </Button>
+
+          <Button
+            disabled={!isStartedSign}
+            color="success"
+            onClick={handleSuccessSignNotify}
+          >
+            Success notify
+          </Button>
+
+          <Button
+            disabled={!isStartedSign}
+            color="error"
+            onClick={handleErrorsSignNotify}
+          >
+            Error notify
+          </Button>
+
+          <Button
+            disabled={!isStartedSign}
+            variant="light"
+            onClick={handleClosesSignNotify}
+          >
+            Сбросить
+          </Button>
+        </Stack>
+
+        <Stack gap={2}>
+          <Button
+            disabled={isStartedSend}
+            onClick={handleProgressNotifySendNotify}
+          >
+            {!isStartedSend ? 'Start send notify' : 'Started...'}
+          </Button>
+
+          <Button disabled={!isStartedSend} onClick={handleUpdateSendNotify}>
+            Update notify
+          </Button>
+
+          <Button
+            disabled={!isStartedSend}
+            variant="light"
+            onClick={handleCloseSendNotify}
+          >
+            Сбросить
+          </Button>
+        </Stack>
       </Stack>
     </ExampleStack>
   );
@@ -245,28 +407,25 @@ export const WithStack = () => {
     });
   };
 
+  const handleProgress = () => {
+    const progressNotify = notify.initProgress({
+      containerId: NOTIFY_STATIC_CONTAINER_ID,
+    });
+
+    progressNotify.start('Загрузка документов...');
+
+    setTimeout(
+      () => progressNotify.success('Документы успешно загружены'),
+      3000,
+    );
+  };
+
   const handleSuccessWithContent = () => {
     notify.success('Операция успешно завершена и заголовок в две строки', {
       filled: false,
       content: 'Все необходимые действия увенчались успехом в ходе обработки.',
       actions: <Button variant="link">Подробнее</Button>,
       actionsDirection: 'right',
-    });
-  };
-
-  const handleWithLoading = async () => {
-    const id = toast.loading('Загрузка документов...', {
-      containerId: NOTIFY_STATIC_CONTAINER_ID,
-    });
-
-    await sleep(3000);
-    notify.dismiss(id);
-
-    notify.success('Документы загружены', {
-      filled: false,
-      containerId: NOTIFY_CONTAINER_ID,
-      content: 'Все необходимые действия увенчались успехом в ходе обработки.',
-      actions: <Button variant="link">Подробнее</Button>,
     });
   };
 
@@ -293,8 +452,8 @@ export const WithStack = () => {
           Notify success with content
         </Button>
 
-        <Button onClick={handleWithLoading} color="primary">
-          Notify with loading
+        <Button onClick={handleProgress} color="primary">
+          Notify progress
         </Button>
       </Stack>
     </ExampleStack>
@@ -304,6 +463,7 @@ export const WithStack = () => {
 export const Static = () => {
   const handleInfo = () => {
     notify.info('Загрузка завершена', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -312,6 +472,7 @@ export const Static = () => {
 
   const handleSuccess = () => {
     notify.success('Операция успешно завершена', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -320,6 +481,7 @@ export const Static = () => {
 
   const handleWarning = () => {
     notify.warning('Внимание', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,
@@ -328,6 +490,7 @@ export const Static = () => {
 
   const handleError = () => {
     notify.error('Соединение потеряно', {
+      // containerId необходимо для storybook, так как на одном экране несколько контейнеров
       containerId: 'static-static',
       filled: false,
       isStatic: true,

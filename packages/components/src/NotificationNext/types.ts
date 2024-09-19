@@ -6,7 +6,9 @@ import {
   type UpdateOptions,
 } from 'react-toastify-next';
 
-export type Variant = 'success' | 'warning' | 'info' | 'error';
+export type VariantWithoutProgress = 'success' | 'warning' | 'info' | 'error';
+
+export type Variant = VariantWithoutProgress | 'progress';
 
 export type ActionsDirection = 'right' | 'left';
 
@@ -90,6 +92,22 @@ type NotificationFunction = (
   options?: NotificationOptions,
 ) => number | string;
 
+type NotificationProgressOptions = Omit<
+  NotificationOptions,
+  | 'hideProgressBar'
+  | 'icon'
+  | 'isStatic'
+  | 'progress'
+  | 'progressClassName'
+  | 'progressStyle'
+  | 'toastId'
+>;
+
+type NotificationProgressFunction = (
+  title: NotificationProps['title'],
+  options?: NotificationProgressOptions,
+) => void;
+
 type Controllable = {
   /**
    * Метод создания полностью кастомной нотификации
@@ -113,4 +131,13 @@ type Controllable = {
   done: (id: Id) => void;
 };
 
-export type Notify = Record<Variant, NotificationFunction> & Controllable;
+export type Notify = Record<VariantWithoutProgress, NotificationFunction> &
+  Controllable & {
+    initProgress: (options?: NotificationProgressOptions) => {
+      start: NotificationProgressFunction;
+      update: NotificationProgressFunction;
+      success: NotificationProgressFunction;
+      error: NotificationProgressFunction;
+      stop: () => void;
+    };
+  };

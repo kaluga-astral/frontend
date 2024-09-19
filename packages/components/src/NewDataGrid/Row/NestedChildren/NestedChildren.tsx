@@ -1,12 +1,12 @@
 import { type ReactElement, memo } from 'react';
 
-import { Button } from '../../../Button';
 import { Collapse } from '../../../Collapse';
+import type { Variant } from '../../enums';
 import type { CellValue, DataGridRowOptions } from '../../types';
 import { HIDDEN_CHILDREN_ROW_CLASSNAME } from '../constants';
 
 import { useLogic } from './useLogic';
-import { MoreButtonRow, NestedRows } from './styles';
+import { MoreButton, MoreButtonRow, NestedRows } from './styles';
 
 export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
   /**
@@ -30,6 +30,16 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
   rowId: string;
 
   /**
+   * Вариант отображения вложенных элементов
+   */
+  variant: `${Variant}`;
+
+  /**
+   * Конфигурация ширины колонок
+   */
+  gridColumns: string;
+
+  /**
    * Уровень вложенности в дереве
    */
   level: number;
@@ -38,6 +48,12 @@ export type NestedChildrenProps<TData extends Record<string, CellValue>> = {
    * Количество отображаемых по умолчанию дочерних элементов
    */
   initialVisibleChildrenCount: number;
+
+  /**
+   * Номер колонки, в которой будет расположена кнопка "Показать все"
+   * Работает только для `variant="subrows"`
+   */
+  moreButtonColumnPosition: number;
 
   renderRow: ({
     key,
@@ -63,13 +79,22 @@ export const NestedChildren = memo(
     const {
       isShowAllChildren,
       isShowMoreButton,
+      isShowConnector,
       nextLevel,
       initialVisibleChildren,
       otherChildren,
       handleToggleShowAllChildren,
     } = useLogic(props);
 
-    const { isOpen, data, keyId, level, renderRow } = props;
+    const {
+      isOpen,
+      data,
+      keyId,
+      level,
+      gridColumns,
+      moreButtonColumnPosition,
+      renderRow,
+    } = props;
 
     if (!data || !data.length) {
       return null;
@@ -77,7 +102,7 @@ export const NestedChildren = memo(
 
     return (
       <Collapse in={isOpen} unmountOnExit>
-        <NestedRows $level={level}>
+        <NestedRows $level={level} $isShowConnector={isShowConnector}>
           {initialVisibleChildren.map(({ children, options, ...nestedRow }) => {
             const nestedRowId = (nestedRow as TData)[keyId] as string;
 
@@ -93,7 +118,7 @@ export const NestedChildren = memo(
           {isOpen && (
             <>
               <Collapse in={isShowAllChildren} component="li" unmountOnExit>
-                <NestedRows $level={level}>
+                <NestedRows $level={level} $isShowConnector={isShowConnector}>
                   {otherChildren.map(({ children, options, ...nestedRow }) => {
                     const nestedRowId = (nestedRow as TData)[keyId] as string;
 
@@ -110,10 +135,18 @@ export const NestedChildren = memo(
               </Collapse>
 
               {isShowMoreButton && (
-                <MoreButtonRow $level={nextLevel}>
-                  <Button variant="link" onClick={handleToggleShowAllChildren}>
+                <MoreButtonRow
+                  $level={nextLevel}
+                  $isShowConnector={isShowConnector}
+                  $gridColumns={gridColumns}
+                >
+                  <MoreButton
+                    $moreButtonColumnPosition={moreButtonColumnPosition}
+                    variant="link"
+                    onClick={handleToggleShowAllChildren}
+                  >
                     {isShowAllChildren ? 'Скрыть' : 'Показать все'}
-                  </Button>
+                  </MoreButton>
                 </MoreButtonRow>
               )}
             </>

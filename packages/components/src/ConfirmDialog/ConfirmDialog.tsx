@@ -1,10 +1,13 @@
-import { type ReactNode, useMemo } from 'react';
+import { type ReactNode } from 'react';
 
 import { Button, type ButtonProps } from '../Button';
 import { Dialog, type DialogProps } from '../Dialog';
 import { DialogContent } from '../DialogContent';
 import { DialogContentText } from '../DialogContentText';
 import { DialogActions } from '../DialogActions';
+
+import { CancelButton } from './styles';
+import { useLogic } from './useLogic';
 
 export type ConfirmDialogProps = {
   /**
@@ -46,30 +49,19 @@ export type ConfirmDialogProps = {
   | 'open'
 >;
 
-export const ConfirmDialog = ({
-  open,
-  title,
-  description,
-  actions,
-  onClose,
-  ...restProps
-}: ConfirmDialogProps) => {
+export const ConfirmDialog = (props: ConfirmDialogProps) => {
+  const { isShowCancelButton, cancelButtonProps } = useLogic(props);
+
+  const { open, title, description, actions, onClose, ...restProps } = props;
+
   const { text: confirmText, ...confirmButtonProps } = actions.confirm;
 
-  const renderCancelButton = useMemo(() => {
-    if (actions.cancel) {
-      const { text: cancelText, ...cancelButtonProps } = actions.cancel;
-      const handleCancelClick = actions.cancel?.onClick || onClose;
-
-      return (
-        <Button {...cancelButtonProps} onClick={handleCancelClick}>
-          {cancelText}
-        </Button>
-      );
-    }
-
-    return null;
-  }, [actions.cancel, onClose]);
+  const {
+    text: cancelText,
+    variant,
+    onClick,
+    ...restCancelProps
+  } = actions.cancel || {};
 
   return (
     <Dialog title={title} open={open} onClose={onClose} {...restProps}>
@@ -79,7 +71,11 @@ export const ConfirmDialog = ({
         </DialogContent>
       )}
       <DialogActions>
-        {renderCancelButton}
+        {isShowCancelButton && (
+          <CancelButton {...restCancelProps} {...cancelButtonProps}>
+            {cancelText}
+          </CancelButton>
+        )}
         <Button {...confirmButtonProps}>{confirmText}</Button>
       </DialogActions>
     </Dialog>

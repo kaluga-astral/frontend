@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+import { Variant } from '../../enums';
 import { DataGridContext } from '../../DataGridContext';
 import type { CellValue } from '../../types';
 import { DISABLE_ROW_ATTR } from '../constants';
@@ -22,6 +23,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   columns,
   row,
   level,
+  variant,
   activeRowId,
   options,
   isInitialExpanded = false,
@@ -47,8 +49,11 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 
   const disabled = isDisabled || isExternalDisabled;
 
+  const isOpen = checkIsOpened(rowId);
+
   useEffect(() => {
-    if (isDefaultExpanded) {
+    // Проверка на isOpen необходима для infinite версии с виртуализацией, когда происходит размонтировании компонента
+    if (isDefaultExpanded && !isOpen) {
       toggleOpenItems(rowId);
     }
   }, []);
@@ -57,7 +62,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
     isSelectable &&
     Boolean(selectedRows?.find((selectedRow) => selectedRow[keyId] === rowId));
 
-  const isOpen = checkIsOpened(rowId);
+  const isShowConnector = Object.is(variant, Variant.Tree);
 
   const childrenColumns = useMemo(
     () => mergeColumnsOptions(columns, options?.childrenColumns),
@@ -102,6 +107,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
 
   return {
     isOpen,
+    isShowConnector,
     childrenColumns,
     rowId,
     disabled,

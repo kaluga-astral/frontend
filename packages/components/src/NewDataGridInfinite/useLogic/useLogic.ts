@@ -4,7 +4,7 @@ import type { ListRange, VirtuosoHandle } from 'react-virtuoso';
 import { prop, uniqueBy } from '../../utils';
 import { useToggle } from '../../hooks';
 import { getGridTemplateColumns } from '../../NewDataGrid/useLogic/utils';
-import type { CellValue, DataGridRow } from '../../NewDataGrid';
+import { type CellValue, type DataGridRow, Variant } from '../../NewDataGrid';
 import { type NewDataGridInfiniteProps } from '../NewDataGridInfinite';
 
 type UseLogicParams<
@@ -19,6 +19,9 @@ export const useLogic = <
   keyId,
   columns,
   rows,
+  variant,
+  tree,
+  subrows,
   selectedRows = [],
   isLoading,
   isDisabled,
@@ -34,6 +37,10 @@ export const useLogic = <
   const isNoData = Boolean(rows?.length);
   const isSelectable = Boolean(onSelectRow);
   const isDataGridDisabled = isDisabled || (!isNoData && isLoading);
+
+  const treeRenderConfig = Object.is(variant, Variant.Subrows)
+    ? { ...subrows, isInitialExpanded: true }
+    : tree;
 
   const availableRows = rows.filter(
     (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
@@ -116,6 +123,7 @@ export const useLogic = <
     isNoData,
     isDataGridDisabled,
     isStickyButtonActive,
+    treeRenderConfig,
     virtuosoProps: {
       ref: virtuoso,
       endReached: handleEndReach,
