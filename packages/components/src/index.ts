@@ -57,6 +57,8 @@ export * from './ConfirmDialog';
 
 export * from './ContentState';
 
+export { CopyTypography, type CopyTypographyProps } from './CopyTypography';
+
 export * from './DashboardLayout';
 
 export {
