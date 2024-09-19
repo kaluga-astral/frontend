@@ -51,9 +51,13 @@ export * from './CollapsibleTypography';
 
 export * from './ConfigProvider';
 
+export { ConfirmAction, type ConfirmActionProps } from './ConfirmAction';
+
 export * from './ConfirmDialog';
 
 export * from './ContentState';
+
+export { CopyTypography, type CopyTypographyProps } from './CopyTypography';
 
 export * from './DashboardLayout';
 

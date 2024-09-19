@@ -17,8 +17,6 @@ type UseLogicParams = Pick<
 
 export const useLogic = ({
   selectedRanges,
-  maxDate,
-  minDate,
   selectedDate,
   hoveredDate,
   isMondayFirst = true,
@@ -43,23 +41,9 @@ export const useLogic = ({
     [selectedRanges, baseDate],
   );
 
-  const { dateA: memoizedMinDate, dateB: memoizedMaxDate } = useMemo(
-    () =>
-      optimizeRangeDates({
-        baseDate: baseDate,
-        dateA: minDate,
-        dateB: maxDate,
-        isMondayFirst: isMondayFirst,
-        accumulator,
-      }),
-    [minDate, maxDate, baseDate],
-  );
-
   return {
     memoizedSelectedDate,
     memoizedHoveredDate,
     memoizedSelectedRanges,
-    memoizedMinDate,
-    memoizedMaxDate,
   };
 };

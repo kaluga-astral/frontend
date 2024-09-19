@@ -10,13 +10,18 @@ export type StaticDateCalendarButtonProps = Omit<
   'variant' | 'title'
 > & {
   tooltipTitle?: ReactNode;
+  disableInteractive?: boolean;
 };
 
 export const StaticCalendarButton = forwardRef<
   HTMLButtonElement,
   StaticDateCalendarButtonProps
->(({ tooltipTitle, disabled, selected, ...props }, ref) => (
-  <StaticCalendarButtonTooltip title={tooltipTitle} isActive={!disabled}>
+>(({ tooltipTitle, disabled, selected, disableInteractive, ...props }, ref) => (
+  <StaticCalendarButtonTooltip
+    title={tooltipTitle}
+    isActive={!disabled}
+    disableInteractive={disableInteractive}
+  >
     <Wrapper
       ref={ref}
       variant={selected ? 'contained' : 'text'}
