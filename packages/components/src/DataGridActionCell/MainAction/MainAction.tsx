@@ -37,8 +37,6 @@ export const MainAction = <TAction,>({
   isDisabled,
   tooltipPlacement,
 }: MainActionProps<TAction>) => {
-  console.log('action', action);
-
   if ('actions' in action) {
     const { disabled, icon, name, disabledReason, actions } = action;
 
