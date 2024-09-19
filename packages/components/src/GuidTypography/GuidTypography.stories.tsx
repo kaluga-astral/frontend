@@ -52,12 +52,12 @@ export const CopyGuid = () => {
   const guid = 'e2f54c10-2ac9-4872-b2ce-1f86eb1c6d2d';
 
   return (
-    <CopyTypography copyText={guid} isShowCopyText>
-      <Wrapper>
+    <Wrapper>
+      <CopyTypography copyText={guid} isShowCopyText>
         <GuidTypography tooltipProps={{ title: undefined }}>
           {guid}
         </GuidTypography>
-      </Wrapper>
-    </CopyTypography>
+      </CopyTypography>
+    </Wrapper>
   );
 };
