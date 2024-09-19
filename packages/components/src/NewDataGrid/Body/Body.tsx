@@ -2,7 +2,6 @@ import { type ChangeEvent, type ReactNode, useContext, useMemo } from 'react';
 
 import { ConfigContext } from '../../ConfigProvider';
 import { ContentState } from '../../ContentState';
-import { DataGridContextProvider } from '../DataGridContext';
 import { Row } from '../Row';
 import { RowContextProvider } from '../Row/RowContext';
 import type { Variant } from '../enums';
@@ -163,20 +162,18 @@ export const Body = <TData extends Record<string, CellValue>>(
   }, [rows, keyId, selectedRows, rowProps]);
 
   return (
-    <DataGridContextProvider>
-      <Wrapper $isEmpty={isNoData} $minDisplayRows={minDisplayRows}>
-        <ContentState
-          {...contentStateProps}
-          errorState={{
-            imgAlt: 'Что-то пошло не так',
-            errorList: [errorMsg || ''],
-            imgSrc: imagesMap.defaultErrorImgSrc,
-            onRetry,
-          }}
-        >
-          {rows.length ? renderedRows : noDataPlaceholder}
-        </ContentState>
-      </Wrapper>
-    </DataGridContextProvider>
+    <Wrapper $isEmpty={isNoData} $minDisplayRows={minDisplayRows}>
+      <ContentState
+        {...contentStateProps}
+        errorState={{
+          imgAlt: 'Что-то пошло не так',
+          errorList: [errorMsg || ''],
+          imgSrc: imagesMap.defaultErrorImgSrc,
+          onRetry,
+        }}
+      >
+        {rows.length ? renderedRows : noDataPlaceholder}
+      </ContentState>
+    </Wrapper>
   );
 };
