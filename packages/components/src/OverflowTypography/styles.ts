@@ -26,3 +26,12 @@ export const StyledTypography = styled(Typography, {
     hasMultipleRows ? 'vertical' : ''};
   -webkit-line-clamp: ${({ rowsCount }) => rowsCount};
 `;
+
+export const Wrapper = styled(Typography, {
+  shouldForwardProp: (prop) => !['$align'].includes(prop),
+})<{ $align: string }>`
+  display: flex;
+  justify-content: ${({ $align }) => $align};
+
+  white-space: nowrap;
+`;
