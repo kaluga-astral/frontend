@@ -7,7 +7,7 @@ import { DEFAULT_ANCHOR_ORIGIN, DEFAULT_TRANSFORM_ORIGIN } from './constants';
 import { useLogic } from './useLogic';
 import { Actions, StyledTypography, Wrapper } from './styles';
 
-type ActionComponentParams = {
+export type ActionComponentParams = {
   onClick: (event: SyntheticEvent) => void;
 };
 

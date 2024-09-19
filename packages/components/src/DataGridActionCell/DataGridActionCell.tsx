@@ -1,10 +1,10 @@
 import { type TooltipProps } from '../Tooltip';
 
-import { SecondaryActions } from './SecondaryAction';
-import type { MainActionKind, SecondaryActionKind } from './types';
 import { useLogic } from './useLogic';
-import { Wrapper } from './styles';
 import { MainAction } from './MainAction';
+import { SecondaryActions } from './SecondaryAction';
+import { Wrapper } from './styles';
+import type { MainActionKind, SecondaryActionKind } from './types';
 
 export type DataGridActions<TAction> = {
   /**
