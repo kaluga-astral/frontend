@@ -1499,10 +1499,11 @@ export const Subrows = () => {
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
+      setSlicedData(fakeData.slice((page - 1) * 10, page * 10));
       setLoading(false);
     }, 1500);
   }, []);
@@ -1510,6 +1511,19 @@ export const Subrows = () => {
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(fakeData.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
 
   return (
     <NewDataGrid<DataType, SortField>
@@ -1522,6 +1536,14 @@ export const Subrows = () => {
       }}
       isLoading={isLoading}
       selectedRows={selected}
+      footer={
+        <DataGridPagination
+          rowsPerPage={10}
+          totalCount={fakeData.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
       onSelectRow={handleSelect}
       onRowClick={handleRowClick}
       onRetry={() => {}}

@@ -11,6 +11,7 @@ import { Variant } from './enums';
 import { useLogic } from './useLogic';
 import { Head } from './Head';
 import { Body } from './Body';
+import { DataGridContextProvider } from './DataGridContext';
 import { Loader } from './Loader';
 import { NoData, type NoDataProps } from './NoData';
 import { Container, DataGridWrapper, DisabledDataGridWrapper } from './styles';
@@ -257,40 +258,42 @@ export const NewDataGrid = <
   }, [noDataPlaceholder, noDataOptions, isLoading]);
 
   return (
-    <Container $maxHeight={maxHeight} className={className}>
-      <TableContainer {...{ inert: isDataGridDisabled ? '' : undefined }}>
-        <Head<TData, TSortField>
-          {...headProps}
-          sorting={sorting}
-          onSort={onSort}
-        />
+    <DataGridContextProvider>
+      <Container $maxHeight={maxHeight} className={className}>
+        <TableContainer {...{ inert: isDataGridDisabled ? '' : undefined }}>
+          <Head<TData, TSortField>
+            {...headProps}
+            sorting={sorting}
+            onSort={onSort}
+          />
 
-        <Body<TData>
-          {...bodyProps}
-          activeRowId={activeRowId}
-          keyId={keyId}
-          selectedRows={selectedRows}
-          minDisplayRows={minDisplayRows}
-          rows={renderRows}
-          columns={columns}
-          variant={variant}
-          emptyCellValue={emptyCellValue}
-          isInitialExpanded={isInitialExpanded}
-          expandedLevel={expandedLevel}
-          initialVisibleChildrenCount={initialVisibleChildrenCount}
-          moreButtonColumnPosition={moreButtonColumnPosition}
-          isLoading={isLoading}
-          isError={isError}
-          errorMsg={errorMsg}
-          noDataPlaceholder={renderedPlaceholder()}
-          onRowClick={onRowClick}
-          onRetry={onRetry}
-        />
-      </TableContainer>
+          <Body<TData>
+            {...bodyProps}
+            activeRowId={activeRowId}
+            keyId={keyId}
+            selectedRows={selectedRows}
+            minDisplayRows={minDisplayRows}
+            rows={renderRows}
+            columns={columns}
+            variant={variant}
+            emptyCellValue={emptyCellValue}
+            isInitialExpanded={isInitialExpanded}
+            expandedLevel={expandedLevel}
+            initialVisibleChildrenCount={initialVisibleChildrenCount}
+            moreButtonColumnPosition={moreButtonColumnPosition}
+            isLoading={isLoading}
+            isError={isError}
+            errorMsg={errorMsg}
+            noDataPlaceholder={renderedPlaceholder()}
+            onRowClick={onRowClick}
+            onRetry={onRetry}
+          />
+        </TableContainer>
 
-      <Loader {...loaderProps} />
+        <Loader {...loaderProps} />
 
-      {footer && footer}
-    </Container>
+        {footer && footer}
+      </Container>
+    </DataGridContextProvider>
   );
 };
