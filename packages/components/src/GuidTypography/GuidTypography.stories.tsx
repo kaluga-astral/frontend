@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 
 import { CopyTypography } from '../CopyTypography';
+import { styled } from '../styles';
 
 import { GuidTypography } from './GuidTypography';
 
@@ -30,8 +31,16 @@ export const Interaction: Story = {
   },
 };
 
+const Wrapper = styled.div`
+  width: 100px;
+`;
+
 export const Example = () => {
-  return <GuidTypography>e2f54c10-2ac9-4872-b2ce-1f86eb1c6d2d</GuidTypography>;
+  return (
+    <Wrapper>
+      <GuidTypography>e2f54c10-2ac9-4872-b2ce-1f86eb1c6d2d</GuidTypography>
+    </Wrapper>
+  );
 };
 
 /**
@@ -43,7 +52,9 @@ export const CopyGuid = () => {
 
   return (
     <CopyTypography copyText={guid} isShowCopyText>
-      <GuidTypography>{guid}</GuidTypography>
+      <Wrapper>
+        <GuidTypography>{guid}</GuidTypography>
+      </Wrapper>
     </CopyTypography>
   );
 };
