@@ -172,21 +172,14 @@ export const StaticDaysCalendar = ({
   baseDate,
   ...props
 }: StaticDaysCalendarProps) => {
-  const {
-    memoizedSelectedDate,
-    memoizedHoveredDate,
-    memoizedSelectedRanges,
-    memoizedMinDate,
-    memoizedMaxDate,
-  } = useLogic({
-    selectedRanges,
-    maxDate,
-    minDate,
-    selectedDate,
-    hoveredDate,
-    isMondayFirst,
-    baseDate,
-  });
+  const { memoizedSelectedDate, memoizedHoveredDate, memoizedSelectedRanges } =
+    useLogic({
+      selectedRanges,
+      selectedDate,
+      hoveredDate,
+      isMondayFirst,
+      baseDate,
+    });
 
   return (
     <StaticDaysCalendarInner
@@ -196,8 +189,8 @@ export const StaticDaysCalendar = ({
       selectedDate={memoizedSelectedDate}
       hoveredDate={memoizedHoveredDate}
       selectedRanges={memoizedSelectedRanges}
-      minDate={memoizedMinDate}
-      maxDate={memoizedMaxDate}
+      maxDate={maxDate}
+      minDate={minDate}
     />
   );
 };

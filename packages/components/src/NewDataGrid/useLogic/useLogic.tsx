@@ -70,6 +70,8 @@ export const useLogic = <
     return columns;
   }, [columns, rows]);
 
+  const renderRows = isLoading ? prevRowsRef.current : rows;
+
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) {
       return;
@@ -111,11 +113,10 @@ export const useLogic = <
     [selectedRows, onSelectRow, keyId],
   );
 
-  const renderRows = isLoading ? prevRowsRef.current : rows;
-
   return {
     isDataGridDisabled,
     treeRenderConfig,
+    renderRows,
     headProps: {
       rowsCount: availableRows.length,
       uncheckedRowsCount,
@@ -133,6 +134,5 @@ export const useLogic = <
       isLoading: isNoData && isLoading,
       isDisabled,
     },
-    renderRows,
   };
 };
