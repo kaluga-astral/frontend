@@ -22,6 +22,7 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   keyId,
   columns,
   row,
+  nestedChildren,
   level,
   variant,
   activeRowId,
@@ -33,7 +34,8 @@ export const useLogic = <TData extends Record<string, CellValue>>({
   onSelectRow,
   onRowClick,
 }: UseLogicParams<TData>) => {
-  const isDefaultExpanded = isInitialExpanded && level <= expandedLevel - 1;
+  const isDefaultExpanded =
+    isInitialExpanded && level <= expandedLevel - 1 && nestedChildren?.length;
 
   const { checkIsOpened, toggleOpenItems } = useContext(DataGridContext);
   const { isDisabled, disabledReason } = useContext(RowContext);
