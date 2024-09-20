@@ -3,12 +3,18 @@ import { type SvgIconProps } from '@mui/material';
 
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
+import { CopyTypography } from '../../CopyTypography';
 
 import { type ValueProps } from './Value';
 
 type StyledTypographyProps = {
   $leader?: boolean;
   $canCopy?: boolean;
+  $direction: string;
+};
+
+type StyledCopyTypographyProps = {
+  $leader?: boolean;
   $direction: string;
 };
 
@@ -28,6 +34,18 @@ export const StyledTypography = styled(Typography, {
 
   &:hover {
     text-decoration: ${({ $canCopy }) => ($canCopy ? 'underline' : 'none')};
+  }
+`;
+
+export const StyledCopyTypography = styled(CopyTypography, {
+  shouldForwardProp: (prop) => !['$leader', '$direction'].includes(prop),
+})<StyledCopyTypographyProps>`
+  hyphens: auto;
+  text-align: ${({ $leader }) => ($leader ? 'right' : 'left')};
+  overflow-wrap: break-word;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    text-align: ${({ $direction }) => ($direction != 'row' ? 'left' : 'right')};
   }
 `;
 

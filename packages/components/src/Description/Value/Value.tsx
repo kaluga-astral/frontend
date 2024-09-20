@@ -7,10 +7,15 @@ import {
 
 import { type TypographyProps } from '../../Typography';
 import { ConfigContext } from '../../ConfigProvider';
-import { Tooltip } from '../../Tooltip';
 import { DescriptionContext } from '../DescriptionContext';
+import { Tooltip } from '../../Tooltip';
 
-import { StyledCopyIcon, StyledTypography, Wrapper } from './styles';
+import {
+  StyledCopyIcon,
+  StyledCopyTypography,
+  StyledTypography,
+  Wrapper,
+} from './styles';
 import { CopyStatus } from './enums';
 
 export type ValueProps = Pick<
@@ -32,11 +37,16 @@ export type ValueProps = Pick<
    * Позиционирует иконку "копировать" (слева / справа от текста)
    */
   copyPosition?: 'left' | 'right';
+  /**
+   * Текст, который будет скопирован. Перекрывает обычное копирование если children является строкой
+   */
+  copyText?: string;
 };
 
 export const Value = ({
   canCopy,
   copyPosition = 'right',
+  copyText,
   children,
   stub,
   ...props
@@ -80,32 +90,45 @@ export const Value = ({
   };
 
   return (
-    <Wrapper onMouseLeave={handleMouseLeave}>
-      <Tooltip placement="bottom" title={status}>
-        <StyledTypography
-          $direction={direction}
-          $canCopy={canCopy}
-          $leader={leader}
-          {...props}
-          onClick={handleClick}
-        >
-          {copyPosition === 'left' && (
-            <StyledCopyIcon
-              $copyPosition={copyPosition}
-              color={props.color as 'secondary'}
-            />
-          )}
-
-          {resultChildren}
-
-          {copyPosition === 'right' && (
-            <StyledCopyIcon
-              $copyPosition={copyPosition}
-              color={props.color as 'secondary'}
-            />
-          )}
-        </StyledTypography>
-      </Tooltip>
+    <Wrapper>
+      <StyledCopyTypography
+        copyPosition={copyPosition}
+        copyText={copyText}
+        $direction={direction}
+        $leader={leader}
+        component="p"
+        {...props}
+      >
+        {resultChildren}
+      </StyledCopyTypography>
     </Wrapper>
+
+    // <Wrapper onMouseLeave={handleMouseLeave}>
+    //   <Tooltip placement="bottom" title={status}>
+    //     <StyledTypography
+    //       $direction={direction}
+    //       $canCopy={canCopy}
+    //       $leader={leader}
+    //       {...props}
+    //       onClick={handleClick}
+    //     >
+    //       {copyPosition === 'left' && (
+    //         <StyledCopyIcon
+    //           $copyPosition={copyPosition}
+    //           color={props.color as 'secondary'}
+    //         />
+    //       )}
+    //
+    //       {resultChildren}
+    //
+    //       {copyPosition === 'right' && (
+    //         <StyledCopyIcon
+    //           $copyPosition={copyPosition}
+    //           color={props.color as 'secondary'}
+    //         />
+    //       )}
+    //     </StyledTypography>
+    //   </Tooltip>
+    // </Wrapper>
   );
 };
