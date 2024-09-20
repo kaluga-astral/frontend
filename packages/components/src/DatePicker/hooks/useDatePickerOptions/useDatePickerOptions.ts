@@ -7,18 +7,22 @@ import { type MinMaxDate, type PickerProps } from '../../types';
 
 type UseMaskedValueAndSelectedBaseDateOptions = MinMaxDate & {
   mask: string;
-  onChange?: (date?: Date | null) => void;
+
   currentValue?: Date | null;
+
   /**
    * смещение базовой даты в месяцах.
    * ожидается использование в DateRangePicker, для создания опорной даты второго календаря,
    * @default 0
    */
   monthOffset?: number;
+
   /**
    * колбэк на выбор даты в пикере
    */
-  onDatePick: () => void;
+  onDatePick: (date?: Date | null) => void;
+
+  onChange?: (date?: Date | null) => void;
 };
 
 type UseMaskedValueAndSelectedBaseDateReturn = {
@@ -76,7 +80,7 @@ export const useDatePickerOptions = ({
 
   const handleDatePick = (date: Date) => {
     onMaskedDateChange(date);
-    onDatePick();
+    onDatePick(date);
   };
 
   const handleMaskedInputChange = (

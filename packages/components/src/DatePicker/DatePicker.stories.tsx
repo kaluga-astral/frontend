@@ -41,12 +41,12 @@ export const Example = () => {
   return (
     <DatePicker
       inputProps={{
-        label: 'Дата начала:',
         error: false,
         helperText: undefined,
         placeholder: 'Выберите дату',
       }}
       disabled={false}
+      label="Дата рождения"
       value={date}
       onChange={setDate}
     />

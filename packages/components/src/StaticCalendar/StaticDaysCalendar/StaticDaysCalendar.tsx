@@ -34,6 +34,11 @@ export type StaticDaysCalendarProps = {
    */
   renderDayContent?: (item: Item) => ReactNode;
   /**
+   * Метод, решающий необходимость отключения возможности взаимодействия с тултипом
+   * @deprecated временное решение, и в последующем будет убрано
+   */
+  checkDisableTooltipInteractive?: (item: Item) => boolean;
+  /**
    * Флаг, отвечающий за необходимость скрытия дней, не относящихся к диапазону основного месяца
    */
   hideOutOfAvailableRangeElements?: boolean;
@@ -65,6 +70,7 @@ const StaticDaysCalendarInner = memo(
     selectedRanges,
     hideOutOfAvailableRangeElements,
     productionCalendarStorage,
+    checkDisableTooltipInteractive,
   }: StaticDaysCalendarProps) => {
     const id = useId();
 
@@ -116,6 +122,9 @@ const StaticDaysCalendarInner = memo(
                 onClick={onChange}
                 onDayHover={onDayHover}
                 renderDayTooltipTitle={renderDayTooltipTitle}
+                disableTooltipInteractive={checkDisableTooltipInteractive?.(
+                  item,
+                )}
                 renderDayContent={renderDayContent}
               />
             ) : (
@@ -163,21 +172,14 @@ export const StaticDaysCalendar = ({
   baseDate,
   ...props
 }: StaticDaysCalendarProps) => {
-  const {
-    memoizedSelectedDate,
-    memoizedHoveredDate,
-    memoizedSelectedRanges,
-    memoizedMinDate,
-    memoizedMaxDate,
-  } = useLogic({
-    selectedRanges,
-    maxDate,
-    minDate,
-    selectedDate,
-    hoveredDate,
-    isMondayFirst,
-    baseDate,
-  });
+  const { memoizedSelectedDate, memoizedHoveredDate, memoizedSelectedRanges } =
+    useLogic({
+      selectedRanges,
+      selectedDate,
+      hoveredDate,
+      isMondayFirst,
+      baseDate,
+    });
 
   return (
     <StaticDaysCalendarInner
@@ -187,8 +189,8 @@ export const StaticDaysCalendar = ({
       selectedDate={memoizedSelectedDate}
       hoveredDate={memoizedHoveredDate}
       selectedRanges={memoizedSelectedRanges}
-      minDate={memoizedMinDate}
-      maxDate={memoizedMaxDate}
+      maxDate={maxDate}
+      minDate={minDate}
     />
   );
 };

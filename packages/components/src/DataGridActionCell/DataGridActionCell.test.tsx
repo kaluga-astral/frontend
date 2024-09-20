@@ -150,4 +150,58 @@ describe('DataGridActionCell', () => {
 
     buttons.forEach((button) => expect(button).toBeDisabled());
   });
+
+  it('Окно с подтверждением отображается при нажатии на кнопку действия при needConfirm=true', async () => {
+    const onClickSpy = vi.fn();
+
+    const fakeAction: DataGridActions<DataTypeActions> = {
+      main: [
+        {
+          icon: <svg />,
+          name: 'Удалить',
+          needConfirm: true,
+          onClick: onClickSpy,
+        },
+      ],
+    };
+
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
+
+    const button = screen.getByRole('button');
+
+    await userEvents.click(button);
+
+    const popover = screen.queryByRole('presentation');
+
+    expect(popover).toBeVisible();
+  });
+
+  it('OnClick вызывается при нажатии на подтверждение действия при needConfirm=true', async () => {
+    const onClickSpy = vi.fn();
+    const fakeAction: DataGridActions<DataTypeActions> = {
+      main: [
+        {
+          icon: <svg />,
+          name: 'Удалить',
+          needConfirm: true,
+          onClick: onClickSpy,
+        },
+      ],
+    };
+
+    renderWithTheme(
+      <DataGridActionCell actions={fakeAction} row={FAKE_DATA} />,
+    );
+
+    const button = screen.getByRole('button');
+
+    await userEvents.click(button);
+
+    const confirmButton = screen.getByRole('button', { name: 'Подтвердить' });
+
+    await userEvents.click(confirmButton);
+    expect(onClickSpy).toBeCalled();
+  });
 });

@@ -463,6 +463,72 @@ export const WidthOptions = () => {
   );
 };
 
+export const ConfirmAction = () => {
+  const ACTIONS: DataGridActions<DataType> = {
+    main: [
+      {
+        icon: <BinOutlineMd />,
+        name: 'Удалить',
+        needConfirm: true,
+        confirmText:
+          'Если вы удалите черновик, то черновик с такими же данными нужно будет создать заново. Удалить черновик из списка?',
+        confirmButtonProps: {
+          text: 'Да, удалить',
+          isAccented: true,
+        },
+        onClick: (row) => alert(`Delete: ${JSON.stringify(row)}`),
+      },
+    ],
+  };
+
+  const columns = makeColumns(FAKE_COLUMNS, [
+    {
+      field: 'actions',
+      renderCell: (row) => {
+        return <DataGridActionCell actions={ACTIONS} row={row} />;
+      },
+    },
+  ]);
+
+  const fakeData: DataGridRowWithOptions<DataType>[] = [
+    {
+      id: '123456789',
+      documentName: 'Договор №12345678',
+      recipient: 'ПАО "Первый завод"',
+      createDate: makeRandomDate(),
+    },
+    ...makeDataList(FAKE_DATA_TEMPLATE),
+  ];
+
+  const [slicedData, setSlicedData] = useState<DataType[]>([]);
+  const [selected, setSelected] = useState<DataType[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlicedData(fakeData.slice(0, 10));
+      setLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleRowClick = (row: DataType) => console.log('row clicked', row);
+
+  const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  return (
+    <NewDataGrid<DataType, SortField>
+      keyId="id"
+      rows={slicedData}
+      columns={columns}
+      isLoading={isLoading}
+      selectedRows={selected}
+      onSelectRow={handleSelect}
+      onRowClick={handleRowClick}
+      onRetry={() => {}}
+    />
+  );
+};
+
 /**
  * Prop `disabled` позволяет заблокировать контент
  */
@@ -1433,10 +1499,11 @@ export const Subrows = () => {
   const [slicedData, setSlicedData] = useState<DataType[]>([]);
   const [selected, setSelected] = useState<DataType[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     setTimeout(() => {
-      setSlicedData(fakeData.slice(0, 10));
+      setSlicedData(fakeData.slice((page - 1) * 10, page * 10));
       setLoading(false);
     }, 1500);
   }, []);
@@ -1444,6 +1511,19 @@ export const Subrows = () => {
   const handleRowClick = (row: DataType) => console.log('row clicked', row);
 
   const handleSelect = (rows: DataType[]) => setSelected(rows);
+
+  const handleChangePage = (
+    _event: ChangeEvent<unknown>,
+    newPage: number,
+  ): void => {
+    setLoading(true);
+    setPage(newPage);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSlicedData(fakeData.slice((newPage - 1) * 10, newPage * 10));
+    }, 1500);
+  };
 
   return (
     <NewDataGrid<DataType, SortField>
@@ -1456,6 +1536,14 @@ export const Subrows = () => {
       }}
       isLoading={isLoading}
       selectedRows={selected}
+      footer={
+        <DataGridPagination
+          rowsPerPage={10}
+          totalCount={fakeData.length}
+          onChange={handleChangePage}
+          page={page}
+        />
+      }
       onSelectRow={handleSelect}
       onRowClick={handleRowClick}
       onRetry={() => {}}
