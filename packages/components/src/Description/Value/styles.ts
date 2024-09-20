@@ -40,12 +40,18 @@ export const StyledTypography = styled(Typography, {
 export const StyledCopyTypography = styled(CopyTypography, {
   shouldForwardProp: (prop) => !['$leader', '$direction'].includes(prop),
 })<StyledCopyTypographyProps>`
+  display: unset;
+
   hyphens: auto;
   text-align: ${({ $leader }) => ($leader ? 'right' : 'left')};
   overflow-wrap: break-word;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     text-align: ${({ $direction }) => ($direction != 'row' ? 'left' : 'right')};
+  }
+
+  & > svg {
+    margin-bottom: ${({ theme }) => theme.spacing(-1)};
   }
 `;
 
