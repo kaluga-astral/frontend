@@ -121,7 +121,12 @@ const Icon = ({ component: Component, name, size, ...props }) => {
         >
           {isVisibleCopy && (
             <CopyOutlineSm
-              style={{ fontSize: '16px', position: 'absolute', left: 0 }}
+              style={{
+                fontSize: '16px',
+                position: 'absolute',
+                left: 0,
+                color: '#778DA8',
+              }}
             />
           )}
           <Component
@@ -134,6 +139,7 @@ const Icon = ({ component: Component, name, size, ...props }) => {
           style={{
             marginTop: '20px',
           }}
+          tooltipProps={{ placement: 'bottom' }}
         >
           {name}
         </OverflowTypography>
