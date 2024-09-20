@@ -119,11 +119,11 @@ export const useLogic = ({
     toast.dismiss({ containerId: externalContainerId });
   };
 
-  const isVisibleCloseButton = Boolean(toasts.length);
+  const hasOpenNotify = Boolean(toasts.length);
 
   return {
-    isVisibleCloseButton,
-    isHoveredContainer,
+    isVisibleCloseButton: hasOpenNotify,
+    isHoveredContainer: isHoveredContainer && hasOpenNotify,
     isStartedClosingNotify,
     closeAll,
   };
