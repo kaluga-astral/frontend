@@ -1,5 +1,6 @@
 import { styled } from '../styles';
 import { Typography } from '../Typography';
+import { Skeleton } from '../Skeleton';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,6 +16,11 @@ export const DigitsWrapper = styled.ul`
 `;
 
 export const DigitsItem = styled.li`
+  flex-grow: 1;
+
+  min-width: 44px;
+  max-width: 60px;
+
   list-style-type: none;
 `;
 
@@ -41,4 +47,9 @@ export const Digit = styled.input<{ isError?: boolean }>`
 
 export const FieldLabel = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(4)};
+`;
+
+export const StyledSkeleton = styled(Skeleton)`
+  min-width: 44px;
+  max-width: 60px;
 `;

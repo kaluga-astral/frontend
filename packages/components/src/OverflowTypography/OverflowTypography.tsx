@@ -3,10 +3,10 @@ import { type PropsWithChildren } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { type TooltipProps as BasicTooltipProps } from '../Tooltip';
-import { type TypographyProps } from '../Typography';
+import { Typography, type TypographyProps } from '../Typography';
 
-import { StyledTypography } from './styles';
-import { useOverflowed } from './hooks';
+import { StyledTypography, Wrapper } from './styles';
+import { useLogic } from './useLogic';
 
 type TooltipProps = Omit<BasicTooltipProps, 'ref'>;
 
@@ -31,6 +31,10 @@ type TooltipCustomizable = {
      */
     title?: ReactNode;
   };
+  /**
+   * Количество отображаемых после сокращения в конце символов
+   */
+  visibleLastSymbolsCount?: number;
 };
 
 export type OverflowedElementProps = OverflowedProps &
@@ -45,29 +49,65 @@ export const DEFAULT_ROWS_COUNT = 1;
 export const OverflowTypography = forwardRef<
   HTMLElement,
   OverflowedTypographyProps
->(
-  (
-    { tooltipProps, children, rowsCount = DEFAULT_ROWS_COUNT, ...props },
+>((props, forwardedRef) => {
+  const {
+    ref,
+    isOverflowed,
+    secondPartLabel,
+    firstPartLabel,
+    isTruncatedStringVisible,
+  } = useLogic({
+    ...props,
     forwardedRef,
-  ) => {
-    const { ref, isOverflowed } = useOverflowed(forwardedRef);
+  });
 
-    const typographyProps = {
-      ...props,
-      ref,
-      children,
-      rowsCount,
-      hasMultipleRows: rowsCount > DEFAULT_ROWS_COUNT,
-    };
+  const {
+    tooltipProps,
+    children,
+    rowsCount = DEFAULT_ROWS_COUNT,
+    visibleLastSymbolsCount,
+    align = 'left',
+    ...restProps
+  } = props;
 
-    if (children && isOverflowed) {
-      return (
-        <Tooltip title={children} disableInteractive {...tooltipProps}>
-          <StyledTypography {...typographyProps} />
-        </Tooltip>
-      );
-    }
+  const typographyProps = {
+    ...restProps,
+    ref,
+    align,
+    children,
+    rowsCount,
+    hasMultipleRows: rowsCount > DEFAULT_ROWS_COUNT,
+  };
 
-    return <StyledTypography {...typographyProps} />;
-  },
-);
+  if (isTruncatedStringVisible) {
+    return (
+      <Tooltip title={children} disableInteractive {...tooltipProps}>
+        <Wrapper $align={align}>
+          <StyledTypography
+            component="span"
+            children={firstPartLabel}
+            ref={ref}
+            hasMultipleRows={false}
+            rowsCount={1}
+            {...restProps}
+          />
+          <Typography
+            children={secondPartLabel}
+            {...restProps}
+            component="span"
+          />
+        </Wrapper>
+      </Tooltip>
+    );
+  }
+
+  if (children && isOverflowed) {
+    return (
+      <Tooltip title={children} disableInteractive {...tooltipProps}>
+        <StyledTypography {...typographyProps} />
+      </Tooltip>
+    );
+  }
+
+  return <StyledTypography {...typographyProps} />;
+});

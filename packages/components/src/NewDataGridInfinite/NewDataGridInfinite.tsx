@@ -14,6 +14,7 @@ import {
   type NewDataGridProps,
   Row,
   RowContextProvider,
+  Variant,
 } from '../NewDataGrid';
 import { DataGridContextProvider } from '../NewDataGrid/DataGridContext';
 import { ScrollToTopButton } from '../ScrollToTopButton';
@@ -65,6 +66,7 @@ export const NewDataGridInfinite = <
     isNoData,
     isDataGridDisabled,
     isStickyButtonActive,
+    treeRenderConfig,
     virtuosoProps,
     headProps,
     rowProps,
@@ -82,7 +84,8 @@ export const NewDataGridInfinite = <
     keyId,
     activeRowId,
     emptyCellValue,
-    tree,
+    variant = Variant.Tree,
+    subrows,
     className,
     isEndReached,
     isError,
@@ -94,11 +97,13 @@ export const NewDataGridInfinite = <
     onRetry,
   } = props;
 
+  const { moreButtonColumnPosition = 1 } = subrows || {};
+
   const {
     isInitialExpanded = false,
     expandedLevel = EXPANDED_LEVEL_BY_DEFAULT,
     initialVisibleChildrenCount = INITIAL_OPENED_NESTED_CHILDREN_COUNT_BY_DEFAULT,
-  } = tree || {};
+  } = treeRenderConfig || {};
 
   const TableContainer = isDisabled ? DisabledDataGridWrapper : DataGridWrapper;
 
@@ -146,6 +151,7 @@ export const NewDataGridInfinite = <
                         selectedRows={selectedRows}
                         options={options}
                         keyId={keyId}
+                        variant={variant}
                         activeRowId={activeRowId}
                         level={INITIAL_LEVEL}
                         nestedChildren={nestedChildren as Array<TData>}
@@ -154,6 +160,7 @@ export const NewDataGridInfinite = <
                         initialVisibleChildrenCount={
                           initialVisibleChildrenCount
                         }
+                        moreButtonColumnPosition={moreButtonColumnPosition}
                         emptyCellValue={emptyCellValue}
                         onRowClick={onRowClick}
                       />

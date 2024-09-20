@@ -70,6 +70,12 @@ export {
   type FormTreeAutocompleteValue,
 } from './FormTreeAutocomplete';
 
+export {
+  FormTreeLikeAutocomplete,
+  type FormTreeLikeAutocompleteProps,
+  type FormTreeLikeAutocompleteValue,
+} from './FormTreeLikeAutocomplete';
+
 export * from './FormSelect';
 
 export * from './FormSubmitButton';

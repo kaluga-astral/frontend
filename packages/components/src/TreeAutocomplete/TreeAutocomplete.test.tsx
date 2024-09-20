@@ -8,7 +8,7 @@ import {
 } from './TreeAutocomplete';
 import { type TreeAutocompleteValue } from './types';
 
-describe('Autocomplete', () => {
+describe('TreeAutocomplete', () => {
   it('Label отображается', async () => {
     renderWithTheme(
       <TreeAutocomplete

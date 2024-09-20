@@ -28,6 +28,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   info: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -41,6 +42,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   warning: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -54,6 +56,7 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
   error: (title, { icon, ...options } = {}) =>
     toast(
       ({ toastProps }) =>
@@ -67,6 +70,113 @@ export const notify: Notify = {
         ...getNotifyOptions({ ...options }),
       },
     ),
+
+  initProgress: (initialOptions = {}) => {
+    let toastId: string | number | undefined;
+
+    return {
+      start: (title, options) => {
+        if (toastId) {
+          return console.warn(
+            `Уведомление с идентификатором ${toastId} уже запущено. Для инициализации нового уведомления используйте initProgress`,
+          );
+        }
+
+        toastId = toast(
+          ({ toastProps }) =>
+            NOTIFICATION_VARIANT.progress(
+              { ...initialOptions, ...options, title, showCloseButton: false },
+              toastProps,
+            ),
+          {
+            className: getClassNameModifierByVariant(
+              NotificationVariantTypes.progress,
+              true,
+            ),
+            transition: leave,
+            icon: false,
+            closeButton: false,
+            ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+          },
+        );
+      },
+
+      update: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.progress(
+              {
+                ...options,
+                title,
+                showCloseButton: false,
+              },
+              toastProps,
+            ),
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+        });
+      },
+
+      success: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.success({ ...options, title }, toastProps),
+          className: getClassNameModifierByVariant(
+            NotificationVariantTypes.success,
+            true,
+          ),
+          type: NotificationVariantTypes.success,
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+        });
+      },
+
+      error: (title, options) => {
+        if (!toastId) {
+          return console.warn(
+            'Перед вызовом обновления уведомления, нужно его запустить использую метод start',
+          );
+        }
+
+        notify.update(toastId, {
+          render: ({ toastProps }) =>
+            NOTIFICATION_VARIANT.error({ ...options, title }, toastProps),
+          className: getClassNameModifierByVariant(
+            NotificationVariantTypes.error,
+            true,
+          ),
+          type: NotificationVariantTypes.error,
+          ...getNotifyOptions({ ...initialOptions, isStatic: true }),
+        });
+      },
+
+      stop: () => {
+        if (initialOptions?.containerId) {
+          toast.dismiss({
+            id: toastId,
+            containerId: initialOptions.containerId,
+          });
+
+          toastId = undefined;
+
+          return;
+        }
+
+        toast.dismiss(toastId);
+        toastId = undefined;
+      },
+    };
+  },
   custom: toast,
   dismiss: toast.dismiss,
   update: toast.update,

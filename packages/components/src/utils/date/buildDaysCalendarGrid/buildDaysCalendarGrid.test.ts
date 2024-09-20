@@ -69,6 +69,26 @@ describe('buildDaysCalendarGrid', () => {
     });
   });
 
+  it('Флаг isDisabled равен true для дат которые меньше minDate, при не переданном maxDate', () => {
+    const sut = buildDaysCalendarGrid({
+      minDate: new Date('2024-08-02T00:00:00Z'),
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+    });
+
+    sut
+      .slice(0, 3)
+      .forEach(({ isDisabled }) => expect(isDisabled).toBeTruthy());
+  });
+
+  it('Флаг isDisabled равен true для дат которые больше maxDate, при не переданном minDate', () => {
+    const sut = buildDaysCalendarGrid({
+      maxDate: new Date('2024-08-05T00:00:00Z'),
+      baseDate: new Date('2024-08-01T00:00:00Z'),
+    });
+
+    sut.slice(9).forEach(({ isDisabled }) => expect(isDisabled).toBeTruthy());
+  });
+
   it('Счетчик monthDay равен номеру дня в месяце', () => {
     const sut = buildDaysCalendarGrid({
       baseDate: new Date('2024-08-01T00:00:00Z'),

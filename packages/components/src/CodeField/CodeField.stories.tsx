@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Typography } from '../Typography';
 import { Button } from '../Button';
@@ -198,6 +198,18 @@ export const IsAutoFocus = () => {
     setIsOpen(false);
   };
 
+  const [loading, setLoading] = useState(false);
+
+  const handleComplete = () => setLoading((prevState) => !prevState);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading((prevState) => !prevState);
+      }, 2000);
+    }
+  }, [loading]);
+
   return (
     <>
       <Button onClick={handleClickOpen}>Открыть CodeField</Button>
@@ -213,6 +225,8 @@ export const IsAutoFocus = () => {
             isAllowResendCode
             onResendCode={() => Promise.resolve()}
             isAutoFocus
+            loading={loading}
+            onComplete={handleComplete}
           />
         </DialogContent>
         <DialogActionComponent>
