@@ -112,11 +112,11 @@ export const Leader = () => {
     <GridWrapper rowSpacing={3} container>
       <Description leader>
         <Description.Name>ФИО</Description.Name>
-        <Description.Value canCopy>Швецова М. Д.</Description.Value>
+        <Description.Value>Швецова М. Д.</Description.Value>
       </Description>
       <Description leader>
         <Description.Name>ФИО</Description.Name>
-        <Description.Value canCopy>Швецова Мария Дмитриевна</Description.Value>
+        <Description.Value>Швецова Мария Дмитриевна</Description.Value>
       </Description>
     </GridWrapper>
   );
