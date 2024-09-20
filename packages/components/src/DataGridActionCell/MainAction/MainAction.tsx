@@ -1,22 +1,30 @@
-import type { ActionCellHandler, MainActionKind } from '../types';
-import { Tooltip, type TooltipProps } from '../../Tooltip';
+import {
+  type ActionComponentParams,
+  ConfirmAction,
+  type ConfirmActionProps,
+} from '../../ConfirmAction';
+import { IconButton } from '../../IconButton';
 import { IconDropdownButton } from '../../IconDropdownButton';
 import { MenuItem } from '../../MenuItem';
-import { IconButton } from '../../IconButton';
+import { Tooltip, type TooltipProps } from '../../Tooltip';
+import type { ActionCellHandler, MainActionKind } from '../types';
 
 type MainActionProps<TAction> = {
   /**
    *  Основные действия
    */
   action: MainActionKind<TAction>;
+
   /**
    *  Обработчик клика на действие
    */
   onActionClick: ActionCellHandler<TAction>;
+
   /**
    *  Если true, action не доступен
    */
   isDisabled?: boolean;
+
   /**
    *  Положение тултипа
    */
@@ -61,18 +69,35 @@ export const MainAction = <TAction,>({
   }
 
   const {
-    onClick,
     name,
     icon,
+    needConfirm,
+    confirmText,
+    confirmButtonProps,
     disabledReason,
     disabled,
     loading,
     isBlockingOperation,
     loadingNote,
+    onClick,
     ...actions
   } = action;
 
   const title = !loading && (disabledReason || name);
+
+  const renderButton = (
+    props: ActionComponentParams | ActionCellHandler<TAction>,
+  ) => (
+    <IconButton
+      disabled={isDisabled || disabled}
+      loading={loading}
+      {...actions}
+      variant="text"
+      {...props}
+    >
+      {icon}
+    </IconButton>
+  );
 
   return (
     <Tooltip
@@ -81,15 +106,18 @@ export const MainAction = <TAction,>({
       withoutContainer={!disabled}
       placement={tooltipPlacement}
     >
-      <IconButton
-        disabled={isDisabled || disabled}
-        loading={loading}
-        {...actions}
-        variant="text"
-        onClick={onActionClick(onClick)}
-      >
-        {icon}
-      </IconButton>
+      {needConfirm ? (
+        <ConfirmAction
+          text={confirmText}
+          confirmButtonProps={confirmButtonProps}
+          actionComponent={(props) => renderButton(props)}
+          onConfirm={onActionClick(onClick) as ConfirmActionProps['onConfirm']}
+        />
+      ) : (
+        renderButton({
+          onClick: onActionClick(onClick) as ConfirmActionProps['onConfirm'],
+        })
+      )}
     </Tooltip>
   );
 };
