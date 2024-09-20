@@ -148,6 +148,8 @@ export * from './Grid';
 
 export * from './Grow';
 
+export { GuidTypography, type GuidTypographyProps } from './GuidTypography';
+
 export { HintIcon, type HintIconProps } from './HintIcon';
 
 export * from './hooks';

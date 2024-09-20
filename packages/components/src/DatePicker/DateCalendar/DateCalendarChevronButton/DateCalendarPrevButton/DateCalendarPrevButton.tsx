@@ -1,10 +1,9 @@
-import { PreviousOutlineMd } from '@astral/icons';
 import { forwardRef, useContext } from 'react';
 
 import { ConfigContext } from '../../../../ConfigProvider';
 import { type DateCalendarChevronBtnProps } from '../types';
 
-import { Wrapper } from './styles';
+import { PrevIcon, Wrapper } from './styles';
 
 export const DateCalendarPrevButton = forwardRef<
   HTMLButtonElement,
@@ -19,7 +18,7 @@ export const DateCalendarPrevButton = forwardRef<
       tooltipTitle={`${isPlural ? previous.plural : previous.single} ${postfixTitle}`}
       {...props}
     >
-      <PreviousOutlineMd />
+      <PrevIcon />
     </Wrapper>
   );
 });
