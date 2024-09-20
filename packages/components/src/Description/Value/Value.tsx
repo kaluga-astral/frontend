@@ -64,7 +64,7 @@ export const Value = ({
         copyText={copyText}
         $direction={direction}
         $leader={leader}
-        component="p"
+        component="div"
         {...props}
       >
         {resultChildren}

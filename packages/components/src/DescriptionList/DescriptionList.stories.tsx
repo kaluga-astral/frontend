@@ -50,6 +50,10 @@ const Wrapper = styled.div`
   width: 400px;
 `;
 
+const GuidWrapper = styled.div`
+  width: 200px;
+`;
+
 export const Example = () => {
   const items: DescriptionListItem[] = [
     {
@@ -103,6 +107,32 @@ export const CopyPosition = () => {
       name: 'СНИЛС',
       value: '23339576886',
       options: { canCopy: true },
+    },
+  ];
+
+  return <DescriptionList items={items} />;
+};
+
+export const CopyText = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'ИНН',
+      value: '295995231495',
+      options: { canCopy: true },
+    },
+    {
+      name: 'СНИЛС',
+      value: '23339576886',
+      options: { canCopy: true, variant: 'tag', copyText: '23339576886' },
+    },
+    {
+      name: 'guid',
+      value: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
+      options: {
+        canCopy: true,
+        variant: 'guid',
+        copyText: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
+      },
     },
   ];
 
@@ -253,6 +283,42 @@ export const VariantTag = () => {
   ];
 
   return <DescriptionList items={items} />;
+};
+
+export const VariantGuid = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'guid',
+      value: 'c9b9b0ed-99b0-4d6a-9bf3-d9205398ca95',
+      options: { color: 'grey', variant: 'guid' },
+    },
+    {
+      name: 'guid',
+      value: 'fd81ae06-cbd4-48a5-8852-547119bb7aa6',
+      options: { color: 'warning', variant: 'guid' },
+    },
+    {
+      name: 'guid',
+      value: '01ec5d63-9d51-4901-9c34-839762f17b09',
+      options: { color: 'error', variant: 'guid' },
+    },
+    {
+      name: 'guid',
+      value: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
+      options: { color: 'success', variant: 'guid' },
+    },
+    {
+      name: 'guid',
+      value: 'b4e16f22-29ea-4b94-8736-d55067ef1b19',
+      options: { color: 'primary', variant: 'guid' },
+    },
+  ];
+
+  return (
+    <GuidWrapper>
+      <DescriptionList items={items} />
+    </GuidWrapper>
+  );
 };
 
 export const LongDescriptionValueLeader = () => {
