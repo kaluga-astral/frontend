@@ -1,9 +1,9 @@
 import { type Ref, type SyntheticEvent, useState } from 'react';
 
-import { type DatePickerProps } from '../DatePicker';
 import { useForwardedRef, usePopover, useViewportType } from '../../hooks';
 import { useDatePickerOptions, useMaskedValue } from '../hooks';
 import { DEFAULT_DATE_MASK } from '../constants';
+import { type DatePickerProps } from '../DatePicker';
 import { DEFAULT_MAX_DATE, DEFAULT_MIN_DATE } from '../MinMaxDateContext';
 
 type UseLogicParams = DatePickerProps & {
@@ -13,12 +13,12 @@ type UseLogicParams = DatePickerProps & {
 export const useLogic = ({
   label,
   value,
-  onOpen,
-  onClose,
-  onBlur,
   maxDate = DEFAULT_MAX_DATE,
   minDate = DEFAULT_MIN_DATE,
   mask = DEFAULT_DATE_MASK,
+  onOpen,
+  onClose,
+  onBlur,
   onChange,
   forwardedRef,
 }: UseLogicParams) => {
@@ -26,18 +26,18 @@ export const useLogic = ({
 
   const [selectedDate, setSelectedDate] = useState(value);
 
+  const { isOpen, actions } = usePopover();
+  const { open, close } = actions;
+
+  const { isMobile } = useViewportType();
+
   const { maskedValue } = useMaskedValue({
-    currentValue: selectedDate,
+    currentValue: value,
     mask,
     onChangeValue: onChange,
   });
 
-  const { isMobile } = useViewportType();
-
   const isTitleShow = isMobile && typeof label === 'string';
-
-  const { isOpen, actions } = usePopover();
-  const { open, close } = actions;
 
   const handleOpen = (event: SyntheticEvent) => {
     onOpen?.();
@@ -45,18 +45,24 @@ export const useLogic = ({
   };
 
   const handleClose = () => {
-    if (isMobile && value !== selectedDate) {
-      onChange?.(selectedDate);
-    }
-
     onBlur?.();
     onClose?.();
     close();
   };
 
-  const handleDayPick = () => {
+  const handleDayPick = (date?: Date | null) => {
+    if (isMobile) {
+      setSelectedDate(date);
+
+      return;
+    }
+
+    handleClose();
+  };
+
+  const handleChange = (date?: Date | null) => {
     if (!isMobile) {
-      handleClose();
+      onChange?.(date);
     }
   };
 
@@ -65,16 +71,16 @@ export const useLogic = ({
     inputProps: calculatedInputProps,
     pickerProps,
   } = useDatePickerOptions({
+    currentValue: value,
     maxDate,
     minDate,
     mask,
     onDatePick: handleDayPick,
-    currentValue: value,
-    onChange,
+    onChange: handleChange,
   });
 
   const handleConfirm = () => {
-    setSelectedDate(value);
+    onChange?.(selectedDate);
     handleClose();
   };
 
@@ -91,8 +97,8 @@ export const useLogic = ({
 
   const confirmButtonProps = {
     onClick: handleConfirm,
-    disabled: !Boolean(value),
-    children: !Boolean(value)
+    disabled: !Boolean(selectedDate),
+    children: !Boolean(selectedDate)
       ? 'Выберите дату'
       : `Выбрать ${calculatedInputProps.value}`,
   };
