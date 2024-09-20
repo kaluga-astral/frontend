@@ -32,6 +32,7 @@ export const Wrapper = styled(Typography, {
 })<{ $align: string }>`
   display: flex;
   justify-content: ${({ $align }) => $align};
+
   width: 100%;
 
   white-space: nowrap;
