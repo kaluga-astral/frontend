@@ -121,11 +121,6 @@ export const CopyText = () => {
       options: { canCopy: true },
     },
     {
-      name: 'СНИЛС',
-      value: '23339576886',
-      options: { canCopy: true, variant: 'tag', copyText: '23339576886' },
-    },
-    {
       name: 'guid',
       value: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
       options: {
@@ -136,7 +131,11 @@ export const CopyText = () => {
     },
   ];
 
-  return <DescriptionList items={items} />;
+  return (
+    <GuidWrapper>
+      <DescriptionList items={items} />
+    </GuidWrapper>
+  );
 };
 
 /**
@@ -290,27 +289,16 @@ export const VariantGuid = () => {
     {
       name: 'guid',
       value: 'c9b9b0ed-99b0-4d6a-9bf3-d9205398ca95',
-      options: { color: 'grey', variant: 'guid' },
+      options: { variant: 'guid' },
     },
     {
       name: 'guid',
       value: 'fd81ae06-cbd4-48a5-8852-547119bb7aa6',
-      options: { color: 'warning', variant: 'guid' },
-    },
-    {
-      name: 'guid',
-      value: '01ec5d63-9d51-4901-9c34-839762f17b09',
-      options: { color: 'error', variant: 'guid' },
-    },
-    {
-      name: 'guid',
-      value: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
-      options: { color: 'success', variant: 'guid' },
-    },
-    {
-      name: 'guid',
-      value: 'b4e16f22-29ea-4b94-8736-d55067ef1b19',
-      options: { color: 'primary', variant: 'guid' },
+      options: {
+        variant: 'guid',
+        canCopy: true,
+        copyText: 'fd81ae06-cbd4-48a5-8852-547119bb7aa6',
+      },
     },
   ];
 

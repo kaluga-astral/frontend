@@ -72,7 +72,9 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
             copyPosition={copyPosition}
             copyText={copyText}
           >
-            <GuidTypography tooltipProps={{ title: undefined }}>
+            <GuidTypography
+              tooltipProps={canCopy ? { title: undefined } : undefined}
+            >
               {value}
             </GuidTypography>
           </StyledDescriptionValue>
