@@ -264,6 +264,13 @@ export { Skeleton, type SkeletonProps } from './Skeleton';
 
 export * from './Slide';
 
+export {
+  SortableList,
+  type SortableListProps,
+  SortableListItem,
+  type SortableListItemProps,
+} from './SortableList';
+
 export * from './Stepper';
 
 export {

@@ -69,11 +69,6 @@ export type DataListProps<TDataItem extends Record<string, unknown>> = {
   isEndReached?: boolean;
 
   /**
-   * Флаг достижения конца списка
-   */
-  // scrollerRef?: (element: HTMLElement | null) => void;
-
-  /**
    * Содержание карточки
    */
   itemContent: (
@@ -166,7 +161,6 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
         overscan={OVERSCAN_COUNT}
         endReached={handleEndReach}
         rangeChanged={handleRangeChanged}
-        // scrollerRef={scrollerRef}
         itemContent={(index, item) => {
           return (
             <Item key={item[keyId] as Key}>
