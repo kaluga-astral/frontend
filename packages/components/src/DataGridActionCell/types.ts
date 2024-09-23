@@ -1,48 +1,71 @@
 import type { MouseEventHandler, ReactNode } from 'react';
 
-import type { MenuItemProps } from '../MenuItem';
-import type { IconButtonProps } from '../IconButton';
+import { type ConfirmActionProps } from '../ConfirmAction';
+import { type MenuItemProps } from '../MenuItem';
+import { type IconButtonProps } from '../IconButton';
 
 export type NestedAction<TAction> = MenuItemProps & {
-  /**
-   * Обработчик действия
-   */
-  onClick?: (row: TAction) => void;
   /**
    * Название действия
    */
   name: string;
+
+  /**
+   * Обработчик действия
+   */
+  onClick?: (row: TAction) => void;
 };
 
 export type SingleAction<TAction> = {
   /**
-   * Причина блокировки действия
+   * Название действия
    */
-  disabledReason?: string;
+  name: string;
+
   /**
    * Иконка действия
    */
   icon?: ReactNode;
-  /**
-   * Обработчик действия
-   */
-  onClick?: (row: TAction) => void;
-  /**
-   * Название действия
-   */
-  name: string;
+
   /**
    * Флаг показа выпадающего списка при клике
    */
   nested?: false;
+
+  /**
+   * Если `true`, при клике на кнопку будет вызываться подтверждение действия
+   */
+  needConfirm?: boolean;
+
+  /**
+   * Поясняющий текст для подтверждения действия
+   */
+  confirmText?: ConfirmActionProps['text'];
+
+  /**
+   * Параметры кнопки подтверждения действия
+   */
+  confirmButtonProps?: ConfirmActionProps['confirmButtonProps'];
+
   /**
    * Если true, блокирует взаимодействие с actions
    */
   isBlockingOperation?: boolean;
+
+  /**
+   * Причина блокировки действия
+   */
+  disabledReason?: string;
+
   /**
    * Причина блокировки строки во время загрузки
    */
   loadingNote?: string;
+
+  /**
+   * Обработчик действия
+   */
+  onClick?: (row: TAction) => void;
 };
 
 export type MultipleAction<TAction> = MenuItemProps & {
@@ -92,6 +115,7 @@ export type SecondaryActionKind<TAction> = MenuItemProps &
      * Причина блокировки действия
      */
     disabledReason?: string;
+
     /**
      * Если true, происходит загрузка
      */

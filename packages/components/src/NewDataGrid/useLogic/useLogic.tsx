@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { prop, uniqueBy } from '../../utils';
+import { Variant } from '../enums';
 import { type NewDataGridProps } from '../NewDataGrid';
 import type { CellValue, DataGridRow } from '../types';
 
@@ -24,6 +25,9 @@ export const useLogic = <
   keyId,
   columns,
   rows = [],
+  variant,
+  tree,
+  subrows,
   selectedRows = [],
   isLoading,
   isDisabled,
@@ -32,6 +36,10 @@ export const useLogic = <
   const isNoData = Boolean(rows?.length);
   const isSelectable = Boolean(onSelectRow);
   const isDataGridDisabled = isLoading || isDisabled;
+
+  const treeRenderConfig = Object.is(variant, Variant.Subrows)
+    ? { ...subrows, isInitialExpanded: true }
+    : tree;
 
   const availableRows = rows.filter(
     (row) => !(row.options?.isDisabled || row.options?.isNotSelectable),
@@ -61,6 +69,8 @@ export const useLogic = <
 
     return columns;
   }, [columns, rows]);
+
+  const renderRows = isLoading ? prevRowsRef.current : rows;
 
   const handleSelectAllRows = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!onSelectRow) {
@@ -103,10 +113,10 @@ export const useLogic = <
     [selectedRows, onSelectRow, keyId],
   );
 
-  const renderRows = isLoading ? prevRowsRef.current : rows;
-
   return {
     isDataGridDisabled,
+    treeRenderConfig,
+    renderRows,
     headProps: {
       rowsCount: availableRows.length,
       uncheckedRowsCount,
@@ -124,6 +134,5 @@ export const useLogic = <
       isLoading: isNoData && isLoading,
       isDisabled,
     },
-    renderRows,
   };
 };

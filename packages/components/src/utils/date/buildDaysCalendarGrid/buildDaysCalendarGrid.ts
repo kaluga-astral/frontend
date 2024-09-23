@@ -116,6 +116,19 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
       date.toISOString(),
     );
 
+    const hasBothEdgeDates = Boolean(minDate && maxDate);
+
+    const isDisabled =
+      (hasBothEdgeDates &&
+        isDateOutOfRange({
+          date,
+          dateA: minDate!,
+          dateB: maxDate!,
+          deep: DateCompareDeep.day,
+        })) ||
+      (Boolean(minDate) && date < minDate!) ||
+      (Boolean(maxDate) && date > maxDate!);
+
     return {
       ...productionCalendarDay,
       isOutOfAvailableRange: dateMonth !== month,
@@ -149,15 +162,7 @@ export const buildDaysCalendarGrid: CalendarGridBuilder<
         deep: DateCompareDeep.day,
       }),
       monthDay: date.getUTCDate(),
-      isDisabled:
-        minDate && maxDate
-          ? isDateOutOfRange({
-              date,
-              dateA: minDate,
-              dateB: maxDate,
-              deep: DateCompareDeep.day,
-            })
-          : false,
+      isDisabled,
     };
   });
 };

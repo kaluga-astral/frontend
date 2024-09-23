@@ -108,7 +108,7 @@ export const PageHeader = <
           </BackButton>
         )}
         {typeof title === 'string' ? (
-          <Title variant="h3" noWrap={isMobile}>
+          <Title component="h1" variant="h3" noWrap={isMobile}>
             <OverflowTypography component="div" variant="inherit">
               {title}
             </OverflowTypography>
@@ -118,7 +118,7 @@ export const PageHeader = <
             component="div"
             role="heading"
             variant="h3"
-            aria-level={3}
+            aria-level={1}
             noWrap={isMobile}
           >
             {title}

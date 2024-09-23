@@ -2,8 +2,7 @@ import { styled } from '../../styles';
 import { MIN_ROW_HEIGHT } from '../constants';
 
 export const Wrapper = styled('ul', {
-  shouldForwardProp: (prop) =>
-    prop !== '$isEmpty' && prop !== '$minDisplayRows',
+  shouldForwardProp: (prop) => !['$isEmpty', '$minDisplayRows'].includes(prop),
 })<{ $isEmpty: boolean; $minDisplayRows: number }>`
   overflow-y: auto;
 

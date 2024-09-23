@@ -13,4 +13,10 @@ export const InnerContainer = styled.div`
   display: flex;
 
   padding: ${({ theme }) => theme.spacing(4)};
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: unset;
+
+    padding: unset;
+  }
 `;

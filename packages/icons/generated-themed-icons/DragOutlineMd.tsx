@@ -10,10 +10,7 @@ const DragOutlineMd: React.FunctionComponent<SvgIconProps> = ({ ...props }) => (
     fill="currentColor"
     {...props}
   >
-    <path
-      fillRule="evenodd"
-      d="M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm2 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm0 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-2-5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm2-9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
-    />
+    <path d="M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm2 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm0 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-2-5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm2-9a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
   </SvgIcon>
 );
 
