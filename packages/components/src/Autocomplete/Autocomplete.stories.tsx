@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { type SyntheticEvent, useState } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Tag } from '../Tag';
@@ -219,18 +219,28 @@ export const Small = () => (
   </Wrapper>
 );
 
-export const NoData = () => (
-  <Wrapper>
-    <Autocomplete<Option, true, false, false>
-      label="No data"
-      size="small"
-      multiple
-      options={[]}
-      getOptionLabel={(params) => params.title}
-      required
-    />
-  </Wrapper>
-);
+export const NoData = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputValueChange = (_: SyntheticEvent, value: string) => {
+    setInputValue(value);
+  };
+
+  return (
+    <Wrapper>
+      <Autocomplete<Option, true, false, false>
+        label="No data"
+        size="small"
+        multiple
+        options={[]}
+        onInputChange={handleInputValueChange}
+        inputValue={inputValue}
+        getOptionLabel={(params) => params.title}
+        required
+      />
+    </Wrapper>
+  );
+};
 
 export const CustomRenderOption = () => (
   <Wrapper>

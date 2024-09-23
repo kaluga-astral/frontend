@@ -112,8 +112,13 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
-  const isEmpty = checkIsInputEmpty(restProps.value);
+  const { inputValue, options, loading } = restProps;
+  const isInputValueNotEmpty =
+    inputValue !== undefined && inputValue.length >= 1;
+  const isOptionsAvailable = options.length > 0;
+  const isPopperVisible = isInputValueNotEmpty || isOptionsAvailable || loading;
 
+  const isEmpty = checkIsInputEmpty(restProps.value);
   const disableClearable = isEmpty || Boolean(externalDisableClearable);
 
   const renderDefaultTags = useCallback(
@@ -220,19 +225,21 @@ const AutocompleteInner = <
       multiple={multiple}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
-      PopperComponent={({ children, ...rest }) => (
-        <MuiPopper {...rest}>
-          {isLoadedDataError ? (
-            <PopperWrapper>
-              <Typography variant="body1" color="grey" colorIntensity="600">
-                {loadedDataError}
-              </Typography>
-            </PopperWrapper>
-          ) : (
-            children
-          )}
-        </MuiPopper>
-      )}
+      PopperComponent={({ children, ...rest }) => {
+        return isPopperVisible ? (
+          <MuiPopper {...rest}>
+            {isLoadedDataError ? (
+              <PopperWrapper>
+                <Typography variant="body1" color="grey" colorIntensity="600">
+                  {loadedDataError}
+                </Typography>
+              </PopperWrapper>
+            ) : (
+              children
+            )}
+          </MuiPopper>
+        ) : null;
+      }}
       renderTags={renderTags ?? renderDefaultTags}
       renderInput={renderInput}
       renderOption={renderOption}
