@@ -90,6 +90,7 @@ export const DatePickerInput = forwardRef<
             startAdornment: startAdornment,
           }}
           inputProps={{
+            autocomplete: 'off',
             ...props.inputProps,
             ref,
           }}
