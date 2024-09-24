@@ -7,7 +7,36 @@ import { TextField } from '../TextField';
 import { Autocomplete } from './Autocomplete';
 
 describe('Autocomplete', () => {
-  it('Popover не отображается пои фокусе на инпут', async () => {
+  it('Popover не отображается при клике на инпут, если inputValue пуст, а опций для выбора нет', async () => {
+    renderWithTheme(<Autocomplete options={[]} inputValue="" />);
+    await userEvents.click(screen.getByRole('combobox'));
+
+    const noDataPlaceholder = screen.queryByText('Нет данных');
+
+    expect(noDataPlaceholder).toBeNull();
+  });
+
+  it('Popover отображается при клике на инпут, если есть опции для выбора, но inputValue пуст', async () => {
+    type Option = { name: string; surname: string };
+
+    const options: Option[] = [{ name: 'Vasya', surname: 'Pupkin' }];
+
+    renderWithTheme(
+      <Autocomplete<Option, false, false, false>
+        options={options}
+        inputValue=""
+        getOptionLabel={(option) => option.surname}
+      />,
+    );
+
+    await userEvents.click(screen.getByRole('combobox'));
+
+    const expectedOption = screen.getByText('Pupkin');
+
+    expect(expectedOption).toBeVisible();
+  });
+
+  it('Popover не отображается при фокусе на инпут', async () => {
     renderWithTheme(<Autocomplete options={[]} />);
     fireEvent.focus(screen.getByRole('combobox'));
 
