@@ -7,6 +7,7 @@ export const Wrapper = styled('div', {
   $justifyContent?: 'space-between' | 'start';
   $direction?: 'default' | 'column' | 'row';
 }>`
+  overflow: hidden;
   display: flex;
   flex-direction: ${({ $direction }) =>
     $direction === 'default' ? 'row' : $direction};

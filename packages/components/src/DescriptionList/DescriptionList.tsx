@@ -3,18 +3,24 @@ import { type ReactNode, useCallback } from 'react';
 import { Description, type DescriptionProps } from '../Description';
 import { type ValueProps } from '../Description/Value';
 import { Tag, type TagColor } from '../Tag';
+import { GuidTypography } from '../GuidTypography';
 
-import { StyledDescriptionName, Wrapper } from './styles';
+import {
+  StyledDescriptionName,
+  StyledDescriptionValue,
+  Wrapper,
+} from './styles';
+import { getTooltipProps } from './utils';
 
 export type DescriptionOptions = Pick<
   ValueProps,
-  'canCopy' | 'copyPosition' | 'color'
+  'canCopy' | 'copyPosition' | 'color' | 'copyText'
 > & {
   nameMaxWidth?: string;
   /**
    *  Вариант отображения Value в списке
    */
-  variant?: 'tag' | 'default';
+  variant?: 'tag' | 'default' | 'guid';
   renderValue?: (
     value: ReactNode,
     optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
@@ -43,18 +49,34 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
       value: ReactNode,
       optionProps: Omit<DescriptionOptions, 'nameMaxWidth'>,
     ) => {
-      const { renderValue, color, canCopy, copyPosition, variant } =
+      const { renderValue, color, canCopy, copyPosition, variant, copyText } =
         optionProps;
 
       if (renderValue) {
         return renderValue(value, optionProps);
       }
 
-      if (variant) {
+      if (variant === 'tag') {
         return (
           <Description.Value>
             <Tag label={value} color={color as TagColor} variant="light" />
           </Description.Value>
+        );
+      }
+
+      if (variant === 'guid') {
+        const tooltipProps = getTooltipProps(canCopy);
+
+        return (
+          <StyledDescriptionValue
+            canCopy={canCopy}
+            $isCopy={canCopy}
+            color={color}
+            copyPosition={copyPosition}
+            copyText={copyText}
+          >
+            <GuidTypography tooltipProps={tooltipProps}>{value}</GuidTypography>
+          </StyledDescriptionValue>
         );
       }
 

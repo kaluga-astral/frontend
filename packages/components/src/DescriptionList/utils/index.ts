@@ -1,0 +1,1 @@
+export { getTooltipProps } from './getTooltipProps';
