@@ -10,6 +10,7 @@ import {
   StyledDescriptionValue,
   Wrapper,
 } from './styles';
+import { getTooltipProps } from './utils';
 
 export type DescriptionOptions = Pick<
   ValueProps,
@@ -64,6 +65,8 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
       }
 
       if (variant === 'guid') {
+        const tooltipProps = getTooltipProps(canCopy);
+
         return (
           <StyledDescriptionValue
             canCopy={canCopy}
@@ -72,11 +75,7 @@ export const DescriptionList = ({ items, ...props }: DescriptionListProps) => {
             copyPosition={copyPosition}
             copyText={copyText}
           >
-            <GuidTypography
-              tooltipProps={canCopy ? { title: undefined } : undefined}
-            >
-              {value}
-            </GuidTypography>
+            <GuidTypography tooltipProps={tooltipProps}>{value}</GuidTypography>
           </StyledDescriptionValue>
         );
       }
