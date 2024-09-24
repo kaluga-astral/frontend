@@ -226,9 +226,9 @@ describe('FormAutocomplete', () => {
 
       renderWithTheme(<TestComponent />);
 
-      const setTextBtn = screen.getByRole('button');
+      const setTextBtn = screen.getAllByRole('button');
 
-      await userEvents.click(setTextBtn);
+      await userEvents.click(setTextBtn[1]);
       expect(screen.getByDisplayValue(formText)).toBeInTheDocument();
     });
 
