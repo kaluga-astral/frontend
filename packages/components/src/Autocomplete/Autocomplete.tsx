@@ -1,4 +1,5 @@
 import {
+  type AutocompleteInputChangeReason,
   type AutocompleteRenderGetTagProps,
   type AutocompleteRenderInputParams,
   type AutocompleteRenderOptionState,
@@ -7,8 +8,15 @@ import {
   type AutocompleteProps as MuiAutocompleteProps,
   Popper as MuiPopper,
 } from '@mui/material';
-import { forwardRef, useCallback } from 'react';
-import type { ForwardedRef, HTMLAttributes, ReactNode } from 'react';
+import {
+  type ForwardedRef,
+  type HTMLAttributes,
+  type ReactNode,
+  type SyntheticEvent,
+  forwardRef,
+  useCallback,
+  useState,
+} from 'react';
 import { ChevronDOutlineMd, CrossSmOutlineSm } from '@astral/icons';
 
 import { TextField, type TextFieldProps } from '../TextField';
@@ -112,14 +120,25 @@ const AutocompleteInner = <
   >,
   ref?: ForwardedRef<unknown>,
 ) => {
-  const { inputValue, options, loading } = restProps;
-  const isInputValueNotEmpty =
-    inputValue !== undefined && inputValue.length >= 1;
-  const isOptionsAvailable = options.length > 0;
-  const isPopperVisible = isInputValueNotEmpty || isOptionsAvailable || loading;
+  const { options, loading, onInputChange } = restProps;
 
+  const [innerInputValue, setInnerInputValue] = useState('');
+
+  const isInnerInputValueNotEmpty = innerInputValue.length >= 1;
+  const isOptionsAvailable = options.length > 0;
+  const isPopperVisible =
+    isInnerInputValueNotEmpty || isOptionsAvailable || loading;
   const isEmpty = checkIsInputEmpty(restProps.value);
   const disableClearable = isEmpty || Boolean(externalDisableClearable);
+
+  const handleInputChange = (
+    event: SyntheticEvent,
+    value: string,
+    reason: AutocompleteInputChangeReason,
+  ) => {
+    onInputChange?.(event, value, reason);
+    setInnerInputValue(value);
+  };
 
   const renderDefaultTags = useCallback(
     (
@@ -223,6 +242,7 @@ const AutocompleteInner = <
       {...restProps}
       size={size}
       multiple={multiple}
+      onInputChange={handleInputChange}
       getOptionLabel={getOptionLabel}
       disableCloseOnSelect={multiple}
       PopperComponent={({ children, ...rest }) => {
@@ -244,6 +264,7 @@ const AutocompleteInner = <
       renderInput={renderInput}
       renderOption={renderOption}
       popupIcon={<ChevronDOutlineMd />}
+      forcePopupIcon
       loadingText={loadingText}
       clearIcon={<CrossSmOutlineSm />}
       isOptionEqualToValue={isOptionEqualToValue}

@@ -1,54 +1,59 @@
-import { Pagination } from '../Pagination';
-import { type PaginationProps } from '../Pagination';
+import { Pagination, type PaginationProps } from '../Pagination';
 import { MenuItem } from '../MenuItem';
 import { Typography } from '../Typography';
 import { Select } from '../Select';
 
-import { PaginationWrapper, Range, RangeWrapper } from './styles';
-import { useLogic } from './useLogic';
 import {
   DEFAULT_ROWS_PER_PAGE,
   DEFAULT_ROWS_PER_PAGE_OPTION,
 } from './constants';
+import { useLogic } from './useLogic';
+import { PaginationWrapper, Range, RangeWrapper } from './styles';
 
 export type DataGridPaginationProps = Omit<PaginationProps, 'count'> & {
   /**
    * Количество всех записей
    */
   totalCount: number;
-  /**
-   * Максимальное количество записей на страницу
-   */
-  rowsPerPage?: number;
+
   /**
    * Текущая страница
    */
   page: number;
+
   /**
-   * Коллбэк для установки количества отображаемых элементов на странице
+   * Максимальное количество записей на страницу
    */
-  onSetCountPerPage?: (rowsPerPage: number) => void;
+  rowsPerPage?: number;
+
   /**
    * Конфигурация списка кол-ва элементов, отображаемых на одной странице
    */
   rowsPerPageOptions?: number[];
+
+  /**
+   * Коллбэк для установки количества отображаемых элементов на странице
+   */
+  onSetCountPerPage?: (rowsPerPage: number) => void;
 };
 
-export const DataGridPagination = ({
-  page,
-  rowsPerPage = DEFAULT_ROWS_PER_PAGE,
-  totalCount,
-  className,
-  onSetCountPerPage,
-  rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTION,
-  ...props
-}: DataGridPaginationProps) => {
+export const DataGridPagination = (props: DataGridPaginationProps) => {
   const {
     formattedRange,
     pageCount,
     handleChangeRowsPerPage,
     isVisiblePagination,
-  } = useLogic(totalCount, rowsPerPage, page, onSetCountPerPage);
+  } = useLogic(props);
+
+  const {
+    page,
+    totalCount,
+    className,
+    rowsPerPage = DEFAULT_ROWS_PER_PAGE,
+    rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTION,
+    onSetCountPerPage,
+    ...restProps
+  } = props;
 
   if (!isVisiblePagination) {
     return null;
@@ -73,9 +78,11 @@ export const DataGridPagination = ({
             </Select>
           </>
         )}
+
         <Range variant="h6">{formattedRange()}</Range>
       </RangeWrapper>
-      <Pagination count={pageCount} page={page} {...props} />
+
+      <Pagination count={pageCount} page={page} {...restProps} />
     </PaginationWrapper>
   );
 };
