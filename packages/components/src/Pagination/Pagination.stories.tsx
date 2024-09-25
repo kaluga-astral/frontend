@@ -36,18 +36,10 @@ export const Example = () => (
   </>
 );
 
-export const HideButtons = () => (
-  <>
-    <Pagination count={10} hidePrevButton hideNextButton />
-  </>
-);
-
 export const PaginationRanges = () => (
   <Grid container rowSpacing={3} columns={1}>
     <Pagination count={10} defaultPage={6} siblingCount={0} />
     <Pagination count={10} defaultPage={6} />
-    <Pagination count={10} defaultPage={6} siblingCount={0} boundaryCount={2} />
-    <Pagination count={10} defaultPage={6} boundaryCount={2} />
   </Grid>
 );
 
