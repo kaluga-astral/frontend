@@ -4,5 +4,10 @@ import { type WithoutEmotionSpecific } from '../types';
 
 export type PaginationProps = Omit<
   WithoutEmotionSpecific<MuiPaginationProps>,
-  'shape'
+  | 'shape'
+  | 'showLastButton'
+  | 'showFirstButton'
+  | 'boundaryCount'
+  | 'hidePrevButton'
+  | 'hideNextButton'
 >;
