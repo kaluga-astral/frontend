@@ -11,6 +11,7 @@ import { useToggle } from '../hooks';
 import { ConfigContext } from '../ConfigProvider';
 import { ContentState } from '../ContentState';
 import { ScrollToTopButton } from '../ScrollToTopButton';
+import type { RequiredKeys } from '../types';
 
 import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
 import { EndData } from './EndData';
@@ -18,12 +19,6 @@ import { Error } from './Error';
 import { Loader } from './Loader';
 import { NoData } from './NoData';
 import { Item } from './styles';
-
-// TODO Вынести этот дженерик в отдельный пакет
-// Дженерик получает из типа только обязательные поля и возвращает их как union
-type RequiredKeys<T> = {
-  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
-}[keyof T];
 
 export type DataListProps<TDataItem extends Record<string, unknown>> = {
   data?: Array<TDataItem>;
