@@ -3,13 +3,14 @@ import { type Meta } from '@storybook/react';
 import { arrayMove } from '@dnd-kit/sortable';
 import { type DragEndEvent } from '@dnd-kit/core';
 import { fakerRU } from '@faker-js/faker';
-import { BinOutlineMd, EditOutlineMd } from '@astral/icons';
+import { BinOutlineMd } from '@astral/icons';
 
 import { styled } from '../styles';
 import { IconButton } from '../IconButton';
+import { SortableListItem } from '../SortableListItem';
 
 import { SortableList } from './SortableList';
-import { SortableListItem } from './SortableListItem';
+import { VirtualDataDisplayStrategy } from './DataDisplayStrategy';
 
 const meta: Meta<typeof SortableList> = {
   title: 'Components/Data Display/SortableList',
@@ -34,10 +35,15 @@ type ItemProps = {
   item: DataItem;
 };
 
+type RemovableItemProps = {
+  item: DataItem;
+  onDelete: (item: DataItem) => void;
+};
+
 const Item = ({ item }: ItemProps) => {
   return (
     <SortableListItem
-      keyId={item.id}
+      id={item.id}
       isDisabled={item.text === 'Договор на оказание услуг №6'}
     >
       {item.text}
@@ -51,10 +57,9 @@ const Container = styled.div`
 `;
 
 export const Example = () => {
-  const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState(generateData());
 
-  function handleDragEnd(event: DragEndEvent) {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!active || !over) {
@@ -67,15 +72,6 @@ export const Example = () => {
 
       setSlicedData(arrayMove(slicedData, oldIndex, newIndex));
     }
-  }
-
-  const incrementData = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setSlicedData((prevData) => [...prevData, ...generateData()]);
-      setLoading(false);
-    }, 1500);
   };
 
   return (
@@ -83,11 +79,7 @@ export const Example = () => {
       <SortableList
         keyId="id"
         data={slicedData}
-        isLoading={loading}
         onDragEnd={handleDragEnd}
-        onEndReached={incrementData}
-        isEndReached={false}
-        onRetry={() => incrementData}
         ListItem={Item}
         isLockedHorizontalAxis={false}
       />
@@ -96,10 +88,9 @@ export const Example = () => {
 };
 
 export const LockedHorizontalAxis = () => {
-  const [loading, setLoading] = useState(false);
   const [slicedData, setSlicedData] = useState(generateData());
 
-  function handleDragEnd(event: DragEndEvent) {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!active || !over) {
@@ -112,15 +103,6 @@ export const LockedHorizontalAxis = () => {
 
       setSlicedData(arrayMove(slicedData, oldIndex, newIndex));
     }
-  }
-
-  const incrementData = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setSlicedData((prevData) => [...prevData, ...generateData()]);
-      setLoading(false);
-    }, 1500);
   };
 
   return (
@@ -128,63 +110,29 @@ export const LockedHorizontalAxis = () => {
       <SortableList
         keyId="id"
         data={slicedData}
-        isLoading={loading}
         onDragEnd={handleDragEnd}
-        onEndReached={incrementData}
-        isEndReached={false}
-        onRetry={() => incrementData}
         ListItem={Item}
         isLockedHorizontalAxis={true}
+        DataDisplayStrategy={VirtualDataDisplayStrategy}
       />
     </Container>
   );
 };
 
-export const WithActions = () => {
-  const [loading, setLoading] = useState(false);
+export const RemovableItems = () => {
   const [slicedData, setSlicedData] = useState(generateData());
 
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
+  const ItemWithAction = ({ item, onDelete }: RemovableItemProps) => {
+    const handleDeleteClick = () => {
+      onDelete(item);
+    };
 
-    if (!active || !over) {
-      return;
-    }
-
-    if (active.id !== over.id) {
-      const oldIndex = slicedData.findIndex((item) => item.id === active.id);
-      const newIndex = slicedData.findIndex((item) => item.id === over.id);
-
-      setSlicedData(arrayMove(slicedData, oldIndex, newIndex));
-    }
-  }
-
-  const incrementData = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setSlicedData((prevData) => [...prevData, ...generateData()]);
-      setLoading(false);
-    }, 1500);
-  };
-
-  const handleEditClick = () => {
-    alert('Edit click');
-  };
-  const handleDeleteClick = () => {
-    alert('Delete click');
-  };
-
-  const ItemWithAction = ({ item }: ItemProps) => {
     return (
       <SortableListItem
-        keyId={item.id}
+        id={item.id}
         isDisabled={item.text === 'Договор на оказание услуг №6'}
         actions={
           <>
-            <IconButton onClick={handleEditClick}>
-              <EditOutlineMd />
-            </IconButton>
             <IconButton>
               <BinOutlineMd onClick={handleDeleteClick} />
             </IconButton>
@@ -196,17 +144,34 @@ export const WithActions = () => {
     );
   };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!active || !over) {
+      return;
+    }
+
+    if (active.id !== over.id) {
+      const oldIndex = slicedData.findIndex((item) => item.id === active.id);
+      const newIndex = slicedData.findIndex((item) => item.id === over.id);
+
+      setSlicedData(arrayMove(slicedData, oldIndex, newIndex));
+    }
+  };
+
+  const handleDelete = (data: DataItem) => {
+    setSlicedData((items) => items.filter((item) => item.id !== data.id));
+  };
+
   return (
     <Container>
       <SortableList
         keyId="id"
         data={slicedData}
-        isLoading={loading}
         onDragEnd={handleDragEnd}
-        onEndReached={incrementData}
-        isEndReached={false}
-        onRetry={() => incrementData}
-        ListItem={ItemWithAction}
+        ListItem={({ item }) => (
+          <ItemWithAction item={item} onDelete={handleDelete} />
+        )}
         isLockedHorizontalAxis={true}
       />
     </Container>

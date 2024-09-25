@@ -1,5 +1,4 @@
 import { type PropsWithChildren, type ReactNode } from 'react';
-import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import {
@@ -9,12 +8,13 @@ import {
   IconWrapper,
   ListItem,
 } from './styles';
+import { useLogic } from './useLogic';
 
 export type SortableListItemProps = PropsWithChildren<{
   /**
    * Уникальный id элемента
    */
-  keyId: string;
+  id: string;
   /**
    * Флаг запрещающий перетягивать элемент
    */
@@ -26,7 +26,7 @@ export type SortableListItemProps = PropsWithChildren<{
 }>;
 
 export const SortableListItem = (props: SortableListItemProps) => {
-  const { keyId, isDisabled, children, actions } = props;
+  const { isDisabled, children, actions, id } = props;
 
   const {
     attributes,
@@ -35,12 +35,13 @@ export const SortableListItem = (props: SortableListItemProps) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: keyId, disabled: isDisabled });
+  } = useLogic(props);
 
   const isActionsExists = Boolean(actions);
 
   return (
     <ListItem
+      key={id}
       ref={setNodeRef}
       $isDragging={isDragging}
       $isDisabled={isDisabled}

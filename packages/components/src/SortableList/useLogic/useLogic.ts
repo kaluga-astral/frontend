@@ -1,20 +1,32 @@
 import { useMemo, useState } from 'react';
-import { type DragEndEvent } from '@dnd-kit/core';
+import {
+  type DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 import type { ObjectWithId } from '../types';
+import { type SortableListProps } from '../SortableList';
 
-type UseLogicProps<TDataItem extends ObjectWithId> = {
-  data?: TDataItem[];
-  isLockedHorizontalAxis?: boolean;
-  onDragStart?: (event: DragEndEvent) => void;
-  onDragEnd: (event: DragEndEvent) => void;
-};
+type UseLogicParams<TDataItem extends ObjectWithId> =
+  SortableListProps<TDataItem>;
 
-export const useLogic = <TDataItem extends ObjectWithId>(
-  props: UseLogicProps<TDataItem>,
-) => {
-  const { data, isLockedHorizontalAxis, onDragStart, onDragEnd } = props;
+export const useLogic = <TDataItem extends ObjectWithId>({
+  data,
+  isLockedHorizontalAxis,
+  onDragStart,
+  onDragEnd,
+}: UseLogicParams<TDataItem>) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
 
   const [activeId, setActiveId] = useState<string | number | null>(null);
 
@@ -28,7 +40,7 @@ export const useLogic = <TDataItem extends ObjectWithId>(
     [isLockedHorizontalAxis],
   );
 
-  function handleDragStart(event: DragEndEvent) {
+  const handleDragStart = (event: DragEndEvent) => {
     onDragStart?.(event);
 
     const { active } = event;
@@ -38,12 +50,12 @@ export const useLogic = <TDataItem extends ObjectWithId>(
     }
 
     setActiveId(active.id);
-  }
+  };
 
-  function handleDragEnd(event: DragEndEvent) {
+  const handleDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     onDragEnd(event);
-  }
+  };
 
-  return { activeItem, handleDragStart, handleDragEnd, modifiers };
+  return { activeItem, handleDragStart, handleDragEnd, modifiers, sensors };
 };

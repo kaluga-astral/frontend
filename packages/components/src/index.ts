@@ -277,9 +277,15 @@ export * from './Slide';
 export {
   SortableList,
   type SortableListProps,
+  type DataDisplayStrategyProps,
+  SimpleDataDisplayStrategy,
+  VirtualDataDisplayStrategy,
+} from './SortableList';
+
+export {
   SortableListItem,
   type SortableListItemProps,
-} from './SortableList';
+} from './SortableListItem';
 
 export * from './Stepper';
 

@@ -1,3 +1,3 @@
 export * from './SortableList';
 
-export * from './SortableListItem';
+export * from './DataDisplayStrategy';

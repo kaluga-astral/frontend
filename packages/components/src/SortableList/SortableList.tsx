@@ -2,29 +2,35 @@ import {
   DndContext,
   type DragEndEvent,
   DragOverlay,
-  KeyboardSensor,
-  PointerSensor,
   closestCenter,
-  useSensor,
-  useSensors,
 } from '@dnd-kit/core';
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { type ElementType } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { DataList, type DataListProps } from '../DataList';
+import type { RequiredKeys } from '../types';
 
 import type { ObjectWithId } from './types';
 import { useLogic } from './useLogic';
+import {
+  type DataDisplayStrategyProps,
+  SimpleDataDisplayStrategy,
+} from './DataDisplayStrategy';
 
-export type SortableListProps<TDataItem extends ObjectWithId> = Omit<
-  DataListProps<TDataItem>,
-  'itemContent'
-> & {
+export type SortableListProps<TDataItem extends Record<string, unknown>> = {
+  /**
+   * Массив элементов
+   */
+  data: Array<TDataItem>;
+
+  /**
+   * Поле, используемое в качестве ключа списка
+   */
+  keyId: RequiredKeys<TDataItem>;
+
   /**
    * Обработчик начала перетягивания
    */
@@ -33,14 +39,25 @@ export type SortableListProps<TDataItem extends ObjectWithId> = Omit<
    * Обработчик завершения перетягивания
    */
   onDragEnd: (event: DragEndEvent) => void;
+
   /**
    * Содержимое элемента списка
    */
-  ListItem: ElementType<{ item: TDataItem }>;
+  ListItem: ElementType<{
+    item: TDataItem;
+    [key: string]: unknown;
+  }>;
   /**
    * Флаг, запрещающий перетягивать элементы по горизонтальной оси
    */
   isLockedHorizontalAxis?: boolean;
+
+  /**
+   * Заменяемый компонент-список. Может быть либо SimpleDataDisplayStrategy, либо VirtualDataDisplayStrategy
+   */
+  DataDisplayStrategy?: (
+    props: DataDisplayStrategyProps<TDataItem>,
+  ) => ReactNode;
 };
 
 export const SortableList = <TDataItem extends ObjectWithId>(
@@ -48,24 +65,13 @@ export const SortableList = <TDataItem extends ObjectWithId>(
 ) => {
   const {
     data,
-    onDragStart,
-    onDragEnd,
     ListItem,
-    isLockedHorizontalAxis = true,
-    ...otherProps
+    DataDisplayStrategy = SimpleDataDisplayStrategy,
+    keyId,
   } = props;
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
-  const { activeItem, modifiers, handleDragStart, handleDragEnd } = useLogic({
-    data,
-    isLockedHorizontalAxis,
-    onDragStart,
-    onDragEnd,
-  });
+
+  const { activeItem, modifiers, handleDragStart, handleDragEnd, sensors } =
+    useLogic(props);
 
   return (
     <DndContext
@@ -79,10 +85,10 @@ export const SortableList = <TDataItem extends ObjectWithId>(
         items={data || []}
         strategy={verticalListSortingStrategy}
       >
-        <DataList
-          {...otherProps}
+        <DataDisplayStrategy
           data={data}
           itemContent={(item) => <ListItem item={item} />}
+          keyId={keyId}
         />
       </SortableContext>
       {createPortal(

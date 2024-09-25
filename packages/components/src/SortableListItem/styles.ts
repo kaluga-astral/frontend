@@ -1,6 +1,6 @@
 import { DragOutlineMd } from '@astral/icons';
 
-import { styled } from '../../styles';
+import { styled } from '../styles';
 
 type StyledItemProps = {
   $isDragging: boolean;
