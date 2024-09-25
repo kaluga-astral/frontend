@@ -1,8 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { addDays } from '@astral/utils';
 
 import { LegacyGrid } from '../LegacyGrid';
-import { addDays, buildIsoDate } from '../utils/date';
+import { buildIsoDate } from '../utils/date';
 
 import { DateRangePicker, type DateRangePickerProps } from './index';
 

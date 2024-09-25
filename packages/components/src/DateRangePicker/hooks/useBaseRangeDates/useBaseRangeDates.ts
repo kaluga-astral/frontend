@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
+import { addMonths } from '@astral/utils';
 
 import { useBaseDateInRange } from '../../../DatePicker/hooks';
-import { addMonths } from '../../../utils/date';
 
 type UseBaseRangeDatesOprions = {
   /**

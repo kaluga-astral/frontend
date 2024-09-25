@@ -1,4 +1,4 @@
-import { zeroPad } from '../../zeroPad';
+import { zeroPad } from '@astral/utils';
 
 /**
  * опции для генерации даты без смещения по часовому поясу пользователя

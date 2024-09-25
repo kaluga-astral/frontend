@@ -1,4 +1,6 @@
-import { addDays, type buildDaysCalendarGrid } from '../../../../../utils/date';
+import { addDays } from '@astral/utils';
+
+import { type buildDaysCalendarGrid } from '../../../../../utils/date';
 import { makeEdgeDates } from '../makeEdgeDates';
 
 const getFromAccumulator = (date: Date, accumulator: Map<string, Date>) => {

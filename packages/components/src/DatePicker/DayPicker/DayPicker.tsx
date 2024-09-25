@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo } from 'react';
+import { addMonths } from '@astral/utils';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -8,7 +9,6 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { addMonths } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../../hooks';
 import { ConfigContext } from '../../ConfigProvider';
 import { PopoverHoveredContext } from '../PopoverHoveredContext';

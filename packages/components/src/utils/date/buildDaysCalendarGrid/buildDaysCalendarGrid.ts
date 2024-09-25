@@ -1,3 +1,5 @@
+import { addDays } from '@astral/utils';
+
 import {
   type CalendarGridBuilder,
   type CalendarGridItem,
@@ -5,7 +7,6 @@ import {
 } from '../../../types';
 import { buildIsoDate } from '../buildIsoDate';
 import { DAYS_IN_WEEK } from '../../../constants';
-import { addDays } from '../addDays';
 import { isDate } from '../isDate';
 import { compareDateDayByUTC } from '../compareDateDayByUTC';
 import { DateCompareDeep, isDateOutOfRange } from '../isDateOutOfRange';
