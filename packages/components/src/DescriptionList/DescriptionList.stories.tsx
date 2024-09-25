@@ -50,6 +50,10 @@ const Wrapper = styled.div`
   width: 400px;
 `;
 
+const GuidWrapper = styled.div`
+  width: 200px;
+`;
+
 export const Example = () => {
   const items: DescriptionListItem[] = [
     {
@@ -107,6 +111,31 @@ export const CopyPosition = () => {
   ];
 
   return <DescriptionList items={items} />;
+};
+
+export const CopyText = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'ИНН',
+      value: '295995231495',
+      options: { canCopy: true },
+    },
+    {
+      name: 'guid',
+      value: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
+      options: {
+        canCopy: true,
+        variant: 'guid',
+        copyText: '83273239-19d9-47db-ae3b-d4c6f24bbbee',
+      },
+    },
+  ];
+
+  return (
+    <GuidWrapper>
+      <DescriptionList items={items} />
+    </GuidWrapper>
+  );
 };
 
 /**
@@ -253,6 +282,31 @@ export const VariantTag = () => {
   ];
 
   return <DescriptionList items={items} />;
+};
+
+export const VariantGuid = () => {
+  const items: DescriptionListItem[] = [
+    {
+      name: 'guid',
+      value: 'c9b9b0ed-99b0-4d6a-9bf3-d9205398ca95',
+      options: { variant: 'guid' },
+    },
+    {
+      name: 'guid',
+      value: 'fd81ae06-cbd4-48a5-8852-547119bb7aa6',
+      options: {
+        variant: 'guid',
+        canCopy: true,
+        copyText: 'fd81ae06-cbd4-48a5-8852-547119bb7aa6',
+      },
+    },
+  ];
+
+  return (
+    <GuidWrapper>
+      <DescriptionList items={items} />
+    </GuidWrapper>
+  );
 };
 
 export const LongDescriptionValueLeader = () => {

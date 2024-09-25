@@ -1,11 +1,6 @@
-import { CopyOutlineSm } from '@astral/icons';
-import { type SvgIconProps } from '@mui/material';
-
 import { styled } from '../../styles';
 import { Typography } from '../../Typography';
 import { CopyTypography } from '../../CopyTypography';
-
-import { type ValueProps } from './Value';
 
 type StyledTypographyProps = {
   $leader?: boolean;
@@ -23,6 +18,8 @@ export const StyledTypography = styled(Typography, {
     !['$canCopy', '$leader', '$direction'].includes(prop),
 })<StyledTypographyProps>`
   cursor: ${({ $canCopy }) => ($canCopy ? 'pointer' : 'default')};
+
+  overflow: hidden;
 
   hyphens: auto;
   text-align: ${({ $leader }) => ($leader ? 'right' : 'left')};
@@ -55,25 +52,8 @@ export const StyledCopyTypography = styled(CopyTypography, {
   }
 `;
 
-type StyledCopyIconProps = SvgIconProps & {
-  $copyPosition: ValueProps['copyPosition'];
-};
-
-export const StyledCopyIcon = styled(CopyOutlineSm, {
-  shouldForwardProp: (prop) => !['$copyPosition'].includes(prop),
-})<StyledCopyIconProps>`
-  margin-right: ${({ $copyPosition, theme }) =>
-    $copyPosition === 'left' ? theme.spacing(1) : ''};
-  margin-bottom: -4px;
-  margin-left: ${({ $copyPosition, theme }) =>
-    $copyPosition === 'right' ? theme.spacing(1) : ''};
-
-  /* Задаем размер иконки */
-  font-size: 16px;
-
-  fill: ${({ color }) => color};
-`;
-
 export const Wrapper = styled.dd`
+  overflow: hidden;
+
   margin: 0;
 `;

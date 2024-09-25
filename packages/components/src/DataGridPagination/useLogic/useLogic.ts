@@ -1,25 +1,43 @@
+import { useEffect, useRef } from 'react';
 import { type SelectChangeEvent } from '@mui/material';
 
-export const useLogic = (
-  totalCount: number,
-  rowsPerPage: number,
-  page: number,
-  onSetCountPerPage?: (rowsPerPage: number) => void,
-) => {
-  const pageCount = Math.ceil(totalCount / rowsPerPage);
+import { DEFAULT_ROWS_PER_PAGE } from '../constants';
+import { type DataGridPaginationProps } from '../DataGridPagination';
+
+type UseLogicParams = DataGridPaginationProps;
+
+export const useLogic = ({
+  totalCount,
+  rowsPerPage = DEFAULT_ROWS_PER_PAGE,
+  page,
+  onSetCountPerPage,
+}: UseLogicParams) => {
+  const prevTotalCountRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (totalCount) {
+      prevTotalCountRef.current = totalCount;
+    }
+  }, [totalCount]);
+
+  const actualTotalCount = totalCount || prevTotalCountRef.current;
+
+  const pageCount = Math.ceil(actualTotalCount / rowsPerPage);
+
   const rangeStart = (page - 1) * rowsPerPage + 1;
+
   const rangeEnd = () => {
     const end = page * rowsPerPage;
 
-    return end < totalCount ? end : totalCount;
+    return end < actualTotalCount ? end : actualTotalCount;
   };
 
   const formattedRange = () => {
-    return `${rangeStart} — ${rangeEnd()} из ${totalCount} записей`;
+    return `${rangeStart} — ${rangeEnd()} из ${actualTotalCount} записей`;
   };
 
   const isVisiblePagination = !(
-    !onSetCountPerPage && totalCount <= rowsPerPage
+    !onSetCountPerPage && actualTotalCount <= rowsPerPage
   );
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent<unknown>) => {
@@ -27,9 +45,9 @@ export const useLogic = (
   };
 
   return {
-    handleChangeRowsPerPage,
-    formattedRange,
-    pageCount,
     isVisiblePagination,
+    pageCount,
+    formattedRange,
+    handleChangeRowsPerPage,
   };
 };

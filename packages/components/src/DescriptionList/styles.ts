@@ -17,3 +17,11 @@ export const Wrapper = styled.dl`
 
   margin: 0;
 `;
+
+export const StyledDescriptionValue = styled(Description.Value, {
+  shouldForwardProp: (prop) => !['$isCopy'].includes(prop),
+})<{ $isCopy?: boolean }>`
+  display: ${({ $isCopy }) => $isCopy && 'flex'};
+
+  width: ${({ $isCopy }) => $isCopy && 'calc(100% - 20px)'};
+`;
