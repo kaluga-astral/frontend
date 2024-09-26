@@ -1,7 +1,8 @@
+import { addDays } from '@astral/utils';
+
 import { DAYS_IN_WEEK } from '../../../../../constants';
 import {
   DAYS_CALENDAR_ITEMS_COUNT,
-  addDays,
   buildIsoDate,
 } from '../../../../../utils/date';
 

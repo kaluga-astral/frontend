@@ -1,4 +1,6 @@
-import { addDays, isDate } from '../../../../utils/date';
+import { addDays } from '@astral/utils';
+
+import { isDate } from '../../../../utils/date';
 
 type GetBoundaryDateParams = {
   /**

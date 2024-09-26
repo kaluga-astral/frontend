@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
+import { addDays } from '@astral/utils';
 
-import { addDays, buildIsoDate } from '../utils/date';
+import { buildIsoDate } from '../utils/date';
 
 import {
   type DateRangePickerValue,

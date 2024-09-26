@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { addYears } from '@astral/utils';
 
 import {
   type CommonDateCalendarHeadProps,
@@ -9,7 +10,6 @@ import {
 } from '../DateCalendar';
 import { useCalendarNavigate } from '../hooks/useCalendarNavigate';
 import { type PickerProps } from '../types';
-import { addYears } from '../../utils/date';
 import { useLocaleDateTimeFormat } from '../../hooks';
 import { ConfigContext } from '../../ConfigProvider';
 import { ELEMENTS_COUNT_IN_ROW_IN_LARGE_GRID } from '../constants';

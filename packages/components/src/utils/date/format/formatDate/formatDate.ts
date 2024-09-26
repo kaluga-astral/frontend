@@ -1,4 +1,5 @@
-import { zeroPad } from '../../../zeroPad';
+import { zeroPad } from '@astral/utils';
+
 import { type DateMask, DateMaskElements } from '../maskDate';
 
 type ElementsMap = Record<DateMaskElements, (date: Date) => number>;
